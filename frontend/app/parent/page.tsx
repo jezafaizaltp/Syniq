@@ -1,0 +1,92 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { PROGRESS_WORDS, api, post } from "@/lib/api";
+import { useSession } from "@/lib/session";
+
+type Child = { id: number; name: string; consent: Record<string, boolean> };
+type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
+
+const CONSENT_WORDS: Record<string, [string, string]> = {
+  core_learning: ["Use SYNiq for learning", "Required. Lets SYNiq save answers and adapt lessons for your child."],
+  mood_checkins: ["Save mood check-ins", "Optional. Your child can always skip check-ins either way."],
+  school_sharing: ["Share progress with the school", "Optional. Lets your child's teacher see topic progress."],
+};
+
+export default function Parent() {
+  const { me, loading } = useSession();
+  const router = useRouter();
+  const [children, setChildren] = useState<Child[]>([]);
+  const [progress, setProgress] = useState<Record<number, Progress>>({});
+
+  useEffect(() => {
+    if (!loading && (!me || me.role !== "guardian")) router.replace("/");
+  }, [me, loading, router]);
+
+  const load = useCallback(async () => {
+    const kids = await api<Child[]>("/guardian/children");
+    const entries = await Promise.all(
+      kids.map(async (k) => [k.id, await api<Progress>(`/guardian/children/${k.id}/progress`)] as const)
+    );
+    setProgress(Object.fromEntries(entries));
+    setChildren(kids);
+  }, []);
+
+  useEffect(() => {
+    if (me?.role === "guardian") load();
+  }, [me, load]);
+
+  async function setConsent(childId: number, scope: string, granted: boolean) {
+    await post(`/guardian/children/${childId}/consent`, { scope, granted });
+    load();
+  }
+
+  if (!me || me.role !== "guardian") return null;
+
+  return (
+    <div className="wrap">
+      <h1>My children</h1>
+      {children.map((c) => (
+        <section key={c.id} className="card">
+          <h2>{c.name}</h2>
+          {Object.entries(CONSENT_WORDS).map(([scope, [title, help]]) => (
+            <div key={scope} style={{ marginTop: 8 }}>
+              <label className="check">
+                <input type="checkbox" checked={!!c.consent[scope]} onChange={(e) => setConsent(c.id, scope, e.target.checked)} />
+                {title}
+              </label>
+              <p className="muted" style={{ margin: "0 0 0 34px" }}>
+                {help}
+              </p>
+            </div>
+          ))}
+          {progress[c.id] && (
+            <>
+              <h3>Progress</h3>
+              <p className="muted">
+                {progress[c.id].questions_practised} questions practised. {progress[c.id].note}
+              </p>
+              {progress[c.id].concepts.length === 0 ? (
+                <p>Nothing practised yet.</p>
+              ) : (
+                <ul className="list">
+                  {progress[c.id].concepts.map((p) => (
+                    <li key={p.title}>
+                      <span>{p.title}</span>
+                      <span className="pill">{PROGRESS_WORDS[p.progress] ?? p.progress}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="muted">
+                Tip: ask {c.name} to explain one topic to you in their own words. Teaching someone else is one of the best ways to
+                remember.
+              </p>
+            </>
+          )}
+        </section>
+      ))}
+    </div>
+  );
+}
