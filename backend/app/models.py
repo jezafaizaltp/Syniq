@@ -113,6 +113,8 @@ class Concept(Base):
     code: Mapped[str] = mapped_column(String(60), unique=True)
     title: Mapped[str] = mapped_column(String(200))
     order: Mapped[int] = mapped_column(Integer, default=0)
+    # Teacher-written summary of what the textbook says. Grounds AI drafts and the tutor.
+    notes: Mapped[str] = mapped_column(Text, default="")
 
 
 class ConceptPrereq(Base):
@@ -131,7 +133,9 @@ class Explanation(Base):
     concept_id: Mapped[int] = mapped_column(ForeignKey("concepts.id"), index=True)
     style: Mapped[str] = mapped_column(String(30))  # text | visual | step_by_step | real_world
     body: Mapped[str] = mapped_column(Text)
-    status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved
+    status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved | rejected
+    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai
+    review_note: Mapped[str] = mapped_column(Text, default="")
 
 
 class Item(Base):
@@ -148,7 +152,9 @@ class Item(Base):
     difficulty: Mapped[int] = mapped_column(Integer, default=1)  # 1..3
     # Maps a wrong response to a misconception tag, e.g. {"x² + 9": "square_each_term"}
     misconceptions: Mapped[dict] = mapped_column(JSON, default=dict)
-    status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved
+    status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved | rejected
+    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai
+    review_note: Mapped[str] = mapped_column(Text, default="")
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
 
