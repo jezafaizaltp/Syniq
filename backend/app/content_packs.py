@@ -58,7 +58,7 @@ def to_sympy(text: str):
     )
 
     s = str(text).strip()
-    for a, b in (("−", "-"), ("×", "*"), ("·", "*"), ("÷", "/"), ("²", "^2"), ("³", "^3"), ("π", " pi ")):
+    for a, b in (("−", "-"), ("×", "*"), ("·", "*"), ("÷", "/"), ("²", "^2"), ("³", "^3"), ("⁴", "^4"), ("⁵", "^5"), ("π", " pi ")):
         s = s.replace(a, b)
     s = re.sub(r"√\(", "sqrt(", s)
     s = re.sub(r"√(\d+(?:\.\d+)?|[a-z])", r"sqrt(\1)", s)
@@ -297,7 +297,11 @@ def main(argv: list[str]) -> int:
     packs = read_packs(paths or None)
     errors = check_all(packs)
     questions = sum(len(c["items"]) for _, p in packs for c in p.get("concepts") or [])
-    checked = sum(1 for _, p in packs for c in p.get("concepts") or [] for i in c["items"] if i.get("check") is not None)
+    # A check that is just a number (a value read off a list, like a mode) is not a second working.
+    checked = sum(
+        1 for _, p in packs for c in p.get("concepts") or [] for i in c["items"]
+        if i.get("check") is not None and not re.fullmatch(r"-?[\d.]+", str(i["check"]).strip())
+    )
     for e in errors:
         print(e)
     print(f"{len(packs)} chapters, {questions} questions, {checked} answers worked out again by computer, {len(errors)} problems")

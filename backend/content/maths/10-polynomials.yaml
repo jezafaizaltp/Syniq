@@ -1,0 +1,191 @@
+# Class 9 Mathematics, chapter 10. Format: content/README.md.
+# Also uses tips from earlier chapters: times_not_plus, square_of_negative, sign_rule, sign_slip,
+# forgot_divide, other_side, minus_negative, product_terms.
+subject: math
+chapter: 10
+title: Polynomials
+
+tips:
+  coefficient_not_degree: "The degree is the highest power of x, not the number in front of it."
+  dropped_sign: "The sign belongs to the term: in −9x the coefficient is −9."
+  added_constants: "The constant term of a product comes from multiplying the constants, not adding them."
+  multiplied_degrees: "When polynomials are multiplied, their degrees add: x² × x³ = x⁵."
+  added_powers: "When adding, only the numbers in front change: 3x² + x² = 4x². The power stays the same."
+  multiply_every_term: "Multiply every term in one bracket by every term in the other, then collect like terms."
+
+concepts:
+  - code: math9.poly.terms
+    title: Terms, coefficients and degree
+    notes: |
+      A polynomial in x is a sum of terms like 3x², −5x and 7. The number in front of a term is its
+      coefficient (with its sign), the term without x is the constant term, and the highest power
+      of x is the degree. When polynomials are multiplied, their degrees add.
+    explanations:
+      text: "In 3x² − 5x + 7 there are three terms. 3x² has coefficient 3, −5x has coefficient −5, and 7 is the constant term. The highest power of x is 2, so the degree is 2. A polynomial of degree 1, like 3x − 7, is called linear; degree 2 is quadratic."
+      visual: "Write each term in its own box, sign included: [3x²] [−5x] [+7]. The first box has the highest power, 2: that is the degree. The number at the front of each box is its coefficient."
+      step_by_step: "For (x² + 1)(x³ − x): Step 1: The highest power from the first bracket is x². Step 2: From the second, x³. Step 3: Multiplying them gives x⁵. Step 4: So the degree is 2 + 3 = 5."
+      real_world: "The area of a square garden with a path of width x around a 10 m square is (10 + 2x)², which expands to 4x² + 40x + 100: a polynomial of degree 2 in x."
+    items:
+      - prompt: "Which of these is a polynomial of degree 1?"
+        options: ["3x − 7", "x² − 7", "7", "x³ + x"]
+        answer: "3x − 7"
+        difficulty: 1
+        hints: ["Degree 1 means the highest power of x is x itself."]
+        solution: "Step 1: 3x − 7 has highest power x¹. Step 2: x² − 7 has degree 2, 7 has degree 0 and x³ + x has degree 3."
+      - prompt: "What is the degree of 3x² − 5x + 7?"
+        answer: "2"
+        check: "degree(3*x**2 - 5*x + 7, x)"
+        difficulty: 1
+        hints: ["Find the highest power of x."]
+        solution: "The highest power is x², so the degree is 2."
+        mistakes: {"3": coefficient_not_degree, "7": coefficient_not_degree}
+      - prompt: "What is the coefficient of x in 4x³ + 2x² − 9x + 1?"
+        answer: "-9"
+        check: "Poly(4*x**3 + 2*x**2 - 9*x + 1, x).coeff_monomial(x)"
+        difficulty: 1
+        hints: ["Find the term with just x, and keep its sign."]
+        solution: "The x term is −9x, so the coefficient is −9."
+        mistakes: {"9": dropped_sign}
+      - prompt: "What is the constant term of (x + 2)(x − 5)?"
+        answer: "-10"
+        check: "expand((x + 2)*(x - 5)).subs(x, 0)"
+        difficulty: 2
+        hints: ["The constant term comes from 2 × (−5)."]
+        solution: "Step 1: The constants are 2 and −5. Step 2: 2 × (−5) = −10."
+        mistakes: {"10": dropped_sign, "-3": added_constants}
+      - prompt: "What is the degree of (x² + 1)(x³ − x)?"
+        answer: "5"
+        check: "degree(expand((x**2 + 1)*(x**3 - x)), x)"
+        difficulty: 2
+        hints: ["x² × x³ = ?"]
+        solution: "Step 1: The highest terms are x² and x³. Step 2: x² × x³ = x⁵. Step 3: Degree 5."
+        mistakes: {"6": multiplied_degrees}
+      - prompt: "What is the degree of (x + 1)³?"
+        answer: "3"
+        check: "degree(expand((x + 1)**3), x)"
+        difficulty: 3
+        hints: ["(x + 1)³ = (x + 1)(x + 1)(x + 1).", "The highest term is x × x × x."]
+        solution: "Step 1: Multiplying three brackets, the highest term is x³. Step 2: Degree 3."
+
+  - code: math9.poly.value
+    title: The value of a polynomial
+    after: [math9.poly.terms]
+    notes: |
+      p(x) names a polynomial; p(a) is its value when x = a. Replace x with the number in brackets
+      and work it out, powers first. If p(a) = 0, then a is a zero of p. A condition like p(1) = 0
+      can be used to find an unknown coefficient.
+    explanations:
+      text: "If p(x) = x² − 4, then p(3) means 'put 3 in place of x': p(3) = 3² − 4 = 5. And p(−2) = (−2)² − 4 = 0. When p(a) = 0, a is called a zero of the polynomial."
+      visual: "Think of p as a machine. Drop 3 into the funnel; the machine squares it to 9 and takes away 4; out comes 5. Drop −2 in; it squares to 4, takes away 4, and out comes 0."
+      step_by_step: "For p(x) = 3x² − x + 2 and x = −1: Step 1: Write (−1) wherever x is: 3(−1)² − (−1) + 2. Step 2: (−1)² = 1, so 3 × 1 = 3. Step 3: −(−1) = +1. Step 4: 3 + 1 + 2 = 6."
+      real_world: "A taxi charges ₹50 plus ₹15 per km: p(x) = 15x + 50 for x km. A 6 km ride costs p(6) = 90 + 50 = ₹140."
+    items:
+      - prompt: "p(x) = 2x + 5. What is p(3)?"
+        answer: "11"
+        check: "2*3 + 5"
+        difficulty: 1
+        hints: ["Put 3 in place of x: 2 × 3 + 5."]
+        solution: "Step 1: p(3) = 2 × 3 + 5. Step 2: = 6 + 5 = 11."
+        mistakes: {"10": times_not_plus}
+      - prompt: "p(x) = x² − 4. What is p(−2)?"
+        answer: "0"
+        check: "(-2)**2 - 4"
+        difficulty: 1
+        hints: ["(−2)² = 4."]
+        solution: "Step 1: p(−2) = (−2)² − 4. Step 2: = 4 − 4 = 0."
+        mistakes: {"-8": square_of_negative}
+      - prompt: "p(x) = x³ − 2x² + x − 1. What is p(2)?"
+        answer: "1"
+        check: "2**3 - 2*2**2 + 2 - 1"
+        difficulty: 2
+        hints: ["2³ = 8 and 2 × 2² = 8."]
+        solution: "Step 1: 8 − 8 + 2 − 1. Step 2: = 1."
+      - prompt: "p(x) = 3x² − x + 2. What is p(−1)?"
+        answer: "6"
+        check: "3*(-1)**2 - (-1) + 2"
+        difficulty: 2
+        hints: ["3(−1)² = 3.", "−(−1) = +1."]
+        solution: "Step 1: 3(−1)² − (−1) + 2. Step 2: = 3 + 1 + 2 = 6."
+        mistakes: {"4": sign_rule, "0": square_of_negative}
+      - prompt: "p(x) = x² + kx + 6 and p(1) = 0. What is k?"
+        answer: "-7"
+        check: "-(1 + 6)"
+        difficulty: 2
+        hints: ["p(1) = 1 + k + 6.", "1 + k + 6 = 0."]
+        solution: "Step 1: p(1) = 7 + k. Step 2: 7 + k = 0. Step 3: k = −7."
+        mistakes: {"7": sign_slip}
+      - prompt: "p(x) = ax + 3 and p(2) = 11. What is a?"
+        answer: "4"
+        check: "(11 - 3)/2"
+        difficulty: 3
+        hints: ["2a + 3 = 11."]
+        solution: "Step 1: 2a + 3 = 11. Step 2: 2a = 8. Step 3: a = 4."
+        mistakes: {"8": forgot_divide, "7": times_not_plus}
+      - prompt: "p(x) = x² − 5x + 6. There are two numbers that make p(x) = 0. What is the smaller one?"
+        answer: "2"
+        check: "Min(*solve(x**2 - 5*x + 6, x))"
+        difficulty: 3
+        hints: ["Try x = 1, 2, 3.", "p(2) = 4 − 10 + 6."]
+        solution: "Step 1: p(2) = 4 − 10 + 6 = 0. Step 2: p(3) = 9 − 15 + 6 = 0. Step 3: The smaller is 2."
+        mistakes: {"3": other_side}
+
+  - code: math9.poly.operations
+    title: Adding, subtracting and multiplying polynomials
+    after: [math9.poly.value]
+    notes: |
+      Add or subtract polynomials by collecting like terms (same power of x); the powers don't change.
+      Subtracting a bracket changes the sign of every term in it. To multiply, multiply every term of
+      one by every term of the other and collect like terms.
+    explanations:
+      text: "Adding polynomials means adding like terms: (3x² + 2x − 1) + (x² − 5x + 4) = 4x² − 3x + 3. Only the numbers in front change; x² stays x². When subtracting a bracket, every sign inside flips: (5x − 3) − (2x − 7) = 5x − 3 − 2x + 7 = 3x + 4."
+      visual: "Line the polynomials up in columns by power, like adding numbers in columns: an x² column, an x column and a number column. Add down each column."
+      step_by_step: "For (x + 2)(x² − x + 3): Step 1: x × each term: x³ − x² + 3x. Step 2: 2 × each term: 2x² − 2x + 6. Step 3: Add: x³ + (−x² + 2x²) + (3x − 2x) + 6. Step 4: = x³ + x² + x + 6."
+      real_world: "A shop's income is 40x + 200 rupees and its costs are 15x + 350 rupees for x items sold. Profit = (40x + 200) − (15x + 350) = 25x − 150 rupees."
+    items:
+      - prompt: "(3x² + 2x − 1) + (x² − 5x + 4) = ?"
+        options: ["4x² − 3x + 3", "4x² + 7x + 3", "3x² − 3x + 3", "4x⁴ − 3x² + 3"]
+        answer: "4x² − 3x + 3"
+        check: "expand((3*x**2 + 2*x - 1) + (x**2 - 5*x + 4))"
+        difficulty: 1
+        hints: ["Add the x² terms, then the x terms, then the numbers."]
+        solution: "Step 1: 3x² + x² = 4x². Step 2: 2x − 5x = −3x. Step 3: −1 + 4 = 3. Step 4: 4x² − 3x + 3."
+        mistakes: {"4x² + 7x + 3": sign_slip, "4x⁴ − 3x² + 3": added_powers}
+      - prompt: "(5x − 3) − (2x − 7) = ?"
+        options: ["3x + 4", "3x − 10", "3x − 4", "7x + 4"]
+        answer: "3x + 4"
+        check: "expand((5*x - 3) - (2*x - 7))"
+        difficulty: 1
+        hints: ["Taking away the bracket flips every sign inside: −2x + 7."]
+        solution: "Step 1: 5x − 3 − 2x + 7. Step 2: = 3x + 4."
+        mistakes: {"3x − 10": minus_negative, "3x − 4": minus_negative}
+      - prompt: "x(2x² − 3x + 4) = ?"
+        options: ["2x³ − 3x² + 4x", "2x³ − 3x + 4", "−x² + 4x", "3x³ − 2x² + 5x"]
+        answer: "2x³ − 3x² + 4x"
+        check: "expand(x*(2*x**2 - 3*x + 4))"
+        difficulty: 2
+        hints: ["Multiply every term inside by x."]
+        solution: "x × 2x² − x × 3x + x × 4 = 2x³ − 3x² + 4x"
+        mistakes: {"2x³ − 3x + 4": multiply_every_term}
+      - prompt: "(x + 2)(x² − x + 3) = ?"
+        options: ["x³ + x² + x + 6", "x³ − x² + 3x + 6", "x³ + x² + 5x + 6", "x³ + 6"]
+        answer: "x³ + x² + x + 6"
+        check: "expand((x + 2)*(x**2 - x + 3))"
+        difficulty: 2
+        hints: ["x × (x² − x + 3), then 2 × (x² − x + 3).", "Collect like terms."]
+        solution: "Step 1: x³ − x² + 3x. Step 2: 2x² − 2x + 6. Step 3: Adding: x³ + x² + x + 6."
+        mistakes: {"x³ + 6": product_terms, "x³ − x² + 3x + 6": multiply_every_term}
+      - prompt: "In (2x + 3)(x² − 4x + 1), what is the coefficient of x²?"
+        answer: "-5"
+        check: "Poly(expand((2*x + 3)*(x**2 - 4*x + 1)), x).coeff_monomial(x**2)"
+        difficulty: 3
+        hints: ["x² comes from 2x × (−4x) and 3 × x².", "−8x² + 3x²."]
+        solution: "Step 1: 2x × (−4x) = −8x². Step 2: 3 × x² = 3x². Step 3: −8 + 3 = −5."
+        mistakes: {"-8": multiply_every_term, "3": multiply_every_term}
+      - prompt: "p(x) = x² + 1 and q(x) = x − 1. What is p(x) − x × q(x)?"
+        options: ["x + 1", "2x² − x + 1", "1 − x", "x − 1"]
+        answer: "x + 1"
+        check: "expand((x**2 + 1) - x*(x - 1))"
+        difficulty: 3
+        hints: ["x × q(x) = x² − x.", "Subtracting flips its signs: −x² + x."]
+        solution: "Step 1: x × q(x) = x² − x. Step 2: x² + 1 − x² + x. Step 3: = x + 1."
+        mistakes: {"1 − x": minus_negative}

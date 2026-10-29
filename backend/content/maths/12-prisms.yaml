@@ -1,0 +1,184 @@
+# Class 9 Mathematics, chapter 12. Format: content/README.md.
+# Also uses tips from earlier chapters: half_base_height, perimeter_not_area.
+subject: math
+chapter: 12
+title: Prisms
+
+tips:
+  added_dimensions: "Volume multiplies the three measurements: length × width × height. Adding them doesn't give a volume."
+  area_not_volume: "That is the area of one face. Volume needs all three measurements: for a cube, edge × edge × edge."
+  litres: "1 litre = 1000 cm³, so divide the volume in cm³ by 1000."
+  volume_not_area: "That is the volume. Surface area adds up the areas of all the faces."
+  one_face: "That is one face. A cube has 6 equal faces, so multiply by 6."
+  opposite_faces: "Each face has an equal face opposite it. Add the three different faces, then double."
+  no_lid: "A box without a lid has no top face, so leave it out."
+  both_ends: "A prism has two equal ends, so count the end shape twice."
+  scale_volume: "Volume uses three lengths, so doubling every edge multiplies it by 2 × 2 × 2 = 8, and tripling by 3 × 3 × 3 = 27."
+  scale_area: "Area uses two lengths, so doubling every edge multiplies the area by 2 × 2 = 4."
+
+concepts:
+  - code: math9.prism.volume
+    title: Volume of a prism
+    notes: |
+      A prism has two equal, parallel ends joined by rectangles. Its volume is the area of an end
+      (the base) times its length (height). Cuboid: l × w × h; cube: a³; triangular prism:
+      ½ × base × height of the triangle × length; a cylinder works the same way: πr² × h.
+      1 litre = 1000 cm³ and 1 m³ = 1000 litres.
+    explanations:
+      text: "A prism is a solid with the same shape all the way through, like a stack of identical slices. Its volume is the area of one slice (the base) times how tall the stack is. A cuboid 5 cm by 4 cm by 3 cm has a 20 cm² base and a height of 3 cm, so its volume is 60 cm³."
+      visual: "Picture a stack of 3 layers of 1 cm cubes, each layer 5 cubes by 4 cubes. Each layer has 20 cubes, so the stack has 60. That is the volume: 60 cm³."
+      step_by_step: "For a triangular prism whose end is a right triangle with sides 3 cm and 4 cm, and length 10 cm: Step 1: End area = ½ × 3 × 4 = 6 cm². Step 2: Volume = 6 × 10 = 60 cm³."
+      real_world: "A fish tank 50 cm × 40 cm × 30 cm holds 60000 cm³. Since 1 litre is 1000 cm³, it holds 60 litres of water."
+    items:
+      - prompt: "A cuboid is 5 cm long, 4 cm wide and 3 cm high. What is its volume, in cm³?"
+        answer: "60"
+        check: "5*4*3"
+        difficulty: 1
+        hints: ["Volume = length × width × height."]
+        solution: "5 × 4 × 3 = 60 cm³"
+        mistakes: {"12": added_dimensions}
+      - prompt: "A cube has edges of 4 cm. What is its volume, in cm³?"
+        answer: "64"
+        check: "4**3"
+        difficulty: 1
+        hints: ["4 × 4 × 4."]
+        solution: "4 × 4 × 4 = 64 cm³"
+        mistakes: {"16": area_not_volume, "12": added_dimensions}
+      - prompt: "A prism has a triangular end with an area of 12 cm², and it is 10 cm long. What is its volume, in cm³?"
+        answer: "120"
+        check: "12*10"
+        difficulty: 2
+        hints: ["Volume = end area × length."]
+        solution: "12 × 10 = 120 cm³"
+      - prompt: "A triangular prism's end is a right triangle with shorter sides of 3 cm and 4 cm. The prism is 10 cm long. What is its volume, in cm³?"
+        answer: "60"
+        check: "(3*4/2)*10"
+        difficulty: 2
+        hints: ["The end's area is ½ × 3 × 4."]
+        solution: "Step 1: End area = 6 cm². Step 2: Volume = 6 × 10 = 60 cm³."
+        mistakes: {"120": half_base_height}
+      - prompt: "A cylindrical tank has a radius of 7 m and a height of 10 m. Using π ≈ 22/7, what is its volume, in m³?"
+        answer: "1540"
+        check: "(22/7)*7**2*10"
+        difficulty: 2
+        hints: ["The base is a circle: πr² = 154 m²."]
+        solution: "Step 1: Base area = 22/7 × 49 = 154 m². Step 2: Volume = 154 × 10 = 1540 m³."
+        mistakes: {"440": perimeter_not_area}
+      - prompt: "A cuboid tank is 2 m long and 1.5 m wide, and holds 6 m³ of water when full. How deep is it, in m?"
+        answer: "2"
+        check: "6/(2*1.5)"
+        difficulty: 3
+        hints: ["Base area = 2 × 1.5 = 3 m².", "Depth = volume ÷ base area."]
+        solution: "Step 1: Base area = 3 m². Step 2: Depth = 6 ÷ 3 = 2 m."
+      - prompt: "A fish tank is 50 cm long, 40 cm wide and 30 cm high. How many litres does it hold when full? (1 litre = 1000 cm³)"
+        answer: "60"
+        check: "50*40*30/1000"
+        difficulty: 3
+        hints: ["Volume = 60000 cm³.", "Divide by 1000."]
+        solution: "Step 1: 50 × 40 × 30 = 60000 cm³. Step 2: 60000 ÷ 1000 = 60 litres."
+        mistakes: {"60000": litres}
+
+  - code: math9.prism.surface
+    title: Surface area of a prism
+    after: [math9.prism.volume]
+    notes: |
+      Surface area is the total area of all faces. A cube has 6 equal faces: 6a². A cuboid has
+      three pairs: 2(lw + lh + wh). A prism's side faces together make a rectangle of perimeter of
+      the end × length; add both ends. A cylinder's curved surface is 2πr × h.
+    explanations:
+      text: "To find how much cardboard a box needs, add the areas of all its faces. A cuboid 5 by 4 by 3 has three different faces: 5 × 4 = 20, 5 × 3 = 15 and 4 × 3 = 12. Each appears twice, so the total is 2 × (20 + 15 + 12) = 94 cm²."
+      visual: "Cut open a cardboard box along its edges and lay it flat. You see a cross shape made of six rectangles: a top and bottom, a front and back, and two sides. The surface area is the area of this flat net."
+      step_by_step: "A triangular prism with a 3-4-5 right triangle at each end, 10 cm long: Step 1: Two ends: 2 × ½ × 3 × 4 = 12 cm². Step 2: Three side rectangles: (3 + 4 + 5) × 10 = 120 cm². Step 3: Total = 132 cm²."
+      real_world: "To paint a cylindrical water tank of radius 7 m and height 10 m on the outside (sides only), the painter covers 2 × 22/7 × 7 × 10 = 440 m²."
+    items:
+      - prompt: "How many faces does a triangular prism have?"
+        options: ["5", "6", "3", "9"]
+        answer: "5"
+        check: "2 + 3"
+        difficulty: 1
+        hints: ["Two triangle ends, and one rectangle for each side of the triangle."]
+        solution: "2 triangular ends + 3 rectangles = 5 faces"
+      - prompt: "A cube has edges of 3 cm. What is its total surface area, in cm²?"
+        answer: "54"
+        check: "6*3**2"
+        difficulty: 1
+        hints: ["One face is 3 × 3 = 9 cm².", "A cube has 6 faces."]
+        solution: "Step 1: One face = 9 cm². Step 2: 6 × 9 = 54 cm²."
+        mistakes: {"27": volume_not_area, "9": one_face}
+      - prompt: "A cuboid is 5 cm long, 4 cm wide and 3 cm high. What is its total surface area, in cm²?"
+        answer: "94"
+        check: "2*(5*4 + 5*3 + 4*3)"
+        difficulty: 1
+        hints: ["The three different faces are 20, 15 and 12 cm².", "Each appears twice."]
+        solution: "Step 1: 20 + 15 + 12 = 47. Step 2: × 2 = 94 cm²."
+        mistakes: {"47": opposite_faces, "60": volume_not_area}
+      - prompt: "A box without a lid is 10 cm long, 8 cm wide and 5 cm high. How much cardboard does it need, in cm²?"
+        answer: "260"
+        check: "2*(10*8 + 10*5 + 8*5) - 10*8"
+        difficulty: 2
+        hints: ["Find the whole surface, then take off the top (10 × 8)."]
+        solution: "Step 1: Whole surface = 2 × (80 + 50 + 40) = 340 cm². Step 2: Without the top: 340 − 80 = 260 cm²."
+        mistakes: {"340": no_lid, "400": volume_not_area}
+      - prompt: "A cylinder has a radius of 7 cm and a height of 10 cm. Using π ≈ 22/7, what is the area of its curved surface, in cm²?"
+        answer: "440"
+        check: "2*(22/7)*7*10"
+        difficulty: 2
+        hints: ["Unrolled, the curved surface is a rectangle: circumference × height."]
+        solution: "Step 1: Circumference = 44 cm. Step 2: 44 × 10 = 440 cm²."
+        mistakes: {"1540": volume_not_area}
+      - prompt: "A triangular prism's ends are right triangles with sides 3 cm, 4 cm and 5 cm, and the prism is 10 cm long. What is its total surface area, in cm²?"
+        answer: "132"
+        check: "2*(3*4/2) + (3 + 4 + 5)*10"
+        difficulty: 3
+        hints: ["Each end is ½ × 3 × 4 = 6 cm².", "The side rectangles together are (3 + 4 + 5) × 10."]
+        solution: "Step 1: Ends: 2 × 6 = 12 cm². Step 2: Sides: 12 × 10 = 120 cm². Step 3: Total = 132 cm²."
+        mistakes: {"126": both_ends, "60": volume_not_area}
+
+  - code: math9.prism.scaling
+    title: Bigger and smaller prisms
+    after: [math9.prism.surface]
+    notes: |
+      If every length of a solid is multiplied by k, its surface area is multiplied by k² and its
+      volume by k³. Doubling the edge of a cube makes the area 4 times and the volume 8 times as big.
+      From a cube's volume, the edge is the cube root.
+    explanations:
+      text: "Make a cube twice as wide, twice as deep and twice as tall. Each face is now 2 × 2 = 4 times as big, so the surface area is 4 times as big. The volume is 2 × 2 × 2 = 8 times as big. Lengths, areas and volumes grow at different speeds."
+      visual: "Build a 2 cm cube from 1 cm cubes. You need 8 small cubes, not 2. Each face of the big cube shows 4 small squares, not 2."
+      step_by_step: "A cube has a volume of 64 cm³. What is its surface area? Step 1: Edge × edge × edge = 64, so the edge is 4 cm. Step 2: One face = 16 cm². Step 3: Six faces = 96 cm²."
+      real_world: "A mango box twice as big in every direction holds 8 times as many mangoes but needs only 4 times as much cardboard. That is why big boxes are cheaper per mango."
+    items:
+      - prompt: "If every edge of a cube is doubled, how many times as big does its volume become?"
+        answer: "8"
+        check: "2**3"
+        difficulty: 1
+        hints: ["Volume uses three lengths.", "2 × 2 × 2."]
+        solution: "2 × 2 × 2 = 8 times"
+        mistakes: {"2": scale_volume, "4": scale_volume}
+      - prompt: "How many 1 cm cubes fit inside a cube with 5 cm edges?"
+        answer: "125"
+        check: "5**3"
+        difficulty: 1
+        hints: ["5 layers of 5 × 5 cubes."]
+        solution: "Step 1: One layer has 5 × 5 = 25 cubes. Step 2: 5 layers: 125 cubes."
+        mistakes: {"25": area_not_volume, "15": added_dimensions}
+      - prompt: "If every edge of a cube is doubled, how many times as big does its surface area become?"
+        answer: "4"
+        check: "2**2"
+        difficulty: 2
+        hints: ["Area uses two lengths."]
+        solution: "Each face is 2 × 2 = 4 times as big, so the whole surface is 4 times as big."
+        mistakes: {"8": scale_area, "2": scale_area}
+      - prompt: "A cuboid has a volume of 10 cm³. Its length, width and height are all tripled. What is the new volume, in cm³?"
+        answer: "270"
+        check: "10*3**3"
+        difficulty: 3
+        hints: ["Volume is multiplied by 3 × 3 × 3."]
+        solution: "Step 1: 3 × 3 × 3 = 27. Step 2: 10 × 27 = 270 cm³."
+        mistakes: {"30": scale_volume, "90": scale_volume}
+      - prompt: "A cube has a volume of 64 cm³. What is its total surface area, in cm²?"
+        answer: "96"
+        check: "6*(64**(1/3))**2"
+        difficulty: 3
+        hints: ["Which number times itself three times gives 64?", "The edge is 4 cm."]
+        solution: "Step 1: 4 × 4 × 4 = 64, so the edge is 4 cm. Step 2: One face = 16 cm². Step 3: 6 × 16 = 96 cm²."
+        mistakes: {"16": one_face, "64": volume_not_area}

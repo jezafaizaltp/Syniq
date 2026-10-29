@@ -12,13 +12,20 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Maths 6: Similar Triangles | same angles, sides in the same ratio, matching sides, heights, shadows and maps | 25 |
 | Maths 7: Negative Numbers | adding and subtracting, multiplying and dividing, putting negatives into expressions, equations with negative answers | 28 |
 | Maths 8: Circle Measures | π, circumference, area, half circles and rings | 25 |
+| Maths 9: Real Numbers | rational and irrational numbers, the number line, distance between points | 21 |
+| Maths 10: Polynomials | terms, coefficients and degree, value of a polynomial, adding, subtracting and multiplying | 19 |
+| Maths 11: Parts of Circles | chords and the centre, angles in circles, arcs and sectors | 20 |
+| Maths 12: Prisms | volume, surface area, bigger and smaller prisms | 18 |
+| Maths 13: Polynomial Pictures | points and coordinates, lines from equations, slope | 18 |
+| Maths 14: Proportion | ratios, direct proportion, inverse proportion, sharing in a ratio | 24 |
+| Maths 15: Statistics | mean, median, mode, averages from a frequency table | 24 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 204 of the 235 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 31 are choice questions that no single calculation can check, such as "Add them" or "Which is the smallest?". They were checked by hand.
+- **Every answer that can be worked out by computer is**, on every test run: 317 of the 379 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 62 were checked by hand: choice questions that no single calculation can check, such as "Add them" or "Which is the smallest?", and a few statistics questions whose answer is read off a list, such as a mode.
 - **The fit with the textbook is not checked.** The chapter names come from the draft syllabus list (`../../content/class9-syllabus-draft.csv`), and the topics from study-guide websites that list each chapter's exercises. A teacher with the 2024 SCERT book should compare topic order and wording when one is available.
 
 ## Format
