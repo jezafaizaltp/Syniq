@@ -6,12 +6,25 @@ self-reported check-ins are never exposed to teachers.
 
 from collections import Counter
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from ..auth import audit, current_user, guardian_of, has_consent, new_token, require_role, verify_password
+from ..auth import (
+    MIN_PASSWORD,
+    audit,
+    clear_login_failures,
+    current_user,
+    guardian_of,
+    has_consent,
+    hash_password,
+    login_blocked,
+    new_token,
+    record_login_failure,
+    require_role,
+    verify_password,
+)
 from ..db import get_db
 from ..engine import detect
 from ..engine.mastery import progress_label
@@ -24,6 +37,7 @@ from ..models import (
     GuardianLink,
     Item,
     Mastery,
+    Session,
     User,
 )
 
@@ -38,11 +52,46 @@ class LoginIn(BaseModel):
 
 
 @router.post("/auth/login", tags=["auth"])
-def login(body: LoginIn, db: DbSession = Depends(get_db)):
-    user = db.scalars(select(User).where(User.email == body.email.lower().strip())).first()
+def login(body: LoginIn, request: Request, db: DbSession = Depends(get_db)):
+    login_id = body.email.lower().strip()
+    key = f"{login_id}|{request.client.host if request.client else ''}"
+    if login_blocked(key):
+        raise HTTPException(429, "Too many tries. Please wait 15 minutes, or ask your school to reset your password.")
+    user = db.scalars(select(User).where(User.email == login_id)).first()
     if not user or not verify_password(body.password, user.password_hash):
-        raise HTTPException(401, "Wrong email or password")
+        record_login_failure(key)
+        raise HTTPException(401, "Wrong username or password")
+    clear_login_failures(key)
     return {"token": new_token(db, user), "role": user.role, "name": user.name}
+
+
+@router.post("/auth/logout", tags=["auth"])
+def logout(authorization: str = Header(default=""), db: DbSession = Depends(get_db)):
+    sess = db.get(Session, authorization.removeprefix("Bearer ").strip())
+    if sess:
+        db.delete(sess)
+        db.commit()
+    return {"ok": True}
+
+
+class PasswordIn(BaseModel):
+    current: str
+    new: str = Field(min_length=MIN_PASSWORD, max_length=200)
+
+
+@router.post("/me/password", tags=["auth"])
+def change_password(body: PasswordIn, db: DbSession = Depends(get_db), user: User = Depends(current_user)):
+    if not verify_password(body.current, user.password_hash):
+        raise HTTPException(400, "Your current password is not right")
+    if body.new == body.current:
+        raise HTTPException(400, "Choose a password different from the old one")
+    user.password_hash = hash_password(body.new)
+    user.must_change_password = False
+    # Sign out everywhere else.
+    for other in db.scalars(select(Session).where(Session.user_id == user.id)).all():
+        db.delete(other)
+    db.commit()
+    return {"token": new_token(db, user)}
 
 
 # --- Teacher -----------------------------------------------------------------------

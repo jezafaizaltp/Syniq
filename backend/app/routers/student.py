@@ -243,7 +243,13 @@ def checkin(body: CheckInIn, db: DbSession = Depends(get_db), user: User = Depen
 
 @router.get("/me")
 def me(user: User = Depends(current_user), db: DbSession = Depends(get_db)):
-    out = {"id": user.id, "name": user.name, "role": user.role, "settings": user.settings or {}}
+    out = {
+        "id": user.id,
+        "name": user.name,
+        "role": user.role,
+        "settings": user.settings or {},
+        "must_change_password": user.must_change_password,
+    }
     if user.role == "student":
         out["consent"] = {
             "core_learning": has_consent(db, user.id, "core_learning"),

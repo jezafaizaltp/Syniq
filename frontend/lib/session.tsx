@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { ApiError, Me, Settings, api, effectiveSupport, hasToken, put, setToken } from "./api";
+import { ApiError, Me, Settings, api, effectiveSupport, hasToken, post, put, setToken } from "./api";
 
 type SessionValue = {
   me: Me | null;
@@ -48,6 +48,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   }, [refresh]);
 
   const signOut = () => {
+    post("/auth/logout", {}).catch(() => undefined);
     setToken(null);
     setMe(null);
     applySettings(undefined);

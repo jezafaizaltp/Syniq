@@ -20,6 +20,9 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 - **Parent view:** consent toggles and progress shown in words, not numbers.
 - **Ten ways to respond, without AI** ([details](docs/response-modes.md)): three support modes SYNiq notices from a student's answers and switches on itself, telling the student why (shorter steps, easier reading, pictures and smaller numbers), three that parents choose (screen reader, deaf or hard of hearing, tap to answer), and four modes picked from the student's answers (count it out with stars, step by step, a real-life story, a smaller similar question). SYNiq names common mistakes in sums, e.g. for 10 + 10 answered 15 it draws both and shows the difference. A "Demo: Number sense warm-up" chapter lets you try it.
 - **Ask SYNiq (AI tutor, Claude API):** students can ask about the topic they are on. Answers are grounded in the teacher's topic notes and approved explanations, and guide rather than hand over answers. No student name, id, progress or mood is sent, phone numbers and emails typed by mistake are removed, and chats are not saved. Messages about self-harm or abuse get a fixed reply pointing to a trusted adult and Tele-MANAS (14416) without calling the AI. Limited to 60 questions per student per day.
+- **School setup for the pilot** (admin's **School** page): upload one spreadsheet (CSV) of students and parents with consent from the paper forms, check it before anything is created, and print a login sheet with temporary passwords. Siblings share one parent login, phone numbers are never saved, and marks or ability groups are never uploaded. The admin can add teachers, give anyone a new password, and record changed paper consent.
+- **Safer sign-in:** everyone must choose their own password the first time they sign in, wrong passwords are limited to 10 in 15 minutes, people are signed out after 14 days without use, and changing a password signs out other devices.
+- **Ready to host** ([guide](docs/deploy.md)): Docker Compose with PostgreSQL, automatic HTTPS (Caddy) and a nightly database backup, on one small server in India.
 - **Teacher content pipeline:** teachers set up SCERT chapters and topics, write short notes on what the textbook covers, and can ask Claude to draft explanations in all four styles plus practice questions with hints, solutions and common mistakes. Drafts are marked "AI draft", carry Claude's notes on what to check, can be edited, and only reach students after a teacher approves them. Unmarkable questions (e.g. an answer that isn't one of the options) are dropped automatically.
 
 ## Not built yet
@@ -28,7 +31,6 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 - Real SCERT chapter content for every subject.
 - Interest exploration activities.
 - Picture explanations: the "picture" style is still described in text.
-- Production auth (password reset, rate limits) and deployment.
 
 ## Run locally
 
@@ -55,6 +57,9 @@ Demo accounts all use the password `syniq-demo`:
 | Student, no consent yet | `fathima@demo.syniq` |
 | Teacher | `teacher@demo.syniq` |
 | Guardian of all three | `parent@demo.syniq` |
+| School admin | `admin@demo.syniq` |
+
+The demo accounts and the sign-in hint are only for local use. A live server starts with no demo accounts (see [docs/deploy.md](docs/deploy.md)) and its web app is built with the hint hidden (`NEXT_PUBLIC_SHOW_DEMO=0`).
 
 The demo maths content was written to exercise the engine. It has **not** been checked against the current SCERT textbook and must be reviewed by a teacher before any pilot student sees it.
 
@@ -74,7 +79,23 @@ cd frontend && npm run build
 | `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | API address used by the web app |
 | `ANTHROPIC_API_KEY` | not set | Turns on the AI tutor and AI drafting. Without it the app works as before and the AI buttons are hidden |
 | `SYNIQ_AI_MODEL` | `claude-opus-5-5` | Claude model used for the tutor and drafting |
+| `SYNIQ_ENV` | not set | `production` switches off the API docs pages |
+| `NEXT_PUBLIC_SHOW_DEMO` | shown | `0` hides the demo account hint on the sign-in page |
 
 The Claude requests use server-side fallbacks (`fallbacks: "default"`): if Claude declines a request, the API retries it on Anthropic's recommended fallback model within the same call.
 
-After pulling this change, delete `backend/syniq.db` and run `python -m app.seed` again: new columns were added and there are no migrations yet.
+## Database changes
+
+Locally, SQLite tables are created on start, so after pulling a change that adds columns, delete `backend/syniq.db` and run `python -m app.seed` again.
+
+PostgreSQL uses Alembic migrations (`backend/migrations/`). The API container runs `alembic upgrade head` each time it starts. After changing `backend/app/models.py`, create a migration and check it before committing:
+
+```bash
+cd backend
+DATABASE_URL=postgresql://... alembic revision --autogenerate -m "what changed"
+DATABASE_URL=postgresql://... alembic upgrade head
+```
+
+## Putting it online
+
+See [docs/deploy.md](docs/deploy.md): one small server, `docker compose up -d --build`, then create the school admin with `python -m app.bootstrap`.

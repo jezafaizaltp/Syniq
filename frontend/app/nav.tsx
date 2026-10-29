@@ -14,6 +14,7 @@ export default function Nav() {
         SYNiq
       </Link>
       {me?.role === "student" && <Link href="/learn">Learn</Link>}
+      {me?.role === "admin" && <Link href="/admin">School</Link>}
       {(me?.role === "teacher" || me?.role === "admin") && <Link href="/teacher">Class</Link>}
       {me?.role === "guardian" && <Link href="/parent">My children</Link>}
       {me && <Link href="/settings">Settings</Link>}
