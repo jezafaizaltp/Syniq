@@ -9,7 +9,7 @@ from ..db import get_db
 from ..engine.mastery import progress_label
 from ..engine import detect, responses
 from ..engine.rules import STYLES
-from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Item, LearningEvent, Mastery, Subject, User
+from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Item, LearningEvent, Mastery, Misconception, Subject, User
 
 router = APIRouter(tags=["student"])
 
@@ -151,10 +151,15 @@ class AttemptIn(BaseModel):
     explanation_style: str | None = None
 
 
-# Tips for the demo maths chapter's common mistakes; the wording is in i18n.py (tip.<misconception>).
-def misconception_tip(lang: str, misconception: str | None) -> str | None:
+# Tips for common mistakes: in i18n.py (tip.<misconception>) when translated, else from content packs.
+def misconception_tip(db: DbSession, lang: str, misconception: str | None) -> str | None:
+    if not misconception:
+        return None
     key = f"tip.{misconception}"
-    return i18n.t(lang, key) if misconception and i18n.has(key) else None
+    if i18n.has(key):
+        return i18n.t(lang, key)
+    row = db.scalars(select(Misconception).where(Misconception.tag == misconception)).first()
+    return row.tip if row else None
 
 
 def localized_settings(settings: dict | None, lang: str) -> dict:
@@ -178,7 +183,7 @@ def submit_attempt(
         db, user, item, body.response, body.hints_used, body.time_ms, body.explanation_style
     )
     findings = learning.update_noticed_support(db, user)
-    tip = None if correct else misconception_tip(lang, misconception)
+    tip = None if correct else misconception_tip(db, lang, misconception)
     explanations = db.scalars(
         select(Explanation).where(Explanation.concept_id == item.concept_id, Explanation.status == "approved")
     ).all()

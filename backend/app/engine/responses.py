@@ -213,7 +213,13 @@ def tap_choices(s: Arithmetic | None, answer: str, seed: int, likely_wrong: list
     try:
         right = int(answer.strip())
     except ValueError:
-        return []
+        # A decimal or fraction: offer the content's likely wrong answers, if it has any.
+        texts = [answer.strip()] + [w for w in (likely_wrong or []) if w.strip() != answer.strip()][:3]
+        if len(texts) < 2:
+            return []
+        shift = seed % len(texts)
+        ordered = sorted(texts)
+        return ordered[shift:] + ordered[:shift]
     wrongs: list[int] = []
     if s is not None:
         wrongs += [s.a + s.b, abs(s.a - s.b), s.a * s.b]

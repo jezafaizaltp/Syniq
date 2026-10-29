@@ -19,3 +19,5 @@ How to fill it in:
 - Upload the same sheet again as it grows. Chapters and topics already there are skipped, and nothing is ever deleted.
 - A chapter number that already exists with a different title is refused, so fix titles in the app instead.
 - Students only see a chapter once a teacher has approved at least one explanation or question in it.
+
+The explanations and questions themselves are in [backend/content](../backend/content/README.md), one file per chapter. Mathematics chapters 1 to 4 are done.

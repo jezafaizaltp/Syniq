@@ -8,7 +8,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 
 - **Accounts and roles:** student, guardian, teacher and admin, with server-side permission checks.
 - **Consent first:** a student can't learn until a guardian consents. Mood check-ins and sharing with the school each need their own consent. Consent records are append-only.
-- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Only a demo Mathematics chapter has content so far.
+- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 4 have full content (17 topics, 122 questions, [content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
 - **Adaptive teacher engine** (`backend/app/engine/`):
   - Bayesian Knowledge Tracing estimates mastery for each concept. Hints and lucky guesses count for less.
   - Ordered, versioned rules pick the next step: introduce, practise, explain differently, revisit a prerequisite, or space out reviews.
@@ -16,7 +16,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
   - Guardrails: no adaptation based on one answer, nothing inferred from speed, and support offers that the student can always decline.
 - **Student app:** optional mood check-in, explanations in four styles (words, picture, step by step, real-life) that the student can switch between at any time, practice with graded hints, misconception-specific tips, worked solutions, and a "take a break" button.
 - **Accessibility settings, no diagnosis needed:** text size, high contrast, easier-to-read font, reduced motion, read-aloud, extra time, and a preferred explanation style.
-- **Teacher dashboard:** class progress by topic shown as counts (never rankings), common mistakes, students who may need a hand, and a content review queue. Nothing reaches students until a teacher approves it.
+- **Teacher dashboard:** class progress by topic shown as counts (never rankings), common mistakes, students who may need a hand, and a content review queue. Content drafted in the app reaches students only after a teacher approves it; content packs arrive already checked.
 - **Parent view:** consent toggles and progress shown in words, not numbers.
 - **Ten ways to respond, without AI** ([details](docs/response-modes.md)): three support modes SYNiq notices from a student's answers and switches on itself, telling the student why (shorter steps, easier reading, pictures and smaller numbers), three that parents choose (screen reader, deaf or hard of hearing, tap to answer), and four modes picked from the student's answers (count it out with stars, step by step, a real-life story, a smaller similar question). SYNiq names common mistakes in sums, e.g. for 10 + 10 answered 15 it draws both and shows the difference. A "Demo: Number sense warm-up" chapter lets you try it.
 - **Ask SYNiq (AI tutor, Claude API):** students can ask about the topic they are on. Answers are grounded in the teacher's topic notes and approved explanations, and guide rather than hand over answers. No student name, id, progress or mood is sent, phone numbers and emails typed by mistake are removed, and chats are not saved. Messages about self-harm or abuse get a fixed reply pointing to a trusted adult and Tele-MANAS (14416) without calling the AI. Limited to 60 questions per student per day.
@@ -31,7 +31,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 ## Not built yet
 
 - Hindi interface, and Malayalam for the teacher and school admin screens.
-- Real SCERT chapter content for every subject (chapters can be loaded; teachers still write notes and approve content).
+- Content for Mathematics chapters 5 to 15 and the other eight subjects, and a teacher's check of chapters 1 to 4 against the 2024 SCERT book.
 - Interest exploration activities.
 - Picture explanations: the "picture" style is still described in text.
 

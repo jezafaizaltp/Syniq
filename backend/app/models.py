@@ -137,7 +137,7 @@ class Explanation(Base):
     style: Mapped[str] = mapped_column(String(30))  # text | visual | step_by_step | real_world
     body: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved | rejected
-    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai
+    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai | pack
     review_note: Mapped[str] = mapped_column(Text, default="")
 
 
@@ -156,9 +156,19 @@ class Item(Base):
     # Maps a wrong response to a misconception tag, e.g. {"x² + 9": "square_each_term"}
     misconceptions: Mapped[dict] = mapped_column(JSON, default=dict)
     status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved | rejected
-    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai
+    source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai | pack
     review_note: Mapped[str] = mapped_column(Text, default="")
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+
+
+class Misconception(Base):
+    """What to tell a student who made a common mistake, by the tag items use in misconceptions."""
+
+    __tablename__ = "misconceptions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    tag: Mapped[str] = mapped_column(String(60), unique=True)
+    tip: Mapped[str] = mapped_column(Text)
 
 
 # --- Raw events ---------------------------------------------------------------

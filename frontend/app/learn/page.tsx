@@ -16,7 +16,15 @@ import Tutor from "./Tutor";
 type Subject = { id: number; name: string; chapters: number; language: string };
 type Chapter = { id: number; number: number; title: string };
 type ChapterDetail = { id: number; title: string; concepts: { id: number; title: string; progress: string }[] };
-type Item = { id: number; kind: "mcq" | "numeric"; prompt: string; options: string[]; hint_count: number; choices?: string[] };
+type Item = {
+  id: number;
+  kind: "mcq" | "numeric";
+  prompt: string;
+  options: string[];
+  hint_count: number;
+  choices?: string[];
+  keyboard?: "text" | "decimal";
+};
 type Step = {
   decision_id: number;
   kind: "explain" | "practice" | "review" | "prereq_review" | "chapter_complete";
@@ -370,7 +378,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                 ) : (
                   <>
                     <label htmlFor="answer">{t("learn.your_answer")}</label>
-                    <input id="answer" inputMode="decimal" value={answer} disabled={!!result} onChange={(e) => setAnswer(e.target.value)} />
+                    <input id="answer" inputMode={step.item.keyboard ?? "decimal"} value={answer} disabled={!!result} onChange={(e) => setAnswer(e.target.value)} />
                   </>
                 )}
 
