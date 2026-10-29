@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post } from "@/lib/api";
 import { speak, useSession } from "@/lib/session";
+import Feedback, { AdaptiveResponse } from "./Feedback";
 import Tutor from "./Tutor";
 
 type Subject = { id: number; name: string; chapters: number; language: string };
 type Chapter = { id: number; number: number; title: string };
 type ChapterDetail = { id: number; title: string; concepts: { id: number; title: string; progress: string }[] };
-type Item = { id: number; kind: "mcq" | "numeric"; prompt: string; options: string[]; hint_count: number };
+type Item = { id: number; kind: "mcq" | "numeric"; prompt: string; options: string[]; hint_count: number; choices?: string[] };
 type Step = {
   decision_id: number;
   kind: "explain" | "practice" | "review" | "prereq_review" | "chapter_complete";
@@ -20,7 +21,14 @@ type Step = {
   styles?: string[];
   item?: Item | null;
 };
-type Result = { correct: boolean; feedback: string; progress: string; tip?: string | null; solution?: string };
+type Result = {
+  correct: boolean;
+  feedback: string;
+  progress: string;
+  tip?: string | null;
+  solution?: string;
+  response: AdaptiveResponse;
+};
 
 const KIND_HEADINGS: Record<string, string> = {
   practice: "Practice",
@@ -236,7 +244,6 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
       explanation_style: styleRef.current,
     });
     setResult(r);
-    if (readAloud) speak([r.feedback, r.tip].filter(Boolean).join(". "));
   }
 
   if (onBreak) {
@@ -326,9 +333,9 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                 🔊
               </button>
               <form onSubmit={submit} style={{ marginTop: 12 }}>
-                {step.item.kind === "mcq" ? (
+                {step.item.kind === "mcq" || step.item.choices?.length ? (
                   <div className="options" role="group" aria-label="Answer choices">
-                    {step.item.options.map((o) => (
+                    {(step.item.choices?.length ? step.item.choices : step.item.options).map((o) => (
                       <button
                         type="button"
                         key={o}
@@ -369,13 +376,11 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
               </form>
 
               {result && (
-                <div className={`feedback ${result.correct ? "good" : "warn"}`} role="status">
-                  <strong>{result.feedback}</strong>
-                  {result.tip && <p>{result.tip}</p>}
-                  {result.solution && <p>Worked solution: {result.solution}</p>}
+                <>
+                  <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   <p className="muted">This topic: {PROGRESS_WORDS[result.progress] ?? result.progress}</p>
                   <button onClick={next}>Next</button>
-                </div>
+                </>
               )}
             </>
           )}

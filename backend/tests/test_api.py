@@ -33,7 +33,8 @@ def anu():
 def math_chapter_id(headers):
     subjects = client.get("/subjects", headers=headers).json()
     math = next(s for s in subjects if s["code"] == "math")
-    return client.get(f"/subjects/{math['id']}/chapters", headers=headers).json()[0]["id"]
+    chapters = client.get(f"/subjects/{math['id']}/chapters", headers=headers).json()
+    return next(c["id"] for c in chapters if c["title"] == "Demo: Algebraic identities")
 
 
 def test_wrong_password_rejected():

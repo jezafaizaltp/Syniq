@@ -31,6 +31,19 @@ export default function SettingsPage() {
     ["extra_time", "Extra time", "Never hurry me. (SYNiq has no timers, and this keeps it that way.)"],
   ];
 
+  const modes = s.support_modes ?? [];
+  const supports: [string, string, string][] = [
+    ["focus", "Help me stay focused", "Short steps shown one at a time, and quick challenges."],
+    ["easy_read", "Make reading easier", "One short sentence per line, a clearer font, and everything read aloud."],
+    ["screen_reader", "I use a screen reader or find pictures hard to see", "Everything is said in words, not only shown in pictures."],
+    ["visual_first", "I'm deaf or hard of hearing", "Nothing depends on sound. Pictures and text come first."],
+    ["tap_to_answer", "Let me tap my answers", "Choose from answers instead of typing or speaking."],
+    ["small_steps", "Show maths with objects and smaller numbers", "Counting pictures and easier questions first, then the real one."],
+  ];
+  function toggleMode(mode: string, on: boolean) {
+    change({ support_modes: on ? [...modes.filter((m) => m !== mode), mode] : modes.filter((m) => m !== mode) });
+  }
+
   return (
     <div className="wrap">
       <h1>Settings</h1>
@@ -73,6 +86,25 @@ export default function SettingsPage() {
               ))}
             </select>
           </>
+        )}
+        {me.role === "student" && (
+          <fieldset style={{ border: 0, padding: 0, margin: "16px 0 0" }}>
+            <legend style={{ fontWeight: 600 }}>How SYNiq helps me</legend>
+            <p className="muted" style={{ margin: "4px 0" }}>
+              Pick anything that helps. You can change these at any time.
+            </p>
+            {supports.map(([key, title, help]) => (
+              <div key={key} style={{ marginTop: 12 }}>
+                <label className="check">
+                  <input type="checkbox" checked={modes.includes(key)} onChange={(e) => toggleMode(key, e.target.checked)} />
+                  {title}
+                </label>
+                <p className="muted" style={{ margin: "0 0 0 34px" }}>
+                  {help}
+                </p>
+              </div>
+            ))}
+          </fieldset>
         )}
         <p role="status" className="muted">
           {saved}
