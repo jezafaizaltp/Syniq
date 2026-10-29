@@ -1,0 +1,181 @@
+# Class 9 Chemistry, chapter 4. Format: content/README.md.
+subject: chem
+chapter: 4
+title: Redox Reactions
+
+tips:
+  oil_rig: "OIL RIG: Oxidation Is Loss of electrons, Reduction Is Gain."
+  oxidation_number_up: "Oxidation increases the oxidation number; reduction decreases it."
+  element_zero: "An element on its own (like O₂, Na, Cl₂) has oxidation number 0."
+  oxygen_minus_two: "Oxygen is −2 in most compounds, hydrogen +1. The total of all oxidation numbers in a neutral compound is 0."
+  ion_total: "In an ion, the oxidation numbers add up to the charge of the ion, not to 0."
+  agent_opposite: "The oxidising agent is itself reduced; the reducing agent is itself oxidised."
+  forgot_count: "Multiply each oxidation number by how many of that atom there are before adding."
+
+concepts:
+  - code: chem9.redox.electrons
+    title: Oxidation and reduction
+    notes: |
+      Oxidation is loss of electrons (also gain of oxygen or loss of hydrogen). Reduction is gain of
+      electrons (also loss of oxygen or gain of hydrogen). They always happen together: a redox
+      reaction. In 2Na + Cl₂ → 2NaCl, sodium is oxidised (Na → Na⁺ + e⁻) and chlorine is reduced
+      (Cl₂ + 2e⁻ → 2Cl⁻).
+    explanations:
+      text: "When magnesium burns in oxygen, each magnesium atom gives 2 electrons to oxygen. Magnesium has lost electrons: it is oxidised. Oxygen has gained them: it is reduced. One cannot happen without the other, because the electrons have to go somewhere."
+      visual: "Draw two people passing a ball. The one who hands it over is oxidised (loses); the one who catches it is reduced (gains). Remember OIL RIG."
+      step_by_step: "Zn + Cu²⁺ → Zn²⁺ + Cu: Step 1: Zn becomes Zn²⁺, losing 2 electrons: oxidised. Step 2: Cu²⁺ becomes Cu, gaining 2 electrons: reduced."
+      real_world: "Rusting of iron is oxidation: iron loses electrons to oxygen in the presence of water. Painting or oiling iron keeps oxygen and water away."
+    items:
+      - prompt: "Oxidation is:"
+        options: ["Loss of electrons", "Gain of electrons", "Loss of protons", "Gain of neutrons"]
+        answer: "Loss of electrons"
+        difficulty: 1
+        hints: ["OIL RIG."]
+        solution: "Oxidation Is Loss of electrons."
+        mistakes: {"Gain of electrons": oil_rig}
+      - prompt: "In Na → Na⁺ + e⁻, sodium is:"
+        options: ["Oxidised", "Reduced", "Neither", "Both"]
+        answer: "Oxidised"
+        difficulty: 1
+        hints: ["It loses an electron."]
+        solution: "Loss of an electron is oxidation."
+        mistakes: {"Reduced": oil_rig}
+      - prompt: "In CuO + H₂ → Cu + H₂O, what happens to copper oxide?"
+        options: ["It is reduced", "It is oxidised", "It is neither", "It is decomposed by heat only"]
+        answer: "It is reduced"
+        difficulty: 2
+        hints: ["It loses oxygen."]
+        solution: "CuO loses oxygen to become Cu: reduction. Hydrogen gains oxygen: oxidation."
+        mistakes: {"It is oxidised": oil_rig}
+      - prompt: "In Cl₂ + 2e⁻ → 2Cl⁻, how many electrons are gained by one chlorine molecule?"
+        answer: "2"
+        check: "2*1"
+        difficulty: 1
+        hints: ["Each Cl atom gains 1."]
+        solution: "Two Cl atoms each gain 1: 2 electrons."
+      - prompt: "In Zn + Cu²⁺ → Zn²⁺ + Cu, how many electrons does each zinc atom lose?"
+        answer: "2"
+        check: "2 - 0"
+        difficulty: 2
+        hints: ["Zn goes from 0 charge to 2+."]
+        solution: "Zn → Zn²⁺ + 2e⁻: 2 electrons lost."
+      - prompt: "Why must oxidation and reduction always happen together?"
+        options: ["Electrons lost by one substance must be gained by another", "Oxygen is always present", "Heat is always given out", "Atoms are destroyed"]
+        answer: "Electrons lost by one substance must be gained by another"
+        difficulty: 3
+        hints: ["Where do the lost electrons go?"]
+        solution: "Electrons cannot just disappear: whatever loses them (oxidised) gives them to something that gains them (reduced)."
+
+  - code: chem9.redox.oxidation_number
+    title: Oxidation numbers
+    after: [chem9.redox.electrons]
+    notes: |
+      The oxidation number is the charge an atom would have if all its bonds were ionic. Rules: an
+      element is 0; a simple ion equals its charge; O is −2 (except in peroxides, −1), H is +1 (with
+      non-metals), group 1 metals +1, group 2 +2, F −1; the sum is 0 in a neutral compound and equals
+      the charge in an ion. Example: S in H₂SO₄: 2(+1) + x + 4(−2) = 0, so x = +6.
+    explanations:
+      text: "Oxidation numbers are bookkeeping. In water, oxygen 'owns' the shared electrons, so O is −2 and each H is +1: 2(+1) + (−2) = 0. To find an unknown, set the total to 0 (or to the ion's charge) and solve."
+      visual: "Write the formula, put the known numbers above each atom and a box (x) above the unknown. Multiply each by how many atoms there are and make the sum match the overall charge."
+      step_by_step: "Mn in KMnO₄: Step 1: K = +1, O = −2. Step 2: +1 + x + 4(−2) = 0. Step 3: x − 7 = 0. Step 4: x = +7."
+      real_world: "Purple potassium permanganate (Mn +7) is used to disinfect wells in Kerala. It works because Mn is in a very high oxidation state and readily takes electrons from germs."
+    items:
+      - prompt: "What is the oxidation number of oxygen in O₂?"
+        answer: "0"
+        check: "0"
+        difficulty: 1
+        hints: ["An uncombined element."]
+        solution: "Elements on their own have oxidation number 0."
+        mistakes: {"-2": element_zero}
+      - prompt: "What is the oxidation number of sulphur in H₂SO₄?"
+        answer: "6"
+        check: "solve(Eq(2*1 + x + 4*(-2), 0), x)[0]"
+        difficulty: 2
+        hints: ["2(+1) + x + 4(−2) = 0."]
+        solution: "2 + x − 8 = 0, so x = +6."
+        mistakes: {"0": element_zero, "-2": forgot_count}
+      - prompt: "What is the oxidation number of manganese in KMnO₄?"
+        answer: "7"
+        check: "solve(Eq(1 + x + 4*(-2), 0), x)[0]"
+        difficulty: 2
+        hints: ["+1 + x + 4(−2) = 0."]
+        solution: "1 + x − 8 = 0, so x = +7."
+        mistakes: {"1": forgot_count}
+      - prompt: "What is the oxidation number of nitrogen in NH₃?"
+        answer: "-3"
+        check: "solve(Eq(x + 3*1, 0), x)[0]"
+        difficulty: 1
+        hints: ["Each H is +1."]
+        solution: "x + 3 = 0, so x = −3."
+        mistakes: {"3": oxygen_minus_two, "-1": forgot_count}
+      - prompt: "What is the oxidation number of carbon in CO₂?"
+        answer: "4"
+        check: "solve(Eq(x + 2*(-2), 0), x)[0]"
+        difficulty: 1
+        hints: ["Each O is −2."]
+        solution: "x − 4 = 0, so x = +4."
+        mistakes: {"2": forgot_count}
+      - prompt: "What is the oxidation number of chromium in the dichromate ion Cr₂O₇²⁻?"
+        answer: "6"
+        check: "solve(Eq(2*x + 7*(-2), -2), x)[0]"
+        difficulty: 3
+        hints: ["The total is −2, not 0.", "2x − 14 = −2."]
+        solution: "2x + 7(−2) = −2, so 2x = 12 and x = +6."
+        mistakes: {"7": ion_total, "12": forgot_count}
+
+  - code: chem9.redox.agents
+    title: Oxidising and reducing agents
+    after: [chem9.redox.oxidation_number]
+    notes: |
+      In a redox reaction, the substance whose oxidation number increases is oxidised and is the
+      reducing agent; the substance whose oxidation number decreases is reduced and is the oxidising
+      agent. Example: Fe₂O₃ + 3CO → 2Fe + 3CO₂: Fe goes +3 → 0 (reduced, Fe₂O₃ is the oxidising
+      agent); C goes +2 → +4 (oxidised, CO is the reducing agent).
+    explanations:
+      text: "An oxidising agent oxidises something else by taking its electrons, so the agent itself is reduced. A reducing agent gives electrons away, so it is itself oxidised. In a blast furnace, carbon monoxide takes oxygen from iron oxide: CO is the reducing agent, iron oxide the oxidising agent."
+      visual: "Draw two arrows on the equation: one from the atom whose number goes up ('oxidised: reducing agent') and one from the atom whose number goes down ('reduced: oxidising agent')."
+      step_by_step: "CuO + H₂ → Cu + H₂O: Step 1: Cu: +2 → 0, reduced, so CuO is the oxidising agent. Step 2: H: 0 → +1, oxidised, so H₂ is the reducing agent."
+      real_world: "Bleach and hydrogen peroxide are oxidising agents that remove stains and kill germs by taking electrons from coloured or living molecules."
+    items:
+      - prompt: "In CuO + H₂ → Cu + H₂O, which substance is the reducing agent?"
+        options: ["H₂", "CuO", "Cu", "H₂O"]
+        answer: "H₂"
+        difficulty: 1
+        hints: ["Which one is oxidised?"]
+        solution: "H goes from 0 to +1 (oxidised), so H₂ is the reducing agent."
+        mistakes: {"CuO": agent_opposite}
+      - prompt: "An oxidising agent is a substance that:"
+        options: ["Gains electrons and is itself reduced", "Loses electrons and is itself oxidised", "Adds hydrogen to others", "Does not change"]
+        answer: "Gains electrons and is itself reduced"
+        difficulty: 1
+        hints: ["It oxidises something else by taking its electrons."]
+        solution: "It takes electrons, so it is reduced."
+        mistakes: {"Loses electrons and is itself oxidised": agent_opposite}
+      - prompt: "In Fe₂O₃ + 3CO → 2Fe + 3CO₂, by how much does the oxidation number of carbon change?"
+        answer: "2"
+        check: "4 - 2"
+        difficulty: 2
+        hints: ["C in CO is +2; C in CO₂ is +4."]
+        solution: "From +2 to +4: an increase of 2, so carbon is oxidised."
+        mistakes: {"-2": oxidation_number_up}
+      - prompt: "In Fe₂O₃ + 3CO → 2Fe + 3CO₂, which substance is the oxidising agent?"
+        options: ["Fe₂O₃", "CO", "Fe", "CO₂"]
+        answer: "Fe₂O₃"
+        difficulty: 2
+        hints: ["Iron goes from +3 to 0."]
+        solution: "Iron is reduced, so Fe₂O₃ is the oxidising agent."
+        mistakes: {"CO": agent_opposite}
+      - prompt: "In Zn + 2HCl → ZnCl₂ + H₂, what is the oxidation number of zinc after the reaction?"
+        answer: "2"
+        check: "solve(Eq(x + 2*(-1), 0), x)[0]"
+        difficulty: 2
+        hints: ["In ZnCl₂, each Cl is −1."]
+        solution: "x + 2(−1) = 0, so Zn is +2 (it was 0: oxidised)."
+        mistakes: {"0": element_zero}
+      - prompt: "In 2Mg + O₂ → 2MgO, which statement is true?"
+        options: ["Mg is the reducing agent and O₂ is the oxidising agent", "Mg is the oxidising agent and O₂ is the reducing agent", "Both are oxidised", "Neither changes oxidation number"]
+        answer: "Mg is the reducing agent and O₂ is the oxidising agent"
+        difficulty: 3
+        hints: ["Mg: 0 → +2. O: 0 → −2."]
+        solution: "Mg is oxidised (reducing agent); O₂ is reduced (oxidising agent)."
+        mistakes: {"Mg is the oxidising agent and O₂ is the reducing agent": agent_opposite}
