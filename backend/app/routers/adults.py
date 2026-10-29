@@ -123,17 +123,27 @@ def review_queue(db: DbSession = Depends(get_db), user: User = Depends(require_r
             {
                 "id": i.id,
                 "concept": db.get(Concept, i.concept_id).title,
+                "kind": i.kind,
                 "prompt": i.prompt,
                 "options": i.options,
                 "answer": i.answer,
                 "hints": i.hints,
                 "solution": i.solution,
                 "difficulty": i.difficulty,
+                "source": i.source,
+                "review_note": i.review_note,
             }
             for i in items
         ],
         "explanations": [
-            {"id": e.id, "concept": db.get(Concept, e.concept_id).title, "style": e.style, "body": e.body}
+            {
+                "id": e.id,
+                "concept": db.get(Concept, e.concept_id).title,
+                "style": e.style,
+                "body": e.body,
+                "source": e.source,
+                "review_note": e.review_note,
+            }
             for e in exps
         ],
     }

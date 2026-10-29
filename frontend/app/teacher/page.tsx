@@ -2,18 +2,27 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PROGRESS_WORDS, api, post } from "@/lib/api";
+import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import ContentTools from "./ContentTools";
 
 type Overview = {
   students: number;
   concepts: { concept_id: number; title: string; counts: Record<string, number>; common_misconceptions: string[] }[];
 };
 type Support = { student_id: number; name: string; concepts: string[] }[];
-type Queue = {
-  items: { id: number; concept: string; prompt: string; options: string[]; answer: string; hints: string[]; solution: string; difficulty: number }[];
-  explanations: { id: number; concept: string; style: string; body: string }[];
+type Draft = { id: number; concept: string; source: string; review_note: string };
+type QueueItem = Draft & {
+  kind: string;
+  prompt: string;
+  options: string[];
+  answer: string;
+  hints: string[];
+  solution: string;
+  difficulty: number;
 };
+type QueueExplanation = Draft & { style: string; body: string };
+type Queue = { items: QueueItem[]; explanations: QueueExplanation[] };
 
 const MISCONCEPTION_WORDS: Record<string, string> = {
   square_each_term: "Squares each term, missing 2ab",
@@ -26,6 +35,121 @@ const MISCONCEPTION_WORDS: Record<string, string> = {
   arithmetic: "Arithmetic slip",
 };
 
+const mistakeWords = (tag: string) => MISCONCEPTION_WORDS[tag] ?? tag.replace(/_/g, " ");
+
+function DraftLabel({ d }: { d: Draft }) {
+  return (
+    <>
+      <p className="muted">
+        {d.concept}
+        {d.source === "ai" && <span className="badge">AI draft</span>}
+      </p>
+      {d.review_note && <p className="feedback warn">Check: {d.review_note}</p>}
+    </>
+  );
+}
+
+const lines = (s: string) =>
+  s
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+function ItemEditor({ item, onDone }: { item: QueueItem; onDone: () => void }) {
+  const [f, setF] = useState({
+    prompt: item.prompt,
+    options: item.options.join("\n"),
+    answer: item.answer,
+    hints: item.hints.join("\n"),
+    solution: item.solution,
+    difficulty: item.difficulty,
+  });
+  const [error, setError] = useState("");
+  const field = (k: keyof typeof f) => ({
+    id: `edit-${item.id}-${k}`,
+    value: f[k],
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setF({ ...f, [k]: e.target.value }),
+  });
+
+  async function save() {
+    try {
+      await put(`/teacher/items/${item.id}`, {
+        ...f,
+        options: lines(f.options),
+        hints: lines(f.hints),
+        difficulty: Number(f.difficulty),
+      });
+      onDone();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Could not save");
+    }
+  }
+
+  return (
+    <div>
+      <label htmlFor={`edit-${item.id}-prompt`}>Question</label>
+      <textarea {...field("prompt")} />
+      {item.kind === "mcq" && (
+        <>
+          <label htmlFor={`edit-${item.id}-options`}>Options, one per line</label>
+          <textarea {...field("options")} />
+        </>
+      )}
+      <label htmlFor={`edit-${item.id}-answer`}>Answer</label>
+      <input {...field("answer")} />
+      <label htmlFor={`edit-${item.id}-hints`}>Hints, one per line</label>
+      <textarea {...field("hints")} />
+      <label htmlFor={`edit-${item.id}-solution`}>Worked solution</label>
+      <textarea {...field("solution")} />
+      <label htmlFor={`edit-${item.id}-difficulty`}>Difficulty</label>
+      <select
+        id={`edit-${item.id}-difficulty`}
+        value={f.difficulty}
+        onChange={(e) => setF({ ...f, difficulty: Number(e.target.value) })}
+      >
+        <option value={1}>1 (easier)</option>
+        <option value={2}>2</option>
+        <option value={3}>3 (harder)</option>
+      </select>
+      {error && (
+        <p className="feedback warn" role="alert">
+          {error}
+        </p>
+      )}
+      <div className="row" style={{ marginTop: 8 }}>
+        <button onClick={save}>Save changes</button>
+        <button className="secondary" onClick={onDone}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ExplanationEditor({ exp, onDone }: { exp: QueueExplanation; onDone: () => void }) {
+  const [body, setBody] = useState(exp.body);
+  return (
+    <div>
+      <label htmlFor={`edit-exp-${exp.id}`}>Explanation</label>
+      <textarea id={`edit-exp-${exp.id}`} rows={6} value={body} onChange={(e) => setBody(e.target.value)} />
+      <div className="row" style={{ marginTop: 8 }}>
+        <button
+          onClick={async () => {
+            await put(`/teacher/explanations/${exp.id}`, { body });
+            onDone();
+          }}
+          disabled={!body.trim()}
+        >
+          Save changes
+        </button>
+        <button className="secondary" onClick={onDone}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Teacher() {
   const { me, loading } = useSession();
   const router = useRouter();
@@ -33,6 +157,7 @@ export default function Teacher() {
   const [overview, setOverview] = useState<Overview | null>(null);
   const [support, setSupport] = useState<Support>([]);
   const [queue, setQueue] = useState<Queue | null>(null);
+  const [editing, setEditing] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && (!me || (me.role !== "teacher" && me.role !== "admin"))) router.replace("/");
@@ -59,6 +184,11 @@ export default function Teacher() {
 
   async function review(kind: "items" | "explanations", id: number, decision: "approve" | "reject") {
     await post(`/teacher/${kind}/${id}/review`, { decision });
+    await reloadQueue();
+  }
+
+  async function reloadQueue() {
+    setEditing(null);
     setQueue(await api<Queue>("/teacher/review-queue"));
   }
 
@@ -91,7 +221,7 @@ export default function Teacher() {
                   {Object.keys(PROGRESS_WORDS).map((k) => (
                     <td key={k}>{c.counts[k] ?? 0}</td>
                   ))}
-                  <td>{c.common_misconceptions.map((m) => MISCONCEPTION_WORDS[m] ?? m).join("; ") || "—"}</td>
+                  <td>{c.common_misconceptions.map(mistakeWords).join("; ") || "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -116,42 +246,60 @@ export default function Teacher() {
         )}
       </section>
 
+      <ContentTools onDrafted={reloadQueue} />
+
       <section className="card">
         <h2>Content waiting for review</h2>
         <p className="muted">Nothing reaches students until a teacher approves it.</p>
         {queue?.items.length === 0 && queue?.explanations.length === 0 && <p>All caught up.</p>}
         {queue?.items.map((i) => (
-          <div key={i.id} className="card">
-            <p className="muted">
-              {i.concept} · difficulty {i.difficulty}
-            </p>
-            <p>
-              <strong>{i.prompt}</strong>
-            </p>
-            {i.options.length > 0 && <p>Options: {i.options.join(" | ")}</p>}
-            <p>Answer: {i.answer}</p>
-            <p>Hints: {i.hints.join(" / ")}</p>
-            <p>Solution: {i.solution}</p>
-            <div className="row">
-              <button onClick={() => review("items", i.id, "approve")}>Approve</button>
-              <button className="secondary" onClick={() => review("items", i.id, "reject")}>
-                Reject
-              </button>
-            </div>
+          <div key={`i${i.id}`} className="card">
+            <DraftLabel d={i} />
+            {editing === `i${i.id}` ? (
+              <ItemEditor item={i} onDone={reloadQueue} />
+            ) : (
+              <>
+                <p className="muted">Difficulty {i.difficulty}</p>
+                <p>
+                  <strong>{i.prompt}</strong>
+                </p>
+                {i.options.length > 0 && <p>Options: {i.options.join(" | ")}</p>}
+                <p>Answer: {i.answer}</p>
+                <p>Hints: {i.hints.join(" / ")}</p>
+                <p>Solution: {i.solution}</p>
+                <div className="row">
+                  <button onClick={() => review("items", i.id, "approve")}>Approve</button>
+                  <button className="secondary" onClick={() => setEditing(`i${i.id}`)}>
+                    Edit
+                  </button>
+                  <button className="secondary" onClick={() => review("items", i.id, "reject")}>
+                    Reject
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         ))}
         {queue?.explanations.map((e) => (
-          <div key={e.id} className="card">
-            <p className="muted">
-              {e.concept} · {e.style}
-            </p>
-            <p>{e.body}</p>
-            <div className="row">
-              <button onClick={() => review("explanations", e.id, "approve")}>Approve</button>
-              <button className="secondary" onClick={() => review("explanations", e.id, "reject")}>
-                Reject
-              </button>
-            </div>
+          <div key={`e${e.id}`} className="card">
+            <DraftLabel d={e} />
+            {editing === `e${e.id}` ? (
+              <ExplanationEditor exp={e} onDone={reloadQueue} />
+            ) : (
+              <>
+                <p className="muted">Style: {STYLE_WORDS[e.style] ?? e.style}</p>
+                <p>{e.body}</p>
+                <div className="row">
+                  <button onClick={() => review("explanations", e.id, "approve")}>Approve</button>
+                  <button className="secondary" onClick={() => setEditing(`e${e.id}`)}>
+                    Edit
+                  </button>
+                  <button className="secondary" onClick={() => review("explanations", e.id, "reject")}>
+                    Reject
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </section>

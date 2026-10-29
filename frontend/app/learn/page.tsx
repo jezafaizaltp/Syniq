@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post } from "@/lib/api";
 import { speak, useSession } from "@/lib/session";
+import Tutor from "./Tutor";
 
 type Subject = { id: number; name: string; chapters: number; language: string };
 type Chapter = { id: number; number: number; title: string };
@@ -177,6 +178,13 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
   const startedRef = useRef<number>(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const readAloud = !!me?.settings?.read_aloud;
+  const [tutorOn, setTutorOn] = useState(false);
+
+  useEffect(() => {
+    api<{ enabled: boolean }>("/ai/status")
+      .then((s) => setTutorOn(s.enabled))
+      .catch(() => setTutorOn(false));
+  }, []);
 
   async function next() {
     setError("");
@@ -383,6 +391,10 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
           </p>
           {showWhy && <p className="muted">{step.reason}</p>}
         </div>
+      )}
+
+      {tutorOn && step?.concept && step.kind !== "chapter_complete" && (
+        <Tutor conceptId={step.concept.id} conceptTitle={step.concept.title} readAloud={readAloud} />
       )}
     </div>
   );
