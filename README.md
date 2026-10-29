@@ -23,11 +23,12 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 - **School setup for the pilot** (admin's **School** page): upload one spreadsheet (CSV) of students and parents with consent from the paper forms, check it before anything is created, and print a login sheet with temporary passwords. Siblings share one parent login, phone numbers are never saved, and marks or ability groups are never uploaded. The admin can add teachers, give anyone a new password, and record changed paper consent.
 - **Safer sign-in:** everyone must choose their own password the first time they sign in, wrong passwords are limited to 10 in 15 minutes, people are signed out after 14 days without use, and changing a password signs out other devices.
 - **Ready to host** ([guide](docs/deploy.md)): Docker Compose with PostgreSQL, automatic HTTPS (Caddy) and a nightly database backup, on one small server in India.
+- **Malayalam:** students and parents can switch the whole app to Malayalam (button at the top, or Settings), and the choice is saved to their account. Feedback, star pictures, stories, reasons, errors and spoken read-aloud all follow it, and Ask SYNiq replies in Malayalam. Lessons and questions stay in the language the teacher wrote them in. The teacher and school admin screens are English for now. All Malayalam wording is in `backend/app/i18n.py` and `frontend/lib/i18n.ts` and should be checked by a Malayalam teacher before the pilot.
 - **Teacher content pipeline:** teachers set up SCERT chapters and topics, write short notes on what the textbook covers, and can ask Claude to draft explanations in all four styles plus practice questions with hints, solutions and common mistakes. Drafts are marked "AI draft", carry Claude's notes on what to check, can be edited, and only reach students after a teacher approves them. Unmarkable questions (e.g. an answer that isn't one of the options) are dropped automatically.
 
 ## Not built yet
 
-- Malayalam and Hindi interfaces.
+- Hindi interface, and Malayalam for the teacher and school admin screens.
 - Real SCERT chapter content for every subject.
 - Interest exploration activities.
 - Picture explanations: the "picture" style is still described in text.

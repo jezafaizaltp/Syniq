@@ -25,6 +25,7 @@ from ..auth import (
     require_role,
     verify_password,
 )
+from .. import i18n
 from ..db import get_db
 from ..engine import detect
 from ..engine.mastery import progress_label
@@ -52,15 +53,15 @@ class LoginIn(BaseModel):
 
 
 @router.post("/auth/login", tags=["auth"])
-def login(body: LoginIn, request: Request, db: DbSession = Depends(get_db)):
+def login(body: LoginIn, request: Request, db: DbSession = Depends(get_db), lang: str = Depends(i18n.language)):
     login_id = body.email.lower().strip()
     key = f"{login_id}|{request.client.host if request.client else ''}"
     if login_blocked(key):
-        raise HTTPException(429, "Too many tries. Please wait 15 minutes, or ask your school to reset your password.")
+        raise HTTPException(429, i18n.t(lang, "err.too_many_tries"))
     user = db.scalars(select(User).where(User.email == login_id)).first()
     if not user or not verify_password(body.password, user.password_hash):
         record_login_failure(key)
-        raise HTTPException(401, "Wrong username or password")
+        raise HTTPException(401, i18n.t(lang, "err.wrong_login"))
     clear_login_failures(key)
     return {"token": new_token(db, user), "role": user.role, "name": user.name}
 
@@ -80,11 +81,13 @@ class PasswordIn(BaseModel):
 
 
 @router.post("/me/password", tags=["auth"])
-def change_password(body: PasswordIn, db: DbSession = Depends(get_db), user: User = Depends(current_user)):
+def change_password(
+    body: PasswordIn, db: DbSession = Depends(get_db), user: User = Depends(current_user), lang: str = Depends(i18n.language)
+):
     if not verify_password(body.current, user.password_hash):
-        raise HTTPException(400, "Your current password is not right")
+        raise HTTPException(400, i18n.t(lang, "err.current_password"))
     if body.new == body.current:
-        raise HTTPException(400, "Choose a password different from the old one")
+        raise HTTPException(400, i18n.t(lang, "err.same_password"))
     user.password_hash = hash_password(body.new)
     user.must_change_password = False
     # Sign out everywhere else.
@@ -227,7 +230,7 @@ def review_explanation(exp_id: int, body: ReviewIn, db: DbSession = Depends(get_
 # --- Guardian ----------------------------------------------------------------------
 
 @router.get("/guardian/children", tags=["guardian"])
-def children(db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+def children(db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian")), lang: str = Depends(i18n.language)):
     links = db.scalars(select(GuardianLink).where(GuardianLink.guardian_id == user.id)).all()
     out = []
     for link in links:
@@ -242,7 +245,7 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
                 },
                 "support_modes": (child.settings or {}).get("support_modes", []),
                 "noticed": [
-                    {"mode": mode, "reason": v["reason"], "on": mode not in (child.settings or {}).get("auto_off", [])}
+                    {"mode": mode, "reason": i18n.translate_english(lang, v["reason"]), "on": mode not in (child.settings or {}).get("auto_off", [])}
                     for mode, v in (child.settings or {}).get("auto_support", {}).items()
                 ],
             }
@@ -251,7 +254,9 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
 
 
 @router.get("/guardian/children/{student_id}/progress", tags=["guardian"])
-def child_progress(student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+def child_progress(
+    student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian")), lang: str = Depends(i18n.language)
+):
     if not guardian_of(db, user, student_id):
         raise HTTPException(404, "Not found")
     rows = db.scalars(select(Mastery).where(Mastery.student_id == student_id, Mastery.attempts > 0)).all()
@@ -259,7 +264,7 @@ def child_progress(student_id: int, db: DbSession = Depends(get_db), user: User 
     audit(db, user, "view_child_progress", student_id)
     return {
         "questions_practised": practised,
-        "note": "Progress labels are estimates from practice so far, not test results.",
+        "note": i18n.t(lang, "parent.progress_note"),
         "concepts": [
             {"title": db.get(Concept, r.concept_id).title, "progress": progress_label(r.p_known, r.attempts)}
             for r in rows

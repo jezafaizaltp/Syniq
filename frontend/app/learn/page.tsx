@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post } from "@/lib/api";
+import { ApiError, api, post } from "@/lib/api";
+import type { Key } from "@/lib/i18n";
 import { speak, useSession } from "@/lib/session";
 
 /** Count a help button press: one of the signs SYNiq uses to notice what helps. */
@@ -35,14 +36,14 @@ type Result = {
   response: AdaptiveResponse;
 };
 
-const KIND_HEADINGS: Record<string, string> = {
-  practice: "Practice",
-  review: "Quick review",
-  prereq_review: "A quick refresher first",
+const KIND_HEADINGS: Record<string, Key> = {
+  practice: "learn.practice",
+  review: "learn.review",
+  prereq_review: "learn.prereq_review",
 };
 
 export default function Learn() {
-  const { me, loading } = useSession();
+  const { me, loading, t } = useSession();
   const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [subject, setSubject] = useState<Subject | null>(null);
@@ -64,8 +65,8 @@ export default function Learn() {
     return (
       <div className="wrap">
         <div className="card">
-          <h1>Almost ready</h1>
-          <p>Your parent or guardian needs to give permission before you can start. Ask them to open SYNiq and check the box for you.</p>
+          <h1>{t("learn.almost_ready")}</h1>
+          <p>{t("learn.need_consent")}</p>
         </div>
       </div>
     );
@@ -81,10 +82,10 @@ export default function Learn() {
 
   return (
     <div className="wrap">
-      <h1>Hi {me.name}</h1>
+      <h1>{t("learn.hi", { name: me.name })}</h1>
       {!subject ? (
         <>
-          <p className="muted">What would you like to learn today?</p>
+          <p className="muted">{t("learn.what_today")}</p>
           <ul className="list card">
             {subjects.map((s) => (
               <li key={s.id}>
@@ -97,10 +98,10 @@ export default function Learn() {
                       setChapters(await api<Chapter[]>(`/subjects/${s.id}/chapters`));
                     }}
                   >
-                    Open
+                    {t("learn.open")}
                   </button>
                 ) : (
-                  <span className="muted">Coming soon</span>
+                  <span className="muted">{t("learn.coming_soon")}</span>
                 )}
               </li>
             ))}
@@ -109,7 +110,7 @@ export default function Learn() {
       ) : (
         <>
           <button className="secondary" onClick={() => setSubject(null)}>
-            ← All subjects
+            {t("learn.all_subjects")}
           </button>
           <h2 style={{ marginTop: 16 }}>{subject.name}</h2>
           <ul className="list card">
@@ -118,7 +119,7 @@ export default function Learn() {
                 <span>
                   {c.number}. {c.title}
                 </span>
-                <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>Start</button>
+                <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>{t("learn.start")}</button>
               </li>
             ))}
           </ul>
@@ -129,20 +130,16 @@ export default function Learn() {
 }
 
 function CheckIn({ onDone }: { onDone: () => void }) {
+  const { t } = useSession();
   const [message, setMessage] = useState("");
-  const moods = [
-    ["great", "😀 Great"],
-    ["okay", "🙂 Okay"],
-    ["low", "😕 Not great"],
-    ["frustrated", "😣 Frustrated"],
-  ];
+  const moods = ["great", "okay", "low", "frustrated"] as const;
 
   if (message) {
     return (
       <div className="wrap">
         <div className="card">
           <p>{message}</p>
-          <button onClick={onDone}>Let&apos;s start</button>
+          <button onClick={onDone}>{t("checkin.start")}</button>
         </div>
       </div>
     );
@@ -151,10 +148,10 @@ function CheckIn({ onDone }: { onDone: () => void }) {
   return (
     <div className="wrap">
       <div className="card">
-        <h2>How are you feeling right now?</h2>
-        <p className="muted">This is optional. You can skip it.</p>
+        <h2>{t("checkin.question")}</h2>
+        <p className="muted">{t("checkin.optional")}</p>
         <div className="options">
-          {moods.map(([value, label]) => (
+          {moods.map((value) => (
             <button
               key={value}
               className="option"
@@ -163,13 +160,13 @@ function CheckIn({ onDone }: { onDone: () => void }) {
                 setMessage(r.message);
               }}
             >
-              {label}
+              {t(`checkin.${value}`)}
             </button>
           ))}
         </div>
         <div className="row" style={{ marginTop: 16 }}>
           <button className="secondary" onClick={onDone}>
-            Skip
+            {t("checkin.skip")}
           </button>
         </div>
       </div>
@@ -178,7 +175,7 @@ function CheckIn({ onDone }: { onDone: () => void }) {
 }
 
 function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => void }) {
-  const { me } = useSession();
+  const { me, t } = useSession();
   const [step, setStep] = useState<Step | null>(null);
   const [answer, setAnswer] = useState("");
   const [hints, setHints] = useState<string[]>([]);
@@ -214,7 +211,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
       if (readAloud) speak(s.explanation?.body ?? s.item?.prompt ?? s.reason);
       requestAnimationFrame(() => headingRef.current?.focus());
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Could not load the next step");
+      setError(e instanceof ApiError ? e.message : t("learn.load_failed"));
     }
   }
 
@@ -255,9 +252,9 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
     return (
       <div className="wrap">
         <div className="card">
-          <h2>Take a short break</h2>
-          <p>Stretch, drink some water, look out of the window. Come back whenever you are ready.</p>
-          <button onClick={() => setOnBreak(false)}>I&apos;m back</button>
+          <h2>{t("break.title")}</h2>
+          <p>{t("break.body")}</p>
+          <button onClick={() => setOnBreak(false)}>{t("break.back")}</button>
         </div>
       </div>
     );
@@ -276,7 +273,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
             helpPressed("break");
           }}
         >
-          Take a break
+          {t("break.button")}
         </button>
       </div>
 
@@ -293,25 +290,23 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
           {step.kind === "chapter_complete" && (
             <>
               <h2 ref={headingRef} tabIndex={-1}>
-                Chapter complete
+                {t("learn.chapter_complete")}
               </h2>
-              <p>Every topic here looks secure. SYNiq will bring a few back for quick reviews later so they stay fresh.</p>
-              <button onClick={onExit}>Choose another chapter</button>
+              <p>{t("learn.chapter_complete_body")}</p>
+              <button onClick={onExit}>{t("learn.another_chapter")}</button>
             </>
           )}
 
           {step.kind === "explain" && (
             <>
               <h2 ref={headingRef} tabIndex={-1}>
-                {step.offer_support ? "Let's try this a different way" : "Let's learn"}
+                {step.offer_support ? t("learn.different_way") : t("learn.lets_learn")}
               </h2>
               {step.offer_support && (
-                <p className="feedback warn">
-                  Would a different explanation help? You can also take a break, or carry on practising if you prefer.
-                </p>
+                <p className="feedback warn">{t("learn.offer_support")}</p>
               )}
-              <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? "No explanation is available yet."}</p>
-              <div className="row" role="group" aria-label="Other ways to explain">
+              <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? t("learn.no_explanation")}</p>
+              <div className="row" role="group" aria-label={t("learn.other_ways")}>
                 {(step.styles ?? []).map((s) => (
                   <button
                     key={s}
@@ -319,7 +314,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                     aria-pressed={step.explanation?.style === s}
                     onClick={() => switchStyle(s)}
                   >
-                    {STYLE_WORDS[s] ?? s}
+                    {t(`style.${s}` as Key)}
                   </button>
                 ))}
                 {step.explanation && (
@@ -330,12 +325,12 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                       helpPressed("read_aloud");
                     }}
                   >
-                    🔊 Read aloud
+                    {t("learn.read_aloud")}
                   </button>
                 )}
               </div>
               <div className="row" style={{ marginTop: 16 }}>
-                <button onClick={next}>I&apos;m ready to practise</button>
+                <button onClick={next}>{t("learn.ready")}</button>
               </div>
             </>
           )}
@@ -343,7 +338,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
           {step.item && (
             <>
               <h2 ref={headingRef} tabIndex={-1}>
-                {KIND_HEADINGS[step.kind]}
+                {KIND_HEADINGS[step.kind] ? t(KIND_HEADINGS[step.kind]) : null}
               </h2>
               <p style={{ fontSize: "1.2rem" }}>{step.item.prompt}</p>
               <button
@@ -352,13 +347,13 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                   speak(step.item!.prompt);
                   helpPressed("read_aloud");
                 }}
-                aria-label="Read the question aloud"
+                aria-label={t("learn.read_question")}
               >
                 🔊
               </button>
               <form onSubmit={submit} style={{ marginTop: 12 }}>
                 {step.item.kind === "mcq" || step.item.choices?.length ? (
-                  <div className="options" role="group" aria-label="Answer choices">
+                  <div className="options" role="group" aria-label={t("learn.choices")}>
                     {(step.item.choices?.length ? step.item.choices : step.item.options).map((o) => (
                       <button
                         type="button"
@@ -374,25 +369,25 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                   </div>
                 ) : (
                   <>
-                    <label htmlFor="answer">Your answer</label>
+                    <label htmlFor="answer">{t("learn.your_answer")}</label>
                     <input id="answer" inputMode="decimal" value={answer} disabled={!!result} onChange={(e) => setAnswer(e.target.value)} />
                   </>
                 )}
 
                 {hints.map((h, i) => (
                   <p key={i} className="feedback warn">
-                    Hint {i + 1}: {h}
+                    {t("learn.hint", { n: i + 1, text: h })}
                   </p>
                 ))}
 
                 {!result && (
                   <div className="row" style={{ marginTop: 16 }}>
                     <button type="submit" disabled={!answer.trim()}>
-                      Check
+                      {t("learn.check")}
                     </button>
                     {hints.length < step.item.hint_count && (
                       <button type="button" className="secondary" onClick={showHint}>
-                        Give me a hint
+                        {t("learn.give_hint")}
                       </button>
                     )}
                   </div>
@@ -402,20 +397,20 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
               {result && (
                 <>
                   <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
-                  <p className="muted">This topic: {PROGRESS_WORDS[result.progress] ?? result.progress}</p>
-                  <button onClick={next}>Next</button>
+                  <p className="muted">{t("learn.this_topic", { progress: t(`progress.${result.progress}` as Key) })}</p>
+                  <button onClick={next}>{t("learn.next")}</button>
                 </>
               )}
             </>
           )}
 
           {step.kind !== "chapter_complete" && step.concept && !step.item && step.kind !== "explain" && (
-            <p className="muted">No approved questions for this topic yet. Your teacher is reviewing them.</p>
+            <p className="muted">{t("learn.no_questions")}</p>
           )}
 
           <p className="why">
             <button className="secondary" onClick={() => setShowWhy(!showWhy)} aria-expanded={showWhy}>
-              Why am I seeing this?
+              {t("learn.why")}
             </button>
           </p>
           {showWhy && <p className="muted">{step.reason}</p>}

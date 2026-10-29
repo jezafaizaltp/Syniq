@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { speak } from "@/lib/session";
+import { speak, useSession } from "@/lib/session";
 
 type Block =
   | { type: "text"; text: string }
@@ -24,6 +24,7 @@ export type AdaptiveResponse = {
 
 /** The response to an answer, shown in the way that suits this student. */
 export default function Feedback({ r, readAloud, tutorOn }: { r: AdaptiveResponse; readAloud: boolean; tutorOn: boolean }) {
+  const { t } = useSession();
   // In focus mode, one piece at a time.
   const [shown, setShown] = useState(r.one_at_a_time ? 1 : r.blocks.length);
 
@@ -41,12 +42,12 @@ export default function Feedback({ r, readAloud, tutorOn }: { r: AdaptiveRespons
       {shown < r.blocks.length && (
         <div className="row" style={{ marginTop: 8 }}>
           <button className="secondary" onClick={() => setShown(shown + 1)}>
-            Show me more ({r.blocks.length - shown} left)
+            {t("fb.show_more", { n: r.blocks.length - shown })}
           </button>
         </div>
       )}
-      {r.suggest_tutor && tutorOn && <p>This one is tricky. You can ask SYNiq about it below.</p>}
-      {r.why && <p className="muted">Why this way: {r.why}</p>}
+      {r.suggest_tutor && tutorOn && <p>{t("fb.tricky")}</p>}
+      {r.why && <p className="muted">{t("fb.why", { why: r.why })}</p>}
       {r.adapted?.map((a) => (
         <p key={a.mode} className="adapted">
           ✨ {a.message}
@@ -88,6 +89,7 @@ function FeedbackBlock({ b }: { b: Block }) {
 
 /** A practice question to try right away. It is not marked or saved. */
 function Challenge({ prompt, answer }: { prompt: string; answer: string }) {
+  const { t } = useSession();
   const [value, setValue] = useState("");
   const [result, setResult] = useState<boolean | null>(null);
   return (
@@ -102,11 +104,11 @@ function Challenge({ prompt, answer }: { prompt: string; answer: string }) {
       <div className="row">
         <input id="challenge" inputMode="numeric" value={value} onChange={(e) => setValue(e.target.value)} style={{ width: 120 }} />
         <button type="submit" disabled={!value.trim()}>
-          Check
+          {t("learn.check")}
         </button>
       </div>
-      {result === true && <p>⭐ Yes! Now try the big one again.</p>}
-      {result === false && <p>Not yet. Try counting the objects one by one.</p>}
+      {result === true && <p>{t("fb.yes")}</p>}
+      {result === false && <p>{t("fb.not_yet")}</p>}
     </form>
   );
 }

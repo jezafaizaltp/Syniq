@@ -13,7 +13,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import ai
+from .. import ai, i18n
 from ..auth import current_user, require_learning_consent
 from ..db import get_db
 from ..models import Chapter, Concept, Explanation, Subject, User
@@ -40,16 +40,18 @@ class TutorIn(BaseModel):
 
 
 @router.post("/tutor")
-def ask(body: TutorIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+def ask(
+    body: TutorIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
+):
     latest = body.history[-1]
     if latest.role != "student" or len(latest.text) > 600:
-        raise HTTPException(400, "Please ask a question of up to 600 characters")
+        raise HTTPException(400, i18n.t(lang, "err.tutor_too_long"))
     concept = db.get(Concept, body.concept_id)
     if not concept:
         raise HTTPException(404, "Topic not found")
     key = (user.id, date.today())
     if _usage[key] >= DAILY_LIMIT:
-        raise HTTPException(429, "That's a lot of questions for one day. Try the explanations, or ask your teacher.")
+        raise HTTPException(429, i18n.t(lang, "err.tutor_daily_limit"))
     chapter = db.get(Chapter, concept.chapter_id)
     subject = db.get(Subject, chapter.subject_id)
     explanations = db.scalars(
@@ -63,10 +65,11 @@ def ask(body: TutorIn, db: DbSession = Depends(get_db), user: User = Depends(req
             notes=concept.notes,
             explanations=[e.body for e in explanations],
             history=[t.model_dump() for t in body.history],
+            lang=lang,
         )
     except ai.AIUnavailable:
-        raise HTTPException(503, "The tutor isn't available right now. The explanations and hints still work.")
+        raise HTTPException(503, i18n.t(lang, "err.tutor_unavailable"))
     except ai.AIDeclined:
-        reply = "I can't help with that one. Let's get back to the topic. What part would you like me to explain?"
+        reply = i18n.t(lang, "tutor.declined")
     _usage[key] += 1
     return {"reply": reply}

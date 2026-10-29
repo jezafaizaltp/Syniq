@@ -8,7 +8,7 @@ import { useSession } from "@/lib/session";
 const HOME: Record<Role, string> = { student: "/learn", teacher: "/teacher", admin: "/admin", guardian: "/parent" };
 
 export default function SignIn() {
-  const { me, loading, refresh } = useSession();
+  const { me, loading, refresh, t } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,7 @@ export default function SignIn() {
       setToken(res.token);
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not sign in");
+      setError(err instanceof Error ? err.message : t("signin.failed"));
     }
   }
 
@@ -34,10 +34,10 @@ export default function SignIn() {
 
   return (
     <div className="wrap">
-      <h1>Welcome to SYNiq</h1>
-      <p className="muted">An adaptive teacher that learns how you learn.</p>
+      <h1>{t("signin.title")}</h1>
+      <p className="muted">{t("signin.tagline")}</p>
       <form className="card" onSubmit={submit}>
-        <label htmlFor="email">Username or email</label>
+        <label htmlFor="email">{t("signin.username")}</label>
         <input
           id="email"
           autoComplete="username"
@@ -47,7 +47,7 @@ export default function SignIn() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">{t("signin.password")}</label>
         <input
           id="password"
           type="password"
@@ -62,7 +62,7 @@ export default function SignIn() {
           </p>
         )}
         <div className="row" style={{ marginTop: 16 }}>
-          <button type="submit">Sign in</button>
+          <button type="submit">{t("signin.button")}</button>
         </div>
       </form>
       {process.env.NEXT_PUBLIC_SHOW_DEMO !== "0" && (
@@ -71,7 +71,7 @@ export default function SignIn() {
           syniq-demo
         </p>
       )}
-      <p className="muted">Forgotten your password? Ask your school to give you a new one.</p>
+      <p className="muted">{t("signin.forgot")}</p>
     </div>
   );
 }

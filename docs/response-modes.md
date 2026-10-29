@@ -47,6 +47,10 @@ For whole-number +, −, × and ÷ questions it spots: took away instead of addi
 
 Numbers up to 20 are drawn as stars. Bigger numbers (up to 100) use 🟦 for each ten and ⭐ for each one.
 
+## In Malayalam
+
+Every message above has a Malayalam version (`backend/app/i18n.py`), used when the student reads SYNiq in Malayalam. The stories keep the same everyday objects: മാങ്ങ, പഴം, അപ്പം, മിഠായി. Logged decisions always keep the English wording.
+
 ## Every response is logged
 
 Each response is recorded as an adaptation decision (rule `F_<mode>`, version `2026.10-1`) with the reason, just like the rest of the engine, so teachers and audits can see why SYNiq chose it.
@@ -54,5 +58,4 @@ Each response is recorded as an adaptation decision (rule `F_<mode>`, version `2
 ## Ideas for later
 
 - More stories and pictures for fractions, decimals and algebra tiles.
-- Malayalam versions of every message.
 - Sign-language video clips for deaf students, made with a teacher.
