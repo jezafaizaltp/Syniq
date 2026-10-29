@@ -1,14 +1,16 @@
 """Glue between the database and the pure adaptive engine."""
 
 import random
+from datetime import timedelta
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
+from .engine import detect
 from .engine import mastery as m
 from .engine import responses
 from .engine.rules import Action, ConceptState, decide
-from .models import Attempt, Concept, ConceptPrereq, Decision, Explanation, Item, Mastery, User, utcnow
+from .models import Attempt, Concept, ConceptPrereq, Decision, Explanation, Item, LearningEvent, Mastery, User, utcnow
 
 
 def get_mastery(db: DbSession, student_id: int, concept_id: int) -> Mastery:
@@ -95,7 +97,7 @@ def next_action(db: DbSession, student: User, chapter_id: int, current_concept_i
     chapter, states = build_states(db, student, chapter_id)
     settings = student.settings or {}
     preferred = settings.get("preferred_style")
-    if not preferred and "visual_first" in settings.get("support_modes", []):
+    if not preferred and "visual_first" in detect.effective_support(settings):
         preferred = "visual"
     action = decide(chapter, states, utcnow(), current_concept_id, preferred)
     evidence = dict(action.evidence)
@@ -212,8 +214,80 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
         "difficulty": item.difficulty,
         "hint_count": len(item.hints),
     }
-    if item.kind == "numeric" and "tap_to_answer" in (settings or {}).get("support_modes", []):
+    if item.kind == "numeric" and "tap_to_answer" in detect.effective_support(settings):
         # Answers to tap instead of type. The right one is among them, so it is not a hint.
         sum_ = responses.parse_arithmetic(item.prompt, item.answer)
         out["choices"] = responses.tap_choices(sum_, item.answer, item.id, list(item.misconceptions))
     return out
+
+
+# --- Noticing what helps ---------------------------------------------------------------
+
+SESSION_GAP = timedelta(minutes=30)
+RECENT = timedelta(days=14)
+
+
+def attempt_records(db: DbSession, student_id: int, limit: int = 60) -> list[detect.AttemptRecord]:
+    """The student's recent answers, oldest first, in the shape the detector reads."""
+    attempts = db.scalars(
+        select(Attempt).where(Attempt.student_id == student_id).order_by(Attempt.created_at.desc(), Attempt.id.desc()).limit(limit)
+    ).all()[::-1]
+    items = {i.id: i for i in db.scalars(select(Item).where(Item.id.in_({a.item_id for a in attempts}))).all()}
+    records, session, last_time = [], 0, None
+    last_mode_by_concept: dict[int, str | None] = {}
+    for a in attempts:
+        if last_time and a.created_at - last_time > SESSION_GAP:
+            session += 1
+        last_time = a.created_at
+        item = items[a.item_id]
+        mistake = None
+        sum_ = responses.parse_arithmetic(item.prompt, item.answer)
+        if not a.correct and sum_ is not None and a.response.strip().isdigit():
+            mistake = responses.diagnose(sum_, int(a.response))[0]
+        records.append(
+            detect.AttemptRecord(
+                correct=a.correct,
+                prompt_words=len(item.prompt.split()),
+                session=session,
+                mistake=mistake,
+                after_mode=last_mode_by_concept.get(a.concept_id),
+            )
+        )
+        last_mode_by_concept[a.concept_id] = a.feedback_mode
+    return records
+
+
+def signals(db: DbSession, student_id: int) -> detect.Signals:
+    since = utcnow() - RECENT
+    kinds = db.scalars(
+        select(LearningEvent.kind).where(LearningEvent.student_id == student_id, LearningEvent.created_at >= since)
+    ).all()
+    return detect.Signals(read_aloud_presses=kinds.count("read_aloud"), break_presses=kinds.count("break"))
+
+
+def update_noticed_support(db: DbSession, student: User) -> list[detect.Finding]:
+    """Switch on any support the student's answers now clearly point to, and log why."""
+    settings = dict(student.settings or {})
+    noticed = dict(settings.get("auto_support", {}))
+    findings = detect.notice(
+        attempt_records(db, student.id), signals(db, student.id), set(noticed), set(settings.get("auto_off", []))
+    )
+    for f in findings:
+        noticed[f.mode] = {"reason": f.reason, "since": utcnow().isoformat(timespec="seconds")}
+        db.add(
+            Decision(
+                student_id=student.id,
+                concept_id=None,
+                rule_id=f"A_{f.mode}",
+                rule_version=detect.DETECT_VERSION,
+                action="support_on",
+                reason=f.reason,
+                evidence=f.evidence,
+            )
+        )
+    if findings:
+        settings["auto_support"] = noticed
+        student.settings = settings
+        db.add(student)
+        db.commit()
+    return findings

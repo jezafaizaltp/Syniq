@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session as DbSession
 
 from ..auth import audit, current_user, guardian_of, has_consent, new_token, require_role, verify_password
 from ..db import get_db
+from ..engine import detect
 from ..engine.mastery import progress_label
 from ..models import (
     Attempt,
@@ -190,6 +191,11 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
                     scope: has_consent(db, child.id, scope)
                     for scope in ("core_learning", "mood_checkins", "school_sharing")
                 },
+                "support_modes": (child.settings or {}).get("support_modes", []),
+                "noticed": [
+                    {"mode": mode, "reason": v["reason"], "on": mode not in (child.settings or {}).get("auto_off", [])}
+                    for mode, v in (child.settings or {}).get("auto_support", {}).items()
+                ],
             }
         )
     return out
@@ -210,6 +216,24 @@ def child_progress(student_id: int, db: DbSession = Depends(get_db), user: User 
             for r in rows
         ],
     }
+
+
+class SupportIn(BaseModel):
+    modes: list[str] = Field(max_length=3)
+
+
+@router.put("/guardian/children/{student_id}/support", tags=["guardian"])
+def set_support(student_id: int, body: SupportIn, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    """Support for sight, hearing or speech, which SYNiq can't tell from answers."""
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    if not set(body.modes) <= set(detect.CHOSEN):
+        raise HTTPException(400, "Unknown support mode")
+    child = db.get(User, student_id)
+    child.settings = {**(child.settings or {}), "support_modes": body.modes}
+    db.commit()
+    audit(db, user, "set_child_support", student_id)
+    return {"support_modes": body.modes}
 
 
 class ConsentIn(BaseModel):

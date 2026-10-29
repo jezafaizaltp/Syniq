@@ -11,7 +11,43 @@ export type Settings = {
   extra_time?: boolean;
   preferred_style?: string | null;
   support_modes?: string[];
+  auto_support?: Record<string, { reason: string; since: string }>;
+  auto_off?: string[];
 };
+
+/** Support for sight, hearing or speech: chosen by a parent or the student. */
+export const CHOSEN_SUPPORT: { key: string; me: string; child: string; help: string }[] = [
+  {
+    key: "screen_reader",
+    me: "I use a screen reader or find pictures hard to see",
+    child: "Uses a screen reader or finds pictures hard to see",
+    help: "Everything is said in words, not only shown in pictures.",
+  },
+  {
+    key: "visual_first",
+    me: "I'm deaf or hard of hearing",
+    child: "Is deaf or hard of hearing",
+    help: "Nothing depends on sound. Pictures and text come first.",
+  },
+  {
+    key: "tap_to_answer",
+    me: "Let me tap answers instead of typing or speaking",
+    child: "Taps answers instead of typing or speaking",
+    help: "Number questions show answers to choose from.",
+  },
+];
+
+/** Support SYNiq turns on itself when a student's answers show it helps. */
+export const NOTICED_SUPPORT: Record<string, string> = {
+  focus: "Shorter steps, one at a time, with quick challenges",
+  easy_read: "Shorter lines, a clearer font, and reading aloud",
+  small_steps: "Pictures and smaller numbers first",
+};
+
+export function effectiveSupport(s: Settings | undefined): string[] {
+  const off = s?.auto_off ?? [];
+  return [...(s?.support_modes ?? []), ...Object.keys(s?.auto_support ?? {}).filter((m) => !off.includes(m))];
+}
 
 export type Me = {
   id: number;

@@ -7,9 +7,9 @@ from .. import ai, learning
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
 from ..engine.mastery import progress_label
-from ..engine import responses
+from ..engine import detect, responses
 from ..engine.rules import STYLES
-from ..models import Chapter, CheckIn, Concept, Decision, Explanation, Item, Mastery, Subject, User
+from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Item, LearningEvent, Mastery, Subject, User
 
 router = APIRouter(tags=["student"])
 
@@ -22,7 +22,8 @@ ALLOWED_SETTINGS = {
     "extra_time": bool,
     "preferred_style": (str, type(None)),
     "ui_language": str,
-    "support_modes": list,
+    "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer
+    "auto_off": list,  # noticed modes the student has switched off
 }
 
 
@@ -154,6 +155,7 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
     correct, misconception, row = learning.record_attempt(
         db, user, item, body.response, body.hints_used, body.time_ms, body.explanation_style
     )
+    findings = learning.update_noticed_support(db, user)
     tip = None if correct else MISCONCEPTION_TIPS.get(misconception or "")
     explanations = db.scalars(
         select(Explanation).where(Explanation.concept_id == item.concept_id, Explanation.status == "approved")
@@ -168,12 +170,20 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
             misconception_tip=tip,
             wrong_in_a_row=row.wrong_streak,
             explanations={e.style: e.body for e in explanations},
-            support=(user.settings or {}).get("support_modes", []),
+            support=detect.effective_support(user.settings),
             tutor_available=ai.enabled(),
         ),
         seed=row.attempts,
     )
+    response["adapted"] = [
+        {"mode": f.mode, "message": detect.ANNOUNCE[f.mode].format(reason=f.reason) + " You can switch this off in Settings."}
+        for f in findings
+    ]
     if response["mode"]:
+        attempt = db.scalars(
+            select(Attempt).where(Attempt.student_id == user.id).order_by(Attempt.id.desc())
+        ).first()
+        attempt.feedback_mode = response["mode"]
         # Logged like every other adaptation, so "Why am I seeing this?" and audits can explain it.
         db.add(
             Decision(
@@ -197,6 +207,18 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
         out["tip"] = tip
         out["solution"] = item.solution
     return out
+
+
+class EventIn(BaseModel):
+    kind: str = Field(pattern="^(read_aloud|break)$")
+
+
+@router.post("/learn/events")
+def learning_event(body: EventIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    """A help button was pressed. Counts only; used to notice what helps."""
+    db.add(LearningEvent(student_id=user.id, kind=body.kind))
+    db.commit()
+    return {"ok": True}
 
 
 # --- Check-ins, settings, progress -------------------------------------------------
@@ -240,7 +262,9 @@ def update_settings(body: dict, user: User = Depends(current_user), db: DbSessio
             raise HTTPException(400, f"Invalid setting: {key}")
         if key == "preferred_style" and value is not None and value not in STYLES:
             raise HTTPException(400, "Unknown style")
-        if key == "support_modes" and not (all(isinstance(v, str) for v in value) and set(value) <= set(responses.SUPPORT_MODES)):
+        if key == "support_modes" and not (all(isinstance(v, str) for v in value) and set(value) <= set(detect.CHOSEN)):
+            raise HTTPException(400, "Unknown support mode")
+        if key == "auto_off" and not (all(isinstance(v, str) for v in value) and set(value) <= set(detect.NOTICED)):
             raise HTTPException(400, "Unknown support mode")
         if key == "font_scale" and not 0.8 <= float(value) <= 2.0:
             raise HTTPException(400, "font_scale must be between 0.8 and 2.0")

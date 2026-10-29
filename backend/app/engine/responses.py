@@ -2,9 +2,11 @@
 
 There are ten response modes, in two groups.
 
-Support modes are switched on in settings by the student, a parent or a
-teacher. They change how every response is presented. They describe what
-helps, not a diagnosis: SYNiq never infers them and never labels a student.
+Support modes change how every response is presented. They describe what
+helps, not a diagnosis, and never label a student. focus, easy_read and
+small_steps are noticed from the student's answers (see detect.py); the
+others depend on sight, hearing or speech and are chosen by a parent or the
+student.
 
     focus          Short bursts, one step at a time, a quick challenge to finish.
     easy_read      One short sentence per line, read aloud, clearer font.

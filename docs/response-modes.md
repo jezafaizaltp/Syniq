@@ -4,18 +4,29 @@ SYNiq has ten ways of responding when a student answers a question. They run on 
 
 Code: `backend/app/engine/responses.py`. Tests: `backend/tests/test_responses.py`.
 
-## Support modes (switched on in Settings)
+## Support modes
 
-The student, a parent or a teacher turns these on under **Settings → How SYNiq helps me**. They describe what helps, not a diagnosis. SYNiq never guesses them and never labels a student. Several can be on at once.
+Support modes change how every response is presented. They describe what helps, never a condition: SYNiq never names or suggests ADHD, dyslexia or any other diagnosis.
 
-| Mode | Setting name shown | Often helps | What changes |
-| --- | --- | --- | --- |
-| `focus` | Help me stay focused | Students with ADHD or who lose focus easily | One piece at a time behind a "Show me more" button, short steps (at most 4), a quick challenge at the end |
-| `easy_read` | Make reading easier | Students with dyslexia | One sentence per line, clearer font, everything read aloud |
-| `screen_reader` | I use a screen reader or find pictures hard to see | Blind and low-vision students | Pictures are replaced by the same meaning in words ("10 stars plus 10 stars makes 20"), read aloud |
-| `visual_first` | I'm deaf or hard of hearing | Deaf and hard-of-hearing students | Nothing depends on sound; picture explanations are chosen first |
-| `tap_to_answer` | Let me tap my answers | Non-speaking students, or students who find typing hard | Number questions show four answers to tap, built from likely mistakes |
-| `small_steps` | Show maths with objects and smaller numbers | Students with dyscalculia or other learning differences | Counting pictures first, then a smaller question with the same idea, sooner |
+### Noticed from answers
+
+SYNiq switches these on by itself when a student's answers show a clear pattern (code: `backend/app/engine/detect.py`). It never decides from fewer than 10 answers, never from a single answer, and never from how fast the student answered. When one switches on, the student is told why, and can switch it off in Settings. Once switched off, SYNiq never turns it back on. Each switch is logged as a decision (`A_<mode>`) with its evidence, and parents can see it with the reason.
+
+| Mode | What changes | Switched on when |
+| --- | --- | --- |
+| `focus` | One piece at a time behind "Show me more", at most 4 steps, a quick challenge | Answers slip in the second half of a session, in 2 or more sessions of 6+ answers; or 3+ "take a break" presses in two weeks |
+| `easy_read` | One sentence per line, clearer font, read aloud | Long questions (15+ words) are answered right at least 30 points less often than short ones (4+ of each); or 3+ read-aloud presses in two weeks |
+| `small_steps` | Counting pictures first, then a smaller question sooner | 3+ counting or number-step slips in the last 20 answers; or answers after pictures are right much more often (40+ points) than after worded explanations |
+
+### Chosen by a parent (or the student)
+
+Sight, hearing and speech can't be read from answers, so a parent ticks them on the parent page. The student can also set them in Settings.
+
+| Mode | Shown as | What changes |
+| --- | --- | --- |
+| `screen_reader` | Uses a screen reader or finds pictures hard to see | Pictures are replaced by the same meaning in words ("10 stars plus 10 stars makes 20"), read aloud |
+| `visual_first` | Is deaf or hard of hearing | Nothing depends on sound; picture explanations are chosen first |
+| `tap_to_answer` | Taps answers instead of typing or speaking | Number questions show four answers to tap, built from likely mistakes |
 
 ## Answer-driven modes (picked automatically)
 

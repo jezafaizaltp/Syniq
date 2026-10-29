@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post } from "@/lib/api";
 import { speak, useSession } from "@/lib/session";
+
+/** Count a help button press: one of the signs SYNiq uses to notice what helps. */
+function helpPressed(kind: "read_aloud" | "break") {
+  post("/learn/events", { kind }).catch(() => undefined);
+}
 import Feedback, { AdaptiveResponse } from "./Feedback";
 import Tutor from "./Tutor";
 
@@ -264,7 +269,13 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
         <button className="secondary" onClick={onExit}>
           ← {chapter.title}
         </button>
-        <button className="secondary" onClick={() => setOnBreak(true)}>
+        <button
+          className="secondary"
+          onClick={() => {
+            setOnBreak(true);
+            helpPressed("break");
+          }}
+        >
           Take a break
         </button>
       </div>
@@ -312,7 +323,13 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                   </button>
                 ))}
                 {step.explanation && (
-                  <button className="secondary" onClick={() => speak(step.explanation!.body)}>
+                  <button
+                    className="secondary"
+                    onClick={() => {
+                      speak(step.explanation!.body);
+                      helpPressed("read_aloud");
+                    }}
+                  >
                     🔊 Read aloud
                   </button>
                 )}
@@ -329,7 +346,14 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                 {KIND_HEADINGS[step.kind]}
               </h2>
               <p style={{ fontSize: "1.2rem" }}>{step.item.prompt}</p>
-              <button className="secondary" onClick={() => speak(step.item!.prompt)} aria-label="Read the question aloud">
+              <button
+                className="secondary"
+                onClick={() => {
+                  speak(step.item!.prompt);
+                  helpPressed("read_aloud");
+                }}
+                aria-label="Read the question aloud"
+              >
                 🔊
               </button>
               <form onSubmit={submit} style={{ marginTop: 12 }}>
