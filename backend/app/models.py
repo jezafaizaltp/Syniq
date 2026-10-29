@@ -172,6 +172,19 @@ class Attempt(Base):
     hints_used: Mapped[int] = mapped_column(Integer, default=0)
     time_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
     explanation_style: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    # The response SYNiq gave to this answer (count_it_out, step_by_step, ...), if it was wrong.
+    feedback_mode: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class LearningEvent(Base):
+    """A help button the student pressed (read aloud, take a break). Never timings."""
+
+    __tablename__ = "learning_events"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

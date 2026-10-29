@@ -107,6 +107,6 @@ def test_wrong_answer_gets_a_logged_adaptive_response_and_tap_choices():
 
     r = client.post("/learn/attempts", json={"item_id": item["id"], "response": "999"}, headers=rahul).json()
     assert r["correct"] is False
-    assert r["response"]["mode"] in ("count_it_out", "step_by_step")
+    assert r["response"]["mode"] in ("count_it_out", "step_by_step", "real_life", "try_similar")
     assert r["response"]["blocks"]
     client.put("/me/settings", json={"support_modes": []}, headers=rahul)

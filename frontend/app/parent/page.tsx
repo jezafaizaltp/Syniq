@@ -2,10 +2,16 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PROGRESS_WORDS, api, post } from "@/lib/api";
+import { CHOSEN_SUPPORT, NOTICED_SUPPORT, PROGRESS_WORDS, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 
-type Child = { id: number; name: string; consent: Record<string, boolean> };
+type Child = {
+  id: number;
+  name: string;
+  consent: Record<string, boolean>;
+  support_modes: string[];
+  noticed: { mode: string; reason: string; on: boolean }[];
+};
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
 const CONSENT_WORDS: Record<string, [string, string]> = {
@@ -37,6 +43,12 @@ export default function Parent() {
     if (me?.role === "guardian") load();
   }, [me, load]);
 
+  async function setSupport(child: Child, mode: string, on: boolean) {
+    const modes = on ? [...child.support_modes.filter((m) => m !== mode), mode] : child.support_modes.filter((m) => m !== mode);
+    await put(`/guardian/children/${child.id}/support`, { modes });
+    load();
+  }
+
   async function setConsent(childId: number, scope: string, granted: boolean) {
     await post(`/guardian/children/${childId}/consent`, { scope, granted });
     load();
@@ -61,6 +73,36 @@ export default function Parent() {
               </p>
             </div>
           ))}
+          <h3>Seeing, hearing and speaking</h3>
+          <p className="muted">SYNiq can&apos;t tell these from answers, so please tick any that apply.</p>
+          {CHOSEN_SUPPORT.map(({ key, child, help }) => (
+            <div key={key} style={{ marginTop: 8 }}>
+              <label className="check">
+                <input type="checkbox" checked={c.support_modes.includes(key)} onChange={(e) => setSupport(c, key, e.target.checked)} />
+                {child}
+              </label>
+              <p className="muted" style={{ margin: "0 0 0 34px" }}>
+                {help}
+              </p>
+            </div>
+          ))}
+          {c.noticed.length > 0 && (
+            <>
+              <h3>What SYNiq has noticed helps {c.name}</h3>
+              <ul className="list">
+                {c.noticed.map((n) => (
+                  <li key={n.mode}>
+                    <span>
+                      {NOTICED_SUPPORT[n.mode] ?? n.mode}
+                      <br />
+                      <span className="muted">{n.reason}</span>
+                    </span>
+                    <span className="pill">{n.on ? "On" : `Turned off by ${c.name}`}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           {progress[c.id] && (
             <>
               <h3>Progress</h3>

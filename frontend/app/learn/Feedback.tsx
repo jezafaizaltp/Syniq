@@ -19,6 +19,7 @@ export type AdaptiveResponse = {
   one_at_a_time: boolean;
   speak: boolean;
   script: string;
+  adapted?: { mode: string; message: string }[];
 };
 
 /** The response to an answer, shown in the way that suits this student. */
@@ -46,6 +47,11 @@ export default function Feedback({ r, readAloud, tutorOn }: { r: AdaptiveRespons
       )}
       {r.suggest_tutor && tutorOn && <p>This one is tricky. You can ask SYNiq about it below.</p>}
       {r.why && <p className="muted">Why this way: {r.why}</p>}
+      {r.adapted?.map((a) => (
+        <p key={a.mode} className="adapted">
+          ✨ {a.message}
+        </p>
+      ))}
     </div>
   );
 }
