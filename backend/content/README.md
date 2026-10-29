@@ -41,7 +41,7 @@ Claude wrote these chapters and checked them, because no subject teacher is avai
 
 - **Every answer that can be worked out by computer is**, on every test run: 436 of the 690 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
 - The other 254 were checked by hand (most of them in Chemistry and Biology, where many questions are about facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
-- **The fit with the textbook is not checked.** The chapter names come from the draft syllabus list (`../../content/class9-syllabus-draft.csv`), and the topics from study-guide websites that list each chapter's exercises. A teacher with the 2024 SCERT book should compare topic order and wording when one is available.
+- **The fit with the textbook is only partly checked.** The Physics, Chemistry and Biology chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 
 ## Format
 
