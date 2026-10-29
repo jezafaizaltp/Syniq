@@ -49,14 +49,33 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Social Science 6: From the Land of Cholas to Delhi | the Chola empire, Chola village assemblies, the Delhi Sultanate | 19 |
 | Social Science 7: Extension of Democracy through Institutions | elections and the Election Commission, watchdog institutions, RTI and citizens' participation | 18 |
 | Social Science 8: Towards a Gender-Neutral Society | sex, gender and stereotypes, equality in the Constitution and law, moving towards gender neutrality | 19 |
+| English I: Hours and Years | Half a Day, Debts of Gratitude, Nothing Twice, grammar, words | 33 |
+| English II: Winds of Change | Dreams Realised, The Toilet, Success, grammar, words | 33 |
+| English III: Aspire and Explore | Sea-Fever, The Saga of the Tiffin Carriers, Waiting for Rain, grammar, words | 33 |
+| English IV: Strive and Thrive | The Unstoppable Soul Surfer, A Shield of Courage, Walk Alone, grammar, words | 33 |
+| English V: Media Matters | Toys to Teens, The Ink and the Melody, Let it Go, grammar, words | 33 |
+| Malayalam AT 1: ഉള്ളിലുയിർക്കും മഴവില്ല് | സുകൃതഹാരങ്ങൾ, അമ്മ, പാത്തുമ്മായുടെ ആട്, language | 25 |
+| Malayalam AT 2: ഭൂമിയാകുന്നു നാം | ആനഡോക്ടർ, പുളിമാവു വെട്ടി, പ്രകൃതിപാഠങ്ങൾ, language | 24 |
+| Malayalam AT 3: കർമ്മോത്സുകതയുടെ ലാവണ്യമുദ്രകൾ | തരിശുനിലങ്ങളിലേക്ക്, അച്യുതമ്മാമ, നിങ്ങളും നിങ്ങളുടെ ജോലിയും, language | 24 |
+| Malayalam AT 4: ഉജ്ജ്വലഹൃദയസ്പന്ദങ്ങൾ | സ്വാതന്ത്ര്യംതന്നെ ജീവിതം, അരുവിപ്പുറത്തുനിന്ന് ഒരു സന്ദേശം, കാണുന്നുണ്ടനേകമക്ഷരങ്ങൾ, language | 26 |
+| Malayalam AT 5: വിടില്ലഞാനീരശ്മികളെ | തത്തക്കൂട്, ചിരിയുടെ അരങ്ങേറ്റം, മധുരക്കിഴങ്ങിന്റെ രുചി, language | 27 |
+| Malayalam BT 1: നടക്കുന്തോറും തെളിയും വഴികൾ | ശാന്തിനികേതനം, സ്മാരകം, മണൽക്കൂനകൾക്കിടയിലൂടെ, language | 25 |
+| Malayalam BT 2: പദം പദം ഉറച്ചു നാം | വംശം, ദയ, തഥാഗത, language | 25 |
+| Malayalam BT 3: ആരോഗ്യത്തിന്റെ രസക്കൂട്ടുകൾ | അല്പമല്ല ഭുജിക്കുന്നു, കിട്ടുമ്മാവൻ, ഭക്ഷണവും ആരോഗ്യവും, language | 26 |
+| Hindi 1: जिएँ जी भर... | झटपट और नटखट, बहुत दिनों के बाद, बूढ़ी काकी, grammar | 26 |
+| Hindi 2: हरियाली की छाँव में | घर, फूल, grammar | 19 |
+| Hindi 3: हम एक हैं | जब गांधीजी की घड़ी चोरी चली गई, जन-जन का चेहरा एक, grammar | 18 |
+| Hindi 4: कामयाबी की राह पर | फुटबॉल के दिल का राजा, घर, पेड़ और तारे की याद, कब तक?, grammar | 25 |
+| Hindi 5: खुला आसमान | राजा और विद्रोही, बोनज़ाई, grammar | 18 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 498 of the 976 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 478 were checked by hand (most of them in Chemistry, Biology and Social Science, where many questions are about facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 503 of the 1,449 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 946 were checked by hand (most of them in the languages, Chemistry, Biology and Social Science, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology and Social Science I chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
+- **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
 ## Format
 
