@@ -8,8 +8,8 @@ from app.db import SessionLocal
 from app.models import Chapter, Concept, Subject
 
 SHEET = """subject,chapter_number,chapter_title,topic
-ss,1,Kerala History,Early Kerala
-ss,1,Kerala History,The spice trade
+ss,39,Kerala History,Early Kerala
+ss,39,Kerala History,The spice trade
 Information Technology,2,Spreadsheets,
 """
 
@@ -23,7 +23,7 @@ def chapters(code):
 
 def test_syllabus_checked_then_added_and_safe_to_repeat():
     a = login("admin@demo.syniq")
-    bad = SHEET + "geo,1,Mountains,\nss,x,,\nss,1,History of Kerala,Temple architecture\n"
+    bad = SHEET + "geo,1,Mountains,\nss,x,,\nss,39,History of Kerala,Temple architecture\n"
     r = client.post("/admin/syllabus", json={"csv": bad, "dry_run": False}, headers=a).json()
     assert r["ok"] is False and [e["row"] for e in r["errors"]] == [5, 6, 7]
     assert chapters("ss") == {}
@@ -33,17 +33,17 @@ def test_syllabus_checked_then_added_and_safe_to_repeat():
 
     r = client.post("/admin/syllabus", json={"csv": SHEET, "dry_run": False}, headers=a).json()
     assert (r["added_chapters"], r["added_topics"]) == (2, 3)
-    assert chapters("ss") == {1: ("Kerala History", ["Early Kerala", "The spice trade"])}
+    assert chapters("ss") == {39: ("Kerala History", ["Early Kerala", "The spice trade"])}
     assert chapters("it") == {2: ("Spreadsheets", ["Spreadsheets"])}
 
     # Uploading again with one more topic adds only that topic, at the end.
-    more = SHEET + "ss,1,Kerala History,Temple architecture\n"
+    more = SHEET + "ss,39,Kerala History,Temple architecture\n"
     r = client.post("/admin/syllabus", json={"csv": more, "dry_run": False}, headers=a).json()
     assert (r["added_chapters"], r["added_topics"]) == (0, 1)
-    assert chapters("ss")[1][1][-1] == "Temple architecture"
+    assert chapters("ss")[39][1][-1] == "Temple architecture"
 
     # A different title for an existing chapter is refused rather than renaming it.
-    r = client.post("/admin/syllabus", json={"csv": "subject,chapter_number,chapter_title\nss,1,Kerala\n"}, headers=a).json()
+    r = client.post("/admin/syllabus", json={"csv": "subject,chapter_number,chapter_title\nss,39,Kerala\n"}, headers=a).json()
     assert r["ok"] is False and "already exists" in r["errors"][0]["problems"][0]
 
 
@@ -71,4 +71,4 @@ def test_students_only_see_chapters_with_approved_content():
 def test_draft_sheet_in_the_repo_is_valid():
     sheet = (Path(__file__).parents[2] / "content" / "class9-syllabus-draft.csv").read_text()
     r = client.post("/admin/syllabus", json={"csv": sheet}, headers=login("admin@demo.syniq")).json()
-    assert r["ok"] is True and r["chapters"] == 30
+    assert r["ok"] is True and r["chapters"] == 63

@@ -2,15 +2,19 @@
 
 `class9-syllabus-draft.csv` is a starting list of chapters for the Kerala State (SCERT) Class 9 textbooks introduced in 2024. Upload it on the admin's **School** page under "Class 9 chapters and topics".
 
-**It is a draft. Check every row against the printed textbooks before the pilot.** It was put together from study-guide websites, not from SCERT itself:
+Most of it now comes from the contents pages of the 2024 textbooks (screenshots shared by the project owner on 29 October 2026). Lesson titles are copied as printed:
 
 | Subject | What's here | Source |
 | --- | --- | --- |
-| Mathematics | Parts 1 and 2, 15 chapters | hsslive.guru chapter list, matching the 2024 book's first chapters (Pairs of Equations, New Numbers) on textbooksall.co.in |
-| Physics | Part 1 only, 4 chapters | educationobserver.com new-syllabus thread; unit 1 confirmed on textbooksall.co.in |
-| Chemistry | 8 chapters | textbooksall.co.in 2024 notes ("Chemicals Kinesis" there, written here as Chemical Kinetics) |
-| Biology | Part 1 only, 3 chapters | educationobserver.com new-syllabus thread |
-| Malayalam, English, Hindi, Social Science, IT | Not included | No reliable current list found |
+| Mathematics | Parts 1 and 2, 15 chapters | **Not yet checked against the book:** hsslive.guru chapter list, matching the 2024 book's first chapters (Pairs of Equations, New Numbers) on textbooksall.co.in |
+| Physics | Parts 1 and 2, 8 chapters | Textbook contents pages |
+| Chemistry | Volumes 1 and 2, 8 chapters | Textbook contents pages |
+| Biology | Volumes 1 and 2, 6 chapters | Textbook contents pages |
+| Malayalam | Kerala Padavali units 1–5 and Adisthana Padavali units 1–3, with their lessons as topics | Textbook contents pages, typed from screenshots: a Malayalam reader should check the spelling |
+| English | Units I–V with their lessons as topics | English Reader contents pages |
+| Hindi | Units 1–5 with their lessons as topics | Hindi Reader contents page |
+| Social Science | Social Science I, 8 chapters | Textbook contents pages. Social Science II is not included yet |
+| IT | Not included | No contents page yet |
 
 How to fill it in:
 
@@ -20,4 +24,4 @@ How to fill it in:
 - A chapter number that already exists with a different title is refused, so fix titles in the app instead.
 - Students only see a chapter once a teacher has approved at least one explanation or question in it.
 
-The explanations and questions themselves are in [backend/content](../backend/content/README.md), one file per chapter. Mathematics chapters 1 to 8 are done.
+The explanations and questions themselves are in [backend/content](../backend/content/README.md), one file per chapter. All 15 Mathematics chapters, Physics 1–4, Chemistry 1–8 and Biology 1–3 are done.
