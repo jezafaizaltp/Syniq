@@ -8,7 +8,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 
 - **Accounts and roles:** student, guardian, teacher and admin, with server-side permission checks.
 - **Consent first:** a student can't learn until a guardian consents. Mood check-ins and sharing with the school each need their own consent. Consent records are append-only.
-- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 4 have full content (17 topics, 122 questions, [content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
+- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 8 have full content (34 topics, 235 questions, [content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
 - **Adaptive teacher engine** (`backend/app/engine/`):
   - Bayesian Knowledge Tracing estimates mastery for each concept. Hints and lucky guesses count for less.
   - Ordered, versioned rules pick the next step: introduce, practise, explain differently, revisit a prerequisite, or space out reviews.
@@ -31,7 +31,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 ## Not built yet
 
 - Hindi interface, and Malayalam for the teacher and school admin screens.
-- Content for Mathematics chapters 5 to 15 and the other eight subjects, and a teacher's check of chapters 1 to 4 against the 2024 SCERT book.
+- Content for Mathematics chapters 9 to 15 and the other eight subjects, and a teacher's check of chapters 1 to 8 against the 2024 SCERT book.
 - Interest exploration activities.
 - Picture explanations: the "picture" style is still described in text.
 

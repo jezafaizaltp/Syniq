@@ -223,13 +223,15 @@ def tap_choices(s: Arithmetic | None, answer: str, seed: int, likely_wrong: list
     wrongs: list[int] = []
     if s is not None:
         wrongs += [s.a + s.b, abs(s.a - s.b), s.a * s.b]
-    wrongs += [int(w) for w in (likely_wrong or []) if w.strip().lstrip("-").isdigit()]
+    likely = [w.strip().replace("−", "-") for w in (likely_wrong or [])]
+    wrongs += [int(w) for w in likely if w.lstrip("-").isdigit()]
     wrongs += [right + 1, right - 1, right + 10, right - 10, right + 2]
     options = [right]
     for w in wrongs:
         if len(options) == 4:
             break
-        if w >= 0 and w not in options:
+        # Negative choices only when the answer is negative, so a lone minus sign never gives it away.
+        if (w >= 0 or right < 0) and w not in options:
             options.append(w)
     options.sort()
     shift = seed % len(options)

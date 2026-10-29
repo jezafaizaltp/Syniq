@@ -102,3 +102,12 @@ def test_students_practise_a_pack_chapter_and_get_its_tips():
     assert wrong["tip"].startswith("That is the total for more than one")
     right = client.post("/learn/attempts", json={"item_id": item_id, "response": "22.0"}, headers=anu).json()
     assert right["correct"] is True
+
+
+def test_tap_choices_for_negative_and_fraction_answers():
+    from app.engine.responses import tap_choices
+
+    negative = tap_choices(None, "-12", 0, ["12"])
+    assert "-12" in negative and "12" in negative and sum(c.startswith("-") for c in negative) > 1
+    assert sorted(tap_choices(None, "1/2", 0, ["1", "1/4"])) == ["1", "1/2", "1/4"]
+    assert tap_choices(None, "3.5", 0, []) == []  # no likely mistakes known: typed instead

@@ -58,7 +58,7 @@ def to_sympy(text: str):
     )
 
     s = str(text).strip()
-    for a, b in (("−", "-"), ("×", "*"), ("·", "*"), ("÷", "/"), ("²", "^2"), ("³", "^3"), ("π", "pi")):
+    for a, b in (("−", "-"), ("×", "*"), ("·", "*"), ("÷", "/"), ("²", "^2"), ("³", "^3"), ("π", " pi ")):
         s = s.replace(a, b)
     s = re.sub(r"√\(", "sqrt(", s)
     s = re.sub(r"√(\d+(?:\.\d+)?|[a-z])", r"sqrt(\1)", s)
@@ -183,7 +183,8 @@ def known_tags() -> set[str]:
 def check_all(packs: list[tuple[Path, dict]]) -> list[str]:
     errors = []
     seen: dict[str, Path] = {}
-    tags = known_tags()
+    # A tip given in one pack can be used in any other, since all packs load together.
+    tags = known_tags() | {tag for _, pack in packs for tag in (pack.get("tips") or {})}
     for path, pack in packs:
         errors += [f"{path.name}: {e}" for e in check_pack(pack, tags)]
         for c in pack.get("concepts") or []:
