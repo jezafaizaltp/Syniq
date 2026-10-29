@@ -2,8 +2,10 @@
 
 import random
 from datetime import timedelta
+from fractions import Fraction
 
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session as DbSession
 
 from .engine import detect
@@ -14,9 +16,8 @@ from .models import Attempt, Concept, ConceptPrereq, Decision, Explanation, Item
 
 
 def get_mastery(db: DbSession, student_id: int, concept_id: int) -> Mastery:
-    row = db.scalars(
-        select(Mastery).where(Mastery.student_id == student_id, Mastery.concept_id == concept_id)
-    ).first()
+    query = select(Mastery).where(Mastery.student_id == student_id, Mastery.concept_id == concept_id)
+    row = db.scalars(query).first()
     if row is None:
         row = Mastery(
             student_id=student_id,
@@ -29,8 +30,12 @@ def get_mastery(db: DbSession, student_id: int, concept_id: int) -> Mastery:
             misconceptions={},
             format_stats={},
         )
-        db.add(row)
-        db.flush()
+        try:
+            with db.begin_nested():
+                db.add(row)
+        except IntegrityError:
+            # Two requests at once (a double tap) both started this topic; use the row the other made.
+            row = db.scalars(query).one()
     return row
 
 
@@ -68,7 +73,9 @@ def _wrong_since_explanation(db: DbSession, student_id: int, concept_id: int) ->
 
 
 def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[ConceptState], dict[int, ConceptState]]:
-    concepts = db.scalars(select(Concept).where(Concept.chapter_id == chapter_id)).all()
+    # Only topics with approved questions can be practised; a topic from the syllabus sheet may have none yet.
+    practisable = select(Item.concept_id).where(Item.status == "approved")
+    concepts = db.scalars(select(Concept).where(Concept.chapter_id == chapter_id, Concept.id.in_(practisable))).all()
     ids = {c.id for c in concepts}
     prereqs: dict[int, list[int]] = {}
     for link in db.scalars(select(ConceptPrereq).where(ConceptPrereq.concept_id.in_(ids))).all():
@@ -148,6 +155,17 @@ def normalise(answer: str) -> str:
     return "".join(answer.lower().split()).replace("^2", "²").replace("−", "-")
 
 
+def same_answer(a: str, b: str) -> bool:
+    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5)."""
+    a, b = normalise(a), normalise(b)
+    if a == b:
+        return True
+    try:
+        return Fraction(a) == Fraction(b)
+    except (ValueError, ZeroDivisionError):
+        return False
+
+
 def record_attempt(
     db: DbSession,
     student: User,
@@ -157,8 +175,10 @@ def record_attempt(
     time_ms: int | None,
     explanation_style: str | None,
 ) -> tuple[bool, str | None, Mastery]:
-    correct = normalise(response) == normalise(item.answer)
-    misconception = None if correct else item.misconceptions.get(response)
+    correct = same_answer(response, item.answer)
+    misconception = None
+    if not correct:
+        misconception = next((tag for wrong, tag in item.misconceptions.items() if same_answer(response, wrong)), None)
 
     db.add(
         Attempt(
@@ -214,6 +234,9 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
         "difficulty": item.difficulty,
         "hint_count": len(item.hints),
     }
+    if item.kind == "numeric":
+        # Phone number pads have no "/", so fraction answers get the full keyboard.
+        out["keyboard"] = "text" if "/" in item.answer else "decimal"
     if item.kind == "numeric" and "tap_to_answer" in detect.effective_support(settings):
         # Answers to tap instead of type. The right one is among them, so it is not a hint.
         sum_ = responses.parse_arithmetic(item.prompt, item.answer)

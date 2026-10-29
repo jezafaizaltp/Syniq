@@ -59,7 +59,7 @@ def test_students_only_see_chapters_with_approved_content():
     assert client.get(f"/subjects/{chem['id']}/chapters", headers=anu).json() == []
     assert len(client.get(f"/subjects/{chem['id']}/chapters", headers=teacher).json()) == 1
     math = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == "math")
-    assert math["chapters"] == 2  # the demo chapters have approved content
+    assert math["chapters"] == 6  # the two demo chapters and the four from content packs have approved content
 
 
 def test_draft_sheet_in_the_repo_is_valid():

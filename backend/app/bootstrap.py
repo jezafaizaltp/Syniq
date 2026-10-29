@@ -12,6 +12,7 @@ from sqlalchemy import select
 
 from .auth import MIN_PASSWORD, hash_password
 from .db import SessionLocal
+from . import content_packs
 from .models import Subject, User
 from .seed import SUBJECTS
 
@@ -30,6 +31,11 @@ def bootstrap(db, admin_email: str, admin_password: str, admin_name: str = "Scho
         db.add(User(name=admin_name, email=email, password_hash=hash_password(admin_password), role="admin", settings={}))
         done.append(f"added admin {email}")
     db.commit()
+    packs = content_packs.read_packs()
+    if packs and not content_packs.check_all(packs):
+        counts = content_packs.load(db, packs)
+        if any(counts.values()):
+            done.append(f"loaded content: {counts['chapters']} new chapters, {counts['items']} new questions")
     return done
 
 

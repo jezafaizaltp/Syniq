@@ -9,6 +9,7 @@ Run:  python -m app.seed
 
 from sqlalchemy.orm import Session as DbSession
 
+from . import content_packs
 from .auth import hash_password
 from .db import Base, SessionLocal, engine
 from .models import (
@@ -230,6 +231,13 @@ def seed(db: DbSession) -> None:
         for scope in ("core_learning", "mood_checkins", "school_sharing"):
             db.add(Consent(student_id=s.id, guardian_id=guardian.id, scope=scope, granted=True, method="school_form"))
     db.commit()
+
+    # The real chapters from content/, checked first.
+    packs = content_packs.read_packs()
+    errors = content_packs.check_all(packs)
+    if errors:
+        raise ValueError("Content packs have problems:\n" + "\n".join(errors))
+    content_packs.load(db, packs)
 
 
 def main() -> None:
