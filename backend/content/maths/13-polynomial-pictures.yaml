@@ -1,0 +1,182 @@
+# Class 9 Mathematics, chapter 13. Format: content/README.md.
+# Also uses tips from earlier chapters: added_sides, sign_slip, forgot_divide.
+subject: math
+chapter: 13
+title: Polynomial Pictures
+
+tips:
+  swapped_coordinates: "Write the across number (x) first and the up-or-down number (y) second: (x, y)."
+  forgot_constant: "Don't forget the number added at the end of the equation."
+  y_intercept_not_x: "That is where the line crosses the y-axis (x = 0). On the x-axis y = 0, so solve for x."
+  slope_not_intercept: "On the y-axis x = 0, so y is just the constant term."
+  intercept_not_slope: "The slope is the number multiplying x. The constant term only says where the line crosses the y-axis."
+  fits_one_point: "Check every point. An equation can fit one point and miss the others."
+  run_over_rise: "Slope is the change in y divided by the change in x: up-or-down over across."
+
+concepts:
+  - code: math9.polypic.coordinates
+    title: Points and coordinates
+    notes: |
+      A point in the plane is given by (x, y): x across from the origin (right positive) and y up
+      (down negative). Points on the y-axis have x = 0; on the x-axis, y = 0. The distance between
+      (x₁, y₁) and (x₂, y₂) is √((x₂ − x₁)² + (y₂ − y₁)²), from a right triangle. The midpoint is
+      halfway in each coordinate.
+    explanations:
+      text: "Two number lines crossing at right angles make a grid. Any point is named by two numbers (x, y): first how far across, then how far up. (3, −2) is 3 to the right of the crossing point and 2 down. The distance from (0, 0) to (3, 4) is the longest side of a right triangle with sides 3 and 4: √(9 + 16) = 5."
+      visual: "Picture a classroom seating chart: column number first, then row number. (3, 2) means column 3, row 2. Swapping them sends you to a different desk."
+      step_by_step: "Distance from (1, 2) to (4, 6): Step 1: Across: 4 − 1 = 3. Step 2: Up: 6 − 2 = 4. Step 3: Distance = √(3² + 4²) = √25 = 5."
+      real_world: "A city map with a grid lets you say 'the school is at (4, 6) and the library at (1, 2)'. Straight across country, they are 5 blocks apart, even though walking along the streets is 3 + 4 = 7 blocks."
+    items:
+      - prompt: "Which point is 3 to the right of the origin and 2 down?"
+        options: ["(3, −2)", "(−2, 3)", "(3, 2)", "(−3, 2)"]
+        answer: "(3, −2)"
+        difficulty: 1
+        hints: ["Across first, then up or down.", "Down is negative."]
+        solution: "x = 3 (right) and y = −2 (down), so (3, −2)."
+        mistakes: {"(−2, 3)": swapped_coordinates, "(3, 2)": sign_slip}
+      - prompt: "On which axis does the point (0, −4) lie?"
+        options: ["The y-axis", "The x-axis", "Neither axis", "Both axes"]
+        answer: "The y-axis"
+        difficulty: 1
+        hints: ["x = 0 means no movement across."]
+        solution: "x = 0, so the point is straight below the origin, on the y-axis."
+        mistakes: {"The x-axis": swapped_coordinates}
+      - prompt: "How far is the point (0, 5) from the origin?"
+        answer: "5"
+        check: "sqrt(0**2 + 5**2)"
+        difficulty: 1
+        hints: ["It is straight up from the origin."]
+        solution: "(0, 5) is 5 straight up, so the distance is 5."
+      - prompt: "How far is the point (3, 4) from the origin?"
+        answer: "5"
+        check: "sqrt(3**2 + 4**2)"
+        difficulty: 2
+        hints: ["Right triangle with sides 3 and 4."]
+        solution: "Step 1: √(3² + 4²) = √25. Step 2: = 5."
+        mistakes: {"7": added_sides, "25": forgot_root}
+      - prompt: "What is the distance between (1, 2) and (4, 6)?"
+        answer: "5"
+        check: "sqrt((4 - 1)**2 + (6 - 2)**2)"
+        difficulty: 2
+        hints: ["Across 3, up 4."]
+        solution: "Step 1: Across 3, up 4. Step 2: √(9 + 16) = 5."
+        mistakes: {"7": added_sides}
+      - prompt: "What is the x-coordinate of the point halfway between (2, 5) and (8, 1)?"
+        answer: "5"
+        check: "(2 + 8)/2"
+        difficulty: 3
+        hints: ["Halfway across: (2 + 8) ÷ 2."]
+        solution: "(2 + 8) ÷ 2 = 5, so the midpoint is (5, 3)."
+        mistakes: {"3": swapped_coordinates}
+
+  - code: math9.polypic.lines
+    title: Lines from equations
+    after: [math9.polypic.coordinates]
+    notes: |
+      The points (x, y) that satisfy y = ax + b lie on a straight line: this is the picture of the
+      first-degree polynomial ax + b. It crosses the y-axis at (0, b) and the x-axis where ax + b = 0.
+      A point is on the line if its coordinates make the equation true.
+    explanations:
+      text: "For y = 2x + 1, pick values of x and work out y: x = 0 gives 1, x = 1 gives 3, x = 2 gives 5. Plot (0, 1), (1, 3) and (2, 5): they lie on a straight line. Every point on that line fits the equation, and every point that fits is on the line."
+      visual: "Make a table with x on top (0, 1, 2, 3) and y below (1, 3, 5, 7). Each column is a dot on the grid. Join the dots with a ruler: a straight line climbing 2 squares for every 1 across."
+      step_by_step: "Where does y = 2x − 6 cross the x-axis? Step 1: On the x-axis, y = 0. Step 2: 0 = 2x − 6. Step 3: 2x = 6. Step 4: x = 3, so the point is (3, 0)."
+      real_world: "A taxi charges ₹50 to start and ₹15 per km: y = 15x + 50. Plotting it gives a straight line starting at ₹50 when x = 0, which the driver can use to read off any fare."
+    items:
+      - prompt: "On the line y = 2x + 1, what is y when x = 3?"
+        answer: "7"
+        check: "2*3 + 1"
+        difficulty: 1
+        hints: ["Put 3 in place of x."]
+        solution: "y = 2 × 3 + 1 = 7"
+        mistakes: {"6": forgot_constant, "5": times_not_plus}
+      - prompt: "Which point lies on the line y = 3x − 2?"
+        options: ["(2, 4)", "(4, 2)", "(1, 2)", "(0, 2)"]
+        answer: "(2, 4)"
+        difficulty: 1
+        hints: ["Put each x into 3x − 2 and see if you get the y."]
+        solution: "Step 1: For x = 2: 3 × 2 − 2 = 4, which matches. Step 2: The others don't fit."
+        mistakes: {"(4, 2)": swapped_coordinates, "(0, 2)": sign_slip}
+      - prompt: "Where does the line y = 5x + 4 cross the y-axis? Give the y value."
+        answer: "4"
+        check: "5*0 + 4"
+        difficulty: 2
+        hints: ["On the y-axis, x = 0."]
+        solution: "With x = 0, y = 4, so the line crosses at (0, 4)."
+        mistakes: {"5": slope_not_intercept}
+      - prompt: "Where does the line y = 2x − 6 cross the x-axis? Give the x value."
+        answer: "3"
+        check: "6/2"
+        difficulty: 2
+        hints: ["On the x-axis, y = 0.", "0 = 2x − 6."]
+        solution: "Step 1: 2x − 6 = 0. Step 2: 2x = 6. Step 3: x = 3."
+        mistakes: {"-6": y_intercept_not_x, "-3": sign_slip}
+      - prompt: "The line y = ax + 1 passes through the point (2, 7). What is a?"
+        answer: "3"
+        check: "(7 - 1)/2"
+        difficulty: 3
+        hints: ["7 = a × 2 + 1."]
+        solution: "Step 1: 7 = 2a + 1. Step 2: 2a = 6. Step 3: a = 3."
+        mistakes: {"6": forgot_divide}
+      - prompt: "The points (1, 3), (2, 5) and (3, 7) lie on one straight line. Which is its equation?"
+        options: ["y = 2x + 1", "y = x + 2", "y = 3x", "y = 2x + 3"]
+        answer: "y = 2x + 1"
+        difficulty: 3
+        hints: ["y goes up 2 each time x goes up 1.", "Check all three points."]
+        solution: "Step 1: y goes up 2 for each 1 across, so y = 2x + something. Step 2: (1, 3): 3 = 2 + 1. Step 3: y = 2x + 1, and (2, 5), (3, 7) fit too."
+        mistakes: {"y = x + 2": fits_one_point, "y = 3x": fits_one_point}
+
+  - code: math9.polypic.slope
+    title: Steepness of a line
+    after: [math9.polypic.lines]
+    notes: |
+      The slope of a line is change in y ÷ change in x between any two of its points. For y = ax + b
+      the slope is a: y goes up a for every 1 across. A bigger slope is steeper; a negative slope goes
+      downhill. Slope is a rate: rupees per km, litres per minute.
+    explanations:
+      text: "The slope says how steep a line is: how far it goes up for each step across. Between (1, 2) and (3, 8), it goes up 6 while going across 2, so the slope is 6 ÷ 2 = 3. In y = ax + b, the slope is a, the number multiplying x."
+      visual: "Draw a staircase under the line, each step 1 square across. On y = 3x, each step rises 3 squares; on y = x, just 1. The taller the steps, the steeper the line."
+      step_by_step: "Slope of the line through (0, 5) and (2, 1): Step 1: Change in y: 1 − 5 = −4. Step 2: Change in x: 2 − 0 = 2. Step 3: Slope = −4 ÷ 2 = −2. The line goes down."
+      real_world: "A tank fills steadily: 30 litres after 2 minutes, 75 after 5. The rate is (75 − 30) ÷ (5 − 2) = 15 litres per minute. That rate is the slope of the line on a graph of litres against minutes."
+    items:
+      - prompt: "What is the slope of the line y = 4x − 3?"
+        answer: "4"
+        check: "Poly(4*x - 3, x).coeff_monomial(x)"
+        difficulty: 1
+        hints: ["The slope is the number multiplying x."]
+        solution: "In y = ax + b the slope is a, so it is 4."
+        mistakes: {"-3": intercept_not_slope}
+      - prompt: "What is the slope of the line through (1, 2) and (3, 8)?"
+        answer: "3"
+        check: "(8 - 2)/(3 - 1)"
+        difficulty: 2
+        hints: ["Change in y ÷ change in x."]
+        solution: "Step 1: Up 6. Step 2: Across 2. Step 3: 6 ÷ 2 = 3."
+        mistakes: {"1/3": run_over_rise}
+      - prompt: "What is the slope of the line through (0, 5) and (2, 1)?"
+        answer: "-2"
+        check: "(1 - 5)/(2 - 0)"
+        difficulty: 2
+        hints: ["y goes from 5 down to 1."]
+        solution: "Step 1: Change in y = 1 − 5 = −4. Step 2: Change in x = 2. Step 3: Slope = −2."
+        mistakes: {"2": sign_slip, "-1/2": run_over_rise}
+      - prompt: "Which of these lines is steepest?"
+        options: ["y = 5x + 1", "y = 2x + 9", "y = x − 4", "y = 3x"]
+        answer: "y = 5x + 1"
+        difficulty: 2
+        hints: ["Compare the numbers multiplying x."]
+        solution: "The slopes are 5, 2, 1 and 3. The biggest is 5, so y = 5x + 1 is steepest."
+        mistakes: {"y = 2x + 9": intercept_not_slope}
+      - prompt: "A taxi fare is y = 15x + 50 rupees for a ride of x km. By how many rupees does the fare go up for each extra km?"
+        answer: "15"
+        check: "(15*2 + 50) - (15*1 + 50)"
+        difficulty: 3
+        hints: ["Compare the fare for 1 km and for 2 km."]
+        solution: "Step 1: 1 km: ₹65. Step 2: 2 km: ₹80. Step 3: ₹15 more per km, the slope."
+        mistakes: {"50": intercept_not_slope, "65": forgot_constant}
+      - prompt: "A tank fills at a steady rate. After 2 minutes it holds 30 litres, and after 5 minutes 75 litres. How many litres flow in per minute?"
+        answer: "15"
+        check: "(75 - 30)/(5 - 2)"
+        difficulty: 3
+        hints: ["In 3 minutes, 45 litres flowed in."]
+        solution: "Step 1: 75 − 30 = 45 litres. Step 2: 5 − 2 = 3 minutes. Step 3: 45 ÷ 3 = 15 litres per minute."
+        mistakes: {"1/15": run_over_rise, "45": forgot_divide}

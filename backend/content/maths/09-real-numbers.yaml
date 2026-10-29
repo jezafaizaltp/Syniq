@@ -1,0 +1,198 @@
+# Class 9 Mathematics, chapter 9. Format: content/README.md.
+# Also uses tips from earlier chapters: pi_exact, perfect_square_root, half_not_root, sign_slip.
+subject: math
+chapter: 9
+title: Real Numbers
+
+tips:
+  irrational_product: "Not always: √2 × √2 = 2, which is rational."
+  irrational_sum: "Not always: √2 + (−√2) = 0, which is rational."
+  non_repeating: "A decimal is rational only if one fixed block of digits repeats for ever. Here the gaps keep growing, so nothing repeats."
+  distance_subtract: "The distance between two numbers is the bigger one minus the smaller one."
+  negative_distance: "A distance is never negative. Take the bigger number minus the smaller, or drop the minus sign."
+  midpoint_half_distance: "Halfway between a and b is (a + b) ÷ 2. Half the distance tells you how far the middle is from each end, not where it is."
+  other_side: "There are two numbers at that distance, one on each side. Check which one the question asks for."
+
+concepts:
+  - code: math9.real.kinds
+    title: Rational and irrational numbers
+    notes: |
+      Rational numbers can be written as fractions (whole numbers, ending decimals and recurring
+      decimals). Irrational numbers cannot: √2, √3, π, and decimals that never end or repeat.
+      Together they make the real numbers. A rational plus an irrational is irrational, but two
+      irrationals can add or multiply to a rational (√2 × √2 = 2).
+    explanations:
+      text: "Every number on the number line is a real number. Some can be written as a fraction: 3, −5, 0.75 = 3/4 and 0.333… = 1/3. These are rational. Others can't, like √2, √5 and π. These are irrational: their decimals go on for ever without a repeating block. Rational and irrational numbers together are the real numbers."
+      visual: "Picture two baskets. Into the 'rational' basket go 3, −1/2, 0.75 and 0.333…. Into the 'irrational' basket go √2, √3 and π. Every point on the number line belongs in exactly one basket."
+      step_by_step: "Is 0.1010010001… rational? Step 1: Look for a block of digits that repeats for ever. Step 2: The number of 0s between the 1s keeps growing. Step 3: So no block repeats. Step 4: It is irrational."
+      real_world: "A tailor measures cloth in fractions of a metre, which are rational. But the diagonal of a 1 m square tablecloth is √2 m, an irrational length. Both are real lengths you can cut."
+    items:
+      - prompt: "Which of these numbers is irrational?"
+        options: ["√5", "0.75", "−3", "22/7"]
+        answer: "√5"
+        difficulty: 1
+        hints: ["Which one can't be written as a fraction?"]
+        solution: "Step 1: 0.75 = 3/4, −3 = −3/1 and 22/7 is already a fraction. Step 2: √5 can't be written as a fraction."
+        mistakes: {"22/7": pi_exact}
+      - prompt: "Which of these numbers is rational?"
+        options: ["√16", "√2", "π", "√3"]
+        answer: "√16"
+        difficulty: 1
+        hints: ["Work out √16."]
+        solution: "Step 1: √16 = 4 = 4/1, a fraction. Step 2: √2, π and √3 are irrational."
+      - prompt: "What kind of number is √2 + (−√2)?"
+        options: ["0, a rational number", "An irrational number", "2√2", "Not a real number"]
+        answer: "0, a rational number"
+        difficulty: 2
+        hints: ["A number plus its negative is 0."]
+        solution: "Step 1: √2 + (−√2) = 0. Step 2: 0 is rational."
+        mistakes: {"An irrational number": irrational_sum}
+      - prompt: "Which statement is always true?"
+        options: ["A rational number plus an irrational number is irrational", "Two irrational numbers add up to an irrational number", "Two irrational numbers multiply to an irrational number", "Every square root is irrational"]
+        answer: "A rational number plus an irrational number is irrational"
+        difficulty: 2
+        hints: ["Test each with √2.", "√2 × √2 = ?"]
+        solution: "Step 1: √2 × √2 = 2 and √2 + (−√2) = 0 are rational, so the second and third can fail. Step 2: √4 = 2, so not every root is irrational. Step 3: 1 + √2 can never be a fraction, so the first is always true."
+        mistakes: {"Two irrational numbers add up to an irrational number": irrational_sum, "Two irrational numbers multiply to an irrational number": irrational_product, "Every square root is irrational": perfect_square_root}
+      - prompt: "Which of these is a rational number between 1 and √2?"
+        options: ["1.2", "1.5", "√3", "1.42"]
+        answer: "1.2"
+        difficulty: 2
+        hints: ["√2 ≈ 1.414."]
+        solution: "Step 1: √2 ≈ 1.414. Step 2: 1.5 and 1.42 are bigger than that, and √3 is irrational. Step 3: 1.2 = 6/5 lies between 1 and 1.414."
+      - prompt: "How many whole numbers are there between √10 and √50?"
+        answer: "4"
+        check: "floor(sqrt(50)) - ceiling(sqrt(10)) + 1"
+        difficulty: 3
+        hints: ["√10 is a bit more than 3, and √50 a bit more than 7."]
+        solution: "Step 1: 3² = 9 < 10 < 16 = 4², so √10 is between 3 and 4. Step 2: 7² = 49 < 50, so √50 is just over 7. Step 3: The whole numbers between are 4, 5, 6 and 7: four of them."
+      - prompt: "The decimal 0.1010010001… has one more 0 before each new 1. Is it rational or irrational?"
+        options: ["Irrational: it never ends and never repeats", "Rational: it is a decimal", "Rational: the 1s repeat", "It can't be decided"]
+        answer: "Irrational: it never ends and never repeats"
+        difficulty: 3
+        hints: ["Is there one block of digits that repeats for ever?"]
+        solution: "Step 1: The gaps between the 1s keep growing. Step 2: So no fixed block repeats. Step 3: It is irrational."
+        mistakes: {"Rational: the 1s repeat": non_repeating, "Rational: it is a decimal": non_repeating}
+
+  - code: math9.real.number_line
+    title: Real numbers on the number line
+    after: [math9.real.kinds]
+    notes: |
+      Every real number is a point on the number line and every point is a real number. √2 can be
+      marked by swinging the diagonal of a unit square onto the line with a compass. To order or
+      place irrational numbers, use approximations (√2 ≈ 1.414, √3 ≈ 1.732) or squares.
+    explanations:
+      text: "The number line has room for every real number. To mark √2, draw a square of side 1 on the line from 0 to 1. Its diagonal is √2 long. Put a compass on 0, open it to the diagonal's end, and swing it down onto the line: it lands at √2, about 1.41. To compare numbers like √3 and 1.7, use decimals: √3 ≈ 1.732, so it is to the right of 1.7."
+      visual: "Picture the number line with a small square standing on it between 0 and 1. A curved arrow swings the square's diagonal down onto the line, landing a little before 1.5. That point is √2."
+      step_by_step: "To place √7: Step 1: Find squares around 7: 4 and 9. Step 2: So √7 is between √4 = 2 and √9 = 3. Step 3: 2.6² = 6.76 and 2.7² = 7.29. Step 4: So √7 is between 2.6 and 2.7, about 2.65."
+      real_world: "A road map shows towns as points along a highway. A milestone can be at any real distance, like 10√2 km from a junction, not just at whole or fractional kilometres."
+    items:
+      - prompt: "Between which two whole numbers is √7 on the number line?"
+        options: ["2 and 3", "3 and 4", "6 and 7", "1 and 2"]
+        answer: "2 and 3"
+        difficulty: 1
+        hints: ["2² = 4 and 3² = 9."]
+        solution: "Step 1: 4 < 7 < 9. Step 2: So √7 is between 2 and 3."
+        mistakes: {"6 and 7": half_not_root}
+      - prompt: "Which of these points is furthest to the right on the number line?"
+        options: ["√5", "2", "−3", "1.5"]
+        answer: "√5"
+        difficulty: 1
+        hints: ["√5 ≈ 2.236."]
+        solution: "Step 1: √5 ≈ 2.236. Step 2: It is bigger than 2, 1.5 and −3, so it is furthest right."
+      - prompt: "To mark √2 on the number line, you draw a square of side 1 from 0 to 1, then swing its diagonal down onto the line with a compass centred at 0. Where does it land?"
+        options: ["At about 1.41", "At exactly 1.5", "At exactly 2", "At about 0.71"]
+        answer: "At about 1.41"
+        difficulty: 2
+        hints: ["The diagonal of a unit square is √2."]
+        solution: "Step 1: The diagonal is √2 long. Step 2: Swinging it keeps its length. Step 3: It lands at √2 ≈ 1.41."
+      - prompt: "Which list is in order from smallest to largest?"
+        options: ["1.7, √3, 7/4", "√3, 1.7, 7/4", "7/4, √3, 1.7", "1.7, 7/4, √3"]
+        answer: "1.7, √3, 7/4"
+        difficulty: 2
+        hints: ["√3 ≈ 1.732 and 7/4 = 1.75."]
+        solution: "Step 1: 1.7 = 1.700, √3 ≈ 1.732 and 7/4 = 1.750. Step 2: So 1.7, √3, 7/4."
+      - prompt: "Which whole number is nearest to √27?"
+        answer: "5"
+        check: "floor(sqrt(27) + 1/2)"
+        difficulty: 2
+        hints: ["5² = 25 and 6² = 36."]
+        solution: "Step 1: 25 is much closer to 27 than 36 is. Step 2: √27 ≈ 5.2, so the nearest whole number is 5."
+        mistakes: {"13.5": half_not_root}
+      - prompt: "On the number line, P is at √2 and Q is at 3√2. Using √2 ≈ 1.414, how far apart are P and Q, to three decimal places?"
+        answer: "2.828"
+        check: "3*1.414 - 1.414"
+        difficulty: 3
+        hints: ["Distance = 3√2 − √2 = 2√2."]
+        solution: "Step 1: PQ = 3√2 − √2 = 2√2. Step 2: ≈ 2 × 1.414 = 2.828."
+        mistakes: {"5.656": distance_subtract}
+
+  - code: math9.real.distance
+    title: Distance between points
+    after: [math9.real.number_line]
+    notes: |
+      The distance between the points x and y on the number line is the bigger minus the smaller,
+      written |x − y|. |a| is the distance of a from 0, so |−9| = 9. The point halfway between a and
+      b is (a + b)/2. |x − 3| = 5 has two answers, x = 8 and x = −2.
+    explanations:
+      text: "The distance between two points on the number line is the bigger number minus the smaller. From −2 to 5 is 5 − (−2) = 7. Mathematicians write this as |5 − (−2)|, where |…| means 'drop the minus sign if there is one'. So |−9| = 9: −9 is 9 steps from 0."
+      visual: "Mark −2 and 5 on a number line and count the steps between them: 2 steps from −2 to 0, then 5 more to 5. That's 7 steps, the distance."
+      step_by_step: "Which numbers are 5 away from 3? Step 1: Go 5 right: 3 + 5 = 8. Step 2: Go 5 left: 3 − 5 = −2. Step 3: Both work, so |x − 3| = 5 means x = 8 or x = −2."
+      real_world: "A thermometer reads −6°C at night and −1°C in the morning. The temperature rose by the distance between them: −1 − (−6) = 5 degrees."
+    items:
+      - prompt: "On the number line, how far apart are 3 and 8?"
+        answer: "5"
+        check: "Abs(3 - 8)"
+        difficulty: 1
+        hints: ["Bigger minus smaller."]
+        solution: "8 − 3 = 5"
+        mistakes: {"11": distance_subtract, "-5": negative_distance}
+      - prompt: "How far apart are −2 and 5 on the number line?"
+        answer: "7"
+        check: "Abs(5 - (-2))"
+        difficulty: 1
+        hints: ["5 − (−2) = 5 + 2."]
+        solution: "Step 1: 5 − (−2). Step 2: = 7."
+        mistakes: {"3": sign_slip}
+      - prompt: "How far apart are −6 and −1 on the number line?"
+        answer: "5"
+        check: "Abs(-1 - (-6))"
+        difficulty: 1
+        hints: ["The bigger number is −1.", "−1 − (−6) = −1 + 6."]
+        solution: "Step 1: −1 − (−6) = −1 + 6. Step 2: = 5."
+        mistakes: {"7": sign_slip, "-5": negative_distance}
+      - prompt: "What is |−9|?"
+        answer: "9"
+        check: "Abs(-9)"
+        difficulty: 2
+        hints: ["How far is −9 from 0?"]
+        solution: "−9 is 9 steps from 0, so |−9| = 9."
+        mistakes: {"-9": negative_distance}
+      - prompt: "What is |3 − 10|?"
+        answer: "7"
+        check: "Abs(3 - 10)"
+        difficulty: 2
+        hints: ["3 − 10 = −7.", "Drop the minus sign."]
+        solution: "Step 1: 3 − 10 = −7. Step 2: |−7| = 7."
+        mistakes: {"-7": negative_distance, "13": distance_subtract}
+      - prompt: "Which number is halfway between −4 and 10 on the number line?"
+        answer: "3"
+        check: "(-4 + 10)/2"
+        difficulty: 2
+        hints: ["Halfway = (a + b) ÷ 2."]
+        solution: "Step 1: (−4 + 10) ÷ 2 = 6 ÷ 2. Step 2: = 3. Step 3: Check: 3 is 7 from each end."
+        mistakes: {"7": midpoint_half_distance}
+      - prompt: "A number x is 5 away from 3 on the number line, and x is negative. What is x?"
+        answer: "-2"
+        check: "3 - 5"
+        difficulty: 3
+        hints: ["Go 5 to the left of 3."]
+        solution: "Step 1: The numbers 5 away from 3 are 8 and −2. Step 2: The negative one is −2."
+        mistakes: {"8": other_side, "2": sign_slip}
+      - prompt: "|x − 4| = 6 and x is bigger than 4. What is x?"
+        answer: "10"
+        check: "4 + 6"
+        difficulty: 3
+        hints: ["x is 6 away from 4.", "Bigger than 4 means go right."]
+        solution: "Step 1: x is 6 away from 4, so x = 10 or x = −2. Step 2: Bigger than 4: x = 10."
+        mistakes: {"-2": other_side, "2": distance_subtract}
