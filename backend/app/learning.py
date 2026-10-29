@@ -6,6 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
 from .engine import mastery as m
+from .engine import responses
 from .engine.rules import Action, ConceptState, decide
 from .models import Attempt, Concept, ConceptPrereq, Decision, Explanation, Item, Mastery, User, utcnow
 
@@ -92,7 +93,10 @@ def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[Co
 
 def next_action(db: DbSession, student: User, chapter_id: int, current_concept_id: int | None) -> tuple[Action, Decision]:
     chapter, states = build_states(db, student, chapter_id)
-    preferred = (student.settings or {}).get("preferred_style")
+    settings = student.settings or {}
+    preferred = settings.get("preferred_style")
+    if not preferred and "visual_first" in settings.get("support_modes", []):
+        preferred = "visual"
     action = decide(chapter, states, utcnow(), current_concept_id, preferred)
     evidence = dict(action.evidence)
     if action.style:
@@ -197,9 +201,9 @@ def record_attempt(
     return correct, misconception, row
 
 
-def public_item(item: Item) -> dict:
+def public_item(item: Item, settings: dict | None = None) -> dict:
     """An item as the student sees it: no answer, no hints until asked."""
-    return {
+    out = {
         "id": item.id,
         "concept_id": item.concept_id,
         "kind": item.kind,
@@ -208,3 +212,8 @@ def public_item(item: Item) -> dict:
         "difficulty": item.difficulty,
         "hint_count": len(item.hints),
     }
+    if item.kind == "numeric" and "tap_to_answer" in (settings or {}).get("support_modes", []):
+        # Answers to tap instead of type. The right one is among them, so it is not a hint.
+        sum_ = responses.parse_arithmetic(item.prompt, item.answer)
+        out["choices"] = responses.tap_choices(sum_, item.answer, item.id, list(item.misconceptions))
+    return out

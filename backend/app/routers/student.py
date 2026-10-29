@@ -3,12 +3,13 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import learning
+from .. import ai, learning
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
 from ..engine.mastery import progress_label
+from ..engine import responses
 from ..engine.rules import STYLES
-from ..models import Chapter, CheckIn, Concept, Decision, Item, Mastery, Subject, User
+from ..models import Chapter, CheckIn, Concept, Decision, Explanation, Item, Mastery, Subject, User
 
 router = APIRouter(tags=["student"])
 
@@ -21,6 +22,7 @@ ALLOWED_SETTINGS = {
     "extra_time": bool,
     "preferred_style": (str, type(None)),
     "ui_language": str,
+    "support_modes": list,
 }
 
 
@@ -86,7 +88,7 @@ def learn_next(body: NextRequest, db: DbSession = Depends(get_db), user: User = 
         payload["styles"] = STYLES
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         item = learning.pick_item(db, user.id, concept.id, action.difficulty)
-        payload["item"] = learning.public_item(item) if item else None
+        payload["item"] = learning.public_item(item, user.settings) if item else None
     return payload
 
 
@@ -152,13 +154,47 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
     correct, misconception, row = learning.record_attempt(
         db, user, item, body.response, body.hints_used, body.time_ms, body.explanation_style
     )
+    tip = None if correct else MISCONCEPTION_TIPS.get(misconception or "")
+    explanations = db.scalars(
+        select(Explanation).where(Explanation.concept_id == item.concept_id, Explanation.status == "approved")
+    ).all()
+    response = responses.build(
+        responses.Context(
+            prompt=item.prompt,
+            answer=item.answer,
+            response=body.response,
+            correct=correct,
+            solution=item.solution,
+            misconception_tip=tip,
+            wrong_in_a_row=row.wrong_streak,
+            explanations={e.style: e.body for e in explanations},
+            support=(user.settings or {}).get("support_modes", []),
+            tutor_available=ai.enabled(),
+        ),
+        seed=row.attempts,
+    )
+    if response["mode"]:
+        # Logged like every other adaptation, so "Why am I seeing this?" and audits can explain it.
+        db.add(
+            Decision(
+                student_id=user.id,
+                concept_id=item.concept_id,
+                rule_id=f"F_{response['mode']}",
+                rule_version=responses.RESPONSES_VERSION,
+                action="feedback",
+                reason=response["why"],
+                evidence={"wrong_in_a_row": row.wrong_streak, "mistake": response.get("mistake") or misconception},
+            )
+        )
+        db.commit()
     out = {
         "correct": correct,
         "progress": progress_label(row.p_known, row.attempts),
         "feedback": "Correct, well done." if correct else "Not quite yet.",
+        "response": response,
     }
     if not correct:
-        out["tip"] = MISCONCEPTION_TIPS.get(misconception or "", None)
+        out["tip"] = tip
         out["solution"] = item.solution
     return out
 
@@ -204,6 +240,8 @@ def update_settings(body: dict, user: User = Depends(current_user), db: DbSessio
             raise HTTPException(400, f"Invalid setting: {key}")
         if key == "preferred_style" and value is not None and value not in STYLES:
             raise HTTPException(400, "Unknown style")
+        if key == "support_modes" and not (all(isinstance(v, str) for v in value) and set(value) <= set(responses.SUPPORT_MODES)):
+            raise HTTPException(400, "Unknown support mode")
         if key == "font_scale" and not 0.8 <= float(value) <= 2.0:
             raise HTTPException(400, "font_scale must be between 0.8 and 2.0")
         settings[key] = value

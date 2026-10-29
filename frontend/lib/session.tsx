@@ -18,7 +18,7 @@ function applySettings(s: Settings | undefined) {
   const root = document.documentElement;
   root.style.setProperty("--font-scale", String(s?.font_scale ?? 1));
   root.dataset.contrast = s?.high_contrast ? "high" : "normal";
-  root.dataset.font = s?.dyslexia_font ? "dyslexia" : "default";
+  root.dataset.font = s?.dyslexia_font || s?.support_modes?.includes("easy_read") ? "dyslexia" : "default";
   root.dataset.motion = s?.reduced_motion ? "reduced" : "full";
 }
 

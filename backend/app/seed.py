@@ -141,6 +141,19 @@ ITEMS = [
 ]
 
 
+# A short warm-up so the no-AI response modes (stars, stories, smaller questions) can be tried.
+WARMUP_EXPLANATIONS = {
+    "text": "Adding puts groups together. Taking away removes some. Multiplying is adding equal groups again and again. Dividing shares equally.",
+    "visual": "Picture 10 stars and 10 more stars. Count them all one by one: 20 stars.",
+    "step_by_step": "Step 1: read the sign (+, −, × or ÷). Step 2: start with the first number. Step 3: add, take away, make groups or share. Step 4: check by counting back.",
+    "real_world": "If you have 10 mangoes and your friend gives you 10 more, you now have 20 mangoes.",
+}
+WARMUP_ITEMS = [
+    ("What is 10 + 10?", "20", 1), ("What is 8 + 7?", "15", 1), ("What is 15 − 6?", "9", 1),
+    ("What is 6 × 4?", "24", 2), ("What is 24 ÷ 6?", "4", 2), ("What is 37 + 25?", "62", 2), ("What is 9 × 7?", "63", 3),
+]
+
+
 def seed(db: DbSession) -> None:
     if db.query(Subject).count():
         return
@@ -171,6 +184,23 @@ def seed(db: DbSession) -> None:
             Item(
                 concept_id=concepts[code].id, kind=kind, prompt=prompt, options=options, answer=answer,
                 hints=hints, solution=solution, difficulty=diff, misconceptions=miscon, status=status,
+            )
+        )
+
+    warmup = Chapter(subject_id=subjects["math"].id, number=0, title="Demo: Number sense warm-up")
+    db.add(warmup)
+    db.flush()
+    warm = Concept(chapter_id=warmup.id, code="math9.number_warmup", title="Adding, taking away, groups and sharing", order=0)
+    db.add(warm)
+    db.flush()
+    for style, body in WARMUP_EXPLANATIONS.items():
+        db.add(Explanation(concept_id=warm.id, style=style, body=body, status="approved"))
+    for prompt, answer, diff in WARMUP_ITEMS:
+        sum_text = prompt.removeprefix("What is ").rstrip("?")
+        db.add(
+            Item(
+                concept_id=warm.id, kind="numeric", prompt=prompt, answer=answer, hints=["Try drawing it with dots or stars."],
+                solution=f"{sum_text} = {answer}", difficulty=diff, misconceptions={}, status="approved",
             )
         )
 

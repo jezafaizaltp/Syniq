@@ -10,6 +10,7 @@ export type Settings = {
   read_aloud?: boolean;
   extra_time?: boolean;
   preferred_style?: string | null;
+  support_modes?: string[];
 };
 
 export type Me = {
