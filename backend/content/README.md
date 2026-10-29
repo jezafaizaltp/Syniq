@@ -8,13 +8,17 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Maths 2: New Numbers | square roots, lengths like √2, estimating square roots, recurring decimals | 30 |
 | Maths 3: Parallel Lines | equally spaced lines, parallel lines and ratios, a line parallel to a side of a triangle, dividing a line in a ratio | 27 |
 | Maths 4: Multiplication Identities | multiplying two sums, (a + b)², (a − b)², (a + b)(a − b), quick calculation | 34 |
+| Maths 5: Irrational Multiplication | multiplying, simplifying, adding and dividing square roots, identities with roots | 35 |
+| Maths 6: Similar Triangles | same angles, sides in the same ratio, matching sides, heights, shadows and maps | 25 |
+| Maths 7: Negative Numbers | adding and subtracting, multiplying and dividing, putting negatives into expressions, equations with negative answers | 28 |
+| Maths 8: Circle Measures | π, circumference, area, half circles and rings | 25 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 106 of the 122 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 16 are choice questions answered in words ("Add them", "5 and 6"). They were checked by hand.
+- **Every answer that can be worked out by computer is**, on every test run: 204 of the 235 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 31 are choice questions that no single calculation can check, such as "Add them" or "Which is the smallest?". They were checked by hand.
 - **The fit with the textbook is not checked.** The chapter names come from the draft syllabus list (`../../content/class9-syllabus-draft.csv`), and the topics from study-guide websites that list each chapter's exercises. A teacher with the 2024 SCERT book should compare topic order and wording when one is available.
 
 ## Format
@@ -55,7 +59,7 @@ concepts:
 
 Typed answers must be numbers (whole, decimal or a fraction like 3/4). Students' answers are accepted however the number is written: 22, 22.0 and 44/2 are all right. Anything else (an expression, a surd, words) is a choice question.
 
-Mistake tags already translated into Malayalam in `backend/app/i18n.py` (`tip.<tag>`) can be used without a tip here. New tags need a tip in the pack, shown in English.
+Mistake tags already translated into Malayalam in `backend/app/i18n.py` (`tip.<tag>`) can be used without a tip here. New tags need a tip in a pack (any pack: tips are shared), shown in English.
 
 ## Changing a pack
 
