@@ -78,7 +78,8 @@ The admin signs in at `https://<your address>` and opens **School**:
 1. **Download the template** and fill in one row per student in Excel or Google Sheets: the student's name, class (e.g. `9 A`), the parent's name, the parent's email if they have one, and `yes` or `no` for each of the three consent boxes on the paper form. Save it as CSV. Don't include marks or how students were chosen.
 2. **Choose the CSV file.** SYNiq checks every row first and lists any problems. Nothing is created until the whole sheet is right.
 3. **Create accounts**, then **Print login sheet** straight away. Temporary passwords are shown only once. Cut the sheet into slips for each student and parent.
-4. **Add a teacher** for each class. Give them their temporary password in person.
+4. **Add the Class 9 chapters and topics** from a sheet (see `content/README.md`; a draft list is in `content/class9-syllabus-draft.csv`). Check it against the textbooks first.
+5. **Add a teacher** for each class. Give them their temporary password in person.
 
 Everyone chooses their own password the first time they sign in. If someone forgets theirs, the admin presses **New password** next to their name and gives them the new temporary one.
 

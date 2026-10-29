@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session as DbSession
 
 from ..auth import audit, has_consent, hash_password, require_role, temporary_password
 from ..db import get_db
-from ..models import ClassGroup, Consent, GuardianLink, Session, User
+from ..models import Chapter, ClassGroup, Concept, Consent, GuardianLink, Session, Subject, User
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 admin_only = require_role("admin")
@@ -246,3 +246,102 @@ def record_paper_consent(student_id: int, body: PaperConsentIn, db: DbSession = 
     db.commit()
     audit(db, user, f"paper_consent:{body.scope}:{'yes' if body.granted else 'no'}", student_id)
     return {"scope": body.scope, "granted": body.granted}
+
+
+# --- Syllabus ---------------------------------------------------------------------------
+
+SYLLABUS_COLUMNS = ("subject", "chapter_number", "chapter_title", "topic")
+SYLLABUS_TEMPLATE = ",".join(SYLLABUS_COLUMNS) + "\nmath,1,Pairs of Equations,Equations with two unknowns\nmath,1,Pairs of Equations,Solving a pair of equations\n"
+
+
+@router.get("/syllabus-template", response_class=PlainTextResponse)
+def syllabus_template(user: User = Depends(admin_only)):
+    return SYLLABUS_TEMPLATE
+
+
+class SyllabusIn(BaseModel):
+    csv: str = Field(max_length=500_000)
+    dry_run: bool = True
+
+
+@router.post("/syllabus")
+def import_syllabus(body: SyllabusIn, db: DbSession = Depends(get_db), user: User = Depends(admin_only)):
+    """Add chapters and topics from a sheet, one row per topic. Safe to run again.
+
+    A chapter is matched by subject and chapter number. Topics already in a chapter are
+    skipped, so the same sheet, with new rows added, can be uploaded as teachers fill it in.
+    An empty topic gives the chapter one topic with the chapter's name, to split up later.
+    Checked first; all rows or none.
+    """
+    reader = csv.DictReader(io.StringIO(body.csv.lstrip("﻿")))
+    headers = [h.strip().lower() for h in (reader.fieldnames or [])]
+    missing = [c for c in SYLLABUS_COLUMNS[:3] if c not in headers]
+    if missing:
+        raise HTTPException(400, f"The sheet needs these columns: {', '.join(missing)}")
+
+    subjects = {s.code: s for s in db.scalars(select(Subject)).all()}
+    by_name = {s.name.lower(): s for s in subjects.values()}
+    errors, rows = [], []
+    titles: dict[tuple[str, int], str] = {}
+    for n, raw in enumerate(reader, start=2):
+        r = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
+        if not any(r.values()):
+            continue
+        problems = []
+        subject = subjects.get(r.get("subject", "").lower()) or by_name.get(r.get("subject", "").lower())
+        if not subject:
+            problems.append(f"unknown subject '{r.get('subject')}' (use one of: {', '.join(sorted(subjects))})")
+        number = r.get("chapter_number", "")
+        if not number.isdigit() or not 1 <= int(number) <= 40:
+            problems.append(f"chapter_number should be a number from 1 to 40, not '{number}'")
+        if not r.get("chapter_title"):
+            problems.append("chapter title is empty")
+        if len(r.get("chapter_title", "")) > 200 or len(r.get("topic", "")) > 200:
+            problems.append("titles can be at most 200 characters")
+        if subject and number.isdigit() and r.get("chapter_title"):
+            key = (subject.code, int(number))
+            if titles.setdefault(key, r["chapter_title"]) != r["chapter_title"]:
+                problems.append(f"chapter {number} has two different titles: '{titles[key]}' and '{r['chapter_title']}'")
+        if problems:
+            errors.append({"row": n, "problems": problems})
+        else:
+            rows.append({"subject": subject, "number": int(number), "title": r["chapter_title"], "topic": r.get("topic", ""), "row": n})
+
+    existing = {(c.subject_id, c.number): c for c in db.scalars(select(Chapter)).all()}
+    for r in rows:
+        have = existing.get((r["subject"].id, r["number"]))
+        if have and have.title != r["title"]:
+            problem = f"{r['subject'].name} chapter {r['number']} already exists as '{have.title}'"
+            if not any(problem in e["problems"] for e in errors):
+                errors.append({"row": r["row"], "problems": [problem]})
+    new_chapters = {(r["subject"].id, r["number"]) for r in rows} - set(existing)
+    if errors or body.dry_run:
+        return {
+            "ok": not errors,
+            "errors": errors,
+            "dry_run": True,
+            "chapters": len({(r["subject"].id, r["number"]) for r in rows}),
+            "new_chapters": len(new_chapters),
+            "topics": len(rows),
+        }
+
+    added_chapters = added_topics = 0
+    for r in rows:
+        key = (r["subject"].id, r["number"])
+        chapter = existing.get(key)
+        if chapter is None:
+            chapter = existing[key] = Chapter(subject_id=r["subject"].id, number=r["number"], title=r["title"])
+            db.add(chapter)
+            db.flush()
+            added_chapters += 1
+        topic = r["topic"] or r["title"]
+        have = db.scalars(select(Concept).where(Concept.chapter_id == chapter.id)).all()
+        if any(c.title.lower() == topic.lower() for c in have):
+            continue
+        order = max((c.order for c in have), default=-1) + 1
+        db.add(Concept(chapter_id=chapter.id, code=f"{r['subject'].code}9.c{chapter.id}.{order}", title=topic, order=order, notes=""))
+        db.flush()
+        added_topics += 1
+    db.commit()
+    audit(db, user, f"import_syllabus:{added_chapters}:{added_topics}")
+    return {"ok": True, "errors": [], "dry_run": False, "added_chapters": added_chapters, "added_topics": added_topics}

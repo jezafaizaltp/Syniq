@@ -18,11 +18,25 @@ type Account = {
 };
 type Person = { id: number; name: string; login: string; first_sign_in_pending: boolean };
 type Student = Person & { consent: Record<string, boolean>; guardians: Person[] };
+type SyllabusCheck = {
+  ok: boolean;
+  errors: { row: number; problems: string[] }[];
+  chapters?: number;
+  new_chapters?: number;
+  topics?: number;
+  added_chapters?: number;
+  added_topics?: number;
+};
 type People = { classes: { id: number; name: string; teacher: string | null; students: Student[] }[]; teachers: Person[] };
 
 const TEMPLATE =
   "student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school\n" +
   "Anu Krishna,9 A,Lakshmi Krishna,lakshmi@example.com,,yes,yes,yes\n";
+
+const SYLLABUS_TEMPLATE =
+  "subject,chapter_number,chapter_title,topic\n" +
+  "math,1,Pairs of Equations,Equations with two unknowns\n" +
+  "math,1,Pairs of Equations,Solving a pair of equations\n";
 
 const SCOPE_WORDS: Record<string, string> = {
   core_learning: "Learning",
@@ -41,6 +55,9 @@ export default function Admin() {
   const [newPasswords, setNewPasswords] = useState<Record<number, string>>({});
   const [teacher, setTeacher] = useState({ name: "", email: "", classes: "" });
   const [teacherResult, setTeacherResult] = useState("");
+  const [syllabus, setSyllabus] = useState("");
+  const [syllabusCheck, setSyllabusCheck] = useState<SyllabusCheck | null>(null);
+  const [syllabusError, setSyllabusError] = useState("");
 
   useEffect(() => {
     if (!loading && me?.role !== "admin") router.replace("/");
@@ -78,6 +95,29 @@ export default function Admin() {
       load();
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Could not create the accounts");
+    }
+  }
+
+  async function readSyllabus(file: File | undefined) {
+    setSyllabusCheck(null);
+    setSyllabusError("");
+    if (!file) return;
+    const text = await file.text();
+    setSyllabus(text);
+    try {
+      setSyllabusCheck(await post<SyllabusCheck>("/admin/syllabus", { csv: text, dry_run: true }));
+    } catch (e) {
+      setSyllabusError(e instanceof ApiError ? e.message : "Could not read the sheet");
+    }
+  }
+
+  async function addSyllabus() {
+    try {
+      const r = await post<SyllabusCheck>("/admin/syllabus", { csv: syllabus, dry_run: false });
+      setSyllabusCheck(r);
+      setSyllabus("");
+    } catch (e) {
+      setSyllabusError(e instanceof ApiError ? e.message : "Could not add the chapters");
     }
   }
 
@@ -225,6 +265,54 @@ export default function Admin() {
             </p>
             <button onClick={createAccounts}>Create accounts</button>
           </div>
+        )}
+      </section>
+
+      <section className="card">
+        <h2>Class 9 chapters and topics</h2>
+        <p className="muted">
+          One row per topic, copied from the SCERT textbooks. Subjects: mal, eng, hin, math, phy, chem, bio, ss, it. Leave
+          the topic empty to add a chapter now and split it into topics later. Upload the same sheet again as it grows:
+          chapters and topics already added are skipped. Students only see a chapter once a teacher has approved content
+          for it.
+        </p>
+        <p>
+          <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(SYLLABUS_TEMPLATE)}`} download="syniq-syllabus.csv">
+            Download the template
+          </a>
+        </p>
+        <label htmlFor="syllabus">Choose the CSV file</label>
+        <input id="syllabus" type="file" accept=".csv,text/csv" onChange={(e) => readSyllabus(e.target.files?.[0])} />
+        {syllabusError && (
+          <p className="feedback warn" role="alert">
+            {syllabusError}
+          </p>
+        )}
+        {syllabusCheck && !syllabusCheck.ok && (
+          <div className="feedback warn" role="alert">
+            <strong>Please fix these rows and choose the file again. Nothing has been added.</strong>
+            <ul>
+              {syllabusCheck.errors.map((e) => (
+                <li key={e.row}>
+                  Row {e.row}: {e.problems.join("; ")}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {syllabusCheck?.ok && syllabusCheck.added_topics === undefined && (
+          <div className="feedback good" role="status">
+            <p>
+              Ready: {syllabusCheck.chapters} chapters ({syllabusCheck.new_chapters} new) and {syllabusCheck.topics} topic rows.
+            </p>
+            <button onClick={addSyllabus}>Add chapters</button>
+          </div>
+        )}
+        {syllabusCheck?.ok && syllabusCheck.added_topics !== undefined && (
+          <p className="feedback good" role="status">
+            Added {syllabusCheck.added_chapters} chapters and {syllabusCheck.added_topics} topics. Teachers can now add notes and
+            content on the Class page.
+          </p>
         )}
       </section>
 
