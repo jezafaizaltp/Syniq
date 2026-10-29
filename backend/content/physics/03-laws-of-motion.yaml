@@ -1,0 +1,238 @@
+# Class 9 Physics, chapter 3. Format: content/README.md.
+# Also uses tips from earlier chapters: forgot_initial_velocity, unit_kmh.
+subject: phy
+chapter: 3
+title: Laws of Motion
+
+tips:
+  force_needed_to_move: "A moving body does not need a force to keep moving. It needs a force only to change its speed or direction."
+  mass_divided: "F = ma: multiply mass by acceleration. To find acceleration, divide force by mass."
+  momentum_added: "Momentum = mass × velocity. Multiply, don't add."
+  grams_not_kg: "Change grams to kilograms first: divide by 1000."
+  action_reaction_same_body: "Action and reaction act on different bodies, so they don't cancel out."
+  reaction_smaller: "Action and reaction are always equal in size, even when one body is much heavier."
+  recoil_direction: "The total momentum stays zero, so the gun or boat moves backwards, opposite to the bullet or person."
+  heavier_more_inertia: "Inertia depends on mass only: the more massive body has more inertia."
+
+concepts:
+  - code: phy9.laws.inertia
+    title: Inertia and the first law
+    notes: |
+      Newton's first law: a body stays at rest, or moving with uniform velocity in a straight line,
+      unless an unbalanced external force acts on it. Inertia is this tendency to resist a change in
+      state of motion; its measure is mass. Balanced forces cause no change in motion. Friction is
+      why moving things on Earth usually stop.
+    explanations:
+      text: "A ball rolling on a smooth floor keeps going until friction slows it. Without friction it would roll forever. Objects keep doing what they are doing (staying still or moving steadily) unless a force makes them change. This 'laziness' is called inertia, and heavier objects have more of it."
+      visual: "Picture a coin on a card on top of a glass. Flick the card away: the coin, at rest, wants to stay at rest, so it drops straight into the glass."
+      step_by_step: "Why do passengers lurch forward when a bus brakes? Step 1: Before braking, the passengers move with the bus. Step 2: The brakes stop the bus, but no force acts directly on the upper body. Step 3: By inertia the body keeps moving forward."
+      real_world: "Seat belts stop you continuing forward when a car stops suddenly. Shaking a tree makes fruit fall: the branch moves, the fruit stays where it was and breaks off."
+    items:
+      - prompt: "When a moving bus suddenly brakes, the passengers lean forward. This is due to:"
+        options: ["Inertia of motion", "Inertia of rest", "Gravity", "Friction of the seats"]
+        answer: "Inertia of motion"
+        difficulty: 1
+        hints: ["The passengers were moving with the bus."]
+        solution: "Their bodies tend to keep moving forward when the bus stops: inertia of motion."
+        mistakes: {"Inertia of rest": force_needed_to_move}
+      - prompt: "Which has more inertia?"
+        options: ["A loaded truck", "A bicycle", "A football", "They all have the same"]
+        answer: "A loaded truck"
+        difficulty: 1
+        hints: ["Inertia depends on mass."]
+        solution: "The truck has the most mass, so it has the most inertia."
+        mistakes: {"They all have the same": heavier_more_inertia}
+      - prompt: "A ball rolls on a perfectly smooth, level floor with no air and no friction. What happens to it?"
+        options: ["It keeps moving at the same speed in a straight line", "It slows down and stops", "It speeds up", "It moves in a circle"]
+        answer: "It keeps moving at the same speed in a straight line"
+        difficulty: 2
+        hints: ["Is there any unbalanced force on it?"]
+        solution: "With no unbalanced force, by the first law its velocity does not change."
+        mistakes: {"It slows down and stops": force_needed_to_move}
+      - prompt: "A card on a glass has a coin on it. The card is flicked away quickly. Why does the coin fall into the glass?"
+        options: ["Because of the coin's inertia of rest", "Because the card pushes it down", "Because of the coin's inertia of motion", "Because air pushes it"]
+        answer: "Because of the coin's inertia of rest"
+        difficulty: 2
+        hints: ["Was the coin moving before?"]
+        solution: "The coin was at rest and tends to stay at rest while the card moves away, so gravity pulls it into the glass."
+      - prompt: "Two forces act on a box: 20 N to the right and 20 N to the left. What is the net force on it, in N?"
+        answer: "0"
+        check: "20 - 20"
+        difficulty: 1
+        hints: ["Forces in opposite directions subtract."]
+        solution: "20 − 20 = 0 N: balanced forces, so no change in motion."
+        mistakes: {"40": action_reaction_same_body}
+      - prompt: "A spacecraft far from any planet switches off its engines while moving at 5 km/s. What happens to its speed?"
+        options: ["It stays 5 km/s", "It falls slowly to 0", "It falls at once to 0", "It keeps increasing"]
+        answer: "It stays 5 km/s"
+        difficulty: 3
+        hints: ["Is anything there to slow it down?"]
+        solution: "In empty space there is no friction or air, so no unbalanced force: it keeps moving at 5 km/s."
+        mistakes: {"It falls slowly to 0": force_needed_to_move, "It falls at once to 0": force_needed_to_move}
+
+  - code: phy9.laws.momentum
+    title: Momentum and the second law
+    after: [phy9.laws.inertia]
+    notes: |
+      Momentum p = mv (kg m/s), a vector in the direction of velocity. Newton's second law: the rate
+      of change of momentum equals the applied force, which for fixed mass gives F = ma. 1 newton is
+      the force that gives 1 kg an acceleration of 1 m/s². Force × time = change in momentum
+      (impulse), which is why a longer stopping time means a smaller force.
+    explanations:
+      text: "Momentum is how hard something is to stop: mass times velocity. A 1000 kg car at 20 m/s has 20,000 kg m/s; a 0.15 kg cricket ball at 30 m/s has just 4.5 kg m/s. Force changes momentum: F = ma. Push 2 kg with 10 N and it accelerates at 5 m/s²."
+      visual: "Picture pushing an empty shopping trolley and a full one with the same push. The empty one speeds up quickly; the full one slowly. Same force, more mass, less acceleration: a = F ÷ m."
+      step_by_step: "A 1200 kg car goes from 10 m/s to 20 m/s in 5 s. Step 1: a = (20 − 10) ÷ 5 = 2 m/s². Step 2: F = ma = 1200 × 2 = 2400 N."
+      real_world: "A cricketer pulls the hands back while catching a fast ball. Stopping it over a longer time makes the force on the hands smaller."
+    items:
+      - prompt: "What is the momentum of a 2 kg ball moving at 5 m/s, in kg m/s?"
+        answer: "10"
+        check: "2*5"
+        difficulty: 1
+        hints: ["p = mv."]
+        solution: "p = 2 × 5 = 10 kg m/s"
+        mistakes: {"7": momentum_added}
+      - prompt: "A force of 10 N acts on a 2 kg mass. What is its acceleration, in m/s²?"
+        answer: "5"
+        check: "10/2"
+        difficulty: 1
+        hints: ["a = F ÷ m."]
+        solution: "a = 10 ÷ 2 = 5 m/s²"
+        mistakes: {"20": mass_divided}
+      - prompt: "What force, in N, gives a 50 kg box an acceleration of 3 m/s²?"
+        answer: "150"
+        check: "50*3"
+        difficulty: 1
+        hints: ["F = ma."]
+        solution: "F = 50 × 3 = 150 N"
+        mistakes: {"50/3": mass_divided}
+      - prompt: "A cricket ball of mass 150 g moves at 20 m/s. What is its momentum, in kg m/s?"
+        answer: "3"
+        check: "Rational(150, 1000)*20"
+        difficulty: 2
+        hints: ["150 g = 0.15 kg."]
+        solution: "p = 0.15 × 20 = 3 kg m/s"
+        mistakes: {"3000": grams_not_kg}
+      - prompt: "A 1200 kg car speeds up from 10 m/s to 20 m/s in 5 s. What force acts on it, in N?"
+        answer: "2400"
+        check: "1200*(20 - 10)/5"
+        difficulty: 2
+        hints: ["Find the acceleration first."]
+        solution: "Step 1: a = 10 ÷ 5 = 2 m/s². Step 2: F = 1200 × 2 = 2400 N."
+        mistakes: {"4800": forgot_initial_velocity}
+      - prompt: "Why does a cricketer pull the hands back while catching a fast ball?"
+        options: ["To increase the stopping time and so reduce the force", "To increase the force on the ball", "To reduce the ball's mass", "To increase the ball's momentum"]
+        answer: "To increase the stopping time and so reduce the force"
+        difficulty: 2
+        hints: ["Force = change in momentum ÷ time."]
+        solution: "The ball's momentum must fall to zero either way. Taking longer makes the force (change in momentum ÷ time) smaller."
+      - prompt: "A 0.5 kg ball moving at 10 m/s is stopped in 0.1 s. What average force stops it, in N?"
+        answer: "50"
+        check: "Rational(1, 2)*10/Rational(1, 10)"
+        difficulty: 3
+        hints: ["Change in momentum = 0.5 × 10 = 5 kg m/s.", "Force = change in momentum ÷ time."]
+        solution: "Step 1: Δp = 5 kg m/s. Step 2: F = 5 ÷ 0.1 = 50 N."
+        mistakes: {"1/2": mass_divided}
+
+  - code: phy9.laws.third_law
+    title: Action and reaction
+    after: [phy9.laws.inertia]
+    notes: |
+      Newton's third law: to every action there is an equal and opposite reaction. The two forces act
+      on different bodies, at the same time, and are of the same kind. Because they act on different
+      bodies they never cancel each other. Examples: walking, swimming, rockets, a gun's recoil.
+    explanations:
+      text: "When you push a wall, the wall pushes back on you just as hard. When you walk, your foot pushes the ground backwards and the ground pushes you forwards. Forces always come in pairs, equal in size and opposite in direction, acting on two different objects."
+      visual: "Draw two skaters facing each other. One pushes the other: draw an arrow on each, equal length, pointing away from each other. Both roll apart."
+      step_by_step: "A rocket: Step 1: The engine pushes hot gas down and out (action on the gas). Step 2: The gas pushes the rocket up (reaction on the rocket). Step 3: These act on different bodies, so the rocket rises."
+      real_world: "A swimmer pushes water backwards with the arms; the water pushes the swimmer forwards. A boat moves away when you jump from it to the shore."
+    items:
+      - prompt: "When you walk, what pushes you forward?"
+        options: ["The ground, pushing back on your foot", "Your own muscles alone", "The air behind you", "Gravity"]
+        answer: "The ground, pushing back on your foot"
+        difficulty: 1
+        hints: ["Your foot pushes the ground backwards."]
+        solution: "Your foot pushes the ground backwards (action); the ground pushes you forwards (reaction)."
+      - prompt: "A book rests on a table and pushes down on it with 5 N. With what force, in N, does the table push up on the book?"
+        answer: "5"
+        check: "5"
+        difficulty: 1
+        hints: ["Action and reaction are equal."]
+        solution: "The table pushes up with an equal 5 N."
+        mistakes: {"0": reaction_smaller}
+      - prompt: "A truck and a small car collide. Which statement about the forces is true?"
+        options: ["Each pushes the other with the same force", "The truck pushes harder", "The car pushes harder", "Only the truck pushes"]
+        answer: "Each pushes the other with the same force"
+        difficulty: 2
+        hints: ["Third law: equal and opposite."]
+        solution: "The forces are equal and opposite. The car is damaged more because its mass is smaller, so the same force gives it a bigger acceleration."
+        mistakes: {"The truck pushes harder": reaction_smaller}
+      - prompt: "Action and reaction are equal and opposite. Why don't they cancel each other?"
+        options: ["They act on different bodies", "They act at different times", "One is always bigger", "They are different kinds of force"]
+        answer: "They act on different bodies"
+        difficulty: 2
+        hints: ["Forces cancel only when they act on the same body."]
+        solution: "Action acts on one body and reaction on the other, so each body feels only one of them."
+        mistakes: {"One is always bigger": reaction_smaller}
+      - prompt: "How does a rocket move upward in space where there is no air to push against?"
+        options: ["It pushes gas out backwards, and the gas pushes the rocket forwards", "Air pressure lifts it", "Gravity pushes it up", "It needs no force"]
+        answer: "It pushes gas out backwards, and the gas pushes the rocket forwards"
+        difficulty: 3
+        hints: ["What does the engine push on?"]
+        solution: "The rocket pushes on its own exhaust gas. By the third law the gas pushes back on the rocket."
+        mistakes: {"It needs no force": force_needed_to_move}
+
+  - code: phy9.laws.conservation
+    title: Conservation of momentum
+    after: [phy9.laws.momentum, phy9.laws.third_law]
+    notes: |
+      When no external force acts on a system, its total momentum stays constant:
+      m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂. Total momentum before = total momentum after. A gun at rest
+      has zero momentum, so after firing the bullet's forward momentum equals the gun's backward
+      momentum (recoil): m_b v_b = m_g v_g.
+    explanations:
+      text: "Before a gun fires, gun and bullet are at rest: total momentum 0. After, the bullet flies forward with momentum mv. For the total to stay 0, the gun must move back with the same momentum. It is heavy, so it moves back slowly: that is the recoil."
+      visual: "Two trolleys held together by a squeezed spring. Release them: they fly apart. Measure: the heavier trolley moves slower, and mass × speed is the same for both."
+      step_by_step: "A 4 kg gun fires a 0.02 kg bullet at 400 m/s. Step 1: Bullet momentum = 0.02 × 400 = 8 kg m/s. Step 2: Gun momentum = 8 kg m/s backwards. Step 3: Recoil speed = 8 ÷ 4 = 2 m/s."
+      real_world: "When you jump out of a small boat onto the shore, the boat moves backwards away from the shore."
+    items:
+      - prompt: "A 4 kg gun fires a 20 g bullet at 400 m/s. What is the recoil speed of the gun, in m/s?"
+        answer: "2"
+        check: "Rational(20, 1000)*400/4"
+        difficulty: 1
+        hints: ["Bullet momentum = gun momentum.", "20 g = 0.02 kg."]
+        solution: "Step 1: 0.02 × 400 = 8 kg m/s. Step 2: 8 ÷ 4 = 2 m/s backwards."
+        mistakes: {"2000": grams_not_kg}
+      - prompt: "A person jumps forward out of a boat onto the shore. What happens to the boat?"
+        options: ["It moves backwards, away from the shore", "It moves forwards with the person", "It stays still", "It sinks a little and stays still"]
+        answer: "It moves backwards, away from the shore"
+        difficulty: 1
+        hints: ["Total momentum was zero before the jump."]
+        solution: "The person gains forward momentum, so the boat gains equal backward momentum."
+        mistakes: {"It moves forwards with the person": recoil_direction}
+      - prompt: "A 2 kg trolley at 3 m/s hits a 1 kg trolley at rest and they stick together. What is their common speed, in m/s?"
+        answer: "2"
+        check: "(2*3 + 1*0)/(2 + 1)"
+        difficulty: 2
+        hints: ["Momentum before = 6 kg m/s.", "Total mass after is 3 kg."]
+        solution: "Step 1: Before: 2 × 3 = 6 kg m/s. Step 2: After: 3 × v = 6. Step 3: v = 2 m/s."
+        mistakes: {"3": momentum_added}
+      - prompt: "Two trolleys at rest are pushed apart by a spring. The 1 kg trolley moves at 6 m/s. How fast does the 3 kg trolley move, in m/s?"
+        answer: "2"
+        check: "1*6/3"
+        difficulty: 2
+        hints: ["Their momenta are equal and opposite."]
+        solution: "3 × v = 1 × 6, so v = 2 m/s in the opposite direction."
+        mistakes: {"18": mass_divided}
+      - prompt: "A 50 kg skater at rest throws a 5 kg ball forward at 10 m/s. With what speed does the skater move backwards, in m/s?"
+        answer: "1"
+        check: "5*10/50"
+        difficulty: 3
+        hints: ["Ball momentum = 50 kg m/s."]
+        solution: "Step 1: 5 × 10 = 50 kg m/s. Step 2: 50 ÷ 50 = 1 m/s backwards."
+        mistakes: {"100": mass_divided}
+      - prompt: "A 1 kg ball at 4 m/s hits a 1 kg ball at rest. The first ball stops. How fast does the second ball move, in m/s?"
+        answer: "4"
+        check: "(1*4 + 1*0 - 1*0)/1"
+        difficulty: 3
+        hints: ["Total momentum before = 4 kg m/s."]
+        solution: "Momentum before = 4 kg m/s. After, the first ball has 0, so the second has 4 kg m/s: v = 4 m/s."

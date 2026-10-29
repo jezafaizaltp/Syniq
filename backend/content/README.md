@@ -19,13 +19,17 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Maths 13: Polynomial Pictures | points and coordinates, lines from equations, slope | 18 |
 | Maths 14: Proportion | ratios, direct proportion, inverse proportion, sharing in a ratio | 24 |
 | Maths 15: Statistics | mean, median, mode, averages from a frequency table | 24 |
+| Physics 1: Refraction of Light | bending of light, refractive index, apparent depth, total internal reflection | 24 |
+| Physics 2: Equations of Motion | distance and displacement, speed and velocity, acceleration, the three equations, motion graphs | 24 |
+| Physics 3: Laws of Motion | inertia, momentum and F = ma, action and reaction, conservation of momentum | 24 |
+| Physics 4: Gravitation | the universal law, mass, weight and g, free fall | 19 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 317 of the 379 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 62 were checked by hand: choice questions that no single calculation can check, such as "Add them" or "Which is the smallest?", and a few statistics questions whose answer is read off a list, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 370 of the 470 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 100 were checked by hand: choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is not checked.** The chapter names come from the draft syllabus list (`../../content/class9-syllabus-draft.csv`), and the topics from study-guide websites that list each chapter's exercises. A teacher with the 2024 SCERT book should compare topic order and wording when one is available.
 
 ## Format
