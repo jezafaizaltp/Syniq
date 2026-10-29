@@ -1,0 +1,224 @@
+# Class 9 Information and Communications Technology, chapter 4. Format: content/README.md.
+# Written from the 2024 SCERT ICT Part 1 text supplied by the school. Software: LibreOffice Calc.
+subject: it
+chapter: 4
+title: Data Analysis Made Easy
+
+tips:
+  calc_formula: "A Calc formula starts with =. Population density = population ÷ area, e.g. =C2/F2. Drag the fill handle (small square at the cell corner) to copy the formula down; the cell addresses change row by row."
+  calc_limits: "A file with more than one sheet is a workbook. A Calc workbook can hold up to 10,000 sheets; each sheet has up to 1,048,576 rows and 1,024 columns."
+  lookup_fn: "LOOKUP classifies values using a lookup table. Put the lower limit of each group in order (0, 100, 200, 400, 800) beside its name, give the range a name with Data → Define Range, then LOOKUP(value; Criteria). A value goes into the group of the largest limit that is not more than it."
+  countif_fn: "COUNTIF(range; criterion) counts how many cells in a range meet a condition, e.g. how many states are 'Very high population density'."
+  autofilter: "AutoFilter (Data → AutoFilter) shows only the rows that meet a condition; it hides the rest without deleting them. Standard Filter (Data → More Filters) lets you set criteria."
+  protect_sheet: "Tools → Protect Sheet with a password stops editing but still lets people open and view the file."
+
+concepts:
+  - code: it9.data.density_formula
+    title: Data, spreadsheets and the density formula
+    notes: |
+      Data is raw, unprocessed information: numbers, words, images or videos. Organised and analysed, it
+      gives meaningful information for decisions. The 2011 Census data is in Census_India_2011.ots. A
+      file with more than one sheet is a workbook; Calc allows up to 10,000 sheets per workbook, and each
+      sheet up to 1,048,576 rows and 1,024 columns. Population density is the average number of people per
+      square kilometre: total population ÷ land area. In Calc, click G2 and type =C2/F2 (C2 population of
+      Uttar Pradesh, F2 its area), Enter; you can click cells instead of typing addresses. Use the fill
+      handle to copy the formula to other rows. Manage decimals with the ROUND function or Delete Decimal
+      Place on the toolbar. Online spreadsheets (Google Sheets, Microsoft Excel online, Zoho Sheet) let
+      several people work at once.
+    explanations:
+      text: "Data becomes useful once you organise it and calculate with it. In Calc, a formula like =C2/F2 divides population by area to get density, and the fill handle repeats it for every state."
+      visual: "Picture a table: column C people, column F area, column G empty. Type =C2/F2 in G2, then pull the little square down. Every row fills in by itself."
+      step_by_step: "To find density: Step 1: click G2. Step 2: type = then click C2, type /, click F2. Step 3: Enter. Step 4: drag the fill handle down to the last state. Step 5: use Delete Decimal Place to show two decimals."
+      real_world: "Kerala had about 3.34 crore people on about 38,863 sq km in 2011, a density of about 860 per sq km, one of India's highest."
+    items:
+      - prompt: "Population density is calculated as"
+        options: ["Total population ÷ land area", "Land area ÷ total population", "Total population × land area", "Total population − land area"]
+        answer: "Total population ÷ land area"
+        difficulty: 1
+        hints: ["People per square kilometre."]
+        solution: "Population ÷ area."
+        mistakes: {"Land area ÷ total population": calc_formula}
+      - prompt: "Every formula in LibreOffice Calc starts with"
+        options: ["=", "+", "#", "$"]
+        answer: "="
+        difficulty: 1
+        hints: ["Like =C2/F2."]
+        solution: "The equals sign."
+        mistakes: {"#": calc_formula}
+      - prompt: "A district has 50,000 people on 200 sq km. What is its population density?"
+        answer: "250"
+        check: "50000/200"
+        difficulty: 1
+        hints: ["Divide people by area."]
+        solution: "50,000 ÷ 200 = 250 per sq km."
+        mistakes: {"10000000": calc_formula}
+      - prompt: "A spreadsheet file with more than one sheet is called a"
+        options: ["Workbook", "Workspace", "Database", "Template"]
+        answer: "Workbook"
+        difficulty: 1
+        hints: ["Like a book of sheets."]
+        solution: "A workbook."
+        mistakes: {"Database": calc_limits}
+      - prompt: "How many columns can one Calc sheet have at most?"
+        answer: "1024"
+        check: "1024"
+        difficulty: 2
+        hints: ["It is 2 to the power 10."]
+        solution: "1,024 columns (and 1,048,576 rows)."
+        mistakes: {"1048576": calc_limits}
+      - prompt: "In G2 you typed =C2/F2 and dragged the fill handle to G3. What formula is in G3?"
+        options: ["=C3/F3", "=C2/F2", "=C3/F2", "=G2/F3"]
+        answer: "=C3/F3"
+        difficulty: 2
+        hints: ["Row numbers move down with the formula."]
+        solution: "The addresses change to row 3."
+        mistakes: {"=C2/F2": calc_formula}
+      - prompt: "Kerala's 2011 population was about 3,34,06,061 and its area about 38,863 sq km. What is its density, to the nearest whole number?"
+        answer: "860"
+        check: "round(33406061/38863)"
+        difficulty: 3
+        hints: ["Divide and round."]
+        solution: "33,406,061 ÷ 38,863 ≈ 859.6, so about 860 per sq km."
+        mistakes: {"38863": calc_formula}
+      - prompt: "Which toolbar option reduces the number of decimal places shown?"
+        options: ["Delete Decimal Place", "AutoFilter", "Protect Sheet", "Define Range"]
+        answer: "Delete Decimal Place"
+        difficulty: 2
+        hints: ["The ROUND function also works."]
+        solution: "Delete Decimal Place (or ROUND)."
+        mistakes: {"AutoFilter": calc_formula}
+
+  - code: it9.data.lookup_countif
+    title: Classifying with LOOKUP and counting with COUNTIF
+    after: [it9.data.density_formula]
+    notes: |
+      Categories (Table 4.1): below 100 very low; 100 to under 200 low; 200 to under 400 moderate; 400 to
+      under 800 high; 800 and above very high population density. LOOKUP is used when data must be put
+      into many categories. Make the lookup table in Sheet2 (lower limits 0, 100, 200, 400, 800 with
+      names), select it, Data → Define Range, name it Criteria. In J2 open the Function Wizard (fx) →
+      LOOKUP → Search Criterion G2, Search Vector Criteria, leave Result Vector empty, OK; drag the fill
+      handle. Head the column Classification. LOOKUP searches for a value in a row or column and returns
+      the matching value from another. Counting by hand in large data is error-prone; COUNTIF counts the
+      cells in a range that meet a condition: Function Wizard → COUNTIF → Range J2:J36, Criteria the cell
+      with the category name, OK, fill down.
+    explanations:
+      text: "LOOKUP sorts each state into a group by checking its density against a small table of limits. COUNTIF then counts how many states landed in each group."
+      visual: "Imagine five boxes labelled from very low to very high, each with a minimum number on it. LOOKUP drops each state into the last box whose minimum it reaches. COUNTIF counts the cards in each box."
+      step_by_step: "To classify 350: Step 1: list the limits 0, 100, 200, 400, 800. Step 2: find the biggest limit not more than 350: that is 200. Step 3: 200 belongs to 'Moderate'. So 350 is moderate."
+      real_world: "Schools use the same idea to turn marks into grades: 80 and above A, 60–79 B, 40–59 C, below 40 D."
+    items:
+      - prompt: "A state has a density of 350 per sq km. Which category is it in?"
+        options: ["Moderate population density", "Low population density", "High population density", "Very high population density"]
+        answer: "Moderate population density"
+        difficulty: 1
+        hints: ["200 to less than 400."]
+        solution: "Moderate."
+        mistakes: {"High population density": lookup_fn}
+      - prompt: "A state has a density of 860. Which category is it in?"
+        options: ["Very high population density", "High population density", "Moderate population density"]
+        answer: "Very high population density"
+        difficulty: 1
+        hints: ["800 and above."]
+        solution: "Very high."
+        mistakes: {"High population density": lookup_fn}
+      - prompt: "What does COUNTIF do?"
+        options: ["Counts the cells in a range that meet a condition", "Counts all empty cells", "Finds the largest value", "Counts cells with formulas"]
+        answer: "Counts the cells in a range that meet a condition"
+        difficulty: 1
+        hints: ["COUNT + IF."]
+        solution: "It counts cells meeting a condition."
+        mistakes: {"Finds the largest value": countif_fn}
+      - prompt: "What is the LOOKUP function used for?"
+        options: ["To find a value in a row or column and return the matching value from another", "To protect cells", "To count empty cells", "To sort data"]
+        answer: "To find a value in a row or column and return the matching value from another"
+        difficulty: 2
+        hints: ["It matched density to category."]
+        solution: "It looks up a value and returns the corresponding result."
+        mistakes: {"To protect cells": lookup_fn}
+      - prompt: "Which menu option gives a selected range a name like 'Criteria'?"
+        options: ["Data → Define Range", "Tools → Protect Sheet", "Data → AutoFilter", "Insert → Function"]
+        answer: "Data → Define Range"
+        difficulty: 2
+        hints: ["It is in the Data menu."]
+        solution: "Data → Define Range."
+        mistakes: {"Data → AutoFilter": lookup_fn}
+      - prompt: "A density is exactly 400. Which category is it in?"
+        options: ["High population density", "Moderate population density", "Very high population density"]
+        answer: "High population density"
+        difficulty: 2
+        hints: ["Moderate is 200 to less than 400."]
+        solution: "400 is the lower limit of 'High'."
+        mistakes: {"Moderate population density": lookup_fn}
+      - prompt: "Data for 35 states is in J2 to J36. How many cells is that?"
+        answer: "35"
+        check: "36 - 2 + 1"
+        difficulty: 2
+        hints: ["Count both ends."]
+        solution: "36 − 2 + 1 = 35."
+        mistakes: {"34": countif_fn}
+      - prompt: "Using the grade table below 40 D, 40–59 C, 60–79 B, 80 and above A, what grade is 59?"
+        options: ["C", "B", "D", "A"]
+        answer: "C"
+        difficulty: 2
+        hints: ["59 is less than 60."]
+        solution: "C."
+        mistakes: {"B": lookup_fn}
+
+  - code: it9.data.filter_protect
+    title: Filtering and protecting data
+    after: [it9.data.lookup_countif]
+    notes: |
+      AutoFilter separates specific data: click a heading cell (Classification), Data → AutoFilter; arrow
+      buttons appear in the heading cells; click the arrow, keep only the needed tick (Very High Density),
+      OK. Only those rows are displayed; others are hidden, not deleted. Data → More Filters → Standard
+      Filter filters by set criteria. Protect Sheet: Tools → Protect Sheet, enter and confirm a password,
+      OK, save. The file can still be opened and viewed but not edited. To edit, unprotect with the
+      password (Tools → Protect Sheet again). Specific cells can also be protected.
+    explanations:
+      text: "AutoFilter shows only the rows you want, like only the very high density states. Protect Sheet locks the sheet with a password so others can look but not change."
+      visual: "AutoFilter is like a sieve: you choose what passes through, and everything else is hidden below, still there."
+      step_by_step: "To show only very high density states: Step 1: click the Classification heading. Step 2: Data → AutoFilter. Step 3: click the arrow in that heading. Step 4: untick all except Very High Density. Step 5: OK."
+      real_world: "A class teacher can lock the marks sheet with a password so students can see but not change their marks."
+    items:
+      - prompt: "What does AutoFilter do?"
+        options: ["Displays only rows that meet chosen criteria", "Deletes rows that do not meet criteria", "Sorts data alphabetically", "Creates a chart"]
+        answer: "Displays only rows that meet chosen criteria"
+        difficulty: 1
+        hints: ["The other rows are hidden, not deleted."]
+        solution: "It shows only matching rows."
+        mistakes: {"Deletes rows that do not meet criteria": autofilter}
+      - prompt: "Which menu option protects a sheet with a password?"
+        options: ["Tools → Protect Sheet", "Data → AutoFilter", "File → Export", "Data → Define Range"]
+        answer: "Tools → Protect Sheet"
+        difficulty: 1
+        hints: ["It is in the Tools menu."]
+        solution: "Tools → Protect Sheet."
+        mistakes: {"Data → AutoFilter": protect_sheet}
+      - prompt: "After Protect Sheet, what can others still do with the file?"
+        options: ["Open and view it", "Edit any cell", "Delete the sheet", "Change the password without knowing it"]
+        answer: "Open and view it"
+        difficulty: 2
+        hints: ["It stops editing, not viewing."]
+        solution: "They can view but not edit."
+        mistakes: {"Edit any cell": protect_sheet}
+      - prompt: "Where is the Standard Filter found?"
+        options: ["Data → More Filters → Standard Filter", "Tools → Protect Sheet", "Format → Cells", "Insert → Chart"]
+        answer: "Data → More Filters → Standard Filter"
+        difficulty: 2
+        hints: ["It is with AutoFilter in the Data menu."]
+        solution: "Data → More Filters → Standard Filter."
+        mistakes: {"Tools → Protect Sheet": autofilter}
+      - prompt: "You filtered to show only Very High Density states. What happened to the other rows?"
+        options: ["They are hidden and come back when the filter is removed", "They are deleted forever", "They moved to Sheet2", "They turned into zeros"]
+        answer: "They are hidden and come back when the filter is removed"
+        difficulty: 2
+        hints: ["Filtering does not change the data."]
+        solution: "They are only hidden."
+        mistakes: {"They are deleted forever": autofilter}
+      - prompt: "You need to find how many states have literacy above 90% and show only those states. Which pair of tools fits best?"
+        options: ["COUNTIF to count and AutoFilter to show them", "Protect Sheet and Define Range", "Delete Decimal Place and ROUND", "Fill handle and Export"]
+        answer: "COUNTIF to count and AutoFilter to show them"
+        difficulty: 3
+        hints: ["One counts, one displays."]
+        solution: "COUNTIF counts; AutoFilter (or Standard Filter) shows the rows."
+        mistakes: {"Protect Sheet and Define Range": countif_fn}

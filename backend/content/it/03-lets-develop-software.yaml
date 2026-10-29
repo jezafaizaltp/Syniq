@@ -1,0 +1,217 @@
+# Class 9 Information and Communications Technology, chapter 3. Format: content/README.md.
+# Written from the 2024 SCERT ICT Part 1 text supplied by the school. Software: PictoBlox (blocks and Python).
+subject: it
+chapter: 3
+title: Let's Develop Software!
+
+tips:
+  block_coding: "Block programming builds programs by dragging and dropping code blocks, so you do not have to memorise instructions. Scratch, PictoBlox, Blockly and App Inventor use it. Real software is mostly written in text languages like Python, Java and C++."
+  app_steps: "Making an app has two main steps: 1) prepare the interface (layout design) with the sprites and backdrop, 2) give instructions (coding) so each part works."
+  clock_angles: "A full circle is 360°. Second and minute hands move 360 ÷ 60 = 6° per step. The hour hand moves 360 ÷ 12 = 30° per hour, and 30 ÷ 60 = 0.5° per minute. Hour hand direction = hour × 30 + minute × 0.5."
+  pivot_point: "The pivot point (rotation centre) is the small crosshair in the Costume Editor. A sprite turns around it, so put it at the end of the clock hand that sits at the dial centre. Use go to front/back layer to change which sprite is on top."
+  variables_input: "The ask and wait block (Sensing) takes typed input; the answer is stored in a variable (e.g. Hour, Minute). Variables hold numbers or text and can be changed. The current block (Sensing) gives the computer's time."
+  python_syntax: "Python is a text-based language created in 1991 under Guido van Rossum. Syntax is the grammar of code: in Python, indentation and symbols like quotes must be correct or the program will not run."
+
+concepts:
+  - code: it9.software.interface
+    title: Block coding and building the interface
+    notes: |
+      Devices can remind us of times accurately and without tiring, e.g. a water bell to remind students
+      to drink water. Applications can be made with programming languages (Java, Python, C++) or block
+      coding apps (Scratch, PictoBlox). Block programming: drag-and-drop code blocks in simple language;
+      no need to memorise instructions; good for beginners. Two main steps: 1) preparing the interface
+      (layout designing), 2) giving instructions (coding). Alarm clock interface in PictoBlox: delete the
+      default sprite, add clock.png (dial) in the middle of the stage, Hour_handle.png at size 50, then
+      Minute_handle.png, Second_handle.png and Alarm_button. In the Costume Editor, use Select to set the
+      rotation centre (pivot point, the small crosshair) so the hand rotates around the dial's centre. Use
+      go to front/back layer (Looks) to arrange overlapping sprites. Save once the interface is set.
+    explanations:
+      text: "Block coding lets you build apps by snapping blocks together. First you place the pictures (interface), then you tell them what to do (code)."
+      visual: "Picture a paper clock: first you pin the dial and three hands on a board (interface). Then you write rules for how each hand turns (coding)."
+      step_by_step: "To build the clock face: Step 1: delete the default sprite. Step 2: add clock.png and centre it. Step 3: add each hand. Step 4: in the Costume Editor, set each hand's pivot point at its base. Step 5: place the pivots on the dial's centre mark."
+      real_world: "School bells, phone alarms and microwave timers are all small programs that act at a set time."
+    items:
+      - prompt: "Block programming creates programs by"
+        options: ["Dragging and dropping code blocks", "Typing long instructions from memory", "Drawing pictures only", "Recording your voice"]
+        answer: "Dragging and dropping code blocks"
+        difficulty: 1
+        hints: ["Scratch and PictoBlox work this way."]
+        solution: "Dragging and dropping blocks."
+        mistakes: {"Typing long instructions from memory": block_coding}
+      - prompt: "What are the two main steps in preparing an application?"
+        options: ["Preparing the interface and giving instructions (coding)", "Printing and scanning", "Saving and deleting", "Drawing and colouring"]
+        answer: "Preparing the interface and giving instructions (coding)"
+        difficulty: 1
+        hints: ["Layout first, then code."]
+        solution: "Interface (layout design), then coding."
+        mistakes: {"Drawing and colouring": app_steps}
+      - prompt: "Which of these is a block coding application?"
+        options: ["PictoBlox", "Python", "Java", "C++"]
+        answer: "PictoBlox"
+        difficulty: 1
+        hints: ["The others are text-based languages."]
+        solution: "PictoBlox (also Scratch)."
+        mistakes: {"Python": block_coding}
+      - prompt: "The small crosshair in a sprite's Costume Editor that the sprite turns around is the"
+        options: ["Pivot point", "Backdrop", "Variable", "Operator"]
+        answer: "Pivot point"
+        difficulty: 2
+        hints: ["It is also called the rotation centre."]
+        solution: "The pivot point."
+        mistakes: {"Backdrop": pivot_point}
+      - prompt: "A pigeon sprite is hidden behind a tree sprite. How can you bring the pigeon forward?"
+        options: ["Use 'go to front layer' on the pigeon or 'go to back layer' on the tree", "Delete the tree", "Make the stage bigger", "Change the pigeon's colour"]
+        answer: "Use 'go to front layer' on the pigeon or 'go to back layer' on the tree"
+        difficulty: 2
+        hints: ["Both ways work; they are in Looks."]
+        solution: "Either block works."
+        mistakes: {"Delete the tree": pivot_point}
+      - prompt: "Why must a clock hand's pivot point be at its base?"
+        options: ["So it turns around the centre of the dial like a real hand", "So it changes colour", "So it moves faster", "So it is hidden"]
+        answer: "So it turns around the centre of the dial like a real hand"
+        difficulty: 2
+        hints: ["A sprite rotates around its pivot point."]
+        solution: "Otherwise it spins around its middle and looks wrong."
+        mistakes: {"So it moves faster": pivot_point}
+
+  - code: it9.software.clock_code
+    title: Coding the clock hands
+    after: [it9.software.interface]
+    notes: |
+      Turning a sprite's direction arrow rotates it. The dial is 360°; the second hand completes the
+      circle in 60 moves, so it turns 360 ÷ 60 = 6° each second. The minute hand also moves 6° a minute.
+      The current block in Sensing gives the computer's time (second, minute, hour). Operators (maths,
+      logic, text blocks) combine values: point in direction (current second × 6). The hour hand moves
+      360 ÷ 12 = 30° each hour and 30 ÷ 60 = 0.5° each minute: point in direction = current hour × 30 +
+      current minute × 0.5. Clicking the green flag runs the program.
+    explanations:
+      text: "Each hand is told which way to point using the computer's time. Seconds and minutes are multiplied by 6. The hour is multiplied by 30, and half a degree is added for every minute."
+      visual: "Picture the dial as a pizza cut into 60 thin slices of 6° each. The second hand jumps one slice every second. The hour hand jumps 5 slices (30°) every hour."
+      step_by_step: "For 3:20: Step 1: hour × 30 = 3 × 30 = 90. Step 2: minute × 0.5 = 20 × 0.5 = 10. Step 3: add: 90 + 10 = 100°."
+      real_world: "Watch a real wall clock at 6:30: the hour hand is halfway between 6 and 7, not on the 6. That half-way slide is the 0.5° per minute."
+    items:
+      - prompt: "How many degrees does the second hand turn each second?"
+        answer: "6"
+        check: "360/60"
+        difficulty: 1
+        hints: ["360° in 60 moves."]
+        solution: "360 ÷ 60 = 6°."
+        mistakes: {"60": clock_angles}
+      - prompt: "How many degrees does the hour hand turn in one hour?"
+        answer: "30"
+        check: "360/12"
+        difficulty: 1
+        hints: ["There are 12 hours on the dial."]
+        solution: "360 ÷ 12 = 30°."
+        mistakes: {"6": clock_angles}
+      - prompt: "How many degrees does the hour hand move in one minute?"
+        answer: "0.5"
+        check: "30/60"
+        difficulty: 2
+        hints: ["It moves 30° in 60 minutes."]
+        solution: "30 ÷ 60 = 0.5°."
+        mistakes: {"6": clock_angles}
+      - prompt: "At 15 seconds, what direction (in degrees) should the second hand point?"
+        answer: "90"
+        check: "15 * 6"
+        difficulty: 2
+        hints: ["Multiply seconds by 6."]
+        solution: "15 × 6 = 90°."
+        mistakes: {"15": clock_angles}
+      - prompt: "Using direction = hour × 30 + minute × 0.5, where should the hour hand point at 3:20?"
+        answer: "100"
+        check: "3 * 30 + 20 * 0.5"
+        difficulty: 2
+        hints: ["3 × 30, then add 20 × 0.5."]
+        solution: "90 + 10 = 100°."
+        mistakes: {"90": clock_angles}
+      - prompt: "Using the same formula, where should the hour hand point at 9:30?"
+        answer: "285"
+        check: "9 * 30 + 30 * 0.5"
+        difficulty: 3
+        hints: ["9 × 30 = 270."]
+        solution: "270 + 15 = 285°."
+        mistakes: {"270": clock_angles}
+      - prompt: "Which PictoBlox block gives the computer's current time?"
+        options: ["current (in Sensing)", "say (in Looks)", "play sound (in Sound)", "go to front layer (in Looks)"]
+        answer: "current (in Sensing)"
+        difficulty: 1
+        hints: ["It is a sensing block."]
+        solution: "The current block in Sensing."
+        mistakes: {"say (in Looks)": variables_input}
+      - prompt: "A sprite Earth should turn anticlockwise 5° every second. Which instruction fits?"
+        options: ["Turn left (anticlockwise) 5 degrees, wait 1 second, repeat forever", "Turn right 5 degrees once", "Move 5 steps", "Turn left 360 degrees once"]
+        answer: "Turn left (anticlockwise) 5 degrees, wait 1 second, repeat forever"
+        difficulty: 3
+        hints: ["It must keep happening every second."]
+        solution: "Inside a forever loop: turn anticlockwise 5°, then wait 1 second."
+        mistakes: {"Turn right 5 degrees once": clock_angles}
+
+  - code: it9.software.alarm_python
+    title: Input, variables, sound and Python
+    after: [it9.software.clock_code]
+    notes: |
+      The ask and wait block (Sensing) shows a field to type input; the reply (answer) is stored in a
+      variable such as Hour, and another, Minute. Variables store input as numbers or text and can be
+      changed by instructions. When the stored time equals the clock's time (use the = operator and
+      'and'), the alarm sound plays a set number of times. The Sounds tab adds sounds from the library,
+      recordings or uploaded files; play with the start sound block. Professional developers mostly use
+      text-based languages (Python, Java, C++). PictoBlox also has a Python coding window; adding sprites
+      generates some Python code. Python, created in 1991 under Guido van Rossum, is easy to learn and is
+      used from small games to AI. Syntax is the correct structure of code, like grammar; in Python,
+      indentation and symbols like quotes are part of the syntax.
+    explanations:
+      text: "The alarm asks you for a time, keeps it in variables, and keeps checking whether the clock has reached it. When it has, it plays a sound. Python is a typed language that does the same kind of work."
+      visual: "A variable is a labelled box. 'Hour' box holds 10, 'Minute' box holds 30. The program keeps peeking at the clock and at the boxes until they match."
+      step_by_step: "To set an alarm: Step 1: ask 'Hour?' and wait. Step 2: set Hour to answer. Step 3: ask 'Minute?' and wait, set Minute to answer. Step 4: if current hour = Hour and current minute = Minute, play the sound."
+      real_world: "When your phone asks 'What time should I wake you?', it saves your answer and checks the time until it matches: the same idea."
+    items:
+      - prompt: "Which block lets the user type in the alarm time?"
+        options: ["ask and wait", "go to front layer", "point in direction", "change size"]
+        answer: "ask and wait"
+        difficulty: 1
+        hints: ["It is in the Sensing section."]
+        solution: "ask and wait."
+        mistakes: {"point in direction": variables_input}
+      - prompt: "What is a variable used for in the alarm clock project?"
+        options: ["To store the alarm hour and minute", "To draw the dial", "To play the sound", "To rotate the hands"]
+        answer: "To store the alarm hour and minute"
+        difficulty: 1
+        hints: ["It is a labelled place to keep a value."]
+        solution: "Variables like Hour and Minute store the input."
+        mistakes: {"To draw the dial": variables_input}
+      - prompt: "Who led the creation of Python?"
+        options: ["Guido van Rossum", "Charles Babbage", "Tim Berners-Lee", "John McCarthy"]
+        answer: "Guido van Rossum"
+        difficulty: 2
+        hints: ["It was created in 1991."]
+        solution: "Guido van Rossum."
+        mistakes: {"Tim Berners-Lee": python_syntax}
+      - prompt: "In which year was Python created?"
+        answer: "1991"
+        check: "1991"
+        difficulty: 2
+        hints: ["Early 1990s."]
+        solution: "1991."
+        mistakes: {"1956": python_syntax}
+      - prompt: "In programming, syntax means"
+        options: ["The correct structure of code, like grammar in a language", "The speed of the computer", "The colour of the code", "The name of the file"]
+        answer: "The correct structure of code, like grammar in a language"
+        difficulty: 2
+        hints: ["In Python, indentation is part of it."]
+        solution: "Syntax is the grammar of code."
+        mistakes: {"The speed of the computer": python_syntax}
+      - prompt: "When should the alarm sound play?"
+        options: ["When the stored Hour and Minute equal the clock's current hour and minute", "Every second", "When the flag is clicked", "When the sprite is deleted"]
+        answer: "When the stored Hour and Minute equal the clock's current hour and minute"
+        difficulty: 2
+        hints: ["Compare the variables with current time."]
+        solution: "Both hour and minute must match."
+        mistakes: {"Every second": variables_input}
+      - prompt: "Which of these is a text-based programming language?"
+        options: ["Python", "Scratch", "PictoBlox blocks", "Blockly"]
+        answer: "Python"
+        difficulty: 1
+        hints: ["You type it, not drag it."]
+        solution: "Python (also Java, C++)."
+        mistakes: {"Scratch": block_coding}
