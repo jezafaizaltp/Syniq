@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ApiError, api, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
@@ -224,6 +225,9 @@ export default function Admin() {
   return (
     <div className="wrap wide">
       <h1>School setup</h1>
+      <p>
+        <Link href="/admin/results">Pilot results: before and after marks →</Link>
+      </p>
 
       <section className="card">
         <h2>Add students and parents from a spreadsheet</h2>

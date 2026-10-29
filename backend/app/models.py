@@ -237,3 +237,37 @@ class Decision(Base):
     reason: Mapped[str] = mapped_column(Text)
     evidence: Mapped[dict] = mapped_column(JSON, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+# --- Pilot evaluation -------------------------------------------------------------
+# School marks used only to measure whether SYNiq helped, in aggregate. Kept apart from
+# the learner model: nothing in the engine, teacher, parent or student views reads them.
+
+class Assessment(Base):
+    """A school test or term exam whose marks measure the pilot, e.g. "First term 2027, Maths"."""
+
+    __tablename__ = "assessments"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120))
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"), index=True)
+    max_marks: Mapped[float] = mapped_column(Float)
+    phase: Mapped[str] = mapped_column(String(10))  # before | after (SYNiq started)
+    taken_on: Mapped[str] = mapped_column(String(10))  # YYYY-MM-DD
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class AssessmentScore(Base):
+    """One student's marks: a pilot student by account, or a comparison student by an anonymous code."""
+
+    __tablename__ = "assessment_scores"
+    __table_args__ = (
+        UniqueConstraint("assessment_id", "student_id"),
+        UniqueConstraint("assessment_id", "comparison_code"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    assessment_id: Mapped[int] = mapped_column(ForeignKey("assessments.id"), index=True)
+    student_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    comparison_code: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    marks: Mapped[float] = mapped_column(Float)
