@@ -1,0 +1,236 @@
+# Class 9 Physics, chapter 2. Format: content/README.md.
+subject: phy
+chapter: 2
+title: Equations of Motion
+
+tips:
+  distance_not_displacement: "Displacement is the straight-line change in position, with direction. Distance is the whole path travelled."
+  speed_time_swapped: "Speed = distance ÷ time. Divide the distance by the time, not the other way round."
+  forgot_initial_velocity: "Start from the initial velocity u. Speed gained is added to what the body already had."
+  acceleration_not_change: "Acceleration is change in velocity ÷ time taken, not just the change in velocity."
+  forgot_half: "In s = ut + ½at², the at² term is halved."
+  forgot_square: "In s = ut + ½at² the time is squared, and in v² = u² + 2as the velocities are squared."
+  unit_kmh: "Convert km/h to m/s by multiplying by 5/18 (1000 m ÷ 3600 s)."
+  retardation_sign: "When a body slows down, its acceleration is negative."
+  graph_slope_area: "On a velocity–time graph, the slope gives acceleration and the area under the line gives displacement."
+
+concepts:
+  - code: phy9.motion.speed_velocity
+    title: Distance, displacement, speed and velocity
+    notes: |
+      Distance is the length of path travelled (scalar). Displacement is the shortest distance from
+      start to finish, with direction (vector). Speed = distance ÷ time; velocity = displacement ÷
+      time. Average speed = total distance ÷ total time. Unit m/s; 1 km/h = 5/18 m/s. Uniform motion
+      covers equal distances in equal times.
+    explanations:
+      text: "Walk 3 m east and then 4 m north. You have walked 7 m (distance), but you are only 5 m from where you started (displacement, towards the north-east). If this took 2 s, your average speed is 7 ÷ 2 = 3.5 m/s, but your average velocity is 5 ÷ 2 = 2.5 m/s."
+      visual: "Draw the path as a bent line from start to finish and then a straight arrow from start to finish. The bent line's length is the distance; the arrow is the displacement."
+      step_by_step: "A bus covers 120 km in 2 h, then 60 km in 1 h. Step 1: Total distance = 180 km. Step 2: Total time = 3 h. Step 3: Average speed = 180 ÷ 3 = 60 km/h. Step 4: In m/s: 60 × 5/18 = 16.7 m/s."
+      real_world: "A runner on a 400 m track who finishes one lap where they started has run 400 m, but their displacement is zero."
+    items:
+      - prompt: "A boy walks 3 m east and then 4 m north. What is his displacement, in m?"
+        answer: "5"
+        check: "sqrt(3**2 + 4**2)"
+        difficulty: 1
+        hints: ["Straight line from start to finish: a right triangle."]
+        solution: "√(3² + 4²) = √25 = 5 m, towards the north-east."
+        mistakes: {"7": distance_not_displacement}
+      - prompt: "A car travels 150 m in 10 s. What is its average speed, in m/s?"
+        answer: "15"
+        check: "150/10"
+        difficulty: 1
+        hints: ["Speed = distance ÷ time."]
+        solution: "150 ÷ 10 = 15 m/s"
+        mistakes: {"1/15": speed_time_swapped, "1500": speed_time_swapped}
+      - prompt: "An athlete runs one full lap of a 400 m track and stops at the starting line. What is the displacement, in m?"
+        answer: "0"
+        check: "0"
+        difficulty: 1
+        hints: ["Where did she finish compared with where she started?"]
+        solution: "She ends where she began, so displacement = 0 m (the distance is 400 m)."
+        mistakes: {"400": distance_not_displacement}
+      - prompt: "A train moves at 72 km/h. What is its speed in m/s?"
+        answer: "20"
+        check: "72*Rational(5, 18)"
+        difficulty: 2
+        hints: ["Multiply km/h by 5/18."]
+        solution: "72 × 5/18 = 20 m/s"
+        mistakes: {"72": unit_kmh}
+      - prompt: "A bus covers 120 km in 2 h and then 60 km in 1 h. What is its average speed, in km/h?"
+        answer: "60"
+        check: "(120 + 60)/(2 + 1)"
+        difficulty: 2
+        hints: ["Total distance ÷ total time."]
+        solution: "Step 1: Total distance 180 km. Step 2: Total time 3 h. Step 3: 180 ÷ 3 = 60 km/h."
+      - prompt: "A cyclist goes 10 km at 20 km/h and returns the same 10 km at 10 km/h. What is the average speed for the whole trip, in km/h?"
+        answer: "40/3"
+        check: "20/(Rational(10, 20) + Rational(10, 10))"
+        difficulty: 3
+        hints: ["Find the time for each half.", "Total distance is 20 km."]
+        solution: "Step 1: Times: 10 ÷ 20 = 0.5 h and 10 ÷ 10 = 1 h. Step 2: Total time 1.5 h. Step 3: 20 ÷ 1.5 = 40/3 ≈ 13.3 km/h (not 15)."
+        mistakes: {"15": speed_time_swapped}
+
+  - code: phy9.motion.acceleration
+    title: Acceleration
+    after: [phy9.motion.speed_velocity]
+    notes: |
+      Acceleration is the rate of change of velocity: a = (v − u) ÷ t, unit m/s². u is the initial
+      and v the final velocity. Slowing down gives negative acceleration (retardation). Uniform
+      acceleration means the velocity changes by equal amounts in equal times.
+    explanations:
+      text: "A scooter starts from rest and reaches 10 m/s in 5 s. Each second its velocity rises by 2 m/s: its acceleration is (10 − 0) ÷ 5 = 2 m/s². When brakes bring a car from 20 m/s to rest in 4 s, the acceleration is (0 − 20) ÷ 4 = −5 m/s²."
+      visual: "Write the velocity every second: 0, 2, 4, 6, 8, 10 m/s. It goes up by the same 2 each second: that steady jump is the acceleration."
+      step_by_step: "A car speeds up from 10 m/s to 25 m/s in 5 s. Step 1: Change in velocity = 25 − 10 = 15 m/s. Step 2: Time = 5 s. Step 3: a = 15 ÷ 5 = 3 m/s²."
+      real_world: "Car adverts boast '0 to 100 km/h in 8 seconds': a measure of acceleration."
+    items:
+      - prompt: "A scooter starts from rest and reaches 10 m/s in 5 s. What is its acceleration, in m/s²?"
+        answer: "2"
+        check: "(10 - 0)/5"
+        difficulty: 1
+        hints: ["a = (v − u) ÷ t, with u = 0."]
+        solution: "a = (10 − 0) ÷ 5 = 2 m/s²"
+        mistakes: {"10": acceleration_not_change, "50": acceleration_not_change}
+      - prompt: "A car speeds up from 10 m/s to 25 m/s in 5 s. What is its acceleration, in m/s²?"
+        answer: "3"
+        check: "(25 - 10)/5"
+        difficulty: 1
+        hints: ["Change in velocity first."]
+        solution: "Step 1: 25 − 10 = 15 m/s. Step 2: 15 ÷ 5 = 3 m/s²."
+        mistakes: {"5": forgot_initial_velocity, "15": acceleration_not_change}
+      - prompt: "A car moving at 20 m/s brakes to rest in 4 s. What is its acceleration, in m/s²?"
+        answer: "-5"
+        check: "(0 - 20)/4"
+        difficulty: 2
+        hints: ["Final velocity is 0.", "Slowing down: the answer is negative."]
+        solution: "a = (0 − 20) ÷ 4 = −5 m/s² (a retardation of 5 m/s²)."
+        mistakes: {"5": retardation_sign}
+      - prompt: "What is the SI unit of acceleration?"
+        options: ["m/s²", "m/s", "m", "N"]
+        answer: "m/s²"
+        difficulty: 1
+        hints: ["Velocity (m/s) divided by time (s)."]
+        solution: "(m/s) ÷ s = m/s²"
+      - prompt: "A body moves with a uniform acceleration of 4 m/s² from rest. What is its velocity after 6 s, in m/s?"
+        answer: "24"
+        check: "0 + 4*6"
+        difficulty: 2
+        hints: ["Each second the velocity rises by 4 m/s."]
+        solution: "v = 0 + 4 × 6 = 24 m/s"
+      - prompt: "A train slows uniformly from 72 km/h to 36 km/h in 10 s. What is its acceleration, in m/s²?"
+        answer: "-1"
+        check: "(36 - 72)*Rational(5, 18)/10"
+        difficulty: 3
+        hints: ["Convert to m/s: 72 km/h = 20 m/s, 36 km/h = 10 m/s."]
+        solution: "Step 1: u = 20 m/s, v = 10 m/s. Step 2: a = (10 − 20) ÷ 10 = −1 m/s²."
+        mistakes: {"-18/5": unit_kmh, "1": retardation_sign}
+
+  - code: phy9.motion.equations
+    title: The three equations of motion
+    after: [phy9.motion.acceleration]
+    notes: |
+      For uniform acceleration a, initial velocity u, final velocity v, time t and displacement s:
+      v = u + at; s = ut + ½at²; v² = u² + 2as. Choose the equation that uses the three known
+      quantities and the one you want. For a body starting from rest, u = 0.
+    explanations:
+      text: "Three equations connect u, v, a, t and s. v = u + at: velocity after time t. s = ut + ½at²: distance covered in time t. v² = u² + 2as: velocity after covering a distance s, without needing the time. Pick the one that has what you know and what you want."
+      visual: "Make a five-box table: u, v, a, t, s. Fill the three you know, mark the one you want with '?'. Choose the equation that leaves out the fifth box."
+      step_by_step: "A car at 10 m/s accelerates at 2 m/s² for 5 s. How far does it go? Step 1: Know u = 10, a = 2, t = 5; want s. Step 2: s = ut + ½at². Step 3: s = 10 × 5 + ½ × 2 × 25 = 50 + 25 = 75 m."
+      real_world: "Road safety engineers use v² = u² + 2as to work out how far a car travels while braking, and so how long the skid marks will be."
+    items:
+      - prompt: "A body starts at 5 m/s and accelerates at 2 m/s² for 4 s. What is its final velocity, in m/s?"
+        answer: "13"
+        check: "5 + 2*4"
+        difficulty: 1
+        hints: ["v = u + at."]
+        solution: "v = 5 + 2 × 4 = 13 m/s"
+        mistakes: {"8": forgot_initial_velocity}
+      - prompt: "A car starts from rest and accelerates at 2 m/s² for 5 s. How far does it travel, in m?"
+        answer: "25"
+        check: "Rational(1, 2)*2*5**2"
+        difficulty: 1
+        hints: ["s = ut + ½at², with u = 0."]
+        solution: "s = 0 + ½ × 2 × 5² = 25 m"
+        mistakes: {"50": forgot_half, "5": forgot_square}
+      - prompt: "A car at 10 m/s accelerates at 2 m/s² for 5 s. How far does it go, in m?"
+        answer: "75"
+        check: "10*5 + Rational(1, 2)*2*5**2"
+        difficulty: 2
+        hints: ["s = ut + ½at²."]
+        solution: "Step 1: ut = 50. Step 2: ½at² = ½ × 2 × 25 = 25. Step 3: s = 75 m."
+        mistakes: {"25": forgot_initial_velocity, "100": forgot_half}
+      - prompt: "A body starts from rest and accelerates at 4 m/s² over a distance of 50 m. What is its final velocity, in m/s?"
+        answer: "20"
+        check: "sqrt(0 + 2*4*50)"
+        difficulty: 2
+        hints: ["v² = u² + 2as.", "v² = 400."]
+        solution: "Step 1: v² = 0 + 2 × 4 × 50 = 400. Step 2: v = 20 m/s."
+        mistakes: {"400": forgot_square}
+      - prompt: "A car moving at 20 m/s brakes with an acceleration of −5 m/s². How far does it travel before stopping, in m?"
+        answer: "40"
+        check: "solve(Eq(0, 20**2 + 2*(-5)*s), s)[0]"
+        difficulty: 3
+        hints: ["v = 0. Use v² = u² + 2as.", "0 = 400 − 10s."]
+        solution: "Step 1: 0 = 20² + 2(−5)s. Step 2: 10s = 400. Step 3: s = 40 m."
+        mistakes: {"-40": retardation_sign, "2": forgot_square}
+      - prompt: "A stone is dropped from rest and falls for 3 s with acceleration 10 m/s². How far does it fall, in m?"
+        answer: "45"
+        check: "Rational(1, 2)*10*3**2"
+        difficulty: 3
+        hints: ["s = ½at², u = 0."]
+        solution: "s = ½ × 10 × 9 = 45 m"
+        mistakes: {"90": forgot_half, "15": forgot_square}
+
+  - code: phy9.motion.graphs
+    title: Motion graphs
+    after: [phy9.motion.acceleration]
+    notes: |
+      On a distance–time graph, the slope is the speed; a straight line means uniform speed and a
+      flat line means rest. On a velocity–time graph, the slope is the acceleration and the area
+      under the graph is the displacement. A horizontal v–t line means constant velocity.
+    explanations:
+      text: "A velocity–time graph tells the whole story of a trip. If the line climbs from 0 to 20 m/s in 4 s, the slope 20 ÷ 4 = 5 m/s² is the acceleration. The area of the triangle under it, ½ × 4 × 20 = 40 m, is the distance covered."
+      visual: "Shade the region under a v–t graph. Split it into rectangles and triangles: add their areas to get the distance travelled."
+      step_by_step: "A car goes at a steady 15 m/s for 6 s. Step 1: The v–t graph is a flat line at 15. Step 2: Area = rectangle 6 × 15 = 90. Step 3: Distance = 90 m; slope 0, so acceleration 0."
+      real_world: "A train's data recorder stores a velocity–time graph. Investigators work out braking and distances from its slopes and areas."
+    items:
+      - prompt: "On a distance–time graph, a horizontal straight line means the body is:"
+        options: ["At rest", "Moving with uniform speed", "Accelerating", "Slowing down"]
+        answer: "At rest"
+        difficulty: 1
+        hints: ["The distance doesn't change as time passes."]
+        solution: "Distance stays the same, so the body is not moving."
+      - prompt: "On a velocity–time graph, what does the slope of the line give?"
+        options: ["Acceleration", "Distance", "Speed", "Time"]
+        answer: "Acceleration"
+        difficulty: 1
+        hints: ["Slope = change in velocity ÷ change in time."]
+        solution: "Change in velocity ÷ time is acceleration."
+        mistakes: {"Distance": graph_slope_area}
+      - prompt: "A velocity–time graph is a flat line at 15 m/s from t = 0 to t = 6 s. How far does the body travel, in m?"
+        answer: "90"
+        check: "15*6"
+        difficulty: 2
+        hints: ["Area under the line: a rectangle."]
+        solution: "Area = 15 × 6 = 90 m"
+        mistakes: {"5/2": speed_time_swapped}
+      - prompt: "A velocity–time graph rises in a straight line from 0 to 20 m/s in 4 s. How far does the body travel in this time, in m?"
+        answer: "40"
+        check: "Rational(1, 2)*4*20"
+        difficulty: 2
+        hints: ["Area of a triangle = ½ × base × height."]
+        solution: "½ × 4 × 20 = 40 m"
+        mistakes: {"80": forgot_half, "5": graph_slope_area}
+      - prompt: "A distance–time graph is a straight line through (0 s, 0 m) and (5 s, 40 m). What is the speed, in m/s?"
+        answer: "8"
+        check: "40/5"
+        difficulty: 2
+        hints: ["Slope of a distance–time graph is speed."]
+        solution: "40 ÷ 5 = 8 m/s"
+        mistakes: {"1/8": speed_time_swapped}
+      - prompt: "A car speeds up from 0 to 10 m/s in 5 s, then keeps 10 m/s for 10 s. Using the velocity–time graph, what is the total distance, in m?"
+        answer: "125"
+        check: "Rational(1, 2)*5*10 + 10*10"
+        difficulty: 3
+        hints: ["A triangle then a rectangle.", "25 + 100."]
+        solution: "Step 1: Triangle ½ × 5 × 10 = 25 m. Step 2: Rectangle 10 × 10 = 100 m. Step 3: Total 125 m."
+        mistakes: {"150": forgot_half}
