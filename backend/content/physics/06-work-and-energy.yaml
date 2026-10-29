@@ -1,0 +1,189 @@
+# Class 9 Physics, chapter 6. Format: content/README.md.
+# Also uses tips from earlier chapters: forgot_half, forgot_square.
+subject: phy
+chapter: 6
+title: Work and Energy
+
+tips:
+  work_needs_displacement: "Work is done only when the force moves something in the direction of the force: W = F × s. No movement, no work."
+  work_divided: "Work = force × displacement. Multiply, don't divide."
+  power_per_time: "Power = work ÷ time. Divide the work by the time taken."
+  ke_speed_squared: "Kinetic energy = ½mv². The speed is squared, so doubling the speed makes KE four times bigger."
+  pe_mgh: "Potential energy = mgh: mass × g × height."
+  energy_conserved: "Energy is not lost: as a body falls, potential energy turns into kinetic energy and the total stays the same."
+  kw_to_w: "1 kW = 1000 W, and 1 kWh (one 'unit' of electricity) = 3.6 × 10⁶ J."
+
+concepts:
+  - code: phy9.energy.work
+    title: Work
+    notes: |
+      Work is done when a force moves an object in the direction of the force: W = F × s, unit joule
+      (1 J = 1 N × 1 m). If there is no displacement, or the force is at right angles to the motion,
+      no work is done. Work is negative when the force opposes the motion (friction, lifting against
+      a falling body). Lifting a mass m through height h needs work mgh.
+    explanations:
+      text: "Pushing a heavy box 5 m across the floor with a 40 N force does 40 × 5 = 200 J of work. Pushing hard against a wall that doesn't move does no work in physics, however tired you get. Carrying a bag while walking on level ground does no work on the bag against gravity, because the force (up) is at right angles to the motion (along)."
+      visual: "Draw a box with a force arrow and a displacement arrow. If they point the same way, work is positive; opposite ways, negative; at right angles, zero."
+      step_by_step: "Work to lift a 10 kg bag onto a 1.5 m shelf (g = 10 m/s²): Step 1: Force needed = weight = 10 × 10 = 100 N. Step 2: Displacement = 1.5 m upward. Step 3: W = 100 × 1.5 = 150 J."
+      real_world: "A coolie who lifts a 30 kg load onto his head (about 1.5 m) does about 450 J of work each time."
+    items:
+      - prompt: "A force of 40 N pushes a box 5 m in the direction of the force. How much work is done, in J?"
+        answer: "200"
+        check: "40*5"
+        difficulty: 1
+        hints: ["W = F × s."]
+        solution: "W = 40 × 5 = 200 J"
+        mistakes: {"8": work_divided, "45": work_divided}
+      - prompt: "A boy pushes hard against a wall but it does not move. How much work does he do on the wall?"
+        options: ["Zero", "A lot", "Equal to his weight", "Depends on how long he pushes"]
+        answer: "Zero"
+        difficulty: 1
+        hints: ["Is there any displacement?"]
+        solution: "No displacement, so W = F × 0 = 0."
+        mistakes: {"A lot": work_needs_displacement, "Depends on how long he pushes": work_needs_displacement}
+      - prompt: "How much work is needed to lift a 10 kg bag through 1.5 m? (g = 10 m/s²) Give the answer in J."
+        answer: "150"
+        check: "10*10*Rational(3, 2)"
+        difficulty: 2
+        hints: ["Force = weight = mg."]
+        solution: "Step 1: Weight = 100 N. Step 2: W = 100 × 1.5 = 150 J."
+        mistakes: {"15": pe_mgh}
+      - prompt: "What is the SI unit of work?"
+        options: ["Joule", "Newton", "Watt", "Pascal"]
+        answer: "Joule"
+        difficulty: 1
+        hints: ["Newton × metre."]
+        solution: "1 J = 1 N × 1 m."
+      - prompt: "Friction of 20 N acts on a sledge as it moves 10 m. How much work does friction do, in J?"
+        answer: "-200"
+        check: "-20*10"
+        difficulty: 3
+        hints: ["Friction opposes the motion."]
+        solution: "W = −20 × 10 = −200 J: negative because the force is opposite to the motion."
+        mistakes: {"200": work_needs_displacement}
+      - prompt: "A girl carries a bag along a level road. How much work does the upward force of her hand do on the bag?"
+        options: ["Zero, because the force is at right angles to the motion", "Positive", "Negative", "Equal to the bag's weight × distance"]
+        answer: "Zero, because the force is at right angles to the motion"
+        difficulty: 2
+        hints: ["The force is up; the motion is along the road."]
+        solution: "Force and displacement are perpendicular, so no work is done by that force."
+        mistakes: {"Equal to the bag's weight × distance": work_needs_displacement}
+
+  - code: phy9.energy.kinetic_potential
+    title: Kinetic and potential energy
+    after: [phy9.energy.work]
+    notes: |
+      Energy is the capacity to do work (joule). Kinetic energy, the energy of motion, is KE = ½mv².
+      Gravitational potential energy, the energy due to height, is PE = mgh. Other forms: elastic
+      (stretched spring), chemical, heat, light, sound, electrical. Doubling the speed makes KE four
+      times as large; doubling the height doubles PE.
+    explanations:
+      text: "A moving cricket ball can knock over stumps: it has kinetic energy. A coconut high on a tree can crack a roof if it falls: it has potential energy because of its height. KE = ½mv²; PE = mgh. Speed counts twice in KE because it is squared."
+      visual: "Picture a ball rolling down a slide. At the top: tall bar for PE, no bar for KE. Halfway: two medium bars. At the bottom: no PE, tall KE bar."
+      step_by_step: "KE of a 2 kg ball at 3 m/s: Step 1: KE = ½ × m × v². Step 2: = ½ × 2 × 9. Step 3: = 9 J."
+      real_world: "The speed limit near schools is low because a car's KE grows with the square of speed: at 60 km/h it has four times the energy it has at 30 km/h."
+    items:
+      - prompt: "What is the kinetic energy of a 2 kg ball moving at 3 m/s, in J?"
+        answer: "9"
+        check: "Rational(1, 2)*2*3**2"
+        difficulty: 1
+        hints: ["KE = ½mv²."]
+        solution: "½ × 2 × 9 = 9 J"
+        mistakes: {"3": forgot_square, "18": forgot_half}
+      - prompt: "What is the potential energy of a 5 kg box on a shelf 2 m high? (g = 10 m/s²) Give it in J."
+        answer: "100"
+        check: "5*10*2"
+        difficulty: 1
+        hints: ["PE = mgh."]
+        solution: "5 × 10 × 2 = 100 J"
+        mistakes: {"10": pe_mgh}
+      - prompt: "A car's speed is doubled. Its kinetic energy becomes:"
+        options: ["Four times as much", "Twice as much", "Half as much", "The same"]
+        answer: "Four times as much"
+        difficulty: 2
+        hints: ["Speed is squared in ½mv²."]
+        solution: "2² = 4, so KE becomes four times as much."
+        mistakes: {"Twice as much": ke_speed_squared}
+      - prompt: "Which has potential energy because of its position?"
+        options: ["Water stored in a dam", "A rolling football", "A moving bus", "Wind blowing"]
+        answer: "Water stored in a dam"
+        difficulty: 1
+        hints: ["Energy because of height."]
+        solution: "Water held high in a dam has gravitational potential energy."
+      - prompt: "A 1000 kg car moves at 20 m/s. What is its kinetic energy, in J?"
+        answer: "200000"
+        check: "Rational(1, 2)*1000*20**2"
+        difficulty: 2
+        hints: ["½ × 1000 × 400."]
+        solution: "½ × 1000 × 400 = 200,000 J"
+        mistakes: {"10000": forgot_square, "400000": forgot_half}
+      - prompt: "A 0.5 kg ball has 25 J of kinetic energy. What is its speed, in m/s?"
+        answer: "10"
+        check: "sqrt(2*25/Rational(1, 2))"
+        difficulty: 3
+        hints: ["25 = ½ × 0.5 × v².", "v² = 100."]
+        solution: "Step 1: v² = 2 × 25 ÷ 0.5 = 100. Step 2: v = 10 m/s."
+        mistakes: {"100": forgot_square}
+
+  - code: phy9.energy.conservation
+    title: Conservation of energy and power
+    after: [phy9.energy.kinetic_potential]
+    notes: |
+      Energy can neither be created nor destroyed; it changes from one form to another (law of
+      conservation of energy). For a freely falling body, PE + KE stays constant (ignoring air
+      resistance). Power is the rate of doing work: P = W ÷ t, unit watt (1 W = 1 J/s); 1 kW = 1000 W.
+      Commercial unit of energy: 1 kWh = 3.6 × 10⁶ J (one 'unit' on the electricity bill).
+    explanations:
+      text: "Drop a 1 kg stone from 20 m. At the top it has PE = 1 × 10 × 20 = 200 J and no KE. Just before it lands it has no PE and 200 J of KE. Halfway down: 100 J of each. The total is always 200 J. Power tells you how fast work is done: a motor lifting the same load in half the time has twice the power."
+      visual: "Draw a tall stack of 200 coins at the top labelled PE. As the stone falls, coins move one by one into a KE stack. The total never changes."
+      step_by_step: "A 100 W bulb runs for 10 hours. Step 1: Power = 0.1 kW. Step 2: Energy = 0.1 × 10 = 1 kWh. Step 3: That is 1 unit of electricity."
+      real_world: "Hydroelectric dams in Idukki turn the potential energy of stored water into kinetic energy and then into electrical energy."
+    items:
+      - prompt: "A 1 kg stone is dropped from 20 m. What is its kinetic energy just before hitting the ground, in J? (g = 10 m/s²; ignore air)"
+        answer: "200"
+        check: "1*10*20"
+        difficulty: 1
+        hints: ["All its PE becomes KE."]
+        solution: "PE at the top = 1 × 10 × 20 = 200 J, all turned into KE."
+        mistakes: {"0": energy_conserved, "20": pe_mgh}
+      - prompt: "A motor does 6000 J of work in 30 s. What is its power, in W?"
+        answer: "200"
+        check: "6000/30"
+        difficulty: 1
+        hints: ["P = W ÷ t."]
+        solution: "6000 ÷ 30 = 200 W"
+        mistakes: {"180000": power_per_time}
+      - prompt: "A 100 W bulb is used for 10 hours. How many units (kWh) of electricity does it use?"
+        answer: "1"
+        check: "Rational(100, 1000)*10"
+        difficulty: 2
+        hints: ["100 W = 0.1 kW."]
+        solution: "0.1 kW × 10 h = 1 kWh"
+        mistakes: {"1000": kw_to_w}
+      - prompt: "A 2 kg ball is dropped from 10 m. What is its kinetic energy when it has fallen halfway, in J? (g = 10 m/s²)"
+        answer: "100"
+        check: "2*10*10 - 2*10*5"
+        difficulty: 2
+        hints: ["Total energy 200 J; PE left at 5 m is 100 J."]
+        solution: "Step 1: Total = 2 × 10 × 10 = 200 J. Step 2: PE at 5 m = 100 J. Step 3: KE = 100 J."
+        mistakes: {"200": energy_conserved}
+      - prompt: "Which energy change happens in a hydroelectric power station?"
+        options: ["Potential energy of water → kinetic energy → electrical energy", "Chemical energy → heat → electrical energy", "Light energy → electrical energy", "Electrical energy → potential energy"]
+        answer: "Potential energy of water → kinetic energy → electrical energy"
+        difficulty: 2
+        hints: ["Water falls from a height and turns turbines."]
+        solution: "Stored water (PE) falls, moving fast (KE), turning turbines and generators (electrical)."
+      - prompt: "A 50 kg girl climbs 6 m of stairs in 15 s. What is her power, in W? (g = 10 m/s²)"
+        answer: "200"
+        check: "50*10*6/15"
+        difficulty: 3
+        hints: ["Work = mgh = 3000 J.", "Power = work ÷ time."]
+        solution: "Step 1: W = 50 × 10 × 6 = 3000 J. Step 2: P = 3000 ÷ 15 = 200 W."
+        mistakes: {"20": pe_mgh, "45000": power_per_time}
+      - prompt: "How many joules are in 1 kWh?"
+        answer: "3600000"
+        check: "1000*3600"
+        difficulty: 3
+        hints: ["1 kW = 1000 W and 1 h = 3600 s."]
+        solution: "1000 × 3600 = 3.6 × 10⁶ J"
+        mistakes: {"1000": kw_to_w, "3600": kw_to_w}

@@ -23,6 +23,10 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Physics 2: Equations of Motion | distance and displacement, speed and velocity, acceleration, the three equations, motion graphs | 24 |
 | Physics 3: Laws of Motion | inertia, momentum and F = ma, action and reaction, conservation of momentum | 24 |
 | Physics 4: Gravitation | the universal law, mass, weight and g, free fall | 19 |
+| Physics 5: Buoyant Force | buoyant force and apparent weight, Archimedes' principle, density, floating and sinking | 19 |
+| Physics 6: Work and Energy | work, kinetic and potential energy, conservation of energy and power | 19 |
+| Physics 7: Electric Current | charge, current and potential difference, Ohm's law, series and parallel circuits | 19 |
+| Physics 8: Sound | sound as a wave, pitch, loudness and hearing, echoes | 18 |
 | Chemistry 1: Structure of Atom | protons, neutrons and electrons, isotopes, shells, subshells | 24 |
 | Chemistry 2: Periodic Table | groups and periods, finding an element's place, trends | 18 |
 | Chemistry 3: Chemical Bonding | octet and valency, ionic bonds, covalent bonds | 18 |
@@ -34,14 +38,25 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Biology 1: Life Processes | life processes, photosynthesis, the leaf and gas exchange | 20 |
 | Biology 2: Digestion and Transport of Nutrients | digestive system, enzymes, blood and vessels, the heart | 24 |
 | Biology 3: Respiration and Excretion | respiration in cells, breathing, the kidneys | 18 |
+| Biology 4: Behind Movements | the skeleton and joints, muscles, healthy bones and muscles | 19 |
+| Biology 5: Reproductive Health | reproductive systems and fertilisation, puberty and hormones, health and hygiene (age-appropriate) | 21 |
+| Biology 6: Classification | binomial names, levels of classification, the five kingdoms | 22 |
+| Social Science 1: Moving Forward from the Stone Age | the Stone Age, the Harappan civilisation, the Iron Age and megaliths in Kerala | 19 |
+| Social Science 2: Ideas and Early States | Vedic society, Buddhism and Jainism, Mahajanapadas and the Mauryas | 19 |
+| Social Science 3: Land Grants and the Indian Society | the Gupta age, land grants and their effects, early Kerala | 18 |
+| Social Science 4: Distribution of Power in the Indian Constitution | Union and States, the three organs of government, local self-government | 19 |
+| Social Science 5: Demographic Trends in India | the census and density, sex ratio, literacy and age, growth and the demographic dividend (Census 2011 figures) | 18 |
+| Social Science 6: From the Land of Cholas to Delhi | the Chola empire, Chola village assemblies, the Delhi Sultanate | 19 |
+| Social Science 7: Extension of Democracy through Institutions | elections and the Election Commission, watchdog institutions, RTI and citizens' participation | 18 |
+| Social Science 8: Towards a Gender-Neutral Society | sex, gender and stereotypes, equality in the Constitution and law, moving towards gender neutrality | 19 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 436 of the 690 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 254 were checked by hand (most of them in Chemistry and Biology, where many questions are about facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
-- **The fit with the textbook is only partly checked.** The Physics, Chemistry and Biology chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
+- **Every answer that can be worked out by computer is**, on every test run: 498 of the 976 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 478 were checked by hand (most of them in Chemistry, Biology and Social Science, where many questions are about facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology and Social Science I chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 
 ## Format
 

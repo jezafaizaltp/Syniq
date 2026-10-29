@@ -26,14 +26,14 @@ def test_syllabus_checked_then_added_and_safe_to_repeat():
     bad = SHEET + "geo,1,Mountains,\nss,x,,\nss,39,History of Kerala,Temple architecture\n"
     r = client.post("/admin/syllabus", json={"csv": bad, "dry_run": False}, headers=a).json()
     assert r["ok"] is False and [e["row"] for e in r["errors"]] == [5, 6, 7]
-    assert chapters("ss") == {}
+    assert 39 not in chapters("ss")  # chapters 1-8 come from the content packs
 
     r = client.post("/admin/syllabus", json={"csv": SHEET}, headers=a).json()
     assert r == {"ok": True, "errors": [], "dry_run": True, "chapters": 2, "new_chapters": 2, "topics": 3}
 
     r = client.post("/admin/syllabus", json={"csv": SHEET, "dry_run": False}, headers=a).json()
     assert (r["added_chapters"], r["added_topics"]) == (2, 3)
-    assert chapters("ss") == {39: ("Kerala History", ["Early Kerala", "The spice trade"])}
+    assert chapters("ss")[39] == ("Kerala History", ["Early Kerala", "The spice trade"])
     assert chapters("it") == {2: ("Spreadsheets", ["Spreadsheets"])}
 
     # Uploading again with one more topic adds only that topic, at the end.
@@ -57,9 +57,10 @@ def test_students_only_see_chapters_with_approved_content():
     client.post("/admin/syllabus", json={"csv": SHEET, "dry_run": False}, headers=a)
     anu, teacher = login("anu@demo.syniq"), login("teacher@demo.syniq")
     social = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == "ss")
-    assert social["chapters"] == 0
-    assert client.get(f"/subjects/{social['id']}/chapters", headers=anu).json() == []
-    assert len(client.get(f"/subjects/{social['id']}/chapters", headers=teacher).json()) == 1
+    ss_packs = len([p for _, p in content_packs.read_packs() if p["subject"] == "ss"])
+    assert social["chapters"] == ss_packs  # the sheet's chapter 39 has no approved content
+    assert len(client.get(f"/subjects/{social['id']}/chapters", headers=anu).json()) == ss_packs
+    assert len(client.get(f"/subjects/{social['id']}/chapters", headers=teacher).json()) == ss_packs + 1
     math = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == "math")
     packs = [p for _, p in content_packs.read_packs() if p["subject"] == "math"]
     assert math["chapters"] == 2 + len(packs)  # the two demo chapters and the content packs have approved content

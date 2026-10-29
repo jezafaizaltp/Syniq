@@ -1,0 +1,190 @@
+# Class 9 Physics, chapter 7. Format: content/README.md.
+subject: phy
+chapter: 7
+title: Electric Current
+
+tips:
+  charge_time: "Current = charge ÷ time (I = Q ÷ t). Charge = current × time."
+  ohm_rearrange: "Ohm's law: V = IR. For current divide V by R; for resistance divide V by I."
+  series_add: "In series, resistances add: R = R₁ + R₂ + …"
+  parallel_reciprocal: "In parallel, 1/R = 1/R₁ + 1/R₂ + … The total is smaller than the smallest resistor."
+  ammeter_voltmeter: "An ammeter is connected in series; a voltmeter is connected in parallel across the part being measured."
+  power_vi: "Electric power P = VI (= I²R = V²/R). Energy = power × time."
+  current_direction: "Conventional current flows from the positive terminal to the negative; electrons flow the other way."
+
+concepts:
+  - code: phy9.current.charge
+    title: Charge, current and potential difference
+    notes: |
+      Electric current is the rate of flow of charge: I = Q ÷ t, unit ampere (1 A = 1 C/s). Current in
+      metals is a flow of electrons; conventional current flows from + to −. Potential difference
+      (voltage) is the work done per unit charge, V = W ÷ Q, unit volt (1 V = 1 J/C), measured with a
+      voltmeter connected in parallel. Current is measured with an ammeter connected in series. A
+      cell or battery maintains the potential difference.
+    explanations:
+      text: "Think of water in pipes: the current is how much water flows past each second, and the potential difference is the push from a raised tank. A battery provides the push; electrons drift through the wires. If 10 coulombs of charge pass a point in 2 seconds, the current is 10 ÷ 2 = 5 A."
+      visual: "Draw a circuit: a cell, a switch, a bulb. Put the ammeter in the loop itself (series). Put the voltmeter on a side branch across the bulb (parallel)."
+      step_by_step: "Charge through a bulb carrying 0.5 A for 1 minute: Step 1: t = 60 s. Step 2: Q = I × t = 0.5 × 60. Step 3: Q = 30 C."
+      real_world: "A mobile charger label like '5 V, 2 A' tells you the push (voltage) and the flow (current) it supplies."
+    items:
+      - prompt: "10 C of charge flows through a wire in 2 s. What is the current, in A?"
+        answer: "5"
+        check: "10/2"
+        difficulty: 1
+        hints: ["I = Q ÷ t."]
+        solution: "10 ÷ 2 = 5 A"
+        mistakes: {"20": charge_time, "1/5": charge_time}
+      - prompt: "How is an ammeter connected in a circuit?"
+        options: ["In series", "In parallel", "Across the cell only", "It is not connected"]
+        answer: "In series"
+        difficulty: 1
+        hints: ["All the current must flow through it."]
+        solution: "An ammeter goes in series so the whole current passes through it."
+        mistakes: {"In parallel": ammeter_voltmeter}
+      - prompt: "A current of 0.5 A flows through a bulb for 1 minute. How much charge passes, in C?"
+        answer: "30"
+        check: "Rational(1, 2)*60"
+        difficulty: 2
+        hints: ["1 minute = 60 s."]
+        solution: "Q = 0.5 × 60 = 30 C"
+        mistakes: {"1/2": charge_time}
+      - prompt: "12 J of work moves 4 C of charge between two points. What is the potential difference, in V?"
+        answer: "3"
+        check: "12/4"
+        difficulty: 2
+        hints: ["V = W ÷ Q."]
+        solution: "12 ÷ 4 = 3 V"
+        mistakes: {"48": charge_time}
+      - prompt: "In a metal wire, which particles actually move to carry the current?"
+        options: ["Electrons", "Protons", "Neutrons", "Whole atoms"]
+        answer: "Electrons"
+        difficulty: 1
+        hints: ["They are free to move in metals."]
+        solution: "Free electrons drift through the metal."
+      - prompt: "Conventional current flows from + to −. In which direction do electrons flow in the wire?"
+        options: ["From − to +", "From + to −", "Both ways equally", "They do not move"]
+        answer: "From − to +"
+        difficulty: 3
+        hints: ["Electrons are negative."]
+        solution: "Electrons move opposite to conventional current, from the negative terminal to the positive."
+        mistakes: {"From + to −": current_direction}
+
+  - code: phy9.current.ohm
+    title: Ohm's law and resistance
+    after: [phy9.current.charge]
+    notes: |
+      Ohm's law: at constant temperature the current through a conductor is proportional to the
+      potential difference across it: V = IR, where R is the resistance in ohms (Ω). Resistance
+      increases with length, decreases with area of cross-section, and depends on the material
+      (resistivity) and temperature. Nichrome has high resistivity (heating elements); copper low
+      (connecting wires).
+    explanations:
+      text: "Resistance is how hard it is for current to flow. With 12 V across a 4 Ω resistor, the current is 12 ÷ 4 = 3 A. A longer wire is harder to get through; a thicker wire is easier, like a wide road compared with a narrow lane."
+      visual: "Draw the V–I graph for a resistor: a straight line through the origin. Its slope (V ÷ I) is the resistance."
+      step_by_step: "Resistance of a bulb that takes 0.5 A at 230 V: Step 1: R = V ÷ I. Step 2: R = 230 ÷ 0.5. Step 3: R = 460 Ω."
+      real_world: "Electric irons and heaters use nichrome coils because its high resistance turns current into heat; house wiring uses copper so little energy is wasted."
+    items:
+      - prompt: "A 4 Ω resistor has 12 V across it. What current flows, in A?"
+        answer: "3"
+        check: "12/4"
+        difficulty: 1
+        hints: ["I = V ÷ R."]
+        solution: "12 ÷ 4 = 3 A"
+        mistakes: {"48": ohm_rearrange, "1/3": ohm_rearrange}
+      - prompt: "A current of 2 A flows through a 6 Ω resistor. What is the potential difference across it, in V?"
+        answer: "12"
+        check: "2*6"
+        difficulty: 1
+        hints: ["V = IR."]
+        solution: "2 × 6 = 12 V"
+        mistakes: {"3": ohm_rearrange}
+      - prompt: "A bulb takes 0.5 A from a 230 V supply. What is its resistance, in Ω?"
+        answer: "460"
+        check: "230/Rational(1, 2)"
+        difficulty: 2
+        hints: ["R = V ÷ I."]
+        solution: "230 ÷ 0.5 = 460 Ω"
+        mistakes: {"115": ohm_rearrange}
+      - prompt: "A wire is replaced by one of the same material and thickness but twice as long. Its resistance:"
+        options: ["Doubles", "Halves", "Stays the same", "Becomes four times"]
+        answer: "Doubles"
+        difficulty: 2
+        hints: ["Resistance is proportional to length."]
+        solution: "R ∝ length, so twice the length gives twice the resistance."
+      - prompt: "Why is nichrome used for the heating coil of an electric iron?"
+        options: ["It has high resistivity", "It has very low resistivity", "It is magnetic", "It is a good insulator"]
+        answer: "It has high resistivity"
+        difficulty: 2
+        hints: ["The coil must get hot."]
+        solution: "High resistivity means a lot of heat for the current passing (and nichrome doesn't oxidise easily)."
+      - prompt: "When the voltage across a resistor is raised from 6 V to 9 V, the current rises from 2 A to what value, in A?"
+        answer: "3"
+        check: "9/(6/2)"
+        difficulty: 3
+        hints: ["R = 6 ÷ 2 = 3 Ω stays the same."]
+        solution: "Step 1: R = 3 Ω. Step 2: I = 9 ÷ 3 = 3 A."
+        mistakes: {"5": ohm_rearrange}
+
+  - code: phy9.current.circuits
+    title: Series and parallel circuits
+    after: [phy9.current.ohm]
+    notes: |
+      Series: the same current flows through every resistor; total R = R₁ + R₂ + …; the voltages add up
+      to the supply voltage. Parallel: each resistor has the full supply voltage; 1/R = 1/R₁ + 1/R₂ + …
+      (total smaller than the smallest); the currents add up. Household appliances are connected in
+      parallel so each gets 230 V and can be switched independently.
+    explanations:
+      text: "In series, current has one path through every resistor, so resistances add: 3 Ω + 6 Ω = 9 Ω. In parallel, current has several paths, so it flows more easily: 3 Ω and 6 Ω in parallel give just 2 Ω. Homes use parallel wiring, so switching off the fan doesn't turn off the light."
+      visual: "Draw series as beads on one string. Draw parallel as a ladder: each rung is a separate path between the same two rails."
+      step_by_step: "3 Ω and 6 Ω in parallel: Step 1: 1/R = 1/3 + 1/6. Step 2: = 2/6 + 1/6 = 3/6 = 1/2. Step 3: R = 2 Ω."
+      real_world: "Old-style serial lamp sets for festivals all go dark when one bulb fails: they are in series. Home lights stay on independently: they are in parallel."
+    items:
+      - prompt: "Resistors of 3 Ω and 6 Ω are connected in series. What is the total resistance, in Ω?"
+        answer: "9"
+        check: "3 + 6"
+        difficulty: 1
+        hints: ["In series, add them."]
+        solution: "3 + 6 = 9 Ω"
+        mistakes: {"2": series_add}
+      - prompt: "Resistors of 3 Ω and 6 Ω are connected in parallel. What is the total resistance, in Ω?"
+        answer: "2"
+        check: "1/(Rational(1, 3) + Rational(1, 6))"
+        difficulty: 2
+        hints: ["1/R = 1/3 + 1/6."]
+        solution: "1/R = 1/2, so R = 2 Ω."
+        mistakes: {"9": parallel_reciprocal, "1/2": parallel_reciprocal}
+      - prompt: "Why are household appliances connected in parallel?"
+        options: ["Each gets the full voltage and can be switched on or off separately", "It uses less wire", "The current is the same in all", "It increases the total resistance"]
+        answer: "Each gets the full voltage and can be switched on or off separately"
+        difficulty: 1
+        hints: ["Switching off the fan doesn't switch off the light."]
+        solution: "In parallel each appliance gets 230 V and works independently."
+        mistakes: {"It increases the total resistance": parallel_reciprocal}
+      - prompt: "Resistors of 2 Ω and 4 Ω are in series with a 12 V battery. What current flows, in A?"
+        answer: "2"
+        check: "12/(2 + 4)"
+        difficulty: 2
+        hints: ["Total R = 6 Ω."]
+        solution: "I = 12 ÷ 6 = 2 A"
+        mistakes: {"6": series_add}
+      - prompt: "A 1000 W heater is used for 2 hours. How much energy does it use, in kWh?"
+        answer: "2"
+        check: "Rational(1000, 1000)*2"
+        difficulty: 2
+        hints: ["1000 W = 1 kW."]
+        solution: "1 kW × 2 h = 2 kWh"
+        mistakes: {"2000": power_vi}
+      - prompt: "A heater takes 4 A at 230 V. What is its power, in W?"
+        answer: "920"
+        check: "230*4"
+        difficulty: 2
+        hints: ["P = VI."]
+        solution: "230 × 4 = 920 W"
+        mistakes: {"115/2": power_vi}
+      - prompt: "Three 6 Ω resistors are connected in parallel across a 12 V battery. What is the total current, in A?"
+        answer: "6"
+        check: "12/(1/(Rational(1, 6)*3))"
+        difficulty: 3
+        hints: ["Total R = 6 ÷ 3 = 2 Ω."]
+        solution: "Step 1: R = 2 Ω. Step 2: I = 12 ÷ 2 = 6 A (2 A in each branch)."
+        mistakes: {"2/3": parallel_reciprocal, "2": parallel_reciprocal}
