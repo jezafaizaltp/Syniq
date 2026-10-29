@@ -1,0 +1,187 @@
+# Class 9 Physics, chapter 8. Format: content/README.md.
+subject: phy
+chapter: 8
+title: Sound
+
+tips:
+  wave_equation: "Speed = frequency × wavelength (v = fλ). For wavelength divide speed by frequency."
+  period_frequency: "Period and frequency are reciprocals: T = 1 ÷ f."
+  echo_double: "In an echo the sound travels to the wall and back, so the distance to the wall is half of speed × time."
+  sound_needs_medium: "Sound needs a medium (solid, liquid or gas) to travel. It cannot travel through a vacuum."
+  speed_in_media: "Sound travels fastest in solids, slower in liquids and slowest in gases."
+  pitch_loudness: "Pitch depends on frequency; loudness depends on amplitude."
+  audible_range: "Humans hear about 20 Hz to 20,000 Hz. Below is infrasound; above is ultrasound."
+  longitudinal: "In a sound wave the particles of the medium vibrate back and forth along the direction the wave travels: a longitudinal wave."
+
+concepts:
+  - code: phy9.sound.waves
+    title: Sound as a wave
+    notes: |
+      Sound is produced by vibrating objects and travels as a longitudinal wave of compressions and
+      rarefactions. It needs a medium and cannot travel through a vacuum. Wave quantities: wavelength λ
+      (distance between two compressions), frequency f (vibrations per second, hertz), period T = 1/f,
+      amplitude, speed v = fλ. Speed of sound in air ≈ 340 m/s; it is faster in liquids and fastest in
+      solids, and increases with temperature.
+    explanations:
+      text: "Strike a tuning fork and touch it to water: it splashes, because it vibrates. These vibrations push and pull the air, making regions where air is squashed (compressions) and spread out (rarefactions). This pattern travels to your ear. On the Moon, with no air, astronauts need radios to talk."
+      visual: "Picture a slinky stretched on a table. Push one end back and forth: bunched-up coils travel along it. That is how a sound wave moves through air."
+      step_by_step: "A sound of frequency 170 Hz in air (340 m/s): Step 1: v = fλ. Step 2: λ = v ÷ f = 340 ÷ 170. Step 3: λ = 2 m."
+      real_world: "Put your ear to a railway track (only when no train is near!): you hear a distant train earlier through the steel than through the air."
+    items:
+      - prompt: "Sound cannot travel through:"
+        options: ["A vacuum", "Water", "Steel", "Air"]
+        answer: "A vacuum"
+        difficulty: 1
+        hints: ["Sound needs particles to vibrate."]
+        solution: "Sound needs a medium; a vacuum has none."
+        mistakes: {"Steel": sound_needs_medium, "Water": sound_needs_medium}
+      - prompt: "A sound wave has frequency 170 Hz and speed 340 m/s. What is its wavelength, in m?"
+        answer: "2"
+        check: "340/170"
+        difficulty: 1
+        hints: ["λ = v ÷ f."]
+        solution: "340 ÷ 170 = 2 m"
+        mistakes: {"57800": wave_equation, "1/2": wave_equation}
+      - prompt: "In which medium does sound travel fastest?"
+        options: ["Steel", "Water", "Air", "Vacuum"]
+        answer: "Steel"
+        difficulty: 1
+        hints: ["Solids > liquids > gases."]
+        solution: "Sound is fastest in solids such as steel."
+        mistakes: {"Air": speed_in_media, "Vacuum": sound_needs_medium}
+      - prompt: "A wave has frequency 50 Hz. What is its time period, in s?"
+        answer: "1/50"
+        check: "1/50"
+        difficulty: 2
+        hints: ["T = 1 ÷ f."]
+        solution: "T = 1 ÷ 50 = 0.02 s"
+        mistakes: {"50": period_frequency}
+      - prompt: "A sound wave has wavelength 0.5 m and frequency 680 Hz. What is its speed, in m/s?"
+        answer: "340"
+        check: "Rational(1, 2)*680"
+        difficulty: 2
+        hints: ["v = fλ."]
+        solution: "680 × 0.5 = 340 m/s"
+        mistakes: {"1360": wave_equation}
+      - prompt: "Sound waves in air are called longitudinal because:"
+        options: ["Air particles vibrate along the direction the wave travels", "Air particles vibrate at right angles to the wave", "They are very long", "They travel only in straight lines"]
+        answer: "Air particles vibrate along the direction the wave travels"
+        difficulty: 3
+        hints: ["Think of the slinky being pushed and pulled."]
+        solution: "The particles move back and forth parallel to the wave's direction, forming compressions and rarefactions."
+        mistakes: {"Air particles vibrate at right angles to the wave": longitudinal}
+
+  - code: phy9.sound.properties
+    title: Pitch, loudness and hearing
+    after: [phy9.sound.waves]
+    notes: |
+      Pitch is how high or low a sound is and depends on frequency. Loudness depends on amplitude (and
+      is measured in decibels, dB). Quality (timbre) lets us tell instruments apart. Human hearing:
+      about 20 Hz to 20 kHz. Below 20 Hz: infrasound (elephants, earthquakes). Above 20 kHz:
+      ultrasound (bats, dolphins, medical scanning). Noise above about 80 dB for long periods harms
+      hearing.
+    explanations:
+      text: "A small bell rings high (high frequency); a big temple bell booms low (low frequency). Hit a drum harder and the skin vibrates further (bigger amplitude), so the sound is louder but not higher. Bats squeak above 20,000 Hz, too high for us, and use the echoes to find insects."
+      visual: "Draw two waves: one with peaks close together (high pitch) and one spread out (low pitch). Then two waves with the same spacing but one much taller (louder)."
+      step_by_step: "Can a person hear a 25,000 Hz whistle? Step 1: Human range is 20 Hz to 20,000 Hz. Step 2: 25,000 Hz is above the range. Step 3: No: it is ultrasound (dogs can hear it)."
+      real_world: "Doctors use ultrasound scans to see a baby before birth, without the harm of X-rays."
+    items:
+      - prompt: "The pitch of a sound depends on its:"
+        options: ["Frequency", "Amplitude", "Speed", "Medium only"]
+        answer: "Frequency"
+        difficulty: 1
+        hints: ["High notes vibrate more times a second."]
+        solution: "Higher frequency means higher pitch."
+        mistakes: {"Amplitude": pitch_loudness}
+      - prompt: "Hitting a drum harder makes the sound louder. What has increased?"
+        options: ["Amplitude", "Frequency", "Wavelength", "Speed of sound"]
+        answer: "Amplitude"
+        difficulty: 1
+        hints: ["The drum skin moves further."]
+        solution: "A bigger amplitude gives a louder sound."
+        mistakes: {"Frequency": pitch_loudness}
+      - prompt: "What is the upper limit of human hearing, in Hz?"
+        answer: "20000"
+        check: "20*1000"
+        difficulty: 1
+        hints: ["20 kHz."]
+        solution: "About 20,000 Hz (20 kHz)."
+        mistakes: {"20": audible_range}
+      - prompt: "Sound with frequency above 20,000 Hz is called:"
+        options: ["Ultrasound", "Infrasound", "Audible sound", "Echo"]
+        answer: "Ultrasound"
+        difficulty: 2
+        hints: ["Ultra means beyond."]
+        solution: "Above the human range is ultrasound."
+        mistakes: {"Infrasound": audible_range}
+      - prompt: "Which animal uses ultrasound to find its way and its prey in the dark?"
+        options: ["Bat", "Elephant", "Cow", "Snake"]
+        answer: "Bat"
+        difficulty: 2
+        hints: ["Echolocation."]
+        solution: "Bats send out ultrasonic squeaks and listen to the echoes."
+        mistakes: {"Elephant": audible_range}
+      - prompt: "A tuning fork makes 512 vibrations per second. A second fork makes 256. Which statement is true?"
+        options: ["The first fork has a higher pitch", "The second fork has a higher pitch", "Both have the same pitch", "The first fork is louder"]
+        answer: "The first fork has a higher pitch"
+        difficulty: 3
+        hints: ["Pitch follows frequency, not loudness."]
+        solution: "512 Hz is higher than 256 Hz, so the first fork sounds higher. Loudness depends on how hard they are struck."
+        mistakes: {"The first fork is louder": pitch_loudness}
+
+  - code: phy9.sound.echo
+    title: Reflection of sound and echoes
+    after: [phy9.sound.waves]
+    notes: |
+      Sound reflects from hard surfaces. An echo is heard if the reflected sound reaches us at least
+      0.1 s after the original, which in air (≈ 340 m/s) needs the reflector to be at least 17 m away.
+      Distance to the reflector = (speed × time) ÷ 2, because the sound goes there and back. SONAR
+      uses ultrasound echoes to find the depth of the sea. Repeated reflections that blend together
+      cause reverberation, reduced in halls by soft materials.
+    explanations:
+      text: "Shout towards a cliff and you hear your voice again: the sound bounced back. If the echo comes 2 s later, the sound travelled 340 × 2 = 680 m in total, there and back, so the cliff is 340 m away. Ships measure the depth of the sea the same way with ultrasound."
+      visual: "Draw a person, an arrow going to a cliff and an arrow coming back. Label the full round trip v × t and the distance to the cliff half of that."
+      step_by_step: "A ship's sonar pulse returns after 4 s; sound in sea water travels at 1500 m/s. Step 1: Total path = 1500 × 4 = 6000 m. Step 2: Depth = 6000 ÷ 2 = 3000 m."
+      real_world: "Cinema halls and auditoriums have curtains, carpets and soft panels to soak up sound and stop echoes from muddling speech."
+    items:
+      - prompt: "A boy hears the echo of his shout from a cliff 2 s later. Sound travels at 340 m/s. How far away is the cliff, in m?"
+        answer: "340"
+        check: "340*2/2"
+        difficulty: 1
+        hints: ["The sound goes there and back."]
+        solution: "Step 1: Total path = 340 × 2 = 680 m. Step 2: Distance = 680 ÷ 2 = 340 m."
+        mistakes: {"680": echo_double}
+      - prompt: "A ship's sonar signal returns after 4 s. Sound travels at 1500 m/s in sea water. How deep is the sea, in m?"
+        answer: "3000"
+        check: "1500*4/2"
+        difficulty: 2
+        hints: ["Halve the total path."]
+        solution: "1500 × 4 = 6000 m round trip; depth = 3000 m."
+        mistakes: {"6000": echo_double}
+      - prompt: "What is the minimum distance from a reflecting wall needed to hear a distinct echo, in m? (speed 340 m/s; minimum gap 0.1 s)"
+        answer: "17"
+        check: "340*Rational(1, 10)/2"
+        difficulty: 2
+        hints: ["The round trip must take 0.1 s: 34 m."]
+        solution: "340 × 0.1 = 34 m round trip, so the wall must be at least 17 m away."
+        mistakes: {"34": echo_double}
+      - prompt: "SONAR uses which kind of sound?"
+        options: ["Ultrasound", "Infrasound", "Audible sound", "Light"]
+        answer: "Ultrasound"
+        difficulty: 1
+        hints: ["High frequency, travels well in water."]
+        solution: "SONAR sends ultrasonic pulses and times their echoes."
+        mistakes: {"Infrasound": audible_range}
+      - prompt: "Why are the walls of concert halls often covered with soft, rough materials?"
+        options: ["To absorb sound and reduce reverberation", "To make the sound louder", "To increase echoes", "To keep the hall warm"]
+        answer: "To absorb sound and reduce reverberation"
+        difficulty: 2
+        hints: ["Hard surfaces reflect sound."]
+        solution: "Soft materials absorb sound, so fewer reflections blur the music or speech."
+      - prompt: "A person stands between two cliffs and claps. The first echo comes after 1 s and the second after 2 s. How far apart are the cliffs, in m? (speed 340 m/s)"
+        answer: "510"
+        check: "340*1/2 + 340*2/2"
+        difficulty: 3
+        hints: ["Distance to each cliff = 340 × t ÷ 2.", "170 m and 340 m."]
+        solution: "Step 1: Nearer cliff: 340 × 1 ÷ 2 = 170 m. Step 2: Farther cliff: 340 × 2 ÷ 2 = 340 m. Step 3: 170 + 340 = 510 m."
+        mistakes: {"1020": echo_double}

@@ -8,7 +8,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 
 - **Accounts and roles:** student, guardian, teacher and admin, with server-side permission checks.
 - **Consent first:** a student can't learn until a guardian consents. Mood check-ins and sharing with the school each need their own consent. Consent records are append-only.
-- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 15 (57 topics, 379 questions), Physics 1 to 4 (15 topics, 91 questions), Chemistry 1 to 8 (26 topics, 158 questions) and Biology 1 to 3 (10 topics, 62 questions) have full content ([content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
+- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 15 (57 topics, 379 questions), Physics 1 to 8 (27 topics, 166 questions), Chemistry 1 to 8 (26 topics, 158 questions) and Biology 1 to 6 (19 topics, 124 questions) have full content ([content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
 - **Adaptive teacher engine** (`backend/app/engine/`):
   - Bayesian Knowledge Tracing estimates mastery for each concept. Hints and lucky guesses count for less.
   - Ordered, versioned rules pick the next step: introduce, practise, explain differently, revisit a prerequisite, or space out reviews.
