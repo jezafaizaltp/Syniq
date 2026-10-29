@@ -55,6 +55,7 @@ export type Me = {
   role: Role;
   settings: Settings;
   consent?: { core_learning: boolean; mood_checkins: boolean };
+  must_change_password?: boolean;
 };
 
 export class ApiError extends Error {

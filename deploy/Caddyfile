@@ -1,0 +1,22 @@
+# HTTPS certificates are fetched and renewed automatically for $DOMAIN.
+{$DOMAIN} {
+	encode gzip
+
+	# The API, under /api on the same domain (so no cross-site requests).
+	handle_path /api/* {
+		reverse_proxy api:8000
+	}
+
+	handle {
+		reverse_proxy web:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+}

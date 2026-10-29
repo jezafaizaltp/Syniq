@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SessionProvider } from "@/lib/session";
 import Nav from "./nav";
+import PasswordGate from "./password";
 
 export const metadata: Metadata = {
   title: "SYNiq",
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SessionProvider>
           <Nav />
-          <main>{children}</main>
+          <main>
+            <PasswordGate>{children}</PasswordGate>
+          </main>
         </SessionProvider>
       </body>
     </html>

@@ -29,6 +29,8 @@ class User(Base):
     role: Mapped[str] = mapped_column(String(20))  # student | guardian | teacher | admin
     class_group_id: Mapped[int | None] = mapped_column(ForeignKey("class_groups.id"), nullable=True)
     settings: Mapped[dict] = mapped_column(JSON, default=dict)
+    # Set for accounts made with a temporary password; cleared when they choose their own.
+    must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
@@ -36,8 +38,9 @@ class Session(Base):
     __tablename__ = "sessions"
 
     token: Mapped[str] = mapped_column(String(64), primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    last_seen_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
     user: Mapped[User] = relationship()
 
@@ -47,7 +50,7 @@ class ClassGroup(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(80))
-    teacher_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", use_alter=True), nullable=True)
+    teacher_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", use_alter=True, name="fk_class_groups_teacher_id_users"), nullable=True)
 
 
 class GuardianLink(Base):

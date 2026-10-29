@@ -2,15 +2,51 @@ import hashlib
 import hmac
 import os
 import secrets
+import time
+from collections import defaultdict, deque
+from datetime import timedelta
 
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
 from .db import get_db
-from .models import AuditLog, Consent, GuardianLink, Session, User
+from .models import AuditLog, Consent, GuardianLink, Session, User, utcnow
 
 PBKDF2_ROUNDS = 200_000
+SESSION_IDLE = timedelta(days=14)  # signed out after two weeks without use
+MIN_PASSWORD = 8
+
+# Letters and digits that are hard to confuse when read off a printed sheet.
+_TEMP_ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789"
+
+
+def temporary_password() -> str:
+    """Easy to type from a printed sheet, e.g. 'kq7m-xp3t'."""
+    pick = lambda n: "".join(secrets.choice(_TEMP_ALPHABET) for _ in range(n))  # noqa: E731
+    return f"{pick(4)}-{pick(4)}"
+
+
+# --- Sign-in attempt limits ----------------------------------------------------------
+# Per process: enough to stop password guessing against children's accounts.
+LOGIN_WINDOW = 15 * 60
+LOGIN_MAX_FAILURES = 10
+_failures: dict[str, deque] = defaultdict(deque)
+
+
+def login_blocked(key: str) -> bool:
+    q = _failures[key]
+    while q and q[0] < time.monotonic() - LOGIN_WINDOW:
+        q.popleft()
+    return len(q) >= LOGIN_MAX_FAILURES
+
+
+def record_login_failure(key: str) -> None:
+    _failures[key].append(time.monotonic())
+
+
+def clear_login_failures(key: str) -> None:
+    _failures.pop(key, None)
 
 
 def hash_password(password: str) -> str:
@@ -39,8 +75,12 @@ def current_user(authorization: str = Header(default=""), db: DbSession = Depend
     if not authorization.startswith("Bearer "):
         raise HTTPException(401, "Not signed in")
     sess = db.get(Session, authorization.removeprefix("Bearer ").strip())
-    if not sess:
+    now = utcnow()
+    if not sess or now - (sess.last_seen_at or sess.created_at) > SESSION_IDLE:
         raise HTTPException(401, "Session expired")
+    if now - (sess.last_seen_at or sess.created_at) > timedelta(hours=1):
+        sess.last_seen_at = now
+        db.commit()
     return sess.user
 
 

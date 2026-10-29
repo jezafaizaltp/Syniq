@@ -33,3 +33,13 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t syniq-api backend
+      - run: docker build -t syniq-web frontend
+      - name: Compose file is valid
+        working-directory: deploy
+        run: DOMAIN=example.org POSTGRES_PASSWORD=x docker compose config --quiet

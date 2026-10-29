@@ -1,0 +1,81 @@
+# SYNiq on one server: database, API, web app, HTTPS and daily backups.
+# Usage: copy .env.example to .env, fill it in, then `docker compose up -d --build`.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: syniq
+      POSTGRES_USER: syniq
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U syniq -d syniq"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ../backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://syniq:${POSTGRES_PASSWORD}@db:5432/syniq
+      SYNIQ_ENV: production
+      CORS_ORIGINS: https://${DOMAIN:?set DOMAIN in .env}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
+  web:
+    build:
+      context: ../frontend
+      args:
+        NEXT_PUBLIC_API_URL: /api
+        NEXT_PUBLIC_SHOW_DEMO: "0"
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+      - web
+
+  # A compressed copy of the database every night, kept for 14 days in ./backups.
+  # Copy that folder off the server too (see docs/deploy.md).
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./backups:/backups
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        while true; do
+          pg_dump -h db -U syniq -d syniq | gzip > /backups/syniq-$$(date +%Y-%m-%d).sql.gz
+          find /backups -name 'syniq-*.sql.gz' -mtime +14 -delete
+          sleep 86400
+        done
+
+volumes:
+  db:
+  caddy_data:
+  caddy_config:

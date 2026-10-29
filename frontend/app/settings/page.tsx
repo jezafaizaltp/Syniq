@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CHOSEN_SUPPORT, NOTICED_SUPPORT, STYLE_WORDS, Settings } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import { ChangePassword } from "../password";
 
 export default function SettingsPage() {
   const { me, loading, saveSettings } = useSession();
@@ -130,6 +131,7 @@ export default function SettingsPage() {
           {saved}
         </p>
       </div>
+      <ChangePassword first={false} />
     </div>
   );
 }
