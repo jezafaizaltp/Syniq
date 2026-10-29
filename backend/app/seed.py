@@ -162,7 +162,8 @@ def seed(db: DbSession) -> None:
     db.add_all(subjects.values())
     db.flush()
 
-    chapter = Chapter(subject_id=subjects["math"].id, number=1, title="Demo: Algebraic identities")
+    # Numbered 99 so it never clashes with a real textbook chapter.
+    chapter = Chapter(subject_id=subjects["math"].id, number=99, title="Demo: Algebraic identities")
     db.add(chapter)
     db.flush()
 

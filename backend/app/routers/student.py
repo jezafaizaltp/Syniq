@@ -29,19 +29,33 @@ ALLOWED_SETTINGS = {
 
 # --- Curriculum browsing ------------------------------------------------------
 
+def visible_chapters(db: DbSession, user: User, subject_id: int) -> list[Chapter]:
+    """Students see only chapters with approved content; staff see every chapter, ready or not."""
+    query = select(Chapter).where(Chapter.subject_id == subject_id).order_by(Chapter.number)
+    if user.role in ("student", "guardian"):
+        ready = (
+            select(Concept.chapter_id)
+            .join(Item, Item.concept_id == Concept.id)
+            .where(Item.status == "approved")
+            .union(select(Concept.chapter_id).join(Explanation, Explanation.concept_id == Concept.id).where(Explanation.status == "approved"))
+        )
+        query = query.where(Chapter.id.in_(ready))
+    return db.scalars(query).all()
+
+
 @router.get("/subjects")
 def list_subjects(db: DbSession = Depends(get_db), user: User = Depends(current_user)):
     subjects = db.scalars(select(Subject).order_by(Subject.id)).all()
     out = []
     for s in subjects:
-        n = len(db.scalars(select(Chapter.id).where(Chapter.subject_id == s.id)).all())
+        n = len(visible_chapters(db, user, s.id))
         out.append({"id": s.id, "code": s.code, "name": s.name, "language": s.language, "chapters": n})
     return out
 
 
 @router.get("/subjects/{subject_id}/chapters")
 def list_chapters(subject_id: int, db: DbSession = Depends(get_db), user: User = Depends(current_user)):
-    chapters = db.scalars(select(Chapter).where(Chapter.subject_id == subject_id).order_by(Chapter.number)).all()
+    chapters = visible_chapters(db, user, subject_id)
     return [{"id": c.id, "number": c.number, "title": c.title} for c in chapters]
 
 
