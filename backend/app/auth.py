@@ -11,6 +11,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
 from .db import get_db
+from .i18n import language, t
 from .models import AuditLog, Consent, GuardianLink, Session, User, utcnow
 
 PBKDF2_ROUNDS = 200_000
@@ -102,10 +103,12 @@ def has_consent(db: DbSession, student_id: int, scope: str) -> bool:
     return bool(latest and latest.granted)
 
 
-def require_learning_consent(user: User = Depends(require_role("student")), db: DbSession = Depends(get_db)) -> User:
+def require_learning_consent(
+    user: User = Depends(require_role("student")), db: DbSession = Depends(get_db), lang: str = Depends(language)
+) -> User:
     """No learning data is processed until a guardian has consented."""
     if not has_consent(db, user.id, "core_learning"):
-        raise HTTPException(403, "Waiting for a parent or guardian to give consent")
+        raise HTTPException(403, t(lang, "err.waiting_consent"))
     return user
 
 

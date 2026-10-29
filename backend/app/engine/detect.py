@@ -20,6 +20,8 @@ Pure functions, so the rules can be tested and audited without a database.
 
 from dataclasses import dataclass, field
 
+from ..i18n import t, translate_english
+
 DETECT_VERSION = "2026.10-1"
 
 CHOSEN = ["screen_reader", "visual_first", "tap_to_answer"]
@@ -34,12 +36,10 @@ BASIC_MISTAKES = {
 CONCRETE = {"count_it_out", "try_similar"}
 ABSTRACT = {"step_by_step", "real_life"}
 
-# What the student is told when a mode switches on. {reason} is filled in.
-ANNOUNCE = {
-    "focus": "From now on I'll show things in shorter steps, one at a time, with quick challenges. {reason}",
-    "easy_read": "From now on I'll use shorter lines and read things aloud to you. {reason}",
-    "small_steps": "From now on I'll show sums with pictures and smaller numbers first. {reason}",
-}
+
+def announce(mode: str, reason: str, lang: str = "en") -> str:
+    """What the student is told when a mode switches on. reason is the finding's English reason."""
+    return t(lang, f"announce.{mode}", reason=translate_english(lang, reason)) + " " + t(lang, "announce.switch_off")
 
 
 @dataclass
@@ -72,12 +72,12 @@ def notice_small_steps(attempts: list[AttemptRecord]) -> Finding | None:
     recent = attempts[-20:]
     basic = [a.mistake for a in recent if a.mistake in BASIC_MISTAKES]
     if len(basic) >= 3:
-        return Finding("small_steps", "Counting and number steps have tripped you up a few times, and pictures help with those.",
+        return Finding("small_steps", t("en", "noticed.small_steps.basic"),
                        {"basic_mistakes": len(basic), "of": len(recent)})
     after_concrete = [a.correct for a in attempts if a.after_mode in CONCRETE]
     after_abstract = [a.correct for a in attempts if a.after_mode in ABSTRACT]
     if len(after_concrete) >= 2 and len(after_abstract) >= 2 and _rate(after_concrete) - _rate(after_abstract) >= 0.4:
-        return Finding("small_steps", "Pictures and smaller numbers have helped you more than long explanations.",
+        return Finding("small_steps", t("en", "noticed.small_steps.pictures"),
                        {"after_pictures": _rate(after_concrete), "after_words": _rate(after_abstract)})
     return None
 
@@ -86,10 +86,10 @@ def notice_easy_read(attempts: list[AttemptRecord], signals: Signals) -> Finding
     long_ = [a.correct for a in attempts if a.prompt_words >= LONG_PROMPT_WORDS]
     short = [a.correct for a in attempts if a.prompt_words < LONG_PROMPT_WORDS]
     if len(long_) >= 4 and len(short) >= 4 and _rate(short) - _rate(long_) >= 0.3:
-        return Finding("easy_read", "Long questions have been harder for you than short ones on the same ideas.",
+        return Finding("easy_read", t("en", "noticed.easy_read.long"),
                        {"short": _rate(short), "long": _rate(long_), "n_long": len(long_)})
     if signals.read_aloud_presses >= 3:
-        return Finding("easy_read", "You often use read aloud, so I'll do it for you.",
+        return Finding("easy_read", t("en", "noticed.easy_read.read_aloud"),
                        {"read_aloud_presses": signals.read_aloud_presses})
     return None
 
@@ -105,10 +105,10 @@ def notice_focus(attempts: list[AttemptRecord], signals: Signals) -> Finding | N
             if _rate(answers[:half]) - _rate(answers[half:]) >= 0.35:
                 slipping += 1
     if slipping >= 2:
-        return Finding("focus", "Your answers tend to slip later in a session, so shorter bursts should help.",
+        return Finding("focus", t("en", "noticed.focus.slipping"),
                        {"sessions_slipping": slipping})
     if signals.break_presses >= 3:
-        return Finding("focus", "You've been taking breaks, so I'll keep things short.",
+        return Finding("focus", t("en", "noticed.focus.breaks"),
                        {"break_presses": signals.break_presses})
     return None
 

@@ -6,7 +6,7 @@ import { useSession } from "@/lib/session";
 
 /** Change your password. Shown in place of everything else on first sign-in with a temporary password. */
 export function ChangePassword({ first }: { first: boolean }) {
-  const { refresh } = useSession();
+  const { refresh, t } = useSession();
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
   const [again, setAgain] = useState("");
@@ -15,7 +15,7 @@ export function ChangePassword({ first }: { first: boolean }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (next !== again) {
-      setMessage("The two new passwords are different. Please type them again.");
+      setMessage(t("pw.mismatch"));
       return;
     }
     try {
@@ -24,22 +24,22 @@ export function ChangePassword({ first }: { first: boolean }) {
       setCurrent("");
       setNext("");
       setAgain("");
-      setMessage("Your new password is saved.");
+      setMessage(t("pw.saved"));
       await refresh();
     } catch (err) {
-      setMessage(err instanceof ApiError ? err.message : "Could not change the password");
+      setMessage(err instanceof ApiError ? err.message : t("pw.failed"));
     }
   }
 
   return (
     <form className="card" onSubmit={submit}>
-      <h2>{first ? "Choose your own password" : "Change password"}</h2>
-      {first && <p className="muted">You signed in with a password from your school. Please choose your own to keep your account safe.</p>}
-      <label htmlFor="pw-current">{first ? "Password from your school" : "Current password"}</label>
+      <h2>{first ? t("pw.choose") : t("pw.change")}</h2>
+      {first && <p className="muted">{t("pw.first_note")}</p>}
+      <label htmlFor="pw-current">{first ? t("pw.from_school") : t("pw.current")}</label>
       <input id="pw-current" type="password" autoComplete="current-password" value={current} onChange={(e) => setCurrent(e.target.value)} required />
-      <label htmlFor="pw-new">New password (at least 8 letters or numbers)</label>
+      <label htmlFor="pw-new">{t("pw.new")}</label>
       <input id="pw-new" type="password" autoComplete="new-password" minLength={8} value={next} onChange={(e) => setNext(e.target.value)} required />
-      <label htmlFor="pw-again">New password again</label>
+      <label htmlFor="pw-again">{t("pw.again")}</label>
       <input id="pw-again" type="password" autoComplete="new-password" minLength={8} value={again} onChange={(e) => setAgain(e.target.value)} required />
       {message && (
         <p className="feedback warn" role="status">
@@ -47,7 +47,7 @@ export function ChangePassword({ first }: { first: boolean }) {
         </p>
       )}
       <div className="row" style={{ marginTop: 16 }}>
-        <button type="submit">Save password</button>
+        <button type="submit">{t("pw.save")}</button>
       </div>
     </form>
   );

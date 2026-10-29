@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import ai, learning
+from .. import ai, i18n, learning
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
 from ..engine.mastery import progress_label
@@ -71,7 +71,9 @@ class NextRequest(BaseModel):
 
 
 @router.post("/learn/next")
-def learn_next(body: NextRequest, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+def learn_next(
+    body: NextRequest, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
+):
     if not db.get(Chapter, body.chapter_id):
         raise HTTPException(404, "Chapter not found")
     action, decision = learning.next_action(db, user, body.chapter_id, body.current_concept_id)
@@ -79,7 +81,7 @@ def learn_next(body: NextRequest, db: DbSession = Depends(get_db), user: User = 
     payload = {
         "decision_id": decision.id,
         "kind": action.kind,
-        "reason": action.reason,
+        "reason": i18n.translate_english(lang, action.reason),
         "concept": {"id": concept.id, "title": concept.title} if concept else None,
         "offer_support": action.offer_support,
     }
@@ -135,20 +137,26 @@ class AttemptIn(BaseModel):
     explanation_style: str | None = None
 
 
-MISCONCEPTION_TIPS = {
-    "square_each_term": "Squaring a sum is not the same as squaring each part: (a + b)² also has a middle term, 2ab.",
-    "missing_double": "Check the middle term: it is 2ab, twice the product of the two terms.",
-    "sign_middle": "In (a − b)² the middle term is negative: −2ab.",
-    "sign_last": "The last term is b², and a square is never negative.",
-    "sum_not_difference": "(a + b)(a − b) gives a difference of squares, a² − b², so the result has a minus sign.",
-    "extra_middle_term": "In (a + b)(a − b) the middle terms cancel out, so there is no middle term.",
-    "product_terms": "Multiply every term in the first bracket by every term in the second.",
-    "arithmetic": "The method looks right; check the arithmetic in the last step.",
-}
+# Tips for the demo maths chapter's common mistakes; the wording is in i18n.py (tip.<misconception>).
+def misconception_tip(lang: str, misconception: str | None) -> str | None:
+    key = f"tip.{misconception}"
+    return i18n.t(lang, key) if misconception and i18n.has(key) else None
+
+
+def localized_settings(settings: dict | None, lang: str) -> dict:
+    """Settings as shown to the reader: noticed-support reasons in their language."""
+    out = dict(settings or {})
+    if lang != "en" and out.get("auto_support"):
+        out["auto_support"] = {
+            mode: {**v, "reason": i18n.translate_english(lang, v.get("reason", ""))} for mode, v in out["auto_support"].items()
+        }
+    return out
 
 
 @router.post("/learn/attempts")
-def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+def submit_attempt(
+    body: AttemptIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
+):
     item = db.get(Item, body.item_id)
     if not item or item.status != "approved":
         raise HTTPException(404, "Item not found")
@@ -156,7 +164,7 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
         db, user, item, body.response, body.hints_used, body.time_ms, body.explanation_style
     )
     findings = learning.update_noticed_support(db, user)
-    tip = None if correct else MISCONCEPTION_TIPS.get(misconception or "")
+    tip = None if correct else misconception_tip(lang, misconception)
     explanations = db.scalars(
         select(Explanation).where(Explanation.concept_id == item.concept_id, Explanation.status == "approved")
     ).all()
@@ -172,13 +180,11 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
             explanations={e.style: e.body for e in explanations},
             support=detect.effective_support(user.settings),
             tutor_available=ai.enabled(),
+            lang=lang,
         ),
         seed=row.attempts,
     )
-    response["adapted"] = [
-        {"mode": f.mode, "message": detect.ANNOUNCE[f.mode].format(reason=f.reason) + " You can switch this off in Settings."}
-        for f in findings
-    ]
+    response["adapted"] = [{"mode": f.mode, "message": detect.announce(f.mode, f.reason, lang)} for f in findings]
     if response["mode"]:
         attempt = db.scalars(
             select(Attempt).where(Attempt.student_id == user.id).order_by(Attempt.id.desc())
@@ -192,7 +198,7 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
                 rule_id=f"F_{response['mode']}",
                 rule_version=responses.RESPONSES_VERSION,
                 action="feedback",
-                reason=response["why"],
+                reason=i18n.t("en", f"why.{response['mode']}"),
                 evidence={"wrong_in_a_row": row.wrong_streak, "mistake": response.get("mistake") or misconception},
             )
         )
@@ -200,7 +206,7 @@ def submit_attempt(body: AttemptIn, db: DbSession = Depends(get_db), user: User 
     out = {
         "correct": correct,
         "progress": progress_label(row.p_known, row.attempts),
-        "feedback": "Correct, well done." if correct else "Not quite yet.",
+        "feedback": i18n.t(lang, "feedback.correct" if correct else "feedback.not_yet"),
         "response": response,
     }
     if not correct:
@@ -229,25 +235,25 @@ class CheckInIn(BaseModel):
 
 
 @router.post("/checkins")
-def checkin(body: CheckInIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+def checkin(
+    body: CheckInIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
+):
     """Optional and self-reported. Skipping it changes nothing."""
     if not has_consent(db, user.id, "mood_checkins"):
-        return {"stored": False, "message": "Thanks. Check-ins are not saved for your account."}
+        return {"stored": False, "message": i18n.t(lang, "checkin.not_saved")}
     db.add(CheckIn(student_id=user.id, mood=body.mood, energy=body.energy))
     db.commit()
-    message = "Thanks for telling me."
-    if body.mood in ("low", "frustrated") or body.energy == "low":
-        message = "Thanks for telling me. We can start with something short, and you can take a break any time."
-    return {"stored": True, "message": message}
+    low = body.mood in ("low", "frustrated") or body.energy == "low"
+    return {"stored": True, "message": i18n.t(lang, "checkin.thanks_low" if low else "checkin.thanks")}
 
 
 @router.get("/me")
-def me(user: User = Depends(current_user), db: DbSession = Depends(get_db)):
+def me(user: User = Depends(current_user), db: DbSession = Depends(get_db), lang: str = Depends(i18n.language)):
     out = {
         "id": user.id,
         "name": user.name,
         "role": user.role,
-        "settings": user.settings or {},
+        "settings": localized_settings(user.settings, lang),
         "must_change_password": user.must_change_password,
     }
     if user.role == "student":
@@ -259,7 +265,9 @@ def me(user: User = Depends(current_user), db: DbSession = Depends(get_db)):
 
 
 @router.put("/me/settings")
-def update_settings(body: dict, user: User = Depends(current_user), db: DbSession = Depends(get_db)):
+def update_settings(
+    body: dict, user: User = Depends(current_user), db: DbSession = Depends(get_db), lang: str = Depends(i18n.language)
+):
     """Accessibility settings need no diagnosis and no approval."""
     settings = dict(user.settings or {})
     for key, value in body.items():
@@ -272,13 +280,15 @@ def update_settings(body: dict, user: User = Depends(current_user), db: DbSessio
             raise HTTPException(400, "Unknown support mode")
         if key == "auto_off" and not (all(isinstance(v, str) for v in value) and set(value) <= set(detect.NOTICED)):
             raise HTTPException(400, "Unknown support mode")
+        if key == "ui_language" and value not in i18n.LANGS:
+            raise HTTPException(400, "Unknown language")
         if key == "font_scale" and not 0.8 <= float(value) <= 2.0:
             raise HTTPException(400, "font_scale must be between 0.8 and 2.0")
         settings[key] = value
     user.settings = settings
     db.add(user)
     db.commit()
-    return settings
+    return localized_settings(settings, lang)
 
 
 @router.get("/me/progress")
@@ -299,9 +309,9 @@ def my_progress(user: User = Depends(require_learning_consent), db: DbSession = 
 
 
 @router.get("/me/why/{decision_id}")
-def why(decision_id: int, user: User = Depends(current_user), db: DbSession = Depends(get_db)):
+def why(decision_id: int, user: User = Depends(current_user), db: DbSession = Depends(get_db), lang: str = Depends(i18n.language)):
     """'Why am I seeing this?' in plain words."""
     d = db.get(Decision, decision_id)
     if not d or d.student_id != user.id:
         raise HTTPException(404, "Not found")
-    return {"reason": d.reason, "rule": d.rule_id, "version": d.rule_version}
+    return {"reason": i18n.translate_english(lang, d.reason), "rule": d.rule_id, "version": d.rule_version}

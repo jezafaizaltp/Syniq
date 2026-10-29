@@ -1,4 +1,12 @@
+import type { Lang } from "./i18n";
+
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
+// The language the server should answer in: feedback, reasons and errors.
+let apiLang: Lang = "en";
+export function setApiLang(lang: Lang) {
+  apiLang = lang;
+}
 
 export type Role = "student" | "guardian" | "teacher" | "admin";
 
@@ -10,39 +18,17 @@ export type Settings = {
   read_aloud?: boolean;
   extra_time?: boolean;
   preferred_style?: string | null;
+  ui_language?: Lang;
   support_modes?: string[];
   auto_support?: Record<string, { reason: string; since: string }>;
   auto_off?: string[];
 };
 
-/** Support for sight, hearing or speech: chosen by a parent or the student. */
-export const CHOSEN_SUPPORT: { key: string; me: string; child: string; help: string }[] = [
-  {
-    key: "screen_reader",
-    me: "I use a screen reader or find pictures hard to see",
-    child: "Uses a screen reader or finds pictures hard to see",
-    help: "Everything is said in words, not only shown in pictures.",
-  },
-  {
-    key: "visual_first",
-    me: "I'm deaf or hard of hearing",
-    child: "Is deaf or hard of hearing",
-    help: "Nothing depends on sound. Pictures and text come first.",
-  },
-  {
-    key: "tap_to_answer",
-    me: "Let me tap answers instead of typing or speaking",
-    child: "Taps answers instead of typing or speaking",
-    help: "Number questions show answers to choose from.",
-  },
-];
+/** Support for sight, hearing or speech: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
+export const CHOSEN_SUPPORT = ["screen_reader", "visual_first", "tap_to_answer"] as const;
 
-/** Support SYNiq turns on itself when a student's answers show it helps. */
-export const NOTICED_SUPPORT: Record<string, string> = {
-  focus: "Shorter steps, one at a time, with quick challenges",
-  easy_read: "Shorter lines, a clearer font, and reading aloud",
-  small_steps: "Pictures and smaller numbers first",
-};
+/** Support SYNiq turns on itself when a student's answers show it helps. Words: noticed.<key> in i18n.ts. */
+export const NOTICED_SUPPORT = ["focus", "easy_read", "small_steps"] as const;
 
 export function effectiveSupport(s: Settings | undefined): string[] {
   const off = s?.auto_off ?? [];
@@ -88,6 +74,7 @@ export function setToken(value: string | null) {
 export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   headers.set("Content-Type", "application/json");
+  headers.set("Accept-Language", apiLang);
   const t = token();
   if (t) headers.set("Authorization", `Bearer ${t}`);
   const res = await fetch(`${API_URL}${path}`, { ...init, headers });
@@ -106,6 +93,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
 export const post = <T>(path: string, body: unknown) => api<T>(path, { method: "POST", body: JSON.stringify(body) });
 export const put = <T>(path: string, body: unknown) => api<T>(path, { method: "PUT", body: JSON.stringify(body) });
 
+// English words for the teacher screens. Student and parent screens use i18n.ts.
 export const PROGRESS_WORDS: Record<string, string> = {
   not_started: "Not started",
   learning: "Learning",

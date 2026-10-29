@@ -32,6 +32,8 @@ Everything here is a pure function so it can be tested without a database.
 import re
 from dataclasses import dataclass, field
 
+from ..i18n import t
+
 RESPONSES_VERSION = "2026.10-1"
 
 SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps"]
@@ -82,29 +84,29 @@ def parse_arithmetic(prompt: str, answer: str) -> Arithmetic | None:
 
 # --- Spotting the mistake -------------------------------------------------------------
 
-def diagnose(s: Arithmetic, response: int) -> tuple[str, str]:
+def diagnose(s: Arithmetic, response: int, lang: str = "en") -> tuple[str, str]:
     """Return (mistake tag, plain-words description) for a wrong whole-number answer."""
     right = s.result
     diff = response - right
     if s.op == "+" and response == abs(s.a - s.b):
-        return "subtracted_instead", "It looks like you took away instead of adding."
+        return "subtracted_instead", t(lang, "mistake.subtracted_instead")
     if s.op == "−" and response == s.a + s.b:
-        return "added_instead", "It looks like you added instead of taking away."
+        return "added_instead", t(lang, "mistake.added_not_subtracted")
     if s.op == "+" and response == s.a * s.b:
-        return "multiplied_instead", "It looks like you multiplied instead of adding."
+        return "multiplied_instead", t(lang, "mistake.multiplied_instead")
     if s.op == "×" and response == s.a + s.b:
-        return "added_instead", "It looks like you added instead of multiplying."
+        return "added_instead", t(lang, "mistake.added_not_multiplied")
     if s.op == "×" and abs(diff) in (s.a, s.b):
-        return "one_group_off", "You have one group too many or too few."
+        return "one_group_off", t(lang, "mistake.one_group_off")
     if response in (s.a, s.b) and s.op in "+×":
-        return "one_group_only", "It looks like you counted only one of the groups."
+        return "one_group_only", t(lang, "mistake.one_group_only")
     if abs(diff) == 1:
-        return "counting_slip", "So close! You are just 1 away. Count once more, slowly."
+        return "counting_slip", t(lang, "mistake.counting_slip")
     if str(response) == str(right)[::-1] and response != right:
-        return "digits_swapped", "You have the right digits, but in the wrong order."
+        return "digits_swapped", t(lang, "mistake.digits_swapped")
     if abs(diff) % 10 == 0 and s.op in "+−":
-        return "tens_slip", "The ones are right. Check the tens again."
-    return "other", f"Your answer is {abs(diff)} {'more' if diff > 0 else 'less'} than it should be."
+        return "tens_slip", t(lang, "mistake.tens_slip")
+    return "other", t(lang, "mistake.more" if diff > 0 else "mistake.less", n=abs(diff))
 
 
 # --- Pictures ----------------------------------------------------------------------------
@@ -116,12 +118,19 @@ def _draw(n: int, tens: bool = False) -> str:
     return TEN * (n // 10) + STAR * (n % 10)
 
 
-def _say(n: int, tens: bool = False) -> str:
+def _say(n: int, tens: bool = False, lang: str = "en") -> str:
     """n in words for a screen reader, grouped the same way as the picture."""
+    if lang == "ml":
+        if not tens:
+            return f"{n} നക്ഷത്രം" if n == 1 else f"{n} നക്ഷത്രങ്ങൾ"
+        t10, ones = divmod(n, 10)
+        if t10 and ones:
+            return f"{t10} പത്തും {ones} ഒന്നും"
+        return f"{t10} പത്ത്" if t10 else (f"{ones} ഒന്ന്" if ones else "ഒന്നുമില്ല")
     if not tens:
         return f"{n} star{'s' if n != 1 else ''}"
-    t, ones = divmod(n, 10)
-    parts = ([f"{t} ten{'s' if t != 1 else ''}"] if t else []) + ([f"{ones} one{'s' if ones != 1 else ''}"] if ones else [])
+    t10, ones = divmod(n, 10)
+    parts = ([f"{t10} ten{'s' if t10 != 1 else ''}"] if t10 else []) + ([f"{ones} one{'s' if ones != 1 else ''}"] if ones else [])
     return " and ".join(parts) or "nothing"
 
 
@@ -130,7 +139,7 @@ def can_draw(s: Arithmetic) -> bool:
     return 0 < biggest <= MAX_BLOCKS and s.result >= 0
 
 
-def picture(s: Arithmetic, response: int | None) -> dict:
+def picture(s: Arithmetic, response: int | None, lang: str = "en") -> dict:
     """A visual block: rows of objects, each with a spoken alternative."""
     rows = []
     # Use tens blocks when one row would hold more than 20 objects.
@@ -141,42 +150,37 @@ def picture(s: Arithmetic, response: int | None) -> dict:
         return _draw(n, big)
 
     def say(n: int) -> str:
-        return _say(n, big)
+        return _say(n, big, lang)
 
     if s.op == "+":
         # Show their answer as a picture only when it reads clearly as "the second group was wrong".
         if not big and response is not None and s.a <= response <= MAX_STARS and response - s.a != s.b:
-            rows.append({"label": "What you wrote", "symbols": f"{draw(s.a)} + {draw(response - s.a)} = {response}",
-                         "alt": f"{say(s.a)} plus {say(response - s.a)} makes {response}"})
-        rows.append({"label": "The right way", "symbols": f"{draw(s.a)} + {draw(s.b)} = {s.result}",
-                     "alt": f"{say(s.a)} plus {say(s.b)} makes {s.result}"})
-        tip = f"Count every object in both groups: {s.a} and then {s.b} more makes {s.result}."
+            rows.append({"label": t(lang, "pic.you_wrote"), "symbols": f"{draw(s.a)} + {draw(response - s.a)} = {response}",
+                         "alt": t(lang, "pic.alt_add", x=say(s.a), y=say(response - s.a), r=response)})
+        rows.append({"label": t(lang, "pic.right_way"), "symbols": f"{draw(s.a)} + {draw(s.b)} = {s.result}",
+                     "alt": t(lang, "pic.alt_add", x=say(s.a), y=say(s.b), r=s.result)})
+        tip = t(lang, "pic.tip_add", a=s.a, b=s.b, r=s.result)
     elif s.op == "−":
-        rows.append({"label": f"Start with {s.a}", "symbols": draw(s.a), "alt": say(s.a)})
-        rows.append({"label": f"Take away {s.b}", "symbols": draw(s.result) + " " + ("❌" * s.b if not big else f"(❌ {s.b})"),
-                     "alt": f"cross out {s.b}, and {say(s.result)} are left"})
-        tip = f"Cross out {s.b} and count what is left: {s.result}."
+        rows.append({"label": t(lang, "pic.start_with", a=s.a), "symbols": draw(s.a), "alt": say(s.a)})
+        rows.append({"label": t(lang, "pic.take_away", b=s.b), "symbols": draw(s.result) + " " + ("❌" * s.b if not big else f"(❌ {s.b})"),
+                     "alt": t(lang, "pic.alt_cross_out", b=s.b, left=say(s.result))})
+        tip = t(lang, "pic.tip_subtract", b=s.b, r=s.result)
     elif s.op == "×":
         for i in range(s.b):
-            rows.append({"label": f"Group {i + 1}", "symbols": draw(s.a), "alt": say(s.a)})
-        tip = f"{s.b} groups of {s.a} make {s.result}. Count the groups, then count every object."
+            rows.append({"label": t(lang, "pic.group", i=i + 1), "symbols": draw(s.a), "alt": say(s.a)})
+        tip = t(lang, "pic.tip_multiply", a=s.a, b=s.b, r=s.result)
     else:
         for i in range(s.b):
-            rows.append({"label": f"Share {i + 1}", "symbols": draw(s.result), "alt": say(s.result)})
-        tip = f"Share {s.a} equally into {s.b} groups. Each group gets {s.result}."
+            rows.append({"label": t(lang, "pic.share", i=i + 1), "symbols": draw(s.result), "alt": say(s.result)})
+        tip = t(lang, "pic.tip_divide", a=s.a, b=s.b, r=s.result)
     return {"type": "visual", "rows": rows, "caption": tip}
 
 
 # --- Stories ----------------------------------------------------------------------------
 
-def story(s: Arithmetic) -> str:
-    if s.op == "+":
-        return f"You have {s.a} mangoes. Your friend gives you {s.b} more. Now you have {s.a} + {s.b} = {s.result} mangoes."
-    if s.op == "−":
-        return f"There are {s.a} bananas in a bunch. You share {s.b} with your family. {s.a} − {s.b} = {s.result} bananas are left."
-    if s.op == "×":
-        return f"There are {s.b} plates with {s.a} appams on each. Altogether that is {s.b} × {s.a} = {s.result} appams."
-    return f"{s.a} sweets are shared equally among {s.b} friends. Each friend gets {s.a} ÷ {s.b} = {s.result} sweets."
+def story(s: Arithmetic, lang: str = "en") -> str:
+    key = {"+": "story.add", "−": "story.subtract", "×": "story.multiply", "÷": "story.divide"}[s.op]
+    return t(lang, key, a=s.a, b=s.b, r=s.result)
 
 
 def smaller(s: Arithmetic) -> Arithmetic:
@@ -242,6 +246,7 @@ class Context:
     explanations: dict[str, str] = field(default_factory=dict)  # approved, by style
     support: list[str] = field(default_factory=list)
     tutor_available: bool = False
+    lang: str = "en"  # en or ml: the language the student reads SYNiq in
 
 
 def choose_answer_mode(ctx: Context, s: Arithmetic | None) -> str:
@@ -259,23 +264,17 @@ def choose_answer_mode(ctx: Context, s: Arithmetic | None) -> str:
     return mode
 
 
-WHY = {
-    "count_it_out": "Seeing it with objects often makes a mistake easy to spot.",
-    "step_by_step": "Going through it one step at a time shows exactly where it changed.",
-    "real_life": "This has been tricky a few times, so here it is as an everyday story.",
-    "try_similar": "Several tries have not worked yet, so here is a smaller one with the same idea.",
-}
-
-CHEERS = ["Nice work!", "Correct, well done.", "Yes! That's it.", "Great thinking."]
+CHEERS = 4  # resp.cheer.0 to resp.cheer.3
 
 
 def build(ctx: Context, seed: int = 0) -> dict:
     """The full response to one answer, as blocks the app can show, speak or both."""
     s = parse_arithmetic(ctx.prompt, ctx.answer)
     support = set(ctx.support)
+    lang = ctx.lang
 
     if ctx.correct:
-        headline = "⭐ Correct!" if "focus" in support else CHEERS[seed % len(CHEERS)]
+        headline = t(lang, "resp.correct_short") if "focus" in support else t(lang, f"resp.cheer.{seed % CHEERS}")
         out = {"correct": True, "mode": None, "headline": headline, "blocks": [], "why": ""}
         return _present(out, support)
 
@@ -285,38 +284,38 @@ def build(ctx: Context, seed: int = 0) -> dict:
 
     mistake = None
     if s is not None and resp is not None:
-        mistake, words = diagnose(s, resp)
+        mistake, words = diagnose(s, resp, lang)
         blocks.append({"type": "text", "text": words})
     elif ctx.misconception_tip:
         blocks.append({"type": "text", "text": ctx.misconception_tip})
 
     if mode == "count_it_out":
         if s is not None and can_draw(s):
-            blocks.append(picture(s, resp))
+            blocks.append(picture(s, resp, lang))
         else:
             blocks.append({"type": "text", "text": ctx.explanations["visual"]})
     elif mode == "step_by_step":
         steps = steps_from(ctx.solution) if ctx.solution else []
         if not steps and s is not None:
-            steps = [f"Read the question: {s.text()}.", f"Work it out: {s.text()} = {s.result}."]
+            steps = [t(lang, "step.read", sum=s.text()), t(lang, "step.work", sum=s.text(), r=s.result)]
         if not steps and "step_by_step" in ctx.explanations:
             steps = steps_from(ctx.explanations["step_by_step"])
         blocks.append({"type": "steps", "steps": steps})
     elif mode == "real_life":
-        text = story(s) if s is not None else ctx.explanations.get("real_world") or ctx.explanations.get("text", "")
+        text = story(s, lang) if s is not None else ctx.explanations.get("real_world") or ctx.explanations.get("text", "")
         if text:
             blocks.append({"type": "text", "text": text})
         if ctx.solution:
-            blocks.append({"type": "text", "text": f"The worked answer: {ctx.solution}"})
+            blocks.append({"type": "text", "text": t(lang, "resp.worked_answer", solution=ctx.solution)})
     elif mode == "try_similar":
         if s is not None:
             easy = smaller(s)
             if can_draw(easy):
-                blocks.append(picture(easy, None))
+                blocks.append(picture(easy, None, lang))
             # Practice only: not marked or stored, so the answer can travel with it.
-            blocks.append({"type": "challenge", "prompt": f"What is {easy.text()}?", "answer": str(easy.result)})
+            blocks.append({"type": "challenge", "prompt": t(lang, "resp.what_is", sum=easy.text()), "answer": str(easy.result)})
         else:
-            blocks.append({"type": "text", "text": "Let's look at the worked answer, then try an easier one next."})
+            blocks.append({"type": "text", "text": t(lang, "resp.easier_next")})
             if ctx.solution:
                 blocks.append({"type": "steps", "steps": steps_from(ctx.solution)})
 
@@ -324,14 +323,14 @@ def build(ctx: Context, seed: int = 0) -> dict:
         "correct": False,
         "mode": mode,
         "mistake": mistake,
-        "headline": "Not quite yet. Let's look at it together.",
+        "headline": t(lang, "resp.not_yet"),
         "blocks": [b for b in blocks if b.get("text") or b.get("steps") or b.get("rows") or b.get("prompt")],
-        "why": WHY[mode],
+        "why": t(lang, f"why.{mode}"),
         "suggest_tutor": ctx.tutor_available and ctx.wrong_in_a_row >= SUGGEST_TUTOR_AFTER,
     }
     if "focus" in support and s is not None and mode != "try_similar":
         quick = smaller(s)
-        out["blocks"].append({"type": "challenge", "prompt": f"Quick challenge: {quick.text()} = ?", "answer": str(quick.result)})
+        out["blocks"].append({"type": "challenge", "prompt": t(lang, "resp.quick_challenge", sum=quick.text()), "answer": str(quick.result)})
     return _present(out, support)
 
 

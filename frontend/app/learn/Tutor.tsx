@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { ApiError, post } from "@/lib/api";
-import { speak } from "@/lib/session";
+import { speak, useSession } from "@/lib/session";
 
 type Turn = { role: "student" | "tutor"; text: string };
 
 /** Ask SYNiq about the current topic. The conversation stays in this page and is not saved. */
 export default function Tutor({ conceptId, conceptTitle, readAloud }: { conceptId: number; conceptTitle: string; readAloud: boolean }) {
+  const { t } = useSession();
   const [open, setOpen] = useState(false);
   const [turns, setTurns] = useState<Turn[]>([]);
   const [text, setText] = useState("");
@@ -35,7 +36,7 @@ export default function Tutor({ conceptId, conceptTitle, readAloud }: { conceptI
       setTurns([...history, { role: "tutor", text: r.reply }]);
       if (readAloud) speak(r.reply);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Could not reach the tutor");
+      setError(err instanceof ApiError ? err.message : t("tutor.failed"));
     } finally {
       setBusy(false);
     }
@@ -45,32 +46,29 @@ export default function Tutor({ conceptId, conceptTitle, readAloud }: { conceptI
     return (
       <div className="row">
         <button className="secondary" onClick={() => setOpen(true)}>
-          💬 Ask SYNiq about this topic
+          {t("tutor.open")}
         </button>
       </div>
     );
   }
 
   return (
-    <section className="card" aria-label="Ask SYNiq">
+    <section className="card" aria-label={t("tutor.title")}>
       <div className="row" style={{ justifyContent: "space-between", alignItems: "center" }}>
-        <h2 style={{ margin: 0 }}>Ask SYNiq</h2>
+        <h2 style={{ margin: 0 }}>{t("tutor.title")}</h2>
         <button className="secondary" onClick={() => setOpen(false)}>
-          Close
+          {t("tutor.close")}
         </button>
       </div>
-      <p className="muted">
-        Ask anything about {conceptTitle}. Please don&apos;t share your name, phone number or address. This chat isn&apos;t
-        saved, and SYNiq can make mistakes, so check with your teacher if something seems off.
-      </p>
+      <p className="muted">{t("tutor.note", { topic: conceptTitle })}</p>
       <div className="chat" aria-live="polite">
-        {turns.map((t, i) => (
-          <p key={i} className={t.role}>
-            <span className="sr-only">{t.role === "student" ? "You: " : "SYNiq: "}</span>
-            {t.text}
+        {turns.map((turn, i) => (
+          <p key={i} className={turn.role}>
+            <span className="sr-only">{turn.role === "student" ? t("tutor.you") : "SYNiq: "}</span>
+            {turn.text}
           </p>
         ))}
-        {busy && <p className="tutor muted">Thinking…</p>}
+        {busy && <p className="tutor muted">{t("tutor.thinking")}</p>}
       </div>
       {error && (
         <p className="feedback warn" role="alert">
@@ -78,11 +76,11 @@ export default function Tutor({ conceptId, conceptTitle, readAloud }: { conceptI
         </p>
       )}
       <form onSubmit={send}>
-        <label htmlFor="tutor-q">Your question</label>
+        <label htmlFor="tutor-q">{t("tutor.question")}</label>
         <textarea id="tutor-q" value={text} maxLength={600} onChange={(e) => setText(e.target.value)} />
         <div className="row" style={{ marginTop: 8 }}>
           <button type="submit" disabled={!text.trim() || busy}>
-            Ask
+            {t("tutor.ask")}
           </button>
         </div>
       </form>

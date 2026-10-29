@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CHOSEN_SUPPORT, NOTICED_SUPPORT, PROGRESS_WORDS, api, post, put } from "@/lib/api";
+import { CHOSEN_SUPPORT, api, post, put } from "@/lib/api";
+import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 
 type Child = {
@@ -14,14 +15,10 @@ type Child = {
 };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
-const CONSENT_WORDS: Record<string, [string, string]> = {
-  core_learning: ["Use SYNiq for learning", "Required. Lets SYNiq save answers and adapt lessons for your child."],
-  mood_checkins: ["Save mood check-ins", "Optional. Your child can always skip check-ins either way."],
-  school_sharing: ["Share progress with the school", "Optional. Lets your child's teacher see topic progress."],
-};
+const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing"] as const;
 
 export default function Parent() {
-  const { me, loading } = useSession();
+  const { me, loading, lang, t } = useSession();
   const router = useRouter();
   const [children, setChildren] = useState<Child[]>([]);
   const [progress, setProgress] = useState<Record<number, Progress>>({});
@@ -41,7 +38,7 @@ export default function Parent() {
 
   useEffect(() => {
     if (me?.role === "guardian") load();
-  }, [me, load]);
+  }, [me, load, lang]); // reload so reasons and notes come in the chosen language
 
   async function setSupport(child: Child, mode: string, on: boolean) {
     const modes = on ? [...child.support_modes.filter((m) => m !== mode), mode] : child.support_modes.filter((m) => m !== mode);
@@ -58,46 +55,46 @@ export default function Parent() {
 
   return (
     <div className="wrap">
-      <h1>My children</h1>
+      <h1>{t("parent.title")}</h1>
       {children.map((c) => (
         <section key={c.id} className="card">
           <h2>{c.name}</h2>
-          {Object.entries(CONSENT_WORDS).map(([scope, [title, help]]) => (
+          {CONSENT_SCOPES.map((scope) => (
             <div key={scope} style={{ marginTop: 8 }}>
               <label className="check">
                 <input type="checkbox" checked={!!c.consent[scope]} onChange={(e) => setConsent(c.id, scope, e.target.checked)} />
-                {title}
+                {t(`consent.${scope}`)}
               </label>
               <p className="muted" style={{ margin: "0 0 0 34px" }}>
-                {help}
+                {t(`consent.${scope}_help`)}
               </p>
             </div>
           ))}
-          <h3>Seeing, hearing and speaking</h3>
-          <p className="muted">SYNiq can&apos;t tell these from answers, so please tick any that apply.</p>
-          {CHOSEN_SUPPORT.map(({ key, child, help }) => (
+          <h3>{t("settings.senses")}</h3>
+          <p className="muted">{t("parent.senses_note")}</p>
+          {CHOSEN_SUPPORT.map((key) => (
             <div key={key} style={{ marginTop: 8 }}>
               <label className="check">
                 <input type="checkbox" checked={c.support_modes.includes(key)} onChange={(e) => setSupport(c, key, e.target.checked)} />
-                {child}
+                {t(`support.${key}.child`)}
               </label>
               <p className="muted" style={{ margin: "0 0 0 34px" }}>
-                {help}
+                {t(`support.${key}.help`)}
               </p>
             </div>
           ))}
           {c.noticed.length > 0 && (
             <>
-              <h3>What SYNiq has noticed helps {c.name}</h3>
+              <h3>{t("parent.noticed", { name: c.name })}</h3>
               <ul className="list">
                 {c.noticed.map((n) => (
                   <li key={n.mode}>
                     <span>
-                      {NOTICED_SUPPORT[n.mode] ?? n.mode}
+                      {t(`noticed.${n.mode}` as Key)}
                       <br />
                       <span className="muted">{n.reason}</span>
                     </span>
-                    <span className="pill">{n.on ? "On" : `Turned off by ${c.name}`}</span>
+                    <span className="pill">{n.on ? t("parent.on") : t("parent.turned_off", { name: c.name })}</span>
                   </li>
                 ))}
               </ul>
@@ -105,26 +102,23 @@ export default function Parent() {
           )}
           {progress[c.id] && (
             <>
-              <h3>Progress</h3>
+              <h3>{t("parent.progress")}</h3>
               <p className="muted">
-                {progress[c.id].questions_practised} questions practised. {progress[c.id].note}
+                {t("parent.practised", { n: progress[c.id].questions_practised, note: progress[c.id].note })}
               </p>
               {progress[c.id].concepts.length === 0 ? (
-                <p>Nothing practised yet.</p>
+                <p>{t("parent.nothing_yet")}</p>
               ) : (
                 <ul className="list">
                   {progress[c.id].concepts.map((p) => (
                     <li key={p.title}>
                       <span>{p.title}</span>
-                      <span className="pill">{PROGRESS_WORDS[p.progress] ?? p.progress}</span>
+                      <span className="pill">{t(`progress.${p.progress}` as Key)}</span>
                     </li>
                   ))}
                 </ul>
               )}
-              <p className="muted">
-                Tip: ask {c.name} to explain one topic to you in their own words. Teaching someone else is one of the best ways to
-                remember.
-              </p>
+              <p className="muted">{t("parent.tip", { name: c.name })}</p>
             </>
           )}
         </section>
