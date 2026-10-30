@@ -28,6 +28,8 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 - **Malayalam:** students and parents can switch the whole app to Malayalam (button at the top, or Settings), and the choice is saved to their account. Feedback, star pictures, stories, reasons, errors and spoken read-aloud all follow it, and Ask SYNiq replies in Malayalam. Lessons and questions stay in the language the teacher wrote them in. The teacher and school admin screens are English for now. All Malayalam wording is in `backend/app/i18n.py` and `frontend/lib/i18n.ts` and should be checked by a Malayalam teacher before the pilot.
 - **Teacher content pipeline:** teachers set up SCERT chapters and topics, write short notes on what the textbook covers, and can ask Claude to draft explanations in all four styles plus practice questions with hints, solutions and common mistakes. Drafts are marked "AI draft", carry Claude's notes on what to check, can be edited, and only reach students after a teacher approves them. Unmarkable questions (e.g. an answer that isn't one of the options) are dropped automatically.
 
+- **Public website and SYNiq tutor** ([site/](site/README.md)): a home page in SYNiq's ivory, brick and yellow, and a free tutor chatbot (OpenAI) that teaches any topic the SYNiq way, for any learner, and draws "your way" next to "the right path" when an answer goes wrong. Plain static files plus one small function, hosted free on Cloudflare Pages.
+
 ## Not built yet
 
 - Hindi interface, and Malayalam for the teacher and school admin screens.
