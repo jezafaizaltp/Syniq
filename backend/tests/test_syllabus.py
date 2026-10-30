@@ -72,4 +72,4 @@ def test_students_only_see_chapters_with_approved_content():
 def test_draft_sheet_in_the_repo_is_valid():
     sheet = (Path(__file__).parents[2] / "content" / "class9-syllabus-draft.csv").read_text()
     r = client.post("/admin/syllabus", json={"csv": sheet}, headers=login("admin@demo.syniq")).json()
-    assert r["ok"] is True and r["chapters"] == 77
+    assert r["ok"] is True and r["chapters"] == 81
