@@ -8,7 +8,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 
 - **Accounts and roles:** student, guardian, teacher and admin, with server-side permission checks.
 - **Consent first:** a student can't learn until a guardian consents. Mood check-ins and sharing with the school each need their own consent. Consent records are append-only.
-- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 15 (57 topics, 379 questions), Physics 1 to 8 (27 topics, 166 questions), Chemistry 1 to 8 (26 topics, 158 questions) Biology 1 to 6 (19 topics, 124 questions), Social Science I 1 to 8 (24 topics, 149 questions), Social Science II 5 to 8 (stored as Social Science 13 to 16; 19 topics, 145 questions), IT 1 to 10 (30 topics, 223 questions), English units I to V (25 topics, 165 questions), Malayalam Kerala Padavali units 1 to 5 and Adisthana Padavali units 1 to 3 (32 topics, 202 questions) and Hindi units 1 to 5 (17 topics, 106 questions) have full content ([content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
+- **Curriculum model:** subject → chapter → concept, with prerequisites. All nine Class 9 subjects exist. Mathematics chapters 1 to 15 (57 topics, 379 questions), Physics 1 to 8 (27 topics, 166 questions), Chemistry 1 to 8 (26 topics, 158 questions) Biology 1 to 6 (19 topics, 124 questions), Social Science I 1 to 8 (24 topics, 149 questions), Social Science II 1 to 8 (stored as Social Science 9 to 16; 36 topics, 289 questions), IT 1 to 10 (30 topics, 223 questions), English units I to V (25 topics, 165 questions), Malayalam Kerala Padavali units 1 to 5 and Adisthana Padavali units 1 to 3 (32 topics, 202 questions) and Hindi units 1 to 5 (17 topics, 106 questions) have full content ([content packs](backend/content/README.md)), written and checked by Claude with every computable answer re-checked by computer; other chapters and subjects have none yet.
 - **Adaptive teacher engine** (`backend/app/engine/`):
   - Bayesian Knowledge Tracing estimates mastery for each concept. Hints and lucky guesses count for less.
   - Ordered, versioned rules pick the next step: introduce, practise, explain differently, revisit a prerequisite, or space out reviews.
@@ -31,7 +31,7 @@ This repository holds the Phase 1 MVP for the **Class 9 Kerala State (SCERT) syl
 ## Not built yet
 
 - Hindi interface, and Malayalam for the teacher and school admin screens.
-- Content for Social Science II chapters 1 to 4 (need the Part 1 book), and a teacher's check of all content against the 2024 SCERT books (including a native speaker's read of the Malayalam and Hindi questions).
+- A teacher's check of all content against the 2024 SCERT books (including a native speaker's read of the Malayalam and Hindi questions).
 - Interest exploration activities.
 - Picture explanations: the "picture" style is still described in text.
 
