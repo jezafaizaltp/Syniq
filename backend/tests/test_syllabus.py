@@ -10,7 +10,7 @@ from app.models import Chapter, Concept, Subject
 SHEET = """subject,chapter_number,chapter_title,topic
 ss,39,Kerala History,Early Kerala
 ss,39,Kerala History,The spice trade
-Information Technology,2,Spreadsheets,
+Information Technology,39,Spreadsheets,
 """
 
 
@@ -34,7 +34,7 @@ def test_syllabus_checked_then_added_and_safe_to_repeat():
     r = client.post("/admin/syllabus", json={"csv": SHEET, "dry_run": False}, headers=a).json()
     assert (r["added_chapters"], r["added_topics"]) == (2, 3)
     assert chapters("ss")[39] == ("Kerala History", ["Early Kerala", "The spice trade"])
-    assert chapters("it") == {2: ("Spreadsheets", ["Spreadsheets"])}
+    assert chapters("it")[39] == ("Spreadsheets", ["Spreadsheets"])  # chapters 1-10 come from the content packs
 
     # Uploading again with one more topic adds only that topic, at the end.
     more = SHEET + "ss,39,Kerala History,Temple architecture\n"
@@ -72,4 +72,4 @@ def test_students_only_see_chapters_with_approved_content():
 def test_draft_sheet_in_the_repo_is_valid():
     sheet = (Path(__file__).parents[2] / "content" / "class9-syllabus-draft.csv").read_text()
     r = client.post("/admin/syllabus", json={"csv": sheet}, headers=login("admin@demo.syniq")).json()
-    assert r["ok"] is True and r["chapters"] == 63
+    assert r["ok"] is True and r["chapters"] == 77

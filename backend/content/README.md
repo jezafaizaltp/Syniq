@@ -49,6 +49,10 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Social Science 6: From the Land of Cholas to Delhi | the Chola empire, Chola village assemblies, the Delhi Sultanate | 19 |
 | Social Science 7: Extension of Democracy through Institutions | elections and the Election Commission, watchdog institutions, RTI and citizens' participation | 18 |
 | Social Science 8: Towards a Gender-Neutral Society | sex, gender and stereotypes, equality in the Constitution and law, moving towards gender neutrality | 19 |
+| Social Science 13 (SS II ch 5): Indian Economy Through Various Sectors | the three sectors, national income methods, GDP, GNP, NNP and per capita income, GVA, organised and unorganised sectors | 34 |
+| Social Science 14 (SS II ch 6): Price and Market | needs and the production function, consumption and sustainable development, demand and supply, equilibrium price, price control and digital marketing | 39 |
+| Social Science 15 (SS II ch 7): Through the Sandy Expanse | deserts and how the Thar formed, Marusthali and Rajasthan Bagar, wind landforms, climate and nature, human life | 36 |
+| Social Science 16 (SS II ch 8): Along the Coasts | the western coastal plain, the eastern plain and the islands, wave landforms, coastal climate, resources and life | 36 |
 | English I: Hours and Years | Half a Day, Debts of Gratitude, Nothing Twice, grammar, words | 33 |
 | English II: Winds of Change | Dreams Realised, The Toilet, Success, grammar, words | 33 |
 | English III: Aspire and Explore | Sea-Fever, The Saga of the Tiffin Carriers, Waiting for Rain, grammar, words | 33 |
@@ -67,14 +71,24 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | Hindi 3: हम एक हैं | जब गांधीजी की घड़ी चोरी चली गई, जन-जन का चेहरा एक, grammar | 18 |
 | Hindi 4: कामयाबी की राह पर | फुटबॉल के दिल का राजा, घर, पेड़ और तारे की याद, कब तक?, grammar | 25 |
 | Hindi 5: खुला आसमान | राजा और विद्रोही, बोनज़ाई, grammar | 18 |
+| IT 1: Poster Images | GIMP canvas and layers, selecting and placing images, text, shadows and exporting | 23 |
+| IT 2: Styles to Get it All in Style | OCR and paragraph styles, changing and creating styles, footnotes and table of contents (LibreOffice Writer) | 21 |
+| IT 3: Let's Develop Software! | block coding and the interface, coding clock hands (angles), input, variables, sound and Python (PictoBlox) | 21 |
+| IT 4: Data Analysis Made Easy | density formula, LOOKUP and COUNTIF, AutoFilter and Protect Sheet (LibreOffice Calc) | 22 |
+| IT 5: The Web of Goodness | Wikipedia and SchoolWiki, e-mail and social media, online services and cyber safety | 24 |
+| IT 6: Intelligent Machines | how AI works, NLP and prompts, responsible AI and AI agents | 21 |
+| IT 7: Laboratory within the Computer | parallel lines in GeoGebra, elements in Kalzium, refraction in PhET Bending Light | 22 |
+| IT 8: The Infinite Scope of Presentation | planning slides, master slides, infographics (LibreOffice Impress) | 19 |
+| IT 9: Creating a Webpage | how webpages work, HTML structure and formatting, images, tables and video | 22 |
+| IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 503 of the 1,449 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 946 were checked by hand (most of them in the languages, Chemistry, Biology and Social Science, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
-- **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology and Social Science I chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
+- **Every answer that can be worked out by computer is**, on every test run: 540 of the 1,817 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 1,277 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II part 2 and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
 ## Format
