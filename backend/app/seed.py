@@ -45,6 +45,12 @@ SUBJECTS = [
     ("cbse9-ss", "Social Science", "en", "cbse", 9),
     ("cbse9-eng", "English", "en", "cbse", 9),
     ("cbse9-hin", "Hindi", "hi", "cbse", 9),
+    # CBSE Class 10 (NCERT books): the board-exam year.
+    ("cbse10-math", "Mathematics", "en", "cbse", 10),
+    ("cbse10-sci", "Science", "en", "cbse", 10),
+    ("cbse10-ss", "Social Science", "en", "cbse", 10),
+    ("cbse10-eng", "English", "en", "cbse", 10),
+    ("cbse10-hin", "Hindi", "hi", "cbse", 10),
 ]
 
 # concept code -> (title, order, prerequisites)
