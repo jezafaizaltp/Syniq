@@ -134,7 +134,26 @@ class Child(Base):
     board: Mapped[str] = mapped_column(String(30), default="cbse")  # cbse | kerala_scert
     grade: Mapped[int | None] = mapped_column(Integer, nullable=True)  # -1 LKG, 0 UKG, 1..12
     student_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)  # their own login
+    # Healthy screen time (2 to 4): minutes a day and per sitting, set by the account holder.
+    daily_limit: Mapped[int] = mapped_column(Integer, default=20, server_default="20")
+    session_limit: Mapped[int] = mapped_column(Integer, default=10, server_default="10")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class ScreenTimeSession(Base):
+    """One sitting of healthy screen time. Only the time used is kept, never taps or answers."""
+
+    __tablename__ = "screen_time_sessions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    child_id: Mapped[int] = mapped_column(ForeignKey("children.id"), index=True)
+    started_by: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    activity_id: Mapped[str] = mapped_column(String(40))
+    day: Mapped[str] = mapped_column(String(10), index=True)  # India date, YYYY-MM-DD
+    allowed_minutes: Mapped[int] = mapped_column(Integer)
+    seconds: Mapped[int] = mapped_column(Integer, default=0)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    ended_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
 class AuditLog(Base):

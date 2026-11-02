@@ -13,7 +13,7 @@ RELATIONS = ("mother", "father", "grandparent", "carer")
 SECTIONS = {
     "pregnancy": {"title": "Pregnancy", "about": "Calm activities for you, and what to expect month by month.", "ready": False},
     "baby": {"title": "Baby, 0 to 2 years", "about": "Play ideas you do together, milestones, food, sleep and vaccines.", "ready": False},
-    "early": {"title": "Healthy screen time, 2 to 4 years", "about": "Slow, calm games with a daily limit you set, and ideas to play away from the screen.", "ready": False},
+    "early": {"title": "Healthy screen time, 2 to 4 years", "about": "Slow, calm games with a daily limit you set, and ideas to play away from the screen.", "ready": True},
     "school": {"title": "School, LKG to Class 12", "about": "One-to-one learning that adapts to how your child learns best.", "ready": True},
 }
 

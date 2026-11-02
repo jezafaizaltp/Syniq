@@ -25,7 +25,7 @@ from ..auth import (
     temporary_password,
 )
 from ..db import get_db
-from ..models import Child, Consent, Family, FamilyMember, GuardianLink, Session, User
+from ..models import Child, Consent, Family, FamilyMember, GuardianLink, ScreenTimeSession, Session, User
 
 router = APIRouter(tags=["family"])
 
@@ -216,6 +216,8 @@ def remove_child(child_id: int, db: DbSession = Depends(get_db), user: User = De
     child = _child(db, family, child_id)
     if child.student_id:
         raise HTTPException(400, "This child has their own login. Close the login first.")
+    for row in db.scalars(select(ScreenTimeSession).where(ScreenTimeSession.child_id == child.id)).all():
+        db.delete(row)
     db.delete(child)
     db.commit()
     audit(db, user, "family_remove_child")
