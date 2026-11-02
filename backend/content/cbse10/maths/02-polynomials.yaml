@@ -1,0 +1,222 @@
+# CBSE Class 10 Mathematics (NCERT), chapter 2. Format: content/README.md.
+subject: cbse10-math
+chapter: 2
+title: Polynomials
+tips:
+  c10_zero_sign: 'Solve ax + b = 0 carefully: moving b across changes its sign. The zero of x − 4 is +4, not −4.'
+  c10_sum_sign: 'The sum of the zeroes is −b/a: change the sign of b. For x² − 7x + 10 the sum is +7.'
+concepts:
+- code: cbse10m.poly.zeroes_graph
+  title: Zeroes of a polynomial on a graph
+  notes: |
+    The zeroes of p(x) are the x-coordinates of the points where the graph of y = p(x) meets the x-axis.
+    A linear polynomial ax + b (a ≠ 0) has exactly one zero, −b/a. The graph of a quadratic is a parabola
+    (opening up if a > 0, down if a < 0) and can meet the x-axis at two points, one point or none, so a
+    quadratic has at most 2 zeroes; a cubic has at most 3.
+  explanations:
+    text: 'A zero of a polynomial is an x that makes it 0. On the graph of y = p(x), those are exactly the places where the curve touches or crosses the x-axis, because there y = 0. Count the crossings to count the zeroes: a straight line crosses once, a parabola at most twice, a cubic at most three times.'
+    visual: 'Sketch y = x² − 4: a U-shape with its lowest point at (0, −4). It crosses the x-axis at x = −2 and x = 2. Those two crossing points are the two zeroes.'
+    step_by_step: 'Step 1: Draw or imagine the graph of y = p(x). Step 2: Find where it meets the x-axis. Step 3: Read off the x-coordinates: those are the zeroes. Step 4: The number of meeting points is the number of zeroes.'
+    real_world: 'If a ball''s height is h(t) = 20t − 5t², the zeroes t = 0 and t = 4 are when it is on the ground: when it is thrown and when it lands.'
+  picture:
+    kind: geometry
+    axes: true
+    range:
+    - -4
+    - 4
+    points:
+      (−2, 0):
+      - -2
+      - 0
+      (2, 0):
+      - 2
+      - 0
+      _a:
+      - -2.65
+      - 3
+      _b:
+      - -1
+      - -3
+      _c:
+      - 0
+      - -4
+      _d:
+      - 1
+      - -3
+      _e:
+      - 2.65
+      - 3
+    segments:
+    - - _a
+      - (−2, 0)
+    - - (−2, 0)
+      - _b
+    - - _b
+      - _c
+    - - _c
+      - _d
+    - - _d
+      - (2, 0)
+    - - (2, 0)
+      - _e
+    caption: y = x² − 4 meets the x-axis at x = −2 and x = 2, so those are its zeroes.
+    alt: A U-shaped graph of y = x² − 4 with its lowest point at (0, −4), crossing the x-axis at −2 and 2.
+  items:
+  - prompt: The graph of y = p(x) meets the x-axis at exactly 3 points. How many zeroes does p(x) have?
+    options:
+    - '3'
+    - '2'
+    - '1'
+    - '0'
+    answer: '3'
+    difficulty: 1
+    hints:
+    - Each meeting point gives one zero.
+    - Count the points.
+    solution: 'Step 1: Each point where the graph meets the x-axis gives a zero. Step 2: 3 points, so 3 zeroes.'
+  - prompt: A parabola opening upwards has its lowest point at (0, 2). How many zeroes does its polynomial have?
+    options:
+    - '0'
+    - '1'
+    - '2'
+    - '3'
+    answer: '0'
+    difficulty: 2
+    hints:
+    - Is the lowest point above or below the x-axis?
+    - The curve never comes down to y = 0.
+    solution: 'Step 1: The lowest point is at y = 2, above the x-axis. Step 2: The curve never meets the x-axis, so there are no zeroes.'
+  - prompt: Find the zero of p(x) = 3x − 12.
+    answer: '4'
+    check: 12/3
+    difficulty: 1
+    hints:
+    - Set 3x − 12 = 0.
+    - 3x = 12.
+    solution: 'Step 1: 3x − 12 = 0. Step 2: x = 4.'
+    mistakes:
+      '-4': c10_zero_sign
+  - prompt: At most how many zeroes can a cubic polynomial have?
+    options:
+    - '3'
+    - '2'
+    - '4'
+    - Infinitely many
+    answer: '3'
+    difficulty: 1
+    hints:
+    - The degree tells you the most zeroes.
+    - Cubic means degree 3.
+    solution: A polynomial of degree n has at most n zeroes; a cubic has at most 3.
+  - prompt: The graph of y = x² − 6x + 9 touches the x-axis at one point. Which point?
+    options:
+    - (3, 0)
+    - (−3, 0)
+    - (9, 0)
+    - (0, 9)
+    answer: (3, 0)
+    difficulty: 2
+    hints:
+    - x² − 6x + 9 = (x − 3)².
+    - When is (x − 3)² = 0?
+    solution: 'Step 1: x² − 6x + 9 = (x − 3)². Step 2: It is 0 only at x = 3. Step 3: So the graph touches the x-axis at (3, 0).'
+  - prompt: y = x² − 5x + 6 crosses the x-axis at x = 2 and at one other point. What is the other x?
+    answer: '3'
+    check: 6/2
+    difficulty: 3
+    hints:
+    - Factorise x² − 5x + 6.
+    - (x − 2)(x − 3).
+    solution: 'Step 1: x² − 5x + 6 = (x − 2)(x − 3). Step 2: The zeroes are 2 and 3, so the other crossing is at x = 3.'
+    mistakes:
+      '-3': c10_zero_sign
+- code: cbse10m.poly.relations
+  title: Zeroes and coefficients
+  after:
+  - cbse10m.poly.zeroes_graph
+  notes: |
+    For a quadratic ax² + bx + c with zeroes α and β: α + β = −b/a and αβ = c/a. A quadratic with zeroes
+    whose sum is S and product is P is k(x² − Sx + P). For a cubic ax³ + bx² + cx + d with zeroes α, β, γ:
+    α + β + γ = −b/a, αβ + βγ + γα = c/a, αβγ = −d/a.
+  explanations:
+    text: You can find the sum and product of a quadratic's zeroes without solving it. For ax² + bx + c, the zeroes add to −b/a and multiply to c/a. Going backwards, if you know the sum and product, the quadratic is x² − (sum)x + (product).
+    visual: 'Write the quadratic as a row of three boxes: [a] x² + [b] x + [c]. Draw an arrow from b to a labelled ''sum = −b/a'' and an arrow from c to a labelled ''product = c/a''.'
+    step_by_step: 'Step 1: Read off a, b and c (with their signs). Step 2: Sum of zeroes = −b/a. Step 3: Product of zeroes = c/a. Step 4: To build a quadratic from sum S and product P, write x² − Sx + P.'
+    real_world: 'Two numbers have a sum of 10 and a product of 21. Instead of guessing, write x² − 10x + 21 = (x − 3)(x − 7): the numbers are 3 and 7.'
+  picture:
+    kind: flow
+    steps:
+    - 'x² − 5x + 6: a = 1, b = −5, c = 6'
+    - Sum of zeroes = −b/a = 5
+    - Product of zeroes = c/a = 6
+    - 'Zeroes 2 and 3: 2 + 3 = 5 and 2 × 3 = 6 ✓'
+    alt: 'Checking the rules on x² − 5x + 6: the sum of the zeroes is −b/a = 5 and the product is c/a = 6, which matches the zeroes 2 and 3.'
+  items:
+  - prompt: Find the sum of the zeroes of x² − 7x + 10.
+    answer: '7'
+    check: -(-7)/1
+    difficulty: 1
+    hints:
+    - Sum = −b/a.
+    - b = −7, a = 1.
+    solution: 'Step 1: a = 1, b = −7. Step 2: Sum = −(−7)/1 = 7. Step 3: Check: zeroes 2 and 5 add to 7.'
+    mistakes:
+      '-7': c10_sum_sign
+  - prompt: Find the product of the zeroes of x² − 7x + 10.
+    answer: '10'
+    check: 10/1
+    difficulty: 1
+    hints:
+    - Product = c/a.
+    - c = 10, a = 1.
+    solution: 'Step 1: Product = c/a = 10/1 = 10. Step 2: Check: 2 × 5 = 10.'
+  - prompt: Find the sum of the zeroes of 2x² + 8x − 5.
+    answer: '-4'
+    check: -8/2
+    difficulty: 2
+    hints:
+    - Sum = −b/a.
+    - −8/2.
+    solution: 'Step 1: a = 2, b = 8. Step 2: Sum = −8/2 = −4.'
+    mistakes:
+      '4': c10_sum_sign
+  - prompt: Find the product of the zeroes of 2x² + 8x − 5. Type a fraction like −5/2.
+    answer: -5/2
+    check: -5/2
+    difficulty: 2
+    hints:
+    - Product = c/a.
+    - c = −5, a = 2.
+    solution: 'Step 1: Product = c/a = −5/2.'
+  - prompt: Which quadratic has zeroes with sum 4 and product 3?
+    options:
+    - x² − 4x + 3
+    - x² + 4x + 3
+    - x² − 3x + 4
+    - x² + 3x − 4
+    answer: x² − 4x + 3
+    difficulty: 2
+    hints:
+    - Use x² − (sum)x + (product).
+    - x² − 4x + 3.
+    solution: 'Step 1: x² − (sum)x + (product) = x² − 4x + 3. Step 2: Check: (x − 1)(x − 3) has zeroes 1 and 3; 1 + 3 = 4, 1 × 3 = 3.'
+    mistakes:
+      x² + 4x + 3: c10_sum_sign
+  - prompt: For the cubic x³ − 6x² + 11x − 6, find the sum of its three zeroes.
+    answer: '6'
+    check: 1 + 2 + 3
+    difficulty: 3
+    hints:
+    - For a cubic, sum = −b/a.
+    - b = −6, a = 1.
+    solution: 'Step 1: a = 1, b = −6. Step 2: Sum = 6. Step 3: Check: the zeroes 1, 2 and 3 add to 6.'
+    mistakes:
+      '-6': c10_sum_sign
+  - prompt: If one zero of x² + kx − 12 is 3, find k.
+    answer: '1'
+    check: (12 - 9)/3
+    difficulty: 3
+    hints:
+    - Put x = 3 and set it to 0.
+    - 9 + 3k − 12 = 0.
+    solution: 'Step 1: 3² + 3k − 12 = 0. Step 2: 3k = 3, so k = 1. Step 3: Check: x² + x − 12 = (x − 3)(x + 4).'

@@ -172,12 +172,33 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Hindi 15: कृतिका: मेरे संग की औरतें | मेरे संग की औरतें (मृदुला गर्ग) | 6 |
 | Hindi 16: कृतिका: रीढ़ की हड्डी | रीढ़ की हड्डी (जगदीश चंद्र माथुर) | 6 |
 
+## CBSE Class 10 (NCERT)
+
+Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths is written so far; the other subjects follow one at a time. Chapter names follow the rationalised NCERT Class 10 Maths book (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every Maths chapter has at least one picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Real Numbers | Fundamental Theorem of Arithmetic, proving numbers irrational | 16 |
+| Maths 2: Polynomials | zeroes of a polynomial on a graph, zeroes and coefficients | 13 |
+| Maths 3: Pair of Linear Equations in Two Variables | pairs of lines and their solutions, solving by substitution and elimination | 13 |
+| Maths 4: Quadratic Equations | solving quadratic equations by factorising, the quadratic formula and nature of roots | 12 |
+| Maths 5: Arithmetic Progressions | the nth term of an AP, sum of the first n terms | 12 |
+| Maths 6: Triangles | Basic Proportionality Theorem, similarity criteria | 12 |
+| Maths 7: Coordinate Geometry | distance formula, section formula | 12 |
+| Maths 8: Introduction to Trigonometry | trigonometric ratios, ratios of special angles and identities | 13 |
+| Maths 9: Some Applications of Trigonometry | heights and distances | 6 |
+| Maths 10: Circles | tangent to a circle, two tangents from an outside point | 12 |
+| Maths 11: Areas Related to Circles | arcs and sectors, segments and combined shapes | 12 |
+| Maths 12: Surface Areas and Volumes | surface area of combined solids, volume of combined solids | 12 |
+| Maths 13: Statistics | mean of grouped data, median and mode of grouped data | 12 |
+| Maths 14: Probability | theoretical probability | 8 |
+
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 733 of the 2,791 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 2,058 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 849 of the 2,956 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 2,107 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 

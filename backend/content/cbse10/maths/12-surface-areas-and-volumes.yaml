@@ -1,0 +1,176 @@
+# CBSE Class 10 Mathematics (NCERT), chapter 12. Format: content/README.md.
+subject: cbse10-math
+chapter: 12
+title: Surface Areas and Volumes
+tips:
+  c10_hemisphere_curved: That's the total surface including the flat circle (3πr²). The curved part alone is 2πr².
+  c10_hidden_faces: Where two solids are joined, those faces are hidden inside and don't count.
+  c10_cone_third: 'A cone holds one third of the cylinder with the same base and height: (1/3)πr²h.'
+  c10_hemisphere_half: 'That''s a whole sphere. A hemisphere is half: (2/3)πr³.'
+  c10_litres: That's in cubic metres. Multiply by 1000 to get litres.
+concepts:
+- code: cbse10m.solid.surface
+  title: Surface area of combined solids
+  notes: |
+    Formulas: cuboid 2(lb + bh + hl); cube 6a²; cylinder curved 2πrh, total 2πr(r + h); cone curved πrl with
+    l = √(r² + h²); sphere 4πr²; hemisphere curved 2πr², total 3πr². For a solid made by joining shapes, the
+    total surface area is the sum of the curved/outer surfaces that remain visible; faces that are joined
+    (hidden) are not counted.
+  explanations:
+    text: When solids are stuck together, like a cone on a hemisphere (an ice-cream cone) or a cylinder with hemispherical ends (a capsule), the surface you can touch is just the outside parts. Add the curved surfaces you can see, and leave out the circles where the pieces join.
+    visual: 'Draw a capsule: a cylinder with a hemisphere on each end. Colour the outside surface: two hemisphere domes and the cylinder''s side. The circles where they meet are inside, not coloured.'
+    step_by_step: 'Step 1: Name the pieces. Step 2: Decide which surfaces are visible. Step 3: Use the right formula for each visible surface. Step 4: Add them.'
+    real_world: To paint a toy shaped like a cone on a hemisphere, you only need paint for the cone's slanted side and the hemisphere's dome.
+  picture:
+    kind: compare
+    columns:
+    - title: Capsule
+      points:
+      - 'Cylinder side: 2πrh'
+      - 'Two hemisphere domes: 2 × 2πr²'
+      - 'Hidden: the circles where they join'
+    - title: 'Toy: cone on hemisphere'
+      points:
+      - 'Cone''s slanted side: πrl'
+      - 'Hemisphere dome: 2πr²'
+      - 'Hidden: the shared flat circle'
+    alt: Two combined solids. A capsule's surface is the cylinder side plus two hemisphere domes. A cone-on-hemisphere toy's surface is the cone's slanted side plus the dome. Joined faces are hidden.
+  items:
+  - prompt: Find the curved surface area of a hemisphere of radius 7 cm, in cm². Use π = 22/7.
+    answer: '308'
+    check: 2*Rational(22, 7)*49
+    difficulty: 1
+    hints:
+    - Curved surface = 2πr².
+    - 2 × 22/7 × 49.
+    solution: 2 × 22/7 × 49 = 308 cm².
+    mistakes:
+      '462': c10_hemisphere_curved
+  - prompt: Find the slant height of a cone with radius 6 cm and height 8 cm, in cm.
+    answer: '10'
+    check: sqrt(6^2 + 8^2)
+    difficulty: 1
+    hints:
+    - l = √(r² + h²).
+    - √(36 + 64).
+    solution: l = √(36 + 64) = 10 cm.
+    mistakes:
+      '14': c10_add_not_square
+  - prompt: A cylinder of radius 7 cm and height 10 cm has a hemisphere of radius 7 cm on each end. Find the total surface area in cm². Use π = 22/7.
+    answer: '1056'
+    check: 2*Rational(22, 7)*7*10 + 4*Rational(22, 7)*49
+    difficulty: 2
+    hints:
+    - Cylinder side 2πrh = 440.
+    - Two domes = 2 × 2πr² = 616.
+    solution: 'Step 1: Cylinder side = 2 × 22/7 × 7 × 10 = 440. Step 2: Two domes = 4 × 22/7 × 49 = 616. Step 3: Total = 1056 cm².'
+  - prompt: A toy is a cone of radius 3.5 cm and slant height 5 cm on a hemisphere of the same radius. Find its total surface area, in cm². Use π = 22/7.
+    answer: '132'
+    check: Rational(22, 7)*Rational(7, 2)*5 + 2*Rational(22, 7)*Rational(7, 2)**2
+    difficulty: 2
+    hints:
+    - Cone side = πrl = 22/7 × 3.5 × 5 = 55.
+    - Dome = 2πr² = 77.
+    solution: 'Step 1: Cone side = 55 cm². Step 2: Hemisphere dome = 2 × 22/7 × 12.25 = 77 cm². Step 3: Total = 132 cm².'
+  - prompt: Two cubes of side 5 cm are joined end to end. What is the surface area of the new cuboid?
+    options:
+    - 250 cm²
+    - 300 cm²
+    - 150 cm²
+    - 200 cm²
+    answer: 250 cm²
+    difficulty: 2
+    hints:
+    - The cuboid is 10 × 5 × 5.
+    - 2(50 + 25 + 50).
+    solution: 'Step 1: The cuboid is 10 × 5 × 5. Step 2: 2(10×5 + 5×5 + 5×10) = 2(125) = 250 cm². (Two faces are hidden, so it is less than 2 × 150.)'
+    mistakes:
+      300 cm²: c10_hidden_faces
+  - prompt: A cube of side 10 cm has a hemisphere of radius 5 cm on top. Its total surface area is 600 + bπ cm². Find b.
+    answer: '25'
+    check: 2*25 - 25
+    difficulty: 3
+    hints:
+    - Cube faces 600, minus the circle πr² hidden, plus the dome 2πr².
+    - 600 − 25π + 50π.
+    solution: 'Step 1: Cube = 600. Step 2: Remove the hidden circle (25π) and add the dome (50π). Step 3: Total = 600 + 25π, so b = 25.'
+- code: cbse10m.solid.volume
+  title: Volume of combined solids
+  after:
+  - cbse10m.solid.surface
+  notes: |
+    Volumes: cuboid lbh; cube a³; cylinder πr²h; cone (1/3)πr²h; sphere (4/3)πr³; hemisphere (2/3)πr³. The
+    volume of a combined solid is the sum of the volumes of its parts (or the difference, when one is cut out
+    of another). Unlike surface area, no part is 'hidden': every piece's volume counts.
+  explanations:
+    text: The space inside a combined solid is just the pieces' volumes added together. A tent shaped like a cylinder with a cone on top holds the cylinder's volume plus the cone's. If a shape is hollowed out, subtract the hollow.
+    visual: 'Draw an ice-cream cone filled to the top with a hemisphere of ice-cream on it. Shade both parts: the ice-cream volume is the cone''s volume plus the hemisphere''s.'
+    step_by_step: 'Step 1: Split the solid into simple parts. Step 2: Find each part''s volume. Step 3: Add (or subtract a hollow). Step 4: Check the units: cm³ or m³.'
+    real_world: A pencil is roughly a cylinder with a cone at the tip. Its wood volume is the cylinder's plus the cone's, minus the thin cylinder of graphite.
+  picture:
+    kind: flow
+    steps:
+    - 'Cylinder: r = 3 cm, h = 7 cm → πr²h = 63π'
+    - 'Cone on top: r = 3, h = 4 → (1/3)πr²h = 12π'
+    - 'Add: 63π + 12π = 75π cm³'
+    - ≈ 235.7 cm³ with π = 22/7
+    alt: 'The volume of a cylinder with a cone on top: 63π plus 12π makes 75π cubic cm.'
+  items:
+  - prompt: Find the volume of a cone of radius 3 cm and height 7 cm, in cm³. Use π = 22/7.
+    answer: '66'
+    check: Rational(1, 3)*Rational(22, 7)*9*7
+    difficulty: 1
+    hints:
+    - V = (1/3)πr²h.
+    - 1/3 × 22/7 × 9 × 7.
+    solution: V = 1/3 × 22/7 × 9 × 7 = 66 cm³.
+    mistakes:
+      '198': c10_cone_third
+  - prompt: Find the volume of a hemisphere of radius 21 cm, in cm³. Use π = 22/7.
+    answer: '19404'
+    check: Rational(2, 3)*Rational(22, 7)*21**3
+    difficulty: 2
+    hints:
+    - V = (2/3)πr³.
+    - 2/3 × 22/7 × 9261.
+    solution: V = 2/3 × 22/7 × 21³ = 19404 cm³.
+    mistakes:
+      '38808': c10_hemisphere_half
+  - prompt: A cylinder of radius 3 cm and height 7 cm has a cone of the same radius and height 4 cm on top. The volume is kπ cm³. Find k.
+    answer: '75'
+    check: 9*7 + Rational(1, 3)*9*4
+    difficulty: 2
+    hints:
+    - Cylinder = 9 × 7 π = 63π.
+    - Cone = 1/3 × 9 × 4 π = 12π.
+    solution: 'Step 1: Cylinder = 63π. Step 2: Cone = 12π. Step 3: Total = 75π, so k = 75.'
+  - prompt: A cone of radius 7 cm and height 15 cm is cut from a cylinder with the same radius and height. The remaining volume is kπ cm³. Find k.
+    answer: '490'
+    check: Rational(2, 3)*49*15
+    difficulty: 3
+    hints:
+    - Cylinder − cone = πr²h − (1/3)πr²h = (2/3)πr²h.
+    - 2/3 × 49 × 15.
+    solution: 'Step 1: Remaining = (2/3)πr²h. Step 2: = 2/3 × 49 × 15 π = 490π, so k = 490.'
+  - prompt: A sphere and a cylinder have the same radius r, and the cylinder's height is 2r. Which has the larger volume?
+    options:
+    - The cylinder
+    - The sphere
+    - They are equal
+    - Can't tell
+    answer: The cylinder
+    difficulty: 2
+    hints:
+    - Cylinder = πr² × 2r = 2πr³.
+    - Sphere = (4/3)πr³.
+    solution: Cylinder = 2πr³, sphere = (4/3)πr³ ≈ 1.33πr³. The cylinder is larger (the sphere is 2/3 of it).
+  - prompt: A cuboid tank 2 m × 1.5 m × 1 m is full of water. How many litres does it hold? (1 m³ = 1000 litres)
+    answer: '3000'
+    check: 2*1.5*1*1000
+    difficulty: 1
+    hints:
+    - Volume = 2 × 1.5 × 1 = 3 m³.
+    - × 1000.
+    solution: 'Step 1: 3 m³. Step 2: 3 × 1000 = 3000 litres.'
+    mistakes:
+      '3': c10_litres

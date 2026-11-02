@@ -1,0 +1,185 @@
+# CBSE Class 10 Mathematics (NCERT), chapter 13. Format: content/README.md.
+subject: cbse10-math
+chapter: 13
+title: Statistics
+tips:
+  c10_class_width: 'That''s the class width. The class mark is the middle: (lower + upper)/2.'
+  c10_divide_by_total: Divide by the total frequency Σf, not by the number of classes.
+  c10_step_h: In the step-deviation method multiply Σfu/Σf by the class width h before adding to a.
+concepts:
+- code: cbse10m.stats.mean
+  title: Mean of grouped data
+  notes: |
+    For grouped data, take each class mark xᵢ (mid-point of the class) as representing its class. Direct
+    method: mean = Σfᵢxᵢ / Σfᵢ. Assumed mean method: choose a, find dᵢ = xᵢ − a, mean = a + Σfᵢdᵢ/Σfᵢ.
+    Step-deviation method: uᵢ = (xᵢ − a)/h, mean = a + h × Σfᵢuᵢ/Σfᵢ. All three give the same answer.
+  explanations:
+    text: When marks are grouped in classes like 10–20, we don't know each exact mark, so we pretend everyone in a class scored its middle value, the class mark. Multiply each class mark by its frequency, add, and divide by the total frequency.
+    visual: 'Draw a table with columns: class, frequency f, class mark x, f × x. Fill each row, add the f column and the f × x column, and divide the second total by the first.'
+    step_by_step: 'Step 1: Find each class mark x = (lower + upper)/2. Step 2: Work out f × x for each row. Step 3: Add the frequencies (Σf) and the products (Σfx). Step 4: Mean = Σfx ÷ Σf.'
+    real_world: A teacher with marks grouped in tens can still estimate the class average quickly with class marks, without the full list.
+  picture:
+    kind: bars
+    touching: true
+    unit: students; class marks 5, 15, 25, 35
+    bars:
+    - label: 0–10
+      value: 2
+    - label: 10–20
+      value: 3
+    - label: 20–30
+      value: 4
+    - label: 30–40
+      value: 1
+    caption: Mean = (2×5 + 3×15 + 4×25 + 1×35) ÷ 10 = 190 ÷ 10 = 19.
+    alt: A histogram with classes 0–10, 10–20, 20–30, 30–40 and frequencies 2, 3, 4, 1. Using the class marks, the mean is 19.
+  items:
+  - prompt: Find the class mark of 20–30.
+    answer: '25'
+    check: (20 + 30)/2
+    difficulty: 1
+    hints:
+    - Class mark = (lower + upper)/2.
+    - (20 + 30)/2.
+    solution: (20 + 30)/2 = 25.
+    mistakes:
+      '10': c10_class_width
+  - prompt: Classes 0–10, 10–20, 20–30, 30–40 have frequencies 2, 3, 4, 1. Find the mean.
+    answer: '19'
+    check: (2*5 + 3*15 + 4*25 + 1*35)/10
+    difficulty: 2
+    hints:
+    - Class marks 5, 15, 25, 35.
+    - Σfx = 10 + 45 + 100 + 35 = 190.
+    solution: 'Step 1: Σfx = 2×5 + 3×15 + 4×25 + 1×35 = 190. Step 2: Σf = 10. Step 3: Mean = 19.'
+    mistakes:
+      190/4: c10_divide_by_total
+  - prompt: If Σfᵢ = 50 and Σfᵢxᵢ = 1300, find the mean.
+    answer: '26'
+    check: 1300/50
+    difficulty: 1
+    hints:
+    - Mean = Σfx/Σf.
+    - 1300/50.
+    solution: 1300 ÷ 50 = 26.
+  - prompt: With assumed mean a = 25, Σf = 20 and Σfd = −40, find the mean.
+    answer: '23'
+    check: 25 + (-40)/20
+    difficulty: 2
+    hints:
+    - Mean = a + Σfd/Σf.
+    - 25 + (−40/20).
+    solution: Mean = 25 − 2 = 23.
+    mistakes:
+      '27': c10_d_sign
+  - prompt: With a = 50, class width h = 10, Σf = 40 and Σfu = 12, find the mean.
+    answer: '53'
+    check: 50 + 10*12/40
+    difficulty: 3
+    hints:
+    - Mean = a + h × Σfu/Σf.
+    - 50 + 10 × 12/40.
+    solution: Mean = 50 + 10 × 0.3 = 53.
+    mistakes:
+      '50.3': c10_step_h
+  - prompt: Why do we use class marks for grouped data?
+    options:
+    - Each class's exact values aren't known, so its mid-point stands for them
+    - Class marks are always whole numbers
+    - It makes the mean bigger
+    - The book says so
+    answer: Each class's exact values aren't known, so its mid-point stands for them
+    difficulty: 1
+    hints:
+    - Grouping hides the individual values.
+    - The middle is a fair guess.
+    solution: Grouping loses the exact values, so each class is represented by its mid-point, assuming values are spread evenly.
+- code: cbse10m.stats.median_mode
+  title: Median and mode of grouped data
+  after:
+  - cbse10m.stats.mean
+  notes: |
+    Mode: find the modal class (highest frequency); mode = l + [(f₁ − f₀)/(2f₁ − f₀ − f₂)] × h, where l is
+    the lower limit of the modal class, f₁ its frequency, f₀ and f₂ the frequencies of the classes before and
+    after, h the class width. Median: find n/2 and the cumulative frequencies; the median class is the first
+    whose cumulative frequency reaches n/2; median = l + [(n/2 − cf)/f] × h, where cf is the cumulative
+    frequency before the median class. Empirical relation: 3 Median = Mode + 2 Mean.
+  explanations:
+    text: 'The mode is the most common value: in grouped data, first find the class with the highest frequency, then use the formula to pin down a value inside it. The median is the middle value: add up frequencies as you go (cumulative frequency) until you pass halfway, and that class holds the median.'
+    visual: 'Draw the histogram. The tallest bar is the modal class. Now stack the bars one after another along a line: the point halfway along the stack falls inside the median class.'
+    step_by_step: 'Step 1 (mode): find the tallest class; read l, f₁, f₀, f₂ and h; use the formula. Step 2 (median): find n/2; make a cumulative frequency column; the first class with cf ≥ n/2 is the median class; use the formula with cf of the class before. Step 3: Check the answer lies inside its class.'
+    real_world: 'A shoe shop stocks most of the modal size. A government sets a ''median income'' as the middle: half the families earn less, half more.'
+  picture:
+    kind: bars
+    touching: true
+    unit: frequency
+    bars:
+    - label: 0–10
+      value: 5
+    - label: 10–20
+      value: 8
+    - label: 20–30
+      value: 12
+    - label: 30–40
+      value: 6
+    - label: 40–50
+      value: 4
+    caption: Modal class 20–30. Mode = 20 + (12 − 8)/(24 − 8 − 6) × 10 = 24.
+    alt: A histogram with frequencies 5, 8, 12, 6, 4 for classes 0–10 to 40–50. The tallest bar, 20–30, is the modal class, and the mode works out to 24.
+  items:
+  - prompt: Frequencies of 0–10, 10–20, 20–30, 30–40, 40–50 are 5, 8, 12, 6, 4. Which is the modal class?
+    options:
+    - 20–30
+    - 10–20
+    - 30–40
+    - 0–10
+    answer: 20–30
+    difficulty: 1
+    hints:
+    - The modal class has the highest frequency.
+    - 12 is the largest.
+    solution: 20–30 has the highest frequency, 12.
+  - prompt: For that data, find the mode.
+    answer: '24'
+    check: 20 + Rational(12 - 8, 2*12 - 8 - 6)*10
+    difficulty: 2
+    hints:
+    - l = 20, f₁ = 12, f₀ = 8, f₂ = 6, h = 10.
+    - 20 + (4/10) × 10.
+    solution: 'Step 1: Mode = 20 + (12 − 8)/(24 − 8 − 6) × 10. Step 2: = 20 + 4/10 × 10 = 24.'
+  - prompt: For 5, 8, 12, 6, 4 in classes of width 10 from 0, the total is 35. The median class is 20–30 (cf before it 13). Find the median, as a decimal to 2 places.
+    answer: '23.75'
+    check: 20 + (Rational(35, 2) - 13)/12*10
+    difficulty: 3
+    hints:
+    - n/2 = 17.5.
+    - Median = 20 + (17.5 − 13)/12 × 10.
+    solution: 'Step 1: n/2 = 17.5, cf before = 13, f = 12. Step 2: Median = 20 + 4.5/12 × 10 = 20 + 3.75 = 23.75.'
+  - prompt: Using 3 Median = Mode + 2 Mean, find the median if the mode is 24 and the mean is 21.
+    answer: '22'
+    check: (24 + 2*21)/3
+    difficulty: 2
+    hints:
+    - 3 Median = 24 + 42.
+    - 66 ÷ 3.
+    solution: 3 Median = 24 + 2 × 21 = 66, so Median = 22.
+  - prompt: What is the cumulative frequency of a class?
+    options:
+    - The total of all frequencies up to and including that class
+    - The frequency of that class only
+    - The class mark times the frequency
+    - The highest frequency
+    answer: The total of all frequencies up to and including that class
+    difficulty: 1
+    hints:
+    - '''Cumulative'' means building up.'
+    - Keep a running total.
+    solution: It is the running total of frequencies up to and including that class.
+  - prompt: n = 50, and the classes 0–10, 10–20, 20–30, 30–40, 40–50 have frequencies 5, 10, 10, 20, 5. Find the median.
+    answer: '30'
+    check: 20 + (25 - 15)/10*10
+    difficulty: 3
+    hints:
+    - 'Cumulative frequencies: 5, 15, 25, 45, 50; n/2 = 25.'
+    - The first cf ≥ 25 is 25, at 20–30.
+    solution: 'Step 1: n/2 = 25. Step 2: cf reaches 25 exactly at the end of 20–30, so the median class is 20–30 with cf before 15 and f = 10. Step 3: Median = 20 + (25 − 15)/10 × 10 = 30.'
