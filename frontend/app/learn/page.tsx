@@ -13,6 +13,7 @@ function helpPressed(kind: "read_aloud" | "break") {
 }
 import Check, { CheckState } from "./Check";
 import Feedback, { AdaptiveResponse } from "./Feedback";
+import Picture, { type PictureSpec } from "./Picture";
 import Notes from "./Notes";
 import Tutor from "./Tutor";
 
@@ -49,13 +50,14 @@ type Item = {
   choices?: string[];
   keyboard?: "text" | "decimal";
 };
+type Explanation = { style: string; body: string; picture?: PictureSpec | null };
 type Step = {
   decision_id: number;
   kind: "explain" | "practice" | "review" | "prereq_review" | "chapter_complete";
   reason: string;
   concept: { id: number; title: string } | null;
   offer_support: boolean;
-  explanation?: { style: string; body: string } | null;
+  explanation?: Explanation | null;
   styles?: string[];
   item?: Item | null;
 };
@@ -352,7 +354,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
 
   async function switchStyle(style: string) {
     if (!step?.concept) return;
-    const exp = await api<{ style: string; body: string }>(`/concepts/${step.concept.id}/explanations/${style}`);
+    const exp = await api<Explanation>(`/concepts/${step.concept.id}/explanations/${style}`);
     styleRef.current = exp.style;
     setStep({ ...step, explanation: exp });
     if (readAloud) speak(exp.body);
@@ -436,6 +438,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                 <p className="feedback warn">{t("learn.offer_support")}</p>
               )}
               <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? t("learn.no_explanation")}</p>
+              {step.explanation?.picture && <Picture picture={step.explanation.picture} />}
               <div className="row" role="group" aria-label={t("learn.other_ways")}>
                 {(step.styles ?? []).map((s) => (
                   <button
