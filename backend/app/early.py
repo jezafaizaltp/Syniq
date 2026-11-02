@@ -14,10 +14,14 @@ Built to the guidelines: WHO (2019) and the Indian Academy of Pediatrics both sa
 Pictures are emoji so every activity works offline once loaded. Three kinds of activity:
 "name" (tap a picture, hear its word), "find" (tap the one that was asked for) and
 "count" (tap each thing to count it aloud).
+
+From 18 to 24 months there is a smaller together-time: only the "name" activities, at most
+10 minutes a day, meant for the child on an adult's lap. Before 18 months there is nothing on screen.
 """
 
 DAILY_DEFAULT, DAILY_MAX = 20, 60
 SESSION_DEFAULT, SESSION_MAX = 10, 15
+TODDLER_MINUTES = 10  # 18 to 24 months: one short together-time a day at most
 
 AREAS = {
     "words": "First words",

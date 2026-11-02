@@ -140,6 +140,36 @@ class Child(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
+class ChildMark(Base):
+    """Something a parent has ticked for a child: a milestone seen, or a vaccine given (with its date)."""
+
+    __tablename__ = "child_marks"
+    __table_args__ = (UniqueConstraint("child_id", "kind", "key"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    child_id: Mapped[int] = mapped_column(ForeignKey("children.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(20))  # milestone | vaccine
+    key: Mapped[str] = mapped_column(String(40))
+    on_date: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    by_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class CareLog(Base):
+    """A feed, meal, sleep or nappy the family logs for a baby. Visible only to the family."""
+
+    __tablename__ = "care_logs"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    child_id: Mapped[int] = mapped_column(ForeignKey("children.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(20))  # breastfeed | bottle | food | sleep | nappy
+    at: Mapped[datetime] = mapped_column(DateTime, index=True)  # India time, as the parent sees it
+    minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    note: Mapped[str] = mapped_column(String(300), default="")
+    by_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 class ScreenTimeSession(Base):
     """One sitting of healthy screen time. Only the time used is kept, never taps or answers."""
 
