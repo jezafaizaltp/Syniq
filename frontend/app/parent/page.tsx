@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { CHOSEN_SUPPORT, api, post, put } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
+import Methods, { type MethodSubject } from "../space/Methods";
 
 type Child = {
   id: number;
@@ -23,6 +24,7 @@ export default function Parent() {
   const router = useRouter();
   const [children, setChildren] = useState<Child[]>([]);
   const [progress, setProgress] = useState<Record<number, Progress>>({});
+  const [methods, setMethods] = useState<Record<number, MethodSubject[]>>({});
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
 
   useEffect(() => {
@@ -35,6 +37,10 @@ export default function Parent() {
       kids.map(async (k) => [k.id, await api<Progress>(`/guardian/children/${k.id}/progress`)] as const)
     );
     setProgress(Object.fromEntries(entries));
+    const helps = await Promise.all(
+      kids.map(async (k) => [k.id, (await api<{ subjects: MethodSubject[] }>(`/guardian/children/${k.id}/methods`).catch(() => ({ subjects: [] }))).subjects] as const)
+    );
+    setMethods(Object.fromEntries(helps));
     setChildren(kids);
     setSpecialists(await api<Specialist[]>("/guardian/specialists").catch(() => []));
   }, []);
@@ -127,6 +133,13 @@ export default function Parent() {
                 </ul>
               )}
               <p className="muted">{t("parent.tip", { name: c.name })}</p>
+            </>
+          )}
+          {methods[c.id] && methods[c.id].length > 0 && (
+            <>
+              <h3>{t("parent.helps", { name: c.name })}</h3>
+              <p className="muted">{t("parent.helps_note", { name: c.name })}</p>
+              <Methods subjects={methods[c.id]} t={t} />
             </>
           )}
           {specialists.length > 0 && (

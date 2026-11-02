@@ -9,10 +9,11 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session as DbSession
 
 from .engine import detect
+from .engine import methods
 from .engine import mastery as m
 from .engine import responses
 from .engine.rules import Action, ConceptState, decide
-from .models import Attempt, Concept, Subject, ConceptPrereq, Decision, Explanation, Item, LearningEvent, Mastery, User, utcnow
+from .models import Attempt, Chapter, Concept, Subject, ConceptPrereq, Decision, Explanation, Item, LearningEvent, Mastery, User, utcnow
 
 
 # Pilot students made before family accounts have no class set: they're Kerala State Class 9.
@@ -116,7 +117,95 @@ def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[Co
             styles_seen=_styles_seen(db, student.id, cid),
             format_stats=row.format_stats or {},
         )
+    for cid, prior in method_priors(db, student.id, list(states)).items():
+        states[cid].method_prior = prior
     return [states[c.id] for c in concepts], states
+
+
+# --- Which ways of explaining work for this student (engine/methods.py) ----------------
+
+# An explanation gets the credit (or not) for the next few answers on its topic.
+CREDIT_WINDOW = 3
+
+
+def style_to_credit(db: DbSession, student_id: int, concept_id: int) -> str | None:
+    """The method last used to explain this topic, if this answer is one of the few right after it."""
+    last = db.scalars(
+        select(Decision)
+        .where(Decision.student_id == student_id, Decision.concept_id == concept_id, Decision.action == "explain")
+        .order_by(Decision.created_at.desc(), Decision.id.desc())
+    ).first()
+    style = (last.evidence or {}).get("style") if last else None
+    if not style:
+        return None
+    since = db.scalars(
+        select(Attempt.id).where(Attempt.student_id == student_id, Attempt.concept_id == concept_id, Attempt.created_at >= last.created_at)
+    ).all()
+    return style if len(since) < CREDIT_WINDOW else None
+
+
+def subject_of(db: DbSession, concept_ids) -> dict[int, int]:
+    rows = db.execute(
+        select(Concept.id, Chapter.subject_id).join(Chapter, Chapter.id == Concept.chapter_id).where(Concept.id.in_(list(concept_ids)))
+    ).all()
+    return {cid: sid for cid, sid in rows}
+
+
+def method_stats(db: DbSession, student_id: int) -> tuple[dict[int, dict], dict[int, dict], dict]:
+    """The student's answers after each method: per topic, per subject, and in total."""
+    rows = db.execute(select(Mastery.concept_id, Mastery.format_stats).where(Mastery.student_id == student_id)).all()
+    per_topic = {cid: st for cid, st in rows if st}
+    subjects = subject_of(db, per_topic)
+    per_subject: dict[int, dict] = {}
+    overall: dict = {}
+    for cid, st in per_topic.items():
+        methods.add(per_subject.setdefault(subjects.get(cid), {}), st)
+        methods.add(overall, st)
+    return per_topic, per_subject, overall
+
+
+def method_priors(db: DbSession, student_id: int, concept_ids: list[int]) -> dict[int, methods.Prior]:
+    """For each topic: what the student's other topics and similar learners say about each method."""
+    if not concept_ids:
+        return {}
+    per_topic, per_subject, overall = method_stats(db, student_id)
+    subjects = subject_of(db, concept_ids)
+    peer_rows = [
+        r
+        for r in db.execute(
+            select(Mastery.student_id, Mastery.concept_id, Mastery.format_stats).where(
+                Mastery.concept_id.in_(concept_ids), Mastery.student_id != student_id
+            )
+        ).all()
+        if r.format_stats
+    ]
+    # Learners who learn in a similar way: their clearest method is the same as this student's.
+    similar: set[int] = set()
+    mine = methods.best_method(overall)
+    if mine and peer_rows:
+        totals: dict[int, dict] = {}
+        for sid, st in db.execute(
+            select(Mastery.student_id, Mastery.format_stats).where(Mastery.student_id.in_({r.student_id for r in peer_rows}))
+        ).all():
+            methods.add(totals.setdefault(sid, {}), st)
+        similar = {sid for sid, st in totals.items() if methods.best_method(st) == mine}
+
+    out = {}
+    for cid in concept_ids:
+        own = per_topic.get(cid)
+        subject_total = per_subject.get(subjects.get(cid), {})
+        on_topic = [r for r in peer_rows if r.concept_id == cid]
+        alike = [r for r in on_topic if r.student_id in similar]
+        peers: dict = {}
+        for r in alike or on_topic:
+            methods.add(peers, r.format_stats)
+        out[cid] = methods.Prior(
+            subject=methods.subtract(subject_total, own),
+            overall=methods.subtract(overall, subject_total),
+            peers=peers,
+            peers_are_similar=bool(alike),
+        )
+    return out
 
 
 def next_action(db: DbSession, student: User, chapter_id: int, current_concept_id: int | None) -> tuple[Action, Decision]:
@@ -195,6 +284,8 @@ def record_attempt(
     explanation_style: str | None,
 ) -> tuple[bool, str | None, Mastery]:
     correct = same_answer(response, item.answer)
+    # The server decides which explanation this answer reflects on (the app's value is not trusted for this).
+    explanation_style = style_to_credit(db, student.id, item.concept_id)
     misconception = None
     if not correct:
         misconception = next((tag for wrong, tag in item.misconceptions.items() if same_answer(response, wrong)), None)
@@ -333,3 +424,15 @@ def update_noticed_support(db: DbSession, student: User) -> list[detect.Finding]
         db.add(student)
         db.commit()
     return findings
+
+
+def method_summary(db: DbSession, student_id: int) -> list[dict]:
+    """Per subject: how often answers were right after each method, and the clearest one right now (or None)."""
+    _, per_subject, _ = method_stats(db, student_id)
+    names = {s.id: s.name for s in db.scalars(select(Subject).where(Subject.id.in_([k for k in per_subject if k]))).all()}
+    out = []
+    for sid, stats in per_subject.items():
+        described = methods.describe(stats)
+        if sid in names and described:
+            out.append({"subject_id": sid, "subject": names[sid], "methods": described, "clearest": methods.best_method(stats)})
+    return sorted(out, key=lambda d: d["subject_id"])

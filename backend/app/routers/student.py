@@ -103,6 +103,9 @@ def learn_next(
         exp = learning.get_explanation(db, concept.id, action.style or "text")
         payload["explanation"] = {"style": exp.style, "body": exp.body, "picture": exp.picture} if exp else None
         payload["styles"] = STYLES
+        why = (decision.evidence or {}).get("method_why")
+        if exp and exp.style == action.style and why in ("history", "similar", "everyone"):
+            payload["method_why"] = why  # the app says, in the student's words, why this way first
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         item = learning.pick_item(db, user.id, concept.id, action.difficulty)
         payload["item"] = learning.public_item(item, user.settings) if item else None

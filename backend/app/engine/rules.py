@@ -14,11 +14,12 @@ Guardrails from the product spec:
 from dataclasses import dataclass, field
 from datetime import datetime
 
+from . import methods
 from .mastery import is_secure
 
-RULES_VERSION = "2026.10-1"
+RULES_VERSION = "2026.11-1"
 
-STYLES = ["text", "visual", "step_by_step", "real_world"]
+STYLES = methods.STYLES
 STRUGGLE_STREAK = 2
 PREREQ_GAP_MIN_ATTEMPTS = 3
 PREREQ_GAP_P = 0.4
@@ -36,6 +37,8 @@ class ConceptState:
     prereq_ids: list[int] = field(default_factory=list)
     styles_seen: list[str] = field(default_factory=list)
     format_stats: dict = field(default_factory=dict)
+    # What other topics and similar learners say about each method (engine/methods.py).
+    method_prior: methods.Prior | None = None
 
 
 @dataclass
@@ -60,20 +63,12 @@ def target_difficulty(p: float) -> int:
 
 
 def pick_style(state: ConceptState, preferred: str | None) -> str:
-    """Choose a different way to explain. The student's own preference wins."""
-    if preferred and preferred not in state.styles_seen:
-        return preferred
-    unseen = [s for s in STYLES if s not in state.styles_seen]
-    if unseen:
-        return unseen[0]
+    """Choose a way to explain. The student's own preference wins; see engine/methods.py."""
+    return choose_style(state, preferred)[0]
 
-    # All styles tried: pick the one most often followed by a correct answer.
-    def score(style: str) -> float:
-        st = state.format_stats.get(style, {})
-        good, bad = st.get("after_correct", 0), st.get("after_wrong", 0)
-        return (good + 1) / (good + bad + 2)
 
-    return max(STYLES, key=score)
+def choose_style(state: ConceptState, preferred: str | None) -> tuple[str, str]:
+    return methods.choose(state.styles_seen, state.format_stats, state.method_prior, preferred)
 
 
 def decide(
@@ -119,7 +114,7 @@ def decide(
 
     # R2: two or more wrong in a row -> explain it a different way and offer support.
     if current and current.wrong_streak >= STRUGGLE_STREAK:
-        style = pick_style(current, preferred_style)
+        style, why = choose_style(current, preferred_style)
         return Action(
             kind="explain",
             concept_id=current.concept_id,
@@ -127,7 +122,7 @@ def decide(
             reason="The last few answers suggest a different explanation might help.",
             style=style,
             offer_support=True,
-            evidence={"wrong_streak": current.wrong_streak, "styles_seen": current.styles_seen},
+            evidence={"wrong_streak": current.wrong_streak, "styles_seen": current.styles_seen, "method_why": why},
         )
 
     # R3: a secured concept is due for spaced review.
@@ -157,12 +152,14 @@ def decide(
 
     # R4: a new concept starts with an explanation, in the student's preferred style.
     if current.attempts == 0 and not current.styles_seen:
+        style, why = choose_style(current, preferred_style)
         return Action(
             kind="explain",
             concept_id=current.concept_id,
             rule_id="R4_introduce",
             reason="Starting a new topic with an explanation.",
-            style=preferred_style or "text",
+            style=style,
+            evidence={"method_why": why},
         )
 
     # R6: default -> practise at a difficulty matched to current understanding.

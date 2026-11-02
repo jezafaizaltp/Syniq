@@ -25,7 +25,7 @@ from ..auth import (
     require_role,
     verify_password,
 )
-from .. import i18n
+from .. import i18n, learning
 from ..db import get_db
 from ..engine import detect
 from ..engine.mastery import progress_label
@@ -167,6 +167,29 @@ def may_need_support(class_id: int, db: DbSession = Depends(get_db), user: User 
     return out
 
 
+@router.get("/teacher/classes/{class_id}/methods", tags=["teacher"])
+def class_methods(class_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
+    """Per subject, students grouped by the way of explaining that helps them most right now.
+
+    Groups are by how students learn, never by marks or ability, and they change as
+    students answer. Students without a clear pattern yet are only counted.
+    """
+    _teacher_class(db, user, class_id)
+    subjects: dict[int, dict] = {}
+    for s in sorted(_shared_students(db, class_id), key=lambda x: x.name):
+        for row in learning.method_summary(db, s.id):
+            entry = subjects.setdefault(row["subject_id"], {"subject_id": row["subject_id"], "subject": row["subject"], "groups": {}, "still_finding_out": 0})
+            if row["clearest"]:
+                entry["groups"].setdefault(row["clearest"], []).append({"student_id": s.id, "name": s.name})
+            else:
+                entry["still_finding_out"] += 1
+    audit(db, user, "view_class_methods")
+    return [
+        {**e, "groups": [{"style": k, "students": v} for k, v in sorted(e["groups"].items())]}
+        for _, e in sorted(subjects.items())
+    ]
+
+
 @router.get("/teacher/review-queue", tags=["teacher"])
 def review_queue(db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
     items = db.scalars(select(Item).where(Item.status == "draft")).all()
@@ -270,6 +293,15 @@ def child_progress(
             for r in rows
         ],
     }
+
+
+@router.get("/guardian/children/{student_id}/methods", tags=["guardian"])
+def child_methods(student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    """Which ways of explaining have helped the child lately, per subject."""
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    audit(db, user, "view_child_methods", student_id)
+    return {"subjects": learning.method_summary(db, student_id)}
 
 
 class SupportIn(BaseModel):

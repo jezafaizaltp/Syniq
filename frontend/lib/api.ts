@@ -123,6 +123,14 @@ export const PROGRESS_WORDS: Record<string, string> = {
   secure: "Secure",
 };
 
+/** Ways of explaining as nouns, for describing what has helped (staff screens; students get lib/i18n.ts). */
+export const METHOD_WORDS: Record<string, string> = {
+  text: "Explaining in words",
+  visual: "Pictures",
+  step_by_step: "Step by step",
+  real_world: "Real-life examples",
+};
+
 export const STYLE_WORDS: Record<string, string> = {
   text: "Explain in words",
   visual: "Show me a picture",
