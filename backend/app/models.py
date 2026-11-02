@@ -26,7 +26,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(120))
     email: Mapped[str] = mapped_column(String(200), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(300))
-    role: Mapped[str] = mapped_column(String(20))  # student | guardian | teacher | admin
+    role: Mapped[str] = mapped_column(String(20))  # student | guardian | teacher | admin | specialist
     class_group_id: Mapped[int | None] = mapped_column(ForeignKey("class_groups.id"), nullable=True)
     settings: Mapped[dict] = mapped_column(JSON, default=dict)
     # Set for accounts made with a temporary password; cleared when they choose their own.
@@ -74,6 +74,22 @@ class Consent(Base):
     granted: Mapped[bool] = mapped_column(Boolean)
     method: Mapped[str] = mapped_column(String(60), default="school_form")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class SpecialistLink(Base):
+    """A parent shares one child with one specialist (counsellor, special educator).
+
+    Ending a share sets ended_at; rows are never deleted, so who could see what, and when, stays on record.
+    """
+
+    __tablename__ = "specialist_links"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    specialist_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    guardian_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    ended_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
 class AuditLog(Base):
@@ -246,6 +262,77 @@ class Decision(Base):
     action: Mapped[str] = mapped_column(String(40))
     reason: Mapped[str] = mapped_column(Text)
     evidence: Mapped[dict] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+# --- Subject checks ---------------------------------------------------------------
+# A short check per subject: at the start (tells the engine where to begin), at the end of
+# term and four weeks later (measure what was learnt and kept). Never shown as a score.
+
+class CheckRound(Base):
+    """An end-of-term or retention check the admin opens for every student at once."""
+
+    __tablename__ = "check_rounds"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    kind: Mapped[str] = mapped_column(String(10))  # end | retention
+    opened_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class SubjectCheck(Base):
+    """One student's check in one subject. Answers stay here, never in the practice history."""
+
+    __tablename__ = "subject_checks"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"))
+    kind: Mapped[str] = mapped_column(String(10))  # start | end | retention
+    round_id: Mapped[int | None] = mapped_column(ForeignKey("check_rounds.id"), nullable=True)
+    item_ids: Mapped[list] = mapped_column(JSON, default=list)
+    # {"<item id>": {"response": "...", "correct": true}}
+    answers: Mapped[dict] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(10), default="open")  # open | done | skipped
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+# --- The student's own space ------------------------------------------------------
+# Goals and notes belong to the student. No teacher, parent or engine reads them.
+
+class Goal(Base):
+    __tablename__ = "goals"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    text: Mapped[str] = mapped_column(String(200))
+    due_on: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
+    done: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Note(Base):
+    __tablename__ = "notes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    concept_id: Mapped[int | None] = mapped_column(ForeignKey("concepts.id"), nullable=True)
+    body: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class InterestReflection(Base):
+    """How an exploration activity felt to the student. Theirs alone; never turned into a label."""
+
+    __tablename__ = "interest_reflections"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    activity_id: Mapped[str] = mapped_column(String(60))
+    feeling: Mapped[str] = mapped_column(String(20))  # loved | okay | not_for_me
+    note: Mapped[str] = mapped_column(Text, default="")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

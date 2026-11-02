@@ -8,7 +8,7 @@ export function setApiLang(lang: Lang) {
   apiLang = lang;
 }
 
-export type Role = "student" | "guardian" | "teacher" | "admin";
+export type Role = "student" | "guardian" | "teacher" | "admin" | "specialist";
 
 export type Settings = {
   font_scale?: number;
@@ -87,6 +87,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
     }
     throw new ApiError(res.status, typeof detail === "string" ? detail : "Something went wrong");
   }
+  if (res.status === 204) return undefined as T;
   return res.json() as Promise<T>;
 }
 

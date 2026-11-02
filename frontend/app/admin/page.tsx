@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ApiError, api, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import Specialists from "./Specialists";
 
 type Check = { ok: boolean; errors: { row: number; problems: string[] }[]; students?: number; classes?: string[]; without_learning_consent?: number };
 type Account = {
@@ -226,7 +227,10 @@ export default function Admin() {
     <div className="wrap wide">
       <h1>School setup</h1>
       <p>
-        <Link href="/admin/results">Pilot results: before and after marks →</Link>
+        <Link href="/admin/results">Pilot results: subject checks and before and after marks →</Link>
+      </p>
+      <p>
+        <Link href="/admin/audit">Audit log: who viewed or changed what →</Link>
       </p>
 
       <section className="card">
@@ -429,6 +433,8 @@ export default function Admin() {
           </ul>
         </section>
       )}
+
+      <Specialists />
     </div>
   );
 }

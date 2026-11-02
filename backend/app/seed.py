@@ -209,7 +209,10 @@ def seed(db: DbSession) -> None:
     pw = hash_password(DEMO_PASSWORD)
     teacher = User(name="Demo Teacher", email="teacher@demo.syniq", password_hash=pw, role="teacher", settings={})
     admin = User(name="Demo Admin", email="admin@demo.syniq", password_hash=pw, role="admin", settings={})
-    db.add_all([teacher, admin])
+    specialist = User(
+        name="Demo Counsellor", email="specialist@demo.syniq", password_hash=pw, role="specialist", settings={"title": "School counsellor"}
+    )
+    db.add_all([teacher, admin, specialist])
     db.flush()
     group = ClassGroup(name="Class 9 A (demo)", teacher_id=teacher.id)
     db.add(group)

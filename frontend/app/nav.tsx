@@ -16,9 +16,12 @@ export default function Nav() {
         SYNiq
       </Link>
       {me?.role === "student" && <Link href="/learn">{t("nav.learn")}</Link>}
+      {me?.role === "student" && <Link href="/space">{t("nav.space")}</Link>}
+      {me?.role === "student" && <Link href="/explore">{t("nav.explore")}</Link>}
       {me?.role === "admin" && <Link href="/admin">{t("nav.school")}</Link>}
       {(me?.role === "teacher" || me?.role === "admin") && <Link href="/teacher">{t("nav.class")}</Link>}
       {me?.role === "guardian" && <Link href="/parent">{t("nav.children")}</Link>}
+      {me?.role === "specialist" && <Link href="/specialist">{t("nav.children")}</Link>}
       {me && <Link href="/settings">{t("nav.settings")}</Link>}
       <button
         className="secondary"

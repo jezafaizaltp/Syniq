@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SessionProvider } from "@/lib/session";
 import Nav from "./nav";
+import Offline from "./offline";
 import PasswordGate from "./password";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SessionProvider>
           <Nav />
+          <Offline />
           <main>
             <PasswordGate>{children}</PasswordGate>
           </main>

@@ -302,5 +302,6 @@ def set_consent(student_id: int, body: ConsentIn, db: DbSession = Depends(get_db
         raise HTTPException(404, "Not found")
     db.add(Consent(student_id=student_id, guardian_id=user.id, scope=body.scope, granted=body.granted, method=body.method))
     db.commit()
+    audit(db, user, f"consent:{body.scope}:{'yes' if body.granted else 'no'}", student_id)
     return {"scope": body.scope, "granted": body.granted}
 
