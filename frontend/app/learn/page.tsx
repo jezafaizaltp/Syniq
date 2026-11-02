@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, api, post } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
+import { ageBand, readsAloud } from "@/lib/age";
 import { speak, useSession } from "@/lib/session";
 
 /** Count a help button press: one of the signs SYNiq uses to notice what helps. */
@@ -137,6 +138,7 @@ export default function Learn() {
   const checkFor = (subjectId: number) => checks.find((c) => c.subject_id === subjectId);
   const startOffer = subject ? checkFor(subject.id) : undefined;
   const offerStart = !!startOffer && (startOffer.start === "not_started" || startOffer.start === "open");
+  const little = ageBand(me) === "little";
   const roundsDue = checks.flatMap((c) =>
     c.rounds.filter((r) => r.status !== "done").map((r) => ({ subjectId: c.subject_id, name: c.subject, kind: r.kind }))
   );
@@ -156,6 +158,11 @@ export default function Learn() {
           👋
         </span>
         <h1>{t("learn.hi", { name: me.name })}</h1>
+        {little && (
+          <button className="secondary listen" onClick={() => speak(`${t("learn.hi", { name: me.name })} ${t("learn.what_today")}`)}>
+            🔊 {t("learn.listen")}
+          </button>
+        )}
       </div>
       {!subject ? (
         <>
@@ -183,6 +190,7 @@ export default function Learn() {
                   style={{ "--tile": look.color } as React.CSSProperties}
                   disabled={!s.chapters}
                   onClick={async () => {
+                    if (little) speak(s.name);
                     setSubject(s);
                     setChapters(await api<Chapter[]>(`/subjects/${s.id}/chapters`));
                   }}
@@ -308,7 +316,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
   const styleRef = useRef<string | null>(null);
   const startedRef = useRef<number>(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const readAloud = !!me?.settings?.read_aloud;
+  const readAloud = readsAloud(me);
   const [tutorOn, setTutorOn] = useState(false);
 
   useEffect(() => {
