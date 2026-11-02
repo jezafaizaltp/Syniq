@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .db import IS_SQLITE, Base, engine
-from .routers import admin, adults, checks, content, myspace, results, student, tutor
+from .routers import admin, adults, checks, content, explore, myspace, results, student, tutor
 
 PRODUCTION = os.environ.get("SYNIQ_ENV") == "production"
 
@@ -37,6 +37,7 @@ app.include_router(admin.router)
 app.include_router(results.router)
 app.include_router(checks.router)
 app.include_router(myspace.router)
+app.include_router(explore.router)
 
 
 @app.get("/health")

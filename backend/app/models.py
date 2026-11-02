@@ -307,6 +307,19 @@ class Note(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
+class InterestReflection(Base):
+    """How an exploration activity felt to the student. Theirs alone; never turned into a label."""
+
+    __tablename__ = "interest_reflections"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    activity_id: Mapped[str] = mapped_column(String(60))
+    feeling: Mapped[str] = mapped_column(String(20))  # loved | okay | not_for_me
+    note: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 # --- Pilot evaluation -------------------------------------------------------------
 # School marks used only to measure whether SYNiq helped, in aggregate. Kept apart from
 # the learner model: nothing in the engine, teacher, parent or student views reads them.
