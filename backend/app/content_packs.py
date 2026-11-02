@@ -24,6 +24,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
 from . import i18n
+from .pictures import check_picture
 from .models import Chapter, Concept, ConceptPrereq, Explanation, Item, Misconception, Subject
 
 CONTENT_DIR = Path(__file__).resolve().parent.parent / "content"
@@ -103,6 +104,8 @@ def check_pack(pack: dict, known_tags: set[str] | None = None) -> list[str]:
         for style in c.get("explanations") or {}:
             if style not in STYLES:
                 errors.append(f"{where}: unknown explanation style '{style}'")
+        if "picture" in c:
+            errors += [f"{where}: {e}" for e in check_picture(c["picture"])]
         levels = {i.get("difficulty") for i in c.get("items") or []}
         if not {1, 2} <= levels:
             errors.append(f"{where}: needs questions at difficulty 1 and 2")
@@ -236,7 +239,7 @@ def load(db: DbSession, packs: list[tuple[Path, dict]]) -> dict:
             concept.chapter_id, concept.title, concept.order, concept.notes = chapter.id, c["title"], order, c["notes"].strip()
             db.flush()
             concepts[c["code"]] = concept
-            counts["explanations"] += _load_explanations(db, concept, c["explanations"])
+            counts["explanations"] += _load_explanations(db, concept, c["explanations"], c.get("picture"))
             added, withdrawn = _load_items(db, concept, c["items"])
             counts["items"] += added
             counts["withdrawn"] += withdrawn
@@ -252,7 +255,7 @@ def load(db: DbSession, packs: list[tuple[Path, dict]]) -> dict:
     return counts
 
 
-def _load_explanations(db: DbSession, concept: Concept, explanations: dict) -> int:
+def _load_explanations(db: DbSession, concept: Concept, explanations: dict, picture: dict | None = None) -> int:
     added = 0
     for style, body in explanations.items():
         row = db.scalars(
@@ -263,6 +266,7 @@ def _load_explanations(db: DbSession, concept: Concept, explanations: dict) -> i
             db.add(row)
             added += 1
         row.body, row.status, row.review_note = body.strip(), "approved", REVIEW_NOTE
+        row.picture = picture if style == "visual" else None
     return added
 
 

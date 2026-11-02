@@ -249,6 +249,8 @@ class Explanation(Base):
     status: Mapped[str] = mapped_column(String(20), default="draft")  # draft | approved | rejected
     source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai | pack
     review_note: Mapped[str] = mapped_column(Text, default="")
+    # For the visual style: a drawing the app renders (see app/pictures.py). None for text only.
+    picture: Mapped[dict | None] = mapped_column(JSON, nullable=True, default=None)
 
 
 class Item(Base):

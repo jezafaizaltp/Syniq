@@ -1239,3 +1239,75 @@ details.card > summary {
 .vaccine-list .pill {
   white-space: normal;
 }
+
+/* Picture explanations (app/learn/Picture.tsx): drawn from the content pack, calm colours,
+   follows dark mode and high contrast through the colour tokens. */
+.picture {
+  margin: 1rem 0;
+  padding: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.picture figcaption {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+.pic-svg { display: block; width: 100%; height: auto; max-height: 420px; }
+.pic-square { max-width: 420px; margin: 0 auto; }
+.pic-svg text { font-family: var(--font); font-size: 18px; paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
+.pic-svg .pic-small { font-size: 15px; }
+.pic-text-strong { fill: var(--text); font-weight: 700; }
+.pic-text-muted { fill: var(--muted); }
+.pic-text-accent { fill: var(--accent); font-weight: 700; }
+.pic-axis { stroke: var(--text); stroke-width: 2; }
+.pic-grid { stroke: var(--line); stroke-width: 1; }
+.pic-fill-accent { fill: var(--accent); }
+.pic-jump { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.pic-shape { fill: none; stroke: var(--text); stroke-width: 2.5; stroke-linejoin: round; }
+.pic-angle { fill: none; stroke: var(--accent); stroke-width: 2; }
+.pic-cell-a { fill: var(--accent-soft); stroke: var(--text); stroke-width: 2; }
+.pic-cell-b { fill: var(--sun-soft); stroke: var(--text); stroke-width: 2; }
+.pic-bar-a { fill: var(--accent); opacity: 0.85; }
+.pic-bar-b { fill: var(--sun); }
+:root[data-contrast="high"] .pic-bar-a,
+:root[data-contrast="high"] .pic-bar-b { fill: var(--text); opacity: 1; stroke: var(--bg); stroke-width: 2; }
+.pic-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem; }
+.pic-flow li {
+  position: relative;
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--bg-2);
+  border-radius: var(--radius-s);
+}
+.pic-flow li + li::before {
+  content: "↓";
+  position: absolute; top: -1.55rem; left: 1.35rem;
+  color: var(--accent); font-weight: 700; font-size: 1.2rem;
+}
+.pic-flow-n {
+  flex: none;
+  display: inline-grid; place-items: center;
+  width: 2rem; height: 2rem; border-radius: 50%;
+  background: var(--accent); color: var(--accent-text); font-weight: 700;
+}
+.pic-compare { display: grid; gap: 0.75rem; }
+.pic-compare section { padding: 0.7rem 0.9rem; border-radius: var(--radius-s); }
+.pic-compare h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.pic-compare ul { margin: 0; padding-left: 1.1rem; }
+.pic-compare li { margin: 0.25rem 0; }
+.pic-col-a { background: var(--accent-soft); }
+.pic-col-b { background: var(--sun-soft); }
+:root[data-contrast="high"] .pic-compare section,
+:root[data-contrast="high"] .pic-flow li { border: 2px solid var(--line); }
+@media (max-width: 520px) {
+  .pic-compare { grid-template-columns: 1fr !important; }
+}
+.pic-figure { max-width: 520px; margin: 0 auto; }
+@media (max-width: 520px) {
+  .pic-svg text { font-size: 27px; }
+  .pic-svg .pic-small { font-size: 22px; }
+  .picture { padding: 0.6rem; }
+}

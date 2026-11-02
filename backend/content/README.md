@@ -183,6 +183,10 @@ concepts:
       visual: "..."
       step_by_step: "Step 1: ... Step 2: ..."
       real_world: "..."
+    picture:                           # optional: drawn under the visual explanation (see Pictures)
+      kind: flow
+      steps: ["...", "..."]
+      alt: "One sentence a screen reader says instead of the picture."
     items:
       - prompt: "The sum of two numbers is 34 and their difference is 10. What is the bigger number?"
         answer: "22"
@@ -201,6 +205,21 @@ concepts:
 Typed answers must be numbers (whole, decimal or a fraction like 3/4). Students' answers are accepted however the number is written: 22, 22.0 and 44/2 are all right. Anything else (an expression, a surd, words) is a choice question.
 
 Mistake tags already translated into Malayalam in `backend/app/i18n.py` (`tip.<tag>`) can be used without a tip here. New tags need a tip in a pack (any pack: tips are shared), shown in English.
+
+## Pictures
+
+A topic can carry a `picture`: a small description that the app draws under its "Show me a picture" explanation. Nothing is downloaded, so it is free, works offline, stays sharp on any screen and follows dark mode and high contrast. `python -m app.content_packs --check` checks every picture the same way it checks answers (`backend/app/pictures.py`). Every picture needs an `alt` sentence for screen readers; `caption` is optional. Labels are at most 40 characters.
+
+| kind | for | fields |
+|---|---|---|
+| `number_line` | numbers, jumps, distance | `from`, `to`, `step` (at most 40 ticks), `points: [{at, label}]`, `jumps: [{from, to, label}]` |
+| `area_grid` | areas, identities, long multiplication | `cols` and `rows`: 1 to 4 `{size, label}`; `cells`: a label for every box, row by row |
+| `bars` | bar charts; histograms with `touching: true` | 2 to 10 `{label, value}`, optional `unit` |
+| `flow` | processes, timelines, worked steps | 2 to 8 `steps` |
+| `compare` | two or three things side by side | 2 or 3 `columns: [{title, points}]`, 1 to 6 points each |
+| `geometry` | shapes, angles, circles, graphs | `points: {A: [x, y]}` (0 to 10, or within `range` with `axes: true`), `segments: [[A, B, label]]`, `circles: [{centre, radius}]`, `angles: [{at, from, to, label}]`, `x_label`/`y_label` with axes |
+
+In `geometry`, a point whose name starts with `_` is a helper: lines can use it but it isn't marked or named. Labels are placed on the outside of the shape automatically. Examples of every kind are in the CBSE Class 9 Maths packs.
 
 ## Changing a pack
 

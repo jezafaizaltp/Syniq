@@ -101,7 +101,7 @@ def learn_next(
     }
     if action.kind == "explain" and concept:
         exp = learning.get_explanation(db, concept.id, action.style or "text")
-        payload["explanation"] = {"style": exp.style, "body": exp.body} if exp else None
+        payload["explanation"] = {"style": exp.style, "body": exp.body, "picture": exp.picture} if exp else None
         payload["styles"] = STYLES
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         item = learning.pick_item(db, user.id, concept.id, action.difficulty)
@@ -130,7 +130,7 @@ def explanation(concept_id: int, style: str, db: DbSession = Depends(get_db), us
             )
         )
         db.commit()
-    return {"style": exp.style, "body": exp.body}
+    return {"style": exp.style, "body": exp.body, "picture": exp.picture}
 
 
 @router.get("/items/{item_id}/hints/{n}")
