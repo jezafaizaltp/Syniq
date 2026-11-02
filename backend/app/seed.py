@@ -39,6 +39,12 @@ SUBJECTS = [
     ("bio", "Biology", "en", "kerala_scert", 9),
     ("ss", "Social Science", "en", "kerala_scert", 9),
     ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE Class 8 (NCERT books, new 2025 editions): the year before, for filling gaps.
+    ("cbse8-math", "Mathematics", "en", "cbse", 8),
+    ("cbse8-sci", "Science", "en", "cbse", 8),
+    ("cbse8-ss", "Social Science", "en", "cbse", 8),
+    ("cbse8-eng", "English", "en", "cbse", 8),
+    ("cbse8-hin", "Hindi", "hi", "cbse", 8),
     # CBSE Class 9 (NCERT books): the first class of SYNiq outside school.
     ("cbse9-math", "Mathematics", "en", "cbse", 9),
     ("cbse9-sci", "Science", "en", "cbse", 9),

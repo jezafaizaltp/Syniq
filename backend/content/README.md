@@ -87,6 +87,27 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 8 (NCERT, 2025 books)
+
+Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8-eng` and `cbse8-hin`. NCERT replaced every Class 8 book in 2025 (NCF 2023), and these packs follow the new books: Ganita Prakash (Maths, in two parts), Curiosity (Science), Exploring Society: India and Beyond (Social Science, two parts), Poorvi (English) and Malhar (Hindi). Maths numbers its chapters across both parts: Part 1 is chapters 1–7 and Part 2 is chapters 8–14. Chapter names and the topics inside each chapter were checked against published contents lists of the 2025 books (not a printed copy); the questions and explanations are Claude's own. Class 8 is here so that a Class 9 student who is stuck can go back and fill a gap.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: A Square and A Cube | square numbers and square roots; cube numbers and cube roots | 13 |
+| Maths 2: Power Play | powers and the laws of exponents; powers of 10 and large numbers | 13 |
+| Maths 3: A Story of Numbers | early ways of writing numbers; place value and number bases | 12 |
+| Maths 4: Quadrilaterals | angles in a quadrilateral; parallelograms, rhombuses, kites and trapeziums | 13 |
+| Maths 5: Number Play | quick checks for divisibility; sums of odd, even and consecutive numbers | 12 |
+| Maths 6: We Distribute, Yet Things Multiply | the distributive property for quick multiplying; squares of sums and differences | 12 |
+| Maths 7: Proportional Reasoning-1 | ratios in simplest form; sharing in a ratio and unit conversions | 12 |
+| Maths 8: Fractions in Disguise | fractions as percentages; percentage of a quantity | 12 |
+| Maths 9: The Baudhayana-Pythagoras Theorem | the Baudhayana–Pythagoras theorem; integer right triangles and doubling a square | 12 |
+| Maths 10: Proportional Reasoning-2 | map scales and ratios with three terms; inverse proportion | 12 |
+| Maths 11: Exploring Some Geometric Themes | fractals: patterns that repeat inside themselves; solids, nets and views | 12 |
+| Maths 12: Tales by Dots and Lines | the mean as a balance point; the median, and mean versus median | 12 |
+| Maths 13: Algebra Play | the algebra behind number tricks; calendar magic and divisibility tricks | 12 |
+| Maths 14: Area | areas of rectangles, triangles and parallelograms; areas of rhombuses, trapeziums and other polygons | 12 |
+
 ## CBSE Class 9 (NCERT)
 
 For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). Hindi B is not written yet. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
@@ -265,8 +286,8 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 903 of the 3,585 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 2,682 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 1,022 of the 3,756 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 2,734 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
