@@ -60,9 +60,14 @@ def test_family_account_from_sign_up_to_a_childs_login():
     assert me["must_change_password"] and me["consent"]["core_learning"] and me["class"] == {"board": "kerala_scert", "grade": 9}
     assert client.get("/subjects", headers=riya).json()  # Kerala Class 9 has content
 
-    # Move her to CBSE Class 9: no CBSE subjects are loaded yet, so she sees none rather than the wrong syllabus.
+    # Move her to CBSE Class 9: she sees the CBSE subjects only, never the Kerala ones.
     client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "cbse", "grade": 9}, headers=asha)
+    codes = [s["code"] for s in client.get("/subjects", headers=riya).json()]
+    assert codes and all(c.startswith("cbse9-") for c in codes)
+    # A class with no subjects yet shows none rather than another class's.
+    client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "cbse", "grade": 4}, headers=asha)
     assert client.get("/subjects", headers=riya).json() == []
+    client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "cbse", "grade": 9}, headers=asha)
     assert client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"]}, headers=asha).status_code == 400
     assert client.delete(f"/family/children/{big['id']}", headers=asha).status_code == 400
     assert client.delete(f"/family/children/{coming['id']}", headers=asha).status_code == 204
