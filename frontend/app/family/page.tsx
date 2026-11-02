@@ -159,6 +159,20 @@ function ChildCard({
         {section.about}
       </p>
       {!section.ready && <p className="pill">Coming next in SYNiq</p>}
+      {child.section === "baby" && (
+        <p>
+          <Link className="btn" href={`/baby?child=${child.id}`}>
+            Open {child.name}&apos;s page
+          </Link>
+        </p>
+      )}
+      {child.section === "pregnancy" && (
+        <p>
+          <Link className="btn" href={`/pregnancy?child=${child.id}`}>
+            Open pregnancy
+          </Link>
+        </p>
+      )}
       {child.section === "early" && (
         <p>
           <Link className="btn" href={`/early?child=${child.id}`}>

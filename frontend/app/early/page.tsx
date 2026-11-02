@@ -11,6 +11,7 @@ type Overview = {
   child: { id: number; name: string; age: string };
   limits: { daily: number; session: number; daily_max: number; session_max: number };
   holder: boolean;
+  together_only: boolean;
   today: string;
   left_today: number;
   week: { day: string; minutes: number }[];
@@ -189,7 +190,7 @@ function Early() {
             {chosen.pic}
           </p>
           <h1>{chosen.title}</h1>
-          <h2>Before you hand over</h2>
+          <h2>{view.together_only ? "Sit together" : "Before you hand over"}</h2>
           <p>{chosen.together}</p>
           <p className="muted">
             Best played together. The screen says goodbye by itself after {Math.min(view.limits.session, left)} minutes, and only you can start
@@ -208,10 +209,12 @@ function Early() {
 
   return (
     <div className="wrap">
-      <Link href="/family">← Family</Link>
-      <h1 style={{ marginTop: 12 }}>{view.child.name}&apos;s healthy screen time</h1>
+      <Link href={view.together_only ? `/baby?child=${view.child.id}` : "/family"}>← Back</Link>
+      <h1 style={{ marginTop: 12 }}>{view.together_only ? `Together-time with ${view.child.name}` : `${view.child.name}'s healthy screen time`}</h1>
       <p className="muted">
-        {view.child.age}. Slow, calm activities with no ads, points or videos. Doctors advise at most an hour a day at this age, and less is better.
+        {view.together_only
+          ? `${view.child.age}. Doctors advise no screens before 2, so this is only for when you really need it: up to 10 minutes a day, with ${view.child.name} on your lap, naming pictures together. Talking and playing with you is always better.`
+          : `${view.child.age}. Slow, calm activities with no ads, points or videos. Doctors advise at most an hour a day at this age, and less is better.`}
       </p>
 
       <section className="card" aria-labelledby="today">

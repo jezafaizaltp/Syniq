@@ -33,9 +33,27 @@ def _child(db: DbSession, user: User, child_id: int, holder: bool = False) -> Ch
         raise HTTPException(404, "Child not found")
     if holder and family.holder_id != user.id:
         raise HTTPException(403, "Only the account holder can change the limits")
-    if fam.section_for(child.birth_date, child.due_date, child.grade) != "early":
-        raise HTTPException(400, "Healthy screen time is for children aged 2 to 4")
+    if not (fam.section_for(child.birth_date, child.due_date, child.grade) == "early" or _toddler(child)):
+        raise HTTPException(400, "Healthy screen time is for children aged 18 months to 4 years")
     return child
+
+
+def _toddler(child: Child) -> bool:
+    """18 to 24 months: a short together-time only, as doctors advise no solo screens before 2."""
+    if fam.section_for(child.birth_date, child.due_date, child.grade) != "baby":
+        return False
+    return fam.months_between(date.fromisoformat(child.birth_date), india_today()) >= 18
+
+
+def _limits(child: Child) -> tuple[int, int]:
+    if _toddler(child):
+        return min(child.daily_limit, early.TODDLER_MINUTES), min(child.session_limit, early.TODDLER_MINUTES)
+    return child.daily_limit, child.session_limit
+
+
+def _activities(child: Child) -> list[dict]:
+    # Under 2: only "tap a picture, hear its word", meant to be done on mum's lap.
+    return [a for a in early.ACTIVITIES if a["kind"] == "name"] if _toddler(child) else early.ACTIVITIES
 
 
 def _used(db: DbSession, child_id: int, day: str) -> int:
@@ -45,7 +63,7 @@ def _used(db: DbSession, child_id: int, day: str) -> int:
 
 
 def _left_minutes(db: DbSession, child: Child) -> int:
-    return max(0, child.daily_limit - (_used(db, child.id, india_today().isoformat()) + 59) // 60)
+    return max(0, _limits(child)[0] - (_used(db, child.id, india_today().isoformat()) + 59) // 60)
 
 
 @router.get("/{child_id}")
@@ -59,13 +77,14 @@ def overview(child_id: int, db: DbSession = Depends(get_db), user: User = Depend
         week.append({"day": d, "minutes": round(_used(db, child.id, d) / 60)})
     return {
         "child": {"id": child.id, "name": child.name, "age": fam.age_words(child.birth_date, child.due_date)},
-        "limits": {"daily": child.daily_limit, "session": child.session_limit, "daily_max": early.DAILY_MAX, "session_max": early.SESSION_MAX},
+        "limits": {"daily": _limits(child)[0], "session": _limits(child)[1], "daily_max": early.TODDLER_MINUTES if _toddler(child) else early.DAILY_MAX, "session_max": early.TODDLER_MINUTES if _toddler(child) else early.SESSION_MAX},
+        "together_only": _toddler(child),
         "holder": family.holder_id == user.id,
         "today": today.isoformat(),
         "left_today": _left_minutes(db, child),
         "week": week,
         "areas": early.AREAS,
-        "activities": early.ACTIVITIES,
+        "activities": _activities(child),
     }
 
 
@@ -76,14 +95,14 @@ class StartIn(BaseModel):
 @router.post("/{child_id}/sessions")
 def start(child_id: int, body: StartIn, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
     child = _child(db, user, child_id)
-    if body.activity_id not in early.BY_ID:
+    if body.activity_id not in {a["id"] for a in _activities(child)}:
         raise HTTPException(404, "Activity not found")
     left = _left_minutes(db, child)
     if left <= 0:
         raise HTTPException(409, f"{child.name}'s screen time for today is used up. More tomorrow.")
     row = ScreenTimeSession(
         child_id=child.id, started_by=user.id, activity_id=body.activity_id, day=india_today().isoformat(),
-        allowed_minutes=min(child.session_limit, left),
+        allowed_minutes=min(_limits(child)[1], left),
     )
     db.add(row)
     db.commit()
@@ -123,16 +142,16 @@ def played_offline(child_id: int, body: PlayedIn, db: DbSession = Depends(get_db
         raise HTTPException(422, "Bad date")
     if not india_today() - timedelta(days=7) <= day <= india_today():
         raise HTTPException(422, "Too old to record")
-    seconds = min(body.seconds, child.session_limit * 60 + GRACE_SECONDS)
+    seconds = min(body.seconds, _limits(child)[1] * 60 + GRACE_SECONDS)
     db.add(ScreenTimeSession(
         child_id=child.id, started_by=user.id, activity_id=body.activity_id[:40], day=day.isoformat(),
-        allowed_minutes=child.session_limit, seconds=seconds, ended_at=utcnow(),
+        allowed_minutes=_limits(child)[1], seconds=seconds, ended_at=utcnow(),
     ))
     db.commit()
     return {"seconds": seconds}
 
 
-class LimitsIn(BaseModel):
+class LimitsIn(BaseModel):  # 18 to 24 months stays capped at early.TODDLER_MINUTES whatever is set
     daily: int = Field(ge=5, le=early.DAILY_MAX)
     session: int = Field(ge=3, le=early.SESSION_MAX)
 
