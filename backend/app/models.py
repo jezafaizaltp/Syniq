@@ -92,6 +92,51 @@ class SpecialistLink(Base):
     ended_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
+class Family(Base):
+    """A family account. The holder (usually the mother) controls the children's data and who else joins."""
+
+    __tablename__ = "families"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120))
+    holder_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    plan: Mapped[str] = mapped_column(String(20), default="free")  # free | premium
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class FamilyMember(Base):
+    """An adult in a family with their own login: mother, father, grandparent or another carer."""
+
+    __tablename__ = "family_members"
+    __table_args__ = (UniqueConstraint("user_id"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    family_id: Mapped[int] = mapped_column(ForeignKey("families.id"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    relation: Mapped[str] = mapped_column(String(20))  # mother | father | grandparent | carer
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Child(Base):
+    """A child in a family, from pregnancy onwards. Only school-age children get a login of their own.
+
+    The section SYNiq opens (pregnancy, baby, early years, school) comes from these dates and the class,
+    never from a test or a label.
+    """
+
+    __tablename__ = "children"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    family_id: Mapped[int] = mapped_column(ForeignKey("families.id"), index=True)
+    name: Mapped[str] = mapped_column(String(120))
+    birth_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
+    due_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # while expecting
+    board: Mapped[str] = mapped_column(String(30), default="cbse")  # cbse | kerala_scert
+    grade: Mapped[int | None] = mapped_column(Integer, nullable=True)  # -1 LKG, 0 UKG, 1..12
+    student_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)  # their own login
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 class AuditLog(Base):
     __tablename__ = "audit_log"
 

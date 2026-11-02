@@ -15,7 +15,20 @@ import Feedback, { AdaptiveResponse } from "./Feedback";
 import Notes from "./Notes";
 import Tutor from "./Tutor";
 
-type Subject = { id: number; name: string; chapters: number; language: string };
+type Subject = { id: number; code: string; name: string; chapters: number; language: string };
+
+/** A symbol and colour per subject, so the subject list can be scanned at a glance. */
+const SUBJECT_LOOK: Record<string, { icon: string; color: string }> = {
+  mal: { icon: "അ", color: "#a63d2a" },
+  eng: { icon: "Aa", color: "#3d5a80" },
+  hin: { icon: "अ", color: "#c9793f" },
+  math: { icon: "÷", color: "#7e2c1e" },
+  phy: { icon: "⚡", color: "#b8860b" },
+  chem: { icon: "⚗", color: "#6b4e9b" },
+  bio: { icon: "🌿", color: "#4f7a55" },
+  ss: { icon: "🌍", color: "#2f6f73" },
+  it: { icon: "⌨", color: "#4a3d35" },
+};
 type CheckRow = {
   subject_id: number;
   subject: string;
@@ -138,11 +151,16 @@ export default function Learn() {
 
   return (
     <div className="wrap">
-      <h1>{t("learn.hi", { name: me.name })}</h1>
+      <div className="hello">
+        <span className="wave" aria-hidden="true">
+          👋
+        </span>
+        <h1>{t("learn.hi", { name: me.name })}</h1>
+      </div>
       {!subject ? (
         <>
           {roundsDue.length > 0 && (
-            <div className="card">
+            <div className="card sunny">
               <h2>{t(`check.round_open.${roundsDue[0].kind}` as Key)}</h2>
               <p className="muted">{t("check.round_help")}</p>
               <div className="row">
@@ -155,35 +173,41 @@ export default function Learn() {
             </div>
           )}
           <p className="muted">{t("learn.what_today")}</p>
-          <ul className="list card">
-            {subjects.map((s) => (
-              <li key={s.id}>
-                <span>{s.name}</span>
-                {s.chapters ? (
-                  <button
-                    className="secondary"
-                    onClick={async () => {
-                      setSubject(s);
-                      setChapters(await api<Chapter[]>(`/subjects/${s.id}/chapters`));
-                    }}
-                  >
-                    {t("learn.open")}
-                  </button>
-                ) : (
-                  <span className="muted">{t("learn.coming_soon")}</span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="subject-grid">
+            {subjects.map((s) => {
+              const look = SUBJECT_LOOK[s.code] ?? { icon: s.name.slice(0, 1), color: "#a63d2a" };
+              return (
+                <button
+                  key={s.id}
+                  className="subject-tile"
+                  style={{ "--tile": look.color } as React.CSSProperties}
+                  disabled={!s.chapters}
+                  onClick={async () => {
+                    setSubject(s);
+                    setChapters(await api<Chapter[]>(`/subjects/${s.id}/chapters`));
+                  }}
+                >
+                  <span className="subject-icon" aria-hidden="true">
+                    {look.icon}
+                  </span>
+                  <span>
+                    <span className="subject-name">{s.name}</span>
+                    <br />
+                    <span className="subject-meta">{s.chapters ? t("learn.chapters", { n: s.chapters }) : t("learn.coming_soon")}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </>
       ) : (
         <>
           <button className="secondary" onClick={() => setSubject(null)}>
             {t("learn.all_subjects")}
           </button>
-          <h2 style={{ marginTop: 16 }}>{subject.name}</h2>
+          <h1 style={{ marginTop: 16 }}>{subject.name}</h1>
           {offerStart && (
-            <div className="card">
+            <div className="card sunny">
               <h2>{t("check.offer_title")}</h2>
               <p>{t("check.offer_body")}</p>
               <div className="row">
@@ -202,13 +226,21 @@ export default function Learn() {
               </div>
             </div>
           )}
-          <ul className="list card">
+          <ul className="list card chapters">
             {chapters.map((c) => (
               <li key={c.id}>
-                <span>
-                  {c.number}. {c.title}
+                <span className="chapter-title">
+                  <span className="chapter-num" aria-hidden="true">
+                    {c.number}
+                  </span>
+                  <span>
+                    <span className="sr-only">{c.number}. </span>
+                    {c.title}
+                  </span>
                 </span>
-                <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>{t("learn.start")}</button>
+                <button className="secondary" onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>
+                  {t("learn.start")}
+                </button>
               </li>
             ))}
           </ul>

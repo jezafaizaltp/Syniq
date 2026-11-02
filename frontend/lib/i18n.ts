@@ -21,6 +21,7 @@ const en = {
   "nav.school": "School",
   "nav.class": "Class",
   "nav.children": "My children",
+  "nav.family": "Family",
   "nav.settings": "Settings",
   "nav.sign_out": "Sign out",
   "nav.language": "Language",
@@ -31,6 +32,7 @@ const en = {
   "signin.button": "Sign in",
   "signin.failed": "Could not sign in",
   "signin.forgot": "Forgotten your password? Ask your school to give you a new one.",
+  "signin.new_family": "New to SYNiq? Start a family account",
 
   // Passwords
   "pw.choose": "Choose your own password",
@@ -52,6 +54,7 @@ const en = {
   "learn.hi": "Hi {name}",
   "learn.what_today": "What would you like to learn today?",
   "learn.open": "Open",
+  "learn.chapters": "{n} chapters",
   "learn.coming_soon": "Coming soon",
   "learn.all_subjects": "← All subjects",
   "learn.start": "Start",
@@ -266,6 +269,7 @@ const ml: Record<Key, string> = {
   "nav.school": "സ്കൂൾ",
   "nav.class": "ക്ലാസ്",
   "nav.children": "എന്റെ കുട്ടികൾ",
+  "nav.family": "കുടുംബം",
   "nav.settings": "സെറ്റിങ്സ്",
   "nav.sign_out": "സൈൻ ഔട്ട്",
   "nav.language": "ഭാഷ",
@@ -276,6 +280,7 @@ const ml: Record<Key, string> = {
   "signin.button": "സൈൻ ഇൻ",
   "signin.failed": "സൈൻ ഇൻ ചെയ്യാൻ കഴിഞ്ഞില്ല",
   "signin.forgot": "പാസ്‌വേഡ് മറന്നോ? പുതിയ ഒന്ന് തരാൻ സ്കൂളിനോട് ചോദിക്കൂ.",
+  "signin.new_family": "SYNiq-ൽ പുതിയതാണോ? ഒരു കുടുംബ അക്കൗണ്ട് തുടങ്ങൂ",
 
   "pw.choose": "സ്വന്തം പാസ്‌വേഡ് തിരഞ്ഞെടുക്കൂ",
   "pw.change": "പാസ്‌വേഡ് മാറ്റുക",
@@ -295,6 +300,7 @@ const ml: Record<Key, string> = {
   "learn.hi": "നമസ്കാരം {name}",
   "learn.what_today": "ഇന്ന് എന്താണ് പഠിക്കേണ്ടത്?",
   "learn.open": "തുറക്കുക",
+  "learn.chapters": "{n} അധ്യായങ്ങൾ",
   "learn.coming_soon": "ഉടൻ വരുന്നു",
   "learn.all_subjects": "← എല്ലാ വിഷയങ്ങളും",
   "learn.start": "തുടങ്ങാം",

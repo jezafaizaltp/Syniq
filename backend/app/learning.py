@@ -12,7 +12,26 @@ from .engine import detect
 from .engine import mastery as m
 from .engine import responses
 from .engine.rules import Action, ConceptState, decide
-from .models import Attempt, Concept, ConceptPrereq, Decision, Explanation, Item, LearningEvent, Mastery, User, utcnow
+from .models import Attempt, Concept, Subject, ConceptPrereq, Decision, Explanation, Item, LearningEvent, Mastery, User, utcnow
+
+
+# Pilot students made before family accounts have no class set: they're Kerala State Class 9.
+DEFAULT_BOARD, DEFAULT_GRADE = "kerala_scert", 9
+
+
+def class_of(user: User) -> tuple[str, int]:
+    settings = user.settings or {}
+    grade = settings.get("grade")
+    return settings.get("board") or DEFAULT_BOARD, DEFAULT_GRADE if grade is None else grade
+
+
+def subjects_for(db: DbSession, user: User) -> list[Subject]:
+    """Students see their own class and board; staff see every subject."""
+    query = select(Subject).order_by(Subject.id)
+    if user.role == "student":
+        board, grade = class_of(user)
+        query = query.where(Subject.syllabus == board, Subject.grade == grade)
+    return db.scalars(query).all()
 
 
 def get_mastery(db: DbSession, student_id: int, concept_id: int) -> Mastery:
