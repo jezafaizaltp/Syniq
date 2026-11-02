@@ -34,6 +34,15 @@ MESSAGES: dict[str, dict[str, str]] = {
         "en": "Waiting for a parent or guardian to give consent",
         "ml": "രക്ഷിതാവിന്റെ അനുമതിക്കായി കാത്തിരിക്കുന്നു",
     },
+    # --- Subject checks
+    "err.check_not_open": {
+        "en": "This check isn't open yet. Your school will tell you when.",
+        "ml": "ഈ ചെക്ക് ഇതുവരെ തുറന്നിട്ടില്ല. എപ്പോഴാണെന്ന് സ്കൂൾ അറിയിക്കും.",
+    },
+    "err.check_no_questions": {
+        "en": "There are no questions for this subject yet.",
+        "ml": "ഈ വിഷയത്തിന് ഇതുവരെ ചോദ്യങ്ങളില്ല.",
+    },
     # --- Ask SYNiq
     "err.tutor_too_long": {
         "en": "Please ask a question of up to 600 characters",

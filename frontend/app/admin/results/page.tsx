@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ApiError, api, apiText, del, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import SubjectChecks from "./SubjectChecks";
 
 type Subject = { id: number; name: string };
 type Test = {
@@ -150,6 +151,8 @@ export default function Results() {
         change by the same amount, the exam just got easier or harder. The difference between the two changes is what SYNiq may
         have added. Only you can see this page. Teachers, parents, students and SYNiq&apos;s teaching never see these marks.
       </p>
+
+      <SubjectChecks />
 
       {report && report.subjects.length > 0 && (
         <section className="card">

@@ -249,6 +249,64 @@ class Decision(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
+# --- Subject checks ---------------------------------------------------------------
+# A short check per subject: at the start (tells the engine where to begin), at the end of
+# term and four weeks later (measure what was learnt and kept). Never shown as a score.
+
+class CheckRound(Base):
+    """An end-of-term or retention check the admin opens for every student at once."""
+
+    __tablename__ = "check_rounds"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    kind: Mapped[str] = mapped_column(String(10))  # end | retention
+    opened_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class SubjectCheck(Base):
+    """One student's check in one subject. Answers stay here, never in the practice history."""
+
+    __tablename__ = "subject_checks"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"))
+    kind: Mapped[str] = mapped_column(String(10))  # start | end | retention
+    round_id: Mapped[int | None] = mapped_column(ForeignKey("check_rounds.id"), nullable=True)
+    item_ids: Mapped[list] = mapped_column(JSON, default=list)
+    # {"<item id>": {"response": "...", "correct": true}}
+    answers: Mapped[dict] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(10), default="open")  # open | done | skipped
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+# --- The student's own space ------------------------------------------------------
+# Goals and notes belong to the student. No teacher, parent or engine reads them.
+
+class Goal(Base):
+    __tablename__ = "goals"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    text: Mapped[str] = mapped_column(String(200))
+    due_on: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
+    done: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Note(Base):
+    __tablename__ = "notes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    concept_id: Mapped[int | None] = mapped_column(ForeignKey("concepts.id"), nullable=True)
+    body: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 # --- Pilot evaluation -------------------------------------------------------------
 # School marks used only to measure whether SYNiq helped, in aggregate. Kept apart from
 # the learner model: nothing in the engine, teacher, parent or student views reads them.

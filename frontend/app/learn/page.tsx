@@ -10,10 +10,19 @@ import { speak, useSession } from "@/lib/session";
 function helpPressed(kind: "read_aloud" | "break") {
   post("/learn/events", { kind }).catch(() => undefined);
 }
+import Check, { CheckState } from "./Check";
 import Feedback, { AdaptiveResponse } from "./Feedback";
+import Notes from "./Notes";
 import Tutor from "./Tutor";
 
 type Subject = { id: number; name: string; chapters: number; language: string };
+type CheckRow = {
+  subject_id: number;
+  subject: string;
+  start: "not_started" | CheckState["status"];
+  rounds: { round_id: number; kind: "end" | "retention"; status: "not_started" | CheckState["status"] }[];
+};
+type ActiveCheck = { subjectId: number; name: string; kind: CheckState["kind"] };
 type Chapter = { id: number; number: number; title: string };
 type ChapterDetail = { id: number; title: string; concepts: { id: number; title: string; progress: string }[] };
 type Item = {
@@ -58,6 +67,9 @@ export default function Learn() {
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [chapter, setChapter] = useState<ChapterDetail | null>(null);
   const [checkedIn, setCheckedIn] = useState(false);
+  const [checks, setChecks] = useState<CheckRow[]>([]);
+  const [activeCheck, setActiveCheck] = useState<ActiveCheck | null>(null);
+  const canLearn = me?.role === "student" && !!me.consent?.core_learning;
 
   useEffect(() => {
     if (!loading && (!me || me.role !== "student")) router.replace("/");
@@ -66,6 +78,21 @@ export default function Learn() {
   useEffect(() => {
     if (me?.role === "student") api<Subject[]>("/subjects").then(setSubjects).catch(() => setSubjects([]));
   }, [me]);
+
+  function loadChecks() {
+    api<CheckRow[]>("/checks").then(setChecks).catch(() => setChecks([]));
+  }
+
+  useEffect(() => {
+    if (canLearn) loadChecks();
+  }, [canLearn]);
+
+  // Opened from "My space" with ?chapter=<id> (revise a topic, carry on a chapter).
+  useEffect(() => {
+    if (!canLearn) return;
+    const id = Number(new URLSearchParams(window.location.search).get("chapter"));
+    if (id) api<ChapterDetail>(`/chapters/${id}`).then(setChapter).catch(() => undefined);
+  }, [canLearn]);
 
   if (!me || me.role !== "student") return null;
 
@@ -80,6 +107,27 @@ export default function Learn() {
     );
   }
 
+  if (activeCheck) {
+    return (
+      <Check
+        subjectId={activeCheck.subjectId}
+        subjectName={activeCheck.name}
+        kind={activeCheck.kind}
+        onDone={() => {
+          setActiveCheck(null);
+          loadChecks();
+        }}
+      />
+    );
+  }
+
+  const checkFor = (subjectId: number) => checks.find((c) => c.subject_id === subjectId);
+  const startOffer = subject ? checkFor(subject.id) : undefined;
+  const offerStart = !!startOffer && (startOffer.start === "not_started" || startOffer.start === "open");
+  const roundsDue = checks.flatMap((c) =>
+    c.rounds.filter((r) => r.status !== "done").map((r) => ({ subjectId: c.subject_id, name: c.subject, kind: r.kind }))
+  );
+
   if (chapter && !checkedIn) {
     return <CheckIn onDone={() => setCheckedIn(true)} />;
   }
@@ -93,6 +141,19 @@ export default function Learn() {
       <h1>{t("learn.hi", { name: me.name })}</h1>
       {!subject ? (
         <>
+          {roundsDue.length > 0 && (
+            <div className="card">
+              <h2>{t(`check.round_open.${roundsDue[0].kind}` as Key)}</h2>
+              <p className="muted">{t("check.round_help")}</p>
+              <div className="row">
+                {roundsDue.map((r) => (
+                  <button key={`${r.subjectId}-${r.kind}`} className="secondary" onClick={() => setActiveCheck(r)}>
+                    {r.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <p className="muted">{t("learn.what_today")}</p>
           <ul className="list card">
             {subjects.map((s) => (
@@ -121,6 +182,26 @@ export default function Learn() {
             {t("learn.all_subjects")}
           </button>
           <h2 style={{ marginTop: 16 }}>{subject.name}</h2>
+          {offerStart && (
+            <div className="card">
+              <h2>{t("check.offer_title")}</h2>
+              <p>{t("check.offer_body")}</p>
+              <div className="row">
+                <button onClick={() => setActiveCheck({ subjectId: subject.id, name: subject.name, kind: "start" })}>
+                  {t("check.offer_start")}
+                </button>
+                <button
+                  className="secondary"
+                  onClick={async () => {
+                    await post("/checks/skip-start", { subject_id: subject.id }).catch(() => undefined);
+                    loadChecks();
+                  }}
+                >
+                  {t("check.skip")}
+                </button>
+              </div>
+            </div>
+          )}
           <ul className="list card">
             {chapters.map((c) => (
               <li key={c.id}>
@@ -428,6 +509,8 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
       {tutorOn && step?.concept && step.kind !== "chapter_complete" && (
         <Tutor conceptId={step.concept.id} conceptTitle={step.concept.title} readAloud={readAloud} />
       )}
+
+      {step?.concept && step.kind !== "chapter_complete" && <Notes conceptId={step.concept.id} conceptTitle={step.concept.title} />}
     </div>
   );
 }
