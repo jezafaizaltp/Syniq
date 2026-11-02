@@ -21,6 +21,7 @@ export default function Nav() {
       {me?.role === "admin" && <Link href="/admin">{t("nav.school")}</Link>}
       {(me?.role === "teacher" || me?.role === "admin") && <Link href="/teacher">{t("nav.class")}</Link>}
       {me?.role === "guardian" && <Link href="/parent">{t("nav.children")}</Link>}
+      {me?.role === "specialist" && <Link href="/specialist">{t("nav.children")}</Link>}
       {me && <Link href="/settings">{t("nav.settings")}</Link>}
       <button
         className="secondary"

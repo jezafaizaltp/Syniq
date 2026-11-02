@@ -255,6 +255,8 @@ const en = {
   "explore.save": "Save",
   "explore.not_yet": "I'll do it later",
   "offline.banner": "You're offline. Pages you opened before still work. Practice needs internet, and starts again when you're back online.",
+  "parent.specialists": "Share with a specialist",
+  "parent.specialists_help": "A school counsellor or special educator can see the support {name} uses, progress in words and mistakes that keep coming back. Never mood check-ins, notes or goals. You can stop sharing at any time.",
 } as const;
 
 export type Key = keyof typeof en;
@@ -491,6 +493,8 @@ const ml: Record<Key, string> = {
   "explore.save": "സേവ് ചെയ്യാം",
   "explore.not_yet": "പിന്നീട് ചെയ്യാം",
   "offline.banner": "ഇന്റർനെറ്റ് ഇല്ല. മുമ്പ് തുറന്ന പേജുകൾ കാണാം. പരിശീലനത്തിന് ഇന്റർനെറ്റ് വേണം, തിരികെ വരുമ്പോൾ വീണ്ടും തുടങ്ങാം.",
+  "parent.specialists": "ഒരു സ്പെഷ്യലിസ്റ്റുമായി പങ്കുവെക്കാം",
+  "parent.specialists_help": "സ്കൂൾ കൗൺസിലർക്കോ സ്പെഷ്യൽ എജ്യുക്കേറ്റർക്കോ {name} ഉപയോഗിക്കുന്ന സഹായങ്ങളും വാക്കുകളിലുള്ള പുരോഗതിയും ആവർത്തിക്കുന്ന തെറ്റുകളും കാണാം. മൂഡ് ചെക്ക്-ഇന്നുകളും കുറിപ്പുകളും ലക്ഷ്യങ്ങളും ഒരിക്കലും കാണില്ല. എപ്പോൾ വേണമെങ്കിലും പങ്കുവെക്കൽ നിർത്താം.",
 };
 
 const STRINGS: Record<Lang, Record<Key, string>> = { en, ml };

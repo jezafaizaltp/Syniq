@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Role, post, setToken } from "@/lib/api";
 import { useSession } from "@/lib/session";
 
-const HOME: Record<Role, string> = { student: "/learn", teacher: "/teacher", admin: "/admin", guardian: "/parent" };
+const HOME: Record<Role, string> = { student: "/learn", teacher: "/teacher", admin: "/admin", guardian: "/parent", specialist: "/specialist" };
 
 export default function SignIn() {
   const { me, loading, refresh, t } = useSession();

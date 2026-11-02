@@ -8,7 +8,7 @@ export function setApiLang(lang: Lang) {
   apiLang = lang;
 }
 
-export type Role = "student" | "guardian" | "teacher" | "admin";
+export type Role = "student" | "guardian" | "teacher" | "admin" | "specialist";
 
 export type Settings = {
   font_scale?: number;

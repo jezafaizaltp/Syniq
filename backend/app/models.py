@@ -26,7 +26,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(120))
     email: Mapped[str] = mapped_column(String(200), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(300))
-    role: Mapped[str] = mapped_column(String(20))  # student | guardian | teacher | admin
+    role: Mapped[str] = mapped_column(String(20))  # student | guardian | teacher | admin | specialist
     class_group_id: Mapped[int | None] = mapped_column(ForeignKey("class_groups.id"), nullable=True)
     settings: Mapped[dict] = mapped_column(JSON, default=dict)
     # Set for accounts made with a temporary password; cleared when they choose their own.
@@ -74,6 +74,22 @@ class Consent(Base):
     granted: Mapped[bool] = mapped_column(Boolean)
     method: Mapped[str] = mapped_column(String(60), default="school_form")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class SpecialistLink(Base):
+    """A parent shares one child with one specialist (counsellor, special educator).
+
+    Ending a share sets ended_at; rows are never deleted, so who could see what, and when, stays on record.
+    """
+
+    __tablename__ = "specialist_links"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    specialist_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    guardian_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    ended_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
 class AuditLog(Base):

@@ -13,6 +13,7 @@ type Child = {
   support_modes: string[];
   noticed: { mode: string; reason: string; on: boolean }[];
 };
+type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
 const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing"] as const;
@@ -22,6 +23,7 @@ export default function Parent() {
   const router = useRouter();
   const [children, setChildren] = useState<Child[]>([]);
   const [progress, setProgress] = useState<Record<number, Progress>>({});
+  const [specialists, setSpecialists] = useState<Specialist[]>([]);
 
   useEffect(() => {
     if (!loading && (!me || me.role !== "guardian")) router.replace("/");
@@ -34,6 +36,7 @@ export default function Parent() {
     );
     setProgress(Object.fromEntries(entries));
     setChildren(kids);
+    setSpecialists(await api<Specialist[]>("/guardian/specialists").catch(() => []));
   }, []);
 
   useEffect(() => {
@@ -43,6 +46,11 @@ export default function Parent() {
   async function setSupport(child: Child, mode: string, on: boolean) {
     const modes = on ? [...child.support_modes.filter((m) => m !== mode), mode] : child.support_modes.filter((m) => m !== mode);
     await put(`/guardian/children/${child.id}/support`, { modes });
+    load();
+  }
+
+  async function share(childId: number, specialistId: number, on: boolean) {
+    await put(`/guardian/children/${childId}/specialists/${specialistId}`, { share: on });
     load();
   }
 
@@ -119,6 +127,19 @@ export default function Parent() {
                 </ul>
               )}
               <p className="muted">{t("parent.tip", { name: c.name })}</p>
+            </>
+          )}
+          {specialists.length > 0 && (
+            <>
+              <h3>{t("parent.specialists")}</h3>
+              <p className="muted">{t("parent.specialists_help", { name: c.name })}</p>
+              {specialists.map((s) => (
+                <label key={s.id} className="check" style={{ marginTop: 8 }}>
+                  <input type="checkbox" checked={s.shared_with.includes(c.id)} onChange={(e) => share(c.id, s.id, e.target.checked)} />
+                  {s.name}
+                  {s.title && <span className="muted"> · {s.title}</span>}
+                </label>
+              ))}
             </>
           )}
         </section>

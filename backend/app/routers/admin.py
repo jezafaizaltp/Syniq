@@ -371,6 +371,10 @@ AUDIT_WORDS = {
     "delete_pilot_results": "Deleted all pilot marks",
     "open_check_round": "Opened a subject check",
     "close_check_round": "Closed a subject check",
+    "add_specialist": "Added a specialist",
+    "share_with_specialist": "Shared a child with a specialist",
+    "stop_sharing_with_specialist": "Stopped sharing a child with a specialist",
+    "view_student_as_specialist": "Specialist viewed a child",
 }
 
 

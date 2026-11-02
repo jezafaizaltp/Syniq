@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ApiError, api, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import Specialists from "./Specialists";
 
 type Check = { ok: boolean; errors: { row: number; problems: string[] }[]; students?: number; classes?: string[]; without_learning_consent?: number };
 type Account = {
@@ -432,6 +433,8 @@ export default function Admin() {
           </ul>
         </section>
       )}
+
+      <Specialists />
     </div>
   );
 }
