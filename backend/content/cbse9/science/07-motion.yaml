@@ -1,0 +1,136 @@
+# CBSE Class 9 Science (NCERT), chapter 7. Format: content/README.md.
+subject: cbse9-sci
+chapter: 7
+title: Motion
+
+tips:
+  displacement_shortest: "Displacement is the shortest straight distance from start to finish, with direction. Going round and back to the start gives displacement 0."
+  average_speed_total: "Average speed = TOTAL distance ÷ TOTAL time, not the average of the two speeds."
+  accel_change_over_time: "Acceleration = (final velocity − initial velocity) ÷ time. Don't forget to subtract the starting velocity."
+  minutes_to_seconds: "Change minutes to seconds first: 1 minute = 60 s, so speed comes out in m/s."
+  v_squared_root: "That is v², not v. Take the square root at the end: if v² = 100, then v = 10."
+  kmh_to_ms: "To change km/h to m/s, multiply by 5/18. 36 km/h = 10 m/s."
+
+concepts:
+  - code: cbse9s.motion.speed
+    title: Distance, displacement, speed and velocity
+    notes: |
+      Distance is the path length (scalar); displacement is the shortest distance from initial to final
+      position, with direction (vector), and can be zero. Uniform motion: equal distances in equal time
+      intervals. Speed = distance / time (m/s). Average speed = total distance / total time. Velocity is
+      speed in a given direction. km/h × 5/18 = m/s.
+    explanations:
+      text: "Distance is how far you actually travelled; displacement is how far you ended up from the start, in a straight line, with a direction. Run once round a 400 m track: distance 400 m, displacement 0. Speed is distance divided by time; velocity is speed with a direction."
+      visual: "Draw your path as a wiggly line from A to B: its length is the distance. Now draw a straight arrow from A to B: its length is the displacement, and the arrow shows the direction."
+      step_by_step: "Step 1: Add up every part of the path for distance. Step 2: Draw a straight line start to end for displacement. Step 3: Speed = distance ÷ time. Step 4: Average speed = total distance ÷ total time. Step 5: Convert km/h to m/s by × 5/18."
+      real_world: "An autorickshaw meter charges for distance, not displacement: a long detour costs more even if you end up only 1 km from home. A car's speedometer shows speed, and a GPS showing direction too gives velocity."
+    items:
+      - prompt: "A car travels 150 km in 3 hours. What is its average speed in km/h?"
+        answer: "50"
+        check: "150/3"
+        difficulty: 1
+        hints: ["Speed = distance ÷ time.", "150 ÷ 3."]
+        solution: "150 ÷ 3 = 50 km/h."
+      - prompt: "An athlete runs one full round of a 400 m circular track. What is the displacement in m?"
+        answer: "0"
+        check: "0"
+        difficulty: 1
+        hints: ["Where does the athlete finish?", "Back at the start."]
+        solution: "Start and finish are the same point, so displacement is 0."
+        mistakes: {"400": displacement_shortest}
+      - prompt: "Convert 72 km/h to m/s."
+        answer: "20"
+        check: "72*5/18"
+        difficulty: 1
+        hints: ["Multiply by 5/18.", "72 × 5 ÷ 18."]
+        solution: "72 × 5/18 = 20 m/s."
+        mistakes: {"259.2": kmh_to_ms}
+      - prompt: "A person walks 4 m east and then 3 m north. What is the displacement in m?"
+        answer: "5"
+        check: "sqrt(4^2 + 3^2)"
+        difficulty: 2
+        hints: ["Draw a right triangle.", "√(16 + 9)."]
+        solution: "Displacement = √(4² + 3²) = 5 m (distance is 7 m)."
+        mistakes: {"7": displacement_shortest}
+      - prompt: "A bus goes 60 km at 30 km/h and then 60 km at 60 km/h. What is its average speed in km/h?"
+        answer: "40"
+        check: "120/(60/30 + 60/60)"
+        difficulty: 3
+        hints: ["Time for each part: 2 h and 1 h.", "120 km ÷ 3 h."]
+        solution: "Step 1: Times are 2 h and 1 h, total 3 h. Step 2: 120 ÷ 3 = 40 km/h."
+        mistakes: {"45": average_speed_total}
+      - prompt: "Which of these is a vector quantity?"
+        options: ["Velocity", "Speed", "Distance", "Time"]
+        answer: "Velocity"
+        difficulty: 2
+        hints: ["A vector has direction.", "Speed with direction."]
+        solution: "Velocity has size and direction, so it is a vector."
+      - prompt: "A cyclist covers 600 m in 2 minutes. What is the speed in m/s?"
+        answer: "5"
+        check: "600/120"
+        difficulty: 2
+        hints: ["2 minutes = 120 s.", "600 ÷ 120."]
+        solution: "600 ÷ 120 = 5 m/s."
+        mistakes: {"300": minutes_to_seconds}
+
+  - code: cbse9s.motion.equations
+    title: Acceleration and equations of motion
+    after: [cbse9s.motion.speed]
+    notes: |
+      Acceleration a = (v − u)/t (m/s²); negative acceleration is retardation. Uniformly accelerated motion:
+      v = u + at; s = ut + ½at²; v² − u² = 2as. Distance–time graph slope = speed; velocity–time graph slope
+      = acceleration and area under it = displacement. Uniform circular motion is accelerated because the
+      direction changes.
+    explanations:
+      text: "Acceleration is how fast velocity changes: (v − u) ÷ t. For steady acceleration there are three equations: v = u + at, s = ut + ½at², and v² = u² + 2as. Pick the one that has the three values you know and the one you want."
+      visual: "On a velocity–time graph, a straight sloping line means steady acceleration: its slope is a. The area under the line, a triangle or trapezium, is the distance travelled."
+      step_by_step: "Step 1: List u, v, a, s, t: which are given, which is asked? Step 2: Choose the equation without the unknown you don't need. Step 3: Put values in with units in SI. Step 4: Solve. A car 'starting from rest' has u = 0; 'comes to stop' means v = 0."
+      real_world: "A bike that goes from 0 to 20 m/s in 10 s accelerates at 2 m/s². When a bus brakes, its acceleration is negative, which is why you lurch forward."
+    items:
+      - prompt: "A car speeds up from 10 m/s to 30 m/s in 5 s. Find its acceleration in m/s²."
+        answer: "4"
+        check: "(30 - 10)/5"
+        difficulty: 1
+        hints: ["a = (v − u) ÷ t.", "20 ÷ 5."]
+        solution: "a = (30 − 10) ÷ 5 = 4 m/s²."
+        mistakes: {"6": accel_change_over_time}
+      - prompt: "A bike starts from rest and accelerates at 2 m/s² for 6 s. Find its final velocity in m/s."
+        answer: "12"
+        check: "0 + 2*6"
+        difficulty: 1
+        hints: ["v = u + at.", "u = 0."]
+        solution: "v = 0 + 2 × 6 = 12 m/s."
+      - prompt: "A train starts from rest with acceleration 1 m/s². How far does it go in 10 s, in m?"
+        answer: "50"
+        check: "0*10 + 1/2*1*10^2"
+        difficulty: 2
+        hints: ["s = ut + ½at².", "½ × 1 × 100."]
+        solution: "s = 0 + ½ × 1 × 10² = 50 m."
+        mistakes: {"100": forgot_half}
+      - prompt: "A car moving at 20 m/s brakes and stops in 4 s. Find its acceleration in m/s²."
+        answer: "-5"
+        check: "(0 - 20)/4"
+        difficulty: 2
+        hints: ["v = 0.", "(0 − 20) ÷ 4."]
+        solution: "a = (0 − 20) ÷ 4 = −5 m/s² (retardation)."
+        mistakes: {"5": retardation_sign}
+      - prompt: "A ball rolls from rest with acceleration 2 m/s² for 25 m. Find its final speed in m/s."
+        answer: "10"
+        check: "sqrt(0 + 2*2*25)"
+        difficulty: 3
+        hints: ["v² = u² + 2as.", "v² = 100."]
+        solution: "v² = 0 + 2 × 2 × 25 = 100, so v = 10 m/s."
+        mistakes: {"100": v_squared_root}
+      - prompt: "On a velocity–time graph, what does the slope show?"
+        options: ["Acceleration", "Distance", "Speed", "Time"]
+        answer: "Acceleration"
+        difficulty: 2
+        hints: ["Slope = change in y ÷ change in x.", "Change in velocity ÷ time."]
+        solution: "Slope of v–t graph = change in velocity ÷ time = acceleration."
+        mistakes: {"Distance": graph_slope_area}
+      - prompt: "Why is uniform circular motion called accelerated motion?"
+        options: ["The direction keeps changing", "The speed keeps increasing", "The distance is zero", "It stops often"]
+        answer: "The direction keeps changing"
+        difficulty: 2
+        hints: ["Velocity includes direction.", "Speed is constant."]
+        solution: "Its direction changes all the time, so its velocity changes: it accelerates."

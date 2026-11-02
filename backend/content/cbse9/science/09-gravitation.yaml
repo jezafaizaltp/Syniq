@@ -1,0 +1,128 @@
+# CBSE Class 9 Science (NCERT), chapter 9. Format: content/README.md.
+subject: cbse9-sci
+chapter: 9
+title: Gravitation
+
+tips:
+  inverse_square: "Gravitational force goes as 1/d². Double the distance and the force becomes one QUARTER, not half."
+  mass_vs_weight: "Mass (kg) stays the same everywhere. Weight (N) = m × g changes with g."
+  product_of_masses: "Force depends on the PRODUCT m₁ × m₂. Doubling both masses multiplies the force by 2 × 2 = 4."
+  pressure_area: "Pressure = force ÷ area. A smaller area gives a BIGGER pressure for the same force."
+
+concepts:
+  - code: cbse9s.grav.law
+    title: Universal law of gravitation, g, mass and weight
+    notes: |
+      F = G m₁m₂/d², G = 6.67 × 10⁻¹¹ N m²/kg². Free fall acceleration g ≈ 9.8 m/s² on Earth, independent of
+      the falling body's mass (ignoring air). Mass is the quantity of matter (constant). Weight W = mg (in N)
+      varies; on the Moon weight is about 1/6 of that on Earth.
+    explanations:
+      text: "Every object pulls on every other object. The pull gets stronger with more mass and weaker with distance: double the distance and the pull drops to a quarter. On Earth everything falls with acceleration g ≈ 9.8 m/s², heavy or light. Your mass stays the same everywhere, but your weight, W = mg, depends on where you are."
+      visual: "Picture a rubber sheet with a heavy ball in the middle making a dip. Smaller balls roll towards it. Further away the dip is shallow and the pull is weak; closer in, it's steep."
+      step_by_step: "Step 1: For weight, W = m × g with m in kg. Step 2: On the Moon, divide Earth weight by 6. Step 3: For a change in distance, the force changes by 1 ÷ (factor)². Step 4: For masses, the force changes by the product of the factors."
+      real_world: "An astronaut weighing 600 N on Earth weighs only about 100 N on the Moon, so they can jump much higher. Their mass, 61 kg or so, hasn't changed at all."
+    items:
+      - prompt: "Find the weight of a 50 kg person on Earth (g = 9.8 m/s²), in N."
+        answer: "490"
+        check: "50*9.8"
+        difficulty: 1
+        hints: ["W = mg.", "50 × 9.8."]
+        solution: "W = 50 × 9.8 = 490 N."
+      - prompt: "An object weighs 60 N on Earth. About how much will it weigh on the Moon, in N?"
+        answer: "10"
+        check: "60/6"
+        difficulty: 1
+        hints: ["Moon's gravity is about 1/6.", "60 ÷ 6."]
+        solution: "60 ÷ 6 = 10 N."
+        mistakes: {"360": moon_sixth}
+      - prompt: "A 6 kg bag is taken to the Moon. What is its mass there, in kg?"
+        answer: "6"
+        check: "6"
+        difficulty: 1
+        hints: ["Mass is the amount of matter.", "It doesn't change."]
+        solution: "Mass stays 6 kg; only weight changes."
+        mistakes: {"1": mass_vs_weight}
+      - prompt: "The distance between two objects is doubled. The gravitational force becomes what fraction of before? Type a fraction like 1/2."
+        answer: "1/4"
+        check: "1/2^2"
+        difficulty: 2
+        hints: ["F ∝ 1/d².", "1 ÷ 2²."]
+        solution: "F ∝ 1/d², so doubling d makes the force 1/4."
+        mistakes: {"1/2": inverse_square}
+      - prompt: "A heavy stone and a light stone are dropped together from the same height (no air). Which lands first?"
+        options: ["Both land together", "The heavy stone", "The light stone", "Depends on shape only"]
+        answer: "Both land together"
+        difficulty: 2
+        hints: ["g doesn't depend on mass.", "Galileo's idea."]
+        solution: "Without air, both fall with the same acceleration g and land together."
+        mistakes: {"The heavy stone": heavier_falls_faster}
+      - prompt: "A stone is dropped from rest. Find its speed after 2 s (g = 9.8 m/s²), in m/s."
+        answer: "19.6"
+        check: "9.8*2"
+        difficulty: 2
+        hints: ["v = u + gt.", "0 + 9.8 × 2."]
+        solution: "v = 9.8 × 2 = 19.6 m/s."
+      - prompt: "If both masses are doubled and the distance stays the same, the force becomes how many times bigger?"
+        answer: "4"
+        check: "2*2"
+        difficulty: 3
+        hints: ["F ∝ m₁m₂.", "2 × 2."]
+        solution: "F ∝ m₁m₂, so the force becomes 2 × 2 = 4 times."
+        mistakes: {"2": product_of_masses}
+
+  - code: cbse9s.grav.pressure
+    title: Thrust, pressure and buoyancy
+    after: [cbse9s.grav.law]
+    notes: |
+      Thrust is force acting perpendicular to a surface; pressure = thrust/area (N/m² = pascal, Pa). Liquids
+      exert pressure in all directions. Buoyant force (upthrust) acts upward on immersed objects. An object
+      floats if its density is less than the liquid's. Archimedes' principle: the upthrust equals the weight
+      of liquid displaced. Relative density = density of substance / density of water (no unit). NOTE: the
+      rationalised book may trim this section; kept as practice.
+    explanations:
+      text: "Pressure is how concentrated a force is: force divided by area. A sharp knife cuts easily because its thin edge has a tiny area, so the pressure is huge. In water, things feel lighter because water pushes up on them: the buoyant force. An object floats if it is less dense than the water."
+      visual: "Stand on sand in flat sandals and you barely sink; stand on one heel and you sink deep. Same weight, smaller area, more pressure."
+      step_by_step: "Step 1: Pressure = force (N) ÷ area (m²). Step 2: Answer in Pa. Step 3: If density of object < density of liquid, it floats. Step 4: Relative density = density ÷ 1000 kg/m³ (water)."
+      real_world: "Camels have wide feet so they don't sink in sand. School bags have wide straps so the pressure on your shoulders is less. A huge steel ship floats because its hollow shape displaces a lot of water."
+    items:
+      - prompt: "A force of 100 N acts on an area of 2 m². Find the pressure in Pa."
+        answer: "50"
+        check: "100/2"
+        difficulty: 1
+        hints: ["P = F ÷ A.", "100 ÷ 2."]
+        solution: "P = 100 ÷ 2 = 50 Pa."
+        mistakes: {"200": pressure_area}
+      - prompt: "Why do school bags have wide straps?"
+        options: ["Wider area means less pressure on the shoulders", "Wider straps are heavier", "To increase pressure", "To look nicer"]
+        answer: "Wider area means less pressure on the shoulders"
+        difficulty: 1
+        hints: ["P = F ÷ A.", "Bigger A, smaller P."]
+        solution: "The same weight spread over a larger area gives less pressure."
+        mistakes: {"To increase pressure": pressure_area}
+      - prompt: "A block weighing 60 N rests on a face of area 0.5 m². Find the pressure in Pa."
+        answer: "120"
+        check: "60/0.5"
+        difficulty: 2
+        hints: ["P = F ÷ A.", "60 ÷ 0.5."]
+        solution: "P = 60 ÷ 0.5 = 120 Pa."
+        mistakes: {"30": pressure_area}
+      - prompt: "An object has density 800 kg/m³. In water (1000 kg/m³) it will…"
+        options: ["Float", "Sink", "Stay at the bottom", "Dissolve"]
+        answer: "Float"
+        difficulty: 2
+        hints: ["Compare densities.", "800 < 1000."]
+        solution: "It is less dense than water, so it floats."
+        mistakes: {"Sink": floats_if_less_dense}
+      - prompt: "Silver has density 10,800 kg/m³. Find its relative density (water 1000 kg/m³)."
+        answer: "10.8"
+        check: "10800/1000"
+        difficulty: 2
+        hints: ["Divide by water's density.", "No unit."]
+        solution: "10800 ÷ 1000 = 10.8."
+      - prompt: "A 5 kg stone fully under water displaces water weighing 20 N. What upthrust acts on it, in N?"
+        answer: "20"
+        check: "20"
+        difficulty: 3
+        hints: ["Archimedes' principle.", "Upthrust = weight of liquid displaced."]
+        solution: "By Archimedes' principle, upthrust = weight of water displaced = 20 N."
+        mistakes: {"49": displaced_not_object}
