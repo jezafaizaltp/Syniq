@@ -9,7 +9,7 @@ from ..db import get_db
 from ..engine.mastery import progress_label
 from ..engine import detect, responses
 from ..engine.rules import STYLES
-from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Item, LearningEvent, Mastery, Misconception, Subject, User
+from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Family, FamilyMember, Item, LearningEvent, Mastery, Misconception, Subject, User
 
 router = APIRouter(tags=["student"])
 
@@ -45,7 +45,7 @@ def visible_chapters(db: DbSession, user: User, subject_id: int) -> list[Chapter
 
 @router.get("/subjects")
 def list_subjects(db: DbSession = Depends(get_db), user: User = Depends(current_user)):
-    subjects = db.scalars(select(Subject).order_by(Subject.id)).all()
+    subjects = learning.subjects_for(db, user)
     out = []
     for s in subjects:
         n = len(visible_chapters(db, user, s.id))
@@ -280,6 +280,12 @@ def me(user: User = Depends(current_user), db: DbSession = Depends(get_db), lang
             "core_learning": has_consent(db, user.id, "core_learning"),
             "mood_checkins": has_consent(db, user.id, "mood_checkins"),
         }
+        board, grade = learning.class_of(user)
+        out["class"] = {"board": board, "grade": grade}
+    if user.role == "guardian":
+        member = db.scalars(select(FamilyMember).where(FamilyMember.user_id == user.id)).first()
+        holder = member and db.get(Family, member.family_id).holder_id == user.id
+        out["family"] = {"holder": bool(holder)} if member else None
     return out
 
 

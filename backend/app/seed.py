@@ -214,6 +214,7 @@ def seed(db: DbSession) -> None:
     )
     db.add_all([teacher, admin, specialist])
     db.flush()
+    _seed_family(db, pw)
     group = ClassGroup(name="Class 9 A (demo)", teacher_id=teacher.id)
     db.add(group)
     db.flush()
@@ -248,6 +249,27 @@ def main() -> None:
     with SessionLocal() as db:
         seed(db)
     print("Seeded demo data. Password for all demo accounts:", DEMO_PASSWORD)
+
+
+def _seed_family(db, pw: str) -> None:
+    """A demo family outside school: a mother holding the account, a baby, a toddler and one on the way."""
+    from datetime import date, timedelta
+
+    from .models import Child, Family, FamilyMember
+
+    mother = User(name="Demo Mother", email="mother@demo.syniq", password_hash=pw, role="guardian", settings={})
+    db.add(mother)
+    db.flush()
+    family = Family(name="Demo family", holder_id=mother.id)
+    db.add(family)
+    db.flush()
+    db.add(FamilyMember(family_id=family.id, user_id=mother.id, relation="mother"))
+    today = date.today()
+    db.add_all([
+        Child(family_id=family.id, name="Meera", birth_date=(today - timedelta(days=300)).isoformat()),
+        Child(family_id=family.id, name="Kabir", birth_date=(today - timedelta(days=365 * 3 + 40)).isoformat()),
+        Child(family_id=family.id, name="Baby", due_date=(today + timedelta(days=120)).isoformat()),
+    ])
 
 
 if __name__ == "__main__":

@@ -42,6 +42,8 @@ export type Me = {
   settings: Settings;
   consent?: { core_learning: boolean; mood_checkins: boolean };
   must_change_password?: boolean;
+  class?: { board: string; grade: number };
+  family?: { holder: boolean } | null;
 };
 
 export class ApiError extends Error {
@@ -71,6 +73,14 @@ export function setToken(value: string | null) {
   }
 }
 
+/** A form check from the server comes as a list; show its first message in plain words. */
+function errorWords(detail: unknown): string {
+  if (typeof detail === "string") return detail;
+  const first = Array.isArray(detail) ? (detail[0] as { msg?: unknown } | undefined) : undefined;
+  if (first && typeof first.msg === "string") return first.msg.replace(/^Value error, /, "");
+  return "Something went wrong";
+}
+
 export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   headers.set("Content-Type", "application/json");
@@ -85,7 +95,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
     } catch {
       /* non-JSON error body */
     }
-    throw new ApiError(res.status, typeof detail === "string" ? detail : "Something went wrong");
+    throw new ApiError(res.status, errorWords(detail));
   }
   if (res.status === 204) return undefined as T;
   return res.json() as Promise<T>;

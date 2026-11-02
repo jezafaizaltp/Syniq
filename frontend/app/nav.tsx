@@ -51,7 +51,8 @@ export default function Nav() {
   const router = useRouter();
   const pathname = usePathname();
   const other = LANGS.find((l) => l.code !== lang)!;
-  const tabs = me ? TABS[me.role] ?? [] : [];
+  let tabs = me ? TABS[me.role] ?? [] : [];
+  if (me?.role === "guardian" && me.family) tabs = [{ href: "/family", label: "nav.family", icon: "🏡" }, ...tabs];
 
   // Room at the bottom of the page for the phone tab bar.
   useEffect(() => {

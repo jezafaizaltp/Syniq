@@ -375,6 +375,13 @@ AUDIT_WORDS = {
     "share_with_specialist": "Shared a child with a specialist",
     "stop_sharing_with_specialist": "Stopped sharing a child with a specialist",
     "view_student_as_specialist": "Specialist viewed a child",
+    "family_signup": "Started a family account",
+    "family_add_child": "Added a child to a family",
+    "family_update_child": "Changed a child's details",
+    "family_remove_child": "Removed a child from a family",
+    "family_child_login": "Made a login for a child",
+    "family_add_adult": "Added an adult to a family",
+    "family_remove_adult": "Removed an adult from a family",
 }
 
 

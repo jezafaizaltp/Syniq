@@ -117,7 +117,7 @@ def my_checks(db: DbSession = Depends(get_db), user: User = Depends(require_lear
     """Checks waiting for this student, per subject that has content."""
     rounds = _open_rounds(db)
     out = []
-    for s in db.scalars(select(Subject).order_by(Subject.id)).all():
+    for s in learning.subjects_for(db, user):
         if not visible_chapters(db, user, s.id):
             continue
         start = _find(db, user.id, s.id, "start", None)

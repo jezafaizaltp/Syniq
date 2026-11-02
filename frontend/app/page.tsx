@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Role, post, setToken } from "@/lib/api";
+import { homeFor } from "@/lib/home";
 import { useSession } from "@/lib/session";
-
-const HOME: Record<Role, string> = { student: "/learn", teacher: "/teacher", admin: "/admin", guardian: "/parent", specialist: "/specialist" };
 
 export default function SignIn() {
   const { me, loading, refresh, t } = useSession();
@@ -15,7 +15,7 @@ export default function SignIn() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (me) router.replace(HOME[me.role]);
+    if (me) router.replace(homeFor(me));
   }, [me, router]);
 
   async function submit(e: React.FormEvent) {
@@ -76,11 +76,14 @@ export default function SignIn() {
       </form>
       {process.env.NEXT_PUBLIC_SHOW_DEMO !== "0" && (
         <p className="muted">
-          Demo accounts: anu@demo.syniq (student), teacher@demo.syniq, parent@demo.syniq, specialist@demo.syniq, admin@demo.syniq. Password:
+          Demo accounts: anu@demo.syniq (student), teacher@demo.syniq, parent@demo.syniq, mother@demo.syniq (family), specialist@demo.syniq, admin@demo.syniq. Password:
           syniq-demo
         </p>
       )}
       <p className="muted">{t("signin.forgot")}</p>
+      <p>
+        <Link href="/signup">{t("signin.new_family")}</Link>
+      </p>
     </div>
   );
 }
