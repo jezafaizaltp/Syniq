@@ -159,6 +159,13 @@ function ChildCard({
         {section.about}
       </p>
       {!section.ready && <p className="pill">Coming next in SYNiq</p>}
+      {child.section === "early" && (
+        <p>
+          <Link className="btn" href={`/early?child=${child.id}`}>
+            Open healthy screen time
+          </Link>
+        </p>
+      )}
       {child.section === "school" && child.grade === null && <p className="muted">Add {child.name}&apos;s class so SYNiq can show the right subjects.</p>}
       {child.login && (
         <p>

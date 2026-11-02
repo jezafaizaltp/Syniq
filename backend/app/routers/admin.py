@@ -382,6 +382,7 @@ AUDIT_WORDS = {
     "family_child_login": "Made a login for a child",
     "family_add_adult": "Added an adult to a family",
     "family_remove_adult": "Removed an adult from a family",
+    "screen_time_limits": "Changed screen time limits (minutes a day, per sitting)",
 }
 
 

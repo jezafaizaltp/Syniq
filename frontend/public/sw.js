@@ -7,15 +7,17 @@
  *   lists) are kept too, so they can still be read offline. Each is stored under a key
  *   made from a hash of the signed-in person's token, so on a shared school computer one
  *   person can never be shown another's saved answers. Signing out clears them.
+ * - Healthy screen time (ages 2 to 4) plays fully offline from the saved activity list; time
+ *   played offline is sent once the phone is back online.
  * - Answering questions needs internet: the adaptive teacher runs on the server.
  */
-const VERSION = "syniq-v1";
+const VERSION = "syniq-v2";
 const SHELL = `${VERSION}-shell`;
 const API = `${VERSION}-api`;
-const API_PATHS = [/^\/me$/, /^\/me\/(overview|goals|notes)$/, /^\/explore(\/[\w.]+)?$/, /^\/subjects(\/\d+\/chapters)?$/, /^\/chapters\/\d+$/, /^\/checks$/, /^\/ai\/status$/];
+const API_PATHS = [/^\/me$/, /^\/me\/(overview|goals|notes)$/, /^\/explore(\/[\w.]+)?$/, /^\/subjects(\/\d+\/chapters)?$/, /^\/chapters\/\d+$/, /^\/checks$/, /^\/ai\/status$/, /^\/family$/, /^\/early\/\d+$/];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(["/", "/learn", "/space", "/explore", "/manifest.webmanifest"]).catch(() => undefined)));
+  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(["/", "/learn", "/space", "/explore", "/family", "/early", "/manifest.webmanifest"]).catch(() => undefined)));
   self.skipWaiting();
 });
 
