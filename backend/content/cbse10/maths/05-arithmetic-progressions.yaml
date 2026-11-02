@@ -1,0 +1,179 @@
+# CBSE Class 10 Mathematics (NCERT), chapter 5. Format: content/README.md.
+subject: cbse10-math
+chapter: 5
+title: Arithmetic Progressions
+tips:
+  c10_n_minus_1: 'The nth term adds d only (n − 1) times: the first term already counts as one term.'
+  c10_d_sign: d = next term − this term. If the terms go down, d is negative.
+  c10_halve_sum: 'Pairing gives twice the sum. Remember to divide by 2: Sₙ = n/2 × (first + last).'
+concepts:
+- code: cbse10m.ap.nth
+  title: The nth term of an AP
+  notes: |
+    An arithmetic progression is a list of numbers where each term after the first is got by adding a fixed
+    number d, the common difference, to the one before: a, a + d, a + 2d, … d can be positive, negative or
+    zero. The nth term is aₙ = a + (n − 1)d. The nth term from the end of an AP with last term l is
+    l − (n − 1)d.
+  explanations:
+    text: 'In an AP you add the same number each time: 3, 7, 11, 15, … adds 4. To reach the 10th term you start at the first term and add the difference 9 times (not 10), so a₁₀ = 3 + 9 × 4 = 39. In general aₙ = a + (n − 1)d.'
+    visual: Draw a staircase where every step rises by the same height d. The first step is at height a. To stand on step n you climb n − 1 more steps, so your height is a + (n − 1)d.
+    step_by_step: 'Step 1: Find a, the first term. Step 2: Find d = second term − first term (check with the next pair). Step 3: Use aₙ = a + (n − 1)d. Step 4: To find which term equals a number, solve a + (n − 1)d = that number for n; n must be a positive whole number.'
+    real_world: 'A taxi charges ₹50 for the first km and ₹15 for each km after that. The fares for 1, 2, 3, … km form an AP: 50, 65, 80, … The 10th km''s fare is 50 + 9 × 15 = ₹185.'
+  picture:
+    kind: number_line
+    from: 0
+    to: 20
+    step: 2
+    points:
+    - at: 3
+      label: a₁ = 3
+    - at: 7
+      label: a₂ = 7
+    - at: 11
+      label: a₃ = 11
+    - at: 15
+      label: a₄ = 15
+    jumps:
+    - from: 3
+      to: 7
+      label: '+4'
+    - from: 7
+      to: 11
+      label: '+4'
+    - from: 11
+      to: 15
+      label: '+4'
+    caption: 'Each term is 4 more than the one before: d = 4, so aₙ = 3 + (n − 1) × 4.'
+    alt: The AP 3, 7, 11, 15 on a number line, with equal jumps of 4 between the terms.
+  items:
+  - prompt: Find the common difference of the AP 5, 9, 13, 17, …
+    answer: '4'
+    check: 9 - 5
+    difficulty: 1
+    hints:
+    - d = second term − first term.
+    - 9 − 5.
+    solution: d = 9 − 5 = 4 (and 13 − 9 = 4 ✓).
+  - prompt: Find the 10th term of the AP 3, 7, 11, …
+    answer: '39'
+    check: 3 + (10 - 1)*4
+    difficulty: 1
+    hints:
+    - aₙ = a + (n − 1)d.
+    - 3 + 9 × 4.
+    solution: 'Step 1: a = 3, d = 4. Step 2: a₁₀ = 3 + 9 × 4 = 39.'
+    mistakes:
+      '43': c10_n_minus_1
+  - prompt: Find the common difference of the AP 20, 17, 14, 11, …
+    answer: '-3'
+    check: 17 - 20
+    difficulty: 1
+    hints:
+    - Subtract a term from the next one.
+    - 17 − 20.
+    solution: d = 17 − 20 = −3. The terms go down.
+    mistakes:
+      '3': c10_d_sign
+  - prompt: Which term of the AP 21, 18, 15, … is −81?
+    answer: '35'
+    check: (-81 - 21)/(-3) + 1
+    difficulty: 2
+    hints:
+    - a + (n − 1)d = −81 with a = 21, d = −3.
+    - (n − 1)(−3) = −102.
+    solution: 'Step 1: 21 + (n − 1)(−3) = −81. Step 2: (n − 1)(−3) = −102, so n − 1 = 34. Step 3: n = 35.'
+    mistakes:
+      '34': c10_n_minus_1
+  - prompt: The 3rd term of an AP is 12 and the 7th term is 24. Find d.
+    answer: '3'
+    check: (24 - 12)/4
+    difficulty: 2
+    hints:
+    - a₇ − a₃ = 4d.
+    - 24 − 12 = 4d.
+    solution: 'Step 1: a₇ − a₃ = (a + 6d) − (a + 2d) = 4d. Step 2: 4d = 12, so d = 3.'
+  - prompt: How many two-digit numbers are divisible by 3?
+    answer: '30'
+    check: (99 - 12)/3 + 1
+    difficulty: 3
+    hints:
+    - They are 12, 15, …, 99.
+    - 99 = 12 + (n − 1) × 3.
+    solution: 'Step 1: The AP is 12, 15, …, 99 with d = 3. Step 2: 99 = 12 + (n − 1)3, so n − 1 = 29. Step 3: n = 30.'
+    mistakes:
+      '29': c10_n_minus_1
+- code: cbse10m.ap.sum
+  title: Sum of the first n terms
+  after:
+  - cbse10m.ap.nth
+  notes: |
+    The sum of the first n terms of an AP is Sₙ = n/2 [2a + (n − 1)d], or Sₙ = n/2 (a + l) where l is the
+    last (nth) term. Gauss's trick: write the sum forwards and backwards; each pair adds to a + l, and there
+    are n pairs, so 2Sₙ = n(a + l). The nth term can also be found as aₙ = Sₙ − Sₙ₋₁.
+  explanations:
+    text: 'To add 1 + 2 + … + 100, pair the first and last (1 + 100), the second and second-last (2 + 99), and so on: every pair makes 101, and there are 50 pairs, so the sum is 5050. For any AP: Sₙ = n/2 × (first + last) = n/2 [2a + (n − 1)d].'
+    visual: 'Build the AP as a staircase of blocks, then put an identical staircase upside down on top of it. Together they make a rectangle n blocks long and (a + l) high. The staircase is half of it: n(a + l)/2.'
+    step_by_step: 'Step 1: Find a, d and n. Step 2: If you know the last term l, use Sₙ = n/2 (a + l). Step 3: Otherwise use Sₙ = n/2 [2a + (n − 1)d]. Step 4: To find n from a sum, set up the equation and solve; n must be a positive whole number.'
+    real_world: Saving ₹50 in the first week, ₹60 in the second, ₹70 in the third, and so on for a year of 52 weeks gives S₅₂ = 26 × (100 + 51 × 10) = ₹15,860.
+  picture:
+    kind: flow
+    steps:
+    - S = 1 + 2 + 3 + … + 100
+    - 'Backwards: S = 100 + 99 + … + 1'
+    - 'Add the two rows: each pair makes 101'
+    - '100 pairs: 2S = 100 × 101'
+    - S = 5050
+    alt: 'Gauss''s trick for 1 + 2 + … + 100: write the sum forwards and backwards, each pair adds to 101, so twice the sum is 100 × 101 and the sum is 5050.'
+  items:
+  - prompt: Find the sum 1 + 2 + 3 + … + 100.
+    answer: '5050'
+    check: 100*101/2
+    difficulty: 1
+    hints:
+    - Sₙ = n/2 (first + last).
+    - 50 × 101.
+    solution: 'Step 1: n = 100, first 1, last 100. Step 2: S = 100/2 × 101 = 5050.'
+    mistakes:
+      '10100': c10_halve_sum
+  - prompt: Find the sum of the first 10 terms of 2, 5, 8, …
+    answer: '155'
+    check: 10*(2*2 + 9*3)/2
+    difficulty: 1
+    hints:
+    - Sₙ = n/2 [2a + (n − 1)d].
+    - 5 × (4 + 27).
+    solution: 'Step 1: a = 2, d = 3, n = 10. Step 2: S₁₀ = 5 × (4 + 9 × 3) = 5 × 31 = 155.'
+  - prompt: Find the sum of the first 20 odd numbers.
+    answer: '400'
+    check: 20^2
+    difficulty: 2
+    hints:
+    - '1 + 3 + 5 + …: a = 1, d = 2.'
+    - S = 10 × (2 + 38).
+    solution: 'Step 1: a = 1, d = 2, n = 20. Step 2: S = 10 × (2 + 19 × 2) = 10 × 40 = 400 (= 20²).'
+  - prompt: An AP has first term 5, last term 45 and 9 terms. Find their sum.
+    answer: '225'
+    check: 9*(5 + 45)/2
+    difficulty: 2
+    hints:
+    - Sₙ = n/2 (a + l).
+    - 9/2 × 50.
+    solution: 'Step 1: S = 9/2 × (5 + 45) = 9/2 × 50 = 225.'
+  - prompt: You save ₹50 in week 1, ₹60 in week 2, ₹70 in week 3, and so on. How much have you saved after 12 weeks, in rupees?
+    answer: '1260'
+    check: 12*(2*50 + 11*10)/2
+    difficulty: 2
+    hints:
+    - a = 50, d = 10, n = 12.
+    - 6 × (100 + 110).
+    solution: 'Step 1: S₁₂ = 12/2 × (2 × 50 + 11 × 10) = 6 × 210 = 1260.'
+  - prompt: How many terms of 3, 6, 9, … must be added to get 165?
+    answer: '10'
+    check: '10'
+    difficulty: 3
+    hints:
+    - Sₙ = n/2 [6 + (n − 1)3] = 165.
+    - 3n² + 3n = 330, so n² + n − 110 = 0.
+    solution: 'Step 1: n/2 (6 + 3n − 3) = 165, so n(3n + 3) = 330. Step 2: n² + n − 110 = 0 = (n + 11)(n − 10). Step 3: n = 10.'
+    mistakes:
+      '-11': c10_reject_negative

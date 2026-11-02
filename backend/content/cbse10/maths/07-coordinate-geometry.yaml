@@ -1,0 +1,201 @@
+# CBSE Class 10 Mathematics (NCERT), chapter 7. Format: content/README.md.
+subject: cbse10-math
+chapter: 7
+title: Coordinate Geometry
+tips:
+  c10_add_not_square: Don't just add the differences. Square each, add the squares, then take the square root.
+  c10_minus_negative: 'Subtracting a negative adds: 5 − (−3) = 8.'
+  c10_section_swap: 'In the section formula m₁ goes with the second point B and m₂ with A: (m₁x₂ + m₂x₁)/(m₁ + m₂).'
+  c10_midpoint_half: 'The mid-point is the average of the two ends. Work backwards: B = 2 × mid-point − A.'
+concepts:
+- code: cbse10m.coord.distance
+  title: Distance formula
+  notes: |
+    The distance between P(x₁, y₁) and Q(x₂, y₂) is PQ = √[(x₂ − x₁)² + (y₂ − y₁)²], from Pythagoras' theorem
+    on the right triangle with legs |x₂ − x₁| and |y₂ − y₁|. The distance of P(x, y) from the origin is
+    √(x² + y²). Uses: checking collinearity, types of triangles and quadrilaterals, equidistant points.
+  explanations:
+    text: To find the distance between two points, draw the right triangle with them at the ends of the slanted side. Its legs are the change in x and the change in y, so the distance is √(change in x² + change in y²).
+    visual: Plot (1, 2) and (4, 6). Draw a line across from (1, 2) to (4, 2), then up to (4, 6). The legs are 3 and 4, so the slanted side is 5.
+    step_by_step: 'Step 1: Subtract the x-coordinates and square. Step 2: Subtract the y-coordinates and square. Step 3: Add the squares. Step 4: Take the square root.'
+    real_world: 'A delivery app works out the straight-line distance between your house at (2, 3) km and the shop at (5, 7) km on its map: √(9 + 16) = 5 km.'
+  picture:
+    kind: geometry
+    axes: true
+    range:
+    - -1
+    - 7
+    points:
+      P(1, 2):
+      - 1
+      - 2
+      Q(4, 6):
+      - 4
+      - 6
+      _R:
+      - 4
+      - 2
+    segments:
+    - - P(1, 2)
+      - _R
+      - '3'
+    - - _R
+      - Q(4, 6)
+      - '4'
+    - - P(1, 2)
+      - Q(4, 6)
+      - '5'
+    caption: PQ = √(3² + 4²) = √25 = 5.
+    alt: Points P(1, 2) and Q(4, 6) on axes joined by a slanted line, with a right triangle of legs 3 across and 4 up, so PQ = 5.
+  items:
+  - prompt: Find the distance between (1, 2) and (4, 6).
+    answer: '5'
+    check: sqrt((4-1)^2 + (6-2)^2)
+    difficulty: 1
+    hints:
+    - √[(4 − 1)² + (6 − 2)²].
+    - √(9 + 16).
+    solution: 'Step 1: Differences 3 and 4. Step 2: √(9 + 16) = √25 = 5.'
+    mistakes:
+      '7': c10_add_not_square
+  - prompt: Find the distance of (6, −8) from the origin.
+    answer: '10'
+    check: sqrt(6^2 + 8^2)
+    difficulty: 1
+    hints:
+    - √(x² + y²).
+    - √(36 + 64).
+    solution: 'Step 1: √(6² + (−8)²) = √100 = 10.'
+  - prompt: Find the distance between (−3, 2) and (5, −4).
+    answer: '10'
+    check: sqrt(8^2 + 6^2)
+    difficulty: 2
+    hints:
+    - Differences 8 and −6.
+    - √(64 + 36).
+    solution: 'Step 1: x: 5 − (−3) = 8; y: −4 − 2 = −6. Step 2: √(64 + 36) = 10.'
+    mistakes:
+      '2': c10_minus_negative
+  - prompt: Are A(1, 5), B(2, 3) and C(−2, 11) collinear?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only A and B
+    - Can't tell
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Find AB, BC and AC.
+    - Does the longest equal the sum of the other two?
+    solution: 'Step 1: AB = √5, BC = √80 = 4√5, AC = √45 = 3√5. Step 2: AB + AC = 4√5 = BC, so the points lie on one line.'
+  - prompt: Find x if the distance between (x, 3) and (2, −1) is 5 and x > 2.
+    answer: '5'
+    check: 2 + 3
+    difficulty: 3
+    hints:
+    - (x − 2)² + 16 = 25.
+    - (x − 2)² = 9.
+    solution: 'Step 1: (x − 2)² + 4² = 25. Step 2: (x − 2)² = 9, so x − 2 = ±3. Step 3: x > 2 gives x = 5.'
+    mistakes:
+      '-1': c10_reject_negative
+  - prompt: Find the point on the x-axis equidistant from (2, −5) and (−2, 9). Give its x-coordinate.
+    answer: '-7'
+    check: -56/8
+    difficulty: 3
+    hints:
+    - The point is (x, 0).
+    - (x − 2)² + 25 = (x + 2)² + 81.
+    solution: 'Step 1: (x − 2)² + 25 = (x + 2)² + 81. Step 2: −4x + 29 = 4x + 85, so −8x = 56. Step 3: x = −7.'
+- code: cbse10m.coord.section
+  title: Section formula
+  after:
+  - cbse10m.coord.distance
+  notes: |
+    The point P dividing the join of A(x₁, y₁) and B(x₂, y₂) internally in the ratio m₁ : m₂ is
+    ((m₁x₂ + m₂x₁)/(m₁ + m₂), (m₁y₂ + m₂y₁)/(m₁ + m₂)). The mid-point is ((x₁ + x₂)/2, (y₁ + y₂)/2). Points
+    of trisection divide a segment in 1 : 2 and 2 : 1. To find the ratio in which a point divides a segment,
+    take k : 1 and solve.
+  explanations:
+    text: 'The section formula finds the point that splits a line in a given ratio. For m : n from A to B, each coordinate is (m × B''s coordinate + n × A''s coordinate) ÷ (m + n). Note the cross-over: m goes with B. The mid-point is the special case 1 : 1, simply the average.'
+    visual: 'Draw a segment from A(1, 2) to B(7, 8) and mark it into 3 equal parts. The point one part from A divides AB in 1 : 2, at (3, 4); the point two parts from A, at (5, 6), divides it in 2 : 1.'
+    step_by_step: 'Step 1: Write A(x₁, y₁), B(x₂, y₂) and the ratio m₁ : m₂ (from A). Step 2: x = (m₁x₂ + m₂x₁)/(m₁ + m₂). Step 3: y = (m₁y₂ + m₂y₁)/(m₁ + m₂). Step 4: Check that the point lies between A and B.'
+    real_world: 'A metro line runs straight from station A to station B. Planners want a new station a third of the way from A: the section formula with ratio 1 : 2 gives its map position.'
+  picture:
+    kind: geometry
+    axes: true
+    range:
+    - -1
+    - 9
+    points:
+      A(1, 2):
+      - 1
+      - 2
+      P(3, 4):
+      - 3
+      - 4
+      Q(5, 6):
+      - 5
+      - 6
+      B(7, 8):
+      - 7
+      - 8
+    segments:
+    - - A(1, 2)
+      - B(7, 8)
+    caption: 'P divides AB in 1 : 2 and Q in 2 : 1: they are the points of trisection.'
+    alt: A segment from A(1, 2) to B(7, 8) on axes, with points P(3, 4) and Q(5, 6) splitting it into three equal parts.
+  items:
+  - prompt: Find the x-coordinate of the mid-point of (2, 5) and (8, 1).
+    answer: '5'
+    check: (2 + 8)/2
+    difficulty: 1
+    hints:
+    - Average the x-coordinates.
+    - (2 + 8)/2.
+    solution: 'Step 1: (2 + 8)/2 = 5. (The mid-point is (5, 3).)'
+  - prompt: Find the y-coordinate of the mid-point of (2, 5) and (8, 1).
+    answer: '3'
+    check: (5 + 1)/2
+    difficulty: 1
+    hints:
+    - Average the y-coordinates.
+    - (5 + 1)/2.
+    solution: (5 + 1)/2 = 3.
+  - prompt: 'P divides the join of A(1, 2) and B(7, 8) in the ratio 1 : 2. Find the x-coordinate of P.'
+    answer: '3'
+    check: (1*7 + 2*1)/3
+    difficulty: 2
+    hints:
+    - x = (1 × 7 + 2 × 1)/(1 + 2).
+    - 9/3.
+    solution: 'Step 1: x = (1 × 7 + 2 × 1)/3 = 9/3 = 3. (y = (8 + 4)/3 = 4.)'
+    mistakes:
+      '5': c10_section_swap
+  - prompt: 'Find the y-coordinate of the point dividing (−1, 7) and (4, −3) in the ratio 2 : 3.'
+    answer: '3'
+    check: (2*(-3) + 3*7)/5
+    difficulty: 2
+    hints:
+    - y = (2 × (−3) + 3 × 7)/5.
+    - (−6 + 21)/5.
+    solution: 'Step 1: y = (2(−3) + 3(7))/5 = 15/5 = 3. (x = (8 − 3)/5 = 1.)'
+    mistakes:
+      '1': c10_section_swap
+  - prompt: The mid-point of AB is (3, 4) and A is (1, 2). Find the x-coordinate of B.
+    answer: '5'
+    check: 2*3 - 1
+    difficulty: 2
+    hints:
+    - (1 + x)/2 = 3.
+    - 1 + x = 6.
+    solution: 'Step 1: (1 + x)/2 = 3, so x = 5. (B is (5, 6).)'
+    mistakes:
+      '2': c10_midpoint_half
+  - prompt: 'In what ratio k : 1 does the point (−4, 6) divide the join of (−6, 10) and (3, −8)? Give k as a fraction like 2/7.'
+    answer: 2/7
+    check: 2/7
+    difficulty: 3
+    hints:
+    - 'Use x: −4 = (3k − 6)/(k + 1).'
+    - −4k − 4 = 3k − 6.
+    solution: 'Step 1: −4(k + 1) = 3k − 6. Step 2: −7k = −2, so k = 2/7. The ratio is 2 : 7.'
