@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ApiError, api, del, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import type { NoteRow } from "../learn/Notes";
+import Methods, { type MethodSubject } from "./Methods";
 
 type Overview = {
   subjects: {
@@ -27,6 +28,7 @@ export default function MySpace() {
   const [overview, setOverview] = useState<Overview | null>(null);
   const [goals, setGoals] = useState<Goal[]>([]);
   const [notes, setNotes] = useState<NoteRow[]>([]);
+  const [methods, setMethods] = useState<MethodSubject[]>([]);
   const [goalText, setGoalText] = useState("");
   const [goalDate, setGoalDate] = useState("");
   const [error, setError] = useState("");
@@ -41,6 +43,7 @@ export default function MySpace() {
     api<Overview>("/me/overview").then(setOverview).catch(() => setOverview(null));
     api<Goal[]>("/me/goals").then(setGoals).catch(() => setGoals([]));
     api<NoteRow[]>("/me/notes").then(setNotes).catch(() => setNotes([]));
+    api<{ subjects: MethodSubject[] }>("/me/methods").then((r) => setMethods(r.subjects)).catch(() => setMethods([]));
   }, [canLearn]);
 
   if (!me || me.role !== "student") return null;
@@ -126,6 +129,12 @@ export default function MySpace() {
             {t("space.no_progress")} <Link href="/learn">{t("nav.learn")}</Link>
           </p>
         )}
+      </section>
+
+      <section className="card" aria-labelledby="helps">
+        <h2 id="helps">{t("space.helps")}</h2>
+        <p className="muted">{t("space.helps_note")}</p>
+        <Methods subjects={methods} t={t} />
       </section>
 
       <section className="card" aria-labelledby="goals">

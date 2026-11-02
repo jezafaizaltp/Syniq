@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiError, PROGRESS_WORDS, STYLE_WORDS, api, post, put } from "@/lib/api";
+import { ApiError, PROGRESS_WORDS, STYLE_WORDS, METHOD_WORDS, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import ContentTools from "./ContentTools";
 
@@ -11,6 +11,12 @@ type Overview = {
   concepts: { concept_id: number; title: string; counts: Record<string, number>; common_misconceptions: string[] }[];
 };
 type Support = { student_id: number; name: string; concepts: string[] }[];
+type MethodGroups = {
+  subject_id: number;
+  subject: string;
+  groups: { style: string; students: { student_id: number; name: string }[] }[];
+  still_finding_out: number;
+}[];
 type Draft = { id: number; concept: string; source: string; review_note: string };
 type QueueItem = Draft & {
   kind: string;
@@ -156,6 +162,7 @@ export default function Teacher() {
   const [classId, setClassId] = useState<number | null>(null);
   const [overview, setOverview] = useState<Overview | null>(null);
   const [support, setSupport] = useState<Support>([]);
+  const [methods, setMethods] = useState<MethodGroups>([]);
   const [queue, setQueue] = useState<Queue | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
 
@@ -167,13 +174,15 @@ export default function Teacher() {
     const classes = await api<{ id: number; name: string }[]>("/teacher/classes");
     if (!classes.length) return;
     const id = classes[0].id;
-    const [o, s, q] = await Promise.all([
+    const [o, s, q, m] = await Promise.all([
       api<Overview>(`/teacher/classes/${id}/overview`),
       api<Support>(`/teacher/classes/${id}/support`),
       api<Queue>("/teacher/review-queue"),
+      api<MethodGroups>(`/teacher/classes/${id}/methods`).catch(() => [] as MethodGroups),
     ]);
     setOverview(o);
     setSupport(s);
+    setMethods(m);
     setQueue(q);
     setClassId(id);
   }, []);
@@ -243,6 +252,34 @@ export default function Teacher() {
               </li>
             ))}
           </ul>
+        )}
+      </section>
+
+      <section className="card">
+        <h2>How students learn best right now</h2>
+        <p className="muted">
+          Grouped by the way of explaining that has helped each student most lately, from their own answers. Useful for
+          small groups that learn the same way. Never by marks, and it changes as they learn.
+        </p>
+        {methods.length === 0 ? (
+          <p>Not enough answers after explanations yet.</p>
+        ) : (
+          methods.map((subj) => (
+            <div key={subj.subject_id}>
+              <h3>{subj.subject}</h3>
+              <ul className="list">
+                {subj.groups.map((g) => (
+                  <li key={g.style}>
+                    <span>{METHOD_WORDS[g.style] ?? g.style}</span>
+                    <span className="muted">{g.students.map((x) => x.name).join(", ")}</span>
+                  </li>
+                ))}
+              </ul>
+              {subj.still_finding_out > 0 && (
+                <p className="muted">{subj.still_finding_out} still finding out: no one way stands out yet.</p>
+              )}
+            </div>
+          ))
         )}
       </section>
 

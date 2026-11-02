@@ -67,6 +67,12 @@ def overview(user: User = Depends(require_learning_consent), db: DbSession = Dep
     return {"subjects": sorted(per_subject.values(), key=lambda s: s["id"]), "review_due": due}
 
 
+@router.get("/methods")
+def my_methods(user: User = Depends(require_learning_consent), db: DbSession = Depends(get_db)):
+    """What has helped this student lately, per subject. A description that changes, never a label."""
+    return {"subjects": learning.method_summary(db, user.id)}
+
+
 # --- Goals --------------------------------------------------------------------
 
 class GoalIn(BaseModel):

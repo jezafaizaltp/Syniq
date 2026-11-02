@@ -13,6 +13,7 @@ function helpPressed(kind: "read_aloud" | "break") {
 }
 import Check, { CheckState } from "./Check";
 import Feedback, { AdaptiveResponse } from "./Feedback";
+import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
 import Notes from "./Notes";
 import Tutor from "./Tutor";
@@ -60,6 +61,7 @@ type Step = {
   explanation?: Explanation | null;
   styles?: string[];
   item?: Item | null;
+  method_why?: "history" | "similar" | "everyone";
 };
 type Result = {
   correct: boolean;
@@ -356,7 +358,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
     if (!step?.concept) return;
     const exp = await api<Explanation>(`/concepts/${step.concept.id}/explanations/${style}`);
     styleRef.current = exp.style;
-    setStep({ ...step, explanation: exp });
+    setStep({ ...step, explanation: exp, method_why: undefined });
     if (readAloud) speak(exp.body);
   }
 
@@ -436,6 +438,9 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
               </h2>
               {step.offer_support && (
                 <p className="feedback warn">{t("learn.offer_support")}</p>
+              )}
+              {step.method_why && step.explanation && (
+                <p className="muted">{t(`learn.why_method.${step.method_why}`, { method: methodName(t, step.explanation.style) })}</p>
               )}
               <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? t("learn.no_explanation")}</p>
               {step.explanation?.picture && <Picture picture={step.explanation.picture} />}

@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import i18n
+from .. import i18n, learning
 from ..auth import audit, guardian_of, hash_password, require_role, temporary_password
 from ..db import get_db
 from ..engine.mastery import progress_label
@@ -147,6 +147,7 @@ def _summary(db: DbSession, student: User) -> dict:
         ],
         "settings": {k: settings[k] for k in ("font_scale", "high_contrast", "dyslexia_font", "reduced_motion", "read_aloud", "extra_time", "preferred_style") if settings.get(k)},
         "subjects": [{"subject": k, **dict(v)} for k, v in sorted(per_subject.items())],
+        "methods": learning.method_summary(db, student.id),
         "repeated_mistakes": [{"tag": tag, "times": n, "tip": _tip(tag, tips)} for tag, n in mistakes.most_common(5)],
         "last_14_days": {"read_aloud": helps.get("read_aloud", 0), "breaks": helps.get("break", 0), "responses": dict(modes)},
     }

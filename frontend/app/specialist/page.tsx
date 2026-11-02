@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { STYLE_WORDS, api } from "@/lib/api";
+import { STYLE_WORDS, METHOD_WORDS, api } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 
@@ -13,6 +13,7 @@ type Student = {
   noticed_support: { mode: string; reason: string; since: string; on: boolean }[];
   settings: Record<string, unknown>;
   subjects: { subject: string; secure?: number; getting_there?: number; learning?: number }[];
+  methods: { subject_id: number; subject: string; methods: { style: string; right_after: number; answers_after: number }[]; clearest: string | null }[];
   repeated_mistakes: { tag: string; times: number; tip: string | null }[];
   last_14_days: { read_aloud: number; breaks: number; responses: Record<string, number> };
 };
@@ -115,6 +116,27 @@ export default function SpecialistPage() {
                   <span>{x.subject}</span>
                   <span className="muted">
                     {x.secure ?? 0} secure · {x.getting_there ?? 0} getting there · {x.learning ?? 0} learning
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <h3>Ways of explaining that help</h3>
+          {s.methods.length === 0 ? (
+            <p className="muted">Not enough answers after explanations yet.</p>
+          ) : (
+            <ul className="list">
+              {s.methods.map((m) => (
+                <li key={m.subject_id}>
+                  <span>
+                    <strong>{m.subject}</strong>
+                    {m.clearest ? ` (most helpful lately: ${METHOD_WORDS[m.clearest]})` : " (no one way stands out yet)"}
+                    {m.methods.map((x) => (
+                      <span key={x.style} className="muted" style={{ display: "block" }}>
+                        {METHOD_WORDS[x.style]}: right {x.right_after} of {x.answers_after} times just after
+                      </span>
+                    ))}
                   </span>
                 </li>
               ))}
