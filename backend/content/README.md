@@ -174,7 +174,7 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 
 ## CBSE Class 10 (NCERT)
 
-Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths and Science are written so far; the other subjects follow one at a time. Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
+Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths, Science and Social Science are written so far; English and Hindi follow. Social Science numbers its chapters across the four books (History 1–5, Geography 6–12, Civics 13–17, Economics 18–22). Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -205,13 +205,35 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 | Science 11: Electricity | current, potential difference and Ohm's law, heating effect and electric power | 12 |
 | Science 12: Magnetic Effects of Electric Current | magnetic fields of currents, force on a current and domestic circuits | 12 |
 | Science 13: Our Environment | ecosystems and food chains, ozone and managing waste | 12 |
+| Social Science 1 (History): The Rise of Nationalism in Europe | the idea of the nation after the French Revolution; revolutions and the making of Germany and Italy | 12 |
+| Social Science 2 (History): Nationalism in India | the First World War, Khilafat and Non-Cooperation; civil Disobedience and the sense of belonging | 12 |
+| Social Science 3 (History): The Making of a Global World | early trade and the nineteenth-century world economy; the Great Depression and the post-war world | 12 |
+| Social Science 4 (History): The Age of Industrialisation | industrialisation in Britain; industry in colonial India | 12 |
+| Social Science 5 (History): Print Culture and the Modern World | the print revolution in Europe; print in India | 12 |
+| Social Science 6 (Geography): Resources and Development | resources and their planning; soils and soil conservation | 12 |
+| Social Science 7 (Geography): Forest and Wildlife Resources | forests, wildlife and conservation | 6 |
+| Social Science 8 (Geography): Water Resources | water scarcity, dams and rainwater harvesting | 6 |
+| Social Science 9 (Geography): Agriculture | types of farming and cropping seasons; major crops and reforms | 12 |
+| Social Science 10 (Geography): Minerals and Energy Resources | minerals and where they are found; energy resources | 12 |
+| Social Science 11 (Geography): Manufacturing Industries | why manufacturing matters and how industries are classified; major industries and pollution | 12 |
+| Social Science 12 (Geography): Lifelines of National Economy | transport, communication and trade | 6 |
+| Social Science 13 (Civics): Power Sharing | why and how power is shared | 6 |
+| Social Science 14 (Civics): Federalism | what makes India a federation; decentralisation and local government | 12 |
+| Social Science 15 (Civics): Gender, Religion and Caste | gender and politics; religion, communalism and caste in politics | 12 |
+| Social Science 16 (Civics): Political Parties | what parties do and party systems; challenges and reform of parties | 12 |
+| Social Science 17 (Civics): Outcomes of Democracy | how democracy performs | 6 |
+| Social Science 18 (Economics): Development | measuring development; sustainable development | 12 |
+| Social Science 19 (Economics): Sectors of the Indian Economy | primary, secondary and tertiary sectors; organised and unorganised; public and private | 12 |
+| Social Science 20 (Economics): Money and Credit | money as a medium of exchange; credit: formal and informal | 12 |
+| Social Science 21 (Economics): Globalisation and the Indian Economy | MNCs, trade and globalisation; effects of globalisation and fair globalisation | 12 |
+| Social Science 22 (Economics): Consumer Rights | consumer rights and redressal | 6 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 883 of the 3,112 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 2,229 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 899 of the 3,340 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 2,441 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
