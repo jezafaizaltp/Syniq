@@ -254,6 +254,7 @@ const en = {
   "explore.private": "Only you can see this. Trying something and not liking it is useful too.",
   "explore.save": "Save",
   "explore.not_yet": "I'll do it later",
+  "offline.banner": "You're offline. Pages you opened before still work. Practice needs internet, and starts again when you're back online.",
 } as const;
 
 export type Key = keyof typeof en;
@@ -489,6 +490,7 @@ const ml: Record<Key, string> = {
   "explore.private": "ഇത് നിങ്ങൾക്ക് മാത്രമേ കാണാനാകൂ. ചെയ്തുനോക്കി ഇഷ്ടപ്പെടാതിരിക്കുന്നതും ഉപകാരമാണ്.",
   "explore.save": "സേവ് ചെയ്യാം",
   "explore.not_yet": "പിന്നീട് ചെയ്യാം",
+  "offline.banner": "ഇന്റർനെറ്റ് ഇല്ല. മുമ്പ് തുറന്ന പേജുകൾ കാണാം. പരിശീലനത്തിന് ഇന്റർനെറ്റ് വേണം, തിരികെ വരുമ്പോൾ വീണ്ടും തുടങ്ങാം.",
 };
 
 const STRINGS: Record<Lang, Record<Key, string>> = { en, ml };

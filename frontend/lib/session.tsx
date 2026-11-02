@@ -84,6 +84,13 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = () => {
     post("/auth/logout", {}).catch(() => undefined);
+    // Forget answers saved for offline use, so the next person on this device can't see them.
+    navigator.serviceWorker?.controller?.postMessage("sign-out");
+    try {
+      caches?.keys().then((keys) => keys.filter((k) => k.endsWith("-api")).forEach((k) => caches.delete(k)));
+    } catch {
+      /* no Cache API (old browser, private window) */
+    }
     setToken(null);
     setMe(null);
     applySettings(undefined);
