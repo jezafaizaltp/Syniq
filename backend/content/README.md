@@ -174,7 +174,7 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 
 ## CBSE Class 10 (NCERT)
 
-Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths, Science and Social Science are written so far; English and Hindi follow. Social Science numbers its chapters across the four books (History 1–5, Geography 6–12, Civics 13–17, Economics 18–22). Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
+Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths, Science, Social Science and English are written so far; Hindi follows. English covers the nine First Flight units (each prose lesson with its poems) as chapters 1–9 and nine Footprints without Feet stories as chapters 10–18; the language content was written from memory of the NCERT texts, so names and details need checking against the books. Social Science numbers its chapters across the four books (History 1–5, Geography 6–12, Civics 13–17, Economics 18–22). Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -227,13 +227,31 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 | Social Science 20 (Economics): Money and Credit | money as a medium of exchange; credit: formal and informal | 12 |
 | Social Science 21 (Economics): Globalisation and the Indian Economy | MNCs, trade and globalisation; effects of globalisation and fair globalisation | 12 |
 | Social Science 22 (Economics): Consumer Rights | consumer rights and redressal | 6 |
+| English 1: A Letter to God · Dust of Snow · Fire and Ice | A Letter to God (G. L. Fuentes); Dust of Snow · Fire and Ice (Robert Frost) | 12 |
+| English 2: Nelson Mandela: Long Walk to Freedom · A Tiger in the Zoo | Nelson Mandela: Long Walk to Freedom; A Tiger in the Zoo (Leslie Norris) | 12 |
+| English 3: Two Stories about Flying · How to Tell Wild Animals · The Ball Poem | Two Stories about Flying: His First Flight · The Black Aeroplane; How to Tell Wild Animals (Carolyn Wells) · The Ball Poem (John Berryman) | 12 |
+| English 4: From the Diary of Anne Frank · Amanda! | From the Diary of Anne Frank; Amanda! (Robin Klein) | 12 |
+| English 5: Glimpses of India · The Trees | Glimpses of India: A Baker from Goa · Coorg · Tea from Assam; The Trees (Adrienne Rich) | 12 |
+| English 6: Mijbil the Otter · Fog | Mijbil the Otter (Gavin Maxwell); Fog (Carl Sandburg) | 12 |
+| English 7: Madam Rides the Bus · The Tale of Custard the Dragon | Madam Rides the Bus (Vallikkannan); The Tale of Custard the Dragon (Ogden Nash) | 12 |
+| English 8: The Sermon at Benares · For Anne Gregory | The Sermon at Benares; For Anne Gregory (W. B. Yeats) | 12 |
+| English 9: The Proposal | The Proposal (Anton Chekhov) | 6 |
+| English 10 (Footprints): A Triumph of Surgery (James Herriot) | A Triumph of Surgery (James Herriot) | 6 |
+| English 11 (Footprints): The Thief's Story (Ruskin Bond) | The Thief's Story (Ruskin Bond) | 6 |
+| English 12 (Footprints): The Midnight Visitor (Robert Arthur) | The Midnight Visitor (Robert Arthur) | 6 |
+| English 13 (Footprints): A Question of Trust (Victor Canning) | A Question of Trust (Victor Canning) | 6 |
+| English 14 (Footprints): Footprints without Feet (H. G. Wells) | Footprints without Feet (H. G. Wells) | 6 |
+| English 15 (Footprints): The Making of a Scientist (Robert W. Peterson) | The Making of a Scientist (Robert W. Peterson) | 6 |
+| English 16 (Footprints): The Necklace (Guy de Maupassant) | The Necklace (Guy de Maupassant) | 6 |
+| English 17 (Footprints): Bholi (K. A. Abbas) | Bholi (K. A. Abbas) | 6 |
+| English 18 (Footprints): The Book That Saved the Earth (Claire Boiko) | The Book That Saved the Earth (Claire Boiko) | 6 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 899 of the 3,340 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 2,441 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 902 of the 3,496 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 2,594 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
