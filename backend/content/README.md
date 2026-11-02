@@ -89,7 +89,7 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -117,13 +117,33 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Science 10: Work and Energy | work, kinetic and potential energy, power and commercial unit of energy | 13 |
 | Science 11: Sound | sound as a wave, echo, range of hearing and ultrasound | 13 |
 | Science 12: Improvement in Food Resources | crop production and protection, animal husbandry | 13 |
+| Social Science 1 (History): The French Revolution | france before 1789 and the outbreak, constitution, Republic and legacy | 12 |
+| Social Science 2 (History): Socialism in Europe and the Russian Revolution | liberals, radicals, conservatives and socialism, the Russian Revolution and its results | 12 |
+| Social Science 3 (History): Nazism and the Rise of Hitler | weimar Germany and Hitler's rise, nazi ideology, society and war | 12 |
+| Social Science 4 (History): Forest Society and Colonialism | why forests disappeared under colonial rule, forest communities and rebellion | 12 |
+| Social Science 5 (History): Pastoralists in the Modern World | pastoral nomads in India and colonial rule, the Maasai of East Africa | 12 |
+| Social Science 6 (Geography): India – Size and Location | location, size and time, india and the world, and its neighbours | 13 |
+| Social Science 7 (Geography): Physical Features of India | the Himalayas and the Northern Plains, peninsular Plateau, desert, coasts and islands | 13 |
+| Social Science 8 (Geography): Drainage | himalayan river systems, peninsular rivers, lakes and pollution | 14 |
+| Social Science 9 (Geography): Climate | climate controls and the monsoon mechanism, seasons and distribution of rainfall | 13 |
+| Social Science 10 (Geography): Natural Vegetation and Wildlife | types of vegetation, wildlife and its protection | 12 |
+| Social Science 11 (Geography): Population | size, distribution and density, population growth and change | 13 |
+| Social Science 12 (Civics): What is Democracy? Why Democracy? | features of democracy, arguments for and against democracy | 12 |
+| Social Science 13 (Civics): Constitutional Design | why a constitution is needed, from South Africa, making of the Indian Constitution | 12 |
+| Social Science 14 (Civics): Electoral Politics | why elections and India's electoral system, what makes elections democratic | 12 |
+| Social Science 15 (Civics): Working of Institutions | parliament and the executive, the judiciary | 12 |
+| Social Science 16 (Civics): Democratic Rights | life without rights and why rights matter, fundamental Rights in the Indian Constitution | 12 |
+| Social Science 17 (Economics): The Story of Village Palampur | factors of production and farming, distribution of land and non-farm activities | 13 |
+| Social Science 18 (Economics): People as Resource | human capital and economic activities, unemployment, education and health | 12 |
+| Social Science 19 (Economics): Poverty as a Challenge | measuring poverty, causes of poverty and anti-poverty measures | 12 |
+| Social Science 20 (Economics): Food Security in India | what food security means and who is food insecure, buffer stock, PDS and cooperatives | 13 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 720 of the 2,291 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 1,571 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 733 of the 2,539 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 1,806 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
