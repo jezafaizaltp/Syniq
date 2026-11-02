@@ -844,3 +844,94 @@ code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: 0.04em;
 }
+
+/* --- Looks by age (set from the student's class; always calm: no streaks, countdowns or flashing) */
+
+/* LKG to Class 2: big pictures, large text, big targets. */
+[data-age="little"] {
+  --radius: 26px;
+}
+
+html[data-age="little"] {
+  font-size: calc(112% * var(--font-scale));
+}
+
+[data-age="little"] .subject-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+[data-age="little"] .subject-tile,
+[data-age="little"] .subject-tile:hover:not(:disabled) {
+  align-items: center;
+  text-align: center;
+  min-height: 170px;
+  background: color-mix(in srgb, var(--tile, var(--accent)) 10%, var(--surface));
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--tile, var(--accent)) 35%, var(--line));
+}
+
+[data-age="little"] .subject-icon {
+  width: 92px;
+  height: 92px;
+  border-radius: 30px;
+  font-size: 3rem;
+}
+
+[data-age="little"] .subject-name {
+  font-size: 1.25rem;
+}
+
+[data-age="little"] .wrap button,
+[data-age="little"] .wrap .btn {
+  min-height: 56px;
+  padding-inline: 26px;
+  font-size: 1.08rem;
+}
+
+[data-age="little"] .option {
+  min-height: 64px;
+  font-size: 1.2rem;
+}
+
+[data-age="little"] .hello {
+  flex-wrap: wrap;
+}
+
+[data-age="little"] .listen {
+  margin-left: auto;
+}
+
+/* Classes 3 to 5: brighter tiles and a little more colour. */
+[data-age="middle"] {
+  --radius: 22px;
+}
+
+[data-age="middle"] .subject-tile,
+[data-age="middle"] .subject-tile:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--tile, var(--accent)) 8%, var(--surface));
+  border-color: color-mix(in srgb, var(--tile, var(--accent)) 30%, var(--line));
+}
+
+[data-age="middle"] .subject-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  font-size: 1.8rem;
+}
+
+[data-age="middle"] h1 {
+  color: var(--accent);
+}
+
+/* High contrast always wins over the age looks. */
+[data-contrast="high"][data-age] .subject-tile,
+[data-contrast="high"][data-age] .subject-tile:hover:not(:disabled) {
+  background: var(--surface);
+  border-color: var(--text);
+}
+
+[data-age="little"] .subject-tile:hover:not(:disabled),
+[data-age="middle"] .subject-tile:hover:not(:disabled) {
+  border-color: var(--tile, var(--accent));
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { AgeBand, ageBand } from "./age";
 import { ApiError, Me, Settings, api, effectiveSupport, hasToken, post, put, setApiLang, setToken } from "./api";
 import { Key, Lang, isLang, translate } from "./i18n";
 
@@ -46,6 +47,11 @@ function applySettings(s: Settings | undefined) {
   root.dataset.motion = s?.reduced_motion ? "reduced" : "full";
 }
 
+function applyAge(band: AgeBand | undefined) {
+  if (band) document.documentElement.dataset.age = band;
+  else delete document.documentElement.dataset.age;
+}
+
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [me, setMe] = useState<Me | null>(null);
   const [loading, setLoading] = useState(true);
@@ -70,6 +76,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       }
       setMe(data);
       applySettings(data.settings);
+      applyAge(ageBand(data));
     } catch (e) {
       if (e instanceof ApiError && e.status === 401) setToken(null);
       setMe(null);
@@ -94,6 +101,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     setToken(null);
     setMe(null);
     applySettings(undefined);
+    applyAge(undefined);
   };
 
   const saveSettings = async (patch: Settings) => {

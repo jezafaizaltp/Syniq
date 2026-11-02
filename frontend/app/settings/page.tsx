@@ -6,6 +6,7 @@ import { CHOSEN_SUPPORT, Settings } from "@/lib/api";
 import { Key, LANGS, isLang } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 import { ChangePassword } from "../password";
+import { readsAloud } from "@/lib/age";
 
 export default function SettingsPage() {
   const { me, loading, saveSettings, lang, setLang, t } = useSession();
@@ -78,7 +79,7 @@ export default function SettingsPage() {
         {toggles.map(([key, title, help]) => (
           <div key={key} style={{ marginTop: 12 }}>
             <label className="check">
-              <input type="checkbox" checked={!!s[key]} onChange={(e) => change({ [key]: e.target.checked })} />
+              <input type="checkbox" checked={key === "read_aloud" ? readsAloud(me) : !!s[key]} onChange={(e) => change({ [key]: e.target.checked })} />
               {t(title)}
             </label>
             <p className="muted" style={{ margin: "0 0 0 34px" }}>
