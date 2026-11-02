@@ -226,7 +226,10 @@ export default function Admin() {
     <div className="wrap wide">
       <h1>School setup</h1>
       <p>
-        <Link href="/admin/results">Pilot results: before and after marks →</Link>
+        <Link href="/admin/results">Pilot results: subject checks and before and after marks →</Link>
+      </p>
+      <p>
+        <Link href="/admin/audit">Audit log: who viewed or changed what →</Link>
       </p>
 
       <section className="card">

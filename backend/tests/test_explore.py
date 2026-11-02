@@ -45,3 +45,17 @@ def test_explore_flow_is_private_and_has_no_labels():
     assert client.get("/explore", headers=login("rahul@demo.syniq")).json()["enjoyed"] == []
     for email in ("parent@demo.syniq", "teacher@demo.syniq"):
         assert client.get("/explore", headers=login(email)).status_code == 403
+
+
+def test_audit_log_for_admin_only_in_plain_words():
+    parent = login("parent@demo.syniq")
+    child = client.get("/guardian/children", headers=parent).json()[0]
+    client.post(f"/guardian/children/{child['id']}/consent", json={"scope": "mood_checkins", "granted": True}, headers=parent)
+
+    admin = login("admin@demo.syniq")
+    log = client.get("/admin/audit?limit=5", headers=admin).json()
+    first = log["entries"][0]
+    assert first["what"] == "Changed consent (mood_checkins, yes)" and first["role"] == "guardian" and first["student"]
+    older = client.get(f"/admin/audit?before_id={first['id']}&limit=5", headers=admin).json()["entries"]
+    assert all(e["id"] < first["id"] for e in older)
+    assert client.get("/admin/audit", headers=login("teacher@demo.syniq")).status_code == 403

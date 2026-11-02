@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session as DbSession
 
 from ..auth import audit, has_consent, hash_password, require_role, temporary_password
 from ..db import get_db
-from ..models import Chapter, ClassGroup, Concept, Consent, GuardianLink, Session, Subject, User
+from ..models import AuditLog, Chapter, ClassGroup, Concept, Consent, GuardianLink, Session, Subject, User
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 admin_only = require_role("admin")
@@ -345,3 +345,72 @@ def import_syllabus(body: SyllabusIn, db: DbSession = Depends(get_db), user: Use
     db.commit()
     audit(db, user, f"import_syllabus:{added_chapters}:{added_topics}")
     return {"ok": True, "errors": [], "dry_run": False, "added_chapters": added_chapters, "added_topics": added_topics}
+
+
+# --- Audit log --------------------------------------------------------------------
+# Who looked at or changed what. Read-only: nobody can edit or delete entries here.
+
+AUDIT_WORDS = {
+    "view_class_overview": "Viewed a class overview",
+    "view_support_list": "Viewed the list of students who may need a hand",
+    "view_child_progress": "Viewed a child's progress",
+    "set_child_support": "Changed a child's support settings",
+    "consent": "Changed consent",
+    "paper_consent": "Recorded paper consent",
+    "import_students": "Imported students",
+    "reset_password": "Gave someone a new password",
+    "add_teacher": "Added a teacher",
+    "import_syllabus": "Uploaded the syllabus",
+    "create_chapter": "Created a chapter",
+    "ai_draft_content": "Asked AI to draft content",
+    "add_assessment": "Added a school test for pilot results",
+    "delete_assessment": "Deleted a school test",
+    "upload_scores": "Uploaded marks",
+    "view_pilot_results": "Viewed pilot results",
+    "export_pilot_results": "Downloaded pilot results",
+    "delete_pilot_results": "Deleted all pilot marks",
+    "open_check_round": "Opened a subject check",
+    "close_check_round": "Closed a subject check",
+}
+
+
+def describe(action: str) -> str:
+    """Plain words for an audit action such as "paper_consent:mood_checkins:yes"."""
+    head, *rest = action.split(":")
+    words = AUDIT_WORDS.get(head, head.replace("_", " ").capitalize())
+    return f"{words} ({', '.join(rest)})" if rest else words
+
+
+@router.get("/audit")
+def audit_log(
+    before_id: int | None = None,
+    student_id: int | None = None,
+    limit: int = 50,
+    db: DbSession = Depends(get_db),
+    user: User = Depends(admin_only),
+):
+    """Newest first, 50 at a time. Pass before_id from the last row to see older entries."""
+    limit = max(1, min(limit, 200))
+    q = select(AuditLog).order_by(AuditLog.id.desc()).limit(limit + 1)
+    if before_id:
+        q = q.where(AuditLog.id < before_id)
+    if student_id:
+        q = q.where(AuditLog.subject_student_id == student_id)
+    rows = db.scalars(q).all()
+    people = {u.id: u for u in db.scalars(select(User).where(User.id.in_({r.actor_id for r in rows} | {r.subject_student_id for r in rows if r.subject_student_id}))).all()}
+    out = []
+    for r in rows[:limit]:
+        actor = people.get(r.actor_id)
+        student = people.get(r.subject_student_id) if r.subject_student_id else None
+        out.append(
+            {
+                "id": r.id,
+                "when": r.created_at.isoformat(timespec="minutes"),
+                "who": actor.name if actor else "?",
+                "role": actor.role if actor else "?",
+                "what": describe(r.action),
+                "action": r.action,
+                "student": student.name if student else None,
+            }
+        )
+    return {"entries": out, "more": len(rows) > limit}
