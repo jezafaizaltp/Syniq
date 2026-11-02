@@ -105,13 +105,25 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Maths 10: Heron's Formula | area of a triangle by Heron's formula | 7 |
 | Maths 11: Surface Areas and Volumes | right circular cone, sphere and hemisphere | 12 |
 | Maths 12: Statistics | grouped frequency tables, bar graphs, histograms and frequency polygons | 12 |
+| Science 1: Matter in Our Surroundings | particles and the states of matter, changing state and evaporation | 12 |
+| Science 2: Is Matter Around Us Pure? | solutions, suspensions and colloids, elements, compounds and changes | 12 |
+| Science 3: Atoms and Molecules | laws of chemical combination and formulae, molecular mass and the mole | 13 |
+| Science 4: Structure of the Atom | particles and models of the atom, electron shells, valency and isotopes | 13 |
+| Science 5: The Fundamental Unit of Life | cells, membranes and osmosis, nucleus and cell organelles | 13 |
+| Science 6: Tissues | plant tissues, animal tissues | 13 |
+| Science 7: Motion | distance, displacement, speed and velocity, acceleration and equations of motion | 14 |
+| Science 8: Force and Laws of Motion | balanced forces and inertia, momentum, F = ma and action–reaction | 13 |
+| Science 9: Gravitation | universal law of gravitation, g, mass and weight, thrust, pressure and buoyancy | 13 |
+| Science 10: Work and Energy | work, kinetic and potential energy, power and commercial unit of energy | 13 |
+| Science 11: Sound | sound as a wave, echo, range of hearing and ultrasound | 13 |
+| Science 12: Improvement in Food Resources | crop production and protection, animal husbandry | 13 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 657 of the 2,136 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 1,479 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 720 of the 2,291 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 1,571 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 

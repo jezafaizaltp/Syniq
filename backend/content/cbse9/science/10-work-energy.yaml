@@ -1,0 +1,124 @@
+# CBSE Class 9 Science (NCERT), chapter 10. Format: content/README.md.
+subject: cbse9-sci
+chapter: 10
+title: Work and Energy
+
+tips:
+  work_zero_no_displacement: "No displacement in the direction of the force means no work: pushing a wall that doesn't move does zero work."
+  ke_half: "Kinetic energy is ½mv²: square the speed, then halve."
+  kwh_unit: "1 kWh = 1 unit of electricity = 1000 W for 1 hour = 3.6 × 10⁶ J."
+
+concepts:
+  - code: cbse9s.energy.work
+    title: Work, kinetic and potential energy
+    notes: |
+      Work W = F × s when force and displacement are in the same direction (joule, J). Work is negative when
+      force opposes motion; zero if there is no displacement or the force is perpendicular. Kinetic energy
+      Eₖ = ½mv². Potential energy at height h: Eₚ = mgh. Energy is conserved: it changes form but the total
+      stays the same (falling body: Eₚ turns into Eₖ).
+    explanations:
+      text: "In science, work is done only when a force moves something: W = F × s. Holding a heavy bag still does no work, however tiring. Moving things have kinetic energy, ½mv². Things lifted up have potential energy, mgh. As a ball falls, its potential energy turns into kinetic energy; the total stays the same."
+      visual: "Picture a swing. At the top of each swing it stops for a moment: all potential energy. At the bottom it's fastest: all kinetic energy. It keeps trading one for the other."
+      step_by_step: "Step 1: Work = force × displacement in the force's direction. Step 2: KE = ½ × m × v². Step 3: PE = m × g × h. Step 4: For a falling object, PE lost = KE gained."
+      real_world: "Water stored high in a dam has potential energy. As it falls through the turbines it gains kinetic energy, which spins generators to make electricity."
+    items:
+      - prompt: "A force of 10 N moves a box 5 m in its direction. Find the work done, in J."
+        answer: "50"
+        check: "10*5"
+        difficulty: 1
+        hints: ["W = F × s.", "10 × 5."]
+        solution: "W = 10 × 5 = 50 J."
+      - prompt: "A person pushes hard on a wall, but it doesn't move. How much work is done, in J?"
+        answer: "0"
+        check: "0"
+        difficulty: 1
+        hints: ["Displacement is 0.", "W = F × 0."]
+        solution: "No displacement, so W = 0."
+        mistakes: {"1": work_zero_no_displacement}
+      - prompt: "Find the kinetic energy of a 2 kg ball moving at 3 m/s, in J."
+        answer: "9"
+        check: "1/2*2*3^2"
+        difficulty: 1
+        hints: ["KE = ½mv².", "½ × 2 × 9."]
+        solution: "KE = ½ × 2 × 9 = 9 J."
+        mistakes: {"18": ke_half, "3": ke_speed_squared}
+      - prompt: "Find the potential energy of a 5 kg object 4 m above the ground (g = 10 m/s²), in J."
+        answer: "200"
+        check: "5*10*4"
+        difficulty: 1
+        hints: ["PE = mgh.", "5 × 10 × 4."]
+        solution: "PE = 5 × 10 × 4 = 200 J."
+      - prompt: "A car's speed doubles. Its kinetic energy becomes how many times bigger?"
+        answer: "4"
+        check: "2^2"
+        difficulty: 2
+        hints: ["KE ∝ v².", "2²."]
+        solution: "KE ∝ v², so doubling speed makes KE 4 times."
+        mistakes: {"2": ke_speed_squared}
+      - prompt: "A 1 kg ball is dropped from 5 m (g = 10 m/s²). What is its kinetic energy just before hitting the ground, in J?"
+        answer: "50"
+        check: "1*10*5"
+        difficulty: 2
+        hints: ["PE at top = KE at bottom.", "mgh = 1 × 10 × 5."]
+        solution: "All the PE, mgh = 50 J, turns into KE: 50 J."
+        mistakes: {"0": energy_conserved}
+      - prompt: "A 1 kg ball is dropped from 5 m (g = 10 m/s²). What is its speed just before hitting the ground, in m/s?"
+        answer: "10"
+        check: "sqrt(2*10*5)"
+        difficulty: 3
+        hints: ["½mv² = mgh.", "v² = 2gh = 100."]
+        solution: "½ × 1 × v² = 50, so v² = 100 and v = 10 m/s."
+        mistakes: {"100": v_squared_root}
+
+  - code: cbse9s.energy.power
+    title: Power and commercial unit of energy
+    after: [cbse9s.energy.work]
+    notes: |
+      Power P = W/t, the rate of doing work (watt, W = J/s; 1 kW = 1000 W). Average power. Commercial unit:
+      kilowatt hour, 1 kWh = 3.6 × 10⁶ J = 1 unit of electricity. Energy used = power × time.
+    explanations:
+      text: "Power is how quickly work is done: P = W ÷ t, measured in watts. A 100 W bulb uses 100 joules every second. Electricity bills count energy in kilowatt hours (units): a 1000 W heater running for 1 hour uses 1 kWh."
+      visual: "Two people carry the same bucket up the same stairs. They do the same work, but the one who runs up in 10 s has more power than the one who walks up in 40 s."
+      step_by_step: "Step 1: Power = work (J) ÷ time (s). Step 2: For energy in kWh, change watts to kilowatts (÷ 1000). Step 3: Multiply by hours. Step 4: 1 kWh = 3.6 × 10⁶ J if joules are needed."
+      real_world: "A 1.5 kW AC running 4 hours a day uses 6 units a day. At ₹6 a unit that's ₹36 a day, which is why switching it off matters."
+    items:
+      - prompt: "A motor does 600 J of work in 20 s. Find its power, in W."
+        answer: "30"
+        check: "600/20"
+        difficulty: 1
+        hints: ["P = W ÷ t.", "600 ÷ 20."]
+        solution: "P = 600 ÷ 20 = 30 W."
+        mistakes: {"12000": power_per_time}
+      - prompt: "A 100 W bulb is used for 10 hours. How many kWh (units) does it use?"
+        answer: "1"
+        check: "100/1000*10"
+        difficulty: 1
+        hints: ["100 W = 0.1 kW.", "0.1 × 10."]
+        solution: "0.1 kW × 10 h = 1 kWh."
+        mistakes: {"1000": kw_to_w}
+      - prompt: "How many joules are in 1 kWh?"
+        options: ["3.6 × 10⁶ J", "1000 J", "3600 J", "3.6 × 10³ J"]
+        answer: "3.6 × 10⁶ J"
+        difficulty: 2
+        hints: ["1000 W × 3600 s.", "3,600,000."]
+        solution: "1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J."
+        mistakes: {"3600 J": kwh_unit}
+      - prompt: "A 2 kW heater runs for 3 hours. How many units of electricity does it use?"
+        answer: "6"
+        check: "2*3"
+        difficulty: 2
+        hints: ["kWh = kW × h.", "2 × 3."]
+        solution: "2 × 3 = 6 kWh."
+      - prompt: "A girl of mass 40 kg climbs 5 m of stairs in 10 s (g = 10 m/s²). Find her power, in W."
+        answer: "200"
+        check: "40*10*5/10"
+        difficulty: 3
+        hints: ["Work = mgh.", "2000 J ÷ 10 s."]
+        solution: "Step 1: W = 40 × 10 × 5 = 2000 J. Step 2: P = 2000 ÷ 10 = 200 W."
+      - prompt: "Four 60 W fans run for 5 hours a day. How many units are used per day?"
+        answer: "1.2"
+        check: "4*60/1000*5"
+        difficulty: 2
+        hints: ["Total power 240 W = 0.24 kW.", "0.24 × 5."]
+        solution: "0.24 kW × 5 h = 1.2 kWh."
+        mistakes: {"1200": kw_to_w}
