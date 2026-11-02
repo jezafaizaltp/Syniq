@@ -86,12 +86,32 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 9: Creating a Webpage | how webpages work, HTML structure and formatting, images, tables and video | 22 |
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
+
+## CBSE Class 9 (NCERT)
+
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Number Systems | rational and irrational numbers, decimal expansions, operations on real numbers, laws of exponents for real numbers | 28 |
+| Maths 2: Polynomials | polynomials and their degree, values and zeroes of a polynomial, factor theorem and factorising, algebraic identities | 27 |
+| Maths 3: Coordinate Geometry | the Cartesian plane, coordinates of a point | 12 |
+| Maths 4: Linear Equations in Two Variables | writing ax + by + c = 0, solutions of a linear equation | 14 |
+| Maths 5: Introduction to Euclid's Geometry | definitions, axioms and postulates, Euclid's five postulates | 12 |
+| Maths 6: Lines and Angles | pairs of angles, parallel lines and a transversal | 13 |
+| Maths 7: Triangles | congruence rules, isosceles triangles | 13 |
+| Maths 8: Quadrilaterals | properties of a parallelogram, the mid-point theorem | 13 |
+| Maths 9: Circles | chords and their distance from the centre, angles in a circle and cyclic quadrilaterals | 12 |
+| Maths 10: Heron's Formula | area of a triangle by Heron's formula | 7 |
+| Maths 11: Surface Areas and Volumes | right circular cone, sphere and hemisphere | 12 |
+| Maths 12: Statistics | grouped frequency tables, bar graphs, histograms and frequency polygons | 12 |
+
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 564 of the 1,961 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 1,397 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 657 of the 2,136 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 1,479 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 

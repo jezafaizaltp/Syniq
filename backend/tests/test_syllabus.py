@@ -65,7 +65,8 @@ def test_students_only_see_chapters_with_approved_content():
     packs = [p for _, p in content_packs.read_packs() if p["subject"] == "math"]
     assert math["chapters"] == 2 + len(packs)  # the two demo chapters and the content packs have approved content
     for code in {p["subject"] for _, p in content_packs.read_packs()} - {"math"}:
-        subject = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == code)
+        who = teacher if code.startswith("cbse") else anu  # Anu is on the Kerala syllabus, so sees only its subjects
+        subject = next(s for s in client.get("/subjects", headers=who).json() if s["code"] == code)
         assert subject["chapters"] == len([p for _, p in content_packs.read_packs() if p["subject"] == code])
 
 

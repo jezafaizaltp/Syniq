@@ -1,4 +1,4 @@
-"""Prepare a fresh live server: the nine Class 9 subjects and the first admin.
+"""Prepare a live server: every subject (Kerala Class 9 and CBSE) and the first admin.
 
 No demo students, content or passwords. Safe to run more than once.
 
@@ -20,9 +20,9 @@ from .seed import SUBJECTS
 def bootstrap(db, admin_email: str, admin_password: str, admin_name: str = "School admin") -> list[str]:
     done = []
     have = {s.code for s in db.scalars(select(Subject)).all()}
-    for code, name, lang in SUBJECTS:
+    for code, name, lang, board, grade in SUBJECTS:
         if code not in have:
-            db.add(Subject(code=code, name=name, language=lang))
+            db.add(Subject(code=code, name=name, language=lang, syllabus=board, grade=grade))
             done.append(f"added subject {name}")
     email = admin_email.lower().strip()
     if not db.scalars(select(User).where(User.email == email)).first():

@@ -4,6 +4,7 @@ from app import auth
 from app.bootstrap import bootstrap
 from app.db import SessionLocal
 from app.models import Consent, Session, Subject, User
+from app.seed import SUBJECTS
 from tests.test_api import client, login
 
 SHEET = """student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school
@@ -126,4 +127,4 @@ def test_bootstrap_is_repeatable():
         first = bootstrap(db, "Head@School.example", "a-long-password")
         assert first == ["added admin head@school.example"]  # subjects already exist
         assert bootstrap(db, "head@school.example", "a-long-password") == []
-        assert db.query(Subject).count() == 9
+        assert db.query(Subject).count() == len(SUBJECTS)

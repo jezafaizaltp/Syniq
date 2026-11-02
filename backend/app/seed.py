@@ -27,16 +27,24 @@ from .models import (
 
 DEMO_PASSWORD = "syniq-demo"
 
+# (code, name, content language, syllabus, class). Codes are unique across syllabuses.
 SUBJECTS = [
-    ("mal", "Malayalam", "ml"),
-    ("eng", "English", "en"),
-    ("hin", "Hindi", "hi"),
-    ("math", "Mathematics", "en"),
-    ("phy", "Physics", "en"),
-    ("chem", "Chemistry", "en"),
-    ("bio", "Biology", "en"),
-    ("ss", "Social Science", "en"),
-    ("it", "Information Technology", "en"),
+    # Kerala State (SCERT) Class 9: the Providence pilot.
+    ("mal", "Malayalam", "ml", "kerala_scert", 9),
+    ("eng", "English", "en", "kerala_scert", 9),
+    ("hin", "Hindi", "hi", "kerala_scert", 9),
+    ("math", "Mathematics", "en", "kerala_scert", 9),
+    ("phy", "Physics", "en", "kerala_scert", 9),
+    ("chem", "Chemistry", "en", "kerala_scert", 9),
+    ("bio", "Biology", "en", "kerala_scert", 9),
+    ("ss", "Social Science", "en", "kerala_scert", 9),
+    ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE Class 9 (NCERT books): the first class of SYNiq outside school.
+    ("cbse9-math", "Mathematics", "en", "cbse", 9),
+    ("cbse9-sci", "Science", "en", "cbse", 9),
+    ("cbse9-ss", "Social Science", "en", "cbse", 9),
+    ("cbse9-eng", "English", "en", "cbse", 9),
+    ("cbse9-hin", "Hindi", "hi", "cbse", 9),
 ]
 
 # concept code -> (title, order, prerequisites)
@@ -159,7 +167,7 @@ def seed(db: DbSession) -> None:
     if db.query(Subject).count():
         return
 
-    subjects = {code: Subject(code=code, name=name, language=lang) for code, name, lang in SUBJECTS}
+    subjects = {code: Subject(code=code, name=name, language=lang, syllabus=board, grade=grade) for code, name, lang, board, grade in SUBJECTS}
     db.add_all(subjects.values())
     db.flush()
 
