@@ -1,0 +1,191 @@
+# CBSE Class 10 Science (NCERT), chapter 11. Format: content/README.md.
+subject: cbse10-sci
+chapter: 11
+title: Electricity
+tips:
+  c10s_time_seconds: 'Change the time to seconds first: 1 minute = 60 s.'
+  c10s_ohm_rearrange: From V = IR, R = V ÷ I. Dividing by 0.5 doubles the number.
+  c10s_meter_connection: Ammeters go in series; voltmeters go in parallel across the part.
+  c10s_series_parallel: Adding them is for series. In parallel use 1/R = 1/R₁ + 1/R₂; the total is smaller than each.
+  c10s_stretch_area: 'Stretching makes the wire thinner too, so the resistance rises twice: ×2 for length and ×2 for area.'
+  c10s_kwh_units: 'Convert watts to kilowatts first: 100 W = 0.1 kW.'
+  c10s_square_current: 'In H = I²Rt the current is squared: 3² = 9.'
+concepts:
+- code: cbse10s.elec.ohm
+  title: Current, potential difference and Ohm's law
+  notes: |
+    Electric current is the rate of flow of charge: I = Q/t, unit ampere (A); 1 C is the charge of about
+    6.25 × 10¹⁸ electrons. Current is measured by an ammeter in series. Potential difference is the work done
+    per unit charge: V = W/Q, unit volt (V); measured by a voltmeter in parallel. Ohm's law: at constant
+    temperature, V = IR. Resistance R depends on length (R ∝ l), area (R ∝ 1/A) and material: R = ρl/A, where ρ
+    is resistivity (Ω m). Metals have low ρ; alloys like nichrome have higher ρ and are used in heaters.
+    In series, R = R₁ + R₂ + R₃ and the current is the same through each. In parallel, 1/R = 1/R₁ + 1/R₂ + 1/R₃,
+    the voltage is the same across each, and the total resistance is less than the smallest one; house wiring
+    is in parallel.
+  explanations:
+    text: 'Current is how much charge flows each second; voltage is the push that drives it; resistance is how hard the wire makes it. Ohm''s law links them: voltage equals current times resistance. Resistors in a line add up; resistors side by side give an easier path, so the total is smaller.'
+    visual: 'Draw two pipes: in series the water must go through both narrow sections one after the other (harder); in parallel it can split between them (easier).'
+    step_by_step: 'Step 1: Write what you know: V, I, R. Step 2: Combine resistors first: series add; parallel use 1/R = 1/R₁ + 1/R₂. Step 3: Use V = IR for the total. Step 4: Check units: volts, amperes, ohms.'
+    real_world: Home appliances are wired in parallel so each gets the full 220 V and one can be switched off without the others going off.
+  picture:
+    kind: flow
+    steps:
+    - 'Two resistors: 6 Ω and 3 Ω'
+    - 'Series: 6 + 3 = 9 Ω'
+    - 'Parallel: 1/R = 1/6 + 1/3 = 1/2'
+    - So R = 2 Ω, less than either one
+    alt: 'Combining a 6 ohm and a 3 ohm resistor: 9 ohms in series, 2 ohms in parallel.'
+  items:
+  - prompt: A charge of 30 C flows through a wire in 1 minute. What is the current, in amperes?
+    answer: '0.5'
+    check: 30/60
+    difficulty: 1
+    hints:
+    - I = Q/t with t in seconds.
+    - t = 60 s.
+    solution: I = 30 ÷ 60 = 0.5 A.
+    mistakes:
+      '30': c10s_time_seconds
+  - prompt: A bulb draws 0.5 A from a 220 V supply. What is its resistance, in ohms?
+    answer: '440'
+    check: 220/Rational(1, 2)
+    difficulty: 1
+    hints:
+    - R = V/I.
+    - 220 ÷ 0.5.
+    solution: R = 220 ÷ 0.5 = 440 Ω.
+    mistakes:
+      '110': c10s_ohm_rearrange
+  - prompt: How is a voltmeter connected in a circuit?
+    options:
+    - In parallel with the component
+    - In series with the component
+    - Either way
+    - Only across the battery
+    answer: In parallel with the component
+    difficulty: 1
+    hints:
+    - It measures the difference between two points.
+    - Ammeter goes in series.
+    solution: A voltmeter is connected in parallel across the component it measures.
+    mistakes:
+      In series with the component: c10s_meter_connection
+  - prompt: Find the total resistance of 6 Ω and 3 Ω connected in parallel, in ohms.
+    answer: '2'
+    check: 1/(Rational(1, 6) + Rational(1, 3))
+    difficulty: 2
+    hints:
+    - 1/R = 1/6 + 1/3.
+    - = 1/2.
+    solution: 1/R = 1/6 + 2/6 = 3/6 = 1/2, so R = 2 Ω.
+    mistakes:
+      '9': c10s_series_parallel
+  - prompt: A wire has resistance 10 Ω. It is stretched to double its length (its area halves). What is the new resistance, in ohms?
+    answer: '40'
+    check: 10*2*2
+    difficulty: 3
+    hints:
+    - R = ρl/A.
+    - l doubles and A halves.
+    solution: 'Step 1: Length ×2 makes R ×2. Step 2: Area ÷2 makes R ×2 again. Step 3: 10 × 4 = 40 Ω.'
+    mistakes:
+      '20': c10s_stretch_area
+  - prompt: Why is nichrome used in electric heaters?
+    options:
+    - It has high resistivity and doesn't oxidise easily when hot
+    - It has very low resistance
+    - It is magnetic
+    - It is a good insulator
+    answer: It has high resistivity and doesn't oxidise easily when hot
+    difficulty: 2
+    hints:
+    - Heating needs resistance.
+    - Copper would just carry the current.
+    solution: Nichrome's high resistivity produces heat, and it doesn't burn easily at high temperature.
+- code: cbse10s.elec.power
+  title: Heating effect and electric power
+  after:
+  - cbse10s.elec.ohm
+  notes: |
+    When current flows through a resistor, energy is turned into heat: H = I²Rt (Joule's law of heating).
+    Uses: electric iron, toaster, heater, bulb filament (tungsten, high melting point, in inert gas), and the
+    fuse (a wire with a low melting point that melts and breaks the circuit if too much current flows).
+    Electric power P = VI = I²R = V²/R, unit watt (W). Energy E = Pt; the commercial unit is the kilowatt-hour:
+    1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J, the 'unit' on electricity bills.
+  explanations:
+    text: 'A current passing through a resistor makes it hot; that is how heaters, irons and filament bulbs work. Power tells you how quickly an appliance uses energy, and electricity bills count energy in kilowatt-hours: one kilowatt used for one hour.'
+    visual: 'Draw an electricity bill: a 1000 W heater running for 3 hours uses 3 kWh, which is 3 units. At ₹6 a unit it costs ₹18.'
+    step_by_step: 'Step 1: Find the power: P = VI, or I²R, or V²/R. Step 2: Energy = P × t. Step 3: For bills, use P in kW and t in hours to get kWh (units). Step 4: Multiply by the price per unit.'
+    real_world: A fuse in a house circuit melts if a fault makes too much current flow, cutting the supply before wires overheat and cause a fire.
+  picture:
+    kind: bars
+    bars:
+    - label: LED bulb
+      value: 10
+    - label: Fan
+      value: 60
+    - label: Television
+      value: 100
+    - label: Iron
+      value: 1000
+    - label: Heater
+      value: 2000
+    unit: watts
+    alt: 'Bar chart of typical power ratings: LED bulb 10 watts, fan 60, television 100, iron 1000, heater 2000.'
+  items:
+  - prompt: An electric iron draws 4 A at 220 V. What is its power, in watts?
+    answer: '880'
+    check: 220*4
+    difficulty: 1
+    hints:
+    - P = VI.
+    - 220 × 4.
+    solution: P = 220 × 4 = 880 W.
+  - prompt: A 100 W bulb is used for 10 hours. How many kWh (units) of energy does it use?
+    answer: '1'
+    check: Rational(100, 1000)*10
+    difficulty: 1
+    hints:
+    - 'Change W to kW: 0.1 kW.'
+    - E = P × t.
+    solution: 'Step 1: 100 W = 0.1 kW. Step 2: 0.1 × 10 = 1 kWh.'
+    mistakes:
+      '1000': c10s_kwh_units
+  - prompt: How many joules are in 1 kWh? Give the answer as a plain number.
+    answer: '3600000'
+    check: 1000*3600
+    difficulty: 2
+    hints:
+    - 1 kW = 1000 W.
+    - 1 h = 3600 s.
+    solution: 1 kWh = 1000 × 3600 = 3 600 000 J (3.6 × 10⁶ J).
+  - prompt: A 2 Ω resistor carries 3 A for 10 s. How much heat is produced, in joules?
+    answer: '180'
+    check: 3**2*2*10
+    difficulty: 2
+    hints:
+    - H = I²Rt.
+    - 9 × 2 × 10.
+    solution: H = 3² × 2 × 10 = 180 J.
+    mistakes:
+      '60': c10s_square_current
+  - prompt: A 1.5 kW heater runs 2 hours a day for 30 days. At ₹6 per unit, what is the cost, in rupees?
+    answer: '540'
+    check: Rational(3, 2)*2*30*6
+    difficulty: 3
+    hints:
+    - Energy per day = 1.5 × 2 = 3 kWh.
+    - Then 30 days and ₹6 each.
+    solution: 'Step 1: 3 kWh a day. Step 2: 3 × 30 = 90 units. Step 3: 90 × 6 = ₹540.'
+  - prompt: Why does a fuse wire have a low melting point?
+    options:
+    - So it melts and breaks the circuit when too much current flows
+    - So it heats the room
+    - So it lasts longer
+    - So it conducts better
+    answer: So it melts and breaks the circuit when too much current flows
+    difficulty: 2
+    hints:
+    - It is a safety device.
+    - It is in series with the appliance.
+    solution: If the current is too large, the fuse heats up, melts and breaks the circuit, protecting the wiring.

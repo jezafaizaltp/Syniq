@@ -174,7 +174,7 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 
 ## CBSE Class 10 (NCERT)
 
-Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths is written so far; the other subjects follow one at a time. Chapter names follow the rationalised NCERT Class 10 Maths book (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every Maths chapter has at least one picture explanation.
+Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. Maths and Science are written so far; the other subjects follow one at a time. Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -192,13 +192,26 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 | Maths 12: Surface Areas and Volumes | surface area of combined solids, volume of combined solids | 12 |
 | Maths 13: Statistics | mean of grouped data, median and mode of grouped data | 12 |
 | Maths 14: Probability | theoretical probability | 8 |
+| Science 1: Chemical Reactions and Equations | writing and balancing chemical equations, types of chemical reactions | 12 |
+| Science 2: Acids, Bases and Salts | acids, bases and how they react, pH and salts in daily life | 12 |
+| Science 3: Metals and Non-metals | properties and reactivity of metals, extracting metals and preventing corrosion | 12 |
+| Science 4: Carbon and its Compounds | covalent bonds and families of carbon compounds, reactions of carbon compounds, ethanol and soap | 12 |
+| Science 5: Life Processes | nutrition and respiration, transport and excretion | 12 |
+| Science 6: Control and Coordination | nervous system and reflexes, hormones in plants and animals | 12 |
+| Science 7: How do Organisms Reproduce? | reproduction and asexual methods, sexual reproduction in plants and humans | 12 |
+| Science 8: Heredity | Mendel's rules of inheritance, how sex is decided in humans | 12 |
+| Science 9: Light – Reflection and Refraction | reflection and spherical mirrors, refraction and lenses | 12 |
+| Science 10: The Human Eye and the Colourful World | the eye and its defects, prisms, dispersion and scattering | 12 |
+| Science 11: Electricity | current, potential difference and Ohm's law, heating effect and electric power | 12 |
+| Science 12: Magnetic Effects of Electric Current | magnetic fields of currents, force on a current and domestic circuits | 12 |
+| Science 13: Our Environment | ecosystems and food chains, ozone and managing waste | 12 |
 
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 849 of the 2,956 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 2,107 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 883 of the 3,112 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 2,229 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
