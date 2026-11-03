@@ -87,6 +87,76 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 7 (NCERT, 2024-25 books)
+
+Under `cbse7/`, with subject codes `cbse7-math`, `cbse7-sci`, `cbse7-ss`, `cbse7-eng` and `cbse7-hin`. NCERT replaced every Class 7 book in 2024-25 (NCF 2023), and these packs follow the new books: Ganita Prakash (Maths, in two parts), Curiosity (Science), Exploring Society: India and Beyond (Social Science, two parts), Poorvi (English) and Malhar (Hindi). Maths numbers its chapters across both parts: Part 1 is chapters 1–8 and Part 2 is chapters 9–15. Social Science does the same: Part 1 is chapters 1–12 and Part 2 is chapters 13–20. English groups Poorvi's 15 chapters into its 5 themes, one file per theme. Chapter names and the topics inside each chapter were checked against published contents lists of the new books (not a printed copy); the questions and explanations are Claude's own. The English and Hindi story details come from memory and published study notes, not the printed books. Sources disagree about Hindi chapter 8 (an interview with Birju Maharaj in some lists), so that lesson stays general until it is checked against the book. The Hindi wording has not yet been read by a Hindi teacher. Class 7 is here so that a Class 8 or 9 student who is stuck can go back two years and fill a gap.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Large Numbers Around Us | reading and writing large numbers; estimating and rounding large numbers | 12 |
+| Maths 2: Arithmetic Expressions | expressions, terms and brackets; comparing and rearranging expressions | 12 |
+| Maths 3: A Peek Beyond the Point | tenths, hundredths and decimals; adding and subtracting decimals | 12 |
+| Maths 4: Expressions Using Letter-Numbers | writing expressions with letter-numbers; simplifying expressions and patterns | 12 |
+| Maths 5: Parallel and Intersecting Lines | intersecting, perpendicular and parallel lines; parallel lines and a transversal | 12 |
+| Maths 6: Number Play | even, odd and parity; magic squares and number patterns | 12 |
+| Maths 7: A Tale of Three Intersecting Lines | triangles and the triangle inequality; angle sum and exterior angles | 12 |
+| Maths 8: Working with Fractions | multiplying fractions; dividing fractions | 12 |
+| Maths 9: Geometric Twins | congruent figures and triangles; isosceles and equilateral triangles | 12 |
+| Maths 10: Operations with Integers | adding and subtracting integers; multiplying and dividing integers | 12 |
+| Maths 11: Finding Common Ground | prime factorisation and HCF; LCM and its link with HCF | 12 |
+| Maths 12: Another Peek Beyond the Point | multiplying decimals; dividing decimals | 12 |
+| Maths 13: Connecting the Dots... | collecting data and the mean; the median and choosing a typical value | 12 |
+| Maths 14: Constructions and Tilings | constructions with ruler and compass; tilings and plane patterns | 12 |
+| Maths 15: Finding the Unknown | solving simple equations; forming equations from word problems | 12 |
+| Science 1: The Ever-Evolving World of Science | how scientific ideas change; asking questions and testing ideas | 12 |
+| Science 2: Exploring Substances: Acidic, Basic and Neutral | acids, bases and indicators; neutralisation in daily life | 12 |
+| Science 3: Electricity: Circuits and Their Components | electric circuits; conductors and insulators | 12 |
+| Science 4: The World of Metals and Non-metals | properties of metals and non-metals; uses of metals and non-metals | 12 |
+| Science 5: Changes Around Us: Physical and Chemical | physical changes; chemical changes | 12 |
+| Science 6: Adolescence: A Stage of Growth and Change | changes during adolescence; health, hygiene and nutrition in adolescence | 12 |
+| Science 7: Heat Transfer in Nature | conduction and convection; radiation, sea breezes and the water cycle | 12 |
+| Science 8: Measurement of Time and Motion | measuring time; speed, distance and time | 12 |
+| Science 9: Life Processes in Animals | nutrition and digestion in animals; breathing, circulation and excretion | 12 |
+| Science 10: Life Processes in Plants | photosynthesis; transport and gas exchange in plants | 12 |
+| Science 11: Light: Shadows and Reflections | how light travels and shadows; reflection and mirrors | 12 |
+| Science 12: Earth, Moon and the Sun | day, night and seasons; phases of the Moon and eclipses | 12 |
+| Social Science 1: Geographical Diversity of India | the Himalayas and the northern plains; desert, plateau, coasts and islands | 12 |
+| Social Science 2: Understanding the Weather | elements of weather; weather versus climate and why it matters | 12 |
+| Social Science 3: Climates of India | climates of India and what shapes them; the monsoon, disasters and climate change | 12 |
+| Social Science 4: New Beginnings: Cities and States | second urbanisation: janapadas and mahajanapadas; governance, trade and society in early states | 12 |
+| Social Science 5: The Rise of Empires | the rise of Magadha and the Mauryan Empire; Ashoka and the legacy of empires | 12 |
+| Social Science 6: The Age of Reorganisation | new kingdoms after the Mauryas; trade, culture and art in the age of reorganisation | 12 |
+| Social Science 7: The Gupta Era: An Age of Tireless Creativity | the Gupta Empire and its rulers; science, literature and art in the Gupta era | 12 |
+| Social Science 8: How the Land Becomes Sacred | how land becomes sacred; sacred ecology and protecting sacred spaces | 12 |
+| Social Science 9: From the Rulers to the Ruled: Types of Governments | types of government; why democracy matters | 12 |
+| Social Science 10: The Constitution of India: An Introduction | what a constitution is and how India's was made; the Preamble and key features | 12 |
+| Social Science 11: From Barter to Money | from barter to money; forms of money today | 12 |
+| Social Science 12: Understanding Markets | what markets are and their types; markets in our lives and the government's role | 12 |
+| Social Science 13: The Story of Indian Farming | Indian agriculture: seasons, soils and water; challenges for farmers and the government's role | 12 |
+| Social Science 14: India and Her Neighbours | India and its land neighbours; maritime neighbours and cultural exchange | 12 |
+| Social Science 15: Empires and Kingdoms: 6th to 10th Centuries | kingdoms of the 6th to 10th centuries; culture and learning in this period | 12 |
+| Social Science 16: Turning Tides: 11th and 12th Centuries | invasions and new powers in the 11th and 12th centuries; culture, reformers and links with Southeast Asia | 12 |
+| Social Science 17: India, a Home to Many | communities who made India home; migration and unity in diversity | 12 |
+| Social Science 18: The State, the Government, and You | the state, the government and its organs; three tiers of government and citizens | 12 |
+| Social Science 19: Infrastructure: Engine of India's Development | transport infrastructure; communication and shared responsibility | 12 |
+| Social Science 20: Banks and the Magic of Finance | banks and their functions; compounding, payments and staying safe | 12 |
+| English 1: Learning Together | The Day the River Spoke (Kamala Nair); Try Again (poem); Three Days to See (Helen Keller) | 18 |
+| English 2: Wit and Humour | Animals, Birds, and Dr. Dolittle (Hugh Lofting); A Funny Man (poem); Say the Right Thing (play) | 18 |
+| English 3: Dreams and Discoveries | My Brother's Great Invention (Anita Rau Badami); Paper Boats (Rabindranath Tagore); North, South, East, West | 18 |
+| English 4: Travel and Adventure | The Tunnel (Ruskin Bond); Travel (Edna St. Vincent Millay); Conquering the Summit (Arunima Sinha) | 18 |
+| English 5: Bravehearts | A Homage to Our Brave Soldiers; My Dear Soldiers (poem); Rani Abbakka (graphic story) | 18 |
+| Hindi 1: माँ, कह एक कहानी (कविता) | माँ, कह एक कहानी (मैथिलीशरण गुप्त) | 6 |
+| Hindi 2: तीन बुद्धिमान (लोककथा) | तीन बुद्धिमान (लोककथा) | 6 |
+| Hindi 3: फूल और काँटा (कविता) | फूल और काँटा (अयोध्या सिंह उपाध्याय 'हरिऔध') | 6 |
+| Hindi 4: पानी रे पानी (निबंध) | पानी रे पानी (अनुपम मिश्र) | 6 |
+| Hindi 5: नहीं होना बीमार (कहानी) | नहीं होना बीमार (स्वयं प्रकाश) | 6 |
+| Hindi 6: गिरिधर कविराय की कुंडलियाँ | गिरिधर कविराय की कुंडलियाँ (गिरिधर कविराय) | 6 |
+| Hindi 7: वर्षा-बहार (कविता) | वर्षा-बहार (मुकुटधर पांडेय) | 6 |
+| Hindi 8: बिरजू महाराज से साक्षात्कार | बिरजू महाराज से साक्षात्कार (पंडित बिरजू महाराज) | 6 |
+| Hindi 9: चिड़िया (कविता) | चिड़िया (आरसी प्रसाद सिंह) | 6 |
+| Hindi 10: मीरा के पद | मीरा के पद (मीराबाई) | 6 |
+
+
 ## CBSE Class 8 (NCERT, 2025 books)
 
 Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8-eng` and `cbse8-hin`. NCERT replaced every Class 8 book in 2025 (NCF 2023), and these packs follow the new books: Ganita Prakash (Maths, in two parts), Curiosity (Science), Exploring Society: India and Beyond (Social Science, two parts), Poorvi (English) and Malhar (Hindi). Maths numbers its chapters across both parts: Part 1 is chapters 1–7 and Part 2 is chapters 8–14. Chapter names and the topics inside each chapter were checked against published contents lists of the 2025 books (not a printed copy); the questions and explanations are Claude's own. The English and Hindi story details come from memory and published study notes, not the printed books, and the Hindi wording has not yet been read by a Hindi teacher. Class 8 is here so that a Class 9 student who is stuck can go back and fill a gap.
@@ -329,8 +399,8 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 1,041 of the 4,242 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 3,201 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 1,186 of the 4,956 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 3,770 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
