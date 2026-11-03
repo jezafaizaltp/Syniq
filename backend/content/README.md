@@ -457,12 +457,90 @@ Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `c
 | Hindi 14 (Kritika): साना-साना हाथ जोड़ि | साना-साना हाथ जोड़ि | 6 |
 | Hindi 15 (Kritika): मैं क्यों लिखता हूँ | मैं क्यों लिखता हूँ | 6 |
 
+## CBSE Class 11 (NCERT, rationalised syllabus)
+
+Under `cbse11/`, with subject codes `cbse11-math`, `cbse11-phy`, `cbse11-chem`, `cbse11-bio` and `cbse11-eng` (science stream plus core English). All five subjects are written. English covers the ten Hornbill chapters (prose and poems, chapters 1–10) and the five Snapshots chapters (11–15); its story and poem details were written from memory of the NCERT texts, so names and details need checking against the books. Physics follows the two parts of the NCERT book as one list: Part 1 is chapters 1–7 and Part 2 is chapters 8–14. Chapter names follow the rationalised NCERT Class 11 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Most numerical answers are worked out again by computer. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Sets | sets, subsets and intervals; operations on sets and Venn diagrams | 12 |
+| Maths 2: Relations and Functions | Cartesian products and relations; functions and their graphs | 12 |
+| Maths 3: Trigonometric Functions | radian measure and trigonometric functions; compound angles and trigonometric identities | 12 |
+| Maths 4: Complex Numbers and Quadratic Equations | complex numbers and their algebra; quadratic equations with complex roots | 12 |
+| Maths 5: Linear Inequalities | solving inequalities in one variable; inequalities in real problems | 12 |
+| Maths 6: Permutations and Combinations | counting principle and permutations; combinations | 12 |
+| Maths 7: Binomial Theorem | binomial expansion and Pascal's triangle; general and middle terms | 12 |
+| Maths 8: Sequences and Series | sequences and arithmetic progressions; geometric progressions | 12 |
+| Maths 9: Straight Lines | slope of a line; equations of a line and distance | 12 |
+| Maths 10: Conic Sections | circles and parabolas; ellipses and hyperbolas | 12 |
+| Maths 11: Introduction to Three Dimensional Geometry | coordinates in space; distance between two points in space | 12 |
+| Maths 12: Limits and Derivatives | limits; derivatives | 12 |
+| Maths 13: Statistics | measures of dispersion: range and mean deviation; variance and standard deviation | 12 |
+| Maths 14: Probability | random experiments, sample spaces and events; probability of events | 12 |
+| Physics 1: Units and Measurements | SI units and significant figures; dimensions and dimensional analysis | 12 |
+| Physics 2: Motion in a Straight Line | position, velocity and acceleration; equations of uniformly accelerated motion | 12 |
+| Physics 3: Motion in a Plane | vectors and their addition; projectile and circular motion | 12 |
+| Physics 4: Laws of Motion | Newton's three laws; friction and circular motion | 12 |
+| Physics 5: Work, Energy and Power | work and the work-energy theorem; potential energy, conservation and power | 12 |
+| Physics 6: System of Particles and Rotational Motion | centre of mass and torque; moment of inertia and angular momentum | 12 |
+| Physics 7: Gravitation | Newton's law of gravitation and g; potential energy, escape speed and satellites | 12 |
+| Physics 8: Mechanical Properties of Solids | stress, strain and Hooke's law; elastic moduli | 12 |
+| Physics 9: Mechanical Properties of Fluids | pressure and Pascal's law; fluid flow, viscosity and surface tension | 12 |
+| Physics 10: Thermal Properties of Matter | temperature and thermal expansion; specific heat, latent heat and heat transfer | 12 |
+| Physics 11: Thermodynamics | zeroth and first laws; second law and heat engines | 12 |
+| Physics 12: Kinetic Theory | ideal gas and pressure of a gas; kinetic energy, equipartition and mean free path | 12 |
+| Physics 13: Oscillations | simple harmonic motion; springs, pendulums and energy | 12 |
+| Physics 14: Waves | travelling waves; superposition, standing waves and beats | 12 |
+| Chemistry 1: Some Basic Concepts of Chemistry | laws of combination and the mole; formulae, concentration and stoichiometry | 12 |
+| Chemistry 2: Structure of Atom | particles, atomic models and Bohr's model; quantum numbers and electronic configuration | 12 |
+| Chemistry 3: Classification of Elements and Periodicity in Properties | the modern periodic table; periodic trends | 12 |
+| Chemistry 4: Chemical Bonding and Molecular Structure | ionic and covalent bonds, VSEPR; hybridisation, molecular orbitals and hydrogen bonds | 12 |
+| Chemistry 5: Thermodynamics | first law and enthalpy; entropy and Gibbs energy | 12 |
+| Chemistry 6: Equilibrium | chemical equilibrium and Le Chatelier; ionic equilibrium, acids, bases and pH | 12 |
+| Chemistry 7: Redox Reactions | oxidation, reduction and oxidation numbers; balancing redox reactions and electrode processes | 12 |
+| Chemistry 8: Organic Chemistry: Some Basic Principles and Techniques | structure, classification and IUPAC naming; reaction ideas and purification methods | 12 |
+| Chemistry 9: Hydrocarbons | alkanes, alkenes and alkynes; aromatic hydrocarbons | 12 |
+| Biology 1: The Living World | what is living? Diversity and naming; taxonomic categories and aids | 12 |
+| Biology 2: Biological Classification | five kingdoms, Monera and Protista; fungi, viruses and lichens | 12 |
+| Biology 3: Plant Kingdom | algae and bryophytes; pteridophytes, gymnosperms and angiosperms | 12 |
+| Biology 4: Animal Kingdom | basis of classification and non-chordates; chordates and vertebrate classes | 12 |
+| Biology 5: Morphology of Flowering Plants | root, stem and leaf; flower, fruit, seed and families | 12 |
+| Biology 6: Anatomy of Flowering Plants | tissues and tissue systems; dicot and monocot anatomy | 12 |
+| Biology 7: Structural Organisation in Animals | animal tissues; frog: morphology and organ systems | 12 |
+| Biology 8: Cell: The Unit of Life | cell theory and prokaryotic cells; eukaryotic cell organelles | 12 |
+| Biology 9: Biomolecules | carbohydrates, proteins, lipids and nucleic acids; enzymes | 12 |
+| Biology 10: Cell Cycle and Cell Division | cell cycle and mitosis; meiosis | 12 |
+| Biology 11: Photosynthesis in Higher Plants | pigments and the light reaction; Calvin cycle, C₄ pathway and photorespiration | 12 |
+| Biology 12: Respiration in Plants | glycolysis and fermentation; Krebs cycle, electron transport and RQ | 12 |
+| Biology 13: Plant Growth and Development | growth, differentiation and development; plant growth regulators | 12 |
+| Biology 14: Breathing and Exchange of Gases | respiratory organs and breathing; gas transport and disorders | 12 |
+| Biology 15: Body Fluids and Circulation | blood and lymph; heart, cardiac cycle and circulation | 12 |
+| Biology 16: Excretory Products and their Elimination | nitrogen waste and the human kidney; urine formation and regulation | 12 |
+| Biology 17: Locomotion and Movement | types of movement and muscle contraction; skeleton, joints and disorders | 12 |
+| Biology 18: Neural Control and Coordination | neurons and the nerve impulse; the brain and reflex action | 12 |
+| Biology 19: Chemical Coordination and Integration | endocrine glands and hormones; how hormones act | 12 |
+| English 1 (Hornbill): The Portrait of a Lady (Khushwant Singh) | The Portrait of a Lady (Khushwant Singh) | 6 |
+| English 2 (Hornbill): A Photograph (Shirley Toulson) | A Photograph (Shirley Toulson) | 6 |
+| English 3 (Hornbill): We're Not Afraid to Die... if We Can All Be Together (Gordon Cook and Alan East) | We're Not Afraid to Die... if We Can All Be Together (Gordon Cook and Alan East) | 6 |
+| English 4 (Hornbill): Discovering Tut: the Saga Continues (A.R. Williams) | Discovering Tut: the Saga Continues (A.R. Williams) | 6 |
+| English 5 (Hornbill): The Laburnum Top (Ted Hughes) | The Laburnum Top (Ted Hughes) | 6 |
+| English 6 (Hornbill): The Voice of the Rain (Walt Whitman) | The Voice of the Rain (Walt Whitman) | 6 |
+| English 7 (Hornbill): Childhood (Markus Natten) | Childhood (Markus Natten) | 6 |
+| English 8 (Hornbill): The Adventure (Jayant Narlikar) | The Adventure (Jayant Narlikar) | 6 |
+| English 9 (Hornbill): Silk Road (Nick Middleton) | Silk Road (Nick Middleton) | 6 |
+| English 10 (Hornbill): Father to Son (Elizabeth Jennings) | Father to Son (Elizabeth Jennings) | 6 |
+| English 11 (Snapshots): The Summer of the Beautiful White Horse (William Saroyan) | The Summer of the Beautiful White Horse (William Saroyan) | 6 |
+| English 12 (Snapshots): The Address (Marga Minco) | The Address (Marga Minco) | 6 |
+| English 13 (Snapshots): Mother's Day (J.B. Priestley) | Mother's Day (J.B. Priestley) | 6 |
+| English 14 (Snapshots): Birth (A.J. Cronin) | Birth (A.J. Cronin) | 6 |
+| English 15 (Snapshots): The Tale of Melon City (Vikram Seth) | The Tale of Melon City (Vikram Seth) | 6 |
+
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 1,277 of the 5,562 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 4,285 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 1,553 of the 6,324 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 4,771 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 

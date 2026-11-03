@@ -1,0 +1,157 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 6. Format: content/README.md.
+subject: cbse11-math
+chapter: 6
+title: Permutations and Combinations
+tips:
+  c11_perm_comb: Order matters → permutation (nPr). Order doesn't matter (choosing a group) → combination (nCr).
+  c11_fact: n! = n × (n − 1) × ... × 1, and 0! = 1.
+concepts:
+- code: cbse11m.pc.perm
+  title: Counting principle and permutations
+  notes: |
+    Fundamental principle of counting: if one event can happen in m ways and another in n ways, both happen in m × n
+    ways. n! = n(n − 1)...1, 0! = 1. Permutations (arrangements, order matters) of n different things taken r at a time:
+    nPr = n!/(n − r)!. All n things: n!. With repeats allowed: nʳ. With identical objects: n!/(p! q! ...)
+    (e.g. letters of MISSISSIPPI: 11!/(4! 4! 2!)).
+  explanations:
+    text: 'If you can choose a shirt in 3 ways and trousers in 4 ways, there are 3 × 4 = 12 outfits. Arranging things in order is a permutation: 5 people can stand in a line in 5! = 120 ways. If some items are identical, divide by the arrangements of the repeats.'
+    visual: 'Draw r blanks in a row. Write how many choices fit in each: 5, then 4, then 3 for arranging 3 of 5 people. Multiply: 60.'
+    step_by_step: 'Step 1: Decide if order matters (yes for permutations). Step 2: Count choices for each position. Step 3: Multiply. Step 4: Divide by factorials of repeated items if any.'
+    real_world: A 4-digit PIN with digits 0–9 repeating allowed has 10⁴ = 10,000 possibilities.
+  picture:
+    kind: flow
+    steps:
+    - 'Choose 1st place: 5 ways'
+    - '2nd place: 4 ways'
+    - '3rd place: 3 ways'
+    - 'Multiply: 5 × 4 × 3 = 60'
+    alt: 'Arranging 3 of 5 people: 5 choices, then 4, then 3, so 60 arrangements.'
+  items:
+  - prompt: Find 5!.
+    answer: '120'
+    check: factorial(5)
+    difficulty: 1
+    hints:
+    - 5 × 4 × 3 × 2 × 1.
+    - Multiply.
+    solution: 5! = 120.
+    mistakes:
+      '25': c11_fact
+  - prompt: Find ⁷P₃.
+    answer: '210'
+    check: factorial(7)/factorial(4)
+    difficulty: 1
+    hints:
+    - 7!/4!.
+    - 7 × 6 × 5.
+    solution: 7 × 6 × 5 = 210.
+  - prompt: How many 3-digit numbers can be made from 1, 2, 3, 4, 5 without repeating digits?
+    answer: '60'
+    check: 5*4*3
+    difficulty: 1
+    hints:
+    - 5 × 4 × 3.
+    - Order matters.
+    solution: 5 × 4 × 3 = 60.
+  - prompt: How many 4-digit PINs are possible using digits 0–9 with repetition?
+    answer: '10000'
+    check: 10**4
+    difficulty: 1
+    hints:
+    - 10 choices each.
+    - 10⁴.
+    solution: 10⁴ = 10,000.
+  - prompt: How many different arrangements of the letters of the word BANANA are there?
+    answer: '60'
+    check: factorial(6)/(factorial(3)*factorial(2))
+    difficulty: 2
+    hints:
+    - '6 letters: A×3, N×2.'
+    - 6!/(3! 2!).
+    solution: 720/(6 × 2) = 60.
+  - prompt: In how many ways can 6 people sit in a row of 6 chairs?
+    answer: '720'
+    check: factorial(6)
+    difficulty: 1
+    hints:
+    - 6!.
+    - All arranged.
+    solution: 6! = 720.
+- code: cbse11m.pc.comb
+  title: Combinations
+  after:
+  - cbse11m.pc.perm
+  notes: |
+    Combinations (selections, order doesn't matter): nCr = n!/(r!(n − r)!) = nPr/r!. nCr = nC(n − r); nC0 = nCn = 1;
+    nCr + nC(r − 1) = (n + 1)Cr. Applications: choosing committees, teams, handshakes (nC2), diagonals of an n-gon
+    (nC2 − n), lines through points. Mixed problems: choose then arrange (multiply nCr by r!).
+  explanations:
+    text: 'When order doesn''t matter, like choosing a team, use combinations: nCr = n!/(r!(n − r)!). Choosing 3 from 5 gives 10 teams, fewer than the 60 ordered arrangements, because each team was counted 3! = 6 times.'
+    visual: 'List teams of 2 from A, B, C, D: AB, AC, AD, BC, BD, CD. Six teams. AB and BA are the same team: that''s why we divide by 2!.'
+    step_by_step: 'Step 1: Check order doesn''t matter. Step 2: Find n (total) and r (chosen). Step 3: Compute n!/(r!(n − r)!). Step 4: For ''at least'' problems, add cases.'
+    real_world: If 10 people each shake hands once with everyone else, there are ¹⁰C₂ = 45 handshakes.
+  picture:
+    kind: compare
+    columns:
+    - title: Permutation
+      points:
+      - order matters
+      - arranging
+      - nPr = n!/(n − r)!
+    - title: Combination
+      points:
+      - order doesn't matter
+      - choosing
+      - nCr = n!/(r!(n − r)!)
+    alt: Permutations count arrangements where order matters; combinations count selections where it doesn't.
+  items:
+  - prompt: Find ⁵C₂.
+    answer: '10'
+    check: binomial(5,2)
+    difficulty: 1
+    hints:
+    - 5!/(2! 3!).
+    - (5 × 4)/2.
+    solution: ⁵C₂ = 10.
+  - prompt: 10 people shake hands once with each other. How many handshakes?
+    answer: '45'
+    check: binomial(10,2)
+    difficulty: 1
+    hints:
+    - Choose 2 of 10.
+    - ¹⁰C₂.
+    solution: ¹⁰C₂ = 45.
+  - prompt: A committee of 3 is chosen from 8 people. How many committees are possible?
+    answer: '56'
+    check: binomial(8,3)
+    difficulty: 1
+    hints:
+    - ⁸C₃.
+    - (8 × 7 × 6)/6.
+    solution: ⁸C₃ = 56.
+    mistakes:
+      '336': c11_perm_comb
+  - prompt: How many diagonals does a hexagon have?
+    answer: '9'
+    check: binomial(6,2) - 6
+    difficulty: 2
+    hints:
+    - 'Lines joining 2 of 6 vertices: ⁶C₂.'
+    - Subtract the 6 sides.
+    solution: 15 − 6 = 9.
+  - prompt: If ⁿC₈ = ⁿC₂, find n.
+    answer: '10'
+    check: 8 + 2
+    difficulty: 2
+    hints:
+    - nCr = nC(n − r).
+    - 8 + 2.
+    solution: n = 8 + 2 = 10.
+  - prompt: A team of 2 boys and 2 girls is chosen from 5 boys and 4 girls. How many teams?
+    answer: '60'
+    check: binomial(5,2)*binomial(4,2)
+    difficulty: 2
+    hints:
+    - ⁵C₂ × ⁴C₂.
+    - 10 × 6.
+    solution: 10 × 6 = 60.

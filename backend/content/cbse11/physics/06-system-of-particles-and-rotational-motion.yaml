@@ -1,0 +1,192 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 6. Format: content/README.md.
+subject: cbse11-phy
+chapter: 6
+title: System of Particles and Rotational Motion
+tips:
+  c11p_torque: Torque = force × perpendicular distance from the axis. Push far from the hinge for more turning effect.
+  c11p_angular_momentum: 'With no external torque, Iω stays constant: if I goes down, ω goes up.'
+concepts:
+- code: cbse11p.rot.com
+  title: Centre of mass and torque
+  notes: |
+    Centre of mass: x_cm = Σmᵢxᵢ/Σmᵢ; for symmetric uniform bodies at the geometric centre. It moves as if all external
+    forces acted on the total mass there. Torque τ = r × F, magnitude rF sin θ (N m) = force × perpendicular distance.
+    Equilibrium of a rigid body: net force = 0 and net torque = 0 (principle of moments: clockwise = anticlockwise).
+    Centre of gravity coincides with centre of mass in uniform g.
+  explanations:
+    text: 'The centre of mass is the average position of the mass; a body balances there. Torque is the turning effect of a force: force × perpendicular distance from the pivot. For a body to balance, the clockwise and anticlockwise torques must be equal.'
+    visual: 'A see-saw: a 30 kg child sits 2 m from the pivot. Where should a 40 kg child sit? 30 × 2 = 40 × d, so d = 1.5 m.'
+    step_by_step: 'Step 1: Choose the pivot. Step 2: For each force, find its perpendicular distance. Step 3: Torque = F × d. Step 4: Set clockwise = anticlockwise for balance.'
+    real_world: Door handles are placed far from the hinges so a small push gives a big torque.
+  picture:
+    kind: geometry
+    points:
+      A:
+      - 1
+      - 5
+      P:
+      - 5
+      - 4
+      B:
+      - 8
+      - 5
+      _L:
+      - 1
+      - 4
+      _R:
+      - 8
+      - 4
+    segments:
+    - - A
+      - B
+    - - A
+      - P
+      - 2 m (30 kg)
+    - - P
+      - B
+      - 1.5 m (40 kg)
+    alt: 'A see-saw balanced on a pivot P: 30 kg at 2 m on one side and 40 kg at 1.5 m on the other.'
+  items:
+  - prompt: Masses 2 kg at x = 0 and 3 kg at x = 5 m. Find the x-coordinate of the centre of mass (in m).
+    answer: '3'
+    check: Rational(2*0+3*5,5)
+    difficulty: 1
+    hints:
+    - Σmx/Σm.
+    - 15/5.
+    solution: 3 m.
+  - prompt: A 30 kg child sits 2 m from a see-saw pivot. How far on the other side must a 40 kg child sit to balance (in m)?
+    answer: 3/2
+    check: Rational(60,40)
+    difficulty: 2
+    hints:
+    - 30 × 2 = 40 × d.
+    - 60/40.
+    solution: 1.5 m.
+  - prompt: A 20 N force acts at right angles to a spanner 0.25 m long. Find the torque (in N m).
+    answer: '5'
+    check: 20*Rational(1,4)
+    difficulty: 1
+    hints:
+    - τ = Fd.
+    - 20 × 0.25.
+    solution: 5 N m.
+    mistakes:
+      '80': c11p_torque
+  - prompt: Where is the centre of mass of a uniform ring?
+    options:
+    - At its centre, where there is no mass
+    - On the ring
+    - At the top
+    - Anywhere
+    answer: At its centre, where there is no mass
+    difficulty: 2
+    hints:
+    - Symmetry.
+    - Can be outside the material.
+    solution: At the geometric centre, even though no material is there.
+  - prompt: Why is a door handle placed far from the hinges?
+    options:
+    - Larger distance gives more torque
+    - To look nice
+    - To reduce friction
+    - To increase mass
+    answer: Larger distance gives more torque
+    difficulty: 1
+    hints:
+    - τ = F × d.
+    - Bigger d.
+    solution: A larger distance gives more turning effect for the same force.
+  - prompt: 'For a rigid body to be in equilibrium:'
+    options:
+    - net force and net torque are both zero
+    - only net force is zero
+    - only net torque is zero
+    - it must be at rest on the ground
+    answer: net force and net torque are both zero
+    difficulty: 2
+    hints:
+    - No moving, no turning.
+    - Two conditions.
+    solution: Both net force and net torque must be zero.
+- code: cbse11p.rot.dynamics
+  title: Moment of inertia and angular momentum
+  after:
+  - cbse11p.rot.com
+  notes: |
+    Rotational analogues: angular displacement θ, angular velocity ω, angular acceleration α. v = ωr. Moment of inertia
+    I = Σmr² (rotational 'mass'): ring about axis MR², disc ½MR², rod about centre ML²/12, solid sphere ⅖MR².
+    Rotational KE = ½Iω². τ = Iα. Angular momentum L = Iω; conserved if no external torque (ice-skater pulls arms in
+    and spins faster). Rolling KE = ½mv² + ½Iω².
+  explanations:
+    text: 'Moment of inertia is to rotation what mass is to straight-line motion: how hard it is to change the spin. It depends on how far the mass is from the axis: I = Σmr². Angular momentum L = Iω stays constant without outside torque, so a skater pulling in her arms (smaller I) spins faster.'
+    visual: 'A skater spins with arms out (large I, slow ω). She pulls her arms in: I halves, so ω doubles, because Iω must stay the same.'
+    step_by_step: 'Step 1: Find I for the shape (use the standard formula). Step 2: For spin speed changes with no torque, set I₁ω₁ = I₂ω₂. Step 3: Rotational KE = ½Iω². Step 4: τ = Iα for angular acceleration.'
+    real_world: Divers tuck in tightly to spin faster, then stretch out to slow down before entering the water.
+  picture:
+    kind: compare
+    columns:
+    - title: Straight line
+      points:
+      - mass m
+      - velocity v
+      - force F = ma
+      - momentum p = mv
+    - title: Rotation
+      points:
+      - moment of inertia I
+      - angular velocity ω
+      - torque τ = Iα
+      - angular momentum L = Iω
+    alt: 'Rotational quantities mirror straight-line ones: I for m, ω for v, τ = Iα for F = ma, and L = Iω for p = mv.'
+  items:
+  - prompt: A ring of mass 2 kg and radius 0.5 m spins about its axis. Find its moment of inertia (in kg m²).
+    answer: 1/2
+    check: 2*Rational(1,4)
+    difficulty: 1
+    hints:
+    - I = MR².
+    - 2 × 0.25.
+    solution: 0.5 kg m².
+  - prompt: A wheel with I = 2 kg m² spins at ω = 3 rad/s. Find its rotational kinetic energy (in J).
+    answer: '9'
+    check: Rational(1,2)*2*9
+    difficulty: 1
+    hints:
+    - ½Iω².
+    - ½ × 2 × 9.
+    solution: 9 J.
+  - prompt: A skater spins at 2 rev/s. She pulls in her arms so her moment of inertia becomes half. Find her new spin rate (in rev/s).
+    answer: '4'
+    check: 2*2
+    difficulty: 2
+    hints:
+    - I₁ω₁ = I₂ω₂.
+    - ω doubles.
+    solution: 4 rev/s.
+    mistakes:
+      '1': c11p_angular_momentum
+  - prompt: A torque of 10 N m acts on a wheel with I = 5 kg m². Find the angular acceleration (in rad/s²).
+    answer: '2'
+    check: 10/5
+    difficulty: 1
+    hints:
+    - τ = Iα.
+    - 10/5.
+    solution: 2 rad/s².
+  - prompt: 'A disc of mass 4 kg and radius 0.5 m: find its moment of inertia about its axis (in kg m²).'
+    answer: 1/2
+    check: Rational(1,2)*4*Rational(1,4)
+    difficulty: 2
+    hints:
+    - I = ½MR².
+    - ½ × 4 × 0.25.
+    solution: 0.5 kg m².
+  - prompt: A point on a wheel of radius 0.4 m has speed 2 m/s. Find the angular velocity (in rad/s).
+    answer: '5'
+    check: 2/Rational(4,10)
+    difficulty: 1
+    hints:
+    - v = ωr.
+    - 2/0.4.
+    solution: 5 rad/s.

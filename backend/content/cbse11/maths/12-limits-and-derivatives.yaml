@@ -1,0 +1,169 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 12. Format: content/README.md.
+subject: cbse11-math
+chapter: 12
+title: Limits and Derivatives
+tips:
+  c11_power_rule: 'd/dx(xⁿ) = nxⁿ⁻¹: bring the power down in front, then reduce the power by 1.'
+  c11_zero_zero: If substituting gives 0/0, factorise and cancel first, or use a standard limit like lim (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹.
+concepts:
+- code: cbse11m.calc.limits
+  title: Limits
+  notes: |
+    lim(x→a) f(x) = L means f(x) gets as close as we like to L as x approaches a (from both sides). Left- and right-hand
+    limits must be equal. Algebra of limits: sum, product, quotient. Methods: substitution; factorise and cancel for
+    0/0; standard limits lim(x→a) (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹; lim(x→0) sin x/x = 1; lim(x→0) (1 − cos x)/x = 0.
+  explanations:
+    text: 'A limit asks what value f(x) approaches as x gets closer and closer to a number. Often you just substitute. If you get 0/0, simplify first: lim(x→2) (x² − 4)/(x − 2) = lim (x + 2) = 4. A key result: sin x / x → 1 as x → 0 (x in radians).'
+    visual: 'Make a table for (x² − 4)/(x − 2) with x = 1.9, 1.99, 2.01, 2.1: values 3.9, 3.99, 4.01, 4.1. They close in on 4, even though x = 2 itself gives 0/0.'
+    step_by_step: 'Step 1: Try substituting. Step 2: If you get a number, that''s the limit. Step 3: If 0/0, factorise and cancel, or use a standard limit. Step 4: Substitute again.'
+    real_world: 'A car''s speedometer shows a limit: the distance covered in a tiny time divided by that time, as the time shrinks to zero.'
+  picture:
+    kind: number_line
+    from: 1.8
+    to: 2.2
+    step: 0.05
+    points:
+    - at: 1.9
+      label: '3.9'
+    - at: 1.95
+      label: '3.95'
+    - at: 2
+      label: → 4
+    - at: 2.05
+      label: '4.05'
+    - at: 2.1
+      label: '4.1'
+    alt: As x approaches 2 from both sides, (x² − 4)/(x − 2) approaches 4.
+  items:
+  - prompt: Find lim(x→3) (x² + 1).
+    answer: '10'
+    check: limit(x**2+1, x, 3)
+    difficulty: 1
+    hints:
+    - Substitute.
+    - 9 + 1.
+    solution: '10.'
+  - prompt: Find lim(x→2) (x² − 4)/(x − 2).
+    answer: '4'
+    check: limit((x**2-4)/(x-2), x, 2)
+    difficulty: 1
+    hints:
+    - 'Factorise: (x − 2)(x + 2).'
+    - Cancel, then x + 2.
+    solution: '4.'
+    mistakes:
+      '0': c11_zero_zero
+  - prompt: Find lim(x→1) (x⁵ − 1)/(x − 1).
+    answer: '5'
+    check: limit((x**5-1)/(x-1), x, 1)
+    difficulty: 2
+    hints:
+    - Standard limit naⁿ⁻¹.
+    - 5 × 1⁴.
+    solution: '5.'
+  - prompt: Find lim(x→0) sin(3x)/x.
+    answer: '3'
+    check: limit(sin(3*x)/x, x, 0)
+    difficulty: 2
+    hints:
+    - Write as 3 · sin 3x/(3x).
+    - sin u/u → 1.
+    solution: '3.'
+  - prompt: Find lim(x→0) sin x / x.
+    answer: '1'
+    check: limit(sin(x)/x, x, 0)
+    difficulty: 1
+    hints:
+    - Standard limit.
+    - x in radians.
+    solution: '1.'
+  - prompt: Find lim(x→3) (x² − 9)/(x − 3).
+    answer: '6'
+    check: limit((x**2-9)/(x-3), x, 3)
+    difficulty: 1
+    hints:
+    - (x − 3)(x + 3).
+    - x + 3 at 3.
+    solution: '6.'
+- code: cbse11m.calc.derivatives
+  title: Derivatives
+  after:
+  - cbse11m.calc.limits
+  notes: |
+    Derivative of f at a: f′(a) = lim(h→0) [f(a + h) − f(a)]/h: the slope of the tangent, the instantaneous rate of
+    change. Rules: d/dx(xⁿ) = nxⁿ⁻¹; constant → 0; (cf)′ = cf′; (u ± v)′ = u′ ± v′; product (uv)′ = u′v + uv′;
+    quotient (u/v)′ = (u′v − uv′)/v². d/dx sin x = cos x; d/dx cos x = −sin x. Example: d/dx(3x² + 5x) = 6x + 5.
+  explanations:
+    text: 'The derivative measures how fast something changes: the slope of a curve at a point. For powers, bring the power down and reduce it by one: the derivative of x³ is 3x². Sums are differentiated term by term, and there are rules for products and quotients.'
+    visual: On the curve y = x², draw a chord from (1, 1) to (1 + h, (1 + h)²). As h shrinks, the chord turns into the tangent at (1, 1), whose slope is 2.
+    step_by_step: 'Step 1: Split the function into terms. Step 2: Apply d/dx(xⁿ) = nxⁿ⁻¹ to each. Step 3: Constants vanish. Step 4: Use the product or quotient rule when terms multiply or divide. Step 5: Substitute x for a value.'
+    real_world: 'If a stone''s height is h(t) = 20t − 5t², its speed at time t is h′(t) = 20 − 10t: at t = 1 second it is rising at 10 m/s.'
+  picture:
+    kind: compare
+    columns:
+    - title: Function
+      points:
+      - xⁿ
+      - sin x
+      - cos x
+    - title: Derivative
+      points:
+      - nxⁿ⁻¹
+      - cos x
+      - −sin x
+    alt: The derivative of xⁿ is nxⁿ⁻¹, of sin x is cos x, and of cos x is −sin x.
+  items:
+  - prompt: Find the derivative of x³ at x = 2.
+    answer: '12'
+    check: diff(x**3, x).subs(x, 2)
+    difficulty: 1
+    hints:
+    - d/dx x³ = 3x².
+    - 3 × 4.
+    solution: '12.'
+    mistakes:
+      '8': c11_power_rule
+  - prompt: f(x) = 3x² + 5x − 7. Find f′(1).
+    answer: '11'
+    check: diff(3*x**2+5*x-7, x).subs(x, 1)
+    difficulty: 1
+    hints:
+    - f′(x) = 6x + 5.
+    - 6 + 5.
+    solution: '11.'
+  - prompt: Find the derivative of x · sin x at x = 0.
+    answer: '0'
+    check: diff(x*sin(x), x).subs(x, 0)
+    difficulty: 2
+    hints:
+    - 'Product rule: sin x + x cos x.'
+    - 'At 0: 0 + 0.'
+    solution: '0.'
+  - prompt: Find d/dx (x²/(x + 1)) at x = 1.
+    answer: 3/4
+    check: diff(x**2/(x+1), x).subs(x, 1)
+    difficulty: 2
+    hints:
+    - 'Quotient rule: (2x(x + 1) − x²)/(x + 1)².'
+    - (4 − 1)/4.
+    solution: 3/4.
+  - prompt: A stone's height is h(t) = 20t − 5t². Find its speed h′(1) (in m/s).
+    answer: '10'
+    check: 20 - 10*1
+    difficulty: 2
+    hints:
+    - h′(t) = 20 − 10t.
+    - t = 1.
+    solution: 10 m/s.
+  - prompt: What is the derivative of cos x?
+    options:
+    - −sin x
+    - sin x
+    - cos x
+    - −cos x
+    answer: −sin x
+    difficulty: 1
+    hints:
+    - Standard result.
+    - Negative sign.
+    solution: d/dx cos x = −sin x.

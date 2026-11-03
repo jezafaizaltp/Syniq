@@ -1,0 +1,177 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 13. Format: content/README.md.
+subject: cbse11-phy
+chapter: 13
+title: Oscillations
+tips:
+  c11p_shm: 'In SHM, a = −ω²x: acceleration is greatest at the extremes and zero at the mean position, while speed is the other way round.'
+  c11p_period: Pendulum T = 2π√(l/g) does not depend on the mass of the bob; spring T = 2π√(m/k) does.
+concepts:
+- code: cbse11p.osc.shm
+  title: Simple harmonic motion
+  notes: |
+    Periodic motion repeats after a period T; frequency ν = 1/T (Hz). Oscillation: to and fro about a mean position.
+    SHM: x(t) = A cos(ωt + φ); amplitude A, angular frequency ω = 2π/T, phase. Velocity v = −ωA sin(ωt + φ), maximum ωA at
+    the mean position; v = ω√(A² − x²). Acceleration a = −ω²x, maximum ω²A at the extremes. SHM is the projection of
+    uniform circular motion on a diameter. Restoring force F = −kx.
+  explanations:
+    text: Simple harmonic motion is a smooth back-and-forth swing where the pull back to the middle grows with the distance from it. The object moves fastest through the middle and stops for an instant at each end.
+    visual: 'Picture a ball going round a circle at steady speed and its shadow on a wall: the shadow moves back and forth in SHM.'
+    step_by_step: 'Step 1: Find ω = 2π/T. Step 2: Max speed = ωA, at the middle. Step 3: Max acceleration = ω²A, at the ends. Step 4: Speed at x is ω√(A² − x²).'
+    real_world: A child on a swing, a guitar string and the quartz crystal in a watch all show nearly simple harmonic motion.
+  picture:
+    kind: number_line
+    from: -5
+    to: 5
+    step: 1
+    points:
+    - at: -5
+      label: 'extreme: v = 0'
+    - at: 0
+      label: 'mean: v max'
+    - at: 5
+      label: 'extreme: v = 0'
+    alt: 'An oscillation from −5 to +5: speed is zero at the extremes and greatest at the mean position.'
+  items:
+  - prompt: A body makes 10 oscillations in 5 s. Find its frequency (in Hz).
+    answer: '2'
+    check: 10/5
+    difficulty: 1
+    hints:
+    - ν = number/time.
+    - 10/5.
+    solution: 2 Hz.
+  - prompt: A body in SHM has amplitude 0.1 m and ω = 20 rad/s. Find its maximum speed (in m/s).
+    answer: '2'
+    check: 20*Rational(1,10)
+    difficulty: 1
+    hints:
+    - v_max = ωA.
+    - 20 × 0.1.
+    solution: 2 m/s.
+  - prompt: For the same motion, find the maximum acceleration (in m/s²).
+    answer: '40'
+    check: 20**2*Rational(1,10)
+    difficulty: 2
+    hints:
+    - a_max = ω²A.
+    - 400 × 0.1.
+    solution: 40 m/s².
+  - prompt: A body in SHM has A = 5 cm and ω = 2 rad/s. Find its speed (in cm/s) when x = 3 cm.
+    answer: '8'
+    check: 2*sqrt(5**2-3**2)
+    difficulty: 2
+    hints:
+    - v = ω√(A² − x²).
+    - 2 × √16.
+    solution: 8 cm/s.
+  - prompt: 'In SHM, the acceleration is greatest:'
+    options:
+    - at the extreme positions
+    - at the mean position
+    - halfway out
+    - it is constant
+    answer: at the extreme positions
+    difficulty: 1
+    hints:
+    - a = −ω²x.
+    - Largest x.
+    solution: Acceleration is greatest at the extremes.
+    mistakes:
+      at the mean position: c11p_shm
+  - prompt: 'The restoring force in SHM is:'
+    options:
+    - proportional to displacement and opposite to it
+    - constant
+    - proportional to velocity
+    - zero at the extremes
+    answer: proportional to displacement and opposite to it
+    difficulty: 2
+    hints:
+    - F = −kx.
+    - Pulls back to the middle.
+    solution: F = −kx.
+- code: cbse11p.osc.systems
+  title: Springs, pendulums and energy
+  after:
+  - cbse11p.osc.shm
+  notes: |
+    Spring–mass system: F = −kx, ω = √(k/m), T = 2π√(m/k). Simple pendulum (small angles): T = 2π√(L/g), independent of
+    mass and amplitude. Energy in SHM: KE = ½k(A² − x²), PE = ½kx², total E = ½kA² constant; KE and PE exchange twice per
+    period. Damped oscillations: amplitude falls due to friction. Forced oscillations and resonance: amplitude is largest
+    when the driving frequency matches the natural frequency (soldiers break step on bridges).
+  explanations:
+    text: A mass on a spring and a swinging pendulum both move in SHM. The spring's period depends on the mass and stiffness; the pendulum's only on its length and g. Energy keeps swapping between kinetic and potential, but the total stays the same.
+    visual: 'Draw a pendulum at three points: at each end it''s all potential energy; at the bottom it''s all kinetic. Halfway, it''s a mix.'
+    step_by_step: 'Step 1: Spring: T = 2π√(m/k). Step 2: Pendulum: T = 2π√(L/g). Step 3: Total energy = ½kA². Step 4: Look at how T changes when you change m, k or L.'
+    real_world: Soldiers break step when marching across a bridge so their footsteps can't drive it at its natural frequency (resonance).
+  picture:
+    kind: flow
+    steps:
+    - 'End: all potential'
+    - 'Moving in: PE → KE'
+    - 'Middle: all kinetic'
+    - 'Moving out: KE → PE'
+    alt: Energy in an oscillation swaps between potential at the ends and kinetic in the middle.
+  items:
+  - prompt: A pendulum's length is made four times larger. By what factor does its period increase?
+    answer: '2'
+    check: sqrt(4)
+    difficulty: 1
+    hints:
+    - T ∝ √L.
+    - √4.
+    solution: It doubles.
+  - prompt: A spring with k = 100 N/m is stretched 0.2 m. Find its total oscillation energy (in J) if released.
+    answer: '2'
+    check: Rational(1,2)*100*Rational(2,10)**2
+    difficulty: 1
+    hints:
+    - E = ½kA².
+    - ½ × 100 × 0.04.
+    solution: 2 J.
+  - prompt: A mass on a spring has period 2 s. The mass is made four times larger. Find the new period (in s).
+    answer: '4'
+    check: 2*sqrt(4)
+    difficulty: 2
+    hints:
+    - T ∝ √m.
+    - 2 × √4.
+    solution: 4 s.
+  - prompt: 'The period of a simple pendulum does not depend on:'
+    options:
+    - the mass of the bob
+    - its length
+    - g
+    - the planet it's on
+    answer: the mass of the bob
+    difficulty: 1
+    hints:
+    - T = 2π√(L/g).
+    - No m.
+    solution: Mass doesn't appear in the formula.
+    mistakes:
+      its length: c11p_period
+  - prompt: 'When a driving frequency equals the natural frequency of a system, we get:'
+    options:
+    - resonance
+    - damping
+    - beats
+    - reflection
+    answer: resonance
+    difficulty: 1
+    hints:
+    - Amplitude becomes very large.
+    - Soldiers on bridges.
+    solution: Resonance.
+  - prompt: In a damped oscillation, which quantity decreases with time?
+    options:
+    - amplitude
+    - the natural period
+    - the mass
+    - the spring constant
+    answer: amplitude
+    difficulty: 2
+    hints:
+    - Energy is lost to friction.
+    - Smaller swings.
+    solution: The amplitude decays.

@@ -1,0 +1,174 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 14. Format: content/README.md.
+subject: cbse11-math
+chapter: 14
+title: Probability
+tips:
+  c11_complement: P(not A) = 1 − P(A). For 'at least one', it is often easiest to find 1 − P(none).
+  c11_addition: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). Subtract the overlap so it isn't counted twice.
+concepts:
+- code: cbse11m.prob.events
+  title: Random experiments, sample spaces and events
+  notes: |
+    Random experiment: outcomes not certain in advance. Sample space S: set of all outcomes (two coins: {HH, HT, TH, TT};
+    a die: 6 outcomes; two dice: 36). Event: subset of S. Simple, compound, sure (S), impossible (∅) events. Complement
+    A′ ('not A'), A ∪ B ('A or B'), A ∩ B ('A and B'). Mutually exclusive: A ∩ B = ∅. Exhaustive: union is S.
+  explanations:
+    text: A random experiment is one where you can't predict the result, like tossing a coin. The sample space lists every possible outcome; an event is any group of outcomes. Two events are mutually exclusive if they can't happen together, like getting 2 and 5 on one roll.
+    visual: 'Draw a 6 × 6 grid for two dice: rows for the first die, columns for the second. 36 cells = 36 outcomes. Shade the cells where the sum is 7: there are 6.'
+    step_by_step: 'Step 1: List the sample space. Step 2: Count its outcomes. Step 3: Mark the outcomes in the event. Step 4: Check whether events overlap.'
+    real_world: Weather apps and cricket win predictions all start from listing what could happen.
+  picture:
+    kind: area_grid
+    cols:
+    - size: 1
+      label: H
+    - size: 1
+      label: T
+    rows:
+    - size: 1
+      label: H
+    - size: 1
+      label: T
+    cells:
+    - - HH
+      - HT
+    - - TH
+      - TT
+    alt: 'Sample space for tossing two coins: HH, HT, TH and TT.'
+  items:
+  - prompt: How many outcomes are there when two coins are tossed?
+    answer: '4'
+    check: 2*2
+    difficulty: 1
+    hints:
+    - HH, HT, TH, TT.
+    - 2 × 2.
+    solution: '4.'
+  - prompt: How many outcomes are there when two dice are rolled?
+    answer: '36'
+    check: 6*6
+    difficulty: 1
+    hints:
+    - 6 × 6.
+    - Ordered pairs.
+    solution: '36.'
+  - prompt: Two dice are rolled. In how many outcomes is the sum 7?
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - (1,6), (2,5), ...
+    - Count them.
+    solution: 6 outcomes.
+  - prompt: 'Getting an even number and getting an odd number on one die roll are:'
+    options:
+    - mutually exclusive and exhaustive
+    - not mutually exclusive
+    - impossible events
+    - the same event
+    answer: mutually exclusive and exhaustive
+    difficulty: 2
+    hints:
+    - Can both happen? Do they cover everything?
+    - No overlap, all covered.
+    solution: They can't both happen, and together they cover all outcomes.
+  - prompt: Three coins are tossed. How many outcomes are in the sample space?
+    answer: '8'
+    check: 2**3
+    difficulty: 1
+    hints:
+    - 2³.
+    - Each coin H or T.
+    solution: '8.'
+  - prompt: 'An event that can never happen is called:'
+    options:
+    - an impossible event
+    - a sure event
+    - a simple event
+    - a compound event
+    answer: an impossible event
+    difficulty: 1
+    hints:
+    - Like rolling a 7 on a die.
+    - Empty set.
+    solution: It is an impossible event.
+- code: cbse11m.prob.axioms
+  title: Probability of events
+  after:
+  - cbse11m.prob.events
+  notes: |
+    Axiomatic approach: 0 ≤ P(A) ≤ 1, P(S) = 1, P(∅) = 0. Equally likely outcomes: P(A) = n(A)/n(S). P(A′) = 1 − P(A).
+    Addition rule: P(A ∪ B) = P(A) + P(B) − P(A ∩ B); for mutually exclusive events P(A ∪ B) = P(A) + P(B). Example: a card
+    from 52: P(king or heart) = 4/52 + 13/52 − 1/52 = 16/52 = 4/13.
+  explanations:
+    text: Probability is a number from 0 (impossible) to 1 (certain). With equally likely outcomes, P(A) = favourable outcomes ÷ total outcomes. P(not A) = 1 − P(A). For 'A or B', add the probabilities and subtract the overlap.
+    visual: In a pack of 52 cards, circle the 13 hearts and the 4 kings. One card (king of hearts) is in both circles, so 'king or heart' covers 13 + 4 − 1 = 16 cards.
+    step_by_step: 'Step 1: Count the sample space. Step 2: Count favourable outcomes. Step 3: Divide. Step 4: For ''or'', use the addition rule; for ''not'', use 1 − P.'
+    real_world: If the chance of rain is 0.3, the chance of no rain is 0.7.
+  picture:
+    kind: compare
+    columns:
+    - title: Rule
+      points:
+      - P(A′)
+      - P(A ∪ B)
+      - Mutually exclusive
+    - title: Formula
+      points:
+      - 1 − P(A)
+      - P(A) + P(B) − P(A ∩ B)
+      - P(A) + P(B)
+    alt: P(not A) = 1 − P(A); P(A or B) = P(A) + P(B) − P(A and B); for mutually exclusive events just add.
+  items:
+  - prompt: A die is rolled. Find the probability of getting a number greater than 4.
+    answer: 1/3
+    check: Rational(2,6)
+    difficulty: 1
+    hints:
+    - 5 and 6.
+    - 2/6.
+    solution: 2/6 = 1/3.
+  - prompt: Two dice are rolled. Find the probability that the sum is 7.
+    answer: 1/6
+    check: Rational(6,36)
+    difficulty: 1
+    hints:
+    - 6 favourable of 36.
+    - 6/36.
+    solution: 1/6.
+  - prompt: A card is drawn from a pack of 52. Find P(king or heart).
+    answer: 4/13
+    check: Rational(4+13-1,52)
+    difficulty: 2
+    hints:
+    - 4/52 + 13/52 − 1/52.
+    - 16/52.
+    solution: 4/13.
+    mistakes:
+      17/52: c11_addition
+  - prompt: P(A) = 0.35. Find P(not A).
+    answer: 13/20
+    check: 1 - Rational(35,100)
+    difficulty: 1
+    hints:
+    - 1 − 0.35.
+    - 0.65.
+    solution: 0.65 = 13/20.
+  - prompt: Three coins are tossed. Find the probability of at least one head.
+    answer: 7/8
+    check: 1 - Rational(1,8)
+    difficulty: 2
+    hints:
+    - 1 − P(no heads).
+    - 1 − 1/8.
+    solution: 7/8.
+    mistakes:
+      3/8: c11_complement
+  - prompt: P(A) = 0.5, P(B) = 0.4, P(A ∩ B) = 0.2. Find P(A ∪ B).
+    answer: 7/10
+    check: Rational(5,10)+Rational(4,10)-Rational(2,10)
+    difficulty: 2
+    hints:
+    - 0.5 + 0.4 − 0.2.
+    - 0.7.
+    solution: 0.7 = 7/10.

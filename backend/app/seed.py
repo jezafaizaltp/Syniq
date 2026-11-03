@@ -69,6 +69,12 @@ SUBJECTS = [
     ("cbse10-ss", "Social Science", "en", "cbse", 10),
     ("cbse10-eng", "English", "en", "cbse", 10),
     ("cbse10-hin", "Hindi", "hi", "cbse", 10),
+    # CBSE Class 11 (NCERT rationalised books): science stream and English.
+    ("cbse11-math", "Mathematics", "en", "cbse", 11),
+    ("cbse11-phy", "Physics", "en", "cbse", 11),
+    ("cbse11-chem", "Chemistry", "en", "cbse", 11),
+    ("cbse11-bio", "Biology", "en", "cbse", 11),
+    ("cbse11-eng", "English", "en", "cbse", 11),
 ]
 
 # concept code -> (title, order, prerequisites)

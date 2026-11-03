@@ -1,0 +1,174 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 9. Format: content/README.md.
+subject: cbse11-math
+chapter: 9
+title: Straight Lines
+tips:
+  c11_slope: Slope = rise ÷ run = (y₂ − y₁)/(x₂ − x₁). Keep the same order of points on top and bottom.
+  c11_perp: 'Perpendicular lines have slopes that multiply to −1: flip the fraction and change its sign.'
+concepts:
+- code: cbse11m.lines.slope
+  title: Slope of a line
+  notes: |
+    Slope (gradient) m = tan θ, θ = angle with the positive x-axis; through (x₁, y₁), (x₂, y₂): m = (y₂ − y₁)/(x₂ − x₁).
+    Horizontal line m = 0; vertical line slope undefined. Parallel lines: equal slopes. Perpendicular: m₁m₂ = −1. Three
+    points collinear if slopes AB = BC. Angle between lines: tan θ = |(m₂ − m₁)/(1 + m₁m₂)|.
+  explanations:
+    text: 'The slope of a line tells how steep it is: rise divided by run, (y₂ − y₁)/(x₂ − x₁). Parallel lines have equal slopes. Perpendicular lines have slopes that multiply to −1, like 2 and −1/2.'
+    visual: 'Plot A(1, 2) and B(4, 8). From A, walk right 3 and up 6 to reach B. Slope = 6/3 = 2: up 2 for every 1 across.'
+    step_by_step: 'Step 1: Label the points (x₁, y₁) and (x₂, y₂). Step 2: Subtract y''s and x''s in the same order. Step 3: Divide. Step 4: Compare slopes for parallel (equal) or perpendicular (product −1).'
+    real_world: 'Road signs show a slope like ''1 in 10'': the road rises 1 m for every 10 m across, a slope of 0.1.'
+  picture:
+    kind: geometry
+    points:
+      A:
+      - 2
+      - 2
+      B:
+      - 6
+      - 8
+      _C:
+      - 6
+      - 2
+    segments:
+    - - A
+      - B
+    - - A
+      - _C
+      - run 3
+    - - _C
+      - B
+      - rise 6
+    alt: A line through A and B, with a run of 3 and a rise of 6, so its slope is 2.
+  items:
+  - prompt: Find the slope of the line through (1, 2) and (4, 8).
+    answer: '2'
+    check: Rational(8-2,4-1)
+    difficulty: 1
+    hints:
+    - (8 − 2)/(4 − 1).
+    - 6/3.
+    solution: Slope = 2.
+    mistakes:
+      1/2: c11_slope
+  - prompt: A line makes an angle of 45° with the positive x-axis. Find its slope.
+    answer: '1'
+    check: tan(pi/4)
+    difficulty: 1
+    hints:
+    - m = tan θ.
+    - tan 45°.
+    solution: m = 1.
+  - prompt: A line has slope 2/3. Find the slope of a line perpendicular to it.
+    answer: -3/2
+    check: -1/Rational(2,3)
+    difficulty: 1
+    hints:
+    - m₁m₂ = −1.
+    - Flip and change sign.
+    solution: −3/2.
+    mistakes:
+      3/2: c11_perp
+  - prompt: What is the slope of a horizontal line?
+    options:
+    - '0'
+    - '1'
+    - Undefined
+    - −1
+    answer: '0'
+    difficulty: 1
+    hints:
+    - No rise.
+    - 0 ÷ run.
+    solution: A horizontal line has slope 0.
+  - prompt: The points (1, 1), (2, 3) and (k, 7) are collinear. Find k.
+    answer: '4'
+    check: 1 + 6/2
+    difficulty: 2
+    hints:
+    - Slope of first two = 2.
+    - (7 − 1)/(k − 1) = 2.
+    solution: k − 1 = 3, so k = 4.
+  - prompt: Find the slope of the line through (−2, 5) and (3, −5).
+    answer: '-2'
+    check: Rational(-10,5)
+    difficulty: 1
+    hints:
+    - (−5 − 5)/(3 + 2).
+    - −10/5.
+    solution: Slope = −2.
+- code: cbse11m.lines.equations
+  title: Equations of a line and distance
+  after:
+  - cbse11m.lines.slope
+  notes: |
+    Forms: point-slope y − y₁ = m(x − x₁); two-point; slope-intercept y = mx + c; intercept x/a + y/b = 1; general
+    Ax + By + C = 0 (slope −A/B, y-intercept −C/B). Distance of (x₁, y₁) from Ax + By + C = 0: |Ax₁ + By₁ + C|/√(A² + B²).
+    Distance between parallel lines Ax + By + C₁ = 0 and Ax + By + C₂ = 0: |C₁ − C₂|/√(A² + B²).
+  explanations:
+    text: 'A straight line can be written as y = mx + c, where m is the slope and c is where it crosses the y-axis. Knowing a point and the slope gives y − y₁ = m(x − x₁). The distance from a point to a line has its own formula: |Ax₁ + By₁ + C|/√(A² + B²).'
+    visual: 'Draw y = 2x + 1: start at (0, 1) on the y-axis and climb 2 for every 1 across. The line also passes through (1, 3) and (2, 5).'
+    step_by_step: 'Step 1: Choose the form that fits what you know. Step 2: Substitute. Step 3: Rearrange to y = mx + c or Ax + By + C = 0. Step 4: For distance, substitute the point into Ax + By + C and divide by √(A² + B²).'
+    real_world: A delivery app finds the shortest distance from a shop to a straight road using the point-to-line distance formula.
+  picture:
+    kind: compare
+    columns:
+    - title: Form
+      points:
+      - y = mx + c
+      - y − y₁ = m(x − x₁)
+      - x/a + y/b = 1
+    - title: Use when you know
+      points:
+      - slope and y-intercept
+      - slope and a point
+      - both intercepts
+    alt: Use y = mx + c with a slope and y-intercept, the point-slope form with a slope and a point, and x/a + y/b = 1 with both intercepts.
+  items:
+  - prompt: Find the y-intercept of the line 3x + 2y − 6 = 0.
+    answer: '3'
+    check: 6/2
+    difficulty: 1
+    hints:
+    - Put x = 0.
+    - 2y = 6.
+    solution: y = 3.
+  - prompt: Find the slope of the line 3x + 2y − 6 = 0.
+    answer: -3/2
+    check: Rational(-3,2)
+    difficulty: 1
+    hints:
+    - Slope = −A/B.
+    - −3/2.
+    solution: −3/2.
+  - prompt: A line through (2, 3) has slope 4. Find its y-intercept c in y = mx + c.
+    answer: '-5'
+    check: 3 - 8
+    difficulty: 2
+    hints:
+    - 3 = 4 × 2 + c.
+    - c = 3 − 8.
+    solution: c = −5.
+  - prompt: Find the distance of the point (3, 4) from the line 3x + 4y − 5 = 0.
+    answer: '4'
+    check: abs(3*3+4*4-5)/sqrt(3**2+4**2)
+    difficulty: 2
+    hints:
+    - '|9 + 16 − 5|/√(9 + 16).'
+    - 20/5.
+    solution: 20/5 = 4.
+  - prompt: Find the distance between the parallel lines 3x + 4y + 7 = 0 and 3x + 4y − 8 = 0.
+    answer: '3'
+    check: abs(7-(-8))/sqrt(3**2+4**2)
+    difficulty: 2
+    hints:
+    - '|C₁ − C₂|/√(A² + B²).'
+    - 15/5.
+    solution: 15/5 = 3.
+  - prompt: A line cuts the x-axis at 4 and the y-axis at 6. Using x/4 + y/6 = 1, find y when x = 2.
+    answer: '3'
+    check: 6*(1-Rational(2,4))
+    difficulty: 1
+    hints:
+    - 2/4 + y/6 = 1.
+    - y/6 = 1/2.
+    solution: y = 3.
