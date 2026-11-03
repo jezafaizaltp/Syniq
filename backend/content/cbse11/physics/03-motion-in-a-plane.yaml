@@ -1,0 +1,185 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 3. Format: content/README.md.
+subject: cbse11-phy
+chapter: 3
+title: Motion in a Plane
+tips:
+  c11p_vector_add: 'Vectors at right angles combine by Pythagoras: R = √(A² + B²). Don''t add the sizes directly.'
+  c11p_range: Range R = u² sin 2θ / g is largest at θ = 45°; angles θ and 90° − θ give the same range.
+concepts:
+- code: cbse11p.plane.vectors
+  title: Vectors and their addition
+  notes: |
+    Scalars have magnitude only (mass, time, speed); vectors have magnitude and direction (displacement, velocity, force).
+    Addition: triangle/parallelogram law; R = √(A² + B² + 2AB cos θ). Perpendicular: R = √(A² + B²). Resolution:
+    A_x = A cos θ, A_y = A sin θ. Unit vectors î, ĵ, k̂. Multiplying by a scalar changes length (and reverses direction if
+    negative). Relative velocity in 2D (rain–man problems).
+  explanations:
+    text: 'Scalars have only size, like mass. Vectors have size and direction, like velocity. To add vectors, place them head to tail; the resultant joins start to end. At right angles, use Pythagoras: 3 and 4 give 5. Any vector can be split into x and y parts: A cos θ and A sin θ.'
+    visual: 'Draw an arrow 3 units east, then from its tip an arrow 4 units north. The arrow from the start to the final tip is 5 units long: the resultant.'
+    step_by_step: 'Step 1: Draw vectors head to tail. Step 2: If at right angles, use Pythagoras. Step 3: Otherwise split each into x and y components. Step 4: Add components separately. Step 5: Recombine with Pythagoras.'
+    real_world: A boat crossing a river at 4 m/s while the current flows at 3 m/s actually moves at 5 m/s at an angle.
+  picture:
+    kind: geometry
+    points:
+      O:
+      - 1
+      - 1
+      A:
+      - 7
+      - 1
+      B:
+      - 7
+      - 9
+    segments:
+    - - O
+      - A
+      - '3'
+    - - A
+      - B
+      - '4'
+    - - O
+      - B
+      - R = 5
+    alt: Adding a vector of 3 east and 4 north head to tail gives a resultant of 5.
+  items:
+  - prompt: Two forces of 3 N and 4 N act at right angles. Find the resultant (in N).
+    answer: '5'
+    check: sqrt(3**2+4**2)
+    difficulty: 1
+    hints:
+    - √(3² + 4²).
+    - √25.
+    solution: 5 N.
+    mistakes:
+      '7': c11p_vector_add
+  - prompt: Which is a vector quantity?
+    options:
+    - Velocity
+    - Mass
+    - Time
+    - Speed
+    answer: Velocity
+    difficulty: 1
+    hints:
+    - Has direction.
+    - Speed with direction.
+    solution: Velocity has magnitude and direction.
+  - prompt: A 10 N force acts at 60° to the horizontal. Find its horizontal component (in N).
+    answer: '5'
+    check: 10*cos(pi/3)
+    difficulty: 1
+    hints:
+    - F cos θ.
+    - 10 × 1/2.
+    solution: 5 N.
+  - prompt: Two equal forces of 10 N act at 120° to each other. Find the resultant (in N).
+    answer: '10'
+    check: sqrt(100+100+2*100*cos(2*pi/3))
+    difficulty: 2
+    hints:
+    - R² = A² + B² + 2AB cos 120°.
+    - 100 + 100 − 100.
+    solution: R = 10 N.
+  - prompt: Find the magnitude of the vector 6î + 8ĵ.
+    answer: '10'
+    check: sqrt(36+64)
+    difficulty: 1
+    hints:
+    - √(36 + 64).
+    - √100.
+    solution: '10.'
+  - prompt: What is the maximum resultant of forces 5 N and 12 N (in N)?
+    answer: '17'
+    check: 5 + 12
+    difficulty: 2
+    hints:
+    - Same direction.
+    - 5 + 12.
+    solution: 17 N when they point the same way.
+- code: cbse11p.plane.projectile
+  title: Projectile and circular motion
+  after:
+  - cbse11p.plane.vectors
+  notes: |
+    Projectile launched with speed u at angle θ: horizontal velocity u cos θ constant; vertical acceleration −g. Time of
+    flight T = 2u sin θ/g; maximum height H = u² sin² θ/2g; range R = u² sin 2θ/g (maximum at 45°, R_max = u²/g).
+    Path is a parabola. Uniform circular motion: speed constant, direction changes; centripetal acceleration a = v²/r =
+    ω²r towards the centre; v = ωr; ω = 2π/T.
+  explanations:
+    text: 'A projectile moves sideways at a steady speed while gravity pulls it down, so it follows a parabola. The range is largest at 45°. In circular motion at steady speed, the velocity keeps changing direction, so there is an acceleration towards the centre: v²/r.'
+    visual: Throw a ball at 45°. Its horizontal motion is steady, like a car on a road; its vertical motion is like a ball thrown up and caught. Put them together and you get a curved arch.
+    step_by_step: 'Step 1: Split u into u cos θ (horizontal) and u sin θ (vertical). Step 2: Use T = 2u sin θ/g for time. Step 3: Range = horizontal speed × time. Step 4: For circles, a = v²/r towards the centre.'
+    real_world: A javelin thrower aims near 45° (a little less, because the release is above ground) for the longest throw.
+  picture:
+    kind: compare
+    columns:
+    - title: Projectile
+      points:
+      - time T = 2u sin θ/g
+      - height H = u² sin² θ/2g
+      - range R = u² sin 2θ/g
+    - title: Circular motion
+      points:
+      - v = ωr
+      - a = v²/r
+      - towards centre
+    alt: For a projectile, T = 2u sin θ/g, H = u² sin² θ/2g and R = u² sin 2θ/g; in circular motion v = ωr and the acceleration v²/r points to the centre.
+  items:
+  - prompt: A ball is thrown at 20 m/s at 45°. Taking g = 10 m/s², find its range (in m).
+    answer: '40'
+    check: 20**2*sin(pi/2)/10
+    difficulty: 1
+    hints:
+    - R = u² sin 2θ/g.
+    - 400 × 1/10.
+    solution: 40 m.
+  - prompt: A ball is thrown at 20 m/s at 30°. Taking g = 10 m/s², find its time of flight (in s).
+    answer: '2'
+    check: 2*20*Rational(1,2)/10
+    difficulty: 2
+    hints:
+    - T = 2u sin θ/g.
+    - 2 × 20 × ½/10.
+    solution: 2 s.
+  - prompt: At what angle is a projectile's range greatest (on level ground)?
+    options:
+    - 45°
+    - 30°
+    - 60°
+    - 90°
+    answer: 45°
+    difficulty: 1
+    hints:
+    - sin 2θ largest.
+    - 2θ = 90°.
+    solution: 45°.
+    mistakes:
+      60°: c11p_range
+  - prompt: A car moves in a circle of radius 50 m at 10 m/s. Find its centripetal acceleration (in m/s²).
+    answer: '2'
+    check: 10**2/50
+    difficulty: 1
+    hints:
+    - a = v²/r.
+    - 100/50.
+    solution: 2 m/s².
+  - prompt: A ball is thrown at 20 m/s at 30°. Taking g = 10 m/s², find its maximum height (in m).
+    answer: '5'
+    check: 400*Rational(1,4)/20
+    difficulty: 2
+    hints:
+    - H = u² sin² θ/2g.
+    - 400 × ¼/20.
+    solution: 5 m.
+  - prompt: 'Angles 30° and 60° (same speed) give:'
+    options:
+    - the same range
+    - different ranges
+    - zero range
+    - range only at 60°
+    answer: the same range
+    difficulty: 2
+    hints:
+    - sin 60° = sin 120°.
+    - Complementary angles.
+    solution: θ and 90° − θ give the same range.

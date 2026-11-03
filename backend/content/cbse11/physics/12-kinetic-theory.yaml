@@ -1,0 +1,183 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 12. Format: content/README.md.
+subject: cbse11-phy
+chapter: 12
+title: Kinetic Theory
+tips:
+  c11p_gaslaw: Ideal gas equation PV = nRT needs T in kelvin; R = 8.31 J mol⁻¹ K⁻¹.
+  c11p_rms: 'rms speed v = √(3RT/M): it doubles only when T becomes four times larger.'
+concepts:
+- code: cbse11p.kinetic.gas
+  title: Ideal gas and pressure of a gas
+  notes: |
+    Matter is made of molecules (Dalton, Avogadro). Ideal gas equation PV = μRT = k_B N T; R = 8.314 J mol⁻¹ K⁻¹;
+    Boltzmann constant k_B = 1.38 × 10⁻²³ J/K; Avogadro number 6.02 × 10²³. Boyle's law (T const: PV const), Charles' law
+    (P const: V ∝ T), Dalton's law of partial pressures. Real gases approach ideal behaviour at low pressure and high
+    temperature. Kinetic theory assumptions: tiny molecules, random motion, elastic collisions, no forces except during
+    collisions. Pressure P = (1/3)nmv̄² (n = number per unit volume).
+  explanations:
+    text: Kinetic theory explains gases as huge numbers of tiny molecules flying about and bouncing off the walls. Their impacts make pressure. The ideal gas equation PV = nRT ties pressure, volume and temperature together.
+    visual: 'Picture a box of bouncing balls. Squash the box to half its volume: the balls hit the walls twice as often, so the pressure doubles. That''s Boyle''s law.'
+    step_by_step: 'Step 1: Convert temperature to kelvin. Step 2: Write PV = nRT, or P₁V₁/T₁ = P₂V₂/T₂ for a fixed amount. Step 3: Solve for the unknown.'
+    real_world: Tyre pressure rises after a long drive because the air inside gets hotter.
+  picture:
+    kind: compare
+    columns:
+    - title: Law
+      points:
+      - Boyle
+      - Charles
+      - Gay-Lussac
+    - title: Held constant
+      points:
+      - temperature
+      - pressure
+      - volume
+    alt: Boyle's law holds temperature constant, Charles' law pressure, and Gay-Lussac's law volume.
+  items:
+  - prompt: A gas at 2 atm occupies 6 L. At the same temperature, what is its volume (in L) at 3 atm?
+    answer: '4'
+    check: 2*6/3
+    difficulty: 1
+    hints:
+    - 'Boyle: P₁V₁ = P₂V₂.'
+    - 12/3.
+    solution: 4 L.
+  - prompt: A gas occupies 3 L at 300 K. At constant pressure, find its volume (in L) at 400 K.
+    answer: '4'
+    check: 3*Rational(400,300)
+    difficulty: 1
+    hints:
+    - 'Charles: V ∝ T.'
+    - 3 × 400/300.
+    solution: 4 L.
+    mistakes:
+      '3': c11p_gaslaw
+  - prompt: How many moles are in 44 g of CO₂ (molar mass 44 g/mol)?
+    answer: '1'
+    check: 44/44
+    difficulty: 1
+    hints:
+    - n = mass/M.
+    - 44/44.
+    solution: 1 mol.
+  - prompt: 'Real gases behave most like ideal gases at:'
+    options:
+    - low pressure and high temperature
+    - high pressure and low temperature
+    - high pressure and high temperature
+    - low pressure and low temperature
+    answer: low pressure and high temperature
+    difficulty: 2
+    hints:
+    - Molecules far apart.
+    - Forces negligible.
+    solution: Low pressure and high temperature.
+  - prompt: 'In kinetic theory, collisions between gas molecules are assumed to be:'
+    options:
+    - elastic
+    - inelastic
+    - sticky
+    - impossible
+    answer: elastic
+    difficulty: 1
+    hints:
+    - Kinetic energy kept.
+    - Bounce perfectly.
+    solution: Collisions are perfectly elastic.
+  - prompt: A gas at 1 atm and 300 K in a rigid container is heated to 600 K. Find the new pressure (in atm).
+    answer: '2'
+    check: 1*600/300
+    difficulty: 2
+    hints:
+    - 'Volume fixed: P ∝ T.'
+    - 1 × 600/300.
+    solution: 2 atm.
+- code: cbse11p.kinetic.energy
+  title: Kinetic energy, equipartition and mean free path
+  after:
+  - cbse11p.kinetic.gas
+  notes: |
+    Average kinetic energy of a molecule = (3/2)k_B T: temperature measures mean molecular KE. Total translational KE of
+    one mole = (3/2)RT. rms speed v_rms = √(3RT/M) = √(3k_B T/m). Degrees of freedom: monatomic 3, diatomic 5 (at room
+    temperature), polyatomic more. Law of equipartition: each quadratic degree of freedom gets ½k_B T. Specific heats:
+    monatomic Cv = 3R/2, Cp = 5R/2, γ = 5/3; diatomic Cv = 5R/2, γ = 7/5. Solids: Cv = 3R (Dulong–Petit). Mean free path
+    l = 1/(√2 nπd²).
+  explanations:
+    text: 'Temperature is a measure of how fast gas molecules move on average: their mean kinetic energy is (3/2)k_B T. Hotter gas, faster molecules. Equipartition shares this energy equally among each way a molecule can move.'
+    visual: 'Draw a helium atom (only moves in x, y, z: 3 ways) next to an oxygen molecule (moves in 3 directions and spins 2 ways: 5 ways). Each way gets ½k_B T.'
+    step_by_step: 'Step 1: Average KE = (3/2)k_B T. Step 2: rms speed ∝ √T. Step 3: For specific heats, count degrees of freedom f: Cv = (f/2)R, γ = 1 + 2/f.'
+    real_world: Hydrogen escapes from Earth's atmosphere because its light molecules have high average speeds, while heavier nitrogen stays.
+  picture:
+    kind: bars
+    bars:
+    - label: monatomic
+      value: 3
+    - label: diatomic
+      value: 5
+    - label: polyatomic
+      value: 6
+    alt: 'Degrees of freedom: monatomic gases 3, diatomic 5, non-linear polyatomic 6.'
+    unit: degrees
+  items:
+  - prompt: The rms speed of a gas is 400 m/s at 300 K. What is it (in m/s) at 1200 K?
+    answer: '800'
+    check: 400*sqrt(Rational(1200,300))
+    difficulty: 2
+    hints:
+    - v ∝ √T.
+    - √4 = 2.
+    solution: 800 m/s.
+    mistakes:
+      '1600': c11p_rms
+  - prompt: How many degrees of freedom does a monatomic gas molecule have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Only translation.
+    - x, y, z.
+    solution: '3.'
+  - prompt: For a diatomic gas at room temperature (5 degrees of freedom), Cv = (f/2)R. Find Cv in units of R as a fraction.
+    answer: 5/2
+    check: Rational(5,2)
+    difficulty: 2
+    hints:
+    - f = 5.
+    - 5/2.
+    solution: Cv = 5R/2.
+  - prompt: 'γ = Cp/Cv for a monatomic ideal gas is:'
+    options:
+    - 5/3
+    - 7/5
+    - 4/3
+    - '1'
+    answer: 5/3
+    difficulty: 2
+    hints:
+    - Cv = 3R/2, Cp = 5R/2.
+    - Divide.
+    solution: γ = 5/3.
+  - prompt: 'The average kinetic energy of a gas molecule depends only on:'
+    options:
+    - absolute temperature
+    - pressure
+    - volume
+    - the container's shape
+    answer: absolute temperature
+    difficulty: 1
+    hints:
+    - (3/2)k_B T.
+    - Only T appears.
+    solution: Average KE = (3/2)k_B T.
+  - prompt: 'The mean free path of a gas molecule is:'
+    options:
+    - the average distance between collisions
+    - the size of a molecule
+    - the length of the container
+    - the distance travelled in one second
+    answer: the average distance between collisions
+    difficulty: 1
+    hints:
+    - Free = no collision.
+    - Average.
+    solution: It's the average distance travelled between collisions.

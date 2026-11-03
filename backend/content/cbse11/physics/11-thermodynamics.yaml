@@ -1,0 +1,184 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 11. Format: content/README.md.
+subject: cbse11-phy
+chapter: 11
+title: Thermodynamics
+tips:
+  c11p_firstlaw: 'First law: ΔQ = ΔU + ΔW. Heat given to the gas is positive; work done BY the gas is positive.'
+  c11p_carnot: Carnot efficiency η = 1 − T₂/T₁ uses kelvin temperatures, never Celsius.
+concepts:
+- code: cbse11p.thermo.firstlaw
+  title: Zeroth and first laws
+  notes: |
+    Thermal equilibrium: no net heat flow. Zeroth law: if A and B are each in equilibrium with C, they are in equilibrium
+    with each other (basis of temperature). Internal energy U: sum of molecular kinetic and potential energies; a state
+    variable. Heat and work are ways of transferring energy, not state variables. First law: ΔQ = ΔU + ΔW, ΔW = PΔV.
+    Specific heats of gases: Cp − Cv = R (Mayer). Processes: isothermal (T constant, ΔU = 0, W = nRT ln(V₂/V₁)), adiabatic
+    (no heat, PV^γ constant), isochoric (V constant, W = 0), isobaric (P constant, W = PΔV). Work = area under P–V curve.
+  explanations:
+    text: 'Thermodynamics is about heat, work and energy. The first law is energy conservation: heat you give a gas either raises its internal energy or lets it do work by expanding. Different processes keep different things constant.'
+    visual: 'Draw a P–V graph: the work done by a gas is the area under its curve. A flat line (constant pressure) gives a rectangle: W = P × ΔV.'
+    step_by_step: 'Step 1: Identify the process (which quantity is constant). Step 2: Find W (zero if volume is constant; PΔV at constant pressure). Step 3: Use ΔQ = ΔU + ΔW for the unknown.'
+    real_world: A bicycle pump gets warm because you do work compressing the air quickly, raising its internal energy.
+  picture:
+    kind: compare
+    columns:
+    - title: Process
+      points:
+      - isothermal
+      - adiabatic
+      - isochoric
+      - isobaric
+    - title: Constant
+      points:
+      - temperature
+      - no heat exchange
+      - volume
+      - pressure
+    alt: Four thermodynamic processes and what each keeps constant.
+  items:
+  - prompt: A gas absorbs 500 J of heat and does 200 J of work. Find the change in internal energy (in J).
+    answer: '300'
+    check: 500 - 200
+    difficulty: 1
+    hints:
+    - ΔU = ΔQ − ΔW.
+    - 500 − 200.
+    solution: 300 J.
+    mistakes:
+      '700': c11p_firstlaw
+  - prompt: A gas expands from 2 m³ to 5 m³ at a constant pressure of 1000 Pa. Find the work done (in J).
+    answer: '3000'
+    check: 1000*(5-2)
+    difficulty: 1
+    hints:
+    - W = PΔV.
+    - 1000 × 3.
+    solution: 3,000 J.
+  - prompt: 'In an isothermal process for an ideal gas, the change in internal energy is:'
+    options:
+    - zero
+    - equal to the heat supplied
+    - negative
+    - equal to PV
+    answer: zero
+    difficulty: 2
+    hints:
+    - U depends only on T.
+    - T is constant.
+    solution: ΔU = 0 because T doesn't change.
+  - prompt: 'In an isochoric process, the work done is:'
+    options:
+    - zero
+    - PΔV
+    - maximum
+    - equal to heat
+    answer: zero
+    difficulty: 1
+    hints:
+    - Volume doesn't change.
+    - ΔV = 0.
+    solution: W = PΔV = 0.
+  - prompt: 'The zeroth law of thermodynamics leads to the idea of:'
+    options:
+    - temperature
+    - entropy
+    - heat engines
+    - internal energy
+    answer: temperature
+    difficulty: 2
+    hints:
+    - Equilibrium with a third body.
+    - Thermometers.
+    solution: It defines temperature.
+  - prompt: In an adiabatic compression, 400 J of work is done on a gas. Find ΔU (in J).
+    answer: '400'
+    check: 0 - (-400)
+    difficulty: 2
+    hints:
+    - 'No heat: ΔQ = 0.'
+    - ΔU = −ΔW, and ΔW = −400.
+    solution: ΔU = +400 J.
+- code: cbse11p.thermo.secondlaw
+  title: Second law and heat engines
+  after:
+  - cbse11p.thermo.firstlaw
+  notes: |
+    Heat engine: absorbs Q₁ from a hot reservoir, does work W, rejects Q₂ to a cold sink; efficiency η = W/Q₁ = 1 − Q₂/Q₁.
+    Refrigerator/heat pump: takes Q₂ from the cold body using work W; coefficient of performance α = Q₂/W. Second law:
+    Kelvin–Planck (no engine can turn all heat into work) and Clausius (no device can move heat from cold to hot without
+    work). Reversible and irreversible processes. Carnot engine: two isothermal + two adiabatic steps; η = 1 − T₂/T₁ (K);
+    no engine between the same reservoirs is more efficient (Carnot's theorem).
+  explanations:
+    text: A heat engine turns some heat into work, but the second law says it must always throw some heat away to a colder place. No engine can be 100% efficient. The best possible engine, the Carnot engine, has efficiency 1 − T_cold/T_hot.
+    visual: 'Draw a hot box at the top, an engine in the middle and a cold box at the bottom. Arrows: Q₁ in from the top, W out to the side, Q₂ down to the cold box. W = Q₁ − Q₂.'
+    step_by_step: 'Step 1: Write W = Q₁ − Q₂. Step 2: Efficiency = W/Q₁. Step 3: For Carnot, convert temperatures to kelvin and use 1 − T₂/T₁.'
+    real_world: A car engine wastes most of its fuel energy as heat through the radiator and exhaust; typical efficiencies are only 25–40%.
+  picture:
+    kind: flow
+    steps:
+    - Hot reservoir gives Q₁
+    - Engine does work W
+    - Cold sink gets Q₂
+    - W = Q₁ − Q₂
+    alt: A heat engine takes Q₁ from the hot reservoir, does work W, and rejects Q₂ to the cold sink.
+  items:
+  - prompt: An engine takes 1000 J of heat and rejects 600 J. Find its efficiency as a percentage.
+    answer: '40'
+    check: (1000-600)*100/1000
+    difficulty: 1
+    hints:
+    - W = 1000 − 600.
+    - η = W/Q₁.
+    solution: 40%.
+  - prompt: A Carnot engine works between 500 K and 300 K. Find its efficiency as a percentage.
+    answer: '40'
+    check: (1 - Rational(300,500))*100
+    difficulty: 1
+    hints:
+    - 1 − T₂/T₁.
+    - 1 − 300/500.
+    solution: 40%.
+    mistakes:
+      '60': c11p_carnot
+  - prompt: A Carnot engine works between 127 °C and 27 °C. Find its efficiency as a percentage (use +273).
+    answer: '25'
+    check: (1 - Rational(300,400))*100
+    difficulty: 2
+    hints:
+    - 400 K and 300 K.
+    - 1 − 300/400.
+    solution: 25%.
+    mistakes:
+      '79': c11p_carnot
+  - prompt: A refrigerator removes 300 J from inside using 100 J of work. Find its coefficient of performance.
+    answer: '3'
+    check: 300/100
+    difficulty: 2
+    hints:
+    - α = Q₂/W.
+    - 300/100.
+    solution: '3.'
+  - prompt: Which statement is the Kelvin–Planck form of the second law?
+    options:
+    - No engine can convert all the heat it absorbs into work
+    - Energy cannot be created or destroyed
+    - Heat flows from cold to hot by itself
+    - Internal energy depends on volume
+    answer: No engine can convert all the heat it absorbs into work
+    difficulty: 2
+    hints:
+    - Some heat must be rejected.
+    - η < 1.
+    solution: No engine can be 100% efficient.
+  - prompt: 'A Carnot cycle consists of:'
+    options:
+    - two isothermal and two adiabatic processes
+    - two isobaric and two isochoric processes
+    - four isothermal processes
+    - four adiabatic processes
+    answer: two isothermal and two adiabatic processes
+    difficulty: 2
+    hints:
+    - Ideal reversible cycle.
+    - Constant T, then no heat.
+    solution: Two isothermals and two adiabatics.

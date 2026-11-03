@@ -1,0 +1,174 @@
+# CBSE Class 11 Physics (NCERT, rationalised syllabus), chapter 5. Format: content/README.md.
+subject: cbse11-phy
+chapter: 5
+title: Work, Energy and Power
+tips:
+  c11p_work_angle: Work = F s cos θ. Only the part of the force along the motion does work; at 90° the work is zero.
+  c11p_ke_square: 'Kinetic energy depends on v²: doubling the speed makes KE four times bigger.'
+concepts:
+- code: cbse11p.wep.work
+  title: Work and the work-energy theorem
+  notes: |
+    Work W = F·s = Fs cos θ (joule). Positive if force has a component along motion, negative if against (friction),
+    zero if perpendicular (centripetal force, carrying a bag horizontally). Variable force: area under F–x graph.
+    Kinetic energy K = ½mv². Work-energy theorem: net work = ΔK. Spring force F = −kx; work stored = ½kx².
+  explanations:
+    text: 'Work is done when a force moves something along its direction: W = Fs cos θ. If the force is at right angles to the motion, no work is done. The work done by the net force equals the change in kinetic energy, ½mv².'
+    visual: 'Pull a suitcase with 50 N along a handle at 60° to the ground for 10 m. Only the forward part, 50 cos 60° = 25 N, does work: 25 × 10 = 250 J.'
+    step_by_step: 'Step 1: Find the force and displacement. Step 2: Find the angle between them. Step 3: W = Fs cos θ. Step 4: For speed changes, set net work = ½mv² − ½mu².'
+    real_world: 'A satellite in circular orbit: gravity is always at right angles to its motion, so it does no work and the speed stays the same.'
+  picture:
+    kind: compare
+    columns:
+    - title: Angle between F and s
+      points:
+      - 0°
+      - 90°
+      - 180°
+    - title: Work
+      points:
+      - positive, maximum
+      - zero
+      - negative
+    alt: When the force is along the motion work is positive, at 90° it is zero, and when opposite it is negative.
+  items:
+  - prompt: A 20 N force moves a box 5 m in its own direction. Find the work done (in J).
+    answer: '100'
+    check: 20*5
+    difficulty: 1
+    hints:
+    - W = Fs.
+    - 20 × 5.
+    solution: 100 J.
+  - prompt: A 50 N force at 60° to the motion moves a suitcase 10 m. Find the work done (in J).
+    answer: '250'
+    check: 50*10*cos(pi/3)
+    difficulty: 2
+    hints:
+    - W = Fs cos θ.
+    - 50 × 10 × ½.
+    solution: 250 J.
+    mistakes:
+      '500': c11p_work_angle
+  - prompt: Find the kinetic energy of a 2 kg ball moving at 3 m/s (in J).
+    answer: '9'
+    check: Rational(1,2)*2*9
+    difficulty: 1
+    hints:
+    - ½mv².
+    - ½ × 2 × 9.
+    solution: 9 J.
+  - prompt: A 1 kg body speeds up from 2 m/s to 4 m/s. Find the net work done on it (in J).
+    answer: '6'
+    check: Rational(1,2)*(16-4)
+    difficulty: 2
+    hints:
+    - ΔK = ½m(v² − u²).
+    - ½ × (16 − 4).
+    solution: 6 J.
+  - prompt: A spring with k = 200 N/m is stretched 0.1 m. Find the energy stored (in J).
+    answer: '1'
+    check: Rational(1,2)*200*Rational(1,100)
+    difficulty: 2
+    hints:
+    - ½kx².
+    - ½ × 200 × 0.01.
+    solution: 1 J.
+  - prompt: 'If a car''s speed doubles, its kinetic energy becomes:'
+    options:
+    - 4 times
+    - 2 times
+    - the same
+    - half
+    answer: 4 times
+    difficulty: 1
+    hints:
+    - KE ∝ v².
+    - 2² = 4.
+    solution: KE becomes 4 times.
+    mistakes:
+      2 times: c11p_ke_square
+- code: cbse11p.wep.energy
+  title: Potential energy, conservation and power
+  after:
+  - cbse11p.wep.work
+  notes: |
+    Gravitational PE near the Earth: mgh. Conservative forces (gravity, spring): work independent of path; mechanical energy
+    K + U is conserved when only they act. Falling from height h: v = √(2gh). Non-conservative (friction) convert energy
+    to heat. Power P = W/t = Fv (watt); 1 hp = 746 W; kWh is a unit of energy (3.6 × 10⁶ J). Collisions: momentum always
+    conserved; KE conserved only in elastic collisions.
+  explanations:
+    text: 'Potential energy is stored energy, like mgh for a raised object. When only gravity or springs act, kinetic + potential energy stays constant: a falling stone loses PE and gains the same KE. Power is how fast work is done: P = W/t.'
+    visual: 'A 2 kg ball held 5 m up has PE = 2 × 10 × 5 = 100 J (g = 10). Halfway down: 50 J PE + 50 J KE. Just before landing: 100 J KE, speed √(2gh) = 10 m/s.'
+    step_by_step: 'Step 1: Find energy at the start (KE + PE). Step 2: Find energy at the end. Step 3: Set them equal (no friction). Step 4: Solve for the unknown. Step 5: Power = energy ÷ time.'
+    real_world: 'Electricity bills count ''units'': 1 unit = 1 kWh. A 100 W bulb on for 10 hours uses 1 unit.'
+  picture:
+    kind: bars
+    bars:
+    - label: 'Top: PE'
+      value: 100
+    - label: 'Top: KE'
+      value: 0
+    - label: 'Middle: PE'
+      value: 50
+    - label: 'Middle: KE'
+      value: 50
+    - label: 'Bottom: PE'
+      value: 0
+    - label: 'Bottom: KE'
+      value: 100
+    alt: 'As a 2 kg ball falls 5 m, its potential energy turns into kinetic energy: 100 and 0 joules at the top, 50 and 50 halfway, 0 and 100 at the bottom.'
+    unit: J
+  items:
+  - prompt: Find the potential energy of a 2 kg ball 5 m above the ground. Take g = 10 m/s² (in J).
+    answer: '100'
+    check: 2*10*5
+    difficulty: 1
+    hints:
+    - mgh.
+    - 2 × 10 × 5.
+    solution: 100 J.
+  - prompt: A stone is dropped from 5 m. Taking g = 10 m/s², find its speed just before hitting the ground (in m/s).
+    answer: '10'
+    check: sqrt(2*10*5)
+    difficulty: 2
+    hints:
+    - v = √(2gh).
+    - √100.
+    solution: 10 m/s.
+  - prompt: A motor does 6000 J of work in 30 s. Find its power (in W).
+    answer: '200'
+    check: 6000/30
+    difficulty: 1
+    hints:
+    - P = W/t.
+    - 6000/30.
+    solution: 200 W.
+  - prompt: A 100 W bulb is on for 10 hours. How many kWh does it use?
+    answer: '1'
+    check: Rational(100,1000)*10
+    difficulty: 1
+    hints:
+    - Energy = power × time.
+    - 0.1 kW × 10 h.
+    solution: 1 kWh.
+  - prompt: In which collision is kinetic energy conserved?
+    options:
+    - Elastic collision
+    - Inelastic collision
+    - Perfectly inelastic collision
+    - None
+    answer: Elastic collision
+    difficulty: 1
+    hints:
+    - Bounce without loss.
+    - Ideal.
+    solution: Only elastic collisions conserve KE.
+  - prompt: A car engine exerts 2000 N at a steady 15 m/s. Find the power (in W).
+    answer: '30000'
+    check: 2000*15
+    difficulty: 2
+    hints:
+    - P = Fv.
+    - 2000 × 15.
+    solution: 30,000 W.
