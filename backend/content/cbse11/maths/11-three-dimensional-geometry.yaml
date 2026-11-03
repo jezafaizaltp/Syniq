@@ -1,0 +1,190 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 11. Format: content/README.md.
+subject: cbse11-math
+chapter: 11
+title: Introduction to Three Dimensional Geometry
+tips:
+  c11_octant: 'The signs of (x, y, z) decide the octant: all positive is octant I. Check each sign one at a time.'
+  c11_dist3d: 'In 3D add all three squared differences: √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²).'
+concepts:
+- code: cbse11m.3d.coords
+  title: Coordinates in space
+  notes: |
+    Three mutually perpendicular axes x, y, z meet at the origin O. A point P(x, y, z): its distances from the yz, zx and
+    xy planes. The three coordinate planes divide space into 8 octants (signs of x, y, z). A point on the x-axis is
+    (x, 0, 0); in the xy-plane (x, y, 0). Distance from the origin: √(x² + y² + z²).
+  explanations:
+    text: 'In space we need three numbers to fix a point: (x, y, z). Picture the corner of a room: the floor edges are the x- and y-axes and the vertical edge is the z-axis. The three walls (coordinate planes) split space into 8 octants.'
+    visual: Stand in the corner of a room. A fly 3 m along one wall, 4 m along the other and 2 m up is at (3, 4, 2). A point on the floor has z = 0.
+    step_by_step: 'Step 1: Read x, y, z. Step 2: A zero coordinate means the point lies in a coordinate plane; two zeros mean it''s on an axis. Step 3: Signs tell the octant.'
+    real_world: 'Drones and aircraft report their position with three numbers: two for the map position and one for height.'
+  picture:
+    kind: geometry
+    points:
+      O:
+      - 3
+      - 3
+      X:
+      - 9
+      - 2
+      Y:
+      - 7
+      - 6
+      Z:
+      - 3
+      - 9
+    segments:
+    - - O
+      - X
+      - x
+    - - O
+      - Y
+      - y
+    - - O
+      - Z
+      - z
+    alt: Three axes x, y and z meeting at the origin O, like the corner of a room.
+  items:
+  - prompt: How many octants do the coordinate planes divide space into?
+    answer: '8'
+    check: 2**3
+    difficulty: 1
+    hints:
+    - Each of x, y, z can be + or −.
+    - 2 × 2 × 2.
+    solution: 8 octants.
+  - prompt: Find the distance of the point (2, 3, 6) from the origin.
+    answer: '7'
+    check: sqrt(2**2+3**2+6**2)
+    difficulty: 1
+    hints:
+    - √(4 + 9 + 36).
+    - √49.
+    solution: '7.'
+  - prompt: Where does the point (0, 5, 0) lie?
+    options:
+    - On the y-axis
+    - On the x-axis
+    - In the xz-plane only
+    - In octant I
+    answer: On the y-axis
+    difficulty: 1
+    hints:
+    - Two coordinates are zero.
+    - Only y is non-zero.
+    solution: x = z = 0, so it is on the y-axis.
+  - prompt: 'The point (−2, 3, 4) lies in the octant where the signs are:'
+    options:
+    - (−, +, +)
+    - (+, +, +)
+    - (−, −, +)
+    - (+, −, −)
+    answer: (−, +, +)
+    difficulty: 1
+    hints:
+    - Read each sign.
+    - x negative.
+    solution: Signs (−, +, +).
+    mistakes:
+      (+, +, +): c11_octant
+  - prompt: 'Every point in the xy-plane has:'
+    options:
+    - z = 0
+    - x = 0
+    - y = 0
+    - x = y
+    answer: z = 0
+    difficulty: 1
+    hints:
+    - The floor.
+    - No height.
+    solution: In the xy-plane z = 0.
+  - prompt: What is the distance of the point (3, −4, 5) from the xy-plane?
+    answer: '5'
+    check: abs(5)
+    difficulty: 2
+    hints:
+    - Distance from xy-plane = |z|.
+    - '|5|.'
+    solution: '5.'
+- code: cbse11m.3d.distance
+  title: Distance between two points in space
+  after:
+  - cbse11m.3d.coords
+  notes: |
+    PQ = √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²). Uses: show points are collinear (PQ + QR = PR), vertices of a right or
+    isosceles triangle, points equidistant from two given points. (Section formula in 3D is no longer in the rationalised
+    syllabus.)
+  explanations:
+    text: 'The distance formula in 3D is like the 2D one with one more term: √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²). It works because of Pythagoras used twice: once across the floor, once up the height.'
+    visual: 'Picture a box 2 by 3 by 6. The diagonal from one corner to the opposite corner: across the floor is √(4 + 9), then up 6. Total √(4 + 9 + 36) = 7.'
+    step_by_step: 'Step 1: Subtract x''s, y''s and z''s. Step 2: Square each difference. Step 3: Add. Step 4: Take the square root.'
+    real_world: The longest stick that fits in a box is its space diagonal, found with this formula.
+  picture:
+    kind: flow
+    steps:
+    - 'Floor diagonal: √(Δx² + Δy²)'
+    - Add height Δz
+    - Pythagoras again
+    - Distance = √(Δx² + Δy² + Δz²)
+    alt: Using Pythagoras twice, first across the floor and then up the height, gives the 3D distance formula.
+  items:
+  - prompt: Find the distance between (1, 2, 3) and (4, 6, 15).
+    answer: '13'
+    check: sqrt(3**2+4**2+12**2)
+    difficulty: 1
+    hints:
+    - Differences 3, 4, 12.
+    - √(9 + 16 + 144).
+    solution: √169 = 13.
+  - prompt: Find the distance between (2, −1, 3) and (−2, 1, 3).
+    options:
+    - 2√5
+    - √6
+    - '6'
+    - 4√2
+    answer: 2√5
+    difficulty: 2
+    hints:
+    - Differences −4, 2, 0.
+    - √(16 + 4).
+    solution: √20 = 2√5.
+  - prompt: A box is 2 m by 3 m by 6 m. Find the length of its longest diagonal (in m).
+    answer: '7'
+    check: sqrt(4+9+36)
+    difficulty: 1
+    hints:
+    - √(4 + 9 + 36).
+    - √49.
+    solution: 7 m.
+  - prompt: 'P, Q and R are collinear (Q between) if:'
+    options:
+    - PQ + QR = PR
+    - PQ = QR = PR
+    - PQ × QR = PR
+    - PQ − QR = 0
+    answer: PQ + QR = PR
+    difficulty: 2
+    hints:
+    - Q lies on the segment PR.
+    - Lengths add.
+    solution: Collinear with Q between means PQ + QR = PR.
+  - prompt: Find the distance between (0, 0, 0) and (1, 1, 1).
+    options:
+    - √3
+    - '3'
+    - '1'
+    - √2
+    answer: √3
+    difficulty: 1
+    hints:
+    - √(1 + 1 + 1).
+    - √3.
+    solution: √3.
+  - prompt: Find k if the distance between (1, 2, k) and (1, 2, 5) is 3 and k > 5.
+    answer: '8'
+    check: 5 + 3
+    difficulty: 2
+    hints:
+    - Only z differs.
+    - '|k − 5| = 3.'
+    solution: k = 8.

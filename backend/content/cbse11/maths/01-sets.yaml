@@ -1,0 +1,172 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 1. Format: content/README.md.
+subject: cbse11-math
+chapter: 1
+title: Sets
+tips:
+  c11_subsets: 'A set with n elements has 2ⁿ subsets, counting the empty set and the set itself. Each element is either in or out: 2 choices each.'
+  c11_union_count: n(A ∪ B) = n(A) + n(B) − n(A ∩ B). Subtract the overlap, or it is counted twice.
+concepts:
+- code: cbse11m.sets.basics
+  title: Sets, subsets and intervals
+  notes: |
+    A set is a well-defined collection of distinct objects. Roster form {1, 2, 3}; set-builder form {x : x is a natural
+    number, x < 4}. Empty set ∅ has no elements. Finite and infinite sets; equal sets have exactly the same elements.
+    A ⊆ B if every element of A is in B; a set with n elements has 2ⁿ subsets (2ⁿ − 1 proper subsets). Power set P(A)
+    is the set of all subsets. Universal set U. Intervals: (a, b) open, [a, b] closed, [a, b) half-open. N ⊂ Z ⊂ Q ⊂ R.
+  explanations:
+    text: A set is a clear collection of different objects, like {2, 4, 6}. If every element of A is also in B, A is a subset of B. A set with n elements has 2ⁿ subsets, because each element can be either in or out. Intervals like [2, 5) describe sets of real numbers.
+    visual: 'Draw a big rectangle (the universal set U). Inside it draw circle B, and inside B a smaller circle A: A ⊆ B. For intervals, draw a number line: a filled dot means the end is included, an open dot means it isn''t.'
+    step_by_step: 'Step 1: List the elements. Step 2: Check each element of A is in B for A ⊆ B. Step 3: Count elements n; subsets = 2ⁿ. Step 4: For intervals, decide which ends are included: square bracket yes, round bracket no.'
+    real_world: A class's set of students who play football is a subset of all the students in the class; a database query picks out such subsets.
+  picture:
+    kind: number_line
+    from: 0
+    to: 6
+    step: 1
+    points:
+    - at: 2
+      label: 2 (included)
+    - at: 5
+      label: 5 (not included)
+    alt: 'The interval [2, 5) on a number line: 2 is included and 5 is not.'
+  items:
+  - prompt: How many subsets does the set {a, b, c} have?
+    answer: '8'
+    check: 2**3
+    difficulty: 1
+    hints:
+    - Each element is in or out.
+    - 2³.
+    solution: 2³ = 8 subsets.
+    mistakes:
+      '6': c11_subsets
+  - prompt: How many proper subsets does a set with 4 elements have?
+    answer: '15'
+    check: 2**4 - 1
+    difficulty: 2
+    hints:
+    - 'All subsets: 2⁴.'
+    - Leave out the set itself.
+    solution: 2⁴ − 1 = 15.
+  - prompt: 'How many elements are in {x : x is a natural number, x² < 30}?'
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - Try x = 1, 2, 3, ...
+    - 5² = 25 < 30, 6² = 36.
+    solution: 'x = 1, 2, 3, 4, 5: five elements.'
+  - prompt: Which of these is the empty set?
+    options:
+    - '{x : x is a natural number, x < 1}'
+    - '{0}'
+    - '{x : x² = 4}'
+    - '{∅, 1}'
+    answer: '{x : x is a natural number, x < 1}'
+    difficulty: 2
+    hints:
+    - Natural numbers start at 1.
+    - '{0} has one element.'
+    solution: No natural number is less than 1, so the set is empty.
+  - prompt: Which interval contains 3 but not 7?
+    options:
+    - '[3, 7)'
+    - (3, 7]
+    - (3, 7)
+    - '[3, 7]'
+    answer: '[3, 7)'
+    difficulty: 1
+    hints:
+    - Square bracket includes.
+    - Round bracket excludes.
+    solution: '[3, 7) includes 3 and excludes 7.'
+  - prompt: How many elements does the power set of a 5-element set have?
+    answer: '32'
+    check: 2**5
+    difficulty: 2
+    hints:
+    - P(A) contains all subsets.
+    - 2⁵.
+    solution: 2⁵ = 32.
+- code: cbse11m.sets.ops
+  title: Operations on sets and Venn diagrams
+  after:
+  - cbse11m.sets.basics
+  notes: |
+    Union A ∪ B: elements in A or B (or both). Intersection A ∩ B: in both. Difference A − B: in A but not B. Complement
+    A′ = U − A. Disjoint sets: A ∩ B = ∅. De Morgan's laws: (A ∪ B)′ = A′ ∩ B′, (A ∩ B)′ = A′ ∪ B′. Counting:
+    n(A ∪ B) = n(A) + n(B) − n(A ∩ B). Venn diagrams show these regions.
+  explanations:
+    text: Union joins two sets; intersection keeps what they share; difference A − B keeps what is only in A. To count students who like tea or coffee, add both groups and subtract those who like both, because they were counted twice.
+    visual: Draw two overlapping circles A and B in a rectangle. The overlap is A ∩ B. Both circles together are A ∪ B. The part of A outside B is A − B. Everything outside A is A′.
+    step_by_step: 'Step 1: Draw the Venn diagram. Step 2: Fill the overlap first. Step 3: Fill ''only A'' = n(A) − overlap and ''only B'' = n(B) − overlap. Step 4: Add the regions you need.'
+    real_world: 'In a survey of 60 people, 35 read English papers, 30 read Malayalam papers and 10 read both: 35 + 30 − 10 = 55 read at least one.'
+  picture:
+    kind: compare
+    columns:
+    - title: Operation
+      points:
+      - A ∪ B
+      - A ∩ B
+      - A − B
+    - title: Meaning
+      points:
+      - in A or B
+      - in both
+      - in A, not in B
+    alt: A ∪ B is everything in A or B, A ∩ B is what is in both, and A − B is what is in A but not B.
+  items:
+  - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A ∪ B?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - List them once each.
+    - 1, 2, 3, 4, 5.
+    solution: 'A ∪ B = {1, 2, 3, 4, 5}: 5 elements.'
+  - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A − B?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Remove 3 and 4 from A.
+    - '{1, 2}.'
+    solution: 'A − B = {1, 2}: 2 elements.'
+  - prompt: n(A) = 35, n(B) = 30, n(A ∩ B) = 10. Find n(A ∪ B).
+    answer: '55'
+    check: 35 + 30 - 10
+    difficulty: 1
+    hints:
+    - Add and subtract the overlap.
+    - 35 + 30 − 10.
+    solution: 35 + 30 − 10 = 55.
+    mistakes:
+      '65': c11_union_count
+  - prompt: In a class of 40, 25 like cricket, 20 like football and every student likes at least one. How many like both?
+    answer: '5'
+    check: 25 + 20 - 40
+    difficulty: 2
+    hints:
+    - n(A ∪ B) = 40.
+    - 25 + 20 − both = 40.
+    solution: Both = 25 + 20 − 40 = 5.
+  - prompt: 'By De Morgan''s law, (A ∪ B)′ equals:'
+    options:
+    - A′ ∩ B′
+    - A′ ∪ B′
+    - A ∩ B
+    - A − B
+    answer: A′ ∩ B′
+    difficulty: 2
+    hints:
+    - Not in A or B means not in A and not in B.
+    - ∪ becomes ∩.
+    solution: (A ∪ B)′ = A′ ∩ B′.
+  - prompt: U = {1, 2, ..., 10} and A = {2, 4, 6, 8, 10}. How many elements are in A′?
+    answer: '5'
+    check: 10 - 5
+    difficulty: 1
+    hints:
+    - A′ = U − A.
+    - The odd numbers.
+    solution: 'A′ = {1, 3, 5, 7, 9}: 5 elements.'

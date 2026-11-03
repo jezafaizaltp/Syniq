@@ -1,0 +1,192 @@
+# CBSE Class 11 Mathematics (NCERT, rationalised syllabus), chapter 4. Format: content/README.md.
+subject: cbse11-math
+chapter: 4
+title: Complex Numbers and Quadratic Equations
+tips:
+  c11_i_powers: 'Powers of i repeat every 4: i, −1, −i, 1. Divide the power by 4 and use the remainder.'
+  c11_modulus: '|a + ib| = √(a² + b²). Square both parts, add, then take the square root.'
+concepts:
+- code: cbse11m.cx.algebra
+  title: Complex numbers and their algebra
+  notes: |
+    i = √−1, i² = −1, i³ = −i, i⁴ = 1 (powers cycle every 4). A complex number z = a + ib: real part a, imaginary part b.
+    Add/subtract parts separately; multiply using i² = −1; (a + ib)(a − ib) = a² + b². Conjugate z̄ = a − ib. Modulus
+    |z| = √(a² + b²). Division: multiply numerator and denominator by the conjugate of the denominator. Argand plane:
+    z as point (a, b); |z| is distance from the origin. Polar form z = r(cos θ + i sin θ).
+  explanations:
+    text: Complex numbers use i, where i² = −1. A complex number a + ib has a real part a and an imaginary part b. Add parts separately; when multiplying, replace i² with −1. The modulus |a + ib| = √(a² + b²) is its distance from 0 on the Argand plane.
+    visual: 'Draw axes: real numbers along the horizontal, imaginary along the vertical. Plot 3 + 4i at (3, 4). The line from the origin to it has length 5: that is |3 + 4i|.'
+    step_by_step: 'Step 1: Write numbers as a + ib. Step 2: Add or multiply, treating i like a letter. Step 3: Replace i² with −1. Step 4: For division, multiply top and bottom by the conjugate.'
+    real_world: Electrical engineers use complex numbers to describe alternating current, where voltage and current are out of step.
+  picture:
+    kind: geometry
+    points:
+      O:
+      - 1
+      - 1
+      Z:
+      - 7
+      - 9
+      _A:
+      - 7
+      - 1
+    segments:
+    - - O
+      - Z
+      - '|z| = 5'
+    - - O
+      - _A
+      - '3'
+    - - _A
+      - Z
+      - '4'
+    alt: On the Argand plane, z = 3 + 4i is the point (3, 4) and its distance from the origin is 5.
+  items:
+  - prompt: Find the modulus of 3 + 4i.
+    answer: '5'
+    check: sqrt(3**2 + 4**2)
+    difficulty: 1
+    hints:
+    - √(3² + 4²).
+    - √25.
+    solution: '|3 + 4i| = 5.'
+    mistakes:
+      '7': c11_modulus
+  - prompt: What is i¹⁰?
+    options:
+    - −1
+    - '1'
+    - i
+    - −i
+    answer: −1
+    difficulty: 1
+    hints:
+    - 10 = 4 × 2 + 2.
+    - i² = −1.
+    solution: i¹⁰ = i² = −1.
+    mistakes:
+      '1': c11_i_powers
+  - prompt: Find the real part of (2 + 3i)(1 − i).
+    answer: '5'
+    check: re((2+3*I)*(1-I))
+    difficulty: 2
+    hints:
+    - 'Expand: 2 − 2i + 3i − 3i².'
+    - −3i² = +3.
+    solution: (2 + 3i)(1 − i) = 5 + i; real part 5.
+  - prompt: Find (1 + 2i)(1 − 2i).
+    answer: '5'
+    check: expand((1+2*I)*(1-2*I))
+    difficulty: 1
+    hints:
+    - (a + ib)(a − ib) = a² + b².
+    - 1 + 4.
+    solution: 1 + 4 = 5.
+  - prompt: What is the conjugate of 5 − 7i?
+    options:
+    - 5 + 7i
+    - −5 + 7i
+    - −5 − 7i
+    - 7 − 5i
+    answer: 5 + 7i
+    difficulty: 1
+    hints:
+    - Change the sign of the imaginary part.
+    - Keep the real part.
+    solution: The conjugate is 5 + 7i.
+  - prompt: Find the imaginary part of 1/(1 + i).
+    answer: -1/2
+    check: im(1/(1+I))
+    difficulty: 2
+    hints:
+    - Multiply by (1 − i)/(1 − i).
+    - (1 − i)/2.
+    solution: 1/(1 + i) = (1 − i)/2; imaginary part −1/2.
+- code: cbse11m.cx.quadratic
+  title: Quadratic equations with complex roots
+  after:
+  - cbse11m.cx.algebra
+  notes: |
+    ax² + bx + c = 0, discriminant D = b² − 4ac. D > 0: two real roots; D = 0: equal real roots; D < 0: two complex
+    conjugate roots x = (−b ± i√(−D))/(2a). Sum of roots = −b/a, product = c/a. Example: x² + x + 1 = 0 has
+    x = (−1 ± i√3)/2. x² + 9 = 0 gives x = ±3i.
+  explanations:
+    text: 'Every quadratic equation has roots, even when the discriminant b² − 4ac is negative: then the roots are complex numbers that come in conjugate pairs. For x² + 9 = 0, x = ±3i.'
+    visual: 'Picture the graph of y = x² + 2x + 5: it never touches the x-axis, so there are no real roots. The two complex roots, −1 ± 2i, sit on the Argand plane as mirror images.'
+    step_by_step: 'Step 1: Find D = b² − 4ac. Step 2: If D < 0, write √D = i√(−D). Step 3: Use x = (−b ± √D)/(2a). Step 4: Check: sum of roots = −b/a.'
+    real_world: 'Engineers designing springs and circuits look at the discriminant: complex roots mean the system wobbles (oscillates) as it settles.'
+  picture:
+    kind: compare
+    columns:
+    - title: Discriminant
+      points:
+      - D > 0
+      - D = 0
+      - D < 0
+    - title: Roots
+      points:
+      - two real
+      - two equal real
+      - two complex conjugates
+    alt: If the discriminant is positive there are two real roots, if zero two equal roots, and if negative two complex conjugate roots.
+  items:
+  - prompt: Find the discriminant of x² + 2x + 5 = 0.
+    answer: '-16'
+    check: 2**2 - 4*1*5
+    difficulty: 1
+    hints:
+    - b² − 4ac.
+    - 4 − 20.
+    solution: D = 4 − 20 = −16.
+  - prompt: 'The roots of x² + 9 = 0 are:'
+    options:
+    - ±3i
+    - ±3
+    - ±9i
+    - 3 and −9
+    answer: ±3i
+    difficulty: 1
+    hints:
+    - x² = −9.
+    - √−9 = 3i.
+    solution: x = ±3i.
+  - prompt: 'The roots of x² + 2x + 5 = 0 are:'
+    options:
+    - −1 ± 2i
+    - 1 ± 2i
+    - −2 ± i
+    - −1 ± 4i
+    answer: −1 ± 2i
+    difficulty: 2
+    hints:
+    - D = −16, √D = 4i.
+    - (−2 ± 4i)/2.
+    solution: x = (−2 ± 4i)/2 = −1 ± 2i.
+  - prompt: Find the sum of the roots of 2x² − 3x + 7 = 0.
+    answer: 3/2
+    check: Rational(3,2)
+    difficulty: 1
+    hints:
+    - Sum = −b/a.
+    - 3/2.
+    solution: Sum = 3/2.
+  - prompt: Find the product of the roots of x² + x + 1 = 0.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Product = c/a.
+    - 1/1.
+    solution: Product = 1.
+  - prompt: 'If one root of a real quadratic is 2 + 3i, the other is:'
+    options:
+    - 2 − 3i
+    - −2 + 3i
+    - 3 + 2i
+    - −2 − 3i
+    answer: 2 − 3i
+    difficulty: 2
+    hints:
+    - Complex roots come in conjugate pairs.
+    - Change the sign of i.
+    solution: The other root is the conjugate, 2 − 3i.
