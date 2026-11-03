@@ -39,6 +39,12 @@ SUBJECTS = [
     ("bio", "Biology", "en", "kerala_scert", 9),
     ("ss", "Social Science", "en", "kerala_scert", 9),
     ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE Class 7 (NCERT books, new 2024-25 editions): two years back, for filling gaps.
+    ("cbse7-math", "Mathematics", "en", "cbse", 7),
+    ("cbse7-sci", "Science", "en", "cbse", 7),
+    ("cbse7-ss", "Social Science", "en", "cbse", 7),
+    ("cbse7-eng", "English", "en", "cbse", 7),
+    ("cbse7-hin", "Hindi", "hi", "cbse", 7),
     # CBSE Class 8 (NCERT books, new 2025 editions): the year before, for filling gaps.
     ("cbse8-math", "Mathematics", "en", "cbse", 8),
     ("cbse8-sci", "Science", "en", "cbse", 8),
