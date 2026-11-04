@@ -1,0 +1,179 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 5. Format: content/README.md.
+subject: cbse12-math
+chapter: 5
+title: Continuity and Differentiability
+tips:
+  c12_chain: 'Chain rule: differentiate the outer function, keep the inside, then multiply by the derivative of the inside.'
+  c12_cont: Continuous at a means the left limit, right limit and f(a) all exist and are equal.
+concepts:
+- code: cbse12m.cont.continuity
+  title: Continuity
+  notes: |
+    f is continuous at x = a if lim(x→a) f(x) = f(a) (left-hand limit = right-hand limit = value). Continuous on an interval
+    if continuous at every point. Polynomials, sin, cos, eˣ, |x| are continuous everywhere; rational functions except where
+    the denominator is 0; tan x except odd multiples of π/2. Sums, products, quotients (non-zero denominator) and
+    compositions of continuous functions are continuous. Every differentiable function is continuous; |x| is continuous
+    but not differentiable at 0. Greatest integer function [x] is discontinuous at integers.
+  explanations:
+    text: A function is continuous if you can draw its graph without lifting your pen. At a point, the value from the left, the value from the right and the actual value must all agree. Jumps and holes break continuity.
+    visual: 'Draw |x|: a V shape with no break, so it''s continuous. Draw the greatest integer function [x]: steps that jump at every integer, so it''s broken there.'
+    step_by_step: 'Step 1: Find the left-hand limit. Step 2: Find the right-hand limit. Step 3: Find f(a). Step 4: All equal → continuous.'
+    real_world: A taxi meter that jumps from ₹100 to ₹110 at each kilometre is like a discontinuous function.
+  picture:
+    kind: number_line
+    from: -2
+    to: 3
+    step: 1
+    points:
+    - at: 0
+      label: jump
+    - at: 1
+      label: jump
+    - at: 2
+      label: jump
+    alt: The greatest integer function jumps at every integer, so it is discontinuous there.
+  items:
+  - prompt: f(x) = kx + 1 for x ≤ 2 and 3x − 1 for x > 2. Find k so that f is continuous at 2.
+    answer: '2'
+    check: (3*2-1-1)/2
+    difficulty: 2
+    hints:
+    - 2k + 1 = 6 − 1.
+    - 2k = 4.
+    solution: k = 2.
+    mistakes:
+      '5': c12_cont
+  - prompt: Find lim(x→3) (x² − 9)/(x − 3), the value that makes the function continuous at 3.
+    answer: '6'
+    check: limit((x**2-9)/(x-3), x, 3)
+    difficulty: 2
+    hints:
+    - 'Factor: x + 3.'
+    - 3 + 3.
+    solution: '6.'
+  - prompt: '|x| at x = 0 is:'
+    options:
+    - continuous but not differentiable
+    - differentiable but not continuous
+    - neither
+    - both
+    answer: continuous but not differentiable
+    difficulty: 2
+    hints:
+    - 'V shape: no break.'
+    - Sharp corner.
+    solution: Continuous but not differentiable.
+  - prompt: 'The greatest integer function [x] is discontinuous at:'
+    options:
+    - every integer
+    - no point
+    - only 0
+    - every non-integer
+    answer: every integer
+    difficulty: 2
+    hints:
+    - Steps.
+    - Jumps at integers.
+    solution: Every integer.
+  - prompt: 'Every differentiable function is:'
+    options:
+    - continuous
+    - discontinuous
+    - constant
+    - a polynomial
+    answer: continuous
+    difficulty: 1
+    hints:
+    - Smooth implies unbroken.
+    - Converse is false.
+    solution: Continuous.
+  - prompt: 'f(x) = 1/x is discontinuous at:'
+    options:
+    - x = 0
+    - x = 1
+    - every point
+    - no point
+    answer: x = 0
+    difficulty: 1
+    hints:
+    - Denominator zero.
+    - Not defined.
+    solution: x = 0.
+- code: cbse12m.cont.derivatives
+  title: Differentiation rules
+  after:
+  - cbse12m.cont.continuity
+  notes: |
+    Chain rule: d/dx f(g(x)) = f′(g(x))·g′(x). Derivatives: d(sin x) = cos x; d(cos x) = −sin x; d(tan x) = sec²x; d(eˣ) = eˣ;
+    d(ln x) = 1/x; d(sin⁻¹x) = 1/√(1 − x²); d(tan⁻¹x) = 1/(1 + x²). Implicit differentiation. Logarithmic differentiation
+    (for xˣ, products). Parametric: dy/dx = (dy/dt)/(dx/dt). Second-order derivatives.
+  explanations:
+    text: 'Differentiation finds how fast a function changes. The chain rule handles functions inside functions: differentiate the outside, then multiply by the derivative of the inside. There are standard results for sin, cos, eˣ and ln x.'
+    visual: 'Think of y = sin(3x) as an outer box (sin) with 3x inside. Derivative: cos(3x) for the box, times 3 for the inside: 3cos(3x).'
+    step_by_step: 'Step 1: Spot the outer and inner functions. Step 2: Differentiate the outer, keeping the inner. Step 3: Multiply by the derivative of the inner. Step 4: Simplify.'
+    real_world: Car speedometers show the derivative of distance with respect to time.
+  picture:
+    kind: flow
+    steps:
+    - y = f(g(x))
+    - 'Differentiate outer: f′(g(x))'
+    - 'Differentiate inner: g′(x)'
+    - Multiply
+    alt: 'The chain rule: differentiate the outer function, then multiply by the derivative of the inner.'
+  items:
+  - prompt: If y = x³, find dy/dx at x = 2.
+    answer: '12'
+    check: diff(x**3, x).subs(x, 2)
+    difficulty: 1
+    hints:
+    - 3x².
+    - 3 × 4.
+    solution: '12.'
+  - prompt: If y = sin(3x), find dy/dx at x = 0.
+    answer: '3'
+    check: diff(sin(3*x), x).subs(x, 0)
+    difficulty: 1
+    hints:
+    - 3cos 3x.
+    - cos 0 = 1.
+    solution: '3.'
+    mistakes:
+      '1': c12_chain
+  - prompt: If y = (2x + 1)⁵, find dy/dx at x = 0.
+    answer: '10'
+    check: diff((2*x+1)**5, x).subs(x, 0)
+    difficulty: 2
+    hints:
+    - 5(2x + 1)⁴ × 2.
+    - 5 × 1 × 2.
+    solution: '10.'
+    mistakes:
+      '5': c12_chain
+  - prompt: If y = ln(x²), find dy/dx at x = 1.
+    answer: '2'
+    check: 2/1
+    difficulty: 2
+    hints:
+    - 2x/x² = 2/x.
+    - At x = 1.
+    solution: '2.'
+  - prompt: If x = t² and y = t³, find dy/dx at t = 2.
+    answer: '3'
+    check: Rational(3,2)*2
+    difficulty: 2
+    hints:
+    - (3t²)/(2t) = 3t/2.
+    - At t = 2.
+    solution: '3.'
+  - prompt: 'd/dx (tan⁻¹x) equals:'
+    options:
+    - 1/(1 + x²)
+    - 1/√(1 − x²)
+    - sec²x
+    - −1/(1 + x²)
+    answer: 1/(1 + x²)
+    difficulty: 2
+    hints:
+    - Standard result.
+    - Never zero denominator.
+    solution: 1/(1 + x²).

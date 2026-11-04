@@ -1,0 +1,182 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 1. Format: content/README.md.
+subject: cbse12-math
+chapter: 1
+title: Relations and Functions
+tips:
+  c12_equiv: An equivalence relation must be reflexive, symmetric AND transitive; check all three.
+  c12_onto: 'One-one: different inputs give different outputs. Onto: every element of the codomain is an output.'
+concepts:
+- code: cbse12m.rel.types
+  title: Types of relations
+  notes: |
+    Relation R from A to A is a subset of A × A. Empty relation (no pairs), universal relation (A × A). Reflexive: (a, a)
+    ∈ R for every a. Symmetric: (a, b) ∈ R ⇒ (b, a) ∈ R. Transitive: (a, b), (b, c) ∈ R ⇒ (a, c) ∈ R. Equivalence relation:
+    all three; it splits A into disjoint equivalence classes (e.g. congruence modulo 3 on integers gives classes [0], [1],
+    [2]). Number of relations on a set with n elements = 2^(n²).
+  explanations:
+    text: A relation pairs up elements of a set. It's reflexive if every element is related to itself, symmetric if the pairing works both ways, and transitive if a link from a to b and b to c gives a to c. A relation with all three is an equivalence relation, and it sorts the set into groups.
+    visual: 'Picture students related by ''same birth month''. Everyone matches themselves (reflexive), if A matches B then B matches A (symmetric), and matches chain (transitive). The 12 months make 12 groups: the equivalence classes.'
+    step_by_step: 'Step 1: Check (a, a) for every a. Step 2: For each (a, b), look for (b, a). Step 3: For each chain (a, b), (b, c), look for (a, c). Step 4: All three hold → equivalence relation.'
+    real_world: 'Clocks use ''congruent modulo 12'': 3 o''clock and 15:00 fall in the same class.'
+  picture:
+    kind: compare
+    columns:
+    - title: Property
+      points:
+      - reflexive
+      - symmetric
+      - transitive
+    - title: Test
+      points:
+      - (a, a) for all a
+      - (a, b) ⇒ (b, a)
+      - (a, b), (b, c) ⇒ (a, c)
+    alt: The three properties of a relation and how to test each.
+  items:
+  - prompt: How many relations are possible on a set with 2 elements?
+    answer: '16'
+    check: 2**(2**2)
+    difficulty: 2
+    hints:
+    - 2^(n²).
+    - 2⁴.
+    solution: '16.'
+  - prompt: Congruence modulo 3 on the integers gives how many equivalence classes?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Remainders 0, 1, 2.
+    - Three.
+    solution: '3.'
+  - prompt: 'R = {(1,1), (2,2), (3,3), (1,2)} on {1, 2, 3} is:'
+    options:
+    - reflexive but not symmetric
+    - symmetric but not reflexive
+    - an equivalence relation
+    - empty
+    answer: reflexive but not symmetric
+    difficulty: 2
+    hints:
+    - All (a, a) present.
+    - (1,2) but no (2,1).
+    solution: Reflexive, but not symmetric.
+    mistakes:
+      an equivalence relation: c12_equiv
+  - prompt: '''Is parallel to'' on lines in a plane (counting a line parallel to itself) is:'
+    options:
+    - an equivalence relation
+    - only symmetric
+    - only reflexive
+    - not a relation
+    answer: an equivalence relation
+    difficulty: 2
+    hints:
+    - Check all three.
+    - Chains of parallels.
+    solution: It's an equivalence relation.
+  - prompt: '''Is less than'' on real numbers is:'
+    options:
+    - transitive but not symmetric
+    - symmetric
+    - reflexive
+    - an equivalence relation
+    answer: transitive but not symmetric
+    difficulty: 1
+    hints:
+    - a < b doesn't give b < a.
+    - a < b < c ⇒ a < c.
+    solution: Transitive, not symmetric or reflexive.
+  - prompt: 'The relation A × A on a set A is called the:'
+    options:
+    - universal relation
+    - empty relation
+    - identity relation
+    - inverse relation
+    answer: universal relation
+    difficulty: 1
+    hints:
+    - Every pair.
+    - Largest relation.
+    solution: The universal relation.
+- code: cbse12m.rel.functions
+  title: Types of functions and composition
+  after:
+  - cbse12m.rel.types
+  notes: |
+    Function f: A → B. One-one (injective): f(x₁) = f(x₂) ⇒ x₁ = x₂. Onto (surjective): range = codomain. Bijective: both.
+    Horizontal line test on graphs. f(x) = 2x on ℝ is bijective; f(x) = x² on ℝ is neither. Composition (g∘f)(x) = g(f(x)).
+    Invertible iff bijective; f⁻¹ undoes f. Number of bijections from a set of n elements onto itself is n!.
+  explanations:
+    text: 'A function is one-one if no two inputs share an output, and onto if every possible output is used. A function that is both (bijective) can be reversed: its inverse undoes it. Composition means applying one function, then another.'
+    visual: 'Draw arrows from inputs to outputs. One-one: no two arrows hit the same target. Onto: every target gets an arrow. Bijective: perfect pairing.'
+    step_by_step: 'Step 1: Set f(x₁) = f(x₂) and see if x₁ = x₂ (one-one). Step 2: Solve y = f(x) for x and check it''s in the domain for every y (onto). Step 3: For composition, work from the inside out.'
+    real_world: 'Roll numbers and students in a class form a bijection: each student has exactly one number and each number belongs to one student.'
+  picture:
+    kind: flow
+    steps:
+    - Input x
+    - Apply f
+    - f(x)
+    - Apply g
+    - g(f(x))
+    alt: 'Composition: apply f first, then g, to get g(f(x)).'
+  items:
+  - prompt: If f(x) = 2x + 1 and g(x) = x², find (g∘f)(1).
+    answer: '9'
+    check: (2*1+1)**2
+    difficulty: 1
+    hints:
+    - f(1) = 3.
+    - g(3) = 9.
+    solution: '9.'
+  - prompt: If f(x) = 2x + 1 and g(x) = x², find (f∘g)(1).
+    answer: '3'
+    check: 2*1**2+1
+    difficulty: 1
+    hints:
+    - g(1) = 1.
+    - f(1) = 3.
+    solution: '3.'
+  - prompt: If f(x) = 3x − 6, find f⁻¹(0).
+    answer: '2'
+    check: 6/3
+    difficulty: 2
+    hints:
+    - Solve 3x − 6 = 0.
+    - x = 2.
+    solution: '2.'
+  - prompt: How many bijections are there from a set of 3 elements onto itself?
+    answer: '6'
+    check: factorial(3)
+    difficulty: 2
+    hints:
+    - n!.
+    - 3!.
+    solution: '6.'
+  - prompt: 'f(x) = x² from ℝ to ℝ is:'
+    options:
+    - neither one-one nor onto
+    - one-one only
+    - onto only
+    - bijective
+    answer: neither one-one nor onto
+    difficulty: 2
+    hints:
+    - f(2) = f(−2).
+    - No negative outputs.
+    solution: Neither one-one nor onto.
+    mistakes:
+      bijective: c12_onto
+  - prompt: 'A function has an inverse exactly when it is:'
+    options:
+    - bijective
+    - one-one only
+    - onto only
+    - constant
+    answer: bijective
+    difficulty: 1
+    hints:
+    - Both one-one and onto.
+    - Perfect pairing.
+    solution: Bijective.
