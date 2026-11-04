@@ -1,0 +1,183 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 1. Format: content/README.md.
+subject: cbse12-phy
+chapter: 1
+title: Electric Charges and Fields
+tips:
+  c12p_coulomb: 'Coulomb''s force F = kq₁q₂/r²: doubling the distance makes the force four times smaller.'
+  c12p_flux: 'Gauss''s law: total flux through a closed surface = enclosed charge ÷ ε₀. Charges outside add nothing.'
+concepts:
+- code: cbse12p.charge.coulomb
+  title: Charge and Coulomb's law
+  notes: |
+    Electric charge: two kinds; like charges repel. Charging by friction, conduction, induction. Properties: additive,
+    conserved, quantised (q = ne, e = 1.6 × 10⁻¹⁹ C). Coulomb's law F = kq₁q₂/r², k = 1/(4πε₀) = 9 × 10⁹ N m² C⁻². Vector form;
+    principle of superposition for many charges. Electric field E = F/q₀; field of a point charge kq/r²; field lines (start on
+    +, end on −, never cross). Electric dipole: dipole moment p = q × 2a; field on axis 2kp/r³, on equatorial line kp/r³;
+    torque in uniform field τ = pE sin θ.
+  explanations:
+    text: 'Charges come in two kinds: like charges repel, unlike attract. Coulomb''s law says the force grows with the charges and falls with the square of the distance. An electric field describes the force a charge would feel at each point.'
+    visual: Draw field lines from a positive charge pointing outward like spokes, and into a negative charge. Lines close together mean a strong field.
+    step_by_step: 'Step 1: Write F = kq₁q₂/r². Step 2: Put charges in coulombs and distance in metres. Step 3: For many charges, add forces as vectors. Step 4: E = F/q.'
+    real_world: Photocopiers use electric charges to make toner powder stick to paper in the right pattern.
+  picture:
+    kind: flow
+    steps:
+    - Charges q₁ and q₂
+    - Distance r apart
+    - F = kq₁q₂/r²
+    - Like charges repel, unlike attract
+    alt: 'Coulomb''s law: the force between two charges depends on their sizes and the square of their distance.'
+  items:
+  - prompt: How many electrons make a charge of 1.6 × 10⁻¹⁸ C? (e = 1.6 × 10⁻¹⁹ C)
+    answer: '10'
+    check: Rational(16,10)*10**-18/(Rational(16,10)*10**-19)
+    difficulty: 1
+    hints:
+    - n = q/e.
+    - 10⁻¹⁸/10⁻¹⁹.
+    solution: 10 electrons.
+  - prompt: Two charges of 1 μC each are 1 m apart. Find the force in units of 10⁻³ N (k = 9 × 10⁹).
+    answer: '9'
+    check: 9*10**9*10**-6*10**-6/10**-3
+    difficulty: 1
+    hints:
+    - k × 10⁻⁶ × 10⁻⁶ / 1.
+    - 9 × 10⁻³ N.
+    solution: 9 × 10⁻³ N.
+  - prompt: The distance between two charges is doubled. By what factor does the force become smaller?
+    answer: '4'
+    check: 2**2
+    difficulty: 1
+    hints:
+    - Inverse square.
+    - 2².
+    solution: 4 times smaller.
+    mistakes:
+      '2': c12p_coulomb
+  - prompt: A 2 μC charge feels a force of 4 N. Find the field in units of 10⁶ N/C.
+    answer: '2'
+    check: 4/(2*10**-6)/10**6
+    difficulty: 2
+    hints:
+    - E = F/q.
+    - 4 ÷ 2 × 10⁻⁶.
+    solution: 2 × 10⁶ N/C.
+  - prompt: 'Electric field lines:'
+    options:
+    - never cross each other
+    - form closed loops around charges
+    - start on negative charges
+    - are always straight
+    answer: never cross each other
+    difficulty: 1
+    hints:
+    - One direction at each point.
+    - Unique.
+    solution: They never cross.
+  - prompt: 'Charge is quantised, meaning:'
+    options:
+    - it comes in whole multiples of e
+    - it is always positive
+    - it can't be transferred
+    - it is infinite
+    answer: it comes in whole multiples of e
+    difficulty: 2
+    hints:
+    - q = ne.
+    - Smallest unit.
+    solution: It exists only as whole multiples of e.
+- code: cbse12p.charge.gauss
+  title: Electric flux and Gauss's law
+  after:
+  - cbse12p.charge.coulomb
+  notes: |
+    Electric flux Φ = E·ΔS = EΔS cos θ (N m² C⁻¹). Gauss's law: total flux through a closed surface = q_enclosed/ε₀,
+    independent of the surface's shape. Applications: field of an infinitely long straight wire E = λ/(2πε₀r); infinite plane
+    sheet E = σ/(2ε₀), independent of distance; thin spherical shell: outside kq/r², inside zero. Continuous charge
+    distributions: linear λ, surface σ, volume ρ.
+  explanations:
+    text: Electric flux counts how many field lines pass through a surface. Gauss's law says the total flux out of any closed surface depends only on the charge inside it. This makes it easy to find fields for symmetric shapes like wires, sheets and spheres.
+    visual: Imagine a balloon around a charge. However you squash the balloon, the same number of field lines poke out of it, because the same charge is inside.
+    step_by_step: 'Step 1: Choose a Gaussian surface that matches the symmetry. Step 2: Find the flux in terms of E. Step 3: Set it equal to q_enclosed/ε₀. Step 4: Solve for E.'
+    real_world: 'Charges on a car''s metal body stay on the outside, so the field inside is zero: that''s why sitting in a car protects you from lightning.'
+  picture:
+    kind: compare
+    columns:
+    - title: Charge shape
+      points:
+      - long wire
+      - plane sheet
+      - spherical shell (outside)
+      - spherical shell (inside)
+    - title: Field
+      points:
+      - λ/(2πε₀r)
+      - σ/(2ε₀)
+      - kq/r²
+      - '0'
+    alt: Fields from Gauss's law for a wire, a sheet and a spherical shell.
+  items:
+  - prompt: A field of 100 N/C passes straight through an area of 0.5 m². Find the flux (N m²/C).
+    answer: '50'
+    check: 100*Rational(1,2)
+    difficulty: 1
+    hints:
+    - Φ = EA cos 0.
+    - 100 × 0.5.
+    solution: 50 N m²/C.
+  - prompt: The same field makes 60° with the normal. Find the flux (N m²/C).
+    answer: '25'
+    check: 100*Rational(1,2)*Rational(1,2)
+    difficulty: 2
+    hints:
+    - cos 60° = 1/2.
+    - 50 × 1/2.
+    solution: 25 N m²/C.
+  - prompt: A closed surface encloses no charge. What is the total flux through it?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - q_enclosed = 0.
+    - In = out.
+    solution: '0.'
+    mistakes:
+      '1': c12p_flux
+  - prompt: 'Inside a uniformly charged thin spherical shell, the field is:'
+    options:
+    - zero
+    - kq/r²
+    - σ/ε₀
+    - infinite
+    answer: zero
+    difficulty: 1
+    hints:
+    - No charge enclosed.
+    - Gauss.
+    solution: Zero.
+  - prompt: 'The field of an infinite plane sheet of charge:'
+    options:
+    - does not depend on distance
+    - falls as 1/r
+    - falls as 1/r²
+    - is zero
+    answer: does not depend on distance
+    difficulty: 2
+    hints:
+    - σ/(2ε₀).
+    - No r.
+    solution: It's independent of distance.
+  - prompt: 'A charge outside a closed surface contributes to the total flux:'
+    options:
+    - nothing
+    - q/ε₀
+    - 2q/ε₀
+    - −q/ε₀
+    answer: nothing
+    difficulty: 2
+    hints:
+    - Lines enter and leave.
+    - Net zero.
+    solution: Nothing.
+    mistakes:
+      q/ε₀: c12p_flux

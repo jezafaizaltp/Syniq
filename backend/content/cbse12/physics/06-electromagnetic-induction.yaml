@@ -1,0 +1,178 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 6. Format: content/README.md.
+subject: cbse12-phy
+chapter: 6
+title: Electromagnetic Induction
+tips:
+  c12p_faraday: 'Induced EMF = −dΦ/dt: it depends on how FAST the flux changes, not on how big the flux is.'
+  c12p_lenz: 'Lenz''s law: the induced current flows so as to OPPOSE the change in flux that causes it.'
+concepts:
+- code: cbse12p.emi.faraday
+  title: Faraday's and Lenz's laws
+  notes: |
+    Experiments of Faraday and Henry. Magnetic flux Φ = B·A = BA cos θ (weber). Faraday's law: ε = −N dΦ/dt. Lenz's law (sign):
+    induced current opposes the change; consequence of energy conservation. Motional EMF ε = Blv for a rod moving across a
+    field. Eddy currents (braking, induction furnaces; reduced by laminated cores). (Energy considerations kept briefly.)
+  explanations:
+    text: 'Changing the magnetic field through a coil makes a voltage in it: that''s electromagnetic induction. The faster the change, the bigger the voltage. Lenz''s law says the induced current always tries to oppose the change that made it.'
+    visual: 'Push a magnet into a coil: the meter needle flicks one way. Pull it out: it flicks the other way. Hold it still: nothing.'
+    step_by_step: 'Step 1: Find the flux Φ = BA cos θ. Step 2: Find how much it changes and how fast. Step 3: ε = −N ΔΦ/Δt. Step 4: Use Lenz''s law for direction.'
+    real_world: Bicycle dynamos and power-station generators make electricity by spinning coils near magnets.
+  picture:
+    kind: flow
+    steps:
+    - Magnet moves into coil
+    - Flux through coil changes
+    - 'EMF induced: ε = −N dΦ/dt'
+    - Current opposes the change (Lenz)
+    alt: 'Electromagnetic induction: changing flux induces an EMF whose current opposes the change.'
+  items:
+  - prompt: Flux through a 100-turn coil changes by 0.02 Wb in 0.1 s. Find the induced EMF (V).
+    answer: '20'
+    check: 100*Rational(2,100)/Rational(1,10)
+    difficulty: 1
+    hints:
+    - ε = N ΔΦ/Δt.
+    - 100 × 0.2.
+    solution: 20 V.
+  - prompt: A 0.5 m rod moves at 4 m/s across a 0.2 T field. Find the EMF (V).
+    answer: '0.4'
+    check: Rational(2,10)*Rational(1,2)*4
+    difficulty: 1
+    hints:
+    - ε = Blv.
+    - 0.2 × 0.5 × 4.
+    solution: 0.4 V.
+  - prompt: A field of 0.5 T passes straight through a 0.2 m² loop. Find the flux (Wb).
+    answer: '0.1'
+    check: Rational(1,2)*Rational(2,10)
+    difficulty: 1
+    hints:
+    - Φ = BA.
+    - 0.5 × 0.2.
+    solution: 0.1 Wb.
+  - prompt: 'A magnet held still inside a coil induces:'
+    options:
+    - no EMF
+    - a steady EMF
+    - a large EMF
+    - an alternating EMF
+    answer: no EMF
+    difficulty: 1
+    hints:
+    - No change in flux.
+    - dΦ/dt = 0.
+    solution: No EMF.
+    mistakes:
+      a large EMF: c12p_faraday
+  - prompt: 'Lenz''s law is a consequence of conservation of:'
+    options:
+    - energy
+    - charge
+    - momentum
+    - mass
+    answer: energy
+    difficulty: 2
+    hints:
+    - Otherwise free energy.
+    - Opposition needs work.
+    solution: Energy.
+    mistakes:
+      charge: c12p_lenz
+  - prompt: 'Transformer cores are laminated to reduce:'
+    options:
+    - eddy currents
+    - voltage
+    - magnetic field
+    - number of turns
+    answer: eddy currents
+    difficulty: 2
+    hints:
+    - Thin insulated sheets.
+    - Less heating.
+    solution: Eddy currents.
+- code: cbse12p.emi.inductance
+  title: Inductance and the AC generator
+  after:
+  - cbse12p.emi.faraday
+  notes: |
+    Self-inductance L: Φ = LI, ε = −L dI/dt (henry); solenoid L = μ₀n²Al. Mutual inductance M: Φ₂ = MI₁, ε₂ = −M dI₁/dt.
+    Energy stored in an inductor ½LI². AC generator: coil rotating in a field, ε = NBAω sin ωt, peak ε₀ = NBAω.
+  explanations:
+    text: An inductor resists changes in current through it, because the changing current induces an opposing voltage in itself. Two coils near each other can induce voltages in one another (mutual inductance). Spinning a coil in a magnetic field gives an alternating voltage.
+    visual: Draw a coil spinning between two magnet poles. As it turns, the flux through it rises and falls, so the induced voltage swings up and down like a sine wave.
+    step_by_step: 'Step 1: Self-induced EMF = L × rate of change of current. Step 2: Energy = ½LI². Step 3: Generator peak EMF = NBAω.'
+    real_world: Wireless phone chargers use mutual inductance between a coil in the pad and one in the phone.
+  picture:
+    kind: number_line
+    from: 0
+    to: 4
+    step: 1
+    points:
+    - at: 0
+      label: ε = 0
+    - at: 1
+      label: peak +
+    - at: 2
+      label: ε = 0
+    - at: 3
+      label: peak −
+    - at: 4
+      label: ε = 0
+    alt: 'An AC generator''s EMF over one turn, in quarter turns: zero, positive peak, zero, negative peak, zero.'
+  items:
+  - prompt: Current in a 2 H inductor changes by 3 A in 1 s. Find the induced EMF (V).
+    answer: '6'
+    check: 2*3
+    difficulty: 1
+    hints:
+    - ε = L dI/dt.
+    - 2 × 3.
+    solution: 6 V.
+  - prompt: Find the energy (J) stored in a 4 H inductor carrying 3 A.
+    answer: '18'
+    check: Rational(1,2)*4*3**2
+    difficulty: 1
+    hints:
+    - ½LI².
+    - ½ × 4 × 9.
+    solution: 18 J.
+  - prompt: A generator coil has N = 100, B = 0.1 T, A = 0.1 m², ω = 50 rad/s. Find the peak EMF (V).
+    answer: '50'
+    check: 100*Rational(1,10)*Rational(1,10)*50
+    difficulty: 2
+    hints:
+    - NBAω.
+    - 100 × 0.1 × 0.1 × 50.
+    solution: 50 V.
+  - prompt: Current in coil 1 changes at 5 A/s, and M = 0.4 H. Find the EMF in coil 2 (V).
+    answer: '2'
+    check: Rational(4,10)*5
+    difficulty: 2
+    hints:
+    - ε = M dI/dt.
+    - 0.4 × 5.
+    solution: 2 V.
+  - prompt: 'The unit of inductance is the:'
+    options:
+    - henry
+    - tesla
+    - weber
+    - farad
+    answer: henry
+    difficulty: 1
+    hints:
+    - Joseph Henry.
+    - H.
+    solution: The henry.
+  - prompt: 'An AC generator converts:'
+    options:
+    - mechanical energy into electrical energy
+    - electrical into mechanical
+    - heat into light
+    - chemical into electrical
+    answer: mechanical energy into electrical energy
+    difficulty: 1
+    hints:
+    - Spinning coil.
+    - Dynamo.
+    solution: Mechanical energy into electrical.

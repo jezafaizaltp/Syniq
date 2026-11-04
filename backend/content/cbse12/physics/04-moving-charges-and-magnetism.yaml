@@ -1,0 +1,183 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 4. Format: content/README.md.
+subject: cbse12-phy
+chapter: 4
+title: Moving Charges and Magnetism
+tips:
+  c12p_force: 'Force on a moving charge F = qvB sin θ: zero when it moves along the field, greatest at right angles.'
+  c12p_rhr: Use Fleming's left-hand rule (or the right-hand palm rule) for the force direction on a current.
+concepts:
+- code: cbse12p.mag.force
+  title: Magnetic force and motion of charges
+  notes: |
+    Oersted's experiment: currents make magnetic fields. Lorentz force F = q(E + v × B); magnetic force qvB sin θ,
+    perpendicular to v (does no work). Charge in a uniform field: circular path r = mv/(qB), period T = 2πm/(qB)
+    (independent of speed); helical if v has a component along B. Force on a current-carrying conductor F = IlB sin θ
+    (Fleming's left-hand rule). Force between parallel currents: attract if same direction (definition of ampere). Torque on
+    a current loop τ = NIAB sin θ; magnetic moment m = NIA. Moving coil galvanometer; conversion to ammeter (shunt) and
+    voltmeter (series resistance).
+  explanations:
+    text: A magnetic field pushes on moving charges and on wires carrying current. The push is sideways to the motion, so a charge in a uniform field goes round in a circle. Coils in a field feel a turning force, which is how meters and motors work.
+    visual: 'Hold your left hand with thumb, first and second fingers at right angles: First finger = Field, seCond finger = Current, thuMb = Motion (force).'
+    step_by_step: 'Step 1: Write F = qvB sin θ or IlB sin θ. Step 2: Find the direction with the left-hand rule. Step 3: For circles, r = mv/(qB).'
+    real_world: Electric motors in fans and mixers turn because current-carrying coils feel forces in a magnetic field.
+  picture:
+    kind: flow
+    steps:
+    - Charge moves in field B
+    - Force qvB at right angles
+    - Path bends into a circle
+    - r = mv/(qB)
+    alt: A charge moving across a uniform magnetic field is pushed sideways into a circular path.
+  items:
+  - prompt: A 2 m wire carries 5 A at right angles to a 0.3 T field. Find the force (N).
+    answer: '3'
+    check: 5*2*Rational(3,10)
+    difficulty: 1
+    hints:
+    - F = IlB.
+    - 5 × 2 × 0.3.
+    solution: 3 N.
+  - prompt: A charge moves parallel to a magnetic field. What is the magnetic force on it?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - sin 0 = 0.
+    - Along the field.
+    solution: '0.'
+    mistakes:
+      '1': c12p_force
+  - prompt: A coil of 100 turns, area 0.01 m², carries 2 A. Find its magnetic moment (A m²).
+    answer: '2'
+    check: 100*2*Rational(1,100)
+    difficulty: 2
+    hints:
+    - m = NIA.
+    - 100 × 2 × 0.01.
+    solution: 2 A m².
+  - prompt: 'Two parallel wires carrying currents in the same direction:'
+    options:
+    - attract each other
+    - repel each other
+    - feel no force
+    - twist
+    answer: attract each other
+    difficulty: 2
+    hints:
+    - Like currents attract.
+    - Opposite to charges.
+    solution: They attract.
+  - prompt: 'The magnetic force on a moving charge does no work because:'
+    options:
+    - it is always perpendicular to the velocity
+    - it is zero
+    - it acts along the motion
+    - charges have no mass
+    answer: it is always perpendicular to the velocity
+    difficulty: 2
+    hints:
+    - W = F·d.
+    - 90°.
+    solution: It's perpendicular to the motion, so speed doesn't change.
+  - prompt: 'A galvanometer is converted into an ammeter by connecting:'
+    options:
+    - a low resistance in parallel (shunt)
+    - a high resistance in series
+    - a capacitor
+    - a battery
+    answer: a low resistance in parallel (shunt)
+    difficulty: 2
+    hints:
+    - Most current bypasses.
+    - Shunt.
+    solution: A low shunt resistance in parallel.
+- code: cbse12p.mag.field
+  title: Biot–Savart and Ampère's laws
+  after:
+  - cbse12p.mag.force
+  notes: |
+    Biot–Savart law dB = (μ₀/4π) I dl sin θ / r². Field at the centre of a circular loop B = μ₀NI/(2R); on its axis
+    μ₀IR²/(2(x² + R²)^(3/2)). Ampère's circuital law ∮B·dl = μ₀I. Long straight wire B = μ₀I/(2πr). Solenoid B = μ₀nI inside
+    (uniform), ~0 outside; toroid B = μ₀NI/(2πr). μ₀ = 4π × 10⁻⁷ T m A⁻¹. Right-hand thumb rule for direction.
+  explanations:
+    text: Currents create magnetic fields. Around a straight wire the field circles the wire and weakens with distance. Inside a long coil (solenoid) the field is strong and uniform, like a bar magnet's.
+    visual: 'Grip a wire with your right hand, thumb along the current: your curled fingers show the field''s direction circling the wire.'
+    step_by_step: 'Step 1: Pick the formula for the shape (wire, loop, solenoid). Step 2: Put in μ₀ = 4π × 10⁻⁷. Step 3: Use the right-hand rule for direction.'
+    real_world: Electromagnets in scrap yards and MRI scanners are big solenoids carrying large currents.
+  picture:
+    kind: compare
+    columns:
+    - title: Shape
+      points:
+      - long straight wire
+      - circular loop (centre)
+      - solenoid (inside)
+    - title: Field B
+      points:
+      - μ₀I/(2πr)
+      - μ₀NI/(2R)
+      - μ₀nI
+    alt: Magnetic fields of a straight wire, a loop and a solenoid.
+  items:
+  - prompt: Find B (in units of 10⁻⁵ T) 0.1 m from a long wire carrying 5 A.
+    answer: '1'
+    check: 2*10**-7*5/Rational(1,10)/10**-5
+    difficulty: 2
+    hints:
+    - μ₀I/(2πr).
+    - 2 × 10⁻⁷ × 5/0.1.
+    solution: 10⁻⁵ T.
+  - prompt: A solenoid has 1000 turns per metre and carries 2 A. Find B in units of π × 10⁻⁴ T.
+    answer: '8'
+    check: 4*1000*2*10**-7/10**-4
+    difficulty: 2
+    hints:
+    - μ₀nI = 4π × 10⁻⁷ × 1000 × 2.
+    - 8π × 10⁻⁴.
+    solution: 8π × 10⁻⁴ T.
+  - prompt: The distance from a long wire is doubled. By what factor does B fall?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - B ∝ 1/r.
+    - Halves.
+    solution: It halves.
+  - prompt: 'The field inside a long solenoid is:'
+    options:
+    - uniform
+    - zero
+    - circular
+    - strongest at the ends
+    answer: uniform
+    difficulty: 1
+    hints:
+    - Parallel lines.
+    - μ₀nI.
+    solution: Uniform.
+  - prompt: 'The direction of the field around a straight current is given by the:'
+    options:
+    - right-hand thumb rule
+    - left-hand rule
+    - Lenz's law
+    - Ohm's law
+    answer: right-hand thumb rule
+    difficulty: 1
+    hints:
+    - Grip the wire.
+    - Fingers curl.
+    solution: The right-hand thumb rule.
+    mistakes:
+      left-hand rule: c12p_rhr
+  - prompt: 'The value of μ₀ is:'
+    options:
+    - 4π × 10⁻⁷ T m/A
+    - 9 × 10⁹ N m²/C²
+    - 8.85 × 10⁻¹² F/m
+    - 1.6 × 10⁻¹⁹ C
+    answer: 4π × 10⁻⁷ T m/A
+    difficulty: 2
+    hints:
+    - Permeability of free space.
+    - Has π.
+    solution: 4π × 10⁻⁷ T m/A.

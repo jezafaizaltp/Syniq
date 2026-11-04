@@ -1,0 +1,179 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 7. Format: content/README.md.
+subject: cbse12-phy
+chapter: 7
+title: Alternating Current
+tips:
+  c12p_rms: rms value = peak ÷ √2. Mains 230 V in India is the rms value; the peak is about 325 V.
+  c12p_transformer: 'Transformer: Vs/Vp = Ns/Np. Step-up raises voltage but lowers current; power stays about the same.'
+concepts:
+- code: cbse12p.ac.circuits
+  title: AC circuits and reactance
+  notes: |
+    AC voltage v = v_m sin ωt; rms values I_rms = I_m/√2, V_rms = V_m/√2. Resistor: V and I in phase. Inductor: current lags
+    by π/2; inductive reactance X_L = ωL. Capacitor: current leads by π/2; capacitive reactance X_C = 1/(ωC). Series LCR:
+    impedance Z = √(R² + (X_L − X_C)²); phase angle tan φ = (X_L − X_C)/R. Resonance when X_L = X_C: ω₀ = 1/√(LC), Z = R,
+    current maximum; quality factor. Phasors.
+  explanations:
+    text: Alternating current keeps reversing direction. Its effective value (rms) is the peak divided by √2. Inductors and capacitors oppose AC in a way that depends on frequency (reactance), and in an LCR circuit the current is biggest at the resonant frequency.
+    visual: 'Picture a radio tuner: turning the knob changes the capacitance until the circuit resonates with one station''s frequency, and that station comes through loudly.'
+    step_by_step: 'Step 1: Find X_L = ωL and X_C = 1/(ωC). Step 2: Z = √(R² + (X_L − X_C)²). Step 3: I = V/Z. Step 4: Resonance when X_L = X_C.'
+    real_world: Indian household supply is 230 V rms at 50 Hz.
+  picture:
+    kind: compare
+    columns:
+    - title: Component
+      points:
+      - resistor
+      - inductor
+      - capacitor
+    - title: Opposition
+      points:
+      - R
+      - X_L = ωL
+      - X_C = 1/(ωC)
+    - title: Current vs voltage
+      points:
+      - in phase
+      - lags by 90°
+      - leads by 90°
+    alt: How a resistor, inductor and capacitor behave in an AC circuit.
+  items:
+  - prompt: The peak voltage is 200√2 V. Find the rms voltage (V).
+    answer: '200'
+    check: '200'
+    difficulty: 1
+    hints:
+    - V_rms = V_m/√2.
+    - 200√2/√2.
+    solution: 200 V.
+    mistakes:
+      '400': c12p_rms
+  - prompt: Find X_L (Ω) for L = 0.1 H at ω = 100 rad/s.
+    answer: '10'
+    check: 100*Rational(1,10)
+    difficulty: 1
+    hints:
+    - ωL.
+    - 100 × 0.1.
+    solution: 10 Ω.
+  - prompt: Find X_C (Ω) for C = 100 μF at ω = 100 rad/s.
+    answer: '100'
+    check: 1/(100*100*10**-6)
+    difficulty: 2
+    hints:
+    - 1/(ωC).
+    - 1/(10⁻²).
+    solution: 100 Ω.
+  - prompt: A series circuit has R = 3 Ω and X_L − X_C = 4 Ω. Find Z (Ω).
+    answer: '5'
+    check: sqrt(3**2+4**2)
+    difficulty: 2
+    hints:
+    - √(9 + 16).
+    - '5.'
+    solution: 5 Ω.
+  - prompt: 'At resonance in a series LCR circuit, the impedance equals:'
+    options:
+    - R
+    - zero
+    - X_L + X_C
+    - infinity
+    answer: R
+    difficulty: 2
+    hints:
+    - X_L = X_C cancel.
+    - Only R left.
+    solution: R.
+  - prompt: 'In a pure inductor, the current:'
+    options:
+    - lags the voltage by 90°
+    - leads the voltage by 90°
+    - is in phase
+    - is zero
+    answer: lags the voltage by 90°
+    difficulty: 2
+    hints:
+    - Opposes change.
+    - Lags.
+    solution: Lags the voltage by 90°.
+- code: cbse12p.ac.power
+  title: Power in AC and transformers
+  after:
+  - cbse12p.ac.circuits
+  notes: |
+    Average power P = V_rms I_rms cos φ; power factor cos φ (1 for pure R, 0 for pure L or C: wattless current). LC oscillations
+    ω = 1/√(LC). Transformer: Vs/Vp = Ns/Np = Ip/Is (ideal); step-up and step-down; losses: copper (I²R), eddy currents,
+    hysteresis, flux leakage. Power transmission at high voltage to reduce I²R loss.
+  explanations:
+    text: 'In AC circuits, the real power used depends on the power factor, cos φ: a pure resistor uses all of it, while a pure inductor or capacitor uses none on average. Transformers change AC voltage using the ratio of turns in two coils.'
+    visual: 'Draw a transformer: two coils on an iron ring. If the second coil has 10 times as many turns, the voltage is 10 times higher, but the current is 10 times smaller.'
+    step_by_step: 'Step 1: P = V_rms I_rms cos φ. Step 2: For a transformer, Vs/Vp = Ns/Np. Step 3: In an ideal transformer, VpIp = VsIs.'
+    real_world: Electricity is sent across the country at very high voltages (like 400 kV) so the current, and the heating loss, is small.
+  picture:
+    kind: flow
+    steps:
+    - Power station
+    - Step-up transformer (high V, low I)
+    - Long transmission lines
+    - Step-down transformer
+    - Homes at 230 V
+    alt: 'Power transmission: stepping voltage up for the long lines, then down for homes.'
+  items:
+  - prompt: A transformer has 100 primary and 500 secondary turns, with 220 V in. Find the output voltage (V).
+    answer: '1100'
+    check: 220*500/100
+    difficulty: 1
+    hints:
+    - Vs = Vp × Ns/Np.
+    - 220 × 5.
+    solution: 1,100 V.
+  - prompt: A step-down transformer changes 220 V to 11 V. Find Np/Ns.
+    answer: '20'
+    check: 220/11
+    difficulty: 1
+    hints:
+    - Ratio of voltages.
+    - 220/11.
+    solution: '20.'
+  - prompt: V_rms = 200 V, I_rms = 5 A, cos φ = 0.8. Find the average power (W).
+    answer: '800'
+    check: 200*5*Rational(8,10)
+    difficulty: 1
+    hints:
+    - P = VI cos φ.
+    - 200 × 5 × 0.8.
+    solution: 800 W.
+  - prompt: An ideal transformer has 220 V, 2 A in and 44 V out. Find the output current (A).
+    answer: '10'
+    check: 220*2/44
+    difficulty: 2
+    hints:
+    - VpIp = VsIs.
+    - 440/44.
+    solution: 10 A.
+    mistakes:
+      '0.4': c12p_transformer
+  - prompt: 'The power factor of a pure inductor is:'
+    options:
+    - '0'
+    - '1'
+    - '0.5'
+    - infinite
+    answer: '0'
+    difficulty: 2
+    hints:
+    - φ = 90°.
+    - cos 90°.
+    solution: '0.'
+  - prompt: 'Power is transmitted at high voltage to:'
+    options:
+    - reduce I²R losses
+    - increase the current
+    - make it safer at home
+    - increase resistance
+    answer: reduce I²R losses
+    difficulty: 2
+    hints:
+    - Same power, less current.
+    - Heat loss ∝ I².
+    solution: To reduce I²R heating losses.

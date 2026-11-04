@@ -1,0 +1,185 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 14. Format: content/README.md.
+subject: cbse12-phy
+chapter: 14
+title: Semiconductor Electronics
+tips:
+  c12p_doping: 'n-type: doped with a pentavalent atom (P, As), extra electrons. p-type: trivalent atom (B, Al, In), holes.'
+  c12p_bias: Forward bias (p to +) makes the depletion layer thin and current flows; reverse bias widens it and almost no current flows.
+concepts:
+- code: cbse12p.semi.materials
+  title: Semiconductors and doping
+  notes: |
+    Classification by conductivity and energy bands: conductors (overlapping bands), insulators (large gap > 3 eV),
+    semiconductors (small gap ~1 eV: Si 1.1 eV, Ge 0.7 eV). Intrinsic semiconductors: nₑ = nₕ; electrons and holes. Extrinsic:
+    n-type (pentavalent donor, electrons majority), p-type (trivalent acceptor, holes majority); nₑnₕ = nᵢ². Conductivity rises
+    with temperature (unlike metals).
+  explanations:
+    text: 'Semiconductors like silicon conduct electricity better than insulators but worse than metals. Adding tiny amounts of other elements (doping) greatly increases conductivity: adding phosphorus gives extra electrons (n-type); adding boron gives holes (p-type).'
+    visual: 'Draw energy bands: for a metal they overlap, for an insulator there''s a big gap, and for a semiconductor there''s a small gap that electrons can jump with a little heat.'
+    step_by_step: 'Step 1: Look at the band gap to classify. Step 2: Pentavalent dopant → n-type. Step 3: Trivalent dopant → p-type. Step 4: Majority carriers: electrons in n, holes in p.'
+    real_world: Every phone and computer chip is made from doped silicon.
+  picture:
+    kind: compare
+    columns:
+    - title: Type
+      points:
+      - n-type
+      - p-type
+    - title: Dopant
+      points:
+      - pentavalent (P, As)
+      - trivalent (B, Al)
+    - title: Majority carriers
+      points:
+      - electrons
+      - holes
+    alt: 'n-type and p-type semiconductors: their dopants and majority carriers.'
+  items:
+  - prompt: What is the valency of an atom used to make n-type silicon?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - Pentavalent.
+    - Phosphorus.
+    solution: '5.'
+  - prompt: What is the valency of an atom used to make p-type silicon?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Trivalent.
+    - Boron.
+    solution: '3.'
+  - prompt: In a semiconductor, nᵢ = 10¹⁰ per cm³ and nₑ = 10¹² per cm³. Find nₕ as a power of 10.
+    answer: '8'
+    check: 20-12
+    difficulty: 2
+    hints:
+    - nₑnₕ = nᵢ².
+    - 10²⁰/10¹².
+    solution: 10⁸ per cm³ (power 8).
+  - prompt: 'In a p-type semiconductor, the majority carriers are:'
+    options:
+    - holes
+    - electrons
+    - protons
+    - ions
+    answer: holes
+    difficulty: 1
+    hints:
+    - Trivalent dopant.
+    - Missing electrons.
+    solution: Holes.
+    mistakes:
+      electrons: c12p_doping
+  - prompt: 'When a semiconductor is heated, its conductivity:'
+    options:
+    - increases
+    - decreases
+    - stays the same
+    - becomes zero
+    answer: increases
+    difficulty: 2
+    hints:
+    - More electrons jump the gap.
+    - Opposite to metals.
+    solution: Increases.
+  - prompt: Which material has the largest band gap?
+    options:
+    - an insulator like diamond
+    - silicon
+    - germanium
+    - copper
+    answer: an insulator like diamond
+    difficulty: 1
+    hints:
+    - Electrons can't jump.
+    - Over 3 eV.
+    solution: An insulator such as diamond.
+- code: cbse12p.semi.diode
+  title: p-n junction and diodes
+  after:
+  - cbse12p.semi.materials
+  notes: |
+    p-n junction: diffusion and drift; depletion region; barrier potential (~0.7 V Si, 0.3 V Ge). Forward bias (p to +):
+    barrier lowered, current flows (mA). Reverse bias: barrier raised, tiny current (μA) until breakdown. Diode I–V
+    characteristic. Rectifiers: half-wave (one diode, output frequency = input), full-wave (two diodes or bridge, output
+    frequency = 2 × input); filters with capacitors. (Special diodes and transistors removed in rationalised syllabus.)
+  explanations:
+    text: Joining p-type and n-type material makes a p-n junction diode, which lets current flow easily one way (forward bias) but hardly at all the other way (reverse bias). Diodes turn AC into DC in a rectifier.
+    visual: 'Draw a diode as an arrow with a bar: current flows in the arrow''s direction. In a half-wave rectifier only the top halves of the AC wave get through; in full-wave, the bottom halves are flipped up too.'
+    step_by_step: 'Step 1: Check the bias: p side positive → forward. Step 2: Forward: current flows after ~0.7 V (Si). Step 3: Reverse: almost no current. Step 4: Rectifier output frequency: half-wave = f, full-wave = 2f.'
+    real_world: Phone chargers use diode rectifiers to turn 230 V AC into the low-voltage DC a battery needs.
+  picture:
+    kind: flow
+    steps:
+    - AC input
+    - Diodes conduct one way
+    - Pulsing DC
+    - Capacitor filter smooths it
+    - Steady DC
+    alt: 'A rectifier: diodes turn AC into pulsing DC, and a capacitor smooths it.'
+  items:
+  - prompt: A full-wave rectifier runs on 50 Hz AC. Find the output ripple frequency (Hz).
+    answer: '100'
+    check: 2*50
+    difficulty: 2
+    hints:
+    - Twice the input.
+    - 2 × 50.
+    solution: 100 Hz.
+  - prompt: A half-wave rectifier runs on 50 Hz AC. Find the output frequency (Hz).
+    answer: '50'
+    check: '50'
+    difficulty: 1
+    hints:
+    - Same as input.
+    - One pulse per cycle.
+    solution: 50 Hz.
+  - prompt: The barrier potential of a silicon diode is about how many volts? Give one decimal place.
+    answer: '0.7'
+    check: Rational(7,10)
+    difficulty: 1
+    hints:
+    - Silicon.
+    - Germanium is 0.3.
+    solution: About 0.7 V.
+  - prompt: 'A diode conducts when it is:'
+    options:
+    - forward biased
+    - reverse biased
+    - not connected
+    - heated only
+    answer: forward biased
+    difficulty: 1
+    hints:
+    - p side to +.
+    - Barrier lowered.
+    solution: Forward biased.
+    mistakes:
+      reverse biased: c12p_bias
+  - prompt: 'In reverse bias, the depletion region:'
+    options:
+    - becomes wider
+    - disappears
+    - becomes thinner
+    - conducts strongly
+    answer: becomes wider
+    difficulty: 2
+    hints:
+    - Carriers pulled away.
+    - Barrier rises.
+    solution: Becomes wider.
+  - prompt: 'A rectifier converts:'
+    options:
+    - AC into DC
+    - DC into AC
+    - low voltage into high
+    - light into current
+    answer: AC into DC
+    difficulty: 1
+    hints:
+    - One-way flow.
+    - Chargers.
+    solution: AC into DC.
