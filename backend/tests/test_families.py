@@ -65,7 +65,7 @@ def test_family_account_from_sign_up_to_a_childs_login():
     codes = [s["code"] for s in client.get("/subjects", headers=riya).json()]
     assert codes and all(c.startswith("cbse9-") for c in codes)
     # A class with no subjects yet shows none rather than another class's.
-    client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "cbse", "grade": 4}, headers=asha)
+    client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "kerala_scert", "grade": 5}, headers=asha)
     assert client.get("/subjects", headers=riya).json() == []
     client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"], "board": "cbse", "grade": 9}, headers=asha)
     assert client.put(f"/family/children/{big['id']}", json={"name": "Riya", "birth_date": big["birth_date"]}, headers=asha).status_code == 400

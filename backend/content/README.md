@@ -87,6 +87,62 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 4 (NCERT, 2025-26 books)
+
+Under `cbse4/`, with subject codes `cbse4-math`, `cbse4-evs`, `cbse4-eng` and `cbse4-hin`. These packs follow the new 2025-26 NCERT books: Maths Mela (Maths), Our Wondrous World (Environmental Studies), Santoor (English) and Veena (Hindi). The English chapter list was checked against NCERT's own contents page; the other chapter names come from published chapter lists. Topics inside Maths and EVS chapters were chosen by Claude. English and Hindi chapter details come from general knowledge, not the printed books: chapters whose stories could not be confirmed (English 1, 2, 5, 9 and 11; Hindi 1, 7, 9 and 11) are kept general and focus on reading skills and vocabulary. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Shapes Around Us | flat shapes: sides and corners; solid shapes | 12 |
+| Maths 2: Hide and Seek | position and direction words; seeing from different sides | 12 |
+| Maths 3: Pattern Around Us | shape and colour patterns; number patterns | 12 |
+| Maths 4: Thousands Around Us | numbers up to 9999; adding and taking away bigger numbers | 12 |
+| Maths 5: Sharing and Measuring | halves, quarters and thirds; sharing money and things equally | 12 |
+| Maths 6: Measuring Length | centimetres and metres; comparing and adding lengths | 12 |
+| Maths 7: The Cleanest Village | adding and subtracting in real life; money: rupees and paise | 12 |
+| Maths 8: Weigh it, Pour it | kilograms and grams; litres and millilitres | 12 |
+| Maths 9: Equal Groups | multiplication as equal groups; division as sharing and grouping | 12 |
+| Maths 10: Elephants, Tigers and Leopards | comparing animal numbers; big animal measurements | 12 |
+| Maths 11: Fun with Symmetry | mirror halves; completing symmetrical pictures | 12 |
+| Maths 12: Ticking Clocks and Turning Calendars | reading the clock; days, weeks, months and years | 12 |
+| Maths 13: The Transport Museum | tickets, fares and seats; journeys and timetables | 12 |
+| Maths 14: Data Handling | collecting data with tally marks; pictographs | 12 |
+| EVS 1: Living Together | families and helping each other; people who help us | 12 |
+| EVS 2: Exploring Our Neighbourhood | places around us; simple maps and directions | 12 |
+| EVS 3: Nature Trail | plants we see on a walk; animals and birds on the trail | 12 |
+| EVS 4: Growing Up With Nature | from seed to plant; caring for plants and animals | 12 |
+| EVS 5: Food for Health | eating a balanced diet; clean and safe food | 12 |
+| EVS 6: Happy and Healthy Living | healthy habits; feelings and friendship | 12 |
+| EVS 7: How Things Work | simple tools and machines; what makes things work | 12 |
+| EVS 8: How Things are Made | materials and their uses; crafts and workers | 12 |
+| EVS 9: Different Lands, Different Lives | homes in different places; food, clothes and work in different lands | 12 |
+| EVS 10: Our Sky | Sun, Moon and stars; clouds, rain and the sky above | 12 |
+| English 1: Together We Can (Unit 1: My Land) | Together We Can (Unit 1: My Land) | 6 |
+| English 2: The Tinkling Bells (Unit 1: My Land) | The Tinkling Bells (Unit 1: My Land) | 6 |
+| English 3: Be Smart, Be Safe (Unit 1: My Land) | Be Smart, Be Safe (Unit 1: My Land) | 6 |
+| English 4: One Thing at a Time (Unit 2: My Beautiful World) | One Thing at a Time (Unit 2: My Beautiful World) | 6 |
+| English 5: The Old Stag (Unit 2: My Beautiful World) | The Old Stag (Unit 2: My Beautiful World) | 6 |
+| English 6: Braille (Unit 2: My Beautiful World) | Braille (Unit 2: My Beautiful World) | 6 |
+| English 7: Fit Body, Fit Mind, Fit Nation (Unit 3: Fun with Games) | Fit Body, Fit Mind, Fit Nation (Unit 3: Fun with Games) | 6 |
+| English 8: The Lagori Champions (Unit 3: Fun with Games) | The Lagori Champions (Unit 3: Fun with Games) | 6 |
+| English 9: Hekko (Unit 3: Fun with Games) | Hekko (Unit 3: Fun with Games) | 6 |
+| English 10: The Swing (Unit 4: Up High) | The Swing (Unit 4: Up High) | 6 |
+| English 11: A Journey to the Magical Mountains (Unit 4: Up High) | A Journey to the Magical Mountains (Unit 4: Up High) | 6 |
+| English 12: Maheshwar (Unit 4: Up High) | Maheshwar (Unit 4: Up High) | 6 |
+| Hindi 1: चिड़िया का गीत | चिड़िया का गीत | 6 |
+| Hindi 2: बगीचे का घोंघा | बगीचे का घोंघा | 6 |
+| Hindi 3: नीम | नीम | 6 |
+| Hindi 4: हमारा आहार | हमारा आहार | 6 |
+| Hindi 5: आसमान गिरा | आसमान गिरा | 6 |
+| Hindi 6: जयपुर से पत्र | जयपुर से पत्र | 6 |
+| Hindi 7: नकली हीरे | नकली हीरे | 6 |
+| Hindi 8: ओणम के रंग | ओणम के रंग | 6 |
+| Hindi 9: मिठाइयों का सम्मेलन | मिठाइयों का सम्मेलन | 6 |
+| Hindi 10: कैमरा | कैमरा | 6 |
+| Hindi 11: कविता का कमाल | कविता का कमाल | 6 |
+| Hindi 12: शतरंज में मात | शतरंज में मात | 6 |
+| Hindi 13: हमारा आदित्य | हमारा आदित्य | 6 |
+
 ## CBSE Class 5 (NCERT, 2025-26 books)
 
 Under `cbse5/`, with subject codes `cbse5-math`, `cbse5-evs`, `cbse5-eng` and `cbse5-hin`. NCERT replaced the Class 5 books in 2025-26 (NCF 2023), and these packs follow the new books: Maths Mela (Maths), Our Wondrous World (Environmental Studies, which replaces the old EVS book Looking Around), Santoor (English) and Veena (Hindi). Chapter names come from published chapter lists of the new books; the topics inside Maths and EVS chapters were chosen by Claude. English chapters 1, 3, 5, 6 and 7 were written from NCERT's own chapter files; chapters 2, 4, 8, 9 and 10 from the unit theme and general knowledge, so their story details are kept general. Hindi details come from study notes and general knowledge (chapters 5, 6, 7 and 9 are kept general because no reliable summary was found) and have not been checked by a Hindi teacher. Every concept has a picture explanation.
@@ -669,8 +725,8 @@ Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, 
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 1,856 of the 7,470 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 5,614 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 1,946 of the 7,908 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 5,962 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
