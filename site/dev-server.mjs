@@ -42,7 +42,15 @@ const MOCK_FRACTION = `Nice, you counted **3 pieces left** correctly! The bottom
 
 How many pieces was the whole bar cut into?`;
 
-const MOCKS = [MOCK_COUNT, MOCK_FRACTION, MOCK_REPLY];
+const MOCK_CARD = `Good thinking: you knew this was a nerve cell! The word is just a small mix-up, and it's a common one.
+
+\`\`\`diagram
+{"alt":"Your way: neutron, a tiny particle in the centre of an atom. The right path: neuron, a nerve cell that carries messages.","panels":[{"tone":"try","caption":"What you wrote: neutron","card":{"emoji":"⚛️","title":"Neutron","points":["A tiny particle in the **centre of an atom**","Part of chemistry and physics"]}},{"tone":"right","caption":"What this is: neuron","card":{"emoji":"🧠","title":"Neuron","points":["A **nerve cell**","Carries messages around your body and brain"]}}]}
+\`\`\`
+
+Can you spot the one letter that changes **neutron** into **neuron**? Then label the picture again.`;
+
+const MOCKS = [MOCK_COUNT, MOCK_FRACTION, MOCK_CARD, MOCK_REPLY];
 let mockTurn = 0;
 
 async function mockFetch(url) {

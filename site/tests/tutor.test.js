@@ -45,6 +45,7 @@ test("sends the chat to OpenAI with the SYNiq prompt and returns the reply", asy
   // Every mistake gets an automatic "your way / the right path" picture.
   assert.match(chat.body.messages[0].content, /"count":\{"a":4,"op":"\+","b":5,"result":8/);
   assert.match(chat.body.messages[0].content, /BEFORE YOU SEND, CHECK/);
+  assert.match(chat.body.messages[0].content, /"card":\{"emoji"/);
   assert.equal(chat.body.messages.at(-1).content, "Teach me angle of elevation");
 });
 

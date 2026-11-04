@@ -459,6 +459,53 @@ function drawFractions(input, tone) {
   return wrap;
 }
 
+/* ---------- Idea cards: "what you wrote" next to "what it is" ---------- */
+
+// Text with **marked** words, built from text nodes so nothing becomes markup.
+function marked(text) {
+  const frag = document.createDocumentFragment();
+  str(text, 160).split("**").forEach((part, i) => {
+    if (!part) return;
+    if (i % 2) {
+      const m = document.createElement("mark");
+      m.textContent = part;
+      frag.appendChild(m);
+    } else {
+      frag.appendChild(document.createTextNode(part));
+    }
+  });
+  return frag;
+}
+
+function drawCard(c) {
+  const card = document.createElement("div");
+  card.className = "sq-card";
+  if (c.emoji) {
+    const pic = document.createElement("div");
+    pic.className = "sq-card-pic";
+    pic.setAttribute("aria-hidden", "true");
+    pic.textContent = str(c.emoji, 8);
+    card.appendChild(pic);
+  }
+  if (c.title) {
+    const t = document.createElement("div");
+    t.className = "sq-card-title";
+    t.appendChild(marked(c.title));
+    card.appendChild(t);
+  }
+  const points = (Array.isArray(c.points) ? c.points : []).slice(0, 5);
+  if (points.length) {
+    const ul = document.createElement("ul");
+    for (const pt of points) {
+      const li = document.createElement("li");
+      li.appendChild(marked(pt));
+      ul.appendChild(li);
+    }
+    card.appendChild(ul);
+  }
+  return card;
+}
+
 function countResult(panel) {
   const c = panel && panel.count;
   if (!c || typeof c !== "object") return null;
@@ -484,6 +531,8 @@ function drawPanel(panel, marks = 0) {
     box.appendChild(drawCount(panel.count, tone, marks));
   } else if (panel.fraction) {
     box.appendChild(drawFractions(panel.fraction, tone));
+  } else if (panel.card && typeof panel.card === "object") {
+    box.appendChild(drawCard(panel.card));
   } else {
     const svg = el("svg", {
       viewBox: `-6 -6 ${W + 12} ${H + 12}`,
