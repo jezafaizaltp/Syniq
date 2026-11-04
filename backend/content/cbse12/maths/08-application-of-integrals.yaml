@@ -1,0 +1,171 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 8. Format: content/README.md.
+subject: cbse12-math
+chapter: 8
+title: Application of Integrals
+tips:
+  c12_area: 'Area between a curve and the x-axis is ∫|y| dx: split where the curve crosses the axis so parts below don''t cancel.'
+concepts:
+- code: cbse12m.area.curve
+  title: Area under simple curves
+  notes: |
+    Area bounded by y = f(x), the x-axis and x = a, x = b: ∫ₐᵇ y dx (take absolute values for parts below the axis). Area
+    with the y-axis: ∫ x dy. Areas of circles (x² + y² = a²: πa²), parabolas (y² = 4ax), ellipses (πab). (Area between two
+    curves is removed in some rationalised years; kept simple.)
+  explanations:
+    text: To find the area under a curve, integrate the curve between the two x-values. If part of the curve dips below the x-axis, treat that part separately so it doesn't cancel out the area above.
+    visual: Shade the region under y = x² from x = 0 to 3. Its area is ∫₀³ x² dx = 9 square units.
+    step_by_step: 'Step 1: Sketch the curve and region. Step 2: Find the limits. Step 3: Integrate y with respect to x. Step 4: Use absolute values for parts below the axis.'
+    real_world: Architects calculate the area of curved windows and arches using integration.
+  picture:
+    kind: flow
+    steps:
+    - Sketch the region
+    - Find the limits
+    - Integrate y dx
+    - Add parts, taking absolute values
+    alt: Steps to find the area under a curve.
+  items:
+  - prompt: Find the area under y = x² from x = 0 to x = 3.
+    answer: '9'
+    check: Rational(27,3)
+    difficulty: 1
+    hints:
+    - x³/3.
+    - 27/3.
+    solution: 9 square units.
+  - prompt: Find the area under y = 2x from x = 0 to x = 4.
+    answer: '16'
+    check: 4**2
+    difficulty: 1
+    hints:
+    - x².
+    - '16.'
+    solution: 16 square units.
+  - prompt: Find the area under y = 3 from x = 1 to x = 5.
+    answer: '12'
+    check: 3*4
+    difficulty: 1
+    hints:
+    - Rectangle.
+    - 3 × 4.
+    solution: 12 square units.
+  - prompt: Find the area between y = x and the x-axis from x = −2 to x = 2.
+    answer: '4'
+    check: 2+2
+    difficulty: 2
+    hints:
+    - Two triangles of area 2.
+    - Don't let them cancel.
+    solution: 4 square units.
+    mistakes:
+      '0': c12_area
+  - prompt: 'The area enclosed by the circle x² + y² = 4 is:'
+    options:
+    - 4π
+    - 2π
+    - 16π
+    - π
+    answer: 4π
+    difficulty: 1
+    hints:
+    - πr².
+    - r = 2.
+    solution: 4π square units.
+  - prompt: 'The area enclosed by the ellipse x²/9 + y²/4 = 1 is:'
+    options:
+    - 6π
+    - 13π
+    - 36π
+    - 5π
+    answer: 6π
+    difficulty: 2
+    hints:
+    - πab.
+    - a = 3, b = 2.
+    solution: 6π square units.
+- code: cbse12m.area.region
+  title: Setting up area integrals
+  after:
+  - cbse12m.area.curve
+  notes: |
+    Choosing horizontal or vertical strips; area of a strip y·dx; summing strips gives the integral. Regions bounded by a
+    line and a parabola, quadrant of a circle (πa²/4). Symmetry halves the work. Interpreting the integral sign as a sum.
+  explanations:
+    text: Think of the area as made of very thin vertical strips. Each strip's area is height y times width dx, and the integral adds them all. Sometimes horizontal strips are easier.
+    visual: Draw thin rectangles under a curve, each of width dx and height y. As they get thinner, their total becomes the exact area.
+    step_by_step: 'Step 1: Pick strips (vertical: dx; horizontal: dy). Step 2: Write the strip''s area. Step 3: Find the limits. Step 4: Integrate.'
+    real_world: Map-makers estimate the areas of lakes by adding thin strips across them.
+  picture:
+    kind: bars
+    bars:
+    - label: strip 1
+      value: 1
+    - label: strip 2
+      value: 4
+    - label: strip 3
+      value: 9
+    - label: strip 4
+      value: 16
+    alt: 'Thin strips under y = x² at x = 1, 2, 3, 4: their heights 1, 4, 9 and 16 add up to approximate the area.'
+    unit: height
+  items:
+  - prompt: Find the area of a quadrant of the circle x² + y² = 16, as a multiple of π.
+    answer: '4'
+    check: 16/4
+    difficulty: 1
+    hints:
+    - πa²/4.
+    - 16π/4.
+    solution: 4π.
+  - prompt: Find the area under y = √x from 0 to 4, as a fraction.
+    answer: 16/3
+    check: Rational(2,3)*8
+    difficulty: 2
+    hints:
+    - (2/3)x^(3/2).
+    - (2/3) × 8.
+    solution: 16/3.
+  - prompt: Find the area under y = x³ from 0 to 2.
+    answer: '4'
+    check: Rational(16,4)
+    difficulty: 2
+    hints:
+    - x⁴/4.
+    - 16/4.
+    solution: '4.'
+  - prompt: 'For area with vertical strips, each strip has area:'
+    options:
+    - y dx
+    - x dy
+    - dx dy
+    - y²dx
+    answer: y dx
+    difficulty: 1
+    hints:
+    - Height × width.
+    - Vertical.
+    solution: y dx.
+  - prompt: When is it easier to use horizontal strips?
+    options:
+    - When the region is easier to describe as x in terms of y
+    - Always
+    - Never
+    - Only for circles
+    answer: When the region is easier to describe as x in terms of y
+    difficulty: 2
+    hints:
+    - e.g. y² = 4x.
+    - Choose the simpler integral.
+    solution: When x as a function of y is simpler.
+  - prompt: 'The integral sign ∫ originally stood for:'
+    options:
+    - a long S, for sum
+    - integer
+    - infinity
+    - slope
+    answer: a long S, for sum
+    difficulty: 2
+    hints:
+    - Leibniz.
+    - Adding strips.
+    solution: A long S, meaning sum.

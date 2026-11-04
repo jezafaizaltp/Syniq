@@ -1,0 +1,186 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 9. Format: content/README.md.
+subject: cbse12-math
+chapter: 9
+title: Differential Equations
+tips:
+  c12_order: Order = the highest derivative present. Degree = the power of that highest derivative (when the equation is a polynomial in derivatives).
+  c12_if: For dy/dx + Py = Q, the integrating factor is e^(∫P dx).
+concepts:
+- code: cbse12m.de.basics
+  title: Order, degree and solutions
+  notes: |
+    Differential equation: involves derivatives of a dependent variable. Order: highest derivative; degree: power of the
+    highest derivative when polynomial in derivatives (undefined otherwise, e.g. containing sin(y′)). General solution
+    (arbitrary constants = order) and particular solution (constants fixed by initial conditions). Verifying a solution by
+    substitution. (Forming DEs removed in rationalised syllabus.)
+  explanations:
+    text: A differential equation links a function with its derivatives. Its order is the highest derivative that appears, and its degree is the power of that derivative. Solving it means finding the function; a general solution has constants, a particular solution fixes them.
+    visual: For d²y/dx² + 3(dy/dx)³ = 0, the highest derivative is the second one (order 2), and it appears to the first power (degree 1).
+    step_by_step: 'Step 1: Find the highest derivative (order). Step 2: Find its power (degree). Step 3: To verify a solution, substitute it in.'
+    real_world: Population growth, cooling of tea and radioactive decay are all described by differential equations.
+  picture:
+    kind: compare
+    columns:
+    - title: Equation
+      points:
+      - dy/dx = 2x
+      - y″ + y = 0
+      - (y″)³ + y′ = 0
+    - title: Order
+      points:
+      - '1'
+      - '2'
+      - '2'
+    - title: Degree
+      points:
+      - '1'
+      - '1'
+      - '3'
+    alt: Examples of differential equations with their order and degree.
+  items:
+  - prompt: Find the order of d²y/dx² + 3(dy/dx)³ = 0.
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Highest derivative.
+    - Second.
+    solution: '2.'
+  - prompt: Find the degree of d²y/dx² + 3(dy/dx)³ = 0.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - Power of the highest derivative.
+    - y″ to power 1.
+    solution: '1.'
+    mistakes:
+      '3': c12_order
+  - prompt: Find the degree of (d²y/dx²)³ + dy/dx = 0.
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - y″ cubed.
+    - Power 3.
+    solution: '3.'
+  - prompt: How many arbitrary constants does the general solution of a 2nd-order equation have?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Equals the order.
+    - Two.
+    solution: '2.'
+  - prompt: 'The degree of y′ + sin(y′) = 0 is:'
+    options:
+    - not defined
+    - '1'
+    - '0'
+    - '2'
+    answer: not defined
+    difficulty: 2
+    hints:
+    - Not a polynomial in y′.
+    - sin(y′).
+    solution: Not defined.
+  - prompt: 'A solution with no arbitrary constants is called:'
+    options:
+    - a particular solution
+    - a general solution
+    - an order
+    - a degree
+    answer: a particular solution
+    difficulty: 1
+    hints:
+    - Constants fixed.
+    - Initial condition.
+    solution: A particular solution.
+- code: cbse12m.de.solve
+  title: Separable, homogeneous and linear equations
+  after:
+  - cbse12m.de.basics
+  notes: |
+    Variables separable: g(y)dy = f(x)dx; integrate both sides. Homogeneous: dy/dx = F(y/x), substitute y = vx. Linear first
+    order: dy/dx + Py = Q; integrating factor IF = e^(∫P dx); solution y·IF = ∫Q·IF dx + C. Applications: growth/decay dy/dt =
+    ky gives y = y₀e^(kt).
+  explanations:
+    text: Some differential equations can be solved by separating the variables, putting all y terms on one side and x terms on the other, then integrating. Linear equations of the form dy/dx + Py = Q use an integrating factor.
+    visual: 'For dy/dx = 2x: separate to dy = 2x dx, integrate to y = x² + C. With y(0) = 1, C = 1, so y = x² + 1.'
+    step_by_step: 'Step 1: Identify the type. Step 2: Separable: rearrange and integrate. Step 3: Linear: find IF = e^(∫P dx), then y·IF = ∫Q·IF dx. Step 4: Use the initial condition.'
+    real_world: Bank interest compounded continuously follows dy/dt = ky, giving exponential growth.
+  picture:
+    kind: flow
+    steps:
+    - Write dy/dx + Py = Q
+    - IF = e^(∫P dx)
+    - Multiply through by IF
+    - y·IF = ∫Q·IF dx + C
+    alt: Solving a linear first-order differential equation with an integrating factor.
+  items:
+  - prompt: Solve dy/dx = 2x with y(0) = 1. Find y(2).
+    answer: '5'
+    check: 2**2+1
+    difficulty: 1
+    hints:
+    - y = x² + C.
+    - C = 1.
+    solution: '5.'
+  - prompt: Solve dy/dx = 3x² with y(0) = 0. Find y(1).
+    answer: '1'
+    check: 1**3
+    difficulty: 1
+    hints:
+    - y = x³ + C.
+    - C = 0.
+    solution: '1.'
+  - prompt: 'The integrating factor of dy/dx + y = x is:'
+    options:
+    - eˣ
+    - e⁻ˣ
+    - x
+    - ln x
+    answer: eˣ
+    difficulty: 2
+    hints:
+    - P = 1.
+    - e^(∫1 dx).
+    solution: eˣ.
+    mistakes:
+      x: c12_if
+  - prompt: 'The integrating factor of dy/dx + (1/x)y = x² (x > 0) is:'
+    options:
+    - x
+    - 1/x
+    - eˣ
+    - ln x
+    answer: x
+    difficulty: 2
+    hints:
+    - e^(ln x).
+    - = x.
+    solution: x.
+  - prompt: 'To solve a homogeneous equation dy/dx = F(y/x), substitute:'
+    options:
+    - y = vx
+    - y = x + v
+    - x = y²
+    - y = eˣ
+    answer: y = vx
+    difficulty: 2
+    hints:
+    - Ratio y/x.
+    - v = y/x.
+    solution: y = vx.
+  - prompt: 'dy/dt = ky with k > 0 describes:'
+    options:
+    - exponential growth
+    - linear growth
+    - decay
+    - oscillation
+    answer: exponential growth
+    difficulty: 1
+    hints:
+    - Rate ∝ amount.
+    - y = y₀e^(kt).
+    solution: Exponential growth.

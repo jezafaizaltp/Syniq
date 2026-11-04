@@ -1,0 +1,166 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 13. Format: content/README.md.
+subject: cbse12-math
+chapter: 13
+title: Probability
+tips:
+  c12_cond: 'P(A|B) = P(A ∩ B) ÷ P(B): divide by the probability of what you already know happened.'
+  c12_indep: 'Independent: P(A ∩ B) = P(A) × P(B). Mutually exclusive: P(A ∩ B) = 0. They are different ideas.'
+concepts:
+- code: cbse12m.prob.conditional
+  title: Conditional probability and independence
+  notes: |
+    Conditional probability P(A|B) = P(A ∩ B)/P(B), P(B) ≠ 0. Multiplication theorem P(A ∩ B) = P(B)P(A|B). Independent events:
+    P(A ∩ B) = P(A)P(B), equivalently P(A|B) = P(A). Mutually exclusive ≠ independent. Total probability: P(A) = Σ P(Eᵢ)P(A|Eᵢ)
+    for a partition E₁…Eₙ.
+  explanations:
+    text: 'Conditional probability is the chance of A when you already know B has happened: P(A|B) = P(A and B) ÷ P(B). Events are independent if knowing one doesn''t change the chance of the other.'
+    visual: Roll a die and you're told the number is even (2, 4 or 6). The chance it's a 6 is now 1 out of 3, not 1 out of 6.
+    step_by_step: 'Step 1: Find P(A ∩ B). Step 2: Find P(B). Step 3: Divide. Step 4: For independence, check P(A ∩ B) = P(A)P(B).'
+    real_world: Doctors use conditional probability to judge how likely a disease is given a positive test result.
+  picture:
+    kind: flow
+    steps:
+    - Know B happened
+    - Restrict to outcomes in B
+    - Count those also in A
+    - P(A|B) = P(A ∩ B)/P(B)
+    alt: 'Conditional probability: restrict to B, then find the share that is also in A.'
+  items:
+  - prompt: A die is rolled; the result is even. Find the probability it is 6, as a fraction.
+    answer: 1/3
+    check: Rational(1,3)
+    difficulty: 1
+    hints:
+    - 'Even: 2, 4, 6.'
+    - One of three.
+    solution: 1/3.
+    mistakes:
+      1/6: c12_cond
+  - prompt: P(A ∩ B) = 0.2 and P(B) = 0.5. Find P(A|B) as a fraction.
+    answer: 2/5
+    check: Rational(2,10)/Rational(5,10)
+    difficulty: 1
+    hints:
+    - 0.2 ÷ 0.5.
+    - = 0.4.
+    solution: 2/5.
+  - prompt: A and B are independent with P(A) = 1/2, P(B) = 1/3. Find P(A ∩ B).
+    answer: 1/6
+    check: Rational(1,2)*Rational(1,3)
+    difficulty: 1
+    hints:
+    - Multiply.
+    - 1/2 × 1/3.
+    solution: 1/6.
+  - prompt: Two coins are tossed. Find P(both heads | at least one head) as a fraction.
+    answer: 1/3
+    check: Rational(1,3)
+    difficulty: 2
+    hints:
+    - 'At least one head: HH, HT, TH.'
+    - HH is one of three.
+    solution: 1/3.
+  - prompt: 'If A and B are mutually exclusive with non-zero probabilities, they are:'
+    options:
+    - not independent
+    - independent
+    - equal
+    - certain
+    answer: not independent
+    difficulty: 2
+    hints:
+    - P(A ∩ B) = 0 ≠ P(A)P(B).
+    - Knowing A rules out B.
+    solution: Not independent.
+    mistakes:
+      independent: c12_indep
+  - prompt: Bag 1 is chosen with probability 1/2 and has 3 red of 5; bag 2 likewise has 1 red of 5. Find P(red).
+    answer: 2/5
+    check: Rational(1,2)*Rational(3,5)+Rational(1,2)*Rational(1,5)
+    difficulty: 2
+    hints:
+    - ½ × 3/5 + ½ × 1/5.
+    - Total probability.
+    solution: 2/5.
+- code: cbse12m.prob.bayes
+  title: Bayes' theorem and random variables
+  after:
+  - cbse12m.prob.conditional
+  notes: |
+    Bayes' theorem: P(Eᵢ|A) = P(Eᵢ)P(A|Eᵢ) / Σ P(Eⱼ)P(A|Eⱼ): reverse conditional probability. Random variable: numerical outcome;
+    probability distribution (Σ pᵢ = 1). Mean (expectation) E(X) = Σ xᵢpᵢ. (Variance and binomial distribution removed in
+    rationalised syllabus.)
+  explanations:
+    text: 'Bayes'' theorem lets you work backwards: given that something happened, how likely was each possible cause? A random variable gives a number to each outcome, and its mean (expected value) is the long-run average.'
+    visual: 'Two machines make bulbs: A makes 60% (2% faulty), B 40% (5% faulty). Given a faulty bulb, Bayes tells you the chance it came from B.'
+    step_by_step: 'Step 1: List the causes and their probabilities. Step 2: Find P(event | each cause). Step 3: Multiply and add for the total. Step 4: Divide the cause''s share by the total.'
+    real_world: Spam filters use Bayes' theorem to decide whether an email with certain words is likely to be spam.
+  picture:
+    kind: compare
+    columns:
+    - title: Cause
+      points:
+      - Machine A
+      - Machine B
+    - title: Share of bulbs
+      points:
+      - 60%
+      - 40%
+    - title: Faulty rate
+      points:
+      - 2%
+      - 5%
+    alt: 'Two machines making bulbs: their shares and faulty rates, used in Bayes'' theorem.'
+  items:
+  - prompt: Machine A makes 60% of bulbs (2% faulty), B 40% (5% faulty). Find P(faulty) as a fraction.
+    answer: 4/125
+    check: Rational(6,10)*Rational(2,100)+Rational(4,10)*Rational(5,100)
+    difficulty: 2
+    hints:
+    - 0.6 × 0.02 + 0.4 × 0.05.
+    - 0.012 + 0.02.
+    solution: 0.032 = 4/125.
+  - prompt: In the same case, find P(from B | faulty) as a fraction.
+    answer: 5/8
+    check: (Rational(4,10)*Rational(5,100))/(Rational(6,10)*Rational(2,100)+Rational(4,10)*Rational(5,100))
+    difficulty: 2
+    hints:
+    - 0.02 ÷ 0.032.
+    - Bayes.
+    solution: 5/8.
+  - prompt: X takes values 0, 1, 2 with probabilities 1/4, 1/2, 1/4. Find E(X).
+    answer: '1'
+    check: 0*Rational(1,4)+1*Rational(1,2)+2*Rational(1,4)
+    difficulty: 1
+    hints:
+    - Σ x p.
+    - 0 + 1/2 + 1/2.
+    solution: '1.'
+  - prompt: Find the expected value of the number shown on a fair die, as a fraction.
+    answer: 7/2
+    check: Rational(21,6)
+    difficulty: 1
+    hints:
+    - (1 + ... + 6)/6.
+    - 21/6.
+    solution: 3.5.
+  - prompt: Probabilities in a distribution are 0.2, 0.5 and k. Find k as a fraction.
+    answer: 3/10
+    check: 1-Rational(7,10)
+    difficulty: 1
+    hints:
+    - They add to 1.
+    - 1 − 0.7.
+    solution: 0.3.
+  - prompt: 'Bayes'' theorem is used to find:'
+    options:
+    - the probability of a cause given an observed result
+    - the mean only
+    - the number of outcomes
+    - areas
+    answer: the probability of a cause given an observed result
+    difficulty: 2
+    hints:
+    - Reverse conditional.
+    - Posterior.
+    solution: The probability of a cause given what was observed.

@@ -1,0 +1,180 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 6. Format: content/README.md.
+subject: cbse12-math
+chapter: 6
+title: Application of Derivatives
+tips:
+  c12_maxmin: At a maximum f′ = 0 and f″ < 0; at a minimum f′ = 0 and f″ > 0.
+  c12_rate: 'Related rates: write the formula linking the quantities first, then differentiate with respect to time.'
+concepts:
+- code: cbse12m.appder.rates
+  title: Rate of change and increasing functions
+  notes: |
+    dy/dx as rate of change; related rates using the chain rule (dA/dt = dA/dr × dr/dt). Increasing on an interval if f′(x)
+    > 0, decreasing if f′(x) < 0 (strictly). Critical points where f′ = 0 split the line into intervals to test.
+    (Tangents and normals, approximations removed in the rationalised syllabus.)
+  explanations:
+    text: The derivative tells how fast one quantity changes as another does. If it's positive, the function is going up; if negative, going down. Related-rates problems link the speed of change of two connected quantities.
+    visual: 'Picture a circle of ripples spreading on a pond. As the radius grows at 2 cm/s, the area grows faster and faster: dA/dt = 2πr × dr/dt.'
+    step_by_step: 'Step 1: Write the formula connecting the quantities. Step 2: Differentiate with respect to time. Step 3: Substitute known values. Step 4: For increasing/decreasing, find where f′ is positive or negative.'
+    real_world: Weather forecasters use rates of change of pressure to predict storms.
+  picture:
+    kind: number_line
+    from: -3
+    to: 3
+    step: 1
+    points:
+    - at: -1
+      label: f′ = 0
+    - at: 1
+      label: f′ = 0
+    alt: 'For f(x) = x³ − 3x, critical points at −1 and 1 split the line: increasing, decreasing, increasing.'
+    jumps:
+    - from: -3
+      to: -1
+      label: up
+    - from: -1
+      to: 1
+      label: down
+    - from: 1
+      to: 3
+      label: up
+  items:
+  - prompt: The radius of a circle grows at 2 cm/s. How fast (in cm²/s, as a multiple of π) is the area growing when r = 5 cm?
+    answer: '20'
+    check: 2*5*2
+    difficulty: 2
+    hints:
+    - dA/dt = 2πr dr/dt.
+    - 2π × 5 × 2.
+    solution: 20π cm²/s.
+    mistakes:
+      '10': c12_rate
+  - prompt: The side of a square grows at 3 cm/s. How fast (cm²/s) is the area growing when the side is 4 cm?
+    answer: '24'
+    check: 2*4*3
+    difficulty: 2
+    hints:
+    - A = s².
+    - 2s × 3.
+    solution: 24 cm²/s.
+  - prompt: f(x) = x³ − 3x. At what positive x is f′(x) = 0?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - 3x² − 3 = 0.
+    - x² = 1.
+    solution: x = 1.
+  - prompt: 'f(x) = x³ − 3x is decreasing on:'
+    options:
+    - (−1, 1)
+    - (1, ∞)
+    - (−∞, −1)
+    - everywhere
+    answer: (−1, 1)
+    difficulty: 2
+    hints:
+    - f′ = 3x² − 3.
+    - Negative between the roots.
+    solution: (−1, 1).
+  - prompt: 'If f′(x) > 0 on an interval, f is:'
+    options:
+    - increasing there
+    - decreasing there
+    - constant there
+    - zero there
+    answer: increasing there
+    difficulty: 1
+    hints:
+    - Positive slope.
+    - Going up.
+    solution: Increasing.
+  - prompt: 'f(x) = eˣ is:'
+    options:
+    - increasing everywhere
+    - decreasing everywhere
+    - constant
+    - increasing only for x > 0
+    answer: increasing everywhere
+    difficulty: 1
+    hints:
+    - f′ = eˣ > 0.
+    - Always positive.
+    solution: Increasing on all reals.
+- code: cbse12m.appder.maxmin
+  title: Maxima and minima
+  after:
+  - cbse12m.appder.rates
+  notes: |
+    Local maximum/minimum. First derivative test: f′ changes + to − (max) or − to + (min). Second derivative test: f′(c) = 0
+    and f″(c) < 0 → local max; f″(c) > 0 → local min; = 0 inconclusive. Absolute max/min on a closed interval: compare
+    values at critical points and end points. Word problems: maximise area for fixed perimeter (square), minimise material,
+    etc.
+  explanations:
+    text: 'To find the highest or lowest point of a function, look where the slope is zero. The second derivative tells which it is: negative means a peak (maximum), positive means a valley (minimum). On a closed interval, also check the end points.'
+    visual: 'Picture a hill: walking up, the slope is positive; at the top it''s zero; going down it''s negative. That change from + to − marks a maximum.'
+    step_by_step: 'Step 1: Find f′(x) and solve f′ = 0. Step 2: Find f″ at each point. Step 3: f″ < 0 → max, f″ > 0 → min. Step 4: On a closed interval, compare with the end values.'
+    real_world: Companies use maxima and minima to find the price that gives the most profit or the box shape that uses the least cardboard.
+  picture:
+    kind: flow
+    steps:
+    - Find f′(x)
+    - Solve f′(x) = 0
+    - Find f″ at each point
+    - 'f″ < 0: maximum; f″ > 0: minimum'
+    alt: The second derivative test for maxima and minima.
+  items:
+  - prompt: Find the minimum value of f(x) = x² − 4x + 7.
+    answer: '3'
+    check: 2**2-4*2+7
+    difficulty: 1
+    hints:
+    - f′ = 2x − 4 = 0 at x = 2.
+    - f(2) = 4 − 8 + 7.
+    solution: '3.'
+  - prompt: Find the maximum value of f(x) = −x² + 6x.
+    answer: '9'
+    check: -3**2+6*3
+    difficulty: 1
+    hints:
+    - x = 3.
+    - −9 + 18.
+    solution: '9.'
+  - prompt: Two positive numbers add to 10. What is the largest possible product?
+    answer: '25'
+    check: 5*5
+    difficulty: 2
+    hints:
+    - x(10 − x).
+    - Max at x = 5.
+    solution: '25.'
+  - prompt: A rectangle has perimeter 20 m. Find the largest possible area (m²).
+    answer: '25'
+    check: 5*5
+    difficulty: 2
+    hints:
+    - Square gives max.
+    - 5 × 5.
+    solution: 25 m².
+  - prompt: 'If f′(c) = 0 and f″(c) > 0, then at c f has a:'
+    options:
+    - local minimum
+    - local maximum
+    - point of inflection always
+    - discontinuity
+    answer: local minimum
+    difficulty: 1
+    hints:
+    - Concave up.
+    - Valley.
+    solution: A local minimum.
+    mistakes:
+      local maximum: c12_maxmin
+  - prompt: Find the absolute maximum of f(x) = x² on [−1, 2].
+    answer: '4'
+    check: max(1, 0, 4)
+    difficulty: 2
+    hints:
+    - Check ends and critical point 0.
+    - f(2) = 4.
+    solution: '4.'

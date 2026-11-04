@@ -1,0 +1,171 @@
+# CBSE Class 12 Physics (NCERT, rationalised syllabus), chapter 3. Format: content/README.md.
+subject: cbse12-phy
+chapter: 3
+title: Current Electricity
+tips:
+  c12p_ohm: Ohm's law V = IR. Resistors in series add; in parallel, 1/R = 1/R₁ + 1/R₂.
+  c12p_kirchhoff: 'Kirchhoff: currents into a junction = currents out; around any loop, the sum of EMFs = sum of IR drops.'
+concepts:
+- code: cbse12p.current.ohm
+  title: Current, resistance and Ohm's law
+  notes: |
+    Current I = dq/dt (ampere). Drift velocity of electrons v_d = eEτ/m; I = neAv_d. Ohm's law V = IR. Resistance R = ρl/A;
+    resistivity ρ depends on material and temperature (ρ_T = ρ₀[1 + α(T − T₀)]); conductivity σ = 1/ρ. Ohmic and non-ohmic
+    devices. Combinations: series R = ΣRᵢ, parallel 1/R = Σ1/Rᵢ. Electrical energy and power P = VI = I²R = V²/R. (Colour
+    code removed in rationalised syllabus.)
+  explanations:
+    text: 'Current is the flow of charge. Ohm''s law says the current through a conductor is proportional to the voltage across it: V = IR. Resistance depends on the material, length and thickness of the wire.'
+    visual: 'Picture water in a pipe: voltage is the pressure, current the flow rate, and resistance a narrow section that slows the flow.'
+    step_by_step: 'Step 1: Find the total resistance (series add; parallel use reciprocals). Step 2: I = V/R. Step 3: Power P = VI or I²R.'
+    real_world: 'A heater has a high-resistance coil that turns electrical energy into heat: P = V²/R.'
+  picture:
+    kind: compare
+    columns:
+    - title: Combination
+      points:
+      - series
+      - parallel
+    - title: Total resistance
+      points:
+      - R₁ + R₂
+      - R₁R₂/(R₁ + R₂)
+    - title: Same for each
+      points:
+      - current
+      - voltage
+    alt: 'Resistors in series and parallel: how they combine and what they share.'
+  items:
+  - prompt: A 12 V battery drives current through 4 Ω. Find the current (A).
+    answer: '3'
+    check: 12/4
+    difficulty: 1
+    hints:
+    - I = V/R.
+    - 12/4.
+    solution: 3 A.
+  - prompt: Find the total resistance (Ω) of 4 Ω and 6 Ω in series.
+    answer: '10'
+    check: 4+6
+    difficulty: 1
+    hints:
+    - Add.
+    - 4 + 6.
+    solution: 10 Ω.
+  - prompt: Find the total resistance (Ω) of 6 Ω and 3 Ω in parallel.
+    answer: '2'
+    check: 6*3/(6+3)
+    difficulty: 2
+    hints:
+    - Product/sum.
+    - 18/9.
+    solution: 2 Ω.
+    mistakes:
+      '9': c12p_ohm
+  - prompt: A 100 W bulb runs on 200 V. Find its resistance (Ω).
+    answer: '400'
+    check: 200**2/100
+    difficulty: 2
+    hints:
+    - R = V²/P.
+    - 40000/100.
+    solution: 400 Ω.
+  - prompt: A wire's length is doubled (same material and area). By what factor does its resistance grow?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - R ∝ l.
+    - Doubles.
+    solution: '2.'
+  - prompt: 'The resistivity of a metal, when heated:'
+    options:
+    - increases
+    - decreases
+    - stays the same
+    - becomes zero
+    answer: increases
+    difficulty: 2
+    hints:
+    - More collisions.
+    - Positive α.
+    solution: It increases.
+- code: cbse12p.current.circuits
+  title: Cells, Kirchhoff's rules and the Wheatstone bridge
+  after:
+  - cbse12p.current.ohm
+  notes: |
+    EMF ε and internal resistance r: V = ε − Ir (discharging). Cells in series (ε add, r add) and parallel. Kirchhoff's
+    junction rule (charge conservation) and loop rule (energy conservation). Wheatstone bridge balanced when P/Q = R/S (no
+    current through the galvanometer). (Meter bridge and potentiometer removed in rationalised syllabus.)
+  explanations:
+    text: 'A cell''s EMF is its total voltage, but some is lost inside it (internal resistance), so the terminal voltage is a little less when current flows. Kirchhoff''s rules let you solve any circuit: currents balance at junctions, and voltages balance around loops.'
+    visual: 'Draw a Wheatstone bridge: four resistors in a diamond with a galvanometer across the middle. When P/Q = R/S, no current flows through the middle.'
+    step_by_step: 'Step 1: Mark currents at each junction (in = out). Step 2: Go round each loop: Σε = ΣIR. Step 3: Solve the equations. Step 4: For a bridge, check P/Q = R/S.'
+    real_world: Electronic weighing scales use a Wheatstone bridge of strain gauges to measure tiny changes in resistance.
+  picture:
+    kind: flow
+    steps:
+    - Label currents
+    - 'Junction rule: in = out'
+    - 'Loop rule: ΣEMF = ΣIR'
+    - Solve the equations
+    alt: Using Kirchhoff's rules to solve a circuit.
+  items:
+  - prompt: A cell of EMF 2 V and internal resistance 0.5 Ω gives 1 A. Find its terminal voltage (V).
+    answer: '1.5'
+    check: 2-Rational(1,2)
+    difficulty: 1
+    hints:
+    - V = ε − Ir.
+    - 2 − 0.5.
+    solution: 1.5 V.
+  - prompt: A cell of EMF 6 V and internal resistance 1 Ω is connected to 2 Ω. Find the current (A).
+    answer: '2'
+    check: 6/(2+1)
+    difficulty: 2
+    hints:
+    - I = ε/(R + r).
+    - 6/3.
+    solution: 2 A.
+  - prompt: Currents of 3 A and 2 A enter a junction. One wire leaves; find its current (A).
+    answer: '5'
+    check: 3+2
+    difficulty: 1
+    hints:
+    - In = out.
+    - 3 + 2.
+    solution: 5 A.
+    mistakes:
+      '1': c12p_kirchhoff
+  - prompt: A Wheatstone bridge has P = 2 Ω, Q = 4 Ω, R = 3 Ω. Find S (Ω) for balance.
+    answer: '6'
+    check: 3*4/2
+    difficulty: 2
+    hints:
+    - P/Q = R/S.
+    - S = RQ/P.
+    solution: 6 Ω.
+  - prompt: 'Kirchhoff''s junction rule is based on conservation of:'
+    options:
+    - charge
+    - energy
+    - momentum
+    - mass
+    answer: charge
+    difficulty: 2
+    hints:
+    - Charge doesn't pile up.
+    - In = out.
+    solution: Charge.
+  - prompt: 'Three 2 V cells in series give a total EMF of:'
+    options:
+    - 6 V
+    - 2 V
+    - 2/3 V
+    - 8 V
+    answer: 6 V
+    difficulty: 1
+    hints:
+    - Add EMFs.
+    - 3 × 2.
+    solution: 6 V.

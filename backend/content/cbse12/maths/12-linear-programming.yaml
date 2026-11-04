@@ -1,0 +1,178 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 12. Format: content/README.md.
+subject: cbse12-math
+chapter: 12
+title: Linear Programming
+tips:
+  c12_corner: 'The best value of a linear objective over a bounded feasible region is always at a corner point: test every corner.'
+concepts:
+- code: cbse12m.lp.formulate
+  title: Formulating linear programming problems
+  notes: |
+    LPP: optimise (maximise/minimise) a linear objective function Z = ax + by subject to linear constraints and non-negativity
+    (x, y ≥ 0). Decision variables. Types: manufacturing, diet, transportation problems. Constraints come from limited
+    resources (time, material, money).
+  explanations:
+    text: Linear programming finds the best way to use limited resources. You choose decision variables (like how many of each product to make), write the goal as a linear function, and write each limit as a linear inequality.
+    visual: 'A baker makes cakes (x) and pies (y). Each cake needs 2 hours of oven time, each pie 1 hour, with 10 hours available: 2x + y ≤ 10. Profit Z = 30x + 20y is what to maximise.'
+    step_by_step: 'Step 1: Define the decision variables. Step 2: Write the objective function. Step 3: Write each constraint as an inequality. Step 4: Add x ≥ 0, y ≥ 0.'
+    real_world: Airlines use linear programming to schedule planes and crews at the lowest cost.
+  picture:
+    kind: flow
+    steps:
+    - Choose variables x, y
+    - Objective Z = ax + by
+    - Constraints from limited resources
+    - Non-negativity x, y ≥ 0
+    alt: Setting up a linear programming problem.
+  items:
+  - prompt: 'In an LPP, the function to maximise or minimise is called the:'
+    options:
+    - objective function
+    - constraint
+    - feasible region
+    - corner point
+    answer: objective function
+    difficulty: 1
+    hints:
+    - The goal.
+    - Z = ax + by.
+    solution: The objective function.
+  - prompt: 'The conditions x ≥ 0, y ≥ 0 are called:'
+    options:
+    - non-negativity constraints
+    - objective functions
+    - optimal solutions
+    - corner points
+    answer: non-negativity constraints
+    difficulty: 1
+    hints:
+    - Can't make negative items.
+    - Always included.
+    solution: Non-negativity constraints.
+  - prompt: Each cake needs 2 hours and each pie 1 hour; 10 hours are available. If 3 cakes are made, what is the most pies?
+    answer: '4'
+    check: 10-2*3
+    difficulty: 1
+    hints:
+    - 2(3) + y ≤ 10.
+    - y ≤ 4.
+    solution: 4 pies.
+  - prompt: Profit Z = 30x + 20y. Find Z when x = 3 and y = 4.
+    answer: '170'
+    check: 30*3+20*4
+    difficulty: 1
+    hints:
+    - 90 + 80.
+    - Substitute.
+    solution: ₹170.
+  - prompt: 'A diet problem usually aims to:'
+    options:
+    - minimise cost while meeting nutrient needs
+    - maximise cost
+    - maximise calories only
+    - ignore constraints
+    answer: minimise cost while meeting nutrient needs
+    difficulty: 2
+    hints:
+    - Cheapest healthy diet.
+    - Minimise.
+    solution: Minimise cost while meeting nutrient requirements.
+  - prompt: 'In an LPP, the constraints and objective must be:'
+    options:
+    - linear
+    - quadratic
+    - exponential
+    - trigonometric
+    answer: linear
+    difficulty: 2
+    hints:
+    - Straight lines.
+    - Name of the method.
+    solution: Linear.
+- code: cbse12m.lp.graphical
+  title: Graphical method and corner points
+  after:
+  - cbse12m.lp.formulate
+  notes: |
+    Graphical method: draw each constraint line, shade the feasible region (all constraints satisfied). Corner point theorem:
+    if the feasible region is bounded, the optimal value of Z occurs at a corner point. Evaluate Z at each corner. For an
+    unbounded region, check whether the optimum exists (draw Z = value half-plane). Infeasible problems have no region.
+  explanations:
+    text: 'Draw each constraint as a line and shade the region where all are true: the feasible region. The best value of the objective always occurs at one of the region''s corners, so you just test each corner.'
+    visual: Shade the region x ≥ 0, y ≥ 0, x + y ≤ 4. Its corners are (0, 0), (4, 0) and (0, 4). For Z = 3x + 2y, the corners give 0, 12 and 8, so the maximum is 12 at (4, 0).
+    step_by_step: 'Step 1: Draw each constraint line. Step 2: Shade the feasible region. Step 3: Find the corner points. Step 4: Evaluate Z at each and pick the best.'
+    real_world: Factories use the corner point method to decide how much of each product to make for the highest profit.
+  picture:
+    kind: bars
+    bars:
+    - label: (0, 0)
+      value: 0
+    - label: (4, 0)
+      value: 12
+    - label: (0, 4)
+      value: 8
+    alt: 'Z = 3x + 2y at the corners of x + y ≤ 4: 0, 12 and 8; the maximum is 12 at (4, 0).'
+    unit: Z
+  items:
+  - prompt: Maximise Z = 3x + 2y with x + y ≤ 4, x, y ≥ 0. Find the maximum Z.
+    answer: '12'
+    check: max(0, 3*4, 2*4)
+    difficulty: 1
+    hints:
+    - Corners (0,0), (4,0), (0,4).
+    - Z = 0, 12, 8.
+    solution: 12, at (4, 0).
+    mistakes:
+      '8': c12_corner
+  - prompt: Minimise Z = x + 2y with x + y ≥ 2, x, y ≥ 0. Find the minimum Z.
+    answer: '2'
+    check: min(2, 4)
+    difficulty: 2
+    hints:
+    - Corners (2,0), (0,2).
+    - Z = 2, 4.
+    solution: 2, at (2, 0).
+  - prompt: Maximise Z = 5x + 4y with x ≤ 3, y ≤ 2, x, y ≥ 0. Find the maximum Z.
+    answer: '23'
+    check: 5*3+4*2
+    difficulty: 2
+    hints:
+    - Best corner (3, 2).
+    - 15 + 8.
+    solution: '23.'
+  - prompt: 'The optimal value of a linear objective on a bounded feasible region occurs at:'
+    options:
+    - a corner point
+    - the centre
+    - any interior point
+    - the origin always
+    answer: a corner point
+    difficulty: 1
+    hints:
+    - Corner point theorem.
+    - Vertices.
+    solution: A corner point.
+  - prompt: 'The feasible region is the set of points that:'
+    options:
+    - satisfy all constraints
+    - give the maximum Z
+    - lie on the axes
+    - satisfy one constraint
+    answer: satisfy all constraints
+    difficulty: 1
+    hints:
+    - Shaded area.
+    - All at once.
+    solution: Satisfy all the constraints.
+  - prompt: 'If no point satisfies all constraints, the problem is:'
+    options:
+    - infeasible
+    - unbounded
+    - optimal
+    - linear
+    answer: infeasible
+    difficulty: 2
+    hints:
+    - Empty region.
+    - No solution.
+    solution: Infeasible.

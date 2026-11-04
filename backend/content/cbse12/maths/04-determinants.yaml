@@ -1,0 +1,171 @@
+# CBSE Class 12 Mathematics (NCERT, rationalised syllabus), chapter 4. Format: content/README.md.
+subject: cbse12-math
+chapter: 4
+title: Determinants
+tips:
+  c12_det: For [[a, b], [c, d]] the determinant is ad − bc. Expand a 3 × 3 along a row using signs + − +.
+  c12_singular: A matrix with determinant 0 is singular and has no inverse; the system may have no or infinitely many solutions.
+concepts:
+- code: cbse12m.det.value
+  title: Determinant values and area
+  notes: |
+    Determinant of a square matrix: |A|. 2 × 2: ad − bc. 3 × 3: expansion along any row or column with cofactors (signs
+    + − + / − + − / + − +). Properties (some deleted in rationalised syllabus but useful): |Aᵀ| = |A|; swapping rows changes
+    sign; equal rows give 0; |kA| = kⁿ|A| for n × n; |AB| = |A||B|. Area of a triangle with vertices (x₁, y₁), (x₂, y₂),
+    (x₃, y₃) = ½ |x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|; zero area means collinear points.
+  explanations:
+    text: A determinant is a single number worked out from a square matrix. For a 2 × 2 matrix it's ad − bc. Determinants tell whether a matrix can be inverted, and they give the area of a triangle from its corners.
+    visual: Draw a triangle on grid paper with corners (0, 0), (4, 0) and (0, 3). The formula gives ½ × 12 = 6, the same as ½ × base × height.
+    step_by_step: 'Step 1: For 2 × 2, compute ad − bc. Step 2: For 3 × 3, expand along a row with + − + signs. Step 3: For area, use the formula and take the absolute value.'
+    real_world: Surveyors find land areas from corner coordinates using the same determinant formula.
+  picture:
+    kind: flow
+    steps:
+    - Write the matrix
+    - Choose a row
+    - Multiply each entry by its cofactor (+ − +)
+    - Add the results
+    alt: Expanding a 3 × 3 determinant along a row.
+  items:
+  - prompt: Find the determinant of [[3, 4], [1, 2]].
+    answer: '2'
+    check: 3*2-4*1
+    difficulty: 1
+    hints:
+    - ad − bc.
+    - 6 − 4.
+    solution: '2.'
+    mistakes:
+      '10': c12_det
+  - prompt: Find the determinant of [[2, 0, 0], [0, 3, 0], [0, 0, 4]].
+    answer: '24'
+    check: 2*3*4
+    difficulty: 1
+    hints:
+    - Diagonal matrix.
+    - 2 × 3 × 4.
+    solution: '24.'
+  - prompt: Find the area of the triangle with vertices (0, 0), (4, 0) and (0, 3).
+    answer: '6'
+    check: Rational(1,2)*abs(0*(0-3)+4*(3-0)+0*(0-0))
+    difficulty: 1
+    hints:
+    - ½|x₁(y₂−y₃)+...|.
+    - ½ × 12.
+    solution: 6 square units.
+  - prompt: If |A| = 3 for a 2 × 2 matrix A, find |2A|.
+    answer: '12'
+    check: 2**2*3
+    difficulty: 2
+    hints:
+    - '|kA| = k²|A| for 2 × 2.'
+    - 4 × 3.
+    solution: '12.'
+    mistakes:
+      '6': c12_det
+  - prompt: Find the determinant of [[1, 2, 3], [0, 1, 4], [0, 0, 2]].
+    answer: '2'
+    check: 1*1*2
+    difficulty: 2
+    hints:
+    - Upper triangular.
+    - Product of diagonal.
+    solution: '2.'
+  - prompt: 'If the area formula gives 0 for three points, the points are:'
+    options:
+    - collinear
+    - a right triangle
+    - equidistant
+    - on a circle
+    answer: collinear
+    difficulty: 2
+    hints:
+    - No triangle formed.
+    - On one line.
+    solution: Collinear.
+- code: cbse12m.det.systems
+  title: Adjoint, inverse and solving equations
+  after:
+  - cbse12m.det.value
+  notes: |
+    Minor Mᵢⱼ, cofactor Aᵢⱼ = (−1)^(i+j) Mᵢⱼ. Adjoint: transpose of the cofactor matrix. A(adj A) = |A| I. A⁻¹ = adj A / |A|
+    if |A| ≠ 0. Solving AX = B: X = A⁻¹B. Consistency: |A| ≠ 0 → unique solution; |A| = 0 → check (adj A)B: if not zero,
+    inconsistent (no solution); if zero, infinitely many or none.
+  explanations:
+    text: To solve several linear equations at once, write them as AX = B. If the determinant of A isn't zero, multiply by A⁻¹ to get X. The inverse comes from the adjoint divided by the determinant.
+    visual: 'Write 2x + y = 5 and x + y = 3 as [[2, 1], [1, 1]][x; y] = [5; 3]. The determinant is 1, so there''s exactly one solution: x = 2, y = 1.'
+    step_by_step: 'Step 1: Write AX = B. Step 2: Find |A|. Step 3: If |A| ≠ 0, find A⁻¹ = adj A / |A|. Step 4: X = A⁻¹B.'
+    real_world: Economists solve systems of equations with matrices to balance supply and demand across many goods.
+  picture:
+    kind: compare
+    columns:
+    - title: '|A|'
+      points:
+      - ≠ 0
+      - = 0, (adj A)B ≠ 0
+      - = 0, (adj A)B = 0
+    - title: System
+      points:
+      - unique solution
+      - no solution
+      - none or infinitely many
+    alt: How the determinant decides whether a system has a unique, no or many solutions.
+  items:
+  - prompt: Solve 2x + y = 5, x + y = 3. Find x.
+    answer: '2'
+    check: 5-3
+    difficulty: 1
+    hints:
+    - Subtract.
+    - x = 2.
+    solution: x = 2.
+  - prompt: In the same system, find y.
+    answer: '1'
+    check: 3-2
+    difficulty: 1
+    hints:
+    - 3 − x.
+    - 3 − 2.
+    solution: y = 1.
+  - prompt: Find the cofactor A₁₁ of [[3, 4], [1, 2]].
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Delete row 1, column 1.
+    - Sign +.
+    solution: '2.'
+  - prompt: Find the cofactor A₁₂ of [[3, 4], [1, 2]].
+    answer: '-1'
+    check: -1*1
+    difficulty: 2
+    hints:
+    - Minor = 1.
+    - Sign (−1)³.
+    solution: −1.
+  - prompt: 'If |A| ≠ 0, the system AX = B has:'
+    options:
+    - a unique solution
+    - no solution
+    - infinitely many solutions
+    - exactly two solutions
+    answer: a unique solution
+    difficulty: 1
+    hints:
+    - A⁻¹ exists.
+    - X = A⁻¹B.
+    solution: A unique solution.
+  - prompt: 'A matrix with determinant zero is called:'
+    options:
+    - singular
+    - non-singular
+    - identity
+    - orthogonal
+    answer: singular
+    difficulty: 1
+    hints:
+    - No inverse.
+    - Special case.
+    solution: Singular.
+    mistakes:
+      non-singular: c12_singular
