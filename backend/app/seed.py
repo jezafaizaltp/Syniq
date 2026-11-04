@@ -39,6 +39,11 @@ SUBJECTS = [
     ("bio", "Biology", "en", "kerala_scert", 9),
     ("ss", "Social Science", "en", "kerala_scert", 9),
     ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE Class 5 (NCERT books, new 2025-26 editions): Maths Mela, Our Wondrous World, Santoor, Veena.
+    ("cbse5-math", "Mathematics", "en", "cbse", 5),
+    ("cbse5-evs", "Environmental Studies", "en", "cbse", 5),
+    ("cbse5-eng", "English", "en", "cbse", 5),
+    ("cbse5-hin", "Hindi", "hi", "cbse", 5),
     # CBSE Class 6 (NCERT books, new 2024-25 editions): three years back, for filling gaps.
     ("cbse6-math", "Mathematics", "en", "cbse", 6),
     ("cbse6-sci", "Science", "en", "cbse", 6),
