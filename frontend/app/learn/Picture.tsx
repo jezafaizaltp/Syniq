@@ -46,6 +46,11 @@ export type PictureSpec = {
 
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100));
 
+// Labels near the left or right edge grow inwards, so they are never cut off.
+function anchor(px: number, width: number): "start" | "middle" | "end" {
+  return px < 90 ? "start" : px > width - 90 ? "end" : "middle";
+}
+
 function NumberLine({ p }: { p: PictureSpec }) {
   const lo = p.from!, hi = p.to!, step = p.step ?? 1;
   const W = 600, pad = 30;
@@ -56,10 +61,18 @@ function NumberLine({ p }: { p: PictureSpec }) {
   const x = (v: number) => pad + ((v - lo) / (hi - lo)) * (W - 2 * pad);
   const ticks: number[] = [];
   for (let v = lo; v <= hi + 1e-9; v += step) ticks.push(Math.round(v * 1e6) / 1e6);
-  const every = ticks.length > 21 ? 2 : 1;
+  // Label every k-th tick so the numbers never touch (about 13 units per character at this size).
+  const gapPx = ticks.length > 1 ? (W - 2 * pad) / (ticks.length - 1) : W;
+  const widest = Math.max(...ticks.map((v) => fmt(v).length));
+  const every = Math.max(1, Math.ceil((widest * 13 + 20) / gapPx));
   const points = (p.points as Pt[] | undefined) ?? [];
+  // A point label that would touch the one before it drops to a second row.
+  const rows = points.map((pt, i) =>
+    points.slice(0, i).some((q) => Math.abs(x(q.at) - x(pt.at)) < 170) ? 1 : 0
+  );
+  const Hh = H + (rows.some((r) => r) ? 22 : 0);
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={p.alt} className="pic-svg">
+    <svg viewBox={`0 0 ${W} ${Hh}`} role="img" aria-label={p.alt} className="pic-svg">
       <defs>
         <marker id="pic-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" className="pic-fill-accent" />
@@ -88,7 +101,7 @@ function NumberLine({ p }: { p: PictureSpec }) {
       {points.map((pt, i) => (
         <g key={i}>
           <circle cx={x(pt.at)} cy={y} r={7} className="pic-fill-accent" />
-          <text x={x(pt.at)} y={y + 44} textAnchor="middle" className="pic-text-strong">{pt.label}</text>
+          <text x={x(pt.at)} y={y + 44 + rows[i] * 22} textAnchor={anchor(x(pt.at), W)} className="pic-text-strong">{pt.label}</text>
         </g>
       ))}
     </svg>

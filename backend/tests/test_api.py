@@ -69,6 +69,8 @@ def test_learning_loop_and_no_answer_leak(anu):
 
     wrong = client.post("/learn/attempts", json={"item_id": item["id"], "response": "zzz", "hints_used": 1}, headers=anu).json()
     assert wrong["correct"] is False and wrong["solution"]
+    # The mistake is shown next to the right answer, so the learner can see where it went.
+    assert wrong["your_answer"] == "zzz" and wrong["right_answer"]
 
     why = client.get(f"/me/why/{nxt['decision_id']}", headers=anu).json()
     assert why["rule"] == "R6_practice"
@@ -128,6 +130,8 @@ def test_checkin_not_stored_without_mood_consent():
     f = login("fathima@demo.syniq")
     r = client.post("/checkins", json={"mood": "low"}, headers=f).json()
     assert r["stored"] is False
+    # The child is thanked the same way; whether it is kept is explained to the parent, not the child.
+    assert "not saved" not in r["message"] and r["message"].startswith("Thanks")
 
 
 def test_guardian_cannot_see_unlinked_child():

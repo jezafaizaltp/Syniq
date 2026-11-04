@@ -91,18 +91,20 @@ def score(style: str, topic_stats: dict | None, prior: Prior | None) -> float:
 
 
 def choose(
-    seen: list[str], topic_stats: dict | None, prior: Prior | None, preferred: str | None = None
+    seen: list[str], topic_stats: dict | None, prior: Prior | None, preferred: str | None = None, ties: list[str] | None = None
 ) -> tuple[str, str]:
     """The method to explain with next, and why: preferred | this_topic | history | similar | everyone | default.
 
     Methods not yet tried on this topic go first, so a struggling student always
-    gets something new; among those, the one most likely to work for them.
+    gets something new; among those, the one most likely to work for them. With no
+    evidence either way, `ties` sets the order (young children start with the picture).
     """
+    order = ties or STYLES
     if preferred and preferred in STYLES and preferred not in seen:
         return preferred, "preferred"
     pool = [s for s in STYLES if s not in seen] or STYLES
     scores = {s: score(s, topic_stats, prior) for s in pool}
-    best = max(pool, key=lambda s: (scores[s], -STYLES.index(s)))
+    best = max(pool, key=lambda s: (scores[s], -order.index(s) if s in order else -len(order)))
     if all(abs(scores[s] - scores[best]) < 1e-9 for s in pool):
         return best, "default"
     topic_n = sum(counts(topic_stats, best))

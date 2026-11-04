@@ -91,7 +91,6 @@ const en = {
   "learn.hint": "Hint {n}: {text}",
   "learn.check": "Check",
   "learn.give_hint": "Give me a hint",
-  "learn.this_topic": "This topic: {progress}",
   "learn.next": "Next",
   "learn.no_questions": "No approved questions for this topic yet. Your teacher is reviewing them.",
   "learn.why": "Why am I seeing this?",
@@ -107,7 +106,9 @@ const en = {
   // Feedback on an answer
   "fb.show_more": "Show me more ({n} left)",
   "fb.tricky": "This one is tricky. You can ask SYNiq about it below.",
-  "fb.why": "Why this way: {why}",
+  "fb.you_said": "You said",
+  "fb.right_answer": "The answer",
+  "fb.see_it": "Let's look at it",
   "fb.yes": "⭐ Yes! Now try the big one again.",
   "fb.not_yet": "Not yet. Try counting the objects one by one.",
 
@@ -173,6 +174,7 @@ const en = {
   "parent.noticed": "What SYNiq has noticed helps {name}",
   "parent.on": "On",
   "parent.turned_off": "Turned off by {name}",
+  "parent.settings_for": "Settings and permissions for {name}",
   "parent.progress": "Progress",
   "parent.practised": "{n} questions practised. {note}",
   "parent.nothing_yet": "Nothing practised yet.",
@@ -355,7 +357,6 @@ const ml: Record<Key, string> = {
   "learn.hint": "സൂചന {n}: {text}",
   "learn.check": "നോക്കാം",
   "learn.give_hint": "ഒരു സൂചന തരൂ",
-  "learn.this_topic": "ഈ പാഠം: {progress}",
   "learn.next": "അടുത്തത്",
   "learn.no_questions": "ഈ പാഠത്തിന് ഇതുവരെ അംഗീകരിച്ച ചോദ്യങ്ങളില്ല. ടീച്ചർ അവ നോക്കിക്കൊണ്ടിരിക്കുകയാണ്.",
   "learn.why": "എന്തുകൊണ്ടാണ് ഇത് കാണിക്കുന്നത്?",
@@ -370,7 +371,9 @@ const ml: Record<Key, string> = {
 
   "fb.show_more": "കൂടുതൽ കാണിക്കൂ (ഇനി {n})",
   "fb.tricky": "ഇത് അൽപ്പം പ്രയാസമാണ്. താഴെ SYNiq-നോട് ചോദിക്കാം.",
-  "fb.why": "എന്തുകൊണ്ട് ഈ രീതി: {why}",
+  "fb.you_said": "നിങ്ങൾ പറഞ്ഞത്",
+  "fb.right_answer": "ശരിയുത്തരം",
+  "fb.see_it": "ചിത്രത്തിൽ നോക്കാം",
   "fb.yes": "⭐ അതെ! ഇനി വലിയ ചോദ്യം ഒന്നുകൂടി ശ്രമിക്കൂ.",
   "fb.not_yet": "ഇതുവരെ ശരിയായില്ല. ഓരോന്നായി എണ്ണിനോക്കൂ.",
 
@@ -432,6 +435,7 @@ const ml: Record<Key, string> = {
   "parent.noticed": "{name}-നെ സഹായിക്കുന്നതായി SYNiq കണ്ടെത്തിയത്",
   "parent.on": "ഓൺ",
   "parent.turned_off": "{name} ഓഫ് ചെയ്തു",
+  "parent.settings_for": "{name}-ന്റെ ക്രമീകരണങ്ങളും അനുമതികളും",
   "parent.progress": "പുരോഗതി",
   "parent.practised": "{n} ചോദ്യങ്ങൾ പരിശീലിച്ചു. {note}",
   "parent.nothing_yet": "ഇതുവരെ ഒന്നും പരിശീലിച്ചിട്ടില്ല.",

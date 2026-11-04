@@ -171,3 +171,13 @@ def test_learners_like_you_shape_the_first_explanation():
         assert prior.peers["step_by_step"] == {"after_correct": 6, "after_wrong": 2}
         # Devi's own history still comes first; among the rest, what helped similar learners leads.
         assert methods.choose(["real_world"], {}, prior) == ("step_by_step", "similar")
+
+
+def test_young_children_start_with_the_picture_when_nothing_is_known():
+    from app.engine.methods import choose
+
+    assert choose([], None, None)[0] == "text"
+    assert choose([], None, None, ties=["visual", "text", "step_by_step", "real_world"])[0] == "visual"
+    # Once evidence exists it wins over the starting order.
+    stats = {"text": {"after_correct": 5, "after_wrong": 0}}
+    assert choose([], stats, None, ties=["visual", "text", "step_by_step", "real_world"])[0] == "text"

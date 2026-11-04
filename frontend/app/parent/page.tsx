@@ -73,47 +73,6 @@ export default function Parent() {
       {children.map((c) => (
         <section key={c.id} className="card">
           <h2>{c.name}</h2>
-          {CONSENT_SCOPES.map((scope) => (
-            <div key={scope} style={{ marginTop: 8 }}>
-              <label className="check">
-                <input type="checkbox" checked={!!c.consent[scope]} onChange={(e) => setConsent(c.id, scope, e.target.checked)} />
-                {t(`consent.${scope}`)}
-              </label>
-              <p className="muted" style={{ margin: "0 0 0 34px" }}>
-                {t(`consent.${scope}_help`)}
-              </p>
-            </div>
-          ))}
-          <h3>{t("settings.senses")}</h3>
-          <p className="muted">{t("parent.senses_note")}</p>
-          {CHOSEN_SUPPORT.map((key) => (
-            <div key={key} style={{ marginTop: 8 }}>
-              <label className="check">
-                <input type="checkbox" checked={c.support_modes.includes(key)} onChange={(e) => setSupport(c, key, e.target.checked)} />
-                {t(`support.${key}.child`)}
-              </label>
-              <p className="muted" style={{ margin: "0 0 0 34px" }}>
-                {t(`support.${key}.help`)}
-              </p>
-            </div>
-          ))}
-          {c.noticed.length > 0 && (
-            <>
-              <h3>{t("parent.noticed", { name: c.name })}</h3>
-              <ul className="list">
-                {c.noticed.map((n) => (
-                  <li key={n.mode}>
-                    <span>
-                      {t(`noticed.${n.mode}` as Key)}
-                      <br />
-                      <span className="muted">{n.reason}</span>
-                    </span>
-                    <span className="pill">{n.on ? t("parent.on") : t("parent.turned_off", { name: c.name })}</span>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
           {progress[c.id] && (
             <>
               <h3>{t("parent.progress")}</h3>
@@ -142,19 +101,63 @@ export default function Parent() {
               <Methods subjects={methods[c.id]} t={t} />
             </>
           )}
-          {specialists.length > 0 && (
+          {c.noticed.length > 0 && (
             <>
-              <h3>{t("parent.specialists")}</h3>
-              <p className="muted">{t("parent.specialists_help", { name: c.name })}</p>
-              {specialists.map((s) => (
-                <label key={s.id} className="check" style={{ marginTop: 8 }}>
-                  <input type="checkbox" checked={s.shared_with.includes(c.id)} onChange={(e) => share(c.id, s.id, e.target.checked)} />
-                  {s.name}
-                  {s.title && <span className="muted"> · {s.title}</span>}
-                </label>
-              ))}
+              <h3>{t("parent.noticed", { name: c.name })}</h3>
+              <ul className="list">
+                {c.noticed.map((n) => (
+                  <li key={n.mode}>
+                    <span>
+                      {t(`noticed.${n.mode}` as Key)}
+                      <br />
+                      <span className="muted">{n.reason}</span>
+                    </span>
+                    <span className="pill">{n.on ? t("parent.on") : t("parent.turned_off", { name: c.name })}</span>
+                  </li>
+                ))}
+              </ul>
             </>
           )}
+          <details className="parent-settings" open={!c.consent.core_learning}>
+            <summary>{t("parent.settings_for", { name: c.name })}</summary>
+            {CONSENT_SCOPES.map((scope) => (
+              <div key={scope} style={{ marginTop: 8 }}>
+                <label className="check">
+                  <input type="checkbox" checked={!!c.consent[scope]} onChange={(e) => setConsent(c.id, scope, e.target.checked)} />
+                  {t(`consent.${scope}`)}
+                </label>
+                <p className="muted" style={{ margin: "0 0 0 34px" }}>
+                  {t(`consent.${scope}_help`)}
+                </p>
+              </div>
+            ))}
+            <h3>{t("settings.senses")}</h3>
+            <p className="muted">{t("parent.senses_note")}</p>
+            {CHOSEN_SUPPORT.map((key) => (
+              <div key={key} style={{ marginTop: 8 }}>
+                <label className="check">
+                  <input type="checkbox" checked={c.support_modes.includes(key)} onChange={(e) => setSupport(c, key, e.target.checked)} />
+                  {t(`support.${key}.child`)}
+                </label>
+                <p className="muted" style={{ margin: "0 0 0 34px" }}>
+                  {t(`support.${key}.help`)}
+                </p>
+              </div>
+            ))}
+            {specialists.length > 0 && (
+              <>
+                <h3>{t("parent.specialists")}</h3>
+                <p className="muted">{t("parent.specialists_help", { name: c.name })}</p>
+                {specialists.map((s) => (
+                  <label key={s.id} className="check" style={{ marginTop: 8 }}>
+                    <input type="checkbox" checked={s.shared_with.includes(c.id)} onChange={(e) => share(c.id, s.id, e.target.checked)} />
+                    {s.name}
+                    {s.title && <span className="muted"> · {s.title}</span>}
+                  </label>
+                ))}
+              </>
+            )}
+          </details>
         </section>
       ))}
     </div>

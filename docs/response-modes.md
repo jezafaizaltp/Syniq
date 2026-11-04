@@ -4,6 +4,10 @@ SYNiq has ten ways of responding when a student answers a question. They run on 
 
 Code: `backend/app/engine/responses.py`. Tests: `backend/tests/test_responses.py`.
 
+## Every wrong answer shows the mistake
+
+Before any of the modes below, a wrong answer puts the learner's own answer next to the right one ("You said 7 · The answer 20"). Small whole numbers (up to 20) are also drawn as dots in groups of five, so the gap can be counted. Then the topic's own picture follows; on a number line, both answers are marked on it. The mistake is the way into the concept, without handing over a worked solution first.
+
 ## Support modes
 
 Support modes change how every response is presented. They describe what helps, never a condition: SYNiq never names or suggests ADHD, dyslexia or any other diagnosis.

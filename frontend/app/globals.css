@@ -1,3 +1,13 @@
+/* Digits from Lexend: the body font draws zero with a slash (0 looks like Ø), which confuses
+   children who are still learning numbers. Only 0-9 come from this file. */
+@font-face {
+  font-family: "SYNiq Digits";
+  src: url("/fonts/syniq-digits.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+  unicode-range: U+0030-0039;
+}
+
 /* SYNiq app. Ivory, brick and yellow, matching the public website, with sage for "good" and clay for "careful". */
 :root {
   --font-scale: 1;
@@ -21,7 +31,7 @@
   --radius: 18px;
   --radius-s: 12px;
   --shadow: 0 1px 2px rgba(43, 33, 28, 0.06), 0 6px 18px rgba(43, 33, 28, 0.06);
-  --font: var(--font-body, "Atkinson Hyperlegible"), "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", "Noto Sans", "Noto Sans Malayalam", "Noto Sans Devanagari", sans-serif;
+  --font: "SYNiq Digits", var(--font-body, "Atkinson Hyperlegible"), "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", "Noto Sans", "Noto Sans Malayalam", "Noto Sans Devanagari", sans-serif;
   --font-heading: var(--font-head, "Fraunces"), Georgia, "Noto Serif Malayalam", serif;
 }
 
@@ -1311,3 +1321,58 @@ details.card > summary {
   .pic-svg .pic-small { font-size: 22px; }
   .picture { padding: 0.6rem; }
 }
+
+/* Wrong answer: the learner's answer beside the right one, then the topic's picture. */
+.mistake {
+  display: grid;
+  gap: 14px;
+  margin: 14px 0 4px;
+}
+.mistake-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mistake-side {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 14px 16px;
+  border-radius: var(--radius-s);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+}
+.mistake-side.yours { border-color: var(--warn); background: var(--warn-bg); }
+.mistake-side.right { border-color: var(--good); background: var(--good-bg); }
+.mistake-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin: 0;
+}
+.mistake-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.mistake-side.yours .mistake-value { color: var(--warn); }
+.mistake-side.right .mistake-value { color: var(--good); }
+/* Dots in groups of five, so a child can count them the way they count on fingers. */
+.mistake-dots { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 2px; }
+.mistake-dots .dot-group { display: inline-flex; gap: 4px; }
+.mistake-dots .dot { width: 13px; height: 13px; border-radius: 50%; background: currentColor; }
+.mistake-side.yours .mistake-dots { color: var(--warn); }
+.mistake-side.right .mistake-dots { color: var(--good); }
+.mistake-picture { display: grid; gap: 8px; }
+@media (max-width: 360px) { .mistake-pair { grid-template-columns: 1fr; } }
+
+/* Parent page: progress first; settings and permissions folded underneath. */
+.parent-settings { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 12px; }
+.parent-settings > summary { cursor: pointer; font-weight: 700; padding: 8px 0; min-height: 44px; display: flex; align-items: center; }
+.parent-settings[open] > summary { margin-bottom: 4px; }
+.parent-settings > summary { list-style: none; gap: 10px; color: var(--accent); }
+.parent-settings > summary::-webkit-details-marker { display: none; }
+.parent-settings > summary::before { content: "▸"; font-size: 1.1em; }
+.parent-settings[open] > summary::before { content: "▾"; }

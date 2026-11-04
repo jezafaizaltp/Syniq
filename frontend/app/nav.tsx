@@ -51,6 +51,14 @@ export default function Nav() {
   const router = useRouter();
   const pathname = usePathname();
   const other = LANGS.find((l) => l.code !== lang)!;
+  // The quick switch is for the Kerala pilot: signed-out screens, Kerala students and school
+  // parents. CBSE families are English first and change language in Settings. Anyone already
+  // in Malayalam always keeps a way back.
+  const showLanguage =
+    !me ||
+    lang !== "en" ||
+    (me.role === "student" && me.class?.board === "kerala_scert") ||
+    (me.role === "guardian" && !me.family);
   let tabs = me ? TABS[me.role] ?? [] : [];
   if (me?.role === "guardian" && me.family) tabs = [{ href: "/family", label: "nav.family", icon: "🏡" }, ...tabs];
 
@@ -80,14 +88,16 @@ export default function Nav() {
         </nav>
       )}
       <div className="nav-actions">
-        <button
-          className="secondary"
-          lang={other.code}
-          aria-label={`${t("nav.language")}: ${other.name}`}
-          onClick={() => setLang(other.code)}
-        >
-          {other.code === "ml" ? "മല" : "EN"}
-        </button>
+        {showLanguage && (
+          <button
+            className="secondary"
+            lang={other.code}
+            aria-label={`${t("nav.language")}: ${other.name}`}
+            onClick={() => setLang(other.code)}
+          >
+            {other.code === "ml" ? "മല" : "EN"}
+          </button>
+        )}
         {me && (
           <button
             className="secondary"

@@ -47,7 +47,6 @@ export default function Feedback({ r, readAloud, tutorOn }: { r: AdaptiveRespons
         </div>
       )}
       {r.suggest_tutor && tutorOn && <p>{t("fb.tricky")}</p>}
-      {r.why && <p className="muted">{t("fb.why", { why: r.why })}</p>}
       {r.adapted?.map((a) => (
         <p key={a.mode} className="adapted">
           ✨ {a.message}
