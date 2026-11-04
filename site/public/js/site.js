@@ -1,4 +1,4 @@
-import { renderDiagram, parseDiagram } from "./diagram.js";
+import { renderDiagram, parseDiagram, fitDiagrams } from "./diagram.js";
 
 const toggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("nav");
@@ -21,3 +21,4 @@ for (const holder of document.querySelectorAll("[data-diagram]")) {
   const spec = source && parseDiagram(source.textContent);
   if (spec) holder.replaceChildren(renderDiagram(spec));
 }
+fitDiagrams();
