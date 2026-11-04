@@ -535,12 +535,88 @@ Under `cbse11/`, with subject codes `cbse11-math`, `cbse11-phy`, `cbse11-chem`, 
 | English 14 (Snapshots): Birth (A.J. Cronin) | Birth (A.J. Cronin) | 6 |
 | English 15 (Snapshots): The Tale of Melon City (Vikram Seth) | The Tale of Melon City (Vikram Seth) | 6 |
 
+## CBSE Class 12 (NCERT, rationalised syllabus)
+
+Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, `cbse12-bio` and `cbse12-eng` (science stream plus core English). All five subjects are written. English covers the eight Flamingo prose chapters (1–8), the five Flamingo poems (9–13) and the six Vistas chapters (14–19); its story and poem details were written from memory of the NCERT texts, so names and details need checking against the books. Chapter names follow the rationalised NCERT Class 12 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Most numerical answers are worked out again by computer. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Relations and Functions | types of relations; types of functions and composition | 12 |
+| Maths 2: Inverse Trigonometric Functions | domains and principal values; properties and simplification | 12 |
+| Maths 3: Matrices | types of matrices and operations; transpose, symmetry and inverse | 12 |
+| Maths 4: Determinants | determinant values and area; adjoint, inverse and solving equations | 12 |
+| Maths 5: Continuity and Differentiability | continuity; differentiation rules | 12 |
+| Maths 6: Application of Derivatives | rate of change and increasing functions; maxima and minima | 12 |
+| Maths 7: Integrals | indefinite integrals and methods; definite integrals | 12 |
+| Maths 8: Application of Integrals | area under simple curves; setting up area integrals | 12 |
+| Maths 9: Differential Equations | order, degree and solutions; separable, homogeneous and linear equations | 12 |
+| Maths 10: Vector Algebra | vectors and their addition; dot and cross products | 12 |
+| Maths 11: Three Dimensional Geometry | direction ratios and equation of a line; shortest distance between lines | 12 |
+| Maths 12: Linear Programming | formulating linear programming problems; graphical method and corner points | 12 |
+| Maths 13: Probability | conditional probability and independence; Bayes' theorem and random variables | 12 |
+| Physics 1: Electric Charges and Fields | charge and Coulomb's law; electric flux and Gauss's law | 12 |
+| Physics 2: Electrostatic Potential and Capacitance | electric potential and potential energy; capacitors and dielectrics | 12 |
+| Physics 3: Current Electricity | current, resistance and Ohm's law; cells, Kirchhoff's rules and the Wheatstone bridge | 12 |
+| Physics 4: Moving Charges and Magnetism | magnetic force and motion of charges; Biot–Savart and Ampère's laws | 12 |
+| Physics 5: Magnetism and Matter | bar magnets and the Earth's magnetism; magnetic properties of materials | 12 |
+| Physics 6: Electromagnetic Induction | Faraday's and Lenz's laws; inductance and the AC generator | 12 |
+| Physics 7: Alternating Current | AC circuits and reactance; power in AC and transformers | 12 |
+| Physics 8: Electromagnetic Waves | displacement current and nature of EM waves; the electromagnetic spectrum | 12 |
+| Physics 9: Ray Optics and Optical Instruments | reflection, refraction and lenses; prisms and optical instruments | 12 |
+| Physics 10: Wave Optics | Huygens' principle and interference; diffraction and polarisation | 12 |
+| Physics 11: Dual Nature of Radiation and Matter | photoelectric effect; matter waves | 12 |
+| Physics 12: Atoms | Rutherford's model; Bohr model and hydrogen spectrum | 12 |
+| Physics 13: Nuclei | nuclear structure and binding energy; nuclear fission and fusion | 12 |
+| Physics 14: Semiconductor Electronics | semiconductors and doping; p-n junction and diodes | 12 |
+| Chemistry 1: Solutions | concentration, solubility and Raoult's law; colligative properties | 12 |
+| Chemistry 2: Electrochemistry | galvanic cells and Nernst equation; conductance, electrolysis and batteries | 12 |
+| Chemistry 3: Chemical Kinetics | rate, rate law and order; integrated rate laws and temperature | 12 |
+| Chemistry 4: The d- and f-Block Elements | properties of transition elements; lanthanoids and actinoids | 12 |
+| Chemistry 5: Coordination Compounds | Werner's theory, terms and naming; bonding: VBT and crystal field theory | 12 |
+| Chemistry 6: Haloalkanes and Haloarenes | haloalkanes: nature and nucleophilic substitution; haloarenes and environmental effects | 12 |
+| Chemistry 7: Alcohols, Phenols and Ethers | alcohols; phenols and ethers | 12 |
+| Chemistry 8: Aldehydes, Ketones and Carboxylic Acids | aldehydes and ketones; carboxylic acids | 12 |
+| Chemistry 9: Amines | structure, preparation and basicity; reactions of amines and diazonium salts | 12 |
+| Chemistry 10: Biomolecules | carbohydrates; proteins, enzymes, vitamins and nucleic acids | 12 |
+| Biology 1: Sexual Reproduction in Flowering Plants | flower structure, pollen and the embryo sac; pollination, double fertilisation and seeds | 12 |
+| Biology 2: Human Reproduction | reproductive systems and gametogenesis; menstrual cycle, fertilisation and pregnancy | 12 |
+| Biology 3: Reproductive Health | reproductive health and contraception; STIs and infertility | 12 |
+| Biology 4: Principles of Inheritance and Variation | Mendel's laws; chromosomal theory, sex determination and disorders | 12 |
+| Biology 5: Molecular Basis of Inheritance | DNA structure and replication; transcription, translation and regulation | 12 |
+| Biology 6: Evolution | origin of life and evidence for evolution; mechanisms of evolution and human evolution | 12 |
+| Biology 7: Human Health and Disease | common diseases in humans; immunity, AIDS, cancer and drugs | 12 |
+| Biology 8: Microbes in Human Welfare | microbes in household and industrial products; microbes in sewage, biogas, biocontrol and biofertilisers | 12 |
+| Biology 9: Biotechnology: Principles and Processes | tools of recombinant DNA technology; processes of recombinant DNA technology | 12 |
+| Biology 10: Biotechnology and its Applications | biotechnology in agriculture; biotechnology in medicine and ethics | 12 |
+| Biology 11: Organisms and Populations | populations and growth; population interactions | 12 |
+| Biology 12: Ecosystem | structure, productivity and energy flow; ecological succession and nutrient cycles | 12 |
+| Biology 13: Biodiversity and Conservation | biodiversity and its patterns; loss of biodiversity and conservation | 12 |
+| English 1 (Flamingo): The Last Lesson (Alphonse Daudet) | The Last Lesson (Alphonse Daudet) | 6 |
+| English 2 (Flamingo): Lost Spring (Anees Jung) | Lost Spring (Anees Jung) | 6 |
+| English 3 (Flamingo): Deep Water (William Douglas) | Deep Water (William Douglas) | 6 |
+| English 4 (Flamingo): The Rattrap (Selma Lagerlöf) | The Rattrap (Selma Lagerlöf) | 6 |
+| English 5 (Flamingo): Indigo (Louis Fischer) | Indigo (Louis Fischer) | 6 |
+| English 6 (Flamingo): Poets and Pancakes (Asokamitran) | Poets and Pancakes (Asokamitran) | 6 |
+| English 7 (Flamingo): The Interview (Christopher Silvester) | The Interview (Christopher Silvester) | 6 |
+| English 8 (Flamingo): Going Places (A.R. Barton) | Going Places (A.R. Barton) | 6 |
+| English 9 (Flamingo): My Mother at Sixty-six (Kamala Das) | My Mother at Sixty-six (Kamala Das) | 6 |
+| English 10 (Flamingo): Keeping Quiet (Pablo Neruda) | Keeping Quiet (Pablo Neruda) | 6 |
+| English 11 (Flamingo): A Thing of Beauty (John Keats) | A Thing of Beauty (John Keats) | 6 |
+| English 12 (Flamingo): A Roadside Stand (Robert Frost) | A Roadside Stand (Robert Frost) | 6 |
+| English 13 (Flamingo): Aunt Jennifer's Tigers (Adrienne Rich) | Aunt Jennifer's Tigers (Adrienne Rich) | 6 |
+| English 14 (Vistas): The Third Level (Jack Finney) | The Third Level (Jack Finney) | 6 |
+| English 15 (Vistas): The Tiger King (Kalki) | The Tiger King (Kalki) | 6 |
+| English 16 (Vistas): Journey to the End of the Earth (Tishani Doshi) | Journey to the End of the Earth (Tishani Doshi) | 6 |
+| English 17 (Vistas): The Enemy (Pearl S. Buck) | The Enemy (Pearl S. Buck) | 6 |
+| English 18 (Vistas): On the Face of It (Susan Hill) | On the Face of It (Susan Hill) | 6 |
+| English 19 (Vistas): Memories of Childhood (Zitkala-Sa and Bama) | Memories of Childhood (Zitkala-Sa and Bama) | 6 |
+
 ## Who checked it
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 1,553 of the 6,324 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 4,771 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 1,749 of the 7,038 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 5,289 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
