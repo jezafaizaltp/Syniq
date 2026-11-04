@@ -1,6 +1,6 @@
 // The SYNiq tutor chat. Keeps the conversation in memory only (closing the tab forgets it),
 // sends it with the learner's settings to /api/chat, and draws any diagrams in the reply.
-import { renderDiagram, parseDiagram } from "./diagram.js";
+import { renderDiagram, parseDiagram, fitDiagrams } from "./diagram.js";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -82,6 +82,18 @@ for (const btn of $$("[data-size]")) {
     applyLook();
   });
 }
+
+// Choices already save as they change; the button confirms it and closes the panel on phones.
+const saveBtn = $("#save-prefs");
+const savedNote = $("#saved-note");
+let savedTimer;
+saveBtn.addEventListener("click", () => {
+  readForm();
+  savedNote.textContent = "Saved ✓ SYNiq will use these from your next message.";
+  clearTimeout(savedTimer);
+  savedTimer = setTimeout(() => (savedNote.textContent = ""), 5000);
+  if (matchMedia("(max-width: 860px)").matches) setTimeout(closeSide, 700);
+});
 
 const openSide = () => {
   side.classList.add("open");
@@ -255,6 +267,7 @@ function addTutor(reply, { note = false, retry = null } = {}) {
 
   row.appendChild(bubble);
   messagesEl.appendChild(row);
+  fitDiagrams(row);
   // Show a reply from its first line, so a long one with pictures is read from the top.
   scrollToEnd(row, "start");
   if (prefs.read_aloud && !note) speak(spokenText(reply));

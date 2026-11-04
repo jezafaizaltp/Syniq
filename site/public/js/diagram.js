@@ -313,7 +313,208 @@ function shapeKind(s) {
   return null;
 }
 
-function drawPanel(panel) {
+
+/* ---------- Counting pictures: 4 + 5 = 9 drawn as stars ---------- */
+
+const ICONS = {
+  star: '<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/>',
+  dot: '<circle cx="12" cy="12" r="8"/>',
+  block: '<rect x="3.5" y="3.5" width="17" height="17" rx="3"/>',
+  heart: '<path d="M12 20.5s-8-4.9-8-10.6A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 8 2.6c0 5.7-8 10.6-8 10.6z"/>',
+  apple: '<path d="M12 7.5c-1.6-1.4-6.5-1.7-7 3.6-.4 4.4 2.7 9.4 5 9.4 1 0 1.3-.5 2-.5s1 .5 2 .5c2.3 0 5.4-5 5-9.4-.5-5.3-5.4-5-7-3.6z"/><path d="M12 7.5c0-2 1-3.5 3-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+};
+const MAX_ITEMS = 40;
+const OPS = { "+": "+", "-": "−", "−": "−", "x": "×", "×": "×", "*": "×" };
+
+function icon(name, cls) {
+  const span = document.createElement("span");
+  span.className = `sq-item ${cls || ""}`;
+  span.setAttribute("aria-hidden", "true");
+  // ICONS holds fixed markup only; nothing from the tutor reaches innerHTML.
+  span.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor">${ICONS[name] || ICONS.star}</svg>`;
+  return span;
+}
+
+function count(v) {
+  const n = Math.round(Number(v));
+  return Number.isFinite(n) ? Math.max(0, Math.min(999, n)) : 0;
+}
+
+// A group of items, split into fives so they are easy to count.
+function group(n, opts = {}) {
+  const box = document.createElement("div");
+  box.className = `sq-group ${opts.cls || ""}`;
+  const items = document.createElement("div");
+  items.className = "sq-items";
+  if (n <= MAX_ITEMS) {
+    for (let i = 0; i < n; i++) {
+      if (i && i % 5 === 0) items.appendChild(Object.assign(document.createElement("span"), { className: "sq-gap" }));
+      let cls = opts.itemCls || "";
+      if (opts.markFrom != null && i >= opts.markFrom) cls += ` ${opts.markCls}`;
+      if (opts.goneFrom != null && i >= opts.goneFrom) cls += " sq-gone";
+      items.appendChild(icon(opts.icon, cls));
+    }
+  }
+  box.appendChild(items);
+  const num = document.createElement("div");
+  num.className = "sq-num";
+  num.textContent = opts.label ?? String(n);
+  box.appendChild(num);
+  return box;
+}
+
+function sign(text, cls = "") {
+  const s = document.createElement("div");
+  s.className = `sq-op ${cls}`;
+  s.textContent = text;
+  return s;
+}
+
+function drawCount(c, tone, marks) {
+  const a = count(c.a);
+  const b = count(c.b);
+  const op = OPS[c.op] || "+";
+  const exact = op === "+" ? a + b : op === "−" ? Math.max(0, a - b) : a * b;
+  const result = c.result == null ? exact : count(c.result);
+  const ic = ICONS[c.icon] ? c.icon : "star";
+  const wrap = document.createElement("div");
+  wrap.className = "sq-count";
+  // Line 1 is the question (4 + 5), line 2 the answer (= 9).
+  const line1 = document.createElement("div");
+  const line2 = document.createElement("div");
+  line1.className = line2.className = "sq-line";
+
+  if (op === "×") {
+    // a groups of b
+    const groups = document.createElement("div");
+    groups.className = "sq-groups";
+    for (let i = 0; i < Math.min(a, 10); i++) groups.appendChild(group(b, { icon: ic, label: "" }));
+    const holder = document.createElement("div");
+    holder.className = "sq-group";
+    holder.appendChild(groups);
+    const num = document.createElement("div");
+    num.className = "sq-num";
+    num.textContent = `${a} groups of ${b}`;
+    holder.appendChild(num);
+    line1.appendChild(holder);
+  } else if (op === "−") {
+    // Start with a, cross out the b taken away.
+    line1.appendChild(group(a, { icon: ic, goneFrom: Math.max(0, a - b), label: `${a}, take away ${b}` }));
+  } else {
+    line1.appendChild(group(a, { icon: ic }));
+    line1.appendChild(sign("+"));
+    line1.appendChild(group(b, { icon: ic }));
+  }
+
+  line2.appendChild(sign("="));
+  // marks > 0: items the learner missed (shown in the right answer); < 0: extra items they added.
+  const res = { icon: ic, cls: "sq-result", itemCls: tone === "try" ? "sq-try-item" : tone === "right" ? "sq-right-item" : "" };
+  if (marks > 0 && tone === "right") Object.assign(res, { markFrom: result - marks, markCls: "sq-missed" });
+  if (marks < 0 && tone === "try") Object.assign(res, { markFrom: result + marks, markCls: "sq-extra" });
+  line2.appendChild(group(result, res));
+  wrap.append(line1, line2);
+  if (result > MAX_ITEMS || a > MAX_ITEMS || b > MAX_ITEMS) wrap.classList.add("sq-big");
+  return wrap;
+}
+
+/* ---------- Fraction bars: 3/8 as a bar of 8 with 3 shaded ---------- */
+
+function parseFraction(f) {
+  if (typeof f === "string") {
+    const m = f.match(/^\s*(\d+)\s*\/\s*(\d+)\s*$/);
+    return m ? { num: count(m[1]), den: count(m[2]) } : null;
+  }
+  if (f && typeof f === "object") return { num: count(f.num), den: count(f.den), label: str(f.label, 40) };
+  return null;
+}
+
+function drawFractions(input, tone) {
+  const list = (Array.isArray(input) ? input : [input]).map(parseFraction).filter((f) => f && f.den > 0 && f.den <= 24).slice(0, 4);
+  const wrap = document.createElement("div");
+  wrap.className = "sq-fractions";
+  for (const f of list) {
+    const row = document.createElement("div");
+    row.className = "sq-frac-row";
+    const bars = document.createElement("div");
+    bars.className = "sq-frac-bars";
+    // More than one whole (e.g. 8/5) needs more than one bar, which shows it at a glance.
+    const wholes = Math.max(1, Math.min(4, Math.ceil(f.num / f.den)));
+    for (let w = 0; w < wholes; w++) {
+      const bar = document.createElement("div");
+      bar.className = "sq-frac-bar";
+      for (let i = 0; i < f.den; i++) {
+        const cell = document.createElement("span");
+        if (w * f.den + i < f.num) cell.className = `on ${tone === "try" ? "on-try" : tone === "right" ? "on-right" : ""}`;
+        bar.appendChild(cell);
+      }
+      bars.appendChild(bar);
+    }
+    row.appendChild(bars);
+    const label = document.createElement("div");
+    label.className = "sq-frac-label";
+    label.textContent = `${f.num}/${f.den}${f.label ? ` ${f.label}` : ""}`;
+    row.appendChild(label);
+    wrap.appendChild(row);
+  }
+  return wrap;
+}
+
+/* ---------- Idea cards: "what you wrote" next to "what it is" ---------- */
+
+// Text with **marked** words, built from text nodes so nothing becomes markup.
+function marked(text) {
+  const frag = document.createDocumentFragment();
+  str(text, 160).split("**").forEach((part, i) => {
+    if (!part) return;
+    if (i % 2) {
+      const m = document.createElement("mark");
+      m.textContent = part;
+      frag.appendChild(m);
+    } else {
+      frag.appendChild(document.createTextNode(part));
+    }
+  });
+  return frag;
+}
+
+function drawCard(c) {
+  const card = document.createElement("div");
+  card.className = "sq-card";
+  if (c.emoji) {
+    const pic = document.createElement("div");
+    pic.className = "sq-card-pic";
+    pic.setAttribute("aria-hidden", "true");
+    pic.textContent = str(c.emoji, 8);
+    card.appendChild(pic);
+  }
+  if (c.title) {
+    const t = document.createElement("div");
+    t.className = "sq-card-title";
+    t.appendChild(marked(c.title));
+    card.appendChild(t);
+  }
+  const points = (Array.isArray(c.points) ? c.points : []).slice(0, 5);
+  if (points.length) {
+    const ul = document.createElement("ul");
+    for (const pt of points) {
+      const li = document.createElement("li");
+      li.appendChild(marked(pt));
+      ul.appendChild(li);
+    }
+    card.appendChild(ul);
+  }
+  return card;
+}
+
+function countResult(panel) {
+  const c = panel && panel.count;
+  if (!c || typeof c !== "object") return null;
+  if (c.result != null) return count(c.result);
+  const op = OPS[c.op] || "+";
+  return op === "+" ? count(c.a) + count(c.b) : op === "−" ? Math.max(0, count(c.a) - count(c.b)) : count(c.a) * count(c.b);
+}
+
+function drawPanel(panel, marks = 0) {
   const tone = ["try", "right"].includes(panel.tone) ? panel.tone : "neutral";
   const box = document.createElement("div");
   box.className = `sq-panel sq-${tone}`;
@@ -326,27 +527,35 @@ function drawPanel(panel) {
     box.appendChild(chip);
   }
 
-  const svg = el("svg", {
-    viewBox: `-6 -6 ${W + 12} ${H + 12}`,
-    role: "presentation",
-    focusable: "false",
-    class: "sq-svg",
-  });
-  const g = el("g", { "font-family": "Atkinson Hyperlegible, system-ui, sans-serif" }, svg);
-  const shapes = Array.isArray(panel.shapes) ? panel.shapes.slice(0, MAX_SHAPES) : [];
-  // Highlights go underneath, so the ring never hides the label it points at.
-  shapes.sort((a, b) => (b && "highlight" in b ? 1 : 0) - (a && "highlight" in a ? 1 : 0));
-  for (const s of shapes) {
-    if (!s || typeof s !== "object") continue;
-    const kind = shapeKind(s);
-    if (!kind) continue;
-    try {
-      DRAW[kind](g, s);
-    } catch {
-      // One odd shape shouldn't lose the rest of the picture.
+  if (panel.count && typeof panel.count === "object") {
+    box.appendChild(drawCount(panel.count, tone, marks));
+  } else if (panel.fraction) {
+    box.appendChild(drawFractions(panel.fraction, tone));
+  } else if (panel.card && typeof panel.card === "object") {
+    box.appendChild(drawCard(panel.card));
+  } else {
+    const svg = el("svg", {
+      viewBox: `-6 -6 ${W + 12} ${H + 12}`,
+      role: "presentation",
+      focusable: "false",
+      class: "sq-svg",
+    });
+    const g = el("g", { "font-family": "Atkinson Hyperlegible, system-ui, sans-serif" }, svg);
+    const shapes = Array.isArray(panel.shapes) ? panel.shapes.slice(0, MAX_SHAPES) : [];
+    // Highlights go underneath, so the ring never hides the label it points at.
+    shapes.sort((a, b) => (b && "highlight" in b ? 1 : 0) - (a && "highlight" in a ? 1 : 0));
+    for (const s of shapes) {
+      if (!s || typeof s !== "object") continue;
+      const kind = shapeKind(s);
+      if (!kind) continue;
+      try {
+        DRAW[kind](g, s);
+      } catch {
+        // One odd shape shouldn't lose the rest of the picture.
+      }
     }
+    box.appendChild(svg);
   }
-  box.appendChild(svg);
 
   if (panel.note) {
     const note = document.createElement("p");
@@ -369,8 +578,14 @@ export function renderDiagram(spec) {
   const row = document.createElement("div");
   row.className = "sq-panels";
   row.dataset.count = String(Math.min(panels.length, MAX_PANELS));
+  // When "your way" and "the right path" are both counting pictures, mark the difference:
+  // the items that were missed, or the extra ones that were added.
+  const tryP = panels.find((p) => p && p.tone === "try");
+  const rightP = panels.find((p) => p && p.tone === "right");
+  const diff = tryP && rightP && countResult(tryP) != null && countResult(rightP) != null
+    ? countResult(rightP) - countResult(tryP) : 0;
   for (const p of panels.slice(0, MAX_PANELS)) {
-    if (p && typeof p === "object") row.appendChild(drawPanel(p));
+    if (p && typeof p === "object") row.appendChild(drawPanel(p, diff));
   }
   fig.appendChild(row);
 
@@ -385,6 +600,28 @@ export function renderDiagram(spec) {
     fig.appendChild(desc);
   }
   return fig;
+}
+
+// Trims empty space around drawn shapes. Needs the diagram to be on the page, so call it after
+// inserting one.
+export function fitDiagrams(root = document) {
+  for (const svg of root.querySelectorAll("svg.sq-svg:not([data-fit])")) {
+    svg.dataset.fit = "1";
+    const g = svg.querySelector("g");
+    let box;
+    try {
+      box = g.getBBox();
+    } catch {
+      continue;
+    }
+    if (!box || box.width <= 0 || box.height <= 0) continue;
+    const pad = 4;
+    const w = Math.max(box.width + pad * 2, 60);
+    const h = Math.max(box.height + pad * 2, 14);
+    const x = box.x - pad - (w - box.width - pad * 2) / 2;
+    const y = box.y - pad - (h - box.height - pad * 2) / 2;
+    svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
+  }
 }
 
 export function parseDiagram(source) {
