@@ -112,6 +112,7 @@ Shapes (each is one object in "shapes"):
 - {"numberline":{"from":0, "to":10, "step":1, "y":30, "marks":[{"at":7, "label":"you", "color":"try"}], "hops":[{"from":2, "to":5, "label":"+3", "color":"right"}]}}
 - {"bar":{"x":8, "y":30, "w":60, "h":9, "parts":4, "shaded":3, "color":"right", "label":"3/4"}}  (fraction bar)
 
+Labels: at most 6 per panel, each 1 to 3 words ("opposite", "20 m", "θ"). Give each label its own clear spot, at least 6 units from any other label; don't label the same line twice (use either a line "label" or a separate "text", not both). Put long explanations in your words, not on the picture.
 Draw roughly to scale so the picture is honest: work out coordinates before you write them (e.g. a 30° line from (12,8) to x=82 rises 70 × tan 30° ≈ 40.4, so it ends at (82,48.4)). Keep labels short. Never put the full working inside a diagram; it supports your words.
 
 Example, a student who measured the angle of elevation from the vertical:

@@ -602,12 +602,40 @@ export function renderDiagram(spec) {
   return fig;
 }
 
+// Moves labels that land on top of each other up or down until they are clear.
+function untangleLabels(svg) {
+  const placed = [];
+  const hit = (a, b) => a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+  for (const t of svg.querySelectorAll("text.sq-text")) {
+    let box;
+    try {
+      box = t.getBBox();
+    } catch {
+      return;
+    }
+    const y0 = Number(t.getAttribute("y"));
+    const step = box.height * 0.9 || 4;
+    const tries = [0, -1, 1, -2, 2, -3, 3];
+    let best = 0;
+    for (const k of tries) {
+      const moved = { x: box.x - 0.5, y: box.y + k * step - 0.5, width: box.width + 1, height: box.height + 1 };
+      if (!placed.some((p) => hit(moved, p))) {
+        best = k;
+        break;
+      }
+    }
+    if (best) t.setAttribute("y", String(y0 + best * step));
+    placed.push({ x: box.x - 0.5, y: box.y + best * step - 0.5, width: box.width + 1, height: box.height + 1 });
+  }
+}
+
 // Trims empty space around drawn shapes. Needs the diagram to be on the page, so call it after
 // inserting one.
 export function fitDiagrams(root = document) {
   for (const svg of root.querySelectorAll("svg.sq-svg:not([data-fit])")) {
     svg.dataset.fit = "1";
     const g = svg.querySelector("g");
+    untangleLabels(svg);
     let box;
     try {
       box = g.getBBox();
@@ -616,7 +644,8 @@ export function fitDiagrams(root = document) {
     }
     if (!box || box.width <= 0 || box.height <= 0) continue;
     const pad = 4;
-    const w = Math.max(box.width + pad * 2, 60);
+    // Never zoom in past the drawing's own scale, or labels grow too big.
+    const w = Math.max(box.width + pad * 2, 100);
     const h = Math.max(box.height + pad * 2, 14);
     const x = box.x - pad - (w - box.width - pad * 2) / 2;
     const y = box.y - pad - (h - box.height - pad * 2) / 2;
