@@ -87,6 +87,70 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 3 (NCERT, 2024-25 books)
+
+Under `cbse3/`, with subject codes `cbse3-math`, `cbse3-evs`, `cbse3-eng` and `cbse3-hin`. These packs follow the new 2024-25 NCERT books: Maths Mela (Maths), Our Wondrous World (Environmental Studies), Santoor (English) and Veena (Hindi). Chapter names come from the CBSE syllabus and published chapter lists, not the printed books; the Hindi chapter order follows one published list and may differ slightly from the book. Topics inside Maths and EVS chapters were chosen by Claude. English and Hindi chapter details come from general knowledge: chapters whose stories could not be confirmed (English 2, 3, 5, 6 and 9; Hindi 3, 8, 11, 12 and 14) are kept general and focus on reading skills and vocabulary. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: What's in a Name? | counting with tally marks; names, lists and comparing counts | 12 |
+| Maths 2: Toy Joy | solid shapes in toys; tracing faces of solids | 12 |
+| Maths 3: Double Century | counting in tens and hundreds up to 200; adding and taking away tens | 12 |
+| Maths 4: Vacation with My Nani Maa | adding in everyday stories; taking away and comparing | 12 |
+| Maths 5: Fun with Shapes | flat shapes: sides and corners; making pictures and patterns with shapes | 12 |
+| Maths 6: House of Hundreds–I | hundreds, tens and ones up to 999; comparing and ordering 3-digit numbers | 12 |
+| Maths 7: Raksha Bandhan | equal groups and repeated addition; times tables of 2, 3, 4, 5 and 10 | 12 |
+| Maths 8: Fair Share | sharing equally; halves and quarters | 12 |
+| Maths 9: House of Hundreds–II | adding 3-digit numbers; subtracting 3-digit numbers | 12 |
+| Maths 10: Fun at Class Party! | patterns in decorations; measuring length | 12 |
+| Maths 11: Filling and Lifting | how much a container holds; heavy and light | 12 |
+| Maths 12: Give and Take | money: notes and coins; paying and getting change | 12 |
+| Maths 13: Time Goes On | days, weeks, months and years; reading the clock | 12 |
+| Maths 14: The Surajkund Fair | collecting and reading data; shopping at the fair | 12 |
+| EVS 1: Family and Friends | small and joint families; sharing work; friendship | 7 |
+| EVS 2: Going to the Mela | melas, artisans and staying safe in crowds | 7 |
+| EVS 3: Celebrating Festivals | festivals across India; celebrating kindly to nature | 7 |
+| EVS 4: Getting to Know Plants | parts of a plant; trees, shrubs, herbs and climbers | 7 |
+| EVS 5: Plants and Animals Live Together | how plants and animals help each other; animal homes | 7 |
+| EVS 6: Living in Harmony | living kindly with plants and animals; Bishnoi and Chipko | 7 |
+| EVS 7: Water—A Precious Gift | sources and uses of water; saving water | 7 |
+| EVS 8: Food We Eat | food from plants and animals; a healthy plate | 7 |
+| EVS 9: Staying Healthy and Happy | clean habits, sleep, play and sharing feelings | 7 |
+| EVS 10: This World of Things | materials and their properties | 7 |
+| EVS 11: Making Things | craftspeople and how things are made | 7 |
+| EVS 12: Taking Charge of Waste | wet and dry waste; reduce, reuse, recycle | 7 |
+| English 1: Colours (Unit 1: Fun with Friends) | reading and vocabulary | 6 |
+| English 2: Badal and Moti (Unit 1: Fun with Friends) | reading and vocabulary | 6 |
+| English 3: Best Friends (Unit 1: Fun with Friends) | reading and vocabulary | 6 |
+| English 4: Out in the Garden (Unit 2: Toys and Games) | reading and vocabulary | 6 |
+| English 5: Talking Toys (Unit 2: Toys and Games) | reading and vocabulary | 6 |
+| English 6: Paper Boats (Unit 2: Toys and Games) | reading and vocabulary | 6 |
+| English 7: The Big Laddoo (Unit 3: Good Food) | reading and vocabulary | 6 |
+| English 8: Thank God (Unit 3: Good Food) | reading and vocabulary | 6 |
+| English 9: Madhu's Wish (Unit 3: Good Food) | reading and vocabulary | 6 |
+| English 10: Night (Unit 4: The Sky) | reading and vocabulary | 6 |
+| English 11: Chanda Mama Counts the Stars (Unit 4: The Sky) | reading and vocabulary | 6 |
+| English 12: Chandrayaan (Unit 4: The Sky) | reading and vocabulary | 6 |
+| Hindi 1: सीखो | reading and vocabulary | 6 |
+| Hindi 2: चींटी | reading and vocabulary | 6 |
+| Hindi 3: कितने पैर? | reading and vocabulary | 6 |
+| Hindi 4: बया हमारी चिड़िया रानी | reading and vocabulary | 6 |
+| Hindi 5: आम का पेड़ | reading and vocabulary | 6 |
+| Hindi 6: बीरबल की खिचड़ी | reading and vocabulary | 6 |
+| Hindi 7: मित्र को पत्र | reading and vocabulary | 6 |
+| Hindi 8: चतुर गीदड़ | reading and vocabulary | 6 |
+| Hindi 9: प्रकृति पर्व – फूलदेई | reading and vocabulary | 6 |
+| Hindi 10: रस्साकशी | reading and vocabulary | 6 |
+| Hindi 11: एक जादुई पिटारा | reading and vocabulary | 6 |
+| Hindi 12: अपना-अपना काम | reading and vocabulary | 6 |
+| Hindi 13: पेड़ों की अम्मा 'थिमक्का' | reading and vocabulary | 6 |
+| Hindi 14: किसान की होशियारी | reading and vocabulary | 6 |
+| Hindi 15: भारत | reading and vocabulary | 6 |
+| Hindi 16: चंद्रयान (संवाद) | reading and vocabulary | 6 |
+| Hindi 17: बोलने वाली मांद | reading and vocabulary | 6 |
+| Hindi 18: हम अनेक किंतु एक | reading and vocabulary | 6 |
+
+
 ## CBSE Class 4 (NCERT, 2025-26 books)
 
 Under `cbse4/`, with subject codes `cbse4-math`, `cbse4-evs`, `cbse4-eng` and `cbse4-hin`. These packs follow the new 2025-26 NCERT books: Maths Mela (Maths), Our Wondrous World (Environmental Studies), Santoor (English) and Veena (Hindi). The English chapter list was checked against NCERT's own contents page; the other chapter names come from published chapter lists. Topics inside Maths and EVS chapters were chosen by Claude. English and Hindi chapter details come from general knowledge, not the printed books: chapters whose stories could not be confirmed (English 1, 2, 5, 9 and 11; Hindi 1, 7, 9 and 11) are kept general and focus on reading skills and vocabulary. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
@@ -725,8 +789,8 @@ Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, 
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 1,946 of the 7,908 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 5,962 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 2,045 of the 8,340 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 6,295 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
