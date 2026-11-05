@@ -13,6 +13,7 @@ function helpPressed(kind: "read_aloud" | "break") {
 }
 import Check, { CheckState } from "./Check";
 import Feedback, { AdaptiveResponse } from "./Feedback";
+import Mistake from "./Mistake";
 import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
 import Notes from "./Notes";
@@ -32,6 +33,7 @@ const SUBJECT_LOOK: Record<string, { icon: string; color: string }> = {
   ss: { icon: "🌍", color: "#2f6f73" },
   it: { icon: "⌨", color: "#4a3d35" },
   sci: { icon: "🔬", color: "#4f6f9b" },
+  evs: { icon: "🌱", color: "#4f7a55" },
 };
 type CheckRow = {
   subject_id: number;
@@ -69,6 +71,9 @@ type Result = {
   progress: string;
   tip?: string | null;
   solution?: string;
+  your_answer?: string;
+  right_answer?: string;
+  picture?: PictureSpec | null;
   response: AdaptiveResponse;
 };
 
@@ -322,6 +327,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
   const startedRef = useRef<number>(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const readAloud = readsAloud(me);
+  const young = ageBand(me) === "little" || ageBand(me) === "middle";
   const [tutorOn, setTutorOn] = useState(false);
 
   useEffect(() => {
@@ -442,8 +448,22 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
               {step.method_why && step.explanation && (
                 <p className="muted">{t(`learn.why_method.${step.method_why}`, { method: methodName(t, step.explanation.style) })}</p>
               )}
+              {young && step.explanation?.picture && <Picture picture={step.explanation.picture} />}
               <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? t("learn.no_explanation")}</p>
-              {step.explanation?.picture && <Picture picture={step.explanation.picture} />}
+              {!young && step.explanation?.picture && <Picture picture={step.explanation.picture} />}
+              {young && step.explanation && (
+                <div className="row">
+                  <button
+                    className="secondary"
+                    onClick={() => {
+                      speak(step.explanation!.body);
+                      helpPressed("read_aloud");
+                    }}
+                  >
+                    {t("learn.read_aloud")}
+                  </button>
+                </div>
+              )}
               <div className="row" role="group" aria-label={t("learn.other_ways")}>
                 {(step.styles ?? []).map((s) => (
                   <button
@@ -455,7 +475,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                     {t(`style.${s}` as Key)}
                   </button>
                 ))}
-                {step.explanation && (
+                {!young && step.explanation && (
                   <button
                     className="secondary"
                     onClick={() => {
@@ -534,8 +554,10 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
 
               {result && (
                 <>
+                  {!result.correct && result.your_answer && result.right_answer && (
+                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture} />
+                  )}
                   <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
-                  <p className="muted">{t("learn.this_topic", { progress: t(`progress.${result.progress}` as Key) })}</p>
                   <button onClick={next}>{t("learn.next")}</button>
                 </>
               )}

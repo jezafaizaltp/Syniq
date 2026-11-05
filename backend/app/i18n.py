@@ -75,10 +75,6 @@ MESSAGES: dict[str, dict[str, str]] = {
         ),
     },
     # --- Check-ins and answers
-    "checkin.not_saved": {
-        "en": "Thanks. Check-ins are not saved for your account.",
-        "ml": "നന്ദി. നിങ്ങളുടെ അക്കൗണ്ടിൽ ചെക്ക്-ഇന്നുകൾ സേവ് ചെയ്യുന്നില്ല.",
-    },
     "checkin.thanks": {"en": "Thanks for telling me.", "ml": "പറഞ്ഞതിന് നന്ദി."},
     "checkin.thanks_low": {
         "en": "Thanks for telling me. We can start with something short, and you can take a break any time.",

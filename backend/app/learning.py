@@ -214,7 +214,10 @@ def next_action(db: DbSession, student: User, chapter_id: int, current_concept_i
     preferred = settings.get("preferred_style")
     if not preferred and "visual_first" in detect.effective_support(settings):
         preferred = "visual"
-    action = decide(chapter, states, utcnow(), current_concept_id, preferred)
+    # LKG to Class 5 see the picture first until their answers show another way works better.
+    _, grade = class_of(student)
+    ties = ["visual", "text", "step_by_step", "real_world"] if grade <= 5 else None
+    action = decide(chapter, states, utcnow(), current_concept_id, preferred, ties)
     evidence = dict(action.evidence)
     if action.style:
         evidence["style"] = action.style

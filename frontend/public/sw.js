@@ -11,13 +11,13 @@
  *   played offline is sent once the phone is back online.
  * - Answering questions needs internet: the adaptive teacher runs on the server.
  */
-const VERSION = "syniq-v3";
+const VERSION = "syniq-v4";
 const SHELL = `${VERSION}-shell`;
 const API = `${VERSION}-api`;
 const API_PATHS = [/^\/me$/, /^\/me\/(overview|goals|notes)$/, /^\/explore(\/[\w.]+)?$/, /^\/subjects(\/\d+\/chapters)?$/, /^\/chapters\/\d+$/, /^\/checks$/, /^\/ai\/status$/, /^\/family$/, /^\/early\/\d+$/, /^\/baby\/\d+$/, /^\/pregnancy\/\d+$/];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(["/", "/learn", "/space", "/explore", "/family", "/early", "/baby", "/pregnancy", "/manifest.webmanifest"]).catch(() => undefined)));
+  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(["/", "/learn", "/space", "/explore", "/family", "/early", "/baby", "/pregnancy", "/manifest.webmanifest", "/fonts/syniq-digits.woff2"]).catch(() => undefined)));
   self.skipWaiting();
 });
 

@@ -234,6 +234,10 @@ def submit_attempt(
     if not correct:
         out["tip"] = tip
         out["solution"] = item.solution
+        # The mistake is the way in: show the learner's answer next to the right one, with the topic's picture.
+        out["your_answer"] = body.response
+        out["right_answer"] = item.answer
+        out["picture"] = next((e.picture for e in explanations if e.picture), None)
     return out
 
 
@@ -261,12 +265,14 @@ def checkin(
     body: CheckInIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
 ):
     """Optional and self-reported. Skipping it changes nothing."""
+    low = body.mood in ("low", "frustrated") or body.energy == "low"
+    # The child hears the same thanks either way; whether it is kept is the parent's choice, explained on their page.
+    message = i18n.t(lang, "checkin.thanks_low" if low else "checkin.thanks")
     if not has_consent(db, user.id, "mood_checkins"):
-        return {"stored": False, "message": i18n.t(lang, "checkin.not_saved")}
+        return {"stored": False, "message": message}
     db.add(CheckIn(student_id=user.id, mood=body.mood, energy=body.energy))
     db.commit()
-    low = body.mood in ("low", "frustrated") or body.energy == "low"
-    return {"stored": True, "message": i18n.t(lang, "checkin.thanks_low" if low else "checkin.thanks")}
+    return {"stored": True, "message": message}
 
 
 @router.get("/me")

@@ -62,13 +62,13 @@ def target_difficulty(p: float) -> int:
     return 3
 
 
-def pick_style(state: ConceptState, preferred: str | None) -> str:
+def pick_style(state: ConceptState, preferred: str | None, ties: list[str] | None = None) -> str:
     """Choose a way to explain. The student's own preference wins; see engine/methods.py."""
-    return choose_style(state, preferred)[0]
+    return choose_style(state, preferred, ties)[0]
 
 
-def choose_style(state: ConceptState, preferred: str | None) -> tuple[str, str]:
-    return methods.choose(state.styles_seen, state.format_stats, state.method_prior, preferred)
+def choose_style(state: ConceptState, preferred: str | None, ties: list[str] | None = None) -> tuple[str, str]:
+    return methods.choose(state.styles_seen, state.format_stats, state.method_prior, preferred, ties)
 
 
 def decide(
@@ -77,6 +77,7 @@ def decide(
     now: datetime,
     current_concept_id: int | None = None,
     preferred_style: str | None = None,
+    style_ties: list[str] | None = None,
 ) -> Action:
     """Pick the next action for one chapter.
 
@@ -114,7 +115,7 @@ def decide(
 
     # R2: two or more wrong in a row -> explain it a different way and offer support.
     if current and current.wrong_streak >= STRUGGLE_STREAK:
-        style, why = choose_style(current, preferred_style)
+        style, why = choose_style(current, preferred_style, style_ties)
         return Action(
             kind="explain",
             concept_id=current.concept_id,
@@ -152,7 +153,7 @@ def decide(
 
     # R4: a new concept starts with an explanation, in the student's preferred style.
     if current.attempts == 0 and not current.styles_seen:
-        style, why = choose_style(current, preferred_style)
+        style, why = choose_style(current, preferred_style, style_ties)
         return Action(
             kind="explain",
             concept_id=current.concept_id,
