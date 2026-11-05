@@ -17,6 +17,21 @@ It is the same SYNiq as the online version, with the same database, so moving to
 
 For a pilot where students use SYNiq in lab periods, the lab computer is enough. The main loss is that parents and students can't use it from home.
 
+## Can one computer handle 50 students?
+
+Yes. On 5 November 2026 we rehearsed the pilot on this setup, held to **2 processor cores** (like an ordinary school desktop):
+
+| What we did | Result |
+| --- | --- |
+| Admin imports 50 students and 48 parents from a sheet | 11.6 seconds |
+| All 50 sign in for the first time within a minute and choose a password | No errors. Slowest sign-in 0.6 s |
+| All 50 practise together for 9½ minutes: reading explanations, answering (949 answers), asking for hints, wrong-answer pictures, plus two teachers watching their class page | **No errors.** Typical reply 30 to 45 ms, slowest 0.6 s |
+| All 48 consented students press "Next" at the very same moment | Everyone answered within 1.5 s |
+| All 50 sign in at the very same moment | Everyone in within 3.3 s |
+| Two students whose consent form came back unsigned | Correctly kept out of practice |
+
+At the busiest moment the two cores were about two-thirds busy, and SYNiq used about 400 MB of memory. A computer with 2 cores and 4 GB of memory is enough. The slow part on a real lab day is more likely to be the school Wi-Fi than this computer, so try it with a full class once before the pilot starts.
+
 ## 1. What you need
 
 - **One computer that stays in the lab** and is switched on whenever students use SYNiq. It needs a 64-bit processor, at least 8 GB of memory (4 GB is enough on Ubuntu), and 20 GB of free disk. A cable to the school router is better than Wi-Fi for this one computer.
@@ -94,6 +109,14 @@ If it doesn't open:
 ## 7. Set up the pilot
 
 This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.md#7-set-up-the-pilot): sign in as the admin, then on **School** import the students and parents from the CSV, print the login slips, add the Class 9 chapters and add the teachers.
+
+## The first lab day
+
+1. Switch on the lab computer 10 minutes early and open the SYNiq address on one tablet to check it works.
+2. Give each student their slip. The address is printed on it.
+3. Students type the login and password from the slip, then choose their own password (at least 8 letters or numbers). **Ask them to write it in their notebook**: if they forget it, the admin presses **New password** on the School page.
+4. Each subject offers a short optional check first. Students can take it, so SYNiq skips what they already know, or skip it.
+5. At the end, everyone presses **Sign out**.
 
 ## 8. Every day
 

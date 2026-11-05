@@ -54,6 +54,9 @@ export default function Mistake({ yours, right, picture }: { yours: string; righ
         alt: `${t("fb.you_said")} ${yours}, ${t("fb.right_answer")} ${right}. ${picture!.alt}`,
       }
     : picture;
+  // The topic's picture often works a different example. Say so, so its numbers don't look like this question's.
+  const esc = right.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const aboutThis = onLine || (right.trim() !== "" && new RegExp(`(^|[^\\w.])${esc}(?![\\w])`).test(JSON.stringify(picture ?? "")));
   return (
     <div className="mistake">
       <div className="mistake-pair">
@@ -70,7 +73,7 @@ export default function Mistake({ yours, right, picture }: { yours: string; righ
       </div>
       {shown && (
         <div className="mistake-picture">
-          <p className="mistake-label">{t("fb.see_it")}</p>
+          <p className="mistake-label">{t(aboutThis ? "fb.see_it" : "fb.see_example")}</p>
           <Picture picture={shown} />
         </div>
       )}

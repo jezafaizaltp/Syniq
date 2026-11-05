@@ -109,6 +109,7 @@ const en = {
   "fb.you_said": "You said",
   "fb.right_answer": "The answer",
   "fb.see_it": "Let's look at it",
+  "fb.see_example": "Here is how it works, with another example",
   "fb.yes": "⭐ Yes! Now try the big one again.",
   "fb.not_yet": "Not yet. Try counting the objects one by one.",
 
@@ -374,6 +375,7 @@ const ml: Record<Key, string> = {
   "fb.you_said": "നിങ്ങൾ പറഞ്ഞത്",
   "fb.right_answer": "ശരിയുത്തരം",
   "fb.see_it": "ചിത്രത്തിൽ നോക്കാം",
+  "fb.see_example": "മറ്റൊരു ഉദാഹരണത്തിലൂടെ ഇത് എങ്ങനെയെന്ന് നോക്കാം",
   "fb.yes": "⭐ അതെ! ഇനി വലിയ ചോദ്യം ഒന്നുകൂടി ശ്രമിക്കൂ.",
   "fb.not_yet": "ഇതുവരെ ശരിയായില്ല. ഓരോന്നായി എണ്ണിനോക്കൂ.",
 
