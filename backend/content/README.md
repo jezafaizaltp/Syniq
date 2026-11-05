@@ -87,6 +87,55 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 1 (NCERT, 2024-25 books)
+
+Under `cbse1/`, with subject codes `cbse1-math`, `cbse1-eng` and `cbse1-hin` (there is no EVS book in Classes 1 and 2). These packs follow the new NCERT books: Joyful Mathematics (Maths), Mridang (English) and Sarangi (Hindi). Chapter names and order come from published chapter lists, two of which agree for each book. None were checked against the printed books. Topics inside Maths chapters were chosen by Claude and kept to Class 1 level (counting to 20 and then 99, making 10, adding and taking away within 10, shapes, patterns, days and money). Most English and Hindi stories could not be confirmed, so those chapters are kept general and focus on reading, words, sounds and the chapter's theme; The Cap-seller and the Monkeys follows the familiar folk tale. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: Finding the Furry Cat! | where is it? Position words; counting up to 9 | 12 |
+| Maths 2: What is Long, What is Round | long and short, tall and short; round things and flat things | 12 |
+| Maths 3: Mango Treat | numbers 1 to 9 and zero; more, fewer and the same | 12 |
+| Maths 4: Making 10 | pairs that make 10; ten-frames and numbers up to 10 | 12 |
+| Maths 5: How Many | counting from 10 to 20; comparing numbers up to 20 | 12 |
+| Maths 6: Vegetable Farm | adding small numbers; taking away | 12 |
+| Maths 7: Lina's Family | first, second, third: order; counting family members | 12 |
+| Maths 8: Fun with Numbers | counting in tens up to 100; numbers up to 99 | 12 |
+| Maths 9: Utsav | patterns in festival decorations; shapes in decorations | 12 |
+| Maths 10: How do I Spend my Day | parts of the day; days of the week | 12 |
+| Maths 11: How Many Times | measuring with hand spans and steps; how many times: repeated adding | 12 |
+| Maths 12: How Much Can We Spend | coins and notes; buying and how much is left | 12 |
+| Maths 13: So Many Toys | sorting toys; shapes of toys | 12 |
+| English 1: Two Little Hands (Unit 1: My Family and Me) | reading and vocabulary | 6 |
+| English 2: Greetings (Unit 1: My Family and Me) | reading and vocabulary | 6 |
+| English 3: Picture Time (Unit 2: Life Around Us) | reading and vocabulary | 6 |
+| English 4: The Cap-seller and the Monkeys (Unit 2: Life Around Us) | reading and vocabulary | 6 |
+| English 5: A Farm (Unit 2: Life Around Us) | reading and vocabulary | 6 |
+| English 6: Fun with Pictures (Unit 3: Food) | reading and vocabulary | 6 |
+| English 7: The Food We Eat (Unit 3: Food) | reading and vocabulary | 6 |
+| English 8: The Four Seasons (Unit 4: Seasons) | reading and vocabulary | 6 |
+| English 9: Anandi's Rainbow (Unit 4: Seasons) | reading and vocabulary | 6 |
+| Hindi 1: मीना का परिवार | reading and vocabulary | 6 |
+| Hindi 2: दादा-दादी | reading and vocabulary | 6 |
+| Hindi 3: रीना का दिन | reading and vocabulary | 6 |
+| Hindi 4: रानी भी | reading and vocabulary | 6 |
+| Hindi 5: मिठाई | reading and vocabulary | 6 |
+| Hindi 6: तीन साथी | reading and vocabulary | 6 |
+| Hindi 7: वाह, मेरे घोड़े! | reading and vocabulary | 6 |
+| Hindi 8: खतरे में साँप | reading and vocabulary | 6 |
+| Hindi 9: आलू की सड़क | reading and vocabulary | 6 |
+| Hindi 10: झूलम-झूली | reading and vocabulary | 6 |
+| Hindi 11: भुट्टे | reading and vocabulary | 6 |
+| Hindi 12: फूली रोटी | reading and vocabulary | 6 |
+| Hindi 13: मेला | reading and vocabulary | 6 |
+| Hindi 14: बरखा और मेघा | reading and vocabulary | 6 |
+| Hindi 15: होली | reading and vocabulary | 6 |
+| Hindi 16: जन्मदिवस पर पेड़ लगाओ | reading and vocabulary | 6 |
+| Hindi 17: हवा | reading and vocabulary | 6 |
+| Hindi 18: कितनी प्यारी है ये दुनिया | reading and vocabulary | 6 |
+| Hindi 19: चाँद का बच्चा | reading and vocabulary | 6 |
+
+
 ## CBSE Class 2 (NCERT, 2024-25 books)
 
 Under `cbse2/`, with subject codes `cbse2-math`, `cbse2-eng` and `cbse2-hin` (there is no EVS book in Classes 1 and 2). These packs follow the new NCERT books: Joyful Mathematics (Maths), Mridang (English) and Sarangi (Hindi). Maths and English chapter names come from published chapter lists that agree with each other; Hindi chapter names and order come from the Delhi Directorate of Education Class II Hindi plan for 2026-27. None were checked against the printed books. Topics inside Maths chapters were chosen by Claude and kept to Class 2 level (numbers up to 99, adding and taking away, early grouping and sharing). Most English and Hindi stories could not be confirmed, so those chapters are kept general and focus on reading, vocabulary, opposites, rhymes and the chapter's theme; well-known tales (The Smart Monkey, शेर और चूहे की दोस्ती, मूली) follow the familiar versions. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
@@ -847,8 +896,8 @@ Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, 
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 2,110 of the 8,706 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 6,596 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 2,182 of the 9,030 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 6,848 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
