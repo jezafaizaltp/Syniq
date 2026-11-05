@@ -1,0 +1,22 @@
+# SYNiq inside the school network: plain http on port 80, no web address needed.
+# Students open http://<this computer's address> on the school Wi-Fi.
+:80 {
+	encode gzip
+
+	# The API, under /api on the same address (so no cross-site requests).
+	handle_path /api/* {
+		reverse_proxy api:8000
+	}
+
+	handle {
+		reverse_proxy web:3000
+	}
+
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+}

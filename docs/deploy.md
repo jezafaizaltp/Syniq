@@ -2,6 +2,8 @@
 
 This guide sets up SYNiq on one small server, with HTTPS, a PostgreSQL database and a backup every night. Students, parents and teachers then use it from any browser, on school computers or phones.
 
+No server or card yet? [lab-pilot.md](lab-pilot.md) runs the same SYNiq on one school lab computer over the school Wi-Fi, and its data can be moved to a server later.
+
 Everything runs with Docker Compose (`deploy/docker-compose.yml`):
 
 | Service | What it does |
