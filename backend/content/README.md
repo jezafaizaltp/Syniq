@@ -87,6 +87,64 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE Class 2 (NCERT, 2024-25 books)
+
+Under `cbse2/`, with subject codes `cbse2-math`, `cbse2-eng` and `cbse2-hin` (there is no EVS book in Classes 1 and 2). These packs follow the new NCERT books: Joyful Mathematics (Maths), Mridang (English) and Sarangi (Hindi). Maths and English chapter names come from published chapter lists that agree with each other; Hindi chapter names and order come from the Delhi Directorate of Education Class II Hindi plan for 2026-27. None were checked against the printed books. Topics inside Maths chapters were chosen by Claude and kept to Class 2 level (numbers up to 99, adding and taking away, early grouping and sharing). Most English and Hindi stories could not be confirmed, so those chapters are kept general and focus on reading, vocabulary, opposites, rhymes and the chapter's theme; well-known tales (The Smart Monkey, शेर और चूहे की दोस्ती, मूली) follow the familiar versions. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
+
+| Chapter | Topics | Questions |
+| --- | --- | --- |
+| Maths 1: A Day at the Beach | counting things up to 99; tens and ones | 12 |
+| Maths 2: Shapes Around Us | solid shapes around us; flat shapes: circle, square, triangle, rectangle | 12 |
+| Maths 3: Fun with Numbers | counting forward, backward and in skips; comparing and ordering numbers | 12 |
+| Maths 4: Shadow Story | shadows of things; seeing from different sides | 12 |
+| Maths 5: Playing with Lines | straight and curved lines; longer and shorter | 12 |
+| Maths 6: Decoration for Festival | patterns with shapes and colours; counting decorations | 12 |
+| Maths 7: Rani's Gift | adding two-digit numbers; taking away two-digit numbers | 12 |
+| Maths 8: Grouping and Sharing | equal groups; sharing equally | 12 |
+| Maths 9: Which Season is it? | days, weeks and months; seasons and time of day | 12 |
+| Maths 10: Fun at the Fair | coins and notes; buying and change | 12 |
+| Maths 11: Data Handling | sorting and counting; reading a picture chart | 12 |
+| English 1: My Bicycle (Unit 1: Fun with Friends) | reading and vocabulary | 6 |
+| English 2: Picture Reading (Unit 1: Fun with Friends) | reading and vocabulary | 6 |
+| English 3: It is Fun (Unit 2: Welcome to My World) | reading and vocabulary | 6 |
+| English 4: Seeing without Seeing (Unit 2: Welcome to My World) | reading and vocabulary | 6 |
+| English 5: Come Back Soon (Unit 3: Going Places) | reading and vocabulary | 6 |
+| English 6: Between Home and School (Unit 3: Going Places) | reading and vocabulary | 6 |
+| English 7: This is My Town (Unit 3: Going Places) | reading and vocabulary | 6 |
+| English 8: A Show of Clouds (Unit 4: Life Around Us) | reading and vocabulary | 6 |
+| English 9: My Name (Unit 4: Life Around Us) | reading and vocabulary | 6 |
+| English 10: The Crow (Unit 4: Life Around Us) | reading and vocabulary | 6 |
+| English 11: The Smart Monkey (Unit 4: Life Around Us) | reading and vocabulary | 6 |
+| English 12: Little Drops of Water (Unit 5: Harmony) | reading and vocabulary | 6 |
+| English 13: We Are All Indians (Unit 5: Harmony) | reading and vocabulary | 6 |
+| Hindi 1: नीमा की दादी | reading and vocabulary | 6 |
+| Hindi 2: घर | reading and vocabulary | 6 |
+| Hindi 3: माला की चाँदी की पायल | reading and vocabulary | 6 |
+| Hindi 4: माँ | reading and vocabulary | 6 |
+| Hindi 5: थाथू और मैं | reading and vocabulary | 6 |
+| Hindi 6: चींटा | reading and vocabulary | 6 |
+| Hindi 7: टिल्लू जी | reading and vocabulary | 6 |
+| Hindi 8: तीन दोस्त | reading and vocabulary | 6 |
+| Hindi 9: दुनिया रंग-बिरंगी | reading and vocabulary | 6 |
+| Hindi 10: कौन | reading and vocabulary | 6 |
+| Hindi 11: बैंगनी जोजो | reading and vocabulary | 6 |
+| Hindi 12: तोसिया का सपना | reading and vocabulary | 6 |
+| Hindi 13: तालाब | reading and vocabulary | 6 |
+| Hindi 14: बीज | reading and vocabulary | 6 |
+| Hindi 15: किसान | reading and vocabulary | 6 |
+| Hindi 16: मूली | reading and vocabulary | 6 |
+| Hindi 17: बरसात और मेंढक | reading and vocabulary | 6 |
+| Hindi 18: शेर और चूहे की दोस्ती | reading and vocabulary | 6 |
+| Hindi 19: आउट | reading and vocabulary | 6 |
+| Hindi 20: छुपन-छुपाई | reading and vocabulary | 6 |
+| Hindi 21: हाथी साइकिल चला रहा था | reading and vocabulary | 6 |
+| Hindi 22: चार दिशाएँ | reading and vocabulary | 6 |
+| Hindi 23: चंदा मामा | reading and vocabulary | 6 |
+| Hindi 24: गिरे ताल में | reading and vocabulary | 6 |
+| Hindi 25: सबसे बड़ा छाता | reading and vocabulary | 6 |
+| Hindi 26: बादल | reading and vocabulary | 6 |
+
+
 ## CBSE Class 3 (NCERT, 2024-25 books)
 
 Under `cbse3/`, with subject codes `cbse3-math`, `cbse3-evs`, `cbse3-eng` and `cbse3-hin`. These packs follow the new 2024-25 NCERT books: Maths Mela (Maths), Our Wondrous World (Environmental Studies), Santoor (English) and Veena (Hindi). Chapter names come from the CBSE syllabus and published chapter lists, not the printed books; the Hindi chapter order follows one published list and may differ slightly from the book. Topics inside Maths and EVS chapters were chosen by Claude. English and Hindi chapter details come from general knowledge: chapters whose stories could not be confirmed (English 2, 3, 5, 6 and 9; Hindi 3, 8, 11, 12 and 14) are kept general and focus on reading skills and vocabulary. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
@@ -789,8 +847,8 @@ Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, 
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 2,045 of the 8,340 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 6,295 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 2,110 of the 8,706 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 6,596 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 

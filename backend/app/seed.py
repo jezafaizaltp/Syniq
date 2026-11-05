@@ -39,6 +39,10 @@ SUBJECTS = [
     ("bio", "Biology", "en", "kerala_scert", 9),
     ("ss", "Social Science", "en", "kerala_scert", 9),
     ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE Class 2 (NCERT books, new 2024-25 editions): Joyful Mathematics, Mridang, Sarangi. No EVS in Classes 1-2.
+    ("cbse2-math", "Mathematics", "en", "cbse", 2),
+    ("cbse2-eng", "English", "en", "cbse", 2),
+    ("cbse2-hin", "Hindi", "hi", "cbse", 2),
     # CBSE Class 3 (NCERT books, new 2024-25 editions): Maths Mela, Our Wondrous World, Santoor, Veena.
     ("cbse3-math", "Mathematics", "en", "cbse", 3),
     ("cbse3-evs", "Environmental Studies", "en", "cbse", 3),
