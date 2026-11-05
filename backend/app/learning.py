@@ -336,6 +336,19 @@ def record_attempt(
     return correct, misconception, row
 
 
+def shuffled_options(item: Item) -> list[str] | None:
+    """Choices in a fixed order per question, but not the order they were written in.
+
+    Packs list the right answer first, so showing them as written would teach
+    "always tap the first one". Seeding by the item id keeps the order the same
+    every time the question comes back."""
+    if not item.options:
+        return item.options
+    options = list(item.options)
+    random.Random(f"options-{item.id}").shuffle(options)
+    return options
+
+
 def public_item(item: Item, settings: dict | None = None) -> dict:
     """An item as the student sees it: no answer, no hints until asked."""
     out = {
@@ -343,7 +356,7 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
         "concept_id": item.concept_id,
         "kind": item.kind,
         "prompt": item.prompt,
-        "options": item.options,
+        "options": shuffled_options(item),
         "difficulty": item.difficulty,
         "hint_count": len(item.hints),
     }

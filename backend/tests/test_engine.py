@@ -107,3 +107,20 @@ def test_style_choice_prefers_what_has_worked():
         format_stats={"visual": {"after_correct": 5, "after_wrong": 0}, "text": {"after_correct": 0, "after_wrong": 4}},
     )
     assert pick_style(s, None) == "visual"
+
+
+def test_choices_are_shuffled_but_stable():
+    from types import SimpleNamespace
+
+    from app.learning import shuffled_options
+
+    firsts = set()
+    for i in range(1, 41):
+        item = SimpleNamespace(id=i, options=["right", "wrong a", "wrong b", "wrong c"])
+        shown = shuffled_options(item)
+        assert sorted(shown) == sorted(item.options)
+        assert shown == shuffled_options(item)
+        firsts.add(shown[0])
+    # The right answer must not always sit in the first slot.
+    assert len(firsts) > 1
+    assert shuffled_options(SimpleNamespace(id=1, options=None)) is None
