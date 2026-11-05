@@ -1,3 +1,4 @@
+from collections import Counter
 from pathlib import Path
 
 from tests.test_api import client, login  # first: it points the app at a test database
@@ -57,17 +58,17 @@ def test_students_only_see_chapters_with_approved_content():
     client.post("/admin/syllabus", json={"csv": SHEET, "dry_run": False}, headers=a)
     anu, teacher = login("anu@demo.syniq"), login("teacher@demo.syniq")
     social = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == "ss")
-    ss_packs = len([p for _, p in content_packs.read_packs() if p["subject"] == "ss"])
+    packs_by_subject = Counter(p["subject"] for _, p in content_packs.read_packs())  # read once: there are hundreds of packs
+    ss_packs = packs_by_subject["ss"]
     assert social["chapters"] == ss_packs  # the sheet's chapter 39 has no approved content
     assert len(client.get(f"/subjects/{social['id']}/chapters", headers=anu).json()) == ss_packs
     assert len(client.get(f"/subjects/{social['id']}/chapters", headers=teacher).json()) == ss_packs + 1
     math = next(s for s in client.get("/subjects", headers=anu).json() if s["code"] == "math")
-    packs = [p for _, p in content_packs.read_packs() if p["subject"] == "math"]
-    assert math["chapters"] == 2 + len(packs)  # the two demo chapters and the content packs have approved content
-    for code in {p["subject"] for _, p in content_packs.read_packs()} - {"math"}:
+    assert math["chapters"] == 2 + packs_by_subject["math"]  # the two demo chapters and the content packs have approved content
+    for code in set(packs_by_subject) - {"math"}:
         who = teacher if code.startswith("cbse") else anu  # Anu is on the Kerala syllabus, so sees only its subjects
         subject = next(s for s in client.get("/subjects", headers=who).json() if s["code"] == code)
-        assert subject["chapters"] == len([p for _, p in content_packs.read_packs() if p["subject"] == code])
+        assert subject["chapters"] == packs_by_subject[code]
 
 
 def test_draft_sheet_in_the_repo_is_valid():
