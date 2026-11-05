@@ -116,3 +116,5 @@ DATABASE_URL=postgresql://... alembic upgrade head
 ## Putting it online
 
 See [docs/deploy.md](docs/deploy.md): one small server, `docker compose up -d --build`, then create the school admin with `python -m app.bootstrap`.
+
+**No server yet?** [docs/lab-pilot.md](docs/lab-pilot.md) runs the same SYNiq on one school lab computer, used over the school Wi-Fi: `deploy/lab/start.sh` (Ubuntu / KITE) or `deploy/lab/start-windows.bat` (Windows) starts it, creates the admin and shows the address students type. A backup from the lab computer can be restored onto a real server later.

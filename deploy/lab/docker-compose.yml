@@ -1,0 +1,81 @@
+# SYNiq on one school lab computer, used over the school Wi-Fi. No server, web address or card needed.
+# Usage: run ./start.sh (Linux) or start.ps1 (Windows). See docs/lab-pilot.md.
+name: syniq-lab
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: syniq
+      POSTGRES_USER: syniq
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env (the start script does this for you)}
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U syniq -d syniq"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ../../backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://syniq:${POSTGRES_PASSWORD}@db:5432/syniq
+      SYNIQ_ENV: production
+      # The web app and the API share one address, so no other site needs to be let in.
+      CORS_ORIGINS: http://localhost
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
+  web:
+    build:
+      context: ../../frontend
+      args:
+        NEXT_PUBLIC_API_URL: /api
+        NEXT_PUBLIC_SHOW_DEMO: "0"
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "${PORT:-80}:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+      - web
+
+  # A compressed copy of the database when SYNiq starts and every 24 hours after,
+  # kept for 14 days in ./backups. Copy that folder to a pen drive every week.
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./backups:/backups
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        while true; do
+          pg_dump -h db -U syniq -d syniq | gzip > /backups/syniq-$$(date +%Y-%m-%d).sql.gz
+          find /backups -name 'syniq-*.sql.gz' -mtime +14 -delete
+          sleep 86400
+        done
+
+volumes:
+  db:
+  caddy_data:
+  caddy_config:
