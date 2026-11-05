@@ -34,6 +34,7 @@ const SUBJECT_LOOK: Record<string, { icon: string; color: string }> = {
   it: { icon: "⌨", color: "#4a3d35" },
   sci: { icon: "🔬", color: "#4f6f9b" },
   evs: { icon: "🌱", color: "#4f7a55" },
+  world: { icon: "🏡", color: "#4f7a55" },
 };
 type CheckRow = {
   subject_id: number;
@@ -192,7 +193,7 @@ export default function Learn() {
           <p className="muted">{t("learn.what_today")}</p>
           <div className="subject-grid">
             {subjects.map((s) => {
-              const look = SUBJECT_LOOK[s.code.replace(/^cbse\d+-/, "")] ?? { icon: s.name.slice(0, 1), color: "#a63d2a" };
+              const look = SUBJECT_LOOK[s.code.replace(/^cbse(\d+|lkg|ukg)-/, "")] ?? { icon: s.name.slice(0, 1), color: "#a63d2a" };
               return (
                 <button
                   key={s.id}

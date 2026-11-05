@@ -39,6 +39,15 @@ SUBJECTS = [
     ("bio", "Biology", "en", "kerala_scert", 9),
     ("ss", "Social Science", "en", "kerala_scert", 9),
     ("it", "Information Technology", "en", "kerala_scert", 9),
+    # CBSE LKG and UKG: no NCERT textbook; play-based packs from NCERT's foundational-stage guidance (ages 3 to 6).
+    ("cbselkg-math", "Numbers and Shapes", "en", "cbse", -1),
+    ("cbselkg-eng", "English", "en", "cbse", -1),
+    ("cbselkg-hin", "Hindi", "hi", "cbse", -1),
+    ("cbselkg-world", "My World", "en", "cbse", -1),
+    ("cbseukg-math", "Numbers and Shapes", "en", "cbse", 0),
+    ("cbseukg-eng", "English", "en", "cbse", 0),
+    ("cbseukg-hin", "Hindi", "hi", "cbse", 0),
+    ("cbseukg-world", "My World", "en", "cbse", 0),
     # CBSE Class 1 (NCERT books, new 2024-25 editions): Joyful Mathematics, Mridang, Sarangi. No EVS in Classes 1-2.
     ("cbse1-math", "Mathematics", "en", "cbse", 1),
     ("cbse1-eng", "English", "en", "cbse", 1),
