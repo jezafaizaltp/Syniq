@@ -87,6 +87,81 @@ Each YAML file here is one textbook chapter: its topics, an explanation of each 
 | IT 10: A Network of Computing Devices | building a network, MAC and IP addresses and protocols, using the lab network and the internet | 28 |
 
 
+## CBSE LKG and UKG (play-based, no textbook)
+
+Under `cbselkg/` and `cbseukg/`, with subject codes `cbselkg-math`, `cbselkg-eng`, `cbselkg-hin`, `cbselkg-world` and the same four for `cbseukg-`. NCERT publishes no textbook for KG, so these packs were written by Claude from NCERT's guidance for ages 3 to 6 (the National Curriculum Framework for the Foundational Stage, 2022, and Aadharshila, 2024). They are short picture-and-sound activities: emoji pictures, three choices, and answers kept to small numbers so the mistake view can draw them as dots. LKG covers size, counting to 10, more and less, three shapes, sorting, patterns, position words, English letters A to Z with their sounds, Hindi vowels and the first consonants, and My World (body, family, animals, food, day and night, feelings). UKG covers numbers to 20, adding and taking away within 10, more shapes, measuring, coins, time, patterns, English vowels, three-letter words and first sentences, the rest of the Hindi consonants, two-letter words and the आ matra, and My World (weather, travel, helpers, plants, safety, clean and green). Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
+
+### LKG
+
+| Chapter | Questions |
+| --- | --- |
+| Numbers 1: Big and Small | 6 |
+| Numbers 2: Count 1 to 5 | 6 |
+| Numbers 3: Count 6 to 10 | 6 |
+| Numbers 4: More and Less | 6 |
+| Numbers 5: Circle, Square, Triangle | 6 |
+| Numbers 6: Colours and Sorting | 6 |
+| Numbers 7: What Comes Next? | 6 |
+| Numbers 8: Up, Down, In, Out | 6 |
+| English 1: Letters A, B, C, D | 6 |
+| English 2: Letters E, F, G, H | 6 |
+| English 3: Letters I, J, K, L | 6 |
+| English 4: Letters M, N, O, P | 6 |
+| English 5: Letters Q, R, S, T | 6 |
+| English 6: Letters U, V, W, X, Y, Z | 6 |
+| English 7: Big and Small Letters | 6 |
+| English 8: Rhymes and Little Words | 6 |
+| Hindi 1: अ, आ, इ, ई | 6 |
+| Hindi 2: उ, ऊ, ए, ऐ | 6 |
+| Hindi 3: ओ, औ, अं | 6 |
+| Hindi 4: क, ख, ग, घ | 6 |
+| Hindi 5: च, छ, ज, झ | 6 |
+| Hindi 6: सुनो और बोलो | 6 |
+| My World 1: My Body | 6 |
+| My World 2: My Family | 6 |
+| My World 3: Animals Around Us | 6 |
+| My World 4: Fruits and Vegetables | 6 |
+| My World 5: Day and Night | 6 |
+| My World 6: My Feelings | 6 |
+
+### UKG
+
+| Chapter | Questions |
+| --- | --- |
+| Numbers 1: Numbers 11 to 20 | 6 |
+| Numbers 2: Before, After, Between | 6 |
+| Numbers 3: Adding: Putting Together | 6 |
+| Numbers 4: Taking Away | 6 |
+| Numbers 5: Shapes Around Us | 6 |
+| Numbers 6: Heavy and Light, Long and Short | 6 |
+| Numbers 7: Coins and Notes | 6 |
+| Numbers 8: Time of Day and Days of the Week | 6 |
+| Numbers 9: Patterns | 6 |
+| Numbers 10: Zero and Writing Numbers | 6 |
+| English 1: Vowels: a, e, i, o, u | 6 |
+| English 2: Words with a: cat, bat, hat | 6 |
+| English 3: Words with e: hen, pen, ten | 6 |
+| English 4: Words with i: pig, wig, fig | 6 |
+| English 5: Words with u: sun, cup, bus | 6 |
+| English 6: Little Words: I, a, the, is | 6 |
+| English 7: Opposites | 6 |
+| English 8: Action Words | 6 |
+| Hindi 1: ट, ठ, ड, ढ | 6 |
+| Hindi 2: त, थ, द, ध, न | 6 |
+| Hindi 3: प, फ, ब, भ, म | 6 |
+| Hindi 4: य, र, ल, व | 6 |
+| Hindi 5: श, ष, स, ह | 6 |
+| Hindi 6: क्ष, त्र, ज्ञ | 6 |
+| Hindi 7: दो अक्षर वाले शब्द | 6 |
+| Hindi 8: आ की मात्रा (ा) | 6 |
+| My World 1: Weather and Seasons | 6 |
+| My World 2: Ways to Travel | 6 |
+| My World 3: People Who Help Us | 6 |
+| My World 4: Plants Around Us | 6 |
+| My World 5: Staying Safe | 6 |
+| My World 6: Clean and Green | 6 |
+
+
 ## CBSE Class 1 (NCERT, 2024-25 books)
 
 Under `cbse1/`, with subject codes `cbse1-math`, `cbse1-eng` and `cbse1-hin` (there is no EVS book in Classes 1 and 2). These packs follow the new NCERT books: Joyful Mathematics (Maths), Mridang (English) and Sarangi (Hindi). Chapter names and order come from published chapter lists, two of which agree for each book. None were checked against the printed books. Topics inside Maths chapters were chosen by Claude and kept to Class 1 level (counting to 20 and then 99, making 10, adding and taking away within 10, shapes, patterns, days and money). Most English and Hindi stories could not be confirmed, so those chapters are kept general and focus on reading, words, sounds and the chapter's theme; The Cap-seller and the Monkeys follows the familiar folk tale. Hindi has not been checked by a Hindi teacher. Every concept has a picture explanation.
@@ -896,8 +971,8 @@ Under `cbse12/`, with subject codes `cbse12-math`, `cbse12-phy`, `cbse12-chem`, 
 
 Claude wrote these chapters and checked them, because no subject teacher is available to the project yet. Every question is marked "Written and checked by Claude for SYNiq. Not yet reviewed by a school teacher." in the teacher's review screen. In detail:
 
-- **Every answer that can be worked out by computer is**, on every test run: 2,182 of the 9,030 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
-- The other 6,848 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
+- **Every answer that can be worked out by computer is**, on every test run: 2,213 of the 9,390 questions. Each one carries a `check`, a calculation done a different way from the answer (for example `expand((x + 4)*(x + 5))` for an expansion, or `(34 + 10)/2` for a sum-and-difference problem), and the test fails if the stored answer differs, or if a wrong option of a choice question also turns out to be right.
+- The other 7,177 were checked by hand (most of them in the languages, Chemistry, Biology, Social Science and IT, where questions are about texts, facts and ideas): choice questions that no single calculation can check, such as "Add them", "Which is the smallest?" or, in science, "Which way does the ray bend?", and a few questions whose answer is read off a list or stated in the question, such as a mode.
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
