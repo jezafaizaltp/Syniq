@@ -50,6 +50,7 @@ UNCOVERED = "how did ancient Babylonian merchants use this in trade"
 def test_tutor_off_without_api_key(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("CLOUDFLARE_API_TOKEN", raising=False)
     anu = login("anu@demo.syniq")
     # The tutor itself always works, from SYNiq's own content; only harder questions need AI.
     assert client.get("/ai/status", headers=anu).json() == {"enabled": True, "ai": False}
