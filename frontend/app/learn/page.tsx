@@ -53,7 +53,25 @@ type Item = {
   hint_count: number;
   choices?: string[];
   keyboard?: "text" | "decimal";
+  /** The question has a trap this student has fallen into before. */
+  watch_out?: boolean;
 };
+type NextStep =
+  | { kind: "secure_in"; n: number; topic: string }
+  | { kind: "secured"; topic: string; next_topic: string | null };
+type Puzzle = { id: string; prompt: string; sequence: string[]; options: string[] };
+type PuzzleResult = { correct: boolean; answer: string; explain: string };
+const PUZZLE_EVERY = 8; // a brain teaser now and then; the server decides whether one is due
+type Spot = { item_id: number; friend: string; prompt: string; their_answer: string; options: string[] };
+type SpotResult = { correct: boolean; right_answer: string; why: string | null; stars: number };
+type Overview = {
+  subjects: { id: number; name: string; carry_on: { chapter_id: number; title: string } }[];
+  review_due: { concept_id: number; title: string; chapter_id: number }[];
+};
+/** What the student said before starting: easier first questions if they feel low, and how long they have. */
+type Prefs = { gentle: boolean; minutes: number };
+const GENTLE_STEPS = 3;
+const SPOT_EVERY = 5; // a spot-the-mistake puzzle after every few answers
 type Explanation = { style: string; body: string; picture?: PictureSpec | null };
 type Step = {
   decision_id: number;
@@ -76,6 +94,8 @@ type Result = {
   right_answer?: string;
   picture?: PictureSpec | null;
   response: AdaptiveResponse;
+  next_step?: NextStep;
+  offer_break?: boolean;
 };
 
 const KIND_HEADINGS: Record<string, Key> = {
@@ -91,7 +111,8 @@ export default function Learn() {
   const [subject, setSubject] = useState<Subject | null>(null);
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [chapter, setChapter] = useState<ChapterDetail | null>(null);
-  const [checkedIn, setCheckedIn] = useState(false);
+  const [prefs, setPrefs] = useState<Prefs | null>(null);
+  const [overview, setOverview] = useState<Overview | null>(null);
   const [checks, setChecks] = useState<CheckRow[]>([]);
   const [activeCheck, setActiveCheck] = useState<ActiveCheck | null>(null);
   const canLearn = me?.role === "student" && !!me.consent?.core_learning;
@@ -111,6 +132,10 @@ export default function Learn() {
   useEffect(() => {
     if (canLearn) loadChecks();
   }, [canLearn]);
+
+  useEffect(() => {
+    if (canLearn && !chapter) api<Overview>("/me/overview").then(setOverview).catch(() => setOverview(null));
+  }, [canLearn, chapter]);
 
   // Opened from "My space" with ?chapter=<id> (revise a topic, carry on a chapter).
   useEffect(() => {
@@ -154,13 +179,25 @@ export default function Learn() {
     c.rounds.filter((r) => r.status !== "done").map((r) => ({ subjectId: c.subject_id, name: c.subject, kind: r.kind }))
   );
 
-  if (chapter && !checkedIn) {
-    return <CheckIn onDone={() => setCheckedIn(true)} />;
+  if (chapter && !prefs) {
+    return <CheckIn onDone={setPrefs} />;
   }
 
-  if (chapter) {
-    return <Session chapter={chapter} onExit={() => setChapter(null)} />;
+  if (chapter && prefs) {
+    return (
+      <Session
+        chapter={chapter}
+        prefs={prefs}
+        onExit={() => {
+          setChapter(null);
+          setPrefs(null);
+        }}
+      />
+    );
   }
+
+  const due = overview?.review_due[0];
+  const carryOn = overview?.subjects[0]?.carry_on;
 
   return (
     <div className="wrap">
@@ -177,6 +214,14 @@ export default function Learn() {
       </div>
       {!subject ? (
         <>
+          {(due || carryOn) && (
+            <div className="card next-step-card">
+              <h2>{t("next.title")}</h2>
+              <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${due ? due.chapter_id : carryOn!.chapter_id}`))}>
+                {due ? t("next.revise", { topic: due.title }) : t("next.carry_on", { chapter: carryOn!.title })}
+              </button>
+            </div>
+          )}
           {roundsDue.length > 0 && (
             <div className="card sunny">
               <h2>{t(`check.round_open.${roundsDue[0].kind}` as Key)}</h2>
@@ -269,17 +314,26 @@ export default function Learn() {
   );
 }
 
-function CheckIn({ onDone }: { onDone: () => void }) {
+function CheckIn({ onDone }: { onDone: (prefs: Prefs) => void }) {
   const { t } = useSession();
   const [message, setMessage] = useState("");
+  const [gentle, setGentle] = useState(false);
   const moods = ["great", "okay", "low", "frustrated"] as const;
+  const times = [5, 10, 20, 0] as const;
 
   if (message) {
     return (
       <div className="wrap">
         <div className="card">
           <p>{message}</p>
-          <button onClick={onDone}>{t("checkin.start")}</button>
+          <h2>{t("checkin.time_question")}</h2>
+          <div className="options">
+            {times.map((m) => (
+              <button key={m} className="option" onClick={() => onDone({ gentle, minutes: m })}>
+                {t(`checkin.time.${m}` as Key)}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -296,6 +350,8 @@ function CheckIn({ onDone }: { onDone: () => void }) {
               key={value}
               className="option"
               onClick={async () => {
+                // Feeling low or frustrated: the first few questions are easier. Not stored unless the parent allowed it.
+                setGentle(value === "low" || value === "frustrated");
                 const r = await post<{ message: string }>("/checkins", { mood: value });
                 setMessage(r.message);
               }}
@@ -305,7 +361,7 @@ function CheckIn({ onDone }: { onDone: () => void }) {
           ))}
         </div>
         <div className="row" style={{ marginTop: 16 }}>
-          <button className="secondary" onClick={onDone}>
+          <button className="secondary" onClick={() => onDone({ gentle: false, minutes: 0 })}>
             {t("checkin.skip")}
           </button>
         </div>
@@ -314,8 +370,19 @@ function CheckIn({ onDone }: { onDone: () => void }) {
   );
 }
 
-function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => void }) {
+function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Prefs; onExit: () => void }) {
   const { me, t } = useSession();
+  const gentleLeft = useRef(prefs.gentle ? GENTLE_STEPS : 0);
+  const sessionStart = useRef(Date.now());
+  const [answered, setAnswered] = useState(0);
+  const [secured, setSecured] = useState<string[]>([]);
+  const [summary, setSummary] = useState(false);
+  const [extended, setExtended] = useState(false);
+  const [spot, setSpot] = useState<Spot | null>(null);
+  const [spotResult, setSpotResult] = useState<SpotResult | null>(null);
+  const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
+  const [puzzleResult, setPuzzleResult] = useState<PuzzleResult | null>(null);
+  const puzzleStart = useRef(0);
   const [step, setStep] = useState<Step | null>(null);
   const [answer, setAnswer] = useState("");
   const [hints, setHints] = useState<string[]>([]);
@@ -340,7 +407,9 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
   async function next() {
     setError("");
     try {
-      const s = await post<Step>("/learn/next", { chapter_id: chapter.id, current_concept_id: conceptRef.current });
+      const gentle = gentleLeft.current > 0;
+      const s = await post<Step>("/learn/next", { chapter_id: chapter.id, current_concept_id: conceptRef.current, gentle });
+      if (gentle && s.item) gentleLeft.current -= 1;
       conceptRef.current = s.concept?.id ?? null;
       if (s.explanation) styleRef.current = s.explanation.style;
       setStep(s);
@@ -356,8 +425,33 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
     }
   }
 
+  /** A brain teaser if one is due (only when the parent switched puzzles on). Returns whether one is showing. */
+  async function tryPuzzle(): Promise<boolean> {
+    try {
+      const pz = await api<Puzzle | null>("/thinking/puzzle");
+      if (!pz || !pz.id) return false;
+      setPuzzle(pz);
+      setPuzzleResult(null);
+      puzzleStart.current = Date.now();
+      if (readAloud) speak(pz.prompt);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async function answerPuzzle(choice: string) {
+    if (!puzzle) return;
+    const r = await post<PuzzleResult>("/thinking/puzzle", { id: puzzle.id, choice, time_ms: Date.now() - puzzleStart.current });
+    setPuzzleResult(r);
+    if (readAloud) speak(`${r.correct ? t("puzzle.nice") : t("puzzle.try")} ${r.explain}`);
+  }
+
   useEffect(() => {
-    next();
+    // At the start: a brain teaser first when one is due, then the lesson.
+    tryPuzzle().then((showing) => {
+      if (!showing) next();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -387,6 +481,149 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
       explanation_style: styleRef.current,
     });
     setResult(r);
+    setAnswered((n) => n + 1);
+    if (r.next_step?.kind === "secured" && r.correct) {
+      const topic = r.next_step.topic;
+      setSecured((ts) => (ts.includes(topic) ? ts : [...ts, topic]));
+    }
+  }
+
+  /** After an answer: the time the student had may be up; every few answers, a spot-the-mistake puzzle. */
+  async function afterResult() {
+    if (prefs.minutes && !extended && Date.now() - sessionStart.current >= prefs.minutes * 60000) {
+      setSummary(true);
+      return;
+    }
+    if (answered % PUZZLE_EVERY === 0 && (await tryPuzzle())) return;
+    if (answered % SPOT_EVERY === 0 && step?.concept) {
+      try {
+        const sp = await api<Spot>(`/learn/spot?concept_id=${step.concept.id}`);
+        setSpot(sp);
+        setSpotResult(null);
+        if (readAloud) speak(`${t("spot.body", { name: sp.friend })} ${sp.prompt} ${t("spot.their", { name: sp.friend, answer: sp.their_answer })}`);
+        return;
+      } catch {
+        // Nothing to spot on this topic: carry on.
+      }
+    }
+    next();
+  }
+
+  async function answerSpot(choice: string) {
+    if (!spot) return;
+    const r = await post<SpotResult>("/learn/spot", { item_id: spot.item_id, their_answer: spot.their_answer, choice });
+    setSpotResult(r);
+    if (readAloud) speak(r.correct ? t("spot.right") : `${t("spot.wrong", { answer: r.right_answer })} ${r.why ?? ""}`);
+  }
+
+  if (summary) {
+    return (
+      <div className="wrap">
+        <div className="card sunny">
+          <h2>{t("session.time_up")}</h2>
+          <p>{t("session.did", { n: answered })}</p>
+          {secured.length > 0 && <p>{t("session.secured", { topics: secured.join(", ") })}</p>}
+          {result?.next_step && <NextStepLine step={result.next_step} />}
+          <div className="row">
+            <button onClick={onExit}>{t("session.finish")}</button>
+            <button
+              className="secondary"
+              onClick={() => {
+                setExtended(true);
+                setSummary(false);
+                next();
+              }}
+            >
+              {t("session.keep_going")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (puzzle) {
+    return (
+      <div className="wrap">
+        <div className="card puzzle" aria-live="polite">
+          <h2>{t("puzzle.title")}</h2>
+          <p style={{ fontSize: "1.15rem" }}>{puzzle.prompt}</p>
+          {puzzle.sequence.length > 0 && (
+            <div className="puzzle-sequence" aria-label={puzzle.sequence.join(", ")}>
+              {puzzle.sequence.map((s, i) => (
+                <span key={i} className="puzzle-tile">
+                  {s}
+                </span>
+              ))}
+              <span className="puzzle-tile puzzle-blank">?</span>
+            </div>
+          )}
+          {!puzzleResult ? (
+            <div className="options puzzle-options">
+              {puzzle.options.map((o) => (
+                <button key={o} className="option" onClick={() => answerPuzzle(o)}>
+                  {o}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <>
+              <p className={`feedback ${puzzleResult.correct ? "good" : "warn"}`}>
+                {puzzleResult.correct ? t("puzzle.nice") : t("puzzle.try")}
+              </p>
+              <p>{puzzleResult.explain}</p>
+              <button
+                onClick={() => {
+                  setPuzzle(null);
+                  next();
+                }}
+              >
+                {t("puzzle.continue")}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (spot) {
+    return (
+      <div className="wrap">
+        <div className="card spot" aria-live="polite">
+          <h2>🔎 {t("spot.title")}</h2>
+          <p className="muted">{t("spot.body", { name: spot.friend })}</p>
+          <p style={{ fontSize: "1.15rem" }}>{spot.prompt}</p>
+          <p className="spot-theirs">{t("spot.their", { name: spot.friend, answer: spot.their_answer })}</p>
+          {!spotResult ? (
+            <>
+              <p>{t("spot.ask")}</p>
+              <div className="options">
+                {spot.options.map((o) => (
+                  <button key={o} className="option" onClick={() => answerSpot(o)}>
+                    {o}
+                  </button>
+                ))}
+              </div>
+              <div className="row" style={{ marginTop: 12 }}>
+                <button className="secondary" onClick={() => { setSpot(null); next(); }}>
+                  {t("spot.skip")}
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className={`feedback ${spotResult.correct ? "good" : "warn"}`}>
+                {spotResult.correct ? t("spot.right") : t("spot.wrong", { answer: spotResult.right_answer })}
+              </p>
+              {spotResult.why && <p>{spotResult.why}</p>}
+              <p className="muted">{spotResult.stars === 1 ? t("stars.count_one") : t("stars.count", { n: spotResult.stars })}</p>
+              <button onClick={() => { setSpot(null); next(); }}>{t("spot.continue")}</button>
+            </>
+          )}
+        </div>
+      </div>
+    );
   }
 
   if (onBreak) {
@@ -499,6 +736,7 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
               <h2 ref={headingRef} tabIndex={-1}>
                 {KIND_HEADINGS[step.kind] ? t(KIND_HEADINGS[step.kind]) : null}
               </h2>
+              {step.item.watch_out && !result && <p className="feedback warn watch-out">{t("learn.watch_out")}</p>}
               <p style={{ fontSize: "1.2rem" }}>{step.item.prompt}</p>
               <button
                 className="secondary"
@@ -559,7 +797,24 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
                     <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture} />
                   )}
                   <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
-                  <button onClick={next}>{t("learn.next")}</button>
+                  {result.next_step && <NextStepLine step={result.next_step} />}
+                  {result.offer_break && (
+                    <div className="feedback note break-offer">
+                      <p>{t("break.offer")}</p>
+                      <div className="row">
+                        <button
+                          className="secondary"
+                          onClick={() => {
+                            setOnBreak(true);
+                            helpPressed("break");
+                          }}
+                        >
+                          {t("break.offer_yes")}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  <button onClick={afterResult}>{t("learn.next")}</button>
                 </>
               )}
             </>
@@ -589,5 +844,20 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
 
       {step?.concept && step.kind !== "chapter_complete" && <Notes conceptId={step.concept.id} conceptTitle={step.concept.title} />}
     </div>
+  );
+}
+
+/** Where the student is heading: how many more right answers secure this topic, or what comes next. */
+function NextStepLine({ step }: { step: NextStep }) {
+  const { t } = useSession();
+  return (
+    <p className="next-step">
+      <span aria-hidden="true">🎯 </span>
+      {step.kind === "secure_in"
+        ? step.n === 1
+          ? t("next.secure_in_one", { topic: step.topic })
+          : t("next.secure_in", { n: step.n, topic: step.topic })
+        : `${t("next.secured", { topic: step.topic })} ${step.next_topic ? t("next.then", { topic: step.next_topic }) : t("next.chapter_done")}`}
+    </p>
   );
 }

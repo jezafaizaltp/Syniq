@@ -33,8 +33,9 @@ import re
 from dataclasses import dataclass, field
 
 from ..i18n import t
+from . import patterns
 
-RESPONSES_VERSION = "2026.10-1"
+RESPONSES_VERSION = "2026.11-1"
 
 SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps"]
 ANSWER_MODES = ["count_it_out", "step_by_step", "real_life", "try_similar"]
@@ -255,10 +256,20 @@ class Context:
     support: list[str] = field(default_factory=list)
     tutor_available: bool = False
     lang: str = "en"  # en or ml: the language the student reads SYNiq in
+    # What has helped this student after a mistake (engine/patterns.py): reorders the ladder.
+    mode_stats: dict | None = None
+    best_method: str | None = None
+    # The question carries a trap this student has fallen into before.
+    known_pattern: bool = False
 
 
 def choose_answer_mode(ctx: Context, s: Arithmetic | None) -> str:
-    """More concrete each time the topic goes wrong in a row."""
+    return choose_answer_mode_why(ctx, s)[0]
+
+
+def choose_answer_mode_why(ctx: Context, s: Arithmetic | None) -> tuple[str, bool]:
+    """A different way each time the topic goes wrong in a row, starting with the way
+    that helps this student most. Returns (mode, chosen because it helps this student)."""
     drawable = s is not None and can_draw(s)
     if "small_steps" in ctx.support and drawable:
         ladder = ["count_it_out", "try_similar", "real_life", "step_by_step"]
@@ -266,10 +277,12 @@ def choose_answer_mode(ctx: Context, s: Arithmetic | None) -> str:
         ladder = ["count_it_out", "step_by_step", "real_life", "try_similar"]
     else:
         ladder = ["step_by_step", "count_it_out", "real_life", "try_similar"]
-    mode = ladder[min(max(ctx.wrong_in_a_row, 1), len(ladder)) - 1]
-    if mode == "count_it_out" and not drawable and "visual" not in ctx.explanations:
-        mode = "real_life"
-    return mode
+    if not drawable and "visual" not in ctx.explanations:
+        ladder.remove("count_it_out")  # nothing to draw for this question
+    ladder, lead = patterns.mode_order(ladder, ctx.mode_stats, ctx.best_method)
+    k = min(max(ctx.wrong_in_a_row, 1), len(ladder)) - 1
+    mode = ladder[k]
+    return mode, lead is not None and k == 0
 
 
 CHEERS = 4  # resp.cheer.0 to resp.cheer.3
@@ -286,7 +299,7 @@ def build(ctx: Context, seed: int = 0) -> dict:
         out = {"correct": True, "mode": None, "headline": headline, "blocks": [], "why": ""}
         return _present(out, support)
 
-    mode = choose_answer_mode(ctx, s)
+    mode, for_you = choose_answer_mode_why(ctx, s)
     blocks: list[dict] = []
     resp = _as_int(ctx.response)
 
@@ -296,6 +309,8 @@ def build(ctx: Context, seed: int = 0) -> dict:
         blocks.append({"type": "text", "text": words})
     elif ctx.misconception_tip:
         blocks.append({"type": "text", "text": ctx.misconception_tip})
+    if ctx.known_pattern:
+        blocks.append({"type": "text", "text": t(lang, "resp.known_trap")})
 
     if mode == "count_it_out":
         if s is not None and can_draw(s):
@@ -333,7 +348,8 @@ def build(ctx: Context, seed: int = 0) -> dict:
         "mistake": mistake,
         "headline": t(lang, "resp.not_yet"),
         "blocks": [b for b in blocks if b.get("text") or b.get("steps") or b.get("rows") or b.get("prompt")],
-        "why": t(lang, f"why.{mode}"),
+        "why": t(lang, f"why.{mode}") + (" " + t(lang, "why.helps_you") if for_you else ""),
+        "for_you": for_you,
         "suggest_tutor": ctx.tutor_available and ctx.wrong_in_a_row >= SUGGEST_TUTOR_AFTER,
     }
     if "focus" in support and s is not None and mode != "try_similar":

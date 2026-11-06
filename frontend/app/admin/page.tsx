@@ -32,8 +32,8 @@ type SyllabusCheck = {
 type People = { classes: { id: number; name: string; teacher: string | null; students: Student[] }[]; teachers: Person[] };
 
 const TEMPLATE =
-  "student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school\n" +
-  "Anu Krishna,9 A,Lakshmi Krishna,lakshmi@example.com,,yes,yes,yes\n";
+  "student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school,consent_puzzles\n" +
+  "Anu Krishna,9 A,Lakshmi Krishna,lakshmi@example.com,,yes,yes,yes,yes\n";
 
 const SYLLABUS_TEMPLATE =
   "subject,chapter_number,chapter_title,topic\n" +
@@ -44,6 +44,7 @@ const SCOPE_WORDS: Record<string, string> = {
   core_learning: "Learning",
   mood_checkins: "Mood check-ins",
   school_sharing: "Share with school",
+  thinking_puzzles: "Puzzles and pace",
 };
 
 export default function Admin() {

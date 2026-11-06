@@ -70,7 +70,7 @@ class Consent(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     guardian_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    scope: Mapped[str] = mapped_column(String(40))  # core_learning | mood_checkins | school_sharing
+    scope: Mapped[str] = mapped_column(String(40))  # core_learning | mood_checkins | school_sharing | thinking_puzzles
     granted: Mapped[bool] = mapped_column(Boolean)
     method: Mapped[str] = mapped_column(String(60), default="school_form")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
@@ -315,6 +315,20 @@ class Attempt(Base):
     explanation_style: Mapped[str | None] = mapped_column(String(30), nullable=True)
     # The response SYNiq gave to this answer (count_it_out, step_by_step, ...), if it was wrong.
     feedback_mode: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class PuzzleAnswer(Base):
+    """A thinking puzzle answered inside a lesson (app/thinking.py). Kept only with the parent's consent."""
+
+    __tablename__ = "puzzle_answers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    domain: Mapped[str] = mapped_column(String(20))
+    level: Mapped[int] = mapped_column(Integer)
+    correct: Mapped[bool] = mapped_column(Boolean)
+    time_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

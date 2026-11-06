@@ -156,6 +156,8 @@ function ExplanationEditor({ exp, onDone }: { exp: QueueExplanation; onDone: () 
   );
 }
 
+type ClassMistakes = { tag: string; text: string; working_on: { student_id: number; name: string }[]; fixed: number; topics: string[] }[];
+
 export default function Teacher() {
   const { me, loading } = useSession();
   const router = useRouter();
@@ -163,6 +165,7 @@ export default function Teacher() {
   const [overview, setOverview] = useState<Overview | null>(null);
   const [support, setSupport] = useState<Support>([]);
   const [methods, setMethods] = useState<MethodGroups>([]);
+  const [mistakes, setMistakes] = useState<ClassMistakes>([]);
   const [queue, setQueue] = useState<Queue | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
 
@@ -174,12 +177,14 @@ export default function Teacher() {
     const classes = await api<{ id: number; name: string }[]>("/teacher/classes");
     if (!classes.length) return;
     const id = classes[0].id;
-    const [o, s, q, m] = await Promise.all([
+    const [o, s, q, m, mk] = await Promise.all([
       api<Overview>(`/teacher/classes/${id}/overview`),
       api<Support>(`/teacher/classes/${id}/support`),
       api<Queue>("/teacher/review-queue"),
       api<MethodGroups>(`/teacher/classes/${id}/methods`).catch(() => [] as MethodGroups),
+      api<ClassMistakes>(`/teacher/classes/${id}/mistakes`).catch(() => [] as ClassMistakes),
     ]);
+    setMistakes(mk);
     setOverview(o);
     setSupport(s);
     setMethods(m);
@@ -280,6 +285,32 @@ export default function Teacher() {
               )}
             </div>
           ))
+        )}
+      </section>
+
+      <section className="card">
+        <h2>Mistakes that keep coming back</h2>
+        <p className="muted">
+          Mistakes students have made more than once, most common first, with who is still working on each. SYNiq already
+          gives each of them extra practice on that trap; a short re-teach to just these students can help too.
+        </p>
+        {mistakes.length === 0 ? (
+          <p>No repeat mistakes yet.</p>
+        ) : (
+          <ul className="list">
+            {mistakes.map((m) => (
+              <li key={m.tag}>
+                <span>
+                  {m.text}
+                  {m.topics.length > 0 && <span className="muted"> ({m.topics.join(", ")})</span>}
+                </span>
+                <span className="muted">
+                  {m.working_on.length > 0 ? `Working on it: ${m.working_on.map((x) => x.name).join(", ")}` : "Everyone has fixed it"}
+                  {m.fixed > 0 ? ` · fixed by ${m.fixed}` : ""}
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
       </section>
 
