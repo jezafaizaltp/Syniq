@@ -124,6 +124,22 @@ This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.m
 - SYNiq starts by itself when the computer starts (on Windows, after sign-in). Nothing needs to be clicked.
 - Students should **sign out** at the end, because lab computers are shared.
 
+## Optional: free AI for questions the notes don't cover
+
+Ask SYNiq answers questions about a topic from SYNiq's own notes. That works without the internet. Questions the notes don't cover can go to Cloudflare Workers AI, which is free (no card, 10,000 "neurons" a day, roughly 130 questions) and does not train on what is sent. Each student can send at most 20 a day, and no student names or details are sent.
+
+1. Sign in at https://dash.cloudflare.com and open **AI** → **Workers AI** in the left menu.
+2. Click **Use REST API**, then **Create a Workers AI API Token**. Keep the suggested name and click **Create API Token**.
+3. Copy the token (Cloudflare shows it only once) and the **Account ID** on the same page.
+4. On the lab computer, add both to `deploy/lab/.env`:
+   ```
+   CLOUDFLARE_ACCOUNT_ID=your account id
+   CLOUDFLARE_API_TOKEN=your token
+   ```
+5. Run the start script again. Answers from Cloudflare are marked "Answered by AI". Without the internet, those questions are saved for the admin instead.
+
+To switch it off, empty those two lines and run the start script again.
+
 ## 9. Backups and updates
 
 A backup copy of the database is made every time SYNiq starts and every 24 hours after that. The copies are kept for 14 days in `deploy/lab/backups`.

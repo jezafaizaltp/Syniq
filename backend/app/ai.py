@@ -8,8 +8,9 @@ Privacy rules for everything in this module:
 - AI-drafted content is saved as a draft. Nothing reaches students until a
   teacher approves it.
 
-AI is off unless ANTHROPIC_API_KEY (Claude) or OPENAI_API_KEY is set; every caller
-handles AIUnavailable. With only an OpenAI key, the tutor works but content drafting
+AI is off unless ANTHROPIC_API_KEY (Claude), OPENAI_API_KEY or
+CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN (Workers AI, free) is set; every caller
+handles AIUnavailable. With only an OpenAI or Cloudflare key, the tutor works but content drafting
 does not (it needs structured output from Claude).
 
 Ask SYNiq answers from the topic's own content first (app.tutor_local) and only
@@ -66,20 +67,42 @@ OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_MODEL = os.environ.get("SYNIQ_OPENAI_MODEL", "gpt-4.1-mini")
 
 
+# Cloudflare Workers AI: free daily allowance, no card, does not train on what is sent.
+# It speaks the same chat format as OpenAI, so one caller serves both.
+CLOUDFLARE_URL = "https://api.cloudflare.com/client/v4/accounts/{account}/ai/v1/chat/completions"
+CLOUDFLARE_MODEL = os.environ.get("SYNIQ_CLOUDFLARE_MODEL", "@cf/meta/llama-3.3-70b-instruct-fp8-fast")
+
+
 def _openai_key() -> str | None:
     return os.environ.get("OPENAI_API_KEY") or None
 
 
+def _cloudflare() -> tuple[str, str] | None:
+    account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip()
+    token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+    return (account, token) if account and token else None
+
+
+def _chat_api() -> tuple[str, str, str] | None:
+    """(url, key, model) of the OpenAI-style service to use when Claude is not set up."""
+    if _openai_key():
+        return OPENAI_URL, _openai_key(), OPENAI_MODEL
+    if cf := _cloudflare():
+        return CLOUDFLARE_URL.format(account=cf[0]), cf[1], CLOUDFLARE_MODEL
+    return None
+
+
 def enabled() -> bool:
-    return get_client() is not None or _openai_key() is not None
+    return get_client() is not None or _chat_api() is not None
 
 
 def _call_openai(system: str, messages: list[dict], *, max_tokens: int) -> str:
+    url, key, model = _chat_api()
     try:
         r = httpx.post(
-            OPENAI_URL,
-            headers={"Authorization": f"Bearer {_openai_key()}"},
-            json={"model": OPENAI_MODEL, "max_tokens": max_tokens, "messages": [{"role": "system", "content": system}, *messages]},
+            url,
+            headers={"Authorization": f"Bearer {key}"},
+            json={"model": model, "max_tokens": max_tokens, "messages": [{"role": "system", "content": system}, *messages]},
             timeout=40,
         )
         r.raise_for_status()
@@ -93,7 +116,7 @@ def _call_openai(system: str, messages: list[dict], *, max_tokens: int) -> str:
 
 def _call(system: str, messages: list[dict], *, max_tokens: int, effort: str, schema: dict | None = None) -> str:
     client = get_client()
-    if client is None and _openai_key() and schema is None:
+    if client is None and _chat_api() and schema is None:
         return _call_openai(system, messages, max_tokens=max_tokens)
     if client is None:
         raise AIUnavailable("AI is not switched on for this server")

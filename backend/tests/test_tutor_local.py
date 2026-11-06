@@ -14,6 +14,7 @@ from tests.test_tutor_and_content import UNCOVERED, first_concept
 def no_ai(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("CLOUDFLARE_API_TOKEN", raising=False)
     ai.set_client(None)
 
 
@@ -140,3 +141,29 @@ def test_openai_used_only_when_notes_dont_cover_it(monkeypatch):
     r = chat.say(UNCOVERED)
     assert r["source"] == "ai" and r["reply"] == "Let's think about it together."
     assert len(calls) == 1 and calls[0]["model"] == ai.OPENAI_MODEL
+
+
+def test_free_cloudflare_fallback(monkeypatch):
+    calls = []
+
+    class FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"choices": [{"message": {"content": "Good question. What do you already know?"}, "finish_reason": "stop"}]}
+
+    def fake_post(url, **kw):
+        calls.append((url, kw["headers"], kw["json"]))
+        return FakeResponse()
+
+    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "acc123")
+    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cf-token")
+    monkeypatch.setattr(ai.httpx, "post", fake_post)
+    anu = login("anu@demo.syniq")
+    r = Chat(anu).say(UNCOVERED)
+    assert r["source"] == "ai"
+    url, headers, body = calls[0]
+    assert url == "https://api.cloudflare.com/client/v4/accounts/acc123/ai/v1/chat/completions"
+    assert headers["Authorization"] == "Bearer cf-token" and body["model"] == ai.CLOUDFLARE_MODEL
+    assert "anu" not in str(body).lower()
