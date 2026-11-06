@@ -10,20 +10,15 @@ import sys
 
 from sqlalchemy import select
 
+from . import content_packs
 from .auth import MIN_PASSWORD, hash_password
 from .db import SessionLocal
-from . import content_packs
-from .models import Subject, User
-from .seed import SUBJECTS
+from .models import User
 
 
 def bootstrap(db, admin_email: str, admin_password: str, admin_name: str = "School admin") -> list[str]:
     done = []
-    have = {s.code for s in db.scalars(select(Subject)).all()}
-    for code, name, lang, board, grade in SUBJECTS:
-        if code not in have:
-            db.add(Subject(code=code, name=name, language=lang, syllabus=board, grade=grade))
-            done.append(f"added subject {name}")
+    done += content_packs.sync_subjects(db)
     email = admin_email.lower().strip()
     if not db.scalars(select(User).where(User.email == email)).first():
         if len(admin_password) < MIN_PASSWORD:

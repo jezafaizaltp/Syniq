@@ -1,0 +1,178 @@
+# CBSE Class 9 Mathematics (NCERT Ganita Manjari, 2026-27), chapter 7. Format: content/README.md.
+subject: cbse9-math
+chapter: 7
+title: 'The Mathematics of Maybe: Introduction to Probability'
+tips:
+  probability_over_one: 'A probability is a fraction of all the outcomes, so it is between 0 and 1: favourable ÷ total.'
+  probability_wrong_total: Count every possible outcome for the bottom of the fraction, not just the unfavourable ones.
+  tree_add_instead_multiply: 'Along the branches of a tree, multiply: the chance of this AND then that is the product.'
+concepts:
+- code: cbse9gm.prob.scale
+  title: Chance, the probability scale and experiments
+  notes: |
+    Probability measures how likely an event is on a scale from 0 (impossible) to 1 (certain), with 1/2 an
+    even chance. Some outcomes are random: we can't say what happens in one trial, but patterns appear over
+    many trials. Empirical (experimental) probability = number of times the event happened ÷ number of
+    trials. As the number of trials grows, the empirical probability tends to settle near the theoretical one.
+  explanations:
+    text: Probability says how likely something is, from 0 (it can never happen) to 1 (it always happens). If you toss a coin 100 times and get 47 heads, the experimental probability of heads is 47/100 = 0.47. Toss it many more times and it settles close to 1/2.
+    visual: 'Draw a line from 0 to 1. Mark ''impossible'' at 0, ''even chance'' at 1/2 and ''certain'' at 1. Place events on it: ''the sun rises tomorrow'' near 1, ''a coin shows heads'' at 1/2, ''rolling a 7 on a dice'' at 0.'
+    step_by_step: 'Step 1: Do the experiment many times (the trials). Step 2: Count how often the event happened. Step 3: Divide by the number of trials. Step 4: Check the answer is between 0 and 1.'
+    real_world: A cricketer who scored a fifty in 12 of 40 innings has an experimental probability of 12/40 = 0.3 of scoring a fifty in the next one.
+  picture:
+    kind: number_line
+    from: 0
+    to: 1
+    step: 0.25
+    points:
+    - at: 0
+      label: impossible
+    - at: 0.5
+      label: even chance
+    - at: 1
+      label: certain
+    alt: A probability scale from 0, impossible, through one half, even chance, to 1, certain.
+  items:
+  - prompt: What is the probability of an event that is certain to happen?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - The top of the scale.
+    - Impossible is 0.
+    solution: 'Step 1: Probabilities go from 0 to 1. Step 2: Certain is 1.'
+  - prompt: A coin is tossed 200 times and shows heads 96 times. What is the experimental probability of heads? Type a decimal.
+    answer: '0.48'
+    check: 96/200
+    difficulty: 1
+    hints:
+    - Times it happened ÷ number of trials.
+    - 96 ÷ 200.
+    solution: 'Step 1: 96 ÷ 200 = 0.48.'
+    mistakes:
+      '96': probability_over_one
+  - prompt: Which of these could NOT be a probability?
+    options:
+    - '1.2'
+    - '0'
+    - '0.75'
+    - 3/8
+    answer: '1.2'
+    difficulty: 1
+    hints:
+    - Probabilities are between 0 and 1.
+    - Which is bigger than 1?
+    solution: 'Step 1: Every probability is from 0 to 1. Step 2: 1.2 is more than 1, so it is impossible as a probability.'
+    mistakes:
+      '0': probability_over_one
+  - prompt: In 50 days, it rained on 15. What is the experimental probability that it did NOT rain on a day? Type a decimal.
+    answer: '0.7'
+    check: (50 - 15)/50
+    difficulty: 2
+    hints:
+    - 'Days without rain: 50 − 15.'
+    - 35 ÷ 50.
+    solution: 'Step 1: 35 days had no rain. Step 2: 35 ÷ 50 = 0.7.'
+  - prompt: A dice is rolled 600 times. About how many times would you expect a 6?
+    answer: '100'
+    check: 600/6
+    difficulty: 2
+    hints:
+    - Each face has probability 1/6.
+    - 1/6 of 600.
+    solution: 'Step 1: P(6) = 1/6. Step 2: 600 × 1/6 = 100. The real count will be close to 100, not always exactly 100.'
+  - prompt: Riya tosses a coin 10 times and gets 7 heads. What is the best conclusion?
+    options:
+    - 10 tosses is too few; with many more tosses the fraction of heads should get close to 1/2
+    - The coin must be unfair
+    - Heads has probability 0.7 for every coin
+    - Tails is now more likely next time
+    answer: 10 tosses is too few; with many more tosses the fraction of heads should get close to 1/2
+    difficulty: 3
+    hints:
+    - Random results vary a lot in small experiments.
+    - A coin has no memory.
+    solution: 'Step 1: In 10 tosses, 7 heads happens quite often with a fair coin. Step 2: Over many tosses the experimental probability settles near 1/2. Step 3: The coin has no memory, so tails is not ''due''.'
+- code: cbse9gm.prob.theoretical
+  title: Theoretical probability, outcomes and tree diagrams
+  after:
+  - cbse9gm.prob.scale
+  notes: |
+    When all outcomes are equally likely, P(event) = number of favourable outcomes ÷ total number of
+    outcomes. The sample space is the list of all outcomes. For two steps (two coins, a coin and a dice) a
+    table or tree diagram lists every combination: two coins give HH, HT, TH, TT. Along a branch, probabilities
+    multiply. P(not A) = 1 − P(A).
+  explanations:
+    text: 'If every outcome is equally likely, count: probability = favourable outcomes ÷ all outcomes. A dice has 6 faces, and 3 are even, so P(even) = 3/6 = 1/2. For two coins, list all four results, HH, HT, TH and TT: getting one head and one tail happens 2 ways in 4, so it is 1/2.'
+    visual: 'Draw a tree: from a start dot, two branches H and T for the first coin. From each, two more branches H and T for the second coin. The four ends are HH, HT, TH, TT. Circle the ends that match the event and count them.'
+    step_by_step: 'Step 1: List all equally likely outcomes (use a table or tree for two steps). Step 2: Count those that match the event. Step 3: Divide by the total. Step 4: For ''not A'', use 1 − P(A).'
+    real_world: In a lucky draw with 500 tickets, if you hold 5 your chance of winning is 5/500 = 1/100.
+  picture:
+    kind: flow
+    steps:
+    - 'Toss coin 1: H or T'
+    - 'Toss coin 2: H or T'
+    - 'Outcomes: HH, HT, TH, TT'
+    - 'One head and one tail: HT, TH'
+    - P = 2/4 = 1/2
+    alt: Two coin tosses give four outcomes; two of them have one head and one tail, so the probability is one half.
+  items:
+  - prompt: A dice is rolled. What is the probability of getting a number greater than 4? Type a fraction.
+    answer: 1/3
+    check: 2/6
+    difficulty: 1
+    hints:
+    - Which faces are greater than 4?
+    - '5 and 6: 2 out of 6.'
+    solution: 'Step 1: Favourable: 5, 6 (2 outcomes). Step 2: 2/6 = 1/3.'
+    mistakes:
+      2/4: probability_wrong_total
+  - prompt: A bag has 3 red and 5 blue marbles. One is picked at random. What is P(red)? Type a fraction.
+    answer: 3/8
+    check: 3/(3 + 5)
+    difficulty: 1
+    hints:
+    - 'Total marbles: 8.'
+    - 'Red: 3.'
+    solution: 'Step 1: Total = 8. Step 2: P(red) = 3/8.'
+    mistakes:
+      3/5: probability_wrong_total
+  - prompt: Two coins are tossed. What is the probability of two heads? Type a fraction.
+    answer: 1/4
+    check: 1/2*1/2
+    difficulty: 2
+    hints:
+    - List HH, HT, TH, TT.
+    - Only HH.
+    solution: 'Step 1: 4 equally likely outcomes. Step 2: Only HH works: 1/4.'
+    mistakes:
+      1/3: probability_wrong_total
+      '1': tree_add_instead_multiply
+  - prompt: If P(rain tomorrow) = 0.35, what is P(no rain tomorrow)? Type a decimal.
+    answer: '0.65'
+    check: 1 - 0.35
+    difficulty: 2
+    hints:
+    - P(not A) = 1 − P(A).
+    - 1 − 0.35.
+    solution: 'Step 1: Rain or no rain covers everything, so the two add to 1. Step 2: 1 − 0.35 = 0.65.'
+  - prompt: A coin is tossed and a dice is rolled. How many outcomes are in the sample space?
+    answer: '12'
+    check: 2*6
+    difficulty: 2
+    hints:
+    - Each coin result pairs with each dice result.
+    - 2 × 6.
+    solution: 'Step 1: H1 … H6 and T1 … T6. Step 2: 2 × 6 = 12 outcomes.'
+    mistakes:
+      '8': tree_add_instead_multiply
+  - prompt: Two dice are rolled. What is the probability that the total is 7? Type a fraction.
+    answer: 1/6
+    check: 6/36
+    difficulty: 3
+    hints:
+    - There are 6 × 6 = 36 outcomes.
+    - (1,6), (2,5), (3,4), (4,3), (5,2), (6,1).
+    solution: 'Step 1: 36 equally likely pairs. Step 2: 6 pairs total 7. Step 3: 6/36 = 1/6.'
+    mistakes:
+      1/11: probability_wrong_total

@@ -116,6 +116,14 @@ SUBJECTS = [
     ("cbse12-eng", "English", "en", "cbse", 12),
 ]
 
+# Subjects whose textbook was replaced. On an existing database the old subject keeps its pupils' history under a
+# new code and the "cbse-old" board, which no student is in, so only the new book shows. A subject is retired only
+# while its chapter 1 still has the old book's title, so a database that already has the new book is left alone.
+# Code -> (code for the old book, name for the old book, the old book's chapter 1 title).
+RETIRED_SUBJECTS = {
+    "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", "Number Systems"),
+}
+
 # concept code -> (title, order, prerequisites)
 CONCEPTS = {
     "math9.binomial_product": ("Multiplying two brackets", 0, []),

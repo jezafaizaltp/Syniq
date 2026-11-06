@@ -24,8 +24,16 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
 from . import i18n
+from .models import (
+    Chapter,
+    Concept,
+    ConceptPrereq,
+    Explanation,
+    Item,
+    Misconception,
+    Subject,
+)
 from .pictures import check_picture
-from .models import Chapter, Concept, ConceptPrereq, Explanation, Item, Misconception, Subject
 
 CONTENT_DIR = Path(__file__).resolve().parent.parent / "content"
 STYLES = ("text", "visual", "step_by_step", "real_world")
@@ -295,6 +303,30 @@ def _load_items(db: DbSession, concept: Concept, items: list[dict]) -> tuple[int
     return added, sum(1 for _ in existing)
 
 
+def sync_subjects(db: DbSession) -> list[str]:
+    """Retire subjects whose book was replaced, then create subjects added in a newer version, before content loads."""
+    from .seed import (  # here, not at the top: seed imports this module
+        RETIRED_SUBJECTS,
+        SUBJECTS,
+    )
+
+    done = []
+    for code, (old_code, old_name, old_first_title) in RETIRED_SUBJECTS.items():
+        row = db.scalars(select(Subject).where(Subject.code == code)).first()
+        first = row and db.scalars(select(Chapter).where(Chapter.subject_id == row.id, Chapter.number == 1)).first()
+        if first and first.title == old_first_title and not db.scalars(select(Subject).where(Subject.code == old_code)).first():
+            row.code, row.name, row.syllabus = old_code, old_name, "cbse-old"
+            done.append(f"retired subject {code} as {old_code}")
+    db.flush()
+    have = {s.code for s in db.scalars(select(Subject)).all()}
+    for code, name, lang, board, grade in SUBJECTS:
+        if code not in have:
+            db.add(Subject(code=code, name=name, language=lang, syllabus=board, grade=grade))
+            done.append(f"added subject {code}")
+    db.flush()
+    return done
+
+
 def main(argv: list[str]) -> int:
     check_only = "--check" in argv
     paths = [Path(a) for a in argv if not a.startswith("--")]
@@ -318,15 +350,8 @@ def main(argv: list[str]) -> int:
         if not db.scalars(select(Subject)).first():
             print("No subjects yet: run python -m app.bootstrap first, which also loads the content.")
             return 0
-        from .seed import SUBJECTS  # here, not at the top: seed imports this module
-
-        # Subjects added in a newer version (a new class or course) are created before their content loads.
-        have = {s.code for s in db.scalars(select(Subject)).all()}
-        for code, name, lang, board, grade in SUBJECTS:
-            if code not in have:
-                db.add(Subject(code=code, name=name, language=lang, syllabus=board, grade=grade))
-                print(f"added subject {code}")
-        db.flush()
+        for line in sync_subjects(db):
+            print(line)
         print(load(db, packs))
     return 0
 

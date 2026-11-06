@@ -641,22 +641,24 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). Hindi B is not written yet. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27), with chapter names and topics taken from published contents lists; the other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
-| Maths 1: Number Systems | rational and irrational numbers, decimal expansions, operations on real numbers, laws of exponents for real numbers | 28 |
-| Maths 2: Polynomials | polynomials and their degree, values and zeroes of a polynomial, factor theorem and factorising, algebraic identities | 27 |
-| Maths 3: Coordinate Geometry | the Cartesian plane, coordinates of a point | 12 |
-| Maths 4: Linear Equations in Two Variables | writing ax + by + c = 0, solutions of a linear equation | 14 |
-| Maths 5: Introduction to Euclid's Geometry | definitions, axioms and postulates, Euclid's five postulates | 12 |
-| Maths 6: Lines and Angles | pairs of angles, parallel lines and a transversal | 13 |
-| Maths 7: Triangles | congruence rules, isosceles triangles | 13 |
-| Maths 8: Quadrilaterals | properties of a parallelogram, the mid-point theorem | 13 |
-| Maths 9: Circles | chords and their distance from the centre, angles in a circle and cyclic quadrilaterals | 12 |
-| Maths 10: Heron's Formula | area of a triangle by Heron's formula | 7 |
-| Maths 11: Surface Areas and Volumes | right circular cone, sphere and hemisphere | 12 |
-| Maths 12: Statistics | grouped frequency tables, bar graphs, histograms and frequency polygons | 12 |
+| Maths 1: Orienting Yourself: The Use of Coordinates | the Cartesian plane, coordinates of a point, distance between two points, the midpoint of a segment | 24 |
+| Maths 2: Introduction to Linear Polynomials | polynomials and their degree, values and zeroes of a polynomial, linear growth and decay, slope and y-intercept of y = ax + b | 25 |
+| Maths 3: The World of Numbers | rational and irrational numbers, decimal expansions, proving √2 is irrational, and the square root spiral | 18 |
+| Maths 4: Exploring Algebraic Identities | algebraic identities, factor theorem and factorising, simplifying rational expressions | 20 |
+| Maths 5: I'm Up and Down, and Round and Round | chords and their distance from the centre, angles in a circle and cyclic quadrilaterals | 12 |
+| Maths 6: Measuring Space: Perimeter and Area | area of a triangle by Heron's formula, circles, arcs and sectors, Brahmagupta's formula for cyclic quadrilaterals | 19 |
+| Maths 7: The Mathematics of Maybe: Introduction to Probability | chance, the probability scale and experiments, theoretical probability, outcomes and tree diagrams | 12 |
+| Maths 8: Predicting What Comes Next: Exploring Sequences and Progressions | sequences and their rules, arithmetic progressions, geometric progressions, Tower of Hanoi and fractals | 18 |
+| Maths 9: Propositions and their Converses | propositions and their converses, proving and disproving with counterexamples | 12 |
+| Maths 10: How Quantities Combine: Understanding Data | weighted means and mixtures, stacked and 100% stacked bar charts | 12 |
+| Maths 11: The World of Algorithms | algorithms, divisors and the GCD, Euclid's algorithm for the GCD | 12 |
+| Maths 12: Quadrilaterals | properties of a parallelogram, the mid-point theorem, medians, the centroid and midpoint quadrilaterals | 19 |
+| Maths 13: Two Variables, One Line | writing ax + by + c = 0, solutions of a linear equation, pairs of linear equations | 20 |
+| Maths 14: Math of Space: Surface Area and Volume | cuboids and cylinders, right circular cone, sphere and hemisphere | 18 |
 | Science 1: Matter in Our Surroundings | particles and the states of matter, changing state and evaporation | 12 |
 | Science 2: Is Matter Around Us Pure? | solutions, suspensions and colloids, elements, compounds and changes | 12 |
 | Science 3: Atoms and Molecules | laws of chemical combination and formulae, molecular mass and the mole | 13 |
