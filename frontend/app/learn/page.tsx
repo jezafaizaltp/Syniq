@@ -579,7 +579,12 @@ function Session({ chapter, onExit }: { chapter: ChapterDetail; onExit: () => vo
       )}
 
       {tutorOn && step?.concept && step.kind !== "chapter_complete" && (
-        <Tutor conceptId={step.concept.id} conceptTitle={step.concept.title} readAloud={readAloud} />
+        <Tutor
+          conceptId={step.concept.id}
+          conceptTitle={step.concept.title}
+          readAloud={readAloud}
+          itemId={step.item && !result ? step.item.id : null}
+        />
       )}
 
       {step?.concept && step.kind !== "chapter_complete" && <Notes conceptId={step.concept.id} conceptTitle={step.concept.title} />}

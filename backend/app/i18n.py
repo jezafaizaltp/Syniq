@@ -60,6 +60,95 @@ MESSAGES: dict[str, dict[str, str]] = {
         "en": "I can't help with that one. Let's get back to the topic. What part would you like me to explain?",
         "ml": "അതിൽ എനിക്ക് സഹായിക്കാൻ കഴിയില്ല. നമുക്ക് പാഠത്തിലേക്ക് തിരിച്ചുവരാം. ഏത് ഭാഗമാണ് വിശദീകരിക്കേണ്ടത്?",
     },
+    # --- Ask SYNiq answering from SYNiq's own content (app/tutor_local.py)
+    "tutor.local.lead.text": {
+        "en": "In plain words:",
+        "ml": "ലളിതമായി പറഞ്ഞാൽ:",
+    },
+    "tutor.local.lead.visual": {
+        "en": "Picture it like this:",
+        "ml": "ഇങ്ങനെ മനസ്സിൽ കാണൂ:",
+    },
+    "tutor.local.lead.step_by_step": {
+        "en": "Step by step:",
+        "ml": "പടിപടിയായി:",
+    },
+    "tutor.local.lead.real_world": {
+        "en": "Here's where you see it in real life:",
+        "ml": 'ജീവിതത്തിൽ ഇത് ഇങ്ങനെ കാണാം:',
+    },
+    "tutor.local.check": {
+        "en": 'Does that make sense? Try saying it back in your own words, or press Test me.',
+        "ml": "മനസ്സിലായോ? സ്വന്തം വാക്കുകളിൽ ഒന്ന് പറഞ്ഞുനോക്കൂ, അല്ലെങ്കിൽ 'എന്നെ പരീക്ഷിക്കൂ' അമർത്തൂ.",
+    },
+    "tutor.local.all_seen": {
+        "en": "That's every way I have of explaining {topic}. Which word or step is still unclear? Tell me, or try a question and I'll help as you go.",
+        "ml": '{topic} വിശദീകരിക്കാൻ എനിക്കറിയാവുന്ന എല്ലാ വഴികളും കാണിച്ചു. ഏത് വാക്കോ പടിയോ ആണ് ഇനിയും വ്യക്തമാകാത്തത്? പറയൂ, അല്ലെങ്കിൽ ഒരു ചോദ്യം ചെയ്തുനോക്കൂ, ഞാൻ കൂടെയുണ്ട്.',
+    },
+    "tutor.local.clarify": {
+        "en": "Tell me a little more: which word or step is confusing?",
+        "ml": "കുറച്ചുകൂടി പറയൂ: ഏത് വാക്കോ പടിയോ ആണ് സംശയം?",
+    },
+    "tutor.local.no_questions": {
+        "en": "There are no practice questions for this topic yet. Shall I explain it another way?",
+        "ml": "ഈ പാഠഭാഗത്തിന് ഇതുവരെ പരിശീലന ചോദ്യങ്ങളില്ല. മറ്റൊരു രീതിയിൽ വിശദീകരിക്കട്ടെ?",
+    },
+    "tutor.local.try_this": {
+        "en": "Try this one:",
+        "ml": "ഇതൊന്ന് ചെയ്തുനോക്കൂ:",
+    },
+    "tutor.local.right": {
+        "en": "Yes, that's right!",
+        "ml": 'അതെ, ശരിയാണ്!',
+    },
+    "tutor.local.not_yet": {
+        "en": "Not yet. You said {yours}. {nudge} Have another go.",
+        "ml": "ഇതുവരെ ശരിയായില്ല. നിങ്ങൾ പറഞ്ഞത് {yours}. {nudge} ഒന്നുകൂടി ശ്രമിക്കൂ.",
+    },
+    "tutor.local.reveal": {
+        "en": "You said {yours}. The answer is {right}.",
+        "ml": "നിങ്ങൾ പറഞ്ഞത് {yours}. ശരിയുത്തരം {right}.",
+    },
+    "tutor.local.hint": {
+        "en": "Hint {n}: {hint}",
+        "ml": "സൂചന {n}: {hint}",
+    },
+    "tutor.local.hint_first": {
+        "en": "Let's work it out together. Start with this.",
+        "ml": 'നമുക്ക് ഒരുമിച്ച് കണ്ടുപിടിക്കാം. ഇവിടെ നിന്ന് തുടങ്ങൂ.',
+    },
+    "tutor.local.try_it": {
+        "en": "That's all my hints for this one. Give it your best try in the answer box: after you answer, I'll show you the working.",
+        "ml": 'ഈ ചോദ്യത്തിനുള്ള എല്ലാ സൂചനകളും തന്നു. ഉത്തരം എഴുതിനോക്കൂ: ഉത്തരം നൽകിയ ശേഷം ചെയ്യുന്ന രീതി കാണിച്ചുതരാം.',
+    },
+    "tutor.local.working": {
+        "en": "Here's the working: {solution}",
+        "ml": 'ചെയ്യുന്ന രീതി ഇതാ: {solution}',
+    },
+    "tutor.local.which_question": {
+        "en": "Which question? Type or paste it here, or press Test me and we'll do one together.",
+        "ml": "ഏത് ചോദ്യം? ഇവിടെ എഴുതുകയോ പേസ്റ്റ് ചെയ്യുകയോ ചെയ്യൂ, അല്ലെങ്കിൽ 'എന്നെ പരീക്ഷിക്കൂ' അമർത്തി നമുക്ക് ഒരെണ്ണം ഒരുമിച്ച് ചെയ്യാം.",
+    },
+    "tutor.local.elsewhere": {
+        "en": "This is in another topic: {topic} (chapter {chapter}).",
+        "ml": "ഇത് മറ്റൊരു പാഠഭാഗത്താണ്: {topic} (അധ്യായം {chapter}).",
+    },
+    "tutor.local.follow_up": {
+        "en": "Want it as a picture, an example, or in steps?",
+        "ml": "ചിത്രമായോ ഉദാഹരണമായോ പടിപടിയായോ വേണോ?",
+    },
+    "tutor.local.hello": {
+        "en": "Hi! Ask me anything about {topic}. I can explain it another way, show a picture, give a real-life example, go step by step, or test you.",
+        "ml": "ഹായ്! {topic}-നെക്കുറിച്ച് എന്തും ചോദിക്കൂ. മറ്റൊരു രീതിയിൽ വിശദീകരിക്കാം, ചിത്രം കാണിക്കാം, ജീവിതത്തിലെ ഉദാഹരണം തരാം, പടിപടിയായി ചെയ്യാം, അല്ലെങ്കിൽ ചോദ്യം ചോദിക്കാം.",
+    },
+    "tutor.local.thanks": {
+        "en": "You're welcome! Want to try a question on {topic}?",
+        "ml": 'സന്തോഷം! {topic}-ൽ ഒരു ചോദ്യം ചെയ്തുനോക്കുന്നോ?',
+    },
+    "tutor.local.unsure": {
+        "en": "I don't have that in my notes for {topic} yet, so I've saved your question to be added. Ask your teacher too. Meanwhile, I can help with this topic in these ways:",
+        "ml": '{topic}-ന്റെ കുറിപ്പുകളിൽ ഇത് ഇതുവരെ ഇല്ല. നിങ്ങളുടെ ചോദ്യം ചേർക്കാനായി സൂക്ഷിച്ചിട്ടുണ്ട്. ടീച്ചറോടും ചോദിക്കൂ. അതുവരെ ഈ പാഠഭാഗത്തിൽ ഇങ്ങനെ സഹായിക്കാം:',
+    },
     "tutor.distress": {
         "en": (
             "I'm really glad you told me. This is important, and you deserve help from a person who can be there for you. "

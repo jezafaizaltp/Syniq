@@ -273,6 +273,22 @@ class Item(Base):
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
 
+class TutorQuestion(Base):
+    """Something a student asked Ask SYNiq that the topic's content didn't cover.
+
+    Kept so the content can grow. Never linked to the student: no id, name or
+    class, and contact details are removed from the text before it is saved.
+    """
+
+    __tablename__ = "tutor_questions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    concept_id: Mapped[int] = mapped_column(ForeignKey("concepts.id"), index=True)
+    text: Mapped[str] = mapped_column(String(600))
+    answered_by: Mapped[str] = mapped_column(String(10))  # ai | none
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 class Misconception(Base):
     """What to tell a student who made a common mistake, by the tag items use in misconceptions."""
 

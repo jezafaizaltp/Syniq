@@ -8,7 +8,12 @@ Privacy rules for everything in this module:
 - AI-drafted content is saved as a draft. Nothing reaches students until a
   teacher approves it.
 
-AI is off unless ANTHROPIC_API_KEY is set; every caller handles AIUnavailable.
+AI is off unless ANTHROPIC_API_KEY (Claude) or OPENAI_API_KEY is set; every caller
+handles AIUnavailable. With only an OpenAI key, the tutor works but content drafting
+does not (it needs structured output from Claude).
+
+Ask SYNiq answers from the topic's own content first (app.tutor_local) and only
+comes here when that content doesn't cover the question.
 """
 
 import json
@@ -16,6 +21,7 @@ import os
 import re
 
 import anthropic
+import httpx
 
 from .i18n import t
 
@@ -56,12 +62,39 @@ def get_client():
     return _client
 
 
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+OPENAI_MODEL = os.environ.get("SYNIQ_OPENAI_MODEL", "gpt-4.1-mini")
+
+
+def _openai_key() -> str | None:
+    return os.environ.get("OPENAI_API_KEY") or None
+
+
 def enabled() -> bool:
-    return get_client() is not None
+    return get_client() is not None or _openai_key() is not None
+
+
+def _call_openai(system: str, messages: list[dict], *, max_tokens: int) -> str:
+    try:
+        r = httpx.post(
+            OPENAI_URL,
+            headers={"Authorization": f"Bearer {_openai_key()}"},
+            json={"model": OPENAI_MODEL, "max_tokens": max_tokens, "messages": [{"role": "system", "content": system}, *messages]},
+            timeout=40,
+        )
+        r.raise_for_status()
+        choice = r.json()["choices"][0]
+    except (httpx.HTTPError, KeyError, IndexError, ValueError) as e:  # the app keeps working without AI
+        raise AIUnavailable(str(e)) from e
+    if choice.get("finish_reason") == "content_filter" or choice["message"].get("refusal"):
+        raise AIDeclined("The model declined this request")
+    return (choice["message"].get("content") or "").strip()
 
 
 def _call(system: str, messages: list[dict], *, max_tokens: int, effort: str, schema: dict | None = None) -> str:
     client = get_client()
+    if client is None and _openai_key() and schema is None:
+        return _call_openai(system, messages, max_tokens=max_tokens)
     if client is None:
         raise AIUnavailable("AI is not switched on for this server")
     output_config: dict = {"effort": effort}
@@ -110,6 +143,11 @@ _DISTRESS_ML = re.compile(r"ആത്മഹത്യ|മരിക്കണം|�
 
 DISTRESS_REPLY = t("en", "tutor.distress")
 
+
+def distressed(text: str) -> bool:
+    """A message that needs a trusted adult, not a lesson."""
+    return bool(_DISTRESS.search(text) or _DISTRESS_ML.search(text))
+
 TUTOR_SYSTEM = """You are SYNiq, a patient tutor for a Class 9 student in Kerala who follows the Kerala State (SCERT) syllabus.
 
 The student is working on this topic:
@@ -146,7 +184,7 @@ def tutor_reply(
 ) -> str:
     """history: [{"role": "student"|"tutor", "text": ...}], ending with the student's message."""
     latest = history[-1]["text"] if history else ""
-    if _DISTRESS.search(latest) or _DISTRESS_ML.search(latest):
+    if distressed(latest):
         return t(lang, "tutor.distress")
     messages = [
         {"role": "user" if turn["role"] == "student" else "assistant", "content": scrub(turn["text"])}
