@@ -22,6 +22,7 @@ export type Settings = {
   support_modes?: string[];
   auto_support?: Record<string, { reason: string; since: string }>;
   auto_off?: string[];
+  hindi_course?: "a" | "b";
 };
 
 /** Support for sight, hearing or speech: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
@@ -43,6 +44,7 @@ export type Me = {
   consent?: { core_learning: boolean; mood_checkins: boolean };
   must_change_password?: boolean;
   class?: { board: string; grade: number };
+  hindi_course?: "a" | "b"; // only when the student's class offers both CBSE Hindi courses
   family?: { holder: boolean } | null;
 };
 

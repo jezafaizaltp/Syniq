@@ -28,13 +28,35 @@ def class_of(user: User) -> tuple[str, int]:
     return settings.get("board") or DEFAULT_BOARD, DEFAULT_GRADE if grade is None else grade
 
 
+def hindi_course(user: User) -> str:
+    """CBSE Hindi Course A (Kshitij, Kritika) or B (Sparsh, Sanchayan). Schools choose one; A unless the student picks B."""
+    return "b" if (user.settings or {}).get("hindi_course") == "b" else "a"
+
+
+def _course_of(code: str) -> str | None:
+    if code.endswith("-hinb"):
+        return "b"
+    return "a" if code.endswith("-hin") else None
+
+
 def subjects_for(db: DbSession, user: User) -> list[Subject]:
-    """Students see their own class and board; staff see every subject."""
+    """Students see their own class and board, and only the Hindi course they take; staff see every subject."""
     query = select(Subject).order_by(Subject.id)
-    if user.role == "student":
-        board, grade = class_of(user)
-        query = query.where(Subject.syllabus == board, Subject.grade == grade)
-    return db.scalars(query).all()
+    if user.role != "student":
+        return db.scalars(query).all()
+    board, grade = class_of(user)
+    subjects = db.scalars(query.where(Subject.syllabus == board, Subject.grade == grade)).all()
+    if not any(_course_of(s.code) == "b" for s in subjects):
+        return subjects
+    mine = hindi_course(user)
+    return [s for s in subjects if _course_of(s.code) in (None, mine)]
+
+
+def has_hindi_choice(db: DbSession, user: User) -> bool:
+    board, grade = class_of(user)
+    return db.scalars(
+        select(Subject).where(Subject.syllabus == board, Subject.grade == grade, Subject.code.like("%-hinb"))
+    ).first() is not None
 
 
 def get_mastery(db: DbSession, student_id: int, concept_id: int) -> Mastery:

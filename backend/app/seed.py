@@ -101,6 +101,7 @@ SUBJECTS = [
     ("cbse10-ss", "Social Science", "en", "cbse", 10),
     ("cbse10-eng", "English", "en", "cbse", 10),
     ("cbse10-hin", "Hindi", "hi", "cbse", 10),
+    ("cbse10-hinb", "Hindi B", "hi", "cbse", 10),  # Sparsh 2 + Sanchayan 2; each student sees A or B (settings.hindi_course)
     # CBSE Class 11 (NCERT rationalised books): science stream and English.
     ("cbse11-math", "Mathematics", "en", "cbse", 11),
     ("cbse11-phy", "Physics", "en", "cbse", 11),

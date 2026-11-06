@@ -26,6 +26,7 @@ const SUBJECT_LOOK: Record<string, { icon: string; color: string }> = {
   mal: { icon: "അ", color: "#a63d2a" },
   eng: { icon: "Aa", color: "#3d5a80" },
   hin: { icon: "अ", color: "#c9793f" },
+  hinb: { icon: "अ", color: "#c9793f" },
   math: { icon: "÷", color: "#7e2c1e" },
   phy: { icon: "⚡", color: "#b8860b" },
   chem: { icon: "⚗", color: "#6b4e9b" },
