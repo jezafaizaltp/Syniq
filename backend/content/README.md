@@ -641,7 +641,7 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) and Science the new Exploration book (13 chapters, 2026–27), with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. The other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. The other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -672,26 +672,21 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Science 11: Reproduction: How Life Continues | asexual reproduction and reproduction in flowering plants; human reproduction and reproductive health | 12 |
 | Science 12: Patterns in Life: Diversity and Classification | why we classify, five kingdoms and scientific names; groups of plants and animals | 12 |
 | Science 13: Earth as a System: Energy, Matter and Life | Earth's spheres, the Sun's energy and winds; cycles of water, carbon, nitrogen and oxygen | 12 |
-| Social Science 1 (History): The French Revolution | france before 1789 and the outbreak, constitution, Republic and legacy | 12 |
-| Social Science 2 (History): Socialism in Europe and the Russian Revolution | liberals, radicals, conservatives and socialism, the Russian Revolution and its results | 12 |
-| Social Science 3 (History): Nazism and the Rise of Hitler | weimar Germany and Hitler's rise, nazi ideology, society and war | 12 |
-| Social Science 4 (History): Forest Society and Colonialism | why forests disappeared under colonial rule, forest communities and rebellion | 12 |
-| Social Science 5 (History): Pastoralists in the Modern World | pastoral nomads in India and colonial rule, the Maasai of East Africa | 12 |
-| Social Science 6 (Geography): India – Size and Location | location, size and time, india and the world, and its neighbours | 13 |
-| Social Science 7 (Geography): Physical Features of India | the Himalayas and the Northern Plains, peninsular Plateau, desert, coasts and islands | 13 |
-| Social Science 8 (Geography): Drainage | himalayan river systems, peninsular rivers, lakes and pollution | 14 |
-| Social Science 9 (Geography): Climate | climate controls and the monsoon mechanism, seasons and distribution of rainfall | 13 |
-| Social Science 10 (Geography): Natural Vegetation and Wildlife | types of vegetation, wildlife and its protection | 12 |
-| Social Science 11 (Geography): Population | size, distribution and density, population growth and change | 13 |
-| Social Science 12 (Civics): What is Democracy? Why Democracy? | features of democracy, arguments for and against democracy | 12 |
-| Social Science 13 (Civics): Constitutional Design | why a constitution is needed, from South Africa, making of the Indian Constitution | 12 |
-| Social Science 14 (Civics): Electoral Politics | why elections and India's electoral system, what makes elections democratic | 12 |
-| Social Science 15 (Civics): Working of Institutions | parliament and the executive, the judiciary | 12 |
-| Social Science 16 (Civics): Democratic Rights | life without rights and why rights matter, fundamental Rights in the Indian Constitution | 12 |
-| Social Science 17 (Economics): The Story of Village Palampur | factors of production and farming, distribution of land and non-farm activities | 13 |
-| Social Science 18 (Economics): People as Resource | human capital and economic activities, unemployment, education and health | 12 |
-| Social Science 19 (Economics): Poverty as a Challenge | measuring poverty, causes of poverty and anti-poverty measures | 12 |
-| Social Science 20 (Economics): Food Security in India | what food security means and who is food insecure, buffer stock, PDS and cooperatives | 13 |
+| Social Science 1: Understanding Social Science | what social science studies | 6 |
+| Social Science 2: Shaping of the Earth's Surface | inside the Earth and moving plates; forces that shape landforms, and disasters | 12 |
+| Social Science 3: Atmosphere and Climate | the atmosphere, its layers, and weather versus climate; climate controls and the monsoon mechanism; seasons and distribution of rainfall | 19 |
+| Social Science 4: Early Humans and Beginning of Civilisation | early humans, from hunting to farming; the first civilisations, Harappa and beyond | 12 |
+| Social Science 5: State and Society up to 1000 CE | from janas to mahajanapadas, kings and republics; society, administration and trade up to 1000 CE | 12 |
+| Social Science 6: Democracy | features of democracy; arguments for and against democracy | 12 |
+| Social Science 7: Elections | why elections and India's electoral system; what makes elections democratic; voting systems and the Emergency | 18 |
+| Social Science 8: Building Blocks in Economics: The Problem of Choice | scarcity, choice and opportunity cost; the central problems of an economy and factors of production | 12 |
+| Social Science 9: The Price Puzzle: What Drives the Market | demand and supply; market equilibrium, shortages and surpluses | 12 |
+| Social Science 10: Oceans and Life | the ocean floor and movements of ocean water; ocean resources, the Blue Economy and maritime zones | 12 |
+| Social Science 11: Life on Earth | biomes, ecosystems and biodiversity; wildlife and its protection; forests, livelihoods and the commons | 18 |
+| Social Science 12: Resistance and Resilience (1000–1700 CE) | kingdoms and leaders who resisted, 1000–1700 CE; resilience through faith, temples and trade | 12 |
+| Social Science 13: Governance and Public Policy | government, governance and good governance; public policy and the policy cycle | 12 |
+| Social Science 14: Managing Your Personal Finances | budgeting and saving; investing, insurance and income tax | 12 |
+| Social Science 15: From Ideas to Startups | entrepreneurs, business plans and startups; revenue, costs and profit | 12 |
 | English 1: The Fun They Had · The Road Not Taken | The Fun They Had (Isaac Asimov), The Road Not Taken (Robert Frost) | 12 |
 | English 2: The Sound of Music · Wind | The Sound of Music (Evelyn Glennie and Bismillah Khan), Wind (Subramania Bharati) | 12 |
 | English 3: The Little Girl · Rain on the Roof | The Little Girl (Katherine Mansfield), Rain on the Roof (Coates Kinney) | 12 |
