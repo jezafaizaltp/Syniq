@@ -31,6 +31,7 @@ from ..engine import detect
 from ..engine.mastery import progress_label
 from ..models import (
     Attempt,
+    Chapter,
     ClassGroup,
     Concept,
     Consent,
@@ -126,7 +127,14 @@ def class_overview(class_id: int, db: DbSession = Depends(get_db), user: User = 
     _teacher_class(db, user, class_id)
     students = _shared_students(db, class_id)
     ids = [s.id for s in students]
-    concepts = db.scalars(select(Concept).order_by(Concept.chapter_id, Concept.order)).all()
+    # Only the subjects this class learns (its students' board and class), not every class in SYNiq.
+    subjects = {sub.id: sub for st in students for sub in learning.subjects_for(db, st)}
+    chapters = {
+        ch.id: ch for ch in db.scalars(select(Chapter).where(Chapter.subject_id.in_(list(subjects)))).all()
+    } if subjects else {}
+    concepts = db.scalars(
+        select(Concept).where(Concept.chapter_id.in_(list(chapters))).order_by(Concept.chapter_id, Concept.order)
+    ).all() if chapters else []
     rows = db.scalars(select(Mastery).where(Mastery.student_id.in_(ids))).all() if ids else []
     by_concept: dict[int, list[Mastery]] = {}
     for r in rows:
@@ -143,6 +151,8 @@ def class_overview(class_id: int, db: DbSession = Depends(get_db), user: User = 
             {
                 "concept_id": c.id,
                 "title": c.title,
+                "subject": subjects[chapters[c.chapter_id].subject_id].name,
+                "chapter": chapters[c.chapter_id].title,
                 "counts": {k: labels.get(k, 0) for k in ("not_started", "learning", "getting_there", "secure")},
                 "common_misconceptions": [m for m, _ in miscon.most_common(3)],
             }

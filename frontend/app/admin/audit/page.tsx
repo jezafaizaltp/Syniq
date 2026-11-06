@@ -36,7 +36,7 @@ export default function Audit() {
   return (
     <div className="wrap wide">
       <p>
-        <Link href="/admin">← School setup</Link>
+        <Link className="back-link" href="/admin">← School setup</Link>
       </p>
       <h1>Audit log</h1>
       <p className="muted">

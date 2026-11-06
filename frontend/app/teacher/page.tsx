@@ -8,7 +8,14 @@ import ContentTools from "./ContentTools";
 
 type Overview = {
   students: number;
-  concepts: { concept_id: number; title: string; counts: Record<string, number>; common_misconceptions: string[] }[];
+  concepts: {
+    concept_id: number;
+    title: string;
+    subject: string;
+    chapter: string;
+    counts: Record<string, number>;
+    common_misconceptions: string[];
+  }[];
 };
 type Support = { student_id: number; name: string; concepts: string[] }[];
 type MethodGroups = {
@@ -217,30 +224,48 @@ export default function Teacher() {
 
       <section className="card">
         <h2>Where the class is, by topic</h2>
-        <div className="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Topic</th>
-                {Object.values(PROGRESS_WORDS).map((w) => (
-                  <th key={w}>{w}</th>
-                ))}
-                <th>Common mistakes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {overview?.concepts.map((c) => (
-                <tr key={c.concept_id}>
-                  <td>{c.title}</td>
-                  {Object.keys(PROGRESS_WORDS).map((k) => (
-                    <td key={k}>{c.counts[k] ?? 0}</td>
-                  ))}
-                  <td>{c.common_misconceptions.map(mistakeWords).join("; ") || "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <p className="muted">Topics at least one student has started, by subject. Tap a subject to open it.</p>
+        {bySubject(overview).map(([subject, concepts]) => {
+          const started = concepts.filter((c) => (c.counts.not_started ?? 0) < (overview?.students ?? 0));
+          return (
+            <details key={subject} className="subject-progress">
+              <summary>
+                {subject} <span className="muted">· {started.length} of {concepts.length} topics started</span>
+              </summary>
+              {started.length === 0 ? (
+                <p className="muted">No one has started this subject yet.</p>
+              ) : (
+                <div className="table-scroll">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Topic</th>
+                        {Object.values(PROGRESS_WORDS).map((w) => (
+                          <th key={w}>{w}</th>
+                        ))}
+                        <th>Common mistakes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {started.map((c) => (
+                        <tr key={c.concept_id}>
+                          <td>
+                            {c.title}
+                            <div className="muted small">{c.chapter}</div>
+                          </td>
+                          {Object.keys(PROGRESS_WORDS).map((k) => (
+                            <td key={k}>{c.counts[k] ?? 0}</td>
+                          ))}
+                          <td>{c.common_misconceptions.map(mistakeWords).join("; ") || "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </details>
+          );
+        })}
       </section>
 
       <section className="card">
@@ -373,4 +398,10 @@ export default function Teacher() {
       </section>
     </div>
   );
+}
+
+function bySubject(o: Overview | null): [string, Overview["concepts"]][] {
+  const groups = new Map<string, Overview["concepts"]>();
+  for (const c of o?.concepts ?? []) groups.set(c.subject, [...(groups.get(c.subject) ?? []), c]);
+  return [...groups.entries()];
 }

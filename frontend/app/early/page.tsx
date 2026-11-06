@@ -90,7 +90,7 @@ function Early() {
     return (
       <div className="wrap">
         <p className="feedback warn">{error}</p>
-        <Link href="/family">← Family</Link>
+        <Link className="back-link" href="/family">← Family</Link>
       </div>
     );
   if (!view) return null;
