@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session as DbSession
 from .engine import detect
 from .engine import methods
 from .engine import patterns
+from . import thinking
 from .engine import mastery as m
 from .engine import responses
 from .engine.rules import Action, ConceptState, decide
@@ -220,8 +221,15 @@ def next_action(
     # LKG to Class 5 see the picture first until their answers show another way works better.
     _, grade = class_of(student)
     ties = ["visual", "text", "step_by_step", "real_world"] if grade <= 5 else None
+    # A clear strength in the thinking puzzles (parent's consent) sets which way goes first
+    # while the child's own answers don't yet show one. Only a starting nudge.
+    puzzle_lean = thinking_lean(db, student, grade)
+    if puzzle_lean:
+        ties = [puzzle_lean] + [s for s in (ties or methods.STYLES) if s != puzzle_lean]
     action = decide(chapter, states, utcnow(), current_concept_id, preferred, ties)
     evidence = dict(action.evidence)
+    if puzzle_lean and action.style:
+        evidence["puzzle_lean"] = puzzle_lean
     # The student said they're tired or having a hard time: start this sitting with easier questions.
     if gentle and action.kind in ("practice", "review", "prereq_review") and (action.difficulty or 1) > 1:
         evidence["gentle_start"] = {"from": action.difficulty}
@@ -608,3 +616,51 @@ def next_step(db: DbSession, student: User, concept_id: int, kind: str = "mcq") 
 def stars(db: DbSession, student_id: int) -> int:
     """Stars from spotting mistakes. A count the student sees; never compared with anyone."""
     return len(db.scalars(select(LearningEvent.id).where(LearningEvent.student_id == student_id, LearningEvent.kind == "spot_star")).all())
+
+
+# --- Thinking puzzles and own pace (app/thinking.py), only with the parent's consent ------
+
+def thinking_lean(db: DbSession, student: User, grade: int) -> str | None:
+    from .auth import has_consent
+    from .models import PuzzleAnswer
+
+    if not has_consent(db, student.id, "thinking_puzzles"):
+        return None
+    rows = db.scalars(select(PuzzleAnswer).where(PuzzleAnswer.student_id == student.id).order_by(PuzzleAnswer.id)).all()
+    return thinking.lean([thinking.Answer(r.domain, r.level, r.correct) for r in rows], grade)
+
+
+PACE_WINDOW = 80
+
+
+def pace_break_due(db: DbSession, student: User) -> bool:
+    """Much slower than the child's own usual pace and missing several: offer a break.
+    Not offered again within 20 minutes of a break or an earlier offer."""
+    from .auth import has_consent
+
+    if not has_consent(db, student.id, "thinking_puzzles"):
+        return False
+    attempts = db.scalars(
+        select(Attempt)
+        .where(Attempt.student_id == student.id, Attempt.time_ms.is_not(None))
+        .order_by(Attempt.created_at.desc(), Attempt.id.desc())
+        .limit(PACE_WINDOW)
+    ).all()[::-1]
+    if not attempts:
+        return False
+    # This sitting: answers since the last gap of more than SESSION_GAP.
+    start = len(attempts) - 1
+    while start > 0 and attempts[start].created_at - attempts[start - 1].created_at <= SESSION_GAP:
+        start -= 1
+    sitting = attempts[start:]
+    baseline = [a.time_ms for a in attempts[: max(0, len(attempts) - thinking.PACE_RECENT)]]
+    if not thinking.pace_break(baseline, [(a.time_ms, a.correct) for a in sitting]):
+        return False
+    since = utcnow() - timedelta(minutes=20)
+    recent_break = db.scalars(
+        select(LearningEvent.id).where(LearningEvent.student_id == student.id, LearningEvent.kind == "break", LearningEvent.created_at >= since)
+    ).first()
+    recent_offer = db.scalars(
+        select(Decision.id).where(Decision.student_id == student.id, Decision.rule_id == "P_pace_break", Decision.created_at >= since)
+    ).first()
+    return not recent_break and not recent_offer

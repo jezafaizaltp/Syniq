@@ -18,7 +18,8 @@ type Child = {
 type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
-const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing"] as const;
+const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing", "thinking_puzzles"] as const;
+type Thinking = { on: boolean; puzzles: number; kinds: { domain: string; trend: "growing" | "steady" | "just_started" }[] };
 
 export default function Parent() {
   const { me, loading, lang, t } = useSession();
@@ -27,6 +28,7 @@ export default function Parent() {
   const [progress, setProgress] = useState<Record<number, Progress>>({});
   const [methods, setMethods] = useState<Record<number, MethodSubject[]>>({});
   const [mistakes, setMistakes] = useState<Record<number, MistakePattern[]>>({});
+  const [thinkingViews, setThinkingViews] = useState<Record<number, Thinking>>({});
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
 
   useEffect(() => {
@@ -47,6 +49,10 @@ export default function Parent() {
       kids.map(async (k) => [k.id, (await api<{ patterns: MistakePattern[] }>(`/guardian/children/${k.id}/mistakes`).catch(() => ({ patterns: [] }))).patterns] as const)
     );
     setMistakes(Object.fromEntries(repeats));
+    const growth = await Promise.all(
+      kids.map(async (k) => [k.id, await api<Thinking>(`/guardian/children/${k.id}/thinking`).catch(() => ({ on: false, puzzles: 0, kinds: [] }))] as const)
+    );
+    setThinkingViews(Object.fromEntries(growth));
     setChildren(kids);
     setSpecialists(await api<Specialist[]>("/guardian/specialists").catch(() => []));
   }, []);
@@ -105,6 +111,20 @@ export default function Parent() {
               <h3>{t("parent.helps", { name: c.name })}</h3>
               <p className="muted">{t("parent.helps_note", { name: c.name })}</p>
               <Methods subjects={methods[c.id]} t={t} />
+            </>
+          )}
+          {thinkingViews[c.id]?.on && thinkingViews[c.id].puzzles > 0 && (
+            <>
+              <h3>{t("parent.thinking", { name: c.name })}</h3>
+              <p className="muted">{t("parent.thinking_help")}</p>
+              <ul className="list">
+                {thinkingViews[c.id].kinds.map((k) => (
+                  <li key={k.domain}>
+                    <span>{t(`thinking.${k.domain}` as Key)}</span>
+                    <span className="muted">{t(`trend.${k.trend}` as Key)}</span>
+                  </li>
+                ))}
+              </ul>
             </>
           )}
           {mistakes[c.id] && mistakes[c.id].length > 0 && (

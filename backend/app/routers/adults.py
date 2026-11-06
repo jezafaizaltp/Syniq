@@ -284,7 +284,7 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
                 "name": child.name,
                 "consent": {
                     scope: has_consent(db, child.id, scope)
-                    for scope in ("core_learning", "mood_checkins", "school_sharing")
+                    for scope in ("core_learning", "mood_checkins", "school_sharing", "thinking_puzzles")
                 },
                 "support_modes": (child.settings or {}).get("support_modes", []),
                 "noticed": [
@@ -354,7 +354,7 @@ def set_support(student_id: int, body: SupportIn, db: DbSession = Depends(get_db
 
 
 class ConsentIn(BaseModel):
-    scope: str = Field(pattern="^(core_learning|mood_checkins|school_sharing)$")
+    scope: str = Field(pattern="^(core_learning|mood_checkins|school_sharing|thinking_puzzles)$")
     granted: bool
     method: str = "in_app"
 

@@ -26,7 +26,7 @@ from ..models import AuditLog, Chapter, ClassGroup, Concept, Consent, GuardianLi
 router = APIRouter(prefix="/admin", tags=["admin"])
 admin_only = require_role("admin")
 
-SCOPES = ("core_learning", "mood_checkins", "school_sharing")
+SCOPES = ("core_learning", "mood_checkins", "school_sharing", "thinking_puzzles")
 COLUMNS = {
     "student_name": "Student's full name",
     "class": "Class, e.g. 9 A",
@@ -36,8 +36,9 @@ COLUMNS = {
     "consent_learning": "yes if the paper form allows SYNiq for learning",
     "consent_mood": "yes if the form allows saving mood check-ins",
     "consent_school": "yes if the form allows sharing progress with the school",
+    "consent_puzzles": "optional: yes if the form allows thinking puzzles and own-pace timing",
 }
-TEMPLATE = ",".join(COLUMNS) + "\nAnu Krishna,9 A,Lakshmi Krishna,lakshmi@example.com,,yes,yes,yes\n"
+TEMPLATE = ",".join(COLUMNS) + "\nAnu Krishna,9 A,Lakshmi Krishna,lakshmi@example.com,,yes,yes,yes,yes\n"
 YES = {"yes", "y", "true", "1", "ok", "agreed"}
 NO = {"no", "n", "false", "0", ""}
 
@@ -81,8 +82,10 @@ def import_students(body: ImportIn, db: DbSession = Depends(get_db), user: User 
             continue
         problems = [f"{c.replace('_', ' ')} is empty" for c in ("student_name", "class", "guardian_name") if not r.get(c)]
         consents = {}
-        for scope, col in zip(SCOPES, ("consent_learning", "consent_mood", "consent_school")):
+        for scope, col in zip(SCOPES, ("consent_learning", "consent_mood", "consent_school", "consent_puzzles")):
             value = r.get(col, "").lower()
+            if col == "consent_puzzles" and not value:
+                value = "no"  # added later: older sheets without this column still import
             if value not in YES | NO:
                 problems.append(f"{col} should be yes or no, not '{r.get(col)}'")
             consents[scope] = value in YES
@@ -232,7 +235,7 @@ def add_teacher(body: TeacherIn, db: DbSession = Depends(get_db), user: User = D
 
 
 class PaperConsentIn(BaseModel):
-    scope: str = Field(pattern="^(core_learning|mood_checkins|school_sharing)$")
+    scope: str = Field(pattern="^(core_learning|mood_checkins|school_sharing|thinking_puzzles)$")
     granted: bool
 
 
@@ -358,6 +361,7 @@ AUDIT_WORDS = {
     "view_class_methods": "Viewed how a class learns best",
     "view_child_mistakes": "Viewed a child's repeated mistakes",
     "view_class_mistakes": "Viewed a class's repeated mistakes",
+    "view_child_thinking": "Viewed how a child's thinking puzzles are growing",
     "set_child_support": "Changed a child's support settings",
     "consent": "Changed consent",
     "paper_consent": "Recorded paper consent",

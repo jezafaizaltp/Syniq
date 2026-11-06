@@ -59,6 +59,9 @@ type Item = {
 type NextStep =
   | { kind: "secure_in"; n: number; topic: string }
   | { kind: "secured"; topic: string; next_topic: string | null };
+type Puzzle = { id: string; prompt: string; sequence: string[]; options: string[] };
+type PuzzleResult = { correct: boolean; answer: string; explain: string };
+const PUZZLE_EVERY = 8; // a brain teaser now and then; the server decides whether one is due
 type Spot = { item_id: number; friend: string; prompt: string; their_answer: string; options: string[] };
 type SpotResult = { correct: boolean; right_answer: string; why: string | null; stars: number };
 type Overview = {
@@ -92,6 +95,7 @@ type Result = {
   picture?: PictureSpec | null;
   response: AdaptiveResponse;
   next_step?: NextStep;
+  offer_break?: boolean;
 };
 
 const KIND_HEADINGS: Record<string, Key> = {
@@ -376,6 +380,9 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const [extended, setExtended] = useState(false);
   const [spot, setSpot] = useState<Spot | null>(null);
   const [spotResult, setSpotResult] = useState<SpotResult | null>(null);
+  const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
+  const [puzzleResult, setPuzzleResult] = useState<PuzzleResult | null>(null);
+  const puzzleStart = useRef(0);
   const [step, setStep] = useState<Step | null>(null);
   const [answer, setAnswer] = useState("");
   const [hints, setHints] = useState<string[]>([]);
@@ -418,8 +425,33 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
     }
   }
 
+  /** A brain teaser if one is due (only when the parent switched puzzles on). Returns whether one is showing. */
+  async function tryPuzzle(): Promise<boolean> {
+    try {
+      const pz = await api<Puzzle | null>("/thinking/puzzle");
+      if (!pz || !pz.id) return false;
+      setPuzzle(pz);
+      setPuzzleResult(null);
+      puzzleStart.current = Date.now();
+      if (readAloud) speak(pz.prompt);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async function answerPuzzle(choice: string) {
+    if (!puzzle) return;
+    const r = await post<PuzzleResult>("/thinking/puzzle", { id: puzzle.id, choice, time_ms: Date.now() - puzzleStart.current });
+    setPuzzleResult(r);
+    if (readAloud) speak(`${r.correct ? t("puzzle.nice") : t("puzzle.try")} ${r.explain}`);
+  }
+
   useEffect(() => {
-    next();
+    // At the start: a brain teaser first when one is due, then the lesson.
+    tryPuzzle().then((showing) => {
+      if (!showing) next();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -462,6 +494,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       setSummary(true);
       return;
     }
+    if (answered % PUZZLE_EVERY === 0 && (await tryPuzzle())) return;
     if (answered % SPOT_EVERY === 0 && step?.concept) {
       try {
         const sp = await api<Spot>(`/learn/spot?concept_id=${step.concept.id}`);
@@ -504,6 +537,51 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
               {t("session.keep_going")}
             </button>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (puzzle) {
+    return (
+      <div className="wrap">
+        <div className="card puzzle" aria-live="polite">
+          <h2>{t("puzzle.title")}</h2>
+          <p style={{ fontSize: "1.15rem" }}>{puzzle.prompt}</p>
+          {puzzle.sequence.length > 0 && (
+            <div className="puzzle-sequence" aria-label={puzzle.sequence.join(", ")}>
+              {puzzle.sequence.map((s, i) => (
+                <span key={i} className="puzzle-tile">
+                  {s}
+                </span>
+              ))}
+              <span className="puzzle-tile puzzle-blank">?</span>
+            </div>
+          )}
+          {!puzzleResult ? (
+            <div className="options puzzle-options">
+              {puzzle.options.map((o) => (
+                <button key={o} className="option" onClick={() => answerPuzzle(o)}>
+                  {o}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <>
+              <p className={`feedback ${puzzleResult.correct ? "good" : "warn"}`}>
+                {puzzleResult.correct ? t("puzzle.nice") : t("puzzle.try")}
+              </p>
+              <p>{puzzleResult.explain}</p>
+              <button
+                onClick={() => {
+                  setPuzzle(null);
+                  next();
+                }}
+              >
+                {t("puzzle.continue")}
+              </button>
+            </>
+          )}
         </div>
       </div>
     );
@@ -720,6 +798,22 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                   )}
                   <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   {result.next_step && <NextStepLine step={result.next_step} />}
+                  {result.offer_break && (
+                    <div className="feedback note break-offer">
+                      <p>{t("break.offer")}</p>
+                      <div className="row">
+                        <button
+                          className="secondary"
+                          onClick={() => {
+                            setOnBreak(true);
+                            helpPressed("break");
+                          }}
+                        >
+                          {t("break.offer_yes")}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   <button onClick={afterResult}>{t("learn.next")}</button>
                 </>
               )}

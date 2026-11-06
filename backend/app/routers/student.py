@@ -252,6 +252,21 @@ def submit_attempt(
     }
     if known:
         out["pattern"] = {"text": learning.pattern_text(db, lang, known.tag), "times": known.times}
+    if learning.pace_break_due(db, user):
+        # Own pace only: offers a break, never changes the level of questions.
+        out["offer_break"] = True
+        db.add(
+            Decision(
+                student_id=user.id,
+                concept_id=item.concept_id,
+                rule_id="P_pace_break",
+                rule_version=learning.thinking.THINKING_VERSION,
+                action="offer_break",
+                reason="The last few answers took much longer than usual and some were missed, so a short break was offered.",
+                evidence={"compared_with": "own usual pace"},
+            )
+        )
+        db.commit()
     if not correct:
         out["tip"] = tip
         out["solution"] = item.solution

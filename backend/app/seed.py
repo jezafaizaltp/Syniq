@@ -308,7 +308,7 @@ def seed(db: DbSession) -> None:
         db.add(GuardianLink(guardian_id=guardian.id, student_id=s.id))
     # Anu and Rahul have full consent; Fathima's guardian has not consented yet.
     for s in students[:2]:
-        for scope in ("core_learning", "mood_checkins", "school_sharing"):
+        for scope in ("core_learning", "mood_checkins", "school_sharing", "thinking_puzzles"):
             db.add(Consent(student_id=s.id, guardian_id=guardian.id, scope=scope, granted=True, method="school_form"))
     db.commit()
 
