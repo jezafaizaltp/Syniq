@@ -124,6 +124,7 @@ RETIRED_SUBJECTS = {
     "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", "Number Systems"),
     "cbse9-sci": ("cbse9old-sci", "Science (pre-2026 book)", "Matter in Our Surroundings"),
     "cbse9-ss": ("cbse9old-ss", "Social Science (pre-2026 books)", "The French Revolution"),
+    "cbse9-eng": ("cbse9old-eng", "English (pre-2026 books)", "The Fun They Had · The Road Not Taken"),
 }
 
 # concept code -> (title, order, prerequisites)

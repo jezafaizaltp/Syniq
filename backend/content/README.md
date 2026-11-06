@@ -641,7 +641,7 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. The other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. Hindi is still on the older books (Kshitij and Kritika) and will move to the 2026–27 book Ganga; its chapter names follow the rationalised NCERT books, from memory. Topics inside each chapter were chosen by Claude. English follows the new Kaveri book (2026–27), which replaces Beehive and Moments: its eight units, each a prose lesson with its poem, are chapters 1–8, written from published summaries of the new book. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -687,24 +687,14 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Social Science 13: Governance and Public Policy | government, governance and good governance; public policy and the policy cycle | 12 |
 | Social Science 14: Managing Your Personal Finances | budgeting and saving; investing, insurance and income tax | 12 |
 | Social Science 15: From Ideas to Startups | entrepreneurs, business plans and startups; revenue, costs and profit | 12 |
-| English 1: The Fun They Had · The Road Not Taken | The Fun They Had (Isaac Asimov), The Road Not Taken (Robert Frost) | 12 |
-| English 2: The Sound of Music · Wind | The Sound of Music (Evelyn Glennie and Bismillah Khan), Wind (Subramania Bharati) | 12 |
-| English 3: The Little Girl · Rain on the Roof | The Little Girl (Katherine Mansfield), Rain on the Roof (Coates Kinney) | 12 |
-| English 4: A Truly Beautiful Mind · The Lake Isle of Innisfree | A Truly Beautiful Mind (Albert Einstein), The Lake Isle of Innisfree (W.B. Yeats) | 12 |
-| English 5: The Snake and the Mirror · A Legend of the Northland | The Snake and the Mirror (Vaikom Muhammad Basheer), A Legend of the Northland (Phoebe Cary) | 12 |
-| English 6: My Childhood · No Men Are Foreign | My Childhood (A.P.J. Abdul Kalam), No Men Are Foreign (James Kirkup) | 12 |
-| English 7: Reach for the Top · On Killing a Tree | Reach for the Top (Santosh Yadav and Maria Sharapova), On Killing a Tree (Gieve Patel) | 12 |
-| English 8: Kathmandu · A Slumber Did My Spirit Seal | Kathmandu (Vikram Seth), A Slumber Did My Spirit Seal (William Wordsworth) | 12 |
-| English 9: If I Were You | If I Were You (Douglas James) | 6 |
-| English 10: Moments: The Lost Child | The Lost Child (Mulk Raj Anand) | 6 |
-| English 11: Moments: The Adventures of Toto | The Adventures of Toto (Ruskin Bond) | 6 |
-| English 12: Moments: Iswaran the Storyteller | Iswaran the Storyteller (R.K. Laxman) | 6 |
-| English 13: Moments: In the Kingdom of Fools | In the Kingdom of Fools (A.K. Ramanujan, Kannada folktale) | 6 |
-| English 14: Moments: The Happy Prince | The Happy Prince (Oscar Wilde) | 6 |
-| English 15: Moments: Weathering the Storm in Ersama | Weathering the Storm in Ersama (Harsh Mander) | 6 |
-| English 16: Moments: The Last Leaf | The Last Leaf (O. Henry) | 6 |
-| English 17: Moments: A House Is Not a Home | A House Is Not a Home (Zan Gaudioso) | 6 |
-| English 18: Moments: The Beggar | The Beggar (Anton Chekhov) | 6 |
+| English 1: How I Taught My Grandmother to Read · Bharat Our Land | How I Taught My Grandmother to Read (Sudha Murty), Bharat Our Land (Subramania Bharati) | 12 |
+| English 2: The Pot Maker · Gifts of Grace | The Pot Maker (Temsula Ao), Gifts of Grace: Honouring Our Vocations | 12 |
+| English 3: Winds of Change · Canvas of Soil | Winds of Change, Canvas of Soil (Maya Anthony) | 12 |
+| English 4: Vitamin-M · I Cannot Remember My Mother | Vitamin-M (Asha Nehemiah), I Cannot Remember My Mother (Rabindranath Tagore) | 12 |
+| English 5: The World of Limitless Possibilities · Nine Gold Medals | The World of Limitless Possibilities (an interview with Deepa Malik), Nine Gold Medals (David Roth) | 12 |
+| English 6: Twin Melodies · A Friend Found in Music | Twin Melodies (Mitra Phukan), A Friend Found in Music | 12 |
+| English 7: Carrier of Words · Words | Carrier of Words, Words (Charles Swain) | 12 |
+| English 8: Follow That Dream · Believe in Yourself | Follow That Dream (Irene Chua), Believe in Yourself | 12 |
 | Hindi 1: दो बैलों की कथा | दो बैलों की कथा (प्रेमचंद) | 6 |
 | Hindi 2: ल्हासा की ओर | ल्हासा की ओर (राहुल सांकृत्यायन) | 6 |
 | Hindi 3: प्रेमचंद के फटे जूते | प्रेमचंद के फटे जूते (हरिशंकर परसाई) | 6 |
