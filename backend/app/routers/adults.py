@@ -190,6 +190,26 @@ def class_methods(class_id: int, db: DbSession = Depends(get_db), user: User = D
     ]
 
 
+@router.get("/teacher/classes/{class_id}/mistakes", tags=["teacher"])
+def class_mistakes(class_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
+    """Mistakes several students keep making: who is still working on each, and how many have fixed it.
+
+    Lets a teacher re-teach one idea to the few who need it. Most common first.
+    """
+    _teacher_class(db, user, class_id)
+    by_tag: dict[str, dict] = {}
+    for s in sorted(_shared_students(db, class_id), key=lambda x: x.name):
+        for p in learning.pattern_summary(db, s.id):
+            e = by_tag.setdefault(p["tag"], {"tag": p["tag"], "text": p["text"], "working_on": [], "fixed": 0, "topics": []})
+            if p["status"] == "working_on":
+                e["working_on"].append({"student_id": s.id, "name": s.name})
+            else:
+                e["fixed"] += 1
+            e["topics"] += [t for t in p["topics"] if t not in e["topics"]]
+    audit(db, user, "view_class_mistakes")
+    return sorted(by_tag.values(), key=lambda e: (-len(e["working_on"]), -e["fixed"], e["text"]))
+
+
 @router.get("/teacher/review-queue", tags=["teacher"])
 def review_queue(db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
     items = db.scalars(select(Item).where(Item.status == "draft")).all()
@@ -302,6 +322,17 @@ def child_methods(student_id: int, db: DbSession = Depends(get_db), user: User =
         raise HTTPException(404, "Not found")
     audit(db, user, "view_child_methods", student_id)
     return {"subjects": learning.method_summary(db, student_id)}
+
+
+@router.get("/guardian/children/{student_id}/mistakes", tags=["guardian"])
+def child_mistakes(
+    student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian")), lang: str = Depends(i18n.language)
+):
+    """Mistakes the child has made more than once, and which are fixed now."""
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    audit(db, user, "view_child_mistakes", student_id)
+    return {"patterns": learning.pattern_summary(db, student_id, lang)}
 
 
 class SupportIn(BaseModel):

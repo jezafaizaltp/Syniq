@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session as DbSession
 
 from .engine import detect
 from .engine import methods
+from .engine import patterns
 from .engine import mastery as m
 from .engine import responses
 from .engine.rules import Action, ConceptState, decide
@@ -208,7 +209,9 @@ def method_priors(db: DbSession, student_id: int, concept_ids: list[int]) -> dic
     return out
 
 
-def next_action(db: DbSession, student: User, chapter_id: int, current_concept_id: int | None) -> tuple[Action, Decision]:
+def next_action(
+    db: DbSession, student: User, chapter_id: int, current_concept_id: int | None, gentle: bool = False
+) -> tuple[Action, Decision]:
     chapter, states = build_states(db, student, chapter_id)
     settings = student.settings or {}
     preferred = settings.get("preferred_style")
@@ -219,6 +222,10 @@ def next_action(db: DbSession, student: User, chapter_id: int, current_concept_i
     ties = ["visual", "text", "step_by_step", "real_world"] if grade <= 5 else None
     action = decide(chapter, states, utcnow(), current_concept_id, preferred, ties)
     evidence = dict(action.evidence)
+    # The student said they're tired or having a hard time: start this sitting with easier questions.
+    if gentle and action.kind in ("practice", "review", "prereq_review") and (action.difficulty or 1) > 1:
+        evidence["gentle_start"] = {"from": action.difficulty}
+        action.difficulty = 1
     if action.style:
         evidence["style"] = action.style
     decision = Decision(
@@ -235,8 +242,15 @@ def next_action(db: DbSession, student: User, chapter_id: int, current_concept_i
     return action, decision
 
 
-def pick_item(db: DbSession, student_id: int, concept_id: int, difficulty: int | None) -> Item | None:
-    """An approved item near the target difficulty, avoiding the most recent ones."""
+def pick_item(
+    db: DbSession, student_id: int, concept_id: int, difficulty: int | None, working_on: set[str] | None = None
+) -> Item | None:
+    """An approved item near the target difficulty, avoiding the most recent ones.
+
+    When the student has a mistake pattern this topic can catch, a question with
+    that trap comes first (within one level of the target), so the pattern gets
+    practised until it is fixed rather than avoided.
+    """
     items = db.scalars(select(Item).where(Item.concept_id == concept_id, Item.status == "approved")).all()
     if not items:
         return None
@@ -248,6 +262,10 @@ def pick_item(db: DbSession, student_id: int, concept_id: int, difficulty: int |
     ).all()
     fresh = [i for i in items if i.id not in recent] or items
     target = difficulty or 1
+    if working_on:
+        repair = [i for i in fresh if set(traps_of(i)) & working_on and abs(i.difficulty - target) <= 1]
+        if repair:
+            fresh = repair
     best = min(abs(i.difficulty - target) for i in fresh)
     return random.choice([i for i in fresh if abs(i.difficulty - target) == best])
 
@@ -452,3 +470,141 @@ def method_summary(db: DbSession, student_id: int) -> list[dict]:
         if sid in names and described:
             out.append({"subject_id": sid, "subject": names[sid], "methods": described, "clearest": methods.best_method(stats)})
     return sorted(out, key=lambda d: d["subject_id"])
+
+
+# --- Mistake patterns (engine/patterns.py) ------------------------------------------
+
+PATTERN_WINDOW = 500  # the student's most recent answers that patterns are read from
+
+_SUM_TRAPS = {
+    "+": ["subtracted_instead", "multiplied_instead", "one_group_only", "counting_slip", "digits_swapped", "tens_slip"],
+    "−": ["added_instead", "counting_slip", "digits_swapped", "tens_slip"],
+    "×": ["added_instead", "one_group_off", "one_group_only", "counting_slip", "digits_swapped"],
+    "÷": ["counting_slip", "digits_swapped"],
+}
+
+
+def traps_of(item: Item) -> list[str]:
+    """The mistakes this question can catch: its written misconceptions, or the slips a sum allows."""
+    tags = list(dict.fromkeys((item.misconceptions or {}).values()))
+    sum_ = responses.parse_arithmetic(item.prompt, item.answer)
+    if sum_ is not None:
+        tags += [t for t in _SUM_TRAPS.get(sum_.op, []) if t not in tags]
+    return tags
+
+
+def mistake_made(item: Item, response: str) -> str | None:
+    """Which known mistake a wrong answer is, if any."""
+    tag = next((tag for wrong, tag in (item.misconceptions or {}).items() if same_answer(response, wrong)), None)
+    if tag:
+        return tag
+    sum_ = responses.parse_arithmetic(item.prompt, item.answer)
+    if sum_ is not None and response.strip().isdigit():
+        found = responses.diagnose(sum_, int(response.strip()))[0]
+        return None if found == "other" else found
+    return None
+
+
+def _recent_attempts(db: DbSession, student_id: int) -> tuple[list[Attempt], dict[int, Item]]:
+    attempts = db.scalars(
+        select(Attempt)
+        .where(Attempt.student_id == student_id)
+        .order_by(Attempt.created_at.desc(), Attempt.id.desc())
+        .limit(PATTERN_WINDOW)
+    ).all()[::-1]
+    items = {i.id: i for i in db.scalars(select(Item).where(Item.id.in_({a.item_id for a in attempts}))).all()}
+    return attempts, items
+
+
+def mistake_patterns(db: DbSession, student_id: int) -> list[patterns.Pattern]:
+    attempts, items = _recent_attempts(db, student_id)
+    sightings = []
+    for a in attempts:
+        item = items.get(a.item_id)
+        if not item:
+            continue
+        traps = traps_of(item)
+        made = None if a.correct else mistake_made(item, a.response)
+        if traps or made:
+            sightings.append(patterns.Sighting(a.concept_id, traps, made, a.correct, a.created_at))
+    return patterns.find(sightings)
+
+
+def mistake_mode_stats(db: DbSession, student_id: int) -> dict:
+    """After each response to a wrong answer, was the next answer on that topic right?"""
+    attempts, _ = _recent_attempts(db, student_id)
+    answers, waiting = [], {}
+    for a in attempts:
+        if a.concept_id in waiting:
+            answers.append(patterns.ModeAnswer(waiting.pop(a.concept_id), a.correct))
+        if a.feedback_mode:
+            waiting[a.concept_id] = a.feedback_mode
+    return patterns.mode_stats(answers)
+
+
+def best_method_overall(db: DbSession, student: User) -> str | None:
+    """The way of explaining that helps this student most, or the one they chose."""
+    _, _, overall = method_stats(db, student.id)
+    return methods.best_method(overall) or (student.settings or {}).get("preferred_style")
+
+
+def pattern_text(db: DbSession, lang: str, tag: str) -> str:
+    from . import i18n
+
+    for key in (f"pattern.{tag}", f"tip.{tag}"):
+        if i18n.has(key):
+            return i18n.t(lang, key)
+    from .models import Misconception
+
+    row = db.scalars(select(Misconception).where(Misconception.tag == tag)).first()
+    return row.tip if row else tag.replace("_", " ")
+
+
+def pattern_summary(db: DbSession, student_id: int, lang: str = "en") -> list[dict]:
+    """Mistakes made more than once: what they are, where, and whether they're fixed. No scores."""
+    found = mistake_patterns(db, student_id)
+    titles = {c.id: c.title for c in db.scalars(select(Concept).where(Concept.id.in_({t for p in found for t in p.topics}))).all()}
+    return [
+        {
+            "tag": p.tag,
+            "text": pattern_text(db, lang, p.tag),
+            "status": p.status,
+            "times": p.times,
+            "topics": [titles[t] for t in p.topics if t in titles],
+        }
+        for p in found
+    ]
+
+
+# --- The next step ------------------------------------------------------------------
+
+def answers_to_secure(p: float, attempts: int, kind: str = "mcq", cap: int = 9) -> int:
+    """Right answers in a row (without hints) that would make this topic secure."""
+    n = 0
+    while not m.is_secure(p, attempts) and n < cap:
+        p = m.update_p_known(p, m.Evidence(True, kind, 0))
+        attempts += 1
+        n += 1
+    return n
+
+
+def next_step(db: DbSession, student: User, concept_id: int, kind: str = "mcq") -> dict:
+    """What the student is working towards now, in a form the app puts into words."""
+    concept = db.get(Concept, concept_id)
+    row = get_mastery(db, student.id, concept_id)
+    if not m.is_secure(row.p_known, row.attempts):
+        return {"kind": "secure_in", "n": answers_to_secure(row.p_known, row.attempts, kind), "topic": concept.title}
+    practisable = select(Item.concept_id).where(Item.status == "approved")
+    later = db.scalars(
+        select(Concept).where(Concept.chapter_id == concept.chapter_id, Concept.id.in_(practisable)).order_by(Concept.order)
+    ).all()
+    for c in later:
+        r = db.scalars(select(Mastery).where(Mastery.student_id == student.id, Mastery.concept_id == c.id)).first()
+        if not r or not m.is_secure(r.p_known, r.attempts):
+            return {"kind": "secured", "topic": concept.title, "next_topic": c.title}
+    return {"kind": "secured", "topic": concept.title, "next_topic": None}
+
+
+def stars(db: DbSession, student_id: int) -> int:
+    """Stars from spotting mistakes. A count the student sees; never compared with anyone."""
+    return len(db.scalars(select(LearningEvent.id).where(LearningEvent.student_id == student_id, LearningEvent.kind == "spot_star")).all())

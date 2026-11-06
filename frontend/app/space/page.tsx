@@ -7,6 +7,7 @@ import { ApiError, api, del, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import type { NoteRow } from "../learn/Notes";
 import Methods, { type MethodSubject } from "./Methods";
+import Mistakes, { type MistakePattern } from "./Mistakes";
 
 type Overview = {
   subjects: {
@@ -18,6 +19,7 @@ type Overview = {
     carry_on: { chapter_id: number; title: string };
   }[];
   review_due: { concept_id: number; title: string; chapter_id: number; chapter: string; subject: string }[];
+  stars?: number;
 };
 type Goal = { id: number; text: string; due_on: string | null; done: boolean };
 
@@ -29,6 +31,7 @@ export default function MySpace() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [notes, setNotes] = useState<NoteRow[]>([]);
   const [methods, setMethods] = useState<MethodSubject[]>([]);
+  const [mistakes, setMistakes] = useState<MistakePattern[]>([]);
   const [goalText, setGoalText] = useState("");
   const [goalDate, setGoalDate] = useState("");
   const [error, setError] = useState("");
@@ -44,6 +47,7 @@ export default function MySpace() {
     api<Goal[]>("/me/goals").then(setGoals).catch(() => setGoals([]));
     api<NoteRow[]>("/me/notes").then(setNotes).catch(() => setNotes([]));
     api<{ subjects: MethodSubject[] }>("/me/methods").then((r) => setMethods(r.subjects)).catch(() => setMethods([]));
+    api<{ patterns: MistakePattern[] }>("/me/mistakes").then((r) => setMistakes(r.patterns)).catch(() => setMistakes([]));
   }, [canLearn]);
 
   if (!me || me.role !== "student") return null;
@@ -135,6 +139,13 @@ export default function MySpace() {
         <h2 id="helps">{t("space.helps")}</h2>
         <p className="muted">{t("space.helps_note")}</p>
         <Methods subjects={methods} t={t} />
+      </section>
+
+      <section className="card" aria-labelledby="mistakes">
+        <h2 id="mistakes">{t("mistakes.title")}</h2>
+        <p className="muted">{t("mistakes.help")}</p>
+        <Mistakes patterns={mistakes} t={t} />
+        {!!overview?.stars && <p>{overview.stars === 1 ? t("stars.count_one") : t("stars.count", { n: overview.stars })}</p>}
       </section>
 
       <section className="card" aria-labelledby="goals">

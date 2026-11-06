@@ -255,6 +255,22 @@ MESSAGES: dict[str, dict[str, str]] = {
         "en": "Not quite yet. Let's look at it together.",
         "ml": "ഇതുവരെ ശരിയായില്ല. നമുക്ക് ഒരുമിച്ച് നോക്കാം.",
     },
+    "why.helps_you": {
+        "en": "This is the way that has helped you most after a mistake.",
+        "ml": "ഒരു തെറ്റിനു ശേഷം നിങ്ങളെ ഏറ്റവും സഹായിച്ചത് ഈ രീതിയാണ്.",
+    },
+    "resp.known_trap": {
+        "en": "You have met this trap before. Noticing it is the first step to beating it.",
+        "ml": "ഈ കെണി നിങ്ങൾ മുമ്പും കണ്ടിട്ടുണ്ട്. അത് തിരിച്ചറിയുന്നതാണ് അതിനെ മറികടക്കാനുള്ള ആദ്യ പടി.",
+    },
+    "pattern.counting_slip": {"en": "Ending up 1 away when counting", "ml": "എണ്ണുമ്പോൾ 1 വ്യത്യാസം വരുന്നത്"},
+    "pattern.tens_slip": {"en": "Mixing up the tens", "ml": "പത്തുകൾ മാറിപ്പോകുന്നത്"},
+    "pattern.one_group_only": {"en": "Counting only one of the groups", "ml": "ഒരു കൂട്ടം മാത്രം എണ്ണുന്നത്"},
+    "pattern.one_group_off": {"en": "One group too many or too few when multiplying", "ml": "ഗുണിക്കുമ്പോൾ ഒരു കൂട്ടം കൂടുകയോ കുറയുകയോ ചെയ്യുന്നത്"},
+    "pattern.added_instead": {"en": "Adding when the sum asks for something else", "ml": "മറ്റൊന്ന് ചോദിക്കുമ്പോൾ കൂട്ടുന്നത്"},
+    "pattern.subtracted_instead": {"en": "Taking away when the sum asks to add", "ml": "കൂട്ടാൻ പറയുമ്പോൾ കുറയ്ക്കുന്നത്"},
+    "pattern.multiplied_instead": {"en": "Multiplying when the sum asks to add", "ml": "കൂട്ടാൻ പറയുമ്പോൾ ഗുണിക്കുന്നത്"},
+    "pattern.digits_swapped": {"en": "Writing the digits the wrong way round", "ml": "അക്കങ്ങൾ തിരിച്ചെഴുതുന്നത്"},
     "why.count_it_out": {
         "en": "Seeing it with objects often makes a mistake easy to spot.",
         "ml": "വസ്തുക്കൾ വെച്ച് കാണുമ്പോൾ തെറ്റ് എളുപ്പം കണ്ടുപിടിക്കാം.",

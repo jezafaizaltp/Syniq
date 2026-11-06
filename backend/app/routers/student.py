@@ -1,3 +1,5 @@
+import random
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy import select
@@ -82,6 +84,8 @@ def chapter_detail(chapter_id: int, db: DbSession = Depends(get_db), user: User 
 class NextRequest(BaseModel):
     chapter_id: int
     current_concept_id: int | None = None
+    # The first few steps after the student said they feel low or tired: easier questions first.
+    gentle: bool = False
 
 
 @router.post("/learn/next")
@@ -90,7 +94,7 @@ def learn_next(
 ):
     if not db.get(Chapter, body.chapter_id):
         raise HTTPException(404, "Chapter not found")
-    action, decision = learning.next_action(db, user, body.chapter_id, body.current_concept_id)
+    action, decision = learning.next_action(db, user, body.chapter_id, body.current_concept_id, body.gentle)
     concept = db.get(Concept, action.concept_id) if action.concept_id else None
     payload = {
         "decision_id": decision.id,
@@ -107,8 +111,12 @@ def learn_next(
         if exp and exp.style == action.style and why in ("history", "similar", "everyone"):
             payload["method_why"] = why  # the app says, in the student's words, why this way first
     elif action.kind in ("practice", "review", "prereq_review") and concept:
-        item = learning.pick_item(db, user.id, concept.id, action.difficulty)
+        working_on = learning.patterns.active(learning.mistake_patterns(db, user.id))
+        item = learning.pick_item(db, user.id, concept.id, action.difficulty, working_on)
         payload["item"] = learning.public_item(item, user.settings) if item else None
+        if item and set(learning.traps_of(item)) & working_on:
+            # A trap they've fallen into before: a nudge to slow down, never the answer.
+            payload["item"]["watch_out"] = True
     return payload
 
 
@@ -187,6 +195,8 @@ def submit_attempt(
     )
     findings = learning.update_noticed_support(db, user)
     tip = None if correct else misconception_tip(db, lang, misconception)
+    made = None if correct else learning.mistake_made(item, body.response)
+    known = next((p for p in learning.mistake_patterns(db, user.id) if made and p.tag == made and p.status == "working_on"), None)
     explanations = db.scalars(
         select(Explanation).where(Explanation.concept_id == item.concept_id, Explanation.status == "approved")
     ).all()
@@ -203,6 +213,9 @@ def submit_attempt(
             support=detect.effective_support(user.settings),
             tutor_available=ai.enabled(),
             lang=lang,
+            mode_stats=None if correct else learning.mistake_mode_stats(db, user.id),
+            best_method=None if correct else learning.best_method_overall(db, user),
+            known_pattern=known is not None,
         ),
         seed=row.attempts,
     )
@@ -221,7 +234,12 @@ def submit_attempt(
                 rule_version=responses.RESPONSES_VERSION,
                 action="feedback",
                 reason=i18n.t("en", f"why.{response['mode']}"),
-                evidence={"wrong_in_a_row": row.wrong_streak, "mistake": response.get("mistake") or misconception},
+                evidence={
+                    "wrong_in_a_row": row.wrong_streak,
+                    "mistake": response.get("mistake") or misconception,
+                    "for_you": response.get("for_you", False),
+                    "pattern_times": known.times if known else 0,
+                },
             )
         )
         db.commit()
@@ -230,7 +248,10 @@ def submit_attempt(
         "progress": progress_label(row.p_known, row.attempts),
         "feedback": i18n.t(lang, "feedback.correct" if correct else "feedback.not_yet"),
         "response": response,
+        "next_step": learning.next_step(db, user, item.concept_id, item.kind),
     }
+    if known:
+        out["pattern"] = {"text": learning.pattern_text(db, lang, known.tag), "times": known.times}
     if not correct:
         out["tip"] = tip
         out["solution"] = item.solution
@@ -251,6 +272,72 @@ def learning_event(body: EventIn, db: DbSession = Depends(get_db), user: User = 
     db.add(LearningEvent(student_id=user.id, kind=body.kind))
     db.commit()
     return {"ok": True}
+
+
+# --- Spot the mistake ---------------------------------------------------------------
+# A friend's answer with a common mistake in it. Finding the right answer earns a star.
+# Stars are a small thank-you, never a score: they unlock nothing and are never compared.
+
+SPOT_STARS_PER_DAY = 20  # stars are a thank-you, not something to grind
+SPOT_FRIENDS = ["Asha", "Ravi", "Meera", "Arjun", "Zara", "Kabir", "Nila", "Dev"]
+
+
+def spot_material(item: Item) -> list[str]:
+    """The wrong answers this question has a written mistake for."""
+    return [w for w in (item.misconceptions or {}) if not learning.same_answer(w, item.answer)]
+
+
+@router.get("/learn/spot")
+def spot(concept_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    items = [
+        i
+        for i in db.scalars(select(Item).where(Item.concept_id == concept_id, Item.status == "approved")).all()
+        if spot_material(i)
+    ]
+    if not items:
+        raise HTTPException(404, "Nothing to spot here yet")
+    item = random.choice(items)
+    theirs = random.choice(spot_material(item))
+    options = learning.shuffled_options(item) or []
+    if not options:
+        options = sorted({item.answer, theirs, *spot_material(item)[:2]}, key=lambda o: hash((item.id, o)))
+    return {
+        "item_id": item.id,
+        "friend": SPOT_FRIENDS[(item.id + user.id) % len(SPOT_FRIENDS)],
+        "prompt": item.prompt,
+        "their_answer": theirs,
+        "options": options,
+    }
+
+
+class SpotIn(BaseModel):
+    item_id: int
+    their_answer: str = Field(max_length=200)
+    choice: str = Field(max_length=200)
+
+
+@router.post("/learn/spot")
+def spot_answer(
+    body: SpotIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent), lang: str = Depends(i18n.language)
+):
+    item = db.get(Item, body.item_id)
+    if not item or item.status != "approved" or body.their_answer not in spot_material(item):
+        raise HTTPException(404, "Item not found")
+    correct = learning.same_answer(body.choice, item.answer)
+    today = learning.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    given_today = db.scalars(
+        select(LearningEvent.id).where(LearningEvent.student_id == user.id, LearningEvent.kind == "spot_star", LearningEvent.created_at >= today)
+    ).all()
+    if correct and len(given_today) < SPOT_STARS_PER_DAY:
+        db.add(LearningEvent(student_id=user.id, kind="spot_star"))
+        db.commit()
+    tag = item.misconceptions[body.their_answer]
+    return {
+        "correct": correct,
+        "right_answer": item.answer,
+        "why": misconception_tip(db, lang, tag),
+        "stars": learning.stars(db, user.id),
+    }
 
 
 # --- Check-ins, settings, progress -------------------------------------------------

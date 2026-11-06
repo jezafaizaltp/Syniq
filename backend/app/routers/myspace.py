@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import learning
+from .. import i18n, learning
 from ..auth import require_learning_consent, require_role
 from ..db import get_db
 from ..engine.mastery import progress_label
@@ -64,13 +64,23 @@ def overview(user: User = Depends(require_learning_consent), db: DbSession = Dep
                     "subject": subject.name,
                 }
             )
-    return {"subjects": sorted(per_subject.values(), key=lambda s: s["id"]), "review_due": due}
+    return {
+        "subjects": sorted(per_subject.values(), key=lambda s: s["id"]),
+        "review_due": due,
+        "stars": learning.stars(db, user.id),
+    }
 
 
 @router.get("/methods")
 def my_methods(user: User = Depends(require_learning_consent), db: DbSession = Depends(get_db)):
     """What has helped this student lately, per subject. A description that changes, never a label."""
     return {"subjects": learning.method_summary(db, user.id)}
+
+
+@router.get("/mistakes")
+def my_mistakes(user: User = Depends(require_learning_consent), db: DbSession = Depends(get_db), lang: str = Depends(i18n.language)):
+    """Mistakes made more than once, and which are fixed now. Shown kindly: every pattern is a thing being worked on."""
+    return {"patterns": learning.pattern_summary(db, user.id, lang)}
 
 
 # --- Goals --------------------------------------------------------------------

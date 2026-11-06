@@ -6,6 +6,7 @@ import { CHOSEN_SUPPORT, api, post, put } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 import Methods, { type MethodSubject } from "../space/Methods";
+import Mistakes, { type MistakePattern } from "../space/Mistakes";
 
 type Child = {
   id: number;
@@ -25,6 +26,7 @@ export default function Parent() {
   const [children, setChildren] = useState<Child[]>([]);
   const [progress, setProgress] = useState<Record<number, Progress>>({});
   const [methods, setMethods] = useState<Record<number, MethodSubject[]>>({});
+  const [mistakes, setMistakes] = useState<Record<number, MistakePattern[]>>({});
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
 
   useEffect(() => {
@@ -41,6 +43,10 @@ export default function Parent() {
       kids.map(async (k) => [k.id, (await api<{ subjects: MethodSubject[] }>(`/guardian/children/${k.id}/methods`).catch(() => ({ subjects: [] }))).subjects] as const)
     );
     setMethods(Object.fromEntries(helps));
+    const repeats = await Promise.all(
+      kids.map(async (k) => [k.id, (await api<{ patterns: MistakePattern[] }>(`/guardian/children/${k.id}/mistakes`).catch(() => ({ patterns: [] }))).patterns] as const)
+    );
+    setMistakes(Object.fromEntries(repeats));
     setChildren(kids);
     setSpecialists(await api<Specialist[]>("/guardian/specialists").catch(() => []));
   }, []);
@@ -99,6 +105,13 @@ export default function Parent() {
               <h3>{t("parent.helps", { name: c.name })}</h3>
               <p className="muted">{t("parent.helps_note", { name: c.name })}</p>
               <Methods subjects={methods[c.id]} t={t} />
+            </>
+          )}
+          {mistakes[c.id] && mistakes[c.id].length > 0 && (
+            <>
+              <h3>{t("parent.mistakes", { name: c.name })}</h3>
+              <p className="muted">{t("parent.mistakes_help")}</p>
+              <Mistakes patterns={mistakes[c.id]} t={t} />
             </>
           )}
           {c.noticed.length > 0 && (

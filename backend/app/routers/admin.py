@@ -356,6 +356,8 @@ AUDIT_WORDS = {
     "view_child_progress": "Viewed a child's progress",
     "view_child_methods": "Viewed what helps a child learn",
     "view_class_methods": "Viewed how a class learns best",
+    "view_child_mistakes": "Viewed a child's repeated mistakes",
+    "view_class_mistakes": "Viewed a class's repeated mistakes",
     "set_child_support": "Changed a child's support settings",
     "consent": "Changed consent",
     "paper_consent": "Recorded paper consent",
