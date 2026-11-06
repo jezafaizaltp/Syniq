@@ -154,6 +154,9 @@ export default function Admin() {
     }
   }
 
+  // The address people type, printed on every slip: on a lab computer it is a number like http://192.168.1.20.
+  const site = typeof window === "undefined" ? "" : window.location.origin.replace(/^https:\/\//, "");
+
   if (me?.role !== "admin") return null;
 
   if (accounts) {
@@ -180,6 +183,9 @@ export default function Admin() {
         </div>
         <section className="print-sheet">
           <h2>SYNiq logins</h2>
+          <p>
+            Sign in at <strong>{site}</strong>
+          </p>
           <div className="table-scroll">
             <table>
               <thead>
@@ -203,6 +209,7 @@ export default function Admin() {
                     </td>
                     <td>
                       <code>{a.student_login}</code>
+                      <div className="sheet-site">{site}</div>
                     </td>
                     <td>
                       <code>{a.student_password}</code>
@@ -210,6 +217,7 @@ export default function Admin() {
                     <td>{a.guardian}</td>
                     <td>
                       <code>{a.guardian_login}</code>
+                      <div className="sheet-site">{site}</div>
                     </td>
                     <td>{a.guardian_password.startsWith("(") ? "Same as above" : <code>{a.guardian_password}</code>}</td>
                   </tr>
@@ -217,7 +225,7 @@ export default function Admin() {
               </tbody>
             </table>
           </div>
-          <p className="muted">Sign in at this site. You will be asked to choose your own password.</p>
+          <p className="muted">Sign in at {site}. You will be asked to choose your own password.</p>
         </section>
       </div>
     );

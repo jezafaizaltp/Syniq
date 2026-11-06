@@ -43,3 +43,8 @@ jobs:
       - name: Compose file is valid
         working-directory: deploy
         run: DOMAIN=example.org POSTGRES_PASSWORD=x docker compose config --quiet
+      - name: Lab compose file and start script are valid
+        working-directory: deploy/lab
+        run: |
+          POSTGRES_PASSWORD=x docker compose config --quiet
+          bash -n start.sh
