@@ -318,6 +318,15 @@ def main(argv: list[str]) -> int:
         if not db.scalars(select(Subject)).first():
             print("No subjects yet: run python -m app.bootstrap first, which also loads the content.")
             return 0
+        from .seed import SUBJECTS  # here, not at the top: seed imports this module
+
+        # Subjects added in a newer version (a new class or course) are created before their content loads.
+        have = {s.code for s in db.scalars(select(Subject)).all()}
+        for code, name, lang, board, grade in SUBJECTS:
+            if code not in have:
+                db.add(Subject(code=code, name=name, language=lang, syllabus=board, grade=grade))
+                print(f"added subject {code}")
+        db.flush()
         print(load(db, packs))
     return 0
 
