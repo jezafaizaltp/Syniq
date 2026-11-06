@@ -559,7 +559,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
             </div>
           )}
           {!puzzleResult ? (
-            <div className="options puzzle-options">
+            <div className="puzzle-options">
               {puzzle.options.map((o) => (
                 <button key={o} className="option" onClick={() => answerPuzzle(o)}>
                   {o}
@@ -640,9 +640,9 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
   return (
     <div className="wrap">
-      <div className="row" style={{ justifyContent: "space-between", alignItems: "center" }}>
-        <button className="secondary" onClick={onExit}>
-          ← {chapter.title}
+      <div className="row session-top" style={{ justifyContent: "space-between", alignItems: "center" }}>
+        <button className="secondary back-chapter" onClick={onExit} aria-label={chapter.title}>
+          <span aria-hidden="true">←</span> <span className="back-chapter-title">{chapter.title}</span>
         </button>
         <button
           className="secondary"
@@ -702,7 +702,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                   </button>
                 </div>
               )}
-              <div className="row" role="group" aria-label={t("learn.other_ways")}>
+              <div className="row style-chips" role="group" aria-label={t("learn.other_ways")}>
                 {(step.styles ?? []).map((s) => (
                   <button
                     key={s}

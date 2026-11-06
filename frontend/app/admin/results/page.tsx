@@ -142,7 +142,7 @@ export default function Results() {
   return (
     <div className="wrap wide">
       <p>
-        <Link href="/admin">← School setup</Link>
+        <Link className="back-link" href="/admin">← School setup</Link>
       </p>
       <h1>Pilot results</h1>
       <p className="muted">

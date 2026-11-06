@@ -64,14 +64,14 @@ function BabyView() {
     return error ? (
       <div className="wrap">
         <p className="feedback warn">{error}</p>
-        <Link href="/family">← Family</Link>
+        <Link className="back-link" href="/family">← Family</Link>
       </div>
     ) : null;
 
   const name = view.child.name;
   return (
     <div className="wrap">
-      <Link href="/family">← Family</Link>
+      <Link className="back-link" href="/family">← Family</Link>
       <div className="hello" style={{ marginTop: 12 }}>
         <span className="wave" aria-hidden="true">
           🍼

@@ -184,8 +184,10 @@ export default function Parent() {
                 {specialists.map((s) => (
                   <label key={s.id} className="check" style={{ marginTop: 8 }}>
                     <input type="checkbox" checked={s.shared_with.includes(c.id)} onChange={(e) => share(c.id, s.id, e.target.checked)} />
-                    {s.name}
-                    {s.title && <span className="muted"> · {s.title}</span>}
+                    <span>
+                      {s.name}
+                      {s.title && <span className="muted"> · {s.title}</span>}
+                    </span>
                   </label>
                 ))}
               </>

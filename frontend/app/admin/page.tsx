@@ -359,7 +359,7 @@ export default function Admin() {
             Class {c.name} <span className="muted">· {c.teacher ? `Teacher: ${c.teacher}` : "No teacher yet"}</span>
           </h2>
           <div className="table-scroll">
-            <table>
+            <table className="stack-table">
               <thead>
                 <tr>
                   <th>Student</th>
