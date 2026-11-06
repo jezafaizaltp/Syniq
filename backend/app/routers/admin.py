@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session as DbSession
 
 from ..auth import audit, has_consent, hash_password, require_role, temporary_password
 from ..db import get_db
-from ..models import AuditLog, Chapter, ClassGroup, Concept, Consent, GuardianLink, Session, Subject, User
+from ..models import AuditLog, Chapter, ClassGroup, Concept, Consent, GuardianLink, Session, Subject, TutorQuestion, User
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 admin_only = require_role("admin")
@@ -428,3 +428,24 @@ def audit_log(
             }
         )
     return {"entries": out, "more": len(rows) > limit}
+
+
+@router.get("/tutor-questions")
+def tutor_questions(db: DbSession = Depends(get_db), user: User = Depends(require_role("admin", "teacher"))):
+    """What students asked Ask SYNiq that the content didn't cover, by topic, most asked first. No student details."""
+    rows = db.execute(
+        select(TutorQuestion, Concept, Chapter, Subject)
+        .join(Concept, Concept.id == TutorQuestion.concept_id)
+        .join(Chapter, Chapter.id == Concept.chapter_id)
+        .join(Subject, Subject.id == Chapter.subject_id)
+        .order_by(TutorQuestion.id.desc())
+        .limit(1000)
+    ).all()
+    topics: dict[int, dict] = {}
+    for q, concept, chapter, subject in rows:
+        t = topics.setdefault(
+            concept.id,
+            {"subject": subject.name, "chapter": f"{chapter.number}. {chapter.title}", "topic": concept.title, "questions": []},
+        )
+        t["questions"].append({"text": q.text, "answered_by": q.answered_by, "asked": q.created_at.date().isoformat()})
+    return sorted(topics.values(), key=lambda t: -len(t["questions"]))

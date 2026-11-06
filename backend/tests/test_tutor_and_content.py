@@ -44,17 +44,23 @@ def ask(headers, text, concept_id=None):
 
 # --- Tutor --------------------------------------------------------------------------
 
+UNCOVERED = "how did ancient Babylonian merchants use this in trade"
+
+
 def test_tutor_off_without_api_key(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     anu = login("anu@demo.syniq")
-    assert client.get("/ai/status", headers=anu).json() == {"enabled": False}
-    assert ask(anu, "why is there a 2ab?").status_code == 503
+    # The tutor itself always works, from SYNiq's own content; only harder questions need AI.
+    assert client.get("/ai/status", headers=anu).json() == {"enabled": True, "ai": False}
+    r = ask(anu, "why is there a 2ab?")
+    assert r.status_code == 200 and r.json()["source"] == "notes" and "2ab" in r.json()["reply"]
 
 
 def test_tutor_grounded_and_sends_no_personal_data(fake):
     f = fake(text="Good question. What do you get when you multiply (a + b) by itself?")
     anu = login("anu@demo.syniq")
-    r = ask(anu, "why is there a 2ab? my number is 98470 12345 and email anu@example.com")
+    r = ask(anu, UNCOVERED + "? my number is 98470 12345 and email anu@example.com")
     assert r.status_code == 200
     assert r.json()["reply"].startswith("Good question")
 
@@ -79,7 +85,7 @@ def test_tutor_distress_answered_without_calling_claude(fake):
 def test_tutor_refusal_gets_gentle_redirect(fake):
     fake(stop_reason="refusal")
     anu = login("anu@demo.syniq")
-    assert "back to the topic" in ask(anu, "something off topic").json()["reply"]
+    assert "back to the topic" in ask(anu, "tell me a joke about cricket").json()["reply"]
 
 
 def test_tutor_rejects_long_or_non_student_last_turn(fake):
