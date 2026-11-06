@@ -118,13 +118,14 @@ SUBJECTS = [
 
 # Subjects whose textbook was replaced. On an existing database the old subject keeps its pupils' history under a
 # new code and the "cbse-old" board, which no student is in, so only the new book shows. A subject is retired only
-# while its chapter 1 still has the old book's title, so a database that already has the new book is left alone.
-# Code -> (code for the old book, name for the old book, the old book's chapter 1 title).
+# while a chapter that only the old book has is still there, so a database that already has the new book is left alone.
+# Code -> (code for the old book, name for the old book, number and title of a chapter found only in the old book).
 RETIRED_SUBJECTS = {
-    "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", "Number Systems"),
-    "cbse9-sci": ("cbse9old-sci", "Science (pre-2026 book)", "Matter in Our Surroundings"),
-    "cbse9-ss": ("cbse9old-ss", "Social Science (pre-2026 books)", "The French Revolution"),
-    "cbse9-eng": ("cbse9old-eng", "English (pre-2026 books)", "The Fun They Had · The Road Not Taken"),
+    "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", 1, "Number Systems"),
+    "cbse9-sci": ("cbse9old-sci", "Science (pre-2026 book)", 1, "Matter in Our Surroundings"),
+    "cbse9-ss": ("cbse9old-ss", "Social Science (pre-2026 books)", 1, "The French Revolution"),
+    "cbse9-hin": ("cbse9old-hin", "Hindi A (pre-2026 books)", 2, "ल्हासा की ओर"),
+    "cbse9-eng": ("cbse9old-eng", "English (pre-2026 books)", 1, "The Fun They Had · The Road Not Taken"),
 }
 
 # concept code -> (title, order, prerequisites)

@@ -311,10 +311,12 @@ def sync_subjects(db: DbSession) -> list[str]:
     )
 
     done = []
-    for code, (old_code, old_name, old_first_title) in RETIRED_SUBJECTS.items():
+    for code, (old_code, old_name, marker_number, marker_title) in RETIRED_SUBJECTS.items():
         row = db.scalars(select(Subject).where(Subject.code == code)).first()
-        first = row and db.scalars(select(Chapter).where(Chapter.subject_id == row.id, Chapter.number == 1)).first()
-        if first and first.title == old_first_title and not db.scalars(select(Subject).where(Subject.code == old_code)).first():
+        marker = row and db.scalars(
+            select(Chapter).where(Chapter.subject_id == row.id, Chapter.number == marker_number)
+        ).first()
+        if marker and marker.title == marker_title and not db.scalars(select(Subject).where(Subject.code == old_code)).first():
             row.code, row.name, row.syllabus = old_code, old_name, "cbse-old"
             done.append(f"retired subject {code} as {old_code}")
     db.flush()

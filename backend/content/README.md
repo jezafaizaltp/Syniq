@@ -641,7 +641,7 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. Hindi is still on the older books (Kshitij and Kritika) and will move to the 2026–27 book Ganga; its chapter names follow the rationalised NCERT books, from memory. Topics inside each chapter were chosen by Claude. English follows the new Kaveri book (2026–27), which replaces Beehive and Moments: its eight units, each a prose lesson with its poem, are chapters 1–8, written from published summaries of the new book. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. Hindi follows the new Ganga book (2026–27), whose twelve lessons (prose 1–7, poetry 8–12, matching NCERT's contents page) replace both Hindi A and Hindi B; its two 'साथ-साथ पढ़ें' extra readings are not included. Do Bailon ki Katha and Reedh ki Haddi were carried over from the old Class 9 books and Ram-Lakshman-Parshuram Samvad from Class 10 Hindi A. Topics inside each chapter were chosen by Claude. English follows the new Kaveri book (2026–27), which replaces Beehive and Moments: its eight units, each a prose lesson with its poem, are chapters 1–8, written from published summaries of the new book. Because Ganga replaces both Hindi courses, there is no Class 9 Hindi B. Both language subjects were written from published summaries and memory of the texts, not from the printed books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher. Databases that already had the older Class 9 books keep them, hidden, under the codes cbse9old-* (see RETIRED_SUBJECTS in app/seed.py), so earlier practice history is not lost.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -696,21 +696,17 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | English 7: Carrier of Words · Words | Carrier of Words, Words (Charles Swain) | 12 |
 | English 8: Follow That Dream · Believe in Yourself | Follow That Dream (Irene Chua), Believe in Yourself | 12 |
 | Hindi 1: दो बैलों की कथा | दो बैलों की कथा (प्रेमचंद) | 6 |
-| Hindi 2: ल्हासा की ओर | ल्हासा की ओर (राहुल सांकृत्यायन) | 6 |
-| Hindi 3: प्रेमचंद के फटे जूते | प्रेमचंद के फटे जूते (हरिशंकर परसाई) | 6 |
-| Hindi 4: मेरे बचपन के दिन | मेरे बचपन के दिन (महादेवी वर्मा) | 6 |
-| Hindi 5: साखियाँ एवं सबद | साखियाँ एवं सबद (कबीर) | 6 |
-| Hindi 6: मेघ आए | मेघ आए (सर्वेश्वर दयाल सक्सेना) | 6 |
-| Hindi 7: उपभोक्तावाद की संस्कृति | उपभोक्तावाद की संस्कृति (श्यामाचरण दुबे) | 6 |
-| Hindi 8: साँवले सपनों की याद | साँवले सपनों की याद (जाबिर हुसैन) | 6 |
-| Hindi 9: वाख | वाख (ललद्यद) | 6 |
-| Hindi 10: सवैये | सवैये (रसखान) | 6 |
-| Hindi 11: कैदी और कोकिला | कैदी और कोकिला (माखनलाल चतुर्वेदी) | 6 |
-| Hindi 12: ग्राम श्री | ग्राम श्री (सुमित्रानंदन पंत) | 6 |
-| Hindi 13: बच्चे काम पर जा रहे हैं | बच्चे काम पर जा रहे हैं (राजेश जोशी) | 6 |
-| Hindi 14: कृतिका: इस जल प्रलय में | इस जल प्रलय में (फणीश्वरनाथ रेणु) | 6 |
-| Hindi 15: कृतिका: मेरे संग की औरतें | मेरे संग की औरतें (मृदुला गर्ग) | 6 |
-| Hindi 16: कृतिका: रीढ़ की हड्डी | रीढ़ की हड्डी (जगदीश चंद्र माथुर) | 6 |
+| Hindi 2: क्या लिखूँ? | क्या लिखूँ? (पदुमलाल पुन्नालाल बख्शी) | 6 |
+| Hindi 3: संवादहीन | संवादहीन (शेखर जोशी) | 6 |
+| Hindi 4: ऐसी भी बातें होती हैं | ऐसी भी बातें होती हैं (लता मंगेशकर से साक्षात्कार, यतीन्द्र मिश्र) | 6 |
+| Hindi 5: आखिरी चट्टान तक | आखिरी चट्टान तक (मोहन राकेश) | 6 |
+| Hindi 6: रीढ़ की हड्डी | रीढ़ की हड्डी (जगदीश चंद्र माथुर) | 6 |
+| Hindi 7: मैं और मेरा देश | मैं और मेरा देश (कन्हैयालाल मिश्र 'प्रभाकर') | 6 |
+| Hindi 8: पद (रैदास) | पद (रैदास) | 6 |
+| Hindi 9: राम-लक्ष्मण-परशुराम संवाद | राम-लक्ष्मण-परशुराम संवाद | 6 |
+| Hindi 10: भारति, जय, विजयकरे! | भारति, जय, विजयकरे! (सूर्यकांत त्रिपाठी 'निराला') | 6 |
+| Hindi 11: झाँसी की रानी | झाँसी की रानी (सुभद्रा कुमारी चौहान) | 6 |
+| Hindi 12: घर की याद | घर की याद (भवानीप्रसाद मिश्र) | 6 |
 
 ## CBSE Class 10 (NCERT)
 
