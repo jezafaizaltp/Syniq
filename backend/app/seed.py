@@ -122,6 +122,7 @@ SUBJECTS = [
 # Code -> (code for the old book, name for the old book, the old book's chapter 1 title).
 RETIRED_SUBJECTS = {
     "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", "Number Systems"),
+    "cbse9-sci": ("cbse9old-sci", "Science (pre-2026 book)", "Matter in Our Surroundings"),
 }
 
 # concept code -> (title, order, prerequisites)

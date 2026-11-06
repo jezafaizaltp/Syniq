@@ -641,7 +641,7 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27), with chapter names and topics taken from published contents lists; the other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) and Science the new Exploration book (13 chapters, 2026–27), with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. The other subjects are still on the older books and will move to the 2026–27 books one by one. Their chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). NCERT's 2026–27 book Ganga replaces both Hindi courses in Class 9, so there is no Class 9 Hindi B. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -659,18 +659,19 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 | Maths 12: Quadrilaterals | properties of a parallelogram, the mid-point theorem, medians, the centroid and midpoint quadrilaterals | 19 |
 | Maths 13: Two Variables, One Line | writing ax + by + c = 0, solutions of a linear equation, pairs of linear equations | 20 |
 | Maths 14: Math of Space: Surface Area and Volume | cuboids and cylinders, right circular cone, sphere and hemisphere | 18 |
-| Science 1: Matter in Our Surroundings | particles and the states of matter, changing state and evaporation | 12 |
-| Science 2: Is Matter Around Us Pure? | solutions, suspensions and colloids, elements, compounds and changes | 12 |
-| Science 3: Atoms and Molecules | laws of chemical combination and formulae, molecular mass and the mole | 13 |
-| Science 4: Structure of the Atom | particles and models of the atom, electron shells, valency and isotopes | 13 |
-| Science 5: The Fundamental Unit of Life | cells, membranes and osmosis, nucleus and cell organelles | 13 |
-| Science 6: Tissues | plant tissues, animal tissues | 13 |
-| Science 7: Motion | distance, displacement, speed and velocity, acceleration and equations of motion | 14 |
-| Science 8: Force and Laws of Motion | balanced forces and inertia, momentum, F = ma and action–reaction | 13 |
-| Science 9: Gravitation | universal law of gravitation, g, mass and weight, thrust, pressure and buoyancy | 13 |
-| Science 10: Work and Energy | work, kinetic and potential energy, power and commercial unit of energy | 13 |
-| Science 11: Sound | sound as a wave, echo, range of hearing and ultrasound | 13 |
-| Science 12: Improvement in Food Resources | crop production and protection, animal husbandry | 13 |
+| Science 1: Exploration: Entering the World of Secondary Science | how scientists find things out | 6 |
+| Science 2: Cell: The Building Block of Life | cells, membranes and osmosis; nucleus and cell organelles; prokaryotes, eukaryotes and cell division | 19 |
+| Science 3: Tissues in Action | plant tissues; animal tissues; bones, muscles and joints | 19 |
+| Science 4: Describing Motion Around Us | distance, displacement, speed and velocity; acceleration and equations of motion; motion graphs and uniform circular motion | 20 |
+| Science 5: Exploring Mixtures and their Separation | solutions, suspensions and colloids; elements, compounds and changes; concentration and separating mixtures | 18 |
+| Science 6: How Forces Affect Motion | balanced forces and inertia; momentum, F = ma and action–reaction; resultant force and friction | 19 |
+| Science 7: Work, Energy and Simple Machines | work, kinetic and potential energy; power and commercial unit of energy; simple machines | 19 |
+| Science 8: Journey Inside the Atom | particles and models of the atom; electron shells, valency and isotopes | 13 |
+| Science 9: Atomic Foundations of Matter | laws of chemical combination and formulae; molecular mass and the mole; ions, ionic and covalent compounds, and formulae | 19 |
+| Science 10: Sound Waves: Characteristics and Applications | sound as a wave; echo, range of hearing and ultrasound | 13 |
+| Science 11: Reproduction: How Life Continues | asexual reproduction and reproduction in flowering plants; human reproduction and reproductive health | 12 |
+| Science 12: Patterns in Life: Diversity and Classification | why we classify, five kingdoms and scientific names; groups of plants and animals | 12 |
+| Science 13: Earth as a System: Energy, Matter and Life | Earth's spheres, the Sun's energy and winds; cycles of water, carbon, nitrogen and oxygen | 12 |
 | Social Science 1 (History): The French Revolution | france before 1789 and the outbreak, constitution, Republic and legacy | 12 |
 | Social Science 2 (History): Socialism in Europe and the Russian Revolution | liberals, radicals, conservatives and socialism, the Russian Revolution and its results | 12 |
 | Social Science 3 (History): Nazism and the Rise of Hitler | weimar Germany and Hitler's rise, nazi ideology, society and war | 12 |
