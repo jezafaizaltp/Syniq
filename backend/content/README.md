@@ -1019,6 +1019,33 @@ A topic can carry a `picture`: a small description that the app draws under its 
 
 In `geometry`, a point whose name starts with `_` is a helper: lines can use it but it isn't marked or named. Labels are placed on the outside of the shape automatically. Examples of every kind are in the CBSE Class 9 Maths packs.
 
+## Activities
+
+A topic can carry an `activity`: something the child plays with to explore the idea, shown under "Try it yourself" with the explanation and behind a button during practice. Like pictures, it is a small description the app builds (`frontend/app/learn/Activity.tsx`), checked by `python -m app.content_packs --check` (`backend/app/activities.py`). Every activity needs a `prompt`. Children change things only with buttons (never by dragging), so a switch, a keyboard or a screen reader works too, and the state is always said in words. A wrong try shows what the child made next to the goal. Nothing is scored.
+
+Types with `goals` take 1 to 4 `{prompt, ...}` with an optional `hint` shown after a wrong try:
+
+| type | for | fields | each goal |
+|---|---|---|---|
+| `number_line` | integers, fractions, estimating | `min`, `max`, `step` (at most 40 steps), `start`, optional `denominator` to label as fractions | `target` |
+| `fraction_bar` | equal shares, equivalent fractions, adding | `max_parts` (2 to 12) | `num`, `den`, `equivalent: false` to need exactly those parts |
+| `rectangle` | area, perimeter, constructing rectangles | `max_side` (2 to 12) | any of `area`, `perimeter`, `width`, `height` |
+| `angle` | angles, turns, rotational symmetry | (none) | `degrees` (in fives) or `kind`: acute, right, obtuse, straight, reflex |
+| `array` | factors, multiples, primes | (none) | `n` (2 to 36), `find: all` (every rectangle) or a number of rows |
+| `scale` | rulers, thermometers, states of matter | `min`, `max`, `step`, `unit`, `orientation` (horizontal/vertical), `start`, `zones: [{from, to, label}]` | `value` or `zone` (a zone label) |
+| `pattern` | growing patterns and sequences | `rule`: square, triangle, odd, even, double; `max_step` (3 to 10) | `count` the pattern reaches |
+
+Types with one task of their own:
+
+| type | for | fields |
+|---|---|---|
+| `sort` | grouping (living things, materials, numbers) | 2 to 4 `bins`; 4 to 10 `items: [{label, bin, why}]`; `why` is said if it is put in the wrong bin |
+| `order` | cycles, methods, sequences | 3 to 8 `steps` in the right order (the app shuffles them) |
+| `bars` | making bar graphs from data | 2 to 6 `categories: [{label, value}]`, `max` (4 to 20), `show`: tally or table |
+| `mirror` | line symmetry | `left`: 2 to 8 rows like `"..#"` (2 to 5 wide); the child completes the right half |
+
+Every CBSE Class 6 Maths and Science topic has one (2026-11-07). Examples of every type are in those packs.
+
 ## Changing a pack
 
 ```
