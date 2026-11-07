@@ -81,6 +81,52 @@ concepts:
     - - _I
       - A'
     alt: 'Ray diagram for a concave mirror (drawn as a straight line at P) with the object beyond C: a ray parallel to the axis reflects through F, a ray through F reflects parallel, and they meet between C and F in an inverted, smaller image.'
+  activity:
+    type: formula
+    prompt: A concave mirror with f = −15 cm. Move the object (u is negative, in front of the mirror). 1/v + 1/u = 1/f, magnification m = −v/u.
+    inputs:
+    - name: u
+      label: Object distance u
+      min: -60
+      max: -10
+      step: 10
+      start: -60
+      unit: cm
+    outputs:
+    - name: v
+      label: Image distance v
+      expr: 1/(1/(-15)-1/u)
+      unit: cm
+      places: 1
+    - name: m
+      label: Magnification m
+      expr: -(1/(1/(-15)-1/u))/u
+      places: 2
+    goals:
+    - prompt: Make a real, inverted image the same size as the object (m = −1).
+      want:
+        m: -1
+      hint: 'Real, inverted and same size: the object sits at C, twice the focal length.'
+      mistakes:
+      - when:
+          u: -60
+        say: Far beyond C the image is smaller (m = −1/3). Move the object in towards C.
+      - when:
+          u: -10
+        say: Inside F the image is virtual, upright and enlarged (m = +3), like a shaving mirror.
+      - when:
+          u: -20
+        say: Between F and C the image is real but enlarged (m = −3). Move out to C.
+    - prompt: Now make an upright image 3 times as big.
+      want:
+        m: 3
+      mistakes:
+      - when:
+          u: -20
+        say: '3 times bigger but inverted (m = −3): a real image. An upright image needs the object inside F.'
+      - when:
+          u: -30
+        say: At C the image is the same size and inverted.
   items:
   - prompt: 'The focal length of a spherical mirror is related to its radius of curvature R by:'
     options:
@@ -218,6 +264,55 @@ concepts:
     - - _I
       - A'
     alt: 'Ray diagram for a convex lens (drawn as a line through O) with the object beyond 2F: a ray parallel to the axis bends through F on the far side, a ray through the centre goes straight, and they meet in a smaller inverted image.'
+  activity:
+    type: formula
+    prompt: 'Refractive index n = c ÷ v: the speed of light in air (3 × 10⁸ m/s) over its speed in the material.'
+    inputs:
+    - name: v
+      label: Light's speed in it (× 10⁸ m/s)
+      min: 1
+      max: 3
+      step: 0.05
+      start: 3
+    outputs:
+    - name: n
+      label: Refractive index n
+      expr: 3/v
+      places: 3
+    goals:
+    - prompt: Make glass, with n = 1.5.
+      want:
+        n: 1.5
+      hint: n = 3 ÷ v, so v = 3 ÷ n.
+      mistakes:
+      - when:
+          v: 1.5
+        say: 'Speed 1.5 gives n = 2. n = c ÷ v, so the speed is c ÷ n: not the same number as n.'
+      - when:
+          v: 3
+        say: 'At 3 × 10⁸ m/s light isn''t slowed at all: n = 1, like air or a vacuum.'
+    - prompt: 'Make diamond, n ≈ 2.42: light bends most in it.'
+      want:
+        n:
+        - 2.39
+        - 2.45
+      mistakes:
+      - when:
+          v:
+          - 2.5
+          - 3
+        say: Faster light means a smaller n. Diamond bends light most, so light is slowest in it.
+    - prompt: Make water, n ≈ 1.33.
+      want:
+        n:
+        - 1.32
+        - 1.34
+      mistakes:
+      - when:
+          v:
+          - 1.3
+          - 1.35
+        say: 'That uses n''s number as the speed. Light in water is slower than in air, but only a little: v = 3 ÷ 1.33.'
   items:
   - prompt: 'When light goes from air into glass, it bends:'
     options:

@@ -35,6 +35,71 @@ concepts:
     - 'Parallel: 1/R = 1/6 + 1/3 = 1/2'
     - So R = 2 Ω, less than either one
     alt: 'Combining a 6 ohm and a 3 ohm resistor: 9 ohms in series, 2 ohms in parallel.'
+  activity:
+    type: formula
+    prompt: Two resistors, R₁ and R₂, with a 12 V battery. In series R = R₁ + R₂; in parallel 1/R = 1/R₁ + 1/R₂. I = V ÷ R.
+    inputs:
+    - name: r1
+      label: R₁
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: Ω
+    - name: r2
+      label: R₂
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: Ω
+    outputs:
+    - name: rs
+      label: Series R
+      expr: r1+r2
+      unit: Ω
+      places: 2
+    - name: rp
+      label: Parallel R
+      expr: r1*r2/(r1+r2)
+      unit: Ω
+      places: 2
+    - name: is
+      label: Current in series
+      expr: 12/(r1+r2)
+      unit: A
+      places: 2
+    - name: ip
+      label: Current in parallel
+      expr: 12/(r1*r2/(r1+r2))
+      unit: A
+      places: 2
+    goals:
+    - prompt: Join two resistors in parallel to make 2 Ω.
+      want:
+        rp: 2
+      hint: In parallel the total is less than either one. Try two equal resistors.
+      mistakes:
+      - when:
+          r1: 1
+          r2: 1
+        say: '1 + 1 = 2 is series. In parallel, two 1 Ω paths give only 0.5 Ω: more paths, less resistance.'
+      - when:
+          rs: 2
+        say: That's 2 Ω in series. Parallel is always smaller than the smallest resistor.
+    - prompt: R₁ = 4 Ω. Choose R₂ so the series current is 1 A.
+      want:
+        r1: 4
+        is: 1
+      mistakes:
+      - when:
+          r1: 4
+          r2: 12
+        say: '12 Ω alone would give 1 A, but in series the 4 Ω adds on: 16 Ω gives only 0.75 A.'
+      - when:
+          r1: 4
+          r2: 3
+        say: In series the current depends on the total, R₁ + R₂. 1 A from 12 V needs 12 Ω in all.
   items:
   - prompt: A charge of 30 C flows through a wire in 1 minute. What is the current, in amperes?
     answer: '0.5'
@@ -132,6 +197,75 @@ concepts:
       value: 2000
     unit: watts
     alt: 'Bar chart of typical power ratings: LED bulb 10 watts, fan 60, television 100, iron 1000, heater 2000.'
+  activity:
+    type: formula
+    prompt: An appliance of power P on 220 V draws I = P ÷ 220. Its fuse must carry that current but melt soon above it.
+    inputs:
+    - name: p
+      label: Power P
+      min: 100
+      max: 3000
+      step: 100
+      start: 100
+      unit: W
+    - name: fz
+      label: Fuse rating
+      min: 1
+      max: 15
+      step: 1
+      start: 1
+      unit: A
+    outputs:
+    - name: i
+      label: Current drawn
+      expr: p/220
+      unit: A
+      places: 2
+    - name: sp
+      label: Fuse rating − current
+      expr: fz-p/220
+      unit: A
+      places: 2
+    goals:
+    - prompt: 'A 2000 W kettle: choose the smallest fuse that won''t blow.'
+      want:
+        p: 2000
+        sp:
+        - 0
+        - 0.99
+      hint: 'Work out the current: 2000 ÷ 220. The fuse must be just above it.'
+      mistakes:
+      - when:
+          p: 2000
+          fz:
+          - 1
+          - 9
+        say: 'The kettle draws about 9.1 A, more than this fuse allows: it would melt every time you switch on.'
+      - when:
+          p: 2000
+          fz:
+          - 13
+          - 15
+        say: This fuse lets far more than 9.1 A through. In a fault the wires could overheat before it melts.
+    - prompt: With a 5 A fuse, find the most powerful appliance (in 100 W steps) that won't blow it.
+      want:
+        fz: 5
+        sp:
+        - 0
+        - 0.4
+      mistakes:
+      - when:
+          fz: 5
+          p:
+          - 1200
+          - 3000
+        say: Over 1100 W the current passes 5 A, so the fuse melts. I = P ÷ 220.
+      - when:
+          fz: 5
+          p:
+          - 100
+          - 1000
+        say: That's safe, but a more powerful one still fits under 5 A.
   items:
   - prompt: An electric iron draws 4 A at 220 V. What is its power, in watts?
     answer: '880'

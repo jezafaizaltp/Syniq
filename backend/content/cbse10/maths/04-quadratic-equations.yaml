@@ -39,6 +39,54 @@ concepts:
       - '6'
     caption: x² + 5x + 6 = (x + 2)(x + 3), so x² + 5x + 6 = 0 when x = −2 or x = −3.
     alt: A rectangle x + 3 wide and x + 2 tall made of x², 3x, 2x and 6, showing x² + 5x + 6 = (x + 2)(x + 3).
+  activity:
+    type: formula
+    prompt: x² + 3x − 40 = (x − 5)(x + 8). Move x and watch both brackets.
+    inputs:
+    - name: x
+      label: x
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: v
+      label: x² + 3x − 40
+      expr: x^2+3*x-40
+    - name: f1
+      label: x − 5
+      expr: x-5
+    - name: f2
+      label: x + 8
+      expr: x+8
+    goals:
+    - prompt: 'Find the positive root: the x that makes x² + 3x − 40 = 0.'
+      want:
+        v: 0
+        x:
+        - 1
+        - 10
+      hint: A product is 0 when one bracket is 0. When is x − 5 = 0?
+      mistakes:
+      - when:
+          x: 8
+        say: 'x = 8 gives 64 + 24 − 40 = 48. The bracket (x + 8) is 0 at x = −8, not 8: a bracket is 0 at minus its number.'
+      - when:
+          x: 4
+        say: 'x = 4 gives −12: still below 0. Look at which bracket can reach 0 for a positive x.'
+    - prompt: Now find the negative root. Could a plot of land be this wide?
+      want:
+        v: 0
+        x:
+        - -10
+        - -1
+      mistakes:
+      - when:
+          x: -5
+        say: x = −5 gives 25 − 15 − 40 = −30. (x − 5) is 0 at +5; the other bracket, (x + 8), gives the negative root.
+      - when:
+          x: 8
+        say: That's positive. The negative root makes (x + 8) = 0.
   items:
   - prompt: Solve x² − 5x + 6 = 0. Give the larger root.
     answer: '3'
@@ -129,6 +177,70 @@ concepts:
       - No real roots
       - Graph never meets the x-axis
     alt: 'The discriminant D = b² − 4ac: positive gives two different roots, zero gives two equal roots, negative gives no real roots.'
+  activity:
+    type: formula
+    prompt: 'For x² + bx + c = 0 the discriminant D = b² − 4c decides the roots: D > 0 two, D = 0 one repeated, D < 0 none.'
+    inputs:
+    - name: b
+      label: b
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    - name: c
+      label: c
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: d
+      label: D = b² − 4c
+      expr: b^2-4*c
+    - name: n
+      label: Real roots
+      expr: 1+(b^2-4*c)/max(abs(b^2-4*c),0.000001)
+    goals:
+    - prompt: Make x² + 6x + c have two equal roots.
+      want:
+        b: 6
+        d: 0
+      hint: 'Equal roots need D = 0: 36 − 4c = 0.'
+      mistakes:
+      - when:
+          b: 6
+          c: -9
+        say: 'D = 36 + 36 = 72: subtracting 4 × (−9) adds 36. For D = 0, 4c must be +36.'
+      - when:
+          b: 6
+          c: 6
+        say: 'D = 36 − 24 = 12, still above 0: two different roots.'
+    - prompt: With b = 4, make the equation have no real roots.
+      want:
+        b: 4
+        n: 0
+      mistakes:
+      - when:
+          b: 4
+          c: 4
+        say: 'D = 16 − 16 = 0: one repeated root, not none. c needs to be a little bigger.'
+      - when:
+          b: 4
+          c:
+          - -10
+          - 3
+        say: D = 16 − 4c is still positive, so the parabola crosses the axis twice. D < 0 needs 4c > 16.
+    - prompt: With c = 5, make two different real roots.
+      want:
+        c: 5
+        n: 2
+      mistakes:
+      - when:
+          c: 5
+          b:
+          - -4
+          - 4
+        say: 'D = b² − 20 is 0 or less here. b² must be more than 20: try a bigger b, either sign.'
   items:
   - prompt: Find the discriminant of x² − 4x + 3.
     answer: '4'

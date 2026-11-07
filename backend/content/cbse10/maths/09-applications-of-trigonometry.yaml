@@ -50,6 +50,70 @@ concepts:
       label: 90°
     caption: tan 60° = h/30, so h = 30√3 ≈ 52 m.
     alt: A tower of height h whose foot is 30 m from a point P on the ground. The angle of elevation from P to the top is 60°, so h = 30√3.
+  activity:
+    type: formula
+    prompt: A tower of height h is seen from d metres away. tan(angle of elevation) = h ÷ d. tan 30° ≈ 0.577, tan 45° = 1, tan 60° ≈ 1.732.
+    inputs:
+    - name: h
+      label: Height h
+      min: 0.5
+      max: 30
+      step: 0.5
+      start: 0.5
+      unit: m
+    - name: d
+      label: Distance d
+      min: 0.5
+      max: 30
+      step: 0.5
+      start: 0.5
+      unit: m
+    outputs:
+    - name: t
+      label: h ÷ d
+      expr: h/d
+      places: 3
+    - name: ls
+      label: Line of sight
+      expr: sqrt(h^2+d^2)
+      unit: m
+      places: 2
+    goals:
+    - prompt: From 15 m away, the top of a tower is at 60° elevation. Make its height.
+      want:
+        d: 15
+        t:
+        - 1.72
+        - 1.74
+      hint: h ÷ 15 = tan 60° = √3.
+      mistakes:
+      - when:
+          d: 15
+          h:
+          - 8.5
+          - 9
+        say: 'That''s 30° (h ÷ d ≈ 0.577). At 60° the tower looks steeper: tan 60° = √3, bigger than 1.'
+      - when:
+          d: 15
+          h: 15
+        say: 'Height equal to distance is 45°. 60° is steeper: the tower must be taller than 15 m.'
+    - prompt: A 10 m pole is seen at 30° elevation. How far away is the observer?
+      want:
+        h: 10
+        t:
+        - 0.57
+        - 0.58
+      mistakes:
+      - when:
+          h: 10
+          d:
+          - 5.5
+          - 6
+        say: 'That''s 60°: you divided by √3 instead of multiplying. A low angle means you''re far away.'
+      - when:
+          h: 10
+          d: 10
+        say: Equal height and distance is 45°. For 30°, stand further back.
   items:
   - prompt: From a point 30 m from the foot of a tower, the angle of elevation of the top is 45°. Find the height in metres.
     answer: '30'

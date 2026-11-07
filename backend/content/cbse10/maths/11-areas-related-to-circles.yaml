@@ -50,6 +50,72 @@ concepts:
       label: 90°
     caption: 'A 90° sector is 90/360 = 1/4 of the circle: area πr²/4, arc 2πr/4.'
     alt: A circle with centre O and two radii OA and OB at 90° to each other, marking off a quarter-circle sector.
+  activity:
+    type: formula
+    prompt: A sector of radius r and angle θ. Arc = (θ/360) × 2πr; area = (θ/360) × πr².
+    inputs:
+    - name: r
+      label: Radius r
+      min: 1
+      max: 21
+      step: 1
+      start: 1
+      unit: cm
+    - name: t
+      label: Angle θ
+      min: 0
+      max: 360
+      step: 5
+      start: 0
+      unit: °
+    outputs:
+    - name: arc
+      label: Arc length
+      expr: t/360*2*pi*r
+      unit: cm
+      places: 2
+    - name: minor
+      label: Sector area
+      expr: t/360*pi*r^2
+      unit: cm²
+      places: 2
+    - name: major
+      label: The rest of the circle
+      expr: (360-t)/360*pi*r^2
+      unit: cm²
+      places: 2
+    goals:
+    - prompt: A clock's minute hand is 14 cm long. Find the area it sweeps in 5 minutes.
+      want:
+        r: 14
+        minor:
+        - 51
+        - 51.5
+      hint: The hand turns 360° in 60 minutes. How many degrees in 5 minutes?
+      mistakes:
+      - when:
+          r: 14
+          t: 5
+        say: '5 minutes isn''t 5°. The minute hand turns 360° in 60 minutes: 6° every minute.'
+      - when:
+          r: 14
+          t: 60
+        say: '60° is 10 minutes of turning: the hand goes 6° a minute.'
+    - prompt: A 21 cm pendulum swings through an arc 22 cm long. Find the angle.
+      want:
+        r: 21
+        arc:
+        - 21.9
+        - 22.1
+      mistakes:
+      - when:
+          r: 21
+          t: 20
+        say: The arc is a length, not an angle. θ/360 of the whole edge (2π × 21 ≈ 132 cm) must be 22 cm.
+      - when:
+          r: 21
+          t: 120
+        say: 120° sweeps a third of the edge, 44 cm. 22 cm is a sixth.
   items:
   - prompt: Find the area of a sector of angle 90° in a circle of radius 14 cm. Use π = 22/7. Answer in cm².
     answer: '154'
@@ -129,6 +195,56 @@ concepts:
     - Triangle = 1/2 × 14 × 14 = 98 cm²
     - Segment = 154 − 98 = 56 cm²
     alt: 'Finding the area of a 90° segment of a circle of radius 14 cm: the sector is 154, the triangle 98, so the segment is 56 square cm.'
+  activity:
+    type: formula
+    prompt: A chord subtends 90° at the centre. Minor segment = sector − triangle = πr²/4 − r²/2.
+    inputs:
+    - name: r
+      label: Radius r
+      min: 1
+      max: 21
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: sec
+      label: Sector (quarter circle)
+      expr: pi*r^2/4
+      unit: cm²
+      places: 2
+    - name: tri
+      label: Triangle OAB
+      expr: r^2/2
+      unit: cm²
+      places: 2
+    - name: seg
+      label: Minor segment
+      expr: pi*r^2/4-r^2/2
+      unit: cm²
+      places: 2
+    goals:
+    - prompt: Make the minor segment about 56 cm².
+      want:
+        seg:
+        - 55.5
+        - 56.5
+      hint: The segment is about 0.285 × r².
+      mistakes:
+      - when:
+          r: 8
+        say: 'At r = 8 the sector is about 50 cm², but the segment is the sector minus the triangle: only about 18 cm².'
+      - when:
+          r: 11
+        say: At r = 11 the triangle alone is 60.5 cm². The segment is the small piece between the chord and the arc.
+    - prompt: Make the minor segment about 28.5 cm².
+      want:
+        seg:
+        - 28
+        - 29
+      mistakes:
+      - when:
+          r: 6
+        say: 'At r = 6 the whole quarter-circle sector is about 28.3 cm², but the segment is the sector minus the triangle: just 10.3 cm².'
   items:
   - prompt: Find the area of the minor segment of a circle of radius 14 cm cut off by a 90° angle at the centre. Use π = 22/7. Answer in cm².
     answer: '56'

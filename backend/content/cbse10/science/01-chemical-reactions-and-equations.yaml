@@ -31,6 +31,91 @@ concepts:
     - 'Now H: 2 on the left, 4 on the right'
     - 'Put 2 before H₂: 2H₂ + O₂ → 2H₂O, balanced'
     alt: 'Balancing hydrogen and oxygen making water: first fix the oxygen by writing 2H2O, then fix the hydrogen by writing 2H2.'
+  activity:
+    type: formula
+    prompt: Balance CH₄ + O₂ → CO₂ + H₂O by choosing how many of each molecule. Never change the formulas.
+    inputs:
+    - name: a
+      label: CH₄
+      min: 1
+      max: 6
+      step: 1
+      start: 1
+    - name: b
+      label: O₂
+      min: 1
+      max: 6
+      step: 1
+      start: 1
+    - name: c
+      label: CO₂
+      min: 1
+      max: 6
+      step: 1
+      start: 1
+    - name: d
+      label: H₂O
+      min: 1
+      max: 6
+      step: 1
+      start: 1
+    outputs:
+    - name: dc
+      label: 'C atoms: left − right'
+      expr: a-c
+    - name: dh
+      label: 'H atoms: left − right'
+      expr: 4*a-2*d
+    - name: do
+      label: 'O atoms: left − right'
+      expr: 2*b-(2*c+d)
+    - name: tot
+      label: Molecules in all
+      expr: a+b+c+d
+    goals:
+    - prompt: Balance it with the smallest whole numbers.
+      want:
+        dc: 0
+        dh: 0
+        do: 0
+        tot: 6
+      hint: 'Balance C, then H, and leave O until last: count the O atoms on the right.'
+      mistakes:
+      - when:
+          a: 1
+          b: 1
+          c: 1
+          d: 2
+        say: C and H balance, but the right has 2 + 2 = 4 oxygen atoms and one O₂ gives only 2.
+      - when:
+          a: 2
+          b: 4
+          c: 2
+          d: 4
+        say: Balanced, but every number can be halved. Use the smallest whole numbers.
+      - when:
+          a: 1
+          b: 2
+          c: 1
+          d: 1
+        say: One H₂O has only 2 H, but CH₄ has 4. Hydrogen doesn't balance.
+    - prompt: Burn 2 molecules of methane and keep it balanced.
+      want:
+        a: 2
+        dc: 0
+        dh: 0
+        do: 0
+      mistakes:
+      - when:
+          a: 2
+          b: 2
+          c: 2
+          d: 4
+        say: 'Doubling the methane doubles the oxygen it needs too: count the O on the right.'
+      - when:
+          a: 2
+          c: 1
+        say: 2 CH₄ have 2 carbon atoms, so 2 CO₂ must come out.
   items:
   - prompt: Which of these shows that a chemical reaction has happened?
     options:
@@ -133,6 +218,51 @@ concepts:
       - 'Double displacement: AB + CD → AD + CB'
       - Na₂SO₄ + BaCl₂ → BaSO₄ + 2NaCl
     alt: 'Two columns of reaction types: joining and splitting (combination and decomposition), and swapping (displacement and double displacement), each with an example.'
+  activity:
+    type: sort
+    prompt: What type of reaction is each one?
+    bins:
+    - Combination
+    - Decomposition
+    - Displacement
+    - Double displacement
+    items:
+    - label: CaO + H₂O → Ca(OH)₂
+      bin: Combination
+      clue: How many products are made?
+      why: 'Two substances join into one: combination (slaking lime, which gets hot).'
+    - label: CaCO₃ → CaO + CO₂ on heating
+      bin: Decomposition
+      clue: How many substances do you start with?
+      why: 'One substance breaks into two on heating: thermal decomposition.'
+    - label: Fe + CuSO₄ → FeSO₄ + Cu
+      bin: Displacement
+      clue: Does one element push another out of its compound?
+      why: 'More reactive iron pushes copper out: displacement.'
+    - label: Na₂SO₄ + BaCl₂ → BaSO₄ + 2NaCl
+      bin: Double displacement
+      clue: Do the two compounds swap partners?
+      why: 'The ions swap partners and white BaSO₄ precipitates: double displacement.'
+    - label: 2AgCl → 2Ag + Cl₂ in sunlight
+      bin: Decomposition
+      clue: Is one thing breaking apart, using light?
+      why: 'Light splits silver chloride: photolytic decomposition.'
+    - label: 2Mg + O₂ → 2MgO
+      bin: Combination
+      clue: How many products?
+      why: 'Magnesium and oxygen join into one product: combination.'
+    - label: Zn + H₂SO₄ → ZnSO₄ + H₂
+      bin: Displacement
+      clue: Is an element replacing another in a compound?
+      why: 'Zinc pushes hydrogen out of the acid: displacement.'
+    - label: Water split by electricity into H₂ and O₂
+      bin: Decomposition
+      clue: One substance or two at the start?
+      why: 'Electricity breaks water into two gases: electrolytic decomposition.'
+    - label: AgNO₃ + NaCl → AgCl + NaNO₃
+      bin: Double displacement
+      clue: 'Two compounds in, two out: did they swap?'
+      why: 'Ag and Na swap partners: double displacement.'
   items:
   - prompt: CaO + H₂O → Ca(OH)₂ is which type of reaction?
     options:

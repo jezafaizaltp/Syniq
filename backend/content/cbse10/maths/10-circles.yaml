@@ -55,6 +55,39 @@ concepts:
       label: 90°
     caption: The radius OP meets the tangent at P at a right angle, so OQ² = OP² + PQ².
     alt: A circle with centre O and a tangent line touching it at P. The radius OP is perpendicular to the tangent, making a right triangle OPQ.
+  activity:
+    type: angle
+    prompt: Turn the arm to make each angle in a circle with tangents.
+    goals:
+    - prompt: Make the angle between a radius and the tangent at its point of contact.
+      degrees: 90
+      mistakes:
+      - when:
+          degrees: 180
+        say: 180° would make the tangent run along the radius, into the circle. The tangent touches at right angles to the radius.
+      - when:
+          degrees:
+          - 45
+          - 60
+        say: 'Too narrow: the tangent would cut into the circle. It meets the radius at a right angle.'
+    - prompt: Tangents PA and PB meet at P with ∠APB = 80°. Make ∠AOB at the centre.
+      degrees: 100
+      mistakes:
+      - when:
+          degrees: 80
+        say: 'Not equal: OAPB has right angles at A and B, so ∠AOB + ∠APB = 360° − 180° = 180°.'
+      - when:
+          degrees: 280
+        say: 280° is the reflex angle round the other side. Inside OAPB, ∠AOB and ∠APB add to 180°.
+    - prompt: PA is a tangent and OA a radius. ∠OPA = 30°. Make ∠AOP.
+      degrees: 60
+      mistakes:
+      - when:
+          degrees: 90
+        say: The 90° is at A, where radius meets tangent. The three angles of triangle OAP add to 180°.
+      - when:
+          degrees: 30
+        say: 30° is at P. At O it's what's left from 180° after 90° and 30°.
   items:
   - prompt: How many tangents can be drawn to a circle from a point outside it?
     options:
@@ -176,6 +209,60 @@ concepts:
       label: 90°
     caption: 'PA = PB: tangents from the same outside point are equal, and OP bisects the angle APB.'
     alt: A circle with centre O and two tangents PA and PB from an outside point P. The radii OA and OB meet the tangents at right angles, and PA equals PB.
+  activity:
+    type: formula
+    prompt: A tangent from P touches the circle at A. Radius OA ⊥ PA, so OA² + PA² = OP².
+    inputs:
+    - name: r
+      label: Radius OA
+      min: 1
+      max: 15
+      step: 1
+      start: 1
+      unit: cm
+    - name: op
+      label: Distance OP
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: t
+      label: Tangent length PA (= PB)
+      expr: sqrt(max(0,op^2-r^2))
+      unit: cm
+      places: 2
+    goals:
+    - prompt: P is 13 cm from the centre and the tangent PA is 12 cm. Find the radius.
+      want:
+        op: 13
+        t: 12
+      hint: r² + 12² = 13².
+      mistakes:
+      - when:
+          op: 13
+          r: 1
+        say: '13 − 12 = 1 subtracts lengths, but OA and PA meet at a right angle: r² + 12² = 13².'
+      - when:
+          op: 13
+          r: 12
+        say: 12 is the tangent, not the radius. The radius is the other short side of the right triangle.
+    - prompt: The radius is 6 cm and the tangent is 8 cm. How far is P from the centre?
+      want:
+        r: 6
+        t: 8
+      mistakes:
+      - when:
+          r: 6
+          op: 14
+        say: '6 + 8 = 14 adds the two sides, but OP is the hypotenuse: √(6² + 8²).'
+      - when:
+          r: 6
+          op:
+          - 1
+          - 6
+        say: P must be outside the circle, further than the radius, or there is no tangent from it.
   items:
   - prompt: From a point P, two tangents PA and PB are drawn. PA = 7 cm. Find PB in cm.
     answer: '7'
