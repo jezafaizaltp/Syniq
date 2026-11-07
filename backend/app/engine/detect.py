@@ -2,9 +2,11 @@
 
 Two kinds of support mode:
 
-- Chosen: screen_reader, visual_first, tap_to_answer. These depend on sight,
-  hearing or speech, which answers can't reveal, so a parent (or the student)
-  switches them on.
+- Chosen: screen_reader, visual_first, tap_to_answer, calm, motor. These
+  depend on sight, hearing, speech, movement or how a child copes with change,
+  which answers can't reveal, so a parent (or the student) switches them on.
+  calm = a predictable lesson: a picture plan, no surprise activities, no
+  movement. motor = big targets, keyboard/switch friendly, nothing to type.
 - Noticed: focus, easy_read, small_steps. SYNiq turns these on by itself when
   the pattern in the student's answers is clear, tells the student why, and
   lets them switch it off. Once switched off, SYNiq never turns it back on.
@@ -24,7 +26,7 @@ from ..i18n import t, translate_english
 
 DETECT_VERSION = "2026.10-1"
 
-CHOSEN = ["screen_reader", "visual_first", "tap_to_answer"]
+CHOSEN = ["screen_reader", "visual_first", "tap_to_answer", "calm", "motor"]
 NOTICED = ["focus", "easy_read", "small_steps"]
 
 MIN_ATTEMPTS = 10  # nothing is noticed before this many answers

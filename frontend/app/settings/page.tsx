@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CHOSEN_SUPPORT, Settings } from "@/lib/api";
+import { CHOSEN_SUPPORT, READING_TINTS, Settings } from "@/lib/api";
 import { Key, LANGS, isLang } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 import { ChangePassword } from "../password";
@@ -29,6 +29,7 @@ export default function SettingsPage() {
   const toggles: [keyof Settings, Key, Key][] = [
     ["high_contrast", "settings.high_contrast", "settings.high_contrast_help"],
     ["dyslexia_font", "settings.easy_text", "settings.easy_text_help"],
+    ["wide_spacing", "settings.wide_spacing", "settings.wide_spacing_help"],
     ["reduced_motion", "settings.motion", "settings.motion_help"],
     ["read_aloud", "settings.read_aloud", "settings.read_aloud_help"],
     ["extra_time", "settings.extra_time", "settings.extra_time_help"],
@@ -76,6 +77,15 @@ export default function SettingsPage() {
           value={s.font_scale ?? 1}
           onChange={(e) => change({ font_scale: Number(e.target.value) })}
         />
+        <label htmlFor="tint">{t("settings.tint")}</label>
+        <select id="tint" value={s.reading_tint ?? "none"} onChange={(e) => change({ reading_tint: e.target.value as Settings["reading_tint"] })}>
+          {READING_TINTS.map((k) => (
+            <option key={k} value={k}>
+              {t(`settings.tint.${k}` as Key)}
+            </option>
+          ))}
+        </select>
+        <p className="muted">{t("settings.tint_help")}</p>
         {toggles.map(([key, title, help]) => (
           <div key={key} style={{ marginTop: 12 }}>
             <label className="check">

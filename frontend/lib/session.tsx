@@ -44,7 +44,13 @@ function applySettings(s: Settings | undefined) {
   root.style.setProperty("--font-scale", String(s?.font_scale ?? 1));
   root.dataset.contrast = s?.high_contrast ? "high" : "normal";
   root.dataset.font = s?.dyslexia_font || effectiveSupport(s).includes("easy_read") ? "dyslexia" : "default";
-  root.dataset.motion = s?.reduced_motion ? "reduced" : "full";
+  const support = effectiveSupport(s);
+  // A calm lesson never moves on its own, whatever the motion setting says.
+  root.dataset.motion = s?.reduced_motion || support.includes("calm") ? "reduced" : "full";
+  root.dataset.tint = s?.reading_tint ?? "none";
+  root.dataset.spacing = s?.wide_spacing ? "wide" : "normal";
+  root.dataset.motor = support.includes("motor") ? "on" : "off";
+  root.dataset.calm = support.includes("calm") ? "on" : "off";
 }
 
 function applyAge(band: AgeBand | undefined) {
@@ -149,5 +155,14 @@ export function speak(text: string, lang = /[\u0D00-\u0D7F]/.test(text) ? "ml-IN
   const u = new SpeechSynthesisUtterance(text);
   u.lang = lang;
   u.rate = 0.95;
+  // Tell any <ReadAlong> showing this text which word is being read, so it can highlight it.
+  const say = (char: number) => window.dispatchEvent(new CustomEvent<SpeakingDetail>("syniq-speaking", { detail: { text, char } }));
+  u.onboundary = (e) => {
+    if (e.name === "word" || e.name === undefined) say(e.charIndex);
+  };
+  u.onend = () => say(-1);
+  u.onerror = () => say(-1);
   window.speechSynthesis.speak(u);
 }
+
+export type SpeakingDetail = { text: string; char: number };

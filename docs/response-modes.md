@@ -24,13 +24,34 @@ SYNiq switches these on by itself when a student's answers show a clear pattern 
 
 ### Chosen by a parent (or the student)
 
-Sight, hearing and speech can't be read from answers, so a parent ticks them on the parent page. The student can also set them in Settings.
+Sight, hearing, speech, movement and how a child copes with change can't be read from answers, so a parent ticks them on the parent page ("Help you can switch on"). The student can also set them in Settings. None of them is a label: each says what helps.
 
 | Mode | Shown as | What changes |
 | --- | --- | --- |
 | `screen_reader` | Uses a screen reader or finds pictures hard to see | Pictures are replaced by the same meaning in words ("10 stars plus 10 stars makes 20"), read aloud |
 | `visual_first` | Is deaf or hard of hearing | Nothing depends on sound; picture explanations are chosen first |
 | `tap_to_answer` | Taps answers instead of typing or speaking | Number questions show four answers to tap, built from likely mistakes |
+| `calm` | Likes calm lessons that go the same way every time | A picture plan (Learn, Practise, Finish) with the time chosen; no surprise brain teasers or spot-the-mistake; nothing moves; the lesson never changes shape without warning |
+| `motor` | Finds tapping, typing or keeping a hand steady hard | Bigger buttons with more space; number questions become answers to tap; on a keyboard or switch, keys 1 to 9 pick an answer, Enter checks it, and the Next button takes focus so one press moves on |
+
+These often help autistic children (`calm`) and children with cerebral palsy or other movement difficulties (`motor`), but SYNiq never says so: they are offered to anyone they help.
+
+### Reading help for everyone (Settings)
+
+- **Easier-to-read text**: a rounder font (Lexend) with more space.
+- **More space between letters and lines**: wider letter, word and line spacing.
+- **Page colour**: cream, soft blue, green or pink instead of white. Some readers find this easier; it is a comfort setting, not a treatment.
+- **Read-along**: whenever SYNiq reads a lesson or question aloud, the word being read is highlighted, so the child can follow. Works in browsers that report word positions (Chrome, Edge, Safari); others just read without the highlight.
+
+### A gentle note for parents (never a label)
+
+Owner's choice, 2026-11-07. SYNiq never tells anyone a child might have dyslexia, ADHD, autism or any other condition: it can't know, and a wrong guess harms. But when a child has kept finding the work hard for weeks, even after SYNiq changed how it teaches, the parent sees one calm note: there may be a simple reason (eyesight, hearing, or the way a child takes in reading, numbers or instructions), a free check is available at the government District Early Intervention Centre (DEIC, RBSK) at the district hospital, the school or a children's doctor, and SYNiq doesn't diagnose anything.
+
+The rule (`backend/app/engine/checkup.py`), all of it needed: at least 80 answers spread over at least 28 days; then in the last 28 days either fewer than half right, or SYNiq has turned on two or more kinds of help and the child is stuck on 3 or more topics. It never uses answer speed, mood check-ins or puzzles. The child never sees the note. The parent can hide it; it stays hidden for 180 days (kept on the parent's account, not the child's). A test checks the note's words never name a condition.
+
+### Screen-reader check (2026-11-07)
+
+Every page (sign-in, sign-up, home, subjects, chapters, check-in, brain teaser, lesson, question, answer feedback, My space, Explore, Settings, parent, family, baby, early years, pregnancy, teacher, admin, results, audit, specialist) was checked with axe-core (WCAG 2.2 AA plus best practice) in light and dark mode, and with calm, movement and reading settings on. Fixes: the lesson screens now have a main heading for screen readers; two colours in dark mode were too faint. A check by a real screen-reader user (TalkBack on Android, NVDA on Windows) is still worth doing before the pilot.
 
 ## Answer-driven modes (picked automatically)
 

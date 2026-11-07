@@ -17,6 +17,8 @@ export type Settings = {
   reduced_motion?: boolean;
   read_aloud?: boolean;
   extra_time?: boolean;
+  reading_tint?: (typeof READING_TINTS)[number];
+  wide_spacing?: boolean;
   preferred_style?: string | null;
   ui_language?: Lang;
   support_modes?: string[];
@@ -25,8 +27,11 @@ export type Settings = {
   hindi_course?: "a" | "b";
 };
 
-/** Support for sight, hearing or speech: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
-export const CHOSEN_SUPPORT = ["screen_reader", "visual_first", "tap_to_answer"] as const;
+/** Support for sight, hearing, speech, movement or a calm routine: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
+export const CHOSEN_SUPPORT = ["screen_reader", "visual_first", "tap_to_answer", "calm", "motor"] as const;
+
+/** Soft page colours some readers find easier than white. Words: settings.tint.<key>. */
+export const READING_TINTS = ["none", "cream", "blue", "green", "rose"] as const;
 
 /** Support SYNiq turns on itself when a student's answers show it helps. Words: noticed.<key> in i18n.ts. */
 export const NOTICED_SUPPORT = ["focus", "easy_read", "small_steps"] as const;
