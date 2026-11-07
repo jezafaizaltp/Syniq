@@ -228,6 +228,8 @@ class Concept(Base):
     order: Mapped[int] = mapped_column(Integer, default=0)
     # Teacher-written summary of what the textbook says. Grounds AI drafts and the tutor.
     notes: Mapped[str] = mapped_column(Text, default="")
+    # A hands-on activity to explore the topic (app/activities.py), or None.
+    activity: Mapped[dict | None] = mapped_column(JSON(none_as_null=True), nullable=True)
 
 
 class ConceptPrereq(Base):

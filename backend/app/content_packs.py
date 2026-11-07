@@ -33,6 +33,7 @@ from .models import (
     Misconception,
     Subject,
 )
+from .activities import check_activity
 from .pictures import check_picture
 
 CONTENT_DIR = Path(__file__).resolve().parent.parent / "content"
@@ -114,6 +115,8 @@ def check_pack(pack: dict, known_tags: set[str] | None = None) -> list[str]:
                 errors.append(f"{where}: unknown explanation style '{style}'")
         if "picture" in c:
             errors += [f"{where}: {e}" for e in check_picture(c["picture"])]
+        if "activity" in c:
+            errors += [f"{where}: {e}" for e in check_activity(c["activity"])]
         levels = {i.get("difficulty") for i in c.get("items") or []}
         if not {1, 2} <= levels:
             errors.append(f"{where}: needs questions at difficulty 1 and 2")
@@ -245,6 +248,7 @@ def load(db: DbSession, packs: list[tuple[Path, dict]]) -> dict:
                 db.add(concept)
                 counts["concepts"] += 1
             concept.chapter_id, concept.title, concept.order, concept.notes = chapter.id, c["title"], order, c["notes"].strip()
+            concept.activity = c.get("activity")
             db.flush()
             concepts[c["code"]] = concept
             counts["explanations"] += _load_explanations(db, concept, c["explanations"], c.get("picture"))

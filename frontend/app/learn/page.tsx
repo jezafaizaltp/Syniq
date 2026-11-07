@@ -8,7 +8,7 @@ import { ageBand, readsAloud } from "@/lib/age";
 import { speak, useSession } from "@/lib/session";
 
 /** Count a help button press: one of the signs SYNiq uses to notice what helps. */
-function helpPressed(kind: "read_aloud" | "break") {
+function helpPressed(kind: "read_aloud" | "break" | "activity") {
   post("/learn/events", { kind }).catch(() => undefined);
 }
 import Check, { CheckState } from "./Check";
@@ -16,6 +16,7 @@ import Feedback, { AdaptiveResponse } from "./Feedback";
 import Mistake from "./Mistake";
 import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
+import Activity, { type ActivitySpec } from "./Activity";
 import Notes from "./Notes";
 import ReadAlong from "./ReadAlong";
 import Tutor from "./Tutor";
@@ -85,6 +86,7 @@ type Step = {
   styles?: string[];
   item?: Item | null;
   method_why?: "history" | "similar" | "everyone";
+  activity?: ActivitySpec | null;
 };
 type Result = {
   correct: boolean;
@@ -399,6 +401,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const [hints, setHints] = useState<string[]>([]);
   const [result, setResult] = useState<Result | null>(null);
   const [showWhy, setShowWhy] = useState(false);
+  const [showActivity, setShowActivity] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
   const [error, setError] = useState("");
   const conceptRef = useRef<number | null>(null);
@@ -434,6 +437,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       setHints([]);
       setResult(null);
       setShowWhy(false);
+      setShowActivity(false);
       startedRef.current = Date.now();
       if (readAloud) speak(s.explanation?.body ?? s.item?.prompt ?? s.reason);
       requestAnimationFrame(() => headingRef.current?.focus());
@@ -771,6 +775,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                   </button>
                 )}
               </div>
+              {step.activity && <Activity key={step.decision_id} spec={step.activity} onDone={() => helpPressed("activity")} />}
               <div className="row" style={{ marginTop: 16 }}>
                 <button onClick={next}>{t("learn.ready")}</button>
               </div>
@@ -794,6 +799,12 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
               >
                 🔊
               </button>
+              {step.activity && (
+                <button className="secondary try-it" aria-expanded={showActivity} onClick={() => setShowActivity(!showActivity)}>
+                  <span aria-hidden="true">🧪</span> {showActivity ? t("act.hide") : t("act.open")}
+                </button>
+              )}
+              {showActivity && step.activity && <Activity key={step.decision_id} spec={step.activity} onDone={() => helpPressed("activity")} />}
               <form onSubmit={submit} style={{ marginTop: 12 }}>
                 {step.item.kind === "mcq" || step.item.choices?.length ? (
                   <>

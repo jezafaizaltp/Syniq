@@ -107,6 +107,8 @@ def learn_next(
         "reason": i18n.translate_english(lang, action.reason),
         "concept": {"id": concept.id, "title": concept.title} if concept else None,
         "offer_support": action.offer_support,
+        # Something to explore with their hands. Offered with the explanation and any time during practice.
+        "activity": concept.activity if concept else None,
     }
     if action.kind == "explain" and concept:
         exp = learning.get_explanation(db, concept.id, action.style or "text")
@@ -283,7 +285,7 @@ def submit_attempt(
 
 
 class EventIn(BaseModel):
-    kind: str = Field(pattern="^(read_aloud|break)$")
+    kind: str = Field(pattern="^(read_aloud|break|activity)$")
 
 
 @router.post("/learn/events")
