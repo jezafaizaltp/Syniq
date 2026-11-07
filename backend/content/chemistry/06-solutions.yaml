@@ -25,6 +25,37 @@ concepts:
       visual: "Picture sugar crystals breaking up into particles too small to see, spreading evenly between the water particles."
       step_by_step: "Identify the parts of salt water: Step 1: Salt dissolves: solute. Step 2: Water does the dissolving: solvent. Step 3: Salt water: solution. Step 4: Water is the solvent, so it is an aqueous solution."
       real_world: "The ORS given to children with diarrhoea is a solution of salt and sugar in water, made in exact amounts."
+    activity:
+      type: sort
+      prompt: Solute (what dissolves) or solvent (what it dissolves in)?
+      bins:
+      - Solute
+      - Solvent
+      items:
+      - label: Salt in salt water
+        bin: Solute
+        clue: Which is there in the smaller amount, and dissolves?
+        why: 'Salt is what dissolves: the solute.'
+      - label: Water in salt water
+        bin: Solvent
+        clue: Which does the dissolving?
+        why: 'Water does the dissolving: the solvent.'
+      - label: Sugar in sugar syrup
+        bin: Solute
+        clue: Which dissolves?
+        why: 'Sugar dissolves: the solute.'
+      - label: Water in sugar syrup
+        bin: Solvent
+        clue: Which does the dissolving?
+        why: 'Water: the solvent.'
+      - label: Iodine in tincture of iodine
+        bin: Solute
+        clue: Which dissolves?
+        why: 'Iodine dissolves: the solute.'
+      - label: Alcohol in tincture of iodine
+        bin: Solvent
+        clue: Which does the dissolving?
+        why: 'Alcohol dissolves the iodine: the solvent.'
     items:
       - prompt: "In a solution of sugar in water, what is the solute?"
         options: ["Sugar", "Water", "Sugar water", "Air"]
@@ -79,6 +110,53 @@ concepts:
       visual: "Picture a 100-bead necklace with 20 red beads (solute) and 80 white (solvent): 20% red. Add 100 more white beads: still 20 red, now out of 200, 10%."
       step_by_step: "Mass % of 15 g salt in 135 g water: Step 1: Solution = 15 + 135 = 150 g. Step 2: 15 ÷ 150 = 0.1. Step 3: × 100 = 10%."
       real_world: "Saline drips in hospitals are about 0.9% salt; too strong or too weak would harm blood cells."
+    activity:
+      type: formula
+      prompt: Mass percentage = solute mass ÷ solution mass × 100.
+      inputs:
+      - name: s
+        label: Solute
+        min: 0
+        max: 50
+        step: 5
+        start: 0
+        unit: g
+      - name: w
+        label: Water
+        min: 50
+        max: 300
+        step: 5
+        start: 100
+        unit: g
+      outputs:
+      - name: m
+        label: Solution mass
+        expr: s+w
+        unit: g
+      - name: c
+        label: Concentration
+        expr: 100*s/(s+w)
+        unit: '%'
+        places: 1
+      goals:
+      - prompt: Make a 20% solution with 25 g of salt.
+        want:
+          c: 20
+          s: 25
+        mistakes:
+        - when:
+            s: 25
+            w: 125
+          say: '25 g in 125 g of water makes 150 g of solution: about 17%. The percentage is out of the whole solution, salt and water together.'
+      - prompt: Make a 10% solution weighing 200 g.
+        want:
+          c: 10
+          m: 200
+        mistakes:
+        - when:
+            s: 20
+            w: 200
+          say: '20 g in 200 g of water makes 220 g of solution: about 9.1%. The 200 g is the whole solution, salt and water together.'
     items:
       - prompt: "20 g of sugar is dissolved in 80 g of water. What is the mass percentage of sugar?"
         answer: "20"
@@ -135,6 +213,51 @@ concepts:
       visual: "Draw a graph with temperature across and solubility up. Most salts make rising lines; a gas like oxygen makes a falling line."
       step_by_step: "Solubility of a salt is 40 g per 100 g water. How much saturates 250 g of water? Step 1: 250 ÷ 100 = 2.5. Step 2: 40 × 2.5 = 100 g."
       real_world: "Fish in warm ponds can gasp for air on hot days: warm water holds less dissolved oxygen. Soda goes flat faster when warm."
+    activity:
+      type: formula
+      prompt: At 25 °C, 100 g of water can dissolve at most 36 g of salt.
+      inputs:
+      - name: s
+        label: Salt added
+        min: 0
+        max: 50
+        step: 1
+        start: 0
+        unit: g
+      outputs:
+      - name: d
+        label: Dissolved
+        expr: min(s,36)
+        unit: g
+      - name: u
+        label: Left at the bottom
+        expr: max(0,s-36)
+        unit: g
+      goals:
+      - prompt: Make a saturated solution with nothing left over.
+        want:
+          d: 36
+          u: 0
+        mistakes:
+        - when:
+            u:
+            - 1
+            - 14
+          say: 'Some salt is lying at the bottom: you added more than 100 g of water can dissolve. It is saturated, but with extra left over.'
+        - when:
+            d:
+            - 1
+            - 35
+          say: 'All of it dissolved, and more still could. That''s unsaturated: the water hasn''t taken all it can.'
+      - prompt: Make an unsaturated solution.
+        want:
+          d:
+          - 1
+          - 35
+        mistakes:
+        - when:
+            d: 36
+          say: 'That''s as much as the water can hold: saturated. Unsaturated means it could still dissolve more.'
     items:
       - prompt: "A solution in which no more solute can dissolve at that temperature is called:"
         options: ["Saturated", "Unsaturated", "Dilute", "Colloidal"]
@@ -191,6 +314,38 @@ concepts:
       visual: "Draw three beakers side by side: clear with a torch beam invisible; cloudy-white with the beam showing; muddy with sediment at the bottom."
       step_by_step: "Classify starch in water: Step 1: It looks uniform. Step 2: A torch beam shows clearly: Tyndall effect. Step 3: It does not settle. Step 4: It is a colloid."
       real_world: "Sunbeams through the trees on a misty morning in Munnar show the Tyndall effect: fog is a colloid scattering the light."
+    activity:
+      type: sort
+      prompt: True solution, colloid or suspension?
+      bins:
+      - True solution
+      - Colloid
+      - Suspension
+      items:
+      - label: Salt water
+        bin: True solution
+        clue: Does anything settle? Can you see the salt?
+        why: 'The salt is spread as single particles you can''t see: a true solution.'
+      - label: Sugar water
+        bin: True solution
+        clue: Does anything settle? Can you see the sugar?
+        why: 'Invisible, never settles: a true solution.'
+      - label: Milk
+        bin: Colloid
+        clue: It doesn't settle, but can you see through it?
+        why: 'Tiny fat drops stay spread out and scatter light: a colloid.'
+      - label: Fog
+        bin: Colloid
+        clue: Does it settle? Does it scatter a torch beam?
+        why: 'Tiny water drops stay spread in air and scatter light: a colloid.'
+      - label: Muddy water
+        bin: Suspension
+        why: 'The mud settles if left alone: a suspension.'
+        clue: What happens if you leave it for an hour?
+      - label: Chalk powder in water
+        bin: Suspension
+        clue: What happens if you leave it?
+        why: 'The chalk settles at the bottom: a suspension.'
     items:
       - prompt: "Which of these shows the Tyndall effect?"
         options: ["Milk diluted with water", "Salt solution", "Sugar solution", "Copper sulphate solution"]

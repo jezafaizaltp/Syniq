@@ -45,19 +45,36 @@ concepts:
     - from: -10
       to: 0
       label: Below freezing
+      says: Water at this temperature is frozen into ice.
     - from: 0
       to: 100
       label: Liquid water
+      says: Between 0 °C and 100 °C, water is a liquid.
     - from: 100
       to: 110
       label: Above boiling
+      says: Above 100 °C, water has boiled into steam.
     goals:
     - prompt: Ice melts at this temperature. Set it.
       value: 0
+      mistakes:
+      - when:
+          v: 100
+        say: 100 °C is where water boils. Ice melts at a much colder temperature.
     - prompt: Normal body temperature is about this. Set it.
       value: 37
+      mistakes:
+      - when:
+          v:
+          - 40
+          - 45
+        say: That's a high fever, not normal body temperature.
     - prompt: Water boils here (at sea level).
       value: 100
+      mistakes:
+      - when:
+          v: 0
+        say: 0 °C is where ice melts. Water boils much hotter.
   items:
   - prompt: What is the normal temperature of the human body (in °C, about)?
     answer: '37'
@@ -155,14 +172,20 @@ concepts:
     - from: 35
       to: 37.5
       label: Normal
+      says: A healthy body is about 37 °C.
     - from: 37.5
       to: 42
       label: Fever
+      says: 'Above about 37.5 °C the body is fighting an illness: a fever.'
     goals:
     - prompt: Set it to 37.0 °C.
       value: 37
     - prompt: Ravi has a fever of 38.6 °C. Set it.
       value: 38.6
+      mistakes:
+      - when:
+          v: 38
+        say: 38.0 is six small steps short. Each small step is 0.1 °C.
     - prompt: Set any temperature that shows a fever.
       zone: Fever
   items:

@@ -25,6 +25,37 @@ concepts:
       visual: "Draw two people passing a ball. The one who hands it over is oxidised (loses); the one who catches it is reduced (gains). Remember OIL RIG."
       step_by_step: "Zn + Cu²⁺ → Zn²⁺ + Cu: Step 1: Zn becomes Zn²⁺, losing 2 electrons: oxidised. Step 2: Cu²⁺ becomes Cu, gaining 2 electrons: reduced."
       real_world: "Rusting of iron is oxidation: iron loses electrons to oxygen in the presence of water. Painting or oiling iron keeps oxygen and water away."
+    activity:
+      type: sort
+      prompt: Oxidation (losing electrons) or reduction (gaining electrons)?
+      bins:
+      - Oxidation
+      - Reduction
+      items:
+      - label: Na → Na⁺ + e⁻
+        bin: Oxidation
+        clue: Which side is the electron (e⁻) on?
+        why: 'The electron is given out on the right: sodium loses it, oxidation.'
+      - label: Cl₂ + 2e⁻ → 2Cl⁻
+        bin: Reduction
+        clue: Which side are the electrons on?
+        why: 'Electrons are taken in on the left: chlorine gains them, reduction.'
+      - label: Fe²⁺ → Fe³⁺ + e⁻
+        bin: Oxidation
+        clue: Does the charge go up or down? Where is the e⁻?
+        why: 'The charge goes up as an electron is lost: oxidation.'
+      - label: Cu²⁺ + 2e⁻ → Cu
+        bin: Reduction
+        clue: Which side are the electrons on?
+        why: 'Copper ions take in electrons: reduction.'
+      - label: Mg → Mg²⁺ + 2e⁻
+        bin: Oxidation
+        clue: Which side are the electrons on?
+        why: 'Magnesium gives out 2 electrons: oxidation.'
+      - label: O₂ + 4e⁻ → 2O²⁻
+        bin: Reduction
+        clue: Which side are the electrons on?
+        why: 'Oxygen takes in electrons: reduction.'
     items:
       - prompt: "Oxidation is:"
         options: ["Loss of electrons", "Gain of electrons", "Loss of protons", "Gain of neutrons"]
@@ -79,6 +110,31 @@ concepts:
       visual: "Write the formula, put the known numbers above each atom and a box (x) above the unknown. Multiply each by how many atoms there are and make the sum match the overall charge."
       step_by_step: "Mn in KMnO₄: Step 1: K = +1, O = −2. Step 2: +1 + x + 4(−2) = 0. Step 3: x − 7 = 0. Step 4: x = +7."
       real_world: "Purple potassium permanganate (Mn +7) is used to disinfect wells in Kerala. It works because Mn is in a very high oxidation state and readily takes electrons from germs."
+    activity:
+      type: formula
+      prompt: In H₂SO₄, hydrogen is +1 and oxygen is −2. The total must be 0. Find sulphur's oxidation number x.
+      inputs:
+      - name: x
+        label: x (sulphur)
+        min: -4
+        max: 8
+        step: 1
+        start: 0
+      outputs:
+      - name: t
+        label: 'Total: 2(+1) + x + 4(−2)'
+        expr: 2+x-8
+      goals:
+      - prompt: Make the total 0.
+        want:
+          t: 0
+        mistakes:
+        - when:
+            x: 2
+          say: '+2 leaves the total at −4: the four oxygens give −8, the hydrogens only +2.'
+        - when:
+            x: -2
+          say: −2 is oxygen's number. Sulphur here has to balance the four oxygens.
     items:
       - prompt: "What is the oxidation number of oxygen in O₂?"
         answer: "0"
@@ -136,6 +192,29 @@ concepts:
       visual: "Draw two arrows on the equation: one from the atom whose number goes up ('oxidised: reducing agent') and one from the atom whose number goes down ('reduced: oxidising agent')."
       step_by_step: "CuO + H₂ → Cu + H₂O: Step 1: Cu: +2 → 0, reduced, so CuO is the oxidising agent. Step 2: H: 0 → +1, oxidised, so H₂ is the reducing agent."
       real_world: "Bleach and hydrogen peroxide are oxidising agents that remove stains and kill germs by taking electrons from coloured or living molecules."
+    activity:
+      type: sort
+      prompt: Is it the oxidising agent or the reducing agent?
+      bins:
+      - Oxidising agent
+      - Reducing agent
+      items:
+      - label: Zn in Zn + CuSO₄ → ZnSO₄ + Cu
+        bin: Reducing agent
+        why: 'Zinc gives electrons to copper ions, so it reduces them: the reducing agent.'
+        clue: Does zinc give electrons away or take them?
+      - label: Cu²⁺ in Zn + CuSO₄ → ZnSO₄ + Cu
+        bin: Oxidising agent
+        clue: Do copper ions give electrons or take them?
+        why: 'Copper ions take electrons from zinc, oxidising it: the oxidising agent.'
+      - label: H₂ in CuO + H₂ → Cu + H₂O
+        bin: Reducing agent
+        clue: Does hydrogen take oxygen or give oxygen?
+        why: 'Hydrogen takes the oxygen away from copper oxide, reducing it: the reducing agent.'
+      - label: CuO in CuO + H₂ → Cu + H₂O
+        bin: Oxidising agent
+        clue: Does copper oxide give oxygen away or take it?
+        why: 'It gives its oxygen to hydrogen, oxidising it: the oxidising agent.'
     items:
       - prompt: "In CuO + H₂ → Cu + H₂O, which substance is the reducing agent?"
         options: ["H₂", "CuO", "Cu", "H₂O"]

@@ -35,6 +35,33 @@ concepts:
       - ['100', '15']
       caption: 23 × 15 = 200 + 30 + 100 + 15 = 345
       alt: A 23 by 15 rectangle split into 20 by 10 (200), 3 by 10 (30), 20 by 5 (100) and 3 by 5 (15), which add to 345.
+    activity:
+      type: formula
+      prompt: Three expressions. One is (x + 2)(x + 3) multiplied out correctly; the last one is a common slip.
+      inputs:
+      - name: x
+        label: x
+        min: 0
+        max: 12
+        step: 1
+        start: 1
+      outputs:
+      - name: p
+        label: (x + 2)(x + 3)
+        expr: (x+2)*(x+3)
+      - name: q
+        label: x² + 5x + 6
+        expr: x^2+5*x+6
+      - name: r
+        label: x² + 6
+        expr: x^2+6
+      goals:
+      - prompt: Make (x + 2)(x + 3) equal 56. Which of the other two always agrees with it?
+        want:
+          p: 56
+      - prompt: x² + 6 is the slip. Find the only x where it agrees with (x + 2)(x + 3).
+        want:
+          p: 6
     items:
       - prompt: "Use (20 + 3)(10 + 5) to work out 23 × 15."
         answer: "345"
@@ -113,6 +140,44 @@ concepts:
       - [ab, b²]
       caption: (a + b)² = a² + 2ab + b²
       alt: A square of side a + b split into a², b² and two ab rectangles, so (a + b)² = a² + 2ab + b².
+    activity:
+      type: formula
+      prompt: (a + b)² is a² + b² plus something more. Find out what.
+      inputs:
+      - name: a
+        label: a
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      - name: b
+        label: b
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: sq
+        label: (a + b)²
+        expr: (a+b)^2
+      - name: parts
+        label: a² + b²
+        expr: a^2+b^2
+      - name: gap
+        label: The difference
+        expr: (a+b)^2-a^2-b^2
+      goals:
+      - prompt: Make (a + b)² = 49 and a² + b² = 25. The difference is 2ab.
+        want:
+          sq: 49
+          parts: 25
+        mistakes:
+        - when:
+            sq: 49
+          say: (a + b)² is 49, so a + b = 7, but a² + b² isn't 25. Which pair adding to 7 also has squares adding to 25?
+        - when:
+            parts: 25
+          say: 'a² + b² is 25, but (a + b)² isn''t 49. Notice: (a + b)² is always bigger by the difference shown.'
     items:
       - prompt: "Expand (x + 5)²."
         options: ["x² + 10x + 25", "x² + 25", "x² + 5x + 25", "x² + 10x + 10"]
@@ -185,6 +250,38 @@ concepts:
       - [(a − b)², (a − b)b]
       caption: 'a² is all four pieces. Take away the two strips ab (which together hold b² twice) and add one b² back: (a − b)² = a² − 2ab + b².'
       alt: A square of side a split into (a − b)², two (a − b) by b strips and a b² corner, showing (a − b)² = a² − 2ab + b².
+    activity:
+      type: formula
+      prompt: Compare (a − b)² with a² − 2ab + b².
+      inputs:
+      - name: a
+        label: a
+        min: 0
+        max: 12
+        step: 1
+        start: 0
+      - name: b
+        label: b
+        min: 0
+        max: 12
+        step: 1
+        start: 0
+      outputs:
+      - name: sq
+        label: (a − b)²
+        expr: (a-b)^2
+      - name: exp
+        label: a² − 2ab + b²
+        expr: a^2-2*a*b+b^2
+      goals:
+      - prompt: Keep a = 10 and make (a − b)² = 9.
+        want:
+          a: 10
+          sq: 9
+        mistakes:
+        - when:
+            sq: 9
+          say: (a − b)² is 9, but a has to stay at 10.
     items:
       - prompt: "Expand (x − 4)²."
         options: ["x² − 8x + 16", "x² − 16", "x² + 8x + 16", "x² − 8x − 16"]
@@ -265,6 +362,45 @@ concepts:
       - [(a − b)², (a − b)b]
       caption: Cut b² from the corner of a². The L-shape left, a² − b², rearranges into a strip (a + b) long and (a − b) wide.
       alt: A square of side a with a small b² square cut from one corner. The L-shape left has area a² − b², which equals (a + b)(a − b).
+    activity:
+      type: formula
+      prompt: '(a + b)(a − b) and a² − b²: are they always equal?'
+      inputs:
+      - name: a
+        label: a
+        min: 0
+        max: 12
+        step: 1
+        start: 0
+      - name: b
+        label: b
+        min: 0
+        max: 12
+        step: 1
+        start: 0
+      outputs:
+      - name: s
+        label: a + b
+        expr: a+b
+      - name: p
+        label: (a + b)(a − b)
+        expr: (a+b)*(a-b)
+      - name: q
+        label: a² − b²
+        expr: a^2-b^2
+      goals:
+      - prompt: Make a + b = 10 and a² − b² = 40.
+        want:
+          s: 10
+          q: 40
+        hint: 'Watch (a + b)(a − b) and a² − b²: they always match. So 40 = 10 × (a − b).'
+        mistakes:
+        - when:
+            s: 10
+          say: 'a + b = 10, but a² − b² isn''t 40. a² − b² = (a + b)(a − b), so think: 10 × what = 40?'
+        - when:
+            q: 40
+          say: a² − b² = 40, but a + b isn't 10 yet.
     items:
       - prompt: "Expand (x + 6)(x − 6)."
         options: ["x² − 36", "x² + 36", "x² − 12x − 36", "x² − 12"]
@@ -342,6 +478,38 @@ concepts:
       - ['300', '9']
       caption: 103² = 10000 + 300 + 300 + 9 = 10609
       alt: '103 squared as a square of side 100 + 3: a 10000 block, two 300 strips and a 9 corner, totalling 10609.'
+    activity:
+      type: formula
+      prompt: Work out 102 × 98 quickly as (a + b)(a − b) = a² − b².
+      inputs:
+      - name: a
+        label: a
+        min: 90
+        max: 110
+        step: 1
+        start: 90
+      - name: b
+        label: b
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: p
+        label: (a + b) × (a − b)
+        expr: (a+b)*(a-b)
+      - name: q
+        label: a² − b²
+        expr: a^2-b^2
+      goals:
+      - prompt: Choose a and b so that a + b = 102 and a − b = 98.
+        want:
+          p: 9996
+        hint: 102 and 98 are the same distance from a middle number. That middle number is a.
+        mistakes:
+        - when:
+            a: 102
+          say: With a = 102, a + b goes past 102 as soon as b is more than 0. a sits in the middle of the two numbers, not at the top.
     items:
       - prompt: "Use an identity to work out 103²."
         answer: "10609"

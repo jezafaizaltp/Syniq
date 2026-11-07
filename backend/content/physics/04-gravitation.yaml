@@ -27,6 +27,65 @@ concepts:
       visual: "Picture a torch shining on a wall. Move it twice as far and the same light spreads over 4 times the area, so each patch is 4 times dimmer. Gravity weakens with distance the same way."
       step_by_step: "Two masses attract with 36 N. The distance is tripled. Step 1: Force ∝ 1/r². Step 2: r × 3 means r² × 9. Step 3: New force = 36 ÷ 9 = 4 N."
       real_world: "The Moon's pull on the oceans raises the water on the side nearest it, giving the tides that fishermen on the Kerala coast plan around."
+    activity:
+      type: formula
+      prompt: Gravitational force F ∝ (m₁ × m₂) ÷ d². Change the masses and the distance.
+      inputs:
+      - name: m
+        label: Masses multiplied by
+        min: 1
+        max: 4
+        step: 1
+        start: 1
+      - name: d
+        label: Distance multiplied by
+        min: 1
+        max: 4
+        step: 1
+        start: 1
+      outputs:
+      - name: f
+        label: Force multiplied by
+        expr: m/d^2
+        places: 4
+      goals:
+      - prompt: Keep the masses and make the force a quarter.
+        want:
+          f: 0.25
+          m: 1
+        mistakes:
+        - when:
+            d: 4
+          say: 'Distance × 4 makes the force 1/16, not 1/4: the force falls with the square of the distance.'
+        - when:
+            m:
+            - 2
+            - 4
+            d: 1
+          say: Changing the masses makes the force bigger, but the goal is to make it smaller while keeping the masses.
+      - prompt: Keep the distance and make the force 4 times as big.
+        want:
+          f: 4
+          d: 1
+        mistakes:
+        - when:
+            m: 2
+            d: 1
+          say: Doubling the masses only doubles the force.
+        - when:
+            d:
+            - 2
+            - 4
+          say: The distance must stay as it was.
+      - prompt: Double the distance, then make the force what it was at the start.
+        want:
+          d: 2
+          f: 1
+        mistakes:
+        - when:
+            m: 2
+            d: 2
+          say: 'Doubling the mass doubles the force, but doubling the distance makes it a quarter: 2 × 1/4 = 1/2.'
     items:
       - prompt: "Two masses attract each other with a force F. If the distance between them is doubled, what is the new force?"
         options: ["F/4", "F/2", "2F", "4F"]
@@ -82,6 +141,47 @@ concepts:
       visual: "Hang the same bag on a spring balance on Earth and then on the Moon. The bag (the mass) is the same; the spring stretches only a sixth as much on the Moon (the weight)."
       step_by_step: "Weight of a 50 kg girl, g = 10 m/s²: Step 1: W = mg. Step 2: W = 50 × 10 = 500 N. Step 3: On the Moon: 500 ÷ 6 ≈ 83 N, mass still 50 kg."
       real_world: "Astronauts on the Moon could leap high with heavy space suits because their weight there was only a sixth of their weight on Earth."
+    activity:
+      type: formula
+      prompt: Weight = mass × g. On Earth g = 9.8 m/s²; on the Moon it is about 1.6 m/s².
+      inputs:
+      - name: m
+        label: Mass
+        min: 1
+        max: 100
+        step: 1
+        start: 1
+        unit: kg
+      outputs:
+      - name: we
+        label: Weight on Earth
+        expr: 9.8*m
+        unit: N
+        places: 1
+      - name: wm
+        label: Weight on the Moon
+        expr: 1.6*m
+        unit: N
+        places: 1
+      goals:
+      - prompt: Make the weight on Earth 490 N. Does the mass change on the Moon?
+        want:
+          we: 490
+        mistakes:
+        - when:
+            m:
+            - 1
+            - 49
+          say: That mass weighs less than 490 N on Earth. Each kilogram weighs 9.8 N.
+      - prompt: Someone weighs 160 N on the Moon. Find their mass and their weight on Earth.
+        want:
+          wm: 160
+        mistakes:
+        - when:
+            m:
+            - 16
+            - 17
+          say: About 16 kg is what weighs 160 N on Earth. On the Moon each kilogram weighs only 1.6 N, so 160 N there needs much more mass.
     items:
       - prompt: "What is the weight of a 50 kg girl on Earth, in N? (Take g = 10 m/s².)"
         answer: "500"
@@ -145,6 +245,47 @@ concepts:
       visual: "Picture a stone dropped from a tower, with its position marked each second: it falls 5 m in the first second, 20 m after 2 s, 45 m after 3 s. The gaps keep growing because it keeps speeding up."
       step_by_step: "A ball is thrown up at 20 m/s (g = 10 m/s²). Step 1: At the top v = 0. Step 2: Time up: 0 = 20 − 10t, so t = 2 s. Step 3: Height: v² = u² − 2gh, so 0 = 400 − 20h, h = 20 m."
       real_world: "Divers on a 10 m board hit the water at about 14 m/s, worked out from v² = 2gh. That is why high diving needs training."
+    activity:
+      type: formula
+      prompt: 'A stone falls from rest: v = gt and h = ½gt² (g = 9.8 m/s²).'
+      inputs:
+      - name: t
+        label: Time
+        min: 0
+        max: 6
+        step: 0.5
+        start: 0
+        unit: s
+      outputs:
+      - name: v
+        label: Speed
+        expr: 9.8*t
+        unit: m/s
+        places: 1
+      - name: h
+        label: Distance fallen
+        expr: 4.9*t^2
+        unit: m
+        places: 1
+      goals:
+      - prompt: Fall 44.1 m.
+        want:
+          h:
+          - 44
+          - 44.2
+        mistakes:
+        - when:
+            t: 4.5
+          say: 'In 4.5 s it falls about 99 m. Falling objects speed up, so the distance grows with t²: you need a shorter time.'
+      - prompt: Reach a speed of 49 m/s.
+        want:
+          v:
+          - 48.9
+          - 49.1
+        mistakes:
+        - when:
+            t: 6
+          say: After 6 s it is going about 59 m/s. It gains 9.8 m/s every second.
     items:
       - prompt: "A heavy stone and a light stone are dropped together from the same height, with no air resistance. Which lands first?"
         options: ["They land together", "The heavy stone", "The light stone", "It depends on their shape"]

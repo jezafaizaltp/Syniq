@@ -1021,9 +1021,27 @@ In `geometry`, a point whose name starts with `_` is a helper: lines can use it 
 
 ## Activities
 
-A topic can carry an `activity`: something the child plays with to explore the idea, shown under "Try it yourself" with the explanation and behind a button during practice. Like pictures, it is a small description the app builds (`frontend/app/learn/Activity.tsx`), checked by `python -m app.content_packs --check` (`backend/app/activities.py`). Every activity needs a `prompt`. Children change things only with buttons (never by dragging), so a switch, a keyboard or a screen reader works too, and the state is always said in words. A wrong try shows what the child made next to the goal. Nothing is scored.
+A topic can carry an `activity`: something the child plays with to explore the idea, shown under "Try it yourself" with the explanation and behind a button during practice. Like pictures, it is a small description the app builds (`frontend/app/learn/Activity.tsx`), checked by `python -m app.content_packs --check` (`backend/app/activities.py`). Every activity needs a `prompt`. Children change things only with buttons (never by dragging), so a switch, a keyboard or a screen reader works too, and the state is always said in words. Nothing is scored.
 
-Types with `goals` take 1 to 4 `{prompt, ...}` with an optional `hint` shown after a wrong try:
+### When a try is wrong
+
+A wrong try is coached in three parts, and the help grows with each wrong try at the same goal:
+
+1. **Where it went wrong.** The picture marks it (an arrow from the marker, outlined squares or rows, a gauge with the gap in red, the rectangle's edge, the missed points on a graph) and a sentence says it.
+2. **What that causes.** The consequence of the slip: "4 × 16 = 64, did you add?", "with 125 g of water the salt is 17%, not 20%", "your line misses (2, 5) by 3". The app works out a plain one for every type; the content's own `mistakes` (below) are better, because they name the topic's real misconceptions, so they win.
+3. **How to get it right.** A direction and a question, never the answer. On the second wrong try the goal's `hint` is shown instead. From the third wrong try the goal is drawn dashed next to the child's try (or one input value is given), and the child still moves it there themselves.
+
+So a good activity has:
+
+- **`mistakes` on each goal** for the slips children really make: `mistakes: [{when: {name: value or [low, high]}, say: "what that slip causes"}]`, 1 to 6, the first that matches a wrong try is said. The names a type reports: `number_line` and `scale` `v`; `angle` `degrees`; `rectangle` `width`, `height`, `area`, `perimeter`; `pattern` `step`, `count`; `array` `rows`; `fraction_bar` `shaded`, `parts`; `graph` `x`, `y` (point) or `m`, `c` (line); `formula` any input or output name. Write what the slip *does* ("an 18 m tree would cast a 27 m shadow, longer than…"), not "wrong, the answer is…". The checker refuses a rule that pins down every wanted value and still matches a right answer.
+- **A `hint` that is a question or a method**, not the answer ("Add the sum and the difference: what is that, in terms of x?", not "x = 13").
+- **`clue` and `why` on every sort item.** `clue` is a question that makes the child look again (said on the first wrong try), `why` is the reason (from the second). The right bin is ringed only from the third.
+- **`reasons` on an order**: `{step: why it can't come earlier}` for each step after the first. A wrong order is ticked up to where it breaks; the child is told the step there came too early, then why. Only put steps in an order when the order is certain (two things that happen together are one step).
+- **`says` on a scale zone**: what a reading there means ("Between 0 °C and 100 °C, water stays liquid").
+
+A `number_line` keeps its marker from one goal to the next, so its goals can be one journey ("start at 3, take away 8, now add 7").
+
+Types with `goals` take 1 to 4 `{prompt, hint, mistakes, ...}`:
 
 | type | for | fields | each goal |
 |---|---|---|---|
@@ -1032,19 +1050,23 @@ Types with `goals` take 1 to 4 `{prompt, ...}` with an optional `hint` shown aft
 | `rectangle` | area, perimeter, constructing rectangles | `max_side` (2 to 12) | any of `area`, `perimeter`, `width`, `height` |
 | `angle` | angles, turns, rotational symmetry | (none) | `degrees` (in fives) or `kind`: acute, right, obtuse, straight, reflex |
 | `array` | factors, multiples, primes | (none) | `n` (2 to 36), `find: all` (every rectangle) or a number of rows |
-| `scale` | rulers, thermometers, states of matter | `min`, `max`, `step`, `unit`, `orientation` (horizontal/vertical), `start`, `zones: [{from, to, label}]` | `value` or `zone` (a zone label) |
+| `scale` | rulers, thermometers, states of matter | `min`, `max`, `step`, `unit`, `orientation` (horizontal/vertical), `start`, `zones: [{from, to, label, says}]` | `value` or `zone` (a zone label) |
 | `pattern` | growing patterns and sequences | `rule`: square, triangle, odd, even, double; `max_step` (3 to 10) | `count` the pattern reaches |
+| `formula` | anything with a formula: motion, Ohm's law, identities, solutions | `inputs: [{name, label, min, max, step, start, unit}]` (1 to 4), `outputs: [{name, label, expr, unit, places}]` (1 to 4) | `want: {name: value or [low, high]}` (outputs, or an input the prompt itself fixes) |
+| `graph` | coordinates, straight lines, motion graphs | `mode`: point or line; `range: [low, high]` (whole numbers around 0, at most 20 apart); `m_step` (slope step, default 0.5); `x_label`, `y_label` | point: `x`, `y`; line: any of `m`, `c`, `through: [[x, y], ...]` |
+
+A `formula` `expr` uses numbers, the input names, `+ - * / ^`, brackets, `pi`, and `sqrt`, `min`, `max`, `abs`; nothing else runs (the same rules in `activities.py` and `frontend/app/learn/formula.ts`). The checker tries every combination of inputs (up to 300,000) to prove each goal can be reached. Don't put an input in `want` unless the prompt states it ("with 25 g of salt"): a wanted input is shown with its gap, which would give the answer away.
 
 Types with one task of their own:
 
 | type | for | fields |
 |---|---|---|
-| `sort` | grouping (living things, materials, numbers) | 2 to 4 `bins`; 4 to 10 `items: [{label, bin, why}]`; `why` is said if it is put in the wrong bin |
-| `order` | cycles, methods, sequences | 3 to 8 `steps` in the right order (the app shuffles them) |
+| `sort` | grouping (living things, materials, numbers) | 2 to 5 `bins`; 4 to 12 `items: [{label, bin, clue, why}]` |
+| `order` | cycles, methods, sequences | 3 to 8 `steps` in the right order (the app shuffles them); `reasons` |
 | `bars` | making bar graphs from data | 2 to 6 `categories: [{label, value}]`, `max` (4 to 20), `show`: tally or table |
 | `mirror` | line symmetry | `left`: 2 to 8 rows like `"..#"` (2 to 5 wide); the child completes the right half |
 
-Every CBSE Class 6 Maths and Science topic has one (2026-11-07). Examples of every type are in those packs.
+Every CBSE Class 6 Maths and Science topic (2026-11-07) and every Kerala Class 9 topic (Maths, Physics, Chemistry, Biology) has one. Examples of every type are in those packs.
 
 ## Changing a pack
 

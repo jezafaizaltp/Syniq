@@ -27,6 +27,49 @@ concepts:
       visual: "Draw a small circle in the middle with '11 p, 12 n' written in it: the nucleus. Around it draw rings with dots for electrons: 2 on the first ring, 8 on the second, 1 on the third."
       step_by_step: "Chlorine, A = 35, Z = 17. Step 1: Protons = Z = 17. Step 2: Electrons = 17 (neutral). Step 3: Neutrons = 35 − 17 = 18. Step 4: As Cl⁻ it gains 1 electron: 18 electrons."
       real_world: "If an atom were the size of a cricket stadium, its nucleus would be a small marble at the centre, yet it would hold almost all the mass."
+    activity:
+      type: formula
+      prompt: Build an atom. Atomic number Z = protons; mass number A = protons + neutrons.
+      inputs:
+      - name: p
+        label: Protons
+        min: 1
+        max: 25
+        step: 1
+        start: 1
+      - name: n
+        label: Neutrons
+        min: 0
+        max: 40
+        step: 1
+        start: 0
+      outputs:
+      - name: z
+        label: Atomic number Z
+        expr: p
+      - name: a
+        label: Mass number A
+        expr: p+n
+      goals:
+      - prompt: 'Build sodium: Z = 11, A = 23.'
+        want:
+          z: 11
+          a: 23
+        mistakes:
+        - when:
+            n: 23
+          say: With 23 neutrons the mass number is 34. The mass number 23 counts protons and neutrons together.
+        - when:
+            p: 23
+          say: 23 protons would make a different element (vanadium). The atomic number, 11, is the number of protons.
+      - prompt: 'Build chlorine-35: Z = 17.'
+        want:
+          z: 17
+          a: 35
+        mistakes:
+        - when:
+            n: 35
+          say: Mass number 35 counts protons and neutrons together, so the neutrons alone are fewer than 35.
     items:
       - prompt: "An atom has atomic number 11 and mass number 23. How many neutrons does it have?"
         answer: "12"
@@ -82,6 +125,37 @@ concepts:
       visual: "Draw three hydrogen nuclei side by side: 1 proton; 1 proton + 1 neutron; 1 proton + 2 neutrons. Each has one electron outside. Only the nucleus is heavier."
       step_by_step: "Are ³⁵Cl and ³⁷Cl isotopes? Step 1: Both are chlorine, Z = 17. Step 2: Neutrons: 35 − 17 = 18 and 37 − 17 = 20. Step 3: Same protons, different neutrons: yes, isotopes."
       real_world: "Doctors use radioactive iodine-131 to treat thyroid problems, and cobalt-60 to treat cancer."
+    activity:
+      type: sort
+      prompt: Isotopes have the same number of protons. Which are isotopes of carbon (6 protons)?
+      bins:
+      - Carbon isotope
+      - Another element
+      items:
+      - label: Carbon-12 (6 protons, 6 neutrons)
+        bin: Carbon isotope
+        clue: Count the protons. Carbon has 6.
+        why: '6 protons: carbon.'
+      - label: Carbon-14 (6 protons, 8 neutrons)
+        bin: Carbon isotope
+        clue: Count the protons. Do extra neutrons change the element?
+        why: '6 protons: still carbon. Only the neutrons differ.'
+      - label: Nitrogen-14 (7 protons, 7 neutrons)
+        bin: Another element
+        why: 'Same mass number as carbon-14, but 7 protons: nitrogen.'
+        clue: Count the protons, not the mass number.
+      - label: Carbon-13 (6 protons, 7 neutrons)
+        bin: Carbon isotope
+        clue: Count the protons.
+        why: '6 protons: carbon, with one extra neutron.'
+      - label: Boron-11 (5 protons, 6 neutrons)
+        bin: Another element
+        clue: Count the protons.
+        why: '5 protons: boron, a different element.'
+      - label: Oxygen-16 (8 protons)
+        bin: Another element
+        clue: Count the protons.
+        why: '8 protons: oxygen, a different element.'
     items:
       - prompt: "Isotopes of an element have the same number of:"
         options: ["Protons", "Neutrons", "Nucleons", "Mass number"]
@@ -138,6 +212,62 @@ concepts:
       visual: "Draw concentric circles round the nucleus and put dots on them: 2 on the first, up to 8 on the second, then the rest on the third."
       step_by_step: "Configuration of sulphur, Z = 16: Step 1: K takes 2 (14 left). Step 2: L takes 8 (6 left). Step 3: M takes 6. Step 4: 2, 8, 6, with 6 valence electrons."
       real_world: "Neon signs glow because electrons jump to higher shells when electricity passes and give out light falling back."
+    activity:
+      type: formula
+      prompt: 'Fill the shells K, L, M, N for the first 20 elements: K holds 2, L 8, M 8 (then N). Inner shells fill first.'
+      inputs:
+      - name: k
+        label: K shell
+        min: 0
+        max: 2
+        step: 1
+        start: 0
+      - name: l
+        label: L shell
+        min: 0
+        max: 8
+        step: 1
+        start: 0
+      - name: m
+        label: M shell
+        min: 0
+        max: 8
+        step: 1
+        start: 0
+      - name: n
+        label: N shell
+        min: 0
+        max: 2
+        step: 1
+        start: 0
+      outputs:
+      - name: e
+        label: Total electrons
+        expr: k+l+m+n
+      - name: gaps
+        label: Empty places left in inner shells
+        expr: min(l,1)*(2-k)+min(m,1)*(8-l)+min(n,1)*(8-m)
+      goals:
+      - prompt: Arrange chlorine's 17 electrons.
+        want:
+          e: 17
+          gaps: 0
+        mistakes:
+        - when:
+            gaps:
+            - 1
+            - 20
+          say: 'An inner shell still has room, but you''ve put electrons further out. Electrons fill the inner shells first: K must be full (2) before L, and L full (8) before M.'
+      - prompt: Arrange calcium's 20 electrons.
+        want:
+          e: 20
+          gaps: 0
+        mistakes:
+        - when:
+            gaps:
+            - 1
+            - 20
+          say: An inner shell still has room, but you've put electrons further out. Fill K, then L, then M, before N.
     items:
       - prompt: "What is the electronic configuration of sodium (atomic number 11)?"
         options: ["2, 8, 1", "2, 9", "8, 2, 1", "2, 1, 8"]
@@ -195,6 +325,24 @@ concepts:
       visual: "Draw a staircase: 1s on the bottom step, then 2s, 2p, 3s, 3p, 4s, 3d going up. Fill electrons step by step, never skipping a step until the one below is full."
       step_by_step: "Configuration of potassium, Z = 19: Step 1: 1s² (2). Step 2: 2s² 2p⁶ (10). Step 3: 3s² 3p⁶ (18). Step 4: The 19th electron goes to 4s, not 3d: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹."
       real_world: "The colours of gemstones and of many transition metal compounds, like blue copper sulphate, come from electrons in d subshells."
+    activity:
+      type: order
+      prompt: Put the subshells in the order electrons fill them.
+      steps:
+      - 1s
+      - 2s
+      - 2p
+      - 3s
+      - 3p
+      - 4s
+      - 3d
+      reasons:
+        2s: '1s fills first: it is closest to the nucleus and lowest in energy.'
+        2p: 2s is lower in energy than 2p.
+        3s: The second shell (2s and 2p) fills before the third.
+        3p: 3s is lower in energy than 3p.
+        4s: 3p has to fill first.
+        3d: 4s is a little lower in energy than 3d, so it fills first.
     items:
       - prompt: "What is the maximum number of electrons a p subshell can hold?"
         answer: "6"

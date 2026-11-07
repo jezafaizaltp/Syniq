@@ -27,6 +27,33 @@ concepts:
       visual: "Picture a coin on a card on top of a glass. Flick the card away: the coin, at rest, wants to stay at rest, so it drops straight into the glass."
       step_by_step: "Why do passengers lurch forward when a bus brakes? Step 1: Before braking, the passengers move with the bus. Step 2: The brakes stop the bus, but no force acts directly on the upper body. Step 3: By inertia the body keeps moving forward."
       real_world: "Seat belts stop you continuing forward when a car stops suddenly. Shaking a tree makes fruit fall: the branch moves, the fruit stays where it was and breaks off."
+    activity:
+      type: sort
+      prompt: Which kind of inertia is it?
+      bins:
+      - Inertia of rest
+      - Inertia of motion
+      items:
+      - label: You fall back when a bus suddenly starts
+        bin: Inertia of rest
+        clue: Before the bus started, was your body still or moving?
+        why: Your body was at rest and tends to stay at rest while the bus moves forward.
+      - label: You fall forward when a bus suddenly stops
+        bin: Inertia of motion
+        clue: Before the bus stopped, was your body still or moving?
+        why: Your body was moving and tends to keep moving when the bus stops.
+      - label: Dust leaves a carpet when it is beaten
+        bin: Inertia of rest
+        clue: When the carpet is hit, what moves and what stays still?
+        why: The carpet moves suddenly; the dust, at rest, stays behind and falls out.
+      - label: A runner can't stop right at the finish line
+        bin: Inertia of motion
+        clue: Is the runner still or moving?
+        why: The runner is moving and tends to keep moving.
+      - label: A coin drops into a glass when the card under it is flicked
+        bin: Inertia of rest
+        clue: Before the flick, was the coin still or moving?
+        why: The coin was at rest and stays put as the card shoots away, then it falls.
     items:
       - prompt: "When a moving bus suddenly brakes, the passengers lean forward. This is due to:"
         options: ["Inertia of motion", "Inertia of rest", "Gravity", "Friction of the seats"]
@@ -83,6 +110,50 @@ concepts:
       visual: "Picture pushing an empty shopping trolley and a full one with the same push. The empty one speeds up quickly; the full one slowly. Same force, more mass, less acceleration: a = F ÷ m."
       step_by_step: "A 1200 kg car goes from 10 m/s to 20 m/s in 5 s. Step 1: a = (20 − 10) ÷ 5 = 2 m/s². Step 2: F = ma = 1200 × 2 = 2400 N."
       real_world: "A cricketer pulls the hands back while catching a fast ball. Stopping it over a longer time makes the force on the hands smaller."
+    activity:
+      type: formula
+      prompt: Momentum p = mass × velocity.
+      inputs:
+      - name: m
+        label: Mass
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: kg
+      - name: v
+        label: Velocity
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+        unit: m/s
+      outputs:
+      - name: p
+        label: Momentum
+        expr: m*v
+        unit: kg m/s
+      goals:
+      - prompt: Give a 4 kg ball a momentum of 20 kg m/s.
+        want:
+          p: 20
+          m: 4
+        mistakes:
+        - when:
+            m: 4
+            v: 16
+          say: 4 × 16 = 64 kg m/s. Did you add 4 + 16 = 20? Momentum multiplies mass by velocity.
+      - prompt: Now a lighter ball, 2 kg or less, with the same momentum.
+        want:
+          p: 20
+          m:
+          - 1
+          - 2
+        mistakes:
+        - when:
+            m: 2
+            v: 18
+          say: 2 × 18 = 36 kg m/s. Momentum is mass × velocity, not mass + velocity.
     items:
       - prompt: "What is the momentum of a 2 kg ball moving at 5 m/s, in kg m/s?"
         answer: "10"
@@ -145,6 +216,33 @@ concepts:
       visual: "Draw two skaters facing each other. One pushes the other: draw an arrow on each, equal length, pointing away from each other. Both roll apart."
       step_by_step: "A rocket: Step 1: The engine pushes hot gas down and out (action on the gas). Step 2: The gas pushes the rocket up (reaction on the rocket). Step 3: These act on different bodies, so the rocket rises."
       real_world: "A swimmer pushes water backwards with the arms; the water pushes the swimmer forwards. A boat moves away when you jump from it to the shore."
+    activity:
+      type: sort
+      prompt: True or false? (Action and reaction)
+      bins:
+      - 'True'
+      - 'False'
+      items:
+      - label: Action and reaction act on different objects
+        bin: 'True'
+        clue: When you push a wall, who pushes whom?
+        why: You push the wall; the wall pushes you. Two different objects, so true.
+      - label: Action and reaction cancel each other out
+        bin: 'False'
+        why: They act on different objects, so they don't cancel.
+        clue: Forces cancel only when they act on the same object. Do these?
+      - label: They are equal in size
+        bin: 'True'
+        clue: Two skaters push off each other. Does one push harder?
+        why: They are always equal in size. True.
+      - label: They act in opposite directions
+        bin: 'True'
+        clue: A rocket pushes gas down. Which way does the gas push the rocket?
+        why: Up, the opposite way. True.
+      - label: The reaction comes a moment after the action
+        bin: 'False'
+        why: They happen at the same time.
+        clue: Can you push a wall without it pushing back at that same moment?
     items:
       - prompt: "When you walk, what pushes you forward?"
         options: ["The ground, pushing back on your foot", "Your own muscles alone", "The air behind you", "Gravity"]
@@ -194,6 +292,33 @@ concepts:
       visual: "Two trolleys held together by a squeezed spring. Release them: they fly apart. Measure: the heavier trolley moves slower, and mass × speed is the same for both."
       step_by_step: "A 4 kg gun fires a 0.02 kg bullet at 400 m/s. Step 1: Bullet momentum = 0.02 × 400 = 8 kg m/s. Step 2: Gun momentum = 8 kg m/s backwards. Step 3: Recoil speed = 8 ÷ 4 = 2 m/s."
       real_world: "When you jump out of a small boat onto the shore, the boat moves backwards away from the shore."
+    activity:
+      type: formula
+      prompt: A 4 kg gun fires a 0.02 kg bullet. Momentum is conserved, so the gun recoils.
+      inputs:
+      - name: vb
+        label: Bullet speed
+        min: 100
+        max: 500
+        step: 50
+        start: 100
+        unit: m/s
+      outputs:
+      - name: vg
+        label: Gun recoil speed
+        expr: 0.02*vb/4
+        unit: m/s
+        places: 2
+      goals:
+      - prompt: Make the gun recoil at 1.5 m/s.
+        want:
+          vg: 1.5
+        mistakes:
+        - when:
+            vb:
+            - 350
+            - 500
+          say: The gun is recoiling too fast. A faster bullet carries more momentum, so the gun kicks back harder.
     items:
       - prompt: "A 4 kg gun fires a 20 g bullet at 400 m/s. What is the recoil speed of the gun, in m/s?"
         answer: "2"

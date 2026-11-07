@@ -27,6 +27,40 @@ concepts:
       visual: "Picture a slinky stretched on a table. Push one end back and forth: bunched-up coils travel along it. That is how a sound wave moves through air."
       step_by_step: "A sound of frequency 170 Hz in air (340 m/s): Step 1: v = fλ. Step 2: λ = v ÷ f = 340 ÷ 170. Step 3: λ = 2 m."
       real_world: "Put your ear to a railway track (only when no train is near!): you hear a distant train earlier through the steel than through the air."
+    activity:
+      type: formula
+      prompt: Speed of a wave = frequency × wavelength.
+      inputs:
+      - name: f
+        label: Frequency
+        min: 10
+        max: 1000
+        step: 10
+        start: 100
+        unit: Hz
+      - name: l
+        label: Wavelength
+        min: 0.1
+        max: 5
+        step: 0.1
+        start: 1
+        unit: m
+      outputs:
+      - name: v
+        label: Speed
+        expr: f*l
+        unit: m/s
+        places: 1
+      goals:
+      - prompt: 'A 170 Hz sound in air (340 m/s): set its wavelength.'
+        want:
+          v: 340
+          f: 170
+        mistakes:
+        - when:
+            l: 0.5
+            f: 170
+          say: 0.5 m × 170 Hz = 85 m/s, far too slow for sound in air. Did you divide 170 by 340? Wavelength = speed ÷ frequency.
     items:
       - prompt: "Sound cannot travel through:"
         options: ["A vacuum", "Water", "Steel", "Air"]
@@ -85,6 +119,37 @@ concepts:
       visual: "Draw two waves: one with peaks close together (high pitch) and one spread out (low pitch). Then two waves with the same spacing but one much taller (louder)."
       step_by_step: "Can a person hear a 25,000 Hz whistle? Step 1: Human range is 20 Hz to 20,000 Hz. Step 2: 25,000 Hz is above the range. Step 3: No: it is ultrasound (dogs can hear it)."
       real_world: "Doctors use ultrasound scans to see a baby before birth, without the harm of X-rays."
+    activity:
+      type: sort
+      prompt: Does it change the pitch or the loudness?
+      bins:
+      - Pitch
+      - Loudness
+      items:
+      - label: Tightening a guitar string
+        bin: Pitch
+        clue: Does it change how fast the string vibrates, or how far it swings?
+        why: 'A tighter string vibrates faster: higher frequency, higher pitch.'
+      - label: Plucking a string harder
+        bin: Loudness
+        clue: Does it change how fast it vibrates, or how far it swings?
+        why: It swings further (bigger amplitude), so it's louder. The pitch stays the same.
+      - label: Shortening the air column in a flute
+        bin: Pitch
+        clue: Does a shorter air column vibrate faster or slower?
+        why: 'A shorter column vibrates faster: higher pitch.'
+      - label: Beating a drum harder
+        bin: Loudness
+        clue: Does it change how fast the skin vibrates, or how far it moves?
+        why: 'The skin moves further: bigger amplitude, louder.'
+      - label: Higher frequency
+        bin: Pitch
+        clue: Frequency is how many vibrations each second. Which does that set?
+        why: More vibrations each second means a higher pitch.
+      - label: Bigger amplitude
+        bin: Loudness
+        clue: Amplitude is how far it vibrates. Which does that set?
+        why: 'Bigger vibrations carry more energy: louder.'
     items:
       - prompt: "The pitch of a sound depends on its:"
         options: ["Frequency", "Amplitude", "Speed", "Medium only"]
@@ -143,6 +208,42 @@ concepts:
       visual: "Draw a person, an arrow going to a cliff and an arrow coming back. Label the full round trip v × t and the distance to the cliff half of that."
       step_by_step: "A ship's sonar pulse returns after 4 s; sound in sea water travels at 1500 m/s. Step 1: Total path = 1500 × 4 = 6000 m. Step 2: Depth = 6000 ÷ 2 = 3000 m."
       real_world: "Cinema halls and auditoriums have curtains, carpets and soft panels to soak up sound and stop echoes from muddling speech."
+    activity:
+      type: formula
+      prompt: 'An echo goes to the wall and back: time = 2 × distance ÷ 340 m/s.'
+      inputs:
+      - name: d
+        label: Distance to the wall
+        min: 10
+        max: 400
+        step: 10
+        start: 10
+        unit: m
+      outputs:
+      - name: t
+        label: Echo time
+        expr: 2*d/340
+        unit: s
+        places: 2
+      goals:
+      - prompt: Hear the echo after 1 s.
+        want:
+          t:
+          - 0.99
+          - 1.01
+        mistakes:
+        - when:
+            d: 340
+          say: 'At 340 m the echo takes 2 s: the sound goes to the wall and back, so it travels twice the distance.'
+      - prompt: The smallest gap we can hear as an echo is 0.1 s. Find the shortest distance.
+        want:
+          t:
+          - 0.1
+          - 0.12
+        mistakes:
+        - when:
+            d: 10
+          say: 'At 10 m the echo comes back in about 0.06 s: too quick for the ear to hear it as a separate sound.'
     items:
       - prompt: "A boy hears the echo of his shout from a cliff 2 s later. Sound travels at 340 m/s. How far away is the cliff, in m?"
         answer: "340"

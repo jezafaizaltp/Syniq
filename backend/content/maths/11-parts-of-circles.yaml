@@ -41,6 +41,40 @@ concepts:
       - {at: M, from: O, to: A, label: 90°}
       caption: OM meets the chord at a right angle, so AM = √(4² − 2.4²) = 3.2 and AB = 6.4.
       alt: A circle with centre O, radius 4 and chord AB. OM is 2.4, at right angles to AB, so half the chord is 3.2.
+    activity:
+      type: formula
+      prompt: A chord in a circle of radius 5 cm. Move it closer to or further from the centre.
+      inputs:
+      - name: d
+        label: Distance from centre
+        min: 0
+        max: 5
+        step: 0.5
+        start: 0
+        unit: cm
+      outputs:
+      - name: c
+        label: Chord length
+        expr: 2*sqrt(25-d^2)
+        unit: cm
+      goals:
+      - prompt: Make the chord 8 cm long.
+        want:
+          c: 8
+        hint: 'Half the chord, the distance and the radius make a right triangle: 4² + d² = 5².'
+        mistakes:
+        - when:
+            d: 4
+          say: At 4 cm from the centre the chord is 6 cm. Chords get shorter as they move away from the centre.
+      - prompt: Which distance gives the longest chord?
+        want:
+          c: 10
+        mistakes:
+        - when:
+            d:
+            - 0.5
+            - 5
+          say: Moving away from the centre makes the chord shorter. Where would a chord be longest?
     items:
       - prompt: "The perpendicular from the centre of a circle to a chord:"
         options: ["cuts the chord into two equal parts", "is always as long as the chord", "cuts the chord in the ratio 1 : 2", "never meets the chord"]
@@ -118,6 +152,36 @@ concepts:
       - {at: C, from: A, to: B, label: 90°}
       caption: AB is a diameter, so the angle at C is always 90°, wherever C is on the circle.
       alt: A circle with diameter AB and a point C on the circle. The angle ACB is a right angle.
+    activity:
+      type: angle
+      prompt: Angles in circles. Turn the arm to the angle asked.
+      goals:
+      - prompt: The angle in a semicircle is always this.
+        degrees: 90
+        mistakes:
+        - when:
+            degrees: 180
+          say: '180° is the angle at the centre on a diameter: a straight line. The angle at the circle on the same arc is half of it.'
+      - prompt: An angle at the circle is 35°. The angle at the centre on the same arc is double. Make it.
+        degrees: 70
+        mistakes:
+        - when:
+            degrees: 35
+          say: 35° is the angle at the circle itself. The angle at the centre on the same arc is twice as big.
+        - when:
+            degrees:
+            - 15
+            - 20
+          say: 'That''s about half of 35°. The angle at the centre is the bigger one: double, not half.'
+      - prompt: Opposite angles of a cyclic quadrilateral add to 180°. One is 110°; make the other.
+        degrees: 70
+        mistakes:
+        - when:
+            degrees: 110
+          say: 110° is the angle you were given. Opposite angles are only equal when both are 90°.
+        - when:
+            degrees: 250
+          say: That's 360° − 110°, angles round a point. Opposite angles of a cyclic quadrilateral add to 180°, not 360°.
     items:
       - prompt: "An arc makes an angle of 80° at the centre. What angle does it make at a point on the rest of the circle, in degrees?"
         answer: "40"
@@ -172,6 +236,47 @@ concepts:
       visual: "Picture a clock face. From 12 to 3 the minute hand sweeps a quarter of the circle, 90°. The crust from 12 to 3 is a quarter of the rim (the arc), and the slice is a quarter of the face (the sector)."
       step_by_step: "Radius 14 cm, sector angle 90°, π ≈ 22/7: Step 1: Fraction = 90/360 = 1/4. Step 2: Circle area = 22/7 × 14 × 14 = 616 cm². Step 3: Sector area = 616 ÷ 4 = 154 cm²."
       real_world: "A pendulum 21 cm long swings through 60°. Its tip travels 60/360 = 1/6 of a full circle of radius 21 cm: 1/6 × 2 × 22/7 × 21 = 22 cm."
+    activity:
+      type: formula
+      prompt: A sector of a circle with radius 7 cm and angle θ.
+      inputs:
+      - name: a
+        label: Angle θ
+        min: 10
+        max: 360
+        step: 10
+        start: 90
+        unit: °
+      outputs:
+      - name: arc
+        label: Arc length
+        expr: 2*pi*7*a/360
+        unit: cm
+        places: 1
+      - name: area
+        label: Sector area
+        expr: pi*49*a/360
+        unit: cm²
+        places: 1
+      goals:
+      - prompt: Make the sector area about 77 cm² (76.5 to 77.5).
+        want:
+          area:
+          - 76.5
+          - 77.5
+        mistakes:
+        - when:
+            a: 360
+          say: 'That''s the whole circle: its area is about 154 cm². 77 is a part of it.'
+      - prompt: Make the arc about 11 cm (10.9 to 11.1).
+        want:
+          arc:
+          - 10.9
+          - 11.1
+        mistakes:
+        - when:
+            a: 360
+          say: That's the whole circumference, about 44 cm. 11 cm is a part of it.
     items:
       - prompt: "What fraction of a circle is a sector with a 90° angle? Type a fraction like 1/2."
         answer: "1/4"

@@ -42,9 +42,17 @@ concepts:
     goals:
     - prompt: It is 3 degrees below zero in Leh. Put the marker on −3.
       target: -3
+      mistakes:
+      - when:
+          v: 3
+        say: +3 is 3 degrees above zero, a warm-ish winter day. Below zero means the other side of 0.
     - prompt: 'Which is colder: −7 or −2? Put the marker on the colder one.'
       target: -7
       hint: Further left is smaller, so colder.
+      mistakes:
+      - when:
+          v: -2
+        say: −2 is closer to 0, so it is warmer than −7. Further left means colder.
   items:
   - prompt: Which is smaller, −8 or −3?
     options:
@@ -147,11 +155,23 @@ concepts:
     goals:
     - prompt: 'Work out −2 + 5: move the marker 5 steps right.'
       target: 3
+      mistakes:
+      - when:
+          v: -7
+        say: '−7 is −2 − 5: you moved left. Adding 5 moves 5 steps right.'
     - prompt: 'Now 3 − 7: from 3, move 7 steps left.'
       target: -4
+      mistakes:
+      - when:
+          v: 10
+        say: 'That''s 3 + 7: you moved right. Subtracting 7 moves left, past 0.'
     - prompt: 'Now −4 − (−6): taking away a negative is the same as adding. Where do you land?'
       target: 2
       hint: −4 − (−6) = −4 + 6.
+      mistakes:
+      - when:
+          v: -10
+        say: 'That''s −4 − 6: you moved left. But taking away −6 (a debt) leaves you better off: move right.'
   items:
   - prompt: Find 3 + (−5).
     answer: '-2'

@@ -27,6 +27,41 @@ concepts:
       visual: "Draw a block under water with a short arrow pushing down on its top and a longer arrow pushing up on its bottom. The bottom is deeper, so the water pushes harder there. The difference between the arrows is the buoyant force."
       step_by_step: "A stone weighs 12 N in air and 9 N in water. Step 1: Loss of weight = 12 − 9 = 3 N. Step 2: The buoyant force is 3 N."
       real_world: "Divers carry lead weights so they don't keep bobbing up to the surface: the water's buoyant force on their body and suit is large."
+    activity:
+      type: formula
+      prompt: Weigh a stone in air and then in water. The loss of weight is the buoyant force.
+      inputs:
+      - name: w
+        label: Weight in air
+        min: 1
+        max: 20
+        step: 1
+        start: 10
+        unit: N
+      - name: ww
+        label: Weight in water
+        min: 0
+        max: 20
+        step: 1
+        start: 10
+        unit: N
+      outputs:
+      - name: b
+        label: Buoyant force
+        expr: w-ww
+        unit: N
+      goals:
+      - prompt: A 10 N stone feels 2 N lighter in water. Set its weight in water.
+        want:
+          w: 10
+          b: 2
+        mistakes:
+        - when:
+            ww: 2
+          say: Weight in water 2 N would mean it lost 8 N. The 2 N is how much lighter it feels, not its new weight.
+        - when:
+            ww: 12
+          say: Heavier in water? The water pushes up, so the stone feels lighter, not heavier.
     items:
       - prompt: "A stone weighs 12 N in air and 9 N when fully under water. What is the buoyant force on it, in N?"
         answer: "3"
@@ -83,6 +118,29 @@ concepts:
       visual: "Picture an overflow can full to the spout. Lower a stone on a spring balance into it. Catch the spilled water in a beaker and weigh it: it equals the drop in the spring-balance reading."
       step_by_step: "A 200 cm³ stone is fully under water. Step 1: It displaces 200 cm³ of water. Step 2: That water has mass 200 g = 0.2 kg. Step 3: Its weight is 0.2 × 10 = 2 N. Step 4: Buoyant force = 2 N."
       real_world: "Ships are measured by displacement: a ship of 50,000 tonnes displacement pushes aside 50,000 tonnes of sea water."
+    activity:
+      type: formula
+      prompt: Buoyant force = weight of liquid pushed aside. 1 litre of water weighs 9.8 N.
+      inputs:
+      - name: v
+        label: Volume under water
+        min: 0
+        max: 10
+        step: 0.5
+        start: 0
+        unit: litres
+      outputs:
+      - name: b
+        label: Buoyant force
+        expr: 9.8*v
+        unit: N
+        places: 1
+      goals:
+      - prompt: Get a buoyant force of 49 N.
+        want:
+          b:
+          - 48.9
+          - 49.1
     items:
       - prompt: "According to Archimedes' principle, the buoyant force equals:"
         options: ["The weight of the liquid displaced", "The weight of the object", "The volume of the object", "The density of the liquid"]
@@ -139,6 +197,37 @@ concepts:
       visual: "Draw three beakers: a wooden block floating high (low density), an ice cube floating mostly underwater (density 0.92 g/cm³), and a stone on the bottom (density more than water)."
       step_by_step: "A 60 g block has volume 75 cm³. Will it float in water? Step 1: Density = 60 ÷ 75 = 0.8 g/cm³. Step 2: Water is 1 g/cm³. Step 3: 0.8 < 1, so it floats."
       real_world: "A lactometer, a kind of hydrometer, checks milk for added water: watered-down milk is less dense, so the lactometer sinks deeper."
+    activity:
+      type: sort
+      prompt: Water's density is 1 g/cm³. Does it float or sink?
+      bins:
+      - Floats
+      - Sinks
+      items:
+      - label: Wood (0.6 g/cm³)
+        bin: Floats
+        clue: Compare 0.6 with water's 1.
+        why: '0.6 is less than 1: wood floats.'
+      - label: Iron (7.8 g/cm³)
+        bin: Sinks
+        clue: Compare 7.8 with water's 1.
+        why: '7.8 is more than 1: a block of iron sinks. Iron ships float only because their shape holds lots of air.'
+      - label: Ice (0.92 g/cm³)
+        bin: Floats
+        why: Just less dense than water, so it floats with most of it under water.
+        clue: Compare 0.92 with water's 1.
+      - label: Stone (2.5 g/cm³)
+        bin: Sinks
+        clue: Compare 2.5 with water's 1.
+        why: '2.5 is more than 1: stone sinks.'
+      - label: Cork (0.24 g/cm³)
+        bin: Floats
+        clue: Compare 0.24 with water's 1.
+        why: '0.24 is much less than 1: cork floats high.'
+      - label: Aluminium (2.7 g/cm³)
+        bin: Sinks
+        clue: Compare 2.7 with water's 1.
+        why: '2.7 is more than 1: a block of aluminium sinks.'
     items:
       - prompt: "A block has mass 60 g and volume 75 cm³. What is its density, in g/cm³?"
         answer: "0.8"

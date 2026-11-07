@@ -38,6 +38,39 @@ concepts:
       - {from: -3, to: 2, label: up 5}
       caption: '−3 + 5 = 2: from floor −3, go up 5 floors to floor 2.'
       alt: A number line from −4 to 3. Starting at −3 and jumping up 5 lands on 2, showing −3 + 5 = 2.
+    activity:
+      type: number_line
+      min: -10
+      max: 10
+      step: 1
+      start: 3
+      prompt: Adding moves right; subtracting moves left. The marker starts at 3.
+      goals:
+      - prompt: Work out 3 − 8.
+        target: -5
+        mistakes:
+        - when:
+            v:
+            - 6
+            - 10
+          say: 'That is to the right of 3: you added. Subtracting 8 moves 8 steps left, past 0.'
+        - when:
+            v: 5
+          say: '5 is 8 − 3: the numbers swapped places. Start at 3 and move 8 to the left, past 0.'
+      - prompt: 'Now from there, add 7: −5 + 7.'
+        target: 2
+        mistakes:
+        - when:
+            v:
+            - -10
+            - -6
+          say: 'That is to the left of −5: you took 7 away. Adding 7 moves 7 steps right.'
+      - prompt: 'Now 2 − (−4): subtracting a negative moves right.'
+        target: 6
+        mistakes:
+        - when:
+            v: -2
+          say: '−2 is 2 − 4: you took away 4. But you''re taking away −4, a debt. Taking away a debt leaves you better off, so you move right.'
     items:
       - prompt: "What is −3 + 5?"
         answer: "2"
@@ -106,6 +139,37 @@ concepts:
       steps: [3 × −2 = −6, 2 × −2 = −4, 1 × −2 = −2, 0 × −2 = 0, −1 × −2 = 2, −2 × −2 = 4]
       alt: 'A pattern: 3 times −2 is −6, 2 times −2 is −4, and so on, each step adding 2, until −1 times −2 is 2 and −2 times −2 is 4.'
       caption: 'Each step adds 2, so the pattern carries on past zero: a negative times a negative is positive.'
+    activity:
+      type: sort
+      prompt: Is the answer positive or negative?
+      bins:
+      - Positive
+      - Negative
+      items:
+      - label: (−3) × 4
+        bin: Negative
+        clue: How many of the numbers have a minus sign? Is that count odd or even?
+        why: 'One negative: the answer is negative, −12.'
+      - label: (−2) × (−5)
+        bin: Positive
+        why: 'Two negatives make a positive: 10.'
+        clue: Count the negative numbers. Odd or even?
+      - label: 12 ÷ (−3)
+        bin: Negative
+        clue: Dividing follows the same sign rule as multiplying. How many negatives?
+        why: 'One negative: −4.'
+      - label: (−8) ÷ (−2)
+        bin: Positive
+        clue: How many negatives?
+        why: 'Two negatives: positive 4.'
+      - label: (−1) × (−1) × (−1)
+        bin: Negative
+        why: 'Two of them make +1, and the third makes it −1: three negatives, an odd number, so negative.'
+        clue: 'Count the negatives: one pair, and then?'
+      - label: (−2)²
+        bin: Positive
+        clue: (−2)² means (−2) × (−2). How many negatives is that?
+        why: '(−2) × (−2) = 4: two negatives make a positive.'
     items:
       - prompt: "What is −4 × 3?"
         answer: "-12"
@@ -168,6 +232,38 @@ concepts:
       visual: "Picture a box with x written on it. Take the x out and drop (−3) into the box, brackets and all. So 2x² − x becomes 2(−3)² − (−3)."
       step_by_step: "For 2x² − 3x + 1 with x = −1: Step 1: Replace x with (−1): 2(−1)² − 3(−1) + 1. Step 2: Powers first: (−1)² = 1, so 2 × 1 = 2. Step 3: −3 × (−1) = +3. Step 4: 2 + 3 + 1 = 6."
       real_world: "A shop's daily profit is 50n − 400 rupees, where n is the number of items sold. On a bad day the formula can go negative: with n = 6, the profit is 300 − 400 = −₹100, a loss."
+    activity:
+      type: formula
+      prompt: Put numbers, including negative ones, into 2x² − 3x.
+      inputs:
+      - name: x
+        label: x
+        min: -5
+        max: 5
+        step: 1
+        start: 0
+      outputs:
+      - name: v
+        label: 2x² − 3x
+        expr: 2*x^2-3*x
+      goals:
+      - prompt: Find a negative x that makes 2x² − 3x = 14.
+        want:
+          v: 14
+        mistakes:
+        - when:
+            x: 2
+          say: 'x = 2 gives 2 × 4 − 6 = 2. With a negative x, −3x turns into + something: the minus signs cancel.'
+        - when:
+            x: 4
+          say: x = 4 gives 32 − 12 = 20. The goal asks for a negative x.
+      - prompt: Find x that makes it 27.
+        want:
+          v: 27
+        mistakes:
+        - when:
+            x: 3
+          say: 'x = 3 gives 18 − 9 = 9. Squaring makes 3 and −3 the same, but −3x changes sign: which one makes −3x add instead of take away?'
     items:
       - prompt: "x = −2. What is 3x?"
         answer: "-6"
@@ -230,6 +326,32 @@ concepts:
       visual: "Picture a balance with x and 8 weights on one side and 3 on the other. Take 8 off both sides. The left side has just x, the right has 3 − 8, which is 5 below zero: −5."
       step_by_step: "For 2x + 9 = 1: Step 1: Take 9 from both sides: 2x = −8. Step 2: Divide both sides by 2: x = −4. Step 3: Check: 2 × (−4) + 9 = −8 + 9 = 1."
       real_world: "A bank account had ₹500. After a bill of ₹x is paid, the balance is −₹150 (overdrawn). So 500 − x = −150, which gives x = 650: the bill was ₹650."
+    activity:
+      type: formula
+      prompt: Try values of x in 3x + 7.
+      inputs:
+      - name: x
+        label: x
+        min: -10
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: v
+        label: 3x + 7
+        expr: 3*x+7
+      goals:
+      - prompt: Solve 3x + 7 = −8.
+        want:
+          v: -8
+        hint: 3x must be −15.
+        mistakes:
+        - when:
+            x: 5
+          say: x = 5 gives 3 × 5 + 7 = 22. For 3x + 7 to be negative, 3x must be a negative number bigger than 7.
+        - when:
+            x: -1
+          say: x = −1 gives −3 + 7 = 4. 3x needs to be much more negative.
     items:
       - prompt: "x + 8 = 3. What is x?"
         answer: "-5"

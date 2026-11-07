@@ -26,6 +26,23 @@ concepts:
       visual: "Picture a classroom seating chart: column number first, then row number. (3, 2) means column 3, row 2. Swapping them sends you to a different desk."
       step_by_step: "Distance from (1, 2) to (4, 6): Step 1: Across: 4 − 1 = 3. Step 2: Up: 6 − 2 = 4. Step 3: Distance = √(3² + 4²) = √25 = 5."
       real_world: "A city map with a grid lets you say 'the school is at (4, 6) and the library at (1, 2)'. Straight across country, they are 5 blocks apart, even though walking along the streets is 3 + 4 = 7 blocks."
+    activity:
+      type: graph
+      mode: point
+      range:
+      - -6
+      - 6
+      prompt: Move the point. x goes left and right; y goes up and down.
+      goals:
+      - prompt: Put the point at (3, 2).
+        x: 3
+        y: 2
+      - prompt: Now (−4, 1).
+        x: -4
+        y: 1
+      - prompt: Now (0, −5).
+        x: 0
+        y: -5
     items:
       - prompt: "Which point is 3 to the right of the origin and 2 down?"
         options: ["(3, −2)", "(−2, 3)", "(3, 2)", "(−3, 2)"]
@@ -94,6 +111,41 @@ concepts:
       - ['(0, 1)', '(3, 7)', y = 2x + 1]
       caption: 'Each pair from the table is a point. They all lie on one straight line: y = 2x + 1.'
       alt: Axes with the points (0, 1), (1, 3), (2, 5) and (3, 7) joined by the straight line y = 2x + 1.
+    activity:
+      type: graph
+      mode: line
+      range:
+      - -6
+      - 6
+      m_step: 0.5
+      prompt: Every straight line is y = mx + c. Tilt it with Tilt up / Tilt down, and slide it with Up / Down.
+      goals:
+      - prompt: Make the line go through both green points.
+        through:
+        - - 0
+          - 1
+        - - 2
+          - 5
+        mistakes:
+        - when:
+            m: 4
+            c: 1
+          say: 'This line is too steep: from (0, 1), going 2 across takes it up 8, to (2, 9).'
+        - when:
+            m: 2
+            c: 5
+          say: This line crosses the y-axis at 5. The first point, (0, 1), is on the y-axis, so the line must cross it at 1.
+      - prompt: Now through (0, −2) and (4, 0).
+        through:
+        - - 0
+          - -2
+        - - 4
+          - 0
+        mistakes:
+        - when:
+            m: 2
+            c: -2
+          say: 'Too steep: from (0, −2), going 4 across takes it up 8, not 2.'
     items:
       - prompt: "On the line y = 2x + 1, what is y when x = 3?"
         answer: "7"
@@ -150,6 +202,31 @@ concepts:
       visual: "Draw a staircase under the line, each step 1 square across. On y = 3x, each step rises 3 squares; on y = x, just 1. The taller the steps, the steeper the line."
       step_by_step: "Slope of the line through (0, 5) and (2, 1): Step 1: Change in y: 1 − 5 = −4. Step 2: Change in x: 2 − 0 = 2. Step 3: Slope = −4 ÷ 2 = −2. The line goes down."
       real_world: "A tank fills steadily: 30 litres after 2 minutes, 75 after 5. The rate is (75 − 30) ÷ (5 − 2) = 15 litres per minute. That rate is the slope of the line on a graph of litres against minutes."
+    activity:
+      type: graph
+      mode: line
+      range:
+      - -6
+      - 6
+      m_step: 0.5
+      prompt: The slope m tells how much y changes when x goes up by 1.
+      goals:
+      - prompt: Make a line with slope 2 that crosses the y-axis at −1.
+        m: 2
+        c: -1
+        mistakes:
+        - when:
+            m: -1
+            c: 2
+          say: 'You swapped them: this line has slope −1 and crosses at 2. In y = mx + c, m is the slope and c is where it crosses the y-axis.'
+      - prompt: 'Make a line going down: slope −1, through (0, 3).'
+        m: -1
+        c: 3
+        mistakes:
+        - when:
+            m: 1
+            c: 3
+          say: Slope 1 goes up as you move right. Going down means a negative slope.
     items:
       - prompt: "What is the slope of the line y = 4x − 3?"
         answer: "4"

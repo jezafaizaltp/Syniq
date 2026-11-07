@@ -27,6 +27,36 @@ concepts:
       visual: "Roll a wheel along the ground for one full turn and mark where it stops. Now lay its diameter along that path. It fits just over 3 times, with a small piece left over. That 'just over 3' is π."
       step_by_step: "To estimate π with a steel plate: Step 1: Wrap a thread around the edge and measure it, say 66 cm. Step 2: Measure across the middle, say 21 cm. Step 3: 66 ÷ 21 ≈ 3.14. Step 4: Any circle gives about the same answer."
       real_world: "A bicycle wheel with a diameter of 70 cm rolls about 3.14 × 70 ≈ 220 cm in one turn. The number of turns on the cycle's meter, times 220 cm, gives the distance travelled."
+    activity:
+      type: formula
+      prompt: 'Measure circles of different sizes: the perimeter divided by the diameter is always the same.'
+      inputs:
+      - name: d
+        label: Diameter
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: c
+        label: Perimeter
+        expr: pi*d
+        unit: cm
+      - name: r
+        label: Perimeter ÷ diameter
+        expr: pi*d/d
+        places: 4
+      goals:
+      - prompt: Make a circle whose perimeter is between 31.4 and 31.5 cm.
+        want:
+          c:
+          - 31.4
+          - 31.5
+        mistakes:
+        - when:
+            d: 5
+          say: 'With diameter 5 the perimeter is about 15.7 cm, half of what you need. Perimeter = π × diameter: a circle twice as wide has twice the perimeter.'
     items:
       - prompt: "For any circle, what is circumference ÷ diameter?"
         options: ["π, about 3.14", "2", "It depends on the size of the circle", "π, which is exactly 22/7"]
@@ -79,6 +109,33 @@ concepts:
       visual: "Picture a circle with a line straight across it, the diameter. Now imagine bending three diameters and a bit more around the edge. That's the circumference: π diameters."
       step_by_step: "For a circle of radius 7 cm, with π ≈ 22/7: Step 1: Diameter = 2 × 7 = 14 cm. Step 2: Circumference = π × d = 22/7 × 14. Step 3: = 44 cm."
       real_world: "A bicycle wheel 70 cm across goes 22/7 × 70 = 220 cm in one turn. After 100 turns the bicycle has travelled 22000 cm, which is 220 m."
+    activity:
+      type: formula
+      prompt: Perimeter of a circle = 2πr.
+      inputs:
+      - name: r
+        label: Radius
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: c
+        label: Perimeter
+        expr: 2*pi*r
+        unit: cm
+      goals:
+      - prompt: Make the perimeter about 44 cm (43.9 to 44.1).
+        want:
+          c:
+          - 43.9
+          - 44.1
+        hint: 'Using 22/7: 2 × 22/7 × r = 44.'
+        mistakes:
+        - when:
+            r: 14
+          say: With radius 14 the perimeter is about 88 cm, twice too much. 14 may be the diameter you're thinking of, not the radius.
     items:
       - prompt: "A circle has a diameter of 14 cm. Using π ≈ 22/7, what is its circumference, in cm?"
         answer: "44"
@@ -143,6 +200,38 @@ concepts:
       visual: "Cut a circle into many thin slices like a pizza. Lay them side by side, points up and down in turn. They make a shape very close to a rectangle: one side is half the circumference, πr, and the other is the radius, r. So the area is πr × r = πr²."
       step_by_step: "For a circle of diameter 20 cm with π ≈ 3.14: Step 1: Radius = 20 ÷ 2 = 10 cm. Step 2: r² = 100. Step 3: Area = 3.14 × 100 = 314 cm²."
       real_world: "A 28 cm pizza (14 cm radius) has an area of 22/7 × 14 × 14 = 616 cm². Cut into 8 equal slices, each slice is 77 cm². Two 20 cm pizzas give less to eat than one 28 cm pizza."
+    activity:
+      type: formula
+      prompt: Area of a circle = πr².
+      inputs:
+      - name: r
+        label: Radius
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: a
+        label: Area
+        expr: pi*r^2
+        unit: cm²
+        places: 1
+      goals:
+      - prompt: Make the area about 154 cm² (153.5 to 154.5).
+        want:
+          a:
+          - 153.5
+          - 154.5
+        mistakes:
+        - when:
+            r: 14
+          say: With radius 14 the area is about 616 cm², four times too big. The radius is squared, so it grows fast.
+      - prompt: What happens to the area when you double the radius? Make it about 616 cm².
+        want:
+          a:
+          - 614
+          - 618
     items:
       - prompt: "A circle has a radius of 7 cm. Using π ≈ 22/7, what is its area, in cm²?"
         answer: "154"
@@ -201,6 +290,37 @@ concepts:
       visual: "Picture a running track: a rectangle in the middle with a half circle stuck on each end. The two half circles together make one whole circle. So one lap is the two straight sides plus one full circumference."
       step_by_step: "A square of side 14 cm with a circle fitting exactly inside it: Step 1: Square area = 14 × 14 = 196 cm². Step 2: The circle's radius is 7 cm, so its area is 154 cm². Step 3: Area outside the circle = 196 − 154 = 42 cm²."
       real_world: "A school track has straight sides of 100 m and semicircular ends 70 m across. One lap is 100 + 100 + 22/7 × 70 = 420 m."
+    activity:
+      type: formula
+      prompt: 'A ring: a big circle of radius R with a small circle of radius r cut out.'
+      inputs:
+      - name: big
+        label: R
+        min: 1
+        max: 12
+        step: 1
+        start: 2
+        unit: cm
+      - name: small
+        label: r
+        min: 0
+        max: 11
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: a
+        label: Ring area
+        expr: pi*(big^2-small^2)
+        unit: cm²
+        places: 1
+      goals:
+      - prompt: Make a ring with area about 88 cm² (87.5 to 88.5).
+        want:
+          a:
+          - 87.5
+          - 88.5
+        hint: R² − r² must be 28.
     items:
       - prompt: "What is the area of a semicircle of radius 7 cm, in cm²? Use π ≈ 22/7."
         answer: "77"

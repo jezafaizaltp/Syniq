@@ -26,6 +26,48 @@ concepts:
       visual: "Picture a rectangle √2 cm wide and √8 cm long. Its area is √2 × √8. Cut and rearrange it and it fills exactly a 4 cm by 1 cm strip: area 4 cm², the same as √16."
       step_by_step: "For 2√3 × 4√2: Step 1: Multiply the numbers outside: 2 × 4 = 8. Step 2: Multiply the numbers under the roots: 3 × 2 = 6, giving √6. Step 3: Put them together: 8√6."
       real_world: "A rectangular tile is √6 cm by √3 cm. Its area is √6 × √3 = √18 = 3√2 cm², about 4.24 cm²."
+    activity:
+      type: formula
+      prompt: √a × √b is always √(ab). Try it.
+      inputs:
+      - name: a
+        label: a
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+      - name: b
+        label: b
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+      outputs:
+      - name: p
+        label: √a × √b
+        expr: sqrt(a)*sqrt(b)
+        places: 3
+      - name: q
+        label: √(ab)
+        expr: sqrt(a*b)
+        places: 3
+      goals:
+      - prompt: Make √a × √b equal 6 exactly, without a or b being a perfect square.
+        want:
+          p: 6
+          a: 2
+        hint: a × b must be 36.
+        mistakes:
+        - when:
+            a: 2
+            b: 3
+          say: '√2 × √3 = √6, about 2.45, not 6. Multiplying square roots multiplies what''s inside: √2 × √b = √(2b). For that to be 6 = √36, what must 2b be?'
+        - when:
+            a: 4
+          say: '4 is a perfect square: √4 = 2. The goal asks for a and b that are not perfect squares.'
+        - when:
+            a: 9
+          say: '9 is a perfect square: √9 = 3. The goal asks for a and b that are not perfect squares.'
     items:
       - prompt: "What is √2 × √8?"
         answer: "4"
@@ -96,6 +138,38 @@ concepts:
       kind: flow
       steps: [50 = 25 × 2, '25 is a square: √25 = 5', √50 = √25 × √2, √50 = 5√2]
       alt: 'Simplifying the square root of 50: 50 is 25 times 2, and the root of 25 is 5, so root 50 is 5 root 2.'
+    activity:
+      type: sort
+      prompt: Which simpler form is each square root equal to?
+      bins:
+      - 2√3
+      - 3√2
+      - 2√5
+      items:
+      - label: √12
+        bin: 2√3
+        why: 12 = 4 × 3, so √12 = √4 × √3 = 2√3.
+        clue: Find a square number that divides 12.
+      - label: √18
+        bin: 3√2
+        why: 18 = 9 × 2, so √18 = 3√2.
+        clue: 'Which square number divides 18: 4 or 9?'
+      - label: √20
+        bin: 2√5
+        why: 20 = 4 × 5, so √20 = 2√5.
+        clue: Which square number divides 20?
+      - label: √4 × √3
+        bin: 2√3
+        clue: What is √4?
+        why: √4 = 2, so √4 × √3 = 2√3.
+      - label: √9 × √2
+        bin: 3√2
+        clue: What is √9?
+        why: √9 = 3, so √9 × √2 = 3√2.
+      - label: √4 × √5
+        bin: 2√5
+        clue: What is √4?
+        why: √4 = 2, so √4 × √5 = 2√5.
     items:
       - prompt: "Simplify √12."
         options: ["2√3", "3√2", "6", "4√3"]
@@ -165,6 +239,37 @@ concepts:
       visual: "Think of √3 as a kind of fruit. Two √3 mangoes and five √3 mangoes make seven √3 mangoes. A √2 is a different fruit, so it can't join the √3 pile. But √8 turns out to be two √2s in disguise."
       step_by_step: "For √12 + √27: Step 1: Simplify √12 = 2√3. Step 2: Simplify √27 = 3√3. Step 3: Now both are √3s: 2√3 + 3√3. Step 4: = 5√3."
       real_world: "A triangle has sides of √12 cm, √27 cm and √48 cm. They are 2√3, 3√3 and 4√3, so the perimeter is 9√3 cm, about 15.6 cm."
+    activity:
+      type: sort
+      prompt: Can the two be added into a single term?
+      bins:
+      - Yes, one term
+      - 'No'
+      items:
+      - label: √2 + √8
+        bin: Yes, one term
+        why: '√8 = √(4 × 2) = 2√2, so √2 + 2√2 = 3√2: one term.'
+        clue: Can √8 be written using √2?
+      - label: √3 + √12
+        bin: Yes, one term
+        why: '√12 = 2√3, so √3 + 2√3 = 3√3: one term.'
+        clue: Can √12 be written using √3?
+      - label: √2 + √3
+        bin: 'No'
+        why: √2 and √3 are different roots that can't be simplified, so they stay two terms, like 2 apples + 3 mangoes.
+        clue: Can either be written using the other's square root?
+      - label: √5 + √20
+        bin: Yes, one term
+        clue: Is there a square number inside 20?
+        why: '√20 = 2√5, so √5 + 2√5 = 3√5: one term.'
+      - label: √6 + √10
+        bin: 'No'
+        clue: Do 6 or 10 have a square factor like 4 or 9?
+        why: Neither 6 nor 10 has a square factor, so √6 and √10 stay separate.
+      - label: 2√7 + √7
+        bin: Yes, one term
+        clue: 'Both count the same thing: √7. How many √7s altogether?'
+        why: '2 of √7 plus 1 of √7 is 3√7: one term.'
     items:
       - prompt: "What is 2√3 + 5√3?"
         options: ["7√3", "7√6", "10√3", "√21"]
@@ -237,6 +342,42 @@ concepts:
       kind: flow
       steps: [6/√3, 'Multiply top and bottom by √3: 6√3 / 3', Divide 6 by 3, 6/√3 = 2√3]
       alt: 'Dividing 6 by root 3: multiply top and bottom by root 3 to get 6 root 3 over 3, which is 2 root 3.'
+    activity:
+      type: formula
+      prompt: √a ÷ √b is the same as √(a ÷ b).
+      inputs:
+      - name: a
+        label: a
+        min: 1
+        max: 50
+        step: 1
+        start: 1
+      - name: b
+        label: b
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+      outputs:
+      - name: p
+        label: √a ÷ √b
+        expr: sqrt(a)/sqrt(b)
+        places: 3
+      - name: q
+        label: √(a ÷ b)
+        expr: sqrt(a/b)
+        places: 3
+      goals:
+      - prompt: Make √a ÷ √b equal 3 with b = 2.
+        want:
+          p: 3
+          b: 2
+        hint: a ÷ b must be 9.
+        mistakes:
+        - when:
+            a: 6
+            b: 2
+          say: '√6 ÷ √2 = √3, about 1.73, not 3. Dividing roots divides what''s inside: 6 ÷ 2 = 3 stays under the root. What''s inside must be 3², not 3.'
     items:
       - prompt: "What is √18 ÷ √2?"
         answer: "3"
@@ -316,6 +457,40 @@ concepts:
       - [√2, '1']
       caption: (√2 + 1)² = 2 + √2 + √2 + 1 = 3 + 2√2
       alt: A square of side root 2 plus 1 split into areas 2, root 2, root 2 and 1, which add to 3 + 2 root 2.
+    activity:
+      type: formula
+      prompt: (√a + √b)(√a − √b) has no square roots left in it. See why.
+      inputs:
+      - name: a
+        label: a
+        min: 1
+        max: 15
+        step: 1
+        start: 1
+      - name: b
+        label: b
+        min: 1
+        max: 15
+        step: 1
+        start: 1
+      outputs:
+      - name: p
+        label: (√a + √b)(√a − √b)
+        expr: (sqrt(a)+sqrt(b))*(sqrt(a)-sqrt(b))
+        places: 3
+      - name: q
+        label: a − b
+        expr: a-b
+      goals:
+      - prompt: Make the product equal 5 using a = 7.
+        want:
+          p: 5
+          a: 7
+        mistakes:
+        - when:
+            a: 7
+            b: 5
+          say: (√7 + √5)(√7 − √5) = 7 − 5 = 2. The square roots vanish and leave a − b, so a − b has to be 5.
     items:
       - prompt: "What is (√3 + √2)(√3 − √2)?"
         answer: "1"

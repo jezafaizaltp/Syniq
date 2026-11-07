@@ -24,6 +24,35 @@ concepts:
       visual: "Line up the students in groups of 5: 2 boys and 3 girls in each. You get 6 such groups. Each group shows the ratio 2 : 3."
       step_by_step: "Simplify 24 : 36. Step 1: The biggest number dividing both is 12. Step 2: 24 ÷ 12 = 2 and 36 ÷ 12 = 3. Step 3: The ratio is 2 : 3."
       real_world: "A recipe uses 2 cups of rice to 3 cups of water. For a bigger family, 4 cups of rice need 6 cups of water: the ratio 2 : 3 stays the same."
+    activity:
+      type: formula
+      prompt: A class of 30 has boys and girls.
+      inputs:
+      - name: b
+        label: Boys
+        min: 1
+        max: 29
+        step: 1
+        start: 15
+      outputs:
+      - name: g
+        label: Girls
+        expr: 30-b
+      - name: r
+        label: Girls for every boy
+        expr: (30-b)/b
+        places: 2
+      goals:
+      - prompt: 'Make the ratio of boys to girls 2 : 3.'
+        want:
+          r: 1.5
+        hint: '2 : 3 means 1.5 girls for every boy.'
+        mistakes:
+        - when:
+            r:
+            - 0.66
+            - 0.67
+          say: 'Now there are 2 girls for every 3 boys: that''s 3 : 2 for boys to girls, the other way round. 2 : 3 means fewer boys than girls.'
     items:
       - prompt: "A class has 12 boys and 18 girls. What is the ratio of boys to girls in simplest form?"
         options: ["2 : 3", "3 : 2", "12 : 30", "6 : 9"]
@@ -91,6 +120,36 @@ concepts:
       - {label: 5 pens, value: 60}
       caption: 'Double the pens, double the cost: cost ÷ pens is always 12.'
       alt: 'Bars for the cost of 1 to 5 pens at 12 rupees each: 12, 24, 36, 48 and 60, growing by the same amount each time.'
+    activity:
+      type: formula
+      prompt: Pens cost ₹12 each. Cost is directly proportional to the number of pens.
+      inputs:
+      - name: n
+        label: Pens
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+      outputs:
+      - name: c
+        label: Cost
+        expr: 12*n
+        unit: ₹
+      - name: r
+        label: Cost ÷ pens
+        expr: 12*n/max(n,1)
+        unit: ₹
+      goals:
+      - prompt: How many pens for ₹84?
+        want:
+          c: 84
+      - prompt: 'Now double the money: ₹168. How many pens?'
+        want:
+          c: 168
+        mistakes:
+        - when:
+            n: 8
+          say: 8 pens cost ₹96. Twice as many pens as 7 cost twice as much.
     items:
       - prompt: "5 pens cost ₹60. How many rupees do 8 pens cost?"
         answer: "96"
@@ -147,6 +206,36 @@ concepts:
       visual: "Picture 60 bricks to lay, one brick per worker per day. Arrange them in a rectangle: 6 rows of 10, or 4 rows of 15, or 12 rows of 5. The total, the area, never changes."
       step_by_step: "A bus at 40 km/h takes 3 hours. How long at 60 km/h? Step 1: Distance = 40 × 3 = 120 km. Step 2: Time = 120 ÷ 60 = 2 hours."
       real_world: "Food stocked for 20 campers for 9 days lasts only 6 days if 30 campers come: 20 × 9 = 180 camper-days, and 180 ÷ 30 = 6."
+    activity:
+      type: formula
+      prompt: A job takes 24 worker-days. More workers, fewer days.
+      inputs:
+      - name: w
+        label: Workers
+        min: 1
+        max: 24
+        step: 1
+        start: 1
+      outputs:
+      - name: d
+        label: Days
+        expr: 24/w
+        places: 1
+      goals:
+      - prompt: Finish it in 4 days.
+        want:
+          d: 4
+        mistakes:
+        - when:
+            w: 4
+          say: 4 workers take 6 days. With more workers the job is shared, so to finish faster you need more workers, not fewer.
+      - prompt: Finish it in 3 days.
+        want:
+          d: 3
+        mistakes:
+        - when:
+            w: 3
+          say: 3 workers take 8 days. Fewer days needs more workers.
     items:
       - prompt: "6 workers can build a wall in 10 days. How many days will 4 workers take?"
         answer: "15"
@@ -211,6 +300,41 @@ concepts:
       - {label: 'Sita: 3 parts', value: 300}
       caption: '₹500 in the ratio 2 : 3 is 5 parts of ₹100: Ravi gets 2 parts, Sita 3.'
       alt: '500 rupees shared in the ratio 2 to 3: Ravi gets 200 rupees and Sita 300 rupees.'
+    activity:
+      type: formula
+      prompt: 'Share ₹600 in the ratio a : b.'
+      inputs:
+      - name: a
+        label: a
+        min: 1
+        max: 9
+        step: 1
+        start: 1
+      - name: b
+        label: b
+        min: 1
+        max: 9
+        step: 1
+        start: 1
+      outputs:
+      - name: x
+        label: First share
+        expr: 600*a/(a+b)
+        unit: ₹
+      - name: y
+        label: Second share
+        expr: 600*b/(a+b)
+        unit: ₹
+      goals:
+      - prompt: Make the shares ₹240 and ₹360.
+        want:
+          x: 240
+          y: 360
+        mistakes:
+        - when:
+            x: 360
+            y: 240
+          say: 'The shares are swapped: the first share is ₹360. In a : b, a goes with the first share.'
     items:
       - prompt: "₹500 is shared between Ravi and Sita in the ratio 2 : 3. How many rupees does Ravi get?"
         answer: "200"

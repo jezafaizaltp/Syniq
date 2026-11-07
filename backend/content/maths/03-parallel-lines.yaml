@@ -52,6 +52,38 @@ concepts:
       - [A, E]
       caption: 'The parallel lines are equally spaced, so they cut the slanted line into equal parts: AB = BC = CD = DE.'
       alt: Five equally spaced parallel lines crossed by a slanted line at A, B, C, D and E, which cut it into four equal pieces.
+    activity:
+      type: number_line
+      min: 0
+      max: 12
+      step: 1
+      start: 0
+      prompt: Equally spaced parallel lines cut a 12 cm line into equal parts. Mark where the cuts fall.
+      goals:
+      - prompt: 'Cut it into 3 equal parts: mark the first cut.'
+        target: 4
+        mistakes:
+        - when:
+            v: 3
+          say: 3 cm is a quarter of 12 cm. Cutting there would make 4 parts, not 3.
+        - when:
+            v: 6
+          say: '6 cm is halfway: that cuts the line into 2 parts, not 3.'
+        - when:
+            v: 8
+          say: '8 cm is two thirds of the way: that''s the second cut, not the first.'
+      - prompt: 'Cut it into 4 equal parts: mark the third cut.'
+        target: 9
+        mistakes:
+        - when:
+            v: 3
+          say: 3 cm is the first cut. The goal asks for the third one.
+        - when:
+            v: 6
+          say: '6 cm is halfway: that''s the second cut of four.'
+        - when:
+            v: 8
+          say: 8 cm is two thirds of the line. Quarters are smaller pieces than thirds.
     items:
       - prompt: "Four equally spaced parallel lines cross a slanted line. The part between the first two lines is 3 cm. How long is the slanted line from the first line to the fourth, in cm?"
         answer: "9"
@@ -107,6 +139,41 @@ concepts:
       visual: "Draw three parallel lines with the middle one nearer the top. Cross them with two slanted lines. On each slanted line the top piece is shorter, and top piece ÷ bottom piece gives the same number for both lines."
       step_by_step: "Three parallel lines cut one line into 2 cm and 3 cm, and another into 4 cm and x cm. Step 1: The ratios match: 2 : 3 = 4 : x. Step 2: As fractions, 2/3 = 4/x. Step 3: Cross-multiply: 2x = 12. Step 4: x = 6 cm."
       real_world: "Two straight roads cross three parallel railway lines. Between the first two railways, road A runs 400 m and road B 500 m. If road A runs 600 m between the second and third railways, road B runs 750 m there, because 400 : 600 = 500 : 750."
+    activity:
+      type: formula
+      prompt: 'A 10 cm line is cut in the ratio a : b by parallel lines.'
+      inputs:
+      - name: a
+        label: a
+        min: 1
+        max: 9
+        step: 1
+        start: 1
+      - name: b
+        label: b
+        min: 1
+        max: 9
+        step: 1
+        start: 1
+      outputs:
+      - name: p
+        label: First part
+        expr: 10*a/(a+b)
+        unit: cm
+      - name: q
+        label: Second part
+        expr: 10*b/(a+b)
+        unit: cm
+      goals:
+      - prompt: Make the first part 6 cm and the second 4 cm. What ratio is that?
+        want:
+          p: 6
+          q: 4
+        mistakes:
+        - when:
+            p: 4
+            q: 6
+          say: 'The parts are swapped: the first part is 4 cm and the second 6 cm. In a : b, a goes with the first part.'
     items:
       - prompt: "Three parallel lines cut one line into parts of 2 cm and 3 cm, and another line into parts of 4 cm and x cm. What is x?"
         answer: "6"
@@ -185,6 +252,40 @@ concepts:
       - [P, Q, 3 cm]
       caption: PQ is parallel to BC a third of the way down, so AP is a third of AB, AQ a third of AC, and PQ a third of BC.
       alt: Triangle ABC with a line PQ parallel to the base BC, a third of the way down from A. PQ is 3 cm, a third of BC's 9 cm.
+    activity:
+      type: formula
+      prompt: 'In triangle ABC, a line parallel to BC cuts AB at P and AC at Q, with AQ = 4 cm. Then AP : PB = AQ : QC.'
+      inputs:
+      - name: ap
+        label: AP
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      - name: pb
+        label: PB
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: qc
+        label: QC
+        expr: 4*pb/ap
+        unit: cm
+      goals:
+      - prompt: Make QC = 6 cm. What do AP and PB have to be?
+        want:
+          qc: 6
+        hint: 'AP : PB = AQ : QC = 4 : 6. Which pairs of numbers are in the ratio 4 : 6?'
+        mistakes:
+        - when:
+            qc:
+            - 2.6
+            - 2.7
+          say: 'QC came out about 2.67 cm, shorter than AQ. AP and PB may be the wrong way round: QC is longer than AQ, so PB must be longer than AP.'
     items:
       - prompt: "In triangle ABC, a line parallel to BC cuts AB at P and AC at Q. AP = 3 cm, PB = 6 cm and AQ = 4 cm. What is QC, in cm?"
         answer: "8"
@@ -247,6 +348,22 @@ concepts:
       visual: "Picture AB along the bottom and a slanted line rising from A with five equal tick marks. A line runs from the 5th tick down to B, and a parallel line from the 2nd tick down to AB. The parallel lines cut AB in the same 2 : 3 ratio as the ticks."
       step_by_step: "To divide a 12 cm line in the ratio 1 : 3: Step 1: Add the ratio numbers: 1 + 3 = 4 shares. Step 2: One share is 12 ÷ 4 = 3 cm. Step 3: The first part is 1 share, 3 cm. Step 4: The second part is 3 shares, 9 cm. Step 5: Check: 3 + 9 = 12."
       real_world: "A 1.5 m ribbon is cut in the ratio 2 : 1 for two gift boxes. That is 3 shares of 0.5 m, so the pieces are 1 m and 0.5 m."
+    activity:
+      type: order
+      prompt: 'Put the steps for dividing a line AB in the ratio 2 : 3 in order.'
+      steps:
+      - Draw the line AB
+      - Draw a slanting line from A
+      - Mark 5 equal steps along it from A
+      - Join the 5th mark to B
+      - Draw a parallel line through the 2nd mark
+      - Where it meets AB is the point you want
+      reasons:
+        Draw a slanting line from A: A slanting line from A needs the line AB, and its point A, to be there first.
+        Mark 5 equal steps along it from A: The steps go along the slanting line, so it must be drawn first. 2 + 3 = 5 steps.
+        Join the 5th mark to B: There is no 5th mark until the 5 steps are marked.
+        Draw a parallel line through the 2nd mark: Parallel to what? The line from the 5th mark to B has to be drawn first.
+        Where it meets AB is the point you want: The point only appears where the parallel line crosses AB.
     items:
       - prompt: "A line 10 cm long is divided in the ratio 2 : 3. How long is the shorter part, in cm?"
         answer: "4"

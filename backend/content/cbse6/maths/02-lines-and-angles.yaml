@@ -51,22 +51,32 @@ concepts:
     items:
     - label: Goes on forever in both directions
       bin: Line
+      clue: How many ends does it have?
+      why: 'No ends at all: a line.'
     - label: Has one end point and goes on forever the other way
       bin: Ray
+      clue: How many ends does it have?
+      why: 'One end: a ray.'
     - label: Has two end points
       bin: Line segment
+      clue: Does it go on forever?
+      why: 'Two ends, so it stops: a line segment.'
     - label: A torch beam shining into the sky
       bin: Ray
-      why: It starts at the torch and goes on in one direction.
+      why: 'It starts at the torch and goes on in one direction: a ray.'
+      clue: Where does it start? Does it stop?
     - label: The edge of a ruler
       bin: Line segment
-      why: The edge stops at both ends of the ruler.
+      why: 'The edge stops at both ends of the ruler: a line segment.'
+      clue: Does the edge stop somewhere?
     - label: Sunlight from the Sun
       bin: Ray
-      why: It starts at the Sun and goes outward.
+      why: 'It starts at the Sun and goes outward: a ray.'
+      clue: Where does it start? Does it stop?
     - label: A side of your notebook
       bin: Line segment
-      why: 'It has two ends: the corners.'
+      why: 'It has two ends, the corners: a line segment.'
+      clue: Does it have ends?
   items:
   - prompt: Which has exactly two end points?
     options:
@@ -171,12 +181,28 @@ concepts:
     goals:
     - prompt: Make a right angle, like the corner of a book.
       degrees: 90
+      mistakes:
+      - when:
+          degrees: 180
+        say: '180° is a straight line: two right angles. A book''s corner is half of that.'
+      - when:
+          degrees:
+          - 45
+          - 60
+        say: 'That''s narrower than a book''s corner: an acute angle.'
     - prompt: Make an acute angle (less than a right angle).
       kind: acute
     - prompt: Make an obtuse angle (more than a right angle, less than a straight line).
       kind: obtuse
     - prompt: Make a straight angle.
       degrees: 180
+      mistakes:
+      - when:
+          degrees: 90
+        say: '90° is a right angle: a corner. A straight angle is two right angles, flat like a line.'
+      - when:
+          degrees: 360
+        say: 360° is a full turn, all the way round. A straight angle is half a turn.
   items:
   - prompt: How many degrees are in a right angle?
     answer: '90'
