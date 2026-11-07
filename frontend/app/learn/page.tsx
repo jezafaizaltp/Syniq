@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiError, api, post } from "@/lib/api";
+import { ApiError, api, effectiveSupport, post } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { ageBand, readsAloud } from "@/lib/age";
 import { speak, useSession } from "@/lib/session";
@@ -17,6 +17,7 @@ import Mistake from "./Mistake";
 import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
 import Notes from "./Notes";
+import ReadAlong from "./ReadAlong";
 import Tutor from "./Tutor";
 
 type Subject = { id: number; code: string; name: string; chapters: number; language: string };
@@ -180,20 +181,29 @@ export default function Learn() {
     c.rounds.filter((r) => r.status !== "done").map((r) => ({ subjectId: c.subject_id, name: c.subject, kind: r.kind }))
   );
 
+  // During a lesson the chapter name is the page's main heading, for screen readers (it shows on the back button).
   if (chapter && !prefs) {
-    return <CheckIn onDone={setPrefs} />;
+    return (
+      <>
+        <h1 className="sr-only">{chapter.title}</h1>
+        <CheckIn onDone={setPrefs} />
+      </>
+    );
   }
 
   if (chapter && prefs) {
     return (
-      <Session
-        chapter={chapter}
-        prefs={prefs}
-        onExit={() => {
-          setChapter(null);
-          setPrefs(null);
-        }}
-      />
+      <>
+        <h1 className="sr-only">{chapter.title}</h1>
+        <Session
+          chapter={chapter}
+          prefs={prefs}
+          onExit={() => {
+            setChapter(null);
+            setPrefs(null);
+          }}
+        />
+      </>
     );
   }
 
@@ -397,6 +407,12 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const headingRef = useRef<HTMLHeadingElement>(null);
   const readAloud = readsAloud(me);
   const young = ageBand(me) === "little" || ageBand(me) === "middle";
+  const support = effectiveSupport(me?.settings);
+  // Calm: the lesson goes the same way every time, with no surprise puzzles.
+  const calm = support.includes("calm");
+  // Movement help: number keys choose answers, and the Next button takes focus so one key press moves on.
+  const motor = support.includes("motor");
+  const nextRef = useRef<HTMLButtonElement>(null);
   const [tutorOn, setTutorOn] = useState(false);
 
   useEffect(() => {
@@ -428,6 +444,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
   /** A brain teaser if one is due (only when the parent switched puzzles on). Returns whether one is showing. */
   async function tryPuzzle(): Promise<boolean> {
+    if (calm) return false;
     try {
       const pz = await api<Puzzle | null>("/thinking/puzzle");
       if (!pz || !pz.id) return false;
@@ -456,6 +473,32 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Number keys pick an answer (1 = first choice); Enter checks it, wherever focus is.
+  const choices = step?.item ? (step.item.choices?.length ? step.item.choices : step.item.kind === "mcq" ? step.item.options : []) : [];
+  useEffect(() => {
+    if (!choices.length || result) return;
+    function onKey(e: KeyboardEvent) {
+      const el = e.target as HTMLElement;
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === "Enter" && answer && el.tagName !== "BUTTON" && el.tagName !== "A") {
+        e.preventDefault();
+        submit();
+        return;
+      }
+      const n = Number(e.key);
+      if (Number.isInteger(n) && n >= 1 && n <= choices.length) {
+        e.preventDefault();
+        setAnswer(choices[n - 1]);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
+  useEffect(() => {
+    if (motor && result) requestAnimationFrame(() => nextRef.current?.focus());
+  }, [motor, result]);
+
   async function switchStyle(style: string) {
     if (!step?.concept) return;
     const exp = await api<Explanation>(`/concepts/${step.concept.id}/explanations/${style}`);
@@ -471,8 +514,8 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
     if (readAloud) speak(h.hint);
   }
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
+  async function submit(e?: React.FormEvent) {
+    e?.preventDefault();
     if (!step?.item || !answer.trim()) return;
     const r = await post<Result>("/learn/attempts", {
       item_id: step.item.id,
@@ -496,7 +539,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       return;
     }
     if (answered % PUZZLE_EVERY === 0 && (await tryPuzzle())) return;
-    if (answered % SPOT_EVERY === 0 && step?.concept) {
+    if (!calm && answered % SPOT_EVERY === 0 && step?.concept) {
       try {
         const sp = await api<Spot>(`/learn/spot?concept_id=${step.concept.id}`);
         setSpot(sp);
@@ -662,6 +705,8 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
         </p>
       )}
 
+      {calm && step && <CalmPlan kind={step.kind} answered={answered} minutes={prefs.minutes} />}
+
       {step && (
         <div className="card" aria-live="polite">
           {step.concept && <p className="muted">{step.concept.title}</p>}
@@ -688,7 +733,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                 <p className="muted">{t(`learn.why_method.${step.method_why}`, { method: methodName(t, step.explanation.style) })}</p>
               )}
               {young && step.explanation?.picture && <Picture picture={step.explanation.picture} />}
-              <p style={{ fontSize: "1.1rem" }}>{step.explanation?.body ?? t("learn.no_explanation")}</p>
+              <ReadAlong style={{ fontSize: "1.1rem" }} text={step.explanation?.body ?? t("learn.no_explanation")} />
               {!young && step.explanation?.picture && <Picture picture={step.explanation.picture} />}
               {young && step.explanation && (
                 <div className="row">
@@ -738,7 +783,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                 {KIND_HEADINGS[step.kind] ? t(KIND_HEADINGS[step.kind]) : null}
               </h2>
               {step.item.watch_out && !result && <p className="feedback warn watch-out">{t("learn.watch_out")}</p>}
-              <p style={{ fontSize: "1.2rem" }}>{step.item.prompt}</p>
+              <ReadAlong style={{ fontSize: "1.2rem" }} text={step.item.prompt} />
               <button
                 className="secondary"
                 onClick={() => {
@@ -751,20 +796,29 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
               </button>
               <form onSubmit={submit} style={{ marginTop: 12 }}>
                 {step.item.kind === "mcq" || step.item.choices?.length ? (
-                  <div className="options" role="group" aria-label={t("learn.choices")}>
-                    {(step.item.choices?.length ? step.item.choices : step.item.options).map((o) => (
-                      <button
-                        type="button"
-                        key={o}
-                        className="option"
-                        aria-pressed={answer === o}
-                        disabled={!!result}
-                        onClick={() => setAnswer(o)}
-                      >
-                        {o}
-                      </button>
-                    ))}
-                  </div>
+                  <>
+                    <div className="options" role="group" aria-label={t("learn.choices")}>
+                      {(step.item.choices?.length ? step.item.choices : step.item.options).map((o, i) => (
+                        <button
+                          type="button"
+                          key={o}
+                          className="option"
+                          aria-pressed={answer === o}
+                          aria-keyshortcuts={i < 9 ? String(i + 1) : undefined}
+                          disabled={!!result}
+                          onClick={() => setAnswer(o)}
+                        >
+                          {o}
+                          {motor && i < 9 && (
+                            <span className="key-hint" aria-hidden="true">
+                              {t("learn.key", { n: i + 1 })}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    {motor && !result && <p className="muted keys-help">{t("learn.keys_hint", { n: Math.min(choices.length, 9) })}</p>}
+                  </>
                 ) : (
                   <>
                     <label htmlFor="answer">{t("learn.your_answer")}</label>
@@ -815,7 +869,9 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                       </div>
                     </div>
                   )}
-                  <button onClick={afterResult}>{t("learn.next")}</button>
+                  <button ref={nextRef} onClick={afterResult}>
+                    {t("learn.next")}
+                  </button>
                 </>
               )}
             </>
@@ -845,6 +901,29 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
       {step?.concept && step.kind !== "chapter_complete" && <Notes conceptId={step.concept.id} conceptTitle={step.concept.title} />}
     </div>
+  );
+}
+
+/** Calm lessons: a picture plan of the lesson, so nothing comes as a surprise. */
+function CalmPlan({ kind, answered, minutes }: { kind: string; answered: number; minutes: number }) {
+  const { t } = useSession();
+  const now = kind === "explain" ? 0 : kind === "chapter_complete" ? 2 : 1;
+  const steps = [
+    { icon: "📖", label: t("calm.learn") },
+    { icon: "✏️", label: t("calm.practise", { n: answered }) },
+    { icon: "🏁", label: t("calm.finish") },
+  ];
+  return (
+    <nav aria-label={t("calm.plan")}>
+      <ol className="calm-plan">
+        {steps.map((st, i) => (
+          <li key={i} aria-current={i === now ? "step" : undefined} className={i < now ? "done" : undefined}>
+            <span aria-hidden="true">{st.icon}</span> {st.label}
+          </li>
+        ))}
+      </ol>
+      <p className="calm-note">{minutes ? t("calm.time", { n: minutes }) : t("calm.no_time")}</p>
+    </nav>
   );
 }
 

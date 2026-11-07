@@ -411,7 +411,7 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
     if item.kind == "numeric":
         # Phone number pads have no "/", so fraction answers get the full keyboard.
         out["keyboard"] = "text" if "/" in item.answer else "decimal"
-    if item.kind == "numeric" and "tap_to_answer" in detect.effective_support(settings):
+    if item.kind == "numeric" and {"tap_to_answer", "motor"} & set(detect.effective_support(settings)):
         # Answers to tap instead of type. The right one is among them, so it is not a hint.
         sum_ = responses.parse_arithmetic(item.prompt, item.answer)
         out["choices"] = responses.tap_choices(sum_, item.answer, item.id, list(item.misconceptions))

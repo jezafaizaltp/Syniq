@@ -97,6 +97,96 @@
   scroll-behavior: auto !important;
 }
 
+/* Reading colours: a soft page tint instead of bright white. Not used with high contrast. */
+:root[data-tint="cream"]:not([data-contrast="high"]) { --bg: #fbf3d9; --bg-2: #f5e9c4; --surface: #fff8e1; }
+:root[data-tint="blue"]:not([data-contrast="high"]) { --bg: #e3eef8; --bg-2: #d3e3f2; --surface: #eef5fb; }
+:root[data-tint="green"]:not([data-contrast="high"]) { --bg: #e5f1e1; --bg-2: #d5e8cf; --surface: #f0f7ed; }
+:root[data-tint="rose"]:not([data-contrast="high"]) { --bg: #f8e6e6; --bg-2: #f0d5d5; --surface: #fcf0f0; }
+@media (prefers-color-scheme: dark) {
+  /* In dark mode, tints stay dark: only a hint of the colour. */
+  :root[data-tint="cream"]:not([data-contrast="high"]) { --bg: #241f14; --bg-2: #2c2618; --surface: #302a1c; }
+  :root[data-tint="blue"]:not([data-contrast="high"]) { --bg: #161d24; --bg-2: #1b242d; --surface: #1f2934; }
+  :root[data-tint="green"]:not([data-contrast="high"]) { --bg: #172018; --bg-2: #1c271d; --surface: #212d22; }
+  :root[data-tint="rose"]:not([data-contrast="high"]) { --bg: #241819; --bg-2: #2c1d1e; --surface: #322223; }
+}
+
+/* Wider spacing: more room between letters, words and lines (within the WCAG 1.4.12 limits). */
+:root[data-spacing="wide"] body {
+  letter-spacing: 0.06em;
+  word-spacing: 0.2em;
+  line-height: 1.9;
+}
+:root[data-spacing="wide"] p { margin-bottom: 1.4em; }
+
+/* Read-along: the word being read is highlighted. */
+.read-along .word-now {
+  color: inherit;
+  background: var(--sun-soft);
+  box-shadow: 0 0 0 2px var(--sun-soft);
+  border-radius: 4px;
+}
+:root[data-contrast="high"] .read-along .word-now { background: #ffff00; color: #000; box-shadow: none; }
+
+/* Movement help: bigger targets, more space between them, a strong focus ring. */
+:root[data-motor="on"] button,
+:root[data-motor="on"] .btn,
+:root[data-motor="on"] input,
+:root[data-motor="on"] select { min-height: 64px; min-width: 64px; }
+:root[data-motor="on"] .options,
+:root[data-motor="on"] .row { gap: 18px; }
+:root[data-motor="on"] .option { padding: 18px 22px; font-size: 1.25rem; }
+:root[data-motor="on"] :focus-visible { outline-width: 5px; outline-offset: 4px; }
+:root[data-motor="on"] input[type="checkbox"] { width: 32px; height: 32px; min-height: 32px; min-width: 32px; }
+
+/* Number-key hints: only where there is a keyboard (or a switch acting as one), never on touch screens. */
+.key-hint,
+.keys-help {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .key-hint {
+    display: inline-block;
+    margin-left: auto;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  .keys-help {
+    display: block;
+  }
+}
+
+/* Calm, predictable lessons: a picture plan of what comes next. */
+.calm-plan {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  flex-wrap: wrap;
+}
+.calm-plan li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
+.calm-plan li[aria-current="step"] {
+  border-color: var(--accent);
+  color: var(--text);
+  font-weight: 700;
+}
+.calm-plan li.done { color: var(--good); border-color: var(--good); }
+.calm-note { color: var(--muted); margin: 0 0 12px; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1587,5 +1677,16 @@ label input[type="checkbox"] {
   .stack-table td {
     border: 0;
     padding: 4px 0;
+  }
+}
+
+/* Dark mode: keep subject symbols and buttons on yellow cards readable (found by the 2026-11 accessibility check). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-contrast="high"]) .subject-icon {
+    color: color-mix(in srgb, var(--tile, var(--accent)) 50%, #ffffff);
+  }
+  :root:not([data-contrast="high"]) .card.sunny button.secondary {
+    color: var(--sun);
+    border-color: color-mix(in srgb, var(--sun) 60%, var(--line));
   }
 }

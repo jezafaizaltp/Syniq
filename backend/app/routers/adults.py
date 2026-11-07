@@ -5,6 +5,7 @@ self-reported check-ins are never exposed to teachers.
 """
 
 from collections import Counter
+from datetime import datetime
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from pydantic import BaseModel, Field
@@ -27,7 +28,7 @@ from ..auth import (
 )
 from .. import i18n, learning
 from ..db import get_db
-from ..engine import detect
+from ..engine import checkup, detect
 from ..engine.mastery import progress_label
 from ..models import (
     Attempt,
@@ -301,9 +302,46 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
                     {"mode": mode, "reason": i18n.translate_english(lang, v["reason"]), "on": mode not in (child.settings or {}).get("auto_off", [])}
                     for mode, v in (child.settings or {}).get("auto_support", {}).items()
                 ],
+                "checkup_note": _checkup_note(db, user, child),
             }
         )
     return out
+
+
+def _checkup_note(db: DbSession, guardian: User, child: User) -> bool:
+    """A gentle note that a free check might help. Never names a condition (engine/checkup.py)."""
+    answers = db.execute(select(Attempt.created_at, Attempt.correct).where(Attempt.student_id == child.id)).all()
+    if len(answers) < checkup.MIN_ANSWERS:
+        return False
+    s = child.settings or {}
+    off = set(s.get("auto_off", []))
+    noticed_on = sum(1 for m in s.get("auto_support", {}) if m in detect.NOTICED and m not in off)
+    stuck = len(
+        db.scalars(select(Mastery).where(Mastery.student_id == child.id, Mastery.attempts >= 4, Mastery.p_known < 0.4)).all()
+    )
+    hidden = (guardian.settings or {}).get("checkup_hidden", {}).get(str(child.id))
+    return checkup.show_note(
+        [(a.created_at, a.correct) for a in answers],
+        noticed_on,
+        stuck,
+        learning.utcnow(),
+        datetime.fromisoformat(hidden) if hidden else None,
+    )
+
+
+@router.post("/guardian/children/{student_id}/checkup-note/hide", tags=["guardian"])
+def hide_checkup_note(student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    """The parent has read the note. It stays hidden for checkup.HIDE_DAYS days. Kept on the parent's own account."""
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    settings = dict(user.settings or {})
+    hidden = dict(settings.get("checkup_hidden", {}))
+    hidden[str(student_id)] = learning.utcnow().isoformat()
+    settings["checkup_hidden"] = hidden
+    user.settings = settings
+    db.commit()
+    audit(db, user, "hide_checkup_note", student_id)
+    return {"ok": True}
 
 
 @router.get("/guardian/children/{student_id}/progress", tags=["guardian"])

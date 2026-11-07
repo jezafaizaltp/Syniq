@@ -15,6 +15,8 @@ from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, 
 
 router = APIRouter(tags=["student"])
 
+READING_TINTS = ("none", "cream", "blue", "green", "rose")
+
 ALLOWED_SETTINGS = {
     "font_scale": (float, int),
     "high_contrast": bool,
@@ -24,7 +26,9 @@ ALLOWED_SETTINGS = {
     "extra_time": bool,
     "preferred_style": (str, type(None)),
     "ui_language": str,
-    "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer
+    "reading_tint": str,  # none, cream, blue, green, rose: a soft page colour that some readers find easier
+    "wide_spacing": bool,  # more space between letters, words and lines
+    "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer, calm, motor
     "auto_off": list,  # noticed modes the student has switched off
     "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
 }
@@ -419,6 +423,8 @@ def update_settings(
             raise HTTPException(400, "Unknown support mode")
         if key == "auto_off" and not (all(isinstance(v, str) for v in value) and set(value) <= set(detect.NOTICED)):
             raise HTTPException(400, "Unknown support mode")
+        if key == "reading_tint" and value not in READING_TINTS:
+            raise HTTPException(400, "Unknown reading colour")
         if key == "hindi_course" and value not in ("a", "b"):
             raise HTTPException(400, "Unknown Hindi course")
         if key == "ui_language" and value not in i18n.LANGS:

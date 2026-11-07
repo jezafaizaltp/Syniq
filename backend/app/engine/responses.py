@@ -13,6 +13,8 @@ student.
     screen_reader  Everything in words; no meaning carried only by pictures.
     visual_first   Never relies on sound; pictures and text for everything.
     tap_to_answer  Tap choices instead of typing or speaking.
+    calm           Predictable: a picture plan, no surprises, no movement.
+    motor          Big targets, keyboard and switch friendly, nothing to type.
     small_steps    Objects and smaller numbers first, then the real question.
 
 Answer-driven modes are picked from how the student answers, getting more
@@ -37,7 +39,7 @@ from . import patterns
 
 RESPONSES_VERSION = "2026.11-1"
 
-SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps"]
+SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps", "calm", "motor"]
 ANSWER_MODES = ["count_it_out", "step_by_step", "real_life", "try_similar"]
 
 # After this many wrong answers in a row, offer the AI tutor.

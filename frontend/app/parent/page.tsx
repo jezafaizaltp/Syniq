@@ -14,6 +14,7 @@ type Child = {
   consent: Record<string, boolean>;
   support_modes: string[];
   noticed: { mode: string; reason: string; on: boolean }[];
+  checkup_note?: boolean;
 };
 type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
@@ -64,6 +65,11 @@ export default function Parent() {
   async function setSupport(child: Child, mode: string, on: boolean) {
     const modes = on ? [...child.support_modes.filter((m) => m !== mode), mode] : child.support_modes.filter((m) => m !== mode);
     await put(`/guardian/children/${child.id}/support`, { modes });
+    load();
+  }
+
+  async function hideCheckup(childId: number) {
+    await post(`/guardian/children/${childId}/checkup-note/hide`, {});
     load();
   }
 
@@ -150,6 +156,17 @@ export default function Parent() {
                 ))}
               </ul>
             </>
+          )}
+          {c.checkup_note && (
+            <aside className="feedback note checkup-note" aria-labelledby={`checkup-${c.id}`}>
+              <h3 id={`checkup-${c.id}`}>{t("checkup.title", { name: c.name })}</h3>
+              <p>{t("checkup.body", { name: c.name })}</p>
+              <p>{t("checkup.where")}</p>
+              <p className="muted">{t("checkup.not_diagnosis")}</p>
+              <button className="secondary" onClick={() => hideCheckup(c.id)}>
+                {t("checkup.hide")}
+              </button>
+            </aside>
           )}
           <details className="parent-settings" open={!c.consent.core_learning}>
             <summary>{t("parent.settings_for", { name: c.name })}</summary>
