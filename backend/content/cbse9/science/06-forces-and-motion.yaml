@@ -37,6 +37,50 @@ concepts:
       - There is a net force
       - The object speeds up, slows down or turns
     alt: Balanced forces add to zero and don't change motion; unbalanced forces leave a net force that changes speed or direction.
+  activity:
+    type: sort
+    prompt: What does the object do? Think about whether the forces on it are balanced.
+    bins:
+    - Stays at rest
+    - Keeps moving the same way
+    - Speeds up, slows down or turns
+    items:
+    - label: 'A book on a table: weight down, table pushing up equally'
+      bin: Stays at rest
+      clue: Are the forces balanced? Was it moving to start with?
+      why: Balanced forces and at rest, so it stays at rest.
+    - label: 'A car at a steady 60 km/h: engine force equals friction'
+      bin: Keeps moving the same way
+      clue: Do balanced forces mean stopped?
+      why: Balanced forces mean no change in motion, so it keeps going at 60 km/h.
+    - label: A football being kicked
+      bin: Speeds up, slows down or turns
+      clue: Is there an unbalanced force at the kick?
+      why: 'The kick is an unbalanced force: the ball speeds up.'
+    - label: A space probe far from everything, engines off
+      bin: Keeps moving the same way
+      clue: Is anything pushing or pulling it?
+      why: No force acts, so by inertia it keeps moving in a straight line.
+    - label: 'A tug of war: both teams pull 500 N, rope still'
+      bin: Stays at rest
+      clue: What do equal, opposite pulls add up to?
+      why: '500 N each way cancel: no net force, so the rope stays still.'
+    - label: A cyclist stops pedalling on a flat road
+      bin: Speeds up, slows down or turns
+      clue: Is friction still acting? Is anything pushing forward?
+      why: Only friction acts, an unbalanced force backwards, so the bicycle slows down.
+    - label: A stone whirled at a steady speed on a string
+      bin: Speeds up, slows down or turns
+      clue: Its speed is steady. Is its direction?
+      why: 'Its direction changes all the time, so it is accelerating: the string pulls it inward.'
+    - label: Passengers when a bus brakes suddenly
+      bin: Keeps moving the same way
+      clue: The bus slows. What do the passengers' bodies tend to do?
+      why: By inertia their bodies keep moving forward, so they lurch forward.
+    - label: A coin on a card when the card is flicked away
+      bin: Stays at rest
+      clue: The card moves fast. Does the coin get pushed sideways?
+      why: The coin's inertia keeps it at rest, so it drops straight into the glass.
   items:
   - prompt: When a bus brakes suddenly, passengers fall forward. Why?
     options:
@@ -134,6 +178,65 @@ concepts:
     - 'After: equal and opposite momenta, total still 0'
     - The lighter skater moves faster
     alt: Two skaters push apart. The forces are equal and opposite, the total momentum stays 0, and the lighter skater moves faster.
+  activity:
+    type: formula
+    prompt: 'A 0.02 kg bullet leaves a gun at 400 m/s: 8 kg m/s forward. Before firing, gun and bullet were at rest: total momentum 0.'
+    inputs:
+    - name: m
+      label: Gun mass
+      min: 1
+      max: 8
+      step: 0.5
+      start: 1
+      unit: kg
+    - name: v
+      label: Gun's recoil speed
+      min: 0
+      max: 10
+      step: 0.5
+      start: 0
+      unit: m/s
+    outputs:
+    - name: pb
+      label: Bullet's momentum (forward)
+      expr: 0.02*400
+      unit: kg m/s
+    - name: pg
+      label: Gun's momentum (backward)
+      expr: m*v
+      unit: kg m/s
+    - name: total
+      label: Total momentum after firing
+      expr: 0.02*400-m*v
+      unit: kg m/s
+    goals:
+    - prompt: A 4 kg gun fires the bullet. Make the total momentum 0 again.
+      want:
+        m: 4
+        total: 0
+      hint: The gun's backward momentum must equal the bullet's 8 kg m/s. Momentum = mass × velocity.
+      mistakes:
+      - when:
+          m: 4
+          v: 8
+        say: At 8 m/s backward the gun carries 32 kg m/s, four times the bullet's. The heavier gun needs less speed for the same momentum.
+      - when:
+          m: 4
+          v: 0
+        say: If the gun didn't move, the total would be 8 kg m/s forward. Before firing it was 0, and momentum is conserved.
+    - prompt: Which gun mass would recoil at 4 m/s?
+      want:
+        v: 4
+        total: 0
+      mistakes:
+      - when:
+          v: 4
+          m: 8
+        say: An 8 kg gun at 4 m/s carries 32 kg m/s backward, four times the bullet's 8. A faster recoil means a lighter gun.
+      - when:
+          v: 4
+          m: 1
+        say: 1 kg at 4 m/s is only 4 kg m/s. The gun must balance the bullet's 8.
   items:
   - prompt: Find the momentum of a 2 kg ball moving at 5 m/s, in kg m/s.
     answer: '10'
@@ -232,6 +335,66 @@ concepts:
     - Resultant 30 N →
     - Box speeds up to the right
     alt: An 80 newton push against 50 newtons of friction gives a resultant of 30 newtons, so the box accelerates.
+  activity:
+    type: formula
+    prompt: A 10 kg box on the floor. Friction resists up to 60 N, so the resultant force is what's left of the pushes after friction.
+    inputs:
+    - name: p
+      label: Your push
+      min: 0
+      max: 100
+      step: 5
+      start: 0
+      unit: N
+    - name: q
+      label: Friend's push (same way)
+      min: 0
+      max: 100
+      step: 5
+      start: 0
+      unit: N
+    outputs:
+    - name: push
+      label: Total push
+      expr: p+q
+      unit: N
+    - name: res
+      label: Resultant force
+      expr: max(0,p+q-60)
+      unit: N
+    - name: acc
+      label: Acceleration = resultant ÷ 10 kg
+      expr: max(0,p+q-60)/10
+      unit: m/s²
+      places: 1
+    goals:
+    - prompt: On your own (friend pushes 0), make the box speed up at 2 m/s².
+      want:
+        q: 0
+        acc: 2
+      hint: F = ma needs 20 N of resultant force. What has to be beaten first?
+      mistakes:
+      - when:
+          p: 20
+          q: 0
+        say: '20 N is less than friction, so the box doesn''t move at all: friction cancels your push. The push must beat friction first.'
+      - when:
+          p: 60
+          q: 0
+        say: '60 N only balances friction: no resultant force, so no speeding up.'
+    - prompt: Your friend pushes 25 N. How hard must you push for 1.5 m/s²?
+      want:
+        q: 25
+        acc: 1.5
+      mistakes:
+      - when:
+          p: 75
+          q: 25
+        say: 'That''s 100 N together, 40 N past friction: 4 m/s². Your friend''s 25 N already counts.'
+      - when:
+          p: 15
+          q: 25
+        say: '15 + 25 = 40 N, less than friction''s 60 N: the box doesn''t move. Beat friction first, then add 15 N for 1.5 m/s².'
   items:
   - prompt: A box is pushed with 60 N and friction is 60 N. What happens to its motion?
     options:

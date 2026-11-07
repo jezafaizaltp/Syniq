@@ -58,6 +58,45 @@ concepts:
       - D
     caption: Opposite sides are equal, and the diagonals cut each other in half at O.
     alt: Parallelogram ABCD with opposite sides labelled a and a, b and b. The diagonals AC and BD cross at their mid-point O.
+  activity:
+    type: angle
+    prompt: Turn the arm to make each angle.
+    goals:
+    - prompt: ABCD is a parallelogram with ∠A = 70°. Make ∠B.
+      degrees: 110
+      mistakes:
+      - when:
+          degrees: 70
+        say: 70° is ∠C, opposite A. B is next to A, and adjacent angles of a parallelogram add to 180°.
+      - when:
+          degrees: 290
+        say: 290° makes a full turn with 70°. Adjacent angles make a straight angle, 180°.
+    - prompt: Now make ∠C.
+      degrees: 70
+      mistakes:
+      - when:
+          degrees: 110
+        say: 110° is ∠B or ∠D, next to A. C is opposite A, and opposite angles are equal.
+    - prompt: A quadrilateral (not a parallelogram) has angles 80°, 95° and 100°. Make the fourth.
+      degrees: 85
+      mistakes:
+      - when:
+          degrees: 95
+        say: 'Only a parallelogram has equal opposite angles. For any quadrilateral, use the angle sum: 360°.'
+      - when:
+          degrees: 180
+        say: The angles of a quadrilateral add to 360°, not 180°. What is left after 275°?
+    - prompt: Make the angle at which a rhombus's diagonals cross.
+      degrees: 90
+      mistakes:
+      - when:
+          degrees: 180
+        say: '180° is a straight line: the diagonals would lie along each other. In a rhombus they cross at right angles.'
+      - when:
+          degrees:
+          - 45
+          - 60
+        say: Too narrow. The diagonals of a rhombus cut each other at right angles, making four equal corners in the middle.
   items:
   - prompt: Three angles of a quadrilateral are 80°, 95° and 110°. Find the fourth angle in degrees.
     answer: '75'
@@ -173,6 +212,67 @@ concepts:
       - 4 cm
     caption: D and E are mid-points of AB and AC. DE is parallel to BC and half as long.
     alt: Triangle ABC with base BC of 8 cm. D and E are the mid-points of AB and AC, and the line DE is level with BC and 4 cm long.
+  activity:
+    type: formula
+    prompt: In triangle ABC, P and Q are the midpoints of AB and AC. Change the three sides.
+    inputs:
+    - name: a
+      label: BC
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: b
+      label: CA
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: c
+      label: AB
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: pq
+      label: PQ
+      expr: a/2
+      unit: cm
+    - name: big
+      label: Perimeter of ABC
+      expr: a+b+c
+      unit: cm
+    - name: small
+      label: Perimeter of the midpoint triangle
+      expr: (a+b+c)/2
+      unit: cm
+    goals:
+    - prompt: Make PQ = 6 cm.
+      want:
+        pq: 6
+      hint: PQ joins the midpoints of AB and AC. Which side is it parallel to?
+      mistakes:
+      - when:
+          a: 6
+        say: With BC = 6, PQ is only 3. The segment joining the midpoints is half the third side.
+      - when:
+          b: 12
+        say: PQ doesn't depend on CA. It is parallel to BC and half of it.
+    - prompt: With BC = 10 cm, make the midpoint triangle's perimeter 15 cm.
+      want:
+        a: 10
+        small: 15
+      mistakes:
+      - when:
+          big: 15
+        say: That's ABC's perimeter. Each side of the midpoint triangle is half a side of ABC, so its perimeter is half of ABC's.
+      - when:
+          small: 10
+        say: 'Not yet: the midpoint triangle''s sides are half of BC, CA and AB. CA + AB must grow.'
   items:
   - prompt: D and E are mid-points of AB and AC in △ABC. If BC = 12 cm, find DE in cm.
     answer: '6'
@@ -281,6 +381,43 @@ concepts:
       - M
     caption: 'G is on median AM with AG : GM = 2 : 1.'
     alt: Triangle ABC with M the midpoint of BC and the median AM; the centroid G lies two-thirds of the way from A to M.
+  activity:
+    type: graph
+    mode: point
+    range:
+    - -6
+    - 6
+    prompt: 'Move the point to the centroid: where the three medians meet. It is the average of the three corners.'
+    goals:
+    - prompt: Triangle A(−4, −1), B(4, −1), C(0, 5). Plot its centroid.
+      x: 0
+      y: 1
+      hint: Add the three x-values and divide by 3. Then the three y-values.
+      mistakes:
+      - when:
+          x: 0
+          y: -1
+        say: (0, −1) is the midpoint of AB, where the median from C ends. The centroid is a third of the way up from there towards C.
+      - when:
+          x: 0
+          y: 3
+        say: 'This is 2 : 1 from the side, not from the corner. The centroid splits the median 2 : 1 from the vertex, so it sits nearer the side.'
+      - when:
+          x: 0
+          y: 2
+        say: 'You averaged only two y-values. Use all three: (−1 − 1 + 5) ÷ 3.'
+    - prompt: Triangle A(−3, 5), B(6, −1), C(0, −4). Plot its centroid.
+      x: 1
+      y: 0
+      mistakes:
+      - when:
+          x: 3
+          y: 0
+        say: You added the x-values, 3, but didn't divide by 3. The centroid is the average.
+      - when:
+          x: 0
+          y: 1
+        say: 'Swapped: the x-values average to 1 and the y-values to 0.'
   items:
   - prompt: Find the x-coordinate of the centroid of the triangle with vertices (0, 0), (6, 0) and (3, 9).
     answer: '3'

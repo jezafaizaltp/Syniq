@@ -32,6 +32,65 @@ concepts:
     - at: 1
       label: certain
     alt: A probability scale from 0, impossible, through one half, even chance, to 1, certain.
+  activity:
+    type: scale
+    min: 0
+    max: 1
+    step: 0.05
+    start: 0.5
+    orientation: horizontal
+    unit: chance
+    prompt: The probability scale runs from 0 (impossible) to 1 (certain). Move the marker.
+    zones:
+    - from: 0.05
+      to: 0.3
+      label: Unlikely
+      says: 'Below about 0.3: it can happen, but less often than not.'
+    - from: 0.3
+      to: 0.7
+      label: About even
+      says: 'Around 0.5: about as likely to happen as not.'
+    - from: 0.7
+      to: 0.95
+      label: Likely
+      says: 'Above about 0.7: it happens more often than not, but not every time.'
+    goals:
+    - prompt: A normal dice shows 7.
+      value: 0
+      mistakes:
+      - when:
+          v:
+          - 0.05
+          - 1
+        say: 'That says 7 could come up. A dice has only 1 to 6, so 7 never can. Something impossible isn''t just unlikely: its probability is exactly 0.'
+    - prompt: You pick a marble from a bag of 3 red and 17 blue. It is red.
+      value: 0.15
+      mistakes:
+      - when:
+          v: 0.85
+        say: '0.85 is 17 out of 20: that''s blue. Red is the 3.'
+      - when:
+          v: 0.3
+        say: 0.3 is 3 out of 10, but the bag holds 20 marbles. Divide by all of them.
+    - prompt: A coin was tossed 40 times and landed heads 26 times. Mark the experimental probability of heads.
+      value: 0.65
+      hint: Experimental probability = times it happened ÷ number of tries.
+      mistakes:
+      - when:
+          v: 0.5
+        say: 0.5 is what we'd expect in theory. The experiment gave 26 heads out of 40 tries.
+      - when:
+          v: 0.35
+        say: '0.35 is 14 out of 40: the tails.'
+    - prompt: 'A spinner has 4 equal parts: 3 green and 1 yellow. It lands on green.'
+      value: 0.75
+      mistakes:
+      - when:
+          v: 0.25
+        say: 0.25 is the one yellow part. Green has 3 of the 4.
+      - when:
+          v: 1
+        say: 1 means certain, but it could land on yellow.
   items:
   - prompt: What is the probability of an event that is certain to happen?
     answer: '1'
@@ -116,6 +175,48 @@ concepts:
     - 'One head and one tail: HT, TH'
     - P = 2/4 = 1/2
     alt: Two coin tosses give four outcomes; two of them have one head and one tail, so the probability is one half.
+  activity:
+    type: number_line
+    min: 0
+    max: 36
+    step: 1
+    start: 0
+    prompt: 'Two dice are rolled: 6 × 6 = 36 equally likely pairs. Mark how many pairs fit: the probability is that many out of 36.'
+    goals:
+    - prompt: The two numbers add up to 7.
+      target: 6
+      hint: 'List pairs: (1, 6), (2, 5), … and remember (6, 1) is a different pair.'
+      mistakes:
+      - when:
+          v: 1
+        say: '1/36 is just one pair. A total of 7 can be made in more ways: count every ordered pair.'
+      - when:
+          v: 3
+        say: 3/36 counts (1, 6) and (6, 1) as the same. The dice are different, so each order is its own outcome.
+    - prompt: Both dice show an even number.
+      target: 9
+      mistakes:
+      - when:
+          v: 3
+        say: '3/36 counts only doubles like (2, 2). Each die can be 2, 4 or 6 on its own: 3 choices × 3 choices.'
+      - when:
+          v: 18
+        say: '18/36 is a half. Along a tree, chances multiply: ½ × ½ is a quarter.'
+    - prompt: NOT both even.
+      target: 27
+      mistakes:
+      - when:
+          v: 9
+        say: '9/36 is ''both even''. ''Not'' is everything else: P(not A) = 1 − P(A).'
+      - when:
+          v: 18
+        say: 18 is half of 36, but 'both even' was a quarter. What's left after a quarter?
+    - prompt: The total is 1.
+      target: 0
+      mistakes:
+      - when:
+          v: 1
+        say: The smallest total is 1 + 1 = 2, so a total of 1 is impossible.
   items:
   - prompt: A dice is rolled. What is the probability of getting a number greater than 4? Type a fraction.
     answer: 1/3

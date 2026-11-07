@@ -32,6 +32,72 @@ concepts:
     - 'Add two lids: 2πr²'
     - Volume = πr²h
     alt: A cylinder's curved side unrolls to a rectangle 2 pi r by h; add two circular lids for the total surface; volume is pi r squared h.
+  activity:
+    type: formula
+    prompt: A tin is a cylinder. Change the radius r and height h.
+    inputs:
+    - name: r
+      label: Radius r
+      min: 1
+      max: 14
+      step: 1
+      start: 1
+      unit: cm
+    - name: h
+      label: Height h
+      min: 1
+      max: 60
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: csa
+      label: Curved surface 2πrh
+      expr: 2*pi*r*h
+      unit: cm²
+      places: 1
+    - name: tsa
+      label: Total surface 2πr(h + r)
+      expr: 2*pi*r*(h+r)
+      unit: cm²
+      places: 1
+    - name: vol
+      label: Volume πr²h
+      expr: pi*r^2*h
+      unit: cm³
+      places: 1
+    goals:
+    - prompt: A tin has radius 7 cm. Its paper label (round the side only) must be 440 cm². Find the height.
+      want:
+        r: 7
+        csa:
+        - 439
+        - 441
+      hint: 'The label unrolls into a rectangle: 2πr long and h tall.'
+      mistakes:
+      - when:
+          r: 7
+          h: 3
+        say: With h = 3 the whole tin, lids included, is 440 cm². A label only wraps the curved side, not the two circles.
+    - prompt: 'Same radius: make the tin hold about 2.31 litres (1 litre = 1000 cm³).'
+      want:
+        r: 7
+        vol:
+        - 2300
+        - 2320
+      mistakes:
+      - when:
+          r: 7
+          h:
+          - 52
+          - 53
+        say: 'You made the curved surface 2310 cm²: that''s the label''s area, not what the tin holds. Volume is πr² × h.'
+      - when:
+          r: 7
+          h:
+          - 1
+          - 2
+        say: That holds only about 154 to 308 cm³, under a third of a litre. 2.31 litres is 2310 cm³.
   items:
   - prompt: Find the volume of a cuboid 8 cm long, 5 cm wide and 3 cm high, in cm³.
     answer: '120'
@@ -131,6 +197,68 @@ concepts:
       label: 90°
     caption: l² = h² + r². Curved surface = πrl. Volume = (1/3)πr²h.
     alt: A cone seen from the side with height h, base radius r and slant height l, which form a right triangle, so l² = h² + r².
+  activity:
+    type: formula
+    prompt: A cone has radius r and height h. Its slant height l is the slanted side of a right triangle.
+    inputs:
+    - name: r
+      label: Radius r
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: cm
+    - name: h
+      label: Height h
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: l
+      label: Slant height l = √(r² + h²)
+      expr: sqrt(r^2+h^2)
+      unit: cm
+      places: 2
+    - name: csa
+      label: Curved surface πrl
+      expr: pi*r*sqrt(r^2+h^2)
+      unit: cm²
+      places: 1
+    - name: vol
+      label: Volume ⅓πr²h
+      expr: pi*r^2*h/3
+      unit: cm³
+      places: 1
+    goals:
+    - prompt: Make a cone 8 cm tall with a slant height of exactly 10 cm.
+      want:
+        h: 8
+        l: 10
+      hint: r, h and l form a right triangle with l the longest side. r² + 8² = 10².
+      mistakes:
+      - when:
+          r: 2
+        say: 'You took 10 − 8 = 2, but the slant height is the slanted side of a right triangle: r² + h² = l², not r + h = l.'
+      - when:
+          r: 10
+        say: 'That makes the radius 10 too, but the slant is the longest side: r must be shorter than l.'
+    - prompt: Make a cone of radius 4 cm that holds as much as a cylinder of radius 4 cm and height 3 cm (about 150.8 cm³).
+      want:
+        r: 4
+        vol:
+        - 150
+        - 151.6
+      mistakes:
+      - when:
+          r: 4
+          h: 3
+        say: Same base and height holds only a third of the cylinder. A cone needs 3 times the height to hold the same.
+      - when:
+          r: 4
+          h: 1
+        say: That's a third of the height, a third of the volume again. The ⅓ in the formula needs the height to grow, not shrink.
   items:
   - prompt: A cone has radius 6 cm and height 8 cm. Find its slant height in cm.
     answer: '10'
@@ -215,6 +343,65 @@ concepts:
       - Total surface 3πr² (dome + flat circle)
       - Volume (2/3)πr³
     alt: A sphere has surface area 4πr² and volume four thirds πr³. A hemisphere has curved surface 2πr², total surface 3πr² and volume two thirds πr³.
+  activity:
+    type: formula
+    prompt: A hemisphere is half a sphere. Change the radius r and compare.
+    inputs:
+    - name: r
+      label: Radius r
+      min: 0.5
+      max: 14
+      step: 0.5
+      start: 1
+      unit: cm
+    outputs:
+    - name: curved
+      label: Hemisphere curved 2πr²
+      expr: 2*pi*r^2
+      unit: cm²
+      places: 1
+    - name: total
+      label: Solid hemisphere total 3πr²
+      expr: 3*pi*r^2
+      unit: cm²
+      places: 1
+    - name: hv
+      label: Hemisphere volume ⅔πr³
+      expr: 2*pi*r^3/3
+      unit: cm³
+      places: 1
+    - name: sv
+      label: Whole sphere volume ⁴⁄₃πr³
+      expr: 4*pi*r^3/3
+      unit: cm³
+      places: 1
+    goals:
+    - prompt: A hemispherical bowl must hold about 2425 cm³ of soup. Choose r.
+      want:
+        hv:
+        - 2420
+        - 2430
+      mistakes:
+      - when:
+          r: 8.5
+        say: 'At r = 8.5 a whole sphere holds about 2572 cm³, but a bowl is half a sphere: it holds only about 1286 cm³.'
+      - when:
+          r:
+          - 13
+          - 14
+        say: 'Much too big: volume grows with r³, so a little more radius adds a lot of soup.'
+    - prompt: 'Paint all of a solid hemisphere, curved top and flat base: about 942 cm². Choose r.'
+      want:
+        total:
+        - 940
+        - 944
+      mistakes:
+      - when:
+          r: 12
+        say: 'At r = 12 the curved part alone is about 905 cm², close to 942 on its own. A solid hemisphere also has a flat circle at the base: 2πr² + πr².'
+      - when:
+          r: 8.5
+        say: 'That paints about 908 cm² of a whole sphere''s 4πr². A hemisphere is half the curve plus a flat circle: 3πr².'
   items:
   - prompt: Find the surface area of a sphere of radius 7 cm (π = 22/7), in cm².
     answer: '616'

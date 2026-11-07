@@ -35,6 +35,22 @@ concepts:
       - 12 ← largest common
       - 18, 36
     alt: The divisors of 24 and of 36 listed side by side, with 12 as the greatest common divisor.
+  activity:
+    type: order
+    prompt: An algorithm is a list of clear steps. Put the steps of column addition for 487 + 256 in order.
+    steps:
+    - 'Add the ones: 7 + 6 = 13'
+    - Write 3 in the ones, carry 1 to the tens
+    - 'Add the tens and the carry: 8 + 5 + 1 = 14'
+    - Write 4 in the tens, carry 1 to the hundreds
+    - 'Add the hundreds and the carry: 4 + 2 + 1 = 7'
+    - 'Write 7 in the hundreds: the answer is 743'
+    reasons:
+      Write 3 in the ones, carry 1 to the tens: You can't write or carry anything until the ones are added.
+      'Add the tens and the carry: 8 + 5 + 1 = 14': The tens need the carry from the ones, so the ones must be finished first.
+      Write 4 in the tens, carry 1 to the hundreds: You need the tens total, 14, before you know what to write and carry.
+      'Add the hundreds and the carry: 4 + 2 + 1 = 7': The hundreds need the carry from the tens column.
+      'Write 7 in the hundreds: the answer is 743': The last digit comes only after the hundreds are added.
   items:
   - prompt: Find the GCD of 18 and 24.
     answer: '6'
@@ -123,6 +139,49 @@ concepts:
     - 12 = 2 × 6 + 0
     - GCD(48, 18) = 6
     alt: Euclid's algorithm on 48 and 18 with remainders 12, 6 and 0, giving GCD 6.
+  activity:
+    type: number_line
+    min: 0
+    max: 80
+    step: 2
+    start: 78
+    prompt: Euclid's algorithm for the GCD of 78 and 30. The marker starts at 78 and stays where you leave it.
+    goals:
+    - prompt: Take 30 away from 78 as many times as it fits. Where do you land?
+      target: 18
+      hint: Is what's left still 30 or more? Then 30 fits again.
+      mistakes:
+      - when:
+          v: 48
+        say: 48 is still bigger than 30, so 30 fits again. Keep taking 30 away until what's left is smaller than 30.
+      - when:
+          v:
+          - 0
+          - 16
+        say: 'That''s gone too far: 30 no longer fits into what''s left. Stop at the remainder.'
+    - prompt: The pair is now 30 and 18. Take 18 from 30 as many times as it fits. Where do you land?
+      target: 12
+      mistakes:
+      - when:
+          v: 18
+        say: '18 is the smaller number of the new pair. The step works on 30: take 18 from it.'
+      - when:
+          v:
+          - 0
+          - 10
+        say: 18 fits into 30 only once. What is left after one 18?
+    - prompt: The pair is 18 and 12. Keep going until one number divides the other exactly. Mark the GCD.
+      target: 6
+      mistakes:
+      - when:
+          v: 12
+        say: 12 doesn't divide 18 exactly (6 is left over), so it can't be the GCD. Keep going with the pair 12 and 6.
+      - when:
+          v: 0
+        say: 0 is where the subtraction stops. The GCD is the last number that divided exactly.
+      - when:
+          v: 2
+        say: 2 divides both, but is it the greatest? Finish the steps.
   items:
   - prompt: In Euclid's algorithm for 48 and 18, what is the first remainder?
     answer: '12'

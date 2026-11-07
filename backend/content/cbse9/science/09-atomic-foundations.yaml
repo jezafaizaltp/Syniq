@@ -31,6 +31,98 @@ concepts:
     - 'Formula: Al₂O₃'
     alt: 'The criss-cross method for aluminium oxide: aluminium has valency 3 and oxygen 2, so the formula is Al₂O₃.'
     caption: 'Check: 2 aluminium × 3 = 6 and 3 oxygen × 2 = 6, so the valencies balance.'
+  activity:
+    type: formula
+    prompt: A compound must have no charge left over. Choose how many positive and negative ions are in one unit.
+    inputs:
+    - name: a
+      label: Charge on the metal ion (+)
+      min: 1
+      max: 3
+      step: 1
+      start: 1
+    - name: x
+      label: Metal ions
+      min: 1
+      max: 3
+      step: 1
+      start: 1
+    - name: b
+      label: Charge on the non-metal ion (−)
+      min: 1
+      max: 3
+      step: 1
+      start: 1
+    - name: y
+      label: Non-metal ions
+      min: 1
+      max: 3
+      step: 1
+      start: 1
+    outputs:
+    - name: plus
+      label: Total + charge
+      expr: a*x
+    - name: minus
+      label: Total − charge
+      expr: b*y
+    - name: net
+      label: Charge left over
+      expr: a*x-b*y
+    - name: n
+      label: Ions in one unit
+      expr: x+y
+    goals:
+    - prompt: 'Calcium chloride: Ca²⁺ and Cl⁻. Make it neutral.'
+      want:
+        a: 2
+        b: 1
+        net: 0
+      hint: 'Criss-cross: each ion''s charge number becomes the other ion''s count.'
+      mistakes:
+      - when:
+          a: 2
+          b: 1
+          x: 2
+          y: 1
+        say: 'Ca₂Cl has +4 and only −1. Cross the numbers over: Ca''s 2 goes on Cl.'
+      - when:
+          a: 2
+          b: 1
+          x: 1
+          y: 1
+        say: 'CaCl has +2 and −1: one + charge is left over. Every compound is neutral.'
+    - prompt: 'Aluminium oxide: Al³⁺ and O²⁻. Make it neutral.'
+      want:
+        a: 3
+        b: 2
+        net: 0
+      mistakes:
+      - when:
+          a: 3
+          b: 2
+          x: 3
+          y: 2
+        say: 'Al₃O₂ gives +9 and −4. Criss-cross: Al''s 3 goes on O, O''s 2 goes on Al.'
+      - when:
+          a: 3
+          b: 2
+          x: 1
+          y: 1
+        say: 'AlO gives +3 and −2: one + left over.'
+    - prompt: 'Magnesium oxide: Mg²⁺ and O²⁻. Make it neutral with the fewest ions.'
+      want:
+        a: 2
+        b: 2
+        net: 0
+        n: 2
+      mistakes:
+      - when:
+          a: 2
+          b: 2
+          x: 2
+          y: 2
+        say: 'Mg₂O₂ is neutral, but it simplifies: the ratio is 1 : 1. Formulas use the simplest ratio.'
   items:
   - prompt: What is the formula of aluminium oxide? (Al has valency 3, O has valency 2.)
     options:
@@ -128,6 +220,83 @@ concepts:
     - 'O: 4 × 16 u = 64 u'
     - 'Add: 2 + 32 + 64 = 98 u'
     alt: 'Working out the molecular mass of H₂SO₄: hydrogen 2, sulphur 32, oxygen 64, total 98 u.'
+  activity:
+    type: formula
+    prompt: Build a molecule from carbon (12 u), hydrogen (1 u) and oxygen (16 u) atoms and read its molecular mass.
+    inputs:
+    - name: c
+      label: Carbon atoms
+      min: 0
+      max: 6
+      step: 1
+      start: 0
+    - name: h
+      label: Hydrogen atoms
+      min: 0
+      max: 12
+      step: 1
+      start: 0
+    - name: o
+      label: Oxygen atoms
+      min: 0
+      max: 6
+      step: 1
+      start: 0
+    outputs:
+    - name: mass
+      label: Molecular mass
+      expr: 12*c+h+16*o
+      unit: u
+    - name: mol
+      label: Moles in 88 g
+      expr: 88/max(12*c+h+16*o,1)
+      places: 2
+    goals:
+    - prompt: Make carbon dioxide, CO₂, and check its mass is 44 u.
+      want:
+        mass: 44
+        h: 0
+      hint: The small 2 belongs to the atom just before it.
+      mistakes:
+      - when:
+          c: 1
+          o: 1
+          h: 0
+        say: That's CO, 28 u. The 2 in CO₂ means two oxygen atoms, each 16 u.
+      - when:
+          c: 2
+          o: 1
+          h: 0
+        say: That's C₂O. The 2 in CO₂ is written after O, so it counts the oxygens.
+    - prompt: 'Make water, H₂O: 18 u.'
+      want:
+        mass: 18
+        c: 0
+      mistakes:
+      - when:
+          h: 1
+          o: 1
+          c: 0
+        say: 'OH is 17 u. Water has two hydrogens: H₂O.'
+      - when:
+          h: 2
+          o: 2
+          c: 0
+        say: That's H₂O₂, hydrogen peroxide, 34 u. Water has one oxygen.
+    - prompt: Make glucose, C₆H₁₂O₆, and read its mass.
+      want:
+        mass: 180
+      mistakes:
+      - when:
+          c: 6
+          h: 12
+          o: 1
+        say: 'Only one O: 100 u. The 6 after O means six oxygen atoms.'
+      - when:
+          c: 1
+          h: 1
+          o: 1
+        say: 'That''s one of each, 29 u. Each small number counts its atoms: multiply, then add.'
   items:
   - prompt: Find the molecular mass of water, H₂O, in u. (H = 1, O = 16.)
     answer: '18'
@@ -232,6 +401,53 @@ concepts:
       - Low melting point
       - Usually does not conduct
     alt: Ionic compounds transfer electrons between a metal and a non-metal and have high melting points; covalent compounds share electrons between non-metals and have low melting points.
+  activity:
+    type: sort
+    prompt: Ionic or covalent?
+    bins:
+    - Ionic
+    - Covalent
+    items:
+    - label: Sodium chloride (NaCl)
+      bin: Ionic
+      clue: Is it a metal joined to a non-metal?
+      why: 'Sodium gives an electron to chlorine: Na⁺ and Cl⁻ ions, an ionic compound.'
+    - label: Water (H₂O)
+      bin: Covalent
+      clue: Are both elements non-metals?
+      why: 'Hydrogen and oxygen share electron pairs: covalent.'
+    - label: Magnesium oxide (MgO)
+      bin: Ionic
+      clue: Is magnesium a metal?
+      why: 'Magnesium gives 2 electrons to oxygen: Mg²⁺ and O²⁻, ionic.'
+    - label: Methane (CH₄)
+      bin: Covalent
+      clue: Do carbon and hydrogen give away electrons, or share them?
+      why: 'Carbon shares electron pairs with four hydrogens: covalent.'
+    - label: Carbon dioxide (CO₂)
+      bin: Covalent
+      clue: Is either element a metal?
+      why: 'Two non-metals sharing electrons: covalent.'
+    - label: Calcium chloride (CaCl₂)
+      bin: Ionic
+      clue: Is calcium a metal?
+      why: 'Calcium gives one electron to each chlorine: ionic.'
+    - label: Conducts electricity when melted
+      bin: Ionic
+      clue: What can move and carry charge in a melt?
+      why: Melted ionic compounds have free ions that carry current.
+    - label: Made by sharing pairs of electrons
+      bin: Covalent
+      clue: Sharing or giving away?
+      why: Sharing electron pairs makes covalent bonds.
+    - label: Hard crystal with a very high melting point
+      bin: Ionic
+      clue: Are strong attractions between charged ions needed for this?
+      why: Strong forces between + and − ions make ionic solids hard, with high melting points.
+    - label: Oxygen gas (O₂)
+      bin: Covalent
+      clue: Can one oxygen atom take electrons from an identical one?
+      why: 'Two identical atoms share electrons: covalent.'
   items:
   - prompt: What is the formula of magnesium chloride (Mg²⁺ and Cl⁻)?
     options:
