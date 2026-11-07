@@ -45,6 +45,62 @@ concepts:
       label: '+4'
     caption: 'Each term is 4 more than the one before: d = 4, so aₙ = 3 + (n − 1) × 4.'
     alt: The AP 3, 7, 11, 15 on a number line, with equal jumps of 4 between the terms.
+  activity:
+    type: formula
+    prompt: An AP starts at a and adds d each time. aₙ = a + (n − 1)d.
+    inputs:
+    - name: a
+      label: First term a
+      min: -20
+      max: 60
+      step: 1
+      start: 0
+    - name: d
+      label: Common difference d
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: a3
+      label: a₃
+      expr: a+2*d
+    - name: a6
+      label: a₆
+      expr: a+5*d
+    - name: a10
+      label: a₁₀
+      expr: a+9*d
+    - name: a20
+      label: a₂₀
+      expr: a+19*d
+    goals:
+    - prompt: An AP has a₃ = 12 and a₁₀ = 33. Find a and d.
+      want:
+        a3: 12
+        a10: 33
+      hint: From the 3rd to the 10th term is 7 jumps of d.
+      mistakes:
+      - when:
+          a: 3
+          d: 3
+        say: 'With a = 3, the 3rd term is 9. a₃ = a + 2d: only two jumps after the first term.'
+      - when:
+          d:
+          - 4
+          - 5
+        say: 'Too steep: from a₃ to a₁₀ is 7 jumps and the terms rise by 21.'
+    - prompt: An AP starts at 50 and its 6th term is 25. Find d.
+      want:
+        a: 50
+        a6: 25
+      mistakes:
+      - when:
+          d: 5
+        say: 'd = 5 makes the AP grow: 50, 55, 60… It falls to 25, so d is negative.'
+      - when:
+          d: -4
+        say: 'd = −4 gives a₆ = 30: there are 5 jumps from the 1st term to the 6th, not 6.'
   items:
   - prompt: Find the common difference of the AP 5, 9, 13, 17, …
     answer: '4'
@@ -124,6 +180,47 @@ concepts:
     - '100 pairs: 2S = 100 × 101'
     - S = 5050
     alt: 'Gauss''s trick for 1 + 2 + … + 100: write the sum forwards and backwards, each pair adds to 101, so twice the sum is 100 × 101 and the sum is 5050.'
+  activity:
+    type: formula
+    prompt: 'For an AP, Sₙ = 3n² + n. The nth term is what the nth term adds: aₙ = Sₙ − Sₙ₋₁.'
+    inputs:
+    - name: n
+      label: n
+      min: 1
+      max: 15
+      step: 1
+      start: 8
+    outputs:
+    - name: sn
+      label: Sₙ
+      expr: 3*n^2+n
+    - name: sp
+      label: Sₙ₋₁
+      expr: 3*(n-1)^2+(n-1)
+    - name: an
+      label: aₙ = Sₙ − Sₙ₋₁
+      expr: 6*n-2
+    goals:
+    - prompt: Which term of the AP is 28?
+      want:
+        an: 28
+      hint: Each new term is the jump from Sₙ₋₁ to Sₙ.
+      mistakes:
+      - when:
+          n: 3
+        say: S₃ = 30 is the sum of the first three terms, not the 3rd term. aₙ is what Sₙ adds to Sₙ₋₁.
+      - when:
+          n:
+          - 6
+          - 15
+        say: 'Too far along: the terms go up by 6 each time.'
+    - prompt: Find the first term.
+      want:
+        an: 4
+      mistakes:
+      - when:
+          n: 2
+        say: a₂ = 14 − 4 = 10. The first term is S₁ itself, with nothing before it.
   items:
   - prompt: Find the sum 1 + 2 + 3 + … + 100.
     answer: '5050'

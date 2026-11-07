@@ -37,6 +37,53 @@ concepts:
       value: 10
     unit: joules
     alt: 'Bar chart of energy at each trophic level: grass 10,000 joules, grasshopper 1,000, frog 100, snake 10, showing the 10 percent law.'
+  activity:
+    type: formula
+    prompt: Only about 10% of the energy at one level passes to the next. Plants (producers) capture E joules.
+    inputs:
+    - name: e
+      label: Energy captured by plants
+      min: 500
+      max: 50000
+      step: 500
+      start: 500
+      unit: J
+    outputs:
+    - name: h
+      label: Herbivores (insects)
+      expr: e*0.1
+      unit: J
+    - name: c1
+      label: First carnivores (frogs)
+      expr: e*0.01
+      unit: J
+    - name: c2
+      label: Top carnivores (snakes)
+      expr: e*0.001
+      unit: J
+      places: 1
+    goals:
+    - prompt: Snakes at the top need 20 J. How much must the plants capture?
+      want:
+        c2: 20
+      hint: 'Work back up: each level down holds 10 times more.'
+      mistakes:
+      - when:
+          e: 2000
+        say: '2000 J of plants leaves just 2 J for the snakes. Three steps of 10%: 10% of 10% of 10%.'
+      - when:
+          e: 6000
+        say: Taking away 10% at each step isn't the rule; only 10% is passed on.
+    - prompt: Frogs need 50 J. How much must the plants capture?
+      want:
+        c1: 50
+      mistakes:
+      - when:
+          e: 500
+        say: '500 J of plants gives the frogs only 5 J: frogs are two steps up, so they get 1% of it.'
+      - when:
+          e: 50000
+        say: That's enough for 500 J of frogs. Frogs are two steps up, not three.
   items:
   - prompt: Which of these are decomposers?
     options:
@@ -140,6 +187,53 @@ concepts:
       - Plastic, glass, metal cans
       - Reduce, reuse, recycle
     alt: Biodegradable waste like peels and paper is broken down by microbes and composted; non-biodegradable waste like plastic and glass must be reduced, reused or recycled.
+  activity:
+    type: sort
+    prompt: Can microbes break it down?
+    bins:
+    - Biodegradable
+    - Non-biodegradable
+    items:
+    - label: Banana peel
+      bin: Biodegradable
+      clue: Was it once part of a living thing?
+      why: 'Bacteria and fungi break it down quickly: biodegradable.'
+    - label: Plastic bag
+      bin: Non-biodegradable
+      clue: Can bacteria eat plastic?
+      why: 'Microbes can''t break plastic down: it stays for hundreds of years.'
+    - label: Newspaper
+      bin: Biodegradable
+      clue: What is paper made from?
+      why: Paper comes from wood, which microbes break down.
+    - label: Glass bottle
+      bin: Non-biodegradable
+      clue: Does glass rot?
+      why: Glass doesn't rot, but it can be recycled.
+    - label: Cotton cloth
+      bin: Biodegradable
+      clue: Where does cotton come from?
+      why: Cotton is a plant fibre that microbes break down.
+    - label: DDT pesticide
+      bin: Non-biodegradable
+      clue: Why does DDT build up in food chains?
+      why: DDT isn't broken down, so it builds up (biological magnification).
+    - label: Aluminium can
+      bin: Non-biodegradable
+      clue: Does a metal can rot?
+      why: Microbes can't break down aluminium; recycle it.
+    - label: Cow dung
+      bin: Biodegradable
+      clue: What happens to dung in a biogas plant?
+      why: Microbes break it down, making biogas and manure.
+    - label: Wood shavings
+      bin: Biodegradable
+      clue: Does wood rot?
+      why: Wood is broken down by fungi and bacteria.
+    - label: Polythene wrapper
+      bin: Non-biodegradable
+      clue: Is polythene a kind of plastic?
+      why: 'Polythene is a plastic: not biodegradable.'
   items:
   - prompt: What does the ozone layer protect us from?
     options:

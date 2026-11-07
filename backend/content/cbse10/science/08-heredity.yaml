@@ -44,6 +44,48 @@ concepts:
       - tt dwarf
     alt: 'Punnett square for Tt crossed with Tt: boxes TT tall, Tt tall, Tt tall and tt dwarf, giving three tall to one dwarf.'
     caption: 'Tt × Tt gives 3 tall : 1 dwarf'
+  activity:
+    type: number_line
+    min: 0
+    max: 1000
+    step: 25
+    start: 0
+    prompt: 'Mendel''s peas: T (tall) is dominant over t (dwarf). Mark how many of 1000 offspring you''d expect. The marker stays where you leave it.'
+    goals:
+    - prompt: 'Tt × Tt: about how many are dwarf?'
+      target: 250
+      hint: 'Draw the Punnett square: TT, Tt, tT, tt. Which boxes are dwarf?'
+      mistakes:
+      - when:
+          v: 500
+        say: Half? Only tt is dwarf, and tt fills 1 of the 4 boxes. Tt plants have a T, so they are tall.
+      - when:
+          v: 750
+        say: '750 is the tall plants: TT, Tt and tT, 3 boxes of 4.'
+    - prompt: Of those 1000, about how many are tall but carry the dwarf gene (Tt)?
+      target: 500
+      mistakes:
+      - when:
+          v: 750
+        say: 750 is all the tall plants, but a third of them are TT, with no t at all.
+      - when:
+          v: 250
+        say: '250 is TT (or tt). Tt fills 2 of the 4 boxes: Tt and tT.'
+    - prompt: About how many are pure tall (TT)?
+      target: 250
+      mistakes:
+      - when:
+          v: 750
+        say: '750 counts every tall plant. Pure tall has two T''s: just 1 box of 4.'
+    - prompt: A test cross, Tt × tt. About how many of 1000 are dwarf?
+      target: 500
+      mistakes:
+      - when:
+          v: 250
+        say: That's for Tt × Tt. With one tt parent, every box gets a t from it, so half are tt.
+      - when:
+          v: 1000
+        say: The Tt parent can pass on T, so half the offspring are Tt and tall.
   items:
   - prompt: 'A pure tall pea plant (TT) is crossed with a dwarf one (tt). The F1 plants are:'
     options:
@@ -149,6 +191,49 @@ concepts:
       - XY boy
     alt: 'Grid crossing the mother''s X eggs with the father''s X and Y sperm: two XX girls and two XY boys, an equal chance.'
     caption: 'Each child: 1/2 chance girl, 1/2 chance boy'
+  activity:
+    type: sort
+    prompt: True or false?
+    bins:
+    - 'True'
+    - 'False'
+    items:
+    - label: The mother decides if the baby is a boy or a girl
+      bin: 'False'
+      clue: What does every egg carry? Does that ever change?
+      why: 'Every egg carries X. Whether the sperm brings X or Y decides it: not the mother.'
+    - label: Every egg carries an X chromosome
+      bin: 'True'
+      clue: What are a woman's sex chromosomes?
+      why: Women are XX, so every egg has an X.
+    - label: About half of all sperm carry a Y chromosome
+      bin: 'True'
+      clue: What are a man's sex chromosomes?
+      why: Men are XY, so sperm carry X or Y in equal numbers.
+    - label: A boy gets his X chromosome from his father
+      bin: 'False'
+      clue: What does a father give to make a boy?
+      why: A boy gets Y from his father, so his X comes from his mother.
+    - label: Women have XX and men have XY
+      bin: 'True'
+      clue: Which pair is the same in both, and which differs?
+      why: The 23rd pair is XX in women and XY in men.
+    - label: Each birth has about a 1 in 2 chance of being a boy
+      bin: 'True'
+      clue: X sperm and Y sperm are equal in number. What does that mean?
+      why: Equal X and Y sperm give about a 1/2 chance each time.
+    - label: After three girls, a boy is more likely next
+      bin: 'False'
+      clue: Does the next sperm remember earlier births?
+      why: 'Each birth is independent: still about 1/2.'
+    - label: Humans have 23 pairs of chromosomes
+      bin: 'True'
+      clue: How many pairs, counting the sex chromosomes?
+      why: '22 pairs plus one pair of sex chromosomes: 23 pairs.'
+    - label: In some reptiles, temperature decides the sex
+      bin: 'True'
+      clue: Do all animals use X and Y chromosomes?
+      why: In many turtles and crocodiles, the egg's temperature decides it.
   items:
   - prompt: What are the sex chromosomes of a human male?
     options:

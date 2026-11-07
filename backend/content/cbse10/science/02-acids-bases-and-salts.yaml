@@ -30,6 +30,54 @@ concepts:
     - Leftover Na⁺ and Cl⁻ make the salt NaCl
     - HCl + NaOH → NaCl + H₂O
     alt: 'Neutralisation: hydrogen ions from the acid and hydroxide ions from the base join to make water, and the rest forms a salt.'
+  activity:
+    type: sort
+    prompt: Acid, base or neutral?
+    bins:
+    - Acid
+    - Base
+    - Neutral
+    items:
+    - label: Turns blue litmus red
+      bin: Acid
+      clue: What colour does litmus turn in vinegar?
+      why: Acids turn blue litmus red.
+    - label: Turns phenolphthalein pink
+      bin: Base
+      clue: Phenolphthalein stays colourless in which kind?
+      why: Phenolphthalein turns pink only in a base.
+    - label: Methyl orange turns yellow
+      bin: Base
+      clue: Methyl orange goes red in which kind?
+      why: Methyl orange is red in acid and yellow in base.
+    - label: Lemon juice
+      bin: Acid
+      clue: How does it taste?
+      why: 'Sour taste: lemon juice contains citric acid.'
+    - label: Soap solution
+      bin: Base
+      clue: How does soap feel between your fingers?
+      why: 'Slippery and bitter: soap solution is basic.'
+    - label: Gives H⁺ ions in water
+      bin: Acid
+      clue: Which ions make a solution acidic?
+      why: H⁺ (as H₃O⁺) ions make a solution acidic.
+    - label: Distilled water
+      bin: Neutral
+      clue: Does it change either litmus?
+      why: 'Pure water changes neither litmus: pH 7, neutral.'
+    - label: Baking soda solution
+      bin: Base
+      clue: Why is baking soda used for acidity?
+      why: Sodium hydrogencarbonate solution is mildly basic, so it cancels acid.
+    - label: Sugar solution
+      bin: Neutral
+      clue: Does dissolved sugar give H⁺ or OH⁻ ions?
+      why: 'Sugar gives neither ion: neutral.'
+    - label: Turns red litmus blue
+      bin: Base
+      clue: Which kind turns litmus blue?
+      why: Bases turn red litmus blue.
   items:
   - prompt: Which gas is given off when zinc reacts with dilute sulphuric acid?
     options:
@@ -141,6 +189,63 @@ concepts:
       value: 10
     unit: pH
     alt: 'Bar chart of pH values: lemon juice 2, vinegar 3, pure water 7, blood 7.4, baking soda solution 8.5, milk of magnesia 10.'
+  activity:
+    type: scale
+    min: 0
+    max: 14
+    step: 0.5
+    start: 10
+    unit: pH
+    orientation: horizontal
+    prompt: The pH scale runs from 0 to 14. Move the marker.
+    zones:
+    - from: 0
+      to: 6.5
+      label: Acidic
+      says: 'Below 7: acidic. The lower the pH, the more H⁺ ions.'
+    - from: 6.5
+      to: 7.5
+      label: Neutral
+      says: 'Around 7: neutral, like pure water.'
+    - from: 7.5
+      to: 14
+      label: Basic
+      says: 'Above 7: basic (alkaline). The higher the pH, the more OH⁻ ions.'
+    goals:
+    - prompt: Mark pure water.
+      value: 7
+      mistakes:
+      - when:
+          v: 0
+        say: 0 is the most acidic end, not 'nothing'. Neutral sits in the middle, at 7.
+      - when:
+          v: 14
+        say: 14 is the most basic end. Pure water is neither acidic nor basic.
+    - prompt: Milk of magnesia cancels stomach acid. Put it in the right zone.
+      zone: Basic
+      mistakes:
+      - when:
+          v:
+          - 0
+          - 6.5
+        say: An acid wouldn't cancel stomach acid; it would add to it. An antacid is a base.
+    - prompt: Tooth decay starts when the mouth falls below this pH. Mark it.
+      value: 5.5
+      mistakes:
+      - when:
+          v:
+          - 7.5
+          - 14
+        say: Above 7 is basic. Decay is caused by acid from bacteria, so the danger is below 7.
+      - when:
+          v: 7
+        say: 7 is neutral. Decay starts once the mouth is a little acidic.
+    - prompt: Which is more acidic, pH 2 or pH 5? Mark the more acidic one.
+      value: 2
+      mistakes:
+      - when:
+          v: 5
+        say: 'A lower pH means more H⁺ ions: pH 2 has 1000 times the H⁺ of pH 5.'
   items:
   - prompt: 'A solution has pH 3. It is:'
     options:

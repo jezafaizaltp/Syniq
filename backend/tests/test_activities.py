@@ -1,4 +1,4 @@
-"""Hands-on activities: every CBSE Class 6 and Class 9 Maths and Science topic and every Kerala Class 9 topic has one,
+"""Hands-on activities: every CBSE Class 6, 9 and 10 Maths and Science topic and every Kerala Class 9 topic has one,
 each can be built and solved, and each says what a wrong try causes, not just "wrong"."""
 
 from tests.test_api import client  # noqa: F401  (must load first: sets up the test database)
@@ -92,10 +92,26 @@ def test_every_cbse_class9_maths_and_science_topic_has_a_working_activity():
         assert check_activity(c["activity"]) == [], c["code"]
 
 
+def _cbse10_concepts():
+    return [
+        c for _path, p in content_packs.read_packs()
+        if p["subject"] in ("cbse10-math", "cbse10-sci")
+        for c in p["concepts"]
+    ]
+
+
+def test_every_cbse_class10_maths_and_science_topic_has_a_working_activity():
+    concepts = _cbse10_concepts()
+    assert len(concepts) == 52  # Maths 26, Science 26
+    for c in concepts:
+        assert "activity" in c, c["code"]
+        assert check_activity(c["activity"]) == [], c["code"]
+
+
 def test_every_activity_coaches_a_wrong_try():
     """The mistake principle: every sort item has a clue and a reason, every order says why a step
     can't come earlier, and number activities name the slips children really make."""
-    concepts = _kerala9_concepts() + _cbse9_concepts() + [c for p in _class6_packs() for c in p["concepts"]]
+    concepts = _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + [c for p in _class6_packs() for c in p["concepts"]]
     numeric = 0
     with_mistakes = 0
     for c in concepts:

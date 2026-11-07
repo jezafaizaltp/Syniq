@@ -32,6 +32,74 @@ concepts:
       value: 1
     caption: Mean = (2×5 + 3×15 + 4×25 + 1×35) ÷ 10 = 190 ÷ 10 = 19.
     alt: A histogram with classes 0–10, 10–20, 20–30, 30–40 and frequencies 2, 3, 4, 1. Using the class marks, the mean is 19.
+  activity:
+    type: formula
+    prompt: Marks in four classes 0–10, 10–20, 20–30, 30–40, with class marks 5, 15, 25, 35. Choose how many students are in each.
+    inputs:
+    - name: f1
+      label: 0–10
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    - name: f2
+      label: 10–20
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    - name: f3
+      label: 20–30
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    - name: f4
+      label: 30–40
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: n
+      label: Students Σf
+      expr: f1+f2+f3+f4
+    - name: fx
+      label: Σfx
+      expr: 5*f1+15*f2+25*f3+35*f4
+    - name: mean
+      label: Mean = Σfx ÷ Σf
+      expr: (5*f1+15*f2+25*f3+35*f4)/max(f1+f2+f3+f4,1)
+      places: 2
+    goals:
+    - prompt: Make a class of 20 with a mean of exactly 22.
+      want:
+        n: 20
+        mean: 22
+      hint: Σfx must be 20 × 22 = 440.
+      mistakes:
+      - when:
+          f1: 5
+          f2: 5
+          f3: 5
+          f4: 5
+        say: Equal groups give 20, the middle of the class marks. To lift the mean to 22, more students must be in the higher classes.
+      - when:
+          fx: 440
+        say: 'Σfx = 440 is right, but the mean divides by Σf: the class must have 20 students.'
+    - prompt: Make a class of 10 with a mean of 11.
+      want:
+        n: 10
+        mean: 11
+      mistakes:
+      - when:
+          mean:
+          - 20
+          - 40
+        say: 'Too high: most students must be in the low classes.'
+      - when:
+          fx: 110
+        say: Σfx is right; check there are exactly 10 students.
   items:
   - prompt: Find the class mark of 20–30.
     answer: '25'
@@ -115,6 +183,66 @@ concepts:
       value: 4
     caption: Modal class 20–30. Mode = 20 + (12 − 8)/(24 − 8 − 6) × 10 = 24.
     alt: A histogram with frequencies 5, 8, 12, 6, 4 for classes 0–10 to 40–50. The tallest bar, 20–30, is the modal class, and the mode works out to 24.
+  activity:
+    type: formula
+    prompt: The modal class is 20–30 (l = 20, h = 10). Mode = l + (f₁ − f₀) ÷ (2f₁ − f₀ − f₂) × h.
+    inputs:
+    - name: f0
+      label: f₀ (class before)
+      min: 0
+      max: 9
+      step: 1
+      start: 3
+    - name: f1
+      label: f₁ (modal class)
+      min: 10
+      max: 20
+      step: 1
+      start: 10
+    - name: f2
+      label: f₂ (class after)
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    outputs:
+    - name: mode
+      label: Mode
+      expr: 20+(f1-f0)/(2*f1-f0-f2)*10
+      places: 2
+    goals:
+    - prompt: f₀ = 4 and f₂ = 8. Choose f₁ so the mode is 26.
+      want:
+        f0: 4
+        f2: 8
+        mode: 26
+      hint: The mode leans towards the bigger neighbour. Try values of f₁ and watch.
+      mistakes:
+      - when:
+          f0: 8
+          f2: 4
+        say: 'Swapped: f₀ is the class before the modal class, f₂ the one after. With more students after, the mode leans up.'
+      - when:
+          f0: 4
+          f2: 8
+          f1:
+          - 10
+          - 12
+        say: Close to the neighbours, the mode swings more. A bigger f₁ pulls it back towards the middle.
+    - prompt: 'Make the mode sit exactly in the middle of the class: 25.'
+      want:
+        mode: 25
+      mistakes:
+      - when:
+          mode:
+          - 20
+          - 24.99
+        say: The mode leans down because f₀ is bigger than f₂. Balance the neighbours.
+      - when:
+          mode:
+          - 25.01
+          - 30
+        say: The mode leans up because f₂ is bigger than f₀. Balance the neighbours.
   items:
   - prompt: Frequencies of 0–10, 10–20, 20–30, 30–40, 40–50 are 5, 8, 12, 6, 4. Which is the modal class?
     options:

@@ -24,6 +24,88 @@ concepts:
       kind: flow
       steps: ["12 = 2² × 3 and 18 = 2 × 3²", "HCF: shared primes, smaller powers: 2 × 3 = 6", "LCM: all primes, bigger powers: 2² × 3² = 36", "Check: 6 × 36 = 216 = 12 × 18"]
       alt: "Finding the HCF and LCM of 12 and 18 from their prime factors: the HCF is 6, the LCM is 36, and 6 × 36 equals 12 × 18."
+    activity:
+      type: formula
+      prompt: Build two numbers from 2s and 3s. HCF takes the smaller power of each prime, LCM the bigger power.
+      inputs:
+      - name: p
+        label: Powers of 2 in a
+        min: 0
+        max: 4
+        step: 1
+        start: 0
+      - name: q
+        label: Powers of 3 in a
+        min: 0
+        max: 4
+        step: 1
+        start: 0
+      - name: r
+        label: Powers of 2 in b
+        min: 0
+        max: 4
+        step: 1
+        start: 0
+      - name: s
+        label: Powers of 3 in b
+        min: 0
+        max: 4
+        step: 1
+        start: 0
+      outputs:
+      - name: a
+        label: a
+        expr: 2^p*3^q
+      - name: b
+        label: b
+        expr: 2^r*3^s
+      - name: hcf
+        label: HCF
+        expr: 2^min(p,r)*3^min(q,s)
+      - name: lcm
+        label: LCM
+        expr: 2^max(p,r)*3^max(q,s)
+      goals:
+      - prompt: Find a and b with HCF 6 and LCM 72, where neither number is 6 or 72.
+        want:
+          hcf: 6
+          lcm: 72
+          a:
+          - 7
+          - 71
+          b:
+          - 7
+          - 71
+        hint: 6 = 2 × 3 and 72 = 2³ × 3². Each prime's smaller power goes in the HCF, its bigger power in the LCM.
+        mistakes:
+        - when:
+            a: 12
+            b: 36
+          say: '12 × 36 = 432 = 6 × 72, but a right product isn''t enough: HCF(12, 36) is 12, because 12 divides 36.'
+        - when:
+            a: 8
+            b: 54
+          say: '8 × 54 = 432 too, but 8 has no 3 in it, so the only shared prime is 2: HCF 2.'
+        - when:
+            hcf: 6
+          say: 'The HCF is right. The LCM takes the biggest power of each prime: it needs 2³ and 3² between the two numbers.'
+      - prompt: Now make HCF 1 and LCM 72, with neither number 1.
+        want:
+          hcf: 1
+          lcm: 72
+          a:
+          - 2
+          - 72
+          b:
+          - 2
+          - 72
+        mistakes:
+        - when:
+            hcf: 2
+          say: 'They share a 2. For HCF 1 no prime may be in both: give all the 2s to one number and all the 3s to the other.'
+        - when:
+            hcf: 3
+          say: They share a 3. For HCF 1, keep the 3s in one number only.
     items:
       - prompt: "Which is the prime factorisation of 140?"
         options: ["2² × 5 × 7", "2 × 5 × 14", "4 × 5 × 7", "2³ × 5 × 7"]
@@ -102,6 +184,53 @@ concepts:
       kind: flow
       steps: ["Assume √2 = a/b, with a and b sharing no factor", "Square both sides: a² = 2b²", "So 2 divides a; write a = 2c", "Then 4c² = 2b², so b² = 2c² and 2 divides b", "2 divides both a and b: impossible, so √2 is irrational"]
       alt: "The proof that √2 is irrational in five steps: assume it is a fraction in lowest terms, then show 2 divides both top and bottom, which is impossible."
+    activity:
+      type: sort
+      prompt: Work each one out first. Is the answer rational or irrational?
+      bins:
+      - Rational
+      - Irrational
+      items:
+      - label: √5 + 3
+        bin: Irrational
+        clue: Is a rational plus an irrational ever rational?
+        why: If √5 + 3 were rational, √5 = (it) − 3 would be too. It isn't, so the sum is irrational.
+      - label: (√3)²
+        bin: Rational
+        clue: What does squaring a square root do?
+        why: (√3)² = 3, a whole number.
+      - label: √8 ÷ √2
+        bin: Rational
+        clue: Combine them under one root first.
+        why: √8 ÷ √2 = √4 = 2.
+      - label: 3√7
+        bin: Irrational
+        clue: Can a non-zero rational times an irrational be rational?
+        why: If 3√7 were p/q, √7 would be p/(3q). It isn't, so 3√7 is irrational.
+      - label: (2 + √3)(2 − √3)
+        bin: Rational
+        clue: Use (a + b)(a − b) = a² − b².
+        why: '4 − 3 = 1: the roots cancel.'
+      - label: √2 + √2
+        bin: Irrational
+        clue: 'Add them: what is √2 + √2?'
+        why: '√2 + √2 = 2√2, a rational times an irrational: irrational.'
+      - label: 0.4545…
+        bin: Rational
+        clue: Does a block of digits repeat?
+        why: '''45'' repeats forever: 45/99 = 5/11, rational.'
+      - label: (1 + √2)²
+        bin: Irrational
+        clue: 'Expand: (1 + √2)² = 1 + 2√2 + 2. Does the √2 go away?'
+        why: 'It is 3 + 2√2, and the 2√2 stays: irrational.'
+      - label: √49 ÷ √16
+        bin: Rational
+        clue: Work out each root.
+        why: 7 ÷ 4 = 7/4.
+      - label: π − 3
+        bin: Irrational
+        clue: Is π itself rational?
+        why: π is irrational, and taking away 3 can't fix that.
     items:
       - prompt: "Which of these is irrational?"
         options: ["√5", "√25", "0.25", "7/3"]
