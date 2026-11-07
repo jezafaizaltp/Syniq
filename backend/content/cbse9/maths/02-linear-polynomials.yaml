@@ -30,6 +30,51 @@ concepts:
     - Its power is 3, so the degree is 3 (cubic)
     - 'Count the non-zero terms: 3, so it is a trinomial'
     alt: 'Steps finding the degree of 4x³ − x + 2: write powers from highest, the first non-zero term is 4x³, so the degree is 3.'
+  activity:
+    type: sort
+    prompt: What is the degree of each one? Or is it not a polynomial at all?
+    bins:
+    - Degree 1
+    - Degree 2
+    - Degree 3
+    - Not a polynomial
+    items:
+    - label: 3x + 7
+      bin: Degree 1
+      clue: What is the highest power of x you can see?
+      why: 'The highest power is x¹: degree 1, a linear polynomial.'
+    - label: x² − 5x + 6
+      bin: Degree 2
+      clue: Look for the biggest little number on x.
+      why: 'The highest power is x²: degree 2, quadratic.'
+    - label: 2x³ + x
+      bin: Degree 3
+      clue: Which power of x is the highest?
+      why: 'x³ is the highest power: degree 3, cubic.'
+    - label: √x + 1
+      bin: Not a polynomial
+      clue: Is the power on x a whole number here?
+      why: √x is x to the power ½. Polynomial powers must be whole numbers.
+    - label: 1/x + 2
+      bin: Not a polynomial
+      clue: Can you write 1/x as x to a whole-number power?
+      why: 1/x is x⁻¹, a negative power, so it is not a polynomial.
+    - label: x(x + 1)
+      bin: Degree 2
+      clue: Multiply it out first. What is the highest power then?
+      why: 'x(x + 1) = x² + x: degree 2.'
+    - label: 7x² + x³
+      bin: Degree 3
+      clue: Which power is the highest, not which comes first?
+      why: 'The highest power is x³, even though it is written last: degree 3.'
+    - label: x³ − x³ + 2x
+      bin: Degree 1
+      clue: What do the two x³ terms do to each other?
+      why: 'x³ − x³ = 0, which leaves 2x: degree 1.'
+    - label: 5 − 4x
+      bin: Degree 1
+      clue: Does the order of the terms change the degree?
+      why: 'The x term has power 1: degree 1, written backwards.'
   items:
   - prompt: What is the degree of 5x³ − 2x² + x − 7?
     answer: '3'
@@ -120,6 +165,58 @@ concepts:
       label: p(2) = 0
     caption: 'For p(x) = x² − 4, the zeroes are −2 and 2: they make the value 0.'
     alt: A number line from −4 to 4. At −2 and at 2, p(x) = x² − 4 equals 0, so they are the zeroes. At 0 the value is −4.
+  activity:
+    type: formula
+    prompt: Move x and watch the values of two polynomials.
+    inputs:
+    - name: x
+      label: x
+      min: -6
+      max: 6
+      step: 0.5
+      start: 0
+    outputs:
+    - name: p
+      label: p(x) = 2x − 6
+      expr: 2*x-6
+    - name: q
+      label: q(x) = x² − 1
+      expr: x^2-1
+    goals:
+    - prompt: 'Find the zero of p(x) = 2x − 6: the x that makes p(x) = 0.'
+      want:
+        p: 0
+      hint: p(x) = 0 means 2x − 6 = 0. What must 2x be?
+      mistakes:
+      - when:
+          x: -3
+        say: 'p(−3) = −12. The −6 has to be cancelled by +6, so 2x must be positive 6: the sign flips when −6 moves across.'
+      - when:
+          x: 6
+        say: 'p(6) = 6, not 0. You read off the 6, but the x is doubled first: 2x has to equal 6.'
+    - prompt: q(x) = x² − 1 has two zeroes. Find the negative one.
+      want:
+        q: 0
+        x:
+        - -6
+        - -0.5
+      mistakes:
+      - when:
+          x: 1
+        say: q(1) = 0 too, but that's the positive zero. Which other number also squares to 1?
+      - when:
+          x: -1.5
+        say: 'q(−1.5) = 1.25: (−1.5)² is positive and bigger than 1. Come a little closer to 0.'
+    - prompt: Make p(x) equal −10.
+      want:
+        p: -10
+      mistakes:
+      - when:
+          x: -5
+        say: 'p(−5) = −16: that makes 2x = −10, but the −6 is still there. 2x − 6 = −10 means 2x = −4.'
+      - when:
+          x: 2
+        say: p(2) = −2. To reach −10, 2x has to be negative.
   items:
   - prompt: If p(x) = x² − 3x + 2, find p(4).
     answer: '6'
@@ -217,6 +314,66 @@ concepts:
       value: 98
     caption: 'Each bar is ₹12 taller than the last: fare = 12x + 50.'
     alt: Bars for a taxi fare at 0 to 4 km rising by the same 12 rupees each step, from 50 to 98.
+  activity:
+    type: formula
+    prompt: Something starts at b and changes by the same amount a every hour. After x hours it is ax + b.
+    inputs:
+    - name: a
+      label: Change each hour a
+      min: -15
+      max: 25
+      step: 1
+      start: 0
+      unit: L
+    - name: b
+      label: Start b
+      min: 0
+      max: 60
+      step: 2
+      start: 0
+      unit: L
+    outputs:
+    - name: t2
+      label: After 2 hours
+      expr: 2*a+b
+      unit: L
+    - name: t5
+      label: After 5 hours
+      expr: 5*a+b
+      unit: L
+    goals:
+    - prompt: A tank being filled holds 26 L after 2 hours and 47 L after 5 hours. Find a and b.
+      want:
+        t2: 26
+        t5: 47
+      hint: How much came in between hour 2 and hour 5? How many hours is that?
+      mistakes:
+      - when:
+          a: 13
+          b: 0
+        say: 13 L an hour from empty fits 26 L at 2 hours, but gives 65 L at 5 hours. Only 21 L came in over those 3 hours.
+      - when:
+          a: 21
+        say: 21 L is what came in over 3 hours (hour 2 to hour 5), not in one hour.
+      - when:
+          a: 7
+          b: 26
+        say: The rate is right, but 26 L is what's in the tank after 2 hours. At the start, 2 hours of filling hadn't happened yet.
+    - prompt: A leaking tank holds 40 L after 2 hours and 28 L after 5 hours. Find a and b.
+      want:
+        t2: 40
+        t5: 28
+      mistakes:
+      - when:
+          a: 4
+        say: 'A positive a means the tank fills up. It is losing water, so the change each hour is negative: linear decay.'
+      - when:
+          a: -12
+        say: −12 L is the loss over 3 hours. Each hour it loses a third of that.
+      - when:
+          a: -4
+          b: 40
+        say: The leak rate is right, but 40 L is after 2 hours of leaking. At the start there was more.
   items:
   - prompt: A taxi charges ₹40 plus ₹15 per km. What is the fare for 6 km, in ₹?
     answer: '130'
@@ -317,6 +474,55 @@ concepts:
       - Q
     caption: Slope = rise ÷ run = 4 ÷ 2 = 2; the line crosses the y-axis at 1.
     alt: The line y = 2x + 1 through (0, 1) and (2, 5), with a step of 2 across and 4 up showing slope 2.
+  activity:
+    type: graph
+    mode: line
+    range:
+    - -6
+    - 6
+    m_step: 0.5
+    prompt: The line is y = ax + b. Tilt it to change the slope a; slide it up or down to change b, where it crosses the y-axis.
+    goals:
+    - prompt: Make y = 2x − 3.
+      m: 2
+      c: -3
+      mistakes:
+      - when:
+          m: -3
+          c: 2
+        say: 'You swapped them: this line has slope −3 and crosses at 2. The number with x is the slope.'
+      - when:
+          m: 2
+          c: 3
+        say: This crosses the y-axis at +3. In y = 2x − 3 it crosses at −3, below the origin.
+    - prompt: Make the line through (0, 4) and (2, 0).
+      through:
+      - - 0
+        - 4
+      - - 2
+        - 0
+      hint: 'From (0, 4) to (2, 0): how far up or down, for how far across?'
+      mistakes:
+      - when:
+          m: 2
+          c: 4
+        say: 'This line rises: from (0, 4), 2 across takes it up to (2, 8). It has to drop to (2, 0).'
+      - when:
+          m: -0.5
+          c: 4
+        say: 'Slope −½ drops 1 for every 2 across, reaching (2, 3). Slope is rise ÷ run: the drop is 4 over a run of 2.'
+    - prompt: Make a line parallel to y = x + 1 that crosses the y-axis at −2.
+      m: 1
+      c: -2
+      mistakes:
+      - when:
+          m: -1
+          c: -2
+        say: Slope −1 goes down, but y = x + 1 goes up 1 for each 1 across. Parallel lines climb at the same rate.
+      - when:
+          m: 1
+          c: 1
+        say: That's y = x + 1 itself, not a parallel line. Keep the tilt, slide it down to cross at −2.
   items:
   - prompt: What is the slope of y = 3x − 5?
     answer: '3'

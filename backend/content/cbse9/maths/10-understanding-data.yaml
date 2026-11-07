@@ -31,6 +31,62 @@ concepts:
     - at: 80
       label: 10 students
     alt: A number line from 55 to 85 marking 60 for 30 students, 80 for 10 students, and the weighted mean 65, closer to the bigger group.
+  activity:
+    type: formula
+    prompt: Mix x kg of rice at ₹40/kg with y kg at ₹60/kg. The mixture's price is a weighted mean.
+    inputs:
+    - name: x
+      label: Rice at ₹40
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: kg
+    - name: y
+      label: Rice at ₹60
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: kg
+    outputs:
+    - name: kg
+      label: Total
+      expr: x+y
+      unit: kg
+    - name: price
+      label: Price of the mix per kg
+      expr: (40*x+60*y)/(x+y)
+      unit: ₹
+      places: 2
+    goals:
+    - prompt: Make 10 kg of mixture costing ₹46 per kg.
+      want:
+        kg: 10
+        price: 46
+      hint: ₹46 is nearer 40 than 60. Which rice should there be more of?
+      mistakes:
+      - when:
+          x: 5
+          y: 5
+        say: Equal amounts give ₹50, the plain average of 40 and 60. To pull the price down to ₹46, more of the cheaper rice is needed.
+      - when:
+          x: 3
+          y: 7
+        say: 'That''s ₹54: more of the dear rice pushes the price up, not down.'
+    - prompt: Now make 20 kg costing ₹55 per kg.
+      want:
+        kg: 20
+        price: 55
+      mistakes:
+      - when:
+          x: 10
+          y: 10
+        say: Equal amounts give ₹50. The average of averages is only right when the amounts are equal.
+      - when:
+          x: 15
+          y: 5
+        say: 'That''s ₹45: you have more cheap rice. ₹55 is nearer 60.'
   items:
   - prompt: Class A (20 students) averages 50 and class B (20 students) averages 70. What is the overall average?
     answer: '60'
@@ -114,6 +170,56 @@ concepts:
       value: 15
     caption: 9A total 40 (girls 45%); 9B total 30 (girls 50%).
     alt: Bars for girls and boys in 9A (18 and 22) and 9B (15 and 15).
+  activity:
+    type: formula
+    prompt: A class has g girls and b boys. On a 100% stacked bar, the girls' part is g ÷ (g + b) × 100.
+    inputs:
+    - name: g
+      label: Girls
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+    - name: b
+      label: Boys
+      min: 0
+      max: 60
+      step: 1
+      start: 0
+    outputs:
+    - name: t
+      label: Whole class
+      expr: g+b
+    - name: pct
+      label: Girls' part of the 100% bar
+      expr: g/max(g+b,1)*100
+      unit: '%'
+      places: 1
+    goals:
+    - prompt: Class 9A has 30 students, and the girls' part of its 100% bar is 40%. How many girls and boys?
+      want:
+        t: 30
+        pct: 40
+      hint: '40% of the whole class of 30: how many is that?'
+      mistakes:
+      - when:
+          g: 12
+          b: 30
+        say: 12 girls and 30 boys is 42 students, but the class has 30 altogether. The boys are the rest of the 30.
+      - when:
+          g: 40
+        say: 40 is the percentage, not a count. 40% of 30 students is fewer than 30.
+    - prompt: Class 9B has 15 girls, more than 9A, but its girls' part is only 30%. How many boys?
+      want:
+        g: 15
+        pct: 30
+      mistakes:
+      - when:
+          b: 50
+        say: 15 is 30% of 50, but the bar's 100% is the whole class, girls plus boys. With 50 boys the class is 65, and girls are only 23%.
+      - when:
+          b: 15
+        say: Equal numbers make each part 50%. For girls to be only 30%, boys must be the other 70%.
   items:
   - prompt: A stacked bar for a class has 12 girls on the bottom and 18 boys on top. What is the height of the whole bar?
     answer: '30'

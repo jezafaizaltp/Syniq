@@ -53,6 +53,59 @@ concepts:
       label: 90°
     caption: 'The line from the centre at right angles to the chord halves it: MB² = 4² − 2.4² = 3.2², so AB = 6.4.'
     alt: A circle with centre O and radius 4. A chord AB with its mid-point M; OM is 2.4 and meets AB at a right angle, making a right triangle OMB.
+  activity:
+    type: formula
+    prompt: A circle has radius 13 cm. Move a chord closer to or further from the centre. Half chord² + distance² = radius².
+    inputs:
+    - name: d
+      label: Distance from centre
+      min: 0
+      max: 13
+      step: 1
+      start: 13
+      unit: cm
+    outputs:
+    - name: h
+      label: Half the chord
+      expr: sqrt(169-d^2)
+      unit: cm
+      places: 2
+    - name: c
+      label: Chord length
+      expr: 2*sqrt(169-d^2)
+      unit: cm
+      places: 2
+    goals:
+    - prompt: Make a chord 24 cm long.
+      want:
+        c: 24
+      hint: 'Half of 24 is 12. 12² + d² = 13²: what is d²?'
+      mistakes:
+      - when:
+          d: 12
+        say: '12 cm from the centre gives a half chord of √(169 − 144) = 5: a 10 cm chord. 12 is half the chord, not the distance.'
+      - when:
+          d: 11
+        say: At 11 cm the chord is about 13.9 cm. Closer to the centre, chords get longer.
+    - prompt: Now make a chord 10 cm long.
+      want:
+        c: 10
+      mistakes:
+      - when:
+          d: 5
+        say: 5 cm from the centre gives a 24 cm chord. A short chord sits far from the centre.
+    - prompt: Make the longest chord possible.
+      want:
+        c: 26
+      mistakes:
+      - when:
+          d: 13
+        say: 'At 13 cm the line only touches the circle: the chord shrinks to nothing. Where would the longest chord pass?'
+      - when:
+          d:
+          - 1
+          - 3
+        say: 'Close, but not the longest yet. The longest chord goes right through the centre: the diameter.'
   items:
   - prompt: A chord is 8 cm long and 3 cm from the centre. Find the radius in cm.
     answer: '5'
@@ -159,6 +212,48 @@ concepts:
       label: 40°
     caption: The angle at the centre (80°) is twice the angle at the circle (40°) on the same chord AB.
     alt: A circle with centre O and chord AB. The angle AOB at the centre is 80°, and the angle APB at a point P on the circle is 40°, half as much.
+  activity:
+    type: angle
+    prompt: Turn the arm to make each angle in a circle.
+    goals:
+    - prompt: Arc AB makes 140° at the centre. Make the angle it makes at a point on the rest of the circle.
+      degrees: 70
+      mistakes:
+      - when:
+          degrees: 140
+        say: 140° is the angle at the centre. A point on the circle sees the same arc at half the angle.
+      - when:
+          degrees: 280
+        say: 280° is double. It's the centre angle that is double the angle on the circle, not the other way round.
+    - prompt: Make the angle in a semicircle.
+      degrees: 90
+      mistakes:
+      - when:
+          degrees: 180
+        say: 180° is the straight angle the diameter makes at the centre. A point on the circle sees it at half that.
+      - when:
+          degrees:
+          - 45
+          - 60
+        say: Too narrow. A diameter is a 180° arc at the centre; the angle on the circle is half of 180°.
+    - prompt: A cyclic quadrilateral has one angle of 75°. Make the angle opposite it.
+      degrees: 105
+      mistakes:
+      - when:
+          degrees: 75
+        say: Equal angles belong to the same segment. Opposite corners of a cyclic quadrilateral add to 180° instead.
+      - when:
+          degrees: 285
+        say: '285° makes 360° with 75°: a full turn. Opposite angles of a cyclic quadrilateral add to a straight angle.'
+    - prompt: Angle ACB on arc AB is 40°. Make angle ADB, with D in the same segment.
+      degrees: 40
+      mistakes:
+      - when:
+          degrees: 80
+        say: 80° is what the centre sees. Every point in the same segment sees the arc at the same angle.
+      - when:
+          degrees: 140
+        say: '140° would add to 180° with 40°: that''s for opposite corners of a cyclic quadrilateral, not the same segment.'
   items:
   - prompt: An arc subtends 50° at a point on the circle. What angle does it subtend at the centre, in degrees?
     answer: '100'

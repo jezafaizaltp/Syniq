@@ -42,6 +42,52 @@ concepts:
       - -2
     caption: A is in Quadrant I, B in II, C in III and D in IV, going anticlockwise.
     alt: 'Coordinate axes with four points: A(3, 2) top right in Quadrant I, B(−3, 2) top left in II, C(−3, −2) bottom left in III, D(3, −2) bottom right in IV.'
+  activity:
+    type: sort
+    prompt: Where does each point sit? Choose its quadrant, or 'On an axis'.
+    bins:
+    - Quadrant I
+    - Quadrant II
+    - Quadrant III
+    - Quadrant IV
+    - On an axis
+    items:
+    - label: (3, 5)
+      bin: Quadrant I
+      clue: Which way does x = 3 take you, left or right? And y = 5, up or down?
+      why: 'Right and up: the top right, Quadrant I.'
+    - label: (−2, 4)
+      bin: Quadrant II
+      clue: 'x is −2: is that left or right of the y-axis?'
+      why: 'Left (x negative) and up (y positive): the top left, Quadrant II.'
+    - label: (−5, −1)
+      bin: Quadrant III
+      clue: Look at both signs. Where is 'left and down'?
+      why: 'Both negative: left and down, the bottom left, Quadrant III.'
+    - label: (4, −3)
+      bin: Quadrant IV
+      clue: 'y is −3: is that above or below the x-axis?'
+      why: 'Right (x positive) and down (y negative): the bottom right, Quadrant IV.'
+    - label: (0, 6)
+      bin: On an axis
+      clue: 'x is 0: how far left or right do you move?'
+      why: x = 0 means no move sideways, so the point sits on the y-axis, in no quadrant.
+    - label: (−7, 0)
+      bin: On an axis
+      clue: 'y is 0: how far up or down do you move?'
+      why: 'y = 0 means no move up or down: the point stays on the x-axis, in no quadrant.'
+    - label: (−1, −6)
+      bin: Quadrant III
+      clue: Is either number positive?
+      why: 'Both are negative, so it is left and down: Quadrant III.'
+    - label: (6, −0.5)
+      bin: Quadrant IV
+      clue: Is −0.5 above or below zero?
+      why: 'y is negative, even if only a little, so the point is just below the x-axis: Quadrant IV.'
+    - label: (−3, 3)
+      bin: Quadrant II
+      clue: The numbers look alike. Which sign does each one have?
+      why: 'x is negative and y positive: Quadrant II. Numbers of the same size can sit in different quadrants.'
   items:
   - prompt: In which quadrant is the point (−4, 5)?
     options:
@@ -163,6 +209,58 @@ concepts:
       - 3 up
     caption: 'To plot P(4, 3): start at O, go 4 along the x-axis, then 3 up.'
     alt: Coordinate axes. A path goes from the origin O 4 steps right to H, then 3 steps up to the point P(4, 3).
+  activity:
+    type: graph
+    mode: point
+    range:
+    - -6
+    - 6
+    prompt: Move the point with the buttons. The first number says how far across, the second how far up or down.
+    goals:
+    - prompt: Plot P(2, 5).
+      x: 2
+      y: 5
+      mistakes:
+      - when:
+          x: 5
+          y: 2
+        say: 'That''s (5, 2): 5 across and 2 up. The first number is the across move, so P is only 2 across.'
+      - when:
+          x: 2
+          y: -5
+        say: That's 5 below the x-axis. A positive y goes up.
+    - prompt: Plot Q(−4, 3).
+      x: -4
+      y: 3
+      mistakes:
+      - when:
+          x: 4
+          y: 3
+        say: That's (4, 3), right of the y-axis. A negative x goes left.
+      - when:
+          x: 3
+          y: -4
+        say: 'That''s (3, −4): the two numbers swapped places. Go across first, by −4.'
+    - prompt: Plot R(0, −3). Its abscissa is 0.
+      x: 0
+      y: -3
+      mistakes:
+      - when:
+          x: -3
+          y: 0
+        say: That's (−3, 0), on the x-axis. An abscissa of 0 means no move across at all; the −3 is the up-or-down move.
+    - prompt: Plot S(−5, −2).
+      x: -5
+      y: -2
+      mistakes:
+      - when:
+          x: -2
+          y: -5
+        say: 'That''s (−2, −5): swapped. S is 5 to the left and only 2 down.'
+      - when:
+          x: 5
+          y: 2
+        say: 'Both signs dropped: that''s (5, 2), top right. Two negatives put S bottom left.'
   items:
   - prompt: What is the abscissa of the point (7, −3)?
     answer: '7'
@@ -276,6 +374,86 @@ concepts:
       label: 90°
     caption: AB = √(3² + 4²) = 5
     alt: Points A(1, 1) and B(4, 5) on a grid, joined by a slanted line of length 5, with a right triangle of sides 3 across and 4 up.
+  activity:
+    type: formula
+    prompt: P is fixed at (1, 2). Move Q and compare the walk along the grid with the straight line PQ.
+    inputs:
+    - name: x
+      label: Q's x
+      min: -6
+      max: 10
+      step: 1
+      start: 1
+    - name: y
+      label: Q's y
+      min: -6
+      max: 10
+      step: 1
+      start: 2
+    outputs:
+    - name: dx
+      label: Across |x − 1|
+      expr: abs(x-1)
+    - name: dy
+      label: Up or down |y − 2|
+      expr: abs(y-2)
+    - name: walk
+      label: Walk along the grid
+      expr: abs(x-1)+abs(y-2)
+    - name: d
+      label: Straight line PQ
+      expr: sqrt((x-1)^2+(y-2)^2)
+      places: 2
+    goals:
+    - prompt: Move Q so PQ is exactly 5 in a straight line, and Q is not straight across or straight up from P.
+      want:
+        d: 5
+        dx:
+        - 1
+        - 16
+        dy:
+        - 1
+        - 16
+      hint: Which two whole numbers, squared and added, make 5² = 25?
+      mistakes:
+      - when:
+          dx: 0
+        say: Q is straight above or below P, so you only need one side. Move Q sideways too, so Pythagoras is needed.
+      - when:
+          dy: 0
+        say: Q is straight across from P. Move it up or down too, so the line is slanted.
+      - when:
+          walk: 5
+        say: Q is 5 steps away along the grid, but the straight line cuts the corner, so PQ is shorter than 5. PQ² = across² + up².
+      - when:
+          d:
+          - 2.2
+          - 2.3
+        say: Across² + up² is 5 here, so PQ = √5 ≈ 2.24. To make PQ = 5, across² + up² must be 25.
+    - prompt: Now move Q so PQ is exactly 10, again on a slant.
+      want:
+        d: 10
+        dx:
+        - 1
+        - 16
+        dy:
+        - 1
+        - 16
+      mistakes:
+      - when:
+          dx: 0
+        say: 'Q is straight above or below P. Keep the line slanted: move Q sideways too.'
+      - when:
+          dy: 0
+        say: 'Q is straight across from P. Keep the line slanted: move Q up or down too.'
+      - when:
+          walk: 10
+        say: 10 steps along the grid, but the slanted line is shorter. For PQ = 10 you need across² + up² = 100.
+      - when:
+          d:
+          - 3.1
+          - 3.2
+        say: Across² + up² is 10, so PQ = √10 ≈ 3.16, not 10. Square the distance you want, not the sides you have.
   items:
   - prompt: Find the distance between (0, 0) and (6, 8).
     answer: '10'
@@ -373,6 +551,60 @@ concepts:
       - B
     caption: M = ((2 + 6)/2, (1 + 5)/2) = (4, 3)
     alt: Segment from A(2, 1) to B(6, 5) with its midpoint M(4, 3) marked in the middle.
+  activity:
+    type: formula
+    prompt: A is at (2, 1). Move B and watch M, the midpoint of AB.
+    inputs:
+    - name: x
+      label: B's x
+      min: -8
+      max: 10
+      step: 1
+      start: 2
+    - name: y
+      label: B's y
+      min: -8
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: mx
+      label: M's x = (2 + x) ÷ 2
+      expr: (2+x)/2
+    - name: my
+      label: M's y = (1 + y) ÷ 2
+      expr: (1+y)/2
+    goals:
+    - prompt: Make the midpoint M = (5, 4). Where must B be?
+      want:
+        mx: 5
+        my: 4
+      hint: M is halfway. How far is it from A to M across, and up? Where does the same step again take you?
+      mistakes:
+      - when:
+          x: 3
+          y: 3
+        say: B at (3, 3) is M − A. Then the midpoint is (2.5, 2), between A and M. B must be on the far side of M.
+      - when:
+          x: 5
+          y: 4
+        say: With B on top of M, the midpoint is (3.5, 2.5), halfway from A to M. M must be in the middle, with B beyond it.
+      - when:
+          x: 8
+        say: 'B''s x is right: M''s x is 5. Now y: A is 3 below M, so how far above M is B?'
+    - prompt: Now make M = (−1, 0).
+      want:
+        mx: -1
+        my: 0
+      mistakes:
+      - when:
+          x: -3
+          y: -1
+        say: B at (−3, −1) is M − A, giving M = (−0.5, 0). From A to M is 3 left and 1 down; B is that same step again past M.
+      - when:
+          x: -1
+          y: 0
+        say: With B on top of M, the midpoint is halfway from A to M. B has to be as far past M as A is before it.
   items:
   - prompt: Find the x-coordinate of the midpoint of (2, 4) and (8, 10).
     answer: '5'

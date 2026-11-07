@@ -31,6 +31,76 @@ concepts:
       - Particles spread apart
       - Lower pressure
     alt: A sound wave is a row of compressions, where particles crowd together at high pressure, and rarefactions, where they spread apart.
+  activity:
+    type: formula
+    prompt: Speed of sound = frequency × wavelength. Change the frequency and the wavelength.
+    inputs:
+    - name: f
+      label: Frequency
+      min: 100
+      max: 2000
+      step: 10
+      start: 100
+      unit: Hz
+    - name: lam
+      label: Wavelength
+      min: 0.1
+      max: 4
+      step: 0.1
+      start: 0.1
+      unit: m
+    outputs:
+    - name: v
+      label: Speed
+      expr: f*lam
+      unit: m/s
+      places: 1
+    - name: t
+      label: Time period = 1 ÷ frequency
+      expr: 1000/f
+      unit: ms
+      places: 2
+    goals:
+    - prompt: In air (340 m/s), a sound has a wavelength of 0.5 m. Find its frequency.
+      want:
+        lam: 0.5
+        v: 340
+      hint: v = frequency × λ, so frequency = v ÷ λ.
+      mistakes:
+      - when:
+          lam: 0.5
+          f: 170
+        say: '170 Hz × 0.5 m = 85 m/s: that''s 340 × 0.5. Frequency is v ÷ λ: a short wave needs a high frequency.'
+      - when:
+          lam: 0.5
+          f: 340
+        say: 340 Hz × 0.5 m = 170 m/s. The speed is 340; each wave is only half a metre, so more fit in each second.
+    - prompt: 'A higher note in air: 1700 Hz. Make the wavelength fit 340 m/s.'
+      want:
+        f: 1700
+        v: 340
+      mistakes:
+      - when:
+          lam:
+          - 1
+          - 4
+        say: A higher frequency squeezes more waves into each second, so each wave is shorter, not longer.
+      - when:
+          lam: 0.5
+        say: 0.5 m was the 680 Hz note. This note is higher, so its waves are shorter.
+    - prompt: In water sound travels at 1500 m/s. Find the wavelength of a 500 Hz sound.
+      want:
+        f: 500
+        v: 1500
+      mistakes:
+      - when:
+          lam: 0.7
+        say: About 0.7 m is the wavelength in air. Water carries sound about 4 times faster, so the waves are longer.
+      - when:
+          lam:
+          - 0.1
+          - 0.4
+        say: Shorter waves would mean slower sound. Water is faster than air.
   items:
   - prompt: A sound wave has frequency 500 Hz and wavelength 0.68 m. Find its speed in m/s.
     answer: '340'
@@ -135,6 +205,54 @@ concepts:
     - Sound went 340 m/s × 2 s = 680 m in all
     - The cliff is 680 ÷ 2 = 340 m away
     alt: 'An echo from a cliff heard after 2 seconds: sound travels 680 m there and back, so the cliff is 340 m away.'
+  activity:
+    type: formula
+    prompt: You clap in front of a wall. Move the wall and see how long the echo takes to come back.
+    inputs:
+    - name: d
+      label: Distance to the wall
+      min: 0
+      max: 3000
+      step: 5
+      start: 0
+      unit: m
+    outputs:
+    - name: ta
+      label: Echo time in air (340 m/s)
+      expr: 2*d/340
+      unit: s
+      places: 3
+    - name: tw
+      label: Echo time in sea water (1500 m/s)
+      expr: 2*d/1500
+      unit: s
+      places: 3
+    goals:
+    - prompt: To hear a separate echo in air, it must return after at least 0.1 s. Find the nearest the wall can be (it moves in 5 m steps).
+      want:
+        ta:
+        - 0.1
+        - 0.12
+      hint: In 0.1 s, sound goes 34 m. But it has to go there and back.
+      mistakes:
+      - when:
+          d: 35
+        say: 'At about 34 m, sound reaches the wall in 0.1 s, but the echo has to come back too: 0.2 s in all.'
+      - when:
+          d:
+          - 5
+          - 15
+        say: 'That''s too close: the echo comes back in under 0.1 s and blends with the clap.'
+    - prompt: A ship's SONAR hears the echo from the sea floor after 2 s. How deep is the sea?
+      want:
+        tw: 2
+      mistakes:
+      - when:
+          d: 3000
+        say: At 3000 m the echo would take 4 s. 1500 × 2 is the whole journey down and up; the floor is only half that far.
+      - when:
+          d: 340
+        say: 340 m uses the speed of sound in air. In sea water sound travels at 1500 m/s, so the floor is much deeper.
   items:
   - prompt: A person hears an echo 2 s after shouting at a cliff. Sound travels at 340 m/s. How far is the cliff, in m?
     answer: '340'

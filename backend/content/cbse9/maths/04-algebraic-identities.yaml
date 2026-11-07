@@ -43,6 +43,59 @@ concepts:
       - b²
     caption: (a + b)² = a² + ab + ab + b² = a² + 2ab + b²
     alt: A square of side a + b split into an a² square, a b² square and two ab rectangles, showing (a + b)² = a² + 2ab + b².
+  activity:
+    type: formula
+    prompt: Is (a + b)² the same as a² + b²? Change a and b, and watch the extra 2ab.
+    inputs:
+    - name: a
+      label: a
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    - name: b
+      label: b
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: sq
+      label: (a + b)²
+      expr: (a+b)^2
+    - name: parts
+      label: a² + b²
+      expr: a^2+b^2
+    - name: gap
+      label: 2ab
+      expr: 2*a*b
+    goals:
+    - prompt: Make (a + b)² = 64 while a² + b² = 34.
+      want:
+        sq: 64
+        parts: 34
+      hint: a + b must be 8. Which pair adding to 8 has squares that add to 34?
+      mistakes:
+      - when:
+          sq: 64
+        say: (a + b)² = 64 is right, but the square also holds two a × b strips worth 2ab. With a² + b² = 34, those strips must be 30.
+      - when:
+          parts: 34
+        say: 'a² + b² = 34 is right, but (a + b)² is bigger: it adds 2ab. Which pair also has a + b = 8?'
+      - when:
+          b: 0
+        say: With b = 0 there are no strips, so (a + b)² and a² + b² look equal. Use two non-zero parts to see the 2ab.
+    - prompt: Now make (a + b)² = 100 and a² + b² = 52.
+      want:
+        sq: 100
+        parts: 52
+      mistakes:
+      - when:
+          sq: 100
+        say: a + b = 10 is right. The two strips, 2ab, must make up 100 − 52 = 48 here.
+      - when:
+          parts: 52
+        say: a² + b² = 52 is right, but then a + b must be 10 as well.
   items:
   - prompt: Using an identity, find 104 × 96.
     answer: '9984'
@@ -169,6 +222,72 @@ concepts:
       - '12'
     caption: x² + 4x + 3x + 12 = x² + 7x + 12, so x² + 7x + 12 = (x + 3)(x + 4).
     alt: A rectangle x + 4 wide and x + 3 tall, split into x², 4x, 3x and 12. Together they make x² + 7x + 12.
+  activity:
+    type: formula
+    prompt: 'To factorise ax² + bx + c, split the middle term: find p and q with p + q = b and p × q = a × c.'
+    inputs:
+    - name: p
+      label: p
+      min: -10
+      max: 30
+      step: 1
+      start: 0
+    - name: q
+      label: q
+      min: -10
+      max: 30
+      step: 1
+      start: 0
+    outputs:
+    - name: s
+      label: p + q
+      expr: p+q
+    - name: pr
+      label: p × q
+      expr: p*q
+    goals:
+    - prompt: '6x² + 17x + 5: find p and q with p + q = 17 and p × q = 6 × 5 = 30.'
+      want:
+        s: 17
+        pr: 30
+      hint: List pairs that multiply to 30. Which pair adds to 17?
+      mistakes:
+      - when:
+          pr: 5
+        say: p × q = 5 uses only the last number. With 6x² in front, the product must be 6 × 5 = 30.
+      - when:
+          pr: 6
+        say: 'p × q = 6 uses only the x² number. The product is a × c: 6 × 5.'
+      - when:
+          s: 17
+        say: p + q = 17 is right; now the product must be 30 too.
+    - prompt: '2x² + 7x + 3: p + q = 7 and p × q = 6.'
+      want:
+        s: 7
+        pr: 6
+      mistakes:
+      - when:
+          pr: 3
+        say: Product 3 forgets the 2 in front of x². It must be 2 × 3.
+      - when:
+          s: 7
+        say: The sum is right; now make the product 6 as well.
+    - prompt: 'x² − 5x + 6: p + q = −5 and p × q = 6.'
+      want:
+        s: -5
+        pr: 6
+      mistakes:
+      - when:
+          p: 2
+          q: 3
+        say: 2 × 3 = 6, but 2 + 3 = +5. To keep the product +6 and make the sum −5, what sign must both have?
+      - when:
+          p: 3
+          q: 2
+        say: 3 × 2 = 6, but the sum is +5. Both numbers need the same sign, and the sum is negative.
+      - when:
+          pr: -6
+        say: 'The product is −6: one number is negative and one positive. Since +6 is wanted, both must share a sign.'
   items:
   - prompt: Factorise x² + 7x + 12.
     options:
@@ -272,6 +391,52 @@ concepts:
     - cancel (x + 3)
     - x − 3   (x ≠ −3)
     alt: Simplifying x squared minus 9 over x plus 3 by factorising the top and cancelling to get x minus 3.
+  activity:
+    type: formula
+    prompt: Move x and compare. Can you cancel, and what may you cancel?
+    inputs:
+    - name: x
+      label: x
+      min: 0
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: a
+      label: (x² − 9) ÷ (x + 3)
+      expr: (x^2-9)/(x+3)
+      places: 2
+    - name: b
+      label: x − 3
+      expr: x-3
+    - name: c
+      label: (x + 6) ÷ (x + 3)
+      expr: (x+6)/(x+3)
+      places: 2
+    goals:
+    - prompt: Make (x² − 9) ÷ (x + 3) equal 5. Watch x − 3 as you go.
+      want:
+        a: 5
+      hint: Factorise x² − 9 as (x + 3)(x − 3). What does dividing by x + 3 leave?
+      mistakes:
+      - when:
+          x: 5
+        say: 'At x = 5 it is (25 − 9) ÷ 8 = 2. Notice it always equals x − 3: so which x makes x − 3 = 5?'
+      - when:
+          x: 2
+        say: At x = 2 it is −5 ÷ 5 = −1, the same as x − 3. To get 5, x − 3 must be 5.
+    - prompt: Someone 'cancels the x's' in (x + 6) ÷ (x + 3) and says it is always 6 ÷ 3 = 2. Find the only x here where that's true.
+      want:
+        c: 2
+      mistakes:
+      - when:
+          x: 3
+        say: At x = 3 it is 9 ÷ 6 = 1.5, not 2. The x is added, not multiplied, so it isn't a factor you can cancel.
+      - when:
+          x:
+          - 1
+          - 12
+        say: For this x the top is less than twice the bottom, so the value is below 2. You may cancel only a factor of the whole top and bottom.
   items:
   - prompt: Simplify (x² − 16)/(x − 4).
     options:

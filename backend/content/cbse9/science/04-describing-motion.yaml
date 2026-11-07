@@ -43,6 +43,64 @@ concepts:
       label: 3 m back
     caption: Distance = 5 + 3 = 8 m. Displacement = 2 m east, from Start straight to End.
     alt: 'A walk along a line: 5 m east from 0, then 3 m back to 2. The distance is 8 m but the displacement is only 2 m east.'
+  activity:
+    type: formula
+    prompt: 'A 60 km trip: the first 30 km at speed a, the next 30 km at speed b. Average speed = total distance ÷ total time.'
+    inputs:
+    - name: a
+      label: First half speed a
+      min: 10
+      max: 120
+      step: 10
+      start: 10
+      unit: km/h
+    - name: b
+      label: Second half speed b
+      min: 10
+      max: 120
+      step: 10
+      start: 10
+      unit: km/h
+    outputs:
+    - name: t1
+      label: Time for the first half
+      expr: 30/a
+      unit: h
+      places: 2
+    - name: t2
+      label: Time for the second half
+      expr: 30/b
+      unit: h
+      places: 2
+    - name: avg
+      label: Average speed
+      expr: 60/(30/a+30/b)
+      unit: km/h
+      places: 1
+    goals:
+    - prompt: The first half is at 30 km/h. Make the average speed for the whole trip 40 km/h.
+      want:
+        a: 30
+        avg: 40
+      hint: At 40 km/h, 60 km takes 1.5 h. How long has the first half taken already?
+      mistakes:
+      - when:
+          a: 30
+          b: 50
+        say: '30 and 50 average to 40, but you spend longer at the slow speed: 1 h + 0.6 h = 1.6 h for 60 km is only 37.5 km/h.'
+    - prompt: Now the first half is at 40 km/h. Make the average 60 km/h.
+      want:
+        a: 40
+        avg: 60
+      mistakes:
+      - when:
+          a: 40
+          b: 80
+        say: '40 and 80 average to 60, but the slow half takes 45 min and the fast one 22.5 min: 60 km in 1.125 h is only 53.3 km/h.'
+      - when:
+          a: 40
+          b: 100
+        say: 'Closer: 57.1 km/h. 60 km at 60 km/h is 1 hour, and the first half already used 45 minutes.'
   items:
   - prompt: A car travels 150 km in 3 hours. What is its average speed in km/h?
     answer: '50'
@@ -153,6 +211,65 @@ concepts:
       - _T
     caption: Slope = (6 − 2) ÷ 8 = 0.5 m/s², the acceleration. Area under the line = (2 + 6) ÷ 2 × 8 = 32 m, the distance.
     alt: A velocity–time graph rising in a straight line from 2 m/s to 6 m/s over 8 seconds. Its slope is the acceleration and the area under it is the distance.
+  activity:
+    type: formula
+    prompt: 'A vehicle moving at u brakes with acceleration a (negative). It stops when v = 0: v² − u² = 2as.'
+    inputs:
+    - name: u
+      label: Starting speed u
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+      unit: m/s
+    - name: a
+      label: Acceleration a
+      min: -10
+      max: -0.5
+      step: 0.5
+      start: -10
+      unit: m/s²
+    outputs:
+    - name: t
+      label: Time to stop
+      expr: -u/a
+      unit: s
+      places: 2
+    - name: s
+      label: Stopping distance
+      expr: u^2/(-2*a)
+      unit: m
+      places: 1
+    goals:
+    - prompt: A car at 20 m/s must stop in exactly 40 m. Find the braking acceleration.
+      want:
+        u: 20
+        s: 40
+      hint: 0 − 20² = 2 × a × 40. What is a?
+      mistakes:
+      - when:
+          u: 20
+          a: -10
+        say: '−10 m/s² stops it in 20 m. That comes from v² − u² = as, without the 2: the equation is v² − u² = 2as.'
+      - when:
+          u: 20
+          a: -0.5
+        say: 'Gentle braking: the car needs 400 m. A shorter stop needs a bigger (more negative) acceleration.'
+    - prompt: A scooter at 36 km/h brakes at −2 m/s². Set u in m/s and read its stopping distance.
+      want:
+        a: -2
+        s: 25
+      hint: 'Change km/h to m/s: multiply by 5/18.'
+      mistakes:
+      - when:
+          u: 36
+        say: '36 is in km/h. Used as m/s, the scooter would need 324 m to stop. Change it first: 36 × 5/18.'
+      - when:
+          u: 10
+          a:
+          - -10
+          - -2.5
+        say: 'The speed is right in m/s now. Check the braking: −2 m/s².'
   items:
   - prompt: A car speeds up from 10 m/s to 30 m/s in 5 s. Find its acceleration in m/s².
     answer: '4'
@@ -270,6 +387,53 @@ concepts:
       - _B
     caption: Slope = acceleration; area under the line = distance.
     alt: A velocity–time graph with a straight line rising from the origin, showing uniform acceleration; the triangle underneath is the distance.
+  activity:
+    type: graph
+    mode: line
+    range:
+    - -2
+    - 10
+    m_step: 0.5
+    x_label: time (s)
+    y_label: position (m)
+    prompt: A position–time graph. The slope is the velocity; where the line meets the position axis is where it starts.
+    goals:
+    - prompt: Show something at rest, 4 m from the start.
+      m: 0
+      c: 4
+      mistakes:
+      - when:
+          m: 4
+          c: 0
+        say: 'This line rises: the position changes by 4 m every second, so it''s moving. At rest, the position never changes.'
+      - when:
+          m: 0
+          c: 0
+        say: Flat is right for 'at rest', but this one sits at the start. It should be 4 m away.
+    - prompt: Moving away at 2 m/s, starting 1 m from the start.
+      m: 2
+      c: 1
+      mistakes:
+      - when:
+          m: 1
+          c: 2
+        say: 'Swapped: this starts at 2 m and moves 1 m each second. The slope is the speed.'
+      - when:
+          m: 0
+          c: 1
+        say: A flat line means it isn't moving. Moving away means the position grows every second.
+    - prompt: Coming back towards the start at 1 m/s, starting from 6 m.
+      m: -1
+      c: 6
+      mistakes:
+      - when:
+          m: 1
+          c: 6
+        say: A rising line means moving away. Coming back, the position shrinks, so the line slopes down.
+      - when:
+          m: -1
+          c: 0
+        say: This starts at the start point. The object begins 6 m away.
   items:
   - prompt: On a position–time graph, a horizontal line means the object is…
     options:

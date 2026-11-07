@@ -38,6 +38,51 @@ concepts:
       - Electrons move in fixed orbits (shells)
       - They don't lose energy while in these orbits
     alt: 'Three models of the atom: Thomson''s positive sphere with electrons in it, Rutherford''s nucleus with mostly empty space, and Bohr''s fixed orbits.'
+  activity:
+    type: sort
+    prompt: Who showed or suggested it?
+    bins:
+    - Thomson
+    - Rutherford
+    - Bohr
+    - Chadwick
+    items:
+    - label: Electrons dotted in a ball of positive charge
+      bin: Thomson
+      clue: Whose model is like seeds in a watermelon?
+      why: 'Thomson''s ''plum pudding'' model: electrons in a positive sphere.'
+    - label: Most alpha particles went straight through gold foil
+      bin: Rutherford
+      clue: Which experiment fired alpha particles at foil?
+      why: 'Rutherford''s gold foil experiment: most passed straight through, so the atom is mostly empty.'
+    - label: A tiny, dense, positive nucleus
+      bin: Rutherford
+      clue: Which experiment found something small and heavy at the centre?
+      why: A few alpha particles bounced back, so Rutherford said the positive charge is packed in a tiny nucleus.
+    - label: Electrons move only in fixed shells, without losing energy
+      bin: Bohr
+      clue: Who fixed the problem of electrons spiralling into the nucleus?
+      why: Bohr said electrons stay in fixed orbits (K, L, M, N) without radiating energy.
+    - label: Discovered the neutron, with no charge
+      bin: Chadwick
+      clue: Who found the third particle, in 1932?
+      why: Chadwick discovered the neutron.
+    - label: A very few alpha particles bounced straight back
+      bin: Rutherford
+      clue: Which result surprised everyone in the foil experiment?
+      why: 'Bouncing back meant they hit something dense and positive: Rutherford''s nucleus.'
+    - label: Shells named K, L, M and N
+      bin: Bohr
+      clue: Whose model has electrons in energy levels?
+      why: Bohr's model put electrons in named shells.
+    - label: Discovered the electron
+      bin: Thomson
+      clue: Who studied cathode rays and found a negative particle?
+      why: J.J. Thomson discovered the electron.
+    - label: Explained why atoms weigh more than their protons
+      bin: Chadwick
+      clue: Which particle adds mass without charge?
+      why: 'Neutrons add mass but no charge: Chadwick''s discovery.'
   items:
   - prompt: An atom has atomic number 11 and mass number 23. How many neutrons does it have?
     answer: '12'
@@ -127,6 +172,62 @@ concepts:
     - 'Third shell (M): 1'
     - 1 electron to give away, so the valency is 1
     alt: Sodium's 11 electrons fill shells as 2, 8 and 1. The single outer electron gives sodium a valency of 1.
+  activity:
+    type: formula
+    prompt: Change the atomic number Z (how many electrons). Shells fill in order K, L, M, N; here K holds 2, L 8 and M 8.
+    inputs:
+    - name: z
+      label: Atomic number Z
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+    outputs:
+    - name: k
+      label: K shell
+      expr: min(z,2)
+    - name: l
+      label: L shell
+      expr: min(max(z-2,0),8)
+    - name: m
+      label: M shell
+      expr: min(max(z-10,0),8)
+    - name: n
+      label: N shell
+      expr: max(z-18,0)
+    goals:
+    - prompt: Make an atom with 3 shells and 7 electrons in the outermost one.
+      want:
+        m: 7
+      hint: Fill K, then L, then put 7 in M. How many is that altogether?
+      mistakes:
+      - when:
+          z: 7
+        say: '7 electrons in all fill K with 2 and L with 5: only 2 shells (nitrogen). You want 7 in the third shell.'
+      - when:
+          z: 10
+        say: 10 electrons fill K and L exactly. The third shell M is still empty.
+    - prompt: Make an atom with 2 electrons in its third shell (M).
+      want:
+        m: 2
+      mistakes:
+      - when:
+          z: 4
+        say: 'That''s 2 in the second shell, L. K and L must fill up first: 2 + 8.'
+      - when:
+          z: 2
+        say: 2 electrons only fill K, the first shell.
+    - prompt: 'Argon has 18: 2, 8, 8. Add one more electron. Where does it go?'
+      want:
+        z: 19
+        n: 1
+      mistakes:
+      - when:
+          z: 18
+        say: That's argon itself. Add one more electron.
+      - when:
+          z: 20
+        say: That's two more than argon. Calcium, 2, 8, 8, 2.
   items:
   - prompt: What is the electron arrangement of sodium (11 electrons)?
     options:
