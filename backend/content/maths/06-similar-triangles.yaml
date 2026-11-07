@@ -24,6 +24,33 @@ concepts:
       visual: "Draw a triangle on a balloon and blow it up. It gets bigger, but its corners keep the same angles, and every side stretches by the same amount. The small and big triangles are similar."
       step_by_step: "Two triangles have the same angles. The small one has sides 3, 4 and 5 cm, and the big one's longest side is 15 cm. Step 1: Match the longest sides: 5 and 15. Step 2: Scale factor = 15 ÷ 5 = 3. Step 3: Multiply the other sides by 3: 9 cm and 12 cm."
       real_world: "A photo of a triangular roof, printed bigger, keeps the same angles. If the printed roof's base is 4 times the small print's, every other edge is 4 times as long too."
+    activity:
+      type: sort
+      prompt: Are the two triangles similar (same three angles)?
+      bins:
+      - Similar
+      - Not similar
+      items:
+      - label: 40°, 60°, 80° and 80°, 40°, 60°
+        bin: Similar
+        why: 'Both are 40°, 60°, 80°, just in a different order: similar.'
+        clue: Write each triangle's angles from smallest to biggest. Are the lists the same?
+      - label: 30°, 60°, 90° and 30°, 70°, 80°
+        bin: Not similar
+        clue: One angle matches. Do the other two?
+        why: 'Only 30° matches; 60°, 90° and 70°, 80° are different: not similar.'
+      - label: 50°, 50°, 80° and 50°, 80°, 50°
+        bin: Similar
+        clue: Sort each list from smallest. Same?
+        why: 'Both are 50°, 50°, 80°: similar.'
+      - label: Two angles 45° and 65°, and two angles 45° and 75°
+        bin: Not similar
+        clue: Work out each triangle's third angle (the three add to 180°).
+        why: 'The third angles are 70° and 60°: 45°, 65°, 70° and 45°, 75°, 60° are different sets, so not similar.'
+      - label: Two angles 35° and 75°, and two angles 75° and 70°
+        bin: Similar
+        why: 'The first is 35°, 75°, 70°; the second 75°, 70°, 35°. Same three angles: similar.'
+        clue: Work out each triangle's third angle (the three add to 180°).
     items:
       - prompt: "Triangle ABC has angles of 40°, 60° and 80°. Triangle PQR has the same shape but sides twice as long. What are PQR's angles?"
         options: ["40°, 60° and 80°", "80°, 120° and 160°", "20°, 30° and 40°", "Can't tell"]
@@ -102,6 +129,33 @@ concepts:
       - [Q, R, '10']
       caption: 'Every side doubles: 6/3 = 8/4 = 10/5 = 2, so the triangles are similar and their angles match.'
       alt: A 3-4-5 right triangle beside a 6-8-10 right triangle. Every side is doubled, so the two triangles are similar.
+    activity:
+      type: formula
+      prompt: A 3, 4, 5 triangle is enlarged by a scale factor k.
+      inputs:
+      - name: k
+        label: Scale factor k
+        min: 0.5
+        max: 4
+        step: 0.5
+        start: 1
+      outputs:
+      - name: a
+        label: Side 1
+        expr: 3*k
+      - name: b
+        label: Side 2
+        expr: 4*k
+      - name: c
+        label: Side 3
+        expr: 5*k
+      goals:
+      - prompt: Make the shortest side 7.5.
+        want:
+          a: 7.5
+      - prompt: Make the longest side 15.
+        want:
+          c: 15
     items:
       - prompt: "Are triangles with sides 2, 3, 4 cm and 4, 6, 8 cm similar?"
         options: ["Yes: every side is doubled", "No: the sides are different", "Only if they have a right angle", "No: 4 − 2 is not 6 − 3"]
@@ -157,6 +211,29 @@ concepts:
       visual: "Colour the matching corners: A and P red, B and Q blue, C and R green. A side joins two colours, so the blue-green side BC matches the blue-green side QR."
       step_by_step: "Triangle ABC matches PQR, with AB = 6, BC = 8 and PQ = 9. Step 1: AB matches PQ, so the scale factor is 9 ÷ 6 = 1.5. Step 2: BC matches QR. Step 3: QR = 8 × 1.5 = 12."
       real_world: "In triangle ABC, a shelf DE runs parallel to the floor BC. The small triangle ADE at the top has the same shape as the whole triangle ABC. If AD is a third of AB, the shelf DE is a third of BC."
+    activity:
+      type: formula
+      prompt: Small triangle sides 4 cm and 6 cm. In the big similar triangle, the side matching 4 cm is 10 cm.
+      inputs:
+      - name: k
+        label: Scale factor
+        min: 1
+        max: 4
+        step: 0.25
+        start: 1
+      outputs:
+      - name: a
+        label: Side matching 4 cm
+        expr: 4*k
+        unit: cm
+      - name: b
+        label: Side matching 6 cm
+        expr: 6*k
+        unit: cm
+      goals:
+      - prompt: Find the scale factor, then read the side matching 6 cm.
+        want:
+          a: 10
     items:
       - prompt: "Triangle ABC is similar to triangle PQR, with A matching P, B matching Q and C matching R. Which side matches BC?"
         options: ["QR", "PQ", "PR", "AC"]
@@ -217,6 +294,31 @@ concepts:
       kind: flow
       steps: [Stick 1 m tall casts a 2 m shadow, Tree casts a 12 m shadow at the same time, 'Sun''s rays hit both at the same angle, so the triangles are similar', Tree height = 12 × (1 ÷ 2) = 6 m]
       alt: 'A stick and a tree with shadows at the same time make similar triangles: a 1 m stick has a 2 m shadow, so a tree with a 12 m shadow is 6 m tall.'
+    activity:
+      type: formula
+      prompt: A 1 m stick casts a 1.5 m shadow. At the same time, how tall is a tree with a 12 m shadow?
+      inputs:
+      - name: h
+        label: Tree height
+        min: 1
+        max: 20
+        step: 0.5
+        start: 1
+        unit: m
+      outputs:
+      - name: s
+        label: Tree's shadow
+        expr: 1.5*h
+        unit: m
+      goals:
+      - prompt: Make the tree's shadow 12 m.
+        want:
+          s: 12
+        hint: Every 1 m of height makes 1.5 m of shadow. How many 1.5s make 12?
+        mistakes:
+        - when:
+            h: 18
+          say: An 18 m tree would cast a 27 m shadow. Here shadows are longer than the things casting them, so the tree must be shorter than its 12 m shadow.
     items:
       - prompt: "A 1 m stick casts a 2 m shadow. At the same time, a tree casts a 16 m shadow. How tall is the tree, in metres?"
         answer: "8"

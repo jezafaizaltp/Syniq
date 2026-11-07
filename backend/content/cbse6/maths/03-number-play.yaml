@@ -37,18 +37,28 @@ concepts:
     items:
     - label: '121'
       bin: Palindrome
+      clue: Read it backwards. Same?
+      why: 'Backwards it is 121: a palindrome.'
     - label: '3443'
       bin: Palindrome
+      clue: Read it backwards. Same?
+      why: 'Backwards it is 3443: a palindrome.'
     - label: '90509'
       bin: Palindrome
+      clue: Read it backwards, one digit at a time.
+      why: 'Backwards it is 90509: a palindrome.'
     - label: '1210'
       bin: Not a palindrome
       why: Backwards it is 0121, not 1210.
+      clue: Read it backwards. Where does the 0 end up?
     - label: '2552'
       bin: Palindrome
+      clue: Read it backwards. Same?
+      why: 'Backwards it is 2552: a palindrome.'
     - label: '1231'
       bin: Not a palindrome
-      why: Backwards it is 1321.
+      why: 'Backwards it is 1321: the middle digits swap.'
+      clue: Read it backwards. Do the middle digits match?
   items:
   - prompt: Which number is a palindrome?
     options:
@@ -141,11 +151,30 @@ concepts:
     goals:
     - prompt: 'Put the marker on 5,000: halfway.'
       target: 5000
+      mistakes:
+      - when:
+          v: 500
+        say: 500 is only one small step from 0. Halfway to 10,000 is much further along.
     - prompt: 'Put it on 2,500: a quarter of the way.'
       target: 2500
+      mistakes:
+      - when:
+          v: 5000
+        say: 5,000 is halfway. A quarter is half of that again.
     - prompt: About how many days are there in 20 years? Put the marker nearest to it.
       target: 7500
-      hint: 365 × 20 is a little more than 7,000.
+      hint: 365 × 20 is between 300 × 20 and 400 × 20.
+      mistakes:
+      - when:
+          v:
+          - 9000
+          - 10000
+        say: That's more than 9,000. 365 × 20 is less than 400 × 20 = 8,000.
+      - when:
+          v:
+          - 0
+          - 5000
+        say: That's 5,000 or less, but 365 × 20 is more than 300 × 20 = 6,000.
   items:
   - prompt: 'Kaprekar step: largest minus smallest for 5432 and 2345. What is 5432 − 2345?'
     answer: '3087'

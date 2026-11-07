@@ -29,6 +29,45 @@ concepts:
       visual: "Picture a stack of 3 layers of 1 cm cubes, each layer 5 cubes by 4 cubes. Each layer has 20 cubes, so the stack has 60. That is the volume: 60 cm³."
       step_by_step: "For a triangular prism whose end is a right triangle with sides 3 cm and 4 cm, and length 10 cm: Step 1: End area = ½ × 3 × 4 = 6 cm². Step 2: Volume = 6 × 10 = 60 cm³."
       real_world: "A fish tank 50 cm × 40 cm × 30 cm holds 60000 cm³. Since 1 litre is 1000 cm³, it holds 60 litres of water."
+    activity:
+      type: formula
+      prompt: 'A rectangular prism: volume = length × breadth × height.'
+      inputs:
+      - name: l
+        label: Length
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      - name: b
+        label: Breadth
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      - name: h
+        label: Height
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: v
+        label: Volume
+        expr: l*b*h
+        unit: cm³
+      goals:
+      - prompt: Make a prism with volume 60 cm³ and height 5 cm.
+        want:
+          v: 60
+          h: 5
+        mistakes:
+        - when:
+            v: 60
+          say: The volume is 60 cm³, but the height must be 5 cm.
     items:
       - prompt: "A cuboid is 5 cm long, 4 cm wide and 3 cm high. What is its volume, in cm³?"
         answer: "60"
@@ -90,6 +129,57 @@ concepts:
       visual: "Cut open a cardboard box along its edges and lay it flat. You see a cross shape made of six rectangles: a top and bottom, a front and back, and two sides. The surface area is the area of this flat net."
       step_by_step: "A triangular prism with a 3-4-5 right triangle at each end, 10 cm long: Step 1: Two ends: 2 × ½ × 3 × 4 = 12 cm². Step 2: Three side rectangles: (3 + 4 + 5) × 10 = 120 cm². Step 3: Total = 132 cm²."
       real_world: "To paint a cylindrical water tank of radius 7 m and height 10 m on the outside (sides only), the painter covers 2 × 22/7 × 7 × 10 = 440 m²."
+    activity:
+      type: formula
+      prompt: Surface area = 2(lb + bh + hl).
+      inputs:
+      - name: l
+        label: Length
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      - name: b
+        label: Breadth
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      - name: h
+        label: Height
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: cm
+      outputs:
+      - name: v
+        label: Volume
+        expr: l*b*h
+        unit: cm³
+      - name: s
+        label: Surface area
+        expr: 2*(l*b+b*h+h*l)
+        unit: cm²
+      goals:
+      - prompt: Make volume 60 cm³ with surface area 94 cm².
+        want:
+          v: 60
+          s: 94
+        mistakes:
+        - when:
+            v: 60
+          say: 'The volume is right, but the surface isn''t 94 cm². Boxes with the same volume can have different surfaces: try another shape.'
+      - prompt: Same volume, 60 cm³, but surface area 104 cm².
+        want:
+          v: 60
+          s: 104
+        mistakes:
+        - when:
+            v: 60
+          say: The volume is right, but the surface isn't 104 cm². Flatter, longer boxes have more surface.
     items:
       - prompt: "How many faces does a triangular prism have?"
         options: ["5", "6", "3", "9"]
@@ -146,6 +236,43 @@ concepts:
       visual: "Build a 2 cm cube from 1 cm cubes. You need 8 small cubes, not 2. Each face of the big cube shows 4 small squares, not 2."
       step_by_step: "A cube has a volume of 64 cm³. What is its surface area? Step 1: Edge × edge × edge = 64, so the edge is 4 cm. Step 2: One face = 16 cm². Step 3: Six faces = 96 cm²."
       real_world: "A mango box twice as big in every direction holds 8 times as many mangoes but needs only 4 times as much cardboard. That is why big boxes are cheaper per mango."
+    activity:
+      type: formula
+      prompt: A 2 × 3 × 4 cm prism, enlarged by a scale factor k.
+      inputs:
+      - name: k
+        label: Scale factor
+        min: 1
+        max: 4
+        step: 0.5
+        start: 1
+      outputs:
+      - name: v
+        label: Volume
+        expr: 24*k^3
+        unit: cm³
+      - name: s
+        label: Surface area
+        expr: 52*k^2
+        unit: cm²
+      goals:
+      - prompt: Make the volume 192 cm³. How many times bigger did the surface get?
+        want:
+          v: 192
+        mistakes:
+        - when:
+            k: 4
+          say: 'k = 4 makes each side 4 times longer, and the volume 64 times bigger: 1,536 cm³.'
+        - when:
+            k: 3
+          say: 'k = 3 makes the volume 27 times bigger: 648 cm³.'
+      - prompt: Now make the surface area 468 cm². How many times bigger is the volume?
+        want:
+          s: 468
+        mistakes:
+        - when:
+            k: 2
+          say: 'k = 2 makes the surface 4 times bigger: 208 cm².'
     items:
       - prompt: "If every edge of a cube is doubled, how many times as big does its volume become?"
         answer: "8"

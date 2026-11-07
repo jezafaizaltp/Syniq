@@ -29,6 +29,53 @@ concepts:
       kind: flow
       steps: ['Sum 34, difference 10', 'Cut the extra 10 off the longer strip: 34 − 10 = 24', 'Now two equal strips: 24 ÷ 2 = 12, the smaller number', The larger is 12 + 10 = 22]
       alt: 'Finding two numbers with sum 34 and difference 10: remove the 10, halve 24 to get 12, and add 10 back to get 22.'
+    activity:
+      type: formula
+      prompt: Two numbers x and y. Change them and watch their sum and difference.
+      inputs:
+      - name: x
+        label: x
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+      - name: y
+        label: y
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+      outputs:
+      - name: s
+        label: x + y
+        expr: x+y
+      - name: d
+        label: x − y
+        expr: x-y
+      goals:
+      - prompt: Find two numbers whose sum is 20 and difference is 6.
+        want:
+          s: 20
+          d: 6
+        hint: Add the sum and the difference together. What do you get, in terms of x?
+        mistakes:
+        - when:
+            d: -6
+          say: 'Your difference is −6, so y is the bigger number. The question wants x − y = 6: x has to be the bigger one.'
+        - when:
+            s: 20
+          say: The sum is 20, but the difference isn't 6. Many pairs add to 20 (10 and 10, 12 and 8, …); only one pair is also 6 apart.
+      - prompt: Now sum 15, difference 3.
+        want:
+          s: 15
+          d: 3
+        mistakes:
+        - when:
+            d: -3
+          say: Your difference is −3, so y is the bigger number. For x − y = 3, x has to be the bigger one.
+        - when:
+            s: 15
+          say: The sum is 15, but the two numbers aren't 3 apart yet.
     items:
       - prompt: "The sum of two numbers is 34 and their difference is 10. What is the bigger number?"
         answer: "22"
@@ -104,6 +151,42 @@ concepts:
       kind: flow
       steps: ['Bill 1: 1 pen + 1 pencil = ₹8', 'Bill 2: 2 pens + 1 pencil = ₹10', Bill 2 has one extra pen and costs ₹2 more, 'So a pen costs ₹2, and a pencil ₹8 − ₹2 = ₹6']
       alt: 'Two shop bills compared: the second has one more pen and costs 2 rupees more, so a pen is 2 rupees and a pencil 6 rupees.'
+    activity:
+      type: formula
+      prompt: Both equations must be true together. Change x and y.
+      inputs:
+      - name: x
+        label: x
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      - name: y
+        label: y
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: p
+        label: 2x + 3y
+        expr: 2*x+3*y
+      - name: q
+        label: x − y
+        expr: x-y
+      goals:
+      - prompt: Make 2x + 3y = 12 and x − y = 1 at the same time.
+        want:
+          p: 12
+          q: 1
+        hint: Can you make the y terms cancel? Try multiplying x − y = 1 by 3, then adding it to the first.
+        mistakes:
+        - when:
+            p: 12
+          say: 'Only 2x + 3y = 12 is true. A pair that fits one equation isn''t enough: both must be true for the same x and y.'
+        - when:
+            q: 1
+          say: Only x − y = 1 is true. Lots of pairs are 1 apart (2 and 1, 3 and 2, …); only one of them also makes 2x + 3y = 12.
     items:
       - prompt: "x + y = 8 and 2x + y = 10. What is x?"
         answer: "2"
@@ -173,6 +256,42 @@ concepts:
       visual: "Think of x + 2y = 11 as a balance: one x and two y's on one pan, 11 on the other. Three copies of the balance still balance: three x's and six y's against 33. Every pan is tripled, not just one weight."
       step_by_step: "Step 1: Choose the unknown to remove, say x, in x + 2y = 11 and 3x + y = 13. Step 2: Multiply the first equation by 3: 3x + 6y = 33. Step 3: Subtract the second equation: 5y = 20. Step 4: y = 4. Step 5: Put y = 4 into x + 2y = 11, so x = 3. Step 6: Check: 3 × 3 + 4 = 13."
       real_world: "One pen and two pencils cost ₹11. Three pens and one pencil cost ₹13. Three of the first bill would be 3 pens and 6 pencils for ₹33. Compared with the second bill, the 5 extra pencils cost ₹20, so a pencil is ₹4 and a pen is ₹3."
+    activity:
+      type: formula
+      prompt: Find x and y that fit both equations.
+      inputs:
+      - name: x
+        label: x
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      - name: y
+        label: y
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: p
+        label: 3x + 2y
+        expr: 3*x+2*y
+      - name: q
+        label: x + y
+        expr: x+y
+      goals:
+      - prompt: Make 3x + 2y = 16 and x + y = 7.
+        want:
+          p: 16
+          q: 7
+        hint: 'If x + y = 7, then 2x + 2y = 14. Compare that with 3x + 2y = 16: what does the extra x equal?'
+        mistakes:
+        - when:
+            q: 7
+          say: x + y = 7 is true, but many pairs add to 7. Only one of them also makes 3x + 2y = 16.
+        - when:
+            p: 16
+          say: 3x + 2y = 16 is true, but x + y isn't 7 yet.
     items:
       - prompt: "To remove x from x + 2y = 11 and 3x + y = 13, what should you multiply the first equation by?"
         options: ["3", "2", "11", "13"]
@@ -235,6 +354,43 @@ concepts:
       visual: "Make a small table with one column for each unknown and one for the total. For the chairs and tables, row 1 is 4 | 3 | ₹2100 and row 2 is 5 | 2 | ₹1750. Each row becomes one equation: 4x + 3y = 2100 and 5x + 2y = 1750."
       step_by_step: "Step 1: Choose letters: x for the price of a chair, y for a table. Step 2: First fact: 4x + 3y = 2100. Step 3: Second fact: 5x + 2y = 1750. Step 4: Make the y terms match: 8x + 6y = 4200 and 15x + 6y = 5250. Step 5: Subtract: 7x = 1050, so x = 150. Step 6: Then 3y = 2100 − 600 = 1500, so y = 500."
       real_world: "Rahul is 3 times as old as his sister. In 5 years he will be twice as old as her. With x for Rahul and y for his sister: x = 3y and x + 5 = 2(y + 5). Putting 3y in place of x: 3y + 5 = 2y + 10, so y = 5. His sister is 5 and Rahul is 15."
+    activity:
+      type: formula
+      prompt: Pens cost ₹5 and notebooks ₹12. Choose how many of each.
+      inputs:
+      - name: p
+        label: Pens
+        min: 0
+        max: 15
+        step: 1
+        start: 0
+      - name: n
+        label: Notebooks
+        min: 0
+        max: 15
+        step: 1
+        start: 0
+      outputs:
+      - name: count
+        label: Things bought
+        expr: p+n
+      - name: cost
+        label: Total cost
+        expr: 5*p+12*n
+        unit: ₹
+      goals:
+      - prompt: Buy 10 things for exactly ₹78.
+        want:
+          count: 10
+          cost: 78
+        hint: 'If all 10 were pens: ₹50. Each swap to a notebook adds ₹7.'
+        mistakes:
+        - when:
+            count: 10
+          say: You bought 10 things, but they cost the wrong amount. Swapping one pen for a notebook changes the cost by ₹7.
+        - when:
+            cost: 78
+          say: That costs ₹78, but you didn't buy 10 things.
     items:
       - prompt: "Meera buys 2 kg of rice and 1 kg of sugar for ₹130. With x for the price of 1 kg of rice and y for 1 kg of sugar, which equation fits?"
         options: ["2x + y = 130", "x + 2y = 130", "2x + 2y = 130", "2xy = 130"]

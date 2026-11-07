@@ -25,6 +25,38 @@ concepts:
       visual: "Write each term in its own box, sign included: [3x²] [−5x] [+7]. The first box has the highest power, 2: that is the degree. The number at the front of each box is its coefficient."
       step_by_step: "For (x² + 1)(x³ − x): Step 1: The highest power from the first bracket is x². Step 2: From the second, x³. Step 3: Multiplying them gives x⁵. Step 4: So the degree is 2 + 3 = 5."
       real_world: "The area of a square garden with a path of width x around a 10 m square is (10 + 2x)², which expands to 4x² + 40x + 100: a polynomial of degree 2 in x."
+    activity:
+      type: sort
+      prompt: What is the degree (the highest power of x)?
+      bins:
+      - Degree 1
+      - Degree 2
+      - Degree 3
+      items:
+      - label: 3x + 1
+        bin: Degree 1
+        clue: Which power of x is in it? (x on its own is x¹.)
+        why: x is x¹, so the degree is 1.
+      - label: x² − 4
+        bin: Degree 2
+        clue: What is the biggest power of x?
+        why: 'The biggest power is x²: degree 2.'
+      - label: 2x³ + x
+        bin: Degree 3
+        clue: Ignore the 2 in front. What is the biggest power of x?
+        why: 'x³ is the biggest power: degree 3. The 2 in front doesn''t change the degree.'
+      - label: 5 − x
+        bin: Degree 1
+        clue: Which term has x in it, and what power?
+        why: '−x is x¹: degree 1. The order of the terms doesn''t matter.'
+      - label: x³
+        bin: Degree 3
+        clue: Only one term. What is its power?
+        why: 'x³: degree 3.'
+      - label: 4x² + x + 1
+        bin: Degree 2
+        clue: Look at each term's power of x. Which is biggest?
+        why: 'x² is the biggest power: degree 2.'
     items:
       - prompt: "Which of these is a polynomial of degree 1?"
         options: ["3x − 7", "x² − 7", "7", "x³ + x"]
@@ -79,6 +111,35 @@ concepts:
       visual: "Think of p as a machine. Drop 3 into the funnel; the machine squares it to 9 and takes away 4; out comes 5. Drop −2 in; it squares to 4, takes away 4, and out comes 0."
       step_by_step: "For p(x) = 3x² − x + 2 and x = −1: Step 1: Write (−1) wherever x is: 3(−1)² − (−1) + 2. Step 2: (−1)² = 1, so 3 × 1 = 3. Step 3: −(−1) = +1. Step 4: 3 + 1 + 2 = 6."
       real_world: "A taxi charges ₹50 plus ₹15 per km: p(x) = 15x + 50 for x km. A 6 km ride costs p(6) = 90 + 50 = ₹140."
+    activity:
+      type: formula
+      prompt: Find the value of p(x) = x³ − 2x + 1 for different x.
+      inputs:
+      - name: x
+        label: x
+        min: -4
+        max: 4
+        step: 1
+        start: 0
+      outputs:
+      - name: v
+        label: p(x)
+        expr: x^3-2*x+1
+      goals:
+      - prompt: Find x with p(x) = 5.
+        want:
+          v: 5
+        mistakes:
+        - when:
+            x: -2
+          say: 'x = −2 gives −8 + 4 + 1 = −3: the cube of a negative stays negative.'
+      - prompt: Find x with p(x) = −20.
+        want:
+          v: -20
+        mistakes:
+        - when:
+            x: 3
+          say: x = 3 gives 27 − 6 + 1 = 22. To get a big negative answer, x³ must be negative.
     items:
       - prompt: "p(x) = 2x + 5. What is p(3)?"
         answer: "11"
@@ -141,6 +202,30 @@ concepts:
       visual: "Line the polynomials up in columns by power, like adding numbers in columns: an x² column, an x column and a number column. Add down each column."
       step_by_step: "For (x + 2)(x² − x + 3): Step 1: x × each term: x³ − x² + 3x. Step 2: 2 × each term: 2x² − 2x + 6. Step 3: Add: x³ + (−x² + 2x²) + (3x − 2x) + 6. Step 4: = x³ + x² + x + 6."
       real_world: "A shop's income is 40x + 200 rupees and its costs are 15x + 350 rupees for x items sold. Profit = (40x + 200) − (15x + 350) = 25x − 150 rupees."
+    activity:
+      type: formula
+      prompt: (x + 1)(x − 2) multiplied out is x² − x − 2. Check it with numbers.
+      inputs:
+      - name: x
+        label: x
+        min: -6
+        max: 6
+        step: 1
+        start: 0
+      outputs:
+      - name: p
+        label: (x + 1)(x − 2)
+        expr: (x+1)*(x-2)
+      - name: q
+        label: x² − x − 2
+        expr: x^2-x-2
+      goals:
+      - prompt: Find an x where both equal 10.
+        want:
+          p: 10
+      - prompt: 'Find an x where both equal 0. Look at the brackets: what makes a bracket 0?'
+        want:
+          p: 0
     items:
       - prompt: "(3x² + 2x − 1) + (x² − 5x + 4) = ?"
         options: ["4x² − 3x + 3", "4x² + 7x + 3", "3x² − 3x + 3", "4x⁴ − 3x² + 3"]

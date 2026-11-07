@@ -26,6 +26,33 @@ concepts:
       visual: "Draw a C with four lines sticking out. Join several C's in a row, add an H on each spare line: you have drawn a hydrocarbon chain."
       step_by_step: "Why does carbon form 4 bonds? Step 1: Carbon is 2, 4. Step 2: Gaining or losing 4 electrons is too hard. Step 3: So it shares 4 electrons: 4 covalent bonds."
       real_world: "Petrol, kerosene, LPG, coconut oil, sugar, rubber and plastics are all carbon compounds."
+    activity:
+      type: sort
+      prompt: True or false? (Carbon)
+      bins:
+      - 'True'
+      - 'False'
+      items:
+      - label: Carbon atoms can join into long chains
+        bin: 'True'
+        clue: Think of petrol and plastics. How are their carbons joined?
+        why: 'Carbon atoms link to each other in long chains: true.'
+      - label: Carbon has a valency of 4
+        bin: 'True'
+        clue: How many outer electrons does carbon have? (2, 4)
+        why: '4 outer electrons, so it makes 4 bonds: true.'
+      - label: Carbon usually forms ionic bonds
+        bin: 'False'
+        why: 'It shares electrons instead: covalent bonds.'
+        clue: Can carbon easily lose or gain 4 electrons?
+      - label: Carbon can form double and triple bonds
+        bin: 'True'
+        clue: Think of ethene (C=C) and ethyne.
+        why: 'Ethene has C=C and ethyne a triple bond: true.'
+      - label: There are only a few carbon compounds
+        bin: 'False'
+        why: There are millions of carbon compounds.
+        clue: Think of all the foods, fuels and plastics.
     items:
       - prompt: "How many covalent bonds does a carbon atom usually form?"
         answer: "4"
@@ -80,6 +107,41 @@ concepts:
       visual: "Write the alkanes one under another: CH₄, C₂H₆, C₃H₈, C₄H₁₀. Each line adds one C and two H's: CH₂ each time."
       step_by_step: "Formula of the alkane with 5 carbons: Step 1: CₙH₂ₙ₊₂ with n = 5. Step 2: H = 2 × 5 + 2 = 12. Step 3: C₅H₁₂, pentane."
       real_world: "LPG cylinders contain mainly propane and butane. Ethyne (acetylene) burns very hot and is used in welding torches."
+    activity:
+      type: formula
+      prompt: 'For n carbon atoms: alkane CₙH₂ₙ₊₂, alkene CₙH₂ₙ, alkyne CₙH₂ₙ₋₂.'
+      inputs:
+      - name: n
+        label: Carbon atoms
+        min: 1
+        max: 8
+        step: 1
+        start: 1
+      outputs:
+      - name: a
+        label: Hydrogens in the alkane
+        expr: 2*n+2
+      - name: e
+        label: Hydrogens in the alkene
+        expr: 2*n
+      - name: y
+        label: Hydrogens in the alkyne
+        expr: 2*n-2
+      goals:
+      - prompt: Find the alkane with 10 hydrogens (butane).
+        want:
+          a: 10
+        mistakes:
+        - when:
+            n: 5
+          say: Five carbons make 12 hydrogens in the alkane (pentane). Butane is shorter.
+      - prompt: Find the alkene with 6 hydrogens.
+        want:
+          e: 6
+        mistakes:
+        - when:
+            n: 6
+          say: Six carbons give an alkene with 12 hydrogens. In an alkene there are exactly twice as many hydrogens as carbons.
     items:
       - prompt: "How many hydrogen atoms are in the alkane with 5 carbon atoms?"
         answer: "12"
@@ -137,6 +199,43 @@ concepts:
       visual: "Draw the carbon chain, count it for the prefix, find any double or triple bond for the suffix, and circle any functional group like –OH or –COOH to choose the ending."
       step_by_step: "Name CH₃–CH₂–CH₂–OH: Step 1: 3 carbons: prop. Step 2: Single bonds: -an-. Step 3: –OH group: -ol. Step 4: Propanol."
       real_world: "Hand sanitisers contain ethanol or propanol. Vinegar used in pickles is about 5% ethanoic acid."
+    activity:
+      type: sort
+      prompt: The first part of the name tells the number of carbons.
+      bins:
+      - 1 carbon
+      - 2 carbons
+      - 3 carbons
+      - 4 carbons
+      items:
+      - label: Methane
+        bin: 1 carbon
+        clue: Meth- means how many carbons?
+        why: Meth- = 1 carbon.
+      - label: Ethene
+        bin: 2 carbons
+        clue: Eth- means how many?
+        why: Eth- = 2 carbons. The -ene ending means a double bond.
+      - label: Propene
+        bin: 3 carbons
+        clue: Prop- means how many?
+        why: Prop- = 3 carbons.
+      - label: Butane
+        bin: 4 carbons
+        clue: But- means how many?
+        why: But- = 4 carbons.
+      - label: Ethyne
+        bin: 2 carbons
+        clue: Look at the start, not the ending.
+        why: Eth- = 2 carbons; -yne means a triple bond.
+      - label: Methanol
+        bin: 1 carbon
+        clue: Look at the start of the name.
+        why: Meth- = 1 carbon; -ol means an alcohol.
+      - label: Propane
+        bin: 3 carbons
+        clue: Prop- means how many?
+        why: Prop- = 3 carbons.
     items:
       - prompt: "What is the name of CH₄?"
         options: ["Methane", "Ethane", "Methene", "Propane"]

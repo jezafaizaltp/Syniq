@@ -38,6 +38,30 @@ concepts:
       - {label: E, value: 10}
       caption: '40 blocks in all, 5 towers: level them out and each has 40 ÷ 5 = 8. The mean is 8.'
       alt: Five towers of 6, 8, 7, 9 and 10 blocks. Together they have 40 blocks, so levelled out each would have 8, the mean.
+    activity:
+      type: formula
+      prompt: Four test marks are 6, 8, 7 and 9. Choose the fifth.
+      inputs:
+      - name: x
+        label: Fifth mark
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+      outputs:
+      - name: m
+        label: Mean
+        expr: (30+x)/5
+        places: 2
+      goals:
+      - prompt: Make the mean exactly 8.
+        want:
+          m: 8
+        hint: The total must be 8 × 5 = 40.
+        mistakes:
+        - when:
+            x: 8
+          say: Adding 8 makes the total 38, and 38 ÷ 5 = 7.6, not 8. The other four average 7.5, so the new mark has to be above 8 to pull the mean up to 8.
     items:
       - prompt: "What is the mean of 6, 8, 7, 9 and 10?"
         answer: "8"
@@ -93,6 +117,32 @@ concepts:
       visual: "Line the students up from shortest to tallest. The one standing exactly in the middle of the line has the median height."
       step_by_step: "Median of 7, 3, 9, 4, 12, 10: Step 1: Order: 3, 4, 7, 9, 10, 12. Step 2: Six numbers, so the middle two are 7 and 9. Step 3: Median = (7 + 9) ÷ 2 = 8."
       real_world: "Monthly wages in a small shop: ₹9,000, ₹10,000, ₹11,000, ₹12,000 and the owner's ₹1,00,000. The mean is ₹28,400, which no worker earns; the median, ₹11,000, describes a typical wage better."
+    activity:
+      type: number_line
+      min: 0
+      max: 16
+      step: 1
+      start: 0
+      prompt: 'Five marks: 12, 3, 15, 7, 8. The median is the middle mark once they are in order.'
+      goals:
+      - prompt: Put the marker on the median.
+        target: 8
+        mistakes:
+        - when:
+            v: 15
+          say: 15 is the middle of the list as written (12, 3, 15, 7, 8). The median is the middle after putting them in order.
+        - when:
+            v: 9
+          say: '9 is the mean: 45 ÷ 5. The median is a different thing: the middle mark in order.'
+      - prompt: A sixth mark, 10, is added. With two middle marks, the median is halfway between them.
+        target: 9
+        mistakes:
+        - when:
+            v: 8
+          say: 8 was the middle before. With six marks there are two middle ones.
+        - when:
+            v: 10
+          say: 10 is one of the two middle marks. The median is halfway between both of them.
     items:
       - prompt: "What is the median of 150, 142, 160, 155 and 148?"
         answer: "150"
@@ -159,6 +209,20 @@ concepts:
       - {label: Size 8, value: 2}
       caption: The tallest bar is size 6, so the mode is size 6.
       alt: 'Shoe sales by size: size 5 sold 4, size 6 sold 9, size 7 sold 6, size 8 sold 2. The tallest bar, size 6, is the mode.'
+    activity:
+      type: bars
+      show: tally
+      max: 10
+      prompt: 'Shoe sizes in a class. Build the bar graph: the tallest bar is the mode.'
+      categories:
+      - label: Size 5
+        value: 3
+      - label: Size 6
+        value: 8
+      - label: Size 7
+        value: 5
+      - label: Size 8
+        value: 2
     items:
       - prompt: "What is the mode of 6, 7, 7, 8, 7, 9, 6, 7?"
         answer: "7"
@@ -211,6 +275,29 @@ concepts:
       visual: "Write the table as a long list: 0, 0, 1, 1, 1, 1, 1, 2, 2, 2. A frequency table is just a short way of writing that list."
       step_by_step: "Marks 5, 6, 7 with frequencies 4, 10, 6. Step 1: Σfx = 20 + 60 + 42 = 122. Step 2: Σf = 20. Step 3: Mean = 122 ÷ 20 = 6.1."
       real_world: "A shop records shirt sizes sold: 38 (12 shirts), 40 (20), 42 (8). The mode, 40, tells the owner what to reorder; the mean size helps with stitching estimates."
+    activity:
+      type: formula
+      prompt: 2 children read 2 books each, and some children read 4 books each.
+      inputs:
+      - name: f
+        label: Children who read 4 books
+        min: 0
+        max: 12
+        step: 1
+        start: 0
+      outputs:
+      - name: n
+        label: Children
+        expr: 2+f
+      - name: m
+        label: Mean books
+        expr: (4+4*f)/(2+f)
+        places: 2
+      goals:
+      - prompt: Make the mean 3.5 books.
+        want:
+          m: 3.5
+        hint: Mean = (2 × 2 + 4f) ÷ (2 + f).
     items:
       - prompt: "Goals in 10 matches: 0 goals in 2 matches, 1 goal in 5 matches, 2 goals in 3 matches. What is the mean number of goals per match?"
         answer: "1.1"

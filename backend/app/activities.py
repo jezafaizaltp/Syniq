@@ -5,8 +5,15 @@ not code or an image: the app builds it (frontend/app/learn/Activity.tsx), so it
 nothing, works offline and can be checked here. Each activity has a short prompt and one
 or more goals; the child changes things with buttons (never by dragging, so it works with
 a switch, a keyboard or a screen reader) and presses Check. A wrong try shows what the
-child made next to what the goal wanted, never just "wrong". Nothing is scored or stored
-except that an activity was finished (a help event, like read-aloud).
+child is coached, never just told "wrong": the app marks on the picture where the try went
+wrong, says what that mistake causes and nudges towards the fix without giving it away; the
+goal is drawn next to the child's try only from the third wrong try. Content can make the
+coaching sharper for its topic:
+  goal  mistakes: [{when: {name: value or [low, high]}, say: what that slip causes}]
+  sort  item clue: a question that makes the child look again (first wrong try); why: the reason
+  order reasons: {step: why it can't come earlier}
+  scale zone says: what a reading in that zone means
+Nothing is scored or stored except that an activity was finished (a help event, like read-aloud).
 
 Types:
   number_line    move a marker along a line (integers, fractions, estimation)
@@ -20,6 +27,8 @@ Types:
   array          arrange counters in rows to find factors (primes make one row)
   scale          set a reading on a scale (ruler, thermometer), with named zones
   pattern        grow a dot pattern step by step
+  formula        change numbers and watch what a formula gives (motion, Ohm's law, identities)
+  graph          move a point, or tilt and shift a line, on a grid
 
 The format, with an example of each type, is in content/README.md.
 """
@@ -29,6 +38,7 @@ from numbers import Real
 
 TYPES = (
     "number_line", "fraction_bar", "rectangle", "mirror", "angle", "sort", "order", "bars", "array", "scale", "pattern",
+    "formula", "graph",
 )
 PATTERN_RULES = {
     "square": lambda n: n * n,
@@ -84,11 +94,85 @@ def check_activity(a) -> list[str]:
             _text(g.get("prompt"), f"goal {i} prompt", errors)
             if "hint" in g:
                 _text(g["hint"], f"goal {i} hint", errors)
+            errors += _check_mistakes(a, g, i)
     elif goals is not None:
         errors.append(f"a {kind} activity has one task, set by its own fields, not goals")
     check = globals()[f"_check_{kind}"]
     errors += check(a, goals or [])
+    if not errors:
+        errors += _mistake_says_right(a, goals or [])
     return errors
+
+
+# The numbers each type reports for a try, which a goal's `mistakes` can match on.
+TRY_NAMES = {
+    "number_line": {"v"},
+    "scale": {"v"},
+    "angle": {"degrees"},
+    "rectangle": {"width", "height", "area", "perimeter"},
+    "pattern": {"step", "count"},
+    "array": {"rows"},
+    "fraction_bar": {"shaded", "parts"},
+}
+
+
+def _want_ok(v) -> bool:
+    return _num(v) or (isinstance(v, list) and len(v) == 2 and all(_num(x) for x in v) and v[0] < v[1])
+
+
+def _check_mistakes(a, g, i):
+    """A goal's `mistakes`: what a common wrong try causes, said when a try matches `when`."""
+    if "mistakes" not in g:
+        return []
+    ms = g["mistakes"]
+    if not isinstance(ms, list) or not 1 <= len(ms) <= 6:
+        return [f"goal {i} mistakes must be a list of 1 to 6"]
+    kind = a.get("type")
+    if kind == "formula":
+        names = {x.get("name") for x in (a.get("inputs") or []) + (a.get("outputs") or []) if isinstance(x, dict)}
+    elif kind == "graph":
+        names = {"x", "y"} if a.get("mode") == "point" else {"m", "c"}
+    else:
+        names = TRY_NAMES.get(kind, set())
+    if not names:
+        return [f"goal {i}: a {kind} activity can't have mistakes"]
+    e = []
+    for n, m in enumerate(ms, start=1):
+        if not isinstance(m, dict) or not isinstance(m.get("when"), dict) or not m["when"]:
+            e.append(f"goal {i} mistake {n} needs 'when' and 'say'")
+            continue
+        _text(m.get("say"), f"goal {i} mistake {n} say", e, 220)
+        bad = set(m["when"]) - names
+        if bad:
+            e.append(f"goal {i} mistake {n} uses {', '.join(sorted(map(str, bad)))}; it can use {', '.join(sorted(names))}")
+        elif not all(_want_ok(v) for v in m["when"].values()):
+            e.append(f"goal {i} mistake {n} values must be numbers or [low, high]")
+    return e
+
+
+def _mistake_says_right(a, goals) -> list[str]:
+    """A mistake rule must never match a right answer: that would tell a child they were wrong.
+    Checked here for one-number types; formula goals are checked while their inputs are tried."""
+    e = []
+    key = {"number_line": "target", "scale": "value", "angle": "degrees"}.get(a.get("type"))
+    if not key:
+        return e
+    kind = a.get("type")
+    if kind == "angle":
+        reach = list(range(5, 361, 5))
+    else:
+        reach = _values(a["min"], a["max"], a["step"])
+    for i, g in enumerate(goals, start=1):
+        right = g.get(key)
+        if not _num(right):
+            continue
+        for n, m in enumerate(g.get("mistakes") or [], start=1):
+            w = next(iter(m["when"].values()))
+            if wanted(right, w):
+                e.append(f"goal {i} mistake {n} matches the right answer")
+            elif not any(wanted(x, w) for x in reach):
+                e.append(f"goal {i} mistake {n} can never happen: no try can reach that value")
+    return e
 
 
 def _check_number_line(a, goals):
@@ -109,6 +193,8 @@ def _check_number_line(a, goals):
             e.append(f"goal {i} target must be on the line, on a step")
         elif t == start and i == 1:
             e.append("goal 1 target is where the marker starts")
+        elif i > 1 and t == goals[i - 2].get("target"):
+            e.append(f"goal {i} target is where goal {i - 1} leaves the marker")
     return e
 
 
@@ -178,13 +264,13 @@ def _check_angle(a, goals):
 def _check_sort(a, goals):
     e = []
     bins = a.get("bins")
-    if not isinstance(bins, list) or not 2 <= len(bins) <= 4 or len(set(bins)) != len(bins):
-        return ["sort needs 2 to 4 different bins"]
+    if not isinstance(bins, list) or not 2 <= len(bins) <= 5 or len(set(bins)) != len(bins):
+        return ["sort needs 2 to 5 different bins"]
     for b in bins:
         _text(b, "a bin", e, LABEL_MAX)
     items = a.get("items")
-    if not isinstance(items, list) or not 4 <= len(items) <= 10:
-        return e + ["sort needs 4 to 10 items"]
+    if not isinstance(items, list) or not 4 <= len(items) <= 12:
+        return e + ["sort needs 4 to 12 items"]
     labels = [i.get("label") if isinstance(i, dict) else None for i in items]
     if len(set(labels)) != len(labels):
         e.append("sort has the same item twice")
@@ -199,6 +285,8 @@ def _check_sort(a, goals):
         used.add(it.get("bin"))
         if "why" in it:
             _text(it["why"], f"item {n} why", e)
+        if "clue" in it:
+            _text(it["clue"], f"item {n} clue", e)
     if set(bins) - used:
         e.append("every bin needs at least one item")
     return e
@@ -211,6 +299,16 @@ def _check_order(a, goals):
         return ["order needs 3 to 8 different steps"]
     for n, s in enumerate(steps, start=1):
         _text(s, f"step {n}", e, LABEL_MAX)
+    reasons = a.get("reasons", {})
+    if not isinstance(reasons, dict):
+        return e + ["order reasons must map a step to why it can't come earlier"]
+    for k, why in reasons.items():
+        if k not in steps:
+            e.append(f"order reason for '{k}', which is not a step")
+        elif k == steps[0]:
+            e.append("the first step can never come too early, so it needs no reason")
+        else:
+            _text(why, f"reason for '{k}'", e, 220)
     return e
 
 
@@ -266,6 +364,8 @@ def _check_scale(a, goals):
             e.append(f"zone {n} needs numbers from < to")
             continue
         _text(z.get("label"), f"zone {n} label", e, 30)
+        if "says" in z:
+            _text(z["says"], f"zone {n} says", e)
         names.add(z.get("label"))
     for i, g in enumerate(goals, start=1):
         if "value" in g:
@@ -291,6 +391,278 @@ def _check_pattern(a, goals):
     for i, g in enumerate(goals, start=1):
         if g.get("count") not in counts[1:]:
             e.append(f"goal {i} count must be one the pattern reaches after step 1 ({counts[1:]})")
+    return e
+
+
+# --- Formulas -----------------------------------------------------------------------------
+# A tiny arithmetic language, the same one the app evaluates (frontend/app/learn/formula.ts):
+# numbers, names, + - * / ^ (power), brackets, pi, and sqrt, min, max, abs. Nothing else, so a
+# pack can never run code.
+
+FUNCS = {"sqrt": lambda x: x ** 0.5, "min": min, "max": max, "abs": abs}
+_NAME = __import__("re").compile(r"^[a-z][a-z0-9_]*$")
+
+
+def _tokens(text: str) -> list[str]:
+    import re
+
+    out = re.findall(r"\d+\.?\d*|\.\d+|[a-z][a-z0-9_]*|[-+*/^(),]", text)
+    if "".join(out) != text.replace(" ", ""):
+        raise ValueError(f"can't read '{text}'")
+    return out
+
+
+class _Parser:
+    def __init__(self, text: str):
+        self.t = _tokens(text)
+        self.i = 0
+
+    def peek(self):
+        return self.t[self.i] if self.i < len(self.t) else None
+
+    def take(self, want=None):
+        tok = self.peek()
+        if tok is None or (want and tok != want):
+            raise ValueError(f"expected {want or 'more'}")
+        self.i += 1
+        return tok
+
+    def parse(self):
+        node = self.sum()
+        if self.peek() is not None:
+            raise ValueError(f"unexpected '{self.peek()}'")
+        return node
+
+    def sum(self):
+        node = self.product()
+        while self.peek() in ("+", "-"):
+            node = (self.take(), node, self.product())
+        return node
+
+    def product(self):
+        node = self.unary()
+        while self.peek() in ("*", "/"):
+            node = (self.take(), node, self.unary())
+        return node
+
+    def unary(self):
+        if self.peek() == "-":
+            self.take()
+            return ("neg", self.unary())
+        return self.power()
+
+    def power(self):
+        base = self.atom()
+        if self.peek() == "^":
+            self.take()
+            return ("^", base, self.unary())
+        return base
+
+    def atom(self):
+        tok = self.take()
+        if tok == "(":
+            node = self.sum()
+            self.take(")")
+            return node
+        if tok[0].isdigit() or tok[0] == ".":
+            return ("num", float(tok))
+        if tok in FUNCS:
+            self.take("(")
+            args = [self.sum()]
+            while self.peek() == ",":
+                self.take()
+                args.append(self.sum())
+            self.take(")")
+            return ("call", tok, args)
+        if _NAME.match(tok):
+            return ("name", tok)
+        raise ValueError(f"unexpected '{tok}'")
+
+
+def parse_formula(text: str):
+    return _Parser(text).parse()
+
+
+def evaluate(node, env: dict) -> float:
+    kind = node[0]
+    if kind == "num":
+        return node[1]
+    if kind == "name":
+        if node[1] == "pi":
+            return 3.141592653589793
+        return env[node[1]]
+    if kind == "neg":
+        return -evaluate(node[1], env)
+    if kind == "call":
+        return FUNCS[node[1]](*[evaluate(a, env) for a in node[2]])
+    a, b = evaluate(node[1], env), evaluate(node[2], env)
+    if kind == "+":
+        return a + b
+    if kind == "-":
+        return a - b
+    if kind == "*":
+        return a * b
+    if kind == "/":
+        return a / b
+    return a ** b
+
+
+def _names(node) -> set[str]:
+    if node[0] == "name":
+        return {node[1]} - {"pi"}
+    if node[0] == "num":
+        return set()
+    if node[0] == "call":
+        return set().union(*[_names(a) for a in node[2]])
+    return set().union(*[_names(n) for n in node[1:]])
+
+
+def _values(lo, hi, step):
+    n = round((hi - lo) / step)
+    return [round(lo + k * step, 10) for k in range(n + 1)]
+
+
+def wanted(value: float, want) -> bool:
+    if isinstance(want, list):
+        return want[0] - 1e-9 <= value <= want[1] + 1e-9
+    return abs(value - want) < 1e-6
+
+
+def _check_formula(a, goals):
+    e = []
+    inputs, outputs = a.get("inputs"), a.get("outputs")
+    if not isinstance(inputs, list) or not 1 <= len(inputs) <= 4:
+        return ["formula needs 1 to 4 inputs"]
+    if not isinstance(outputs, list) or not 1 <= len(outputs) <= 4:
+        return ["formula needs 1 to 4 outputs"]
+    names = []
+    grids = []
+    for n, i in enumerate(inputs, start=1):
+        if not isinstance(i, dict) or not _NAME.match(str(i.get("name", ""))):
+            e.append(f"input {n} needs a lower-case name")
+            continue
+        _text(i.get("label"), f"input {n} label", e, 40)
+        lo, hi, step = i.get("min"), i.get("max"), i.get("step")
+        if not (_num(lo) and _num(hi) and _num(step)) or step <= 0 or lo >= hi or (hi - lo) / step > 1000:
+            e.append(f"input {n} needs min < max and a step (at most 1000 steps)")
+            continue
+        start = i.get("start", lo)
+        if not _num(start) or not lo <= start <= hi or not _on_step(start, lo, step):
+            e.append(f"input {n} start must be on a step")
+        names.append(i["name"])
+        grids.append(_values(lo, hi, step))
+    parsed = {}
+    for n, o in enumerate(outputs, start=1):
+        if not isinstance(o, dict) or not _NAME.match(str(o.get("name", ""))):
+            e.append(f"output {n} needs a lower-case name")
+            continue
+        _text(o.get("label"), f"output {n} label", e, 40)
+        try:
+            tree = parse_formula(str(o.get("expr", "")))
+        except (ValueError, IndexError) as err:
+            e.append(f"output {n} formula: {err}")
+            continue
+        unknown = _names(tree) - set(names)
+        if unknown:
+            e.append(f"output {n} uses {', '.join(sorted(unknown))}, which is not an input")
+            continue
+        parsed[o["name"]] = tree
+    if len(set(names) | set(parsed)) != len(names) + len(parsed):
+        e.append("inputs and outputs need different names")
+    if e:
+        return e
+    import itertools
+
+    combos = 1
+    for g in grids:
+        combos *= len(g)
+    for gi, g in enumerate(goals, start=1):
+        want = g.get("want")
+        if not isinstance(want, dict) or not want:
+            e.append(f"goal {gi} needs 'want': values for outputs or inputs")
+            continue
+        if set(want) - set(names) - set(parsed):
+            e.append(f"goal {gi} wants something that is not an input or output")
+            continue
+        if any(not (_num(v) or (isinstance(v, list) and len(v) == 2 and all(_num(x) for x in v) and v[0] < v[1])) for v in want.values()):
+            e.append(f"goal {gi} values must be numbers or [low, high]")
+            continue
+        if combos > 300_000:
+            continue  # too many to try them all; the app still checks each try
+        # A rule that pins down every wanted value but still matches a right answer would tell a
+        # child who got it right that they slipped. (Partial rules, like "only the sum is right",
+        # are fine: they are only read on a wrong try.)
+        rules = [
+            m["when"] for m in g.get("mistakes") or []
+            if isinstance(m, dict) and isinstance(m.get("when"), dict) and set(want) <= set(m["when"])
+        ]
+        every = [m["when"] for m in g.get("mistakes") or [] if isinstance(m, dict) and isinstance(m.get("when"), dict)]
+        seen = set()
+        reachable = False
+        clash = set()
+        for combo in itertools.product(*grids):
+            env = dict(zip(names, combo))
+            try:
+                env.update({k: evaluate(t, env) for k, t in parsed.items()})
+            except (ZeroDivisionError, ValueError, OverflowError, TypeError):
+                continue
+            if any(isinstance(v, complex) for v in env.values()):
+                continue
+            for n, w in enumerate(every, start=1):
+                if n not in seen and all(k in env and _want_ok(v) and wanted(env[k], v) for k, v in w.items()):
+                    seen.add(n)
+            if all(wanted(env[k], v) for k, v in want.items()):
+                reachable = True
+                for n, w in enumerate(rules, start=1):
+                    if all(k in env and _want_ok(v) and wanted(env[k], v) for k, v in w.items()):
+                        clash.add(n)
+                if not rules and len(seen) == len(every):
+                    break
+        if not reachable:
+            e.append(f"goal {gi} can't be reached with these inputs")
+        for n in range(1, len(every) + 1):
+            if n not in seen:
+                e.append(f"goal {gi} mistake {n} can never happen: no inputs give those values")
+        for n in sorted(clash):
+            e.append(f"goal {gi} mistake {n} also matches a right answer")
+    return e
+
+
+def _check_graph(a, goals):
+    e = []
+    mode = a.get("mode")
+    if mode not in ("point", "line"):
+        return ["graph mode must be point or line"]
+    rng = a.get("range", [-6, 6])
+    if not (isinstance(rng, list) and len(rng) == 2 and all(_int(x) for x in rng) and rng[0] < 0 < rng[1] and rng[1] - rng[0] <= 20):
+        return ["graph range must be [low, high] whole numbers around 0, at most 20 apart"]
+    for k in ("x_label", "y_label"):
+        if k in a:
+            _text(a[k], k, e, 30)
+    m_step = a.get("m_step", 0.5)
+    if mode == "line" and not (_num(m_step) and m_step > 0):
+        e.append("graph m_step must be a number above 0")
+    lo, hi = rng
+    for i, g in enumerate(goals, start=1):
+        if mode == "point":
+            if not all(_int(g.get(k)) and lo <= g[k] <= hi for k in ("x", "y")):
+                e.append(f"goal {i} needs whole-number x and y inside the range")
+            continue
+        keys = [k for k in ("m", "c", "through") if k in g]
+        if not keys:
+            e.append(f"goal {i} needs m, c or through")
+            continue
+        ms = [round(k * m_step, 10) for k in range(round(-10 / m_step), round(10 / m_step) + 1)]
+        cs = list(range(lo, hi + 1))
+        ok = any(
+            (g.get("m") is None or abs(m - g["m"]) < 1e-9)
+            and (g.get("c") is None or c == g["c"])
+            and all(abs(m * p[0] + c - p[1]) < 1e-9 for p in g.get("through", []))
+            for m in ms
+            for c in cs
+        )
+        if not ok:
+            e.append(f"goal {i} can't be reached with slope steps of {m_step} and whole-number c")
     return e
 
 

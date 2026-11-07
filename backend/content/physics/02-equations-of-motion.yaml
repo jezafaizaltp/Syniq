@@ -27,6 +27,48 @@ concepts:
       visual: "Draw the path as a bent line from start to finish and then a straight arrow from start to finish. The bent line's length is the distance; the arrow is the displacement."
       step_by_step: "A bus covers 120 km in 2 h, then 60 km in 1 h. Step 1: Total distance = 180 km. Step 2: Total time = 3 h. Step 3: Average speed = 180 ÷ 3 = 60 km/h. Step 4: In m/s: 60 × 5/18 = 16.7 m/s."
       real_world: "A runner on a 400 m track who finishes one lap where they started has run 400 m, but their displacement is zero."
+    activity:
+      type: formula
+      prompt: Speed = distance ÷ time.
+      inputs:
+      - name: s
+        label: Distance
+        min: 0
+        max: 200
+        step: 10
+        start: 0
+        unit: m
+      - name: t
+        label: Time
+        min: 1
+        max: 20
+        step: 1
+        start: 1
+        unit: s
+      outputs:
+      - name: v
+        label: Speed
+        expr: s/t
+        unit: m/s
+        places: 1
+      goals:
+      - prompt: Run at 20 m/s for 5 s.
+        want:
+          v: 20
+          t: 5
+        mistakes:
+        - when:
+            s: 20
+          say: 'You set the distance to 20 m: that''s the speed, not the distance. Going 20 m every second for 5 seconds covers more than that.'
+      - prompt: Cover 150 m at 10 m/s.
+        want:
+          s: 150
+          v: 10
+        mistakes:
+        - when:
+            t: 10
+            s: 150
+          say: 'Covering 150 m in 10 s means going 15 m every second: too fast. At 10 m/s, 150 m takes longer.'
     items:
       - prompt: "A boy walks 3 m east and then 4 m north. What is his displacement, in m?"
         answer: "5"
@@ -82,6 +124,55 @@ concepts:
       visual: "Write the velocity every second: 0, 2, 4, 6, 8, 10 m/s. It goes up by the same 2 each second: that steady jump is the acceleration."
       step_by_step: "A car speeds up from 10 m/s to 25 m/s in 5 s. Step 1: Change in velocity = 25 − 10 = 15 m/s. Step 2: Time = 5 s. Step 3: a = 15 ÷ 5 = 3 m/s²."
       real_world: "Car adverts boast '0 to 100 km/h in 8 seconds': a measure of acceleration."
+    activity:
+      type: formula
+      prompt: Acceleration = change in velocity ÷ time.
+      inputs:
+      - name: u
+        label: Starting velocity u
+        min: 0
+        max: 30
+        step: 1
+        start: 0
+        unit: m/s
+      - name: v
+        label: Final velocity v
+        min: 0
+        max: 30
+        step: 1
+        start: 0
+        unit: m/s
+      - name: t
+        label: Time
+        min: 1
+        max: 10
+        step: 1
+        start: 1
+        unit: s
+      outputs:
+      - name: a
+        label: Acceleration
+        expr: (v-u)/t
+        unit: m/s²
+        places: 2
+      goals:
+      - prompt: Speed up at 2 m/s² for 5 s, starting from 10 m/s.
+        want:
+          a: 2
+          t: 5
+          u: 10
+        mistakes:
+        - when:
+            a: 2
+            u: 10
+          say: Acceleration and start are right, but the time must be 5 s.
+      - prompt: 'Now slow down: acceleration −3 m/s².'
+        want:
+          a: -3
+        mistakes:
+        - when:
+            a: 3
+          say: +3 m/s² means speeding up. Slowing down means the final velocity is less than the starting one, so v − u is negative.
     items:
       - prompt: "A scooter starts from rest and reaches 10 m/s in 5 s. What is its acceleration, in m/s²?"
         answer: "2"
@@ -136,6 +227,53 @@ concepts:
       visual: "Make a five-box table: u, v, a, t, s. Fill the three you know, mark the one you want with '?'. Choose the equation that leaves out the fifth box."
       step_by_step: "A car at 10 m/s accelerates at 2 m/s² for 5 s. How far does it go? Step 1: Know u = 10, a = 2, t = 5; want s. Step 2: s = ut + ½at². Step 3: s = 10 × 5 + ½ × 2 × 25 = 50 + 25 = 75 m."
       real_world: "Road safety engineers use v² = u² + 2as to work out how far a car travels while braking, and so how long the skid marks will be."
+    activity:
+      type: formula
+      prompt: v = u + at and s = ut + ½at².
+      inputs:
+      - name: u
+        label: u
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+        unit: m/s
+      - name: a
+        label: a
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+        unit: m/s²
+      - name: t
+        label: t
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+        unit: s
+      outputs:
+      - name: v
+        label: Final velocity v
+        expr: u+a*t
+        unit: m/s
+      - name: s
+        label: Distance s
+        expr: u*t+0.5*a*t^2
+        unit: m
+      goals:
+      - prompt: Make v = 20 m/s and s = 75 m.
+        want:
+          v: 20
+          s: 75
+        hint: Pick a time first, then find u and a that give v = 20. Then check s.
+        mistakes:
+        - when:
+            v: 20
+          say: v is 20 m/s, but the distance is wrong. Different u, a and t can give the same final speed but cover different distances.
+        - when:
+            s: 75
+          say: The distance is 75 m, but the final velocity isn't 20 m/s.
     items:
       - prompt: "A body starts at 5 m/s and accelerates at 2 m/s² for 4 s. What is its final velocity, in m/s?"
         answer: "13"
@@ -192,6 +330,47 @@ concepts:
       visual: "Shade the region under a v–t graph. Split it into rectangles and triangles: add their areas to get the distance travelled."
       step_by_step: "A car goes at a steady 15 m/s for 6 s. Step 1: The v–t graph is a flat line at 15. Step 2: Area = rectangle 6 × 15 = 90. Step 3: Distance = 90 m; slope 0, so acceleration 0."
       real_world: "A train's data recorder stores a velocity–time graph. Investigators work out braking and distances from its slopes and areas."
+    activity:
+      type: graph
+      mode: line
+      range:
+      - -2
+      - 10
+      m_step: 0.5
+      x_label: time
+      y_label: velocity
+      prompt: A velocity–time graph. The slope is the acceleration; where it meets the velocity axis is the starting velocity.
+      goals:
+      - prompt: Start at 2 m/s and speed up by 1 m/s every second.
+        m: 1
+        c: 2
+        mistakes:
+        - when:
+            m: 2
+            c: 1
+          say: 'You swapped them: this starts at 1 m/s and speeds up by 2 every second. Where the line crosses the velocity axis is the start.'
+      - prompt: Start at 8 m/s and slow down by 2 m/s every second.
+        m: -2
+        c: 8
+        mistakes:
+        - when:
+            m: 2
+            c: 8
+          say: Your line slopes up, so the object speeds up. Slowing down means the line slopes down.
+        - when:
+            m:
+            - -10
+            - 10
+            c: 2
+          say: 'This starts at 2 m/s. Where the line meets the velocity axis is the starting velocity: 8 m/s here.'
+      - prompt: Move at a steady 5 m/s.
+        m: 0
+        c: 5
+        mistakes:
+        - when:
+            m: 5
+            c: 0
+          say: 'Slope 5 means speeding up by 5 m/s every second. A steady speed means the velocity never changes: what does that look like?'
     items:
       - prompt: "On a distance–time graph, a horizontal straight line means the body is:"
         options: ["At rest", "Moving with uniform speed", "Accelerating", "Slowing down"]

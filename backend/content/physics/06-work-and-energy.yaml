@@ -26,6 +26,34 @@ concepts:
       visual: "Draw a box with a force arrow and a displacement arrow. If they point the same way, work is positive; opposite ways, negative; at right angles, zero."
       step_by_step: "Work to lift a 10 kg bag onto a 1.5 m shelf (g = 10 m/s²): Step 1: Force needed = weight = 10 × 10 = 100 N. Step 2: Displacement = 1.5 m upward. Step 3: W = 100 × 1.5 = 150 J."
       real_world: "A coolie who lifts a 30 kg load onto his head (about 1.5 m) does about 450 J of work each time."
+    activity:
+      type: formula
+      prompt: Work = force × distance moved in the direction of the force.
+      inputs:
+      - name: f
+        label: Force
+        min: 0
+        max: 50
+        step: 5
+        start: 0
+        unit: N
+      - name: s
+        label: Distance
+        min: 0
+        max: 10
+        step: 1
+        start: 0
+        unit: m
+      outputs:
+      - name: w
+        label: Work done
+        expr: f*s
+        unit: J
+      goals:
+      - prompt: Do 120 J of work by pushing a box 4 m.
+        want:
+          w: 120
+          s: 4
     items:
       - prompt: "A force of 40 N pushes a box 5 m in the direction of the force. How much work is done, in J?"
         answer: "200"
@@ -82,6 +110,45 @@ concepts:
       visual: "Picture a ball rolling down a slide. At the top: tall bar for PE, no bar for KE. Halfway: two medium bars. At the bottom: no PE, tall KE bar."
       step_by_step: "KE of a 2 kg ball at 3 m/s: Step 1: KE = ½ × m × v². Step 2: = ½ × 2 × 9. Step 3: = 9 J."
       real_world: "The speed limit near schools is low because a car's KE grows with the square of speed: at 60 km/h it has four times the energy it has at 30 km/h."
+    activity:
+      type: formula
+      prompt: A 2 kg ball. KE = ½mv² and PE = mgh (g = 10 m/s²).
+      inputs:
+      - name: v
+        label: Speed
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+        unit: m/s
+      - name: h
+        label: Height
+        min: 0
+        max: 20
+        step: 1
+        start: 0
+        unit: m
+      outputs:
+      - name: ke
+        label: Kinetic energy
+        expr: 0.5*2*v^2
+        unit: J
+      - name: pe
+        label: Potential energy
+        expr: 2*10*h
+        unit: J
+      goals:
+      - prompt: Give it 100 J of kinetic energy and 100 J of potential energy.
+        want:
+          ke: 100
+          pe: 100
+        mistakes:
+        - when:
+            ke: 100
+          say: Kinetic energy is right, but potential energy isn't 100 J yet.
+        - when:
+            pe: 100
+          say: 'Potential energy is right, but kinetic energy isn''t 100 J yet. KE grows with v²: double the speed, four times the energy.'
     items:
       - prompt: "What is the kinetic energy of a 2 kg ball moving at 3 m/s, in J?"
         answer: "9"
@@ -138,6 +205,38 @@ concepts:
       visual: "Draw a tall stack of 200 coins at the top labelled PE. As the stone falls, coins move one by one into a KE stack. The total never changes."
       step_by_step: "A 100 W bulb runs for 10 hours. Step 1: Power = 0.1 kW. Step 2: Energy = 0.1 × 10 = 1 kWh. Step 3: That is 1 unit of electricity."
       real_world: "Hydroelectric dams in Idukki turn the potential energy of stored water into kinetic energy and then into electrical energy."
+    activity:
+      type: formula
+      prompt: 'A ball dropped from height h: all its PE becomes KE, so v = √(2gh) (g = 10 m/s²).'
+      inputs:
+      - name: h
+        label: Height
+        min: 0
+        max: 45
+        step: 1
+        start: 0
+        unit: m
+      outputs:
+      - name: v
+        label: Speed at the bottom
+        expr: sqrt(2*10*h)
+        unit: m/s
+        places: 1
+      goals:
+      - prompt: Hit the ground at 10 m/s.
+        want:
+          v: 10
+        mistakes:
+        - when:
+            h: 10
+          say: 'From 10 m it lands at about 14 m/s. The speed doesn''t grow as fast as the height: v² is what doubles when h doubles.'
+      - prompt: Hit the ground at 30 m/s.
+        want:
+          v: 30
+        mistakes:
+        - when:
+            h: 15
+          say: From 15 m it lands at about 17 m/s, not 30. To go 3 times as fast you need 9 times the height, because v² grows with h.
     items:
       - prompt: "A 1 kg stone is dropped from 20 m. What is its kinetic energy just before hitting the ground, in J? (g = 10 m/s²; ignore air)"
         answer: "200"

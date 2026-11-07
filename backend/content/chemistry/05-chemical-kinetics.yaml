@@ -24,6 +24,35 @@ concepts:
       visual: "Picture a graph of gas volume against time: steep at the start, flattening out, then level when the reaction stops. Steepness is the rate."
       step_by_step: "Magnesium loses 0.6 g in 2 minutes. Step 1: Change = 0.6 g. Step 2: Time = 120 s. Step 3: Rate = 0.6 ÷ 120 = 0.005 g per second."
       real_world: "Fireworks explode in a fraction of a second, while an iron gate rusts over years. Both are chemical reactions, at very different rates."
+    activity:
+      type: formula
+      prompt: Rate of reaction = change in amount ÷ time taken.
+      inputs:
+      - name: c
+        label: Gas made
+        min: 0
+        max: 50
+        step: 1
+        start: 0
+        unit: mL
+      - name: t
+        label: Time
+        min: 1
+        max: 60
+        step: 1
+        start: 1
+        unit: s
+      outputs:
+      - name: r
+        label: Rate
+        expr: c/t
+        unit: mL/s
+        places: 2
+      goals:
+      - prompt: Make 0.5 mL of gas per second for 20 s.
+        want:
+          r: 0.5
+          t: 20
     items:
       - prompt: "60 cm³ of gas is produced in 30 s. What is the average rate, in cm³ per second?"
         answer: "2"
@@ -80,6 +109,41 @@ concepts:
       visual: "Picture one big cube of sugar and the same sugar as powder. Cut the cube into 8 small cubes: the surface doubles. Grind it to powder and the surface becomes huge, so water reaches far more sugar at once."
       step_by_step: "To make a reaction faster: Step 1: Use powder, not lumps. Step 2: Use more concentrated solution. Step 3: Heat it. Step 4: Add a suitable catalyst."
       real_world: "Food lasts longer in a fridge because low temperature slows the reactions that spoil it. Chopped vegetables cook faster than whole ones."
+    activity:
+      type: sort
+      prompt: Does it make the reaction faster or slower?
+      bins:
+      - Faster
+      - Slower
+      items:
+      - label: Heating
+        bin: Faster
+        clue: Do particles move faster or slower when hot?
+        why: 'Faster particles collide more often and harder: faster reaction.'
+      - label: Cooling
+        bin: Slower
+        clue: Do particles move faster or slower when cold?
+        why: 'Slower particles collide less: slower reaction.'
+      - label: Powdering the solid
+        bin: Faster
+        why: 'More surface for particles to collide with: faster.'
+        clue: Does powder have more or less surface than a lump?
+      - label: Using big lumps
+        bin: Slower
+        clue: Do lumps have more or less surface than powder?
+        why: 'Less surface: fewer collisions, slower.'
+      - label: Using more concentrated acid
+        bin: Faster
+        clue: 'More acid particles in the same space: more or fewer collisions?'
+        why: 'More collisions every second: faster.'
+      - label: Adding a catalyst
+        bin: Faster
+        clue: What does a catalyst do to the energy needed to react?
+        why: 'It lowers the energy needed, so more collisions work: faster.'
+      - label: Diluting the acid
+        bin: Slower
+        clue: 'Fewer acid particles in the same space: more or fewer collisions?'
+        why: 'Fewer collisions: slower.'
     items:
       - prompt: "Which will react fastest with dilute hydrochloric acid?"
         options: ["Marble powder", "Large marble chips", "One big marble block", "They all react at the same rate"]
@@ -136,6 +200,33 @@ concepts:
       visual: "Draw an energy hill between reactants and products. The height of the hill is the activation energy. A catalyst digs a tunnel through the hill: a lower route that more particles can manage."
       step_by_step: "Why does heating speed up a reaction? Step 1: Particles gain kinetic energy. Step 2: They collide more often. Step 3: More of the collisions have energy above the activation energy. Step 4: More effective collisions per second, so a faster rate."
       real_world: "Enzymes in our body are natural catalysts. They let digestion happen at 37 °C, which would otherwise need much higher temperatures."
+    activity:
+      type: sort
+      prompt: True or false? (Collision theory)
+      bins:
+      - 'True'
+      - 'False'
+      items:
+      - label: Particles must collide to react
+        bin: 'True'
+        clue: Can two particles react without touching?
+        why: 'They have to meet: true.'
+      - label: Every collision causes a reaction
+        bin: 'False'
+        why: Only collisions with enough energy (and the right direction) react.
+        clue: If every collision worked, what would happen to all reactions?
+      - label: Heating makes particles move faster and collide harder
+        bin: 'True'
+        clue: What does heat do to particles?
+        why: 'Heat gives them more energy: true.'
+      - label: A catalyst gets used up in the reaction
+        bin: 'False'
+        clue: Is the catalyst still there at the end?
+        why: A catalyst is left unchanged at the end.
+      - label: A higher concentration means more collisions per second
+        bin: 'True'
+        clue: 'More particles in the same space: more or fewer bumps?'
+        why: 'More particles, more collisions: true.'
     items:
       - prompt: "The minimum energy colliding particles need in order to react is called:"
         options: ["Activation energy", "Kinetic energy", "Heat of reaction", "Bond energy"]

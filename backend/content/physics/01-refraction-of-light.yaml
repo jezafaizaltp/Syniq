@@ -26,6 +26,34 @@ concepts:
       visual: "Draw a horizontal line for the water surface and a dotted vertical line, the normal, where the ray hits. The ray from the air comes in at a slant; below the surface draw it closer to the dotted line. Light going the other way retraces the same path."
       step_by_step: "To predict the bending: Step 1: Draw the normal where the ray meets the surface. Step 2: Ask which medium is denser (light is slower there). Step 3: Entering the denser medium, the ray bends towards the normal; entering the rarer one, away from it. Step 4: If the ray is along the normal, it goes straight on."
       real_world: "A lifeguard running along the sand then swimming to a swimmer takes a bent path: running is faster than swimming, so it pays to run further on the sand. Light 'chooses' its bent path through air and water the same way."
+    activity:
+      type: sort
+      prompt: Which way does the light bend?
+      bins:
+      - Towards the normal
+      - Away from the normal
+      - Goes straight
+      items:
+      - label: From air into glass, at a slant
+        bin: Towards the normal
+        why: Light slows down entering glass, so it bends towards the normal.
+        clue: Is the light going into a material where it slows down, or one where it speeds up?
+      - label: From glass into air, at a slant
+        bin: Away from the normal
+        clue: Is the light slowing down or speeding up as it crosses?
+        why: Light speeds up leaving glass, so it bends away from the normal.
+      - label: From air into water, at a slant
+        bin: Towards the normal
+        clue: Does light go slower in water or in air?
+        why: Light is slower in water, so it bends towards the normal.
+      - label: From water into air, at a slant
+        bin: Away from the normal
+        clue: Does light speed up or slow down as it leaves water?
+        why: Speeding up into air, it bends away from the normal. That's why a pool looks shallower.
+      - label: Along the normal into glass
+        bin: Goes straight
+        why: Going straight along the normal, it slows down but doesn't change direction.
+        clue: Is there any slant at all?
     items:
       - prompt: "A ray of light goes from air into glass at a slant. Which way does it bend?"
         options: ["Towards the normal", "Away from the normal", "It does not bend", "Along the surface"]
@@ -84,6 +112,42 @@ concepts:
       visual: "Picture a race: light in a vacuum runs 3 squares a second; in glass only 2. Glass's refractive index is the ratio of the two speeds, 3/2. The slower the runner, the bigger the number."
       step_by_step: "Speed of light in water, n = 4/3: Step 1: n = c ÷ v, so v = c ÷ n. Step 2: v = 3 × 10⁸ ÷ (4/3). Step 3: v = 3 × 10⁸ × 3/4 = 2.25 × 10⁸ m/s."
       real_world: "Optical fibres carrying internet signals are made of glass with a carefully chosen refractive index so light stays trapped inside for kilometres."
+    activity:
+      type: formula
+      prompt: Refractive index n = speed of light in air ÷ speed in the material (3 × 10⁸ m/s in air).
+      inputs:
+      - name: v
+        label: Speed in material (× 10⁸ m/s)
+        min: 1
+        max: 3
+        step: 0.25
+        start: 3
+      outputs:
+      - name: n
+        label: Refractive index
+        expr: 3/v
+        places: 2
+      goals:
+      - prompt: Glass has n = 1.5. Set the speed of light in glass.
+        want:
+          n: 1.5
+        mistakes:
+        - when:
+            v:
+            - 2.25
+            - 3
+          say: At this speed n is less than 1.5. The faster light travels in a material, the smaller its refractive index. Glass slows light down more than that.
+      - prompt: Water has n ≈ 1.33.
+        want:
+          n:
+          - 1.33
+          - 1.34
+        mistakes:
+        - when:
+            v:
+            - 2.5
+            - 3
+          say: 'At this speed n is too small. Water slows light down: less than in glass, but still a lot.'
     items:
       - prompt: "Light travels at 3 × 10⁸ m/s in a vacuum and 2 × 10⁸ m/s in glass. What is the refractive index of the glass?"
         answer: "1.5"
@@ -140,6 +204,35 @@ concepts:
       visual: "Draw a coin at the bottom of a beaker, two rays leaving it, bending outwards at the surface, and dotted lines tracing them back. The dotted lines meet above the coin: that is where the coin seems to be."
       step_by_step: "A tank 120 cm deep with water (n = 4/3): Step 1: Apparent depth = real ÷ n. Step 2: 120 ÷ (4/3) = 120 × 3/4 = 90 cm. Step 3: It seems raised by 120 − 90 = 30 cm."
       real_world: "Swimmers misjudge pool depth because the bottom looks nearer. Fishermen who spear fish aim below where the fish seems to be."
+    activity:
+      type: formula
+      prompt: 'A pool looks shallower than it is: apparent depth = real depth ÷ 1.33.'
+      inputs:
+      - name: d
+        label: Real depth
+        min: 1
+        max: 8
+        step: 0.5
+        start: 1
+        unit: m
+      outputs:
+      - name: a
+        label: Looks this deep
+        expr: d/1.33
+        unit: m
+        places: 2
+      goals:
+      - prompt: Make the pool look 3 m deep.
+        want:
+          a:
+          - 2.98
+          - 3.02
+        mistakes:
+        - when:
+            d:
+            - 1
+            - 3
+          say: A pool 3 m deep or less would look even shallower than 3 m. A pool always looks shallower than it really is, so the real depth must be more than 3 m.
     items:
       - prompt: "A coin lies at the bottom of a glass of water. Seen from above, how does it appear?"
         options: ["Raised, nearer the surface", "Deeper than it is", "At its real depth", "Upside down"]
@@ -198,6 +291,29 @@ concepts:
       visual: "Draw three rays from one point under water: a steep one escaping and bending away from the normal, one at the critical angle grazing along the surface, and a shallow one bouncing back down like a mirror reflection."
       step_by_step: "Will light in glass (critical angle 42°) hitting the surface at 50° escape? Step 1: Glass to air is denser to rarer, so it is possible. Step 2: 50° > 42°. Step 3: So it is totally internally reflected."
       real_world: "Doctors look inside the stomach with an endoscope: light travels through bundles of thin glass fibres, bouncing off the inside walls by total internal reflection without leaking out."
+    activity:
+      type: scale
+      min: 0
+      max: 90
+      step: 1
+      start: 20
+      unit: °
+      orientation: horizontal
+      prompt: Light going from glass into air. The critical angle for glass is about 42°.
+      zones:
+      - from: 0
+        to: 42
+        label: Refracts out
+        says: Below the critical angle the light gets out of the glass, bending away from the normal.
+      - from: 42
+        to: 90
+        label: Reflects back inside
+        says: 'Past the critical angle no light gets out: it all reflects back inside. Optical fibres work this way.'
+      goals:
+      - prompt: Set an angle of incidence where all the light reflects back inside.
+        zone: Reflects back inside
+      - prompt: Set the critical angle itself.
+        value: 42
     items:
       - prompt: "For total internal reflection, light must travel from:"
         options: ["A denser medium to a rarer medium", "A rarer medium to a denser medium", "Air to glass", "Any medium to any other"]
