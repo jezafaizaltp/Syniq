@@ -87,6 +87,16 @@ export default function SettingsPage() {
             </p>
           </div>
         ))}
+        {me.role === "student" && me.hindi_course && (
+          <>
+            <label htmlFor="hindi">{t("settings.hindi_course")}</label>
+            <select id="hindi" value={s.hindi_course ?? me.hindi_course} onChange={(e) => change({ hindi_course: e.target.value as "a" | "b" })}>
+              <option value="a">{t("settings.hindi_a")}</option>
+              <option value="b">{t("settings.hindi_b")}</option>
+            </select>
+            <p className="muted">{t("settings.hindi_course_help")}</p>
+          </>
+        )}
         {me.role === "student" && (
           <>
             <label htmlFor="style">{t("settings.style")}</label>

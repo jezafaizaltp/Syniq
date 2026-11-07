@@ -1,0 +1,299 @@
+# CBSE Class 9 Mathematics (NCERT Ganita Manjari, 2026-27), chapter 6. Format: content/README.md.
+subject: cbse9-math
+chapter: 6
+title: 'Measuring Space: Perimeter and Area'
+tips:
+  semi_perimeter_half: 's is the SEMI-perimeter: add the three sides, then halve it.'
+  heron_forgot_root: 'Heron''s formula ends with a square root: area = √(s(s − a)(s − b)(s − c)).'
+  sector_full_circle: 'A sector is only part of the circle: multiply the full-circle amount by θ/360.'
+  area_radius_not_squared: 'Area uses r², the radius times itself: πr², not πr or 2πr.'
+  brahmagupta_half: 's is half the perimeter: add the four sides and divide by 2 before subtracting each side.'
+concepts:
+- code: cbse9gm.area.heron
+  title: Area of a triangle by Heron's formula
+  notes: |
+    For a triangle with sides a, b, c, s = (a + b + c)/2 and area = √(s(s − a)(s − b)(s − c)). Useful when
+    the height is not known. For an equilateral triangle of side a this gives (√3/4)a².
+  explanations:
+    text: 'When you know all three sides but not the height, use Heron''s formula. First find s, half the perimeter. Then multiply s by (s − a), (s − b) and (s − c), and take the square root. For sides 3, 4, 5: s = 6, and area = √(6 × 3 × 2 × 1) = √36 = 6.'
+    visual: 'Write the four numbers in a row: s, s − a, s − b, s − c. Multiply them along the row, then put the answer under a square-root sign. Factorising into primes first makes the root easy to spot.'
+    step_by_step: 'Step 1: Add the sides. Step 2: Halve it to get s. Step 3: Work out s − a, s − b and s − c. Step 4: Multiply all four numbers. Step 5: Take the square root. Step 6: Write square units.'
+    real_world: A farmer has a triangular field with sides measured by rope, but no way to measure its height across the middle of the crop. Heron's formula gives the area from the three side lengths alone.
+  picture:
+    kind: geometry
+    points:
+      A:
+      - 4
+      - 8.7
+      B:
+      - 1
+      - 1.5
+      C:
+      - 9.4
+      - 1.5
+    segments:
+    - - A
+      - B
+      - '13'
+    - - B
+      - C
+      - '14'
+    - - C
+      - A
+      - '15'
+    caption: s = (13 + 14 + 15) ÷ 2 = 21. Area = √(21 × 8 × 7 × 6) = √7056 = 84.
+    alt: A triangle with sides 13, 14 and 15. Half the perimeter is 21, and Heron's formula gives an area of 84.
+  items:
+  - prompt: Find s for a triangle with sides 7 cm, 8 cm and 9 cm.
+    answer: '12'
+    check: (7 + 8 + 9)/2
+    difficulty: 1
+    hints:
+    - Add the sides.
+    - Halve it.
+    solution: s = (7 + 8 + 9) ÷ 2 = 24 ÷ 2 = 12 cm.
+    mistakes:
+      '24': semi_perimeter_half
+  - prompt: Find the area of a triangle with sides 3 cm, 4 cm and 5 cm, in cm².
+    answer: '6'
+    check: sqrt(6*3*2*1)
+    difficulty: 1
+    hints:
+    - s = 6.
+    - √(6 × 3 × 2 × 1).
+    solution: 'Step 1: s = 6. Step 2: Area = √(6 × 3 × 2 × 1) = √36 = 6 cm².'
+    mistakes:
+      '36': heron_forgot_root
+  - prompt: Find the area of a triangle with sides 13 m, 14 m and 15 m, in m².
+    answer: '84'
+    check: sqrt(21*8*7*6)
+    difficulty: 2
+    hints:
+    - s = 21.
+    - √(21 × 8 × 7 × 6).
+    solution: 'Step 1: s = 21. Step 2: s − a = 8, s − b = 7, s − c = 6. Step 3: Area = √7056 = 84 m².'
+    mistakes:
+      '7056': heron_forgot_root
+  - prompt: A triangle has sides 5 cm, 5 cm and 6 cm. Find its area in cm².
+    answer: '12'
+    check: sqrt(8*3*3*2)
+    difficulty: 2
+    hints:
+    - s = 8.
+    - √(8 × 3 × 3 × 2).
+    solution: 'Step 1: s = 8. Step 2: Area = √(8 × 3 × 3 × 2) = √144 = 12 cm².'
+  - prompt: 'The sides of a triangle are in the ratio 3 : 4 : 5 and its perimeter is 48 cm. Find its area in cm².'
+    answer: '96'
+    check: sqrt(24*12*8*4)
+    difficulty: 3
+    hints:
+    - Sides are 12, 16, 20.
+    - s = 24.
+    solution: 'Step 1: 12x = 48, x = 4, sides 12, 16, 20. Step 2: s = 24. Step 3: Area = √(24 × 12 × 8 × 4) = √9216 = 96 cm².'
+  - prompt: An equilateral triangle has side 6 cm. Find s in cm.
+    answer: '9'
+    check: 18/2
+    difficulty: 1
+    hints:
+    - Perimeter = 3 × 6.
+    - Halve it.
+    solution: s = (6 + 6 + 6) ÷ 2 = 9 cm.
+    mistakes:
+      '18': semi_perimeter_half
+  - prompt: A triangle has sides 9 cm, 12 cm and 15 cm. Find its area in cm².
+    answer: '54'
+    check: sqrt(18*9*6*3)
+    difficulty: 2
+    hints:
+    - s = 18.
+    - √(18 × 9 × 6 × 3).
+    solution: 'Step 1: s = 18. Step 2: Area = √2916 = 54 cm².'
+    mistakes:
+      '2916': heron_forgot_root
+- code: cbse9gm.area.circle_sector
+  title: Circles, arcs and sectors
+  after:
+  - cbse9gm.area.heron
+  notes: |
+    π is the ratio of any circle's circumference to its diameter; it is irrational (≈ 3.14159, often 22/7).
+    Circumference = 2πr; area = πr². An arc of angle θ (in degrees) has length (θ/360) × 2πr; a sector of
+    angle θ has area (θ/360) × πr². A semicircle is the sector with θ = 180°, a quadrant θ = 90°.
+  explanations:
+    text: A sector is a slice of a round pizza. If the slice's angle is θ, it is θ/360 of the whole circle, so its area is θ/360 × πr² and its curved edge (the arc) is θ/360 × 2πr.
+    visual: 'Draw a circle of radius 7 and shade a 90° slice from the centre. The slice is a quarter of the circle: area = ¼ × (22/7) × 7 × 7 = 38.5, and its curved edge is ¼ × 2 × (22/7) × 7 = 11.'
+    step_by_step: 'Step 1: Find the fraction of the circle: θ/360. Step 2: Whole area = πr² (or whole circumference = 2πr). Step 3: Multiply the two. Step 4: For the sector''s perimeter, add the two radii to the arc.'
+    real_world: 'A wall clock''s minute hand sweeps a sector: in 15 minutes it turns 90°, so the tip travels a quarter of the circumference.'
+  picture:
+    kind: geometry
+    points:
+      O:
+      - 5
+      - 5
+      A:
+      - 9
+      - 5
+      B:
+      - 5
+      - 9
+    circles:
+    - centre: O
+      radius: 4
+    segments:
+    - - O
+      - A
+      - r
+    - - O
+      - B
+      - r
+    angles:
+    - at: O
+      from: A
+      to: B
+      label: 90°
+    caption: A 90° sector is 90/360 = ¼ of the circle.
+    alt: A circle with centre O and two radii OA and OB at right angles, marking a quarter-circle sector.
+  items:
+  - prompt: Find the circumference of a circle of radius 7 cm, using π = 22/7.
+    answer: '44'
+    check: 2*22/7*7
+    difficulty: 1
+    hints:
+    - C = 2πr.
+    - 2 × 22/7 × 7.
+    solution: 'Step 1: C = 2 × (22/7) × 7. Step 2: = 44 cm.'
+  - prompt: Find the area of a circle of radius 14 cm, using π = 22/7.
+    answer: '616'
+    check: 22/7*14^2
+    difficulty: 1
+    hints:
+    - A = πr².
+    - 22/7 × 196.
+    solution: 'Step 1: r² = 196. Step 2: (22/7) × 196 = 616 cm².'
+    mistakes:
+      '44': area_radius_not_squared
+      '88': area_radius_not_squared
+  - prompt: Find the area of a 90° sector of a circle of radius 14 cm (π = 22/7).
+    answer: '154'
+    check: 90/360*22/7*14^2
+    difficulty: 2
+    hints:
+    - 90° is a quarter of the circle.
+    - ¼ × 616.
+    solution: 'Step 1: Full area = 616 cm². Step 2: 90/360 = 1/4. Step 3: 616 ÷ 4 = 154 cm².'
+    mistakes:
+      '616': sector_full_circle
+  - prompt: Find the length of a 60° arc of a circle of radius 21 cm (π = 22/7).
+    answer: '22'
+    check: 60/360*2*22/7*21
+    difficulty: 2
+    hints:
+    - 60° is 1/6 of the circle.
+    - Circumference = 2 × 22/7 × 21 = 132.
+    solution: 'Step 1: Circumference = 132 cm. Step 2: 1/6 of 132 = 22 cm.'
+    mistakes:
+      '132': sector_full_circle
+  - prompt: Why is π called irrational?
+    options:
+    - It cannot be written exactly as a fraction p/q
+    - It changes with the size of the circle
+    - It is exactly 22/7
+    - It is a negative number
+    answer: It cannot be written exactly as a fraction p/q
+    difficulty: 2
+    hints:
+    - 22/7 is only close to π.
+    - Its decimals never repeat.
+    solution: 'Step 1: π = 3.14159… goes on without repeating. Step 2: So no fraction equals it exactly; 22/7 is an approximation.'
+  - prompt: The minute hand of a clock is 7 cm long. What area does it sweep in 30 minutes, in cm² (π = 22/7)?
+    answer: '77'
+    check: 180/360*22/7*7^2
+    difficulty: 3
+    hints:
+    - In 30 minutes the hand turns 180°.
+    - Half of (22/7) × 49.
+    solution: 'Step 1: 60 minutes = 360°, so 30 minutes = 180°. Step 2: Full area = (22/7) × 49 = 154 cm². Step 3: Half of 154 = 77 cm².'
+    mistakes:
+      '154': sector_full_circle
+- code: cbse9gm.area.brahmagupta
+  title: Brahmagupta's formula for cyclic quadrilaterals
+  after:
+  - cbse9gm.area.heron
+  notes: |
+    Brahmagupta (7th century) gave the area of a cyclic quadrilateral (all four corners on one circle) with
+    sides a, b, c, d: with s = (a + b + c + d)/2, area = √((s − a)(s − b)(s − c)(s − d)). If one side shrinks to
+    0 the quadrilateral becomes a triangle and the formula becomes Heron's. A rectangle is cyclic: for sides
+    a, b, a, b, s = a + b and the formula gives √(b·a·b·a) = ab.
+  explanations:
+    text: 'Heron''s formula finds a triangle''s area from its three sides. Brahmagupta went further: for a four-sided figure whose corners all sit on one circle, area = √((s − a)(s − b)(s − c)(s − d)), where s is half the perimeter.'
+    visual: 'Draw a circle and put four corners on it: a cyclic quadrilateral with sides a, b, c, d. Write s = half the perimeter, then four brackets: (s − a), (s − b), (s − c), (s − d). Multiply them and take the square root.'
+    step_by_step: 'Step 1: Check the corners lie on one circle. Step 2: s = (a + b + c + d)/2. Step 3: Work out s − a, s − b, s − c, s − d. Step 4: Multiply and take the square root.'
+    real_world: 'A farmer''s field shaped like a cyclic quadrilateral can be measured just by walking its four sides: no need to measure any angle or height.'
+  picture:
+    kind: flow
+    steps:
+    - Sides 5, 5, 5, 5 (a square in a circle)
+    - s = 20 ÷ 2 = 10
+    - (10 − 5)⁴ = 5⁴ = 625
+    - Area = √625 = 25
+    alt: 'Brahmagupta''s formula on a square of side 5: s is 10, the product is 625, and the area is 25.'
+  items:
+  - prompt: For a cyclic quadrilateral with sides 3, 4, 5 and 6, what is s?
+    answer: '9'
+    check: (3 + 4 + 5 + 6)/2
+    difficulty: 1
+    hints:
+    - s is half the perimeter.
+    - 18 ÷ 2.
+    solution: 'Step 1: Perimeter = 18. Step 2: s = 9.'
+    mistakes:
+      '18': brahmagupta_half
+  - prompt: Use Brahmagupta's formula for a rectangle 6 by 4 (sides 6, 4, 6, 4). What area does it give?
+    answer: '24'
+    check: sqrt((10-6)*(10-4)*(10-6)*(10-4))
+    difficulty: 1
+    hints:
+    - s = 10.
+    - √(4 × 6 × 4 × 6).
+    solution: 'Step 1: s = 20/2 = 10. Step 2: √(4 × 6 × 4 × 6) = √576 = 24, the same as 6 × 4.'
+  - prompt: Find the area of a cyclic quadrilateral with sides 5, 5, 5 and 5.
+    answer: '25'
+    check: sqrt(5^4)
+    difficulty: 2
+    hints:
+    - s = 10.
+    - Each bracket is 5.
+    solution: 'Step 1: s = 10. Step 2: √(5 × 5 × 5 × 5) = 25.'
+  - prompt: Brahmagupta's formula works for which quadrilaterals?
+    options:
+    - Those whose four corners lie on a circle
+    - Every quadrilateral
+    - Only squares
+    - Only those with a right angle
+    answer: Those whose four corners lie on a circle
+    difficulty: 2
+    hints:
+    - They are called cyclic.
+    - A rectangle is one.
+    solution: 'Step 1: The formula needs a cyclic quadrilateral. Step 2: For other shapes with the same sides it gives the wrong area.'
+  - prompt: If one side d of the quadrilateral becomes 0, Brahmagupta's formula turns into which formula?
+    options:
+    - Heron's formula for a triangle
+    - The area of a circle
+    - The area of a rectangle
+    - Pythagoras' theorem
+    answer: Heron's formula for a triangle
+    difficulty: 2
+    hints:
+    - Four sides with one of length 0 is a triangle.
+    - √(s(s − a)(s − b)(s − c)).
+    solution: 'Step 1: With d = 0, s − d = s. Step 2: The formula becomes √(s(s − a)(s − b)(s − c)), Heron''s formula.'
+  - prompt: Find the area of a cyclic quadrilateral with sides 7, 15, 20 and 24.
+    answer: '234'
+    check: sqrt((33-7)*(33-15)*(33-20)*(33-24))
+    difficulty: 3
+    hints:
+    - s = 66 ÷ 2 = 33.
+    - 26 × 18 × 13 × 9.
+    solution: 'Step 1: s = 33. Step 2: (33 − 7)(33 − 15)(33 − 20)(33 − 24) = 26 × 18 × 13 × 9 = 54756. Step 3: √54756 = 234.'
+    mistakes:
+      '468': brahmagupta_half

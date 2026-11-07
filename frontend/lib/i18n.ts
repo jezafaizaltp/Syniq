@@ -150,6 +150,10 @@ const en = {
   "settings.extra_time": "Extra time",
   "settings.extra_time_help": "Never hurry me. (SYNiq has no timers, and this keeps it that way.)",
   "settings.style": "How I like things explained",
+  "settings.hindi_course": "My Hindi course",
+  "settings.hindi_a": "Hindi A (Kshitij, Kritika)",
+  "settings.hindi_b": "Hindi B (Sparsh, Sanchayan)",
+  "settings.hindi_course_help": "Choose the one your school follows. Your Hindi lessons change to match.",
   "settings.no_preference": "No preference",
   "settings.noticed": "What SYNiq has noticed helps you",
   "settings.noticed_none":
@@ -477,6 +481,10 @@ const ml: Record<Key, string> = {
   "settings.extra_time": "കൂടുതൽ സമയം",
   "settings.extra_time_help": "എന്നെ ഒരിക്കലും തിരക്കുകൂട്ടരുത്. (SYNiq-ൽ ടൈമറുകളില്ല, ഇത് അങ്ങനെതന്നെ നിലനിർത്തും.)",
   "settings.style": "എനിക്ക് ഇഷ്ടമുള്ള വിശദീകരണ രീതി",
+  "settings.hindi_course": "എന്റെ ഹിന്ദി കോഴ്സ്",
+  "settings.hindi_a": "ഹിന്ദി A (ക്ഷിതിജ്, കൃതിക)",
+  "settings.hindi_b": "ഹിന്ദി B (സ്പർശ്, സഞ്ചയൻ)",
+  "settings.hindi_course_help": "നിങ്ങളുടെ സ്കൂൾ പഠിപ്പിക്കുന്നത് തിരഞ്ഞെടുക്കൂ. ഹിന്ദി പാഠങ്ങൾ അതിനനുസരിച്ച് മാറും.",
   "settings.no_preference": "പ്രത്യേക ഇഷ്ടമില്ല",
   "settings.noticed": "നിങ്ങളെ സഹായിക്കുന്നതായി SYNiq കണ്ടെത്തിയത്",
   "settings.noticed_none":

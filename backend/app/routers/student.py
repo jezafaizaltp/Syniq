@@ -26,6 +26,7 @@ ALLOWED_SETTINGS = {
     "ui_language": str,
     "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer
     "auto_off": list,  # noticed modes the student has switched off
+    "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
 }
 
 
@@ -393,6 +394,8 @@ def me(user: User = Depends(current_user), db: DbSession = Depends(get_db), lang
         }
         board, grade = learning.class_of(user)
         out["class"] = {"board": board, "grade": grade}
+        if learning.has_hindi_choice(db, user):
+            out["hindi_course"] = learning.hindi_course(user)
     if user.role == "guardian":
         member = db.scalars(select(FamilyMember).where(FamilyMember.user_id == user.id)).first()
         holder = member and db.get(Family, member.family_id).holder_id == user.id
@@ -416,6 +419,8 @@ def update_settings(
             raise HTTPException(400, "Unknown support mode")
         if key == "auto_off" and not (all(isinstance(v, str) for v in value) and set(value) <= set(detect.NOTICED)):
             raise HTTPException(400, "Unknown support mode")
+        if key == "hindi_course" and value not in ("a", "b"):
+            raise HTTPException(400, "Unknown Hindi course")
         if key == "ui_language" and value not in i18n.LANGS:
             raise HTTPException(400, "Unknown language")
         if key == "font_scale" and not 0.8 <= float(value) <= 2.0:

@@ -641,88 +641,72 @@ Under `cbse8/`, with subject codes `cbse8-math`, `cbse8-sci`, `cbse8-ss`, `cbse8
 
 ## CBSE Class 9 (NCERT)
 
-For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Social Science numbers its chapters across the four books (History 1–5, Geography 6–11, Civics 12–16, Economics 17–20). Chapter names follow the rationalised NCERT books (2024–25 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. English covers the nine Beehive units (each prose lesson with its poem) as chapters 1–9 and the nine Moments supplementary stories as chapters 10–18. Hindi A covers thirteen Kshitij lessons (chapters 1–13, numbered in SYNiq's own order) and the three Kritika lessons (chapters 14–16). Hindi B is not written yet. Both language subjects were written from memory of the NCERT texts, not from the books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher.
+For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`, `cbse9-sci`, `cbse9-ss`, `cbse9-eng` and `cbse9-hin`. Maths follows the new Ganita Manjari books (Part 1 chapters 1–8, Part 2 chapters 9–14, 2026–27) Science the new Exploration book (13 chapters) and Social Science the new Understanding Society: India and Beyond (Part 1 chapters 1–9, Part 2 chapters 10–15), all 2026–27, with chapter names and topics taken from published contents lists; topics that both old and new books teach were carried over. Hindi follows the new Ganga book (2026–27), whose twelve lessons (prose 1–7, poetry 8–12, matching NCERT's contents page) replace both Hindi A and Hindi B; its two 'साथ-साथ पढ़ें' extra readings are not included. Do Bailon ki Katha and Reedh ki Haddi were carried over from the old Class 9 books and Ram-Lakshman-Parshuram Samvad from Class 10 Hindi A. Topics inside each chapter were chosen by Claude. English follows the new Kaveri book (2026–27), which replaces Beehive and Moments: its eight units, each a prose lesson with its poem, are chapters 1–8, written from published summaries of the new book. Because Ganga replaces both Hindi courses, there is no Class 9 Hindi B. Both language subjects were written from published summaries and memory of the texts, not from the printed books, so names and details need checking, and the Hindi wording has not been read by a Hindi teacher. Databases that already had the older Class 9 books keep them, hidden, under the codes cbse9old-* (see RETIRED_SUBJECTS in app/seed.py), so earlier practice history is not lost.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
-| Maths 1: Number Systems | rational and irrational numbers, decimal expansions, operations on real numbers, laws of exponents for real numbers | 28 |
-| Maths 2: Polynomials | polynomials and their degree, values and zeroes of a polynomial, factor theorem and factorising, algebraic identities | 27 |
-| Maths 3: Coordinate Geometry | the Cartesian plane, coordinates of a point | 12 |
-| Maths 4: Linear Equations in Two Variables | writing ax + by + c = 0, solutions of a linear equation | 14 |
-| Maths 5: Introduction to Euclid's Geometry | definitions, axioms and postulates, Euclid's five postulates | 12 |
-| Maths 6: Lines and Angles | pairs of angles, parallel lines and a transversal | 13 |
-| Maths 7: Triangles | congruence rules, isosceles triangles | 13 |
-| Maths 8: Quadrilaterals | properties of a parallelogram, the mid-point theorem | 13 |
-| Maths 9: Circles | chords and their distance from the centre, angles in a circle and cyclic quadrilaterals | 12 |
-| Maths 10: Heron's Formula | area of a triangle by Heron's formula | 7 |
-| Maths 11: Surface Areas and Volumes | right circular cone, sphere and hemisphere | 12 |
-| Maths 12: Statistics | grouped frequency tables, bar graphs, histograms and frequency polygons | 12 |
-| Science 1: Matter in Our Surroundings | particles and the states of matter, changing state and evaporation | 12 |
-| Science 2: Is Matter Around Us Pure? | solutions, suspensions and colloids, elements, compounds and changes | 12 |
-| Science 3: Atoms and Molecules | laws of chemical combination and formulae, molecular mass and the mole | 13 |
-| Science 4: Structure of the Atom | particles and models of the atom, electron shells, valency and isotopes | 13 |
-| Science 5: The Fundamental Unit of Life | cells, membranes and osmosis, nucleus and cell organelles | 13 |
-| Science 6: Tissues | plant tissues, animal tissues | 13 |
-| Science 7: Motion | distance, displacement, speed and velocity, acceleration and equations of motion | 14 |
-| Science 8: Force and Laws of Motion | balanced forces and inertia, momentum, F = ma and action–reaction | 13 |
-| Science 9: Gravitation | universal law of gravitation, g, mass and weight, thrust, pressure and buoyancy | 13 |
-| Science 10: Work and Energy | work, kinetic and potential energy, power and commercial unit of energy | 13 |
-| Science 11: Sound | sound as a wave, echo, range of hearing and ultrasound | 13 |
-| Science 12: Improvement in Food Resources | crop production and protection, animal husbandry | 13 |
-| Social Science 1 (History): The French Revolution | france before 1789 and the outbreak, constitution, Republic and legacy | 12 |
-| Social Science 2 (History): Socialism in Europe and the Russian Revolution | liberals, radicals, conservatives and socialism, the Russian Revolution and its results | 12 |
-| Social Science 3 (History): Nazism and the Rise of Hitler | weimar Germany and Hitler's rise, nazi ideology, society and war | 12 |
-| Social Science 4 (History): Forest Society and Colonialism | why forests disappeared under colonial rule, forest communities and rebellion | 12 |
-| Social Science 5 (History): Pastoralists in the Modern World | pastoral nomads in India and colonial rule, the Maasai of East Africa | 12 |
-| Social Science 6 (Geography): India – Size and Location | location, size and time, india and the world, and its neighbours | 13 |
-| Social Science 7 (Geography): Physical Features of India | the Himalayas and the Northern Plains, peninsular Plateau, desert, coasts and islands | 13 |
-| Social Science 8 (Geography): Drainage | himalayan river systems, peninsular rivers, lakes and pollution | 14 |
-| Social Science 9 (Geography): Climate | climate controls and the monsoon mechanism, seasons and distribution of rainfall | 13 |
-| Social Science 10 (Geography): Natural Vegetation and Wildlife | types of vegetation, wildlife and its protection | 12 |
-| Social Science 11 (Geography): Population | size, distribution and density, population growth and change | 13 |
-| Social Science 12 (Civics): What is Democracy? Why Democracy? | features of democracy, arguments for and against democracy | 12 |
-| Social Science 13 (Civics): Constitutional Design | why a constitution is needed, from South Africa, making of the Indian Constitution | 12 |
-| Social Science 14 (Civics): Electoral Politics | why elections and India's electoral system, what makes elections democratic | 12 |
-| Social Science 15 (Civics): Working of Institutions | parliament and the executive, the judiciary | 12 |
-| Social Science 16 (Civics): Democratic Rights | life without rights and why rights matter, fundamental Rights in the Indian Constitution | 12 |
-| Social Science 17 (Economics): The Story of Village Palampur | factors of production and farming, distribution of land and non-farm activities | 13 |
-| Social Science 18 (Economics): People as Resource | human capital and economic activities, unemployment, education and health | 12 |
-| Social Science 19 (Economics): Poverty as a Challenge | measuring poverty, causes of poverty and anti-poverty measures | 12 |
-| Social Science 20 (Economics): Food Security in India | what food security means and who is food insecure, buffer stock, PDS and cooperatives | 13 |
-| English 1: The Fun They Had · The Road Not Taken | The Fun They Had (Isaac Asimov), The Road Not Taken (Robert Frost) | 12 |
-| English 2: The Sound of Music · Wind | The Sound of Music (Evelyn Glennie and Bismillah Khan), Wind (Subramania Bharati) | 12 |
-| English 3: The Little Girl · Rain on the Roof | The Little Girl (Katherine Mansfield), Rain on the Roof (Coates Kinney) | 12 |
-| English 4: A Truly Beautiful Mind · The Lake Isle of Innisfree | A Truly Beautiful Mind (Albert Einstein), The Lake Isle of Innisfree (W.B. Yeats) | 12 |
-| English 5: The Snake and the Mirror · A Legend of the Northland | The Snake and the Mirror (Vaikom Muhammad Basheer), A Legend of the Northland (Phoebe Cary) | 12 |
-| English 6: My Childhood · No Men Are Foreign | My Childhood (A.P.J. Abdul Kalam), No Men Are Foreign (James Kirkup) | 12 |
-| English 7: Reach for the Top · On Killing a Tree | Reach for the Top (Santosh Yadav and Maria Sharapova), On Killing a Tree (Gieve Patel) | 12 |
-| English 8: Kathmandu · A Slumber Did My Spirit Seal | Kathmandu (Vikram Seth), A Slumber Did My Spirit Seal (William Wordsworth) | 12 |
-| English 9: If I Were You | If I Were You (Douglas James) | 6 |
-| English 10: Moments: The Lost Child | The Lost Child (Mulk Raj Anand) | 6 |
-| English 11: Moments: The Adventures of Toto | The Adventures of Toto (Ruskin Bond) | 6 |
-| English 12: Moments: Iswaran the Storyteller | Iswaran the Storyteller (R.K. Laxman) | 6 |
-| English 13: Moments: In the Kingdom of Fools | In the Kingdom of Fools (A.K. Ramanujan, Kannada folktale) | 6 |
-| English 14: Moments: The Happy Prince | The Happy Prince (Oscar Wilde) | 6 |
-| English 15: Moments: Weathering the Storm in Ersama | Weathering the Storm in Ersama (Harsh Mander) | 6 |
-| English 16: Moments: The Last Leaf | The Last Leaf (O. Henry) | 6 |
-| English 17: Moments: A House Is Not a Home | A House Is Not a Home (Zan Gaudioso) | 6 |
-| English 18: Moments: The Beggar | The Beggar (Anton Chekhov) | 6 |
+| Maths 1: Orienting Yourself: The Use of Coordinates | the Cartesian plane, coordinates of a point, distance between two points, the midpoint of a segment | 24 |
+| Maths 2: Introduction to Linear Polynomials | polynomials and their degree, values and zeroes of a polynomial, linear growth and decay, slope and y-intercept of y = ax + b | 25 |
+| Maths 3: The World of Numbers | rational and irrational numbers, decimal expansions, proving √2 is irrational, and the square root spiral | 18 |
+| Maths 4: Exploring Algebraic Identities | algebraic identities, factor theorem and factorising, simplifying rational expressions | 20 |
+| Maths 5: I'm Up and Down, and Round and Round | chords and their distance from the centre, angles in a circle and cyclic quadrilaterals | 12 |
+| Maths 6: Measuring Space: Perimeter and Area | area of a triangle by Heron's formula, circles, arcs and sectors, Brahmagupta's formula for cyclic quadrilaterals | 19 |
+| Maths 7: The Mathematics of Maybe: Introduction to Probability | chance, the probability scale and experiments, theoretical probability, outcomes and tree diagrams | 12 |
+| Maths 8: Predicting What Comes Next: Exploring Sequences and Progressions | sequences and their rules, arithmetic progressions, geometric progressions, Tower of Hanoi and fractals | 18 |
+| Maths 9: Propositions and their Converses | propositions and their converses, proving and disproving with counterexamples | 12 |
+| Maths 10: How Quantities Combine: Understanding Data | weighted means and mixtures, stacked and 100% stacked bar charts | 12 |
+| Maths 11: The World of Algorithms | algorithms, divisors and the GCD, Euclid's algorithm for the GCD | 12 |
+| Maths 12: Quadrilaterals | properties of a parallelogram, the mid-point theorem, medians, the centroid and midpoint quadrilaterals | 19 |
+| Maths 13: Two Variables, One Line | writing ax + by + c = 0, solutions of a linear equation, pairs of linear equations | 20 |
+| Maths 14: Math of Space: Surface Area and Volume | cuboids and cylinders, right circular cone, sphere and hemisphere | 18 |
+| Science 1: Exploration: Entering the World of Secondary Science | how scientists find things out | 6 |
+| Science 2: Cell: The Building Block of Life | cells, membranes and osmosis; nucleus and cell organelles; prokaryotes, eukaryotes and cell division | 19 |
+| Science 3: Tissues in Action | plant tissues; animal tissues; bones, muscles and joints | 19 |
+| Science 4: Describing Motion Around Us | distance, displacement, speed and velocity; acceleration and equations of motion; motion graphs and uniform circular motion | 20 |
+| Science 5: Exploring Mixtures and their Separation | solutions, suspensions and colloids; elements, compounds and changes; concentration and separating mixtures | 18 |
+| Science 6: How Forces Affect Motion | balanced forces and inertia; momentum, F = ma and action–reaction; resultant force and friction | 19 |
+| Science 7: Work, Energy and Simple Machines | work, kinetic and potential energy; power and commercial unit of energy; simple machines | 19 |
+| Science 8: Journey Inside the Atom | particles and models of the atom; electron shells, valency and isotopes | 13 |
+| Science 9: Atomic Foundations of Matter | laws of chemical combination and formulae; molecular mass and the mole; ions, ionic and covalent compounds, and formulae | 19 |
+| Science 10: Sound Waves: Characteristics and Applications | sound as a wave; echo, range of hearing and ultrasound | 13 |
+| Science 11: Reproduction: How Life Continues | asexual reproduction and reproduction in flowering plants; human reproduction and reproductive health | 12 |
+| Science 12: Patterns in Life: Diversity and Classification | why we classify, five kingdoms and scientific names; groups of plants and animals | 12 |
+| Science 13: Earth as a System: Energy, Matter and Life | Earth's spheres, the Sun's energy and winds; cycles of water, carbon, nitrogen and oxygen | 12 |
+| Social Science 1: Understanding Social Science | what social science studies | 6 |
+| Social Science 2: Shaping of the Earth's Surface | inside the Earth and moving plates; forces that shape landforms, and disasters | 12 |
+| Social Science 3: Atmosphere and Climate | the atmosphere, its layers, and weather versus climate; climate controls and the monsoon mechanism; seasons and distribution of rainfall | 19 |
+| Social Science 4: Early Humans and Beginning of Civilisation | early humans, from hunting to farming; the first civilisations, Harappa and beyond | 12 |
+| Social Science 5: State and Society up to 1000 CE | from janas to mahajanapadas, kings and republics; society, administration and trade up to 1000 CE | 12 |
+| Social Science 6: Democracy | features of democracy; arguments for and against democracy | 12 |
+| Social Science 7: Elections | why elections and India's electoral system; what makes elections democratic; voting systems and the Emergency | 18 |
+| Social Science 8: Building Blocks in Economics: The Problem of Choice | scarcity, choice and opportunity cost; the central problems of an economy and factors of production | 12 |
+| Social Science 9: The Price Puzzle: What Drives the Market | demand and supply; market equilibrium, shortages and surpluses | 12 |
+| Social Science 10: Oceans and Life | the ocean floor and movements of ocean water; ocean resources, the Blue Economy and maritime zones | 12 |
+| Social Science 11: Life on Earth | biomes, ecosystems and biodiversity; wildlife and its protection; forests, livelihoods and the commons | 18 |
+| Social Science 12: Resistance and Resilience (1000–1700 CE) | kingdoms and leaders who resisted, 1000–1700 CE; resilience through faith, temples and trade | 12 |
+| Social Science 13: Governance and Public Policy | government, governance and good governance; public policy and the policy cycle | 12 |
+| Social Science 14: Managing Your Personal Finances | budgeting and saving; investing, insurance and income tax | 12 |
+| Social Science 15: From Ideas to Startups | entrepreneurs, business plans and startups; revenue, costs and profit | 12 |
+| English 1: How I Taught My Grandmother to Read · Bharat Our Land | How I Taught My Grandmother to Read (Sudha Murty), Bharat Our Land (Subramania Bharati) | 12 |
+| English 2: The Pot Maker · Gifts of Grace | The Pot Maker (Temsula Ao), Gifts of Grace: Honouring Our Vocations | 12 |
+| English 3: Winds of Change · Canvas of Soil | Winds of Change, Canvas of Soil (Maya Anthony) | 12 |
+| English 4: Vitamin-M · I Cannot Remember My Mother | Vitamin-M (Asha Nehemiah), I Cannot Remember My Mother (Rabindranath Tagore) | 12 |
+| English 5: The World of Limitless Possibilities · Nine Gold Medals | The World of Limitless Possibilities (an interview with Deepa Malik), Nine Gold Medals (David Roth) | 12 |
+| English 6: Twin Melodies · A Friend Found in Music | Twin Melodies (Mitra Phukan), A Friend Found in Music | 12 |
+| English 7: Carrier of Words · Words | Carrier of Words, Words (Charles Swain) | 12 |
+| English 8: Follow That Dream · Believe in Yourself | Follow That Dream (Irene Chua), Believe in Yourself | 12 |
 | Hindi 1: दो बैलों की कथा | दो बैलों की कथा (प्रेमचंद) | 6 |
-| Hindi 2: ल्हासा की ओर | ल्हासा की ओर (राहुल सांकृत्यायन) | 6 |
-| Hindi 3: प्रेमचंद के फटे जूते | प्रेमचंद के फटे जूते (हरिशंकर परसाई) | 6 |
-| Hindi 4: मेरे बचपन के दिन | मेरे बचपन के दिन (महादेवी वर्मा) | 6 |
-| Hindi 5: साखियाँ एवं सबद | साखियाँ एवं सबद (कबीर) | 6 |
-| Hindi 6: मेघ आए | मेघ आए (सर्वेश्वर दयाल सक्सेना) | 6 |
-| Hindi 7: उपभोक्तावाद की संस्कृति | उपभोक्तावाद की संस्कृति (श्यामाचरण दुबे) | 6 |
-| Hindi 8: साँवले सपनों की याद | साँवले सपनों की याद (जाबिर हुसैन) | 6 |
-| Hindi 9: वाख | वाख (ललद्यद) | 6 |
-| Hindi 10: सवैये | सवैये (रसखान) | 6 |
-| Hindi 11: कैदी और कोकिला | कैदी और कोकिला (माखनलाल चतुर्वेदी) | 6 |
-| Hindi 12: ग्राम श्री | ग्राम श्री (सुमित्रानंदन पंत) | 6 |
-| Hindi 13: बच्चे काम पर जा रहे हैं | बच्चे काम पर जा रहे हैं (राजेश जोशी) | 6 |
-| Hindi 14: कृतिका: इस जल प्रलय में | इस जल प्रलय में (फणीश्वरनाथ रेणु) | 6 |
-| Hindi 15: कृतिका: मेरे संग की औरतें | मेरे संग की औरतें (मृदुला गर्ग) | 6 |
-| Hindi 16: कृतिका: रीढ़ की हड्डी | रीढ़ की हड्डी (जगदीश चंद्र माथुर) | 6 |
+| Hindi 2: क्या लिखूँ? | क्या लिखूँ? (पदुमलाल पुन्नालाल बख्शी) | 6 |
+| Hindi 3: संवादहीन | संवादहीन (शेखर जोशी) | 6 |
+| Hindi 4: ऐसी भी बातें होती हैं | ऐसी भी बातें होती हैं (लता मंगेशकर से साक्षात्कार, यतीन्द्र मिश्र) | 6 |
+| Hindi 5: आखिरी चट्टान तक | आखिरी चट्टान तक (मोहन राकेश) | 6 |
+| Hindi 6: रीढ़ की हड्डी | रीढ़ की हड्डी (जगदीश चंद्र माथुर) | 6 |
+| Hindi 7: मैं और मेरा देश | मैं और मेरा देश (कन्हैयालाल मिश्र 'प्रभाकर') | 6 |
+| Hindi 8: पद (रैदास) | पद (रैदास) | 6 |
+| Hindi 9: राम-लक्ष्मण-परशुराम संवाद | राम-लक्ष्मण-परशुराम संवाद | 6 |
+| Hindi 10: भारति, जय, विजयकरे! | भारति, जय, विजयकरे! (सूर्यकांत त्रिपाठी 'निराला') | 6 |
+| Hindi 11: झाँसी की रानी | झाँसी की रानी (सुभद्रा कुमारी चौहान) | 6 |
+| Hindi 12: घर की याद | घर की याद (भवानीप्रसाद मिश्र) | 6 |
 
 ## CBSE Class 10 (NCERT)
 

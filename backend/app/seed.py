@@ -101,6 +101,7 @@ SUBJECTS = [
     ("cbse10-ss", "Social Science", "en", "cbse", 10),
     ("cbse10-eng", "English", "en", "cbse", 10),
     ("cbse10-hin", "Hindi", "hi", "cbse", 10),
+    ("cbse10-hinb", "Hindi B", "hi", "cbse", 10),  # Sparsh 2 + Sanchayan 2; each student sees A or B (settings.hindi_course)
     # CBSE Class 11 (NCERT rationalised books): science stream and English.
     ("cbse11-math", "Mathematics", "en", "cbse", 11),
     ("cbse11-phy", "Physics", "en", "cbse", 11),
@@ -114,6 +115,18 @@ SUBJECTS = [
     ("cbse12-bio", "Biology", "en", "cbse", 12),
     ("cbse12-eng", "English", "en", "cbse", 12),
 ]
+
+# Subjects whose textbook was replaced. On an existing database the old subject keeps its pupils' history under a
+# new code and the "cbse-old" board, which no student is in, so only the new book shows. A subject is retired only
+# while a chapter that only the old book has is still there, so a database that already has the new book is left alone.
+# Code -> (code for the old book, name for the old book, number and title of a chapter found only in the old book).
+RETIRED_SUBJECTS = {
+    "cbse9-math": ("cbse9old-math", "Mathematics (pre-2026 book)", 1, "Number Systems"),
+    "cbse9-sci": ("cbse9old-sci", "Science (pre-2026 book)", 1, "Matter in Our Surroundings"),
+    "cbse9-ss": ("cbse9old-ss", "Social Science (pre-2026 books)", 1, "The French Revolution"),
+    "cbse9-hin": ("cbse9old-hin", "Hindi A (pre-2026 books)", 2, "ल्हासा की ओर"),
+    "cbse9-eng": ("cbse9old-eng", "English (pre-2026 books)", 1, "The Fun They Had · The Road Not Taken"),
+}
 
 # concept code -> (title, order, prerequisites)
 CONCEPTS = {

@@ -1,0 +1,378 @@
+# CBSE Class 9 Mathematics (NCERT Ganita Manjari, 2026-27), chapter 2. Format: content/README.md.
+subject: cbse9-math
+chapter: 2
+title: Introduction to Linear Polynomials
+tips:
+  exponent_multiply_instead_add: 'When you multiply powers of the same base, add the exponents: a^m × a^n = a^(m + n).'
+  degree_count_terms: The degree is the highest power of the variable, not the number of terms.
+  zero_sign_flip: 'A zero makes the polynomial equal 0. For x − a the zero is +a: put it back in to check.'
+  slope_rise_run_swap: 'Slope is how much y changes for each 1 step in x: change in y ÷ change in x, not the other way round.'
+  intercept_is_coefficient: In y = ax + b the number on its own, b, is where the line crosses the y-axis; a is the slope.
+  growth_vs_decay: If the amount goes up by the same step each time, a is positive (growth); if it goes down, a is negative (decay).
+concepts:
+- code: cbse9gm.poly.degree
+  title: Polynomials and their degree
+  notes: |
+    A polynomial in one variable x is a sum of terms a·xⁿ with whole-number powers. Its degree is the highest
+    power with a non-zero coefficient. Linear (degree 1), quadratic (2) and cubic (3) polynomials;
+    monomials, binomials and trinomials by number of terms. A non-zero constant has degree 0. Expressions
+    with √x or 1/x are not polynomials.
+  explanations:
+    text: 'A polynomial is made of terms like 3x², −5x and 7, where x is only raised to whole-number powers. Its degree is the highest power of x: 4x³ − x + 2 has degree 3, so it is a cubic. 1/x and √x are not allowed, so x + 1/x is not a polynomial.'
+    visual: 'Line the terms up from the highest power to the lowest: 4x³ + 0x² − x + 2. The first term with a non-zero number in front tells you the degree. Count the terms to name it: one term is a monomial, two a binomial, three a trinomial.'
+    step_by_step: 'Step 1: Check every power of x is a whole number (0, 1, 2, …). If not, it''s not a polynomial. Step 2: Find the highest power with a non-zero coefficient: that''s the degree. Step 3: Degree 1 is linear, 2 quadratic, 3 cubic. Step 4: Count the terms to say monomial, binomial or trinomial.'
+    real_world: 'The area of a square of side x is x², a quadratic. The volume of a cube of side x is x³, a cubic. The perimeter of the square, 4x, is linear: double the side and it only doubles.'
+  picture:
+    kind: flow
+    steps:
+    - 'Highest power first: 4x³ + 0x² − x + 2'
+    - 'First term that isn''t zero: 4x³'
+    - Its power is 3, so the degree is 3 (cubic)
+    - 'Count the non-zero terms: 3, so it is a trinomial'
+    alt: 'Steps finding the degree of 4x³ − x + 2: write powers from highest, the first non-zero term is 4x³, so the degree is 3.'
+  items:
+  - prompt: What is the degree of 5x³ − 2x² + x − 7?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Look for the highest power of x.
+    - x³ is the highest.
+    solution: 'Step 1: The powers are 3, 2, 1 and 0. Step 2: The highest is 3, so the degree is 3.'
+    mistakes:
+      '4': degree_count_terms
+  - prompt: Which of these is a polynomial?
+    options:
+    - x² − 3x + 2
+    - x + 1/x
+    - √x + 4
+    - x^(−2) + 1
+    answer: x² − 3x + 2
+    difficulty: 1
+    hints:
+    - Every power of x must be a whole number.
+    - 1/x = x^(−1) and √x = x^(1/2).
+    solution: 'Step 1: 1/x, √x and x^(−2) have powers −1, 1/2 and −2. Step 2: Only x² − 3x + 2 has whole-number powers.'
+  - prompt: What kind of polynomial is 3y² + 5y?
+    options:
+    - Quadratic binomial
+    - Linear binomial
+    - Cubic trinomial
+    - Quadratic trinomial
+    answer: Quadratic binomial
+    difficulty: 1
+    hints:
+    - Highest power gives the degree.
+    - Count the terms.
+    solution: 'Step 1: The highest power is 2, so it is quadratic. Step 2: It has 2 terms, so it is a binomial.'
+  - prompt: What is the coefficient of x² in 2 − x² + 4x³?
+    answer: '-1'
+    check: '-1'
+    difficulty: 2
+    hints:
+    - The coefficient is the number multiplied by x².
+    - −x² means −1 × x².
+    solution: 'Step 1: The x² term is −x². Step 2: −x² = −1 × x², so the coefficient is −1.'
+    mistakes:
+      '1': zero_sign_flip
+  - prompt: What is the degree of the polynomial 9 (a constant)?
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - 9 = 9x⁰.
+    - Any number to the power 0 is 1.
+    solution: 'Step 1: 9 = 9 × x⁰. Step 2: The power is 0, so the degree is 0.'
+  - prompt: What is the degree of (x² + 1)(x³ − 2)?
+    answer: '5'
+    check: 2 + 3
+    difficulty: 3
+    hints:
+    - Multiply the highest terms only.
+    - x² × x³ = ?
+    solution: 'Step 1: The highest-power term is x² × x³ = x⁵. Step 2: So the degree is 5.'
+    mistakes:
+      '6': exponent_multiply_instead_add
+- code: cbse9gm.poly.zeroes
+  title: Values and zeroes of a polynomial
+  after:
+  - cbse9gm.poly.degree
+  notes: |
+    p(a) is the value of p(x) at x = a. A zero of p(x) is a number c with p(c) = 0. A linear polynomial
+    ax + b has exactly one zero, −b/a. A non-zero constant polynomial has no zero. A polynomial can have
+    more than one zero, e.g. x² − 1 has zeroes 1 and −1.
+  explanations:
+    text: 'To find p(2), put 2 in place of x everywhere and work it out. A zero of the polynomial is a value of x that makes the whole thing 0. For 2x − 6, set 2x − 6 = 0: x = 3, so 3 is its zero.'
+    visual: Think of the polynomial as a machine. Feed in a number for x and a value comes out. A zero is a number that makes the machine print 0. For x² − 4, feeding in 2 or −2 both print 0.
+    step_by_step: 'Step 1: To find p(a), replace every x with (a), in brackets. Step 2: Do powers, then multiplication, then addition and subtraction. Step 3: To find the zero of ax + b, solve ax + b = 0. Step 4: x = −b/a. Step 5: Check by putting it back in: you should get 0.'
+    real_world: 'A shop''s profit is p(x) = 20x − 500 rupees for x items sold. The zero, x = 25, is the break-even point: sell 25 items and you''ve earned back the ₹500 you spent.'
+  picture:
+    kind: number_line
+    from: -4
+    to: 4
+    step: 1
+    points:
+    - at: -2
+      label: p(−2) = 0
+    - at: 0
+      label: p(0) = −4
+    - at: 2
+      label: p(2) = 0
+    caption: 'For p(x) = x² − 4, the zeroes are −2 and 2: they make the value 0.'
+    alt: A number line from −4 to 4. At −2 and at 2, p(x) = x² − 4 equals 0, so they are the zeroes. At 0 the value is −4.
+  items:
+  - prompt: If p(x) = x² − 3x + 2, find p(4).
+    answer: '6'
+    check: 4^2 - 3*4 + 2
+    difficulty: 1
+    hints:
+    - Put 4 in place of x.
+    - 16 − 12 + 2.
+    solution: 'Step 1: p(4) = 4² − 3 × 4 + 2. Step 2: = 16 − 12 + 2 = 6.'
+  - prompt: Find the zero of p(x) = 2x − 6.
+    answer: '3'
+    check: 6/2
+    difficulty: 1
+    hints:
+    - Set 2x − 6 = 0.
+    - 2x = 6.
+    solution: 'Step 1: 2x − 6 = 0. Step 2: 2x = 6, so x = 3. Step 3: Check: p(3) = 6 − 6 = 0.'
+    mistakes:
+      '-3': zero_sign_flip
+  - prompt: Find the zero of p(x) = x + 5.
+    answer: '-5'
+    check: '-5'
+    difficulty: 1
+    hints:
+    - Set x + 5 = 0.
+    - Take 5 to the other side.
+    solution: 'Step 1: x + 5 = 0. Step 2: x = −5. Step 3: Check: −5 + 5 = 0.'
+    mistakes:
+      '5': zero_sign_flip
+  - prompt: If p(x) = 3x³ − x + 1, find p(−1).
+    answer: '-1'
+    check: 3*(-1)^3 - (-1) + 1
+    difficulty: 2
+    hints:
+    - (−1)³ = −1.
+    - 3 × (−1) − (−1) + 1.
+    solution: 'Step 1: p(−1) = 3(−1)³ − (−1) + 1. Step 2: = −3 + 1 + 1 = −1.'
+  - prompt: Find the zero of p(x) = 3x + 2. Type a fraction like −2/3.
+    answer: -2/3
+    check: -2/3
+    difficulty: 2
+    hints:
+    - Set 3x + 2 = 0.
+    - 3x = −2.
+    solution: 'Step 1: 3x + 2 = 0. Step 2: 3x = −2. Step 3: x = −2/3.'
+    mistakes:
+      2/3: zero_sign_flip
+  - prompt: Which numbers are zeroes of x² − 9?
+    options:
+    - 3 and −3
+    - 9 and −9
+    - Only 3
+    - 0 and 9
+    answer: 3 and −3
+    difficulty: 2
+    hints:
+    - Set x² − 9 = 0, so x² = 9.
+    - Both 3² and (−3)² are 9.
+    solution: 'Step 1: x² − 9 = 0 means x² = 9. Step 2: x = 3 or x = −3.'
+  - prompt: If p(x) = kx − 4 and p(2) = 0, what is k?
+    answer: '2'
+    check: 4/2
+    difficulty: 3
+    hints:
+    - Put x = 2 and set the result to 0.
+    - 2k − 4 = 0.
+    solution: 'Step 1: p(2) = 2k − 4 = 0. Step 2: 2k = 4, so k = 2.'
+- code: cbse9gm.linear.growth
+  title: Linear growth and decay
+  after:
+  - cbse9gm.poly.degree
+  notes: |
+    A linear polynomial ax + b (a ≠ 0) changes by the same amount a every time x goes up by 1. If a > 0
+    the quantity grows steadily (linear growth); if a < 0 it shrinks steadily (linear decay). Examples: a taxi
+    fare of ₹50 plus ₹12 per km is 12x + 50; a 20 L tank leaking 2 L per hour holds 20 − 2x litres. Tables of
+    values with equal differences show a linear relationship.
+  explanations:
+    text: 'Something grows linearly when it goes up by the same amount every step: ₹50 to start and ₹12 for every km gives 50, 62, 74, 86… That rule is y = 12x + 50. If it goes down by the same amount each step, like water leaking 2 L every hour, it is linear decay: y = 20 − 2x.'
+    visual: 'Make a table: x = 0, 1, 2, 3 and y = 50, 62, 74, 86. Under the y-row write the gaps: +12, +12, +12. Equal gaps are the sign of a linear rule. Plot the points: they lie on one straight line.'
+    step_by_step: 'Step 1: Find the starting value (when x = 0): that is b. Step 2: Find the change for each step of 1: that is a. Step 3: Write y = ax + b. Step 4: Check with another row of the table.'
+    real_world: 'A phone plan costs ₹199 plus ₹2 per extra GB. 0 GB extra: ₹199; 5 GB: ₹209. The bill grows linearly, ₹2 for every GB.'
+  picture:
+    kind: bars
+    unit: ₹
+    bars:
+    - label: 0 km
+      value: 50
+    - label: 1 km
+      value: 62
+    - label: 2 km
+      value: 74
+    - label: 3 km
+      value: 86
+    - label: 4 km
+      value: 98
+    caption: 'Each bar is ₹12 taller than the last: fare = 12x + 50.'
+    alt: Bars for a taxi fare at 0 to 4 km rising by the same 12 rupees each step, from 50 to 98.
+  items:
+  - prompt: A taxi charges ₹40 plus ₹15 per km. What is the fare for 6 km, in ₹?
+    answer: '130'
+    check: 40 + 15*6
+    difficulty: 1
+    hints:
+    - Fare = 15x + 40.
+    - 15 × 6 = 90.
+    solution: 'Step 1: 15 × 6 = 90. Step 2: 90 + 40 = 130.'
+  - prompt: Which table shows a linear relationship?
+    options:
+    - 'x: 0, 1, 2, 3 → y: 5, 8, 11, 14'
+    - 'x: 0, 1, 2, 3 → y: 1, 2, 4, 8'
+    - 'x: 0, 1, 2, 3 → y: 0, 1, 4, 9'
+    - 'x: 0, 1, 2, 3 → y: 5, 6, 8, 11'
+    answer: 'x: 0, 1, 2, 3 → y: 5, 8, 11, 14'
+    difficulty: 1
+    hints:
+    - Look at the gaps between the y-values.
+    - Linear means equal gaps.
+    solution: 'Step 1: 5, 8, 11, 14 goes up by 3 every time. Step 2: The others have gaps that change, so they are not linear.'
+  - prompt: A 30 L tank leaks 1.5 L per hour. Which rule gives the water left after x hours?
+    options:
+    - 30 − 1.5x
+    - 1.5x + 30
+    - 30x − 1.5
+    - 1.5 − 30x
+    answer: 30 − 1.5x
+    difficulty: 2
+    hints:
+    - It starts at 30.
+    - It goes down by 1.5 each hour.
+    solution: 'Step 1: Start: 30 L. Step 2: Each hour it loses 1.5 L, so subtract 1.5x. Rule: 30 − 1.5x.'
+    mistakes:
+      1.5x + 30: growth_vs_decay
+  - prompt: In that tank (30 − 1.5x litres after x hours), after how many hours is it empty?
+    answer: '20'
+    check: 30/1.5
+    difficulty: 2
+    hints:
+    - Empty means 30 − 1.5x = 0.
+    - 30 ÷ 1.5.
+    solution: 'Step 1: 30 − 1.5x = 0. Step 2: 1.5x = 30, so x = 20 hours.'
+  - prompt: A plant is 4 cm tall and grows 0.5 cm a day. On which day is it 10 cm tall?
+    answer: '12'
+    check: (10 - 4)/0.5
+    difficulty: 2
+    hints:
+    - Height = 0.5x + 4.
+    - It must grow 6 cm.
+    solution: 'Step 1: 0.5x + 4 = 10. Step 2: 0.5x = 6, so x = 12.'
+  - prompt: A linear rule gives y = 7 when x = 1 and y = 19 when x = 4. What is y when x = 0?
+    answer: '3'
+    check: 7 - (19 - 7)/(4 - 1)
+    difficulty: 3
+    hints:
+    - From x = 1 to x = 4, y goes up 12 in 3 steps.
+    - So each step is 4. Go back one step from x = 1.
+    solution: 'Step 1: Change per step = (19 − 7) ÷ 3 = 4. Step 2: At x = 0: 7 − 4 = 3. (Rule: y = 4x + 3.)'
+- code: cbse9gm.linear.slope
+  title: Slope and y-intercept of y = ax + b
+  after:
+  - cbse9gm.linear.growth
+  notes: |
+    The graph of y = ax + b is a straight line. a is the slope: the change in y for each increase of 1 in x
+    (rise over run between any two points). b is the y-intercept: the value of y where the line crosses the
+    y-axis (x = 0). A positive slope rises left to right, a negative slope falls, slope 0 is horizontal. Lines
+    with the same slope are parallel. The zero of ax + b is x = −b/a, where the line crosses the x-axis.
+  explanations:
+    text: 'In y = ax + b, a tells you how steep the line is: every step of 1 to the right, the line goes up a (or down if a is negative). b tells you where the line starts on the y-axis. So y = 2x + 1 starts at 1 and climbs 2 for every 1 across.'
+    visual: Draw y = 2x + 1. Start at (0, 1) on the y-axis. Step 1 right and 2 up to (1, 3), again to (2, 5). Join them. The staircase of '1 across, 2 up' is the slope; the starting point (0, 1) is the intercept.
+    step_by_step: 'Step 1: Pick two points on the line. Step 2: Rise = difference in y; run = difference in x. Step 3: Slope = rise ÷ run. Step 4: The y-intercept is the y-value at x = 0.'
+    real_world: 'A road sign saying ''1 in 10'' means the road rises 1 m for every 10 m across: a slope of 1/10. A steeper hill has a bigger slope.'
+  picture:
+    kind: geometry
+    axes: true
+    range:
+    - -1
+    - 6
+    points:
+      P:
+      - 0
+      - 1
+      Q:
+      - 2
+      - 5
+      _R:
+      - 2
+      - 1
+    segments:
+    - - P
+      - _R
+      - run 2
+    - - _R
+      - Q
+      - rise 4
+    - - P
+      - Q
+    caption: Slope = rise ÷ run = 4 ÷ 2 = 2; the line crosses the y-axis at 1.
+    alt: The line y = 2x + 1 through (0, 1) and (2, 5), with a step of 2 across and 4 up showing slope 2.
+  items:
+  - prompt: What is the slope of y = 3x − 5?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - In y = ax + b, the slope is a.
+    - The number with x.
+    solution: 'Step 1: Compare with y = ax + b. Step 2: a = 3, so the slope is 3.'
+    mistakes:
+      '-5': intercept_is_coefficient
+  - prompt: Where does y = 3x − 5 cross the y-axis? Give the y-value.
+    answer: '-5'
+    check: '-5'
+    difficulty: 1
+    hints:
+    - Put x = 0.
+    - 3 × 0 − 5.
+    solution: 'Step 1: At the y-axis, x = 0. Step 2: y = −5.'
+    mistakes:
+      '3': intercept_is_coefficient
+  - prompt: Find the slope of the line through (1, 2) and (3, 8).
+    answer: '3'
+    check: (8 - 2)/(3 - 1)
+    difficulty: 2
+    hints:
+    - Rise = 8 − 2.
+    - Run = 3 − 1.
+    solution: 'Step 1: Rise = 6, run = 2. Step 2: Slope = 6 ÷ 2 = 3.'
+    mistakes:
+      1/3: slope_rise_run_swap
+  - prompt: Which line is parallel to y = −2x + 4?
+    options:
+    - y = −2x − 1
+    - y = 2x + 4
+    - y = 4x − 2
+    - y = −x + 4
+    answer: y = −2x − 1
+    difficulty: 2
+    hints:
+    - Parallel lines have the same slope.
+    - Look for −2 in front of x.
+    solution: 'Step 1: The slope is −2. Step 2: y = −2x − 1 also has slope −2, so it is parallel.'
+  - prompt: Where does y = 2x − 6 cross the x-axis? Give the x-value.
+    answer: '3'
+    check: 6/2
+    difficulty: 2
+    hints:
+    - On the x-axis, y = 0.
+    - 2x − 6 = 0.
+    solution: 'Step 1: 2x − 6 = 0. Step 2: x = 3. This is the zero of the polynomial 2x − 6.'
+  - prompt: A line has slope −1/2 and passes through (0, 4). What is y when x = 6?
+    answer: '1'
+    check: -1/2*6 + 4
+    difficulty: 3
+    hints:
+    - The line is y = −x/2 + 4.
+    - Six steps right, each going down 1/2.
+    solution: 'Step 1: y = −(1/2)x + 4. Step 2: y = −3 + 4 = 1.'
