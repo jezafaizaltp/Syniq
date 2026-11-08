@@ -31,6 +31,71 @@ concepts:
       label: '3.7'
     caption: Between 3 and 4 there are ten tenths; 3.7 is the seventh.
     alt: A number line from 3 to 4 marked in tenths, with a point at 3.7, seven tenths past 3.
+  activity:
+    type: formula
+    prompt: Build a decimal from ones, tenths and hundredths.
+    inputs:
+    - name: o
+      label: Ones
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: t
+      label: Tenths
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: h
+      label: Hundredths
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: o+t/10+h/100
+      places: 2
+    goals:
+    - prompt: Make 4.37.
+      want:
+        val: 4.37
+      mistakes:
+      - when:
+          o: 4
+          t: 7
+          h: 3
+        say: That's 4.73. The first digit after the point is tenths, the next is hundredths.
+      - when:
+          o: 3
+          t: 7
+          h: 4
+        say: '4 is the whole number here: it goes in the ones.'
+    - prompt: Write 3 cm 7 mm in cm.
+      want:
+        val: 3.7
+      mistakes:
+      - when:
+          o: 3
+          t: 0
+          h: 7
+        say: 3.07 cm is 3 cm and less than 1 mm. Each mm is a tenth of a cm, so 7 mm is 7 tenths.
+    - prompt: Make half a unit and 5 hundredths more.
+      want:
+        val: 0.55
+      mistakes:
+      - when:
+          o: 0
+          t: 5
+          h: 0
+        say: That's 0.5, the half. Now add 5 hundredths.
+      - when:
+          o: 0
+          t: 0
+          h: 5
+        say: That's only 5 hundredths. Half a unit is 5 tenths.
   items:
   - prompt: Write 7/10 as a decimal.
     answer: '0.7'
@@ -110,6 +175,56 @@ concepts:
     - 'Add: 12.75 + 3.60'
     - = 16.35
     alt: 'Adding 12.75 and 3.6: write 3.6 as 3.60, line up the points and add to get 16.35.'
+  activity:
+    type: formula
+    prompt: You have ₹10. You buy a pencil for ₹2.75 and a pen for ₹x.
+    inputs:
+    - name: x
+      label: Pen price
+      min: 0
+      max: 7
+      step: 0.05
+      start: 1
+      unit: ₹
+    outputs:
+    - name: spent
+      label: Spent
+      expr: x+2.75
+      unit: ₹
+      places: 2
+    - name: change
+      label: Change
+      expr: 10-x-2.75
+      unit: ₹
+      places: 2
+    goals:
+    - prompt: You spend exactly ₹7. Find the pen's price.
+      want:
+        spent: 7
+      mistakes:
+      - when:
+          x: 4.75
+        say: '7 − 2 = 5, then 5 − 0.25? Line up the points: 7.00 − 2.75 = 4.25.'
+      - when:
+          x: 5.25
+        say: 'That adds the 0.25 back. 7.00 − 2.75: take the hundredths away too.'
+    - prompt: Your change is ₹3.50. Find the pen's price.
+      want:
+        change: 3.5
+      mistakes:
+      - when:
+          x: 6.5
+        say: 10 − 3.50 = 6.50 is everything spent. The pencil took ₹2.75 of that.
+      - when:
+          x: 4.25
+        say: 'Close. 6.50 − 2.75: line up the points and borrow carefully.'
+    - prompt: Your change is ₹5.05. Find the pen's price.
+      want:
+        change: 5.05
+      mistakes:
+      - when:
+          x: 2.25
+        say: 'Write 5.05 in full: 5 ones, 0 tenths, 5 hundredths. 7.25 − 5.05 = 2.20.'
   items:
   - prompt: Find 12.75 + 3.6.
     answer: '16.35'

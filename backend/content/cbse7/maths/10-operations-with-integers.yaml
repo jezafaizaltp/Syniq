@@ -33,6 +33,43 @@ concepts:
       label: −8
     caption: '5 + (−8): start at 5 and move 8 steps left to −3.'
     alt: A number line from −5 to 6 with a jump of 8 steps left from 5, landing on −3.
+  activity:
+    type: number_line
+    min: -10
+    max: 10
+    step: 1
+    start: 0
+    prompt: Use the number line. Mark each answer.
+    goals:
+    - prompt: 4 − (−3)
+      target: 7
+      mistakes:
+      - when:
+          v: 1
+        say: 4 − 3 = 1 ignores the minus sign. Taking away a debt of 3 leaves you 3 better off.
+      - when:
+          v: -7
+        say: Subtracting a negative moves you right, not left.
+    - prompt: −5 + 8
+      target: 3
+      mistakes:
+      - when:
+          v:
+          - -10
+          - -6
+        say: Adding 8 moves right, towards the positives.
+      - when:
+          v: -3
+        say: 'Start at −5, go 8 steps right: 5 steps get you to 0, then 3 more.'
+    - prompt: −2 − 6
+      target: -8
+      mistakes:
+      - when:
+          v: 4
+        say: 6 − 2 = 4 swaps the order. Start at −2 and move 6 left.
+      - when:
+          v: 8
+        say: 'Both moves take you left: you end up below zero.'
   items:
   - prompt: Find 5 + (−8).
     answer: '-3'
@@ -115,6 +152,46 @@ concepts:
       - (−3) × (+4) = −12
       - (−20) ÷ 4 = −5
     alt: 'Sign rules: same signs give a positive answer, different signs give a negative answer, for both multiplication and division.'
+  activity:
+    type: sort
+    prompt: Is the answer positive, negative or zero?
+    bins:
+    - Positive
+    - Negative
+    - Zero
+    items:
+    - label: (−3) × (−4)
+      bin: Positive
+      clue: Same signs or different?
+      why: 'Same signs: +12.'
+    - label: (−20) ÷ (−5)
+      bin: Positive
+      clue: Two minus signs.
+      why: '+4.'
+    - label: (−2) × (−2) × (−2) × (−2)
+      bin: Positive
+      clue: Pair the minus signs up.
+      why: 'Four negatives make two pairs: +16.'
+    - label: (−3) × 4
+      bin: Negative
+      clue: Different signs.
+      why: −12.
+    - label: 12 ÷ (−3)
+      bin: Negative
+      clue: One minus sign.
+      why: −4.
+    - label: (−1) × (−1) × (−1)
+      bin: Negative
+      clue: 'Three minus signs: one is left unpaired.'
+      why: −1.
+    - label: 0 × (−7)
+      bin: Zero
+      clue: No groups of anything at all.
+      why: '0.'
+    - label: 0 ÷ (−5)
+      bin: Zero
+      clue: Sharing nothing.
+      why: '0.'
   items:
   - prompt: Find (−3) × (−4).
     answer: '12'

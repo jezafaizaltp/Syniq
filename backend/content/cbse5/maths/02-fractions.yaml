@@ -36,6 +36,55 @@ concepts:
     - at: 1
       label: '1'
     alt: A number line from 0 to 1 cut into quarters shows 1/4, 1/2 which equals 2/4, and 3/4.
+  activity:
+    type: formula
+    prompt: A roti is cut into d equal pieces. You take n pieces.
+    inputs:
+    - name: n
+      label: Pieces taken n
+      min: 0
+      max: 12
+      step: 1
+      start: 1
+    - name: d
+      label: Pieces in all d
+      min: 1
+      max: 12
+      step: 1
+      start: 2
+    outputs:
+    - name: val
+      label: Part of the roti (n ÷ d)
+      expr: n/d
+      places: 2
+    goals:
+    - prompt: Cut it into 8 pieces. Take half.
+      want:
+        d: 8
+        val: 0.5
+      mistakes:
+      - when:
+          d: 8
+          n: 2
+        say: 2 out of 8 is a quarter. Half of 8 pieces is 4 pieces.
+    - prompt: Cut it into 6 pieces. Take the same amount as 2/3.
+      want:
+        d: 6
+        val: 0.6666666666666666
+      mistakes:
+      - when:
+          d: 6
+          n: 2
+        say: 2 of 6 pieces is only a third. Each third is 2 pieces, so two thirds is 4.
+    - prompt: Cut it into 5 pieces. Take the whole roti.
+      want:
+        d: 5
+        val: 1
+      mistakes:
+      - when:
+          d: 5
+          n: 1
+        say: 1 piece is one fifth. The whole roti is all 5 pieces.
   items:
   - prompt: A roti is cut into 4 equal pieces and Meena eats 3. What fraction did she eat?
     options:
@@ -128,6 +177,58 @@ concepts:
       value: 5
     alt: Bars of 2 sevenths and 3 sevenths together make 5 sevenths.
     unit: sevenths
+  activity:
+    type: formula
+    prompt: Write the answer as a fraction n/d.
+    inputs:
+    - name: n
+      label: Top n
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+    - name: d
+      label: Bottom d
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+    outputs:
+    - name: val
+      label: n ÷ d
+      expr: n/d
+      places: 2
+    goals:
+    - prompt: 2/7 + 3/7
+      want:
+        n: 5
+        d: 7
+      mistakes:
+      - when:
+          n: 5
+          d: 14
+        say: 'The pieces are still sevenths. Count the pieces: 2 + 3. Don''t add the bottoms.'
+    - prompt: 5/8 − 2/8
+      want:
+        n: 3
+        d: 8
+      mistakes:
+      - when:
+          n: 7
+          d: 8
+        say: 'That adds. Take away: 5 eighths − 2 eighths.'
+    - prompt: 4/9 + 5/9
+      want:
+        val: 1
+      mistakes:
+      - when:
+          n: 9
+          d: 18
+        say: Ninths stay ninths. 9 ninths make one whole.
+      - when:
+          n: 1
+          d: 9
+        say: 'Count again: 4 + 5 pieces.'
   items:
   - prompt: 2/7 + 3/7 = ?
     options:

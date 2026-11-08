@@ -25,6 +25,73 @@ concepts:
     - 'Circuit breaks: current stops'
     - Wiring is safe from fire
     alt: 'How a fuse protects a house: too much current melts the fuse wire, which breaks the circuit before the wiring overheats.'
+  activity:
+    type: formula
+    prompt: Heat made each second in a wire = current × current × resistance.
+    inputs:
+    - name: i
+      label: Current
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: A
+    - name: r
+      label: Resistance
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: Ω
+    outputs:
+    - name: heat
+      label: Heat each second
+      expr: i*i*r
+      unit: J
+    goals:
+    - prompt: Make 400 J each second with a 25 Ω wire.
+      want:
+        r: 25
+        heat: 400
+      mistakes:
+      - when:
+          r: 25
+          i:
+          - 5
+          - 10
+        say: 'Too hot. Heat grows with the current squared: 5 × 5 × 25 is already 625.'
+      - when:
+          r: 25
+          i:
+          - 1
+          - 3
+        say: 'Not enough. Try a bigger current: it counts twice.'
+    - prompt: Make 1000 J each second with a 10 A current.
+      want:
+        i: 10
+        heat: 1000
+      mistakes:
+      - when:
+          i: 10
+          r: 100
+        say: 100 × 10 = 1000 forgets the square. It's 10 × 10 × R.
+    - prompt: Make 360 J each second with a 10 Ω wire.
+      want:
+        r: 10
+        heat: 360
+      mistakes:
+      - when:
+          r: 10
+          i:
+          - 7
+          - 10
+        say: 'Too much: 7 × 7 × 10 = 490 already.'
+      - when:
+          r: 10
+          i:
+          - 1
+          - 5
+        say: 'Not enough: 5 × 5 × 10 = 250.'
   items:
   - prompt: Which appliance works mainly on the heating effect of current?
     options:
@@ -130,6 +197,59 @@ concepts:
       - Fridge magnets, compasses
     alt: An electromagnet works only while current flows and can be made stronger or switched off; a permanent magnet is always on.
     caption: An electromagnet is a magnet with a switch.
+  activity:
+    type: formula
+    prompt: 'An electromagnet: wire coiled round an iron nail. Strength grows with turns and current.'
+    inputs:
+    - name: n
+      label: Turns of wire
+      min: 10
+      max: 100
+      step: 10
+      start: 10
+    - name: i
+      label: Current
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+      unit: A
+    outputs:
+    - name: pins
+      label: Pins it can lift
+      expr: n*i/10
+    goals:
+    - prompt: Lift 20 pins with a 2 A current.
+      want:
+        i: 2
+        pins: 20
+      mistakes:
+      - when:
+          i: 2
+          n:
+          - 10
+          - 90
+        say: Not enough turns. With 2 A, each 10 turns lifts 2 pins.
+    - prompt: Lift 15 pins with 50 turns.
+      want:
+        n: 50
+        pins: 15
+      mistakes:
+      - when:
+          n: 50
+          i:
+          - 1
+          - 2
+        say: Too weak. With the turns fixed, more current makes it stronger.
+    - prompt: Lift 20 pins again, but with only 50 turns.
+      want:
+        n: 50
+        pins: 20
+      mistakes:
+      - when:
+          n: 50
+          i: 2
+        say: Halving the turns halves the strength. Double the current to make up for it.
   items:
   - prompt: What happens to a compass needle placed near a wire carrying current?
     options:

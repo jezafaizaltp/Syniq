@@ -47,6 +47,51 @@ concepts:
       - '5'
     caption: 'A 3 by 3 square is 1 + 3 + 5 = 9: each L-shaped border adds the next odd number.'
     alt: A 3 by 3 grid where the corner cell is marked 1, the next L-shaped border 3 and the outer border 5, showing 1 + 3 + 5 = 9.
+  activity:
+    type: formula
+    prompt: Arrange n × n dots into a square. Set n, the side.
+    inputs:
+    - name: n
+      label: Dots along one side (n)
+      min: 1
+      max: 80
+      step: 1
+      start: 1
+    outputs:
+    - name: sq
+      label: Dots in the square (n × n)
+      expr: n*n
+    goals:
+    - prompt: Make a square of 144 dots.
+      want:
+        sq: 144
+      mistakes:
+      - when:
+          n: 72
+        say: 72 is half of 144. The square root is the number that times itself makes 144. Try 12 × 12.
+      - when:
+          n:
+          - 13
+          - 71
+        say: 'Too wide: that many rows of that many dots is more than 144. Try smaller sides.'
+    - prompt: Make a square of 625 dots.
+      want:
+        sq: 625
+      mistakes:
+      - when:
+          n:
+          - 20
+          - 24
+        say: Close. 20 × 20 = 400, still short. A number ending in 5 squares to a number ending in 25.
+    - prompt: Make a square of 2025 dots.
+      want:
+        sq: 2025
+      mistakes:
+      - when:
+          n:
+          - 40
+          - 44
+        say: 40 × 40 = 1600, not enough yet. 2025 ends in 25, so try a side ending in 5.
   items:
   - prompt: Find 14².
     answer: '196'
@@ -142,6 +187,58 @@ concepts:
     unit: unit cubes
     caption: 'Cubes grow fast: 1, 8, 27, 64, 125.'
     alt: A bar chart of the first five cube numbers 1, 8, 27, 64 and 125, each bar much taller than the last.
+  activity:
+    type: formula
+    prompt: Build an n × n × n cube from small cubes. Set n.
+    inputs:
+    - name: n
+      label: Cubes along one edge (n)
+      min: 1
+      max: 40
+      step: 1
+      start: 1
+    outputs:
+    - name: face
+      label: Cubes on one face (n × n)
+      expr: n*n
+    - name: cube
+      label: Cubes in all (n × n × n)
+      expr: n*n*n
+    goals:
+    - prompt: Build a cube from 64 small cubes.
+      want:
+        cube: 64
+      mistakes:
+      - when:
+          n: 8
+        say: '8 × 8 = 64 is one flat face, a square. A cube has three equal edges: 4 × 4 × 4.'
+      - when:
+          n: 16
+        say: '16 is 64 ÷ 4. You need one number used three times: n × n × n = 64.'
+    - prompt: Build a cube from 1000 small cubes.
+      want:
+        cube: 1000
+      mistakes:
+      - when:
+          n:
+          - 11
+          - 40
+        say: Too big. 10 × 10 × 10 is already 1000.
+      - when:
+          face: 100
+        say: 'Close: that''s 100, one face. Stack n of those faces, so n × 100 = 1000.'
+    - prompt: Build a cube from 1728 small cubes.
+      want:
+        cube: 1728
+      mistakes:
+      - when:
+          cube:
+          - 1000
+          - 1727
+        say: Close, but short. 1728 ends in 8, and only a number ending in 2 gives a cube ending in 8.
+      - when:
+          n: 13
+        say: '13 × 13 × 13 = 2197: a bit too many.'
   items:
   - prompt: Find 6³.
     answer: '216'

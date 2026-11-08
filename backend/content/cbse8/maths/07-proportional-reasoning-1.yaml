@@ -28,6 +28,71 @@ concepts:
     unit: counters
     caption: '6 : 9 simplifies to 2 : 3 by dividing both by 3.'
     alt: Two bars showing 6 red and 9 blue counters, a ratio of 6 to 9 that simplifies to 2 to 3.
+  activity:
+    type: formula
+    prompt: 'Write each ratio a : b in its simplest form.'
+    inputs:
+    - name: a
+      label: a
+      min: 1
+      max: 60
+      step: 1
+      start: 1
+    - name: b
+      label: b
+      min: 1
+      max: 60
+      step: 1
+      start: 1
+    outputs:
+    - name: q
+      label: a ÷ b
+      expr: a/b
+      places: 3
+    goals:
+    - prompt: 'Simplify 12 : 18.'
+      want:
+        a: 2
+        b: 3
+      mistakes:
+      - when:
+          a: 12
+          b: 18
+        say: Same ratio, but not simplest. Both divide by 6.
+      - when:
+          a: 4
+          b: 6
+        say: Both are still even. Divide again.
+      - when:
+          a: 3
+          b: 2
+        say: Flipped. 12 comes first, so the smaller number goes first.
+    - prompt: A 50 cm ribbon and a 2 m ribbon. Simplest ratio?
+      want:
+        a: 1
+        b: 4
+      mistakes:
+      - when:
+          a: 25
+          b: 1
+        say: '50 : 2 mixes cm and m. 2 m is 200 cm, so it''s 50 : 200.'
+      - when:
+          a: 4
+          b: 1
+        say: 'That''s 200 : 50, flipped. The 50 cm ribbon comes first.'
+    - prompt: 18 girls and 24 boys. Ratio of girls to all students?
+      want:
+        a: 3
+        b: 7
+      mistakes:
+      - when:
+          a: 3
+          b: 4
+        say: '3 : 4 is girls to boys. All students are 18 + 24 = 42.'
+      - when:
+          a: 18
+          b: 42
+        say: 'Right comparison. Now simplify: both divide by 6.'
   items:
   - prompt: 'Write 24 : 36 in simplest form.'
     options:
@@ -115,6 +180,60 @@ concepts:
     - 'Shares: 2 × 120 = ₹240 and 3 × 120 = ₹360'
     - 'Check: 240 + 360 = 600 ✓'
     alt: 'Sharing ₹600 in the ratio 2 to 3: five parts of ₹120 give ₹240 and ₹360.'
+  activity:
+    type: formula
+    prompt: 'Share money in the ratio 2 : 3. Set what one part is worth.'
+    inputs:
+    - name: u
+      label: One part (₹)
+      min: 0
+      max: 300
+      step: 5
+      start: 0
+    outputs:
+    - name: first
+      label: First person (2 parts)
+      expr: 2*u
+      unit: ₹
+    - name: second
+      label: Second person (3 parts)
+      expr: 3*u
+      unit: ₹
+    - name: total
+      label: Total
+      expr: 5*u
+      unit: ₹
+    goals:
+    - prompt: Share ₹600.
+      want:
+        total: 600
+      mistakes:
+      - when:
+          u: 200
+        say: '₹600 ÷ 3 = ₹200, but 2 : 3 has 2 + 3 = 5 parts. The total comes to ₹1000.'
+      - when:
+          u: 300
+        say: '₹600 ÷ 2: count all the parts, 2 + 3 = 5.'
+    - prompt: The second person gets ₹450. Find the share.
+      want:
+        second: 450
+      mistakes:
+      - when:
+          u: 225
+        say: 450 ÷ 2? The second person has 3 parts, so divide by 3.
+      - when:
+          u: 90
+        say: 450 ÷ 5 shares out the second person's money over everyone. Their ₹450 is just 3 parts.
+    - prompt: The second person gets ₹100 more than the first.
+      want:
+        u: 100
+      mistakes:
+      - when:
+          u: 20
+        say: 100 ÷ 5? The difference is 3 parts − 2 parts = 1 part. So one part is ₹100.
+      - when:
+          u: 50
+        say: 100 ÷ 2? The difference between 3 parts and 2 parts is 1 part.
   items:
   - prompt: 'Share ₹600 in the ratio 2 : 3. What is the larger share, in rupees?'
     answer: '360'

@@ -26,6 +26,74 @@ concepts:
     - = seven 2s multiplied
     - = 2⁷ = 128
     alt: 'Why we add exponents: 2³ × 2⁴ is three 2s times four 2s, seven 2s in all, so 2⁷.'
+  activity:
+    type: formula
+    prompt: 'Two powers of 2: 2ᵃ and 2ᵇ. Set the exponents a and b.'
+    inputs:
+    - name: a
+      label: Exponent a
+      min: 0
+      max: 10
+      step: 1
+      start: 3
+    - name: b
+      label: Exponent b
+      min: 0
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: prod
+      label: 2ᵃ × 2ᵇ
+      expr: 2^a*2^b
+    - name: quot
+      label: 2ᵃ ÷ 2ᵇ
+      expr: 2^a/2^b
+      places: 4
+    goals:
+    - prompt: Make 2² × 2ᵇ = 2⁶ = 64.
+      want:
+        a: 2
+        prod: 64
+      mistakes:
+      - when:
+          a: 2
+          b: 3
+        say: '2 × 3 = 6, so you multiplied the exponents. 2² × 2³ is five 2s multiplied: 32. Count the 2s: add the exponents.'
+      - when:
+          a:
+          - 3
+          - 10
+        say: 'a must be 2 here: the first power is 2².'
+    - prompt: Make 2⁵ ÷ 2ᵇ = 8.
+      want:
+        a: 5
+        quot: 8
+      mistakes:
+      - when:
+          a: 5
+          b: 8
+        say: '8 is the answer, not b. Dividing cancels 2s: 2⁵ ÷ 2ᵇ = 2 to the power (5 − b), and 8 = 2³.'
+      - when:
+          a: 5
+          b:
+          - 6
+          - 10
+        say: 'When b is bigger than a, more 2s cancel than you have: the answer drops below 1.'
+    - prompt: Make 2ᵃ ÷ 2ᵇ equal exactly 1.
+      want:
+        quot: 1
+      mistakes:
+      - when:
+          quot:
+          - 1.01
+          - 1024
+        say: 'Still more 2s on top than below. Equal exponents cancel completely: 2⁰ = 1.'
+      - when:
+          quot:
+          - 0.0009
+          - 0.99
+        say: More 2s below than on top now. Make a and b the same.
   items:
   - prompt: Find 3⁴.
     answer: '81'
@@ -118,6 +186,66 @@ concepts:
       label: 10⁷ crore
     caption: 'The exponent counts the zeros: a thousand has 3, a lakh 5, a crore 7.'
     alt: A number line of exponents 0 to 7 marking 3 as a thousand, 5 as a lakh and 7 as a crore.
+  activity:
+    type: formula
+    prompt: Write big numbers as m × 10ᵏ, with m between 1 and 10.
+    inputs:
+    - name: m
+      label: m (1 to 9.9)
+      min: 1
+      max: 9.9
+      step: 0.1
+      start: 1
+    - name: k
+      label: Power k
+      min: 0
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: m × 10ᵏ
+      expr: m*10^k
+    goals:
+    - prompt: Write 3,80,000 (the Moon is about this many km away).
+      want:
+        m: 3.8
+        k: 5
+      mistakes:
+      - when:
+          m: 3.8
+          k: 4
+        say: '3.8 × 10⁴ = 38,000. Count how many places the point moves: 3,80,000 is 3.8 moved 5 places.'
+      - when:
+          m: 3.8
+          k: 6
+        say: 3.8 × 10⁶ = 38,00,000, ten times too big.
+    - prompt: Write 15,00,00,000 (km to the Sun).
+      want:
+        m: 1.5
+        k: 8
+      mistakes:
+      - when:
+          m: 1.5
+          k: 7
+        say: '1.5 × 10⁷ = 1,50,00,000, ten times too small. Count the digits after the first one: 8.'
+      - when:
+          m: 1.5
+          k: 9
+        say: 'That''s 1,50,00,00,000: ten times too far.'
+    - prompt: Write 70,00,000.
+      want:
+        m: 7
+        k: 6
+      mistakes:
+      - when:
+          m: 7
+          k: 7
+        say: 10⁷ has seven zeros, but 70,00,000 has only six after the 7.
+      - when:
+          m: 7
+          k: 5
+        say: '7,00,000: one zero short.'
   items:
   - prompt: How many zeros does 10⁹ have when written out?
     answer: '9'

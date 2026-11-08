@@ -34,6 +34,48 @@ concepts:
       - Two sides only
       - One side and one angle
     alt: Conditions that prove two triangles congruent (SSS, SAS, ASA, RHS) compared with ones that don't (AAA, too few parts).
+  activity:
+    type: sort
+    prompt: Is this enough to be sure two triangles are congruent? Which rule?
+    bins:
+    - SSS
+    - SAS
+    - ASA
+    - RHS
+    - Not enough
+    items:
+    - label: All three sides match
+      bin: SSS
+      clue: Only sides are given.
+      why: Side-side-side.
+    - label: Sides 5, 6, 7 cm in both
+      bin: SSS
+      clue: Three lengths, no angles.
+      why: SSS.
+    - label: Two sides and the angle between them match
+      bin: SAS
+      clue: Is the angle between the two sides?
+      why: Side-angle-side.
+    - label: 4 cm, 50°, 6 cm, with 50° between the sides
+      bin: SAS
+      clue: The angle is trapped between the sides.
+      why: SAS.
+    - label: Two angles and the side between them match
+      bin: ASA
+      clue: Is the side between the two angles?
+      why: Angle-side-angle.
+    - label: A right angle, the hypotenuse and one more side match
+      bin: RHS
+      clue: A right triangle with its longest side known.
+      why: Right angle-hypotenuse-side.
+    - label: All three angles match
+      bin: Not enough
+      clue: A small and a large triangle can share angles.
+      why: Same shape, maybe not the same size.
+    - label: Two sides and an angle not between them
+      bin: Not enough
+      clue: Where is the angle?
+      why: That can give two different triangles.
   items:
   - prompt: What does congruent mean?
     options:
@@ -154,6 +196,37 @@ concepts:
       label: x
     caption: AB = AC, so the base angles at B and C are equal.
     alt: An isosceles triangle ABC with AB equal to AC, a dotted line of symmetry from A to the base, and equal base angles x at B and C.
+  activity:
+    type: angle
+    prompt: Turn the arm to make each angle of the triangle.
+    goals:
+    - prompt: An isosceles triangle has a top angle of 40°. Make one base angle.
+      degrees: 70
+      mistakes:
+      - when:
+          degrees: 140
+        say: 140° is both base angles together. They're equal, so share it.
+      - when:
+          degrees: 40
+        say: Base angles are equal to each other, not to the top angle.
+    - prompt: Each base angle is 50°. Make the top angle.
+      degrees: 80
+      mistakes:
+      - when:
+          degrees: 130
+        say: '180 − 50 uses only one base angle. Take both off: 180 − 100.'
+      - when:
+          degrees: 50
+        say: 50° is a base angle. The top is what's left of 180°.
+    - prompt: Make one angle of an equilateral triangle.
+      degrees: 60
+      mistakes:
+      - when:
+          degrees: 90
+        say: Three right angles make 270°. Three equal angles share 180°.
+      - when:
+          degrees: 120
+        say: 120° is the exterior angle. Inside, three equal angles share 180°.
   items:
   - prompt: An isosceles triangle has base angles of 50° each. Find the top angle, in degrees.
     answer: '80'

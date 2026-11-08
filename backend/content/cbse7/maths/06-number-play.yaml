@@ -31,6 +31,45 @@ concepts:
       - even × odd = even
       - odd × odd = odd
     alt: 'Parity rules: odd plus odd is even, even plus odd is odd; a product is odd only when both numbers are odd.'
+  activity:
+    type: sort
+    prompt: Will the answer be even or odd? Think about leftovers.
+    bins:
+    - Even
+    - Odd
+    items:
+    - label: odd + odd
+      bin: Even
+      clue: Two leftovers pair up.
+      why: Even.
+    - label: even + even
+      bin: Even
+      clue: No leftovers at all.
+      why: Even.
+    - label: odd × even
+      bin: Even
+      clue: Groups of a pairable number.
+      why: Even.
+    - label: 17 + 29
+      bin: Even
+      clue: Each has one left over. What do two leftovers make?
+      why: '46.'
+    - label: odd + even
+      bin: Odd
+      clue: Only one leftover.
+      why: Odd.
+    - label: odd + odd + odd
+      bin: Odd
+      clue: 'Three leftovers: two pair up, one doesn''t.'
+      why: Odd.
+    - label: odd × odd
+      bin: Odd
+      clue: An unpaired number of unpaired groups.
+      why: 'Odd: 3 × 5 = 15.'
+    - label: 1 + 2 + 3 + … + 10
+      bin: Odd
+      clue: How many of these numbers have a leftover? 1, 3, 5, 7, 9.
+      why: 'Five leftovers: the total, 55, is odd.'
   items:
   - prompt: Is 37 + 49 even or odd?
     options:
@@ -144,6 +183,67 @@ concepts:
       - '8'
     caption: 'A magic square: every row, column and diagonal adds to 15.'
     alt: A 3 by 3 magic square with rows 2 7 6, 9 5 1 and 4 3 8, each row and column labelled with the sum 15.
+  activity:
+    type: formula
+    prompt: 'A 3 × 3 magic square using 1 to 9. Rows: 8, 1, 6 / 3, x, 7 / 4, 9, y. Every line must add to 15.'
+    inputs:
+    - name: x
+      label: Middle x
+      min: 1
+      max: 9
+      step: 1
+      start: 1
+    - name: y
+      label: Corner y
+      min: 1
+      max: 9
+      step: 1
+      start: 1
+    outputs:
+    - name: r2
+      label: 'Row 2: 3 + x + 7'
+      expr: 3+x+7
+    - name: r3
+      label: 'Row 3: 4 + 9 + y'
+      expr: 4+9+y
+    - name: dg
+      label: 'Diagonal: 8 + x + y'
+      expr: 8+x+y
+    - name: c3
+      label: 'Column 3: 6 + 7 + y'
+      expr: 6+7+y
+    goals:
+    - prompt: Make row 2 add to 15.
+      want:
+        r2: 15
+      mistakes:
+      - when:
+          x:
+          - 6
+          - 9
+        say: 'Too big: 3 + 7 is already 10.'
+      - when:
+          x:
+          - 1
+          - 4
+        say: 'Not enough: 3 + 7 + x has to reach 15.'
+    - prompt: Now make every line add to 15.
+      want:
+        r2: 15
+        r3: 15
+        dg: 15
+        c3: 15
+      mistakes:
+      - when:
+          x: 5
+          y: 5
+        say: Each number 1 to 9 is used once, and 5 is already in the middle. 4 + 9 + y = 15.
+      - when:
+          x: 5
+          y:
+          - 3
+          - 9
+        say: 'Row 3 goes over: 4 + 9 is 13 already.'
   items:
   - prompt: What is the magic sum of a 3 × 3 magic square using 1 to 9?
     answer: '15'

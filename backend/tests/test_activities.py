@@ -140,10 +140,27 @@ def test_every_cbse_class12_science_topic_has_a_working_activity():
         assert check_activity(c["activity"]) == [], c["code"]
 
 
+def _concepts_of(*subjects):
+    return [c for _path, p in content_packs.read_packs() if p["subject"] in subjects for c in p["concepts"]]
+
+
+def test_every_cbse_class5_7_and_8_maths_and_science_topic_has_a_working_activity():
+    for subjects, count in ((("cbse8-math", "cbse8-sci"), 54), (("cbse7-math", "cbse7-sci"), 54), (("cbse5-math", "cbse5-evs"), 50)):
+        concepts = _concepts_of(*subjects)
+        assert len(concepts) == count, subjects  # Class 8: 28 + 26; Class 7: 30 + 24; Class 5: 30 + 20 (EVS)
+        for c in concepts:
+            assert "activity" in c, c["code"]
+            assert check_activity(c["activity"]) == [], c["code"]
+
+
 def test_every_activity_coaches_a_wrong_try():
     """The mistake principle: every sort item has a clue and a reason, every order says why a step
     can't come earlier, and number activities name the slips children really make."""
-    concepts = _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + _cbse11_concepts() + _cbse12_concepts() + [c for p in _class6_packs() for c in p["concepts"]]
+    concepts = (
+        _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + _cbse11_concepts() + _cbse12_concepts()
+        + _concepts_of("cbse8-math", "cbse8-sci", "cbse7-math", "cbse7-sci", "cbse5-math", "cbse5-evs")
+        + [c for p in _class6_packs() for c in p["concepts"]]
+    )
     numeric = 0
     with_mistakes = 0
     for c in concepts:

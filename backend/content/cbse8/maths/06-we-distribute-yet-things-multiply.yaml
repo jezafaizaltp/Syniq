@@ -34,6 +34,74 @@ concepts:
       - 7 × 2 = 14
     caption: 7 × 12 = 7 × 10 + 7 × 2 = 70 + 14 = 84.
     alt: A rectangle 7 by 12 split into a 7 by 10 part of area 70 and a 7 by 2 part of area 14, together 84.
+  activity:
+    type: formula
+    prompt: 'Multiply a sum: a × (b + c). Set a, b and c.'
+    inputs:
+    - name: a
+      label: a
+      min: 0
+      max: 20
+      step: 1
+      start: 1
+    - name: b
+      label: b
+      min: 0
+      max: 100
+      step: 1
+      start: 1
+    - name: c
+      label: c
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: lhs
+      label: a × (b + c)
+      expr: a*(b+c)
+    - name: split
+      label: a × b + a × c
+      expr: a*b+a*c
+    - name: wrong
+      label: a × b + c
+      expr: a*b+c
+    goals:
+    - prompt: Make a × (10 + c) = 84.
+      want:
+        b: 10
+        lhs: 84
+      mistakes:
+      - when:
+          b: 10
+          wrong: 84
+        say: a × 10 + c = 84 multiplies only the 10. The a multiplies every part, so look at a × (b + c).
+    - prompt: Work out 9 × 98 as 9 × (100 − 2).
+      want:
+        a: 9
+        b: 100
+        c: -2
+      mistakes:
+      - when:
+          a: 9
+          b: 100
+          c: 2
+        say: That's 9 × 102. 98 is 2 less than 100, so c is −2.
+      - when:
+          a: 9
+          b: 98
+        say: That's right but slow. Use the friendly 100 and take a little off.
+    - prompt: Work out 7 × 105 as 7 × (100 + 5).
+      want:
+        a: 7
+        b: 100
+        c: 5
+      mistakes:
+      - when:
+          a: 7
+          b: 100
+          c: -5
+        say: That's 7 × 95. 105 is 5 more than 100.
   items:
   - prompt: 'Use the distributive property: 35 × 102.'
     answer: '3570'
@@ -125,6 +193,74 @@ concepts:
       - b²
     caption: '(a + b)² = a² + 2ab + b²: the square has two ab rectangles, not none.'
     alt: A square of side a plus b split into an a-squared square, a b-squared square and two ab rectangles.
+  activity:
+    type: formula
+    prompt: A square of side a + b. Compare its area with a² + b².
+    inputs:
+    - name: a
+      label: a
+      min: 0
+      max: 20
+      step: 1
+      start: 1
+    - name: b
+      label: b
+      min: 0
+      max: 20
+      step: 1
+      start: 1
+    outputs:
+    - name: sum2
+      label: (a + b)²
+      expr: (a+b)^2
+    - name: sq
+      label: a² + b²
+      expr: a^2+b^2
+    - name: gap
+      label: Difference (the two a × b pieces)
+      expr: (a+b)^2-a^2-b^2
+    - name: diff2
+      label: (a − b)²
+      expr: (a-b)^2
+    goals:
+    - prompt: Make (a + b)² exactly 100 more than a² + b².
+      want:
+        gap: 100
+      mistakes:
+      - when:
+          gap: 0
+        say: 'No gap: with a or b at 0, the two a × b rectangles vanish. The gap is always 2ab.'
+      - when:
+          gap:
+          - 102
+          - 800
+        say: 'Too much: the gap is 2 × a × b. Make a × b = 50.'
+    - prompt: Make (7 + b)² = 144.
+      want:
+        a: 7
+        sum2: 144
+      mistakes:
+      - when:
+          a: 7
+          b:
+          - 6
+          - 20
+        say: Too big. 144 = 12 × 12, so 7 + b must be 12.
+      - when:
+          a: 7
+          sq:
+          - 140
+          - 150
+        say: 'a² + b² isn''t (a + b)²: it misses the two a × b pieces.'
+    - prompt: Make (10 − b)² = 49.
+      want:
+        a: 10
+        diff2: 49
+      mistakes:
+      - when:
+          a: 10
+          b: 7
+        say: 10 − 7 = 3, and 3² = 9. You need 10 − b = 7.
   items:
   - prompt: Use (a + b)² to find 101².
     answer: '10201'

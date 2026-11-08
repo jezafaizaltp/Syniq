@@ -33,6 +33,69 @@ concepts:
       - 'ten thousands: 40,000'
       - 'hundreds: 300'
     alt: In 45,307 the 4 is in the ten thousands place, worth 40,000, and the 3 is in the hundreds place, worth 300.
+  activity:
+    type: formula
+    prompt: Build a number from thousands, hundreds, tens and ones.
+    inputs:
+    - name: th
+      label: Thousands
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: h
+      label: Hundreds
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: te
+      label: Tens
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: o
+      label: Ones
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: 1000*th+100*h+10*te+o
+    goals:
+    - prompt: Make 4,307.
+      want:
+        val: 4307
+      mistakes:
+      - when:
+          th: 4
+          h: 3
+          te: 7
+          o: 0
+        say: That's 4,370. There are 0 tens in 4,307, so the 7 is ones.
+    - prompt: Make 6,050.
+      want:
+        val: 6050
+      mistakes:
+      - when:
+          th: 6
+          h: 5
+          te: 0
+          o: 0
+        say: That's 6,500. In 6,050 the 5 sits in the tens place.
+    - prompt: Make the biggest number from the digits 2, 9, 0 and 5.
+      want:
+        val: 9520
+      mistakes:
+      - when:
+          val: 9502
+        say: Close! Put the bigger of 2 and 0 in the tens.
+      - when:
+          val: 9250
+        say: 'Put 5 before 2: the bigger digit goes in the bigger place.'
   items:
   - prompt: What is the value of 6 in 36,452?
     answer: '6000'
@@ -116,6 +179,55 @@ concepts:
     - 'Hundreds: 2 + 3 + 1 = 6'
     - 'Thousands: 1 → 1,613'
     alt: Adding 1,245 and 368 column by column with carrying gives 1,613.
+  activity:
+    type: formula
+    prompt: 'A trip: 233 km on the first day and x km on the second.'
+    inputs:
+    - name: x
+      label: Second day
+      min: 0
+      max: 500
+      step: 1
+      start: 0
+      unit: km
+    outputs:
+    - name: total
+      label: Whole trip
+      expr: 233+x
+      unit: km
+    goals:
+    - prompt: The whole trip is 470 km. How far on day 2?
+      want:
+        total: 470
+      mistakes:
+      - when:
+          x: 243
+        say: 'In the ones, 0 − 3 can''t be done. Take a ten: 10 − 3 = 7. Then 6 − 3 in the tens.'
+      - when:
+          x:
+          - 300
+          - 500
+        say: 'Too much: 233 + 300 is already more than 470. Take 233 away from 470.'
+    - prompt: The whole trip is 512 km.
+      want:
+        total: 512
+      mistakes:
+      - when:
+          x: 321
+        say: Each column was taken small-from-big. 2 − 3 needs a ten taken from the tens first.
+      - when:
+          x: 289
+        say: 'Check the tens: after taking a ten, 0 − 3 needs a hundred too.'
+    - prompt: The whole trip is 400 km.
+      want:
+        total: 400
+      mistakes:
+      - when:
+          x: 233
+        say: That's the first day again. 400 − 233 = ?
+      - when:
+          x: 277
+        say: 'Check with adding: 233 + 277 = 510. Too much.'
   items:
   - prompt: A train goes 1,245 km and then a bus goes 368 km. How far is the whole trip in km?
     answer: '1613'

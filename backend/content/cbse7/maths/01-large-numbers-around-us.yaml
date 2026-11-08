@@ -33,6 +33,75 @@ concepts:
       - 1,000,000 = 1 million
       - 10,000,000 = 10 million
     alt: 'The Indian and international systems side by side: 1 lakh is a hundred thousand, 10 lakh is a million, and 1 crore is ten million.'
+  activity:
+    type: formula
+    prompt: Build big numbers from crores, lakhs and thousands.
+    inputs:
+    - name: c
+      label: Crores
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: l
+      label: Lakhs
+      min: 0
+      max: 99
+      step: 1
+      start: 0
+    - name: t
+      label: Thousands
+      min: 0
+      max: 99
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: c*10000000+l*100000+t*1000
+    goals:
+    - prompt: Make one million.
+      want:
+        val: 1000000
+      mistakes:
+      - when:
+          c: 1
+          l: 0
+          t: 0
+        say: 1 crore is 100 lakh, which is 10 million. One million is 10 lakh.
+      - when:
+          c: 0
+          l: 1
+          t: 0
+        say: One lakh is 1,00,000, only a tenth of a million.
+    - prompt: Make 2,35,00,000.
+      want:
+        val: 23500000
+      mistakes:
+      - when:
+          c: 2
+          l: 3
+          t: 50
+        say: 'That''s 2,03,50,000. After the crores, read the digits in pairs: 35 lakh.'
+      - when:
+          c: 0
+          l: 23
+          t: 50
+        say: That's 23,50,000, about ten times too small. The 2 at the front is crores.
+    - prompt: Make 4 million 50 thousand.
+      want:
+        val: 4050000
+      mistakes:
+      - when:
+          c: 0
+          l: 4
+          t: 50
+        say: 'That''s 4,50,000: less than half a million. A million is 10 lakh, so 4 million is 40 lakh.'
+      - when:
+          c: 4
+          l: 0
+          t: 50
+        say: 4 crore is 40 million. 4 million is 40 lakh.
   items:
   - prompt: How many zeros are there in one lakh?
     answer: '5'
@@ -115,6 +184,38 @@ concepts:
     - 'Round up: 8 becomes 9'
     - 'Answer: 49,000'
     alt: 'Rounding 48,763 to the nearest thousand: the next digit, 7, is 5 or more, so it rounds up to 49,000.'
+  activity:
+    type: number_line
+    min: 40000
+    max: 60000
+    step: 1000
+    start: 40000
+    prompt: Round each number to the nearest thousand.
+    goals:
+    - prompt: 48,763
+      target: 49000
+      mistakes:
+      - when:
+          v: 48000
+        say: 'The hundreds digit is 7: 5 or more, so round up.'
+      - when:
+          v: 50000
+        say: That's rounding to the nearest ten thousand. Look just at the thousands.
+    - prompt: 52,480
+      target: 52000
+      mistakes:
+      - when:
+          v: 53000
+        say: 'The hundreds digit is 4: less than 5, so round down.'
+      - when:
+          v: 50000
+        say: 'Too far: round to the nearest thousand, not ten thousand.'
+    - prompt: 45,500
+      target: 46000
+      mistakes:
+      - when:
+          v: 45000
+        say: The hundreds digit is 5. Exactly 5 rounds up.
   items:
   - prompt: Round 48,763 to the nearest thousand.
     answer: '49000'

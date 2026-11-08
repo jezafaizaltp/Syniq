@@ -26,6 +26,47 @@ concepts:
     - 'Turn: 2 blocks East'
     - Reach the library
     alt: 'A route: from the gate go 3 blocks North, then 2 blocks East, to reach the library.'
+  activity:
+    type: sort
+    prompt: Which direction is it? North is at the top of the map.
+    bins:
+    - North
+    - South
+    - East
+    - West
+    items:
+    - label: The top of the map
+      bin: North
+      clue: Maps put this direction at the top.
+      why: North.
+    - label: The way the Pole Star shows
+      bin: North
+      clue: Travellers used this star at night.
+      why: North.
+    - label: The bottom of the map
+      bin: South
+      clue: Opposite the top.
+      why: South.
+    - label: Behind you when you face the Pole Star
+      bin: South
+      clue: Turn half way round.
+      why: South.
+    - label: Where the Sun rises
+      bin: East
+      clue: Morning sunshine comes from here.
+      why: East.
+    - label: The right side of the map
+      bin: East
+      clue: With the top pointing up.
+      why: East.
+    - label: Where the Sun sets
+      bin: West
+      clue: Evening sunshine comes from here.
+      why: West.
+    - label: The left side of the map
+      bin: West
+      clue: With the top pointing up.
+      why: West.
   items:
   - prompt: On most maps, which direction is at the top?
     options:
@@ -119,6 +160,64 @@ concepts:
     - label: Real (km)
       value: 6
     alt: With a scale of 1 centimetre to 1 kilometre, 6 centimetres on the map is 6 kilometres in real life.
+  activity:
+    type: formula
+    prompt: On a map, each cm stands for k km in real life.
+    inputs:
+    - name: cm
+      label: Length on the map
+      min: 0
+      max: 20
+      step: 0.5
+      start: 0
+      unit: cm
+    - name: k
+      label: km for each cm (k)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: real
+      label: Real distance
+      expr: cm*k
+      unit: km
+    goals:
+    - prompt: 1 cm stands for 2 km. The real road is 14 km. How long on the map?
+      want:
+        k: 2
+        real: 14
+      mistakes:
+      - when:
+          k: 2
+          cm: 14
+        say: '14 cm would be 28 km: each cm is 2 km. Halve it.'
+    - prompt: 1 cm stands for 5 km. The real road is 25 km.
+      want:
+        k: 5
+        real: 25
+      mistakes:
+      - when:
+          k: 5
+          cm: 20
+        say: 20 cm would be 100 km. How many 5s make 25?
+    - prompt: 4 cm on the map is 20 km. What does 1 cm stand for?
+      want:
+        cm: 4
+        real: 20
+      mistakes:
+      - when:
+          cm: 4
+          k:
+          - 1
+          - 4
+        say: 'Too small: 4 cm must reach 20 km. 20 ÷ 4.'
+      - when:
+          cm: 4
+          k:
+          - 6
+          - 10
+        say: 'Too big: 4 cm would go past 20 km.'
   items:
   - prompt: On a map, 1 cm = 1 km. Two towns are 6 cm apart on the map. How many km apart are they really?
     answer: '6'

@@ -23,6 +23,47 @@ concepts:
     - 72 = 4 × 18
     - Yes, 9,372 is divisible by 4
     alt: 'Testing 9,372 for 4: only the last two digits, 72, matter, and 72 is a multiple of 4.'
+  activity:
+    type: sort
+    prompt: Use the quick checks. Which one does each number pass?
+    bins:
+    - Divisible by 3
+    - Divisible by 4
+    - Divisible by 11
+    - None of these
+    items:
+    - label: 5,106
+      bin: Divisible by 3
+      clue: Add the digits.
+      why: 5 + 1 + 0 + 6 = 12, a multiple of 3.
+    - label: 8,013
+      bin: Divisible by 3
+      clue: Add the digits. Is the total in the 3 times table?
+      why: 8 + 0 + 1 + 3 = 12, so it divides by 3.
+    - label: 7,316
+      bin: Divisible by 4
+      clue: Look only at the last two digits.
+      why: 16 is a multiple of 4, so 7316 is too.
+    - label: 2,524
+      bin: Divisible by 4
+      clue: What are the last two digits?
+      why: 24 ÷ 4 = 6, so it divides by 4.
+    - label: 3,751
+      bin: Divisible by 11
+      clue: 'Alternately add and subtract the digits: 3 − 7 + 5 − 1.'
+      why: 3 − 7 + 5 − 1 = 0, so it divides by 11.
+    - label: 5,291
+      bin: Divisible by 11
+      clue: Try + − + − across the digits.
+      why: 5 − 2 + 9 − 1 = 11, so it divides by 11.
+    - label: 6,205
+      bin: None of these
+      clue: Check all three tests.
+      why: Digits add to 13; last two 05; 6 − 2 + 0 − 5 = −1. None works.
+    - label: 4,127
+      bin: None of these
+      clue: 'Digits, last two digits, alternating sum: check each.'
+      why: Digit sum 14, last two 27, alternating 4 − 1 + 2 − 7 = −2. None.
   items:
   - prompt: Which number is divisible by 9?
     options:
@@ -123,6 +164,56 @@ concepts:
       label: '+5'
     caption: 'Adding odd numbers in turn lands on squares: 1, 4, 9.'
     alt: A number line where jumps of 3 and then 5 from 1 land on 4 and 9, the square numbers.
+  activity:
+    type: formula
+    prompt: Add up a long list fast. n is how many numbers you add.
+    inputs:
+    - name: n
+      label: How many numbers (n)
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+    outputs:
+    - name: odd
+      label: 1 + 3 + 5 + … (n odd numbers)
+      expr: n*n
+    - name: all
+      label: 1 + 2 + 3 + … + n
+      expr: n*(n+1)/2
+    goals:
+    - prompt: Find 1 + 3 + 5 + … + 19.
+      want:
+        odd: 100
+      mistakes:
+      - when:
+          n: 19
+        say: 19 is the last number, not how many there are. 1, 3, 5, …, 19 is 10 odd numbers.
+      - when:
+          n: 20
+        say: 'That counts every number up to 20. Only the odd ones are in the list: half of them.'
+    - prompt: Find n so that 1 + 2 + … + n = 5050.
+      want:
+        all: 5050
+      mistakes:
+      - when:
+          n: 50
+        say: 50 is the number of pairs. Each pair is 1 + n = 101, and 50 pairs make 5050. So n is …?
+      - when:
+          n:
+          - 60
+          - 99
+        say: 'Not there yet. Pair the first and last numbers: 50 pairs of 101 make 5050.'
+    - prompt: Make the odd-number sum equal 64.
+      want:
+        odd: 64
+      mistakes:
+      - when:
+          n: 32
+        say: 32 is half of 64. The sum of the first n odd numbers is n × n, a square.
+      - when:
+          n: 7
+        say: 7 odd numbers make 49. One more step.
   items:
   - prompt: Find 1 + 2 + 3 + ... + 50.
     answer: '1275'

@@ -34,6 +34,48 @@ concepts:
     unit: marks
     caption: 'Marks 6, 8, 7, 9, 10: levelled out, each would be the mean, 8.'
     alt: A bar chart of five children's marks, 6, 8, 7, 9 and 10, whose mean is 8.
+  activity:
+    type: formula
+    prompt: Five friends scored 6, 8, 7, 9 and 10. A sixth friend scores x.
+    inputs:
+    - name: x
+      label: Sixth score x
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+    outputs:
+    - name: total
+      label: Total
+      expr: 40+x
+    - name: mean
+      label: Mean of six
+      expr: (40+x)/6
+      places: 2
+    goals:
+    - prompt: Keep the mean at 8.
+      want:
+        mean: 8
+      mistakes:
+      - when:
+          x:
+          - 9
+          - 20
+        say: Too high. The five already average 8, so a score of 8 keeps it.
+    - prompt: Make the mean 7.
+      want:
+        mean: 7
+      mistakes:
+      - when:
+          x: 7
+        say: The others average 8, so x must pull it down. The total must be 6 × 7 = 42.
+    - prompt: Make the mean 9.
+      want:
+        mean: 9
+      mistakes:
+      - when:
+          x: 9
+        say: The others average 8, so x must pull up. Total 6 × 9 = 54.
   items:
   - prompt: Find the mean of 6, 8, 7, 9 and 10.
     answer: '8'
@@ -121,6 +163,41 @@ concepts:
       - Ignores how extreme the ends are
       - Better when there are outliers
     alt: 'Mean and median compared: the mean uses every value and is pulled by outliers; the median is the middle value and is not.'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: Mark the median of each set.
+    goals:
+    - prompt: 12, 3, 15, 9, 14
+      target: 12
+      mistakes:
+      - when:
+          v: 15
+        say: '15 is in the middle as written. Order first: 3, 9, 12, 14, 15.'
+      - when:
+          v: 9
+        say: In order, 9 is second. Which is third of five?
+    - prompt: 5, 6, 7, 8, 40
+      target: 7
+      mistakes:
+      - when:
+          v: 13
+        say: 'About 13 is the mean: the 40 drags it up. The median is the middle value.'
+      - when:
+          v: 8
+        say: 'Count again: five values, the third is in the middle.'
+    - prompt: 4, 8, 10, 2
+      target: 6
+      mistakes:
+      - when:
+          v: 8
+        say: 'Order first: 2, 4, 8, 10. Two middle values: 4 and 8. Take halfway.'
+      - when:
+          v: 4
+        say: With four values, take halfway between the middle two, 4 and 8.
   items:
   - prompt: Find the median of 3, 5, 7, 8, 12.
     answer: '7'

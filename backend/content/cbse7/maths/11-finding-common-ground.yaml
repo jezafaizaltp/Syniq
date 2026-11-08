@@ -28,6 +28,62 @@ concepts:
     - HCF = 2 × 2 × 3
     - HCF = 12
     alt: 'Finding the HCF of 24 and 36: write both as primes, pick the shared primes 2, 2 and 3, and multiply to get 12.'
+  activity:
+    type: formula
+    prompt: 'Build a number from primes: 2ᵃ × 3ᵇ × 5ᶜ.'
+    inputs:
+    - name: a
+      label: How many 2s
+      min: 0
+      max: 3
+      step: 1
+      start: 0
+    - name: b
+      label: How many 3s
+      min: 0
+      max: 2
+      step: 1
+      start: 0
+    - name: c
+      label: How many 5s
+      min: 0
+      max: 2
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: 2^a*3^b*5^c
+    goals:
+    - prompt: Build 60.
+      want:
+        val: 60
+      mistakes:
+      - when:
+          a: 1
+          b: 1
+          c: 1
+        say: 'That''s 30. 60 = 2 × 2 × 3 × 5: two 2s.'
+    - prompt: Build the HCF of 60 (2 × 2 × 3 × 5) and 72 (2 × 2 × 2 × 3 × 3).
+      want:
+        val: 12
+      mistakes:
+      - when:
+          val: 360
+        say: 360 is the LCM. The HCF uses only primes both share, as few times as either has.
+      - when:
+          val: 6
+        say: Both have at least two 2s, so the HCF can use two.
+    - prompt: Build the HCF of 45 (3 × 3 × 5) and 75 (3 × 5 × 5).
+      want:
+        val: 15
+      mistakes:
+      - when:
+          val: 225
+        say: '225 uses the most of each prime: that''s the LCM.'
+      - when:
+          val: 5
+        say: Both are divisible by 3 too.
   items:
   - prompt: Which is the prime factorisation of 60?
     options:
@@ -114,6 +170,41 @@ concepts:
       - All primes, highest powers
       - When things happen together again
     alt: 'HCF and LCM compared: the HCF divides both numbers and uses shared primes; the LCM is divided by both and uses all primes at their highest powers.'
+  activity:
+    type: number_line
+    min: 0
+    max: 40
+    step: 1
+    start: 0
+    prompt: Mark the lowest common multiple (LCM).
+    goals:
+    - prompt: LCM of 6 and 8
+      target: 24
+      mistakes:
+      - when:
+          v: 12
+        say: '12 is in the 6 times table but not the 8 times table. Keep going: 6, 12, 18, 24 …'
+      - when:
+          v: 2
+        say: '2 is the HCF: it divides both. The LCM is a number both divide into.'
+    - prompt: LCM of 4 and 10
+      target: 20
+      mistakes:
+      - when:
+          v: 40
+        say: '40 works, but 20 comes first: 10, 20 …'
+      - when:
+          v: 14
+        say: 4 + 10 adds them. The LCM is in both times tables.
+    - prompt: Two bells ring every 3 and 5 minutes. When do they ring together again?
+      target: 15
+      mistakes:
+      - when:
+          v: 8
+        say: 3 + 5 = 8, but 8 isn't in the 3 times table.
+      - when:
+          v: 30
+        say: They meet at 30, but they already met earlier.
   items:
   - prompt: Find the LCM of 6 and 8.
     answer: '24'

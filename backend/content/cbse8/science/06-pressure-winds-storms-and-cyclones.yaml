@@ -30,6 +30,72 @@ concepts:
     unit: jet length (cm)
     caption: 'Water spurts farthest from the lowest hole: pressure grows with depth.'
     alt: Bars showing water jets of 2, 5 and 9 cm from the top, middle and bottom holes of a bottle.
+  activity:
+    type: formula
+    prompt: Pressure = force ÷ area. Set the force and the area it presses on.
+    inputs:
+    - name: f
+      label: Force
+      min: 10
+      max: 500
+      step: 10
+      start: 10
+      unit: N
+    - name: a
+      label: Area
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: cm²
+    outputs:
+    - name: p
+      label: Pressure
+      expr: f/a
+      unit: N/cm²
+      places: 2
+    goals:
+    - prompt: Make 50 N/cm² with a 500 N force.
+      want:
+        f: 500
+        p: 50
+      mistakes:
+      - when:
+          f: 500
+          a:
+          - 11
+          - 100
+        say: 'Too spread out: a bigger area means less pressure. Pressure = force ÷ area.'
+      - when:
+          f: 500
+          a:
+          - 1
+          - 9
+        say: Too concentrated. A smaller area pushes pressure up.
+    - prompt: Make only 2 N/cm² with a 200 N force.
+      want:
+        f: 200
+        p: 2
+      mistakes:
+      - when:
+          f: 200
+          a: 1
+        say: '200 N on 1 cm² is like a pin tip: very high pressure. Spread it out.'
+      - when:
+          f: 200
+          a:
+          - 1
+          - 50
+        say: Still too high. Spread the force wider.
+    - prompt: A 100 N force on 20 cm² gives 5 N/cm². Make the pressure 4 times bigger.
+      want:
+        f: 100
+        p: 20
+      mistakes:
+      - when:
+          f: 100
+          a: 80
+        say: 80 cm² makes the pressure 4 times smaller. Shrink the area to raise the pressure.
   items:
   - prompt: A force of 200 N acts on an area of 4 m². Find the pressure in pascals.
     answer: '50'
@@ -124,6 +190,22 @@ concepts:
     - Moisture condenses, releasing more heat
     - The storm grows into a cyclone with a calm eye
     alt: 'How a cyclone forms: warm sea air rises, air rushes in and spins, condensation adds heat and the storm grows around a calm eye.'
+  activity:
+    type: order
+    prompt: How does a cyclone form? Put the steps in order.
+    steps:
+    - The Sun heats the sea strongly
+    - Warm, moist air rises from the sea
+    - Low pressure forms where the air rose
+    - Air from around rushes into the low-pressure area
+    - Rising air cools; vapour forms clouds, giving out heat
+    - The heat feeds a huge spinning storm with a calm eye
+    reasons:
+      Warm, moist air rises from the sea: Air only rises once the sea below has warmed it.
+      Low pressure forms where the air rose: Air pressure drops after the air above has risen away.
+      Air from around rushes into the low-pressure area: Wind blows from high to low pressure, so the low must exist first.
+      Rising air cools; vapour forms clouds, giving out heat: Air must have risen and cooled before its water vapour condenses.
+      The heat feeds a huge spinning storm with a calm eye: The released heat drives the storm, so this comes last.
   items:
   - prompt: 'Wind blows from:'
     options:

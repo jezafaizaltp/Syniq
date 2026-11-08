@@ -46,6 +46,62 @@ concepts:
       label: 90°
     caption: '3² + 4² = 9 + 16 = 25 = 5²: the hypotenuse is 5.'
     alt: A right-angled triangle with the right angle at A, legs 3 and 4 and hypotenuse 5.
+  activity:
+    type: formula
+    prompt: A right triangle with short sides a and b. c is the longest side.
+    inputs:
+    - name: a
+      label: Side a
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    - name: b
+      label: Side b
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: a2b2
+      label: a² + b²
+      expr: a^2+b^2
+    - name: c
+      label: Longest side c
+      expr: sqrt(a^2+b^2)
+      places: 2
+    goals:
+    - prompt: Make c = 13 with a = 5.
+      want:
+        a: 5
+        c: 13
+      mistakes:
+      - when:
+          a: 5
+          b: 8
+        say: '5 + 8 = 13, but sides don''t add like that. Square them: 25 + 64 = 89, so c ≈ 9.4.'
+    - prompt: A 10 m ladder, its foot 6 m from the wall. How high does it reach?
+      want:
+        a: 6
+        c: 10
+      mistakes:
+      - when:
+          a: 6
+          b: 4
+        say: '10 − 6 = 4 subtracts lengths. Subtract the squares: 100 − 36 = 64.'
+      - when:
+          a: 6
+          b: 10
+        say: 10 m is the ladder, the longest side, c. The height is a shorter side.
+    - prompt: Make c = 25 with a = 7.
+      want:
+        a: 7
+        c: 25
+      mistakes:
+      - when:
+          a: 7
+          b: 18
+        say: '7 + 18 = 25 again. Add the squares instead: 625 − 49 = ?'
   items:
   - prompt: A right triangle has legs 6 cm and 8 cm. Find the hypotenuse, in cm.
     answer: '10'
@@ -134,6 +190,49 @@ concepts:
       - 16, 30, 34 (× 2)
     caption: Multiply every side of a triple by the same number to get another triple.
     alt: 'Two columns: basic triples 3-4-5, 5-12-13, 8-15-17, 7-24-25 and scaled-up triples 6-8-10, 9-12-15, 10-24-26, 16-30-34.'
+  activity:
+    type: sort
+    prompt: Can these three sides make a right triangle?
+    bins:
+    - Right triangle
+    - Not a right triangle
+    items:
+    - label: 3, 4, 5
+      bin: Right triangle
+      clue: Is 3² + 4² equal to 5²?
+      why: 9 + 16 = 25. Yes.
+    - label: 6, 8, 10
+      bin: Right triangle
+      clue: It's 3, 4, 5 doubled. Does doubling keep the angle?
+      why: 36 + 64 = 100. Yes.
+    - label: 5, 12, 13
+      bin: Right triangle
+      clue: Check 25 + 144 against 169.
+      why: 25 + 144 = 169. Yes.
+    - label: 8, 15, 17
+      bin: Right triangle
+      clue: Check 64 + 225 against 289.
+      why: 64 + 225 = 289. Yes.
+    - label: 9, 12, 15
+      bin: Right triangle
+      clue: It's 3, 4, 5 times 3.
+      why: 81 + 144 = 225. Yes.
+    - label: 4, 5, 6
+      bin: Not a right triangle
+      clue: Is 16 + 25 equal to 36?
+      why: 41 is not 36. No.
+    - label: 2, 3, 4
+      bin: Not a right triangle
+      clue: Square and add the two short sides.
+      why: 4 + 9 = 13, not 16. No.
+    - label: 5, 6, 11
+      bin: Not a right triangle
+      clue: 5 + 6 = 11, but does that matter? Square them.
+      why: 25 + 36 = 61, not 121. In fact 5 + 6 = 11 can't make a triangle at all.
+    - label: 7, 8, 10
+      bin: Not a right triangle
+      clue: 49 + 64 against 100?
+      why: 113 is not 100. No.
   items:
   - prompt: Which set is a Baudhayana–Pythagoras triple?
     options:

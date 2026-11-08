@@ -32,6 +32,60 @@ concepts:
       - 6 × 4
       - same 24 trees
     alt: '24 trees can be planted as 1 by 24, 2 by 12, 3 by 8 or 4 by 6: these are the factor pairs of 24.'
+  activity:
+    type: formula
+    prompt: Coconut trees in equal rows.
+    inputs:
+    - name: r
+      label: Rows
+      min: 1
+      max: 24
+      step: 1
+      start: 1
+    - name: c
+      label: Trees in each row
+      min: 1
+      max: 24
+      step: 1
+      start: 1
+    outputs:
+    - name: tot
+      label: Trees in all
+      expr: r*c
+    goals:
+    - prompt: Plant 24 trees in 4 equal rows.
+      want:
+        r: 4
+        tot: 24
+      mistakes:
+      - when:
+          r: 4
+          c: 20
+        say: 4 + 20 = 24 adds. 4 rows of c trees is 4 × c.
+    - prompt: 'Plant 36 trees in a square: rows the same as trees in a row.'
+      want:
+        r: 6
+        c: 6
+      mistakes:
+      - when:
+          r: 9
+          c: 4
+        say: That's 36 trees, but 9 rows of 4 is not a square.
+      - when:
+          r: 4
+          c: 9
+        say: 36 trees, but 4 rows of 9 is a long rectangle.
+    - prompt: Plant 30 trees in 5 equal rows.
+      want:
+        r: 5
+        tot: 30
+      mistakes:
+      - when:
+          r: 5
+          c:
+          - 7
+          - 24
+        say: 'Too many in each row: 5 × 7 is already 35.'
   items:
   - prompt: A farm has 6 rows of 8 coconut trees. How many trees?
     answer: '48'
@@ -134,6 +188,41 @@ concepts:
     - from: 18
       to: 24
       label: '+6'
+  activity:
+    type: number_line
+    min: 0
+    max: 40
+    step: 1
+    start: 0
+    prompt: Mark the first number in both skip-counting lists.
+    goals:
+    - prompt: Skip count by 4 and by 6.
+      target: 12
+      mistakes:
+      - when:
+          v: 24
+        say: '24 is in both lists, but 12 comes first: 4, 8, 12 and 6, 12.'
+      - when:
+          v: 10
+        say: 4 + 6 adds them. Is 10 in the 4 list?
+    - prompt: Skip count by 3 and by 5.
+      target: 15
+      mistakes:
+      - when:
+          v: 8
+        say: 3 + 5 = 8, but 8 isn't in the 3 list.
+      - when:
+          v: 30
+        say: 30 is in both, but there's an earlier one.
+    - prompt: Skip count by 2 and by 7.
+      target: 14
+      mistakes:
+      - when:
+          v: 9
+        say: 2 + 7 = 9. Is 9 in the 2 list?
+      - when:
+          v: 7
+        say: '7 is in the 7 list, but 7 is odd: not in the 2 list.'
   items:
   - prompt: What is the 5th multiple of 7?
     answer: '35'
