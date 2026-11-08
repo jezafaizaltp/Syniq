@@ -29,6 +29,54 @@ concepts:
     - Shifts to oppose the change
     - New equilibrium
     alt: 'Le Chatelier''s principle: a disturbed equilibrium shifts to oppose the change, then settles again.'
+  activity:
+    type: sort
+    prompt: 'N₂ + 3H₂ ⇌ 2NH₃, ΔH = −92 kJ. Le Chatelier: the equilibrium shifts to undo each change. Which way?'
+    bins:
+    - 'Shifts right: more NH₃'
+    - 'Shifts left: less NH₃'
+    - No shift
+    items:
+    - label: Add more N₂
+      bin: 'Shifts right: more NH₃'
+      clue: Which side gets crowded? Which way would use it up?
+      why: Extra N₂ is used up by making more NH₃.
+    - label: Remove NH₃ as it forms
+      bin: 'Shifts right: more NH₃'
+      clue: If product is taken away, what does the system make more of?
+      why: The system replaces the lost NH₃.
+    - label: Raise the pressure
+      bin: 'Shifts right: more NH₃'
+      clue: 'Count gas moles: 4 on the left, 2 on the right. Which side takes less room?'
+      why: 'Higher pressure favours fewer gas moles: the right.'
+    - label: Raise the temperature
+      bin: 'Shifts left: less NH₃'
+      clue: The forward reaction gives out heat. Which direction absorbs heat?
+      why: Heating favours the endothermic backward reaction.
+    - label: Lower the pressure
+      bin: 'Shifts left: less NH₃'
+      clue: Which side has more gas moles?
+      why: 'Lower pressure favours more gas moles: the left side.'
+    - label: Cool it
+      bin: 'Shifts right: more NH₃'
+      clue: Removing heat favours the direction that gives heat out. Which is that?
+      why: The forward reaction is exothermic, so cooling favours NH₃ (though slowly).
+    - label: Remove some H₂
+      bin: 'Shifts left: less NH₃'
+      clue: If a reactant is taken away, what does the system do?
+      why: The system makes more H₂ by breaking up NH₃.
+    - label: Add a catalyst
+      bin: No shift
+      clue: Does a catalyst speed one direction or both?
+      why: 'A catalyst speeds both directions equally: equilibrium is reached sooner, but not moved.'
+    - label: Add argon at constant volume
+      bin: No shift
+      clue: Does argon change any of the three gases' partial pressures?
+      why: At fixed volume the partial pressures of N₂, H₂ and NH₃ don't change.
+    - label: Add more NH₃
+      bin: 'Shifts left: less NH₃'
+      clue: Where is the extra? Which way would use it up?
+      why: The system breaks up some of the extra NH₃, though more remains overall.
   items:
   - prompt: For H₂ + I₂ ⇌ 2HI, [H₂] = [I₂] = 0.1 M and [HI] = 0.8 M. Find Kc.
     answer: '64'
@@ -126,6 +174,49 @@ concepts:
     - at: 10
       label: soap
     alt: The pH scale from 0 to 14 with lemon juice near 2, pure water at 7 and soap near 10.
+  activity:
+    type: number_line
+    min: 0
+    max: 14
+    step: 1
+    start: 7
+    prompt: At 25 °C, pH = −log[H⁺] and pH + pOH = 14. Mark the pH.
+    goals:
+    - prompt: '[H⁺] = 10⁻³ M.'
+      target: 3
+      mistakes:
+      - when:
+          v: 11
+        say: '11 would be the pH if [OH⁻] were 10⁻³. pH comes from [H⁺]: drop the minus sign from the power.'
+      - when:
+          v: 7
+        say: pH 7 is neutral, [H⁺] = 10⁻⁷. 10⁻³ M is far more acid.
+    - prompt: '[OH⁻] = 10⁻⁴ M.'
+      target: 10
+      mistakes:
+      - when:
+          v: 4
+        say: 4 is the pOH. pH + pOH = 14 at 25 °C.
+    - prompt: 0.01 M HCl, a strong acid.
+      target: 2
+      mistakes:
+      - when:
+          v: 1
+        say: 'Count the places: 0.01 = 10⁻², so pH 2.'
+      - when:
+          v:
+          - 8
+          - 14
+        say: 'HCl is an acid: its pH is below 7.'
+    - prompt: Dilute that pH 2 acid 10 times with water.
+      target: 3
+      mistakes:
+      - when:
+          v: 1
+        say: Diluting lowers [H⁺] from 10⁻² to 10⁻³, so the pH goes UP by 1.
+      - when:
+          v: 7
+        say: 'One tenfold dilution doesn''t make it neutral: there''s just 10 times less acid.'
   items:
   - prompt: Find the pH of 0.001 M HCl.
     answer: '3'

@@ -41,6 +41,91 @@ concepts:
       - Z
       - '4'
     alt: On the Argand plane, z = 3 + 4i is the point (3, 4) and its distance from the origin is 5.
+  activity:
+    type: formula
+    prompt: Multiply (a + ib)(c + id). Remember i² = −1, so the product is (ac − bd) + i(ad + bc).
+    inputs:
+    - name: a
+      label: a, real part of the first
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: b
+      label: b, i part of the first
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: c
+      label: c, real part of the second
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: d
+      label: d, i part of the second
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    outputs:
+    - name: re
+      label: Real part ac − bd
+      expr: a*c-b*d
+    - name: im
+      label: i part ad + bc
+      expr: a*d+b*c
+    goals:
+    - prompt: Make the first number 3 + 4i. Choose c + id so the product is a positive real number.
+      want:
+        a: 3
+        b: 4
+        im: 0
+        re:
+        - 1
+        - 100
+      hint: Which number cancels the i part of 3 + 4i?
+      mistakes:
+      - when:
+          a: 3
+          b: 4
+          c: 3
+          d: 4
+        say: '(3 + 4i)(3 + 4i) = 9 + 24i + 16i² = −7 + 24i. To cancel the i parts, flip the sign of the i part only: the conjugate.'
+      - when:
+          a: 3
+          b: 4
+          re:
+          - -100
+          - -1
+          im: 0
+        say: 'That''s real but negative: you flipped the real part too. The conjugate keeps the real part and flips only the i part.'
+    - prompt: Keep a = c = 0, so both numbers are pure i numbers. Make the product −4.
+      want:
+        a: 0
+        c: 0
+        re: -4
+        im: 0
+      mistakes:
+      - when:
+          a: 0
+          c: 0
+          re: 4
+        say: bi × di = bd·i², and i² = −1, so the product is −bd. To get −4, bd must be +4.
+    - prompt: Make the first number 1 + i. Choose c + id so the product is 2i.
+      want:
+        a: 1
+        b: 1
+        re: 0
+        im: 2
+      mistakes:
+      - when:
+          a: 1
+          b: 1
+          re: 2
+          im: 0
+        say: 'That''s 2, a real number: (1 + i)(1 − i) = 1 − i² = 2. To leave only an i part, the real part c − d must be 0.'
   items:
   - prompt: Find the modulus of 3 + 4i.
     answer: '5'
@@ -129,6 +214,69 @@ concepts:
       - two equal real
       - two complex conjugates
     alt: If the discriminant is positive there are two real roots, if zero two equal roots, and if negative two complex conjugate roots.
+  activity:
+    type: formula
+    prompt: Roots of x² + bx + c = 0 are −b/2 ± √D/2, with D = b² − 4c. When D < 0 the ± part is an i number.
+    inputs:
+    - name: b
+      label: b
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    - name: c
+      label: c
+      min: -10
+      max: 30
+      step: 1
+      start: 0
+    outputs:
+    - name: disc
+      label: D = b² − 4c
+      expr: b^2-4*c
+    - name: re
+      label: Centre of the roots, −b/2
+      expr: -b/2
+    - name: sp
+      label: Spread √|D| ÷ 2
+      expr: sqrt(abs(b^2-4*c))/2
+      places: 3
+    goals:
+    - prompt: Make the roots −1 ± 2i.
+      want:
+        re: -1
+        disc: -16
+      mistakes:
+      - when:
+          b: -2
+        say: 'With b = −2 the centre is +1: it is −b/2, so the sign flips.'
+      - when:
+          re: -1
+          disc: 16
+        say: 'D = 16 is positive: that gives the real roots −1 ± 2, which are 1 and −3. Complex roots need D below 0.'
+    - prompt: Make equal roots, both 3.
+      want:
+        re: 3
+        disc: 0
+      mistakes:
+      - when:
+          b: 6
+        say: 'b = 6 centres the roots at −3: the centre is −b/2.'
+      - when:
+          re: 3
+          disc:
+          - 1
+          - 40
+        say: D > 0 splits the roots apart. Equal roots need D = 0.
+    - prompt: Make the roots ±3i, with no real part.
+      want:
+        re: 0
+        disc: -36
+      mistakes:
+      - when:
+          b: 0
+          c: -9
+        say: 'c = −9 gives x² = 9: real roots ±3. For ±3i, x² must be −9, so x² + 9 = 0.'
   items:
   - prompt: Find the discriminant of x² + 2x + 5 = 0.
     answer: '-16'

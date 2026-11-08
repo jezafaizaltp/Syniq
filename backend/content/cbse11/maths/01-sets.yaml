@@ -29,6 +29,53 @@ concepts:
     - at: 5
       label: 5 (not included)
     alt: 'The interval [2, 5) on a number line: 2 is included and 5 is not.'
+  activity:
+    type: sort
+    prompt: 'Is it a set? A set needs a clear rule: anyone can check whether a thing belongs.'
+    bins:
+    - Well-defined set
+    - Not a set
+    items:
+    - label: The vowels of the English alphabet
+      bin: Well-defined set
+      clue: Could two people disagree about which letters belong?
+      why: 'a, e, i, o, u: anyone can check, so the collection is well-defined.'
+    - label: The tall students in your class
+      bin: Not a set
+      clue: Who decides how tall counts as 'tall'?
+      why: '''Tall'' is a matter of opinion, so nobody can say for sure who belongs.'
+    - label: Prime numbers less than 20
+      bin: Well-defined set
+      clue: Can you test any number to see if it belongs?
+      why: '2, 3, 5, 7, 11, 13, 17, 19: a clear test, so it is a set.'
+    - label: The good cricket players of India
+      bin: Not a set
+      clue: Would every fan make the same list?
+      why: '''Good'' changes from person to person, so membership is not well-defined.'
+    - label: The rivers of India
+      bin: Well-defined set
+      clue: Does a river either flow in India or not?
+      why: Each river is either in India or not, so the collection is well-defined.
+    - label: The difficult chapters in this book
+      bin: Not a set
+      clue: Is a chapter difficult for everyone?
+      why: 'One learner''s hard chapter is another''s easy one: no clear rule.'
+    - label: The solutions of x² = 4
+      bin: Well-defined set
+      clue: Can you list exactly which numbers work?
+      why: Only −2 and 2 work, so this is the set {−2, 2}.
+    - label: Natural numbers greater than 100
+      bin: Well-defined set
+      clue: It never ends. Does that stop it being a set?
+      why: 'It is infinite, but any number can be tested: 101 is in, 99 is not. Infinite sets are still sets.'
+    - label: The most beautiful flowers in a garden
+      bin: Not a set
+      clue: Is beauty something you can measure?
+      why: Beauty is opinion, so membership can't be checked.
+    - label: Even prime numbers
+      bin: Well-defined set
+      clue: Can you find one? Is there more than one?
+      why: Only 2 is even and prime, so this is the set {2}, a singleton.
   items:
   - prompt: How many subsets does the set {a, b, c} have?
     answer: '8'
@@ -115,6 +162,87 @@ concepts:
       - in both
       - in A, not in B
     alt: A ∪ B is everything in A or B, A ∩ B is what is in both, and A − B is what is in A but not B.
+  activity:
+    type: formula
+    prompt: Two sets A and B overlap. Set n(A), n(B) and the overlap n(A ∩ B). n(A ∪ B) = n(A) + n(B) − n(A ∩ B).
+    inputs:
+    - name: a
+      label: n(A)
+      min: 0
+      max: 40
+      step: 1
+      start: 10
+    - name: b
+      label: n(B)
+      min: 0
+      max: 40
+      step: 1
+      start: 10
+    - name: x
+      label: n(A ∩ B), in both
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+    outputs:
+    - name: u
+      label: n(A ∪ B)
+      expr: a+b-x
+    - name: ao
+      label: Only in A
+      expr: a-x
+    - name: bo
+      label: Only in B
+      expr: b-x
+    goals:
+    - prompt: In a class of 40, 25 take Hindi (A) and 26 take Sanskrit (B). Every student takes at least one. How many take both?
+      want:
+        a: 25
+        b: 26
+        u: 40
+      hint: Every student is in A ∪ B, so n(A ∪ B) = 40.
+      mistakes:
+      - when:
+          u: 51
+        say: '51 is more than the whole class: the students who take both were counted twice, once in each set. Take the overlap away once.'
+      - when:
+          a: 25
+          b: 26
+          x:
+          - 12
+          - 20
+        say: 'The overlap is too big now: n(A ∪ B) has dropped below 40, so some students would take neither. The class has nobody like that.'
+    - prompt: Make n(A) = 12 and n(B) = 9 with A and B disjoint.
+      want:
+        a: 12
+        b: 9
+        x: 0
+      mistakes:
+      - when:
+          a: 12
+          b: 9
+          x:
+          - 1
+          - 9
+        say: Disjoint sets share nothing, so n(A ∩ B) = 0 and n(A ∪ B) is just 12 + 9.
+    - prompt: 21 are only in A, 10 only in B, and n(A ∪ B) = 39. Set n(A), n(B) and the overlap.
+      want:
+        ao: 21
+        bo: 10
+        u: 39
+      hint: Only-A + only-B + both = the union.
+      mistakes:
+      - when:
+          a: 21
+          b: 10
+        say: n(A) counts everything in A, the overlap too. 21 is only the part of A outside B, so n(A) = 21 + overlap.
+      - when:
+          ao: 21
+          bo: 10
+          u:
+          - 31
+          - 38
+        say: The union is still short of 39. The 8 in the gap are the ones in both sets.
   items:
   - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A ∪ B?
     answer: '5'

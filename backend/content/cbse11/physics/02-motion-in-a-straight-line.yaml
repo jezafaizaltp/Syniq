@@ -41,6 +41,86 @@ concepts:
       - A
       - v = 20 m/s
     alt: A velocity–time graph rising in a straight line from 0 to 20 m/s in 4 s; the slope is the acceleration and the triangle's area is the displacement.
+  activity:
+    type: formula
+    prompt: Walk east, then turn and walk west. Speed uses the whole path; velocity uses only where you end up.
+    inputs:
+    - name: e
+      label: East first
+      min: 0
+      max: 100
+      step: 10
+      start: 0
+      unit: m
+    - name: w
+      label: Then west
+      min: 0
+      max: 100
+      step: 10
+      start: 0
+      unit: m
+    - name: t
+      label: Total time
+      min: 10
+      max: 100
+      step: 10
+      start: 10
+      unit: s
+    outputs:
+    - name: dist
+      label: Distance walked
+      expr: e+w
+      unit: m
+    - name: disp
+      label: Displacement (east +)
+      expr: e-w
+      unit: m
+    - name: speed
+      label: Average speed
+      expr: (e+w)/t
+      unit: m/s
+      places: 2
+    - name: vel
+      label: Average velocity
+      expr: (e-w)/t
+      unit: m/s
+      places: 2
+    goals:
+    - prompt: Make the average velocity 0 but the average speed 3 m/s.
+      want:
+        vel: 0
+        speed: 3
+      mistakes:
+      - when:
+          e: 0
+          w: 0
+        say: Standing still gives 0 for both. Walk somewhere and come back.
+      - when:
+          vel:
+          - 0.1
+          - 10
+        say: You end up east of the start, so the velocity isn't 0. Come all the way back.
+    - prompt: Make the average speed 2 m/s and the average velocity 1 m/s.
+      want:
+        speed: 2
+        vel: 1
+      mistakes:
+      - when:
+          vel: 2
+        say: 'That''s a velocity of 2: you went one way only. Walk back part of the way: the path stays long but the displacement shrinks.'
+      - when:
+          speed: 1
+          vel: 1
+        say: Speed and velocity match only when you never turn back. Add some walking west.
+    - prompt: Finish 40 m west of the start, after walking 100 m in all.
+      want:
+        disp: -40
+        dist: 100
+      mistakes:
+      - when:
+          disp: 40
+          dist: 100
+        say: '+40 m ends east of the start. West is the negative direction: walk further west than east.'
   items:
   - prompt: A person walks 4 m east then 3 m west. What is the displacement (in m, east positive)?
     answer: '1'
@@ -121,6 +201,68 @@ concepts:
       - v
       - t
     alt: v = u + at has no s, s = ut + ½at² has no v, and v² = u² + 2as has no t.
+  activity:
+    type: formula
+    prompt: A ball is thrown straight up at u m/s (g = 10 m/s²). It rises to h = u² ÷ 2g and takes u ÷ g to reach the top.
+    inputs:
+    - name: u
+      label: Throw speed u
+      min: 0
+      max: 90
+      step: 1
+      start: 10
+      unit: m/s
+    outputs:
+    - name: h
+      label: Greatest height
+      expr: u^2/20
+      unit: m
+      places: 1
+    - name: tup
+      label: Time to the top
+      expr: u/10
+      unit: s
+      places: 1
+    - name: tt
+      label: Time in the air
+      expr: u/5
+      unit: s
+      places: 1
+    goals:
+    - prompt: Throw the ball so it rises 45 m.
+      want:
+        h: 45
+      mistakes:
+      - when:
+          u: 45
+        say: 45 m/s would send it up 101 m. The height is u² ÷ 2g, so u² = 2 × 10 × 45.
+      - when:
+          u: 90
+        say: 'That''s twice 45: it would rise 405 m. Height grows with u², not u.'
+      - when:
+          u:
+          - 1
+          - 29
+        say: Not high enough yet. h = u² ÷ 20.
+    - prompt: Make the ball spend 4 s in the air altogether.
+      want:
+        tt: 4
+      mistakes:
+      - when:
+          u: 40
+        say: u = 40 takes 4 s just to reach the top. Up and down take the same time, so the top comes at 2 s.
+    - prompt: Throw it 80 m high.
+      want:
+        h: 80
+      mistakes:
+      - when:
+          u: 80
+        say: 'u = 80 rises 320 m. Height goes as u²: u² = 2 × 10 × 80.'
+      - when:
+          u:
+          - 1
+          - 39
+        say: Not high enough yet. h = u² ÷ 20.
   items:
   - prompt: A car starts from rest with acceleration 2 m/s². Find its speed after 5 s (in m/s).
     answer: '10'

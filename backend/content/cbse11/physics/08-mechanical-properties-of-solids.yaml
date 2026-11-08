@@ -28,6 +28,22 @@ concepts:
     - Ultimate tensile strength
     - Fracture point
     alt: 'Stages on a stress–strain curve: proportional limit, yield point, ultimate strength, then fracture.'
+  activity:
+    type: order
+    prompt: A metal wire is stretched more and more. Put what happens in order.
+    steps:
+    - Strain grows in step with stress (Hooke's law)
+    - 'Proportional limit: the straight line ends'
+    - 'Yield point: the wire starts to flow'
+    - 'Plastic region: it no longer springs back'
+    - 'Ultimate tensile strength: greatest stress'
+    - 'Fracture: the wire breaks'
+    reasons:
+      'Proportional limit: the straight line ends': The graph starts as a straight line. Only once the stress is past that region does it stop being proportional.
+      'Yield point: the wire starts to flow': 'Yielding comes after the elastic region: until then, removing the load lets the wire spring back.'
+      'Plastic region: it no longer springs back': Permanent stretch only begins once the wire has yielded.
+      'Ultimate tensile strength: greatest stress': The highest stress is reached well into the plastic region, after the wire has been permanently stretched.
+      'Fracture: the wire breaks': 'Breaking is last: after the greatest stress the wire narrows (necks) and then snaps.'
   items:
   - prompt: A force of 200 N acts on a wire of cross-section 2 × 10⁻⁶ m². Find the stress in units of 10⁶ N/m².
     answer: '100'
@@ -126,6 +142,92 @@ concepts:
       - change in shape
       - change in volume
     alt: Young's modulus is for length change, shear modulus for shape change and bulk modulus for volume change.
+  activity:
+    type: formula
+    prompt: A steel wire (Y = 2 × 10¹¹ Pa) carries a load F. It stretches by ΔL = FL ÷ (AY).
+    inputs:
+    - name: f
+      label: Load F
+      min: 1
+      max: 50
+      step: 1
+      start: 1
+      unit: kN
+    - name: l
+      label: Length L
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: m
+    - name: a
+      label: Cross-section A
+      min: 5
+      max: 100
+      step: 5
+      start: 100
+      unit: mm²
+    outputs:
+    - name: stress
+      label: Stress F/A
+      expr: f*1000/a
+      unit: MPa
+      places: 1
+    - name: strain
+      label: Strain
+      expr: f*1000/a/200000
+      places: 5
+    - name: dl
+      label: Stretch ΔL
+      expr: 5*f*l/a
+      unit: mm
+      places: 2
+    goals:
+    - prompt: A 2 m steel wire carries 10 kN. Choose its area so it stretches 1 mm.
+      want:
+        f: 10
+        l: 2
+        dl: 1
+      mistakes:
+      - when:
+          f: 10
+          l: 2
+          a: 50
+        say: '50 mm² stretches 2 mm. A thicker wire shares the load: doubling A halves ΔL.'
+      - when:
+          f: 10
+          l: 2
+          a:
+          - 5
+          - 45
+        say: 'Too thin: it stretches more than 1 mm.'
+    - prompt: A 4 m wire of area 20 mm² may stretch at most 2 mm. Find the largest load.
+      want:
+        l: 4
+        a: 20
+        dl: 2
+      mistakes:
+      - when:
+          l: 4
+          a: 20
+          f:
+          - 3
+          - 50
+        say: 'Too much: the wire stretches past 2 mm. ΔL = 5 × F × 4 ÷ 20.'
+    - prompt: Make the strain 0.001 (a 0.1% stretch).
+      want:
+        strain: 0.001
+      mistakes:
+      - when:
+          strain:
+          - 0.0001
+          - 0.0009
+        say: Not enough. Strain = stress ÷ Y, so you need a stress of 200 MPa.
+      - when:
+          strain:
+          - 0.0011
+          - 0.05
+        say: Too much. Strain = stress ÷ Y, so you need a stress of 200 MPa.
   items:
   - prompt: Stress is 2 × 10⁸ Pa and strain is 10⁻³. Find Young's modulus in units of 10¹¹ Pa.
     answer: '2'

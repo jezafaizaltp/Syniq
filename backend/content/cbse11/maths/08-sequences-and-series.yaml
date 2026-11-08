@@ -47,6 +47,83 @@ concepts:
     - from: 15
       to: 19
       label: '+4'
+  activity:
+    type: formula
+    prompt: An AP starts at a and adds d each time. aₙ = a + (n − 1)d and Sₙ = n/2 × (2a + (n − 1)d).
+    inputs:
+    - name: a
+      label: First term a
+      min: -10
+      max: 30
+      step: 1
+      start: 0
+    - name: d
+      label: Common difference d
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: n
+      label: Number of terms n
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: an
+      label: nth term aₙ
+      expr: a+(n-1)*d
+    - name: sn
+      label: Sum Sₙ
+      expr: n*(2*a+(n-1)*d)/2
+    goals:
+    - prompt: 'Insert 3 arithmetic means between 1 and 13: make 1, _, _, _, 13.'
+      want:
+        a: 1
+        n: 5
+        an: 13
+      hint: 3 means plus the two ends make 5 terms, with 4 gaps.
+      mistakes:
+      - when:
+          a: 1
+          d: 4
+        say: 'With d = 4 you go 1, 5, 9, 13: only 2 numbers between. 3 means make 4 gaps, so d = 12 ÷ 4.'
+      - when:
+          a: 1
+          n: 4
+          an: 13
+        say: n = 4 leaves only 2 numbers between 1 and 13. 3 means plus the two ends make 5 terms.
+    - prompt: How many odd numbers 1 + 3 + 5 + … add up to 225?
+      want:
+        a: 1
+        d: 2
+        sn: 225
+      mistakes:
+      - when:
+          a: 1
+          d: 2
+          n:
+          - 16
+          - 30
+        say: 'Too many terms: the sum has gone past 225.'
+      - when:
+          a: 1
+          d: 2
+          n:
+          - 1
+          - 14
+        say: 'Not enough terms yet: the sum is below 225. Keep adding odd numbers.'
+    - prompt: Start at a = 21 with d = −3. How many terms add up to 0?
+      want:
+        a: 21
+        d: -3
+        sn: 0
+      mistakes:
+      - when:
+          a: 21
+          d: -3
+          an: 0
+        say: 'That''s the term that equals 0 (the 8th). The sum is still positive there: the negative terms after it have to cancel the positive ones.'
   items:
   - prompt: Find the 10th term of the AP 3, 7, 11, ...
     answer: '39'
@@ -129,6 +206,74 @@ concepts:
     - label: '6'
       value: 32
     alt: 'A GP with ratio 2: the terms 1, 2, 4, 8, 16, 32 double each time.'
+  activity:
+    type: formula
+    prompt: A GP multiplies by r each time. When −1 < r < 1 the terms shrink and the sum heads to S∞ = a ÷ (1 − r).
+    inputs:
+    - name: a
+      label: First term a
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+    - name: r
+      label: Common ratio r
+      min: -0.9
+      max: 0.9
+      step: 0.1
+      start: 0
+    outputs:
+    - name: t2
+      label: 2nd term
+      expr: a*r
+      places: 3
+    - name: t3
+      label: 3rd term
+      expr: a*r^2
+      places: 3
+    - name: sinf
+      label: Sum to infinity
+      expr: a/(1-r)
+      places: 3
+    goals:
+    - prompt: Make 1 + ½ + ¼ + …
+      want:
+        a: 1
+        r: 0.5
+      mistakes:
+      - when:
+          a: 1
+          r: -0.5
+        say: '−0.5 makes the terms switch sign: 1 − ½ + ¼ … Each term is half the one before, so r = +0.5.'
+      - when:
+          a: 2
+        say: a is the first term, 1.
+    - prompt: First term 6, sum to infinity 10. Find r.
+      want:
+        a: 6
+        sinf: 10
+      mistakes:
+      - when:
+          a: 6
+          r:
+          - -0.9
+          - -0.1
+        say: A negative r makes the sum smaller than a. To grow from 6 to 10, r must be positive.
+      - when:
+          a: 6
+          sinf:
+          - 10.1
+          - 60
+        say: 'Too big: r is too close to 1. 10 = 6 ÷ (1 − r), so 1 − r = 0.6.'
+    - prompt: Sum to infinity 15, common ratio 0.2. Find a.
+      want:
+        r: 0.2
+        sinf: 15
+      mistakes:
+      - when:
+          r: 0.2
+          a: 15
+        say: 'a = 15 gives S∞ = 15 ÷ 0.8 = 18.75. With r > 0 the sum is bigger than a: a = S∞ × (1 − r).'
   items:
   - prompt: Find the 6th term of the GP 2, 6, 18, ...
     answer: '486'

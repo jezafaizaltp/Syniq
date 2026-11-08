@@ -33,6 +33,65 @@ concepts:
       - tiny dense nucleus
       - fixed energy levels
     alt: 'Three atomic models: Thomson''s sphere, Rutherford''s nucleus and Bohr''s energy levels.'
+  activity:
+    type: formula
+    prompt: In Bohr's hydrogen atom, Eₙ = −13.6 ÷ n² eV. An electron falling from an upper level to a lower one gives a photon of λ = 1240 ÷ ΔE nm.
+    inputs:
+    - name: u
+      label: Upper level
+      min: 2
+      max: 7
+      step: 1
+      start: 2
+    - name: d
+      label: Lower level
+      min: 1
+      max: 6
+      step: 1
+      start: 1
+    outputs:
+    - name: e
+      label: Energy given out ΔE
+      expr: 13.6*abs(1/d^2-1/u^2)
+      unit: eV
+      places: 2
+    - name: lam
+      label: Wavelength
+      expr: 1240/max(0.1,13.6*abs(1/d^2-1/u^2))
+      unit: nm
+      places: 1
+    goals:
+    - prompt: Make the red Balmer line, near 656 nm.
+      want:
+        lam:
+        - 650
+        - 660
+      mistakes:
+      - when:
+          d: 1
+        say: Lines ending on n = 1 are the Lyman series, ultraviolet. Visible Balmer lines end on n = 2.
+      - when:
+          u: 4
+          d: 2
+        say: 4 → 2 gives 486 nm, blue-green. Red is the smallest Balmer jump, so the least energy.
+    - prompt: Make a jump that gives out 12.09 eV.
+      want:
+        e:
+        - 12
+        - 12.2
+      mistakes:
+      - when:
+          d: 2
+        say: Any fall to n = 2 gives out at most 3.4 eV. Big energies come from falls to n = 1.
+    - prompt: Make the Balmer line with the shortest wavelength these levels allow.
+      want:
+        u: 7
+        d: 2
+      mistakes:
+      - when:
+          u: 3
+          d: 2
+        say: 'That''s the longest Balmer line, the red one. Shorter wavelength means more energy: a bigger fall.'
   items:
   - prompt: How many neutrons are in an atom with Z = 17 and A = 35?
     answer: '18'
@@ -120,6 +179,49 @@ concepts:
     - 3d
     - 4p
     alt: 'Order of filling orbitals by the Aufbau principle: 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p.'
+  activity:
+    type: sort
+    prompt: Can an electron have this set of quantum numbers (n, l, mₗ, mₛ)?
+    bins:
+    - Possible
+    - Impossible
+    items:
+    - label: n = 2, l = 1, mₗ = 0, mₛ = +½
+      bin: Possible
+      clue: 'Check: l < n? mₗ between −l and +l?'
+      why: 'A 2p electron: l = 1 < 2, mₗ = 0 is in −1 … +1, mₛ = +½.'
+    - label: n = 1, l = 1, mₗ = 0, mₛ = +½
+      bin: Impossible
+      clue: How large can l be when n = 1?
+      why: l goes from 0 to n − 1, so n = 1 allows only l = 0. There is no 1p.
+    - label: n = 3, l = 2, mₗ = −2, mₛ = −½
+      bin: Possible
+      clue: Is −2 inside −l … +l?
+      why: 'A 3d electron: mₗ = −2 is in −2 … +2.'
+    - label: n = 2, l = 0, mₗ = 1, mₛ = +½
+      bin: Impossible
+      clue: When l = 0, which values can mₗ take?
+      why: mₗ runs from −l to +l, so l = 0 allows only mₗ = 0.
+    - label: n = 3, l = 1, mₗ = −1, mₛ = 0
+      bin: Impossible
+      clue: What values can spin take?
+      why: mₛ is only +½ or −½; 0 isn't a spin.
+    - label: n = 4, l = 3, mₗ = +3, mₛ = +½
+      bin: Possible
+      clue: Is l = 3 below n = 4? Is +3 inside −3 … +3?
+      why: 'A 4f electron: every rule holds.'
+    - label: n = 0, l = 0, mₗ = 0, mₛ = +½
+      bin: Impossible
+      clue: Which number does the shell count start at?
+      why: n starts at 1; there's no shell 0.
+    - label: n = 3, l = 3, mₗ = 0, mₛ = −½
+      bin: Impossible
+      clue: Can l equal n?
+      why: l can be at most n − 1, so n = 3 has no l = 3 (there is no 3f).
+    - label: n = 4, l = 2, mₗ = −1, mₛ = −½
+      bin: Possible
+      clue: Check each rule in turn.
+      why: 'A 4d electron: l < n, mₗ in −2 … +2, spin −½.'
   items:
   - prompt: What is the maximum number of electrons in the n = 3 shell?
     answer: '18'

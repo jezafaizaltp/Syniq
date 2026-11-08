@@ -35,6 +35,62 @@ concepts:
       - volume
       - pressure
     alt: Four thermodynamic processes and what each keeps constant.
+  activity:
+    type: formula
+    prompt: 'First law: ΔU = Q − W. Q is heat given TO the gas; W is work done BY the gas.'
+    inputs:
+    - name: q
+      label: Heat into the gas Q
+      min: -500
+      max: 500
+      step: 50
+      start: 0
+      unit: J
+    - name: w
+      label: Work done by the gas W
+      min: -500
+      max: 500
+      step: 50
+      start: 0
+      unit: J
+    outputs:
+    - name: du
+      label: Change in internal energy ΔU
+      expr: q-w
+      unit: J
+    goals:
+    - prompt: A gas takes in 300 J of heat and its internal energy rises by 200 J. Set the work it did.
+      want:
+        q: 300
+        du: 200
+      mistakes:
+      - when:
+          q: 300
+          w: -100
+        say: 'W is the work done BY the gas. Here ΔU is less than Q, so the gas spent 100 J pushing outward: W = +100.'
+    - prompt: A gas expands at constant temperature and does 250 J of work. Set Q.
+      want:
+        w: 250
+        du: 0
+      mistakes:
+      - when:
+          w: 250
+          q: 0
+        say: 'Q = 0 makes ΔU = −250: the gas would cool. At constant temperature U stays the same, so heat must flow in to pay for the work.'
+    - prompt: A gas is squashed with no heat flow (adiabatic) and 400 J of work is done ON it.
+      want:
+        q: 0
+        w: -400
+      mistakes:
+      - when:
+          q: 0
+          w: 400
+        say: W = +400 is the gas doing work. Work done ON the gas makes W negative, so ΔU = 0 − (−400).
+      - when:
+          q:
+          - 50
+          - 500
+        say: 'Adiabatic means no heat flows: Q = 0.'
   items:
   - prompt: A gas absorbs 500 J of heat and does 200 J of work. Find the change in internal energy (in J).
     answer: '300'
@@ -121,6 +177,57 @@ concepts:
     - Cold sink gets Q₂
     - W = Q₁ − Q₂
     alt: A heat engine takes Q₁ from the hot reservoir, does work W, and rejects Q₂ to the cold sink.
+  activity:
+    type: formula
+    prompt: The best a heat engine can do is the Carnot efficiency 1 − T_cold ÷ T_hot, with both temperatures in kelvin.
+    inputs:
+    - name: th
+      label: Hot side T_hot
+      min: 300
+      max: 800
+      step: 1
+      start: 300
+      unit: K
+    - name: tc
+      label: Cold side T_cold
+      min: 1
+      max: 400
+      step: 1
+      start: 1
+      unit: K
+    outputs:
+    - name: eff
+      label: Carnot efficiency
+      expr: 1-tc/th
+      places: 3
+    goals:
+    - prompt: The hot side is at 327 °C and the cold side at 27 °C. Set them and read the efficiency.
+      want:
+        th: 600
+        tc: 300
+      mistakes:
+      - when:
+          th: 327
+          tc: 27
+        say: 'Those are °C. Carnot''s formula needs kelvin: add 273 to each.'
+    - prompt: Keep the cold side at 300 K. Make the efficiency 0.6.
+      want:
+        tc: 300
+        eff: 0.6
+      mistakes:
+      - when:
+          tc: 300
+          th: 720
+        say: '720 K gives 0.583. Efficiency isn''t in proportion to T_hot: 1 − 300/T = 0.6 means 300/T = 0.4.'
+    - prompt: The hot side is at 400 K. Make the efficiency 0.25.
+      want:
+        th: 400
+        eff: 0.25
+      mistakes:
+      - when:
+          th: 400
+          tc: 100
+        say: T_cold = 100 K gives 0.75. Efficiency is 1 − T_cold/T_hot, so T_cold must be 75% of 400.
   items:
   - prompt: An engine takes 1000 J of heat and rejects 600 J. Find its efficiency as a percentage.
     answer: '40'

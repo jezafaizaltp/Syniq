@@ -27,6 +27,85 @@ concepts:
     - Make new bonds (gives energy)
     - Products, ΔH = net change
     alt: A reaction breaks bonds, which takes energy, then makes new ones, which releases energy; ΔH is the net change.
+  activity:
+    type: formula
+    prompt: H₂ + Cl₂ → 2HCl. Breaking bonds costs energy; making bonds gives it out. ΔH = energy to break − energy released by making.
+    inputs:
+    - name: x
+      label: H–H bonds broken (436 kJ each)
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    - name: y
+      label: Cl–Cl bonds broken (242 kJ each)
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    - name: z
+      label: H–Cl bonds made (431 kJ each)
+      min: 0
+      max: 8
+      step: 1
+      start: 0
+    outputs:
+    - name: brk
+      label: Energy to break
+      expr: 436*x+242*y
+      unit: kJ
+    - name: mk
+      label: Energy from making
+      expr: 431*z
+      unit: kJ
+    - name: dh
+      label: ΔH
+      expr: 436*x+242*y-431*z
+      unit: kJ
+    goals:
+    - prompt: Set up H₂ + Cl₂ → 2HCl.
+      want:
+        x: 1
+        y: 1
+        z: 2
+      mistakes:
+      - when:
+          x: 1
+          y: 1
+          z: 1
+        say: Two HCl molecules form, so two H–Cl bonds are made.
+      - when:
+          x: 2
+          y: 2
+          z: 2
+        say: 'One H₂ and one Cl₂ are enough for 2HCl: each molecule splits into two atoms.'
+    - prompt: Make 4 HCl. Read ΔH.
+      want:
+        x: 2
+        y: 2
+        z: 4
+      mistakes:
+      - when:
+          x: 2
+          y: 2
+          z: 2
+        say: 4 HCl means 4 H–Cl bonds made.
+      - when:
+          x: 4
+          y: 4
+          z: 4
+        say: '4 HCl need only 2 H₂ and 2 Cl₂: each molecule gives two atoms.'
+    - prompt: 'Show that only breaking bonds is endothermic: break one H₂ and one Cl₂, make nothing.'
+      want:
+        x: 1
+        y: 1
+        z: 0
+      mistakes:
+      - when:
+          dh:
+          - -1000
+          - -1
+        say: A negative ΔH means energy is given out, which needs bonds to be made.
   items:
   - prompt: A system absorbs 300 J of heat and 100 J of work is done on it. Find ΔU (in J).
     answer: '400'
@@ -130,6 +209,110 @@ concepts:
       - at low T
       - at high T
     alt: Four sign combinations of ΔH and ΔS and when each process is spontaneous.
+  activity:
+    type: formula
+    prompt: 'Gibbs energy: ΔG = ΔH − TΔS. A reaction goes on its own when ΔG < 0.'
+    inputs:
+    - name: t
+      label: Temperature T
+      min: 100
+      max: 1500
+      step: 10
+      start: 300
+      unit: K
+    - name: h
+      label: ΔH
+      min: -200
+      max: 200
+      step: 20
+      start: 0
+      unit: kJ/mol
+    - name: s
+      label: ΔS
+      min: -0.3
+      max: 0.3
+      step: 0.05
+      start: 0
+      unit: kJ/(mol K)
+    outputs:
+    - name: dg
+      label: ΔG
+      expr: h-t*s
+      unit: kJ/mol
+      places: 1
+    goals:
+    - prompt: 'Limestone breaking down: ΔH = +180, ΔS = +0.15. Find the lowest temperature where ΔG < 0.'
+      want:
+        h: 180
+        s: 0.15
+        dg:
+        - -1.6
+        - -1
+      mistakes:
+      - when:
+          h: 180
+          s: 0.15
+          t: 1200
+        say: 'At 1200 K, ΔG = 0: equilibrium, no drive either way. It must be just above.'
+      - when:
+          h: 180
+          s: 0.15
+          t:
+          - 100
+          - 1190
+        say: ΔG is still positive. Heat it more until TΔS beats ΔH.
+      - when:
+          h: 180
+          s: 0.15
+          t:
+          - 1220
+          - 1500
+        say: That works, but it isn't the lowest. Come down until ΔG is just below 0.
+    - prompt: Make a reaction that goes on its own at every temperature.
+      want:
+        h:
+        - -200
+        - -20
+        s:
+        - 0.05
+        - 0.3
+      mistakes:
+      - when:
+          h:
+          - -200
+          - -20
+          s:
+          - -0.3
+          - -0.05
+        say: 'Exothermic, but the entropy falls: at high T the −TΔS term turns positive and wins.'
+      - when:
+          h:
+          - 20
+          - 200
+          s:
+          - 0.05
+          - 0.3
+        say: Endothermic with rising entropy goes only when T is high enough.
+    - prompt: ΔH = −100, ΔS = −0.2. Find the highest temperature where it still goes.
+      want:
+        h: -100
+        s: -0.2
+        dg:
+        - -2.5
+        - -0.1
+      mistakes:
+      - when:
+          h: -100
+          s: -0.2
+          t:
+          - 510
+          - 1500
+        say: 'Above 500 K, −TΔS (positive here) beats ΔH: ΔG > 0.'
+      - when:
+          h: -100
+          s: -0.2
+          t: 500
+        say: 'At 500 K, ΔG = 0: equilibrium. Go just below.'
   items:
   - prompt: ΔH = 40 kJ/mol and ΔS = 0.1 kJ/(mol K). Find ΔG (kJ/mol) at 500 K.
     answer: '-10'

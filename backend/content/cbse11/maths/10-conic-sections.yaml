@@ -32,6 +32,92 @@ concepts:
       - directrix x = −a
       - latus rectum 4a
     alt: A circle (x − h)² + (y − k)² = r² has centre (h, k) and radius r; the parabola y² = 4ax has focus (a, 0), directrix x = −a and latus rectum 4a.
+  activity:
+    type: formula
+    prompt: x² + y² + 2gx + 2fy + c = 0 is a circle with centre (−g, −f) and r² = g² + f² − c.
+    inputs:
+    - name: g
+      label: g
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: f
+      label: f
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: c
+      label: c
+      min: -30
+      max: 30
+      step: 1
+      start: 0
+    outputs:
+    - name: h
+      label: Centre x, −g
+      expr: -g
+    - name: k
+      label: Centre y, −f
+      expr: -f
+    - name: rr
+      label: r² = g² + f² − c
+      expr: g^2+f^2-c
+    - name: rad
+      label: Radius r
+      expr: sqrt(max(0,g^2+f^2-c))
+      places: 2
+    goals:
+    - prompt: Make the circle with centre (2, −3) and radius 5.
+      want:
+        h: 2
+        k: -3
+        rad: 5
+      mistakes:
+      - when:
+          g: 2
+          f: -3
+        say: 'The centre is (−g, −f): g = 2 puts it at x = −2. Flip both signs.'
+      - when:
+          h: 2
+          k: -3
+          c: 25
+        say: c isn't r². r² = g² + f² − c, so c = 4 + 9 − 25.
+      - when:
+          h: 2
+          k: -3
+          c: -25
+        say: c = −25 makes r² = 13 + 25 = 38. You need g² + f² − c = 25.
+    - prompt: Make a circle centred at (3, 4) that passes through the origin.
+      want:
+        h: 3
+        k: 4
+        c: 0
+      mistakes:
+      - when:
+          h: 3
+          k: 4
+          c: -25
+        say: 'That gives r² = 50: too big. Put x = y = 0 into the equation: if (0, 0) is on the circle, c = 0.'
+      - when:
+          h: 3
+          k: 4
+          c: 25
+        say: 'r² = 25 − 25 = 0: just a single point. Put x = y = 0 into the equation: c = 0.'
+    - prompt: Keep the centre (1, 1) but make the equation describe no circle at all (r² < 0).
+      want:
+        h: 1
+        k: 1
+        rr:
+        - -30
+        - -1
+      mistakes:
+      - when:
+          h: 1
+          k: 1
+          rr: 0
+        say: r² = 0 is a single point, a 'point circle'. Push c higher so r² goes below 0.
   items:
   - prompt: Find the radius of the circle x² + y² = 49.
     answer: '7'
@@ -119,6 +205,81 @@ concepts:
       - c² = a² + b²
       - e > 1
     alt: An ellipse x²/a² + y²/b² = 1 has c² = a² − b² and e < 1; a hyperbola x²/a² − y²/b² = 1 has c² = a² + b² and e > 1.
+  activity:
+    type: formula
+    prompt: 'For x²/a² ± y²/b² = 1: an ellipse has foci at ±c with c² = a² − b²; a hyperbola has c² = a² + b². e = c ÷ a.'
+    inputs:
+    - name: a
+      label: a
+      min: 1
+      max: 10
+      step: 1
+      start: 2
+    - name: b
+      label: b
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: ce
+      label: Ellipse c (a > b)
+      expr: sqrt(max(0,a^2-b^2))
+      places: 2
+    - name: e
+      label: Ellipse e = c/a
+      expr: sqrt(max(0,a^2-b^2))/a
+      places: 3
+    - name: ch
+      label: Hyperbola c
+      expr: sqrt(a^2+b^2)
+      places: 2
+    - name: eh
+      label: Hyperbola e
+      expr: sqrt(a^2+b^2)/a
+      places: 3
+    goals:
+    - prompt: Make an ellipse with vertices (±5, 0) and foci (±4, 0).
+      want:
+        a: 5
+        ce: 4
+      mistakes:
+      - when:
+          a: 5
+          b: 4
+        say: b = 4 puts the foci at ±3. c² = a² − b², so b² = 25 − 16.
+      - when:
+          a: 4
+        say: a is the vertex distance, 5. The foci sit inside the ellipse, at ±c.
+    - prompt: Make a hyperbola with vertices (±3, 0) and foci (±5, 0).
+      want:
+        a: 3
+        ch: 5
+      mistakes:
+      - when:
+          a: 5
+        say: a is the vertex distance, 3. A hyperbola's foci lie beyond its vertices.
+      - when:
+          a: 3
+          b:
+          - 1
+          - 3
+        say: For a hyperbola c² = a² + b², so b² = 25 − 9.
+    - prompt: Make an ellipse with a = 10 and eccentricity 0.6.
+      want:
+        a: 10
+        e: 0.6
+      mistakes:
+      - when:
+          a: 10
+          b: 6
+        say: b = 6 gives c = 8 and e = 0.8. e = c/a = 0.6 means c = 6, then b² = 100 − 36.
+      - when:
+          a: 10
+          eh:
+          - 1
+          - 2
+        say: 'Read the ellipse row: a hyperbola''s e is always more than 1.'
   items:
   - prompt: For x²/25 + y²/9 = 1, find c (the distance from the centre to a focus).
     answer: '4'

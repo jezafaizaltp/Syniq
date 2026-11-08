@@ -34,6 +34,78 @@ concepts:
     - at: 2.1
       label: '4.1'
     alt: As x approaches 2 from both sides, (x² − 4)/(x − 2) approaches 4.
+  activity:
+    type: formula
+    prompt: f(x) = (x² − 4) ÷ (x − 2) has no value at x = 2 (0 ÷ 0). Move x close to 2 and watch f(x).
+    inputs:
+    - name: x
+      label: x
+      min: 1.505
+      max: 2.495
+      step: 0.01
+      start: 1.505
+    outputs:
+    - name: num
+      label: Top, x² − 4
+      expr: x^2-4
+      places: 4
+    - name: den
+      label: Bottom, x − 2
+      expr: x-2
+      places: 3
+    - name: f
+      label: f(x)
+      expr: (x^2-4)/(x-2)
+      places: 3
+    goals:
+    - prompt: Come towards 2 from the left until f(x) is within 0.01 of where it's heading.
+      want:
+        f:
+        - 3.99
+        - 3.9999
+      mistakes:
+      - when:
+          x:
+          - 2.005
+          - 2.495
+        say: That's to the right of 2. Approach from the left, with x below 2.
+      - when:
+          f:
+          - 3.5
+          - 3.985
+        say: Closer, but f is still more than 0.01 below its limit. Nudge x nearer to 2.
+    - prompt: Now come from the right until f(x) is within 0.01 of the limit.
+      want:
+        f:
+        - 4.0001
+        - 4.01
+      mistakes:
+      - when:
+          x:
+          - 1.505
+          - 1.995
+        say: That's left of 2. Approach from above.
+      - when:
+          f:
+          - 4.015
+          - 4.5
+        say: Closer, but still more than 0.01 above. Move x nearer to 2.
+    - prompt: Make the top, x² − 4, within 0.03 of zero. What is f(x) doing as both top and bottom shrink?
+      want:
+        num:
+        - -0.03
+        - 0.03
+      mistakes:
+      - when:
+          num:
+          - -1.8
+          - -0.031
+        say: 'Still too far below: x² − 4 shrinks only as x comes very close to 2.'
+      - when:
+          num:
+          - 0.031
+          - 2.3
+        say: 'Still too far above: bring x closer to 2.'
   items:
   - prompt: Find lim(x→3) (x² + 1).
     answer: '10'
@@ -112,6 +184,76 @@ concepts:
       - cos x
       - −sin x
     alt: The derivative of xⁿ is nxⁿ⁻¹, of sin x is cos x, and of cos x is −sin x.
+  activity:
+    type: formula
+    prompt: For y = x³, the secant from x = a to x = a + h has slope ((a + h)³ − a³) ÷ h. As h shrinks it heads to the tangent slope, 3a².
+    inputs:
+    - name: a
+      label: Point a
+      min: -3
+      max: 3
+      step: 1
+      start: -3
+    - name: h
+      label: Step h
+      min: 0.01
+      max: 1
+      step: 0.01
+      start: 1
+    outputs:
+    - name: sec
+      label: Secant slope
+      expr: ((a+h)^3-a^3)/h
+      places: 3
+    - name: tan
+      label: Tangent slope 3a²
+      expr: 3*a^2
+    goals:
+    - prompt: At a = 1, shrink h until the secant slope is within 0.1 of the tangent slope.
+      want:
+        a: 1
+        sec:
+        - 2.9
+        - 3.1
+      mistakes:
+      - when:
+          a: 1
+          h:
+          - 0.5
+          - 1
+        say: h is still big, so the secant reaches far up the curve and is much steeper than the tangent. Shrink h.
+      - when:
+          a: 1
+          sec:
+          - 3.11
+          - 3.99
+        say: 'Closer. Keep shrinking h: the slope is heading to 3 × 1² = 3.'
+    - prompt: Find the point where the tangent to y = x³ is flat.
+      want:
+        tan: 0
+      mistakes:
+      - when:
+          a: -1
+        say: 'At a = −1 the slope is 3(−1)² = +3: squaring makes it positive. x³ rises on both sides of 0; only a = 0 makes 3a² zero.'
+    - prompt: At a = 2, shrink h until the secant slope is within 0.5 of the tangent slope.
+      want:
+        a: 2
+        sec:
+        - 11.5
+        - 12.5
+      mistakes:
+      - when:
+          a: 2
+          h:
+          - 0.3
+          - 1
+        say: 'h is too big: the secant is much steeper than the tangent, 3 × 2² = 12.'
+      - when:
+          a: 2
+          sec:
+          - 12.51
+          - 15
+        say: Closer. Shrink h a little more.
   items:
   - prompt: Find the derivative of x³ at x = 2.
     answer: '12'

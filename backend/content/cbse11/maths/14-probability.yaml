@@ -35,6 +35,53 @@ concepts:
     - - TH
       - TT
     alt: 'Sample space for tossing two coins: HH, HT, TH and TT.'
+  activity:
+    type: sort
+    prompt: Can both events happen on the same go?
+    bins:
+    - Mutually exclusive
+    - Can happen together
+    items:
+    - label: 'One die: A even, B odd'
+      bin: Mutually exclusive
+      clue: Is there a number that is even and odd?
+      why: No number is both even and odd, so A and B can't happen together.
+    - label: 'One die: A more than 3, B even'
+      bin: Can happen together
+      clue: Does 4 or 6 fit both?
+      why: 4 and 6 are in both, so both can happen at once.
+    - label: 'One die: A a 6, B less than 3'
+      bin: Mutually exclusive
+      clue: Can a 6 be less than 3?
+      why: 'A 6 is never below 3: no shared outcome.'
+    - label: 'One die: A prime, B even'
+      bin: Can happen together
+      clue: Is there an even prime on a die?
+      why: 2 is prime and even, so they overlap.
+    - label: 'One card: A a king, B a heart'
+      bin: Can happen together
+      clue: Is there a card that is both?
+      why: The king of hearts is both.
+    - label: 'One card: A a red card, B a spade'
+      bin: Mutually exclusive
+      clue: What colour are spades?
+      why: Spades are black, so no card is red and a spade.
+    - label: 'Two coins: A two heads, B at least one tail'
+      bin: Mutually exclusive
+      clue: If both coins are heads, can there be a tail?
+      why: HH has no tail, so these two never happen together.
+    - label: 'Two coins: A at least one head, B at least one tail'
+      bin: Can happen together
+      clue: What about HT?
+      why: HT has a head and a tail, so both happen.
+    - label: 'Two dice: A total 12, B a double'
+      bin: Can happen together
+      clue: How do you make 12?
+      why: Only (6, 6) makes 12, and it is a double.
+    - label: 'Two dice: A total 7, B a double'
+      bin: Mutually exclusive
+      clue: Can two equal numbers add to 7?
+      why: Two equal numbers make an even total, never 7.
   items:
   - prompt: How many outcomes are there when two coins are tossed?
     answer: '4'
@@ -119,6 +166,87 @@ concepts:
       - P(A) + P(B) − P(A ∩ B)
       - P(A) + P(B)
     alt: P(not A) = 1 − P(A); P(A or B) = P(A) + P(B) − P(A and B); for mutually exclusive events just add.
+  activity:
+    type: formula
+    prompt: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). The overlap is counted twice in P(A) + P(B), so it is taken away once.
+    inputs:
+    - name: pa
+      label: P(A)
+      min: 0
+      max: 1
+      step: 0.05
+      start: 0
+    - name: pb
+      label: P(B)
+      min: 0
+      max: 1
+      step: 0.05
+      start: 0
+    - name: pab
+      label: P(A ∩ B), both
+      min: 0
+      max: 1
+      step: 0.05
+      start: 0
+    outputs:
+    - name: u
+      label: P(A ∪ B), A or B
+      expr: pa+pb-pab
+      places: 2
+    - name: na
+      label: P(not A)
+      expr: 1-pa
+      places: 2
+    goals:
+    - prompt: P(A) = 0.5, P(B) = 0.4 and P(A ∪ B) = 0.7. Find P(A ∩ B).
+      want:
+        pa: 0.5
+        pb: 0.4
+        u: 0.7
+      mistakes:
+      - when:
+          pa: 0.5
+          pb: 0.4
+          pab: 0
+        say: With no overlap the union would be 0.9. The overlap is counted twice in P(A) + P(B).
+      - when:
+          pa: 0.5
+          pb: 0.4
+          pab: 0.7
+        say: 0.7 is the union, 'A or B'. 'A and B' is the overlap, which can't be bigger than P(B).
+    - prompt: A and B are mutually exclusive, P(A) = 0.35 and P(B) = 0.45. Find P(A ∪ B).
+      want:
+        pa: 0.35
+        pb: 0.45
+        pab: 0
+      mistakes:
+      - when:
+          pa: 0.35
+          pb: 0.45
+          pab:
+          - 0.05
+          - 0.45
+        say: Mutually exclusive events can't happen together, so P(A ∩ B) = 0.
+    - prompt: P(A) = 0.8 and P(B) = 0.6. What is the smallest P(A ∩ B) can be?
+      want:
+        pa: 0.8
+        pb: 0.6
+        pab: 0.4
+      mistakes:
+      - when:
+          pa: 0.8
+          pb: 0.6
+          u:
+          - 1.01
+          - 1.4
+        say: 'P(A ∪ B) is over 1, which is impossible: the overlap must be bigger.'
+      - when:
+          pa: 0.8
+          pb: 0.6
+          pab:
+          - 0.45
+          - 0.6
+        say: That works, but it isn't the smallest. Push P(A ∪ B) up to its limit, 1.
   items:
   - prompt: A die is rolled. Find the probability of getting a number greater than 4.
     answer: 1/3

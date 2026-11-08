@@ -43,6 +43,63 @@ concepts:
       - phosphodiester
       - ester
     alt: Biomolecules, their building blocks and the bonds that join them.
+  activity:
+    type: sort
+    prompt: Which kind of biomolecule is it?
+    bins:
+    - Carbohydrate
+    - Protein
+    - Lipid
+    - Nucleic acid
+    items:
+    - label: Glucose
+      bin: Carbohydrate
+      clue: 'C₆H₁₂O₆: a simple sugar. Which group?'
+      why: A monosaccharide.
+    - label: Starch
+      bin: Carbohydrate
+      clue: A chain of glucose units stored in plants. Which group?
+      why: A polysaccharide.
+    - label: Cellulose
+      bin: Carbohydrate
+      clue: Glucose chains in plant cell walls. Which group?
+      why: A polysaccharide.
+    - label: Haemoglobin
+      bin: Protein
+      clue: A chain of amino acids that carries O₂. Which group?
+      why: A protein.
+    - label: Collagen
+      bin: Protein
+      clue: The most plentiful amino-acid chain in animals. Which group?
+      why: A protein.
+    - label: Trypsin
+      bin: Protein
+      clue: A digestive enzyme. What are most enzymes made of?
+      why: Most enzymes, trypsin included, are proteins.
+    - label: RuBisCO
+      bin: Protein
+      clue: The most plentiful enzyme on Earth. Which group?
+      why: A protein.
+    - label: Lecithin
+      bin: Lipid
+      clue: A phospholipid in membranes. Which group?
+      why: A lipid.
+    - label: Palmitic acid
+      bin: Lipid
+      clue: A fatty acid with 16 carbons. Which group?
+      why: A lipid.
+    - label: Cholesterol
+      bin: Lipid
+      clue: A steroid in membranes. Which group?
+      why: Steroids are lipids.
+    - label: DNA
+      bin: Nucleic acid
+      clue: Built from nucleotides. Which group?
+      why: A nucleic acid.
+    - label: RNA
+      bin: Nucleic acid
+      clue: Nucleotides with ribose. Which group?
+      why: A nucleic acid.
   items:
   - prompt: How many types of amino acids commonly make up proteins?
     answer: '20'
@@ -134,6 +191,81 @@ concepts:
     - Enzyme–product complex
     - Enzyme + product
     alt: An enzyme binds its substrate, forms a complex, converts it, then releases the product and is free again.
+  activity:
+    type: formula
+    prompt: 'Enzyme rate: v = Vmax × [S] ÷ (Km + [S]). Km is the substrate concentration at which the rate is half of Vmax.'
+    inputs:
+    - name: s
+      label: Substrate [S]
+      min: 0
+      max: 100
+      step: 1
+      start: 0
+    - name: km
+      label: Km
+      min: 1
+      max: 50
+      step: 1
+      start: 1
+    - name: vmax
+      label: Vmax
+      min: 10
+      max: 100
+      step: 10
+      start: 10
+    outputs:
+    - name: v
+      label: Rate v
+      expr: vmax*s/(km+s)
+      places: 1
+    - name: frac
+      label: v as a part of Vmax
+      expr: s/(km+s)
+      places: 3
+    goals:
+    - prompt: Vmax = 100 and Km = 20. Set [S] so the rate is half of Vmax.
+      want:
+        km: 20
+        vmax: 100
+        v: 50
+      mistakes:
+      - when:
+          km: 20
+          vmax: 100
+          s: 50
+        say: '[S] = 50 gives 71, not 50. The rate is half Vmax exactly when [S] equals Km: that is what Km means.'
+      - when:
+          km: 20
+          vmax: 100
+          s: 40
+        say: '[S] = 40 gives 66.7. Half speed comes when [S] = Km.'
+    - prompt: An enzyme with Vmax = 100 runs at 50 when [S] = 5. Set its Km.
+      want:
+        vmax: 100
+        s: 5
+        v: 50
+      mistakes:
+      - when:
+          vmax: 100
+          s: 5
+          km: 50
+        say: Km = 50 gives only 9. Km is the [S] at half Vmax, here 5.
+    - prompt: Vmax = 100, Km = 10. How much substrate brings the rate up to 80?
+      want:
+        vmax: 100
+        km: 10
+        v: 80
+      mistakes:
+      - when:
+          vmax: 100
+          km: 10
+          s: 20
+        say: '[S] = 2 × Km gives two-thirds of Vmax (66.7). The rate doesn''t rise in step with [S]: it levels off.'
+      - when:
+          vmax: 100
+          km: 10
+          s: 80
+        say: 80 is the rate you want, not the [S]. It gives 88.9.
   items:
   - prompt: 'Enzymes speed up reactions by:'
     options:

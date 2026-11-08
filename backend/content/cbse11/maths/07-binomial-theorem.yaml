@@ -27,6 +27,70 @@ concepts:
     - 1 3 3 1
     - 1 4 6 4 1
     alt: 'Pascal''s triangle rows 0 to 4: each number is the sum of the two above it.'
+  activity:
+    type: formula
+    prompt: '(1 + x)ⁿ = nC0 + nC1 x + nC2 x² + …: the coefficients are row n of Pascal''s triangle.'
+    inputs:
+    - name: n
+      label: n
+      min: 1
+      max: 8
+      step: 1
+      start: 1
+    - name: r
+      label: r, the power of x
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    outputs:
+    - name: coef
+      label: Coefficient nCr
+      expr: ((1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4)))/((1+min(1,max(0,r))*(r-1))*(1+min(1,max(0,r-1))*(r-2))*(1+min(1,max(0,r-2))*(r-3))*(1+min(1,max(0,r-3))*(r-4)))
+    - name: sum
+      label: All coefficients added, 2ⁿ
+      expr: 2^n
+    goals:
+    - prompt: Find a coefficient of 15 in (1 + x)⁶.
+      want:
+        n: 6
+        coef: 15
+      mistakes:
+      - when:
+          n: 6
+          r: 3
+        say: 6C3 = 20, the middle and biggest one. 15 sits either side of it.
+      - when:
+          n: 6
+          r: 1
+        say: 6C1 = 6, the x term. Move further in.
+    - prompt: Make the coefficients of (1 + x)ⁿ add up to 128.
+      want:
+        sum: 128
+      hint: 'Put x = 1: (1 + 1)ⁿ adds every coefficient.'
+      mistakes:
+      - when:
+          sum: 64
+        say: '2⁶ = 64: one row short.'
+      - when:
+          sum:
+          - 2
+          - 32
+        say: Too small. Each row adds to twice the row before.
+    - prompt: In (1 + x)ⁿ the x term is 8x. Set n and r.
+      want:
+        r: 1
+        coef: 8
+      mistakes:
+      - when:
+          r: 0
+        say: r = 0 is the first term, 1, with no x in it.
+      - when:
+          r: 1
+          n:
+          - 1
+          - 7
+        say: 'Too small: in (1 + x)ⁿ the x term is nC1 x = nx.'
   items:
   - prompt: How many terms are in the expansion of (a + b)⁷?
     answer: '8'
@@ -103,6 +167,68 @@ concepts:
       - T((n+1)/2), T((n+3)/2)
       - 4th and 5th terms
     alt: For even n like 6 there is one middle term, the 4th; for odd n like 7 there are two, the 4th and 5th.
+  activity:
+    type: formula
+    prompt: In (1 + 2x)ⁿ the general term is T(r+1) = nCr (2x)ʳ, so its coefficient is nCr × 2ʳ.
+    inputs:
+    - name: n
+      label: n
+      min: 1
+      max: 8
+      step: 1
+      start: 1
+    - name: r
+      label: r
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    outputs:
+    - name: plain
+      label: nCr
+      expr: ((1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4)))/((1+min(1,max(0,r))*(r-1))*(1+min(1,max(0,r-1))*(r-2))*(1+min(1,max(0,r-2))*(r-3))*(1+min(1,max(0,r-3))*(r-4)))
+    - name: pw
+      label: 2ʳ
+      expr: 2^r
+    - name: coef
+      label: Coefficient nCr × 2ʳ
+      expr: ((1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4)))/((1+min(1,max(0,r))*(r-1))*(1+min(1,max(0,r-1))*(r-2))*(1+min(1,max(0,r-2))*(r-3))*(1+min(1,max(0,r-3))*(r-4)))*2^r
+    goals:
+    - prompt: Make the x² coefficient of (1 + 2x)ⁿ equal 40.
+      want:
+        r: 2
+        coef: 40
+      mistakes:
+      - when:
+          r: 2
+          n:
+          - 6
+          - 8
+        say: 'Too big. Keep the 2² = 4 in mind: you need nC2 × 4 = 40, so nC2 = 10.'
+      - when:
+          r: 2
+          n:
+          - 1
+          - 4
+        say: Too small. You need nC2 × 4 = 40, so nC2 = 10.
+    - prompt: Find the 4th term's coefficient in (1 + 2x)⁶.
+      want:
+        n: 6
+        r: 3
+      mistakes:
+      - when:
+          n: 6
+          r: 4
+        say: The 4th term is T(r + 1) with r + 1 = 4, so r = 3. r = 4 gives the 5th term.
+    - prompt: Find the middle term of (1 + 2x)⁸.
+      want:
+        n: 8
+        r: 4
+      mistakes:
+      - when:
+          n: 8
+          r: 3
+        say: '(1 + 2x)⁸ has 9 terms, so the middle one is the 5th: r + 1 = 5.'
   items:
   - prompt: Find the 3rd term coefficient in (x + 2)⁵ (the number multiplying x³).
     answer: '40'

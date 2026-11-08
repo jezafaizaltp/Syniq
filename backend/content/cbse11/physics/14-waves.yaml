@@ -35,6 +35,60 @@ concepts:
       - wave on a string
       - sound in air
     alt: Transverse waves move particles across the direction of travel; longitudinal waves move them along it.
+  activity:
+    type: formula
+    prompt: A wave on a stretched string travels at v = √(T ÷ μ), with μ the mass per metre in kg/m.
+    inputs:
+    - name: t
+      label: Tension T
+      min: 10
+      max: 1000
+      step: 10
+      start: 10
+      unit: N
+    - name: mu
+      label: Mass per metre μ
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: g/m
+    outputs:
+    - name: v
+      label: Wave speed
+      expr: sqrt(t/(mu/1000))
+      unit: m/s
+      places: 1
+    goals:
+    - prompt: Make a wave travel at 100 m/s on a 5 g/m string.
+      want:
+        mu: 5
+        v: 100
+      mistakes:
+      - when:
+          mu: 5
+          t: 500
+        say: '500 N gives 316 m/s. Use kg/m: μ = 0.005 kg/m, so T = v² × μ.'
+    - prompt: Keep μ = 5 g/m. Make the wave twice as fast, 200 m/s.
+      want:
+        mu: 5
+        v: 200
+      mistakes:
+      - when:
+          mu: 5
+          t: 100
+        say: Doubling T gives √2 × the speed (141 m/s). v ∝ √T, so the tension must be 4 times as big.
+    - prompt: Keep T = 90 N. Choose the string so the wave travels at 150 m/s.
+      want:
+        t: 90
+        v: 150
+      mistakes:
+      - when:
+          t: 90
+          mu:
+          - 5
+          - 20
+        say: A heavier string slows the wave. μ = T ÷ v².
   items:
   - prompt: A wave has frequency 50 Hz and wavelength 4 m. Find its speed (in m/s).
     answer: '200'
@@ -128,6 +182,66 @@ concepts:
     - at: 4
       label: node
     alt: Along a standing wave, nodes and antinodes alternate; nodes are half a wavelength apart.
+  activity:
+    type: formula
+    prompt: A pipe closed at one end holds a node at the closed end and an antinode at the open end. Sound speed is 340 m/s.
+    inputs:
+    - name: n
+      label: Harmonic number n
+      min: 1
+      max: 9
+      step: 1
+      start: 1
+    - name: l
+      label: Pipe length L
+      min: 10
+      max: 100
+      step: 5
+      start: 10
+      unit: cm
+    outputs:
+    - name: f
+      label: Frequency n × v ÷ 4L
+      expr: n*340/(4*l/100)
+      unit: Hz
+      places: 1
+    - name: odd
+      label: Fits a closed pipe? (1 yes, 0 no)
+      expr: (1-(-1)^n)/2
+    goals:
+    - prompt: Make a closed pipe whose lowest note is 170 Hz.
+      want:
+        n: 1
+        f: 170
+      mistakes:
+      - when:
+          n: 1
+          l: 100
+        say: '100 cm gives 85 Hz. A closed pipe holds a quarter wave: λ = 4L, so L = 340 ÷ (4 × 170).'
+    - prompt: Keep the 50 cm closed pipe. Make the next note above 170 Hz.
+      want:
+        l: 50
+        n: 3
+      mistakes:
+      - when:
+          l: 50
+          n: 2
+        say: '340 Hz would be the 2nd harmonic, but a closed pipe needs a node at one end and an antinode at the other: only odd harmonics fit.'
+    - prompt: Make 850 Hz in the 50 cm closed pipe.
+      want:
+        l: 50
+        f: 850
+      mistakes:
+      - when:
+          l: 50
+          odd: 0
+        say: Even harmonics can't form in a closed pipe. Use an odd n.
+      - when:
+          l: 50
+          n:
+          - 6
+          - 9
+        say: 'Too high: 170 Hz × n = 850.'
   items:
   - prompt: Two tuning forks of 256 Hz and 260 Hz sound together. How many beats per second are heard?
     answer: '4'

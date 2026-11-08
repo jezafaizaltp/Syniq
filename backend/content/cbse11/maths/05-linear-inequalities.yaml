@@ -26,6 +26,62 @@ concepts:
     - at: -3
       label: −3 (open)
     alt: 'The solution x > −3: an open circle at −3 with everything to its right shaded.'
+  activity:
+    type: number_line
+    min: -16
+    max: 16
+    step: 1
+    start: 0
+    prompt: Solve each inequality, then mark the number it asks for.
+    goals:
+    - prompt: 3x − 7 ≤ 8. Mark the largest x that works.
+      target: 5
+      mistakes:
+      - when:
+          v: 15
+        say: 3x ≤ 15 still needs dividing by 3.
+      - when:
+          v:
+          - 0
+          - 1
+        say: 'Undo − 7 by adding 7 to both sides: 3x ≤ 15.'
+      - when:
+          v: 4
+        say: 'Try x = 5: 3 × 5 − 7 = 8, and 8 ≤ 8 is true. ≤ includes the boundary.'
+    - prompt: −2x > 6. Mark the largest whole number that works.
+      target: -4
+      mistakes:
+      - when:
+          v: -3
+        say: x = −3 gives −2 × −3 = 6, which is not more than 6. A strict > leaves the boundary out.
+      - when:
+          v:
+          - -2
+          - 16
+        say: 'Try it: x = −2 gives 4, not more than 6. Dividing by −2 flips the sign: x < −3.'
+    - prompt: (x + 4)/2 < x + 1. Mark the smallest whole number that works.
+      target: 3
+      mistakes:
+      - when:
+          v: 2
+        say: x = 2 gives 3 < 3, which is false. A strict < leaves the boundary out.
+      - when:
+          v:
+          - -16
+          - 1
+        say: 'Try x = 0: (0 + 4)/2 = 2, and 2 < 1 is false. Multiply both sides by 2 first: x + 4 < 2x + 2.'
+    - prompt: −5 ≤ 2x + 1 < 9. Mark the smallest whole number that works.
+      target: -3
+      mistakes:
+      - when:
+          v: -6
+        say: '−6 is the bound for 2x. Divide all three parts by 2: −3 ≤ x < 4.'
+      - when:
+          v: -2
+        say: 'x = −3 gives 2 × −3 + 1 = −5, and −5 ≤ −5 is true: ≤ keeps the end.'
+      - when:
+          v: 3
+        say: 3 is the largest that works. The question asks for the smallest.
   items:
   - prompt: Solve 3x + 4 < 19. What is the largest integer x can be?
     answer: '4'
@@ -115,6 +171,98 @@ concepts:
       - '>'
       - <
     alt: At least means ≥, at most means ≤, more than means >, and less than means <.
+  activity:
+    type: formula
+    prompt: A student needs an average of at least a set mark over three tests. Set the first two marks and the third.
+    inputs:
+    - name: a
+      label: First test
+      min: 0
+      max: 100
+      step: 5
+      start: 50
+    - name: b
+      label: Second test
+      min: 0
+      max: 100
+      step: 5
+      start: 50
+    - name: x
+      label: Third test
+      min: 0
+      max: 100
+      step: 1
+      start: 0
+    outputs:
+    - name: avg
+      label: Average of the three
+      expr: (a+b+x)/3
+      places: 2
+    goals:
+    - prompt: Ravi scored 70 and 75. Find the smallest third mark that makes his average at least 60.
+      want:
+        a: 70
+        b: 75
+        x: 35
+      hint: (70 + 75 + x)/3 ≥ 60 means 70 + 75 + x ≥ 180.
+      mistakes:
+      - when:
+          a: 70
+          b: 75
+          x: 60
+        say: 60 is the average he needs, not the mark. His first two marks are already above 60, which helps him.
+      - when:
+          a: 70
+          b: 75
+          x:
+          - 0
+          - 34
+        say: The average is below 60. Solve x ≥ 180 − 145.
+      - when:
+          a: 70
+          b: 75
+          x:
+          - 36
+          - 59
+        say: That works, but it isn't the smallest. Solve x ≥ 180 − 145.
+    - prompt: Meera scored 55 and 50. Find the smallest third mark for an average of at least 60.
+      want:
+        a: 55
+        b: 50
+        x: 75
+      mistakes:
+      - when:
+          a: 55
+          b: 50
+          x:
+          - 0
+          - 74
+        say: 'The average is still below 60: 55 + 50 + x must reach 180.'
+      - when:
+          a: 55
+          b: 50
+          x:
+          - 76
+          - 100
+        say: That works, but it isn't the smallest.
+    - prompt: Arun scored 85 and 75 and wants an average of MORE than 80. Find the smallest whole mark.
+      want:
+        a: 85
+        b: 75
+        x: 81
+      mistakes:
+      - when:
+          a: 85
+          b: 75
+          x: 80
+        say: 80 gives an average of exactly 80. 'More than' is >, which leaves 80 itself out.
+      - when:
+          a: 85
+          b: 75
+          x:
+          - 0
+          - 79
+        say: 'The average is below 80: 85 + 75 + x must be more than 240.'
   items:
   - prompt: Pens cost ₹35 each. What is the greatest number you can buy with ₹1,000?
     answer: '28'

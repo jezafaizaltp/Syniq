@@ -51,6 +51,91 @@ concepts:
       to: P
       label: x
     alt: On a unit circle, the point P at angle x has horizontal distance cos x and vertical distance sin x from the centre O.
+  activity:
+    type: formula
+    prompt: 'π radians is half a turn, 180°. Turn the angle and choose a radius r: the arc it cuts is l = rθ (θ in radians).'
+    inputs:
+    - name: d
+      label: Angle in degrees
+      min: 0
+      max: 360
+      step: 5
+      start: 0
+      unit: °
+    - name: r
+      label: Radius r
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: rad
+      label: Angle in radians
+      expr: d*pi/180
+      places: 3
+    - name: fr
+      label: Angle as a part of π
+      expr: d/180
+      places: 3
+    - name: arc
+      label: Arc length l = rθ
+      expr: r*d*pi/180
+      unit: cm
+      places: 2
+    goals:
+    - prompt: Make an angle of π/4 radians.
+      want:
+        d: 45
+      mistakes:
+      - when:
+          d: 90
+        say: 90° is a quarter turn, which is π/2. π stands for 180°, so π/4 is 180° ÷ 4.
+      - when:
+          d: 180
+        say: 180° is π itself. π/4 is a quarter of that.
+    - prompt: Make an angle of 3 radians, as close as the steps allow.
+      want:
+        rad:
+        - 2.95
+        - 3.06
+      hint: 1 radian ≈ 57.3°. Is 3 radians more or less than half a turn?
+      mistakes:
+      - when:
+          d:
+          - 0
+          - 15
+        say: '3° is tiny. 3 radians means the arc is 3 radii long: almost half a turn.'
+      - when:
+          d: 180
+        say: 180° is π ≈ 3.14 radians, a little more than 3. Turn back slightly.
+    - prompt: On a circle of radius 12 cm, make an arc 4π ≈ 12.57 cm long.
+      want:
+        r: 12
+        arc:
+        - 12.5
+        - 12.6
+      mistakes:
+      - when:
+          r: 12
+          d: 30
+        say: 'That arc is 2π ≈ 6.28 cm. l = rθ uses the radius, not the diameter: θ = 4π ÷ 12 = π/3.'
+      - when:
+          r: 12
+          d:
+          - 5
+          - 15
+        say: Did you use θ in degrees? l = rθ needs θ in radians. θ = 4π ÷ 12 = π/3 radians.
+    - prompt: Make 7π/6 radians, past a half turn.
+      want:
+        d: 210
+      mistakes:
+      - when:
+          d: 150
+        say: 150° is 5π/6, short of a half turn. π/6 is 30°, so 7π/6 is 7 × 30°.
+      - when:
+          d: 360
+        say: 360° is 2π, a full turn. 7π/6 is only a little past π.
   items:
   - prompt: Convert 60° into radians, as a multiple of π. Write the coefficient of π.
     answer: 1/3
@@ -131,6 +216,53 @@ concepts:
     - = (√2/2)(√3/2) + (√2/2)(1/2)
     - = (√6 + √2)/4
     alt: Finding sin 75° by splitting it into 45° + 30° and using the sine addition formula.
+  activity:
+    type: sort
+    prompt: Is it an identity, true for every angle? If you think not, try x = 90° or x = y = 90°.
+    bins:
+    - True for every angle
+    - Not always true
+    items:
+    - label: sin²x + cos²x = 1
+      bin: True for every angle
+      clue: Picture the unit circle. What is x² + y² on it?
+      why: On the unit circle cos x and sin x are the coordinates, and x² + y² = 1 always.
+    - label: sin(x + y) = sin x + sin y
+      bin: Not always true
+      clue: Try x = y = 90°. What is sin 180°?
+      why: sin 180° = 0, but sin 90° + sin 90° = 2. sin doesn't split over a sum.
+    - label: cos(−x) = cos x
+      bin: True for every angle
+      clue: Reflect the angle in the x-axis. What happens to its x-coordinate?
+      why: 'Turning the other way keeps the x-coordinate, so cos is even: cos(−x) = cos x.'
+    - label: sin(−x) = sin x
+      bin: Not always true
+      clue: Reflect the angle in the x-axis. What happens to its y-coordinate?
+      why: 'The y-coordinate changes sign: sin(−x) = −sin x. Try x = 90°: −1, not 1.'
+    - label: sin 2x = 2 sin x
+      bin: Not always true
+      clue: Try x = 90°. What is sin 180°?
+      why: sin 180° = 0, but 2 sin 90° = 2. The right rule is sin 2x = 2 sin x cos x.
+    - label: sin 2x = 2 sin x cos x
+      bin: True for every angle
+      clue: Put y = x in sin(x + y). What do you get?
+      why: sin(x + x) = sin x cos x + cos x sin x = 2 sin x cos x.
+    - label: cos 2x = cos²x − sin²x
+      bin: True for every angle
+      clue: Put y = x in cos(x + y). What do you get?
+      why: cos(x + x) = cos x cos x − sin x sin x.
+    - label: 1 + tan²x = sec²x
+      bin: True for every angle
+      clue: Divide sin²x + cos²x = 1 by cos²x. What comes out?
+      why: Dividing every term by cos²x gives tan²x + 1 = sec²x (wherever cos x ≠ 0).
+    - label: cos(x + y) = cos x cos y + sin x sin y
+      bin: Not always true
+      clue: Try x = y = 90°. What is cos 180°?
+      why: 'cos 180° = −1, but the right side gives 0 + 1 = 1. The sign is minus: cos x cos y − sin x sin y.'
+    - label: sin(π/2 − x) = cos x
+      bin: True for every angle
+      clue: In a right triangle, what is the sine of the other acute angle?
+      why: The complementary angle swaps sine and cosine.
   items:
   - prompt: Find sin 75°.
     options:

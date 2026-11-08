@@ -35,6 +35,61 @@ concepts:
       - increases
       - decreases
     alt: Oxidation loses electrons and raises oxidation number; reduction gains electrons and lowers it.
+  activity:
+    type: formula
+    prompt: 'Call the unknown oxidation number x. Add up every atom''s number: it must equal the overall charge. (O is −2, K and H are +1.)'
+    inputs:
+    - name: x
+      label: x
+      min: -4
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: k2
+      label: K₂Cr₂O₇ total (x on Cr)
+      expr: 2+2*x-14
+    - name: km
+      label: KMnO₄ total (x on Mn)
+      expr: 1+x-8
+    - name: so4
+      label: SO₄²⁻ total (x on S)
+      expr: x-8
+    - name: hp
+      label: H₂O₂ total (x on O)
+      expr: 2+2*x
+    goals:
+    - prompt: Find Cr in K₂Cr₂O₇ (a neutral compound).
+      want:
+        k2: 0
+      mistakes:
+      - when:
+          x: 12
+        say: 12 is for both Cr atoms together. There are two Cr, so each is 12 ÷ 2.
+      - when:
+          x: 7
+        say: 'With x = 7 the total is +2, not 0. Two K (+2) and seven O (−14): 2x = 12.'
+    - prompt: Find Mn in KMnO₄.
+      want:
+        km: 0
+      mistakes:
+      - when:
+          x: 8
+        say: 'K brings +1: 1 + x − 8 = 0.'
+    - prompt: Find S in the sulfate ion SO₄²⁻.
+      want:
+        so4: -2
+      mistakes:
+      - when:
+          x: 8
+        say: '+8 makes the ion neutral, but SO₄²⁻ carries −2: x − 8 = −2.'
+    - prompt: Find O in hydrogen peroxide, H₂O₂.
+      want:
+        hp: 0
+      mistakes:
+      - when:
+          x: -2
+        say: 'O is usually −2, but in a peroxide the O–O bond means each O is −1: 2(+1) + 2x = 0.'
   items:
   - prompt: Find the oxidation number of S in H₂SO₄.
     answer: '6'
@@ -120,6 +175,64 @@ concepts:
     - Equalise electrons
     - Add and simplify
     alt: The half-reaction method for balancing a redox equation, step by step.
+  activity:
+    type: formula
+    prompt: Electrons lost must equal electrons gained. MnO₄⁻ → Mn²⁺ gains 5 e⁻; Cr₂O₇²⁻ → 2Cr³⁺ gains 6 e⁻; Fe²⁺ → Fe³⁺ loses 1 e⁻.
+    inputs:
+    - name: a
+      label: Oxidant ions
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+    - name: b
+      label: Fe²⁺ ions
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+    outputs:
+    - name: lost
+      label: Electrons lost by Fe²⁺
+      expr: b
+    - name: nm
+      label: 'If MnO₄⁻: gained − lost'
+      expr: 5*a-b
+    - name: nc
+      label: 'If Cr₂O₇²⁻: gained − lost'
+      expr: 6*a-b
+    goals:
+    - prompt: Balance one MnO₄⁻ with Fe²⁺.
+      want:
+        a: 1
+        nm: 0
+      mistakes:
+      - when:
+          a: 1
+          b: 1
+        say: 'One Fe²⁺ gives only 1 electron. Mn goes from +7 to +2: it needs 5.'
+      - when:
+          a: 1
+          b: 7
+        say: Mn goes from +7 to +2, a change of 5, not 7.
+    - prompt: Balance one Cr₂O₇²⁻ with Fe²⁺.
+      want:
+        a: 1
+        nc: 0
+      mistakes:
+      - when:
+          a: 1
+          b: 3
+        say: 'Each Cr gains 3, but there are two Cr in Cr₂O₇²⁻: 6 electrons.'
+    - prompt: Balance two MnO₄⁻ with Fe²⁺.
+      want:
+        a: 2
+        nm: 0
+      mistakes:
+      - when:
+          a: 2
+          b: 5
+        say: 5 Fe²⁺ balance only one MnO₄⁻. Two need 10 electrons.
   items:
   - prompt: In MnO₄⁻ → Mn²⁺, how many electrons are gained per Mn?
     answer: '5'

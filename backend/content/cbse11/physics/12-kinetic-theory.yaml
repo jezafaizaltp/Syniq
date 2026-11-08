@@ -33,6 +33,76 @@ concepts:
       - pressure
       - volume
     alt: Boyle's law holds temperature constant, Charles' law pressure, and Gay-Lussac's law volume.
+  activity:
+    type: formula
+    prompt: 'For a fixed amount of gas, PV ÷ T stays the same (T in kelvin). Start: 100 kPa, 10 L, 300 K, so PV/T = 3.33.'
+    inputs:
+    - name: p
+      label: Pressure P
+      min: 50
+      max: 400
+      step: 10
+      start: 50
+      unit: kPa
+    - name: v
+      label: Volume V
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: L
+    - name: t
+      label: Temperature T
+      min: 200
+      max: 600
+      step: 10
+      start: 200
+      unit: K
+    outputs:
+    - name: pvt
+      label: PV ÷ T
+      expr: p*v/t
+      places: 3
+    goals:
+    - prompt: The gas is squeezed to 5 L at 300 K. Set the new pressure.
+      want:
+        v: 5
+        t: 300
+        pvt:
+        - 3.33
+        - 3.34
+      mistakes:
+      - when:
+          v: 5
+          t: 300
+          p: 50
+        say: 'Half the space makes the gas push harder, not softer. At fixed T, P × V stays 1000: P doubles.'
+    - prompt: The gas, in a rigid can (V = 10 L), is heated to 600 K. Set the new pressure.
+      want:
+        v: 10
+        t: 600
+        pvt:
+        - 3.33
+        - 3.34
+      mistakes:
+      - when:
+          v: 10
+          t: 600
+          p: 100
+        say: 'Pressure can''t stay at 100 kPa: with the volume fixed, P rises in step with T in kelvin.'
+    - prompt: At 100 kPa the gas is heated from 300 K to 450 K. Set the new volume.
+      want:
+        p: 100
+        t: 450
+        pvt:
+        - 3.33
+        - 3.34
+      mistakes:
+      - when:
+          p: 100
+          t: 450
+          v: 10
+        say: 'At constant pressure the gas expands as it warms: V rises in step with T in kelvin.'
   items:
   - prompt: A gas at 2 atm occupies 6 L. At the same temperature, what is its volume (in L) at 3 atm?
     answer: '4'
@@ -118,6 +188,60 @@ concepts:
       value: 6
     alt: 'Degrees of freedom: monatomic gases 3, diatomic 5, non-linear polyatomic 6.'
     unit: degrees
+  activity:
+    type: formula
+    prompt: Gas molecules move at v_rms = √(3RT ÷ M). Hotter gas is faster; heavier molecules are slower.
+    inputs:
+    - name: t
+      label: Temperature T
+      min: 100
+      max: 1200
+      step: 50
+      start: 100
+      unit: K
+    - name: m
+      label: Molar mass M
+      min: 2
+      max: 64
+      step: 2
+      start: 64
+      unit: g/mol
+    outputs:
+    - name: v
+      label: v_rms
+      expr: sqrt(3*8.314*t/(m/1000))
+      unit: m/s
+      places: 0
+    goals:
+    - prompt: Oxygen (M = 32) at 300 K moves at about 484 m/s. Keep M = 32 and double v_rms.
+      want:
+        m: 32
+        v:
+        - 966
+        - 968
+      mistakes:
+      - when:
+          m: 32
+          t: 600
+        say: 'Doubling T raises v_rms only by √2, to 684 m/s. v_rms ∝ √T: to double it, T must be 4 times bigger.'
+    - prompt: At 300 K, set the molar mass of a gas that moves 4 times as fast as oxygen.
+      want:
+        t: 300
+        m: 2
+      mistakes:
+      - when:
+          t: 300
+          m: 8
+        say: 'M = 8 is a quarter of 32, which only doubles the speed: v ∝ 1/√M. Four times as fast needs M 16 times smaller.'
+    - prompt: At 300 K, make nitrogen (M = 28). Is it faster or slower than oxygen?
+      want:
+        t: 300
+        m: 28
+      mistakes:
+      - when:
+          t: 300
+          m: 14
+        say: '14 is one N atom. Nitrogen gas is N₂: 28 g/mol.'
   items:
   - prompt: The rms speed of a gas is 400 m/s at 300 K. What is it (in m/s) at 1200 K?
     answer: '800'
