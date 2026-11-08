@@ -232,5 +232,5 @@ def test_lesson_offers_the_activity_with_the_topic():
 
 def test_topics_without_an_activity_send_none():
     with SessionLocal() as db:
-        c = db.scalars(select(Concept).where(Concept.code.like("cbse12m.%"))).first()
+        c = db.scalars(select(Concept).where(Concept.code.like("cbse12e.%"))).first()
         assert c.activity is None
