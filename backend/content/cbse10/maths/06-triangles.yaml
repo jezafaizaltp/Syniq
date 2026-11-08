@@ -55,6 +55,62 @@ concepts:
       - E
     caption: 'DE ∥ BC, so AD/DB = AE/EC: 2/3 = 4/6.'
     alt: Triangle ABC with DE parallel to BC. AD is 2, DB is 3, AE is 4 and EC is 6, so both sides are cut in the ratio 2 to 3.
+  activity:
+    type: formula
+    prompt: 'In triangle ABC, DE ∥ BC cuts AB at D and AC at E, with AE = 4 cm. By Thales, AD : DB = AE : EC.'
+    inputs:
+    - name: ad
+      label: AD
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: cm
+    - name: db
+      label: DB
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: ec
+      label: EC
+      expr: 4*db/ad
+      unit: cm
+      places: 2
+    - name: r
+      label: AD ÷ DB
+      expr: ad/db
+      places: 2
+    goals:
+    - prompt: 'AD = 3 cm. Make EC = 8 cm: how long is DB?'
+      want:
+        ad: 3
+        ec: 8
+      hint: 'AE : EC is 4 : 8 = 1 : 2. AD : DB must be the same.'
+      mistakes:
+      - when:
+          ad: 3
+          db: 8
+        say: DB = 8 copies EC, but the sides are cut in the same ratio, not into the same lengths. With DB = 8, EC = 10.67.
+      - when:
+          ad: 3
+          db: 4
+        say: 'DB = 4 copies AE. Match AD with AE and DB with EC: AD : DB = AE : EC.'
+    - prompt: 'Now DB = 3 cm. Make EC = 2 cm: how long is AD?'
+      want:
+        db: 3
+        ec: 2
+      mistakes:
+      - when:
+          db: 3
+          ad: 2
+        say: 'AD = 2 gives EC = 6. You paired the wrong sides: AD goes with AE, DB with EC.'
+      - when:
+          db: 3
+          ad: 3
+        say: AD = DB makes AE = EC = 4. Here EC is half of AE, so DB is half of AD.
   items:
   - prompt: In triangle ABC, DE ∥ BC. AD = 2 cm, DB = 3 cm and AE = 4 cm. Find EC in cm.
     answer: '6'
@@ -174,6 +230,55 @@ concepts:
       - '10'
     caption: 6/3 = 8/4 = 10/5 = 2, so △ABC ~ △PQR by SSS.
     alt: Triangle ABC with sides 3, 4, 5 beside triangle PQR with sides 6, 8, 10. Every side ratio is 2, so they are similar.
+  activity:
+    type: sort
+    prompt: Are the two triangles similar? If so, by which test?
+    bins:
+    - AA
+    - SSS
+    - SAS
+    - Not similar
+    items:
+    - label: Angles 50°, 60° and 50°, 70°
+      bin: AA
+      clue: Find the third angle of each triangle.
+      why: 'Both have 50°, 60° and 70°: two equal angles is enough (AA).'
+    - label: Sides 3, 4, 5 and 6, 8, 10
+      bin: SSS
+      clue: Divide each side of the second by the matching side of the first.
+      why: 'Every side doubles: all three ratios are 2, so SSS.'
+    - label: Sides 2, 3, 4 and 4, 6, 9
+      bin: Not similar
+      clue: Check all three ratios, not just two.
+      why: '4/2 = 2 and 6/3 = 2, but 9/4 = 2.25: not all equal, so not similar.'
+    - label: AB/PQ = AC/PR = 2 and ∠A = ∠P
+      bin: SAS
+      clue: Is the equal angle between the two sides in the ratio?
+      why: '∠A sits between AB and AC: an included angle with sides in proportion, SAS.'
+    - label: AB/PQ = AC/PR = 2 and ∠B = ∠Q
+      bin: Not similar
+      clue: Is ∠B between AB and AC?
+      why: '∠B isn''t between those sides, so SAS doesn''t apply: they need not be similar.'
+    - label: Two equilateral triangles
+      bin: AA
+      clue: What are all the angles of an equilateral triangle?
+      why: 'All angles are 60° in both: AA.'
+    - label: Angles 40°, 80° and 40°, 70°
+      bin: Not similar
+      clue: Work out each third angle.
+      why: 'One is 40°, 80°, 60°, the other 40°, 70°, 70°: the angles differ.'
+    - label: Sides 5, 5, 8 and 10, 10, 16
+      bin: SSS
+      clue: Does every side scale by the same number?
+      why: 'Every side doubles: SSS.'
+    - label: Two right triangles that each have a 35° angle
+      bin: AA
+      clue: Each has 90° and 35°. Is that two equal angles?
+      why: 90° and 35° match, so AA.
+    - label: Two isosceles triangles
+      bin: Not similar
+      clue: Could one be tall and thin, the other short and wide?
+      why: Isosceles triangles can have different angles, so not always similar.
   items:
   - prompt: Which is NOT a test for similar triangles?
     options:

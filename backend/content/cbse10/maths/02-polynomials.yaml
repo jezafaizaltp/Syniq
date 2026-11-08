@@ -61,6 +61,81 @@ concepts:
       - _e
     caption: y = x² − 4 meets the x-axis at x = −2 and x = 2, so those are its zeroes.
     alt: A U-shaped graph of y = x² − 4 with its lowest point at (0, −4), crossing the x-axis at −2 and 2.
+  activity:
+    type: formula
+    prompt: The graph of y = x² + bx + c is a parabola. Its zeroes are where it meets the x-axis.
+    inputs:
+    - name: b
+      label: b
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: c
+      label: c
+      min: -9
+      max: 9
+      step: 1
+      start: 4
+    outputs:
+    - name: p2
+      label: Value at x = 2
+      expr: 4+2*b+c
+    - name: p3
+      label: Value at x = 3
+      expr: 9+3*b+c
+    - name: low
+      label: Height of the lowest point
+      expr: c-b^2/4
+      places: 2
+    - name: n
+      label: Times it meets the x-axis
+      expr: 1+(b^2-4*c)/max(abs(b^2-4*c),0.000001)
+    goals:
+    - prompt: Make the zeroes 2 and 3.
+      want:
+        p2: 0
+        p3: 0
+      hint: If 2 and 3 are zeroes, x² + bx + c = (x − 2)(x − 3). Multiply it out.
+      mistakes:
+      - when:
+          b: 5
+          c: 6
+        say: 'x² + 5x + 6 = (x + 2)(x + 3): its zeroes are −2 and −3. A zero of 2 comes from the bracket (x − 2).'
+      - when:
+          b: -5
+          c: -6
+        say: 'x² − 5x − 6 = (x − 6)(x + 1): zeroes 6 and −1. The constant is the product of the zeroes: 2 × 3 = +6.'
+      - when:
+          p2: 0
+        say: 'x = 2 is a zero now. Check x = 3 as well: both values must be 0.'
+    - prompt: Make the parabola touch the x-axis at just one point.
+      want:
+        n: 1
+      mistakes:
+      - when:
+          low:
+          - 0.25
+          - 30
+        say: 'The lowest point is above the axis, so the curve never reaches it: no zeroes.'
+      - when:
+          low:
+          - -30
+          - -0.25
+        say: 'The lowest point is below the axis, so the curve dips through it twice. It must just touch: lowest point at height 0.'
+    - prompt: Make a parabola that never meets the x-axis, with its lowest point 1 above it.
+      want:
+        n: 0
+        low: 1
+      mistakes:
+      - when:
+          low:
+          - -30
+          - -0.25
+        say: 'Below the axis: the curve crosses it twice. Lift the lowest point up to 1.'
+      - when:
+          low: 0
+        say: It touches the axis at one point. Lift it a little more.
   items:
   - prompt: The graph of y = p(x) meets the x-axis at exactly 3 points. How many zeroes does p(x) have?
     options:
@@ -151,6 +226,69 @@ concepts:
     - Product of zeroes = c/a = 6
     - 'Zeroes 2 and 3: 2 + 3 = 5 and 2 × 3 = 6 ✓'
     alt: 'Checking the rules on x² − 5x + 6: the sum of the zeroes is −b/a = 5 and the product is c/a = 6, which matches the zeroes 2 and 3.'
+  activity:
+    type: formula
+    prompt: Choose two zeroes p and q. The quadratic with these zeroes is x² − (p + q)x + pq.
+    inputs:
+    - name: p
+      label: Zero p
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: q
+      label: Zero q
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    outputs:
+    - name: s
+      label: Sum of zeroes
+      expr: p+q
+    - name: pr
+      label: Product of zeroes
+      expr: p*q
+    - name: bb
+      label: b in x² + bx + c
+      expr: -(p+q)
+    - name: cc
+      label: c in x² + bx + c
+      expr: p*q
+    goals:
+    - prompt: Find the zeroes of x² − 7x + 10.
+      want:
+        bb: -7
+        cc: 10
+      hint: Sum of zeroes = −b/a, product = c/a. Which two numbers add to 7 and multiply to 10?
+      mistakes:
+      - when:
+          p: -2
+          q: -5
+        say: Zeroes −2 and −5 give x² + 7x + 10. The sum of the zeroes is −b, so b = −7 needs zeroes that add to +7.
+      - when:
+          p: -5
+          q: -2
+        say: 'Zeroes −5 and −2 give x² + 7x + 10. The sum of the zeroes is −b: here +7.'
+      - when:
+          cc: 10
+        say: 'The product 10 is right. Now the sum: it must be 7.'
+    - prompt: Find the zeroes of x² + x − 12.
+      want:
+        bb: 1
+        cc: -12
+      mistakes:
+      - when:
+          p: -3
+          q: 4
+        say: −3 and 4 add to +1, which gives x² − x − 12. Sum of zeroes = −b = −1.
+      - when:
+          p: 4
+          q: -3
+        say: 4 and −3 add to +1, giving x² − x − 12. The zeroes must add to −1.
+      - when:
+          cc: 12
+        say: 'Product +12: both zeroes have the same sign. c = −12 needs one positive and one negative.'
   items:
   - prompt: Find the sum of the zeroes of x² − 7x + 10.
     answer: '7'

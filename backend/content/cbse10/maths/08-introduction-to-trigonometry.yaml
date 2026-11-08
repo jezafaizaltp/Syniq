@@ -52,6 +52,74 @@ concepts:
       label: A
     caption: 'From angle A: sin A = 3/5, cos A = 4/5, tan A = 3/4.'
     alt: A right triangle with the right angle at B. From angle A, the opposite side is 3, the adjacent side 4 and the hypotenuse 5.
+  activity:
+    type: formula
+    prompt: Right triangle ABC with the right angle at B. Change the side opposite A and the side next to A.
+    inputs:
+    - name: o
+      label: Opposite A (BC)
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+    - name: a
+      label: Adjacent to A (AB)
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+    outputs:
+    - name: h
+      label: Hypotenuse AC
+      expr: sqrt(o^2+a^2)
+      places: 2
+    - name: sin
+      label: sin A = opp ÷ hyp
+      expr: o/sqrt(o^2+a^2)
+      places: 3
+    - name: cos
+      label: cos A = adj ÷ hyp
+      expr: a/sqrt(o^2+a^2)
+      places: 3
+    - name: tan
+      label: tan A = opp ÷ adj
+      expr: o/a
+      places: 3
+    goals:
+    - prompt: Make sin A = 0.6 with a hypotenuse of 10.
+      want:
+        sin: 0.6
+        h: 10
+      hint: sin A = opposite ÷ hypotenuse. 0.6 of 10 is?
+      mistakes:
+      - when:
+          o: 8
+          a: 6
+        say: 'That makes sin A = 0.8 and cos A = 0.6: opposite and adjacent swapped. Opposite is the side facing A.'
+      - when:
+          o: 6
+          a: 10
+        say: The 10 went on the adjacent side, but 10 must be the hypotenuse, the longest side, facing the right angle.
+    - prompt: Make tan A = 4/3 with a hypotenuse of 5.
+      want:
+        tan:
+        - 1.333
+        - 1.334
+        h: 5
+      mistakes:
+      - when:
+          o: 3
+          a: 4
+        say: 'tan A = 3/4 = 0.75: flipped. tan is opposite over adjacent.'
+    - prompt: Make sin A = 0.6 again, with a hypotenuse of 15.
+      want:
+        sin: 0.6
+        h: 15
+      mistakes:
+      - when:
+          o: 6
+          a: 8
+        say: 'That''s the triangle with hypotenuse 10. Scale every side by the same amount: the ratio stays 0.6.'
   items:
   - prompt: In a right triangle the side opposite angle A is 3 and the hypotenuse is 5. Find sin A. Type a fraction.
     answer: 3/5
@@ -143,6 +211,45 @@ concepts:
       value: 100
     caption: 'sin grows from 0 at 0° to 1 at 90°: 0, 1/2, 1/√2 ≈ 0.707, √3/2 ≈ 0.866, 1. cos goes the other way.'
     alt: Bars for sin 0°, 30°, 45°, 60° and 90°, rising from 0 to 0.5, 0.707, 0.866 and 1 (shown times 100).
+  activity:
+    type: angle
+    prompt: Turn the arm to the angle A that makes each statement true (0° to 90°).
+    goals:
+    - prompt: tan A = √3
+      degrees: 60
+      mistakes:
+      - when:
+          degrees: 30
+        say: tan 30° = 1/√3, the flip of √3. tan grows as the angle grows.
+      - when:
+          degrees: 90
+        say: 'tan 90° isn''t defined: the opposite side would grow without end.'
+    - prompt: sin A = 1/√2
+      degrees: 45
+      mistakes:
+      - when:
+          degrees: 30
+        say: sin 30° = 1/2 = 0.5, less than 1/√2 ≈ 0.71. sin grows from 0 at 0° to 1 at 90°.
+      - when:
+          degrees: 90
+        say: sin 90° = 1, the biggest sin can be. 1/√2 is less than that.
+    - prompt: cos A = 0
+      degrees: 90
+      mistakes:
+      - when:
+          degrees:
+          - 5
+          - 30
+        say: Near 0°, cos is close to 1, not 0. cos falls from 1 at 0° to 0 at 90°.
+    - prompt: sin A = cos 20°
+      degrees: 70
+      mistakes:
+      - when:
+          degrees: 20
+        say: sin 20° ≈ 0.34 but cos 20° ≈ 0.94. sin A = cos(90° − A).
+      - when:
+          degrees: 110
+        say: 'Keep A between 0° and 90°: sin A = cos(90° − A).'
   items:
   - prompt: Find sin 30° + cos 60°.
     answer: '1'
