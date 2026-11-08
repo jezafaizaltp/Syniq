@@ -27,6 +27,70 @@ concepts:
     - 'Gun: equal backward momentum'
     - Total still 0
     alt: 'Momentum is conserved when a gun fires: the bullet''s forward momentum equals the gun''s backward momentum, keeping the total at zero.'
+  activity:
+    type: formula
+    prompt: A person stands on a scale in a lift. The scale reads the push N = m(g + a), with g = 10 and a positive when the lift accelerates upward.
+    inputs:
+    - name: m
+      label: Person's mass
+      min: 30
+      max: 80
+      step: 5
+      start: 30
+      unit: kg
+    - name: a
+      label: Lift's acceleration (up +)
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+      unit: m/s²
+    outputs:
+    - name: n
+      label: Scale reading
+      expr: m*(10+a)
+      unit: N
+    - name: kg
+      label: What the scale shows
+      expr: m*(10+a)/10
+      unit: kg
+      places: 1
+    goals:
+    - prompt: A 50 kg person in a lift accelerating upward at 2 m/s².
+      want:
+        m: 50
+        a: 2
+      mistakes:
+      - when:
+          m: 50
+          a: -2
+        say: −2 is accelerating downward, and the scale would read less. Up is positive here.
+    - prompt: Make a 60 kg person feel weightless.
+      want:
+        m: 60
+        n: 0
+      mistakes:
+      - when:
+          m: 60
+          a: 0
+        say: 'a = 0 is a lift at rest or moving steadily: the scale reads the full 600 N. Weightless means falling freely, a = −g.'
+    - prompt: The lift moves up but is slowing down. A 70 kg person's scale reads 560 N. Set a.
+      want:
+        m: 70
+        n: 560
+      mistakes:
+      - when:
+          m: 70
+          a:
+          - 1
+          - 10
+        say: 'Moving up doesn''t mean accelerating up. It''s slowing, so the acceleration points down: negative.'
+      - when:
+          m: 70
+          a:
+          - -10
+          - -3
+        say: 'Too much: the reading is now below 560 N. 70(10 + a) = 560.'
   items:
   - prompt: A force gives a 5 kg mass an acceleration of 4 m/s². Find the force (in N).
     answer: '20'
@@ -114,6 +178,85 @@ concepts:
       - equals μₖN
       - smaller
     alt: Static friction acts before sliding and can reach μₛN; kinetic friction acts while sliding, equals μₖN and is smaller.
+  activity:
+    type: formula
+    prompt: A box on a floor (g = 10). Friction can hold it up to μmg. Push harder than that and it slides.
+    inputs:
+    - name: m
+      label: Mass
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: kg
+    - name: mu
+      label: μ
+      min: 0
+      max: 1
+      step: 0.05
+      start: 0
+    - name: f
+      label: Your push
+      min: 0
+      max: 100
+      step: 5
+      start: 0
+      unit: N
+    outputs:
+    - name: fmax
+      label: Greatest friction μmg
+      expr: mu*m*10
+      unit: N
+      places: 1
+    - name: acc
+      label: Acceleration
+      expr: max(0,f-mu*m*10)/m
+      unit: m/s²
+      places: 2
+    goals:
+    - prompt: A 10 kg box, μ = 0.4. Find the biggest push that doesn't move it.
+      want:
+        m: 10
+        mu: 0.4
+        f: 40
+      mistakes:
+      - when:
+          m: 10
+          mu: 0.4
+          f: 5
+        say: That's tiny next to the box's weight. Friction is μ × weight, and the weight is mg = 100 N.
+      - when:
+          m: 10
+          mu: 0.4
+          f:
+          - 45
+          - 100
+        say: 'That push beats friction: the box slides.'
+    - prompt: A 5 kg box and a 30 N push. Choose μ so it accelerates at 2 m/s².
+      want:
+        m: 5
+        f: 30
+        acc: 2
+      mistakes:
+      - when:
+          m: 5
+          f: 30
+          mu: 0
+        say: 'With no friction it accelerates at 6 m/s². Friction takes μmg of the push: 30 − 50μ = 5 × 2.'
+      - when:
+          m: 5
+          f: 30
+          acc: 0
+        say: 'Too much friction: the box doesn''t move at all.'
+    - prompt: Make friction able to hold back 60 N on a 20 kg box.
+      want:
+        m: 20
+        fmax: 60
+      mistakes:
+      - when:
+          m: 20
+          mu: 0.6
+        say: μ = 0.6 gives 120 N. Friction is μ × 200 N here, so μ = 60 ÷ 200.
   items:
   - prompt: A 10 kg box is on a floor with μ = 0.3. Taking g = 10 m/s², find the kinetic friction (in N).
     answer: '30'

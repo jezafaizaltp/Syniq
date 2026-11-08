@@ -27,6 +27,54 @@ concepts:
     - 'No O₂: fermentation'
     - 'With O₂: mitochondria'
     alt: Glycolysis splits glucose into two pyruvates, which go to fermentation without oxygen or to mitochondria with oxygen.
+  activity:
+    type: sort
+    prompt: Is it part of glycolysis, alcoholic fermentation or lactic acid fermentation?
+    bins:
+    - Glycolysis
+    - Alcoholic fermentation
+    - Lactic acid fermentation
+    items:
+    - label: Glucose is split into 2 pyruvate
+      bin: Glycolysis
+      clue: Which stage breaks glucose in two?
+      why: Glycolysis splits glucose into two pyruvic acid molecules.
+    - label: Net gain of 2 ATP per glucose
+      bin: Glycolysis
+      clue: Which stage makes a little ATP from glucose without O₂?
+      why: 'Glycolysis makes 4 ATP but uses 2: a net gain of 2.'
+    - label: Hexokinase adds phosphate to glucose
+      bin: Glycolysis
+      clue: This is the first step of which pathway?
+      why: The first step of glycolysis.
+    - label: NAD⁺ is turned into NADH
+      bin: Glycolysis
+      clue: Which stage makes NADH as triose is oxidised?
+      why: Glycolysis makes 2 NADH; fermentation uses them up.
+    - label: Pyruvate → ethanol + CO₂
+      bin: Alcoholic fermentation
+      clue: Which product makes bread rise?
+      why: Yeast turns pyruvate into ethanol and CO₂.
+    - label: Yeast making dough rise
+      bin: Alcoholic fermentation
+      clue: Which gas makes the bubbles?
+      why: CO₂ from alcoholic fermentation.
+    - label: Toddy made from palm sap
+      bin: Alcoholic fermentation
+      clue: Which product makes it a drink?
+      why: Yeast turns sugar into alcohol.
+    - label: Muscles in a sprint, short of O₂
+      bin: Lactic acid fermentation
+      clue: What builds up in tired muscles?
+      why: Muscle cells turn pyruvate into lactic acid.
+    - label: Curd from milk
+      bin: Lactic acid fermentation
+      clue: Which acid sours milk?
+      why: Lactobacillus makes lactic acid.
+    - label: Pyruvate → lactic acid, no CO₂
+      bin: Lactic acid fermentation
+      clue: Is any CO₂ given off?
+      why: Lactic acid fermentation releases no CO₂.
   items:
   - prompt: How many pyruvate molecules does one glucose give in glycolysis?
     answer: '2'
@@ -117,6 +165,64 @@ concepts:
       value: 38
     alt: 'ATP per glucose: about 2 from fermentation and about 38 from aerobic respiration.'
     unit: ATP
+  activity:
+    type: formula
+    prompt: Respiratory quotient RQ = CO₂ given out ÷ O₂ taken in. Carbohydrates give 1, fats about 0.7, organic acids above 1.
+    inputs:
+    - name: c
+      label: CO₂ molecules given out
+      min: 1
+      max: 150
+      step: 1
+      start: 10
+    - name: o
+      label: O₂ molecules taken in
+      min: 1
+      max: 150
+      step: 1
+      start: 20
+    outputs:
+    - name: rq
+      label: RQ
+      expr: c/o
+      places: 2
+    goals:
+    - prompt: 'Tripalmitin, a fat: 2 C₅₁H₉₈O₆ + 145 O₂ → 102 CO₂ + 98 H₂O. Set the gases.'
+      want:
+        c: 102
+        o: 145
+      mistakes:
+      - when:
+          c: 145
+          o: 102
+        say: 'Upside down: RQ = CO₂ given out ÷ O₂ taken in. Fats need lots of O₂, so their RQ is below 1.'
+      - when:
+          c: 98
+        say: '98 is the water. Count the CO₂: 102.'
+    - prompt: 'Malic acid: C₄H₆O₅ + 3 O₂ → 4 CO₂ + 3 H₂O. Set the gases.'
+      want:
+        c: 4
+        o: 3
+      mistakes:
+      - when:
+          c: 3
+          o: 4
+        say: 'Upside down again: CO₂ goes on top. Organic acids already hold lots of oxygen, so their RQ is above 1.'
+    - prompt: Using 7 CO₂, choose O₂ so the RQ is about 0.7, like a fat.
+      want:
+        c: 7
+        rq:
+        - 0.69
+        - 0.71
+      mistakes:
+      - when:
+          c: 7
+          o: 5
+        say: '7 ÷ 5 = 1.4: that''s like an organic acid. Fats use more O₂ than the CO₂ they give.'
+      - when:
+          c: 7
+          o: 7
+        say: That's RQ 1, like a carbohydrate.
   items:
   - prompt: How many CO₂ molecules are released per turn of the Krebs cycle?
     answer: '2'

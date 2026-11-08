@@ -34,6 +34,84 @@ concepts:
     - at: 7
       label: '7'
     alt: The values 3, 4, 5, 6 and 7 around their mean 5; their distances from the mean are 2, 1, 0, 1 and 2.
+  activity:
+    type: formula
+    prompt: Four marks. Range = biggest − smallest. Mean deviation = the average distance of the marks from their mean.
+    inputs:
+    - name: w
+      label: Mark 1
+      min: 0
+      max: 16
+      step: 1
+      start: 2
+    - name: x
+      label: Mark 2
+      min: 0
+      max: 16
+      step: 1
+      start: 6
+    - name: y
+      label: Mark 3
+      min: 0
+      max: 16
+      step: 1
+      start: 12
+    - name: z
+      label: Mark 4
+      min: 0
+      max: 16
+      step: 1
+      start: 14
+    outputs:
+    - name: mean
+      label: Mean
+      expr: (w+x+y+z)/4
+      places: 2
+    - name: rng
+      label: Range
+      expr: max(max(w,x),max(y,z))-min(min(w,x),min(y,z))
+    - name: md
+      label: Mean deviation
+      expr: (abs(w-(w+x+y+z)/4)+abs(x-(w+x+y+z)/4)+abs(y-(w+x+y+z)/4)+abs(z-(w+x+y+z)/4))/4
+      places: 2
+    goals:
+    - prompt: Make the mean 10 and the range 0.
+      want:
+        mean: 10
+        rng: 0
+      mistakes:
+      - when:
+          mean: 10
+          rng:
+          - 1
+          - 16
+        say: The mean is 10, but the marks differ. A range of 0 means every mark is the same.
+    - prompt: Keep the mean at 10, but make the mean deviation 5.
+      want:
+        mean: 10
+        md: 5
+      mistakes:
+      - when:
+          mean: 10
+          rng: 5
+        say: 'A range of 5 isn''t a mean deviation of 5. MD averages how far EACH mark is from 10: every mark must be 5 away.'
+      - when:
+          mean: 10
+          md:
+          - 0
+          - 4.9
+        say: Spread the marks further from 10.
+    - prompt: 'Mean 10, range 10, mean deviation 2.5: same range, less spread.'
+      want:
+        mean: 10
+        rng: 10
+        md: 2.5
+      mistakes:
+      - when:
+          mean: 10
+          rng: 10
+          md: 5
+        say: Every mark sits at an end (5 or 15), so the MD is 5. Pull two marks in to the mean, 10.
   items:
   - prompt: Find the range of 12, 7, 19, 3, 15.
     answer: '16'
@@ -114,6 +192,68 @@ concepts:
     - label: '10'
       value: 16
     alt: 'Squared deviations from the mean 6 for the values 2, 4, 6, 8, 10: 16, 4, 0, 4 and 16, which average to a variance of 8.'
+  activity:
+    type: formula
+    prompt: The data 2, 4, 4, 4, 5, 5, 7, 9 has mean 5 and σ = 2. Change every value to m × value + k.
+    inputs:
+    - name: m
+      label: Multiply by m
+      min: -4
+      max: 4
+      step: 0.5
+      start: 1
+    - name: k
+      label: Then add k
+      min: -10
+      max: 15
+      step: 1
+      start: 0
+    outputs:
+    - name: mean
+      label: New mean
+      expr: 5*m+k
+      places: 2
+    - name: sd
+      label: New σ
+      expr: 2*abs(m)
+      places: 2
+    - name: var
+      label: New variance σ²
+      expr: 4*m^2
+      places: 2
+    goals:
+    - prompt: Keep m = 1. Add a number so the mean becomes 12.
+      want:
+        m: 1
+        mean: 12
+      mistakes:
+      - when:
+          m: 1
+          k: 12
+        say: 'Adding 12 makes the mean 17: k is added to the old mean of 5.'
+    - prompt: Make σ = 6.
+      want:
+        sd: 6
+      mistakes:
+      - when:
+          m: 1
+          k:
+          - -10
+          - 10
+        say: 'Adding moves every value along but keeps the gaps, so σ stays 2. Stretch the data: change m.'
+      - when:
+          m: 1.5
+        say: '×1.5 makes σ = 3. σ scales by the same factor as the data: 2 × ? = 6.'
+    - prompt: Make the variance 16.
+      want:
+        var: 16
+      mistakes:
+      - when:
+          m: 4
+        say: ×4 makes σ = 8 and the variance 64. Variance scales by m², so m² = 4.
+      - when:
+          m: -4
+        say: ×(−4) makes σ = 8 and the variance 64. Variance scales by m², so m² = 4.
   items:
   - prompt: Find the variance of 2, 4, 6, 8, 10.
     answer: '8'

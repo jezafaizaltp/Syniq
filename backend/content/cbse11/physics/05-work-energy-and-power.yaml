@@ -31,6 +31,84 @@ concepts:
       - zero
       - negative
     alt: When the force is along the motion work is positive, at 90° it is zero, and when opposite it is negative.
+  activity:
+    type: formula
+    prompt: 'Work W = F s cos θ: only the part of the force along the motion does work.'
+    inputs:
+    - name: f
+      label: Force F
+      min: 0
+      max: 50
+      step: 5
+      start: 0
+      unit: N
+    - name: s
+      label: Distance s
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+      unit: m
+    - name: c
+      label: cos θ (angle between F and motion)
+      min: -1
+      max: 1
+      step: 0.5
+      start: 1
+    outputs:
+    - name: w
+      label: Work done
+      expr: f*s*c
+      unit: J
+    goals:
+    - prompt: Pull a box 10 m with a 20 N rope at 60° to the ground.
+      want:
+        f: 20
+        s: 10
+        c: 0.5
+      mistakes:
+      - when:
+          f: 20
+          s: 10
+          c: 1
+        say: '200 J counts the whole pull, but only the part along the ground does work: cos 60° = 0.5.'
+      - when:
+          f: 20
+          s: 10
+          c: -0.5
+        say: A negative cos θ would mean the rope pulls backwards. 60° gives cos θ = +0.5.
+    - prompt: 'Carry a bag across a room: the force holds it up, the motion is sideways. Make the work 0, with F and s not 0.'
+      want:
+        w: 0
+        f:
+        - 5
+        - 50
+        s:
+        - 1
+        - 20
+      mistakes:
+      - when:
+          c:
+          - 0.5
+          - 1
+          f:
+          - 5
+          - 50
+          s:
+          - 1
+          - 20
+        say: Up and sideways are at 90°, and cos 90° = 0. Holding a bag while walking does no work on it.
+    - prompt: Friction of 15 N acts on a block sliding 4 m. Make the work done by friction.
+      want:
+        f: 15
+        s: 4
+        w: -60
+      mistakes:
+      - when:
+          f: 15
+          s: 4
+          c: 1
+        say: '+60 J would mean friction helps the motion. It acts backwards: θ = 180°, cos θ = −1.'
   items:
   - prompt: A 20 N force moves a box 5 m in its own direction. Find the work done (in J).
     answer: '100'
@@ -119,6 +197,78 @@ concepts:
       value: 100
     alt: 'As a 2 kg ball falls 5 m, its potential energy turns into kinetic energy: 100 and 0 joules at the top, 50 and 50 halfway, 0 and 100 at the bottom.'
     unit: J
+  activity:
+    type: formula
+    prompt: A squashed spring stores ½kx². Released, it turns that energy into the ball's ½mv².
+    inputs:
+    - name: k
+      label: Spring constant k
+      min: 100
+      max: 1000
+      step: 100
+      start: 100
+      unit: N/m
+    - name: x
+      label: Squeeze x
+      min: 0
+      max: 0.5
+      step: 0.05
+      start: 0
+      unit: m
+    - name: m
+      label: Ball's mass
+      min: 0.5
+      max: 5
+      step: 0.5
+      start: 0.5
+      unit: kg
+    outputs:
+    - name: pe
+      label: Energy stored
+      expr: 0.5*k*x^2
+      unit: J
+      places: 2
+    - name: v
+      label: Launch speed
+      expr: sqrt(k*x^2/m)
+      unit: m/s
+      places: 2
+    goals:
+    - prompt: Store 8 J in a 400 N/m spring.
+      want:
+        k: 400
+        pe: 8
+      mistakes:
+      - when:
+          k: 400
+          x: 0.4
+        say: 'Doubling x stores 4 times the energy: 0.4 m gives 32 J. E = ½kx².'
+      - when:
+          k: 400
+          x: 0.1
+        say: 0.1 m stores only 2 J. Energy grows with x².
+    - prompt: Launch a 1 kg ball at 4 m/s with k = 100 N/m.
+      want:
+        k: 100
+        m: 1
+        v: 4
+      mistakes:
+      - when:
+          k: 100
+          m: 1
+          x: 0.2
+        say: 0.2 m gives 2 m/s. Here v grows in step with x, so double the squeeze.
+    - prompt: Keep k = 100 and x = 0.4 m. Choose the mass so the ball leaves at 2 m/s.
+      want:
+        k: 100
+        x: 0.4
+        v: 2
+      mistakes:
+      - when:
+          k: 100
+          x: 0.4
+          m: 2
+        say: 'Twice the mass gives 4 ÷ √2 ≈ 2.83 m/s, not half: the energy is shared out as ½mv², so v falls as 1/√m.'
   items:
   - prompt: Find the potential energy of a 2 kg ball 5 m above the ground. Take g = 10 m/s² (in J).
     answer: '100'

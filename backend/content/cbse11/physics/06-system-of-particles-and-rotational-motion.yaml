@@ -46,6 +46,84 @@ concepts:
       - B
       - 1.5 m (40 kg)
     alt: 'A see-saw balanced on a pivot P: 30 kg at 2 m on one side and 40 kg at 1.5 m on the other.'
+  activity:
+    type: formula
+    prompt: Mass m₁ sits at 0 and mass m₂ at the far end of a light rod of length L. The centre of mass is at m₂L ÷ (m₁ + m₂).
+    inputs:
+    - name: a
+      label: m₁ (at 0)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: kg
+    - name: b
+      label: m₂ (at the end)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: kg
+    - name: l
+      label: Rod length L
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: m
+    outputs:
+    - name: xcm
+      label: Centre of mass from m₁
+      expr: b*l/(a+b)
+      unit: m
+      places: 2
+    goals:
+    - prompt: m₁ = 2 kg and the rod is 4 m long. Choose m₂ so the centre of mass is 3 m from m₁.
+      want:
+        a: 2
+        l: 4
+        xcm: 3
+      mistakes:
+      - when:
+          a: 2
+          l: 4
+          b:
+          - 1
+          - 2
+        say: With m₂ no heavier than m₁, the centre is at or before the middle (2 m). It moves toward the heavier mass.
+      - when:
+          a: 2
+          l: 4
+          b: 3
+        say: m₂ = 3 puts it at 2.4 m. The centre sits 3 times as far from m₁ as from m₂, so m₂ must be 3 times m₁.
+    - prompt: Make the centre of mass sit exactly in the middle of a 6 m rod.
+      want:
+        l: 6
+        xcm: 3
+      mistakes:
+      - when:
+          l: 6
+          xcm:
+          - 0.1
+          - 2.9
+        say: It's nearer m₁, so m₁ is heavier. The middle needs equal masses.
+      - when:
+          l: 6
+          xcm:
+          - 3.1
+          - 5.9
+        say: It's nearer m₂, so m₂ is heavier. The middle needs equal masses.
+    - prompt: A 1 kg and a 9 kg mass sit at the ends of a 10 m rod. Put the 1 kg mass at 0 and find the centre.
+      want:
+        a: 1
+        b: 9
+        l: 10
+      mistakes:
+      - when:
+          a: 9
+          b: 1
+          l: 10
+        say: 'That puts the 9 kg mass at 0. Swap them: m₁ = 1 kg sits at 0.'
   items:
   - prompt: Masses 2 kg at x = 0 and 3 kg at x = 5 m. Find the x-coordinate of the centre of mass (in m).
     answer: '3'
@@ -139,6 +217,61 @@ concepts:
       - torque τ = Iα
       - angular momentum L = Iω
     alt: 'Rotational quantities mirror straight-line ones: I for m, ω for v, τ = Iα for F = ma, and L = Iω for p = mv.'
+  activity:
+    type: formula
+    prompt: A skater spins at 2 rev/s with moment of inertia I = 6 kg m². With no outside torque, Iω stays 12.
+    inputs:
+    - name: i
+      label: Moment of inertia I
+      min: 1
+      max: 12
+      step: 0.5
+      start: 6
+      unit: kg m²
+    outputs:
+    - name: w
+      label: Spin
+      expr: 12/i
+      unit: rev/s
+      places: 2
+    - name: l
+      label: Angular momentum Iω
+      expr: i*(12/i)
+      places: 1
+    - name: ke
+      label: Kinetic energy vs start
+      expr: 6/i
+      unit: ×
+      places: 2
+    goals:
+    - prompt: The skater pulls their arms in and halves their moment of inertia.
+      want:
+        i: 3
+      mistakes:
+      - when:
+          i: 12
+        say: 'That doubles I: arms stretched further, so the spin slows.'
+      - when:
+          i: 4
+        say: Two-thirds, not half. Half of 6 is 3.
+    - prompt: Make the skater spin at 3 rev/s.
+      want:
+        w: 3
+      mistakes:
+      - when:
+          i:
+          - 6.5
+          - 12
+        say: Larger I means a slower spin. Iω stays 12, so to speed up, I must shrink.
+    - prompt: Angular momentum is kept, but is kinetic energy? Make it 3 times the start.
+      want:
+        ke: 3
+      mistakes:
+      - when:
+          ke:
+          - 0.5
+          - 0.99
+        say: 'Spreading the arms lowers the kinetic energy. Pulling them in raises it: the skater''s muscles do work.'
   items:
   - prompt: A ring of mass 2 kg and radius 0.5 m spins about its axis. Find its moment of inertia (in kg m²).
     answer: 1/2

@@ -41,6 +41,80 @@ concepts:
       - B
       - R = 5
     alt: Adding a vector of 3 east and 4 north head to tail gives a resultant of 5.
+  activity:
+    type: formula
+    prompt: Two forces A and B act at an angle θ. The resultant is R = √(A² + B² + 2AB cos θ).
+    inputs:
+    - name: a
+      label: Force A
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: N
+    - name: b
+      label: Force B
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: N
+    - name: c
+      label: 'cos θ: 1 same way, −1 opposite'
+      min: -1
+      max: 1
+      step: 0.5
+      start: 1
+    outputs:
+    - name: r
+      label: Resultant R
+      expr: sqrt(a^2+b^2+2*a*b*c)
+      unit: N
+      places: 2
+    goals:
+    - prompt: Make forces of 3 N and 4 N give a resultant of 5 N.
+      want:
+        a: 3
+        b: 4
+        r: 5
+      mistakes:
+      - when:
+          a: 3
+          b: 4
+          c: 1
+        say: 'Pointing the same way they add to 7 N. 5 N needs them at right angles: 3² + 4² = 5², cos 90° = 0.'
+      - when:
+          a: 3
+          b: 4
+          c: -1
+        say: Opposite ways leave only 1 N. Turn them to a right angle.
+    - prompt: Make forces of 6 N and 8 N give the smallest resultant they can.
+      want:
+        a: 6
+        b: 8
+        r: 2
+      mistakes:
+      - when:
+          a: 6
+          b: 8
+          c: 0
+        say: At right angles they give 10 N. The smallest is when they pull in opposite directions.
+    - prompt: Make two 5 N forces give a resultant of exactly 5 N.
+      want:
+        a: 5
+        b: 5
+        r: 5
+      mistakes:
+      - when:
+          a: 5
+          b: 5
+          c: 0.5
+        say: 'At 60° they give 8.66 N. Spread them wider: at 120° the resultant equals each force.'
+      - when:
+          a: 5
+          b: 5
+          c: 0
+        say: At 90° they give 7.07 N. Open the angle further.
   items:
   - prompt: Two forces of 3 N and 4 N act at right angles. Find the resultant (in N).
     answer: '5'
@@ -124,6 +198,85 @@ concepts:
       - a = v²/r
       - towards centre
     alt: For a projectile, T = 2u sin θ/g, H = u² sin² θ/2g and R = u² sin 2θ/g; in circular motion v = ωr and the acceleration v²/r points to the centre.
+  activity:
+    type: formula
+    prompt: A stone is thrown sideways from a cliff of height H (g = 10 m/s²). It falls for t = √(2H ÷ g) and travels u × t sideways.
+    inputs:
+    - name: h
+      label: Cliff height H
+      min: 5
+      max: 125
+      step: 5
+      start: 5
+      unit: m
+    - name: u
+      label: Sideways speed u
+      min: 0
+      max: 30
+      step: 1
+      start: 0
+      unit: m/s
+    outputs:
+    - name: t
+      label: Time to fall
+      expr: sqrt(h/5)
+      unit: s
+      places: 2
+    - name: x
+      label: Lands this far out
+      expr: u*sqrt(h/5)
+      unit: m
+      places: 1
+    - name: vy
+      label: Downward speed on landing
+      expr: 10*sqrt(h/5)
+      unit: m/s
+      places: 1
+    goals:
+    - prompt: From an 80 m cliff, make the stone land 60 m out.
+      want:
+        h: 80
+        x: 60
+      mistakes:
+      - when:
+          h: 80
+          u: 20
+        say: 20 m/s for 4 s carries it 80 m. The fall takes √(2 × 80 ÷ 10) = 4 s, so u = 60 ÷ 4.
+      - when:
+          h: 80
+          u: 30
+        say: '30 m/s for 4 s goes 120 m. The fall always takes 4 s from 80 m: u = 60 ÷ 4.'
+    - prompt: Make the stone stay in the air for 3 s.
+      want:
+        t: 3
+      mistakes:
+      - when:
+          h:
+          - 5
+          - 40
+          u:
+          - 1
+          - 30
+        say: 'Throwing faster doesn''t keep it up longer: only the height sets the fall time. Raise the cliff.'
+      - when:
+          h:
+          - 50
+          - 125
+        say: 'Too high: the fall now lasts more than 3 s. H = ½ g t².'
+    - prompt: From a 20 m cliff, make the stone land 40 m out.
+      want:
+        h: 20
+        x: 40
+      mistakes:
+      - when:
+          h: 20
+          u:
+          - 1
+          - 30
+          x:
+          - 0
+          - 39
+        say: Short. The fall from 20 m lasts 2 s, so u = 40 ÷ 2.
   items:
   - prompt: A ball is thrown at 20 m/s at 45°. Taking g = 10 m/s², find its range (in m).
     answer: '40'

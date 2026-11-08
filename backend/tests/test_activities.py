@@ -108,10 +108,26 @@ def test_every_cbse_class10_maths_and_science_topic_has_a_working_activity():
         assert check_activity(c["activity"]) == [], c["code"]
 
 
+def _cbse11_concepts():
+    return [
+        c for _path, p in content_packs.read_packs()
+        if p["subject"] in ("cbse11-math", "cbse11-phy", "cbse11-chem", "cbse11-bio")
+        for c in p["concepts"]
+    ]
+
+
+def test_every_cbse_class11_science_topic_has_a_working_activity():
+    concepts = _cbse11_concepts()
+    assert len(concepts) == 112  # Maths 28, Physics 28, Chemistry 18, Biology 38
+    for c in concepts:
+        assert "activity" in c, c["code"]
+        assert check_activity(c["activity"]) == [], c["code"]
+
+
 def test_every_activity_coaches_a_wrong_try():
     """The mistake principle: every sort item has a clue and a reason, every order says why a step
     can't come earlier, and number activities name the slips children really make."""
-    concepts = _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + [c for p in _class6_packs() for c in p["concepts"]]
+    concepts = _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + _cbse11_concepts() + [c for p in _class6_packs() for c in p["concepts"]]
     numeric = 0
     with_mistakes = 0
     for c in concepts:

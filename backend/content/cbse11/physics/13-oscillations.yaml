@@ -31,6 +31,59 @@ concepts:
     - at: 5
       label: 'extreme: v = 0'
     alt: 'An oscillation from −5 to +5: speed is zero at the extremes and greatest at the mean position.'
+  activity:
+    type: formula
+    prompt: A mass on a spring swings between x = −10 and +10 cm. Total energy stays fixed; PE share = (x/A)², KE share = 1 − (x/A)².
+    inputs:
+    - name: x
+      label: Position x
+      min: -10
+      max: 10
+      step: 1
+      start: 3
+      unit: cm
+    outputs:
+    - name: pe
+      label: PE share
+      expr: (x/10)^2
+      places: 2
+    - name: ke
+      label: KE share
+      expr: 1-(x/10)^2
+      places: 2
+    - name: force
+      label: Restoring force (k = 1)
+      expr: -x
+    goals:
+    - prompt: Find a place where KE and PE are about equal.
+      want:
+        pe:
+        - 0.45
+        - 0.55
+      mistakes:
+      - when:
+          x: 5
+        say: 'At half the amplitude PE is only ¼: energy goes as x². Equal shares need x = A ÷ √2 ≈ 7 cm.'
+      - when:
+          x: -5
+        say: 'At half the amplitude PE is only ¼: energy goes as x². Equal shares need x = A ÷ √2 ≈ 7 cm.'
+    - prompt: Find where the mass moves fastest.
+      want:
+        ke: 1
+      mistakes:
+      - when:
+          pe: 1
+        say: 'At the ends the mass stops for an instant to turn: KE = 0 there.'
+    - prompt: Find where the spring pulls hardest to the left.
+      want:
+        x: 10
+      mistakes:
+      - when:
+          x: -10
+        say: At −10 the spring pulls right, back toward the middle. The pull always points back to 0.
+      - when:
+          x: 0
+        say: 'At the middle the force is zero: that''s where it moves fastest, not where it''s pulled hardest.'
   items:
   - prompt: A body makes 10 oscillations in 5 s. Find its frequency (in Hz).
     answer: '2'
@@ -112,6 +165,66 @@ concepts:
     - 'Middle: all kinetic'
     - 'Moving out: KE → PE'
     alt: Energy in an oscillation swaps between potential at the ends and kinetic in the middle.
+  activity:
+    type: formula
+    prompt: A simple pendulum of length L swings with period T = 2π√(L ÷ g).
+    inputs:
+    - name: l
+      label: Length L
+      min: 0.1
+      max: 4
+      step: 0.1
+      start: 0.1
+      unit: m
+    - name: g
+      label: g
+      min: 1
+      max: 25
+      step: 0.1
+      start: 1
+      unit: m/s²
+    outputs:
+    - name: t
+      label: Period T
+      expr: 2*pi*sqrt(l/g)
+      unit: s
+      places: 2
+    goals:
+    - prompt: 'On Earth (g = 9.8), make a seconds pendulum: period 2 s.'
+      want:
+        g: 9.8
+        t:
+        - 1.99
+        - 2.02
+      mistakes:
+      - when:
+          g: 9.8
+          t:
+          - 0.85
+          - 1.15
+        say: That swings over and back in 1 s. A seconds pendulum takes 1 s each way, so its full period is 2 s.
+    - prompt: Keep g = 9.8. Make a period of 4 s, double the 1 m pendulum's.
+      want:
+        g: 9.8
+        l: 4
+      mistakes:
+      - when:
+          g: 9.8
+          l: 2
+        say: Doubling L gives only √2 × the period (2.84 s). T ∝ √L, so L must be 4 times as long.
+    - prompt: Keep L = 1 m. Change g so the period is about 4 s.
+      want:
+        l: 1
+        t:
+        - 3.9
+        - 4.1
+      mistakes:
+      - when:
+          l: 1
+          g:
+          - 4.8
+          - 5
+        say: 'Halving g doesn''t double T: T ∝ 1/√g, so g must drop to a quarter.'
   items:
   - prompt: A pendulum's length is made four times larger. By what factor does its period increase?
     answer: '2'

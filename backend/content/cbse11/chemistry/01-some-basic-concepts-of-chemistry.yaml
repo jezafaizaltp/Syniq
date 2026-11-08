@@ -28,6 +28,72 @@ concepts:
     - × 6.022 × 10²³
     - Number of particles
     alt: Converting grams to moles by dividing by molar mass, then to particles by multiplying by Avogadro's number.
+  activity:
+    type: formula
+    prompt: Choose a substance by its molar mass M, then weigh some out. Moles n = mass ÷ M; one mole holds 6.022 × 10²³ particles.
+    inputs:
+    - name: mm
+      label: Molar mass M
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: g/mol
+    - name: m
+      label: Mass weighed
+      min: 0
+      max: 100
+      step: 1
+      start: 0
+      unit: g
+    outputs:
+    - name: n
+      label: Moles
+      expr: m/mm
+      unit: mol
+      places: 3
+    - name: p
+      label: Particles (× 10²³)
+      expr: m/mm*6.022
+      places: 3
+    goals:
+    - prompt: Weigh out exactly 1 mole of water, H₂O.
+      want:
+        mm: 18
+        n: 1
+      mistakes:
+      - when:
+          mm: 17
+        say: '17 is OH. Water has two H atoms: 2 × 1 + 16.'
+      - when:
+          mm: 10
+        say: 'H₂O: 2 × 1 + 16 = 18. The 2 multiplies the H only.'
+    - prompt: Weigh out 0.5 mol of carbon dioxide, CO₂.
+      want:
+        mm: 44
+        n: 0.5
+      mistakes:
+      - when:
+          mm: 28
+        say: '28 is CO. CO₂ has two O atoms: 12 + 2 × 16.'
+      - when:
+          mm: 44
+          m: 88
+        say: 88 g is 2 mol. Half a mole is half of 44 g.
+    - prompt: Weigh out 12.044 × 10²³ molecules of oxygen gas, O₂.
+      want:
+        mm: 32
+        p:
+        - 12.04
+        - 12.05
+      mistakes:
+      - when:
+          mm: 16
+        say: '16 is one O atom. Oxygen gas is O₂: 32 g/mol.'
+      - when:
+          mm: 32
+          m: 32
+        say: 32 g is one mole, 6.022 × 10²³ molecules. You need twice that.
   items:
   - prompt: Find the molar mass of water, H₂O, in g/mol (H = 1, O = 16).
     answer: '18'
@@ -115,6 +181,79 @@ concepts:
       - mol solute per kg solvent
       - mol of part ÷ total mol
     alt: 'Three ways to express concentration: molarity, molality and mole fraction.'
+  activity:
+    type: formula
+    prompt: N₂ + 3H₂ → 2NH₃. Whichever runs out first, the limiting reagent, decides how much ammonia forms.
+    inputs:
+    - name: a
+      label: N₂
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+      unit: mol
+    - name: b
+      label: H₂
+      min: 0
+      max: 30
+      step: 1
+      start: 0
+      unit: mol
+    outputs:
+    - name: nh3
+      label: NH₃ made
+      expr: 2*min(a,b/3)
+      unit: mol
+      places: 2
+    - name: ln
+      label: N₂ left over
+      expr: a-min(a,b/3)
+      unit: mol
+      places: 2
+    - name: lh
+      label: H₂ left over
+      expr: b-3*min(a,b/3)
+      unit: mol
+      places: 2
+    goals:
+    - prompt: Make 4 mol of NH₃ with nothing left over.
+      want:
+        nh3: 4
+        ln: 0
+        lh: 0
+      mistakes:
+      - when:
+          a: 2
+          b: 2
+        say: '1 : 1 isn''t the recipe. Each N₂ needs three H₂.'
+      - when:
+          a: 4
+          b: 12
+        say: 'That makes 8 mol: each N₂ gives two NH₃.'
+    - prompt: You have 5 mol of N₂. Add H₂ to make 6 mol of NH₃.
+      want:
+        a: 5
+        nh3: 6
+      mistakes:
+      - when:
+          a: 5
+          b: 6
+        say: '6 mol of H₂ makes only 4 mol of NH₃: 3 H₂ for every 2 NH₃.'
+      - when:
+          a: 5
+          b: 15
+        say: 15 mol of H₂ uses up all the N₂ and makes 10 mol.
+    - prompt: Use 4 mol of N₂ and make N₂ the limiting reagent, with 2 mol of H₂ left over.
+      want:
+        a: 4
+        lh: 2
+      mistakes:
+      - when:
+          a: 4
+          b:
+          - 0
+          - 11
+        say: 'Now H₂ runs out first: 4 N₂ need 12 H₂.'
   items:
   - prompt: 4 g of NaOH (M = 40) is dissolved to make 250 mL of solution. Find its molarity (mol/L).
     answer: '0.4'

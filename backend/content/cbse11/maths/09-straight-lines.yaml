@@ -39,6 +39,72 @@ concepts:
       - B
       - rise 6
     alt: A line through A and B, with a run of 3 and a rise of 6, so its slope is 2.
+  activity:
+    type: graph
+    mode: line
+    range:
+    - -6
+    - 6
+    m_step: 0.5
+    prompt: Tilt the line to change its slope m, and slide it to change where it crosses the y-axis.
+    goals:
+    - prompt: Make the line through (0, 3) perpendicular to y = 2x + 1.
+      m: -0.5
+      c: 3
+      mistakes:
+      - when:
+          m: -2
+          c: 3
+        say: 'Slope −2 only flips the sign. Perpendicular slopes multiply to −1: 2 × m = −1.'
+      - when:
+          m: 0.5
+          c: 3
+        say: ½ is the reciprocal, but 2 × ½ = +1. Flip it AND change the sign.
+      - when:
+          m: 2
+          c: 3
+        say: Slope 2 is parallel to y = 2x + 1. Perpendicular slopes multiply to −1.
+    - prompt: Make the line through (−2, −1) and (2, 5).
+      through:
+      - - -2
+        - -1
+      - - 2
+        - 5
+      hint: Slope = rise ÷ run between the two points.
+      mistakes:
+      - when:
+          m: -1.5
+        say: That line falls. From (−2, −1) to (2, 5), y goes up.
+      - when:
+          m: 1
+          c: 1
+        say: Slope 1 rises 4 over the run of 4. The rise is 5 − (−1) = 6.
+    - prompt: Make a line at 45° to the x-axis that crosses the y-axis at −4.
+      m: 1
+      c: -4
+      mistakes:
+      - when:
+          m: -1
+          c: -4
+        say: Slope −1 makes 135° with the x-axis. tan 45° = 1.
+      - when:
+          m: 1
+          c: 4
+        say: That crosses at +4. Slide it down to −4.
+    - prompt: Make the horizontal line through (3, 2).
+      m: 0
+      c: 2
+      mistakes:
+      - when:
+          m: 0
+          c: 3
+        say: This line is at height 3. Horizontal means y stays the same everywhere, so y = 2.
+      - when:
+          c: 2
+          m:
+          - -10
+          - 10
+        say: It passes (0, 2), but it's tilted. A horizontal line has slope 0.
   items:
   - prompt: Find the slope of the line through (1, 2) and (4, 8).
     answer: '2'
@@ -123,6 +189,98 @@ concepts:
       - slope and a point
       - both intercepts
     alt: Use y = mx + c with a slope and y-intercept, the point-slope form with a slope and a point, and x/a + y/b = 1 with both intercepts.
+  activity:
+    type: formula
+    prompt: The distance from a point (p, q) to the line 3x − 4y + C = 0 is |3p − 4q + C| ÷ √(3² + 4²) = |3p − 4q + C| ÷ 5.
+    inputs:
+    - name: p
+      label: Point's x, p
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: q
+      label: Point's y, q
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: c
+      label: C
+      min: -20
+      max: 20
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: 3p − 4q + C
+      expr: 3*p-4*q+c
+    - name: dist
+      label: Distance to the line
+      expr: abs(3*p-4*q+c)/5
+      places: 2
+    goals:
+    - prompt: Keep the point at the origin. Choose C > 0 so the line is 3 units away.
+      want:
+        p: 0
+        q: 0
+        dist: 3
+        c:
+        - 1
+        - 20
+      mistakes:
+      - when:
+          p: 0
+          q: 0
+          c: 3
+        say: 'C = 3 puts the line only 0.6 away. Divide by √(3² + 4²) = 5: |C| ÷ 5 = 3.'
+      - when:
+          p: 0
+          q: 0
+          c: -15
+        say: That's 3 away too, on the other side of the origin. The question asks for C > 0.
+    - prompt: Keep C = 5. Move the point onto the line 3x − 4y + 5 = 0.
+      want:
+        c: 5
+        dist: 0
+      mistakes:
+      - when:
+          c: 5
+          p: 0
+          q: 0
+        say: 'The origin gives 3(0) − 4(0) + 5 = 5, not 0: it''s 1 unit off the line.'
+      - when:
+          c: 5
+          val:
+          - -30
+          - -1
+        say: '3p − 4q + 5 is negative: the point is on the other side. You need 3p − 4q = −5.'
+    - prompt: Take C = −2. Find a point on the y-axis, above the x-axis, 2 units from the line.
+      want:
+        p: 0
+        c: -2
+        dist: 2
+        q:
+        - 1
+        - 6
+      mistakes:
+      - when:
+          p: 0
+          c: -2
+          q: -3
+        say: That's 2 away too, but below the x-axis.
+      - when:
+          p:
+          - -6
+          - -1
+          c: -2
+        say: A point on the y-axis has p = 0.
+      - when:
+          p:
+          - 1
+          - 6
+          c: -2
+        say: A point on the y-axis has p = 0.
   items:
   - prompt: Find the y-intercept of the line 3x + 2y − 6 = 0.
     answer: '3'

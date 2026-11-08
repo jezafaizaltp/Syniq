@@ -26,6 +26,72 @@ concepts:
     - '3rd place: 3 ways'
     - 'Multiply: 5 × 4 × 3 = 60'
     alt: 'Arranging 3 of 5 people: 5 choices, then 4, then 3, so 60 arrangements.'
+  activity:
+    type: formula
+    prompt: 'Arrange r things chosen from n different things. Order matters: nPr = n × (n − 1) × … (r numbers).'
+    inputs:
+    - name: n
+      label: n, things to choose from
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: r
+      label: r, places to fill
+      min: 1
+      max: 4
+      step: 1
+      start: 1
+    outputs:
+    - name: perm
+      label: nPr, no repeats
+      expr: (1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4))
+    - name: rep
+      label: With repeats allowed, nʳ
+      expr: n^r
+    goals:
+    - prompt: A 4-digit PIN uses the digits 0 to 9 with no digit repeated. Set n and r.
+      want:
+        n: 10
+        r: 4
+      mistakes:
+      - when:
+          n: 9
+          r: 4
+        say: '0 is a digit too: 0 to 9 makes 10 choices.'
+      - when:
+          n: 4
+        say: n is how many digits you can choose from. The 4 is the number of places, r.
+    - prompt: Find n so that nP2 = 56.
+      want:
+        r: 2
+        perm: 56
+      mistakes:
+      - when:
+          r: 2
+          n: 7
+        say: 7P2 = 7 × 6 = 42. You need two whole numbers in a row that multiply to 56.
+      - when:
+          r: 2
+          n:
+          - 9
+          - 10
+        say: 'Too many: nP2 is n × (n − 1), and that''s past 56.'
+    - prompt: '3-letter ''words'' with no repeated letter: make exactly 120 of them.'
+      want:
+        r: 3
+        perm: 120
+      mistakes:
+      - when:
+          r: 3
+          rep: 125
+        say: '125 = 5³ lets letters repeat, like AAB. Without repeats each place has one fewer choice: 5 × 4 × 3 = 60.'
+      - when:
+          r: 3
+          n:
+          - 7
+          - 10
+        say: 'Too many letters: nP3 = n(n − 1)(n − 2) is past 120.'
   items:
   - prompt: Find 5!.
     answer: '120'
@@ -104,6 +170,74 @@ concepts:
       - choosing
       - nCr = n!/(r!(n − r)!)
     alt: Permutations count arrangements where order matters; combinations count selections where it doesn't.
+  activity:
+    type: formula
+    prompt: 'Choose r from n when order doesn''t matter: nCr = nPr ÷ r!. Each group of r appears r! times among the arrangements.'
+    inputs:
+    - name: n
+      label: n, things to choose from
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: r
+      label: r, how many to choose
+      min: 1
+      max: 4
+      step: 1
+      start: 1
+    outputs:
+    - name: perm
+      label: nPr, ordered
+      expr: (1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4))
+    - name: comb
+      label: nCr, unordered
+      expr: ((1+min(1,max(0,r))*(n-1))*(1+min(1,max(0,r-1))*(n-2))*(1+min(1,max(0,r-2))*(n-3))*(1+min(1,max(0,r-3))*(n-4)))/((1+min(1,max(0,r))*(r-1))*(1+min(1,max(0,r-1))*(r-2))*(1+min(1,max(0,r-2))*(r-3))*(1+min(1,max(0,r-3))*(r-4)))
+    goals:
+    - prompt: A committee of 3 can be chosen from n people in 35 ways. Find n.
+      want:
+        r: 3
+        comb: 35
+      mistakes:
+      - when:
+          r: 3
+          n:
+          - 8
+          - 10
+        say: Too many people. A committee has no order, so divide nP3 by 3! = 6.
+      - when:
+          r: 3
+          n:
+          - 3
+          - 6
+        say: 'Too few: nC3 is still below 35.'
+    - prompt: 'Everyone at a party shakes hands once with everyone else: 10 handshakes. How many people?'
+      want:
+        r: 2
+        comb: 10
+      mistakes:
+      - when:
+          r: 2
+          n: 10
+        say: 10 is the number of handshakes, not people. 10 people would make 10C2 = 45.
+      - when:
+          r: 2
+          n: 4
+        say: 4 people make only 4C2 = 6 handshakes.
+    - prompt: With n = 6, find a different r that gives the same as 6C2 = 15.
+      want:
+        n: 6
+        comb: 15
+        r: 4
+      mistakes:
+      - when:
+          n: 6
+          r: 2
+        say: That's 6C2 itself. Choosing 2 to take is the same as choosing the other 4 to leave behind.
+      - when:
+          n: 6
+          r: 3
+        say: 6C3 = 20, the biggest in the row. Look one step further along.
   items:
   - prompt: Find ⁵C₂.
     answer: '10'

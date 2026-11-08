@@ -29,6 +29,54 @@ concepts:
     - DCT
     - Collecting duct
     alt: Parts of a nephron in order, from the filtering cup to the collecting duct.
+  activity:
+    type: sort
+    prompt: Which nitrogenous waste does each animal mainly excrete?
+    bins:
+    - Ammonia
+    - Urea
+    - Uric acid
+    items:
+    - label: Bony fishes
+      bin: Ammonia
+      clue: A toxic waste that dissolves easily needs lots of water. Who has plenty?
+      why: 'Ammonotelic: ammonia diffuses out through the gills.'
+    - label: Tadpoles
+      bin: Ammonia
+      clue: Do tadpoles live in water?
+      why: Aquatic tadpoles are ammonotelic.
+    - label: Aquatic insects
+      bin: Ammonia
+      clue: Plenty of water around. Which waste?
+      why: Ammonotelic.
+    - label: Humans
+      bin: Urea
+      clue: Mammals make the liver convert ammonia. Into what?
+      why: Mammals are ureotelic.
+    - label: Marine fishes
+      bin: Urea
+      clue: Sea water draws water out. Which less toxic waste do they keep?
+      why: Many marine fishes are ureotelic.
+    - label: Adult frogs on land
+      bin: Urea
+      clue: Which waste needs moderate water?
+      why: Terrestrial amphibians are ureotelic.
+    - label: Birds
+      bin: Uric acid
+      clue: Which waste can be passed as a paste with almost no water?
+      why: 'Uricotelic: saves water.'
+    - label: Reptiles
+      bin: Uric acid
+      clue: Living in dry places, which waste saves water?
+      why: Uricotelic.
+    - label: Land snails
+      bin: Uric acid
+      clue: Which waste suits life on dry land?
+      why: Uricotelic.
+    - label: Land insects
+      bin: Uric acid
+      clue: Which nearly insoluble waste do they make?
+      why: Uricotelic.
   items:
   - prompt: About how many nephrons are in each human kidney (in millions)?
     answer: '1'
@@ -125,6 +173,83 @@ concepts:
       value: 1.5
     alt: About 180 litres of filtrate are made each day, but only about 1.5 litres of urine are passed.
     unit: L
+  activity:
+    type: formula
+    prompt: The kidneys filter blood at the GFR, then take most of the filtrate back. What isn't taken back leaves as urine.
+    inputs:
+    - name: g
+      label: GFR
+      min: 50
+      max: 200
+      step: 5
+      start: 50
+      unit: mL/min
+    - name: r
+      label: Filtrate taken back
+      min: 90
+      max: 100
+      step: 0.5
+      start: 90
+      unit: '%'
+    outputs:
+    - name: filt
+      label: Filtrate per day
+      expr: g*1440/1000
+      unit: L
+      places: 1
+    - name: urine
+      label: Urine per day
+      expr: g*1440/1000*(1-r/100)
+      unit: L
+      places: 2
+    goals:
+    - prompt: A healthy kidney filters 125 mL/min. Take back enough to make about 1.8 L of urine a day.
+      want:
+        g: 125
+        urine:
+        - 1.7
+        - 1.9
+      mistakes:
+      - when:
+          g: 125
+          r: 90
+        say: 'Taking back only 90% would lose 18 L of water a day! The tubules return almost all of it: 99%.'
+      - when:
+          g: 125
+          r:
+          - 99.5
+          - 100
+        say: 'Too little urine: waste can''t leave the body.'
+    - prompt: Make the filtrate about 180 L a day.
+      want:
+        filt: 180
+      mistakes:
+      - when:
+          g: 180
+        say: '180 is litres per DAY. The GFR is mL per MINUTE: 180 000 mL ÷ 1440 min.'
+      - when:
+          g:
+          - 50
+          - 120
+        say: 'Too little filtered: under 180 L a day.'
+    - prompt: ADH is high because the body is short of water. With GFR 125, make about 0.9 L of urine.
+      want:
+        g: 125
+        urine:
+        - 0.85
+        - 0.95
+      mistakes:
+      - when:
+          g: 125
+          r:
+          - 90
+          - 98.5
+        say: More water lost, not less. ADH makes the tubules take back MORE water.
+      - when:
+          g:
+          - 130
+          - 200
+        say: ADH doesn't change how fast the blood is filtered. Keep the GFR at 125 and change how much is taken back.
   items:
   - prompt: GFR is 125 mL/min. How much filtrate (in L) is made per day, to the nearest litre?
     answer: '180'

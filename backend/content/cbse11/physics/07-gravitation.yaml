@@ -31,6 +31,63 @@ concepts:
       - ÷ 4
       - ÷ 9
     alt: Doubling one mass doubles the gravitational force; doubling the distance makes it a quarter; tripling the distance makes it a ninth.
+  activity:
+    type: formula
+    prompt: Rise h Earth radii above the surface. You're then (1 + h) radii from the centre, and g = 9.8 ÷ (1 + h)².
+    inputs:
+    - name: h
+      label: Height above the surface
+      min: 0
+      max: 5
+      step: 0.25
+      start: 0
+      unit: R
+    outputs:
+    - name: r
+      label: Distance from the centre
+      expr: 1+h
+      unit: R
+      places: 2
+    - name: g
+      label: g there
+      expr: 9.8/(1+h)^2
+      unit: m/s²
+      places: 2
+    goals:
+    - prompt: Go where g is a quarter of its surface value.
+      want:
+        h: 1
+      mistakes:
+      - when:
+          h: 3
+        say: At h = 3R you're 4R from the centre, so g falls to 1/16. g goes as 1/r², with r measured from the centre.
+      - when:
+          h: 4
+        say: '4R up is 5R from the centre: g/25. A quarter needs r = 2R.'
+    - prompt: Go where g is one-ninth.
+      want:
+        h: 2
+      mistakes:
+      - when:
+          h: 3
+        say: '3R up is 4R from the centre: g/16. One-ninth needs r = 3R, which is 2R above the surface.'
+      - when:
+          h: 4.5
+        say: That's 5.5R from the centre. One-ninth needs r = 3R.
+    - prompt: Go where g is about 4.36 m/s².
+      want:
+        g:
+        - 4.3
+        - 4.4
+      mistakes:
+      - when:
+          h:
+          - 1
+          - 5
+        say: 'Too high: g is already below 4.36. 9.8 ÷ 4.36 = 2.25 = 1.5², so r = 1.5R.'
+      - when:
+          h: 0.25
+        say: 'Not high enough yet: g is still 6.27.'
   items:
   - prompt: 'If the distance between two masses is doubled, the gravitational force becomes:'
     options:
@@ -126,6 +183,70 @@ concepts:
       - ≈ 11.2 km/s
       - leaves Earth
     alt: Low orbit speed is √(gR), about 7.9 km/s; escape speed is √(2gR), about 11.2 km/s.
+  activity:
+    type: formula
+    prompt: 'For a planet with surface gravity g and radius R: escape speed √(2gR); speed of a low orbit √(gR).'
+    inputs:
+    - name: g
+      label: Surface g
+      min: 1
+      max: 20
+      step: 0.2
+      start: 1
+      unit: m/s²
+    - name: r
+      label: Radius R (thousand km)
+      min: 1
+      max: 70
+      step: 0.2
+      start: 1
+    outputs:
+    - name: ve
+      label: Escape speed
+      expr: sqrt(2*g*r*1000000)/1000
+      unit: km/s
+      places: 2
+    - name: vo
+      label: Low-orbit speed
+      expr: sqrt(g*r*1000000)/1000
+      unit: km/s
+      places: 2
+    goals:
+    - prompt: Earth (g = 9.8, R = 6400 km) has v_e = 11.2 km/s. Keep g = 9.8 and make v_e twice as big.
+      want:
+        g: 9.8
+        ve:
+        - 22.3
+        - 22.5
+      mistakes:
+      - when:
+          g: 9.8
+          r: 12.8
+        say: 'Doubling R raises v_e only by √2, to 15.8 km/s. v_e = √(2gR): to double it, R must be 4 times as big.'
+    - prompt: On a planet with g = 2, make the low-orbit speed 4 km/s.
+      want:
+        g: 2
+        vo: 4
+      mistakes:
+      - when:
+          g: 2
+          ve: 4
+        say: 'That''s the escape speed at 4 km/s. A low orbit needs less: v_e ÷ √2.'
+    - prompt: 'Make Earth: g = 9.8, R = 6400 km. Read both speeds.'
+      want:
+        g: 9.8
+        r: 6.4
+      mistakes:
+      - when:
+          g: 9.8
+          r: 64
+        say: 'R is in thousands of km: 6400 km is 6.4.'
+      - when:
+          r: 6.4
+          g:
+          - 10
+          - 20
+        say: Earth's g is 9.8.
   items:
   - prompt: What is the approximate escape speed from Earth?
     options:

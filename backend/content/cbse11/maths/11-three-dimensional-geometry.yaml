@@ -43,6 +43,50 @@ concepts:
       - Z
       - z
     alt: Three axes x, y and z meeting at the origin O, like the corner of a room.
+  activity:
+    type: sort
+    prompt: Where does each point sit in space? Count how many coordinates are 0.
+    bins:
+    - On an axis
+    - In a coordinate plane
+    - Inside an octant
+    items:
+    - label: (0, 0, 5)
+      bin: On an axis
+      clue: How many coordinates are 0?
+      why: x = y = 0, so the point lies on the z-axis.
+    - label: (3, 0, −2)
+      bin: In a coordinate plane
+      clue: Which coordinate is 0?
+      why: y = 0 only, so it lies in the xz-plane.
+    - label: (1, 2, 3)
+      bin: Inside an octant
+      clue: Is any coordinate 0?
+      why: 'None is 0, so it is inside an octant: all positive, octant I.'
+    - label: (−4, 0, 0)
+      bin: On an axis
+      clue: How many coordinates are 0?
+      why: y = z = 0, so it lies on the x-axis, on the negative side.
+    - label: (2, −1, 0)
+      bin: In a coordinate plane
+      clue: What is z?
+      why: z = 0 only, so it lies in the xy-plane.
+    - label: (0, 7, −1)
+      bin: In a coordinate plane
+      clue: Which coordinate is 0?
+      why: x = 0 only, so it lies in the yz-plane.
+    - label: (−1, −2, −3)
+      bin: Inside an octant
+      clue: Any zeros at all?
+      why: 'No zeros: inside the octant where all three are negative.'
+    - label: (5, −5, 2)
+      bin: Inside an octant
+      clue: Is any coordinate 0?
+      why: No zeros, so it is inside an octant, with y negative.
+    - label: (0, −3, 0)
+      bin: On an axis
+      clue: How many coordinates are 0?
+      why: x = z = 0, so it lies on the y-axis.
   items:
   - prompt: How many octants do the coordinate planes divide space into?
     answer: '8'
@@ -127,6 +171,90 @@ concepts:
     - Pythagoras again
     - Distance = √(Δx² + Δy² + Δz²)
     alt: Using Pythagoras twice, first across the floor and then up the height, gives the 3D distance formula.
+  activity:
+    type: formula
+    prompt: P is fixed at (1, 2, 3). Move Q. PQ = √((x − 1)² + (y − 2)² + (z − 3)²).
+    inputs:
+    - name: x
+      label: Q's x
+      min: -6
+      max: 10
+      step: 1
+      start: 0
+    - name: y
+      label: Q's y
+      min: -6
+      max: 10
+      step: 1
+      start: 0
+    - name: z
+      label: Q's z
+      min: -6
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: walk
+      label: Walk along the edges
+      expr: abs(x-1)+abs(y-2)+abs(z-3)
+    - name: flat
+      label: Distance using x and y only
+      expr: sqrt((x-1)^2+(y-2)^2)
+      places: 2
+    - name: d
+      label: PQ
+      expr: sqrt((x-1)^2+(y-2)^2+(z-3)^2)
+      places: 2
+    goals:
+    - prompt: Move Q to exactly 7 units from P, with x, y and z all different from P's.
+      want:
+        d: 7
+        flat:
+        - 0.5
+        - 6.9
+      hint: Which three whole numbers have squares adding to 49? Try 2, 3 and 6.
+      mistakes:
+      - when:
+          flat: 7
+        say: Q is 7 away across x and y, but it's also above or below P, so PQ is more than 7. Use all three differences.
+      - when:
+          walk: 7
+        say: Walking along the edges takes 7, but the straight line cuts across, so PQ is shorter than 7.
+    - prompt: Put Q at the mirror image of P in the xy-plane.
+      want:
+        x: 1
+        y: 2
+        z: -3
+      mistakes:
+      - when:
+          x: -1
+          y: -2
+          z: -3
+        say: 'That''s the reflection through the origin. The xy-plane is the floor: only the height z changes sign.'
+      - when:
+          x: -1
+          y: -2
+          z: 3
+        say: That flips x and y. A mirror in the xy-plane keeps x and y and flips z.
+    - prompt: Find a point Q on the x-axis, with x positive, that is 7 units from P.
+      want:
+        y: 0
+        z: 0
+        d: 7
+        x:
+        - 0
+        - 10
+      mistakes:
+      - when:
+          y: 0
+          z: 0
+          x: 8
+        say: 'That''s 8 from the origin, but Q must be 7 from P: (x − 1)² + 2² + 3² = 49.'
+      - when:
+          y: 0
+          z: 0
+          x: -5
+        say: That's 7 from P too, but on the negative side. The question wants x positive.
   items:
   - prompt: Find the distance between (1, 2, 3) and (4, 6, 15).
     answer: '13'

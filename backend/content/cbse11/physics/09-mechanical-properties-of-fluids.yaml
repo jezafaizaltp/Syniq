@@ -26,6 +26,89 @@ concepts:
     - Same pressure reaches big piston
     - Big force lifts load
     alt: In a hydraulic lift, pressure from the small piston passes through the oil to the big piston.
+  activity:
+    type: formula
+    prompt: 'A hydraulic lift: pressure on the small piston reaches the big one unchanged, so F₂ = F₁ × A₂ ÷ A₁.'
+    inputs:
+    - name: f1
+      label: Push on small piston F₁
+      min: 10
+      max: 500
+      step: 10
+      start: 10
+      unit: N
+    - name: a1
+      label: Small piston A₁
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm²
+    - name: a2
+      label: Big piston A₂
+      min: 50
+      max: 1000
+      step: 50
+      start: 50
+      unit: cm²
+    outputs:
+    - name: p
+      label: Pressure in the oil
+      expr: f1/a1
+      unit: N/cm²
+      places: 1
+    - name: f2
+      label: Lift on big piston F₂
+      expr: f1*a2/a1
+      unit: N
+    goals:
+    - prompt: Lift a 10 000 N car with a 100 N push on a 5 cm² piston. Choose A₂.
+      want:
+        f1: 100
+        a1: 5
+        f2: 10000
+      mistakes:
+      - when:
+          f1: 100
+          a1: 5
+          a2: 100
+        say: 100 cm² gives only 2000 N. The same pressure (20 N/cm²) acts on every cm² of the big piston.
+      - when:
+          f1: 100
+          a1: 5
+          a2:
+          - 550
+          - 1000
+        say: That's more area than you need.
+    - prompt: A₁ = 4 cm² and A₂ = 800 cm². What push lifts 12 000 N?
+      want:
+        a1: 4
+        a2: 800
+        f2: 12000
+      mistakes:
+      - when:
+          a1: 4
+          a2: 800
+          f1:
+          - 70
+          - 500
+        say: More than needed. The big piston is 200 times larger, so the push is 12 000 ÷ 200.
+      - when:
+          a1: 4
+          a2: 800
+          f1:
+          - 10
+          - 50
+        say: Not enough to lift it.
+    - prompt: Make the pressure in the oil 20 N/cm² using a 10 cm² small piston.
+      want:
+        a1: 10
+        p: 20
+      mistakes:
+      - when:
+          a1: 10
+          f1: 20
+        say: 20 N on 10 cm² is 2 N/cm². Pressure = force ÷ area.
   items:
   - prompt: Find the gauge pressure (in Pa) at 10 m depth in water (ρ = 1000 kg/m³, g = 10 m/s²).
     answer: '100000'
@@ -119,6 +202,79 @@ concepts:
       - P + ½ρv² + ρgh = constant
       - F = 6πηrv
     alt: 'Three flow rules: continuity, Bernoulli''s principle and Stokes'' law.'
+  activity:
+    type: formula
+    prompt: 'Water flows from a wide pipe into a narrow one. The same volume passes each second: A₁v₁ = A₂v₂, and area goes as diameter².'
+    inputs:
+    - name: d1
+      label: Wide pipe's diameter
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: cm
+    - name: v1
+      label: Speed in the wide pipe
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: m/s
+    - name: d2
+      label: Narrow pipe's diameter
+      min: 1
+      max: 10
+      step: 1
+      start: 2
+      unit: cm
+    outputs:
+    - name: v2
+      label: Speed in the narrow pipe
+      expr: v1*(d1/d2)^2
+      unit: m/s
+      places: 2
+    goals:
+    - prompt: Water moves at 2 m/s in a 4 cm pipe. Choose the narrow pipe so the water leaves at 8 m/s.
+      want:
+        d1: 4
+        v1: 2
+        v2: 8
+      mistakes:
+      - when:
+          d1: 4
+          v1: 2
+          d2: 1
+        say: '1 cm makes it 32 m/s. Speed depends on area, and area goes as diameter²: half the width is a quarter of the area.'
+    - prompt: A 10 cm pipe carries water at 1 m/s. Make it 25 times faster in the narrow part.
+      want:
+        d1: 10
+        v1: 1
+        v2: 25
+      mistakes:
+      - when:
+          d1: 10
+          v1: 1
+          d2: 4
+        say: 4 cm is 2.5 times narrower, which makes it 6.25 times faster. You need 25 = 5², so 5 times narrower.
+    - prompt: Make the speed stay the same when the pipe joins another.
+      want:
+        v2:
+        - 0.99
+        - 1.01
+        v1: 1
+      mistakes:
+      - when:
+          v1: 1
+          v2:
+          - 1.1
+          - 100
+        say: The second pipe is narrower, so the water speeds up. Make the diameters equal.
+      - when:
+          v1: 1
+          v2:
+          - 0.01
+          - 0.9
+        say: The second pipe is wider, so the water slows. Make the diameters equal.
   items:
   - prompt: Water flows at 2 m/s in a pipe of area 6 cm². What is its speed (in m/s) where the area is 3 cm²?
     answer: '4'

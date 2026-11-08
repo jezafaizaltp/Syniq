@@ -31,6 +31,61 @@ concepts:
     - at: 100
       label: water boils
     alt: 'A Celsius number line: −40 °C equals −40 °F, ice melts at 0 °C and water boils at 100 °C.'
+  activity:
+    type: formula
+    prompt: Change the Celsius temperature. °F = 9/5 × °C + 32, and kelvin = °C + 273.
+    inputs:
+    - name: c
+      label: Celsius
+      min: -50
+      max: 110
+      step: 1
+      start: 20
+      unit: °C
+    outputs:
+    - name: f
+      label: Fahrenheit
+      expr: 9*c/5+32
+      unit: °F
+      places: 1
+    - name: k
+      label: Kelvin
+      expr: c+273
+      unit: K
+    goals:
+    - prompt: Find the temperature where °C and °F read the same number.
+      want:
+        f: -40
+      mistakes:
+      - when:
+          c: 0
+        say: 0 °C is 32 °F. The two scales cross far below freezing.
+      - when:
+          c:
+          - -39
+          - 110
+        say: 'The Fahrenheit number is still bigger. Go colder: °F falls 9/5 as fast as °C.'
+    - prompt: Body temperature is 98.6 °F. Set it in °C.
+      want:
+        f: 98.6
+      mistakes:
+      - when:
+          c:
+          - 60
+          - 70
+        say: 'You took away 32 but didn''t scale. A Celsius degree is 9/5 of a Fahrenheit degree: (98.6 − 32) × 5/9.'
+    - prompt: Make 300 K.
+      want:
+        k: 300
+      mistakes:
+      - when:
+          c: -27
+        say: '−27 °C is 246 K. Going from kelvin to °C you subtract 273: 300 − 273.'
+      - when:
+          c:
+          - 100
+          - 110
+        say: Water would be boiling. 300 K is about room temperature.
   items:
   - prompt: Convert 100 °C to Fahrenheit.
     answer: '212'
@@ -113,6 +168,102 @@ concepts:
     - Water warms to 100 °C
     - Water boils (flat)
     alt: 'Heating ice: temperature rises, stays flat while melting, rises again, then stays flat while boiling.'
+  activity:
+    type: formula
+    prompt: Mix hot and cold water. Heat lost by the hot = heat gained by the cold, so they meet at (m₁t₁ + m₂t₂) ÷ (m₁ + m₂).
+    inputs:
+    - name: a
+      label: Hot water mass
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: kg
+    - name: ta
+      label: Hot water temperature
+      min: 0
+      max: 100
+      step: 5
+      start: 60
+      unit: °C
+    - name: b
+      label: Cold water mass
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: kg
+    - name: tb
+      label: Cold water temperature
+      min: 0
+      max: 100
+      step: 5
+      start: 10
+      unit: °C
+    outputs:
+    - name: t
+      label: Final temperature
+      expr: (a*ta+b*tb)/(a+b)
+      unit: °C
+      places: 1
+    goals:
+    - prompt: Mix hot water at 80 °C with 3 kg at 20 °C to end at 50 °C. How much hot water?
+      want:
+        ta: 80
+        b: 3
+        tb: 20
+        t: 50
+      mistakes:
+      - when:
+          ta: 80
+          b: 3
+          tb: 20
+          a:
+          - 1
+          - 2
+        say: 'Too little hot water: the mix ends below 50 °C. Both waters change by 30 °C, so the masses must be equal.'
+      - when:
+          ta: 80
+          b: 3
+          tb: 20
+          a:
+          - 4
+          - 10
+        say: 'Too much hot water: the mix ends above 50 °C.'
+    - prompt: 1 kg of water at 100 °C is mixed with cold water at 10 °C and ends at 40 °C. How much cold water?
+      want:
+        a: 1
+        ta: 100
+        tb: 10
+        t: 40
+      mistakes:
+      - when:
+          a: 1
+          ta: 100
+          tb: 10
+          b: 1
+        say: Equal masses meet halfway, at 55 °C. The hot water falls 60 °C, the cold rises only 30 °C, so it needs twice the mass.
+      - when:
+          a: 1
+          ta: 100
+          tb: 10
+          b:
+          - 3
+          - 10
+        say: 'Too much cold water: the mix ends below 40 °C.'
+    - prompt: Mix 2 kg at 70 °C with 3 kg at 20 °C.
+      want:
+        a: 2
+        ta: 70
+        b: 3
+        tb: 20
+      mistakes:
+      - when:
+          a: 3
+          ta: 70
+          b: 2
+          tb: 20
+        say: 'Masses swapped: it''s 2 kg of hot water and 3 kg of cold.'
   items:
   - prompt: How much heat (in J) warms 2 kg of water by 10 °C? (c = 4200 J/kg°C)
     answer: '84000'

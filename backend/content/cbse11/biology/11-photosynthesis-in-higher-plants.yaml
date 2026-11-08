@@ -29,6 +29,49 @@ concepts:
     - Light hits PS I
     - NADPH formed
     alt: 'The light reaction: PS II splits water, electron flow makes ATP, PS I makes NADPH.'
+  activity:
+    type: sort
+    prompt: Does it happen in the light reaction or the Calvin cycle?
+    bins:
+    - Light reaction (thylakoids)
+    - Calvin cycle (stroma)
+    items:
+    - label: Water is split
+      bin: Light reaction (thylakoids)
+      clue: Which stage needs electrons from water?
+      why: Photolysis of water near photosystem II gives electrons for the light reaction.
+    - label: O₂ is released
+      bin: Light reaction (thylakoids)
+      clue: Where does the oxygen come from?
+      why: O₂ comes from splitting water, in the light reaction.
+    - label: ATP is made by photophosphorylation
+      bin: Light reaction (thylakoids)
+      clue: Which stage uses light energy to make ATP?
+      why: The light reaction makes ATP through chemiosmosis.
+    - label: NADPH is made
+      bin: Light reaction (thylakoids)
+      clue: Where do electrons reduce NADP⁺?
+      why: At the end of the electron transport chain in the thylakoids.
+    - label: Photosystem II absorbs light at 680 nm
+      bin: Light reaction (thylakoids)
+      clue: Do the pigments catch light here?
+      why: P680 is the reaction centre of photosystem II.
+    - label: CO₂ is fixed by RuBisCO
+      bin: Calvin cycle (stroma)
+      clue: Which stage takes in CO₂?
+      why: 'Carboxylation: RuBP + CO₂ → 3-PGA.'
+    - label: 3-PGA is reduced to a triose sugar
+      bin: Calvin cycle (stroma)
+      clue: Which stage spends ATP and NADPH to build sugar?
+      why: Reduction uses the light reaction's ATP and NADPH.
+    - label: RuBP is regenerated
+      bin: Calvin cycle (stroma)
+      clue: Which stage keeps the CO₂ acceptor coming back?
+      why: Regeneration keeps the Calvin cycle turning.
+    - label: Glucose is built
+      bin: Calvin cycle (stroma)
+      clue: Which stage makes sugar?
+      why: Six turns make one glucose.
   items:
   - prompt: 'The oxygen released in photosynthesis comes from:'
     options:
@@ -124,6 +167,58 @@ concepts:
     - Sugar made
     - RuBP regenerated
     alt: 'The Calvin cycle: carboxylation, reduction and regeneration.'
+  activity:
+    type: formula
+    prompt: Each turn of the Calvin cycle fixes one CO₂ and uses 3 ATP and 2 NADPH. Glucose has 6 carbons.
+    inputs:
+    - name: t
+      label: Turns of the cycle
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: co2
+      label: CO₂ fixed
+      expr: t
+    - name: glu
+      label: Glucose made
+      expr: t/6
+      places: 2
+    - name: atp
+      label: ATP used
+      expr: 3*t
+    - name: nadph
+      label: NADPH used
+      expr: 2*t
+    goals:
+    - prompt: Make one glucose.
+      want:
+        glu: 1
+      mistakes:
+      - when:
+          t: 3
+        say: '3 turns fix 3 carbons: half a glucose. Glucose has 6 carbons, one per turn.'
+      - when:
+          t: 2
+        say: Each turn fixes one carbon. Glucose has 6.
+    - prompt: Make 2 glucose. Read the ATP used.
+      want:
+        glu: 2
+      mistakes:
+      - when:
+          t: 2
+        say: 2 turns fix only 2 carbons. Two glucose need 12 carbons.
+    - prompt: Use exactly 30 NADPH.
+      want:
+        nadph: 30
+      mistakes:
+      - when:
+          atp: 30
+        say: That's 30 ATP. Each turn uses 3 ATP but only 2 NADPH.
+      - when:
+          t: 30
+        say: '30 turns use 60 NADPH: 2 per turn.'
   items:
   - prompt: How many turns of the Calvin cycle make one glucose molecule?
     answer: '6'
