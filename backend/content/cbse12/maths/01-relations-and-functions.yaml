@@ -32,6 +32,53 @@ concepts:
       - (a, b) ⇒ (b, a)
       - (a, b), (b, c) ⇒ (a, c)
     alt: The three properties of a relation and how to test each.
+  activity:
+    type: sort
+    prompt: An equivalence relation is reflexive, symmetric AND transitive. Which of these are?
+    bins:
+    - Equivalence relation
+    - Not an equivalence relation
+    items:
+    - label: 'On ℤ: a R b if a − b is divisible by 3'
+      bin: Equivalence relation
+      clue: Is a − a divisible by 3? If 3 divides a − b, does it divide b − a?
+      why: a − a = 0 works; b − a = −(a − b) works; and (a − b) + (b − c) = a − c, so all three hold.
+    - label: 'On ℝ: a R b if a ≤ b'
+      bin: Not an equivalence relation
+      clue: If 2 ≤ 5, is 5 ≤ 2?
+      why: 'Reflexive and transitive, but not symmetric: 2 ≤ 5 doesn''t give 5 ≤ 2.'
+    - label: 'People: a R b if a and b are the same age'
+      bin: Equivalence relation
+      clue: Check each property in turn. Does any fail?
+      why: 'Same age as yourself, both ways, and passes along a chain: all three hold.'
+    - label: 'People: a R b if a is a brother of b'
+      bin: Not an equivalence relation
+      clue: Is anyone their own brother?
+      why: 'Not reflexive: nobody is their own brother. (It isn''t symmetric either: a sister''s brother isn''t her brother back.)'
+    - label: 'Lines: L₁ R L₂ if L₁ ∥ L₂ (L ∥ L counts)'
+      bin: Equivalence relation
+      clue: If L₁ ∥ L₂ and L₂ ∥ L₃, what about L₁ and L₃?
+      why: 'Reflexive (given), symmetric, and transitive: parallel to parallel is parallel.'
+    - label: 'Lines: L₁ R L₂ if L₁ ⊥ L₂'
+      bin: Not an equivalence relation
+      clue: Is a line perpendicular to itself?
+      why: Not reflexive; and two lines perpendicular to a third are parallel to each other, so not transitive.
+    - label: 'On ℝ: a R b if |a − b| ≤ 1'
+      bin: Not an equivalence relation
+      clue: Try 0, 1 and 2. Is 0 related to 2?
+      why: '0 R 1 and 1 R 2, but |0 − 2| = 2: not transitive.'
+    - label: 'On {1, 2, 3}: {(1, 1), (2, 2), (3, 3)}'
+      bin: Equivalence relation
+      clue: Is every element related to itself? Any pairs to reverse?
+      why: 'The identity relation: reflexive, and symmetric and transitive with nothing to break them.'
+    - label: 'On {1, 2, 3}: {(1, 1), (2, 2), (3, 3), (1, 2)}'
+      bin: Not an equivalence relation
+      clue: (1, 2) is there. Is (2, 1)?
+      why: 'Not symmetric: (1, 2) is in R but (2, 1) isn''t.'
+    - label: 'Triangles: T₁ R T₂ if T₁ is similar to T₂'
+      bin: Equivalence relation
+      clue: Is a triangle similar to itself? Does similarity pass along a chain?
+      why: Similarity is reflexive, symmetric and transitive.
   items:
   - prompt: How many relations are possible on a set with 2 elements?
     answer: '16'
@@ -121,6 +168,59 @@ concepts:
     - Apply g
     - g(f(x))
     alt: 'Composition: apply f first, then g, to get g(f(x)).'
+  activity:
+    type: sort
+    prompt: 'One-one: no two inputs share an output. Onto: every element of the codomain is hit. Sort each function.'
+    bins:
+    - One-one and onto
+    - One-one, not onto
+    - Onto, not one-one
+    - Neither
+    items:
+    - label: f(x) = 2x, ℝ → ℝ
+      bin: One-one and onto
+      clue: Can two x give the same 2x? Is every real y = 2x for some x?
+      why: '2x₁ = 2x₂ forces x₁ = x₂, and y comes from x = y/2: a bijection.'
+    - label: f(x) = 2x, ℕ → ℕ
+      bin: One-one, not onto
+      clue: Which natural numbers are never doubles?
+      why: Distinct inputs give distinct outputs, but odd numbers like 3 are never reached.
+    - label: f(x) = x + 1, ℕ → ℕ
+      bin: One-one, not onto
+      clue: Which natural number is never x + 1?
+      why: 1 is never reached, though no two inputs collide.
+    - label: f(x) = eˣ, ℝ → ℝ
+      bin: One-one, not onto
+      clue: Can eˣ ever be negative or 0?
+      why: eˣ is always positive, so negatives are never hit; but it never repeats a value.
+    - label: f(x) = x³, ℝ → ℝ
+      bin: One-one and onto
+      clue: Does x³ ever repeat? Does every real have a cube root?
+      why: 'x³ always increases, and every real y has a cube root: a bijection.'
+    - label: f(x) = x², [0, ∞) → [0, ∞)
+      bin: One-one and onto
+      clue: With no negative inputs, can two x share an x²?
+      why: Restricting the domain removes −x, so it's one-one, and every y ≥ 0 is √y squared.
+    - label: f(x) = x², ℝ → [0, ∞)
+      bin: Onto, not one-one
+      clue: Do 2 and −2 give the same output?
+      why: Every y ≥ 0 is hit, but 2 and −2 both give 4.
+    - label: f(x) = |x|, ℝ → [0, ∞)
+      bin: Onto, not one-one
+      clue: Compare |3| and |−3|.
+      why: Every y ≥ 0 is reached, but 3 and −3 share 3.
+    - label: f(x) = sin x, ℝ → [−1, 1]
+      bin: Onto, not one-one
+      clue: Does sin x repeat its values?
+      why: Every value from −1 to 1 is hit, many times over.
+    - label: f(x) = x², ℝ → ℝ
+      bin: Neither
+      clue: Do ±2 share an output? Is −1 ever reached?
+      why: 2 and −2 share 4, and negatives are never reached.
+    - label: f(x) = ⌊x⌋ (greatest integer), ℝ → ℝ
+      bin: Neither
+      clue: Is 0.5 ever an output? Do 1.2 and 1.7 share one?
+      why: Only integers come out, and many inputs share each one.
   items:
   - prompt: If f(x) = 2x + 1 and g(x) = x², find (g∘f)(1).
     answer: '9'

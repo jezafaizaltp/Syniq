@@ -24,6 +24,42 @@ concepts:
     - Constraints from limited resources
     - Non-negativity x, y ≥ 0
     alt: Setting up a linear programming problem.
+  activity:
+    type: sort
+    prompt: A dealer buys x tables (₹2500 each) and y chairs (₹500 each), has ₹50 000 and space for 60 items. Profit is ₹250 per table and ₹75 per chair. Sort each line.
+    bins:
+    - Objective function
+    - Constraint
+    - Non-negativity
+    items:
+    - label: Maximise Z = 250x + 75y
+      bin: Objective function
+      clue: Is this the thing the dealer wants as large as possible?
+      why: 'Profit is what''s being maximised: the objective.'
+    - label: 2500x + 500y ≤ 50 000
+      bin: Constraint
+      clue: Is it a limit set by money?
+      why: The budget limits the cost of what's bought.
+    - label: x + y ≤ 60
+      bin: Constraint
+      clue: Is it a limit set by space?
+      why: Only 60 items fit.
+    - label: 5x + y ≤ 100
+      bin: Constraint
+      clue: Divide 2500x + 500y ≤ 50 000 by 500. What do you get?
+      why: The budget inequality, simplified.
+    - label: x ≥ 0
+      bin: Non-negativity
+      clue: Can the dealer buy a negative number of tables?
+      why: Quantities can't be negative.
+    - label: y ≥ 0
+      bin: Non-negativity
+      clue: Can there be −3 chairs?
+      why: Quantities can't be negative.
+    - label: Minimise C = 2500x + 500y
+      bin: Objective function
+      clue: Is it a quantity to make as small as possible?
+      why: A cost to minimise is also an objective function, just in a different problem.
   items:
   - prompt: 'In an LPP, the function to maximise or minimise is called the:'
     options:
@@ -113,6 +149,73 @@ concepts:
       value: 8
     alt: 'Z = 3x + 2y at the corners of x + y ≤ 4: 0, 12 and 8; the maximum is 12 at (4, 0).'
     unit: Z
+  activity:
+    type: formula
+    prompt: 'Feasible region: x + y ≤ 4, x + 3y ≤ 6, x ≥ 0, y ≥ 0. Its corners are (0, 0), (4, 0), (3, 1) and (0, 2).'
+    inputs:
+    - name: x
+      label: x
+      min: 0
+      max: 6
+      step: 1
+      start: 0
+    - name: y
+      label: y
+      min: 0
+      max: 6
+      step: 1
+      start: 0
+    outputs:
+    - name: ok
+      label: Feasible? (1 yes, 0 no)
+      expr: min(1,max(0,min(4-x-y,6-x-3*y)+1))
+    - name: z
+      label: Z = 3x + 2y
+      expr: 3*x+2*y
+    - name: z2
+      label: Z₂ = x + 3y
+      expr: x+3*y
+    goals:
+    - prompt: Find the corner where Z = 3x + 2y is largest.
+      want:
+        x: 4
+        y: 0
+      mistakes:
+      - when:
+          ok: 0
+        say: 'That point breaks a constraint: it''s outside the feasible region. Only feasible points count.'
+      - when:
+          x: 3
+          y: 1
+        say: 'Z = 11 at (3, 1). Check every corner: one gives more.'
+      - when:
+          x: 0
+          y: 2
+        say: Z = 4 at (0, 2). Check the other corners.
+    - prompt: Now make Z₂ = x + 3y as large as possible, staying feasible.
+      want:
+        ok: 1
+        z2: 6
+      mistakes:
+      - when:
+          ok: 0
+          z2:
+          - 7
+          - 30
+        say: Higher Z₂, but outside the feasible region.
+      - when:
+          x: 4
+          y: 0
+        say: Z₂ = 4 at (4, 0). A different objective can peak at a different corner.
+    - prompt: Make Z = 3x + 2y equal 9 at a feasible point that is NOT a corner.
+      want:
+        ok: 1
+        z: 9
+      mistakes:
+      - when:
+          z: 9
+          ok: 0
+        say: Z = 9, but the point is outside the region.
   items:
   - prompt: Maximise Z = 3x + 2y with x + y ≤ 4, x, y ≥ 0. Find the maximum Z.
     answer: '12'

@@ -37,6 +37,51 @@ concepts:
       - '1'
       - '3'
     alt: Examples of differential equations with their order and degree.
+  activity:
+    type: sort
+    prompt: Order = the highest derivative. Degree = its power, once the equation is a polynomial in derivatives.
+    bins:
+    - Order 1, degree 1
+    - Order 2, degree 1
+    - Order 1, degree 2
+    - Degree not defined
+    items:
+    - label: dy/dx + y = eˣ
+      bin: Order 1, degree 1
+      clue: Highest derivative? Its power?
+      why: Only dy/dx, to the power 1.
+    - label: x dy/dx = y
+      bin: Order 1, degree 1
+      clue: Is there any second derivative?
+      why: First derivative only, power 1.
+    - label: d²y/dx² + y = 0
+      bin: Order 2, degree 1
+      clue: What is the highest derivative?
+      why: d²y/dx² is the highest, to the power 1.
+    - label: d²y/dx² + (dy/dx)³ = 0
+      bin: Order 2, degree 1
+      clue: 'Degree comes from which derivative: the highest, or the one with the biggest power?'
+      why: The cube is on dy/dx, but the highest derivative is d²y/dx², power 1.
+    - label: (dy/dx)² + y = x
+      bin: Order 1, degree 2
+      clue: What power is the highest derivative raised to?
+      why: 'dy/dx squared: order 1, degree 2.'
+    - label: (dy/dx)² = 1 + x²
+      bin: Order 1, degree 2
+      clue: Highest derivative and its power?
+      why: Order 1, degree 2.
+    - label: sin(dy/dx) + y = 0
+      bin: Degree not defined
+      clue: Is it a polynomial in dy/dx?
+      why: 'dy/dx sits inside sin, so it isn''t a polynomial: no degree.'
+    - label: y″ + sin(y′) = 0
+      bin: Degree not defined
+      clue: Is every derivative only raised to whole powers?
+      why: 'y′ is inside sin: not a polynomial, so the degree is not defined.'
+    - label: e^(dy/dx) = x
+      bin: Degree not defined
+      clue: Is dy/dx in a power or an exponent?
+      why: 'dy/dx is in an exponent: no degree.'
   items:
   - prompt: Find the order of d²y/dx² + 3(dy/dx)³ = 0.
     answer: '2'
@@ -117,6 +162,85 @@ concepts:
     - Multiply through by IF
     - y·IF = ∫Q·IF dx + C
     alt: Solving a linear first-order differential equation with an integrating factor.
+  activity:
+    type: formula
+    prompt: 'dN/dt = kN is separable; its solution is exponential. With a doubling time d: N = N₀ × 2^(t/d). A decay with half-life d: N₀ × 2^(−t/d).'
+    inputs:
+    - name: n0
+      label: Start amount N₀
+      min: 10
+      max: 100
+      step: 10
+      start: 10
+    - name: d
+      label: Doubling time or half-life d
+      min: 0.5
+      max: 10
+      step: 0.5
+      start: 0.5
+      unit: h
+    - name: t
+      label: Time t
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+      unit: h
+    outputs:
+    - name: n
+      label: 'If doubling: N'
+      expr: n0*2^(t/d)
+      places: 1
+    - name: half
+      label: 'If halving: N'
+      expr: n0*2^(-t/d)
+      places: 2
+    goals:
+    - prompt: 100 bacteria become 800 in 6 hours. Set the doubling time.
+      want:
+        n0: 100
+        t: 6
+        n: 800
+      mistakes:
+      - when:
+          n0: 100
+          t: 6
+          d: 3
+        say: 'd = 3 gives two doublings: 400. 800 is 8 = 2³ times 100: three doublings in 6 hours.'
+      - when:
+          n0: 100
+          t: 6
+          d:
+          - 0.5
+          - 1.5
+        say: 'Too fast: the colony shoots past 800.'
+    - prompt: Doubling time 3 h. How long until 50 grow to 400?
+      want:
+        n0: 50
+        d: 3
+        n: 400
+      mistakes:
+      - when:
+          n0: 50
+          d: 3
+          t: 24
+        say: 'That''s 8 × 3 hours. 400 is 50 × 8 = 2³: three doublings, not eight.'
+    - prompt: A substance has a half-life of 5 years (read h as years). How long until 80 g falls to 10 g?
+      want:
+        n0: 80
+        d: 5
+        half: 10
+      mistakes:
+      - when:
+          n0: 80
+          d: 5
+          t: 10
+        say: Two half-lives leave 20 g. One more halves it again.
+      - when:
+          n0: 80
+          d: 5
+          t: 35
+        say: '80 − 10 = 70, but decay isn''t subtraction: it halves every 5 years. 80 → 40 → 20 → 10.'
   items:
   - prompt: Solve dy/dx = 2x with y(0) = 1. Find y(2).
     answer: '5'

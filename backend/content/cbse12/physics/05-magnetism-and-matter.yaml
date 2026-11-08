@@ -27,6 +27,58 @@ concepts:
     - Runs S → N inside
     - Closed loop
     alt: Magnetic field lines of a bar magnet form closed loops.
+  activity:
+    type: formula
+    prompt: A short bar magnet (m = 1 A m²). At distance r its field on the axis is 2 × (μ₀/4π)m/r³; on the equator it is half that.
+    inputs:
+    - name: r
+      label: Distance r
+      min: 5
+      max: 50
+      step: 1
+      start: 5
+      unit: cm
+    outputs:
+    - name: ax
+      label: Field on the axis
+      expr: 200000/r^3
+      unit: μT
+      places: 2
+    - name: eq
+      label: Field on the equator
+      expr: 100000/r^3
+      unit: μT
+      places: 2
+    goals:
+    - prompt: Find where the axial field is 1/8 of its value at 10 cm.
+      want:
+        r: 20
+      mistakes:
+      - when:
+          r: 40
+        say: '4 times as far gives 1/64: B ∝ 1/r³. 1/8 = (1/2)³ needs only twice the distance.'
+      - when:
+          r: 30
+        say: 3 times as far gives 1/27.
+    - prompt: Find where the axial field is 8 times its value at 40 cm.
+      want:
+        r: 20
+      mistakes:
+      - when:
+          r: 5
+        say: '8 times closer gives 512 times the field. 8 = 2³: halve the distance.'
+      - when:
+          r: 10
+        say: 4 times closer gives 64 times the field.
+    - prompt: Find where the EQUATORIAL field equals the axial field at 10 cm (200 μT).
+      want:
+        eq:
+        - 190
+        - 210
+      mistakes:
+      - when:
+          r: 10
+        say: At the same distance the equatorial field is only half the axial field. Come closer.
   items:
   - prompt: A magnet of moment 2 A m² is at 90° to a 0.5 T field. Find the torque (N m).
     answer: '1'
@@ -124,6 +176,58 @@ concepts:
       - aluminium, oxygen
       - iron, nickel
     alt: Diamagnetic, paramagnetic and ferromagnetic materials compared.
+  activity:
+    type: sort
+    prompt: How does each material behave in a magnetic field?
+    bins:
+    - Diamagnetic
+    - Paramagnetic
+    - Ferromagnetic
+    items:
+    - label: Bismuth
+      bin: Diamagnetic
+      clue: Is it pushed weakly out of a strong field?
+      why: 'Bismuth is weakly repelled: χ small and negative.'
+    - label: Copper
+      bin: Diamagnetic
+      clue: Does a copper wire stick to a magnet?
+      why: Copper is weakly repelled.
+    - label: Water
+      bin: Diamagnetic
+      clue: Water is pushed slightly away by strong magnets. Which kind?
+      why: Diamagnetic.
+    - label: A superconductor
+      bin: Diamagnetic
+      clue: It throws the field out completely (Meissner effect). Which kind?
+      why: 'A perfect diamagnet: χ = −1.'
+    - label: Aluminium
+      bin: Paramagnetic
+      clue: Is it pulled weakly toward a strong field?
+      why: 'Weakly attracted: paramagnetic.'
+    - label: Sodium
+      bin: Paramagnetic
+      clue: Weakly pulled in, and loses it when the field goes. Which kind?
+      why: Paramagnetic.
+    - label: Liquid oxygen
+      bin: Paramagnetic
+      clue: It clings weakly between magnet poles. Which kind?
+      why: O₂ is paramagnetic.
+    - label: Iron
+      bin: Ferromagnetic
+      clue: Is it pulled strongly and can stay magnetised?
+      why: 'Ferromagnetic: domains line up.'
+    - label: Nickel
+      bin: Ferromagnetic
+      clue: Strongly attracted. Which kind?
+      why: Ferromagnetic.
+    - label: Cobalt
+      bin: Ferromagnetic
+      clue: Used in strong permanent magnets. Which kind?
+      why: Ferromagnetic.
+    - label: Gadolinium
+      bin: Ferromagnetic
+      clue: Strongly magnetic below about 20 °C. Which kind?
+      why: Ferromagnetic (below its Curie temperature).
   items:
   - prompt: A material has χ = 0.5. Find its relative permeability μr.
     answer: '1.5'

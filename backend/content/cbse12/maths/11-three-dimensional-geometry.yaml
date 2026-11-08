@@ -26,6 +26,85 @@ concepts:
     - r = a + λb
     - 'Cartesian: (x − x₁)/a = (y − y₁)/b = (z − z₁)/c'
     alt: Writing the equation of a line in space from a point and a direction.
+  activity:
+    type: formula
+    prompt: P is (1, 2, 3). Move Q. The line PQ has direction ratios x − 1, y − 2, z − 3.
+    inputs:
+    - name: x
+      label: Q's x
+      min: -4
+      max: 8
+      step: 1
+      start: 0
+    - name: y
+      label: Q's y
+      min: -4
+      max: 8
+      step: 1
+      start: 0
+    - name: z
+      label: Q's z
+      min: -4
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: pq
+      label: '|PQ|'
+      expr: sqrt((x-1)^2+(y-2)^2+(z-3)^2)
+      places: 2
+    - name: cross
+      label: How far from parallel to (2, −1, 2)
+      expr: sqrt((2*(y-2)+(z-3))^2+(2*(z-3)-2*(x-1))^2+(-(x-1)-2*(y-2))^2)
+      places: 2
+    - name: dot
+      label: Dot with (2, −1, 2)
+      expr: 2*(x-1)-(y-2)+2*(z-3)
+    goals:
+    - prompt: Make PQ have direction ratios proportional to 2, −1, 2.
+      want:
+        cross: 0
+        pq:
+        - 0.5
+        - 30
+      mistakes:
+      - when:
+          x: 2
+          y: -1
+          z: 2
+        say: 'That puts Q AT (2, −1, 2). Direction ratios are the differences Q − P: x − 1, y − 2, z − 3.'
+      - when:
+          cross:
+          - 0.01
+          - 3
+        say: Close, but not parallel yet. Make x − 1, y − 2, z − 3 a multiple of 2, −1, 2.
+    - prompt: Make PQ parallel to the z-axis.
+      want:
+        x: 1
+        y: 2
+        pq:
+        - 0.5
+        - 30
+      mistakes:
+      - when:
+          z: 3
+          pq:
+          - 0.5
+          - 30
+        say: With z unchanged, PQ lies flat, at right angles to the z-axis. Keep x and y as P's and change z.
+    - prompt: Make PQ perpendicular to the direction (2, −1, 2), with Q not on P.
+      want:
+        dot: 0
+        pq:
+        - 0.5
+        - 30
+      mistakes:
+      - when:
+          cross: 0
+          pq:
+          - 0.5
+          - 30
+        say: That's parallel to (2, −1, 2), the opposite of perpendicular. You need 2(x − 1) − (y − 2) + 2(z − 3) = 0.
   items:
   - prompt: The line through (1, 2, 3) and (4, 6, 3) has direction ratios (3, 4, k). Find k.
     answer: '0'
@@ -114,6 +193,75 @@ concepts:
       - '|b × (a₂ − a₁)|/|b|'
       - '0'
     alt: 'Shortest distance between lines: skew, parallel and intersecting.'
+  activity:
+    type: formula
+    prompt: Line 1 is the x-axis (direction i). Line 2 runs along j through the point (x, y, z). b₁ × b₂ = k, so the shortest distance is |(a₂ − a₁)·k| = |z|.
+    inputs:
+    - name: x
+      label: x
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: y
+      label: y
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: z
+      label: z
+      min: -6
+      max: 6
+      step: 1
+      start: 1
+    outputs:
+    - name: sd
+      label: Shortest distance |z|
+      expr: abs(z)
+    - name: oa
+      label: Distance between the chosen points
+      expr: sqrt(x^2+y^2+z^2)
+      places: 2
+    goals:
+    - prompt: Make the shortest distance 4, with the point (x, y, z) 5 from the origin.
+      want:
+        sd: 4
+        oa: 5
+      mistakes:
+      - when:
+          oa: 4
+        say: 4 is the gap between the two chosen points. The shortest distance only counts the part along b₁ × b₂, here the z-direction.
+      - when:
+          sd: 4
+          oa:
+          - 4.1
+          - 4.9
+        say: 'The shortest distance is 4, but the point is not yet 5 from the origin: x² + y² must be 9.'
+    - prompt: Make the two lines meet.
+      want:
+        sd: 0
+      mistakes:
+      - when:
+          x: 0
+          y: 0
+          sd:
+          - 1
+          - 6
+        say: 'Moving the point onto the z-axis doesn''t help: the lines still pass one above the other. Only z decides.'
+    - prompt: Keep the point at x = 3, y = 3. Make the lines exactly 2 apart.
+      want:
+        x: 3
+        y: 3
+        sd: 2
+      mistakes:
+      - when:
+          x: 3
+          y: 3
+          sd:
+          - 3
+          - 6
+        say: 'Too far apart. Only z sets the gap here: the shortest distance is |z|.'
   items:
   - prompt: Find the distance between (1, 2, 2) and the origin.
     answer: '3'

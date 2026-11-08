@@ -36,6 +36,24 @@ concepts:
       - 4 sperm
       - 1 ovum
     alt: Spermatogenesis and oogenesis compared.
+  activity:
+    type: order
+    prompt: Trace a sperm's path out of the body.
+    steps:
+    - Seminiferous tubules (where sperms form)
+    - Rete testis
+    - Vasa efferentia
+    - Epididymis (where sperms mature and are stored)
+    - Vas deferens
+    - Ejaculatory duct
+    - Urethra
+    reasons:
+      Rete testis: Sperms leave the tubules first; the rete testis collects them inside the testis.
+      Vasa efferentia: These small ducts lead out of the rete testis.
+      Epididymis (where sperms mature and are stored): The vasa efferentia open into the epididymis.
+      Vas deferens: From the epididymis the vas deferens carries sperms up into the body.
+      Ejaculatory duct: The vas deferens joins the seminal vesicle's duct to form the ejaculatory duct.
+      Urethra: The ejaculatory ducts open into the urethra, the last part of the path.
   items:
   - prompt: How many sperm develop from one primary spermatocyte?
     answer: '4'
@@ -124,6 +142,45 @@ concepts:
     - Implantation in uterus
     - Placenta forms
     alt: From fertilisation to implantation and placenta formation.
+  activity:
+    type: number_line
+    min: 0
+    max: 28
+    step: 1
+    start: 0
+    prompt: A typical 28-day menstrual cycle. Day 1 is the first day of menstruation. Mark each day.
+    goals:
+    - prompt: Ovulation, after the LH surge.
+      target: 14
+      mistakes:
+      - when:
+          v: 1
+        say: Day 1 is when menstruation begins. Ovulation is in the middle of the cycle.
+      - when:
+          v: 28
+        say: Day 28 is the end of the cycle. The egg is released halfway through.
+    - prompt: The last day of the menstrual phase.
+      target: 5
+      mistakes:
+      - when:
+          v: 14
+        say: Day 14 is ovulation. Menstruation lasts about 3–5 days.
+      - when:
+          v:
+          - 8
+          - 13
+        say: By then the follicular phase is building the uterus lining again. Menstruation lasts about 3–5 days.
+    - prompt: The first day of the luteal phase.
+      target: 15
+      mistakes:
+      - when:
+          v: 14
+        say: Day 14 is ovulation itself. The luteal phase starts right after, when the corpus luteum forms.
+      - when:
+          v:
+          - 6
+          - 13
+        say: 'Still the follicular phase: the follicle hasn''t released the egg yet.'
   items:
   - prompt: A typical menstrual cycle lasts about how many days?
     answer: '28'

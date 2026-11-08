@@ -32,6 +32,73 @@ concepts:
       - '9 : 3 : 3 : 1'
       - '1 : 1'
     alt: Phenotype ratios for monohybrid, dihybrid and test crosses.
+  activity:
+    type: formula
+    prompt: 'Pea height: T (tall) is dominant over t (dwarf). Set how many T alleles each parent has. Each parent passes on one allele at random.'
+    inputs:
+    - name: p1
+      label: Parent 1's T alleles (0–2)
+      min: 0
+      max: 2
+      step: 1
+      start: 2
+    - name: p2
+      label: Parent 2's T alleles (0–2)
+      min: 0
+      max: 2
+      step: 1
+      start: 0
+    outputs:
+    - name: dom
+      label: Tall offspring
+      expr: 100*(1-(1-p1/2)*(1-p2/2))
+      unit: '%'
+      places: 1
+    - name: tt
+      label: TT offspring
+      expr: 100*(p1/2)*(p2/2)
+      unit: '%'
+      places: 1
+    - name: rec
+      label: tt (dwarf) offspring
+      expr: 100*(1-p1/2)*(1-p2/2)
+      unit: '%'
+      places: 1
+    goals:
+    - prompt: 'Make a cross that gives 3 tall : 1 dwarf.'
+      want:
+        dom: 75
+      mistakes:
+      - when:
+          p1: 2
+          p2: 0
+        say: 'TT × tt gives all tall Tt: that''s the F₁. The 3 : 1 comes from crossing two F₁ hybrids, Tt × Tt.'
+      - when:
+          p1: 0
+          p2: 2
+        say: 'tt × TT gives all tall Tt: that''s the F₁. The 3 : 1 comes from Tt × Tt.'
+      - when:
+          dom: 100
+        say: Every child gets at least one T here. For dwarfs to appear, both parents must carry t.
+    - prompt: 'Test cross: a tall plant × a dwarf gives 1 tall : 1 dwarf. Set both parents.'
+      want:
+        dom: 50
+      mistakes:
+      - when:
+          dom: 100
+        say: 'All tall means the tall parent was TT. Half dwarf means it carries a t: it''s Tt.'
+      - when:
+          dom: 75
+        say: That's Tt × Tt. A test cross uses a dwarf (tt) parent.
+    - prompt: Make every offspring dwarf.
+      want:
+        dom: 0
+      mistakes:
+      - when:
+          dom:
+          - 25
+          - 100
+        say: Some offspring still get a T. Dwarf parents (tt) can only pass on t.
   items:
   - prompt: In a monohybrid F₂ of 400 plants, how many are expected to show the recessive trait?
     answer: '100'
@@ -126,6 +193,51 @@ concepts:
       - extra chromosome 21
       - one X missing (XO)
     alt: Genetic disorders and their causes.
+  activity:
+    type: sort
+    prompt: Which kind of sex determination is it?
+    bins:
+    - XX–XY
+    - XX–XO
+    - ZW–ZZ
+    - Haplo-diploid
+    items:
+    - label: Humans
+      bin: XX–XY
+      clue: Females XX, males XY. Which kind?
+      why: 'XY: the male makes two kinds of sperm.'
+    - label: Drosophila (fruit fly)
+      bin: XX–XY
+      clue: Males have X and Y. Which kind?
+      why: XY.
+    - label: The father's sperm decides the baby's sex
+      bin: XX–XY
+      clue: Which kind has the male making X and Y gametes?
+      why: 'Male heterogamety: XY.'
+    - label: Grasshopper
+      bin: XX–XO
+      clue: Males have one X and no partner. Which kind?
+      why: XO.
+    - label: Males have one X and no Y
+      bin: XX–XO
+      clue: One sex chromosome alone. Which kind?
+      why: XO.
+    - label: Birds
+      bin: ZW–ZZ
+      clue: Here the female has two different sex chromosomes. Which kind?
+      why: ZW females, ZZ males.
+    - label: Females make two kinds of eggs
+      bin: ZW–ZZ
+      clue: Which kind has the female heterogametic?
+      why: ZW.
+    - label: Honey bee
+      bin: Haplo-diploid
+      clue: Drones come from unfertilised eggs. Which kind?
+      why: Males are haploid, females diploid.
+    - label: Males develop from unfertilised eggs
+      bin: Haplo-diploid
+      clue: Haploid males, diploid females. Which kind?
+      why: Haplo-diploid.
   items:
   - prompt: How many chromosomes does a person with Down's syndrome have?
     answer: '47'

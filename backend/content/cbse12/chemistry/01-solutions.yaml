@@ -34,6 +34,88 @@ concepts:
       - ethanol + acetone
       - chloroform + acetone
     alt: Positive and negative deviations from Raoult's law.
+  activity:
+    type: formula
+    prompt: Molarity M = moles of solute ÷ litres of solution. Moles = mass ÷ molar mass.
+    inputs:
+    - name: m
+      label: Mass of solute
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: g
+    - name: mm
+      label: Molar mass
+      min: 10
+      max: 200
+      step: 10
+      start: 10
+      unit: g/mol
+    - name: v
+      label: Volume of solution
+      min: 50
+      max: 1000
+      step: 50
+      start: 1000
+      unit: mL
+    outputs:
+    - name: n
+      label: Moles
+      expr: m/mm
+      unit: mol
+      places: 3
+    - name: mol
+      label: Molarity
+      expr: (m/mm)/(v/1000)
+      unit: M
+      places: 3
+    goals:
+    - prompt: Make 250 mL of 0.5 M NaOH (molar mass 40).
+      want:
+        mm: 40
+        v: 250
+        mol: 0.5
+      mistakes:
+      - when:
+          mm: 40
+          v: 250
+          m: 20
+        say: '20 g makes 1 L of 0.5 M. You only want 250 mL: a quarter of that.'
+      - when:
+          mm: 40
+          v: 250
+          m:
+          - 1
+          - 4
+        say: 'Too dilute: you need 0.5 × 0.25 = 0.125 mol.'
+    - prompt: Dissolve 18 g of glucose (molar mass 180) to make a 0.2 M solution. Set the volume.
+      want:
+        m: 18
+        mm: 180
+        mol: 0.2
+      mistakes:
+      - when:
+          m: 18
+          mm: 180
+          v: 200
+        say: 0.2 M doesn't mean 200 mL. 0.1 mol ÷ 0.2 mol/L = 0.5 L.
+      - when:
+          m: 18
+          mm: 180
+          v: 1000
+        say: In 1 L it's only 0.1 M. Less water makes it stronger.
+    - prompt: Make a 1 M solution of NaCl (molar mass about 60 here) in 500 mL.
+      want:
+        mm: 60
+        v: 500
+        mol: 1
+      mistakes:
+      - when:
+          mm: 60
+          v: 500
+          m: 60
+        say: 60 g is a mole, enough for 1 L of 1 M. Half a litre needs half a mole.
   items:
   - prompt: A solution has 2 mol of A and 3 mol of B. Find the mole fraction of A as a fraction.
     answer: 2/5
@@ -115,6 +197,70 @@ concepts:
     - Vapour pressure falls
     - Boiling point rises, freezing point falls
     alt: Why dissolving a solute raises the boiling point and lowers the freezing point.
+  activity:
+    type: formula
+    prompt: Freezing point depression ΔT_f = i × K_f × m. For water K_f = 1.86 K kg/mol. i counts the particles each formula unit gives.
+    inputs:
+    - name: i
+      label: van 't Hoff factor i
+      min: 1
+      max: 3
+      step: 1
+      start: 1
+    - name: m
+      label: Molality m
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 0.1
+      unit: mol/kg
+    outputs:
+    - name: dt
+      label: Freezing point lowered by
+      expr: i*1.86*m
+      unit: K
+      places: 2
+    - name: fp
+      label: New freezing point
+      expr: -i*1.86*m
+      unit: °C
+      places: 2
+    goals:
+    - prompt: Use glucose (i = 1) to lower water's freezing point by 1.86 °C.
+      want:
+        i: 1
+        dt: 1.86
+      mistakes:
+      - when:
+          i: 1
+          m:
+          - 0.1
+          - 0.9
+        say: 'Not enough solute: ΔT_f = 1.86 × m, so m = 1.'
+    - prompt: Use NaCl to freeze water at −3.72 °C.
+      want:
+        i: 2
+        fp: -3.72
+      mistakes:
+      - when:
+          i: 1
+          m: 2
+        say: 'That''s 2 molal of something that doesn''t split. NaCl splits into Na⁺ and Cl⁻: i = 2.'
+      - when:
+          i: 3
+        say: NaCl gives two ions, not three.
+    - prompt: Use CaCl₂ to lower the freezing point by 5.58 °C.
+      want:
+        i: 3
+        dt: 5.58
+      mistakes:
+      - when:
+          i: 2
+        say: 'CaCl₂ gives three ions: one Ca²⁺ and two Cl⁻. i = 3.'
+      - when:
+          i: 3
+          m: 2
+        say: 'Too much: 3 × 1.86 × m = 5.58 means m = 1.'
   items:
   - prompt: Kf of water is 1.86 K kg/mol. Find ΔTf (K) for a 1 m glucose solution, to two decimals.
     answer: '1.86'

@@ -26,6 +26,80 @@ concepts:
     - Add potentials of all charges
     - Work = charge × potential difference
     alt: 'Electric potential: find V for each charge, add them, and use W = qΔV.'
+  activity:
+    type: formula
+    prompt: '+4 nC sits at x = 0 and q₂ at x = 10 cm. The potential at a point between them is V = k(q₁/r₁ + q₂/r₂): a scalar sum, signs included.'
+    inputs:
+    - name: q2
+      label: q₂
+      min: -10
+      max: 10
+      step: 1
+      start: 1
+      unit: nC
+    - name: x
+      label: Point at x
+      min: 1
+      max: 9
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: v
+      label: Potential V
+      expr: 900*(4/x+q2/(10-x))
+      unit: V
+      places: 1
+    goals:
+    - prompt: With q₂ = −4 nC, find the point between them where V = 0.
+      want:
+        q2: -4
+        v: 0
+      mistakes:
+      - when:
+          q2: -4
+          x:
+          - 1
+          - 4
+        say: 'Nearer the +4 nC charge its potential wins: V > 0. Equal and opposite charges cancel at the middle.'
+      - when:
+          q2: -4
+          x:
+          - 6
+          - 9
+        say: 'Nearer the −4 nC charge: V < 0.'
+    - prompt: Choose a negative q₂ so that V = 0 at x = 8 cm.
+      want:
+        x: 8
+        v: 0
+      mistakes:
+      - when:
+          x: 8
+          q2: -4
+        say: Equal charges cancel only at the middle. At 8 cm you're 4 times nearer q₂ than q₁, so q₂ can be 4 times smaller.
+      - when:
+          x: 8
+          q2:
+          - 1
+          - 10
+        say: A positive q₂ adds to the potential. To cancel, q₂ must be negative.
+    - prompt: Make q₂ = +4 nC. Can V be 0 anywhere between them? Find where V is smallest.
+      want:
+        q2: 4
+        x: 5
+      mistakes:
+      - when:
+          q2: 4
+          x:
+          - 1
+          - 4
+        say: 'V grows close to either charge. Two positive potentials never cancel: the smallest is midway.'
+      - when:
+          q2: 4
+          x:
+          - 6
+          - 9
+        say: 'V grows close to either charge. Two positive potentials never cancel: the smallest is midway.'
   items:
   - prompt: Find the potential (in units of 10³ V) 1 m from a 1 μC charge (k = 9 × 10⁹).
     answer: '9'
@@ -114,6 +188,81 @@ concepts:
       - charge
       - voltage
     alt: 'Capacitors in series and parallel: how they combine and what they share.'
+  activity:
+    type: formula
+    prompt: 'A parallel-plate capacitor: C = Kε₀A ÷ d.'
+    inputs:
+    - name: a
+      label: Plate area A
+      min: 10
+      max: 200
+      step: 10
+      start: 10
+      unit: cm²
+    - name: d
+      label: Gap d
+      min: 0.5
+      max: 5
+      step: 0.5
+      start: 0.5
+      unit: mm
+    - name: k
+      label: Dielectric constant K
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: c
+      label: Capacitance
+      expr: 0.885*k*a/d
+      unit: pF
+      places: 2
+    goals:
+    - prompt: A = 100 cm² and K = 1 (air). Set the gap so C = 17.7 pF.
+      want:
+        a: 100
+        k: 1
+        c: 17.7
+      mistakes:
+      - when:
+          a: 100
+          k: 1
+          d:
+          - 0.5
+          - 4.5
+        say: 'Plates closer together give MORE capacitance: C ∝ 1/d. Widen the gap.'
+    - prompt: Keep A = 100 cm² and d = 5 mm. Fill the gap with a dielectric to make C = 88.5 pF.
+      want:
+        a: 100
+        d: 5
+        c: 88.5
+      mistakes:
+      - when:
+          a: 100
+          d: 5
+          k:
+          - 6
+          - 10
+        say: 'Too much: C is K times the air value of 17.7 pF.'
+    - prompt: Keep A = 100 cm² and K = 1. Double the 17.7 pF.
+      want:
+        a: 100
+        k: 1
+        c: 35.4
+      mistakes:
+      - when:
+          a: 100
+          k: 1
+          d: 5
+        say: 'That''s still 17.7 pF. Halve the gap: C ∝ 1/d.'
+      - when:
+          a: 100
+          k: 1
+          d:
+          - 0.5
+          - 2
+        say: 'Too close: C has more than doubled.'
   items:
   - prompt: A capacitor holds 20 μC at 10 V. Find its capacitance in μF.
     answer: '2'

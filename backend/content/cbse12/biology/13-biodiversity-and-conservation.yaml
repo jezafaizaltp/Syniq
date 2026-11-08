@@ -34,6 +34,67 @@ concepts:
       - number of bird species
       - forests, wetlands, deserts
     alt: Three levels of biodiversity with examples.
+  activity:
+    type: formula
+    prompt: 'Species–area relation: S = C × A^Z. Here C = 10. Z is usually 0.1–0.2 for small areas; near 1 for whole continents.'
+    inputs:
+    - name: a
+      label: Area A
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+    - name: z
+      label: Z
+      min: 0.1
+      max: 1.2
+      step: 0.05
+      start: 0.1
+    outputs:
+    - name: s
+      label: Species S
+      expr: 10*a^z
+      places: 1
+    goals:
+    - prompt: Z = 0.2. How much area gives twice the species of A = 1?
+      want:
+        z: 0.2
+        s:
+        - 19.9
+        - 20.1
+      mistakes:
+      - when:
+          z: 0.2
+          a: 2
+        say: Twice the area gives only 2^0.2 ≈ 1.15 times the species. With Z = 0.2, doubling S needs 2⁵ = 32 times the area.
+      - when:
+          z: 0.2
+          a:
+          - 3
+          - 31
+        say: 'Not enough area yet: with Z = 0.2, doubling S needs 32 times the area.'
+    - prompt: Make doubling the area double the species, with A = 2.
+      want:
+        a: 2
+        s: 20
+      mistakes:
+      - when:
+          a: 2
+          z:
+          - 0.1
+          - 0.5
+        say: With a small Z, doubling area adds only a few species. For S to double with A, Z must be 1.
+    - prompt: Z = 0.15. Make S about 18.
+      want:
+        z: 0.15
+        s:
+        - 17.7
+        - 18.3
+      mistakes:
+      - when:
+          z: 0.15
+          a: 18
+        say: 18 is the species count you want, not the area. S = 10 × A^0.15.
   items:
   - prompt: India has about what percentage of the world's land area (to one decimal)?
     answer: '2.4'
@@ -129,6 +190,53 @@ concepts:
       - national parks, sacred groves
       - zoos, seed banks
     alt: In-situ and ex-situ conservation compared.
+  activity:
+    type: sort
+    prompt: In situ (in its home) or ex situ (taken out of it)?
+    bins:
+    - In situ
+    - Ex situ
+    items:
+    - label: National parks
+      bin: In situ
+      clue: Are the animals protected where they live?
+      why: Protected in their natural habitat.
+    - label: Wildlife sanctuaries
+      bin: In situ
+      clue: Do the animals stay in the wild?
+      why: In situ.
+    - label: Biosphere reserves
+      bin: In situ
+      clue: Is the whole ecosystem protected where it is?
+      why: In situ.
+    - label: Sacred groves
+      bin: In situ
+      clue: Forests protected by communities, where they grow. Which kind?
+      why: In situ.
+    - label: Biodiversity hotspots
+      bin: In situ
+      clue: Protecting rich regions as they are. Which kind?
+      why: In situ.
+    - label: Zoological parks
+      bin: Ex situ
+      clue: Are the animals taken out of their habitat?
+      why: Ex situ.
+    - label: Botanical gardens
+      bin: Ex situ
+      clue: Plants grown away from their home. Which kind?
+      why: Ex situ.
+    - label: Seed banks
+      bin: Ex situ
+      clue: Seeds stored away from where they grow. Which kind?
+      why: Ex situ.
+    - label: Cryopreservation of gametes
+      bin: Ex situ
+      clue: Frozen at −196 °C in a lab. Which kind?
+      why: Ex situ.
+    - label: Tissue culture of rare plants
+      bin: Ex situ
+      clue: Grown in a lab. Which kind?
+      why: Ex situ.
   items:
   - prompt: How many biodiversity hotspots are there worldwide?
     answer: '34'

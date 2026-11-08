@@ -26,6 +26,83 @@ concepts:
     - Leftover energy = K_max
     - K_max = hν − φ
     alt: 'Einstein''s photoelectric equation: photon energy minus work function gives the electron''s maximum kinetic energy.'
+  activity:
+    type: formula
+    prompt: 'Einstein: K_max = hν − φ. With λ in nm, a photon carries 1240 ÷ λ eV.'
+    inputs:
+    - name: lam
+      label: Wavelength λ
+      min: 200
+      max: 700
+      step: 10
+      start: 700
+      unit: nm
+    - name: phi
+      label: Work function φ
+      min: 1
+      max: 5
+      step: 0.1
+      start: 5
+      unit: eV
+    outputs:
+    - name: e
+      label: Photon energy
+      expr: 1240/lam
+      unit: eV
+      places: 2
+    - name: k
+      label: Fastest electron's KE
+      expr: max(0,1240/lam-phi)
+      unit: eV
+      places: 2
+    goals:
+    - prompt: Sodium has φ = 2.3 eV. Find the longest wavelength that still frees electrons.
+      want:
+        phi: 2.3
+        k:
+        - 0.01
+        - 0.1
+      mistakes:
+      - when:
+          phi: 2.3
+          lam:
+          - 540
+          - 700
+        say: 'No electrons: each photon has less than 2.3 eV. Brighter light won''t help: only the photon''s energy counts.'
+      - when:
+          phi: 2.3
+          lam:
+          - 200
+          - 520
+        say: Electrons escape, but that isn't the longest wavelength. Go redder.
+    - prompt: Light of 310 nm frees electrons with K_max = 2 eV. Set the work function.
+      want:
+        lam: 310
+        k: 2
+      mistakes:
+      - when:
+          lam: 310
+          phi: 4
+        say: φ = 4 eV takes all the photon's energy, leaving 0. K = hν − φ.
+      - when:
+          lam: 310
+          phi:
+          - 1
+          - 1.9
+        say: 'Electrons come out too fast: φ is too small.'
+    - prompt: A metal with φ = 2 eV. Make K_max = 3 eV.
+      want:
+        phi: 2
+        k:
+        - 2.95
+        - 3.05
+      mistakes:
+      - when:
+          phi: 2
+          k:
+          - 0.01
+          - 2.9
+        say: 'Not enough energy per photon: shorter wavelength.'
   items:
   - prompt: Photons of 5 eV hit a metal with work function 2 eV. Find K_max (eV).
     answer: '3'
@@ -114,6 +191,54 @@ concepts:
       - about 0.12 nm
       - about 10⁻³⁴ m
     alt: 'de Broglie wavelengths of an electron and a cricket ball: noticeable for the electron, negligible for the ball.'
+  activity:
+    type: formula
+    prompt: An electron accelerated through V volts has a de Broglie wavelength λ = 1.227 ÷ √V nm.
+    inputs:
+    - name: v
+      label: Accelerating voltage V
+      min: 1
+      max: 400
+      step: 1
+      start: 1
+      unit: V
+    outputs:
+    - name: lam
+      label: Wavelength
+      expr: 1.227/sqrt(v)
+      unit: nm
+      places: 4
+    goals:
+    - prompt: Make λ = 0.1227 nm.
+      want:
+        lam:
+        - 0.1226
+        - 0.1228
+      mistakes:
+      - when:
+          v: 10
+        say: 'λ ∝ 1/√V: a tenth of 1.227 needs √V = 10, so V = 100.'
+    - prompt: At V = 16, λ = 0.307 nm. Find the voltage that halves it.
+      want:
+        lam:
+        - 0.1533
+        - 0.1534
+      mistakes:
+      - when:
+          v: 32
+        say: Doubling V shrinks λ only by √2. To halve λ, V must be 4 times bigger.
+      - when:
+          v: 8
+        say: Lowering V makes λ longer.
+    - prompt: Make λ = 0.0614 nm (half of 0.1227).
+      want:
+        lam:
+        - 0.0613
+        - 0.0614
+      mistakes:
+      - when:
+          v: 200
+        say: Twice 100 V shrinks λ only by √2. Half the wavelength needs 4 × 100 V.
   items:
   - prompt: An electron is accelerated through 100 V. Find its wavelength (nm) using 1.227/√V, to three decimals.
     answer: '0.123'

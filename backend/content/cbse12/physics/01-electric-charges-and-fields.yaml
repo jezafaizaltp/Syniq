@@ -27,6 +27,82 @@ concepts:
     - F = kq₁q₂/r²
     - Like charges repel, unlike attract
     alt: 'Coulomb''s law: the force between two charges depends on their sizes and the square of their distance.'
+  activity:
+    type: formula
+    prompt: Two point charges r apart. F = kq₁q₂ ÷ r². A positive F repels; a negative F attracts.
+    inputs:
+    - name: q1
+      label: q₁
+      min: -5
+      max: 5
+      step: 1
+      start: 1
+      unit: μC
+    - name: q2
+      label: q₂
+      min: -5
+      max: 5
+      step: 1
+      start: 1
+      unit: μC
+    - name: r
+      label: Distance r
+      min: 1
+      max: 40
+      step: 1
+      start: 40
+      unit: cm
+    outputs:
+    - name: f
+      label: Force (+ repel, − attract)
+      expr: 90*q1*q2/r^2
+      unit: N
+      places: 2
+    goals:
+    - prompt: Two 2 μC charges 10 cm apart push with 3.6 N. Keep the charges and make the force 0.9 N.
+      want:
+        q1: 2
+        q2: 2
+        f: 0.9
+      mistakes:
+      - when:
+          q1: 2
+          q2: 2
+          r: 40
+        say: '4 times as far gives 1/16 of the force. F ∝ 1/r²: a quarter of the force needs twice the distance.'
+      - when:
+          q1: 2
+          q2: 2
+          r:
+          - 11
+          - 19
+        say: Not far enough yet. A quarter of the force needs twice the distance.
+    - prompt: Make the charges ATTRACT with 9 N at 10 cm.
+      want:
+        r: 10
+        f: -9
+      mistakes:
+      - when:
+          r: 10
+          f: 9
+        say: '+9 N is repulsion: like charges. Attraction needs one positive and one negative.'
+    - prompt: Keep r = 10 cm. Make the force zero without moving the charges.
+      want:
+        r: 10
+        f: 0
+      mistakes:
+      - when:
+          r: 10
+          f:
+          - -30
+          - -0.1
+        say: 'Still a pull. With any charge on both, there''s a force: one charge must be 0.'
+      - when:
+          r: 10
+          f:
+          - 0.1
+          - 30
+        say: Still a push. One of the charges must be 0.
   items:
   - prompt: How many electrons make a charge of 1.6 × 10⁻¹⁸ C? (e = 1.6 × 10⁻¹⁹ C)
     answer: '10'
@@ -116,6 +192,41 @@ concepts:
       - kq/r²
       - '0'
     alt: Fields from Gauss's law for a wire, a sheet and a spherical shell.
+  activity:
+    type: sort
+    prompt: 'A charge of +2 μC sits inside a closed surface. Gauss: the total flux = q_enclosed ÷ ε₀. Which changes alter the total flux?'
+    bins:
+    - Changes the total flux
+    - Leaves it the same
+    items:
+    - label: Double the charge inside
+      bin: Changes the total flux
+      clue: Does the enclosed charge change?
+      why: Twice the enclosed charge, twice the flux.
+    - label: Add −2 μC inside too
+      bin: Changes the total flux
+      clue: What is the net charge inside now?
+      why: Net enclosed charge is 0, so the total flux becomes 0.
+    - label: Move the charge outside the surface
+      bin: Changes the total flux
+      clue: Is it still enclosed?
+      why: 'Nothing enclosed: zero total flux.'
+    - label: Make the surface a bigger sphere
+      bin: Leaves it the same
+      clue: Same charge inside?
+      why: 'Field weakens as 1/r² but the area grows as r²: the flux is unchanged.'
+    - label: Change the sphere into a cube around the charge
+      bin: Leaves it the same
+      clue: Does Gauss's law care about the surface's shape?
+      why: Only the enclosed charge matters.
+    - label: Add a charge OUTSIDE the surface
+      bin: Leaves it the same
+      clue: Its field lines enter and leave. Net effect?
+      why: 'Every line from an outside charge that goes in also comes out: net flux unchanged.'
+    - label: Move the charge to another spot inside
+      bin: Leaves it the same
+      clue: Is it still enclosed?
+      why: Still enclosed, so the same total flux.
   items:
   - prompt: A field of 100 N/C passes straight through an area of 0.5 m². Find the flux (N m²/C).
     answer: '50'

@@ -26,6 +26,63 @@ concepts:
     - 'Cathode: reduction (Cu²⁺ → Cu)'
     - Salt bridge balances charge
     alt: How a Daniell cell works.
+  activity:
+    type: formula
+    prompt: 'E°cell = E°(cathode) − E°(anode). Reduction happens at the cathode, the electrode with the higher E°. Some E° values: Mg −2.37, Zn −0.76, Cu +0.34, Ag +0.80 V.'
+    inputs:
+    - name: c
+      label: Cathode E°
+      min: -2.5
+      max: 1
+      step: 0.01
+      start: 0
+      unit: V
+    - name: a
+      label: Anode E°
+      min: -2.5
+      max: 1
+      step: 0.01
+      start: 0
+      unit: V
+    outputs:
+    - name: e
+      label: E°cell
+      expr: c-a
+      unit: V
+      places: 2
+    goals:
+    - prompt: 'Make the Daniell cell: Zn | Zn²⁺ || Cu²⁺ | Cu.'
+      want:
+        c: 0.34
+        a: -0.76
+      mistakes:
+      - when:
+          c: -0.76
+          a: 0.34
+        say: 'Negative E°cell: swapped. Copper, with the higher E°, is reduced: it is the cathode.'
+      - when:
+          e:
+          - -0.43
+          - -0.41
+        say: −0.76 − 0.34? E°cell = E°cathode − E°anode, not a sum.
+    - prompt: Make a working cell from magnesium and silver.
+      want:
+        c: 0.8
+        a: -2.37
+      mistakes:
+      - when:
+          c: -2.37
+          a: 0.8
+        say: A negative E°cell means it won't run. Silver, with the higher E°, is the cathode.
+    - prompt: Make a working cell from copper and silver.
+      want:
+        c: 0.8
+        a: 0.34
+      mistakes:
+      - when:
+          c: 0.34
+          a: 0.8
+        say: 'Swapped: silver (+0.80) is more easily reduced than copper (+0.34), so silver is the cathode.'
   items:
   - prompt: E°(Cu²⁺/Cu) = 0.34 V and E°(Zn²⁺/Zn) = −0.76 V. Find E°cell (V).
     answer: '1.1'
@@ -117,6 +174,85 @@ concepts:
       - secondary (rechargeable)
       - continuous fuel supply
     alt: 'Kinds of batteries: dry cell, lead storage battery and fuel cell.'
+  activity:
+    type: formula
+    prompt: 'Faraday: 96 500 C (1 F) is one mole of electrons. Cu²⁺ + 2e⁻ → Cu (63.5 g/mol); Ag⁺ + e⁻ → Ag (108 g/mol).'
+    inputs:
+    - name: i
+      label: Current
+      min: 0.5
+      max: 10
+      step: 0.5
+      start: 0.5
+      unit: A
+    - name: t
+      label: Time
+      min: 0
+      max: 4000
+      step: 5
+      start: 0
+      unit: s
+    outputs:
+    - name: q
+      label: Charge
+      expr: i*t
+      unit: C
+      places: 0
+    - name: cu
+      label: Copper deposited
+      expr: 63.5*i*t/(2*96500)
+      unit: g
+      places: 3
+    - name: ag
+      label: Silver deposited
+      expr: 108*i*t/96500
+      unit: g
+      places: 3
+    goals:
+    - prompt: With 1 A, deposit 0.635 g of copper.
+      want:
+        i: 1
+        cu:
+        - 0.634
+        - 0.636
+      mistakes:
+      - when:
+          i: 1
+          t:
+          - 960
+          - 970
+        say: That's enough charge for 0.01 mol of electrons, but each Cu²⁺ needs TWO. Twice the time.
+      - when:
+          i: 1
+          t:
+          - 3850
+          - 3870
+        say: 'Too long: that''s 1.27 g.'
+    - prompt: With 2 A, deposit 2.16 g of silver.
+      want:
+        i: 2
+        ag:
+        - 2.15
+        - 2.17
+      mistakes:
+      - when:
+          i: 2
+          t: 1930
+        say: 'That''s twice the charge needed: 4.32 g. Doubling the current halves the time.'
+      - when:
+          i: 2
+          t:
+          - 480
+          - 490
+        say: 'Only half: Ag⁺ takes one electron each, so 0.02 mol of Ag needs 0.02 F = 1930 C.'
+    - prompt: The same charge flows through a copper cell and a silver cell in series. Pass 1930 C with 1 A, and compare the masses.
+      want:
+        q: 1930
+        i: 1
+      mistakes:
+      - when:
+          q: 965
+        say: That's half the charge. 1930 s at 1 A.
   items:
   - prompt: A current of 2 A flows for 965 s. Find the charge (C).
     answer: '1930'

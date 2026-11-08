@@ -33,6 +33,52 @@ concepts:
       - eˣ + C
       - sin x + C
     alt: 'Standard integrals: powers, 1/x, eˣ and cos x.'
+  activity:
+    type: sort
+    prompt: 'Integrate each one. Then check: differentiating your answer must give back what''s inside the integral.'
+    bins:
+    - x³/3 + C
+    - −cos x + C
+    - sin x + C
+    - ln|x| + C
+    - eˣ + C
+    items:
+    - label: ∫ x² dx
+      bin: x³/3 + C
+      clue: 'Power rule: raise the power by 1, divide by the new power.'
+      why: 'x³/3; check: d/dx(x³/3) = x².'
+    - label: ∫ x · x dx
+      bin: x³/3 + C
+      clue: 'Multiply first: x · x = ?'
+      why: x · x = x², so it's x³/3.
+    - label: ∫ sin x dx
+      bin: −cos x + C
+      clue: Which function differentiates to sin x? Mind the sign.
+      why: d/dx(−cos x) = sin x. A common slip is to write +cos x.
+    - label: ∫ cos x dx
+      bin: sin x + C
+      clue: Which function differentiates to cos x?
+      why: d/dx sin x = cos x.
+    - label: ∫ sin(π/2 − x) dx
+      bin: sin x + C
+      clue: 'Simplify first: sin(π/2 − x) = ?'
+      why: sin(π/2 − x) = cos x, which integrates to sin x.
+    - label: ∫ 1/x dx
+      bin: ln|x| + C
+      clue: Which function has derivative 1/x?
+      why: ln|x|.
+    - label: ∫ x⁻¹ dx
+      bin: ln|x| + C
+      clue: The power rule gives x⁰/0. Does that work?
+      why: 'n = −1 is the one exception to the power rule: the answer is ln|x|.'
+    - label: ∫ eˣ dx
+      bin: eˣ + C
+      clue: Which function is its own derivative?
+      why: eˣ.
+    - label: ∫ (eˣ · eˣ) ÷ eˣ dx
+      bin: eˣ + C
+      clue: 'Simplify first: eˣ · eˣ ÷ eˣ = ?'
+      why: It simplifies to eˣ.
   items:
   - prompt: If F(x) = ∫3x² dx with F(0) = 0, find F(2).
     answer: '8'
@@ -121,6 +167,87 @@ concepts:
     - Evaluate F(lower)
     - Subtract
     alt: 'Evaluating a definite integral: F(upper) minus F(lower).'
+  activity:
+    type: formula
+    prompt: '∫ₐᵇ x dx = (b² − a²)/2: area above the x-axis counts +, below it counts −. The geometric area counts both as +.'
+    inputs:
+    - name: a
+      label: Lower limit a
+      min: -4
+      max: 4
+      step: 1
+      start: 0
+    - name: b
+      label: Upper limit b
+      min: -4
+      max: 4
+      step: 1
+      start: 1
+    outputs:
+    - name: val
+      label: ∫ₐᵇ x dx
+      expr: (b^2-a^2)/2
+      places: 1
+    - name: area
+      label: Area between y = x and the axis
+      expr: abs(b*abs(b)-a*abs(a))/2
+      places: 1
+    - name: w
+      label: b − a
+      expr: b-a
+    goals:
+    - prompt: Make ∫ₐᵇ x dx = 0 with b greater than a.
+      want:
+        val: 0
+        w:
+        - 1
+        - 8
+      mistakes:
+      - when:
+          w:
+          - 1
+          - 8
+          val:
+          - 0.5
+          - 8
+        say: 'Still positive: more of the line is above the axis. Let a go negative so the part below cancels it.'
+      - when:
+          w:
+          - 1
+          - 8
+          val:
+          - -8
+          - -0.5
+        say: 'Now the part below the axis wins. Balance them: a = −b.'
+    - prompt: Keep a = −2. Make the AREA between y = x and the axis equal 4.
+      want:
+        a: -2
+        area: 4
+      mistakes:
+      - when:
+          a: -2
+          b: 0
+        say: 'From −2 to 0 the area is only 2: one triangle. Keep going past 0.'
+      - when:
+          a: -2
+          b: 4
+        say: From −2 to 4 the area is 2 + 8 = 10. Stop sooner.
+    - prompt: Make ∫ₐᵇ x dx = −4 with b BELOW a.
+      want:
+        val: -4
+        w:
+        - -8
+        - -1
+      mistakes:
+      - when:
+          val: 4
+        say: '+4: going from a to b backwards flips the sign: ∫ₐᵇ = −∫ᵇₐ.'
+      - when:
+          val: -4
+          w:
+          - 1
+          - 8
+        say: That's −4, but with b above a. Here, put b below a.
   items:
   - prompt: Evaluate ∫₀² x dx.
     answer: '2'

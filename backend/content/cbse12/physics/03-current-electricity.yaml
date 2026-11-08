@@ -34,6 +34,69 @@ concepts:
       - current
       - voltage
     alt: 'Resistors in series and parallel: how they combine and what they share.'
+  activity:
+    type: formula
+    prompt: 'A 10 Ω wire is stretched to n times its length. Its volume stays the same, so it also gets thinner: R becomes 10n².'
+    inputs:
+    - name: n
+      label: Stretched to n × the length
+      min: 1
+      max: 10
+      step: 0.5
+      start: 1
+    - name: v
+      label: Voltage
+      min: 0
+      max: 24
+      step: 1
+      start: 0
+      unit: V
+    outputs:
+    - name: r
+      label: Resistance
+      expr: 10*n^2
+      unit: Ω
+      places: 1
+    - name: i
+      label: Current
+      expr: v/(10*n^2)
+      unit: A
+      places: 3
+    goals:
+    - prompt: Stretch the wire until R = 90 Ω.
+      want:
+        r: 90
+      mistakes:
+      - when:
+          n: 9
+        say: 'Stretching 9 times gives 810 Ω: the wire also gets thinner, so R ∝ n². 90 = 10 × n².'
+      - when:
+          n:
+          - 1
+          - 2.5
+        say: 'Not stretched enough: R = 10n².'
+    - prompt: Stretch it to twice its length. What voltage drives 0.5 A?
+      want:
+        n: 2
+        i: 0.5
+      mistakes:
+      - when:
+          n: 2
+          v: 5
+        say: '5 V suits the unstretched 10 Ω wire. Stretched to twice the length it''s 40 Ω: V = IR.'
+      - when:
+          n: 2
+          v: 10
+        say: '10 V assumes R doubled to 20 Ω. It''s 40 Ω: longer AND thinner.'
+    - prompt: Keep 12 V. Stretch the wire so the current is 0.3 A.
+      want:
+        v: 12
+        i: 0.3
+      mistakes:
+      - when:
+          v: 12
+          n: 4
+        say: n = 4 gives 160 Ω and only 0.075 A. You need R = 40 Ω.
   items:
   - prompt: A 12 V battery drives current through 4 Ω. Find the current (A).
     answer: '3'
@@ -110,6 +173,97 @@ concepts:
     - 'Loop rule: ΣEMF = ΣIR'
     - Solve the equations
     alt: Using Kirchhoff's rules to solve a circuit.
+  activity:
+    type: formula
+    prompt: A cell with EMF ε and internal resistance r drives a resistor R. I = ε ÷ (R + r); the terminal voltage is V = ε − Ir.
+    inputs:
+    - name: e
+      label: EMF ε
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+      unit: V
+    - name: r
+      label: Internal resistance r
+      min: 0
+      max: 5
+      step: 0.5
+      start: 0
+      unit: Ω
+    - name: rr
+      label: External R
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: Ω
+    outputs:
+    - name: i
+      label: Current
+      expr: e/(rr+r)
+      unit: A
+      places: 2
+    - name: vt
+      label: Terminal voltage
+      expr: e-r*e/(rr+r)
+      unit: V
+      places: 2
+    - name: p
+      label: Power in R
+      expr: rr*(e/(rr+r))^2
+      unit: W
+      places: 2
+    goals:
+    - prompt: ε = 6 V and R = 4 Ω give a terminal voltage of 4.8 V. Find r.
+      want:
+        e: 6
+        rr: 4
+        vt: 4.8
+      mistakes:
+      - when:
+          e: 6
+          rr: 4
+          r: 0
+        say: 'With no internal resistance the terminal voltage would be the full 6 V. The missing 1.2 V is lost inside the cell: Ir.'
+    - prompt: ε = 12 V and r = 2 Ω. Choose R so the terminal voltage is 10 V.
+      want:
+        e: 12
+        r: 2
+        vt: 10
+      mistakes:
+      - when:
+          e: 12
+          r: 2
+          rr:
+          - 1
+          - 9
+        say: 'A smaller R draws more current, so more is lost inside: V drops below 10.'
+      - when:
+          e: 12
+          r: 2
+          rr:
+          - 11
+          - 20
+        say: 'Now less is lost inside: V is above 10.'
+    - prompt: ε = 12 V and r = 2 Ω. Deliver the most power to R.
+      want:
+        e: 12
+        r: 2
+        rr: 2
+      mistakes:
+      - when:
+          e: 12
+          r: 2
+          rr: 1
+        say: 'R = 1 Ω gives 16 W: lots of current, but too much is lost inside.'
+      - when:
+          e: 12
+          r: 2
+          rr:
+          - 3
+          - 20
+        say: A bigger R takes less current, so the power falls. The most power flows when R = r.
   items:
   - prompt: A cell of EMF 2 V and internal resistance 0.5 Ω gives 1 A. Find its terminal voltage (V).
     answer: '1.5'

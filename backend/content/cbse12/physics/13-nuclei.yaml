@@ -26,6 +26,58 @@ concepts:
     - Mass decreases (mass defect)
     - 'Energy released: ΔMc²'
     alt: 'Binding energy: when nucleons combine, the lost mass becomes energy.'
+  activity:
+    type: formula
+    prompt: A nucleus of mass number A has radius R = 1.2 A^(1/3) fm. Its density doesn't depend on A.
+    inputs:
+    - name: a
+      label: Mass number A
+      min: 1
+      max: 250
+      step: 1
+      start: 1
+    outputs:
+    - name: r
+      label: Radius R
+      expr: 1.2*a^(1/3)
+      unit: fm
+      places: 2
+    - name: rho
+      label: Density (× 10¹⁷ kg/m³)
+      expr: a*1.66/(4/3*pi*(1.2*a^(1/3))^3)*10
+      places: 2
+    goals:
+    - prompt: ¹⁶O has R ≈ 3.02 fm. Find a nucleus with twice that radius.
+      want:
+        a: 128
+      mistakes:
+      - when:
+          a: 32
+        say: 'Twice the mass number gives only 1.26 × the radius: R ∝ A^(1/3). Double R needs 2³ = 8 times A.'
+      - when:
+          a: 64
+        say: 4 times A gives 1.59 × R. You need 8 times.
+    - prompt: Make R = 6 fm.
+      want:
+        r:
+        - 5.99
+        - 6.01
+      mistakes:
+      - when:
+          a: 5
+        say: A = 5 is the cube root. R = 1.2 × A^(1/3) = 6 means A^(1/3) = 5, so A = 5³.
+    - prompt: Make a nucleus whose radius is 3 times hydrogen's (A = 1).
+      want:
+        r:
+        - 3.59
+        - 3.61
+      mistakes:
+      - when:
+          a: 3
+        say: 'Three times A gives only 1.44 × the radius: R ∝ A^(1/3).'
+      - when:
+          a: 9
+        say: '9 = 3², but R goes as the CUBE root of A: A = 3³.'
   items:
   - prompt: How many neutrons are in ²³⁵U (Z = 92)?
     answer: '143'
@@ -115,6 +167,49 @@ concepts:
       - uranium-235 in reactors
       - hydrogen in the Sun
     alt: Fission and fusion compared.
+  activity:
+    type: sort
+    prompt: Fission or fusion?
+    bins:
+    - Fission
+    - Fusion
+    items:
+    - label: A heavy nucleus splits into two medium ones
+      bin: Fission
+      clue: Does the nucleus break apart or join with another?
+      why: Splitting a heavy nucleus is fission.
+    - label: ²³⁵U absorbs a neutron and splits
+      bin: Fission
+      clue: Is uranium heavy or light?
+      why: Neutron-induced fission of U-235.
+    - label: A chain reaction carried on by neutrons
+      bin: Fission
+      clue: Each event releases 2–3 neutrons. Which process?
+      why: Fission releases neutrons that cause more fissions.
+    - label: Today's nuclear power stations
+      bin: Fission
+      clue: Do power reactors split or join nuclei?
+      why: All working power reactors use controlled fission.
+    - label: Cadmium control rods and a moderator
+      bin: Fission
+      clue: 'What do they control: neutrons or temperature?'
+      why: They control the neutrons in a fission chain.
+    - label: Light nuclei join to make a heavier one
+      bin: Fusion
+      clue: Do nuclei join or split?
+      why: Joining light nuclei is fusion.
+    - label: What powers the Sun
+      bin: Fusion
+      clue: What happens to hydrogen in the Sun's core?
+      why: Hydrogen fuses into helium.
+    - label: Needs temperatures around 10⁷ K
+      bin: Fusion
+      clue: Why must nuclei move very fast to react?
+      why: 'Light nuclei must overcome their repulsion to fuse: thermonuclear fusion.'
+    - label: Deuterium + tritium → helium + neutron
+      bin: Fusion
+      clue: Two light nuclei make a heavier one. Which process?
+      why: A fusion reaction.
   items:
   - prompt: About how much energy (MeV) is released per fission of uranium-235?
     answer: '200'

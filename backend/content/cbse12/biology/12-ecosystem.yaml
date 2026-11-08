@@ -32,6 +32,64 @@ concepts:
       value: 10
     alt: 'A pyramid of energy following the 10% law: 10,000, 1,000, 100 and 10 joules.'
     unit: J
+  activity:
+    type: formula
+    prompt: Plants fix GPP; they burn some in respiration R. What's left, NPP = GPP − R, is food for herbivores, who keep about 10% of it.
+    inputs:
+    - name: gpp
+      label: GPP
+      min: 0
+      max: 1000
+      step: 10
+      start: 0
+    - name: r
+      label: Plants' respiration R
+      min: 0
+      max: 1000
+      step: 10
+      start: 0
+    outputs:
+    - name: npp
+      label: NPP = GPP − R
+      expr: gpp-r
+    - name: herb
+      label: Herbivores (10% of NPP)
+      expr: (gpp-r)*0.1
+      places: 1
+    goals:
+    - prompt: GPP is 800 units and NPP is 500. Set R.
+      want:
+        gpp: 800
+        npp: 500
+      mistakes:
+      - when:
+          gpp: 800
+          r: 500
+        say: '500 is the NPP. R is what the plants burn: GPP − NPP.'
+    - prompt: Herbivores need 40 units. The plants' R is 200. Set GPP.
+      want:
+        r: 200
+        herb: 40
+      mistakes:
+      - when:
+          r: 200
+          gpp: 400
+        say: 'That makes NPP only 200, and herbivores get 20. Herbivores eat from NPP, after R is spent: NPP must be 400.'
+      - when:
+          r: 200
+          gpp: 40
+        say: 40 units is the herbivores' share, only 10% of NPP.
+    - prompt: 'Make NPP 0: plants burning everything they fix, with GPP 600.'
+      want:
+        gpp: 600
+        npp: 0
+      mistakes:
+      - when:
+          gpp: 600
+          npp:
+          - 10
+          - 600
+        say: NPP is still positive. R must equal GPP.
   items:
   - prompt: Plants capture 10,000 J. How much energy (J) reaches the carnivores that eat the herbivores?
     answer: '100'
@@ -122,6 +180,24 @@ concepts:
     - Grasses and shrubs
     - Climax forest
     alt: Primary succession on bare rock, from lichens to a climax forest.
+  activity:
+    type: order
+    prompt: 'Hydrarch succession: put the stages in order, from open water to forest.'
+    steps:
+    - Phytoplankton in open water
+    - Submerged plants (rooted)
+    - Floating plants
+    - Reed swamp
+    - Marsh meadow (sedges, grasses)
+    - Shrubs
+    - 'Forest: the climax community'
+    reasons:
+      Submerged plants (rooted): Pioneer plankton add organic matter first, so rooted plants can take hold in the mud.
+      Floating plants: As silt builds up and the water gets shallower, floating plants follow.
+      Reed swamp: Reeds need much shallower water, so they come after the floating stage.
+      Marsh meadow (sedges, grasses): The swamp fills in and becomes wet land.
+      Shrubs: Shrubs need drier, firmer soil.
+      'Forest: the climax community': Trees come last, once soil has built up.
   items:
   - prompt: 'The first organisms to colonise bare rock are usually:'
     options:

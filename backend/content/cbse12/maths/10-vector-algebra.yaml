@@ -26,6 +26,114 @@ concepts:
     - Join start of a to tip of b
     - That arrow is a + b
     alt: The triangle law of vector addition.
+  activity:
+    type: formula
+    prompt: r = xi + yj + zk has magnitude |r| = √(x² + y² + z²). Its direction cosines are l = x/|r|, m = y/|r|.
+    inputs:
+    - name: x
+      label: x
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: y
+      label: y
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: z
+      label: z
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    outputs:
+    - name: mag
+      label: '|r|'
+      expr: sqrt(x^2+y^2+z^2)
+      places: 2
+    - name: s
+      label: x + y + z
+      expr: x+y+z
+    - name: l
+      label: l = cos α (with x-axis)
+      expr: x/max(0.0001,sqrt(x^2+y^2+z^2))
+      places: 3
+    - name: m
+      label: m = cos β (with y-axis)
+      expr: y/max(0.0001,sqrt(x^2+y^2+z^2))
+      places: 3
+    goals:
+    - prompt: Make a vector of magnitude 7 with all three components positive.
+      want:
+        mag: 7
+        x:
+        - 1
+        - 6
+        y:
+        - 1
+        - 6
+        z:
+        - 1
+        - 6
+      hint: Which three squares add to 49? Try 2, 3 and 6.
+      mistakes:
+      - when:
+          s: 7
+          x:
+          - 1
+          - 6
+          y:
+          - 1
+          - 6
+          z:
+          - 1
+          - 6
+        say: 'The components add to 7, but magnitude isn''t a sum: |r| = √(x² + y² + z²).'
+    - prompt: Make a vector in the xy-plane making equal angles with the x- and y-axes, pointing between +x and +y.
+      want:
+        z: 0
+        l:
+        - 0.7
+        - 0.71
+        m:
+        - 0.7
+        - 0.71
+      mistakes:
+      - when:
+          z: 0
+          l: 1
+        say: 'That lies along the x-axis: 0° with x and 90° with y. Equal angles need x = y.'
+      - when:
+          l:
+          - 0.7
+          - 0.71
+          m:
+          - 0.7
+          - 0.71
+          z:
+          - -6
+          - -1
+        say: x = y, but the vector is tilted out of the plane. Keep z = 0.
+      - when:
+          l:
+          - 0.7
+          - 0.71
+          m:
+          - 0.7
+          - 0.71
+          z:
+          - 1
+          - 6
+        say: x = y, but the vector is tilted out of the plane. Keep z = 0.
+    - prompt: Make a vector whose direction cosine with the x-axis is −1.
+      want:
+        l: -1
+      mistakes:
+      - when:
+          l: 1
+        say: '+1 points along +x. cos α = −1 means α = 180°: the negative x-axis.'
   items:
   - prompt: Find the magnitude of 3i + 4j.
     answer: '5'
@@ -114,6 +222,83 @@ concepts:
       - perpendicular
       - parallel
     alt: 'Dot and cross products compared: what they give and when they are zero.'
+  activity:
+    type: formula
+    prompt: a = i + 2j + 2k is fixed (|a| = 3). Choose b. a·b = b₁ + 2b₂ + 2b₃; the projection of b on a is a·b ÷ |a|.
+    inputs:
+    - name: x
+      label: b₁
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: y
+      label: b₂
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    - name: z
+      label: b₃
+      min: -6
+      max: 6
+      step: 1
+      start: 0
+    outputs:
+    - name: dot
+      label: a·b
+      expr: x+2*y+2*z
+    - name: mag
+      label: '|b|'
+      expr: sqrt(x^2+y^2+z^2)
+      places: 2
+    - name: proj
+      label: Projection of b on a
+      expr: (x+2*y+2*z)/3
+      places: 2
+    goals:
+    - prompt: Make b perpendicular to a, with b₁ positive and b₂ negative.
+      want:
+        dot: 0
+        x:
+        - 1
+        - 6
+        y:
+        - -6
+        - -1
+      mistakes:
+      - when:
+          dot:
+          - 1
+          - 40
+        say: 'a·b > 0: the angle is less than 90°. Perpendicular needs a·b = 0.'
+      - when:
+          dot:
+          - -40
+          - -1
+        say: 'a·b < 0: the angle is more than 90°. Perpendicular needs a·b = 0.'
+    - prompt: Make the projection of b on a equal 3.
+      want:
+        proj: 3
+      mistakes:
+      - when:
+          dot: 3
+        say: 'a·b = 3 gives a projection of only 1: divide a·b by |a| = 3. You need a·b = 9.'
+    - prompt: Make b parallel to a and pointing the same way, with |b| = 6.
+      want:
+        mag: 6
+        dot: 18
+      mistakes:
+      - when:
+          x: -2
+          y: -4
+          z: -4
+        say: 'That''s antiparallel: on the same line, but pointing the other way.'
+      - when:
+          x: 1
+          y: 2
+          z: 2
+        say: That's a itself, with |a| = 3. Double it.
   items:
   - prompt: Find (2i + 3j)·(4i − j).
     answer: '5'
