@@ -41,6 +41,46 @@ concepts:
       value: 1000
     unit: ₹ per month
     alt: 'Bar chart of five people''s monthly incomes in an unequal country: one person earns 46,000 rupees and four earn 1,000 rupees each. The average is 10,000 rupees, which hides the gap.'
+  activity:
+    type: formula
+    prompt: Per capita income = total income ÷ population.
+    inputs:
+    - name: t
+      label: Total income (₹ crore)
+      min: 0
+      max: 1000
+      step: 10
+      start: 0
+    - name: p
+      label: Population (crore)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: pci
+      label: Per capita income
+      expr: t/p
+      unit: ₹
+    goals:
+    - prompt: 'Country A: income ₹500 crore, 5 crore people. Find the per capita income.'
+      want:
+        pci: 100
+        p: 5
+      mistakes:
+      - when:
+          pci: 500
+        say: 'Divide by the population too: 500 ÷ 5.'
+    - prompt: 'Country B: same per capita income, ₹100, but 8 crore people. What total income?'
+      want:
+        pci: 100
+        p: 8
+      mistakes:
+      - when:
+          pci:
+          - 10
+          - 90
+        say: 'Per capita is too low: with more people you need more total income.'
   items:
   - prompt: A country of 5 people has a total income of ₹50 000. What is its average (per capita) income, in rupees?
     answer: '10000'
@@ -134,6 +174,33 @@ concepts:
     - Future generations face shortage
     - 'Fix: recharge, harvest rain, save water'
     alt: 'Overuse of groundwater: the water table falls, wells go deeper, and future generations face a shortage unless water is recharged and saved.'
+  activity:
+    type: sort
+    prompt: Sustainable or not?
+    bins:
+    - Sustainable
+    - Not sustainable
+    items:
+    - label: Pumping groundwater faster than rain refills it
+      bin: Not sustainable
+      clue: Will it last?
+      why: Over a third of districts face depletion.
+    - label: Rooftop rainwater harvesting
+      bin: Sustainable
+      clue: Refills the ground.
+      why: Sustainable.
+    - label: Depending ever more on imported crude oil
+      bin: Not sustainable
+      clue: Oil will run out.
+      why: Not sustainable.
+    - label: Solar power for homes
+      bin: Sustainable
+      clue: Renewable.
+      why: Sustainable.
+    - label: Over-using fertiliser till soil degrades
+      bin: Not sustainable
+      clue: The soil gets worse.
+      why: Not sustainable.
   items:
   - prompt: What is sustainable development?
     options:

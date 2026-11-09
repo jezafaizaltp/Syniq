@@ -40,6 +40,50 @@ concepts:
       - 'State commission: ₹50 lakh–₹2 crore'
       - 'National commission: above ₹2 crore'
     alt: Six consumer rights (safety, information, choice, being heard, redressal and education) and the three-tier commissions by claim amount.
+  activity:
+    type: scale
+    min: 0
+    max: 400
+    step: 5
+    start: 400
+    unit: ₹ lakh
+    prompt: Which consumer commission hears the claim? Slide to the claim (₹ lakh).
+    zones:
+    - from: 0
+      to: 50
+      label: District commission
+      says: Claims up to ₹50 lakh.
+    - from: 50
+      to: 200
+      label: State commission
+      says: ₹50 lakh to ₹2 crore.
+    - from: 200
+      to: 400
+      label: National commission
+      says: Above ₹2 crore.
+    goals:
+    - prompt: A claim the district commission hears
+      zone: District commission
+      mistakes:
+      - when:
+          v:
+          - 60
+          - 190
+        say: Over ₹50 lakh goes to the state commission.
+    - prompt: A claim of ₹1.5 crore
+      value: 150
+      mistakes:
+      - when:
+          v: 15
+        say: 1 crore is 100 lakh. So how many lakh is 1.5 crore?
+    - prompt: A claim the national commission hears
+      zone: National commission
+      mistakes:
+      - when:
+          v:
+          - 60
+          - 190
+        say: That's still the state commission. National is above ₹2 crore (200 lakh).
   items:
   - prompt: In which year was the Consumer Protection Act (COPRA) first passed in India?
     answer: '1986'

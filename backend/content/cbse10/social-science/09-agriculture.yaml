@@ -41,6 +41,38 @@ concepts:
       - Between rabi and kharif
       - Watermelon, cucumber, fodder
     alt: 'India''s three cropping seasons: kharif sown with the monsoon (rice, cotton), rabi sown in winter (wheat, mustard), and zaid in summer (watermelon).'
+  activity:
+    type: sort
+    prompt: Rabi, kharif or zaid?
+    bins:
+    - Rabi
+    - Kharif
+    - Zaid
+    items:
+    - label: Wheat
+      bin: Rabi
+      clue: Sown October–December.
+      why: Rabi.
+    - label: Mustard
+      bin: Rabi
+      clue: A winter crop.
+      why: Rabi.
+    - label: Paddy
+      bin: Kharif
+      clue: Sown with the monsoon.
+      why: Kharif.
+    - label: Cotton
+      bin: Kharif
+      clue: Harvested September–October.
+      why: Kharif.
+    - label: Watermelon
+      bin: Zaid
+      clue: Short summer season.
+      why: Zaid.
+    - label: Cucumber
+      bin: Zaid
+      clue: Summer.
+      why: Zaid.
   items:
   - prompt: Wheat is a crop of which season?
     options:
@@ -147,6 +179,62 @@ concepts:
       value: 62
     unit: cm rainfall
     alt: 'Bar chart of rough rainfall needs for crops in centimetres: rice about 100 or more, sugarcane 75 to 100, wheat 50 to 75, cotton about 60.'
+  activity:
+    type: scale
+    min: 0
+    max: 200
+    step: 5
+    start: 0
+    unit: cm
+    prompt: Slide the yearly rainfall. Which crop suits it?
+    zones:
+    - from: 50
+      to: 75
+      label: Wheat
+      says: Wheat needs 50–75 cm and a cool growing season.
+    - from: 75
+      to: 100
+      label: Sugarcane
+      says: Sugarcane needs 75–100 cm, 21–27 °C.
+    - from: 100
+      to: 200
+      label: Rice
+      says: Rice needs over 100 cm, high heat and humidity.
+    goals:
+    - prompt: Find the rainfall for rice.
+      zone: Rice
+      mistakes:
+      - when:
+          v:
+          - 50
+          - 70
+        say: 'That suits wheat. Rice needs much more water: over 100 cm.'
+      - when:
+          v:
+          - 0
+          - 45
+        say: Far too dry for rice.
+    - prompt: Find the rainfall for wheat.
+      zone: Wheat
+      mistakes:
+      - when:
+          v:
+          - 105
+          - 200
+        say: That suits rice. Wheat needs only 50–75 cm.
+      - when:
+          v:
+          - 0
+          - 45
+        say: Too dry, even for wheat.
+    - prompt: Find the rainfall for sugarcane.
+      zone: Sugarcane
+      mistakes:
+      - when:
+          v:
+          - 105
+          - 200
+        say: 'Too wet: sugarcane needs 75–100 cm.'
   items:
   - prompt: 'Rice needs rainfall of more than:'
     options:

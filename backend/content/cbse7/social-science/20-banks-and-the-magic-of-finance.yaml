@@ -35,6 +35,31 @@ concepts:
       - Lump sum for a fixed time, higher interest
       - Fixed amount each month
     alt: 'Types of bank deposits and what they are for: savings, current, fixed and recurring deposits.'
+  activity:
+    type: sort
+    prompt: Which kind of deposit?
+    bins:
+    - Savings account
+    - Current account
+    - Fixed deposit
+    - Recurring deposit
+    items:
+    - label: For individuals, earns some interest
+      bin: Savings account
+      clue: Everyday saving.
+      why: Savings.
+    - label: For businesses with many transactions
+      bin: Current account
+      clue: Shops and firms.
+      why: Current.
+    - label: Money kept for a fixed time at higher interest
+      bin: Fixed deposit
+      clue: Locked in.
+      why: FD.
+    - label: A fixed amount every month
+      bin: Recurring deposit
+      clue: Monthly.
+      why: RD.
   items:
   - prompt: Which is India's central bank?
     options:
@@ -136,6 +161,41 @@ concepts:
     unit: ₹
     caption: ₹1,000 at 10% compounded each year grows by more every year.
     alt: A bar chart showing ₹1,000 growing to ₹1,100, ₹1,210 and ₹1,331 over three years at 10% compound interest.
+  activity:
+    type: formula
+    prompt: ₹1,000 at 10% a year. Change the years.
+    inputs:
+    - name: n
+      label: Years
+      min: 0
+      max: 5
+      step: 1
+      start: 0
+    outputs:
+    - name: si
+      label: Simple interest total
+      expr: 1000+100*n
+      unit: ₹
+    - name: ci
+      label: Compound interest total
+      expr: 1000*1.1^n
+      unit: ₹
+      places: 0
+    goals:
+    - prompt: When does the compound total reach ₹1,210?
+      want:
+        ci: 1210
+      mistakes:
+      - when:
+          ci: 1100
+        say: After 1 year it's ₹1,100. The next year, interest is on ₹1,100.
+    - prompt: When is compound ahead of simple by ₹31?
+      want:
+        ci: 1331
+      mistakes:
+      - when:
+          ci: 1210
+        say: At 2 years compound is only ₹10 ahead. Go one more year.
   items:
   - prompt: ₹1,000 is deposited at 10% compound interest per year. How much is there after 1 year, in rupees?
     answer: '1100'

@@ -33,6 +33,37 @@ concepts:
       visual: "A notebook factory: bamboo and wood pulp, machines, fuel, a building, land and workers go in (inputs); notebooks come out (output)."
       step_by_step: "To tell fixed from variable: Step 1: ask whether the input can be increased within a few weeks. Step 2: if yes (more workers, more machines), it is variable. Step 3: if no (more land, a new management system), it is fixed."
       real_world: "A tea shop owner can add one more helper during festival season (variable input), but cannot quickly make the shop bigger (fixed input)."
+    activity:
+      type: sort
+      prompt: In the short run, can this input be changed?
+      bins:
+      - Fixed in the short run
+      - Variable
+      items:
+      - label: The land of a farm
+        bin: Fixed in the short run
+        clue: Can you buy more land in a week?
+        why: Land is fixed in the short run.
+      - label: The owner's organisation of the firm
+        bin: Fixed in the short run
+        clue: The way the firm is run.
+        why: Organisation is fixed in the short run.
+      - label: Number of workers at harvest
+        bin: Variable
+        clue: Can you hire more for a week?
+        why: Labour can be changed quickly.
+      - label: More machines and tools
+        bin: Variable
+        clue: Capital can be added.
+        why: Capital is variable.
+      - label: Extra hours worked by labourers
+        bin: Variable
+        clue: More labour, quickly.
+        why: Labour is variable.
+      - label: The factory's plot of land
+        bin: Fixed in the short run
+        clue: Land again.
+        why: Fixed.
     items:
       - prompt: "Which of these is a basic need?"
         options: ["Food", "A motorbike", "A smartphone game", "A holiday trip"]
@@ -104,6 +135,37 @@ concepts:
       visual: "Think of a well shared by a village. If everyone draws only what they need, it lasts for years. If some waste water, it dries up for the next generation."
       step_by_step: "To judge whether a habit is sustainable: Step 1: does it waste resources? Step 2: can the thing be reused or recycled? Step 3: does it harm the environment? Fewer harms means more sustainable."
       real_world: "Carrying a cloth bag to the shop instead of taking new plastic covers is sustainable consumption."
+    activity:
+      type: sort
+      prompt: Is it sustainable consumption?
+      bins:
+      - Sustainable
+      - Not sustainable
+      items:
+      - label: Carrying a cloth bag to the shop
+        bin: Sustainable
+        clue: Used again and again.
+        why: Reusing cuts waste.
+      - label: Buying a new phone every year though the old one works
+        bin: Not sustainable
+        clue: Need or greed?
+        why: 'It wastes resources: ''enough for need, not for greed''.'
+      - label: Using LED bulbs and solar power
+        bin: Sustainable
+        clue: Saves energy.
+        why: Saves energy and resources.
+      - label: Throwing away leftover food every day
+        bin: Not sustainable
+        clue: Was it needed?
+        why: Waste of food and resources.
+      - label: Recycling paper
+        bin: Sustainable
+        clue: Old becomes new.
+        why: Recycling is sustainable.
+      - label: Single-use plastic cups at every meal
+        bin: Not sustainable
+        clue: Used once.
+        why: Creates lasting waste.
     items:
       - prompt: "Buying and using goods and services to fulfil needs is called"
         options: ["Consumption", "Production", "Supply", "Marketing"]
@@ -180,6 +242,32 @@ concepts:
       visual: "Draw price up the side and quantity along the bottom. Demand runs from top-left down to bottom-right. Supply runs from bottom-left up to top-right."
       step_by_step: "To read a schedule: Step 1: find the price in the left column. Step 2: read the quantity beside it. Step 3: compare two rows to see whether quantity went up or down when price rose."
       real_world: "When mango prices fall in season, families buy more mangoes. When fish prices rise, more boats try to bring fish to market."
+    activity:
+      type: number_line
+      min: 0
+      max: 60
+      step: 10
+      start: 0
+      prompt: 'Demand: ₹5→50, ₹10→40, ₹15→30, ₹20→20, ₹25→10 kg. Supply: ₹5→10 up to ₹25→50 kg.'
+      goals:
+      - prompt: How many kg are demanded at ₹10?
+        target: 40
+        mistakes:
+        - when:
+            v: 20
+          say: That's supply at ₹10. Demand is high at a low price.
+      - prompt: How many kg are supplied at ₹25?
+        target: 50
+        mistakes:
+        - when:
+            v: 10
+          say: That's demand at ₹25. Sellers offer more when the price is high.
+      - prompt: How many kg are demanded at ₹25?
+        target: 10
+        mistakes:
+        - when:
+            v: 50
+          say: 'That''s supply. Buyers want less when the price is high: the demand curve slopes down.'
     items:
       - prompt: "Demand is desire backed by"
         options: ["Willingness and ability to pay", "Only a wish", "Government orders", "The seller's needs"]
@@ -262,6 +350,54 @@ concepts:
       visual: "Picture the downward demand line and the upward supply line forming an X. The crossing point E gives the equilibrium price on the side and the quantity at the bottom."
       step_by_step: "To find equilibrium in a table: Step 1: go row by row. Step 2: compare quantity demanded with quantity supplied. Step 3: the row where they are equal gives the equilibrium price and quantity."
       real_world: "At the start of Onam, demand for flowers jumps and prices shoot up. After the festival demand falls, there are too many flowers, and prices drop."
+    activity:
+      type: formula
+      prompt: Change the price. Watch demand and supply.
+      inputs:
+      - name: p
+        label: Price
+        min: 5
+        max: 25
+        step: 5
+        start: 5
+        unit: ₹
+      outputs:
+      - name: d
+        label: Quantity demanded
+        expr: 60-2*p
+        unit: kg
+      - name: s
+        label: Quantity supplied
+        expr: 2*p
+        unit: kg
+      - name: g
+        label: Demand minus supply
+        expr: 60-4*p
+        unit: kg
+      goals:
+      - prompt: Find the equilibrium price, where demand equals supply.
+        want:
+          g: 0
+        mistakes:
+        - when:
+            g:
+            - 10
+            - 40
+          say: 'Demand is more than supply: buyers compete and the price rises. Try a higher price.'
+        - when:
+            g:
+            - -40
+            - -10
+          say: 'Supply is more than demand: goods stay unsold and the price falls. Try a lower price.'
+      - prompt: Find the price where sellers offer 40 kg.
+        want:
+          s: 40
+        mistakes:
+        - when:
+            s:
+            - 10
+            - 30
+          say: 'Sellers offer more only at a higher price: supply rises with price.'
     items:
       - prompt: "The price at which demand and supply are equal is called"
         options: ["Equilibrium price", "Support price", "Discount price", "Maximum price"]
@@ -340,6 +476,37 @@ concepts:
       visual: "Picture a ration shop selling rice below market price on one side, and a paddy farmer receiving a guaranteed price on the other. Both are the government protecting people from bad prices."
       step_by_step: "To spot who is helped: Step 1: is the action about lowering prices for buyers (ration shop, Supplyco)? Consumers are helped. Step 2: is it about guaranteeing a minimum price for sellers (MSP)? Farmers are helped."
       real_world: "During festivals, Supplyco fairs sell essential items at lower prices. Ordering a school bag on a shopping app is digital marketing."
+    activity:
+      type: sort
+      prompt: Marketing technique or government price control?
+      bins:
+      - Marketing technique
+      - Price control
+      items:
+      - label: A 20% festival discount
+        bin: Marketing technique
+        clue: A seller's plan to sell more.
+        why: A marketing technique.
+      - label: Selling through an online store
+        bin: Marketing technique
+        clue: Digital marketing.
+        why: A marketing technique.
+      - label: A rebate on a fridge
+        bin: Marketing technique
+        clue: Money back to attract buyers.
+        why: Marketing technique.
+      - label: Minimum Support Price for paddy
+        bin: Price control
+        clue: Fixed so farmers don't lose.
+        why: Price control by government.
+      - label: Rice at a Fair Price Shop
+        bin: Price control
+        clue: Below market price, limited amount.
+        why: 'Public distribution: price control.'
+      - label: Supplyco selling essentials cheaply
+        bin: Price control
+        clue: A Kerala government outlet.
+        why: Price control.
     items:
       - prompt: "Which is a marketing technique?"
         options: ["Discount", "Minimum Support Price", "Production function", "Census"]

@@ -35,6 +35,32 @@ concepts:
     unit: ₹
     caption: A monthly budget for an income of ₹10,000
     alt: 'A monthly budget of ₹10,000: ₹6,000 for needs, ₹2,000 for wants and ₹2,000 saved.'
+  activity:
+    type: number_line
+    min: 0
+    max: 4000
+    step: 100
+    start: 4000
+    prompt: Savings = income − spending. Mark the monthly savings (₹).
+    goals:
+    - prompt: Income ₹10,000, spending ₹8,000
+      target: 2000
+      mistakes:
+      - when:
+          v: 1800
+        say: Saving = income − spending. Take the spending away from the income again.
+    - prompt: Income ₹12,000, spending ₹9,000
+      target: 3000
+      mistakes:
+      - when:
+          v: 2000
+        say: 'That''s the last answer. Use this month''s income and spending: income − spending.'
+    - prompt: Income ₹9,000, spending ₹9,000
+      target: 0
+      mistakes:
+      - when:
+          v: 1000
+        say: 'Spending equals income: nothing is left to save.'
   items:
   - prompt: Meena earns ₹15,000 a month and spends ₹12,000. How much does she save, in rupees?
     answer: '3000'
@@ -127,6 +153,18 @@ concepts:
     - Mutual funds
     - 'Shares: highest risk and return'
     alt: Investment options arranged from lowest risk and return (fixed deposit) to highest (shares).
+  activity:
+    type: order
+    prompt: Order the investments from lowest risk to highest risk.
+    steps:
+    - Fixed deposit
+    - Bond
+    - Mutual fund
+    - Shares
+    reasons:
+      Bond: A bond pays regular interest but the borrower could fail, so a little more risk than a bank FD.
+      Mutual fund: Pooled and spread across assets, but values move with markets.
+      Shares: 'Part-ownership: highest risk and highest possible return.'
   items:
   - prompt: Which investment is generally the safest, with a fixed, assured return?
     options:

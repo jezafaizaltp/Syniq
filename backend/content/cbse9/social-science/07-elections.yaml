@@ -23,6 +23,43 @@ concepts:
     visual: Picture a map of India cut into 543 pieces like a jigsaw. Each piece sends one MP to the Lok Sabha in Delhi. Some pieces are coloured to show reserved seats.
     step_by_step: 'Step 1: Divide the country into constituencies. Step 2: Prepare the voters'' list of everyone 18+. Step 3: Candidates (25+) file nominations and declare assets and criminal cases. Step 4: Campaign. Step 5: Polling with EVMs. Step 6: Counting; the candidate with the most votes wins.'
     real_world: Before every election, voters can check their name on the electoral roll online and get a voter ID card (EPIC). First-time voters turning 18 are encouraged to register on National Voters' Day, 25 January.
+  activity:
+    type: scale
+    min: 15
+    max: 90
+    step: 1
+    start: 15
+    unit: no.
+    prompt: India's electoral system. Slide to the number.
+    zones: []
+    goals:
+    - prompt: Minimum age to vote
+      value: 18
+      mistakes:
+      - when:
+          v: 25
+        say: That's the age to contest an election. Voting starts younger.
+      - when:
+          v: 21
+        say: It was 21 before 1988. The 61st Amendment lowered it.
+    - prompt: Minimum age to contest a Lok Sabha election
+      value: 25
+      mistakes:
+      - when:
+          v: 18
+        say: That's the voting age. A candidate must be older.
+    - prompt: Lok Sabha seats reserved for SC (as of 2019)
+      value: 84
+      mistakes:
+      - when:
+          v: 47
+        say: That's the ST number. SC have more seats reserved.
+    - prompt: Lok Sabha seats reserved for ST
+      value: 47
+      mistakes:
+      - when:
+          v: 84
+        say: That's the SC number. ST have fewer seats reserved.
   items:
   - prompt: How many Lok Sabha constituencies are there?
     answer: '543'
@@ -106,6 +143,33 @@ concepts:
     visual: 'Picture a cricket match. The Election Commission is the umpire: neutral, enforcing the rules on both teams, and able to order a replay. The code of conduct is the rulebook.'
     step_by_step: 'Step 1: Who conducts elections? The Election Commission. Step 2: Is it independent? Yes; the CEC isn''t answerable to the government. Step 3: What rules apply? The code of conduct. Step 4: Is it fair? Check if rulers lose, turnout is high, results are accepted. Step 5: Note the challenges.'
     real_world: In past elections, the Election Commission has transferred officials, stopped ministers from announcing new schemes, and even ordered repolling in booths where machines were tampered with.
+  activity:
+    type: sort
+    prompt: Allowed under the code of conduct, or not?
+    bins:
+    - Allowed
+    - Not allowed
+    items:
+    - label: Campaigning at a public rally
+      bin: Allowed
+      clue: Normal campaign.
+      why: Allowed.
+    - label: Using a government car for campaigning
+      bin: Not allowed
+      clue: Government resources.
+      why: Not allowed.
+    - label: Campaigning in a place of worship
+      bin: Not allowed
+      clue: Religion.
+      why: Not allowed.
+    - label: Announcing a new project after elections are announced
+      bin: Not allowed
+      clue: Bribing voters with schemes.
+      why: Not allowed.
+    - label: Door-to-door canvassing
+      bin: Allowed
+      clue: Meeting voters.
+      why: Allowed.
   items:
   - prompt: Who conducts elections in India?
     options:
@@ -210,6 +274,37 @@ concepts:
       value: 25
     caption: 'FPTP: A wins with 40%, less than half the votes'
     alt: 'Votes in one constituency: A 40%, B 35%, C 25%. Under First Past the Post, A wins the seat.'
+  activity:
+    type: sort
+    prompt: First Past the Post or Proportional Representation?
+    bins:
+    - FPTP
+    - PR
+    items:
+    - label: Lok Sabha elections
+      bin: FPTP
+      clue: One member per constituency.
+      why: FPTP.
+    - label: Most votes wins, even under half
+      bin: FPTP
+      clue: Most, not majority.
+      why: FPTP.
+    - label: Seats in proportion to vote share
+      bin: PR
+      clue: Netherlands and Israel.
+      why: PR.
+    - label: Rajya Sabha elections
+      bin: PR
+      clue: Single transferable vote.
+      why: A form of PR.
+    - label: Electing the President
+      bin: PR
+      clue: Single transferable vote.
+      why: A form of PR.
+    - label: State assembly elections
+      bin: FPTP
+      clue: Constituencies.
+      why: FPTP.
   items:
   - prompt: Which electoral system is used for Lok Sabha elections in India?
     options:

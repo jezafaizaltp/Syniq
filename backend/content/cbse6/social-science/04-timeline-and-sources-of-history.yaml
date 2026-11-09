@@ -31,6 +31,32 @@ concepts:
     - at: 200
       label: 200 CE
     alt: A timeline from 500 BCE to 500 CE, with 300 BCE to the left of the start of the Common Era and 200 CE to the right.
+  activity:
+    type: number_line
+    min: -500
+    max: 500
+    step: 50
+    start: 0
+    prompt: A timeline. Left of the middle is BCE (counting back); right is CE.
+    goals:
+    - prompt: Mark 300 BCE
+      target: -300
+      mistakes:
+      - when:
+          v: 300
+        say: That's 300 CE. BCE dates go to the left, before the Common Era.
+    - prompt: Mark 200 CE
+      target: 200
+      mistakes:
+      - when:
+          v: -200
+        say: That's 200 BCE. CE dates are to the right.
+    - prompt: Which is older, 500 BCE or 100 BCE? Mark it.
+      target: -500
+      mistakes:
+      - when:
+          v: -100
+        say: 'BCE counts backwards: 500 BCE is further back, so older.'
   items:
   - prompt: 'Which is older: 300 BCE or 100 BCE?'
     options:
@@ -123,6 +149,38 @@ concepts:
       - stories
       - family memories
     alt: Archaeological sources are objects like pots and coins, literary sources are writings like manuscripts and inscriptions, and oral sources are songs and stories.
+  activity:
+    type: sort
+    prompt: Which kind of source?
+    bins:
+    - Archaeological
+    - Literary
+    - Oral
+    items:
+    - label: A coin dug up at an old site
+      bin: Archaeological
+      clue: Material remains.
+      why: Archaeological.
+    - label: Pottery pieces
+      bin: Archaeological
+      clue: Dug up.
+      why: Archaeological.
+    - label: A palm-leaf manuscript
+      bin: Literary
+      clue: Written.
+      why: Literary.
+    - label: A traveller's account
+      bin: Literary
+      clue: Written by a visitor.
+      why: Literary.
+    - label: Folk songs passed down
+      bin: Oral
+      clue: Spoken, not written.
+      why: Oral.
+    - label: Grandmother's stories of old times
+      bin: Oral
+      clue: Spoken.
+      why: Oral.
   items:
   - prompt: 'A person who digs up and studies old objects is an:'
     options:

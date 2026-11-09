@@ -36,6 +36,57 @@ concepts:
     - 'Thermosphere: radio waves'
     - 'Exosphere: thin air'
     alt: The five layers of the atmosphere from the ground upwards, with what happens in each.
+  activity:
+    type: scale
+    min: 0
+    max: 100
+    step: 1
+    start: 100
+    unit: km
+    prompt: Height above the ground (km). Find the layer.
+    zones:
+    - from: 0
+      to: 12
+      label: Troposphere
+      says: All weather happens here, up to 8–18 km.
+    - from: 12
+      to: 50
+      label: Stratosphere
+      says: Calm air for jets; the ozone layer.
+    - from: 50
+      to: 80
+      label: Mesosphere
+      says: Coldest layer; meteors burn up here.
+    - from: 80
+      to: 100
+      label: Thermosphere
+      says: Very hot; the ionosphere reflects radio waves.
+    goals:
+    - prompt: Where do clouds and rain form?
+      zone: Troposphere
+      mistakes:
+      - when:
+          v:
+          - 13
+          - 50
+        say: 'That''s the stratosphere: calm, no weather. Weather is in the lowest layer.'
+    - prompt: Where is the ozone layer?
+      zone: Stratosphere
+      mistakes:
+      - when:
+          v:
+          - 0
+          - 11
+        say: That's the troposphere. Ozone is higher up, in the stratosphere.
+    - prompt: Where do most meteors burn up?
+      zone: Mesosphere
+      mistakes:
+      - when:
+          v:
+          - 81
+          - 100
+        say: 'Too high: meteors burn in the mesosphere.'
+    orientation: vertical
   items:
   - prompt: In which layer of the atmosphere does almost all weather happen?
     options:
@@ -138,6 +189,37 @@ concepts:
     - Moist winds blow from the sea towards the land
     - They bring rain from June to September
     alt: 'How the monsoon works: the land heats faster than the sea, low pressure forms over India, and moist sea winds blow in and bring rain from June to September.'
+  activity:
+    type: sort
+    prompt: Weather or climate?
+    bins:
+    - Weather
+    - Climate
+    items:
+    - label: It's raining in Kochi right now
+      bin: Weather
+      clue: A short time.
+      why: Weather.
+    - label: Kerala gets heavy rain every June
+      bin: Climate
+      clue: The average over many years.
+      why: Climate.
+    - label: Today's temperature is 34 °C
+      bin: Weather
+      clue: One day.
+      why: Weather.
+    - label: Rajasthan is dry year after year
+      bin: Climate
+      clue: Long-term.
+      why: Climate.
+    - label: A storm is expected tonight
+      bin: Weather
+      clue: Short-term.
+      why: Weather.
+    - label: India has a monsoon type
+      bin: Climate
+      clue: Over 30+ years.
+      why: Climate.
   items:
   - prompt: The word 'monsoon' comes from the Arabic word…
     options:
@@ -232,6 +314,35 @@ concepts:
     - 'Advancing monsoon: June to September'
     - 'Retreating monsoon: October and November'
     alt: 'India''s four seasons in order: cold from mid-November to February, hot from March to May, the advancing monsoon June to September, and the retreating monsoon in October and November.'
+  activity:
+    type: sort
+    prompt: Which season?
+    bins:
+    - Cold weather
+    - Hot weather
+    - Advancing monsoon
+    - Retreating monsoon
+    items:
+    - label: Western disturbances bring winter rain
+      bin: Cold weather
+      clue: Helps rabi crops.
+      why: Cold weather.
+    - label: Loo blows; mango showers in Kerala
+      bin: Hot weather
+      clue: March–May.
+      why: Hot weather.
+    - label: Onset in Kerala about 1 June
+      bin: Advancing monsoon
+      clue: Rain moves north.
+      why: Advancing monsoon.
+    - label: October heat; Coromandel coast gets rain
+      bin: Retreating monsoon
+      clue: October–November.
+      why: Retreating monsoon.
+    - label: Kaal baisakhi storms in Bengal
+      bin: Hot weather
+      clue: Before the rains.
+      why: Hot weather.
   items:
   - prompt: Which place receives the highest average rainfall in the world?
     options:

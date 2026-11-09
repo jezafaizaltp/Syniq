@@ -30,6 +30,20 @@ concepts:
       visual: "Picture a paper clock: first you pin the dial and three hands on a board (interface). Then you write rules for how each hand turns (coding)."
       step_by_step: "To build the clock face: Step 1: delete the default sprite. Step 2: add clock.png and centre it. Step 3: add each hand. Step 4: in the Costume Editor, set each hand's pivot point at its base. Step 5: place the pivots on the dial's centre mark."
       real_world: "School bells, phone alarms and microwave timers are all small programs that act at a set time."
+    activity:
+      type: order
+      prompt: Build the alarm clock interface in PictoBlox. Put the steps in order.
+      steps:
+      - Delete the default sprite
+      - Add the clock dial (clock.png) in the middle
+      - Add the hour, minute and second hands
+      - Set each hand's rotation centre at the dial's centre
+      - Arrange layers so the hands are in front, then save
+      reasons:
+        Add the clock dial (clock.png) in the middle: The stage must be cleared before placing the dial.
+        Add the hour, minute and second hands: The hands go on top of the dial, so the dial comes first.
+        Set each hand's rotation centre at the dial's centre: Each hand must exist before you can set its pivot point.
+        Arrange layers so the hands are in front, then save: Arrange and save only when every sprite is placed.
     items:
       - prompt: "Block programming creates programs by"
         options: ["Dragging and dropping code blocks", "Typing long instructions from memory", "Drawing pictures only", "Recording your voice"]
@@ -89,6 +103,43 @@ concepts:
       visual: "Picture the dial as a pizza cut into 60 thin slices of 6° each. The second hand jumps one slice every second. The hour hand jumps 5 slices (30°) every hour."
       step_by_step: "For 3:20: Step 1: hour × 30 = 3 × 30 = 90. Step 2: minute × 0.5 = 20 × 0.5 = 10. Step 3: add: 90 + 10 = 100°."
       real_world: "Watch a real wall clock at 6:30: the hour hand is halfway between 6 and 7, not on the 6. That half-way slide is the 0.5° per minute."
+    activity:
+      type: angle
+      prompt: The clock dial is 360°. How far has the hand turned from 12?
+      goals:
+      - prompt: The second hand at 10 seconds (6° each second)
+        degrees: 60
+        mistakes:
+        - when:
+            degrees: 10
+          say: 'That''s the number of seconds. Each second turns the hand 6°: 10 × 6.'
+        - when:
+            degrees: 100
+          say: Each second is 6°, not 10°.
+      - prompt: The hour hand at 3 o'clock (30° each hour)
+        degrees: 90
+        mistakes:
+        - when:
+            degrees: 15
+          say: That uses the second hand's rule. The hour hand moves 360 ÷ 12 = 30° each hour.
+        - when:
+            degrees: 180
+          say: That's 6 hours. Each hour is 30° on the clock face; how many hours is 3 o'clock?
+      - prompt: The hour hand at 4:30 (30° an hour + 0.5° a minute)
+        degrees: 135
+        mistakes:
+        - when:
+            degrees: 120
+          say: That's 4:00. Add 30 minutes × 0.5° = 15°.
+        - when:
+            degrees: 150
+          say: The hour hand is halfway to 5, not at 5.
+      - prompt: The minute hand at 45 minutes (6° each minute)
+        degrees: 270
+        mistakes:
+        - when:
+            degrees: 45
+          say: 'That''s the minutes. Each minute turns 6°: 45 × 6.'
     items:
       - prompt: "How many degrees does the second hand turn each second?"
         answer: "6"
@@ -165,6 +216,39 @@ concepts:
       visual: "A variable is a labelled box. 'Hour' box holds 10, 'Minute' box holds 30. The program keeps peeking at the clock and at the boxes until they match."
       step_by_step: "To set an alarm: Step 1: ask 'Hour?' and wait. Step 2: set Hour to answer. Step 3: ask 'Minute?' and wait, set Minute to answer. Step 4: if current hour = Hour and current minute = Minute, play the sound."
       real_world: "When your phone asks 'What time should I wake you?', it saves your answer and checks the time until it matches: the same idea."
+    activity:
+      type: sort
+      prompt: What is it in the alarm program?
+      bins:
+      - Input block
+      - Variable
+      - Operator
+      - Sound block
+      items:
+      - label: ask and wait
+        bin: Input block
+        clue: Shows a field for the user to type in.
+        why: Input block (Sensing).
+      - label: answer (the reply typed)
+        bin: Input block
+        clue: Comes straight from the ask block.
+        why: The answer reporter belongs to the ask block.
+      - label: Hour
+        bin: Variable
+        clue: Stores the typed hour so it can be used later.
+        why: A variable stores a value.
+      - label: Minute
+        bin: Variable
+        clue: Stores a value.
+        why: A variable.
+      - label: = and 'and'
+        bin: Operator
+        clue: Compare the stored time with the clock's time.
+        why: Operator blocks.
+      - label: start sound
+        bin: Sound block
+        clue: Plays the alarm.
+        why: Sound block.
     items:
       - prompt: "Which block lets the user type in the alarm time?"
         options: ["ask and wait", "go to front layer", "point in direction", "change size"]
