@@ -455,3 +455,93 @@ def tutor_questions(db: DbSession = Depends(get_db), user: User = Depends(requir
         )
         t["questions"].append({"text": q.text, "answered_by": q.answered_by, "asked": q.created_at.date().isoformat()})
     return sorted(topics.values(), key=lambda t: -len(t["questions"]))
+
+
+# --- Teacher review sheet -------------------------------------------------------
+
+staff = require_role("admin", "teacher")
+
+
+@router.get("/review-sheet")
+def review_subjects(db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """Subjects that have questions, with how many, for choosing a sheet to print."""
+    from sqlalchemy import func
+
+    from ..models import Item
+
+    rows = db.execute(
+        select(Subject, func.count(Item.id))
+        .join(Chapter, Chapter.subject_id == Subject.id)
+        .join(Concept, Concept.chapter_id == Chapter.id)
+        .join(Item, Item.concept_id == Concept.id)
+        .where(Item.status != "rejected")
+        .group_by(Subject.id)
+        .order_by(Subject.syllabus, Subject.grade, Subject.name)
+    ).all()
+    return [
+        {"id": s.id, "name": s.name, "grade": s.grade, "syllabus": s.syllabus, "questions": n}
+        for s, n in rows
+        if not s.syllabus.endswith("-old")
+    ]
+
+
+def tip_text(db: DbSession, tag: str, cache: dict[str, str]) -> str:
+    """The tip a student sees for this mistake, in English, as the Learn page finds it."""
+    if tag not in cache:
+        from .. import i18n
+        from ..models import Misconception
+
+        if i18n.has(f"tip.{tag}"):
+            cache[tag] = i18n.t("en", f"tip.{tag}")
+        else:
+            row = db.scalars(select(Misconception).where(Misconception.tag == tag)).first()
+            cache[tag] = row.tip if row else ""
+    return cache[tag]
+
+
+@router.get("/review-sheet/{subject_id}")
+def review_sheet(subject_id: int, db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """Every question in one subject, chapter by chapter, for a teacher to read on paper.
+
+    Shows what a student sees (question, choices), the right answer and worked solution, and
+    each planned wrong answer with the tip it gets, so the teacher can mark anything to fix.
+    """
+    from ..models import Item
+
+    subject = db.get(Subject, subject_id)
+    if not subject:
+        raise HTTPException(404, "No such subject")
+    rows = db.execute(
+        select(Item, Concept, Chapter)
+        .join(Concept, Concept.id == Item.concept_id)
+        .join(Chapter, Chapter.id == Concept.chapter_id)
+        .where(Chapter.subject_id == subject.id, Item.status != "rejected")
+        .order_by(Chapter.number, Concept.order, Concept.id, Item.difficulty, Item.id)
+    ).all()
+    tips: dict[str, str] = {}
+    chapters: dict[int, dict] = {}
+    n = 0
+    for item, concept, chapter in rows:
+        ch = chapters.setdefault(chapter.id, {"number": chapter.number, "title": chapter.title, "topics": {}})
+        topic = ch["topics"].setdefault(concept.id, {"title": concept.title, "questions": []})
+        n += 1
+        topic["questions"].append(
+            {
+                "n": n,
+                "id": item.id,
+                "prompt": item.prompt,
+                "options": item.options or [],
+                "answer": item.answer,
+                "solution": item.solution,
+                "difficulty": item.difficulty,
+                "status": item.status,
+                "mistakes": [
+                    {"wrong": wrong, "tip": tip_text(db, tag, tips)} for wrong, tag in (item.misconceptions or {}).items()
+                ],
+            }
+        )
+    return {
+        "subject": {"id": subject.id, "name": subject.name, "grade": subject.grade, "syllabus": subject.syllabus},
+        "questions": n,
+        "chapters": [{**c, "topics": list(c["topics"].values())} for c in chapters.values()],
+    }
