@@ -9,6 +9,11 @@ tips:
   c10_perimeter_radii: The perimeter of a sector is the arc plus the two straight radii.
   c10_subtract_triangle: That is the whole sector. Take away the triangle to leave the segment.
   c10_radius_diameter: Use the radius, half the diameter, in πr².
+  t10_clock_angle: "The minute hand turns 360° in 60 minutes. Find the angle for 5 minutes first, then take that fraction of πr²."
+  t10_composite_area: "Add the rectangle and the semicircle. A semicircle is half of πr² with r = half of 7."
+  t10_sector_fraction: "Sector area = (θ/360) × πr². What fraction of the whole circle is 50π?"
+  t10_segment_def: "A segment is cut off by a chord. A sector is cut off by two radii."
+  t10_square_minus_circle: "Area outside the circle = square area − circle area. The circle's diameter is the square's side."
 concepts:
 - code: cbse10m.area.sector
   title: Arcs and sectors
@@ -145,6 +150,7 @@ concepts:
     - In 5 minutes it turns 30°.
     - (30/360) × 22/7 × 196.
     solution: 'Step 1: 60 minutes = 360°, so 5 minutes = 30°. Step 2: Area = 1/12 × 22/7 × 196 = 154/3 ≈ 51.33 cm².'
+    mistakes: {"616": "t10_clock_angle", "22/3": "c10_arc_not_area"}
   - prompt: A circle of radius 7 cm has a minor sector of 90°. Find the area of the major sector in cm². Use π = 22/7. Type a decimal.
     answer: '115.5'
     check: Rational(270, 360)*Rational(22, 7)*49
@@ -163,6 +169,7 @@ concepts:
     - (θ/360) × π × 100 = 50π.
     - θ/360 = 1/2.
     solution: 'Step 1: (θ/360) × 100π = 50π. Step 2: θ/360 = 1/2, so θ = 180°: a semicircle.'
+    mistakes: {"90": "t10_sector_fraction", "360": "t10_sector_fraction"}
   - prompt: Find the perimeter of a quadrant (90° sector) of a circle of radius 14 cm, in cm. Use π = 22/7.
     answer: '50'
     check: Rational(1, 4)*2*Rational(22, 7)*14 + 28
@@ -264,6 +271,7 @@ concepts:
     - Semicircle radius 3.5.
     - 70 + 1/2 × 22/7 × 3.5².
     solution: 'Step 1: Rectangle = 70. Step 2: Semicircle = 1/2 × 22/7 × 12.25 = 19.25. Step 3: Total = 89.25 cm².'
+    mistakes: {"108.5": "c10_radius_diameter", "70": "t10_composite_area"}
   - prompt: A square of side 14 cm has a circle drawn inside touching all four sides. Find the area outside the circle but inside the square, in cm². Use π = 22/7.
     answer: '42'
     check: 196 - Rational(22, 7)*49
@@ -272,6 +280,7 @@ concepts:
     - Circle radius = 7.
     - 196 − 154.
     solution: 'Step 1: Square = 196. Step 2: Circle = 22/7 × 49 = 154. Step 3: Difference = 42 cm².'
+    mistakes: {"154": "t10_square_minus_circle", "616": "c10_radius_diameter"}
   - prompt: Find the area of a semicircle of diameter 28 cm, in cm². Use π = 22/7.
     answer: '308'
     check: Rational(1, 2)*Rational(22, 7)*196
@@ -294,6 +303,7 @@ concepts:
     - Two radii make a sector.
     - A chord cuts off a piece.
     solution: A segment is the region between a chord and the arc it cuts off.
+    mistakes: {"The region between two radii": "t10_segment_def", "A line through the centre": "t10_segment_def"}
   - prompt: Find the area of the minor segment for a 60° angle in a circle of radius 6 cm, written as aπ − b√3. Find a.
     answer: '6'
     check: Rational(60, 360)*36
@@ -302,3 +312,4 @@ concepts:
     - Sector = (60/360) × π × 36 = 6π.
     - 'Triangle is equilateral: (√3/4) × 36 = 9√3.'
     solution: 'Step 1: Sector = 6π. Step 2: Triangle = 9√3. Step 3: Segment = 6π − 9√3, so a = 6.'
+    mistakes: {"9": "c10_subtract_triangle", "12": "t10_sector_fraction"}
