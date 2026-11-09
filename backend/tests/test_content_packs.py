@@ -113,16 +113,23 @@ def test_tap_choices_for_negative_and_fraction_answers():
     assert tap_choices(None, "3.5", 0, []) == []  # no likely mistakes known: typed instead
 
 
-FULLY_TIPPED = {"maths", "physics", "chemistry", "biology", "social-science", "english", "hindi", "it"} | {
-    f"cbse{n}/{s}" for n in (6, 7, 8, 9, 10) for s in ("maths", "science")
-}
-
-
-def test_every_maths_and_science_question_has_planned_mistakes():
-    """Kerala Class 9 and CBSE Classes 6 to 10 Maths and Science: every wrong answer we expect gets its own tip."""
+def test_every_question_has_planned_mistakes():
+    """Every question in every pack names the wrong answers we expect and gives each one a tip."""
     missing = []
     for path, pack in content_packs.read_packs():
-        folder = "/".join(path.relative_to(content_packs.CONTENT_DIR).parts[:-1])
-        if folder in FULLY_TIPPED:
-            missing += [f"{path.name}: {i['prompt'][:50]}" for c in pack["concepts"] for i in c["items"] if not i.get("mistakes")]
+        rel = path.relative_to(content_packs.CONTENT_DIR)
+        missing += [f"{rel}: {i['prompt'][:50]}" for c in pack["concepts"] for i in c["items"] if not i.get("mistakes")]
     assert missing == []
+
+
+def test_no_tip_tag_defined_twice_with_different_text():
+    """Tags are shared across packs and the first definition wins, so a second, different text would be silently lost."""
+    seen: dict[str, tuple[str, str]] = {}
+    clashes = []
+    for path, pack in content_packs.read_packs():
+        rel = str(path.relative_to(content_packs.CONTENT_DIR))
+        for tag, tip in (pack.get("tips") or {}).items():
+            if tag in seen and seen[tag][1] != tip:
+                clashes.append(f"{tag}: {seen[tag][0]} and {rel}")
+            seen.setdefault(tag, (rel, tip))
+    assert clashes == []
