@@ -35,6 +35,35 @@ concepts:
     - Launch and sell
     - Learn and grow
     alt: The path from spotting a problem to an idea, a business plan, arranging resources, launching and growing a startup.
+  activity:
+    type: sort
+    prompt: Which functional area of a business?
+    bins:
+    - Finance and accounting
+    - Human resources
+    - Marketing and sales
+    - Management and operations
+    items:
+    - label: Keeping track of costs and profit
+      bin: Finance and accounting
+      clue: Money.
+      why: Finance.
+    - label: Hiring and training staff
+      bin: Human resources
+      clue: People.
+      why: HR.
+    - label: An advertisement for papads
+      bin: Marketing and sales
+      clue: Promotion.
+      why: Marketing.
+    - label: Planning daily production
+      bin: Management and operations
+      clue: Running things.
+      why: Operations.
+    - label: Setting the price
+      bin: Marketing and sales
+      clue: Pricing.
+      why: Marketing.
   items:
   - prompt: Lijjat Papad was started in 1959 by…
     options:
@@ -134,6 +163,53 @@ concepts:
     unit: ₹
     caption: A lime juice stall's day
     alt: Revenue ₹2,000, total cost ₹1,300, so profit is ₹700.
+  activity:
+    type: formula
+    prompt: A stall sells juice at ₹20 a cup. Fixed cost ₹300 a day; each cup costs ₹10 to make.
+    inputs:
+    - name: q
+      label: Cups sold
+      min: 0
+      max: 60
+      step: 5
+      start: 0
+    outputs:
+    - name: r
+      label: Revenue
+      expr: 20*q
+      unit: ₹
+    - name: c
+      label: Total cost
+      expr: 300+10*q
+      unit: ₹
+    - name: pr
+      label: Profit
+      expr: 10*q-300
+      unit: ₹
+    goals:
+    - prompt: Find the break-even point (no profit, no loss).
+      want:
+        pr: 0
+      mistakes:
+      - when:
+          pr:
+          - -300
+          - -50
+        say: 'Still a loss: revenue hasn''t covered the fixed ₹300 yet. Sell more.'
+      - when:
+          pr:
+          - 50
+          - 300
+        say: That's already a profit. Break-even is where profit is exactly zero.
+    - prompt: Make a profit of ₹200.
+      want:
+        pr: 200
+      mistakes:
+      - when:
+          pr:
+          - -300
+          - -50
+        say: 'A loss: each cup adds only ₹10 profit after its cost.'
   items:
   - prompt: A stall sells 50 samosas at ₹12 each. What is its revenue, in rupees?
     answer: '600'

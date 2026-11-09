@@ -34,6 +34,35 @@ concepts:
       value: 15
     caption: Kilograms of mangoes bought at each price
     alt: 'A demand schedule: at ₹20 a kg buyers take 50 kg, at ₹40 they take 30 kg, at ₹60 only 15 kg.'
+  activity:
+    type: sort
+    prompt: Does demand or supply change, and which way?
+    bins:
+    - Demand rises
+    - Demand falls
+    - Supply rises
+    - Supply falls
+    items:
+    - label: Price of tea falls (for tea)
+      bin: Demand rises
+      clue: Law of demand.
+      why: Lower price, more demanded.
+    - label: Coffee gets cheaper (demand for tea)
+      bin: Demand falls
+      clue: Substitute goods.
+      why: People switch to coffee.
+    - label: A bumper mango harvest
+      bin: Supply rises
+      clue: Weather.
+      why: More mangoes to sell.
+    - label: Fuel price rises for bus companies
+      bin: Supply falls
+      clue: Input costs.
+      why: Costlier inputs, less supply.
+    - label: Incomes rise in a town
+      bin: Demand rises
+      clue: More to spend.
+      why: Demand rises.
   items:
   - prompt: According to the law of demand, if the price of bananas rises, the quantity demanded will…
     options:
@@ -141,6 +170,51 @@ concepts:
       - Shortage
       - Price rises
     alt: Above the equilibrium price there is a surplus and the price falls; below it there is a shortage and the price rises; at equilibrium supply equals demand.
+  activity:
+    type: formula
+    prompt: Change the price. Demand = 120 − 2 × price; supply = 2 × price.
+    inputs:
+    - name: p
+      label: Price
+      min: 10
+      max: 50
+      step: 5
+      start: 10
+      unit: ₹
+    outputs:
+    - name: d
+      label: Quantity demanded
+      expr: 120-2*p
+    - name: s
+      label: Quantity supplied
+      expr: 2*p
+    - name: g
+      label: Demand minus supply
+      expr: 120-4*p
+    goals:
+    - prompt: Find the equilibrium price.
+      want:
+        g: 0
+      mistakes:
+      - when:
+          g:
+          - 20
+          - 80
+        say: 'Shortage: buyers want more than sellers offer, so the price rises.'
+      - when:
+          g:
+          - -80
+          - -20
+        say: 'Surplus: sellers offer more than buyers want, so the price falls.'
+    - prompt: Show a surplus of 40.
+      want:
+        g: -40
+      mistakes:
+      - when:
+          g:
+          - 20
+          - 80
+        say: That's a shortage. A surplus needs a price above equilibrium.
   items:
   - prompt: At ₹30 a kg, buyers want 40 kg and sellers offer 40 kg of a vegetable. ₹30 is the…
     options:

@@ -33,6 +33,18 @@ concepts:
     - Abyssal plain
     - Mid-ocean ridge or trench
     alt: 'The ocean floor from the coast outwards: continental shelf, slope, abyssal plain and then ridges or trenches.'
+  activity:
+    type: order
+    prompt: 'From the coast to the deep sea: put the ocean floor in order.'
+    steps:
+    - Continental shelf
+    - Continental slope
+    - Abyssal plain
+    - Trench (like the Mariana Trench)
+    reasons:
+      Continental slope: The shelf ends at the slope, which drops steeply.
+      Abyssal plain: Below the slope lie the deep plains.
+      Trench (like the Mariana Trench): Trenches are the deepest parts, cut into the floor.
   items:
   - prompt: What mainly causes the tides?
     options:
@@ -138,6 +150,56 @@ concepts:
     - 'Exclusive Economic Zone: 200 nm'
     - 'High seas: open to all'
     alt: 'Maritime zones measured from the coast: territorial waters to 12 nautical miles, contiguous zone to 24, Exclusive Economic Zone to 200, then the high seas.'
+  activity:
+    type: scale
+    min: 0
+    max: 250
+    step: 1
+    start: 125
+    unit: nm
+    prompt: Distance from the coast (nautical miles). Which zone?
+    zones:
+    - from: 0
+      to: 12
+      label: Territorial waters
+      says: 'Up to 12 nm: full control.'
+    - from: 12
+      to: 24
+      label: Contiguous zone
+      says: 'Up to 24 nm: customs and law enforcement.'
+    - from: 24
+      to: 200
+      label: EEZ
+      says: 'Up to 200 nm: rights to fish and mine.'
+    - from: 200
+      to: 250
+      label: High seas
+      says: 'Beyond 200 nm: open to all.'
+    goals:
+    - prompt: Where does India have full control?
+      zone: Territorial waters
+      mistakes:
+      - when:
+          v:
+          - 13
+          - 23
+        say: 'That''s the contiguous zone: customs only.'
+    - prompt: Where can India fish and mine but not fully control?
+      zone: EEZ
+      mistakes:
+      - when:
+          v:
+          - 0
+          - 11
+        say: 'That''s territorial waters: full control. Fishing rights stretch farther.'
+    - prompt: Where is it open to all countries?
+      zone: High seas
+      mistakes:
+      - when:
+          v:
+          - 25
+          - 199
+        say: That's still India's EEZ.
   items:
   - prompt: How far from the coast does a country's Exclusive Economic Zone extend, in nautical miles?
     answer: '200'

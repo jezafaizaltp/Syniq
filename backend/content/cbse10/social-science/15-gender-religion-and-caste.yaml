@@ -32,6 +32,57 @@ concepts:
       value: 33
     unit: '%'
     alt: 'Bar chart: male literacy about 82 percent, female literacy about 65 percent, women about 14 percent of the Lok Sabha in 2019, and at least 33 percent of local body seats reserved for women.'
+  activity:
+    type: scale
+    min: 0
+    max: 50
+    step: 1
+    start: 50
+    unit: '%'
+    prompt: Women's share of seats. Slide to the right value.
+    zones:
+    - from: 0
+      to: 5
+      label: State assemblies
+      says: Women hold below 5% of seats in state assemblies.
+    - from: 14
+      to: 15
+      label: Lok Sabha 2019
+      says: Lok Sabha crossed 14% for the first time in 2019.
+    - from: 33
+      to: 34
+      label: Reserved share
+      says: At least one-third of seats are reserved for women.
+    goals:
+    - prompt: Women in the Lok Sabha after 2019
+      zone: Lok Sabha 2019
+      mistakes:
+      - when:
+          v:
+          - 33
+          - 34
+        say: That's the reserved share in panchayats. Lok Sabha had only about 14%.
+      - when:
+          v:
+          - 40
+          - 50
+        say: 'Far too high: women held only about 14% of Lok Sabha seats.'
+    - prompt: Seats reserved for women in panchayats
+      zone: Reserved share
+      mistakes:
+      - when:
+          v:
+          - 14
+          - 15
+        say: That's the Lok Sabha share in 2019. Panchayats reserve one-third.
+    - prompt: Women in state assemblies
+      zone: State assemblies
+      mistakes:
+      - when:
+          v:
+          - 14
+          - 15
+        say: 'That''s the Lok Sabha. State assemblies are even lower: below 5%.'
   items:
   - prompt: What is the 'sexual division of labour'?
     options:
@@ -137,6 +188,37 @@ concepts:
       - Votes sought on religious lines
       - Can lead to violence
     alt: India as a secular state, with no official religion and equal freedom, compared with communalism, which treats one religion as superior and can lead to violence.
+  activity:
+    type: sort
+    prompt: Secular or communal?
+    bins:
+    - Secular
+    - Communal
+    items:
+    - label: No official religion for the state
+      bin: Secular
+      clue: Does the state favour any faith?
+      why: Secular.
+    - label: Asking votes only by appealing to one religion
+      bin: Communal
+      clue: Mobilising on religious lines.
+      why: Communal.
+    - label: Freedom to practise any religion
+      bin: Secular
+      clue: Rights for all.
+      why: Secular.
+    - label: Saying one religion is superior
+      bin: Communal
+      clue: Ranking faiths.
+      why: Communal.
+    - label: State bans untouchability
+      bin: Secular
+      clue: Acts against discrimination.
+      why: The secular state can intervene.
+    - label: Demanding the state favour one religion
+      bin: Communal
+      clue: Unequal treatment.
+      why: Communal.
   items:
   - prompt: What makes India a secular state?
     options:
