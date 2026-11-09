@@ -24,6 +24,35 @@ concepts:
       value: 0
     alt: Basket A has 4 mangoes, basket B has 1, and basket C has 0.
     unit: mangoes
+  activity:
+    type: number_line
+    min: 0
+    max: 9
+    step: 1
+    start: 9
+    prompt: How many mangoes in the basket?
+    goals:
+    - prompt: 🥭🥭🥭🥭
+      target: 4
+      mistakes:
+      - when:
+          v: 3
+        say: 'One mango was missed. Touch each one: 1, 2, 3, 4.'
+      - when:
+          v: 5
+        say: One mango was counted twice.
+    - prompt: An empty basket
+      target: 0
+      mistakes:
+      - when:
+          v: 1
+        say: There is nothing in the basket. Nothing is zero, not one.
+    - prompt: 🥭🥭🥭🥭🥭🥭
+      target: 6
+      mistakes:
+      - when:
+          v: 5
+        say: After 5 comes 6. Count the last mango too.
   items:
   - prompt: A basket has no mangoes. How many mangoes?
     answer: '0'
@@ -110,6 +139,34 @@ concepts:
       value: 3
     alt: Anu has 5 mangoes and Babu has 3, so Anu has more.
     unit: mangoes
+  activity:
+    type: sort
+    prompt: Which plate has more mangoes?
+    bins:
+    - Plate A
+    - Plate B
+    - Same
+    items:
+    - label: 'A: 🥭🥭🥭🥭  B: 🥭🥭'
+      bin: Plate A
+      clue: Match one from each plate. Who has some left over?
+      why: Plate A has 2 left over. A has more.
+    - label: 'A: 🥭  B: 🥭🥭🥭'
+      bin: Plate B
+      clue: Match one to one. Who still has mangoes?
+      why: Plate B has 2 left over.
+    - label: 'A: 🥭🥭🥭  B: 🥭🥭🥭'
+      bin: Same
+      clue: Match one to one. Any left over?
+      why: None left over. They are the same.
+    - label: 'A: 🥭🥭🥭🥭🥭  B: 🥭🥭🥭🥭'
+      bin: Plate A
+      clue: Pair them. Who has one left?
+      why: Plate A has 1 extra.
+    - label: 'A: 🥭🥭  B: 🥭🥭🥭🥭🥭'
+      bin: Plate B
+      clue: Pair them. Who has some left?
+      why: Plate B has 3 extra.
   items:
   - prompt: Anu has 5 mangoes, Babu has 3. Who has more?
     options:

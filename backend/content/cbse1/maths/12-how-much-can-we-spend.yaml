@@ -26,6 +26,38 @@ concepts:
       value: 10
     alt: 'Coins: 1 rupee, 2 rupees, 5 rupees, 10 rupees.'
     unit: rupees
+  activity:
+    type: sort
+    prompt: How many rupees?
+    bins:
+    - 5 rupees
+    - 10 rupees
+    - 20 rupees
+    items:
+    - label: Two ₹5 coins
+      bin: 10 rupees
+      clue: Count 5, then 5 more.
+      why: 5 + 5 = 10.
+    - label: One ₹5 coin
+      bin: 5 rupees
+      clue: Read the number on the coin.
+      why: One coin, but it says 5.
+    - label: Two ₹10 notes
+      bin: 20 rupees
+      clue: 10 and 10 more.
+      why: 10 + 10 = 20.
+    - label: One ₹2 coin and three ₹1 coins
+      bin: 5 rupees
+      clue: Start at 2, count on 3.
+      why: 2, 3, 4, 5.
+    - label: One ₹20 note
+      bin: 20 rupees
+      clue: One note, but read the number.
+      why: It says 20.
+    - label: Five ₹2 coins
+      bin: 10 rupees
+      clue: 'Count in twos: 2, 4 ...'
+      why: 2, 4, 6, 8, 10.
   items:
   - prompt: Two 5-rupee coins make how many rupees?
     answer: '10'
@@ -109,6 +141,38 @@ concepts:
     - ₹10 − ₹8
     - ₹2 left
     alt: You have 10 rupees, buy things for 8 rupees, and 2 rupees are left.
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: Add the prices, or find what is left.
+    goals:
+    - prompt: A pencil ₹5 and an eraser ₹3. Total?
+      target: 8
+      mistakes:
+      - when:
+          v: 2
+        say: 'That takes away. Buying both means put the prices together: 5 + 3.'
+      - when:
+          v: 5
+        say: That's only the pencil. Add the eraser too.
+    - prompt: You have ₹10. You spend ₹8. What is left?
+      target: 2
+      mistakes:
+      - when:
+          v: 18
+        say: Spending makes your money go down, not up. 10 take away 8.
+      - when:
+          v: 8
+        say: That's what you spent. What is left in your hand?
+    - prompt: A ball ₹10 and a whistle ₹6. Total?
+      target: 16
+      mistakes:
+      - when:
+          v: 4
+        say: 'That takes away. Buying both adds: 10 + 6.'
   items:
   - prompt: A pencil costs 5 rupees and an eraser 3 rupees. Together?
     answer: '8'

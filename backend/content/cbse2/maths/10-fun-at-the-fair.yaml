@@ -27,6 +27,38 @@ concepts:
       value: 50
     alt: 'Money values: a 5 rupee coin, a 10 rupee coin, a 20 rupee note and a 50 rupee note.'
     unit: rupees
+  activity:
+    type: sort
+    prompt: How much money?
+    bins:
+    - 15 rupees
+    - 50 rupees
+    - 100 rupees
+    items:
+    - label: One ₹10 coin and one ₹5 coin
+      bin: 15 rupees
+      clue: 10 and 5 more.
+      why: 10 + 5 = 15.
+    - label: Two ₹20 notes and one ₹10 note
+      bin: 50 rupees
+      clue: Count 20, 40, then?
+      why: 20 + 20 + 10 = 50.
+    - label: One ₹50 note and two ₹20 notes and one ₹10 note
+      bin: 100 rupees
+      clue: Start at 50, then 70, 90 ...
+      why: 50 + 20 + 20 + 10 = 100.
+    - label: Three ₹5 coins
+      bin: 15 rupees
+      clue: Count in fives.
+      why: 5, 10, 15.
+    - label: Five ₹10 notes
+      bin: 50 rupees
+      clue: Count in tens.
+      why: 10, 20, 30, 40, 50.
+    - label: Two ₹50 notes
+      bin: 100 rupees
+      clue: 50 and 50 more.
+      why: 50 + 50 = 100.
   items:
   - prompt: Two 5-rupee coins make how many rupees?
     answer: '10'
@@ -105,6 +137,39 @@ concepts:
     - ₹20 − ₹15
     - Change ₹5
     alt: The price is 15 rupees; you pay 20 rupees; 20 take away 15 gives 5 rupees change.
+  activity:
+    type: number_line
+    min: 0
+    max: 100
+    step: 5
+    start: 0
+    prompt: Shop at the fair.
+    goals:
+    - prompt: A balloon ₹15 and a toffee ₹5. Total?
+      target: 20
+      mistakes:
+      - when:
+          v: 10
+        say: 'That takes away. Buying both means add: 15 + 5.'
+    - prompt: You pay ₹100 for a ₹45 kite. How much change?
+      target: 55
+      mistakes:
+      - when:
+          v: 45
+        say: That's the price. Count up from 45 to 100.
+      - when:
+          v: 65
+        say: 'Break a ten carefully: 100 − 45. Check: 45 + 55 = 100.'
+    - prompt: You pay ₹50 for a ₹30 toy. How much change?
+      target: 20
+      hint: What you paid take away the price.
+      mistakes:
+      - when:
+          v: 80
+        say: 'Change is never more than you paid. Take away: 50 − 30.'
+      - when:
+          v: 30
+        say: That's the price. Change is what comes back to you.
   items:
   - prompt: A balloon costs 10 rupees and a whistle 5 rupees. Total?
     answer: '15'

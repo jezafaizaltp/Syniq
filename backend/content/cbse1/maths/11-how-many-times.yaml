@@ -25,6 +25,29 @@ concepts:
       value: 1
     alt: 'Hand spans: a table is 6 spans, a desk is 4 spans, a book is 1 span.'
     unit: spans
+  activity:
+    type: sort
+    prompt: Same thing, different units. Will we count fewer or more?
+    bins:
+    - We count fewer
+    - We count more
+    items:
+    - label: Father's hand span, on a table
+      bin: We count fewer
+      clue: Is his hand big or small?
+      why: A big hand covers more, so fewer spans fit.
+    - label: A child's hand span, on the same table
+      bin: We count more
+      clue: Is a child's hand big or small?
+      why: A small hand covers less, so more spans fit.
+    - label: Big steps across a room
+      bin: We count fewer
+      clue: Each big step covers a lot.
+      why: 'Big steps: fewer steps to cross.'
+    - label: Tiny steps across the same room
+      bin: We count more
+      clue: Each tiny step covers a little.
+      why: 'Tiny steps: more steps to cross.'
   items:
   - prompt: A table is 6 hand spans long and a desk is 4. How many spans longer is the table?
     answer: '2'
@@ -121,6 +144,38 @@ concepts:
     - from: 4
       to: 6
       label: '+2'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: 'Equal groups: add the same number again and again.'
+    goals:
+    - prompt: 2 chairs, 4 legs each
+      target: 8
+      mistakes:
+      - when:
+          v: 4
+        say: 'That''s one chair. Add the other chair''s 4 legs: 4 + 4.'
+      - when:
+          v: 6
+        say: Each chair has 4 legs, not 2 and 4. 4 + 4.
+    - prompt: 3 hands, 5 fingers each
+      target: 15
+      mistakes:
+      - when:
+          v: 10
+        say: 'That''s two hands. Count in fives: 5, 10, 15.'
+      - when:
+          v: 8
+        say: 'That adds 3 and 5. Each hand has 5: 5 + 5 + 5.'
+    - prompt: 4 pairs of socks, 2 in each
+      target: 8
+      mistakes:
+      - when:
+          v: 6
+        say: 'That adds 4 and 2. Count in twos: 2, 4, 6, 8.'
   items:
   - prompt: 3 faces, 2 eyes each. How many eyes?
     answer: '6'

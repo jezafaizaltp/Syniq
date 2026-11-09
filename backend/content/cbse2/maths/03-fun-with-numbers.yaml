@@ -47,6 +47,44 @@ concepts:
     - from: 8
       to: 10
       label: '+2'
+  activity:
+    type: number_line
+    min: 0
+    max: 40
+    step: 1
+    start: 0
+    prompt: Skip count. Find the next number.
+    goals:
+    - prompt: 2, 4, 6, 8, ...
+      target: 10
+      mistakes:
+      - when:
+          v: 9
+        say: 'That counts in ones. Each jump is 2: 8, then 10.'
+    - prompt: 5, 10, 15, 20, ...
+      target: 25
+      mistakes:
+      - when:
+          v: 21
+        say: That counts in ones. Each jump is 5.
+      - when:
+          v: 30
+        say: That jumped twice. One more jump of 5.
+    - prompt: 'Backward: 20, 18, 16, ...'
+      target: 14
+      mistakes:
+      - when:
+          v: 18
+        say: Backward means smaller. 16 take 2.
+      - when:
+          v: 15
+        say: Each jump back is 2, not 1.
+    - prompt: 10, 20, 30, ...
+      target: 40
+      mistakes:
+      - when:
+          v: 31
+        say: Each jump is 10, not 1.
   items:
   - prompt: 2, 4, 6, 8, __ ?
     answer: '10'
@@ -129,6 +167,37 @@ concepts:
     - label: '52'
       value: 52
     alt: 52 is a much taller bar than 25, so 52 is bigger.
+  activity:
+    type: sort
+    prompt: Which number is bigger? Look at the tens first.
+    bins:
+    - The first
+    - The second
+    items:
+    - label: 52 or 25
+      bin: The first
+      clue: 5 tens or 2 tens?
+      why: 52 has 5 tens. More tens means bigger.
+    - label: 38 or 83
+      bin: The second
+      clue: Which has more tens?
+      why: 83 has 8 tens.
+    - label: 47 or 49
+      bin: The second
+      clue: Tens are the same. Look at the ones.
+      why: 9 ones is more than 7.
+    - label: 60 or 59
+      bin: The first
+      clue: Don't be fooled by the 9. Look at the tens.
+      why: 60 has 6 tens; 59 only 5.
+    - label: 91 or 19
+      bin: The first
+      clue: 9 tens or 1 ten?
+      why: 91 is much bigger.
+    - label: 70 or 71
+      bin: The second
+      clue: Same tens. Compare ones.
+      why: 1 one is more than 0.
   items:
   - prompt: 'Which is the biggest: 52, 25 or 22?'
     options:

@@ -31,6 +31,35 @@ concepts:
     - from: 10
       to: 13
       label: '+3'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: One full ten-frame is 10. Move to the number.
+    goals:
+    - prompt: A full ten-frame and 3 more
+      target: 13
+      mistakes:
+      - when:
+          v: 3
+        say: Don't forget the full ten-frame. 10 and 3 more.
+    - prompt: A full ten-frame and 7 more
+      target: 17
+      mistakes:
+      - when:
+          v: 7
+        say: 'Count the full frame first: 10, then 11, 12 ... 17.'
+      - when:
+          v: 16
+        say: 'Count the 7 dots again: 11, 12, 13, 14, 15, 16, 17.'
+    - prompt: Two full ten-frames
+      target: 20
+      mistakes:
+      - when:
+          v: 10
+        say: That's one ten-frame. There are two.
   items:
   - prompt: '10 and 3 more make:'
     answer: '13'
@@ -116,6 +145,38 @@ concepts:
     - at: 15
       label: '15'
     alt: '12 and 15 on a number line: 15 is further along, so it is bigger.'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: Find the number.
+    goals:
+    - prompt: One more than 15
+      target: 16
+      mistakes:
+      - when:
+          v: 14
+        say: 'That''s one less. One more moves forward: 15, 16.'
+    - prompt: One less than 11
+      target: 10
+      mistakes:
+      - when:
+          v: 12
+        say: 'That''s one more. One less moves back: 11, 10.'
+    - prompt: The bigger of 12 and 18
+      target: 18
+      mistakes:
+      - when:
+          v: 12
+        say: When we count, 18 comes after 12. Later means bigger.
+    - prompt: The smaller of 19 and 9
+      target: 9
+      mistakes:
+      - when:
+          v: 19
+        say: 19 comes later when counting, so it is bigger. The smaller is the other.
   items:
   - prompt: 'Which is more: 12 or 15?'
     options:

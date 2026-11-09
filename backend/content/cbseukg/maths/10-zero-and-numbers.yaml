@@ -22,6 +22,35 @@ concepts:
       value: 0
     alt: Basket A has 3 balls and basket B has 0.
     unit: balls
+  activity:
+    type: number_line
+    min: 0
+    max: 5
+    step: 1
+    start: 5
+    prompt: How many are left on the plate? Zero means none.
+    goals:
+    - prompt: 🍩🍩 on a plate. Both are eaten.
+      target: 0
+      mistakes:
+      - when:
+          v: 2
+        say: Both were eaten. Is anything left? Nothing left is zero.
+      - when:
+          v: 1
+        say: Both were eaten, not one.
+    - prompt: An empty plate gets 🍩🍩🍩
+      target: 3
+      mistakes:
+      - when:
+          v: 0
+        say: The plate was empty, but now 3 were put on it.
+    - prompt: 🍩🍩🍩🍩 on a plate. 4 are eaten.
+      target: 0
+      mistakes:
+      - when:
+          v: 4
+        say: 4 were eaten. How many are still there? None, which is 0.
   items:
   - prompt: An empty plate has how many laddoos?
     answer: '0'

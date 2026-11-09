@@ -36,6 +36,41 @@ concepts:
     - from: 10
       to: 12
       label: '+2'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: A full ten-frame is 10. Move to the number.
+    goals:
+    - prompt: 🔟 + ⚫⚫ (ten and 2 more)
+      target: 12
+      mistakes:
+      - when:
+          v: 2
+        say: Don't forget the full ten-frame. 10 and 2 more is 12.
+      - when:
+          v: 11
+        say: 'Ten and 1 more is 11. Here there are 2 more: 12.'
+    - prompt: 🔟 + 🔟 (two full ten-frames)
+      target: 20
+      mistakes:
+      - when:
+          v: 10
+        say: 'That''s one ten-frame. There are two: 10, then 20.'
+      - when:
+          v: 2
+        say: Each frame is 10, not 1.
+    - prompt: 🔟 + ⚫⚫⚫⚫⚫ (ten and 5 more)
+      target: 15
+      mistakes:
+      - when:
+          v: 5
+        say: 'Count the full frame too: 10, then 11, 12, 13, 14, 15.'
+      - when:
+          v: 16
+        say: Count the 5 dots one by one after 10.
   items:
   - prompt: '10 and 2 more make:'
     answer: '12'
