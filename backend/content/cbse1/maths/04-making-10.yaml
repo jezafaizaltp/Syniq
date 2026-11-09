@@ -31,6 +31,44 @@ concepts:
     - from: 7
       to: 10
       label: '+3'
+  activity:
+    type: number_line
+    min: 0
+    max: 10
+    step: 1
+    start: 10
+    prompt: 10 fingers. Some are up. How many are down?
+    goals:
+    - prompt: 6 fingers up
+      target: 4
+      mistakes:
+      - when:
+          v: 6
+        say: That's how many are up. How many are folded down? 6 and ? make 10.
+      - when:
+          v: 5
+        say: 'Count on from 6 to 10: 7, 8, 9, 10. That''s 4 jumps.'
+    - prompt: 3 fingers up
+      target: 7
+      mistakes:
+      - when:
+          v: 3
+        say: 'That''s the fingers up. Count the ones folded: 4, 5, 6, 7, 8, 9, 10.'
+      - when:
+          v: 6
+        say: Count on from 3 to 10 slowly. It's 7 jumps.
+    - prompt: 5 fingers up
+      target: 5
+      mistakes:
+      - when:
+          v: 4
+        say: 'One full hand is up. The other hand is down: 5.'
+    - prompt: 10 fingers up
+      target: 0
+      mistakes:
+      - when:
+          v: 10
+        say: 'All 10 are up. How many are down? None: 0.'
   items:
   - prompt: 7 + ? = 10
     answer: '3'
@@ -115,6 +153,35 @@ concepts:
       value: 2
     alt: A ten-frame with 8 filled boxes and 2 empty boxes; 8 and 2 make 10.
     unit: boxes
+  activity:
+    type: number_line
+    min: 0
+    max: 10
+    step: 1
+    start: 0
+    prompt: A ten-frame has 2 rows of 5. Count the counters.
+    goals:
+    - prompt: Top row full, bottom row has 2
+      target: 7
+      mistakes:
+      - when:
+          v: 2
+        say: The full top row is 5. 5 and 2 more.
+      - when:
+          v: 5
+        say: That's just the top row. Add the bottom 2.
+    - prompt: Both rows full
+      target: 10
+      mistakes:
+      - when:
+          v: 5
+        say: That's one row. Two full rows are 5 and 5.
+    - prompt: Top row has 4. Bottom row empty.
+      target: 4
+      mistakes:
+      - when:
+          v: 5
+        say: The top row is not full. One box is empty.
   items:
   - prompt: How many boxes are in a ten-frame?
     answer: '10'

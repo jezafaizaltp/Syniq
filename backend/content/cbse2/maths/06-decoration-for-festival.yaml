@@ -23,6 +23,34 @@ concepts:
     - yellow
     - '?'
     alt: 'A garland pattern: red, yellow, red, yellow, and next comes red.'
+  activity:
+    type: sort
+    prompt: What comes next on the garland?
+    bins:
+    - 🔺
+    - ⚪
+    - 🟥
+    items:
+    - label: 🔺⚪🔺⚪🔺 ...
+      bin: ⚪
+      clue: They take turns.
+      why: Triangle, circle, triangle, circle. Next is a circle.
+    - label: 🟥🟥⚪🟥🟥 ...
+      bin: ⚪
+      clue: Two of one, then one of another.
+      why: Square, square, circle. Next is a circle.
+    - label: 🔺⚪🟥🔺⚪ ...
+      bin: 🟥
+      clue: The part that repeats has three shapes.
+      why: Triangle, circle, square. Next is a square.
+    - label: ⚪🔺🔺⚪🔺🔺⚪ ...
+      bin: 🔺
+      clue: One, then two of another.
+      why: Circle, triangle, triangle. Next a triangle.
+    - label: 🟥⚪⚪🟥⚪⚪ ...
+      bin: 🟥
+      clue: Where does it start again?
+      why: Square, circle, circle. It starts again with a square.
   items:
   - prompt: Red, yellow, red, yellow, ___ ?
     options:
@@ -114,6 +142,38 @@ concepts:
       value: 10
     alt: Two rows of 5 diyas each make 10 diyas together.
     unit: diyas
+  activity:
+    type: number_line
+    min: 0
+    max: 40
+    step: 1
+    start: 0
+    prompt: Count the decorations.
+    goals:
+    - prompt: 3 rows of lamps, 5 lamps in each row
+      target: 15
+      mistakes:
+      - when:
+          v: 8
+        say: 'That adds 3 and 5. Each row has 5: 5 + 5 + 5.'
+      - when:
+          v: 10
+        say: That's two rows. There are three.
+    - prompt: 2 doors, 10 balloons on each
+      target: 20
+      mistakes:
+      - when:
+          v: 12
+        say: 'That adds 2 and 10. Each door has 10: 10 + 10.'
+    - prompt: 4 strings of 6 flowers
+      target: 24
+      mistakes:
+      - when:
+          v: 10
+        say: 'That adds 4 and 6. Add 6 four times: 6, 12, 18, 24.'
+      - when:
+          v: 18
+        say: That's three strings. Add one more 6.
   items:
   - prompt: 2 rows of 5 diyas. How many diyas?
     answer: '10'

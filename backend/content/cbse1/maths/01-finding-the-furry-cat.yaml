@@ -31,6 +31,38 @@ concepts:
       - cat under the table
       - toy inside the box
     alt: 'On: a ball on the table. Under: a cat under the table. Inside: a toy inside the box.'
+  activity:
+    type: sort
+    prompt: Where is the cat?
+    bins:
+    - 'On'
+    - Under
+    - Behind
+    items:
+    - label: 🐱 sits on top of the bed
+      bin: 'On'
+      clue: Is the bed below the cat?
+      why: The bed is below. The cat is on it.
+    - label: 🐱 hides below the table
+      bin: Under
+      clue: Is the table above the cat?
+      why: The table is above. The cat is under it.
+    - label: 🐱 hides at the back of the door
+      bin: Behind
+      clue: Can you see it from the front?
+      why: The door is in front. The cat is behind it.
+    - label: 🐱 sleeps on top of the mat
+      bin: 'On'
+      clue: Is the mat below?
+      why: The cat is on the mat.
+    - label: 🐱 sits below the chair
+      bin: Under
+      clue: What is above the cat?
+      why: The chair is above. The cat is under it.
+    - label: 🐱 hides at the back of the curtain
+      bin: Behind
+      clue: The curtain is in front of it.
+      why: The cat is behind the curtain.
   items:
   - prompt: The cat is below the table. The cat is ___ the table.
     options:
@@ -147,6 +179,38 @@ concepts:
     - from: 4
       to: 5
       label: '+1'
+  activity:
+    type: number_line
+    min: 0
+    max: 9
+    step: 1
+    start: 0
+    prompt: Touch each one and count. The last number tells how many.
+    goals:
+    - prompt: 🐱🐱🐱🐱🐱
+      target: 5
+      mistakes:
+      - when:
+          v: 4
+        say: 'One cat was missed. Touch each cat: 1, 2, 3, 4, 5.'
+      - when:
+          v: 6
+        say: One cat was counted two times. Touch each only once.
+    - prompt: 🐟🐟🐟🐟🐟🐟🐟
+      target: 7
+      mistakes:
+      - when:
+          v: 6
+        say: 'Count slowly to the end: 5, 6, 7.'
+      - when:
+          v: 8
+        say: One fish was counted twice.
+    - prompt: 🧶🧶🧶🧶🧶🧶🧶🧶🧶
+      target: 9
+      mistakes:
+      - when:
+          v: 8
+        say: 'Count the last ball too: 8, 9.'
   items:
   - prompt: 'Count: 🐱🐱🐱. How many cats?'
     answer: '3'

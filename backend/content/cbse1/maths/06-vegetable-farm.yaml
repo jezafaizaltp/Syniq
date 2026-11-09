@@ -31,6 +31,41 @@ concepts:
     - from: 4
       to: 5
       label: '+1'
+  activity:
+    type: number_line
+    min: 0
+    max: 10
+    step: 1
+    start: 0
+    prompt: Put them together. Start at the first number and count on.
+    goals:
+    - prompt: 🥕🥕🥕 and 🥕🥕 more
+      target: 5
+      mistakes:
+      - when:
+          v: 3
+        say: 'Don''t stop at 3. Count on 2 more: 4, 5.'
+      - when:
+          v: 4
+        say: 'Count on 2 jumps, not 1: 4, 5.'
+      - when:
+          v: 6
+        say: 'Start counting on after 3: 4, 5. Don''t count 3 again.'
+    - prompt: 🍅🍅🍅🍅 and 🍅🍅🍅 more
+      target: 7
+      mistakes:
+      - when:
+          v: 1
+        say: 'That takes away. Adding puts together: it gets bigger.'
+      - when:
+          v: 6
+        say: 'Count on 3: 5, 6, 7.'
+    - prompt: 🥔🥔🥔🥔🥔🥔 and 🥔🥔 more
+      target: 8
+      mistakes:
+      - when:
+          v: 4
+        say: 'That takes away. Adding makes more: 7, 8.'
   items:
   - prompt: 3 carrots + 2 carrots = ?
     answer: '5'
@@ -125,6 +160,38 @@ concepts:
     - from: 5
       to: 4
       label: −1
+  activity:
+    type: number_line
+    min: 0
+    max: 10
+    step: 1
+    start: 10
+    prompt: Some go away. Start at the first number and count back.
+    goals:
+    - prompt: 6 potatoes. 2 are cooked.
+      target: 4
+      mistakes:
+      - when:
+          v: 8
+        say: 'That adds. Cooking takes some away: fewer are left.'
+      - when:
+          v: 5
+        say: 'Count back 2 jumps, not 1: 5, 4.'
+    - prompt: 9 carrots. 3 are eaten.
+      target: 6
+      mistakes:
+      - when:
+          v: 7
+        say: 'Count back 3 jumps from 9: 8, 7, 6.'
+      - when:
+          v: 3
+        say: 3 were eaten. How many are still there?
+    - prompt: 5 peas. All 5 roll away.
+      target: 0
+      mistakes:
+      - when:
+          v: 5
+        say: 'All 5 rolled away. Are any left? None: 0.'
   items:
   - prompt: 6 potatoes, 2 are cooked. How many left?
     answer: '4'

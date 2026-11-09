@@ -21,6 +21,18 @@ concepts:
     - 3rd
     - last
     alt: 'A line of four: first, second, third and last.'
+  activity:
+    type: order
+    prompt: Children stand in a line by height, shortest first. Put them in order.
+    steps:
+    - Tinu (the shortest)
+    - Lina (a little taller than Tinu)
+    - Arun (taller than Lina)
+    - Meera (the tallest, last)
+    reasons:
+      Lina (a little taller than Tinu): Lina is taller than Tinu, so she comes after him.
+      Arun (taller than Lina): Arun is taller than Lina, so he stands after her.
+      Meera (the tallest, last): Meera is the tallest, so she comes last.
   items:
   - prompt: Who is at the very front of a line?
     options:
@@ -111,6 +123,35 @@ concepts:
       value: 7
     alt: 'Family sizes: Lina 5, Amar 3, Zoya 7.'
     unit: people
+  activity:
+    type: number_line
+    min: 0
+    max: 10
+    step: 1
+    start: 0
+    prompt: Count the people in the family.
+    goals:
+    - prompt: Mother, father, grandmother, a brother and Lina
+      target: 5
+      mistakes:
+      - when:
+          v: 4
+        say: Did you count Lina herself? She is in the family too.
+      - when:
+          v: 6
+        say: Each person is counted once. Touch each name.
+    - prompt: Grandfather, grandmother, mother, father, two sisters
+      target: 6
+      mistakes:
+      - when:
+          v: 5
+        say: Two sisters means 2 people, not 1.
+    - prompt: Just mother and baby
+      target: 2
+      mistakes:
+      - when:
+          v: 1
+        say: The baby counts too. 1, 2.
   items:
   - prompt: 'Lina''s family: mother, father, grandmother, brother and Lina. How many people?'
     answer: '5'

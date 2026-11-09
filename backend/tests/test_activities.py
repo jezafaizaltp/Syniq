@@ -144,11 +144,13 @@ def _concepts_of(*subjects):
     return [c for _path, p in content_packs.read_packs() if p["subject"] in subjects for c in p["concepts"]]
 
 
-def test_every_cbse_class3_to_8_maths_and_science_topic_has_a_working_activity():
+def test_every_cbse_kg_to_8_maths_and_science_topic_has_a_working_activity():
     for subjects, count in ((("cbse8-math", "cbse8-sci"), 54), (("cbse7-math", "cbse7-sci"), 54), (("cbse5-math", "cbse5-evs"), 50),
-                            (("cbse4-math", "cbse4-evs"), 48), (("cbse3-math", "cbse3-evs"), 40)):
+                            (("cbse4-math", "cbse4-evs"), 48), (("cbse3-math", "cbse3-evs"), 40),
+                            (("cbse2-math",), 22), (("cbse1-math",), 26), (("cbselkg-math", "cbselkg-world"), 14),
+                            (("cbseukg-math", "cbseukg-world"), 16)):
         concepts = _concepts_of(*subjects)
-        assert len(concepts) == count, subjects  # Class 8: 28 + 26; Class 7: 30 + 24; Class 5: 30 + 20 (EVS); Class 4: 28 + 20; Class 3: 28 + 12
+        assert len(concepts) == count, subjects  # Class 8: 28 + 26; 7: 30 + 24; 5: 30 + 20; 4: 28 + 20; 3: 28 + 12; LKG: 8 + 6; UKG: 10 + 6
         for c in concepts:
             assert "activity" in c, c["code"]
             assert check_activity(c["activity"]) == [], c["code"]
@@ -160,7 +162,8 @@ def test_every_activity_coaches_a_wrong_try():
     concepts = (
         _kerala9_concepts() + _cbse9_concepts() + _cbse10_concepts() + _cbse11_concepts() + _cbse12_concepts()
         + _concepts_of("cbse8-math", "cbse8-sci", "cbse7-math", "cbse7-sci", "cbse5-math", "cbse5-evs",
-                       "cbse4-math", "cbse4-evs", "cbse3-math", "cbse3-evs")
+                       "cbse4-math", "cbse4-evs", "cbse3-math", "cbse3-evs", "cbse2-math", "cbse1-math",
+                       "cbselkg-math", "cbselkg-world", "cbseukg-math", "cbseukg-world")
         + [c for p in _class6_packs() for c in p["concepts"]]
     )
     numeric = 0
