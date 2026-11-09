@@ -27,6 +27,45 @@ concepts:
       value: 1000
     alt: A quarter kilogram is 250 grams, half a kilogram 500 grams, and one kilogram 1000 grams.
     unit: g
+  activity:
+    type: sort
+    prompt: Would you weigh it in kilograms or grams?
+    bins:
+    - Kilograms
+    - Grams
+    items:
+    - label: A sack of rice
+      bin: Kilograms
+      clue: Heavy to lift.
+      why: Kilograms.
+    - label: A child
+      bin: Kilograms
+      clue: Too heavy for a kitchen scale.
+      why: Kilograms.
+    - label: A watermelon
+      bin: Kilograms
+      clue: Heavy fruit.
+      why: A few kilograms.
+    - label: A bag of cement
+      bin: Kilograms
+      clue: Very heavy.
+      why: Kilograms.
+    - label: A pencil
+      bin: Grams
+      clue: Very light.
+      why: Grams.
+    - label: An eraser
+      bin: Grams
+      clue: Tiny and light.
+      why: Grams.
+    - label: A letter
+      bin: Grams
+      clue: Just paper.
+      why: Grams.
+    - label: A spoon
+      bin: Grams
+      clue: Light in your hand.
+      why: Grams.
   items:
   - prompt: How many grams are in 1 kg?
     answer: '1000'
@@ -108,6 +147,41 @@ concepts:
     - 1000 ÷ 200 = 5
     - Fills 5 glasses
     alt: A 1 litre bottle of 1000 millilitres fills 5 glasses of 200 millilitres.
+  activity:
+    type: number_line
+    min: 0
+    max: 2000
+    step: 50
+    start: 0
+    prompt: The line is in millilitres (mL). 1 litre = 1000 mL. Mark each amount.
+    goals:
+    - prompt: 1 litre
+      target: 1000
+      mistakes:
+      - when:
+          v: 100
+        say: 1 litre is 1000 mL, not 100.
+      - when:
+          v: 2000
+        say: That's 2 litres.
+    - prompt: Half a litre
+      target: 500
+      mistakes:
+      - when:
+          v: 50
+        say: Half of 1000 mL is 500 mL.
+      - when:
+          v: 1000
+        say: That's a whole litre.
+    - prompt: 1 litre 500 mL
+      target: 1500
+      mistakes:
+      - when:
+          v: 1050
+        say: That's 1 L 50 mL. Here it's 500 mL more.
+      - when:
+          v: 500
+        say: 'Don''t forget the 1 litre: that''s 1000 mL.'
   items:
   - prompt: How many mL are in 1 litre?
     answer: '1000'

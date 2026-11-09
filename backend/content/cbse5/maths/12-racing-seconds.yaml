@@ -31,54 +31,45 @@ concepts:
     alt: 'Times for a 100 metre race: Anu 14 seconds, Ravi 12, Sara 15, Joseph 13. Ravi is fastest with the smallest time.'
     unit: s
   activity:
-    type: formula
-    prompt: Set the time in minutes.
-    inputs:
-    - name: m
-      label: Minutes
-      min: 0
-      max: 300
-      step: 5
-      start: 0
-    outputs:
-    - name: h
-      label: In hours
-      expr: m/60
-      places: 2
-    - name: sec
-      label: In seconds
-      expr: 60*m
-    goals:
-    - prompt: 2 hours 15 minutes
-      want:
-        m: 135
-      mistakes:
-      - when:
-          m: 215
-        say: 2 hours is 120 minutes, not 200. An hour has 60 minutes.
-      - when:
-          m: 35
-        say: That's only the 15 minutes plus 20. Each hour is 60 minutes.
-    - prompt: A quarter of an hour
-      want:
-        m: 15
-      mistakes:
-      - when:
-          m: 25
-        say: A quarter of 60 is 15.
-      - when:
-          m: 30
-        say: That's half an hour.
-    - prompt: One and a half hours
-      want:
-        m: 90
-      mistakes:
-      - when:
-          m: 150
-        say: 1.5 hours isn't 150 minutes. One hour is 60, half an hour is 30.
-      - when:
-          m: 60
-        say: That's one hour. Add the half.
+    type: sort
+    prompt: How long is each one? An hour is 60 minutes.
+    bins:
+    - 15 minutes
+    - 90 minutes
+    - 135 minutes
+    items:
+    - label: A quarter of an hour
+      bin: 15 minutes
+      clue: Split 60 into 4 equal parts.
+      why: 60 ÷ 4 = 15.
+    - label: 900 seconds
+      bin: 15 minutes
+      clue: 60 seconds make a minute.
+      why: 900 ÷ 60 = 15.
+    - label: Half of half an hour
+      bin: 15 minutes
+      clue: Half an hour is 30 minutes.
+      why: Half of 30 is 15.
+    - label: One and a half hours
+      bin: 90 minutes
+      clue: One hour, plus half of 60.
+      why: 60 + 30 = 90. Not 150!
+    - label: 1 hour 30 minutes
+      bin: 90 minutes
+      clue: Turn the hour into minutes first.
+      why: 60 + 30.
+    - label: Three half-hours
+      bin: 90 minutes
+      clue: 30, three times.
+      why: '90.'
+    - label: 2 hours 15 minutes
+      bin: 135 minutes
+      clue: 2 hours is 120 minutes, not 200.
+      why: 120 + 15.
+    - label: Two and a quarter hours
+      bin: 135 minutes
+      clue: Two hours, then a quarter of 60.
+      why: 120 + 15.
   items:
   - prompt: How many seconds are in 3 minutes?
     answer: '180'

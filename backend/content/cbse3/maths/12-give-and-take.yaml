@@ -25,6 +25,56 @@ concepts:
       value: 8
     alt: A ₹5 pencil and a ₹3 eraser cost ₹8 in all.
     unit: ₹
+  activity:
+    type: formula
+    prompt: Make ₹ amounts with ₹10 notes and ₹5 coins.
+    inputs:
+    - name: t
+      label: ₹10 notes
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    - name: f
+      label: ₹5 coins
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: tot
+      label: Total
+      expr: 10*t+5*f
+      unit: ₹
+    goals:
+    - prompt: Make ₹20 using one ₹10 note.
+      want:
+        t: 1
+        tot: 20
+      mistakes:
+      - when:
+          t: 1
+          f: 10
+        say: 'That''s ₹60. Each coin is ₹5: two of them make ₹10.'
+    - prompt: Make ₹35.
+      want:
+        tot: 35
+      mistakes:
+      - when:
+          tot: 30
+        say: Close. ₹5 more.
+      - when:
+          tot: 40
+        say: ₹5 too much.
+    - prompt: Make ₹50 using only ₹5 coins.
+      want:
+        t: 0
+        tot: 50
+      mistakes:
+      - when:
+          t: 0
+          f: 5
+        say: 5 coins of ₹5 is ₹25. Count in 5s to 50.
   items:
   - prompt: A pencil costs ₹5 and an eraser ₹3. Total cost in ₹?
     answer: '8'
@@ -109,6 +159,44 @@ concepts:
     - from: 12
       to: 20
       label: change ₹8
+  activity:
+    type: formula
+    prompt: You pay with a ₹50 note. Set the price.
+    inputs:
+    - name: x
+      label: Price
+      min: 0
+      max: 50
+      step: 1
+      start: 0
+      unit: ₹
+    outputs:
+    - name: chg
+      label: Change
+      expr: 50-x
+      unit: ₹
+    goals:
+    - prompt: You get ₹15 change. What did it cost?
+      want:
+        chg: 15
+      mistakes:
+      - when:
+          x: 15
+        say: ₹15 is the change. The price is 50 − 15.
+    - prompt: A toy costs ₹32. Set the price and read the change.
+      want:
+        x: 32
+      mistakes:
+      - when:
+          x: 18
+        say: ₹18 is the change. Set the price, ₹32.
+    - prompt: You get ₹8 change.
+      want:
+        chg: 8
+      mistakes:
+      - when:
+          x: 8
+        say: ₹8 came back to you. The price is 50 − 8.
   items:
   - prompt: You pay ₹20 for a ₹12 toy. Change in ₹?
     answer: '8'

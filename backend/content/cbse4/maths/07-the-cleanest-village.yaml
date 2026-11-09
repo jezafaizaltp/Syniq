@@ -25,6 +25,41 @@ concepts:
     - Add or subtract?
     - Solve and check
     alt: 'Solving a word problem: read the story, find the key words, decide to add or subtract, then solve and check.'
+  activity:
+    type: sort
+    prompt: Do you add or take away to solve it?
+    bins:
+    - Add
+    - Subtract
+    items:
+    - label: 12 boys and 9 girls. How many children in all?
+      bin: Add
+      clue: '''In all'' puts the groups together.'
+      why: 12 + 9.
+    - label: Ravi has 15 shells and finds 8 more. How many altogether?
+      bin: Add
+      clue: Is the number growing?
+      why: 15 + 8.
+    - label: A bus has 30 people; 6 more get on. How many now?
+      bin: Add
+      clue: More people come.
+      why: 30 + 6.
+    - label: Meena had 20 sweets and ate 5. How many are left?
+      bin: Subtract
+      clue: '''Left'' means some went away.'
+      why: 20 − 5.
+    - label: A box has 40 pencils; 15 are used. How many remain?
+      bin: Subtract
+      clue: Some are gone.
+      why: 40 − 15.
+    - label: Asha is 12, her brother 8. How many more years is Asha?
+      bin: Subtract
+      clue: '''How many more'' compares two numbers.'
+      why: 12 − 8.
+    - label: Find the difference between 50 and 35
+      bin: Subtract
+      clue: Difference compares.
+      why: 50 − 35.
   items:
   - prompt: A village collected 1,245 kg of dry waste and 868 kg of wet waste. How many kg in all?
     answer: '2113'
@@ -103,6 +138,47 @@ concepts:
       value: 35
     alt: Paying 100 rupees for something costing 65 gives 35 rupees change.
     unit: ₹
+  activity:
+    type: formula
+    prompt: You pay with a ₹100 note. Set the price.
+    inputs:
+    - name: x
+      label: Price
+      min: 0
+      max: 100
+      step: 5
+      start: 0
+      unit: ₹
+    outputs:
+    - name: chg
+      label: Change
+      expr: 100-x
+      unit: ₹
+    goals:
+    - prompt: You get ₹35 change. What did it cost?
+      want:
+        chg: 35
+      mistakes:
+      - when:
+          x: 35
+        say: ₹35 is the change. The price is what you paid minus the change.
+    - prompt: You get ₹20 change.
+      want:
+        chg: 20
+      mistakes:
+      - when:
+          x: 20
+        say: ₹20 came back to you. The price is 100 − 20.
+    - prompt: You buy two toys at ₹25 each. Set the total price.
+      want:
+        x: 50
+      mistakes:
+      - when:
+          x: 25
+        say: That's one toy. There are two.
+      - when:
+          x: 75
+        say: That's three toys.
   items:
   - prompt: How many paise are in ₹1?
     answer: '100'

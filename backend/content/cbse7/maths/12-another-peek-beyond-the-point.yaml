@@ -28,50 +28,49 @@ concepts:
     - 'Check: about 1 × 0.3 = 0.3'
     alt: 'Multiplying 1.2 by 0.3: multiply 12 by 3 to get 36, count two decimal places, and get 0.36.'
   activity:
-    type: formula
-    prompt: Set your answer x.
-    inputs:
-    - name: x
-      label: Your answer x
-      min: 0
-      max: 4
-      step: 0.01
-      start: 1
-    outputs:
-    - name: hund
-      label: x in hundredths
-      expr: x*100
-    goals:
-    - prompt: 1.2 × 0.3
-      want:
-        x: 0.36
-      mistakes:
-      - when:
-          x: 3.6
-        say: 12 × 3 = 36. The two numbers have 2 decimal places between them, so 0.36.
-      - when:
-          x: 1.5
-        say: 'That adds them. Multiply: 12 × 3 = 36.'
-    - prompt: 0.5 × 0.4
-      want:
-        x: 0.2
-      mistakes:
-      - when:
-          x: 2
-        say: '5 × 4 = 20, then 2 decimal places: 0.20.'
-      - when:
-          x: 0.02
-        say: 20 with 2 decimal places is 0.20, not 0.02.
-    - prompt: 2.5 × 1.2
-      want:
-        x: 3
-      mistakes:
-      - when:
-          x: 0.3
-        say: '25 × 12 = 300. Two decimal places: 3.00.'
-      - when:
-          x: 0.03
-        say: 300 with 2 decimal places is 3.00.
+    type: sort
+    prompt: Multiply the decimals. Which answer does each one make?
+    bins:
+    - '0.2'
+    - '0.36'
+    - '3'
+    items:
+    - label: 0.5 × 0.4
+      bin: '0.2'
+      clue: 5 × 4 = 20, then count decimal places.
+      why: 'Two places: 0.20.'
+    - label: 0.1 × 2
+      bin: '0.2'
+      clue: A tenth, twice.
+      why: 0.2.
+    - label: 0.25 × 0.8
+      bin: '0.2'
+      clue: 25 × 8 = 200; three decimal places.
+      why: 0.200.
+    - label: 1.2 × 0.3
+      bin: '0.36'
+      clue: 12 × 3 = 36; how many decimal places in all?
+      why: 'Two: 0.36.'
+    - label: 0.6 × 0.6
+      bin: '0.36'
+      clue: 6 × 6, then two places.
+      why: 0.36.
+    - label: 0.9 × 0.4
+      bin: '0.36'
+      clue: 9 × 4, then two places.
+      why: 0.36.
+    - label: 2.5 × 1.2
+      bin: '3'
+      clue: 25 × 12 = 300; two places.
+      why: 3.00.
+    - label: 1.5 × 2
+      bin: '3'
+      clue: One decimal place in all.
+      why: 3.0.
+    - label: 0.6 × 5
+      bin: '3'
+      clue: 6 × 5 = 30; one place.
+      why: 3.0.
   items:
   - prompt: Find 2.35 × 100.
     answer: '235'
@@ -149,50 +148,49 @@ concepts:
     - 'Check: 0.6 × 8 = 4.8'
     alt: 'Dividing 4.8 by 0.6: multiply both by 10 to get 48 ÷ 6, which is 8.'
   activity:
-    type: formula
-    prompt: Set your answer x.
-    inputs:
-    - name: x
-      label: Your answer x
-      min: 0
-      max: 100
-      step: 0.1
-      start: 1
-    outputs:
-    - name: tenths
-      label: x in tenths
-      expr: x*10
-    goals:
-    - prompt: 4.8 ÷ 0.6
-      want:
-        x: 8
-      mistakes:
-      - when:
-          x: 0.8
-        say: 'Move both points one place: 48 ÷ 6 = 8.'
-      - when:
-          x: 80
-        say: 'Move both points the same number of places: 48 ÷ 6.'
-    - prompt: 2.4 ÷ 0.04
-      want:
-        x: 60
-      mistakes:
-      - when:
-          x: 6
-        say: 'Move both points two places: 240 ÷ 4.'
-      - when:
-          x: 0.6
-        say: Dividing by a small number gives a big answer. 240 ÷ 4.
-    - prompt: 1.5 ÷ 0.5
-      want:
-        x: 3
-      mistakes:
-      - when:
-          x: 0.3
-        say: How many halves fit in 1.5? 15 ÷ 5.
-      - when:
-          x: 30
-        say: 'Both points move one place: 15 ÷ 5.'
+    type: sort
+    prompt: Divide. Move both points first. Which answer does each one make?
+    bins:
+    - '3'
+    - '8'
+    - '60'
+    items:
+    - label: 1.5 ÷ 0.5
+      bin: '3'
+      clue: 'Move both points one place: 15 ÷ 5.'
+      why: '3.'
+    - label: 0.9 ÷ 0.3
+      bin: '3'
+      clue: 9 ÷ 3.
+      why: '3.'
+    - label: 2.4 ÷ 0.8
+      bin: '3'
+      clue: 24 ÷ 8.
+      why: '3.'
+    - label: 4.8 ÷ 0.6
+      bin: '8'
+      clue: 48 ÷ 6.
+      why: '8.'
+    - label: 0.8 ÷ 0.1
+      bin: '8'
+      clue: How many tenths in 0.8?
+      why: '8.'
+    - label: 5.6 ÷ 0.7
+      bin: '8'
+      clue: 56 ÷ 7.
+      why: '8.'
+    - label: 2.4 ÷ 0.04
+      bin: '60'
+      clue: 'Move both points two places: 240 ÷ 4.'
+      why: '60.'
+    - label: 3.6 ÷ 0.06
+      bin: '60'
+      clue: 'Two places: 360 ÷ 6.'
+      why: '60.'
+    - label: 1.2 ÷ 0.02
+      bin: '60'
+      clue: 'Two places: 120 ÷ 2.'
+      why: '60.'
   items:
   - prompt: Find 45.6 ÷ 100.
     answer: '0.456'

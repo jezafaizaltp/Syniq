@@ -26,6 +26,56 @@ concepts:
       value: 2
     alt: There are 4 pottery stalls, 6 bangle stalls and 2 toy stalls.
     unit: stalls
+  activity:
+    type: formula
+    prompt: A picture graph. Each picture stands for k children.
+    inputs:
+    - name: k
+      label: Children per picture
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: p
+      label: Pictures
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+    outputs:
+    - name: tot
+      label: Children shown
+      expr: k*p
+    goals:
+    - prompt: Each picture = 2 children. Show 10 children.
+      want:
+        k: 2
+        tot: 10
+      mistakes:
+      - when:
+          k: 2
+          p: 10
+        say: 10 pictures show 20 children. Each picture is 2.
+    - prompt: Each picture = 5 children. Show 20 children.
+      want:
+        k: 5
+        tot: 20
+      mistakes:
+      - when:
+          k: 5
+          p: 20
+        say: 20 pictures show 100! Each picture is 5.
+    - prompt: Each picture = 1 child. Show 7 children.
+      want:
+        k: 1
+        tot: 7
+      mistakes:
+      - when:
+          k: 1
+          p:
+          - 8
+          - 20
+        say: Too many pictures. One picture for each child.
   items:
   - prompt: Pottery 4, Bangles 6, Toys 2 stalls. Which has the most stalls?
     options:
@@ -117,6 +167,52 @@ concepts:
       - subtract
       - multiply
     alt: For a total cost, add; for money left, subtract; for many of the same, multiply.
+  activity:
+    type: formula
+    prompt: At the fair, balloons cost ₹6 each. Set how many you buy.
+    inputs:
+    - name: n
+      label: Balloons
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: cost
+      label: Cost
+      expr: 6*n
+      unit: ₹
+    - name: chg
+      label: Change from ₹50
+      expr: 50-6*n
+      unit: ₹
+    goals:
+    - prompt: Spend ₹30.
+      want:
+        cost: 30
+      mistakes:
+      - when:
+          n: 6
+        say: 6 balloons cost ₹36. 30 is 5 sixes.
+    - prompt: Buy as many as you can with ₹50.
+      want:
+        n: 8
+      mistakes:
+      - when:
+          n: 9
+        say: '9 balloons cost ₹54: more than ₹50.'
+      - when:
+          n:
+          - 1
+          - 7
+        say: You can still buy one more.
+    - prompt: Get ₹26 change.
+      want:
+        chg: 26
+      mistakes:
+      - when:
+          n: 5
+        say: 5 balloons cost ₹30, leaving ₹20. You spent 50 − 26 = 24.
   items:
   - prompt: A clay pot costs ₹30 and a whistle ₹10. Total in ₹?
     answer: '40'

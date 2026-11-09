@@ -44,6 +44,56 @@ concepts:
     - from: 15
       to: 20
       label: '5'
+  activity:
+    type: formula
+    prompt: Laddoos on plates. Set the plates and the laddoos on each.
+    inputs:
+    - name: p
+      label: Plates
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: l
+      label: Laddoos on each plate
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+    outputs:
+    - name: tot
+      label: Laddoos in all
+      expr: p*l
+    goals:
+    - prompt: 20 laddoos on 4 plates, the same on each.
+      want:
+        p: 4
+        tot: 20
+      mistakes:
+      - when:
+          p: 4
+          l: 16
+        say: 4 + 16 = 20 adds. 4 plates with the same number each is 4 × that number.
+    - prompt: 24 laddoos on 6 plates.
+      want:
+        p: 6
+        tot: 24
+      mistakes:
+      - when:
+          p: 6
+          l: 18
+        say: 6 + 18 adds. 6 plates of how many make 24?
+    - prompt: 30 laddoos on 5 plates.
+      want:
+        p: 5
+        tot: 30
+      mistakes:
+      - when:
+          p: 5
+          l:
+          - 7
+          - 20
+        say: 'Too many: 5 × 7 = 35.'
   items:
   - prompt: 4 plates have 5 laddoos each. How many laddoos?
     answer: '20'
@@ -120,6 +170,38 @@ concepts:
       value: 6
     alt: 24 students split into 4 equal teams gives 6 students in each team.
     unit: students
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: Share or group equally. Mark the answer.
+    goals:
+    - prompt: 20 sweets for 4 children. How many does each get?
+      target: 5
+      mistakes:
+      - when:
+          v: 16
+        say: '20 − 4 takes away. Share: 4 × ? = 20.'
+      - when:
+          v: 4
+        say: 4 is the number of children.
+    - prompt: 18 pencils in boxes of 3. How many boxes?
+      target: 6
+      mistakes:
+      - when:
+          v: 15
+        say: 18 − 3 takes away once. How many 3s make 18?
+      - when:
+          v: 3
+        say: 3 is how many go in each box.
+    - prompt: 35 marbles shared by 5 friends. How many each?
+      target: 7
+      mistakes:
+      - when:
+          v: 5
+        say: 5 is the number of friends. 5 × ? = 35.
   items:
   - prompt: 20 sweets are shared among 4 children. How many each?
     answer: '5'

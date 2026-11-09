@@ -33,6 +33,69 @@ concepts:
       - 5 → 50
       - 2 → 2
     alt: In 3,452 the 3 is worth 3000, the 4 is worth 400, the 5 is worth 50 and the 2 is worth 2.
+  activity:
+    type: formula
+    prompt: Build a number from thousands, hundreds, tens and ones.
+    inputs:
+    - name: th
+      label: Thousands
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: h
+      label: Hundreds
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: te
+      label: Tens
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: o
+      label: Ones
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: 1000*th+100*h+10*te+o
+    goals:
+    - prompt: Make 3,056.
+      want:
+        val: 3056
+      mistakes:
+      - when:
+          th: 3
+          h: 5
+          te: 6
+          o: 0
+        say: That's 3,560. There are 0 hundreds in 3,056.
+    - prompt: Make 7,400.
+      want:
+        val: 7400
+      mistakes:
+      - when:
+          th: 7
+          h: 0
+          te: 4
+          o: 0
+        say: That's 7,040. The 4 is in the hundreds place.
+    - prompt: Make the smallest number from the digits 4, 1, 7 and 3.
+      want:
+        val: 1347
+      mistakes:
+      - when:
+          val: 7431
+        say: That's the biggest. Put the smallest digit first.
+      - when:
+          val: 1374
+        say: Close! Put 4 before 7.
   items:
   - prompt: What is the value of 4 in 3,452?
     answer: '400'
@@ -111,6 +174,50 @@ concepts:
     - 'Hundreds: 3 + 2 + 1 = 6'
     - 'Thousands: 2 + 1 = 3 → 3,623'
     alt: Adding 2,345 and 1,278 place by place with carrying gives 3,623.
+  activity:
+    type: sort
+    prompt: Add or take away. Which answer does each one make?
+    bins:
+    - '635'
+    - '1635'
+    - '2635'
+    items:
+    - label: 3000 − 2365
+      bin: '635'
+      clue: '0 − 5: borrow, all the way from the thousands.'
+      why: '635. Check: 635 + 2365 = 3000.'
+    - label: 500 + 135
+      bin: '635'
+      clue: Hundreds, tens, ones.
+      why: '635.'
+    - label: 1000 − 365
+      bin: '635'
+      clue: Borrow across the zeros.
+      why: '635.'
+    - label: 4000 − 2365
+      bin: '1635'
+      clue: Borrowing turns the zeros into 9s.
+      why: 1635. Check by adding.
+    - label: 1000 + 635
+      bin: '1635'
+      clue: One thousand more.
+      why: '1635.'
+    - label: 1700 − 65
+      bin: '1635'
+      clue: Take 65 away from 1700.
+      why: '1635.'
+    - label: 5000 − 2365
+      bin: '2635'
+      clue: 'Borrow across the zeros: 4 thousands, 9 hundreds, 9 tens, 10 ones.'
+      why: '2635.'
+    - label: 2000 + 635
+      bin: '2635'
+      clue: Two thousands and 635.
+      why: '2635.'
+    - label: 1365 + 1270
+      bin: '2635'
+      clue: 5 + 0, 6 + 7 (carry), 3 + 2 + 1, 1 + 1.
+      why: '2635.'
   items:
   - prompt: What is 2,345 + 1,278?
     answer: '3623'

@@ -33,6 +33,38 @@ concepts:
     - from: 100
       to: 200
       label: '+100'
+  activity:
+    type: number_line
+    min: 0
+    max: 200
+    step: 10
+    start: 0
+    prompt: Count in tens. Mark the number.
+    goals:
+    - prompt: 10 tens
+      target: 100
+      mistakes:
+      - when:
+          v: 10
+        say: That's 1 ten. 10 tens make a hundred.
+      - when:
+          v: 200
+        say: That's 20 tens.
+    - prompt: A century and 5 tens more
+      target: 150
+      mistakes:
+      - when:
+          v: 200
+        say: That's two centuries. 5 tens is 50 more than 100.
+      - when:
+          v: 50
+        say: 'Don''t forget the century: 100 runs.'
+    - prompt: A double century
+      target: 200
+      mistakes:
+      - when:
+          v: 100
+        say: That's one century. Double means two hundreds.
   items:
   - prompt: '10 tens make:'
     answer: '100'
@@ -125,6 +157,50 @@ concepts:
     - from: 140
       to: 150
       label: '+10'
+  activity:
+    type: sort
+    prompt: Add or take away tens. Which answer does each one make?
+    bins:
+    - '110'
+    - '150'
+    - '190'
+    items:
+    - label: 120 + 30
+      bin: '150'
+      clue: 'Count on in tens from 120: 130, …'
+      why: 12 tens and 3 tens make 15 tens.
+    - label: 80 + 70
+      bin: '150'
+      clue: 8 tens and 7 tens.
+      why: 15 tens.
+    - label: 100 + 50
+      bin: '150'
+      clue: A century and 5 tens.
+      why: '150.'
+    - label: 150 − 40
+      bin: '110'
+      clue: Count back in tens from 150.
+      why: 15 tens take away 4 tens leaves 11 tens.
+    - label: 90 + 20
+      bin: '110'
+      clue: 9 tens and 2 tens.
+      why: 11 tens.
+    - label: 140 − 30
+      bin: '110'
+      clue: Count back 3 tens.
+      why: 11 tens.
+    - label: 160 + 30
+      bin: '190'
+      clue: Count on 3 tens from 160.
+      why: 19 tens.
+    - label: 200 − 10
+      bin: '190'
+      clue: One ten back from 200.
+      why: 19 tens.
+    - label: 100 + 90
+      bin: '190'
+      clue: A hundred and 9 tens.
+      why: '190.'
   items:
   - prompt: 120 + 30 = ?
     answer: '150'
