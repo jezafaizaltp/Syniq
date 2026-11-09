@@ -9,6 +9,13 @@ tips:
   kwh_unit: 1 kWh = 1 unit of electricity = 1000 W for 1 hour = 3.6 × 10⁶ J.
   ma_inverted: Mechanical advantage = load ÷ effort. If a machine lets a small effort lift a big load, the MA is more than 1.
   machine_saves_work: 'A machine can reduce the force needed, but you then move it a longer distance: it never reduces the work.'
+  fixed_pulley: "With a single fixed pulley you pull down to lift up. Is the force you need any smaller than the load?"
+  lever_class_two: "In a nutcracker the hinge is at one end and you squeeze the handles at the other end. Where does the nut sit?"
+  lever_moments: "Load × its distance = effort × its distance. Find the load's turning effect, then divide by the effort's distance."
+  power_mgh_time: "First find the work done climbing (mass × g × height), then divide by the time."
+  ramp_ma: "Ideal mechanical advantage of a ramp = length ÷ height. Divide, don't multiply."
+  units_kwh: "One unit = 1 kWh. Multiply the power in kW by the hours."
+  work_force_distance: "Work = force × distance moved in the direction of the force. Multiply, don't add."
 concepts:
 - code: cbse9ex.energy.work
   title: Work, kinetic and potential energy
@@ -93,6 +100,7 @@ concepts:
     - W = F × s.
     - 10 × 5.
     solution: W = 10 × 5 = 50 J.
+    mistakes: {"15": "work_force_distance", "2": "work_force_distance"}
   - prompt: A person pushes hard on a wall, but it doesn't move. How much work is done, in J?
     answer: '0'
     check: '0'
@@ -122,6 +130,7 @@ concepts:
     - PE = mgh.
     - 5 × 10 × 4.
     solution: PE = 5 × 10 × 4 = 200 J.
+    mistakes: {"20": "pe_mgh", "19": "pe_mgh"}
   - prompt: A car's speed doubles. Its kinetic energy becomes how many times bigger?
     answer: '4'
     check: 2^2
@@ -281,6 +290,7 @@ concepts:
     - kWh = kW × h.
     - 2 × 3.
     solution: 2 × 3 = 6 kWh.
+    mistakes: {"6000": "kw_to_w", "5": "units_kwh"}
   - prompt: A girl of mass 40 kg climbs 5 m of stairs in 10 s (g = 10 m/s²). Find her power, in W.
     answer: '200'
     check: 40*10*5/10
@@ -289,6 +299,7 @@ concepts:
     - Work = mgh.
     - 2000 J ÷ 10 s.
     solution: 'Step 1: W = 40 × 10 × 5 = 2000 J. Step 2: P = 2000 ÷ 10 = 200 W.'
+    mistakes: {"2000": "power_per_time", "20": "power_mgh_time"}
   - prompt: Four 60 W fans run for 5 hours a day. How many units are used per day?
     answer: '1.2'
     check: 4*60/1000*5
@@ -408,6 +419,7 @@ concepts:
     - The hinge is the fulcrum.
     - You squeeze at the ends.
     solution: 'Step 1: Fulcrum at the hinge, effort at the handles. Step 2: The nut sits between them: a class 2 lever.'
+    mistakes: {"At the fulcrum": "lever_class_two", "Beyond the effort": "lever_class_two"}
   - prompt: A lever has a 900 N load 0.5 m from the fulcrum. What effort, 1.5 m from the fulcrum, balances it, in N?
     answer: '300'
     check: 900*0.5/1.5
@@ -416,6 +428,7 @@ concepts:
     - Load × load arm = effort × effort arm.
     - 900 × 0.5 = effort × 1.5.
     solution: 'Step 1: 900 × 0.5 = 450. Step 2: 450 ÷ 1.5 = 300 N.'
+    mistakes: {"2700": "lever_moments", "450": "lever_moments"}
   - prompt: What does a single fixed pulley do?
     options:
     - Changes the direction of the force, MA = 1
@@ -428,6 +441,7 @@ concepts:
     - Pulling down to lift up.
     - The effort equals the load.
     solution: 'Step 1: You pull down and the load goes up. Step 2: The force needed is the same as the load, so MA = 1.'
+    mistakes: {"Halves the effort": "fixed_pulley", "Removes friction": "fixed_pulley"}
   - prompt: A ramp is 6 m long and 1.5 m high. What is its ideal mechanical advantage?
     answer: '4'
     check: 6/1.5
@@ -436,6 +450,7 @@ concepts:
     - Ideal MA = length ÷ height.
     - 6 ÷ 1.5.
     solution: 'Step 1: MA = 6 ÷ 1.5 = 4. Step 2: You push with a quarter of the weight, over 4 times the distance.'
+    mistakes: {"9": "ramp_ma", "0.25": "ma_inverted"}
   - prompt: A student says a lever with MA = 4 gives four times as much work. Why is this wrong?
     options:
     - Effort moves 4 times as far, so work out is at most work in

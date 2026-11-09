@@ -9,6 +9,11 @@ tips:
   distance_forgot_root: 'After adding the squares, take the square root: the distance is √(dx² + dy²), not dx² + dy².'
   distance_added_sides: The straight-line distance is the slanted side of the right triangle, so use Pythagoras, not dx + dy.
   midpoint_subtracted: 'The midpoint is the average: add the two x-values and halve, then add the two y-values and halve.'
+  collinear_by_sum: "Points are on one line when the two short distances add up exactly to the long one. Check AB + BC against AC."
+  diagonals_share_midpoint: "Both diagonals of a parallelogram have the same midpoint. Find it from A and C, then work out what D must be so B and D share it."
+  midpoint_no_halve: "Adding the coordinates is only half the job. Divide each sum by 2 to land in the middle."
+  origin_zero: "The origin is where the two axes cross. On the x-axis y is 0, and on the y-axis x is 0, so at the crossing both are 0."
+  vertical_distance: "When both points have the same x, they sit on one vertical line. The distance is just the gap between the y-values."
 concepts:
 - code: cbse9gm.coord.plane
   title: The Cartesian plane
@@ -129,6 +134,7 @@ concepts:
     - The origin is where the axes cross.
     - Both axes are at 0 there.
     solution: The axes cross where x = 0 and y = 0, so the origin is (0, 0).
+    mistakes: {"(1, 1)": "origin_zero", "(0, 1)": "origin_zero"}
   - prompt: Where does the point (0, −6) lie?
     options:
     - On the y-axis
@@ -474,6 +480,7 @@ concepts:
     - Both points have x = 2.
     - They are on the same vertical line.
     solution: 'Step 1: The x-values are equal, so the points are on a vertical line. Step 2: Distance = 10 − 3 = 7.'
+    mistakes: {"13": "vertical_distance", "49": "distance_forgot_root"}
   - prompt: Find the distance between (1, 2) and (4, 6).
     answer: '5'
     check: sqrt((4-1)^2 + (6-2)^2)
@@ -503,6 +510,7 @@ concepts:
     - dx = 2 − (−1) = 3.
     - dy = 2 − (−2) = 4.
     solution: 'Step 1: dx = 3, dy = 4. Step 2: √(9 + 16) = √25 = 5.'
+    mistakes: {"7": "distance_added_sides", "25": "distance_forgot_root"}
   - prompt: Are A(0, 0), B(3, 4) and C(6, 8) on one straight line? (AB = 5, BC = 5, AC = 10)
     options:
     - Yes, because AB + BC = AC
@@ -515,6 +523,7 @@ concepts:
     - If B is on the straight path from A to C, going via B is no longer.
     - 5 + 5 = 10.
     solution: 'Step 1: AB + BC = 5 + 5 = 10 = AC. Step 2: Going via B is no longer than going straight, so B lies on segment AC: the points are collinear.'
+    mistakes: {"No, because AB = BC": "collinear_by_sum", "Can't tell from distances": "collinear_by_sum"}
 - code: cbse9gm.coord.midpoint
   title: The midpoint of a segment
   after:
@@ -629,6 +638,7 @@ concepts:
     - Halve each coordinate.
     - x first, then y.
     solution: 'Step 1: (0 + 6)/2 = 3. Step 2: (0 + 4)/2 = 2. Midpoint (3, 2).'
+    mistakes: {"(6, 4)": "midpoint_no_halve", "(12, 8)": "midpoint_no_halve"}
   - prompt: Find the y-coordinate of the midpoint of (−3, 7) and (5, −1).
     answer: '3'
     check: (7 + (-1))/2
@@ -661,6 +671,7 @@ concepts:
     - The centre is the midpoint of a diameter.
     - (−2 + 6)/2.
     solution: 'Step 1: The centre is the midpoint of the diameter. Step 2: ((−2 + 6)/2, (3 + 3)/2) = (2, 3).'
+    mistakes: {"(4, 3)": "midpoint_subtracted", "(8, 6)": "midpoint_no_halve"}
   - prompt: The diagonals of a parallelogram bisect each other. Three corners are A(0, 0), B(4, 0) and C(6, 3), with D opposite B. Find the x-coordinate of D.
     answer: '2'
     check: 0 + 6 - 4
@@ -669,3 +680,4 @@ concepts:
     - Midpoint of AC = midpoint of BD.
     - Midpoint of AC is (3, 1.5).
     solution: 'Step 1: Midpoint of AC = (3, 1.5). Step 2: It is also the midpoint of BD, so (4 + x)/2 = 3, x = 2. (D = (2, 3).)'
+    mistakes: {"6": "diagonals_share_midpoint", "10": "diagonals_share_midpoint"}

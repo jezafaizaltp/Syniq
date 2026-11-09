@@ -8,6 +8,14 @@ tips:
   square_missing_middle: '(a + b)² has a middle term 2ab: (a + b)² = a² + 2ab + b², not a² + b².'
   cube_missing_terms: (a + b)³ = a³ + b³ + 3ab(a + b). Don't drop the 3ab(a + b) part.
   cancel_terms_not_factors: You can only cancel a factor that multiplies the whole top and the whole bottom. Factorise first, then cancel.
+  a2_minus_b2_factor: "Write each part as a square: 9x² = (3x)², 25 = 5². Then a² − b² = (a + b)(a − b)."
+  cancel_after_factor: "Factorise the top first. Only a whole bracket that appears top and bottom can cancel."
+  cube_identity: "Write 99 as 100 − 1 and use (a − b)³ = a³ − b³ − 3ab(a − b). Keep every term."
+  cubes_sum_zero: "When a + b + c = 0, a³ + b³ + c³ = 3abc. Check that the three numbers add to 0, then multiply."
+  diff_of_squares: "Write the two numbers as (a + b) and (a − b) around a round number a, then use a² − b²."
+  factor_pair_signs: "Find two numbers that multiply to the last number and add to the middle number. Watch the signs: both must be negative to give + and −."
+  factor_theorem_try: "Try small values: if p(1) = 0 then (x − 1) is a factor. Divide it out, then factorise the quadratic left over."
+  square_of_sum: "(100 + 5)² = 100² + 2 × 100 × 5 + 5². Don't skip the middle term."
 concepts:
 - code: cbse9gm.poly.identities
   title: Algebraic identities
@@ -105,6 +113,7 @@ concepts:
     - 104 = 100 + 4 and 96 = 100 − 4.
     - (a + b)(a − b) = a² − b².
     solution: 'Step 1: 104 × 96 = (100 + 4)(100 − 4). Step 2: = 100² − 4² = 10000 − 16 = 9984.'
+    mistakes: {"10016": "diff_of_squares", "9996": "diff_of_squares"}
   - prompt: Expand (x + 4)².
     options:
     - x² + 8x + 16
@@ -143,6 +152,7 @@ concepts:
     - 9x² = (3x)² and 25 = 5².
     - a² − b² = (a + b)(a − b).
     solution: 'Step 1: 9x² − 25 = (3x)² − 5². Step 2: = (3x + 5)(3x − 5).'
+    mistakes: {"(3x − 5)²": "a2_minus_b2_factor", "(9x + 5)(x − 5)": "a2_minus_b2_factor"}
   - prompt: Expand (x + 2y + 3z)².
     options:
     - x² + 4y² + 9z² + 4xy + 12yz + 6xz
@@ -181,6 +191,7 @@ concepts:
     - 99 = 100 − 1.
     - (a − b)³ = a³ − b³ − 3ab(a − b).
     solution: 'Step 1: 99³ = (100 − 1)³. Step 2: = 1000000 − 1 − 300 × 99. Step 3: = 1000000 − 1 − 29700 = 970299.'
+    mistakes: {"999999": "cube_identity", "970000": "cube_identity"}
   - prompt: Without cubing, find (−12)³ + 7³ + 5³.
     answer: '-1260'
     check: (-12)^3 + 7^3 + 5^3
@@ -189,6 +200,7 @@ concepts:
     - −12 + 7 + 5 = 0.
     - If a + b + c = 0, then a³ + b³ + c³ = 3abc.
     solution: 'Step 1: −12 + 7 + 5 = 0. Step 2: So the sum of cubes = 3 × (−12) × 7 × 5. Step 3: = −1260.'
+    mistakes: {"0": "cubes_sum_zero", "1260": "cubes_sum_zero"}
 - code: cbse9gm.poly.factorise
   title: Factor theorem and factorising
   after:
@@ -331,6 +343,7 @@ concepts:
     - Two numbers that multiply to +6 and add to −5.
     - Both must be negative.
     solution: 'Step 1: (−2) × (−3) = 6 and −2 + (−3) = −5. Step 2: x² − 5x + 6 = (x − 2)(x − 3).'
+    mistakes: {"(x + 2)(x + 3)": "factor_pair_signs", "(x − 2)(x + 3)": "factor_pair_signs"}
   - prompt: Factorise 6x² + 17x + 5.
     options:
     - (3x + 1)(2x + 5)
@@ -369,6 +382,7 @@ concepts:
     - 'Try x = 1: 1 − 23 + 142 − 120 = 0, so x − 1 is a factor.'
     - Then factorise x² − 22x + 120.
     solution: 'Step 1: p(1) = 0, so x − 1 is a factor. Step 2: Dividing gives x² − 22x + 120. Step 3: −10 × −12 = 120 and −10 − 12 = −22. Step 4: So it is (x − 1)(x − 10)(x − 12).'
+    mistakes: {"(x + 1)(x + 10)(x + 12)": "factor_theorem_try", "(x − 2)(x − 6)(x − 10)": "factor_theorem_try"}
 - code: cbse9gm.identities.rational
   title: Simplifying rational expressions
   after:
@@ -451,6 +465,7 @@ concepts:
     - x² − 16 = (x + 4)(x − 4).
     - Cancel (x − 4).
     solution: 'Step 1: x² − 16 = (x + 4)(x − 4). Step 2: Cancel x − 4: x + 4.'
+    mistakes: {"x − 4": "cancel_after_factor", "x + 16": "cancel_terms_not_factors"}
   - prompt: Use (a + b)(a − b) = a² − b² to work out 98 × 102.
     answer: '9996'
     check: 98*102
@@ -459,6 +474,7 @@ concepts:
     - 98 = 100 − 2, 102 = 100 + 2.
     - 100² − 2².
     solution: 'Step 1: 98 × 102 = (100 − 2)(100 + 2). Step 2: = 10000 − 4 = 9996.'
+    mistakes: {"10004": "diff_of_squares", "9600": "diff_of_squares"}
   - prompt: Simplify (x² + 5x + 6)/(x + 2).
     options:
     - x + 3
@@ -472,6 +488,7 @@ concepts:
     - Find two numbers that multiply to 6 and add to 5.
     - x² + 5x + 6 = (x + 2)(x + 3).
     solution: 'Step 1: x² + 5x + 6 = (x + 2)(x + 3). Step 2: Cancel x + 2: x + 3.'
+    mistakes: {"x² + 3": "cancel_terms_not_factors", "5x + 3": "cancel_terms_not_factors"}
   - prompt: A student writes (x + 6)/6 = x + 1. What went wrong?
     options:
     - 6 is not a factor of the whole top, so it can't be cancelled
@@ -499,6 +516,7 @@ concepts:
     - 'Top: 2(x² − 4) = 2(x + 2)(x − 2).'
     - 'Bottom: x(x − 2).'
     solution: 'Step 1: Top = 2(x + 2)(x − 2). Step 2: Bottom = x(x − 2). Step 3: Cancel x − 2: 2(x + 2)/x.'
+    mistakes: {"2/x": "cancel_after_factor", "2(x − 2)/x": "cancel_after_factor"}
   - prompt: Use an identity to work out 105².
     answer: '11025'
     check: 105^2
@@ -507,3 +525,4 @@ concepts:
     - 105 = 100 + 5.
     - (a + b)² = a² + 2ab + b².
     solution: 'Step 1: (100 + 5)² = 10000 + 1000 + 25. Step 2: = 11025.'
+    mistakes: {"10025": "square_of_sum", "1025": "square_of_sum"}

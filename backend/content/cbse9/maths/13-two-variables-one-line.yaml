@@ -10,6 +10,14 @@ tips:
   elimination_sign: To eliminate a letter, make its numbers match and then subtract if the signs are the same, add if they are opposite.
   pair_parallel_no_solution: Parallel lines never meet, so a pair of equations with the same slope but different intercepts has no solution.
   pair_found_one_value: You've found one letter; put it back into an equation to find the other.
+  check_by_substituting: "Put x = 2 and y = 3 into the left side and see if it equals the right side."
+  eliminate_pen: "Double the second equation so the pens match, then subtract to leave only pencils."
+  k_both_places: "Put x = k and y = 2k into the equation, collect the k's, then solve."
+  linear_power_one: "Linear means every variable has power 1 (or 0). Look for a squared term."
+  missing_variable_zero: "If y doesn't appear, its coefficient is 0. Write x = 5 as x + 0·y − 5 = 0 and read off b."
+  no_solution_ratio: "No solution means parallel lines: the x and y coefficients are in the same ratio, but the constants are not."
+  solve_for_y: "Put the given x in, then get y on its own."
+  y_intercept_x0: "Put x = 0, so the x-term disappears. Then solve for y."
 concepts:
 - code: cbse9gm.lin2.form
   title: Writing ax + by + c = 0
@@ -103,6 +111,7 @@ concepts:
     - There is no y term.
     - x + 0·y − 5 = 0.
     solution: 'Step 1: x = 5 becomes x + 0·y − 5 = 0. Step 2: So b = 0.'
+    mistakes: {"1": "missing_variable_zero", "-5": "missing_variable_zero"}
   - prompt: Write 2x = 3y − 5 as ax + by + c = 0, with a = 2. What is c?
     answer: '5'
     check: '5'
@@ -139,6 +148,7 @@ concepts:
     - Linear means each variable has power 1.
     - Look for a square.
     solution: 'x² has power 2, so x² + y = 4 is not linear. y = 7 is linear: it is 0·x + y − 7 = 0.'
+    mistakes: {"y = 7": "linear_power_one", "2x − 3y = 0": "linear_power_one"}
 - code: cbse9gm.lin2.solutions
   title: Solutions of a linear equation
   after:
@@ -234,6 +244,7 @@ concepts:
     - Put x = 2 and y = 3.
     - 2 + 2 × 3 = ?
     solution: 'Step 1: 2 + 2 × 3 = 2 + 6 = 8. Step 2: That equals the right side, so yes.'
+    mistakes: {"No": "check_by_substituting", "Only if x = 3": "substitute_both"}
   - prompt: For x + y = 7, if x = 2, what is y?
     answer: '5'
     check: 7 - 2
@@ -242,6 +253,7 @@ concepts:
     - 2 + y = 7.
     - Subtract 2.
     solution: 'Step 1: 2 + y = 7. Step 2: y = 5. So (2, 5) is a solution.'
+    mistakes: {"9": "solve_for_y", "2": "solve_for_y"}
   - prompt: How many solutions does 2x + 3y = 6 have?
     options:
     - Infinitely many
@@ -264,6 +276,7 @@ concepts:
     - Put x = 0.
     - 3y = 12.
     solution: 'Step 1: 2(0) + 3y = 12. Step 2: 3y = 12, so y = 4. The solution is (0, 4).'
+    mistakes: {"6": "y_intercept_x0", "12": "y_intercept_x0"}
   - prompt: For x − 2y = 4, find x when y = −1.
     answer: '2'
     check: 4 + 2*(-1)
@@ -306,6 +319,7 @@ concepts:
     - k + 2k = 12.
     - 3k = 12.
     solution: 'Step 1: k + 2k = 12. Step 2: 3k = 12, so k = 4. The solution is (4, 8).'
+    mistakes: {"6": "k_both_places", "8": "k_both_places"}
 - code: cbse9gm.lin2.pairs
   title: Pairs of linear equations
   after:
@@ -445,6 +459,7 @@ concepts:
     - 'Double the second: 2 pens + 2 pencils = ₹36.'
     - Subtract from the first.
     solution: 'Step 1: 2p + 2q = 36. Step 2: Subtract from 2p + 3q = 46: q = 10. A pencil costs ₹10 (and a pen ₹8).'
+    mistakes: {"8": "pair_found_one_value", "28": "eliminate_pen"}
   - prompt: For which value of k do 2x + ky = 5 and 4x + 6y = 7 have no solution?
     answer: '3'
     check: 6*2/4
@@ -453,3 +468,4 @@ concepts:
     - No solution means a₁/a₂ = b₁/b₂ ≠ c₁/c₂.
     - 2/4 = k/6.
     solution: 'Step 1: 2/4 = k/6 gives k = 3. Step 2: Check 5/7 ≠ 1/2, so the lines are parallel and distinct: no solution.'
+    mistakes: {"6": "no_solution_ratio", "12": "no_solution_ratio"}

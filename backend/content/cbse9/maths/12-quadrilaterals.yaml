@@ -7,6 +7,15 @@ tips:
   parallelogram_adjacent: In a parallelogram, opposite angles are equal and adjacent angles add to 180°.
   midpoint_half: The segment joining the midpoints of two sides is half the THIRD side, and parallel to it.
   centroid_ratio_flip: 'The centroid is twice as far from the corner as from the midpoint of the opposite side: 2 : 1 from the vertex.'
+  centroid_average: "The centroid is the average of the three corners: add the three x-values and divide by 3."
+  centroid_reverse: "The centroid's y is the average of the three y-values. Multiply by 3, then take away the two you know."
+  converse_midpoint: "A line through the mid-point of one side, parallel to another side, cuts the third side in half."
+  diagonals_bisect: "The diagonals of a parallelogram cut each other in half. AO is half of AC."
+  equal_and_perp: "Rectangles have equal diagonals; rhombuses have perpendicular ones. Which shape is both?"
+  midpoint_theorem_parallel: "The mid-point theorem says the joining segment is parallel to the third side and half as long. It doesn't touch the third side."
+  midpoint_theorem_used: "Draw one diagonal. It splits the quadrilateral into two triangles, each with two midpoints joined. Which theorem is about that?"
+  varignon_parallelogram: "Each side of the inner shape is parallel to a diagonal and half its length. Opposite sides match: which shape has that?"
+  varignon_perimeter: "Each side of the midpoint shape is half a diagonal, and each diagonal is used twice."
 concepts:
 - code: cbse9gm.quad.parallelogram
   title: Properties of a parallelogram
@@ -136,6 +145,7 @@ concepts:
     - Diagonals bisect each other.
     - AO is half of AC.
     solution: The diagonals bisect each other, so AO = 14 ÷ 2 = 7 cm.
+    mistakes: {"14": "diagonals_bisect", "28": "diagonals_bisect"}
   - prompt: Which quadrilateral has diagonals that are equal AND perpendicular?
     options:
     - Square
@@ -148,6 +158,7 @@ concepts:
     - 'Rectangle: equal diagonals.'
     - 'Rhombus: perpendicular diagonals.'
     solution: A square is both a rectangle and a rhombus, so its diagonals are equal and perpendicular.
+    mistakes: {"Rhombus": "equal_and_perp", "Rectangle": "equal_and_perp"}
   - prompt: 'Two adjacent angles of a parallelogram are in the ratio 2 : 3. Find the smaller angle in degrees.'
     answer: '72'
     check: 180*2/5
@@ -306,6 +317,7 @@ concepts:
     - Think of the shelf halfway up.
     - It runs level with the base.
     solution: The mid-point theorem says DE ∥ BC (and DE = BC/2).
+    mistakes: {"DE = BC": "midpoint_half", "DE meets BC": "midpoint_theorem_parallel"}
   - prompt: A triangle has sides 8 cm, 10 cm and 12 cm. The mid-points are joined to make a smaller triangle. Find its perimeter in cm.
     answer: '15'
     check: (8 + 10 + 12)/2
@@ -328,6 +340,7 @@ concepts:
     - Draw a diagonal of the quadrilateral.
     - Two of the new sides are each half of it and parallel to it.
     solution: 'Each pair of opposite sides is parallel to the same diagonal and half of it, so they are equal and parallel: a parallelogram.'
+    mistakes: {"Square": "varignon_parallelogram", "Trapezium only": "varignon_parallelogram"}
   - prompt: Through the mid-point D of AB in △ABC, a line parallel to BC meets AC at E. If AC = 10 cm, find AE in cm.
     answer: '5'
     check: 10/2
@@ -336,6 +349,7 @@ concepts:
     - This is the converse of the mid-point theorem.
     - E is the mid-point of AC.
     solution: The line through D parallel to BC bisects AC, so AE = 10 ÷ 2 = 5 cm.
+    mistakes: {"10": "converse_midpoint", "20": "converse_midpoint"}
 - code: cbse9gm.quad.centroid_varignon
   title: Medians, the centroid and midpoint quadrilaterals
   after:
@@ -427,6 +441,7 @@ concepts:
     - Average the three x-values.
     - (0 + 6 + 3) ÷ 3.
     solution: 'Step 1: 0 + 6 + 3 = 9. Step 2: 9 ÷ 3 = 3. (The centroid is (3, 3).)'
+    mistakes: {"9": "centroid_average", "4.5": "centroid_average"}
   - prompt: A median AM is 12 cm long. How far is the centroid G from A, in cm?
     answer: '8'
     check: 2/3*12
@@ -450,6 +465,7 @@ concepts:
     - Varignon's theorem.
     - Use the midpoint theorem with a diagonal.
     solution: 'Step 1: Each pair of opposite sides is parallel to the same diagonal and half its length. Step 2: So the midpoint quadrilateral is a parallelogram.'
+    mistakes: {"A square": "varignon_parallelogram", "A rectangle": "varignon_parallelogram"}
   - prompt: A quadrilateral has diagonals 10 cm and 14 cm. What is the perimeter of its midpoint quadrilateral, in cm?
     answer: '24'
     check: 10 + 14
@@ -458,6 +474,7 @@ concepts:
     - Each side of the midpoint quadrilateral is half a diagonal.
     - Two sides of 5 and two of 7.
     solution: 'Step 1: Sides are 5, 7, 5, 7. Step 2: Perimeter = 24 cm, the sum of the diagonals.'
+    mistakes: {"48": "varignon_perimeter", "12": "varignon_perimeter"}
   - prompt: Which theorem is used to prove Varignon's result about midpoint quadrilaterals?
     options:
     - The midpoint theorem
@@ -470,6 +487,7 @@ concepts:
     - Join midpoints of two sides of a triangle.
     - That segment is parallel to the third side and half of it.
     solution: 'Step 1: Draw a diagonal to split the quadrilateral into two triangles. Step 2: In each, the midpoint theorem makes the joining segment parallel to the diagonal and half its length.'
+    mistakes: {"Pythagoras' theorem": "midpoint_theorem_used", "Heron's formula": "midpoint_theorem_used"}
   - prompt: The centroid of a triangle is (4, 5). Two vertices are (1, 2) and (8, 3). What is the y-coordinate of the third vertex?
     answer: '10'
     check: 3*5 - 2 - 3
@@ -478,3 +496,4 @@ concepts:
     - (2 + 3 + y) ÷ 3 = 5.
     - 2 + 3 + y = 15.
     solution: 'Step 1: (2 + 3 + y)/3 = 5. Step 2: y = 15 − 5 = 10. (The x-coordinate is 12 − 9 = 3.)'
+    mistakes: {"5": "centroid_reverse", "15": "centroid_reverse"}
