@@ -5,6 +5,16 @@ title: Sequences and Series
 tips:
   c11_gp_ratio: 'In a GP, divide a term by the one before it to get the common ratio r. Don''t subtract: that is for APs.'
   c11_am_gm: For positive a and b, AM = (a + b)/2 and GM = √(ab), and AM ≥ GM always.
+  m11_am: "The arithmetic mean of two numbers is their sum divided by 2."
+  m11_ap_nth: "aₙ = a + (n − 1)d. The 10th term adds the difference only 9 times."
+  m11_ap_sum: "Sₙ = n(first + last)/2. Pair first with last: each pair has the same sum."
+  m11_ap_sum_n: "Sₙ = n/2 [2a + (n − 1)d]. Find a and d first."
+  m11_gp_infinity: "S∞ = a/(1 − r) for |r| < 1."
+  m11_gp_sum: "Sₙ = a(rⁿ − 1)/(r − 1). Count the terms: from 2⁰ to 2⁹ is 10 terms."
+  m11_is_ap: "Subtract each term from the next. In an AP the differences are all the same."
+  m11_sum_cubes: "Σk³ = [n(n + 1)/2]². Find the sum of the first n numbers, then square it."
+  m11_sum_squares: "Σk² = n(n + 1)(2n + 1)/6. You are adding squares, not the numbers."
+  m11_which_term: "Set a + (n − 1)d equal to 81 and solve for n."
 concepts:
 - code: cbse11m.seq.ap
   title: Sequences and arithmetic progressions
@@ -133,6 +143,7 @@ concepts:
     - a = 3, d = 4.
     - 3 + 9 × 4.
     solution: a₁₀ = 3 + 36 = 39.
+    mistakes: {"43": "m11_ap_nth", "40": "m11_ap_nth"}
   - prompt: Find the sum 1 + 2 + 3 + ... + 100.
     answer: '5050'
     check: 100*101/2
@@ -141,6 +152,7 @@ concepts:
     - n(n + 1)/2.
     - 100 × 101/2.
     solution: 5,050.
+    mistakes: {"5000": "m11_ap_sum", "10100": "m11_ap_sum"}
   - prompt: Find the sum of the first 20 terms of 2, 5, 8, ...
     answer: '610'
     check: 10*(2*2 + 19*3)
@@ -149,6 +161,7 @@ concepts:
     - a = 2, d = 3.
     - 20/2 (4 + 57).
     solution: 10 × 61 = 610.
+    mistakes: {"1220": "m11_ap_sum_n", "59": "m11_ap_sum_n"}
   - prompt: Find the arithmetic mean of 8 and 20.
     answer: '14'
     check: (8+20)/2
@@ -157,6 +170,7 @@ concepts:
     - (a + b)/2.
     - 28/2.
     solution: '14.'
+    mistakes: {"28": "m11_am", "12": "m11_am"}
   - prompt: Which term of the AP 5, 9, 13, ... is 81?
     answer: '20'
     check: (81-5)/4 + 1
@@ -165,6 +179,7 @@ concepts:
     - 5 + (n − 1)4 = 81.
     - n − 1 = 19.
     solution: n = 20.
+    mistakes: {"19": "m11_which_term", "21": "m11_which_term"}
   - prompt: Which is an AP?
     options:
     - 4, 9, 14, 19
@@ -177,6 +192,7 @@ concepts:
     - Same difference each time.
     - '+5.'
     solution: 4, 9, 14, 19 increases by 5 each time.
+    mistakes: {"2, 4, 8, 16": "m11_is_ap", "1, 4, 9, 16": "m11_is_ap", "1, 1, 2, 3": "m11_is_ap"}
 - code: cbse11m.seq.gp
   title: Geometric progressions
   after:
@@ -293,6 +309,7 @@ concepts:
     - a = 1, r = 2, n = 10.
     - 2¹⁰ − 1.
     solution: 2¹⁰ − 1 = 1,023.
+    mistakes: {"512": "m11_gp_sum", "1024": "m11_gp_sum", "2047": "m11_gp_sum"}
   - prompt: Find the sum to infinity of 1 + 1/2 + 1/4 + ...
     answer: '2'
     check: 1/(1-Rational(1,2))
@@ -301,6 +318,7 @@ concepts:
     - a/(1 − r).
     - 1/(1/2).
     solution: S = 1/(1 − 1/2) = 2.
+    mistakes: {"1": "m11_gp_infinity", "3/2": "m11_gp_infinity"}
   - prompt: Find the geometric mean of 4 and 16.
     answer: '8'
     check: sqrt(4*16)
@@ -319,6 +337,7 @@ concepts:
     - n(n + 1)(2n + 1)/6.
     - 10 × 11 × 21/6.
     solution: '385.'
+    mistakes: {"55": "m11_sum_squares", "100": "m11_sum_squares"}
   - prompt: Find 1³ + 2³ + ... + 5³.
     answer: '225'
     check: 15**2
@@ -327,3 +346,4 @@ concepts:
     - '[n(n + 1)/2]².'
     - 15².
     solution: 15² = 225.
+    mistakes: {"15": "m11_sum_cubes", "125": "m11_sum_cubes"}

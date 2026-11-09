@@ -4,7 +4,16 @@ chapter: 13
 title: Oscillations
 tips:
   c11p_shm: 'In SHM, a = −ω²x: acceleration is greatest at the extremes and zero at the mean position, while speed is the other way round.'
-  c11p_period: Pendulum T = 2π√(l/g) does not depend on the mass of the bob; spring T = 2π√(m/k) does.
+  c11p_period: "Pendulum T = 2π√(l/g); spring T = 2π√(m/k). Check which quantities actually appear in each formula."
+  p11_amax: "a_max = Aω²."
+  p11_damped: "A swing left alone slowly stops. What gets smaller with each swing?"
+  p11_frequency: "Frequency = oscillations ÷ time."
+  p11_pendulum: "T ∝ √L. Take the square root of the factor."
+  p11_resonance: "Push a swing at exactly its own rhythm and it goes higher and higher."
+  p11_restoring: "F = −kx. Where is the spring stretched the most?"
+  p11_shm_v: "v = ω√(A² − x²)."
+  p11_spring_period: "T = 2π√(m/k), so T ∝ √m."
+  p11_vmax: "v_max = Aω."
 concepts:
 - code: cbse11p.osc.shm
   title: Simple harmonic motion
@@ -93,6 +102,7 @@ concepts:
     - ν = number/time.
     - 10/5.
     solution: 2 Hz.
+    mistakes: {"0.5": "p11_frequency", "50": "p11_frequency"}
   - prompt: A body in SHM has amplitude 0.1 m and ω = 20 rad/s. Find its maximum speed (in m/s).
     answer: '2'
     check: 20*Rational(1,10)
@@ -101,6 +111,7 @@ concepts:
     - v_max = ωA.
     - 20 × 0.1.
     solution: 2 m/s.
+    mistakes: {"200": "p11_vmax", "0.005": "p11_vmax"}
   - prompt: For the same motion, find the maximum acceleration (in m/s²).
     answer: '40'
     check: 20**2*Rational(1,10)
@@ -109,6 +120,7 @@ concepts:
     - a_max = ω²A.
     - 400 × 0.1.
     solution: 40 m/s².
+    mistakes: {"2": "p11_amax", "4": "p11_amax"}
   - prompt: A body in SHM has A = 5 cm and ω = 2 rad/s. Find its speed (in cm/s) when x = 3 cm.
     answer: '8'
     check: 2*sqrt(5**2-3**2)
@@ -117,6 +129,7 @@ concepts:
     - v = ω√(A² − x²).
     - 2 × √16.
     solution: 8 cm/s.
+    mistakes: {"10": "p11_shm_v", "4": "p11_shm_v", "6": "p11_shm_v"}
   - prompt: 'In SHM, the acceleration is greatest:'
     options:
     - at the extreme positions
@@ -143,6 +156,7 @@ concepts:
     - F = −kx.
     - Pulls back to the middle.
     solution: F = −kx.
+    mistakes: {"constant": "p11_restoring", "proportional to velocity": "p11_restoring", "zero at the extremes": "p11_restoring"}
 - code: cbse11p.osc.systems
   title: Springs, pendulums and energy
   after:
@@ -234,6 +248,7 @@ concepts:
     - T ∝ √L.
     - √4.
     solution: It doubles.
+    mistakes: {"4": "p11_pendulum", "16": "p11_pendulum"}
   - prompt: A spring with k = 100 N/m is stretched 0.2 m. Find its total oscillation energy (in J) if released.
     answer: '2'
     check: Rational(1,2)*100*Rational(2,10)**2
@@ -242,6 +257,7 @@ concepts:
     - E = ½kA².
     - ½ × 100 × 0.04.
     solution: 2 J.
+    mistakes: {"4": "p11_spring_energy", "20": "p11_spring_energy", "10": "p11_spring_energy"}
   - prompt: A mass on a spring has period 2 s. The mass is made four times larger. Find the new period (in s).
     answer: '4'
     check: 2*sqrt(4)
@@ -250,6 +266,7 @@ concepts:
     - T ∝ √m.
     - 2 × √4.
     solution: 4 s.
+    mistakes: {"8": "p11_spring_period", "1": "p11_spring_period"}
   - prompt: 'The period of a simple pendulum does not depend on:'
     options:
     - the mass of the bob
@@ -276,6 +293,7 @@ concepts:
     - Amplitude becomes very large.
     - Soldiers on bridges.
     solution: Resonance.
+    mistakes: {"damping": "p11_resonance", "beats": "p11_resonance", "reflection": "p11_resonance"}
   - prompt: In a damped oscillation, which quantity decreases with time?
     options:
     - amplitude
@@ -288,3 +306,4 @@ concepts:
     - Energy is lost to friction.
     - Smaller swings.
     solution: The amplitude decays.
+    mistakes: {"the natural period": "p11_damped", "the mass": "p11_damped", "the spring constant": "p11_damped"}

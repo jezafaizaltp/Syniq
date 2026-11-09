@@ -5,6 +5,16 @@ title: Sets
 tips:
   c11_subsets: 'A set with n elements has 2ⁿ subsets, counting the empty set and the set itself. Each element is either in or out: 2 choices each.'
   c11_union_count: n(A ∪ B) = n(A) + n(B) − n(A ∩ B). Subtract the overlap, or it is counted twice.
+  m11_brackets: "A square bracket includes the end point; a round one leaves it out. Check each end separately."
+  m11_complement: "A′ is what is left in U after removing A. Count U, then take away A."
+  m11_de_morgan: "Draw the Venn diagram: shade everything outside both circles. Is that 'outside A and outside B', or 'outside A or outside B'?"
+  m11_difference: "A − B keeps the elements of A that are not in B. Cross out the shared ones from A only."
+  m11_empty_set: "An empty set has nothing in it. A set that contains 0, or contains ∅, still has a member."
+  m11_inclusion: "n(A ∪ B) = n(A) + n(B) − n(A ∩ B). The students who like both were counted twice."
+  m11_power_set: "Each element is either in a subset or not: two choices per element. Multiply the choices."
+  m11_proper_subset: "A proper subset leaves at least one element out. Of all 2ⁿ subsets, which one is not proper?"
+  m11_square_list: "List the natural numbers one at a time and square each: stop as soon as the square reaches 30."
+  m11_union_count: "Write A ∪ B out in full, listing shared elements only once, then count."
 concepts:
 - code: cbse11m.sets.basics
   title: Sets, subsets and intervals
@@ -95,6 +105,7 @@ concepts:
     - 'All subsets: 2⁴.'
     - Leave out the set itself.
     solution: 2⁴ − 1 = 15.
+    mistakes: {"16": "m11_proper_subset"}
   - prompt: 'How many elements are in {x : x is a natural number, x² < 30}?'
     answer: '5'
     check: '5'
@@ -103,6 +114,7 @@ concepts:
     - Try x = 1, 2, 3, ...
     - 5² = 25 < 30, 6² = 36.
     solution: 'x = 1, 2, 3, 4, 5: five elements.'
+    mistakes: {"30": "m11_square_list", "6": "m11_square_list"}
   - prompt: Which of these is the empty set?
     options:
     - '{x : x is a natural number, x < 1}'
@@ -115,6 +127,7 @@ concepts:
     - Natural numbers start at 1.
     - '{0} has one element.'
     solution: No natural number is less than 1, so the set is empty.
+    mistakes: {"{0}": "m11_empty_set", "{x : x² = 4}": "m11_empty_set", "{∅, 1}": "m11_empty_set"}
   - prompt: Which interval contains 3 but not 7?
     options:
     - '[3, 7)'
@@ -127,6 +140,7 @@ concepts:
     - Square bracket includes.
     - Round bracket excludes.
     solution: '[3, 7) includes 3 and excludes 7.'
+    mistakes: {"(3, 7]": "m11_brackets", "(3, 7)": "m11_brackets", "[3, 7]": "m11_brackets"}
   - prompt: How many elements does the power set of a 5-element set have?
     answer: '32'
     check: 2**5
@@ -135,6 +149,7 @@ concepts:
     - P(A) contains all subsets.
     - 2⁵.
     solution: 2⁵ = 32.
+    mistakes: {"25": "m11_power_set", "10": "m11_power_set", "31": "m11_power_set"}
 - code: cbse11m.sets.ops
   title: Operations on sets and Venn diagrams
   after:
@@ -252,6 +267,7 @@ concepts:
     - List them once each.
     - 1, 2, 3, 4, 5.
     solution: 'A ∪ B = {1, 2, 3, 4, 5}: 5 elements.'
+    mistakes: {"7": "m11_union_count", "2": "m11_union_count"}
   - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A − B?
     answer: '2'
     check: '2'
@@ -260,6 +276,7 @@ concepts:
     - Remove 3 and 4 from A.
     - '{1, 2}.'
     solution: 'A − B = {1, 2}: 2 elements.'
+    mistakes: {"1": "m11_difference", "3": "m11_difference"}
   - prompt: n(A) = 35, n(B) = 30, n(A ∩ B) = 10. Find n(A ∪ B).
     answer: '55'
     check: 35 + 30 - 10
@@ -278,6 +295,7 @@ concepts:
     - n(A ∪ B) = 40.
     - 25 + 20 − both = 40.
     solution: Both = 25 + 20 − 40 = 5.
+    mistakes: {"45": "m11_inclusion", "20": "m11_inclusion"}
   - prompt: 'By De Morgan''s law, (A ∪ B)′ equals:'
     options:
     - A′ ∩ B′
@@ -290,6 +308,7 @@ concepts:
     - Not in A or B means not in A and not in B.
     - ∪ becomes ∩.
     solution: (A ∪ B)′ = A′ ∩ B′.
+    mistakes: {"A′ ∪ B′": "m11_de_morgan", "A ∩ B": "m11_de_morgan", "A − B": "m11_de_morgan"}
   - prompt: U = {1, 2, ..., 10} and A = {2, 4, 6, 8, 10}. How many elements are in A′?
     answer: '5'
     check: 10 - 5
@@ -298,3 +317,4 @@ concepts:
     - A′ = U − A.
     - The odd numbers.
     solution: 'A′ = {1, 3, 5, 7, 9}: 5 elements.'
+    mistakes: {"10": "m11_complement", "15": "m11_complement"}

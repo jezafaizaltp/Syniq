@@ -5,6 +5,16 @@ title: Complex Numbers and Quadratic Equations
 tips:
   c11_i_powers: 'Powers of i repeat every 4: i, −1, −i, 1. Divide the power by 4 and use the remainder.'
   c11_modulus: '|a + ib| = √(a² + b²). Square both parts, add, then take the square root.'
+  m11_complex_mult: "Expand fully and remember i² = −1. Collect the terms without i."
+  m11_conj_product: "(a + bi)(a − bi) = a² + b², because −(bi)² becomes +b²."
+  m11_conj_roots: "Complex roots of a real quadratic come in conjugate pairs: same real part, opposite imaginary part."
+  m11_conjugate: "The conjugate keeps the real part and flips only the sign of the imaginary part."
+  m11_discriminant: "D = b² − 4ac. Write a, b and c first, then substitute carefully with signs."
+  m11_quadratic_formula: "x = (−b ± √D)/2a. Find √D using i, then divide every term by 2a."
+  m11_rationalise: "Multiply top and bottom by the conjugate 1 − i. The bottom becomes a real number."
+  m11_root_product: "Product of roots = c/a."
+  m11_root_sum: "Sum of roots = −b/a. Watch the sign of b."
+  m11_sqrt_negative: "x² = −9. The square root of a negative number brings in i; √9 is 3."
 concepts:
 - code: cbse11m.cx.algebra
   title: Complex numbers and their algebra
@@ -159,6 +169,7 @@ concepts:
     - 'Expand: 2 − 2i + 3i − 3i².'
     - −3i² = +3.
     solution: (2 + 3i)(1 − i) = 5 + i; real part 5.
+    mistakes: {"2": "m11_complex_mult", "-1": "m11_complex_mult"}
   - prompt: Find (1 + 2i)(1 − 2i).
     answer: '5'
     check: expand((1+2*I)*(1-2*I))
@@ -167,6 +178,7 @@ concepts:
     - (a + ib)(a − ib) = a² + b².
     - 1 + 4.
     solution: 1 + 4 = 5.
+    mistakes: {"-3": "m11_conj_product", "1": "m11_conj_product"}
   - prompt: What is the conjugate of 5 − 7i?
     options:
     - 5 + 7i
@@ -179,6 +191,7 @@ concepts:
     - Change the sign of the imaginary part.
     - Keep the real part.
     solution: The conjugate is 5 + 7i.
+    mistakes: {"−5 + 7i": "m11_conjugate", "−5 − 7i": "m11_conjugate", "7 − 5i": "m11_conjugate"}
   - prompt: Find the imaginary part of 1/(1 + i).
     answer: -1/2
     check: im(1/(1+I))
@@ -187,6 +200,7 @@ concepts:
     - Multiply by (1 − i)/(1 − i).
     - (1 − i)/2.
     solution: 1/(1 + i) = (1 − i)/2; imaginary part −1/2.
+    mistakes: {"1/2": "m11_rationalise", "-1": "m11_rationalise"}
 - code: cbse11m.cx.quadratic
   title: Quadratic equations with complex roots
   after:
@@ -286,6 +300,7 @@ concepts:
     - b² − 4ac.
     - 4 − 20.
     solution: D = 4 − 20 = −16.
+    mistakes: {"16": "m11_discriminant", "24": "m11_discriminant"}
   - prompt: 'The roots of x² + 9 = 0 are:'
     options:
     - ±3i
@@ -298,6 +313,7 @@ concepts:
     - x² = −9.
     - √−9 = 3i.
     solution: x = ±3i.
+    mistakes: {"±3": "m11_sqrt_negative", "±9i": "m11_sqrt_negative", "3 and −9": "m11_sqrt_negative"}
   - prompt: 'The roots of x² + 2x + 5 = 0 are:'
     options:
     - −1 ± 2i
@@ -310,6 +326,7 @@ concepts:
     - D = −16, √D = 4i.
     - (−2 ± 4i)/2.
     solution: x = (−2 ± 4i)/2 = −1 ± 2i.
+    mistakes: {"1 ± 2i": "m11_quadratic_formula", "−2 ± i": "m11_quadratic_formula", "−1 ± 4i": "m11_quadratic_formula"}
   - prompt: Find the sum of the roots of 2x² − 3x + 7 = 0.
     answer: 3/2
     check: Rational(3,2)
@@ -318,6 +335,7 @@ concepts:
     - Sum = −b/a.
     - 3/2.
     solution: Sum = 3/2.
+    mistakes: {"-3/2": "m11_root_sum", "7/2": "m11_root_sum"}
   - prompt: Find the product of the roots of x² + x + 1 = 0.
     answer: '1'
     check: '1'
@@ -326,6 +344,7 @@ concepts:
     - Product = c/a.
     - 1/1.
     solution: Product = 1.
+    mistakes: {"-1": "m11_root_product"}
   - prompt: 'If one root of a real quadratic is 2 + 3i, the other is:'
     options:
     - 2 − 3i
@@ -338,3 +357,4 @@ concepts:
     - Complex roots come in conjugate pairs.
     - Change the sign of i.
     solution: The other root is the conjugate, 2 − 3i.
+    mistakes: {"−2 + 3i": "m11_conj_roots", "3 + 2i": "m11_conj_roots", "−2 − 3i": "m11_conj_roots"}
