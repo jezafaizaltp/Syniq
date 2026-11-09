@@ -5,6 +5,14 @@ title: Finding Common Ground
 tips:
   c7_hcf_lcm: HCF is the biggest number that divides both; LCM is the smallest number both divide. Check which one the question asks for.
   c7_lcm_smallest: A common multiple is not always the lowest. List multiples and take the first one in both lists.
+  t7_bells_lcm: "The bells ring together at times that are multiples of both 6 and 8. Find the smallest one."
+  t7_hcf: "List the prime factors of both. Multiply the ones they share."
+  t7_hcf_lcm_product: "HCF × LCM = product of the two numbers. Divide the product by the HCF."
+  t7_hcf_lcm_rule: "Test with 4 and 6: HCF 2, LCM 12. Which rule works?"
+  t7_kits_hcf: "Each kit must use all pencils and erasers equally. The largest number that divides both is the HCF."
+  t7_lcm: "The LCM is the smallest number both divide into. List multiples of the bigger one until the other divides it."
+  t7_primes_only: "Every factor must be prime. Can 10, 6 or 30 be broken down further?"
+  t7_two_primes: "Two different primes share no factor except 1."
 concepts:
 - code: cbse7m.hcf.primes
   title: Prime factorisation and HCF
@@ -97,6 +105,7 @@ concepts:
     - Every factor must be prime.
     - 10 and 6 are not prime.
     solution: 60 = 2 × 2 × 3 × 5, all primes.
+    mistakes: {"2 × 3 × 10": "t7_primes_only", "6 × 10": "t7_primes_only"}
   - prompt: Find the HCF of 24 and 36.
     answer: '12'
     check: gcd(24, 36)
@@ -115,6 +124,7 @@ concepts:
     - 18 = 2 × 3²; 45 = 3² × 5.
     - 'Shared: 3².'
     solution: HCF = 3 × 3 = 9.
+    mistakes: {"90": "hcf_lcm_swapped", "3": "t7_hcf"}
   - prompt: Find the HCF of 84 and 126.
     answer: '42'
     check: gcd(84, 126)
@@ -123,6 +133,7 @@ concepts:
     - 84 = 2² × 3 × 7; 126 = 2 × 3² × 7.
     - 'Shared: 2 × 3 × 7.'
     solution: HCF = 2 × 3 × 7 = 42.
+    mistakes: {"252": "hcf_lcm_swapped", "14": "t7_hcf"}
   - prompt: 24 pencils and 36 erasers go into identical kits with nothing left over. What is the largest number of kits?
     answer: '12'
     check: gcd(24, 36)
@@ -131,6 +142,7 @@ concepts:
     - Largest number dividing both.
     - HCF.
     solution: HCF(24, 36) = 12 kits.
+    mistakes: {"72": "t7_kits_hcf", "6": "t7_kits_hcf"}
   - prompt: What is the HCF of two different prime numbers, such as 7 and 11?
     answer: '1'
     check: gcd(7, 11)
@@ -139,6 +151,7 @@ concepts:
     - Primes have only 1 and themselves as factors.
     - Nothing else is shared.
     solution: Two different primes share only the factor 1.
+    mistakes: {"77": "t7_two_primes", "7": "t7_two_primes"}
 - code: cbse7m.hcf.lcm
   title: LCM and its link with HCF
   after:
@@ -224,6 +237,7 @@ concepts:
     - 2³ × 3².
     - 8 × 9.
     solution: LCM = 2³ × 3² = 72.
+    mistakes: {"12": "hcf_lcm_swapped", "864": "t7_lcm"}
   - prompt: Find the LCM of 4, 6 and 10.
     answer: '60'
     check: lcm(lcm(4, 6), 10)
@@ -232,6 +246,7 @@ concepts:
     - 4 = 2², 6 = 2 × 3, 10 = 2 × 5.
     - 2² × 3 × 5.
     solution: LCM = 4 × 3 × 5 = 60.
+    mistakes: {"240": "t7_lcm", "2": "hcf_lcm_swapped"}
   - prompt: Two bells ring every 6 and every 8 minutes. They ring together at 9:00. After how many minutes will they next ring together?
     answer: '24'
     check: lcm(6, 8)
@@ -240,6 +255,7 @@ concepts:
     - LCM of 6 and 8.
     - First common multiple.
     solution: LCM(6, 8) = 24 minutes.
+    mistakes: {"48": "t7_bells_lcm", "2": "t7_bells_lcm"}
   - prompt: The HCF of two numbers is 4 and their product is 96. Find their LCM.
     answer: '24'
     check: 96/4
@@ -248,6 +264,7 @@ concepts:
     - HCF × LCM = product.
     - 96 ÷ 4.
     solution: LCM = 96 ÷ 4 = 24.
+    mistakes: {"384": "hcf_times_lcm_divide", "92": "t7_hcf_lcm_product"}
   - prompt: Which is always true for two numbers?
     options:
     - HCF × LCM = their product
@@ -260,3 +277,4 @@ concepts:
     - 'Try 4 and 6: HCF 2, LCM 12.'
     - 2 × 12 = 24 = 4 × 6.
     solution: HCF × LCM always equals the product of the two numbers.
+    mistakes: {"HCF + LCM = their sum": "t7_hcf_lcm_rule", "LCM is smaller than HCF": "t7_hcf_lcm_rule"}
