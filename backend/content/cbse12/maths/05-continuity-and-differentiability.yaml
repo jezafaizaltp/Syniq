@@ -5,6 +5,15 @@ title: Continuity and Differentiability
 tips:
   c12_chain: 'Chain rule: differentiate the outer function, keep the inside, then multiply by the derivative of the inside.'
   c12_cont: Continuous at a means the left limit, right limit and f(a) all exist and are equal.
+  m12_diff_cont: "Can a curve have a slope at a point where it is broken?"
+  m12_factor_limit: "Factor x² − 9 as (x − 3)(x + 3), cancel, then substitute."
+  m12_floor_jump: "[x] stays flat and then jumps. Where does it jump?"
+  m12_log_chain: "ln(x²) = 2 ln x. Differentiate, then put x = 1."
+  m12_mod_corner: "The graph of |x| has no break at 0 but a sharp corner there."
+  m12_one_over_x: "Where is 1/x undefined?"
+  m12_parametric: "dy/dx = (dy/dt)/(dx/dt). Find each, then put t = 2."
+  m12_power_rule: "d/dx xⁿ = nxⁿ⁻¹. Then substitute x = 2."
+  m12_tan_inv_deriv: "sin⁻¹x gives 1/√(1 − x²). For tan⁻¹, differentiate tan y = x and use 1 + tan² y = sec² y."
 concepts:
 - code: cbse12m.cont.continuity
   title: Continuity
@@ -125,6 +134,7 @@ concepts:
     - 'Factor: x + 3.'
     - 3 + 3.
     solution: '6.'
+    mistakes: {"0": "m12_factor_limit", "3": "m12_factor_limit", "9": "m12_factor_limit"}
   - prompt: '|x| at x = 0 is:'
     options:
     - continuous but not differentiable
@@ -137,6 +147,7 @@ concepts:
     - 'V shape: no break.'
     - Sharp corner.
     solution: Continuous but not differentiable.
+    mistakes: {"differentiable but not continuous": "m12_mod_corner", "neither": "m12_mod_corner", "both": "m12_mod_corner"}
   - prompt: 'The greatest integer function [x] is discontinuous at:'
     options:
     - every integer
@@ -149,6 +160,7 @@ concepts:
     - Steps.
     - Jumps at integers.
     solution: Every integer.
+    mistakes: {"no point": "m12_floor_jump", "only 0": "m12_floor_jump", "every non-integer": "m12_floor_jump"}
   - prompt: 'Every differentiable function is:'
     options:
     - continuous
@@ -161,6 +173,7 @@ concepts:
     - Smooth implies unbroken.
     - Converse is false.
     solution: Continuous.
+    mistakes: {"discontinuous": "m12_diff_cont", "constant": "m12_diff_cont", "a polynomial": "m12_diff_cont"}
   - prompt: 'f(x) = 1/x is discontinuous at:'
     options:
     - x = 0
@@ -173,6 +186,7 @@ concepts:
     - Denominator zero.
     - Not defined.
     solution: x = 0.
+    mistakes: {"x = 1": "m12_one_over_x", "every point": "m12_one_over_x", "no point": "m12_one_over_x"}
 - code: cbse12m.cont.derivatives
   title: Differentiation rules
   after:
@@ -257,6 +271,7 @@ concepts:
     - 3x².
     - 3 × 4.
     solution: '12.'
+    mistakes: {"8": "m12_power_rule", "6": "m12_power_rule", "4": "m12_power_rule"}
   - prompt: If y = sin(3x), find dy/dx at x = 0.
     answer: '3'
     check: diff(sin(3*x), x).subs(x, 0)
@@ -285,6 +300,7 @@ concepts:
     - 2x/x² = 2/x.
     - At x = 1.
     solution: '2.'
+    mistakes: {"1": "m12_log_chain", "0": "m12_log_chain"}
   - prompt: If x = t² and y = t³, find dy/dx at t = 2.
     answer: '3'
     check: Rational(3,2)*2
@@ -293,6 +309,7 @@ concepts:
     - (3t²)/(2t) = 3t/2.
     - At t = 2.
     solution: '3.'
+    mistakes: {"2": "m12_parametric", "12": "m12_parametric", "2/3": "m12_parametric"}
   - prompt: 'd/dx (tan⁻¹x) equals:'
     options:
     - 1/(1 + x²)
@@ -305,3 +322,4 @@ concepts:
     - Standard result.
     - Never zero denominator.
     solution: 1/(1 + x²).
+    mistakes: {"1/√(1 − x²)": "m12_tan_inv_deriv", "sec²x": "m12_tan_inv_deriv", "−1/(1 + x²)": "m12_tan_inv_deriv"}

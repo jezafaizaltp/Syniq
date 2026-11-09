@@ -5,6 +5,15 @@ title: Differential Equations
 tips:
   c12_order: Order = the highest derivative present. Degree = the power of that highest derivative (when the equation is a polynomial in derivatives).
   c12_if: For dy/dx + Py = Q, the integrating factor is e^(∫P dx).
+  m12_constants: "An nth-order equation has n arbitrary constants."
+  m12_de_integrate: "Integrate both sides to get y plus a constant C. Use the starting value to find C, then substitute."
+  m12_degree_de: "Degree = power of the highest-order derivative."
+  m12_degree_undefined: "Degree is defined only when the equation is a polynomial in the derivatives. Is sin(y′) a polynomial?"
+  m12_exp_growth: "The rate is proportional to the amount itself, and k > 0. Think of compound interest."
+  m12_homogeneous: "Homogeneous equations depend on the ratio y/x. Make that ratio the new variable."
+  m12_if: "IF = e^(∫P dx) with P = 1/x, and e^(ln x) = x."
+  m12_order_de: "Order = highest derivative present. The power on dy/dx doesn't matter."
+  m12_particular: "A general solution has constants; giving them values makes it specific."
 concepts:
 - code: cbse12m.de.basics
   title: Order, degree and solutions
@@ -91,6 +100,7 @@ concepts:
     - Highest derivative.
     - Second.
     solution: '2.'
+    mistakes: {"3": "m12_order_de", "1": "m12_order_de"}
   - prompt: Find the degree of d²y/dx² + 3(dy/dx)³ = 0.
     answer: '1'
     check: '1'
@@ -109,6 +119,7 @@ concepts:
     - y″ cubed.
     - Power 3.
     solution: '3.'
+    mistakes: {"2": "m12_degree_de", "1": "m12_degree_de"}
   - prompt: How many arbitrary constants does the general solution of a 2nd-order equation have?
     answer: '2'
     check: '2'
@@ -117,6 +128,7 @@ concepts:
     - Equals the order.
     - Two.
     solution: '2.'
+    mistakes: {"1": "m12_constants", "0": "m12_constants"}
   - prompt: 'The degree of y′ + sin(y′) = 0 is:'
     options:
     - not defined
@@ -129,6 +141,7 @@ concepts:
     - Not a polynomial in y′.
     - sin(y′).
     solution: Not defined.
+    mistakes: {"1": "m12_degree_undefined", "0": "m12_degree_undefined", "2": "m12_degree_undefined"}
   - prompt: 'A solution with no arbitrary constants is called:'
     options:
     - a particular solution
@@ -141,6 +154,7 @@ concepts:
     - Constants fixed.
     - Initial condition.
     solution: A particular solution.
+    mistakes: {"a general solution": "m12_particular", "an order": "m12_particular", "a degree": "m12_particular"}
 - code: cbse12m.de.solve
   title: Separable, homogeneous and linear equations
   after:
@@ -250,6 +264,7 @@ concepts:
     - y = x² + C.
     - C = 1.
     solution: '5.'
+    mistakes: {"4": "m12_de_integrate", "3": "m12_de_integrate"}
   - prompt: Solve dy/dx = 3x² with y(0) = 0. Find y(1).
     answer: '1'
     check: 1**3
@@ -258,6 +273,7 @@ concepts:
     - y = x³ + C.
     - C = 0.
     solution: '1.'
+    mistakes: {"3": "m12_de_integrate", "0": "m12_de_integrate"}
   - prompt: 'The integrating factor of dy/dx + y = x is:'
     options:
     - eˣ
@@ -284,6 +300,7 @@ concepts:
     - e^(ln x).
     - = x.
     solution: x.
+    mistakes: {"1/x": "m12_if", "eˣ": "m12_if", "ln x": "m12_if"}
   - prompt: 'To solve a homogeneous equation dy/dx = F(y/x), substitute:'
     options:
     - y = vx
@@ -296,6 +313,7 @@ concepts:
     - Ratio y/x.
     - v = y/x.
     solution: y = vx.
+    mistakes: {"y = x + v": "m12_homogeneous", "x = y²": "m12_homogeneous", "y = eˣ": "m12_homogeneous"}
   - prompt: 'dy/dt = ky with k > 0 describes:'
     options:
     - exponential growth
@@ -308,3 +326,4 @@ concepts:
     - Rate ∝ amount.
     - y = y₀e^(kt).
     solution: Exponential growth.
+    mistakes: {"linear growth": "m12_exp_growth", "decay": "m12_exp_growth", "oscillation": "m12_exp_growth"}
