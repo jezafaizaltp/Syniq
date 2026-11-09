@@ -5,6 +5,15 @@ title: Thermodynamics
 tips:
   c11c_sign: ΔH negative = exothermic (heat given out); ΔH positive = endothermic.
   c11c_gibbs: ΔG = ΔH − TΔS. A reaction is spontaneous when ΔG is negative.
+  c11_delta_g_sign: "ΔG = ΔH − TΔS. With both positive, which T makes the TΔS term win?"
+  c11_delta_g_zero: "ΔG = ΔH − TΔS = 0 gives T = ΔH/ΔS. Convert both to the same energy unit."
+  c11_entropy: "Entropy measures disorder. Which state has molecules moving most freely?"
+  c11_first_law: "ΔU = q + w. Heat absorbed and work done on the system both add."
+  c11_hess: "Climb a hill by any path: the height gained is the same. Which law says that for enthalpy?"
+  c11_hess_formation: "ΔH = Σ products − Σ reactants. Count 2 × H₂O, and O₂ is zero."
+  c11_isolated: "Open swaps matter and energy, closed swaps only energy. Which swaps neither?"
+  c11_state_function: "A state function depends only on start and end, not the route. Heat and work depend on the route."
+  c11_third_law: "A perfect crystal at absolute zero has just one possible arrangement."
 concepts:
 - code: cbse11c.thermo.enthalpy
   title: First law and enthalpy
@@ -115,6 +124,7 @@ concepts:
     - ΔU = q + w.
     - 300 + 100.
     solution: 400 J.
+    mistakes: {"200": "c11_first_law", "-200": "c11_first_law", "300": "c11_first_law"}
   - prompt: 'ΔfH: CO₂ = −393, H₂O(l) = −286, CH₄ = −75 kJ/mol. Find ΔH (kJ/mol) for CH₄ + 2O₂ → CO₂ + 2H₂O.'
     answer: '-890'
     check: (-393 + 2*(-286)) - (-75)
@@ -123,6 +133,7 @@ concepts:
     - Products − reactants; O₂ is 0.
     - (−393 − 572) − (−75).
     solution: −890 kJ/mol.
+    mistakes: {"-604": "c11_hess_formation", "890": "c11_hess_formation", "-1040": "c11_hess_formation"}
   - prompt: 'A reaction with ΔH = −50 kJ/mol is:'
     options:
     - exothermic
@@ -149,6 +160,7 @@ concepts:
     - Depends only on start and end.
     - Not on the route.
     solution: Enthalpy is a state function.
+    mistakes: {"heat": "c11_state_function", "work": "c11_state_function", "path length": "c11_state_function"}
   - prompt: 'Hess''s law states that:'
     options:
     - total enthalpy change is the same whatever the route
@@ -161,6 +173,7 @@ concepts:
     - Path independence.
     - ΔH is a state function.
     solution: ΔH doesn't depend on the path.
+    mistakes: {"energy flows from hot to cold": "c11_hess", "entropy always rises": "c11_hess", "heat equals work": "c11_hess"}
   - prompt: 'A system that exchanges neither energy nor matter with its surroundings is:'
     options:
     - isolated
@@ -173,6 +186,7 @@ concepts:
     - Nothing crosses.
     - Thermos flask (ideal).
     solution: An isolated system.
+    mistakes: {"open": "c11_isolated", "closed": "c11_isolated", "adiabatic only": "c11_isolated"}
 - code: cbse11c.thermo.spont
   title: Entropy and Gibbs energy
   after:
@@ -332,6 +346,7 @@ concepts:
     - T = ΔH/ΔS.
     - 40/0.1.
     solution: 400 K.
+    mistakes: {"0.4": "c11_delta_g_zero", "40": "c11_delta_g_zero", "4000": "c11_delta_g_zero"}
   - prompt: 'A reaction is spontaneous when ΔG is:'
     options:
     - negative
@@ -358,6 +373,7 @@ concepts:
     - Gas is most disordered.
     - Molecules spread out.
     solution: Steam.
+    mistakes: {"ice": "c11_entropy", "liquid water": "c11_entropy", "all the same": "c11_entropy"}
   - prompt: 'A reaction with ΔH > 0 and ΔS > 0 is spontaneous:'
     options:
     - at high temperature
@@ -370,6 +386,7 @@ concepts:
     - TΔS must beat ΔH.
     - Big T.
     solution: At high temperature.
+    mistakes: {"at low temperature": "c11_delta_g_sign", "always": "c11_delta_g_sign", "never": "c11_delta_g_sign"}
   - prompt: 'The third law says the entropy of a perfect crystal at 0 K is:'
     options:
     - zero
@@ -382,3 +399,4 @@ concepts:
     - Perfect order.
     - No disorder.
     solution: Zero.
+    mistakes: {"infinite": "c11_third_law", "negative": "c11_third_law", "equal to R": "c11_third_law"}
