@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ApiError, api, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import Readiness from "./Readiness";
 import Specialists from "./Specialists";
 
 type Check = { ok: boolean; errors: { row: number; problems: string[] }[]; students?: number; classes?: string[]; without_learning_consent?: number };
@@ -247,6 +248,8 @@ export default function Admin() {
       <p>
         <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
       </p>
+
+      {people && <Readiness people={people} />}
 
       <section className="card">
         <h2>Add students and parents from a spreadsheet</h2>
