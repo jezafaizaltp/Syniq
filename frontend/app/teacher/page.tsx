@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ApiError, PROGRESS_WORDS, STYLE_WORDS, METHOD_WORDS, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import ContentTools from "./ContentTools";
@@ -220,6 +221,11 @@ export default function Teacher() {
       <h1>Your class</h1>
       <p className="muted">
         {overview?.students ?? 0} students whose families share progress with the school. Students are never ranked.
+      </p>
+      <p>
+        <Link href="/admin/review">Review sheet: print every question in a subject →</Link>
+        <br />
+        <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
       </p>
 
       <section className="card">
