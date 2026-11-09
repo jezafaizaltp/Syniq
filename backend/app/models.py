@@ -273,6 +273,9 @@ class Item(Base):
     source: Mapped[str] = mapped_column(String(20), default="teacher")  # teacher | ai | pack
     review_note: Mapped[str] = mapped_column(Text, default="")
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    # What a teacher wrote on the paper review sheet. Kept apart from review_note, which the
+    # content loader rewrites, so it survives a reload until someone marks it fixed.
+    fix_note: Mapped[str] = mapped_column(Text, default="")
 
 
 class TutorQuestion(Base):
@@ -289,6 +292,8 @@ class TutorQuestion(Base):
     text: Mapped[str] = mapped_column(String(600))
     answered_by: Mapped[str] = mapped_column(String(10))  # ai | none
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    # Set when an adult has dealt with it (added content, or nothing to add). Hidden by default.
+    handled: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
 class Misconception(Base):
