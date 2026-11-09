@@ -5,6 +5,15 @@ title: Alternating Current
 tips:
   c12p_rms: rms value = peak ÷ √2. Mains 230 V in India is the rms value; the peak is about 325 V.
   c12p_transformer: 'Transformer: Vs/Vp = Ns/Np. Step-up raises voltage but lowers current; power stays about the same.'
+  p12_ac_power: "P = V_rms I_rms cos φ."
+  p12_impedance: "Z = √(R² + (X_L − X_C)²)."
+  p12_inductor_phase: "An inductor resists changes in current, so the current falls behind the voltage."
+  p12_power_factor: "In a pure inductor, the phase difference is 90°. What is cos 90°?"
+  p12_resonance: "At resonance X_L = X_C, so they cancel."
+  p12_transformer: "Vs/Vp = Ns/Np."
+  p12_transmission: "For the same power, higher voltage means lower current. Loss in wires is I²R."
+  p12_xc: "X_C = 1/(ωC). Convert μF to F."
+  p12_xl: "X_L = ωL."
 concepts:
 - code: cbse12p.ac.circuits
   title: AC circuits and reactance
@@ -158,6 +167,7 @@ concepts:
     - ωL.
     - 100 × 0.1.
     solution: 10 Ω.
+    mistakes: {"1000": "p12_xl", "0.001": "p12_xl"}
   - prompt: Find X_C (Ω) for C = 100 μF at ω = 100 rad/s.
     answer: '100'
     check: 1/(100*100*10**-6)
@@ -166,6 +176,7 @@ concepts:
     - 1/(ωC).
     - 1/(10⁻²).
     solution: 100 Ω.
+    mistakes: {"0.01": "p12_xc", "10000": "p12_xc"}
   - prompt: A series circuit has R = 3 Ω and X_L − X_C = 4 Ω. Find Z (Ω).
     answer: '5'
     check: sqrt(3**2+4**2)
@@ -174,6 +185,7 @@ concepts:
     - √(9 + 16).
     - '5.'
     solution: 5 Ω.
+    mistakes: {"7": "p12_impedance", "25": "p12_impedance"}
   - prompt: 'At resonance in a series LCR circuit, the impedance equals:'
     options:
     - R
@@ -186,6 +198,7 @@ concepts:
     - X_L = X_C cancel.
     - Only R left.
     solution: R.
+    mistakes: {"zero": "p12_resonance", "X_L + X_C": "p12_resonance", "infinity": "p12_resonance"}
   - prompt: 'In a pure inductor, the current:'
     options:
     - lags the voltage by 90°
@@ -198,6 +211,7 @@ concepts:
     - Opposes change.
     - Lags.
     solution: Lags the voltage by 90°.
+    mistakes: {"leads the voltage by 90°": "p12_inductor_phase", "is in phase": "p12_inductor_phase", "is zero": "p12_inductor_phase"}
 - code: cbse12p.ac.power
   title: Power in AC and transformers
   after:
@@ -297,6 +311,7 @@ concepts:
     - Vs = Vp × Ns/Np.
     - 220 × 5.
     solution: 1,100 V.
+    mistakes: {"44": "p12_transformer", "500": "p12_transformer"}
   - prompt: A step-down transformer changes 220 V to 11 V. Find Np/Ns.
     answer: '20'
     check: 220/11
@@ -305,6 +320,7 @@ concepts:
     - Ratio of voltages.
     - 220/11.
     solution: '20.'
+    mistakes: {"1/20": "p12_transformer", "11": "p12_transformer"}
   - prompt: V_rms = 200 V, I_rms = 5 A, cos φ = 0.8. Find the average power (W).
     answer: '800'
     check: 200*5*Rational(8,10)
@@ -313,6 +329,7 @@ concepts:
     - P = VI cos φ.
     - 200 × 5 × 0.8.
     solution: 800 W.
+    mistakes: {"1000": "p12_ac_power", "640": "p12_ac_power"}
   - prompt: An ideal transformer has 220 V, 2 A in and 44 V out. Find the output current (A).
     answer: '10'
     check: 220*2/44
@@ -335,6 +352,7 @@ concepts:
     - φ = 90°.
     - cos 90°.
     solution: '0.'
+    mistakes: {"1": "p12_power_factor", "0.5": "p12_power_factor", "infinite": "p12_power_factor"}
   - prompt: 'Power is transmitted at high voltage to:'
     options:
     - reduce I²R losses
@@ -347,3 +365,4 @@ concepts:
     - Same power, less current.
     - Heat loss ∝ I².
     solution: To reduce I²R heating losses.
+    mistakes: {"increase the current": "p12_transmission", "make it safer at home": "p12_transmission", "increase resistance": "p12_transmission"}
