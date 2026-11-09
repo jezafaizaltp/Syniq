@@ -6,6 +6,17 @@ tips:
   recurring_digits_count: Count how many digits repeat. One repeating digit means multiply by 10; two repeating digits means multiply by 100.
   irrational_root_of_square: The square root of a perfect square, like √9 = 3, is a whole number, so it is rational.
   sqrt_spiral_add: Each new triangle adds a side of 1 to the last hypotenuse √n, so the new hypotenuse is √(n + 1), not √n + 1.
+  always_another_between: "Between any two fractions you can find their average, and then another between that and either end. Does that ever stop?"
+  contradiction_start: "A proof by contradiction starts by assuming the opposite of what you want to prove, then shows it leads to nonsense."
+  diagonal_root_two: "Use Pythagoras on the square: diagonal² = 1² + 1². The compass carries that diagonal length to the number line."
+  irrational_decimal: "Rational numbers end or repeat. An irrational one is the opposite on both counts."
+  long_division_decimal: "Divide the top by the bottom: 1 ÷ 8. Keep adding zeros and dividing until it stops."
+  lowest_terms_clash: "We assumed p/q was in lowest terms. Look at what the proof shows about p and q: can both share a factor if they're in lowest terms?"
+  odd_squared_odd: "Try it: 3², 5², 7². What do odd numbers give when squared? So what must p be if p² is even?"
+  partly_recurring: "Only the 3 repeats, not the 2. Multiply by 10 and by 100 so the repeating parts line up, subtract, then simplify."
+  rational_perfect_square: "A square root is rational when the number inside is a perfect square. Which one comes out as a whole number?"
+  rational_plus_irrational: "If √2 + 3 were rational, subtracting 3 would make √2 rational. Is it?"
+  simplify_root_first: "Simplify each square root first. If the inside is a perfect square (or a fraction of perfect squares), the root is rational."
 concepts:
 - code: cbse9gm.numbers.rational_irrational
   title: Rational and irrational numbers
@@ -109,6 +120,7 @@ concepts:
     - Which square root comes out as a whole number?
     - 7 × 7 = 49.
     solution: 'Step 1: √49 = 7 = 7/1, so it is rational. Step 2: √7, π and √2 + 1 go on forever without repeating.'
+    mistakes: {"√7": "rational_perfect_square", "√2 + 1": "rational_perfect_square"}
   - prompt: What is the number exactly halfway between 1/4 and 3/4? Type a fraction like 2/3.
     answer: 1/2
     check: (1/4 + 3/4)/2
@@ -145,6 +157,7 @@ concepts:
     - 1.5 is one. Is there one between 1 and 1.5?
     - You can always find the average of two numbers.
     solution: 'Step 1: 1.5 is between 1 and 2. Step 2: 1.25 is between 1 and 1.5, 1.125 between 1 and 1.25, and so on for ever. So there are infinitely many.'
+    mistakes: {"None": "always_another_between", "Exactly nine": "always_another_between"}
   - prompt: Using a square of side 1 on the number line, its diagonal is swung down from 0. Which number does it mark?
     options:
     - √2
@@ -158,6 +171,7 @@ concepts:
     - 'Use Pythagoras on the square: the diagonal² = 1² + 1².'
     - Diagonal² = 2.
     solution: 'Step 1: Diagonal² = 1² + 1² = 2. Step 2: Diagonal = √2. Step 3: The compass marks √2 on the line, about 1.414.'
+    mistakes: {"2": "diagonal_root_two", "1.5": "diagonal_root_two"}
 - code: cbse9gm.numbers.decimals
   title: Decimal expansions
   after:
@@ -248,6 +262,7 @@ concepts:
     - Divide 1 by 8.
     - 1/8 is half of 1/4 = 0.25.
     solution: 'Step 1: 1 ÷ 8 = 0.125. Step 2: The division stops, so it is a terminating decimal.'
+    mistakes: {"0.18": "long_division_decimal", "1.8": "long_division_decimal"}
   - prompt: Which fraction has a terminating decimal expansion?
     options:
     - 3/20
@@ -260,6 +275,7 @@ concepts:
     - A fraction in lowest terms terminates when the bottom has only 2s and 5s as factors.
     - 20 = 2 × 2 × 5.
     solution: 'Step 1: 20 = 2² × 5, so 3/20 = 0.15 terminates. Step 2: 3, 7 and 6 (= 2 × 3) have other factors, so those recur.'
+    mistakes: {"1/3": "terminating_denominator", "5/6": "terminating_denominator"}
   - prompt: Write 0.4747… (47 repeats) as a fraction in lowest terms. Type a fraction like 2/3.
     answer: 47/99
     check: 47/99
@@ -279,6 +295,7 @@ concepts:
     - Let x = 0.2333…; then 10x = 2.333… and 100x = 23.333…
     - 100x − 10x = 21, so 90x = 21.
     solution: 'Step 1: 10x = 2.333… and 100x = 23.333… Step 2: Subtracting, 90x = 21. Step 3: x = 21/90 = 7/30.'
+    mistakes: {"0.2": "partly_recurring", "0.23": "partly_recurring"}
   - prompt: What kind of decimal expansion does an irrational number have?
     options:
     - Non-terminating and non-recurring
@@ -291,6 +308,7 @@ concepts:
     - Rational numbers either stop or repeat.
     - Irrational numbers do neither.
     solution: 'Step 1: Rational numbers terminate or recur. Step 2: An irrational number like √2 = 1.41421356… never stops and never repeats.'
+    mistakes: {"Non-terminating and recurring": "irrational_decimal", "Terminating": "irrational_decimal"}
 - code: cbse9gm.numbers.proof_spiral
   title: Proving √2 is irrational, and the square root spiral
   after:
@@ -345,6 +363,7 @@ concepts:
     - Proof by contradiction assumes the opposite.
     - The opposite of 'irrational'.
     solution: 'Step 1: We want to show √2 is not a fraction. Step 2: So we assume it is one, p/q, in lowest terms, and look for a contradiction.'
+    mistakes: {"√2 = 1.414 exactly": "contradiction_start", "p and q are both even": "contradiction_start"}
   - prompt: If p² is even, what must be true of p?
     options:
     - p is even
@@ -357,6 +376,7 @@ concepts:
     - What is an odd number squared?
     - 3² = 9, 5² = 25.
     solution: 'Step 1: An odd number squared is odd. Step 2: So if p² is even, p can''t be odd: p is even.'
+    mistakes: {"p is odd": "odd_squared_odd", "Nothing can be said": "odd_squared_odd"}
   - prompt: Why does the proof end in a contradiction?
     options:
     - p and q both turn out even, but p/q was in lowest terms
@@ -369,6 +389,7 @@ concepts:
     - What do we learn about p, and then about q?
     - Lowest terms means no common factor.
     solution: 'Step 1: p is even and q is even, so both share the factor 2. Step 2: That contradicts p/q being in lowest terms.'
+    mistakes: {"p turns out bigger than q": "lowest_terms_clash", "√2 turns out negative": "lowest_terms_clash"}
   - prompt: In the square root spiral, a triangle is built on a side of length √4 with the other leg 1. How long is its hypotenuse?
     options:
     - √5
@@ -396,6 +417,7 @@ concepts:
     - Which are perfect squares?
     - √(4/9) = 2/3.
     solution: 'Step 1: √(4/9) = 2/3, √0.25 = 0.5, √121 = 11 are rational. Step 2: 3 is not a perfect square, so √3 is irrational.'
+    mistakes: {"√(4/9)": "simplify_root_first", "√0.25": "simplify_root_first"}
   - prompt: Is √2 + 3 rational or irrational?
     options:
     - Irrational
@@ -408,3 +430,4 @@ concepts:
     - Suppose √2 + 3 = r, a rational number.
     - Then √2 = r − 3.
     solution: 'Step 1: If √2 + 3 were rational, then √2 = (√2 + 3) − 3 would be rational too. Step 2: But √2 is irrational, so √2 + 3 is irrational.'
+    mistakes: {"Rational": "rational_plus_irrational", "It depends on the decimal places": "rational_plus_irrational"}

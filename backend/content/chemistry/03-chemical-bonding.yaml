@@ -11,6 +11,9 @@ tips:
   charges_balance: "In an ionic formula the positive and negative charges must add up to zero. Cross over the charge numbers."
   valency_is_needed: "Valency is the number of electrons an atom gives, takes or shares to reach an octet, not always its valence electrons."
   polar_electronegativity: "A covalent bond is polar when the two atoms have different electronegativities; the more electronegative atom gets a slight negative charge."
+  al_three: "Aluminium has 3 outer electrons and loses all 3 to become Al³⁺."
+  ions_must_move: "Current needs moving charges. In solid salt the ions are locked in place; melted or dissolved they can move."
+  octet_duplet: "Eight outer electrons is an octet; two (as in helium) is a duplet."
 
 concepts:
   - code: chem9.bonding.octet
@@ -85,6 +88,7 @@ concepts:
         difficulty: 1
         hints: ["Octa means eight."]
         solution: "Eight outer electrons is an octet; two (for helium) is a duplet."
+        mistakes: {"A duplet": "octet_duplet", "A valency": "valency_is_needed"}
       - prompt: "Which noble gas does a sodium ion Na⁺ resemble in electron arrangement?"
         options: ["Neon", "Argon", "Helium", "Krypton"]
         answer: "Neon"
@@ -99,6 +103,7 @@ concepts:
         hints: ["Configuration 2, 4."]
         solution: "Carbon shares 4 electrons to complete its octet: valency 4."
 
+        mistakes: {"6": "valency_is_needed", "2": "valency_is_needed"}
   - code: chem9.bonding.ionic
     title: Ionic bonds
     after: [chem9.bonding.octet]
@@ -172,12 +177,14 @@ concepts:
         difficulty: 2
         hints: ["Aluminium is 2, 8, 3."]
         solution: "Aluminium loses its 3 outer electrons to become Al³⁺."
+        mistakes: {"2": "al_three", "6": "al_three"}
       - prompt: "When does solid sodium chloride conduct electricity?"
         options: ["When it is melted or dissolved in water", "Always, as a solid", "Never", "Only when cooled"]
         answer: "When it is melted or dissolved in water"
         difficulty: 2
         hints: ["The ions must be free to move."]
         solution: "In the solid the ions are fixed in place. Melted or dissolved, they can move and carry current."
+        mistakes: {"Always, as a solid": "ions_must_move", "Never": "ions_must_move"}
       - prompt: "Calcium forms Ca²⁺ and nitrogen forms N³⁻. How many calcium ions are in one unit of calcium nitride?"
         answer: "3"
         check: "solve(Eq(2*x, 3*2), x)[0]"
@@ -260,6 +267,7 @@ concepts:
         difficulty: 2
         hints: ["Carbon needs 4 more electrons."]
         solution: "Four single C–H bonds."
+        mistakes: {"1": "bond_pairs", "8": "bond_pairs"}
       - prompt: "How many shared pairs of electrons are in a molecule of carbon dioxide, O=C=O?"
         answer: "4"
         check: "2 + 2"

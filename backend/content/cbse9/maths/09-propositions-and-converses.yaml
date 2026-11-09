@@ -5,6 +5,14 @@ title: Propositions and their Converses
 tips:
   converse_assumed_true: 'A converse swaps the ''if'' and ''then'' parts. It needs its own proof: a true statement can have a false converse.'
   examples_not_proof: Examples that work don't prove a statement for every case; one counterexample is enough to disprove it.
+  consecutive_one_even: "In any two numbers next to each other, one must be even. What happens when you multiply by an even number?"
+  converse_swap: "A converse swaps the 'if' part and the 'then' part. It doesn't add a 'not'."
+  counterexample_odd: "A counterexample must be odd AND not prime. Check each choice for both."
+  factor_out_two: "An even number is 2 × something. Can you take 2 out of every term?"
+  iff_both_ways: "'If and only if' needs the statement and its converse both true. Try a counterexample for each one."
+  one_counterexample: "To show 'for all' is false, you need just one case where it fails."
+  proposition_true_false: "A proposition is a sentence that is either true or false. Can a question or an order be true or false?"
+  square_smaller_fraction: "Try squaring a number between 0 and 1. Is the square bigger or smaller?"
 concepts:
 - code: cbse9gm.logic.converse
   title: Propositions and their converses
@@ -89,6 +97,7 @@ concepts:
     - Swap the 'if' part and the 'then' part.
     - The 'then' part was 'divisible by 5'.
     solution: 'Step 1: P = ends in 0, Q = divisible by 5. Step 2: Converse: if Q then P, ''If a number is divisible by 5, then it ends in 0''.'
+    mistakes: {"If a number does not end in 0, then it is not divisible by 5": "converse_swap", "A number ends in 0 and is divisible by 5": "converse_swap"}
   - prompt: Is that converse true?
     options:
     - 'No: 15 is divisible by 5 but ends in 5'
@@ -115,6 +124,7 @@ concepts:
     - A proposition is either true or false.
     - Questions and orders are neither.
     solution: 'Step 1: ''7 is a prime number'' is a statement that is true. Step 2: The others are an order, a question and an exclamation.'
+    mistakes: {"Is it raining?": "proposition_true_false", "Please close the door": "proposition_true_false"}
   - prompt: 'Statement: ''If two angles are vertically opposite, they are equal.'' Which is true?'
     options:
     - The statement is true, but its converse is false
@@ -141,6 +151,7 @@ concepts:
     - Test each converse.
     - x = −3 also gives x² = 9.
     solution: 'Step 1: Equilateral triangles have equal angles, and a triangle with equal angles has equal sides: both true. Step 2: 6 is even but not a multiple of 4; a rectangle need not have equal sides; x² = 9 also when x = −3.'
+    mistakes: {"A number is even ↔ it is a multiple of 4": "iff_both_ways", "x² = 9 ↔ x = 3": "iff_both_ways"}
   - prompt: In Pythagoras' theorem, 'If a triangle is right-angled, then a² + b² = c².' What does the converse say?
     options:
     - If a² + b² = c² for a triangle's sides, then it is right-angled
@@ -153,6 +164,7 @@ concepts:
     - Swap the two parts.
     - The converse of Pythagoras is also true.
     solution: 'Step 1: Swap ''right-angled'' and ''a² + b² = c²''. Step 2: This converse is true too: builders use 3, 4, 5 to make right angles.'
+    mistakes: {"If a triangle is not right-angled, then a² + b² ≠ c²": "converse_swap", "Every triangle has a² + b² = c²": "converse_swap"}
 - code: cbse9gm.logic.counterexample
   title: Proving and disproving with counterexamples
   after:
@@ -225,6 +237,7 @@ concepts:
     - If it fails even once, it isn't true for all.
     - The smallest whole number above 0.
     solution: 'Step 1: ''For all numbers'' means no exceptions. Step 2: One exception, one counterexample, is enough.'
+    mistakes: {"2": "one_counterexample", "10": "one_counterexample"}
   - prompt: Which number is a counterexample to 'Every odd number is prime'?
     options:
     - '9'
@@ -237,6 +250,7 @@ concepts:
     - Find an odd number that is not prime.
     - 3 × 3.
     solution: 'Step 1: 9 is odd. Step 2: 9 = 3 × 3, so it is not prime. That disproves the statement.'
+    mistakes: {"7": "counterexample_odd", "2": "counterexample_odd"}
   - prompt: Ravi checks that 'n² + n + 41 is prime' for n = 0 to 10 and says it is always prime. What is wrong?
     options:
     - Examples can't prove it for every n; in fact n = 40 gives 41²
@@ -264,6 +278,7 @@ concepts:
     - 'Collect: 2a + 2b + 2.'
     - Take out the 2.
     solution: 'Step 1: 2a + 1 + 2b + 1 = 2a + 2b + 2. Step 2: = 2(a + b + 1), a multiple of 2, so it is even.'
+    mistakes: {"2a + 2b + 1": "factor_out_two", "2(a + b) + 1": "factor_out_two"}
   - prompt: Which is a counterexample to 'The square of any number is bigger than the number'?
     options:
     - 1/2
@@ -276,6 +291,7 @@ concepts:
     - Try a number between 0 and 1.
     - (1/2)² = 1/4.
     solution: 'Step 1: (1/2)² = 1/4. Step 2: 1/4 is less than 1/2, so the statement fails.'
+    mistakes: {"3": "square_smaller_fraction", "−4": "square_smaller_fraction"}
   - prompt: 'Prove or disprove: ''The product of two consecutive whole numbers is always even.'' Which is right?'
     options:
     - 'True: one of any two consecutive numbers is even, so the product is even'
@@ -288,3 +304,4 @@ concepts:
     - 3 and 5 are not consecutive.
     - Consecutive numbers alternate odd, even.
     solution: 'Step 1: Of n and n + 1, one is even. Step 2: An even number times anything is even. So the statement is true (and 0 is even too).'
+    mistakes: {"False: 3 × 5 = 15": "consecutive_one_even", "True only for numbers below 10": "consecutive_one_even"}

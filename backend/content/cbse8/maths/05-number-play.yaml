@@ -2,6 +2,20 @@
 subject: cbse8-math
 chapter: 5
 title: Number Play
+tips:
+  t8_consecutive_middle: "Three consecutive numbers are (middle − 1), middle, (middle + 1). Their sum is 3 × the middle."
+  t8_digit_missing: "Add the known digits, then find the single digit that brings the total to the next multiple of 9."
+  t8_div11: "Alternately add and subtract the digits. Divisible by 11 if the result is 0 or a multiple of 11."
+  t8_div4: "For 4, look only at the last two digits. Are they a multiple of 4?"
+  t8_div9: "Add the digits. A number is divisible by 9 when that sum is a multiple of 9."
+  t8_div_6: "2 and 3 share no factor, so divisible by both means divisible by 2 × 3."
+  t8_even_sum: "2 + 4 + … + 40 = 2 × (1 + 2 + … + 20). Find the inner sum first."
+  t8_gauss_sum: "1 + 2 + … + n = n(n + 1) ÷ 2. Pair the first and last numbers."
+  t8_odd_count_parity: "Pair the odd numbers: each pair sums to even. With 7 numbers, is one left over?"
+  t8_odd_sum_count: "How many odd numbers are there from 1 to 39? The sum of the first n odd numbers is n²."
+  t8_power_of_two: "Try writing each as consecutive numbers: 15 = 7 + 8, 9 = 4 + 5, 10 = 1 + 2 + 3 + 4. Which one can't be done?"
+  t8_remainder_9: "The remainder when dividing by 9 equals the remainder of the digit sum divided by 9."
+
 concepts:
 - code: cbse8m.np.divisibility
   title: Quick checks for divisibility
@@ -77,6 +91,7 @@ concepts:
     - Add the digits.
     - 4 + 7 + 2 + 5 = 18.
     solution: 4 + 7 + 2 + 5 = 18, a multiple of 9, so 4,725 is divisible by 9.
+    mistakes: {"4,726": "t8_div9", "4,728": "t8_div9"}
   - prompt: Is 5,316 divisible by 4?
     options:
     - Yes, because 16 is a multiple of 4
@@ -89,6 +104,7 @@ concepts:
     - For 4, look at the last two digits.
     - 16 = 4 × 4.
     solution: The last two digits, 16, make a multiple of 4, so 5,316 is divisible by 4.
+    mistakes: {"Yes, because 5 + 3 + 1 + 6 = 15": "t8_div4", "No, because it doesn't end in 0": "t8_div4"}
   - prompt: What digit should replace ★ so that 3★5 is divisible by 9? (★ is a single digit.)
     answer: '1'
     check: 9 - 3 - 5
@@ -97,6 +113,7 @@ concepts:
     - The digit sum must be a multiple of 9.
     - 3 + ★ + 5 = 9.
     solution: 3 + ★ + 5 = 8 + ★ must be 9 (★ is at most 9, so 18 is too big), so ★ = 1. 315 = 9 × 35.
+    mistakes: {"9": "t8_digit_missing", "0": "t8_digit_missing"}
   - prompt: Which number is divisible by 11?
     options:
     - 918,082
@@ -109,6 +126,7 @@ concepts:
     - Alternately add and subtract the digits.
     - 9 − 1 + 8 − 0 + 8 − 2.
     solution: 9 − 1 + 8 − 0 + 8 − 2 = 22, a multiple of 11, so 918,082 is divisible by 11.
+    mistakes: {"918,083": "t8_div11", "918,085": "t8_div11"}
   - prompt: A number is divisible by both 2 and 3. Which must it also be divisible by?
     options:
     - '6'
@@ -121,6 +139,7 @@ concepts:
     - 2 × 3.
     - 2 and 3 share no factor.
     solution: Divisible by 2 and by 3 means divisible by 2 × 3 = 6.
+    mistakes: {"9": "t8_div_6", "12": "t8_div_6"}
   - prompt: What is the remainder when 247,513 is divided by 9?
     answer: '4'
     check: 247513 - 9*27501
@@ -129,6 +148,7 @@ concepts:
     - The remainder by 9 equals the remainder of the digit sum.
     - 2 + 4 + 7 + 5 + 1 + 3 = 22.
     solution: Digit sum 22, and 22 = 2 × 9 + 4, so the remainder is 4.
+    mistakes: {"22": "t8_remainder_9", "3": "t8_remainder_9"}
 - code: cbse8m.np.patterns
   title: Sums of odd, even and consecutive numbers
   after:
@@ -223,6 +243,7 @@ concepts:
     - n(n + 1)/2 with n = 50.
     - 50 × 51 ÷ 2.
     solution: 50 × 51 ÷ 2 = 1275.
+    mistakes: {"2550": "sum_formula_half", "1250": "t8_gauss_sum"}
   - prompt: Is the sum of 7 odd numbers odd or even?
     options:
     - Odd
@@ -235,6 +256,7 @@ concepts:
     - Two odds make an even.
     - '7 odds: 3 pairs and one left over.'
     solution: 'Pair them: 3 pairs give even sums and one odd number is left, so the total is odd.'
+    mistakes: {"Even": "t8_odd_count_parity", "It depends on the numbers": "t8_odd_count_parity"}
   - prompt: Find 1 + 3 + 5 + ... + 39 (all odd numbers up to 39).
     answer: '400'
     check: 20**2
@@ -243,6 +265,7 @@ concepts:
     - How many odd numbers from 1 to 39?
     - There are 20; sum = 20².
     solution: There are 20 odd numbers up to 39, so the sum is 20² = 400.
+    mistakes: {"1521": "t8_odd_sum_count", "780": "t8_odd_sum_count"}
   - prompt: Three consecutive numbers add to 72. What is the middle one?
     answer: '24'
     check: 72/3
@@ -251,6 +274,7 @@ concepts:
     - The sum is 3 times the middle number.
     - 72 ÷ 3.
     solution: 72 ÷ 3 = 24, so the numbers are 23, 24, 25.
+    mistakes: {"23": "t8_consecutive_middle", "36": "t8_consecutive_middle"}
   - prompt: Find 2 + 4 + 6 + ... + 40.
     answer: '420'
     check: 20*21
@@ -259,6 +283,7 @@ concepts:
     - Twice 1 + 2 + ... + 20.
     - 20 × 21.
     solution: 2(1 + 2 + ... + 20) = 2 × 210 = 420.
+    mistakes: {"210": "t8_even_sum", "820": "t8_even_sum"}
   - prompt: Which number cannot be written as a sum of two or more consecutive counting numbers?
     options:
     - '16'
@@ -271,3 +296,4 @@ concepts:
     - 15 = 7 + 8, 9 = 4 + 5, 10 = 1 + 2 + 3 + 4.
     - Powers of 2 can't.
     solution: 16 is a power of 2, and powers of 2 are the only numbers that cannot be written this way.
+    mistakes: {"15": "t8_power_of_two", "10": "t8_power_of_two"}

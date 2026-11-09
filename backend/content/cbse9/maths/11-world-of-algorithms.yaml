@@ -5,6 +5,14 @@ title: The World of Algorithms
 tips:
   gcd_vs_lcm: The GCD is the biggest number that divides both; it can't be bigger than the smaller number. The LCM is the one that is a multiple of both.
   euclid_stop_early: Keep going until the remainder is 0; the GCD is the last non-zero number (the last divisor).
+  algorithm_exact_steps: "An algorithm is a list of exact steps that always finishes and always gives the answer. Which choice is like that?"
+  common_factor_out: "If d divides both, write a = d × m and b = d × n. What do you get when you subtract?"
+  coprime_meaning: "GCD 1 means they share no factor except 1. They don't have to be prime themselves (think of 8 and 15)."
+  divisor_pair_root: "Divisors come in pairs d and n/d. If both were bigger than √n, their product would be bigger than n."
+  divisor_pairs: "List the divisors in pairs that multiply to 36. A square number has one pair where both are the same: count it once."
+  euclid_continue: "Divide, keep the remainder, then divide the old divisor by it. Stop when the remainder is 0."
+  euclid_remainder: "Divide the big number by the small one: how many whole 18s fit in 48, and what is left?"
+  euclid_speed: "Both methods give the same GCD. Think about how many steps each needs when the numbers are huge."
 concepts:
 - code: cbse9gm.algo.basics
   title: Algorithms, divisors and the GCD
@@ -74,6 +82,7 @@ concepts:
     - An algorithm has exact steps.
     - Anyone following it gets the same answer.
     solution: 'Step 1: Only the column-addition steps are exact and always finish. Step 2: The others are not clear steps.'
+    mistakes: {"Add the numbers somehow": "algorithm_exact_steps", "Guess the answer and hope": "algorithm_exact_steps"}
   - prompt: How many divisors does 36 have?
     answer: '9'
     check: '9'
@@ -82,6 +91,7 @@ concepts:
     - 'Pair them: 1 × 36, 2 × 18, 3 × 12, 4 × 9, 6 × 6.'
     - 6 × 6 counts once.
     solution: 'Step 1: Pairs: (1, 36), (2, 18), (3, 12), (4, 9), (6, 6). Step 2: That is 4 × 2 + 1 = 9 divisors.'
+    mistakes: {"10": "divisor_pairs", "8": "divisor_pairs"}
   - prompt: Find the GCD of 45 and 75.
     answer: '15'
     check: gcd(45, 75)
@@ -105,6 +115,7 @@ concepts:
     - 'For 36: 2 pairs with 18, 3 with 12.'
     - If both were bigger than √n, their product would be bigger than n.
     solution: 'Step 1: If d divides n, so does n/d. Step 2: They can''t both be more than √n, or the product would be more than n. So testing up to √n finds every pair.'
+    mistakes: {"Numbers above √n are never divisors": "divisor_pair_root", "√n is always prime": "divisor_pair_root"}
   - prompt: Two numbers have GCD 1. What are they called?
     options:
     - Co-prime
@@ -117,6 +128,7 @@ concepts:
     - They share no factor except 1.
     - 8 and 15 are an example.
     solution: 'Step 1: GCD 1 means no common factor other than 1. Step 2: Such numbers are co-prime (they need not be prime themselves: 8 and 15).'
+    mistakes: {"Prime": "coprime_meaning", "Square": "coprime_meaning"}
 - code: cbse9gm.algo.euclid
   title: Euclid's algorithm for the GCD
   after:
@@ -191,6 +203,7 @@ concepts:
     - 18 goes into 48 twice.
     - 48 − 36.
     solution: 'Step 1: 48 = 2 × 18 + 12. The remainder is 12.'
+    mistakes: {"2": "euclid_remainder", "30": "euclid_remainder"}
   - prompt: Use Euclid's algorithm to find GCD(84, 36).
     answer: '12'
     check: gcd(84, 36)
@@ -199,6 +212,7 @@ concepts:
     - 84 = 2 × 36 + 12.
     - 36 = 3 × 12 + 0.
     solution: 'Step 1: 84 = 2 × 36 + 12. Step 2: 36 = 3 × 12 + 0. Step 3: GCD = 12.'
+    mistakes: {"6": "euclid_continue", "252": "gcd_vs_lcm"}
   - prompt: Find GCD(391, 299).
     answer: '23'
     check: gcd(391, 299)
@@ -221,6 +235,7 @@ concepts:
     - Write a and b as multiples of d.
     - Take d out as a common factor.
     solution: 'Step 1: a = dm, b = dn. Step 2: a − b = d(m − n), a multiple of d.'
+    mistakes: {"Because a − b is always smaller": "common_factor_out", "It only works for even numbers": "common_factor_out"}
   - prompt: A hall is 72 m by 30 m. What is the largest square tile side (in m) that covers it exactly?
     answer: '6'
     check: gcd(72, 30)
@@ -243,3 +258,4 @@ concepts:
     - Think about efficiency.
     - Each remainder is smaller than the divisor.
     solution: 'Step 1: Both give the same GCD. Step 2: Euclid''s remainders shrink fast, so even 10-digit numbers take only a few dozen steps, while listing divisors could take millions.'
+    mistakes: {"It gives a bigger GCD": "euclid_speed", "Listing divisors gives the wrong answer": "euclid_speed"}

@@ -5,6 +5,13 @@ title: Statistics
 tips:
   c10_class_width: 'That''s the class width. The class mark is the middle: (lower + upper)/2.'
   c10_divide_by_total: Divide by the total frequency Σf, not by the number of classes.
+  t10_class_mark_reason: "Once data is grouped we don't know the exact values in a class. What single value can stand for them?"
+  t10_cumulative: "'Cumulative' means adding up as you go. It includes all classes up to this one."
+  t10_empirical: "3 × Median = Mode + 2 × Mean. Find the right side, then divide by 3."
+  t10_mean_divide: "Mean = Σfx ÷ Σf. Divide the bigger total by the number of values."
+  t10_median_formula: "Median = l + (n/2 − cf)/f × h, where cf is the total BEFORE the median class."
+  t10_modal_class: "The modal class is the class with the highest frequency, not the middle class."
+  t10_mode_formula: "Mode = l + (f₁ − f₀)/(2f₁ − f₀ − f₂) × h. Find l, f₁, f₀, f₂ from the modal class and its neighbours."
 concepts:
 - code: cbse10m.stats.mean
   title: Mean of grouped data
@@ -129,6 +136,7 @@ concepts:
     - Mean = Σfx/Σf.
     - 1300/50.
     solution: 1300 ÷ 50 = 26.
+    mistakes: {"65000": "t10_mean_divide", "1300": "t10_mean_divide"}
   - prompt: With assumed mean a = 25, Σf = 20 and Σfd = −40, find the mean.
     answer: '23'
     check: 25 + (-40)/20
@@ -151,6 +159,7 @@ concepts:
     - Grouping hides the individual values.
     - The middle is a fair guess.
     solution: Grouping loses the exact values, so each class is represented by its mid-point, assuming values are spread evenly.
+    mistakes: {"It makes the mean bigger": "t10_class_mark_reason", "Class marks are always whole numbers": "t10_class_mark_reason"}
 - code: cbse10m.stats.median_mode
   title: Median and mode of grouped data
   after:
@@ -256,6 +265,7 @@ concepts:
     - The modal class has the highest frequency.
     - 12 is the largest.
     solution: 20–30 has the highest frequency, 12.
+    mistakes: {"10–20": "t10_modal_class", "30–40": "t10_modal_class"}
   - prompt: For that data, find the mode.
     answer: '24'
     check: 20 + Rational(12 - 8, 2*12 - 8 - 6)*10
@@ -264,6 +274,7 @@ concepts:
     - l = 20, f₁ = 12, f₀ = 8, f₂ = 6, h = 10.
     - 20 + (4/10) × 10.
     solution: 'Step 1: Mode = 20 + (12 − 8)/(24 − 8 − 6) × 10. Step 2: = 20 + 4/10 × 10 = 24.'
+    mistakes: {"20": "t10_mode_formula", "12": "t10_mode_formula"}
   - prompt: For 5, 8, 12, 6, 4 in classes of width 10 from 0, the total is 35. The median class is 20–30 (cf before it 13). Find the median, as a decimal to 2 places.
     answer: '23.75'
     check: 20 + (Rational(35, 2) - 13)/12*10
@@ -272,6 +283,7 @@ concepts:
     - n/2 = 17.5.
     - Median = 20 + (17.5 − 13)/12 × 10.
     solution: 'Step 1: n/2 = 17.5, cf before = 13, f = 12. Step 2: Median = 20 + 4.5/12 × 10 = 20 + 3.75 = 23.75.'
+    mistakes: {"25": "t10_median_formula", "17.5": "t10_median_formula"}
   - prompt: Using 3 Median = Mode + 2 Mean, find the median if the mode is 24 and the mean is 21.
     answer: '22'
     check: (24 + 2*21)/3
@@ -280,6 +292,7 @@ concepts:
     - 3 Median = 24 + 42.
     - 66 ÷ 3.
     solution: 3 Median = 24 + 2 × 21 = 66, so Median = 22.
+    mistakes: {"66": "t10_empirical", "22.5": "t10_empirical"}
   - prompt: What is the cumulative frequency of a class?
     options:
     - The total of all frequencies up to and including that class
@@ -292,6 +305,7 @@ concepts:
     - '''Cumulative'' means building up.'
     - Keep a running total.
     solution: It is the running total of frequencies up to and including that class.
+    mistakes: {"The frequency of that class only": "t10_cumulative", "The highest frequency": "t10_cumulative"}
   - prompt: n = 50, and the classes 0–10, 10–20, 20–30, 30–40, 40–50 have frequencies 5, 10, 10, 20, 5. Find the median.
     answer: '30'
     check: 20 + (25 - 15)/10*10
@@ -300,3 +314,4 @@ concepts:
     - 'Cumulative frequencies: 5, 15, 25, 45, 50; n/2 = 25.'
     - The first cf ≥ 25 is 25, at 20–30.
     solution: 'Step 1: n/2 = 25. Step 2: cf reaches 25 exactly at the end of 20–30, so the median class is 20–30 with cf before 15 and f = 10. Step 3: Median = 20 + (25 − 15)/10 × 10 = 30.'
+    mistakes: {"25": "t10_median_formula", "20": "t10_median_formula"}

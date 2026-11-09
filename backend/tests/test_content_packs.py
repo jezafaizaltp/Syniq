@@ -111,3 +111,18 @@ def test_tap_choices_for_negative_and_fraction_answers():
     assert "-12" in negative and "12" in negative and sum(c.startswith("-") for c in negative) > 1
     assert sorted(tap_choices(None, "1/2", 0, ["1", "1/4"])) == ["1", "1/2", "1/4"]
     assert tap_choices(None, "3.5", 0, []) == []  # no likely mistakes known: typed instead
+
+
+FULLY_TIPPED = {"maths", "physics", "chemistry", "biology", "social-science", "english", "hindi", "it"} | {
+    f"cbse{n}/{s}" for n in (6, 7, 8, 9, 10) for s in ("maths", "science")
+}
+
+
+def test_every_maths_and_science_question_has_planned_mistakes():
+    """Kerala Class 9 and CBSE Classes 6 to 10 Maths and Science: every wrong answer we expect gets its own tip."""
+    missing = []
+    for path, pack in content_packs.read_packs():
+        folder = "/".join(path.relative_to(content_packs.CONTENT_DIR).parts[:-1])
+        if folder in FULLY_TIPPED:
+            missing += [f"{path.name}: {i['prompt'][:50]}" for c in pack["concepts"] for i in c["items"] if not i.get("mistakes")]
+    assert missing == []

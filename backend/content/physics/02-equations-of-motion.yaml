@@ -13,6 +13,9 @@ tips:
   unit_kmh: "Convert km/h to m/s by multiplying by 5/18 (1000 m ÷ 3600 s)."
   retardation_sign: "When a body slows down, its acceleration is negative."
   graph_slope_area: "On a velocity–time graph, the slope gives acceleration and the area under the line gives displacement."
+  acceleration_unit: "Acceleration is change in velocity (m/s) per second: m/s²."
+  horizontal_rest: "A flat line on a distance–time graph means distance isn't changing: the body is still."
+  v_from_rest: "From rest, v = a × t."
 
 concepts:
   - code: phy9.motion.speed_velocity
@@ -104,6 +107,7 @@ concepts:
         difficulty: 2
         hints: ["Total distance ÷ total time."]
         solution: "Step 1: Total distance 180 km. Step 2: Total time 3 h. Step 3: 180 ÷ 3 = 60 km/h."
+        mistakes: {"90": "average_speed_total", "180": "average_speed_total"}
       - prompt: "A cyclist goes 10 km at 20 km/h and returns the same 10 km at 10 km/h. What is the average speed for the whole trip, in km/h?"
         answer: "40/3"
         check: "20/(Rational(10, 20) + Rational(10, 10))"
@@ -201,12 +205,14 @@ concepts:
         difficulty: 1
         hints: ["Velocity (m/s) divided by time (s)."]
         solution: "(m/s) ÷ s = m/s²"
+        mistakes: {"m/s": "acceleration_unit", "N": "acceleration_unit"}
       - prompt: "A body moves with a uniform acceleration of 4 m/s² from rest. What is its velocity after 6 s, in m/s?"
         answer: "24"
         check: "0 + 4*6"
         difficulty: 2
         hints: ["Each second the velocity rises by 4 m/s."]
         solution: "v = 0 + 4 × 6 = 24 m/s"
+        mistakes: {"10": "v_from_rest", "1.5": "v_from_rest"}
       - prompt: "A train slows uniformly from 72 km/h to 36 km/h in 10 s. What is its acceleration, in m/s²?"
         answer: "-1"
         check: "(36 - 72)*Rational(5, 18)/10"
@@ -378,6 +384,7 @@ concepts:
         difficulty: 1
         hints: ["The distance doesn't change as time passes."]
         solution: "Distance stays the same, so the body is not moving."
+        mistakes: {"Moving with uniform speed": "horizontal_rest", "Accelerating": "horizontal_rest"}
       - prompt: "On a velocity–time graph, what does the slope of the line give?"
         options: ["Acceleration", "Distance", "Speed", "Time"]
         answer: "Acceleration"

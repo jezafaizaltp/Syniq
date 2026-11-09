@@ -6,6 +6,11 @@ tips:
   probability_over_one: 'A probability is a fraction of all the outcomes, so it is between 0 and 1: favourable ÷ total.'
   probability_wrong_total: Count every possible outcome for the bottom of the fraction, not just the unfavourable ones.
   tree_add_instead_multiply: 'Along the branches of a tree, multiply: the chance of this AND then that is the product.'
+  certain_is_one: "Probability runs from 0 (impossible) to 1 (certain). Certain is the top of the scale."
+  complement_one_minus: "Rain and no rain together cover every case, so their probabilities add to 1."
+  expected_count: "Expected count = probability × number of trials. What fraction of rolls should show a 6?"
+  not_event_complement: "The question asks about days WITHOUT rain. Count those days first, then divide by the total."
+  small_sample: "10 tosses is a very small sample, and a coin has no memory. What happens to the fraction of heads over thousands of tosses?"
 concepts:
 - code: cbse9gm.prob.scale
   title: Chance, the probability scale and experiments
@@ -100,6 +105,7 @@ concepts:
     - The top of the scale.
     - Impossible is 0.
     solution: 'Step 1: Probabilities go from 0 to 1. Step 2: Certain is 1.'
+    mistakes: {"100": "probability_over_one", "0": "certain_is_one"}
   - prompt: A coin is tossed 200 times and shows heads 96 times. What is the experimental probability of heads? Type a decimal.
     answer: '0.48'
     check: 96/200
@@ -132,6 +138,7 @@ concepts:
     - 'Days without rain: 50 − 15.'
     - 35 ÷ 50.
     solution: 'Step 1: 35 days had no rain. Step 2: 35 ÷ 50 = 0.7.'
+    mistakes: {"0.3": "not_event_complement", "35": "probability_over_one"}
   - prompt: A dice is rolled 600 times. About how many times would you expect a 6?
     answer: '100'
     check: 600/6
@@ -140,6 +147,7 @@ concepts:
     - Each face has probability 1/6.
     - 1/6 of 600.
     solution: 'Step 1: P(6) = 1/6. Step 2: 600 × 1/6 = 100. The real count will be close to 100, not always exactly 100.'
+    mistakes: {"6": "expected_count", "60": "expected_count"}
   - prompt: Riya tosses a coin 10 times and gets 7 heads. What is the best conclusion?
     options:
     - 10 tosses is too few; with many more tosses the fraction of heads should get close to 1/2
@@ -152,6 +160,7 @@ concepts:
     - Random results vary a lot in small experiments.
     - A coin has no memory.
     solution: 'Step 1: In 10 tosses, 7 heads happens quite often with a fair coin. Step 2: Over many tosses the experimental probability settles near 1/2. Step 3: The coin has no memory, so tails is not ''due''.'
+    mistakes: {"The coin must be unfair": "small_sample", "Tails is now more likely next time": "small_sample"}
 - code: cbse9gm.prob.theoretical
   title: Theoretical probability, outcomes and tree diagrams
   after:
@@ -257,6 +266,7 @@ concepts:
     - P(not A) = 1 − P(A).
     - 1 − 0.35.
     solution: 'Step 1: Rain or no rain covers everything, so the two add to 1. Step 2: 1 − 0.35 = 0.65.'
+    mistakes: {"0.35": "complement_one_minus", "0.75": "complement_one_minus"}
   - prompt: A coin is tossed and a dice is rolled. How many outcomes are in the sample space?
     answer: '12'
     check: 2*6

@@ -241,6 +241,12 @@ export default function Admin() {
       <p>
         <Link href="/admin/audit">Audit log: who viewed or changed what →</Link>
       </p>
+      <p>
+        <Link href="/admin/review">Teacher review sheet: print every question in a subject →</Link>
+      </p>
+      <p>
+        <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
+      </p>
 
       <section className="card">
         <h2>Add students and parents from a spreadsheet</h2>

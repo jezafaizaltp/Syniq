@@ -9,6 +9,20 @@ tips:
   slope_rise_run_swap: 'Slope is how much y changes for each 1 step in x: change in y ÷ change in x, not the other way round.'
   intercept_is_coefficient: In y = ax + b the number on its own, b, is where the line crosses the y-axis; a is the slope.
   growth_vs_decay: If the amount goes up by the same step each time, a is positive (growth); if it goes down, a is negative (decay).
+  constant_degree: "A plain number is the number times x⁰. What power of x is that?"
+  empty_means_zero: "Empty means the amount left is 0. Set the expression equal to 0 and solve for x."
+  fixed_plus_rate: "The fixed charge is paid once; the per-km charge is multiplied by the distance. Do the multiplying, then add the fixed part."
+  linear_same_gap: "A linear table goes up by the same amount every step. Find the gaps between the y-values and see which stay equal."
+  negative_cube: "(−1)³ = −1 × −1 × −1. Count the minus signs: an odd number of them leaves the answer negative."
+  parallel_same_slope: "Parallel lines climb at the same rate: their x-coefficients (slopes) are equal. The number on its own can differ."
+  poly_name_parts: "Two separate checks: the highest power names the degree (linear, quadratic, cubic), and the number of terms names it binomial or trinomial."
+  polynomial_whole_powers: "In a polynomial every power of x is a whole number 0, 1, 2, … Rewrite 1/x and √x as powers and look."
+  slope_negative_down: "A negative slope means y goes DOWN as x goes up. Multiply the slope by x and add it to the starting value."
+  square_root_two_signs: "x² = 9 has two answers: a positive one and a negative one, because a negative times itself is positive too."
+  start_height: "The plant starts at 4 cm, so only the growth beyond that comes from the daily 0.5 cm. Take the start away first, then divide."
+  step_back_to_zero: "Find how much y changes for each step in x, then walk back from x = 1 to x = 0."
+  sub_every_term: "Replace every x with the number in brackets, do the powers first, then the multiplying, then add and subtract."
+  x_axis_y_zero: "A line crosses the x-axis where y = 0. Put 0 for y and solve."
 concepts:
 - code: cbse9gm.poly.degree
   title: Polynomials and their degree
@@ -98,6 +112,7 @@ concepts:
     - Every power of x must be a whole number.
     - 1/x = x^(−1) and √x = x^(1/2).
     solution: 'Step 1: 1/x, √x and x^(−2) have powers −1, 1/2 and −2. Step 2: Only x² − 3x + 2 has whole-number powers.'
+    mistakes: {"x + 1/x": "polynomial_whole_powers", "√x + 4": "polynomial_whole_powers"}
   - prompt: What kind of polynomial is 3y² + 5y?
     options:
     - Quadratic binomial
@@ -110,6 +125,7 @@ concepts:
     - Highest power gives the degree.
     - Count the terms.
     solution: 'Step 1: The highest power is 2, so it is quadratic. Step 2: It has 2 terms, so it is a binomial.'
+    mistakes: {"Quadratic trinomial": "poly_name_parts", "Linear binomial": "poly_name_parts"}
   - prompt: What is the coefficient of x² in 2 − x² + 4x³?
     answer: '-1'
     check: '-1'
@@ -128,6 +144,7 @@ concepts:
     - 9 = 9x⁰.
     - Any number to the power 0 is 1.
     solution: 'Step 1: 9 = 9 × x⁰. Step 2: The power is 0, so the degree is 0.'
+    mistakes: {"1": "constant_degree", "9": "constant_degree"}
   - prompt: What is the degree of (x² + 1)(x³ − 2)?
     answer: '5'
     check: 2 + 3
@@ -226,6 +243,7 @@ concepts:
     - Put 4 in place of x.
     - 16 − 12 + 2.
     solution: 'Step 1: p(4) = 4² − 3 × 4 + 2. Step 2: = 16 − 12 + 2 = 6.'
+    mistakes: {"30": "sub_every_term", "-2": "sub_every_term"}
   - prompt: Find the zero of p(x) = 2x − 6.
     answer: '3'
     check: 6/2
@@ -254,6 +272,7 @@ concepts:
     - (−1)³ = −1.
     - 3 × (−1) − (−1) + 1.
     solution: 'Step 1: p(−1) = 3(−1)³ − (−1) + 1. Step 2: = −3 + 1 + 1 = −1.'
+    mistakes: {"3": "negative_cube", "-3": "minus_negative"}
   - prompt: Find the zero of p(x) = 3x + 2. Type a fraction like −2/3.
     answer: -2/3
     check: -2/3
@@ -276,6 +295,7 @@ concepts:
     - Set x² − 9 = 0, so x² = 9.
     - Both 3² and (−3)² are 9.
     solution: 'Step 1: x² − 9 = 0 means x² = 9. Step 2: x = 3 or x = −3.'
+    mistakes: {"Only 3": "square_root_two_signs", "9 and −9": "square_root_two_signs"}
   - prompt: If p(x) = kx − 4 and p(2) = 0, what is k?
     answer: '2'
     check: 4/2
@@ -284,6 +304,7 @@ concepts:
     - Put x = 2 and set the result to 0.
     - 2k − 4 = 0.
     solution: 'Step 1: p(2) = 2k − 4 = 0. Step 2: 2k = 4, so k = 2.'
+    mistakes: {"-2": "zero_sign_flip", "8": "sub_every_term"}
 - code: cbse9gm.linear.growth
   title: Linear growth and decay
   after:
@@ -383,6 +404,7 @@ concepts:
     - Fare = 15x + 40.
     - 15 × 6 = 90.
     solution: 'Step 1: 15 × 6 = 90. Step 2: 90 + 40 = 130.'
+    mistakes: {"90": "fixed_plus_rate", "330": "fixed_plus_rate"}
   - prompt: Which table shows a linear relationship?
     options:
     - 'x: 0, 1, 2, 3 → y: 5, 8, 11, 14'
@@ -395,6 +417,7 @@ concepts:
     - Look at the gaps between the y-values.
     - Linear means equal gaps.
     solution: 'Step 1: 5, 8, 11, 14 goes up by 3 every time. Step 2: The others have gaps that change, so they are not linear.'
+    mistakes: {"x: 0, 1, 2, 3 → y: 1, 2, 4, 8": "linear_same_gap", "x: 0, 1, 2, 3 → y: 5, 6, 8, 11": "linear_same_gap"}
   - prompt: A 30 L tank leaks 1.5 L per hour. Which rule gives the water left after x hours?
     options:
     - 30 − 1.5x
@@ -417,6 +440,7 @@ concepts:
     - Empty means 30 − 1.5x = 0.
     - 30 ÷ 1.5.
     solution: 'Step 1: 30 − 1.5x = 0. Step 2: 1.5x = 30, so x = 20 hours.'
+    mistakes: {"45": "empty_means_zero", "28.5": "empty_means_zero"}
   - prompt: A plant is 4 cm tall and grows 0.5 cm a day. On which day is it 10 cm tall?
     answer: '12'
     check: (10 - 4)/0.5
@@ -425,6 +449,7 @@ concepts:
     - Height = 0.5x + 4.
     - It must grow 6 cm.
     solution: 'Step 1: 0.5x + 4 = 10. Step 2: 0.5x = 6, so x = 12.'
+    mistakes: {"20": "start_height", "28": "start_height"}
   - prompt: A linear rule gives y = 7 when x = 1 and y = 19 when x = 4. What is y when x = 0?
     answer: '3'
     check: 7 - (19 - 7)/(4 - 1)
@@ -433,6 +458,7 @@ concepts:
     - From x = 1 to x = 4, y goes up 12 in 3 steps.
     - So each step is 4. Go back one step from x = 1.
     solution: 'Step 1: Change per step = (19 − 7) ÷ 3 = 4. Step 2: At x = 0: 7 − 4 = 3. (Rule: y = 4x + 3.)'
+    mistakes: {"7": "step_back_to_zero", "4": "intercept_is_coefficient"}
 - code: cbse9gm.linear.slope
   title: Slope and y-intercept of y = ax + b
   after:
@@ -566,6 +592,7 @@ concepts:
     - Parallel lines have the same slope.
     - Look for −2 in front of x.
     solution: 'Step 1: The slope is −2. Step 2: y = −2x − 1 also has slope −2, so it is parallel.'
+    mistakes: {"y = 2x + 4": "parallel_same_slope", "y = −x + 4": "parallel_same_slope"}
   - prompt: Where does y = 2x − 6 cross the x-axis? Give the x-value.
     answer: '3'
     check: 6/2
@@ -574,6 +601,7 @@ concepts:
     - On the x-axis, y = 0.
     - 2x − 6 = 0.
     solution: 'Step 1: 2x − 6 = 0. Step 2: x = 3. This is the zero of the polynomial 2x − 6.'
+    mistakes: {"-6": "x_axis_y_zero", "-3": "zero_sign_flip"}
   - prompt: A line has slope −1/2 and passes through (0, 4). What is y when x = 6?
     answer: '1'
     check: -1/2*6 + 4
@@ -582,3 +610,4 @@ concepts:
     - The line is y = −x/2 + 4.
     - Six steps right, each going down 1/2.
     solution: 'Step 1: y = −(1/2)x + 4. Step 2: y = −3 + 4 = 1.'
+    mistakes: {"7": "slope_negative_down", "-8": "slope_negative_down"}

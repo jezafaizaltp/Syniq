@@ -6,6 +6,19 @@ tips:
   ap_nth_term_n_not_n_minus_1: 'The nth term is a + (n − 1)d: from the first term you take n − 1 steps, not n.'
   gp_multiply_not_add: In a geometric progression you multiply by the same ratio each time; you don't add.
   sum_formula_half: '1 + 2 + … + n = n(n + 1)/2: remember to halve.'
+  ap_back_to_first: "The 3rd and 7th terms are 4 steps apart. Find one step d, then step back from the 3rd term to the 1st."
+  common_difference: "Subtract each term from the next one. The common difference is that gap, not a term itself."
+  consecutive_squares: "20² − 19² = (20 + 19)(20 − 19). Or just work out both squares and subtract."
+  fibonacci_add_two: "Each Fibonacci number is the sum of the two before it. Add the last two."
+  gp_count_terms: "Write the terms out one by one and count carefully: 2 is the 1st term, 4 the 2nd …"
+  gp_same_ratio: "In a GP each term is the last one multiplied by the same number. Divide each term by the one before it."
+  halve_each_bounce: "Halve the height once for each bounce. Count four halvings from 64."
+  hanoi_steps: "To move the biggest disc, all the smaller ones must first go somewhere else, and then come back on top. Count those moves."
+  nth_term_substitute: "Put n = 4 into the rule: multiply first, then subtract."
+  odd_sum_square: "Count the odd numbers up to 29. The sum of the first n odd numbers is n²."
+  power_then_minus: "Work out 2⁶ first, then subtract 1."
+  recursive_step: "Use the rule one step at a time: t₂ from t₁, t₃ from t₂, t₄ from t₃. Don't jump."
+  rule_check_first: "Test each rule with n = 1, 2, 3. The right one gives 3, 7, 11."
 concepts:
 - code: cbse9gm.seq.rules
   title: Sequences and their rules
@@ -113,6 +126,7 @@ concepts:
     - Put n = 4.
     - 5 × 4 − 2.
     solution: 'Step 1: t₄ = 5 × 4 − 2. Step 2: = 18.'
+    mistakes: {"23": "nth_term_substitute", "12": "nth_term_substitute"}
   - prompt: What is the next Fibonacci number after 1, 1, 2, 3, 5, 8, 13?
     answer: '21'
     check: 8 + 13
@@ -121,6 +135,7 @@ concepts:
     - Each term is the sum of the two before.
     - 8 + 13.
     solution: 'Step 1: Add the last two: 8 + 13 = 21.'
+    mistakes: {"18": "fibonacci_add_two", "26": "fibonacci_add_two"}
   - prompt: Which explicit rule gives 3, 7, 11, 15, …?
     options:
     - tₙ = 4n − 1
@@ -133,6 +148,7 @@ concepts:
     - The terms go up by 4, so start with 4n.
     - When n = 1, 4n = 4, but the term is 3.
     solution: 'Step 1: Gap 4, so 4n. Step 2: 4n gives 4, 8, 12; subtract 1 to get 3, 7, 11. Rule: 4n − 1.'
+    mistakes: {"tₙ = 4n + 3": "rule_check_first", "tₙ = 3n + 4": "rule_check_first"}
   - prompt: A recursive rule says t₁ = 2 and tₙ = 2tₙ₋₁ + 1. What is t₄?
     answer: '23'
     check: 2*(2*(2*2 + 1) + 1) + 1
@@ -141,6 +157,7 @@ concepts:
     - t₂ = 2 × 2 + 1 = 5.
     - Then t₃ = 11.
     solution: 'Step 1: t₂ = 5. Step 2: t₃ = 11. Step 3: t₄ = 23.'
+    mistakes: {"11": "recursive_step", "17": "recursive_step"}
   - prompt: What is the 10th triangular number, n(n + 1)/2?
     answer: '55'
     check: 10*11/2
@@ -159,6 +176,7 @@ concepts:
     - 400 − 361.
     - 'Or use (a + b)(a − b): 39 × 1.'
     solution: 'Step 1: 20² − 19² = (20 + 19)(20 − 19). Step 2: = 39.'
+    mistakes: {"1": "consecutive_squares", "41": "consecutive_squares"}
 - code: cbse9gm.seq.ap
   title: Arithmetic progressions
   after:
@@ -249,6 +267,7 @@ concepts:
     - Subtract a term from the next.
     - 12 − 7.
     solution: 'Step 1: 12 − 7 = 5, and 17 − 12 = 5. So d = 5.'
+    mistakes: {"7": "common_difference", "27": "common_difference"}
   - prompt: Find the 10th term of 3, 7, 11, 15, …
     answer: '39'
     check: 3 + (10 - 1)*4
@@ -287,6 +306,7 @@ concepts:
     - The sum of the first n odd numbers is n².
     - 15².
     solution: 'Step 1: There are 15 odd numbers. Step 2: The sum is 15² = 225.'
+    mistakes: {"841": "odd_sum_square", "450": "odd_sum_square"}
   - prompt: An AP has 3rd term 11 and 7th term 27. What is its first term?
     answer: '3'
     check: 11 - 2*(27 - 11)/4
@@ -295,6 +315,7 @@ concepts:
     - 'From the 3rd to the 7th term is 4 steps: 4d = 16.'
     - d = 4; go back 2 steps from 11.
     solution: 'Step 1: 4d = 27 − 11 = 16, d = 4. Step 2: a = 11 − 2 × 4 = 3.'
+    mistakes: {"7": "ap_back_to_first", "-1": "ap_nth_term_n_not_n_minus_1"}
 - code: cbse9gm.seq.gp
   title: Geometric progressions, Tower of Hanoi and fractals
   after:
@@ -407,6 +428,7 @@ concepts:
     - Keep doubling.
     - 2 × 2⁵.
     solution: 'Step 1: 32 is the 5th term. Step 2: The 6th is 64.'
+    mistakes: {"32": "gp_count_terms", "128": "gp_count_terms"}
   - prompt: Which of these is a geometric progression?
     options:
     - 81, 27, 9, 3
@@ -419,6 +441,7 @@ concepts:
     - Look for the same multiplier.
     - Each divided by 3.
     solution: 'Step 1: 81 × 1/3 = 27, 27 × 1/3 = 9, 9 × 1/3 = 3. Step 2: The ratio is 1/3 every time, so it is a GP.'
+    mistakes: {"2, 5, 8, 11": "gp_same_ratio", "1, 4, 9, 16": "gp_same_ratio"}
   - prompt: The Tower of Hanoi with n discs needs 2ⁿ − 1 moves. How many moves for 6 discs?
     answer: '63'
     check: 2^6 - 1
@@ -427,6 +450,7 @@ concepts:
     - 2⁶ = 64.
     - Subtract 1.
     solution: 'Step 1: 2⁶ = 64. Step 2: 64 − 1 = 63 moves.'
+    mistakes: {"64": "power_then_minus", "11": "power_then_minus"}
   - prompt: A ball dropped from 64 m bounces back to half its height each time. How high does it rise after the 4th bounce, in m?
     answer: '4'
     check: 64*(1/2)^4
@@ -435,6 +459,7 @@ concepts:
     - 64 → 32 → 16 → …
     - Four halvings.
     solution: 'Step 1: 64 × (1/2)⁴. Step 2: = 64 ÷ 16 = 4 m.'
+    mistakes: {"8": "halve_each_bounce", "16": "halve_each_bounce"}
   - prompt: In the Tower of Hanoi, Mₙ = 2Mₙ₋₁ + 1 and M₁ = 1. Why is there a + 1?
     options:
     - Move n − 1 discs off, move the biggest disc once, then move n − 1 discs back on
@@ -447,3 +472,4 @@ concepts:
     - How does the biggest disc get to the last peg?
     - The smaller discs must move out of the way and back.
     solution: 'Step 1: Move the top n − 1 discs to the spare peg: Mₙ₋₁ moves. Step 2: Move the biggest disc: 1 move. Step 3: Move the n − 1 discs on top: Mₙ₋₁ moves. Total 2Mₙ₋₁ + 1.'
+    mistakes: {"You always need one extra peg": "hanoi_steps", "The first disc is moved twice": "hanoi_steps"}

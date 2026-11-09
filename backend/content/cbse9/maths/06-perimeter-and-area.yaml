@@ -8,6 +8,13 @@ tips:
   sector_full_circle: 'A sector is only part of the circle: multiply the full-circle amount by θ/360.'
   area_radius_not_squared: 'Area uses r², the radius times itself: πr², not πr or 2πr.'
   brahmagupta_half: 's is half the perimeter: add the four sides and divide by 2 before subtracting each side.'
+  brahmagupta_steps: "Find s = half the perimeter, then multiply (s − a)(s − b)(s − c)(s − d) and take the square root."
+  circumference_2pir: "Circumference = 2πr. Area is πr². Check which one the question asks for."
+  cyclic_only: "Brahmagupta's formula needs a quadrilateral whose four corners lie on a circle. It fails for other shapes with the same sides."
+  d_zero_triangle: "If d = 0, the quadrilateral has only three sides left. What formula gives a triangle's area from its three sides?"
+  heron_steps: "Find s (half the perimeter), then s − a, s − b, s − c, multiply all four and take the square root."
+  pi_not_fraction: "22/7 and 3.14 are only close to π. π's decimals go on for ever without repeating."
+  ratio_to_sides: "First turn the ratio into real sides: the parts add to 12, so each part is 48 ÷ 12. Then use Heron's formula."
 concepts:
 - code: cbse9gm.area.heron
   title: Area of a triangle by Heron's formula
@@ -136,6 +143,7 @@ concepts:
     - s = 8.
     - √(8 × 3 × 3 × 2).
     solution: 'Step 1: s = 8. Step 2: Area = √(8 × 3 × 3 × 2) = √144 = 12 cm².'
+    mistakes: {"144": "heron_forgot_root", "15": "heron_steps"}
   - prompt: 'The sides of a triangle are in the ratio 3 : 4 : 5 and its perimeter is 48 cm. Find its area in cm².'
     answer: '96'
     check: sqrt(24*12*8*4)
@@ -144,6 +152,7 @@ concepts:
     - Sides are 12, 16, 20.
     - s = 24.
     solution: 'Step 1: 12x = 48, x = 4, sides 12, 16, 20. Step 2: s = 24. Step 3: Area = √(24 × 12 × 8 × 4) = √9216 = 96 cm².'
+    mistakes: {"6": "ratio_to_sides", "9216": "heron_forgot_root"}
   - prompt: An equilateral triangle has side 6 cm. Find s in cm.
     answer: '9'
     check: 18/2
@@ -287,6 +296,7 @@ concepts:
     - C = 2πr.
     - 2 × 22/7 × 7.
     solution: 'Step 1: C = 2 × (22/7) × 7. Step 2: = 44 cm.'
+    mistakes: {"22": "circumference_2pir", "154": "circumference_2pir"}
   - prompt: Find the area of a circle of radius 14 cm, using π = 22/7.
     answer: '616'
     check: 22/7*14^2
@@ -330,6 +340,7 @@ concepts:
     - 22/7 is only close to π.
     - Its decimals never repeat.
     solution: 'Step 1: π = 3.14159… goes on without repeating. Step 2: So no fraction equals it exactly; 22/7 is an approximation.'
+    mistakes: {"It is exactly 22/7": "pi_not_fraction", "It changes with the size of the circle": "pi_not_fraction"}
   - prompt: The minute hand of a clock is 7 cm long. What area does it sweep in 30 minutes, in cm² (π = 22/7)?
     answer: '77'
     check: 180/360*22/7*7^2
@@ -420,6 +431,7 @@ concepts:
     - s = 10.
     - √(4 × 6 × 4 × 6).
     solution: 'Step 1: s = 20/2 = 10. Step 2: √(4 × 6 × 4 × 6) = √576 = 24, the same as 6 × 4.'
+    mistakes: {"576": "brahmagupta_steps", "20": "brahmagupta_half"}
   - prompt: Find the area of a cyclic quadrilateral with sides 5, 5, 5 and 5.
     answer: '25'
     check: sqrt(5^4)
@@ -428,6 +440,7 @@ concepts:
     - s = 10.
     - Each bracket is 5.
     solution: 'Step 1: s = 10. Step 2: √(5 × 5 × 5 × 5) = 25.'
+    mistakes: {"625": "brahmagupta_steps", "20": "brahmagupta_half"}
   - prompt: Brahmagupta's formula works for which quadrilaterals?
     options:
     - Those whose four corners lie on a circle
@@ -440,6 +453,7 @@ concepts:
     - They are called cyclic.
     - A rectangle is one.
     solution: 'Step 1: The formula needs a cyclic quadrilateral. Step 2: For other shapes with the same sides it gives the wrong area.'
+    mistakes: {"Every quadrilateral": "cyclic_only", "Only squares": "cyclic_only"}
   - prompt: If one side d of the quadrilateral becomes 0, Brahmagupta's formula turns into which formula?
     options:
     - Heron's formula for a triangle
@@ -452,6 +466,7 @@ concepts:
     - Four sides with one of length 0 is a triangle.
     - √(s(s − a)(s − b)(s − c)).
     solution: 'Step 1: With d = 0, s − d = s. Step 2: The formula becomes √(s(s − a)(s − b)(s − c)), Heron''s formula.'
+    mistakes: {"The area of a rectangle": "d_zero_triangle", "Pythagoras' theorem": "d_zero_triangle"}
   - prompt: Find the area of a cyclic quadrilateral with sides 7, 15, 20 and 24.
     answer: '234'
     check: sqrt((33-7)*(33-15)*(33-20)*(33-24))

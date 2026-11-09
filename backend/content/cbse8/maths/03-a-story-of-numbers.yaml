@@ -5,6 +5,16 @@ title: A Story of Numbers
 tips:
   c8_roman_subtract: 'A smaller symbol before a bigger one is taken away: XL is 50 − 10 = 40, not 60.'
   c8_face_value: That is the digit itself. Its place value is the digit times the value of its place.
+  t8_base5_places: "Base-5 places from the right are 1, 5, 25. Multiply each digit by its place value and add."
+  t8_base60: "Which choice uses the number 60?"
+  t8_base_digits: "In base b the digits run from 0 up to b − 1."
+  t8_binary_places: "Binary places from the right are 1, 2, 4, 8. Add the place values where there is a 1."
+  t8_egyptian: "Multiply each symbol's value by how many times it appears, then add."
+  t8_place_value: "Think about adding 2,345 + 678 in columns. What do Roman numerals lack that columns need?"
+  t8_roman_build: "Build it from thousands, tens and units: 2000, 20, 6. Write each part and join them."
+  t8_roman_subtract: "In Roman numerals a smaller symbol before a bigger one is subtracted: CM = 900, XC = 90. Split the numeral into chunks."
+  t8_to_binary: "Split 10 into powers of 2 (8, 4, 2, 1). Write 1 where a power is used and 0 where it isn't."
+  t8_zero_placeholder: "Remove the zero from 305. What number do you get? So what is the zero doing?"
 concepts:
 - code: cbse8m.story.systems
   title: Early ways of writing numbers
@@ -70,6 +80,7 @@ concepts:
     - M = 1000, CM = 900.
     - XC = 90.
     solution: M + CM + XC = 1000 + 900 + 90 = 1990.
+    mistakes: {"2190": "t8_roman_subtract", "2110": "t8_roman_subtract"}
   - prompt: Which is 2026 in Roman numerals?
     options:
     - MMXXVI
@@ -82,6 +93,7 @@ concepts:
     - MM = 2000.
     - XXVI = 26.
     solution: '2000 = MM, 20 = XX, 6 = VI: MMXXVI.'
+    mistakes: {"MMXXIV": "t8_roman_build", "MMCCVI": "t8_roman_build"}
   - prompt: Why is the Roman system hard for big calculations?
     options:
     - It has no place value or zero, so numbers can't be lined up in columns
@@ -94,6 +106,7 @@ concepts:
     - How do we add big numbers today?
     - Columns of ones, tens, hundreds.
     solution: Without place value and zero, there are no ones, tens and hundreds columns, so written methods for adding and multiplying don't work.
+    mistakes: {"It uses too few symbols": "t8_place_value", "It was written right to left": "t8_place_value"}
   - prompt: Which everyday measure comes from base-60 counting?
     options:
     - 60 minutes in an hour
@@ -106,6 +119,7 @@ concepts:
     - Look for the number 60.
     - Time and angles.
     solution: Minutes, seconds and degrees (360 = 6 × 60) come from Mesopotamian base-60 counting.
+    mistakes: {"100 paise in a rupee": "t8_base60", "12 months in a year": "t8_base60"}
   - prompt: An Egyptian number shows 3 symbols for 100, 4 for 10 and 2 for 1. What number is it?
     answer: '342'
     check: 3*100 + 4*10 + 2
@@ -114,6 +128,7 @@ concepts:
     - Add the values of all the symbols.
     - 300 + 40 + 2.
     solution: 3 × 100 + 4 × 10 + 2 × 1 = 342.
+    mistakes: {"9": "t8_egyptian", "243": "t8_egyptian"}
 - code: cbse8m.story.base
   title: Place value and number bases
   after:
@@ -246,6 +261,7 @@ concepts:
     - 'Places: 8, 4, 2, 1.'
     - 8 + 4 + 0 + 1.
     solution: 1101₂ = 8 + 4 + 0 + 1 = 13.
+    mistakes: {"1101": "t8_binary_places", "11": "t8_binary_places"}
   - prompt: Write 10 in base 2 (binary).
     answer: '1010'
     check: '1010'
@@ -254,6 +270,7 @@ concepts:
     - Use places 8, 4, 2, 1.
     - 10 = 8 + 2.
     solution: 10 = 8 + 2 = 1×8 + 0×4 + 1×2 + 0×1, so 1010₂.
+    mistakes: {"101": "t8_to_binary", "10": "t8_to_binary"}
   - prompt: Write the base-5 number 243₅ in base 10.
     answer: '73'
     check: 2*25 + 4*5 + 3
@@ -262,6 +279,7 @@ concepts:
     - 'Places: 25, 5, 1.'
     - 2×25 + 4×5 + 3.
     solution: 2 × 25 + 4 × 5 + 3 × 1 = 50 + 20 + 3 = 73.
+    mistakes: {"243": "t8_base5_places", "9": "t8_base5_places"}
   - prompt: What does the zero do in 305?
     options:
     - It holds the tens place empty, so the 3 means 3 hundreds
@@ -274,6 +292,7 @@ concepts:
     - Compare 305 with 35.
     - Without the zero the 3 moves.
     solution: 'Zero is a place holder: without it, 305 would read as 35.'
+    mistakes: {"Nothing, it can be left out": "t8_zero_placeholder", "It shows the number is even": "t8_zero_placeholder"}
   - prompt: Which digits does base 2 use?
     options:
     - Only 0 and 1
@@ -286,3 +305,4 @@ concepts:
     - Each place can hold less than the base.
     - 'Base 2: digits below 2.'
     solution: In base b the digits go from 0 to b − 1, so base 2 uses 0 and 1.
+    mistakes: {"1 and 2": "t8_base_digits", "0, 1 and 2": "t8_base_digits"}

@@ -5,6 +5,15 @@ title: Large Numbers Around Us
 tips:
   c7_lakh_zeros: 'One lakh is 1,00,000: a 1 followed by 5 zeros. 6 zeros makes ten lakh.'
   c7_round_up: 'Look at the digit just to the right of the place you round to: if it is 5 or more, round up.'
+  t7_compare_digits: "The number with more digits is larger. Count the digits before comparing the first digit."
+  t7_crore_digits: "One crore = 1,00,00,000. Count every digit, the 1 and all the zeros."
+  t7_exact_needed: "Where would a small mistake matter? Money in a bank must be counted to the last rupee."
+  t7_friendly_pair: "Pair 125 × 8 first: that makes a round number. Then multiply by 37."
+  t7_lakh_million: "1 million = 10,00,000 (ten lakh). Count the zeros: a lakh has 5, a million has 6."
+  t7_read_indian: "Use the Indian commas: crore, lakh, thousand, hundreds. Read each group in turn: 3 | 05 | 00 | 420."
+  t7_round_lakh: "Look at the ten-thousands digit. Below 5, round down to the lakh below; 5 or more, round up."
+  t7_round_then_multiply: "Round 1,248 to the nearest hundred first, then multiply by 6."
+  t7_round_thousand: "Round each number to the nearest thousand first, then add the rounded numbers."
 concepts:
 - code: cbse7m.large.read
   title: Reading and writing large numbers
@@ -121,6 +130,7 @@ concepts:
     - 1 crore = 1,00,00,000.
     - 1,00,00,000 ÷ 1,00,000.
     solution: 1 crore = 100 lakh.
+    mistakes: {"10": "t8_lakh_crore", "1000": "t8_lakh_crore"}
   - prompt: How many lakh make one million?
     answer: '10'
     check: 10**6/10**5
@@ -129,6 +139,7 @@ concepts:
     - 1 million = 1,000,000.
     - 1,000,000 ÷ 1,00,000.
     solution: 1 million = 10,00,000 = 10 lakh.
+    mistakes: {"1": "t7_lakh_million", "100": "t7_lakh_million"}
   - prompt: Which is 3,05,00,420 written in words?
     options:
     - Three crore five lakh four hundred twenty
@@ -141,6 +152,7 @@ concepts:
     - 'Groups: 3 | 05 | 00 | 420.'
     - Crore | lakh | thousand | rest.
     solution: '3 crore, 05 lakh, 00 thousand, 420: three crore five lakh four hundred twenty.'
+    mistakes: {"Three crore fifty lakh four hundred twenty": "t7_read_indian", "Three crore five thousand four hundred twenty": "t7_read_indian"}
   - prompt: Which number is the largest?
     options:
     - 9,87,654
@@ -153,6 +165,7 @@ concepts:
     - Count the digits.
     - More digits means bigger.
     solution: 10,00,001 has 7 digits; the others have 6 or 5.
+    mistakes: {"9,99,999": "t7_compare_digits", "9,87,654": "t7_compare_digits"}
   - prompt: Write one crore as a number without commas. How many digits does it have?
     answer: '8'
     check: '8'
@@ -161,6 +174,7 @@ concepts:
     - 1 crore = 1,00,00,000.
     - 1 followed by 7 zeros.
     solution: 10000000 has 8 digits.
+    mistakes: {"7": "t7_crore_digits", "9": "t7_crore_digits"}
 - code: cbse7m.large.estimate
   title: Estimating and rounding large numbers
   after:
@@ -235,6 +249,7 @@ concepts:
     - Look at the ten-thousands digit.
     - 4 is less than 5.
     solution: The ten-thousands digit is 4, so round down to 3,00,000.
+    mistakes: {"400000": "t7_round_lakh", "340000": "t7_round_lakh"}
   - prompt: Estimate 4,890 + 3,120 by rounding each to the nearest thousand.
     answer: '8000'
     check: 5000 + 3000
@@ -243,6 +258,7 @@ concepts:
     - 4,890 ≈ 5,000; 3,120 ≈ 3,000.
     - Add the rounded numbers.
     solution: 5,000 + 3,000 = 8,000.
+    mistakes: {"8010": "t7_round_thousand", "7000": "t7_round_thousand"}
   - prompt: Find 125 × 8 × 37 quickly.
     answer: '37000'
     check: 125*8*37
@@ -251,6 +267,7 @@ concepts:
     - 125 × 8 = 1000.
     - Then × 37.
     solution: 125 × 8 = 1000, and 1000 × 37 = 37,000.
+    mistakes: {"3700": "t7_friendly_pair", "370000": "t7_friendly_pair"}
   - prompt: Which situation needs an exact number, not an estimate?
     options:
     - The amount in a bank account
@@ -263,6 +280,7 @@ concepts:
     - Where would a small error matter?
     - Money must be exact.
     solution: A bank balance must be exact; the others are fine as estimates.
+    mistakes: {"People at a fair": "t7_exact_needed", "Stars visible on a clear night": "t7_exact_needed"}
   - prompt: A school has 1,248 students. Each needs 6 notebooks. Estimate the total by rounding 1,248 to the nearest hundred.
     answer: '7200'
     check: 1200*6
@@ -271,3 +289,4 @@ concepts:
     - 1,248 ≈ 1,200.
     - 1,200 × 6.
     solution: '1,200 × 6 = 7,200 notebooks (exact: 7,488).'
+    mistakes: {"7488": "t7_round_then_multiply", "6000": "t7_round_then_multiply"}

@@ -5,6 +5,16 @@ title: A Tale of Three Intersecting Lines
 tips:
   c7_tri_ineq: 'Check the triangle inequality: the two shorter sides must add to MORE than the longest.'
   c7_angle_sum: 'The three angles of a triangle add to 180°: subtract the two you know from 180°.'
+  t7_equilateral_angle: "All three angles are equal and add to 180°."
+  t7_exterior_angle: "The exterior angle equals the sum of the two opposite interior angles."
+  t7_flat_triangle: "2 + 3 = 5 exactly. Can the two short sides meet above the long one, or would they lie flat?"
+  t7_isosceles_base: "Take the top angle from 180°, then share the rest equally between the two base angles."
+  t7_right_triangle_angles: "The angles add to 180°, and one is 90°. Take 90 and 35 away."
+  t7_third_side_max: "The third side must be LESS than 9 + 4. What is the largest whole number that works?"
+  t7_third_side_min: "The third side must be MORE than 9 − 4. What is the smallest whole number that works?"
+  t7_triangle_inequality: "Any two sides must add to MORE than the third side. Test the two shortest."
+  t7_triangle_types: "Two equal sides makes it isosceles; all three equal is equilateral."
+  t7_two_right: "Two right angles already add to 180°. How much is left for the third angle?"
 concepts:
 - code: cbse7m.tri.sides
   title: Triangles and the triangle inequality
@@ -99,6 +109,7 @@ concepts:
     - 5 + 6 = 11.
     - Is 11 > 9?
     solution: 5 + 6 = 11 > 9, so yes.
+    mistakes: {"No": "t7_triangle_inequality", "Only an equilateral one": "t7_triangle_inequality"}
   - prompt: A triangle has sides 7, 7 and 4 cm. What type is it?
     options:
     - Isosceles
@@ -111,6 +122,7 @@ concepts:
     - Two sides are equal.
     - Not all three.
     solution: 'Two equal sides: isosceles.'
+    mistakes: {"Equilateral": "t7_triangle_types", "Scalene": "t7_triangle_types"}
   - prompt: Can 2 cm, 3 cm and 5 cm make a triangle?
     options:
     - No, the sides would lie flat
@@ -123,6 +135,7 @@ concepts:
     - 2 + 3 = 5.
     - It must be greater, not equal.
     solution: 2 + 3 is equal to 5, not greater, so the sides lie on one line.
+    mistakes: {"Yes": "t7_flat_triangle", "Yes, a right triangle": "t7_flat_triangle"}
   - prompt: Two sides of a triangle are 4 cm and 9 cm. The third side is a whole number of cm. What is the smallest it can be?
     answer: '6'
     check: 9 - 4 + 1
@@ -131,6 +144,7 @@ concepts:
     - The third side must be more than 9 − 4.
     - More than 5.
     solution: The third side must be greater than 9 − 4 = 5, so at least 6 cm.
+    mistakes: {"5": "t7_third_side_min", "1": "t7_third_side_min"}
   - prompt: Two sides of a triangle are 4 cm and 9 cm. The third side is a whole number of cm. What is the largest it can be?
     answer: '12'
     check: 4 + 9 - 1
@@ -139,6 +153,7 @@ concepts:
     - It must be less than 4 + 9.
     - Less than 13.
     solution: The third side must be less than 13, so at most 12 cm.
+    mistakes: {"13": "t7_third_side_max", "14": "t7_third_side_max"}
 - code: cbse7m.tri.angles
   title: Angle sum and exterior angles
   after:
@@ -243,6 +258,7 @@ concepts:
     - Three equal angles.
     - 180 ÷ 3.
     solution: 180° ÷ 3 = 60°.
+    mistakes: {"90": "t7_equilateral_angle", "180": "t7_equilateral_angle"}
   - prompt: A right triangle has one angle of 35°. Find the other acute angle, in degrees.
     answer: '55'
     check: 180 - 90 - 35
@@ -251,6 +267,7 @@ concepts:
     - One angle is 90°.
     - 180 − 90 − 35.
     solution: 180° − 90° − 35° = 55°.
+    mistakes: {"145": "t7_right_triangle_angles", "35": "t7_right_triangle_angles"}
   - prompt: In triangle ABC, ∠A = 45° and ∠B = 65°. Find the exterior angle at C, in degrees.
     answer: '110'
     check: 45 + 65
@@ -259,6 +276,7 @@ concepts:
     - Exterior angle = sum of opposite interior angles.
     - 45 + 65.
     solution: 45° + 65° = 110°.
+    mistakes: {"70": "t7_exterior_angle", "250": "t7_exterior_angle"}
   - prompt: An isosceles triangle has a top angle of 40°. Find each of the two equal angles, in degrees.
     answer: '70'
     check: (180 - 40)/2
@@ -267,6 +285,7 @@ concepts:
     - 180 − 40 = 140.
     - Split equally.
     solution: (180° − 40°) ÷ 2 = 70°.
+    mistakes: {"140": "t7_isosceles_base", "40": "t7_isosceles_base"}
   - prompt: Can a triangle have two right angles?
     options:
     - No, they already add to 180°
@@ -279,3 +298,4 @@ concepts:
     - 90 + 90 = ?
     - Nothing left for the third angle.
     solution: Two right angles already make 180°, leaving 0° for the third.
+    mistakes: {"Yes": "t7_two_right", "Only if it is large": "t7_two_right"}

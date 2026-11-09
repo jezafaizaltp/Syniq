@@ -12,6 +12,12 @@ tips:
   alveoli_exchange: "Gas exchange happens in the alveoli, tiny air sacs with thin walls surrounded by capillaries."
   nephron_unit: "The nephron is the working unit of the kidney: it filters blood and forms urine."
   urea_kidney: "Urea is made in the liver and removed by the kidneys. Lungs remove carbon dioxide; skin removes sweat."
+  airway_order: "Air goes in through the windpipe (trachea) first, which branches into bronchi, then smaller bronchioles, ending in the alveoli."
+  cartilage_rings: "C-shaped rings of cartilage in its wall keep the trachea open. Mucus traps dust; the diaphragm helps breathing."
+  glucose_reabsorbed: "Urea, extra salt and extra water leave in urine. Glucose is all taken back into the blood in a healthy kidney."
+  mitochondria_power: "Mitochondria release energy in respiration. Chloroplasts make food in plants; the nucleus controls the cell."
+  subtract_reabsorbed: "What is reabsorbed is what is filtered minus what leaves as urine."
+  ureter_urethra: "The ureter runs from kidney to bladder; the urethra carries urine out of the body."
 
 concepts:
   - code: bio9.respiration.cellular
@@ -66,6 +72,7 @@ concepts:
         difficulty: 1
         hints: ["The powerhouse of the cell."]
         solution: "Mitochondria carry out aerobic respiration."
+        mistakes: {"Chloroplasts": "mitochondria_power", "Nucleus": "mitochondria_power"}
       - prompt: "What are the products of aerobic respiration?"
         options: ["Carbon dioxide, water and energy", "Lactic acid and energy", "Ethanol and carbon dioxide", "Glucose and oxygen"]
         answer: "Carbon dioxide, water and energy"
@@ -155,12 +162,14 @@ concepts:
         difficulty: 2
         hints: ["From the biggest tube to the smallest sac."]
         solution: "The windpipe branches into bronchi, then bronchioles, ending in alveoli."
+        mistakes: {"Bronchi → trachea → alveoli → bronchioles": "airway_order", "Alveoli → bronchioles → bronchi → trachea": "airway_order", "Trachea → alveoli → bronchi → bronchioles": "airway_order"}
       - prompt: "What keeps the trachea from collapsing?"
         options: ["Rings of cartilage", "Muscles of the diaphragm", "Mucus", "The ribs"]
         answer: "Rings of cartilage"
         difficulty: 2
         hints: ["Feel the ridges at the front of your throat."]
         solution: "C-shaped cartilage rings hold the trachea open."
+        mistakes: {"Mucus": "cartilage_rings", "Muscles of the diaphragm": "cartilage_rings"}
       - prompt: "Breathing and respiration are different. Which statement is correct?"
         options: ["Breathing moves air; respiration releases energy in cells", "They are the same process", "Respiration moves air; breathing releases energy", "Only plants respire"]
         answer: "Breathing moves air; respiration releases energy in cells"
@@ -175,6 +184,7 @@ concepts:
         hints: ["16 × 0.5."]
         solution: "16 × 0.5 = 8 litres per minute"
 
+        mistakes: {"32": "times_not_plus", "16.5": "times_not_plus"}
   - code: bio9.excretion.kidney
     title: Excretion and the kidneys
     after: [bio9.respiration.cellular, bio9.transport.blood]
@@ -229,15 +239,18 @@ concepts:
         difficulty: 2
         hints: ["Two of them, one from each kidney."]
         solution: "Ureters carry urine to the bladder; the urethra carries it out of the body."
+        mistakes: {"Urethra": "ureter_urethra", "Renal artery": "ureter_urethra"}
       - prompt: "In a healthy person, which substance is filtered into the nephron but fully reabsorbed, so it is not found in urine?"
         options: ["Glucose", "Urea", "Excess salt", "Excess water"]
         answer: "Glucose"
         difficulty: 3
         hints: ["The body needs it for energy."]
         solution: "All glucose is reabsorbed in the tubule. Glucose in urine is a sign of diabetes."
+        mistakes: {"Urea": "glucose_reabsorbed", "Excess salt": "glucose_reabsorbed", "Excess water": "glucose_reabsorbed"}
       - prompt: "The kidneys filter about 180 litres of fluid a day, and about 1.5 litres leave as urine. How many litres are reabsorbed?"
         answer: "178.5"
         check: "180 - Rational(3, 2)"
         difficulty: 2
         hints: ["Subtract the urine from the filtrate."]
         solution: "180 − 1.5 = 178.5 litres are taken back into the blood."
+        mistakes: {"181.5": "subtract_reabsorbed", "1.5": "subtract_reabsorbed"}

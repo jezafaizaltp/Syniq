@@ -10,6 +10,11 @@ tips:
   c10s_stretch_area: 'Stretching makes the wire thinner too, so the resistance rises twice: ×2 for length and ×2 for area.'
   c10s_kwh_units: 'Convert watts to kilowatts first: 100 W = 0.1 kW.'
   c10s_square_current: 'In H = I²Rt the current is squared: 3² = 9.'
+  t10_cost_units: "Find units per day (kW × hours), then for 30 days, then multiply by the rate."
+  t10_fuse: "When too much current flows, the fuse wire gets hot. What must it do to protect the circuit?"
+  t10_kwh_joules: "1 kWh = 1000 W × 3600 s. Multiply both."
+  t10_nichrome: "A heater needs a wire that gets hot and doesn't burn away. Which property makes a wire get hot?"
+  t10_p_vi: "Power = voltage × current. Multiply."
 concepts:
 - code: cbse10s.elec.ohm
   title: Current, potential difference and Ohm's law
@@ -167,6 +172,7 @@ concepts:
     - Heating needs resistance.
     - Copper would just carry the current.
     solution: Nichrome's high resistivity produces heat, and it doesn't burn easily at high temperature.
+    mistakes: {"It has very low resistance": "t10_nichrome", "It is a good insulator": "t10_nichrome"}
 - code: cbse10s.elec.power
   title: Heating effect and electric power
   after:
@@ -275,6 +281,7 @@ concepts:
     - P = VI.
     - 220 × 4.
     solution: P = 220 × 4 = 880 W.
+    mistakes: {"55": "t10_p_vi", "224": "t10_p_vi"}
   - prompt: A 100 W bulb is used for 10 hours. How many kWh (units) of energy does it use?
     answer: '1'
     check: Rational(100, 1000)*10
@@ -293,6 +300,7 @@ concepts:
     - 1 kW = 1000 W.
     - 1 h = 3600 s.
     solution: 1 kWh = 1000 × 3600 = 3 600 000 J (3.6 × 10⁶ J).
+    mistakes: {"1000": "t10_kwh_joules", "3600": "t10_kwh_joules"}
   - prompt: A 2 Ω resistor carries 3 A for 10 s. How much heat is produced, in joules?
     answer: '180'
     check: 3**2*2*10
@@ -311,6 +319,7 @@ concepts:
     - Energy per day = 1.5 × 2 = 3 kWh.
     - Then 30 days and ₹6 each.
     solution: 'Step 1: 3 kWh a day. Step 2: 3 × 30 = 90 units. Step 3: 90 × 6 = ₹540.'
+    mistakes: {"18": "t10_cost_units", "540000": "c10s_kwh_units"}
   - prompt: Why does a fuse wire have a low melting point?
     options:
     - So it melts and breaks the circuit when too much current flows
@@ -323,3 +332,4 @@ concepts:
     - It is a safety device.
     - It is in series with the appliance.
     solution: If the current is too large, the fuse heats up, melts and breaks the circuit, protecting the wiring.
+    mistakes: {"So it heats the room": "t10_fuse", "So it conducts better": "t10_fuse"}

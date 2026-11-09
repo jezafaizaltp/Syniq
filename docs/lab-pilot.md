@@ -112,7 +112,7 @@ This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.m
 
 ## The first lab day
 
-1. Switch on the lab computer 10 minutes early and open the SYNiq address on one tablet to check it works.
+1. Switch on the lab computer 10 minutes early. On Ubuntu, run `./check.sh` in `deploy/lab`: it checks SYNiq is running and answers on the school network address, that there is enough free disk space and that last night's backup is there and complete, and says what to fix if not. It changes nothing. Then open the SYNiq address on one tablet to check it works over the Wi-Fi (the script can't test the Wi-Fi or a tablet's firewall).
 2. Give each student their slip. The address is printed on it.
 3. Students type the login and password from the slip, then choose their own password (at least 8 letters or numbers). **Ask them to write it in their notebook**: if they forget it, the admin presses **New password** on the School page.
 4. Each subject offers a short optional check first. Students can take it, so SYNiq skips what they already know, or skip it.
@@ -120,6 +120,7 @@ This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.m
 
 ## 8. Every day
 
+- Before each lab period, run `./check.sh` (Ubuntu) and fix anything it marks **FIX**. On Windows, check the address opens on one tablet and that `deploy\lab\backups` has a file from today or yesterday.
 - Switch the lab computer on before the lab period and **don't let it go to sleep** while students are using SYNiq. Turn off sleep in power settings. The screen can still turn off.
 - SYNiq starts by itself when the computer starts (on Windows, after sign-in). Nothing needs to be clicked.
 - Students should **sign out** at the end, because lab computers are shared.

@@ -14,6 +14,10 @@ tips:
   frequency_not_used: "Multiply each value by its frequency before adding. Each value counts as many times as it occurs."
   divided_by_values: "Divide by the total frequency (how many people), not by how many different values there are."
   middle_of_list_unsorted: "Use the position in the ordered list, counting through the frequencies."
+  frequency_equation: "Multiply each value by its frequency, add, and set it equal to the mean times the total frequency."
+  missing_value_mean: "Total = mean × count = 60. Take away the three known numbers."
+  mode_value: "The mode is the value that appears most, not how often it appears."
+  two_modes: "When two values tie for the most, both are modes."
 
 concepts:
   - code: math9.stats.mean
@@ -90,6 +94,7 @@ concepts:
         difficulty: 2
         hints: ["The total of all 4 is 4 × 15 = 60."]
         solution: "Step 1: Total = 60. Step 2: 10 + 12 + 20 = 42. Step 3: 60 − 42 = 18."
+        mistakes: {"42": "missing_value_mean", "14": "missing_value_mean"}
       - prompt: "The mean mark of 10 students is 32. A new student scoring 54 joins. What is the new mean?"
         answer: "34"
         check: "(10*32 + 54)/11"
@@ -237,24 +242,28 @@ concepts:
         difficulty: 1
         hints: ["Count each value."]
         solution: "3 appears three times; 5 twice; 8 and 9 once."
+        mistakes: {"5": "mode_value", "3.5": "mode_value"}
       - prompt: "A canteen sold 25 samosas, 40 vadas and 18 puffs. Which snack is the mode?"
         options: ["Vada", "Samosa", "Puff", "There is no mode"]
         answer: "Vada"
         difficulty: 1
         hints: ["Which was bought most often?"]
         solution: "40 vadas is the most, so vada is the mode."
+        mistakes: {"Samosa": "mode_value", "There is no mode": "mode_value"}
       - prompt: "In the list 2, 4, 4, 5, 7, 7, 9 which statement is true?"
         options: ["4 and 7 are both modes", "4 is the only mode", "7 is the only mode", "There is no mode"]
         answer: "4 and 7 are both modes"
         difficulty: 2
         hints: ["Count how often 4 and 7 each appear."]
         solution: "4 and 7 each appear twice and nothing appears more, so both are modes."
+        mistakes: {"4 is the only mode": "two_modes", "7 is the only mode": "two_modes", "There is no mode": "two_modes"}
       - prompt: "The list 5, 8, 10, 10, 12, 8 has one more number added, and then 8 is the only mode. What is the added number?"
         answer: "8"
         check: "8"
         difficulty: 2
         hints: ["Right now 8 and 10 each appear twice."]
         solution: "8 and 10 both appear twice. Adding another 8 makes 8 appear three times, so 8 is the only mode."
+        mistakes: {"10": "two_modes", "5": "two_modes"}
       - prompt: "Marks of 7 students are 12, 14, 19, 14, 20, 18, 17. What is the median minus the mode?"
         answer: "3"
         check: "sorted([12, 14, 19, 14, 20, 18, 17])[3] - 14"
@@ -340,3 +349,4 @@ concepts:
         difficulty: 3
         hints: ["Σfx = 4 + 3k + 30 = 34 + 3k.", "Σfx = 3.2 × Σf = 3.2(10 + k)."]
         solution: "Step 1: 34 + 3k = 3.2(10 + k) = 32 + 3.2k. Step 2: 2 = 0.2k. Step 3: k = 10."
+        mistakes: {"5": "frequency_equation", "3": "frequency_equation"}
