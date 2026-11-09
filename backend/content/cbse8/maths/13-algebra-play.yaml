@@ -2,6 +2,19 @@
 subject: cbse8-math
 chapter: 13
 title: Algebra Play
+tips:
+  t8_calendar_below: "One row down on a calendar is one week later."
+  t8_calendar_block: "In a 3 × 3 block the total is 9 times the middle date."
+  t8_calendar_diagonal: "The 2 × 2 square has dates 10, 11, 17, 18. Add each diagonal pair."
+  t8_pyramid: "Each block is the sum of the two below it. Build up row by row."
+  t8_pyramid_algebra: "Middle row: a + b and b + c. Add them for the top. b is used twice."
+  t8_pyramid_solve: "Top = 4 + 2x + 6. Set it equal to 30 and solve."
+  t8_reverse_11: "Write the number as 10a + b and its reverse as 10b + a. Add and factor."
+  t8_reverse_9: "Subtract first, then divide by 9."
+  t8_three_dates: "Dates one under another are n, n + 7, n + 14. Add them and solve."
+  t8_trick_algebra: "Use x for the number and follow each step: 2x, 2x + 8, x + 4, then subtract x."
+  t8_undo_steps: "Follow the steps with x: they always bring you back to x. So the answer equals the number you started with."
+
 concepts:
 - code: cbse8m.alg.tricks
   title: The algebra behind number tricks
@@ -86,6 +99,7 @@ concepts:
     - x → 2x → 2x + 8.
     - 'Halve: x + 4.'
     solution: (2x + 8) ÷ 2 − x = x + 4 − x = 4.
+    mistakes: {"8": "t8_trick_algebra", "0": "t8_trick_algebra"}
   - prompt: Think of a number, add 3, multiply by 4, subtract 12, then divide by your number. What do you always get?
     answer: '4'
     check: (4*(5 + 3) - 12)/5
@@ -94,6 +108,7 @@ concepts:
     - 4(x + 3) − 12 = 4x.
     - 4x ÷ x.
     solution: 4(x + 3) − 12 = 4x, and 4x ÷ x = 4.
+    mistakes: {"3": "t8_trick_algebra", "12": "t8_trick_algebra"}
   - prompt: A number pyramid has bottom row 3, 5, 2. What is the top block?
     answer: '15'
     check: 3 + 2*5 + 2
@@ -102,6 +117,7 @@ concepts:
     - 'Middle row: 8 and 7.'
     - 'Top: 8 + 7.'
     solution: 3 + 5 = 8, 5 + 2 = 7, top = 15 (= 3 + 2 × 5 + 2).
+    mistakes: {"10": "t8_pyramid", "8": "t8_pyramid"}
   - prompt: In a 3-row number pyramid with bottom a, b, c, what is the top?
     options:
     - a + 2b + c
@@ -114,6 +130,7 @@ concepts:
     - 'Middle row: a + b and b + c.'
     - Add them.
     solution: (a + b) + (b + c) = a + 2b + c.
+    mistakes: {"a + b + c": "t8_pyramid_algebra", "2a + b + 2c": "t8_pyramid_algebra"}
   - prompt: A pyramid has bottom row 4, x, 6 and top 30. Find x.
     answer: '10'
     check: (30 - 10)/2
@@ -122,6 +139,7 @@ concepts:
     - Top = 4 + 2x + 6.
     - 2x + 10 = 30.
     solution: 2x + 10 = 30, so x = 10.
+    mistakes: {"20": "t8_pyramid_solve", "5": "t8_pyramid_solve"}
   - prompt: Think of a number, multiply by 5, add 15, divide by 5, subtract 3. If you got 9, what number did you think of?
     answer: '9'
     check: '9'
@@ -130,6 +148,7 @@ concepts:
     - 5x + 15 ÷ 5 = x + 3.
     - x + 3 − 3 = x.
     solution: The steps give back x, so the number was 9.
+    mistakes: {"45": "t8_undo_steps", "3": "t8_undo_steps"}
 - code: cbse8m.alg.grids
   title: Calendar magic and divisibility tricks
   after:
@@ -217,6 +236,7 @@ concepts:
     - Down one row adds 7.
     - 12 + 7.
     solution: 12 + 7 = 19.
+    mistakes: {"13": "t8_calendar_below", "18": "t8_calendar_below"}
   - prompt: A 3 × 3 calendar block has a total of 108. What is the middle date?
     answer: '12'
     check: 108/9
@@ -225,6 +245,7 @@ concepts:
     - The total is 9 times the middle date.
     - 108 ÷ 9.
     solution: 108 ÷ 9 = 12.
+    mistakes: {"36": "t8_calendar_block", "9": "t8_calendar_block"}
   - prompt: A 2 × 2 calendar square has top-left date 10. What is the sum of either diagonal?
     answer: '28'
     check: 10 + 18
@@ -233,6 +254,7 @@ concepts:
     - The diagonal is 10 and 18.
     - Or 11 and 17.
     solution: 10 + 18 = 28 = 11 + 17.
+    mistakes: {"21": "t8_calendar_diagonal", "56": "t8_calendar_diagonal"}
   - prompt: Why is a two-digit number plus its reverse always a multiple of 11?
     options:
     - (10a + b) + (10b + a) = 11(a + b)
@@ -245,6 +267,7 @@ concepts:
     - Write the number as 10a + b.
     - Its reverse is 10b + a.
     solution: Adding gives 11a + 11b = 11(a + b), a multiple of 11.
+    mistakes: {"Because 11 is prime": "t8_reverse_11", "Because both have two digits": "t8_reverse_11"}
   - prompt: 72 − 27 is a multiple of 9. What is (72 − 27) ÷ 9?
     answer: '5'
     check: (72 - 27)/9
@@ -253,6 +276,7 @@ concepts:
     - The difference is 9(a − b).
     - a − b = 7 − 2.
     solution: 72 − 27 = 45 = 9 × 5.
+    mistakes: {"45": "t8_reverse_9", "11": "t8_reverse_9"}
   - prompt: Three dates one under another on a calendar add to 45. What is the top date?
     answer: '8'
     check: (45 - 21)/3
@@ -261,3 +285,4 @@ concepts:
     - The dates are n, n + 7, n + 14.
     - 3n + 21 = 45.
     solution: 3n + 21 = 45, so n = 8 (dates 8, 15, 22).
+    mistakes: {"15": "t8_three_dates", "22": "t8_three_dates"}
