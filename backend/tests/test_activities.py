@@ -160,10 +160,12 @@ SS_IT_ENGLISH = (
     (("ss",), 60), (("it",), 30), (("eng",), 25),
     (("cbse10-ss",), 38), (("cbse9-ss",), 32), (("cbse8-ss",), 30), (("cbse7-ss",), 40), (("cbse6-ss",), 28),
     (("cbse9-eng",), 16), (("cbse10-eng",), 26), (("cbse11-eng",), 15), (("cbse12-eng",), 19),
+    (("cbse8-eng",), 15), (("cbse7-eng",), 15), (("cbse6-eng",), 16), (("cbse5-eng",), 10), (("cbse4-eng",), 12),
+    (("cbse3-eng",), 12), (("cbse2-eng",), 13), (("cbse1-eng",), 9), (("cbselkg-eng",), 8), (("cbseukg-eng",), 8),
 )
 
 
-def test_every_social_science_it_and_upper_english_topic_has_a_working_activity():
+def test_every_social_science_it_and_english_topic_has_a_working_activity():
     for subjects, count in SS_IT_ENGLISH:
         concepts = _concepts_of(*subjects)
         assert len(concepts) == count, subjects
