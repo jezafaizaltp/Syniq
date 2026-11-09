@@ -38,6 +38,38 @@ concepts:
       visual: "Draw an upside-down triangle for the Peninsula. Make the left edge a tall wall (Western Ghats) and the right edge a row of broken low hills (Eastern Ghats). They meet near the bottom at the Nilgiris."
       step_by_step: "To place a feature: Step 1: south of the Satpuras, between the Ghats? Deccan Plateau. Step 2: north of the Satpuras (Malwa, Aravali, Mount Abu, Chota Nagpur)? Central Highlands."
       real_world: "Anamudi in Idukki district, Kerala, is the highest peak in India south of the Himalayas."
+    activity:
+      type: sort
+      prompt: Where is it?
+      bins:
+      - Western Ghats
+      - Eastern Ghats
+      - Central Highlands
+      items:
+      - label: Anamudi, 2695 m
+        bin: Western Ghats
+        clue: Highest peak in Peninsular India, in Kerala.
+        why: In the Anamalai, Western Ghats.
+      - label: Called the Sahyadris in Maharashtra
+        bin: Western Ghats
+        clue: A long, continuous wall near the west coast.
+        why: Western Ghats.
+      - label: About 1600 km, Kanyakumari to Gujarat
+        bin: Western Ghats
+        clue: Continuous, along the Arabian Sea side.
+        why: Western Ghats.
+      - label: Javadi and Nallamalai hills
+        bin: Eastern Ghats
+        clue: Low hills near the Bay of Bengal side.
+        why: Eastern Ghats.
+      - label: Broken by rivers flowing east
+        bin: Eastern Ghats
+        clue: Not one continuous wall.
+        why: Eastern Ghats.
+      - label: Malwa Plateau and Mount Abu
+        bin: Central Highlands
+        clue: North of the Satpuras.
+        why: Central Highlands.
     items:
       - prompt: "The highest peak in Peninsular India is"
         options: ["Anamudi", "Dodabetta", "Mount Abu", "K2"]
@@ -132,6 +164,42 @@ concepts:
       visual: "Picture wet air climbing the Western Ghats like a sponge being squeezed on the way up. When it comes down the other side it is wrung dry: that side is the rain shadow."
       step_by_step: "To sort a river: Step 1: does it reach the Bay of Bengal? East-flowing (Mahanadi, Godavari, Krishna, Kaveri). Step 2: the Arabian Sea? West-flowing (Narmada, Tapti, Kerala rivers). Step 3: does it join the Yamuna or Ganga? North-flowing (Chambal)."
       real_world: "Wayanad gets heavy rain while Mysuru, just over the hills, is much drier: a rain shadow you can drive across in two hours."
+    activity:
+      type: sort
+      prompt: Which way does it flow?
+      bins:
+      - East to the Bay of Bengal
+      - West to the Arabian Sea
+      - North to the Ganga system
+      items:
+      - label: Godavari, the 'Dakshin Ganga'
+        bin: East to the Bay of Bengal
+        clue: Rises at Nashik and makes a delta.
+        why: Godavari flows east.
+      - label: Krishna
+        bin: East to the Bay of Bengal
+        clue: Rises at Mahabaleshwar.
+        why: Krishna flows east.
+      - label: Kaveri
+        bin: East to the Bay of Bengal
+        clue: Rises at Brahmagiri.
+        why: Kaveri flows east.
+      - label: Narmada
+        bin: West to the Arabian Sea
+        clue: Rises at Amarkantak; Dhuandhar Falls.
+        why: Narmada flows west, against the plateau's slope.
+      - label: Tapti
+        bin: West to the Arabian Sea
+        clue: Rises at Multai.
+        why: Tapti flows west.
+      - label: Chambal, with its ravines
+        bin: North to the Ganga system
+        clue: Joins the Yamuna.
+        why: Chambal flows north.
+      - label: Betwa
+        bin: North to the Ganga system
+        clue: A peninsular river that reaches the northern plain.
+        why: Betwa flows north.
     items:
       - prompt: "Which is the largest peninsular river, called Dakshin Ganga?"
         options: ["Godavari", "Krishna", "Kaveri", "Narmada"]
@@ -226,6 +294,61 @@ concepts:
       visual: "Laterite is like a sieve washed again and again: heavy rains carry away the silica and lime, leaving the red, iron-rich stuff behind. Kerala's red building blocks are cut from it."
       step_by_step: "To name a soil: Step 1: black, sticky, from basalt, good for cotton? Black (regur). Step 2: red because of iron, from old rocks? Red. Step 3: formed by leaching in rain-and-drought climates, used for plantations? Laterite."
       real_world: "Many Kerala houses are built with laterite (vettukallu) blocks cut from the ground."
+    activity:
+      type: scale
+      min: 0
+      max: 250
+      step: 5
+      start: 250
+      unit: cm
+      prompt: Slide the yearly rainfall. Which forest grows?
+      zones:
+      - from: 0
+        to: 75
+        label: Thorn forest
+        says: 'Below 75 cm and very hot: acacia, euphorbia, date palms.'
+      - from: 75
+        to: 100
+        label: Dry deciduous
+        says: '70–100 cm: teak, rosewood, bamboo; leafless in drought.'
+      - from: 100
+        to: 200
+        label: Moist deciduous
+        says: '100–200 cm: teak, sal, shisham, sandalwood.'
+      - from: 200
+        to: 250
+        label: Evergreen
+        says: 'Over 200 cm: forests stay green all year.'
+      goals:
+      - prompt: Find rainfall for dry deciduous forest.
+        zone: Dry deciduous
+        mistakes:
+        - when:
+            v:
+            - 0
+            - 70
+          say: 'Too dry: below 75 cm you get thorn forest, not deciduous trees.'
+        - when:
+            v:
+            - 105
+            - 195
+          say: That's wet enough for moist deciduous forest. Dry deciduous needs less.
+      - prompt: Find rainfall for moist deciduous forest (teak, sal).
+        zone: Moist deciduous
+        mistakes:
+        - when:
+            v:
+            - 75
+            - 95
+          say: That only gives dry deciduous forest. Moist needs over 100 cm.
+      - prompt: Find rainfall for thorn forest east of the Ghats.
+        zone: Thorn forest
+        mistakes:
+        - when:
+            v:
+            - 100
+            - 195
+          say: Thorn forest grows in dry rain-shadow areas, not wet ones.
     items:
       - prompt: "Black soil is also called"
         options: ["Regur or black cotton soil", "Laterite", "Alluvium", "Peat"]
@@ -302,6 +425,43 @@ concepts:
       visual: "Picture a map with five coloured mineral patches: black (coal) in Jharkhand and Odisha, grey in central India, red (iron) in Karnataka and Goa, and copper-coloured in the Aravalis."
       step_by_step: "To read a percentage: Step 1: Karnataka makes 71% of India's coffee. Step 2: Kerala makes 22%. Step 3: together 93%, leaving 7% for the rest of India."
       real_world: "Wayanad's coffee estates are part of the 22% of India's coffee that Kerala grows."
+    activity:
+      type: sort
+      prompt: Which crop?
+      bins:
+      - Coffee
+      - Tea
+      - Cotton
+      - Sugarcane
+      items:
+      - label: Seven seeds brought by Bababudan
+        bin: Coffee
+        clue: Planted in the Chikkamagaluru hills.
+        why: Coffee came to India this way.
+      - label: Arabica and Robusta
+        bin: Coffee
+        clue: Two varieties.
+        why: Coffee varieties.
+      - label: Karnataka gives 71% of production
+        bin: Coffee
+        clue: Kerala is second with 22%.
+        why: Coffee.
+      - label: 'Nilgiris: 44% of plantations'
+        bin: Tea
+        clue: Labour-intensive plucking on hills.
+        why: Tea.
+      - label: Needs 21–30 °C and frost-free months; harvested January–May
+        bin: Cotton
+        clue: Grows best in black soil.
+        why: Cotton.
+      - label: Gujarat leads production
+        bin: Cotton
+        clue: Then Maharashtra.
+        why: Cotton.
+      - label: High sucrose, long crushing season in the Deccan
+        bin: Sugarcane
+        clue: Black soil and tropical climate.
+        why: Sugarcane.
     items:
       - prompt: "Which state is India's leading coffee producer?"
         options: ["Karnataka", "Kerala", "Tamil Nadu", "Assam"]

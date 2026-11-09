@@ -27,6 +27,32 @@ concepts:
       visual: "Draw two squares of the same size. In one draw 4 dots (sparse); in the other 9 dots (dense). Same area, more people: higher density."
       step_by_step: "A district has 12,00,000 people on 1,500 sq km. Step 1: Density = population ÷ area. Step 2: 12,00,000 ÷ 1,500 = 800. Step 3: 800 persons per sq km."
       real_world: "Census figures decide how many seats each area gets in panchayats, assemblies and Parliament."
+    activity:
+      type: number_line
+      min: 1871
+      max: 2021
+      step: 10
+      start: 1871
+      prompt: India's census comes every 10 years. Mark the year.
+      goals:
+      - prompt: The first synchronous census
+        target: 1881
+        mistakes:
+        - when:
+            v: 1871
+          say: Too early. The first census held all over India at the same time was in 1881.
+      - prompt: The latest completed census
+        target: 2011
+        mistakes:
+        - when:
+            v: 2021
+          say: The 2021 census was not completed on time. The latest completed one is 2011.
+      - prompt: The census just before 2011
+        target: 2001
+        mistakes:
+        - when:
+            v: 1991
+          say: 'That is 20 years before. A census comes every 10 years: 2011 − 10.'
     items:
       - prompt: "How often is the census held in India?"
         options: ["Every 10 years", "Every 5 years", "Every year", "Every 20 years"]
@@ -85,6 +111,52 @@ concepts:
       visual: "Draw a population pyramid: a wide base (many children) for a young population, and a more column-like shape for Kerala with more older people."
       step_by_step: "A village has 600 men and 630 women. Step 1: Sex ratio = females ÷ males × 1000. Step 2: 630 ÷ 600 × 1000. Step 3: = 1050 females per 1000 males."
       real_world: "Kerala's high literacy owes much to early schools, library movements and the literacy campaign that made Kottayam India's first fully literate town in 1989."
+    activity:
+      type: scale
+      min: 900
+      max: 1100
+      step: 1
+      start: 1000
+      unit: per 1000
+      prompt: Sex ratio = females per 1000 males (Census 2011). Slide to the value.
+      zones:
+      - from: 900
+        to: 1000
+        label: Fewer females
+        says: 'Below 1000: fewer females than males.'
+      - from: 1000
+        to: 1100
+        label: More females
+        says: 'Above 1000: more females than males.'
+      goals:
+      - prompt: Kerala's sex ratio, the highest of all states
+        value: 1084
+        mistakes:
+        - when:
+            v: 943
+          say: That's India's ratio. Kerala has more females than males, so it is above 1000.
+        - when:
+            v:
+            - 900
+            - 999
+          say: Below 1000 means fewer females. Kerala has more females than males.
+      - prompt: India's sex ratio
+        value: 943
+        mistakes:
+        - when:
+            v:
+            - 1000
+            - 1100
+          say: India has fewer females than males, so its ratio is below 1000.
+        - when:
+            v: 919
+          say: That's the child sex ratio (0–6 years). For all ages it is 943.
+      - prompt: India's child sex ratio (0–6 years)
+        value: 919
+        mistakes:
+        - when:
+            v: 943
+          say: '943 is for all ages. Among young children the ratio is even lower: 919.'
     items:
       - prompt: "Sex ratio is the number of females per how many males?"
         answer: "1000"
@@ -143,6 +215,35 @@ concepts:
       visual: "Draw two lines over time: death rate falling first, birth rate falling later. The gap between them is the growth, widest in the middle stage."
       step_by_step: "Birth rate 18, death rate 7 per 1000. Step 1: Growth = 18 − 7. Step 2: = 11 per 1000. Step 3: That is 1.1% a year."
       real_world: "Money sent home by Keralites working in the Gulf countries (remittances) changed housing, education and the economy of many Kerala villages."
+    activity:
+      type: number_line
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+      prompt: Natural growth rate = birth rate − death rate (per 1000 people).
+      goals:
+      - prompt: Birth rate 20, death rate 7
+        target: 13
+        mistakes:
+        - when:
+            v: 27
+          say: 'That adds them. Deaths take people away: 20 − 7.'
+        - when:
+            v: 7
+          say: That's the death rate. Take it away from the birth rate.
+      - prompt: Birth rate 25, death rate 10
+        target: 15
+        mistakes:
+        - when:
+            v: 35
+          say: That adds them. Growth is births minus deaths.
+      - prompt: 'Birth rate 12, death rate 9: a late stage of the transition'
+        target: 3
+        mistakes:
+        - when:
+            v: 21
+          say: 'That adds them. When both rates are low, growth is slow: 12 − 9.'
     items:
       - prompt: "Birth rate is 20 per 1000 and death rate is 7 per 1000. What is the natural growth rate, per 1000?"
         answer: "13"

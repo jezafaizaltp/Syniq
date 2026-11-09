@@ -28,6 +28,37 @@ concepts:
       visual: "Draw a path: voters' list → nomination → campaign (Model Code of Conduct) → voting on EVM with VVPAT → counting → result."
       step_by_step: "Can a 17-year-old vote in the Lok Sabha election? Step 1: The voting age is 18. Step 2: 17 is below 18. Step 3: No, not until they turn 18."
       real_world: "India's general elections are the largest in the world, with nearly a billion registered voters, all handled by the Election Commission."
+    activity:
+      type: sort
+      prompt: Who conducts this election?
+      bins:
+      - Election Commission of India
+      - State Election Commission
+      items:
+      - label: Lok Sabha election
+        bin: Election Commission of India
+        clue: Elects Parliament.
+        why: The ECI (Article 324) runs Parliament elections.
+      - label: Kerala Legislative Assembly election
+        bin: Election Commission of India
+        clue: Elects MLAs, not panchayat members.
+        why: The ECI runs State Legislature elections too.
+      - label: Election of the President
+        bin: Election Commission of India
+        clue: The highest office.
+        why: The ECI conducts it.
+      - label: Grama panchayat election
+        bin: State Election Commission
+        clue: A local body.
+        why: Local body elections are run by the State Election Commission.
+      - label: Kozhikode Corporation election
+        bin: State Election Commission
+        clue: A city's local body.
+        why: Run by the State Election Commission.
+      - label: Election of the Vice-President
+        bin: Election Commission of India
+        clue: A national office.
+        why: The ECI conducts it.
     items:
       - prompt: "What is the minimum voting age in India?"
         answer: "18"
@@ -86,6 +117,40 @@ concepts:
       visual: "Draw a government building in the middle with watchdogs around it, each with a label: CAG (money), PSC (jobs), NHRC (rights), Lokpal (corruption)."
       step_by_step: "A report shows money for a road was spent without the road being built. Which body would find this? Step 1: It is about checking government accounts. Step 2: Auditing is done by the CAG. Step 3: So the CAG's audit report would show it."
       real_world: "The Kerala Public Service Commission conducts tests for thousands of State government jobs every year, on merit."
+    activity:
+      type: sort
+      prompt: Which institution does this job?
+      bins:
+      - CAG
+      - UPSC
+      - Finance Commission
+      - Human Rights Commission
+      - Lokpal
+      items:
+      - label: Audits how government spends money
+        bin: CAG
+        clue: Article 148; reports to Parliament.
+        why: The Comptroller and Auditor General audits spending.
+      - label: Selects civil servants on merit
+        bin: UPSC
+        clue: Article 315; exams and interviews.
+        why: The Union Public Service Commission selects officers.
+      - label: Recommends how taxes are shared with states
+        bin: Finance Commission
+        clue: Article 280; set up every five years.
+        why: The Finance Commission advises on sharing taxes.
+      - label: Looks into police torture of a prisoner
+        bin: Human Rights Commission
+        clue: Set up in 1993 to protect dignity.
+        why: The NHRC looks into rights violations.
+      - label: Investigates a corrupt minister
+        bin: Lokpal
+        clue: Act of 2013, against corruption.
+        why: The Lokpal investigates corruption by public servants.
+      - label: Checks if a road project wasted money
+        bin: CAG
+        clue: An audit of spending.
+        why: The CAG audits it.
     items:
       - prompt: "Which body audits the accounts of the government?"
         options: ["The Comptroller and Auditor General", "The Election Commission", "The UPSC", "The NHRC"]
@@ -142,6 +207,35 @@ concepts:
       visual: "Draw a citizen handing an application to a Public Information Officer, a calendar showing '30 days', and a reply coming back."
       step_by_step: "An RTI application is filed on 1 June. By when must the reply come? Step 1: The limit is 30 days. Step 2: June has 30 days. Step 3: By about 1 July."
       real_world: "The RTI movement grew from the Mazdoor Kisan Shakti Sangathan's campaigns in Rajasthan, where villagers checked public works records."
+    activity:
+      type: number_line
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+      prompt: 'Right to Information Act, 2005: mark the deadline in days.'
+      goals:
+      - prompt: 'Normal request: the office must reply within how many days?'
+        target: 30
+        mistakes:
+        - when:
+            v: 2
+          say: That's for life or liberty cases. A normal request gets up to 30 days.
+      - prompt: 'Life or liberty is at risk: reply within 48 hours. How many days is that?'
+        target: 2
+        mistakes:
+        - when:
+            v: 30
+          say: 30 days is for a normal request. When life or liberty is at risk it is 48 hours.
+        - when:
+            v: 1
+          say: A day is 24 hours. 48 hours is two days.
+      - prompt: You asked on 1 March. On which date in March is the last day for a reply?
+        target: 31
+        mistakes:
+        - when:
+            v: 30
+          say: 'Count 30 days on from 1 March: 1 + 30 = 31 March.'
     items:
       - prompt: "In which year was the Right to Information Act passed?"
         answer: "2005"

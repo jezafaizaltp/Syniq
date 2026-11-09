@@ -30,6 +30,38 @@ concepts:
       visual: "Picture a table: column C people, column F area, column G empty. Type =C2/F2 in G2, then pull the little square down. Every row fills in by itself."
       step_by_step: "To find density: Step 1: click G2. Step 2: type = then click C2, type /, click F2. Step 3: Enter. Step 4: drag the fill handle down to the last state. Step 5: use Delete Decimal Place to show two decimals."
       real_world: "Kerala had about 3.34 crore people on about 38,863 sq km in 2011, a density of about 860 per sq km, one of India's highest."
+    activity:
+      type: number_line
+      min: 300
+      max: 1100
+      step: 20
+      start: 300
+      prompt: Population density = population ÷ area. Mark the density (people per sq km).
+      goals:
+      - prompt: 'A district: 60,000 people on 100 sq km'
+        target: 600
+        mistakes:
+        - when:
+            v: 1000
+          say: 'Check the division: 60000 ÷ 100 = 600.'
+      - prompt: 'A state: 3,34,00,000 people on about 38,900 sq km (Kerala)'
+        target: 860
+        mistakes:
+        - when:
+            v: 380
+          say: That's close to India's density (382). Kerala is much more crowded.
+        - when:
+            v: 1100
+          say: That's close to Bihar's (1106), the highest.
+      - prompt: 'A town: 20,000 people on 50 sq km'
+        target: 400
+        mistakes:
+        - when:
+            v: 1000
+          say: That multiplies instead of dividing. 20000 ÷ 50.
+        - when:
+            v: 380
+          say: 'That''s India''s density. Work it out: 20000 ÷ 50.'
     items:
       - prompt: "Population density is calculated as"
         options: ["Total population ÷ land area", "Land area ÷ total population", "Total population × land area", "Total population − land area"]
@@ -106,6 +138,52 @@ concepts:
       visual: "Imagine five boxes labelled from very low to very high, each with a minimum number on it. LOOKUP drops each state into the last box whose minimum it reaches. COUNTIF counts the cards in each box."
       step_by_step: "To classify 350: Step 1: list the limits 0, 100, 200, 400, 800. Step 2: find the biggest limit not more than 350: that is 200. Step 3: 200 belongs to 'Moderate'. So 350 is moderate."
       real_world: "Schools use the same idea to turn marks into grades: 80 and above A, 60–79 B, 40–59 C, below 40 D."
+    activity:
+      type: sort
+      prompt: Which density class? (people per sq km)
+      bins:
+      - Very low (below 100)
+      - Low (100–199)
+      - Moderate (200–399)
+      - High (400–799)
+      - Very high (800+)
+      items:
+      - label: Arunachal Pradesh, 17
+        bin: Very low (below 100)
+        clue: Is it below 100?
+        why: 17 is below 100.
+      - label: Himachal Pradesh, 123
+        bin: Low (100–199)
+        clue: Between 100 and 200.
+        why: Low.
+      - label: Odisha, 270
+        bin: Moderate (200–399)
+        clue: Between 200 and 400.
+        why: Moderate.
+      - label: India, 382
+        bin: Moderate (200–399)
+        clue: Is 382 under 400?
+        why: '382 is still under 400: moderate.'
+      - label: Maharashtra, 365
+        bin: Moderate (200–399)
+        clue: Under 400.
+        why: Moderate.
+      - label: Uttar Pradesh, 829
+        bin: Very high (800+)
+        clue: 800 or more?
+        why: '829 is 800 or more: very high.'
+      - label: Kerala, 860
+        bin: Very high (800+)
+        clue: Compare with 800.
+        why: Very high.
+      - label: Punjab, 551
+        bin: High (400–799)
+        clue: Between 400 and 800.
+        why: High.
+      - label: Exactly 400
+        bin: High (400–799)
+        clue: 'Lower limit counts: 400 to under 800.'
+        why: 400 is the start of high, not moderate.
     items:
       - prompt: "A state has a density of 350 per sq km. Which category is it in?"
         options: ["Moderate population density", "Low population density", "High population density", "Very high population density"]
@@ -179,6 +257,37 @@ concepts:
       visual: "AutoFilter is like a sieve: you choose what passes through, and everything else is hidden below, still there."
       step_by_step: "To show only very high density states: Step 1: click the Classification heading. Step 2: Data → AutoFilter. Step 3: click the arrow in that heading. Step 4: untick all except Very High Density. Step 5: OK."
       real_world: "A class teacher can lock the marks sheet with a password so students can see but not change their marks."
+    activity:
+      type: sort
+      prompt: AutoFilter or Protect Sheet?
+      bins:
+      - AutoFilter
+      - Protect Sheet
+      items:
+      - label: Show only the 'Very High Density' states
+        bin: AutoFilter
+        clue: Keep some rows visible, hide others.
+        why: AutoFilter.
+      - label: Stop classmates from changing the data
+        bin: Protect Sheet
+        clue: Needs a password.
+        why: Protect Sheet.
+      - label: Hide every row except one category
+        bin: AutoFilter
+        clue: Rows are hidden, not deleted.
+        why: AutoFilter.
+      - label: Others can open and view but not edit
+        bin: Protect Sheet
+        clue: Locked with a password.
+        why: Protect Sheet.
+      - label: Arrow buttons appear in the heading cells
+        bin: AutoFilter
+        clue: Data menu.
+        why: AutoFilter.
+      - label: Tools menu, enter and confirm a password
+        bin: Protect Sheet
+        clue: Tools menu.
+        why: Protect Sheet.
     items:
       - prompt: "What does AutoFilter do?"
         options: ["Displays only rows that meet chosen criteria", "Deletes rows that do not meet criteria", "Sorts data alphabetically", "Creates a chart"]
