@@ -156,6 +156,22 @@ def test_every_cbse_kg_to_8_maths_and_science_topic_has_a_working_activity():
             assert check_activity(c["activity"]) == [], c["code"]
 
 
+SS_IT_ENGLISH = (
+    (("ss",), 60), (("it",), 30), (("eng",), 25),
+    (("cbse10-ss",), 38), (("cbse9-ss",), 32), (("cbse8-ss",), 30), (("cbse7-ss",), 40), (("cbse6-ss",), 28),
+    (("cbse9-eng",), 16), (("cbse10-eng",), 26), (("cbse11-eng",), 15), (("cbse12-eng",), 19),
+)
+
+
+def test_every_social_science_it_and_upper_english_topic_has_a_working_activity():
+    for subjects, count in SS_IT_ENGLISH:
+        concepts = _concepts_of(*subjects)
+        assert len(concepts) == count, subjects
+        for c in concepts:
+            assert "activity" in c, c["code"]
+            assert check_activity(c["activity"]) == [], c["code"]
+
+
 def test_every_activity_coaches_a_wrong_try():
     """The mistake principle: every sort item has a clue and a reason, every order says why a step
     can't come earlier, and number activities name the slips children really make."""
@@ -164,6 +180,7 @@ def test_every_activity_coaches_a_wrong_try():
         + _concepts_of("cbse8-math", "cbse8-sci", "cbse7-math", "cbse7-sci", "cbse5-math", "cbse5-evs",
                        "cbse4-math", "cbse4-evs", "cbse3-math", "cbse3-evs", "cbse2-math", "cbse1-math",
                        "cbselkg-math", "cbselkg-world", "cbseukg-math", "cbseukg-world")
+        + _concepts_of(*(s for subjects, _count in SS_IT_ENGLISH for s in subjects))
         + [c for p in _class6_packs() for c in p["concepts"]]
     )
     numeric = 0
@@ -254,5 +271,5 @@ def test_lesson_offers_the_activity_with_the_topic():
 
 def test_topics_without_an_activity_send_none():
     with SessionLocal() as db:
-        c = db.scalars(select(Concept).where(Concept.code.like("cbse12e.%"))).first()
+        c = db.scalars(select(Concept).where(Concept.code.like("mal9.%"))).first()
         assert c.activity is None
