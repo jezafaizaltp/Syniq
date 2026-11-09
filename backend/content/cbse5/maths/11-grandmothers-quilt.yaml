@@ -30,6 +30,65 @@ concepts:
       value: 6
     alt: A quilt with 4 rows of 6 squares each has 24 squares in all.
     unit: squares
+  activity:
+    type: formula
+    prompt: A quilt made of squares. Set the rows and columns.
+    inputs:
+    - name: r
+      label: Rows
+      min: 1
+      max: 24
+      step: 1
+      start: 1
+    - name: c
+      label: Squares in a row
+      min: 1
+      max: 24
+      step: 1
+      start: 1
+    outputs:
+    - name: area
+      label: Squares in all (area)
+      expr: r*c
+    - name: per
+      label: Squares along the border edge
+      expr: 2*(r+c)
+    goals:
+    - prompt: 24 squares, 6 in each row.
+      want:
+        c: 6
+        area: 24
+      mistakes:
+      - when:
+          c: 6
+          r: 18
+        say: 6 + 18 = 24 adds. 6 squares in each of r rows is 6 × r.
+    - prompt: 36 squares, with the shortest border.
+      want:
+        r: 6
+        c: 6
+      mistakes:
+      - when:
+          r: 4
+          c: 9
+        say: 36 squares, but the border is 26 long. A square shape has a shorter border.
+      - when:
+          r: 9
+          c: 4
+        say: 36 squares, but a long shape has a longer border.
+    - prompt: 20 squares with a border 18 long.
+      want:
+        area: 20
+        per: 18
+      mistakes:
+      - when:
+          r: 2
+          c: 10
+        say: 20 squares, but the border is 24. Try a less long shape.
+      - when:
+          r: 10
+          c: 2
+        say: 20 squares, but the border is 24.
   items:
   - prompt: A quilt is 6 squares long and 4 squares wide. How many squares?
     answer: '24'
@@ -110,6 +169,57 @@ concepts:
     - 10 × 2 = 20
     - Perimeter 20 m
     alt: 'The perimeter of a 6 by 4 rectangle: sides 6, 4, 6, 4; 6 plus 4 is 10; doubled is 20.'
+  activity:
+    type: formula
+    prompt: Lace goes all the way round a quilt.
+    inputs:
+    - name: l
+      label: Length
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+      unit: m
+    - name: w
+      label: Width
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+      unit: m
+    outputs:
+    - name: per
+      label: Lace needed
+      expr: 2*(l+w)
+      unit: m
+    goals:
+    - prompt: 16 m of lace. The quilt is 5 m long. Set the width.
+      want:
+        l: 5
+        per: 16
+      mistakes:
+      - when:
+          l: 5
+          w: 11
+        say: 5 + 11 = 16 counts only two sides. The lace goes round all four.
+    - prompt: 20 m of lace. The quilt is 5 m long.
+      want:
+        l: 5
+        per: 20
+      mistakes:
+      - when:
+          l: 5
+          w: 15
+        say: Only two sides counted. Long + wide + long + wide = 20.
+    - prompt: 30 m of lace. The quilt is 6 m wide.
+      want:
+        w: 6
+        per: 30
+      mistakes:
+      - when:
+          w: 6
+          l: 24
+        say: Only two sides counted. 30 ÷ 2 = 15 for one long and one wide side.
   items:
   - prompt: A quilt is 6 m long and 4 m wide. How much lace goes around it, in m?
     answer: '20'

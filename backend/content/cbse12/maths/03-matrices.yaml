@@ -34,6 +34,88 @@ concepts:
       - Aᵀ = A
       - Aᵀ = −A
     alt: Kinds of square matrices and what each means.
+  activity:
+    type: formula
+    prompt: A is m × n and B is p × q. AB exists only when A's columns match B's rows (n = p); then AB is m × q.
+    inputs:
+    - name: m
+      label: A's rows m
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+    - name: n
+      label: A's columns n
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+    - name: p
+      label: B's rows p
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+    - name: q
+      label: B's columns q
+      min: 1
+      max: 5
+      step: 1
+      start: 1
+    outputs:
+    - name: ab
+      label: AB possible? (1 yes, 0 no)
+      expr: 1-min(1,abs(n-p))
+    - name: ba
+      label: BA possible? (1 yes, 0 no)
+      expr: 1-min(1,abs(q-m))
+    - name: gap
+      label: AB and BA differ in size by
+      expr: abs(m-n)
+    goals:
+    - prompt: A is 2 × 4. Choose B so AB is a 2 × 3 matrix.
+      want:
+        m: 2
+        n: 4
+        ab: 1
+        q: 3
+      mistakes:
+      - when:
+          m: 2
+          n: 4
+          p: 2
+        say: 'B''s rows must match A''s COLUMNS, not its rows: p = 4.'
+      - when:
+          m: 2
+          n: 4
+          p: 3
+          q: 4
+        say: 'B is 3 × 4, but its rows (3) don''t match A''s columns (4). Flip it: B should be 4 × 3.'
+    - prompt: Make AB possible but BA impossible.
+      want:
+        ab: 1
+        ba: 0
+      mistakes:
+      - when:
+          ab: 1
+          ba: 1
+        say: 'Both work here. For BA, B''s columns q must match A''s rows m: make them different.'
+      - when:
+          ab: 0
+        say: 'AB doesn''t work yet: A''s columns n must equal B''s rows p.'
+    - prompt: Make both AB and BA possible, but of different sizes.
+      want:
+        ab: 1
+        ba: 1
+        gap:
+        - 1
+        - 4
+      mistakes:
+      - when:
+          ab: 1
+          ba: 1
+          gap: 0
+        say: 'With A square (m = n), AB and BA are the same size. Try A as 2 × 3 and B as 3 × 2: AB is 2 × 2, BA is 3 × 3.'
   items:
   - prompt: How many entries does a 3 × 4 matrix have?
     answer: '12'
@@ -117,6 +199,133 @@ concepts:
     - Negate b and c
     - Divide by ad − bc
     alt: Finding the inverse of a 2 × 2 matrix.
+  activity:
+    type: formula
+    prompt: A = [[a, b], [c, d]]. A⁻¹ exists only when |A| = ad − bc ≠ 0; then A⁻¹ = (1/|A|) [[d, −b], [−c, a]].
+    inputs:
+    - name: a
+      label: a
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: b
+      label: b
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: c
+      label: c
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    - name: d
+      label: d
+      min: -5
+      max: 5
+      step: 1
+      start: 0
+    outputs:
+    - name: det
+      label: '|A| = ad − bc'
+      expr: a*d-b*c
+    - name: asym
+      label: b − c (0 if symmetric)
+      expr: b-c
+    goals:
+    - prompt: Make a matrix with no inverse, with every entry from 1 to 5.
+      want:
+        det: 0
+        a:
+        - 1
+        - 5
+        b:
+        - 1
+        - 5
+        c:
+        - 1
+        - 5
+        d:
+        - 1
+        - 5
+      mistakes:
+      - when:
+          a:
+          - 1
+          - 5
+          b:
+          - 1
+          - 5
+          c:
+          - 1
+          - 5
+          d:
+          - 1
+          - 5
+          det:
+          - 1
+          - 25
+        say: '|A| ≠ 0, so A⁻¹ exists. Make the rows proportional, so ad = bc.'
+      - when:
+          a:
+          - 1
+          - 5
+          b:
+          - 1
+          - 5
+          c:
+          - 1
+          - 5
+          d:
+          - 1
+          - 5
+          det:
+          - -25
+          - -1
+        say: '|A| ≠ 0, so A⁻¹ exists. Make the rows proportional, so ad = bc.'
+    - prompt: Keep b = 1 and c = 2. Make |A| = 1, so A⁻¹ has whole-number entries.
+      want:
+        b: 1
+        c: 2
+        det: 1
+      mistakes:
+      - when:
+          b: 1
+          c: 2
+          det: -1
+        say: '|A| = ad − bc = −1: ad is only 1. You need ad − 2 = 1, so ad = 3.'
+      - when:
+          b: 1
+          c: 2
+          det:
+          - 2
+          - 30
+        say: '|A| is too big. ad − 2 must equal 1.'
+    - prompt: Make A symmetric (b = c) and singular, with a = 4 and b not 0.
+      want:
+        a: 4
+        asym: 0
+        det: 0
+        b:
+        - 1
+        - 5
+      mistakes:
+      - when:
+          a: 4
+          det: 0
+          asym:
+          - -10
+          - -1
+        say: 'Singular, but not symmetric: b and c must be equal (A = Aᵀ).'
+      - when:
+          a: 4
+          det: 0
+          asym:
+          - 1
+          - 10
+        say: 'Singular, but not symmetric: b and c must be equal (A = Aᵀ).'
   items:
   - prompt: For A = [[2, 1], [5, 3]], find ad − bc.
     answer: '1'

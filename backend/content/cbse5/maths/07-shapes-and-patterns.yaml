@@ -31,6 +31,52 @@ concepts:
       - 5 and 5
       - 6 and 6
     alt: A triangle has 3 sides and 3 corners, a pentagon 5 and 5, a hexagon 6 and 6.
+  activity:
+    type: sort
+    prompt: What shape is it?
+    bins:
+    - Triangle
+    - Square
+    - Pentagon
+    - Hexagon
+    - Circle
+    items:
+    - label: 3 corners
+      bin: Triangle
+      clue: Count the corners.
+      why: 3 corners, 3 sides.
+    - label: A samosa from the side
+      bin: Triangle
+      clue: How many sides?
+      why: 3 sides.
+    - label: 4 equal sides and 4 square corners
+      bin: Square
+      clue: All sides the same.
+      why: A square.
+    - label: A carrom board
+      bin: Square
+      clue: Four equal sides, corners like a book's.
+      why: A square.
+    - label: 5 sides
+      bin: Pentagon
+      clue: One more than 4.
+      why: A pentagon.
+    - label: A cell of a honeycomb
+      bin: Hexagon
+      clue: 'Count the sides: 6.'
+      why: A hexagon.
+    - label: 6 corners
+      bin: Hexagon
+      clue: Count them.
+      why: A hexagon.
+    - label: No corners at all
+      bin: Circle
+      clue: Perfectly round.
+      why: A circle.
+    - label: A bangle
+      bin: Circle
+      clue: Round all the way.
+      why: A circle.
   items:
   - prompt: How many sides does a hexagon have?
     answer: '6'
@@ -128,6 +174,50 @@ concepts:
     - from: 10
       to: 13
       label: '+3'
+  activity:
+    type: formula
+    prompt: Squares in a row made of matchsticks. The first square uses 4 sticks.
+    inputs:
+    - name: n
+      label: Squares in the row
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+    outputs:
+    - name: m
+      label: Matchsticks
+      expr: 3*n+1
+    goals:
+    - prompt: Use exactly 13 matchsticks.
+      want:
+        m: 13
+      mistakes:
+      - when:
+          n: 3
+        say: 3 squares use 10 sticks. Each new square adds 3.
+      - when:
+          n:
+          - 5
+          - 20
+        say: Too many sticks. Each square shares a side with the one before.
+    - prompt: Use exactly 31 matchsticks.
+      want:
+        m: 31
+      mistakes:
+      - when:
+          n: 7
+        say: 31 ÷ 4 counts 4 sticks for every square. Neighbours share a stick, so each new one needs only 3.
+    - prompt: Use exactly 61 matchsticks.
+      want:
+        m: 61
+      mistakes:
+      - when:
+          n: 15
+        say: 15 squares use 46 sticks. Shared sides mean you can make more.
+      - when:
+          n: 19
+        say: 19 squares use 58. One more square.
   items:
   - prompt: 'What comes next: 1, 4, 7, 10, ...?'
     answer: '13'

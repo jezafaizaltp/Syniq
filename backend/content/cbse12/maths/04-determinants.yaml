@@ -26,6 +26,60 @@ concepts:
     - Multiply each entry by its cofactor (+ − +)
     - Add the results
     alt: Expanding a 3 × 3 determinant along a row.
+  activity:
+    type: formula
+    prompt: A(1, 2) and B(4, 6) are fixed. Move C(x, y). Area of ABC = ½ |determinant|, where the determinant here is 3y − 4x − 2.
+    inputs:
+    - name: x
+      label: C's x
+      min: -6
+      max: 10
+      step: 1
+      start: 0
+    - name: y
+      label: C's y
+      min: -6
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: dv
+      label: Determinant
+      expr: 3*y-4*x-2
+    - name: area
+      label: Area of triangle ABC
+      expr: abs(3*y-4*x-2)/2
+      places: 1
+    goals:
+    - prompt: Make C collinear with A and B (area 0), with x negative.
+      want:
+        area: 0
+        x:
+        - -6
+        - -1
+      mistakes:
+      - when:
+          area:
+          - 0.5
+          - 3
+        say: 'Close, but A, B and C still make a thin triangle. Collinear means the determinant is exactly 0: 3y = 4x + 2.'
+    - prompt: Make the area exactly 5.
+      want:
+        area: 5
+      mistakes:
+      - when:
+          dv: 5
+        say: The determinant is 5, but the area is HALF of it. You need |determinant| = 10.
+      - when:
+          dv: -5
+        say: The determinant is −5, but the area is half its size. You need |determinant| = 10.
+    - prompt: 'Area 5 again, but with the determinant negative: C on the other side of AB.'
+      want:
+        dv: -10
+      mistakes:
+      - when:
+          dv: 10
+        say: That's +10. The sign shows which side of AB C is on; the area ignores it. Move C to the other side.
   items:
   - prompt: Find the determinant of [[3, 4], [1, 2]].
     answer: '2'
@@ -110,6 +164,92 @@ concepts:
       - no solution
       - none or infinitely many
     alt: How the determinant decides whether a system has a unique, no or many solutions.
+  activity:
+    type: formula
+    prompt: The system x + 2y = 3 and 2x + ky = m has |A| = k − 4. If |A| ≠ 0 there is one solution; if |A| = 0, there are none or infinitely many.
+    inputs:
+    - name: k
+      label: k
+      min: -6
+      max: 10
+      step: 1
+      start: 0
+    - name: m
+      label: m
+      min: -6
+      max: 12
+      step: 1
+      start: 0
+    outputs:
+    - name: det
+      label: '|A| = k − 4'
+      expr: k-4
+    - name: gap
+      label: 'If |A| = 0: |m − 6|'
+      expr: abs(m-6)
+    - name: r
+      label: Does (1, 1) fit eq. 2? 2 + k − m
+      expr: 2+k-m
+    goals:
+    - prompt: Make the system have no solution.
+      want:
+        det: 0
+        gap:
+        - 1
+        - 18
+      mistakes:
+      - when:
+          det: 0
+          gap: 0
+        say: 'With m = 6 the second equation is twice the first: the same line, infinitely many solutions. Parallel lines need a different right side.'
+      - when:
+          det:
+          - -10
+          - -1
+        say: '|A| ≠ 0 means exactly one solution. Make |A| = 0.'
+      - when:
+          det:
+          - 1
+          - 6
+        say: '|A| ≠ 0 means exactly one solution. Make |A| = 0.'
+    - prompt: Make it have infinitely many solutions.
+      want:
+        det: 0
+        gap: 0
+      mistakes:
+      - when:
+          det: 0
+          gap:
+          - 1
+          - 18
+        say: 'Same slope but a different right side: parallel lines, no solution. Make equation 2 exactly twice equation 1.'
+    - prompt: Make (1, 1) the one and only solution, with k > 4.
+      want:
+        r: 0
+        k:
+        - 5
+        - 10
+      mistakes:
+      - when:
+          r: 0
+          k: 4
+        say: 'k = 4 makes |A| = 0: (1, 1) fits, but so do infinitely many other points.'
+      - when:
+          k:
+          - 5
+          - 10
+          r:
+          - -10
+          - -1
+        say: '(1, 1) doesn''t satisfy equation 2 yet: 2(1) + k(1) must equal m.'
+      - when:
+          k:
+          - 5
+          - 10
+          r:
+          - 1
+          - 20
+        say: '(1, 1) doesn''t satisfy equation 2 yet: 2(1) + k(1) must equal m.'
   items:
   - prompt: Solve 2x + y = 5, x + y = 3. Find x.
     answer: '2'

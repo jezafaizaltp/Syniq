@@ -36,6 +36,64 @@ concepts:
       - bidentate
       - hexadentate
     alt: Ligands and how many donor atoms each uses.
+  activity:
+    type: formula
+    prompt: 'Call the central metal''s oxidation state x. Ligand charges: NH₃, CO and en are 0; Cl⁻ and CN⁻ are −1. Atoms'' charges add to the overall charge.'
+    inputs:
+    - name: x
+      label: x
+      min: -1
+      max: 9
+      step: 1
+      start: -1
+    outputs:
+    - name: co
+      label: '[Co(NH₃)₆]³⁺ charge'
+      expr: x
+    - name: fe
+      label: K₄[Fe(CN)₆] total (x on Fe)
+      expr: 4+x-6
+    - name: ni
+      label: '[Ni(CO)₄] total (x on Ni)'
+      expr: x
+    - name: cr
+      label: '[Cr(en)₂Cl₂]⁺ charge'
+      expr: x-2
+    goals:
+    - prompt: Find Co in [Co(NH₃)₆]³⁺.
+      want:
+        co: 3
+      mistakes:
+      - when:
+          x: 6
+        say: 6 is the coordination number (six NH₃), not the oxidation state. NH₃ is neutral, so Co carries the whole 3+.
+    - prompt: Find Fe in K₄[Fe(CN)₆].
+      want:
+        fe: 0
+      mistakes:
+      - when:
+          x: 6
+        say: '6 is how many CN⁻ there are. Each is −1: x + 4 − 6 = 0.'
+      - when:
+          x: 3
+        say: 'Fe³⁺ is in K₃[Fe(CN)₆]. Here there are 4 K⁺: x + 4 − 6 = 0.'
+    - prompt: Find Ni in [Ni(CO)₄].
+      want:
+        ni: 0
+      mistakes:
+      - when:
+          x: 4
+        say: 4 is the number of CO ligands. CO is neutral, so Ni is 0.
+    - prompt: Find Cr in [Cr(en)₂Cl₂]⁺.
+      want:
+        cr: 1
+      mistakes:
+      - when:
+          x: 1
+        say: 'en is neutral, but each Cl⁻ is −1: x − 2 = +1.'
+      - when:
+          x: 6
+        say: '6 is the coordination number: each en binds twice (2 × 2) plus 2 Cl. x − 2 = +1.'
   items:
   - prompt: What is the coordination number of Co in [Co(NH₃)₆]³⁺?
     answer: '6'
@@ -120,6 +178,26 @@ concepts:
     - Split into t₂g (lower) and eg (higher)
     - Gap Δ₀ decides colour and spin
     alt: Crystal field splitting in an octahedral complex.
+  activity:
+    type: order
+    prompt: Put these ligands in order of the spectrochemical series, weakest field first.
+    steps:
+    - I⁻
+    - Br⁻
+    - Cl⁻
+    - F⁻
+    - H₂O
+    - NH₃
+    - en (ethane-1,2-diamine)
+    - CN⁻
+    reasons:
+      Br⁻: Br⁻ splits the d orbitals a little more than I⁻.
+      Cl⁻: Cl⁻ is a stronger-field ligand than Br⁻.
+      F⁻: F⁻ is the strongest of the halides.
+      H₂O: Water splits more than the halide ions.
+      NH₃: NH₃ is a stronger-field ligand than water.
+      en (ethane-1,2-diamine): en binds through two N atoms and splits more than NH₃.
+      CN⁻: 'CN⁻ is one of the strongest-field ligands: it usually forces low-spin complexes.'
   items:
   - prompt: In an octahedral field, how many d orbitals are in the lower t₂g set?
     answer: '3'

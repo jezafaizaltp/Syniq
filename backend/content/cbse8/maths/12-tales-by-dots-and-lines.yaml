@@ -33,6 +33,52 @@ concepts:
       label: 7, 7
     caption: '2, 4, 5, 7, 7 balance at 5: 3 + 1 below, 2 + 2 above.'
     alt: A number line with dots at 2, 4, 5 and two at 7, balancing at the mean 5.
+  activity:
+    type: formula
+    prompt: 'Five scores: 6, 8, 9, 5 and x. Set x.'
+    inputs:
+    - name: x
+      label: Fifth score x
+      min: 0
+      max: 30
+      step: 1
+      start: 0
+    outputs:
+    - name: total
+      label: Total
+      expr: 28+x
+    - name: mean
+      label: Mean
+      expr: (28+x)/5
+      places: 2
+    goals:
+    - prompt: Make the mean 8.
+      want:
+        mean: 8
+      mistakes:
+      - when:
+          x: 8
+        say: 'A score of 8 only keeps the mean where it is if the others balance at 8. They don''t: 6 + 8 + 9 + 5 = 28, 4 short of 4 × 8.'
+      - when:
+          total: 32
+        say: Total 32 is 4 × 8, but there are 5 scores. The total must be 5 × 8.
+    - prompt: Make the mean 6.
+      want:
+        mean: 6
+      mistakes:
+      - when:
+          x: 6
+        say: 'The other four already average 7. x must pull the mean down: total 5 × 6 = 30.'
+    - prompt: Make the mean 9.
+      want:
+        mean: 9
+      mistakes:
+      - when:
+          x: 9
+        say: The other four average only 7, so x must be well above 9 to balance them. Total 45.
+      - when:
+          total: 36
+        say: 36 = 4 × 9. Five scores need 5 × 9 = 45.
   items:
   - prompt: Find the mean of 4, 8, 6, 10 and 12.
     answer: '8'
@@ -110,6 +156,43 @@ concepts:
     - '5 values: the middle is the 3rd'
     - Median = 6
     alt: 'Finding the median of 7, 2, 9, 4, 6: in order 2, 4, 6, 7, 9, the third value 6 is in the middle.'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 0.5
+    start: 0
+    prompt: Mark the median of each set of numbers.
+    goals:
+    - prompt: 3, 9, 4, 7, 5
+      target: 5
+      mistakes:
+      - when:
+          v: 4
+        say: '4 sits in the middle of the list as written. Put them in order first: 3, 4, 5, 7, 9.'
+      - when:
+          v:
+          - 6
+          - 20
+        say: 'Too big. In order, 3, 4, 5, 7, 9: which one is in the middle?'
+    - prompt: 10, 12, 13, 13, 15, 18
+      target: 13
+      mistakes:
+      - when:
+          v: 13.5
+        say: 13.5 is the mean. The two middle values are 13 and 13.
+      - when:
+          v: 14
+        say: 14 is halfway between the smallest and largest. The median is the middle of the ordered list.
+    - prompt: 2, 4, 6, 50
+      target: 5
+      mistakes:
+      - when:
+          v: 15.5
+        say: '15.5 is the mean: the 50 drags it up. The median is halfway between the two middle values, 4 and 6.'
+      - when:
+          v: 4
+        say: With an even count there are two middle values, 4 and 6. Take the number halfway between.
   items:
   - prompt: Find the median of 7, 2, 9, 4, 6.
     answer: '6'

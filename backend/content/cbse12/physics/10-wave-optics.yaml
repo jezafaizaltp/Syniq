@@ -26,6 +26,77 @@ concepts:
     - 'Path difference nλ: bright'
     - 'Path difference (n + ½)λ: dark'
     alt: 'Young''s double-slit experiment: bright and dark fringes from interfering waves.'
+  activity:
+    type: formula
+    prompt: 'Young''s double slit: the fringe width is β = λD ÷ d.'
+    inputs:
+    - name: lam
+      label: Wavelength λ
+      min: 400
+      max: 700
+      step: 10
+      start: 400
+      unit: nm
+    - name: dd
+      label: Screen distance D
+      min: 0.5
+      max: 2
+      step: 0.1
+      start: 0.5
+      unit: m
+    - name: d
+      label: Slit gap d
+      min: 0.1
+      max: 1
+      step: 0.05
+      start: 1
+      unit: mm
+    outputs:
+    - name: beta
+      label: Fringe width β
+      expr: lam*dd/d/1000
+      unit: mm
+      places: 2
+    goals:
+    - prompt: λ = 600 nm and D = 1 m. Choose d so the fringes are 6 mm wide.
+      want:
+        lam: 600
+        dd: 1
+        beta: 6
+      mistakes:
+      - when:
+          lam: 600
+          dd: 1
+          d:
+          - 0.15
+          - 1
+        say: 'Slits further apart give NARROWER fringes: β = λD ÷ d. Bring them closer.'
+    - prompt: D = 1 m and d = 0.2 mm. Choose the colour that makes 3.5 mm fringes.
+      want:
+        dd: 1
+        d: 0.2
+        beta: 3.5
+      mistakes:
+      - when:
+          dd: 1
+          d: 0.2
+          lam:
+          - 400
+          - 690
+        say: A shorter wavelength gives narrower fringes. Go redder.
+    - prompt: λ = 500 nm, d = 0.25 mm. Move the screen so β = 4 mm.
+      want:
+        lam: 500
+        d: 0.25
+        beta: 4
+      mistakes:
+      - when:
+          lam: 500
+          d: 0.25
+          dd:
+          - 0.5
+          - 1.9
+        say: 'The fringes spread out further from the slits: β ∝ D. Move the screen back.'
   items:
   - prompt: In Young's experiment λ = 600 nm, D = 1 m, d = 1 mm. Find the fringe width (mm).
     answer: '0.6'
@@ -118,6 +189,68 @@ concepts:
       - 1/4
       - '0'
     alt: 'Malus''s law: fraction of polarised light passing a second polaroid at different angles.'
+  activity:
+    type: formula
+    prompt: 'Single slit of width a: the central bright band is 2λD ÷ a wide. Here D = 1 m.'
+    inputs:
+    - name: lam
+      label: Wavelength λ
+      min: 400
+      max: 700
+      step: 10
+      start: 400
+      unit: nm
+    - name: a
+      label: Slit width a
+      min: 0.05
+      max: 1
+      step: 0.05
+      start: 1
+      unit: mm
+    outputs:
+    - name: w
+      label: Central band width
+      expr: 2*lam/a/1000
+      unit: mm
+      places: 2
+    goals:
+    - prompt: λ = 500 nm. Choose the slit width so the central band is 4 mm wide.
+      want:
+        lam: 500
+        w: 4
+      mistakes:
+      - when:
+          lam: 500
+          a: 0.5
+        say: 'That gives 2 mm. A NARROWER slit spreads the light more: w = 2λD ÷ a.'
+      - when:
+          lam: 500
+          a:
+          - 0.3
+          - 1
+        say: 'Too wide a slit: the band is too narrow.'
+    - prompt: Keep a = 0.25 mm. Which wavelength makes the band 5.6 mm wide?
+      want:
+        a: 0.25
+        w: 5.6
+      mistakes:
+      - when:
+          a: 0.25
+          lam:
+          - 400
+          - 690
+        say: A shorter wavelength spreads less. Go redder.
+    - prompt: Make diffraction as strong as possible with red light (700 nm).
+      want:
+        lam: 700
+        a: 0.05
+      mistakes:
+      - when:
+          lam: 700
+          a:
+          - 0.1
+          - 1
+        say: A narrower slit spreads the light further.
   items:
   - prompt: Unpolarised light of intensity 100 units passes one polaroid. Find the transmitted intensity.
     answer: '50'

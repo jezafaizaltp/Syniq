@@ -26,6 +26,70 @@ concepts:
     - = 450 + 90
     - = 540
     alt: 45 times 12 is split into 45 times 10 plus 45 times 2, which is 450 plus 90, so 540.
+  activity:
+    type: formula
+    prompt: Tickets for a trip. Set the price of one ticket and how many people go.
+    inputs:
+    - name: a
+      label: Price of one ticket
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: ₹
+    - name: n
+      label: People
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: cost
+      label: Total cost
+      expr: a*n
+      unit: ₹
+    goals:
+    - prompt: Tickets cost ₹45. The total is ₹540. How many people?
+      want:
+        a: 45
+        cost: 540
+      mistakes:
+      - when:
+          a: 45
+          n: 10
+        say: '10 tickets cost 450. You need 90 more: that''s 2 more tickets.'
+      - when:
+          a: 45
+          n:
+          - 13
+          - 30
+        say: 'Too many: that costs more than 540.'
+    - prompt: 15 children paid ₹600 in all. What did one ticket cost?
+      want:
+        n: 15
+        cost: 600
+      mistakes:
+      - when:
+          n: 15
+          a: 45
+        say: '15 × 45 = 675: too much. Try a smaller price.'
+      - when:
+          n: 15
+          a:
+          - 41
+          - 100
+        say: 'Too much: 15 × 41 is already more than 600.'
+    - prompt: Tickets cost ₹25. The total is ₹750.
+      want:
+        a: 25
+        cost: 750
+      mistakes:
+      - when:
+          a: 25
+          n:
+          - 20
+          - 29
+        say: Not enough people yet. 25 × 30 = 750.
   items:
   - prompt: A bus ticket costs ₹45. How much do 12 tickets cost in rupees?
     answer: '540'
@@ -122,6 +186,71 @@ concepts:
     - from: 72
       to: 96
       label: '24'
+  activity:
+    type: formula
+    prompt: 96 sweets are shared fairly. Set how many children, and how many each one gets.
+    inputs:
+    - name: k
+      label: Children
+      min: 1
+      max: 12
+      step: 1
+      start: 1
+    - name: e
+      label: Sweets each
+      min: 0
+      max: 50
+      step: 1
+      start: 0
+    outputs:
+    - name: used
+      label: Sweets given out
+      expr: k*e
+    - name: left
+      label: Sweets left
+      expr: 96-k*e
+    goals:
+    - prompt: Share among 4 children with none left.
+      want:
+        k: 4
+        left: 0
+      mistakes:
+      - when:
+          k: 4
+          e: 20
+        say: '4 × 20 = 80. There are still 16 left: share those too.'
+      - when:
+          k: 4
+          e:
+          - 25
+          - 50
+        say: That's more than 96 sweets! Give each child fewer.
+    - prompt: Share among 7 children. Give each as many as you can.
+      want:
+        k: 7
+        e: 13
+      mistakes:
+      - when:
+          k: 7
+          e: 14
+        say: '7 × 14 = 98: more than 96. Give one less each; 5 are left over.'
+      - when:
+          k: 7
+          e:
+          - 1
+          - 12
+        say: There are enough to give each one more.
+    - prompt: Share among 8 children with none left.
+      want:
+        k: 8
+        left: 0
+      mistakes:
+      - when:
+          k: 8
+          e:
+          - 13
+          - 50
+        say: More than you have. 8 × 12 = 96.
   items:
   - prompt: 96 sweets are shared equally among 4 children. How many does each get?
     answer: '24'

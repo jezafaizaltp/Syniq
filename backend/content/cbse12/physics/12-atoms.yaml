@@ -25,6 +25,42 @@ concepts:
     - A few deflected strongly
     - A tiny dense positive nucleus
     alt: Rutherford's gold-foil experiment and what it showed.
+  activity:
+    type: sort
+    prompt: Geiger and Marsden fired α-particles at gold foil. What does each result tell us?
+    bins:
+    - Most of the atom is empty
+    - A tiny, dense, positive nucleus
+    - A problem with the model
+    items:
+    - label: Most α-particles pass straight through
+      bin: Most of the atom is empty
+      clue: If most go through without bending, what must they be passing through?
+      why: 'Nothing much is in their way: the atom is mostly empty space.'
+    - label: The foil barely slows most of them
+      bin: Most of the atom is empty
+      clue: What does that say about what they meet?
+      why: 'Little in their path: mostly empty space.'
+    - label: A few are bent through large angles
+      bin: A tiny, dense, positive nucleus
+      clue: What could bend a fast α-particle sharply?
+      why: A strong repulsion from concentrated positive charge.
+    - label: About 1 in 8000 bounces straight back
+      bin: A tiny, dense, positive nucleus
+      clue: Why so rare, and why so violent?
+      why: Only a direct hit on a tiny, heavy nucleus can turn it right round.
+    - label: Large bends need a force very close up
+      bin: A tiny, dense, positive nucleus
+      clue: What size must the charge's home be?
+      why: The charge must be packed into about 10⁻¹⁵ m.
+    - label: An orbiting electron should radiate and spiral in
+      bin: A problem with the model
+      clue: Accelerating charges radiate. What would that do to the orbit?
+      why: 'Classically the atom would collapse: Rutherford''s model can''t explain stability.'
+    - label: It predicts a continuous spectrum, not lines
+      bin: A problem with the model
+      clue: Hydrogen shows sharp lines. Does the model explain them?
+      why: 'A spiralling electron would give all frequencies: Bohr''s model was needed.'
   items:
   - prompt: An atom is about 10⁻¹⁰ m across and its nucleus 10⁻¹⁵ m. How many times larger is the atom? Give the power of 10.
     answer: '5'
@@ -127,6 +163,54 @@ concepts:
       - visible
       - infrared
     alt: Hydrogen spectral series, the level each ends on, and the region of the spectrum.
+  activity:
+    type: formula
+    prompt: 'Bohr''s hydrogen atom: radius rₙ = 0.53 n² Å, energy Eₙ = −13.6 ÷ n² eV.'
+    inputs:
+    - name: n
+      label: Orbit n
+      min: 1
+      max: 10
+      step: 1
+      start: 5
+    outputs:
+    - name: r
+      label: Radius
+      expr: 0.53*n^2
+      unit: Å
+      places: 2
+    - name: en
+      label: Energy
+      expr: -13.6/n^2
+      unit: eV
+      places: 2
+    - name: ion
+      label: Energy to ionise from here
+      expr: 13.6/n^2
+      unit: eV
+      places: 2
+    goals:
+    - prompt: Find the orbit with radius 4.77 Å.
+      want:
+        n: 3
+      mistakes:
+      - when:
+          n: 9
+        say: 'r grows as n²: n = 9 gives 42.9 Å. 4.77 ÷ 0.53 = 9 = n², so n = 3.'
+    - prompt: Find the orbit from which 3.4 eV ionises the atom.
+      want:
+        ion: 3.4
+      mistakes:
+      - when:
+          n: 4
+        say: 'n = 4 needs only 0.85 eV: E ∝ 1/n². 13.6 ÷ 3.4 = 4 = n², so n = 2.'
+    - prompt: Find the orbit where the electron is most tightly held.
+      want:
+        n: 1
+      mistakes:
+      - when:
+          n: 10
+        say: Energy −0.136 eV is almost free. The most negative energy is the innermost orbit.
   items:
   - prompt: Find the energy (eV) of hydrogen's n = 2 level.
     answer: '-3.4'

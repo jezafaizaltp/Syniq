@@ -32,6 +32,67 @@ concepts:
       - s⁻¹
       - L mol⁻¹ s⁻¹
     alt: Units of the rate constant for zero, first and second order reactions.
+  activity:
+    type: formula
+    prompt: Rate = k[A]ˣ[B]ʸ. Doubling a concentration multiplies the rate by 2 to the power of its order.
+    inputs:
+    - name: x
+      label: Order in A, x
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    - name: y
+      label: Order in B, y
+      min: 0
+      max: 4
+      step: 1
+      start: 0
+    outputs:
+    - name: ra
+      label: Rate × when [A] doubles
+      expr: 2^x
+    - name: rb
+      label: Rate × when [B] doubles
+      expr: 2^y
+    - name: r3
+      label: Rate × when [A] triples
+      expr: 3^x
+    - name: tot
+      label: Overall order
+      expr: x+y
+    goals:
+    - prompt: Doubling [A] doubles the rate; doubling [B] makes it 4 times. Set the orders.
+      want:
+        ra: 2
+        rb: 4
+      mistakes:
+      - when:
+          rb: 16
+        say: Order 4 would make it 2⁴ = 16 times. 4 = 2², so the order in B is 2.
+      - when:
+          ra: 4
+        say: 'Order 2 in A would make doubling give 4 times. It only doubles: order 1.'
+    - prompt: Doubling [A] leaves the rate unchanged; doubling [B] doubles it.
+      want:
+        ra: 1
+        rb: 2
+      mistakes:
+      - when:
+          x: 1
+        say: 'If doubling [A] changed nothing, 2ˣ = 1: the order in A is zero.'
+    - prompt: Overall order 3, and tripling [A] makes the rate 9 times.
+      want:
+        r3: 9
+        tot: 3
+      mistakes:
+      - when:
+          x: 3
+        say: 'Tripling would then give 27 times. 9 = 3²: order 2 in A, leaving 1 for B.'
+      - when:
+          r3: 9
+          tot: 2
+        say: Order 2 in A is right, but the overall order must be 3.
   items:
   - prompt: Rate = k[A]²[B]. What is the overall order?
     answer: '3'
@@ -122,6 +183,75 @@ concepts:
       value: 12.5
     alt: 'A first-order reaction: amount left after each half-life: 100, 50, 25, 12.5.'
     unit: '%'
+  activity:
+    type: formula
+    prompt: A first-order reaction halves every half-life, whatever amount you start with. Left = 100% × (½)^(t ÷ t½), and k = 0.693 ÷ t½.
+    inputs:
+    - name: h
+      label: Half-life t½
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: min
+    - name: t
+      label: Time t
+      min: 0
+      max: 100
+      step: 1
+      start: 0
+      unit: min
+    outputs:
+    - name: left
+      label: Left
+      expr: 100*0.5^(t/h)
+      unit: '%'
+      places: 2
+    - name: k
+      label: Rate constant k
+      expr: 0.693/h
+      unit: per min
+      places: 4
+    goals:
+    - prompt: Half-life 10 min. How long until 12.5% is left?
+      want:
+        h: 10
+        left: 12.5
+      mistakes:
+      - when:
+          h: 10
+          t: 20
+        say: Two half-lives leave 25%. One more halves it again.
+      - when:
+          h: 10
+          t: 40
+        say: Four half-lives leave 6.25%.
+    - prompt: k = 0.0693 per min. Set the half-life.
+      want:
+        k:
+        - 0.0692
+        - 0.0694
+      mistakes:
+      - when:
+          h:
+          - 1
+          - 9
+        say: A shorter half-life means a bigger k. t½ = 0.693 ÷ k.
+    - prompt: Half-life 5 min. How long until only 6.25% is left?
+      want:
+        h: 5
+        left: 6.25
+      mistakes:
+      - when:
+          h: 5
+          t: 15
+        say: Three half-lives leave 12.5%. 6.25% is one more halving.
+      - when:
+          h: 5
+          t:
+          - 45
+          - 50
+        say: '94% gone isn''t 94% of the time: it halves each 5 minutes. 100 → 50 → 25 → 12.5 → 6.25.'
   items:
   - prompt: A first-order reaction has k = 0.0693 s⁻¹. Find t½ (s).
     answer: '10'

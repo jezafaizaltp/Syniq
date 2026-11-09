@@ -25,6 +25,51 @@ concepts:
     - Divide both sides by 2
     - 'x = 6; check: 2 × 6 + 5 = 17'
     alt: 'Solving 2x + 5 = 17: subtract 5 from both sides to get 2x = 12, then divide by 2 to get x = 6.'
+  activity:
+    type: formula
+    prompt: Find the x that balances each equation.
+    inputs:
+    - name: x
+      label: x
+      min: -20
+      max: 40
+      step: 1
+      start: 0
+    outputs:
+    - name: l1
+      label: x + 7
+      expr: x+7
+    - name: l2
+      label: 3x
+      expr: 3*x
+    - name: l3
+      label: 2x − 5
+      expr: 2*x-5
+    goals:
+    - prompt: x + 7 = 15
+      want:
+        l1: 15
+      mistakes:
+      - when:
+          x: 22
+        say: You added 7. To undo + 7, take 7 from both sides.
+    - prompt: 3x = 27
+      want:
+        l2: 27
+      mistakes:
+      - when:
+          x: 24
+        say: '27 − 3 undoes adding. 3x means 3 times x: divide by 3.'
+    - prompt: 2x − 5 = 11
+      want:
+        l3: 11
+      mistakes:
+      - when:
+          x: 3
+        say: '11 − 5 = 6: take the −5 off by adding 5 to both sides, so 2x = 16.'
+      - when:
+          x: 16
+        say: '16 is 2x. One more step: divide by 2.'
   items:
   - prompt: Solve x + 7 = 15.
     answer: '8'
@@ -105,6 +150,54 @@ concepts:
     - 'It equals 19: 2n + 3 = 19'
     - 'Solve: n = 8'
     alt: 'Forming an equation: double a number and add 3 to get 19 gives 2n + 3 = 19, so the number is 8.'
+  activity:
+    type: formula
+    prompt: Turn each story into an equation for n, then find n.
+    inputs:
+    - name: n
+      label: n
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+    outputs:
+    - name: a
+      label: 2n + 3
+      expr: 2*n+3
+    - name: b
+      label: 4n − 6
+      expr: 4*n-6
+    - name: c
+      label: n + (n + 1) + (n + 2)
+      expr: 3*n+3
+    goals:
+    - prompt: Double a number and add 3 to get 19.
+      want:
+        a: 19
+      mistakes:
+      - when:
+          n: 11
+        say: 'That''s (19 + 3) ÷ 2. Undo the + 3 by subtracting: 19 − 3 = 16, then halve.'
+      - when:
+          n: 16
+        say: 16 is double the number. Halve it.
+    - prompt: Four times a number, minus 6, is 30.
+      want:
+        b: 30
+      mistakes:
+      - when:
+          n: 6
+        say: 'That''s (30 − 6) ÷ 4. Undo the − 6 by adding: 36 ÷ 4.'
+    - prompt: Three numbers in a row add to 48. Find the first.
+      want:
+        c: 48
+      mistakes:
+      - when:
+          n: 16
+        say: 16 is the middle one (48 ÷ 3). The first is one less.
+      - when:
+          n: 17
+        say: That's the last of the three.
   items:
   - prompt: I double a number and add 3 to get 19. What is the number?
     answer: '8'

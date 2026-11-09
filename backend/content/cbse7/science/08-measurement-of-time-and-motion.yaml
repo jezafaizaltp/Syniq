@@ -28,6 +28,61 @@ concepts:
     - Pendulum clock
     - Quartz and atomic clocks
     alt: 'How timekeeping developed: from sundials and water clocks to sand clocks, pendulum clocks and modern quartz and atomic clocks.'
+  activity:
+    type: formula
+    prompt: 'A pendulum: its period is the time for one full swing, there and back.'
+    inputs:
+    - name: s
+      label: Number of swings
+      min: 1
+      max: 50
+      step: 1
+      start: 1
+    - name: t
+      label: Time taken
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+      unit: s
+    outputs:
+    - name: p
+      label: Period (time ÷ swings)
+      expr: t/s
+      unit: s
+      places: 2
+    goals:
+    - prompt: A pendulum with a period of 2 s makes 20 swings. How long does it take?
+      want:
+        s: 20
+        p: 2
+      mistakes:
+      - when:
+          s: 20
+          t: 10
+        say: 20 ÷ 2 divides. Each swing takes 2 s, so 20 swings take 20 × 2.
+      - when:
+          s: 20
+          t: 22
+        say: 20 + 2 adds. Time = swings × period.
+    - prompt: Period 1.5 s. How many swings in 30 s?
+      want:
+        t: 30
+        p: 1.5
+      mistakes:
+      - when:
+          t: 30
+          s: 45
+        say: '30 × 1.5 multiplies. Swings = time ÷ period: 30 ÷ 1.5.'
+    - prompt: 'A seconds pendulum: one swing each second. Count 25 swings.'
+      want:
+        s: 25
+        p: 1
+      mistakes:
+      - when:
+          s: 25
+          t: 50
+        say: That gives 2 s per swing. For 1 s each, 25 swings take 25 s.
   items:
   - prompt: How many seconds are there in one hour?
     answer: '3600'
@@ -119,6 +174,75 @@ concepts:
       - Speed changes
       - Curved distance–time graph
     alt: Uniform motion covers equal distances in equal times at constant speed; non-uniform motion changes speed.
+  activity:
+    type: formula
+    prompt: Speed = distance ÷ time.
+    inputs:
+    - name: d
+      label: Distance
+      min: 0
+      max: 300
+      step: 10
+      start: 10
+      unit: km
+    - name: t
+      label: Time
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+      unit: h
+    outputs:
+    - name: v
+      label: Speed
+      expr: d/t
+      unit: km/h
+      places: 1
+    goals:
+    - prompt: A car travels at 60 km/h for 2 hours. Set the distance.
+      want:
+        t: 2
+        v: 60
+      mistakes:
+      - when:
+          t: 2
+          d: 30
+        say: 60 ÷ 2 divides. Each hour covers 60 km, so 2 hours cover 60 × 2.
+    - prompt: A bus goes 150 km at 50 km/h. Set the time.
+      want:
+        d: 150
+        v: 50
+      mistakes:
+      - when:
+          d: 150
+          t:
+          - 4
+          - 10
+        say: 'Too slow: at 50 km/h it covers 150 km sooner.'
+      - when:
+          d: 150
+          t:
+          - 1
+          - 2
+        say: 'Too fast: in 2 hours at 50 km/h it only goes 100 km.'
+    - prompt: Make a journey at 45 km/h lasting at least 3 hours.
+      want:
+        v: 45
+        t:
+        - 3
+        - 10
+      mistakes:
+      - when:
+          v: 45
+          t:
+          - 1
+          - 2
+        say: Right speed, but not long enough.
+      - when:
+          v:
+          - 46
+          - 300
+        say: 'Too fast: distance ÷ time must be 45.'
   items:
   - prompt: A car travels 120 km in 2 hours. Find its speed in km/h.
     answer: '60'

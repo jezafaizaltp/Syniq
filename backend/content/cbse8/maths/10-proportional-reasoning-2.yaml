@@ -28,6 +28,57 @@ concepts:
     unit: kg
     caption: '140 kg of concrete mixed 1 : 2 : 4 is 20 kg, 40 kg and 80 kg.'
     alt: Bars for cement 20 kg, sand 40 kg and gravel 80 kg, the ratio 1 to 2 to 4 for 140 kg.
+  activity:
+    type: formula
+    prompt: 'Share sweets in the ratio 1 : 2 : 4. Set what one part is worth.'
+    inputs:
+    - name: u
+      label: One part (sweets)
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+    outputs:
+    - name: s1
+      label: Smallest share (1 part)
+      expr: u
+    - name: s2
+      label: Middle share (2 parts)
+      expr: 2*u
+    - name: s3
+      label: Biggest share (4 parts)
+      expr: 4*u
+    - name: total
+      label: Total
+      expr: 7*u
+    goals:
+    - prompt: Share 70 sweets.
+      want:
+        total: 70
+      mistakes:
+      - when:
+          u: 23
+        say: 70 ÷ 3? There are three people but 1 + 2 + 4 = 7 parts.
+      - when:
+          u: 35
+        say: '70 ÷ 2: count the parts, 1 + 2 + 4 = 7.'
+    - prompt: The biggest share is 48 sweets.
+      want:
+        s3: 48
+      mistakes:
+      - when:
+          u: 16
+        say: 48 ÷ 3? The biggest share is 4 parts, so divide by 4.
+      - when:
+          u: 7
+        say: 48 ÷ 7 shares everything. Only the biggest share is 48, and it's 4 parts.
+    - prompt: The middle share is 10 more than the smallest.
+      want:
+        u: 10
+      mistakes:
+      - when:
+          u: 5
+        say: 10 ÷ 2? The middle (2 parts) minus the smallest (1 part) is just 1 part.
   items:
   - prompt: 'A map''s scale is 1 : 1,00,000. Two places are 5 cm apart on it. How far apart are they really, in km?'
     answer: '5'
@@ -106,6 +157,59 @@ concepts:
     unit: days
     caption: 'Doubling the workers halves the days: workers × days stays 60.'
     alt: Bars showing 3 workers take 20 days, 6 take 10 and 12 take 5, so workers times days stays 60.
+  activity:
+    type: formula
+    prompt: 12 painters paint a wall in 6 days. Set how many painters work.
+    inputs:
+    - name: w
+      label: Painters
+      min: 1
+      max: 36
+      step: 1
+      start: 12
+    outputs:
+    - name: wd
+      label: Painter-days needed
+      expr: '72'
+    - name: days
+      label: Days to finish
+      expr: 72/w
+      places: 2
+    goals:
+    - prompt: Finish in 4 days.
+      want:
+        days: 4
+      mistakes:
+      - when:
+          w: 8
+        say: 8 painters take 9 days. Fewer days need more painters, not fewer.
+      - when:
+          w: 3
+        say: 12 ÷ 4 = 3 divides the wrong way. The work, 72 painter-days, stays the same.
+    - prompt: Finish in 2 days.
+      want:
+        days: 2
+      mistakes:
+      - when:
+          days:
+          - 6.01
+          - 72
+        say: More days, not fewer! Fewer painters take longer.
+      - when:
+          w: 24
+        say: Twice the painters halves the time to 3 days. For 2 days you need 72 ÷ 2.
+    - prompt: Only a few painters, taking 24 days.
+      want:
+        days: 24
+      mistakes:
+      - when:
+          w: 36
+        say: 'More painters finish sooner. To take 24 days, use fewer: 72 ÷ 24.'
+      - when:
+          w:
+          - 4
+          - 11
+        say: 'Still too many: they''d finish before 24 days.'
   items:
   - prompt: 6 workers build a wall in 10 days. How many days do 12 workers take?
     answer: '5'

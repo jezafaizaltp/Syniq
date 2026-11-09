@@ -24,6 +24,69 @@ concepts:
     - Integrate y dx
     - Add parts, taking absolute values
     alt: Steps to find the area under a curve.
+  activity:
+    type: formula
+    prompt: The area under y = x² from x = a to x = b is (b³ − a³)/3.
+    inputs:
+    - name: a
+      label: From a
+      min: 0
+      max: 5
+      step: 1
+      start: 0
+    - name: b
+      label: To b
+      min: 0
+      max: 6
+      step: 1
+      start: 1
+    outputs:
+    - name: area
+      label: Area under y = x²
+      expr: (b^3-a^3)/3
+      places: 3
+    - name: line
+      label: Area under y = x, same limits
+      expr: (b^2-a^2)/2
+      places: 2
+    goals:
+    - prompt: Keep a = 0. Make the area 9.
+      want:
+        a: 0
+        area: 9
+      mistakes:
+      - when:
+          a: 0
+          b:
+          - 4
+          - 6
+        say: 'Too big: area = b³/3, so b³ = 27.'
+      - when:
+          a: 0
+          b:
+          - 1
+          - 2
+        say: 'Too small: area = b³/3, so b³ = 27.'
+    - prompt: Keep a = 1. Make the area 7/3 ≈ 2.333.
+      want:
+        a: 1
+        area:
+        - 2.33
+        - 2.34
+      mistakes:
+      - when:
+          a: 1
+          b: 3
+        say: 'That''s (27 − 1)/3 ≈ 8.67. Start counting at 1: (b³ − 1)/3 = 7/3.'
+    - prompt: From 0 to 3, which is bigger, the area under y = x² or under y = x? Set the limits and compare.
+      want:
+        a: 0
+        b: 3
+      mistakes:
+      - when:
+          a: 0
+          b: 1
+        say: From 0 to 1, x² is below x. Go on to 3 and compare again.
   items:
   - prompt: Find the area under y = x² from x = 0 to x = 3.
     answer: '9'
@@ -108,6 +171,45 @@ concepts:
       value: 16
     alt: 'Thin strips under y = x² at x = 1, 2, 3, 4: their heights 1, 4, 9 and 16 add up to approximate the area.'
     unit: height
+  activity:
+    type: sort
+    prompt: 'To find each area, which strips are simpler: vertical (∫ y dx) or horizontal (∫ x dy)?'
+    bins:
+    - Vertical strips, ∫ y dx
+    - Horizontal strips, ∫ x dy
+    items:
+    - label: Under y = x² from x = 0 to 2, above the x-axis
+      bin: Vertical strips, ∫ y dx
+      clue: Is the curve given as y in terms of x? Are the limits in x?
+      why: 'y = x² and x-limits: stand each strip up from the x-axis.'
+    - label: Between x = y² and the y-axis, from y = 0 to 2
+      bin: Horizontal strips, ∫ x dy
+      clue: Is the curve given as x in terms of y? Which axis bounds it?
+      why: 'x = y² with y-limits: lay strips across from the y-axis.'
+    - label: Under y = sin x from 0 to π
+      bin: Vertical strips, ∫ y dx
+      clue: Which axis is the region sitting on?
+      why: The region sits on the x-axis, with x-limits.
+    - label: Bounded by y = 3x, the x-axis and x = 2
+      bin: Vertical strips, ∫ y dx
+      clue: 'Which line closes the region: x = 2 or y = something?'
+      why: x-limits 0 to 2 and the x-axis below.
+    - label: Bounded by x = 2y, the y-axis and y = 3
+      bin: Horizontal strips, ∫ x dy
+      clue: Which axis and which line close the region?
+      why: y-limits 0 to 3 against the y-axis.
+    - label: Between the y-axis, y = 1, y = 4 and x = √y
+      bin: Horizontal strips, ∫ x dy
+      clue: The limits are y = 1 and y = 4. Which variable do you integrate in?
+      why: Integrate √y dy from 1 to 4.
+    - label: Right of the y-axis, inside x = 4 − y²
+      bin: Horizontal strips, ∫ x dy
+      clue: Solve for the variable that's alone. Which is it?
+      why: x = 4 − y², with y from −2 to 2.
+    - label: Under y = eˣ from x = 0 to 1
+      bin: Vertical strips, ∫ y dx
+      clue: Is it y in terms of x?
+      why: ∫₀¹ eˣ dx = e − 1.
   items:
   - prompt: Find the area of a quadrant of the circle x² + y² = 16, as a multiple of π.
     answer: '4'

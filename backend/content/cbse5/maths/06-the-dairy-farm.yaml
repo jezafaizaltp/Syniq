@@ -30,6 +30,49 @@ concepts:
       value: 1000
     alt: A quarter litre is 250 millilitres, half a litre 500, three quarters 750, and one litre 1000.
     unit: mL
+  activity:
+    type: formula
+    prompt: Milk comes in half-litre packets (500 mL). Set how many packets.
+    inputs:
+    - name: p
+      label: Packets
+      min: 0
+      max: 40
+      step: 1
+      start: 0
+    outputs:
+    - name: ml
+      label: Milk
+      expr: 500*p
+      unit: mL
+    - name: l
+      label: In litres
+      expr: p/2
+      unit: L
+    goals:
+    - prompt: Get 3 litres.
+      want:
+        l: 3
+      mistakes:
+      - when:
+          p: 3
+        say: 3 packets of half a litre make only 1.5 L. Each litre needs 2 packets.
+    - prompt: Get 8 litres.
+      want:
+        l: 8
+      mistakes:
+      - when:
+          p: 8
+        say: 8 packets is 4 litres. Double it.
+    - prompt: Get 6.5 litres.
+      want:
+        l: 6.5
+      mistakes:
+      - when:
+          p:
+          - 6
+          - 7
+        say: Each packet is half a litre. 6 litres needs 12 packets, plus one more.
   items:
   - prompt: How many millilitres are in 1/2 litre?
     answer: '500'
@@ -103,6 +146,55 @@ concepts:
     - 'Total: ₹340'
     - Paid ₹500 → change ₹160
     alt: 'A dairy bill: 5 litres of milk at 56 rupees is 280, 2 curds at 30 is 60, total 340; paying 500 gives 160 change.'
+  activity:
+    type: formula
+    prompt: Milk costs ₹56 a litre. You pay with a ₹500 note.
+    inputs:
+    - name: n
+      label: Litres
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: cost
+      label: Cost
+      expr: 56*n
+      unit: ₹
+    - name: change
+      label: Change
+      expr: 500-56*n
+      unit: ₹
+    goals:
+    - prompt: Buy as many litres as you can.
+      want:
+        n: 8
+      mistakes:
+      - when:
+          n: 9
+        say: '9 litres cost ₹504: ₹4 more than you have.'
+      - when:
+          n:
+          - 1
+          - 7
+        say: You still have enough for another litre.
+    - prompt: Get exactly ₹220 change.
+      want:
+        change: 220
+      mistakes:
+      - when:
+          n: 4
+        say: That leaves ₹276. You spent 500 − 220 = 280 in all.
+      - when:
+          n: 6
+        say: That leaves ₹164. Spend a little less.
+    - prompt: Spend exactly ₹336.
+      want:
+        cost: 336
+      mistakes:
+      - when:
+          n: 7
+        say: 7 litres cost ₹392. One litre less.
   items:
   - prompt: Milk costs ₹56 a litre. What do 5 litres cost in rupees?
     answer: '280'

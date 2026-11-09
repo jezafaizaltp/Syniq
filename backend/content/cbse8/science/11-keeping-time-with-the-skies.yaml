@@ -28,6 +28,41 @@ concepts:
     - Waning back to new moon
     alt: The Moon's phases from new moon through crescent, first quarter and gibbous to full moon, then waning back.
     caption: One full cycle takes about 29.5 days.
+  activity:
+    type: number_line
+    min: 0
+    max: 30
+    step: 1
+    start: 0
+    prompt: Day 0 is new moon. The cycle takes about 29.5 days. Mark the day of each phase.
+    goals:
+    - prompt: Full moon.
+      target: 15
+      mistakes:
+      - when:
+          v: 30
+        say: 'Day 30 is back to new moon: dark. Full moon is halfway through.'
+      - when:
+          v: 7
+        say: 'Around day 7 only half the disc is lit: the first quarter.'
+    - prompt: First quarter (right half lit).
+      target: 7
+      mistakes:
+      - when:
+          v: 15
+        say: That's the full moon. The first quarter comes halfway to it.
+      - when:
+          v: 22
+        say: Day 22 is the last quarter, when the other half is lit.
+    - prompt: Last quarter (left half lit).
+      target: 22
+      mistakes:
+      - when:
+          v: 7
+        say: Day 7 is the first quarter, when the right half is lit. The last quarter comes after full moon.
+      - when:
+          v: 15
+        say: That's the full moon. The last quarter is a week later.
   items:
   - prompt: Why does the Moon shine?
     options:
@@ -130,6 +165,45 @@ concepts:
       - Safe to watch
     alt: A solar eclipse has the Moon between the Sun and Earth at new moon; a lunar eclipse has the Earth between the Sun and Moon at full moon.
     caption: Which body is in the middle decides the eclipse.
+  activity:
+    type: sort
+    prompt: Solar eclipse or lunar eclipse?
+    bins:
+    - Solar eclipse
+    - Lunar eclipse
+    items:
+    - label: The Moon comes between the Sun and the Earth
+      bin: Solar eclipse
+      clue: Whose light is blocked?
+      why: The Moon hides the Sun.
+    - label: Happens on a new-moon day
+      bin: Solar eclipse
+      clue: At new moon, where is the Moon?
+      why: Between the Earth and the Sun.
+    - label: The daytime sky goes dark
+      bin: Solar eclipse
+      clue: The Sun is hidden.
+      why: A solar eclipse.
+    - label: Never look at it without special filters
+      bin: Solar eclipse
+      clue: Looking at the Sun hurts your eyes.
+      why: Solar.
+    - label: The Earth comes between the Sun and the Moon
+      bin: Lunar eclipse
+      clue: Whose shadow falls where?
+      why: Earth's shadow on the Moon.
+    - label: Happens on a full-moon night
+      bin: Lunar eclipse
+      clue: At full moon the Earth is in the middle.
+      why: Lunar.
+    - label: The Moon turns a coppery red
+      bin: Lunar eclipse
+      clue: Earth's shadow, lit by sunlight bent through our air.
+      why: Lunar.
+    - label: Seen from the whole night side of the Earth
+      bin: Lunar eclipse
+      clue: Everyone who can see the Moon sees it.
+      why: Lunar.
   items:
   - prompt: In a solar eclipse, which body is in the middle?
     options:

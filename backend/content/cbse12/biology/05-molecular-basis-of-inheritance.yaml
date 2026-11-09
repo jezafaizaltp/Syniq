@@ -29,6 +29,59 @@ concepts:
     - New complementary strands built
     - Two DNA molecules, each half old
     alt: Semi-conservative DNA replication.
+  activity:
+    type: formula
+    prompt: 'Chargaff''s rule: A pairs with T and G with C, so A = T and G = C. A–T pairs have 2 hydrogen bonds; G–C pairs have 3.'
+    inputs:
+    - name: a
+      label: Adenine
+      min: 0
+      max: 50
+      step: 1
+      start: 25
+      unit: '%'
+    outputs:
+    - name: t
+      label: Thymine
+      expr: a
+      unit: '%'
+    - name: g
+      label: Guanine
+      expr: (100-2*a)/2
+      unit: '%'
+    - name: h
+      label: H bonds in 100 base pairs
+      expr: 2*(2*a)+3*(100-2*a)
+    goals:
+    - prompt: Make DNA that is 30% guanine.
+      want:
+        g: 30
+      mistakes:
+      - when:
+          a: 30
+        say: That makes A = T = 30% and G only 20%. G = C = 30% leaves 40% for A and T together.
+      - when:
+          a: 40
+        say: A = 40% makes T 40% too, leaving only 10% G.
+    - prompt: 100 base pairs held by 240 hydrogen bonds. Set the adenine %.
+      want:
+        h: 240
+      mistakes:
+      - when:
+          a: 20
+        say: A = 20% gives 260 bonds. A–T pairs have only 2 bonds, so more A–T means FEWER bonds.
+      - when:
+          a:
+          - 0
+          - 19
+        say: 'Too many bonds: that''s rich in G–C. More A–T lowers the count.'
+    - prompt: Make DNA held together as strongly as possible.
+      want:
+        a: 0
+      mistakes:
+      - when:
+          a: 50
+        say: 'All A–T: only 2 bonds per pair, the weakest. G–C pairs have 3.'
   items:
   - prompt: A DNA sample has 30% adenine. What percentage is guanine?
     answer: '20'
@@ -116,6 +169,24 @@ concepts:
     - mRNA to ribosome
     - Translation → protein
     alt: 'The central dogma: DNA is transcribed to mRNA, which is translated into protein.'
+  activity:
+    type: order
+    prompt: Put the steps from gene to protein in a eukaryote in order.
+    steps:
+    - RNA polymerase binds the promoter
+    - mRNA is copied from the template strand
+    - Introns are spliced out; a cap and tail are added
+    - The mRNA moves to the cytoplasm
+    - A ribosome starts at AUG with tRNA carrying methionine
+    - tRNAs bring amino acids; peptide bonds join them
+    - A stop codon ends translation
+    reasons:
+      mRNA is copied from the template strand: Copying can only start once RNA polymerase is bound at the promoter.
+      Introns are spliced out; a cap and tail are added: Processing needs the primary transcript to be made first.
+      The mRNA moves to the cytoplasm: Only processed mRNA leaves the nucleus.
+      A ribosome starts at AUG with tRNA carrying methionine: Translation happens in the cytoplasm, so the mRNA must be there first.
+      tRNAs bring amino acids; peptide bonds join them: The chain grows only after the start codon sets the reading frame.
+      A stop codon ends translation: The stop codon is reached at the end, after the chain has been built.
   items:
   - prompt: How many codons are there in the genetic code?
     answer: '64'

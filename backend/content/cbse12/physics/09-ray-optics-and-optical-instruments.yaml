@@ -34,6 +34,78 @@ concepts:
       - positive
       - negative
     alt: Sign of focal length for mirrors and lenses under the Cartesian convention.
+  activity:
+    type: formula
+    prompt: 'A convex lens of focal length f. Object at u (negative, on the left). Lens formula: 1/v − 1/u = 1/f, magnification m = v/u.'
+    inputs:
+    - name: u
+      label: Object distance u
+      min: -60
+      max: -5
+      step: 5
+      start: -60
+      unit: cm
+    - name: f
+      label: Focal length f
+      min: 5
+      max: 30
+      step: 5
+      start: 30
+      unit: cm
+    outputs:
+    - name: v
+      label: Image distance v
+      expr: 1/(1/f+1/u)
+      unit: cm
+      places: 1
+    - name: m
+      label: Magnification m
+      expr: (1/(1/f+1/u))/u
+      places: 2
+    goals:
+    - prompt: f = 10 cm. Place the object so a real image forms 30 cm behind the lens.
+      want:
+        f: 10
+        v: 30
+      mistakes:
+      - when:
+          f: 10
+          u: -30
+        say: 'Object and image swapped: an object at 30 cm images at 15 cm. 1/u = 1/30 − 1/10.'
+      - when:
+          f: 10
+          u: -20
+        say: At 2f the image is also at 2f, 20 cm. Move nearer to f to push the image further out.
+    - prompt: f = 15 cm. Make a real image the same size as the object.
+      want:
+        f: 15
+        m: -1
+      mistakes:
+      - when:
+          f: 15
+          u:
+          - -60
+          - -35
+        say: 'Object beyond 2f: the image is smaller (|m| < 1). Same size needs the object at 2f.'
+      - when:
+          f: 15
+          u:
+          - -25
+          - -20
+        say: Between f and 2f the image is bigger.
+    - prompt: 'f = 20 cm. Make a magnifying glass: an upright, enlarged image.'
+      want:
+        f: 20
+        m:
+        - 1.1
+        - 10
+      mistakes:
+      - when:
+          f: 20
+          m:
+          - -100
+          - -0.01
+        say: 'm is negative: a real, inverted image. A magnifier needs the object inside f.'
   items:
   - prompt: A lens has focal length 0.5 m. Find its power (dioptre).
     answer: '2'
@@ -113,6 +185,85 @@ concepts:
     - Eyepiece magnifies that image
     - Eye sees enlarged view
     alt: 'How an astronomical telescope works: the objective forms an image and the eyepiece magnifies it.'
+  activity:
+    type: formula
+    prompt: 'An astronomical telescope in normal adjustment: magnifying power fₒ ÷ fₑ, tube length fₒ + fₑ.'
+    inputs:
+    - name: fo
+      label: Objective fₒ
+      min: 10
+      max: 200
+      step: 10
+      start: 10
+      unit: cm
+    - name: fe
+      label: Eyepiece fₑ
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: m
+      label: Magnifying power
+      expr: fo/fe
+      places: 1
+    - name: len
+      label: Tube length
+      expr: fo+fe
+      unit: cm
+    goals:
+    - prompt: Make a telescope with magnifying power 20 and fₑ = 5 cm.
+      want:
+        fe: 5
+        m: 20
+      mistakes:
+      - when:
+          fe: 5
+          fo:
+          - 10
+          - 90
+        say: 'Not enough: a long objective focal length gives the magnification. fₒ = 20 × 5.'
+      - when:
+          fe: 5
+          fo:
+          - 110
+          - 200
+        say: Too much.
+    - prompt: Make a telescope 105 cm long with magnifying power 20.
+      want:
+        len: 105
+        m: 20
+      mistakes:
+      - when:
+          len: 105
+          m:
+          - 1
+          - 19
+        say: 'Right length, but put more of it in the objective: m = fₒ ÷ fₑ.'
+      - when:
+          m: 20
+          len:
+          - 21
+          - 104
+        say: 'Right power, but too short: scale both focal lengths up.'
+    - prompt: Make magnifying power 10 with a 110 cm tube.
+      want:
+        len: 110
+        m: 10
+      mistakes:
+      - when:
+          len: 110
+          m:
+          - 1
+          - 9
+        say: 'Right length, but too little power: give more of the length to the objective.'
+      - when:
+          m: 10
+          len:
+          - 11
+          - 109
+        say: 'Right power, but too short: scale both focal lengths up.'
   items:
   - prompt: A telescope has f₀ = 100 cm and fₑ = 5 cm. Find its magnifying power.
     answer: '20'

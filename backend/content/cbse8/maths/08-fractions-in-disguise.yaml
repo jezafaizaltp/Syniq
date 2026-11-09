@@ -34,6 +34,50 @@ concepts:
       - 25%
     caption: 3/4 of a whole is 75%, and the rest, 1/4, is 25%.
     alt: A bar split into three quarters marked 75 per cent and one quarter marked 25 per cent.
+  activity:
+    type: number_line
+    min: 0
+    max: 100
+    step: 5
+    start: 0
+    prompt: 'Mark each fraction as a percentage: how many out of 100?'
+    goals:
+    - prompt: 1/4
+      target: 25
+      mistakes:
+      - when:
+          v: 75
+        say: 75% is 3/4. One quarter is 100 ÷ 4.
+      - when:
+          v: 40
+        say: 'Not 4 out of 10. Make the bottom 100: 1/4 = ?/100.'
+    - prompt: 3/5
+      target: 60
+      mistakes:
+      - when:
+          v: 35
+        say: 'Writing 3 and 5 side by side isn''t a percentage. 5 goes into 100 twenty times: 3 × 20.'
+      - when:
+          v: 30
+        say: 3 × 10 = 30. But 5 × 10 is only 50, not 100. Multiply by 20.
+    - prompt: 7/20
+      target: 35
+      mistakes:
+      - when:
+          v: 70
+        say: '7 × 10 = 70, but 20 × 10 = 200. 20 goes into 100 five times: 7 × 5.'
+      - when:
+          v: 20
+        say: That's the bottom number. Turn 20 into 100 and do the same to the 7.
+    - prompt: 9/10
+      target: 90
+      mistakes:
+      - when:
+          v: 10
+        say: 10% is 1/10. Here you have 9 tenths.
+      - when:
+          v: 45
+        say: Half of 90. Each tenth is 10%, so 9 tenths is …?
   items:
   - prompt: Write 3/5 as a percentage. Type the number only.
     answer: '60'
@@ -116,6 +160,73 @@ concepts:
     - 5% of 240 = 12
     - 15% = 24 + 12 = 36
     alt: Finding 15 per cent of 240 by adding 10 per cent, 24, and 5 per cent, 12, to get 36.
+  activity:
+    type: formula
+    prompt: Prices and percentages. Set the starting price and the percentage.
+    inputs:
+    - name: a
+      label: Starting price
+      min: 0
+      max: 2000
+      step: 50
+      start: 100
+      unit: ₹
+    - name: p
+      label: Percentage
+      min: 0
+      max: 100
+      step: 5
+      start: 0
+      unit: '%'
+    outputs:
+    - name: part
+      label: p% of the price
+      expr: a*p/100
+      unit: ₹
+    - name: up
+      label: After a p% rise
+      expr: a*(1+p/100)
+      unit: ₹
+    - name: down
+      label: After a p% cut
+      expr: a*(1-p/100)
+      unit: ₹
+    goals:
+    - prompt: After a 25% discount a shirt costs ₹600. Find the original price.
+      want:
+        p: 25
+        down: 600
+      mistakes:
+      - when:
+          p: 25
+          a: 750
+        say: ₹750 is 600 + 25% of 600. The 25% was taken off the original price, not off ₹600.
+      - when:
+          p: 25
+          a: 600
+        say: ₹600 is the price after the discount. Find the price that 25% off turns into ₹600.
+    - prompt: A price rose 10% to ₹550. Find the old price.
+      want:
+        p: 10
+        up: 550
+      mistakes:
+      - when:
+          p: 10
+          a: 550
+        say: ₹550 is the new price. Find the price that a 10% rise turns into ₹550.
+      - when:
+          p: 10
+          a: 600
+        say: A 10% rise goes up, so the old price must be less than ₹550.
+    - prompt: What percent of ₹400 is ₹60?
+      want:
+        a: 400
+        part: 60
+      mistakes:
+      - when:
+          a: 400
+          p: 60
+        say: 60 is the amount, not the percentage. ₹60 out of ₹400 is how many out of 100?
   items:
   - prompt: Find 15% of 240.
     answer: '36'

@@ -24,6 +24,59 @@ concepts:
     - 'Halve it: x + 5'
     - 'Take away the number: 5'
     alt: 'A number trick in algebra: x, 2x, 2x + 10, x + 5, and finally 5 whatever x was.'
+  activity:
+    type: formula
+    prompt: Think of x. Double it, add k, halve the result, then take away x.
+    inputs:
+    - name: x
+      label: Secret number x
+      min: 0
+      max: 50
+      step: 1
+      start: 1
+    - name: k
+      label: Number added k
+      min: 0
+      max: 30
+      step: 1
+      start: 0
+    outputs:
+    - name: d
+      label: Doubled
+      expr: 2*x
+    - name: ad
+      label: Plus k
+      expr: 2*x+k
+    - name: h
+      label: Halved
+      expr: (2*x+k)/2
+    - name: end
+      label: Minus x
+      expr: (2*x+k)/2-x
+    goals:
+    - prompt: Make the trick always end at 8.
+      want:
+        end: 8
+      mistakes:
+      - when:
+          k: 8
+        say: You add k before halving, so the end is k ÷ 2. What k halves to 8?
+    - prompt: Secret number 37, and the trick ends at 5.
+      want:
+        x: 37
+        end: 5
+      mistakes:
+      - when:
+          x: 37
+          k: 5
+        say: 'Adding 5 and then halving leaves 2.5. Add double what you want: 10.'
+    - prompt: Make the trick end at 12.
+      want:
+        end: 12
+      mistakes:
+      - when:
+          k: 12
+        say: Halving cuts it to 6. The end is always k ÷ 2, whatever x is.
   items:
   - prompt: Think of a number, double it, add 8, halve it, then subtract the number you thought of. What do you always get?
     answer: '4'
@@ -110,6 +163,51 @@ concepts:
       - n + 8
     caption: In any 2 × 2 calendar square, n + (n + 8) = (n + 1) + (n + 7).
     alt: A 2 by 2 calendar square with dates n, n plus 1, n plus 7 and n plus 8; both diagonals add to 2n plus 8.
+  activity:
+    type: formula
+    prompt: On a calendar, call a date n. One step right adds 1; one step down adds 7.
+    inputs:
+    - name: n
+      label: Date n
+      min: 1
+      max: 31
+      step: 1
+      start: 1
+    outputs:
+    - name: box
+      label: '2 × 2 box: n + (n+1) + (n+7) + (n+8)'
+      expr: 4*n+16
+    - name: col
+      label: '3 in a column: n + (n+7) + (n+14)'
+      expr: 3*n+21
+    goals:
+    - prompt: A 2 × 2 box of dates adds to 64. Find its top-left date.
+      want:
+        box: 64
+      mistakes:
+      - when:
+          n: 16
+        say: '64 ÷ 4 = 16 is the average of the four dates. The top-left one is the smallest: 4n + 16 = 64.'
+      - when:
+          n: 8
+        say: 'Check: 8 + 9 + 15 + 16 = 48. Too small.'
+    - prompt: A 2 × 2 box adds to 100.
+      want:
+        box: 100
+      mistakes:
+      - when:
+          n: 25
+        say: '100 ÷ 4 = 25 is the average. Take away 16 first: 4n = 84.'
+    - prompt: Three dates in a column add to 45. Find the top one.
+      want:
+        col: 45
+      mistakes:
+      - when:
+          n: 15
+        say: 15 is the middle date (45 ÷ 3). The top one is 7 less.
+      - when:
+          n: 22
+        say: That's the bottom date. The top one is 14 less.
   items:
   - prompt: On a calendar, what is the date directly below the 12th?
     answer: '19'

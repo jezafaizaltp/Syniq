@@ -38,6 +38,67 @@ concepts:
       - '1'
     caption: '2/3 of 4/5: 8 of the 15 cells, so 8/15.'
     alt: A rectangle split into 4/5 and 1/5 across and 2/3 and 1/3 down; the overlap of 4/5 and 2/3 holds 8 of the 15 small cells, so two thirds of four fifths is eight fifteenths.
+  activity:
+    type: formula
+    prompt: Write the answer as one fraction n/d in simplest form.
+    inputs:
+    - name: n
+      label: Top n
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    - name: d
+      label: Bottom d
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: val
+      label: n ÷ d
+      expr: n/d
+      places: 3
+    goals:
+    - prompt: 1/2 × 1/3 (half of a third)
+      want:
+        n: 1
+        d: 6
+      mistakes:
+      - when:
+          n: 2
+          d: 5
+        say: 'You added tops and bottoms. Multiply them: 1 × 1 over 2 × 3.'
+      - when:
+          n: 1
+          d: 5
+        say: '1/5 adds the bottoms. Half of a third is smaller than a third: multiply 2 × 3.'
+    - prompt: 2/3 × 4/5
+      want:
+        n: 8
+        d: 15
+      mistakes:
+      - when:
+          n: 10
+          d: 12
+        say: You cross-multiplied (2 × 5 and 3 × 4). Multiply top × top and bottom × bottom.
+      - when:
+          n: 6
+          d: 8
+        say: Adding tops and bottoms doesn't multiply. 2 × 4 over 3 × 5.
+    - prompt: 3/4 × 2/3
+      want:
+        n: 1
+        d: 2
+      mistakes:
+      - when:
+          n: 6
+          d: 12
+        say: 'Right value, not simplest: 6 and 12 both divide by 6.'
+      - when:
+          n: 3
+          d: 6
+        say: 'Still not simplest: divide by 3.'
   items:
   - prompt: Find 3/4 of 20.
     answer: '15'
@@ -116,6 +177,63 @@ concepts:
     - Flip 4/5 to 5/4
     - 2/3 × 5/4 = 10/12 = 5/6
     alt: 'Dividing 2/3 by 4/5: keep, change, flip, then multiply to get 10/12, which simplifies to 5/6.'
+  activity:
+    type: formula
+    prompt: Write the answer as n/d in simplest form (a whole number has d = 1).
+    inputs:
+    - name: n
+      label: Top n
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    - name: d
+      label: Bottom d
+      min: 1
+      max: 30
+      step: 1
+      start: 2
+    outputs:
+    - name: val
+      label: n ÷ d
+      expr: n/d
+      places: 3
+    goals:
+    - prompt: '3 ÷ 1/4: how many quarters fit in 3 rotis?'
+      want:
+        n: 12
+        d: 1
+      mistakes:
+      - when:
+          n: 3
+          d: 4
+        say: '3/4 is a quarter of 3. Dividing by 1/4 asks how many quarters fit: 4 in each roti.'
+    - prompt: 2/3 ÷ 1/6
+      want:
+        n: 4
+        d: 1
+      mistakes:
+      - when:
+          n: 1
+          d: 9
+        say: '2/18 = 1/9 multiplies by 1/6. Flip the second fraction: 2/3 × 6/1.'
+      - when:
+          n: 2
+          d: 18
+        say: 'That''s multiplying by 1/6. Flip it: 2/3 × 6.'
+    - prompt: 3/4 ÷ 1/2
+      want:
+        n: 3
+        d: 2
+      mistakes:
+      - when:
+          n: 3
+          d: 8
+        say: '3/8 multiplies by 1/2. Dividing by a half doubles: 3/4 × 2.'
+      - when:
+          n: 6
+          d: 4
+        say: 'Right value, not simplest: both divide by 2.'
   items:
   - prompt: Find 3 ÷ 1/4.
     answer: '12'

@@ -37,6 +37,108 @@ concepts:
       - lags by 90°
       - leads by 90°
     alt: How a resistor, inductor and capacitor behave in an AC circuit.
+  activity:
+    type: formula
+    prompt: In an AC circuit, X_L = 2πfL grows with frequency and X_C = 1 ÷ (2πfC) shrinks with it. They match at resonance.
+    inputs:
+    - name: f
+      label: Frequency f
+      min: 10
+      max: 1000
+      step: 10
+      start: 1000
+      unit: Hz
+    - name: l
+      label: Inductance L
+      min: 10
+      max: 500
+      step: 10
+      start: 10
+      unit: mH
+    - name: c
+      label: Capacitance C
+      min: 1
+      max: 50
+      step: 1
+      start: 1
+      unit: μF
+    outputs:
+    - name: xl
+      label: X_L
+      expr: 2*pi*f*l/1000
+      unit: Ω
+      places: 1
+    - name: xc
+      label: X_C
+      expr: 1000000/(2*pi*f*c)
+      unit: Ω
+      places: 1
+    - name: dx
+      label: X_L − X_C
+      expr: 2*pi*f*l/1000-1000000/(2*pi*f*c)
+      unit: Ω
+      places: 1
+    goals:
+    - prompt: With L = 100 mH and C = 10 μF, find the frequency closest to resonance.
+      want:
+        l: 100
+        c: 10
+        dx:
+        - -2
+        - 2
+      mistakes:
+      - when:
+          l: 100
+          c: 10
+          f:
+          - 10
+          - 150
+        say: 'X_C is still bigger: at low frequency the capacitor blocks more. Go higher.'
+      - when:
+          l: 100
+          c: 10
+          f:
+          - 170
+          - 1000
+        say: 'X_L now wins: too high.'
+    - prompt: At 50 Hz, choose L so X_L = 31.4 Ω.
+      want:
+        f: 50
+        xl:
+        - 31.3
+        - 31.5
+      mistakes:
+      - when:
+          f: 50
+          xl:
+          - 0.1
+          - 31.2
+        say: Too small. X_L = 2πfL, so L = 31.4 ÷ (2π × 50).
+      - when:
+          f: 50
+          xl:
+          - 31.6
+          - 160
+        say: Too big. X_L = 2πfL.
+    - prompt: At 50 Hz, choose C so X_C = 318 Ω (about).
+      want:
+        f: 50
+        xc:
+        - 315
+        - 321
+      mistakes:
+      - when:
+          f: 50
+          c:
+          - 11
+          - 50
+        say: 'A bigger capacitor lets AC through more easily: X_C is smaller. Choose a smaller C.'
+      - when:
+          f: 50
+          c:
+          - 1
+          - 9
+        say: 'A smaller capacitor blocks more: X_C is too big.'
   items:
   - prompt: The peak voltage is 200√2 V. Find the rms voltage (V).
     answer: '200'
@@ -118,6 +220,74 @@ concepts:
     - Step-down transformer
     - Homes at 230 V
     alt: 'Power transmission: stepping voltage up for the long lines, then down for homes.'
+  activity:
+    type: formula
+    prompt: 'An ideal transformer on 220 V mains: Vs ÷ Vp = Ns ÷ Np, and the power in equals the power out.'
+    inputs:
+    - name: np
+      label: Primary turns Np
+      min: 100
+      max: 1000
+      step: 100
+      start: 100
+    - name: ns
+      label: Secondary turns Ns
+      min: 10
+      max: 2000
+      step: 10
+      start: 10
+    - name: is
+      label: Secondary current
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: A
+    outputs:
+    - name: vs
+      label: Secondary voltage
+      expr: 220*ns/np
+      unit: V
+      places: 1
+    - name: ip
+      label: Primary current
+      expr: (220*ns/np)*is/220
+      unit: A
+      places: 2
+    goals:
+    - prompt: Step 220 V down to 11 V with 1000 primary turns.
+      want:
+        np: 1000
+        vs: 11
+      mistakes:
+      - when:
+          np: 1000
+          ns:
+          - 60
+          - 2000
+        say: 'More secondary turns give more volts. Stepping DOWN needs fewer turns: Ns = 1000 × 11 ÷ 220.'
+    - prompt: Step up to 440 V using 500 primary turns.
+      want:
+        np: 500
+        vs: 440
+      mistakes:
+      - when:
+          np: 500
+          ns: 250
+        say: 'Fewer secondary turns step DOWN: 110 V. Twice the voltage needs twice the turns.'
+    - prompt: 'The 1000 : 50 transformer delivers 10 A at 11 V. Read the primary current.'
+      want:
+        np: 1000
+        ns: 50
+        is: 10
+      mistakes:
+      - when:
+          np: 1000
+          ns: 50
+          is:
+          - 1
+          - 9
+        say: The secondary delivers 10 A.
   items:
   - prompt: A transformer has 100 primary and 500 secondary turns, with 220 V in. Find the output voltage (V).
     answer: '1100'

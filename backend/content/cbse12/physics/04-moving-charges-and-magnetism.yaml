@@ -28,6 +28,99 @@ concepts:
     - Path bends into a circle
     - r = mv/(qB)
     alt: A charge moving across a uniform magnetic field is pushed sideways into a circular path.
+  activity:
+    type: formula
+    prompt: A charged particle in a magnetic field moves in a circle of radius r = mv ÷ (qB). Mass in proton masses, charge in units of e.
+    inputs:
+    - name: v
+      label: Speed (× 10⁶ m/s)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: b
+      label: Field B
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 0.1
+      unit: T
+    - name: m
+      label: Mass (proton masses)
+      min: 1
+      max: 4
+      step: 1
+      start: 1
+    - name: q
+      label: Charge (units of e)
+      min: 1
+      max: 2
+      step: 1
+      start: 1
+    outputs:
+    - name: r
+      label: Radius
+      expr: 1.044*m*v/(q*b)
+      unit: cm
+      places: 2
+    goals:
+    - prompt: A proton at 2 × 10⁶ m/s in 0.5 T circles at 4.18 cm. Change only the speed to make the radius 8.35 cm.
+      want:
+        b: 0.5
+        m: 1
+        q: 1
+        r:
+        - 8.3
+        - 8.4
+      mistakes:
+      - when:
+          b: 0.5
+          m: 1
+          q: 1
+          v: 8
+        say: '4 times the speed gives 4 times the radius: r ∝ v, not v². Twice the radius needs twice the speed.'
+      - when:
+          b: 0.5
+          m: 1
+          q: 1
+          v: 3
+        say: 1.5 times the speed gives 1.5 times the radius. Twice the radius needs twice the speed.
+    - prompt: The same proton at 2 × 10⁶ m/s. Change only B so the radius is 2.09 cm.
+      want:
+        m: 1
+        q: 1
+        v: 2
+        r:
+        - 2.08
+        - 2.1
+      mistakes:
+      - when:
+          m: 1
+          q: 1
+          v: 2
+          b: 0.3
+        say: 'A weaker field bends less: a bigger circle. r ∝ 1/B, so halve the radius by doubling B.'
+      - when:
+          m: 1
+          q: 1
+          v: 2
+          b: 0.2
+        say: 'A weaker field bends less: a bigger circle. r ∝ 1/B, so halve the radius by doubling B.'
+    - prompt: An α-particle (4 proton masses, charge 2e) at 2 × 10⁶ m/s in 0.5 T. Set it up.
+      want:
+        m: 4
+        q: 2
+        v: 2
+        b: 0.5
+      mistakes:
+      - when:
+          m: 4
+          q: 1
+        say: 'An α-particle carries charge 2e: two protons.'
+      - when:
+          m: 2
+          q: 2
+        say: 'An α-particle has 2 protons AND 2 neutrons: mass 4.'
   items:
   - prompt: A 2 m wire carries 5 A at right angles to a 0.3 T field. Find the force (N).
     answer: '3'
@@ -118,6 +211,94 @@ concepts:
       - μ₀NI/(2R)
       - μ₀nI
     alt: Magnetic fields of a straight wire, a loop and a solenoid.
+  activity:
+    type: formula
+    prompt: The field at the centre of a circular coil is B = μ₀NI ÷ (2R).
+    inputs:
+    - name: n
+      label: Turns N
+      min: 1
+      max: 100
+      step: 1
+      start: 1
+    - name: i
+      label: Current I
+      min: 0.5
+      max: 10
+      step: 0.5
+      start: 0.5
+      unit: A
+    - name: r
+      label: Radius R
+      min: 1
+      max: 20
+      step: 1
+      start: 20
+      unit: cm
+    outputs:
+    - name: b
+      label: Field at the centre
+      expr: 62.83*n*i/r
+      unit: μT
+      places: 1
+    goals:
+    - prompt: 10 turns, 1 A and R = 10 cm give 62.8 μT. Keep N and I, and change only R to double B.
+      want:
+        n: 10
+        i: 1
+        b:
+        - 125
+        - 126
+      mistakes:
+      - when:
+          n: 10
+          i: 1
+          r: 20
+        say: 'A bigger loop gives a WEAKER field at its centre: B ∝ 1/R. Make it smaller.'
+    - prompt: Keep I = 1 A and R = 10 cm. Choose N for 314 μT.
+      want:
+        i: 1
+        r: 10
+        b:
+        - 314
+        - 314.3
+      mistakes:
+      - when:
+          i: 1
+          r: 10
+          n:
+          - 1
+          - 40
+        say: 'Not enough turns: each turn adds 6.28 μT here.'
+      - when:
+          i: 1
+          r: 10
+          n:
+          - 60
+          - 100
+        say: Too many turns.
+    - prompt: Keep N = 10 and R = 10 cm. Make the field 314 μT by changing the current.
+      want:
+        n: 10
+        r: 10
+        b:
+        - 314
+        - 314.3
+      mistakes:
+      - when:
+          n: 10
+          r: 10
+          i:
+          - 0.5
+          - 4.5
+        say: 'Not enough current: B ∝ I.'
+      - when:
+          n: 10
+          r: 10
+          i:
+          - 5.5
+          - 10
+        say: Too much current.
   items:
   - prompt: Find B (in units of 10⁻⁵ T) 0.1 m from a long wire carrying 5 A.
     answer: '1'

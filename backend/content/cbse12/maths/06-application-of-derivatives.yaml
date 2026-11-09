@@ -38,6 +38,77 @@ concepts:
     - from: 1
       to: 3
       label: up
+  activity:
+    type: formula
+    prompt: A ripple's radius r grows at dr/dt. Its area A = πr² grows at dA/dt = 2πr × dr/dt (chain rule).
+    inputs:
+    - name: r
+      label: Radius r
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: v
+      label: dr/dt
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 0.1
+      unit: cm/s
+    outputs:
+    - name: area
+      label: Area
+      expr: pi*r^2
+      unit: cm²
+      places: 1
+    - name: rate
+      label: dA/dt
+      expr: 2*pi*r*v
+      unit: cm²/s
+      places: 2
+    goals:
+    - prompt: When r = 10 cm, make the area grow at 20π ≈ 62.83 cm²/s.
+      want:
+        r: 10
+        rate:
+        - 62.8
+        - 62.9
+      mistakes:
+      - when:
+          r: 10
+          v: 2
+        say: 'That''s 125.7: twice as fast. dA/dt = 2π × 10 × dr/dt = 20π means dr/dt = 1.'
+      - when:
+          r: 10
+          v:
+          - 0.1
+          - 0.9
+        say: 'Too slow: you need 2π × 10 × dr/dt = 20π.'
+    - prompt: Keep dr/dt = 0.5 cm/s. Find r where the area grows at 10π ≈ 31.42 cm²/s.
+      want:
+        v: 0.5
+        rate:
+        - 31.4
+        - 31.5
+      mistakes:
+      - when:
+          v: 0.5
+          r: 5
+        say: r = 5 gives 5π. With dr/dt = 0.5, dA/dt = 2πr × 0.5 = πr, so r = 10.
+      - when:
+          v: 0.5
+          r: 20
+        say: r = 20 gives 20π. dA/dt = πr here, so r = 10.
+    - prompt: Same dr/dt = 0.5, but r = 20 cm. How fast does the area grow now?
+      want:
+        v: 0.5
+        r: 20
+      mistakes:
+      - when:
+          v: 1
+          r: 10
+        say: 'That''s a different ripple. Keep dr/dt = 0.5 and let r = 20: the same push on the radius moves twice the rim.'
   items:
   - prompt: The radius of a circle grows at 2 cm/s. How fast (in cm²/s, as a multiple of π) is the area growing when r = 5 cm?
     answer: '20'
@@ -123,6 +194,45 @@ concepts:
     - Find f″ at each point
     - 'f″ < 0: maximum; f″ > 0: minimum'
     alt: The second derivative test for maxima and minima.
+  activity:
+    type: formula
+    prompt: Cut a square of side x from each corner of an 18 cm square sheet and fold up the sides. V = x(18 − 2x)², and V′ = (18 − 2x)(18 − 6x).
+    inputs:
+    - name: x
+      label: Cut x
+      min: 0.5
+      max: 8.5
+      step: 0.5
+      start: 0.5
+      unit: cm
+    outputs:
+    - name: v
+      label: Volume V
+      expr: x*(18-2*x)^2
+      unit: cm³
+      places: 1
+    - name: dv
+      label: Slope V′
+      expr: (18-2*x)*(18-6*x)
+      places: 1
+    goals:
+    - prompt: Choose the cut that gives the biggest box.
+      want:
+        x: 3
+      mistakes:
+      - when:
+          x:
+          - 0.5
+          - 2.5
+        say: 'V′ is still positive: a bigger cut still increases V. Keep going until V′ = 0.'
+      - when:
+          x:
+          - 3.5
+          - 8.5
+        say: 'V′ is negative: you''ve gone past the top. Cut smaller.'
+      - when:
+          x: 4.5
+        say: '4.5 cm leaves a 9 × 9 base but only 364.5 cm³. Watch V′: it''s already negative.'
   items:
   - prompt: Find the minimum value of f(x) = x² − 4x + 7.
     answer: '3'

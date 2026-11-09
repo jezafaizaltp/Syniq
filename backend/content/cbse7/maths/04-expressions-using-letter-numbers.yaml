@@ -28,6 +28,43 @@ concepts:
     - '4 more: 3n + 4'
     - 'If n = 5: 3 × 5 + 4 = 19'
     alt: 'Turning words into an expression: three times a number is 3n, four more is 3n + 4, which is 19 when n = 5.'
+  activity:
+    type: formula
+    prompt: Pencils cost ₹5 each and the box costs ₹20. n is the number of pencils.
+    inputs:
+    - name: n
+      label: Pencils n
+      min: 0
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: cost
+      label: 'Cost: 5n + 20'
+      expr: 5*n+20
+      unit: ₹
+    goals:
+    - prompt: The total is ₹70. How many pencils?
+      want:
+        cost: 70
+      mistakes:
+      - when:
+          n: 14
+        say: 70 ÷ 5 = 14 forgets the ₹20 box. Take the box off first.
+    - prompt: The total is ₹45.
+      want:
+        cost: 45
+      mistakes:
+      - when:
+          n: 9
+        say: 45 ÷ 5 = 9 forgets the box. 45 − 20 = 25 is the pencils.
+    - prompt: The total is ₹100.
+      want:
+        cost: 100
+      mistakes:
+      - when:
+          n: 20
+        say: 100 ÷ 5 = 20 forgets the box. The pencils cost 100 − 20.
   items:
   - prompt: Which expression means '4 more than n'?
     options:
@@ -117,6 +154,45 @@ concepts:
     unit: matchsticks
     caption: 'Each extra square needs 3 more sticks: 3n + 1.'
     alt: 'A bar chart of matchsticks needed for 1, 2, 3 and 4 squares in a row: 4, 7, 10 and 13, going up by 3 each time.'
+  activity:
+    type: sort
+    prompt: Can the terms be added into one term?
+    bins:
+    - Joins into one term
+    - Stays as it is
+    items:
+    - label: 3n + 5n
+      bin: Joins into one term
+      clue: 3 apples and 5 apples.
+      why: 8n.
+    - label: 7x − 2x
+      bin: Joins into one term
+      clue: Same letter in both.
+      why: 5x.
+    - label: 4a + a
+      bin: Joins into one term
+      clue: a means 1a.
+      why: 5a.
+    - label: 2p + 3p + p
+      bin: Joins into one term
+      clue: All p's.
+      why: 6p.
+    - label: 3n + 5
+      bin: Stays as it is
+      clue: 3 apples and 5 bananas.
+      why: 'One has a letter, one doesn''t: they can''t join.'
+    - label: 4x + 4y
+      bin: Stays as it is
+      clue: Different letters.
+      why: x and y are different unknowns.
+    - label: 5m − 3
+      bin: Stays as it is
+      clue: Is 3 a number of m's?
+      why: A plain number can't join an m-term.
+    - label: 2a + 3b + 1
+      bin: Stays as it is
+      clue: Three different kinds.
+      why: Nothing to combine.
   items:
   - prompt: Simplify 3n + 5n. What number goes in front of n?
     answer: '8'

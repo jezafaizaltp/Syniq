@@ -32,6 +32,80 @@ concepts:
     - at: 2
       label: jump
     alt: The greatest integer function jumps at every integer, so it is discontinuous there.
+  activity:
+    type: formula
+    prompt: f(x) = kx + c for x ≤ 2, and 3x − 1 for x > 2. Continuous at 2 needs both pieces to meet there; differentiable needs the same slope too.
+    inputs:
+    - name: k
+      label: Left slope k
+      min: -5
+      max: 5
+      step: 0.5
+      start: 0
+    - name: c
+      label: Left intercept c
+      min: -10
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: lv
+      label: Left piece at x = 2
+      expr: 2*k+c
+      places: 1
+    - name: rv
+      label: Right piece reaches
+      expr: 5+0*k
+    - name: jump
+      label: Jump at x = 2 (right − left)
+      expr: 5-2*k-c
+      places: 1
+    - name: kink
+      label: Slope difference 3 − k
+      expr: 3-k
+      places: 1
+    goals:
+    - prompt: Keep c = 1. Choose k so f is continuous at x = 2.
+      want:
+        c: 1
+        jump: 0
+      mistakes:
+      - when:
+          c: 1
+          k: 3
+        say: 'Same slope as the right piece, but the left piece reaches 7 at x = 2, not 5: a jump.'
+      - when:
+          c: 1
+          jump:
+          - 0.5
+          - 20
+        say: 'The left piece ends below 5: there''s a gap. Raise k.'
+    - prompt: Make f continuous AND smooth (no corner) at x = 2.
+      want:
+        jump: 0
+        kink: 0
+      mistakes:
+      - when:
+          jump: 0
+          kink:
+          - -10
+          - -0.5
+        say: 'Joined, but with a corner: the slopes differ, so f isn''t differentiable there.'
+      - when:
+          jump: 0
+          kink:
+          - 0.5
+          - 10
+        say: 'Joined, but with a corner: the slopes differ, so f isn''t differentiable there.'
+    - prompt: Keep k = 1. Make a jump of exactly 3 at x = 2, with the left piece below.
+      want:
+        k: 1
+        jump: 3
+      mistakes:
+      - when:
+          k: 1
+          jump: -3
+        say: 'That''s a jump of 3 the other way: the left piece ends above the right. It must reach only 2.'
   items:
   - prompt: f(x) = kx + 1 for x ≤ 2 and 3x − 1 for x > 2. Find k so that f is continuous at 2.
     answer: '2'
@@ -120,6 +194,60 @@ concepts:
     - 'Differentiate inner: g′(x)'
     - Multiply
     alt: 'The chain rule: differentiate the outer function, then multiply by the derivative of the inner.'
+  activity:
+    type: sort
+    prompt: Find the derivative of each function. Use the chain rule where one function sits inside another.
+    bins:
+    - cos x
+    - −sin x
+    - eˣ
+    - 1/x
+    - 2x
+    items:
+    - label: sin x
+      bin: cos x
+      clue: Which function's slope does the sine curve have?
+      why: d/dx sin x = cos x.
+    - label: sin x + 10
+      bin: cos x
+      clue: What is the derivative of a constant?
+      why: The 10 disappears; sin x gives cos x.
+    - label: cos x
+      bin: −sin x
+      clue: Does cos x go up or down just after 0?
+      why: d/dx cos x = −sin x.
+    - label: cos(−x)
+      bin: −sin x
+      clue: 'Chain rule: differentiate the outside, then times d/dx(−x).'
+      why: '−sin(−x) × (−1) = sin(−x) = −sin x. (Or: cos(−x) = cos x.)'
+    - label: eˣ
+      bin: eˣ
+      clue: Which function is its own slope?
+      why: d/dx eˣ = eˣ.
+    - label: eˣ + 4
+      bin: eˣ
+      clue: What happens to the + 4?
+      why: 'Constants vanish: eˣ stays.'
+    - label: ln x
+      bin: 1/x
+      clue: Which function's slope is the reciprocal of x?
+      why: d/dx ln x = 1/x.
+    - label: ln(5x)
+      bin: 1/x
+      clue: 'Chain rule: (1/(5x)) × 5. Or split: ln 5 + ln x.'
+      why: '5/(5x) = 1/x: ln 5 is just a constant.'
+    - label: ½ ln(x²)
+      bin: 1/x
+      clue: 'Simplify first: ln(x²) = ? ln x.'
+      why: ½ × 2 ln x = ln x, whose derivative is 1/x (for x > 0).
+    - label: x²
+      bin: 2x
+      clue: 'Power rule: bring the power down, lower it by one.'
+      why: d/dx x² = 2x.
+    - label: x² + 7
+      bin: 2x
+      clue: Does the 7 change the slope?
+      why: The 7 vanishes.
   items:
   - prompt: If y = x³, find dy/dx at x = 2.
     answer: '12'

@@ -32,6 +32,74 @@ concepts:
     unit: g of sugar per 100 mL water
     caption: More sugar dissolves in hotter water (approximate values).
     alt: Bars showing that about 200, 238, 287 and 362 grams of sugar dissolve in 100 millilitres of water at 20, 40, 60 and 80 degrees.
+  activity:
+    type: formula
+    prompt: At room temperature, 36 g of salt dissolves in each 100 g of water. Extra salt stays at the bottom.
+    inputs:
+    - name: w
+      label: Water
+      min: 0
+      max: 500
+      step: 50
+      start: 100
+      unit: g
+    - name: s
+      label: Salt added
+      min: 0
+      max: 200
+      step: 1
+      start: 0
+      unit: g
+    outputs:
+    - name: dis
+      label: Salt dissolved
+      expr: min(s,0.36*w)
+      unit: g
+    - name: left
+      label: Salt left at the bottom
+      expr: s-min(s,0.36*w)
+      unit: g
+    goals:
+    - prompt: Make a saturated solution with 200 g of water, and no salt left over.
+      want:
+        w: 200
+        dis: 72
+        left: 0
+      mistakes:
+      - when:
+          w: 200
+          s: 36
+        say: 36 g is for 100 g of water. Double the water dissolves double the salt.
+      - when:
+          w: 200
+          s:
+          - 73
+          - 200
+        say: 'Now some salt sits at the bottom: you''ve gone past saturated.'
+    - prompt: Dissolve 90 g of salt using as little water as possible.
+      want:
+        s: 90
+        w: 250
+      mistakes:
+      - when:
+          s: 90
+          w: 200
+        say: 200 g of water holds only 72 g, so 18 g stays at the bottom.
+      - when:
+          s: 90
+          w:
+          - 300
+          - 500
+        say: That works, but uses more water than you need.
+    - prompt: Leave 14 g of salt at the bottom of 100 g of water.
+      want:
+        w: 100
+        left: 14
+      mistakes:
+      - when:
+          w: 100
+          s: 14
+        say: 14 g all dissolves. The water takes 36 g first; only the extra stays.
   items:
   - prompt: In salt water, which is the solute?
     options:
@@ -131,6 +199,69 @@ concepts:
     unit: g/cm³
     caption: Things less dense than water (1 g/cm³) float on it.
     alt: Bars showing densities of oil 0.9, ice 0.92, water 1, sea water 1.03 and iron 7.9 grams per cubic centimetre.
+  activity:
+    type: formula
+    prompt: Density = mass ÷ volume. Water's density is 1 g/cm³.
+    inputs:
+    - name: m
+      label: Mass
+      min: 10
+      max: 500
+      step: 10
+      start: 10
+      unit: g
+    - name: v
+      label: Volume
+      min: 10
+      max: 500
+      step: 10
+      start: 10
+      unit: cm³
+    outputs:
+    - name: d
+      label: Density
+      expr: m/v
+      unit: g/cm³
+      places: 2
+    goals:
+    - prompt: Make a block that floats, with density 0.5 g/cm³.
+      want:
+        d: 0.5
+      mistakes:
+      - when:
+          d:
+          - 1.01
+          - 50
+        say: 'Denser than water: it would sink. Floating needs less than 1 g/cm³.'
+      - when:
+          d:
+          - 0.51
+          - 0.99
+        say: It would float, but density isn't 0.5 yet.
+    - prompt: A 200 g stone with density 2.5 g/cm³. Find its volume.
+      want:
+        m: 200
+        d: 2.5
+      mistakes:
+      - when:
+          m: 200
+          v: 500
+        say: 200 × 2.5 = 500 multiplies. Volume = mass ÷ density.
+      - when:
+          m: 200
+          v:
+          - 10
+          - 70
+        say: Too small a volume makes it too dense.
+    - prompt: A log of wood with density 0.6 g/cm³ has mass 300 g. Find its volume.
+      want:
+        m: 300
+        d: 0.6
+      mistakes:
+      - when:
+          m: 300
+          v: 180
+        say: '300 × 0.6 = 180 multiplies. Divide: 300 ÷ 0.6.'
   items:
   - prompt: A block has a mass of 60 g and a volume of 20 cm³. Find its density, in g/cm³.
     answer: '3'

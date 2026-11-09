@@ -35,6 +35,22 @@ concepts:
       - Easy to calculate
     caption: Additive systems repeat symbols; place value lets ten digits write any number.
     alt: Two columns comparing Roman additive numerals, which repeat symbols and have no zero, with the Indian place-value system using ten digits and zero.
+  activity:
+    type: order
+    prompt: Put these Roman numerals in order, smallest first.
+    steps:
+    - IX
+    - XIV
+    - XL
+    - LX
+    - XC
+    - CX
+    reasons:
+      XIV: IX is 10 − 1 = 9; XIV is 10 + 4 = 14. A small letter before a bigger one subtracts.
+      XL: XL is 50 − 10 = 40, bigger than 14.
+      LX: LX is 50 + 10 = 60. The X after L adds; before L (XL) it subtracts.
+      XC: XC is 100 − 10 = 90, bigger than 60.
+      CX: CX is 100 + 10 = 110, the biggest.
   items:
   - prompt: What number is XLVII?
     answer: '47'
@@ -133,6 +149,84 @@ concepts:
       - '1'
     caption: 1011 in base 2 = 8 + 0 + 2 + 1 = 11.
     alt: Four boxes with place values 8, 4, 2 and 1 holding the digits 1, 0, 1, 1, which make 11.
+  activity:
+    type: formula
+    prompt: 'Base 2: each place holds 0 or 1. The places are worth 8, 4, 2 and 1.'
+    inputs:
+    - name: e
+      label: Eights place
+      min: 0
+      max: 1
+      step: 1
+      start: 0
+    - name: f
+      label: Fours place
+      min: 0
+      max: 1
+      step: 1
+      start: 0
+    - name: t
+      label: Twos place
+      min: 0
+      max: 1
+      step: 1
+      start: 0
+    - name: o
+      label: Ones place
+      min: 0
+      max: 1
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: Value
+      expr: 8*e+4*f+2*t+o
+    goals:
+    - prompt: Make 5 in base 2.
+      want:
+        val: 5
+      mistakes:
+      - when:
+          e: 1
+          f: 0
+          t: 1
+          o: 0
+        say: 'That''s 1010 = 8 + 2 = 10. You wrote 0101 backwards: the ones place is on the right.'
+      - when:
+          val:
+          - 6
+          - 15
+        say: 'Too big. 5 = 4 + 1: which two places make that?'
+    - prompt: Make 13 in base 2.
+      want:
+        val: 13
+      mistakes:
+      - when:
+          e: 1
+          f: 1
+          t: 1
+          o: 1
+        say: '1111 = 8 + 4 + 2 + 1 = 15. Take out 2: 13 = 8 + 4 + 1.'
+      - when:
+          val:
+          - 0
+          - 7
+        say: Without the eights place you can make at most 7. 13 needs an 8.
+    - prompt: Make 8 in base 2.
+      want:
+        val: 8
+      mistakes:
+      - when:
+          e: 0
+          f: 0
+          t: 0
+          o: 1
+        say: 'A 1 in the ones place is just 1. 8 has its own place on the left: 1000.'
+      - when:
+          val:
+          - 9
+          - 15
+        say: 'Too big. 8 needs only the eights place: 1000.'
   items:
   - prompt: What is the place value of 7 in 47,302?
     answer: '7000'

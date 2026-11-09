@@ -29,6 +29,54 @@ concepts:
       value: 1000
     alt: A quarter kilogram is 250 grams, half 500, three quarters 750, and one kilogram 1000.
     unit: g
+  activity:
+    type: formula
+    prompt: Weigh it in grams. 1 kg = 1000 g.
+    inputs:
+    - name: g
+      label: Weight
+      min: 0
+      max: 3000
+      step: 25
+      start: 0
+      unit: g
+    outputs:
+    - name: kg
+      label: In kilograms
+      expr: g/1000
+      unit: kg
+      places: 3
+    goals:
+    - prompt: 1 kg 250 g
+      want:
+        g: 1250
+      mistakes:
+      - when:
+          g: 1025
+        say: That's 1 kg 25 g. Here it's 250 g.
+      - when:
+          g: 250
+        say: 'Don''t forget the 1 kg: that''s 1000 g more.'
+    - prompt: Half a kilogram
+      want:
+        g: 500
+      mistakes:
+      - when:
+          g: 50
+        say: Half of 1000 g is 500 g.
+      - when:
+          g: 1500
+        say: That's one and a half kilograms.
+    - prompt: 2 kg 75 g
+      want:
+        g: 2075
+      mistakes:
+      - when:
+          g: 2750
+        say: That's 2 kg 750 g. Here it's only 75 g.
+      - when:
+          g: 275
+        say: 2 kg is 2000 g, not 200 g.
   items:
   - prompt: How many grams are in 2 kg?
     answer: '2000'
@@ -106,6 +154,46 @@ concepts:
     - 1000 ÷ 200 = 5
     - 5 glasses
     alt: A 1 litre jug of 1000 millilitres fills 5 glasses of 200 millilitres.
+  activity:
+    type: formula
+    prompt: A jug of water fills glasses of 200 mL each.
+    inputs:
+    - name: j
+      label: Water in the jug
+      min: 0
+      max: 3000
+      step: 100
+      start: 0
+      unit: mL
+    outputs:
+    - name: glasses
+      label: Glasses filled
+      expr: j/200
+    goals:
+    - prompt: Fill 5 glasses.
+      want:
+        glasses: 5
+      mistakes:
+      - when:
+          j: 500
+        say: 500 mL fills only 2 and a half glasses. Each glass needs 200 mL.
+    - prompt: The jug holds 1 L 400 mL. Set it.
+      want:
+        j: 1400
+      mistakes:
+      - when:
+          j: 400
+        say: 'Don''t forget the 1 litre: that''s 1000 mL more.'
+      - when:
+          j: 1000
+        say: Now add the 400 mL.
+    - prompt: Fill 8 glasses.
+      want:
+        glasses: 8
+      mistakes:
+      - when:
+          j: 800
+        say: 800 mL fills 4 glasses. Each glass is 200 mL, not 100.
   items:
   - prompt: A jug holds 1 L. How many 200 mL glasses can it fill?
     answer: '5'

@@ -31,6 +31,60 @@ concepts:
     unit: triangles
     caption: 'Sierpinski gasket: each step turns every triangle into 3.'
     alt: Bars showing 1, 3, 9 and 27 triangles at steps 0 to 3 of the Sierpinski gasket.
+  activity:
+    type: formula
+    prompt: 'The Sierpinski triangle: at each stage, cut the middle out of every triangle.'
+    inputs:
+    - name: n
+      label: Stage n
+      min: 0
+      max: 10
+      step: 1
+      start: 0
+    outputs:
+    - name: tri
+      label: Shaded triangles
+      expr: 3^n
+    - name: left
+      label: Fraction of area left
+      expr: (3/4)^n
+      places: 3
+    goals:
+    - prompt: Reach 27 shaded triangles.
+      want:
+        tri: 27
+      mistakes:
+      - when:
+          n: 2
+        say: 9 triangles. Each stage turns every triangle into 3, so 9 × 3 at the next stage.
+      - when:
+          n:
+          - 4
+          - 10
+        say: 'Too many stages: each stage multiplies by 3, so it grows fast.'
+    - prompt: Leave less than half the area shaded.
+      want:
+        left:
+        - 0
+        - 0.5
+      mistakes:
+      - when:
+          n: 2
+        say: 'Each stage keeps 3/4 of what was there: 3/4 × 3/4 = 9/16, still more than half.'
+      - when:
+          n: 1
+        say: One cut leaves 3/4. Keep going.
+    - prompt: Make the shaded area under 1/10 of the start.
+      want:
+        left:
+        - 0
+        - 0.1
+      mistakes:
+      - when:
+          n:
+          - 3
+          - 8
+        say: Still at least 0.1. The area shrinks, but by only a quarter each time.
   items:
   - prompt: In the Sierpinski gasket, how many shaded triangles are there after 4 steps?
     answer: '81'
@@ -121,6 +175,56 @@ concepts:
       - 5 + 5 − 8 = 2
     caption: Euler's formula F + V − E = 2 works for both.
     alt: 'Two columns: a cube with 6 faces, 8 vertices and 12 edges, and a square pyramid with 5 faces, 5 vertices and 8 edges, both giving F plus V minus E equals 2.'
+  activity:
+    type: sort
+    prompt: Which solid is it?
+    bins:
+    - Cube
+    - Cuboid
+    - Triangular prism
+    - Square pyramid
+    - Cylinder
+    items:
+    - label: A net of six equal squares
+      bin: Cube
+      clue: Six faces, all the same square.
+      why: A cube.
+    - label: 8 corners, 12 edges, every edge the same length
+      bin: Cube
+      clue: Equal edges in all three directions.
+      why: A cube.
+    - label: A brick
+      bin: Cuboid
+      clue: Six rectangular faces, not all the same.
+      why: A cuboid.
+    - label: Front view a long rectangle, top view a short rectangle
+      bin: Cuboid
+      clue: Flat faces, right-angled, different lengths.
+      why: A cuboid.
+    - label: '5 faces: 2 triangles and 3 rectangles'
+      bin: Triangular prism
+      clue: Same triangle at both ends, joined by rectangles.
+      why: A triangular prism.
+    - label: 6 corners and 9 edges
+      bin: Triangular prism
+      clue: Two triangles (3 corners each) joined edge to edge.
+      why: A triangular prism.
+    - label: Front view a triangle, top view a square with its diagonals
+      bin: Square pyramid
+      clue: Square base, sides rising to one point.
+      why: A square pyramid.
+    - label: 5 corners and 8 edges
+      bin: Square pyramid
+      clue: 4 corners round the base plus 1 at the top.
+      why: A square pyramid.
+    - label: Net of two circles and a rectangle
+      bin: Cylinder
+      clue: Roll the rectangle; cap it with the circles.
+      why: A cylinder.
+    - label: Front view a rectangle, top view a circle
+      bin: Cylinder
+      clue: Round from above, straight sides from the front.
+      why: A cylinder.
   items:
   - prompt: How many edges does a cube have?
     answer: '12'

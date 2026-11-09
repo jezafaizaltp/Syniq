@@ -52,6 +52,65 @@ concepts:
       - height 5
     caption: Parallelogram area = base × height = 6 × 5 = 30 square units.
     alt: A parallelogram ABCD with base 6 and a dotted height of 5 drawn from D down to the base.
+  activity:
+    type: formula
+    prompt: A shape with base b and height h.
+    inputs:
+    - name: b
+      label: Base b
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: h
+      label: Height h
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: rect
+      label: Rectangle b × h
+      expr: b*h
+      unit: cm²
+    - name: tri
+      label: Triangle ½ × b × h
+      expr: b*h/2
+      unit: cm²
+    - name: para
+      label: Parallelogram b × h
+      expr: b*h
+      unit: cm²
+    goals:
+    - prompt: A triangle with base 8 cm has area 24 cm². Find its height.
+      want:
+        b: 8
+        tri: 24
+      mistakes:
+      - when:
+          b: 8
+          h: 3
+        say: 8 × 3 = 24 is the rectangle. A triangle is half the rectangle, so the height must be double.
+    - prompt: A parallelogram with height 4 cm has area 36 cm². Find its base.
+      want:
+        h: 4
+        para: 36
+      mistakes:
+      - when:
+          h: 4
+          b: 18
+        say: '18 × 4 ÷ 2 halves it like a triangle. A parallelogram slides into a full rectangle: no halving.'
+    - prompt: A triangle with height 5 cm has area 30 cm². Find its base.
+      want:
+        h: 5
+        tri: 30
+      mistakes:
+      - when:
+          h: 5
+          b: 6
+        say: 6 × 5 = 30 forgets the half. Triangle area is half of base × height.
   items:
   - prompt: Find the area of a rectangle 12 cm by 7 cm, in cm².
     answer: '84'
@@ -154,6 +213,79 @@ concepts:
       - h = 5
     caption: Trapezium area = ½ × (8 + 4) × 5 = 30 square units.
     alt: A trapezium with parallel sides 8 and 4 and height 5, giving an area of 30 square units.
+  activity:
+    type: formula
+    prompt: A trapezium with parallel sides a and b and height h. Area = (a + b) ÷ 2 × h.
+    inputs:
+    - name: a
+      label: Parallel side a
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: b
+      label: Parallel side b
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    - name: h
+      label: Height h
+      min: 1
+      max: 20
+      step: 1
+      start: 1
+      unit: cm
+    outputs:
+    - name: avg
+      label: Average of a and b
+      expr: (a+b)/2
+      unit: cm
+    - name: area
+      label: Area
+      expr: (a+b)/2*h
+      unit: cm²
+    goals:
+    - prompt: Parallel sides 6 cm and 14 cm, area 50 cm². Find h.
+      want:
+        a: 6
+        b: 14
+        area: 50
+      mistakes:
+      - when:
+          a: 6
+          b: 14
+          h: 10
+        say: 'That makes 100. Average the sides first: (6 + 14) ÷ 2 = 10, then 10 × h = 50.'
+      - when:
+          a: 6
+          b: 14
+          h: 2
+        say: 'Too small: 10 × 2 = 20.'
+    - prompt: h = 6 cm, a = 4 cm, area 60 cm². Find b.
+      want:
+        h: 6
+        a: 4
+        area: 60
+      mistakes:
+      - when:
+          h: 6
+          a: 4
+          b: 6
+        say: (4 + 6) × 6 = 60 forgets to halve. Use the average of the two parallel sides.
+    - prompt: h = 8 cm, a = 3 cm, area 64 cm². Find b.
+      want:
+        h: 8
+        a: 3
+        area: 64
+      mistakes:
+      - when:
+          h: 8
+          a: 3
+          b: 5
+        say: (3 + 5) × 8 = 64 forgets to halve. The average of a and b times h is 64.
   items:
   - prompt: A trapezium has parallel sides 8 cm and 4 cm and height 5 cm. Find its area, in cm².
     answer: '30'

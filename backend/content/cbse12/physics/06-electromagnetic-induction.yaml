@@ -25,6 +25,97 @@ concepts:
     - 'EMF induced: ε = −N dΦ/dt'
     - Current opposes the change (Lenz)
     alt: 'Electromagnetic induction: changing flux induces an EMF whose current opposes the change.'
+  activity:
+    type: formula
+    prompt: 'Faraday: a coil of N turns gets an EMF ε = N × ΔΦ ÷ Δt, with Φ = BA.'
+    inputs:
+    - name: n
+      label: Turns N
+      min: 10
+      max: 100
+      step: 10
+      start: 10
+    - name: b
+      label: Change in B
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 0.1
+      unit: T
+    - name: a
+      label: Coil area A
+      min: 10
+      max: 200
+      step: 10
+      start: 10
+      unit: cm²
+    - name: t
+      label: Time taken Δt
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 2
+      unit: s
+    outputs:
+    - name: emf
+      label: EMF
+      expr: n*b*a*0.0001/t
+      unit: V
+      places: 3
+    goals:
+    - prompt: 50 turns, area 100 cm², B changes by 0.4 T. How quickly must it change to give 2 V?
+      want:
+        n: 50
+        b: 0.4
+        a: 100
+        emf: 2
+      mistakes:
+      - when:
+          n: 50
+          b: 0.4
+          a: 100
+          t:
+          - 0.2
+          - 2
+        say: 'A slower change gives a smaller EMF: ε = NΔΦ ÷ Δt. Make the change faster.'
+    - prompt: Keep Δt = 0.1 s, B change 0.4 T and area 100 cm². Choose N for 4 V.
+      want:
+        t: 0.1
+        b: 0.4
+        a: 100
+        emf: 4
+      mistakes:
+      - when:
+          t: 0.1
+          b: 0.4
+          a: 100
+          n:
+          - 10
+          - 90
+        say: 'Not enough turns: each turn adds the same EMF, 0.04 V here.'
+    - prompt: 10 turns, Δt = 1 s, B changes by 1 T. Choose the coil's area to make 0.1 V.
+      want:
+        n: 10
+        t: 1
+        b: 1
+        emf: 0.1
+      mistakes:
+      - when:
+          n: 10
+          t: 1
+          b: 1
+          a:
+          - 10
+          - 90
+        say: 'Too small. Use A in m² in Φ = BA: 0.1 = 10 × 1 × A ÷ 1 gives A = 0.01 m² = 100 cm².'
+      - when:
+          n: 10
+          t: 1
+          b: 1
+          a:
+          - 110
+          - 200
+        say: 'Too big: A = 0.01 m² = 100 cm².'
   items:
   - prompt: Flux through a 100-turn coil changes by 0.02 Wb in 0.1 s. Find the induced EMF (V).
     answer: '20'
@@ -119,6 +210,81 @@ concepts:
     - at: 4
       label: ε = 0
     alt: 'An AC generator''s EMF over one turn, in quarter turns: zero, positive peak, zero, negative peak, zero.'
+  activity:
+    type: formula
+    prompt: A coil of inductance L carrying current I stores ½LI². Switch the current off in 0.01 s and it pushes back with EMF L × I ÷ 0.01.
+    inputs:
+    - name: l
+      label: Inductance L
+      min: 0.1
+      max: 2
+      step: 0.1
+      start: 0.1
+      unit: H
+    - name: i
+      label: Current I
+      min: 0.5
+      max: 10
+      step: 0.5
+      start: 0.5
+      unit: A
+    outputs:
+    - name: en
+      label: Energy stored
+      expr: 0.5*l*i^2
+      unit: J
+      places: 2
+    - name: emf
+      label: Back EMF when switched off in 0.01 s
+      expr: l*i/0.01
+      unit: V
+      places: 1
+    goals:
+    - prompt: Store 4 J in a 0.5 H coil.
+      want:
+        l: 0.5
+        en: 4
+      mistakes:
+      - when:
+          l: 0.5
+          i: 8
+        say: 'Doubling I stores 4 times the energy: 16 J. E = ½LI², so I² = 16.'
+      - when:
+          l: 0.5
+          i: 2
+        say: 2 A stores only 1 J. E grows with I².
+    - prompt: Switch off 2 A in 0.01 s. Choose L so the back EMF is 100 V.
+      want:
+        i: 2
+        emf: 100
+      mistakes:
+      - when:
+          i: 2
+          l:
+          - 0.6
+          - 2
+        say: 'Too big a kick: ε = L × 2 ÷ 0.01 = 200L.'
+      - when:
+          i: 2
+          l:
+          - 0.1
+          - 0.4
+        say: 'Not enough: ε = 200L here.'
+    - prompt: 'A 2 H coil: find the current that stores 25 J.'
+      want:
+        l: 2
+        en: 25
+      mistakes:
+      - when:
+          l: 2
+          i: 10
+        say: 10 A stores 100 J.
+      - when:
+          l: 2
+          i:
+          - 5.5
+          - 9.5
+        say: 'Too much: ½ × 2 × I² = 25.'
   items:
   - prompt: Current in a 2 H inductor changes by 3 A in 1 s. Find the induced EMF (V).
     answer: '6'

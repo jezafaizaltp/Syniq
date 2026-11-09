@@ -36,6 +36,40 @@ concepts:
       - '[0, π]'
       - (−π/2, π/2)
     alt: Domains and principal ranges of sin⁻¹, cos⁻¹ and tan⁻¹.
+  activity:
+    type: angle
+    prompt: Turn the arm to each principal value. sin⁻¹ gives −90° to 90°, cos⁻¹ gives 0° to 180°, tan⁻¹ gives between −90° and 90°.
+    goals:
+    - prompt: cos⁻¹(−½)
+      degrees: 120
+      mistakes:
+      - when:
+          degrees: 60
+        say: 60° is cos⁻¹(+½). For a negative input, cos⁻¹(−x) = 180° − cos⁻¹x.
+      - when:
+          degrees: 240
+        say: cos 240° is −½ too, but it isn't in 0° to 180°, the principal range of cos⁻¹.
+    - prompt: sin⁻¹(√3/2)
+      degrees: 60
+      mistakes:
+      - when:
+          degrees: 120
+        say: sin 120° is √3/2 too, but sin⁻¹ only gives angles from −90° to 90°.
+      - when:
+          degrees: 30
+        say: sin 30° is ½. √3/2 belongs to a larger angle.
+    - prompt: tan⁻¹(1)
+      degrees: 45
+      mistakes:
+      - when:
+          degrees: 225
+        say: tan 225° is 1 as well, but the principal value lies between −90° and 90°.
+    - prompt: cos⁻¹(cos 300°)
+      degrees: 60
+      mistakes:
+      - when:
+          degrees: 300
+        say: 300° isn't in 0° to 180°, so cos⁻¹ can't give it back. cos 300° = cos 60° = ½, and cos⁻¹(½) = 60°.
   items:
   - prompt: Find sin⁻¹(1/2) in degrees.
     answer: '30'
@@ -120,6 +154,53 @@ concepts:
     - cos(π/2 − θ) = x
     - sin⁻¹x + cos⁻¹x = π/2
     alt: Why sin⁻¹x + cos⁻¹x = π/2, using complementary angles.
+  activity:
+    type: sort
+    prompt: Is each statement true wherever both sides are defined?
+    bins:
+    - Always true (in its domain)
+    - Not always true
+    items:
+    - label: sin(sin⁻¹x) = x, for x in [−1, 1]
+      bin: Always true (in its domain)
+      clue: sin⁻¹x is an angle whose sine is x. Take its sine.
+      why: sin⁻¹x is the angle with sine x, so its sine is x.
+    - label: sin⁻¹(sin x) = x, for every real x
+      bin: Not always true
+      clue: Try x = 180°. What is sin⁻¹(sin 180°)?
+      why: sin 180° = 0 and sin⁻¹0 = 0°, not 180°. It only works for x in −90° to 90°.
+    - label: sin⁻¹(−x) = −sin⁻¹x
+      bin: Always true (in its domain)
+      clue: Is sine an odd function?
+      why: sin is odd and its principal range is symmetric about 0, so this holds.
+    - label: cos⁻¹(−x) = −cos⁻¹x
+      bin: Not always true
+      clue: Can cos⁻¹ ever give a negative angle?
+      why: cos⁻¹ gives 0° to 180°, never negative. The rule is cos⁻¹(−x) = π − cos⁻¹x.
+    - label: cos⁻¹(−x) = π − cos⁻¹x
+      bin: Always true (in its domain)
+      clue: 'Try x = ½: is 120° = 180° − 60°?'
+      why: Reflecting across the y-axis turns θ into 180° − θ.
+    - label: sin⁻¹x + cos⁻¹x = π/2, for x in [−1, 1]
+      bin: Always true (in its domain)
+      clue: If sin θ = x, what is cos(90° − θ)?
+      why: The two angles are complements.
+    - label: tan⁻¹x + cot⁻¹x = π/2
+      bin: Always true (in its domain)
+      clue: Complementary angles swap tan and cot. Does that fit?
+      why: If tan θ = x, then cot(90° − θ) = x.
+    - label: sin⁻¹x = 1 / sin x
+      bin: Not always true
+      clue: Does the −1 mean 'inverse function' or 'reciprocal'?
+      why: sin⁻¹ is the inverse function (an angle), not 1/sin x, which is cosec x.
+    - label: tan⁻¹(−x) = −tan⁻¹x
+      bin: Always true (in its domain)
+      clue: Is tan an odd function with a symmetric range?
+      why: 'Yes: tan is odd and its range is symmetric about 0.'
+    - label: cos⁻¹(cos x) = x, for every real x
+      bin: Not always true
+      clue: Try x = 300°.
+      why: cos⁻¹(cos 300°) = 60°. It's only x when x is in 0° to 180°.
   items:
   - prompt: Find sin⁻¹(0.3) + cos⁻¹(0.3) in degrees.
     answer: '90'
