@@ -32,6 +32,32 @@ concepts:
     - The postmaster collects 70 pesos and sends it
     - Lencho calls the post office employees 'crooks'
     alt: 'The story in five steps: hope from the rain, the hailstorm, Lencho''s letter to God for 100 pesos, the postmaster''s 70 pesos, and Lencho''s accusation.'
+  activity:
+    type: number_line
+    min: 0
+    max: 100
+    step: 5
+    start: 0
+    prompt: 'A Letter to God: Lencho asked for 100 pesos. Mark the amounts.'
+    goals:
+    - prompt: How much did the postmaster send?
+      target: 70
+      mistakes:
+      - when:
+          v: 100
+        say: That's what Lencho asked for. The postmaster could only collect 70.
+      - when:
+          v: 30
+        say: That's what was missing. He sent 70 pesos.
+    - prompt: How many pesos did Lencho think were missing?
+      target: 30
+      mistakes:
+      - when:
+          v: 70
+        say: That's what arrived. He asked for 100, so 100 − 70 were missing.
+      - when:
+          v: 100
+        say: That's the full request. Missing = asked − received.
   items:
   - prompt: What did Lencho compare the raindrops to?
     options:
@@ -131,6 +157,37 @@ concepts:
       - Either could end the world
       - Warning against extreme feelings
     alt: 'Two Frost poems: in Dust of Snow a crow and hemlock lift the poet''s mood; in Fire and Ice, fire stands for desire and ice for hatred, both able to destroy the world.'
+  activity:
+    type: sort
+    prompt: Dust of Snow or Fire and Ice?
+    bins:
+    - Dust of Snow
+    - Fire and Ice
+    items:
+    - label: A crow shakes snow from a hemlock
+      bin: Dust of Snow
+      clue: A small moment in nature.
+      why: The crow and hemlock are in Dust of Snow.
+    - label: Desire could end the world
+      bin: Fire and Ice
+      clue: What does fire stand for?
+      why: 'Fire = desire: an idea from Fire and Ice.'
+    - label: Saves part of a day he had rued
+      bin: Dust of Snow
+      clue: A mood that changes.
+      why: His bad day is saved by the snow falling on him.
+    - label: Hatred 'would suffice'
+      bin: Fire and Ice
+      clue: What does ice stand for?
+      why: Ice = hatred, which would also be enough to destroy.
+    - label: Small things can lift a sad mood
+      bin: Dust of Snow
+      clue: The poem's message.
+      why: That's the message of Dust of Snow.
+    - label: How the world will end
+      bin: Fire and Ice
+      clue: The big question.
+      why: Fire and Ice asks how the world will end.
   items:
   - prompt: In 'Dust of Snow', which bird shakes the snow onto the poet?
     options:

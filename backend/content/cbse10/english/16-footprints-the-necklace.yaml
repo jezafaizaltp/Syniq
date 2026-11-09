@@ -29,6 +29,49 @@ concepts:
     - Ten years of hard work to repay debts
     - The original was fake, worth 500 francs
     alt: 'The Necklace: Matilda borrows and loses a necklace, buys a replacement for 36,000 francs, works ten years to repay, then learns the original was worth only 500 francs.'
+  activity:
+    type: scale
+    min: 0
+    max: 40000
+    step: 100
+    start: 0
+    unit: francs
+    prompt: 'The Necklace: mark the amounts in francs.'
+    zones:
+    - from: 0
+      to: 1000
+      label: Small
+      says: The cost of a dress or a fake.
+    - from: 1000
+      to: 40000
+      label: Huge
+      says: Ten years of debt.
+    goals:
+    - prompt: The replacement necklace cost…
+      value: 36000
+      mistakes:
+      - when:
+          v: 18000
+        say: That's only the inheritance. They borrowed the rest to reach 36,000.
+      - when:
+          v: 500
+        say: That's what the lost necklace was really worth. They paid 36,000 for the new one.
+    - prompt: The lost necklace was really worth at most…
+      value: 500
+      mistakes:
+      - when:
+          v: 36000
+        say: That's what they paid. The original was paste, worth at most 500.
+      - when:
+          v: 400
+        say: That's the dress money. The necklace was worth at most 500.
+    - prompt: Her husband gave her this for a dress.
+      value: 400
+      start: 0
+      mistakes:
+      - when:
+          v: 500
+        say: That's the necklace's value. He gave the 400 francs saved for a gun.
   items:
   - prompt: From whom did Matilda borrow the necklace?
     options:
