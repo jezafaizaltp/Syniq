@@ -34,6 +34,38 @@ concepts:
     - at: 60
       label: next hour
     alt: 'Minutes in an hour on a line: 0 o''clock, 15 quarter past, 30 half past, 45 quarter to, 60 the next hour.'
+  activity:
+    type: number_line
+    min: 0
+    max: 60
+    step: 3
+    start: 0
+    prompt: Where is the long hand? Mark how many minutes past the hour it shows.
+    goals:
+    - prompt: The long hand points to 3.
+      target: 15
+      mistakes:
+      - when:
+          v: 3
+        say: Each number on the clock is 5 minutes. 3 × 5 = 15.
+      - when:
+          v: 45
+        say: That's the 9. The 3 is a quarter of the way round.
+    - prompt: The long hand points to 6.
+      target: 30
+      mistakes:
+      - when:
+          v: 6
+        say: 'Each number is 5 minutes. 6 × 5 = 30: half past.'
+    - prompt: The long hand points to 9.
+      target: 45
+      mistakes:
+      - when:
+          v: 9
+        say: Each number is 5 minutes. 9 × 5.
+      - when:
+          v: 15
+        say: 15 minutes is the 3. The 9 is three quarters of the way round.
   items:
   - prompt: How many minutes are in 1 hour?
     answer: '60'
@@ -120,6 +152,38 @@ concepts:
       value: 30
     alt: 'Days in the months: January 31, February 28 (29 in a leap year), March 31, April 30.'
     unit: days
+  activity:
+    type: number_line
+    min: 1
+    max: 31
+    step: 1
+    start: 1
+    prompt: Use the calendar. Mark the date.
+    goals:
+    - prompt: Today is 5 March. What date is one week later?
+      target: 12
+      mistakes:
+      - when:
+          v: 6
+        say: That's tomorrow. A week is 7 days.
+      - when:
+          v: 11
+        say: 'Count 7 days on from 5: 6, 7, 8, 9, 10, 11, 12.'
+    - prompt: Today is the 20th. What date was it two weeks ago?
+      target: 6
+      mistakes:
+      - when:
+          v: 13
+        say: That's one week ago. Two weeks is 14 days.
+      - when:
+          v: 18
+        say: Two days ago, not two weeks.
+    - prompt: Mark the last day of April.
+      target: 30
+      mistakes:
+      - when:
+          v: 31
+        say: 'April has 30 days. Remember: 30 days have September, April, June and November.'
   items:
   - prompt: How many days are in a week?
     answer: '7'

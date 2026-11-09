@@ -33,6 +33,46 @@ concepts:
     - at: 1
       label: '1'
     alt: 'A number line from 0 to 1 in quarters: 1/4, 1/2, 3/4 and 1.'
+  activity:
+    type: sort
+    prompt: How big is each part?
+    bins:
+    - A half
+    - A quarter
+    - A third
+    items:
+    - label: 'A roti cut into 2 equal parts: one part'
+      bin: A half
+      clue: How many equal parts?
+      why: '2 parts: each is one half.'
+    - label: 30 minutes out of one hour
+      bin: A half
+      clue: 60 split into 2 equal parts.
+      why: One half of an hour.
+    - label: Two quarters of a cake together
+      bin: A half
+      clue: 2 of 4 equal pieces.
+      why: Two quarters make one half.
+    - label: 'A roti cut into 4 equal parts: one part'
+      bin: A quarter
+      clue: How many equal parts?
+      why: '4 parts: each is one quarter.'
+    - label: 15 minutes out of one hour
+      bin: A quarter
+      clue: 60 split into 4 equal parts.
+      why: One quarter.
+    - label: 'A chocolate cut into 3 equal pieces: one piece'
+      bin: A third
+      clue: How many equal pieces?
+      why: '3 pieces: each is one third.'
+    - label: 20 minutes out of one hour
+      bin: A third
+      clue: 60 split into 3 equal parts.
+      why: One third.
+    - label: One share when 3 friends share a mango fairly
+      bin: A third
+      clue: How many people share?
+      why: '3 shares: one third each.'
   items:
   - prompt: 'A roti is cut into 2 equal parts. Each part is:'
     options:
@@ -121,6 +161,72 @@ concepts:
       value: 20
     alt: 60 rupees shared among 3 children gives each child 20 rupees.
     unit: ₹
+  activity:
+    type: formula
+    prompt: Share ₹60 equally. Set how many people and how much each one gets.
+    inputs:
+    - name: k
+      label: People
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: e
+      label: Each gets
+      min: 0
+      max: 60
+      step: 1
+      start: 0
+      unit: ₹
+    outputs:
+    - name: used
+      label: Given out
+      expr: k*e
+      unit: ₹
+    - name: left
+      label: Left over
+      expr: 60-k*e
+      unit: ₹
+    goals:
+    - prompt: Share among 4 people, nothing left.
+      want:
+        k: 4
+        left: 0
+      mistakes:
+      - when:
+          k: 4
+          e: 10
+        say: 4 × 10 = 40. There's still ₹20 to share.
+      - when:
+          k: 4
+          e:
+          - 16
+          - 60
+        say: That's more than ₹60!
+    - prompt: Share among 5 people, nothing left.
+      want:
+        k: 5
+        left: 0
+      mistakes:
+      - when:
+          k: 5
+          e: 10
+        say: '5 × 10 = 50. ₹10 is left: give each one more.'
+    - prompt: Share among 7 people. Give as much as you can.
+      want:
+        k: 7
+        e: 8
+      mistakes:
+      - when:
+          k: 7
+          e: 9
+        say: '7 × 9 = 63: more than ₹60. Give ₹8 each; ₹4 is left over.'
+      - when:
+          k: 7
+          e:
+          - 1
+          - 7
+        say: You can still give each one more rupee.
   items:
   - prompt: ₹60 is shared equally among 3 children. How many rupees does each get?
     answer: '20'

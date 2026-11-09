@@ -37,6 +37,54 @@ concepts:
     - from: 8
       to: 12
       label: '+4'
+  activity:
+    type: formula
+    prompt: Laddoos on plates. Set plates and laddoos on each.
+    inputs:
+    - name: p
+      label: Plates
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: l
+      label: Laddoos on each
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    outputs:
+    - name: tot
+      label: Laddoos in all
+      expr: p*l
+    goals:
+    - prompt: 3 plates with 4 laddoos each.
+      want:
+        p: 3
+        l: 4
+      mistakes:
+      - when:
+          p: 4
+          l: 3
+        say: That's 4 plates of 3. Same total, but the story has 3 plates.
+    - prompt: 12 laddoos on 2 plates, the same on each.
+      want:
+        p: 2
+        tot: 12
+      mistakes:
+      - when:
+          p: 2
+          l: 10
+        say: 2 + 10 adds. 2 plates of 6 make 12.
+    - prompt: 15 laddoos on 5 plates.
+      want:
+        p: 5
+        tot: 15
+      mistakes:
+      - when:
+          p: 5
+          l: 10
+        say: 5 + 10 adds. 5 plates of how many make 15?
   items:
   - prompt: 3 plates with 4 laddoos each. How many laddoos?
     answer: '12'
@@ -125,6 +173,35 @@ concepts:
       value: 20
     alt: Two fives make 10, three fives 15 and four fives 20.
     unit: total
+  activity:
+    type: number_line
+    min: 0
+    max: 30
+    step: 1
+    start: 0
+    prompt: Skip count to find the answer. Mark it.
+    goals:
+    - prompt: 4 × 5
+      target: 20
+      mistakes:
+      - when:
+          v: 9
+        say: '4 + 5 adds. Count in 5s four times: 5, 10, 15, 20.'
+      - when:
+          v: 25
+        say: That's 5 fives. You need 4.
+    - prompt: 3 × 10
+      target: 30
+      mistakes:
+      - when:
+          v: 13
+        say: 3 + 10 adds. Count in 10s three times.
+    - prompt: 6 × 2
+      target: 12
+      mistakes:
+      - when:
+          v: 8
+        say: 6 + 2 adds. Count in 2s six times.
   items:
   - prompt: 5 × 4 = ?
     answer: '20'

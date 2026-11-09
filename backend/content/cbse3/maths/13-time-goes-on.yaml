@@ -29,6 +29,38 @@ concepts:
       - 28 to 31 days
       - 12 months
     alt: A week has 7 days, a month 28 to 31 days, and a year 12 months.
+  activity:
+    type: number_line
+    min: 1
+    max: 31
+    step: 1
+    start: 1
+    prompt: Use the calendar. Mark the date.
+    goals:
+    - prompt: Today is the 3rd. What date is one week later?
+      target: 10
+      mistakes:
+      - when:
+          v: 4
+        say: That's tomorrow. A week is 7 days.
+      - when:
+          v: 9
+        say: 'Count 7 days from the 3rd: 4, 5, 6, 7, 8, 9, 10.'
+    - prompt: The last day of January.
+      target: 31
+      mistakes:
+      - when:
+          v: 30
+        say: January has 31 days.
+    - prompt: Today is the 15th. What date was it a week ago?
+      target: 8
+      mistakes:
+      - when:
+          v: 22
+        say: That's a week later. Go back 7 days.
+      - when:
+          v: 14
+        say: That's yesterday.
   items:
   - prompt: How many days are in a week?
     answer: '7'
@@ -108,6 +140,37 @@ concepts:
     - Short hand on 3
     - It is 3 o'clock
     alt: With the long hand on 12 and the short hand on 3, it is 3 o'clock.
+  activity:
+    type: sort
+    prompt: What time is it?
+    bins:
+    - Something o'clock
+    - Half past
+    items:
+    - label: Long hand on 12, short hand on 3
+      bin: Something o'clock
+      clue: Where is the long hand?
+      why: 3 o'clock.
+    - label: Long hand on 12, short hand on 8
+      bin: Something o'clock
+      clue: The long hand is at the top.
+      why: 8 o'clock.
+    - label: Long hand on 12, short hand on 1
+      bin: Something o'clock
+      clue: The long hand points straight up.
+      why: 1 o'clock.
+    - label: Long hand on 6, short hand between 4 and 5
+      bin: Half past
+      clue: The long hand points down.
+      why: Half past 4.
+    - label: Long hand on 6, short hand between 9 and 10
+      bin: Half past
+      clue: The long hand is at the bottom.
+      why: Half past 9.
+    - label: Long hand on 6, short hand between 12 and 1
+      bin: Half past
+      clue: Long hand straight down.
+      why: Half past 12.
   items:
   - prompt: 'The short hand on a clock shows the:'
     options:

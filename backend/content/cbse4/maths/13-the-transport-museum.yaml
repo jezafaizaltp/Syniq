@@ -31,6 +31,43 @@ concepts:
       - '3'
       - '4'
     alt: A bicycle has 2 wheels, an auto-rickshaw 3, and a car 4.
+  activity:
+    type: formula
+    prompt: Museum tickets cost ₹15 each. Set how many people go.
+    inputs:
+    - name: n
+      label: People
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: tot
+      label: Total cost
+      expr: 15*n
+      unit: ₹
+    goals:
+    - prompt: The tickets cost ₹120 in all.
+      want:
+        tot: 120
+      mistakes:
+      - when:
+          n: 12
+        say: 120 ÷ 10? Each ticket is ₹15, not ₹10.
+    - prompt: The tickets cost ₹180 in all.
+      want:
+        tot: 180
+      mistakes:
+      - when:
+          n: 18
+        say: 180 ÷ 10? Each ticket is ₹15.
+    - prompt: The tickets cost ₹300 in all.
+      want:
+        tot: 300
+      mistakes:
+      - when:
+          n: 15
+        say: 15 × 15 = 225, not 300. How many 15s make 300?
   items:
   - prompt: A museum ticket costs ₹25. How much for 6 children in rupees?
     answer: '150'
@@ -114,6 +151,35 @@ concepts:
     - from: 120
       to: 150
       label: 30 min
+  activity:
+    type: number_line
+    min: 0
+    max: 180
+    step: 5
+    start: 0
+    prompt: Count up from leaving to arriving. Mark how many minutes the journey takes.
+    goals:
+    - prompt: A bus leaves at 8:00 and arrives at 9:30.
+      target: 90
+      mistakes:
+      - when:
+          v: 130
+        say: 9:30 − 8:00 like ordinary numbers gives 130, but an hour is 60 minutes.
+      - when:
+          v: 30
+        say: That's just the 30 minutes. There is a whole hour too.
+    - prompt: A train leaves at 10:15 and arrives at 11:00.
+      target: 45
+      mistakes:
+      - when:
+          v: 85
+        say: 1100 − 1015 treats an hour as 100 minutes. 10:15 to 11:00 is 45 minutes.
+    - prompt: A boat leaves at 2:30 and arrives at 5:00.
+      target: 150
+      mistakes:
+      - when:
+          v: 120
+        say: 'Count up: 2:30 to 4:30 is 2 hours, then 30 more minutes.'
   items:
   - prompt: A bus leaves at 8:00 and arrives at 11:00. How many hours is the journey?
     answer: '3'

@@ -31,6 +31,60 @@ concepts:
       - '5'
       - '5'
     alt: 345 is 3 hundreds (300), 4 tens (40) and 5 ones (5).
+  activity:
+    type: formula
+    prompt: Build a number from hundreds, tens and ones.
+    inputs:
+    - name: h
+      label: Hundreds
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: t
+      label: Tens
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    - name: o
+      label: Ones
+      min: 0
+      max: 9
+      step: 1
+      start: 0
+    outputs:
+    - name: val
+      label: The number
+      expr: 100*h+10*t+o
+    goals:
+    - prompt: Make 345.
+      want:
+        val: 345
+      mistakes:
+      - when:
+          h: 5
+          t: 4
+          o: 3
+        say: That's 543, back to front. The 3 is hundreds.
+    - prompt: Make 405.
+      want:
+        val: 405
+      mistakes:
+      - when:
+          h: 4
+          t: 5
+          o: 0
+        say: 'That''s 450. 405 has no tens: the 0 keeps the tens empty.'
+    - prompt: Make 760.
+      want:
+        val: 760
+      mistakes:
+      - when:
+          h: 7
+          t: 0
+          o: 6
+        say: That's 706. The 6 is in the tens place.
   items:
   - prompt: '3 hundreds, 4 tens and 5 ones make:'
     answer: '345'
@@ -120,6 +174,37 @@ concepts:
     - at: 532
       label: '532'
     alt: On a number line 361 comes before 498, which comes before 532, so 532 is the biggest.
+  activity:
+    type: sort
+    prompt: Which is bigger?
+    bins:
+    - First is bigger
+    - Second is bigger
+    items:
+    - label: 528 or 385
+      bin: First is bigger
+      clue: Look at the hundreds first.
+      why: 5 hundreds beat 3 hundreds.
+    - label: 703 or 699
+      bin: First is bigger
+      clue: 7 hundreds or 6 hundreds?
+      why: 703 is bigger.
+    - label: 460 or 406
+      bin: First is bigger
+      clue: Same hundreds. Look at the tens.
+      why: 6 tens beat 0 tens.
+    - label: 291 or 912
+      bin: Second is bigger
+      clue: Hundreds first.
+      why: 9 hundreds beat 2.
+    - label: 357 or 375
+      bin: Second is bigger
+      clue: Same hundreds. Now the tens.
+      why: 7 tens beat 5 tens.
+    - label: 89 or 102
+      bin: Second is bigger
+      clue: How many digits?
+      why: 102 has hundreds.
   items:
   - prompt: Which is bigger, 532 or 498?
     options:

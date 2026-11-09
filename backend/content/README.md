@@ -1066,7 +1066,7 @@ Types with one task of their own:
 | `bars` | making bar graphs from data | 2 to 6 `categories: [{label, value}]`, `max` (4 to 20), `show`: tally or table |
 | `mirror` | line symmetry | `left`: 2 to 8 rows like `"..#"` (2 to 5 wide); the child completes the right half |
 
-Every CBSE Class 5 Maths and EVS topic, every Class 6, 7, 8, Class 9 (2026-27 books) and Class 10 Maths and Science topic, every CBSE Class 11 and Class 12 Maths, Physics, Chemistry and Biology topic, and every Kerala Class 9 topic (Maths, Physics, Chemistry, Biology) has one (2026-11-08). Examples of every type are in those packs.
+Every CBSE Class 3, 4 and 5 Maths and EVS topic, every Class 6, 7, 8, Class 9 (2026-27 books) and Class 10 Maths and Science topic, every CBSE Class 11 and Class 12 Maths, Physics, Chemistry and Biology topic, and every Kerala Class 9 topic (Maths, Physics, Chemistry, Biology) has one (2026-11-08). Examples of every type are in those packs.
 
 ## Changing a pack
 

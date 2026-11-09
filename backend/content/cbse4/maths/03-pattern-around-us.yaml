@@ -26,6 +26,41 @@ concepts:
     - ←
     - ↑ again
     alt: 'An arrow pattern turns a quarter each time: up, right, down, left, then up again.'
+  activity:
+    type: number_line
+    min: 0
+    max: 20
+    step: 1
+    start: 0
+    prompt: Beads on a string follow a pattern. Count along and mark the bead number.
+    goals:
+    - prompt: Red, blue, blue, red, blue, blue … Which bead is the 3rd red?
+      target: 7
+      mistakes:
+      - when:
+          v: 3
+        say: Bead 3 is blue. The reds are beads 1, 4, 7 …
+      - when:
+          v: 9
+        say: 'Count again: the core is 3 beads, so reds come every 3.'
+    - prompt: Triangle, square, triangle, square … Which bead is the 5th triangle?
+      target: 9
+      mistakes:
+      - when:
+          v: 5
+        say: Bead 5 is the 3rd triangle. Triangles are beads 1, 3, 5, 7, 9.
+      - when:
+          v: 10
+        say: Bead 10 is a square. Triangles are the odd beads.
+    - prompt: Black, black, white, white repeats. How many beads in 4 full repeats?
+      target: 16
+      mistakes:
+      - when:
+          v: 4
+        say: That's the number of repeats. Each repeat has 4 beads.
+      - when:
+          v: 8
+        say: That's 2 repeats. You need 4.
   items:
   - prompt: 'What comes next: red, blue, red, blue, red, ...?'
     options:
@@ -137,6 +172,41 @@ concepts:
     - from: 15
       to: 20
       label: '+5'
+  activity:
+    type: number_line
+    min: 0
+    max: 40
+    step: 1
+    start: 0
+    prompt: Find the rule and mark the next number.
+    goals:
+    - prompt: 2, 5, 8, 11, …
+      target: 14
+      mistakes:
+      - when:
+          v: 13
+        say: The numbers jump by 3 each time, not 2.
+      - when:
+          v: 12
+        say: 11 + 1? The jump is 3.
+    - prompt: 35, 30, 25, …
+      target: 20
+      mistakes:
+      - when:
+          v: 30
+        say: The pattern is going down by 5.
+      - when:
+          v: 24
+        say: Each step takes away 5, not 1.
+    - prompt: 1, 2, 4, 8, …
+      target: 16
+      mistakes:
+      - when:
+          v: 10
+        say: It isn't adding 2. Each number is double the one before.
+      - when:
+          v: 12
+        say: 'Each number doubles: 8 + 8.'
   items:
   - prompt: 'What comes next: 5, 10, 15, 20, ...?'
     answer: '25'

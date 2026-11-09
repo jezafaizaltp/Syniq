@@ -27,6 +27,46 @@ concepts:
       value: 60
     alt: 'Animals counted in a park: 120 elephants, 45 tigers and 60 leopards.'
     unit: animals
+  activity:
+    type: sort
+    prompt: Compare the two numbers.
+    bins:
+    - First is bigger (>)
+    - First is smaller (<)
+    - Both the same (=)
+    items:
+    - label: 4,210 and 4,201
+      bin: First is bigger (>)
+      clue: Thousands and hundreds match. Look at the tens.
+      why: 1 ten beats 0 tens.
+    - label: 800 and 80
+      bin: First is bigger (>)
+      clue: Count the digits.
+      why: 800 has more digits.
+    - label: 1,000 and 999
+      bin: First is bigger (>)
+      clue: Which has 4 digits?
+      why: 1,000 > 999.
+    - label: 350 and 530
+      bin: First is smaller (<)
+      clue: Look at the hundreds first.
+      why: 3 hundreds < 5 hundreds.
+    - label: 45 and 54
+      bin: First is smaller (<)
+      clue: Look at the tens.
+      why: 4 tens < 5 tens.
+    - label: 999 and 1,000
+      bin: First is smaller (<)
+      clue: Which has fewer digits?
+      why: 999 < 1,000.
+    - label: Half of 50 and 25
+      bin: Both the same (=)
+      clue: Work out half of 50.
+      why: 25 = 25.
+    - label: Double 12 and 24
+      bin: Both the same (=)
+      clue: Work out double 12.
+      why: 24 = 24.
   items:
   - prompt: 'Which sign makes this true: 120 ___ 45?'
     options:
@@ -105,6 +145,43 @@ concepts:
     - × 7 days
     - = 1,050 kg in a week
     alt: An elephant eating 150 kilograms a day eats 1,050 kilograms in 7 days.
+  activity:
+    type: formula
+    prompt: An elephant eats 150 kg of food a day. Set the number of days.
+    inputs:
+    - name: d
+      label: Days
+      min: 1
+      max: 30
+      step: 1
+      start: 1
+    outputs:
+    - name: tot
+      label: Food eaten
+      expr: 150*d
+      unit: kg
+    goals:
+    - prompt: How much in one week?
+      want:
+        d: 7
+      mistakes:
+      - when:
+          d: 5
+        say: A week has 7 days, not 5.
+    - prompt: How many days to eat 1,500 kg?
+      want:
+        tot: 1500
+      mistakes:
+      - when:
+          d: 15
+        say: 1500 ÷ 100 = 15, but it eats 150 kg a day, not 100.
+    - prompt: How much in two weeks?
+      want:
+        d: 14
+      mistakes:
+      - when:
+          d: 2
+        say: 2 days isn't 2 weeks. Each week has 7 days.
   items:
   - prompt: An elephant eats 150 kg of food a day. How many kg in 2 days?
     answer: '300'

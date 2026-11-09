@@ -29,6 +29,38 @@ concepts:
       value: 4
     alt: 'Favourite fruits in a class: mango 8, banana 5, apple 3, guava 4.'
     unit: children
+  activity:
+    type: number_line
+    min: 0
+    max: 30
+    step: 1
+    start: 0
+    prompt: A bundle of tally marks is 4 lines with a 5th line across. Count the marks.
+    goals:
+    - prompt: 2 bundles and 3 single lines.
+      target: 13
+      mistakes:
+      - when:
+          v: 5
+        say: Each bundle is 5, not 1.
+      - when:
+          v: 11
+        say: Each bundle has 5 lines, counting the one across.
+    - prompt: 4 bundles.
+      target: 20
+      mistakes:
+      - when:
+          v: 4
+        say: 'Each bundle is 5: count by fives.'
+      - when:
+          v: 16
+        say: Don't forget the 5th line across each bundle.
+    - prompt: 1 bundle and 1 single line.
+      target: 6
+      mistakes:
+      - when:
+          v: 2
+        say: The bundle is 5 marks, not 1.
   items:
   - prompt: 'How many does this tally show: one bundle of five and two more lines?'
     answer: '7'
@@ -109,6 +141,56 @@ concepts:
       value: 4
     alt: 'How children come to school: walk 8, bus 6, cycle 4.'
     unit: children
+  activity:
+    type: formula
+    prompt: A pictograph. Each picture stands for k children.
+    inputs:
+    - name: k
+      label: Children per picture (key)
+      min: 1
+      max: 10
+      step: 1
+      start: 1
+    - name: p
+      label: Pictures
+      min: 0
+      max: 20
+      step: 1
+      start: 0
+    outputs:
+    - name: tot
+      label: Children shown
+      expr: k*p
+    goals:
+    - prompt: 'Key: 1 picture = 2 children. Show 14 children.'
+      want:
+        k: 2
+        tot: 14
+      mistakes:
+      - when:
+          k: 2
+          p: 14
+        say: 14 pictures would show 28 children. Each picture is 2.
+    - prompt: 6 pictures show 30 children. What is the key?
+      want:
+        p: 6
+        tot: 30
+      mistakes:
+      - when:
+          p: 6
+          k: 6
+        say: 6 × 6 = 36. Each picture stands for fewer.
+    - prompt: 'Key: 1 picture = 10 children. Show 70 children.'
+      want:
+        k: 10
+        tot: 70
+      mistakes:
+      - when:
+          k: 10
+          p:
+          - 8
+          - 20
+        say: 'Too many pictures: 8 × 10 = 80.'
   items:
   - prompt: 'Key: 1 picture = 2 children. ''Walk'' has 4 pictures. How many children walk?'
     answer: '8'
