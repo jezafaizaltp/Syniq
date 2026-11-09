@@ -73,7 +73,15 @@ services:
     command:
       - |
         while true; do
-          pg_dump -h db -U syniq -d syniq | gzip > /backups/syniq-$$(date +%Y-%m-%d).sql.gz
+          # Wait until the database takes connections, and only keep a copy that finished,
+          # so a failed run never replaces the day's good backup with an empty file.
+          until pg_isready -q -h db -U syniq -d syniq; do sleep 5; done
+          file=/backups/syniq-$$(date +%Y-%m-%d).sql.gz
+          if ! pg_dump -h db -U syniq -d syniq -Z 6 -f $$file.part || ! mv $$file.part $$file; then
+            echo "Backup failed, trying again in 10 minutes"
+            sleep 600
+            continue
+          fi
           find /backups -name 'syniq-*.sql.gz' -mtime +14 -delete
           sleep 86400
         done
