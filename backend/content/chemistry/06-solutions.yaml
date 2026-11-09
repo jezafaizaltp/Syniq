@@ -11,6 +11,14 @@ tips:
   solubility_per_100g: "Solubility is grams of solute per 100 g of solvent. Scale it to the amount of water you have."
   tyndall_true_solution: "True solutions do not scatter light; colloids do (Tyndall effect)."
   particle_size: "True solution particles are smallest (< 1 nm), colloids in between (1–100 nm), suspensions largest (> 100 nm)."
+  alloy_solid_solution: "In brass, zinc is dissolved in copper. Both are solids, so it's a solid-in-solid solution."
+  concentration_ratio: "Compare salt per gram of water: the same salt in less water is more concentrated."
+  fog_aerosol: "Fog is tiny water droplets (liquid) spread through air (gas)."
+  gas_in_liquid: "Soda water is a gas (CO₂) in a liquid (water). Brass is solid in solid; air is gas in gas."
+  gases_less_soluble_hot: "Gases dissolve less in warm water, so warm water holds less oxygen for fish."
+  solids_more_soluble_hot: "For most solids, more dissolves in hot water. It's gases that dissolve less when warm."
+  suspension_settles: "Only a suspension like muddy water settles. Salt water is a true solution; milk is a colloid."
+  universal_not_all: "Water dissolves very many substances, but not everything: oil doesn't dissolve in it."
 
 concepts:
   - code: chem9.solutions.parts
@@ -70,18 +78,21 @@ concepts:
         difficulty: 1
         hints: ["Carbon dioxide dissolved in water."]
         solution: "Soda water is CO₂ (gas) dissolved in water (liquid)."
+        mistakes: {"Brass": "gas_in_liquid", "Air": "gas_in_liquid", "Sugar syrup": "gas_in_liquid"}
       - prompt: "Why is water called the universal solvent?"
         options: ["It dissolves a very large number of substances", "It dissolves everything", "It is found everywhere", "It has no colour"]
         answer: "It dissolves a very large number of substances"
         difficulty: 2
         hints: ["Not literally everything: oil does not dissolve in water."]
         solution: "Water dissolves more substances than any other common liquid, though not all (e.g. oil)."
+        mistakes: {"It dissolves everything": "universal_not_all", "It is found everywhere": "universal_not_all"}
       - prompt: "Brass is a mixture of copper and zinc. What kind of solution is it?"
         options: ["Solid in solid", "Liquid in solid", "Gas in solid", "It is not a solution"]
         answer: "Solid in solid"
         difficulty: 2
         hints: ["Both are metals, solid at room temperature."]
         solution: "Zinc is dissolved in copper: a solid solution (an alloy)."
+        mistakes: {"Liquid in solid": "alloy_solid_solution", "It is not a solution": "alloy_solid_solution"}
       - prompt: "10 g of salt is dissolved in 90 g of water. What is the mass of the solution, in g?"
         answer: "100"
         check: "10 + 90"
@@ -192,6 +203,7 @@ concepts:
         difficulty: 1
         hints: ["Most solute for the least water."]
         solution: "10 g in 50 g of water has the most salt per gram of water."
+        mistakes: {"10 g of salt in 100 g of water": "concentration_ratio", "They are all equal": "concentration_ratio"}
       - prompt: "100 g of a 20% sugar solution is diluted by adding 100 g of water. What is the new mass percentage?"
         answer: "10"
         check: "20/(100 + 100)*100"
@@ -279,12 +291,14 @@ concepts:
         difficulty: 1
         hints: ["Sugar dissolves better in hot tea."]
         solution: "For most solids, solubility rises with temperature."
+        mistakes: {"It decreases": "solids_more_soluble_hot", "It stays the same": "solids_more_soluble_hot"}
       - prompt: "Why do fish find it harder to breathe in warm water?"
         options: ["Gases are less soluble in warm water", "Warm water has more oxygen", "Fish dislike heat", "Water vapour replaces oxygen"]
         answer: "Gases are less soluble in warm water"
         difficulty: 2
         hints: ["How does gas solubility change with temperature?"]
         solution: "Warm water holds less dissolved oxygen."
+        mistakes: {"Warm water has more oxygen": "gases_less_soluble_hot", "Fish dislike heat": "gases_less_soluble_hot"}
       - prompt: "At 30 °C, 18 g of a substance saturates 50 g of water. What is its solubility, in g per 100 g of water?"
         answer: "36"
         check: "18*100/50"
@@ -360,6 +374,7 @@ concepts:
         difficulty: 1
         hints: ["Large particles."]
         solution: "Muddy water is a suspension; its particles are large and settle."
+        mistakes: {"Salt water": "suspension_settles", "Milk": "suspension_settles"}
       - prompt: "Particles of a colloid have a size of about:"
         options: ["1 to 100 nm", "Less than 1 nm", "More than 100 nm", "More than 1 mm"]
         answer: "1 to 100 nm"
@@ -380,6 +395,7 @@ concepts:
         difficulty: 3
         hints: ["Tiny water droplets in air."]
         solution: "Fog is water droplets dispersed in air: liquid in gas (an aerosol)."
+        mistakes: {"Gas in a liquid": "fog_aerosol", "Solid in a gas": "fog_aerosol"}
       - prompt: "A particle is 50 nm across. How many such particles would fit across 1 μm (1000 nm)?"
         answer: "20"
         check: "1000/50"

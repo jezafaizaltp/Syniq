@@ -11,6 +11,13 @@ tips:
   missed_right_angle: "The angle standing on a diameter is 90°. Use it with the angle sum of 180°."
   opposite_angles_cyclic: "Opposite angles of a quadrilateral drawn inside a circle add up to 180°."
   arc_not_area: "That is the arc length (part of 2πr). The sector's area is the same part of πr²."
+  arc_45: "45° is one eighth of the circle: 44 ÷ 8."
+  arc_fraction: "A 90° arc is a quarter of the circumference."
+  arc_to_angle: "The arc's share of the circumference is its share of 360°: 11 of 44."
+  diameter_longest: "The closer a chord is to the centre, the longer it is. Through the centre, it's the diameter."
+  perpendicular_bisects: "The perpendicular from the centre always cuts a chord exactly in half."
+  same_arc_equal: "Angles at the circle on the same arc are equal: both are half the centre angle."
+  sector_fraction: "A sector's fraction is its angle over 360: 90/360."
 
 concepts:
   - code: math9.circparts.chords
@@ -82,12 +89,14 @@ concepts:
         difficulty: 1
         hints: ["The circle is symmetric about this line."]
         solution: "The circle looks the same on both sides of the perpendicular, so it meets the chord at its middle."
+        mistakes: {"cuts the chord in the ratio 1 : 2": "perpendicular_bisects", "is always as long as the chord": "perpendicular_bisects"}
       - prompt: "A chord AB is 8 cm long. The perpendicular from the centre meets it at M. How long is AM, in cm?"
         answer: "4"
         check: "8/2"
         difficulty: 1
         hints: ["M is the middle of AB."]
         solution: "M is the midpoint, so AM = 8 ÷ 2 = 4 cm."
+        mistakes: {"8": "half_chord", "16": "half_chord"}
       - prompt: "A circle has a radius of 5 cm. A chord is 3 cm from the centre. How long is the chord, in cm?"
         answer: "8"
         check: "2*sqrt(5**2 - 3**2)"
@@ -101,6 +110,7 @@ concepts:
         difficulty: 2
         hints: ["The closer a chord is to the centre, the longer it is."]
         solution: "Step 1: Half the chord = √(r² − d²) gets bigger as d gets smaller. Step 2: It is biggest when d = 0, through the centre: the diameter."
+        mistakes: {"A chord near the edge": "diameter_longest", "All chords are the same length": "diameter_longest"}
       - prompt: "A circle has a radius of 13 cm and a chord 24 cm long. How far is the chord from the centre, in cm?"
         answer: "5"
         check: "sqrt(13**2 - 12**2)"
@@ -196,6 +206,7 @@ concepts:
         difficulty: 1
         hints: ["A diameter makes 180° at the centre."]
         solution: "Step 1: The diameter's angle at the centre is 180°. Step 2: Half of that is 90°."
+        mistakes: {"180": "semicircle_right", "45": "semicircle_right"}
       - prompt: "An angle at the circle, standing on an arc, is 35°. What angle does the same arc make at the centre, in degrees?"
         answer: "70"
         check: "2*35"
@@ -216,6 +227,7 @@ concepts:
         difficulty: 3
         hints: ["Each is half of the same centre angle."]
         solution: "Both angles are half of the arc's angle at the centre, so they are equal."
+        mistakes: {"The point nearer the arc makes a bigger angle": "same_arc_equal", "The angles add up to 180°": "same_arc_equal"}
       - prompt: "A quadrilateral has all four corners on a circle. One of its angles is 110°. What is the opposite angle, in degrees?"
         answer: "70"
         check: "180 - 110"
@@ -284,18 +296,21 @@ concepts:
         difficulty: 1
         hints: ["A full turn is 360°."]
         solution: "90/360 = 1/4"
+        mistakes: {"1/2": "sector_fraction", "1/90": "sector_fraction"}
       - prompt: "A circle has a circumference of 44 cm. How long is the arc of a 90° sector, in cm?"
         answer: "11"
         check: "44*90/360"
         difficulty: 1
         hints: ["90° is a quarter of the circle."]
         solution: "44 ÷ 4 = 11 cm"
+        mistakes: {"22": "arc_fraction", "176": "arc_fraction"}
       - prompt: "A circle has a radius of 7 cm. Using π ≈ 22/7, what is the length of an arc with a 45° angle at the centre, in cm?"
         answer: "5.5"
         check: "(45/360)*2*(22/7)*7"
         difficulty: 2
         hints: ["The circumference is 44 cm.", "45° is 1/8 of the circle."]
         solution: "Step 1: Circumference = 44 cm. Step 2: 44 ÷ 8 = 5.5 cm."
+        mistakes: {"11": "arc_45", "2.75": "radius_diameter"}
       - prompt: "A circle has a radius of 14 cm. Using π ≈ 22/7, what is the area of a 90° sector, in cm²?"
         answer: "154"
         check: "(90/360)*(22/7)*14**2"
@@ -324,3 +339,4 @@ concepts:
         difficulty: 3
         hints: ["The circumference is 44 cm.", "11 is what fraction of 44?"]
         solution: "Step 1: 11/44 = 1/4. Step 2: 1/4 × 360 = 90°."
+        mistakes: {"45": "arc_to_angle", "180": "arc_to_angle"}

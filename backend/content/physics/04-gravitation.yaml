@@ -12,6 +12,11 @@ tips:
   moon_sixth: "On the Moon, g is about one sixth of the Earth's, so weight is divided by 6."
   g_sign: "Going up, a thrown body slows down by g every second until its velocity is zero."
   big_g_small_g: "G is the universal constant (6.67 × 10⁻¹¹ N m²/kg²), the same everywhere. g is the acceleration due to gravity, about 9.8 m/s² on Earth."
+  force_mass_direct: "Force is proportional to each mass: double one mass, double the force."
+  free_fall_speed: "v = g × t from rest: 10 × 3."
+  g_poles: "The Earth is flatter at the poles, so you are nearer its centre and g is a little bigger."
+  gravity_holds_moon: "Earth's gravity pulls the Moon into its curved orbit."
+  speed_not_distance: "That is how far it falls (½gt²). The question asks for its speed: v = gt."
 
 concepts:
   - code: phy9.gravity.universal_law
@@ -100,12 +105,14 @@ concepts:
         difficulty: 1
         hints: ["Force is proportional to each mass."]
         solution: "Doubling one mass doubles the force: 20 N."
+        mistakes: {"40": "force_mass_direct", "5": "force_mass_direct"}
       - prompt: "Which force keeps the Moon moving in its orbit around the Earth?"
         options: ["The Earth's gravitational pull", "Magnetism", "Friction", "The Sun's light"]
         answer: "The Earth's gravitational pull"
         difficulty: 1
         hints: ["The same force that makes an apple fall."]
         solution: "The Earth's gravity pulls the Moon towards it, bending its path into an orbit."
+        mistakes: {"Magnetism": "gravity_holds_moon", "The Sun's light": "gravity_holds_moon"}
       - prompt: "Two masses attract with 36 N. The distance between them is made 3 times larger. What is the new force, in N?"
         answer: "4"
         check: "36/3**2"
@@ -224,6 +231,7 @@ concepts:
         difficulty: 3
         hints: ["g = GM/R². Where is the Earth's radius smallest?"]
         solution: "The Earth is slightly flattened at the poles, so R is smaller there and g is larger."
+        mistakes: {"At the equator": "g_poles", "It is the same everywhere": "g_poles"}
       - prompt: "A 30 kg child weighs 48 N on the Moon. What is g on the Moon, in m/s²?"
         answer: "1.6"
         check: "Rational(48, 30)"
@@ -300,6 +308,7 @@ concepts:
         difficulty: 1
         hints: ["v = u + gt."]
         solution: "v = 0 + 10 × 3 = 30 m/s"
+        mistakes: {"13": "free_fall_speed", "45": "speed_not_distance"}
       - prompt: "A stone is dropped from the top of a building and reaches the ground in 2 s. How tall is the building, in m? (g = 10 m/s²)"
         answer: "20"
         check: "Rational(1, 2)*10*2**2"

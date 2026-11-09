@@ -15,6 +15,10 @@ tips:
   both_ends: "A prism has two equal ends, so count the end shape twice."
   scale_volume: "Volume uses three lengths, so doubling every edge multiplies it by 2 × 2 × 2 = 8, and tripling by 3 × 3 × 3 = 27."
   scale_area: "Area uses two lengths, so doubling every edge multiplies the area by 2 × 2 = 4."
+  depth_from_volume: "Depth = volume ÷ base area. Find the base area first."
+  end_area_given: "The area of the end is already given, so don't halve it again. Multiply it by the length."
+  prism_faces: "A triangular prism has 2 triangle ends and 3 rectangle sides: 5 faces."
+  prism_volume: "Prism volume = area of the end × length. Multiply, don't add."
 
 concepts:
   - code: math9.prism.volume
@@ -89,6 +93,7 @@ concepts:
         difficulty: 2
         hints: ["Volume = end area × length."]
         solution: "12 × 10 = 120 cm³"
+        mistakes: {"22": "prism_volume", "60": "end_area_given"}
       - prompt: "A triangular prism's end is a right triangle with shorter sides of 3 cm and 4 cm. The prism is 10 cm long. What is its volume, in cm³?"
         answer: "60"
         check: "(3*4/2)*10"
@@ -109,6 +114,7 @@ concepts:
         difficulty: 3
         hints: ["Base area = 2 × 1.5 = 3 m².", "Depth = volume ÷ base area."]
         solution: "Step 1: Base area = 3 m². Step 2: Depth = 6 ÷ 3 = 2 m."
+        mistakes: {"18": "depth_from_volume", "1.5": "depth_from_volume"}
       - prompt: "A fish tank is 50 cm long, 40 cm wide and 30 cm high. How many litres does it hold when full? (1 litre = 1000 cm³)"
         answer: "60"
         check: "50*40*30/1000"
@@ -188,6 +194,7 @@ concepts:
         difficulty: 1
         hints: ["Two triangle ends, and one rectangle for each side of the triangle."]
         solution: "2 triangular ends + 3 rectangles = 5 faces"
+        mistakes: {"6": "prism_faces", "3": "prism_faces", "9": "prism_faces"}
       - prompt: "A cube has edges of 3 cm. What is its total surface area, in cm²?"
         answer: "54"
         check: "6*3**2"

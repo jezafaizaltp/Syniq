@@ -18,6 +18,12 @@ tips:
   compare_squares: "To compare, square both numbers: (2√3)² = 4 × 3 = 12 and (3√2)² = 9 × 2 = 18."
   half_base_height: "The area of a triangle is half of base × height. Don't forget the half."
   over_ten: "Recurring decimals go over 9s, not 10s: one repeating digit over 9, two repeating digits over 99."
+  area_equals_perimeter: "Set s × s = 4s and divide both sides by s."
+  perfect_square_check: "A perfect square is a whole number times itself: 9 × 9 = 81. 50, 27 and 90 aren't."
+  recurring_subtract: "Write 10x = 7.777… and subtract x = 0.777…: the repeating part cancels."
+  root_estimate: "Estimate both roots first: √3 ≈ 1.73 and √5 ≈ 2.24. Pick the number between them."
+  spiral_count: "Each triangle adds 1 under the root: √2, then √3, then √4. Count three triangles."
+  terminating_denominator: "Fractions whose bottom has only 2s and 5s stop. A bottom of 3 makes the digits repeat."
 
 concepts:
   - code: math9.newnum.square_roots
@@ -86,6 +92,7 @@ concepts:
         difficulty: 1
         hints: ["A perfect square is a whole number times itself.", "Try 9 × 9."]
         solution: "Step 1: 9 × 9 = 81. Step 2: 50, 27 and 90 are not whole numbers times themselves."
+        mistakes: {"50": "perfect_square_check", "27": "perfect_square_check"}
       - prompt: "What is √1.44? Decimals are fine."
         answer: "1.2"
         check: "sqrt(144/100)"
@@ -106,6 +113,7 @@ concepts:
         difficulty: 2
         hints: ["With side s, the area is s × s and the perimeter is 4 × s.", "s × s = 4 × s. Divide both sides by s."]
         solution: "Step 1: s × s = 4s. Step 2: Dividing by s, s = 4. Step 3: Check: area 16 and perimeter 16."
+        mistakes: {"16": "area_equals_perimeter", "2": "area_equals_perimeter"}
       - prompt: "A square floor has an area of 6.25 m². How long is one side, in metres?"
         answer: "2.5"
         check: "sqrt(625/100)"
@@ -218,6 +226,7 @@ concepts:
         hints: ["The 1st triangle's longest side is √2.", "The 2nd is √(2 + 1) = √3. Keep going."]
         solution: "Step 1: 1st: √(1 + 1) = √2. Step 2: 2nd: √(2 + 1) = √3. Step 3: 3rd: √(3 + 1) = √4 = 2 cm."
 
+        mistakes: {"√3": "spiral_count", "√5": "spiral_count"}
   - code: math9.newnum.approximations
     title: Estimating square roots
     after: [math9.newnum.irrational_lengths]
@@ -290,6 +299,7 @@ concepts:
         difficulty: 2
         hints: ["√3 ≈ 1.732 and √5 ≈ 2.236."]
         solution: "Step 1: √3 ≈ 1.732 and √5 ≈ 2.236. Step 2: Only 1.9 is between them."
+        mistakes: {"1.6": "root_estimate", "2.4": "root_estimate", "1.7": "root_estimate"}
       - prompt: "A steel wire 4 m long is bent into a square. Using √2 ≈ 1.414, how long is the square's diagonal, in metres?"
         answer: "1.414"
         check: "(4/4)*1.414"
@@ -377,6 +387,7 @@ concepts:
         difficulty: 1
         hints: ["Divide each: 1 ÷ 4 = 0.25 stops.", "Try 1 ÷ 3."]
         solution: "Step 1: 1/4 = 0.25, 1/2 = 0.5 and 1/5 = 0.2 stop. Step 2: 1/3 = 0.333… goes on for ever."
+        mistakes: {"1/4": "terminating_denominator", "1/5": "terminating_denominator"}
       - prompt: "Write 0.555… (the 5 repeats for ever) as a fraction. Type it like 2/3."
         answer: "5/9"
         check: "nsimplify(0.555555555555556)"
@@ -418,3 +429,4 @@ concepts:
         difficulty: 3
         hints: ["10x = 7.777….", "9x = 10x − x."]
         solution: "Step 1: 10x = 7.777…. Step 2: 10x − x = 7. Step 3: So 9x = 7."
+        mistakes: {"0.777": "recurring_subtract", "6.993": "recurring_subtract"}
