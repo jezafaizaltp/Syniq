@@ -271,7 +271,8 @@ def test_lesson_offers_the_activity_with_the_topic():
     assert client.post("/learn/events", json={"kind": "score"}, headers=me).status_code == 422
 
 
-def test_topics_without_an_activity_send_none():
+def test_every_pack_topic_has_an_activity():
+    # Only the built-in demo chapter (math9.*) is left without one; it sends None.
     with SessionLocal() as db:
-        c = db.scalars(select(Concept).where(Concept.code.like("mal9.%"))).first()
-        assert c.activity is None
+        without = [c.code for c in db.scalars(select(Concept)) if c.activity is None]
+    assert without and all(code.startswith("math9.") for code in without), without
