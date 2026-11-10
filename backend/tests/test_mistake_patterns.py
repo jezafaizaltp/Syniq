@@ -250,3 +250,28 @@ def test_due_review_from_another_chapter_comes_into_the_sitting():
     # Reviewed once this sitting: back to today's chapter.
     after = client.post("/learn/next", json={"chapter_id": second, "current_concept_id": old_id}, headers=h).json()
     assert after["concept"]["id"] != old_id
+
+
+def test_secure_chapter_stretches_with_hardest_questions_first():
+    from app.engine.rules import ConceptState, decide
+
+    a = ConceptState(concept_id=1, order=0, p_known=0.99, attempts=6, stretch_left=2)
+    b = ConceptState(concept_id=2, order=1, p_known=0.99, attempts=6)
+    action = decide([a, b], {1: a, 2: b}, T0)
+    assert action.rule_id == "R7_stretch" and action.concept_id == 1 and action.difficulty == 3
+    a.stretch_left = 0
+    assert decide([a, b], {1: a, 2: b}, T0).kind == "chapter_complete"
+
+
+def test_stretch_item_is_a_hardest_question_not_yet_answered_right():
+    sid = new_student("sneha.mp@demo.syniq")
+    cid, items = items_of("math9.pairs.sum_difference")
+    top = max(i.difficulty for i in items)
+    with SessionLocal() as db:
+        student = db.get(User, sid)
+        first = learning.pick_stretch_item(db, sid, cid)
+        assert first.difficulty == top
+        learning.record_attempt(db, student, first, first.answer, 0, None, None)
+        second = learning.pick_stretch_item(db, sid, cid)
+        assert second is None or (second.id != first.id and second.difficulty == top)
+        assert learning.stretch_counts(db, sid, [cid])[cid] == sum(1 for i in items if i.difficulty == top) - 1

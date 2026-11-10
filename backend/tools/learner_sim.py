@@ -42,9 +42,28 @@ CHAPTERS = [("math", 1), ("phy", 1), ("math", 2), ("bio", 1), ("ss", 1)]
 SITTINGS = 15  # lab periods
 STEPS = 30  # explanations read + questions answered per period
 DAYS_BETWEEN = [1, 2, 1, 3]  # school week rhythm, repeating
-DELAYED_DAYS = 14
+DELAYED_DAYS = 14  # retention test this long after the last period
 # SIM_TAPS=0 turns off the learners' "did this help?" answers.
-TAPS = os.environ.get("SIM_TAPS", "1") != "0"  # retention test this long after the last period
+TAPS = os.environ.get("SIM_TAPS", "1") != "0"
+
+# SIM_TERM=1: a whole term. Ten chapters taught in order, 40 lab periods; each subject's chapter moves on
+# every third time that subject comes round, as a teacher's plan would.
+TERM = os.environ.get("SIM_TERM") == "1"
+if TERM:
+    CHAPTERS = [("math", 1), ("math", 2), ("math", 3), ("math", 4), ("phy", 1), ("phy", 2), ("chem", 1), ("chem", 2),
+                ("bio", 1), ("ss", 1)]
+    SITTINGS = 40
+SUBJECT_ROUND = ["math", "phy", "chem", "math", "bio", "ss"]
+
+
+def todays_chapter(period: int) -> int:
+    """Index into CHAPTERS of the chapter the class works on in this period."""
+    if not TERM:
+        return period % len(CHAPTERS)
+    subject = SUBJECT_ROUND[period % len(SUBJECT_ROUND)]
+    visit = sum(1 for p in range(period) if SUBJECT_ROUND[p % len(SUBJECT_ROUND)] == subject)
+    mine = [i for i, (code, _) in enumerate(CHAPTERS) if code == subject]
+    return mine[min(visit // 3, len(mine) - 1)]
 
 
 @dataclass
@@ -61,6 +80,7 @@ class Kind:
     focus: int  # questions in a period before attention starts to drop
     hints_below: float  # asks for a hint when they feel less sure than this
     takes_breaks: bool = True
+    absent: float = 0.0  # chance of missing a lab period
 
 
 KINDS = [
@@ -75,6 +95,10 @@ KINDS = [
     # A control: every way of explaining works equally. Adapting can't help here; it must not hurt.
     Kind("any_way", "Control", "control learner: every way of explaining works the same",
          0.25, {s: 0.20 for s in STYLES}, 0.08, 0.10, 25, 0.3),
+    Kind("strong", "Ammu", "already strong: knows much of it and learns fast from any explanation",
+         0.60, {"text": 0.40, "visual": 0.35, "step_by_step": 0.30, "real_world": 0.35}, 0.04, 0.05, 40, 0.0),
+    Kind("absent", "Rahul", "learns like the control, but misses about 4 periods in 10",
+         0.25, {s: 0.20 for s in STYLES}, 0.08, 0.10, 25, 0.3, absent=0.4),
 ]
 
 
@@ -258,8 +282,18 @@ def run(seed: int) -> dict:
         secured: set = set()
         day = 0.0
         email = f"sim-{kind.key}@demo.syniq"
+        absent_rng = random.Random(f"{seed}-{kind.key}-absent")
         for period in range(SITTINGS):
-            ch_id, _ = chapters[period % len(chapters)]
+            today = todays_chapter(period)
+            ch_id, _ = chapters[today]
+            if absent_rng.random() < kind.absent:
+                log["missed"] = log.get("missed", 0) + 1
+                gap = DAYS_BETWEEN[period % len(DAYS_BETWEEN)]
+                day += gap
+                clock["offset"] = timedelta(days=day)
+                syn.rest_days(gap)
+                fixed.rest_days(gap)
+                continue
             token = client.post("/auth/login", json={"email": email, "password": DEMO_PASSWORD}).json()["token"]
             h = {"Authorization": f"Bearer {token}"}
             current = None
@@ -280,7 +314,7 @@ def run(seed: int) -> dict:
                     ch_idx = (ch_idx + 1) % len(ch_order)
                     ch_id = ch_order[ch_idx]
                     current = None
-                    if ch_idx == ch_order.index(chapters[period % len(chapters)][0]):
+                    if ch_idx == today:
                         break
                     continue
                 cid = s["concept"]["id"]
@@ -288,6 +322,8 @@ def run(seed: int) -> dict:
                 steps += 1
                 per_concept_steps[cid] = per_concept_steps.get(cid, 0) + 1
                 if s["kind"] == "explain":
+                    run = log["explain_run"] = log.get("explain_run", 0) + 1
+                    log["max_explain_run"] = max(log.get("max_explain_run", 0), run)
                     style = s["explanation"]["style"]
                     syn.read(cid, style)
                     # About half the time they answer "did this way help?", and not always accurately.
@@ -298,6 +334,7 @@ def run(seed: int) -> dict:
                     if rule == "R4_introduce":
                         log.setdefault("first_styles", []).append(style)
                     continue
+                log["explain_run"] = 0
                 item_pub = s["item"]
                 if not item_pub:
                     log["stuck"].append(f"no question for {concept_title[cid]}")
@@ -308,6 +345,8 @@ def run(seed: int) -> dict:
                 seen_items.add(item.id)
                 watch = bool(item_pub.get("watch_out"))
                 log["watch_out"] += watch
+                if syn.topic(cid).k > 0.9:
+                    log["known_answers"] = log.get("known_answers", 0) + 1
                 resp, hints = syn.answer(item, cid, item_pub.get("options"), watch)
                 for n in range(1, hints + 1):
                     client.get(f"/items/{item.id}/hints/{n}", headers=h)
@@ -332,7 +371,7 @@ def run(seed: int) -> dict:
             log["idle"] = log.get("idle", 0) + (STEPS - steps)
 
             # The fixed version: same child, same period, same chapter, same number of steps.
-            run_fixed_period(fixed, chapters[period % len(chapters)][0], concept_ids, items_by_concept, fixed_state)
+            run_fixed_period(fixed, chapters[today][0], concept_ids, items_by_concept, fixed_state)
 
             gap = DAYS_BETWEEN[period % len(DAYS_BETWEEN)]
             day += gap
@@ -377,6 +416,11 @@ def run(seed: int) -> dict:
             "rules": log["rules"],
             "topics_reached": len(est),
             "idle_steps": log.get("idle", 0),
+            "missed": log.get("missed", 0),
+            "known_answers": log.get("known_answers", 0),
+            "max_explain_run": log.get("max_explain_run", 0),
+            "other_reviews": log["rules"].get("R3_other_chapter", 0),
+            "reviews": log["rules"].get("R3_spaced_review", 0),
             "secure_end": sum(1 for p, n in est.values() if mastery.is_secure(p, n)),
         }
     return out
@@ -423,6 +467,8 @@ def summarise(paths: list[str]) -> None:
               f"{round(100 * m('share_best_style_late'))}% in the second half, {round(100 * m('share_best_first'))}% of first explanations of a topic")
         print(f"  questions {m('questions')}, right {m('right_pct')}%, topics secured {m('topics_secured')}/{rs[0]['topics']}, "
               f"secured too early (hidden knowledge under 70%) {m('false_secure')}")
+        print(f"  periods missed {m('missed')}, questions on topics already known well {m('known_answers')}, "
+              f"reviews {m('reviews')} in-chapter + {m('other_reviews')} other chapters, most explanations in a row {m('max_explain_run')}")
         print(f"  steps left unused because SYNiq had nothing more to give {m('idle_steps')} of {SITTINGS * STEPS}")
         print(f"  repeats within a period {m('repeats_in_period')}, watch-out nudges {m('watch_out')}, breaks {m('breaks')}")
         stuck = [s for x in rs for s in x["stuck"]]

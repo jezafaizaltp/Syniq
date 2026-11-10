@@ -17,7 +17,7 @@ from datetime import datetime
 from . import methods
 from .mastery import is_secure
 
-RULES_VERSION = "2026.11-2"
+RULES_VERSION = "2026.11-3"
 
 STYLES = methods.STYLES
 STRUGGLE_STREAK = 2
@@ -39,6 +39,8 @@ class ConceptState:
     format_stats: dict = field(default_factory=dict)
     # What other topics and similar learners say about each method (engine/methods.py).
     method_prior: methods.Prior | None = None
+    # Hardest questions of this topic not yet answered right: stretch practice once it is secure.
+    stretch_left: int = 0
 
 
 @dataclass
@@ -150,6 +152,18 @@ def decide(
         )
 
     if current is None:
+        # R7: every topic is secure, but some of the hardest questions haven't been answered right yet.
+        # Stretch with those before calling the chapter done: secure is not the same as the hardest level.
+        stretch = next((s for s in ordered if s.stretch_left and s.concept_id not in set_aside), None)
+        if stretch:
+            return Action(
+                kind="practice",
+                concept_id=stretch.concept_id,
+                rule_id="R7_stretch",
+                reason="Every topic here is secure. Here are some harder questions to stretch you.",
+                difficulty=3,
+                evidence={"hard_questions_left": stretch.stretch_left},
+            )
         return Action(
             kind="chapter_complete",
             concept_id=None,
