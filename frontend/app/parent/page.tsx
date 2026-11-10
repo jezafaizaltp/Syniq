@@ -91,7 +91,13 @@ export default function Parent() {
       {children.map((c) => (
         <section key={c.id} className="card">
           <h2>{c.name}</h2>
-          {progress[c.id] && (
+          {!c.consent.core_learning && (
+            <div className="feedback note" role="status">
+              <p>{t("parent.needs_consent", { name: c.name })}</p>
+              <button onClick={() => setConsent(c.id, "core_learning", true)}>{t("parent.give_consent", { name: c.name })}</button>
+            </div>
+          )}
+          {c.consent.core_learning && progress[c.id] && (
             <>
               <h3>{t("parent.progress")}</h3>
               <p className="muted">

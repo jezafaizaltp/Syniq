@@ -25,6 +25,7 @@ export type Settings = {
   auto_support?: Record<string, { reason: string; since: string }>;
   auto_off?: string[];
   hindi_course?: "a" | "b";
+  welcome_seen?: boolean;
 };
 
 /** Support for sight, hearing, speech, movement or a calm routine: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */

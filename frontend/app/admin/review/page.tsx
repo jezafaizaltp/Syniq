@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api, ApiError, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
+import { BOARD_WORDS, classWords } from "@/lib/subjects";
 
 type SubjectRow = { id: number; name: string; grade: number; syllabus: string; questions: number };
 type Question = {
@@ -28,12 +29,7 @@ type Sheet = {
 type Fix = { id: number; subject: string; chapter: string; topic: string; prompt: string; answer: string; note: string };
 type UploadResult = { ok: number; to_fix: number; not_checked: number; unknown_ids: string[] };
 
-const BOARD_WORDS: Record<string, string> = { kerala_scert: "Kerala SCERT", cbse: "CBSE" };
 const LEVEL_WORDS = ["", "Easy", "Medium", "Harder"];
-
-function classWords(grade: number) {
-  return grade === -1 ? "LKG" : grade === 0 ? "UKG" : `Class ${grade}`;
-}
 
 function csvCell(v: string | number) {
   const s = String(v);

@@ -133,3 +133,41 @@ def test_no_tip_tag_defined_twice_with_different_text():
                 clashes.append(f"{tag}: {seen[tag][0]} and {rel}")
             seen.setdefault(tag, (rel, tip))
     assert clashes == []
+
+
+# Tips that name the answer on purpose: a memory trick, a method that works the answer
+# out in front of the learner, or a word root they still have to spot. Keep this list short.
+TIPS_ALLOWED_TO_NAME_THE_ANSWER = {
+    "axis_point_zero", "b11_relative_growth", "c10ss_rabi_kharif", "c11_third_law", "c5_directions",
+    "h2_baingani", "m4_minutes_count", "solubility_per_100g", "t7_sun_east",
+}
+
+
+def test_tips_point_the_way_without_stating_the_answer():
+    """Mistake principle: a tip shown after a wrong answer must not just hand over the right one."""
+    import re
+
+    packs = content_packs.read_packs()
+    tips: dict[str, str] = {}
+    for _, pack in packs:
+        for tag, tip in (pack.get("tips") or {}).items():
+            tips.setdefault(tag, tip)
+    giveaways = set()
+    for path, pack in packs:
+        rel = path.relative_to(content_packs.CONTENT_DIR)
+        for c in pack["concepts"]:
+            for item in c["items"]:
+                answer = re.sub(r"\(.*?\)", "", str(item["answer"])).strip().lower()
+                for tag in (item.get("mistakes") or {}).values():
+                    if tag in TIPS_ALLOWED_TO_NAME_THE_ANSWER:
+                        continue
+                    tip = tips.get(tag, "").lower()
+                    if re.fullmatch(r"\d{2,}", answer):
+                        named = re.search(rf"(?<![\d.,]){answer}(?!\d)", tip)
+                    elif len(answer) >= 4 and not re.fullmatch(r"[\d.,/ −-]+", answer):
+                        named = re.search(rf"(?<!\w){re.escape(answer)}(?!\w)", tip)
+                    else:
+                        named = None
+                    if named:
+                        giveaways.add(f"{rel}: {tag} names '{item['answer']}'")
+    assert sorted(giveaways) == []

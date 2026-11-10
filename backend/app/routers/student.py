@@ -31,6 +31,7 @@ ALLOWED_SETTINGS = {
     "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer, calm, motor
     "auto_off": list,  # noticed modes the student has switched off
     "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
+    "welcome_seen": bool,  # the first-day welcome card has been read
 }
 
 
@@ -56,7 +57,9 @@ def list_subjects(db: DbSession = Depends(get_db), user: User = Depends(current_
     out = []
     for s in subjects:
         n = len(visible_chapters(db, user, s.id))
-        out.append({"id": s.id, "code": s.code, "name": s.name, "language": s.language, "chapters": n})
+        out.append(
+            {"id": s.id, "code": s.code, "name": s.name, "language": s.language, "chapters": n, "grade": s.grade, "syllabus": s.syllabus}
+        )
     return out
 
 

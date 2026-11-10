@@ -109,7 +109,7 @@ const KIND_HEADINGS: Record<string, Key> = {
 };
 
 export default function Learn() {
-  const { me, loading, t } = useSession();
+  const { me, loading, t, saveSettings } = useSession();
   const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [subject, setSubject] = useState<Subject | null>(null);
@@ -227,6 +227,17 @@ export default function Learn() {
       </div>
       {!subject ? (
         <>
+          {me.role === "student" && !me.settings?.welcome_seen && (
+            <div className="card welcome-card">
+              <h2>{t("welcome.title")}</h2>
+              <ul>
+                <li>{t("welcome.no_marks")}</li>
+                <li>{t("welcome.mistakes")}</li>
+                <li>{t("welcome.pace")}</li>
+              </ul>
+              <button onClick={() => saveSettings({ welcome_seen: true }).catch(() => undefined)}>{t("welcome.ok")}</button>
+            </div>
+          )}
           {(due || carryOn) && (
             <div className="card next-step-card">
               <h2>{t("next.title")}</h2>
@@ -306,7 +317,7 @@ export default function Learn() {
           <ul className="list card chapters">
             {chapters.map((c) => (
               <li key={c.id}>
-                <span className="chapter-title">
+                <span className="chapter-title" onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>
                   <span className="chapter-num" aria-hidden="true">
                     {c.number}
                   </span>
@@ -859,10 +870,13 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
               {result && (
                 <>
-                  {!result.correct && result.your_answer && result.right_answer && (
-                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture} />
+                  {!result.correct && result.your_answer && result.right_answer ? (
+                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture}>
+                      <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
+                    </Mistake>
+                  ) : (
+                    <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   )}
-                  <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   {result.next_step && <NextStepLine step={result.next_step} />}
                   {result.offer_break && (
                     <div className="feedback note break-offer">
