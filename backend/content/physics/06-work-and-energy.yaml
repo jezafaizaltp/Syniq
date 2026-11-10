@@ -5,6 +5,11 @@ chapter: 6
 title: Work and Energy
 
 tips:
+  add_each_part: "Find the work for each part with its own force and distance, then add."
+  lift_then_carry: "Against gravity, only the upward part of the motion counts. Moving along a level floor is at right angles to gravity."
+  orbit_right_angle: "Gravity pulls towards the Earth's centre while the satellite moves along the circle. What is the angle between the force and the motion?"
+  elastic_store: "Where is the energy stored before the arrow is let go, and what does the arrow have once it flies?"
+  minutes_to_hours: "Units (kWh) need power in kilowatts and time in hours. Change minutes to hours and add up all the days."
   work_needs_displacement: "Work is done only when the force moves something in the direction of the force: W = F × s. No movement, no work."
   work_divided: "Work = force × displacement. Multiply, don't divide."
   power_per_time: "Power = work ÷ time. Divide the work by the time taken."
@@ -100,6 +105,27 @@ concepts:
         hints: ["The force is up; the motion is along the road."]
         solution: "Force and displacement are perpendicular, so no work is done by that force."
         mistakes: {"Equal to the bag's weight × distance": work_needs_displacement}
+      - prompt: "A 50 kg box is lifted 2 m onto a cart and then pushed 10 m along a level floor. How much work is done against gravity in all, in J? (g = 10 m/s²)"
+        answer: "1000"
+        check: "50*10*2"
+        difficulty: 3
+        hints: ["Which part of the motion is against gravity?", "Work against gravity = mgh."]
+        solution: "Step 1: Lifting: 50 × 10 × 2 = 1000 J. Step 2: The level part is at right angles to gravity, so no work against gravity. Step 3: Total = 1000 J."
+        mistakes: {"6000": lift_then_carry, "100": pe_mgh, "5000": lift_then_carry}
+      - prompt: "A force of 30 N moves a trolley 4 m. Then a force of 20 N moves it a further 6 m in the same direction. How much work is done in all, in J?"
+        answer: "240"
+        check: "30*4 + 20*6"
+        difficulty: 2
+        hints: ["Work for the first part = 30 × 4.", "Add the work for the second part."]
+        solution: "Step 1: 30 × 4 = 120 J. Step 2: 20 × 6 = 120 J. Step 3: Total = 240 J."
+        mistakes: {"500": add_each_part, "120": add_each_part, "60": work_divided}
+      - prompt: "A satellite moves in a circular orbit around the Earth. How much work does the Earth's gravity do on it during one orbit?"
+        options: ["Zero", "A positive amount", "A negative amount", "It depends on the satellite's speed"]
+        answer: "Zero"
+        difficulty: 3
+        hints: ["Which way does gravity pull the satellite?", "Which way is the satellite moving at each moment?"]
+        solution: "Step 1: Gravity points to the centre; the motion is along the circle. Step 2: Force at right angles to motion does no work."
+        mistakes: {"A positive amount": orbit_right_angle, "A negative amount": orbit_right_angle, "It depends on the satellite's speed": orbit_right_angle}
 
   - code: phy9.energy.kinetic_potential
     title: Kinetic and potential energy
@@ -196,6 +222,27 @@ concepts:
         hints: ["25 = ½ × 0.5 × v².", "v² = 100."]
         solution: "Step 1: v² = 2 × 25 ÷ 0.5 = 100. Step 2: v = 10 m/s."
         mistakes: {"100": forgot_square}
+      - prompt: "A 2 kg ball moving at 6 m/s has the same kinetic energy as an 8 kg ball. How fast is the 8 kg ball moving, in m/s?"
+        answer: "3"
+        check: "sqrt(2*(0.5*2*6**2)/8)"
+        difficulty: 3
+        hints: ["KE of the 2 kg ball = ½ × 2 × 36.", "½ × 8 × v² = 36."]
+        solution: "Step 1: KE = 36 J. Step 2: 4v² = 36, so v² = 9 and v = 3 m/s."
+        mistakes: {"1.5": ke_speed_squared, "9": forgot_square, "24": ke_speed_squared}
+      - prompt: "How high must a 2 kg ball be lifted so that its potential energy equals the kinetic energy it would have moving at 10 m/s? (g = 10 m/s²) Give the height in m."
+        answer: "5"
+        check: "0.5*2*10**2/(2*10)"
+        difficulty: 3
+        hints: ["KE = ½ × 2 × 10².", "mgh = 100, so h = 100 ÷ 20."]
+        solution: "Step 1: KE = 100 J. Step 2: 2 × 10 × h = 100. Step 3: h = 5 m."
+        mistakes: {"10": forgot_half, "50": pe_mgh, "0.5": forgot_square}
+      - prompt: "An archer pulls back a bowstring and lets the arrow fly. Which energy change happens?"
+        options: ["Elastic potential energy → kinetic energy", "Kinetic energy → elastic potential energy", "Chemical energy → sound energy", "Heat energy → kinetic energy"]
+        answer: "Elastic potential energy → kinetic energy"
+        difficulty: 2
+        hints: ["The stretched bow stores energy.", "The flying arrow has energy of motion."]
+        solution: "Step 1: Pulling back stores elastic potential energy in the bow. Step 2: On release it becomes the arrow's kinetic energy."
+        mistakes: {"Kinetic energy → elastic potential energy": elastic_store, "Chemical energy → sound energy": elastic_store, "Heat energy → kinetic energy": elastic_store}
 
   - code: phy9.energy.conservation
     title: Conservation of energy and power
@@ -292,3 +339,24 @@ concepts:
         hints: ["1 kW = 1000 W and 1 h = 3600 s."]
         solution: "1000 × 3600 = 3.6 × 10⁶ J"
         mistakes: {"1000": kw_to_w, "3600": kw_to_w}
+      - prompt: "A ball is dropped from 20 m. How fast is it moving just before it hits the ground, in m/s? (g = 10 m/s²; ignore air resistance)"
+        answer: "20"
+        check: "sqrt(2*10*20)"
+        difficulty: 2
+        hints: ["All the PE (mgh) becomes KE (½mv²).", "The mass cancels: v² = 2gh."]
+        solution: "Step 1: mgh = ½mv², so v² = 2 × 10 × 20 = 400. Step 2: v = 20 m/s."
+        mistakes: {"400": forgot_square, "200": energy_conserved, "14.1": forgot_half}
+      - prompt: "A pump lifts 600 kg of water through a height of 15 m in 1 minute. What is its power, in W? (g = 10 m/s²)"
+        answer: "1500"
+        check: "600*10*15/60"
+        difficulty: 3
+        hints: ["Work = mgh = 600 × 10 × 15.", "Divide by the time in seconds."]
+        solution: "Step 1: Work = 90,000 J. Step 2: Power = 90,000 ÷ 60 = 1500 W."
+        mistakes: {"90000": power_per_time, "150": pe_mgh, "9000": pe_mgh}
+      - prompt: "A 2 kW heater is used for 30 minutes every day for 30 days. Electricity costs ₹6 a unit. What is the cost, in rupees?"
+        answer: "180"
+        check: "2*0.5*30*6"
+        difficulty: 3
+        hints: ["Energy per day = 2 kW × 0.5 h.", "Units in 30 days, then × ₹6."]
+        solution: "Step 1: Per day: 2 × 0.5 = 1 kWh. Step 2: 30 days: 30 kWh. Step 3: Cost = 30 × 6 = ₹180."
+        mistakes: {"10800": minutes_to_hours, "6": minutes_to_hours, "360": minutes_to_hours}

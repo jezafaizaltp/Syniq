@@ -5,6 +5,10 @@ chapter: 4
 title: Gravitation
 
 tips:
+  tiny_force: "Every two masses attract. Look at how small G is, and how small a person's mass is compared with the Earth's."
+  g_mass_radius: "g = GM ÷ R². Change one thing at a time: mass on top, radius squared underneath."
+  up_down_time: "The time going up equals the time coming down. The ball stops for an instant at the top."
+  fall_in_one_second: "Find how far it has fallen after 4 s and after 3 s. The 4th second is the gap between them."
   inverse_not_square: "Gravitational force goes as 1 ÷ distance². If the distance becomes k times larger, divide the force by k × k. Masses multiply the force directly."
   mass_changes_on_moon: "Mass is the amount of matter and is the same everywhere. Only weight changes from place to place."
   weight_in_kg: "Mass, in kg, is how much matter something has. The pull of gravity on that mass is a force, in newtons: force = mass × g. To go back from the force to the mass, or to find g, divide."
@@ -134,6 +138,27 @@ concepts:
         hints: ["Masses: × 2 × 2 = × 4.", "Distance squared: × 4."]
         solution: "Step 1: Masses multiply the force by 4. Step 2: The distance divides it by 2² = 4. Step 3: Overall × 1, no change."
         mistakes: {"2": inverse_not_square}
+      - prompt: "Two masses attract each other with 100 N. One mass is tripled and the distance between them is halved. What is the new force, in N?"
+        answer: "1200"
+        check: "100*3*2**2"
+        difficulty: 3
+        hints: ["Tripling a mass triples the force.", "Halving the distance multiplies the force by 2²."]
+        solution: "Step 1: Mass ×3 → force ×3. Step 2: Distance ÷2 → force ×4. Step 3: 100 × 3 × 4 = 1200 N."
+        mistakes: {"600": inverse_not_square, "150": inverse_not_square, "75": inverse_not_square}
+      - prompt: "How does the Moon's pull on the Earth compare with the Earth's pull on the Moon?"
+        options: ["Equal in size", "Much smaller", "Much bigger", "There is no pull on the Earth"]
+        answer: "Equal in size"
+        difficulty: 2
+        hints: ["F = G m₁m₂ ÷ r²: does it matter which mass is m₁?", "These two pulls are an action–reaction pair."]
+        solution: "Step 1: The same formula gives the force on each body. Step 2: The pulls are equal and opposite; the Earth just moves far less because its mass is much bigger."
+        mistakes: {"Much smaller": reaction_smaller, "Much bigger": reaction_smaller, "There is no pull on the Earth": reaction_smaller}
+      - prompt: "Why don't two people sitting next to each other feel pulled together by gravity?"
+        options: ["The force between such small masses is tiny because G is very small", "Only the Earth has gravity", "Gravity acts only between planets", "The air between them blocks gravity"]
+        answer: "The force between such small masses is tiny because G is very small"
+        difficulty: 2
+        hints: ["The law of gravitation applies to every two bodies.", "G = 6.67 × 10⁻¹¹. Try 60 kg and 60 kg, 1 m apart."]
+        solution: "Step 1: They do attract. Step 2: F = 6.67 × 10⁻¹¹ × 60 × 60 ÷ 1² ≈ 2.4 × 10⁻⁷ N, far too small to feel."
+        mistakes: {"Only the Earth has gravity": tiny_force, "Gravity acts only between planets": tiny_force, "The air between them blocks gravity": tiny_force}
 
   - code: phy9.gravity.weight
     title: Mass, weight and g
@@ -239,6 +264,27 @@ concepts:
         hints: ["g = W ÷ m."]
         solution: "g = 48 ÷ 30 = 1.6 m/s²"
         mistakes: {"5/8": weight_in_kg}
+      - prompt: "A person weighs 588 N on Earth (g = 9.8 m/s²). What do they weigh on the Moon, where g = 1.63 m/s², in N?"
+        answer: "97.8"
+        check: "588/9.8*1.63"
+        difficulty: 3
+        hints: ["Find the mass first: 588 ÷ 9.8.", "Weight on the Moon = mass × 1.63."]
+        solution: "Step 1: Mass = 588 ÷ 9.8 = 60 kg. Step 2: Moon weight = 60 × 1.63 = 97.8 N."
+        mistakes: {"588": mass_changes_on_moon, "60": weight_in_kg, "3528": moon_sixth}
+      - prompt: "A planet has the same radius as the Earth but twice the Earth's mass. How does g on its surface compare with g on Earth?"
+        options: ["Twice as big", "The same", "Half as big", "Four times as big"]
+        answer: "Twice as big"
+        difficulty: 3
+        hints: ["g = GM ÷ R².", "Only M changes."]
+        solution: "Step 1: g is proportional to M when R is fixed. Step 2: Double the mass gives double g."
+        mistakes: {"The same": g_mass_radius, "Half as big": g_mass_radius, "Four times as big": g_mass_radius}
+      - prompt: "A planet has the same mass as the Earth but half the Earth's radius. How many times Earth's g is g on its surface?"
+        answer: "4"
+        check: "1/(0.5)**2"
+        difficulty: 3
+        hints: ["g = GM ÷ R².", "R becomes ½, so R² becomes ¼."]
+        solution: "Step 1: R² is ¼ as big. Step 2: Dividing by ¼ multiplies g by 4."
+        mistakes: {"2": inverse_not_square, "0.5": g_mass_radius, "0.25": g_mass_radius}
 
   - code: phy9.gravity.free_fall
     title: Free fall
@@ -337,3 +383,24 @@ concepts:
         hints: ["v² = 2gh."]
         solution: "v² = 2 × 10 × 5 = 100, so v = 10 m/s."
         mistakes: {"100": forgot_square}
+      - prompt: "A stone is thrown straight down at 5 m/s from a bridge and hits the water 2 s later. How high is the bridge above the water, in m? (g = 10 m/s²)"
+        answer: "30"
+        check: "5*2 + 0.5*10*2**2"
+        difficulty: 3
+        hints: ["The stone does not start from rest: u = 5 m/s.", "h = ut + ½gt²."]
+        solution: "Step 1: ut = 5 × 2 = 10 m. Step 2: ½gt² = ½ × 10 × 4 = 20 m. Step 3: h = 30 m."
+        mistakes: {"20": forgot_initial_velocity, "50": forgot_half, "25": forgot_square}
+      - prompt: "A ball thrown straight up comes back to the thrower's hand 4 s later. How fast was it thrown, in m/s? (g = 10 m/s²)"
+        answer: "20"
+        check: "10*4/2"
+        difficulty: 3
+        hints: ["How long did it take to reach the top?", "At the top v = 0, so u = g × time up."]
+        solution: "Step 1: Time up = time down = 2 s. Step 2: u = 10 × 2 = 20 m/s."
+        mistakes: {"40": up_down_time, "10": up_down_time}
+      - prompt: "A stone dropped from rest falls freely. How far does it fall during the 4th second alone, in m? (g = 10 m/s²)"
+        answer: "35"
+        check: "0.5*10*4**2 - 0.5*10*3**2"
+        difficulty: 3
+        hints: ["Distance after 4 s = ½ × 10 × 16.", "Take away the distance after 3 s."]
+        solution: "Step 1: After 4 s: 80 m. Step 2: After 3 s: 45 m. Step 3: In the 4th second: 80 − 45 = 35 m."
+        mistakes: {"80": fall_in_one_second, "40": fall_in_one_second, "5": fall_in_one_second}

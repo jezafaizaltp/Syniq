@@ -4,6 +4,12 @@ chapter: 8
 title: Sound
 
 tips:
+  frequency_stays: "The frequency is set by the vibrating source and does not change in a new medium. Use the new speed."
+  one_way: "The thunder travels only once, from the lightning to you. There is no return trip."
+  quality: "Two instruments can play the same note equally loudly and still sound different. Which property is about the shape of the wave, not its size or how often it vibrates?"
+  other_ears: "The human range is about 20 Hz to 20 kHz. Other animals have different ranges, and dogs hear much higher than we do."
+  tension_pitch: "Tightening a string makes it vibrate more times each second. Which property depends on how many vibrations per second?"
+  clap_with_echo: "Find the time for the echo to come back (there and back). One clap fits in each of those intervals."
   wave_equation: "Speed = frequency × wavelength (v = fλ). For wavelength divide speed by frequency."
   period_frequency: "Period and frequency are reciprocals: T = 1 ÷ f."
   echo_double: "In an echo the sound travels to the wall and back, so the distance to the wall is half of speed × time."
@@ -105,6 +111,27 @@ concepts:
         hints: ["Think of the slinky being pushed and pulled."]
         solution: "The particles move back and forth parallel to the wave's direction, forming compressions and rarefactions."
         mistakes: {"Air particles vibrate at right angles to the wave": longitudinal}
+      - prompt: "A 500 Hz sound passes from air (speed 340 m/s) into water (speed 1500 m/s). What is its wavelength in water, in m?"
+        answer: "3"
+        check: "1500/500"
+        difficulty: 3
+        hints: ["Does the frequency change when sound enters water?", "λ = v ÷ f, using the speed in water."]
+        solution: "Step 1: The frequency stays 500 Hz. Step 2: λ = 1500 ÷ 500 = 3 m."
+        mistakes: {"0.68": frequency_stays, "750000": wave_equation, "1/3": wave_equation}
+      - prompt: "The time between two compressions passing a point is 0.004 s. What is the frequency of the sound, in Hz?"
+        answer: "250"
+        check: "1/0.004"
+        difficulty: 2
+        hints: ["The time between compressions is the period T.", "f = 1 ÷ T."]
+        solution: "Step 1: T = 0.004 s. Step 2: f = 1 ÷ 0.004 = 250 Hz."
+        mistakes: {"0.004": period_frequency, "4": period_frequency}
+      - prompt: "Lightning is seen and its thunder is heard 3 s later. Sound travels at 340 m/s and the light arrives almost at once. How far away is the lightning, in m?"
+        answer: "1020"
+        check: "340*3"
+        difficulty: 2
+        hints: ["How long did the sound take to reach you?", "Distance = speed × time."]
+        solution: "Step 1: Sound took 3 s. Step 2: Distance = 340 × 3 = 1020 m."
+        mistakes: {"510": one_way, "113.33": speed_time_swapped}
 
   - code: phy9.sound.properties
     title: Pitch, loudness and hearing
@@ -194,6 +221,27 @@ concepts:
         hints: ["Pitch follows frequency, not loudness."]
         solution: "512 Hz is higher than 256 Hz, so the first fork sounds higher. Loudness depends on how hard they are struck."
         mistakes: {"The first fork is louder": pitch_loudness}
+      - prompt: "A flute and a violin play the same note equally loudly. What lets us tell which is which?"
+        options: ["Quality (timbre)", "Pitch", "Loudness", "Speed of the sound"]
+        answer: "Quality (timbre)"
+        difficulty: 2
+        hints: ["Same note means the same pitch.", "Equally loud means the same amplitude."]
+        solution: "Step 1: Pitch and loudness are the same. Step 2: The difference is the shape of the wave, called its quality or timbre."
+        mistakes: {"Pitch": quality, "Loudness": quality, "Speed of the sound": quality}
+      - prompt: "A whistle of 25 kHz is blown near a dog and a person. Who can hear it?"
+        options: ["Only the dog", "Only the person", "Both", "Neither"]
+        answer: "Only the dog"
+        difficulty: 2
+        hints: ["What is the upper limit of human hearing?", "Dogs hear higher sounds than people."]
+        solution: "Step 1: 25 kHz is above 20 kHz, so it is ultrasound for us. Step 2: Dogs hear up to about 45 kHz, so only the dog hears it."
+        mistakes: {"Only the person": other_ears, "Both": audible_range, "Neither": other_ears}
+      - prompt: "A guitar string is tightened, so it vibrates faster. What happens to the sound?"
+        options: ["The pitch goes up", "It gets louder", "The pitch goes down", "It travels faster through the air"]
+        answer: "The pitch goes up"
+        difficulty: 2
+        hints: ["Faster vibration means higher frequency.", "Which property depends on frequency?"]
+        solution: "Step 1: A tighter string vibrates at a higher frequency. Step 2: Higher frequency means higher pitch."
+        mistakes: {"It gets louder": pitch_loudness, "The pitch goes down": tension_pitch, "It travels faster through the air": speed_in_media}
 
   - code: phy9.sound.echo
     title: Reflection of sound and echoes
@@ -288,3 +336,24 @@ concepts:
         hints: ["Distance to each cliff = 340 × t ÷ 2.", "170 m and 340 m."]
         solution: "Step 1: Nearer cliff: 340 × 1 ÷ 2 = 170 m. Step 2: Farther cliff: 340 × 2 ÷ 2 = 340 m. Step 3: 170 + 340 = 510 m."
         mistakes: {"1020": echo_double}
+      - prompt: "A man stands 85 m from a wall and claps once. After how many seconds does he hear the echo? (speed of sound 340 m/s)"
+        answer: "0.5"
+        check: "2*85/340"
+        difficulty: 2
+        hints: ["The sound goes to the wall and back.", "Total distance = 170 m."]
+        solution: "Step 1: Distance travelled = 2 × 85 = 170 m. Step 2: Time = 170 ÷ 340 = 0.5 s."
+        mistakes: {"0.25": echo_double, "4": speed_time_swapped}
+      - prompt: "A bat sends out ultrasound and hears the echo from a moth 0.02 s later. Sound travels at 340 m/s. How far away is the moth, in m?"
+        answer: "3.4"
+        check: "340*0.02/2"
+        difficulty: 2
+        hints: ["Distance travelled = 340 × 0.02.", "The sound went to the moth and back."]
+        solution: "Step 1: 340 × 0.02 = 6.8 m there and back. Step 2: The moth is 3.4 m away."
+        mistakes: {"6.8": echo_double, "17000": speed_time_swapped}
+      - prompt: "A boy stands 34 m from a wall and claps so that each clap comes exactly as the echo of the last one arrives. How many claps does he make each second? (speed of sound 340 m/s)"
+        answer: "5"
+        check: "340/(2*34)"
+        difficulty: 3
+        hints: ["How long does the echo take to come back?", "Echo time = 68 ÷ 340."]
+        solution: "Step 1: Echo time = 2 × 34 ÷ 340 = 0.2 s. Step 2: One clap every 0.2 s means 5 claps a second."
+        mistakes: {"10": echo_double, "0.2": clap_with_echo}

@@ -4,6 +4,11 @@ chapter: 1
 title: Refraction of Light
 
 tips:
+  two_faces: "Follow the ray through both faces. It bends at the first face and again at the second, between the same two media but in the opposite direction."
+  raised_by: "How much it looks raised is the gap between the real depth and the apparent depth."
+  each_layer: "Each layer looks shallower by its own refractive index. Find each layer's apparent depth, then add them."
+  mirage_layers: "Air close to a hot road is hotter and rarer than the air above it. Think about light passing from denser to rarer air at a very slanting angle."
+  smaller_critical: "A denser medium bends light more strongly, so light inside it reaches the critical angle sooner. Compare the critical angles with that in mind."
   bends_wrong_way: "Light is slower in the medium with the higher refractive index. Picture a cart rolling at a slant from a smooth floor onto a rug: the wheel that reaches the rug first slows first and the cart turns. Which way does it turn compared with the normal? A ray along the normal meets the new medium all at once."
   angle_from_surface: "Angles of incidence and refraction are measured from the normal, the line at right angles to the surface, not from the surface."
   index_upside_down: "Refractive index = speed of light in vacuum ÷ speed in the medium. It is never less than 1."
@@ -100,6 +105,27 @@ concepts:
         hints: ["The source decides how many waves arrive each second."]
         solution: "The number of waves per second (frequency) is set by the source and does not change. Speed and wavelength both decrease in water, and a slanting ray changes direction."
         mistakes: {"Speed": speed_same}
+      - prompt: "A ray goes at a slant from glass (n = 1.5) into water (n = 1.33). Which way does it bend?"
+        options: ["Away from the normal", "Towards the normal", "It does not bend", "It is always reflected back"]
+        answer: "Away from the normal"
+        difficulty: 3
+        hints: ["Which of the two has the higher refractive index?", "Is the light speeding up or slowing down as it enters water?"]
+        solution: "Step 1: Glass has the higher index, so light is faster in water. Step 2: Going into a medium where it is faster, light bends away from the normal."
+        mistakes: {"Towards the normal": bends_wrong_way, "It does not bend": speed_same, "It is always reflected back": critical_angle_rule}
+      - prompt: "A ray passes at a slant through a glass block with parallel faces. How does the ray that comes out compare with the ray that went in?"
+        options: ["Parallel to it, but shifted sideways", "Bent towards the normal for good", "Exactly in line with it", "At right angles to it"]
+        answer: "Parallel to it, but shifted sideways"
+        difficulty: 3
+        hints: ["At the first face light goes air → glass. At the second, glass → air.", "Do the two bends cancel in direction? Does the path inside move the ray across?"]
+        solution: "Step 1: At the first face the ray bends towards the normal; at the second it bends away by the same amount. Step 2: So it comes out parallel to the ray that went in. Step 3: It travelled slantwise inside, so it is shifted sideways."
+        mistakes: {"Bent towards the normal for good": two_faces, "Exactly in line with it": two_faces, "At right angles to it": two_faces}
+      - prompt: "A ray in air meets a water surface with an angle of incidence of 40°. Which of these could be its angle of refraction?"
+        options: ["29°", "40°", "52°", "90°"]
+        answer: "29°"
+        difficulty: 2
+        hints: ["Air to water: is the light slowing down?", "Slowing down bends it towards the normal, so the angle gets smaller."]
+        solution: "Step 1: Water is denser, so the ray bends towards the normal. Step 2: The angle of refraction must be less than 40°, so 29°."
+        mistakes: {"40°": speed_same, "52°": bends_wrong_way, "90°": bends_wrong_way}
 
   - code: phy9.refraction.index
     title: Refractive index
@@ -194,6 +220,27 @@ concepts:
         hints: ["Relative index of glass with respect to water = speed in water ÷ speed in glass."]
         solution: "n = 2.25 ÷ 2 = 1.125 (also 1.5 ÷ 1.333… = 1.125)."
         mistakes: {"8/9": index_upside_down}
+      - prompt: "Light travels at 2 × 10⁸ m/s in glass. The refractive index of glass relative to water is 1.125. What is the speed of light in water, in units of 10⁸ m/s?"
+        answer: "2.25"
+        check: "1.125*2"
+        difficulty: 3
+        hints: ["Index of glass relative to water = speed in water ÷ speed in glass.", "Speed in water = 1.125 × 2."]
+        solution: "Step 1: n(glass, water) = v(water) ÷ v(glass). Step 2: v(water) = 1.125 × 2 = 2.25 × 10⁸ m/s."
+        mistakes: {"1.78": index_upside_down, "3": index_upside_down}
+      - prompt: "In which of these does light travel slowest: ice (n = 1.31), water (n = 1.33), kerosene (n = 1.44) or glass (n = 1.5)?"
+        options: ["Glass", "Ice", "Water", "Kerosene"]
+        answer: "Glass"
+        difficulty: 2
+        hints: ["n = speed in vacuum ÷ speed in the medium.", "The bigger n is, the smaller the speed must be."]
+        solution: "Step 1: v = c ÷ n, so the largest n gives the smallest speed. Step 2: Glass has the largest n."
+        mistakes: {"Ice": index_upside_down, "Water": index_upside_down, "Kerosene": index_upside_down}
+      - prompt: "In a certain plastic, light travels at 60% of its speed in a vacuum. What is the refractive index of the plastic?"
+        answer: "5/3"
+        check: "1/(6/10)"
+        difficulty: 3
+        hints: ["Write the speed in the plastic as 0.6c.", "n = c ÷ 0.6c."]
+        solution: "Step 1: v = 0.6c. Step 2: n = c ÷ 0.6c = 1 ÷ 0.6 = 5/3 ≈ 1.67."
+        mistakes: {"0.6": index_upside_down, "1.6": index_upside_down, "0.4": index_upside_down}
 
   - code: phy9.refraction.depth
     title: Apparent depth
@@ -281,6 +328,27 @@ concepts:
         solution: "Light from the part under water refracts away from the normal at the surface, so that part appears raised and the stick looks bent."
 
         mistakes: {"Water really bends the stick": "stick_refraction", "Light reflects off the water surface": "stick_refraction"}
+      - prompt: "A coin lies under 12 cm of water (n = 4/3). Seen from straight above, by how many cm does it appear raised?"
+        answer: "3"
+        check: "12 - 12/(4/3)"
+        difficulty: 2
+        hints: ["First find the apparent depth.", "Apparent depth = 12 ÷ 4/3."]
+        solution: "Step 1: Apparent depth = 12 ÷ 4/3 = 9 cm. Step 2: Raised by 12 − 9 = 3 cm."
+        mistakes: {"9": raised_by, "16": depth_multiplied, "4": depth_multiplied}
+      - prompt: "A beaker has a 6 cm layer of oil (n = 1.5) floating on 8 cm of water (n = 4/3). Seen from straight above, how deep does the bottom appear, in cm?"
+        answer: "10"
+        check: "6/1.5 + 8/(4/3)"
+        difficulty: 3
+        hints: ["Find the apparent thickness of the oil and of the water separately.", "Oil: 6 ÷ 1.5. Water: 8 ÷ 4/3."]
+        solution: "Step 1: Oil looks 6 ÷ 1.5 = 4 cm thick. Step 2: Water looks 8 ÷ 4/3 = 6 cm deep. Step 3: The bottom appears 4 + 6 = 10 cm down."
+        mistakes: {"14": each_layer, "4": each_layer, "6": each_layer}
+      - prompt: "Why is it unsafe to judge how deep a pond is just by looking into it from above?"
+        options: ["It is deeper than it looks", "It is shallower than it looks", "Water makes the bottom invisible", "The pond's depth keeps changing with the light"]
+        answer: "It is deeper than it looks"
+        difficulty: 2
+        hints: ["What happens to a coin at the bottom of a glass of water?", "Light from the bottom bends away from the normal as it leaves the water."]
+        solution: "Step 1: Light from the bottom bends as it leaves the water, so the bottom appears raised. Step 2: The real depth is more than it seems."
+        mistakes: {"It is shallower than it looks": depth_multiplied, "Water makes the bottom invisible": stick_refraction, "The pond's depth keeps changing with the light": stick_refraction}
   - code: phy9.refraction.tir
     title: Total internal reflection
     after: [phy9.refraction.bending]
@@ -362,3 +430,24 @@ concepts:
         hints: ["Any ray meeting the surface at more than 24° is trapped."]
         solution: "With a small critical angle, most rays inside hit the faces above 24° and are reflected many times before leaving through the top, so the diamond flashes brightly."
         mistakes: {"Light speeds up in diamond": speed_same}
+      - prompt: "Light goes from air into glass with an angle of incidence of 60°. Glass's critical angle is 42°. Can total internal reflection happen at this surface?"
+        options: ["No: the light is going from a rarer to a denser medium", "Yes: 60° is more than the critical angle", "Yes: glass always reflects some light", "Only if the glass is thick"]
+        answer: "No: the light is going from a rarer to a denser medium"
+        difficulty: 3
+        hints: ["Total internal reflection has two conditions.", "Which way is the light travelling: from denser to rarer, or rarer to denser?"]
+        solution: "Step 1: Total internal reflection needs light going from denser to rarer. Step 2: Here it goes from air (rarer) into glass, so it cannot happen, whatever the angle."
+        mistakes: {"Yes: 60° is more than the critical angle": tir_wrong_direction, "Yes: glass always reflects some light": tir_wrong_direction, "Only if the glass is thick": tir_wrong_direction}
+      - prompt: "On a hot day, a road far ahead seems to have a pool of water on it. What causes this mirage?"
+        options: ["Light from the sky bends through hot air layers and is totally internally reflected near the road", "There really is a thin layer of water on the road", "The tar reflects light like a mirror", "Heat waves from the road are coloured blue"]
+        answer: "Light from the sky bends through hot air layers and is totally internally reflected near the road"
+        difficulty: 3
+        hints: ["Air near the hot road is rarer than the air above.", "What can happen to light going from denser to rarer at a very slanting angle?"]
+        solution: "Step 1: Light from the sky passes into hotter, rarer air near the road and bends away from the normal. Step 2: At a large enough angle it is totally internally reflected upwards. Step 3: We see the sky's image on the road, which looks like water."
+        mistakes: {"There really is a thin layer of water on the road": mirage_layers, "The tar reflects light like a mirror": mirage_layers, "Heat waves from the road are coloured blue": mirage_layers}
+      - prompt: "Three materials have critical angles of 24°, 42° and 49°. Which has the largest refractive index?"
+        options: ["The one with 24°", "The one with 49°", "The one with 42°", "They all have the same index"]
+        answer: "The one with 24°"
+        difficulty: 3
+        hints: ["Diamond has a very large index. What is its critical angle?", "The denser the medium, the sooner light inside gets trapped."]
+        solution: "Step 1: A larger refractive index bends light away more strongly as it leaves. Step 2: So the refracted ray reaches 90° at a smaller angle of incidence. Step 3: The smallest critical angle, 24°, goes with the largest index."
+        mistakes: {"The one with 49°": smaller_critical, "The one with 42°": smaller_critical, "They all have the same index": smaller_critical}
