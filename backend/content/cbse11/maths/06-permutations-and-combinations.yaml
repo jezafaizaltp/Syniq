@@ -5,6 +5,16 @@ title: Permutations and Combinations
 tips:
   c11_perm_comb: Order matters → permutation (nPr). Order doesn't matter (choosing a group) → combination (nCr).
   c11_fact: n! = n × (n − 1) × ... × 1, and 0! = 1.
+  m11_choose_both: "Choose boys and girls separately, then multiply the two counts."
+  m11_diagonals: "Joining any 2 of the 6 vertices gives a segment. Some of those segments are sides, not diagonals."
+  m11_factorial: "First chair: 6 choices, next: 5, and so on down to 1. Multiply them all."
+  m11_handshake: "A handshake is a pair of people; A–B is the same as B–A. Choose 2 from 10."
+  m11_ncr: "ⁿCᵣ = ⁿPᵣ ÷ r!. Order does not matter, so divide the arrangements by 2!."
+  m11_ncr_equal: "ⁿCₓ = ⁿCᵧ with x ≠ y means x + y = n."
+  m11_no_repeat: "Fill the three places one by one. After using a digit, one fewer is left for the next place."
+  m11_npr: "ⁿPᵣ = n(n − 1)… for r factors. Multiply 3 numbers counting down from 7."
+  m11_repeated_letters: "6! counts swaps of identical letters as different. Divide by the factorial of each repeated letter's count."
+  m11_with_repeat: "With repetition, every place has all 10 digits available. Multiply 10 for each place."
 concepts:
 - code: cbse11m.pc.perm
   title: Counting principle and permutations
@@ -111,6 +121,7 @@ concepts:
     - 7!/4!.
     - 7 × 6 × 5.
     solution: 7 × 6 × 5 = 210.
+    mistakes: {"35": "m11_npr", "343": "m11_npr", "21": "m11_npr"}
   - prompt: How many 3-digit numbers can be made from 1, 2, 3, 4, 5 without repeating digits?
     answer: '60'
     check: 5*4*3
@@ -119,6 +130,7 @@ concepts:
     - 5 × 4 × 3.
     - Order matters.
     solution: 5 × 4 × 3 = 60.
+    mistakes: {"125": "m11_no_repeat", "10": "m11_no_repeat"}
   - prompt: How many 4-digit PINs are possible using digits 0–9 with repetition?
     answer: '10000'
     check: 10**4
@@ -127,6 +139,7 @@ concepts:
     - 10 choices each.
     - 10⁴.
     solution: 10⁴ = 10,000.
+    mistakes: {"5040": "m11_with_repeat", "40": "m11_with_repeat"}
   - prompt: How many different arrangements of the letters of the word BANANA are there?
     answer: '60'
     check: factorial(6)/(factorial(3)*factorial(2))
@@ -135,6 +148,7 @@ concepts:
     - '6 letters: A×3, N×2.'
     - 6!/(3! 2!).
     solution: 720/(6 × 2) = 60.
+    mistakes: {"720": "m11_repeated_letters", "120": "m11_repeated_letters"}
   - prompt: In how many ways can 6 people sit in a row of 6 chairs?
     answer: '720'
     check: factorial(6)
@@ -143,6 +157,7 @@ concepts:
     - 6!.
     - All arranged.
     solution: 6! = 720.
+    mistakes: {"36": "m11_factorial", "6": "m11_factorial"}
 - code: cbse11m.pc.comb
   title: Combinations
   after:
@@ -247,6 +262,7 @@ concepts:
     - 5!/(2! 3!).
     - (5 × 4)/2.
     solution: ⁵C₂ = 10.
+    mistakes: {"20": "m11_ncr", "5": "m11_ncr"}
   - prompt: 10 people shake hands once with each other. How many handshakes?
     answer: '45'
     check: binomial(10,2)
@@ -255,6 +271,7 @@ concepts:
     - Choose 2 of 10.
     - ¹⁰C₂.
     solution: ¹⁰C₂ = 45.
+    mistakes: {"90": "m11_handshake", "100": "m11_handshake"}
   - prompt: A committee of 3 is chosen from 8 people. How many committees are possible?
     answer: '56'
     check: binomial(8,3)
@@ -273,6 +290,7 @@ concepts:
     - 'Lines joining 2 of 6 vertices: ⁶C₂.'
     - Subtract the 6 sides.
     solution: 15 − 6 = 9.
+    mistakes: {"15": "m11_diagonals", "6": "m11_diagonals"}
   - prompt: If ⁿC₈ = ⁿC₂, find n.
     answer: '10'
     check: 8 + 2
@@ -281,6 +299,7 @@ concepts:
     - nCr = nC(n − r).
     - 8 + 2.
     solution: n = 8 + 2 = 10.
+    mistakes: {"6": "m11_ncr_equal", "16": "m11_ncr_equal"}
   - prompt: A team of 2 boys and 2 girls is chosen from 5 boys and 4 girls. How many teams?
     answer: '60'
     check: binomial(5,2)*binomial(4,2)
@@ -289,3 +308,4 @@ concepts:
     - ⁵C₂ × ⁴C₂.
     - 10 × 6.
     solution: 10 × 6 = 60.
+    mistakes: {"16": "m11_choose_both", "126": "m11_choose_both"}

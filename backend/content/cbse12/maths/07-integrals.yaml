@@ -5,6 +5,13 @@ title: Integrals
 tips:
   c12_constant: An indefinite integral always needs + C, because every constant differentiates to zero.
   c12_limits: 'Definite integral: find the antiderivative F, then F(upper) − F(lower). No + C needed.'
+  m12_definite: "Find the antiderivative, then F(upper) − F(lower)."
+  m12_even_function: "An even function is mirror-symmetric about the y-axis. Compare the left half with the right half."
+  m12_ilate: "ILATE: Inverse, Log, Algebraic, Trig, Exponential. Pick u from the earlier letter."
+  m12_int_cos: "Differentiate each option. Which one gives cos x back?"
+  m12_int_reciprocal: "The power rule fails for x⁻¹ (it would divide by zero). Which function has derivative 1/x?"
+  m12_integrate_power: "∫xⁿ dx = xⁿ⁺¹/(n + 1). Then evaluate at 2."
+  m12_odd_function: "x³ is odd: the area on the left cancels the area on the right."
 concepts:
 - code: cbse12m.int.indefinite
   title: Indefinite integrals and methods
@@ -88,6 +95,7 @@ concepts:
     - F = x³.
     - 2³.
     solution: '8.'
+    mistakes: {"12": "m12_integrate_power", "6": "m12_integrate_power", "24": "m12_integrate_power"}
   - prompt: If F(x) = ∫(2x + 3) dx with F(0) = 0, find F(1).
     answer: '4'
     check: 1+3
@@ -96,6 +104,7 @@ concepts:
     - x² + 3x.
     - 1 + 3.
     solution: '4.'
+    mistakes: {"5": "m12_integrate_power", "2": "m12_integrate_power", "3": "m12_integrate_power"}
   - prompt: '∫cos x dx equals:'
     options:
     - sin x + C
@@ -108,6 +117,7 @@ concepts:
     - Derivative of sin is cos.
     - Reverse.
     solution: sin x + C.
+    mistakes: {"−sin x + C": "m12_int_cos", "cos x + C": "m12_int_cos", "tan x + C": "m12_int_cos"}
   - prompt: '∫(1/x) dx equals:'
     options:
     - ln|x| + C
@@ -120,6 +130,7 @@ concepts:
     - Special case n = −1.
     - Logarithm.
     solution: ln|x| + C.
+    mistakes: {"x⁰/0": "m12_int_reciprocal", "1/x² + C": "m12_int_reciprocal", "eˣ + C": "m12_int_reciprocal"}
   - prompt: 'For ∫x eˣ dx by parts (ILATE), u should be:'
     options:
     - x
@@ -132,6 +143,7 @@ concepts:
     - Algebraic before exponential.
     - Differentiates to 1.
     solution: u = x.
+    mistakes: {"eˣ": "m12_ilate", "x eˣ": "m12_ilate", "1": "m12_ilate"}
   - prompt: Why do indefinite integrals include + C?
     options:
     - Constants differentiate to zero, so many functions share a derivative
@@ -257,6 +269,7 @@ concepts:
     - x²/2.
     - 4/2 − 0.
     solution: '2.'
+    mistakes: {"4": "m12_definite", "1": "m12_definite"}
   - prompt: Evaluate ∫₁³ 2x dx.
     answer: '8'
     check: 3**2-1**2
@@ -275,6 +288,7 @@ concepts:
     - x³.
     - 1 − 0.
     solution: '1.'
+    mistakes: {"3": "m12_definite", "6": "m12_definite"}
   - prompt: Evaluate ∫₋₂² x³ dx.
     answer: '0'
     check: Rational(2**4,4)-Rational((-2)**4,4)
@@ -283,6 +297,7 @@ concepts:
     - Odd function.
     - Symmetric limits.
     solution: '0.'
+    mistakes: {"8": "m12_odd_function", "16": "m12_odd_function", "4": "m12_odd_function"}
   - prompt: Evaluate ∫₀^π sin x dx.
     answer: '2'
     check: -(-1)+1
@@ -291,6 +306,7 @@ concepts:
     - −cos x.
     - −(−1) − (−1).
     solution: '2.'
+    mistakes: {"0": "m12_definite", "1": "m12_definite", "-2": "m12_definite"}
   - prompt: 'For an even function f, ∫₋ₐᵃ f(x)dx equals:'
     options:
     - 2∫₀ᵃ f(x)dx
@@ -303,3 +319,4 @@ concepts:
     - Symmetric about y-axis.
     - Two equal halves.
     solution: 2∫₀ᵃ f(x)dx.
+    mistakes: {"0": "m12_even_function", "∫₀ᵃ f(x)dx": "m12_even_function", "−∫₀ᵃ f(x)dx": "m12_even_function"}

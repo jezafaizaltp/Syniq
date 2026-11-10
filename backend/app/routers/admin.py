@@ -366,6 +366,8 @@ AUDIT_WORDS = {
     "consent": "Changed consent",
     "paper_consent": "Recorded paper consent",
     "import_students": "Imported students",
+    "review_sheet_upload": "Uploaded a filled-in review sheet",
+    "review_fix_done": "Marked a question fixed",
     "reset_password": "Gave someone a new password",
     "add_teacher": "Added a teacher",
     "import_syllabus": "Uploaded the syllabus",
@@ -437,24 +439,50 @@ def audit_log(
 
 
 @router.get("/tutor-questions")
-def tutor_questions(db: DbSession = Depends(get_db), user: User = Depends(require_role("admin", "teacher"))):
-    """What students asked Ask SYNiq that the content didn't cover, by topic, most asked first. No student details."""
-    rows = db.execute(
+def tutor_questions(
+    show: str = "open",
+    db: DbSession = Depends(get_db),
+    user: User = Depends(require_role("admin", "teacher")),
+):
+    """What students asked Ask SYNiq that the content didn't cover, by topic, most asked first. No student details.
+
+    show: "open" (default, not yet handled), "handled", or "all".
+    """
+    q = (
         select(TutorQuestion, Concept, Chapter, Subject)
         .join(Concept, Concept.id == TutorQuestion.concept_id)
         .join(Chapter, Chapter.id == Concept.chapter_id)
         .join(Subject, Subject.id == Chapter.subject_id)
         .order_by(TutorQuestion.id.desc())
         .limit(1000)
-    ).all()
+    )
+    if show in ("open", "handled"):
+        q = q.where(TutorQuestion.handled == (show == "handled"))
     topics: dict[int, dict] = {}
-    for q, concept, chapter, subject in rows:
+    for tq, concept, chapter, subject in db.execute(q).all():
         t = topics.setdefault(
             concept.id,
             {"subject": subject.name, "chapter": f"{chapter.number}. {chapter.title}", "topic": concept.title, "questions": []},
         )
-        t["questions"].append({"text": q.text, "answered_by": q.answered_by, "asked": q.created_at.date().isoformat()})
+        t["questions"].append(
+            {"id": tq.id, "text": tq.text, "answered_by": tq.answered_by, "asked": tq.created_at.date().isoformat(), "handled": tq.handled}
+        )
     return sorted(topics.values(), key=lambda t: -len(t["questions"]))
+
+
+class HandledIn(BaseModel):
+    ids: list[int] = Field(min_length=1, max_length=500)
+    handled: bool = True
+
+
+@router.post("/tutor-questions/handled")
+def mark_tutor_questions(body: HandledIn, db: DbSession = Depends(get_db), user: User = Depends(require_role("admin", "teacher"))):
+    """Mark asked questions as dealt with (or open again). Handled ones drop off the default list."""
+    rows = db.scalars(select(TutorQuestion).where(TutorQuestion.id.in_(body.ids))).all()
+    for row in rows:
+        row.handled = body.handled
+    db.commit()
+    return {"changed": len(rows)}
 
 
 # --- Teacher review sheet -------------------------------------------------------
@@ -535,6 +563,7 @@ def review_sheet(subject_id: int, db: DbSession = Depends(get_db), user: User = 
                 "solution": item.solution,
                 "difficulty": item.difficulty,
                 "status": item.status,
+                "fix_note": item.fix_note,
                 "mistakes": [
                     {"wrong": wrong, "tip": tip_text(db, tag, tips)} for wrong, tag in (item.misconceptions or {}).items()
                 ],
@@ -545,3 +574,100 @@ def review_sheet(subject_id: int, db: DbSession = Depends(get_db), user: User = 
         "questions": n,
         "chapters": [{**c, "topics": list(c["topics"].values())} for c in chapters.values()],
     }
+
+
+# --- Teacher's filled-in sheet back in -------------------------------------------
+
+class ReviewUploadIn(BaseModel):
+    csv: str = Field(max_length=5_000_000)
+
+
+def _cell(row: dict, *names: str) -> str:
+    """A column by any of its names, ignoring case, spaces and a spreadsheet's byte-order mark."""
+    keys = {re.sub(r"[^a-z]", "", (k or "").lower()): v for k, v in row.items()}
+    for name in names:
+        v = keys.get(re.sub(r"[^a-z]", "", name.lower()))
+        if v is not None:
+            return str(v).strip()
+    return ""
+
+
+@router.post("/review-sheet/upload")
+def upload_review_sheet(body: ReviewUploadIn, db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """Read back the spreadsheet a teacher filled in (the CSV from the review sheet page).
+
+    A row marked "no" in the ok column, or with anything in "what to fix", becomes a note on
+    that question's fix list. Nothing is changed in what students see: someone fixes the
+    question in its content pack, then marks the note done. Rows marked ok are only counted.
+    """
+    from datetime import date
+
+    from ..models import Item
+
+    reader = csv.DictReader(io.StringIO(body.csv.lstrip("\ufeff")))
+    if not reader.fieldnames or not any(re.sub(r"[^a-z]", "", (f or "").lower()) == "id" for f in reader.fieldnames):
+        raise HTTPException(400, "This doesn't look like a review sheet: there is no 'id' column.")
+    ok = fixes = blank = 0
+    unknown: list[str] = []
+    stamp = f"{user.name}, {date.today().isoformat()}"
+    for row in reader:
+        raw_id = _cell(row, "id")
+        verdict = _cell(row, "ok (yes/no)", "ok").lower()
+        note = _cell(row, "what to fix", "fix")
+        if not raw_id:
+            continue
+        if not verdict and not note:
+            blank += 1
+            continue
+        item = db.get(Item, int(raw_id)) if raw_id.isdigit() else None
+        if not item:
+            unknown.append(raw_id)
+            continue
+        if note or verdict in NO - {""}:
+            text = f"{note or 'Marked not ok, no details given.'} ({stamp})"
+            item.fix_note = f"{item.fix_note}\n{text}" if item.fix_note and text not in item.fix_note else text
+            fixes += 1
+        else:
+            ok += 1
+    audit(db, user, f"review_sheet_upload:{fixes} to fix:{ok} ok")
+    return {"ok": ok, "to_fix": fixes, "not_checked": blank, "unknown_ids": unknown[:50]}
+
+
+@router.get("/review-fixes")
+def review_fixes(db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """Questions a teacher marked to fix, by subject and chapter, until someone marks them done."""
+    from ..models import Item
+
+    rows = db.execute(
+        select(Item, Concept, Chapter, Subject)
+        .join(Concept, Concept.id == Item.concept_id)
+        .join(Chapter, Chapter.id == Concept.chapter_id)
+        .join(Subject, Subject.id == Chapter.subject_id)
+        .where(Item.fix_note != "", Item.status != "rejected")
+        .order_by(Subject.syllabus, Subject.grade, Subject.name, Chapter.number, Item.id)
+    ).all()
+    return [
+        {
+            "id": item.id,
+            "subject": f"{subject.name} (class {subject.grade})",
+            "chapter": f"{chapter.number}. {chapter.title}",
+            "topic": concept.title,
+            "prompt": item.prompt,
+            "answer": item.answer,
+            "note": item.fix_note,
+        }
+        for item, concept, chapter, subject in rows
+    ]
+
+
+@router.post("/review-fixes/{item_id}/done")
+def review_fix_done(item_id: int, db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """The question has been fixed (or the note was wrong): take it off the list."""
+    from ..models import Item
+
+    item = db.get(Item, item_id)
+    if not item:
+        raise HTTPException(404, "No such question")
+    item.fix_note = ""
+    audit(db, user, f"review_fix_done:{item_id}")
+    return {"ok": True}

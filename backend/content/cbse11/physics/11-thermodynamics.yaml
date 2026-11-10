@@ -5,6 +5,15 @@ title: Thermodynamics
 tips:
   c11p_firstlaw: 'First law: ΔQ = ΔU + ΔW. Heat given to the gas is positive; work done BY the gas is positive.'
   c11p_carnot: Carnot efficiency η = 1 − T₂/T₁ uses kelvin temperatures, never Celsius.
+  p11_adiabatic: "Adiabatic: Q = 0. Work done on the gas goes into its internal energy."
+  p11_carnot: "The Carnot engine takes in and gives out heat at fixed temperatures, and moves between them without any heat flow."
+  p11_cop: "COP of a fridge = heat removed ÷ work put in."
+  p11_efficiency: "Efficiency = work out ÷ heat in = (Q₁ − Q₂)/Q₁."
+  p11_isochoric: "Isochoric means constant volume. W = PΔV; what is ΔV?"
+  p11_isothermal: "An ideal gas's internal energy depends only on temperature. Isothermal means T stays fixed."
+  p11_kelvin_planck: "Kelvin–Planck is about engines. Energy conservation is the first law, not the second."
+  p11_work_pv: "W = PΔV. Use the change in volume."
+  p11_zeroth: "If A and B are each in thermal equilibrium with C, they share one property. A thermometer reads it."
 concepts:
 - code: cbse11p.thermo.firstlaw
   title: Zeroth and first laws
@@ -110,6 +119,7 @@ concepts:
     - W = PΔV.
     - 1000 × 3.
     solution: 3,000 J.
+    mistakes: {"7000": "p11_work_pv", "5000": "p11_work_pv"}
   - prompt: 'In an isothermal process for an ideal gas, the change in internal energy is:'
     options:
     - zero
@@ -122,6 +132,7 @@ concepts:
     - U depends only on T.
     - T is constant.
     solution: ΔU = 0 because T doesn't change.
+    mistakes: {"equal to the heat supplied": "p11_isothermal", "negative": "p11_isothermal", "equal to PV": "p11_isothermal"}
   - prompt: 'In an isochoric process, the work done is:'
     options:
     - zero
@@ -134,6 +145,7 @@ concepts:
     - Volume doesn't change.
     - ΔV = 0.
     solution: W = PΔV = 0.
+    mistakes: {"PΔV": "p11_isochoric", "maximum": "p11_isochoric", "equal to heat": "p11_isochoric"}
   - prompt: 'The zeroth law of thermodynamics leads to the idea of:'
     options:
     - temperature
@@ -146,6 +158,7 @@ concepts:
     - Equilibrium with a third body.
     - Thermometers.
     solution: It defines temperature.
+    mistakes: {"entropy": "p11_zeroth", "heat engines": "p11_zeroth", "internal energy": "p11_zeroth"}
   - prompt: In an adiabatic compression, 400 J of work is done on a gas. Find ΔU (in J).
     answer: '400'
     check: 0 - (-400)
@@ -154,6 +167,7 @@ concepts:
     - 'No heat: ΔQ = 0.'
     - ΔU = −ΔW, and ΔW = −400.
     solution: ΔU = +400 J.
+    mistakes: {"-400": "p11_adiabatic", "0": "p11_adiabatic"}
 - code: cbse11p.thermo.secondlaw
   title: Second law and heat engines
   after:
@@ -237,6 +251,7 @@ concepts:
     - W = 1000 − 600.
     - η = W/Q₁.
     solution: 40%.
+    mistakes: {"60": "p11_efficiency", "400": "p11_efficiency"}
   - prompt: A Carnot engine works between 500 K and 300 K. Find its efficiency as a percentage.
     answer: '40'
     check: (1 - Rational(300,500))*100
@@ -265,6 +280,7 @@ concepts:
     - α = Q₂/W.
     - 300/100.
     solution: '3.'
+    mistakes: {"1/3": "p11_cop", "4": "p11_cop"}
   - prompt: Which statement is the Kelvin–Planck form of the second law?
     options:
     - No engine can convert all the heat it absorbs into work
@@ -277,6 +293,7 @@ concepts:
     - Some heat must be rejected.
     - η < 1.
     solution: No engine can be 100% efficient.
+    mistakes: {"Energy cannot be created or destroyed": "p11_kelvin_planck", "Heat flows from cold to hot by itself": "p11_kelvin_planck", "Internal energy depends on volume": "p11_kelvin_planck"}
   - prompt: 'A Carnot cycle consists of:'
     options:
     - two isothermal and two adiabatic processes
@@ -289,3 +306,4 @@ concepts:
     - Ideal reversible cycle.
     - Constant T, then no heat.
     solution: Two isothermals and two adiabatics.
+    mistakes: {"two isobaric and two isochoric processes": "p11_carnot", "four isothermal processes": "p11_carnot", "four adiabatic processes": "p11_carnot"}

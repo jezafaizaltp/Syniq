@@ -5,6 +5,15 @@ title: Statistics
 tips:
   c11_variance: Variance is the mean of the squared deviations from the mean; standard deviation is its square root.
   c11_cv: Coefficient of variation = (σ ÷ mean) × 100. The smaller CV is the more consistent series.
+  m11_cv: "CV = (σ / mean) × 100."
+  m11_dispersion_why: "Compare 49, 50, 51 with 0, 50, 100. Same mean, very different data. What does the mean miss?"
+  m11_mean: "Add all values and divide by how many there are."
+  m11_mean_dev: "Take |x − mean| for each value (no negatives), add them, and divide by the number of values."
+  m11_median: "Sort the data first, then pick the middle value."
+  m11_range_stat: "Range = largest value − smallest value."
+  m11_sd: "Standard deviation is the square root of the variance."
+  m11_shift_sd: "Adding the same number to every value moves the data but does not stretch it."
+  m11_variance: "Variance = mean of the squared deviations from the mean."
 concepts:
 - code: cbse11m.stat.dispersion
   title: 'Measures of dispersion: range and mean deviation'
@@ -121,6 +130,7 @@ concepts:
     - Largest − smallest.
     - 19 − 3.
     solution: '16.'
+    mistakes: {"12": "m11_range_stat", "19": "m11_range_stat"}
   - prompt: Find the mean deviation about the mean of 3, 4, 5, 6, 7.
     answer: 6/5
     check: Rational(2+1+0+1+2,5)
@@ -129,6 +139,7 @@ concepts:
     - Mean 5.
     - Distances 2, 1, 0, 1, 2.
     solution: 6/5 = 1.2.
+    mistakes: {"0": "m11_mean_dev", "2": "m11_mean_dev"}
   - prompt: Find the mean of 2, 4, 6, 8, 10.
     answer: '6'
     check: Rational(30,5)
@@ -137,6 +148,7 @@ concepts:
     - Add and divide by 5.
     - 30/5.
     solution: '6.'
+    mistakes: {"5": "m11_mean", "30": "m11_mean"}
   - prompt: Find the mean deviation about the mean of 2, 4, 6, 8, 10.
     answer: 12/5
     check: Rational(12,5)
@@ -145,6 +157,7 @@ concepts:
     - Distances 4, 2, 0, 2, 4.
     - 12/5.
     solution: 12/5 = 2.4.
+    mistakes: {"0": "m11_mean_dev", "4": "m11_mean_dev"}
   - prompt: Why do we need measures of dispersion?
     options:
     - Two data sets can have the same mean but different spreads
@@ -157,6 +170,7 @@ concepts:
     - Average hides spread.
     - Consistency.
     solution: The mean alone doesn't show how spread out data are.
+    mistakes: {"The mean is always wrong": "m11_dispersion_why", "To find the largest value only": "m11_dispersion_why", "To avoid using numbers": "m11_dispersion_why"}
   - prompt: Find the median of 3, 9, 4, 7, 5.
     answer: '5'
     check: '5'
@@ -165,6 +179,7 @@ concepts:
     - 'Order: 3, 4, 5, 7, 9.'
     - Middle value.
     solution: '5.'
+    mistakes: {"4": "m11_median", "7": "m11_median"}
 - code: cbse11m.stat.variance
   title: Variance and standard deviation
   after:
@@ -273,6 +288,7 @@ concepts:
     - σ = √variance.
     - √25.
     solution: '5.'
+    mistakes: {"25": "m11_sd", "625": "m11_sd", "12.5": "m11_sd"}
   - prompt: Find the variance of 1, 2, 3, 4, 5.
     answer: '2'
     check: Rational(10,5)
@@ -281,6 +297,7 @@ concepts:
     - Mean 3; squared deviations 4, 1, 0, 1, 4.
     - 10/5.
     solution: '2.'
+    mistakes: {"3": "m11_variance", "10": "m11_variance", "1": "m11_variance"}
   - prompt: A series has mean 50 and standard deviation 10. Find its coefficient of variation (%).
     answer: '20'
     check: Rational(10,50)*100
@@ -289,6 +306,7 @@ concepts:
     - σ/mean × 100.
     - 10/50 × 100.
     solution: 20%.
+    mistakes: {"5": "m11_cv", "500": "m11_cv"}
   - prompt: Series A has CV 15% and series B has CV 25%. Which is more consistent?
     options:
     - A
@@ -311,3 +329,4 @@ concepts:
     - Adding a constant shifts all values.
     - Spread is unchanged.
     solution: σ stays 4.
+    mistakes: {"11": "m11_shift_sd", "28": "m11_shift_sd"}

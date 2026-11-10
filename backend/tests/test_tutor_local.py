@@ -107,6 +107,15 @@ def test_uncovered_question_saved_without_student_details_for_admin():
     topics = client.get("/admin/tutor-questions", headers=admin).json()
     assert any("Babylonian" in q["text"] for t in topics for q in t["questions"])
     assert client.get("/admin/tutor-questions", headers=anu).status_code == 403
+    # Marking it handled moves it off the open list and onto the handled one.
+    qid = next(q["id"] for t in topics for q in t["questions"] if "Babylonian" in q["text"])
+    assert client.post("/admin/tutor-questions/handled", json={"ids": [qid]}, headers=admin).json() == {"changed": 1}
+    open_ids = {q["id"] for t in client.get("/admin/tutor-questions", headers=admin).json() for q in t["questions"]}
+    done = client.get("/admin/tutor-questions?show=handled", headers=admin).json()
+    assert qid not in open_ids and any(q["id"] == qid and q["handled"] for t in done for q in t["questions"])
+    client.post("/admin/tutor-questions/handled", json={"ids": [qid], "handled": False}, headers=admin)
+    assert qid in {q["id"] for t in client.get("/admin/tutor-questions", headers=admin).json() for q in t["questions"]}
+    assert client.post("/admin/tutor-questions/handled", json={"ids": [qid]}, headers=anu).status_code == 403
 
 
 def test_chat_with_the_tutor_is_not_answered_from_notes():

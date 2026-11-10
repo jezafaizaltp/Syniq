@@ -5,6 +5,14 @@ title: Probability
 tips:
   c12_cond: 'P(A|B) = P(A ∩ B) ÷ P(B): divide by the probability of what you already know happened.'
   c12_indep: 'Independent: P(A ∩ B) = P(A) × P(B). Mutually exclusive: P(A ∩ B) = 0. They are different ideas.'
+  m12_bayes: "P(B|faulty) = P(B)P(faulty|B) ÷ P(faulty). Use the total from the last question."
+  m12_bayes_use: "Bayes reasons backwards: we see an effect and ask what probably caused it."
+  m12_conditional: "P(A|B) = P(A ∩ B) ÷ P(B)."
+  m12_expectation: "E(X) = Σ x·p(x)."
+  m12_given: "The sample space shrinks to outcomes with at least one head: HH, HT, TH."
+  m12_independent: "For independent events, P(A ∩ B) = P(A) × P(B)."
+  m12_sum_one: "All probabilities in a distribution add to 1."
+  m12_total_prob: "P(red) = P(bag 1)P(red|1) + P(bag 2)P(red|2)."
 concepts:
 - code: cbse12m.prob.conditional
   title: Conditional probability and independence
@@ -121,6 +129,7 @@ concepts:
     - 0.2 ÷ 0.5.
     - = 0.4.
     solution: 2/5.
+    mistakes: {"1/10": "m12_conditional", "1/2": "m12_conditional"}
   - prompt: A and B are independent with P(A) = 1/2, P(B) = 1/3. Find P(A ∩ B).
     answer: 1/6
     check: Rational(1,2)*Rational(1,3)
@@ -129,6 +138,7 @@ concepts:
     - Multiply.
     - 1/2 × 1/3.
     solution: 1/6.
+    mistakes: {"5/6": "m12_independent", "1/2": "m12_independent"}
   - prompt: Two coins are tossed. Find P(both heads | at least one head) as a fraction.
     answer: 1/3
     check: Rational(1,3)
@@ -137,6 +147,7 @@ concepts:
     - 'At least one head: HH, HT, TH.'
     - HH is one of three.
     solution: 1/3.
+    mistakes: {"1/4": "m12_given", "1/2": "m12_given"}
   - prompt: 'If A and B are mutually exclusive with non-zero probabilities, they are:'
     options:
     - not independent
@@ -159,6 +170,7 @@ concepts:
     - ½ × 3/5 + ½ × 1/5.
     - Total probability.
     solution: 2/5.
+    mistakes: {"4/5": "m12_total_prob", "3/5": "m12_total_prob", "1/5": "m12_total_prob"}
 - code: cbse12m.prob.bayes
   title: Bayes' theorem and random variables
   after:
@@ -275,6 +287,7 @@ concepts:
     - 0.6 × 0.02 + 0.4 × 0.05.
     - 0.012 + 0.02.
     solution: 0.032 = 4/125.
+    mistakes: {"7/100": "m12_total_prob", "7/200": "m12_total_prob"}
   - prompt: In the same case, find P(from B | faulty) as a fraction.
     answer: 5/8
     check: (Rational(4,10)*Rational(5,100))/(Rational(6,10)*Rational(2,100)+Rational(4,10)*Rational(5,100))
@@ -283,6 +296,7 @@ concepts:
     - 0.02 ÷ 0.032.
     - Bayes.
     solution: 5/8.
+    mistakes: {"2/5": "m12_bayes", "3/8": "m12_bayes"}
   - prompt: X takes values 0, 1, 2 with probabilities 1/4, 1/2, 1/4. Find E(X).
     answer: '1'
     check: 0*Rational(1,4)+1*Rational(1,2)+2*Rational(1,4)
@@ -291,6 +305,7 @@ concepts:
     - Σ x p.
     - 0 + 1/2 + 1/2.
     solution: '1.'
+    mistakes: {"1/2": "m12_expectation", "2": "m12_expectation"}
   - prompt: Find the expected value of the number shown on a fair die, as a fraction.
     answer: 7/2
     check: Rational(21,6)
@@ -299,6 +314,7 @@ concepts:
     - (1 + ... + 6)/6.
     - 21/6.
     solution: 3.5.
+    mistakes: {"3": "m12_expectation", "21": "m12_expectation", "6": "m12_expectation"}
   - prompt: Probabilities in a distribution are 0.2, 0.5 and k. Find k as a fraction.
     answer: 3/10
     check: 1-Rational(7,10)
@@ -307,6 +323,7 @@ concepts:
     - They add to 1.
     - 1 − 0.7.
     solution: 0.3.
+    mistakes: {"7/10": "m12_sum_one", "1/2": "m12_sum_one"}
   - prompt: 'Bayes'' theorem is used to find:'
     options:
     - the probability of a cause given an observed result
@@ -319,3 +336,4 @@ concepts:
     - Reverse conditional.
     - Posterior.
     solution: The probability of a cause given what was observed.
+    mistakes: {"the mean only": "m12_bayes_use", "the number of outcomes": "m12_bayes_use", "areas": "m12_bayes_use"}

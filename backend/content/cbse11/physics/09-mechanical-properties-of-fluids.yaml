@@ -5,6 +5,15 @@ title: Mechanical Properties of Fluids
 tips:
   c11p_pressure: 'Pressure at depth h in a liquid: P = P₀ + ρgh. Gauge pressure is only the ρgh part.'
   c11p_bernoulli: 'Bernoulli: P + ½ρv² + ρgh stays constant along a streamline, so where a fluid speeds up its pressure falls.'
+  p11_archimedes: "Archimedes' principle: the push up equals the weight of the fluid pushed aside."
+  p11_atm: "1 atm is about 100 kPa: the weight of a 10 m column of water on each square metre."
+  p11_continuity: "Av = constant. Halve the area and what happens to the speed?"
+  p11_depth_pressure: "P = hρg. Which quantities appear in that formula?"
+  p11_hydraulic_lift: "Pressure is the same on both pistons: F₁/A₁ = F₂/A₂. The small piston needs the smaller force."
+  p11_pressure: "P = F/A."
+  p11_terminal: "As speed grows, air drag grows. At terminal velocity, the forces on the drop add up to zero."
+  p11_torricelli: "v = √(2gh). Take the square root."
+  p11_viscosity_heat: "Warm honey or cold honey: which pours more easily?"
 concepts:
 - code: cbse11p.fluids.pressure
   title: Pressure and Pascal's law
@@ -128,6 +137,7 @@ concepts:
     - P = F/A.
     - 50 ÷ 0.01.
     solution: 5,000 Pa.
+    mistakes: {"0.5": "p11_pressure", "500": "p11_pressure"}
   - prompt: In a hydraulic lift, A₁ = 0.01 m² and A₂ = 0.5 m². What force (in N) on the small piston lifts 10,000 N?
     answer: '200'
     check: 10000*Rational(1,100)/Rational(1,2)
@@ -136,6 +146,7 @@ concepts:
     - F₁ = F₂ × A₁/A₂.
     - 10000 × 0.01 ÷ 0.5.
     solution: 200 N.
+    mistakes: {"500000": "p11_hydraulic_lift", "50": "p11_hydraulic_lift"}
   - prompt: 'Pressure at a given depth in a liquid depends on:'
     options:
     - depth, liquid density and g
@@ -148,6 +159,7 @@ concepts:
     - P = ρgh.
     - Hydrostatic paradox.
     solution: Only depth, density and g matter, not the vessel's shape.
+    mistakes: {"the shape of the vessel": "p11_depth_pressure", "the total volume of liquid": "p11_depth_pressure", "the area of the base": "p11_depth_pressure"}
   - prompt: 'Atmospheric pressure at sea level is about:'
     options:
     - 1.013 × 10⁵ Pa
@@ -160,6 +172,7 @@ concepts:
     - 76 cm of mercury.
     - About 100,000 Pa.
     solution: About 1.013 × 10⁵ Pa.
+    mistakes: {"1.013 × 10³ Pa": "p11_atm", "9.8 Pa": "p11_atm", "76 Pa": "p11_atm"}
   - prompt: 'The upthrust on a body in a fluid equals:'
     options:
     - the weight of fluid it displaces
@@ -172,6 +185,7 @@ concepts:
     - Archimedes' principle.
     - Displaced fluid.
     solution: Upthrust = weight of displaced fluid.
+    mistakes: {"its own weight": "p11_archimedes", "its volume": "p11_archimedes", "the fluid pressure at the top": "p11_archimedes"}
 - code: cbse11p.fluids.flow
   title: Fluid flow, viscosity and surface tension
   after:
@@ -284,6 +298,7 @@ concepts:
     - A₁v₁ = A₂v₂.
     - 6 × 2 ÷ 3.
     solution: 4 m/s.
+    mistakes: {"1": "p11_continuity", "2": "p11_continuity"}
   - prompt: Water leaks from a hole 5 m below the surface of a tank. Find its speed (in m/s), g = 10 m/s².
     answer: '10'
     check: sqrt(2*10*5)
@@ -292,6 +307,7 @@ concepts:
     - 'Torricelli: v = √(2gh).'
     - √100.
     solution: 10 m/s.
+    mistakes: {"100": "p11_torricelli", "50": "p11_torricelli"}
   - prompt: 'Where fluid flows faster along a horizontal streamline, its pressure is:'
     options:
     - lower
@@ -318,6 +334,7 @@ concepts:
     - Hot honey flows easily.
     - Molecules move apart.
     solution: Liquids become less viscous when heated.
+    mistakes: {"increases": "p11_viscosity_heat", "stays the same": "p11_viscosity_heat", "becomes infinite": "p11_viscosity_heat"}
   - prompt: Surface tension of soap solution is 0.03 N/m. Find the excess pressure (in Pa) inside a soap bubble of radius 0.01 m.
     answer: '12'
     check: 4*Rational(3,100)/Rational(1,100)
@@ -340,3 +357,4 @@ concepts:
     - Terminal velocity.
     - Net force zero.
     solution: At terminal velocity the drag force balances the net downward force.
+    mistakes: {"gravity switches off": "p11_terminal", "air pressure pushes it up": "p11_terminal", "surface tension stops it": "p11_terminal"}

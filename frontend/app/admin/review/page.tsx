@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { api } from "@/lib/api";
+import { api, ApiError, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
 
 type SubjectRow = { id: number; name: string; grade: number; syllabus: string; questions: number };
@@ -16,6 +16,7 @@ type Question = {
   solution: string;
   difficulty: number;
   status: string;
+  fix_note: string;
   mistakes: { wrong: string; tip: string }[];
 };
 type Sheet = {
@@ -23,6 +24,9 @@ type Sheet = {
   questions: number;
   chapters: { number: number; title: string; topics: { title: string; questions: Question[] }[] }[];
 };
+
+type Fix = { id: number; subject: string; chapter: string; topic: string; prompt: string; answer: string; note: string };
+type UploadResult = { ok: number; to_fix: number; not_checked: number; unknown_ids: string[] };
 
 const BOARD_WORDS: Record<string, string> = { kerala_scert: "Kerala SCERT", cbse: "CBSE" };
 const LEVEL_WORDS = ["", "Easy", "Medium", "Harder"];
@@ -72,6 +76,10 @@ export default function ReviewSheet() {
   const [sheet, setSheet] = useState<Sheet | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [chapter, setChapter] = useState<number | null>(null);
+  const [fixes, setFixes] = useState<Fix[]>([]);
+  const [upload, setUpload] = useState<UploadResult | null>(null);
+  const [uploadError, setUploadError] = useState("");
   const staff = me?.role === "admin" || me?.role === "teacher";
 
   useEffect(() => {
@@ -79,13 +87,33 @@ export default function ReviewSheet() {
   }, [staff, loading, router]);
 
   useEffect(() => {
-    if (staff) api<SubjectRow[]>("/admin/review-sheet").then(setSubjects).catch(() => setError("Couldn't load the subjects."));
+    if (!staff) return;
+    api<SubjectRow[]>("/admin/review-sheet").then(setSubjects).catch(() => setError("Couldn't load the subjects."));
+    api<Fix[]>("/admin/review-fixes").then(setFixes).catch(() => {});
   }, [staff]);
+
+  async function readFilledSheet(file: File | undefined) {
+    setUpload(null);
+    setUploadError("");
+    if (!file) return;
+    try {
+      setUpload(await post<UploadResult>("/admin/review-sheet/upload", { csv: await file.text() }));
+      setFixes(await api<Fix[]>("/admin/review-fixes"));
+    } catch (e) {
+      setUploadError(e instanceof ApiError ? e.message : "Couldn't read that file.");
+    }
+  }
+
+  async function markFixed(id: number) {
+    await post(`/admin/review-fixes/${id}/done`, {});
+    setFixes((f) => f.filter((x) => x.id !== id));
+  }
 
   useEffect(() => {
     if (chosen === null) return;
     setBusy(true);
     setSheet(null);
+    setChapter(null);
     setError("");
     api<Sheet>(`/admin/review-sheet/${chosen}`)
       .then(setSheet)
@@ -95,7 +123,17 @@ export default function ReviewSheet() {
 
   if (!staff) return null;
 
-  const fileName = sheet ? `syniq-review-${classWords(sheet.subject.grade)}-${sheet.subject.name}.csv`.replace(/\s+/g, "-").toLowerCase() : "";
+  // One chapter at a time keeps a printout short enough for a teacher to finish in one sitting.
+  const shown: Sheet | null = sheet && {
+    ...sheet,
+    chapters: sheet.chapters.filter((c) => chapter === null || c.number === chapter),
+  };
+  const shownCount = shown ? shown.chapters.reduce((n, c) => n + c.topics.reduce((m, t) => m + t.questions.length, 0), 0) : 0;
+  const fileName = sheet
+    ? `syniq-review-${classWords(sheet.subject.grade)}-${sheet.subject.name}${chapter === null ? "" : `-chapter-${chapter}`}.csv`
+        .replace(/\s+/g, "-")
+        .toLowerCase()
+    : "";
 
   return (
     <div className="wrap wide">
@@ -122,27 +160,81 @@ export default function ReviewSheet() {
             ))}
           </select>
         </label>
+        {sheet && (
+          <label>
+            {" "}
+            Chapter{" "}
+            <select value={chapter ?? ""} onChange={(e) => setChapter(e.target.value ? Number(e.target.value) : null)}>
+              <option value="">All chapters</option>
+              {sheet.chapters.map((c) => (
+                <option key={c.number} value={c.number}>
+                  {c.number}. {c.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         {busy && <p className="muted">Loading…</p>}
         {error && <p role="alert">{error}</p>}
         {sheet && (
           <p>
             <button onClick={() => window.print()}>Print</button>{" "}
-            <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(toCsv(sheet))}`} download={fileName}>
+            <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(toCsv(shown!))}`} download={fileName}>
               Download spreadsheet (CSV)
             </a>
           </p>
         )}
+
+        <section className="card">
+          <h2>Bring back a filled-in spreadsheet</h2>
+          <p className="muted">
+            Upload the CSV after a teacher has written yes or no and what to fix. Questions marked no, or with a note, go on the fix
+            list below. Nothing changes for students until the question itself is corrected.
+          </p>
+          <label htmlFor="filled">Filled-in sheet (CSV)</label>{" "}
+          <input id="filled" type="file" accept=".csv,text/csv" onChange={(e) => readFilledSheet(e.target.files?.[0])} />
+          {uploadError && (
+            <p className="feedback warn" role="alert">
+              {uploadError}
+            </p>
+          )}
+          {upload && (
+            <p role="status">
+              {upload.to_fix} to fix, {upload.ok} marked correct, {upload.not_checked} not checked yet.
+              {upload.unknown_ids.length > 0 && ` These ids weren't found: ${upload.unknown_ids.join(", ")}.`}
+            </p>
+          )}
+          <h3>Fix list ({fixes.length})</h3>
+          {fixes.length === 0 && <p className="muted">Nothing waiting to be fixed.</p>}
+          <ul className="fix-list">
+            {fixes.map((f) => (
+              <li key={f.id}>
+                <p>
+                  <strong>{f.prompt}</strong> <span className="muted">(id {f.id}, answer {f.answer})</span>
+                </p>
+                <p className="muted">
+                  {f.subject}, chapter {f.chapter}, {f.topic}
+                </p>
+                <p style={{ whiteSpace: "pre-line" }}>{f.note}</p>
+                <button className="secondary" onClick={() => markFixed(f.id)}>
+                  Fixed, take it off the list
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
 
-      {sheet && (
+      {shown && (
         <div className="print-sheet review-sheet">
           <h2>
-            {BOARD_WORDS[sheet.subject.syllabus] ?? sheet.subject.syllabus} {classWords(sheet.subject.grade)}: {sheet.subject.name}
+            {BOARD_WORDS[shown.subject.syllabus] ?? shown.subject.syllabus} {classWords(shown.subject.grade)}: {shown.subject.name}
           </h2>
           <p className="muted">
-            {sheet.questions} questions. Reviewer: ____________________ Date: ____________
+            {chapter === null ? "" : `Chapter ${chapter} only. `}
+            {shownCount} questions. Reviewer: ____________________ Date: ____________
           </p>
-          {sheet.chapters.map((ch) => (
+          {shown.chapters.map((ch) => (
             <section key={ch.number} className="card review-chapter">
               <h3>
                 Chapter {ch.number}. {ch.title}
@@ -178,6 +270,7 @@ export default function ReviewSheet() {
                             ))}
                           </ul>
                         )}
+                        {q.fix_note && <p className="feedback warn no-print">Waiting to be fixed: {q.fix_note}</p>}
                         <p className="review-verdict">☐ Correct ☐ Fix: ______________________________________________</p>
                       </li>
                     ))}

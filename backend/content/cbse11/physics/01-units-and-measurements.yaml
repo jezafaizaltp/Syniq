@@ -4,7 +4,17 @@ chapter: 1
 title: Units and Measurements
 tips:
   c11p_sigfig: Leading zeros never count as significant figures; zeros between digits always do; trailing zeros after a decimal point do.
-  c11p_dims: 'Write each quantity in M, L, T: velocity [LT⁻¹], acceleration [LT⁻²], force [MLT⁻²], energy [ML²T⁻²].'
+  c11p_dims: "Write each quantity in M, L, T step by step: velocity [LT⁻¹], acceleration [LT⁻²]. Then build the one asked for from its formula."
+  p11_dimless: "Strain is a length divided by a length. What's left when units cancel?"
+  p11_dims_check: "Each term must have the same dimensions. Check every term of each equation for length, speed, etc."
+  p11_dims_ke: "KE = ½mv². Write the dimensions of m and of v², then multiply."
+  p11_dims_limit: "Pure numbers have no dimensions. Can a dimension check ever see them?"
+  p11_dims_pressure: "Pressure = force ÷ area: [MLT⁻²] ÷ [L²]. Subtract the powers of L."
+  p11_km_m: "1 km = 1000 m."
+  p11_si_base: "List them: metre, kilogram, second, ampere, kelvin, mole and one for light. Count."
+  p11_sig_product: "When multiplying, the answer keeps as many significant figures as the least precise measurement."
+  p11_sig_zeros: "Trailing zeros after a decimal point are significant: they show how precisely you measured."
+  p11_units: "Joule is energy, watt power, pascal pressure. Force is named after the man of the three laws."
 concepts:
 - code: cbse11p.units.si
   title: SI units and significant figures
@@ -99,6 +109,7 @@ concepts:
     - m, kg, s, A, K, mol, cd.
     - Count.
     solution: Seven.
+    mistakes: {"3": "p11_si_base", "5": "p11_si_base"}
   - prompt: How many significant figures are in 0.00304?
     answer: '3'
     check: '3'
@@ -117,6 +128,7 @@ concepts:
     - Trailing zeros after a decimal count.
     - 2, 5, 0, 0.
     solution: Four.
+    mistakes: {"2": "p11_sig_zeros", "3": "p11_sig_zeros"}
   - prompt: Convert 5 km into metres.
     answer: '5000'
     check: 5*10**3
@@ -125,6 +137,7 @@ concepts:
     - kilo = 10³.
     - 5 × 1000.
     solution: 5,000 m.
+    mistakes: {"500": "p11_km_m", "50000": "p11_km_m"}
   - prompt: Which is the SI unit of force?
     options:
     - newton
@@ -137,6 +150,7 @@ concepts:
     - kg m s⁻².
     - Named after Newton.
     solution: Force is measured in newtons.
+    mistakes: {"joule": "p11_units", "watt": "p11_units", "pascal": "p11_units"}
   - prompt: A rectangle measures 2.5 m by 1.25 m. Its area is 3.125 m². To how many significant figures should it be given?
     answer: '2'
     check: '2'
@@ -145,6 +159,7 @@ concepts:
     - 'Product: fewest significant figures.'
     - 2.5 has 2.
     solution: 'Two significant figures: 3.1 m².'
+    mistakes: {"4": "p11_sig_product", "3": "p11_sig_product"}
 - code: cbse11p.units.dims
   title: Dimensions and dimensional analysis
   after:
@@ -249,6 +264,7 @@ concepts:
     - ½mv².
     - '[M][L²T⁻²].'
     solution: Energy is [ML²T⁻²].
+    mistakes: {"[MLT⁻²]": "p11_dims_ke", "[ML²T⁻¹]": "p11_dims_ke", "[MLT]": "p11_dims_ke"}
   - prompt: Which quantity is dimensionless?
     options:
     - Strain
@@ -261,6 +277,7 @@ concepts:
     - Ratio of two lengths.
     - No units.
     solution: 'Strain = change in length ÷ length: dimensionless.'
+    mistakes: {"Speed": "p11_dimless", "Force": "p11_dimless", "Power": "p11_dimless"}
   - prompt: In [MᵃLᵇTᶜ] for pressure, what is b?
     options:
     - −1
@@ -273,6 +290,7 @@ concepts:
     - Pressure = force/area.
     - '[MLT⁻²]/[L²].'
     solution: Pressure is [ML⁻¹T⁻²], so b = −1.
+    mistakes: {"1": "p11_dims_pressure", "2": "p11_dims_pressure", "−2": "p11_dims_pressure"}
   - prompt: Which equation is dimensionally correct?
     options:
     - s = ut + ½at²
@@ -285,6 +303,7 @@ concepts:
     - Each term should be a length.
     - ut and at² are lengths.
     solution: All terms in s = ut + ½at² have dimension [L].
+    mistakes: {"v = u + at²": "p11_dims_check", "s = u + at": "p11_dims_check", "v² = u + 2as": "p11_dims_check"}
   - prompt: 'Dimensional analysis cannot find:'
     options:
     - dimensionless constants like ½ or 2π
@@ -297,3 +316,4 @@ concepts:
     - Pure numbers have no dimensions.
     - Limitation.
     solution: Pure-number constants can't be found by dimensions.
+    mistakes: {"whether an equation is consistent": "p11_dims_limit", "how to convert units": "p11_dims_limit", "the form of a simple relation": "p11_dims_limit"}

@@ -5,6 +5,15 @@ title: Some Basic Concepts of Chemistry
 tips:
   c11c_mole: Moles = mass ÷ molar mass. One mole of anything contains 6.022 × 10²³ particles.
   c11c_molarity: Molarity = moles of solute ÷ volume of SOLUTION in litres (not millilitres, not volume of water).
+  c11_amu: "The modern standard is carbon-12, chosen in 1961. One amu is a set fraction of its mass."
+  c11_avogadro: "Molecules = moles × 6.022 × 10²³."
+  c11_empirical: "Divide every subscript by their highest common factor to get the simplest ratio."
+  c11_law_definite: "Water from a river or a lab always has H and O in the same mass ratio. Which law says the ratio is fixed?"
+  c11_mass_from_mol: "Mass = moles × molar mass. Find the molar mass of NaOH first."
+  c11_molality: "Volume changes with temperature, mass does not. Which unit uses mass of solvent, not volume of solution?"
+  c11_molar_mass: "Add the atomic masses of every atom: two H and one O."
+  c11_mole_ratio: "Read the coefficients: 2 mol H₂ gives 2 mol H₂O. Scale up."
+  c11_percent: "% O = mass of O in one molecule ÷ molar mass × 100."
 concepts:
 - code: cbse11c.basic.mole
   title: Laws of combination and the mole
@@ -103,6 +112,7 @@ concepts:
     - 2 × 1 + 16.
     - Add atomic masses.
     solution: 18 g/mol.
+    mistakes: {"17": "c11_molar_mass", "10": "c11_molar_mass", "34": "c11_molar_mass"}
   - prompt: How many moles are in 88 g of CO₂ (C = 12, O = 16)?
     answer: '2'
     check: 88/(12+2*16)
@@ -121,6 +131,7 @@ concepts:
     - M = 40.
     - 0.5 × 40.
     solution: 20 g.
+    mistakes: {"40": "c11_mass_from_mol", "80": "c11_mass_from_mol", "10": "c11_mass_from_mol"}
   - prompt: How many molecules are in 2 mol of oxygen gas, in units of 10²³? (use 6.022)
     answer: '12.044'
     check: 2*Rational(6022,1000)
@@ -129,6 +140,7 @@ concepts:
     - n × Nₐ.
     - 2 × 6.022.
     solution: 12.044 × 10²³ molecules.
+    mistakes: {"6.022": "c11_avogadro", "24.088": "c11_avogadro", "3.011": "c11_avogadro"}
   - prompt: Which law says a compound always contains the same elements in the same mass ratio?
     options:
     - law of definite proportions
@@ -141,6 +153,7 @@ concepts:
     - Proust.
     - Water is always 1:8 H:O by mass.
     solution: The law of definite proportions.
+    mistakes: {"law of multiple proportions": "c11_law_definite", "law of conservation of mass": "c11_law_definite", "Avogadro's law": "c11_law_definite"}
   - prompt: 'One atomic mass unit is defined as:'
     options:
     - 1/12 of the mass of a carbon-12 atom
@@ -153,6 +166,7 @@ concepts:
     - Carbon-12 standard.
     - Twelfth.
     solution: 1 u = 1/12 of a C-12 atom's mass.
+    mistakes: {"the mass of a hydrogen atom": "c11_amu", "1/16 of an oxygen atom": "c11_amu", "the mass of a proton exactly": "c11_amu"}
 - code: cbse11c.basic.stoich
   title: Formulae, concentration and stoichiometry
   after:
@@ -273,6 +287,7 @@ concepts:
     - 'Ratio H₂ : H₂O = 2 : 2.'
     - Same number.
     solution: 4 mol.
+    mistakes: {"2": "c11_mole_ratio", "8": "c11_mole_ratio"}
   - prompt: In 2H₂ + O₂ → 2H₂O, how many moles of O₂ are needed for 6 mol of H₂?
     answer: '3'
     check: 6/2
@@ -281,6 +296,7 @@ concepts:
     - 'Ratio 2 : 1.'
     - 6 ÷ 2.
     solution: 3 mol.
+    mistakes: {"6": "c11_mole_ratio", "12": "c11_mole_ratio", "2": "c11_mole_ratio"}
   - prompt: Find the percentage of oxygen by mass in water (H = 1, O = 16), to the nearest whole number.
     answer: '89'
     check: round(Rational(16,18)*100)
@@ -289,6 +305,7 @@ concepts:
     - 16/18 × 100.
     - 88.9.
     solution: About 89%.
+    mistakes: {"33": "c11_percent", "11": "c11_percent", "50": "c11_percent"}
   - prompt: 'The empirical formula of glucose, C₆H₁₂O₆, is:'
     options:
     - CH₂O
@@ -301,6 +318,7 @@ concepts:
     - Divide by 6.
     - Simplest ratio.
     solution: CH₂O.
+    mistakes: {"C₆H₁₂O₆": "c11_empirical", "C₂H₄O₂": "c11_empirical", "CHO": "c11_empirical"}
   - prompt: Which concentration unit does not change with temperature?
     options:
     - molality
@@ -313,3 +331,4 @@ concepts:
     - Volume changes with T.
     - Mass doesn't.
     solution: Molality uses mass of solvent, so it doesn't change.
+    mistakes: {"molarity": "c11_molality", "grams per litre": "c11_molality", "normality": "c11_molality"}

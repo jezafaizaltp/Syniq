@@ -5,6 +5,16 @@ title: Straight Lines
 tips:
   c11_slope: Slope = rise ÷ run = (y₂ − y₁)/(x₂ − x₁). Keep the same order of points on top and bottom.
   c11_perp: 'Perpendicular lines have slopes that multiply to −1: flip the fraction and change its sign.'
+  m11_collinear: "Collinear points give the same slope between any two pairs. Equate the slopes and solve."
+  m11_find_c: "Substitute the point into y = 4x + c and solve for c."
+  m11_horizontal: "A horizontal line does not rise as you move right. Rise ÷ run = ?"
+  m11_intercept_form: "Put x = 2 into x/4 + y/6 = 1, then solve for y."
+  m11_parallel_dist: "Distance = |C₁ − C₂| / √(A² + B²). Watch the signs when subtracting."
+  m11_point_line: "Distance = |Ax₁ + By₁ + C| / √(A² + B²). Don't forget to divide."
+  m11_slope_general: "Rewrite as y = mx + c, or use m = −A/B for Ax + By + C = 0."
+  m11_slope_tan: "Slope m = tan θ. Use the value of tan at that angle, not the angle itself."
+  m11_slope_two: "Slope = (y₂ − y₁)/(x₂ − x₁). Keep the order the same on top and bottom."
+  m11_y_intercept: "Put x = 0 and solve for y."
 concepts:
 - code: cbse11m.lines.slope
   title: Slope of a line
@@ -124,6 +134,7 @@ concepts:
     - m = tan θ.
     - tan 45°.
     solution: m = 1.
+    mistakes: {"45": "m11_slope_tan", "0": "m11_slope_tan"}
   - prompt: A line has slope 2/3. Find the slope of a line perpendicular to it.
     answer: -3/2
     check: -1/Rational(2,3)
@@ -146,6 +157,7 @@ concepts:
     - No rise.
     - 0 ÷ run.
     solution: A horizontal line has slope 0.
+    mistakes: {"1": "m11_horizontal", "Undefined": "m11_horizontal", "−1": "m11_horizontal"}
   - prompt: The points (1, 1), (2, 3) and (k, 7) are collinear. Find k.
     answer: '4'
     check: 1 + 6/2
@@ -154,6 +166,7 @@ concepts:
     - Slope of first two = 2.
     - (7 − 1)/(k − 1) = 2.
     solution: k − 1 = 3, so k = 4.
+    mistakes: {"5": "m11_collinear", "3": "m11_collinear"}
   - prompt: Find the slope of the line through (−2, 5) and (3, −5).
     answer: '-2'
     check: Rational(-10,5)
@@ -162,6 +175,7 @@ concepts:
     - (−5 − 5)/(3 + 2).
     - −10/5.
     solution: Slope = −2.
+    mistakes: {"2": "m11_slope_two", "-1/2": "m11_slope_two"}
 - code: cbse11m.lines.equations
   title: Equations of a line and distance
   after:
@@ -290,6 +304,7 @@ concepts:
     - Put x = 0.
     - 2y = 6.
     solution: y = 3.
+    mistakes: {"2": "m11_y_intercept", "6": "m11_y_intercept"}
   - prompt: Find the slope of the line 3x + 2y − 6 = 0.
     answer: -3/2
     check: Rational(-3,2)
@@ -298,6 +313,7 @@ concepts:
     - Slope = −A/B.
     - −3/2.
     solution: −3/2.
+    mistakes: {"3/2": "m11_slope_general", "-2/3": "m11_slope_general"}
   - prompt: A line through (2, 3) has slope 4. Find its y-intercept c in y = mx + c.
     answer: '-5'
     check: 3 - 8
@@ -306,6 +322,7 @@ concepts:
     - 3 = 4 × 2 + c.
     - c = 3 − 8.
     solution: c = −5.
+    mistakes: {"5": "m11_find_c", "11": "m11_find_c"}
   - prompt: Find the distance of the point (3, 4) from the line 3x + 4y − 5 = 0.
     answer: '4'
     check: abs(3*3+4*4-5)/sqrt(3**2+4**2)
@@ -314,6 +331,7 @@ concepts:
     - '|9 + 16 − 5|/√(9 + 16).'
     - 20/5.
     solution: 20/5 = 4.
+    mistakes: {"20": "m11_point_line", "5": "m11_point_line"}
   - prompt: Find the distance between the parallel lines 3x + 4y + 7 = 0 and 3x + 4y − 8 = 0.
     answer: '3'
     check: abs(7-(-8))/sqrt(3**2+4**2)
@@ -322,6 +340,7 @@ concepts:
     - '|C₁ − C₂|/√(A² + B²).'
     - 15/5.
     solution: 15/5 = 3.
+    mistakes: {"1/5": "m11_parallel_dist", "15": "m11_parallel_dist"}
   - prompt: A line cuts the x-axis at 4 and the y-axis at 6. Using x/4 + y/6 = 1, find y when x = 2.
     answer: '3'
     check: 6*(1-Rational(2,4))
@@ -330,3 +349,4 @@ concepts:
     - 2/4 + y/6 = 1.
     - y/6 = 1/2.
     solution: y = 3.
+    mistakes: {"2": "m11_intercept_form", "4": "m11_intercept_form"}

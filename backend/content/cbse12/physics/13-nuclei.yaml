@@ -5,6 +5,16 @@ title: Nuclei
 tips:
   c12p_be: Binding energy = mass defect × c² (1 u ≈ 931.5 MeV). Higher binding energy per nucleon means a more stable nucleus.
   c12p_fission: Fission splits a heavy nucleus; fusion joins light nuclei. Both release energy because products are more tightly bound.
+  p12_be_per_nucleon: "BE per nucleon = total BE ÷ A."
+  p12_chain: "Generation 1 has 1 fission, generation 2 has 3, generation 3 multiplies again."
+  p12_control_rods: "Cadmium and boron rods are pushed in to slow the chain. What do they do to neutrons?"
+  p12_fission_energy: "Fission of one U-235 nucleus releases far more than chemical reactions (a few eV): it's in the hundreds of MeV."
+  p12_fusion: "Two positive nuclei repel. Only very fast nuclei get close enough to fuse."
+  p12_mass_energy: "E = Δm × 931.5 MeV."
+  p12_moderator: "Slow neutrons cause fission more easily. Water and graphite do this job."
+  p12_neutrons: "N = A − Z."
+  p12_nuclear_force: "It holds protons together against repulsion, but only over about a femtometre."
+  p12_nuclear_radius: "R ∝ A^(1/3). Find the number that, cubed, gives 27."
 concepts:
 - code: cbse12p.nuclei.structure
   title: Nuclear structure and binding energy
@@ -87,6 +97,7 @@ concepts:
     - A − Z.
     - 235 − 92.
     solution: '143.'
+    mistakes: {"92": "p12_neutrons", "235": "p12_neutrons", "327": "p12_neutrons"}
   - prompt: A mass defect of 0.1 u corresponds to how much energy (MeV), using 931.5 MeV/u?
     answer: '93.15'
     check: Rational(9315,100)
@@ -95,6 +106,7 @@ concepts:
     - 0.1 × 931.5.
     - Multiply.
     solution: 93.15 MeV.
+    mistakes: {"931.5": "p12_mass_energy", "9.315": "p12_mass_energy"}
   - prompt: A nucleus with A = 8 has binding energy 56 MeV. Find the binding energy per nucleon (MeV).
     answer: '7'
     check: 56/8
@@ -103,6 +115,7 @@ concepts:
     - E_b/A.
     - 56/8.
     solution: 7 MeV.
+    mistakes: {"448": "p12_be_per_nucleon", "64": "p12_be_per_nucleon"}
   - prompt: If R = R₀A^(1/3), by what factor is a nucleus with A = 27 larger in radius than one with A = 1?
     answer: '3'
     check: '3'
@@ -111,6 +124,7 @@ concepts:
     - 27^(1/3).
     - '3.'
     solution: 3 times.
+    mistakes: {"27": "p12_nuclear_radius", "9": "p12_nuclear_radius"}
   - prompt: Which nucleus is the most stable (highest binding energy per nucleon)?
     options:
     - iron-56
@@ -137,6 +151,7 @@ concepts:
     - Holds nucleus together.
     - About 2–3 fm.
     solution: Strong and short-range.
+    mistakes: {"weak and long-range": "p12_nuclear_force", "the same as gravity": "p12_nuclear_force", "only between protons": "p12_nuclear_force"}
 - code: cbse12p.nuclei.energy
   title: Nuclear fission and fusion
   after:
@@ -219,6 +234,7 @@ concepts:
     - Typical value.
     - Two hundred.
     solution: About 200 MeV.
+    mistakes: {"20": "p12_fission_energy", "2000": "p12_fission_energy"}
   - prompt: Each fission releases 3 neutrons, each causing another fission. How many fissions are in the 3rd generation (starting from 1)?
     answer: '9'
     check: 3**2
@@ -227,6 +243,7 @@ concepts:
     - 1, 3, 9.
     - 3².
     solution: '9.'
+    mistakes: {"27": "p12_chain", "3": "p12_chain", "6": "p12_chain"}
   - prompt: 'In a nuclear reactor, control rods are made of materials that:'
     options:
     - absorb neutrons
@@ -239,6 +256,7 @@ concepts:
     - Cadmium, boron.
     - Slow the chain.
     solution: Absorb neutrons.
+    mistakes: {"speed up neutrons": "p12_control_rods", "produce neutrons": "p12_control_rods", "cool the reactor": "p12_control_rods"}
   - prompt: 'A moderator in a reactor:'
     options:
     - slows down neutrons
@@ -251,6 +269,7 @@ concepts:
     - Heavy water, graphite.
     - Slow neutrons cause fission better.
     solution: Slows neutrons down.
+    mistakes: {"absorbs all neutrons": "p12_moderator", "stops the reaction": "p12_moderator", "makes uranium": "p12_moderator"}
   - prompt: 'The Sun''s energy comes from:'
     options:
     - nuclear fusion
@@ -277,3 +296,4 @@ concepts:
     - Both positive.
     - Thermonuclear.
     solution: Positive nuclei must move fast enough to overcome repulsion.
+    mistakes: {"it needs light": "p12_fusion", "it absorbs energy": "p12_fusion", "neutrons are slow": "p12_fusion"}

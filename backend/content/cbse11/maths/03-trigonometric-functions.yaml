@@ -5,6 +5,16 @@ title: Trigonometric Functions
 tips:
   c11_radian: To convert degrees to radians multiply by π/180; radians to degrees multiply by 180/π.
   c11_quadrant: 'ASTC: All positive in quadrant I, Sine in II, Tan in III, Cos in IV.'
+  m11_allied: "π − x is in the second quadrant, where sine is positive. And π keeps sin as sin."
+  m11_arc: "Arc length l = rθ with θ in radians."
+  m11_compound: "75° = 45° + 30°. Use sin(A + B) = sin A cos B + cos A sin B with the table values."
+  m11_compound_cos: "15° = 45° − 30°. Use cos(A − B) = cos A cos B + sin A sin B. Note the sign is plus."
+  m11_cos_double: "cos 2x = 2cos² x − 1. Square first, double, then subtract 1."
+  m11_double_angle: "sin 2x = 2 sin x cos x. Don't forget the 2."
+  m11_pythag_trig: "Use sin² x + cos² x = 1, or draw a 3-4-5 triangle. In the first quadrant cos is positive."
+  m11_rad_deg: "π radians = 180°. Divide 180 by the denominator."
+  m11_tan_sum: "tan(A + B) = (tan A + tan B)/(1 − tan A tan B). Work out top and bottom separately."
+  m11_trig_values: "Write down sin 30° and cos 60° separately from the table, then add."
 concepts:
 - code: cbse11m.trig.angles
   title: Radian measure and trigonometric functions
@@ -155,6 +165,7 @@ concepts:
     - × 180/π.
     - 180/4.
     solution: π/4 = 45°.
+    mistakes: {"90": "m11_rad_deg", "180": "m11_rad_deg"}
   - prompt: A circle has radius 10 cm. Find the arc length for a central angle of 2 radians (in cm).
     answer: '20'
     check: 10*2
@@ -163,6 +174,7 @@ concepts:
     - l = rθ.
     - 10 × 2.
     solution: l = 10 × 2 = 20 cm.
+    mistakes: {"5": "m11_arc", "10": "m11_arc"}
   - prompt: Find sin 30° + cos 60°.
     answer: '1'
     check: sin(pi/6) + cos(pi/3)
@@ -171,6 +183,7 @@ concepts:
     - Both equal 1/2.
     - Add.
     solution: 1/2 + 1/2 = 1.
+    mistakes: {"2": "m11_trig_values", "1/2": "m11_trig_values"}
   - prompt: In which quadrant are sine and cosine both negative?
     options:
     - Third
@@ -193,6 +206,7 @@ concepts:
     - sin² + cos² = 1.
     - 1 − 9/25 = 16/25.
     solution: cos x = 4/5.
+    mistakes: {"3/4": "m11_pythag_trig", "2/5": "m11_pythag_trig"}
 - code: cbse11m.trig.identities
   title: Compound angles and trigonometric identities
   after:
@@ -276,6 +290,7 @@ concepts:
     - 75° = 45° + 30°.
     - Use sin(A + B).
     solution: sin 75° = (√6 + √2)/4.
+    mistakes: {"(√6 − √2)/4": "m11_compound", "(√3 + 1)/2": "m11_compound", "√3/2": "m11_compound"}
   - prompt: If sin x = 3/5 and cos x = 4/5, find sin 2x.
     answer: 24/25
     check: 2*Rational(3,5)*Rational(4,5)
@@ -284,6 +299,7 @@ concepts:
     - sin 2x = 2 sin x cos x.
     - 2 × 3/5 × 4/5.
     solution: sin 2x = 24/25.
+    mistakes: {"12/25": "m11_double_angle", "6/5": "m11_double_angle"}
   - prompt: If cos x = 1/3, find cos 2x.
     answer: -7/9
     check: 2*Rational(1,9) - 1
@@ -292,6 +308,7 @@ concepts:
     - cos 2x = 2cos² x − 1.
     - 2/9 − 1.
     solution: cos 2x = 2/9 − 1 = −7/9.
+    mistakes: {"2/3": "m11_cos_double", "7/9": "m11_cos_double", "-1/3": "m11_cos_double"}
   - prompt: Find cos 15°.
     options:
     - (√6 + √2)/4
@@ -304,6 +321,7 @@ concepts:
     - 15° = 45° − 30°.
     - cos(A − B) = cos A cos B + sin A sin B.
     solution: cos 15° = (√6 + √2)/4.
+    mistakes: {"(√6 − √2)/4": "m11_compound_cos", "(√2 − 1)/2": "m11_compound_cos", "1/2": "m11_compound_cos"}
   - prompt: 'sin(π − x) equals:'
     options:
     - sin x
@@ -316,6 +334,7 @@ concepts:
     - Quadrant II, sine positive.
     - Allied angle.
     solution: sin(π − x) = sin x.
+    mistakes: {"−sin x": "m11_allied", "cos x": "m11_allied", "−cos x": "m11_allied"}
   - prompt: If tan A = 1/2 and tan B = 1/3, find tan(A + B).
     answer: '1'
     check: (Rational(1,2)+Rational(1,3))/(1-Rational(1,6))
@@ -324,3 +343,4 @@ concepts:
     - (tan A + tan B)/(1 − tan A tan B).
     - (5/6)/(5/6).
     solution: tan(A + B) = (5/6)/(1 − 1/6) = 1.
+    mistakes: {"5/6": "m11_tan_sum", "1/6": "m11_tan_sum"}

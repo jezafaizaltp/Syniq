@@ -5,6 +5,16 @@ title: Relations and Functions
 tips:
   c11_product_count: 'The number of ordered pairs in A × B is n(A) × n(B): multiply, don''t add.'
   c11_function: A function gives each input exactly one output. One input with two outputs is not a function.
+  m11_cartesian_size: "If A has n elements, A × A has n × n. Which n gives 9?"
+  m11_domain_zero: "Division by zero is not allowed. Which x makes the denominator zero? Everything else is fine."
+  m11_f_plus_g: "(f + g)(2) = f(2) + g(2). Work out each one at 2, then add."
+  m11_floor: "The greatest integer function gives the largest integer not more than the number. Look left on the number line."
+  m11_modulus: "Find |−5| first (distance from 0, never negative), then subtract."
+  m11_order_matters: "Think of (row, column) on a seating chart: is seat (2, 3) the same as seat (3, 2)?"
+  m11_ordered_pair: "Equal ordered pairs match term by term: first with first, second with second. Solve each equation."
+  m11_range: "The range is the set of second entries of the pairs. Read off the right-hand number of each pair."
+  m11_relations_count: "A relation is any subset of A × B. First count the pairs in A × B, then count its subsets."
+  m11_substitute: "Replace x with the number, then follow the order: power first, then add."
 concepts:
 - code: cbse11m.rel.relations
   title: Cartesian products and relations
@@ -114,6 +124,7 @@ concepts:
     - x + 1 = 3, y − 2 = 1.
     - x = 2, y = 3.
     solution: x = 2, y = 3, so x + y = 5.
+    mistakes: {"4": "m11_ordered_pair", "6": "m11_ordered_pair"}
   - prompt: How many relations are there from a 2-element set to a 3-element set?
     answer: '64'
     check: 2**6
@@ -122,6 +133,7 @@ concepts:
     - Relations are subsets of A × B.
     - 'A × B has 6 pairs: 2⁶.'
     solution: 2^(2×3) = 64.
+    mistakes: {"6": "m11_relations_count", "32": "m11_relations_count", "5": "m11_relations_count"}
   - prompt: R = {(1, 2), (2, 4), (3, 6)}. What is the range of R?
     options:
     - '{2, 4, 6}'
@@ -134,6 +146,7 @@ concepts:
     - Range = second elements.
     - 2, 4, 6.
     solution: The second elements are 2, 4, 6.
+    mistakes: {"{1, 2, 3}": "m11_range", "{1, 2, 3, 4, 6}": "m11_range"}
   - prompt: Is (2, 3) the same ordered pair as (3, 2)?
     options:
     - No, order matters
@@ -146,6 +159,7 @@ concepts:
     - Ordered pair.
     - First place differs.
     solution: (2, 3) ≠ (3, 2) because order matters.
+    mistakes: {"Yes, always": "m11_order_matters", "Only in a relation": "m11_order_matters"}
   - prompt: A × A has 9 elements, two of which are (−1, 0) and (0, 1). How many elements does A have?
     answer: '3'
     check: sqrt(9)
@@ -154,6 +168,7 @@ concepts:
     - n(A)² = 9.
     - √9.
     solution: n(A) = 3 (A = {−1, 0, 1}).
+    mistakes: {"9": "m11_cartesian_size", "2": "m11_cartesian_size"}
 - code: cbse11m.rel.functions
   title: Functions and their graphs
   after:
@@ -242,6 +257,7 @@ concepts:
     - Replace x with 3.
     - 9 + 1.
     solution: f(3) = 9 + 1 = 10.
+    mistakes: {"7": "m11_substitute", "9": "m11_substitute"}
   - prompt: Which relation is a function from {1, 2, 3}?
     options:
     - '{(1, 4), (2, 5), (3, 4)}'
@@ -264,6 +280,7 @@ concepts:
     - '|−5| = 5.'
     - 5 − 2.
     solution: f(−5) = 5 − 2 = 3.
+    mistakes: {"-7": "m11_modulus", "7": "m11_modulus"}
   - prompt: For the greatest integer function, what is [2.7]?
     answer: '2'
     check: floor(Rational(27,10))
@@ -272,6 +289,7 @@ concepts:
     - Largest integer ≤ 2.7.
     - Round down.
     solution: '[2.7] = 2.'
+    mistakes: {"3": "m11_floor"}
   - prompt: f(x) = 2x + 1 and g(x) = x². Find (f + g)(2).
     answer: '9'
     check: (2*2+1) + 2**2
@@ -280,6 +298,7 @@ concepts:
     - f(2) = 5, g(2) = 4.
     - Add.
     solution: 5 + 4 = 9.
+    mistakes: {"5": "m11_f_plus_g", "4": "m11_f_plus_g"}
   - prompt: What is the domain of f(x) = 1/(x − 3)?
     options:
     - All real numbers except 3
@@ -292,3 +311,4 @@ concepts:
     - Avoid dividing by zero.
     - x − 3 ≠ 0.
     solution: x cannot be 3.
+    mistakes: {"All real numbers": "m11_domain_zero", "x > 3 only": "m11_domain_zero", "x = 3 only": "m11_domain_zero"}

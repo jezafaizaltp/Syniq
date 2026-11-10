@@ -5,6 +5,16 @@ title: Binomial Theorem
 tips:
   c11_general_term: The general term is T(r+1) = nCr a^(n−r) b^r. The (r+1)th term uses r, not r + 1.
   c11_middle: For even n there is one middle term, the (n/2 + 1)th. For odd n there are two.
+  m11_bin_101: "101² = (100 + 1)². Expand: 100² + 2·100·1 + 1²."
+  m11_bin_coeff: "The x² term is ³C₁ · x² · 2¹. Include both the binomial coefficient and the power of 2."
+  m11_bin_coeff_2x: "The x² term is ⁴C₂ (2x)². Square the 2 as well."
+  m11_bin_coeff_ab: "The a²b² term uses ⁴C₂. Work it out."
+  m11_bin_coeff_x: "The x³ term of (1 + x)⁵ has coefficient ⁵C₃."
+  m11_bin_negative: "The x⁵ term is ⁷C₅ (−x)⁵. An odd power of a negative stays negative."
+  m11_independent: "General term: ⁶Cᵣ x^(6−r) x^(−r). Find r that makes the power of x zero."
+  m11_middle: "An odd power gives an even number of terms. How many sit in the middle then?"
+  m11_sum_coeff: "Put a = b = 1. The expansion becomes (1 + 1)ⁿ."
+  m11_terms_count: "(a + b)ⁿ has one more term than the power. Check with (a + b)² = a² + 2ab + b²."
 concepts:
 - code: cbse11m.bin.expand
   title: Binomial expansion and Pascal's triangle
@@ -100,6 +110,7 @@ concepts:
     - n + 1 terms.
     - 7 + 1.
     solution: 8 terms.
+    mistakes: {"7": "m11_terms_count"}
   - prompt: Find the coefficient of x² in (x + 2)³.
     answer: '6'
     check: binomial(3,1)*2
@@ -108,6 +119,7 @@ concepts:
     - ³C₁ x² · 2.
     - 3 × 2.
     solution: The x² term is 3 · x² · 2 = 6x².
+    mistakes: {"3": "m11_bin_coeff", "12": "m11_bin_coeff"}
   - prompt: Find the sum of the coefficients in (a + b)⁶.
     answer: '64'
     check: 2**6
@@ -116,6 +128,7 @@ concepts:
     - Put a = b = 1.
     - 2⁶.
     solution: 2⁶ = 64.
+    mistakes: {"12": "m11_sum_coeff", "32": "m11_sum_coeff"}
   - prompt: Find the coefficient of a²b² in (a + b)⁴.
     answer: '6'
     check: binomial(4,2)
@@ -124,6 +137,7 @@ concepts:
     - ⁴C₂.
     - Pascal's row 4.
     solution: ⁴C₂ = 6.
+    mistakes: {"4": "m11_bin_coeff_ab", "1": "m11_bin_coeff_ab"}
   - prompt: Expand (1 + x)⁵ and find the coefficient of x³.
     answer: '10'
     check: binomial(5,3)
@@ -132,6 +146,7 @@ concepts:
     - ⁵C₃.
     - '10.'
     solution: ⁵C₃ = 10.
+    mistakes: {"5": "m11_bin_coeff_x", "20": "m11_bin_coeff_x"}
   - prompt: Using the binomial theorem, find 101² exactly.
     answer: '10201'
     check: 101**2
@@ -140,6 +155,7 @@ concepts:
     - (100 + 1)².
     - 10000 + 200 + 1.
     solution: 100² + 2·100 + 1 = 10,201.
+    mistakes: {"10001": "m11_bin_101", "1201": "m11_bin_101"}
 - code: cbse11m.bin.terms
   title: General and middle terms
   after:
@@ -248,6 +264,7 @@ concepts:
     - Power 6 − 2r = 0.
     - 'r = 3: ⁶C₃.'
     solution: ⁶C₃ = 20.
+    mistakes: {"15": "m11_independent", "6": "m11_independent"}
   - prompt: Which term is the middle term of (a + b)¹⁰? Give its number.
     answer: '6'
     check: 10/2 + 1
@@ -266,6 +283,7 @@ concepts:
     - n is odd.
     - Two middle terms.
     solution: 'Two: the 5th and 6th.'
+    mistakes: {"1": "m11_middle"}
   - prompt: Find the coefficient of x² in (1 + 2x)⁴.
     answer: '24'
     check: binomial(4,2)*4
@@ -274,6 +292,7 @@ concepts:
     - ⁴C₂ (2x)².
     - 6 × 4.
     solution: 6 × 4 = 24.
+    mistakes: {"6": "m11_bin_coeff_2x", "12": "m11_bin_coeff_2x"}
   - prompt: Find the coefficient of x⁵ in (1 − x)⁷.
     answer: '-21'
     check: -binomial(7,5)
@@ -282,3 +301,4 @@ concepts:
     - ⁷C₅ (−x)⁵.
     - Odd power is negative.
     solution: −⁷C₅ = −21.
+    mistakes: {"21": "m11_bin_negative", "-35": "m11_bin_negative"}

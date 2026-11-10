@@ -5,6 +5,16 @@ title: Kinetic Theory
 tips:
   c11p_gaslaw: Ideal gas equation PV = nRT needs T in kelvin; R = 8.31 J mol⁻¹ K⁻¹.
   c11p_rms: 'rms speed v = √(3RT/M): it doubles only when T becomes four times larger.'
+  p11_boyle: "Boyle's law: P₁V₁ = P₂V₂. More pressure, less volume."
+  p11_cv: "Cv = (f/2)R with f = 5."
+  p11_dof: "A single atom can only move along x, y and z; it has no rotation that counts."
+  p11_elastic_molecules: "If molecules lost energy in every collision, the gas would cool by itself in a sealed flask."
+  p11_gamma: "For monatomic gas Cv = (3/2)R and Cp = Cv + R. Divide."
+  p11_gay_lussac: "At fixed volume, P ∝ T (in kelvin)."
+  p11_ideal: "Ideal-gas assumptions fail when molecules are crowded or slow. Which conditions keep them far apart and fast?"
+  p11_ke_temp: "Average KE = (3/2)kT. Only one variable appears."
+  p11_mean_free: "'Free path' is how far a molecule goes freely before it hits another."
+  p11_moles: "Moles = mass ÷ molar mass."
 concepts:
 - code: cbse11p.kinetic.gas
   title: Ideal gas and pressure of a gas
@@ -112,6 +122,7 @@ concepts:
     - 'Boyle: P₁V₁ = P₂V₂.'
     - 12/3.
     solution: 4 L.
+    mistakes: {"9": "p11_boyle", "3": "p11_boyle"}
   - prompt: A gas occupies 3 L at 300 K. At constant pressure, find its volume (in L) at 400 K.
     answer: '4'
     check: 3*Rational(400,300)
@@ -130,6 +141,7 @@ concepts:
     - n = mass/M.
     - 44/44.
     solution: 1 mol.
+    mistakes: {"44": "p11_moles", "2": "p11_moles"}
   - prompt: 'Real gases behave most like ideal gases at:'
     options:
     - low pressure and high temperature
@@ -142,6 +154,7 @@ concepts:
     - Molecules far apart.
     - Forces negligible.
     solution: Low pressure and high temperature.
+    mistakes: {"high pressure and low temperature": "p11_ideal", "high pressure and high temperature": "p11_ideal", "low pressure and low temperature": "p11_ideal"}
   - prompt: 'In kinetic theory, collisions between gas molecules are assumed to be:'
     options:
     - elastic
@@ -154,6 +167,7 @@ concepts:
     - Kinetic energy kept.
     - Bounce perfectly.
     solution: Collisions are perfectly elastic.
+    mistakes: {"inelastic": "p11_elastic_molecules", "sticky": "p11_elastic_molecules", "impossible": "p11_elastic_molecules"}
   - prompt: A gas at 1 atm and 300 K in a rigid container is heated to 600 K. Find the new pressure (in atm).
     answer: '2'
     check: 1*600/300
@@ -162,6 +176,7 @@ concepts:
     - 'Volume fixed: P ∝ T.'
     - 1 × 600/300.
     solution: 2 atm.
+    mistakes: {"1": "p11_gay_lussac", "0.5": "p11_gay_lussac", "4": "p11_gay_lussac"}
 - code: cbse11p.kinetic.energy
   title: Kinetic energy, equipartition and mean free path
   after:
@@ -261,6 +276,7 @@ concepts:
     - Only translation.
     - x, y, z.
     solution: '3.'
+    mistakes: {"5": "p11_dof", "6": "p11_dof"}
   - prompt: For a diatomic gas at room temperature (5 degrees of freedom), Cv = (f/2)R. Find Cv in units of R as a fraction.
     answer: 5/2
     check: Rational(5,2)
@@ -269,6 +285,7 @@ concepts:
     - f = 5.
     - 5/2.
     solution: Cv = 5R/2.
+    mistakes: {"5": "p11_cv", "3/2": "p11_cv", "7/2": "p11_cv"}
   - prompt: 'γ = Cp/Cv for a monatomic ideal gas is:'
     options:
     - 5/3
@@ -281,6 +298,7 @@ concepts:
     - Cv = 3R/2, Cp = 5R/2.
     - Divide.
     solution: γ = 5/3.
+    mistakes: {"7/5": "p11_gamma", "4/3": "p11_gamma", "1": "p11_gamma"}
   - prompt: 'The average kinetic energy of a gas molecule depends only on:'
     options:
     - absolute temperature
@@ -293,6 +311,7 @@ concepts:
     - (3/2)k_B T.
     - Only T appears.
     solution: Average KE = (3/2)k_B T.
+    mistakes: {"pressure": "p11_ke_temp", "volume": "p11_ke_temp", "the container's shape": "p11_ke_temp"}
   - prompt: 'The mean free path of a gas molecule is:'
     options:
     - the average distance between collisions
@@ -305,3 +324,4 @@ concepts:
     - Free = no collision.
     - Average.
     solution: It's the average distance travelled between collisions.
+    mistakes: {"the size of a molecule": "p11_mean_free", "the length of the container": "p11_mean_free", "the distance travelled in one second": "p11_mean_free"}
