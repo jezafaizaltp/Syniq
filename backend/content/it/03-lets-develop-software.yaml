@@ -5,6 +5,7 @@ chapter: 3
 title: Let's Develop Software!
 
 tips:
+  hour_formula: "Use direction = hour × 30 + minute × 0.5. Work out each part before adding."
   block_coding: "Block coding means snapping ready-made blocks together instead of typing commands from memory. Scratch-like tools are block-based; languages where you type every word are text-based."
   app_steps: "Making an app has two main steps: 1) prepare the interface (layout design) with the sprites and backdrop, 2) give instructions (coding) so each part works."
   clock_angles: "A full turn is 360°. Divide it by the number of steps in one turn: 60 seconds for the second hand, 12 hours for the hour hand, and that hourly turn divided by 60 for each minute. Anticlockwise is a left turn."
@@ -87,6 +88,20 @@ concepts:
         hints: ["A sprite rotates around its pivot point."]
         solution: "Otherwise it spins around its middle and looks wrong."
         mistakes: {"So it moves faster": pivot_point}
+      - prompt: "When the clock runs, the second hand spins around its middle instead of its end. What needs fixing?"
+        options: ["Set the rotation centre at the hand's base in the Costume Editor", "Change the sprite's size to 50", "Send the hand to the back layer", "Delete the dial sprite"]
+        answer: "Set the rotation centre at the hand's base in the Costume Editor"
+        difficulty: 3
+        hints: ["The small crosshair decides where a sprite turns.", "Where should a clock hand turn from?"]
+        solution: "Step 1: A sprite turns around its pivot point. Step 2: Move the pivot (rotation centre) to the base of the hand so it turns around the dial's centre."
+        mistakes: {"Change the sprite's size to 50": pivot_point, "Send the hand to the back layer": pivot_point, "Delete the dial sprite": pivot_point}
+      - prompt: "The hands disappear behind the dial when the program runs. Which block fixes this?"
+        options: ["go to front layer on each hand", "point in direction 90", "ask and wait", "start sound"]
+        answer: "go to front layer on each hand"
+        difficulty: 3
+        hints: ["Overlapping sprites are arranged by layers.", "Which group of blocks (Looks) changes layers?"]
+        solution: "Step 1: The dial is on top of the hands. Step 2: Use the Looks block go to front layer on each hand so they show over the dial."
+        mistakes: {"point in direction 90": app_steps, "ask and wait": variables_input, "start sound": app_steps}
 
   - code: it9.software.clock_code
     title: Coding the clock hands
@@ -197,6 +212,20 @@ concepts:
         hints: ["It must keep happening every second."]
         solution: "Inside a forever loop: turn anticlockwise 5°, then wait 1 second."
         mistakes: {"Turn right 5 degrees once": clock_angles}
+      - prompt: "Using direction = hour × 30 + minute × 0.5, where should the hour hand point at 7:40?"
+        answer: "230"
+        check: "7*30 + 40//2"
+        difficulty: 3
+        hints: ["7 × 30 = ?", "40 × 0.5 = ?"]
+        solution: "Step 1: 7 × 30 = 210. Step 2: 40 × 0.5 = 20. Step 3: 210 + 20 = 230°."
+        mistakes: {"210": hour_formula, "250": hour_formula}
+      - prompt: "At 4:30, how many degrees apart are the hour hand and the minute hand?"
+        answer: "45"
+        check: "30*6 - (4*30 + 30//2)"
+        difficulty: 3
+        hints: ["Minute hand: minute × 6. Hour hand: hour × 30 + minute × 0.5.", "Find both directions, then the difference."]
+        solution: "Step 1: Minute hand: 30 × 6 = 180°. Step 2: Hour hand: 4 × 30 + 30 × 0.5 = 135°. Step 3: 180 − 135 = 45°."
+        mistakes: {"60": clock_angles, "30": clock_angles}
 
   - code: it9.software.alarm_python
     title: Input, variables, sound and Python
@@ -299,3 +328,17 @@ concepts:
         hints: ["You type it, not drag it."]
         solution: "Python (also Java, C++)."
         mistakes: {"Scratch": block_coding}
+      - prompt: "The alarm is set for 6:30, but it rings at 6:00, 6:30, 7:30 and other times. Which condition was probably used?"
+        options: ["Only minute = Minute was checked", "hour = Hour and minute = Minute", "hour > Hour", "No condition at all"]
+        answer: "Only minute = Minute was checked"
+        difficulty: 3
+        hints: ["It rings whenever the minutes are 30.", "Both the hour and the minute must match."]
+        solution: "Step 1: Ringing at any :30 means only the minute is compared. Step 2: The fix is current hour = Hour and current minute = Minute, joined with 'and'."
+        mistakes: {"hour = Hour and minute = Minute": variables_input, "hour > Hour": variables_input, "No condition at all": variables_input}
+      - prompt: "In Python, a line inside an if block is not moved in like the others and the program stops with an error. What kind of mistake is this?"
+        options: ["A syntax error: indentation is part of Python's grammar", "A wrong alarm time", "A missing sound file", "A slow computer"]
+        answer: "A syntax error: indentation is part of Python's grammar"
+        difficulty: 3
+        hints: ["Syntax is like grammar for code.", "In Python, spaces at the start of a line matter."]
+        solution: "Step 1: Python uses indentation to show which lines belong inside a block. Step 2: Wrong indentation breaks that rule, so it is a syntax error."
+        mistakes: {"A wrong alarm time": python_syntax, "A missing sound file": python_syntax, "A slow computer": python_syntax}

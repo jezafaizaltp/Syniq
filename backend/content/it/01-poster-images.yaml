@@ -5,6 +5,7 @@ chapter: 1
 title: Poster Images
 
 tips:
+  pixel_area: "Total pixels come from the width times the height. Work out each canvas before comparing."
   gimp_basics: "Each letter of GIMP stands for a word: the free-software project GNU, then picture, handling, and the kind of software it is. A digital image is a grid of tiny coloured dots; to count them, multiply width by height. For Wilber's creator, check the first chapter's box on GIMP's history."
   gimp_layers: "Layers are like clear sheets stacked on top of each other: each one moves and edits on its own. If an image was pasted straight onto the bottom sheet, it is stuck to it. Look in the Edit and Layer menus for options that make a new or copied layer, and remember that blur softens a shadow."
   gimp_selection: "Each select tool fits a shape: boxes, ovals, free outlines, or areas of similar colour picked with one click. Its shortcut is often the first letter of the shape. Threshold sets how similar a colour must be to join; a traced path becomes a selection from the Select menu."
@@ -103,6 +104,20 @@ concepts:
         hints: ["It should have been pasted as a new layer."]
         solution: "Pasted onto the background layer, the image is part of it. Use Edit → Paste as → New Layer."
         mistakes: {"The Move tool is broken": gimp_layers}
+      - prompt: "A poster canvas is changed from 600 × 400 pixels to 1200 × 800 pixels. How many times as many pixels does it have now?"
+        answer: "4"
+        check: "(1200*800)//(600*400)"
+        difficulty: 3
+        hints: ["Find the pixels in each canvas: width × height.", "Divide the new total by the old total."]
+        solution: "Step 1: 600 × 400 = 240,000 pixels. Step 2: 1200 × 800 = 960,000 pixels. Step 3: 960,000 ÷ 240,000 = 4 times."
+        mistakes: {"2": pixel_area}
+      - prompt: "Your heading layer is above the image layer, but you cannot see the heading on the canvas. What is the most likely reason?"
+        options: ["The heading layer's eye (visibility) is switched off", "GIMP cannot show text above an image", "The canvas is too small for layers", "The image layer is the Background layer"]
+        answer: "The heading layer's eye (visibility) is switched off"
+        difficulty: 3
+        hints: ["Each layer in the Layers window has a small icon at its left.", "A layer that is above should show on top, unless it is hidden."]
+        solution: "Step 1: An upper layer normally shows over the lower ones. Step 2: If it is not seen, it is hidden: its eye icon in the Layers window is off. Turning it on shows the heading."
+        mistakes: {"GIMP cannot show text above an image": gimp_layers, "The canvas is too small for layers": gimp_layers, "The image layer is the Background layer": gimp_layers}
 
   - code: it9.poster.selection
     title: Selecting and placing images
@@ -214,6 +229,20 @@ concepts:
         hints: ["Copy the layer you already have."]
         solution: "Duplicate Layer, then move the copy."
         mistakes: {"Open a new canvas": gimp_layers}
+      - prompt: "Fuzzy Select picks up part of the fruit as well as the white background. What should you change?"
+        options: ["Lower the Threshold in Tool Options", "Raise the Threshold in Tool Options", "Use the Scale tool", "Add an alpha channel"]
+        answer: "Lower the Threshold in Tool Options"
+        difficulty: 3
+        hints: ["Threshold decides how different a colour may be and still be picked.", "You want it to pick fewer colours, not more."]
+        solution: "Step 1: Threshold sets how far a colour can be from the clicked colour and still be selected. Step 2: It is picking too much, so make it stricter by lowering the Threshold."
+        mistakes: {"Raise the Threshold in Tool Options": gimp_selection, "Use the Scale tool": gimp_tools, "Add an alpha channel": rgba}
+      - prompt: "You selected the background with Fuzzy Select and pressed Delete, but it turned white instead of see-through. What was missing?"
+        options: ["An alpha channel on the layer", "A new canvas", "A higher Threshold", "The Move tool"]
+        answer: "An alpha channel on the layer"
+        difficulty: 3
+        hints: ["Which part of RGBA stores transparency?", "Look at what you right-click on the layer to add."]
+        solution: "Step 1: Transparency is stored in the alpha (A) channel. Step 2: An RGB-only layer has no alpha, so deleted areas fill with colour. Step 3: Right-click the layer → Add Alpha Channel, then delete again."
+        mistakes: {"A new canvas": rgba, "A higher Threshold": gimp_selection, "The Move tool": rgba}
 
   - code: it9.poster.text_export
     title: Text, shadows, shapes and exporting
@@ -310,3 +339,17 @@ concepts:
         hints: ["B alone is the Paths tool."]
         solution: "Shift+B."
         mistakes: {"G": gimp_tools}
+      - prompt: "You exported the poster as JPEG and closed GIMP. Next day you need to move the heading. Why is that hard now?"
+        options: ["A JPEG flattens all layers into one picture", "JPEG files cannot be opened in GIMP", "The heading was deleted on export", "JPEG keeps only the text layer"]
+        answer: "A JPEG flattens all layers into one picture"
+        difficulty: 3
+        hints: ["Which format keeps layers?", "Think about what Export does to separate layers."]
+        solution: "Step 1: Only the .xcf project format keeps the layers. Step 2: A JPEG is one flat picture, so the heading is no longer a separate layer you can move."
+        mistakes: {"JPEG files cannot be opened in GIMP": gimp_files, "The heading was deleted on export": gimp_files, "JPEG keeps only the text layer": gimp_files}
+      - prompt: "You make a hand-made shadow but it covers the heading. What step did you skip?"
+        options: ["Lowering the black copy below the original text layer", "Applying Gaussian Blur", "Choosing a font size", "Exporting as PNG"]
+        answer: "Lowering the black copy below the original text layer"
+        difficulty: 3
+        hints: ["The shadow must sit behind the letters.", "Layer order decides what is in front."]
+        solution: "Step 1: The black copy is above the original, so it hides it. Step 2: Lower this layer in the Layers palette so the shadow sits behind the heading."
+        mistakes: {"Applying Gaussian Blur": gimp_layers, "Choosing a font size": gimp_layers, "Exporting as PNG": gimp_files}
