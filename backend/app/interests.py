@@ -345,6 +345,20 @@ ACTIVITIES: list[dict] = [
         ],
         "reflect": "How did your body feel at the end?",
     },
+    {
+        "id": "movement.game",
+        "area": "movement",
+        "title": "Invent a game for everyone",
+        "minutes": 20,
+        "intro": "Make up a game that a friend in a wheelchair, a friend who can't see and you could all play together.",
+        "steps": [
+            "Pick a goal: get a ball to a spot, pass something round, or reach a place first.",
+            "Change the rules so everyone can play: a rolling ball with a bell inside, sitting down, taking turns.",
+            "Play it once with family or friends.",
+            "Change one rule to make it fairer or more fun.",
+        ],
+        "reflect": "Which rule made the biggest difference?",
+    },
     # --- Nature
     {
         "id": "nature.watch",
@@ -388,6 +402,20 @@ ACTIVITIES: list[dict] = [
         ],
         "reflect": "How did you decide your groups?",
     },
+    {
+        "id": "nature.sounds",
+        "area": "nature",
+        "title": "A sound map",
+        "minutes": 10,
+        "intro": "Find out how much of nature you can notice with your ears alone.",
+        "steps": [
+            "Sit outside or by an open window and close your eyes for five minutes.",
+            "Notice each sound: birds, wind, water, insects, animals.",
+            "Point to where each one comes from, or tell someone.",
+            "Draw, say or write a map with you in the middle and the sounds around you.",
+        ],
+        "reflect": "Which sound did you notice last, and why do you think you missed it at first?",
+    },
     # --- Technology
     {
         "id": "technology.instructions",
@@ -430,6 +458,20 @@ ACTIVITIES: list[dict] = [
             "Explain how it makes the job easier.",
         ],
         "reflect": "What did you change, and what happened?",
+    },
+    {
+        "id": "technology.helper",
+        "area": "technology",
+        "title": "Design a gadget that helps someone",
+        "minutes": 15,
+        "intro": "Think of a small problem someone at home has, and design a gadget that would fix it.",
+        "steps": [
+            "Ask someone at home what small job is hard or annoying for them.",
+            "Think of three different gadgets that could help. Silly ideas are fine at first.",
+            "Pick one and draw it, build a model, or describe how it works step by step.",
+            "Show them. What would they change?",
+        ],
+        "reflect": "What did the person say, and how would you make it better?",
     },
 ]
 
