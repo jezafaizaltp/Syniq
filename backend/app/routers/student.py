@@ -56,7 +56,9 @@ def list_subjects(db: DbSession = Depends(get_db), user: User = Depends(current_
     out = []
     for s in subjects:
         n = len(visible_chapters(db, user, s.id))
-        out.append({"id": s.id, "code": s.code, "name": s.name, "language": s.language, "chapters": n})
+        out.append(
+            {"id": s.id, "code": s.code, "name": s.name, "language": s.language, "chapters": n, "grade": s.grade, "syllabus": s.syllabus}
+        )
     return out
 
 

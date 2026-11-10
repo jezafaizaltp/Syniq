@@ -306,7 +306,7 @@ export default function Learn() {
           <ul className="list card chapters">
             {chapters.map((c) => (
               <li key={c.id}>
-                <span className="chapter-title">
+                <span className="chapter-title" onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${c.id}`))}>
                   <span className="chapter-num" aria-hidden="true">
                     {c.number}
                   </span>
@@ -859,10 +859,13 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
               {result && (
                 <>
-                  {!result.correct && result.your_answer && result.right_answer && (
-                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture} />
+                  {!result.correct && result.your_answer && result.right_answer ? (
+                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture}>
+                      <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
+                    </Mistake>
+                  ) : (
+                    <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   )}
-                  <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
                   {result.next_step && <NextStepLine step={result.next_step} />}
                   {result.offer_break && (
                     <div className="feedback note break-offer">

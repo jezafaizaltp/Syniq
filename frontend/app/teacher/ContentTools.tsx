@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { ApiError, api, post, put } from "@/lib/api";
+import { bySchoolOrder, subjectLabel } from "@/lib/subjects";
 
-type Subject = { id: number; name: string; code: string };
+type Subject = { id: number; name: string; code: string; grade?: number; syllabus?: string };
 type Chapter = { id: number; number: number; title: string };
 type Topic = { id: number; title: string };
 type TopicDetail = {
@@ -124,9 +125,9 @@ export default function ContentTools({ onDrafted }: { onDrafted: () => void }) {
         <option value="" disabled>
           Choose a subject
         </option>
-        {subjects.map((s) => (
+        {bySchoolOrder(subjects).map((s) => (
           <option key={s.id} value={s.id}>
-            {s.name}
+            {subjectLabel(s)}
           </option>
         ))}
       </select>

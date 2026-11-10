@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useSession } from "@/lib/session";
 import Picture, { PictureSpec } from "./Picture";
 
@@ -27,9 +28,20 @@ function Dots({ n, label }: { n: number; label: string }) {
 
 /**
  * The mistake is the way in: the learner's answer sits next to the right one, drawn
- * where the numbers are small, then the topic's own picture.
+ * where the numbers are small. The tip about this exact mistake (children) comes next,
+ * before the topic's own picture, so on a phone the personal hint isn't pushed below the fold.
  */
-export default function Mistake({ yours, right, picture }: { yours: string; right: string; picture?: PictureSpec | null }) {
+export default function Mistake({
+  yours,
+  right,
+  picture,
+  children,
+}: {
+  yours: string;
+  right: string;
+  picture?: PictureSpec | null;
+  children?: ReactNode;
+}) {
   const { t } = useSession();
   const a = countable(yours);
   const b = countable(right);
@@ -71,6 +83,7 @@ export default function Mistake({ yours, right, picture }: { yours: string; righ
           {draw && <Dots n={b} label={`${b}`} />}
         </div>
       </div>
+      {children}
       {shown && (
         <div className="mistake-picture">
           <p className="mistake-label">{t(aboutThis ? "fb.see_it" : "fb.see_example")}</p>

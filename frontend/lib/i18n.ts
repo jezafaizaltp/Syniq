@@ -50,7 +50,7 @@ const en = {
   // Learning
   "learn.almost_ready": "Almost ready",
   "learn.need_consent":
-    "Your parent or guardian needs to give permission before you can start. Ask them to open SYNiq and check the box for you.",
+    "Your parent or guardian needs to give permission before you can start. They can sign the form from your school, or sign in to SYNiq and tick the box for you.",
   "learn.hi": "Hi {name}",
   "learn.what_today": "What would you like to learn today?",
   "learn.listen": "Listen",
@@ -410,6 +410,8 @@ const en = {
   "parent.on": "On",
   "parent.turned_off": "Turned off by {name}",
   "parent.settings_for": "Settings and permissions for {name}",
+  "parent.needs_consent": "{name} can't start yet. SYNiq needs your permission for learning first. You can read what it covers in the settings below.",
+  "parent.give_consent": "Let {name} start learning",
   "parent.progress": "Progress",
   "parent.practised": "{n} questions practised. {note}",
   "parent.nothing_yet": "Nothing practised yet.",
@@ -604,7 +606,7 @@ const ml: Record<Key, string> = {
 
   "learn.almost_ready": "ഏകദേശം തയ്യാർ",
   "learn.need_consent":
-    "തുടങ്ങുന്നതിന് മുമ്പ് രക്ഷിതാവിന്റെ അനുമതി വേണം. SYNiq തുറന്ന് നിങ്ങൾക്കായി ബോക്സിൽ ടിക്ക് ചെയ്യാൻ അവരോട് പറയൂ.",
+    "തുടങ്ങുന്നതിന് മുമ്പ് രക്ഷിതാവിന്റെ അനുമതി വേണം. സ്കൂളിൽ നിന്നുള്ള ഫോമിൽ ഒപ്പിടാം, അല്ലെങ്കിൽ SYNiq-ൽ കയറി നിങ്ങൾക്കായി ബോക്സിൽ ടിക്ക് ചെയ്യാം.",
   "learn.hi": "നമസ്കാരം {name}",
   "learn.what_today": "ഇന്ന് എന്താണ് പഠിക്കേണ്ടത്?",
   "learn.listen": "കേൾക്കാം",
@@ -961,6 +963,8 @@ const ml: Record<Key, string> = {
   "parent.on": "ഓൺ",
   "parent.turned_off": "{name} ഓഫ് ചെയ്തു",
   "parent.settings_for": "{name}-ന്റെ ക്രമീകരണങ്ങളും അനുമതികളും",
+  "parent.needs_consent": "{name}-ന് ഇപ്പോൾ തുടങ്ങാൻ കഴിയില്ല. പഠനത്തിന് ആദ്യം നിങ്ങളുടെ അനുമതി വേണം. അതിൽ എന്തെല്ലാം ഉൾപ്പെടുന്നു എന്ന് താഴെയുള്ള ക്രമീകരണങ്ങളിൽ വായിക്കാം.",
+  "parent.give_consent": "{name}-നെ പഠിച്ചു തുടങ്ങാൻ അനുവദിക്കുക",
   "parent.progress": "പുരോഗതി",
   "parent.practised": "{n} ചോദ്യങ്ങൾ പരിശീലിച്ചു. {note}",
   "parent.nothing_yet": "ഇതുവരെ ഒന്നും പരിശീലിച്ചിട്ടില്ല.",

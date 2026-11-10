@@ -365,7 +365,7 @@ export default function Admin() {
       {people?.classes.map((c) => (
         <section key={c.id} className="card">
           <h2>
-            Class {c.name} <span className="muted">· {c.teacher ? `Teacher: ${c.teacher}` : "No teacher yet"}</span>
+            {/^class\b/i.test(c.name) ? c.name : `Class ${c.name}`} <span className="muted">· {c.teacher ? `Teacher: ${c.teacher}` : "No teacher yet"}</span>
           </h2>
           <div className="table-scroll">
             <table className="stack-table">

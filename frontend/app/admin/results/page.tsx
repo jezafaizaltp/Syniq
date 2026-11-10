@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { ApiError, api, apiText, del, post } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import SubjectChecks from "./SubjectChecks";
+import { bySchoolOrder, subjectLabel } from "@/lib/subjects";
 
-type Subject = { id: number; name: string };
+type Subject = { id: number; name: string; grade?: number; syllabus?: string };
 type Test = {
   id: number;
   name: string;
@@ -367,9 +368,9 @@ export default function Results() {
             <option value="" disabled>
               Choose a subject
             </option>
-            {subjects.map((s) => (
+            {bySchoolOrder(subjects).map((s) => (
               <option key={s.id} value={s.id}>
-                {s.name}
+                {subjectLabel(s)}
               </option>
             ))}
           </select>
