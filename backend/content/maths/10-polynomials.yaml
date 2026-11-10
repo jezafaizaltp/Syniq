@@ -104,6 +104,27 @@ concepts:
         solution: "Step 1: Multiplying three brackets, the highest term is x³. Step 2: Degree 3."
 
         mistakes: {"1": "cube_degree", "4": "cube_degree"}
+      - prompt: "What is the coefficient of x² in 5 − 3x + x³ − 7x²?"
+        answer: "-7"
+        check: "-7"
+        difficulty: 2
+        hints: ["Find the x² term, sign included.", "The terms can be in any order."]
+        solution: "Step 1: The x² term is −7x². Step 2: Its coefficient is −7."
+        mistakes: {"7": dropped_sign, "3": coefficient_not_degree}
+      - prompt: "What is the degree of (2x³ + 1)(x² − 4) + x⁶?"
+        answer: "6"
+        check: "6"
+        difficulty: 3
+        hints: ["The product has highest power x³ × x² = x⁵.", "Then x⁶ is added."]
+        solution: "Step 1: (2x³ + 1)(x² − 4) has degree 3 + 2 = 5. Step 2: Adding x⁶ gives degree 6."
+        mistakes: {"5": degree_highest_power, "30": multiplied_degrees}
+      - prompt: "What is the constant term of (x − 3)(x + 2)(x − 1)?"
+        answer: "6"
+        check: "(-3)*2*(-1)"
+        difficulty: 3
+        hints: ["The constant term is the product of the constants.", "(−3) × 2 × (−1)."]
+        solution: "Step 1: Constant = (−3) × 2 × (−1). Step 2: = 6."
+        mistakes: {"-6": dropped_sign, "-2": added_constants}
   - code: math9.poly.value
     title: The value of a polynomial
     after: [math9.poly.terms]
@@ -195,6 +216,27 @@ concepts:
         hints: ["Try x = 1, 2, 3.", "p(2) = 4 − 10 + 6."]
         solution: "Step 1: p(2) = 4 − 10 + 6 = 0. Step 2: p(3) = 9 − 15 + 6 = 0. Step 3: The smaller is 2."
         mistakes: {"3": other_side}
+      - prompt: "p(x) = 2x² − 3x + 1. What is p(−2)?"
+        answer: "15"
+        check: "2*4 + 6 + 1"
+        difficulty: 2
+        hints: ["(−2)² = 4.", "2 × 4 − 3 × (−2) + 1."]
+        solution: "Step 1: 2 × 4 = 8. Step 2: −3 × (−2) = +6. Step 3: 8 + 6 + 1 = 15."
+        mistakes: {"3": sign_rule, "-1": square_of_negative}
+      - prompt: "p(x) = x³ + kx − 4 and p(2) = 10. What is k?"
+        answer: "3"
+        check: "(10 + 4 - 8)/2"
+        difficulty: 3
+        hints: ["p(2) = 8 + 2k − 4.", "8 + 2k − 4 = 10."]
+        solution: "Step 1: p(2) = 8 + 2k − 4 = 4 + 2k. Step 2: 4 + 2k = 10, so k = 3."
+        mistakes: {"6": forgot_divide, "7": sign_slip}
+      - prompt: "p(x) = x² − 9. Which numbers make p(x) = 0?"
+        options: ["3 and −3", "Only 3", "9 and −9", "Only 9"]
+        answer: "3 and −3"
+        difficulty: 3
+        hints: ["Which numbers squared give 9?", "Don't forget the negative one."]
+        solution: "Step 1: x² = 9. Step 2: x = 3 or x = −3, since (−3)² = 9 too."
+        mistakes: {"Only 3": other_side, "9 and −9": forgot_root}
 
   - code: math9.poly.operations
     title: Adding, subtracting and multiplying polynomials
@@ -280,3 +322,24 @@ concepts:
         hints: ["x × q(x) = x² − x.", "Subtracting flips its signs: −x² + x."]
         solution: "Step 1: x × q(x) = x² − x. Step 2: x² + 1 − x² + x. Step 3: = x + 1."
         mistakes: {"1 − x": minus_negative}
+      - prompt: "(4x² − 3x + 2) − (x² + 2x − 5) = ?"
+        options: ["3x² − 5x + 7", "3x² − x − 3", "3x² − 5x − 3", "5x² − x − 3"]
+        answer: "3x² − 5x + 7"
+        difficulty: 2
+        hints: ["Subtracting the bracket changes every sign in it.", "4x² − x², −3x − 2x, 2 + 5."]
+        solution: "Step 1: 4x² − x² = 3x². Step 2: −3x − 2x = −5x. Step 3: 2 − (−5) = 7."
+        mistakes: {"3x² − x − 3": minus_negative, "3x² − 5x − 3": minus_negative}
+      - prompt: "(x − 1)(x² + x + 1) = ?"
+        options: ["x³ − 1", "x³ + 1", "x³ − 2x² − 1", "x³ + 2x² + 2x + 1"]
+        answer: "x³ − 1"
+        difficulty: 3
+        hints: ["Multiply x by each term, then −1 by each term.", "Many terms cancel."]
+        solution: "Step 1: x(x² + x + 1) = x³ + x² + x. Step 2: −1(x² + x + 1) = −x² − x − 1. Step 3: Adding: x³ − 1."
+        mistakes: {"x³ + 1": sign_rule, "x³ + 2x² + 2x + 1": multiply_every_term}
+      - prompt: "p(x) = 2x + 1 and q(x) = x² − 3. What is the coefficient of x in p(x) × q(x)?"
+        answer: "-6"
+        check: "2*(-3)"
+        difficulty: 3
+        hints: ["Which pairs of terms multiply to give an x term?", "Only 2x × (−3)."]
+        solution: "Step 1: (2x + 1)(x² − 3) = 2x³ + x² − 6x − 3. Step 2: The coefficient of x is −6."
+        mistakes: {"6": dropped_sign, "-3": multiply_every_term}

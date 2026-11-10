@@ -121,6 +121,27 @@ concepts:
         hints: ["√625 = 25.", "6.25 has two decimal places, so the side has one."]
         solution: "Step 1: 6.25 = 625/100. Step 2: √625 = 25 and √100 = 10. Step 3: The side is 25/10 = 2.5 m."
         mistakes: {"3.125": half_not_root, "0.25": decimal_places}
+      - prompt: "What is √0.09? Decimals are fine."
+        answer: "0.3"
+        check: "sqrt(0.09)"
+        difficulty: 2
+        hints: ["Which decimal multiplied by itself gives 0.09?", "3 × 3 = 9; count the decimal places."]
+        solution: "Step 1: 0.3 × 0.3 = 0.09. Step 2: So √0.09 = 0.3."
+        mistakes: {"0.03": decimal_places, "0.045": half_not_root}
+      - prompt: "A square garden has an area of 196 m². A fence goes all round it. How long is the fence, in metres?"
+        answer: "56"
+        check: "4*sqrt(196)"
+        difficulty: 3
+        hints: ["First find the side: which number times itself is 196?", "The side is 14 m. The fence goes round all four sides."]
+        solution: "Step 1: Side = √196 = 14 m. Step 2: Fence = 4 × 14 = 56 m."
+        mistakes: {"14": forgot_divide, "98": half_not_root}
+      - prompt: "What is √(2 1/4)? Type a fraction like 2/3."
+        answer: "3/2"
+        check: "sqrt(9/4)"
+        difficulty: 3
+        hints: ["Write 2 1/4 as an improper fraction first.", "2 1/4 = 9/4. Take the root of the top and the bottom."]
+        solution: "Step 1: 2 1/4 = 9/4. Step 2: √9 = 3 and √4 = 2. Step 3: √(9/4) = 3/2."
+        mistakes: {"3/4": root_top_only, "9/8": half_not_root}
 
   - code: math9.newnum.irrational_lengths
     title: Lengths like √2
@@ -227,6 +248,27 @@ concepts:
         solution: "Step 1: 1st: √(1 + 1) = √2. Step 2: 2nd: √(2 + 1) = √3. Step 3: 3rd: √(3 + 1) = √4 = 2 cm."
 
         mistakes: {"√3": "spiral_count", "√5": "spiral_count"}
+      - prompt: "A rectangle is 2 cm by 3 cm. How long is its diagonal, in cm?"
+        options: ["√13", "5", "√5", "13"]
+        answer: "√13"
+        difficulty: 2
+        hints: ["The diagonal is the longest side of a right triangle with sides 2 and 3.", "2² + 3² = ?"]
+        solution: "Step 1: 2² + 3² = 4 + 9 = 13. Step 2: The diagonal is √13 cm."
+        mistakes: {"5": added_sides, "13": forgot_root}
+      - prompt: "A square has a diagonal of 4 cm. What is its area, in cm²?"
+        answer: "8"
+        check: "4**2/2"
+        difficulty: 3
+        hints: ["If the side is a, then a² + a² = diagonal².", "2a² = 16. The area is a²."]
+        solution: "Step 1: a² + a² = 4² = 16. Step 2: 2a² = 16, so a² = 8. Step 3: The area is a² = 8 cm²."
+        mistakes: {"16": diagonal_as_side, "4": half_not_root}
+      - prompt: "A square has sides of √3 cm. A bigger square has sides of √27 cm. How many times as long is the bigger square's side?"
+        answer: "3"
+        check: "sqrt(27)/sqrt(3)"
+        difficulty: 3
+        hints: ["Divide √27 by √3.", "√27 ÷ √3 = √(27 ÷ 3)."]
+        solution: "Step 1: √27 ÷ √3 = √9. Step 2: √9 = 3, so the side is 3 times as long."
+        mistakes: {"9": forgot_root, "24": added_not_multiplied}
   - code: math9.newnum.approximations
     title: Estimating square roots
     after: [math9.newnum.irrational_lengths]
@@ -328,6 +370,27 @@ concepts:
         hints: ["3² = 9 and 4² = 16, so start just above 3.", "Try 3.1² and 3.2²."]
         solution: "Step 1: 3.1² = 9.61, less than 10. Step 2: 3.2² = 10.24, more than 10. Step 3: So √10 is between 3.1 and 3.2."
         mistakes: {"5.0 and 5.1": half_not_root}
+      - prompt: "√50 lies between which two whole numbers?"
+        options: ["7 and 8", "6 and 7", "24 and 26", "8 and 9"]
+        answer: "7 and 8"
+        difficulty: 2
+        hints: ["Find the perfect squares just below and just above 50.", "49 = 7² and 64 = 8²."]
+        solution: "Step 1: 7² = 49 and 8² = 64. Step 2: 50 is between 49 and 64, so √50 is between 7 and 8."
+        mistakes: {"24 and 26": half_not_root, "6 and 7": root_estimate}
+      - prompt: "Using √3 ≈ 1.732, what is 2√3 + √3 to three decimal places?"
+        answer: "5.196"
+        check: "3*1.732"
+        difficulty: 3
+        hints: ["2√3 + √3 is 3 lots of √3.", "3 × 1.732 = ?"]
+        solution: "Step 1: 2√3 + √3 = 3√3. Step 2: 3 × 1.732 = 5.196."
+        mistakes: {"3.732": added_not_multiplied, "3.464": added_not_multiplied}
+      - prompt: "Which is larger: 2√5 or 3√2?"
+        options: ["2√5", "3√2", "They are equal"]
+        answer: "2√5"
+        difficulty: 3
+        hints: ["Compare the squares instead.", "(2√5)² = 4 × 5 and (3√2)² = 9 × 2."]
+        solution: "Step 1: (2√5)² = 20 and (3√2)² = 18. Step 2: 20 > 18, so 2√5 is larger."
+        mistakes: {"3√2": compare_squares, "They are equal": compare_squares}
 
   - code: math9.newnum.recurring
     title: Recurring decimals as fractions
@@ -430,3 +493,24 @@ concepts:
         hints: ["10x = 7.777….", "9x = 10x − x."]
         solution: "Step 1: 10x = 7.777…. Step 2: 10x − x = 7. Step 3: So 9x = 7."
         mistakes: {"0.777": "recurring_subtract", "6.993": "recurring_subtract"}
+      - prompt: "Write 0.444… (the 4 repeats for ever) as a fraction. Type it like 2/3."
+        answer: "4/9"
+        check: "4/9"
+        difficulty: 2
+        hints: ["Let x = 0.444… Then 10x = 4.444…", "Subtract: 10x − x = 4."]
+        solution: "Step 1: 10x = 4.444… and x = 0.444… Step 2: 9x = 4. Step 3: x = 4/9."
+        mistakes: {"4/10": over_ten, "2/5": over_ten}
+      - prompt: "Write 1.333… (the 3 repeats for ever) as a fraction. Type it like 2/3."
+        answer: "4/3"
+        check: "1 + 3/9"
+        difficulty: 3
+        hints: ["The whole number 1 stays. 0.333… is a fraction you know.", "0.333… = 3/9 = 1/3."]
+        solution: "Step 1: 0.333… = 3/9 = 1/3. Step 2: 1 + 1/3 = 4/3."
+        mistakes: {"13/10": over_ten, "1/3": recurring_subtract}
+      - prompt: "Write 0.2727… (27 repeats for ever) as a fraction in lowest terms. Type it like 2/3."
+        answer: "3/11"
+        check: "27/99"
+        difficulty: 3
+        hints: ["Two digits repeat, so multiply by 100.", "100x − x = 27, so x = 27/99. Simplify."]
+        solution: "Step 1: 100x = 27.2727… and x = 0.2727… Step 2: 99x = 27, so x = 27/99. Step 3: Dividing top and bottom by 9 gives 3/11."
+        mistakes: {"27/100": over_ten, "27/90": recurring_subtract}

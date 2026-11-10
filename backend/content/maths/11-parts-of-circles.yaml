@@ -132,6 +132,27 @@ concepts:
         hints: ["The 12 cm chord is √(100 − 36) = 8 cm from the centre.", "The 16 cm chord is √(100 − 64) = 6 cm from the centre."]
         solution: "Step 1: Distances: 8 cm and 6 cm. Step 2: Same side, so subtract: 2 cm."
         mistakes: {"14": same_side}
+      - prompt: "A circle has a radius of 10 cm. A chord is 6 cm from the centre. How long is the chord, in cm?"
+        answer: "16"
+        check: "2*sqrt(10**2 - 6**2)"
+        difficulty: 2
+        hints: ["Radius, half the chord and the distance make a right triangle.", "Half chord = √(100 − 36)."]
+        solution: "Step 1: Half chord = √(100 − 36) = 8 cm. Step 2: Chord = 16 cm."
+        mistakes: {"8": half_chord, "4": forgot_root}
+      - prompt: "Two parallel chords of lengths 10 cm and 24 cm are on opposite sides of the centre of a circle of radius 13 cm. How far apart are they, in cm?"
+        answer: "17"
+        check: "sqrt(13**2 - 5**2) + sqrt(13**2 - 12**2)"
+        difficulty: 3
+        hints: ["Find each chord's distance from the centre.", "On opposite sides, add the distances."]
+        solution: "Step 1: 10 cm chord: √(169 − 25) = 12 cm from the centre. Step 2: 24 cm chord: √(169 − 144) = 5 cm. Step 3: Opposite sides: 12 + 5 = 17 cm."
+        mistakes: {"7": same_side, "14": forgot_root}
+      - prompt: "A chord 16 cm long is 6 cm from the centre of a circle. How long is the diameter, in cm?"
+        answer: "20"
+        check: "2*sqrt(8**2 + 6**2)"
+        difficulty: 3
+        hints: ["Half the chord is 8 cm.", "Radius = √(8² + 6²)."]
+        solution: "Step 1: Radius = √(64 + 36) = 10 cm. Step 2: Diameter = 20 cm."
+        mistakes: {"10": radius_diameter, "14": added_sides}
 
   - code: math9.circparts.angles
     title: Angles in circles
@@ -235,6 +256,27 @@ concepts:
         hints: ["Opposite angles of such a quadrilateral add up to 180°."]
         solution: "180 − 110 = 70°"
         mistakes: {"110": opposite_angles_cyclic, "250": opposite_angles_cyclic}
+      - prompt: "In a circle with centre O, A, B and C are on the circle and angle AOB = 130°. C is on the larger arc. What is angle ACB, in degrees?"
+        answer: "65"
+        check: "130/2"
+        difficulty: 2
+        hints: ["The angle at the centre is twice the angle at the circle.", "Halve 130."]
+        solution: "Step 1: Angle ACB stands on the same arc as angle AOB. Step 2: ACB = 130 ÷ 2 = 65°."
+        mistakes: {"260": double_not_half, "115": opposite_angles_cyclic}
+      - prompt: "ABCD has all four corners on a circle. Angle A = 3 × angle C. What is angle C, in degrees?"
+        answer: "45"
+        check: "180/4"
+        difficulty: 3
+        hints: ["Opposite angles of such a quadrilateral add to 180°.", "3C + C = 180."]
+        solution: "Step 1: A + C = 180°. Step 2: 4C = 180, so C = 45° (and A = 135°)."
+        mistakes: {"135": swapped_unknowns, "90": opposite_angles_cyclic}
+      - prompt: "AB is a diameter and C is on the circle. AC = 6 cm and BC = 8 cm. What is the radius, in cm?"
+        answer: "5"
+        check: "sqrt(6**2 + 8**2)/2"
+        difficulty: 3
+        hints: ["The angle at C is 90° because AB is a diameter.", "AB = √(6² + 8²)."]
+        solution: "Step 1: Angle ACB = 90°. Step 2: AB = √(36 + 64) = 10 cm. Step 3: Radius = 5 cm."
+        mistakes: {"10": radius_diameter, "7": added_sides}
 
   - code: math9.circparts.arcs_sectors
     title: Arcs and sectors
@@ -340,3 +382,24 @@ concepts:
         hints: ["The circumference is 44 cm.", "11 is what fraction of 44?"]
         solution: "Step 1: 11/44 = 1/4. Step 2: 1/4 × 360 = 90°."
         mistakes: {"45": "arc_to_angle", "180": "arc_to_angle"}
+      - prompt: "A circle has a radius of 21 cm. Using π ≈ 22/7, what is the length of an arc with a 120° angle at the centre, in cm?"
+        answer: "44"
+        check: "120/360*2*22/7*21"
+        difficulty: 2
+        hints: ["120° is 1/3 of the circle.", "Circumference = 2 × 22/7 × 21 = 132."]
+        solution: "Step 1: Circumference = 132 cm. Step 2: Arc = 132 ÷ 3 = 44 cm."
+        mistakes: {"462": arc_not_area, "22": radius_diameter}
+      - prompt: "A sector of a circle of radius 7 cm has an area of 77 cm². Using π ≈ 22/7, what is its angle, in degrees?"
+        answer: "180"
+        check: "77/(22/7*49)*360"
+        difficulty: 3
+        hints: ["The full circle's area is 22/7 × 49 = 154.", "What fraction of 154 is 77?"]
+        solution: "Step 1: Full area = 154 cm². Step 2: 77 is half, so the angle is 180°."
+        mistakes: {"90": sector_fraction, "77": arc_to_angle}
+      - prompt: "The minute hand of a clock is 14 cm long. Using π ≈ 22/7, what area does it sweep in 15 minutes, in cm²?"
+        answer: "154"
+        check: "22/7*14**2/4"
+        difficulty: 3
+        hints: ["15 minutes is a quarter of an hour.", "Area swept = a quarter of a circle of radius 14."]
+        solution: "Step 1: Full circle = 22/7 × 196 = 616 cm². Step 2: A quarter = 154 cm²."
+        mistakes: {"22": arc_not_area, "616": sector_fraction}

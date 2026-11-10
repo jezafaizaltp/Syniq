@@ -5,6 +5,15 @@ chapter: 15
 title: Statistics
 
 tips:
+  removed_value_mean: "Find the total first (mean × count). Take the removed number out of the total, then divide by how many numbers are left."
+  needed_total: "Work with totals: the total needed for the new mean, minus the total already scored."
+  misread_value: "Fix the total, not the mean: take out the wrong number, put in the right one, then divide again."
+  median_unknown: "The two middle numbers of the ordered list average to the median. Write that as an equation."
+  typical_value: "One very large value drags the total up. Which average does not use the size of every value?"
+  mode_unknown: "Count how many times each value appears for each choice of x. The mode must be the only value that appears most."
+  which_averages: "Work out all three averages before comparing them."
+  numbers_only: "The mean and median need numbers you can add or put in order. Colours have neither."
+  frequency_median: "Add the frequencies until you reach the middle positions. With an even total there are two middle positions."
   divided_wrong_count: "Divide by how many numbers there are, not by some other number."
   median_not_sorted: "Put the numbers in order first. The median is the middle of the ordered list."
   median_even_count: "With an even count there are two middle numbers. The median is halfway between them."
@@ -109,6 +118,27 @@ concepts:
         hints: ["Try it with 1, 2, 3 (mean 2) and 4, 5, 6."]
         solution: "The total goes up by 3n and is divided by n, so the mean goes up by 3. Check: 1, 2, 3 has mean 2; 4, 5, 6 has mean 5."
         mistakes: {"It goes up by 3 times the count": forgot_divide}
+      - prompt: "The mean of 5 numbers is 20. One of them, 30, is removed. What is the mean of the other four?"
+        answer: "17.5"
+        check: "(5*20-30)/4"
+        difficulty: 3
+        hints: ["The total of the 5 numbers is 5 × 20.", "Take away 30, then divide by 4."]
+        solution: "Step 1: Total = 100. Step 2: Without 30, total = 70. Step 3: Mean = 70 ÷ 4 = 17.5."
+        mistakes: {"14": removed_value_mean, "-10": removed_value_mean}
+      - prompt: "A student's mean mark over 4 tests is 65. What must they score in the 5th test to make the mean 68?"
+        answer: "80"
+        check: "5*68 - 4*65"
+        difficulty: 3
+        hints: ["Total so far = 4 × 65.", "Total needed = 5 × 68."]
+        solution: "Step 1: Total so far = 260. Step 2: Total needed = 340. Step 3: The 5th test must be 340 − 260 = 80."
+        mistakes: {"71": needed_total, "68": needed_total, "3": needed_total}
+      - prompt: "The mean of 20 numbers was found to be 15. Later it was found that 35 had been copied as 53. What is the correct mean?"
+        answer: "14.1"
+        check: "(20*15 - 53 + 35)/20"
+        difficulty: 3
+        hints: ["The wrong total was 20 × 15 = 300.", "The total was 18 too big."]
+        solution: "Step 1: Wrong total = 300. Step 2: Correct total = 300 − 53 + 35 = 282. Step 3: Mean = 282 ÷ 20 = 14.1."
+        mistakes: {"15.9": misread_value, "-3": misread_value}
 
   - code: math9.stats.median
     title: Median
@@ -191,6 +221,27 @@ concepts:
         hints: ["The median is x.", "So x = (36 + x) ÷ 5."]
         solution: "Step 1: Median = x. Step 2: x = (36 + x) ÷ 5. Step 3: 5x = 36 + x, so 4x = 36 and x = 9."
         mistakes: {"36/5": forgot_divide}
+      - prompt: "The numbers 3, 5, 7, x, x + 2, 12, 14, 15 are in order, and their median is 9. What is x?"
+        answer: "8"
+        check: "(2*9 - 2)/2"
+        difficulty: 3
+        hints: ["8 numbers: the median is halfway between the 4th and 5th.", "(x + x + 2) ÷ 2 = 9."]
+        solution: "Step 1: (x + x + 2) ÷ 2 = 9. Step 2: 2x + 2 = 18, so x = 8."
+        mistakes: {"9": median_unknown, "7": median_unknown}
+      - prompt: "Six students have heights 140, 152, 147, 160, 138 and 155 cm. A new student 150 cm tall joins. What is the median height now, in cm?"
+        answer: "150"
+        check: "150"
+        difficulty: 2
+        hints: ["There are now 7 heights.", "Put them in order and take the 4th."]
+        solution: "Step 1: In order: 138, 140, 147, 150, 152, 155, 160. Step 2: The 4th is 150 cm."
+        mistakes: {"160": median_not_sorted, "149.5": median_not_sorted, "148.857": mean_not_median}
+      - prompt: "In a small company, nine workers earn ₹15,000 to ₹20,000 a month and the owner earns ₹8,00,000. Which average best describes a typical worker's pay?"
+        options: ["The median", "The mean", "The total pay", "The highest pay"]
+        answer: "The median"
+        difficulty: 2
+        hints: ["Which average is pulled up by the owner's huge pay?", "The middle value ignores how big the largest one is."]
+        solution: "Step 1: The owner's pay drags the mean far above what most people earn. Step 2: The median is the middle pay, so it stays typical."
+        mistakes: {"The mean": typical_value, "The total pay": typical_value, "The highest pay": typical_value}
 
   - code: math9.stats.mode
     title: Mode
@@ -271,6 +322,27 @@ concepts:
         hints: ["Order: 12, 14, 14, 17, 18, 19, 20."]
         solution: "Step 1: Mode = 14 (it appears twice). Step 2: Median = 4th value = 17. Step 3: 17 − 14 = 3."
         mistakes: {"-3": sign_slip}
+      - prompt: "The list 4, x, 6, 7, 6, 4, x has 4 as its only mode. What is x?"
+        options: ["4", "6", "5", "7"]
+        answer: "4"
+        difficulty: 3
+        hints: ["x appears twice in the list.", "Try each choice and count how often each value appears."]
+        solution: "Step 1: Without x, 4 and 6 each appear twice. Step 2: If x = 4, then 4 appears four times and is the only mode. Any other x leaves a tie or makes another value the mode."
+        mistakes: {"5": mode_unknown, "6": mode_unknown, "7": mode_unknown}
+      - prompt: "Ages: 12, 13, 13, 14, 14, 14, 15. Which two averages are equal?"
+        options: ["Median and mode", "Mean and median", "Mean and mode", "All three"]
+        answer: "Median and mode"
+        difficulty: 3
+        hints: ["Mean = total ÷ 7.", "Find the 4th value and the most common value."]
+        solution: "Step 1: Mean = 95 ÷ 7 ≈ 13.6. Step 2: Median = 4th value = 14. Step 3: Mode = 14. So the median and mode are equal."
+        mistakes: {"All three": which_averages, "Mean and median": which_averages, "Mean and mode": which_averages}
+      - prompt: "The colours of 20 cars in a car park are: white 7, black 5, red 4, grey 4. Which average can describe this data?"
+        options: ["Only the mode", "The mean", "The median", "All three"]
+        answer: "Only the mode"
+        difficulty: 2
+        hints: ["Can you add colours?", "Can you put colours in order of size?"]
+        solution: "Step 1: Colours cannot be added or ordered, so there is no mean or median. Step 2: The most common colour is the mode."
+        mistakes: {"The mean": numbers_only, "The median": numbers_only, "All three": numbers_only}
 
   - code: math9.stats.frequency
     title: Averages from a frequency table
@@ -350,3 +422,24 @@ concepts:
         hints: ["Σfx = 4 + 3k + 30 = 34 + 3k.", "Σfx = 3.2 × Σf = 3.2(10 + k)."]
         solution: "Step 1: 34 + 3k = 3.2(10 + k) = 32 + 3.2k. Step 2: 2 = 0.2k. Step 3: k = 10."
         mistakes: {"5": "frequency_equation", "3": "frequency_equation"}
+      - prompt: "Marks 2, 4, 6 and 8 were scored by 3, 7, 6 and 4 students. What is the median mark?"
+        answer: "5"
+        check: "(4+6)/2"
+        difficulty: 3
+        hints: ["20 students: the median is halfway between the 10th and 11th.", "Running totals: 3, 10, 16, 20."]
+        solution: "Step 1: 20 students, so the 10th and 11th marks are in the middle. Step 2: Running totals 3, 10, 16, 20: the 10th mark is 4, the 11th is 6. Step 3: Median = 5."
+        mistakes: {"4": frequency_median, "6": frequency_median, "5.1": mean_not_median}
+      - prompt: "Marks 2, 4, 6 and 8 were scored by 3, 7, 6 and 4 students. What is the mean mark?"
+        answer: "5.1"
+        check: "(2*3 + 4*7 + 6*6 + 8*4)/20"
+        difficulty: 2
+        hints: ["Multiply each mark by the number of students who got it.", "Divide by the number of students, 20."]
+        solution: "Step 1: Σfx = 6 + 28 + 36 + 32 = 102. Step 2: Σf = 20. Step 3: Mean = 102 ÷ 20 = 5.1."
+        mistakes: {"5": frequency_not_used, "25.5": divided_by_values}
+      - prompt: "Values 10, 20 and 30 have frequencies 5, 8 and f. The mean is 20. What is f?"
+        answer: "5"
+        check: "(10*5 + 20*8 - 20*13)/(20 - 30)"
+        difficulty: 3
+        hints: ["Σfx = 50 + 160 + 30f and Σf = 13 + f.", "Set (210 + 30f) ÷ (13 + f) = 20."]
+        solution: "Step 1: 210 + 30f = 20(13 + f) = 260 + 20f. Step 2: 10f = 50, so f = 5."
+        mistakes: {"8": mode_not_count, "50": forgot_divide}
