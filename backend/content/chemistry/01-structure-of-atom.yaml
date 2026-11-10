@@ -4,6 +4,10 @@ chapter: 1
 title: Structure of Atom
 
 tips:
+  particle_masses: "Look up each particle's mass in u. One of the three is nearly 2000 times lighter than the other two."
+  average_isotopes: "Weight each mass by how common it is: multiply each mass by its share, then add."
+  all_p: "Write the whole configuration and add the electrons in every p subshell, not just the last one."
+  count_all_electrons: "Add the electrons in every subshell of the configuration. A neutral atom has as many electrons as protons."
   mass_not_neutrons: "Neutrons = mass number − atomic number. The mass number counts protons and neutrons together."
   protons_neutrons_mixed: "The atomic number is the number of protons. Neutrons are what is left of the mass number."
   ion_electrons: "A positive ion has lost electrons; a negative ion has gained them. The number of protons never changes."
@@ -117,6 +121,27 @@ concepts:
         hints: ["Two more electrons than protons."]
         solution: "18 electrons − 16 protons = 2 extra negative charges: S²⁻."
         mistakes: {"2+": ion_electrons}
+      - prompt: "An ion X³⁺ has 10 electrons and 14 neutrons. What is the mass number of X?"
+        answer: "27"
+        check: "(10+3) + 14"
+        difficulty: 3
+        hints: ["X³⁺ lost 3 electrons, so the atom had 13.", "Mass number = protons + neutrons."]
+        solution: "Step 1: Protons = 10 + 3 = 13. Step 2: Mass number = 13 + 14 = 27 (aluminium)."
+        mistakes: {"24": ion_electrons, "21": ion_electrons, "13": mass_not_neutrons}
+      - prompt: "Which two particles have almost the same mass?"
+        options: ["Proton and neutron", "Proton and electron", "Neutron and electron", "All three"]
+        answer: "Proton and neutron"
+        difficulty: 2
+        hints: ["Which particles are in the nucleus?", "Which particle's mass is about 1/1840 u?"]
+        solution: "Step 1: Proton ≈ 1 u, neutron ≈ 1 u. Step 2: Electron ≈ 1/1840 u, far lighter."
+        mistakes: {"Proton and electron": particle_masses, "Neutron and electron": particle_masses, "All three": particle_masses}
+      - prompt: "The sulphide ion S²⁻ has 18 electrons. How many protons does it have?"
+        answer: "16"
+        check: "18-2"
+        difficulty: 2
+        hints: ["A 2− ion has gained 2 electrons.", "Protons do not change."]
+        solution: "Step 1: The neutral atom had 18 − 2 = 16 electrons. Step 2: So it has 16 protons."
+        mistakes: {"20": ion_electrons, "18": ion_electrons}
 
   - code: chem9.atom.isotopes
     title: Isotopes
@@ -205,6 +230,27 @@ concepts:
         hints: ["Chemical reactions involve electrons."]
         solution: "Both have 17 electrons arranged the same way (2, 8, 7). Chemistry depends on electrons, not neutrons."
         mistakes: {"They have the same number of neutrons": isotope_protons}
+      - prompt: "Chlorine is 75% chlorine-35 and 25% chlorine-37. What is its average atomic mass?"
+        answer: "35.5"
+        check: "0.75*35 + 0.25*37"
+        difficulty: 3
+        hints: ["The average is weighted by how common each isotope is.", "0.75 × 35 + 0.25 × 37."]
+        solution: "Step 1: 0.75 × 35 = 26.25. Step 2: 0.25 × 37 = 9.25. Step 3: Average = 35.5."
+        mistakes: {"36": average_isotopes, "72": average_isotopes}
+      - prompt: "What is different between an atom of carbon-12 and an atom of carbon-14?"
+        options: ["The number of neutrons", "The number of protons", "The number of electrons", "Their chemical properties"]
+        answer: "The number of neutrons"
+        difficulty: 2
+        hints: ["Both are carbon, so the atomic number is 6.", "The mass numbers differ by 2."]
+        solution: "Step 1: Both have 6 protons and 6 electrons. Step 2: C-12 has 6 neutrons and C-14 has 8."
+        mistakes: {"The number of protons": isotope_protons, "The number of electrons": isotope_protons, "Their chemical properties": isotope_protons}
+      - prompt: "Atom A has 6 protons and 6 neutrons, B has 6 protons and 8 neutrons, and C has 7 protons and 7 neutrons. Which two are isotopes?"
+        options: ["A and B", "B and C", "A and C", "All three"]
+        answer: "A and B"
+        difficulty: 3
+        hints: ["Isotopes are the same element.", "B and C have the same mass number. Does that make them the same element?"]
+        solution: "Step 1: A and B both have 6 protons, so both are carbon, with different neutrons. Step 2: C has 7 protons, so it is nitrogen, even though its mass number equals B's."
+        mistakes: {"B and C": isotope_protons, "A and C": isotope_protons, "All three": isotope_protons}
 
   - code: chem9.atom.shells
     title: Shells and electronic configuration
@@ -318,6 +364,27 @@ concepts:
         hints: ["Add up all the electrons."]
         solution: "2 + 8 + 3 = 13 (aluminium)."
         mistakes: {"3": valence_shell}
+      - prompt: "An atom has electrons in 3 shells and 6 valence electrons. What is its atomic number?"
+        answer: "16"
+        check: "2+8+6"
+        difficulty: 3
+        hints: ["The first two shells are full.", "K holds 2, L holds 8."]
+        solution: "Step 1: Configuration 2, 8, 6. Step 2: Atomic number = 16 (sulphur)."
+        mistakes: {"6": valence_shell, "18": shell_capacity, "14": shell_capacity}
+      - prompt: "How many electrons does a phosphorus atom (atomic number 15) have in its M shell?"
+        answer: "5"
+        check: "15-2-8"
+        difficulty: 2
+        hints: ["Fill K, then L, then M.", "15 − 2 − 8."]
+        solution: "Step 1: Configuration 2, 8, 5. Step 2: The M shell has 5 electrons."
+        mistakes: {"8": shell_capacity, "18": shell_capacity, "15": valence_shell}
+      - prompt: "X has the configuration 2, 8, 8, 1 and Y has 2, 8, 7. Which ions do they form?"
+        options: ["X⁺ and Y⁻", "X⁻ and Y⁺", "X²⁺ and Y⁻", "X⁺ and Y⁷⁺"]
+        answer: "X⁺ and Y⁻"
+        difficulty: 3
+        hints: ["Which is easier for X: losing 1 or gaining 7?", "Which is easier for Y: gaining 1 or losing 7?"]
+        solution: "Step 1: X loses its 1 outer electron to become X⁺. Step 2: Y gains 1 electron to complete its octet and becomes Y⁻."
+        mistakes: {"X⁻ and Y⁺": metals_lose, "X²⁺ and Y⁻": ion_electrons, "X⁺ and Y⁷⁺": valency_is_needed}
 
   - code: chem9.atom.subshells
     title: Subshells
@@ -393,3 +460,24 @@ concepts:
         hints: ["Shell n has n subshells: 3s, 3p, …"]
         solution: "3s, 3p and 3d: 3 subshells."
         mistakes: {"9": "subshells_per_shell", "18": "subshells_per_shell"}
+      - prompt: "How many electrons in all are in the p subshells of a chlorine atom (atomic number 17)?"
+        answer: "11"
+        check: "6+5"
+        difficulty: 3
+        hints: ["Chlorine is 1s² 2s² 2p⁶ 3s² 3p⁵.", "Add 2p and 3p."]
+        solution: "Step 1: Chlorine is 1s² 2s² 2p⁶ 3s² 3p⁵. Step 2: p electrons = 6 + 5 = 11."
+        mistakes: {"5": all_p, "6": all_p, "12": subshell_capacity}
+      - prompt: "Which is the subshell configuration of the sodium ion Na⁺?"
+        options: ["1s² 2s² 2p⁶", "1s² 2s² 2p⁶ 3s¹", "1s² 2s² 2p⁶ 3s²", "1s² 2s² 2p⁵"]
+        answer: "1s² 2s² 2p⁶"
+        difficulty: 2
+        hints: ["Na has 11 electrons. Na⁺ has lost one.", "Which electron is lost: the outermost one."]
+        solution: "Step 1: Na is 1s² 2s² 2p⁶ 3s¹. Step 2: Na⁺ loses the 3s electron, leaving 1s² 2s² 2p⁶ (like neon)."
+        mistakes: {"1s² 2s² 2p⁶ 3s¹": ion_electrons, "1s² 2s² 2p⁶ 3s²": ion_electrons, "1s² 2s² 2p⁵": ion_electrons}
+      - prompt: "An atom has the configuration 1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵ 4s². What is its atomic number?"
+        answer: "25"
+        check: "2+2+6+2+6+5+2"
+        difficulty: 3
+        hints: ["Add the small numbers above each subshell.", "Up to 3p⁶ there are 18 electrons."]
+        solution: "Step 1: Up to 3p⁶: 18 electrons. Step 2: 3d⁵ 4s² adds 7. Step 3: Atomic number = 25 (manganese)."
+        mistakes: {"7": count_all_electrons, "18": count_all_electrons, "23": count_all_electrons}

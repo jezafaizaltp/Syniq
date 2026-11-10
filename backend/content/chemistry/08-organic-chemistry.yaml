@@ -5,6 +5,9 @@ chapter: 8
 title: Organic Chemistry
 
 tips:
+  count_cc_too: "Count every bond: the C–H bonds and the bond between the carbons."
+  carbon_exceptions: "Organic chemistry covers carbon compounds, with a few simple exceptions. Recall which small carbon compounds are left out."
+  alkane_mass: "Write the formula first from CₙH₂ₙ₊₂, then add 12 for each carbon and 1 for each hydrogen."
   alkane_formula: "Alkanes are CₙH₂ₙ₊₂: double the carbons and add 2 for the hydrogens."
   alkene_formula: "Alkenes are CₙH₂ₙ (one double bond); alkynes are CₙH₂ₙ₋₂ (one triple bond)."
   prefix_count: "Prefixes count carbons: meth 1, eth 2, prop 3, but 4; after that they use Greek number words, like pent- in pentagon and hex- in hexagon. Then check the ending: -ane all single bonds, -ene one double bond."
@@ -98,6 +101,27 @@ concepts:
         hints: ["Three carbons in a chain: C–C–C."]
         solution: "A chain of 3 carbons has 2 C–C bonds (and 8 C–H bonds)."
         mistakes: {"3": catenation_carbon}
+      - prompt: "How many single covalent bonds are there in a molecule of ethane, C₂H₆?"
+        answer: "7"
+        check: "6+1"
+        difficulty: 2
+        hints: ["Each hydrogen is joined by one bond.", "Don't forget the bond joining the two carbons."]
+        solution: "Step 1: Six C–H bonds. Step 2: One C–C bond. Step 3: Total 7."
+        mistakes: {"6": count_cc_too, "8": count_cc_too, "14": bond_pairs}
+      - prompt: "Which of these is NOT counted as an organic compound?"
+        options: ["CO₂", "CH₄", "C₂H₅OH", "C₂H₄"]
+        answer: "CO₂"
+        difficulty: 2
+        hints: ["All four contain carbon.", "A few simple carbon compounds are studied with inorganic chemistry."]
+        solution: "Step 1: Organic chemistry is the chemistry of carbon compounds. Step 2: CO, CO₂ and carbonates are the exceptions, so CO₂ is not organic."
+        mistakes: {"CH₄": carbon_exceptions, "C₂H₅OH": carbon_exceptions, "C₂H₄": carbon_exceptions}
+      - prompt: "How many electrons in all are shared in a molecule of ethene, CH₂=CH₂?"
+        answer: "12"
+        check: "4*2 + 2*2"
+        difficulty: 3
+        hints: ["Four C–H single bonds.", "One C=C double bond is two pairs."]
+        solution: "Step 1: 4 C–H bonds share 8 electrons. Step 2: C=C shares 4. Step 3: Total 12."
+        mistakes: {"10": bond_pairs, "6": bond_pairs, "8": count_cc_too}
 
   - code: chem9.organic.hydrocarbons
     title: Alkanes, alkenes and alkynes
@@ -190,6 +214,27 @@ concepts:
         hints: ["CₙH₂ₙ₋₂."]
         solution: "2 × 3 − 2 = 4: propyne, C₃H₄."
         mistakes: {"6": alkene_formula, "8": alkane_formula}
+      - prompt: "An alkane has 22 hydrogen atoms in its molecule. How many carbon atoms does it have?"
+        answer: "10"
+        check: "(22-2)/2"
+        difficulty: 3
+        hints: ["Alkanes are CₙH₂ₙ₊₂.", "2n + 2 = 22."]
+        solution: "Step 1: 2n + 2 = 22. Step 2: n = 10 (decane)."
+        mistakes: {"11": alkane_formula, "20": alkane_formula, "12": alkane_formula}
+      - prompt: "Which of these hydrocarbons is saturated?"
+        options: ["C₃H₈", "C₃H₆", "C₃H₄", "C₂H₂"]
+        answer: "C₃H₈"
+        difficulty: 2
+        hints: ["Saturated means single bonds only: an alkane.", "Which one fits CₙH₂ₙ₊₂?"]
+        solution: "Step 1: For 3 carbons, an alkane has 2 × 3 + 2 = 8 hydrogens. Step 2: C₃H₈ (propane) is saturated; the others have double or triple bonds."
+        mistakes: {"C₃H₆": alkene_formula, "C₃H₄": alkene_formula, "C₂H₂": alkene_formula}
+      - prompt: "What is the molecular mass, in u, of the alkane with 4 carbon atoms? (C = 12 u, H = 1 u)"
+        answer: "58"
+        check: "4*12 + (2*4+2)*1"
+        difficulty: 3
+        hints: ["Its formula is C₄H₁₀.", "4 × 12 + 10 × 1."]
+        solution: "Step 1: Butane is C₄H₁₀. Step 2: 48 + 10 = 58 u."
+        mistakes: {"56": alkane_mass, "60": alkane_mass, "52": alkane_mass}
 
   - code: chem9.organic.naming
     title: Naming and functional groups
@@ -291,3 +336,24 @@ concepts:
         hints: ["Count the H in C₂H₅ and in OH."]
         solution: "5 + 1 = 6 hydrogen atoms (C₂H₆O)."
         mistakes: {"5": functional_group}
+      - prompt: "What is the name of CH≡C–CH₃?"
+        options: ["Propyne", "Propene", "Ethyne", "Propane"]
+        answer: "Propyne"
+        difficulty: 2
+        hints: ["Count the carbons for the prefix.", "Which bond is there: single, double or triple?"]
+        solution: "Step 1: 3 carbons: prop-. Step 2: A triple bond: -yne. Step 3: Propyne."
+        mistakes: {"Propene": suffix_bond, "Ethyne": prefix_count, "Propane": suffix_bond}
+      - prompt: "What is the name of CH₃CH₂CH₂OH?"
+        options: ["Propanol", "Propanoic acid", "Propanal", "Propane"]
+        answer: "Propanol"
+        difficulty: 2
+        hints: ["Count the carbons.", "Which functional group is –OH?"]
+        solution: "Step 1: 3 carbons: prop-. Step 2: –OH makes it an alcohol: -ol. Step 3: Propanol."
+        mistakes: {"Propanoic acid": functional_group, "Propanal": functional_group, "Propane": functional_group}
+      - prompt: "Which is the formula of ethanal, the aldehyde with two carbon atoms?"
+        options: ["CH₃CHO", "CH₃COOH", "C₂H₅OH", "CH₃COCH₃"]
+        answer: "CH₃CHO"
+        difficulty: 3
+        hints: ["Aldehydes end in -al and contain –CHO.", "Two carbons in all."]
+        solution: "Step 1: -al means an aldehyde group, –CHO, at the end of the chain. Step 2: With two carbons: CH₃CHO."
+        mistakes: {"CH₃COOH": functional_group, "C₂H₅OH": functional_group, "CH₃COCH₃": functional_group}

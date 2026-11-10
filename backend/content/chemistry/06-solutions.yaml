@@ -4,6 +4,14 @@ chapter: 6
 title: Solutions
 
 tips:
+  other_solvents: "Water is not the only solvent. Which liquid here does the dissolving?"
+  solution_minus_solute: "The solution's mass is solute + solvent. Take the solute away to find the solvent."
+  dilute_target: "The salt does not change when water is added. Find what total mass of solution gives the new percentage, then subtract what you already have."
+  mix_percent: "Percentages don't add. Add up the masses of sugar, add up the masses of solution, then find the new percentage."
+  extra_stays: "Compare what you add with what the water can hold at that temperature. Anything over the limit stays undissolved."
+  test_saturated: "A saturated solution can't take any more solute at that temperature. What simple test would show that?"
+  colloid_signs: "Check two things: does a light beam show up (scattering), and do particles settle? A colloid scatters but does not settle."
+  ink_through_paper: "Filter paper stops only large particles. Ink is a colloid: how big are its particles compared with the paper's pores?"
   solute_solvent_swapped: "The solute is what dissolves (usually less); the solvent does the dissolving (usually more)."
   mass_of_solution: "Mass percentage uses the mass of the whole solution: solute + solvent."
   percent_times_100: "Multiply the fraction by 100 to get a percentage."
@@ -107,6 +115,27 @@ concepts:
         hints: ["The solvent is the component present in the largest amount."]
         solution: "Nitrogen is present in the greatest amount, so it is the solvent."
         mistakes: {"Oxygen": solute_solvent_swapped}
+      - prompt: "Tincture of iodine is iodine dissolved in alcohol. What is the solvent?"
+        options: ["Alcohol", "Iodine", "Water", "Both together"]
+        answer: "Alcohol"
+        difficulty: 2
+        hints: ["Which substance dissolves?", "Which substance does the dissolving?"]
+        solution: "Step 1: Iodine is the solute. Step 2: Alcohol dissolves it, so alcohol is the solvent."
+        mistakes: {"Iodine": solute_solvent_swapped, "Water": other_solvents, "Both together": solute_solvent_swapped}
+      - prompt: "25 g of sugar is dissolved in water to make 200 g of solution. How many grams of water were used?"
+        answer: "175"
+        check: "200-25"
+        difficulty: 2
+        hints: ["Solution = solute + solvent.", "200 − 25."]
+        solution: "Step 1: Water = solution − sugar. Step 2: 200 − 25 = 175 g."
+        mistakes: {"225": solution_minus_solute, "200": solution_minus_solute}
+      - prompt: "Which of these is NOT a solution?"
+        options: ["Muddy water", "Air", "Brass", "Soda water"]
+        answer: "Muddy water"
+        difficulty: 2
+        hints: ["A solution is the same all the way through and never settles.", "Which one has particles you can see falling to the bottom?"]
+        solution: "Step 1: Air, brass and soda water are all uniform mixtures. Step 2: Mud settles out of muddy water, so it is a suspension."
+        mistakes: {"Air": suspension_settles, "Brass": alloy_solid_solution, "Soda water": gas_in_liquid}
 
   - code: chem9.solutions.concentration
     title: Concentration
@@ -211,6 +240,27 @@ concepts:
         hints: ["The sugar is still 20 g.", "The solution is now 200 g."]
         solution: "20 g of sugar in 200 g: 20 ÷ 200 × 100 = 10%."
         mistakes: {"20": mass_of_solution}
+      - prompt: "How many grams of water must be added to 50 g of a 20% salt solution to make it a 10% solution?"
+        answer: "50"
+        check: "50*0.2/0.1 - 50"
+        difficulty: 3
+        hints: ["How much salt is in 50 g of 20% solution?", "That salt must be 10% of the new solution."]
+        solution: "Step 1: Salt = 20% of 50 = 10 g. Step 2: For 10%, the solution must be 100 g. Step 3: Add 100 − 50 = 50 g of water."
+        mistakes: {"100": dilute_target, "25": dilute_target, "10": dilute_target}
+      - prompt: "A 250 mL packet of oral rehydration solution contains 5 g of glucose. What is its glucose concentration, in g/L?"
+        answer: "20"
+        check: "5/0.25"
+        difficulty: 2
+        hints: ["250 mL is a quarter of a litre.", "How much glucose would 1000 mL have?"]
+        solution: "Step 1: 250 mL = 0.25 L. Step 2: 5 ÷ 0.25 = 20 g/L."
+        mistakes: {"1.25": solubility_per_100g, "0.02": solubility_per_100g, "50": solubility_per_100g}
+      - prompt: "100 g of a 10% sugar solution is mixed with 100 g of a 30% sugar solution. What is the mass percentage of sugar in the mixture?"
+        answer: "20"
+        check: "(10+30)/200*100"
+        difficulty: 3
+        hints: ["How many grams of sugar are in each?", "Total sugar ÷ total solution × 100."]
+        solution: "Step 1: Sugar = 10 g + 30 g = 40 g. Step 2: Solution = 200 g. Step 3: 40 ÷ 200 × 100 = 20%."
+        mistakes: {"40": mix_percent, "0.2": percent_times_100}
 
   - code: chem9.solutions.solubility
     title: Solubility and saturation
@@ -313,6 +363,27 @@ concepts:
         hints: ["Only 32 g can stay dissolved at 20 °C."]
         solution: "110 − 32 = 78 g crystallises out."
         mistakes: {"142": saturated_meaning}
+      - prompt: "The solubility of potassium nitrate at 20 °C is 32 g per 100 g of water. 50 g of it is stirred into 100 g of water at 20 °C. What do you get?"
+        options: ["A saturated solution with 18 g left undissolved", "An unsaturated solution", "A saturated solution with nothing left over", "A saturated solution with 32 g left undissolved"]
+        answer: "A saturated solution with 18 g left undissolved"
+        difficulty: 3
+        hints: ["How much can 100 g of water hold at 20 °C?", "Compare 50 g with that limit."]
+        solution: "Step 1: Only 32 g can dissolve, so the solution is saturated. Step 2: 50 − 32 = 18 g stays undissolved."
+        mistakes: {"An unsaturated solution": extra_stays, "A saturated solution with nothing left over": extra_stays, "A saturated solution with 32 g left undissolved": extra_stays}
+      - prompt: "How can you tell whether a salt solution is saturated?"
+        options: ["Add a little more salt at the same temperature and see if it dissolves", "Heat it and see if it boils", "Check whether it is clear", "Taste whether it is salty"]
+        answer: "Add a little more salt at the same temperature and see if it dissolves"
+        difficulty: 2
+        hints: ["What can a saturated solution NOT do?", "Keep the temperature the same."]
+        solution: "Step 1: A saturated solution cannot dissolve any more solute at that temperature. Step 2: If extra salt stays undissolved, the solution is saturated."
+        mistakes: {"Heat it and see if it boils": test_saturated, "Check whether it is clear": test_saturated, "Taste whether it is salty": test_saturated}
+      - prompt: "At 20 °C the solubility of common salt is 36 g per 100 g of water. What is the least mass of water, in g, that can dissolve 90 g of salt at 20 °C?"
+        answer: "250"
+        check: "90*100/36"
+        difficulty: 2
+        hints: ["36 g needs 100 g of water.", "90 g is 2.5 times as much."]
+        solution: "Step 1: 90 ÷ 36 = 2.5. Step 2: Water = 2.5 × 100 = 250 g."
+        mistakes: {"32.4": solubility_per_100g, "40": solubility_per_100g}
 
   - code: chem9.solutions.mixtures
     title: True solutions, colloids and suspensions
@@ -403,3 +474,24 @@ concepts:
         hints: ["Divide 1000 by 50."]
         solution: "1000 ÷ 50 = 20 particles"
         mistakes: {"50000": particle_size}
+      - prompt: "A light beam shows a clear path through a liquid, and nothing settles even after a day. What kind of mixture is it?"
+        options: ["A colloid", "A true solution", "A suspension", "Pure water"]
+        answer: "A colloid"
+        difficulty: 3
+        hints: ["Which mixtures scatter light?", "Which of those don't settle?"]
+        solution: "Step 1: Scattering light (Tyndall effect) rules out a true solution. Step 2: Not settling rules out a suspension. So it is a colloid."
+        mistakes: {"A true solution": tyndall_true_solution, "A suspension": suspension_settles, "Pure water": colloid_signs}
+      - prompt: "Ink, a colloid, is poured through filter paper. What happens?"
+        options: ["The coloured liquid passes through", "The colour is left on the paper and clear water passes", "Only water stays on the paper", "The ink separates into layers"]
+        answer: "The coloured liquid passes through"
+        difficulty: 3
+        hints: ["Colloid particles are 1 to 100 nm across.", "Filter paper stops particles bigger than that."]
+        solution: "Step 1: Colloid particles are too small for filter paper to catch. Step 2: So the ink passes through, colour and all."
+        mistakes: {"The colour is left on the paper and clear water passes": ink_through_paper, "Only water stays on the paper": ink_through_paper, "The ink separates into layers": suspension_settles}
+      - prompt: "Starch stirred in hot water, salt in water, and sand in water: which kinds of mixture are these, in that order?"
+        options: ["Colloid, true solution, suspension", "True solution, colloid, suspension", "Suspension, true solution, colloid", "Colloid, suspension, true solution"]
+        answer: "Colloid, true solution, suspension"
+        difficulty: 3
+        hints: ["Which one settles?", "Which one is clear and does not scatter light? Which one looks cloudy but does not settle?"]
+        solution: "Step 1: Salt dissolves completely: true solution. Step 2: Sand settles: suspension. Step 3: Starch gives a cloudy mixture that scatters light and doesn't settle: colloid."
+        mistakes: {"True solution, colloid, suspension": particle_size, "Suspension, true solution, colloid": particle_size, "Colloid, suspension, true solution": particle_size}

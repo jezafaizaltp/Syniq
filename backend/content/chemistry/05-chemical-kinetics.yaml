@@ -4,6 +4,13 @@ chapter: 5
 title: Chemical Kinetics
 
 tips:
+  rate_slows: "Work out how much gas is made in each 20 s. As the reactants get used up, does that amount grow or shrink?"
+  interval_change: "The rate over a time interval uses the gas made during it: later volume − earlier volume, divided by the time between them."
+  time_shrinks: "If the reaction goes k times as fast, the same reaction takes 1/k of the time."
+  more_oxygen: "Pure oxygen has more oxygen particles in the same space than air does. What does that do to the number of collisions?"
+  dust_surface: "Think about how much surface a fine powder has compared with the same mass in one lump."
+  catalyst_amount: "A catalyst changes how fast the products form, not how much reactant there is to turn into product."
+  meet_not_hit: "Concentration changes how often particles meet, not how hard they hit. Which factor changes how hard they hit?"
   rate_per_time: "Rate = change in amount ÷ time taken. Divide by the time."
   surface_area: "Smaller pieces have more surface for particles to collide with, so they react faster."
   temperature_up: "Higher temperature makes particles move faster and collide harder and more often, so the rate rises."
@@ -99,6 +106,27 @@ concepts:
         hints: ["Change in volume ÷ change in time."]
         solution: "(50 − 20) ÷ (25 − 10) = 30 ÷ 15 = 2 cm³/s"
         mistakes: {"6/5": rate_per_time}
+      - prompt: "Gas made by a reaction: 0 cm³ at 0 s, 40 cm³ at 20 s, 60 cm³ at 40 s and 70 cm³ at 60 s. In which 20 seconds is the rate highest?"
+        options: ["0 to 20 s", "20 to 40 s", "40 to 60 s", "It is the same throughout"]
+        answer: "0 to 20 s"
+        difficulty: 2
+        hints: ["Find the gas made in each 20 s.", "40, then 20, then 10."]
+        solution: "Step 1: Gas made: 40, 20 and 10 cm³ in the three intervals. Step 2: The most gas per second is at the start, 0 to 20 s."
+        mistakes: {"20 to 40 s": rate_slows, "40 to 60 s": rate_slows, "It is the same throughout": rate_slows}
+      - prompt: "Gas made by a reaction: 40 cm³ at 20 s and 70 cm³ at 60 s. What is the average rate between 20 s and 60 s, in cm³ per second?"
+        answer: "0.75"
+        check: "(70-40)/(60-20)"
+        difficulty: 3
+        hints: ["How much gas was made between the two times?", "How many seconds passed?"]
+        solution: "Step 1: Gas made = 70 − 40 = 30 cm³. Step 2: Time = 40 s. Step 3: Rate = 30 ÷ 40 = 0.75 cm³/s."
+        mistakes: {"1.75": interval_change, "1.17": interval_change, "30": rate_per_time}
+      - prompt: "A flask of marble chips and acid has a mass of 200.0 g at the start and 198.8 g after 4 minutes. What is the average rate of mass loss, in g per minute?"
+        answer: "0.3"
+        check: "(2000-1988)/40"
+        difficulty: 2
+        hints: ["The mass lost is the carbon dioxide that escaped.", "Mass lost ÷ minutes."]
+        solution: "Step 1: Mass lost = 1.2 g. Step 2: Rate = 1.2 ÷ 4 = 0.3 g/min."
+        mistakes: {"1.2": rate_per_time, "49.7": interval_change, "4.8": rate_per_time}
 
   - code: chem9.kinetics.factors
     title: Factors affecting the rate
@@ -192,6 +220,27 @@ concepts:
         solution: "A bigger lump has less surface area for its mass, so it does not speed the reaction."
 
         mistakes: {"Using zinc powder": "lump_less_surface", "Heating the acid": "temperature_up", "Using more concentrated acid": "concentration_up"}
+      - prompt: "A reaction takes 4 minutes at 20 °C. Its rate doubles for every 10 °C rise. How many minutes does it take at 40 °C?"
+        answer: "1"
+        check: "4/2**2"
+        difficulty: 3
+        hints: ["From 20 °C to 40 °C is two 10 °C steps.", "Rate × 4 means time ÷ 4."]
+        solution: "Step 1: Two doublings make it 4 times as fast. Step 2: Time = 4 ÷ 4 = 1 minute."
+        mistakes: {"16": time_shrinks, "2": temperature_up, "8": time_shrinks}
+      - prompt: "Why does a glowing splint burn much faster in pure oxygen than in air?"
+        options: ["More oxygen particles in the same space mean more collisions", "Pure oxygen is hotter than air", "Oxygen acts as a catalyst", "The splint has more surface in oxygen"]
+        answer: "More oxygen particles in the same space mean more collisions"
+        difficulty: 2
+        hints: ["Air is only about one fifth oxygen.", "Which factor is this: temperature, concentration, surface area or catalyst?"]
+        solution: "Step 1: Pure oxygen has about five times the oxygen concentration of air. Step 2: More collisions with oxygen each second make burning faster."
+        mistakes: {"Pure oxygen is hotter than air": more_oxygen, "Oxygen acts as a catalyst": catalyst_not_used, "The splint has more surface in oxygen": more_oxygen}
+      - prompt: "Lumps of coal burn slowly, but fine coal dust in a mine can explode. Why?"
+        options: ["The dust has a far larger surface area, so it burns extremely fast", "Coal dust is a catalyst", "Coal dust contains more carbon", "Dust is hotter than lumps"]
+        answer: "The dust has a far larger surface area, so it burns extremely fast"
+        difficulty: 3
+        hints: ["Which factor is different between a lump and dust of the same coal?", "Burning happens at the surface."]
+        solution: "Step 1: Dust has a huge total surface for oxygen to reach. Step 2: So many collisions happen at once that the burning becomes explosive."
+        mistakes: {"Coal dust is a catalyst": catalyst_not_used, "Coal dust contains more carbon": dust_surface, "Dust is hotter than lumps": dust_surface}
   - code: chem9.kinetics.collisions
     title: Collision theory
     after: [chem9.kinetics.factors]
@@ -275,3 +324,24 @@ concepts:
         hints: ["Divide by 10,000."]
         solution: "5,000,000 ÷ 10,000 = 500"
         mistakes: {"5000000": effective_collisions}
+      - prompt: "A catalyst lowers a reaction's activation energy. What happens to the amount of product made by the end?"
+        options: ["The same amount is made, but sooner", "More product is made", "Less product is made", "The product is made more slowly"]
+        answer: "The same amount is made, but sooner"
+        difficulty: 3
+        hints: ["Is the catalyst used up or turned into product?", "What decides how much product can form?"]
+        solution: "Step 1: The amount of product depends on the amount of reactants. Step 2: The catalyst only speeds up the reaction, so the same amount forms sooner."
+        mistakes: {"More product is made": catalyst_amount, "Less product is made": catalyst_amount, "The product is made more slowly": catalyst_not_used}
+      - prompt: "The concentration of an acid is doubled, at the same temperature. What happens to the fraction of collisions that have at least the activation energy?"
+        options: ["It stays the same", "It doubles", "It halves", "Every collision now has enough energy"]
+        answer: "It stays the same"
+        difficulty: 3
+        hints: ["Concentration changes how many collisions happen.", "What decides how energetic each collision is?"]
+        solution: "Step 1: Doubling concentration doubles the number of collisions. Step 2: The particles' energies depend on temperature, which is unchanged, so the fraction with enough energy stays the same."
+        mistakes: {"It doubles": meet_not_hit, "It halves": meet_not_hit, "Every collision now has enough energy": effective_collisions}
+      - prompt: "In a reaction, 1 collision in every 2000 is effective. How many collisions per second are needed for 600 effective collisions per second?"
+        answer: "1200000"
+        check: "600*2000"
+        difficulty: 2
+        hints: ["Effective = total ÷ 2000.", "Total = 600 × 2000."]
+        solution: "Step 1: Total × 1/2000 = 600. Step 2: Total = 1,200,000 collisions per second."
+        mistakes: {"0.3": effective_collisions, "3.33": effective_collisions}
