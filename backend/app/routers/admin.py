@@ -76,6 +76,14 @@ def import_students(body: ImportIn, db: DbSession = Depends(get_db), user: User 
     if missing:
         raise HTTPException(400, f"The sheet needs these columns: {', '.join(missing)}")
 
+    # Same name in the same class twice (sheet uploaded again, late joiner added twice) would
+    # quietly make a second account, so it is refused; a different child gets an initial added.
+    have = {
+        (name.strip().lower(), cls): f"login {login}"
+        for name, cls, login in db.execute(
+            select(User.name, ClassGroup.name, User.email).join(ClassGroup, User.class_group_id == ClassGroup.id).where(User.role == "student")
+        ).all()
+    }
     errors, rows = [], []
     for n, raw in enumerate(reader, start=2):  # row 1 is the header
         r = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
@@ -93,6 +101,14 @@ def import_students(body: ImportIn, db: DbSession = Depends(get_db), user: User 
         email = r.get("guardian_email", "").lower()
         if email and not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
             problems.append(f"'{email}' doesn't look like an email address")
+        key = (r.get("student_name", "").lower(), r.get("class", ""))
+        if key[0] and key in have:
+            problems.append(
+                f"{r['student_name']} is already in {r['class']} ({have[key]}). "
+                "If this is a different child, add an initial to tell them apart."
+            )
+        elif key[0]:
+            have[key] = f"row {n} of this sheet"
         if problems:
             errors.append({"row": n, "problems": problems})
         rows.append({**r, "guardian_email": email, "consents": consents, "row": n})
