@@ -197,6 +197,14 @@ MESSAGES: dict[str, dict[str, str]] = {
         "en": "Every topic in this chapter looks secure.",
         "ml": "ഈ അധ്യായത്തിലെ എല്ലാ പാഠങ്ങളും നന്നായി ഉറച്ചതായി തോന്നുന്നു.",
     },
+    "reason.R3_slipped": {
+        "en": "A topic you secured earlier has slipped a little, so here is a question on it.",
+        "ml": "മുമ്പ് ഉറപ്പിച്ച ഒരു പാഠം അല്പം മറന്നുതുടങ്ങിയിട്ടുണ്ട്, അതിനാൽ അതിൽ നിന്ന് ഒരു ചോദ്യം.",
+    },
+    "reason.R7_stretch": {
+        "en": "Every topic here is secure. Here are some harder questions to stretch you.",
+        "ml": "ഇവിടത്തെ എല്ലാ പാഠങ്ങളും ഉറച്ചു. ഇനി കുറച്ചുകൂടി കടുപ്പമുള്ള ചോദ്യങ്ങൾ നോക്കാം.",
+    },
     "reason.R6_practice": {
         "en": "Practice at a level that matches where you are now.",
         "ml": "ഇപ്പോഴത്തെ നിലയ്ക്ക് ചേരുന്ന പരിശീലനം.",

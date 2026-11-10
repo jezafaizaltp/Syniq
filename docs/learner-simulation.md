@@ -79,6 +79,37 @@ hints, and everyday examples).
   halves the repeats, but more questions are the real fix.
 - **Forgetting is still large**: about a third of the gain is lost in two weeks without practice.
 
+## A full term (`SIM_TERM=1`, 4 runs)
+
+Ten chapters in a teacher's order (Maths 1–4, Physics 1–2, Chemistry 1–2, Biology 1, Social Science 1; 38 topics),
+40 lab periods, and two more learners: **Ammu**, already strong, and **Rahul**, who misses about 4 periods in 10.
+
+| Learner | SYNiq | Fixed version |
+| --- | --- | --- |
+| Meera | 32 → 42 → 37 | 32 → 41 → 35 |
+| Arjun | 25 → 40 → 32 | 25 → 36 → 29 |
+| Zara | 32 → 49 → 45 | 32 → 42 → 38 |
+| Vishnu | 20 → 37 → 28 | 20 → 28 → 23 |
+| Control | 32 → 42 → 37 | 32 → 45 → 38 |
+| Ammu | 62 → 64 → 63 | 62 → 72 → 67 |
+| Rahul | 32 → 41 → 35 | 32 → 38 → 34 |
+
+What the term run found:
+
+- **The "watch out" nudge came on about half of all questions**, so it would soon be ignored. Now it shows at most once
+  in 5 questions (`learning.watch_out_shown_recently`): about 400 nudges a term down to about 130.
+- **Once a chapter was all secure, SYNiq had nothing to give.** Now it first offers the topic's hardest questions not
+  yet answered right (rule `R7_stretch`), and only then says the chapter is done.
+- **Strong learners are moved on fast but not stretched enough.** Ammu secures everything quickly and gains little on
+  these ten chapters (64%, against 72% for the fixed version, which keeps her practising). Stretch questions helped
+  little because each topic has only two or three hardest questions. In the real app she would go on to new chapters,
+  which may be the better use of her time, but these topics deserve harder questions too.
+- **Absences are handled well.** Rahul, missing 4 periods in 10, still keeps more than with the fixed version; the
+  reviews from other chapters bring back what slipped while he was away.
+- **"Secure" is still reached too early** for about 6 in 10 topics in the term run. The learning rates in
+  `engine/mastery.py` were tuned on simulated learners; they should be re-fitted to real pilot answers after the first
+  few weeks.
+
 ## Running it
 
 ```
@@ -87,6 +118,6 @@ python -m tools.learner_sim --seed 1 --out /tmp/sim-1.json   # about 2–3 minut
 python -m tools.learner_sim --summarise "/tmp/sim-*.json"
 ```
 
-Engine settings can be tried without changing code: `SIM_P_TRANSIT`, `SIM_MIN_ATTEMPTS`, `SIM_SECURE`,
+Engine settings can be tried without changing code: `SIM_P_TRANSIT`, `SIM_MIN_ATTEMPTS`, `SIM_SECURE`, `SIM_TERM=1` (the full term),
 `SIM_REVIEW_DAYS` (for example `1,3,7,21,60`), `SIM_CAPS` (method-matching caps) and `SIM_TAPS=0` (learners don't
 answer "did this help?").

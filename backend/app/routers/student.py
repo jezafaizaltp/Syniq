@@ -122,11 +122,17 @@ def learn_next(
             payload["method_why"] = why  # the app says, in the student's words, why this way first
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         working_on = learning.patterns.active(learning.mistake_patterns(db, user.id))
-        item = learning.pick_item(db, user.id, concept.id, action.difficulty, working_on)
+        item = None
+        if action.rule_id == "R7_stretch":
+            item = learning.pick_stretch_item(db, user.id, concept.id)
+        item = item or learning.pick_item(db, user.id, concept.id, action.difficulty, working_on)
         payload["item"] = learning.public_item(item, user.settings) if item else None
-        if item and set(learning.traps_of(item)) & working_on:
-            # A trap they've fallen into before: a nudge to slow down, never the answer.
+        if item and set(learning.traps_of(item)) & working_on and not learning.watch_out_shown_recently(db, user.id):
+            # A trap they've fallen into before: a nudge to slow down, never the answer. Not on every
+            # question, or it stops being noticed.
             payload["item"]["watch_out"] = True
+            decision.evidence = {**(decision.evidence or {}), "watch_out": True}
+            db.commit()
     return payload
 
 

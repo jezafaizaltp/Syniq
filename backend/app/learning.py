@@ -143,6 +143,8 @@ def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[Co
         )
     for cid, prior in method_priors(db, student.id, list(states)).items():
         states[cid].method_prior = prior
+    for cid, left in stretch_counts(db, student.id, ids).items():
+        states[cid].stretch_left = left
     return [states[c.id] for c in concepts], states
 
 
@@ -285,6 +287,12 @@ def next_action(
 REPEAT_GAP = timedelta(hours=12)
 
 
+def i18n_text(key: str) -> str:
+    from . import i18n
+
+    return i18n.t("en", key)
+
+
 # Most reviews from other chapters in one sitting, so today's chapter still gets the time.
 OTHER_REVIEWS_PER_SITTING = 4
 
@@ -365,14 +373,71 @@ def other_review(db: DbSession, student: User, chapter_id: int, now) -> Action |
         kind="review",
         concept_id=row.concept_id,
         rule_id="R3_other_chapter",
-        reason=(
-            "A topic you secured earlier has slipped a little, so here is a question on it."
-            if slipped
-            else "A quick review now helps you remember this for longer."
-        ),
+        reason=i18n_text("reason.R3_slipped" if slipped else "reason.R3_spaced_review"),
         difficulty=2,
         evidence={"slipped": slipped, "due": when.isoformat()},
     )
+
+
+def _hardest(db: DbSession, concept_ids) -> dict[int, list[Item]]:
+    """Each topic's questions at its highest difficulty, when that is above the easiest level."""
+    by_topic: dict[int, list[Item]] = {}
+    for i in db.scalars(select(Item).where(Item.concept_id.in_(list(concept_ids)), Item.status == "approved")):
+        by_topic.setdefault(i.concept_id, []).append(i)
+    out = {}
+    for cid, items in by_topic.items():
+        top = max(i.difficulty for i in items)
+        if top >= 2:
+            out[cid] = [i for i in items if i.difficulty == top]
+    return out
+
+
+def stretch_counts(db: DbSession, student_id: int, concept_ids) -> dict[int, int]:
+    """How many of each topic's hardest questions the student has not yet answered right."""
+    hardest = _hardest(db, concept_ids)
+    if not hardest:
+        return {}
+    right = set(
+        db.scalars(
+            select(Attempt.item_id).where(
+                Attempt.student_id == student_id, Attempt.correct.is_(True), Attempt.concept_id.in_(list(hardest))
+            )
+        ).all()
+    )
+    return {cid: sum(1 for i in items if i.id not in right) for cid, items in hardest.items()}
+
+
+def pick_stretch_item(db: DbSession, student_id: int, concept_id: int) -> Item | None:
+    """A hardest-level question of this topic not yet answered right, the one seen longest ago first."""
+    items = _hardest(db, [concept_id]).get(concept_id, [])
+    right = set(
+        db.scalars(
+            select(Attempt.item_id).where(Attempt.student_id == student_id, Attempt.concept_id == concept_id, Attempt.correct.is_(True))
+        ).all()
+    )
+    left = [i for i in items if i.id not in right]
+    if not left:
+        return None
+    last_seen: dict[int, int] = {}
+    for item_id, attempt_id in db.execute(
+        select(Attempt.item_id, Attempt.id).where(Attempt.student_id == student_id, Attempt.concept_id == concept_id)
+    ):
+        last_seen[item_id] = max(attempt_id, last_seen.get(item_id, 0))
+    return min(left, key=lambda i: (last_seen.get(i.id, 0), i.id))
+
+
+# A "watch out" nudge at most once in this many questions, so it still means something.
+WATCH_OUT_EVERY = 5
+
+
+def watch_out_shown_recently(db: DbSession, student_id: int) -> bool:
+    rows = db.scalars(
+        select(Decision.evidence)
+        .where(Decision.student_id == student_id, Decision.action.in_(("practice", "review", "prereq_review")))
+        .order_by(Decision.id.desc())
+        .limit(WATCH_OUT_EVERY)
+    ).all()
+    return any((e or {}).get("watch_out") for e in rows[1:])  # the newest row is this step's own decision
 
 
 def pick_item(
