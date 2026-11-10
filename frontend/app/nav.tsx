@@ -54,8 +54,8 @@ export default function Nav() {
   const pathname = usePathname();
   const other = LANGS.find((l) => l.code !== lang)!;
   // The quick switch is for the Kerala pilot: signed-out screens, Kerala students and school
-  // parents. CBSE families are English first and change language in Settings. Anyone already
-  // in Malayalam always keeps a way back.
+  // parents. CBSE families are English first and pick Hindi or Malayalam in Settings. Anyone
+  // already in another language always keeps a way back to English.
   const showLanguage =
     !me ||
     lang !== "en" ||

@@ -19,7 +19,7 @@ def fields(text: str) -> set[str]:
 
 def test_every_message_has_malayalam_with_the_same_blanks():
     for key, entry in i18n.MESSAGES.items():
-        assert set(entry) == {"en", "ml"}, key
+        assert set(entry) == {"en", "ml", "hi"}, key
         assert MALAYALAM.search(entry["ml"]), key
         assert fields(entry["en"]) == fields(entry["ml"]), key
 

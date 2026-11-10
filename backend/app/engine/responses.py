@@ -130,6 +130,12 @@ def _say(n: int, tens: bool = False, lang: str = "en") -> str:
         if t10 and ones:
             return f"{t10} പത്തും {ones} ഒന്നും"
         return f"{t10} പത്ത്" if t10 else (f"{ones} ഒന്ന്" if ones else "ഒന്നുമില്ല")
+    if lang == "hi":
+        if not tens:
+            return f"{n} तारा" if n == 1 else f"{n} तारे"
+        t10, ones = divmod(n, 10)
+        parts = ([f"{t10} दहाई"] if t10 else []) + ([f"{ones} इकाई"] if ones else [])
+        return " और ".join(parts) or "कुछ नहीं"
     if not tens:
         return f"{n} star{'s' if n != 1 else ''}"
     t10, ones = divmod(n, 10)
