@@ -76,7 +76,8 @@ def class_today(class_id: int, db: DbSession = Depends(get_db), user: User = Dep
             today = db.scalars(select(Attempt).where(Attempt.student_id == s.id, Attempt.created_at >= start)).all()
             last = db.scalars(select(Attempt.created_at).where(Attempt.student_id == s.id).order_by(Attempt.created_at.desc())).first()
             row["answered_today"] = len(today)
-            row["quiet"] = not s.must_change_password and (last is None or last < quiet_since)
+            # Quiet: nothing for a week. A student who joined this week hasn't had the chance yet.
+            row["quiet"] = not s.must_change_password and (last or s.created_at) < quiet_since
             if today:
                 active += 1
                 answers += len(today)

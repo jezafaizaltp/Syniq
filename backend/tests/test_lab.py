@@ -109,3 +109,14 @@ def test_weekly_usage_hides_small_weeks():
     assert week["hidden"] is True and week["active_students"] is None  # only a couple of test students practised
     assert "name" not in str(r).lower()
     assert client.get("/admin/usage", headers=login("teacher@demo.syniq")).status_code == 403
+
+
+def test_new_student_is_not_called_quiet():
+    a = login("admin@demo.syniq")
+    sheet = "student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school\nQuiet Q,9 Q,Q Parent,,,yes,no,yes\n"
+    row = client.post("/admin/import", json={"csv": sheet, "dry_run": False}, headers=a).json()["accounts"][0]
+    h = sign_in(row["student_login"], row["student_password"])
+    client.post("/me/password", json={"current": row["student_password"], "new": "quiet-pass-1"}, headers=h)
+    class_id = next(c["id"] for c in client.get("/teacher/classes", headers=a).json() if c["name"] == "9 Q")
+    student = client.get(f"/teacher/classes/{class_id}/today", headers=a).json()["students"][0]
+    assert student["first_sign_in_pending"] is False and student["quiet"] is False

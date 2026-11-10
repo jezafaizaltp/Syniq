@@ -60,8 +60,9 @@ export default function LabToday({ classId }: { classId: number }) {
     <section className="card">
       <h2>Today in the lab</h2>
       <p>
-        <strong>{data.today.active}</strong> students practised today: <strong>{data.today.answers}</strong> answers across{" "}
-        <strong>{data.today.topics}</strong> topics. Counts only include families who share progress with the school.
+        <strong>{data.today.active}</strong> {data.today.active === 1 ? "student" : "students"} practised today:{" "}
+        <strong>{data.today.answers}</strong> {data.today.answers === 1 ? "answer" : "answers"} across <strong>{data.today.topics}</strong>{" "}
+        {data.today.topics === 1 ? "topic" : "topics"}. Counts only include families who share progress with the school.
       </p>
       {notIn.length > 0 && <p className="muted">Not signed in yet: {notIn.map((s) => s.name).join(", ")}.</p>}
       {quiet.length > 0 && (

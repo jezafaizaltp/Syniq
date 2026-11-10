@@ -110,20 +110,27 @@ If it doesn't open:
 
 This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.md#7-set-up-the-pilot): sign in as the admin, then on **School** import the students and parents from the CSV, print the login slips, add the Class 9 chapters and add the teachers.
 
+Before the import, send the consent forms home: on **School**, open **Parent letters and consent forms**, type the school name and who parents can ask, and print. There is one page per student with the names filled in. Tick the same boxes on the School page when the signed forms come back, and keep the paper forms safe. After the import, **Show as cut-out slips** prints one slip per student and one per parent, to cut along the dashed lines.
+
 ## The first lab day
 
 1. Switch on the lab computer 10 minutes early. On Ubuntu, run `./check.sh` in `deploy/lab`; on Windows, double-click `check-windows.bat` there: it checks SYNiq is running and answers on the school network address, that there is enough free disk space and that last night's backup is there and complete, and says what to fix if not. It changes nothing. Then open the SYNiq address on one tablet to check it works over the Wi-Fi (the script can't test the Wi-Fi or a tablet's firewall).
 2. Give each student their slip. The address is printed on it.
-3. Students type the login and password from the slip, then choose their own password (at least 8 letters or numbers). **Ask them to write it in their notebook**: if they forget it, the admin presses **New password** on the School page.
-4. Each subject offers a short optional check first. Students can take it, so SYNiq skips what they already know, or skip it.
-5. At the end, everyone presses **Sign out**.
+3. Students type the login and password from the slip, then choose their own password (at least 8 letters or numbers). **Ask them to write it in their notebook**. The first time, each student sees a short welcome card saying there are no marks and mistakes help.
+4. If a student forgets their password, the class teacher opens **Class**, then **Today in the lab**, then **All students**, and presses **New password** next to their name. The new temporary password is shown at once. The admin can still do the same on the School page.
+5. Each subject offers a short optional check first. Students can take it, so SYNiq skips what they already know, or skip it.
+6. During the period, **Today in the lab** on the teacher's Class page shows who has signed in and who practised today. It also lists students who have been quiet for a week, for a friendly word. Practice counts only include families who agreed to share progress with the school.
+7. At the end, students press **Sign out**. They first see what they did today, then sign out. Then the teacher presses **End lab period: sign everyone out**, which closes every student's sign-in in that class on all computers. A student who walks away is signed out by itself after 20 minutes without use, with a minute's warning first.
+
+If a family withdraws, the admin presses **Withdraw from SYNiq** under the student's name on the School page. The login stops working and everything SYNiq learned about the child is deleted. The consent record and audit log are kept.
 
 ## 8. Every day
 
 - Before each lab period, run `./check.sh` (Ubuntu) or double-click `check-windows.bat` (Windows) and fix anything it marks **FIX**. On Windows it also warns if the network is set to Public, which blocks tablets. The Windows check has not yet been run on a real Windows computer.
 - Switch the lab computer on before the lab period and **don't let it go to sleep** while students are using SYNiq. Turn off sleep in power settings. The screen can still turn off.
 - SYNiq starts by itself when the computer starts (on Windows, after sign-in). Nothing needs to be clicked.
-- Students should **sign out** at the end, because lab computers are shared.
+- Students should **sign out** at the end, and the teacher presses **End lab period**, because lab computers are shared.
+- For the pilot report, **Pilot results** now shows how much SYNiq was used each week, as counts only. A week with fewer than five active students shows no numbers.
 
 ## Optional: free AI for questions the notes don't cover
 
