@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ApiError, api, post } from "@/lib/api";
+import { ApiError, api, post, put } from "@/lib/api";
 
 type Student = {
   id: number;
@@ -12,7 +12,17 @@ type Student = {
   answered_today?: number;
   quiet?: boolean;
 };
-type Today = { class: string; students: Student[]; today: { active: number; answers: number; topics: number }; quiet_days: number };
+type Hand = { id: number; name: string; topic: string | null; minutes: number };
+type TodayChapter = { chapter_id: number; title: string; number: number; subject: string } | null;
+type Today = {
+  class: string;
+  students: Student[];
+  today: { active: number; answers: number; topics: number };
+  quiet_days: number;
+  today_chapter: TodayChapter;
+  hands: Hand[];
+};
+type ChapterChoice = { chapter_id: number; subject: string; number: number; title: string };
 
 function status(s: Student, quietDays: number) {
   if (s.first_sign_in_pending) return { text: "Not signed in yet", cls: "pill warn" };
@@ -28,10 +38,27 @@ export default function LabToday({ classId }: { classId: number }) {
   const [message, setMessage] = useState("");
   const [confirmEnd, setConfirmEnd] = useState(false);
 
+  const [chapters, setChapters] = useState<ChapterChoice[]>([]);
   const load = useCallback(async () => setData(await api<Today>(`/teacher/classes/${classId}/today`)), [classId]);
   useEffect(() => {
     load();
-  }, [load]);
+    api<ChapterChoice[]>(`/teacher/classes/${classId}/chapters`).then(setChapters).catch(() => undefined);
+    // Keep the panel current during the lab period: raised hands and who has started.
+    const timer = window.setInterval(() => {
+      if (document.visibilityState === "visible") load().catch(() => undefined);
+    }, 30000);
+    return () => window.clearInterval(timer);
+  }, [load, classId]);
+
+  async function chooseChapter(value: string) {
+    await put(`/teacher/classes/${classId}/today-chapter`, { chapter_id: value ? Number(value) : null });
+    load();
+  }
+
+  async function helped(h: Hand) {
+    await post(`/teacher/help/${h.id}/done`, {});
+    load();
+  }
 
   async function newPassword(s: Student) {
     try {
@@ -59,6 +86,31 @@ export default function LabToday({ classId }: { classId: number }) {
   return (
     <section className="card">
       <h2>Today in the lab</h2>
+      {data.hands.length > 0 && (
+        <div className="feedback note hands" role="status" aria-live="polite">
+          <strong>✋ {data.hands.length === 1 ? "1 student needs help" : `${data.hands.length} students need help`}</strong>
+          <ul>
+            {data.hands.map((h) => (
+              <li key={h.id}>
+                {h.name}
+                {h.topic ? ` · ${h.topic}` : ""} <span className="muted">· {h.minutes < 1 ? "just now" : `${h.minutes} min`}</span>{" "}
+                <button className="secondary" onClick={() => helped(h)}>
+                  Helped
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <label htmlFor="today-chapter">Today&apos;s chapter (students see it first; it clears itself tomorrow)</label>
+      <select id="today-chapter" value={data.today_chapter?.chapter_id ?? ""} onChange={(e) => chooseChapter(e.target.value)}>
+        <option value="">No chapter set: students choose</option>
+        {chapters.map((c) => (
+          <option key={c.chapter_id} value={c.chapter_id}>
+            {c.subject} {c.number}. {c.title}
+          </option>
+        ))}
+      </select>
       <p>
         <strong>{data.today.active}</strong> {data.today.active === 1 ? "student" : "students"} practised today:{" "}
         <strong>{data.today.answers}</strong> {data.today.answers === 1 ? "answer" : "answers"} across <strong>{data.today.topics}</strong>{" "}

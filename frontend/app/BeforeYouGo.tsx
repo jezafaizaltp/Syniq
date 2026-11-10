@@ -19,10 +19,30 @@ export async function loadToday(): Promise<Today | null> {
 export default function BeforeYouGo({ today, onSignOut, onStay }: { today: Today; onSignOut: () => void; onStay: () => void }) {
   const { t } = useSession();
   const first = useRef<HTMLButtonElement>(null);
+  const box = useRef<HTMLDivElement>(null);
   useEffect(() => first.current?.focus(), []);
+  // Escape goes back to learning; Tab stays inside the dialog, so a keyboard or switch user can't get lost behind it.
+  function onKey(e: React.KeyboardEvent) {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      onStay();
+      return;
+    }
+    if (e.key !== "Tab" || !box.current) return;
+    const items = Array.from(box.current.querySelectorAll<HTMLElement>("button"));
+    if (!items.length) return;
+    const [start, end] = [items[0], items[items.length - 1]];
+    if (e.shiftKey && document.activeElement === start) {
+      e.preventDefault();
+      end.focus();
+    } else if (!e.shiftKey && document.activeElement === end) {
+      e.preventDefault();
+      start.focus();
+    }
+  }
   return (
-    <div className="modal-backdrop">
-      <div className="card modal" role="dialog" aria-modal="true" aria-labelledby="byg-title">
+    <div className="modal-backdrop" onKeyDown={onKey}>
+      <div ref={box} className="card modal" role="dialog" aria-modal="true" aria-labelledby="byg-title">
         <h2 id="byg-title">{t("today.title")}</h2>
         <p>{t("today.answered", { n: today.answered })}</p>
         {today.topics.length > 0 && (

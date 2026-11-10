@@ -1,0 +1,51 @@
+"use client";
+
+import Link from "next/link";
+import { useSession } from "@/lib/session";
+
+const EN = {
+  back: "← My children",
+  title: "SYNiq for parents",
+  intro: "SYNiq is a learning app your child uses in the school computer lab. Here is what you can do with your own login.",
+  sections: [
+    ["What you see", "Each child's last 7 days in words, the topics they are learning, what helps them understand, and mistakes that keep coming back. There are no marks and no ranking."],
+    ["What you can change", "The permissions (learning, mood check-ins, sharing with the school, thinking puzzles) and help such as screen-reader support, calm lessons or bigger buttons. Open Settings and permissions under your child's name. Changes work at once."],
+    ["Helping at home", "Ask your child to explain one topic to you in their own words. Praise trying, not getting it right. A mistake is how SYNiq finds the next step."],
+    ["Your child's data", "SYNiq keeps answers and progress so lessons can adapt. It shows no adverts and sells nothing. You can ask the school for a copy of everything it holds about your child, or ask for your child to be withdrawn, which deletes it."],
+    ["Forgotten password", "Ask the school office. They give you a new temporary one, and you choose your own when you sign in."],
+  ],
+};
+
+const ML = {
+  back: "← എന്റെ കുട്ടികൾ",
+  title: "രക്ഷിതാക്കൾക്കായി SYNiq",
+  intro: "സ്കൂൾ കമ്പ്യൂട്ടർ ലാബിൽ നിങ്ങളുടെ കുട്ടി ഉപയോഗിക്കുന്ന പഠന ആപ്പാണ് SYNiq. നിങ്ങളുടെ സ്വന്തം ലോഗിനിൽ ചെയ്യാവുന്നത് ഇവയാണ്.",
+  sections: [
+    ["നിങ്ങൾ കാണുന്നത്", "ഓരോ കുട്ടിയുടെയും കഴിഞ്ഞ 7 ദിവസം വാക്കുകളിൽ, പഠിക്കുന്ന വിഷയങ്ങൾ, മനസ്സിലാക്കാൻ സഹായിക്കുന്നത്, ആവർത്തിക്കുന്ന തെറ്റുകൾ. മാർക്കോ റാങ്കോ ഇല്ല."],
+    ["നിങ്ങൾക്ക് മാറ്റാവുന്നത്", "അനുമതികൾ (പഠനം, മൂഡ് ചെക്ക്-ഇൻ, സ്കൂളുമായി പങ്കുവെക്കൽ, ചിന്താ പസിലുകൾ), സ്ക്രീൻ റീഡർ സഹായം, ശാന്തമായ പാഠങ്ങൾ, വലിയ ബട്ടണുകൾ പോലുള്ള സഹായങ്ങൾ. കുട്ടിയുടെ പേരിന് താഴെയുള്ള ക്രമീകരണങ്ങളും അനുമതികളും തുറക്കൂ. മാറ്റങ്ങൾ ഉടൻ പ്രാബല്യത്തിൽ വരും."],
+    ["വീട്ടിൽ സഹായിക്കാൻ", "ഒരു വിഷയം സ്വന്തം വാക്കുകളിൽ വിശദീകരിക്കാൻ കുട്ടിയോട് പറയൂ. ശരിയാക്കിയതിനല്ല, ശ്രമിച്ചതിനെ അഭിനന്ദിക്കൂ. തെറ്റുകളിലൂടെയാണ് SYNiq അടുത്ത പടി കണ്ടെത്തുന്നത്."],
+    ["കുട്ടിയുടെ വിവരങ്ങൾ", "പാഠങ്ങൾ അനുയോജ്യമാക്കാൻ SYNiq ഉത്തരങ്ങളും പുരോഗതിയും സൂക്ഷിക്കുന്നു. പരസ്യങ്ങളില്ല, ഒന്നും വിൽക്കുന്നില്ല. കുട്ടിയെക്കുറിച്ച് സൂക്ഷിക്കുന്ന എല്ലാ വിവരങ്ങളുടെയും പകർപ്പ് സ്കൂളിനോട് ചോദിക്കാം, അല്ലെങ്കിൽ കുട്ടിയെ പിൻവലിക്കാൻ ആവശ്യപ്പെടാം; അപ്പോൾ അവ മായ്ക്കും."],
+    ["പാസ്‌വേഡ് മറന്നാൽ", "സ്കൂൾ ഓഫീസിനോട് ചോദിക്കൂ. അവർ ഒരു താൽക്കാലിക പാസ്‌വേഡ് തരും; സൈൻ ഇൻ ചെയ്യുമ്പോൾ നിങ്ങളുടെ സ്വന്തം പാസ്‌വേഡ് തിരഞ്ഞെടുക്കാം."],
+  ],
+};
+
+/** For parents, in their language: what SYNiq shows them and what they can change. */
+export default function ParentHelp() {
+  const { lang } = useSession();
+  const w = lang === "ml" ? ML : EN;
+  return (
+    <div className="wrap help-page" lang={lang}>
+      <p>
+        <Link href="/parent">{w.back}</Link>
+      </p>
+      <h1>{w.title}</h1>
+      <p>{w.intro}</p>
+      {w.sections.map(([head, body]) => (
+        <section key={head}>
+          <h2>{head}</h2>
+          <p>{body}</p>
+        </section>
+      ))}
+    </div>
+  );
+}

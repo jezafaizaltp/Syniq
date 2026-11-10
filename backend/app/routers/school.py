@@ -255,11 +255,12 @@ def class_chapters(class_id: int, db: DbSession = Depends(get_db), user: User = 
 
 @router.get("/me/lesson-today", tags=["student"])
 def my_lesson_today(db: DbSession = Depends(get_db), user: User = Depends(current_user)):
+    """Today's chapter from the class teacher, and whether this student's hand is up. Only for students in a school class."""
     if user.role != "student" or not user.class_group_id:
-        return {"today_chapter": None, "hand_up": False}
+        return {"in_class": False, "today_chapter": None, "hand_up": False}
     group = db.get(ClassGroup, user.class_group_id)
     hand = db.scalars(select(HelpRequest).where(HelpRequest.student_id == user.id, HelpRequest.resolved_at.is_(None))).first()
-    return {"today_chapter": _today_chapter(db, group), "hand_up": hand is not None}
+    return {"in_class": True, "today_chapter": _today_chapter(db, group), "hand_up": hand is not None}
 
 
 # --- Raised hands ----------------------------------------------------------------------

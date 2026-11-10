@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ApiError, api, post } from "@/lib/api";
+import { ApiError, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import Readiness from "./Readiness";
+import { AddOneStudent, Records, SchoolDetails, saveFile } from "./SchoolTools";
 import Specialists from "./Specialists";
 
 type Check = { ok: boolean; errors: { row: number; problems: string[] }[]; students?: number; classes?: string[]; without_learning_consent?: number };
@@ -58,7 +59,14 @@ export default function Admin() {
   const [error, setError] = useState("");
   const [newPasswords, setNewPasswords] = useState<Record<number, string>>({});
   const [slips, setSlips] = useState(false);
+  const [schoolName, setSchoolName] = useState("");
+  useEffect(() => {
+    api<{ name: string }>("/school")
+      .then((x) => setSchoolName(x.name))
+      .catch(() => undefined);
+  }, [accounts]);
   const [withdrawing, setWithdrawing] = useState<number | null>(null);
+  const [editing, setEditing] = useState<{ id: number; name: string; cls: string } | null>(null);
   const [teacher, setTeacher] = useState({ name: "", email: "", classes: "" });
   const [teacherResult, setTeacherResult] = useState("");
   const [syllabus, setSyllabus] = useState("");
@@ -134,6 +142,18 @@ export default function Admin() {
     load();
   }
 
+  async function saveEdit() {
+    if (!editing) return;
+    await put(`/admin/students/${editing.id}`, { name: editing.name, class_name: editing.cls });
+    setEditing(null);
+    load();
+  }
+
+  async function downloadData(student: Student) {
+    const data = await api<unknown>(`/admin/students/${student.id}/data`);
+    saveFile(JSON.stringify(data, null, 2), `syniq-data-${student.login}.json`, "application/json");
+  }
+
   async function withdraw(student: Student) {
     await post(`/admin/students/${student.id}/withdraw`, {});
     setWithdrawing(null);
@@ -198,6 +218,7 @@ export default function Admin() {
           <section className="slips" aria-label="Login slips to cut out">
             {accounts.map((a) => (
               <div key={a.student_login} className="slip">
+                {schoolName && <p className="slip-note">{schoolName} · SYNiq</p>}
                 <p className="slip-who">
                   <strong>{a.student}</strong> · {a.class} · student
                 </p>
@@ -216,6 +237,7 @@ export default function Admin() {
               .filter((a) => !a.guardian_password.startsWith("("))
               .map((a) => (
                 <div key={`g-${a.guardian_login}`} className="slip">
+                  {schoolName && <p className="slip-note">{schoolName} · SYNiq</p>}
                   <p className="slip-who">
                     <strong>{a.guardian}</strong> · parent of {a.student}
                   </p>
@@ -304,6 +326,8 @@ export default function Admin() {
 
       {people && <Readiness people={people} />}
 
+      <SchoolDetails />
+
       <section className="card">
         <h2>Add students and parents from a spreadsheet</h2>
         <p className="muted">
@@ -346,6 +370,15 @@ export default function Admin() {
           </div>
         )}
       </section>
+
+      <AddOneStudent
+        onCreated={(a) => {
+          setAccounts(a);
+          load();
+        }}
+      />
+
+      <Records />
 
       <section className="card">
         <h2>Class 9 chapters and topics</h2>
@@ -447,6 +480,26 @@ export default function Admin() {
                           New password
                         </button>
                       )}
+                      <br />
+                      {editing?.id === s.id ? (
+                        <span className="edit-student">
+                          <label htmlFor={`e-name-${s.id}`}>Name</label>
+                          <input id={`e-name-${s.id}`} value={editing.name} onChange={(e) => setEditing({ ...editing, name: e.target.value })} />
+                          <label htmlFor={`e-class-${s.id}`}>Class</label>
+                          <input id={`e-class-${s.id}`} value={editing.cls} onChange={(e) => setEditing({ ...editing, cls: e.target.value })} />
+                          <button onClick={saveEdit}>Save</button>{" "}
+                          <button className="secondary" onClick={() => setEditing(null)}>
+                            Cancel
+                          </button>
+                        </span>
+                      ) : (
+                        <button className="link-button" onClick={() => setEditing({ id: s.id, name: s.name, cls: c.name })}>
+                          Fix name or class
+                        </button>
+                      )}{" "}
+                      <button className="link-button" onClick={() => downloadData(s)}>
+                        Download their data
+                      </button>
                       <br />
                       {withdrawing === s.id ? (
                         <span className="feedback warn withdraw-confirm" role="alert">
