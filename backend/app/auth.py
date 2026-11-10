@@ -7,7 +7,7 @@ from collections import defaultdict, deque
 from datetime import timedelta
 
 from fastapi import Depends, Header, HTTPException
-from sqlalchemy import select
+from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session as DbSession
 
 from .db import get_db
@@ -68,6 +68,9 @@ def verify_password(password: str, stored: str) -> bool:
 def new_token(db: DbSession, user: User) -> str:
     token = secrets.token_urlsafe(32)
     db.add(Session(token=token, user_id=user.id))
+    # Tidy up: sign-ins nobody has used for longer than SESSION_IDLE can never be used again.
+    cutoff = utcnow() - SESSION_IDLE
+    db.execute(delete(Session).where(func.coalesce(Session.last_seen_at, Session.created_at) < cutoff))
     db.commit()
     return token
 

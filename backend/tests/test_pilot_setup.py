@@ -128,3 +128,17 @@ def test_bootstrap_is_repeatable():
         assert first == ["added admin head@school.example"]  # subjects already exist
         assert bootstrap(db, "head@school.example", "a-long-password") == []
         assert db.query(Subject).count() == len(SUBJECTS)
+
+
+def test_same_name_in_same_class_is_refused():
+    a = admin()
+    head = "student_name,class,guardian_name,guardian_email,guardian_phone,consent_learning,consent_mood,consent_school\n"
+    first = client.post("/admin/import", json={"csv": head + "Twice Done,9 T,Twice Parent,,,yes,no,yes\n", "dry_run": False}, headers=a).json()
+    assert first["ok"] is not False and len(first["accounts"]) == 1
+    login_name = first["accounts"][0]["student_login"]
+    # The same sheet again, and a name repeated inside one sheet, are both caught; another class is fine.
+    again = client.post("/admin/import", json={"csv": head + "twice done,9 T,Twice Parent,,,yes,no,yes\n", "dry_run": False}, headers=a).json()
+    assert again["ok"] is False and login_name in again["errors"][0]["problems"][0]
+    inside = head + "Repeat Kid,9 T,P,,,yes,no,yes\nRepeat Kid,9 T,P,,,yes,no,yes\nTwice Done,9 U,P,,,yes,no,yes\n"
+    r = client.post("/admin/import", json={"csv": inside}, headers=a).json()
+    assert [e["row"] for e in r["errors"]] == [3] and "row 2 of this sheet" in r["errors"][0]["problems"][0]

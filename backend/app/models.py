@@ -5,9 +5,9 @@ The learner model (Mastery, CheckIn) is kept apart from raw interaction events
 retained and audited separately.
 """
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
-from sqlalchemy import JSON, Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import JSON, Boolean, Date, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .db import Base
@@ -51,6 +51,9 @@ class ClassGroup(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(80))
     teacher_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", use_alter=True, name="fk_class_groups_teacher_id_users"), nullable=True)
+    # The chapter the teacher chose for today's lab period, shown first to the class. Only counts on that day.
+    today_chapter_id: Mapped[int | None] = mapped_column(ForeignKey("chapters.id", use_alter=True, name="fk_class_groups_today_chapter"), nullable=True)
+    today_set_on: Mapped[date | None] = mapped_column(Date, nullable=True)
 
 
 class GuardianLink(Base):
@@ -501,3 +504,25 @@ class AssessmentScore(Base):
     student_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     comparison_code: Mapped[str | None] = mapped_column(String(12), nullable=True)
     marks: Mapped[float] = mapped_column(Float)
+
+
+class SchoolSetting(Base):
+    """A few words about the school, set by the admin: its name, shown on sign-in, letters and slips."""
+
+    __tablename__ = "school_settings"
+
+    key: Mapped[str] = mapped_column(String(40), primary_key=True)
+    value: Mapped[str] = mapped_column(String(500))
+
+
+class HelpRequest(Base):
+    """A student's raised hand in the lab: seen only by their class teacher, cleared when helped."""
+
+    __tablename__ = "help_requests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    class_group_id: Mapped[int] = mapped_column(ForeignKey("class_groups.id"), index=True)
+    concept_id: Mapped[int | None] = mapped_column(ForeignKey("concepts.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

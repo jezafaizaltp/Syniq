@@ -241,6 +241,8 @@ export default function Teacher() {
         <Link href="/admin/review">Review sheet: print every question in a subject →</Link>
         <br />
         <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
+        <br />
+        <Link href="/help/teacher">How a lab period works, step by step →</Link>
       </p>
 
       <LabToday key={classId} classId={classId} />
@@ -342,6 +344,11 @@ export default function Teacher() {
           Mistakes students have made more than once, most common first, with who is still working on each. SYNiq already
           gives each of them extra practice on that trap; a short re-teach to just these students can help too.
         </p>
+        {mistakes.length > 0 && (
+          <p>
+            <Link href={`/teacher/reteach?class=${classId}`}>Print a re-teach sheet for these mistakes →</Link>
+          </p>
+        )}
         {mistakes.length === 0 ? (
           <p>No repeat mistakes yet.</p>
         ) : (

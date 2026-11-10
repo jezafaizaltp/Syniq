@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Role, post, setToken } from "@/lib/api";
+import { Role, api, post, setToken } from "@/lib/api";
 import { homeFor } from "@/lib/home";
 import { useSession } from "@/lib/session";
 
@@ -13,10 +13,18 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [school, setSchool] = useState("");
 
   useEffect(() => {
     if (me) router.replace(homeFor(me));
   }, [me, router]);
+
+  // On a school's own SYNiq, say whose it is, so students know they are in the right place.
+  useEffect(() => {
+    api<{ name: string }>("/school")
+      .then((s) => setSchool(s.name))
+      .catch(() => undefined);
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -40,6 +48,7 @@ export default function SignIn() {
           <path d="M9 29c5 0 6-6 11-6s5-8 11-8" fill="none" stroke="#fbf7ee" strokeWidth="3.4" strokeLinecap="round" />
           <circle cx="31" cy="15" r="4" fill="#f2b630" />
         </svg>
+        {school && <p className="signin-school">{school}</p>}
         <h1>{t("signin.title")}</h1>
         <p className="muted">{t("signin.tagline")}</p>
       </div>

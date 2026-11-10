@@ -8,6 +8,7 @@ import { useSession } from "@/lib/session";
 import type { NoteRow } from "../learn/Notes";
 import Methods, { type MethodSubject } from "./Methods";
 import Mistakes, { type MistakePattern } from "./Mistakes";
+import Days from "./Days";
 
 type Overview = {
   subjects: {
@@ -84,6 +85,8 @@ export default function MySpace() {
     <div className="wrap">
       <h1>{t("space.title")}</h1>
       <p className="muted">{t("space.private")}</p>
+
+      <Days />
 
       <section className="card" aria-labelledby="revise">
         <h2 id="revise">{t("space.revise")}</h2>

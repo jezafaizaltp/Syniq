@@ -12,6 +12,7 @@ import csv
 import io
 import re
 import secrets
+from datetime import date, datetime, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
@@ -75,6 +76,14 @@ def import_students(body: ImportIn, db: DbSession = Depends(get_db), user: User 
     if missing:
         raise HTTPException(400, f"The sheet needs these columns: {', '.join(missing)}")
 
+    # Same name in the same class twice (sheet uploaded again, late joiner added twice) would
+    # quietly make a second account, so it is refused; a different child gets an initial added.
+    have = {
+        (name.strip().lower(), cls): f"login {login}"
+        for name, cls, login in db.execute(
+            select(User.name, ClassGroup.name, User.email).join(ClassGroup, User.class_group_id == ClassGroup.id).where(User.role == "student")
+        ).all()
+    }
     errors, rows = [], []
     for n, raw in enumerate(reader, start=2):  # row 1 is the header
         r = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
@@ -92,6 +101,14 @@ def import_students(body: ImportIn, db: DbSession = Depends(get_db), user: User 
         email = r.get("guardian_email", "").lower()
         if email and not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
             problems.append(f"'{email}' doesn't look like an email address")
+        key = (r.get("student_name", "").lower(), r.get("class", ""))
+        if key[0] and key in have:
+            problems.append(
+                f"{r['student_name']} is already in {r['class']} ({have[key]}). "
+                "If this is a different child, add an initial to tell them apart."
+            )
+        elif key[0]:
+            have[key] = f"row {n} of this sheet"
         if problems:
             errors.append({"row": n, "problems": problems})
         rows.append({**r, "guardian_email": email, "consents": consents, "row": n})
@@ -393,6 +410,14 @@ AUDIT_WORDS = {
     "family_add_adult": "Added an adult to a family",
     "family_remove_adult": "Removed an adult from a family",
     "screen_time_limits": "Changed screen time limits (minutes a day, per sitting)",
+    "view_class_today": "Viewed today in the lab",
+    "end_lab_period": "Ended a lab period (signed the class out)",
+    "withdraw_student": "Withdrew a student and deleted their learning data",
+    "view_weekly_usage": "Viewed weekly use",
+    "set_school_details": "Changed the school's name or contact",
+    "edit_student": "Changed a student's name or class",
+    "export_consent_register": "Downloaded the consent register",
+    "export_student_data": "Downloaded everything held about a student",
 }
 
 
@@ -407,13 +432,22 @@ def describe(action: str) -> str:
 def audit_log(
     before_id: int | None = None,
     student_id: int | None = None,
+    action: str | None = None,
+    since: date | None = None,
     limit: int = 50,
     db: DbSession = Depends(get_db),
     user: User = Depends(admin_only),
 ):
-    """Newest first, 50 at a time. Pass before_id from the last row to see older entries."""
+    """Newest first, 50 at a time. Pass before_id from the last row to see older entries.
+
+    action keeps rows whose action starts with it (e.g. "reset_password"); since keeps rows from that day on.
+    """
     limit = max(1, min(limit, 200))
     q = select(AuditLog).order_by(AuditLog.id.desc()).limit(limit + 1)
+    if action:
+        q = q.where(AuditLog.action.startswith(action))
+    if since:
+        q = q.where(AuditLog.created_at >= datetime(since.year, since.month, since.day) - timedelta(hours=5, minutes=30))
     if before_id:
         q = q.where(AuditLog.id < before_id)
     if student_id:

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CHOSEN_SUPPORT, api, post, put } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
+import Link from "next/link";
 import { useSession } from "@/lib/session";
 import Methods, { type MethodSubject } from "../space/Methods";
 import Mistakes, { type MistakePattern } from "../space/Mistakes";
@@ -19,6 +20,8 @@ type Child = {
 type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
+type Week = { days: number; answered: number; topics: { title: string; progress: string }[] };
+
 const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing", "thinking_puzzles"] as const;
 type Thinking = { on: boolean; puzzles: number; kinds: { domain: string; trend: "growing" | "steady" | "just_started" }[] };
 
@@ -31,6 +34,7 @@ export default function Parent() {
   const [mistakes, setMistakes] = useState<Record<number, MistakePattern[]>>({});
   const [thinkingViews, setThinkingViews] = useState<Record<number, Thinking>>({});
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
+  const [weeks, setWeeks] = useState<Record<number, Week>>({});
 
   useEffect(() => {
     if (!loading && (!me || me.role !== "guardian")) router.replace("/");
@@ -54,6 +58,10 @@ export default function Parent() {
       kids.map(async (k) => [k.id, await api<Thinking>(`/guardian/children/${k.id}/thinking`).catch(() => ({ on: false, puzzles: 0, kinds: [] }))] as const)
     );
     setThinkingViews(Object.fromEntries(growth));
+    const lastWeek = await Promise.all(
+      kids.map(async (k) => [k.id, await api<Week>(`/guardian/children/${k.id}/week`).catch(() => null)] as const)
+    );
+    setWeeks(Object.fromEntries(lastWeek.filter(([, w]) => w)) as Record<number, Week>);
     setChildren(kids);
     setSpecialists(await api<Specialist[]>("/guardian/specialists").catch(() => []));
   }, []);
@@ -88,6 +96,9 @@ export default function Parent() {
   return (
     <div className="wrap">
       <h1>{t("parent.title")}</h1>
+      <p>
+        <Link href="/help/parent">{t("parent.help_link")}</Link>
+      </p>
       {children.map((c) => (
         <section key={c.id} className="card">
           <h2>{c.name}</h2>
@@ -96,6 +107,21 @@ export default function Parent() {
               <p>{t("parent.needs_consent", { name: c.name })}</p>
               <button onClick={() => setConsent(c.id, "core_learning", true)}>{t("parent.give_consent", { name: c.name })}</button>
             </div>
+          )}
+          {c.consent.core_learning && weeks[c.id] && (
+            <>
+              <h3>{t("parent.week_title")}</h3>
+              <p>
+                {weeks[c.id].answered
+                  ? t("parent.week_line", { name: c.name, days: weeks[c.id].days, answered: weeks[c.id].answered })
+                  : t("parent.week_none", { name: c.name })}
+              </p>
+              {weeks[c.id].topics.length > 0 && (
+                <p className="muted">
+                  {t("parent.week_topics")} {weeks[c.id].topics.map((x) => `${x.title} (${t(`progress.${x.progress}` as Key)})`).join(", ")}
+                </p>
+              )}
+            </>
           )}
           {c.consent.core_learning && progress[c.id] && (
             <>

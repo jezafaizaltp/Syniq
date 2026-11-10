@@ -110,7 +110,18 @@ If it doesn't open:
 
 This is the same as on a real server. Follow [step 7 of docs/deploy.md](deploy.md#7-set-up-the-pilot): sign in as the admin, then on **School** import the students and parents from the CSV, print the login slips, add the Class 9 chapters and add the teachers.
 
-Before the import, send the consent forms home: on **School**, open **Parent letters and consent forms**, type the school name and who parents can ask, and print. There is one page per student with the names filled in. Tick the same boxes on the School page when the signed forms come back, and keep the paper forms safe. After the import, **Show as cut-out slips** prints one slip per student and one per parent, to cut along the dashed lines.
+First fill in **School details** at the top of the School page (the school's name and who parents can ask). The name appears on the sign-in page, the slips, the poster and the letters.
+
+Before the import, send the consent forms home: on **School**, open **Parent letters and consent forms**, choose English or Malayalam, and print. The Malayalam letter has not yet been checked by a native teacher. There is one page per student with the names filled in. Tick the same boxes on the School page when the signed forms come back, and keep the paper forms safe. After the import, **Show as cut-out slips** prints one slip per student and one per parent, to cut along the dashed lines.
+
+Other things on the School page:
+
+- **Print the lab-wall poster**: an A4 poster in English and Malayalam with the sign-in address. **Login reminder sheet** prints logins only (no passwords), for the teacher's file.
+- **Add one student**: a late joiner, without making a spreadsheet. A name already in that class is refused, so a sheet uploaded twice can't make second accounts. For a different child with the same name, add an initial.
+- **Fix name or class** under a student's name, for a spelling mistake or a move to another class.
+- **Download their data**: everything SYNiq holds about one student, as a file, for a parent who asks (DPDP).
+- **Records**: download the consent register as a spreadsheet (every permission given or taken back, with the date and who recorded it).
+- The **Audit log** can be filtered by kind of action and by date.
 
 ## The first lab day
 
@@ -119,8 +130,13 @@ Before the import, send the consent forms home: on **School**, open **Parent let
 3. Students type the login and password from the slip, then choose their own password (at least 8 letters or numbers). **Ask them to write it in their notebook**. The first time, each student sees a short welcome card saying there are no marks and mistakes help.
 4. If a student forgets their password, the class teacher opens **Class**, then **Today in the lab**, then **All students**, and presses **New password** next to their name. The new temporary password is shown at once. The admin can still do the same on the School page.
 5. Each subject offers a short optional check first. Students can take it, so SYNiq skips what they already know, or skip it.
-6. During the period, **Today in the lab** on the teacher's Class page shows who has signed in and who practised today. It also lists students who have been quiet for a week, for a friendly word. Practice counts only include families who agreed to share progress with the school.
-7. At the end, students press **Sign out**. They first see what they did today, then sign out. Then the teacher presses **End lab period: sign everyone out**, which closes every student's sign-in in that class on all computers. A student who walks away is signed out by itself after 20 minutes without use, with a minute's warning first.
+6. At the start, the teacher can pick **Today's chapter** in **Today in the lab**. Students see it first on their home screen. It clears itself the next day.
+7. A stuck student presses **✋ I need help** in the lesson. The teacher sees the name and topic at the top of **Today in the lab** (it refreshes every 30 seconds) and presses **Helped** after going over. Students keep practising while they wait.
+8. During the period, **Today in the lab** on the teacher's Class page shows who has signed in and who practised today. It also lists students who have been quiet for a week, for a friendly word. Practice counts only include families who agreed to share progress with the school.
+9. If the Wi-Fi drops for a moment, the answer is sent again by itself; the student sees "trying again" and does not need to retype it.
+10. At the end, students press **Sign out**. They first see what they did today, then sign out. Then the teacher presses **End lab period: sign everyone out**, which closes every student's sign-in in that class on all computers. A student who walks away is signed out by itself after 20 minutes without use, with a minute's warning first. Teacher and admin sign-ins close after 30 minutes without use.
+
+After the period, **Print a re-teach sheet** (under the repeat mistakes on the Class page) prints the mistakes that keep coming back in the class, with who is still working on each, for a short re-teach next time. A teacher's step-by-step guide is at **How a lab period works**; parents have their own help page (English and Malayalam) linked from the Parent page. Parents also see **This week** for each child: how many days they practised and which topics. Students see the days they practised in **My space**.
 
 If a family withdraws, the admin presses **Withdraw from SYNiq** under the student's name on the School page. The login stops working and everything SYNiq learned about the child is deleted. The consent record and audit log are kept.
 

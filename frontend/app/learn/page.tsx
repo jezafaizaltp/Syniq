@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiError, api, effectiveSupport, post } from "@/lib/api";
+import { ApiError, api, del, effectiveSupport, post } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { ageBand, readsAloud } from "@/lib/age";
 import { speak, useSession } from "@/lib/session";
@@ -120,6 +120,7 @@ export default function Learn() {
   const [checks, setChecks] = useState<CheckRow[]>([]);
   const [activeCheck, setActiveCheck] = useState<ActiveCheck | null>(null);
   const canLearn = me?.role === "student" && !!me.consent?.core_learning;
+  const [teacherChapter, setTeacherChapter] = useState<{ chapter_id: number; title: string; number: number; subject: string } | null>(null);
 
   useEffect(() => {
     if (!loading && (!me || me.role !== "student")) router.replace("/");
@@ -128,6 +129,13 @@ export default function Learn() {
   useEffect(() => {
     if (me?.role === "student") api<Subject[]>("/subjects").then(setSubjects).catch(() => setSubjects([]));
   }, [me]);
+
+  useEffect(() => {
+    if (canLearn && !chapter)
+      api<{ today_chapter: typeof teacherChapter }>("/me/lesson-today")
+        .then((r) => setTeacherChapter(r.today_chapter))
+        .catch(() => undefined);
+  }, [canLearn, chapter]);
 
   function loadChecks() {
     api<CheckRow[]>("/checks").then(setChecks).catch(() => setChecks([]));
@@ -236,6 +244,14 @@ export default function Learn() {
                 <li>{t("welcome.pace")}</li>
               </ul>
               <button onClick={() => saveSettings({ welcome_seen: true }).catch(() => undefined)}>{t("welcome.ok")}</button>
+            </div>
+          )}
+          {teacherChapter && (
+            <div className="card next-step-card teacher-chapter">
+              <h2>{t("today.teacher_chapter")}</h2>
+              <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${teacherChapter.chapter_id}`))}>
+                {teacherChapter.subject}: {teacherChapter.number}. {teacherChapter.title}
+              </button>
             </div>
           )}
           {(due || carryOn) && (
@@ -414,6 +430,25 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const [showWhy, setShowWhy] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [connection, setConnection] = useState("");
+  const [lessonInfo, setLessonInfo] = useState<{ in_class: boolean; hand_up: boolean }>({ in_class: false, hand_up: false });
+  useEffect(() => {
+    api<{ in_class: boolean; hand_up: boolean }>("/me/lesson-today")
+      .then(setLessonInfo)
+      .catch(() => undefined);
+  }, []);
+
+  async function toggleHand() {
+    const up = !lessonInfo.hand_up;
+    try {
+      if (up) await post("/me/help", { concept_id: step?.concept?.id ?? null });
+      else await del("/me/help");
+      setLessonInfo({ ...lessonInfo, hand_up: up });
+    } catch {
+      /* offline: the button stays as it was */
+    }
+  }
   const [error, setError] = useState("");
   const conceptRef = useRef<number | null>(null);
   const styleRef = useRef<string | null>(null);
@@ -531,14 +566,39 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
 
   async function submit(e?: React.FormEvent) {
     e?.preventDefault();
-    if (!step?.item || !answer.trim()) return;
-    const r = await post<Result>("/learn/attempts", {
+    if (!step?.item || !answer.trim() || sending) return;
+    const body = {
       item_id: step.item.id,
       response: answer.trim(),
       hints_used: hints.length,
       time_ms: Date.now() - startedRef.current,
       explanation_style: styleRef.current,
-    });
+    };
+    // School Wi-Fi drops for a moment now and then: try again quietly before giving up, keeping the answer.
+    let r: Result | null = null;
+    setSending(true);
+    for (const wait of [0, 2000, 4000, 8000]) {
+      if (wait) {
+        setConnection(t("net.retrying"));
+        await new Promise((ok) => setTimeout(ok, wait));
+      }
+      try {
+        r = await post<Result>("/learn/attempts", body);
+        break;
+      } catch (err) {
+        if (err instanceof ApiError) {
+          setSending(false);
+          setConnection("");
+          throw err;
+        }
+      }
+    }
+    setSending(false);
+    if (!r) {
+      setConnection(t("net.lost"));
+      return;
+    }
+    setConnection("");
     setResult(r);
     setAnswered((n) => n + 1);
     if (r.next_step?.kind === "secured" && r.correct) {
@@ -713,10 +773,27 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
           {t("break.button")}
         </button>
       </div>
+      {lessonInfo.in_class && (
+        <div className="hand-row">
+          <button className={lessonInfo.hand_up ? "" : "secondary"} aria-pressed={lessonInfo.hand_up} onClick={toggleHand}>
+            ✋ {lessonInfo.hand_up ? t("help.lower") : t("help.raise")}
+          </button>
+          {lessonInfo.hand_up && (
+            <span className="muted" role="status">
+              {t("help.waiting")}
+            </span>
+          )}
+        </div>
+      )}
 
       {error && (
         <p className="feedback warn" role="alert">
           {error}
+        </p>
+      )}
+      {connection && (
+        <p className="feedback note" role="status" aria-live="polite">
+          {connection}
         </p>
       )}
 

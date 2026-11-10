@@ -92,6 +92,17 @@ def _chat_api() -> tuple[str, str, str] | None:
     return None
 
 
+def provider_name() -> str | None:
+    """Which outside AI Ask SYNiq would use: the same order as tutor_reply."""
+    if get_client() is not None:
+        return "Claude"
+    if _openai_key():
+        return "OpenAI"
+    if _cloudflare():
+        return "Cloudflare Workers AI"
+    return None
+
+
 def enabled() -> bool:
     return get_client() is not None or _chat_api() is not None
 
