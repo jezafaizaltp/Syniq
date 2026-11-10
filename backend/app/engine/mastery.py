@@ -33,6 +33,14 @@ class Evidence:
     hints_used: int = 0
 
 
+def expected_correct(p: float, ev: Evidence) -> float:
+    """Chance of a right answer from what was known just before it (BKT's own prediction)."""
+    guess = GUESS.get(ev.kind, 0.2)
+    if ev.hints_used:
+        guess = min(0.6, guess + 0.15 * ev.hints_used)
+    return p * (1 - SLIP) + (1 - p) * guess
+
+
 def update_p_known(p: float, ev: Evidence) -> float:
     guess = GUESS.get(ev.kind, 0.2)
     # Each hint makes a correct answer less telling about unaided knowledge.

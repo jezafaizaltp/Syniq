@@ -287,6 +287,23 @@ def submit_attempt(
     return out
 
 
+class FeltIn(BaseModel):
+    concept_id: int
+    style: str
+    helped: bool
+
+
+@router.post("/learn/explanation-feedback")
+def explanation_feedback(body: FeltIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    """The learner says whether a way of explaining helped. Used only to choose the next explanation."""
+    if body.style not in STYLES:
+        raise HTTPException(400, "Unknown style")
+    if not db.get(Concept, body.concept_id):
+        raise HTTPException(404, "Topic not found")
+    learning.record_felt(db, user, body.concept_id, body.style, body.helped)
+    return {"ok": True}
+
+
 class EventIn(BaseModel):
     kind: str = Field(pattern="^(read_aloud|break|activity)$")
 

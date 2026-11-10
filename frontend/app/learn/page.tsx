@@ -454,6 +454,8 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const [result, setResult] = useState<Result | null>(null);
   const [showWhy, setShowWhy] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
+  // "Did this way help?" for the explanation on screen: the learner's own answer helps SYNiq choose next time.
+  const [felt, setFelt] = useState<{ key: string; helped: boolean } | null>(null);
   const [onBreak, setOnBreak] = useState(false);
   const [sending, setSending] = useState(false);
   const [connection, setConnection] = useState("");
@@ -628,6 +630,16 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   useEffect(() => {
     if ((motor || listen) && result) requestAnimationFrame(() => nextRef.current?.focus());
   }, [motor, listen, result]);
+
+  async function tellHelped(helped: boolean) {
+    if (!step?.concept || !step.explanation) return;
+    setFelt({ key: `${step.decision_id}-${step.explanation.style}`, helped });
+    try {
+      await post("/learn/explanation-feedback", { concept_id: step.concept.id, style: step.explanation.style, helped });
+    } catch {
+      // Only a nudge for next time: nothing to show if it doesn't reach the server.
+    }
+  }
 
   async function switchStyle(style: string) {
     if (!step?.concept) return;
@@ -945,6 +957,19 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                   </button>
                 )}
               </div>
+              {step.explanation && (
+                <div className="row felt" role="group" aria-label={t("learn.felt.ask")}>
+                  {felt?.key === `${step.decision_id}-${step.explanation.style}` ? (
+                    <p className="muted" role="status">{t(felt.helped ? "learn.felt.thanks" : "learn.felt.try_other")}</p>
+                  ) : (
+                    <>
+                      <span className="muted">{t("learn.felt.ask")}</span>
+                      <button className="secondary" onClick={() => tellHelped(true)}>{t("learn.felt.yes")}</button>
+                      <button className="secondary" onClick={() => tellHelped(false)}>{t("learn.felt.no")}</button>
+                    </>
+                  )}
+                </div>
+              )}
               {step.activity && <Activity key={step.decision_id} spec={step.activity} onDone={() => helpPressed("activity")} />}
               <div className="row" style={{ marginTop: 16 }}>
                 <button onClick={next}>{t("learn.ready")}</button>

@@ -42,7 +42,9 @@ CHAPTERS = [("math", 1), ("phy", 1), ("math", 2), ("bio", 1), ("ss", 1)]
 SITTINGS = 15  # lab periods
 STEPS = 30  # explanations read + questions answered per period
 DAYS_BETWEEN = [1, 2, 1, 3]  # school week rhythm, repeating
-DELAYED_DAYS = 14  # retention test this long after the last period
+DELAYED_DAYS = 14
+# SIM_TAPS=0 turns off the learners' "did this help?" answers.
+TAPS = os.environ.get("SIM_TAPS", "1") != "0"  # retention test this long after the last period
 
 
 @dataclass
@@ -288,6 +290,10 @@ def run(seed: int) -> dict:
                 if s["kind"] == "explain":
                     style = s["explanation"]["style"]
                     syn.read(cid, style)
+                    # About half the time they answer "did this way help?", and not always accurately.
+                    if TAPS and syn.rng.random() < 0.5:
+                        helped = syn.rng.random() < min(0.9, 0.2 + 1.5 * kind.gain[style])
+                        client.post("/learn/explanation-feedback", json={"concept_id": cid, "style": style, "helped": helped}, headers=h)
                     log["styles_read"].append(style)
                     if rule == "R4_introduce":
                         log.setdefault("first_styles", []).append(style)

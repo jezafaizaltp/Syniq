@@ -211,3 +211,42 @@ def test_no_question_twice_in_a_sitting_while_others_are_left():
             seen.append(item.id)
             learning.record_attempt(db, student, item, "zzz", 0, None, None)
     assert len(set(seen)) == len(items)
+
+
+def test_used_up_topic_waits_while_others_are_open():
+    from app.engine.rules import ConceptState, decide
+
+    a, b = ConceptState(concept_id=1, order=0, attempts=4, styles_seen=["text"]), ConceptState(concept_id=2, order=1, attempts=2, styles_seen=["text"])
+    states = {1: a, 2: b}
+    assert decide([a, b], states, T0, current_concept_id=1, set_aside={1}).concept_id == 2
+    # Nothing else left: carry on with it rather than stop.
+    assert decide([a, b], states, T0, current_concept_id=1, set_aside={1, 2}).concept_id == 1
+
+
+def test_due_review_from_another_chapter_comes_into_the_sitting():
+    sid = new_student("asha.mp@demo.syniq")
+    with SessionLocal() as db:
+        chapters = db.scalars(select(Concept.chapter_id).join(Item, Item.concept_id == Concept.id).distinct()).all()
+        subject_chapters = {}
+        from app.models import Chapter
+
+        for ch in db.scalars(select(Chapter).where(Chapter.id.in_(chapters))).all():
+            subject_chapters.setdefault(ch.subject_id, []).append(ch.id)
+        subject = next(s for s, chs in subject_chapters.items() if len(chs) >= 2 and db.get(__import__("app.models", fromlist=["Subject"]).Subject, s).syllabus == "kerala_scert")
+        first, second = sorted(subject_chapters[subject])[:2]
+        old = db.scalars(select(Concept).join(Item, Item.concept_id == Concept.id).where(Concept.chapter_id == first)).first()
+        db.add(Mastery(student_id=sid, concept_id=old.id, p_known=0.99, attempts=6, correct_streak=6, wrong_streak=0, review_count=0,
+                       misconceptions={}, format_stats={}, secured_at=T0, next_review_at=T0))
+        db.commit()
+        old_id = old.id
+    h = login("asha.mp@demo.syniq")
+    step = client.post("/learn/next", json={"chapter_id": second}, headers=h).json()
+    if step["kind"] == "explain":  # a new topic starts with its explanation; the review comes with practice
+        step = client.post("/learn/next", json={"chapter_id": second, "current_concept_id": step["concept"]["id"]}, headers=h).json()
+    assert step["kind"] == "review" and step["concept"]["id"] == old_id
+    with SessionLocal() as db:
+        answer = db.get(Item, step["item"]["id"]).answer
+    client.post("/learn/attempts", json={"item_id": step["item"]["id"], "response": answer}, headers=h)
+    # Reviewed once this sitting: back to today's chapter.
+    after = client.post("/learn/next", json={"chapter_id": second, "current_concept_id": old_id}, headers=h).json()
+    assert after["concept"]["id"] != old_id

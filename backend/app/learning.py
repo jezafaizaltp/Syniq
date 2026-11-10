@@ -248,7 +248,16 @@ def next_action(
     puzzle_lean = thinking_lean(db, student, grade)
     if puzzle_lean:
         ties = [puzzle_lean] + [s for s in (ties or methods.STYLES) if s != puzzle_lean]
-    action = decide(chapter, states, utcnow(), current_concept_id, preferred, ties)
+    now = utcnow()
+    # A topic whose questions have all been answered in this sitting is set aside for now:
+    # moving to another topic beats asking the same questions again.
+    used_up = used_up_topics(db, student.id, [s.concept_id for s in chapter if not m.is_secure(s.p_known, s.attempts)])
+    action = decide(chapter, states, now, current_concept_id, preferred, ties, set_aside=used_up)
+    if action.kind in ("practice", "chapter_complete"):
+        # Reviews from other chapters are due too: without them, what was learnt there fades.
+        other = other_review(db, student, chapter_id, now)
+        if other is not None:
+            action = other
     evidence = dict(action.evidence)
     if puzzle_lean and action.style:
         evidence["puzzle_lean"] = puzzle_lean
@@ -274,6 +283,96 @@ def next_action(
 
 # Questions answered within this long are not asked again while the topic has others.
 REPEAT_GAP = timedelta(hours=12)
+
+
+# Most reviews from other chapters in one sitting, so today's chapter still gets the time.
+OTHER_REVIEWS_PER_SITTING = 4
+
+
+def sitting_start(db: DbSession, student_id: int):
+    """When this sitting began: the first answer after the last gap of more than SESSION_GAP."""
+    times = db.scalars(
+        select(Attempt.created_at).where(Attempt.student_id == student_id).order_by(Attempt.created_at.desc()).limit(200)
+    ).all()
+    if not times:
+        return utcnow()
+    start = times[0]
+    if utcnow() - start > SESSION_GAP:
+        return utcnow()
+    for t in times[1:]:
+        if start - t > SESSION_GAP:
+            break
+        start = t
+    return start
+
+
+def used_up_topics(db: DbSession, student_id: int, concept_ids: list[int]) -> set[int]:
+    """Topics where every question has been answered within REPEAT_GAP."""
+    if not concept_ids:
+        return set()
+    totals: dict[int, int] = {}
+    for cid in db.scalars(select(Item.concept_id).where(Item.concept_id.in_(concept_ids), Item.status == "approved")):
+        totals[cid] = totals.get(cid, 0) + 1
+    seen: dict[int, set] = {}
+    for cid, item_id in db.execute(
+        select(Attempt.concept_id, Attempt.item_id).where(
+            Attempt.student_id == student_id, Attempt.concept_id.in_(concept_ids), Attempt.created_at >= utcnow() - REPEAT_GAP
+        )
+    ):
+        seen.setdefault(cid, set()).add(item_id)
+    return {cid for cid, n in totals.items() if len(seen.get(cid, ())) >= n}
+
+
+def other_review(db: DbSession, student: User, chapter_id: int, now) -> Action | None:
+    """A topic from another chapter of the student's subjects that is due for review, or that
+    was secure once and has slipped since. A few per sitting, earliest due first."""
+    start = sitting_start(db, student.id)
+    done = db.scalars(
+        select(Decision.id).where(
+            Decision.student_id == student.id, Decision.rule_id == "R3_other_chapter", Decision.created_at >= start
+        )
+    ).all()
+    if len(done) >= OTHER_REVIEWS_PER_SITTING:
+        return None
+    subject_ids = [s.id for s in subjects_for(db, student)]
+    rows = db.execute(
+        select(Mastery, Concept.title)
+        .join(Concept, Concept.id == Mastery.concept_id)
+        .join(Chapter, Chapter.id == Concept.chapter_id)
+        .where(
+            Mastery.student_id == student.id,
+            Mastery.secured_at.is_not(None),
+            Chapter.subject_id.in_(subject_ids),
+            Chapter.id != chapter_id,
+        )
+    ).all()
+    # Not one answered in this sitting already: one review per topic per sitting is enough.
+    answered = set(
+        db.scalars(select(Attempt.concept_id).where(Attempt.student_id == student.id, Attempt.created_at >= start)).all()
+    )
+    due = []
+    for row, _ in rows:
+        if row.concept_id in answered:
+            continue
+        secure = m.is_secure(row.p_known, row.attempts)
+        if not secure or (row.next_review_at and row.next_review_at <= now):
+            due.append((row.next_review_at or now, row))
+    if not due:
+        return None
+    when, row = min(due, key=lambda d: d[0])
+    slipped = not m.is_secure(row.p_known, row.attempts)
+    return Action(
+        kind="review",
+        concept_id=row.concept_id,
+        rule_id="R3_other_chapter",
+        reason=(
+            "A topic you secured earlier has slipped a little, so here is a question on it."
+            if slipped
+            else "A quick review now helps you remember this for longer."
+        ),
+        difficulty=2,
+        evidence={"slipped": slipped, "due": when.isoformat()},
+    )
 
 
 def pick_item(
@@ -343,6 +442,17 @@ def same_answer(a: str, b: str) -> bool:
         return False
 
 
+def record_felt(db: DbSession, student: User, concept_id: int, style: str, helped: bool) -> None:
+    """The learner's own answer to "did this way help?", kept with that topic's method counts."""
+    row = get_mastery(db, student.id, concept_id)
+    stats = {k: dict(v) for k, v in (row.format_stats or {}).items()}
+    st = stats.setdefault(style, {"after_correct": 0, "after_wrong": 0})
+    key = "felt_yes" if helped else "felt_no"
+    st[key] = st.get(key, 0) + 1
+    row.format_stats = stats
+    db.commit()
+
+
 def record_attempt(
     db: DbSession,
     student: User,
@@ -374,6 +484,7 @@ def record_attempt(
 
     row = get_mastery(db, student.id, item.concept_id)
     was_secure = m.is_secure(row.p_known, row.attempts)
+    expected = m.expected_correct(row.p_known, m.Evidence(correct, item.kind, hints_used))
     row.p_known = m.update_p_known(row.p_known, m.Evidence(correct, item.kind, hints_used))
     row.attempts += 1
     row.correct_streak = row.correct_streak + 1 if correct else 0
@@ -386,6 +497,8 @@ def record_attempt(
         stats = {k: dict(v) for k, v in (row.format_stats or {}).items()}
         st = stats.setdefault(explanation_style, {"after_correct": 0, "after_wrong": 0})
         st["after_correct" if correct else "after_wrong"] += 1
+        if "expected" in st or st["after_correct"] + st["after_wrong"] == 1:
+            st["expected"] = round(st.get("expected", 0) + expected, 3)
         row.format_stats = stats
 
     now = utcnow()
