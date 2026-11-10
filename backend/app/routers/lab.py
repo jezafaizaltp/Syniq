@@ -8,10 +8,10 @@ school. Nothing here ranks students: lists are alphabetical and counts are for t
 from datetime import datetime, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import delete, select
+from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session as DbSession
 
-from ..auth import audit, current_user, has_consent, hash_password, require_role, temporary_password
+from ..auth import audit, current_user, hash_password, require_role, temporary_password
 from ..db import get_db
 from ..models import (
     AssessmentScore,
@@ -22,6 +22,7 @@ from ..models import (
     Consent,
     Decision,
     Goal,
+    HelpRequest,
     GuardianLink,
     InterestReflection,
     LearningEvent,
@@ -63,25 +64,39 @@ def _students(db: DbSession, class_id: int) -> list[User]:
 
 @router.get("/teacher/classes/{class_id}/today", tags=["teacher"])
 def class_today(class_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
-    """The lab period at a glance: who has signed in, who practised today, who has been quiet."""
+    """The lab period at a glance: who has signed in, who practised today, who has been quiet, raised hands.
+
+    A handful of queries for the whole class, so it stays quick with 50 students and refreshes often.
+    """
+    from .school import _today_chapter, open_hands
+
     group = _own_class(db, user, class_id)
     now = utcnow()
     start = _day_start(now)
     quiet_since = now - timedelta(days=QUIET_DAYS)
+    roster = _students(db, class_id)
+    ids = [s.id for s in roster]
+    shared = _sharing(db, ids)
+    today_rows = db.execute(
+        select(Attempt.student_id, Attempt.concept_id).where(Attempt.student_id.in_(ids), Attempt.created_at >= start)
+    ).all() if ids else []
+    last_at = dict(
+        db.execute(select(Attempt.student_id, func.max(Attempt.created_at)).where(Attempt.student_id.in_(ids)).group_by(Attempt.student_id)).all()
+    ) if ids else {}
+    answered: dict[int, int] = {}
+    for sid, _ in today_rows:
+        answered[sid] = answered.get(sid, 0) + 1
     students, active, answers, topics = [], 0, 0, set()
-    for s in _students(db, class_id):
-        shared = has_consent(db, s.id, "school_sharing")
-        row = {"id": s.id, "name": s.name, "login": s.email, "first_sign_in_pending": s.must_change_password, "shared": shared}
-        if shared:
-            today = db.scalars(select(Attempt).where(Attempt.student_id == s.id, Attempt.created_at >= start)).all()
-            last = db.scalars(select(Attempt.created_at).where(Attempt.student_id == s.id).order_by(Attempt.created_at.desc())).first()
-            row["answered_today"] = len(today)
+    for s in roster:
+        row = {"id": s.id, "name": s.name, "login": s.email, "first_sign_in_pending": s.must_change_password, "shared": s.id in shared}
+        if s.id in shared:
+            row["answered_today"] = answered.get(s.id, 0)
             # Quiet: nothing for a week. A student who joined this week hasn't had the chance yet.
-            row["quiet"] = not s.must_change_password and (last or s.created_at) < quiet_since
-            if today:
+            row["quiet"] = not s.must_change_password and (last_at.get(s.id) or s.created_at) < quiet_since
+            if row["answered_today"]:
                 active += 1
-                answers += len(today)
-                topics |= {a.concept_id for a in today}
+                answers += row["answered_today"]
+                topics |= {cid for sid, cid in today_rows if sid == s.id}
         students.append(row)
     audit(db, user, "view_class_today")
     return {
@@ -89,7 +104,23 @@ def class_today(class_id: int, db: DbSession = Depends(get_db), user: User = Dep
         "students": students,
         "today": {"active": active, "answers": answers, "topics": len(topics)},
         "quiet_days": QUIET_DAYS,
+        "today_chapter": _today_chapter(db, group),
+        "hands": open_hands(db, class_id),
     }
+
+
+def _sharing(db: DbSession, ids: list[int]) -> set[int]:
+    """Students whose latest school_sharing consent is yes, in one query."""
+    if not ids:
+        return set()
+    latest: dict[int, bool] = {}
+    for sid, granted in db.execute(
+        select(Consent.student_id, Consent.granted)
+        .where(Consent.student_id.in_(ids), Consent.scope == "school_sharing")
+        .order_by(Consent.created_at, Consent.id)
+    ).all():
+        latest[sid] = granted
+    return {sid for sid, g in latest.items() if g}
 
 
 @router.post("/teacher/classes/{class_id}/students/{student_id}/reset-password", tags=["teacher"])
@@ -150,6 +181,7 @@ _STUDENT_ROWS = [
     (SubjectCheck, SubjectCheck.student_id),
     (AssessmentScore, AssessmentScore.student_id),
     (SpecialistLink, SpecialistLink.student_id),
+    (HelpRequest, HelpRequest.student_id),
 ]
 
 
@@ -169,16 +201,21 @@ def withdraw_student(student_id: int, db: DbSession = Depends(get_db), user: Use
     scopes = {c.scope for c in db.scalars(select(Consent).where(Consent.student_id == student.id)).all()}
     for scope in sorted(scopes):
         db.add(Consent(student_id=student.id, guardian_id=user.id, scope=scope, granted=False, method="withdrawn"))
+    guardian_ids = list(db.scalars(select(GuardianLink.guardian_id).where(GuardianLink.student_id == student.id)).all())
     db.execute(delete(GuardianLink).where(GuardianLink.student_id == student.id))
+    db.flush()
     student.name = "Withdrawn student"
     student.email = f"withdrawn-{student.id}@removed.invalid"
     student.password_hash = "!"
     student.settings = {}
     student.class_group_id = None
     student.role = "withdrawn"
+    from .school import close_orphan_guardians
+
+    parents_closed = close_orphan_guardians(db, guardian_ids)
     db.commit()
     audit(db, user, "withdraw_student", student.id)
-    return {"ok": True}
+    return {"ok": True, "parent_logins_closed": parents_closed}
 
 
 @router.get("/admin/usage", tags=["admin"])
@@ -218,3 +255,47 @@ def weekly_usage(db: DbSession = Depends(get_db), user: User = Depends(require_r
         )
     audit(db, user, "view_weekly_usage")
     return {"min_group": MIN_GROUP, "weeks": out}
+
+
+def _local_day(at: datetime):
+    return (at + timedelta(hours=5, minutes=30)).date()
+
+
+def _week_summary(db: DbSession, student_id: int) -> dict:
+    """The last 7 days in words: days used, answers, topics. No marks, no comparison with anyone."""
+    since = _day_start(utcnow()) - timedelta(days=6)
+    rows = db.execute(
+        select(Attempt.concept_id, Attempt.created_at).where(Attempt.student_id == student_id, Attempt.created_at >= since)
+    ).all()
+    topics = []
+    for cid in dict.fromkeys(cid for cid, _ in rows):
+        concept = db.get(Concept, cid)
+        m = db.scalars(select(Mastery).where(Mastery.student_id == student_id, Mastery.concept_id == cid)).first()
+        topics.append({"title": concept.title, "progress": progress_label(m.p_known, m.attempts) if m else "learning"})
+    return {"days": len({_local_day(at) for _, at in rows}), "answered": len(rows), "topics": topics}
+
+
+@router.get("/guardian/children/{student_id}/week", tags=["guardian"])
+def child_week(student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    from ..auth import guardian_of
+
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    audit(db, user, "view_child_progress", student_id)
+    return _week_summary(db, student_id)
+
+
+@router.get("/me/days", tags=["student"])
+def my_days(db: DbSession = Depends(get_db), user: User = Depends(current_user)):
+    """Which of the last 28 days I practised on. A calendar, not a streak: missed days are never counted against anyone."""
+    today = _local_day(utcnow())
+    first = today - timedelta(days=27)
+    since = _day_start(utcnow()) - timedelta(days=27)
+    counts: dict = {}
+    for (at,) in db.execute(select(Attempt.created_at).where(Attempt.student_id == user.id, Attempt.created_at >= since)).all():
+        d = _local_day(at)
+        counts[d] = counts.get(d, 0) + 1
+    return {
+        "days": [{"date": (first + timedelta(days=i)).isoformat(), "answered": counts.get(first + timedelta(days=i), 0)} for i in range(28)],
+        "week": _week_summary(db, user.id),
+    }

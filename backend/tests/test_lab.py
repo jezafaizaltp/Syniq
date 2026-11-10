@@ -79,7 +79,7 @@ def test_withdraw_deletes_what_was_learned_and_keeps_the_record():
     people = client.get("/admin/people", headers=a).json()
     kiran = next(s for c in people["classes"] for s in c["students"] if s["name"] == "Lab Kiran")
     assert client.post(f"/admin/students/{kiran['id']}/withdraw", headers=login("teacher@demo.syniq")).status_code == 403
-    assert client.post(f"/admin/students/{kiran['id']}/withdraw", headers=a).json() == {"ok": True}
+    assert client.post(f"/admin/students/{kiran['id']}/withdraw", headers=a).json() == {"ok": True, "parent_logins_closed": 1}
     with SessionLocal() as db:
         u = db.get(User, kiran["id"])
         assert u.role == "withdrawn" and u.name == "Withdrawn student" and u.class_group_id is None

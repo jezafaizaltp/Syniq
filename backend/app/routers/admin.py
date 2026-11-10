@@ -12,6 +12,7 @@ import csv
 import io
 import re
 import secrets
+from datetime import date, datetime, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
@@ -393,6 +394,14 @@ AUDIT_WORDS = {
     "family_add_adult": "Added an adult to a family",
     "family_remove_adult": "Removed an adult from a family",
     "screen_time_limits": "Changed screen time limits (minutes a day, per sitting)",
+    "view_class_today": "Viewed today in the lab",
+    "end_lab_period": "Ended a lab period (signed the class out)",
+    "withdraw_student": "Withdrew a student and deleted their learning data",
+    "view_weekly_usage": "Viewed weekly use",
+    "set_school_details": "Changed the school's name or contact",
+    "edit_student": "Changed a student's name or class",
+    "export_consent_register": "Downloaded the consent register",
+    "export_student_data": "Downloaded everything held about a student",
 }
 
 
@@ -407,13 +416,22 @@ def describe(action: str) -> str:
 def audit_log(
     before_id: int | None = None,
     student_id: int | None = None,
+    action: str | None = None,
+    since: date | None = None,
     limit: int = 50,
     db: DbSession = Depends(get_db),
     user: User = Depends(admin_only),
 ):
-    """Newest first, 50 at a time. Pass before_id from the last row to see older entries."""
+    """Newest first, 50 at a time. Pass before_id from the last row to see older entries.
+
+    action keeps rows whose action starts with it (e.g. "reset_password"); since keeps rows from that day on.
+    """
     limit = max(1, min(limit, 200))
     q = select(AuditLog).order_by(AuditLog.id.desc()).limit(limit + 1)
+    if action:
+        q = q.where(AuditLog.action.startswith(action))
+    if since:
+        q = q.where(AuditLog.created_at >= datetime(since.year, since.month, since.day) - timedelta(hours=5, minutes=30))
     if before_id:
         q = q.where(AuditLog.id < before_id)
     if student_id:
