@@ -321,6 +321,9 @@ export default function Admin() {
         <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
       </p>
       <p>
+        <Link href="/admin/signs">Sign-language videos for deaf students, per topic →</Link>
+      </p>
+      <p>
         <Link href="/admin/letters">Parent letters and consent forms: print one per student →</Link>
       </p>
 

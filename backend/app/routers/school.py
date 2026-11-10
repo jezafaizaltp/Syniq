@@ -265,8 +265,13 @@ def my_lesson_today(db: DbSession = Depends(get_db), user: User = Depends(curren
 
 # --- Raised hands ----------------------------------------------------------------------
 
+# The talk board: picture buttons for students who find it hard to speak up or ask out loud.
+NEEDS = ("help", "dont_understand", "break", "too_loud", "finished", "toilet", "upset")
+
+
 class HelpIn(BaseModel):
     concept_id: int | None = None
+    need: str | None = None
 
 
 @router.post("/me/help", tags=["student"])
@@ -274,11 +279,15 @@ def raise_hand(body: HelpIn, db: DbSession = Depends(get_db), user: User = Depen
     """'I need help': tells the class teacher, quietly. One open hand at a time."""
     if user.role != "student" or not user.class_group_id:
         raise HTTPException(400, "Only for students in a class")
+    if body.need is not None and body.need not in NEEDS:
+        raise HTTPException(400, "Unknown need")
     open_ = db.scalars(select(HelpRequest).where(HelpRequest.student_id == user.id, HelpRequest.resolved_at.is_(None))).first()
     if open_:
         open_.concept_id = body.concept_id or open_.concept_id
+        # The newest press says what they need now.
+        open_.need = body.need
     else:
-        db.add(HelpRequest(student_id=user.id, class_group_id=user.class_group_id, concept_id=body.concept_id))
+        db.add(HelpRequest(student_id=user.id, class_group_id=user.class_group_id, concept_id=body.concept_id, need=body.need))
     db.commit()
     return {"hand_up": True}
 
@@ -306,7 +315,7 @@ def open_hands(db: DbSession, class_id: int) -> list[dict]:
         if not s or s.class_group_id != class_id:
             continue
         concept = db.get(Concept, h.concept_id) if h.concept_id else None
-        out.append({"id": h.id, "name": s.name, "topic": concept.title if concept else None, "minutes": int((now - h.created_at).total_seconds() // 60)})
+        out.append({"id": h.id, "name": s.name, "topic": concept.title if concept else None, "need": h.need, "minutes": int((now - h.created_at).total_seconds() // 60)})
     return out
 
 

@@ -372,6 +372,18 @@ def child_methods(student_id: int, db: DbSession = Depends(get_db), user: User =
     return {"subjects": learning.method_summary(db, student_id)}
 
 
+@router.get("/guardian/children/{student_id}/strengths", tags=["guardian"])
+def child_strengths(student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    """Where the child shines lately and ways to grow it at home. In words, never a score or a label."""
+    from .. import strengths
+
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    audit(db, user, "view_child_strengths", student_id)
+    child = db.get(User, student_id)
+    return strengths.strengths(db, child, puzzles_allowed=has_consent(db, student_id, "thinking_puzzles"))
+
+
 @router.get("/guardian/children/{student_id}/mistakes", tags=["guardian"])
 def child_mistakes(
     student_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian")), lang: str = Depends(i18n.language)

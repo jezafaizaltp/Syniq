@@ -26,7 +26,7 @@ from ..i18n import t, translate_english
 
 DETECT_VERSION = "2026.10-1"
 
-CHOSEN = ["screen_reader", "visual_first", "tap_to_answer", "calm", "motor"]
+CHOSEN = ["screen_reader", "visual_first", "tap_to_answer", "calm", "motor", "listen", "fewer_choices", "talk_board", "maths_helper"]
 NOTICED = ["focus", "easy_read", "small_steps"]
 
 MIN_ATTEMPTS = 10  # nothing is noticed before this many answers

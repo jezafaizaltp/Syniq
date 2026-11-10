@@ -397,8 +397,25 @@ def shuffled_options(item: Item) -> list[str] | None:
     return options
 
 
+def fewer(choices: list[str], item: Item) -> list[str]:
+    """Two choices instead of many: the right answer and the most common wrong one.
+
+    The wrong one is the mistake the item already expects (its first listed misconception), so
+    the choice still teaches something; otherwise one picked the same way every time."""
+    if len(choices) <= 2:
+        return choices
+    right = next((c for c in choices if c.strip().lower() == item.answer.strip().lower()), None)
+    if right is None:
+        return choices
+    wrong = [c for c in choices if c != right]
+    expected = [c for c in wrong if c in (item.misconceptions or {})]
+    other = expected[0] if expected else random.Random(f"fewer-{item.id}").choice(wrong)
+    return [c for c in choices if c in (right, other)]
+
+
 def public_item(item: Item, settings: dict | None = None) -> dict:
     """An item as the student sees it: no answer, no hints until asked."""
+    support = set(detect.effective_support(settings))
     out = {
         "id": item.id,
         "concept_id": item.concept_id,
@@ -411,10 +428,15 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
     if item.kind == "numeric":
         # Phone number pads have no "/", so fraction answers get the full keyboard.
         out["keyboard"] = "text" if "/" in item.answer else "decimal"
-    if item.kind == "numeric" and {"tap_to_answer", "motor"} & set(detect.effective_support(settings)):
+    if item.kind == "numeric" and {"tap_to_answer", "motor", "listen"} & support:
         # Answers to tap instead of type. The right one is among them, so it is not a hint.
         sum_ = responses.parse_arithmetic(item.prompt, item.answer)
         out["choices"] = responses.tap_choices(sum_, item.answer, item.id, list(item.misconceptions))
+    if "fewer_choices" in support:
+        if item.kind == "mcq":
+            out["options"] = fewer(out["options"], item)
+        if out.get("choices"):
+            out["choices"] = fewer(out["choices"], item)
     return out
 
 

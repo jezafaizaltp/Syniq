@@ -1,4 +1,4 @@
-"""Interest exploration: short activities across five areas, open to every student.
+"""Interest exploration: short activities across eight areas, open to every student.
 
 Each activity takes 10 to 20 minutes, needs nothing that has to be bought, and can be
 done at home or school. Afterwards the student says how it felt (loved it, it was okay,
@@ -10,7 +10,11 @@ areas they liked alongside areas they haven't tried yet, so nobody is boxed in e
 Nobody else sees a student's reflections.
 """
 
-AREAS = ("creative", "practical", "scientific", "social", "enterprise")
+AREAS = ("creative", "practical", "scientific", "social", "enterprise", "movement", "nature", "technology")
+
+# Every activity can be done in more than one way: by touch, by talking it through, with a
+# helper doing the hands while the student leads, sitting down, or with sound instead of
+# sight. The app says so on every activity, so no area is closed to a disabled student.
 
 ACTIVITIES: list[dict] = [
     # --- Creative
@@ -297,6 +301,135 @@ ACTIVITIES: list[dict] = [
             "Share your plan. What did your family think?",
         ],
         "reflect": "What was the hardest thing to fit in the budget?",
+    },
+    # --- Movement
+    {
+        "id": "movement.routine",
+        "area": "movement",
+        "title": "Make up a one-minute movement routine",
+        "minutes": 10,
+        "intro": "Put together eight moves into a routine you can repeat. Sitting down or standing both work.",
+        "steps": [
+            "Choose four moves your body likes: a clap, a stretch, a turn, a nod, a wheel of the arms.",
+            "Put them in an order and count 1 to 8 as you do them.",
+            "Repeat the routine three times. Can you do it with your eyes closed?",
+            "Teach it to someone, or say it out loud step by step.",
+        ],
+        "reflect": "Which move felt best? What would make the routine harder?",
+    },
+    {
+        "id": "movement.target",
+        "area": "movement",
+        "title": "Rolled-paper target game",
+        "minutes": 15,
+        "intro": "Roll paper into balls and get them into a bucket or box from further and further away.",
+        "steps": [
+            "Make five paper balls and put a bucket or box on the floor.",
+            "Start close. Each time three of five go in, move one step back.",
+            "Try throwing, rolling, or pushing the ball along a slope made from a book.",
+            "Ask someone to clap near the box if you aim better by sound.",
+        ],
+        "reflect": "Which way of sending the ball worked best for you?",
+    },
+    {
+        "id": "movement.balance",
+        "area": "movement",
+        "title": "Balance and breathe",
+        "minutes": 10,
+        "intro": "Find out how still and steady your body can be.",
+        "steps": [
+            "Sit or stand tall. Breathe in for 4 counts and out for 4 counts, five times.",
+            "Balance something light on your head or hand, like a folded cloth, and count how long it stays.",
+            "Try again after slow breathing. Does it stay longer?",
+            "Make up your own balance challenge.",
+        ],
+        "reflect": "How did your body feel at the end?",
+    },
+    # --- Nature
+    {
+        "id": "nature.watch",
+        "area": "nature",
+        "title": "Ten minutes of watching",
+        "minutes": 10,
+        "intro": "Sit near a window, a plant, a tree or a garden and notice living things.",
+        "steps": [
+            "Sit quietly for ten minutes. Look, listen and smell.",
+            "Count the different birds, insects or animals you notice, by sight or by sound.",
+            "Pick one and follow what it does for a minute.",
+            "Draw it, describe it aloud, or write three lines about it.",
+        ],
+        "reflect": "What was the living thing doing, and why do you think it did that?",
+    },
+    {
+        "id": "nature.seed",
+        "area": "nature",
+        "title": "Grow a seed",
+        "minutes": 15,
+        "intro": "Plant a few seeds from the kitchen and see what happens over a week.",
+        "steps": [
+            "Take a few seeds: green gram, mustard, or a chilli seed.",
+            "Put them on wet cotton or soil in a cup, and keep it near light.",
+            "Check every day. Feel the seed, look at it, note any change.",
+            "Try one cup in the dark too. What is different?",
+        ],
+        "reflect": "What changed first? What did the plant need most?",
+    },
+    {
+        "id": "nature.leaves",
+        "area": "nature",
+        "title": "A leaf collection",
+        "minutes": 15,
+        "intro": "Collect fallen leaves and sort them in your own way.",
+        "steps": [
+            "Gather eight to ten fallen leaves from different plants.",
+            "Feel their edges, smell them, look at their veins.",
+            "Sort them into groups that make sense to you: by shape, size, smell or feel.",
+            "Find out the name of one plant from someone at home.",
+        ],
+        "reflect": "How did you decide your groups?",
+    },
+    # --- Technology
+    {
+        "id": "technology.instructions",
+        "area": "technology",
+        "title": "Program a person",
+        "minutes": 15,
+        "intro": "Write exact instructions for a simple job, the way a computer program does.",
+        "steps": [
+            "Choose a job: making a cup of water, drawing a house, walking to the door.",
+            "Write or say every step, one tiny action at a time.",
+            "Ask someone to follow your steps exactly, word for word.",
+            "Fix any step that went wrong and try again.",
+        ],
+        "reflect": "Which step was missing the first time?",
+    },
+    {
+        "id": "technology.code",
+        "area": "technology",
+        "title": "A secret code",
+        "minutes": 10,
+        "intro": "Invent a code to send a secret message, like early computer engineers did.",
+        "steps": [
+            "Pick a rule: shift every letter one along (A becomes B), or use taps and pauses.",
+            "Write or tap a short message in your code.",
+            "Give someone the rule and see if they can read it.",
+            "Make a harder rule and try again.",
+        ],
+        "reflect": "What makes a code easy to read but hard to crack?",
+    },
+    {
+        "id": "technology.machine",
+        "area": "technology",
+        "title": "Build a simple machine",
+        "minutes": 20,
+        "intro": "Make something that moves using things at home: a ramp, a lever, or a pulley.",
+        "steps": [
+            "Choose one: a ramp from a book, a lever from a ruler and pencil, or a pulley from string and a spool.",
+            "Use it to move or lift something small.",
+            "Change one thing (the slope, the length, the weight) and see what happens.",
+            "Explain how it makes the job easier.",
+        ],
+        "reflect": "What did you change, and what happened?",
     },
 ]
 

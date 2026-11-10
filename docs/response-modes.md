@@ -33,8 +33,27 @@ Sight, hearing, speech, movement and how a child copes with change can't be read
 | `tap_to_answer` | Taps answers instead of typing or speaking | Number questions show four answers to tap, built from likely mistakes |
 | `calm` | Likes calm lessons that go the same way every time | A picture plan (Learn, Practise, Finish) with the time chosen; no surprise brain teasers or spot-the-mistake; nothing moves; the lesson never changes shape without warning |
 | `motor` | Finds tapping, typing or keeping a hand steady hard | Bigger buttons with more space; number questions become answers to tap; on a keyboard or switch, keys 1 to 9 pick an answer, Enter checks it, and the Next button takes focus so one press moves on |
+| `listen` | Is blind or finds the screen hard to see, without a screen reader | SYNiq speaks everything itself, for lab computers with no screen reader: each question with its numbered choices, the explanation with its picture described, what was chosen, a short sound and the result (yours against the right answer). Number keys choose, Enter checks or moves on, R repeats, H gives a hint. Number questions become choices, so nothing has to be typed blind |
+| `talk_board` | Finds speaking up or asking out loud hard | A board of picture buttons: I need help, I don't understand, I need a break, It's too loud, I've finished, Toilet please, I feel upset. In a class it tells the teacher (their Today panel shows what is needed); at home it shows the need big, to point at |
+| `fewer_choices` | Does better with fewer answers to choose from | Two choices instead of four: the right answer and the mistake the question expects most, so the choice still teaches |
+| `maths_helper` | Finds it hard to hold numbers in their head | A number line (0-20, or 0-100 in tens) and counters in rows of ten beside every number question. Buttons only; it never checks or gives the answer. Also offered when SYNiq has noticed pictures and smaller numbers help (`small_steps`) |
 
-These often help autistic children (`calm`) and children with cerebral palsy or other movement difficulties (`motor`), but SYNiq never says so: they are offered to anyone they help.
+These often help autistic children (`calm`, `talk_board`), children with cerebral palsy or other movement difficulties (`motor`), blind children (`listen`), non-speaking children (`talk_board`), and children with learning disabilities such as dyscalculia (`maths_helper`, `fewer_choices`), but SYNiq never says so: they are offered to anyone they help.
+
+### Sign language for deaf learners
+
+Students with `visual_first` see an "In sign language" card beside every lesson: links to Indian Sign Language videos for the topic's key words, and a link to the national ISL dictionary from ISLRTC. Schools add the videos per topic on **School → Sign-language videos** (`/admin/signs`): their own recordings or dictionary entries, https links only, up to 10 per topic, opened in a new tab with nothing about the student sent. SYNiq doesn't ship sign videos itself: signing must come from Deaf signers, not from a machine.
+
+### Strengths and talents (every child)
+
+My space shows **Your strengths** and the parent page **Where {name} shines** (`app/strengths.py`). Four signals, each against the child's own record, never against other children:
+
+- a subject where first-try answers are clearly better than in the child's other subjects (at least 15 answers in each of two subjects, at least 60% and 10 points above their own overall rate);
+- thinking-puzzle kinds that are growing (only with the parent's thinking-puzzles consent);
+- Explore areas they loved: making, fixing, finding out, people, ideas, and now movement and sport, nature and animals, technology and building;
+- using the hands-on activities a lot.
+
+Each strength comes with ways to grow it at home (low cost, including para-sport and adapted games), the next Explore activity in that area, and always something new to try so nobody is boxed in. No scores, no ranks, no "gifted" label. Every Explore activity says it can be done by touch, by sound, sitting down, by talking it through, or with a helper doing the hands while the child leads.
 
 ### Reading help for everyone (Settings)
 

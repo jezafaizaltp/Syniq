@@ -9,6 +9,7 @@ import type { NoteRow } from "../learn/Notes";
 import Methods, { type MethodSubject } from "./Methods";
 import Mistakes, { type MistakePattern } from "./Mistakes";
 import Days from "./Days";
+import Strengths, { type StrengthsView } from "./Strengths";
 
 type Overview = {
   subjects: {
@@ -33,6 +34,7 @@ export default function MySpace() {
   const [notes, setNotes] = useState<NoteRow[]>([]);
   const [methods, setMethods] = useState<MethodSubject[]>([]);
   const [mistakes, setMistakes] = useState<MistakePattern[]>([]);
+  const [strengths, setStrengths] = useState<StrengthsView | null>(null);
   const [goalText, setGoalText] = useState("");
   const [goalDate, setGoalDate] = useState("");
   const [error, setError] = useState("");
@@ -49,6 +51,7 @@ export default function MySpace() {
     api<NoteRow[]>("/me/notes").then(setNotes).catch(() => setNotes([]));
     api<{ subjects: MethodSubject[] }>("/me/methods").then((r) => setMethods(r.subjects)).catch(() => setMethods([]));
     api<{ patterns: MistakePattern[] }>("/me/mistakes").then((r) => setMistakes(r.patterns)).catch(() => setMistakes([]));
+    api<StrengthsView>("/me/strengths").then(setStrengths).catch(() => setStrengths(null));
   }, [canLearn]);
 
   if (!me || me.role !== "student") return null;
@@ -137,6 +140,14 @@ export default function MySpace() {
           </p>
         )}
       </section>
+
+      {strengths && (
+        <section className="card" aria-labelledby="strengths">
+          <h2 id="strengths">{t("strengths.title")}</h2>
+          <p className="muted">{t("strengths.note")}</p>
+          <Strengths view={strengths} t={t} />
+        </section>
+      )}
 
       <section className="card" aria-labelledby="helps">
         <h2 id="helps">{t("space.helps")}</h2>

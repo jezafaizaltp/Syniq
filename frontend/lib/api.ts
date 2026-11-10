@@ -28,8 +28,18 @@ export type Settings = {
   welcome_seen?: boolean;
 };
 
-/** Support for sight, hearing, speech, movement or a calm routine: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
-export const CHOSEN_SUPPORT = ["screen_reader", "visual_first", "tap_to_answer", "calm", "motor"] as const;
+/** Support for sight, hearing, speech, movement, a calm routine, choosing or numbers: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */
+export const CHOSEN_SUPPORT = [
+  "screen_reader",
+  "listen",
+  "visual_first",
+  "tap_to_answer",
+  "talk_board",
+  "calm",
+  "motor",
+  "fewer_choices",
+  "maths_helper",
+] as const;
 
 /** Soft page colours some readers find easier than white. Words: settings.tint.<key>. */
 export const READING_TINTS = ["none", "cream", "blue", "green", "rose"] as const;

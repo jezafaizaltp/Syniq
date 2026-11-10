@@ -12,7 +12,18 @@ type Student = {
   answered_today?: number;
   quiet?: boolean;
 };
-type Hand = { id: number; name: string; topic: string | null; minutes: number };
+type Hand = { id: number; name: string; topic: string | null; need: string | null; minutes: number };
+
+/** What a talk-board press asks for, in the teacher's words. */
+const NEED_WORDS: Record<string, string> = {
+  help: "🙋 needs help",
+  dont_understand: "❓ doesn't understand",
+  break: "🧃 needs a break",
+  too_loud: "🔇 says it's too loud",
+  finished: "✅ has finished",
+  toilet: "🚻 needs the toilet",
+  upset: "💙 is upset",
+};
 type TodayChapter = { chapter_id: number; title: string; number: number; subject: string } | null;
 type Today = {
   class: string;
@@ -93,6 +104,7 @@ export default function LabToday({ classId }: { classId: number }) {
             {data.hands.map((h) => (
               <li key={h.id}>
                 {h.name}
+                {h.need && NEED_WORDS[h.need] ? <strong> {NEED_WORDS[h.need]}</strong> : null}
                 {h.topic ? ` · ${h.topic}` : ""} <span className="muted">· {h.minutes < 1 ? "just now" : `${h.minutes} min`}</span>{" "}
                 <button className="secondary" onClick={() => helped(h)}>
                   Helped

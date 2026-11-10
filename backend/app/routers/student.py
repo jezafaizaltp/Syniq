@@ -28,7 +28,7 @@ ALLOWED_SETTINGS = {
     "ui_language": str,
     "reading_tint": str,  # none, cream, blue, green, rose: a soft page colour that some readers find easier
     "wide_spacing": bool,  # more space between letters, words and lines
-    "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer, calm, motor
+    "support_modes": list,  # chosen: see engine/detect.CHOSEN
     "auto_off": list,  # noticed modes the student has switched off
     "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
     "welcome_seen": bool,  # the first-day welcome card has been read
@@ -108,7 +108,7 @@ def learn_next(
         "decision_id": decision.id,
         "kind": action.kind,
         "reason": i18n.translate_english(lang, action.reason),
-        "concept": {"id": concept.id, "title": concept.title} if concept else None,
+        "concept": {"id": concept.id, "title": concept.title, "signs": concept.sign_videos or []} if concept else None,
         "offer_support": action.offer_support,
         # Something to explore with their hands. Offered with the explanation and any time during practice.
         "activity": concept.activity if concept else None,

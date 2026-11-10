@@ -39,7 +39,7 @@ from . import patterns
 
 RESPONSES_VERSION = "2026.11-1"
 
-SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps", "calm", "motor"]
+SUPPORT_MODES = ["focus", "easy_read", "screen_reader", "visual_first", "tap_to_answer", "small_steps", "calm", "motor", "listen", "fewer_choices", "talk_board", "maths_helper"]
 ANSWER_MODES = ["count_it_out", "step_by_step", "real_life", "try_similar"]
 
 # After this many wrong answers in a row, offer the AI tutor.

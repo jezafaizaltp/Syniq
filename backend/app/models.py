@@ -233,6 +233,8 @@ class Concept(Base):
     notes: Mapped[str] = mapped_column(Text, default="")
     # A hands-on activity to explore the topic (app/activities.py), or None.
     activity: Mapped[dict | None] = mapped_column(JSON(none_as_null=True), nullable=True)
+    # Indian Sign Language videos for this topic's key words, added by the school: [{"word", "url"}].
+    sign_videos: Mapped[list | None] = mapped_column(JSON(none_as_null=True), nullable=True)
 
 
 class ConceptPrereq(Base):
@@ -524,5 +526,7 @@ class HelpRequest(Base):
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     class_group_id: Mapped[int] = mapped_column(ForeignKey("class_groups.id"), index=True)
     concept_id: Mapped[int | None] = mapped_column(ForeignKey("concepts.id"), nullable=True)
+    # From the talk board: what the student needs (app/routers/school.py NEEDS), or None for a plain raised hand.
+    need: Mapped[str | None] = mapped_column(String(20), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     resolved_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

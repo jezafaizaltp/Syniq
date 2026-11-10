@@ -6,6 +6,31 @@ import { ApiError, api, del, effectiveSupport, post } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { ageBand, readsAloud } from "@/lib/age";
 import { speak, useSession } from "@/lib/session";
+import MathsHelper from "./MathsHelper";
+import Signs from "./Signs";
+import TalkBoard from "./TalkBoard";
+
+/** A short sound after an answer, for listeners: two rising notes when right, one soft low note when not yet. */
+function chime(right: boolean) {
+  try {
+    const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new Ctx();
+    const notes = right ? [523, 784] : [330];
+    notes.forEach((f, i) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0.12, ctx.currentTime + i * 0.15);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.15 + 0.3);
+      o.connect(g).connect(ctx.destination);
+      o.start(ctx.currentTime + i * 0.15);
+      o.stop(ctx.currentTime + i * 0.15 + 0.3);
+    });
+    setTimeout(() => ctx.close(), 1000);
+  } catch {
+    /* no sound available: the words still say it */
+  }
+}
 
 /** Count a help button press: one of the signs SYNiq uses to notice what helps. */
 function helpPressed(kind: "read_aloud" | "break" | "activity") {
@@ -80,7 +105,7 @@ type Step = {
   decision_id: number;
   kind: "explain" | "practice" | "review" | "prereq_review" | "chapter_complete";
   reason: string;
-  concept: { id: number; title: string } | null;
+  concept: { id: number; title: string; signs?: { word: string; url: string }[] } | null;
   offer_support: boolean;
   explanation?: Explanation | null;
   styles?: string[];
@@ -454,9 +479,17 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
   const styleRef = useRef<string | null>(null);
   const startedRef = useRef<number>(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const readAloud = readsAloud(me);
-  const young = ageBand(me) === "little" || ageBand(me) === "middle";
   const support = effectiveSupport(me?.settings);
+  // Listening: SYNiq says everything itself, for blind and low-vision learners on a computer with no screen reader.
+  const listen = support.includes("listen");
+  const readAloud = readsAloud(me) || listen;
+  const young = ageBand(me) === "little" || ageBand(me) === "middle";
+  // Deaf learners who chose pictures and text first also get the topic's sign-language links.
+  const signs = support.includes("visual_first");
+  const talkBoard = support.includes("talk_board");
+  // The number helper: chosen, or noticed when pictures and smaller numbers help.
+  const helperOn = support.includes("maths_helper") || support.includes("small_steps");
+  const [showHelper, setShowHelper] = useState(false);
   // Calm: the lesson goes the same way every time, with no surprise puzzles.
   const calm = support.includes("calm");
   // Movement help: number keys choose answers, and the Next button takes focus so one key press moves on.
@@ -469,6 +502,18 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       .then((s) => setTutorOn(s.enabled))
       .catch(() => setTutorOn(false));
   }, []);
+
+  /** Everything a listener needs to answer: the question, then each choice with its number key. */
+  function sayItem(item: Item): string {
+    const options = item.choices?.length ? item.choices : item.kind === "mcq" ? item.options : [];
+    const read = options.map((o, i) => t("listen.choice", { n: i + 1, text: o })).join(" ");
+    return `${item.prompt} ${read} ${options.length ? t("listen.keys") : t("listen.type")}`;
+  }
+
+  function sayExplanation(exp: Explanation | null | undefined): string {
+    const picture = exp?.picture?.alt ? ` ${t("listen.picture", { text: exp.picture.alt })}` : "";
+    return `${exp?.body ?? t("learn.no_explanation")}${picture} ${t("listen.ready")}`;
+  }
 
   async function next() {
     setError("");
@@ -484,8 +529,10 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       setResult(null);
       setShowWhy(false);
       setShowActivity(false);
+      setShowHelper(false);
       startedRef.current = Date.now();
-      if (readAloud) speak(s.explanation?.body ?? s.item?.prompt ?? s.reason);
+      if (listen) speak(s.item ? sayItem(s.item) : s.kind === "explain" ? sayExplanation(s.explanation) : s.reason);
+      else if (readAloud) speak(s.explanation?.body ?? s.item?.prompt ?? s.reason);
       requestAnimationFrame(() => headingRef.current?.focus());
     } catch (e) {
       setError(e instanceof ApiError ? e.message : t("learn.load_failed"));
@@ -539,15 +586,48 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       if (Number.isInteger(n) && n >= 1 && n <= choices.length) {
         e.preventDefault();
         setAnswer(choices[n - 1]);
+        if (listen) speak(t("listen.chosen", { n, text: choices[n - 1] }));
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   });
 
+  // Listening keys: R says it again, H gives a hint, Enter moves on from an explanation.
   useEffect(() => {
-    if (motor && result) requestAnimationFrame(() => nextRef.current?.focus());
-  }, [motor, result]);
+    if (!listen || !step) return;
+    function onKey(e: KeyboardEvent) {
+      const el = e.target as HTMLElement;
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable || e.altKey || e.ctrlKey || e.metaKey) return;
+      const key = e.key.toLowerCase();
+      if (key === "r") {
+        e.preventDefault();
+        if (step!.item) speak(sayItem(step!.item));
+        else if (step!.kind === "explain") speak(sayExplanation(step!.explanation));
+      } else if (key === "h" && step!.item && !result && hints.length < step!.item.hint_count) {
+        e.preventDefault();
+        showHint();
+      } else if (e.key === "Enter" && step!.kind === "explain" && el.tagName !== "BUTTON" && el.tagName !== "A") {
+        e.preventDefault();
+        next();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
+  // After an answer, a listener hears a sound, the result and what they said against the answer.
+  useEffect(() => {
+    if (!listen || !result) return;
+    chime(result.correct);
+    const compare = !result.correct && result.your_answer && result.right_answer ? `${t("listen.yours_right", { yours: result.your_answer, right: result.right_answer })} ` : "";
+    speak(`${compare}${result.response.script} ${t("listen.next")}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listen, result]);
+
+  useEffect(() => {
+    if ((motor || listen) && result) requestAnimationFrame(() => nextRef.current?.focus());
+  }, [motor, listen, result]);
 
   async function switchStyle(style: string) {
     if (!step?.concept) return;
@@ -785,6 +865,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
           )}
         </div>
       )}
+      {talkBoard && <TalkBoard inClass={lessonInfo.in_class} conceptId={step?.concept?.id ?? null} />}
 
       {error && (
         <p className="feedback warn" role="alert">
@@ -802,6 +883,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
       {step && (
         <div className="card" aria-live="polite">
           {step.concept && <p className="muted">{step.concept.title}</p>}
+          {signs && step.concept && step.kind !== "chapter_complete" && <Signs signs={step.concept.signs ?? []} />}
 
           {step.kind === "chapter_complete" && (
             <>
@@ -893,6 +975,12 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                 </button>
               )}
               {showActivity && step.activity && <Activity key={step.decision_id} spec={step.activity} onDone={() => helpPressed("activity")} />}
+              {helperOn && /\d/.test(step.item.prompt) && (
+                <button className="secondary" aria-expanded={showHelper} onClick={() => setShowHelper(!showHelper)}>
+                  {showHelper ? t("helper.hide") : t("helper.open")}
+                </button>
+              )}
+              {showHelper && <MathsHelper key={step.decision_id} prompt={step.item.prompt} />}
               <form onSubmit={submit} style={{ marginTop: 12 }}>
                 {step.item.kind === "mcq" || step.item.choices?.length ? (
                   <>
@@ -949,10 +1037,10 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                 <>
                   {!result.correct && result.your_answer && result.right_answer ? (
                     <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture}>
-                      <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
+                      <Feedback key={step.decision_id} r={result.response} readAloud={readAloud && !listen} tutorOn={tutorOn} />
                     </Mistake>
                   ) : (
-                    <Feedback key={step.decision_id} r={result.response} readAloud={readAloud} tutorOn={tutorOn} />
+                    <Feedback key={step.decision_id} r={result.response} readAloud={readAloud && !listen} tutorOn={tutorOn} />
                   )}
                   {result.next_step && <NextStepLine step={result.next_step} />}
                   {result.offer_break && (
