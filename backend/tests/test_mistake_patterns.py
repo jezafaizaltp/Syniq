@@ -198,3 +198,16 @@ def test_learner_who_learns_from_stories_gets_a_story_after_a_mistake():
     r = client.post("/learn/attempts", json={"item_id": items[0].id, "response": wrong}, headers=me).json()
     assert r["response"]["mode"] == "real_life" and r["response"]["for_you"] is True
     assert "helped you most" in r["response"]["why"]
+
+
+def test_no_question_twice_in_a_sitting_while_others_are_left():
+    sid = new_student("ravi.mp@demo.syniq")
+    cid, items = items_of("math9.pairs.sum_difference")
+    seen = []
+    with SessionLocal() as db:
+        student = db.get(User, sid)
+        for _ in range(len(items)):
+            item = learning.pick_item(db, sid, cid, 2)
+            seen.append(item.id)
+            learning.record_attempt(db, student, item, "zzz", 0, None, None)
+    assert len(set(seen)) == len(items)

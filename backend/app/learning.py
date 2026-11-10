@@ -272,6 +272,10 @@ def next_action(
     return action, decision
 
 
+# Questions answered within this long are not asked again while the topic has others.
+REPEAT_GAP = timedelta(hours=12)
+
+
 def pick_item(
     db: DbSession, student_id: int, concept_id: int, difficulty: int | None, working_on: set[str] | None = None
 ) -> Item | None:
@@ -284,20 +288,34 @@ def pick_item(
     items = db.scalars(select(Item).where(Item.concept_id == concept_id, Item.status == "approved")).all()
     if not items:
         return None
-    recent = db.scalars(
-        select(Attempt.item_id)
-        .where(Attempt.student_id == student_id, Attempt.concept_id == concept_id)
-        .order_by(Attempt.created_at.desc(), Attempt.id.desc())
-        .limit(max(1, len(items) // 2))
-    ).all()
-    fresh = [i for i in items if i.id not in recent] or items
+    # When each question was last answered. A question seen in this sitting is not asked again while
+    # others are left: the same question twice tests memory of that question, not the topic.
+    last_seen: dict[int, int] = {}
+    for item_id, attempt_id in db.execute(
+        select(Attempt.item_id, Attempt.id).where(Attempt.student_id == student_id, Attempt.concept_id == concept_id)
+    ):
+        last_seen[item_id] = max(attempt_id, last_seen.get(item_id, 0))
+    today = set(
+        db.scalars(
+            select(Attempt.item_id).where(
+                Attempt.student_id == student_id,
+                Attempt.concept_id == concept_id,
+                Attempt.created_at >= utcnow() - REPEAT_GAP,
+            )
+        ).all()
+    )
+    fresh = [i for i in items if i.id not in today] or items
     target = difficulty or 1
     if working_on:
         repair = [i for i in fresh if set(traps_of(i)) & working_on and abs(i.difficulty - target) <= 1]
         if repair:
             fresh = repair
-    best = min(abs(i.difficulty - target) for i in fresh)
-    return random.choice([i for i in fresh if abs(i.difficulty - target) == best])
+    # Near the right level first, then the one not seen for longest (never seen comes first).
+    near = [i for i in fresh if abs(i.difficulty - target) <= 1] or fresh
+    oldest = min(last_seen.get(i.id, 0) for i in near)
+    pool = [i for i in near if last_seen.get(i.id, 0) == oldest]
+    best = min(abs(i.difficulty - target) for i in pool)
+    return random.choice([i for i in pool if abs(i.difficulty - target) == best])
 
 
 def get_explanation(db: DbSession, concept_id: int, style: str) -> Explanation | None:
