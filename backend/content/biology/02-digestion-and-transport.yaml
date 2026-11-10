@@ -4,6 +4,12 @@ chapter: 2
 title: Digestion and Transport of Nutrients
 
 tips:
+  big_molecules: "Only small, soluble molecules can pass through the intestine wall into the blood. Is starch a small molecule or a long chain?"
+  enzyme_conditions: "Each enzyme works best in particular conditions. Think about why the stomach makes acid."
+  thin_air: "What is different about the air high in the mountains, and which cells carry that gas?"
+  pulmonary_vessels: "Vessels are named by direction: arteries leave the heart, veins return to it. Then ask where this vessel comes from."
+  ml_to_litre: "Multiply to get millilitres per minute, then divide by 1000 for litres."
+  single_double: "Count how many times blood passes through the heart in one full trip around the body."
   enzyme_food_match: "Enzyme names often hint at their food: amyl- is from the Greek for starch, lip- for fat, and protein enzymes include pepsin and trypsin. Proteins are chains of smaller building blocks: recall their name."
   digestion_order: "Trace a bite of food from where you chew it: the food pipe, then the stomach, then the long, narrow tube, then the wider tube. Saliva already has an enzyme for starch."
   absorption_small_intestine: "Absorption needs a huge surface: look for the part lined with millions of finger-like villi. The last, wider part mainly takes back water."
@@ -94,6 +100,27 @@ concepts:
         solution: "Villi greatly increase the surface area, so nutrients are absorbed quickly."
 
         mistakes: {"To store food": "villi_surface", "To make the food move faster": "villi_surface"}
+      - prompt: "A person has had their gall bladder removed. Digestion of which food is most likely to be affected?"
+        options: ["Fats", "Starch", "Proteins", "Vitamins"]
+        answer: "Fats"
+        difficulty: 3
+        hints: ["The gall bladder stores something made by the liver.", "What does bile act on?"]
+        solution: "Step 1: The gall bladder stores bile and releases it after meals. Step 2: Bile breaks fats into droplets, so fat digestion suffers."
+        mistakes: {"Starch": bile_no_enzyme, "Proteins": bile_no_enzyme, "Vitamins": bile_no_enzyme}
+      - prompt: "Which is the correct order of parts that food passes through?"
+        options: ["Mouth, oesophagus, stomach, small intestine, large intestine", "Mouth, stomach, oesophagus, small intestine, large intestine", "Mouth, oesophagus, stomach, large intestine, small intestine", "Mouth, oesophagus, small intestine, stomach, large intestine"]
+        answer: "Mouth, oesophagus, stomach, small intestine, large intestine"
+        difficulty: 2
+        hints: ["The food pipe comes straight after the mouth.", "Water is absorbed near the end."]
+        solution: "Step 1: Mouth → oesophagus → stomach. Step 2: Then the small intestine (digestion and absorption) and the large intestine (water)."
+        mistakes: {"Mouth, stomach, oesophagus, small intestine, large intestine": digestion_order, "Mouth, oesophagus, stomach, large intestine, small intestine": digestion_order, "Mouth, oesophagus, small intestine, stomach, large intestine": digestion_order}
+      - prompt: "Why must starch be digested before the body can absorb it?"
+        options: ["Its molecules are too large and insoluble to pass into the blood", "It is poisonous until digested", "It is digested only to make it taste sweet", "Blood cannot carry any carbohydrate"]
+        answer: "Its molecules are too large and insoluble to pass into the blood"
+        difficulty: 2
+        hints: ["What is absorbed through the villi?", "Starch is a long chain of glucose units."]
+        solution: "Step 1: Starch molecules are huge and don't dissolve. Step 2: Only after being broken into glucose can they pass into the blood."
+        mistakes: {"It is poisonous until digested": big_molecules, "It is digested only to make it taste sweet": big_molecules, "Blood cannot carry any carbohydrate": big_molecules}
   - code: bio9.digestion.enzymes
     title: Digestive juices and enzymes
     after: [bio9.digestion.organs]
@@ -178,6 +205,27 @@ concepts:
         hints: ["Its juice enters the small intestine."]
         solution: "Pancreatic juice contains all three."
         mistakes: {"Liver": bile_no_enzyme}
+      - prompt: "A piece of plain bread chewed for a long time begins to taste sweet. Why?"
+        options: ["Salivary amylase turns starch into sugar", "Saliva contains sugar", "Teeth release sugar", "Stomach acid has already reached the mouth"]
+        answer: "Salivary amylase turns starch into sugar"
+        difficulty: 2
+        hints: ["Bread is mostly starch.", "Which enzyme is in saliva?"]
+        solution: "Step 1: Saliva has amylase. Step 2: It breaks starch into maltose, which tastes sweet."
+        mistakes: {"Saliva contains sugar": enzyme_food_match, "Teeth release sugar": enzyme_food_match, "Stomach acid has already reached the mouth": hcl_role}
+      - prompt: "Pepsin works in the stomach. How would it work in the small intestine, where the juices are alkaline?"
+        options: ["It would hardly work", "It would work faster", "It would start digesting starch", "It would turn into trypsin"]
+        answer: "It would hardly work"
+        difficulty: 3
+        hints: ["Why does the stomach make hydrochloric acid?", "Enzymes need the right conditions."]
+        solution: "Step 1: Pepsin needs an acidic medium. Step 2: In alkaline conditions it hardly works; trypsin digests proteins there instead."
+        mistakes: {"It would work faster": enzyme_conditions, "It would start digesting starch": enzyme_food_match, "It would turn into trypsin": enzyme_conditions}
+      - prompt: "Fats are finally digested into:"
+        options: ["Fatty acids and glycerol", "Amino acids", "Glucose", "Maltose"]
+        answer: "Fatty acids and glycerol"
+        difficulty: 2
+        hints: ["Which enzyme digests fat?", "Amino acids come from proteins, glucose from carbohydrates."]
+        solution: "Step 1: Lipase acts on fats. Step 2: It breaks them into fatty acids and glycerol."
+        mistakes: {"Amino acids": enzyme_food_match, "Glucose": enzyme_food_match, "Maltose": enzyme_food_match}
 
   - code: bio9.transport.blood
     title: Blood and blood vessels
@@ -268,6 +316,27 @@ concepts:
         hints: ["Blood pressure is low in them."]
         solution: "Veins carry low-pressure blood back to the heart and need valves."
         mistakes: {"Arteries": arteries_veins}
+      - prompt: "A blood sample has about 5,000,000 red cells and 8,000 white cells in each mm³. About how many times as many red cells as white cells is that?"
+        answer: "625"
+        check: "5000000/8000"
+        difficulty: 2
+        hints: ["'How many times as many' means divide.", "5,000,000 ÷ 8,000."]
+        solution: "Step 1: 5,000,000 ÷ 8,000 = 625. Step 2: About 625 red cells for every white cell."
+        mistakes: {"4992000": ratio_subtracted, "0.0016": ratio_subtracted}
+      - prompt: "People who live high in the mountains usually have more red blood cells than people at sea level. Why?"
+        options: ["The air has less oxygen, so more cells are needed to carry enough", "Cold air makes the body make more blood", "There are more germs in the mountains", "Their blood needs to clot faster"]
+        answer: "The air has less oxygen, so more cells are needed to carry enough"
+        difficulty: 3
+        hints: ["What do red cells carry?", "How is mountain air different?"]
+        solution: "Step 1: High up, each breath holds less oxygen. Step 2: More red cells (more haemoglobin) let the blood carry enough oxygen."
+        mistakes: {"Cold air makes the body make more blood": thin_air, "There are more germs in the mountains": blood_cell_jobs, "Their blood needs to clot faster": blood_cell_jobs}
+      - prompt: "Why is the pulmonary vein unusual among veins?"
+        options: ["It carries oxygenated blood", "It carries blood away from the heart", "It has very thick walls", "It carries blood to the lungs"]
+        answer: "It carries oxygenated blood"
+        difficulty: 3
+        hints: ["Where does the pulmonary vein bring blood from?", "Blood leaving the lungs has just picked up oxygen."]
+        solution: "Step 1: It brings blood from the lungs back to the heart, so it is a vein. Step 2: That blood has just been oxygenated, unlike the blood in other veins."
+        mistakes: {"It carries blood away from the heart": pulmonary_vessels, "It has very thick walls": arteries_veins, "It carries blood to the lungs": pulmonary_vessels}
 
   - code: bio9.transport.heart
     title: The heart and circulation
@@ -344,3 +413,24 @@ concepts:
         hints: ["The lungs are close; the toes are far."]
         solution: "The body circuit is much longer than the lung circuit, so the left ventricle needs stronger muscle."
         mistakes: {"It pumps deoxygenated blood": heart_sides}
+      - prompt: "Which is the path of blood from the right atrium to the aorta?"
+        options: ["Right atrium → right ventricle → lungs → left atrium → left ventricle → aorta", "Right atrium → left atrium → left ventricle → aorta", "Right atrium → right ventricle → aorta", "Right atrium → right ventricle → left atrium → lungs → aorta"]
+        answer: "Right atrium → right ventricle → lungs → left atrium → left ventricle → aorta"
+        difficulty: 3
+        hints: ["The right side sends blood to the lungs.", "Blood comes back from the lungs into the left side."]
+        solution: "Step 1: Right atrium → right ventricle → pulmonary artery → lungs. Step 2: Pulmonary vein → left atrium → left ventricle → aorta."
+        mistakes: {"Right atrium → left atrium → left ventricle → aorta": heart_sides, "Right atrium → right ventricle → aorta": double_circulation, "Right atrium → right ventricle → left atrium → lungs → aorta": heart_sides}
+      - prompt: "A heart pumps 70 mL of blood with each beat and beats 72 times a minute. How many litres does it pump in a minute?"
+        answer: "5.04"
+        check: "70*72/1000"
+        difficulty: 3
+        hints: ["70 × 72 gives mL per minute.", "1 litre = 1000 mL."]
+        solution: "Step 1: 70 × 72 = 5040 mL a minute. Step 2: 5040 ÷ 1000 = 5.04 litres."
+        mistakes: {"5040": ml_to_litre, "302400": per_minute_to_hour, "142": ml_to_litre}
+      - prompt: "A fish's heart has two chambers, and its blood passes through the heart once in each trip around the body. What is this called?"
+        options: ["Single circulation", "Double circulation", "Open circulation", "Pulmonary circulation"]
+        answer: "Single circulation"
+        difficulty: 2
+        hints: ["How many times does human blood pass the heart in one trip?", "The fish's blood passes only once."]
+        solution: "Step 1: Humans have double circulation: twice through the heart. Step 2: Fish blood passes once: single circulation."
+        mistakes: {"Double circulation": single_double, "Open circulation": single_double, "Pulmonary circulation": single_double}
