@@ -23,6 +23,10 @@ STYLES = ["text", "visual", "step_by_step", "real_world"]
 
 # Most pseudo-answers each wider level may add to a style's score.
 CAPS = {"subject": 6.0, "overall": 3.0, "peers": 4.0}
+# What format_stats keeps per method: answers right and wrong after it, how many were expected right
+# from what the learner knew just before, and the learner's own "this helped" / "not really" taps.
+FIELDS = ("after_correct", "after_wrong", "expected", "felt_yes", "felt_no")
+
 # Answers after a method before it counts towards someone's pattern.
 CLEAR_PATTERN_MIN = 6
 # A method needs this many answers after it before we describe it to people.
@@ -38,8 +42,9 @@ def add(total: dict, stats: dict | None) -> dict:
     """Add one format_stats dict into a running total (same shape)."""
     for style, st in (stats or {}).items():
         t = total.setdefault(style, {"after_correct": 0, "after_wrong": 0})
-        t["after_correct"] += int(st.get("after_correct", 0))
-        t["after_wrong"] += int(st.get("after_wrong", 0))
+        for key in FIELDS:
+            if key in st:
+                t[key] = t.get(key, 0) + st[key]
     return total
 
 
@@ -47,17 +52,24 @@ def subtract(total: dict | None, stats: dict | None) -> dict:
     out = {k: dict(v) for k, v in (total or {}).items()}
     for style, st in (stats or {}).items():
         if style in out:
-            out[style]["after_correct"] = max(0, out[style].get("after_correct", 0) - int(st.get("after_correct", 0)))
-            out[style]["after_wrong"] = max(0, out[style].get("after_wrong", 0) - int(st.get("after_wrong", 0)))
+            for key in FIELDS:
+                if key in st and key in out[style]:
+                    out[style][key] = max(0, out[style][key] - st[key])
     return out
 
 
-def _capped(good: int, bad: int, cap: float) -> tuple[float, float]:
-    n = good + bad
-    if n <= cap or n == 0:
-        return float(good), float(bad)
-    scale = cap / n
-    return good * scale, bad * scale
+def evidence(stats: dict | None, style: str) -> tuple[float, float, float]:
+    """(right answers, answers, right answers expected) after this method, plus the learner's own
+    "did this help?" taps as answers expected right half the time.
+
+    Comparing with what was expected matters: a first explanation comes when the topic is new and a
+    second one after mistakes, so raw right-after counts mostly say how hard the moment was. Rows
+    from before the expected count was kept are taken at half, which gives the old smoothed rate."""
+    st = (stats or {}).get(style) or {}
+    good, bad = int(st.get("after_correct", 0)), int(st.get("after_wrong", 0))
+    expected = float(st["expected"]) if "expected" in st else 0.5 * (good + bad)
+    yes, no = int(st.get("felt_yes", 0)), int(st.get("felt_no", 0))
+    return good + yes, good + bad + yes + no, expected + 0.5 * (yes + no)
 
 
 @dataclass
@@ -69,25 +81,26 @@ class Prior:
     peers: dict = field(default_factory=dict)
     peers_are_similar: bool = False
 
-    def pseudo(self, style: str) -> tuple[float, float, str | None]:
-        """(good, bad) pseudo-counts for a style, and the level that contributed most."""
-        good = bad = 0.0
+    def pseudo(self, style: str) -> tuple[float, float, float, str | None]:
+        """(right, answers, expected right) pseudo-counts for a style, and the level that contributed most."""
+        hits = n = expected = 0.0
         best_level, best_n = None, 0.0
         for level in ("subject", "overall", "peers"):
-            g, b = _capped(*counts(getattr(self, level), style), CAPS[level])
-            good, bad = good + g, bad + b
-            if g + b > best_n:
-                best_level, best_n = level, g + b
-        return good, bad, best_level
+            h, k, e = evidence(getattr(self, level), style)
+            scale = CAPS[level] / k if k > CAPS[level] else 1.0
+            hits, n, expected = hits + h * scale, n + k * scale, expected + e * scale
+            if k * scale > best_n:
+                best_level, best_n = level, k * scale
+        return hits, n, expected, best_level
 
 
 def score(style: str, topic_stats: dict | None, prior: Prior | None) -> float:
-    """Chance the next answer is right after this method: a smoothed rate, 0.5 with no evidence."""
-    good, bad = counts(topic_stats, style)
+    """How much better than expected the answers after this method went: 0.5 with no evidence."""
+    hits, n, expected = evidence(topic_stats, style)
     if prior:
-        g, b, _ = prior.pseudo(style)
-        good, bad = good + g, bad + b
-    return (good + 1) / (good + bad + 2)
+        h, k, e, _ = prior.pseudo(style)
+        hits, n, expected = hits + h, n + k, expected + e
+    return 0.5 + (hits - expected) / (n + 2)
 
 
 def choose(
@@ -107,9 +120,9 @@ def choose(
     best = max(pool, key=lambda s: (scores[s], -order.index(s) if s in order else -len(order)))
     if all(abs(scores[s] - scores[best]) < 1e-9 for s in pool):
         return best, "default"
-    topic_n = sum(counts(topic_stats, best))
-    g, b, level = prior.pseudo(best) if prior else (0.0, 0.0, None)
-    if level is None or topic_n >= g + b:
+    topic_n = evidence(topic_stats, best)[1]
+    _, k, _, level = prior.pseudo(best) if prior else (0.0, 0.0, 0.0, None)
+    if level is None or topic_n >= k:
         return best, "this_topic"
     if level == "peers":
         return best, "similar" if prior.peers_are_similar else "everyone"

@@ -119,7 +119,9 @@ def test_a_new_chapter_starts_with_what_helped_and_adults_see_it():
     client.post("/learn/attempts", json={"item_id": item["id"], "response": answer, "explanation_style": "text"}, headers=kiran)
     with SessionLocal() as db:
         row = db.scalars(select(Mastery).where(Mastery.student_id == kid, Mastery.concept_id == item["concept_id"])).one()
-        assert row.format_stats == st(visual=(1, 0))
+        assert {k: v for k, v in row.format_stats["visual"].items() if k != "expected"} == st(visual=(1, 0))["visual"]
+        # Also how likely a right answer was from what Kiran knew just before, to judge the method fairly.
+        assert 0 < row.format_stats["visual"]["expected"] < 1
 
     mine = client.get("/me/methods", headers=kiran).json()["subjects"]
     assert mine[0]["clearest"] == "visual" and mine[0]["methods"][0]["style"] == "visual"
@@ -181,3 +183,31 @@ def test_young_children_start_with_the_picture_when_nothing_is_known():
     # Once evidence exists it wins over the starting order.
     stats = {"text": {"after_correct": 5, "after_wrong": 0}}
     assert choose([], stats, None, ties=["visual", "text", "step_by_step", "real_world"])[0] == "text"
+
+
+def test_methods_are_judged_against_what_was_expected():
+    # Same right answers after both, but after text they were expected anyway (the topic was nearly known).
+    stats = {
+        "visual": {"after_correct": 3, "after_wrong": 1, "expected": 1.2},
+        "text": {"after_correct": 3, "after_wrong": 1, "expected": 3.4},
+    }
+    assert methods.score("visual", stats, None) > 0.5 > methods.score("text", stats, None)
+    # Old rows without an expected count keep the old smoothed rate.
+    assert methods.score("visual", {"visual": {"after_correct": 3, "after_wrong": 1}}, None) == (3 + 1) / (4 + 2)
+
+
+def test_learner_saying_it_helped_counts():
+    with SessionLocal() as db:
+        _new_student(db, "Leena", "leena@demo.syniq")
+        db.commit()
+        concept_id = db.scalars(select(Concept)).first().id
+    leena = login("leena@demo.syniq")
+    for _ in range(3):
+        r = client.post("/learn/explanation-feedback", json={"concept_id": concept_id, "style": "real_world", "helped": True}, headers=leena)
+        assert r.status_code == 200
+    client.post("/learn/explanation-feedback", json={"concept_id": concept_id, "style": "text", "helped": False}, headers=leena)
+    assert client.post("/learn/explanation-feedback", json={"concept_id": concept_id, "style": "dance", "helped": True}, headers=leena).status_code == 400
+    with SessionLocal() as db:
+        stats = db.scalars(select(Mastery).where(Mastery.concept_id == concept_id, Mastery.student_id == db.scalars(select(User.id).where(User.email == "leena@demo.syniq")).one())).one().format_stats
+    assert stats["real_world"]["felt_yes"] == 3 and stats["text"]["felt_no"] == 1
+    assert methods.score("real_world", stats, None) > methods.score("text", stats, None)

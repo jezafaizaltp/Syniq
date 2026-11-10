@@ -23,15 +23,15 @@ def test_numeric_correct_is_stronger_evidence_than_mcq():
 
 
 def test_cannot_be_secure_from_too_few_attempts():
-    assert not m.is_secure(0.99, 2)
-    assert m.is_secure(0.99, 3)
+    assert not m.is_secure(0.99, 4)
+    assert m.is_secure(0.99, 5)
 
 
 def test_progress_labels_have_no_numbers():
     assert m.progress_label(0.2, 0) == "not_started"
     assert m.progress_label(0.3, 2) == "learning"
     assert m.progress_label(0.7, 2) == "getting_there"
-    assert m.progress_label(0.97, 4) == "secure"
+    assert m.progress_label(0.99, 5) == "secure"
 
 
 def _chapter(**overrides):
@@ -65,7 +65,7 @@ def test_two_wrong_in_a_row_offers_new_format_and_support():
 
 def test_prereq_gap_routes_to_weak_prerequisite():
     chapter, states = _chapter(
-        a={"p_known": 0.97, "attempts": 5, "styles_seen": ["text"]},
+        a={"p_known": 0.99, "attempts": 5, "styles_seen": ["text"]},
         b={"p_known": 0.3, "attempts": 4, "styles_seen": ["text"]},
     )
     states[1].p_known = 0.5  # prerequisite became weak again
@@ -74,14 +74,14 @@ def test_prereq_gap_routes_to_weak_prerequisite():
 
 
 def test_secure_concept_moves_on_to_next():
-    chapter, states = _chapter(a={"p_known": 0.97, "attempts": 4, "styles_seen": ["text"]})
+    chapter, states = _chapter(a={"p_known": 0.99, "attempts": 5, "styles_seen": ["text"]})
     action = decide(chapter, states, NOW, current_concept_id=1)
     assert action.concept_id == 2
 
 
 def test_spaced_review_when_due():
     chapter, states = _chapter(
-        a={"p_known": 0.97, "attempts": 4, "styles_seen": ["text"], "next_review_at": NOW - timedelta(hours=1)},
+        a={"p_known": 0.99, "attempts": 5, "styles_seen": ["text"], "next_review_at": NOW - timedelta(hours=1)},
         b={"attempts": 1, "styles_seen": ["text"]},
     )
     action = decide(chapter, states, NOW, current_concept_id=2)
@@ -90,7 +90,7 @@ def test_spaced_review_when_due():
 
 def test_chapter_complete():
     chapter, states = _chapter(
-        a={"p_known": 0.97, "attempts": 4}, b={"p_known": 0.97, "attempts": 4}
+        a={"p_known": 0.99, "attempts": 5}, b={"p_known": 0.99, "attempts": 5}
     )
     assert decide(chapter, states, NOW).kind == "chapter_complete"
 

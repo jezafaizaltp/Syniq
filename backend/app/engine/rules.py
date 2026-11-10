@@ -17,7 +17,7 @@ from datetime import datetime
 from . import methods
 from .mastery import is_secure
 
-RULES_VERSION = "2026.11-1"
+RULES_VERSION = "2026.11-2"
 
 STYLES = methods.STYLES
 STRUGGLE_STREAK = 2
@@ -78,6 +78,7 @@ def decide(
     current_concept_id: int | None = None,
     preferred_style: str | None = None,
     style_ties: list[str] | None = None,
+    set_aside: set[int] | None = None,
 ) -> Action:
     """Pick the next action for one chapter.
 
@@ -86,8 +87,13 @@ def decide(
     """
     ordered = sorted(chapter, key=lambda s: s.order)
     current = states_by_id.get(current_concept_id) if current_concept_id else None
-    if current is None or is_secure(current.p_known, current.attempts):
-        current = next((s for s in ordered if not is_secure(s.p_known, s.attempts)), None)
+    set_aside = set_aside or set()
+    if current is None or is_secure(current.p_known, current.attempts) or current.concept_id in set_aside:
+        # Topics whose questions are all used up for today wait, unless nothing else is left.
+        open_ = [s for s in ordered if not is_secure(s.p_known, s.attempts)]
+        current = next((s for s in open_ if s.concept_id not in set_aside), None) or (
+            current if current in open_ else next(iter(open_), None)
+        )
 
     # R1: persistent difficulty plus a weak prerequisite -> revisit the prerequisite.
     if current and current.attempts >= PREREQ_GAP_MIN_ATTEMPTS and current.p_known < PREREQ_GAP_P:

@@ -13,14 +13,17 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 
 P_INIT = 0.2
-P_TRANSIT = 0.15
+# Tuned 2026-11 with simulated learners (tools/learner_sim.py, docs/learner-simulation.md): the old
+# values (0.15, 0.95, 3 answers, first review after 2 days) called many topics secure after three lucky
+# right answers in a row, so the learner moved on while they still knew too little.
+P_TRANSIT = 0.08
 SLIP = 0.1
 GUESS = {"mcq": 0.25, "numeric": 0.05}
-SECURE_THRESHOLD = 0.95
-MIN_ATTEMPTS_TO_SECURE = 3
+SECURE_THRESHOLD = 0.98
+MIN_ATTEMPTS_TO_SECURE = 5
 
-# Spaced review after a concept is secured: 2 days, then 7, then 21, then 60.
-REVIEW_INTERVALS_DAYS = [2, 7, 21, 60]
+# Spaced review after a concept is secured: the next day, then 3, 7, 21 and 60 days.
+REVIEW_INTERVALS_DAYS = [1, 3, 7, 21, 60]
 
 
 @dataclass
@@ -28,6 +31,14 @@ class Evidence:
     correct: bool
     kind: str = "mcq"
     hints_used: int = 0
+
+
+def expected_correct(p: float, ev: Evidence) -> float:
+    """Chance of a right answer from what was known just before it (BKT's own prediction)."""
+    guess = GUESS.get(ev.kind, 0.2)
+    if ev.hints_used:
+        guess = min(0.6, guess + 0.15 * ev.hints_used)
+    return p * (1 - SLIP) + (1 - p) * guess
 
 
 def update_p_known(p: float, ev: Evidence) -> float:
