@@ -33,3 +33,14 @@ def test_every_app_word_has_malayalam_with_the_same_placeholders():
     wrong = [k for k in en if holes(en[k]) != holes(ml[k])]
     untranslated = [k for k in en if en[k] == ml[k] and re.search(r"[a-z]{3} [a-z]{3}", en[k])]
     assert wrong == [] and untranslated == []
+
+
+def test_every_app_word_has_hindi_with_the_same_placeholders():
+    src = I18N.read_text(encoding="utf-8")
+    en, hi = _words(_block(src, "en")), _words(_block(src, "hi"))
+    assert set(en) == set(hi)
+    holes = lambda t: sorted(set(re.findall(r"\{(\w+)\}", t)))  # noqa: E731
+    wrong = [k for k in en if holes(en[k]) != holes(hi[k])]
+    # Every line has some Devanagari, except ones that are only a number and a unit.
+    english = [k for k in en if not re.search(r"[\u0900-\u097F]", hi[k]) and re.search(r"[a-z]{3}", en[k])]
+    assert wrong == [] and english == []

@@ -11,9 +11,18 @@ type Overview = { areas: { area: string; activities: Card[] }[]; suggested: Card
 type Activity = Card & { intro: string; steps: string[]; reflect: string; note: string };
 
 const FEELINGS = ["loved", "okay", "not_for_me"] as const;
-const AREA_ICON: Record<string, string> = { creative: "🎨", practical: "🛠️", scientific: "🔬", social: "🤝", enterprise: "💡" };
+const AREA_ICON: Record<string, string> = {
+  creative: "🎨",
+  practical: "🛠️",
+  scientific: "🔬",
+  social: "🤝",
+  enterprise: "💡",
+  movement: "🏃",
+  nature: "🌿",
+  technology: "🤖",
+};
 
-/** Short activities across five areas. What a student enjoyed is shown back to them, never turned into a label. */
+/** Short activities across eight areas. What a student enjoyed is shown back to them, never turned into a label. */
 export default function Explore() {
   const { me, loading, t } = useSession();
   const router = useRouter();
@@ -30,6 +39,13 @@ export default function Explore() {
   }
   useEffect(() => {
     if (canLearn) load();
+  }, [canLearn]);
+
+  // "Try next" links from My space open one activity straight away: /explore?open=<id>.
+  useEffect(() => {
+    if (!canLearn) return;
+    const id = new URLSearchParams(window.location.search).get("open");
+    if (id) api<Activity>(`/explore/${encodeURIComponent(id)}`).then(setOpen).catch(() => undefined);
   }, [canLearn]);
 
   if (!me || me.role !== "student") return null;
@@ -140,6 +156,7 @@ function ActivityView({ activity, onDone }: { activity: Activity; onDone: () => 
             </li>
           ))}
         </ol>
+        <p className="muted any-way">{t("explore.any_way")}</p>
         <button className="secondary" onClick={() => speak(all)}>
           {t("learn.read_aloud")}
         </button>

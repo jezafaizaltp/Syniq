@@ -705,3 +705,49 @@ def review_fix_done(item_id: int, db: DbSession = Depends(get_db), user: User = 
     item.fix_note = ""
     audit(db, user, f"review_fix_done:{item_id}")
     return {"ok": True}
+
+
+# --- Sign-language videos ---------------------------------------------------------------
+
+class SignVideo(BaseModel):
+    word: str = Field(min_length=1, max_length=40)
+    url: str = Field(min_length=12, max_length=300)
+
+
+class SignVideosIn(BaseModel):
+    videos: list[SignVideo] = Field(max_length=10)
+
+
+@router.get("/signs/{subject_id}")
+def sign_topics(subject_id: int, db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    """Every topic in a subject, with the sign-language videos the school has added to it.
+
+    Deaf students who use "pictures and text first" see these links beside the lesson. The
+    school records its own videos or links to a published Indian Sign Language dictionary."""
+    if not db.get(Subject, subject_id):
+        raise HTTPException(404, "No such subject")
+    chapters = db.scalars(select(Chapter).where(Chapter.subject_id == subject_id).order_by(Chapter.number)).all()
+    out = []
+    for ch in chapters:
+        concepts = db.scalars(select(Concept).where(Concept.chapter_id == ch.id).order_by(Concept.id)).all()
+        out.append(
+            {
+                "chapter": f"{ch.number}. {ch.title}",
+                "topics": [{"id": c.id, "title": c.title, "videos": c.sign_videos or []} for c in concepts],
+            }
+        )
+    return out
+
+
+@router.put("/signs/{concept_id}")
+def set_sign_videos(concept_id: int, body: SignVideosIn, db: DbSession = Depends(get_db), user: User = Depends(staff)):
+    concept = db.get(Concept, concept_id)
+    if not concept:
+        raise HTTPException(404, "No such topic")
+    for v in body.videos:
+        # Only web links that open safely in a new tab: never javascript: or data: links.
+        if not re.match(r"^https://[\w.-]+\.[a-z]{2,}(/\S*)?$", v.url.strip(), re.I):
+            raise HTTPException(400, f"The link for \"{v.word}\" must start with https://")
+    concept.sign_videos = [{"word": v.word.strip(), "url": v.url.strip()} for v in body.videos] or None
+    audit(db, user, f"sign videos set: {concept.title}")
+    return {"videos": concept.sign_videos or []}

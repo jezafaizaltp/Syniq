@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useSession } from "@/lib/session";
 import Methods, { type MethodSubject } from "../space/Methods";
 import Mistakes, { type MistakePattern } from "../space/Mistakes";
+import Strengths, { type StrengthsView } from "../space/Strengths";
 
 type Child = {
   id: number;
@@ -33,6 +34,7 @@ export default function Parent() {
   const [methods, setMethods] = useState<Record<number, MethodSubject[]>>({});
   const [mistakes, setMistakes] = useState<Record<number, MistakePattern[]>>({});
   const [thinkingViews, setThinkingViews] = useState<Record<number, Thinking>>({});
+  const [strengths, setStrengths] = useState<Record<number, StrengthsView>>({});
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
   const [weeks, setWeeks] = useState<Record<number, Week>>({});
 
@@ -58,6 +60,10 @@ export default function Parent() {
       kids.map(async (k) => [k.id, await api<Thinking>(`/guardian/children/${k.id}/thinking`).catch(() => ({ on: false, puzzles: 0, kinds: [] }))] as const)
     );
     setThinkingViews(Object.fromEntries(growth));
+    const shines = await Promise.all(
+      kids.map(async (k) => [k.id, await api<StrengthsView>(`/guardian/children/${k.id}/strengths`).catch(() => null)] as const)
+    );
+    setStrengths(Object.fromEntries(shines.filter(([, v]) => v)) as Record<number, StrengthsView>);
     const lastWeek = await Promise.all(
       kids.map(async (k) => [k.id, await api<Week>(`/guardian/children/${k.id}/week`).catch(() => null)] as const)
     );
@@ -142,6 +148,13 @@ export default function Parent() {
                 </ul>
               )}
               <p className="muted">{t("parent.tip", { name: c.name })}</p>
+            </>
+          )}
+          {strengths[c.id] && (
+            <>
+              <h3>{t("strengths.parent_title", { name: c.name })}</h3>
+              <p className="muted">{t("strengths.parent_note", { name: c.name })}</p>
+              <Strengths view={strengths[c.id]} t={t} name={c.name} />
             </>
           )}
           {methods[c.id] && methods[c.id].length > 0 && (

@@ -14,7 +14,7 @@ export default function Days() {
     api<DaysOut>("/me/days").then(setData).catch(() => undefined);
   }, []);
   if (!data) return null;
-  const fmt = (d: string) => new Date(`${d}T00:00:00`).toLocaleDateString(lang === "ml" ? "ml-IN" : "en-IN", { weekday: "short", day: "numeric", month: "short" });
+  const fmt = (d: string) => new Date(`${d}T00:00:00`).toLocaleDateString(`${lang}-IN`, { weekday: "short", day: "numeric", month: "short" });
   return (
     <section className="card" aria-labelledby="days">
       <h2 id="days">{t("space.days_title")}</h2>

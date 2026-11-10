@@ -221,3 +221,12 @@ def delete_note(note_id: int, user: User = Depends(student_only), db: DbSession 
     db.delete(_own_note(db, user, note_id))
     db.commit()
     return Response(status_code=204)
+
+
+@router.get("/strengths")
+def my_strengths(user: User = Depends(require_learning_consent), db: DbSession = Depends(get_db)):
+    """What comes easily to you and what you love doing, with ways to grow it. Never a score."""
+    from .. import strengths
+    from ..auth import has_consent
+
+    return strengths.strengths(db, user, puzzles_allowed=has_consent(db, user.id, "thinking_puzzles"))

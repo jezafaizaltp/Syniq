@@ -207,8 +207,10 @@ How to help:
 
 
 LANGUAGE_LINE = {
-    "en": "Reply in Indian English, or in Malayalam if the student writes in Malayalam.",
+    "en": "Reply in Indian English, or in Malayalam or Hindi if the student writes in that language.",
     "ml": "Reply in simple Malayalam, in Malayalam script, even if the student writes in English or Manglish. "
+    "Keep numbers, maths symbols and textbook terms the student would recognise.",
+    "hi": "Reply in simple everyday Hindi, in Devanagari script, even if the student writes in English or Hinglish. "
     "Keep numbers, maths symbols and textbook terms the student would recognise.",
 }
 

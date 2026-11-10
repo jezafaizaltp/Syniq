@@ -148,8 +148,15 @@ export function useSession() {
   return v;
 }
 
-/** Read text aloud with the browser's speech engine, in Malayalam when the text is in Malayalam. */
-export function speak(text: string, lang = /[\u0D00-\u0D7F]/.test(text) ? "ml-IN" : "en-IN") {
+/** The speech voice for this text: Malayalam or Hindi when it is written in that script. */
+export function voiceFor(text: string): string {
+  if (/[\u0D00-\u0D7F]/.test(text)) return "ml-IN";
+  if (/[\u0900-\u097F]/.test(text)) return "hi-IN";
+  return "en-IN";
+}
+
+/** Read text aloud with the browser's speech engine, in the language the text is written in. */
+export function speak(text: string, lang = voiceFor(text)) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);

@@ -1,8 +1,9 @@
-"""Words the API shows to students and parents, in English and Malayalam.
+"""Words the API shows to students and parents, in English, Malayalam and Hindi.
 
-The web app sends the reader's language in the Accept-Language header ("en"
-or "ml"). Logs, decisions and audits always keep the English wording, so a
-teacher or auditor reads the same record whatever language the student uses.
+The web app sends the reader's language in the Accept-Language header ("en",
+"ml" or "hi"); the Hindi lives in app/i18n_hi.py. Logs, decisions and audits
+always keep the English wording, so a teacher or auditor reads the same record
+whatever language the student uses.
 
 The Malayalam here was written for Class 9 students and their parents, in
 plain everyday words. A Malayalam teacher should check it before the pilot.
@@ -10,7 +11,7 @@ plain everyday words. A Malayalam teacher should check it before the pilot.
 
 from fastapi import Header
 
-LANGS = ("en", "ml")
+LANGS = ("en", "ml", "hi")
 
 MESSAGES: dict[str, dict[str, str]] = {
     # --- Sign-in and passwords
@@ -416,6 +417,12 @@ MESSAGES: dict[str, dict[str, str]] = {
 }
 
 
+from app.i18n_hi import HINDI  # noqa: E402
+
+for _key, _text in HINDI.items():
+    MESSAGES[_key]["hi"] = _text
+
+
 def t(lang: str, key: str, **values) -> str:
     """The message in this language, falling back to English."""
     entry = MESSAGES[key]
@@ -427,9 +434,12 @@ def has(key: str) -> bool:
 
 
 def language(accept_language: str | None = Header(default=None)) -> str:
-    """FastAPI dependency: "ml" if the reader asked for Malayalam, otherwise "en"."""
+    """FastAPI dependency: "ml" or "hi" if the reader asked for Malayalam or Hindi, otherwise "en"."""
     first = (accept_language or "").split(",")[0].strip().lower()
-    return "ml" if first.startswith("ml") else "en"
+    for lang in ("ml", "hi"):
+        if first.startswith(lang):
+            return lang
+    return "en"
 
 
 _ENGLISH_TO_KEY = {v["en"]: k for k, v in MESSAGES.items()}
