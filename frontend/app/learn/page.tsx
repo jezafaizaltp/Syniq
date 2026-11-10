@@ -109,7 +109,7 @@ const KIND_HEADINGS: Record<string, Key> = {
 };
 
 export default function Learn() {
-  const { me, loading, t } = useSession();
+  const { me, loading, t, saveSettings } = useSession();
   const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [subject, setSubject] = useState<Subject | null>(null);
@@ -227,6 +227,17 @@ export default function Learn() {
       </div>
       {!subject ? (
         <>
+          {me.role === "student" && !me.settings?.welcome_seen && (
+            <div className="card welcome-card">
+              <h2>{t("welcome.title")}</h2>
+              <ul>
+                <li>{t("welcome.no_marks")}</li>
+                <li>{t("welcome.mistakes")}</li>
+                <li>{t("welcome.pace")}</li>
+              </ul>
+              <button onClick={() => saveSettings({ welcome_seen: true }).catch(() => undefined)}>{t("welcome.ok")}</button>
+            </div>
+          )}
           {(due || carryOn) && (
             <div className="card next-step-card">
               <h2>{t("next.title")}</h2>

@@ -1947,3 +1947,115 @@ label input[type="checkbox"] {
 .ready-must > span[aria-hidden] {
   color: var(--warn);
 }
+
+/* Teacher: lab-period status of each student. */
+.pill.good {
+  background: var(--good-bg, #e5f4e4);
+}
+.pill.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+/* Student: first-day welcome, idle warning on shared computers, and "before you go". */
+.welcome-card ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+.welcome-card li {
+  margin: 6px 0;
+}
+.idle-warning {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  transform: translateX(-50%);
+  z-index: 60;
+  width: min(440px, calc(100% - 32px));
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.modal {
+  width: min(480px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+/* Admin: a quiet text-style button for rare, serious actions. */
+.link-button {
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  min-height: 0;
+  color: var(--muted);
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 0.85rem;
+  box-shadow: none;
+}
+.withdraw-confirm {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+/* Admin: login slips to cut out, one per person. */
+.slips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0;
+}
+.slip {
+  border: 1.5px dashed var(--line);
+  padding: 12px 14px;
+  break-inside: avoid;
+}
+.slip p {
+  margin: 4px 0;
+}
+.slip-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+@media print {
+  .slips {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .slip {
+    border-color: #888;
+  }
+}
+
+/* Admin: one letter and consent form per student, each on its own page. */
+.letter {
+  break-after: page;
+  max-width: 720px;
+  margin: 0 auto 32px;
+}
+.letter .boxes li {
+  list-style: none;
+  margin: 10px 0;
+}
+.letter .box {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid currentColor;
+  margin-right: 8px;
+  vertical-align: -2px;
+}
+.letter .sign-line {
+  margin-top: 28px;
+}

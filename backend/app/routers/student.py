@@ -31,6 +31,7 @@ ALLOWED_SETTINGS = {
     "support_modes": list,  # chosen: screen_reader, visual_first, tap_to_answer, calm, motor
     "auto_off": list,  # noticed modes the student has switched off
     "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
+    "welcome_seen": bool,  # the first-day welcome card has been read
 }
 
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ApiError, PROGRESS_WORDS, STYLE_WORDS, METHOD_WORDS, api, post, put } from "@/lib/api";
 import { useSession } from "@/lib/session";
 import ContentTools from "./ContentTools";
+import LabToday from "./LabToday";
 
 type Overview = {
   students: number;
@@ -170,6 +171,7 @@ export default function Teacher() {
   const { me, loading } = useSession();
   const router = useRouter();
   const [classId, setClassId] = useState<number | null>(null);
+  const [classes, setClasses] = useState<{ id: number; name: string }[]>([]);
   const [overview, setOverview] = useState<Overview | null>(null);
   const [support, setSupport] = useState<Support>([]);
   const [methods, setMethods] = useState<MethodGroups>([]);
@@ -181,10 +183,11 @@ export default function Teacher() {
     if (!loading && (!me || (me.role !== "teacher" && me.role !== "admin"))) router.replace("/");
   }, [me, loading, router]);
 
-  const load = useCallback(async () => {
-    const classes = await api<{ id: number; name: string }[]>("/teacher/classes");
-    if (!classes.length) return;
-    const id = classes[0].id;
+  const load = useCallback(async (chosen?: number) => {
+    const list = await api<{ id: number; name: string }[]>("/teacher/classes");
+    setClasses(list);
+    if (!list.length) return;
+    const id = list.some((c) => c.id === chosen) ? chosen! : list[0].id;
     const [o, s, q, m, mk] = await Promise.all([
       api<Overview>(`/teacher/classes/${id}/overview`),
       api<Support>(`/teacher/classes/${id}/support`),
@@ -218,7 +221,19 @@ export default function Teacher() {
 
   return (
     <div className="wrap wide">
-      <h1>Your class</h1>
+      <h1>{classes.length === 1 ? `Your class: ${classes[0].name}` : "Your classes"}</h1>
+      {classes.length > 1 && (
+        <p>
+          <label htmlFor="class-pick">Class</label>
+          <select id="class-pick" value={classId} onChange={(e) => load(Number(e.target.value))}>
+            {classes.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </p>
+      )}
       <p className="muted">
         {overview?.students ?? 0} students whose families share progress with the school. Students are never ranked.
       </p>
@@ -227,6 +242,8 @@ export default function Teacher() {
         <br />
         <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
       </p>
+
+      <LabToday key={classId} classId={classId} />
 
       <section className="card">
         <h2>Where the class is, by topic</h2>

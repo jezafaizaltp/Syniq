@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import BeforeYouGo, { loadToday, type Today } from "./BeforeYouGo";
+import IdleSignOut from "./IdleSignOut";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { Key } from "@/lib/i18n";
@@ -59,6 +61,12 @@ export default function Nav() {
     lang !== "en" ||
     (me.role === "student" && me.class?.board === "kerala_scert") ||
     (me.role === "guardian" && !me.family);
+  const [today, setToday] = useState<Today | null>(null);
+  const leave = () => {
+    setToday(null);
+    signOut();
+    router.push("/");
+  };
   let tabs = me ? TABS[me.role] ?? [] : [];
   if (me?.role === "guardian" && me.family) tabs = [{ href: "/family", label: "nav.family", icon: "🏡" }, ...tabs];
 
@@ -68,6 +76,7 @@ export default function Nav() {
   }, [tabs.length]);
 
   return (
+    <>
     <header className="nav">
       <Link href="/" className="brand" aria-label="SYNiq">
         <BrandMark />
@@ -101,9 +110,11 @@ export default function Nav() {
         {me && (
           <button
             className="secondary"
-            onClick={() => {
-              signOut();
-              router.push("/");
+            onClick={async () => {
+              // A student hears what they did today first, unless they did nothing yet.
+              const day = me.role === "student" ? await loadToday() : null;
+              if (day && day.answered > 0) setToday(day);
+              else leave();
             }}
           >
             {t("nav.sign_out")}
@@ -111,5 +122,8 @@ export default function Nav() {
         )}
       </div>
     </header>
+      {today && <BeforeYouGo today={today} onSignOut={leave} onStay={() => setToday(null)} />}
+      <IdleSignOut />
+    </>
   );
 }

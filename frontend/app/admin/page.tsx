@@ -57,6 +57,8 @@ export default function Admin() {
   const [accounts, setAccounts] = useState<Account[] | null>(null);
   const [error, setError] = useState("");
   const [newPasswords, setNewPasswords] = useState<Record<number, string>>({});
+  const [slips, setSlips] = useState(false);
+  const [withdrawing, setWithdrawing] = useState<number | null>(null);
   const [teacher, setTeacher] = useState({ name: "", email: "", classes: "" });
   const [teacherResult, setTeacherResult] = useState("");
   const [syllabus, setSyllabus] = useState("");
@@ -132,6 +134,12 @@ export default function Admin() {
     load();
   }
 
+  async function withdraw(student: Student) {
+    await post(`/admin/students/${student.id}/withdraw`, {});
+    setWithdrawing(null);
+    load();
+  }
+
   async function setConsent(student: Student, scope: string, granted: boolean) {
     await post(`/admin/students/${student.id}/consent`, { scope, granted });
     load();
@@ -171,7 +179,10 @@ export default function Admin() {
             chooses their own password the first time they sign in.
           </p>
           <div className="row">
-            <button onClick={() => window.print()}>Print login sheet</button>
+            <button onClick={() => window.print()}>{slips ? "Print slips" : "Print login sheet"}</button>
+            <button className="secondary" onClick={() => setSlips(!slips)}>
+              {slips ? "Show as one sheet" : "Show as cut-out slips"}
+            </button>
             <button
               className="secondary"
               onClick={() => {
@@ -183,6 +194,44 @@ export default function Admin() {
             </button>
           </div>
         </div>
+        {slips ? (
+          <section className="slips" aria-label="Login slips to cut out">
+            {accounts.map((a) => (
+              <div key={a.student_login} className="slip">
+                <p className="slip-who">
+                  <strong>{a.student}</strong> · {a.class} · student
+                </p>
+                <p>
+                  Go to <strong>{site}</strong>
+                </p>
+                <p>
+                  Login <code>{a.student_login}</code>
+                  <br />
+                  Password <code>{a.student_password}</code>
+                </p>
+                <p className="slip-note">You will choose your own password the first time.</p>
+              </div>
+            ))}
+            {accounts
+              .filter((a) => !a.guardian_password.startsWith("("))
+              .map((a) => (
+                <div key={`g-${a.guardian_login}`} className="slip">
+                  <p className="slip-who">
+                    <strong>{a.guardian}</strong> · parent of {a.student}
+                  </p>
+                  <p>
+                    Go to <strong>{site}</strong>
+                  </p>
+                  <p>
+                    Login <code>{a.guardian_login}</code>
+                    <br />
+                    Password <code>{a.guardian_password}</code>
+                  </p>
+                  <p className="slip-note">You will choose your own password the first time.</p>
+                </div>
+              ))}
+          </section>
+        ) : (
         <section className="print-sheet">
           <h2>SYNiq logins</h2>
           <p>
@@ -229,6 +278,7 @@ export default function Admin() {
           </div>
           <p className="muted">Sign in at {site}. You will be asked to choose your own password.</p>
         </section>
+        )}
       </div>
     );
   }
@@ -247,6 +297,9 @@ export default function Admin() {
       </p>
       <p>
         <Link href="/admin/questions">Questions students asked Ask SYNiq →</Link>
+      </p>
+      <p>
+        <Link href="/admin/letters">Parent letters and consent forms: print one per student →</Link>
       </p>
 
       {people && <Readiness people={people} />}
@@ -392,6 +445,21 @@ export default function Admin() {
                       ) : (
                         <button className="secondary" onClick={() => reset(s)}>
                           New password
+                        </button>
+                      )}
+                      <br />
+                      {withdrawing === s.id ? (
+                        <span className="feedback warn withdraw-confirm" role="alert">
+                          Withdraw {s.name}? Their login stops working and everything SYNiq learned about them is deleted. The
+                          consent record and audit log are kept. This can&apos;t be undone.{" "}
+                          <button onClick={() => withdraw(s)}>Yes, withdraw</button>{" "}
+                          <button className="secondary" onClick={() => setWithdrawing(null)}>
+                            Cancel
+                          </button>
+                        </span>
+                      ) : (
+                        <button className="link-button" onClick={() => setWithdrawing(s.id)}>
+                          Withdraw from SYNiq
                         </button>
                       )}
                     </td>
