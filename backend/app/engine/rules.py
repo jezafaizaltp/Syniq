@@ -17,13 +17,18 @@ from datetime import datetime
 from . import methods
 from .mastery import is_secure
 
-RULES_VERSION = "2026.11-3"
+RULES_VERSION = "2026.11-4"
 
 STYLES = methods.STYLES
 STRUGGLE_STREAK = 2
 PREREQ_GAP_MIN_ATTEMPTS = 3
 PREREQ_GAP_P = 0.4
 PREREQ_WEAK_P = 0.6
+# Right answers in a row before the next question steps up a level (2 for learners who asked for more challenges).
+STEP_UP_STREAK = 3
+STEP_UP_STREAK_CHALLENGE = 2
+# Wrong answers in a row before the next question steps down a level, with the explanation already offered (R2).
+STEP_DOWN_STREAK = 2
 
 
 @dataclass
@@ -33,6 +38,8 @@ class ConceptState:
     p_known: float = 0.2
     attempts: int = 0
     wrong_streak: int = 0  # wrong answers in a row since the last explanation
+    right_streak: int = 0  # right answers in a row on this topic
+    wrong_in_row: int = 0  # wrong answers in a row on this topic, explanations or not
     next_review_at: datetime | None = None
     prereq_ids: list[int] = field(default_factory=list)
     styles_seen: list[str] = field(default_factory=list)
@@ -64,6 +71,19 @@ def target_difficulty(p: float) -> int:
     return 3
 
 
+def practice_difficulty(state: ConceptState, challenge: bool = False) -> tuple[int, str | None]:
+    """The level for the next practice question, and why it moved from the usual one (if it did).
+
+    Answers, never speed, move it: a run of right answers steps up a level, two wrong in a row steps down."""
+    base = target_difficulty(state.p_known)
+    if state.wrong_in_row >= STEP_DOWN_STREAK and base > 1:
+        return base - 1, "step_down"
+    streak = STEP_UP_STREAK_CHALLENGE if challenge else STEP_UP_STREAK
+    if state.right_streak >= streak and base < 3:
+        return base + 1, "step_up"
+    return base, None
+
+
 def pick_style(state: ConceptState, preferred: str | None, ties: list[str] | None = None) -> str:
     """Choose a way to explain. The student's own preference wins; see engine/methods.py."""
     return choose_style(state, preferred, ties)[0]
@@ -81,6 +101,7 @@ def decide(
     preferred_style: str | None = None,
     style_ties: list[str] | None = None,
     set_aside: set[int] | None = None,
+    challenge: bool = False,
 ) -> Action:
     """Pick the next action for one chapter.
 
@@ -183,12 +204,17 @@ def decide(
             evidence={"method_why": why},
         )
 
-    # R6: default -> practise at a difficulty matched to current understanding.
+    # R6: default -> practise at a difficulty matched to current understanding, stepping up after a run
+    # of right answers and down after wrong ones.
+    level, moved = practice_difficulty(current, challenge)
+    evidence = {"p_known": round(current.p_known, 3), "attempts": current.attempts}
+    if moved:
+        evidence["level"] = moved
     return Action(
         kind="practice",
         concept_id=current.concept_id,
         rule_id="R6_practice",
         reason="Practice at a level that matches where you are now.",
-        difficulty=target_difficulty(current.p_known),
-        evidence={"p_known": round(current.p_known, 3), "attempts": current.attempts},
+        difficulty=level,
+        evidence=evidence,
     )

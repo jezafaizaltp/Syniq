@@ -697,6 +697,11 @@ const en = {
   "grow.area.nature": "Look after a plant or a pet, and keep a record of birds or insects you notice.",
   "grow.area.technology": "Try block coding, build models from waste material, or join a robotics or science club.",
   "grow.hands_on": "Build, model and try things out: a box of odds and ends to make with is worth a lot.",
+  "learn.next_chapter": "Next: Chapter {number}, {title}",
+  "learn.challenge": "Challenge question",
+  "learn.challenge_wrong": "This was one of the harder questions, so getting stuck here is normal. It will come back later for another try.",
+  "settings.more_challenges": "More challenges",
+  "settings.more_challenges_help": "Harder questions come sooner when you get a few right in a row.",
 } as const;
 
 export type Key = keyof typeof en;
@@ -1368,7 +1373,12 @@ const ml: Record<Key, string> = {
   "grow.area.movement": "നിങ്ങളുടെ ശരീരത്തിന് ചേരുന്ന ഒരു കളിയോ നൃത്തമോ യോഗയോ കണ്ടെത്തൂ; പാരാ-സ്പോർട്സും അനുയോജ്യമാക്കിയ കളികളും ഉൾപ്പെടെ.",
   "grow.area.nature": "ഒരു ചെടിയെയോ വളർത്തുമൃഗത്തെയോ പരിപാലിക്കൂ; കാണുന്ന പക്ഷികളെയും പ്രാണികളെയും കുറിച്ച് രേഖ സൂക്ഷിക്കൂ.",
   "grow.area.technology": "ബ്ലോക്ക് കോഡിങ് ശ്രമിക്കൂ, പാഴ്‌വസ്തുക്കളിൽ നിന്ന് മാതൃകകൾ ഉണ്ടാക്കൂ, അല്ലെങ്കിൽ റോബോട്ടിക്സ്/സയൻസ് ക്ലബ്ബിൽ ചേരൂ.",
-  "grow.hands_on": "നിർമ്മിച്ചും മാതൃകകളുണ്ടാക്കിയും പരീക്ഷിച്ചും പഠിക്കൂ: ഉണ്ടാക്കാൻ പലതരം സാധനങ്ങളുള്ള ഒരു പെട്ടി വളരെ വിലപ്പെട്ടതാണ്.",
+  "grow.hands_on": "നിർമ്മിച്ചും മാതൃകകളുണ്ടാക്കിയും പരീക്ഷിച്ചും പഠിക്കൂ: ഉണ്ടാക്കാൻ പലതരം സാധനങ്ങളുള്ള ഒരു പെട്ടി വളരെ വിലപ്പെട്ടതാണ്.",  "learn.next_chapter": "അടുത്തത്: അധ്യായം {number}, {title}",
+  "learn.challenge": "വെല്ലുവിളി ചോദ്യം",
+  "learn.challenge_wrong": "ഇത് കുറച്ച് കടുപ്പമുള്ള ചോദ്യമായിരുന്നു; ഇവിടെ കുടുങ്ങുന്നത് സ്വാഭാവികമാണ്. പിന്നീട് വീണ്ടും ശ്രമിക്കാൻ ഇത് തിരികെ വരും.",
+  "settings.more_challenges": "കൂടുതൽ വെല്ലുവിളികൾ",
+  "settings.more_challenges_help": "തുടർച്ചയായി കുറച്ചെണ്ണം ശരിയാക്കുമ്പോൾ കടുപ്പമുള്ള ചോദ്യങ്ങൾ നേരത്തേ വരും.",
+
 };
 
 const hi: Record<Key, string> = {
@@ -2022,7 +2032,12 @@ const hi: Record<Key, string> = {
   "grow.area.movement": "अपने शरीर के हिसाब से कोई खेल, नृत्य या योग समूह ढूँढो, पैरा-खेल और बदले हुए खेलों समेत।",
   "grow.area.nature": "किसी पौधे या पालतू जानवर की देखभाल करो, और जो पक्षी या कीड़े दिखें उनका रिकॉर्ड रखो।",
   "grow.area.technology": "ब्लॉक कोडिंग आज़माओ, कबाड़ से मॉडल बनाओ, या रोबोटिक्स या विज्ञान क्लब से जुड़ो।",
-  "grow.hands_on": "बनाओ, मॉडल बनाओ, आज़माओ: बनाने के लिए छोटी-मोटी चीज़ों का एक डिब्बा बहुत काम का है।",
+  "grow.hands_on": "बनाओ, मॉडल बनाओ, आज़माओ: बनाने के लिए छोटी-मोटी चीज़ों का एक डिब्बा बहुत काम का है।",  "learn.next_chapter": "अगला: अध्याय {number}, {title}",
+  "learn.challenge": "चुनौती वाला प्रश्न",
+  "learn.challenge_wrong": "यह थोड़ा कठिन प्रश्न था, यहाँ अटकना आम बात है। यह बाद में फिर से कोशिश के लिए आएगा।",
+  "settings.more_challenges": "ज़्यादा चुनौतियाँ",
+  "settings.more_challenges_help": "लगातार कुछ सही करने पर कठिन प्रश्न जल्दी आएँगे।",
+
 };
 
 const STRINGS: Record<Lang, Record<Key, string>> = { en, ml, hi };

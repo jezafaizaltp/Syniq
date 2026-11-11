@@ -83,6 +83,8 @@ type Item = {
   keyboard?: "text" | "decimal";
   /** The question has a trap this student has fallen into before. */
   watch_out?: boolean;
+  /** 1 easy to 3 harder. Harder ones carry a "challenge" tag so a slip there feels normal. */
+  difficulty?: number;
 };
 type NextStep =
   | { kind: "secure_in"; n: number; topic: string }
@@ -112,6 +114,7 @@ type Step = {
   item?: Item | null;
   method_why?: "history" | "similar" | "everyone";
   activity?: ActivitySpec | null;
+  next_chapter?: { id: number; number: number; title: string } | null;
 };
 type Result = {
   correct: boolean;
@@ -237,6 +240,7 @@ export default function Learn() {
             setChapter(null);
             setPrefs(null);
           }}
+          onChapter={async (id) => setChapter(await api<ChapterDetail>(`/chapters/${id}`))}
         />
       </>
     );
@@ -435,7 +439,17 @@ function CheckIn({ onDone }: { onDone: (prefs: Prefs) => void }) {
   );
 }
 
-function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Prefs; onExit: () => void }) {
+function Session({
+  chapter,
+  prefs,
+  onExit,
+  onChapter,
+}: {
+  chapter: ChapterDetail;
+  prefs: Prefs;
+  onExit: () => void;
+  onChapter: (id: number) => void;
+}) {
   const { me, t } = useSession();
   const gentleLeft = useRef(prefs.gentle ? GENTLE_STEPS : 0);
   const sessionStart = useRef(Date.now());
@@ -903,7 +917,16 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                 {t("learn.chapter_complete")}
               </h2>
               <p>{t("learn.chapter_complete_body")}</p>
-              <button onClick={onExit}>{t("learn.another_chapter")}</button>
+              <div className="row">
+                {step.next_chapter && (
+                  <button onClick={() => onChapter(step.next_chapter!.id)}>
+                    {t("learn.next_chapter", { number: step.next_chapter.number, title: step.next_chapter.title })}
+                  </button>
+                )}
+                <button className={step.next_chapter ? "secondary" : undefined} onClick={onExit}>
+                  {t("learn.another_chapter")}
+                </button>
+              </div>
             </>
           )}
 
@@ -982,6 +1005,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
               <h2 ref={headingRef} tabIndex={-1}>
                 {KIND_HEADINGS[step.kind] ? t(KIND_HEADINGS[step.kind]) : null}
               </h2>
+              {(step.item.difficulty ?? 1) >= 3 && <p className="challenge-tag">{t("learn.challenge")}</p>}
               {step.item.watch_out && !result && <p className="feedback warn watch-out">{t("learn.watch_out")}</p>}
               <ReadAlong style={{ fontSize: "1.2rem" }} text={step.item.prompt} />
               <button
@@ -1067,6 +1091,7 @@ function Session({ chapter, prefs, onExit }: { chapter: ChapterDetail; prefs: Pr
                   ) : (
                     <Feedback key={step.decision_id} r={result.response} readAloud={readAloud && !listen} tutorOn={tutorOn} />
                   )}
+                  {!result.correct && (step.item.difficulty ?? 1) >= 3 && <p className="muted">{t("learn.challenge_wrong")}</p>}
                   {result.next_step && <NextStepLine step={result.next_step} />}
                   {result.offer_break && (
                     <div className="feedback note break-offer">

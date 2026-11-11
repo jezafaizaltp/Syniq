@@ -136,6 +136,8 @@ def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[Co
             p_known=row.p_known,
             attempts=row.attempts,
             wrong_streak=_wrong_since_explanation(db, student.id, cid),
+            right_streak=row.correct_streak or 0,
+            wrong_in_row=row.wrong_streak or 0,
             next_review_at=row.next_review_at,
             prereq_ids=prereqs.get(cid, []),
             styles_seen=_styles_seen(db, student.id, cid),
@@ -254,7 +256,8 @@ def next_action(
     # A topic whose questions have all been answered in this sitting is set aside for now:
     # moving to another topic beats asking the same questions again.
     used_up = used_up_topics(db, student.id, [s.concept_id for s in chapter if not m.is_secure(s.p_known, s.attempts)])
-    action = decide(chapter, states, now, current_concept_id, preferred, ties, set_aside=used_up)
+    challenge = bool(settings.get("more_challenges"))
+    action = decide(chapter, states, now, current_concept_id, preferred, ties, set_aside=used_up, challenge=challenge)
     if action.kind in ("practice", "chapter_complete"):
         # Reviews from other chapters are due too: without them, what was learnt there fades.
         other = other_review(db, student, chapter_id, now)
@@ -390,6 +393,19 @@ def _hardest(db: DbSession, concept_ids) -> dict[int, list[Item]]:
         if top >= 2:
             out[cid] = [i for i in items if i.difficulty == top]
     return out
+
+
+def hard_progress(db: DbSession, student_id: int, concept_id: int) -> tuple[bool, bool]:
+    """(the topic has harder questions, the student has answered one of them right)."""
+    hard_ids = db.scalars(
+        select(Item.id).where(Item.concept_id == concept_id, Item.status == "approved", Item.difficulty >= m.HARD)
+    ).all()
+    if not hard_ids:
+        return False, False
+    right = db.scalars(
+        select(Attempt.id).where(Attempt.student_id == student_id, Attempt.item_id.in_(hard_ids), Attempt.correct.is_(True)).limit(1)
+    ).first()
+    return True, right is not None
 
 
 def stretch_counts(db: DbSession, student_id: int, concept_ids) -> dict[int, int]:
@@ -551,6 +567,10 @@ def record_attempt(
     was_secure = m.is_secure(row.p_known, row.attempts)
     expected = m.expected_correct(row.p_known, m.Evidence(correct, item.kind, hints_used))
     row.p_known = m.update_p_known(row.p_known, m.Evidence(correct, item.kind, hints_used))
+    if row.p_known >= m.SECURE_THRESHOLD and not was_secure:
+        has_hard, hard_right = hard_progress(db, student.id, item.concept_id)
+        hard_right = hard_right or (correct and item.difficulty >= m.HARD)
+        row.p_known = m.cap_until_hard_right(row.p_known, has_hard, hard_right, was_secure)
     row.attempts += 1
     row.correct_streak = row.correct_streak + 1 if correct else 0
     row.wrong_streak = 0 if correct else row.wrong_streak + 1

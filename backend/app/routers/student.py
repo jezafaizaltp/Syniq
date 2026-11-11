@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session as DbSession
 from .. import ai, i18n, learning
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
-from ..engine.mastery import progress_label
+from ..engine.mastery import is_secure, progress_label
 from ..engine import detect, responses
 from ..engine.rules import STYLES
 from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Family, FamilyMember, Item, LearningEvent, Mastery, Misconception, Subject, User
@@ -32,6 +32,7 @@ ALLOWED_SETTINGS = {
     "auto_off": list,  # noticed modes the student has switched off
     "hindi_course": str,  # "a" or "b": which CBSE Hindi course the student's school follows
     "welcome_seen": bool,  # the first-day welcome card has been read
+    "more_challenges": bool,  # the learner's own choice: harder questions sooner
 }
 
 
@@ -49,6 +50,21 @@ def visible_chapters(db: DbSession, user: User, subject_id: int) -> list[Chapter
         )
         query = query.where(Chapter.id.in_(ready))
     return db.scalars(query).all()
+
+
+def next_chapter(db: DbSession, user: User, chapter_id: int) -> dict | None:
+    """The next chapter of the same subject that still has topics to learn, for when this one is done."""
+    done = db.get(Chapter, chapter_id)
+    if not done:
+        return None
+    for ch in visible_chapters(db, user, done.subject_id):
+        if ch.number <= done.number:
+            continue
+        topics = db.scalars(select(Concept.id).where(Concept.chapter_id == ch.id)).all()
+        rows = {r.concept_id: r for r in db.scalars(select(Mastery).where(Mastery.student_id == user.id, Mastery.concept_id.in_(topics)))}
+        if any(cid not in rows or not is_secure(rows[cid].p_known, rows[cid].attempts) for cid in topics):
+            return {"id": ch.id, "number": ch.number, "title": ch.title}
+    return None
 
 
 @router.get("/subjects")
@@ -113,6 +129,8 @@ def learn_next(
         # Something to explore with their hands. Offered with the explanation and any time during practice.
         "activity": concept.activity if concept else None,
     }
+    if action.kind == "chapter_complete":
+        payload["next_chapter"] = next_chapter(db, user, body.chapter_id)
     if action.kind == "explain" and concept:
         exp = learning.get_explanation(db, concept.id, action.style or "text")
         payload["explanation"] = {"style": exp.style, "body": exp.body, "picture": exp.picture} if exp else None
