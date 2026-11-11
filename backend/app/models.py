@@ -233,6 +233,8 @@ class Concept(Base):
     notes: Mapped[str] = mapped_column(Text, default="")
     # A hands-on activity to explore the topic (app/activities.py), or None.
     activity: Mapped[dict | None] = mapped_column(JSON(none_as_null=True), nullable=True)
+    # The lesson that teaches the topic step by step before practice (app/lessons.py), or None.
+    lesson: Mapped[list | None] = mapped_column(JSON(none_as_null=True), nullable=True)
     # Indian Sign Language videos for this topic's key words, added by the school: [{"word", "url"}].
     sign_videos: Mapped[list | None] = mapped_column(JSON(none_as_null=True), nullable=True)
 
@@ -355,7 +357,7 @@ class LearningEvent(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
-    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break | spot_star | spot_seen | tip_yes | tip_no
+    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break | spot_star | spot_seen | tip_yes | tip_no | lesson_right | lesson_wrong
     # The question it was about (spot puzzles, tip feedback) and the mistake tip's tag, when there is one.
     item_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
     detail: Mapped[str | None] = mapped_column(String(60), nullable=True)
