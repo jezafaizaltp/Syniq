@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import ai, i18n, learning, rewards
+from .. import ai, i18n, learning, lessons, rewards
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
 from ..engine.mastery import is_secure, progress_label
@@ -129,6 +129,7 @@ def learn_next(
         "offer_support": action.offer_support,
         # Something to explore with their hands. Offered with the explanation and any time during practice.
         "activity": concept.activity if concept else None,
+        "has_lesson": bool(concept and concept.lesson),
     }
     if action.kind == "chapter_complete":
         payload["next_chapter"] = next_chapter(db, user, body.chapter_id)
@@ -139,6 +140,9 @@ def learn_next(
         why = (decision.evidence or {}).get("method_why")
         if exp and exp.style == action.style and why in ("history", "similar", "everyone"):
             payload["method_why"] = why  # the app says, in the student's words, why this way first
+        if action.rule_id == "R4_introduce":
+            # A new topic is taught first: the lesson's steps, then this explanation as the sum-up.
+            payload["lesson"] = lessons.public_lesson(concept.lesson, concept.id)
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         working_on = learning.patterns.active(learning.mistake_patterns(db, user.id))
         item = None
@@ -153,6 +157,36 @@ def learn_next(
             decision.evidence = {**(decision.evidence or {}), "watch_out": True}
             db.commit()
     return payload
+
+
+@router.get("/learn/lesson/{concept_id}")
+def lesson(concept_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    """The topic's lesson, to go over again at any time."""
+    concept = db.get(Concept, concept_id)
+    if not concept or not concept.lesson:
+        raise HTTPException(404, "No lesson for this topic yet")
+    return {"concept_id": concept.id, "title": concept.title, "steps": lessons.public_lesson(concept.lesson, concept.id)}
+
+
+class LessonCheck(BaseModel):
+    concept_id: int
+    step: int = Field(ge=0)
+    choice: str = Field(max_length=500)
+
+
+@router.post("/learn/lesson-check")
+def lesson_check(body: LessonCheck, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    """A check question inside a lesson: right or not, and why. Not marked: mastery comes from practice."""
+    concept = db.get(Concept, body.concept_id)
+    if not concept or not concept.lesson:
+        raise HTTPException(404, "No lesson for this topic yet")
+    try:
+        result = lessons.mark(concept.lesson, body.step, body.choice)
+    except IndexError:
+        raise HTTPException(404, "No such step") from None
+    db.add(LearningEvent(student_id=user.id, kind="lesson_right" if result["right"] else "lesson_wrong", detail=f"{concept.id}:{body.step}"))
+    db.commit()
+    return result
 
 
 @router.get("/concepts/{concept_id}/explanations/{style}")

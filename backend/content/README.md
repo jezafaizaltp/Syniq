@@ -1008,6 +1008,33 @@ Typed answers must be numbers (whole, decimal or a fraction like 3/4). Students'
 
 Mistake tags already translated into Malayalam in `backend/app/i18n.py` (`tip.<tag>`) can be used without a tip here. New tags need a tip in a pack (any pack: tips are shared), shown in English.
 
+## Lessons
+
+SYNiq teaches a topic before it asks practice questions. A topic's `lesson` is a short run of steps (2 to 8), one
+idea per step, in the textbook's order. Each step teaches the idea in a few sentences, with a `picture` when one helps
+(any kind from "Pictures" below), and then asks one quick `check` question about that idea only. The learner is told
+`why` the right answer is right before the next step. Checks are not marked: mastery still comes from practice.
+
+```yaml
+lesson:
+  - teach: One idea, in two to five short sentences.
+    picture: {kind: flow, steps: [...], alt: "A sentence for screen readers."}   # optional
+    check:
+      prompt: A question about this idea only.
+      options: [right one, wrong one, wrong one]      # 2 to 4
+      answer: right one
+      why: Why the right answer is right.
+```
+
+Every Kerala Class 9 topic has a lesson and at least 15 practice questions (a test checks this), so practice can
+adapt, come back to a topic and catch a repeated mistake without the same few questions coming round again.
+CBSE Class 9 (all five subjects on the 2026–27 books, 131 topics) follows the same rule, with its own test. The
+CBSE 9 English and Hindi lessons were written from published summaries, not the printed books, so story details
+need checking, and the Hindi wording has not been read by a Hindi teacher.
+`app/lessons.py` checks lessons. To add lessons or questions to a pack without rewriting it, write a small extra file
+and run `python -m tools.add_to_packs <file>` (see the top of `tools/add_to_packs.py`); it keeps the pack's comments
+and layout and refuses the change if the pack would fail its checks.
+
 ## Harder questions
 
 Every topic should have questions at all three levels; the Kerala Class 9 packs have at least two at level 3 (a test

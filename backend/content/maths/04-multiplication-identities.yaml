@@ -65,6 +65,53 @@ concepts:
       - prompt: x² + 6 is the slip. Find the only x where it agrees with (x + 2)(x + 3).
         want:
           p: 6
+    lesson:
+      - teach: 'To multiply 23 × 15, split both numbers: 23 = 20 + 3 and 15 = 10 + 5. Draw a rectangle 23 long and 15 wide, and cut it into four boxes. The four areas are 20 × 10, 20 × 5, 3 × 10 and 3 × 5. Added, they give 200 + 100 + 30 + 15 = 345.'
+        picture:
+          kind: area_grid
+          cols:
+          - size: 20
+            label: '20'
+          - size: 3
+            label: '3'
+          rows:
+          - size: 10
+            label: '10'
+          - size: 5
+            label: '5'
+          cells:
+          - - '200'
+            - '30'
+          - - '100'
+            - '15'
+          caption: 23 × 15 = 200 + 30 + 100 + 15 = 345
+          alt: A 23 by 15 rectangle cut into four boxes of 200, 30, 100 and 15.
+        check:
+          prompt: Split 12 × 13 as (10 + 2)(10 + 3). How many boxes do you add?
+          options:
+          - '4'
+          - '2'
+          - '3'
+          answer: '4'
+          why: 'Each of the 2 parts of the first number meets each of the 2 parts of the second: 2 × 2 = 4 boxes (100, 30, 20 and 6).'
+      - teach: 'The same works with letters: (a + b)(c + d) = ac + ad + bc + bd. Every part of the first bracket multiplies every part of the second. Leaving one out is the most common slip.'
+        check:
+          prompt: Which is (a + 2)(b + 5)?
+          options:
+          - ab + 5a + 2b + 10
+          - ab + 10
+          - ab + 7
+          answer: ab + 5a + 2b + 10
+          why: 'a × b, a × 5, 2 × b and 2 × 5: all four products.'
+      - teach: 'When both brackets start with x, two of the products are x terms and can be added: (x + 4)(x + 5) = x² + 5x + 4x + 20 = x² + 9x + 20. The middle number is 4 + 5 and the last number is 4 × 5. With a minus sign, keep the sign with its number: (x − 3)(x + 7) = x² + 4x − 21.'
+        check:
+          prompt: (x + 2)(x + 6) = x² + ?x + 12. What is the middle number?
+          options:
+          - '8'
+          - '12'
+          - '2'
+          answer: '8'
+          why: The x terms are 6x and 2x, which add to 8x. The last term is 2 × 6 = 12.
     items:
       - prompt: "Use (20 + 3)(10 + 5) to work out 23 × 15."
         answer: "345"
@@ -140,6 +187,86 @@ concepts:
         hints: ["−2 × −6 is positive.", "The middle term is (−2) + (−6) lots of x."]
         solution: "Step 1: x × x = x². Step 2: x × (−6) + (−2) × x = −8x. Step 3: (−2) × (−6) = +12."
         mistakes: {"x² − 8x − 12": sign_product, "x² + 8x + 12": sign_product}
+      - prompt: Use (10 + 2)(10 + 3) to work out 12 × 13.
+        answer: '156'
+        check: 12*13
+        difficulty: 1
+        hints:
+        - Multiply each part of the first bracket by each part of the second.
+        - 100 + 30 + 20 + 6.
+        solution: 'Step 1: 10 × 10 = 100 and 10 × 3 = 30. Step 2: 2 × 10 = 20 and 2 × 3 = 6. Step 3: 100 + 30 + 20 + 6 = 156.'
+        mistakes:
+          '106': product_terms
+      - prompt: Expand (x + 2)(x + 3).
+        options:
+        - x² + 5x + 6
+        - x² + 6
+        - x² + 6x + 5
+        - x² + 5x + 5
+        answer: x² + 5x + 6
+        check: expand((x + 2)*(x + 3))
+        difficulty: 1
+        hints:
+        - 'Four products: x × x, x × 3, 2 × x, 2 × 3.'
+        - Add the two x terms together.
+        solution: 'Step 1: x² + 3x + 2x + 6. Step 2: 3x + 2x = 5x. Step 3: So it is x² + 5x + 6.'
+        mistakes:
+          x² + 6: product_terms
+          x² + 6x + 5: product_constant
+      - prompt: Expand (x + 5)(x − 2).
+        options:
+        - x² + 3x − 10
+        - x² − 3x − 10
+        - x² + 3x + 10
+        - x² − 10
+        answer: x² + 3x − 10
+        check: expand((x + 5)*(x - 2))
+        difficulty: 2
+        hints:
+        - Keep the minus sign with the 2.
+        - The x terms are −2x and +5x.
+        solution: 'Step 1: x² − 2x + 5x − 10. Step 2: −2x + 5x = 3x. Step 3: So it is x² + 3x − 10.'
+        mistakes:
+          x² − 3x − 10: sign_middle
+          x² + 3x + 10: sign_product
+          x² − 10: product_terms
+      - prompt: (x + a)(x + 2) = x² + 9x + 14. What is a?
+        answer: '7'
+        check: 14/2
+        difficulty: 2
+        hints:
+        - The last term, 14, is a × 2.
+        - 'Check with the middle number: a + 2 should be 9.'
+        solution: 'Step 1: 2 × a = 14, so a = 7. Step 2: Check: 7 + 2 = 9, the middle number. Step 3: So a = 7.'
+        mistakes:
+          '9': product_constant
+          '12': product_constant
+      - prompt: Expand (3x + 2)(x + 4).
+        options:
+        - 3x² + 14x + 8
+        - 3x² + 8
+        - 3x² + 12x + 8
+        - 4x² + 14x + 8
+        answer: 3x² + 14x + 8
+        check: expand((3*x + 2)*(x + 4))
+        difficulty: 3
+        hints:
+        - 3x × x, 3x × 4, 2 × x and 2 × 4.
+        - The x terms are 12x and 2x.
+        solution: 'Step 1: 3x² + 12x + 2x + 8. Step 2: 12x + 2x = 14x. Step 3: So it is 3x² + 14x + 8.'
+        mistakes:
+          3x² + 8: product_terms
+          3x² + 12x + 8: product_terms
+      - prompt: Use (200 + 3)(100 + 1) to work out 203 × 101.
+        answer: '20503'
+        check: 203*101
+        difficulty: 3
+        hints:
+        - 'Four products: 200 × 100, 200 × 1, 3 × 100, 3 × 1.'
+        - 20000 + 200 + 300 + 3.
+        solution: 'Step 1: 200 × 100 = 20000 and 200 × 1 = 200. Step 2: 3 × 100 = 300 and 3 × 1 = 3. Step 3: 20000 + 200 + 300 + 3 = 20503.'
+        mistakes:
+          '20003': product_terms
 
   - code: math9.ident.square_of_sum
     title: "Square of a sum: (a + b)²"
@@ -203,6 +330,62 @@ concepts:
         - when:
             parts: 25
           say: 'a² + b² is 25, but (a + b)² isn''t 49. Notice: (a + b)² is always bigger by the difference shown.'
+    lesson:
+      - teach: '(a + b)² means (a + b) × (a + b). Draw a square with side a + b and cut it up: you get an a by a square, a b by b square, and two a by b rectangles. So (a + b)² = a² + 2ab + b².'
+        picture:
+          kind: area_grid
+          cols:
+          - size: 3
+            label: a
+          - size: 1.5
+            label: b
+          rows:
+          - size: 3
+            label: a
+          - size: 1.5
+            label: b
+          cells:
+          - - a²
+            - ab
+          - - ab
+            - b²
+          caption: (a + b)² = a² + 2ab + b²
+          alt: A square of side a + b cut into a², two rectangles ab, and b².
+        check:
+          prompt: How many a by b rectangles are inside a square of side a + b?
+          options:
+          - '2'
+          - '1'
+          - '4'
+          answer: '2'
+          why: One in each of the two corners that aren't squares, so the middle term is 2ab.
+      - teach: 'The rule in words: the square of the first, plus twice the first times the second, plus the square of the second. (x + 5)² = x² + 2 × x × 5 + 25 = x² + 10x + 25. Writing just x² + 25 forgets the two rectangles.'
+        check:
+          prompt: Which is (x + 3)²?
+          options:
+          - x² + 6x + 9
+          - x² + 9
+          - x² + 3x + 9
+          answer: x² + 6x + 9
+          why: x², then 2 × x × 3 = 6x, then 3² = 9.
+      - teach: 'Square the whole first term: (2y + 3)² starts with (2y)² = 4y², not 2y². The middle is 2 × 2y × 3 = 12y. So (2y + 3)² = 4y² + 12y + 9.'
+        check:
+          prompt: What is the first term of (3m + 1)²?
+          options:
+          - 9m²
+          - 3m²
+          - 6m
+          answer: 9m²
+          why: (3m)² = 3m × 3m = 9m².
+      - teach: It also helps with numbers and with facts about a and b. 41² = (40 + 1)² = 1600 + 80 + 1 = 1681. And if you know a + b and ab, then a² + b² = (a + b)² − 2ab.
+        check:
+          prompt: a + b = 5 and ab = 6. What is a² + b²?
+          options:
+          - '13'
+          - '25'
+          - '19'
+          answer: '13'
+          why: (a + b)² = 25 = a² + b² + 2ab = a² + b² + 12, so a² + b² = 13.
     items:
       - prompt: "Expand (x + 5)²."
         options: ["x² + 10x + 25", "x² + 25", "x² + 5x + 25", "x² + 10x + 10"]
@@ -271,6 +454,85 @@ concepts:
         hints: ["Draw the square and cut each side at the point a from the corner.", "The two rectangles are the 2ab."]
         solution: "Step 1: Cutting both sides at a gives four pieces. Step 2: They are a², b² and two ab rectangles. Step 3: So (a + b)² = a² + 2ab + b²."
         mistakes: {"One a by a square and one b by b square": square_each_term, "One a by a square, one b by b square and one a by b rectangle": missing_double}
+      - prompt: Expand (x + 3)².
+        options:
+        - x² + 6x + 9
+        - x² + 9
+        - x² + 3x + 9
+        - x² + 6x + 6
+        answer: x² + 6x + 9
+        check: expand((x + 3)**2)
+        difficulty: 1
+        hints:
+        - Square the first, twice the product, square the second.
+        - Twice the product is 2 × x × 3.
+        solution: 'Step 1: x² from x × x. Step 2: 2 × x × 3 = 6x. Step 3: 3² = 9, so x² + 6x + 9.'
+        mistakes:
+          x² + 9: missing_double
+          x² + 3x + 9: missing_double
+      - prompt: Use (30 + 2)² to work out 32².
+        answer: '1024'
+        check: 32**2
+        difficulty: 1
+        hints:
+        - 30² + 2 × 30 × 2 + 2².
+        - 900 + 120 + 4.
+        solution: 'Step 1: 30² = 900. Step 2: 2 × 30 × 2 = 120. Step 3: 2² = 4, so 32² = 1024.'
+        mistakes:
+          '904': missing_double
+      - prompt: Expand (4a + 1)².
+        options:
+        - 16a² + 8a + 1
+        - 4a² + 8a + 1
+        - 16a² + 1
+        - 16a² + 4a + 1
+        answer: 16a² + 8a + 1
+        check: expand((4*a + 1)**2)
+        difficulty: 2
+        hints:
+        - 'Square the whole first term: (4a)².'
+        - Twice the product is 2 × 4a × 1.
+        solution: 'Step 1: (4a)² = 16a². Step 2: 2 × 4a × 1 = 8a. Step 3: 1² = 1, so 16a² + 8a + 1.'
+        mistakes:
+          4a² + 8a + 1: square_coefficient
+          16a² + 1: missing_double
+      - prompt: If a + b = 7 and ab = 10, what is a² + b²?
+        answer: '29'
+        check: 7**2 - 2*10
+        difficulty: 2
+        hints:
+        - (a + b)² = a² + b² + 2ab.
+        - 49 = a² + b² + 20.
+        solution: 'Step 1: (a + b)² = 49. Step 2: 2ab = 20. Step 3: a² + b² = 49 − 20 = 29.'
+        mistakes:
+          '49': missing_double
+          '39': missing_double
+      - prompt: (x + k)² = x² + 18x + 81. What is k?
+        answer: '9'
+        check: 18/2
+        difficulty: 3
+        hints:
+        - The middle term is 2 × k × x.
+        - 2k = 18.
+        solution: 'Step 1: 2k = 18. Step 2: k = 9. Step 3: Check: 9² = 81, the last term.'
+        mistakes:
+          '18': missing_double
+      - prompt: Expand (x + 2y)².
+        options:
+        - x² + 4xy + 4y²
+        - x² + 2xy + 4y²
+        - x² + 4y²
+        - x² + 4xy + 2y²
+        answer: x² + 4xy + 4y²
+        check: expand((x + 2*y)**2)
+        difficulty: 3
+        hints:
+        - The second term is 2y; square all of it.
+        - Twice the product is 2 × x × 2y.
+        solution: 'Step 1: x². Step 2: 2 × x × 2y = 4xy. Step 3: (2y)² = 4y², so x² + 4xy + 4y².'
+        mistakes:
+          x² + 2xy + 4y²: missing_double
+          x² + 4xy + 2y²: square_coefficient
 
   - code: math9.ident.square_of_difference
     title: "Square of a difference: (a − b)²"
@@ -328,6 +590,33 @@ concepts:
         - when:
             sq: 9
           say: (a − b)² is 9, but a has to stay at 10.
+    lesson:
+      - teach: '(a − b)² works like (a + b)², with one change: the middle term is subtracted. (a − b)² = a² − 2ab + b². The last term stays plus, because (−b) × (−b) = +b².'
+        check:
+          prompt: What is the sign of the last term in (x − 4)²?
+          options:
+          - 'Plus: +16'
+          - 'Minus: −16'
+          answer: 'Plus: +16'
+          why: (−4) × (−4) = +16, so (x − 4)² = x² − 8x + 16.
+      - teach: 'Example: (x − 6)² = x² − 2 × x × 6 + 36 = x² − 12x + 36. With a number in front: (3k − 1)² = 9k² − 6k + 1.'
+        check:
+          prompt: Which is (y − 5)²?
+          options:
+          - y² − 10y + 25
+          - y² − 25
+          - y² − 10y − 25
+          answer: y² − 10y + 25
+          why: y², then −2 × y × 5 = −10y, then (−5)² = +25.
+      - teach: 'Use it for numbers just below a round number: 99² = (100 − 1)² = 10000 − 200 + 1 = 9801. And (x − y)² = (y − x)², because a number and its negative have the same square.'
+        check:
+          prompt: What is 49², using (50 − 1)²?
+          options:
+          - '2401'
+          - '2499'
+          - '2500'
+          answer: '2401'
+          why: 2500 − 100 + 1 = 2401.
     items:
       - prompt: "Expand (x − 4)²."
         options: ["x² − 8x + 16", "x² − 16", "x² + 8x + 16", "x² − 8x − 16"]
@@ -404,6 +693,81 @@ concepts:
         hints: ["The middle term is −2kx.", "2k = 12."]
         solution: "Step 1: −2kx = −12x, so k = 6. Step 2: Check: k² = 36."
         mistakes: {"12": missing_double, "-6": sign_middle}
+      - prompt: Expand (x − 3)².
+        options:
+        - x² − 6x + 9
+        - x² − 9
+        - x² + 6x + 9
+        - x² − 6x − 9
+        answer: x² − 6x + 9
+        check: expand((x - 3)**2)
+        difficulty: 1
+        hints:
+        - The middle term is minus twice the product.
+        - −2 × x × 3 = −6x.
+        solution: 'Step 1: x². Step 2: −2 × x × 3 = −6x. Step 3: (−3)² = +9, so x² − 6x + 9.'
+        mistakes:
+          x² − 9: missing_double
+          x² + 6x + 9: sign_middle
+          x² − 6x − 9: sign_last
+      - prompt: Use (100 − 2)² to work out 98².
+        answer: '9604'
+        check: 98**2
+        difficulty: 1
+        hints:
+        - 100² − 2 × 100 × 2 + 2².
+        - 10000 − 400 + 4.
+        solution: 'Step 1: 100² = 10000. Step 2: 2 × 100 × 2 = 400. Step 3: 10000 − 400 + 4 = 9604.'
+        mistakes:
+          '9996': missing_double
+      - prompt: Expand (2x − 1)².
+        options:
+        - 4x² − 4x + 1
+        - 2x² − 4x + 1
+        - 4x² − 2x + 1
+        - 4x² − 1
+        answer: 4x² − 4x + 1
+        check: expand((2*x - 1)**2)
+        difficulty: 2
+        hints:
+        - (2x)² is the first term.
+        - The middle term is −2 × 2x × 1.
+        solution: 'Step 1: (2x)² = 4x². Step 2: −2 × 2x × 1 = −4x. Step 3: +1, so 4x² − 4x + 1.'
+        mistakes:
+          2x² − 4x + 1: square_coefficient
+          4x² − 2x + 1: missing_double
+          4x² − 1: missing_double
+      - prompt: If a − b = 3 and ab = 10, what is a² + b²?
+        answer: '29'
+        check: 3**2 + 2*10
+        difficulty: 2
+        hints:
+        - (a − b)² = a² + b² − 2ab.
+        - 9 = a² + b² − 20.
+        solution: 'Step 1: (a − b)² = 9. Step 2: 2ab = 20. Step 3: a² + b² = 9 + 20 = 29.'
+        mistakes:
+          '9': missing_double
+          '19': missing_double
+      - prompt: (x − k)² = x² − 20x + 100. What is k?
+        answer: '10'
+        check: 20/2
+        difficulty: 3
+        hints:
+        - The middle term is −2 × k × x.
+        - 2k = 20.
+        solution: 'Step 1: 2k = 20. Step 2: k = 10. Step 3: Check: 10² = 100, the last term.'
+        mistakes:
+          '20': missing_double
+      - prompt: a + b = 8 and ab = 12. What is (a − b)²?
+        answer: '16'
+        check: 8**2 - 4*12
+        difficulty: 3
+        hints:
+        - (a − b)² = (a + b)² − 4ab.
+        - 64 − 48.
+        solution: 'Step 1: (a + b)² = a² + 2ab + b² = 64. Step 2: (a − b)² = a² − 2ab + b², which is 4ab less. Step 3: 64 − 48 = 16.'
+        mistakes:
+          '40': squared_difference
 
   - code: math9.ident.difference_of_squares
     title: "Sum times difference: (a + b)(a − b)"
@@ -468,6 +832,34 @@ concepts:
         - when:
             q: 40
           say: a² − b² = 40, but a + b isn't 10 yet.
+    lesson:
+      - teach: 'Multiply (a + b)(a − b): a² − ab + ab − b². The middle terms cancel, leaving a² − b². So a sum times a difference of the same two things is a difference of squares.'
+        check:
+          prompt: What is (x + 3)(x − 3)?
+          options:
+          - x² − 9
+          - x² + 9
+          - x² − 6x − 9
+          answer: x² − 9
+          why: −3x and +3x cancel, leaving x² − 9.
+      - teach: 'Used backwards, it factorises: x² − 49 = (x + 7)(x − 7), because 49 = 7². And 9x² − 16 = (3x + 4)(3x − 4). Careful: a² − b² is not (a − b)², which has a middle term.'
+        check:
+          prompt: Which equals y² − 64?
+          options:
+          - (y + 8)(y − 8)
+          - (y − 8)²
+          - (y − 32)(y + 2)
+          answer: (y + 8)(y − 8)
+          why: 64 = 8², so y² − 64 = (y + 8)(y − 8). (y − 8)² would be y² − 16y + 64.
+      - teach: It makes some sums quick. 61 × 59 = (60 + 1)(60 − 1) = 3600 − 1 = 3599. And 53² − 47² = (53 + 47)(53 − 47) = 100 × 6 = 600.
+        check:
+          prompt: What is 21 × 19, using (20 + 1)(20 − 1)?
+          options:
+          - '399'
+          - '401'
+          - '400'
+          answer: '399'
+          why: 20² − 1² = 400 − 1 = 399.
     items:
       - prompt: "Expand (x + 6)(x − 6)."
         options: ["x² − 36", "x² + 36", "x² − 12x − 36", "x² − 12"]
@@ -544,6 +936,78 @@ concepts:
         hints: ["x² − y² = (x + y)(x − y).", "You don't need x and y themselves."]
         solution: "Step 1: x² − y² = (x + y)(x − y). Step 2: 12 × 3 = 36."
         mistakes: {"81": squared_difference, "15": diff_squares_use}
+      - prompt: Expand (a + 4)(a − 4).
+        options:
+        - a² − 16
+        - a² + 16
+        - a² − 8a − 16
+        - a² − 8
+        answer: a² − 16
+        check: expand((a + 4)*(a - 4))
+        difficulty: 1
+        hints:
+        - The middle terms cancel.
+        - The answer is a square minus a square.
+        solution: 'Step 1: a² − 4a + 4a − 16. Step 2: −4a + 4a = 0. Step 3: So a² − 16.'
+        mistakes:
+          a² + 16: sign_last
+          a² − 8: square_each_term
+      - prompt: Use (40 + 2)(40 − 2) to work out 42 × 38.
+        answer: '1596'
+        check: 42*38
+        difficulty: 1
+        hints:
+        - It is 40² − 2².
+        - 1600 − 4.
+        solution: 'Step 1: 40² = 1600. Step 2: 2² = 4. Step 3: 1600 − 4 = 1596.'
+        mistakes:
+          '1604': sign_last
+      - prompt: Factorise 4x² − 25.
+        options:
+        - (2x + 5)(2x − 5)
+        - (4x + 5)(4x − 5)
+        - (2x − 5)²
+        - (4x + 25)(x − 1)
+        answer: (2x + 5)(2x − 5)
+        check: 4*x**2 - 25
+        difficulty: 2
+        hints:
+        - 'Write each part as a square: 4x² = (2x)².'
+        - 25 = 5².
+        solution: 'Step 1: 4x² = (2x)² and 25 = 5². Step 2: a² − b² = (a + b)(a − b). Step 3: So (2x + 5)(2x − 5).'
+        mistakes:
+          (4x + 5)(4x − 5): square_coefficient
+          (2x − 5)²: diff_squares_not_square
+      - prompt: What is 36² − 34²?
+        answer: '140'
+        check: 36**2 - 34**2
+        difficulty: 2
+        hints:
+        - Use (a + b)(a − b).
+        - (36 + 34)(36 − 34).
+        solution: 'Step 1: 36 + 34 = 70. Step 2: 36 − 34 = 2. Step 3: 70 × 2 = 140.'
+        mistakes:
+          '4': diff_squares_use
+      - prompt: x² − y² = 45 and x − y = 5. What is x + y?
+        answer: '9'
+        check: 45/5
+        difficulty: 3
+        hints:
+        - x² − y² = (x + y)(x − y).
+        - 45 = (x + y) × 5.
+        solution: 'Step 1: (x + y)(x − y) = 45. Step 2: (x + y) × 5 = 45. Step 3: x + y = 9.'
+        mistakes:
+          '40': diff_squares_use
+      - prompt: A square garden of side 25 m has a square pond of side 15 m in one corner. What area of garden is left around the pond, in m²?
+        answer: '400'
+        check: 25**2 - 15**2
+        difficulty: 3
+        hints:
+        - The area left is 25² − 15².
+        - (25 + 15)(25 − 15).
+        solution: 'Step 1: 25 + 15 = 40. Step 2: 25 − 15 = 10. Step 3: 40 × 10 = 400 m².'
+        mistakes:
+          '100': diff_squares_not_square
   - code: math9.ident.quick_calculation
     title: Quick calculation with identities
     after: [math9.ident.square_of_difference, math9.ident.difference_of_squares]
@@ -601,6 +1065,34 @@ concepts:
         - when:
             a: 102
           say: With a = 102, a + b goes past 102 as soon as b is more than 0. a sits in the middle of the two numbers, not at the top.
+    lesson:
+      - teach: Numbers just above or below a round number are easy to square with an identity. 103² = (100 + 3)² = 10000 + 600 + 9 = 10609. 199² = (200 − 1)² = 40000 − 400 + 1 = 39601.
+        check:
+          prompt: Which way of writing 102 makes 102² easy?
+          options:
+          - (100 + 2)²
+          - (51 × 2)²
+          - (110 − 8)²
+          answer: (100 + 2)²
+          why: '100 is round, so 100² = 10000 and 2 × 100 × 2 = 400 are easy: 10000 + 400 + 4 = 10404.'
+      - teach: Two numbers the same distance either side of a round number multiply as a difference of squares. 48 × 52 = (50 − 2)(50 + 2) = 2500 − 4 = 2496. 95 × 105 = 10000 − 25 = 9975.
+        check:
+          prompt: 47 × 53 = (50 − 3)(50 + 3). What is it?
+          options:
+          - '2491'
+          - '2500'
+          - '2509'
+          answer: '2491'
+          why: 50² − 3² = 2500 − 9 = 2491.
+      - teach: 'Pick the identity by the shape of the sum: one number squared, use (a + b)² or (a − b)². Two numbers either side of a middle, use (a + b)(a − b). A square minus a square, use (a + b)(a − b) backwards.'
+        check:
+          prompt: Which identity suits 1004 × 996?
+          options:
+          - (a + b)(a − b) = a² − b²
+          - (a + b)² = a² + 2ab + b²
+          - (a − b)² = a² − 2ab + b²
+          answer: (a + b)(a − b) = a² − b²
+          why: 1004 and 996 are 4 either side of 1000, so 1004 × 996 = 1000² − 4² = 999984.
     items:
       - prompt: "Use an identity to work out 103²."
         answer: "10609"
@@ -672,3 +1164,63 @@ concepts:
         hints: ["Use a² − b² = (a + b)(a − b).", "(2000)(4)."]
         solution: "Step 1: 1002 + 998 = 2000. Step 2: 1002 − 998 = 4. Step 3: 2000 × 4 = 8000."
         mistakes: {"16": squared_difference}
+      - prompt: Use an identity to work out 101².
+        answer: '10201'
+        check: 101**2
+        difficulty: 1
+        hints:
+        - Write 101 as 100 + 1.
+        - 10000 + 200 + 1.
+        solution: 'Step 1: (100 + 1)² = 100² + 2 × 100 × 1 + 1². Step 2: = 10000 + 200 + 1. Step 3: = 10201.'
+        mistakes:
+          '10001': missing_double
+      - prompt: Use an identity to work out 29 × 31.
+        answer: '899'
+        check: 29*31
+        difficulty: 1
+        hints:
+        - Both numbers are 1 away from 30.
+        - 30² − 1².
+        solution: 'Step 1: 29 × 31 = (30 − 1)(30 + 1). Step 2: = 30² − 1². Step 3: = 900 − 1 = 899.'
+        mistakes:
+          '901': sign_last
+      - prompt: Use an identity to work out 1004 × 996.
+        answer: '999984'
+        check: 1004*996
+        difficulty: 2
+        hints:
+        - Both are 4 away from 1000.
+        - 1000² − 4².
+        solution: 'Step 1: (1000 + 4)(1000 − 4). Step 2: = 1000000 − 16. Step 3: = 999984.'
+        mistakes:
+          '1000016': sign_last
+      - prompt: Use an identity to work out 299².
+        answer: '89401'
+        check: 299**2
+        difficulty: 2
+        hints:
+        - Write 299 as 300 − 1.
+        - 90000 − 600 + 1.
+        solution: 'Step 1: (300 − 1)² = 300² − 2 × 300 + 1. Step 2: = 90000 − 600 + 1. Step 3: = 89401.'
+        mistakes:
+          '89999': missing_double
+      - prompt: Use an identity to work out 9.8². Decimals are fine.
+        answer: '96.04'
+        check: 9.8**2
+        difficulty: 3
+        hints:
+        - Write 9.8 as 10 − 0.2.
+        - 100 − 4 + 0.04.
+        solution: 'Step 1: (10 − 0.2)² = 100 − 2 × 10 × 0.2 + 0.2². Step 2: = 100 − 4 + 0.04. Step 3: = 96.04.'
+        mistakes:
+          '99.96': missing_double
+      - prompt: What is 505² − 495²?
+        answer: '10000'
+        check: 505**2 - 495**2
+        difficulty: 3
+        hints:
+        - Use (a + b)(a − b).
+        - (505 + 495)(505 − 495).
+        solution: 'Step 1: 505 + 495 = 1000. Step 2: 505 − 495 = 10. Step 3: 1000 × 10 = 10000.'
+        mistakes:
+          '100': diff_squares_use

@@ -56,6 +56,46 @@ concepts:
         bin: Similar
         why: 'The first is 35°, 75°, 70°; the second 75°, 70°, 35°. Same three angles: similar.'
         clue: Work out each triangle's third angle (the three add to 180°).
+    lesson:
+      - teach: A photo and its enlargement show the same shape at different sizes. For triangles, the same shape means the same three angles. Making a triangle bigger stretches its sides, but every angle stays exactly the same.
+        check:
+          prompt: A triangle has angles of 30°, 60° and 90°. You double every side. What are the new angles?
+          options:
+          - 30°, 60° and 90°
+          - 60°, 120° and 180°
+          - 15°, 30° and 45°
+          answer: 30°, 60° and 90°
+          why: Angles don't change with size. Doubling sides doubles lengths only.
+      - teach: If two triangles have the same three angles, their matching sides are all in the same ratio. Such triangles are called similar, and that ratio is the scale factor. A 3, 4, 5 triangle and a 6, 8, 10 triangle with the same angles have scale factor 2.
+        picture:
+          kind: compare
+          columns:
+          - title: Small triangle
+            points:
+            - sides 3, 4, 5 cm
+            - angles 37°, 53°, 90°
+          - title: Big triangle
+            points:
+            - sides 6, 8, 10 cm
+            - same angles
+          alt: 'Two similar triangles: the big one has every side twice as long and the same angles.'
+        check:
+          prompt: 'Similar triangles: the small one''s shortest side is 2 cm, the big one''s is 6 cm. What is the scale factor?'
+          options:
+          - '3'
+          - '4'
+          - '12'
+          answer: '3'
+          why: 6 ÷ 2 = 3, so every side of the big triangle is 3 times the matching side.
+      - teach: Two equal angles are enough. The three angles of any triangle add to 180°, so if two angles match, the third is 180° minus those two in both triangles, and it matches too.
+        check:
+          prompt: One triangle has angles 50° and 60°. Another has 60° and 70°. What is the third angle of the first?
+          options:
+          - 70°
+          - 50°
+          - 60°
+          answer: 70°
+          why: '180° − 50° − 60° = 70°. So both triangles have 50°, 60° and 70°: they are similar.'
     items:
       - prompt: "Triangle ABC has angles of 40°, 60° and 80°. Triangle PQR has the same shape but sides twice as long. What are PQR's angles?"
         options: ["40°, 60° and 80°", "80°, 120° and 160°", "20°, 30° and 40°", "Can't tell"]
@@ -128,6 +168,75 @@ concepts:
         hints: ["Enlarging a triangle changes its sides, not its angles.", "Which angle is biggest in the small triangle?"]
         solution: "Step 1: Similar triangles have equal angles. Step 2: The biggest angle stays 80°."
         mistakes: {"240": angles_scaled}
+      - prompt: Two triangles have the same angles. The small one has sides 2, 3 and 4 cm. The big one's shortest side is 6 cm. What is the scale factor?
+        answer: '3'
+        check: 6/2
+        difficulty: 1
+        hints:
+        - Compare the two shortest sides.
+        - 6 is how many times 2?
+        solution: 'Step 1: The shortest sides are 2 cm and 6 cm. Step 2: 6 ÷ 2 = 3. Step 3: The scale factor is 3.'
+        mistakes:
+          '4': scale_inverted
+      - prompt: Two triangles have the same angles. The small one has sides 2, 3 and 4 cm and the big one's shortest side is 6 cm. How long is the big one's longest side, in cm?
+        answer: '12'
+        check: 4*6/2
+        difficulty: 1
+        hints:
+        - Find the scale factor first.
+        - Every side is 3 times as long.
+        solution: 'Step 1: Scale factor = 6 ÷ 2 = 3. Step 2: The small longest side is 4 cm. Step 3: 4 × 3 = 12 cm.'
+        mistakes:
+          '8': scale_inverted
+      - prompt: Triangle ABC has angles of 35° and 85°. Triangle PQR has angles of 85° and 60°. Are they similar?
+        options:
+        - 'Yes: both have angles 35°, 60° and 85°'
+        - 'No: they have different angles'
+        - Only if their sides are equal
+        answer: 'Yes: both have angles 35°, 60° and 85°'
+        difficulty: 2
+        hints:
+        - Find the third angle of each triangle.
+        - The angles of a triangle add up to 180°.
+        solution: 'Step 1: ABC''s third angle is 180° − 35° − 85° = 60°. Step 2: PQR''s third angle is 180° − 85° − 60° = 35°. Step 3: Both have 35°, 60°, 85°, so they are similar.'
+        mistakes:
+          'No: they have different angles': third_angle
+          Only if their sides are equal: similar_angle
+      - prompt: Which pair of triangles is sure to be similar?
+        options:
+        - Two right triangles that each have a 40° angle
+        - Any two right triangles
+        - Any two triangles with a 40° angle
+        - Any two isosceles triangles
+        answer: Two right triangles that each have a 40° angle
+        difficulty: 2
+        hints:
+        - Similar needs two equal angles.
+        - Which pair is sure to share two angles?
+        solution: 'Step 1: Two right triangles each with 40° share 90° and 40°. Step 2: So their third angles are both 50°. Step 3: The others share at most one angle, so they need not be similar.'
+        mistakes:
+          Any two right triangles: similar_needs_angles
+          Any two triangles with a 40° angle: similar_needs_angles
+      - prompt: Similar triangles have scale factor 2.5. A side of the small one is 4 cm. How long is the matching side of the big one, in cm?
+        answer: '10'
+        check: 4*2.5
+        difficulty: 3
+        hints:
+        - Multiply the small side by the scale factor.
+        - 4 × 2.5.
+        solution: 'Step 1: Matching sides are in the ratio 1 : 2.5. Step 2: 4 × 2.5 = 10. Step 3: So the big side is 10 cm.'
+        mistakes:
+          '1.6': scale_inverted
+      - prompt: Two similar triangles have angles of 25° and 90°. What is the third angle of the bigger one, in degrees?
+        answer: '65'
+        check: 180 - 25 - 90
+        difficulty: 3
+        hints:
+        - Size doesn't change angles.
+        - The three angles add up to 180°.
+        solution: 'Step 1: Both triangles have the same angles. Step 2: 180 − 25 − 90 = 65. Step 3: So the third angle is 65°.'
+        mistakes:
+          '130': angles_scaled
   - code: math9.similar.sides_ratio
     title: Sides in the same ratio
     after: [math9.similar.equal_angles]
@@ -185,6 +294,33 @@ concepts:
       - prompt: Make the longest side 15.
         want:
           c: 15
+    lesson:
+      - teach: 'There is a second way to spot similar triangles: compare the sides. If every side of one triangle is the same multiple of the matching side of the other, the triangles have the same angles and are similar.'
+        check:
+          prompt: Triangle sides 2, 3, 4 cm and 6, 9, 12 cm. What is each side multiplied by?
+          options:
+          - '3'
+          - '4'
+          - Different numbers
+          answer: '3'
+          why: 2 × 3 = 6, 3 × 3 = 9, 4 × 3 = 12. The same multiple every time, so they are similar.
+      - teach: 'Match smallest with smallest, middle with middle, largest with largest, then divide. All three answers must be equal. 4, 6, 9 and 6, 9, 13.5 give 6 ÷ 4 = 1.5, 9 ÷ 6 = 1.5, 13.5 ÷ 9 = 1.5: similar. If one ratio differs, they are not similar.'
+        check:
+          prompt: Are triangles with sides 3, 4, 5 cm and 6, 8, 11 cm similar?
+          options:
+          - 'No: 11 ÷ 5 is not 2'
+          - 'Yes: every side got bigger'
+          answer: 'No: 11 ÷ 5 is not 2'
+          why: 6 ÷ 3 = 2 and 8 ÷ 4 = 2, but 11 ÷ 5 = 2.2. The ratios must all match.
+      - teach: The perimeter grows by the same factor. A 3, 4, 5 triangle has perimeter 12. A similar triangle with perimeter 36 has scale factor 36 ÷ 12 = 3, so its sides are 9, 12 and 15.
+        check:
+          prompt: A triangle with perimeter 10 cm is enlarged to perimeter 30 cm. What is the scale factor?
+          options:
+          - '3'
+          - '20'
+          - 1/3
+          answer: '3'
+          why: 30 ÷ 10 = 3. Every side, and so the whole perimeter, is 3 times as long.
     items:
       - prompt: "Are triangles with sides 2, 3, 4 cm and 4, 6, 8 cm similar?"
         options: ["Yes: every side is doubled", "No: the sides are different", "Only if they have a right angle", "No: 4 − 2 is not 6 − 3"]
@@ -249,6 +385,73 @@ concepts:
         hints: ["7.5 ÷ 5 = 1.5 and 18 ÷ 12 = 1.5.", "x = 13 × 1.5."]
         solution: "Step 1: Scale factor 1.5. Step 2: x = 13 × 1.5 = 19.5 cm."
         mistakes: {"15.5": added_not_ratio, "8.67": scale_inverted}
+      - prompt: Are triangles with sides 5, 6, 7 cm and 10, 12, 14 cm similar?
+        options:
+        - 'Yes: every side is doubled'
+        - 'No: the sides are different'
+        - 'No: their perimeters are different'
+        answer: 'Yes: every side is doubled'
+        difficulty: 1
+        hints:
+        - Divide matching sides.
+        - 10 ÷ 5, 12 ÷ 6 and 14 ÷ 7.
+        solution: 'Step 1: 10 ÷ 5 = 2. Step 2: 12 ÷ 6 = 2 and 14 ÷ 7 = 2. Step 3: All equal, so the triangles are similar.'
+        mistakes:
+          'No: their perimeters are different': perimeter_scale
+      - prompt: Which triangle is similar to one with sides 4, 5 and 6 cm?
+        options:
+        - 8, 10 and 12 cm
+        - 5, 6 and 7 cm
+        - 4, 10 and 12 cm
+        - 8, 10 and 11 cm
+        answer: 8, 10 and 12 cm
+        difficulty: 1
+        hints:
+        - Look for every side multiplied by the same number.
+        - Adding 1 to each side is not the same as multiplying.
+        solution: 'Step 1: 8 ÷ 4 = 2. Step 2: 10 ÷ 5 = 2 and 12 ÷ 6 = 2. Step 3: So 8, 10, 12 is similar.'
+        mistakes:
+          5, 6 and 7 cm: similar_needs_angles
+      - prompt: A triangle has sides of 4, 6 and 7 cm. A similar triangle's middle side is 9 cm. What is its longest side, in cm? Decimals are fine.
+        answer: '10.5'
+        check: 7*9/6
+        difficulty: 2
+        hints:
+        - 'Match middle with middle: 6 ↔ 9.'
+        - The scale factor is 9 ÷ 6 = 1.5.
+        solution: 'Step 1: Scale factor = 9 ÷ 6 = 1.5. Step 2: The longest side is 7 × 1.5. Step 3: = 10.5 cm.'
+        mistakes:
+          '10': matched_wrong_sides
+      - prompt: A triangle has sides of 2, 3 and 4 cm. A similar triangle has a perimeter of 36 cm. What is its longest side, in cm?
+        answer: '16'
+        check: 4*36/9
+        difficulty: 2
+        hints:
+        - The first perimeter is 2 + 3 + 4 = 9 cm.
+        - The scale factor is 36 ÷ 9 = 4.
+        solution: 'Step 1: Perimeter 9 cm. Step 2: Scale factor 36 ÷ 9 = 4. Step 3: Longest side 4 × 4 = 16 cm.'
+        mistakes:
+          '12': scale_longest
+      - prompt: A drawing of a triangle with sides 3, 6 and 8 cm is shrunk so that its longest side is 2 cm. How long is its shortest side, in cm? Decimals are fine.
+        answer: '0.75'
+        check: 3*2/8
+        difficulty: 3
+        hints:
+        - The scale factor takes 8 to 2.
+        - It is 2 ÷ 8 = 0.25.
+        solution: 'Step 1: Scale factor = 2 ÷ 8 = 0.25. Step 2: Shortest side = 3 × 0.25. Step 3: = 0.75 cm.'
+        mistakes:
+          '12': scale_inverted
+      - prompt: Triangle A has sides 6, 8 and 10 cm. Triangle B has sides 9, x and 15 cm and is similar to A. What is x?
+        answer: '12'
+        check: 8*9/6
+        difficulty: 3
+        hints:
+        - Find the scale factor from a pair you know.
+        - 9 ÷ 6 = 1.5, and 15 ÷ 10 = 1.5 too.
+        solution: 'Step 1: Scale factor = 1.5. Step 2: x = 8 × 1.5. Step 3: x = 12.'
+        mistakes:
+          '11': matched_wrong_sides
 
   - code: math9.similar.matching
     title: Matching sides and finding lengths
@@ -285,6 +488,34 @@ concepts:
       - prompt: Find the scale factor, then read the side matching 6 cm.
         want:
           a: 10
+    lesson:
+      - teach: In similar triangles, a side matches the side opposite the equal angle. Writing triangle ABC ~ triangle PQR means A matches P, B matches Q and C matches R, in that order. So AB ↔ PQ, BC ↔ QR and CA ↔ RP.
+        check:
+          prompt: Triangle ABC ~ triangle XYZ. Which side matches AC?
+          options:
+          - XZ
+          - XY
+          - YZ
+          answer: XZ
+          why: A ↔ X and C ↔ Z, so AC ↔ XZ.
+      - teach: 'To find a length, find the scale factor from a matching pair you know, then multiply. ABC ~ PQR, AB = 6, PQ = 9: the factor is 9 ÷ 6 = 1.5. If BC = 8, then QR = 8 × 1.5 = 12.'
+        check:
+          prompt: ABC ~ PQR with AB = 4, PQ = 12 and BC = 5. What is QR?
+          options:
+          - '15'
+          - '13'
+          - '60'
+          answer: '15'
+          why: The factor is 12 ÷ 4 = 3, so QR = 5 × 3 = 15.
+      - teach: A line parallel to one side of a triangle cuts off a small triangle similar to the whole. In triangle ABC with DE parallel to BC, triangle ADE ~ triangle ABC. Compare AD with the whole AB, not with the leftover DB.
+        check:
+          prompt: DE is parallel to BC, AD = 2, DB = 4 and BC = 9. Which ratio gives DE?
+          options:
+          - DE/BC = AD/AB = 2/6
+          - DE/BC = AD/DB = 2/4
+          - DE = BC − 2
+          answer: DE/BC = AD/AB = 2/6
+          why: ADE and ABC are similar, so DE ↔ BC and AD ↔ AB = 6. DE = 9 × 2/6 = 3.
     items:
       - prompt: "Triangle ABC is similar to triangle PQR, with A matching P, B matching Q and C matching R. Which side matches BC?"
         options: ["QR", "PQ", "PR", "AC"]
@@ -349,6 +580,71 @@ concepts:
         hints: ["Angle M matches Q, and angle R matches N.", "So triangle PQR has angles Q = 65° and R = 45°."]
         solution: "Step 1: Angle R = angle N = 45°. Step 2: Angle P = 180 − 65 − 45 = 70°."
         mistakes: {"65": matched_wrong_sides, "45": matched_wrong_sides}
+      - prompt: Triangle KLM ~ triangle RST, with K, L, M matching R, S, T. Which side matches LM?
+        options:
+        - ST
+        - RS
+        - RT
+        - TS is not a side
+        answer: ST
+        difficulty: 1
+        hints:
+        - Match the letters in order.
+        - L ↔ S and M ↔ T.
+        solution: 'Step 1: K ↔ R, L ↔ S, M ↔ T. Step 2: LM uses L and M. Step 3: So it matches ST.'
+        mistakes:
+          RS: matched_wrong_sides
+          RT: matched_wrong_sides
+      - prompt: Triangle ABC ~ triangle PQR, with A, B, C matching P, Q, R. AB = 5 cm, PQ = 10 cm and CA = 7 cm. What is RP, in cm?
+        answer: '14'
+        check: 7*10/5
+        difficulty: 1
+        hints:
+        - Find the scale factor from AB and PQ.
+        - CA matches RP.
+        solution: 'Step 1: Scale factor = 10 ÷ 5 = 2. Step 2: CA ↔ RP. Step 3: RP = 7 × 2 = 14 cm.'
+        mistakes:
+          '3.5': scale_inverted
+      - prompt: Triangle ABC ~ triangle DEF, with A, B, C matching D, E, F. AB = 9 cm, DE = 6 cm and EF = 8 cm. What is BC, in cm?
+        answer: '12'
+        check: 8*9/6
+        difficulty: 2
+        hints:
+        - ABC is the bigger triangle here.
+        - The factor from DEF to ABC is 9 ÷ 6 = 1.5.
+        solution: 'Step 1: BC ↔ EF. Step 2: Factor = 9 ÷ 6 = 1.5. Step 3: BC = 8 × 1.5 = 12 cm.'
+        mistakes:
+          '5.333': scale_inverted
+      - prompt: In triangle ABC, DE is parallel to BC, with D on AB and E on AC. AD = 5 cm, AB = 15 cm and DE = 4 cm. How long is BC, in cm?
+        answer: '12'
+        check: 4*15/5
+        difficulty: 2
+        hints:
+        - Triangle ADE ~ triangle ABC.
+        - AB is 3 times AD.
+        solution: 'Step 1: ADE ~ ABC. Step 2: AB ÷ AD = 15 ÷ 5 = 3. Step 3: BC = 3 × 4 = 12 cm.'
+        mistakes:
+          '8': used_part_not_whole
+      - prompt: In triangle ABC, DE is parallel to BC, with D on AB and E on AC. AD = 2 cm, DB = 3 cm and BC = 10 cm. How long is DE, in cm?
+        answer: '4'
+        check: 10*2/5
+        difficulty: 3
+        hints:
+        - Use the whole side AB = AD + DB.
+        - DE/BC = AD/AB = 2/5.
+        solution: 'Step 1: AB = 2 + 3 = 5 cm. Step 2: DE/BC = 2/5. Step 3: DE = 10 × 2/5 = 4 cm.'
+        mistakes:
+          '6.667': used_part_not_whole
+      - prompt: Triangle ABC ~ triangle PQR, with A, B, C matching P, Q, R. Angle A = 40° and angle R = 85°. What is angle B, in degrees?
+        answer: '55'
+        check: 180 - 40 - 85
+        difficulty: 3
+        hints:
+        - Angle R matches angle C.
+        - The angles of ABC are 40°, B and 85°.
+        solution: 'Step 1: C ↔ R, so angle C = 85°. Step 2: Angle B = 180° − 40° − 85°. Step 3: = 55°.'
+        mistakes:
+          '85': similar_angle
 
   - code: math9.similar.heights
     title: Heights, shadows and maps
@@ -391,6 +687,46 @@ concepts:
         - when:
             h: 18
           say: An 18 m tree would cast a 27 m shadow. Here shadows are longer than the things casting them, so the tree must be shorter than its 12 m shadow.
+    lesson:
+      - teach: At one moment of the day, the sun's rays hit the ground at the same angle everywhere nearby. A stick and its shadow, and a tree and its shadow, both make right triangles with that same angle. So the two triangles are similar.
+        check:
+          prompt: Why are the stick's triangle and the tree's triangle similar?
+          options:
+          - Both have a right angle and the same sun angle
+          - The tree is taller
+          - Their shadows are the same length
+          answer: Both have a right angle and the same sun angle
+          why: Two equal angles make triangles similar.
+      - teach: So height ÷ shadow is the same for both. A 1 m stick with a 2 m shadow gives 1 ÷ 2 = 0.5. A tree with a 16 m shadow is 16 × 0.5 = 8 m tall. Measuring a short stick lets you find a tall height without climbing.
+        picture:
+          kind: compare
+          columns:
+          - title: Stick
+            points:
+            - height 1 m
+            - shadow 2 m
+          - title: Tree
+            points:
+            - height ? m
+            - shadow 16 m
+          alt: A stick 1 m tall casts a 2 m shadow; a tree casting a 16 m shadow is 8 m tall.
+        check:
+          prompt: A 2 m pole has a 4 m shadow. A building's shadow is 20 m. How tall is the building?
+          options:
+          - 10 m
+          - 40 m
+          - 18 m
+          answer: 10 m
+          why: Height is half the shadow (2 ÷ 4), so the building is 20 ÷ 2 = 10 m.
+      - teach: 'Maps and scale drawings are similar figures too. A scale of 1 : 50000 means 1 cm on the map is 50000 cm, which is 500 m, on the ground. Change units carefully: 100 cm = 1 m and 1000 m = 1 km.'
+        check:
+          prompt: 'On a 1 : 100000 map, 1 cm stands for how much?'
+          options:
+          - 1 km
+          - 100 m
+          - 10 km
+          answer: 1 km
+          why: 100000 cm = 1000 m = 1 km.
     items:
       - prompt: "A 1 m stick casts a 2 m shadow. At the same time, a tree casts a 16 m shadow. How tall is the tree, in metres?"
         answer: "8"
@@ -455,3 +791,64 @@ concepts:
         hints: ["The light reflects at equal angles, so the two triangles are similar.", "Eye height ÷ her distance = tree height ÷ tree's distance."]
         solution: "Step 1: 1.2 ÷ 1.5 = height ÷ 6. Step 2: Height = 6 × 0.8 = 4.8 m."
         mistakes: {"7.5": scale_inverted, "5.7": added_not_ratio}
+      - prompt: A 1 m stick casts a 3 m shadow. At the same time a tower casts a 45 m shadow. How tall is the tower, in metres?
+        answer: '15'
+        check: 45/3
+        difficulty: 1
+        hints:
+        - Height ÷ shadow is the same for both.
+        - The shadow is 3 times the height.
+        solution: 'Step 1: The stick''s shadow is 3 times its height. Step 2: So the tower''s height is 45 ÷ 3. Step 3: = 15 m.'
+        mistakes:
+          '135': shadow_similar
+      - prompt: A 1.5 m girl casts a 1 m shadow. At the same time a tree casts a 6 m shadow. How tall is the tree, in metres?
+        answer: '9'
+        check: 1.5*6/1
+        difficulty: 1
+        hints:
+        - Height is 1.5 times the shadow here.
+        - 6 × 1.5.
+        solution: 'Step 1: Height ÷ shadow = 1.5 ÷ 1 = 1.5. Step 2: Tree height = 6 × 1.5. Step 3: = 9 m.'
+        mistakes:
+          '4': scale_inverted
+      - prompt: A 3 m pole casts a 2 m shadow. At the same time a tower's shadow is 24 m. How tall is the tower, in metres?
+        answer: '36'
+        check: 3*24/2
+        difficulty: 2
+        hints:
+        - Height ÷ shadow = 3 ÷ 2.
+        - 24 × 1.5.
+        solution: 'Step 1: Height ÷ shadow = 1.5. Step 2: Tower = 24 × 1.5. Step 3: = 36 m.'
+        mistakes:
+          '16': scale_inverted
+      - prompt: 'On a map with a scale of 1 : 25000, a road is 8 cm long. How long is it really, in km?'
+        answer: '2'
+        check: 8*25000/100000
+        difficulty: 2
+        hints:
+        - 8 cm on the map is 8 × 25000 cm on the ground.
+        - 100000 cm = 1 km.
+        solution: 'Step 1: 8 × 25000 = 200000 cm. Step 2: 200000 cm = 2000 m. Step 3: = 2 km.'
+        mistakes:
+          '200': unit_change
+          '20': unit_change
+      - prompt: A school plan uses 1 cm for 4 m. The playground is 25 cm long on the plan. How long is it really, in metres?
+        answer: '100'
+        check: 25*4
+        difficulty: 3
+        hints:
+        - Each cm stands for 4 m.
+        - 25 × 4.
+        solution: 'Step 1: 1 cm ↔ 4 m. Step 2: 25 cm ↔ 25 × 4 m. Step 3: = 100 m.'
+        mistakes:
+          '6.25': scale_inverted
+      - prompt: A 6 m tree casts a 4 m shadow. At the same time a lamp post casts a 3 m shadow. How tall is the lamp post, in metres? Decimals are fine.
+        answer: '4.5'
+        check: 6*3/4
+        difficulty: 3
+        hints:
+        - Height ÷ shadow is 6 ÷ 4 for both.
+        - 3 × 1.5.
+        solution: 'Step 1: Height ÷ shadow = 1.5. Step 2: Lamp post = 3 × 1.5. Step 3: = 4.5 m.'
+        mistakes:
+          '2': scale_inverted

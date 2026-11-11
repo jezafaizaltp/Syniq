@@ -10,6 +10,8 @@ tips:
   equal_chords_equal_distance: "Equal chords are the same distance from the centre. Nothing else to calculate."
   perp_bisects_chord: "Draw the perpendicular from the centre to a chord. Measure the two pieces of the chord: what do you notice?"
   three_points_one_circle: "Three points not on a line fix exactly the centre (where the perpendicular bisectors meet). How many centres, so how many circles?"
+  c9m5_half_chord: The right triangle uses half the chord, not the whole chord. Halve the chord before squaring, or double your answer at the end if you found half.
+  c9m5_opposite_not_adjacent: In a cyclic quadrilateral the angles that add to 180° are opposite each other (A with C, B with D), not side by side.
 concepts:
 - code: cbse9gm.circle.chords
   title: Chords and their distance from the centre
@@ -110,6 +112,63 @@ concepts:
           - 1
           - 3
         say: 'Close, but not the longest yet. The longest chord goes right through the centre: the diameter.'
+  lesson:
+    - teach: 'A chord is a line segment joining two points of a circle. The longest chord passes through the centre: the diameter. Draw a perpendicular from the centre O to a chord AB: it always cuts the chord into two equal halves.'
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 5
+          - 5
+          A:
+          - 2
+          - 3
+          B:
+          - 8
+          - 3
+          M:
+          - 5
+          - 3
+        circles:
+        - centre: O
+          radius: 3.6
+        segments:
+        - - A
+          - B
+        - - O
+          - M
+          - d
+        - - O
+          - A
+          - r
+        caption: OM ⟂ AB, so AM = MB. Triangle OMA has a right angle at M.
+        alt: Circle with centre O, chord AB and the perpendicular OM from the centre to the midpoint M of AB; OA is a radius.
+      check:
+        prompt: A chord is 10 cm long. The perpendicular from the centre meets it at M. How long is AM?
+        options:
+        - 5 cm
+        - 10 cm
+        - 20 cm
+        answer: 5 cm
+        why: 'The perpendicular from the centre bisects the chord: 10 ÷ 2 = 5.'
+    - teach: 'Triangle OMA is right-angled at M. Its sides are the radius r (OA), the distance d from the centre (OM) and half the chord (AM). Pythagoras: (half chord)² + d² = r². With chord 8 and d = 3: 4² + 3² = 25, so r = 5.'
+      check:
+        prompt: Radius 10, distance from the centre 6. What is half the chord?
+        options:
+        - '8'
+        - '4'
+        - '16'
+        answer: '8'
+        why: half² = 100 − 36 = 64, so half chord = 8 and the chord is 16.
+    - teach: Equal chords are the same distance from the centre, and chords the same distance from the centre are equal. Equal chords also make equal angles at the centre. And through any three points not on one line, there is exactly one circle.
+      check:
+        prompt: Two chords are each 5 cm from the centre. One is 12 cm long. How long is the other?
+        options:
+        - 12 cm
+        - 5 cm
+        - 6 cm
+        answer: 12 cm
+        why: Same distance from the centre means equal chords.
   items:
   - prompt: A chord is 8 cm long and 3 cm from the centre. Find the radius in cm.
     answer: '5'
@@ -170,6 +229,106 @@ concepts:
     - d² = 100 − 64.
     solution: 'Step 1: d² = 10² − 8² = 36. Step 2: d = 6 cm.'
     mistakes: {"2": "chord_right_triangle", "36": "distance_forgot_root"}
+  - prompt: A chord is 6 cm long and 4 cm from the centre. Find the radius in cm.
+    answer: '5'
+    check: sqrt(3**2 + 4**2)
+    difficulty: 1
+    hints:
+    - Half the chord is 3.
+    - r² = 3² + 4².
+    solution: r² = 9 + 16 = 25, so r = 5 cm.
+    mistakes:
+      '7': chord_right_triangle
+      '52': c9m5_half_chord
+  - prompt: The perpendicular from the centre meets a chord of 14 cm. How long is each part?
+    answer: '7'
+    check: 14/2
+    difficulty: 1
+    hints:
+    - The perpendicular from the centre bisects the chord.
+    - Split 14 into two equal parts.
+    solution: 14 ÷ 2 = 7 cm on each side.
+    mistakes:
+      '14': perp_bisects_chord
+      '28': perp_bisects_chord
+  - prompt: Two chords of a circle are each 7 cm from the centre. One is 20 cm long. How long is the other, in cm?
+    answer: '20'
+    check: '20'
+    difficulty: 1
+    hints:
+    - Chords equally far from the centre are…
+    - …equal.
+    solution: Chords equidistant from the centre are equal, so 20 cm.
+    mistakes:
+      '7': equal_chords_equal_distance
+  - prompt: A circle has radius 5 cm. A chord is 3 cm from the centre. Find the chord's length in cm.
+    answer: '8'
+    check: 2*sqrt(25 - 9)
+    difficulty: 2
+    hints:
+    - Half chord² = 5² − 3².
+    - Then double.
+    solution: Half chord = √(25 − 9) = 4, so the chord is 8 cm.
+    mistakes:
+      '4': c9m5_half_chord
+      '16': chord_right_triangle
+  - prompt: A circle has radius 17 cm and a chord of 30 cm. How far is the chord from the centre, in cm?
+    answer: '8'
+    check: sqrt(17**2 - 15**2)
+    difficulty: 2
+    hints:
+    - Half chord = 15.
+    - d² = 17² − 15² = 289 − 225.
+    solution: d² = 64, so d = 8 cm.
+    mistakes:
+      '64': chord_right_triangle
+      '2': chord_right_triangle
+  - prompt: Two equal chords make angles at the centre. One angle is 70°. What is the other, in degrees?
+    answer: '70'
+    check: '70'
+    difficulty: 2
+    hints:
+    - Equal chords subtend equal angles at the centre.
+    - No working needed.
+    solution: 'Equal chords make equal angles at the centre: 70°.'
+    mistakes:
+      '110': equal_chords_equal_distance
+      '35': centre_double
+  - prompt: Which chord of a circle is the longest?
+    options:
+    - The diameter
+    - Any chord near the edge
+    - A chord 1 cm from the centre
+    - All chords are equal
+    answer: The diameter
+    difficulty: 2
+    hints:
+    - Closer to the centre means longer.
+    - Distance 0 from the centre.
+    solution: The closer a chord is to the centre, the longer it is. The diameter passes through the centre, so it is longest.
+    mistakes:
+      All chords are equal: equal_chords_equal_distance
+  - prompt: Chord AB = 24 cm is 5 cm from the centre. Chord CD of the same circle is 12 cm from the centre. How long is CD, in cm?
+    answer: '10'
+    check: 2*sqrt(13**2 - 12**2)
+    difficulty: 3
+    hints:
+    - 'First find r: r² = 12² + 5².'
+    - Then half of CD = √(r² − 12²).
+    solution: r² = 144 + 25 = 169, r = 13. Half CD = √(169 − 144) = 5, so CD = 10 cm.
+    mistakes:
+      '5': c9m5_half_chord
+      '24': equal_chords_equal_distance
+  - prompt: Three points A, B, C lie on one straight line. How many circles pass through all three?
+    answer: '0'
+    check: '0'
+    difficulty: 3
+    hints:
+    - The centre must be equally far from all three.
+    - Perpendicular bisectors of AB and BC are parallel.
+    solution: 'The perpendicular bisectors of AB and BC are parallel and never meet, so no centre exists: 0 circles.'
+    mistakes:
+      '1': three_points_one_circle
 - code: cbse9gm.circle.angles
   title: Angles in a circle and cyclic quadrilaterals
   after:
@@ -263,6 +422,72 @@ concepts:
       - when:
           degrees: 140
         say: '140° would add to 180° with 40°: that''s for opposite corners of a cyclic quadrilateral, not the same segment.'
+  lesson:
+    - teach: An arc of a circle makes an angle at the centre and an angle at any point on the rest of the circle. The angle at the centre is always double the angle at the circle. If the arc makes 40° at the circle, it makes 80° at the centre.
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 5
+          - 5
+          A:
+          - 2
+          - 3.5
+          B:
+          - 8
+          - 3.5
+          P:
+          - 5
+          - 8.4
+        circles:
+        - centre: O
+          radius: 3.4
+        segments:
+        - - O
+          - A
+        - - O
+          - B
+        - - P
+          - A
+        - - P
+          - B
+        angles:
+        - at: O
+          from: A
+          to: B
+          label: 2x
+        - at: P
+          from: A
+          to: B
+          label: x
+        caption: The angle at the centre is double the angle at P.
+        alt: Circle with centre O, arc AB, angle AOB labelled 2x and angle APB at a point P on the circle labelled x.
+      check:
+        prompt: An arc makes 120° at the centre. What angle does it make at the circle?
+        options:
+        - 60°
+        - 240°
+        - 120°
+        answer: 60°
+        why: Half of 120° is 60°.
+    - teach: 'Two results follow. Angles in the same segment (standing on the same arc, on the same side) are equal. And the angle in a semicircle is 90°: a diameter makes 180° at the centre, so half of that at the circle.'
+      check:
+        prompt: AB is a diameter. C is on the circle. What is ∠ACB?
+        options:
+        - 90°
+        - 180°
+        - 45°
+        answer: 90°
+        why: The angle in a semicircle is a right angle.
+    - teach: 'A cyclic quadrilateral has all four corners on a circle. Its opposite angles add up to 180°: ∠A + ∠C = 180° and ∠B + ∠D = 180°. If ∠A = 70°, then ∠C = 110°.'
+      check:
+        prompt: In cyclic quadrilateral PQRS, ∠Q = 95°. What is ∠S?
+        options:
+        - 85°
+        - 95°
+        - 265°
+        answer: 85°
+        why: Q and S are opposite, so ∠S = 180° − 95° = 85°.
   items:
   - prompt: An arc subtends 50° at a point on the circle. What angle does it subtend at the centre, in degrees?
     answer: '100'
@@ -324,3 +549,105 @@ concepts:
     solution: 'Step 1: 2x + 10 + x + 20 = 180. Step 2: 3x = 150. Step 3: x = 50.'
     mistakes:
       '30': opposite_angles_cyclic
+  - prompt: An arc subtends 35° at a point on the circle. What does it subtend at the centre, in degrees?
+    answer: '70'
+    check: 2*35
+    difficulty: 1
+    hints:
+    - The centre angle is double.
+    - 2 × 35.
+    solution: 2 × 35° = 70°.
+    mistakes:
+      '17.5': centre_double
+      '35': centre_double
+  - prompt: An arc subtends 100° at the centre. What does it subtend at a point on the remaining circle, in degrees?
+    answer: '50'
+    check: 100/2
+    difficulty: 1
+    hints:
+    - The angle at the circle is half the centre angle.
+    - 100 ÷ 2.
+    solution: 100° ÷ 2 = 50°.
+    mistakes:
+      '200': centre_double
+      '100': centre_double
+  - prompt: ABCD is a cyclic quadrilateral with ∠B = 110°. Find ∠D in degrees.
+    answer: '70'
+    check: 180 - 110
+    difficulty: 1
+    hints:
+    - B and D are opposite.
+    - Opposite angles add to 180°.
+    solution: ∠D = 180° − 110° = 70°.
+    mistakes:
+      '110': cyclic_only
+      '250': c9m5_opposite_not_adjacent
+  - prompt: PQ is a diameter of a circle and R is another point on it. ∠PQR = 40°. Find ∠QPR in degrees.
+    answer: '50'
+    check: 180 - 90 - 40
+    difficulty: 2
+    hints:
+    - ∠PRQ is in a semicircle.
+    - Angles of a triangle add to 180°.
+    solution: ∠PRQ = 90°, so ∠QPR = 180° − 90° − 40° = 50°.
+    mistakes:
+      '40': semicircle_right
+      '140': semicircle_right
+  - prompt: Chord AB subtends ∠ACB = 55° at C on the circle. D is on the same arc as C. Find ∠ADB in degrees.
+    answer: '55'
+    check: '55'
+    difficulty: 2
+    hints:
+    - C and D are in the same segment.
+    - Angles in the same segment are equal.
+    solution: ∠ADB = ∠ACB = 55°.
+    mistakes:
+      '110': same_segment_equal
+      '125': same_segment_equal
+  - prompt: Can a quadrilateral with angles 80°, 90°, 100° and 90° (in order) be cyclic?
+    options:
+    - Yes, both pairs of opposite angles add to 180°
+    - No, no angle is 180°
+    - No, two angles are equal
+    - Only if it is a square
+    answer: Yes, both pairs of opposite angles add to 180°
+    difficulty: 2
+    hints:
+    - Pair the 1st with the 3rd angle and the 2nd with the 4th.
+    - 80 + 100 and 90 + 90.
+    solution: 80° + 100° = 180° and 90° + 90° = 180°, so the quadrilateral can be cyclic.
+    mistakes:
+      No, no angle is 180°: cyclic_only
+  - prompt: O is the centre and ∠AOB = 140°. C is on the major arc. Find ∠ACB in degrees.
+    answer: '70'
+    check: 140/2
+    difficulty: 2
+    hints:
+    - C is on the other side from the arc AB.
+    - Halve the centre angle.
+    solution: ∠ACB = 140° ÷ 2 = 70°.
+    mistakes:
+      '280': centre_double
+      '40': semicircle_right
+  - prompt: In cyclic quadrilateral ABCD, ∠A = (3x − 10)° and ∠C = (x + 30)°. Find x.
+    answer: '40'
+    check: (180 - 20)/4
+    difficulty: 3
+    hints:
+    - ∠A + ∠C = 180.
+    - 4x + 20 = 180.
+    solution: 3x − 10 + x + 30 = 180, so 4x = 160 and x = 40.
+    mistakes:
+      '50': c9m5_opposite_not_adjacent
+      '160': cyclic_only
+  - prompt: O is the centre, and triangle AOB has OA = OB with ∠OAB = 25°. C is on the major arc. Find ∠ACB in degrees.
+    answer: '65'
+    check: (180 - 50)/2
+    difficulty: 3
+    hints:
+    - Triangle AOB is isosceles, so ∠OBA = 25°.
+    - ∠AOB = 180 − 50; then halve.
+    solution: ∠AOB = 180° − 25° − 25° = 130°. ∠ACB = 130° ÷ 2 = 65°.
+    mistakes:
+      '130': centre_double
+      '25': same_segment_equal

@@ -16,6 +16,7 @@ tips:
   midpoint_theorem_used: "Draw one diagonal. It splits the quadrilateral into two triangles, each with two midpoints joined. Which theorem is about that?"
   varignon_parallelogram: "Each side of the inner shape is parallel to a diagonal and half its length. Opposite sides match: which shape has that?"
   varignon_perimeter: "Each side of the midpoint shape is half a diagonal, and each diagonal is used twice."
+  c9m12_one_pair_test: "Draw a diagonal. With one pair of sides equal and parallel, the two triangles it makes are congruent (SAS). What does that tell you about the other two sides?"
 concepts:
 - code: cbse9gm.quad.parallelogram
   title: Properties of a parallelogram
@@ -106,6 +107,76 @@ concepts:
           - 45
           - 60
         say: Too narrow. The diagonals of a rhombus cut each other at right angles, making four equal corners in the middle.
+  lesson:
+    - teach: Any quadrilateral can be cut by a diagonal into two triangles, each with angles adding to 180°. So the four angles of a quadrilateral add to 360°.
+      check:
+        prompt: Three angles of a quadrilateral are 90°, 90° and 100°. What is the fourth?
+        options:
+        - 80°
+        - 100°
+        - 180°
+        answer: 80°
+        why: 360 − 280 = 80.
+    - teach: 'A parallelogram has both pairs of opposite sides parallel. Then: opposite sides are equal, opposite angles are equal, and adjacent angles add to 180° (co-interior angles between parallel lines). The diagonals cut each other in half.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 2
+          B:
+          - 6
+          - 2
+          C:
+          - 8
+          - 6
+          D:
+          - 3
+          - 6
+          O:
+          - 4.5
+          - 4
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - D
+        - - D
+          - A
+        - - A
+          - C
+        - - B
+          - D
+        angles:
+        - at: A
+          from: B
+          to: D
+          label: x
+        - at: B
+          from: C
+          to: A
+          label: 180° − x
+        caption: Opposite angles are equal; neighbours add to 180°; O is the midpoint of both diagonals.
+        alt: Parallelogram ABCD with diagonals meeting at O; angle A is x and angle B is 180° minus x.
+      check:
+        prompt: In parallelogram PQRS, ∠P = 65°. What is ∠Q?
+        options:
+        - 115°
+        - 65°
+        - 25°
+        answer: 115°
+        why: P and Q are adjacent, so they add to 180°.
+    - teach: 'Special parallelograms: a rectangle has equal diagonals; a rhombus has perpendicular diagonals; a square has both. And to prove a quadrilateral is a parallelogram, it is enough to show one pair of opposite sides is equal and parallel.'
+      check:
+        prompt: Which quadrilateral has diagonals that are perpendicular but not always equal?
+        options:
+        - Rhombus
+        - Rectangle
+        - Square
+        answer: Rhombus
+        why: A rhombus's diagonals cross at right angles; they are equal only if it is a square.
   items:
   - prompt: Three angles of a quadrilateral are 80°, 95° and 110°. Find the fourth angle in degrees.
     answer: '75'
@@ -179,6 +250,100 @@ concepts:
     solution: 'Step 1: x + 2x + 3x + 4x = 10x = 360°. Step 2: x = 36°.'
     mistakes:
       '18': quad_sum_360
+  - prompt: Three angles of a quadrilateral are 70°, 120° and 85°. Find the fourth, in degrees.
+    answer: '85'
+    check: 360 - 70 - 120 - 85
+    difficulty: 1
+    hints:
+    - The angles add to 360°.
+    - 360 − 275.
+    solution: 360 − 275 = 85°.
+    mistakes:
+      '265': quad_sum_360
+      '5': quad_sum_360
+  - prompt: In parallelogram ABCD, AB = 9 cm. How long is CD, in cm?
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - AB and CD are opposite sides.
+    - Opposite sides of a parallelogram are equal.
+    solution: Opposite sides are equal, so CD = 9 cm.
+    mistakes:
+      '18': parallelogram_adjacent
+  - prompt: In parallelogram ABCD, ∠B = 125°. Find ∠D in degrees.
+    answer: '125'
+    check: '125'
+    difficulty: 1
+    hints:
+    - B and D are opposite.
+    - Opposite angles are equal.
+    solution: ∠D = ∠B = 125°.
+    mistakes:
+      '55': parallelogram_adjacent
+  - prompt: The diagonals of parallelogram PQRS meet at O. OQ = 5 cm. How long is QS, in cm?
+    answer: '10'
+    check: '10'
+    difficulty: 2
+    hints:
+    - The diagonals bisect each other.
+    - O is the middle of QS.
+    solution: QS = 2 × OQ = 10 cm.
+    mistakes:
+      '5': diagonals_bisect
+      '2.5': diagonals_bisect
+  - prompt: Which quadrilateral has equal diagonals that are not always perpendicular?
+    options:
+    - Rectangle
+    - Rhombus
+    - Square
+    - Kite
+    answer: Rectangle
+    difficulty: 2
+    hints:
+    - Picture a long, thin shape with four right angles.
+    - Its diagonals are equal but cross at a slant.
+    solution: A rectangle's diagonals are equal; they are perpendicular only when it is a square.
+    mistakes:
+      Rhombus: equal_and_perp
+      Square: equal_and_perp
+  - prompt: In parallelogram ABCD, ∠A = (2x + 10)° and ∠B = (3x − 30)°. Find x.
+    answer: '40'
+    check: 200/5
+    difficulty: 2
+    hints:
+    - 'A and B are adjacent: they add to 180°.'
+    - 5x − 20 = 180.
+    solution: 2x + 10 + 3x − 30 = 180, so 5x = 200 and x = 40.
+    mistakes:
+      '8': parallelogram_adjacent
+      '36': quad_sum_360
+  - prompt: A quadrilateral has one pair of opposite sides equal AND parallel. What must it be?
+    options:
+    - A parallelogram
+    - A rectangle
+    - A trapezium only
+    - Nothing can be said
+    answer: A parallelogram
+    difficulty: 2
+    hints:
+    - Join a diagonal and compare the two triangles it makes.
+    - The triangles are congruent, so the other pair of sides is parallel too.
+    solution: One pair of opposite sides equal and parallel is enough to prove a parallelogram.
+    mistakes:
+      Nothing can be said: c9m12_one_pair_test
+      A rectangle: equal_and_perp
+  - prompt: In a rhombus, one diagonal makes an angle of 35° with a side. What angle do the diagonals make with each other, in degrees?
+    answer: '90'
+    check: '90'
+    difficulty: 3
+    hints:
+    - What is special about a rhombus's diagonals?
+    - They are perpendicular.
+    solution: The diagonals of a rhombus always cross at 90°, whatever the side angle.
+    mistakes:
+      '35': equal_and_perp
+      '70': equal_and_perp
 - code: cbse9gm.quad.midpoint
   title: The mid-point theorem
   after:
@@ -284,6 +449,65 @@ concepts:
       - when:
           small: 10
         say: 'Not yet: the midpoint triangle''s sides are half of BC, CA and AB. CA + AB must grow.'
+  lesson:
+    - teach: 'In any triangle ABC, mark D, the midpoint of AB, and E, the midpoint of AC. Join DE. The mid-point theorem says: DE is parallel to BC, and DE is exactly half of BC.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 5
+          - 9
+          B:
+          - 1
+          - 1
+          C:
+          - 9
+          - 1
+          D:
+          - 3
+          - 5
+          E:
+          - 7
+          - 5
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+          - '12'
+        - - C
+          - A
+        - - D
+          - E
+          - '6'
+        caption: D and E are midpoints, so DE ∥ BC and DE = ½BC.
+        alt: Triangle ABC with midpoints D on AB and E on AC; DE is parallel to BC and half its length, 6 against 12.
+      check:
+        prompt: BC = 18 cm. D and E are midpoints of AB and AC. How long is DE?
+        options:
+        - 9 cm
+        - 18 cm
+        - 36 cm
+        answer: 9 cm
+        why: DE is half of BC.
+    - teach: 'The converse also holds: a line through the midpoint of one side, parallel to a second side, cuts the third side exactly in half.'
+      check:
+        prompt: D is the midpoint of AB and DE ∥ BC meets AC at E. AC = 16 cm. What is AE?
+        options:
+        - 8 cm
+        - 16 cm
+        - 4 cm
+        answer: 8 cm
+        why: By the converse, E is the midpoint of AC.
+    - teach: Join the midpoints of all three sides and you get a small triangle whose sides are halves of the big triangle's sides, so its perimeter is half. Joining the midpoints of any quadrilateral's sides gives a parallelogram.
+      check:
+        prompt: A triangle has perimeter 30 cm. What is the perimeter of the triangle formed by joining its midpoints?
+        options:
+        - 15 cm
+        - 30 cm
+        - 10 cm
+        answer: 15 cm
+        why: Each side is half, so the perimeter is half.
   items:
   - prompt: D and E are mid-points of AB and AC in △ABC. If BC = 12 cm, find DE in cm.
     answer: '6'
@@ -350,6 +574,111 @@ concepts:
     - E is the mid-point of AC.
     solution: The line through D parallel to BC bisects AC, so AE = 10 ÷ 2 = 5 cm.
     mistakes: {"10": "converse_midpoint", "20": "converse_midpoint"}
+  - prompt: D and E are mid-points of AB and AC in △ABC. If BC = 20 cm, find DE in cm.
+    answer: '10'
+    check: 20/2
+    difficulty: 1
+    hints:
+    - DE is half of BC.
+    - 20 ÷ 2.
+    solution: DE = ½ × 20 = 10 cm.
+    mistakes:
+      '20': midpoint_half
+      '40': midpoint_half
+  - prompt: D and E are mid-points of AB and AC. If DE = 7 cm, find BC in cm.
+    answer: '14'
+    check: 2*7
+    difficulty: 1
+    hints:
+    - BC is twice DE.
+    - 2 × 7.
+    solution: BC = 2 × 7 = 14 cm.
+    mistakes:
+      '3.5': midpoint_half
+      '7': midpoint_half
+  - prompt: In △PQR, X and Y are the midpoints of PQ and PR. Which side is XY parallel to?
+    options:
+    - QR
+    - PQ
+    - PR
+    - None
+    answer: QR
+    difficulty: 1
+    hints:
+    - XY joins midpoints of two sides.
+    - It is parallel to the third side.
+    solution: By the mid-point theorem, XY ∥ QR.
+    mistakes:
+      PQ: midpoint_theorem_parallel
+  - prompt: A triangle has sides 6 cm, 9 cm and 11 cm. The midpoints are joined. What is the perimeter of the new triangle, in cm?
+    answer: '13'
+    check: (6 + 9 + 11)/2
+    difficulty: 2
+    hints:
+    - Each new side is half an old side.
+    - Half of 26.
+    solution: 'Sides 3, 4.5, 5.5: perimeter 13 cm.'
+    mistakes:
+      '26': midpoint_half
+      '52': midpoint_half
+  - prompt: In △ABC, D is the midpoint of AB. A line through D parallel to BC meets AC at E. If AE = 6 cm, find AC in cm.
+    answer: '12'
+    check: '12'
+    difficulty: 2
+    hints:
+    - By the converse, E is the midpoint of AC.
+    - AC = 2 × AE.
+    solution: E is the midpoint of AC, so AC = 12 cm.
+    mistakes:
+      '6': converse_midpoint
+      '3': converse_midpoint
+  - prompt: ABCD is any quadrilateral. P, Q, R, S are midpoints of AB, BC, CD, DA. Why is PQ ∥ SR?
+    options:
+    - Both are parallel to the diagonal AC
+    - Both are parallel to BD
+    - Because ABCD is a parallelogram
+    - Because PQ = QR
+    answer: Both are parallel to the diagonal AC
+    difficulty: 2
+    hints:
+    - 'Look at △ABC: P and Q are midpoints of two of its sides.'
+    - Then look at △ACD.
+    solution: In △ABC, PQ ∥ AC. In △ACD, SR ∥ AC. So PQ ∥ SR.
+    mistakes:
+      Because ABCD is a parallelogram: varignon_parallelogram
+  - prompt: D and E are midpoints of AB and AC. ∠ABC = 55°. Find ∠ADE in degrees.
+    answer: '55'
+    check: '55'
+    difficulty: 2
+    hints:
+    - DE ∥ BC.
+    - Corresponding angles along AB are equal.
+    solution: DE ∥ BC, so ∠ADE = ∠ABC = 55° (corresponding angles).
+    mistakes:
+      '125': midpoint_theorem_parallel
+      '27.5': midpoint_half
+  - prompt: An equilateral triangle has side 16 cm. Its midpoints are joined, then the midpoints of the new triangle are joined. What is the side of the smallest triangle, in cm?
+    answer: '4'
+    check: 16/4
+    difficulty: 3
+    hints:
+    - Each joining halves the side.
+    - 16 → 8 → ?
+    solution: 16 → 8 → 4 cm.
+    mistakes:
+      '8': midpoint_half
+      '2': midpoint_half
+  - prompt: In △ABC, D and E are midpoints of AB and AC, and DE = 2x + 1 while BC = 5x − 4. Find x.
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - BC = 2 × DE.
+    - 5x − 4 = 4x + 2.
+    solution: '5x − 4 = 2(2x + 1) = 4x + 2, so x = 6. Check: DE = 13, BC = 26.'
+    mistakes:
+      '1.67': midpoint_half
+      '3': midpoint_theorem_used
 - code: cbse9gm.quad.centroid_varignon
   title: Medians, the centroid and midpoint quadrilaterals
   after:
@@ -432,6 +761,67 @@ concepts:
           x: 0
           y: 1
         say: 'Swapped: the x-values average to 1 and the y-values to 0.'
+  lesson:
+    - teach: A median of a triangle joins a corner to the midpoint of the opposite side. Every triangle has three medians, and they always meet at one point, the centroid G. If you cut the triangle from card, it balances on G.
+      check:
+        prompt: A median joins a vertex to…
+        options:
+        - the midpoint of the opposite side
+        - the opposite vertex
+        - the centre of the circle
+        answer: the midpoint of the opposite side
+        why: That is what a median is.
+    - teach: 'G divides each median in the ratio 2 : 1 from the vertex. If median AM is 9 cm, AG = 6 cm and GM = 3 cm. On a coordinate grid, G is the average of the three vertices: ((x₁ + x₂ + x₃)/3, (y₁ + y₂ + y₃)/3).'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 5
+          - 9
+          B:
+          - 1
+          - 1
+          C:
+          - 9
+          - 1
+          M:
+          - 5
+          - 1
+          G:
+          - 5
+          - 3.67
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        - - A
+          - G
+          - 2 parts
+        - - G
+          - M
+          - 1 part
+        caption: 'AG : GM = 2 : 1.'
+        alt: Triangle ABC with median AM; the centroid G divides AM so that AG is two parts and GM is one part.
+      check:
+        prompt: Vertices (0, 0), (9, 0), (0, 6). What is the centroid?
+        options:
+        - (3, 2)
+        - (4.5, 3)
+        - (9, 6)
+        answer: (3, 2)
+        why: ((0 + 9 + 0)/3, (0 + 0 + 6)/3) = (3, 2).
+    - teach: 'Varignon''s theorem: joining the midpoints of any quadrilateral''s sides, in order, makes a parallelogram. Each of its sides is parallel to a diagonal and half as long, so its perimeter equals the sum of the diagonals.'
+      check:
+        prompt: A quadrilateral's diagonals are 8 cm and 12 cm. What is the perimeter of its midpoint parallelogram?
+        options:
+        - 20 cm
+        - 40 cm
+        - 10 cm
+        answer: 20 cm
+        why: 'Two sides of 4 and two of 6: 4 + 6 + 4 + 6 = 20.'
   items:
   - prompt: Find the x-coordinate of the centroid of the triangle with vertices (0, 0), (6, 0) and (3, 9).
     answer: '3'
@@ -497,3 +887,108 @@ concepts:
     - 2 + 3 + y = 15.
     solution: 'Step 1: (2 + 3 + y)/3 = 5. Step 2: y = 15 − 5 = 10. (The x-coordinate is 12 − 9 = 3.)'
     mistakes: {"5": "centroid_reverse", "15": "centroid_reverse"}
+  - prompt: Find the y-coordinate of the centroid of the triangle with vertices (1, 2), (4, 6) and (7, 1).
+    answer: '3'
+    check: (2 + 6 + 1)/3
+    difficulty: 1
+    hints:
+    - Average the three y-values.
+    - (2 + 6 + 1) ÷ 3.
+    solution: 9 ÷ 3 = 3.
+    mistakes:
+      '9': centroid_average
+      '4.5': centroid_average
+  - prompt: Median PM is 15 cm. How far is the centroid from M, in cm?
+    answer: '5'
+    check: 15/3
+    difficulty: 1
+    hints:
+    - 'PG : GM = 2 : 1.'
+    - GM is one third of the median.
+    solution: GM = 15 ÷ 3 = 5 cm (and PG = 10 cm).
+    mistakes:
+      '10': centroid_ratio_flip
+      '7.5': centroid_ratio_flip
+  - prompt: How many medians does a triangle have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - One from each corner.
+    - A triangle has three corners.
+    solution: 'One median from each vertex: 3.'
+    mistakes:
+      '1': centroid_average
+      '2': centroid_average
+  - prompt: AG = 10 cm, where G is the centroid on median AM. How long is AM, in cm?
+    answer: '15'
+    check: 10*3/2
+    difficulty: 2
+    hints:
+    - AG is 2 parts of 3.
+    - One part = 5 cm.
+    solution: AG = 2 parts = 10, so 1 part = 5 and AM = 15 cm.
+    mistakes:
+      '20': centroid_reverse
+      '30': centroid_reverse
+  - prompt: Find the centroid of the triangle with vertices (−3, 4), (5, 2) and (1, −3).
+    options:
+    - (1, 1)
+    - (3, 3)
+    - (1, 3)
+    - (−1, 1)
+    answer: (1, 1)
+    difficulty: 2
+    hints:
+    - (−3 + 5 + 1) ÷ 3.
+    - (4 + 2 − 3) ÷ 3.
+    solution: (3/3, 3/3) = (1, 1).
+    mistakes:
+      (3, 3): centroid_average
+  - prompt: A rectangle has diagonals 10 cm each. What shape is its midpoint quadrilateral?
+    options:
+    - A rhombus
+    - A rectangle that is not a square
+    - A trapezium
+    - A kite that is not a parallelogram
+    answer: A rhombus
+    difficulty: 2
+    hints:
+    - Each side of the midpoint shape is half a diagonal.
+    - Both diagonals are equal.
+    solution: All four sides are 5 cm, so the parallelogram is a rhombus.
+    mistakes:
+      A trapezium: varignon_parallelogram
+  - prompt: A quadrilateral has diagonals 9 cm and 15 cm. Find the perimeter of its midpoint quadrilateral, in cm.
+    answer: '24'
+    check: 9 + 15
+    difficulty: 2
+    hints:
+    - 'Sides are half the diagonals: 4.5 and 7.5.'
+    - Two of each.
+    solution: 2 × 4.5 + 2 × 7.5 = 24 cm, the sum of the diagonals.
+    mistakes:
+      '48': varignon_perimeter
+      '12': varignon_perimeter
+  - prompt: The centroid is (2, 3). Two vertices are (0, 0) and (5, 1). What is the x-coordinate of the third vertex?
+    answer: '1'
+    check: 3*2 - 0 - 5
+    difficulty: 3
+    hints:
+    - (0 + 5 + x)/3 = 2.
+    - 5 + x = 6.
+    solution: 0 + 5 + x = 6, so x = 1.
+    mistakes:
+      '-3': centroid_reverse
+      '6': centroid_reverse
+  - prompt: In △ABC, median AD = 18 cm and G is the centroid. M is the midpoint of AG. How long is MD, in cm?
+    answer: '12'
+    check: 6 + 6
+    difficulty: 3
+    hints:
+    - Split the median 2 : 1 at G.
+    - M is 6 from G; MD = MG + GD.
+    solution: AG = 12 cm, so MG = 6 cm. MD = 6 + 6 = 12 cm.
+    mistakes:
+      '6': centroid_ratio_flip
+      '9': centroid_ratio_flip

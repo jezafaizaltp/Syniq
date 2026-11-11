@@ -71,6 +71,33 @@ concepts:
         bin: Rational
         clue: Can you write −7 as a fraction?
         why: '−7 = −7/1: every whole number is rational.'
+    lesson:
+      - teach: 'A rational number is one that can be written as a fraction of whole numbers: 5 = 5/1, 0.25 = 1/4, −3 = −3/1, and recurring decimals like 0.333… = 1/3. Their decimals either end or repeat.'
+        check:
+          prompt: Which of these is rational?
+          options:
+          - '0.75'
+          - √3
+          - π
+          answer: '0.75'
+          why: 0.75 = 3/4, a fraction. √3 and π can't be written as fractions.
+      - teach: 'An irrational number can''t be written as a fraction. Its decimals go on for ever without repeating: √2 = 1.41421…, π = 3.14159… Rational and irrational numbers together make up the real numbers.'
+        check:
+          prompt: 0.1234567891011… (counting on for ever) never repeats. What kind of number is it?
+          options:
+          - Irrational
+          - Rational
+          answer: Irrational
+          why: Its decimals never end and never settle into a repeating block.
+      - teach: 'Mixing them: a rational plus an irrational is always irrational (1 + √2). But two irrationals can give a rational: √2 × √2 = 2, and √3 + (−√3) = 0. Simplify before deciding.'
+        check:
+          prompt: What kind of number is √5 × √20?
+          options:
+          - 'Rational: it is 10'
+          - Irrational
+          - It can't be worked out
+          answer: 'Rational: it is 10'
+          why: √5 × √20 = √100 = 10, a whole number.
     items:
       - prompt: "Which of these numbers is irrational?"
         options: ["√5", "0.75", "−3", "22/7"]
@@ -142,6 +169,87 @@ concepts:
         hints: ["√20 is between 4 and 5; √90 is between 9 and 10.", "Count 5, 6, 7, 8, 9."]
         solution: "Step 1: 4² = 16 < 20 < 25 = 5², so √20 is between 4 and 5. Step 2: 9² = 81 < 90 < 100, so √90 is between 9 and 10. Step 3: The whole numbers between are 5, 6, 7, 8, 9: five of them."
         mistakes: {"70": whole_between_roots, "6": whole_between_roots}
+      - prompt: Which one of these cannot be written as a fraction?
+        options:
+        - √11
+        - √36
+        - '0.5'
+        - −7
+        answer: √11
+        difficulty: 1
+        hints:
+        - Check which square roots come out exactly.
+        - √36 = 6. Is 11 a perfect square?
+        solution: 'Step 1: √36 = 6, 0.5 = 1/2 and −7 = −7/1 are rational. Step 2: 11 is not a perfect square. Step 3: So √11 is irrational.'
+        mistakes:
+          √36: root_of_square
+      - prompt: Which of these is a rational number?
+        options:
+        - √49
+        - √8
+        - π
+        - √2 + 1
+        answer: √49
+        difficulty: 1
+        hints:
+        - A square root of a perfect square is a whole number.
+        - 49 = 7 × 7.
+        solution: 'Step 1: √49 = 7 = 7/1. Step 2: √8 and π are irrational. Step 3: √2 + 1 is rational plus irrational, so irrational.'
+        mistakes:
+          √2 + 1: irrational_sum
+      - prompt: What kind of number is 3 + √7?
+        options:
+        - Irrational
+        - Rational
+        - A whole number
+        answer: Irrational
+        difficulty: 2
+        hints:
+        - Is √7 rational?
+        - A rational plus an irrational is…?
+        solution: 'Step 1: 3 is rational. Step 2: √7 is irrational. Step 3: Their sum is irrational.'
+        mistakes:
+          Rational: irrational_sum
+      - prompt: What kind of number is √8 ÷ √2?
+        options:
+        - 'Rational: it is 2'
+        - 'Irrational: it is √4'
+        - 'Irrational: it has roots in it'
+        answer: 'Rational: it is 2'
+        difficulty: 2
+        hints:
+        - √a ÷ √b = √(a ÷ b).
+        - 8 ÷ 2 = 4.
+        solution: 'Step 1: √8 ÷ √2 = √4. Step 2: √4 = 2. Step 3: 2 is rational.'
+        mistakes:
+          'Irrational: it has roots in it': irrational_product
+          'Irrational: it is √4': root_of_square
+      - prompt: How many whole numbers are there between √5 and √30?
+        answer: '3'
+        check: 5 - 2
+        difficulty: 3
+        hints:
+        - √5 is between 2 and 3, and √30 between 5 and 6.
+        - Count the whole numbers from 3 to 5.
+        solution: 'Step 1: √5 ≈ 2.24 and √30 ≈ 5.48. Step 2: The whole numbers between are 3, 4, 5. Step 3: That is 3 numbers.'
+        mistakes:
+          '25': whole_between_roots
+          '4': whole_between_roots
+      - prompt: Which of these is a rational number between √2 and √3?
+        options:
+        - '1.5'
+        - √2.5
+        - '1.4'
+        - '1.8'
+        answer: '1.5'
+        difficulty: 3
+        hints:
+        - √2 ≈ 1.414 and √3 ≈ 1.732.
+        - Which decimal sits between them, and is rational?
+        solution: 'Step 1: √2 ≈ 1.414 and √3 ≈ 1.732. Step 2: 1.5 is between them and equals 3/2. Step 3: √2.5 is between them but irrational; 1.4 and 1.8 are outside.'
+        mistakes:
+          '1.4': between_root2
+          √2.5: non_repeating
 
   - code: math9.real.number_line
     title: Real numbers on the number line
@@ -199,6 +307,40 @@ concepts:
         - when:
             v: 2
           say: '2 is too far: √2 × √2 = 2, so √2 itself is much less than 2.'
+    lesson:
+      - teach: Every real number has a place on the number line, rational or irrational, and every point on the line is a real number. There are no gaps.
+        check:
+          prompt: Is there a point on the number line for √3?
+          options:
+          - Yes, every real number has a point
+          - No, only fractions have points
+          answer: Yes, every real number has a point
+          why: The number line has a point for every real number, including irrationals like √3.
+      - teach: We can mark √2 exactly. Draw a square of side 1 on the line from 0 to 1. Its diagonal is √2. Put the compass point at 0, open it to the diagonal's top corner, and swing an arc down to the line. It lands at √2, about 1.41.
+        picture:
+          kind: flow
+          steps:
+          - Square of side 1 from 0 to 1
+          - Diagonal = √2
+          - Compass at 0, swing the diagonal down
+          - It lands at √2 ≈ 1.41
+          alt: Marking √2 on the number line by swinging the diagonal of a unit square down from 0.
+        check:
+          prompt: To mark √5 the same way, which right triangle do you draw from 0?
+          options:
+          - Shorter sides 1 and 2
+          - Shorter sides 1 and 1
+          - Shorter sides 2 and 3
+          answer: Shorter sides 1 and 2
+          why: 1² + 2² = 5, so its longest side is √5.
+      - teach: 'To order numbers with roots, use decimals or compare squares. √3 ≈ 1.732 lies between 1.7 and 7/4 = 1.75. Negative numbers flip the order: −√5 ≈ −2.24 is to the left of −2.'
+        check:
+          prompt: 'Which is further right on the number line: √10 or 3?'
+          options:
+          - √10
+          - '3'
+          answer: √10
+          why: 3 = √9, and √10 > √9.
     items:
       - prompt: "Between which two whole numbers is √7 on the number line?"
         options: ["2 and 3", "3 and 4", "6 and 7", "1 and 2"]
@@ -263,6 +405,85 @@ concepts:
         hints: ["Distance = bigger − smaller = 2√2 − (−√2).", "That is 3√2."]
         solution: "Step 1: 2√2 − (−√2) = 3√2. Step 2: 3 × 1.414 = 4.242."
         mistakes: {"1.414": distance_subtract, "2.828": negative_distance}
+      - prompt: Between which two whole numbers is √40 on the number line?
+        options:
+        - 6 and 7
+        - 5 and 6
+        - 20 and 21
+        - 7 and 8
+        answer: 6 and 7
+        difficulty: 1
+        hints:
+        - Find the perfect squares either side of 40.
+        - 36 and 49.
+        solution: 'Step 1: 36 < 40 < 49. Step 2: √36 = 6 and √49 = 7. Step 3: So √40 is between 6 and 7.'
+        mistakes:
+          20 and 21: root_of_square
+      - prompt: Which of these points is furthest to the left on the number line?
+        options:
+        - −√10
+        - −3
+        - −√5
+        - '0'
+        answer: −√10
+        difficulty: 1
+        hints:
+        - Furthest left means smallest.
+        - √10 ≈ 3.16, so −√10 ≈ −3.16.
+        solution: 'Step 1: −√10 ≈ −3.16 and −√5 ≈ −2.24. Step 2: −3.16 < −3 < −2.24 < 0. Step 3: So −√10 is furthest left.'
+        mistakes:
+          −3: furthest_right
+          '0': furthest_right
+      - prompt: Which whole number is nearest to √60?
+        answer: '8'
+        check: '8'
+        difficulty: 2
+        hints:
+        - 7² = 49 and 8² = 64.
+        - Is 60 closer to 49 or to 64?
+        solution: 'Step 1: 49 < 60 < 64. Step 2: 60 is 4 from 64 but 11 from 49. Step 3: So √60 ≈ 7.75 and the nearest whole number is 8.'
+        mistakes:
+          '7': decimal_compare
+          '30': root_of_square
+      - prompt: Put 1.5, √2 and 1.4 in order from smallest to largest.
+        options:
+        - 1.4, √2, 1.5
+        - √2, 1.4, 1.5
+        - 1.4, 1.5, √2
+        - 1.5, √2, 1.4
+        answer: 1.4, √2, 1.5
+        difficulty: 2
+        hints:
+        - √2 ≈ 1.414.
+        - Where does 1.414 fit between 1.4 and 1.5?
+        solution: 'Step 1: √2 ≈ 1.414. Step 2: 1.4 < 1.414 < 1.5. Step 3: So 1.4, √2, 1.5.'
+        mistakes:
+          √2, 1.4, 1.5: decimal_compare
+          1.4, 1.5, √2: decimal_compare
+      - prompt: A square of side 1 is drawn from 2 to 3 on the number line. Its diagonal from 2 is swung down onto the line, to the right. Where does it land?
+        options:
+        - 2 + √2
+        - √2
+        - 3√2
+        - 2√2
+        answer: 2 + √2
+        difficulty: 3
+        hints:
+        - The compass is at 2, not 0.
+        - The diagonal is √2 long, measured from 2.
+        solution: 'Step 1: The diagonal is √2. Step 2: The compass point is at 2. Step 3: So it lands at 2 + √2 ≈ 3.41.'
+        mistakes:
+          √2: diagonal_swing
+      - prompt: On the number line, P is at √3 and Q is at 4√3. Using √3 ≈ 1.732, how far apart are they, to three decimal places?
+        answer: '5.196'
+        check: 3*1.732
+        difficulty: 3
+        hints:
+        - Distance = 4√3 − √3.
+        - That is 3√3.
+        solution: 'Step 1: 4√3 − √3 = 3√3. Step 2: 3 × 1.732. Step 3: = 5.196.'
+        mistakes:
+          '8.66': distance_subtract
 
   - code: math9.real.distance
     title: Distance between points
@@ -313,6 +534,45 @@ concepts:
             - 5
             - 6
           say: That's to the right of 4. The goal wants the number on the left.
+    lesson:
+      - teach: The distance between two points on the number line is the bigger number minus the smaller one. From 3 to 8 is 8 − 3 = 5. From −2 to 5 is 5 − (−2) = 7. Distances are never negative.
+        picture:
+          kind: number_line
+          from: -3
+          to: 6
+          step: 1
+          points:
+          - at: -2
+            label: −2
+          - at: 5
+            label: '5'
+          alt: On the number line, −2 and 5 are 7 steps apart.
+        check:
+          prompt: How far apart are −4 and 2?
+          options:
+          - '6'
+          - −2
+          - '2'
+          answer: '6'
+          why: '2 − (−4) = 2 + 4 = 6. Count the steps: 4 to reach 0, then 2 more.'
+      - teach: '|a|, called the absolute value of a, is the distance of a from 0. |−9| = 9 and |9| = 9. The distance between x and y is |x − y|, which is the same as |y − x|.'
+        check:
+          prompt: What is |2 − 11|?
+          options:
+          - '9'
+          - −9
+          - '13'
+          answer: '9'
+          why: 2 − 11 = −9, and its distance from 0 is 9.
+      - teach: 'The point halfway between a and b is (a + b)/2: halfway between −4 and 10 is 6/2 = 3. And an equation like |x − 3| = 5 has two answers: the points 5 steps either side of 3, which are 8 and −2.'
+        check:
+          prompt: Which numbers are 4 away from 1?
+          options:
+          - 5 and −3
+          - 5 only
+          - 4 and −4
+          answer: 5 and −3
+          why: 1 + 4 = 5 and 1 − 4 = −3. Both are 4 steps from 1.
     items:
       - prompt: "On the number line, how far apart are 3 and 8?"
         answer: "5"
@@ -391,3 +651,66 @@ concepts:
         hints: ["Distance = bigger − smaller.", "6.25 − (−3.5) = 6.25 + 3.5."]
         solution: "Step 1: 6.25 − (−3.5) = 6.25 + 3.5. Step 2: = 9.75."
         mistakes: {"2.75": negative_distance, "-9.75": distance_subtract}
+      - prompt: How far apart are −8 and −3 on the number line?
+        answer: '5'
+        check: -3 - (-8)
+        difficulty: 1
+        hints:
+        - Bigger minus smaller.
+        - −3 − (−8).
+        solution: 'Step 1: −3 is bigger than −8. Step 2: −3 − (−8) = −3 + 8. Step 3: = 5.'
+        mistakes:
+          '11': distance_subtract
+          '-5': negative_distance
+      - prompt: What is |−15|?
+        answer: '15'
+        check: '15'
+        difficulty: 1
+        hints:
+        - '|a| is a''s distance from 0.'
+        - Distances are never negative.
+        solution: 'Step 1: −15 is 15 steps left of 0. Step 2: Its distance from 0 is 15. Step 3: So |−15| = 15.'
+        mistakes:
+          '-15': negative_distance
+      - prompt: Which number is halfway between −9 and 1 on the number line?
+        answer: '-4'
+        check: (-9 + 1)/2
+        difficulty: 2
+        hints:
+        - Halfway is (a + b) ÷ 2.
+        - (−9 + 1) ÷ 2.
+        solution: 'Step 1: −9 + 1 = −8. Step 2: −8 ÷ 2 = −4. Step 3: Check: −4 is 5 from both −9 and 1.'
+        mistakes:
+          '5': midpoint_half_distance
+          '-5': midpoint_half_distance
+      - prompt: A lift is at floor −2 (basement) and goes up to floor 9. How many floors does it pass through, counting the move from each floor to the next?
+        answer: '11'
+        check: 9 - (-2)
+        difficulty: 2
+        hints:
+        - It is the distance from −2 to 9.
+        - 9 − (−2).
+        solution: 'Step 1: Distance = 9 − (−2). Step 2: = 9 + 2. Step 3: = 11 floors.'
+        mistakes:
+          '7': distance_subtract
+      - prompt: '|x − 1| = 7 and x is negative. What is x?'
+        answer: '-6'
+        check: 1 - 7
+        difficulty: 3
+        hints:
+        - x is 7 away from 1.
+        - The negative one is to the left of 1.
+        solution: 'Step 1: x = 1 + 7 or x = 1 − 7. Step 2: 8 or −6. Step 3: x is negative, so x = −6.'
+        mistakes:
+          '8': other_side
+          '-8': other_side
+      - prompt: M is halfway between A and B. A is at −5 and M is at 2. Where is B?
+        answer: '9'
+        check: 2 + (2 - (-5))
+        difficulty: 3
+        hints:
+        - From A to M is 7 steps.
+        - B is another 7 steps past M.
+        solution: 'Step 1: AM = 2 − (−5) = 7. Step 2: MB is also 7. Step 3: B = 2 + 7 = 9.'
+        mistakes:
+          '-1.5': midpoint_half_distance

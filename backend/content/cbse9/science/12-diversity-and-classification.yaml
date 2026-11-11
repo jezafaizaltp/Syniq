@@ -13,6 +13,9 @@ tips:
   hierarchy_smallest: "Say the levels in order from the biggest group down (kingdom, phylum, class, order, family, genus…). Which level comes last?"
   jointed_legs: "Jointed legs and a hard outer skeleton (insects, crabs, spiders) mark one animal group. Annelids are soft-bodied worms."
   monocot_signs: "Parallel veins go with one group of flowering plants. How many seed leaves does that group have?"
+  c9s12_animal_group: "Look at the body: soft and ringed, jointed legs, a soft body with a shell, spiny skin, or a backbone? Each of these marks a different group, whatever the animal's common name says."
+  c9s12_flightless: "Think of penguins, ostriches and hens. They are birds but can't really fly. What covering do they still share with every other bird?"
+  c9s12_plant_group: 'Ask in order: does it have tubes for water? Does it make seeds? Are the seeds inside a fruit? The first ''no'' tells you the group.'
 concepts:
 - code: cbse9ex.diversity.kingdoms
   title: Why we classify, five kingdoms and scientific names
@@ -92,6 +95,52 @@ concepts:
       bin: Animalia
       clue: Does it eat food made by others?
       why: 'Many-celled, no cell walls, takes in food: Animalia.'
+  lesson:
+    - teach: 'There are millions of kinds of living things. To study them we sort them into groups by shared features, from big groups to small: kingdom, phylum, class, order, family, genus, species. The more levels two organisms share, the more closely related they are.'
+      check:
+        prompt: Which level is the largest group?
+        options:
+        - Kingdom
+        - Species
+        - Genus
+        answer: Kingdom
+        why: Kingdom is at the top; species is the smallest.
+    - teach: 'Whittaker''s five kingdoms sort by cell type, body and food. Monera: prokaryotes, one cell (bacteria). Protista: one-celled eukaryotes (Amoeba, Paramecium). Fungi: no chlorophyll, absorb food (mushrooms, yeast). Plantae: many cells, make food, cell walls. Animalia: many cells, eat food, no cell walls.'
+      picture:
+        kind: compare
+        columns:
+        - title: Kingdom
+          points:
+          - Monera
+          - Protista
+          - Fungi
+          - Plantae
+          - Animalia
+        - title: Key feature
+          points:
+          - No nucleus, one cell
+          - Nucleus, one cell
+          - No chlorophyll, absorbs food
+          - Makes food, cell walls
+          - Eats food, no cell walls
+        alt: The five kingdoms with the feature that identifies each.
+      check:
+        prompt: Paramecium is one cell with a nucleus. Kingdom?
+        options:
+        - Protista
+        - Monera
+        - Animalia
+        answer: Protista
+        why: Single-celled eukaryotes are Protista.
+    - teach: 'Every species has a two-part scientific name (binomial nomenclature, Linnaeus): genus first with a capital letter, then species in small letters, written in italics (underlined by hand). Human: Homo sapiens. Mango: Mangifera indica. Viruses fit no kingdom: they have no cells and multiply only inside a host.'
+      check:
+        prompt: Which is written correctly?
+        options:
+        - Homo sapiens
+        - homo Sapiens
+        - Homo Sapiens
+        answer: Homo sapiens
+        why: Genus capitalised, species small.
   items:
   - prompt: Bacteria have no nucleus. Which kingdom do they belong to?
     options:
@@ -176,6 +225,133 @@ concepts:
     solution: 'Step 1: A virus is genetic material in a protein coat, not a cell. Step 2: It multiplies only inside living cells, so it doesn''t fit any kingdom.'
     mistakes:
       They make their own food: virus_living
+  - prompt: Which kingdom has organisms with cell walls that make their own food?
+    options:
+    - Plantae
+    - Animalia
+    - Fungi
+    - Protista
+    answer: Plantae
+    difficulty: 1
+    hints:
+    - They contain chlorophyll.
+    - Fungi have walls but can't make food.
+    solution: Plants have cell walls and make food by photosynthesis.
+    mistakes:
+      Fungi: fungi_no_chlorophyll
+  - prompt: Which is the correct scientific name of the mango?
+    options:
+    - Mangifera indica
+    - mangifera Indica
+    - Mangifera Indica
+    - Indica mangifera
+    answer: Mangifera indica
+    difficulty: 1
+    hints:
+    - Genus first, capital letter.
+    - Species second, small letter.
+    solution: Mangifera (genus) indica (species).
+    mistakes:
+      Mangifera Indica: binomial_order
+      Indica mangifera: binomial_order
+  - prompt: Who proposed the five-kingdom classification?
+    options:
+    - Whittaker
+    - Linnaeus
+    - Darwin
+    - Hooke
+    answer: Whittaker
+    difficulty: 1
+    hints:
+    - It was proposed in 1969.
+    - Linnaeus gave two-part names.
+    solution: R.H. Whittaker proposed the five kingdoms in 1969.
+    mistakes:
+      Linnaeus: binomial_order
+  - prompt: Blue-green algae (cyanobacteria) make food but have no nucleus. Which kingdom are they in?
+    options:
+    - Monera
+    - Plantae
+    - Protista
+    - Fungi
+    answer: Monera
+    difficulty: 2
+    hints:
+    - The deciding feature is the nucleus.
+    - Prokaryotes go together.
+    solution: 'No nucleus means prokaryote: Monera, even though they photosynthesise.'
+    mistakes:
+      Plantae: kingdom_cell_type
+  - prompt: 'Arrange from biggest to smallest: genus, kingdom, species, family.'
+    options:
+    - Kingdom, family, genus, species
+    - Species, genus, family, kingdom
+    - Kingdom, genus, family, species
+    - Family, kingdom, genus, species
+    answer: Kingdom, family, genus, species
+    difficulty: 2
+    hints:
+    - Kingdom is biggest, species smallest.
+    - Family contains genera.
+    solution: Kingdom > … > family > genus > species.
+    mistakes:
+      Kingdom, genus, family, species: hierarchy_smallest
+  - prompt: Lions and tigers are both Panthera. What does this tell us?
+    options:
+    - They belong to the same genus
+    - They are the same species
+    - They are in different kingdoms
+    - Nothing
+    answer: They belong to the same genus
+    difficulty: 2
+    hints:
+    - The first word of the name is the genus.
+    - The second word differs.
+    solution: Panthera leo and Panthera tigris share a genus but are different species.
+    mistakes:
+      They are the same species: hierarchy_smallest
+  - prompt: Why are fungi not placed with plants?
+    options:
+    - They have no chlorophyll and can't make food
+    - They have no cells
+    - They move around
+    - They have backbones
+    answer: They have no chlorophyll and can't make food
+    difficulty: 2
+    hints:
+    - How do mushrooms get food?
+    - They absorb it from dead matter.
+    solution: Fungi lack chlorophyll and absorb food, so they are a separate kingdom.
+    mistakes:
+      They have no cells: virus_living
+  - prompt: Which feature is used FIRST to separate Monera from all other kingdoms?
+    options:
+    - Whether the cell has a nucleus
+    - Size
+    - Colour
+    - Where it lives
+    answer: Whether the cell has a nucleus
+    difficulty: 3
+    hints:
+    - Monera are prokaryotes.
+    - All other kingdoms are eukaryotes.
+    solution: Monera have no true nucleus; every other kingdom does.
+    mistakes:
+      Size: kingdom_cell_type
+  - prompt: Two organisms share the same order but different families. Which is true?
+    options:
+    - They share class, phylum and kingdom too
+    - They share genus
+    - They are the same species
+    - They share nothing else
+    answer: They share class, phylum and kingdom too
+    difficulty: 3
+    hints:
+    - Each level sits inside the one above.
+    - Same order means same class as well.
+    solution: An order lies inside one class, phylum and kingdom, so they share all of those.
+    mistakes:
+      They share genus: hierarchy_smallest
 - code: cbse9ex.diversity.groups
   title: Groups of plants and animals
   notes: |
@@ -263,6 +439,43 @@ concepts:
       bin: Reptiles
       clue: Does it have dry scales and breathe air?
       why: 'Scaly skin, lungs, eggs on land: a reptile.'
+  lesson:
+    - teach: 'Plants are grouped step by step. Thallophyta (algae like Spirogyra): no true roots, stems or leaves. Bryophyta (mosses): simple bodies, no tubes for water, the ''amphibians of plants''. Pteridophyta (ferns): tubes (vascular tissue) but no seeds. Gymnosperms (pine, cycas): naked seeds on cones. Angiosperms: seeds inside fruits.'
+      picture:
+        kind: flow
+        steps:
+        - 'Thallophyta: no true body parts'
+        - 'Bryophyta: no water tubes'
+        - 'Pteridophyta: tubes, no seeds'
+        - 'Gymnosperms: naked seeds'
+        - 'Angiosperms: seeds in fruits'
+        alt: Plant groups in order of increasing complexity, each adding one new feature.
+      check:
+        prompt: A plant has seeds but no fruits. Group?
+        options:
+        - Gymnosperms
+        - Angiosperms
+        - Pteridophyta
+        answer: Gymnosperms
+        why: Naked seeds, not enclosed in a fruit.
+    - teach: 'Angiosperms split into monocots (one seed leaf, parallel veins, fibrous roots: grass, maize, rice) and dicots (two seed leaves, net-like veins, tap root: mango, pea, sunflower).'
+      check:
+        prompt: A plant has net-like veins. It is probably a…
+        options:
+        - Dicot
+        - Monocot
+        - Fern
+        answer: Dicot
+        why: Net-like veins go with two seed leaves.
+    - teach: 'Animals without a backbone include Porifera (sponges), Cnidaria (Hydra, jellyfish), Annelida (earthworm, ringed body), Arthropoda (jointed legs: insects, crabs, spiders), Mollusca (snail, octopus) and Echinodermata (starfish, spiny skin). Vertebrates have a backbone: fish, amphibians, reptiles, birds, mammals.'
+      check:
+        prompt: An earthworm has a soft body made of rings. Group?
+        options:
+        - Annelida
+        - Arthropoda
+        - Mollusca
+        answer: Annelida
+        why: Ringed, segmented, soft body.
   items:
   - prompt: Which plant group has seeds that are not enclosed in a fruit?
     options:
@@ -345,3 +558,125 @@ concepts:
     - Mosses have no water-carrying tubes.
     solution: 'Step 1: Vascular tissue rules out mosses and algae. Step 2: No seeds rules out gymnosperms and angiosperms. Step 3: Pteridophyta.'
     mistakes: {"Bryophyta": "fern_group", "Gymnosperms": "fern_group"}
+  - prompt: Spirogyra has no true roots, stems or leaves. Which group is it in?
+    options:
+    - Thallophyta
+    - Bryophyta
+    - Pteridophyta
+    - Angiosperms
+    answer: Thallophyta
+    difficulty: 1
+    hints:
+    - It is a green alga.
+    - The simplest plant group.
+    solution: Algae like Spirogyra belong to Thallophyta.
+    mistakes:
+      Bryophyta: c9s12_plant_group
+  - prompt: A starfish has spiny skin. Which group is it in?
+    options:
+    - Echinodermata
+    - Mollusca
+    - Pisces
+    - Arthropoda
+    answer: Echinodermata
+    difficulty: 1
+    hints:
+    - '''Echino'' means spiny.'
+    - It is not a fish.
+    solution: Starfish are spiny-skinned echinoderms.
+    mistakes:
+      Pisces: c9s12_animal_group
+  - prompt: Which animal is a reptile?
+    options:
+    - Snake
+    - Frog
+    - Whale
+    - Shark
+    answer: Snake
+    difficulty: 1
+    hints:
+    - Reptiles have dry, scaly skin.
+    - They lay eggs on land.
+    solution: 'Snakes have dry scales and breathe with lungs: reptiles.'
+    mistakes:
+      Frog: vertebrate_classes
+  - prompt: Mosses have no tubes to carry water. Which group are they in?
+    options:
+    - Bryophyta
+    - Pteridophyta
+    - Gymnosperms
+    - Angiosperms
+    answer: Bryophyta
+    difficulty: 2
+    hints:
+    - They need damp places.
+    - Called amphibians of the plant kingdom.
+    solution: 'Mosses are bryophytes: no vascular tissue.'
+    mistakes:
+      Pteridophyta: fern_group
+  - prompt: Maize has fibrous roots and parallel veins. How many seed leaves does its seed have?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - Parallel veins mean monocot.
+    - '''Mono'' means one.'
+    solution: 'Maize is a monocot: one cotyledon.'
+    mistakes:
+      '2': monocot_signs
+  - prompt: A snail has a soft body and a shell. Which group?
+    options:
+    - Mollusca
+    - Arthropoda
+    - Annelida
+    - Reptilia
+    answer: Mollusca
+    difficulty: 2
+    hints:
+    - Soft body, often a shell.
+    - Octopus is in the same group.
+    solution: Snails are molluscs.
+    mistakes:
+      Arthropoda: jointed_legs
+  - prompt: Which feature do ALL birds have?
+    options:
+    - Feathers
+    - The ability to fly
+    - Teeth
+    - Gills
+    answer: Feathers
+    difficulty: 2
+    hints:
+    - Penguins and ostriches can't fly.
+    - Only birds have this covering.
+    solution: All birds have feathers; not all can fly.
+    mistakes:
+      The ability to fly: c9s12_flightless
+  - prompt: A bat flies, has fur and feeds its young on milk. Which class is it in?
+    options:
+    - Mammalia
+    - Aves
+    - Reptilia
+    - Insecta
+    answer: Mammalia
+    difficulty: 3
+    hints:
+    - Flying doesn't make it a bird.
+    - Fur and milk are the key.
+    solution: Fur and milk glands make the bat a mammal.
+    mistakes:
+      Aves: vertebrate_classes
+  - prompt: Pine trees have cones with seeds sitting open on the scales. Why are they not angiosperms?
+    options:
+    - Their seeds are not enclosed in a fruit
+    - They have no tubes
+    - They have no seeds
+    - They are not green
+    answer: Their seeds are not enclosed in a fruit
+    difficulty: 3
+    hints:
+    - Angiosperms have seeds inside fruits.
+    - '''Gymno'' means naked.'
+    solution: 'Pines are gymnosperms: their seeds are naked, not in fruits.'
+    mistakes:
+      They have no seeds: c9s12_plant_group

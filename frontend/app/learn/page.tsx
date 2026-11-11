@@ -42,6 +42,7 @@ import Mistake from "./Mistake";
 import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
 import Activity, { type ActivitySpec } from "./Activity";
+import Lesson, { type LessonStep } from "./Lesson";
 import Notes from "./Notes";
 import ReadAlong from "./ReadAlong";
 import Tutor from "./Tutor";
@@ -122,6 +123,8 @@ type Step = {
   item?: Item | null;
   method_why?: "history" | "similar" | "everyone";
   activity?: ActivitySpec | null;
+  lesson?: LessonStep[] | null;
+  has_lesson?: boolean;
   next_chapter?: { id: number; number: number; title: string } | null;
 };
 type Result = {
@@ -499,6 +502,10 @@ function Session({
   const [result, setResult] = useState<Result | null>(null);
   const [showWhy, setShowWhy] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
+  // The lesson is taught before the sum-up; this remembers which step's lesson has been finished.
+  const [lessonDone, setLessonDone] = useState<number | null>(null);
+  // Going over a topic's lesson again during practice.
+  const [replay, setReplay] = useState<{ conceptId: number; steps: LessonStep[] } | null>(null);
   // "Did this way help?" for the explanation on screen: the learner's own answer helps SYNiq choose next time.
   const [felt, setFelt] = useState<{ key: string; helped: boolean } | null>(null);
   const [onBreak, setOnBreak] = useState(false);
@@ -972,10 +979,19 @@ function Session({
             </>
           )}
 
-          {step.kind === "explain" && (
+          {step.kind === "explain" && step.lesson?.length && lessonDone !== step.decision_id ? (
             <>
               <h2 ref={headingRef} tabIndex={-1}>
-                {step.offer_support ? t("learn.different_way") : t("learn.lets_learn")}
+                {t("lesson.heading", { topic: step.concept?.title ?? "" })}
+              </h2>
+              <Lesson key={step.decision_id} conceptId={step.concept!.id} steps={step.lesson} onDone={() => setLessonDone(step.decision_id)} />
+            </>
+          ) : null}
+
+          {step.kind === "explain" && (!step.lesson?.length || lessonDone === step.decision_id) && (
+            <>
+              <h2 ref={headingRef} tabIndex={-1}>
+                {step.offer_support ? t("learn.different_way") : step.lesson?.length ? t("lesson.in_short") : t("learn.lets_learn")}
               </h2>
               {step.offer_support && (
                 <p className="feedback warn">{t("learn.offer_support")}</p>
@@ -1066,6 +1082,26 @@ function Session({
                 </button>
               )}
               {showActivity && step.activity && <Activity key={step.decision_id} spec={step.activity} onDone={() => helpPressed("activity")} />}
+              {step.concept && step.has_lesson && (
+                <button
+                  className="secondary"
+                  aria-expanded={replay?.conceptId === step.concept.id}
+                  onClick={async () => {
+                    if (replay?.conceptId === step.concept!.id) return setReplay(null);
+                    try {
+                      const l = await api<{ steps: LessonStep[] }>(`/learn/lesson/${step.concept!.id}`);
+                      setReplay({ conceptId: step.concept!.id, steps: l.steps });
+                    } catch {
+                      setReplay(null);
+                    }
+                  }}
+                >
+                  <span aria-hidden="true">📖</span> {replay?.conceptId === step.concept.id ? t("lesson.hide") : t("lesson.again")}
+                </button>
+              )}
+              {replay && replay.conceptId === step.concept?.id && (
+                <Lesson key={`again-${step.decision_id}`} conceptId={replay.conceptId} steps={replay.steps} onDone={() => setReplay(null)} />
+              )}
               {helperOn && /\d/.test(step.item.prompt) && (
                 <button className="secondary" aria-expanded={showHelper} onClick={() => setShowHelper(!showHelper)}>
                   {showHelper ? t("helper.hide") : t("helper.open")}

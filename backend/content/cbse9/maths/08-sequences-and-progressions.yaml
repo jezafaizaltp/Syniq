@@ -117,6 +117,42 @@ concepts:
       - when:
           b: 43
         say: b is not t₁₀. t₁₀ = 10 × 4 + b.
+  lesson:
+    - teach: 'A sequence is a list of numbers in order: first term t₁, second t₂, and so on. An explicit rule gives any term straight from its position n. With tₙ = 2n + 3: t₁ = 5, t₂ = 7, t₁₀ = 23.'
+      check:
+        prompt: tₙ = 4n − 1. What is t₅?
+        options:
+        - '19'
+        - '20'
+        - '15'
+        answer: '19'
+        why: 4 × 5 − 1 = 19.
+    - teach: A recursive rule gives each term from the one before. t₁ = 3 and tₙ = tₙ₋₁ + 5 gives 3, 8, 13, 18, … To reach t₁₀ you must step through all terms, so explicit rules are faster for far terms.
+      picture:
+        kind: flow
+        steps:
+        - t₁ = 3
+        - t₂ = 3 + 5 = 8
+        - t₃ = 8 + 5 = 13
+        - t₄ = 13 + 5 = 18
+        alt: 'A recursive rule building each term by adding 5 to the one before: 3, 8, 13, 18.'
+      check:
+        prompt: t₁ = 1 and tₙ = 3tₙ₋₁. What is t₃?
+        options:
+        - '9'
+        - '3'
+        - '7'
+        answer: '9'
+        why: t₂ = 3, t₃ = 9.
+    - teach: 'Famous sequences: squares 1, 4, 9, 16 (n²); triangular numbers 1, 3, 6, 10 (n(n + 1)/2); Fibonacci 1, 1, 2, 3, 5, 8, each term the sum of the two before. Indian poets Virahanka and Hemachandra found the Fibonacci numbers centuries before Fibonacci, by counting rhythms of short and long syllables.'
+      check:
+        prompt: What comes after 3, 5, 8, 13 in the Fibonacci sequence?
+        options:
+        - '21'
+        - '18'
+        - '26'
+        answer: '21'
+        why: 8 + 13 = 21.
   items:
   - prompt: A sequence has tₙ = 5n − 2. What is the 4th term?
     answer: '18'
@@ -177,6 +213,109 @@ concepts:
     - 'Or use (a + b)(a − b): 39 × 1.'
     solution: 'Step 1: 20² − 19² = (20 + 19)(20 − 19). Step 2: = 39.'
     mistakes: {"1": "consecutive_squares", "41": "consecutive_squares"}
+  - prompt: A sequence has tₙ = 3n + 2. What is the 6th term?
+    answer: '20'
+    check: 3*6 + 2
+    difficulty: 1
+    hints:
+    - Put n = 6.
+    - 3 × 6 + 2.
+    solution: t₆ = 18 + 2 = 20.
+    mistakes:
+      '18': nth_term_substitute
+      '17': nth_term_substitute
+  - prompt: What is the 5th square number?
+    answer: '25'
+    check: 5**2
+    difficulty: 1
+    hints:
+    - Square numbers are n².
+    - 5 × 5.
+    solution: 5² = 25.
+    mistakes:
+      '10': consecutive_squares
+      '16': consecutive_squares
+  - prompt: t₁ = 10 and tₙ = tₙ₋₁ − 4. What is t₄?
+    answer: '-2'
+    check: 10 - 3*4
+    difficulty: 1
+    hints:
+    - Subtract 4 each step.
+    - 10, 6, 2, …
+    solution: 10, 6, 2, −2. So t₄ = −2.
+    mistakes:
+      '-6': recursive_step
+      '2': recursive_step
+  - prompt: Which explicit rule gives 5, 8, 11, 14, …?
+    options:
+    - tₙ = 3n + 2
+    - tₙ = 5n + 3
+    - tₙ = 3n + 5
+    - tₙ = n + 3
+    answer: tₙ = 3n + 2
+    difficulty: 2
+    hints:
+    - The terms go up by 3, so start with 3n.
+    - 'Check n = 1: 3 + ? = 5.'
+    solution: 'Going up by 3 means 3n; at n = 1 we need 5, so add 2: tₙ = 3n + 2.'
+    mistakes:
+      tₙ = 3n + 5: rule_check_first
+      tₙ = 5n + 3: rule_check_first
+  - prompt: What is the 6th triangular number?
+    answer: '21'
+    check: 6*7/2
+    difficulty: 2
+    hints:
+    - Use n(n + 1)/2.
+    - 6 × 7 ÷ 2.
+    solution: 6 × 7 ÷ 2 = 21.
+    mistakes:
+      '42': sum_formula_half
+      '36': consecutive_squares
+  - prompt: A recursive rule says t₁ = 1 and tₙ = tₙ₋₁ + n. What is t₅?
+    answer: '15'
+    check: 1 + 2 + 3 + 4 + 5
+    difficulty: 2
+    hints:
+    - t₂ = 1 + 2 = 3, t₃ = 3 + 3 = 6.
+    - Keep going to n = 5.
+    solution: 1, 3, 6, 10, 15. So t₅ = 15 (the triangular numbers).
+    mistakes:
+      '10': recursive_step
+      '9': recursive_step
+  - prompt: 'Fibonacci numbers: 1, 1, 2, 3, 5, 8, 13, 21, 34, … What is the 11th term?'
+    answer: '89'
+    check: '89'
+    difficulty: 2
+    hints:
+    - The 10th term is 21 + 34.
+    - Then add the 9th and 10th.
+    solution: 10th = 55, 11th = 34 + 55 = 89.
+    mistakes:
+      '55': fibonacci_add_two
+      '68': fibonacci_add_two
+  - prompt: A sequence has tₙ = n² + 1. Which term equals 50?
+    answer: '7'
+    check: '7'
+    difficulty: 3
+    hints:
+    - n² + 1 = 50.
+    - n² = 49.
+    solution: 'n² = 49, so n = 7: the 7th term.'
+    mistakes:
+      '49': nth_term_substitute
+      '50': nth_term_substitute
+  - prompt: How much bigger is the 15th triangular number than the 14th?
+    answer: '15'
+    check: 15*16/2 - 14*15/2
+    difficulty: 3
+    hints:
+    - Each triangular number adds the next row of dots.
+    - Row 15 has 15 dots.
+    solution: 120 − 105 = 15. Going from the 14th to the 15th adds a row of 15.
+    mistakes:
+      '29': consecutive_squares
+      '1': recursive_step
 - code: cbse9gm.seq.ap
   title: Arithmetic progressions
   after:
@@ -258,6 +397,59 @@ concepts:
       - when:
           v: 36
         say: '36 is the sum of the first six odd numbers. Count them: there are five here. The sum of n odd numbers is n².'
+  lesson:
+    - teach: 'An arithmetic progression (AP) adds the same number d, the common difference, each time. 2, 9, 16, 23: d = 7. To find d, take any term minus the one before it. d can be negative: 20, 17, 14 has d = −3.'
+      check:
+        prompt: What is d for 50, 45, 40, 35?
+        options:
+        - −5
+        - '5'
+        - '50'
+        answer: −5
+        why: 45 − 50 = −5.
+    - teach: 'To reach the nth term you add d only (n − 1) times, because the first term already counts. So tₙ = a + (n − 1)d. For 2, 9, 16, …: t₁₀ = 2 + 9 × 7 = 65.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 30
+        step: 5
+        points:
+        - at: 2
+          label: t₁
+        - at: 9
+          label: t₂
+        - at: 16
+          label: t₃
+        - at: 23
+          label: t₄
+        jumps:
+        - from: 2
+          to: 9
+          label: '+7'
+        - from: 9
+          to: 16
+          label: '+7'
+        - from: 16
+          to: 23
+          label: '+7'
+        alt: 'Four terms of an AP on a number line with three equal jumps of 7: three jumps to reach the 4th term.'
+      check:
+        prompt: a = 4, d = 3. What is t₂₀?
+        options:
+        - '61'
+        - '64'
+        - '60'
+        answer: '61'
+        why: 4 + 19 × 3 = 61. Using 20 jumps would give 64.
+    - teach: 'Sum 1 + 2 + … + n by pairing: 1 with n, 2 with n − 1, and so on; each pair adds to n + 1, and there are n/2 pairs. So the sum is n(n + 1)/2. Also, 1 + 3 + 5 + … (first n odd numbers) = n².'
+      check:
+        prompt: What is 1 + 2 + … + 20?
+        options:
+        - '210'
+        - '420'
+        - '200'
+        answer: '210'
+        why: 20 × 21 ÷ 2 = 210.
   items:
   - prompt: What is the common difference of 7, 12, 17, 22, …?
     answer: '5'
@@ -316,6 +508,106 @@ concepts:
     - d = 4; go back 2 steps from 11.
     solution: 'Step 1: 4d = 27 − 11 = 16, d = 4. Step 2: a = 11 − 2 × 4 = 3.'
     mistakes: {"7": "ap_back_to_first", "-1": "ap_nth_term_n_not_n_minus_1"}
+  - prompt: What is the common difference of 11, 8, 5, 2, …?
+    answer: '-3'
+    check: 8 - 11
+    difficulty: 1
+    hints:
+    - Second term minus first.
+    - 8 − 11.
+    solution: 8 − 11 = −3.
+    mistakes:
+      '3': common_difference
+  - prompt: Find the 8th term of 5, 9, 13, 17, …
+    answer: '33'
+    check: 5 + 7*4
+    difficulty: 1
+    hints:
+    - a = 5, d = 4.
+    - 5 + 7 × 4.
+    solution: t₈ = 5 + 7 × 4 = 33.
+    mistakes:
+      '37': ap_nth_term_n_not_n_minus_1
+      '32': ap_nth_term_n_not_n_minus_1
+  - prompt: Find 1 + 2 + 3 + … + 30.
+    answer: '465'
+    check: 30*31/2
+    difficulty: 1
+    hints:
+    - n(n + 1)/2 with n = 30.
+    - 30 × 31 ÷ 2.
+    solution: 930 ÷ 2 = 465.
+    mistakes:
+      '930': sum_formula_half
+  - prompt: Which term of 3, 8, 13, 18, … is 98?
+    answer: '20'
+    check: (98 - 3)/5 + 1
+    difficulty: 2
+    hints:
+    - 3 + (n − 1)5 = 98.
+    - (n − 1)5 = 95.
+    solution: n − 1 = 19, so n = 20.
+    mistakes:
+      '19': ap_nth_term_n_not_n_minus_1
+      '21': ap_nth_term_n_not_n_minus_1
+  - prompt: What is 1 + 3 + 5 + … + 19?
+    answer: '100'
+    check: 10**2
+    difficulty: 2
+    hints:
+    - How many odd numbers from 1 to 19?
+    - There are 10; the sum is n².
+    solution: 10 odd numbers, so the sum is 10² = 100.
+    mistakes:
+      '361': odd_sum_square
+      '81': odd_sum_square
+  - prompt: A worker earns ₹200 on day 1, and ₹10 more each day. How much on day 15, in ₹?
+    answer: '340'
+    check: 200 + 14*10
+    difficulty: 2
+    hints:
+    - a = 200, d = 10.
+    - 200 + 14 × 10.
+    solution: 200 + 140 = ₹340.
+    mistakes:
+      '350': ap_nth_term_n_not_n_minus_1
+  - prompt: Is 100 a term of 4, 7, 10, 13, …?
+    options:
+    - Yes, the 33rd
+    - 'No'
+    - Yes, the 32nd
+    - Yes, the 25th
+    answer: Yes, the 33rd
+    difficulty: 2
+    hints:
+    - 4 + (n − 1)3 = 100.
+    - (n − 1)3 = 96.
+    solution: n − 1 = 32, so n = 33. 100 is the 33rd term.
+    mistakes:
+      Yes, the 32nd: ap_nth_term_n_not_n_minus_1
+      'No': ap_back_to_first
+  - prompt: An AP has 4th term 14 and 9th term 34. What is d?
+    answer: '4'
+    check: (34 - 14)/5
+    difficulty: 3
+    hints:
+    - From the 4th to the 9th term there are 5 steps.
+    - 20 ÷ 5.
+    solution: 34 − 14 = 20 over 5 steps, so d = 4.
+    mistakes:
+      '20': common_difference
+      '5': common_difference
+  - prompt: Find 2 + 4 + 6 + … + 100.
+    answer: '2550'
+    check: 2*50*51/2
+    difficulty: 3
+    hints:
+    - This is 2 × (1 + 2 + … + 50).
+    - 1 + … + 50 = 1275.
+    solution: 2 × 1275 = 2550.
+    mistakes:
+      '5050': sum_formula_half
+      '1275': sum_formula_half
 - code: cbse9gm.seq.gp
   title: Geometric progressions, Tower of Hanoi and fractals
   after:
@@ -409,6 +701,48 @@ concepts:
       - when:
           r: -3
         say: '×(−3) flips the sign but triples: 3, −9, 27. Check −6 ÷ 3.'
+  lesson:
+    - teach: 'A geometric progression (GP) multiplies by the same number r, the common ratio, each time. 3, 6, 12, 24: r = 2. 100, 50, 25: r = 1/2. Find r by dividing a term by the one before it.'
+      check:
+        prompt: What is r for 2, 10, 50, 250?
+        options:
+        - '5'
+        - '8'
+        - '10'
+        answer: '5'
+        why: 10 ÷ 2 = 5.
+    - teach: 'The nth term multiplies the first term by r, (n − 1) times: tₙ = a × r^(n − 1). For 3, 6, 12, …: t₆ = 3 × 2⁵ = 96. An AP adds; a GP multiplies, so a GP grows much faster.'
+      picture:
+        kind: bars
+        bars:
+        - label: '1'
+          value: 3
+        - label: '2'
+          value: 6
+        - label: '3'
+          value: 12
+        - label: '4'
+          value: 24
+        - label: '5'
+          value: 48
+        alt: 'Bars doubling in height: 3, 6, 12, 24, 48, the first five terms of a GP with ratio 2.'
+      check:
+        prompt: a = 5, r = 3. What is t₄?
+        options:
+        - '135'
+        - '405'
+        - '14'
+        answer: '135'
+        why: 5 × 3³ = 5 × 27 = 135.
+    - teach: 'Tower of Hanoi: to move n discs, move the top n − 1 off, move the biggest disc once, then move the n − 1 back on. So Mₙ = 2Mₙ₋₁ + 1, giving 1, 3, 7, 15, … = 2ⁿ − 1. Fractals like the Sierpinski triangle also grow as a GP: 1, 3, 9, 27 triangles.'
+      check:
+        prompt: How many moves are needed for 4 discs?
+        options:
+        - '15'
+        - '16'
+        - '8'
+        answer: '15'
+        why: 2⁴ − 1 = 15.
   items:
   - prompt: What is the common ratio of 5, 15, 45, 135, …?
     answer: '3'
@@ -473,3 +807,100 @@ concepts:
     - The smaller discs must move out of the way and back.
     solution: 'Step 1: Move the top n − 1 discs to the spare peg: Mₙ₋₁ moves. Step 2: Move the biggest disc: 1 move. Step 3: Move the n − 1 discs on top: Mₙ₋₁ moves. Total 2Mₙ₋₁ + 1.'
     mistakes: {"You always need one extra peg": "hanoi_steps", "The first disc is moved twice": "hanoi_steps"}
+  - prompt: What is the common ratio of 4, 12, 36, 108, …?
+    answer: '3'
+    check: 12/4
+    difficulty: 1
+    hints:
+    - Divide a term by the one before.
+    - 12 ÷ 4.
+    solution: 12 ÷ 4 = 3.
+    mistakes:
+      '8': gp_multiply_not_add
+  - prompt: Find the 5th term of 1, 3, 9, 27, …
+    answer: '81'
+    check: 3**4
+    difficulty: 1
+    hints:
+    - Multiply by 3 once more.
+    - 27 × 3.
+    solution: 27 × 3 = 81.
+    mistakes:
+      '36': gp_multiply_not_add
+      '243': gp_count_terms
+  - prompt: What is the common ratio of 80, 40, 20, 10, …? Type a fraction or decimal.
+    answer: 1/2
+    check: 40/80
+    difficulty: 1
+    hints:
+    - 40 ÷ 80.
+    - Each term is half the one before.
+    solution: 40 ÷ 80 = 1/2.
+    mistakes:
+      '-40': gp_multiply_not_add
+      '2': gp_same_ratio
+  - prompt: Find the 7th term of 2, 4, 8, 16, …
+    answer: '128'
+    check: 2*2**6
+    difficulty: 2
+    hints:
+    - tₙ = 2 × 2^(n − 1).
+    - 2 × 2⁶.
+    solution: 2 × 64 = 128.
+    mistakes:
+      '256': gp_count_terms
+      '14': gp_multiply_not_add
+  - prompt: How many moves does the Tower of Hanoi need for 8 discs?
+    answer: '255'
+    check: 2**8 - 1
+    difficulty: 2
+    hints:
+    - 2ⁿ − 1.
+    - 2⁸ = 256.
+    solution: 256 − 1 = 255.
+    mistakes:
+      '256': power_then_minus
+      '15': hanoi_steps
+  - prompt: A town of 10,000 people grows 10% a year. What is the population after 2 years?
+    answer: '12100'
+    check: 10000*1.1**2
+    difficulty: 2
+    hints:
+    - Each year multiply by 1.1.
+    - 10000 × 1.1 × 1.1.
+    solution: 11000 after 1 year, 12100 after 2.
+    mistakes:
+      '12000': gp_multiply_not_add
+  - prompt: 'Sierpinski triangle: stage 0 has 1 triangle, and each stage triples. How many triangles at stage 5?'
+    answer: '243'
+    check: 3**5
+    difficulty: 2
+    hints:
+    - 1, 3, 9, 27, …
+    - 3⁵.
+    solution: 3⁵ = 243.
+    mistakes:
+      '81': gp_count_terms
+      '15': gp_multiply_not_add
+  - prompt: A GP has first term 3 and 4th term 192. What is r?
+    answer: '4'
+    check: (192/3)**(1/3)
+    difficulty: 3
+    hints:
+    - 3 × r³ = 192.
+    - r³ = 64.
+    solution: r³ = 64, so r = 4.
+    mistakes:
+      '64': gp_count_terms
+      '63': gp_multiply_not_add
+  - prompt: A ball dropped from 81 m bounces to 2/3 of its height each time. How high does it rise after the 3rd bounce, in m?
+    answer: '24'
+    check: 81*(2/3)**3
+    difficulty: 3
+    hints:
+    - 81 × 2/3 = 54 after the 1st bounce.
+    - Multiply by 2/3 two more times.
+    solution: 54, then 36, then 24 m.
+    mistakes:
+      '36': halve_each_bounce
+      '16': halve_each_bounce

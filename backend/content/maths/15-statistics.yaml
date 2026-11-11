@@ -75,6 +75,47 @@ concepts:
         - when:
             x: 8
           say: Adding 8 makes the total 38, and 38 ÷ 5 = 7.6, not 8. The other four average 7.5, so the new mark has to be above 8 to pull the mean up to 8.
+    lesson:
+      - teach: 'Four towers of blocks are 6, 8, 7 and 9 blocks high. If we share all the blocks out so every tower is the same height, how high is each? 6 + 8 + 7 + 9 = 30 blocks, shared by 4 towers: 7.5 each. That equal share is the mean, or average.'
+        picture:
+          kind: bars
+          unit: blocks in each tower
+          bars:
+          - label: A
+            value: 6
+          - label: B
+            value: 8
+          - label: C
+            value: 7
+          - label: D
+            value: 9
+          alt: Four towers of 6, 8, 7 and 9 blocks. Levelled out, each would be 7.5 blocks high.
+        check:
+          prompt: What is the mean of 4, 6 and 8?
+          options:
+          - '6'
+          - '18'
+          - '9'
+          answer: '6'
+          why: '4 + 6 + 8 = 18, shared by 3 numbers: 18 ÷ 3 = 6.'
+      - teach: 'Mean = sum of the values ÷ how many values there are. Divide by the count of values, not by the biggest value or by 2. For 45, 30, 72 and 53: the sum is 200 and there are 4 scores, so the mean is 50.'
+        check:
+          prompt: What is the mean of 10, 20, 30, 40 and 50?
+          options:
+          - '30'
+          - '75'
+          - '50'
+          answer: '30'
+          why: 'The sum is 150, and there are 5 numbers: 150 ÷ 5 = 30.'
+      - teach: Mean × count = total, which lets you work backwards. If 4 numbers have mean 15, their total is 60. If three of them are 10, 12 and 20 (total 42), the fourth is 60 − 42 = 18.
+        check:
+          prompt: The mean of 3 numbers is 10. What is their total?
+          options:
+          - '30'
+          - '13'
+          - '10'
+          answer: '30'
+          why: Total = mean × count = 10 × 3 = 30.
     items:
       - prompt: "What is the mean of 6, 8, 7, 9 and 10?"
         answer: "8"
@@ -139,6 +180,69 @@ concepts:
         hints: ["The wrong total was 20 × 15 = 300.", "The total was 18 too big."]
         solution: "Step 1: Wrong total = 300. Step 2: Correct total = 300 − 53 + 35 = 282. Step 3: Mean = 282 ÷ 20 = 14.1."
         mistakes: {"15.9": misread_value, "-3": misread_value}
+      - prompt: What is the mean of 3, 5, 7, 9 and 11?
+        answer: '7'
+        check: (3 + 5 + 7 + 9 + 11)/5
+        difficulty: 1
+        hints:
+        - Add them all up.
+        - Divide the total by how many numbers there are.
+        solution: 'Step 1: 3 + 5 + 7 + 9 + 11 = 35. Step 2: There are 5 numbers. Step 3: 35 ÷ 5 = 7.'
+        mistakes:
+          '35': divided_wrong_count
+          '17.5': divided_wrong_count
+      - prompt: 'Rain fell on 4 days: 12 mm, 8 mm, 0 mm and 20 mm. What was the mean rainfall per day, in mm?'
+        answer: '10'
+        check: (12 + 8 + 0 + 20)/4
+        difficulty: 1
+        hints:
+        - The 0 mm day still counts as a day.
+        - 40 ÷ 4.
+        solution: 'Step 1: 12 + 8 + 0 + 20 = 40. Step 2: There are 4 days. Step 3: 40 ÷ 4 = 10 mm.'
+        mistakes:
+          '13.333': divided_wrong_count
+      - prompt: The mean of 5 numbers is 12. Four of them are 10, 15, 8 and 14. What is the fifth?
+        answer: '13'
+        check: 5*12 - (10 + 15 + 8 + 14)
+        difficulty: 2
+        hints:
+        - Total = mean × count = 60.
+        - The four known numbers add to 47.
+        solution: 'Step 1: Total = 5 × 12 = 60. Step 2: 10 + 15 + 8 + 14 = 47. Step 3: Fifth = 60 − 47 = 13.'
+        mistakes:
+          '12': missing_value_mean
+      - prompt: Every mark in a test is doubled. The old mean was 14. What is the new mean?
+        answer: '28'
+        check: 14*2
+        difficulty: 2
+        hints:
+        - If every value doubles, so does the total.
+        - The count stays the same.
+        solution: 'Step 1: The total doubles. Step 2: The number of marks is the same. Step 3: So the mean doubles: 28.'
+        mistakes:
+          '16': removed_value_mean
+      - prompt: The mean age of 6 children is 10. When their teacher joins, the mean age becomes 14. How old is the teacher?
+        answer: '38'
+        check: 7*14 - 6*10
+        difficulty: 3
+        hints:
+        - Total of 6 children = 60.
+        - Total of all 7 = 7 × 14 = 98.
+        solution: 'Step 1: Children''s total = 60. Step 2: New total = 98. Step 3: Teacher = 98 − 60 = 38.'
+        mistakes:
+          '14': needed_total
+          '24': needed_total
+      - prompt: A batter's mean over 8 innings is 40. What must she score in the 9th innings to raise the mean to 42?
+        answer: '58'
+        check: 9*42 - 8*40
+        difficulty: 3
+        hints:
+        - Total needed after 9 innings = 9 × 42.
+        - Total so far = 8 × 40.
+        solution: 'Step 1: Needed total = 378. Step 2: So far = 320. Step 3: She needs 378 − 320 = 58.'
+        mistakes:
+          '42': needed_total
+          '44': needed_total
 
   - code: math9.stats.median
     title: Median
@@ -178,6 +282,33 @@ concepts:
         - when:
             v: 10
           say: 10 is one of the two middle marks. The median is halfway between both of them.
+    lesson:
+      - teach: 'The median is the middle value when the data are put in order. For 150, 142, 160, 155, 148, first sort them: 142, 148, 150, 155, 160. The middle one is 150. Always sort first: the middle of an unsorted list means nothing.'
+        check:
+          prompt: What is the median of 9, 2, 7?
+          options:
+          - '7'
+          - '2'
+          - '6'
+          answer: '7'
+          why: 'In order: 2, 7, 9. The middle value is 7.'
+      - teach: 'With an even number of values there are two middle ones, so take their mean. 3, 4, 7, 9, 10, 12 in order: the middle two are 7 and 9, so the median is 8.'
+        check:
+          prompt: What is the median of 2, 5, 6, 11?
+          options:
+          - '5.5'
+          - '5'
+          - '6'
+          answer: '5.5'
+          why: The middle two are 5 and 6, and their mean is 5.5.
+      - teach: The median is not pulled far by one extreme value. Wages ₹9,000, ₹10,000, ₹11,000, ₹12,000 and ₹1,00,000 have median ₹11,000 but mean ₹28,400. So the median often describes a typical value better.
+        check:
+          prompt: Five houses cost ₹20 lakh, ₹22 lakh, ₹25 lakh, ₹27 lakh and ₹3 crore. Which average shows a typical house better?
+          options:
+          - The median
+          - The mean
+          answer: The median
+          why: The ₹3 crore house pulls the mean far up, but the median (₹25 lakh) stays typical.
     items:
       - prompt: "What is the median of 150, 142, 160, 155 and 148?"
         answer: "150"
@@ -242,6 +373,67 @@ concepts:
         hints: ["Which average is pulled up by the owner's huge pay?", "The middle value ignores how big the largest one is."]
         solution: "Step 1: The owner's pay drags the mean far above what most people earn. Step 2: The median is the middle pay, so it stays typical."
         mistakes: {"The mean": typical_value, "The total pay": typical_value, "The highest pay": typical_value}
+      - prompt: What is the median of 21, 17, 25, 19 and 30?
+        answer: '21'
+        check: '21'
+        difficulty: 1
+        hints:
+        - Put them in order first.
+        - 17, 19, 21, 25, 30.
+        solution: 'Step 1: In order: 17, 19, 21, 25, 30. Step 2: There are 5 values. Step 3: The middle (3rd) is 21.'
+        mistakes:
+          '25': median_not_sorted
+      - prompt: What is the median of 4, 8, 15, 16, 23 and 42?
+        answer: '15.5'
+        check: (15 + 16)/2
+        difficulty: 1
+        hints:
+        - There are 6 values, so two are in the middle.
+        - The middle two are 15 and 16.
+        solution: 'Step 1: The list is already in order. Step 2: The middle two are 15 and 16. Step 3: Median = (15 + 16) ÷ 2 = 15.5.'
+        mistakes:
+          '15': median_even_count
+          '18': mean_not_median
+      - prompt: What is the median of 12, 3, 8, 5, 10, 7, 1?
+        answer: '7'
+        check: '7'
+        difficulty: 2
+        hints:
+        - Sort them first.
+        - 1, 3, 5, 7, 8, 10, 12.
+        solution: 'Step 1: In order: 1, 3, 5, 7, 8, 10, 12. Step 2: 7 values, so the 4th is the middle. Step 3: Median = 7.'
+        mistakes:
+          '5': middle_of_list_unsorted
+      - prompt: 'Marks of 8 students: 35, 40, 42, 45, 48, 50, 52, 90. What is the median mark?'
+        answer: '46.5'
+        check: (45 + 48)/2
+        difficulty: 2
+        hints:
+        - '8 values: the 4th and 5th are the middle.'
+        - 45 and 48.
+        solution: 'Step 1: Already in order. Step 2: The 4th and 5th values are 45 and 48. Step 3: Median = (45 + 48) ÷ 2 = 46.5.'
+        mistakes:
+          '50.25': mean_not_median
+      - prompt: The numbers 2, 5, x, 9, 12 are in order and their median is 7. What is their mean?
+        answer: '7'
+        check: (2 + 5 + 7 + 9 + 12)/5
+        difficulty: 3
+        hints:
+        - The median is the middle value, x.
+        - So x = 7. Now find the mean.
+        solution: 'Step 1: The middle value x = 7. Step 2: Sum = 2 + 5 + 7 + 9 + 12 = 35. Step 3: Mean = 35 ÷ 5 = 7.'
+        mistakes:
+          '5.6': median_unknown
+      - prompt: Seven runners finish in 12, 13, 13, 14, 15, 16 and 40 minutes. The slowest runner is removed. What is the median of the other six, in minutes?
+        answer: '13.5'
+        check: (13 + 14)/2
+        difficulty: 3
+        hints:
+        - 'Six values remain: 12, 13, 13, 14, 15, 16.'
+        - The middle two are 13 and 14.
+        solution: 'Step 1: 12, 13, 13, 14, 15, 16. Step 2: The middle two are 13 and 14. Step 3: Median = 13.5 minutes.'
+        mistakes:
+          '14': median_even_count
 
   - code: math9.stats.mode
     title: Mode
@@ -279,6 +471,34 @@ concepts:
         value: 5
       - label: Size 8
         value: 2
+    lesson:
+      - teach: The mode is the value that appears most often. In 6, 7, 7, 8, 7, 9, 6, 7, the number 7 appears four times, more than any other, so the mode is 7. The mode is a value from the list, not how many times it appears.
+        check:
+          prompt: What is the mode of 2, 3, 3, 5, 3, 2?
+          options:
+          - '3'
+          - '2'
+          - Three times
+          answer: '3'
+          why: 3 appears three times, more than any other value. The mode is the value 3, not the count.
+      - teach: A list can have two modes (2, 4, 4, 7, 7 has modes 4 and 7) or no mode at all if every value appears once (1, 2, 3, 4).
+        check:
+          prompt: How many modes does 5, 5, 6, 8, 8, 9 have?
+          options:
+          - 'Two: 5 and 8'
+          - 'One: 8'
+          - None
+          answer: 'Two: 5 and 8'
+          why: 5 and 8 each appear twice, more than 6 or 9.
+      - teach: 'The mode is the only average that works for things that aren''t numbers: the most popular snack, the shirt size sold most, the commonest colour. A shop owner orders more of the mode.'
+        check:
+          prompt: 'Votes for a class trip: beach 12, hills 15, zoo 9. Which average makes sense here?'
+          options:
+          - 'The mode: hills'
+          - The mean
+          - The median
+          answer: 'The mode: hills'
+          why: Places are not numbers, so they can't be added or ordered. The most popular choice is the mode.
     items:
       - prompt: "What is the mode of 6, 7, 7, 8, 7, 9, 6, 7?"
         answer: "7"
@@ -343,6 +563,78 @@ concepts:
         hints: ["Can you add colours?", "Can you put colours in order of size?"]
         solution: "Step 1: Colours cannot be added or ordered, so there is no mean or median. Step 2: The most common colour is the mode."
         mistakes: {"The mean": numbers_only, "The median": numbers_only, "All three": numbers_only}
+      - prompt: What is the mode of 4, 9, 4, 6, 9, 4, 2?
+        answer: '4'
+        check: '4'
+        difficulty: 1
+        hints:
+        - Count how many times each value appears.
+        - 4 appears three times.
+        solution: 'Step 1: 4 appears 3 times, 9 twice, 6 and 2 once. Step 2: 4 appears most. Step 3: Mode = 4.'
+        mistakes:
+          '3': mode_not_count
+          '9': mode_value
+      - prompt: 'Shoe sizes sold today: 6, 7, 8, 7, 9, 7, 8, 6, 7. Which size is the mode?'
+        answer: '7'
+        check: '7'
+        difficulty: 1
+        hints:
+        - Which size appears most often?
+        - Count the 7s.
+        solution: 'Step 1: Size 7 appears 4 times. Step 2: No other size appears as often. Step 3: Mode = 7.'
+        mistakes:
+          '4': mode_not_count
+          '8': mode_value
+      - prompt: Which statement is true about 1, 3, 5, 7, 9?
+        options:
+        - It has no mode
+        - Its mode is 5
+        - Its mode is 1
+        - Its mode is 9
+        answer: It has no mode
+        difficulty: 2
+        hints:
+        - How many times does each value appear?
+        - Every value appears just once.
+        solution: 'Step 1: Each number appears once. Step 2: None appears more than the others. Step 3: So there is no mode.'
+        mistakes:
+          Its mode is 5: mean_not_mode
+      - prompt: The list 3, 6, 6, 8, 8, 10 gets one more number, and then 6 is the only mode. What number was added?
+        answer: '6'
+        check: '6'
+        difficulty: 2
+        hints:
+        - Right now 6 and 8 tie as modes.
+        - Which value must get one more?
+        solution: 'Step 1: 6 and 8 each appear twice. Step 2: Adding another 6 makes it appear 3 times. Step 3: So the added number is 6.'
+        mistakes:
+          '8': two_modes
+      - prompt: 'Marks: 15, 18, 12, 18, 20, 16, 18, 13. What is the mode minus the median?'
+        answer: '1'
+        check: 18 - (16 + 18)/2
+        difficulty: 3
+        hints:
+        - 'Mode first: which mark appears most?'
+        - 'In order: 12, 13, 15, 16, 18, 18, 18, 20; median is between the 4th and 5th.'
+        solution: 'Step 1: Mode = 18. Step 2: Median = (16 + 18) ÷ 2 = 17. Step 3: 18 − 17 = 1.'
+        mistakes:
+          '2': median_even_count
+          '-1': which_averages
+      - prompt: 'Ages: 10, 11, 11, 12, 12, 12, 13. Which is true?'
+        options:
+        - Median and mode are both 12
+        - Mean and mode are both 12
+        - All three averages are 12
+        - Mean and median are both 11
+        answer: Median and mode are both 12
+        difficulty: 3
+        hints:
+        - Work out each average.
+        - Mean = 81 ÷ 7 ≈ 11.6.
+        solution: 'Step 1: Mode = 12 (three times). Step 2: Median = 4th value = 12. Step 3: Mean = 81 ÷ 7 ≈ 11.6, so only median and mode are 12.'
+        mistakes:
+          All three averages are 12: which_averages
+          Mean and mode are both 12: mean_not_mode
 
   - code: math9.stats.frequency
     title: Averages from a frequency table
@@ -379,6 +671,42 @@ concepts:
         want:
           m: 3.5
         hint: Mean = (2 × 2 + 4f) ÷ (2 + f).
+    lesson:
+      - teach: 'When values repeat a lot, we use a frequency table: each value with how many times it occurs. Goals in 10 matches: 0 goals in 2 matches, 1 goal in 5, 2 goals in 3. The frequencies 2 + 5 + 3 = 10 add up to the number of matches.'
+        check:
+          prompt: Marks 4, 5, 6 were scored by 3, 8 and 4 students. How many students are there?
+          options:
+          - '15'
+          - '3'
+          - 15 marks
+          answer: '15'
+          why: 'Add the frequencies: 3 + 8 + 4 = 15 students.'
+      - teach: 'Mean from a table: multiply each value by its frequency, add these up, then divide by the total frequency. Goals: 0 × 2 + 1 × 5 + 2 × 3 = 11 goals in 10 matches, so the mean is 1.1. Dividing by the number of different values (3) is a common slip.'
+        picture:
+          kind: flow
+          steps:
+          - 0 × 2 = 0
+          - 1 × 5 = 5
+          - 2 × 3 = 6
+          - Total 11 goals ÷ 10 matches = 1.1
+          alt: 'Mean from a frequency table: multiply each value by its frequency, add, and divide by the total frequency.'
+        check:
+          prompt: Values 1 and 2 have frequencies 3 and 1. What is the mean?
+          options:
+          - '1.25'
+          - '1.5'
+          - '2.5'
+          answer: '1.25'
+          why: '1 × 3 + 2 × 1 = 5, and 3 + 1 = 4 values: 5 ÷ 4 = 1.25.'
+      - teach: 'The mode is the value with the biggest frequency. For the median, add up frequencies in order until you reach the middle position. 20 families: the middle is between the 10th and 11th. If sizes 2, 3, 4 have 3, 5, 8 families, the running totals are 3, 8, 16, so the 10th and 11th families have size 4.'
+        check:
+          prompt: Sizes 38, 40, 42 sold 12, 20 and 8 shirts. What is the mode?
+          options:
+          - '40'
+          - '20'
+          - '42'
+          answer: '40'
+          why: Size 40 has the largest frequency, 20. The mode is the size, not the frequency.
     items:
       - prompt: "Goals in 10 matches: 0 goals in 2 matches, 1 goal in 5 matches, 2 goals in 3 matches. What is the mean number of goals per match?"
         answer: "1.1"
@@ -443,3 +771,65 @@ concepts:
         hints: ["Σfx = 50 + 160 + 30f and Σf = 13 + f.", "Set (210 + 30f) ÷ (13 + f) = 20."]
         solution: "Step 1: 210 + 30f = 20(13 + f) = 260 + 20f. Step 2: 10f = 50, so f = 5."
         mistakes: {"8": mode_not_count, "50": forgot_divide}
+      - prompt: 'Children in families: 1 child (4 families), 2 children (5 families), 3 children (1 family). What is the mean number of children per family?'
+        answer: '1.7'
+        check: (1*4 + 2*5 + 3*1)/10
+        difficulty: 1
+        hints:
+        - Multiply each value by its frequency and add.
+        - 4 + 10 + 3 = 17 children in 10 families.
+        solution: 'Step 1: 1 × 4 + 2 × 5 + 3 × 1 = 17. Step 2: 4 + 5 + 1 = 10 families. Step 3: 17 ÷ 10 = 1.7.'
+        mistakes:
+          '2': frequency_not_used
+          '5.667': divided_by_values
+      - prompt: Marks 6, 7, 8 and 9 were scored by 5, 12, 9 and 4 students. What is the mode?
+        answer: '7'
+        check: '7'
+        difficulty: 1
+        hints:
+        - Find the largest frequency.
+        - 12 students scored the same mark.
+        solution: 'Step 1: The frequencies are 5, 12, 9, 4. Step 2: The largest is 12. Step 3: Its mark is 7, so the mode is 7.'
+        mistakes:
+          '12': mode_not_count
+      - prompt: Values 2, 4 and 6 have frequencies 5, 10 and 5. What is the mean?
+        answer: '4'
+        check: (2*5 + 4*10 + 6*5)/20
+        difficulty: 2
+        hints:
+        - Σfx = 10 + 40 + 30.
+        - Σf = 20.
+        solution: 'Step 1: Σfx = 2 × 5 + 4 × 10 + 6 × 5 = 80. Step 2: Σf = 20. Step 3: 80 ÷ 20 = 4.'
+        mistakes:
+          '26.667': divided_by_values
+      - prompt: Values 1, 2, 3 and 4 have frequencies 3, 6, 7 and 4. What is the median?
+        answer: '3'
+        check: '3'
+        difficulty: 2
+        hints:
+        - '20 values: the median is between the 10th and 11th.'
+        - 'Running totals: 3, 9, 16, 20.'
+        solution: 'Step 1: Σf = 20, so look at the 10th and 11th values. Step 2: Running totals 3, 9, 16: values 10 to 16 are 3. Step 3: Median = 3.'
+        mistakes:
+          '2.5': frequency_median
+          '7': frequency_median
+      - prompt: Values 0, 1 and 2 have frequencies 2, k and 4. The mean is 1.2. What is k?
+        answer: '4'
+        check: (8 - 1.2*6)/(1.2 - 1)
+        difficulty: 3
+        hints:
+        - Write the total and the count with k in them.
+        - Σfx = k + 8 and Σf = 6 + k.
+        solution: 'Step 1: Σfx = 0 × 2 + 1 × k + 2 × 4 = k + 8, and Σf = 6 + k. Step 2: k + 8 = 1.2(6 + k) = 7.2 + 1.2k. Step 3: 0.8 = 0.2k, so k = 4.'
+        mistakes:
+          '6': frequency_equation
+      - prompt: 'A dice is rolled 20 times: 1 (2 times), 2 (4), 3 (3), 4 (5), 5 (2), 6 (4). What is the mean score?'
+        answer: '3.65'
+        check: (1*2 + 2*4 + 3*3 + 4*5 + 5*2 + 6*4)/20
+        difficulty: 3
+        hints:
+        - Multiply each score by how many times it came up.
+        - The products add up to 73 over 20 rolls.
+        solution: 'Step 1: Σfx = 2 + 8 + 9 + 20 + 10 + 24 = 73. Step 2: Σf = 20 rolls. Step 3: Mean = 73 ÷ 20 = 3.65.'
+        mistakes:
+          '3.5': frequency_not_used

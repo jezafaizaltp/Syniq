@@ -12,6 +12,13 @@ tips:
   pivot_point: "A sprite turns around a small crosshair in its Costume Editor. For a clock hand, that point must sit where the hand meets the centre of the dial. Overlapping sprites are stacked in layers that you can bring forward or send back."
   variables_input: "The Sensing blocks read things from outside: what the user types, and the computer's clock. A typed answer is stored in a variable so you can compare it later; the alarm should sound only when the stored time matches the clock."
   python_syntax: "Python was created in the early 1990s by a Dutch programmer (Tim Berners-Lee made the web, not Python). Syntax is the set of grammar rules for writing code."
+  it3_block_vs_text: Block coding uses drag-and-drop blocks; text languages need typed instructions with exact syntax.
+  it3_two_steps: 'Building an app has two stages: first lay out what the user sees, then write the instructions.'
+  it3_layers: "When sprites overlap, blocks that change how a sprite appears on the stage decide which one is in front."
+  it3_degrees_per_step: A full turn is 360°. Divide by the number of steps in one full turn.
+  it3_hour_formula: Hour hand direction = hour × 30 + minute × 0.5. Work out each part, then add.
+  it3_store_input: The typed reply has to be kept somewhere so the program can compare it later.
+  it3_both_match: An alarm must check that the hour AND the minute both match.
 
 concepts:
   - code: it9.software.interface
@@ -45,6 +52,43 @@ concepts:
         Add the hour, minute and second hands: The hands go on top of the dial, so the dial comes first.
         Set each hand's rotation centre at the dial's centre: Each hand must exist before you can set its pivot point.
         Arrange layers so the hands are in front, then save: Arrange and save only when every sprite is placed.
+    lesson:
+      - teach: Apps can be built with text languages (Python, Java, C++) or with block coding apps (Scratch, PictoBlox). In block coding you drag and drop blocks written in simple words, so you don't need to memorise commands. It is good for beginners.
+        check:
+          prompt: Which is a block coding app?
+          options:
+          - Scratch
+          - Python
+          - C++
+          answer: Scratch
+          why: Scratch uses drag-and-drop blocks.
+      - teach: 'Making an app has two steps: (1) prepare the interface (layout: what the user sees) and (2) give instructions (coding). For an alarm clock in PictoBlox: delete the default sprite, add the dial, then the hour, minute and second hands and an alarm button.'
+        picture:
+          kind: flow
+          steps:
+          - Delete default sprite
+          - Add clock dial
+          - Add hour, minute, second hands
+          - Add alarm button
+          - Save
+          alt: Building the alarm clock interface.
+        check:
+          prompt: 'What comes first: the interface or the code?'
+          options:
+          - The interface
+          - The code
+          - Neither
+          answer: The interface
+          why: You lay out the screen, then tell each part what to do.
+      - teach: Each hand must turn around the dial's centre. In the Costume Editor, set the rotation centre (pivot point, a small crosshair) at the base of each hand. Use 'go to front layer' / 'go to back layer' so hands appear above the dial.
+        check:
+          prompt: Where should a clock hand's pivot point be?
+          options:
+          - At its base
+          - At its tip
+          - Anywhere
+          answer: At its base
+          why: Real hands turn around the end fixed at the centre.
     items:
       - prompt: "Block programming creates programs by"
         options: ["Dragging and dropping code blocks", "Typing long instructions from memory", "Drawing pictures only", "Recording your voice"]
@@ -102,6 +146,104 @@ concepts:
         hints: ["Overlapping sprites are arranged by layers.", "Which group of blocks (Looks) changes layers?"]
         solution: "Step 1: The dial is on top of the hands. Step 2: Use the Looks block go to front layer on each hand so they show over the dial."
         mistakes: {"point in direction 90": app_steps, "ask and wait": variables_input, "start sound": app_steps}
+      - prompt: Which is a reason block coding suits beginners?
+        options:
+        - No need to memorise instructions
+        - It needs exact typed syntax
+        - It only works offline
+        - It has no pictures
+        answer: No need to memorise instructions
+        difficulty: 1
+        hints:
+        - Blocks are written in simple words.
+        - You choose them instead of typing.
+        solution: 'Step 1: Blocks show their instructions. Step 2: You drag them into place. Step 3: No need to memorise.'
+        mistakes:
+          It needs exact typed syntax: it3_block_vs_text
+      - prompt: In the alarm clock project, which file is the dial?
+        options:
+        - clock.png
+        - Hour_handle.png
+        - Alarm_button
+        - Second_handle.png
+        answer: clock.png
+        difficulty: 1
+        hints:
+        - It is the round face behind the hands.
+        - Its name is just the object.
+        solution: 'Step 1: Handles are the hands. Step 2: The button sets the alarm. Step 3: The dial is clock.png.'
+        mistakes:
+          Hour_handle.png: app_steps
+      - prompt: At what size was the hour hand sprite set?
+        options:
+        - '50'
+        - '100'
+        - '10'
+        - '360'
+        answer: '50'
+        difficulty: 2
+        hints:
+        - It had to be smaller than the default 100.
+        - Half its size.
+        solution: 'Step 1: Default size is 100. Step 2: The hand was made half size. Step 3: 50.'
+        mistakes:
+          '360': clock_angles
+      - prompt: What is the first stage of making an application called?
+        options:
+        - Preparing the interface (layout designing)
+        - Coding
+        - Testing
+        - Selling
+        answer: Preparing the interface (layout designing)
+        difficulty: 1
+        hints:
+        - What the user will see is designed first.
+        - Coding comes after.
+        solution: 'Step 1: Two main steps. Step 2: Layout comes first. Step 3: Preparing the interface.'
+        mistakes:
+          Coding: it3_two_steps
+      - prompt: Which block category has 'go to front layer'?
+        options:
+        - Looks
+        - Sound
+        - Sensing
+        - Operators
+        answer: Looks
+        difficulty: 2
+        hints:
+        - It changes how sprites appear on stage.
+        - Not about sound or maths.
+        solution: 'Step 1: Layering affects appearance. Step 2: Appearance blocks are grouped together. Step 3: Looks.'
+        mistakes:
+          Operators: it3_layers
+      - prompt: Which device could remind students to drink water, as in the lesson's example?
+        options:
+        - A water bell
+        - A printer
+        - A scanner
+        - A projector
+        answer: A water bell
+        difficulty: 1
+        hints:
+        - It rings at set times.
+        - It reminds about water.
+        solution: 'Step 1: Devices can remind us on time. Step 2: The lesson names one for drinking water. Step 3: A water bell.'
+        mistakes:
+          A printer: block_coding
+      - prompt: Why use a block coding app before learning Python?
+        options:
+        - You learn program logic without worrying about syntax
+        - Block apps are faster than Python
+        - Python cannot make games
+        - Block apps need no computer
+        answer: You learn program logic without worrying about syntax
+        difficulty: 3
+        hints:
+        - What is hardest for beginners in typed languages?
+        - Blocks always fit correctly.
+        solution: 'Step 1: Typed code fails on small spelling or spacing errors. Step 2: Blocks avoid that. Step 3: You focus on logic.'
+        mistakes:
+          Python cannot make games: it3_block_vs_text
 
   - code: it9.software.clock_code
     title: Coding the clock hands
@@ -155,6 +297,39 @@ concepts:
         - when:
             degrees: 45
           say: 'That''s the minutes. Each minute turns 6°: 45 × 6.'
+    lesson:
+      - teach: 'A dial is 360°. The second hand goes round in 60 steps, so it turns 360 ÷ 60 = 6° each second. The minute hand also moves 6° each minute. In PictoBlox: point in direction (current second × 6).'
+        picture:
+          kind: flow
+          steps:
+          - Full circle 360°
+          - ÷ 60 steps
+          - = 6° per second
+          alt: Why the second hand moves 6°.
+        check:
+          prompt: At 10 seconds, the second hand points to
+          options:
+          - 60°
+          - 10°
+          - 600°
+          answer: 60°
+          why: 10 × 6 = 60.
+      - teach: The hour hand moves 360 ÷ 12 = 30° each hour, and 30 ÷ 60 = 0.5° each minute. So direction = hour × 30 + minute × 0.5. The 'current' block in Sensing gives the computer's time; Operators blocks do the maths.
+        picture:
+          kind: flow
+          steps:
+          - hour × 30
+          - + minute × 0.5
+          - = hour hand direction
+          alt: Hour hand formula.
+        check:
+          prompt: At 2:00, the hour hand points to
+          options:
+          - 60°
+          - 30°
+          - 120°
+          answer: 60°
+          why: 2 × 30 + 0 = 60.
     items:
       - prompt: "How many degrees does the second hand turn each second?"
         answer: "6"
@@ -226,6 +401,64 @@ concepts:
         hints: ["Minute hand: minute × 6. Hour hand: hour × 30 + minute × 0.5.", "Find both directions, then the difference."]
         solution: "Step 1: Minute hand: 30 × 6 = 180°. Step 2: Hour hand: 4 × 30 + 30 × 0.5 = 135°. Step 3: 180 − 135 = 45°."
         mistakes: {"60": clock_angles, "30": clock_angles}
+      - prompt: At 40 seconds, what direction should the second hand point (degrees)?
+        answer: '240'
+        check: 40*6
+        difficulty: 1
+        hints:
+        - Each second is 6°.
+        - 40 × 6.
+        solution: 'Step 1: 6° per second. Step 2: 40 seconds. Step 3: 240°.'
+        mistakes:
+          '46': it3_degrees_per_step
+      - prompt: Using hour × 30 + minute × 0.5, where does the hour hand point at 5:10?
+        answer: '155'
+        check: 5*30 + 10*0.5
+        difficulty: 2
+        hints:
+        - 5 × 30 first.
+        - Then add 10 × 0.5.
+        solution: 'Step 1: 5 × 30 = 150. Step 2: 10 × 0.5 = 5. Step 3: 155°.'
+        mistakes:
+          '150': it3_hour_formula
+      - prompt: Which block category holds maths blocks like × and +?
+        options:
+        - Operators
+        - Looks
+        - Sound
+        - Events
+        answer: Operators
+        difficulty: 1
+        hints:
+        - Maths signs like × and + act on numbers.
+        - Logic and text blocks are there too.
+        solution: 'Step 1: × and + operate on numbers. Step 2: They are grouped together. Step 3: Operators.'
+        mistakes:
+          Looks: hour_formula
+      - prompt: How many degrees does the minute hand move in 15 minutes?
+        answer: '90'
+        check: 15*6
+        difficulty: 2
+        hints:
+        - The minute hand moves 6° a minute.
+        - 15 × 6.
+        solution: 'Step 1: 6° per minute. Step 2: 15 minutes. Step 3: 90°.'
+        mistakes:
+          '7.5': it3_degrees_per_step
+      - prompt: What starts the PictoBlox program running?
+        options:
+        - Clicking the green flag
+        - Pressing Delete
+        - Closing the stage
+        - Saving the file
+        answer: Clicking the green flag
+        difficulty: 1
+        hints:
+        - It is a coloured flag above the stage.
+        - Its colour means 'go'.
+        solution: 'Step 1: Programs start with an event. Step 2: The flag is the usual start. Step 3: Green flag.'
+        mistakes:
+          Saving the file: block_coding
 
   - code: it9.software.alarm_python
     title: Input, variables, sound and Python
@@ -278,6 +511,42 @@ concepts:
         bin: Sound block
         clue: Plays the alarm.
         why: Sound block.
+    lesson:
+      - teach: The 'ask and wait' block (Sensing) lets the user type an answer. Store the answer in variables such as Hour and Minute. A variable is a named box that holds a value which can change.
+        check:
+          prompt: Where is the typed alarm hour kept?
+          options:
+          - In a variable
+          - In the dial sprite
+          - In the sound library
+          answer: In a variable
+          why: Variables store values for later use.
+      - teach: The alarm rings when Hour = current hour AND Minute = current minute. Use the = and 'and' blocks. Add a sound from the Sounds tab and play it with 'start sound', repeating a few times.
+        picture:
+          kind: flow
+          steps:
+          - ask and wait
+          - store Hour and Minute
+          - 'check: hour = Hour and minute = Minute'
+          - start sound
+          alt: The alarm logic.
+        check:
+          prompt: Why must both hour and minute be checked?
+          options:
+          - Otherwise it rings at wrong times
+          - To save memory
+          - To change the dial colour
+          answer: Otherwise it rings at wrong times
+          why: Checking only minutes would ring every hour.
+      - teach: Professionals mostly write text code (Python, Java, C++). Python was created in 1991 under Guido van Rossum and is used from games to AI. Syntax is the grammar of code; in Python, indentation and quotes are part of it.
+        check:
+          prompt: What is syntax?
+          options:
+          - The correct structure of code
+          - A kind of sound
+          - A sprite
+          answer: The correct structure of code
+          why: Like grammar in a language.
     items:
       - prompt: "Which block lets the user type in the alarm time?"
         options: ["ask and wait", "go to front layer", "point in direction", "change size"]
@@ -342,3 +611,87 @@ concepts:
         hints: ["Syntax is like grammar for code.", "In Python, spaces at the start of a line matter."]
         solution: "Step 1: Python uses indentation to show which lines belong inside a block. Step 2: Wrong indentation breaks that rule, so it is a syntax error."
         mistakes: {"A wrong alarm time": python_syntax, "A missing sound file": python_syntax, "A slow computer": python_syntax}
+      - prompt: Which block plays a chosen sound?
+        options:
+        - start sound
+        - ask and wait
+        - go to front layer
+        - point in direction
+        answer: start sound
+        difficulty: 1
+        hints:
+        - It is in the Sound category.
+        - It begins playing the sound.
+        solution: 'Step 1: The alarm must make a noise. Step 2: Sound blocks play sounds. Step 3: start sound.'
+        mistakes:
+          ask and wait: variables_input
+      - prompt: Which operator joins two conditions so both must be true?
+        options:
+        - and
+        - or
+        - not
+        - +
+        answer: and
+        difficulty: 2
+        hints:
+        - The alarm needs hour AND minute to match.
+        - With 'or', only one would need to match.
+        solution: 'Step 1: Both conditions must hold. Step 2: The joining word means ''both''. Step 3: and.'
+        mistakes:
+          or: it3_both_match
+      - prompt: Name one other way to get a sound into PictoBlox besides the library.
+        options:
+        - Record it
+        - Draw it
+        - Type it in Python only
+        - Scan it
+        answer: Record it
+        difficulty: 2
+        hints:
+        - Use a microphone.
+        - 'The Sounds tab has three options: library, record, upload.'
+        solution: 'Step 1: Library is one option. Step 2: You can also use a microphone or a file. Step 3: Record it.'
+        mistakes:
+          Draw it: variables_input
+      - prompt: In Python, which is part of the syntax?
+        options:
+        - Indentation
+        - The colour of the screen
+        - The size of the monitor
+        - The speed of the internet
+        answer: Indentation
+        difficulty: 2
+        hints:
+        - Python cares how lines are lined up.
+        - Spaces at the start of a line matter.
+        solution: 'Step 1: Syntax = rules for writing code. Step 2: Python uses spaces to group lines. Step 3: Indentation.'
+        mistakes:
+          The colour of the screen: python_syntax
+      - prompt: The user types 7 for the hour. Which variable should hold it?
+        options:
+        - Hour
+        - Minute
+        - Second
+        - Sound
+        answer: Hour
+        difficulty: 1
+        hints:
+        - Match the value to its meaning.
+        - 7 is the alarm's hour.
+        solution: 'Step 1: Two variables: Hour and Minute. Step 2: 7 is the hour. Step 3: Hour.'
+        mistakes:
+          Minute: it3_store_input
+      - prompt: When you add sprites in PictoBlox's Python mode, what appears?
+        options:
+        - Some Python code is generated
+        - The sprites disappear
+        - A new block category
+        - The computer restarts
+        answer: Some Python code is generated
+        difficulty: 3
+        hints:
+        - The Python window shows code for what you do.
+        - Sprites need code to exist in Python.
+        solution: 'Step 1: Python mode shows code. Step 2: Adding sprites creates matching lines. Step 3: Some code is generated.'
+        mistakes:
+          The sprites disappear: python_syntax

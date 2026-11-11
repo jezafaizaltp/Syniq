@@ -13,6 +13,8 @@ tips:
   digits_reversed: "That is the number with its digits reversed. Check which of the two is bigger."
   angle_sum_180: "The two acute angles of a right triangle add up to 90°, because the right angle takes the other 90°."
   match_coefficient: "To remove x, the x terms in both equations must match. Look at the x term in the second equation: what do you multiply the first equation's x by to get it?"
+  add_when_same: When an unknown has the same sign in both equations, like 5x and 5x, adding doubles it. Taking one equation from the other makes it cancel.
+  match_coefficient_y: 'To remove y, the y terms in both equations must match. Look at the y term in the second equation: what do you multiply the first equation''s y by to get it?'
 
 concepts:
   - code: math9.pairs.sum_difference
@@ -77,6 +79,50 @@ concepts:
         - when:
             s: 15
           say: The sum is 15, but the two numbers aren't 3 apart yet.
+    lesson:
+      - teach: 'Two numbers are hidden, but we know two facts about them: what they add up to (their sum) and how far apart they are (their difference). For example: two numbers add up to 34, and one is 10 more than the other. Either fact alone fits many pairs. Together they fix both numbers.'
+        check:
+          prompt: Two numbers are 9 and 5. What is their difference?
+          options:
+          - '4'
+          - '14'
+          - '45'
+          answer: '4'
+          why: 'The difference is how far apart they are: 9 − 5 = 4. Adding them gives the sum, 14.'
+      - teach: 'Think of the numbers as two strips of paper. The long strip is 10 longer, and together they measure 34. Cut the extra 10 off the long strip. What is left, 34 − 10 = 24, is two equal short strips, so each is 12. That is the smaller number. Stick the 10 back on: the bigger number is 22.'
+        picture:
+          kind: flow
+          steps:
+          - Sum 34, difference 10
+          - 'Cut off the extra 10: 34 − 10 = 24'
+          - 'Two equal strips: 24 ÷ 2 = 12'
+          - 'Bigger number: 12 + 10 = 22'
+          alt: Remove the difference 10 from the sum 34, halve the 24 that is left to get 12, then add 10 back to get 22.
+        check:
+          prompt: Sum 20, difference 6. After cutting off the extra 6, how much is left to share equally?
+          options:
+          - '14'
+          - '26'
+          - '7'
+          answer: '14'
+          why: 20 − 6 = 14. That 14 is two equal smaller numbers, so the smaller is 7 and the bigger is 13.
+      - teach: 'In letters, call the bigger number x and the smaller y. The facts are x + y = 34 and x − y = 10. Add the two equations: +y and −y cancel, leaving 2x = 44, so x = 22. Then y = 34 − 22 = 12.'
+        check:
+          prompt: x + y = 16 and x − y = 4. Adding the two equations gives what?
+          options:
+          - 2x = 20
+          - 2y = 12
+          - x = 20
+          answer: 2x = 20
+          why: x + x = 2x, y − y = 0 and 16 + 4 = 20. So 2x = 20, and x = 10.
+      - teach: 'Always check your pair against both facts: 22 + 12 = 34 and 22 − 12 = 10. Two slips to watch: stopping at 2x = 44 and forgetting to halve, and giving the smaller number when the question asked for the bigger.'
+        check:
+          prompt: Someone says the two numbers with sum 30 and difference 4 are 17 and 13. Are they right?
+          options:
+          - 'Yes'
+          - 'No'
+          answer: 'Yes'
+          why: 17 + 13 = 30 and 17 − 13 = 4. Both facts are true, so the pair is right.
     items:
       - prompt: "The sum of two numbers is 34 and their difference is 10. What is the bigger number?"
         answer: "22"
@@ -155,6 +201,64 @@ concepts:
         hints: ["Subtract the second equation from the first.", "The x terms cancel: 2y = 2."]
         solution: "Step 1: Subtracting, 2y = 2.5 − 0.5 = 2. Step 2: y = 1. Step 3: Then x = 1.5, and 1.5 − 1 = 0.5."
         mistakes: {"2": forgot_divide, "1.5": swapped_unknowns}
+      - prompt: The sum of two numbers is 20 and their difference is 4. What is the bigger number?
+        answer: '12'
+        check: (20 + 4)/2
+        difficulty: 1
+        hints:
+        - Add the sum and the difference.
+        - That total is two of the bigger number.
+        solution: 'Step 1: 20 + 4 = 24. Step 2: 24 ÷ 2 = 12. Step 3: The smaller number is 8, and 12 − 8 = 4.'
+        mistakes:
+          '24': forgot_divide
+          '8': swapped_unknowns
+      - prompt: x + y = 20 and x − y = 6. What is y?
+        answer: '7'
+        check: (20 - 6)/2
+        difficulty: 1
+        hints:
+        - Take the second equation away from the first.
+        - The x terms cancel, leaving 2y = 14.
+        solution: 'Step 1: (x + y) − (x − y) = 20 − 6, so 2y = 14. Step 2: y = 7. Step 3: Check: x = 13, and 13 − 7 = 6.'
+        mistakes:
+          '14': forgot_divide
+          '13': swapped_unknowns
+      - prompt: Two numbers have a sum of 30 and a difference of 8. Which are they?
+        options:
+        - 19 and 11
+        - 22 and 8
+        - 15 and 15
+        - 38 and 22
+        answer: 19 and 11
+        difficulty: 2
+        hints:
+        - The bigger number is half of (30 + 8).
+        - Check each pair against both facts.
+        solution: 'Step 1: Bigger = (30 + 8) ÷ 2 = 19. Step 2: Smaller = 30 − 19 = 11. Step 3: Check: 19 − 11 = 8.'
+        mistakes:
+          22 and 8: difference_as_number
+      - prompt: The sum of two numbers is 9 and their difference is 2. What is the bigger number? Decimals are fine.
+        answer: '5.5'
+        check: (9 + 2)/2
+        difficulty: 2
+        hints:
+        - 'It works the same way with decimals: add the sum and the difference.'
+        - 9 + 2 = 11 is two of the bigger number.
+        solution: 'Step 1: 9 + 2 = 11. Step 2: 11 ÷ 2 = 5.5. Step 3: The smaller is 3.5, and 5.5 − 3.5 = 2.'
+        mistakes:
+          '11': forgot_divide
+          '3.5': swapped_unknowns
+      - prompt: Two friends share 60 marbles. One has 14 more than the other. How many marbles does the one with fewer have?
+        answer: '23'
+        check: (60 - 14)/2
+        difficulty: 3
+        hints:
+        - The two shares add up to 60 and differ by 14.
+        - Take away the extra 14, then share what is left equally.
+        solution: 'Step 1: 60 − 14 = 46. Step 2: 46 ÷ 2 = 23. Step 3: The other friend has 37, and 23 + 37 = 60.'
+        mistakes:
+          '46': forgot_divide
+          '37': swapped_unknowns
 
   - code: math9.pairs.elimination
     title: Adding or subtracting the equations
@@ -209,6 +313,43 @@ concepts:
         - when:
             q: 1
           say: Only x − y = 1 is true. Lots of pairs are 1 apart (2 and 1, 3 and 2, …); only one of them also makes 2x + 3y = 12.
+    lesson:
+      - teach: 'Sometimes one unknown has the same number in front of it in both equations. In x + y = 8 and 2x + y = 10, both have one y. Take the first equation away from the second: (2x + y) − (x + y) = 10 − 8, which leaves x = 2. The y has disappeared.'
+        check:
+          prompt: 3x + y = 11 and x + y = 5. Take the second away from the first. What is left?
+          options:
+          - 2x = 6
+          - 4x = 16
+          - 2y = 6
+          answer: 2x = 6
+          why: 3x − x = 2x, y − y = 0 and 11 − 5 = 6. So 2x = 6, and x = 3.
+      - teach: If the same unknown has opposite signs, like +3y in one equation and −3y in the other, add the equations instead. +3y and −3y make 0. In 2x + 3y = 13 and 2x − 3y = 1, adding gives 4x = 14.
+        check:
+          prompt: When does adding the two equations remove y?
+          options:
+          - When the y terms have opposite signs, like +2y and −2y
+          - When the y terms are the same, like +2y and +2y
+          - Never
+          answer: When the y terms have opposite signs, like +2y and −2y
+          why: +2y and −2y add up to 0. Terms with the same sign cancel when you subtract instead.
+      - teach: 'Once one unknown is found, put it back into either equation to find the other. From x = 2 and x + y = 8: 2 + y = 8, so y = 6. Then check in the other equation: 2 × 2 + 6 = 10, which is right.'
+        check:
+          prompt: You found x = 3, and x + y = 7. What is y?
+          options:
+          - '4'
+          - '10'
+          - '3'
+          answer: '4'
+          why: 3 + y = 7, so y = 7 − 3 = 4.
+      - teach: Adding both equations can also give a total straight away. 2x + 3y = 13 and 3x + 2y = 12 add up to 5x + 5y = 25, so x + y = 5 without finding x or y first.
+        check:
+          prompt: x + 2y = 9 and 2x + y = 6 add up to 3x + 3y = 15. What is x + y?
+          options:
+          - '5'
+          - '15'
+          - '3'
+          answer: '5'
+          why: 'Divide every term of 3x + 3y = 15 by 3: x + y = 5.'
     items:
       - prompt: "x + y = 8 and 2x + y = 10. What is x?"
         answer: "2"
@@ -287,6 +428,60 @@ concepts:
         hints: ["Subtract to remove x first: 5y = 25.", "With y = 5, put it back into 6x + 2y = 22."]
         solution: "Step 1: Subtracting, 5y = 25, so y = 5. Step 2: 6x + 10 = 22, so 6x = 12. Step 3: x = 2."
         mistakes: {"5": swapped_unknowns, "12": forgot_divide}
+      - prompt: 2x + y = 11 and x + y = 7. What is x?
+        answer: '4'
+        check: 11 - 7
+        difficulty: 1
+        hints:
+        - Both equations have one y. Take one equation away from the other.
+        - (2x + y) − (x + y) leaves just x.
+        solution: 'Step 1: Subtract: (2x + y) − (x + y) = 11 − 7. Step 2: So x = 4. Step 3: Then y = 7 − 4 = 3.'
+        mistakes:
+          '3': swapped_unknowns
+      - prompt: x + 4y = 14 and x − 4y = 6. What is x?
+        answer: '10'
+        check: (14 + 6)/2
+        difficulty: 2
+        hints:
+        - The y terms have opposite signs.
+        - Adding the equations gives 2x = 20.
+        solution: 'Step 1: Add: 2x = 20. Step 2: x = 10. Step 3: Then 4y = 4, so y = 1.'
+        mistakes:
+          '20': forgot_divide
+          '1': swapped_unknowns
+      - prompt: To find y from 5x + 2y = 19 and 5x − y = 7, what should you do first?
+        options:
+        - Take the second equation away from the first
+        - Add the two equations
+        - Multiply the first equation by 2
+        answer: Take the second equation away from the first
+        difficulty: 2
+        hints:
+        - 'Look at the x terms: are their signs the same or opposite?'
+        - Both are +5x, so they cancel only one way.
+        solution: 'Step 1: Both equations have +5x. Step 2: Subtracting gives 2y − (−y) = 3y = 12. Step 3: So y = 4.'
+        mistakes:
+          Add the two equations: add_when_same
+      - prompt: 7x + 3y = 37 and 2x + 3y = 17. What is y?
+        answer: '3'
+        check: (17 - 2*4)/3
+        difficulty: 3
+        hints:
+        - Both have +3y, so subtract to find x first.
+        - 5x = 20, so x = 4. Put it back into the second equation.
+        solution: 'Step 1: Subtract: 5x = 20, so x = 4. Step 2: 2 × 4 + 3y = 17, so 3y = 9. Step 3: y = 3.'
+        mistakes:
+          '4': swapped_unknowns
+      - prompt: 4x + 3y = 25 and 3x + 4y = 24. What is x + y?
+        answer: '7'
+        check: (25 + 24)/7
+        difficulty: 3
+        hints:
+        - Try adding the two equations.
+        - You get 7x + 7y = 49.
+        solution: 'Step 1: Add: 7x + 7y = 49. Step 2: Divide by 7: x + y = 7. Step 3: Check: x = 4 and y = 3 fit both equations.'
+        mistakes:
+          '49': forgot_divide
 
   - code: math9.pairs.make_match
     title: Making the numbers match first
@@ -335,6 +530,43 @@ concepts:
         - when:
             p: 16
           say: 3x + 2y = 16 is true, but x + y isn't 7 yet.
+    lesson:
+      - teach: 'In x + 2y = 11 and 3x + y = 13, no unknown has the same number in front of it. We can make one match: multiply the first equation by 3 to get 3x + 6y = 33. Now both equations have 3x.'
+        check:
+          prompt: To make the x terms match in x + y = 5 and 4x + 3y = 18, multiply the first equation by what?
+          options:
+          - '4'
+          - '3'
+          - '5'
+          answer: '4'
+          why: x × 4 = 4x, which matches the 4x in the second equation.
+      - teach: Multiply every term, on both sides of the = sign. 2x + 3y = 7 multiplied by 4 is 8x + 12y = 28. Writing 8x + 3y = 7 or 8x + 12y = 7 would make the equation untrue, because only part of it was multiplied.
+        check:
+          prompt: Multiply x + 2y = 5 by 3. Which is right?
+          options:
+          - 3x + 6y = 15
+          - 3x + 2y = 5
+          - 3x + 6y = 5
+          answer: 3x + 6y = 15
+          why: 'Every term is multiplied: 3 × x = 3x, 3 × 2y = 6y and 3 × 5 = 15.'
+      - teach: 'Then add or subtract as before. 3x + 6y = 33 and 3x + y = 13 both have 3x, so subtract: 5y = 20, which gives y = 4. Put it back: x + 8 = 11, so x = 3.'
+        check:
+          prompt: 3x + 6y = 33 and 3x + y = 13. Taking the second from the first gives what?
+          options:
+          - 5y = 20
+          - 7y = 46
+          - 6x = 46
+          answer: 5y = 20
+          why: 3x − 3x = 0, 6y − y = 5y and 33 − 13 = 20.
+      - teach: 'Sometimes both equations need multiplying. For 3x + 2y = 12 and 2x + 3y = 13, multiply the first by 2 and the second by 3: 6x + 4y = 24 and 6x + 9y = 39. Now both have 6x, and subtracting gives 5y = 15.'
+        check:
+          prompt: To make the y terms match in 2x + 3y = 8 and 5x + 2y = 9, which works?
+          options:
+          - First × 2, second × 3
+          - First × 3, second × 2
+          - First × 5, second × 2
+          answer: First × 2, second × 3
+          why: 3y × 2 = 6y and 2y × 3 = 6y, so both y terms become 6y.
     items:
       - prompt: "To remove x from x + 2y = 11 and 3x + y = 13, what should you multiply the first equation by?"
         options: ["3", "2", "11", "13"]
@@ -406,6 +638,61 @@ concepts:
         hints: ["You need the y terms to become the same size: 4y and 6y.", "The smallest number both 4 and 6 go into is 12."]
         solution: "Step 1: 4y × 3 = 12y and 6y × 2 = 12y. Step 2: Then 12y and −12y cancel when you add. Step 3: Multiplying by 6 and 4 also works but makes bigger numbers; 5 and 3 would match x, not y."
         mistakes: {"Multiply the first by 5 and the second by 3": match_coefficient, "Multiply only the first by 2": match_coefficient}
+      - prompt: To make the y terms match in 2x + y = 8 and 3x + 2y = 13, what should you multiply the first equation by?
+        answer: '2'
+        check: '2'
+        difficulty: 1
+        hints:
+        - Look at the y term in the second equation.
+        - What turns y into 2y?
+        solution: 'Step 1: The second equation has 2y. Step 2: y × 2 = 2y. Step 3: So multiply the first equation by 2 to get 4x + 2y = 16.'
+        mistakes:
+          '3': match_coefficient_y
+      - prompt: Multiply every term of 3x − y = 4 by 5. What do you get?
+        options:
+        - 15x − 5y = 20
+        - 15x − y = 4
+        - 15x − 5y = 4
+        - 15x + 5y = 20
+        answer: 15x − 5y = 20
+        difficulty: 2
+        hints:
+        - Every term on both sides gets multiplied.
+        - Multiply 3x, −y and 4 each by 5.
+        solution: 'Step 1: 5 × 3x = 15x. Step 2: 5 × (−y) = −5y. Step 3: 5 × 4 = 20, so 15x − 5y = 20.'
+        mistakes:
+          15x − y = 4: only_one_side
+          15x − 5y = 4: only_one_side
+      - prompt: 2x + y = 8 and 3x + 2y = 13. What is x?
+        answer: '3'
+        check: 2*8 - 13
+        difficulty: 2
+        hints:
+        - Make the y terms match first.
+        - 'Multiply the first equation by 2: 4x + 2y = 16.'
+        solution: 'Step 1: 4x + 2y = 16. Step 2: Subtract 3x + 2y = 13 to get x = 3. Step 3: Then y = 8 − 6 = 2.'
+        mistakes:
+          '2': swapped_unknowns
+      - prompt: 3x + 2y = 16 and 4x − 3y = 10. What is x?
+        answer: '4'
+        check: (3*16 + 2*10)/17
+        difficulty: 3
+        hints:
+        - 'Make the y terms match: one has +2y and the other −3y.'
+        - Multiply the first by 3 and the second by 2, then add.
+        solution: 'Step 1: 9x + 6y = 48 and 8x − 6y = 20. Step 2: Add: 17x = 68. Step 3: x = 4, and then 2y = 4, so y = 2.'
+        mistakes:
+          '2': swapped_unknowns
+      - prompt: 5x + 2y = 20 and 3x + 5y = 31. What is y?
+        answer: '5'
+        check: (20 - 5*2)/2
+        difficulty: 3
+        hints:
+        - Make one unknown match in both equations.
+        - Multiply the first by 5 and the second by 2 to get 10y in both.
+        solution: 'Step 1: 25x + 10y = 100 and 6x + 10y = 62. Step 2: Subtract: 19x = 38, so x = 2. Step 3: 10 + 2y = 20, so y = 5.'
+        mistakes:
+          '2': swapped_unknowns
 
   - code: math9.pairs.word_problems
     title: Writing equations from a situation
@@ -456,6 +743,43 @@ concepts:
         - when:
             cost: 78
           say: That costs ₹78, but you didn't buy 10 things.
+    lesson:
+      - teach: 'A word problem hides two unknowns. Start by naming them: ''Let x be the price of 1 kg of rice, in rupees, and y the price of 1 kg of sugar.'' Saying what each letter stands for, with its unit, makes the rest much easier.'
+        check:
+          prompt: A pen and a notebook cost ₹40 together. What is a good first step?
+          options:
+          - Let x be the price of a pen and y the price of a notebook
+          - Guess the price of the pen
+          - Divide 40 by 2
+          answer: Let x be the price of a pen and y the price of a notebook
+          why: Naming the unknowns first lets you write each fact as an equation.
+      - teach: Next, turn each fact into one equation. '2 kg of rice and 1 kg of sugar cost ₹130' becomes 2x + y = 130. 'The pen costs ₹9 more than the pencil' becomes x − y = 9, which is the same as x = y + 9.
+        check:
+          prompt: Anu is 4 years older than Binu. With a for Anu's age and b for Binu's, which equation fits?
+          options:
+          - a − b = 4
+          - b − a = 4
+          - a + b = 4
+          answer: a − b = 4
+          why: Anu is older, so Anu's age minus Binu's age is 4.
+      - teach: 'Some situations bring their own rule. A rectangle: perimeter = 2 × (length + breadth). A two-digit number with tens digit a and units digit b is 10a + b, and with its digits reversed it is 10b + a. In a right triangle, the two acute angles add up to 90°.'
+        check:
+          prompt: A two-digit number has tens digit a and units digit b. How do we write the number?
+          options:
+          - 10a + b
+          - a + b
+          - 10b + a
+          answer: 10a + b
+          why: 'The tens digit counts tens: for example 47 = 10 × 4 + 7.'
+      - teach: 'Solve the pair, then answer exactly what was asked, with its unit, and check it in the story. If the pen is ₹12 and the pencil ₹3: together they cost ₹15, and the pen costs ₹9 more. Both facts fit.'
+        check:
+          prompt: You found x = 12 for the pen and y = 3 for the pencil. The question asks for the pencil's price. What do you answer?
+          options:
+          - ₹3
+          - ₹12
+          - ₹15
+          answer: ₹3
+          why: The question asked about the pencil, which is y, so the answer is ₹3.
     items:
       - prompt: "Meera buys 2 kg of rice and 1 kg of sugar for ₹130. With x for the price of 1 kg of rice and y for 1 kg of sugar, which equation fits?"
         options: ["2x + y = 130", "x + 2y = 130", "2x + 2y = 130", "2xy = 130"]
@@ -534,3 +858,57 @@ concepts:
         hints: ["Downstream speed = boat + stream = 12 km/h. Upstream speed = boat − stream = 8 km/h.", "It is a sum and difference problem: add the two speeds and halve."]
         solution: "Step 1: Downstream 24 ÷ 2 = 12 km/h, upstream 24 ÷ 3 = 8 km/h. Step 2: b + s = 12 and b − s = 8. Step 3: 2b = 20, so b = 10 km/h (and the stream is 2 km/h)."
         mistakes: {"20": forgot_divide, "2": swapped_unknowns}
+      - prompt: One number is twice another, and together they add up to 36. What is the smaller number?
+        answer: '12'
+        check: 36/3
+        difficulty: 1
+        hints:
+        - Call the smaller number x. Then the bigger one is 2x.
+        - x + 2x = 3x = 36.
+        solution: 'Step 1: x + 2x = 36, so 3x = 36. Step 2: x = 12. Step 3: The bigger number is 24, and 12 + 24 = 36.'
+        mistakes:
+          '24': swapped_unknowns
+      - prompt: In a right triangle, the two acute angles are x° and y°, and the first is 30° more than the second. Which pair of equations fits?
+        options:
+        - x + y = 90 and x − y = 30
+        - x + y = 180 and x − y = 30
+        - x + y = 90 and x + y = 30
+        answer: x + y = 90 and x − y = 30
+        difficulty: 2
+        hints:
+        - How much do the two acute angles of a right triangle add up to?
+        - The right angle takes 90° of the triangle's 180°.
+        solution: 'Step 1: The acute angles share 180° − 90° = 90°, so x + y = 90. Step 2: The first is 30° more, so x − y = 30. Step 3: Solving gives 60° and 30°.'
+        mistakes:
+          x + y = 180 and x − y = 30: angle_sum_180
+      - prompt: A rectangle has a perimeter of 40 cm. Its length is 4 cm more than its breadth. What is the breadth, in cm?
+        answer: '8'
+        check: (40/2 - 4)/2
+        difficulty: 2
+        hints:
+        - The perimeter is twice (length + breadth).
+        - So length + breadth = 20 and length − breadth = 4.
+        solution: 'Step 1: Length + breadth = 40 ÷ 2 = 20. Step 2: Length − breadth = 4. Step 3: Breadth = (20 − 4) ÷ 2 = 8 cm, and the length is 12 cm.'
+        mistakes:
+          '12': swapped_unknowns
+          '18': perimeter_half
+      - prompt: 2 kg of apples and 3 kg of oranges cost ₹460. 3 kg of apples and 2 kg of oranges cost ₹440. How many rupees does 1 kg of apples cost?
+        answer: '80'
+        check: (900/5 - 20)/2
+        difficulty: 3
+        hints:
+        - Adding the two facts gives 5 kg of each kind together.
+        - a + o = 180, and subtracting the facts gives o − a = 20.
+        solution: 'Step 1: Add: 5a + 5o = 900, so a + o = 180. Step 2: Subtract: o − a = 20. Step 3: a = (180 − 20) ÷ 2 = ₹80, and oranges are ₹100.'
+        mistakes:
+          '100': swapped_unknowns
+      - prompt: The digits of a two-digit number add up to 11. Reversing the digits makes the number 45 smaller. What is the number?
+        answer: '83'
+        check: 10*(11 + 5)/2 + (11 - 5)/2
+        difficulty: 3
+        hints:
+        - Write the number as 10a + b and the reversed number as 10b + a.
+        - Their difference is 9(a − b) = 45, so a − b = 5.
+        solution: 'Step 1: a + b = 11. Step 2: (10a + b) − (10b + a) = 9(a − b) = 45, so a − b = 5. Step 3: a = 8 and b = 3, so the number is 83.'
+        mistakes:
+          '38': digits_reversed

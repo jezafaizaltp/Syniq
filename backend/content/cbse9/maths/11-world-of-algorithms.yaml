@@ -7,7 +7,7 @@ tips:
   euclid_stop_early: Keep going until the remainder is 0; the GCD is the last non-zero number (the last divisor).
   algorithm_exact_steps: "An algorithm is a list of exact steps that always finishes and always gives the answer. Which choice is like that?"
   common_factor_out: "If d divides both, write a = d × m and b = d × n. What do you get when you subtract?"
-  coprime_meaning: "GCD 1 means two numbers share no factor except 1. They don't have to be prime themselves: think of 8 and 15. The name says they are prime 'together'."
+  coprime_meaning: "GCD 1 means two numbers share no factor except 1. They don't have to be prime themselves: think of 9 and 10. The name says they are prime 'together'."
   divisor_pair_root: "Divisors come in pairs d and n/d. If both were bigger than √n, their product would be bigger than n."
   divisor_pairs: "List the divisors in pairs that multiply to 36. A square number has one pair where both are the same: count it once."
   euclid_continue: "Divide, keep the remainder, then divide the old divisor by it. Stop when the remainder is 0."
@@ -59,6 +59,48 @@ concepts:
       Write 4 in the tens, carry 1 to the hundreds: You need the tens total, 14, before you know what to write and carry.
       'Add the hundreds and the carry: 4 + 2 + 1 = 7': The hundreds need the carry from the tens column.
       'Write 7 in the hundreds: the answer is 743': The last digit comes only after the hundreds are added.
+  lesson:
+    - teach: 'An algorithm is a finite list of clear steps that solves every case of a problem. Column addition is one: add the units, write the units digit, carry the tens, move left, repeat. A recipe that says ''add some salt'' is not exact enough to be an algorithm.'
+      check:
+        prompt: Which is an algorithm?
+        options:
+        - To double a number, add it to itself
+        - Think hard until you see the answer
+        - Guess a number you like
+        answer: To double a number, add it to itself
+        why: It is a clear step that works for every number.
+    - teach: 'The greatest common divisor (GCD) of two numbers is the biggest number that divides both. One algorithm: list the divisors of each, then pick the largest common one. Divisors of 12: 1, 2, 3, 4, 6, 12. Of 18: 1, 2, 3, 6, 9, 18. GCD = 6.'
+      picture:
+        kind: compare
+        columns:
+        - title: Divisors of 12
+          points:
+          - 1, 2, 3, 4, 6, 12
+        - title: Divisors of 18
+          points:
+          - 1, 2, 3, 6, 9, 18
+        - title: Common
+          points:
+          - 1, 2, 3, 6
+          - 'Greatest: 6'
+        alt: Divisors of 12 and of 18 listed side by side; the common ones are 1, 2, 3, 6 and the greatest is 6.
+      check:
+        prompt: What is the GCD of 8 and 20?
+        options:
+        - '4'
+        - '2'
+        - '40'
+        answer: '4'
+        why: 'Divisors of 8: 1, 2, 4, 8. Of 20: 1, 2, 4, 5, 10, 20. Largest common: 4.'
+    - teach: 'Divisors come in pairs: 36 = 1 × 36 = 2 × 18 = 3 × 12 = 4 × 9 = 6 × 6. One number of each pair is at most √36 = 6, so you only need to test up to √n. Still, for huge numbers listing is slow. A good algorithm is correct AND efficient.'
+      check:
+        prompt: To list the divisors of 100, up to which number must you test?
+        options:
+        - '10'
+        - '50'
+        - '100'
+        answer: '10'
+        why: √100 = 10; each divisor above 10 pairs with one below.
   items:
   - prompt: Find the GCD of 18 and 24.
     answer: '6'
@@ -129,6 +171,111 @@ concepts:
     - 8 and 15 are an example.
     solution: 'Step 1: GCD 1 means no common factor other than 1. Step 2: Such numbers are co-prime (they need not be prime themselves: 8 and 15).'
     mistakes: {"Prime": "coprime_meaning", "Square": "coprime_meaning"}
+  - prompt: Find the GCD of 12 and 30.
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - 'List divisors of 12: 1, 2, 3, 4, 6, 12.'
+    - Which of those divide 30?
+    solution: Common divisors are 1, 2, 3, 6. The greatest is 6.
+    mistakes:
+      '60': gcd_vs_lcm
+      '3': gcd_vs_lcm
+  - prompt: How many divisors does 12 have?
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - 'Pair them: 1 × 12, 2 × 6, 3 × 4.'
+    - Count both numbers in each pair.
+    solution: '1, 2, 3, 4, 6, 12: six divisors.'
+    mistakes:
+      '3': divisor_pairs
+      '4': divisor_pairs
+  - prompt: Find the GCD of 14 and 15.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - 14 = 2 × 7, 15 = 3 × 5.
+    - Do they share any prime?
+    solution: No common prime factor, so the GCD is 1; they are co-prime.
+    mistakes:
+      '210': gcd_vs_lcm
+      '0': coprime_meaning
+  - prompt: Find the GCD of 24 and 36.
+    answer: '12'
+    check: '12'
+    difficulty: 2
+    hints:
+    - Both are multiples of 12.
+    - 'Check: does any bigger number divide both?'
+    solution: Divisors of 24 include 12; 36 = 3 × 12. Nothing bigger divides 24 and 36, so GCD = 12.
+    mistakes:
+      '6': gcd_vs_lcm
+      '72': gcd_vs_lcm
+  - prompt: How many divisors does 49 have?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - 49 = 7 × 7.
+    - The pair 7 × 7 gives only one new divisor.
+    solution: '1, 7, 49: three divisors. A square number has an odd number of divisors.'
+    mistakes:
+      '4': divisor_pair_root
+      '2': divisor_pairs
+  - prompt: Which pair of numbers is co-prime?
+    options:
+    - 8 and 15
+    - 6 and 9
+    - 10 and 25
+    - 12 and 18
+    answer: 8 and 15
+    difficulty: 2
+    hints:
+    - Co-prime means GCD = 1.
+    - 8 = 2³, 15 = 3 × 5.
+    solution: 8 and 15 share no factor except 1, so they are co-prime.
+    mistakes:
+      6 and 9: coprime_meaning
+  - prompt: A step says 'If the number looks big, divide it by something.' Why is this not a proper algorithm step?
+    options:
+    - 'It is not exact: ''looks big'' and ''something'' are unclear'
+    - It uses division
+    - It is too short
+    - Algorithms can't use 'if'
+    answer: 'It is not exact: ''looks big'' and ''something'' are unclear'
+    difficulty: 2
+    hints:
+    - Could two people follow it and get different results?
+    - Each step must be clear.
+    solution: An algorithm's steps must be exact so anyone gets the same result. 'Looks big' and 'something' are vague.
+    mistakes:
+      Algorithms can't use 'if': algorithm_exact_steps
+  - prompt: To find all divisors of 144 by testing, what is the largest number you need to test?
+    answer: '12'
+    check: sqrt(144)
+    difficulty: 3
+    hints:
+    - Divisors pair up around √144.
+    - √144 = 12.
+    solution: √144 = 12. Each divisor bigger than 12 pairs with one smaller than 12.
+    mistakes:
+      '72': divisor_pair_root
+      '144': divisor_pair_root
+  - prompt: Three ropes are 24 m, 36 m and 60 m long. They are cut into pieces of equal length, as long as possible, with nothing left over. How long is each piece, in m?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - The piece length must divide all three lengths.
+    - Find the GCD of 24, 36 and 60.
+    solution: GCD(24, 36) = 12, and 12 divides 60. So each piece is 12 m.
+    mistakes:
+      '6': gcd_vs_lcm
+      '360': gcd_vs_lcm
 - code: cbse9gm.algo.euclid
   title: Euclid's algorithm for the GCD
   after:
@@ -194,6 +341,43 @@ concepts:
       - when:
           v: 2
         say: 2 divides both, but is it the greatest? Finish the steps.
+  lesson:
+    - teach: 'Euclid noticed: any number that divides both a and b also divides a − b. So GCD(a, b) = GCD(b, a − b). GCD(30, 12) = GCD(12, 18) = GCD(12, 6) = GCD(6, 6) = 6. The numbers keep getting smaller.'
+      check:
+        prompt: GCD(50, 20) equals which of these?
+        options:
+        - GCD(20, 30)
+        - GCD(50, 70)
+        - GCD(20, 2)
+        answer: GCD(20, 30)
+        why: 50 − 20 = 30, and the GCD doesn't change.
+    - teach: Subtracting many times is the same as dividing and keeping the remainder. So GCD(a, b) = GCD(b, r), where r is the remainder of a ÷ b. Repeat until the remainder is 0; the last divisor is the GCD.
+      picture:
+        kind: flow
+        steps:
+        - GCD(252, 105)
+        - 252 = 2 × 105 + 42
+        - 105 = 2 × 42 + 21
+        - 42 = 2 × 21 + 0
+        - GCD = 21
+        alt: 'Euclid''s algorithm for 252 and 105: remainders 42, 21, 0, so the GCD is 21.'
+      check:
+        prompt: What is the remainder when 100 is divided by 36?
+        options:
+        - '28'
+        - '64'
+        - '2'
+        answer: '28'
+        why: 100 = 2 × 36 + 28.
+    - teach: 'Euclid''s algorithm is fast: the numbers shrink quickly, so even huge numbers need only a few steps, while listing divisors would take ages. It solves real problems like the largest tile that fits a floor exactly.'
+      check:
+        prompt: In Euclid's algorithm, when do you stop?
+        options:
+        - When the remainder is 0
+        - When the remainder is 1
+        - After three steps
+        answer: When the remainder is 0
+        why: Then the last divisor is the GCD.
   items:
   - prompt: In Euclid's algorithm for 48 and 18, what is the first remainder?
     answer: '12'
@@ -259,3 +443,104 @@ concepts:
     - Each remainder is smaller than the divisor.
     solution: 'Step 1: Both give the same GCD. Step 2: Euclid''s remainders shrink fast, so even 10-digit numbers take only a few dozen steps, while listing divisors could take millions.'
     mistakes: {"It gives a bigger GCD": "euclid_speed", "Listing divisors gives the wrong answer": "euclid_speed"}
+  - prompt: In Euclid's algorithm for 60 and 25, what is the first remainder?
+    answer: '10'
+    check: 60 % 25
+    difficulty: 1
+    hints:
+    - 60 ÷ 25.
+    - 60 = 2 × 25 + ?
+    solution: 60 = 2 × 25 + 10, so the remainder is 10.
+    mistakes:
+      '2': euclid_remainder
+      '35': euclid_remainder
+  - prompt: Use Euclid's algorithm to find GCD(60, 25).
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - 60 = 2 × 25 + 10, then 25 = 2 × 10 + 5.
+    - Then 10 = 2 × 5 + 0.
+    solution: Remainders 10, 5, 0. The last divisor is 5.
+    mistakes:
+      '10': euclid_stop_early
+      '0': euclid_continue
+  - prompt: Use Euclid's algorithm to find GCD(56, 21).
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - 56 = 2 × 21 + 14.
+    - 21 = 1 × 14 + 7, then 14 = 2 × 7 + 0.
+    solution: Remainders 14, 7, 0. GCD = 7.
+    mistakes:
+      '14': euclid_stop_early
+      '21': euclid_stop_early
+  - prompt: Find GCD(1071, 462).
+    answer: '21'
+    check: '21'
+    difficulty: 2
+    hints:
+    - 1071 = 2 × 462 + 147.
+    - 462 = 3 × 147 + 21; 147 = 7 × 21 + 0.
+    solution: Remainders 147, 21, 0. GCD = 21.
+    mistakes:
+      '147': euclid_stop_early
+      '7': euclid_continue
+  - prompt: Find GCD(144, 89).
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - 144 − 89 = 55, 89 − 55 = 34, …
+    - These are Fibonacci numbers; keep going.
+    solution: The remainders run 55, 34, 21, 13, 8, 5, 3, 2, 1, 0. GCD = 1.
+    mistakes:
+      '89': euclid_stop_early
+  - prompt: A floor is 360 cm by 150 cm. What is the side of the largest square tile (in cm) that covers it exactly?
+    answer: '30'
+    check: '30'
+    difficulty: 2
+    hints:
+    - The tile side must divide both lengths.
+    - 360 = 2 × 150 + 60; 150 = 2 × 60 + 30; 60 = 2 × 30.
+    solution: GCD(360, 150) = 30, so 30 cm tiles.
+    mistakes:
+      '60': euclid_stop_early
+      '10': gcd_vs_lcm
+  - prompt: If d divides both 91 and 35, which of these must d also divide?
+    options:
+    - '56'
+    - '126'
+    - '3185'
+    - '2'
+    answer: '56'
+    difficulty: 2
+    hints:
+    - A common divisor divides the difference.
+    - 91 − 35.
+    solution: d divides 91 − 35 = 56. (It also divides the sum 126, but 56 is the difference Euclid uses.)
+    mistakes:
+      '2': common_factor_out
+  - prompt: Using Euclid's algorithm, how many divisions are needed for GCD(100, 75)?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - 100 = 1 × 75 + 25.
+    - 75 = 3 × 25 + 0.
+    solution: 'Two divisions: remainders 25 then 0. GCD = 25.'
+    mistakes:
+      '3': euclid_speed
+      '1': euclid_stop_early
+  - prompt: Two bells ring every 84 s and 120 s. The largest unit of time that divides both gaps exactly is what, in s?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - Find GCD(120, 84).
+    - 120 = 1 × 84 + 36; 84 = 2 × 36 + 12; 36 = 3 × 12.
+    solution: Remainders 36, 12, 0. GCD = 12 s.
+    mistakes:
+      '36': euclid_stop_early
+      '840': gcd_vs_lcm

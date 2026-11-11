@@ -6,6 +6,7 @@ tips:
   mass_by_mass_solution: Concentration by mass uses the mass of the whole SOLUTION (solute + solvent) at the bottom, not just the solvent.
   colloid_not_settle: Colloid particles are too small to settle or be filtered, but big enough to scatter light (Tyndall effect).
   compound_vs_mixture: A compound has fixed proportions and new properties, and needs a chemical reaction to separate. A mixture keeps its parts' properties and can be separated physically.
+  c9s5_split_by_reaction: "Water could not be pulled apart by filtering, a magnet or evaporating. It took electricity, a chemical process, and gave two new substances. Which kind of substance needs that?"
   physical_vs_chemical: "Ask: is a new substance made? If you can get the original back easily (melting, dissolving), it is physical. If something new forms (ash, rust), it is chemical."
   concentration_solvent_not_solution: Mass percent uses the mass of the whole solution (solute + solvent) on the bottom, not just the solvent.
   separation_wrong_property: "Choose the method from the property that differs: colours that travel at different speeds on paper, a solid that turns straight into gas, or gases that boil at different temperatures."
@@ -96,6 +97,56 @@ concepts:
       bin: Colloid
       clue: Is it gas spread through a liquid, like a foam?
       why: 'A foam is gas spread through a liquid: a colloid.'
+  lesson:
+    - teach: 'A pure substance has only one kind of particle: distilled water, gold, sugar. A mixture has two or more substances not chemically joined: sea water, air, soil. A homogeneous mixture looks the same all through (salt water); a heterogeneous one doesn''t (sand in water).'
+      check:
+        prompt: Which is a homogeneous mixture?
+        options:
+        - Sugar dissolved in water
+        - Sand in water
+        - Oil and water
+        answer: Sugar dissolved in water
+        why: The sugar spreads evenly; every drop is the same.
+    - teach: 'Mixtures of a substance in a liquid come in three types, by particle size. Solution: particles under 1 nm, never settle, light passes straight through. Colloid: 1–1000 nm, never settle, but scatter a beam of light (the Tyndall effect): milk, fog, ink. Suspension: big particles you can see, which settle: chalk or mud in water.'
+      picture:
+        kind: compare
+        columns:
+        - title: Solution
+          points:
+          - Particles < 1 nm
+          - Don't settle
+          - No Tyndall effect
+          - Salt water
+        - title: Colloid
+          points:
+          - 1–1000 nm
+          - Don't settle
+          - Scatter light
+          - Milk, fog
+        - title: Suspension
+          points:
+          - Visible particles
+          - Settle
+          - Scatter light
+          - Muddy water
+        alt: Solutions, colloids and suspensions compared by particle size, settling and scattering of light.
+      check:
+        prompt: A torch beam is visible through fog. What is this called?
+        options:
+        - The Tyndall effect
+        - Osmosis
+        - Sublimation
+        answer: The Tyndall effect
+        why: Colloid particles scatter light, making the beam visible.
+    - teach: 'The concentration of a solution tells how much solute is in it. Mass by mass % = mass of solute ÷ mass of SOLUTION × 100. The solution is solute + solvent: 10 g salt in 90 g water makes 100 g solution, so 10%.'
+      check:
+        prompt: 5 g of sugar is dissolved in 45 g of water. What is the mass %?
+        options:
+        - 10%
+        - 11.1%
+        - 5%
+        answer: 10%
+        why: Solution = 50 g; 5 ÷ 50 × 100 = 10. (Dividing by the water gives 11.1, a common slip.)
   items:
   - prompt: Which of these shows the Tyndall effect?
     options:
@@ -167,6 +218,124 @@ concepts:
     - 4 ÷ 100 × 500.
     solution: Salt = 4% of 500 g = 20 g (and 480 g water).
     mistakes: {"2000": "percent_of_mass", "4": "percent_of_mass"}
+  - prompt: Which of these is a pure substance?
+    options:
+    - Distilled water
+    - Sea water
+    - Air
+    - Soil
+    answer: Distilled water
+    difficulty: 1
+    hints:
+    - A pure substance has one kind of particle.
+    - The others contain many substances.
+    solution: Distilled water contains only water molecules; the others are mixtures.
+    mistakes:
+      Sea water: element_one_kind
+      Air: element_one_kind
+  - prompt: Muddy water is left to stand, and mud collects at the bottom. What kind of mixture was it?
+    options:
+    - Suspension
+    - Solution
+    - Colloid
+    - Pure substance
+    answer: Suspension
+    difficulty: 1
+    hints:
+    - Which kind of mixture settles?
+    - The particles are big enough to see.
+    solution: Particles that settle on standing mean a suspension.
+    mistakes:
+      Colloid: colloid_not_settle
+  - prompt: 15 g of salt is dissolved in 135 g of water. What is the concentration by mass, in percent?
+    answer: '10'
+    check: 15/150*100
+    difficulty: 1
+    hints:
+    - Solution mass = 15 + 135.
+    - 15 ÷ 150 × 100.
+    solution: 15 ÷ 150 × 100 = 10%.
+    mistakes:
+      '11.1': concentration_solvent_not_solution
+      '11.11': concentration_solvent_not_solution
+  - prompt: Which of these is a colloid?
+    options:
+    - Shaving foam
+    - Salt water
+    - Sand in water
+    - Copper sulphate solution
+    answer: Shaving foam
+    difficulty: 2
+    hints:
+    - A colloid looks even but is not a true solution.
+    - Gas spread through a liquid.
+    solution: 'Foam is gas dispersed in a liquid: a colloid that doesn''t settle and scatters light.'
+    mistakes:
+      Salt water: tyndall_colloid
+      Sand in water: colloid_not_settle
+  - prompt: Why can't a colloid be separated by filtering through paper?
+    options:
+    - Its particles are small enough to pass through the filter paper
+    - It settles too fast
+    - It is a pure substance
+    - Its particles are too big
+    answer: Its particles are small enough to pass through the filter paper
+    difficulty: 2
+    hints:
+    - Colloid particles are 1–1000 nm.
+    - Filter paper pores are larger.
+    solution: Colloid particles pass through ordinary filter paper; they can be separated by centrifuging.
+    mistakes:
+      It settles too fast: colloid_not_settle
+  - prompt: A 250 g solution contains 30 g of glucose. What is its concentration by mass, in percent?
+    answer: '12'
+    check: 30/250*100
+    difficulty: 2
+    hints:
+    - The 250 g is already the whole solution.
+    - 30 ÷ 250 × 100.
+    solution: 30 ÷ 250 × 100 = 12%.
+    mistakes:
+      '13.6': concentration_solvent_not_solution
+      '30': percent_of_mass
+  - prompt: How much water must be added to 25 g of salt to make a 5% (by mass) solution, in grams?
+    answer: '475'
+    check: 25/0.05 - 25
+    difficulty: 2
+    hints:
+    - 25 g is 5% of the whole solution.
+    - Solution = 500 g; subtract the salt.
+    solution: Solution = 25 ÷ 0.05 = 500 g, so water = 500 − 25 = 475 g.
+    mistakes:
+      '500': mass_by_mass_solution
+  - prompt: Which pair shows the Tyndall effect?
+    options:
+    - Milk and fog
+    - Salt water and sugar water
+    - Copper sulphate solution and vinegar
+    - Pure water and alcohol
+    answer: Milk and fog
+    difficulty: 3
+    hints:
+    - The Tyndall effect needs particles big enough to scatter light.
+    - Solutions don't scatter light.
+    solution: Milk and fog are colloids; their particles scatter light. Solutions do not.
+    mistakes:
+      Salt water and sugar water: tyndall_colloid
+  - prompt: Sunlight entering a dark, dusty room shows a visible beam. Why?
+    options:
+    - Dust and smoke particles scatter the light
+    - The light is coloured
+    - Air is a solution that bends light
+    - The room is cold
+    answer: Dust and smoke particles scatter the light
+    difficulty: 3
+    hints:
+    - Think of the Tyndall effect.
+    - Small particles in air.
+    solution: 'Tiny particles in the air scatter the light so the beam''s path becomes visible: the Tyndall effect.'
+    mistakes:
+      Air is a solution that bends light: tyndall_colloid
 - code: cbse9ex.mixtures.elements_compounds
   title: Elements, compounds and changes
   after:
@@ -243,6 +412,50 @@ concepts:
       bin: Compound
       clue: Does salt behave like sodium metal or chlorine gas?
       why: 'Sodium and chlorine joined chemically, with new properties: a compound.'
+  lesson:
+    - teach: 'An element is the simplest kind of substance: it can''t be broken into anything simpler by chemical reactions. Iron, oxygen, sodium and carbon are elements. Elements are metals (shiny, conduct), non-metals (dull, poor conductors) or metalloids (in between, like silicon).'
+      check:
+        prompt: Which is an element?
+        options:
+        - Oxygen
+        - Water
+        - Salt
+        answer: Oxygen
+        why: Water and salt can be broken into elements; oxygen can't.
+    - teach: 'A compound forms when elements join chemically in a fixed ratio, and its properties are different from theirs. Iron and sulphur heated together make iron sulphide: no longer magnetic, a new substance. Just mixed without heating, they stay a mixture: a magnet pulls the iron out.'
+      picture:
+        kind: compare
+        columns:
+        - title: Mixture of iron and sulphur
+          points:
+          - Any proportion
+          - Magnet removes iron
+          - Each keeps its properties
+          - No heat taken or given
+        - title: 'Compound: iron sulphide'
+          points:
+          - Fixed ratio by mass
+          - Not magnetic
+          - New properties
+          - Heat given out when formed
+        alt: Iron and sulphur as a mixture beside iron sulphide as a compound, compared by ratio, magnetism and properties.
+      check:
+        prompt: Which is true of a compound?
+        options:
+        - Its elements are in a fixed ratio
+        - It can be separated with a magnet
+        - It keeps its elements' properties
+        answer: Its elements are in a fixed ratio
+        why: Water is always 1 g hydrogen to 8 g oxygen.
+    - teach: 'A physical change makes no new substance and can often be reversed: melting ice, dissolving sugar, tearing paper. A chemical change makes a new substance: burning, rusting, cooking an egg. Signs: new colour, gas, heat or light given out.'
+      check:
+        prompt: Which is a physical change?
+        options:
+        - Ice melting
+        - Milk turning sour
+        - Wood burning
+        answer: Ice melting
+        why: Water stays water; no new substance forms.
   items:
   - prompt: Which of these is a compound?
     options:
@@ -327,6 +540,136 @@ concepts:
     solution: A compound always has its elements in a fixed ratio by mass.
     mistakes:
       Its composition can vary: compound_vs_mixture
+  - prompt: Which of these is a metalloid?
+    options:
+    - Silicon
+    - Copper
+    - Sulphur
+    - Oxygen
+    answer: Silicon
+    difficulty: 1
+    hints:
+    - It is used in computer chips.
+    - It has properties between metals and non-metals.
+    solution: Silicon is a metalloid, partly like a metal and partly like a non-metal.
+    mistakes:
+      Copper: element_one_kind
+  - prompt: Which of these is a mixture?
+    options:
+    - Air
+    - Carbon dioxide
+    - Water
+    - Sodium chloride
+    answer: Air
+    difficulty: 1
+    hints:
+    - Its parts can vary in amount.
+    - Nitrogen, oxygen, argon, carbon dioxide…
+    solution: Air is a mixture of gases in varying amounts; the others are compounds.
+    mistakes:
+      Carbon dioxide: compound_vs_mixture
+      Water: compound_vs_mixture
+  - prompt: Dissolving sugar in tea is a…
+    options:
+    - Physical change
+    - Chemical change
+    - Nuclear change
+    - Compound forming
+    answer: Physical change
+    difficulty: 1
+    hints:
+    - Is a new substance made?
+    - Evaporate the tea and the sugar is back.
+    solution: The sugar is still sugar, so it is a physical change.
+    mistakes:
+      Chemical change: physical_vs_chemical
+  - prompt: Water can be split by electricity into hydrogen and oxygen. So water is…
+    options:
+    - A compound
+    - An element
+    - A mixture
+    - A colloid
+    answer: A compound
+    difficulty: 2
+    hints:
+    - It breaks into two different elements.
+    - Elements can't be broken down.
+    solution: Water breaks into elements by a chemical process, so it is a compound.
+    mistakes:
+      An element: element_one_kind
+      A mixture: c9s5_split_by_reaction
+  - prompt: Which is a sign of a chemical change?
+    options:
+    - A gas forms and the colour changes
+    - The shape changes
+    - It melts
+    - It is cut into pieces
+    answer: A gas forms and the colour changes
+    difficulty: 2
+    hints:
+    - Chemical changes make new substances.
+    - New substances may bring gas, colour, heat or light.
+    solution: A new gas and colour show a new substance has formed.
+    mistakes:
+      It melts: physical_vs_chemical
+  - prompt: In the compound water, hydrogen and oxygen are always in the mass ratio…
+    options:
+    - '1 : 8'
+    - Any ratio
+    - '2 : 1'
+    - '8 : 1'
+    answer: '1 : 8'
+    difficulty: 2
+    hints:
+    - A compound's ratio is fixed.
+    - Hydrogen is much lighter.
+    solution: Water always has 1 g of hydrogen for every 8 g of oxygen.
+    mistakes:
+      Any ratio: compound_vs_mixture
+      '2 : 1': compound_vs_mixture
+  - prompt: Which of these is a chemical change?
+    options:
+    - Cooking an egg
+    - Boiling water
+    - Melting butter
+    - Breaking glass
+    answer: Cooking an egg
+    difficulty: 2
+    hints:
+    - Can you un-cook it?
+    - Its proteins change into new forms.
+    solution: Cooking changes the egg's proteins into new substances; it can't be undone.
+    mistakes:
+      Boiling water: physical_vs_chemical
+  - prompt: Iron and sulphur are heated together. The product is not attracted by a magnet. Why?
+    options:
+    - A new compound, iron sulphide, has formed
+    - The iron has evaporated
+    - Sulphur coats the iron
+    - Heat destroys magnets
+    answer: A new compound, iron sulphide, has formed
+    difficulty: 3
+    hints:
+    - Is this still a mixture?
+    - Compounds have new properties.
+    solution: Heating makes iron sulphide, a compound with properties different from iron.
+    mistakes:
+      Sulphur coats the iron: compound_vs_mixture
+  - prompt: Salt can be got back by evaporating salt water. What does this show?
+    options:
+    - Salt water is a mixture and dissolving is a physical change
+    - Salt water is a compound
+    - Salt is an element
+    - Evaporation is a chemical change
+    answer: Salt water is a mixture and dissolving is a physical change
+    difficulty: 3
+    hints:
+    - The salt comes back unchanged.
+    - No new substance formed.
+    solution: Because the salt is recovered unchanged by a physical process, salt water is a mixture.
+    mistakes:
+      Salt water is a compound: compound_vs_mixture
+      Evaporation is a chemical change: physical_vs_chemical
 - code: cbse9ex.mixtures.separation
   title: Concentration and separating mixtures
   after:
@@ -415,6 +758,54 @@ concepts:
       bin: Chromatography
       clue: Are there several colours mixed in one solution?
       why: 'Each pigment moves at its own speed up the paper: chromatography.'
+  lesson:
+    - teach: 'We separate a mixture by using a property in which its parts differ: size, solubility, boiling point, magnetism, or whether a solid turns straight into a gas. Pick the method that matches the difference.'
+      check:
+        prompt: 'Iron filings and sawdust: which property helps?'
+        options:
+        - Only iron is magnetic
+        - Both dissolve in water
+        - Both are solids
+        answer: Only iron is magnetic
+        why: A magnet pulls the iron out.
+    - teach: 'Methods: evaporation gets a dissolved solid back; crystallisation gives purer crystals; filtration removes undissolved solids; sublimation separates a solid that turns straight to gas (camphor, ammonium chloride, naphthalene); distillation separates liquids with very different boiling points; fractional distillation for close boiling points (liquid air); chromatography separates dyes; a separating funnel separates liquids that don''t mix; centrifuging separates fine particles (cream from milk).'
+      picture:
+        kind: compare
+        columns:
+        - title: Mixture
+          points:
+          - Salt from sea water
+          - Camphor and salt
+          - Oil and water
+          - Dyes in ink
+          - Cream from milk
+          - Acetone and water
+        - title: Method
+          points:
+          - Evaporation
+          - Sublimation
+          - Separating funnel
+          - Chromatography
+          - Centrifugation
+          - Distillation
+        alt: Six mixtures matched with the separation method that uses the difference in their parts.
+      check:
+        prompt: How would you separate oil and water?
+        options:
+        - Separating funnel
+        - Sublimation
+        - Chromatography
+        answer: Separating funnel
+        why: They don't mix and form two layers; the lower layer is run off.
+    - teach: 'Mass by volume % = mass of solute (g) ÷ volume of solution (mL) × 100: 10 g in 200 mL is 5%. Crystallisation beats evaporation for pure crystals: soluble impurities stay in the leftover liquid, and some solids (like copper sulphate) break down if heated dry.'
+      check:
+        prompt: 8 g of sugar in 200 mL of solution. Mass by volume %?
+        options:
+        - 4%
+        - 8%
+        - 25%
+        answer: 4%
+        why: 8 ÷ 200 × 100 = 4.
   items:
   - prompt: 20 g of salt is dissolved in 180 g of water. What is the mass percentage of salt in the solution?
     answer: '10'
@@ -489,3 +880,126 @@ concepts:
     - Some solids break down on strong heating.
     solution: 'Step 1: In evaporation, impurities dry onto the solid, and strong heat can decompose it. Step 2: In crystallisation, pure crystals form and the impurities stay dissolved.'
     mistakes: {"It is faster": "crystallisation_pure", "It removes the water completely": "crystallisation_pure"}
+  - prompt: Which method separates salt from sea water?
+    options:
+    - Evaporation
+    - Filtration
+    - Sublimation
+    - Separating funnel
+    answer: Evaporation
+    difficulty: 1
+    hints:
+    - The salt is dissolved.
+    - Heat drives off the water.
+    solution: Evaporating the water leaves the dissolved salt behind.
+    mistakes:
+      Filtration: separation_wrong_property
+  - prompt: Which method removes sand from water?
+    options:
+    - Filtration
+    - Evaporation
+    - Chromatography
+    - Sublimation
+    answer: Filtration
+    difficulty: 1
+    hints:
+    - Sand doesn't dissolve.
+    - Use filter paper.
+    solution: Undissolved sand is trapped by filter paper; water passes through.
+    mistakes:
+      Evaporation: separation_wrong_property
+  - prompt: Cream is separated from milk in dairies by…
+    options:
+    - Centrifugation
+    - Distillation
+    - Sublimation
+    - Magnet
+    answer: Centrifugation
+    difficulty: 1
+    hints:
+    - Milk is spun very fast.
+    - Lighter cream collects in the middle.
+    solution: Spinning fast (centrifuging) separates the lighter cream.
+    mistakes:
+      Distillation: separation_wrong_property
+  - prompt: Acetone (boils at 56 °C) is mixed with water (100 °C). Which method separates them?
+    options:
+    - Distillation
+    - Filtration
+    - Separating funnel
+    - Chromatography
+    answer: Distillation
+    difficulty: 2
+    hints:
+    - They mix completely.
+    - Their boiling points differ a lot.
+    solution: 'Heat: acetone boils first, is cooled and collected; water stays behind.'
+    mistakes:
+      Separating funnel: separation_wrong_property
+  - prompt: Which of these sublimes and can be separated from sand by heating?
+    options:
+    - Ammonium chloride
+    - Common salt
+    - Sugar
+    - Copper sulphate
+    answer: Ammonium chloride
+    difficulty: 2
+    hints:
+    - 'Sublime: solid turns straight into gas.'
+    - Camphor and naphthalene do this too.
+    solution: Ammonium chloride sublimes; its vapour is cooled and collected away from the sand.
+    mistakes:
+      Common salt: separation_wrong_property
+  - prompt: A solution has 20 g of salt in 400 mL of solution. What is its mass by volume percentage?
+    answer: '5'
+    check: 20/400*100
+    difficulty: 2
+    hints:
+    - Mass (g) ÷ volume (mL) × 100.
+    - 20 ÷ 400 × 100.
+    solution: 20 ÷ 400 × 100 = 5%.
+    mistakes:
+      '20': mass_by_volume
+      '0.05': mass_by_volume
+  - prompt: Why does paper chromatography separate dyes in ink?
+    options:
+    - The dyes dissolve and travel up the paper at different speeds
+    - The dyes have different boiling points
+    - The dyes are magnetic
+    - The paper absorbs only one colour
+    answer: The dyes dissolve and travel up the paper at different speeds
+    difficulty: 2
+    hints:
+    - Water carries the dyes up the paper.
+    - Some stick to the paper more than others.
+    solution: More soluble dyes move further with the solvent, so they separate into bands.
+    mistakes:
+      The dyes have different boiling points: chromatography_dyes
+  - prompt: A mixture has salt, sand and camphor. In which order would you separate them?
+    options:
+    - Sublime camphor, dissolve salt and filter sand, evaporate salt
+    - Filter first, then sublime
+    - Evaporate first
+    - Use a magnet first
+    answer: Sublime camphor, dissolve salt and filter sand, evaporate salt
+    difficulty: 3
+    hints:
+    - Camphor would be lost if you heated water with it later.
+    - Salt dissolves; sand doesn't.
+    solution: Heat to sublime camphor first. Then add water to dissolve the salt, filter out the sand and evaporate the salt water.
+    mistakes:
+      Use a magnet first: separation_wrong_property
+  - prompt: Oxygen boils at −183 °C and nitrogen at −196 °C. Why is fractional distillation used for liquid air rather than simple distillation?
+    options:
+    - Their boiling points are close together
+    - They are solids
+    - They don't mix
+    - They are the same gas
+    answer: Their boiling points are close together
+    difficulty: 3
+    hints:
+    - Difference = 13 °C.
+    - Simple distillation needs a big gap.
+    solution: With only 13 °C between them, a fractionating column is needed to separate them well.
+    mistakes:
+      They don't mix: separation_wrong_property

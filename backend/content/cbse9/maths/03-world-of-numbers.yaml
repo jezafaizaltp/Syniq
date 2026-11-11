@@ -17,6 +17,7 @@ tips:
   rational_perfect_square: "A square root is rational when the number inside is a perfect square. Which one comes out as a whole number?"
   rational_plus_irrational: "If √2 + 3 were rational, subtracting 3 would make √2 rational. Is it?"
   simplify_root_first: "Simplify each square root first. If the inside is a perfect square (or a fraction of perfect squares), the root is rational."
+  c9m3_terminating_denominator: A fraction in lowest terms has a terminating decimal only when its bottom has no prime factors other than 2 and 5. Simplify first, then factorise the bottom.
 concepts:
 - code: cbse9gm.numbers.rational_irrational
   title: Rational and irrational numbers
@@ -93,6 +94,49 @@ concepts:
       bin: Irrational
       clue: If 2√3 were p/q, what would √3 be?
       why: If 2√3 were p/q, √3 would be p/(2q), a fraction. √3 isn't, so 2√3 is irrational.
+  lesson:
+    - teach: Numbers grow in families. Natural numbers 1, 2, 3, … ; whole numbers add 0; integers add the negatives; rational numbers are all fractions p/q with q ≠ 0, like 3/4, −2 and 0.5. Every integer is rational, because 5 = 5/1.
+      check:
+        prompt: Is −7 a rational number?
+        options:
+        - Yes, it is −7/1
+        - No, it is negative
+        - No, it is an integer
+        answer: Yes, it is −7/1
+        why: Any integer n can be written n/1, so it is rational.
+    - teach: 'Some numbers on the number line can never be written as p/q: √2, √3, √5, π. These are irrational. A square root of a whole number is rational only when the number is a perfect square: √49 = 7, but √50 is irrational.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 4
+        step: 1
+        points:
+        - at: 1.414
+          label: √2
+        - at: 1.732
+          label: √3
+        - at: 2
+          label: √4 = 2
+        - at: 3.1416
+          label: π
+        alt: Number line from 0 to 4 with √2, √3, 2 and π marked; √4 lands exactly on 2.
+      check:
+        prompt: Which is irrational?
+        options:
+        - √10
+        - √9
+        - '0.25'
+        answer: √10
+        why: 10 is not a perfect square, so √10 can't be written as a fraction.
+    - teach: 'Rational and irrational numbers together are the real numbers, and every point on the number line is one of them. Between any two rationals there is always another: their average. So there are infinitely many rationals between any two.'
+      check:
+        prompt: Which rational number lies between 1/3 and 1/2?
+        options:
+        - 5/12
+        - 1/6
+        - 5/6
+        answer: 5/12
+        why: 'Their average: (4/12 + 6/12) ÷ 2 = 5/12.'
   items:
   - prompt: Which of these is irrational?
     options:
@@ -172,6 +216,130 @@ concepts:
     - Diagonal² = 2.
     solution: 'Step 1: Diagonal² = 1² + 1² = 2. Step 2: Diagonal = √2. Step 3: The compass marks √2 on the line, about 1.414.'
     mistakes: {"2": "diagonal_root_two", "1.5": "diagonal_root_two"}
+  - prompt: Which of these numbers cannot be written as p/q?
+    options:
+    - √7
+    - √16
+    - 3/8
+    - −4
+    answer: √7
+    difficulty: 1
+    hints:
+    - Look for a square root of a number that is not a perfect square.
+    - √16 = 4.
+    solution: 7 is not a perfect square, so √7 is irrational. √16 = 4 is rational.
+    mistakes:
+      √16: rational_perfect_square
+  - prompt: Which of these numbers can be written as p/q?
+    options:
+    - √81
+    - √2
+    - π
+    - √12
+    answer: √81
+    difficulty: 1
+    hints:
+    - Which number under the root is a perfect square?
+    - 9 × 9 = 81.
+    solution: √81 = 9 = 9/1, so it is rational.
+    mistakes:
+      √12: irrational_root_of_square
+  - prompt: Which statement about number families is true?
+    options:
+    - Every whole number is an integer
+    - Every integer is a whole number
+    - Every rational number is an integer
+    - √9 is irrational
+    answer: Every whole number is an integer
+    difficulty: 1
+    hints:
+    - Whole numbers are 0, 1, 2, …
+    - Integers include those and the negatives.
+    solution: Whole numbers 0, 1, 2, … are all integers. But −3 is an integer that is not a whole number.
+    mistakes:
+      √9 is irrational: rational_perfect_square
+  - prompt: What is the number exactly halfway between 2/5 and 4/5? Type a fraction like 2/3.
+    answer: 3/5
+    check: (2/5 + 4/5)/2
+    difficulty: 2
+    hints:
+    - Average the two numbers.
+    - (2/5 + 4/5) ÷ 2.
+    solution: (2/5 + 4/5) ÷ 2 = (6/5) ÷ 2 = 3/5.
+    mistakes:
+      6/5: midpoint_no_halve
+  - prompt: Is 0 a rational number?
+    options:
+    - Yes, 0 = 0/1
+    - No, you can't divide by 0
+    - No, it is not positive
+    - Only sometimes
+    answer: Yes, 0 = 0/1
+    difficulty: 2
+    hints:
+    - p/q needs q ≠ 0, not p ≠ 0.
+    - Can the top be 0?
+    solution: 0 = 0/1, with the bottom 1 ≠ 0, so 0 is rational.
+    mistakes:
+      No, you can't divide by 0: always_another_between
+  - prompt: Which of these sums is irrational?
+    options:
+    - 2 + √3
+    - √4 + 1
+    - '0.5'
+    - 22/7
+    answer: 2 + √3
+    difficulty: 2
+    hints:
+    - A rational plus an irrational is irrational.
+    - √4 = 2 is rational. 22/7 is only close to π.
+    solution: √3 is irrational, so 2 + √3 is irrational. √4 + 1 = 3. 22/7 is a fraction, so rational.
+    mistakes:
+      22/7: pi_not_fraction
+      √4 + 1: rational_perfect_square
+  - prompt: Is √12 rational or irrational?
+    options:
+    - Irrational
+    - Rational
+    - Neither
+    - It is an integer
+    answer: Irrational
+    difficulty: 2
+    hints:
+    - √12 = 2√3.
+    - Is 12 a perfect square?
+    solution: 12 is not a perfect square; √12 = 2√3, a rational times an irrational, so irrational.
+    mistakes:
+      Rational: simplify_root_first
+  - prompt: Which of these lies between 3 and 4?
+    options:
+    - √10
+    - √8
+    - √17
+    - √20
+    answer: √10
+    difficulty: 3
+    hints:
+    - 'Square the ends: 9 and 16.'
+    - The number under the root must lie between 9 and 16.
+    solution: 3 = √9 and 4 = √16. Only 10 is between 9 and 16, so √10 lies between 3 and 4.
+    mistakes:
+      √8: irrational_root_of_square
+      √17: irrational_root_of_square
+  - prompt: √2 and −√2 are both irrational. What is √2 + (−√2)?
+    options:
+    - 0, a rational number
+    - 2√2, irrational
+    - An irrational number
+    - It can't be found
+    answer: 0, a rational number
+    difficulty: 3
+    hints:
+    - Add the two numbers.
+    - They cancel.
+    solution: √2 − √2 = 0, which is rational. So two irrationals can add up to a rational.
+    mistakes:
+      An irrational number: rational_plus_irrational
 - code: cbse9gm.numbers.decimals
   title: Decimal expansions
   after:
@@ -243,6 +411,57 @@ concepts:
       bin: Repeats a block
       clue: 6 = 2 × 3. Which factor keeps the digits going?
       why: 'The 3 makes it repeat: 1/6 = 0.1666…, with the 6 going on forever.'
+  lesson:
+    - teach: 'Divide to turn a fraction into a decimal. Some divisions stop: 3/8 = 0.375 (terminating). Others go on forever with a repeating block: 2/3 = 0.666…, 5/11 = 0.4545… (non-terminating recurring). Every rational number does one of these two.'
+      check:
+        prompt: What kind of decimal is 1/6 = 0.1666…?
+        options:
+        - Non-terminating recurring
+        - Terminating
+        - Non-recurring
+        answer: Non-terminating recurring
+        why: The 6 repeats forever.
+    - teach: 'Which fractions terminate? Write the fraction in lowest terms and factorise the bottom. If its only prime factors are 2 and 5, the decimal terminates: 7/20 (20 = 2² × 5) is 0.35. If any other prime appears, like 3 or 7, it recurs: 1/12 recurs because 12 = 2² × 3.'
+      picture:
+        kind: compare
+        columns:
+        - title: Terminates
+          points:
+          - '3/8: 8 = 2³'
+          - '7/20: 20 = 2² × 5'
+          - '9/25: 25 = 5²'
+        - title: Recurs
+          points:
+          - '1/3: 3'
+          - '5/12: 12 = 2² × 3'
+          - '2/7: 7'
+        alt: Fractions whose bottoms have only 2s and 5s terminate; those with 3, 7 or other primes recur.
+      check:
+        prompt: Which fraction terminates?
+        options:
+        - 9/40
+        - 1/9
+        - 4/15
+        answer: 9/40
+        why: 40 = 2³ × 5, only 2s and 5s.
+    - teach: 'To turn a recurring decimal into a fraction, multiply to shift the repeating block and subtract. x = 0.3636…: 100x = 36.3636…, so 99x = 36 and x = 36/99 = 4/11. One digit repeating: use 10x; two digits: 100x.'
+      check:
+        prompt: x = 0.555… What is 10x − x?
+        options:
+        - '5'
+        - '0.5'
+        - '50'
+        answer: '5'
+        why: 10x = 5.555… minus x = 0.555… leaves 5, so 9x = 5 and x = 5/9.
+    - teach: 'Irrational numbers have decimals that never end and never settle into a repeat: √2 = 1.41421356…, π = 3.14159265… That is the decimal test for irrational.'
+      check:
+        prompt: A decimal goes on forever with no repeating block. What is the number?
+        options:
+        - Irrational
+        - Rational
+        - An integer
+        answer: Irrational
+        why: Non-terminating and non-recurring decimals belong to irrational numbers.
   items:
   - prompt: Write 0.777… (the 7 repeats) as a fraction. Type a fraction like 2/3.
     answer: 7/9
@@ -309,6 +528,112 @@ concepts:
     - Irrational numbers do neither.
     solution: 'Step 1: Rational numbers terminate or recur. Step 2: An irrational number like √2 = 1.41421356… never stops and never repeats.'
     mistakes: {"Non-terminating and recurring": "irrational_decimal", "Terminating": "irrational_decimal"}
+  - prompt: Write 3/4 as a decimal.
+    answer: '0.75'
+    check: 3/4
+    difficulty: 1
+    hints:
+    - 3 ÷ 4.
+    - 1/4 = 0.25.
+    solution: 3/4 = 3 × 0.25 = 0.75.
+    mistakes:
+      '0.34': long_division_decimal
+      '1.33': long_division_decimal
+  - prompt: Write 0.222… (the 2 repeats) as a fraction. Type a fraction like 2/3.
+    answer: 2/9
+    check: 2/9
+    difficulty: 1
+    hints:
+    - One digit repeats, so use 10x − x.
+    - 9x = 2.
+    solution: 10x = 2.222…, so 9x = 2 and x = 2/9.
+    mistakes:
+      2/10: recurring_digits_count
+      1/5: recurring_digits_count
+  - prompt: Which fraction has a recurring decimal?
+    options:
+    - 5/6
+    - 3/5
+    - 7/8
+    - 11/50
+    answer: 5/6
+    difficulty: 1
+    hints:
+    - Factorise each bottom.
+    - Look for a prime other than 2 or 5.
+    solution: 6 = 2 × 3 contains 3, so 5/6 recurs (0.8333…). The others have only 2s and 5s.
+    mistakes:
+      7/8: c9m3_terminating_denominator
+      11/50: c9m3_terminating_denominator
+  - prompt: Write 0.1818… (18 repeats) as a fraction in lowest terms. Type a fraction like 2/3.
+    answer: 2/11
+    check: 18/99
+    difficulty: 2
+    hints:
+    - 'Two digits repeat: use 100x − x.'
+    - 99x = 18; simplify.
+    solution: 100x − x = 18, so x = 18/99 = 2/11.
+    mistakes:
+      18/100: recurring_digits_count
+      2/9: recurring_digits_count
+  - prompt: Which fraction terminates even though its bottom has a 3?
+    options:
+    - 6/15
+    - 1/15
+    - 2/3
+    - 4/9
+    answer: 6/15
+    difficulty: 2
+    hints:
+    - Simplify each fraction first.
+    - 6/15 = 2/5.
+    solution: 6/15 = 2/5 = 0.4. In lowest terms the 3 is gone, so it terminates.
+    mistakes:
+      1/15: c9m3_terminating_denominator
+  - prompt: Write 1/16 as a decimal.
+    answer: '0.0625'
+    check: 1/16
+    difficulty: 2
+    hints:
+    - 1/4 = 0.25; halve it twice.
+    - 1/8 = 0.125.
+    solution: 1/8 = 0.125, so 1/16 = 0.0625.
+    mistakes:
+      '0.16': long_division_decimal
+      '0.625': long_division_decimal
+  - prompt: Write 1.333… (the 3 repeats) as a fraction. Type a fraction like 2/3.
+    answer: 4/3
+    check: 4/3
+    difficulty: 2
+    hints:
+    - 10x = 13.333…
+    - 10x − x = 12.
+    solution: 9x = 12, so x = 12/9 = 4/3.
+    mistakes:
+      13/10: recurring_digits_count
+      4/9: recurring_digits_count
+  - prompt: Write 0.1666… (only the 6 repeats) as a fraction in lowest terms. Type a fraction like 2/3.
+    answer: 1/6
+    check: 1/6
+    difficulty: 3
+    hints:
+    - Let x = 0.1666…; then 10x = 1.666… and 100x = 16.666…
+    - 100x − 10x = 15.
+    solution: 90x = 15, so x = 15/90 = 1/6.
+    mistakes:
+      16/99: partly_recurring
+      1/9: partly_recurring
+  - prompt: 1/7 = 0.142857142857… How many digits are in its repeating block?
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - Find where the pattern starts again.
+    - 142857 then 142857 again.
+    solution: The block 142857 repeats, so 6 digits.
+    mistakes:
+      '7': recurring_digits_count
+      '1': recurring_digits_count
 - code: cbse9gm.numbers.proof_spiral
   title: Proving √2 is irrational, and the square root spiral
   after:
@@ -350,6 +675,43 @@ concepts:
       'Put p = 2k in: 4k² = 2q², so q² = 2k²': You can only put in p = 2k after showing p is even.
       So q is even too: q² = 2k² is what shows q² is even. Find that first.
       'p and q both even is not lowest terms: a contradiction': The clash only appears once you know both p and q are even.
+  lesson:
+    - teach: 'Proof by contradiction: to show something is true, suppose it is false and follow the logic until you reach something impossible. Then the supposition must have been wrong.'
+      check:
+        prompt: To prove √3 is irrational by contradiction, what do we suppose first?
+        options:
+        - √3 is rational, √3 = p/q in lowest terms
+        - √3 is irrational
+        - √3 = 3
+        answer: √3 is rational, √3 = p/q in lowest terms
+        why: We suppose the opposite of what we want to prove.
+    - teach: 'Suppose √2 = p/q in lowest terms. Squaring: p² = 2q², so p² is even and p must be even (odd × odd is odd). Write p = 2k: 4k² = 2q², so q² = 2k² and q is even too. Both even means p/q was not in lowest terms: contradiction. So √2 is irrational.'
+      picture:
+        kind: flow
+        steps:
+        - Suppose √2 = p/q, lowest terms
+        - p² = 2q², so p is even
+        - p = 2k gives q² = 2k², so q is even
+        - 'Both even: not lowest terms'
+        - 'Contradiction: √2 is irrational'
+        alt: Five steps of the proof that √2 is irrational, ending in a contradiction.
+      check:
+        prompt: Why must p be even if p² is even?
+        options:
+        - An odd number squared is odd
+        - Every square is even
+        - Because q is even
+        answer: An odd number squared is odd
+        why: If p were odd, p² would be odd. So p² even forces p even.
+    - teach: 'The square root spiral draws these lengths. Start with a right triangle with legs 1 and 1: hypotenuse √2. On that hypotenuse build another right triangle with the other leg 1: hypotenuse √3. Keep going: √4 = 2, √5, √6, … Each step uses √(n + 1) = √(n + 1²).'
+      check:
+        prompt: In the spiral, the triangle built on √7 has which hypotenuse?
+        options:
+        - √8
+        - √7 + 1
+        - '8'
+        answer: √8
+        why: (√7)² + 1² = 8, so the hypotenuse is √8.
   items:
   - prompt: In the proof that √2 is irrational, what do we suppose at the start?
     options:
@@ -431,3 +793,126 @@ concepts:
     - Then √2 = r − 3.
     solution: 'Step 1: If √2 + 3 were rational, then √2 = (√2 + 3) − 3 would be rational too. Step 2: But √2 is irrational, so √2 + 3 is irrational.'
     mistakes: {"Rational": "rational_plus_irrational", "It depends on the decimal places": "rational_plus_irrational"}
+  - prompt: In the proof that √2 is irrational, which equation comes from squaring √2 = p/q?
+    options:
+    - p² = 2q²
+    - p = 2q
+    - p² = q²
+    - 2p² = q²
+    answer: p² = 2q²
+    difficulty: 1
+    hints:
+    - 'Square both sides: 2 = p²/q².'
+    - Multiply both sides by q².
+    solution: 2 = p²/q², so p² = 2q².
+    mistakes:
+      2p² = q²: contradiction_start
+  - prompt: If q² is even, what must be true of q?
+    options:
+    - q is even
+    - q is odd
+    - q is 2
+    - Nothing
+    answer: q is even
+    difficulty: 1
+    hints:
+    - What is odd × odd?
+    - Odd squared is odd.
+    solution: If q were odd, q² would be odd. So q is even.
+    mistakes:
+      q is odd: odd_squared_odd
+  - prompt: In the square root spiral, the first triangle has legs 1 and 1. How long is its hypotenuse?
+    options:
+    - √2
+    - '2'
+    - '1'
+    - √3
+    answer: √2
+    difficulty: 1
+    hints:
+    - 1² + 1² = 2.
+    - Take the square root.
+    solution: √(1 + 1) = √2.
+    mistakes:
+      '2': sqrt_spiral_add
+  - prompt: In the spiral, after how many triangles do we first reach a whole-number length (other than 1)?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - The hypotenuses are √2, √3, √4, …
+    - Which of these is a whole number?
+    solution: Hypotenuses √2, √3, √4 = 2. The third triangle gives 2.
+    mistakes:
+      '4': sqrt_spiral_add
+      '2': sqrt_spiral_add
+  - prompt: In the proof for √3, p² = 3q². What follows about p?
+    options:
+    - p is a multiple of 3
+    - p is even
+    - p is 3
+    - p is odd
+    answer: p is a multiple of 3
+    difficulty: 2
+    hints:
+    - 3 divides p².
+    - 3 is prime, so it divides p too.
+    solution: 3 divides p², and since 3 is prime it must divide p. So p is a multiple of 3.
+    mistakes:
+      p is even: contradiction_start
+  - prompt: Is 5√2 rational or irrational?
+    options:
+    - Irrational
+    - Rational
+    - It depends
+    - An integer
+    answer: Irrational
+    difficulty: 2
+    hints:
+    - If 5√2 = r were rational, then √2 = r/5.
+    - Would r/5 be rational?
+    solution: If 5√2 were rational, √2 = (5√2)/5 would be rational too, which is false. So 5√2 is irrational.
+    mistakes:
+      Rational: rational_plus_irrational
+  - prompt: Which length is the diagonal of a square with side 1?
+    options:
+    - √2
+    - '2'
+    - '1.5'
+    - √3
+    answer: √2
+    difficulty: 2
+    hints:
+    - The diagonal makes a right triangle with two sides.
+    - 1² + 1² = 2.
+    solution: By Pythagoras, diagonal² = 1 + 1 = 2, so the diagonal is √2.
+    mistakes:
+      '2': diagonal_root_two
+  - prompt: Why can't we prove √4 is irrational the same way as √2?
+    options:
+    - √4 = 2 is rational, so the argument breaks
+    - 4 is even
+    - The proof only works for primes under 10
+    - We can; √4 is irrational
+    answer: √4 = 2 is rational, so the argument breaks
+    difficulty: 3
+    hints:
+    - Work out √4.
+    - A proof can't show something false.
+    solution: √4 = 2 = 2/1. With p² = 4q² nothing forces both p and q to share a factor in lowest terms (p = 2, q = 1). So no contradiction appears.
+    mistakes:
+      We can; √4 is irrational: rational_perfect_square
+  - prompt: Is 3 − √5 rational or irrational?
+    options:
+    - Irrational
+    - Rational
+    - Zero
+    - Negative and rational
+    answer: Irrational
+    difficulty: 3
+    hints:
+    - If 3 − √5 = r were rational, √5 = 3 − r.
+    - Then √5 would be rational.
+    solution: If it were rational r, then √5 = 3 − r would be rational, which is false. So 3 − √5 is irrational.
+    mistakes:
+      Rational: rational_plus_irrational

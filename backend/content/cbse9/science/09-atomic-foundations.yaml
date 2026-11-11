@@ -6,6 +6,7 @@ tips:
   criss_cross_valency: "Swap the valencies: each one becomes the small number under the other symbol. Put brackets round a group ion if it needs more than one."
   molecular_mass_count_all: "Multiply each atom's mass by how many of that atom there are, then add: CH₄ is 12 + 4 × 1. For moles, multiply by the molar mass."
   mole_avogadro: One mole has 6.022 × 10²³ particles. Number of moles = given mass ÷ molar mass.
+  c9s9_carbon_twelve: "12 is the mass of a carbon atom in u, not a count. A mole is a fixed, enormous number of particles, so huge that a few grams hold one: it is named after Avogadro."
   conservation_of_mass: In a reaction, total mass of reactants = total mass of products. Mass is neither created nor destroyed.
   formula_valency_cross: "Write the symbols, put each valency under the other symbol (criss-cross), then simplify. Use brackets for a group like OH if you need two of it."
   ionic_covalent_swap: Ionic bonds form when electrons are transferred (usually metal with non-metal); covalent bonds form when non-metals share electrons.
@@ -125,6 +126,42 @@ concepts:
           x: 2
           y: 2
         say: 'Mg₂O₂ is neutral, but it simplifies: the ratio is 1 : 1. Formulas use the simplest ratio.'
+  lesson:
+    - teach: 'Lavoisier showed that in a chemical reaction mass is neither created nor destroyed: the total mass of the products equals the total mass of the reactants. This is the law of conservation of mass. If a gas escapes, weigh it too.'
+      check:
+        prompt: 10 g of A reacts with 5 g of B to make C only. What is the mass of C?
+        options:
+        - 15 g
+        - 5 g
+        - 50 g
+        answer: 15 g
+        why: 'Mass is conserved: 10 + 5 = 15.'
+    - teach: 'Proust found that a compound always contains the same elements in the same proportion by mass, wherever it comes from: water is always 1 part hydrogen to 8 parts oxygen. This is the law of constant proportions. Dalton explained both laws with his atomic theory: matter is made of atoms that combine in small whole-number ratios.'
+      check:
+        prompt: 9 g of water is made. How much of it is hydrogen?
+        options:
+        - 1 g
+        - 8 g
+        - 4.5 g
+        answer: 1 g
+        why: 'Ratio 1 : 8, so 1 g of hydrogen in every 9 g of water.'
+    - teach: 'Valency is an atom''s combining power. To write a formula, write the symbols, put each valency below the OTHER symbol (criss-cross), and simplify. Aluminium (3) and oxygen (2): Al₂O₃. For a group like SO₄²⁻ or OH⁻, use brackets when you need more than one: Ca(OH)₂.'
+      picture:
+        kind: flow
+        steps:
+        - 'Symbols: Al   O'
+        - 'Valencies: 3   2'
+        - 'Criss-cross: Al₂ O₃'
+        - 'Formula: Al₂O₃'
+        alt: Writing aluminium oxide by criss-crossing the valencies 3 and 2 to get Al₂O₃.
+      check:
+        prompt: Magnesium (valency 2) and chlorine (valency 1) make…
+        options:
+        - MgCl₂
+        - Mg₂Cl
+        - MgCl
+        answer: MgCl₂
+        why: 'Criss-cross: Mg₁Cl₂.'
   items:
   - prompt: What is the formula of aluminium oxide? (Al has valency 3, O has valency 2.)
     options:
@@ -199,6 +236,124 @@ concepts:
     - Proportion means ratio.
     - 'Water is always 1 : 8.'
     solution: That is the law of constant (definite) proportions.
+    mistakes:
+      Law of conservation of mass: conservation_of_mass
+  - prompt: What is the formula of sodium oxide? (Na valency 1, O valency 2.)
+    options:
+    - Na₂O
+    - NaO₂
+    - NaO
+    - Na₂O₂
+    answer: Na₂O
+    difficulty: 1
+    hints:
+    - Criss-cross the valencies.
+    - O's 2 goes to Na.
+    solution: Criss-cross gives Na₂O₁ = Na₂O.
+    mistakes:
+      NaO₂: criss_cross_valency
+      NaO: formula_valency_cross
+  - prompt: Who stated the law of conservation of mass?
+    options:
+    - Lavoisier
+    - Proust
+    - Dalton
+    - Chadwick
+    answer: Lavoisier
+    difficulty: 1
+    hints:
+    - A French chemist who weighed everything in reactions.
+    - Proust gave constant proportions.
+    solution: Antoine Lavoisier established the law of conservation of mass.
+    mistakes:
+      Proust: fixed_ratio
+  - prompt: Which law says mass is neither created nor destroyed in a chemical reaction?
+    options:
+    - Law of conservation of mass
+    - Law of constant proportions
+    - Newton's first law
+    - Law of inertia
+    answer: Law of conservation of mass
+    difficulty: 1
+    hints:
+    - Total mass stays the same.
+    - It 'conserves' mass.
+    solution: The law of conservation of mass.
+    mistakes:
+      Law of constant proportions: fixed_ratio
+  - prompt: 'Carbon and oxygen combine in carbon dioxide in the mass ratio 3 : 8. How much oxygen combines with 9 g of carbon, in g?'
+    answer: '24'
+    check: 9*8/3
+    difficulty: 2
+    hints:
+    - 9 g is 3 times 3 g.
+    - So oxygen is 3 times 8 g.
+    solution: 9 ÷ 3 × 8 = 24 g of oxygen.
+    mistakes:
+      '8': fixed_ratio
+      '33': fixed_ratio
+  - prompt: 'Magnesium burns: 2.4 g of magnesium makes 4.0 g of magnesium oxide. How much oxygen was used, in g?'
+    answer: '1.6'
+    check: 4.0 - 2.4
+    difficulty: 2
+    hints:
+    - Mass of product = mass of magnesium + mass of oxygen.
+    - 4.0 − 2.4.
+    solution: By conservation of mass, oxygen = 4.0 − 2.4 = 1.6 g.
+    mistakes:
+      '6.4': conservation_of_mass
+  - prompt: What is the formula of potassium sulphate? (K⁺ and SO₄²⁻.)
+    options:
+    - K₂SO₄
+    - KSO₄
+    - K(SO₄)₂
+    - K₂(SO₄)₂
+    answer: K₂SO₄
+    difficulty: 2
+    hints:
+    - Criss-cross 1 and 2.
+    - SO₄ gets 1, so no brackets.
+    solution: 'Two K⁺ balance one SO₄²⁻: K₂SO₄.'
+    mistakes:
+      K(SO₄)₂: criss_cross_valency
+      KSO₄: formula_valency_cross
+  - prompt: What is the formula of aluminium sulphate? (Al³⁺ and SO₄²⁻.)
+    options:
+    - Al₂(SO₄)₃
+    - Al₃(SO₄)₂
+    - AlSO₄
+    - Al₂SO₄₃
+    answer: Al₂(SO₄)₃
+    difficulty: 2
+    hints:
+    - Criss-cross 3 and 2.
+    - More than one SO₄ needs brackets.
+    solution: 'Al gets 2, SO₄ gets 3: Al₂(SO₄)₃. Charges: 2 × 3 = 6 and 3 × 2 = 6.'
+    mistakes:
+      Al₃(SO₄)₂: criss_cross_valency
+      Al₂SO₄₃: formula_valency_cross
+  - prompt: A sealed flask with vinegar and baking soda weighs 200 g. They react, making gas. What does the sealed flask weigh now, in g?
+    answer: '200'
+    check: '200'
+    difficulty: 3
+    hints:
+    - Nothing can escape from a sealed flask.
+    - Mass is conserved.
+    solution: The gas stays inside, so the total mass is still 200 g.
+    mistakes:
+      '0': conservation_of_mass
+  - prompt: 'Water from a river and water from melted ice both contain hydrogen and oxygen in the ratio 1 : 8. Which law does this support?'
+    options:
+    - Law of constant proportions
+    - Law of conservation of mass
+    - Law of inertia
+    - Law of reflection
+    answer: Law of constant proportions
+    difficulty: 3
+    hints:
+    - The source differs, the ratio doesn't.
+    - The proportion stays constant.
+    solution: 'A compound has a fixed composition whatever its source: the law of constant proportions.'
     mistakes:
       Law of conservation of mass: conservation_of_mass
 - code: cbse9ex.atoms.mass
@@ -300,6 +455,43 @@ concepts:
           h: 1
           o: 1
         say: 'That''s one of each, 29 u. Each small number counts its atoms: multiply, then add.'
+  lesson:
+    - teach: 'Atoms are too light to weigh in grams, so we use the atomic mass unit, u: 1/12 of the mass of a carbon-12 atom. Some atomic masses: H 1, C 12, N 14, O 16, Na 23, Mg 24, S 32, Cl 35.5, Ca 40.'
+      check:
+        prompt: How many times heavier is an oxygen atom (16 u) than a hydrogen atom (1 u)?
+        options:
+        - '16'
+        - '8'
+        - 1/16
+        answer: '16'
+        why: 16 ÷ 1 = 16.
+    - teach: 'Molecular mass is the sum of the masses of all the atoms in a molecule. Count every atom: in H₂O there are 2 H and 1 O, so 2 × 1 + 16 = 18 u. For ionic compounds like NaCl we call it formula unit mass: 23 + 35.5 = 58.5 u.'
+      picture:
+        kind: flow
+        steps:
+        - 'H₂SO₄: count atoms'
+        - '2 H: 2 × 1 = 2'
+        - '1 S: 32'
+        - '4 O: 4 × 16 = 64'
+        - 'Total: 98 u'
+        alt: 'Molecular mass of sulphuric acid found by counting each kind of atom and adding: 98 u.'
+      check:
+        prompt: Molecular mass of NH₃ (N = 14, H = 1)?
+        options:
+        - 17 u
+        - 15 u
+        - 42 u
+        answer: 17 u
+        why: 14 + 3 × 1 = 17.
+    - teach: 'A mole is a counting number for tiny particles: 6.022 × 10²³ (Avogadro''s number). One mole of a substance has a mass in grams equal to its molecular mass in u: 1 mole of water is 18 g. Moles = mass ÷ molar mass.'
+      check:
+        prompt: How many moles are in 88 g of CO₂ (molar mass 44 g)?
+        options:
+        - '2'
+        - '44'
+        - '0.5'
+        answer: '2'
+        why: 88 ÷ 44 = 2.
   items:
   - prompt: Find the molecular mass of water, H₂O, in u. (H = 1, O = 16.)
     answer: '18'
@@ -370,6 +562,97 @@ concepts:
     solution: 'Step 1: O₂ = 32 g/mol. Step 2: 0.5 × 32 = 16 g.'
     mistakes:
       '8': molecular_mass_count_all
+  - prompt: Find the molecular mass of O₂ in u. (O = 16.)
+    answer: '32'
+    check: 2*16
+    difficulty: 1
+    hints:
+    - O₂ has two oxygen atoms.
+    - 2 × 16.
+    solution: 2 × 16 = 32 u.
+    mistakes:
+      '16': molecular_mass_count_all
+  - prompt: Find the molecular mass of CH₄ in u. (C = 12, H = 1.)
+    answer: '16'
+    check: 12 + 4
+    difficulty: 1
+    hints:
+    - 1 C and 4 H.
+    - 12 + 4 × 1.
+    solution: 12 + 4 = 16 u.
+    mistakes:
+      '13': molecular_mass_count_all
+  - prompt: How many particles are in one mole?
+    options:
+    - 6.022 × 10²³
+    - 6.022 × 10²
+    - '1000'
+    - '12'
+    answer: 6.022 × 10²³
+    difficulty: 1
+    hints:
+    - It is Avogadro's number.
+    - A huge number.
+    solution: One mole contains 6.022 × 10²³ particles.
+    mistakes:
+      '12': c9s9_carbon_twelve
+  - prompt: Find the formula unit mass of MgO in u. (Mg = 24, O = 16.)
+    answer: '40'
+    check: 24 + 16
+    difficulty: 2
+    hints:
+    - One Mg and one O.
+    - 24 + 16.
+    solution: 24 + 16 = 40 u.
+    mistakes:
+      '384': formula_mass_add
+  - prompt: Find the molecular mass of HNO₃ in u. (H = 1, N = 14, O = 16.)
+    answer: '63'
+    check: 1 + 14 + 3*16
+    difficulty: 2
+    hints:
+    - 3 oxygen atoms.
+    - 1 + 14 + 48.
+    solution: 1 + 14 + 48 = 63 u.
+    mistakes:
+      '31': molecular_mass_count_all
+  - prompt: What is the mass of 3 moles of water, in g? (Molar mass 18 g/mol.)
+    answer: '54'
+    check: 3*18
+    difficulty: 2
+    hints:
+    - mass = moles × molar mass.
+    - 3 × 18.
+    solution: 3 × 18 = 54 g.
+    mistakes:
+      '6': mole_avogadro
+      '21': mole_avogadro
+  - prompt: How many moles are in 46 g of sodium? (Na = 23.)
+    answer: '2'
+    check: 46/23
+    difficulty: 2
+    hints:
+    - moles = mass ÷ molar mass.
+    - 46 ÷ 23.
+    solution: 46 ÷ 23 = 2 moles.
+    mistakes:
+      '1058': mole_avogadro
+      '0.5': mole_avogadro
+  - prompt: How many molecules are in 2 moles of water?
+    options:
+    - 1.2044 × 10²⁴
+    - 6.022 × 10²³
+    - '36'
+    - 3.011 × 10²³
+    answer: 1.2044 × 10²⁴
+    difficulty: 3
+    hints:
+    - 1 mole = 6.022 × 10²³ molecules.
+    - Double it.
+    solution: 2 × 6.022 × 10²³ = 12.044 × 10²³ = 1.2044 × 10²⁴.
+    mistakes:
+      '36': mole_avogadro
+      3.011 × 10²³: mole_avogadro
 - code: cbse9ex.atoms.compounds
   title: Ions, ionic and covalent compounds, and formulae
   after:
@@ -452,6 +735,52 @@ concepts:
       bin: Covalent
       clue: Can one oxygen atom take electrons from an identical one?
       why: 'Two identical atoms share electrons: covalent.'
+  lesson:
+    - teach: 'Atoms combine to get a full outer shell, like the noble gases. A metal atom with 1–3 outer electrons loses them and becomes a positive ion (cation): Na → Na⁺. A non-metal with 5–7 gains electrons and becomes a negative ion (anion): Cl → Cl⁻.'
+      check:
+        prompt: Magnesium (2, 8, 2) forms which ion?
+        options:
+        - Mg²⁺
+        - Mg²⁻
+        - Mg⁺
+        answer: Mg²⁺
+        why: It loses its 2 outer electrons.
+    - teach: 'Oppositely charged ions attract strongly: an ionic compound. Ionic compounds (NaCl, MgO) are hard solids with high melting points; they conduct electricity when melted or dissolved, because then the ions can move. Non-metals can instead share electron pairs: a covalent compound (H₂O, CH₄, CO₂), usually with low melting points and no conduction.'
+      picture:
+        kind: compare
+        columns:
+        - title: Ionic
+          points:
+          - Electrons transferred
+          - Metal + non-metal
+          - High melting point
+          - Conducts when melted or dissolved
+          - NaCl, MgO
+        - title: Covalent
+          points:
+          - Electrons shared
+          - Non-metal + non-metal
+          - Low melting point
+          - Usually doesn't conduct
+          - H₂O, CH₄
+        alt: Ionic compounds transfer electrons and conduct when melted; covalent compounds share electrons and usually don't conduct.
+      check:
+        prompt: Which is ionic?
+        options:
+        - MgO
+        - CO₂
+        - H₂O
+        answer: MgO
+        why: A metal (Mg) and a non-metal (O) form ions.
+    - teach: 'Formulae of ionic compounds balance the charges. Ca²⁺ and Cl⁻: you need two Cl⁻ for one Ca²⁺, so CaCl₂. Fe³⁺ and O²⁻: 2 × 3 = 6 = 3 × 2, so Fe₂O₃. Polyatomic ions stay together in brackets: Mg(OH)₂.'
+      check:
+        prompt: Formula of iron(III) oxide (Fe³⁺, O²⁻)?
+        options:
+        - Fe₂O₃
+        - Fe₃O₂
+        - FeO
+        answer: Fe₂O₃
+        why: +6 from two Fe³⁺ balances −6 from three O²⁻.
   items:
   - prompt: What is the formula of magnesium chloride (Mg²⁺ and Cl⁻)?
     options:
@@ -531,3 +860,131 @@ concepts:
     solution: 'Step 1: Ca²⁺ needs two OH⁻. Step 2: Bracket the polyatomic ion: Ca(OH)₂.'
     mistakes:
       CaOH₂: formula_valency_cross
+  - prompt: What is the formula of sodium chloride (Na⁺ and Cl⁻)?
+    options:
+    - NaCl
+    - Na₂Cl
+    - NaCl₂
+    - Na₂Cl₂
+    answer: NaCl
+    difficulty: 1
+    hints:
+    - The charges are +1 and −1.
+    - One of each balances.
+    solution: +1 and −1 balance, so NaCl.
+    mistakes:
+      Na₂Cl₂: formula_valency_cross
+  - prompt: A chlorine atom gains one electron. What does it become?
+    options:
+    - Cl⁻, an anion
+    - Cl⁺, a cation
+    - A neutron
+    - Argon
+    answer: Cl⁻, an anion
+    difficulty: 1
+    hints:
+    - Gaining a negative particle.
+    - Negative ions are anions.
+    solution: 'Extra electron gives a −1 charge: Cl⁻, an anion.'
+    mistakes:
+      Cl⁺, a cation: ionic_covalent_swap
+  - prompt: Which compound is ionic?
+    options:
+    - Calcium oxide, CaO
+    - Methane, CH₄
+    - Ammonia, NH₃
+    - Water, H₂O
+    answer: Calcium oxide, CaO
+    difficulty: 1
+    hints:
+    - Look for a metal joined to a non-metal.
+    - Calcium is a metal.
+    solution: 'Ca (metal) gives electrons to O (non-metal): ionic.'
+    mistakes:
+      Water, H₂O: ionic_covalent_swap
+  - prompt: What is the formula of calcium oxide (Ca²⁺ and O²⁻)?
+    options:
+    - CaO
+    - Ca₂O₂
+    - CaO₂
+    - Ca₂O
+    answer: CaO
+    difficulty: 2
+    hints:
+    - +2 and −2 balance.
+    - Simplify Ca₂O₂.
+    solution: 'One of each balances: CaO.'
+    mistakes:
+      Ca₂O₂: formula_valency_cross
+  - prompt: Why does sugar solution not conduct electricity, but salt solution does?
+    options:
+    - Sugar is covalent and makes no ions; salt gives free ions
+    - Sugar is heavier
+    - Salt is a metal
+    - Sugar doesn't dissolve
+    answer: Sugar is covalent and makes no ions; salt gives free ions
+    difficulty: 2
+    hints:
+    - Current in a solution is carried by ions.
+    - Which one splits into ions?
+    solution: NaCl splits into moving Na⁺ and Cl⁻ ions; sugar stays as neutral molecules.
+    mistakes:
+      Sugar doesn't dissolve: ionic_covalent_swap
+  - prompt: What is the formula of magnesium oxide (Mg²⁺ and O²⁻)?
+    options:
+    - MgO
+    - Mg₂O
+    - MgO₂
+    - Mg₂O₂
+    answer: MgO
+    difficulty: 2
+    hints:
+    - +2 and −2.
+    - One of each.
+    solution: 'The charges balance one-to-one: MgO.'
+    mistakes:
+      Mg₂O₂: formula_valency_cross
+      Mg₂O: criss_cross_valency
+  - prompt: What is the formula of ammonium chloride (NH₄⁺ and Cl⁻)?
+    options:
+    - NH₄Cl
+    - (NH₄)₂Cl
+    - NH₄Cl₂
+    - NH₃Cl
+    answer: NH₄Cl
+    difficulty: 2
+    hints:
+    - +1 and −1.
+    - No brackets needed for one ion.
+    solution: 'One NH₄⁺ balances one Cl⁻: NH₄Cl.'
+    mistakes:
+      (NH₄)₂Cl: criss_cross_valency
+  - prompt: Which property suggests a substance is ionic?
+    options:
+    - It melts at 800 °C and conducts when molten
+    - It is a gas at room temperature
+    - It melts at 50 °C and never conducts
+    - It is soft like wax
+    answer: It melts at 800 °C and conducts when molten
+    difficulty: 3
+    hints:
+    - Ionic bonds are strong.
+    - Free ions carry current.
+    solution: High melting point and conduction when molten are signs of an ionic compound.
+    mistakes:
+      It melts at 50 °C and never conducts: ionic_covalent_swap
+  - prompt: What is the formula of calcium phosphate (Ca²⁺ and PO₄³⁻)?
+    options:
+    - Ca₃(PO₄)₂
+    - Ca₂(PO₄)₃
+    - CaPO₄
+    - Ca₃PO₄₂
+    answer: Ca₃(PO₄)₂
+    difficulty: 3
+    hints:
+    - Criss-cross 2 and 3.
+    - Balance +6 with −6.
+    solution: 'Three Ca²⁺ (+6) balance two PO₄³⁻ (−6): Ca₃(PO₄)₂.'
+    mistakes:
+      Ca₂(PO₄)₃: criss_cross_valency
+      Ca₃PO₄₂: formula_valency_cross

@@ -96,6 +96,47 @@ concepts:
       - when:
           v: 1
         say: 1 means certain, but it could land on yellow.
+  lesson:
+    - teach: Probability measures how likely something is, on a scale from 0 to 1. 0 means impossible (rolling a 7 on a normal dice). 1 means certain (the sun rising tomorrow). 1/2 is an even chance, like heads on a fair coin. No probability is below 0 or above 1.
+      picture:
+        kind: number_line
+        from: 0
+        to: 1
+        step: 0.25
+        points:
+        - at: 0
+          label: impossible
+        - at: 0.5
+          label: even chance
+        - at: 1
+          label: certain
+        alt: Probability scale from 0 (impossible) through 0.5 (even chance) to 1 (certain).
+      check:
+        prompt: Which number could be a probability?
+        options:
+        - '0.85'
+        - '1.5'
+        - −0.2
+        answer: '0.85'
+        why: A probability must lie between 0 and 1.
+    - teach: We can't say what one coin toss will give, but over many tosses a pattern appears. Experimental (empirical) probability = number of times the event happened ÷ number of trials. If 100 tosses give 53 heads, the experimental probability of heads is 53/100 = 0.53.
+      check:
+        prompt: A spinner lands on red 30 times in 120 spins. What is the experimental probability of red?
+        options:
+        - '0.25'
+        - '0.3'
+        - '4'
+        answer: '0.25'
+        why: 30 ÷ 120 = 0.25.
+    - teach: 'With only a few trials, results jump around: 10 tosses could easily give 7 heads. With many trials, the experimental probability settles close to the theoretical one. To predict, multiply: in 300 rolls of a dice, expect about 300 × 1/6 = 50 sixes.'
+      check:
+        prompt: A coin is tossed 400 times. About how many heads do you expect?
+        options:
+        - '200'
+        - '400'
+        - '100'
+        answer: '200'
+        why: 400 × 1/2 = 200, roughly.
   items:
   - prompt: What is the probability of an event that is certain to happen?
     answer: '1'
@@ -161,6 +202,113 @@ concepts:
     - A coin has no memory.
     solution: 'Step 1: In 10 tosses, 7 heads happens quite often with a fair coin. Step 2: Over many tosses the experimental probability settles near 1/2. Step 3: The coin has no memory, so tails is not ''due''.'
     mistakes: {"The coin must be unfair": "small_sample", "Tails is now more likely next time": "small_sample"}
+  - prompt: What is the probability of an impossible event?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - The scale runs from impossible to certain.
+    - Certain is 1.
+    solution: An impossible event has probability 0.
+    mistakes:
+      '1': certain_is_one
+  - prompt: A dice is rolled 60 times and shows 4 eleven times. What is the experimental probability of a 4? Type a fraction.
+    answer: 11/60
+    check: 11/60
+    difficulty: 1
+    hints:
+    - Times it happened ÷ number of trials.
+    - 11 ÷ 60.
+    solution: "It happened 11 times in 60 rolls, so 11 ÷ 60 = 11/60."
+    mistakes:
+      1/6: small_sample
+      11/49: probability_wrong_total
+  - prompt: Which event has probability closest to 1?
+    options:
+    - A ball dropped will fall down
+    - A coin shows heads
+    - A dice shows 6
+    - It snows in Chennai in May
+    answer: A ball dropped will fall down
+    difficulty: 1
+    hints:
+    - Probability 1 means certain.
+    - Which one always happens?
+    solution: A dropped ball always falls, so its probability is 1.
+    mistakes:
+      A coin shows heads: certain_is_one
+  - prompt: In 80 matches, a team won 20. What is the experimental probability that it did NOT win a match? Type a decimal.
+    answer: '0.75'
+    check: 60/80
+    difficulty: 2
+    hints:
+    - It did not win 80 − 20 = 60 matches.
+    - 60 ÷ 80.
+    solution: P(not win) = 60/80 = 0.75, or 1 − 0.25.
+    mistakes:
+      '0.25': not_event_complement
+  - prompt: A dice is rolled 900 times. About how many times would you expect an even number?
+    answer: '450'
+    check: 900/2
+    difficulty: 2
+    hints:
+    - 3 of the 6 faces are even.
+    - 900 × 1/2.
+    solution: P(even) = 1/2, so about 450 times.
+    mistakes:
+      '150': expected_count
+      '300': expected_count
+  - prompt: A coin is tossed 1000 times and shows tails 512 times. What is the experimental probability of heads? Type a decimal.
+    answer: '0.488'
+    check: 488/1000
+    difficulty: 2
+    hints:
+    - Heads came 1000 − 512 times.
+    - 488 ÷ 1000.
+    solution: Heads = 488, so 488/1000 = 0.488.
+    mistakes:
+      '0.512': not_event_complement
+      '0.5': small_sample
+  - prompt: Which of these fractions could NOT be a probability?
+    options:
+    - 5/4
+    - 3/4
+    - '0'
+    - '0.99'
+    answer: 5/4
+    difficulty: 2
+    hints:
+    - A probability can't be more than 1.
+    - Is 5/4 bigger than 1?
+    solution: 5/4 = 1.25, which is more than 1, so it can't be a probability.
+    mistakes:
+      '0': probability_over_one
+  - prompt: Out of 250 bulbs tested, 10 were faulty. A shop gets 1000 such bulbs. About how many are faulty?
+    answer: '40'
+    check: 1000*10/250
+    difficulty: 3
+    hints:
+    - Experimental P(faulty) = 10/250 = 0.04.
+    - 0.04 × 1000.
+    solution: P(faulty) = 0.04, so about 0.04 × 1000 = 40 bulbs.
+    mistakes:
+      '10': expected_count
+      '960': not_event_complement
+  - prompt: Two students each toss a coin. Anu tosses 20 times (12 heads), Ben tosses 2000 times (1012 heads). Whose experimental probability is likely closer to 1/2?
+    options:
+    - Ben's, because he made many more tosses
+    - Anu's, because 12 is closer to 10
+    - They are equally good
+    - Neither can be trusted
+    answer: Ben's, because he made many more tosses
+    difficulty: 3
+    hints:
+    - What happens as the number of trials grows?
+    - Compare 12/20 and 1012/2000.
+    solution: 'Anu: 0.6. Ben: 0.506. More trials settle closer to the true value, so Ben''s is closer.'
+    mistakes:
+      They are equally good: small_sample
+      Anu's, because 12 is closer to 10: small_sample
 - code: cbse9gm.prob.theoretical
   title: Theoretical probability, outcomes and tree diagrams
   after:
@@ -226,6 +374,43 @@ concepts:
       - when:
           v: 1
         say: The smallest total is 1 + 1 = 2, so a total of 1 is impossible.
+  lesson:
+    - teach: 'When every outcome is equally likely, we can work out probability without experiments: P(event) = favourable outcomes ÷ total outcomes. A dice has 6 outcomes; ''a number below 3'' is 1 or 2, so P = 2/6 = 1/3.'
+      check:
+        prompt: A dice is rolled. What is P(an odd number)?
+        options:
+        - 1/2
+        - 1/3
+        - 1/6
+        answer: 1/2
+        why: '1, 3, 5: 3 of 6 outcomes.'
+    - teach: 'The list of all outcomes is the sample space. For two steps, list every combination with a table or tree. Two coins: HH, HT, TH, TT, 4 outcomes. ''One head and one tail'' is HT or TH, so P = 2/4 = 1/2.'
+      picture:
+        kind: flow
+        steps:
+        - 'First coin: H or T'
+        - 'Second coin: H or T for each'
+        - 'Outcomes: HH, HT, TH, TT'
+        - 'One of each: HT, TH'
+        - P = 2/4 = 1/2
+        alt: A two-step tree for two coins giving four outcomes, two of which have one head and one tail.
+      check:
+        prompt: A coin is tossed and a dice rolled. How many outcomes?
+        options:
+        - '12'
+        - '8'
+        - '6'
+        answer: '12'
+        why: 2 × 6 = 12.
+    - teach: 'Two helpful rules. P(not A) = 1 − P(A): if P(win) = 0.3, P(not win) = 0.7. Along a tree branch, multiply: P(H then H) = 1/2 × 1/2 = 1/4.'
+      check:
+        prompt: P(a bus is late) = 0.2. What is P(it is not late)?
+        options:
+        - '0.8'
+        - '0.2'
+        - '1.2'
+        answer: '0.8'
+        why: 1 − 0.2 = 0.8.
   items:
   - prompt: A dice is rolled. What is the probability of getting a number greater than 4? Type a fraction.
     answer: 1/3
@@ -287,3 +472,102 @@ concepts:
     solution: 'Step 1: 36 equally likely pairs. Step 2: 6 pairs total 7. Step 3: 6/36 = 1/6.'
     mistakes:
       1/11: probability_wrong_total
+  - prompt: A dice is rolled. What is the probability of a 2? Type a fraction.
+    answer: 1/6
+    check: 1/6
+    difficulty: 1
+    hints:
+    - How many faces show 2?
+    - 1 out of 6.
+    solution: '1 favourable outcome out of 6: 1/6.'
+    mistakes:
+      1/2: probability_wrong_total
+      2/6: probability_wrong_total
+  - prompt: A box has 4 green and 6 yellow balls. One is picked at random. What is P(yellow)? Type a fraction.
+    answer: 3/5
+    check: 6/10
+    difficulty: 1
+    hints:
+    - Total balls = 10.
+    - 6 ÷ 10.
+    solution: 6/10 = 3/5.
+    mistakes:
+      6/4: probability_wrong_total
+      2/5: not_event_complement
+  - prompt: A letter is chosen at random from the word MATHS. What is P(a vowel)? Type a fraction.
+    answer: 1/5
+    check: 1/5
+    difficulty: 1
+    hints:
+    - MATHS has 5 letters.
+    - Only A is a vowel.
+    solution: '1 vowel out of 5 letters: 1/5.'
+    mistakes:
+      4/5: not_event_complement
+  - prompt: Two coins are tossed. What is P(at least one head)? Type a fraction.
+    answer: 3/4
+    check: 3/4
+    difficulty: 2
+    hints:
+    - List HH, HT, TH, TT.
+    - Only TT has no head.
+    solution: 'HH, HT, TH: 3 out of 4, so 3/4.'
+    mistakes:
+      1/4: not_event_complement
+      1/2: probability_wrong_total
+  - prompt: A card is drawn from 1, 2, 3, …, 20. What is P(a multiple of 5)? Type a fraction.
+    answer: 1/5
+    check: 4/20
+    difficulty: 2
+    hints:
+    - 'Multiples of 5 up to 20: 5, 10, 15, 20.'
+    - 4 ÷ 20.
+    solution: 4/20 = 1/5.
+    mistakes:
+      1/4: probability_wrong_total
+      4/5: not_event_complement
+  - prompt: P(A) = 2/7. What is P(not A)? Type a fraction.
+    answer: 5/7
+    check: 5/7
+    difficulty: 2
+    hints:
+    - P(not A) = 1 − P(A).
+    - 7/7 − 2/7.
+    solution: 1 − 2/7 = 5/7.
+    mistakes:
+      2/7: complement_one_minus
+      7/2: complement_one_minus
+  - prompt: A coin is tossed and a dice is rolled. What is P(heads and a 6)? Type a fraction.
+    answer: 1/12
+    check: 1/2*1/6
+    difficulty: 2
+    hints:
+    - There are 12 outcomes.
+    - 'Multiply along the branch: 1/2 × 1/6.'
+    solution: 'Only H6 works: 1/12.'
+    mistakes:
+      2/3: tree_add_instead_multiply
+      1/6: probability_wrong_total
+  - prompt: Two dice are rolled. What is P(a double, the same number on both)? Type a fraction.
+    answer: 1/6
+    check: 6/36
+    difficulty: 3
+    hints:
+    - 36 outcomes in all.
+    - 'Doubles: (1,1), (2,2), …, (6,6).'
+    solution: '6 doubles out of 36: 1/6.'
+    mistakes:
+      1/36: probability_wrong_total
+      1/12: probability_wrong_total
+  - prompt: Three coins are tossed. What is P(all three heads)? Type a fraction.
+    answer: 1/8
+    check: (1/2)**3
+    difficulty: 3
+    hints:
+    - Each coin has 2 outcomes; 2 × 2 × 2 = 8.
+    - Only HHH works.
+    solution: 1/2 × 1/2 × 1/2 = 1/8.
+    mistakes:
+      3/2: tree_add_instead_multiply
+      1/6: probability_wrong_total
+      1/3: probability_wrong_total

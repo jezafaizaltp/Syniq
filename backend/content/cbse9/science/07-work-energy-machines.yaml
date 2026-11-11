@@ -5,6 +5,8 @@ title: Work, Energy and Simple Machines
 tips:
   v_squared_root: "The equation gives v², not v. Take the square root at the end: if v² = 49, then v = 7."
   work_zero_no_displacement: 'No displacement in the direction of the force means no work: pushing a wall that doesn''t move does zero work.'
+  c9s7_right_angle: "Work counts only the part of the motion along the force. Gravity pulls towards the centre; which way does the satellite move compared with that?"
+  c9s7_force_against: "Friction points backwards while the box moves forwards. When a force acts against the motion, the work it does has a minus sign: it takes energy away."
   ke_half: 'Kinetic energy is ½mv²: square the speed, then halve.'
   kwh_unit: "1 kWh means 1000 watts for one hour. Change the hour to seconds and multiply: watts × seconds = joules."
   ma_inverted: Mechanical advantage = load ÷ effort. If a machine lets a small effort lift a big load, the MA is more than 1.
@@ -91,6 +93,51 @@ concepts:
       - when:
           h: 20
         say: 'From 20 m it lands at 20 m/s. Twice the height doesn''t give twice the speed: speed grows with √h.'
+  lesson:
+    - teach: 'In science, work is done only when a force moves something in the direction of the force. Work = force × displacement, W = F × s, measured in joules (J). Push a box with 20 N for 3 m: W = 60 J. Push a wall that doesn''t move: no displacement, so no work, however tired you feel.'
+      check:
+        prompt: A coolie carries a load and stands still. How much work is done on the load?
+        options:
+        - Zero
+        - A lot
+        - Depends on the load
+        answer: Zero
+        why: The load doesn't move, so displacement and work are zero.
+    - teach: Energy is the ability to do work, also in joules. A moving object has kinetic energy, Eₖ = ½mv². An object raised to a height has potential energy, Eₚ = mgh (g ≈ 10 m/s²). Doubling speed makes kinetic energy four times as big, because v is squared.
+      check:
+        prompt: A 2 kg ball moves at 4 m/s. What is its kinetic energy?
+        options:
+        - 16 J
+        - 8 J
+        - 32 J
+        answer: 16 J
+        why: ½ × 2 × 16 = 16.
+    - teach: Energy is never made or destroyed; it only changes form. A falling ball loses potential energy and gains the same amount of kinetic energy. Just before it lands, all the mgh has become ½mv².
+      picture:
+        kind: bars
+        bars:
+        - label: 'Top: Eₚ'
+          value: 100
+        - label: 'Top: Eₖ'
+          value: 0
+        - label: 'Halfway: Eₚ'
+          value: 50
+        - label: 'Halfway: Eₖ'
+          value: 50
+        - label: 'Bottom: Eₚ'
+          value: 0
+        - label: 'Bottom: Eₖ'
+          value: 100
+        unit: J
+        alt: A falling ball's 100 J of energy shifts from potential at the top to half and half midway to all kinetic at the bottom.
+      check:
+        prompt: A ball starts with 80 J of potential energy. Halfway down, its kinetic energy is…
+        options:
+        - 40 J
+        - 80 J
+        - 0 J
+        answer: 40 J
+        why: Half of the potential energy has become kinetic; the total stays 80 J.
   items:
   - prompt: A force of 10 N moves a box 5 m in its direction. Find the work done, in J.
     answer: '50'
@@ -161,6 +208,95 @@ concepts:
     solution: ½ × 1 × v² = 50, so v² = 100 and v = 10 m/s.
     mistakes:
       '100': v_squared_root
+  - prompt: A force of 25 N pulls a cart 4 m along its direction. Find the work done, in J.
+    answer: '100'
+    check: 25*4
+    difficulty: 1
+    hints:
+    - W = F × s.
+    - 25 × 4.
+    solution: 25 × 4 = 100 J.
+    mistakes:
+      '6.25': work_force_distance
+      '29': work_force_distance
+  - prompt: Find the kinetic energy of a 4 kg trolley moving at 5 m/s, in J.
+    answer: '50'
+    check: 0.5*4*25
+    difficulty: 1
+    hints:
+    - Eₖ = ½mv².
+    - ½ × 4 × 25.
+    solution: ½ × 4 × 25 = 50 J.
+    mistakes:
+      '100': ke_half
+      '10': ke_half
+  - prompt: Find the potential energy of a 10 kg bag lifted 3 m (g = 10 m/s²), in J.
+    answer: '300'
+    check: 10*10*3
+    difficulty: 1
+    hints:
+    - Eₚ = mgh.
+    - 10 × 10 × 3.
+    solution: 10 × 10 × 3 = 300 J.
+    mistakes:
+      '30': work_force_distance
+  - prompt: A satellite moves in a circle around Earth. Gravity pulls towards the centre, at right angles to its motion. How much work does gravity do?
+    options:
+    - Zero
+    - Positive
+    - Negative
+    - It depends on speed
+    answer: Zero
+    difficulty: 2
+    hints:
+    - Is there displacement along the force?
+    - The force is at right angles to the motion.
+    solution: A force at right angles to the displacement does no work.
+    mistakes:
+      Positive: c9s7_right_angle
+  - prompt: A ball's speed triples. How many times bigger is its kinetic energy?
+    answer: '9'
+    check: 3**2
+    difficulty: 2
+    hints:
+    - Eₖ depends on v².
+    - 3².
+    solution: (3v)² = 9v², so 9 times.
+    mistakes:
+      '3': v_squared_root
+      '6': v_squared_root
+  - prompt: A 2 kg stone is dropped from 20 m (g = 10 m/s²). What is its kinetic energy just before landing, in J?
+    answer: '400'
+    check: 2*10*20
+    difficulty: 2
+    hints:
+    - All potential energy turns into kinetic.
+    - mgh = 2 × 10 × 20.
+    solution: Eₖ = mgh = 400 J.
+    mistakes:
+      '40': work_force_distance
+      '200': ke_half
+  - prompt: Friction of 15 N acts on a sliding box over 4 m. What work does friction do on the box, in J?
+    answer: '-60'
+    check: -15*4
+    difficulty: 2
+    hints:
+    - Friction acts against the motion.
+    - So the work is negative.
+    solution: W = −15 × 4 = −60 J; friction takes energy away.
+    mistakes:
+      '60': c9s7_force_against
+  - prompt: A 0.5 kg ball has 25 J of kinetic energy. What is its speed, in m/s?
+    answer: '10'
+    check: sqrt(2*25/0.5)
+    difficulty: 3
+    hints:
+    - 25 = ½ × 0.5 × v².
+    - v² = 100.
+    solution: v² = 25 × 2 ÷ 0.5 = 100, so v = 10 m/s.
+    mistakes:
+      '100': v_squared_root
+      '50': ke_half
 - code: cbse9ex.energy.power
   title: Power and commercial unit of energy
   after:
@@ -247,6 +383,42 @@ concepts:
           - 90
           - 120
         say: 1.5 to 2 hours makes only 0.15 to 0.2 unit. A unit counts kilowatts × hours, and 100 W is just 0.1 kW.
+  lesson:
+    - teach: 'Two people can do the same work, but one faster. Power is the rate of doing work: P = W ÷ t, in watts (W). 1 W = 1 J per second; 1 kW = 1000 W. A 60 W bulb uses 60 J of energy every second.'
+      check:
+        prompt: A pump does 1200 J of work in 60 s. What is its power?
+        options:
+        - 20 W
+        - 72000 W
+        - 1260 W
+        answer: 20 W
+        why: 1200 ÷ 60 = 20.
+    - teach: Joules are tiny for household use, so electricity is sold in kilowatt hours (kWh), called units. 1 kWh is the energy used by a 1 kW appliance in 1 hour = 1000 × 3600 J = 3.6 × 10⁶ J. Energy in kWh = power in kW × time in hours.
+      picture:
+        kind: flow
+        steps:
+        - Power in W ÷ 1000 = kW
+        - × hours used
+        - = kWh (units)
+        - × rate per unit = bill
+        alt: Steps from an appliance's watts to kilowatt hours to the electricity bill.
+      check:
+        prompt: A 500 W iron is used for 2 hours. How many units?
+        options:
+        - '1'
+        - '1000'
+        - '250'
+        answer: '1'
+        why: 0.5 kW × 2 h = 1 kWh.
+    - teach: 'Lifting yourself up stairs: work = mgh, power = mgh ÷ t. A 50 kg student climbing 6 m in 12 s: W = 50 × 10 × 6 = 3000 J, P = 3000 ÷ 12 = 250 W.'
+      check:
+        prompt: Running up the same stairs in half the time needs…
+        options:
+        - Twice the power
+        - Twice the work
+        - Half the power
+        answer: Twice the power
+        why: The work is the same; doing it in half the time doubles the power.
   items:
   - prompt: A motor does 600 J of work in 20 s. Find its power, in W.
     answer: '30'
@@ -310,6 +482,108 @@ concepts:
     solution: 0.24 kW × 5 h = 1.2 kWh.
     mistakes:
       '1200': kw_to_w
+  - prompt: A crane does 50,000 J of work in 25 s. Find its power, in W.
+    answer: '2000'
+    check: 50000/25
+    difficulty: 1
+    hints:
+    - P = W ÷ t.
+    - 50000 ÷ 25.
+    solution: 50,000 ÷ 25 = 2000 W = 2 kW.
+    mistakes:
+      '1250000': power_mgh_time
+  - prompt: A 1 kW heater runs for 5 hours. How many units of electricity does it use?
+    answer: '5'
+    check: 1*5
+    difficulty: 1
+    hints:
+    - kWh = kW × hours.
+    - 1 × 5.
+    solution: 1 kW × 5 h = 5 kWh = 5 units.
+    mistakes:
+      '5000': units_kwh
+  - prompt: What is the SI unit of power?
+    options:
+    - Watt
+    - Joule
+    - Newton
+    - Kilowatt hour
+    answer: Watt
+    difficulty: 1
+    hints:
+    - It means joules per second.
+    - Bulbs are rated in it.
+    solution: Power is measured in watts (W), 1 W = 1 J/s.
+    mistakes:
+      Kilowatt hour: kwh_unit
+      Joule: kwh_unit
+  - prompt: A 40 W tube light runs 10 hours a day for 30 days. How many units does it use?
+    answer: '12'
+    check: 0.04*10*30
+    difficulty: 2
+    hints:
+    - 40 W = 0.04 kW.
+    - 0.04 × 300 hours.
+    solution: 0.04 kW × 300 h = 12 kWh.
+    mistakes:
+      '12000': units_kwh
+  - prompt: Electricity costs ₹6 per unit. A 1.5 kW air-cooler runs 4 hours. What does it cost, in ₹?
+    answer: '36'
+    check: 1.5*4*6
+    difficulty: 2
+    hints:
+    - Units = 1.5 × 4 = 6.
+    - 6 units × ₹6.
+    solution: 6 units × ₹6 = ₹36.
+    mistakes:
+      '6': units_kwh
+  - prompt: Convert 2 kWh into joules.
+    options:
+    - 7.2 × 10⁶ J
+    - 2000 J
+    - 3.6 × 10⁶ J
+    - 7200 J
+    answer: 7.2 × 10⁶ J
+    difficulty: 2
+    hints:
+    - 1 kWh = 3.6 × 10⁶ J.
+    - Double it.
+    solution: 2 × 3.6 × 10⁶ = 7.2 × 10⁶ J.
+    mistakes:
+      2000 J: units_kwh
+      7200 J: units_kwh
+  - prompt: A 60 kg man climbs a 10 m staircase in 20 s (g = 10 m/s²). Find his power, in W.
+    answer: '300'
+    check: 60*10*10/20
+    difficulty: 2
+    hints:
+    - Work = mgh = 6000 J.
+    - 6000 ÷ 20.
+    solution: mgh = 6000 J; P = 6000 ÷ 20 = 300 W.
+    mistakes:
+      '6000': power_mgh_time
+      '30': power_mgh_time
+  - prompt: A motor of power 2 kW lifts water. How much work does it do in 1 minute, in J?
+    answer: '120000'
+    check: 2000*60
+    difficulty: 3
+    hints:
+    - W = P × t.
+    - 2000 W × 60 s.
+    solution: 2000 × 60 = 120,000 J.
+    mistakes:
+      '120': units_kwh
+      '2000': power_mgh_time
+  - prompt: A family uses a 1 kW fridge for 24 hours, two 100 W fans for 8 hours each and a 2 kW geyser for 1 hour each day. How many units a day?
+    answer: '27.6'
+    check: 1*24 + 2*0.1*8 + 2*1
+    difficulty: 3
+    hints:
+    - Fridge 24 kWh, fans 2 × 0.8 kWh, geyser 2 kWh.
+    - Add them.
+    solution: 24 + 1.6 + 2 = 27.6 units.
+    mistakes:
+      '26.8': units_kwh
 - code: cbse9ex.energy.machines
   title: Simple machines
   after:
@@ -396,6 +670,50 @@ concepts:
           - 0.75
           - 1.5
         say: 'Balanced, but the MA is only 1.5 to 3. MA = load ÷ effort, so MA 4 needs a quarter of 600 N: move further from the pivot.'
+  lesson:
+    - teach: A simple machine makes work easier by letting a small effort move a big load, or by changing the direction of a force. Mechanical advantage MA = load ÷ effort. A jack lifting a 10,000 N car with 500 N effort has MA = 20.
+      check:
+        prompt: A machine lifts 600 N with 150 N effort. What is its MA?
+        options:
+        - '4'
+        - '450'
+        - 1/4
+        answer: '4'
+        why: 600 ÷ 150 = 4.
+    - teach: 'A lever turns about a fulcrum. It balances when load × load arm = effort × effort arm. Class 1: fulcrum in the middle (see-saw, scissors). Class 2: load in the middle (nutcracker, wheelbarrow), MA > 1. Class 3: effort in the middle (tongs, your forearm), MA < 1 but faster movement.'
+      picture:
+        kind: compare
+        columns:
+        - title: Class 1
+          points:
+          - Fulcrum in middle
+          - See-saw, scissors, crowbar
+        - title: Class 2
+          points:
+          - Load in middle
+          - Nutcracker, wheelbarrow
+        - title: Class 3
+          points:
+          - Effort in middle
+          - Tongs, forearm, fishing rod
+        alt: 'Three classes of lever by what lies in the middle: fulcrum, load or effort, with examples.'
+      check:
+        prompt: A wheelbarrow is which class of lever?
+        options:
+        - Class 2
+        - Class 1
+        - Class 3
+        answer: Class 2
+        why: The wheel is the fulcrum at one end, the load in the middle, the effort at the handles.
+    - teach: 'Machines never give more work than you put in. A ramp lets you push a heavy box up with less force, but over a longer distance: ideal MA = length ÷ height. A single fixed pulley only changes direction (MA = 1). Real machines lose some energy to friction.'
+      check:
+        prompt: A ramp is 10 m long and 2 m high. Ideal MA?
+        options:
+        - '5'
+        - '20'
+        - '8'
+        answer: '5'
+        why: 10 ÷ 2 = 5.
   items:
   - prompt: A machine lifts a 500 N load with an effort of 100 N. What is its mechanical advantage?
     answer: '5'
@@ -465,3 +783,113 @@ concepts:
     solution: 'Step 1: The force is multiplied by 4, but the effort moves 4 times further. Step 2: Work in ≥ work out; machines never create energy.'
     mistakes:
       Levers always lose half the work: machine_saves_work
+  - prompt: A lever lifts a 400 N load with an effort of 80 N. What is its MA?
+    answer: '5'
+    check: 400/80
+    difficulty: 1
+    hints:
+    - MA = load ÷ effort.
+    - 400 ÷ 80.
+    solution: 400 ÷ 80 = 5.
+    mistakes:
+      '0.2': ma_inverted
+      '320': ma_inverted
+  - prompt: Which class of lever is a pair of scissors?
+    options:
+    - Class 1
+    - Class 2
+    - Class 3
+    - Not a lever
+    answer: Class 1
+    difficulty: 1
+    hints:
+    - Where is the pivot screw?
+    - Between the handles and the blades.
+    solution: 'The fulcrum (pivot) is between effort and load: class 1.'
+    mistakes:
+      Class 2: lever_class_two
+  - prompt: Which class of lever is a pair of kitchen tongs?
+    options:
+    - Class 3
+    - Class 1
+    - Class 2
+    - Not a lever
+    answer: Class 3
+    difficulty: 1
+    hints:
+    - Your fingers press in the middle.
+    - The hinge is at one end.
+    solution: 'Effort is in the middle, between the fulcrum and the load: class 3.'
+    mistakes:
+      Class 2: lever_class_two
+  - prompt: 'A see-saw: a 300 N child sits 2 m from the pivot. How far from the pivot must a 400 N child sit to balance, in m?'
+    answer: '1.5'
+    check: 300*2/400
+    difficulty: 2
+    hints:
+    - 300 × 2 = 400 × d.
+    - d = 600 ÷ 400.
+    solution: 400 × d = 600, so d = 1.5 m.
+    mistakes:
+      '2.67': lever_moments
+  - prompt: A ramp is 8 m long and 2 m high. What is its ideal mechanical advantage?
+    answer: '4'
+    check: 8/2
+    difficulty: 2
+    hints:
+    - Ideal MA = length ÷ height.
+    - 8 ÷ 2.
+    solution: 8 ÷ 2 = 4.
+    mistakes:
+      '0.25': ramp_ma
+      '16': ramp_ma
+  - prompt: Why do we use a single fixed pulley to raise a flag?
+    options:
+    - It lets us pull down to lift the flag up
+    - It halves the effort
+    - It doubles the work
+    - It removes friction
+    answer: It lets us pull down to lift the flag up
+    difficulty: 2
+    hints:
+    - Its MA is 1.
+    - What does it change?
+    solution: A fixed pulley changes the direction of the force; pulling down is easier.
+    mistakes:
+      It halves the effort: fixed_pulley
+  - prompt: Which simple machine is a screw most like?
+    options:
+    - An inclined plane wrapped around a rod
+    - A lever
+    - A pulley
+    - A wheel and axle
+    answer: An inclined plane wrapped around a rod
+    difficulty: 2
+    hints:
+    - Follow the thread round and round.
+    - It is a long gentle slope.
+    solution: A screw's thread is a ramp wound round a cylinder.
+    mistakes:
+      A pulley: fixed_pulley
+  - prompt: With a crowbar, a 50 N effort 1.2 m from the fulcrum lifts a rock 0.2 m from the fulcrum. What load can it lift, in N?
+    answer: '300'
+    check: 50*1.2/0.2
+    difficulty: 3
+    hints:
+    - Load × 0.2 = 50 × 1.2.
+    - 60 ÷ 0.2.
+    solution: Load = 60 ÷ 0.2 = 300 N.
+    mistakes:
+      '8.33': lever_moments
+      '12': lever_moments
+  - prompt: Pushing a 600 N box up a 5 m ramp to a 1 m high platform takes 150 N. How much work does the person do, in J?
+    answer: '750'
+    check: 150*5
+    difficulty: 3
+    hints:
+    - Work = effort × distance moved by the effort.
+    - 150 × 5.
+    solution: 150 × 5 = 750 J. Lifting straight up would need 600 J; the extra 150 J goes to friction.
+    mistakes:
+      '600': machine_saves_work
+      '3000': work_force_distance

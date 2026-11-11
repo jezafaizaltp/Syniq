@@ -12,6 +12,14 @@ tips:
   countif_fn: "COUNTIF(range; criterion) counts how many cells in a range meet a condition, e.g. how many states are 'Very high population density'."
   autofilter: "AutoFilter (Data → AutoFilter) shows only the rows that meet a condition; it hides the rest without deleting them. Standard Filter (Data → More Filters) lets you set criteria."
   protect_sheet: "Protecting a sheet is a safety tool, so look in the Tools menu. It stops changes, but people can still open the file and look."
+  it4_people_per_km: 'Density is people for each square kilometre: divide the people by the area.'
+  it4_relative_ref: When you drag the fill handle down one row, every row number in the formula goes up by one.
+  it4_lower_limit: Each category starts at its lower limit and runs up to just below the next one. Find the band the number falls in.
+  it4_count_rest: All the categories together make the total. Take away the ones you know.
+  it4_lookup_or_countif: LOOKUP puts each value into a category; COUNTIF counts how many cells meet a condition.
+  it4_hide_not_delete: A filter only hides rows; nothing is deleted.
+  it4_protect_view: A protected sheet can still be opened and read, but not changed without the password.
+  it4_menu_names: Each Calc menu groups related jobs. File is for saving, Tools for protection; which menu works on the values in your table?
 
 concepts:
   - code: it9.data.density_formula
@@ -63,6 +71,42 @@ concepts:
         - when:
             v: 380
           say: 'That''s India''s density. Work it out: 20000 ÷ 50.'
+    lesson:
+      - teach: 'Data is raw information: numbers, words, images. Organised and analysed, it helps us decide. A spreadsheet file with many sheets is a workbook. In Calc a sheet can have up to 1,048,576 rows and 1,024 columns.'
+        check:
+          prompt: A Calc file with several sheets is a
+          options:
+          - Workbook
+          - Template
+          - Slide
+          answer: Workbook
+          why: A workbook holds sheets.
+      - teach: 'Population density = total population ÷ land area (people per sq km). In Calc, every formula starts with =. In G2 type =C2/F2 (population ÷ area) and press Enter, then drag the fill handle down to copy it: the row numbers change automatically (=C3/F3, =C4/F4...).'
+        picture:
+          kind: flow
+          steps:
+          - 'G2: =C2/F2'
+          - Drag fill handle
+          - 'G3: =C3/F3'
+          - 'G4: =C4/F4'
+          alt: The fill handle copies the formula row by row.
+        check:
+          prompt: 1,000 people live on 4 sq km. Density?
+          options:
+          - '250'
+          - '4000'
+          - '1004'
+          answer: '250'
+          why: 1000 ÷ 4 = 250 per sq km.
+      - teach: Use ROUND or Delete Decimal Place to tidy decimals. Online spreadsheets (Google Sheets, Excel online, Zoho Sheet) let many people edit together.
+        check:
+          prompt: Which lets several people edit one sheet at the same time?
+          options:
+          - An online spreadsheet
+          - A printed sheet
+          - A PNG image
+          answer: An online spreadsheet
+          why: Online sheets are shared over the internet.
     items:
       - prompt: "Population density is calculated as"
         options: ["Total population ÷ land area", "Land area ÷ total population", "Total population × land area", "Total population − land area"]
@@ -134,6 +178,68 @@ concepts:
         hints: ["C2 is the population and F2 the area.", "What happens if you divide area by population?"]
         solution: "Step 1: Density is population ÷ area, so C2/F2. Step 2: F2/C2 is area ÷ population: square kilometres per person, a tiny decimal, not people per sq km."
         mistakes: {"The correct density": density_divide, "An error message": calc_formula, "The total population": calc_formula}
+      - prompt: A town has 90,000 people on 300 sq km. What is its population density?
+        answer: '300'
+        check: 90000/300
+        difficulty: 1
+        hints:
+        - Divide people by area.
+        - 90,000 ÷ 300.
+        solution: 'Step 1: People 90,000. Step 2: Area 300 sq km. Step 3: 300 per sq km.'
+        mistakes:
+          '27000000': it4_people_per_km
+      - prompt: How many columns can one Calc sheet have at most?
+        options:
+        - '1024'
+        - '1048576'
+        - '10000'
+        - '256'
+        answer: '1024'
+        difficulty: 2
+        hints:
+        - Rows go past a million, but columns are far fewer.
+        - It is about a thousand.
+        solution: 'Step 1: Rows: 1,048,576. Step 2: Columns are fewer. Step 3: 1,024.'
+        mistakes:
+          '1048576': calc_limits
+      - prompt: Which of these is an online spreadsheet?
+        options:
+        - Zoho Sheet
+        - GIMP
+        - PictoBlox
+        - Kalzium
+        answer: Zoho Sheet
+        difficulty: 1
+        hints:
+        - Its name has the word 'Sheet'.
+        - The others are for images, coding and chemistry.
+        solution: 'Step 1: GIMP = images; PictoBlox = coding; Kalzium = elements. Step 2: The spreadsheet is left. Step 3: Zoho Sheet.'
+        mistakes:
+          GIMP: calc_formula
+      - prompt: In H5 you type =D5*2 and drag down to H7. What formula is in H7?
+        options:
+        - =D7*2
+        - =D5*2
+        - =D7*4
+        - =H7*2
+        answer: =D7*2
+        difficulty: 2
+        hints:
+        - Each row down adds 1 to the row number.
+        - The 2 is a plain number and does not change.
+        solution: 'Step 1: H5 → H7 is two rows down. Step 2: D5 → D7. Step 3: =D7*2.'
+        mistakes:
+          =D5*2: it4_relative_ref
+      - prompt: Kerala's density is about 860 and India's about 382. About how many more people per sq km does Kerala have?
+        answer: '478'
+        check: 860 - 382
+        difficulty: 2
+        hints:
+        - Find the difference.
+        - 860 − 382.
+        solution: 'Step 1: Kerala 860. Step 2: India 382. Step 3: 860 − 382 = 478.'
+        mistakes:
+          '1242': m5_subtract_not_add
 
   - code: it9.data.lookup_countif
     title: Classifying with LOOKUP and counting with COUNTIF
@@ -199,6 +305,52 @@ concepts:
         bin: High (400–799)
         clue: 'Lower limit counts: 400 to under 800.'
         why: 400 is the start of high, not moderate.
+    lesson:
+      - teach: 'States are grouped by density: below 100 very low; 100–199 low; 200–399 moderate; 400–799 high; 800 and above very high. LOOKUP puts each value into its category using a table of lower limits (0, 100, 200, 400, 800), named with Data → Define Range (e.g. Criteria).'
+        picture:
+          kind: bars
+          unit: lower limit (people per sq km)
+          bars:
+          - label: Very low
+            value: 0
+          - label: Low
+            value: 100
+          - label: Moderate
+            value: 200
+          - label: High
+            value: 400
+          - label: Very high
+            value: 800
+          alt: Lower limits of the five density categories.
+        check:
+          prompt: Density 150 is in which category?
+          options:
+          - Low
+          - Moderate
+          - Very low
+          answer: Low
+          why: 150 is between 100 and 199.
+      - teach: 'LOOKUP: Function Wizard (fx) → LOOKUP → Search Criterion (G2), Search Vector (Criteria), OK, then fill down. The lower limits must be sorted smallest to largest. COUNTIF counts cells that meet a condition: Range J2:J36, Criteria the category name.'
+        picture:
+          kind: compare
+          columns:
+          - title: LOOKUP
+            points:
+            - value → category
+            - needs sorted limits
+          - title: COUNTIF
+            points:
+            - how many match?
+            - range + condition
+          alt: LOOKUP and COUNTIF compared.
+        check:
+          prompt: Which function tells you how many states are 'High'?
+          options:
+          - COUNTIF
+          - LOOKUP
+          - ROUND
+          answer: COUNTIF
+          why: It counts cells meeting a condition.
     items:
       - prompt: "A state has a density of 350 per sq km. Which category is it in?"
         options: ["Moderate population density", "Low population density", "High population density", "Very high population density"]
@@ -270,6 +422,72 @@ concepts:
         hints: ["How many cells are there from J2 to J36?", "Subtract all the counts you know."]
         solution: "Step 1: J2 to J36 is 35 cells. Step 2: 6 + 9 + 11 + 4 = 30. Step 3: 35 − 30 = 5."
         mistakes: {"6": countif_fn, "4": countif_fn}
+      - prompt: A state has a density of 99. Which category is it in?
+        options:
+        - Very low
+        - Low
+        - Moderate
+        - High
+        answer: Very low
+        difficulty: 1
+        hints:
+        - Low starts at 100.
+        - Is 99 below that?
+        solution: 'Step 1: Low begins at 100. Step 2: 99 is below it. Step 3: Very low.'
+        mistakes:
+          Low: it4_lower_limit
+      - prompt: A state has a density of 799. Which category is it in?
+        options:
+        - High
+        - Very high
+        - Moderate
+        - Low
+        answer: High
+        difficulty: 2
+        hints:
+        - The next category starts at 800.
+        - 799 is just below that.
+        solution: 'Step 1: High = 400 to under 800. Step 2: 799 is under 800. Step 3: High.'
+        mistakes:
+          Very high: it4_lower_limit
+      - prompt: Where do you start the LOOKUP function from?
+        options:
+        - Function Wizard (fx)
+        - Tools → Protect Sheet
+        - Data → AutoFilter
+        - File → Export
+        answer: Function Wizard (fx)
+        difficulty: 1
+        hints:
+        - Functions are chosen from a wizard.
+        - Its button shows fx.
+        solution: 'Step 1: LOOKUP is a function. Step 2: Functions open from the wizard. Step 3: Function Wizard (fx).'
+        mistakes:
+          Data → AutoFilter: it4_lookup_or_countif
+      - prompt: Of 30 districts, 8 are Very High, 7 High, 9 Moderate and 4 Low. How many are Very Low?
+        answer: '2'
+        check: 30 - 8 - 7 - 9 - 4
+        difficulty: 2
+        hints:
+        - Add the known ones first.
+        - Take that from 30.
+        solution: 'Step 1: 8 + 7 + 9 + 4 = 28. Step 2: 30 − 28 = 2. Step 3: 2.'
+        mistakes:
+          '28': it4_count_rest
+      - prompt: In COUNTIF, what goes in the 'Range' box?
+        options:
+        - The cells to be checked
+        - The answer
+        - The password
+        - The chart title
+        answer: The cells to be checked
+        difficulty: 2
+        hints:
+        - COUNTIF looks through a set of cells.
+        - Criteria is the condition; Range is where to look.
+        solution: 'Step 1: COUNTIF needs where and what. Step 2: Range = where. Step 3: The cells to be checked.'
+        mistakes:
+          The answer: countif_fn
 
   - code: it9.data.filter_protect
     title: Filtering and protecting data
@@ -317,6 +535,34 @@ concepts:
         bin: Protect Sheet
         clue: Tools menu.
         why: Protect Sheet.
+    lesson:
+      - teach: 'AutoFilter shows only rows that match what you choose: click a heading cell, Data → AutoFilter, then use the arrow to tick only, say, ''Very High Density''. Other rows are hidden, not deleted. Standard Filter (Data → More Filters) lets you set conditions.'
+        picture:
+          kind: flow
+          steps:
+          - Click heading
+          - Data → AutoFilter
+          - Click arrow
+          - Tick only what you need
+          - Matching rows shown
+          alt: Using AutoFilter.
+        check:
+          prompt: What happens to rows that don't match a filter?
+          options:
+          - They are hidden
+          - They are deleted
+          - They turn red
+          answer: They are hidden
+          why: Clearing the filter brings them back.
+      - teach: Tools → Protect Sheet with a password stops changes. The file can still be opened and viewed. To edit again, unprotect with the same password. You can also protect only certain cells.
+        check:
+          prompt: After protecting a sheet, others can
+          options:
+          - Open and view it
+          - Edit any cell
+          - Delete the password
+          answer: Open and view it
+          why: Protection blocks editing, not viewing.
     items:
       - prompt: "What does AutoFilter do?"
         options: ["Displays only rows that meet chosen criteria", "Deletes rows that do not meet criteria", "Sorts data alphabetically", "Creates a chart"]
@@ -374,3 +620,94 @@ concepts:
         hints: ["Does a filter hide rows or remove them?"]
         solution: "Step 1: AutoFilter only hides the rows that do not match. Step 2: Clearing the filter shows them again: nothing was deleted."
         mistakes: {"29": autofilter, "6": autofilter}
+      - prompt: Which menu turns on AutoFilter?
+        options:
+        - Data
+        - Tools
+        - File
+        - Insert
+        answer: Data
+        difficulty: 1
+        hints:
+        - Filtering sorts through the values in your table.
+        - More Filters is in the same menu.
+        solution: 'Step 1: Filters sort through data. Step 2: The Data menu holds them. Step 3: Data.'
+        mistakes:
+          Tools: it4_menu_names
+      - prompt: After AutoFilter is on, what appears in the heading cells?
+        options:
+        - Arrow buttons
+        - Passwords
+        - Charts
+        - Pictures
+        answer: Arrow buttons
+        difficulty: 1
+        hints:
+        - You click them to choose what to show.
+        - They open a list.
+        solution: 'Step 1: Each heading gets a control. Step 2: It opens a tick list. Step 3: Arrow buttons.'
+        mistakes:
+          Passwords: autofilter
+      - prompt: When protecting a sheet, how many times do you type the password?
+        answer: '2'
+        check: '2'
+        difficulty: 2
+        hints:
+        - You enter it, then confirm it.
+        - Confirming prevents typing mistakes.
+        solution: 'Step 1: Enter the password. Step 2: Confirm it again. Step 3: Twice.'
+        mistakes:
+          '1': protect_sheet
+      - prompt: A sheet has 36 rows of states. A filter shows 6. How many rows still exist in the sheet?
+        answer: '36'
+        check: '36'
+        difficulty: 2
+        hints:
+        - Does a filter remove rows?
+        - Hidden rows still exist.
+        solution: 'Step 1: Filters hide, not delete. Step 2: All rows remain. Step 3: 36.'
+        mistakes:
+          '6': it4_hide_not_delete
+          '30': it4_hide_not_delete
+      - prompt: You want classmates to see marks but not change them. What should you do?
+        options:
+        - Protect the sheet with a password
+        - Use AutoFilter
+        - Use COUNTIF
+        - Delete the marks
+        answer: Protect the sheet with a password
+        difficulty: 2
+        hints:
+        - They should read but not edit.
+        - Which feature blocks editing?
+        solution: 'Step 1: Viewing must stay possible. Step 2: Editing must be blocked. Step 3: Protect the sheet.'
+        mistakes:
+          Use AutoFilter: it4_protect_view
+      - prompt: Which tool lets you filter by a condition such as 'density greater than 500'?
+        options:
+        - Standard Filter
+        - Protect Sheet
+        - Delete Decimal Place
+        - Define Range
+        answer: Standard Filter
+        difficulty: 3
+        hints:
+        - AutoFilter ticks values; this one uses conditions.
+        - It is under Data → More Filters.
+        solution: 'Step 1: A ''greater than'' rule is a condition. Step 2: More Filters has a tool for conditions. Step 3: Standard Filter.'
+        mistakes:
+          Define Range: it4_lookup_or_countif
+      - prompt: How do you unprotect a sheet?
+        options:
+        - Tools → Protect Sheet again and enter the password
+        - Delete the file
+        - Use AutoFilter
+        - Export as PDF
+        answer: Tools → Protect Sheet again and enter the password
+        difficulty: 2
+        hints:
+        - Use the same menu option.
+        - You need the password.
+        solution: 'Step 1: Protection is toggled in Tools. Step 2: Choose Protect Sheet again. Step 3: Enter the password.'
+        mistakes:
+          Use AutoFilter: it4_protect_view

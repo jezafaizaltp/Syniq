@@ -8,6 +8,7 @@ tips:
   honest_data: "Data is never changed to fit an idea. When results disagree with a hypothesis, which one gives way?"
   repeat_readings: "Every reading has small random errors. What does averaging several readings do to them?"
   si_base_units: "The SI unit for each quantity is fixed: force has its own unit named after a scientist, and the SI unit for mass is a thousand times bigger than the gram."
+  c9s1_variable_roles: The variable you change on purpose is the independent one; the one you measure is the dependent one; everything else is kept the same (controlled). Which role does this one play?
 concepts:
 - code: cbse9ex.science.method
   title: How scientists find things out
@@ -68,6 +69,53 @@ concepts:
       bin: Keep it the same
       clue: If the sunny plants were also warmer, what would you be testing?
       why: Warmth could make plants taller too. Keep it the same, so only sunlight changes.
+  lesson:
+    - teach: 'Science is a way of asking questions and testing answers with evidence. It often starts with an observation: ''The milk went sour faster in summer.'' Then a question: ''Does temperature affect how fast milk sours?'''
+      check:
+        prompt: Which of these is a scientific question that can be tested?
+        options:
+        - Does salt make ice melt faster?
+        - Is blue the nicest colour?
+        - Will I be happy tomorrow?
+        answer: Does salt make ice melt faster?
+        why: We can test it by measuring melting with and without salt.
+    - teach: 'A hypothesis is a possible explanation that we can test: ''Milk sours faster when warm, because bacteria grow faster in warmth.'' From it we make a prediction: ''Milk kept at 35 °C will sour before milk kept at 5 °C.'''
+      check:
+        prompt: What is a hypothesis?
+        options:
+        - A testable explanation made before testing
+        - The result of an experiment
+        - A proven law
+        answer: A testable explanation made before testing
+        why: It comes before the test; the experiment then supports it or not.
+    - teach: 'A fair test changes one thing (the independent variable), measures one thing (the dependent variable) and keeps everything else the same (controlled variables). For the milk test: change temperature, measure time to sour, keep the same milk, amount and container.'
+      picture:
+        kind: flow
+        steps:
+        - Observe
+        - Ask a question
+        - Hypothesis and prediction
+        - Fair test
+        - Record and analyse data
+        - Conclude and share
+        alt: The cycle of science from observation to question, hypothesis, fair test, data and conclusion.
+      check:
+        prompt: In the milk test, which is the dependent variable?
+        options:
+        - Time taken to sour
+        - Temperature
+        - Type of container
+        answer: Time taken to sour
+        why: It is what we measure, and it depends on what we changed.
+    - teach: Measure carefully in SI units (metre, kilogram, second, kelvin, ampere, mole, candela), repeat readings to reduce random errors, and record data honestly, even when it doesn't match your guess. If the results don't support the hypothesis, change it and test again.
+      check:
+        prompt: Why repeat a measurement three times?
+        options:
+        - To reduce the effect of random errors
+        - To make the table longer
+        - To get the answer you wanted
+        answer: To reduce the effect of random errors
+        why: The average of repeats is more reliable than one reading.
   items:
   - prompt: What is a hypothesis?
     options:
@@ -150,3 +198,132 @@ concepts:
     solution: 'Step 1: Both fertiliser and sunlight differed. Step 2: We can''t tell which one caused the extra growth: the test was not fair.'
     mistakes:
       Fertiliser makes beans grow: fair_test_change_many
+  - prompt: What is the SI unit of length?
+    options:
+    - Metre
+    - Centimetre
+    - Kilometre
+    - Foot
+    answer: Metre
+    difficulty: 1
+    hints:
+    - SI uses one base unit for each quantity.
+    - The others are made from it.
+    solution: The SI base unit of length is the metre; cm and km are built from it.
+    mistakes:
+      Centimetre: si_base_units
+      Kilometre: si_base_units
+  - prompt: What is the SI unit of time?
+    options:
+    - Second
+    - Minute
+    - Hour
+    - Day
+    answer: Second
+    difficulty: 1
+    hints:
+    - It is the smallest of these.
+    - Speeds are written per ___.
+    solution: The SI unit of time is the second (s).
+    mistakes:
+      Minute: si_base_units
+  - prompt: 'Testing whether light affects how tall seedlings grow: what is the independent variable?'
+    options:
+    - The amount of light
+    - The height of the seedlings
+    - The type of soil
+    - The amount of water
+    answer: The amount of light
+    difficulty: 1
+    hints:
+    - The independent variable is what you change on purpose.
+    - What is the question about?
+    solution: We change the light on purpose, so it is the independent variable. Height is measured (dependent).
+    mistakes:
+      The height of the seedlings: c9s1_variable_roles
+      The type of soil: fair_test_change_many
+  - prompt: In that seedling test, which should be kept the same?
+    options:
+    - Soil, water and type of seed
+    - The amount of light
+    - The height of the seedlings
+    - Nothing
+    answer: Soil, water and type of seed
+    difficulty: 2
+    hints:
+    - Only one thing should change.
+    - Which things could also affect growth?
+    solution: Soil, water and seed type are controlled, so only light can explain any difference.
+    mistakes:
+      Nothing: fair_test_change_many
+      The amount of light: c9s1_variable_roles
+  - prompt: A student's results don't match the class's expected answer. What should she record?
+    options:
+    - Her actual readings, and note anything unusual
+    - The expected values instead
+    - Nothing, and start again silently
+    - An average of her values and the expected ones
+    answer: Her actual readings, and note anything unusual
+    difficulty: 2
+    hints:
+    - Science depends on honest data.
+    - Unexpected results can teach us something.
+    solution: Data must be recorded honestly. Unusual results are noted and investigated, never replaced.
+    mistakes:
+      The expected values instead: honest_data
+  - prompt: Which statement is a hypothesis?
+    options:
+    - Plants grow taller with more sunlight because they make more food
+    - The plant grew 5 cm
+    - Plants are green
+    - Measure the plant every day
+    answer: Plants grow taller with more sunlight because they make more food
+    difficulty: 2
+    hints:
+    - A hypothesis explains and can be tested.
+    - A result is something already measured.
+    solution: It gives a testable explanation. '5 cm' is a result; 'measure daily' is a method.
+    mistakes:
+      The plant grew 5 cm: hypothesis_is_result
+  - prompt: Three readings of a pendulum's swing time are 2.1 s, 2.0 s and 2.2 s. What is the average?
+    options:
+    - 2.1 s
+    - 2.0 s
+    - 6.3 s
+    - 2.2 s
+    answer: 2.1 s
+    difficulty: 2
+    hints:
+    - Add the three readings.
+    - Divide by 3.
+    solution: (2.1 + 2.0 + 2.2) ÷ 3 = 6.3 ÷ 3 = 2.1 s.
+    mistakes:
+      6.3 s: repeat_readings
+  - prompt: Why do scientists share their results for others to check?
+    options:
+    - Others may repeat the test and find mistakes or confirm it
+    - To become famous
+    - Because results can never be wrong
+    - So no one needs to do the test again
+    answer: Others may repeat the test and find mistakes or confirm it
+    difficulty: 3
+    hints:
+    - One experiment can have errors.
+    - What happens when others repeat it?
+    solution: When others repeat an experiment and get the same result, we trust it more; if not, errors come to light.
+    mistakes:
+      Because results can never be wrong: honest_data
+  - prompt: Rina waters plant A with fertiliser water at 8 a.m. and plant B with plain water at 6 p.m. A grows more. What is wrong with her test?
+    options:
+    - 'Two things differ: fertiliser and watering time'
+    - Nothing; fertiliser helped
+    - She used only two plants, which is always fine
+    - She should have measured colour
+    answer: 'Two things differ: fertiliser and watering time'
+    difficulty: 3
+    hints:
+    - Count how many things differ between A and B.
+    - In a fair test only one thing changes.
+    solution: Both fertiliser and watering time changed, so we can't tell which caused the extra growth.
+    mistakes:
+      Nothing; fertiliser helped: fair_test_change_many

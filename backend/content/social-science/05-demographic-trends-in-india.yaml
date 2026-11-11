@@ -5,6 +5,7 @@ chapter: 5
 title: Demographic Trends in India
 
 tips:
+  scale_up: "Equal numbers give a ratio of one to one. Sex ratio counts females for every thousand males, so scale it up."
   census_why: "Births, deaths and migration change the population all the time. What do planners of schools, hospitals and jobs need?"
   girls_missing: "Naturally, about as many girls as boys are born. If far fewer girls are counted, what does that suggest about how girls are treated?"
   rate_to_number: "A rate per 1000 tells you how many for every 1000 people. Scale it up to the whole population."
@@ -21,6 +22,14 @@ tips:
   kerala_elderly: "Kerala's people live long and have few children, so the elderly form a larger share."
   most_populous: "The largest state by population is the big northern state on the Ganga plain, with over 19 crore people in 2011."
   population_change: "Only births, deaths and migration change how many people there are. Literacy changes what people can do, not their number."
+  density_per_area: 'Density is people per square kilometre: divide the population by the area, not the other way round.'
+  per_thousand_males: 'Sex ratio counts females for every 1000 males: divide females by males and multiply by 1000.'
+  natural_minus: Natural growth is births minus deaths. Migration and literacy are not part of it.
+  per_1000_to_percent: Rates per 1000 become percentages when you divide by 10.
+  transition_stage: Better medicine lowers deaths first; families take longer to have fewer children.
+  census_gap: The census is held once every ten years. Count on from the last one.
+  dependents_only: Dependents are children (0–14) and the elderly (65+). People aged 15–64 are the working age.
+  ss5d_which_count: 'Check which number the question wants: the overall sex ratio, the child sex ratio (0–6), or Kerala''s own figure. The notes give each one separately.'
 
 concepts:
   - code: ss9.demography.census
@@ -62,6 +71,45 @@ concepts:
         - when:
             v: 1991
           say: 'That is 20 years before. A census comes every 10 years: 2011 − 10.'
+    lesson:
+      - teach: A census counts every person in the country and records their age, sex, literacy, work, language and more. India holds a census every 10 years. The first synchronous census was in 1881; the latest completed one was in 2011.
+        check:
+          prompt: How often does India hold a census?
+          options:
+          - Every 10 years
+          - Every year
+          - Every 5 years
+          answer: Every 10 years
+          why: 'The census is decennial: once in ten years.'
+      - teach: Census 2011 counted about 121 crore (1.21 billion) people, second only to China then. Uttar Pradesh had the most people. Kerala had about 3.34 crore.
+        check:
+          prompt: Which state had the largest population in 2011?
+          options:
+          - Uttar Pradesh
+          - Kerala
+          - Goa
+          answer: Uttar Pradesh
+          why: UP was the most populous state.
+      - teach: 'Population density tells how crowded a place is: population ÷ area, in persons per sq km. India''s was 382; Kerala''s 860; Bihar''s the highest, 1106. A town of 30,000 people on 10 sq km has a density of 3,000.'
+        picture:
+          kind: bars
+          bars:
+          - label: India
+            value: 382
+          - label: Kerala
+            value: 860
+          - label: Bihar
+            value: 1106
+          unit: per sq km
+          alt: 'Population density in 2011: India 382, Kerala 860, Bihar 1106 per square kilometre.'
+        check:
+          prompt: A town has 40,000 people on 8 sq km. What is its density?
+          options:
+          - 5,000 per sq km
+          - 320,000 per sq km
+          - 40,008 per sq km
+          answer: 5,000 per sq km
+          why: 40,000 ÷ 8 = 5,000.
     items:
       - prompt: "How often is the census held in India?"
         options: ["Every 10 years", "Every 5 years", "Every year", "Every 20 years"]
@@ -119,6 +167,88 @@ concepts:
         hints: ["What changes the population?", "Who uses census figures?"]
         solution: "Step 1: Births, deaths and migration keep changing the population. Step 2: Governments need new figures to plan schools, hospitals, jobs and seats."
         mistakes: {"The law requires counting every house once a decade only": census_why, "It is used to elect the Prime Minister": census_why, "Old census records are thrown away": census_why}
+      - prompt: A panchayat has 24,000 people on an area of 16 sq km. What is its population density, in persons per sq km?
+        answer: '1500'
+        check: 24000/16
+        difficulty: 1
+        hints:
+        - Density is people per square kilometre.
+        - Divide the population by the area.
+        solution: 'Step 1: Population = 24,000. Step 2: Area = 16 sq km. Step 3: 24,000 ÷ 16 = 1,500 per sq km.'
+        mistakes:
+          '384000': density_per_area
+      - prompt: Which state had the highest population density in Census 2011?
+        options:
+        - Bihar
+        - Kerala
+        - Rajasthan
+        - Arunachal Pradesh
+        answer: Bihar
+        difficulty: 2
+        hints:
+        - Kerala is crowded, but one state was even more so.
+        - It lies in the Ganga plain.
+        solution: 'Step 1: India''s density was 382, Kerala''s 860. Step 2: One state crossed 1,100. Step 3: Bihar (1,106).'
+        mistakes:
+          Kerala: density_per_area
+      - prompt: In which year was the first synchronous census of India held?
+        answer: '1881'
+        check: '1881'
+        difficulty: 2
+        hints:
+        - It was during British rule.
+        - It was 130 years before 2011.
+        solution: 'Step 1: 2011 − 130 = 1881. Step 2: That was the first census taken across India at the same time. Step 3: 1881.'
+        mistakes:
+          '2011': census_gap
+      - prompt: If the census is held every 10 years after 2011, in which year would the next one be due?
+        answer: '2021'
+        check: 2011+10
+        difficulty: 1
+        hints:
+        - Add the gap to the last census year.
+        - The gap is ten years.
+        solution: 'Step 1: Last census 2011. Step 2: Add 10 years. Step 3: Due in 2021 (it was postponed).'
+        mistakes:
+          '2016': census_gap
+      - prompt: Why does the government need census data?
+        options:
+        - To plan schools, hospitals, jobs and services
+        - To decide the weather
+        - To choose cricket teams
+        - To print stamps
+        answer: To plan schools, hospitals, jobs and services
+        difficulty: 1
+        hints:
+        - The census tells how many people there are and what they need.
+        - What does a government plan for?
+        solution: 'Step 1: The census gives facts about people. Step 2: Planning needs these facts. Step 3: Schools, hospitals and jobs are planned from them.'
+        mistakes:
+          To decide the weather: census_gap
+      - prompt: Village P has 6,000 people on 4 sq km. Village Q has 9,000 people on 10 sq km. Which is more densely populated?
+        options:
+        - Village P
+        - Village Q
+        - Both are equal
+        - Cannot be found
+        answer: Village P
+        difficulty: 3
+        hints:
+        - Work out the density of each village.
+        - Compare persons per sq km, not total people.
+        solution: 'Step 1: P: 6,000 ÷ 4 = 1,500. Step 2: Q: 9,000 ÷ 10 = 900. Step 3: P is more densely populated.'
+        mistakes:
+          Village Q: density_per_area
+      - prompt: Kerala had about 3.34 crore people in 2011. Written in full, how many people is 3.34 crore?
+        answer: '33400000'
+        check: 334*100000
+        difficulty: 3
+        hints:
+        - 1 crore = 1,00,00,000 (ten million).
+        - Multiply 3.34 by ten million.
+        solution: 'Step 1: 1 crore = 10,000,000. Step 2: 3.34 × 10,000,000. Step 3: = 3,34,00,000 (33,400,000).'
+        mistakes:
+          '3340000': census_gap
 
   - code: ss9.demography.composition
     title: Sex ratio, literacy and age structure
@@ -181,6 +311,45 @@ concepts:
         - when:
             v: 943
           say: That one is for all ages. Among children aged 0–6 the ratio is lower still.
+    lesson:
+      - teach: Sex ratio is the number of females for every 1000 males. In 2011 India's was 943, and Kerala's 1084, the highest of all states. If a village has 500 men and 520 women, its sex ratio is 520 ÷ 500 × 1000 = 1040.
+        picture:
+          kind: bars
+          bars:
+          - label: India
+            value: 943
+          - label: Kerala
+            value: 1084
+          - label: India 0–6 yrs
+            value: 919
+          unit: females per 1000 males
+          alt: 'Sex ratio 2011: India 943, Kerala 1084, India''s child sex ratio 919.'
+        check:
+          prompt: A place has 1000 males and 950 females. What is its sex ratio?
+          options:
+          - '950'
+          - '1050'
+          - '50'
+          answer: '950'
+          why: 950 females per 1000 males.
+      - teach: Literacy rate is the share of people aged 7 and above who can read and write. India's was about 74% in 2011; Kerala's about 94%, among the highest.
+        check:
+          prompt: Literacy rate counts people from which age?
+          options:
+          - 7 years and above
+          - All ages from birth
+          - 18 years and above
+          answer: 7 years and above
+          why: Younger children are not counted.
+      - teach: Age structure groups people as children (0–14), working age (15–64) and elderly (65+). Children and the elderly are dependents. Kerala has a large share of elderly people because people live long and have fewer children.
+        check:
+          prompt: Which group is the working-age population?
+          options:
+          - 15–64 years
+          - 0–14 years
+          - 65 and above
+          answer: 15–64 years
+          why: Working age is 15 to 64.
     items:
       - prompt: "Sex ratio is the number of females per how many males?"
         answer: "1000"
@@ -239,6 +408,95 @@ concepts:
         hints: ["Naturally, roughly equal numbers of girls and boys are born.", "Why might fewer girls survive or be born?"]
         solution: "Step 1: Nature gives roughly equal numbers. Step 2: A low and falling child sex ratio points to sex-selection and neglect of girls, a social problem laws try to stop."
         mistakes: {"More girls are being born than boys": girls_missing, "Girls' health is improving fastest": girls_missing, "Only mistakes in counting": girls_missing}
+      - prompt: A village has 800 men and 840 women. What is its sex ratio?
+        answer: '1050'
+        check: 840/800*1000
+        difficulty: 1
+        hints:
+        - Sex ratio = females per 1000 males.
+        - Divide females by males, then multiply by 1000.
+        solution: 'Step 1: 840 ÷ 800 = 1.05. Step 2: × 1000. Step 3: = 1050.'
+        mistakes:
+          '952': per_thousand_males
+          '40': per_thousand_males
+      - prompt: What was Kerala's literacy rate in Census 2011, approximately?
+        options:
+        - 94%
+        - 74%
+        - 50%
+        - 65%
+        answer: 94%
+        difficulty: 1
+        hints:
+        - India's rate was about 74%.
+        - Kerala's was much higher.
+        solution: 'Step 1: India: about 74%. Step 2: Kerala is a leader in literacy. Step 3: About 94%.'
+        mistakes:
+          74%: per_thousand_males
+      - prompt: Which age group is counted as the elderly?
+        options:
+        - 65 and above
+        - 15–64
+        - 0–14
+        - Only above 90
+        answer: 65 and above
+        difficulty: 1
+        hints:
+        - There are three age groups.
+        - The elderly come after working age ends.
+        solution: 'Step 1: 0–14 children. Step 2: 15–64 working age. Step 3: 65+ elderly.'
+        mistakes:
+          15–64: dependents_only
+      - prompt: A town has 400 children, 200 elderly and 1,200 people aged 15–64. How many dependents are there?
+        answer: '600'
+        check: 400+200
+        difficulty: 2
+        hints:
+        - Dependents are children and the elderly.
+        - Add those two groups.
+        solution: 'Step 1: Children = 400. Step 2: Elderly = 200. Step 3: Dependents = 600.'
+        mistakes:
+          '1200': dependents_only
+          '1800': dependents_only
+      - prompt: A place has 5,000 females and 5,000 males. What is its sex ratio?
+        answer: '1000'
+        check: 5000/5000*1000
+        difficulty: 2
+        hints:
+        - Equal numbers of females and males.
+        - Females per 1000 males.
+        solution: 'Step 1: 5,000 ÷ 5,000 = 1. Step 2: × 1000. Step 3: = 1000.'
+        mistakes:
+          '1': scale_up
+      - prompt: 'Kerala''s high literacy and long life expectancy are linked mainly to:'
+        options:
+        - Good schools and public health care
+        - Low rainfall
+        - Fewer roads
+        - Mountains
+        answer: Good schools and public health care
+        difficulty: 2
+        hints:
+        - Think of what helps people read and live long.
+        - These are services, not geography.
+        solution: 'Step 1: Literacy comes from schooling. Step 2: Long life comes from health care. Step 3: Kerala invested in both.'
+        mistakes:
+          Low rainfall: transition_stage
+      - prompt: 'In Census 2011, India''s overall sex ratio was:'
+        options:
+        - '943'
+        - '1084'
+        - '919'
+        - '1000'
+        answer: '943'
+        difficulty: 1
+        hints:
+        - It is below 1000, so there were fewer females than males.
+        - It is higher than the child sex ratio.
+        solution: India's sex ratio in 2011 was 943 females per 1000 males (Kerala 1084, child sex ratio 919).
+        mistakes:
+          '919': ss5d_which_count
+          '1084': ss5d_which_count
   - code: ss9.demography.growth
     title: Population growth and the demographic dividend
     after: [ss9.demography.composition]
@@ -283,6 +541,41 @@ concepts:
         - when:
             v: 21
           say: 'That adds them. When both rates are low, growth is slow: 12 − 9.'
+    lesson:
+      - teach: Population changes through births, deaths and migration. Birth and death rates are given per 1000 people a year. Natural growth rate = birth rate − death rate. If birth rate is 22 and death rate 8, natural growth is 14 per 1000.
+        check:
+          prompt: Birth rate 25, death rate 10 per 1000. What is the natural growth rate?
+          options:
+          - 15 per 1000
+          - 35 per 1000
+          - 2.5 per 1000
+          answer: 15 per 1000
+          why: 25 − 10 = 15.
+      - teach: 'Countries pass through a demographic transition. First, birth and death rates are both high: slow growth. Then medicine lowers death rates while birth rates stay high: fast growth. Finally birth rates fall too: slow growth again. Kerala reached the last stage early.'
+        picture:
+          kind: flow
+          steps:
+          - 'High births, high deaths: slow growth'
+          - 'Deaths fall, births high: fast growth'
+          - 'Births fall too: slow growth'
+          alt: The three stages of the demographic transition.
+        check:
+          prompt: In which stage does population grow fastest?
+          options:
+          - When deaths fall but births stay high
+          - When both are high
+          - When both are low
+          answer: When deaths fall but births stay high
+          why: Many more births than deaths.
+      - teach: 'India has a huge working-age population. This demographic dividend can speed up growth if young people get education, health and jobs. Migration also shapes population: from villages to cities, and from Kerala to the Gulf.'
+        check:
+          prompt: What turns a demographic dividend into real growth?
+          options:
+          - Education, health and jobs for young people
+          - Fewer schools
+          - Stopping migration completely
+          answer: Education, health and jobs for young people
+          why: Only skilled, healthy, employed young people boost the economy.
     items:
       - prompt: "Birth rate is 20 per 1000 and death rate is 7 per 1000. What is the natural growth rate, per 1000?"
         answer: "13"
@@ -340,3 +633,86 @@ concepts:
         hints: ["The dividend comes from many people being of working age.", "What turns young people into a productive workforce?"]
         solution: "Step 1: Many working-age people can boost growth. Step 2: Only if they are healthy, skilled and employed; otherwise the chance is lost."
         mistakes: {"Close schools to save money": use_the_young, "Discourage young people from working": use_the_young, "Spend less on health": use_the_young}
+      - prompt: Birth rate is 16 per 1000 and death rate 6 per 1000. What is the natural growth rate, per 1000?
+        answer: '10'
+        check: 16-6
+        difficulty: 1
+        hints:
+        - Natural growth = births − deaths.
+        - 16 − 6.
+        solution: 'Step 1: Birth rate 16. Step 2: Death rate 6. Step 3: Natural growth = 10 per 1000.'
+        mistakes:
+          '22': natural_minus
+      - prompt: A natural growth rate of 15 per 1000 is what percentage per year?
+        answer: '1.5'
+        check: 15/10
+        difficulty: 2
+        hints:
+        - Per 1000 to per 100.
+        - Divide by 10.
+        solution: 'Step 1: Percent means per 100. Step 2: 15 per 1000 = 1.5 per 100. Step 3: 1.5%.'
+        mistakes:
+          '150': per_1000_to_percent
+          '15': per_1000_to_percent
+      - prompt: 'Moving from a village to a city to find work is an example of:'
+        options:
+        - Rural-to-urban migration
+        - Birth rate
+        - Sex ratio
+        - Census
+        answer: Rural-to-urban migration
+        difficulty: 1
+        hints:
+        - People are moving from one place to another.
+        - From countryside to town.
+        solution: 'Step 1: People move to live elsewhere: migration. Step 2: From village (rural) to city (urban). Step 3: Rural-to-urban migration.'
+        mistakes:
+          Birth rate: natural_minus
+      - prompt: Why do death rates fall before birth rates in the demographic transition?
+        options:
+        - Medicine and clean water reduce deaths quickly, but family size changes slowly
+        - Births stop suddenly
+        - People stop migrating
+        - The census changes
+        answer: Medicine and clean water reduce deaths quickly, but family size changes slowly
+        difficulty: 3
+        hints:
+        - What lowers deaths?
+        - Do habits about family size change overnight?
+        solution: 'Step 1: Vaccines and clean water quickly cut deaths. Step 2: Choices about family size change over a generation. Step 3: So deaths fall first.'
+        mistakes:
+          Births stop suddenly: transition_stage
+      - prompt: A town of 50,000 people has a birth rate of 20 and a death rate of 8 per 1000. About how many people does it grow by naturally in a year?
+        answer: '600'
+        check: 50000*(20-8)/1000
+        difficulty: 3
+        hints:
+        - Find the natural growth rate per 1000.
+        - Then scale it to 50,000 people.
+        solution: 'Step 1: 20 − 8 = 12 per 1000. Step 2: 50,000 ÷ 1000 = 50 thousands. Step 3: 12 × 50 = 600 people.'
+        mistakes:
+          '1400': natural_minus
+      - prompt: 'Money sent home by Keralites working in the Gulf is called:'
+        options:
+        - Remittances
+        - Taxes
+        - Census
+        - Dividends
+        answer: Remittances
+        difficulty: 2
+        hints:
+        - It is money that migrants send back.
+        - It has helped Kerala's economy.
+        solution: 'Step 1: Migrants earn abroad. Step 2: They send money to families at home. Step 3: This money is called remittances.'
+        mistakes:
+          Dividends: transition_stage
+      - prompt: Birth rate is 24 per 1000 and death rate is 9 per 1000. What is the natural growth rate, per 1000?
+        answer: '15'
+        check: 24-9
+        difficulty: 1
+        hints:
+        - Natural growth uses only births and deaths.
+        - Take deaths away from births.
+        solution: Natural growth rate = 24 − 9 = 15 per 1000.
+        mistakes:
+          '33': growth_formula
