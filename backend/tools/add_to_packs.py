@@ -68,7 +68,7 @@ def merge(text: str, extra: dict) -> str:
 
 
 def main(paths: list[str]) -> int:
-    known = cp.known_tags()
+    known = cp.known_tags() | {t for _, p in cp.read_packs() for t in (p.get("tips") or {})}
     failed = 0
     for p in paths:
         extra = yaml.safe_load(Path(p).read_text())
