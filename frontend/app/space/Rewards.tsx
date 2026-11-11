@@ -12,6 +12,12 @@ export type RewardsView =
       practice_days: number;
     };
 
+/** "8 Nov 2026", in the app's language. */
+export function earnedOn(date: string, lang: string): string {
+  const locale = lang === "ml" ? "ml-IN" : lang === "hi" ? "hi-IN" : "en-IN";
+  return new Date(date).toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" });
+}
+
 export const ACH_KEYS: Record<string, Key> = {
   first_secure: "ach.first_secure",
   chapter_done: "ach.chapter_done",
@@ -22,7 +28,15 @@ export const ACH_KEYS: Record<string, Key> = {
 };
 
 /** Stickers from spotting mistakes, achievements, and practice days. Mine alone, never compared. */
-export default function Rewards({ view, t }: { view: RewardsView | null; t: (key: Key, vars?: Record<string, string | number>) => string }) {
+export default function Rewards({
+  view,
+  t,
+  lang,
+}: {
+  view: RewardsView | null;
+  t: (key: Key, vars?: Record<string, string | number>) => string;
+  lang: string;
+}) {
   if (!view || !view.on) return null;
   const { stickers, achievements, practice_days } = view;
   return (
@@ -59,7 +73,7 @@ export default function Rewards({ view, t }: { view: RewardsView | null; t: (key
           {achievements.map((a) => (
             <li key={a.id}>
               <span aria-hidden="true">🏅</span> {t(ACH_KEYS[a.id] ?? "ach.title")}{" "}
-              <span className="muted">· {new Date(a.earned_on).toLocaleDateString()}</span>
+              <span className="muted">· {earnedOn(a.earned_on, lang)}</span>
             </li>
           ))}
         </ul>

@@ -5,14 +5,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { useSession } from "@/lib/session";
-import { ACH_KEYS, type RewardsView } from "../Rewards";
+import { ACH_KEYS, earnedOn, type RewardsView } from "../Rewards";
 
 /**
  * An achievement card the learner can print and show, if they want to. They choose what goes on it.
  * No marks, no levels, nothing that compares them with anyone.
  */
 export default function AchievementCard() {
-  const { me, loading, t } = useSession();
+  const { me, loading, t, lang } = useSession();
   const router = useRouter();
   const [view, setView] = useState<RewardsView | null>(null);
   const [chosen, setChosen] = useState<Set<string>>(new Set());
@@ -74,7 +74,7 @@ export default function AchievementCard() {
           {shown.map((a) => (
             <li key={a.id}>
               <span aria-hidden="true">🏅</span> {t(ACH_KEYS[a.id] ?? "ach.title")}
-              <span className="muted"> · {new Date(a.earned_on).toLocaleDateString()}</span>
+              <span className="muted"> · {earnedOn(a.earned_on, lang)}</span>
             </li>
           ))}
         </ul>

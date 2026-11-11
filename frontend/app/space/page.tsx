@@ -28,7 +28,7 @@ type Goal = { id: number; text: string; due_on: string | null; done: boolean };
 
 /** The student's own space: progress in words, revision due, goals and notes. */
 export default function MySpace() {
-  const { me, loading, t } = useSession();
+  const { me, loading, t, lang } = useSession();
   const router = useRouter();
   const [overview, setOverview] = useState<Overview | null>(null);
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -165,7 +165,7 @@ export default function MySpace() {
         {rewards?.on && !!overview?.stars && <p>{overview.stars === 1 ? t("stars.count_one") : t("stars.count", { n: overview.stars })}</p>}
       </section>
 
-      <Rewards view={rewards} t={t} />
+      <Rewards view={rewards} t={t} lang={lang} />
 
       <section className="card" aria-labelledby="goals">
         <h2 id="goals">{t("space.goals")}</h2>
