@@ -85,6 +85,41 @@ concepts:
         - when:
             v: 8
           say: 8 cm is two thirds of the line. Quarters are smaller pieces than thirds.
+    lesson:
+      - teach: 'Look at the ruled lines in your notebook. They are parallel (they never meet) and equally spaced. Draw any slanted line across them: the ruled lines cut it into pieces that are all the same length.'
+        check:
+          prompt: Equally spaced parallel lines cut a slanted line. One piece is 2 cm. How long is the next piece?
+          options:
+          - 2 cm
+          - 4 cm
+          - It can be any length
+          answer: 2 cm
+          why: Equally spaced parallel lines cut any crossing line into equal pieces, so every piece is 2 cm.
+      - teach: A line that slants more crosses at a longer path, so its pieces are longer, but they are still equal to each other. One line might be cut into 2 cm pieces and another into 3 cm pieces by the same ruled lines.
+        check:
+          prompt: The same ruled lines cut line A into 2 cm pieces. Line B slants more. What can you say about B's pieces?
+          options:
+          - They are equal to each other, and longer than 2 cm
+          - They are all 2 cm
+          - They get longer and longer
+          answer: They are equal to each other, and longer than 2 cm
+          why: Each crossing line is cut into equal pieces; a more slanted line has longer ones.
+      - teach: Count gaps, not lines. With 4 parallel lines there are 3 gaps between them, so a slanted line across all 4 is cut into 3 pieces. With n lines there are n − 1 pieces.
+        picture:
+          kind: flow
+          steps:
+          - 4 parallel lines
+          - 3 gaps between them
+          - 3 equal pieces on the slanted line
+          alt: Four parallel lines have three gaps, so a crossing line is cut into three equal pieces.
+        check:
+          prompt: A slanted line crosses 5 equally spaced parallel lines. Into how many pieces is it cut between the first and the last?
+          options:
+          - '4'
+          - '5'
+          - '6'
+          answer: '4'
+          why: 5 lines have 4 gaps between them, so there are 4 pieces.
     items:
       - prompt: "Four equally spaced parallel lines cross a slanted line. The part between the first two lines is 3 cm. How long is the slanted line from the first line to the fourth, in cm?"
         answer: "9"
@@ -149,6 +184,69 @@ concepts:
         hints: ["7 equal parts need 8 ruled lines, but you only need the number of parts here.", "Share 21 cm into 7 equal parts."]
         solution: "Step 1: The strip is cut into 7 equal parts. Step 2: 21 ÷ 7 = 3 cm each."
         mistakes: {"2.625": counted_lines_not_gaps, "3.5": counted_lines_not_gaps}
+      - prompt: A slanted line crosses 3 equally spaced parallel lines. Each piece between neighbouring lines is 5 cm. How long is it from the first line to the last, in cm?
+        answer: '10'
+        check: (3 - 1)*5
+        difficulty: 1
+        hints:
+        - How many gaps are there between 3 lines?
+        - There are 2 gaps, each 5 cm.
+        solution: 'Step 1: 3 lines have 2 gaps. Step 2: Each gap gives a 5 cm piece. Step 3: 2 × 5 = 10 cm.'
+        mistakes:
+          '15': counted_lines_not_gaps
+      - prompt: A slanted line crosses 5 equally spaced parallel lines. From the first to the last it is 12 cm. How long is each piece, in cm?
+        answer: '3'
+        check: 12/(5 - 1)
+        difficulty: 1
+        hints:
+        - Count the gaps between 5 lines.
+        - 12 cm is shared among 4 gaps.
+        solution: 'Step 1: 5 lines have 4 gaps. Step 2: 12 ÷ 4 = 3. Step 3: So each piece is 3 cm.'
+        mistakes:
+          '2.4': counted_lines_not_gaps
+      - prompt: Equally spaced parallel lines cut line A into 2 cm pieces and line B into 4 cm pieces. On line A, 5 pieces make 10 cm. How long are the same 5 pieces on line B, in cm?
+        answer: '20'
+        check: 5*4
+        difficulty: 2
+        hints:
+        - The same gaps give 5 pieces on line B too.
+        - Each piece on B is 4 cm.
+        solution: 'Step 1: The same 5 gaps cut B into 5 pieces. Step 2: Each is 4 cm. Step 3: 5 × 4 = 20 cm.'
+        mistakes:
+          '10': equal_on_each_line
+      - prompt: Which of these can divide a strip of paper into 5 equal parts?
+        options:
+        - Laying it slanting across a notebook so it spans exactly 5 gaps between ruled lines
+        - Laying it across 5 ruled lines
+        - Folding it in half twice
+        answer: Laying it slanting across a notebook so it spans exactly 5 gaps between ruled lines
+        difficulty: 2
+        hints:
+        - Equal gaps between ruled lines give equal pieces.
+        - How many gaps make 5 parts?
+        solution: 'Step 1: Equally spaced lines cut the strip into equal pieces. Step 2: 5 gaps give 5 pieces. Step 3: 5 lines would give only 4 gaps, and folding twice gives 4 parts.'
+        mistakes:
+          Laying it across 5 ruled lines: counted_lines_not_gaps
+      - prompt: A slanted line crosses 10 equally spaced parallel lines and is 27 cm from the first to the last. How long is it from the 1st line to the 4th, in cm?
+        answer: '9'
+        check: 27/9*3
+        difficulty: 3
+        hints:
+        - 'First find one piece: how many gaps between 10 lines?'
+        - Each piece is 27 ÷ 9 cm. From the 1st line to the 4th is 3 pieces.
+        solution: 'Step 1: 10 lines have 9 gaps, so each piece is 27 ÷ 9 = 3 cm. Step 2: From line 1 to line 4 is 3 gaps. Step 3: 3 × 3 = 9 cm.'
+        mistakes:
+          '12': counted_lines_not_gaps
+      - prompt: Equally spaced parallel lines cut a slanted line into 1.2 cm pieces. How many gaps does a 6 cm stretch of that line cross?
+        answer: '5'
+        check: 6/1.2
+        difficulty: 3
+        hints:
+        - Each gap gives one 1.2 cm piece.
+        - How many 1.2 cm pieces make 6 cm?
+        solution: 'Step 1: Each gap makes a 1.2 cm piece. Step 2: 6 ÷ 1.2 = 5. Step 3: So the stretch crosses 5 gaps, between 6 lines.'
+        mistakes:
+          '6': counted_lines_not_gaps
 
   - code: math9.parallel.ratio
     title: Parallel lines and ratios
@@ -197,6 +295,48 @@ concepts:
             p: 4
             q: 6
           say: 'The parts are swapped: the first part is 4 cm and the second 6 cm. In a : b, a goes with the first part.'
+    lesson:
+      - teach: Parallel lines need not be equally spaced. Take three parallel lines, with a wide gap and a narrow gap. Any line crossing them is cut into a long piece and a short piece.
+        check:
+          prompt: Three parallel lines have a wide gap then a narrow gap. A line crosses them. Which piece is longer?
+          options:
+          - The piece across the wide gap
+          - The piece across the narrow gap
+          - They are equal
+          answer: The piece across the wide gap
+          why: The wider the gap between the parallel lines, the longer the piece of the crossing line.
+      - teach: 'The rule: parallel lines cut every crossing line in the same ratio. If they cut one line into 2 cm and 3 cm (ratio 2 : 3), they cut any other crossing line in the ratio 2 : 3 too, such as 4 cm and 6 cm.'
+        picture:
+          kind: compare
+          columns:
+          - title: Line l
+            points:
+            - 2 cm
+            - 3 cm
+            - 'ratio 2 : 3'
+          - title: Line m
+            points:
+            - 4 cm
+            - 6 cm
+            - 'ratio 2 : 3'
+          alt: 'The same three parallel lines cut line l into 2 cm and 3 cm, and line m into 4 cm and 6 cm: the same ratio 2 : 3.'
+        check:
+          prompt: Parallel lines cut one line into 1 cm and 2 cm. Another line is cut into 3 cm and x cm. What is x?
+          options:
+          - '6'
+          - '4'
+          - '3'
+          answer: '6'
+          why: '1 : 2 = 3 : x. The first part grew 3 times, so the second does too: 2 × 3 = 6.'
+      - teach: 'To find a missing length, write the two ratios equal and see what the first part was multiplied by. 2 : 3 = 4 : x. 2 became 4 (times 2), so 3 becomes 6. A common slip is adding instead: 2 + 2 = 4, so 3 + 2 = 5 is wrong.'
+        check:
+          prompt: '3 : 5 = 6 : x. What is x?'
+          options:
+          - '10'
+          - '8'
+          - '15'
+          answer: '10'
+          why: '3 was doubled to make 6, so 5 is doubled too: x = 10. Adding 3 to each would give 8, which keeps the difference, not the ratio.'
     items:
       - prompt: "Three parallel lines cut one line into parts of 2 cm and 3 cm, and another line into parts of 4 cm and x cm. What is x?"
         answer: "6"
@@ -268,6 +408,70 @@ concepts:
         hints: ["The parts on m are in the ratio 3 : 5, like 3k and 5k.", "5k − 3k = 2."]
         solution: "Step 1: Parts on m are 3k and 5k. Step 2: 5k − 3k = 2k = 2, so k = 1. Step 3: The first part is 3 cm (and the second 5 cm)."
         mistakes: {"5": swapped_parts, "1": shares_not_added}
+      - prompt: Parallel lines cut one line into 2 cm and 5 cm. They cut another line into 6 cm and x cm. What is x?
+        answer: '15'
+        check: 5*6/2
+        difficulty: 1
+        hints:
+        - The ratio on both lines is the same.
+        - 2 became 6, which is times 3.
+        solution: 'Step 1: 2 : 5 = 6 : x. Step 2: 6 is 3 times 2. Step 3: So x = 3 × 5 = 15.'
+        mistakes:
+          '9': added_not_ratio
+      - prompt: Three parallel lines cut a line into 3 cm and 9 cm. In what ratio do they cut another line?
+        options:
+        - '1 : 3'
+        - '3 : 1'
+        - '1 : 9'
+        - '3 : 9 is not a ratio'
+        answer: '1 : 3'
+        difficulty: 1
+        hints:
+        - Every crossing line is cut in the same ratio.
+        - '3 : 9 can be simplified by dividing both by 3.'
+        solution: 'Step 1: The ratio is 3 : 9. Step 2: Divide both by 3: 1 : 3. Step 3: Any other crossing line is cut in the ratio 1 : 3.'
+        mistakes:
+          '3 : 1': ratio_order
+      - prompt: Three parallel lines cut line l into 4 cm and 10 cm. They cut line m into x cm and 15 cm. What is x?
+        answer: '6'
+        check: 4*15/10
+        difficulty: 2
+        hints:
+        - '4 : 10 = x : 15.'
+        - '10 became 15: what was it multiplied by?'
+        solution: 'Step 1: 10 × 1.5 = 15. Step 2: So x = 4 × 1.5. Step 3: x = 6 cm.'
+        mistakes:
+          '9': added_not_ratio
+      - prompt: 'Three parallel lines cross a line, and the length between the outer two is 20 cm. The middle line cuts it in the ratio 3 : 2. How long is the longer part, in cm?'
+        answer: '12'
+        check: 20*3/5
+        difficulty: 2
+        hints:
+        - '3 : 2 means 5 equal shares in all.'
+        - Each share is 20 ÷ 5 cm.
+        solution: 'Step 1: 3 + 2 = 5 shares. Step 2: Each share is 4 cm. Step 3: The longer part is 3 × 4 = 12 cm.'
+        mistakes:
+          '8': swapped_parts
+      - prompt: Four parallel lines cut line l into 1 cm, 2 cm and 3 cm. They cut line m into pieces whose total is 18 cm. How long is the longest piece on m, in cm?
+        answer: '9'
+        check: 18*3/6
+        difficulty: 3
+        hints:
+        - 'The pieces on m are in the ratio 1 : 2 : 3 too.'
+        - 1 + 2 + 3 = 6 shares make 18 cm.
+        solution: 'Step 1: 6 shares make 18 cm, so one share is 3 cm. Step 2: The pieces on m are 3, 6 and 9 cm. Step 3: The longest is 9 cm.'
+        mistakes:
+          '3': swapped_parts
+      - prompt: Three parallel lines cut line l into 5 cm and 7 cm. On line m the first part is 4 cm shorter than the second. How long is the second part on m, in cm?
+        answer: '14'
+        check: 7*4/2
+        difficulty: 3
+        hints:
+        - On l the difference between the parts is 2 cm.
+        - On m the difference is 4 cm, so m is l times 2.
+        solution: 'Step 1: On l, 7 − 5 = 2. Step 2: On m the difference is 4, twice as much, so every part is doubled. Step 3: The second part on m is 7 × 2 = 14 cm.'
+        mistakes:
+          '11': added_not_ratio
 
   - code: math9.parallel.triangle
     title: A line parallel to a side of a triangle
@@ -330,6 +534,41 @@ concepts:
             - 2.6
             - 2.7
           say: 'QC came out about 2.67 cm, shorter than AQ. AP and PB may be the wrong way round: QC is longer than AQ, so PB must be longer than AP.'
+    lesson:
+      - teach: In triangle ABC, draw a line parallel to BC. It meets AB at P and AC at Q. Now imagine one more line through A, parallel to BC too. Then we have three parallel lines (through A, through P and Q, and BC) crossing the two sides AB and AC.
+        picture:
+          kind: flow
+          steps:
+          - Line through A, parallel to BC
+          - Line PQ, parallel to BC
+          - Side BC
+          alt: 'Three parallel lines: one through A, PQ, and BC. Sides AB and AC both cross all three.'
+        check:
+          prompt: In triangle ABC, PQ is parallel to BC. Which lines do the sides AB and AC both cross?
+          options:
+          - The line through A, PQ and BC
+          - Only BC
+          - Only PQ
+          answer: The line through A, PQ and BC
+          why: Thinking of a parallel line through A gives three parallel lines that both sides cross.
+      - teach: 'Three parallel lines cut both crossing lines in the same ratio. So AP : PB = AQ : QC. If AP = 3 and PB = 6, then AQ : QC is also 1 : 2.'
+        check:
+          prompt: PQ is parallel to BC, AP = 2 cm, PB = 4 cm and AQ = 3 cm. What is QC?
+          options:
+          - 6 cm
+          - 5 cm
+          - 1.5 cm
+          answer: 6 cm
+          why: 'AP : PB = 2 : 4 = 1 : 2, so QC is twice AQ: 6 cm.'
+      - teach: 'It also works with whole sides: AP : AB = AQ : AC. If AP is 2 of AB''s 5 equal shares, then AQ is 2 of AC''s 5 shares. Watch whether a question gives you PB (the rest of the side) or AB (the whole side).'
+        check:
+          prompt: PQ is parallel to BC, AP = 3 cm and AB = 9 cm. What fraction of AC is AQ?
+          options:
+          - 1/3
+          - 1/2
+          - 3/9 of AB
+          answer: 1/3
+          why: 'AP : AB = 3 : 9 = 1 : 3, so AQ is 1/3 of AC.'
     items:
       - prompt: "In triangle ABC, a line parallel to BC cuts AB at P and AC at Q. AP = 3 cm, PB = 6 cm and AQ = 4 cm. What is QC, in cm?"
         answer: "8"
@@ -401,6 +640,66 @@ concepts:
         hints: ["First find AQ from AP : PB = AQ : QC.", "AQ = 12 × 6/9 = 8. Then AC = AQ + QC."]
         solution: "Step 1: AQ : 12 = 6 : 9, so AQ = 8 cm. Step 2: AC = 8 + 12 = 20 cm."
         mistakes: {"8": added_not_ratio, "18": swapped_parts}
+      - prompt: In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AP = 4 cm, PB = 2 cm and AQ = 6 cm. What is QC, in cm?
+        answer: '3'
+        check: 6*2/4
+        difficulty: 1
+        hints:
+        - 'AP : PB = AQ : QC.'
+        - AP is twice PB, so AQ is twice QC.
+        solution: 'Step 1: AP : PB = 4 : 2 = 2 : 1. Step 2: So AQ : QC = 2 : 1. Step 3: QC = 6 ÷ 2 = 3 cm.'
+        mistakes:
+          '12': ratio_order
+      - prompt: In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AP = 1 cm, PB = 3 cm and QC = 6 cm. What is AQ, in cm?
+        answer: '2'
+        check: 6*1/3
+        difficulty: 1
+        hints:
+        - 'AP : PB = AQ : QC.'
+        - PB is 3 times AP.
+        solution: 'Step 1: AP : PB = 1 : 3. Step 2: So QC is 3 times AQ. Step 3: AQ = 6 ÷ 3 = 2 cm.'
+        mistakes:
+          '18': ratio_order
+      - prompt: In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AB = 12 cm, AP = 3 cm and AC = 8 cm. What is AQ, in cm?
+        answer: '2'
+        check: 8*3/12
+        difficulty: 2
+        hints:
+        - 'Here you have whole sides: use AP : AB = AQ : AC.'
+        - AP is a quarter of AB.
+        solution: 'Step 1: AP : AB = 3 : 12 = 1 : 4. Step 2: So AQ is a quarter of AC. Step 3: AQ = 8 ÷ 4 = 2 cm.'
+        mistakes:
+          '6': short_ratio_side
+      - prompt: In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AP = 6 cm, PB = 4 cm and AC = 15 cm. What is QC, in cm?
+        answer: '6'
+        check: 15*4/10
+        difficulty: 2
+        hints:
+        - AB = AP + PB = 10 cm.
+        - 'QC is PB''s share of the side: 4 out of 10.'
+        solution: 'Step 1: AB = 6 + 4 = 10 cm. Step 2: PB : AB = 4 : 10, so QC is 4/10 of AC. Step 3: QC = 15 × 4/10 = 6 cm.'
+        mistakes:
+          '9': swapped_parts
+      - prompt: In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AQ = 5 cm, QC = 5 cm and AB = 9 cm. What is AP, in cm? Decimals are fine.
+        answer: '4.5'
+        check: 9/2
+        difficulty: 3
+        hints:
+        - AQ and QC are equal. What does that say about Q?
+        - Then P is in the same place on AB.
+        solution: 'Step 1: AQ = QC, so Q is the middle of AC. Step 2: So P is the middle of AB too. Step 3: AP = 9 ÷ 2 = 4.5 cm.'
+        mistakes:
+          '5': equal_lengths_not_ratio
+      - prompt: 'In triangle ABC, PQ is parallel to BC, with P on AB and Q on AC. AP : PB = 1 : 4 and AC = 25 cm. How long is AQ, in cm?'
+        answer: '5'
+        check: 25*1/5
+        difficulty: 3
+        hints:
+        - '1 : 4 means AC is made of 5 equal shares.'
+        - AQ is 1 share.
+        solution: 'Step 1: 1 + 4 = 5 shares. Step 2: One share of 25 cm is 5 cm. Step 3: AQ = 5 cm and QC = 20 cm.'
+        mistakes:
+          '20': swapped_parts
 
   - code: math9.parallel.divide_segment
     title: Dividing a line in a given ratio
@@ -430,6 +729,42 @@ concepts:
         Join the 5th mark to B: There is no 5th mark until the 5 steps are marked.
         Draw a parallel line through the 2nd mark: Parallel to what? The line from the 5th mark to B has to be drawn first.
         Where it meets AB is the point you want: The point only appears where the parallel line crosses AB.
+    lesson:
+      - teach: 'Dividing a line in the ratio 2 : 3 means cutting it into 2 + 3 = 5 equal shares, then giving 2 shares to the first part and 3 to the second. A 10 cm line has shares of 2 cm, so the parts are 4 cm and 6 cm.'
+        picture:
+          kind: flow
+          steps:
+          - 'Ratio 2 : 3'
+          - 2 + 3 = 5 shares
+          - 10 cm ÷ 5 = 2 cm per share
+          - 'Parts: 4 cm and 6 cm'
+          alt: 'A 10 cm line in the ratio 2 : 3: five shares of 2 cm, giving parts of 4 cm and 6 cm.'
+        check:
+          prompt: 'A 12 cm line is divided in the ratio 1 : 2. How many equal shares is it cut into?'
+          options:
+          - '3'
+          - '2'
+          - '12'
+          answer: '3'
+          why: 1 + 2 = 3 shares, each 4 cm, so the parts are 4 cm and 8 cm.
+      - teach: 'With ruler and compass we can do it without measuring. From A draw a slanted line and mark 5 equal steps on it. Join the 5th mark to B. Then draw a line through the 2nd mark parallel to that join. Where it meets AB divides it in the ratio 2 : 3.'
+        check:
+          prompt: 'To divide AB in the ratio 3 : 1, how many equal steps do you mark on the slanted line?'
+          options:
+          - '4'
+          - '3'
+          - '1'
+          answer: '4'
+          why: 3 + 1 = 4 steps. The parallel goes through the 3rd mark.
+      - teach: 'Why does it work? The parallel lines through the marks cut the slanted line into equal steps, so they cut AB in the same ratio: 2 steps to 3 steps.'
+        check:
+          prompt: 'Why is AB cut in the ratio 2 : 3 by this construction?'
+          options:
+          - Parallel lines cut every crossing line in the same ratio
+          - Because we measured AB
+          - Because the slanted line is 5 cm
+          answer: Parallel lines cut every crossing line in the same ratio
+          why: 'The slanted line is cut 2 : 3 by the parallel lines, so AB is cut 2 : 3 as well.'
     items:
       - prompt: "A line 10 cm long is divided in the ratio 2 : 3. How long is the shorter part, in cm?"
         answer: "4"
@@ -502,3 +837,68 @@ concepts:
         hints: ["2 + 3 + 4 = 9 shares.", "Each share is 36 ÷ 9 = 4 cm."]
         solution: "Step 1: 9 shares, each 4 cm. Step 2: Middle piece = 3 × 4 = 12 cm."
         mistakes: {"16": swapped_parts, "8": swapped_parts}
+      - prompt: 'A line 18 cm long is divided in the ratio 1 : 2. How long is the shorter part, in cm?'
+        answer: '6'
+        check: 18*1/3
+        difficulty: 1
+        hints:
+        - '1 : 2 means 3 equal shares.'
+        - Each share is 18 ÷ 3 cm.
+        solution: 'Step 1: 1 + 2 = 3 shares. Step 2: Each share is 6 cm. Step 3: The shorter part is 1 share, 6 cm.'
+        mistakes:
+          '12': swapped_parts
+          '9': shares_not_added
+      - prompt: 'A line 14 cm long is divided in the ratio 3 : 4. How long is the longer part, in cm?'
+        answer: '8'
+        check: 14*4/7
+        difficulty: 1
+        hints:
+        - How many shares are there in all?
+        - 3 + 4 = 7 shares, each 2 cm.
+        solution: 'Step 1: 7 shares in all. Step 2: Each share is 14 ÷ 7 = 2 cm. Step 3: The longer part is 4 × 2 = 8 cm.'
+        mistakes:
+          '6': swapped_parts
+      - prompt: 'To divide AB in the ratio 4 : 3, you mark 7 equal steps from A and join the 7th mark to B. Through which mark do you draw the parallel?'
+        options:
+        - The 4th
+        - The 3rd
+        - The 7th
+        - The 1st
+        answer: The 4th
+        difficulty: 2
+        hints:
+        - The first part from A gets the first number of the ratio.
+        - How many steps belong to the part next to A?
+        solution: 'Step 1: The part next to A gets 4 of the 7 shares. Step 2: So the parallel goes through the 4th mark. Step 3: It cuts AB into 4 : 3 from A.'
+        mistakes:
+          The 3rd: ratio_order
+      - prompt: 'A 2.4 m plank is cut in the ratio 1 : 5. How long is the shorter piece, in metres? Decimals are fine.'
+        answer: '0.4'
+        check: 2.4/6
+        difficulty: 2
+        hints:
+        - 1 + 5 = 6 shares.
+        - Each share is 2.4 ÷ 6 m.
+        solution: 'Step 1: 6 equal shares. Step 2: 2.4 ÷ 6 = 0.4 m per share. Step 3: The shorter piece is 1 share, 0.4 m.'
+        mistakes:
+          '2': swapped_parts
+      - prompt: 'A point divides a line in the ratio 2 : 7, and the shorter part is 6 cm. How long is the whole line, in cm?'
+        answer: '27'
+        check: 6/2*9
+        difficulty: 3
+        hints:
+        - The shorter part is 2 shares.
+        - One share is 3 cm, and there are 9 shares.
+        solution: 'Step 1: 2 shares = 6 cm, so 1 share = 3 cm. Step 2: The whole line is 2 + 7 = 9 shares. Step 3: 9 × 3 = 27 cm.'
+        mistakes:
+          '21': short_ratio_side
+      - prompt: 'A 45 cm rod is cut into three pieces in the ratio 1 : 3 : 5. How long is the longest piece, in cm?'
+        answer: '25'
+        check: 45*5/9
+        difficulty: 3
+        hints:
+        - Add all three numbers to find the shares.
+        - 1 + 3 + 5 = 9 shares of 5 cm.
+        solution: 'Step 1: 9 shares in all. Step 2: 45 ÷ 9 = 5 cm per share. Step 3: The longest piece is 5 × 5 = 25 cm.'
+        mistakes:
+          '5': swapped_parts
