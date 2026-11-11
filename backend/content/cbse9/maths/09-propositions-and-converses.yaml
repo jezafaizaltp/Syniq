@@ -84,6 +84,46 @@ concepts:
       bin: True, and so is the converse
       clue: Is this Pythagoras or its converse? Do both hold?
       why: This is the converse of Pythagoras, and it is true, as is Pythagoras itself.
+  lesson:
+    - teach: A proposition is a sentence that is either true or false. '7 is odd' is a proposition (true). '5 > 9' is a proposition (false). 'Close the door' and 'Is it raining?' are not, because they can't be true or false.
+      check:
+        prompt: Which is a proposition?
+        options:
+        - 12 is a multiple of 5
+        - Please sit down
+        - What time is it?
+        answer: 12 is a multiple of 5
+        why: 'It is a statement that can be judged: here it is false, but it is still a proposition.'
+    - teach: 'Many propositions have the form ''If P, then Q''. Swap the two parts and you get the converse: ''If Q, then P''. A true statement can have a false converse. ''If it is a square, then it has four sides'' is true; ''If it has four sides, then it is a square'' is false (a rectangle).'
+      picture:
+        kind: compare
+        columns:
+        - title: 'Statement: If P, then Q'
+          points:
+          - If a number is a multiple of 6, it is even
+          - 'True'
+        - title: 'Converse: If Q, then P'
+          points:
+          - If a number is even, it is a multiple of 6
+          - 'False: 4 is even'
+        alt: A true statement about multiples of 6 next to its converse, which is false because 4 is even but not a multiple of 6.
+      check:
+        prompt: What is the converse of 'If x = 3, then x² = 9'?
+        options:
+        - If x² = 9, then x = 3
+        - If x ≠ 3, then x² ≠ 9
+        - If x = 3, then x² ≠ 9
+        answer: If x² = 9, then x = 3
+        why: 'Swap the two parts. (It is false: x could be −3.)'
+    - teach: 'When a statement and its converse are both true, we join them with ''if and only if'': ''A triangle has two equal sides if and only if it has two equal angles''. Each part guarantees the other.'
+      check:
+        prompt: Which can be said with 'if and only if'?
+        options:
+        - A number is even ↔ it ends in 0, 2, 4, 6 or 8
+        - A shape is a square ↔ it has four sides
+        - x = 2 ↔ x² = 4
+        answer: A number is even ↔ it ends in 0, 2, 4, 6 or 8
+        why: Both directions are true. The others fail one way (rectangles; x = −2).
   items:
   - prompt: What is the converse of 'If a number ends in 0, then it is divisible by 5'?
     options:
@@ -165,6 +205,133 @@ concepts:
     - The converse of Pythagoras is also true.
     solution: 'Step 1: Swap ''right-angled'' and ''a² + b² = c²''. Step 2: This converse is true too: builders use 3, 4, 5 to make right angles.'
     mistakes: {"If a triangle is not right-angled, then a² + b² ≠ c²": "converse_swap", "Every triangle has a² + b² = c²": "converse_swap"}
+  - prompt: What is the converse of 'If a shape is a triangle, then it has three sides'?
+    options:
+    - If a shape has three sides, then it is a triangle
+    - If a shape is not a triangle, it does not have three sides
+    - A triangle has three sides
+    - If a shape has four sides, it is not a triangle
+    answer: If a shape has three sides, then it is a triangle
+    difficulty: 1
+    hints:
+    - Swap the 'if' part and the 'then' part.
+    - The converse starts 'If a shape has three sides…'.
+    solution: Swapping gives 'If a shape has three sides, then it is a triangle'. Here the converse is also true.
+    mistakes:
+      If a shape is not a triangle, it does not have three sides: converse_swap
+  - prompt: Which of these is NOT a proposition?
+    options:
+    - Solve this equation
+    - 2 + 2 = 5
+    - Delhi is in India
+    - Every square is a rectangle
+    answer: Solve this equation
+    difficulty: 1
+    hints:
+    - A proposition must be true or false.
+    - Can an instruction be true or false?
+    solution: '''Solve this equation'' is an instruction. It can''t be true or false. ''2 + 2 = 5'' is a false proposition.'
+    mistakes:
+      2 + 2 = 5: proposition_true_false
+  - prompt: '''If a number is divisible by 9, then it is divisible by 3.'' Is the converse true?'
+    options:
+    - 'No: 6 is divisible by 3 but not by 9'
+    - Yes, always
+    - Yes, for odd numbers only
+    - 'No: 9 is not divisible by 3'
+    answer: 'No: 6 is divisible by 3 but not by 9'
+    difficulty: 1
+    hints:
+    - 'The converse: if divisible by 3, then divisible by 9.'
+    - Try 6 or 12.
+    solution: 6 is divisible by 3 but not by 9, so the converse is false.
+    mistakes:
+      Yes, always: converse_assumed_true
+  - prompt: Is '3 + 4 = 8' a proposition?
+    options:
+    - Yes, a false one
+    - No, because it is false
+    - No, it is a sum
+    - Yes, a true one
+    answer: Yes, a false one
+    difficulty: 2
+    hints:
+    - A proposition doesn't have to be true.
+    - Can we say whether it is true or false?
+    solution: It is a statement that is clearly false, so it is a (false) proposition.
+    mistakes:
+      No, because it is false: proposition_true_false
+  - prompt: 'Statement: ''If a quadrilateral is a rectangle, its diagonals are equal.'' What is true?'
+    options:
+    - The statement is true, but its converse is false
+    - Both are true
+    - Both are false
+    - The statement is false, but its converse is true
+    answer: The statement is true, but its converse is false
+    difficulty: 2
+    hints:
+    - Do all rectangles have equal diagonals?
+    - Can a non-rectangle have equal diagonals? Think of an isosceles trapezium.
+    solution: Rectangles have equal diagonals. But an isosceles trapezium also has equal diagonals without being a rectangle, so the converse is false.
+    mistakes:
+      Both are true: converse_assumed_true
+  - prompt: Which statement has a true converse?
+    options:
+    - If a triangle is equilateral, its angles are all 60°
+    - If x = 5, then x² = 25
+    - If a number is a multiple of 10, it is even
+    - If it is a dog, it has four legs
+    answer: If a triangle is equilateral, its angles are all 60°
+    difficulty: 2
+    hints:
+    - Write each converse.
+    - Does 'all angles 60°' force all sides equal?
+    solution: A triangle with all angles 60° is equilateral, so that converse is true. x² = 25 allows x = −5; even numbers like 4 aren't multiples of 10; cats have four legs.
+    mistakes:
+      If x = 5, then x² = 25: converse_assumed_true
+      If it is a dog, it has four legs: converse_assumed_true
+  - prompt: '''A whole number is odd if and only if its square is odd.'' What does this claim?'
+    options:
+    - 'Both: odd number gives odd square, and odd square comes from an odd number'
+    - Only that odd numbers have odd squares
+    - Only that odd squares come from odd numbers
+    - That all squares are odd
+    answer: 'Both: odd number gives odd square, and odd square comes from an odd number'
+    difficulty: 2
+    hints:
+    - '''If and only if'' joins a statement and its converse.'
+    - Both directions.
+    solution: '''If and only if'' means both directions are claimed, and here both are true.'
+    mistakes:
+      Only that odd numbers have odd squares: iff_both_ways
+  - prompt: The converse of Pythagoras' theorem says a triangle with sides 5, 12, 13 is…
+    options:
+    - right-angled, because 25 + 144 = 169
+    - not right-angled
+    - equilateral
+    - isosceles
+    answer: right-angled, because 25 + 144 = 169
+    difficulty: 3
+    hints:
+    - 'The converse: if a² + b² = c², the triangle is right-angled.'
+    - Check 5² + 12².
+    solution: 5² + 12² = 169 = 13², so by the converse the triangle is right-angled.
+    mistakes:
+      not right-angled: converse_swap
+  - prompt: 'Ria says: ''All prime numbers are odd, because 3, 5, 7 and 11 are odd.'' What is right?'
+    options:
+    - 'False: 2 is prime and even'
+    - True, she checked four primes
+    - True, primes have no factors
+    - Can't be decided
+    answer: 'False: 2 is prime and even'
+    difficulty: 3
+    hints:
+    - Examples don't prove 'all'.
+    - Is there an even prime?
+    solution: 2 is prime and even, so the statement is false. One counterexample is enough.
+    mistakes:
+      True, she checked four primes: examples_not_proof
 - code: cbse9gm.logic.counterexample
   title: Proving and disproving with counterexamples
   after:
@@ -228,6 +395,42 @@ concepts:
       bin: Proves it for every case
       clue: Does this argument work for any triangle?
       why: It uses only facts true for every triangle, so it is a proof.
+  lesson:
+    - teach: To show a claim about ALL numbers is true, examples are not enough, because the next number might fail. 'n² + n + 41 is always prime' works from n = 0 to 39, then fails at n = 40. We need a general argument.
+      check:
+        prompt: A claim works for the first 1000 numbers. Is it proved for all?
+        options:
+        - No, examples can't prove it for every number
+        - Yes, 1000 is enough
+        - Yes, if the numbers were chosen randomly
+        answer: No, examples can't prove it for every number
+        why: Only a general argument covers every case.
+    - teach: 'To show a claim is false, ONE counterexample is enough. ''Every number ending in 7 is prime'' fails at 27 = 3 × 9. Hunt for a counterexample among small, special or awkward numbers: 0, 1, 2, fractions, negatives.'
+      check:
+        prompt: Which is a counterexample to 'Every multiple of 3 is odd'?
+        options:
+        - '6'
+        - '9'
+        - '15'
+        answer: '6'
+        why: 6 is a multiple of 3 but even.
+    - teach: 'A general proof uses letters for any number. Any even number is 2a, any odd number is 2a + 1. Sum of two evens: 2a + 2b = 2(a + b), a multiple of 2, so always even. That covers every case at once.'
+      picture:
+        kind: flow
+        steps:
+        - 'Two odd numbers: 2a + 1 and 2b + 1'
+        - 'Add: 2a + 2b + 2'
+        - 'Take out 2: 2(a + b + 1)'
+        - 'A multiple of 2: always even'
+        alt: Algebra steps showing the sum of any two odd numbers is a multiple of 2.
+      check:
+        prompt: How do we write any odd number in algebra?
+        options:
+        - 2a + 1
+        - 2a
+        - a + 1
+        answer: 2a + 1
+        why: One more than an even number 2a.
   items:
   - prompt: How many counterexamples do you need to show a statement about all numbers is false?
     answer: '1'
@@ -305,3 +508,133 @@ concepts:
     - Consecutive numbers alternate odd, even.
     solution: 'Step 1: Of n and n + 1, one is even. Step 2: An even number times anything is even. So the statement is true (and 0 is even too).'
     mistakes: {"False: 3 × 5 = 15": "consecutive_one_even", "True only for numbers below 10": "consecutive_one_even"}
+  - prompt: Which number is a counterexample to 'Every number ending in 1 is prime'?
+    options:
+    - '21'
+    - '11'
+    - '31'
+    - '41'
+    answer: '21'
+    difficulty: 1
+    hints:
+    - Find one that ends in 1 but has factors.
+    - Try 21 = 3 × …
+    solution: 21 = 3 × 7 ends in 1 but is not prime.
+    mistakes:
+      '11': one_counterexample
+      '31': one_counterexample
+  - prompt: Which is a counterexample to 'The sum of two numbers is always bigger than each of them'?
+    options:
+    - −2 and 5
+    - 3 and 4
+    - 10 and 1
+    - 6 and 6
+    answer: −2 and 5
+    difficulty: 1
+    hints:
+    - Try a negative number.
+    - −2 + 5 = 3, is that bigger than 5?
+    solution: −2 + 5 = 3, which is not bigger than 5. So the claim fails.
+    mistakes:
+      3 and 4: one_counterexample
+  - prompt: To prove 'the sum of two even numbers is even' for all numbers, what should you do?
+    options:
+    - Write them as 2a and 2b and show the sum is 2(a + b)
+    - Check 2 + 4, 6 + 8 and 10 + 12
+    - Check 100 examples
+    - Find a counterexample
+    answer: Write them as 2a and 2b and show the sum is 2(a + b)
+    difficulty: 1
+    hints:
+    - Examples are not a proof.
+    - Use letters to cover every case.
+    solution: 2a + 2b = 2(a + b) is a multiple of 2 for any a, b. That proves it for all even numbers.
+    mistakes:
+      Check 100 examples: examples_not_proof
+  - prompt: Which is a counterexample to 'If n² is greater than 4, then n is greater than 2'?
+    options:
+    - n = −3
+    - n = 3
+    - n = 5
+    - n = 2
+    answer: n = −3
+    difficulty: 2
+    hints:
+    - Try a negative number.
+    - (−3)² = 9 > 4, but is −3 > 2?
+    solution: (−3)² = 9 > 4, but −3 is not greater than 2. So the claim is false.
+    mistakes:
+      n = 3: one_counterexample
+      n = 2: one_counterexample
+  - prompt: 'Even × odd: 2a × (2b + 1) = 2a(2b + 1). What does this show?'
+    options:
+    - The product is always even
+    - The product is always odd
+    - The product can be either
+    - Nothing
+    answer: The product is always even
+    difficulty: 2
+    hints:
+    - Is there a factor of 2 outside the bracket?
+    - 2 × (something).
+    solution: 2a(2b + 1) = 2 × a(2b + 1), a multiple of 2, so always even.
+    mistakes:
+      The product is always odd: factor_out_two
+  - prompt: Which is a counterexample to 'Every square number is even'?
+    options:
+    - '9'
+    - '4'
+    - '16'
+    - '36'
+    answer: '9'
+    difficulty: 2
+    hints:
+    - Look for an odd square.
+    - 3² = …
+    solution: 9 = 3² is a square number but odd.
+    mistakes:
+      '4': counterexample_odd
+  - prompt: Which is a counterexample to 'Dividing by a number always makes it smaller'?
+    options:
+    - 10 ÷ 1/2 = 20
+    - 10 ÷ 2 = 5
+    - 10 ÷ 5 = 2
+    - 8 ÷ 4 = 2
+    answer: 10 ÷ 1/2 = 20
+    difficulty: 2
+    hints:
+    - Try dividing by a fraction less than 1.
+    - How many halves are in 10?
+    solution: 10 ÷ 1/2 = 20, which is bigger than 10. So the claim is false.
+    mistakes:
+      10 ÷ 2 = 5: square_smaller_fraction
+  - prompt: 'Prove or disprove: ''The sum of three consecutive whole numbers is always a multiple of 3.'''
+    options:
+    - 'True: n + (n + 1) + (n + 2) = 3(n + 1)'
+    - 'False: 1 + 2 + 3 = 6 is even'
+    - True, only for even n
+    - 'False: 2 + 3 + 4 = 9 is odd'
+    answer: 'True: n + (n + 1) + (n + 2) = 3(n + 1)'
+    difficulty: 3
+    hints:
+    - Call the numbers n, n + 1, n + 2.
+    - Add and take out a common factor.
+    solution: n + n + 1 + n + 2 = 3n + 3 = 3(n + 1), always a multiple of 3.
+    mistakes:
+      'False: 1 + 2 + 3 = 6 is even': one_counterexample
+      'False: 2 + 3 + 4 = 9 is odd': one_counterexample
+  - prompt: 'Prove or disprove: ''For every whole number n, 2ⁿ + 1 is prime.'''
+    options:
+    - 'False: n = 3 gives 9'
+    - True for all n
+    - 'True: 3, 5 and 17 are prime'
+    - 'False: n = 1 gives 3'
+    answer: 'False: n = 3 gives 9'
+    difficulty: 3
+    hints:
+    - Try n = 0, 1, 2, 3, …
+    - 2³ + 1 = 9.
+    solution: n = 3 gives 9 = 3 × 3, not prime. One counterexample disproves it.
+    mistakes:
+      'True: 3, 5 and 17 are prime': examples_not_proof
+      'False: n = 1 gives 3': one_counterexample

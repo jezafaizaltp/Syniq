@@ -106,6 +106,42 @@ concepts:
           - 1
           - 2
         say: That holds only about 154 to 308 cm³, under a third of a litre. 2.31 litres is 2310 cm³.
+  lesson:
+    - teach: 'Surface area is the area of all the outside faces, like the paper to wrap a box. Volume is the space inside, like the water a tank holds. A cuboid l × w × h has 6 rectangular faces in 3 equal pairs: surface area 2(lw + wh + hl), volume lwh.'
+      picture:
+        kind: flow
+        steps:
+        - 'Top and bottom: 2 × lw'
+        - 'Front and back: 2 × lh'
+        - 'Two sides: 2 × wh'
+        - 'Add them: 2(lw + wh + hl)'
+        alt: The six faces of a cuboid come in three equal pairs, so the surface area is 2(lw + wh + hl).
+      check:
+        prompt: A box is 5 cm × 4 cm × 2 cm. What is its volume?
+        options:
+        - 40 cm³
+        - 11 cm³
+        - 76 cm³
+        answer: 40 cm³
+        why: 5 × 4 × 2 = 40. (76 cm² is its surface area.)
+    - teach: 'A cube of side a has 6 equal square faces: surface area 6a², volume a³. A cylinder of radius r and height h: unroll its curved side and you get a rectangle 2πr long and h high, so curved surface area = 2πrh. Add the two circles for the total: 2πr(h + r). Volume = πr²h.'
+      check:
+        prompt: A cylinder has r = 7 cm and h = 5 cm. Curved surface area (π = 22/7)?
+        options:
+        - 220 cm²
+        - 770 cm²
+        - 154 cm²
+        answer: 220 cm²
+        why: 2 × 22/7 × 7 × 5 = 220.
+    - teach: 'Units: area in cm² or m², volume in cm³ or m³. 1 litre = 1000 cm³ and 1 m³ = 1000 litres. Before calculating a real object, guess: a classroom bucket holds about 10 litres, a water tank on a roof about 1000.'
+      check:
+        prompt: A tank holds 2 m³. How many litres is that?
+        options:
+        - '2000'
+        - '200'
+        - '20'
+        answer: '2000'
+        why: 1 m³ = 1000 L.
   items:
   - prompt: Find the volume of a cuboid 8 cm long, 5 cm wide and 3 cm high, in cm³.
     answer: '120'
@@ -163,6 +199,103 @@ concepts:
     - Multiply by 1000 for litres.
     solution: 'Step 1: V = 3.14 × 1 × 2 = 6.28 m³. Step 2: 6.28 × 1000 = 6280 L.'
     mistakes: {"6.28": "m3_to_litres", "628": "m3_to_litres"}
+  - prompt: Find the volume of a cube of side 5 cm, in cm³.
+    answer: '125'
+    check: 5**3
+    difficulty: 1
+    hints:
+    - Volume = a³.
+    - 5 × 5 × 5.
+    solution: 5³ = 125 cm³.
+    mistakes:
+      '150': cube_six_faces
+      '25': volume_lbh
+  - prompt: Find the total surface area of a cuboid 6 cm × 4 cm × 3 cm, in cm².
+    answer: '108'
+    check: 2*(6*4 + 4*3 + 3*6)
+    difficulty: 1
+    hints:
+    - 2(lw + wh + hl).
+    - 24 + 12 + 18 = 54.
+    solution: 2 × 54 = 108 cm².
+    mistakes:
+      '54': cube_six_faces
+      '72': volume_lbh
+  - prompt: Find the volume of a cylinder with radius 7 cm and height 10 cm (π = 22/7), in cm³.
+    answer: '1540'
+    check: 22/7*49*10
+    difficulty: 1
+    hints:
+    - V = πr²h.
+    - 22/7 × 49 × 10.
+    solution: 154 × 10 = 1540 cm³.
+    mistakes:
+      '440': csa_cylinder_2pirh
+      '6160': volume_used_diameter
+  - prompt: A cuboid tank is 2 m × 1.5 m × 1 m. How many litres does it hold?
+    answer: '3000'
+    check: 2*1.5*1*1000
+    difficulty: 2
+    hints:
+    - Volume = 3 m³.
+    - 1 m³ = 1000 L.
+    solution: 3 m³ × 1000 = 3000 litres.
+    mistakes:
+      '3': m3_to_litres
+      '300': m3_to_litres
+  - prompt: Find the curved surface area of a cylinder with diameter 14 cm and height 15 cm (π = 22/7), in cm².
+    answer: '660'
+    check: 2*22/7*7*15
+    difficulty: 2
+    hints:
+    - Radius = 7 cm.
+    - 2πrh.
+    solution: 2 × 22/7 × 7 × 15 = 660 cm².
+    mistakes:
+      '1320': volume_used_diameter
+      '968': cylinder_curved_vs_total
+  - prompt: A cube has total surface area 150 cm². What is its side, in cm?
+    answer: '5'
+    check: sqrt(150/6)
+    difficulty: 2
+    hints:
+    - 6a² = 150.
+    - a² = 25.
+    solution: a² = 25, so a = 5 cm.
+    mistakes:
+      '25': cube_six_faces
+  - prompt: A closed cylinder has radius 14 cm and height 6 cm. Find its total surface area (π = 22/7), in cm².
+    answer: '1760'
+    check: 2*22/7*14*(6 + 14)
+    difficulty: 2
+    hints:
+    - 2πr(h + r).
+    - 2 × 22/7 × 14 × 20.
+    solution: 88 × 20 = 1760 cm².
+    mistakes:
+      '528': cylinder_curved_vs_total
+  - prompt: A cylindrical glass has radius 3.5 cm and height 10 cm. How many millilitres does it hold (π = 22/7)? (1 cm³ = 1 mL)
+    answer: '385'
+    check: 22/7*3.5**2*10
+    difficulty: 3
+    hints:
+    - πr²h.
+    - 22/7 × 12.25 × 10.
+    solution: 38.5 × 10 = 385 cm³ = 385 mL.
+    mistakes:
+      '220': csa_cylinder_2pirh
+      '1540': volume_used_diameter
+  - prompt: A road roller is a cylinder of diameter 1.4 m and length 2 m. What area does it press in 5 full turns, in m² (π = 22/7)?
+    answer: '44'
+    check: 5*2*22/7*0.7*2
+    difficulty: 3
+    hints:
+    - 'One turn presses its curved surface: 2πrh.'
+    - r = 0.7 m.
+    solution: 'One turn: 2 × 22/7 × 0.7 × 2 = 8.8 m². Five turns: 44 m².'
+    mistakes:
+      '8.8': csa_cylinder_2pirh
+      '88': volume_used_diameter
 - code: cbse9gm.solid.cone
   title: Right circular cone
   notes: |
@@ -271,6 +404,58 @@ concepts:
           r: 4
           h: 1
         say: That's a third of the height, a third of the volume again. The ⅓ in the formula needs the height to grow, not shrink.
+  lesson:
+    - teach: A right circular cone has a circular base of radius r, a height h straight up from the centre to the tip, and a slant height l along the side. h, r and l make a right triangle, so l = √(r² + h²).
+      picture:
+        kind: geometry
+        points:
+          V:
+          - 5
+          - 9
+          O:
+          - 5
+          - 2
+          A:
+          - 9
+          - 2
+        segments:
+        - - V
+          - O
+          - h
+        - - O
+          - A
+          - r
+        - - V
+          - A
+          - l
+        caption: l² = r² + h².
+        alt: 'Half of a cone seen from the side: height h from tip V to centre O, radius r from O to A, slant height l from V to A.'
+      check:
+        prompt: r = 5 cm, h = 12 cm. What is l?
+        options:
+        - 13 cm
+        - 17 cm
+        - 7 cm
+        answer: 13 cm
+        why: √(25 + 144) = √169 = 13.
+    - teach: The curved surface of a cone unrolls into a sector, with area πrl. Add the base circle πr² for the total surface area πr(l + r). Note it uses l, not h.
+      check:
+        prompt: r = 7, l = 10. Curved surface area (π = 22/7)?
+        options:
+        - '220'
+        - '154'
+        - '374'
+        answer: '220'
+        why: 22/7 × 7 × 10 = 220.
+    - teach: 'A cone holds exactly one third of a cylinder with the same base and height: V = ⅓πr²h. Three full cones of water fill the matching cylinder. The volume uses the height h, not the slant height.'
+      check:
+        prompt: A cylinder of the same base and height holds 600 cm³. How much does the cone hold?
+        options:
+        - 200 cm³
+        - 300 cm³
+        - 1800 cm³
+        answer: 200 cm³
+        why: One third of 600.
   items:
   - prompt: A cone has radius 6 cm and height 8 cm. Find its slant height in cm.
     answer: '10'
@@ -331,6 +516,101 @@ concepts:
     solution: 'Step 1: l = √(576 + 100) = 26 m. Step 2: CSA = 22/7 × 24 × 26 = 13728/7 ≈ 1961 m².'
     mistakes:
       '754': slant_not_height
+  - prompt: A cone has radius 9 cm and height 12 cm. Find its slant height in cm.
+    answer: '15'
+    check: sqrt(81 + 144)
+    difficulty: 1
+    hints:
+    - l = √(r² + h²).
+    - 81 + 144 = 225.
+    solution: √225 = 15 cm.
+    mistakes:
+      '21': slant_not_height
+      '225': slant_not_height
+  - prompt: Find the curved surface area of a cone with radius 14 cm and slant height 5 cm (π = 22/7), in cm².
+    answer: '220'
+    check: 22/7*14*5
+    difficulty: 1
+    hints:
+    - πrl.
+    - 22/7 × 14 × 5.
+    solution: 44 × 5 = 220 cm².
+    mistakes:
+      '836': cone_base
+  - prompt: Find the volume of a cone with radius 3 cm and height 7 cm (π = 22/7), in cm³.
+    answer: '66'
+    check: 22/7*9*7/3
+    difficulty: 1
+    hints:
+    - ⅓πr²h.
+    - ⅓ × 22/7 × 9 × 7.
+    solution: ⅓ × 198 = 66 cm³.
+    mistakes:
+      '198': cone_third
+  - prompt: A cone has radius 7 cm and slant height 25 cm. Find its height in cm.
+    answer: '24'
+    check: sqrt(625 - 49)
+    difficulty: 2
+    hints:
+    - h² = l² − r².
+    - 625 − 49 = 576.
+    solution: √576 = 24 cm.
+    mistakes:
+      '18': slant_not_height
+      '576': slant_not_height
+  - prompt: Find the total surface area of a cone with radius 14 cm and slant height 16 cm (π = 22/7), in cm².
+    answer: '1320'
+    check: 22/7*14*(16 + 14)
+    difficulty: 2
+    hints:
+    - πr(l + r).
+    - 44 × 30.
+    solution: 22/7 × 14 × 30 = 1320 cm².
+    mistakes:
+      '704': cone_base
+  - prompt: A cone and a cylinder have the same base and height. The cylinder holds 4.5 L. How much does the cone hold, in L?
+    answer: '1.5'
+    check: 4.5/3
+    difficulty: 2
+    hints:
+    - The cone holds a third.
+    - 4.5 ÷ 3.
+    solution: The cone holds a third of the cylinder, so 4.5 ÷ 3 = 1.5 L.
+    mistakes:
+      '13.5': cone_third
+      '2.25': cone_third
+  - prompt: A cone has radius 6 cm and height 8 cm. Find its curved surface area, taking π = 3.14, in cm².
+    answer: '188.4'
+    check: 3.14*6*10
+    difficulty: 2
+    hints:
+    - First find l = 10.
+    - πrl = 3.14 × 6 × 10.
+    solution: l = √(36 + 64) = 10. CSA = 3.14 × 60 = 188.4 cm².
+    mistakes:
+      '150.72': slant_not_height
+  - prompt: A conical heap of grain has diameter 21 m and height 6 m. Find its volume in m³ (π = 22/7).
+    answer: '693'
+    check: 22/7*10.5**2*6/3
+    difficulty: 3
+    hints:
+    - Radius = 10.5 m.
+    - ⅓ × 22/7 × 110.25 × 6.
+    solution: ⅓ × 22/7 × 10.5 × 10.5 × 6 = 693 m³.
+    mistakes:
+      '2079': cone_third
+      '2772': volume_used_diameter
+  - prompt: How many metres of cloth 5 m wide are needed for a conical tent of radius 7 m and slant height 25 m (π = 22/7)?
+    answer: '110'
+    check: 22/7*7*25/5
+    difficulty: 3
+    hints:
+    - Cloth area = curved surface = πrl = 550 m².
+    - Length = area ÷ width.
+    solution: 550 ÷ 5 = 110 m of cloth.
+    mistakes:
+      '550': cone_csa_pirl
+      '2750': cone_csa_pirl
 - code: cbse9gm.solid.sphere
   title: Sphere and hemisphere
   after:
@@ -415,6 +695,47 @@ concepts:
       - when:
           r: 8.5
         say: 'That paints about 908 cm² of a whole sphere''s 4πr². A hemisphere is half the curve plus a flat circle: 3πr².'
+  lesson:
+    - teach: 'A sphere is a perfectly round ball. All points on it are r from the centre. Its surface area is 4πr²: exactly four times the area of a circle with the same radius. Its volume is (4/3)πr³.'
+      check:
+        prompt: A sphere has r = 7 cm. Surface area (π = 22/7)?
+        options:
+        - 616 cm²
+        - 154 cm²
+        - 1437 cm²
+        answer: 616 cm²
+        why: 4 × 22/7 × 49 = 616.
+    - teach: 'A hemisphere is half a sphere. Its curved surface is half of 4πr², so 2πr². A solid hemisphere also has a flat circle πr² on top: total 3πr². A bowl is open, so only the curved part counts. Volume of a hemisphere = (2/3)πr³.'
+      picture:
+        kind: compare
+        columns:
+        - title: Sphere
+          points:
+          - Surface 4πr²
+          - Volume (4/3)πr³
+        - title: Hemisphere
+          points:
+          - Curved 2πr²
+          - Solid total 3πr²
+          - Volume (2/3)πr³
+        alt: 'Sphere formulas beside hemisphere formulas: half the sphere''s curved surface, plus the flat circle for a solid hemisphere.'
+      check:
+        prompt: A solid hemisphere has r = 7 cm. Total surface area (π = 22/7)?
+        options:
+        - 462 cm²
+        - 308 cm²
+        - 616 cm²
+        answer: 462 cm²
+        why: 3 × 22/7 × 49 = 462.
+    - teach: 'Watch for diameter: a ball of diameter 14 cm has r = 7. Using 14 as r makes the surface area 4 times too big and the volume 8 times too big.'
+      check:
+        prompt: A ball has diameter 6 cm. Which radius do you use?
+        options:
+        - 3 cm
+        - 6 cm
+        - 12 cm
+        answer: 3 cm
+        why: Radius is half the diameter.
   items:
   - prompt: Find the surface area of a sphere of radius 7 cm (π = 22/7), in cm².
     answer: '616'
@@ -473,3 +794,100 @@ concepts:
     solution: 'Step 1: r = 14 ÷ 2 = 7 cm. Step 2: 4 × 22/7 × 49 = 616 cm².'
     mistakes:
       '2464': radius_diameter
+  - prompt: Find the surface area of a sphere of radius 14 cm (π = 22/7), in cm².
+    answer: '2464'
+    check: 4*22/7*14**2
+    difficulty: 1
+    hints:
+    - 4πr².
+    - 4 × 22/7 × 196.
+    solution: 4 × 616 = 2464 cm².
+    mistakes:
+      '616': sphere_four
+      '11498.67': sphere_volume
+  - prompt: Find the curved surface area of a hemisphere of radius 14 cm (π = 22/7), in cm².
+    answer: '1232'
+    check: 2*22/7*196
+    difficulty: 1
+    hints:
+    - 2πr².
+    - 2 × 22/7 × 196.
+    solution: 2 × 616 = 1232 cm².
+    mistakes:
+      '1848': hemisphere_csa
+      '2464': hemisphere_csa
+  - prompt: Find the volume of a sphere of radius 3 cm, taking π = 3.14, in cm³.
+    answer: '113.04'
+    check: 4/3*3.14*27
+    difficulty: 1
+    hints:
+    - (4/3)πr³.
+    - (4/3) × 3.14 × 27.
+    solution: 36 × 3.14 = 113.04 cm³.
+    mistakes:
+      '28.26': sphere_volume
+      '339.12': sphere_volume
+  - prompt: Find the total surface area of a solid hemisphere of radius 14 cm (π = 22/7), in cm².
+    answer: '1848'
+    check: 3*22/7*196
+    difficulty: 2
+    hints:
+    - 3πr².
+    - 3 × 616.
+    solution: 3 × 22/7 × 196 = 3 × 616 = 1848 cm².
+    mistakes:
+      '1232': hemisphere_total
+  - prompt: Find the volume of a hemisphere of radius 21 cm (π = 22/7), in cm³.
+    answer: '19404'
+    check: 2/3*22/7*21**3
+    difficulty: 2
+    hints:
+    - (2/3)πr³.
+    - Half of the sphere's 38808.
+    solution: 38808 ÷ 2 = 19404 cm³.
+    mistakes:
+      '38808': hemisphere_volume
+  - prompt: A sphere has surface area 154 cm². Find its radius in cm (π = 22/7).
+    answer: '3.5'
+    check: sqrt(154/(4*22/7))
+    difficulty: 2
+    hints:
+    - 4πr² = 154.
+    - r² = 154 ÷ (88/7) = 12.25.
+    solution: r² = 12.25, so r = 3.5 cm.
+    mistakes:
+      '7': sphere_four
+      '12.25': sphere_four
+  - prompt: A football has diameter 28 cm. How much leather covers it, in cm² (π = 22/7)?
+    answer: '2464'
+    check: 4*22/7*14**2
+    difficulty: 2
+    hints:
+    - r = 14 cm.
+    - 4πr².
+    solution: 4 × 22/7 × 196 = 2464 cm².
+    mistakes:
+      '9856': volume_used_diameter
+      '616': sphere_four
+  - prompt: The radius of a ball is doubled. How many times bigger does its volume become?
+    answer: '8'
+    check: 2**3
+    difficulty: 3
+    hints:
+    - Volume depends on r³.
+    - 2³.
+    solution: (2r)³ = 8r³, so 8 times.
+    mistakes:
+      '2': sphere_volume
+      '4': sphere_four
+  - prompt: A hemispherical tank of radius 1.4 m is full of water. How many litres does it hold (π = 22/7)? Round to the nearest litre.
+    answer: '5749'
+    check: round(2/3*22/7*1.4**3*1000)
+    difficulty: 3
+    hints:
+    - (2/3)πr³ in m³.
+    - Then × 1000 for litres.
+    solution: (2/3) × 22/7 × 2.744 = 5.749 m³ ≈ 5749 litres.
+    mistakes:
+      '5.749': m3_to_litres
+      '11499': hemisphere_volume

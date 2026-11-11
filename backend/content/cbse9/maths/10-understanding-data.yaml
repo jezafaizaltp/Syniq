@@ -95,6 +95,45 @@ concepts:
           x: 15
           y: 5
         say: 'That''s ₹45: you have more cheap rice. ₹55 is nearer 60.'
+  lesson:
+    - teach: 'The mean is total ÷ count. When groups of different sizes combine, the bigger group pulls the mean more. 30 students averaging 60 and 10 averaging 80 don''t average 70: the totals are 1800 and 800, so the mean is 2600 ÷ 40 = 65.'
+      check:
+        prompt: 10 students average 40 and 10 average 60. What is the overall mean?
+        options:
+        - '50'
+        - '45'
+        - '100'
+        answer: '50'
+        why: 'Equal groups, so the plain average works: (400 + 600) ÷ 20 = 50.'
+    - teach: Weighted mean = (w₁x₁ + w₂x₂ + …) ÷ (w₁ + w₂ + …), where each value x is multiplied by its weight w (its size or importance). The average of averages is right only when the weights are equal.
+      picture:
+        kind: bars
+        bars:
+        - label: '30 students: 60'
+          value: 1800
+        - label: '10 students: 80'
+          value: 800
+        - label: All 40
+          value: 2600
+        unit: marks
+        alt: Total marks of each group, 1800 and 800, add to 2600 for 40 students, a mean of 65.
+      check:
+        prompt: A final mark is 30% test, 70% project. Test 50, project 90. Final mark?
+        options:
+        - '78'
+        - '70'
+        - '84'
+        answer: '78'
+        why: 0.3 × 50 + 0.7 × 90 = 15 + 63 = 78.
+    - teach: 'Mixtures work the same way. 6 kg of dal at ₹100/kg mixed with 4 kg at ₹150/kg: total cost 600 + 600 = ₹1200 for 10 kg, so ₹120 per kg. The mixture price is always between the two, nearer to the one with more weight.'
+      check:
+        prompt: 1 kg at ₹40 mixed with 3 kg at ₹80. Price per kg?
+        options:
+        - ₹70
+        - ₹60
+        - ₹50
+        answer: ₹70
+        why: (40 + 240) ÷ 4 = 70.
   items:
   - prompt: Class A (20 students) averages 50 and class B (20 students) averages 70. What is the overall average?
     answer: '60'
@@ -153,6 +192,102 @@ concepts:
     - 200x + 900 = 240x + 720.
     solution: 'Step 1: 200x + 900 = 240(x + 3). Step 2: 900 − 720 = 40x, so x = 4.5 kg.'
     mistakes: {"3": "mixture_balance", "6": "mixture_balance"}
+  - prompt: Group A (25 people) averages 30 and group B (25 people) averages 50. What is the overall average?
+    answer: '40'
+    check: (25*30 + 25*50)/50
+    difficulty: 1
+    hints:
+    - The groups are the same size.
+    - So the plain average of 30 and 50 works.
+    solution: (750 + 1250) ÷ 50 = 40.
+    mistakes:
+      '80': equal_groups_mean
+  - prompt: 20 students averaged 70 and 5 students averaged 50. What is the overall average?
+    answer: '66'
+    check: (20*70 + 5*50)/25
+    difficulty: 1
+    hints:
+    - 'Totals: 1400 and 250.'
+    - Divide by 25.
+    solution: 1650 ÷ 25 = 66.
+    mistakes:
+      '60': weighted_plain_mean
+      '1650': weighted_total
+  - prompt: A cricketer scores an average of 40 in 6 matches and 70 in 4 matches. What is the average over all 10?
+    answer: '52'
+    check: (6*40 + 4*70)/10
+    difficulty: 1
+    hints:
+    - 'Totals: 240 and 280.'
+    - 520 ÷ 10.
+    solution: (240 + 280) ÷ 10 = 52.
+    mistakes:
+      '55': weighted_plain_mean
+  - prompt: 5 kg of rice at ₹40/kg is mixed with 5 kg at ₹60/kg. Price of the mixture per kg, in ₹?
+    answer: '50'
+    check: (5*40 + 5*60)/10
+    difficulty: 2
+    hints:
+    - Total cost ÷ total weight.
+    - 500 ÷ 10.
+    solution: (200 + 300) ÷ 10 = ₹50 per kg.
+    mistakes:
+      '100': weighted_total
+  - prompt: A course mark is 20% homework, 30% test and 50% exam. Ravi scores 90, 60 and 70. What is his mark?
+    answer: '71'
+    check: 0.2*90 + 0.3*60 + 0.5*70
+    difficulty: 2
+    hints:
+    - Multiply each mark by its weight.
+    - 18 + 18 + 35.
+    solution: 18 + 18 + 35 = 71.
+    mistakes:
+      '73.33': weighted_plain_mean
+  - prompt: Why is the overall average of 30 students at 60 and 10 students at 80 not 70?
+    options:
+    - The groups are different sizes, so the 30 count more
+    - Because 70 is not a whole number
+    - Averages can't be added
+    - Because 80 is too high
+    answer: The groups are different sizes, so the 30 count more
+    difficulty: 2
+    hints:
+    - 70 would be right if both groups had the same size.
+    - Which group has more students?
+    solution: There are three times as many students at 60, so the overall mean (65) is pulled towards 60.
+    mistakes:
+      Averages can't be added: equal_groups_mean
+  - prompt: A hotel has 80 ratings averaging 4 stars. 20 new ratings average 5 stars. What is the new average?
+    answer: '4.2'
+    check: (80*4 + 20*5)/100
+    difficulty: 2
+    hints:
+    - 'Totals: 320 and 100.'
+    - Divide by 100.
+    solution: 420 ÷ 100 = 4.2 stars.
+    mistakes:
+      '4.5': weighted_plain_mean
+  - prompt: How many kg of sugar at ₹30/kg must be mixed with 6 kg at ₹50/kg to get a mixture at ₹45/kg?
+    answer: '2'
+    check: 6*(50 - 45)/(45 - 30)
+    difficulty: 3
+    hints:
+    - Each kg of the ₹50 sugar is ₹5 above 45; each kg of ₹30 sugar is ₹15 below.
+    - 15x = 6 × 5.
+    solution: 'The extras must balance: 15x = 30, so x = 2 kg.'
+    mistakes:
+      '6': mixture_balance
+      '18': mixture_balance
+  - prompt: The mean of 10 numbers is 20. One number, 38, is removed. What is the mean of the rest?
+    answer: '18'
+    check: (200 - 38)/9
+    difficulty: 3
+    hints:
+    - Total of the 10 numbers = 200.
+    - (200 − 38) ÷ 9.
+    solution: 162 ÷ 9 = 18.
+    mistakes:
+      '16.2': weighted_total
 - code: cbse9gm.data.stacked
   title: Stacked and 100% stacked bar charts
   after:
@@ -231,6 +366,47 @@ concepts:
       - when:
           b: 15
         say: Equal numbers make each part 50%. For girls to be only 30%, boys must be the other 70%.
+  lesson:
+    - teach: 'A stacked bar chart piles the parts of each total on top of each other. A bar for Class 9A might show 14 girls at the bottom and 16 boys on top: the whole bar is 30, and you can still read each part.'
+      picture:
+        kind: bars
+        bars:
+        - label: 9A girls
+          value: 14
+        - label: 9A boys
+          value: 16
+        - label: 9B girls
+          value: 20
+        - label: 9B boys
+          value: 20
+        unit: students
+        alt: 'Girls and boys in two classes: 9A has 14 girls and 16 boys (30), 9B has 20 and 20 (40).'
+      check:
+        prompt: A stacked bar has parts 8, 5 and 7. How tall is the bar?
+        options:
+        - '20'
+        - '8'
+        - '7'
+        answer: '20'
+        why: 8 + 5 + 7 = 20.
+    - teach: 'To compare shares, turn each part into a percentage of its own total: part ÷ total × 100. In 9A girls are 14/30 ≈ 47%; in 9B 20/40 = 50%. 9B has more girls AND a bigger share, but that isn''t always so.'
+      check:
+        prompt: 45 of 150 households have a scooter. What percentage is that?
+        options:
+        - 30%
+        - 45%
+        - 15%
+        answer: 30%
+        why: 45 ÷ 150 × 100 = 30.
+    - teach: 'A 100% stacked bar chart makes every bar the same height, 100%, and shows each part as a percentage. It is best for comparing shares, but it hides the totals: two equal-height bars may stand for 30 people and 3000 people.'
+      check:
+        prompt: Which chart shows that a big school and a small school have the same share of cyclists?
+        options:
+        - 100% stacked bars
+        - Ordinary stacked bars
+        - A single total bar
+        answer: 100% stacked bars
+        why: Every bar is scaled to 100%, so equal shares look equal.
   items:
   - prompt: A stacked bar for a class has 12 girls on the bottom and 18 boys on top. What is the height of the whole bar?
     answer: '30'
@@ -299,3 +475,109 @@ concepts:
     - 30% of 40,000.
     solution: 'Step 1: Other = 30%. Step 2: 0.3 × 40000 = ₹12,000.'
     mistakes: {"28000": "rest_percent", "30": "rest_percent"}
+  - prompt: A stacked bar shows 9 cars, 15 bikes and 6 buses. How tall is the whole bar?
+    answer: '30'
+    check: 9 + 15 + 6
+    difficulty: 1
+    hints:
+    - Add the parts.
+    - 9 + 15 + 6.
+    solution: 'The bar height is the total: 30.'
+    mistakes:
+      '15': stacked_total
+  - prompt: In a class of 40, 10 walk to school. What percentage walk?
+    answer: '25'
+    check: 10/40*100
+    difficulty: 1
+    hints:
+    - Part ÷ total × 100.
+    - 10 ÷ 40.
+    solution: 10 ÷ 40 = 0.25 = 25%.
+    mistakes:
+      '10': share_needs_percent
+      '40': percent_of_total
+  - prompt: In a 100% stacked bar, 'tea' is 35% and 'coffee' is 45%. What percentage is the rest?
+    answer: '20'
+    check: 100 - 35 - 45
+    difficulty: 1
+    hints:
+    - The bar adds up to 100%.
+    - 100 − 35 − 45.
+    solution: 100 − 80 = 20%.
+    mistakes:
+      '80': rest_percent
+  - prompt: Shop A sold 60 pens of which 15 were blue. Shop B sold 200 pens of which 40 were blue. Which shop had the bigger share of blue pens?
+    options:
+    - A (25%)
+    - B (20%)
+    - B, because 40 > 15
+    - They are the same
+    answer: A (25%)
+    difficulty: 2
+    hints:
+    - Compare percentages, not counts.
+    - 15/60 and 40/200.
+    solution: 'A: 25%. B: 20%. Shop A had the bigger share, even though B sold more blue pens.'
+    mistakes:
+      B, because 40 > 15: share_not_count
+  - prompt: Two bars in a 100% stacked chart are equally tall. One is for a village of 300, one for a city of 3 lakh. What does the equal height mean?
+    options:
+    - 'Nothing about size: every bar is 100%'
+    - Both places have the same population
+    - The village is bigger
+    - The chart is wrong
+    answer: 'Nothing about size: every bar is 100%'
+    difficulty: 2
+    hints:
+    - What is the height of every bar in a 100% chart?
+    - Totals are hidden.
+    solution: Every bar is drawn to 100%, so equal height says nothing about totals.
+    mistakes:
+      Both places have the same population: hundred_percent_totals
+  - prompt: In a class, 18 of 45 students like football. What percentage is that?
+    answer: '40'
+    check: 18/45*100
+    difficulty: 2
+    hints:
+    - 18 ÷ 45.
+    - Times 100.
+    solution: 18 ÷ 45 = 0.4 = 40%.
+    mistakes:
+      '18': share_needs_percent
+  - prompt: A town's budget bar (100%) is 40% roads, 35% schools, 25% health. The budget is ₹8 crore. How much for schools, in crore ₹?
+    answer: '2.8'
+    check: 0.35*8
+    difficulty: 2
+    hints:
+    - 35% of 8.
+    - 0.35 × 8.
+    solution: 0.35 × 8 = ₹2.8 crore.
+    mistakes:
+      '35': percent_of_total
+      '3.2': percent_of_total
+  - prompt: Class X has 12 girls in 30. Class Y has 18 girls in 60. A 100% stacked chart is drawn. Which statement is right?
+    options:
+    - X's girls part is taller (40% vs 30%)
+    - Y's girls part is taller (18 vs 12)
+    - Both girls parts are equal
+    - Y's bar is taller overall
+    answer: X's girls part is taller (40% vs 30%)
+    difficulty: 3
+    hints:
+    - Turn each into a percentage.
+    - 12/30 and 18/60.
+    solution: 'X: 40%, Y: 30%. In a 100% chart the girls part of X is taller, and both bars are the same height.'
+    mistakes:
+      Y's girls part is taller (18 vs 12): share_not_count
+      Y's bar is taller overall: hundred_percent_totals
+  - prompt: 'A family spends ₹30,000 a month: 40% on food and 20% on rent. Next month, total spending stays the same but food rises to 45%. By how much does food spending rise, in ₹?'
+    answer: '1500'
+    check: 0.05*30000
+    difficulty: 3
+    hints:
+    - The share rose by 5 percentage points.
+    - 5% of 30,000.
+    solution: Food was ₹12,000 and becomes ₹13,500, a rise of ₹1,500.
+    mistakes:
+      '5': percent_of_total
+      '13500': percent_of_total

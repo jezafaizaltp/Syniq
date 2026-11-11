@@ -82,6 +82,42 @@ concepts:
       bin: Not linear
       clue: What power is √x?
       why: √x is x to the power ½, so not linear.
+  lesson:
+    - teach: 'A linear equation in two variables has x and y, each to the power 1 only, like 2x + 3y = 12. Its standard form moves everything to one side: ax + by + c = 0. So 2x + 3y = 12 becomes 2x + 3y − 12 = 0, with a = 2, b = 3, c = −12.'
+      check:
+        prompt: Write x + 4y = 7 as ax + by + c = 0. What is c?
+        options:
+        - −7
+        - '7'
+        - '4'
+        answer: −7
+        why: x + 4y − 7 = 0, so c = −7.
+    - teach: 'Watch the signs when moving terms across the equals sign: they flip. 3x = 2y + 6 becomes 3x − 2y − 6 = 0. An equation with only one letter is still linear in two variables: y = 4 is 0·x + 1·y − 4 = 0.'
+      picture:
+        kind: flow
+        steps:
+        - 3x = 2y + 6
+        - 'Take 2y from both sides: 3x − 2y = 6'
+        - 'Take 6 from both sides: 3x − 2y − 6 = 0'
+        - a = 3, b = −2, c = −6
+        alt: Moving every term to the left side, changing signs as they cross, to reach standard form.
+      check:
+        prompt: Write y = 4 as ax + by + c = 0. What is a?
+        options:
+        - '0'
+        - '1'
+        - '4'
+        answer: '0'
+        why: 'There is no x term, so a = 0: 0x + y − 4 = 0.'
+    - teach: 'Word problems become equations. ''Two notebooks and three pens cost ₹50'': if a notebook costs ₹x and a pen ₹y, then 2x + 3y = 50. ''Ravi''s age is 5 more than Sita''s'': x = y + 5, or x − y − 5 = 0.'
+      check:
+        prompt: The sum of two numbers x and y is 25. Which equation shows this?
+        options:
+        - x + y − 25 = 0
+        - x − y = 25
+        - xy = 25
+        answer: x + y − 25 = 0
+        why: x + y = 25, moved to one side.
   items:
   - prompt: Write 3x + 2y = 9 as ax + by + c = 0. What is c?
     answer: '-9'
@@ -149,6 +185,118 @@ concepts:
     - Look for a square.
     solution: 'x² has power 2, so x² + y = 4 is not linear. y = 7 is linear: it is 0·x + y − 7 = 0.'
     mistakes: {"y = 7": "linear_power_one", "2x − 3y = 0": "linear_power_one"}
+  - prompt: Write 5x − y = 3 as ax + by + c = 0. What is c?
+    answer: '-3'
+    check: '-3'
+    difficulty: 1
+    hints:
+    - Move 3 to the left.
+    - 5x − y − 3 = 0.
+    solution: 5x − y − 3 = 0, so c = −3.
+    mistakes:
+      '3': standard_form_sign
+  - prompt: In 4x + 7y − 2 = 0, what is a?
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - a is the number in front of x.
+    - Read the x term.
+    solution: The x term is 4x, so a = 4.
+    mistakes:
+      '7': standard_form_sign
+      '-2': standard_form_sign
+  - prompt: Which of these is a linear equation in two variables?
+    options:
+    - 3x − 2y = 7
+    - x² + y = 1
+    - xy = 6
+    - x + 1/y = 2
+    answer: 3x − 2y = 7
+    difficulty: 1
+    hints:
+    - Each variable must have power 1.
+    - No x × y, no squares, no dividing by a variable.
+    solution: 3x − 2y = 7 has x and y to power 1 only. The others have x², xy or 1/y.
+    mistakes:
+      xy = 6: linear_power_one
+      x² + y = 1: linear_power_one
+  - prompt: Write y = 3x as ax + by + c = 0 with a = 3. What is b?
+    answer: '-1'
+    check: '-1'
+    difficulty: 2
+    hints:
+    - Move y to the right side.
+    - 3x − y = 0.
+    solution: 3x − y + 0 = 0, so b = −1.
+    mistakes:
+      '1': standard_form_sign
+      '0': missing_variable_zero
+  - prompt: Write x = −2 as ax + by + c = 0 with a = 1. What is c?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Add 2 to both sides.
+    - x + 2 = 0.
+    solution: x + 0y + 2 = 0, so c = 2.
+    mistakes:
+      '-2': standard_form_sign
+  - prompt: A bus ticket costs ₹x and a train ticket ₹y. 3 bus tickets and 2 train tickets cost ₹110. Which equation shows this?
+    options:
+    - 3x + 2y = 110
+    - 2x + 3y = 110
+    - 3x − 2y = 110
+    - 5xy = 110
+    answer: 3x + 2y = 110
+    difficulty: 2
+    hints:
+    - 3 bus tickets cost 3x.
+    - Add the train tickets' cost.
+    solution: '3x for the bus tickets plus 2y for the train tickets: 3x + 2y = 110.'
+    mistakes:
+      2x + 3y = 110: twice_which_way
+  - prompt: A father's age (x) is 4 times his son's age (y). Which equation shows this?
+    options:
+    - x − 4y = 0
+    - 4x − y = 0
+    - x + 4y = 0
+    - x − y = 4
+    answer: x − 4y = 0
+    difficulty: 2
+    hints:
+    - Who is older? The father.
+    - x = 4y.
+    solution: x = 4y, so x − 4y = 0.
+    mistakes:
+      4x − y = 0: twice_which_way
+      x − y = 4: twice_which_way
+  - prompt: Write (x/2) + (y/3) = 1 as ax + by + c = 0 with whole numbers and a = 3. What is c?
+    answer: '-6'
+    check: '-6'
+    difficulty: 3
+    hints:
+    - Multiply every term by 6.
+    - 3x + 2y = 6.
+    solution: 'Multiply by 6: 3x + 2y = 6, so 3x + 2y − 6 = 0 and c = −6.'
+    mistakes:
+      '6': standard_form_sign
+      '-1': standard_form_sign
+  - prompt: The perimeter of a rectangle with length x and breadth y is 40 cm. Which equation shows this in standard form?
+    options:
+    - 2x + 2y − 40 = 0
+    - x + y − 40 = 0
+    - xy − 40 = 0
+    - 2x + y − 40 = 0
+    answer: 2x + 2y − 40 = 0
+    difficulty: 3
+    hints:
+    - Perimeter = 2(length + breadth).
+    - 2x + 2y = 40.
+    solution: 2x + 2y = 40, so 2x + 2y − 40 = 0.
+    mistakes:
+      xy − 40 = 0: linear_power_one
+      x + y − 40 = 0: twice_which_way
 - code: cbse9gm.lin2.solutions
   title: Solutions of a linear equation
   after:
@@ -232,6 +380,55 @@ concepts:
           x: 3
           y: 2
         say: 'That''s (3, 2): swapped. The point is (2, k), so x = 2.'
+  lesson:
+    - teach: 'A solution of x + y = 5 is any pair (x, y) that makes it true: (1, 4), (2, 3), (0, 5), (6, −1), (2.5, 2.5)… There are infinitely many, one for every x you choose.'
+      check:
+        prompt: Which pair is a solution of x + y = 5?
+        options:
+        - (3, 2)
+        - (3, 3)
+        - (5, 5)
+        answer: (3, 2)
+        why: 3 + 2 = 5.
+    - teach: 'To check a pair, put both values in: is (2, 1) a solution of 3x − y = 5? 3(2) − 1 = 5. Yes. To find solutions, choose x and solve for y. For 2x + y = 8, x = 0 gives y = 8, x = 3 gives y = 2.'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 9
+        points:
+          (0, 8):
+          - 0
+          - 8
+          (3, 2):
+          - 3
+          - 2
+          (4, 0):
+          - 4
+          - 0
+        segments:
+        - - (0, 8)
+          - (4, 0)
+        caption: Every point on the line is a solution of 2x + y = 8.
+        alt: The line 2x + y = 8 through (0, 8), (3, 2) and (4, 0); each point on it is a solution.
+      check:
+        prompt: For 2x + y = 8, what is y when x = 1?
+        options:
+        - '6'
+        - '7'
+        - '10'
+        answer: '6'
+        why: 2 + y = 8, so y = 6.
+    - teach: If a pair is a solution of an equation with an unknown number k, substitute the pair and solve for k. If (1, 2) solves x + ky = 7, then 1 + 2k = 7, so k = 3.
+      check:
+        prompt: (2, 1) solves 3x + ky = 10. What is k?
+        options:
+        - '4'
+        - '10'
+        - '6'
+        answer: '4'
+        why: 6 + k = 10, so k = 4.
   items:
   - prompt: Is (2, 3) a solution of x + 2y = 8?
     options:
@@ -320,6 +517,90 @@ concepts:
     - 3k = 12.
     solution: 'Step 1: k + 2k = 12. Step 2: 3k = 12, so k = 4. The solution is (4, 8).'
     mistakes: {"6": "k_both_places", "8": "k_both_places"}
+  - prompt: Is (4, 1) a solution of x − 2y = 2?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if x = 1
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Put x = 4 and y = 1.
+    - 4 − 2 = ?
+    solution: 4 − 2(1) = 2. True, so yes.
+    mistakes:
+      'No': check_by_substituting
+  - prompt: For 3x + y = 10, if x = 2, what is y?
+    answer: '4'
+    check: 10 - 6
+    difficulty: 1
+    hints:
+    - 6 + y = 10.
+    - Take 6 from 10.
+    solution: y = 10 − 6 = 4.
+    mistakes:
+      '16': substitute_both
+      '8': substitute_both
+  - prompt: For x + 3y = 9, find x when y = 0.
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Put y = 0.
+    - x + 0 = 9.
+    solution: x = 9.
+    mistakes:
+      '3': y_intercept_x0
+      '0': missing_variable_zero
+  - prompt: For 4x − 3y = 12, find y when x = 0.
+    answer: '-4'
+    check: -12/3
+    difficulty: 2
+    hints:
+    - −3y = 12.
+    - Divide by −3.
+    solution: −3y = 12, so y = −4.
+    mistakes:
+      '4': solve_for_y
+  - prompt: Which pair is NOT a solution of 2x + y = 6?
+    options:
+    - (2, 3)
+    - (0, 6)
+    - (3, 0)
+    - (1, 4)
+    answer: (2, 3)
+    difficulty: 2
+    hints:
+    - Check each pair.
+    - 2(2) + 3 = ?
+    solution: 2(2) + 3 = 7 ≠ 6. The others all give 6.
+    mistakes:
+      (1, 4): check_by_substituting
+  - prompt: If (3, −1) is a solution of 2x + ky = 4, what is k?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - 6 + k(−1) = 4.
+    - 6 − k = 4.
+    solution: 6 − k = 4, so k = 2.
+    mistakes:
+      '-2': k_both_places
+      '10': k_both_places
+  - prompt: How many solutions does x = 3 have, as an equation in x and y?
+    options:
+    - 'Infinitely many: (3, any y)'
+    - Exactly one
+    - None
+    - Two
+    answer: 'Infinitely many: (3, any y)'
+    difficulty: 3
+    hints:
+    - Does y appear in the equation?
+    - (3, 0), (3, 1), (3, −7)… all work.
+    solution: 'Any pair with x = 3 works, whatever y is: infinitely many solutions (a vertical line).'
+    mistakes:
+      Exactly one: one_solution_only
 - code: cbse9gm.lin2.pairs
   title: Pairs of linear equations
   after:
@@ -406,6 +687,65 @@ concepts:
       bin: Exactly one
       clue: One line is upright, one is flat. Do they meet?
       why: 'An upright line and a flat line always cross once: at (3, 3).'
+  lesson:
+    - teach: 'One equation in x and y has endless solutions. Two equations together usually pin down one pair that fits both: the point where their two lines cross. x + y = 7 and x − y = 1 meet at (4, 3).'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 8
+        points:
+          (4, 3):
+          - 4
+          - 3
+          _a:
+          - 0
+          - 7
+          _b:
+          - 7
+          - 0
+          _c:
+          - 1
+          - 0
+          _d:
+          - 8
+          - 7
+        segments:
+        - - _a
+          - _b
+          - x + y = 7
+        - - _c
+          - _d
+          - x − y = 1
+        caption: The lines cross at (4, 3), the only pair that fits both.
+        alt: Lines x + y = 7 and x − y = 1 crossing at the point (4, 3).
+      check:
+        prompt: Does (4, 3) fit x + y = 7 and x − y = 1?
+        options:
+        - Yes, both
+        - Only the first
+        - Only the second
+        answer: Yes, both
+        why: 4 + 3 = 7 and 4 − 3 = 1.
+    - teach: 'Elimination: add or subtract the equations so one letter disappears. x + y = 7 plus x − y = 1 gives 2x = 8, x = 4, then y = 3. Substitution: make one letter the subject (y = 2x) and put it into the other equation.'
+      check:
+        prompt: y = 3x and x + y = 12. What is x?
+        options:
+        - '3'
+        - '4'
+        - '9'
+        answer: '3'
+        why: x + 3x = 12, so 4x = 12 and x = 3.
+    - teach: 'Two lines don''t always cross once. Parallel lines (same slope, different intercept) never meet: no solution, e.g. x + y = 2 and x + y = 5. The same line written twice (2x + 2y = 4 and x + y = 2) gives infinitely many. Compare ratios: a₁/a₂, b₁/b₂, c₁/c₂.'
+      check:
+        prompt: How many solutions do x + 2y = 3 and 2x + 4y = 6 have?
+        options:
+        - Infinitely many
+        - One
+        - None
+        answer: Infinitely many
+        why: 'The second is the first doubled: the same line.'
   items:
   - prompt: Solve x + y = 10 and x − y = 2. What is x?
     answer: '6'
@@ -469,3 +809,109 @@ concepts:
     - 2/4 = k/6.
     solution: 'Step 1: 2/4 = k/6 gives k = 3. Step 2: Check 5/7 ≠ 1/2, so the lines are parallel and distinct: no solution.'
     mistakes: {"6": "no_solution_ratio", "12": "no_solution_ratio"}
+  - prompt: Solve x + y = 12 and x − y = 4. What is y?
+    answer: '4'
+    check: (12 - 4)/2
+    difficulty: 1
+    hints:
+    - Subtract the second from the first.
+    - 2y = 8.
+    solution: 2y = 8 so y = 4, and x = 8.
+    mistakes:
+      '8': pair_found_one_value
+      '16': elimination_sign
+  - prompt: Solve y = x + 1 and x + y = 7. What is x?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Put y = x + 1 into the second equation.
+    - 2x + 1 = 7.
+    solution: 2x + 1 = 7, so x = 3 and y = 4.
+    mistakes:
+      '4': pair_found_one_value
+      '6': substitute_both
+  - prompt: How many solutions do x + y = 4 and x + y = 9 have?
+    options:
+    - None
+    - One
+    - Infinitely many
+    - Two
+    answer: None
+    difficulty: 1
+    hints:
+    - Can two numbers add to 4 and to 9 at once?
+    - The lines are parallel.
+    solution: 'x + y can''t be both 4 and 9, so there is no solution: the lines are parallel.'
+    mistakes:
+      One: pair_parallel_no_solution
+  - prompt: Solve 2x + y = 11 and x + y = 7. What is x?
+    answer: '4'
+    check: 11 - 7
+    difficulty: 2
+    hints:
+    - 'Subtract: (2x + y) − (x + y).'
+    - x = 11 − 7.
+    solution: x = 4, then y = 3.
+    mistakes:
+      '3': pair_found_one_value
+      '18': elimination_sign
+  - prompt: Solve 3x − 2y = 5 and x + 2y = 7. What is y?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - 'Add the equations: 4x = 12.'
+    - x = 3, then 3 + 2y = 7.
+    solution: 4x = 12 gives x = 3; 2y = 4 gives y = 2.
+    mistakes:
+      '3': pair_found_one_value
+      '1': elimination_sign
+  - prompt: How many solutions do 3x − y = 2 and 6x − 2y = 4 have?
+    options:
+    - Infinitely many
+    - None
+    - One
+    - Two
+    answer: Infinitely many
+    difficulty: 2
+    hints:
+    - Compare the second equation with the first.
+    - Is it just doubled?
+    solution: '6x − 2y = 4 is 2 × (3x − y = 2): the same line, so infinitely many solutions.'
+    mistakes:
+      None: no_solution_ratio
+      One: one_solution_only
+  - prompt: 'A bag holds ₹5 and ₹10 coins: 20 coins worth ₹130 in all. How many ₹10 coins are there?'
+    answer: '6'
+    check: (130 - 100)/5
+    difficulty: 2
+    hints:
+    - x + y = 20 and 5x + 10y = 130.
+    - 'Multiply the first by 5 and subtract: 5y = 30.'
+    solution: 5y = 30, so 6 ten-rupee coins and 14 five-rupee coins.
+    mistakes:
+      '14': pair_found_one_value
+      '13': eliminate_pen
+  - prompt: Solve 2x + 3y = 13 and 3x + 2y = 12. What is x?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - 'Add the equations: 5x + 5y = 25, so x + y = 5.'
+    - 'Subtract: x − y = −1.'
+    solution: x + y = 5 and x − y = −1 give x = 2, y = 3.
+    mistakes:
+      '3': pair_found_one_value
+      '-1': elimination_sign
+  - prompt: For which value of k do kx + 2y = 3 and 6x + 4y = 6 have infinitely many solutions?
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - The second must be the first doubled.
+    - 2 × kx = 6x.
+    solution: Doubling the first gives 2kx + 4y = 6, which matches when 2k = 6, so k = 3.
+    mistakes:
+      '6': k_both_places
+      '1.5': no_solution_ratio
