@@ -60,8 +60,36 @@ export default function TeacherHelp() {
       <h2>What you can and can&apos;t see</h2>
       <p>
         You see topic progress only for students whose families agreed to share it with the school. You never see marks,
-        mood check-ins, notes or goals. A raised hand always reaches you, because the student asked for you.
+        mood check-ins, notes, goals, stickers or achievements. A raised hand always reaches you, because the student asked
+        for you.
       </p>
+
+      <h2>What&apos;s new</h2>
+      <ul>
+        <li>
+          <strong>Harder questions count.</strong> A topic is only called secure once the student has answered one of its
+          harder questions right. Practice steps up a level after a few right answers in a row and steps down after two wrong.
+          Harder questions carry a small &ldquo;Challenge&rdquo; tag.
+        </li>
+        <li>
+          <strong>Re-teach sheet</strong> now also lists topics where several students keep missing the harder questions:
+          good ones to work through together on the board.
+        </li>
+        <li>
+          <strong>Chapter planning sheet</strong> (from your Class page): for one chapter, how many students are secure,
+          getting there, learning or not started on each topic. Counts only, no names.
+        </li>
+        <li>
+          <strong>Stickers and achievements</strong> for students: earned by spotting SYNiq&apos;s deliberate mistakes and
+          by learning moments, never by time on screen. They are the student&apos;s own; you don&apos;t see them, and nobody
+          is compared.
+        </li>
+        <li>
+          After a mistake tip students can tap <strong>&ldquo;Was this tip helpful?&rdquo;</strong>. The admin sees which
+          tips most often didn&apos;t help, so they can be improved.
+        </li>
+        <li>Typed numbers can be written with Indian commas: 1,00,000 is accepted.</li>
+      </ul>
     </div>
   );
 }

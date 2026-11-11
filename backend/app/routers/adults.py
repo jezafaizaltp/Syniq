@@ -26,7 +26,7 @@ from ..auth import (
     require_role,
     verify_password,
 )
-from .. import i18n, learning
+from .. import i18n, learning, rewards
 from ..db import get_db
 from ..engine import checkup, detect
 from ..engine.mastery import progress_label
@@ -221,6 +221,70 @@ def class_mistakes(class_id: int, db: DbSession = Depends(get_db), user: User = 
     return sorted(by_tag.values(), key=lambda e: (-len(e["working_on"]), -e["fixed"], e["text"]))
 
 
+HARD_TROUBLE_MIN_STUDENTS = 2  # a topic is listed when this many students are stuck on its harder questions
+
+
+@router.get("/teacher/classes/{class_id}/hard-trouble", tags=["teacher"])
+def class_hard_trouble(class_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
+    """Topics whose harder questions several students have missed twice or more without one right yet.
+
+    A harder question is best gone through together on the board. Students in alphabetical order, never ranked.
+    """
+    _teacher_class(db, user, class_id)
+    hard_items = {i.id: i.concept_id for i in db.scalars(select(Item).where(Item.difficulty >= 3, Item.status == "approved")).all()}
+    by_topic: dict[int, list[dict]] = {}
+    for s in sorted(_shared_students(db, class_id), key=lambda x: x.name):
+        wrong: Counter = Counter()
+        right: set[int] = set()
+        for item_id, correct in db.execute(
+            select(Attempt.item_id, Attempt.correct).where(Attempt.student_id == s.id, Attempt.item_id.in_(list(hard_items)))
+        ).all():
+            if correct:
+                right.add(hard_items[item_id])
+            else:
+                wrong[hard_items[item_id]] += 1
+        for cid, n in wrong.items():
+            if n >= 2 and cid not in right:
+                by_topic.setdefault(cid, []).append({"student_id": s.id, "name": s.name})
+    out = []
+    for cid, students in by_topic.items():
+        if len(students) < HARD_TROUBLE_MIN_STUDENTS:
+            continue
+        c = db.get(Concept, cid)
+        ch = db.get(Chapter, c.chapter_id)
+        out.append({"concept_id": cid, "topic": c.title, "chapter": ch.title, "students": students})
+    audit(db, user, "view_class_hard_trouble")
+    return sorted(out, key=lambda e: (-len(e["students"]), e["topic"]))
+
+
+@router.get("/teacher/classes/{class_id}/chapter-progress", tags=["teacher"])
+def class_chapter_progress(
+    class_id: int, chapter_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))
+):
+    """For one chapter: how many students are secure, getting there, learning or not started on each topic.
+
+    Counts only: no names, no marks, nothing to rank anyone by. For the teacher's printed planning sheet.
+    """
+    _teacher_class(db, user, class_id)
+    chapter = db.get(Chapter, chapter_id)
+    if not chapter:
+        raise HTTPException(404, "Chapter not found")
+    students = _shared_students(db, class_id)
+    ids = [s.id for s in students]
+    topics = db.scalars(select(Concept).where(Concept.chapter_id == chapter_id).order_by(Concept.order, Concept.id)).all()
+    rows = []
+    for c in topics:
+        counts = {"secure": 0, "getting_there": 0, "learning": 0, "not_started": 0}
+        seen = 0
+        for r in db.scalars(select(Mastery).where(Mastery.concept_id == c.id, Mastery.student_id.in_(ids), Mastery.attempts > 0)).all():
+            counts[progress_label(r.p_known, r.attempts)] += 1
+            seen += 1
+        counts["not_started"] = len(ids) - seen
+        rows.append({"topic": c.title, **counts})
+    audit(db, user, "view_class_chapter_progress")
+    return {"chapter": chapter.title, "number": chapter.number, "students": len(ids), "topics": rows}
+
+
 @router.get("/teacher/review-queue", tags=["teacher"])
 def review_queue(db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
     items = db.scalars(select(Item).where(Item.status == "draft")).all()
@@ -303,6 +367,7 @@ def children(db: DbSession = Depends(get_db), user: User = Depends(require_role(
                     for mode, v in (child.settings or {}).get("auto_support", {}).items()
                 ],
                 "checkup_note": _checkup_note(db, user, child),
+                "rewards_on": rewards.rewards_on(db, child),
             }
         )
     return out
@@ -411,6 +476,22 @@ def set_support(student_id: int, body: SupportIn, db: DbSession = Depends(get_db
     db.commit()
     audit(db, user, "set_child_support", student_id)
     return {"support_modes": body.modes}
+
+
+class RewardsIn(BaseModel):
+    on: bool
+
+
+@router.put("/guardian/children/{student_id}/rewards", tags=["guardian"])
+def set_rewards(student_id: int, body: RewardsIn, db: DbSession = Depends(get_db), user: User = Depends(require_role("guardian"))):
+    """Stickers and achievements on or off for this child. The parent's choice wins over the school's default."""
+    if not guardian_of(db, user, student_id):
+        raise HTTPException(404, "Not found")
+    child = db.get(User, student_id)
+    child.settings = {**(child.settings or {}), "rewards": "on" if body.on else "off"}
+    db.commit()
+    audit(db, user, "set_child_rewards", student_id)
+    return {"rewards_on": body.on}
 
 
 class ConsentIn(BaseModel):

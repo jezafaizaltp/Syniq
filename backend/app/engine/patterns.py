@@ -58,6 +58,7 @@ class Pattern:
     status: str = "working_on"  # working_on | fixed
     right_since: int = 0
     last_seen: datetime | None = None
+    fixed_at: datetime | None = None  # the right answer that made it fixed
 
 
 def find(sightings: list[Sighting]) -> list[Pattern]:
@@ -68,6 +69,7 @@ def find(sightings: list[Sighting]) -> list[Pattern]:
             p = out.setdefault(s.made, Pattern(tag=s.made, times=0))
             p.times += 1
             p.right_since = 0
+            p.fixed_at = None
             p.last_seen = s.at
             if s.concept_id not in p.topics:
                 p.topics.append(s.concept_id)
@@ -75,11 +77,14 @@ def find(sightings: list[Sighting]) -> list[Pattern]:
             for tag in s.traps:
                 if tag in out:
                     out[tag].right_since += 1
+                    if out[tag].right_since == FIXED_AFTER:
+                        out[tag].fixed_at = s.at
         elif not s.made:
             # Wrong in another way on a question that carries the trap: not a clean avoid.
             for tag in s.traps:
                 if tag in out:
                     out[tag].right_since = 0
+                    out[tag].fixed_at = None
     found = [p for p in out.values() if p.times >= PATTERN_MIN]
     for p in found:
         p.status = "fixed" if p.right_since >= FIXED_AFTER else "working_on"

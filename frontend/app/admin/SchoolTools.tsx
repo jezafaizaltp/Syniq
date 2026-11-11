@@ -33,14 +33,14 @@ export function saveFile(text: string, name: string, type = "text/csv") {
 
 /** The school's name and who parents can ask: shown on sign-in, letters, slips and the lab poster. */
 export function SchoolDetails() {
-  const [f, setF] = useState({ name: "", contact: "" });
+  const [f, setF] = useState({ name: "", contact: "", rewards: "" });
   const [saved, setSaved] = useState("");
   useEffect(() => {
-    api<{ name: string; contact: string }>("/admin/school").then(setF);
+    api<{ name: string; contact: string; rewards: string }>("/admin/school").then(setF);
   }, []);
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    setF(await put<{ name: string; contact: string }>("/admin/school", f));
+    setF(await put<{ name: string; contact: string; rewards: string }>("/admin/school", f));
     setSaved("Saved. The sign-in page, letters, slips and poster now use it.");
   }
   return (
@@ -51,6 +51,14 @@ export function SchoolDetails() {
         <input id="s-name" value={f.name} maxLength={120} onChange={(e) => setF({ ...f, name: e.target.value })} />
         <label htmlFor="s-contact">Who parents can ask (name and phone or email)</label>
         <input id="s-contact" value={f.contact} maxLength={200} onChange={(e) => setF({ ...f, contact: e.target.value })} />
+        <label className="check" style={{ marginTop: 12 }}>
+          <input
+            type="checkbox"
+            checked={f.rewards !== "off"}
+            onChange={(e) => setF({ ...f, rewards: e.target.checked ? "on" : "off" })}
+          />
+          Stickers and achievements for students (a parent can still switch them off or on for their own child)
+        </label>
         <div className="row" style={{ marginTop: 12 }}>
           <button type="submit">Save</button>
           <Link href="/admin/poster">Print the lab-wall poster →</Link>

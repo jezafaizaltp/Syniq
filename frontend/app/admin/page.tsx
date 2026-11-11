@@ -326,6 +326,12 @@ export default function Admin() {
       <p>
         <Link href="/admin/letters">Parent letters and consent forms: print one per student →</Link>
       </p>
+      <p>
+        <Link href="/admin/coverage">Content coverage: questions, harder questions and activities per subject →</Link>
+      </p>
+      <p>
+        <Link href="/admin/tips">Mistake tips students said did not help →</Link>
+      </p>
 
       {people && <Readiness people={people} />}
 

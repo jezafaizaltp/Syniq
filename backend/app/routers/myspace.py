@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import i18n, learning
+from .. import i18n, learning, rewards
 from ..auth import require_learning_consent, require_role
 from ..db import get_db
 from ..engine.mastery import progress_label
@@ -69,6 +69,12 @@ def overview(user: User = Depends(require_learning_consent), db: DbSession = Dep
         "review_due": due,
         "stars": learning.stars(db, user.id),
     }
+
+
+@router.get("/rewards")
+def my_rewards(user: User = Depends(require_learning_consent), db: DbSession = Depends(get_db)):
+    """Stickers from spotting mistakes, achievements and practice days. Mine alone: never compared, never shown to teachers."""
+    return rewards.summary(db, user, learning.utcnow())
 
 
 @router.get("/methods")

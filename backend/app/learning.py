@@ -1,6 +1,7 @@
 """Glue between the database and the pure adaptive engine."""
 
 import random
+import re
 from datetime import timedelta
 from fractions import Fraction
 
@@ -136,6 +137,8 @@ def build_states(db: DbSession, student: User, chapter_id: int) -> tuple[list[Co
             p_known=row.p_known,
             attempts=row.attempts,
             wrong_streak=_wrong_since_explanation(db, student.id, cid),
+            right_streak=row.correct_streak or 0,
+            wrong_in_row=row.wrong_streak or 0,
             next_review_at=row.next_review_at,
             prereq_ids=prereqs.get(cid, []),
             styles_seen=_styles_seen(db, student.id, cid),
@@ -254,7 +257,8 @@ def next_action(
     # A topic whose questions have all been answered in this sitting is set aside for now:
     # moving to another topic beats asking the same questions again.
     used_up = used_up_topics(db, student.id, [s.concept_id for s in chapter if not m.is_secure(s.p_known, s.attempts)])
-    action = decide(chapter, states, now, current_concept_id, preferred, ties, set_aside=used_up)
+    challenge = bool(settings.get("more_challenges"))
+    action = decide(chapter, states, now, current_concept_id, preferred, ties, set_aside=used_up, challenge=challenge)
     if action.kind in ("practice", "chapter_complete"):
         # Reviews from other chapters are due too: without them, what was learnt there fades.
         other = other_review(db, student, chapter_id, now)
@@ -392,6 +396,19 @@ def _hardest(db: DbSession, concept_ids) -> dict[int, list[Item]]:
     return out
 
 
+def hard_progress(db: DbSession, student_id: int, concept_id: int) -> tuple[bool, bool]:
+    """(the topic has harder questions, the student has answered one of them right)."""
+    hard_ids = db.scalars(
+        select(Item.id).where(Item.concept_id == concept_id, Item.status == "approved", Item.difficulty >= m.HARD)
+    ).all()
+    if not hard_ids:
+        return False, False
+    right = db.scalars(
+        select(Attempt.id).where(Attempt.student_id == student_id, Attempt.item_id.in_(hard_ids), Attempt.correct.is_(True)).limit(1)
+    ).first()
+    return True, right is not None
+
+
 def stretch_counts(db: DbSession, student_id: int, concept_ids) -> dict[int, int]:
     """How many of each topic's hardest questions the student has not yet answered right."""
     hardest = _hardest(db, concept_ids)
@@ -496,13 +513,21 @@ def normalise(answer: str) -> str:
     return "".join(answer.lower().split()).replace("^2", "²").replace("−", "-")
 
 
+_GROUPED = re.compile(r"^-?\d{1,3}(,\d{2,3})+(\.\d+)?$")
+
+
+def _ungroup(n: str) -> str:
+    """1,00,000 (Indian grouping) and 100,000 are both 100000. Spaces are already gone (normalise)."""
+    return n.replace(",", "") if _GROUPED.match(n) else n
+
+
 def same_answer(a: str, b: str) -> bool:
-    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5)."""
+    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5, 1,00,000 and 100000)."""
     a, b = normalise(a), normalise(b)
     if a == b:
         return True
     try:
-        return Fraction(a) == Fraction(b)
+        return Fraction(_ungroup(a)) == Fraction(_ungroup(b))
     except (ValueError, ZeroDivisionError):
         return False
 
@@ -551,6 +576,10 @@ def record_attempt(
     was_secure = m.is_secure(row.p_known, row.attempts)
     expected = m.expected_correct(row.p_known, m.Evidence(correct, item.kind, hints_used))
     row.p_known = m.update_p_known(row.p_known, m.Evidence(correct, item.kind, hints_used))
+    if row.p_known >= m.SECURE_THRESHOLD and not was_secure:
+        has_hard, hard_right = hard_progress(db, student.id, item.concept_id)
+        hard_right = hard_right or (correct and item.difficulty >= m.HARD)
+        row.p_known = m.cap_until_hard_right(row.p_known, has_hard, hard_right, was_secure)
     row.attempts += 1
     row.correct_streak = row.correct_streak + 1 if correct else 0
     row.wrong_streak = 0 if correct else row.wrong_streak + 1

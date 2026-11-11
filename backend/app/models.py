@@ -7,7 +7,7 @@ retained and audited separately.
 
 from datetime import date, datetime, timezone
 
-from sqlalchemy import JSON, Boolean, Date, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import JSON, Boolean, Date, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .db import Base
@@ -315,6 +315,8 @@ class Misconception(Base):
 
 class Attempt(Base):
     __tablename__ = "attempts"
+    # Days practised, today's answers, this week: always by student and time.
+    __table_args__ = (Index("ix_attempts_student_time", "student_id", "created_at"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
@@ -349,9 +351,14 @@ class LearningEvent(Base):
 
     __tablename__ = "learning_events"
 
+    __table_args__ = (Index("ix_learning_events_daily", "student_id", "kind", "created_at"),)
+
     id: Mapped[int] = mapped_column(primary_key=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
-    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break
+    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break | spot_star | spot_seen | tip_yes | tip_no
+    # The question it was about (spot puzzles, tip feedback) and the mistake tip's tag, when there is one.
+    item_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    detail: Mapped[str | None] = mapped_column(String(60), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

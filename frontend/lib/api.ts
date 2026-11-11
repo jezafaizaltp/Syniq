@@ -26,6 +26,7 @@ export type Settings = {
   auto_off?: string[];
   hindi_course?: "a" | "b";
   welcome_seen?: boolean;
+  more_challenges?: boolean;
 };
 
 /** Support for sight, hearing, speech, movement, a calm routine, choosing or numbers: chosen by a parent or the student. Words: support.<key>.* in i18n.ts. */

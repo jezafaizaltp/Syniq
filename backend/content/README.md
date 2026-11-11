@@ -960,6 +960,10 @@ Claude wrote these chapters and checked them, because no subject teacher is avai
 - **The fit with the textbook is only partly checked.** The Physics, Chemistry, Biology, Social Science I, Social Science II and IT chapter names match the 2024 textbooks' contents pages; the Maths chapter names still come from study-guide websites (`../../content/class9-syllabus-draft.csv`). The topics inside each chapter were not taken from the books. A teacher with the 2024 SCERT books should compare topic order and wording when one is available.
 - **The language chapters (English, Malayalam, Hindi) were written from the 2024 lesson texts themselves**, which the school supplied, so names, events and quotations come from the books. The lesson topics are the textbook's lessons; each unit adds one grammar or language topic from the unit's own exercises. The Malayalam and Hindi wording was written by Claude and has not been read by a native-speaking teacher yet.
 
+- **Worked solutions in CBSE Classes 11 and 12 are often one word or a number** (about 770 questions, for example
+  "Seven." or "2 ATP."). Everywhere else, Maths and Science solutions give a reason or a step, and a test keeps it that
+  way. Writing fuller solutions for Classes 11 and 12 is still to do.
+
 ## Format
 
 ```yaml
@@ -1003,6 +1007,21 @@ concepts:
 Typed answers must be numbers (whole, decimal or a fraction like 3/4). Students' answers are accepted however the number is written: 22, 22.0 and 44/2 are all right. Anything else (an expression, a surd, words) is a choice question.
 
 Mistake tags already translated into Malayalam in `backend/app/i18n.py` (`tip.<tag>`) can be used without a tip here. New tags need a tip in a pack (any pack: tips are shared), shown in English.
+
+## Harder questions
+
+Every topic should have questions at all three levels; the Kerala Class 9 packs have at least two at level 3 (a test
+checks this). Level 3 matters to the engine:
+
+- **A topic is not called secure until one level-3 question is answered right** (`engine/mastery.py`,
+  `cap_until_hard_right`). Until then the estimate stops at 0.97, just short of secure, which also makes practice pick
+  level-3 questions. A topic that was secure before stays secure.
+- **Practice steps up a level** after 3 right answers in a row (2 with the student's "More challenges" setting) and
+  **steps down** after 2 wrong in a row (`rules.practice_difficulty`).
+- The app shows a small "Challenge" tag on level-3 questions, and a kind line after a wrong one.
+
+A good level-3 question needs two steps of thinking (apply, explain why, or compare), not a rarer fact. Its first
+hint points the way without stating the answer (a test checks this too); later hints may come closer.
 
 ## Pictures
 

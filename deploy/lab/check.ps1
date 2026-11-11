@@ -100,6 +100,11 @@ if ($backups.Count -eq 0) {
   }
 }
 
+# 6. Lessons and questions are loaded
+$content = docker compose exec -T api python -m tools.content_counts 2>$null
+if ($LASTEXITCODE -eq 0 -and $content) { Ok "Content: $content" }
+else { Fail "No lessons or questions found. Restart SYNiq (start.ps1); if it stays empty see: docker compose logs --tail 50 api" }
+
 Write-Host ""
 if ($script:problems -gt 0) {
   Write-Host "$($script:problems) thing(s) to fix before students start." -ForegroundColor Red

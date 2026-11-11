@@ -29,10 +29,14 @@ services:
       SYNIQ_ENV: production
       # The web app and the API share one address, so no other site needs to be let in.
       CORS_ORIGINS: http://localhost
+      # The admin page shows how old the newest backup is and how much disk is left.
+      SYNIQ_BACKUP_DIR: /backups
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       CLOUDFLARE_ACCOUNT_ID: ${CLOUDFLARE_ACCOUNT_ID:-}
       CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN:-}
+    volumes:
+      - ./backups:/backups:ro
 
   web:
     build:

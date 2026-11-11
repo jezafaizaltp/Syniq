@@ -751,3 +751,86 @@ def set_sign_videos(concept_id: int, body: SignVideosIn, db: DbSession = Depends
     concept.sign_videos = [{"word": v.word.strip(), "url": v.url.strip()} for v in body.videos] or None
     audit(db, user, f"sign videos set: {concept.title}")
     return {"videos": concept.sign_videos or []}
+
+
+# --- Lab health, content coverage, tip feedback ------------------------------------------
+
+BACKUP_WARN_HOURS = 36  # backups run every 24 hours
+DISK_WARN_GB = 2.0
+
+
+@router.get("/health")
+def lab_health(db: DbSession = Depends(get_db), user: User = Depends(admin_only)):
+    """How old the newest backup is and how much disk is left, for the readiness card."""
+    import os
+    import shutil
+    import time
+
+    folder = os.environ.get("SYNIQ_BACKUP_DIR", "")
+    out: dict = {"backup_folder": bool(folder and os.path.isdir(folder)), "newest_backup_hours": None, "backups": 0}
+    if out["backup_folder"]:
+        files = [os.path.join(folder, f) for f in os.listdir(folder) if f.startswith("syniq-") and f.endswith(".sql.gz")]
+        files = [f for f in files if os.path.getsize(f) > 0]
+        out["backups"] = len(files)
+        if files:
+            out["newest_backup_hours"] = round((time.time() - max(os.path.getmtime(f) for f in files)) / 3600, 1)
+    usage = shutil.disk_usage(folder if out["backup_folder"] else "/")
+    out["disk_free_gb"] = round(usage.free / 1e9, 1)
+    out["backup_ok"] = out["newest_backup_hours"] is not None and out["newest_backup_hours"] <= BACKUP_WARN_HOURS
+    out["disk_ok"] = out["disk_free_gb"] >= DISK_WARN_GB
+    return out
+
+
+@router.get("/coverage")
+def coverage(db: DbSession = Depends(get_db), user: User = Depends(admin_only)):
+    """Per subject: chapters, topics, approved questions at each level, and what each topic has (or lacks)."""
+    from ..models import Explanation, Item
+
+    rows = []
+    for subject in db.scalars(select(Subject).order_by(Subject.id)).all():
+        chapters = db.scalars(select(Chapter).where(Chapter.subject_id == subject.id)).all()
+        concepts = db.scalars(select(Concept).where(Concept.chapter_id.in_([c.id for c in chapters]))).all() if chapters else []
+        if not concepts:
+            continue
+        ids = [c.id for c in concepts]
+        items = db.scalars(select(Item).where(Item.concept_id.in_(ids), Item.status == "approved")).all()
+        levels = {1: 0, 2: 0, 3: 0}
+        hard_per_topic = {cid: 0 for cid in ids}
+        for i in items:
+            levels[min(max(i.difficulty, 1), 3)] += 1
+            if i.difficulty >= 3:
+                hard_per_topic[i.concept_id] += 1
+        with_expl = set(db.scalars(select(Explanation.concept_id).where(Explanation.concept_id.in_(ids), Explanation.status == "approved")).all())
+        with_items = {i.concept_id for i in items}
+        rows.append(
+            {
+                "subject_id": subject.id,
+                "subject": subject.name,
+                "code": subject.code,
+                "chapters": len(chapters),
+                "topics": len(concepts),
+                "questions": len(items),
+                "by_level": levels,
+                "topics_without_questions": len(set(ids) - with_items),
+                "topics_without_explanations": len(set(ids) - with_expl),
+                "topics_without_activity": sum(1 for c in concepts if not c.activity),
+                "topics_without_hard": sum(1 for v in hard_per_topic.values() if v == 0),
+            }
+        )
+    return rows
+
+
+@router.get("/tip-feedback")
+def tip_feedback_list(db: DbSession = Depends(get_db), user: User = Depends(admin_only)):
+    """Mistake tips learners said did not help, most first. Counts per tip only: no student is named."""
+    from ..models import LearningEvent, Misconception
+
+    votes: dict[str, dict] = {}
+    for kind, tag in db.execute(
+        select(LearningEvent.kind, LearningEvent.detail).where(LearningEvent.kind.in_(("tip_yes", "tip_no")), LearningEvent.detail.is_not(None))
+    ).all():
+        v = votes.setdefault(tag, {"yes": 0, "no": 0})
+        v["yes" if kind == "tip_yes" else "no"] += 1
+    tips = {m.tag: m.tip for m in db.scalars(select(Misconception).where(Misconception.tag.in_(list(votes)))).all()} if votes else {}
+    out = [{"tag": t, "tip": tips.get(t, ""), **v} for t, v in votes.items()]
+    return sorted(out, key=lambda r: (-r["no"], r["yes"], r["tag"]))

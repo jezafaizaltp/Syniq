@@ -7,6 +7,7 @@ COPY app ./app
 COPY migrations ./migrations
 COPY alembic.ini .
 COPY content ./content
+COPY tools ./tools
 RUN useradd --system --uid 1001 syniq
 USER syniq
 EXPOSE 8000

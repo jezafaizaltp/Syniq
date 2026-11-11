@@ -1,5 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
+
+type Health = { backup_folder: boolean; newest_backup_hours: number | null; backups: number; disk_free_gb: number; backup_ok: boolean; disk_ok: boolean };
+
+/** The newest backup and free disk space, as two more lines on the card. */
+function HealthLines() {
+  const [h, setH] = useState<Health | null>(null);
+  useEffect(() => {
+    api<Health>("/admin/health").then(setH).catch(() => setH(null));
+  }, []);
+  if (!h) return null;
+  return (
+    <>
+      <li className={h.backup_ok ? "ready-done" : "ready-must"}>
+        <span aria-hidden="true">{h.backup_ok ? "✓" : "!"}</span>{" "}
+        <strong>
+          {!h.backup_folder
+            ? "Backups: this computer can't see the backups folder"
+            : h.newest_backup_hours == null
+              ? "Backups: none yet"
+              : `Newest backup: ${h.newest_backup_hours < 1 ? "less than an hour" : `${Math.round(h.newest_backup_hours)} hours`} old (${h.backups} kept)`}
+        </strong>
+        {!h.backup_ok && <span className="muted"> (make one now: docker compose restart backup)</span>}
+      </li>
+      <li className={h.disk_ok ? "ready-done" : "ready-must"}>
+        <span aria-hidden="true">{h.disk_ok ? "✓" : "!"}</span> <strong>Free disk space: {h.disk_free_gb} GB</strong>
+        {!h.disk_ok && <span className="muted"> (below 2 GB: SYNiq may stop saving work)</span>}
+      </li>
+    </>
+  );
+}
+
 type Person = { id: number; name: string; first_sign_in_pending: boolean };
 type Student = Person & { consent: Record<string, boolean>; guardians: Person[] };
 type People = { classes: { id: number; name: string; teacher: string | null; students: Student[] }[]; teachers: Person[] };
@@ -83,6 +116,7 @@ export default function Readiness({ people }: { people: People }) {
               waiting={parents.filter((p) => p.first_sign_in_pending).map((p) => p.name)}
               must={false}
             />
+            <HealthLines />
           </ul>
           <p className="muted">
             Before each lab period, also run the lab check (check.sh on Ubuntu, check-windows.bat on Windows). Mood check-ins,

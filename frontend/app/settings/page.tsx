@@ -33,6 +33,7 @@ export default function SettingsPage() {
     ["reduced_motion", "settings.motion", "settings.motion_help"],
     ["read_aloud", "settings.read_aloud", "settings.read_aloud_help"],
     ["extra_time", "settings.extra_time", "settings.extra_time_help"],
+    ["more_challenges", "settings.more_challenges", "settings.more_challenges_help"],
   ];
 
   const modes = s.support_modes ?? [];
