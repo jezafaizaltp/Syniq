@@ -60,6 +60,34 @@ concepts:
         bin: Degree 2
         clue: Look at each term's power of x. Which is biggest?
         why: 'x² is the biggest power: degree 2.'
+    lesson:
+      - teach: 'A polynomial in x is a sum of terms such as 3x², −5x and 7. Each term is a number times a whole-number power of x. The number in front of a term, with its sign, is its coefficient: in 3x² − 5x + 7, the coefficient of x is −5. The term with no x, here 7, is the constant term.'
+        check:
+          prompt: In 6x³ − 2x + 9, what is the coefficient of x?
+          options:
+          - −2
+          - '2'
+          - '6'
+          answer: −2
+          why: The term with x is −2x, and the sign belongs to the coefficient.
+      - teach: 'The degree of a polynomial is the highest power of x in it. 3x² − 5x + 7 has degree 2. 4x − 1 has degree 1. Look at the power, not the coefficient: 9x² still has degree 2.'
+        check:
+          prompt: What is the degree of 2 + 8x − x⁴?
+          options:
+          - '4'
+          - '8'
+          - '2'
+          answer: '4'
+          why: The highest power of x is x⁴, so the degree is 4, wherever the term is written.
+      - teach: 'When two polynomials are multiplied, their degrees add, because x³ × x² = x⁵. So (x² + 1)(x³ − x) has degree 2 + 3 = 5. The constant term of a product is the product of the constant terms: (x + 2)(x − 5) has constant term −10.'
+        check:
+          prompt: What is the degree of (x³ + 2)(x⁴ − 1)?
+          options:
+          - '7'
+          - '12'
+          - '4'
+          answer: '7'
+          why: 'x³ × x⁴ = x⁷, so the degrees add: 3 + 4 = 7.'
     items:
       - prompt: "Which of these is a polynomial of degree 1?"
         options: ["3x − 7", "x² − 7", "7", "x³ + x"]
@@ -125,6 +153,69 @@ concepts:
         hints: ["The constant term is the product of the constants.", "(−3) × 2 × (−1)."]
         solution: "Step 1: Constant = (−3) × 2 × (−1). Step 2: = 6."
         mistakes: {"-6": dropped_sign, "-2": added_constants}
+      - prompt: What is the degree of 7x⁵ + 3x² − 1?
+        answer: '5'
+        check: '5'
+        difficulty: 1
+        hints:
+        - Find the highest power of x.
+        - Ignore the coefficients.
+        solution: 'Step 1: The powers are 5, 2 and 0. Step 2: The highest is 5. Step 3: So the degree is 5.'
+        mistakes:
+          '7': coefficient_not_degree
+      - prompt: What is the constant term of 4x² − 6x − 11?
+        answer: '-11'
+        check: '-11'
+        difficulty: 1
+        hints:
+        - It is the term with no x.
+        - Keep its sign.
+        solution: 'Step 1: The terms are 4x², −6x and −11. Step 2: −11 has no x. Step 3: So the constant term is −11.'
+        mistakes:
+          '11': dropped_sign
+      - prompt: What is the coefficient of x³ in 2x − x³ + 5x²?
+        answer: '-1'
+        check: '-1'
+        difficulty: 2
+        hints:
+        - −x³ means −1 × x³.
+        - The sign belongs to the coefficient.
+        solution: 'Step 1: The x³ term is −x³. Step 2: −x³ = −1 × x³. Step 3: So the coefficient is −1.'
+        mistakes:
+          '1': dropped_sign
+          '3': coefficient_not_degree
+      - prompt: What is the degree of (x² − 3)(x² + 3)?
+        answer: '4'
+        check: 2 + 2
+        difficulty: 2
+        hints:
+        - Degrees add when you multiply.
+        - x² × x².
+        solution: 'Step 1: Each bracket has degree 2. Step 2: x² × x² = x⁴. Step 3: So the degree is 4.'
+        mistakes:
+          '2': added_powers
+      - prompt: What is the constant term of (2x − 1)(x + 4)(x − 3)?
+        answer: '12'
+        check: (-1)*4*(-3)
+        difficulty: 3
+        hints:
+        - Multiply the constant terms of the brackets.
+        - (−1) × 4 × (−3).
+        solution: 'Step 1: The constants are −1, 4 and −3. Step 2: (−1) × 4 = −4. Step 3: (−4) × (−3) = 12.'
+        mistakes:
+          '-12': dropped_sign
+          '0': added_constants
+      - prompt: What is the degree of (x + 2)⁴?
+        answer: '4'
+        check: '4'
+        difficulty: 3
+        hints:
+        - (x + 2)⁴ is four brackets multiplied.
+        - Each has degree 1.
+        solution: 'Step 1: (x + 2)⁴ = (x + 2)(x + 2)(x + 2)(x + 2). Step 2: Degrees add: 1 + 1 + 1 + 1. Step 3: = 4.'
+        mistakes:
+          '1': cube_degree
+          '8': multiplied_degrees
   - code: math9.poly.value
     title: The value of a polynomial
     after: [math9.poly.terms]
@@ -166,6 +257,34 @@ concepts:
         - when:
             x: 3
           say: x = 3 gives 27 − 6 + 1 = 22. To get a big negative answer, x³ must be negative.
+    lesson:
+      - teach: 'We often name a polynomial p(x). Then p(3) means its value when x = 3: put 3 in place of every x. If p(x) = 2x + 5, then p(3) = 2 × 3 + 5 = 11.'
+        check:
+          prompt: p(x) = 4x − 1. What is p(2)?
+          options:
+          - '7'
+          - '41'
+          - '3'
+          answer: '7'
+          why: 4 × 2 − 1 = 8 − 1 = 7.
+      - teach: 'With negative numbers, use brackets and do powers first. p(x) = x² − 3x: p(−2) = (−2)² − 3 × (−2) = 4 + 6 = 10.'
+        check:
+          prompt: p(x) = x² + x. What is p(−3)?
+          options:
+          - '6'
+          - −12
+          - '12'
+          answer: '6'
+          why: (−3)² + (−3) = 9 − 3 = 6.
+      - teach: 'If p(a) = 0, the number a is called a zero of p. For x² − 4: p(2) = 0 and p(−2) = 0, so 2 and −2 are its zeros. A fact like p(1) = 0 can also be used to find a missing coefficient.'
+        check:
+          prompt: p(x) = x² − 25. Which is a zero of p?
+          options:
+          - '5'
+          - '25'
+          - '0'
+          answer: '5'
+          why: p(5) = 25 − 25 = 0. (−5 is another zero.)
     items:
       - prompt: "p(x) = 2x + 5. What is p(3)?"
         answer: "11"
@@ -237,6 +356,67 @@ concepts:
         hints: ["Which numbers squared give 9?", "Don't forget the negative one."]
         solution: "Step 1: x² = 9. Step 2: x = 3 or x = −3, since (−3)² = 9 too."
         mistakes: {"Only 3": other_side, "9 and −9": forgot_root}
+      - prompt: p(x) = 3x − 4. What is p(5)?
+        answer: '11'
+        check: 3*5 - 4
+        difficulty: 1
+        hints:
+        - Put 5 in place of x.
+        - 3 × 5 − 4.
+        solution: 'Step 1: p(5) = 3 × 5 − 4. Step 2: = 15 − 4. Step 3: = 11.'
+        mistakes:
+          '31': substitute_carefully
+      - prompt: p(x) = x² + 2. What is p(−3)?
+        answer: '11'
+        check: (-3)**2 + 2
+        difficulty: 1
+        hints:
+        - (−3)² first.
+        - (−3)² = 9.
+        solution: 'Step 1: (−3)² = 9. Step 2: 9 + 2. Step 3: = 11.'
+        mistakes:
+          '-7': substitute_carefully
+      - prompt: p(x) = x³ − x. What is p(3)?
+        answer: '24'
+        check: 3**3 - 3
+        difficulty: 2
+        hints:
+        - 3³ = 27.
+        - 27 − 3.
+        solution: 'Step 1: 3³ = 27. Step 2: 27 − 3. Step 3: = 24.'
+        mistakes:
+          '6': substitute_carefully
+      - prompt: p(x) = x² − 6x + k and p(2) = 0. What is k?
+        answer: '8'
+        check: -(2**2 - 6*2)
+        difficulty: 2
+        hints:
+        - Work out p(2) with k left in.
+        - 4 − 12 + k = 0.
+        solution: 'Step 1: p(2) = 4 − 12 + k. Step 2: −8 + k = 0. Step 3: k = 8.'
+        mistakes:
+          '-8': dropped_sign
+      - prompt: p(x) = 2x² − 5x. What is p(−1) + p(1)?
+        answer: '4'
+        check: (2 + 5) + (2 - 5)
+        difficulty: 3
+        hints:
+        - Work out each value separately.
+        - p(−1) = 7 and p(1) = −3.
+        solution: 'Step 1: p(−1) = 2 + 5 = 7. Step 2: p(1) = 2 − 5 = −3. Step 3: 7 + (−3) = 4.'
+        mistakes:
+          '-6': substitute_carefully
+      - prompt: p(x) = x² − 7x + 10. What is the larger of the two numbers that make p(x) = 0?
+        answer: '5'
+        check: '5'
+        difficulty: 3
+        hints:
+        - Look for two numbers that multiply to 10 and add to 7.
+        - Try p(2) and p(5).
+        solution: 'Step 1: x² − 7x + 10 = (x − 2)(x − 5). Step 2: p(2) = 0 and p(5) = 0. Step 3: The larger is 5.'
+        mistakes:
+          '2': substitute_carefully
+          '10': substitute_carefully
 
   - code: math9.poly.operations
     title: Adding, subtracting and multiplying polynomials
@@ -274,6 +454,34 @@ concepts:
       - prompt: 'Find an x where both equal 0. Look at the brackets: what makes a bracket 0?'
         want:
           p: 0
+    lesson:
+      - teach: 'To add polynomials, add like terms: terms with the same power of x. (3x² + 2x − 1) + (x² − 5x + 4) = 4x² − 3x + 3. The powers don''t change when you add: x² + x² is 2x², not x⁴.'
+        check:
+          prompt: What is (2x² + 3x) + (5x² − x)?
+          options:
+          - 7x² + 2x
+          - 7x⁴ + 2x
+          - 7x² + 4x
+          answer: 7x² + 2x
+          why: 2x² + 5x² = 7x² and 3x − x = 2x. Powers stay the same.
+      - teach: Subtracting a bracket changes the sign of every term inside it. (5x − 3) − (2x − 7) = 5x − 3 − 2x + 7 = 3x + 4. Forgetting to change the sign of the last term is the usual slip.
+        check:
+          prompt: What is (x + 4) − (x − 2)?
+          options:
+          - '6'
+          - '2'
+          - 2x + 2
+          answer: '6'
+          why: x + 4 − x + 2 = 6. The −2 becomes +2.
+      - teach: To multiply, multiply every term of one polynomial by every term of the other, then collect like terms. (x + 2)(x² − x + 3) = x³ − x² + 3x + 2x² − 2x + 6 = x³ + x² + x + 6.
+        check:
+          prompt: What is 3x(x² + 2)?
+          options:
+          - 3x³ + 6x
+          - 3x³ + 2
+          - 3x² + 6x
+          answer: 3x³ + 6x
+          why: 3x × x² = 3x³ and 3x × 2 = 6x.
     items:
       - prompt: "(3x² + 2x − 1) + (x² − 5x + 4) = ?"
         options: ["4x² − 3x + 3", "4x² + 7x + 3", "3x² − 3x + 3", "4x⁴ − 3x² + 3"]
@@ -343,3 +551,90 @@ concepts:
         hints: ["Which pairs of terms multiply to give an x term?", "Only 2x × (−3)."]
         solution: "Step 1: (2x + 1)(x² − 3) = 2x³ + x² − 6x − 3. Step 2: The coefficient of x is −6."
         mistakes: {"6": dropped_sign, "-3": multiply_every_term}
+      - prompt: (2x² − x + 5) + (3x² + 4x − 2) = ?
+        options:
+        - 5x² + 3x + 3
+        - 5x⁴ + 3x + 3
+        - 5x² + 5x + 3
+        - 6x² + 3x + 3
+        answer: 5x² + 3x + 3
+        check: expand((2*x**2 - x + 5) + (3*x**2 + 4*x - 2))
+        difficulty: 1
+        hints:
+        - Add the x² terms, then the x terms, then the numbers.
+        - −x + 4x = 3x.
+        solution: 'Step 1: 2x² + 3x² = 5x². Step 2: −x + 4x = 3x. Step 3: 5 − 2 = 3, so 5x² + 3x + 3.'
+        mistakes:
+          5x⁴ + 3x + 3: added_powers
+      - prompt: (6x + 1) − (4x − 3) = ?
+        options:
+        - 2x + 4
+        - 2x − 2
+        - 10x − 2
+        - 2x − 4
+        answer: 2x + 4
+        check: expand((6*x + 1) - (4*x - 3))
+        difficulty: 1
+        hints:
+        - Change the sign of every term in the second bracket.
+        - 6x + 1 − 4x + 3.
+        solution: 'Step 1: 6x + 1 − 4x + 3. Step 2: 6x − 4x = 2x. Step 3: 1 + 3 = 4, so 2x + 4.'
+        mistakes:
+          2x − 2: dropped_sign
+      - prompt: 2x(x² − 4x + 1) = ?
+        options:
+        - 2x³ − 8x² + 2x
+        - 2x³ − 4x + 1
+        - 2x² − 8x + 2
+        - 2x³ − 8x + 2x
+        answer: 2x³ − 8x² + 2x
+        check: expand(2*x*(x**2 - 4*x + 1))
+        difficulty: 2
+        hints:
+        - Multiply every term by 2x.
+        - 2x × x² = 2x³.
+        solution: 'Step 1: 2x × x² = 2x³. Step 2: 2x × (−4x) = −8x². Step 3: 2x × 1 = 2x.'
+        mistakes:
+          2x³ − 4x + 1: multiply_every_term
+      - prompt: (x − 3)(x² + 2x − 1) = ?
+        options:
+        - x³ − x² − 7x + 3
+        - x³ − 3x² − 7x + 3
+        - x³ − x² − 7x − 3
+        - x³ + 2x − 3
+        answer: x³ − x² − 7x + 3
+        check: expand((x - 3)*(x**2 + 2*x - 1))
+        difficulty: 2
+        hints:
+        - Multiply x by each term, then −3 by each term.
+        - x³ + 2x² − x − 3x² − 6x + 3.
+        solution: 'Step 1: x(x² + 2x − 1) = x³ + 2x² − x. Step 2: −3(x² + 2x − 1) = −3x² − 6x + 3. Step 3: Add: x³ − x² − 7x + 3.'
+        mistakes:
+          x³ − x² − 7x − 3: dropped_sign
+          x³ + 2x − 3: multiply_every_term
+      - prompt: In (x² + 3x − 2)(x + 5), what is the coefficient of x?
+        answer: '13'
+        check: 3*5 + (-2)*1
+        difficulty: 3
+        hints:
+        - Find every pair of terms whose product is an x term.
+        - 3x × 5 and −2 × x.
+        solution: 'Step 1: 3x × 5 = 15x. Step 2: −2 × x = −2x. Step 3: 15x − 2x = 13x, so the coefficient is 13.'
+        mistakes:
+          '15': multiply_every_term
+          '17': dropped_sign
+      - prompt: p(x) = x² + x and q(x) = x² − x. What is p(x) − q(x)?
+        options:
+        - 2x
+        - 2x²
+        - '0'
+        - −2x
+        answer: 2x
+        check: expand((x**2 + x) - (x**2 - x))
+        difficulty: 3
+        hints:
+        - Subtracting changes every sign in q(x).
+        - x² + x − x² + x.
+        solution: 'Step 1: x² + x − x² + x. Step 2: x² − x² = 0. Step 3: x + x = 2x.'
+        mistakes:
+          '0': dropped_sign
