@@ -12,6 +12,12 @@ tips:
   protocols: "Each protocol has a job: one hands out addresses automatically (Dynamic Host Configuration), one serves web pages (HyperText Transfer), one gives a secure remote shell, one transfers files. Different systems talk because they follow the same rules."
   static_ip: "To test whether a computer answers, send it a short signal named after the sound of sonar. In 192.168.1.x, x runs from 0 to 255 but 0, 1 and 255 are reserved: take them out and count what's left. To reach another lab computer you need its network address; the factory-set hardware number is not used for this."
   domain_iot: "An easy name like cusat.ac.in stands in for a server's number address and is registered for a website. Smart (IoT) devices have a microprocessor so they can connect to a network; which choice is just a plain lead with no chip?"
+  it10_net_size: 'Name the network by its size: around one person, one building, or across a country.'
+  it10_cable_kind: Glass fibres carry light; copper wires carry electrical signals.
+  it10_mac_vs_ip: The maker fixes the MAC address; the network hands out the IP address.
+  it10_protocol_job: 'Match the protocol to its job: giving addresses, carrying webpages, moving files, or logging in remotely.'
+  it10_reserved: In the lab range, 0, 1 and 255 are kept aside for special uses. Count what's left.
+  it10_iot_test: An IoT device has a tiny processor and can be controlled over a network.
 
 concepts:
   - code: it9.net.building
@@ -71,6 +77,55 @@ concepts:
         bin: PAN
         clue: About 10 m around you.
         why: PAN.
+    lesson:
+      - teach: 'A computer network joins computers so they can share files, printers and the internet. Data travels through media: optical fibre (light through glass, very little loss), copper cables, or wireless signals. An Internet Service Provider (BSNL, Jio, Airtel, Vi) connects us to the internet.'
+        check:
+          prompt: Which cable sends data as light?
+          options:
+          - Optical fibre
+          - Copper
+          - USB
+          answer: Optical fibre
+          why: Glass fibres carry light.
+      - teach: Lab computers use UTP cables (four twisted pairs of wires) with RJ45 connectors, all plugged into a switch. A switch sends data only to the right computer; an old hub sends it to all, slowing the network.
+        picture:
+          kind: compare
+          columns:
+          - title: Switch
+            points:
+            - sends to the right computer only
+            - faster, less traffic
+          - title: Hub
+            points:
+            - sends to every computer
+            - slower, rarely used now
+          alt: Switch versus hub.
+        check:
+          prompt: Why are switches preferred to hubs?
+          options:
+          - They send data only where it is needed
+          - They are louder
+          - They need no cables
+          answer: They send data only where it is needed
+          why: Less needless traffic means more speed.
+      - teach: 'Network types: PAN (around one person, e.g. Bluetooth earbuds), LAN (a room or building, e.g. the lab), WAN (across a country, e.g. banks and railways). Wireless: Wi-Fi reaches about 150 m; Bluetooth about 10 m.'
+        picture:
+          kind: bars
+          unit: approx. range (m)
+          bars:
+          - label: Bluetooth
+            value: 10
+          - label: Wi-Fi
+            value: 150
+          alt: Wi-Fi reaches much farther than Bluetooth.
+        check:
+          prompt: A bank's network across India is a
+          options:
+          - WAN
+          - LAN
+          - PAN
+          answer: WAN
+          why: Wide Area Network covers large distances.
     items:
       - prompt: "The connector at the end of a network cable is called"
         options: ["RJ45", "RJ11", "USB", "HDMI"]
@@ -149,6 +204,62 @@ concepts:
         hints: ["Bluetooth reaches about 10 m.", "Which medium carries data as light?"]
         solution: "Step 1: The distance is long and loss must be low. Step 2: Optical fibre carries data as light through glass with minimal loss over long distances."
         mistakes: {"Bluetooth": net_types, "A UTP cable with RJ45": net_media, "A hub": net_devices}
+      - prompt: Which is an Internet Service Provider?
+        options:
+        - BSNL
+        - Firefox
+        - GIMP
+        - Kalzium
+        answer: BSNL
+        difficulty: 1
+        hints:
+        - It provides internet connections.
+        - Jio and Airtel are others.
+        solution: 'Step 1: Firefox is a browser; GIMP and Kalzium are software. Step 2: The connection company is left. Step 3: BSNL.'
+        mistakes:
+          Firefox: net_devices
+      - prompt: Old telephones used which connectors?
+        options:
+        - RJ9 and RJ11
+        - RJ45
+        - USB-C
+        - HDMI
+        answer: RJ9 and RJ11
+        difficulty: 2
+        hints:
+        - RJ45 is for network cables.
+        - Telephones used smaller jacks.
+        solution: 'Step 1: Network = RJ45. Step 2: Phones used smaller registered jacks. Step 3: RJ9 and RJ11.'
+        mistakes:
+          RJ45: net_media
+      - prompt: Copper cables carry data as what kind of signals?
+        options:
+        - Analogue electrical signals
+        - Light
+        - Sound waves in air
+        - Radio from satellites
+        answer: Analogue electrical signals
+        difficulty: 2
+        hints:
+        - Copper conducts electricity.
+        - Optical fibre is the one that uses light.
+        solution: 'Step 1: Fibre uses light. Step 2: Copper conducts electricity. Step 3: Analogue electrical signals.'
+        mistakes:
+          Light: it10_cable_kind
+      - prompt: A smartwatch linked to a phone by Bluetooth is part of which network type?
+        options:
+        - PAN
+        - LAN
+        - WAN
+        - Internet backbone
+        answer: PAN
+        difficulty: 2
+        hints:
+        - It is all around one person.
+        - Bluetooth reaches only about 10 m.
+        solution: 'Step 1: Devices are on one person. Step 2: Short range. Step 3: Personal Area Network.'
+        mistakes:
+          LAN: it10_net_size
 
   - code: it9.net.addresses_protocols
     title: MAC addresses, IP addresses and protocols
@@ -205,6 +316,51 @@ concepts:
         bin: HTTP
         clue: Browser.
         why: HTTP.
+    lesson:
+      - teach: 'Every device needs an address. The MAC (Media Access Control) address is fixed by the maker, written as six pairs of hexadecimal symbols (0–9, A–F), e.g. 00:1B:44:11:3A:B7. The IP address is given by the network and can change. IPv4: four numbers 0–255, e.g. 192.168.1.1. IPv6 allows far more devices.'
+        picture:
+          kind: compare
+          columns:
+          - title: MAC address
+            points:
+            - set by manufacturer
+            - fixed
+            - 00:1B:44:11:3A:B7
+          - title: IP address
+            points:
+            - given by the network
+            - can change
+            - 192.168.1.1
+          alt: MAC and IP addresses.
+        check:
+          prompt: Which address stays the same wherever your phone goes?
+          options:
+          - MAC address
+          - IP address
+          - Both change
+          answer: MAC address
+          why: The maker fixes it.
+      - teach: Protocols are shared rules so different systems can talk. DHCP gives IP addresses automatically; TCP/IP governs exchange; HTTP carries webpages; FTP moves files; SSH lets you log in to a distant computer securely.
+        picture:
+          kind: compare
+          columns:
+          - title: Addresses / web
+            points:
+            - 'DHCP: gives IPs'
+            - 'HTTP: webpages'
+          - title: Files / remote
+            points:
+            - 'FTP: file transfer'
+            - 'SSH: remote login'
+          alt: Common network protocols.
+        check:
+          prompt: Which protocol moves files between computers?
+          options:
+          - FTP
+          - DHCP
+          - HTTP
+          answer: FTP
+          why: File Transfer Protocol.
     items:
       - prompt: "Which is a valid IPv4 address?"
         options: ["192.168.1.254", "192.168.1.257", "192.168.1.256", "192.168.256.1"]
@@ -290,6 +446,48 @@ concepts:
         hints: ["Who assigns each address?", "Which protocol hands out IP addresses?"]
         solution: "Step 1: The manufacturer sets the MAC address. Step 2: Each network's DHCP gives the device an IP address, so it changes from network to network."
         mistakes: {"The phone changes its MAC address daily": mac_ip, "IP addresses are fixed by the maker": protocols, "MAC addresses only work at school": mac_ip}
+      - prompt: What does DHCP stand for?
+        options:
+        - Dynamic Host Configuration Protocol
+        - Digital Home Computer Program
+        - Data Hub Control Port
+        - Direct HTTP Connection
+        answer: Dynamic Host Configuration Protocol
+        difficulty: 2
+        hints:
+        - It configures hosts (computers) automatically.
+        - '''Dynamic'' means it can change.'
+        solution: 'Step 1: It sets up computers on a network. Step 2: Addresses change (dynamic). Step 3: Dynamic Host Configuration Protocol.'
+        mistakes:
+          Data Hub Control Port: it10_protocol_job
+      - prompt: Which IPv4 address is NOT valid?
+        options:
+        - 10.0.0.256
+        - 10.0.0.25
+        - 192.168.0.1
+        - 172.16.5.4
+        answer: 10.0.0.256
+        difficulty: 2
+        hints:
+        - Each number must be 0 to 255.
+        - Check the last number of each.
+        solution: 'Step 1: Allowed range is 0–255. Step 2: 256 is too big. Step 3: 10.0.0.256.'
+        mistakes:
+          10.0.0.25: mac_ip
+      - prompt: Where in GNU/Linux can you see a device's MAC address?
+        options:
+        - Settings → Network or Wi-Fi → Details → Hardware Address
+        - File → New
+        - Tools → Protect Sheet
+        - Insert → Image
+        answer: Settings → Network or Wi-Fi → Details → Hardware Address
+        difficulty: 3
+        hints:
+        - It is a network setting.
+        - The MAC is a hardware address.
+        solution: 'Step 1: Open network settings. Step 2: Look at Details. Step 3: Hardware Address shows the MAC.'
+        mistakes:
+          Tools → Protect Sheet: it10_mac_vs_ip
 
   - code: it9.net.using_network
     title: Using the lab network and the internet
@@ -351,6 +549,43 @@ concepts:
         bin: Reserved
         clue: The gateway uses it.
         why: 1 is reserved (gateway 192.168.1.1).
+    lesson:
+      - teach: 'Join Wi-Fi: Settings → Wi-Fi → choose a network → password; DHCP gives an IP. For lab tasks, set a static IP: IPv4 → Manual, address 192.168.1.x (x from 2 to 254), netmask 255.255.255.0, gateway and DNS 192.168.1.1. Test with ping, e.g. ping 192.168.1.15.'
+        picture:
+          kind: flow
+          steps:
+          - IPv4 → Manual
+          - Address 192.168.1.x
+          - Netmask 255.255.255.0
+          - Gateway & DNS 192.168.1.1
+          - Apply, then ping
+          alt: Setting a static IP in the lab.
+        check:
+          prompt: Which command tests if another computer replies?
+          options:
+          - ping
+          - copy
+          - print
+          answer: ping
+          why: ping sends a test message and waits for a reply.
+      - teach: 'Share files over SSH: Files → Other Locations → Connect to Server → ssh://IP, then log in with that computer''s username and password. Share screens with VNC: turn on Remote Desktop (Legacy VNC) on one computer and connect from Remmina on another.'
+        check:
+          prompt: Which app views another computer's screen?
+          options:
+          - Remmina
+          - GIMP
+          - Kalzium
+          answer: Remmina
+          why: Remmina is a remote desktop client using VNC.
+      - teach: The internet is a network of networks. Websites live on servers reached by IP address; domain names (cusat.ac.in) are easy names for those addresses. IoT devices (smart TVs, bulbs, locks) have microprocessors so they can be controlled over a network.
+        check:
+          prompt: A domain name is
+          options:
+          - An easy name for a server's IP address
+          - A type of cable
+          - A Wi-Fi password
+          answer: An easy name for a server's IP address
+          why: Names are easier to remember than numbers.
     items:
       - prompt: "Which command checks whether another computer on the network can be reached?"
         options: ["ping", "copy", "print", "save"]
@@ -429,3 +664,56 @@ concepts:
         hints: ["One ping worked. What does that say about your own connection?", "Only one address did not answer."]
         solution: "Step 1: The reply from .16 shows your computer and the network work. Step 2: So the problem is with the computer at .15: it may be off or unplugged."
         mistakes: {"The whole lab network is broken": static_ip, "Your own computer has no IP address": static_ip, "The internet is down": domain_iot}
+      - prompt: Which netmask is used for the lab's static IP setting?
+        options:
+        - 255.255.255.0
+        - 192.168.1.1
+        - 0.0.0.0
+        - 255.0.0.0
+        answer: 255.255.255.0
+        difficulty: 2
+        hints:
+        - The lesson gives one netmask for the lab.
+        - It ends in .0 and starts with 255.
+        solution: 'Step 1: Gateway is 192.168.1.1. Step 2: The netmask is different. Step 3: 255.255.255.0.'
+        mistakes:
+          192.168.1.1: static_ip
+      - prompt: What four things do you need to fetch a file from another lab computer?
+        options:
+        - File name, its location, the computer's IP, and its username and password
+        - Only the MAC address
+        - Only the Wi-Fi name
+        - The printer's name
+        answer: File name, its location, the computer's IP, and its username and password
+        difficulty: 2
+        hints:
+        - You must know what, where, which computer and how to log in.
+        - MAC address is not needed.
+        solution: 'Step 1: Which file and where. Step 2: Which computer (IP). Step 3: Login details.'
+        mistakes:
+          Only the MAC address: it10_mac_vs_ip
+      - prompt: Which is an IoT device?
+        options:
+        - A smart door lock controlled from a phone
+        - A wooden chair
+        - A paper notebook
+        - A pencil
+        answer: A smart door lock controlled from a phone
+        difficulty: 1
+        hints:
+        - IoT devices connect to a network.
+        - Which can be controlled from a distance?
+        solution: 'Step 1: Chairs, notebooks and pencils have no processor. Step 2: A smart lock connects to a network. Step 3: The smart lock.'
+        mistakes:
+          A wooden chair: it10_iot_test
+      - prompt: Lab computers are numbered 192.168.1.2 upward, one each. What is the largest number of lab computers this range can hold?
+        answer: '253'
+        check: 254 - 2 + 1
+        difficulty: 3
+        hints:
+        - Allowed last numbers are 2 to 254.
+        - Count from 2 to 254 inclusive.
+        solution: 'Step 1: Range 2–254. Step 2: 254 − 2 + 1. Step 3: 253 computers.'
+        mistakes:
+          '252': it10_reserved
+          '256': it10_reserved
