@@ -23,6 +23,8 @@ tips:
   step_back_to_zero: "Find how much y changes for each step in x, then walk back from x = 1 to x = 0."
   sub_every_term: "Replace every x with the number in brackets, do the powers first, then the multiplying, then add and subtract."
   x_axis_y_zero: "A line crosses the x-axis where y = 0. Put 0 for y and solve."
+  c9m2_highest_not_first: The degree is the highest power anywhere in the polynomial, not the power of the first term written. Scan every term.
+  c9m2_rate_is_slope: In a linear rule the number multiplying x is how much changes each step; the number on its own is where you start. Which one does the question ask for?
 concepts:
 - code: cbse9gm.poly.degree
   title: Polynomials and their degree
@@ -89,6 +91,49 @@ concepts:
       bin: Degree 1
       clue: Does the order of the terms change the degree?
       why: 'The x term has power 1: degree 1, written backwards.'
+  lesson:
+    - teach: 'A polynomial is built from terms like 4x³, −2x and 7: a number times a whole-number power of x. The number in front is the coefficient. Expressions with √x, 1/x or x^½ are not polynomials, because those powers are not whole numbers.'
+      check:
+        prompt: Which of these is NOT a polynomial?
+        options:
+        - x + 1/x
+        - x² + 1
+        - '7'
+        answer: x + 1/x
+        why: 1/x is x to the power −1, not a whole-number power.
+    - teach: The degree of a polynomial is its highest power of x (with a non-zero coefficient). 3x − 5 has degree 1 (linear), x² + 2x has degree 2 (quadratic), 2x³ − x has degree 3 (cubic). A plain number like 9 has degree 0.
+      picture:
+        kind: compare
+        columns:
+        - title: Name by degree
+          points:
+          - 'Degree 0: constant, 9'
+          - 'Degree 1: linear, 3x − 5'
+          - 'Degree 2: quadratic, x² + 2x'
+          - 'Degree 3: cubic, 2x³ − x'
+        - title: Name by number of terms
+          points:
+          - '1 term: monomial, 5x²'
+          - '2 terms: binomial, x + 4'
+          - '3 terms: trinomial, x² + x + 1'
+        alt: 'Two ways to name a polynomial: by its highest power and by how many terms it has.'
+      check:
+        prompt: What is the degree of 7 − x + 4x²?
+        options:
+        - '2'
+        - '1'
+        - '0'
+        answer: '2'
+        why: The highest power is x², even though it is written last.
+    - teach: 'We also name a polynomial by how many terms it has: one term is a monomial, two a binomial, three a trinomial. So 3y² + 5y is a quadratic binomial: degree 2, two terms.'
+      check:
+        prompt: What kind of polynomial is x³ − 1?
+        options:
+        - Cubic binomial
+        - Linear binomial
+        - Cubic trinomial
+        answer: Cubic binomial
+        why: Highest power 3 (cubic) and two terms (binomial).
   items:
   - prompt: What is the degree of 5x³ − 2x² + x − 7?
     answer: '3'
@@ -155,6 +200,115 @@ concepts:
     solution: 'Step 1: The highest-power term is x² × x³ = x⁵. Step 2: So the degree is 5.'
     mistakes:
       '6': exponent_multiply_instead_add
+  - prompt: What is the degree of 4x − 9?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Find the highest power of x.
+    - x on its own means x¹.
+    solution: 'The highest power is x¹, so the degree is 1: a linear polynomial.'
+    mistakes:
+      '2': degree_count_terms
+      '0': constant_degree
+  - prompt: What is the coefficient of x in 6x² − 5x + 1?
+    answer: '-5'
+    check: '-5'
+    difficulty: 1
+    hints:
+    - Look at the term with x¹.
+    - Keep its sign.
+    solution: The x-term is −5x, so the coefficient is −5.
+    mistakes:
+      '5': poly_name_parts
+      '6': poly_name_parts
+  - prompt: Which of these is NOT a polynomial?
+    options:
+    - √x + 2
+    - x² − 2
+    - 3x
+    - '5'
+    answer: √x + 2
+    difficulty: 1
+    hints:
+    - Every power must be a whole number.
+    - √x is x to the power ½.
+    solution: √x = x^½, and ½ is not a whole number, so √x + 2 is not a polynomial. 5 is a constant polynomial.
+    mistakes:
+      '5': constant_degree
+  - prompt: What is the degree of 2 + 3x − x⁴ + x²?
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Look at every term, not just the first.
+    - Which power is largest?
+    solution: The powers are 0, 1, 4 and 2. The highest is 4, so the degree is 4.
+    mistakes:
+      '0': c9m2_highest_not_first
+      '2': c9m2_highest_not_first
+  - prompt: What kind of polynomial is 8x?
+    options:
+    - Linear monomial
+    - Linear binomial
+    - Quadratic monomial
+    - Constant
+    answer: Linear monomial
+    difficulty: 2
+    hints:
+    - Count the terms.
+    - Find the power of x.
+    solution: 'One term (monomial) and power 1 (linear): a linear monomial.'
+    mistakes:
+      Linear binomial: degree_count_terms
+  - prompt: What is the constant term of x³ − 4x + 11?
+    answer: '11'
+    check: '11'
+    difficulty: 2
+    hints:
+    - The constant term has no x.
+    - It is the number on its own.
+    solution: The term without x is 11.
+    mistakes:
+      '-4': poly_name_parts
+      '3': poly_name_parts
+  - prompt: Which polynomial has degree 3 and exactly two terms?
+    options:
+    - x³ + 7
+    - x³ + x + 1
+    - 3x + 7
+    - x² + 3
+    answer: x³ + 7
+    difficulty: 2
+    hints:
+    - Degree 3 means x³ is the highest power.
+    - 'Two terms: a binomial.'
+    solution: x³ + 7 has highest power 3 and two terms. x³ + x + 1 has three terms.
+    mistakes:
+      3x + 7: c9m2_highest_not_first
+      x³ + x + 1: degree_count_terms
+  - prompt: What is the degree of (x + 2)(x − 5)?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - Multiply out the first terms of each bracket.
+    - x × x = x².
+    solution: (x + 2)(x − 5) = x² − 3x − 10, so the degree is 2.
+    mistakes:
+      '1': exponent_multiply_instead_add
+      '4': degree_count_terms
+  - prompt: If p(x) = 3x² + kx³ − 1 has degree 2, what must k be?
+    answer: '0'
+    check: '0'
+    difficulty: 3
+    hints:
+    - If k were not 0, which power would be highest?
+    - The x³ term must vanish.
+    solution: For the degree to be 2, the x³ term must disappear, so its coefficient k = 0.
+    mistakes:
+      '3': c9m2_highest_not_first
+      '1': c9m2_highest_not_first
 - code: cbse9gm.poly.zeroes
   title: Values and zeroes of a polynomial
   after:
@@ -234,6 +388,56 @@ concepts:
       - when:
           x: 2
         say: p(2) = −2. To reach −10, 2x has to be negative.
+  lesson:
+    - teach: 'p(a) means: put x = a into the polynomial and work it out. For p(x) = x² + 2x, p(3) = 9 + 6 = 15. Replace every x, and be careful with negatives: p(−1) = 1 − 2 = −1.'
+      check:
+        prompt: If p(x) = 2x + 7, what is p(−3)?
+        options:
+        - '1'
+        - '13'
+        - −1
+        answer: '1'
+        why: 2 × (−3) + 7 = −6 + 7 = 1.
+    - teach: 'A zero of p(x) is a number c that makes p(c) = 0. It is where the graph of y = p(x) touches the x-axis. For 2x − 8: set 2x − 8 = 0, so x = 4. Check: 2 × 4 − 8 = 0.'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -6
+        - 6
+        points:
+          (4, 0):
+          - 4
+          - 0
+          _a:
+          - 1
+          - -6
+          _b:
+          - 5
+          - 2
+        segments:
+        - - _a
+          - _b
+          - y = 2x − 8
+        caption: The line meets the x-axis at x = 4, the zero of 2x − 8.
+        alt: The line y = 2x − 8 crossing the x-axis at the point (4, 0).
+      check:
+        prompt: What is the zero of x − 6?
+        options:
+        - '6'
+        - −6
+        - '0'
+        answer: '6'
+        why: 6 − 6 = 0, so x = 6 is the zero.
+    - teach: 'A linear polynomial ax + b has exactly one zero, x = −b/a. Watch the sign: the zero of x + 5 is −5. A polynomial of higher degree can have more zeroes: x² − 4 has zeroes 2 and −2.'
+      check:
+        prompt: What is the zero of 4x + 2?
+        options:
+        - −1/2
+        - 1/2
+        - −2
+        answer: −1/2
+        why: 4x + 2 = 0 gives x = −2/4 = −1/2.
   items:
   - prompt: If p(x) = x² − 3x + 2, find p(4).
     answer: '6'
@@ -305,6 +509,97 @@ concepts:
     - 2k − 4 = 0.
     solution: 'Step 1: p(2) = 2k − 4 = 0. Step 2: 2k = 4, so k = 2.'
     mistakes: {"-2": "zero_sign_flip", "8": "sub_every_term"}
+  - prompt: If p(x) = 5x − 3, find p(2).
+    answer: '7'
+    check: 5*2 - 3
+    difficulty: 1
+    hints:
+    - Replace x by 2.
+    - 5 × 2 − 3.
+    solution: p(2) = 10 − 3 = 7.
+    mistakes:
+      '13': sub_every_term
+  - prompt: Find the zero of p(x) = x − 9.
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Set x − 9 = 0.
+    - Add 9 to both sides.
+    solution: x − 9 = 0 gives x = 9.
+    mistakes:
+      '-9': zero_sign_flip
+  - prompt: If p(x) = x² + x + 1, find p(0).
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Every x becomes 0.
+    - Only the constant is left.
+    solution: p(0) = 0 + 0 + 1 = 1.
+    mistakes:
+      '0': empty_means_zero
+  - prompt: Find the zero of p(x) = 5x + 20.
+    answer: '-4'
+    check: -20/5
+    difficulty: 2
+    hints:
+    - Set 5x + 20 = 0.
+    - 5x = −20.
+    solution: 5x = −20, so x = −4.
+    mistakes:
+      '4': zero_sign_flip
+      '-20': step_back_to_zero
+  - prompt: If p(x) = x² − 2x, find p(−2).
+    answer: '8'
+    check: (-2)**2 - 2*(-2)
+    difficulty: 2
+    hints:
+    - (−2)² = 4.
+    - −2 × (−2) = +4.
+    solution: p(−2) = 4 − 2(−2) = 4 + 4 = 8.
+    mistakes:
+      '0': negative_cube
+      '-8': negative_cube
+  - prompt: Which numbers are zeroes of x² − 16?
+    options:
+    - 4 and −4
+    - 4 only
+    - 16 and −16
+    - 8 and −8
+    answer: 4 and −4
+    difficulty: 2
+    hints:
+    - x² = 16.
+    - Both a positive and a negative number square to 16.
+    solution: x² = 16 gives x = 4 or x = −4. Both make x² − 16 = 0.
+    mistakes:
+      4 only: square_root_two_signs
+      8 and −8: square_root_two_signs
+  - prompt: Is x = 2 a zero of p(x) = x³ − 8?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if x is negative
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Work out p(2).
+    - 2³ = 8.
+    solution: p(2) = 8 − 8 = 0, so 2 is a zero.
+    mistakes:
+      'No': sub_every_term
+  - prompt: p(x) = 3x + k has zero x = 2. What is k?
+    answer: '-6'
+    check: '-6'
+    difficulty: 3
+    hints:
+    - p(2) must be 0.
+    - 3 × 2 + k = 0.
+    solution: 6 + k = 0, so k = −6.
+    mistakes:
+      '6': zero_sign_flip
+      '2': step_back_to_zero
 - code: cbse9gm.linear.growth
   title: Linear growth and decay
   after:
@@ -395,6 +690,49 @@ concepts:
           a: -4
           b: 40
         say: The leak rate is right, but 40 L is after 2 hours of leaking. At the start there was more.
+  lesson:
+    - teach: 'Some quantities change by the same amount every step. A phone plan of ₹100 plus ₹2 a minute costs 100, 102, 104, … — always 2 more. Such a rule is linear: y = (change per step) × x + (starting value), here y = 2x + 100.'
+      check:
+        prompt: A gym charges ₹500 to join and ₹300 a month. Which rule gives the cost for x months?
+        options:
+        - 300x + 500
+        - 500x + 300
+        - 800x
+        answer: 300x + 500
+        why: ₹300 is added each month (the rate) and ₹500 is paid once at the start.
+    - teach: If the change per step is positive, the quantity grows (linear growth). If it is negative, it shrinks steadily (linear decay). A candle 20 cm long burning 2 cm an hour is 20 − 2x cm after x hours, and it is gone when 20 − 2x = 0, at x = 10.
+      picture:
+        kind: bars
+        bars:
+        - label: 0 h
+          value: 20
+        - label: 2 h
+          value: 16
+        - label: 4 h
+          value: 12
+        - label: 6 h
+          value: 8
+        - label: 8 h
+          value: 4
+        unit: cm
+        alt: 'Candle length falling by 4 cm every 2 hours: 20, 16, 12, 8, 4 cm.'
+      check:
+        prompt: The candle is 20 − 2x cm. How long is it after 3 hours?
+        options:
+        - 14 cm
+        - 18 cm
+        - 6 cm
+        answer: 14 cm
+        why: 20 − 2 × 3 = 20 − 6 = 14.
+    - teach: 'In a table, a linear relationship shows equal gaps: x goes 0, 1, 2, 3 and y goes 7, 10, 13, 16 (always +3). If the gaps change (like 1, 2, 4, 8), it is not linear.'
+      check:
+        prompt: Which list of y-values (for x = 0, 1, 2, 3) is linear?
+        options:
+        - 9, 7, 5, 3
+        - 1, 2, 4, 8
+        - 0, 1, 4, 9
+        answer: 9, 7, 5, 3
+        why: 'It goes down by 2 every time: equal gaps.'
   items:
   - prompt: A taxi charges ₹40 plus ₹15 per km. What is the fare for 6 km, in ₹?
     answer: '130'
@@ -459,6 +797,111 @@ concepts:
     - So each step is 4. Go back one step from x = 1.
     solution: 'Step 1: Change per step = (19 − 7) ÷ 3 = 4. Step 2: At x = 0: 7 − 4 = 3. (Rule: y = 4x + 3.)'
     mistakes: {"7": "step_back_to_zero", "4": "intercept_is_coefficient"}
+  - prompt: An auto charges ₹30 plus ₹10 per km. What is the fare for 8 km, in ₹?
+    answer: '110'
+    check: 30 + 10*8
+    difficulty: 1
+    hints:
+    - Fare = 30 + 10 × km.
+    - 10 × 8 = 80.
+    solution: 30 + 80 = ₹110.
+    mistakes:
+      '80': fixed_plus_rate
+      '320': fixed_plus_rate
+  - prompt: A tank has 50 L and loses 5 L each hour. How much is left after 4 hours, in litres?
+    answer: '30'
+    check: 50 - 5*4
+    difficulty: 1
+    hints:
+    - It loses 5 L each hour.
+    - 50 − 5 × 4.
+    solution: 50 − 20 = 30 L.
+    mistakes:
+      '70': growth_vs_decay
+      '45': sub_every_term
+  - prompt: Which rule shows linear decay?
+    options:
+    - y = 40 − 3x
+    - y = 3x + 40
+    - y = 40
+    - y = x²
+    answer: y = 40 − 3x
+    difficulty: 1
+    hints:
+    - Decay means it goes down steadily.
+    - The number multiplying x must be negative.
+    solution: 'In 40 − 3x, y drops by 3 each time x goes up by 1: linear decay.'
+    mistakes:
+      y = 3x + 40: growth_vs_decay
+  - prompt: y-values for x = 0, 1, 2, 3 are 4, 9, 14, 19. What is y when x = 6?
+    answer: '34'
+    check: 4 + 5*6
+    difficulty: 2
+    hints:
+    - The gap is 5 each step; the start is 4.
+    - y = 5x + 4.
+    solution: y = 5x + 4, so y(6) = 30 + 4 = 34.
+    mistakes:
+      '30': start_height
+      '24': linear_same_gap
+  - prompt: A savings box starts with ₹200, and ₹50 is added every week. After how many weeks does it hold ₹600?
+    answer: '8'
+    check: (600 - 200)/50
+    difficulty: 2
+    hints:
+    - 200 + 50x = 600.
+    - 50x = 400.
+    solution: 50x = 400, so x = 8 weeks.
+    mistakes:
+      '12': fixed_plus_rate
+      '400': step_back_to_zero
+  - prompt: A phone battery at 100% drops 8% an hour. After how many hours does it reach 20%?
+    answer: '10'
+    check: (100 - 20)/8
+    difficulty: 2
+    hints:
+    - 100 − 8x = 20.
+    - 8x = 80.
+    solution: 8x = 80, so x = 10 hours.
+    mistakes:
+      '80': step_back_to_zero
+      '2.5': growth_vs_decay
+  - prompt: In y = 12x + 250, what does 250 mean if y is a bill in ₹ and x is units used?
+    options:
+    - A fixed charge paid even when nothing is used
+    - The cost of each unit
+    - The number of units
+    - The total bill
+    answer: A fixed charge paid even when nothing is used
+    difficulty: 2
+    hints:
+    - Put x = 0.
+    - What is left when no units are used?
+    solution: At x = 0 the bill is 250. So 250 is the fixed charge, and 12 is the cost per unit.
+    mistakes:
+      The cost of each unit: c9m2_rate_is_slope
+  - prompt: A linear rule gives y = 10 when x = 2 and y = 22 when x = 5. What is the change in y for each step of 1 in x?
+    answer: '4'
+    check: (22 - 10)/(5 - 2)
+    difficulty: 3
+    hints:
+    - y went up by 12.
+    - That happened over 3 steps.
+    solution: y rose 22 − 10 = 12 over 3 steps, so 4 per step.
+    mistakes:
+      '12': linear_same_gap
+      '6': linear_same_gap
+  - prompt: Water in a pool rises 3 cm an hour from 15 cm, and a second pool falls 2 cm an hour from 65 cm. After how many hours are they at the same level?
+    answer: '10'
+    check: (65 - 15)/(3 + 2)
+    difficulty: 3
+    hints:
+    - 15 + 3x = 65 − 2x.
+    - 5x = 50.
+    solution: 15 + 3x = 65 − 2x gives 5x = 50, so x = 10 hours (both at 45 cm).
+    mistakes:
+      '50': linear_same_gap
+      50/1: linear_same_gap
 - code: cbse9gm.linear.slope
   title: Slope and y-intercept of y = ax + b
   after:
@@ -549,6 +992,61 @@ concepts:
           m: 1
           c: 1
         say: That's y = x + 1 itself, not a parallel line. Keep the tilt, slide it down to cross at −2.
+  lesson:
+    - teach: 'The graph of y = ax + b is a straight line. The number a is its slope: how much y goes up when x goes up by 1. Between any two points, slope = rise ÷ run = (change in y) ÷ (change in x).'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 7
+        points:
+          (1, 2):
+          - 1
+          - 2
+          (3, 6):
+          - 3
+          - 6
+          _c:
+          - 3
+          - 2
+        segments:
+        - - (1, 2)
+          - _c
+          - run 2
+        - - _c
+          - (3, 6)
+          - rise 4
+        - - (1, 2)
+          - (3, 6)
+        caption: 'Rise 4 over run 2: slope 2.'
+        alt: Line from (1, 2) to (3, 6) with a run of 2 across and a rise of 4 up, so slope 2.
+      check:
+        prompt: A line goes through (0, 1) and (2, 7). What is its slope?
+        options:
+        - '3'
+        - 1/3
+        - '6'
+        answer: '3'
+        why: Rise 7 − 1 = 6, run 2 − 0 = 2, slope 6 ÷ 2 = 3.
+    - teach: 'The number b is the y-intercept: where the line crosses the y-axis, because at x = 0, y = b. In y = 4x − 3 the slope is 4 and the line crosses the y-axis at −3.'
+      check:
+        prompt: Where does y = −x + 6 cross the y-axis?
+        options:
+        - '6'
+        - −1
+        - −6
+        answer: '6'
+        why: At x = 0, y = 6.
+    - teach: 'A positive slope climbs left to right, a negative slope falls, slope 0 is flat. Lines with the same slope never meet: they are parallel. The line crosses the x-axis where y = 0, at x = −b/a.'
+      check:
+        prompt: Which line falls from left to right?
+        options:
+        - y = −3x + 1
+        - y = 3x − 1
+        - y = 2
+        answer: y = −3x + 1
+        why: Its slope −3 is negative.
   items:
   - prompt: What is the slope of y = 3x − 5?
     answer: '3'
@@ -611,3 +1109,103 @@ concepts:
     - Six steps right, each going down 1/2.
     solution: 'Step 1: y = −(1/2)x + 4. Step 2: y = −3 + 4 = 1.'
     mistakes: {"7": "slope_negative_down", "-8": "slope_negative_down"}
+  - prompt: What is the slope of y = 7x + 2?
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Compare with y = ax + b.
+    - The slope multiplies x.
+    solution: a = 7, so the slope is 7.
+    mistakes:
+      '2': intercept_is_coefficient
+  - prompt: What is the y-intercept of y = −2x + 9?
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Put x = 0.
+    - What is left?
+    solution: At x = 0, y = 9.
+    mistakes:
+      '-2': intercept_is_coefficient
+  - prompt: Find the slope of the line through (2, 5) and (6, 13).
+    answer: '2'
+    check: (13 - 5)/(6 - 2)
+    difficulty: 2
+    hints:
+    - Rise = 13 − 5.
+    - Run = 6 − 2.
+    solution: Slope = 8 ÷ 4 = 2.
+    mistakes:
+      1/2: slope_rise_run_swap
+      '8': slope_rise_run_swap
+  - prompt: Find the slope of the line through (0, 8) and (4, 0).
+    answer: '-2'
+    check: (0 - 8)/(4 - 0)
+    difficulty: 2
+    hints:
+    - y goes down as x goes up.
+    - Rise = 0 − 8 = −8; run = 4.
+    solution: Slope = −8 ÷ 4 = −2.
+    mistakes:
+      '2': slope_negative_down
+      -1/2: slope_rise_run_swap
+  - prompt: Which line is parallel to y = 5x − 3?
+    options:
+    - y = 5x + 8
+    - y = −5x − 3
+    - y = 3x + 5
+    - y = x/5
+    answer: y = 5x + 8
+    difficulty: 2
+    hints:
+    - Parallel lines have equal slopes.
+    - Look for slope 5.
+    solution: y = 5x + 8 has the same slope, 5, so it is parallel.
+    mistakes:
+      y = −5x − 3: parallel_same_slope
+      y = 3x + 5: parallel_same_slope
+  - prompt: Where does y = 3x + 12 cross the x-axis? Give the x-value.
+    answer: '-4'
+    check: -12/3
+    difficulty: 2
+    hints:
+    - On the x-axis, y = 0.
+    - 3x + 12 = 0.
+    solution: 3x = −12, so x = −4.
+    mistakes:
+      '4': zero_sign_flip
+      '12': x_axis_y_zero
+  - prompt: What is the slope of a horizontal line such as y = 4?
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - Does y change as x changes?
+    - Rise is 0.
+    solution: y stays 4 everywhere, so the rise is 0 and the slope is 0.
+    mistakes:
+      '4': intercept_is_coefficient
+  - prompt: A line has slope 3 and crosses the y-axis at −2. What is y when x = 4?
+    answer: '10'
+    check: 3*4 - 2
+    difficulty: 3
+    hints:
+    - The line is y = 3x − 2.
+    - 3 × 4 − 2.
+    solution: y = 12 − 2 = 10.
+    mistakes:
+      '14': start_height
+      '12': start_height
+  - prompt: A line passes through (1, 4) and (3, 10). Where does it cross the y-axis?
+    answer: '1'
+    check: 4 - 3*1
+    difficulty: 3
+    hints:
+    - Slope = (10 − 4) ÷ (3 − 1) = 3.
+    - 'From (1, 4), step back 1 in x: y drops by 3.'
+    solution: Slope 3. Going from x = 1 to x = 0, y goes from 4 to 4 − 3 = 1. So the y-intercept is 1.
+    mistakes:
+      '4': start_height
+      '7': slope_negative_down

@@ -14,6 +14,8 @@ tips:
   midpoint_no_halve: "Adding the coordinates is only half the job. Divide each sum by 2 to land in the middle."
   origin_zero: "The origin is where the two axes cross. On the x-axis y is 0, and on the y-axis x is 0, so at the crossing both are 0."
   vertical_distance: "When both points have the same x, they sit on one vertical line. The distance is just the gap between the y-values."
+  c9m1_order_xy: 'Coordinates always come in the order (x, y): first how far across, then how far up or down. Check which number you wrote first.'
+  c9m1_distance_sign: A distance is never negative. How far a point is from an axis is the size of the other coordinate, without its sign.
 concepts:
 - code: cbse9gm.coord.plane
   title: The Cartesian plane
@@ -93,6 +95,55 @@ concepts:
       bin: Quadrant II
       clue: The numbers look alike. Which sign does each one have?
       why: 'x is negative and y positive: Quadrant II. Numbers of the same size can sit in different quadrants.'
+  lesson:
+    - teach: A single number line tells you where a point is on a line. To fix a point on a flat page we need two number lines. Draw one across (the x-axis) and one up and down (the y-axis), so they cross at right angles at 0. That crossing point is the origin, O.
+      check:
+        prompt: What do we call the point where the x-axis and y-axis cross?
+        options:
+        - The origin
+        - Quadrant I
+        - The midpoint
+        answer: The origin
+        why: Both axes start counting from 0 there, so it is (0, 0), the origin.
+    - teach: 'The two axes cut the page into four parts called quadrants. Start at the top right and go anticlockwise: I, II, III, IV. In I both numbers are positive. In II, x is negative (left). In III both are negative. In IV, y is negative (down).'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -5
+        - 5
+        points:
+          P(2, 3):
+          - 2
+          - 3
+          Q(−2, 3):
+          - -2
+          - 3
+          R(−2, −3):
+          - -2
+          - -3
+          S(2, −3):
+          - 2
+          - -3
+        caption: P in I, Q in II, R in III, S in IV, going anticlockwise.
+        alt: Coordinate axes with P(2, 3) top right, Q(−2, 3) top left, R(−2, −3) bottom left and S(2, −3) bottom right.
+      check:
+        prompt: Which quadrant has x negative and y positive?
+        options:
+        - Quadrant II
+        - Quadrant IV
+        - Quadrant III
+        answer: Quadrant II
+        why: 'Left of the y-axis (x negative) and above the x-axis (y positive) is the top left: Quadrant II.'
+    - teach: A point with a 0 in it sits on an axis, so it belongs to no quadrant. (4, 0) is on the x-axis; (0, −3) is on the y-axis. Always check for a zero before you name a quadrant.
+      check:
+        prompt: Where is the point (0, 7)?
+        options:
+        - On the y-axis
+        - In Quadrant I
+        - On the x-axis
+        answer: On the y-axis
+        why: 'Its x-value is 0, so it has not moved left or right: it sits on the y-axis.'
   items:
   - prompt: In which quadrant is the point (−4, 5)?
     options:
@@ -177,6 +228,131 @@ concepts:
     solution: (5, 0) has y = 0, so it lies on the x-axis, which belongs to no quadrant.
     mistakes:
       (5, 1): axis_point_zero
+  - prompt: In which quadrant is the point (−1, −8)?
+    options:
+    - Quadrant III
+    - Quadrant II
+    - Quadrant IV
+    - Quadrant I
+    answer: Quadrant III
+    difficulty: 1
+    hints:
+    - Look at the sign of each number.
+    - Left of the y-axis and below the x-axis.
+    solution: x is negative (left) and y is negative (down), so the point is in Quadrant III, the bottom left.
+    mistakes:
+      Quadrant II: quadrant_signs
+      Quadrant IV: quadrant_signs
+  - prompt: In which quadrant is the point (6, 2)?
+    options:
+    - Quadrant I
+    - Quadrant II
+    - Quadrant III
+    - Quadrant IV
+    answer: Quadrant I
+    difficulty: 1
+    hints:
+    - Both numbers have the same sign.
+    - Right of the y-axis and above the x-axis.
+    solution: Both coordinates are positive, so the point is in the top right, Quadrant I.
+    mistakes:
+      Quadrant III: quadrant_signs
+  - prompt: Where does the point (−9, 0) lie?
+    options:
+    - On the x-axis
+    - On the y-axis
+    - In Quadrant II
+    - In Quadrant III
+    answer: On the x-axis
+    difficulty: 1
+    hints:
+    - One coordinate is zero.
+    - 'Which coordinate is 0: the up-down one or the left-right one?'
+    solution: The y-value is 0, so the point has not moved up or down from the x-axis. It lies on the x-axis, in no quadrant.
+    mistakes:
+      In Quadrant II: axis_point_zero
+      On the y-axis: axis_point_zero
+  - prompt: A point is in Quadrant IV. What can you say about its coordinates?
+    options:
+    - x is positive, y is negative
+    - x is negative, y is positive
+    - Both are negative
+    - Both are positive
+    answer: x is positive, y is negative
+    difficulty: 2
+    hints:
+    - 'Go anticlockwise from the top right: I, II, III, IV.'
+    - IV is the bottom right.
+    solution: 'Quadrant IV is the bottom right: right of the y-axis (x positive), below the x-axis (y negative).'
+    mistakes:
+      x is negative, y is positive: quadrant_signs
+  - prompt: Which point is in Quadrant II?
+    options:
+    - (−3, 4)
+    - (3, −4)
+    - (−3, −4)
+    - (0, 4)
+    answer: (−3, 4)
+    difficulty: 2
+    hints:
+    - Quadrant II is the top left.
+    - You need x negative and y positive.
+    solution: Top left needs x negative and y positive. Only (−3, 4) fits; (0, 4) is on the y-axis.
+    mistakes:
+      (3, −4): quadrant_signs
+      (0, 4): axis_point_zero
+  - prompt: The point (a, b) is in Quadrant I. In which quadrant is (−a, b)?
+    options:
+    - Quadrant II
+    - Quadrant III
+    - Quadrant IV
+    - Quadrant I
+    answer: Quadrant II
+    difficulty: 2
+    hints:
+    - a and b are both positive.
+    - Changing the sign of x flips the point across the y-axis.
+    solution: a and b are positive, so −a is negative and b is positive. Negative x with positive y is Quadrant II.
+    mistakes:
+      Quadrant IV: quadrant_signs
+      Quadrant III: quadrant_signs
+  - prompt: 'How many of these points lie in no quadrant: (0, 0), (2, 0), (−1, 3), (0, −5)?'
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - A point with a zero coordinate sits on an axis.
+    - Count the points with at least one 0.
+    solution: (0, 0), (2, 0) and (0, −5) each have a zero, so they are on an axis. Only (−1, 3) is in a quadrant (II). So 3 points are in no quadrant.
+    mistakes:
+      '2': origin_zero
+      '1': axis_point_zero
+  - prompt: A point is in Quadrant III. You move it 10 units up. Which of these could now be true?
+    options:
+    - It is in Quadrant II
+    - It is in Quadrant IV
+    - It is in Quadrant I with x positive
+    - Its x-value has changed
+    answer: It is in Quadrant II
+    difficulty: 3
+    hints:
+    - Moving up changes only y; x stays negative.
+    - With x still negative, which quadrants are possible?
+    solution: 'Moving up keeps x negative. If y becomes positive, the point is top left: Quadrant II. It can never reach I or IV, because x stays negative.'
+    mistakes:
+      It is in Quadrant IV: quadrant_signs
+      Its x-value has changed: c9m1_order_xy
+  - prompt: The corners of a square are (2, 2), (−2, 2), (−2, −2) and (2, −2). How many quadrants does the square have a corner in?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Check the signs of each corner.
+    - Each corner has a different pair of signs.
+    solution: (+, +) is I, (−, +) is II, (−, −) is III and (+, −) is IV. One corner in each, so 4 quadrants.
+    mistakes:
+      '2': quadrant_signs
+      '1': quadrant_signs
 - code: cbse9gm.coord.plot
   title: Coordinates of a point
   after:
@@ -267,6 +443,49 @@ concepts:
           x: 5
           y: 2
         say: 'Both signs dropped: that''s (5, 2), top right. Two negatives put S bottom left.'
+  lesson:
+    - teach: Every point on the plane has an address (x, y). The first number, x (the abscissa), says how far to go right (+) or left (−) from the origin. The second, y (the ordinate), says how far up (+) or down (−).
+      check:
+        prompt: In the point (5, −2), what is the ordinate?
+        options:
+        - −2
+        - '5'
+        - '3'
+        answer: −2
+        why: 'The ordinate is the second number, the y-value: −2.'
+    - teach: 'To plot (3, 4): start at O, walk 3 along the x-axis to the right, then 4 up, parallel to the y-axis. Order matters: (4, 3) is a different point, 4 across and 3 up.'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 6
+        points:
+          A(3, 4):
+          - 3
+          - 4
+          B(4, 3):
+          - 4
+          - 3
+        caption: '(3, 4) and (4, 3) are different points: swapping the numbers moves the point.'
+        alt: Axes from −1 to 6 with A at (3, 4) and B at (4, 3), two different points.
+      check:
+        prompt: To plot (−2, 5), which way do you move first?
+        options:
+        - 2 to the left
+        - 5 up
+        - 2 down
+        answer: 2 to the left
+        why: The first number is x. It is −2, so move 2 to the left, then 5 up.
+    - teach: The distance of a point from the y-axis is the size of its x-value, and its distance from the x-axis is the size of its y-value. (−6, 2) is 6 units from the y-axis and 2 units from the x-axis. Distances are never negative.
+      check:
+        prompt: How far is (4, −7) from the x-axis?
+        options:
+        - '7'
+        - '4'
+        - −7
+        answer: '7'
+        why: 'Distance from the x-axis is the size of y: 7. A distance has no minus sign.'
   items:
   - prompt: What is the abscissa of the point (7, −3)?
     answer: '7'
@@ -333,6 +552,119 @@ concepts:
     solution: 'Step 1: The sides run from x = 0 to 4 (length 4) and y = 0 to 3 (breadth 3). Step 2: Area = 4 × 3 = 12 square units.'
     mistakes:
       '14': rectangle_area_not_perimeter
+  - prompt: What is the abscissa of the point (−8, 3)?
+    answer: '-8'
+    check: '-8'
+    difficulty: 1
+    hints:
+    - The abscissa is the x-coordinate.
+    - It is the first number in the pair.
+    solution: The abscissa is the first number, x = −8.
+    mistakes:
+      '3': c9m1_order_xy
+      '8': c9m1_distance_sign
+  - prompt: What is the ordinate of the point (6, 0)?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - The ordinate is the y-coordinate.
+    - Look at the second number.
+    solution: The ordinate is the second number, 0. The point lies on the x-axis.
+    mistakes:
+      '6': c9m1_order_xy
+  - prompt: A point is 3 units to the right of the y-axis and 5 units below the x-axis. What are its coordinates?
+    options:
+    - (3, −5)
+    - (−5, 3)
+    - (5, −3)
+    - (−3, 5)
+    answer: (3, −5)
+    difficulty: 1
+    hints:
+    - Right is positive x.
+    - Below is negative y.
+    solution: Right 3 gives x = 3. Below 5 gives y = −5. The point is (3, −5).
+    mistakes:
+      (−5, 3): c9m1_order_xy
+      (−3, 5): quadrant_signs
+  - prompt: How far is the point (−7, −2) from the y-axis?
+    answer: '7'
+    check: '7'
+    difficulty: 2
+    hints:
+    - Distance from the y-axis depends on x.
+    - 'Drop the sign: distances are not negative.'
+    solution: The x-value is −7, so the point is 7 units left of the y-axis. The distance is 7.
+    mistakes:
+      '-7': c9m1_distance_sign
+      '2': c9m1_order_xy
+  - prompt: A point lies on the y-axis, 4 units below the origin. What are its coordinates?
+    options:
+    - (0, −4)
+    - (−4, 0)
+    - (4, 0)
+    - (0, 4)
+    answer: (0, −4)
+    difficulty: 2
+    hints:
+    - On the y-axis, x is 0.
+    - Below the origin means y is negative.
+    solution: On the y-axis x = 0; 4 below gives y = −4. The point is (0, −4).
+    mistakes:
+      (−4, 0): axis_point_zero
+      (0, 4): quadrant_signs
+  - prompt: 'Which two points are the same distance from the x-axis: P(2, 5), Q(5, 2), R(−1, −5)?'
+    options:
+    - P and R
+    - P and Q
+    - Q and R
+    - None of them
+    answer: P and R
+    difficulty: 2
+    hints:
+    - Distance from the x-axis is the size of y.
+    - Compare the y-values without their signs.
+    solution: The distances are |5| = 5, |2| = 2 and |−5| = 5. P and R are both 5 units from the x-axis.
+    mistakes:
+      P and Q: c9m1_order_xy
+      None of them: c9m1_distance_sign
+  - prompt: The points (1, 1), (5, 1) and (5, 4) are three corners of a rectangle. What is the fourth corner?
+    options:
+    - (1, 4)
+    - (4, 1)
+    - (4, 5)
+    - (5, 5)
+    answer: (1, 4)
+    difficulty: 2
+    hints:
+    - Opposite sides of a rectangle line up with the axes here.
+    - The missing corner shares an x-value with (1, 1) and a y-value with (5, 4).
+    solution: 'The fourth corner is straight above (1, 1) and level with (5, 4): x = 1 and y = 4, so (1, 4).'
+    mistakes:
+      (4, 1): c9m1_order_xy
+  - prompt: A square has corners (0, 0), (5, 0), (5, 5) and (0, 5). What is its area in square units?
+    answer: '25'
+    check: 5*5
+    difficulty: 3
+    hints:
+    - Find the length of one side from the coordinates.
+    - Side from (0, 0) to (5, 0) is 5.
+    solution: Each side is 5 units long, so the area is 5 × 5 = 25 square units.
+    mistakes:
+      '20': rectangle_area_not_perimeter
+      '10': rectangle_area_not_perimeter
+  - prompt: A triangle has corners (0, 0), (6, 0) and (0, 4). What is its area in square units?
+    answer: '12'
+    check: 6*4/2
+    difficulty: 3
+    hints:
+    - Two sides lie along the axes, so it is a right triangle.
+    - Area = half × base × height.
+    solution: The base is 6 along the x-axis and the height is 4 along the y-axis. Area = ½ × 6 × 4 = 12 square units.
+    mistakes:
+      '24': rectangle_area_not_perimeter
+      '10': rectangle_area_not_perimeter
 - code: cbse9gm.coord.distance
   title: Distance between two points
   after:
@@ -460,6 +792,59 @@ concepts:
           - 3.1
           - 3.2
         say: Across² + up² is 10, so PQ = √10 ≈ 3.16, not 10. Square the distance you want, not the sides you have.
+  lesson:
+    - teach: When two points are on the same horizontal line, their distance is just the gap between the x-values. (1, 3) and (7, 3) are 7 − 1 = 6 apart. On the same vertical line, use the gap between the y-values.
+      check:
+        prompt: How far apart are (2, −1) and (2, 6)?
+        options:
+        - '7'
+        - '5'
+        - '4'
+        answer: '7'
+        why: Same x, so they are on a vertical line. The gap in y is 6 − (−1) = 7.
+    - teach: 'For two points that are not lined up, draw a right triangle: go across from one, then up to the other. The across side is the gap in x, the up side is the gap in y, and the distance is the slanted side. Pythagoras gives it: distance = √((gap in x)² + (gap in y)²).'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 6
+        points:
+          P(1, 1):
+          - 1
+          - 1
+          Q(4, 5):
+          - 4
+          - 5
+          _R:
+          - 4
+          - 1
+        segments:
+        - - P(1, 1)
+          - _R
+        - - _R
+          - Q(4, 5)
+        - - P(1, 1)
+          - Q(4, 5)
+        caption: Across 3, up 4, so PQ = √(9 + 16) = 5.
+        alt: Right triangle from P(1, 1) across 3 to (4, 1) and up 4 to Q(4, 5); the slanted side PQ is 5.
+      check:
+        prompt: The gap in x is 6 and the gap in y is 8. What is the distance?
+        options:
+        - '10'
+        - '14'
+        - '100'
+        answer: '10'
+        why: √(36 + 64) = √100 = 10. Adding 6 + 8 walks round the corner; squaring without the root gives 100.
+    - teach: 'The distance from the origin to (x, y) is √(x² + y²). Signs don''t matter because squaring removes them: (−3, 4) is √(9 + 16) = 5 from O, the same as (3, 4).'
+      check:
+        prompt: How far is (−8, −6) from the origin?
+        options:
+        - '10'
+        - '14'
+        - '2'
+        answer: '10'
+        why: √(64 + 36) = √100 = 10.
   items:
   - prompt: Find the distance between (0, 0) and (6, 8).
     answer: '10'
@@ -524,6 +909,109 @@ concepts:
     - 5 + 5 = 10.
     solution: 'Step 1: AB + BC = 5 + 5 = 10 = AC. Step 2: Going via B is no longer than going straight, so B lies on segment AC: the points are collinear.'
     mistakes: {"No, because AB = BC": "collinear_by_sum", "Can't tell from distances": "collinear_by_sum"}
+  - prompt: Find the distance between (−3, 2) and (5, 2).
+    answer: '8'
+    check: 5 - (-3)
+    difficulty: 1
+    hints:
+    - Both points have y = 2.
+    - Find the gap between −3 and 5.
+    solution: 'Same y, so the distance is the gap in x: 5 − (−3) = 8.'
+    mistakes:
+      '2': c9m1_distance_sign
+  - prompt: Find the distance between (0, 0) and (3, 4).
+    answer: '5'
+    check: sqrt(3**2 + 4**2)
+    difficulty: 1
+    hints:
+    - Use √(x² + y²).
+    - 9 + 16 = 25.
+    solution: √(3² + 4²) = √25 = 5.
+    mistakes:
+      '7': distance_added_sides
+      '25': distance_forgot_root
+  - prompt: Find the distance between (1, 1) and (7, 9).
+    answer: '10'
+    check: sqrt(6**2 + 8**2)
+    difficulty: 2
+    hints:
+    - The gaps are 6 in x and 8 in y.
+    - √(36 + 64).
+    solution: Gap in x = 6, gap in y = 8. Distance = √(36 + 64) = √100 = 10.
+    mistakes:
+      '14': distance_added_sides
+      '100': distance_forgot_root
+  - prompt: How far is the point (−6, 8) from the origin?
+    answer: '10'
+    check: sqrt(36 + 64)
+    difficulty: 2
+    hints:
+    - Squaring removes the minus sign.
+    - √(36 + 64).
+    solution: √((−6)² + 8²) = √(36 + 64) = √100 = 10.
+    mistakes:
+      '2': distance_added_sides
+      '14': distance_added_sides
+      '100': distance_forgot_root
+  - prompt: Find the distance between (2, −3) and (−4, 5).
+    answer: '10'
+    check: sqrt(6**2 + 8**2)
+    difficulty: 2
+    hints:
+    - 'Gap in x: 2 − (−4).'
+    - 'Gap in y: 5 − (−3).'
+    solution: Gap in x = 6, gap in y = 8. Distance = √(36 + 64) = 10.
+    mistakes:
+      '14': distance_added_sides
+      '100': distance_forgot_root
+  - prompt: Find the distance between (0, 0) and (5, 12).
+    answer: '13'
+    check: sqrt(25 + 144)
+    difficulty: 2
+    hints:
+    - 25 + 144 = 169.
+    - Which number squared is 169?
+    solution: √(5² + 12²) = √169 = 13.
+    mistakes:
+      '17': distance_added_sides
+      '169': distance_forgot_root
+  - prompt: A(1, 2), B(4, 6) and C(4, 2) form a triangle. What is its perimeter?
+    answer: '12'
+    check: 3 + 4 + 5
+    difficulty: 3
+    hints:
+    - AC is horizontal and BC is vertical.
+    - 'AB is the slanted side: use Pythagoras.'
+    solution: AC = 3 and BC = 4. AB = √(9 + 16) = 5. Perimeter = 3 + 4 + 5 = 12.
+    mistakes:
+      '14': distance_added_sides
+      '6': rectangle_area_not_perimeter
+  - prompt: The point (x, 0) is 5 units from (0, 3), and x is positive. What is x?
+    answer: '4'
+    check: sqrt(25 - 9)
+    difficulty: 3
+    hints:
+    - x² + 3² = 5².
+    - x² = 25 − 9.
+    solution: x² + 9 = 25, so x² = 16 and x = 4.
+    mistakes:
+      '16': distance_forgot_root
+      '2': distance_added_sides
+  - prompt: Is the triangle with corners O(0, 0), A(6, 0) and B(3, 4) isosceles?
+    options:
+    - Yes, OB = AB = 5
+    - No, all sides are different
+    - Yes, OA = OB = 6
+    - No, it is right-angled
+    answer: Yes, OB = AB = 5
+    difficulty: 3
+    hints:
+    - Find OB and AB with the distance formula.
+    - OB = √(9 + 16).
+    solution: OB = √(3² + 4²) = 5 and AB = √(3² + 4²) = 5, while OA = 6. Two equal sides, so it is isosceles.
+    mistakes:
+      Yes, OA = OB = 6: distance_added_sides
+      No, all sides are different: distance_forgot_root
 - code: cbse9gm.coord.midpoint
   title: The midpoint of a segment
   after:
@@ -614,6 +1102,55 @@ concepts:
           x: -1
           y: 0
         say: With B on top of M, the midpoint is halfway from A to M. B has to be as far past M as A is before it.
+  lesson:
+    - teach: 'The midpoint of a segment sits exactly halfway between its ends. On a number line, halfway between 2 and 8 is their average, (2 + 8)/2 = 5. On the plane we do the same thing twice: average the x-values, and average the y-values.'
+      check:
+        prompt: What number is halfway between −4 and 10?
+        options:
+        - '3'
+        - '7'
+        - '6'
+        answer: '3'
+        why: (−4 + 10)/2 = 6/2 = 3.
+    - teach: 'Midpoint of (x₁, y₁) and (x₂, y₂) is ((x₁ + x₂)/2, (y₁ + y₂)/2). For (2, 1) and (6, 7): ((2 + 6)/2, (1 + 7)/2) = (4, 4). A common slip is to add but forget to halve.'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 8
+        points:
+          A(2, 1):
+          - 2
+          - 1
+          B(6, 7):
+          - 6
+          - 7
+          M(4, 4):
+          - 4
+          - 4
+        segments:
+        - - A(2, 1)
+          - B(6, 7)
+        caption: M is the average of A and B in both coordinates.
+        alt: Segment from A(2, 1) to B(6, 7) with its midpoint M at (4, 4).
+      check:
+        prompt: What is the midpoint of (0, 4) and (6, 0)?
+        options:
+        - (3, 2)
+        - (6, 4)
+        - (3, 4)
+        answer: (3, 2)
+        why: ((0 + 6)/2, (4 + 0)/2) = (3, 2). (6, 4) adds without halving.
+    - teach: 'Working backwards: if M is the midpoint of AB, then B is as far beyond M as A is before it. So B = (2·xM − xA, 2·yM − yA). With A(1, 2) and M(3, 5), B = (6 − 1, 10 − 2) = (5, 8).'
+      check:
+        prompt: M(2, 0) is the midpoint of AB and A is (0, 0). What is B?
+        options:
+        - (4, 0)
+        - (1, 0)
+        - (2, 0)
+        answer: (4, 0)
+        why: A to M is 2 steps right; B is another 2 steps right, at (4, 0).
   items:
   - prompt: Find the x-coordinate of the midpoint of (2, 4) and (8, 10).
     answer: '5'
@@ -681,3 +1218,118 @@ concepts:
     - Midpoint of AC is (3, 1.5).
     solution: 'Step 1: Midpoint of AC = (3, 1.5). Step 2: It is also the midpoint of BD, so (4 + x)/2 = 3, x = 2. (D = (2, 3).)'
     mistakes: {"6": "diagonals_share_midpoint", "10": "diagonals_share_midpoint"}
+  - prompt: Find the x-coordinate of the midpoint of (3, 1) and (9, 5).
+    answer: '6'
+    check: (3 + 9)/2
+    difficulty: 1
+    hints:
+    - Add the two x-values.
+    - Then halve.
+    solution: (3 + 9)/2 = 12/2 = 6.
+    mistakes:
+      '12': midpoint_no_halve
+      '3': midpoint_subtracted
+  - prompt: What is the midpoint of (−2, 0) and (2, 0)?
+    options:
+    - (0, 0)
+    - (2, 0)
+    - (4, 0)
+    - (−2, 0)
+    answer: (0, 0)
+    difficulty: 1
+    hints:
+    - The points are equally far on each side of the y-axis.
+    - Average −2 and 2.
+    solution: ((−2 + 2)/2, (0 + 0)/2) = (0, 0), the origin.
+    mistakes:
+      (4, 0): midpoint_subtracted
+      (2, 0): midpoint_subtracted
+  - prompt: Find the y-coordinate of the midpoint of (4, −6) and (0, 10).
+    answer: '2'
+    check: (-6 + 10)/2
+    difficulty: 1
+    hints:
+    - Add −6 and 10.
+    - Halve the result.
+    solution: (−6 + 10)/2 = 4/2 = 2.
+    mistakes:
+      '4': midpoint_no_halve
+      '8': midpoint_subtracted
+  - prompt: What is the midpoint of (1, 3) and (5, 9)?
+    options:
+    - (3, 6)
+    - (6, 12)
+    - (2, 3)
+    - (4, 6)
+    answer: (3, 6)
+    difficulty: 2
+    hints:
+    - 'Average the x-values: 1 and 5.'
+    - 'Average the y-values: 3 and 9.'
+    solution: ((1 + 5)/2, (3 + 9)/2) = (3, 6).
+    mistakes:
+      (6, 12): midpoint_no_halve
+      (2, 3): midpoint_subtracted
+  - prompt: M(5, 1) is the midpoint of AB, and A is (2, −3). What is the y-coordinate of B?
+    answer: '5'
+    check: 2*1 - (-3)
+    difficulty: 2
+    hints:
+    - B is as far beyond M as A is before it.
+    - y of B = 2 × 1 − (−3).
+    solution: 'From A to M, y goes from −3 to 1, up 4. Go up 4 more: B has y = 5.'
+    mistakes:
+      '-1': midpoint_subtracted
+      '-2': midpoint_subtracted
+  - prompt: A diameter of a circle has ends (1, 4) and (7, 4). Where is the centre?
+    options:
+    - (4, 4)
+    - (8, 8)
+    - (3, 0)
+    - (6, 0)
+    answer: (4, 4)
+    difficulty: 2
+    hints:
+    - The centre is the midpoint of any diameter.
+    - Average the two ends.
+    solution: The centre is ((1 + 7)/2, (4 + 4)/2) = (4, 4).
+    mistakes:
+      (8, 8): midpoint_no_halve
+      (3, 0): midpoint_subtracted
+  - prompt: The midpoint of (a, 2) and (6, 8) is (4, 5). What is a?
+    answer: '2'
+    check: 2*4 - 6
+    difficulty: 2
+    hints:
+    - (a + 6)/2 = 4.
+    - So a + 6 = 8.
+    solution: (a + 6)/2 = 4 gives a + 6 = 8, so a = 2.
+    mistakes:
+      '10': midpoint_subtracted
+      '-2': midpoint_subtracted
+  - prompt: A(0, 0), B(6, 0), C(8, 4) and D are corners of a parallelogram ABCD. What is the y-coordinate of D?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Diagonals AC and BD share a midpoint.
+    - Midpoint of AC is (4, 2).
+    solution: Midpoint of AC = (4, 2). For B(6, 0), D = (2·4 − 6, 2·2 − 0) = (2, 4). The y-coordinate is 4.
+    mistakes:
+      '2': diagonals_share_midpoint
+      '0': diagonals_share_midpoint
+  - prompt: A segment joins (−4, 6) and (8, −2). The point P is the midpoint of the segment. How far is P from the origin?
+    options:
+    - 2√2
+    - '4'
+    - '8'
+    - √2
+    answer: 2√2
+    difficulty: 3
+    hints:
+    - 'First find P: average each coordinate.'
+    - P = (2, 2); then use √(x² + y²).
+    solution: P = ((−4 + 8)/2, (6 − 2)/2) = (2, 2). Distance from O = √(4 + 4) = √8 = 2√2.
+    mistakes:
+      '4': distance_added_sides
+      '8': distance_forgot_root

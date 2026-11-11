@@ -34,10 +34,27 @@ def _dump(value, indent: int) -> list[str]:
     return [(" " * indent + line) if line else line for line in text.rstrip("\n").split("\n")]
 
 
-def _block(lines: list[str], code: str) -> tuple[int, int]:
-    start = next(n for n, line in enumerate(lines) if line.rstrip() == f"  - code: {code}")
-    end = next((n for n in range(start + 1, len(lines)) if lines[n].startswith("  - code: ")), len(lines))
-    return start, end
+def _indent(line: str) -> int:
+    return len(line) - len(line.lstrip(" "))
+
+
+def _block(lines: list[str], code: str) -> tuple[int, int, int]:
+    """Where the topic starts and ends, and the indent of its keys (packs nest lists either way)."""
+    start = next(n for n, line in enumerate(lines) if line.lstrip(" ").rstrip() == f"- code: {code}")
+    ind = _indent(lines[start])
+    end = next((n for n in range(start + 1, len(lines)) if lines[n].strip() and _indent(lines[n]) <= ind), len(lines))
+    return start, end, ind + 2
+
+
+def _value_end(lines: list[str], at: int, end: int, key: int) -> int:
+    """The line after the value of the key on line `at` (a list may sit at the key's own indent)."""
+    stop = next(
+        (n for n in range(at + 1, end) if lines[n].strip() and _indent(lines[n]) <= key and not lines[n].startswith(" " * key + "- ")),
+        end,
+    )
+    while stop > at + 1 and not lines[stop - 1].strip():
+        stop -= 1
+    return stop
 
 
 def merge(text: str, extra: dict) -> str:
@@ -48,22 +65,19 @@ def merge(text: str, extra: dict) -> str:
             at += 1
         lines[at + 1 : at + 1] = _dump(extra["tips"], 2)
     for code, add in (extra.get("topics") or {}).items():
-        start, end = _block(lines, code)
+        start, end, key = _block(lines, code)
         if add.get("items"):
-            items_at = next(n for n in range(start, end) if lines[n].rstrip() == "    items:")
-            stop = next((n for n in range(items_at + 1, end) if lines[n].strip() and not lines[n].startswith("      ")), end)
-            while stop > items_at + 1 and not lines[stop - 1].strip():
-                stop -= 1
-            lines[stop:stop] = _dump(add["items"], 6)
-            start, end = _block(lines, code)
+            items_at = next(n for n in range(start, end) if lines[n].rstrip() == " " * key + "items:")
+            stop = _value_end(lines, items_at, end, key)
+            lines[stop:stop] = _dump(add["items"], _indent(lines[items_at + 1]))
+            start, end, key = _block(lines, code)
         if add.get("lesson"):
-            old = next((n for n in range(start, end) if lines[n].rstrip() == "    lesson:"), None)
+            old = next((n for n in range(start, end) if lines[n].rstrip() == " " * key + "lesson:"), None)
             if old is not None:
-                stop = next(n for n in range(old + 1, end) if lines[n].strip() and not lines[n].startswith("      "))
-                del lines[old:stop]
-                start, end = _block(lines, code)
-            items_at = next(n for n in range(start, end) if lines[n].rstrip() == "    items:")
-            lines[items_at:items_at] = ["    lesson:", *_dump(add["lesson"], 6)]
+                del lines[old : _value_end(lines, old, end, key)]
+                start, end, key = _block(lines, code)
+            items_at = next(n for n in range(start, end) if lines[n].rstrip() == " " * key + "items:")
+            lines[items_at:items_at] = [" " * key + "lesson:", *_dump(add["lesson"], key + 2)]
     return "\n".join(lines)
 
 
