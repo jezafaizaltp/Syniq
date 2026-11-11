@@ -15,6 +15,11 @@ tips:
   t10_ratio_parts: "Add the ratio parts (9 + 3 + 3 + 1). Each part is 160 ÷ that total. Both-recessive is 1 part."
   t10_temperature_sex: "In some reptiles there are no sex chromosomes. What outside condition decides?"
   t10_xy: "Males and females differ by one chromosome: which pair has a Y?"
+  c10s8_dominant: When two different versions of a trait meet, the dominant one shows and the recessive one hides. A hidden trait can come back when two hidden copies meet.
+  c10s8_square: Write the gametes of each parent along the sides of a 2 × 2 square and fill in the four boxes. Then count.
+  c10s8_inherited_acquired: An inherited trait comes from genes in the gametes. A trait gained during life, like a skill or an injury, does not change the genes.
+  c10s8_gene_protein: A gene carries the instructions for a protein, and the protein (often an enzyme or hormone) makes the trait.
+  c10s8_xy_count: Mothers always pass on an X. Fathers pass on X or Y with equal chance.
 concepts:
 - code: cbse10s.heredity.mendel
   title: Mendel's rules of inheritance
@@ -92,6 +97,43 @@ concepts:
       - when:
           v: 1000
         say: The Tt parent can pass on T, so half the offspring are Tt and tall.
+  lesson:
+    - teach: 'Heredity is how traits pass from parents to children. Mendel crossed pea plants with contrasting traits, like tall and short. All F1 plants were tall: tall is dominant, short is recessive. When F1 plants self-pollinated, F2 had tall and short in a ratio of about 3 : 1. The short trait was hidden, not lost.'
+      picture:
+        kind: flow
+        steps:
+        - TT × tt
+        - 'F1: all Tt (tall)'
+        - Tt × Tt
+        - 'F2: 1 TT, 2 Tt, 1 tt'
+        - '3 tall : 1 short'
+        alt: 'Mendel''s monohybrid cross: TT crossed with tt gives all tall Tt in F1; Tt selfed gives TT, Tt, Tt, tt in F2, a ratio of 3 tall to 1 short.'
+      check:
+        prompt: Which trait showed in all F1 plants?
+        options:
+        - The dominant one
+        - The recessive one
+        - A blend
+        answer: The dominant one
+        why: Tt shows the dominant trait.
+    - teach: Each trait is controlled by a pair of factors, now called genes, one from each parent. Gametes carry only one of each pair. A gene is a section of DNA that carries the instructions for a protein; for example, a gene for an enzyme that makes a growth hormone decides plant height.
+      check:
+        prompt: How many copies of each gene does a gamete carry?
+        options:
+        - One
+        - Two
+        - Four
+        answer: One
+        why: Gametes carry one of each pair.
+    - teach: 'Crossing two traits at once (round yellow × wrinkled green) gave F2 in 9 : 3 : 3 : 1, including new mixes like round green. So traits are inherited independently. Traits gained during life (acquired traits, like a skill) are not passed on, because they don''t change the DNA of gametes.'
+      check:
+        prompt: Can a wrestler's big muscles be inherited?
+        options:
+        - No, they are acquired
+        - Yes, always
+        - Only by sons
+        answer: No, they are acquired
+        why: Training doesn't change the genes.
   items:
   - prompt: 'A pure tall pea plant (TT) is crossed with a dwarf one (tt). The F1 plants are:'
     options:
@@ -166,6 +208,122 @@ concepts:
     - They carry instructions for proteins.
     solution: A gene is a stretch of DNA that carries instructions for a protein, which affects a trait.
     mistakes: {"A whole chromosome": "t10_gene_def", "A hormone": "t10_gene_def"}
+  - prompt: In Mendel's cross of tall (TT) and dwarf (tt) peas, what is the genotype of the F1 plants?
+    options:
+    - Tt
+    - TT
+    - tt
+    - TTtt
+    answer: Tt
+    difficulty: 1
+    hints:
+    - Each parent gives one gene.
+    - One T and one t.
+    solution: 'Every F1 plant gets T from one parent and t from the other: Tt.'
+    mistakes:
+      TT: c10s8_square
+  - prompt: Tt × tt. What fraction of offspring are dwarf? Type a fraction.
+    answer: 1/2
+    check: 2/4
+    difficulty: 2
+    hints:
+    - 'Gametes: T or t, and only t.'
+    - 'Fill the square: Tt, Tt, tt, tt.'
+    solution: 2 of 4 boxes are tt, so half are dwarf.
+    mistakes:
+      1/4: c10s8_square
+      3/4: c10s8_square
+  - prompt: Two tall pea plants produce some dwarf offspring. What must both parents be?
+    options:
+    - Tt
+    - TT
+    - tt
+    - One TT and one tt
+    answer: Tt
+    difficulty: 3
+    hints:
+    - Dwarf needs tt.
+    - Each parent must pass on a t but still look tall.
+    solution: Both parents must carry a hidden t and look tall, so both are Tt.
+    mistakes:
+      TT: c10s8_dominant
+      One TT and one tt: c10s8_dominant
+  - prompt: Which of these is an acquired trait?
+    options:
+    - Ability to swim learnt in a pool
+    - Eye colour
+    - Blood group
+    - Shape of the earlobe
+    answer: Ability to swim learnt in a pool
+    difficulty: 1
+    hints:
+    - Acquired means gained during life.
+    - Which one did you learn?
+    solution: Swimming is learnt, so it is acquired and not passed on.
+    mistakes:
+      Eye colour: c10s8_inherited_acquired
+      Blood group: c10s8_inherited_acquired
+  - prompt: How does a gene control a trait like height in a plant?
+    options:
+    - It codes for a protein, such as an enzyme that makes a growth hormone
+    - It grows into the stem
+    - It carries water
+    - It is a hormone itself
+    answer: It codes for a protein, such as an enzyme that makes a growth hormone
+    difficulty: 3
+    hints:
+    - Genes are instructions.
+    - Instructions for making what?
+    solution: A gene codes for a protein; if the enzyme works well, more growth hormone is made and the plant is tall.
+    mistakes:
+      It is a hormone itself: c10s8_gene_protein
+  - prompt: 'In a round yellow × wrinkled green cross, F2 had 9 : 3 : 3 : 1. Out of 16, how many were round and yellow?'
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - Both dominant traits together is the biggest group.
+    - Look at the first number of the ratio.
+    solution: Round yellow (both dominant) is 9 of 16.
+    mistakes:
+      '1': t10_ratio_parts
+      '3': t10_ratio_parts
+  - prompt: Why did Mendel choose pea plants?
+    options:
+    - They have clear contrasting traits and grow quickly
+    - They are trees
+    - They don't have flowers
+    - They live for many years
+    answer: They have clear contrasting traits and grow quickly
+    difficulty: 1
+    hints:
+    - He needed traits that are easy to tell apart.
+    - And many generations.
+    solution: Peas have clear either-or traits (tall/short, round/wrinkled) and a short life cycle.
+    mistakes:
+      They are trees: c10s8_dominant
+  - prompt: A plant with genotype tt crossed with TT. Out of 100 offspring, how many are tall?
+    answer: '100'
+    check: '100'
+    difficulty: 2
+    hints:
+    - Every offspring gets one T and one t.
+    - Which trait shows in Tt?
+    solution: All offspring are Tt, which look tall, so all 100 are tall.
+    mistakes:
+      '50': c10s8_square
+      '75': c10s8_square
+  - prompt: In a monohybrid F2 of 400 plants, how many are pure tall (TT)?
+    answer: '100'
+    check: 400 / 4
+    difficulty: 2
+    hints:
+    - 'TT : Tt : tt = 1 : 2 : 1.'
+    - TT is one part of four.
+    solution: 400 ÷ 4 = 100.
+    mistakes:
+      '300': c10s_genotype_phenotype
+      '200': c10s_genotype_phenotype
 - code: cbse10s.heredity.sex
   title: How sex is decided in humans
   after:
@@ -243,6 +401,46 @@ concepts:
       bin: 'True'
       clue: Do all animals use X and Y chromosomes?
       why: In many turtles and crocodiles, the egg's temperature decides it.
+  lesson:
+    - teach: 'Humans have 23 pairs of chromosomes. 22 pairs are the same in men and women (autosomes). The 23rd pair is the sex chromosomes: women have XX, men have XY.'
+      picture:
+        kind: compare
+        columns:
+        - title: Woman
+          points:
+          - 22 pairs + XX
+          - Every egg has X
+        - title: Man
+          points:
+          - 22 pairs + XY
+          - Half the sperm have X, half have Y
+        alt: A woman has 22 pairs plus XX, so every egg carries X; a man has 22 pairs plus XY, so half his sperm carry X and half carry Y.
+      check:
+        prompt: Sex chromosomes of a woman?
+        options:
+        - XX
+        - XY
+        - YY
+        answer: XX
+        why: Women have two X.
+    - teach: Every egg carries an X. A sperm carries X or Y with equal chance. X sperm + egg → XX (girl). Y sperm + egg → XY (boy). So the father's sperm decides the sex, and each child has about a 50% chance of either.
+      check:
+        prompt: A Y sperm fertilises an egg. The child is…
+        options:
+        - A boy
+        - A girl
+        - Either
+        answer: A boy
+        why: XY is male.
+    - teach: Not all animals use chromosomes. In some reptiles the temperature of the eggs decides the sex. Snails can change sex. So sex determination varies across living things.
+      check:
+        prompt: In some turtles, sex depends on…
+        options:
+        - Egg temperature
+        - Food
+        - The father's colour
+        answer: Egg temperature
+        why: There are no sex chromosomes.
   items:
   - prompt: What are the sex chromosomes of a human male?
     options:
@@ -317,3 +515,119 @@ concepts:
     - (44 + 2) ÷ 2.
     solution: 'Step 1: Total 46. Step 2: Egg has half: 23 (22 autosomes + X).'
     mistakes: {"46": "t10_gamete_halve", "22": "t10_gamete_halve"}
+  - prompt: What are the sex chromosomes of a human female?
+    options:
+    - XX
+    - XY
+    - YY
+    - X only
+    answer: XX
+    difficulty: 1
+    hints:
+    - Males have XY.
+    - Females have two of the same.
+    solution: Females have XX.
+    mistakes:
+      XY: t10_xy
+  - prompt: Which sex chromosome does every egg carry?
+    options:
+    - X
+    - Y
+    - Either X or Y
+    - None
+    answer: X
+    difficulty: 1
+    hints:
+    - The mother has XX.
+    - She can only pass on one kind.
+    solution: All eggs carry X.
+    mistakes:
+      Either X or Y: c10s_sex_father
+  - prompt: What is the chance that a baby is a girl? Type a percentage number.
+    answer: '50'
+    check: 100 / 2
+    difficulty: 1
+    hints:
+    - Half the sperm carry X.
+    - Half carry Y.
+    solution: X sperm and Y sperm are equally likely, so 50%.
+    mistakes:
+      '25': c10s8_xy_count
+      '100': c10s8_xy_count
+  - prompt: How many autosomes are in a human body cell?
+    answer: '44'
+    check: 22 * 2
+    difficulty: 2
+    hints:
+    - Autosomes are the 22 non-sex pairs.
+    - Count the chromosomes, not the pairs.
+    solution: 22 pairs × 2 = 44 autosomes.
+    mistakes:
+      '22': c10s_pairs_count
+      '46': c10s_pairs_count
+  - prompt: A sperm with X fertilises an egg. What is the child's sex?
+    options:
+    - Girl
+    - Boy
+    - It depends on the mother
+    - It cannot be known
+    answer: Girl
+    difficulty: 1
+    hints:
+    - The egg gives X too.
+    - X + X = ?
+    solution: 'X from the father + X from the mother = XX: a girl.'
+    mistakes:
+      It depends on the mother: c10s_sex_father
+  - prompt: Is it fair to blame a mother for not having a son?
+    options:
+    - No, the father's sperm decides the sex
+    - Yes, the egg decides
+    - Yes, the mother's food decides
+    - No, the grandparents decide
+    answer: No, the father's sperm decides the sex
+    difficulty: 2
+    hints:
+    - What does every egg carry?
+    - Where can a Y come from?
+    solution: Only the father can pass on Y, and it is chance; the mother has no say in it.
+    mistakes:
+      Yes, the egg decides: c10s_sex_father
+  - prompt: How many sex chromosomes are in a human sperm cell?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - A gamete has one of each pair.
+    - Sex chromosomes are one pair.
+    solution: 'A sperm has 23 chromosomes: 22 autosomes and one sex chromosome (X or Y).'
+    mistakes:
+      '2': t10_gamete_halve
+  - prompt: Which animal can change its sex?
+    options:
+    - Some snails
+    - Humans
+    - Dogs
+    - Pea plants
+    answer: Some snails
+    difficulty: 2
+    hints:
+    - Not mammals.
+    - A shelled animal in the textbook.
+    solution: Some snails can change sex, showing sex is not always fixed by genes.
+    mistakes:
+      Humans: t10_temperature_sex
+  - prompt: In humans, is sex determined by genes or by the environment?
+    options:
+    - By genes (sex chromosomes)
+    - By temperature
+    - By food
+    - By light
+    answer: By genes (sex chromosomes)
+    difficulty: 1
+    hints:
+    - Think XX and XY.
+    - Temperature works for some reptiles.
+    solution: In humans, the sex chromosomes from the parents decide the sex.
+    mistakes:
+      By temperature: t10_temperature_sex
