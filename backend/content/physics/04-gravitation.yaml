@@ -95,6 +95,48 @@ concepts:
             m: 2
             d: 2
           say: 'Doubling the mass doubles the force, but doubling the distance makes it a quarter: 2 × 1/4 = 1/2.'
+    lesson:
+      - teach: An apple falls because the Earth pulls it. Newton realised that the same pull keeps the Moon going round the Earth. In fact every two bodies in the universe attract each other. This pull is gravitation.
+        check:
+          prompt: Which force keeps the Earth going round the Sun?
+          options:
+          - The Sun's gravitational pull
+          - Friction
+          - Magnetism
+          answer: The Sun's gravitational pull
+          why: Gravitation acts between all bodies; the Sun's pull bends the Earth's path into an orbit.
+      - teach: 'The force grows with each mass: double one mass, double the force. It falls with the square of the distance between their centres: double the distance and the force becomes 1/4; triple it and it becomes 1/9. Together: F = G m₁m₂ ÷ r².'
+        picture:
+          kind: compare
+          columns:
+          - title: Change
+            points:
+            - one mass × 2
+            - distance × 2
+            - distance × 3
+          - title: Force becomes
+            points:
+            - F × 2
+            - F ÷ 4
+            - F ÷ 9
+          alt: Doubling a mass doubles the force; doubling the distance makes it a quarter; tripling the distance makes it a ninth.
+        check:
+          prompt: Two masses attract with 20 N. The distance is doubled. What is the new force?
+          options:
+          - 5 N
+          - 10 N
+          - 40 N
+          answer: 5 N
+          why: 'Doubling the distance divides the force by 2² = 4: 20 ÷ 4 = 5 N.'
+      - teach: G = 6.67 × 10⁻¹¹ N m²/kg² is the same everywhere in the universe. It is tiny, so the pull between everyday objects, like two people, is far too small to notice. Only huge masses like the Earth give a strong pull. And by the third law, the Earth pulls the Moon exactly as hard as the Moon pulls the Earth.
+        check:
+          prompt: Why don't two books on a table move towards each other?
+          options:
+          - The pull between them is tiny because G is so small
+          - Books don't have gravity
+          - The table blocks gravity
+          answer: The pull between them is tiny because G is so small
+          why: They do attract, but the force is far smaller than the friction holding them in place.
     items:
       - prompt: "Two masses attract each other with a force F. If the distance between them is doubled, what is the new force?"
         options: ["F/4", "F/2", "2F", "4F"]
@@ -159,6 +201,79 @@ concepts:
         hints: ["The law of gravitation applies to every two bodies.", "G = 6.67 × 10⁻¹¹. Try 60 kg and 60 kg, 1 m apart."]
         solution: "Step 1: They do attract. Step 2: F = 6.67 × 10⁻¹¹ × 60 × 60 ÷ 1² ≈ 2.4 × 10⁻⁷ N, far too small to feel."
         mistakes: {"Only the Earth has gravity": tiny_force, "Gravity acts only between planets": tiny_force, "The air between them blocks gravity": tiny_force}
+      - prompt: Two masses attract with a force F. The distance between them is halved. What is the new force?
+        options:
+        - 4F
+        - 2F
+        - F/2
+        - F/4
+        answer: 4F
+        difficulty: 1
+        hints:
+        - Force depends on 1 ÷ distance².
+        - Halving r makes r² a quarter.
+        solution: 'Step 1: F ∝ 1/r². Step 2: r becomes r/2, so r² becomes r²/4. Step 3: The force becomes 4F.'
+        mistakes:
+          2F: inverse_not_square
+          F/4: inverse_not_square
+      - prompt: Two masses attract with 12 N. Both masses are doubled; the distance stays the same. What is the new force, in N?
+        answer: '48'
+        check: 12*2*2
+        difficulty: 1
+        hints:
+        - Each doubled mass doubles the force.
+        - 12 × 2 × 2.
+        solution: 'Step 1: Doubling one mass gives 24 N. Step 2: Doubling the other gives 48 N. Step 3: So the force is 48 N.'
+        mistakes:
+          '24': force_mass_direct
+      - prompt: Which pair attracts each other with the strongest gravitational force?
+        options:
+        - The Earth and the Moon
+        - Two cars parked side by side
+        - Two people shaking hands
+        - Two apples on a plate
+        answer: The Earth and the Moon
+        difficulty: 2
+        hints:
+        - The force grows with the masses.
+        - Which pair has enormous masses?
+        solution: 'Step 1: F = G m₁m₂ ÷ r². Step 2: G is tiny, so only huge masses give large forces. Step 3: The Earth and Moon win easily, despite the big distance.'
+        mistakes:
+          Two people shaking hands: tiny_force
+      - prompt: Two masses attract with 90 N. The distance between them is tripled. What is the new force, in N?
+        answer: '10'
+        check: 90/3**2
+        difficulty: 2
+        hints:
+        - Tripling the distance divides the force by 3².
+        - 90 ÷ 9.
+        solution: 'Step 1: F ∝ 1/r². Step 2: 3² = 9. Step 3: 90 ÷ 9 = 10 N.'
+        mistakes:
+          '30': inverse_not_square
+      - prompt: One mass is halved and the distance is also halved. What happens to the force?
+        options:
+        - It doubles
+        - It halves
+        - It stays the same
+        - It becomes 4 times
+        answer: It doubles
+        difficulty: 3
+        hints:
+        - Halving the mass halves the force.
+        - Halving the distance makes it 4 times.
+        solution: 'Step 1: Mass halved: × 1/2. Step 2: Distance halved: × 4. Step 3: 1/2 × 4 = 2, so the force doubles.'
+        mistakes:
+          It stays the same: inverse_not_square
+      - prompt: The Earth pulls a 1 kg book with about 10 N. With what force does the book pull the Earth, in N?
+        answer: '10'
+        check: '10'
+        difficulty: 3
+        hints:
+        - Gravitation is a pair of forces.
+        - Newton's third law.
+        solution: 'Step 1: The forces form an action–reaction pair. Step 2: They are equal in size. Step 3: The book pulls the Earth with 10 N; the Earth barely moves because its mass is huge.'
+        mistakes:
+          '0': gravity_holds_moon
 
   - code: phy9.gravity.weight
     title: Mass, weight and g
@@ -214,6 +329,34 @@ concepts:
             - 16
             - 17
           say: About 16 kg is what weighs 160 N on Earth. On the Moon each kilogram weighs only 1.6 N, so 160 N there needs much more mass.
+    lesson:
+      - teach: Near the Earth's surface, gravity makes every falling body speed up by about 9.8 m/s every second. This is the acceleration due to gravity, g ≈ 9.8 m/s² (we often round it to 10 m/s²).
+        check:
+          prompt: Dropped from rest, about how fast is a stone falling after 1 s?
+          options:
+          - About 10 m/s
+          - About 1 m/s
+          - About 100 m/s
+          answer: About 10 m/s
+          why: It gains about 9.8 m/s each second.
+      - teach: 'Mass is how much matter a body has, in kg; it is the same everywhere. Weight is the force of gravity on it: W = m × g, in newtons. A 50 kg girl weighs 50 × 10 = 500 N on Earth. Saying ''I weigh 50 kg'' really gives your mass.'
+        check:
+          prompt: What is the weight of a 3 kg bag on Earth? (g = 10 m/s²)
+          options:
+          - 30 N
+          - 3 kg
+          - 0.3 N
+          answer: 30 N
+          why: W = mg = 3 × 10 = 30 N. Weight is a force, in newtons.
+      - teach: 'On the Moon, g is about 1/6 of the Earth''s, so you weigh 1/6 as much, but your mass doesn''t change. g also varies a little on Earth: it is slightly larger at the poles than at the equator, because the Earth is a bit flattened.'
+        check:
+          prompt: An astronaut's mass is 72 kg on Earth. What is it on the Moon?
+          options:
+          - 72 kg
+          - 12 kg
+          - 720 kg
+          answer: 72 kg
+          why: Mass doesn't change from place to place. Only weight changes.
     items:
       - prompt: "What is the weight of a 50 kg girl on Earth, in N? (Take g = 10 m/s².)"
         answer: "500"
@@ -285,6 +428,79 @@ concepts:
         hints: ["g = GM ÷ R².", "R becomes ½, so R² becomes ¼."]
         solution: "Step 1: R² is ¼ as big. Step 2: Dividing by ¼ multiplies g by 4."
         mistakes: {"2": inverse_not_square, "0.5": g_mass_radius, "0.25": g_mass_radius}
+      - prompt: What is the weight of a 25 kg suitcase on Earth, in N? (g = 10 m/s²)
+        answer: '250'
+        check: 25*10
+        difficulty: 1
+        hints:
+        - W = mg.
+        - 25 × 10.
+        solution: 'Step 1: W = m × g. Step 2: 25 × 10. Step 3: = 250 N.'
+        mistakes:
+          '25': weight_in_kg
+          '2.5': weight_in_kg
+      - prompt: Which of these changes when you go from the Earth to the Moon?
+        options:
+        - Your weight
+        - Your mass
+        - The amount of matter in you
+        - Your height
+        answer: Your weight
+        difficulty: 1
+        hints:
+        - Weight = m × g.
+        - Which one depends on g?
+        solution: 'Step 1: Mass stays the same. Step 2: g on the Moon is smaller. Step 3: So weight changes.'
+        mistakes:
+          Your mass: mass_changes_on_moon
+      - prompt: A rock weighs 120 N on the Moon. What would it weigh on Earth, in N? (Moon's g is 1/6 of Earth's.)
+        answer: '720'
+        check: 120*6
+        difficulty: 2
+        hints:
+        - Earth's g is 6 times the Moon's.
+        - 120 × 6.
+        solution: 'Step 1: Weight is 6 times bigger on Earth. Step 2: 120 × 6. Step 3: = 720 N.'
+        mistakes:
+          '20': moon_sixth
+      - prompt: A sack weighs 490 N on Earth (g = 9.8 m/s²). What is its mass, in kg?
+        answer: '50'
+        check: 490/9.8
+        difficulty: 2
+        hints:
+        - m = W ÷ g.
+        - 490 ÷ 9.8.
+        solution: 'Step 1: W = mg, so m = W ÷ g. Step 2: 490 ÷ 9.8. Step 3: = 50 kg.'
+        mistakes:
+          '4802': weight_in_kg
+      - prompt: A spring balance shows slightly different readings for the same mass at the equator and at a pole. Where does it read more?
+        options:
+        - At the pole
+        - At the equator
+        - The same at both
+        - It depends on the weather
+        answer: At the pole
+        difficulty: 3
+        hints:
+        - The balance shows weight, mg.
+        - Where is g larger?
+        solution: 'Step 1: The Earth''s radius is smaller at the poles. Step 2: So g is larger there. Step 3: The weight reading is larger at the pole.'
+        mistakes:
+          At the equator: g_poles
+      - prompt: A planet has twice the Earth's radius and the same mass. How does g on its surface compare with g on Earth?
+        options:
+        - One quarter
+        - Half
+        - Twice
+        - Four times
+        answer: One quarter
+        difficulty: 3
+        hints:
+        - g = GM ÷ R².
+        - Doubling R makes R² four times.
+        solution: 'Step 1: g ∝ 1/R² for the same mass. Step 2: R × 2 means R² × 4. Step 3: So g is 1/4 of Earth''s.'
+        mistakes:
+          Half: g_mass_radius
 
   - code: phy9.gravity.free_fall
     title: Free fall
@@ -340,6 +556,34 @@ concepts:
         - when:
             t: 6
           say: After 6 s it is going about 59 m/s. It gains 9.8 m/s every second.
+    lesson:
+      - teach: 'A body falling only under gravity is in free fall. Without air resistance, all bodies fall with the same acceleration g, whatever their mass: a heavy stone and a light stone dropped together land together. On the Moon, a hammer and a feather were dropped and landed at the same time.'
+        check:
+          prompt: 'Without air, which falls faster: a 1 kg ball or a 10 kg ball?'
+          options:
+          - They fall together
+          - The 10 kg ball
+          - The 1 kg ball
+          answer: They fall together
+          why: In free fall every body has the same acceleration g.
+      - teach: 'Free fall is uniform acceleration with a = g ≈ 10 m/s², so the equations of motion work: v = u + gt, h = ut + ½gt², v² = u² + 2gh. A stone dropped (u = 0) for 2 s reaches 20 m/s and falls ½ × 10 × 4 = 20 m.'
+        check:
+          prompt: A stone is dropped from rest. How far does it fall in 3 s? (g = 10 m/s²)
+          options:
+          - 45 m
+          - 30 m
+          - 90 m
+          answer: 45 m
+          why: h = ½ × 10 × 3² = 45 m. 30 m/s is its speed, not its distance.
+      - teach: Thrown straight up, a body slows by 10 m/s every second (a = −g), stops for an instant at the top (v = 0), then falls back. The time going up equals the time coming down. Thrown up at 20 m/s, it takes 2 s to stop and reaches 20 m.
+        check:
+          prompt: A ball is thrown up at 30 m/s. How long until it stops at the top? (g = 10 m/s²)
+          options:
+          - 3 s
+          - 300 s
+          - 6 s
+          answer: 3 s
+          why: 'It loses 10 m/s each second: 30 ÷ 10 = 3 s. 6 s is the whole trip up and down.'
     items:
       - prompt: "A heavy stone and a light stone are dropped together from the same height, with no air resistance. Which lands first?"
         options: ["They land together", "The heavy stone", "The light stone", "It depends on their shape"]
@@ -404,3 +648,69 @@ concepts:
         hints: ["Distance after 4 s = ½ × 10 × 16.", "Take away the distance after 3 s."]
         solution: "Step 1: After 4 s: 80 m. Step 2: After 3 s: 45 m. Step 3: In the 4th second: 80 − 45 = 35 m."
         mistakes: {"80": fall_in_one_second, "40": fall_in_one_second, "5": fall_in_one_second}
+      - prompt: A stone is dropped from rest. What is its speed after 5 s, in m/s? (g = 10 m/s²)
+        answer: '50'
+        check: 10*5
+        difficulty: 1
+        hints:
+        - v = u + gt, with u = 0.
+        - 10 × 5.
+        solution: 'Step 1: u = 0. Step 2: v = 0 + 10 × 5. Step 3: = 50 m/s.'
+        mistakes:
+          '125': speed_not_distance
+      - prompt: Why does a feather fall more slowly than a stone in air?
+        options:
+        - Air resistance slows the feather much more
+        - Gravity pulls the feather less strongly per kg
+        - The feather has no weight
+        - Stones fall faster than g
+        answer: Air resistance slows the feather much more
+        difficulty: 1
+        hints:
+        - In a vacuum they fall together.
+        - What is different in air?
+        solution: 'Step 1: Without air, both fall with acceleration g. Step 2: The feather is light and wide. Step 3: Air resistance slows it much more than the stone.'
+        mistakes:
+          Gravity pulls the feather less strongly per kg: heavier_falls_faster
+      - prompt: A coconut falls from a tree and takes 1.5 s to reach the ground. How high was it, in m? (g = 10 m/s²)
+        answer: '11.25'
+        check: 0.5*10*1.5**2
+        difficulty: 2
+        hints:
+        - h = ½gt².
+        - ½ × 10 × 2.25.
+        solution: 'Step 1: u = 0. Step 2: h = ½ × 10 × 1.5². Step 3: = 5 × 2.25 = 11.25 m.'
+        mistakes:
+          '15': speed_not_distance
+      - prompt: A ball is thrown straight up at 15 m/s. How high does it go, in m? (g = 10 m/s²)
+        answer: '11.25'
+        check: 15**2/(2*10)
+        difficulty: 2
+        hints:
+        - At the top v = 0. Use v² = u² − 2gh.
+        - 0 = 225 − 20h.
+        solution: 'Step 1: 0 = 15² − 2 × 10 × h. Step 2: 20h = 225. Step 3: h = 11.25 m.'
+        mistakes:
+          '22.5': up_down_time
+      - prompt: A stone is dropped from a 45 m tower. How long does it take to reach the ground, in s? (g = 10 m/s²)
+        answer: '3'
+        check: sqrt(2*45/10)
+        difficulty: 3
+        hints:
+        - h = ½gt².
+        - 45 = 5t², so t² = 9.
+        solution: 'Step 1: 45 = ½ × 10 × t². Step 2: t² = 9. Step 3: t = 3 s.'
+        mistakes:
+          '4.5': fall_in_one_second
+          '9': forgot_square
+      - prompt: A ball thrown straight up is caught 6 s later at the same height. What was its greatest height, in m? (g = 10 m/s²)
+        answer: '45'
+        check: 0.5*10*3**2
+        difficulty: 3
+        hints:
+        - Time up = time down = 3 s.
+        - 'Falling from rest for 3 s: h = ½gt².'
+        solution: 'Step 1: It goes up for 3 s and down for 3 s. Step 2: Falling 3 s from rest: h = ½ × 10 × 9. Step 3: = 45 m.'
+        mistakes:
+          '180': up_down_time
+          '30': speed_not_distance
