@@ -28,7 +28,7 @@ def ready(row):
 
 def test_school_name_is_public_and_only_the_name():
     a = login("admin@demo.syniq")
-    assert client.put("/admin/school", json={"name": "Test School", "contact": "Office, 0495 000"}, headers=a).json() == {"name": "Test School", "contact": "Office, 0495 000"}
+    assert client.put("/admin/school", json={"name": "Test School", "contact": "Office, 0495 000"}, headers=a).json() == {"name": "Test School", "contact": "Office, 0495 000", "rewards": ""}
     assert client.get("/school").json() == {"name": "Test School"}
     assert client.put("/admin/school", json={"name": "x"}, headers=login("teacher@demo.syniq")).status_code == 403
     client.put("/admin/school", json={"name": "", "contact": ""}, headers=a)
@@ -117,5 +117,5 @@ def test_week_summary_for_parent_and_days_for_student():
     parent = login("parent@demo.syniq")
     kids = client.get("/guardian/children", headers=parent).json()
     week = client.get(f"/guardian/children/{kids[0]['id']}/week", headers=parent).json()
-    assert set(week) == {"days", "answered", "topics"}
+    assert set(week) == {"days", "answered", "topics", "achievements"}
     assert client.get(f"/guardian/children/{kids[0]['id']}/week", headers=login("mother@demo.syniq")).status_code in (403, 404)

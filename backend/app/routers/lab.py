@@ -282,7 +282,10 @@ def child_week(student_id: int, db: DbSession = Depends(get_db), user: User = De
     if not guardian_of(db, user, student_id):
         raise HTTPException(404, "Not found")
     audit(db, user, "view_child_progress", student_id)
-    return _week_summary(db, student_id)
+    from .. import rewards
+
+    # New achievements, as words in the app: a moment to notice together, never a score.
+    return {**_week_summary(db, student_id), "achievements": rewards.new_this_week(db, db.get(User, student_id), utcnow())}
 
 
 @router.get("/me/days", tags=["student"])

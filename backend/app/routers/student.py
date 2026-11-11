@@ -5,12 +5,13 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import ai, i18n, learning
+from .. import ai, i18n, learning, rewards
 from ..auth import current_user, has_consent, require_learning_consent
 from ..db import get_db
 from ..engine.mastery import is_secure, progress_label
 from ..engine import detect, responses
 from ..engine.rules import STYLES
+from .lab import _day_start as lab_day_start
 from ..models import Attempt, Chapter, CheckIn, Concept, Decision, Explanation, Family, FamilyMember, Item, LearningEvent, Mastery, Misconception, Subject, User
 
 router = APIRouter(tags=["student"])
@@ -284,6 +285,8 @@ def submit_attempt(
         "response": response,
         "next_step": learning.next_step(db, user, item.concept_id, item.kind),
     }
+    if tip:
+        out["tip_tag"] = misconception  # so the app can ask "Was this tip helpful?"
     if known:
         out["pattern"] = {"text": learning.pattern_text(db, lang, known.tag), "times": known.times}
     if learning.pace_break_due(db, user):
@@ -345,12 +348,21 @@ def learning_event(body: EventIn, db: DbSession = Depends(get_db), user: User = 
 # Stars are a small thank-you, never a score: they unlock nothing and are never compared.
 
 SPOT_STARS_PER_DAY = 20  # stars are a thank-you, not something to grind
+SPOT_PUZZLES_PER_DAY = 60  # puzzles given out per day: a guard against a stuck loop, far above real use
+TIP_FEEDBACK_PER_DAY = 100
 SPOT_FRIENDS = ["Asha", "Ravi", "Meera", "Arjun", "Zara", "Kabir", "Nila", "Dev"]
 
 
 def spot_material(item: Item) -> list[str]:
     """The wrong answers this question has a written mistake for."""
     return [w for w in (item.misconceptions or {}) if not learning.same_answer(w, item.answer)]
+
+
+def _spot_events_today(db: DbSession, user: User, kind: str) -> list[LearningEvent]:
+    today = lab_day_start(learning.utcnow())
+    return db.scalars(
+        select(LearningEvent).where(LearningEvent.student_id == user.id, LearningEvent.kind == kind, LearningEvent.created_at >= today)
+    ).all()
 
 
 @router.get("/learn/spot")
@@ -360,6 +372,12 @@ def spot(concept_id: int, db: DbSession = Depends(get_db), user: User = Depends(
         for i in db.scalars(select(Item).where(Item.concept_id == concept_id, Item.status == "approved")).all()
         if spot_material(i)
     ]
+    # A puzzle never comes back on the same day.
+    seen_today = _spot_events_today(db, user, "spot_seen")
+    if len(seen_today) >= SPOT_PUZZLES_PER_DAY:
+        raise HTTPException(429, "That's plenty of puzzles for today")
+    seen = {e.item_id for e in seen_today}
+    items = [i for i in items if i.id not in seen]
     if not items:
         raise HTTPException(404, "Nothing to spot here yet")
     item = random.choice(items)
@@ -367,6 +385,8 @@ def spot(concept_id: int, db: DbSession = Depends(get_db), user: User = Depends(
     options = learning.shuffled_options(item) or []
     if not options:
         options = sorted({item.answer, theirs, *spot_material(item)[:2]}, key=lambda o: hash((item.id, o)))
+    db.add(LearningEvent(student_id=user.id, kind="spot_seen", item_id=item.id))
+    db.commit()
     return {
         "item_id": item.id,
         "friend": SPOT_FRIENDS[(item.id + user.id) % len(SPOT_FRIENDS)],
@@ -389,21 +409,60 @@ def spot_answer(
     item = db.get(Item, body.item_id)
     if not item or item.status != "approved" or body.their_answer not in spot_material(item):
         raise HTTPException(404, "Item not found")
+    # Only a puzzle SYNiq gave today can be answered, and only its first answer can earn a star.
+    if body.item_id not in {e.item_id for e in _spot_events_today(db, user, "spot_seen")}:
+        raise HTTPException(404, "Item not found")
     correct = learning.same_answer(body.choice, item.answer)
-    today = learning.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    given_today = db.scalars(
-        select(LearningEvent.id).where(LearningEvent.student_id == user.id, LearningEvent.kind == "spot_star", LearningEvent.created_at >= today)
-    ).all()
-    if correct and len(given_today) < SPOT_STARS_PER_DAY:
-        db.add(LearningEvent(student_id=user.id, kind="spot_star"))
+    on = rewards.rewards_on(db, user)
+    stars_today = _spot_events_today(db, user, "spot_star")
+    already = body.item_id in {e.item_id for e in stars_today}
+    new_sticker = None
+    star = on and correct and not already and len(stars_today) < SPOT_STARS_PER_DAY
+    if star:
+        db.add(LearningEvent(student_id=user.id, kind="spot_star", item_id=item.id))
         db.commit()
+        n = learning.stars(db, user.id)
+        if n % rewards.STARS_PER_STICKER == 0 and n // rewards.STARS_PER_STICKER <= len(rewards.STICKERS):
+            new_sticker = rewards.STICKERS[n // rewards.STARS_PER_STICKER - 1]
     tag = item.misconceptions[body.their_answer]
     return {
         "correct": correct,
         "right_answer": item.answer,
         "why": misconception_tip(db, lang, tag),
-        "stars": learning.stars(db, user.id),
+        # Missing it costs nothing: a gentle "look carefully next time" in the app.
+        "careful": not correct,
+        "star_earned": star,
+        "stars": learning.stars(db, user.id) if on else None,
+        "new_sticker": new_sticker,
     }
+
+
+# --- Was this tip helpful? ----------------------------------------------------------
+# After a mistake tip, the learner can say whether it helped. Counts only, per tip, for the admin's list of tips to
+# improve. Never shown to teachers per student, never used by the engine.
+
+class TipFeedbackIn(BaseModel):
+    item_id: int
+    tag: str = Field(max_length=60)
+    helpful: bool
+
+
+@router.post("/learn/tip-feedback")
+def tip_feedback(body: TipFeedbackIn, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    item = db.get(Item, body.item_id)
+    if not item or body.tag not in (item.misconceptions or {}).values():
+        raise HTTPException(404, "Tip not found")
+    answered = db.scalars(select(Attempt.id).where(Attempt.student_id == user.id, Attempt.item_id == item.id).limit(1)).first()
+    if not answered:
+        raise HTTPException(404, "Tip not found")
+    today = [*_spot_events_today(db, user, "tip_yes"), *_spot_events_today(db, user, "tip_no")]
+    if len(today) >= TIP_FEEDBACK_PER_DAY:
+        raise HTTPException(429, "Thank you, that's enough for today")
+    if any(e.item_id == item.id and e.detail == body.tag for e in today):
+        return {"ok": True}  # one vote per tip per question per day
+    db.add(LearningEvent(student_id=user.id, kind="tip_yes" if body.helpful else "tip_no", item_id=item.id, detail=body.tag))
+    db.commit()
+    return {"ok": True}
 
 
 # --- Check-ins, settings, progress -------------------------------------------------

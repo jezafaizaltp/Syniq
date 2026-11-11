@@ -347,6 +347,8 @@ export default function Teacher() {
         {mistakes.length > 0 && (
           <p>
             <Link href={`/teacher/reteach?class=${classId}`}>Print a re-teach sheet for these mistakes →</Link>
+            <br />
+            <Link href={`/teacher/chapter?class=${classId}`}>Print a chapter planning sheet (counts only) →</Link>
           </p>
         )}
         {mistakes.length === 0 ? (

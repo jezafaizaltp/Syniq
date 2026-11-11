@@ -9,6 +9,7 @@ import { useSession } from "@/lib/session";
 import Methods, { type MethodSubject } from "../space/Methods";
 import Mistakes, { type MistakePattern } from "../space/Mistakes";
 import Strengths, { type StrengthsView } from "../space/Strengths";
+import { ACH_KEYS } from "../space/Rewards";
 
 type Child = {
   id: number;
@@ -17,11 +18,12 @@ type Child = {
   support_modes: string[];
   noticed: { mode: string; reason: string; on: boolean }[];
   checkup_note?: boolean;
+  rewards_on?: boolean;
 };
 type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
-type Week = { days: number; answered: number; topics: { title: string; progress: string }[] };
+type Week = { days: number; answered: number; topics: { title: string; progress: string }[]; achievements?: string[] };
 
 const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing", "thinking_puzzles"] as const;
 type Thinking = { on: boolean; puzzles: number; kinds: { domain: string; trend: "growing" | "steady" | "just_started" }[] };
@@ -82,6 +84,11 @@ export default function Parent() {
     load();
   }
 
+  async function setRewards(childId: number, on: boolean) {
+    await put(`/guardian/children/${childId}/rewards`, { on });
+    load();
+  }
+
   async function hideCheckup(childId: number) {
     await post(`/guardian/children/${childId}/checkup-note/hide`, {});
     load();
@@ -125,6 +132,12 @@ export default function Parent() {
               {weeks[c.id].topics.length > 0 && (
                 <p className="muted">
                   {t("parent.week_topics")} {weeks[c.id].topics.map((x) => `${x.title} (${t(`progress.${x.progress}` as Key)})`).join(", ")}
+                </p>
+              )}
+              {!!weeks[c.id].achievements?.length && (
+                <p>
+                  🏅 {t("parent.week_achievements", { name: c.name })}{" "}
+                  {weeks[c.id].achievements!.map((a) => t(ACH_KEYS[a] ?? "ach.title")).join(", ")}
                 </p>
               )}
             </>
@@ -226,6 +239,14 @@ export default function Parent() {
                 </p>
               </div>
             ))}
+            <h3>{t("parent.rewards")}</h3>
+            <label className="check">
+              <input type="checkbox" checked={c.rewards_on !== false} onChange={(e) => setRewards(c.id, e.target.checked)} />
+              {t("parent.rewards_on", { name: c.name })}
+            </label>
+            <p className="muted" style={{ margin: "0 0 0 34px" }}>
+              {t("parent.rewards_help")}
+            </p>
             <h3>{t("settings.senses")}</h3>
             <p className="muted">{t("parent.senses_note")}</p>
             {CHOSEN_SUPPORT.map((key) => (

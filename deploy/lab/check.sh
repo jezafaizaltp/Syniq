@@ -82,6 +82,13 @@ else
   [ "$oldest_days" -ge 7 ] && printf '  NOTE   %s\n' "Copy deploy/lab/backups to the pen drive once a week."
 fi
 
+# 6. Lessons and questions are loaded
+if command -v docker >/dev/null 2>&1 && content=$(docker compose exec -T api python -m tools.content_counts 2>/dev/null); then
+  ok "Content: ${content}"
+else
+  fail "No lessons or questions found. Restart SYNiq (./start.sh); if it stays empty see: docker compose logs --tail 50 api"
+fi
+
 echo
 if [ "$problems" -gt 0 ]; then
   echo "${problems} thing(s) to fix before students start."

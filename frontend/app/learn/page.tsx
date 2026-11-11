@@ -93,7 +93,15 @@ type Puzzle = { id: string; prompt: string; sequence: string[]; options: string[
 type PuzzleResult = { correct: boolean; answer: string; explain: string };
 const PUZZLE_EVERY = 8; // a brain teaser now and then; the server decides whether one is due
 type Spot = { item_id: number; friend: string; prompt: string; their_answer: string; options: string[] };
-type SpotResult = { correct: boolean; right_answer: string; why: string | null; stars: number };
+type SpotResult = {
+  correct: boolean;
+  right_answer: string;
+  why: string | null;
+  careful?: boolean;
+  star_earned?: boolean;
+  stars: number | null;
+  new_sticker?: string | null;
+};
 type Overview = {
   subjects: { id: number; name: string; carry_on: { chapter_id: number; title: string } }[];
   review_due: { concept_id: number; title: string; chapter_id: number }[];
@@ -128,7 +136,30 @@ type Result = {
   response: AdaptiveResponse;
   next_step?: NextStep;
   offer_break?: boolean;
+  tip_tag?: string;
 };
+
+/** "Was this tip helpful?" after a mistake tip. One tap, then a thank-you; counts only, for improving tips. */
+function TipHelpful({ itemId, tag }: { itemId: number; tag: string }) {
+  const { t } = useSession();
+  const [sent, setSent] = useState(false);
+  const send = (helpful: boolean) => {
+    setSent(true);
+    post("/learn/tip-feedback", { item_id: itemId, tag, helpful }).catch(() => undefined);
+  };
+  if (sent) return <p className="muted tip-helpful">{t("tip.thanks")}</p>;
+  return (
+    <p className="tip-helpful">
+      <span className="muted">{t("tip.helpful")}</span>{" "}
+      <button type="button" className="secondary small" onClick={() => send(true)}>
+        {t("tip.yes")}
+      </button>{" "}
+      <button type="button" className="secondary small" onClick={() => send(false)}>
+        {t("tip.no")}
+      </button>
+    </p>
+  );
+}
 
 const KIND_HEADINGS: Record<string, Key> = {
   practice: "learn.practice",
@@ -738,7 +769,8 @@ function Session({
     if (!spot) return;
     const r = await post<SpotResult>("/learn/spot", { item_id: spot.item_id, their_answer: spot.their_answer, choice });
     setSpotResult(r);
-    if (readAloud) speak(r.correct ? t("spot.right") : `${t("spot.wrong", { answer: r.right_answer })} ${r.why ?? ""}`);
+    const said = r.correct ? t(r.star_earned ? "spot.right" : "spot.right_plain") : `${t("spot.wrong", { answer: r.right_answer })} ${r.why ?? ""} ${t("spot.careful")}`;
+    if (readAloud) speak(r.new_sticker ? `${said} ${t("sticker.new")}` : said);
   }
 
   if (summary) {
@@ -839,10 +871,20 @@ function Session({
           ) : (
             <>
               <p className={`feedback ${spotResult.correct ? "good" : "warn"}`}>
-                {spotResult.correct ? t("spot.right") : t("spot.wrong", { answer: spotResult.right_answer })}
+                {spotResult.correct
+                  ? t(spotResult.star_earned ? "spot.right" : "spot.right_plain")
+                  : t("spot.wrong", { answer: spotResult.right_answer })}
               </p>
               {spotResult.why && <p>{spotResult.why}</p>}
-              <p className="muted">{spotResult.stars === 1 ? t("stars.count_one") : t("stars.count", { n: spotResult.stars })}</p>
+              {spotResult.careful && <p className="muted">{t("spot.careful")}</p>}
+              {spotResult.new_sticker && (
+                <p className="new-sticker" role="status">
+                  <span className="sticker" aria-hidden="true">{spotResult.new_sticker}</span> {t("sticker.new")}
+                </p>
+              )}
+              {spotResult.stars != null && spotResult.stars > 0 && (
+                <p className="muted">{spotResult.stars === 1 ? t("stars.count_one") : t("stars.count", { n: spotResult.stars })}</p>
+              )}
               <button onClick={() => { setSpot(null); next(); }}>{t("spot.continue")}</button>
             </>
           )}
@@ -1092,6 +1134,7 @@ function Session({
                     <Feedback key={step.decision_id} r={result.response} readAloud={readAloud && !listen} tutorOn={tutorOn} />
                   )}
                   {!result.correct && (step.item.difficulty ?? 1) >= 3 && <p className="muted">{t("learn.challenge_wrong")}</p>}
+                  {!result.correct && result.tip_tag && <TipHelpful key={`${step.item.id}-${result.tip_tag}`} itemId={step.item.id} tag={result.tip_tag} />}
                   {result.next_step && <NextStepLine step={result.next_step} />}
                   {result.offer_break && (
                     <div className="feedback note break-offer">

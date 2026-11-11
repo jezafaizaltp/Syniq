@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session as DbSession
 
-from .. import ai
+from .. import ai, learning, rewards
 from ..auth import audit, current_user, require_role
 from ..db import get_db
 from ..models import (
@@ -46,7 +46,7 @@ from .lab import _day_start, _own_class
 router = APIRouter()
 admin_only = require_role("admin")
 
-SETTING_KEYS = {"name": 120, "contact": 200}
+SETTING_KEYS = {"name": 120, "contact": 200, "rewards": 3}
 
 
 def school_settings(db: DbSession) -> dict[str, str]:
@@ -68,6 +68,8 @@ def get_school(db: DbSession = Depends(get_db), user: User = Depends(admin_only)
 class SchoolIn(BaseModel):
     name: str = Field(default="", max_length=120)
     contact: str = Field(default="", max_length=200)
+    # Stickers and achievements for every student unless a parent chooses otherwise: "on" (default) or "off".
+    rewards: str = Field(default="", pattern="^(|on|off)$")
 
 
 @router.put("/admin/school", tags=["admin"])
@@ -187,6 +189,7 @@ def student_data(student_id: int, db: DbSession = Depends(get_db), user: User = 
         "subject_checks": _rows(db, SubjectCheck, SubjectCheck.student_id, s.id),
         "events": _rows(db, LearningEvent, LearningEvent.student_id, s.id),
         "help_requests": _rows(db, HelpRequest, HelpRequest.student_id, s.id),
+        "rewards": {"on": rewards.rewards_on(db, s), "achievements": rewards.achievements(db, s.id), "stars": learning.stars(db, s.id)},
     }
     audit(db, user, "export_student_data", s.id)
     return out
