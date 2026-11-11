@@ -12,6 +12,14 @@ tips:
   new_style: "Malayalam is a 'complex text layout' script, and Writer has a separate font setting for such scripts. A new style is named in the tab that organises styles. Subheadings sit one level below main headings, so choose the level that matches."
   footnote: "Think of where a page's 'foot' is. End-notes gather after the last page instead. Both are added from the Insert menu."
   toc: "Writer builds the contents table only from text that has heading styles; main headings use the top level. In the finished table you hold a key and click to jump, and after adding pages you right-click the table to refresh it."
+  it2_ocr_steps: 'In gImageReader: add the image, choose the language, recognise, then save the text.'
+  it2_style_kind: 'Styles come in kinds: paragraph (whole paragraphs like headings), character (a few letters), page, frame, list and table.'
+  it2_one_change: A style is defined once and used many times. Change the definition and every use changes.
+  it2_inherit: A new style copies (inherits) everything from its parent unless you set it differently.
+  it2_ctl_font: Writer has separate font settings for Western, Asian and CTL (complex text, like Malayalam) scripts.
+  it2_foot_end: Footnotes sit at the bottom of the same page; endnotes all gather at the end of the document.
+  it2_toc_source: The automatic table of contents is built from heading styles, and it must be refreshed after changes.
+  it2_cancel_key: F11 opens and closes the Styles window. Which key do you press to cancel or leave almost any mode?
 
 concepts:
   - code: it9.styles.ocr_styles
@@ -64,6 +72,33 @@ concepts:
         bin: Character style
         clue: Just part of a line.
         why: Character style.
+    lesson:
+      - teach: 'OCR (Optical Character Recognition) turns text in a picture or scan into editable text. Examples: Tesseract, GOCR, EasyOCR. On school computers, gImageReader does this: Files → Add images, choose the language, click Recognize all, then Save output.'
+        picture:
+          kind: flow
+          steps:
+          - Add image
+          - Choose language
+          - Recognize all
+          - Save output as text
+          alt: Using gImageReader.
+        check:
+          prompt: OCR changes a scanned page into
+          options:
+          - Editable text
+          - A video
+          - A spreadsheet chart
+          answer: Editable text
+          why: It recognises the letters in the image.
+      - teach: Formatting each heading by hand is slow and must be redone if the design changes. Styles are saved sets of formatting. Pick one from the Style box (e.g. Heading 1) or the Styles window (F11). Fill Format Mode applies a style to each item you click; Esc stops it.
+        check:
+          prompt: Which key opens the Styles window?
+          options:
+          - F11
+          - F1
+          - Esc
+          answer: F11
+          why: F11 toggles the Styles sidebar in Writer.
     items:
       - prompt: "What does OCR stand for?"
         options: ["Optical Character Recognition", "Online Content Reader", "Open Colour Recorder", "Optical Code Reader"]
@@ -128,6 +163,90 @@ concepts:
         hints: ["How many changes would you make by hand?", "How many changes with a style?"]
         solution: "Step 1: By hand, each of the 25 headings must be changed. Step 2: With a style, you modify the style once and all headings that use it change together."
         mistakes: {"Styles make the file smaller": writer_styles, "Styles colour text automatically green": writer_styles, "Styles stop the text from being edited": writer_styles}
+      - prompt: Which is an example of OCR software?
+        options:
+        - Tesseract
+        - GIMP
+        - Kalzium
+        - Impress
+        answer: Tesseract
+        difficulty: 1
+        hints:
+        - It reads text from images.
+        - GIMP edits images; Impress makes slides.
+        solution: 'Step 1: GIMP, Kalzium and Impress do other jobs. Step 2: One reads letters in images. Step 3: Tesseract.'
+        mistakes:
+          GIMP: ocr
+      - prompt: In gImageReader, what do you click to turn the image into text?
+        options:
+        - Recognize all
+        - Export
+        - Fill Format
+        - Crop
+        answer: Recognize all
+        difficulty: 1
+        hints:
+        - OCR means recognising characters.
+        - The button's name says so.
+        solution: 'Step 1: Add the image. Step 2: Choose language. Step 3: Click Recognize all.'
+        mistakes:
+          Export: it2_ocr_steps
+      - prompt: How do you stop Fill Format Mode?
+        options:
+        - Press Esc
+        - Press F11
+        - Press Delete
+        - Close Writer
+        answer: Press Esc
+        difficulty: 1
+        hints:
+        - It is the key for cancelling.
+        - Top-left of the keyboard.
+        solution: 'Step 1: Fill Format keeps applying the style. Step 2: Cancel with the escape key. Step 3: Esc.'
+        mistakes:
+          Press F11: it2_cancel_key
+      - prompt: Which style category formats a few selected letters, not the whole paragraph?
+        options:
+        - Character Styles
+        - Paragraph Styles
+        - Page Styles
+        - Frame Styles
+        answer: Character Styles
+        difficulty: 2
+        hints:
+        - Letters are characters.
+        - Heading 1 is a paragraph style.
+        solution: 'Step 1: Paragraph styles affect whole paragraphs. Step 2: Letters are characters. Step 3: Character Styles.'
+        mistakes:
+          Paragraph Styles: it2_style_kind
+      - prompt: What size is Heading 1 by default in Writer, according to the lesson?
+        options:
+        - 18 pt
+        - 12 pt
+        - 10 pt
+        - 36 pt
+        answer: 18 pt
+        difficulty: 2
+        hints:
+        - It is bigger than normal text.
+        - Normal text is around 12 pt.
+        solution: 'Step 1: Headings are larger than body text. Step 2: The lesson names its size. Step 3: 18 pt.'
+        mistakes:
+          12 pt: writer_styles
+      - prompt: Why is a template (.ott) useful?
+        options:
+        - Each new document starts with the same styles and layout
+        - It deletes styles
+        - It makes images
+        - It is a video format
+        answer: Each new document starts with the same styles and layout
+        difficulty: 3
+        hints:
+        - It opens as 'Untitled'.
+        - Think of a form you fill in again and again.
+        solution: 'Step 1: Templates hold ready-made styles. Step 2: Opening one makes a new copy. Step 3: Each document starts the same way.'
+        mistakes:
+          It deletes styles: writer_styles
 
   - code: it9.styles.modify_create
     title: Changing and creating styles
@@ -162,6 +281,42 @@ concepts:
         'Organizer tab: name it MyStyle1, Inherit from Heading 1': Name and parent come first so the Table of Contents can use it.
         Set Font, Font Effects and Alignment, then OK: Formatting is set after the style exists and has a parent.
         Apply it with Fill Format Mode: You can only apply a style after it has been created.
+    lesson:
+      - teach: 'To change a style: in the Styles window right-click it (e.g. Heading 1) → Modify, then change Font, Font Effects (colour) and Alignment. Every heading using that style changes at once. For Malayalam text, change the CTL Font.'
+        check:
+          prompt: You make Heading 1 red. What happens?
+          options:
+          - Every Heading 1 turns red
+          - Only the selected heading turns red
+          - Nothing
+          answer: Every Heading 1 turns red
+          why: Changing the style changes all its uses.
+      - teach: 'To create a style: right-click a heading style → New. In Organizer give a name (MyStyle1) and choose Inherit from (Heading 1). Set font, effects, alignment and spacing. A sub-heading style (MyStyle2) inherits from Heading 2. You can also drag formatted text into the Styles window.'
+        picture:
+          kind: flow
+          steps:
+          - Heading 1
+          - MyStyle1 inherits from it
+          - Change Heading 1's font
+          - MyStyle1 changes too (unless set)
+          alt: How inheriting works.
+        check:
+          prompt: A new style first copies its settings from
+          options:
+          - The style it inherits from
+          - The last page
+          - The printer
+          answer: The style it inherits from
+          why: That is what 'Inherit from' means.
+      - teach: 'Other tools: Load Styles from Template reuses styles; LaTeX (with TeXmaker) is for maths and science documents; Scribus is free desktop publishing software that handles Unicode Malayalam and is used by many Malayalam newspapers.'
+        check:
+          prompt: Which suits a newspaper layout?
+          options:
+          - Scribus
+          - Kalzium
+          - gImageReader
+          answer: Scribus
+          why: It is desktop publishing software.
     items:
       - prompt: "All headings use Heading 1. You modify Heading 1 to make the font blue. What happens?"
         options: ["All headings using Heading 1 turn blue", "Only the first heading turns blue", "Only the table of contents turns blue", "Nothing changes"]
@@ -226,6 +381,87 @@ concepts:
         hints: ["Writer keeps separate font settings for different scripts.", "Which setting is for complex scripts?"]
         solution: "Step 1: Writer has Western, Asian and CTL (complex text layout) fonts. Step 2: Malayalam is a complex script, so its font is set in CTL."
         mistakes: {"Malayalam text cannot have styles": new_style, "The heading is in a footnote": new_style, "You must first export to PDF": new_style}
+      - prompt: In which tab of the style dialog do you choose 'Inherit from'?
+        options:
+        - Organizer
+        - Font Effects
+        - Alignment
+        - Indents & Spacing
+        answer: Organizer
+        difficulty: 2
+        hints:
+        - The same tab where you type the style's name.
+        - It organises the style's place in the family.
+        solution: 'Step 1: Name and parent are set together. Step 2: That is the first tab. Step 3: Organizer.'
+        mistakes:
+          Font Effects: new_style
+      - prompt: Which tab do you use to change a style's colour?
+        options:
+        - Font Effects
+        - Organizer
+        - Alignment
+        - Indents & Spacing
+        answer: Font Effects
+        difficulty: 1
+        hints:
+        - Colour is an effect on the letters.
+        - Its name mentions effects.
+        solution: 'Step 1: Colour belongs to how letters look. Step 2: The tab covers font effects. Step 3: Font Effects.'
+        mistakes:
+          Organizer: new_style
+      - prompt: MyStyle2 inherits from Heading 2. Heading 2 is changed to size 16. MyStyle2 had no size of its own. What size is MyStyle2 now?
+        answer: '16'
+        check: '16'
+        difficulty: 3
+        hints:
+        - MyStyle2 copies what it did not set itself.
+        - Its parent is now 16.
+        solution: 'Step 1: MyStyle2 inherits size from Heading 2. Step 2: Heading 2 became 16. Step 3: MyStyle2 is 16 too.'
+        mistakes:
+          '14': it2_inherit
+          '12': it2_inherit
+      - prompt: How can you reuse your styles in another document?
+        options:
+        - Load Styles from Template
+        - Print the styles
+        - Copy one heading by hand
+        - Use OCR
+        answer: Load Styles from Template
+        difficulty: 2
+        hints:
+        - Styles can be imported.
+        - Look for 'Load Styles'.
+        solution: 'Step 1: Styles live in a document or template. Step 2: Writer can load them. Step 3: Load Styles from Template.'
+        mistakes:
+          Use OCR: it2_one_change
+      - prompt: Which alignment puts a heading in the middle of the line?
+        options:
+        - Center
+        - Left
+        - Right
+        - Justified
+        answer: Center
+        difficulty: 1
+        hints:
+        - Not to either side.
+        - Equal space on both sides.
+        solution: 'Step 1: Left and right push to one side. Step 2: Middle means equal space. Step 3: Center.'
+        mistakes:
+          Justified: writer_styles
+      - prompt: A Malayalam heading uses a style. You change the style's Western font. Why doesn't the heading change?
+        options:
+        - Malayalam uses the CTL font setting
+        - Styles can't change fonts
+        - Malayalam can't be styled
+        - The file is read-only
+        answer: Malayalam uses the CTL font setting
+        difficulty: 3
+        hints:
+        - Writer has separate font settings for different scripts.
+        - Malayalam is a complex script.
+        solution: 'Step 1: Western font affects English letters. Step 2: Malayalam uses complex text layout. Step 3: Change the CTL font.'
+        mistakes:
+          Styles can't change fonts: it2_ctl_font
 
   - code: it9.styles.notes_toc
     title: Footnotes, endnotes and table of contents
@@ -278,6 +514,45 @@ concepts:
         bin: Endnote
         clue: At the very end.
         why: Endnote.
+    lesson:
+      - teach: 'Footnotes add extra information at the bottom of the same page: click after the word, Insert → Footnote and Endnote → Footnote, and type. Numbers stay in order automatically. Endnotes collect all notes at the end of the document.'
+        picture:
+          kind: compare
+          columns:
+          - title: Footnote
+            points:
+            - bottom of the same page
+            - next to the word's page
+          - title: Endnote
+            points:
+            - end of the document
+            - all notes together
+          alt: Footnotes and endnotes.
+        check:
+          prompt: Where does a footnote go?
+          options:
+          - Bottom of the same page
+          - End of the document
+          - Top of the page
+          answer: Bottom of the same page
+          why: '''Foot'' = bottom of the page.'
+      - teach: 'A Table of Contents lists headings with page numbers. Writer builds it from heading styles: Insert → Table of Contents and Index → Table of Contents, Index or Bibliography. Ctrl+click an entry to jump there. After edits, right-click → Update Index.'
+        picture:
+          kind: flow
+          steps:
+          - Use heading styles
+          - Insert Table of Contents
+          - Ctrl+click to jump
+          - Update Index after changes
+          alt: Making an automatic table of contents.
+        check:
+          prompt: After adding pages, how do you fix the table of contents?
+          options:
+          - Right-click → Update Index
+          - Type new numbers by hand
+          - Delete it
+          answer: Right-click → Update Index
+          why: Update refreshes headings and page numbers.
     items:
       - prompt: "Where does a footnote appear?"
         options: ["At the bottom of the same page", "At the end of the document", "In the header", "On the title page"]
@@ -342,3 +617,87 @@ concepts:
         hints: ["Footnotes are numbered in order automatically.", "One new note comes before it."]
         solution: "Step 1: The new note becomes 2. Step 2: Every later note moves up by one, so old 3 becomes 4."
         mistakes: {"3": footnote}
+      - prompt: Which menu path inserts an automatic table of contents?
+        options:
+        - Insert → Table of Contents and Index
+        - Format → Columns
+        - File → Export
+        - Tools → OCR
+        answer: Insert → Table of Contents and Index
+        difficulty: 1
+        hints:
+        - You are adding something new.
+        - It's under Insert.
+        solution: 'Step 1: A table of contents is inserted. Step 2: The Insert menu has it. Step 3: Insert → Table of Contents and Index.'
+        mistakes:
+          File → Export: it2_toc_source
+      - prompt: What should you add first so the table of contents sits on its own first page?
+        options:
+        - A page break
+        - A footnote
+        - An image
+        - A new style
+        answer: A page break
+        difficulty: 2
+        hints:
+        - You need a blank page at the start.
+        - Insert → Page break.
+        solution: 'Step 1: The TOC needs its own page. Step 2: A break starts a new page. Step 3: Page break.'
+        mistakes:
+          A footnote: it2_foot_end
+      - prompt: Why is typing a table of contents by hand a bad idea?
+        options:
+        - It goes out of date when pages change
+        - It looks too neat
+        - Writer won't allow typing
+        - It needs the internet
+        answer: It goes out of date when pages change
+        difficulty: 2
+        hints:
+        - What happens when you add pages later?
+        - Page numbers move.
+        solution: 'Step 1: Editing moves headings to new pages. Step 2: Typed numbers don''t update. Step 3: It goes out of date.'
+        mistakes:
+          Writer won't allow typing: it2_toc_source
+      - prompt: To format the table of contents text directly, what must you untick?
+        options:
+        - Protected against manual changes
+        - Show footnotes
+        - Use OCR
+        - Inherit from
+        answer: Protected against manual changes
+        difficulty: 3
+        hints:
+        - Writer locks the table by default.
+        - Turn off the protection.
+        solution: 'Step 1: The table is protected. Step 2: Unlock it in Edit Index. Step 3: Untick ''Protected against manual changes''.'
+        mistakes:
+          Inherit from: it2_inherit
+      - prompt: You click a footnote number in the text. What happens?
+        options:
+        - You jump to the note
+        - The note is deleted
+        - A new page opens
+        - The style changes
+        answer: You jump to the note
+        difficulty: 1
+        hints:
+        - The number links word and note.
+        - Clicking the note's number jumps back.
+        solution: 'Step 1: Footnote numbers are links. Step 2: Click to go to the note. Step 3: You jump to it.'
+        mistakes:
+          The note is deleted: footnote
+      - prompt: Do the table of contents links still work after exporting to PDF?
+        options:
+        - 'Yes'
+        - No, never
+        - Only on paper
+        - Only in GIMP
+        answer: 'Yes'
+        difficulty: 2
+        hints:
+        - The lesson mentions exported PDFs.
+        - Links are kept.
+        solution: 'Step 1: Writer exports links to PDF. Step 2: TOC entries are links. Step 3: Yes, they work.'
+        mistakes:
+          No, never: toc

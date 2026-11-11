@@ -12,6 +12,13 @@ tips:
   gimp_tools: "Match the tool to the job: one blends two colours smoothly, one makes a layer bigger or smaller, one types words, one fills an area with a single colour. Drop shadows are under the Filters menu, in the group about light. Hover over a tool in GIMP to see its shortcut."
   gimp_files: "GIMP has its own project format that keeps every layer, and ordinary picture formats that flatten them. Saving keeps the project format; to make a picture for other apps you use a different File option."
   rgba: "R, G and B mix colours. The fourth channel controls how much you can see through a pixel: without it, a deleted background can't become see-through."
+  it1_multiply_sides: Total pixels = width × height. Multiply, don't add.
+  it1_layer_sheets: Think of layers as clear plastic sheets stacked up. What can you do to one sheet without touching the others?
+  it1_gimp_history: 'Check the notes about GIMP''s history: who made it, where they studied, and who drew the mascot.'
+  it1_select_shape: 'Each select tool matches a shape: a box, an oval, a hand-drawn outline, or ''same colour''.'
+  it1_move_vs_scale: One tool changes where a layer sits; another changes how big it is; another cuts part away.
+  it1_save_vs_export: Save keeps GIMP's own file with layers. Export makes a picture file for other programs.
+  it1_shadow_steps: The hand-made shadow is a dark, blurred copy sitting just behind the text and a little offset.
 
 concepts:
   - code: it9.poster.canvas_layers
@@ -47,6 +54,53 @@ concepts:
         Click OK to make the canvas: OK creates the canvas with the size you typed.
         Pick foreground and background colours: You need a canvas before colouring it, and the colours must be chosen before filling.
         Drag the Gradient tool across the canvas: The gradient uses the colours you just picked.
+    lesson:
+      - teach: Image editing means improving or changing a picture with software. GIMP (GNU Image Manipulation Program) is free software for this. A new canvas is made with File → New, giving width and height in pixels, e.g. 600 × 400.
+        check:
+          prompt: How do you start a new canvas in GIMP?
+          options:
+          - File → New
+          - Edit → Paste
+          - Filters → Blur
+          answer: File → New
+          why: File → New asks for the canvas size.
+      - teach: A pixel (picture element) is the smallest dot of a digital image. A 600 × 400 canvas has 600 × 400 = 2,40,000 pixels. More pixels give a sharper image.
+        picture:
+          kind: area_grid
+          cols:
+          - size: 6
+            label: 600 px wide
+          rows:
+          - size: 4
+            label: 400 px high
+          cells:
+          - - 600 × 400 = 2,40,000 pixels
+          alt: 'A canvas is a grid of pixels: width × height.'
+        check:
+          prompt: A 100 × 50 canvas has how many pixels?
+          options:
+          - '5000'
+          - '150'
+          - '500'
+          answer: '5000'
+          why: 100 × 50 = 5000.
+      - teach: Layers are like clear sheets stacked on the canvas. Put each part of a poster (background, picture, heading) on its own layer, so you can move or edit one without spoiling the others. The eye icon shows or hides a layer.
+        picture:
+          kind: flow
+          steps:
+          - Background layer
+          - Picture layer
+          - Heading layer
+          - Finished poster
+          alt: Layers stacked to make a poster.
+        check:
+          prompt: Why give the heading its own layer?
+          options:
+          - To edit it without changing the rest
+          - To make the file smaller
+          - To print faster
+          answer: To edit it without changing the rest
+          why: Each layer can be changed separately.
     items:
       - prompt: "What does GIMP stand for?"
         options: ["GNU Image Manipulation Program", "Graphic Image Making Program", "General Internet Media Program", "Great Image Movement Program"]
@@ -118,6 +172,72 @@ concepts:
         hints: ["Each layer in the Layers window has a small icon at its left.", "A layer that is above should show on top, unless it is hidden."]
         solution: "Step 1: An upper layer normally shows over the lower ones. Step 2: If it is not seen, it is hidden: its eye icon in the Layers window is off. Turning it on shows the heading."
         mistakes: {"GIMP cannot show text above an image": gimp_layers, "The canvas is too small for layers": gimp_layers, "The image layer is the Background layer": gimp_layers}
+      - prompt: A new canvas starts with which layer?
+        options:
+        - Background
+        - Text
+        - Shadow
+        - Alpha
+        answer: Background
+        difficulty: 1
+        hints:
+        - Before you add anything, one layer is already there.
+        - It sits at the bottom.
+        solution: 'Step 1: A new canvas has one layer. Step 2: It is at the bottom of the stack. Step 3: Background.'
+        mistakes:
+          Text: it1_layer_sheets
+      - prompt: A canvas is 800 × 600 pixels. How many pixels in all?
+        answer: '480000'
+        check: 800*600
+        difficulty: 2
+        hints:
+        - Multiply width by height.
+        - 800 × 600.
+        solution: 'Step 1: Width 800. Step 2: Height 600. Step 3: 800 × 600 = 4,80,000.'
+        mistakes:
+          '1400': it1_multiply_sides
+      - prompt: GIMP was first created by students of which university?
+        options:
+        - University of California
+        - University of Kerala
+        - Oxford University
+        - MIT
+        answer: University of California
+        difficulty: 2
+        hints:
+        - Spencer Kimball and Peter Mattis made it.
+        - They studied in the USA, on the west coast.
+        solution: 'Step 1: Kimball and Mattis created GIMP. Step 2: They were students in California. Step 3: University of California.'
+        mistakes:
+          Oxford University: it1_gimp_history
+      - prompt: Which other software, like GIMP, is used for graphic design?
+        options:
+        - Krita
+        - Calc
+        - Kalzium
+        - Tesseract
+        answer: Krita
+        difficulty: 2
+        hints:
+        - It is a drawing and painting program.
+        - Calc is a spreadsheet; Kalzium is about elements.
+        solution: 'Step 1: Calc = spreadsheet; Kalzium = chemistry; Tesseract = OCR. Step 2: The design program is left. Step 3: Krita.'
+        mistakes:
+          Calc: gimp_basics
+      - prompt: How do you see the other tools hidden in a tool group in the toolbox?
+        options:
+        - Right-click the tool
+        - Press Delete
+        - Double-click the canvas
+        - Close the layers window
+        answer: Right-click the tool
+        difficulty: 1
+        hints:
+        - Tools are grouped together.
+        - A mouse click opens the group's list.
+        solution: 'Step 1: Similar tools share one button. Step 2: A right-click shows them. Step 3: Right-click the tool.'
+        mistakes:
+          Press Delete: gimp_tools
 
   - code: it9.poster.selection
     title: Selecting and placing images
@@ -172,6 +292,55 @@ concepts:
         bin: Ellipse Select (E)
         clue: A circle.
         why: Ellipse Select.
+    lesson:
+      - teach: Selection tools pick out part of an image. Rectangle Select (R) for boxes, Ellipse Select (E) for ovals, Free Select (F) to draw any outline, Fuzzy Select (U) to pick an area of similar colour with one click. Threshold sets how similar the colours must be.
+        picture:
+          kind: compare
+          columns:
+          - title: Shape tools
+            points:
+            - Rectangle Select (R)
+            - Ellipse Select (E)
+            - Free Select (F)
+          - title: Colour tool
+            points:
+            - Fuzzy Select (U)
+            - Threshold controls spread
+          alt: GIMP selection tools.
+        check:
+          prompt: Which tool picks all the white background in one click?
+          options:
+          - Fuzzy Select
+          - Ellipse Select
+          - Scale
+          answer: Fuzzy Select
+          why: It selects an area of similar colour.
+      - teach: To make a background see-through you need an alpha channel (RGBA = red, green, blue + alpha for transparency). Right-click the layer → Add Alpha Channel, select the background, press Delete, then Select → None.
+        picture:
+          kind: flow
+          steps:
+          - Add Alpha Channel
+          - Fuzzy Select background
+          - Delete
+          - Select → None
+          alt: Removing a background.
+        check:
+          prompt: Without an alpha channel, deleting the background makes it
+          options:
+          - A solid colour
+          - See-through
+          - Bigger
+          answer: A solid colour
+          why: Only an alpha channel can store transparency.
+      - teach: 'To put the picture on the poster: Edit → Copy, then Edit → Paste as → New Layer. Use Scale to resize (unlink the chain to change width and height separately), Move to position, Crop to cut, and Duplicate Layer for a copy.'
+        check:
+          prompt: Which tool moves a layer to a new place?
+          options:
+          - Move
+          - Scale
+          - Crop
+          answer: Move
+          why: Move changes position; Scale changes size.
     items:
       - prompt: "Which tool selects an area of similar colour with one click?"
         options: ["Fuzzy Select", "Rectangle Select", "Move", "Text"]
@@ -243,6 +412,77 @@ concepts:
         hints: ["Which part of RGBA stores transparency?", "Look at what you right-click on the layer to add."]
         solution: "Step 1: Transparency is stored in the alpha (A) channel. Step 2: An RGB-only layer has no alpha, so deleted areas fill with colour. Step 3: Right-click the layer → Add Alpha Channel, then delete again."
         mistakes: {"A new canvas": rgba, "A higher Threshold": gimp_selection, "The Move tool": rgba}
+      - prompt: What is the shortcut key for Ellipse Select?
+        options:
+        - E
+        - R
+        - F
+        - U
+        answer: E
+        difficulty: 1
+        hints:
+        - R is Rectangle Select.
+        - Use the first letter of the shape's name.
+        solution: 'Step 1: Rectangle = R. Step 2: Ellipse starts with E. Step 3: E.'
+        mistakes:
+          R: it1_select_shape
+          U: it1_select_shape
+      - prompt: Which tool lets you draw your own outline around an odd-shaped object?
+        options:
+        - Free Select
+        - Rectangle Select
+        - Bucket Fill
+        - Gradient
+        answer: Free Select
+        difficulty: 2
+        hints:
+        - The object is not a box or an oval.
+        - You click points around its edge by hand.
+        solution: 'Step 1: Rectangle and Ellipse only make fixed shapes. Step 2: An odd shape needs a hand-drawn outline. Step 3: Free Select.'
+        mistakes:
+          Rectangle Select: it1_select_shape
+      - prompt: Which menu improves a dull photo's lightness and contrast?
+        options:
+        - Colours → Brightness-Contrast
+        - File → Export
+        - Select → None
+        - Filters → Blur
+        answer: Colours → Brightness-Contrast
+        difficulty: 2
+        hints:
+        - It is under the menu that deals with colour.
+        - Blur would make it less clear.
+        solution: 'Step 1: The photo needs light and contrast. Step 2: These are colour settings. Step 3: Colours → Brightness-Contrast.'
+        mistakes:
+          Filters → Blur: it1_move_vs_scale
+      - prompt: Where can you view an image's RGBA channels?
+        options:
+        - Windows → Dockable Dialogs → Channels
+        - File → New
+        - Edit → Copy
+        - Image → Crop
+        answer: Windows → Dockable Dialogs → Channels
+        difficulty: 3
+        hints:
+        - Channels are shown in a dialog window.
+        - Look under the Windows menu.
+        solution: 'Step 1: Channels have their own dialog. Step 2: Dialogs open from Windows → Dockable Dialogs. Step 3: Channels.'
+        mistakes:
+          File → New: rgba
+      - prompt: You want to make a picture taller without making it wider. What must you do in the Scale tool?
+        options:
+        - Unlink the chain between width and height
+        - Press Delete
+        - Add an alpha channel
+        - Use Fuzzy Select
+        answer: Unlink the chain between width and height
+        difficulty: 3
+        hints:
+        - Normally width and height change together.
+        - A small chain icon locks them.
+        solution: 'Step 1: Linked sizes keep the same shape. Step 2: Unlinking lets each change alone. Step 3: Unlink the chain.'
+        mistakes:
+          Add an alpha channel: it1_move_vs_scale
 
   - code: it9.poster.text_export
     title: Text, shadows, shapes and exporting
@@ -289,6 +529,48 @@ concepts:
         bin: .png / .jpg (export)
         clue: A normal picture file.
         why: Export.
+    lesson:
+      - teach: 'The Text tool adds words: set font, size and colour in Tool Options, click the canvas and type. A hand-made shadow: duplicate the text layer, colour the copy black, lower it below the original, blur it (Filters → Blur → Gaussian Blur) and nudge it with Move. Quicker: Filters → Light and Shadow → Drop Shadow.'
+        picture:
+          kind: flow
+          steps:
+          - Duplicate text layer
+          - Colour copy black
+          - Lower it below
+          - Gaussian Blur
+          - Shift a little
+          alt: Making a text shadow by hand.
+        check:
+          prompt: Why lower the black copy below the original?
+          options:
+          - So the shadow sits behind the text
+          - To delete it
+          - To make it bigger
+          answer: So the shadow sits behind the text
+          why: A shadow must be behind what casts it.
+      - teach: 'Shapes: on a new layer, drag Rectangle or Ellipse Select, then fill with Bucket Fill (Shift+B) or Gradient (G). File → Save keeps the .xcf project with all layers. File → Export makes PNG, JPEG or TIFF images for printing or sharing, but these flatten the layers.'
+        picture:
+          kind: compare
+          columns:
+          - title: Save (.xcf)
+            points:
+            - keeps layers
+            - keeps transparency
+            - edit later
+          - title: Export (PNG/JPEG)
+            points:
+            - one flat picture
+            - share or print
+            - hard to edit
+          alt: Save versus Export in GIMP.
+        check:
+          prompt: Which keeps the layers for editing tomorrow?
+          options:
+          - Saving as .xcf
+          - Exporting as JPEG
+          - Printing
+          answer: Saving as .xcf
+          why: XCF is GIMP's layered project format.
     items:
       - prompt: "What is the project file format of GIMP?"
         options: ["XCF", "PDF", "JPG", "PNG"]
@@ -353,3 +635,87 @@ concepts:
         hints: ["The shadow must sit behind the letters.", "Layer order decides what is in front."]
         solution: "Step 1: The black copy is above the original, so it hides it. Step 2: Lower this layer in the Layers palette so the shadow sits behind the heading."
         mistakes: {"Applying Gaussian Blur": gimp_layers, "Choosing a font size": gimp_layers, "Exporting as PNG": gimp_files}
+      - prompt: Which filter softens the black copy to make it look like a shadow?
+        options:
+        - Gaussian Blur
+        - Drop Shadow
+        - Brightness-Contrast
+        - Crop
+        answer: Gaussian Blur
+        difficulty: 2
+        hints:
+        - A shadow has soft edges.
+        - It is under Filters → Blur.
+        solution: 'Step 1: Sharp black text doesn''t look like a shadow. Step 2: Softening needs a blur. Step 3: Gaussian Blur.'
+        mistakes:
+          Drop Shadow: it1_shadow_steps
+      - prompt: What is the shortcut key for the Gradient tool?
+        options:
+        - G
+        - B
+        - T
+        - M
+        answer: G
+        difficulty: 1
+        hints:
+        - It is the first letter of the tool's name.
+        - Shift+B is Bucket Fill.
+        solution: 'Step 1: Shortcuts often match the name. Step 2: Gradient begins with G. Step 3: G.'
+        mistakes:
+          B: gimp_tools
+      - prompt: Which file type would you choose to export a poster for printing with transparency kept?
+        options:
+        - PNG
+        - XCF
+        - ODT
+        - TXT
+        answer: PNG
+        difficulty: 2
+        hints:
+        - It must be an image file other programs can open.
+        - JPEG cannot store transparency.
+        solution: 'Step 1: XCF is GIMP-only. Step 2: ODT and TXT are text files. Step 3: PNG keeps transparency.'
+        mistakes:
+          XCF: it1_save_vs_export
+      - prompt: Which tool turns an image to face the other direction?
+        options:
+        - Flip
+        - Crop
+        - Text
+        - Bucket Fill
+        answer: Flip
+        difficulty: 1
+        hints:
+        - Think of a mirror image.
+        - It turns left into right.
+        solution: 'Step 1: Facing the other way is a mirror image. Step 2: The tool for that is named after flipping. Step 3: Flip.'
+        mistakes:
+          Crop: it1_move_vs_scale
+      - prompt: In Drop Shadow, which values move the shadow sideways and downwards?
+        options:
+        - X and Y
+        - Red and Green
+        - Width and Height of the canvas
+        - Threshold
+        answer: X and Y
+        difficulty: 2
+        hints:
+        - Think of graph axes.
+        - One is across, one is down.
+        solution: 'Step 1: Moving sideways and down is like coordinates. Step 2: Across = X, up/down = Y. Step 3: X and Y.'
+        mistakes:
+          Threshold: gimp_selection
+      - prompt: Which is NOT a job that uses image editing?
+        options:
+        - Repairing car engines
+        - Designing posters
+        - Making game visual effects
+        - Preparing e-commerce product photos
+        answer: Repairing car engines
+        difficulty: 1
+        hints:
+        - Three jobs work with pictures.
+        - Which one works with machines, not images?
+        solution: 'Step 1: Posters, games and shop photos all use pictures. Step 2: Engines are machines. Step 3: Repairing car engines.'
+        mistakes:
+          Designing posters: gimp_files
