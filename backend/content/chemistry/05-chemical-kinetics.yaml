@@ -63,6 +63,47 @@ concepts:
         want:
           r: 0.5
           t: 20
+    lesson:
+      - teach: 'Some reactions are over in a flash, like a firecracker. Others take years, like an iron gate rusting. The rate of a reaction tells how fast reactants are used up or products are made: change in amount ÷ time taken.'
+        check:
+          prompt: Which reaction is very fast?
+          options:
+          - A firecracker exploding
+          - An iron nail rusting
+          - Milk slowly turning to curd
+          answer: A firecracker exploding
+          why: An explosion is over almost at once; rusting and curdling take hours or days.
+      - teach: 'We measure the rate by watching something change: the volume of gas given off, the loss of mass as a gas escapes, a colour fading, or the time for a cloudiness to appear. If 30 cm³ of gas forms in 10 s, the average rate is 30 ÷ 10 = 3 cm³ per second.'
+        check:
+          prompt: 100 cm³ of gas forms in 50 s. What is the average rate?
+          options:
+          - 2 cm³/s
+          - 5000 cm³/s
+          - 50 cm³/s
+          answer: 2 cm³/s
+          why: Rate = 100 ÷ 50 = 2 cm³ per second.
+      - teach: A reaction is fastest at the start, when there are most reactant particles. As they get used up, it slows down, and it stops when one reactant runs out. On a graph of gas volume against time, the curve is steep at first and then flattens.
+        picture:
+          kind: bars
+          bars:
+          - label: 0–20 s
+            value: 40
+          - label: 20–40 s
+            value: 20
+          - label: 40–60 s
+            value: 10
+          - label: 60–80 s
+            value: 0
+          unit: cm³
+          alt: 'Gas made in each 20 seconds: 40, 20, 10, then 0 cm³. The reaction slows down and stops.'
+        check:
+          prompt: Why does the reaction slow down?
+          options:
+          - The reactants are being used up
+          - The products speed it up
+          - The gas is getting heavier
+          answer: The reactants are being used up
+          why: Fewer reactant particles means fewer reactions each second.
     items:
       - prompt: "60 cm³ of gas is produced in 30 s. What is the average rate, in cm³ per second?"
         answer: "2"
@@ -127,6 +168,76 @@ concepts:
         hints: ["The mass lost is the carbon dioxide that escaped.", "Mass lost ÷ minutes."]
         solution: "Step 1: Mass lost = 1.2 g. Step 2: Rate = 1.2 ÷ 4 = 0.3 g/min."
         mistakes: {"1.2": rate_per_time, "49.7": interval_change, "4.8": rate_per_time}
+      - prompt: A reaction gives 90 cm³ of gas in 45 s. What is the average rate, in cm³ per second?
+        answer: '2'
+        check: 90/45
+        difficulty: 1
+        hints:
+        - Rate = change in amount ÷ time.
+        - Divide the volume by the time.
+        solution: 'Step 1: Volume = 90 cm³. Step 2: Time = 45 s. Step 3: Rate = 90 ÷ 45 = 2 cm³/s.'
+        mistakes:
+          '4050': rate_per_time
+      - prompt: Which of these is a slow reaction?
+        options:
+        - Ripening of a mango
+        - Burning of a match
+        - Adding silver nitrate to salt water
+        - A cracker going off
+        answer: Ripening of a mango
+        difficulty: 1
+        hints:
+        - Fast reactions are over in a moment.
+        - Which one takes days?
+        solution: 'Step 1: A match burns and a cracker explodes in moments. Step 2: A white precipitate forms at once with silver nitrate. Step 3: Ripening takes days: it is slow.'
+        mistakes:
+          Burning of a match: rust_slow
+      - prompt: A reaction makes 2 g of product in 4 minutes. What is the average rate, in g per minute?
+        answer: '0.5'
+        check: 2/4
+        difficulty: 1
+        hints:
+        - Rate = amount ÷ time.
+        - Use minutes, since the rate is asked per minute.
+        solution: 'Step 1: Amount = 2 g. Step 2: Time = 4 min. Step 3: Rate = 2 ÷ 4 = 0.5 g/min.'
+        mistakes:
+          '8': rate_per_time
+          '2': rate_per_time
+      - prompt: Gas volume is 30 cm³ at 20 s and 54 cm³ at 50 s. What is the average rate between these times, in cm³/s?
+        answer: '0.8'
+        check: (54-30)/(50-20)
+        difficulty: 2
+        hints:
+        - Find the gas made during the interval.
+        - Divide by the length of the interval.
+        solution: 'Step 1: Gas made = 54 − 30 = 24 cm³. Step 2: Time = 50 − 20 = 30 s. Step 3: Rate = 24 ÷ 30 = 0.8 cm³/s.'
+        mistakes:
+          '1.08': interval_change
+          '1.8': interval_change
+      - prompt: 'Magnesium ribbon reacts with acid. Gas made: 25 cm³ in the first 10 s, 15 cm³ in the next 10 s, 5 cm³ in the next 10 s. What does this show?'
+        options:
+        - The reaction slows down as the reactants are used up
+        - The reaction speeds up as it goes
+        - The rate stays the same
+        - The reaction stops at once
+        answer: The reaction slows down as the reactants are used up
+        difficulty: 2
+        hints:
+        - Compare the gas made in each 10 s.
+        - Is that amount growing or shrinking?
+        solution: 'Step 1: 25, then 15, then 5 cm³ per 10 s. Step 2: Less gas each interval. Step 3: The rate falls as the reactants run low.'
+        mistakes:
+          The reaction speeds up as it goes: rate_slows
+      - prompt: A reaction loses 1.5 g of carbon dioxide in 5 minutes. What is the average rate of mass loss, in g per second?
+        answer: '0.005'
+        check: 1.5/(5*60)
+        difficulty: 3
+        hints:
+        - Change minutes to seconds first.
+        - Then divide the mass by the time.
+        solution: 'Step 1: 5 min = 300 s. Step 2: Rate = 1.5 ÷ 300. Step 3: Rate = 0.005 g/s.'
+        mistakes:
+          '0.3': rate_per_time
 
   - code: chem9.kinetics.factors
     title: Factors affecting the rate
@@ -176,6 +287,43 @@ concepts:
         bin: Slower
         clue: 'Fewer acid particles in the same space: more or fewer collisions?'
         why: 'Fewer collisions: slower.'
+    lesson:
+      - teach: 'Four things speed up most reactions. Concentration: stronger acid reacts faster. Temperature: warm reactions go faster (food spoils faster outside the fridge). Surface area: powder reacts faster than lumps. A catalyst: a substance that speeds up a reaction without being used up.'
+        picture:
+          kind: flow
+          steps:
+          - Higher concentration
+          - Higher temperature
+          - Larger surface area
+          - Add a catalyst
+          - Faster reaction
+          alt: Concentration, temperature, surface area and catalysts all speed up reactions.
+        check:
+          prompt: 'Which will dissolve faster in acid: a lump of chalk or chalk powder of the same mass?'
+          options:
+          - Chalk powder
+          - The lump
+          - Both the same
+          answer: Chalk powder
+          why: Powder has much more surface for the acid to attack.
+      - teach: Temperature has a big effect. For many reactions, the rate roughly doubles for every 10 °C rise. From 20 °C to 40 °C is two rises of 10 °C, so the rate becomes 2 × 2 = 4 times faster.
+        check:
+          prompt: A rate doubles every 10 °C. How much faster is it at 30 °C than at 20 °C?
+          options:
+          - 2 times
+          - 10 times
+          - 4 times
+          answer: 2 times
+          why: 'One 10 °C rise: one doubling.'
+      - teach: 'A catalyst is not used up: at the end it is still there, chemically unchanged. Manganese dioxide speeds up the breakdown of hydrogen peroxide; iron is the catalyst in making ammonia. Enzymes in our body are catalysts too. Light also speeds up some reactions, like photosynthesis.'
+        check:
+          prompt: What happens to a catalyst during a reaction?
+          options:
+          - It is unchanged at the end
+          - It is used up
+          - It becomes a product
+          answer: It is unchanged at the end
+          why: A catalyst speeds up the reaction but is not consumed.
     items:
       - prompt: "Which will react fastest with dilute hydrochloric acid?"
         options: ["Marble powder", "Large marble chips", "One big marble block", "They all react at the same rate"]
@@ -241,6 +389,85 @@ concepts:
         hints: ["Which factor is different between a lump and dust of the same coal?", "Burning happens at the surface."]
         solution: "Step 1: Dust has a huge total surface for oxygen to reach. Step 2: So many collisions happen at once that the burning becomes explosive."
         mistakes: {"Coal dust is a catalyst": catalyst_not_used, "Coal dust contains more carbon": dust_surface, "Dust is hotter than lumps": dust_surface}
+      - prompt: Which change will slow down the reaction between marble and hydrochloric acid?
+        options:
+        - Using more dilute acid
+        - Warming the acid
+        - Crushing the marble
+        - Using more concentrated acid
+        answer: Using more dilute acid
+        difficulty: 1
+        hints:
+        - Three of the changes speed things up.
+        - What does diluting do to the number of acid particles in the same space?
+        solution: 'Step 1: Warming, crushing and concentrating speed it up. Step 2: Diluting means fewer acid particles per cm³. Step 3: Fewer collisions, so it slows down.'
+        mistakes:
+          Crushing the marble: surface_area
+      - prompt: Why do we chew food well before swallowing?
+        options:
+        - Small pieces have more surface, so digestion is faster
+        - Chewing adds heat to the food
+        - It removes the catalyst
+        - It makes the food more concentrated
+        answer: Small pieces have more surface, so digestion is faster
+        difficulty: 1
+        hints:
+        - Chewing breaks food into small bits.
+        - What do small bits have more of than a big lump?
+        solution: 'Step 1: Chewing breaks food into small pieces. Step 2: That gives more surface area. Step 3: Digestive enzymes can act faster.'
+        mistakes:
+          It makes the food more concentrated: surface_area
+      - prompt: A reaction's rate doubles for every 10 °C rise. How many times faster is it at 60 °C than at 30 °C?
+        answer: '8'
+        check: 2**3
+        difficulty: 2
+        hints:
+        - How many 10 °C rises are there from 30 °C to 60 °C?
+        - Double once for each rise.
+        solution: 'Step 1: 60 − 30 = 30 °C = three 10 °C rises. Step 2: 2 × 2 × 2. Step 3: 8 times faster.'
+        mistakes:
+          '6': temperature_up
+          '3': temperature_up
+      - prompt: In the Haber process for ammonia, iron is used as a catalyst. What does the iron do?
+        options:
+        - Speeds up the reaction without being used up
+        - Becomes part of the ammonia
+        - Makes more ammonia from the same reactants
+        - Slows down the reaction
+        answer: Speeds up the reaction without being used up
+        difficulty: 2
+        hints:
+        - A catalyst changes how fast, not how much.
+        - Is the iron still there at the end?
+        solution: 'Step 1: Iron is a catalyst. Step 2: It speeds up the reaction. Step 3: It is not used up and does not become part of the product.'
+        mistakes:
+          Becomes part of the ammonia: catalyst_not_used
+          Makes more ammonia from the same reactants: catalyst_amount
+      - prompt: A reaction takes 12 minutes at 25 °C. Its rate doubles for every 10 °C rise. How many minutes does it take at 45 °C?
+        answer: '3'
+        check: 12/2**2
+        difficulty: 3
+        hints:
+        - How many times faster is it at 45 °C?
+        - Faster reaction, shorter time.
+        solution: 'Step 1: 45 − 25 = 20 °C: two doublings. Step 2: 4 times faster. Step 3: Time = 12 ÷ 4 = 3 minutes.'
+        mistakes:
+          '48': time_shrinks
+          '6': time_shrinks
+      - prompt: Why does a cut apple turn brown faster on a hot day than in a fridge?
+        options:
+        - Higher temperature speeds up the reaction with air
+        - The fridge has no oxygen
+        - Cold makes apples sweeter
+        - Heat adds a catalyst
+        answer: Higher temperature speeds up the reaction with air
+        difficulty: 2
+        hints:
+        - Browning is a chemical reaction.
+        - Which factor differs between a hot day and a fridge?
+        solution: 'Step 1: Browning is a reaction with oxygen in the air. Step 2: On a hot day the particles move faster and collide more. Step 3: So browning is faster.'
+        mistakes:
+          The fridge has no oxygen: temperature_up
   - code: chem9.kinetics.collisions
     title: Collision theory
     after: [chem9.kinetics.factors]
@@ -281,6 +508,46 @@ concepts:
         bin: 'True'
         clue: 'More particles in the same space: more or fewer bumps?'
         why: 'More particles, more collisions: true.'
+    lesson:
+      - teach: 'Why do these factors work? Collision theory says particles react only when they collide. But not every bump counts: they must hit hard enough, with at least the activation energy, and facing the right way. Such collisions are effective collisions.'
+        check:
+          prompt: Which collisions lead to a reaction?
+          options:
+          - Those with enough energy and the right orientation
+          - Every collision
+          - Only the slowest collisions
+          answer: Those with enough energy and the right orientation
+          why: Only effective collisions, with at least the activation energy and the right orientation, react.
+      - teach: 'Concentration and surface area increase how often particles meet, so there are more collisions each second. Temperature does more: particles move faster, so they collide more often AND a much bigger share of collisions have enough energy.'
+        picture:
+          kind: compare
+          columns:
+          - title: Concentration / surface area
+            points:
+            - more collisions per second
+            - same share with enough energy
+          - title: Temperature
+            points:
+            - more collisions per second
+            - bigger share with enough energy
+          alt: Concentration and surface area add collisions; temperature also gives more of them enough energy.
+        check:
+          prompt: Why does heating speed up a reaction so much?
+          options:
+          - More collisions have at least the activation energy
+          - Particles become bigger
+          - The activation energy rises
+          answer: More collisions have at least the activation energy
+          why: Faster particles hit harder, so many more collisions are effective.
+      - teach: 'A catalyst offers a different route with a lower activation energy. More collisions now have enough energy, so the reaction is faster. The catalyst does not change how much product forms: it only gets there sooner.'
+        check:
+          prompt: How does a catalyst speed up a reaction?
+          options:
+          - It lowers the activation energy
+          - It gives particles more energy
+          - It adds more reactant
+          answer: It lowers the activation energy
+          why: With a lower energy barrier, more collisions succeed.
     items:
       - prompt: "The minimum energy colliding particles need in order to react is called:"
         options: ["Activation energy", "Kinetic energy", "Heat of reaction", "Bond energy"]
@@ -345,3 +612,84 @@ concepts:
         hints: ["Effective = total ÷ 2000.", "Total = 600 × 2000."]
         solution: "Step 1: Total × 1/2000 = 600. Step 2: Total = 1,200,000 collisions per second."
         mistakes: {"0.3": effective_collisions, "3.33": effective_collisions}
+      - prompt: 'A collision that leads to a reaction is called:'
+        options:
+        - An effective collision
+        - An activation collision
+        - A catalyst collision
+        - A slow collision
+        answer: An effective collision
+        difficulty: 1
+        hints:
+        - Most collisions do not lead to a reaction.
+        - The ones that do have a special name.
+        solution: 'Step 1: Not every collision reacts. Step 2: Those with enough energy and the right orientation do. Step 3: They are effective collisions.'
+        mistakes:
+          An activation collision: effective_collisions
+      - prompt: Why does powdered zinc react faster with acid than a single piece of zinc?
+        options:
+        - More zinc surface is exposed, so there are more collisions
+        - Powder has more energy
+        - Powder lowers the activation energy
+        - Powder is a catalyst
+        answer: More zinc surface is exposed, so there are more collisions
+        difficulty: 1
+        hints:
+        - Acid particles can only hit zinc on its surface.
+        - Which form has more surface?
+        solution: 'Step 1: Reactions happen at the surface. Step 2: Powder has much more surface. Step 3: More collisions per second, so a faster rate.'
+        mistakes:
+          Powder lowers the activation energy: surface_area
+      - prompt: 'Raising the temperature makes particles:'
+        options:
+        - Move faster and collide harder and more often
+        - Move slower
+        - Lower their activation energy
+        - Join together
+        answer: Move faster and collide harder and more often
+        difficulty: 2
+        hints:
+        - Heat gives particles more kinetic energy.
+        - What happens to their collisions?
+        solution: 'Step 1: Heat gives particles more energy. Step 2: They move faster. Step 3: They collide more often and harder, so more collisions are effective.'
+        mistakes:
+          Lower their activation energy: meet_not_hit
+      - prompt: In a gas, 1 collision in every 500 is effective. There are 2,000,000 collisions per second. How many effective collisions are there per second?
+        answer: '4000'
+        check: 2000000/500
+        difficulty: 2
+        hints:
+        - Find what fraction of collisions is effective.
+        - Multiply the total by that fraction.
+        solution: 'Step 1: Fraction = 1/500. Step 2: 2,000,000 ÷ 500. Step 3: = 4000 effective collisions per second.'
+        mistakes:
+          '1000000000': effective_collisions
+      - prompt: 'Increasing the concentration of a reactant speeds up a reaction because:'
+        options:
+        - Particles meet more often
+        - Each collision has more energy
+        - The activation energy is lower
+        - The products form a catalyst
+        answer: Particles meet more often
+        difficulty: 2
+        hints:
+        - More concentrated means more particles in the same space.
+        - Does that change how hard they hit, or how often they meet?
+        solution: 'Step 1: More particles in the same volume. Step 2: They meet more often. Step 3: More collisions per second means a faster rate; the energy of each hit is unchanged.'
+        mistakes:
+          Each collision has more energy: meet_not_hit
+      - prompt: A catalyst is added to a reaction. Which is true?
+        options:
+        - More collisions are effective, because less energy is needed
+        - Particles move faster
+        - More product is made in the end
+        - The catalyst is used up
+        answer: More collisions are effective, because less energy is needed
+        difficulty: 3
+        hints:
+        - A catalyst changes the route of the reaction.
+        - Does it change the temperature, or the energy barrier?
+        solution: 'Step 1: A catalyst gives a route with lower activation energy. Step 2: More collisions now have enough energy. Step 3: The rate rises, but the amount of product is the same.'
+        mistakes:
+          More product is made in the end: catalyst_amount
+          The catalyst is used up: catalyst_not_used
