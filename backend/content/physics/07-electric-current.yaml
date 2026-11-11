@@ -64,6 +64,55 @@ concepts:
         want:
           i: 2
           t: 5
+    lesson:
+      - teach: 'Switch on a torch and charge starts to flow round the circuit. Electric current is how much charge flows past a point each second: I = Q ÷ t. Charge is measured in coulombs (C), current in amperes (A). 1 A means 1 coulomb every second.'
+        check:
+          prompt: 6 C of charge flows past a point in 3 s. What is the current?
+          options:
+          - 2 A
+          - 18 A
+          - 0.5 A
+          answer: 2 A
+          why: I = Q ÷ t = 6 ÷ 3 = 2 A.
+      - teach: In a metal wire, the particles that move are electrons, tiny negative charges. They drift from the − end to the + end of the cell. But long before electrons were found, scientists agreed that current flows from + to −. We still draw this 'conventional current', opposite to the electrons.
+        picture:
+          kind: compare
+          columns:
+          - title: Conventional current
+            points:
+            - drawn from + to −
+            - agreed before electrons were known
+          - title: Electron flow
+            points:
+            - electrons drift from − to +
+            - what really moves in a metal
+          alt: Conventional current goes from + to −; electrons actually drift from − to +.
+        check:
+          prompt: In a copper wire, which way do the electrons drift?
+          options:
+          - From the − end to the + end
+          - From the + end to the − end
+          - They don't move
+          answer: From the − end to the + end
+          why: Electrons are negative, so they move opposite to conventional current.
+      - teach: 'Charge flows only when there is a potential difference (voltage), kept up by a cell or battery. Potential difference is the work done to move each coulomb: V = W ÷ Q. 1 volt = 1 joule per coulomb. A 3 V cell gives each coulomb 3 J of energy.'
+        check:
+          prompt: A 9 V battery pushes 2 C of charge round a circuit. How much work does it do?
+          options:
+          - 18 J
+          - 4.5 J
+          - 11 J
+          answer: 18 J
+          why: W = V × Q = 9 × 2 = 18 J.
+      - teach: 'Meters: an ammeter measures current, so all the current must pass through it. Connect it in series. A voltmeter measures the potential difference across a part, so it goes side by side with it: in parallel.'
+        check:
+          prompt: How is a voltmeter connected to measure the voltage across a bulb?
+          options:
+          - In parallel with the bulb
+          - In series with the bulb
+          - Anywhere in the circuit
+          answer: In parallel with the bulb
+          why: It measures across the bulb, so its two ends join the bulb's two ends.
     items:
       - prompt: "10 C of charge flows through a wire in 2 s. What is the current, in A?"
         answer: "5"
@@ -128,6 +177,70 @@ concepts:
         hints: ["V = W ÷ Q.", "W = 6 × 3."]
         solution: "Step 1: Each coulomb gives up 6 J. Step 2: 3 C give up 6 × 3 = 18 J."
         mistakes: {"2": work_vq, "27": work_vq, "12": work_vq}
+      - prompt: A current of 3 A flows for 20 s. How much charge passes, in C?
+        answer: '60'
+        check: 3*20
+        difficulty: 1
+        hints:
+        - Current is charge per second.
+        - Charge = current × time.
+        solution: 'Step 1: Q = I × t. Step 2: Q = 3 × 20. Step 3: Q = 60 C.'
+        mistakes:
+          '23': charge_time
+      - prompt: Which instrument measures electric current?
+        options:
+        - Ammeter
+        - Voltmeter
+        - Ohmmeter
+        - Barometer
+        answer: Ammeter
+        difficulty: 1
+        hints:
+        - Current is measured in amperes.
+        - The meter's name comes from the unit.
+        solution: 'Step 1: Current is in amperes. Step 2: The ampere-meter is the ammeter. Step 3: It is connected in series.'
+        mistakes:
+          Voltmeter: volt_meaning
+      - prompt: 120 C of charge flows through a wire in 1 minute. What is the current, in A?
+        answer: '2'
+        check: 120/60
+        difficulty: 2
+        hints:
+        - Change the time to seconds.
+        - I = Q ÷ t.
+        solution: 'Step 1: 1 minute = 60 s. Step 2: I = 120 ÷ 60. Step 3: I = 2 A.'
+        mistakes:
+          '120': seconds_needed
+      - prompt: A 1.5 V cell moves 10 C of charge through a torch bulb. How much energy does it give the charge, in J?
+        answer: '15'
+        check: 1.5*10
+        difficulty: 2
+        hints:
+        - Potential difference is energy per coulomb.
+        - W = V × Q.
+        solution: 'Step 1: Each coulomb gets 1.5 J. Step 2: W = 1.5 × 10. Step 3: W = 15 J.'
+        mistakes:
+          '0.15': work_vq
+      - prompt: A battery does 48 J of work moving charge through a 12 V lamp. How much charge flowed, in C?
+        answer: '4'
+        check: 48/12
+        difficulty: 2
+        hints:
+        - V = W ÷ Q.
+        - Rearrange to find Q.
+        solution: 'Step 1: Q = W ÷ V. Step 2: Q = 48 ÷ 12. Step 3: Q = 4 C.'
+        mistakes:
+          '576': work_vq
+      - prompt: A current of 0.2 A flows through a radio for 10 minutes. How much charge flows, in C?
+        answer: '120'
+        check: 0.2*10*60
+        difficulty: 3
+        hints:
+        - Change minutes to seconds first.
+        - Q = I × t.
+        solution: 'Step 1: 10 minutes = 600 s. Step 2: Q = 0.2 × 600. Step 3: Q = 120 C.'
+        mistakes:
+          '2': seconds_needed
 
   - code: phy9.current.ohm
     title: Ohm's law and resistance
@@ -187,6 +300,54 @@ concepts:
         - when:
             r: 2
           say: '2 Ω lets 3 A through: too much. A bigger resistance lets less current flow.'
+    lesson:
+      - teach: 'Connect a wire to 1, 2, then 3 cells. The current goes up in step with the voltage: twice the voltage, twice the current. Ohm found this: at a steady temperature, V ∝ I, or V = IR. R, the resistance, is how strongly the wire opposes the current. Its unit is the ohm (Ω).'
+        picture:
+          kind: bars
+          bars:
+          - label: 2 V
+            value: 0.5
+          - label: 4 V
+            value: 1
+          - label: 6 V
+            value: 1.5
+          unit: A
+          alt: 'Through a 4 Ω wire: 0.5 A at 2 V, 1 A at 4 V, 1.5 A at 6 V. The current grows in step with the voltage.'
+        check:
+          prompt: A resistor has 1 A through it at 5 V. At 10 V, what current flows?
+          options:
+          - 2 A
+          - 1 A
+          - 0.5 A
+          answer: 2 A
+          why: 'Double the voltage, double the current: 2 A.'
+      - teach: Use V = IR three ways. To find V, multiply I × R. To find I, divide V ÷ R. To find R, divide V ÷ I. A 10 Ω lamp on 5 V takes I = 5 ÷ 10 = 0.5 A.
+        check:
+          prompt: A 20 Ω resistor has 0.5 A flowing through it. What is the voltage across it?
+          options:
+          - 10 V
+          - 40 V
+          - 20.5 V
+          answer: 10 V
+          why: V = IR = 0.5 × 20 = 10 V.
+      - teach: 'What decides resistance? A longer wire has more resistance (double the length, double R). A thicker wire has less (double the area, half R). The material matters too: copper has low resistivity, nichrome high. Heat usually raises it.'
+        check:
+          prompt: 'A wire is replaced with one of the same material and length but twice the thickness (area). Its resistance:'
+          options:
+          - Halves
+          - Doubles
+          - Stays the same
+          answer: Halves
+          why: 'Resistance falls as the cross-section area grows: twice the area, half the resistance.'
+      - teach: That is why house wiring is thick copper, which wastes little energy, while the coil in an iron or heater is nichrome, which resists strongly and gets hot. The bulb filament is tungsten, which glows white-hot without melting.
+        check:
+          prompt: Why are connecting wires made of copper?
+          options:
+          - Copper has low resistivity
+          - Copper has high resistivity
+          - Copper melts easily
+          answer: Copper has low resistivity
+          why: Low resistance means little energy is wasted as heat in the wires.
     items:
       - prompt: "A 4 Ω resistor has 12 V across it. What current flows, in A?"
         answer: "3"
@@ -251,6 +412,75 @@ concepts:
         hints: ["Find the heater's resistance first.", "R = 12 ÷ 3 = 4 Ω."]
         solution: "Step 1: R = 4 Ω. Step 2: V = 5 × 4 = 20 V."
         mistakes: {"14": ohm_rearrange, "7.2": ohm_rearrange}
+      - prompt: A 10 Ω resistor is connected to a 5 V supply. What current flows, in A?
+        answer: '0.5'
+        check: 5/10
+        difficulty: 1
+        hints:
+        - 'Ohm''s law: V = IR.'
+        - For current, divide V by R.
+        solution: 'Step 1: I = V ÷ R. Step 2: I = 5 ÷ 10. Step 3: I = 0.5 A.'
+        mistakes:
+          '50': ohm_rearrange
+          '2': ohm_rearrange
+      - prompt: What is the SI unit of resistance?
+        options:
+        - Ohm
+        - Volt
+        - Ampere
+        - Watt
+        answer: Ohm
+        difficulty: 1
+        hints:
+        - It is named after the scientist who found V = IR.
+        - Its symbol is the Greek letter Ω.
+        solution: 'Step 1: Volt is for potential difference, ampere for current, watt for power. Step 2: Resistance R = V ÷ I. Step 3: Its unit is the ohm, Ω.'
+        mistakes:
+          Volt: volt_meaning
+      - prompt: A current of 0.25 A flows through a resistor with 5 V across it. What is the resistance, in Ω?
+        answer: '20'
+        check: 5/0.25
+        difficulty: 2
+        hints:
+        - R = V ÷ I.
+        - Dividing by 0.25 is the same as multiplying by 4.
+        solution: 'Step 1: R = V ÷ I. Step 2: R = 5 ÷ 0.25. Step 3: R = 20 Ω.'
+        mistakes:
+          '1.25': ohm_rearrange
+      - prompt: A wire of resistance 6 Ω is cut into two equal halves. What is the resistance of one half, in Ω?
+        answer: '3'
+        check: 6/2
+        difficulty: 2
+        hints:
+        - Resistance depends on length.
+        - Half the length means half the resistance.
+        solution: 'Step 1: Same material and thickness. Step 2: Length is halved. Step 3: R = 6 ÷ 2 = 3 Ω.'
+        mistakes:
+          '12': resistance_length
+      - prompt: Which material is best for the element of an electric heater?
+        options:
+        - Nichrome
+        - Copper
+        - Silver
+        - Aluminium
+        answer: Nichrome
+        difficulty: 2
+        hints:
+        - A heater must turn electrical energy into heat.
+        - Which material resists the current strongly?
+        solution: 'Step 1: Copper, silver and aluminium have low resistivity. Step 2: They would barely heat. Step 3: Nichrome has high resistivity, so it gets hot and does not oxidise easily.'
+        mistakes:
+          Copper: nichrome_high
+      - prompt: A resistor takes 0.4 A when 8 V is applied. What current will flow when the voltage is raised to 20 V, in A?
+        answer: '1'
+        check: 20/(8/0.4)
+        difficulty: 3
+        hints:
+        - First find the resistance.
+        - Then use I = V ÷ R with the new voltage.
+        solution: 'Step 1: R = 8 ÷ 0.4 = 20 Ω. Step 2: I = 20 ÷ 20. Step 3: I = 1 A.'
+        mistakes:
+          '0.4': ohm_rearrange
 
   - code: phy9.current.circuits
     title: Series and parallel circuits
@@ -306,6 +536,51 @@ concepts:
         - when:
             p: 2
           say: In parallel it's 2 Ω, but in series they don't add up to 9 Ω.
+    lesson:
+      - teach: 'In a series circuit, parts are joined one after another, in a single loop. The same current flows through each. The resistances add: R = R₁ + R₂. If one bulb breaks, the loop is broken and everything goes off.'
+        picture:
+          kind: flow
+          steps:
+          - Cell
+          - Bulb 1
+          - Bulb 2
+          - Back to cell
+          alt: 'A series circuit: one path from the cell through bulb 1, then bulb 2, and back.'
+        check:
+          prompt: A 2 Ω and a 5 Ω resistor are joined in series. What is the total resistance?
+          options:
+          - 7 Ω
+          - 10 Ω
+          - 3 Ω
+          answer: 7 Ω
+          why: 'In series, resistances add: 2 + 5 = 7 Ω.'
+      - teach: In a parallel circuit, each part has its own path between the same two points. Each gets the full supply voltage, and the currents add up. The total resistance is found from 1/R = 1/R₁ + 1/R₂. It is always smaller than the smallest resistor, because the current has more ways to go.
+        check:
+          prompt: Two 10 Ω resistors are in parallel. What is the total resistance?
+          options:
+          - 5 Ω
+          - 20 Ω
+          - 10 Ω
+          answer: 5 Ω
+          why: 1/R = 1/10 + 1/10 = 2/10, so R = 5 Ω.
+      - teach: Homes are wired in parallel. Every appliance gets the full 230 V, and each has its own switch, so turning off the fan doesn't turn off the light.
+        check:
+          prompt: In a house, one bulb burns out. What happens to the others?
+          options:
+          - They stay on
+          - They all go off
+          - They get dimmer
+          answer: They stay on
+          why: In parallel, each appliance has its own path, so the others still work.
+      - teach: 'Electric power is how fast electrical energy is used: P = VI, in watts. A 230 V iron taking 4 A uses 920 W. Energy = power × time: in kWh, multiply kW by hours.'
+        check:
+          prompt: A lamp on 230 V takes 0.5 A. What is its power?
+          options:
+          - 115 W
+          - 460 W
+          - 230.5 W
+          answer: 115 W
+          why: P = VI = 230 × 0.5 = 115 W.
     items:
       - prompt: "Resistors of 3 Ω and 6 Ω are connected in series. What is the total resistance, in Ω?"
         answer: "9"
@@ -377,3 +652,68 @@ concepts:
         hints: ["Maximum power = 230 × 5.", "How many whole 100 W bulbs fit in that?"]
         solution: "Step 1: Maximum power = 230 × 5 = 1150 W. Step 2: 1150 ÷ 100 = 11.5, so at most 11 whole bulbs."
         mistakes: {"12": whole_bulbs_only, "11.5": whole_bulbs_only, "46": power_vi}
+      - prompt: Resistors of 4 Ω, 5 Ω and 6 Ω are connected in series. What is the total resistance, in Ω?
+        answer: '15'
+        check: 4+5+6
+        difficulty: 1
+        hints:
+        - In series the current has only one path.
+        - Add the resistances.
+        solution: 'Step 1: In series, R = R₁ + R₂ + R₃. Step 2: R = 4 + 5 + 6. Step 3: R = 15 Ω.'
+        mistakes:
+          '1.62': parallel_reciprocal
+      - prompt: A 12 Ω and a 4 Ω resistor are connected in parallel. What is the total resistance, in Ω?
+        answer: '3'
+        check: 1/(1/12+1/4)
+        difficulty: 2
+        hints:
+        - Use 1/R = 1/R₁ + 1/R₂.
+        - The answer must be smaller than 4 Ω.
+        solution: 'Step 1: 1/R = 1/12 + 1/4 = 1/12 + 3/12 = 4/12. Step 2: 1/R = 1/3. Step 3: R = 3 Ω.'
+        mistakes:
+          '16': series_add
+      - prompt: Two bulbs are in series with a battery. One bulb breaks. What happens to the other bulb?
+        options:
+        - It goes off, because the only path is broken
+        - It glows brighter
+        - It stays the same
+        - It glows dimmer but stays on
+        answer: It goes off, because the only path is broken
+        difficulty: 1
+        hints:
+        - How many paths does a series circuit have?
+        - Can current flow through a broken bulb?
+        solution: 'Step 1: A series circuit has one loop. Step 2: The broken bulb breaks the loop. Step 3: No current flows, so the other bulb goes off.'
+        mistakes:
+          It glows brighter: series_add
+      - prompt: A 6 Ω and a 3 Ω resistor are in parallel across a 6 V battery. What is the total current from the battery, in A?
+        answer: '3'
+        check: 6/6+6/3
+        difficulty: 2
+        hints:
+        - In parallel, each resistor has the full 6 V.
+        - Find each current, then add.
+        solution: 'Step 1: Through 6 Ω: 6 ÷ 6 = 1 A. Step 2: Through 3 Ω: 6 ÷ 3 = 2 A. Step 3: Total = 3 A.'
+        mistakes:
+          '0.67': series_add
+      - prompt: A 60 W bulb works on 240 V. What current does it take, in A?
+        answer: '0.25'
+        check: 60/240
+        difficulty: 2
+        hints:
+        - P = VI.
+        - Rearrange to find I.
+        solution: 'Step 1: I = P ÷ V. Step 2: I = 60 ÷ 240. Step 3: I = 0.25 A.'
+        mistakes:
+          '4': power_vi
+          '14400': power_vi
+      - prompt: A 2 Ω resistor is joined in series with a pair of 6 Ω resistors that are in parallel with each other. The whole set is connected to a 10 V battery. What current flows from the battery, in A?
+        answer: '2'
+        check: 10/(2+1/(1/6+1/6))
+        difficulty: 3
+        hints:
+        - Replace the parallel pair by one resistor first.
+        - Then add the 2 Ω and use I = V ÷ R.
+        solution: 'Step 1: Two 6 Ω in parallel = 3 Ω. Step 2: Total = 2 + 3 = 5 Ω. Step 3: I = 10 ÷ 5 = 2 A.'
+        mistakes:
+          '0.71': mixed_circuit
