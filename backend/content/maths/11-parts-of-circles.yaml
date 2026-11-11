@@ -82,6 +82,42 @@ concepts:
             - 0.5
             - 5
           say: Moving away from the centre makes the chord shorter. Where would a chord be longest?
+    lesson:
+      - teach: A chord is a straight line joining two points on a circle. A chord through the centre is a diameter, and it is the longest chord. Chords further from the centre are shorter.
+        check:
+          prompt: Which is the longest chord of a circle of radius 6 cm?
+          options:
+          - The diameter, 12 cm
+          - Any chord, 6 cm
+          - There is no longest chord
+          answer: The diameter, 12 cm
+          why: The diameter passes through the centre and is twice the radius.
+      - teach: 'Draw a line from the centre perpendicular to a chord (meeting it at a right angle). It cuts the chord into two equal halves. Fold a paper circle so a chord lands on itself: the fold goes through the centre and the chord''s middle.'
+        check:
+          prompt: A chord is 10 cm long. The perpendicular from the centre meets it at M. How long is each half?
+          options:
+          - 5 cm
+          - 10 cm
+          - It depends on the radius
+          answer: 5 cm
+          why: 'The perpendicular from the centre always bisects the chord: 10 ÷ 2 = 5 cm.'
+      - teach: 'So the radius, half the chord and the distance from the centre make a right triangle, with the radius as the longest side: r² = (half chord)² + d². Radius 5 and distance 3: half chord = √(25 − 9) = 4, so the chord is 8.'
+        picture:
+          kind: flow
+          steps:
+          - Radius r = 5 (longest side)
+          - Distance from centre d = 3
+          - Half chord = √(5² − 3²) = 4
+          - Chord = 2 × 4 = 8
+          alt: 'The radius, half the chord and the distance from the centre form a right triangle: 5² = 4² + 3².'
+        check:
+          prompt: Radius 10 cm, chord 8 cm from the centre. How long is half the chord?
+          options:
+          - 6 cm
+          - 2 cm
+          - 12 cm
+          answer: 6 cm
+          why: √(10² − 8²) = √36 = 6 cm, so the whole chord is 12 cm.
     items:
       - prompt: "The perpendicular from the centre of a circle to a chord:"
         options: ["cuts the chord into two equal parts", "is always as long as the chord", "cuts the chord in the ratio 1 : 2", "never meets the chord"]
@@ -153,6 +189,71 @@ concepts:
         hints: ["Half the chord is 8 cm.", "Radius = √(8² + 6²)."]
         solution: "Step 1: Radius = √(64 + 36) = 10 cm. Step 2: Diameter = 20 cm."
         mistakes: {"10": radius_diameter, "14": added_sides}
+      - prompt: A chord PQ is 14 cm long. The perpendicular from the centre meets it at N. How long is NQ, in cm?
+        answer: '7'
+        check: 14/2
+        difficulty: 1
+        hints:
+        - The perpendicular from the centre cuts the chord in half.
+        - Half of 14.
+        solution: 'Step 1: The perpendicular bisects PQ. Step 2: NQ = PQ ÷ 2. Step 3: = 7 cm.'
+        mistakes:
+          '14': perpendicular_bisects
+          '28': double_not_half
+      - prompt: A circle has a radius of 13 cm. A chord is 5 cm from the centre. How long is the chord, in cm?
+        answer: '24'
+        check: 2*sqrt(13**2 - 5**2)
+        difficulty: 1
+        hints:
+        - Half chord² = r² − d².
+        - 169 − 25 = 144.
+        solution: 'Step 1: Half chord² = 13² − 5² = 144. Step 2: Half chord = 12 cm. Step 3: Chord = 24 cm.'
+        mistakes:
+          '12': half_chord
+      - prompt: A chord 24 cm long is 9 cm from the centre of a circle. What is the radius, in cm?
+        answer: '15'
+        check: sqrt(12**2 + 9**2)
+        difficulty: 2
+        hints:
+        - Half the chord is 12 cm.
+        - r² = 12² + 9².
+        solution: 'Step 1: Half chord = 12. Step 2: r² = 144 + 81 = 225. Step 3: r = 15 cm.'
+        mistakes:
+          '25': half_chord
+          '30': double_not_half
+      - prompt: A circle has a radius of 17 cm and a chord 30 cm long. How far is the chord from the centre, in cm?
+        answer: '8'
+        check: sqrt(17**2 - 15**2)
+        difficulty: 2
+        hints:
+        - Half the chord is 15 cm.
+        - d² = 17² − 15².
+        solution: 'Step 1: Half chord = 15. Step 2: d² = 289 − 225 = 64. Step 3: d = 8 cm.'
+        mistakes:
+          '16': double_not_half
+      - prompt: 'In a circle of radius 5 cm, which chord is closer to the centre: a 6 cm chord or an 8 cm chord?'
+        options:
+        - The 8 cm chord
+        - The 6 cm chord
+        - They are the same distance
+        answer: The 8 cm chord
+        difficulty: 3
+        hints:
+        - 'Work out each distance: d² = r² − (half chord)².'
+        - Longer chords are nearer the centre.
+        solution: 'Step 1: 6 cm chord: d = √(25 − 9) = 4 cm. Step 2: 8 cm chord: d = √(25 − 16) = 3 cm. Step 3: So the 8 cm chord is closer.'
+        mistakes:
+          The 6 cm chord: diameter_longest
+      - prompt: Two parallel chords of a circle of radius 5 cm are 6 cm and 8 cm long, on opposite sides of the centre. How far apart are they, in cm?
+        answer: '7'
+        check: sqrt(25 - 9) + sqrt(25 - 16)
+        difficulty: 3
+        hints:
+        - Find each chord's distance from the centre.
+        - On opposite sides, add the distances.
+        solution: 'Step 1: 6 cm chord is 4 cm from the centre. Step 2: 8 cm chord is 3 cm from the centre. Step 3: Opposite sides: 4 + 3 = 7 cm.'
+        mistakes:
+          '1': same_side
 
   - code: math9.circparts.angles
     title: Angles in circles
@@ -213,6 +314,34 @@ concepts:
         - when:
             degrees: 250
           say: That's 360° − 110°, angles round a point. Opposite angles of a cyclic quadrilateral add to 180°, not 360°.
+    lesson:
+      - teach: Take an arc of a circle. The angle it makes at the centre is twice the angle it makes at any point on the rest of the circle. If arc AB makes 80° at the centre O, then from any point C on the rest of the circle, angle ACB = 40°.
+        check:
+          prompt: An arc makes 120° at the centre. What angle does it make at the circle?
+          options:
+          - 60°
+          - 240°
+          - 120°
+          answer: 60°
+          why: 'The angle at the circle is half the angle at the centre: 120 ÷ 2 = 60.'
+      - teach: 'Two results follow. Angles on the same arc, from points on the same side, are all equal (each is half the same centre angle). And a diameter makes 180° at the centre, so any angle standing on a diameter is 90°: the angle in a semicircle is a right angle.'
+        check:
+          prompt: AB is a diameter and C is on the circle. What is angle ACB?
+          options:
+          - 90°
+          - 180°
+          - 60°
+          answer: 90°
+          why: The diameter's centre angle is 180°, and half of it is 90°.
+      - teach: A quadrilateral with all four corners on a circle is called cyclic. Its opposite angles add up to 180°. If one angle is 110°, the angle opposite it is 70°.
+        check:
+          prompt: A cyclic quadrilateral has an angle of 95°. What is the opposite angle?
+          options:
+          - 85°
+          - 95°
+          - 265°
+          answer: 85°
+          why: 'Opposite angles add to 180°: 180 − 95 = 85.'
     items:
       - prompt: "An arc makes an angle of 80° at the centre. What angle does it make at a point on the rest of the circle, in degrees?"
         answer: "40"
@@ -277,6 +406,68 @@ concepts:
         hints: ["The angle at C is 90° because AB is a diameter.", "AB = √(6² + 8²)."]
         solution: "Step 1: Angle ACB = 90°. Step 2: AB = √(36 + 64) = 10 cm. Step 3: Radius = 5 cm."
         mistakes: {"10": radius_diameter, "7": added_sides}
+      - prompt: An arc makes an angle of 100° at the centre. What angle does it make at a point on the rest of the circle, in degrees?
+        answer: '50'
+        check: 100/2
+        difficulty: 1
+        hints:
+        - The angle at the circle is half the centre angle.
+        - Half of 100.
+        solution: 'Step 1: Angle at circle = centre angle ÷ 2. Step 2: 100 ÷ 2. Step 3: = 50°.'
+        mistakes:
+          '200': double_not_half
+      - prompt: An angle at the circle, standing on an arc, is 42°. What angle does the same arc make at the centre, in degrees?
+        answer: '84'
+        check: 42*2
+        difficulty: 1
+        hints:
+        - The centre angle is twice the angle at the circle.
+        - 2 × 42.
+        solution: 'Step 1: Centre angle = 2 × angle at circle. Step 2: 2 × 42. Step 3: = 84°.'
+        mistakes:
+          '21': double_not_half
+      - prompt: AB is a diameter of a circle and C is on the circle. Angle CAB = 25°. What is angle CBA, in degrees?
+        answer: '65'
+        check: 180 - 90 - 25
+        difficulty: 2
+        hints:
+        - Angle ACB stands on a diameter.
+        - Angle ACB = 90°, and the angles of triangle ABC add to 180°.
+        solution: 'Step 1: Angle ACB = 90°. Step 2: 180 − 90 − 25. Step 3: = 65°.'
+        mistakes:
+          '155': missed_right_angle
+      - prompt: A, B, C and D are on a circle, and C and D are on the same side of AB. Angle ACB = 38°. What is angle ADB, in degrees?
+        answer: '38'
+        check: '38'
+        difficulty: 2
+        hints:
+        - Both angles stand on the same arc AB.
+        - Angles on the same arc are equal.
+        solution: 'Step 1: Angles ACB and ADB stand on arc AB. Step 2: Angles on the same arc are equal. Step 3: So angle ADB = 38°.'
+        mistakes:
+          '76': same_arc_equal
+          '142': opposite_angles_cyclic
+      - prompt: PQRS is a cyclic quadrilateral. Angle P = 2 × angle R. What is angle P, in degrees?
+        answer: '120'
+        check: 180*2/3
+        difficulty: 3
+        hints:
+        - P and R are opposite, so P + R = 180°.
+        - 2R + R = 180.
+        solution: 'Step 1: P + R = 180°. Step 2: 3R = 180, so R = 60°. Step 3: P = 120°.'
+        mistakes:
+          '60': opposite_angles_cyclic
+      - prompt: AB is a diameter of a circle and C is on the circle. AC = 5 cm and BC = 12 cm. What is the diameter, in cm?
+        answer: '13'
+        check: sqrt(5**2 + 12**2)
+        difficulty: 3
+        hints:
+        - Angle ACB is a right angle.
+        - AB² = AC² + BC².
+        solution: 'Step 1: Angle ACB = 90°, since AB is a diameter. Step 2: AB² = 25 + 144 = 169. Step 3: AB = 13 cm.'
+        mistakes:
+          '6.5': half_chord
+          '17': missed_right_angle
 
   - code: math9.circparts.arcs_sectors
     title: Arcs and sectors
@@ -331,6 +522,34 @@ concepts:
         - when:
             a: 360
           say: That's the whole circumference, about 44 cm. 11 cm is a part of it.
+    lesson:
+      - teach: A whole turn is 360°. An arc whose angle at the centre is 90° is 90/360 = 1/4 of the circle. An arc of 60° is 60/360 = 1/6 of it. So an arc's length is (θ/360) × 2πr.
+        check:
+          prompt: What fraction of the circle is an arc of 120°?
+          options:
+          - 1/3
+          - 1/4
+          - 1/2
+          answer: 1/3
+          why: 120/360 = 1/3.
+      - teach: 'A sector is a slice of the circle between two radii, like a slice of pizza. Its area is the same fraction of the whole area: (θ/360) × πr². A 90° sector of a circle of radius 14 cm is 1/4 × 616 = 154 cm².'
+        check:
+          prompt: A circle has an area of 300 cm². What is the area of a 60° sector?
+          options:
+          - 50 cm²
+          - 60 cm²
+          - 100 cm²
+          answer: 50 cm²
+          why: 60/360 = 1/6, and 300 ÷ 6 = 50.
+      - teach: 'Watch which formula you need: arc length uses 2πr (a distance around), sector area uses πr² (a space inside). And you can go backwards: if an arc is 1/4 of the circumference, its angle is 90°.'
+        check:
+          prompt: An arc is half of the circle's circumference. What is its angle at the centre?
+          options:
+          - 180°
+          - 90°
+          - 360°
+          answer: 180°
+          why: Half of 360° is 180°.
     items:
       - prompt: "What fraction of a circle is a sector with a 90° angle? Type a fraction like 1/2."
         answer: "1/4"
@@ -403,3 +622,63 @@ concepts:
         hints: ["15 minutes is a quarter of an hour.", "Area swept = a quarter of a circle of radius 14."]
         solution: "Step 1: Full circle = 22/7 × 196 = 616 cm². Step 2: A quarter = 154 cm²."
         mistakes: {"22": arc_not_area, "616": sector_fraction}
+      - prompt: What fraction of a circle is a sector with a 45° angle? Type a fraction like 1/2.
+        answer: 1/8
+        check: 45/360
+        difficulty: 1
+        hints:
+        - A whole turn is 360°.
+        - 45/360, simplified.
+        solution: 'Step 1: Fraction = 45/360. Step 2: Divide top and bottom by 45. Step 3: = 1/8.'
+        mistakes:
+          1/4: arc_45
+      - prompt: A circle has a circumference of 60 cm. How long is the arc of a 120° sector, in cm?
+        answer: '20'
+        check: 60*120/360
+        difficulty: 1
+        hints:
+        - 120° is what fraction of 360°?
+        - 1/3 of 60.
+        solution: 'Step 1: 120/360 = 1/3. Step 2: 1/3 of 60. Step 3: = 20 cm.'
+        mistakes:
+          '120': arc_fraction
+      - prompt: A circle has a radius of 21 cm. Using π ≈ 22/7, what is the length of an arc with a 60° angle at the centre, in cm?
+        answer: '22'
+        check: 60/360*2*22/7*21
+        difficulty: 2
+        hints:
+        - Full circumference = 2 × 22/7 × 21 = 132 cm.
+        - 60° is 1/6 of the circle.
+        solution: 'Step 1: Circumference = 132 cm. Step 2: 60/360 = 1/6. Step 3: 132 ÷ 6 = 22 cm.'
+        mistakes:
+          '231': arc_not_area
+      - prompt: A circle has a radius of 7 cm. Using π ≈ 22/7, what is the area of a 120° sector, in cm²? Give your answer to two decimal places.
+        answer: '51.33'
+        check: round(120/360*22/7*49, 2)
+        difficulty: 2
+        hints:
+        - Full area = 154 cm².
+        - 120° is 1/3 of the circle.
+        solution: 'Step 1: Area of circle = 22/7 × 49 = 154 cm². Step 2: 120/360 = 1/3. Step 3: 154 ÷ 3 ≈ 51.33 cm².'
+        mistakes:
+          '14.67': arc_not_area
+      - prompt: A sector of a circle of radius 14 cm has an arc 22 cm long. What is its angle, in degrees? Use π ≈ 22/7.
+        answer: '90'
+        check: 22/(2*22/7*14)*360
+        difficulty: 3
+        hints:
+        - The full circumference is 88 cm.
+        - 22 is what fraction of 88?
+        solution: 'Step 1: Circumference = 2 × 22/7 × 14 = 88 cm. Step 2: 22/88 = 1/4. Step 3: 1/4 of 360° = 90°.'
+        mistakes:
+          '22': arc_to_angle
+      - prompt: The minute hand of a clock is 21 cm long. Using π ≈ 22/7, how far does its tip travel in 20 minutes, in cm?
+        answer: '44'
+        check: 20/60*2*22/7*21
+        difficulty: 3
+        hints:
+        - In 60 minutes the tip goes once round.
+        - 20 minutes is 1/3 of the way round.
+        solution: 'Step 1: Full circle = 2 × 22/7 × 21 = 132 cm. Step 2: 20 minutes = 1/3 of a turn. Step 3: 132 ÷ 3 = 44 cm.'
+        mistakes:
+          '462': arc_not_area
