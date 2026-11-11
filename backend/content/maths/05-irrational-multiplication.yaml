@@ -71,6 +71,34 @@ concepts:
         - when:
             a: 9
           say: '9 is a perfect square: √9 = 3. The goal asks for a and b that are not perfect squares.'
+    lesson:
+      - teach: 'What is √2 × √8? Square it: (√2 × √8)² = √2 × √2 × √8 × √8 = 2 × 8 = 16. A positive number whose square is 16 is 4. So √2 × √8 = √16 = 4. In general, √a × √b = √(ab).'
+        check:
+          prompt: What is √3 × √3?
+          options:
+          - '3'
+          - '9'
+          - √6
+          answer: '3'
+          why: √3 × √3 = √9 = 3. A root times itself gives back the number under it.
+      - teach: 'Often the product is not a perfect square, and that''s fine: √2 × √3 = √6, and we leave it as √6. When the product is a perfect square, finish it: √3 × √12 = √36 = 6.'
+        check:
+          prompt: What is √2 × √5?
+          options:
+          - √10
+          - √7
+          - '10'
+          answer: √10
+          why: 'Multiply under the root: 2 × 5 = 10. Adding (√7) is a different, wrong rule.'
+      - teach: 'Numbers in front multiply with each other, and roots with roots: 2√3 × 4√2 = (2 × 4) × (√3 × √2) = 8√6.'
+        check:
+          prompt: What is 3√2 × 2√5?
+          options:
+          - 6√10
+          - 5√7
+          - 6√7
+          answer: 6√10
+          why: 3 × 2 = 6 in front, and √2 × √5 = √10.
     items:
       - prompt: "What is √2 × √8?"
         answer: "4"
@@ -145,6 +173,73 @@ concepts:
         hints: ["Area = side × side = 2√3 × 2√3.", "2 × 2 = 4 and √3 × √3 = 3."]
         solution: "Step 1: 2√3 × 2√3 = 4 × 3. Step 2: Area = 12 cm²."
         mistakes: {"6": doubled_not_squared, "4": forgot_root}
+      - prompt: What is √2 × √18?
+        options:
+        - '6'
+        - √20
+        - '36'
+        - 2√5
+        answer: '6'
+        check: sqrt(2)*sqrt(18)
+        difficulty: 1
+        hints:
+        - Multiply the numbers under the roots.
+        - 2 × 18 = 36, a perfect square.
+        solution: 'Step 1: √2 × √18 = √36. Step 2: 36 = 6². Step 3: So the answer is 6.'
+        mistakes:
+          √20: added_under_root
+          '36': square_not_root_out
+      - prompt: What is √7 × √7?
+        options:
+        - '7'
+        - '49'
+        - √14
+        - '14'
+        answer: '7'
+        check: sqrt(7)*sqrt(7)
+        difficulty: 1
+        hints:
+        - What does √7 mean?
+        - √7 multiplied by itself gives the number under the root.
+        solution: 'Step 1: √7 × √7 = √49. Step 2: √49 = 7. Step 3: So the answer is 7.'
+        mistakes:
+          '49': square_not_root_out
+          √14: added_under_root
+      - prompt: What is √5 × √3?
+        options:
+        - √15
+        - √8
+        - '15'
+        - 2√2
+        answer: √15
+        check: sqrt(5)*sqrt(3)
+        difficulty: 2
+        hints:
+        - Multiply under the root.
+        - 15 is not a perfect square, so leave the root.
+        solution: 'Step 1: √5 × √3 = √(5 × 3). Step 2: = √15. Step 3: 15 has no perfect square factor, so √15 is the answer.'
+        mistakes:
+          √8: added_under_root
+      - prompt: What is 4√3 × √3?
+        answer: '12'
+        check: 4*sqrt(3)*sqrt(3)
+        difficulty: 2
+        hints:
+        - √3 × √3 first.
+        - √3 × √3 = 3, then multiply by 4.
+        solution: 'Step 1: √3 × √3 = 3. Step 2: 4 × 3 = 12. Step 3: So 4√3 × √3 = 12.'
+        mistakes:
+          '36': square_not_root_out
+      - prompt: A rectangle is 2√5 cm long and √20 cm wide. What is its area, in cm²?
+        answer: '20'
+        check: 2*sqrt(5)*sqrt(20)
+        difficulty: 3
+        hints:
+        - Area = length × width.
+        - √5 × √20 = √100.
+        solution: 'Step 1: 2√5 × √20 = 2 × √100. Step 2: √100 = 10. Step 3: 2 × 10 = 20 cm².'
+        mistakes:
+          '10': square_not_root_out
 
   - code: math9.irrmul.simplify
     title: Simplifying square roots
@@ -194,6 +289,34 @@ concepts:
         bin: 2√5
         clue: What is √4?
         why: √4 = 2, so √4 × √5 = 2√5.
+    lesson:
+      - teach: √12 can be written more simply. 12 = 4 × 3, and 4 is a perfect square. So √12 = √4 × √3 = 2√3. The perfect square comes out of the root as its square root.
+        check:
+          prompt: √20 = √4 × √5. What is that?
+          options:
+          - 2√5
+          - 4√5
+          - √5 × 2√2
+          answer: 2√5
+          why: '√4 = 2 comes out, and the 5 stays under the root: 2√5.'
+      - teach: 'Look for the largest perfect square that divides the number: 4, 9, 16, 25, 36, 49, 64, 81, 100… √72 = √36 × √2 = 6√2 in one step. Using √4 × √18 works too, but you''d have to simplify √18 again.'
+        check:
+          prompt: What is the largest perfect square that divides 50?
+          options:
+          - '25'
+          - '5'
+          - '10'
+          answer: '25'
+          why: 50 = 25 × 2, so √50 = 5√2.
+      - teach: 'Going backwards, put the number in front back under the root by squaring it: 3√5 = √9 × √5 = √45. A common slip is 3√5 = √15, which forgets to square the 3.'
+        check:
+          prompt: Which is the same as 2√7?
+          options:
+          - √28
+          - √14
+          - √49
+          answer: √28
+          why: 2 = √4, and √4 × √7 = √28.
     items:
       - prompt: "Simplify √12."
         options: ["2√3", "3√2", "6", "4√3"]
@@ -271,6 +394,77 @@ concepts:
         hints: ["To move 4 inside the root, square it.", "4² × 3 = ?"]
         solution: "Step 1: 4√3 = √16 × √3. Step 2: √(16 × 3) = √48."
         mistakes: {"√12": moved_in_without_square, "√7": added_under_root}
+      - prompt: Simplify √18.
+        options:
+        - 3√2
+        - 2√3
+        - 9√2
+        - 6√3
+        answer: 3√2
+        check: sqrt(18)
+        difficulty: 1
+        hints:
+        - Find a perfect square that divides 18.
+        - 18 = 9 × 2.
+        solution: 'Step 1: 18 = 9 × 2. Step 2: √18 = √9 × √2. Step 3: = 3√2.'
+        mistakes:
+          9√2: square_not_root_out
+      - prompt: Simplify √27.
+        options:
+        - 3√3
+        - 9√3
+        - 3√9
+        - √9 + √3
+        answer: 3√3
+        check: sqrt(27)
+        difficulty: 1
+        hints:
+        - 27 = 9 × 3.
+        - √9 comes out as 3.
+        solution: 'Step 1: 27 = 9 × 3. Step 2: √27 = √9 × √3. Step 3: = 3√3.'
+        mistakes:
+          9√3: square_not_root_out
+      - prompt: √80 = a√5. What is a?
+        answer: '4'
+        check: sqrt(80/5)
+        difficulty: 2
+        hints:
+        - 80 = 16 × 5.
+        - √16 comes out.
+        solution: 'Step 1: 80 = 16 × 5. Step 2: √80 = √16 × √5 = 4√5. Step 3: So a = 4.'
+        mistakes:
+          '16': square_not_root_out
+      - prompt: Which of these is the same as 5√2?
+        options:
+        - √50
+        - √10
+        - √25
+        - √7
+        answer: √50
+        check: 5*sqrt(2)
+        difficulty: 2
+        hints:
+        - Put the 5 back under the root by squaring it.
+        - 5² = 25, and 25 × 2 = 50.
+        solution: 'Step 1: 5 = √25. Step 2: √25 × √2 = √50. Step 3: So 5√2 = √50.'
+        mistakes:
+          √10: moved_in_without_square
+      - prompt: Simplify √288.
+        options:
+        - 12√2
+        - 6√2
+        - 8√2
+        - 24√2
+        answer: 12√2
+        check: sqrt(288)
+        difficulty: 3
+        hints:
+        - Look for the largest perfect square that divides 288.
+        - 288 = 144 × 2.
+        solution: 'Step 1: 288 = 144 × 2. Step 2: √144 = 12. Step 3: √288 = 12√2.'
+        mistakes:
+          6√2: wrong_square_factor
+          24√2: square_not_root_out
 
   - code: math9.irrmul.add
     title: Adding and subtracting square roots
@@ -315,6 +509,33 @@ concepts:
         bin: Yes, one term
         clue: 'Both count the same thing: √7. How many √7s altogether?'
         why: '2 of √7 plus 1 of √7 is 3√7: one term.'
+    lesson:
+      - teach: 'Roots of the same number add like apples: 2√3 + 5√3 = 7√3, just as 2 apples + 5 apples = 7 apples. Subtraction works the same: 6√5 − 2√5 = 4√5.'
+        check:
+          prompt: What is 4√2 + 3√2?
+          options:
+          - 7√2
+          - 7√4
+          - 12√2
+          answer: 7√2
+          why: 'Both are √2, so add the numbers in front: 4 + 3 = 7.'
+      - teach: '√a + √b is NOT √(a + b). Test it: √9 + √16 = 3 + 4 = 7, but √25 = 5. Different roots can''t be combined as they are.'
+        check:
+          prompt: Is √4 + √9 the same as √13?
+          options:
+          - No, √4 + √9 = 5, but √13 is not 5
+          - 'Yes'
+          answer: No, √4 + √9 = 5, but √13 is not 5
+          why: 2 + 3 = 5, and 5² = 25, not 13.
+      - teach: But simplifying first can make them alike. √8 + √2 = 2√2 + √2 = 3√2. √12 + √27 = 2√3 + 3√3 = 5√3.
+        check:
+          prompt: What is √18 + √2?
+          options:
+          - 4√2
+          - √20
+          - 3√2
+          answer: 4√2
+          why: √18 = 3√2, and 3√2 + √2 = 4√2.
     items:
       - prompt: "What is 2√3 + 5√3?"
         options: ["7√3", "7√6", "10√3", "√21"]
@@ -392,6 +613,85 @@ concepts:
         hints: ["Perimeter = 2 × (length + width).", "√50 = 5√2 and √18 = 3√2."]
         solution: "Step 1: √50 + √18 = 5√2 + 3√2 = 8√2. Step 2: Perimeter = 2 × 8√2 = 16√2 cm."
         mistakes: {"8√2": perimeter_half, "2√68": root_of_sum}
+      - prompt: What is 9√7 − 4√7?
+        options:
+        - 5√7
+        - '5'
+        - 13√7
+        - √35
+        answer: 5√7
+        check: 9*sqrt(7) - 4*sqrt(7)
+        difficulty: 1
+        hints:
+        - Both are √7.
+        - Subtract the numbers in front.
+        solution: 'Step 1: Both terms are multiples of √7. Step 2: 9 − 4 = 5. Step 3: So 5√7.'
+        mistakes:
+          13√7: like_terms
+          '5': like_terms
+      - prompt: What is √3 + 2√3 + 3√3?
+        options:
+        - 6√3
+        - 6√9
+        - 5√3
+        - √18
+        answer: 6√3
+        check: sqrt(3) + 2*sqrt(3) + 3*sqrt(3)
+        difficulty: 1
+        hints:
+        - √3 on its own counts as 1√3.
+        - 1 + 2 + 3.
+        solution: 'Step 1: All three are √3. Step 2: 1 + 2 + 3 = 6. Step 3: So 6√3.'
+        mistakes:
+          6√9: added_under_root
+          5√3: like_terms
+      - prompt: What is √32 + √8?
+        options:
+        - 6√2
+        - √40
+        - 2√10
+        - 8√2
+        answer: 6√2
+        check: sqrt(32) + sqrt(8)
+        difficulty: 2
+        hints:
+        - Simplify each root first.
+        - √32 = 4√2 and √8 = 2√2.
+        solution: 'Step 1: √32 = 4√2. Step 2: √8 = 2√2. Step 3: 4√2 + 2√2 = 6√2.'
+        mistakes:
+          √40: root_of_sum
+          2√10: root_of_sum
+      - prompt: What is √75 − √12?
+        options:
+        - 3√3
+        - √63
+        - 7√3
+        - 3√7
+        answer: 3√3
+        check: sqrt(75) - sqrt(12)
+        difficulty: 2
+        hints:
+        - Simplify each root first.
+        - √75 = 5√3 and √12 = 2√3.
+        solution: 'Step 1: √75 = 5√3. Step 2: √12 = 2√3. Step 3: 5√3 − 2√3 = 3√3.'
+        mistakes:
+          √63: root_of_sum
+          7√3: added_outside
+      - prompt: A square has sides of √8 cm. What is its perimeter, in cm?
+        options:
+        - 8√2
+        - 4√2
+        - 2√2
+        - '16'
+        answer: 8√2
+        check: 4*sqrt(8)
+        difficulty: 3
+        hints:
+        - Perimeter = 4 × side.
+        - √8 = 2√2.
+        solution: 'Step 1: √8 = 2√2. Step 2: Perimeter = 4 × 2√2. Step 3: = 8√2 cm.'
+        mistakes:
+          '16': square_not_root_out
 
   - code: math9.irrmul.divide
     title: Dividing square roots
@@ -444,6 +744,34 @@ concepts:
             a: 6
             b: 2
           say: '√6 ÷ √2 = √3, about 1.73, not 3. Dividing roots divides what''s inside: 6 ÷ 2 = 3 stays under the root. What''s inside must be 3², not 3.'
+    lesson:
+      - teach: 'Dividing works like multiplying: √a ÷ √b = √(a ÷ b). So √18 ÷ √2 = √9 = 3. And √50 ÷ √2 = √25 = 5.'
+        check:
+          prompt: What is √32 ÷ √2?
+          options:
+          - '4'
+          - √30
+          - '16'
+          answer: '4'
+          why: √(32 ÷ 2) = √16 = 4.
+      - teach: 'A root at the bottom of a fraction is awkward. Multiply the top and the bottom by that root to move it: 1/√2 = (1 × √2)/(√2 × √2) = √2/2. The value doesn''t change, because we multiplied by √2/√2 = 1.'
+        check:
+          prompt: To clear the root from 5/√3, what do you multiply the top and bottom by?
+          options:
+          - √3
+          - '3'
+          - '5'
+          answer: √3
+          why: '√3 × √3 = 3, so the bottom becomes 3: 5/√3 = 5√3/3.'
+      - teach: 'Then simplify if you can: 6/√3 = 6√3/3 = 2√3. It also makes decimals easy: 1/√2 = √2/2 ≈ 1.414 ÷ 2 = 0.707.'
+        check:
+          prompt: What is 4/√2 without a root at the bottom?
+          options:
+          - 2√2
+          - 4√2
+          - √2/4
+          answer: 2√2
+          why: 4/√2 = 4√2/2 = 2√2.
     items:
       - prompt: "What is √18 ÷ √2?"
         answer: "3"
@@ -519,6 +847,71 @@ concepts:
         hints: ["3/√3 = 3√3/3.", "That simplifies to √3."]
         solution: "Step 1: 3/√3 = 3√3/3 = √3. Step 2: √3 ≈ 1.732."
         mistakes: {"5.196": rationalise_both, "0.577": rationalise_half}
+      - prompt: What is √27 ÷ √3?
+        answer: '3'
+        check: sqrt(27)/sqrt(3)
+        difficulty: 1
+        hints:
+        - Divide under the root.
+        - 27 ÷ 3 = 9.
+        solution: 'Step 1: √27 ÷ √3 = √(27 ÷ 3). Step 2: = √9. Step 3: = 3.'
+        mistakes:
+          '9': square_not_root_out
+      - prompt: Write 1/√5 without a root at the bottom.
+        options:
+        - √5/5
+        - 5/√5
+        - √5
+        - 1/5
+        answer: √5/5
+        check: 1/sqrt(5)
+        difficulty: 1
+        hints:
+        - Multiply the top and the bottom by √5.
+        - √5 × √5 = 5.
+        solution: 'Step 1: Multiply top and bottom by √5. Step 2: The top becomes √5 and the bottom 5. Step 3: So √5/5.'
+        mistakes:
+          √5: rationalise_both
+      - prompt: Write 12/√6 without a root at the bottom.
+        options:
+        - 2√6
+        - 12√6
+        - √6/2
+        - 6√2
+        answer: 2√6
+        check: 12/sqrt(6)
+        difficulty: 2
+        hints:
+        - Multiply the top and the bottom by √6.
+        - 12√6/6 can be simplified.
+        solution: 'Step 1: 12/√6 = 12√6/6. Step 2: 12 ÷ 6 = 2. Step 3: So 2√6.'
+        mistakes:
+          12√6: rationalise_both
+      - prompt: Using √5 ≈ 2.236, what is 5/√5, to three decimal places?
+        answer: '2.236'
+        check: '2.236'
+        difficulty: 2
+        hints:
+        - 'Clear the root first: 5/√5 = 5√5/5.'
+        - That is just √5.
+        solution: 'Step 1: 5/√5 = 5√5/5. Step 2: = √5. Step 3: ≈ 2.236.'
+        mistakes:
+          '1.118': rationalise_half
+      - prompt: Simplify √(5/9).
+        options:
+        - √5/3
+        - 5/3
+        - √5/9
+        - √(5/3)
+        answer: √5/3
+        check: sqrt(5/9)
+        difficulty: 3
+        hints:
+        - Take the root of the top and of the bottom.
+        - √9 = 3.
+        solution: 'Step 1: √(5/9) = √5/√9. Step 2: √9 = 3. Step 3: So √5/3.'
+        mistakes:
+          √5/9: rationalise_half
 
   - code: math9.irrmul.identities
     title: Identities with square roots
@@ -579,6 +972,34 @@ concepts:
             a: 7
             b: 5
           say: (√7 + √5)(√7 − √5) = 7 − 5 = 2. The square roots vanish and leave a − b, so a − b has to be 5.
+    lesson:
+      - teach: The identities from chapter 4 work with roots too. (√3 + √2)(√3 − √2) is a sum times a difference, so it is (√3)² − (√2)² = 3 − 2 = 1. The roots vanish.
+        check:
+          prompt: What is (√5 + √2)(√5 − √2)?
+          options:
+          - '3'
+          - √3
+          - '7'
+          answer: '3'
+          why: (√5)² − (√2)² = 5 − 2 = 3.
+      - teach: 'Squares of sums keep a root in the middle: (√2 + 1)² = (√2)² + 2 × √2 × 1 + 1² = 2 + 2√2 + 1 = 3 + 2√2. Squares of differences: (√5 − 1)² = 5 − 2√5 + 1 = 6 − 2√5.'
+        check:
+          prompt: What is (√3 + 1)²?
+          options:
+          - 4 + 2√3
+          - '4'
+          - 3 + 2√3
+          answer: 4 + 2√3
+          why: 3 + 2√3 + 1 = 4 + 2√3.
+      - teach: 'The sum-times-difference trick clears roots from the bottom of a fraction. 1/(√3 + √2): multiply top and bottom by √3 − √2. The bottom becomes 3 − 2 = 1, so the answer is √3 − √2.'
+        check:
+          prompt: To clear the roots from 1/(√5 + √3), multiply the top and bottom by what?
+          options:
+          - √5 − √3
+          - √5 + √3
+          - √15
+          answer: √5 − √3
+          why: (√5 + √3)(√5 − √3) = 5 − 3 = 2, which has no root.
     items:
       - prompt: "What is (√3 + √2)(√3 − √2)?"
         answer: "1"
@@ -653,3 +1074,70 @@ concepts:
         hints: ["Multiply top and bottom by √5 + 1.", "The bottom becomes 5 − 1 = 4."]
         solution: "Step 1: 2(√5 + 1)/((√5 − 1)(√5 + 1)) = 2(√5 + 1)/4. Step 2: = (√5 + 1)/2."
         mistakes: {"√5 + 1": rationalise_both, "(√5 − 1)/2": root_of_sum}
+      - prompt: What is (√6 + 1)(√6 − 1)?
+        answer: '5'
+        check: (sqrt(6) + 1)*(sqrt(6) - 1)
+        difficulty: 1
+        hints:
+        - It is a sum times a difference.
+        - (√6)² − 1².
+        solution: 'Step 1: (a + b)(a − b) = a² − b². Step 2: (√6)² − 1² = 6 − 1. Step 3: = 5.'
+        mistakes:
+          '7': roots_cancel
+      - prompt: What is (√11 + 3)(√11 − 3)?
+        answer: '2'
+        check: (sqrt(11) + 3)*(sqrt(11) - 3)
+        difficulty: 1
+        hints:
+        - Sum times difference.
+        - 11 − 9.
+        solution: 'Step 1: (√11)² = 11. Step 2: 3² = 9. Step 3: 11 − 9 = 2.'
+        mistakes:
+          '8': roots_cancel
+      - prompt: Expand (√3 − 1)².
+        options:
+        - 4 − 2√3
+        - '2'
+        - '4'
+        - 3 − 2√3
+        answer: 4 − 2√3
+        check: expand((sqrt(3) - 1)**2)
+        difficulty: 2
+        hints:
+        - (a − b)² = a² − 2ab + b².
+        - 3 − 2√3 + 1.
+        solution: 'Step 1: (√3)² = 3. Step 2: −2 × √3 × 1 = −2√3. Step 3: 3 − 2√3 + 1 = 4 − 2√3.'
+        mistakes:
+          '2': missing_double
+          '4': missing_double
+      - prompt: Expand (√5 + √2)².
+        options:
+        - 7 + 2√10
+        - '7'
+        - 7 + √10
+        - 25 + 2√10
+        answer: 7 + 2√10
+        check: expand((sqrt(5) + sqrt(2))**2)
+        difficulty: 2
+        hints:
+        - (a + b)² = a² + 2ab + b².
+        - 5 + 2√10 + 2.
+        solution: 'Step 1: (√5)² = 5 and (√2)² = 2. Step 2: 2 × √5 × √2 = 2√10. Step 3: 5 + 2 + 2√10 = 7 + 2√10.'
+        mistakes:
+          '7': missing_double
+          7 + √10: missing_double
+      - prompt: Write 4/(√7 + √3) without roots at the bottom.
+        options:
+        - √7 − √3
+        - √7 + √3
+        - 4(√7 − √3)
+        - (√7 − √3)/4
+        answer: √7 − √3
+        check: 4/(sqrt(7) + sqrt(3))
+        difficulty: 3
+        hints:
+        - Multiply the top and bottom by the bottom with its sign changed.
+        - The bottom becomes 7 − 3 = 4.
+        solution: 'Step 1: Multiply top and bottom by √7 − √3. Step 2: The bottom is 7 − 3 = 4 and the top is 4(√7 − √3). Step 3: 4(√7 − √3)/4 = √7 − √3.'
+        mistakes:
+          4(√7 − √3): rationalise_half
