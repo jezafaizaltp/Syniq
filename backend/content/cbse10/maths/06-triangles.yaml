@@ -11,6 +11,10 @@ tips:
   t10_same_ratio_parallel: "Both sides are cut in the same ratio. Which theorem turns equal ratios into a fact about the line ST?"
   t10_scale_factor: "Divide each side of the big triangle by the matching side of the small one. Same number each time?"
   t10_similarity_tests: "AA, SSS and SAS work. With two sides and an angle, the angle must be BETWEEN the sides."
+  c10m6_same_ratio: 'With DE ∥ BC, the small piece over the other piece on one side equals the matching ratio on the other side: AD/DB = AE/EC. Line the parts up before you cross-multiply.'
+  c10m6_whole_side: For the parallel side DE compared with BC, use the whole side AD/AB, not AD/DB.
+  c10m6_match: 'Read the letters in order: if △ABC ~ △PQR then A↔P, B↔Q, C↔R. Pair sides by those letters.'
+  c10m6_tests: Similarity needs AA, SSS (all ratios equal) or SAS (an angle between two sides in the same ratio). An angle that is not between the two sides doesn't count.
 concepts:
 - code: cbse10m.tri.bpt
   title: Basic Proportionality Theorem
@@ -117,6 +121,62 @@ concepts:
           db: 3
           ad: 3
         say: AD = DB makes AE = EC = 4. Here EC is half of AE, so DB is half of AD.
+  lesson:
+    - teach: 'Similar figures have the same shape but maybe not the same size: matching angles are equal and matching sides are in the same ratio. All circles are similar; all squares are similar; but two rectangles need not be.'
+      check:
+        prompt: Which pair is always similar?
+        options:
+        - Two squares
+        - Two rectangles
+        - Two triangles
+        answer: Two squares
+        why: All angles 90° and all sides in one ratio.
+    - teach: 'Basic Proportionality Theorem (Thales): if a line parallel to one side of a triangle cuts the other two sides, it divides them in the same ratio. In △ABC with DE ∥ BC (D on AB, E on AC): AD/DB = AE/EC. The converse also holds: if AD/DB = AE/EC, then DE ∥ BC.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 3
+          - 6
+          B:
+          - 0
+          - 0
+          C:
+          - 6
+          - 0
+          D:
+          - 2
+          - 4
+          E:
+          - 4
+          - 4
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        - - D
+          - E
+        alt: Triangle ABC with segment DE parallel to BC, cutting AB at D and AC at E.
+      check:
+        prompt: AD = 2, DB = 4, AE = 3. EC = ?
+        options:
+        - '6'
+        - '1.5'
+        - '8'
+        answer: '6'
+        why: 2/4 = 3/EC gives EC = 6.
+    - teach: 'Because △ADE ~ △ABC, the parallel side compares with the whole sides: DE/BC = AD/AB. Use AB = AD + DB, not DB alone.'
+      check:
+        prompt: AD = 2, DB = 4, BC = 9. DE = ?
+        options:
+        - '3'
+        - '4.5'
+        - '6'
+        answer: '3'
+        why: DE/9 = 2/6.
   items:
   - prompt: In triangle ABC, DE ∥ BC. AD = 2 cm, DB = 3 cm and AE = 4 cm. Find EC in cm.
     answer: '6'
@@ -183,6 +243,118 @@ concepts:
     solution: 'Step 1: AD : DB = 1 : 2, so AD/AB = 1/3. Step 2: Triangles ADE and ABC are similar, so DE/BC = 1/3. Step 3: DE = 3 cm.'
     mistakes:
       9/2: c10_part_not_whole
+  - prompt: In △ABC, DE ∥ BC with AD = 4 cm, DB = 6 cm and AE = 5 cm. Find AC in cm. Type a decimal.
+    answer: '12.5'
+    check: 5 + 5 * 6 / 4
+    difficulty: 2
+    hints:
+    - First find EC from AD/DB = AE/EC.
+    - Then AC = AE + EC.
+    solution: 'Step 1: 4/6 = 5/EC, so EC = 7.5. Step 2: AC = 5 + 7.5 = 12.5 cm.'
+    mistakes:
+      '7.5': c10m6_whole_side
+      '3.33': c10m6_same_ratio
+  - prompt: In △PQR, ST ∥ QR with PS = 3, SQ = 9 and PT = 2. Find TR.
+    answer: '6'
+    check: 2 * 9 / 3
+    difficulty: 1
+    hints:
+    - PS/SQ = PT/TR.
+    - 3/9 = 2/TR.
+    solution: TR = 2 × 9 ÷ 3 = 6.
+    mistakes:
+      '18': c10m6_same_ratio
+  - prompt: D and E are on AB and AC with AD = 3, DB = 5, AE = 4.5, EC = 7.5. Is DE ∥ BC?
+    options:
+    - Yes, the ratios are equal
+    - No, the ratios differ
+    - Only if AB = AC
+    - Cannot be decided
+    answer: Yes, the ratios are equal
+    difficulty: 2
+    hints:
+    - Find AD/DB and AE/EC.
+    - 3/5 and 4.5/7.5.
+    solution: 3/5 = 0.6 and 4.5/7.5 = 0.6; equal ratios, so by the converse of BPT, DE ∥ BC.
+    mistakes:
+      No, the ratios differ: c10m6_same_ratio
+  - prompt: In △ABC, DE ∥ BC, AD = 3 cm, AB = 12 cm and BC = 16 cm. Find DE in cm.
+    answer: '4'
+    check: 16 * 3 / 12
+    difficulty: 2
+    hints:
+    - DE/BC = AD/AB.
+    - Use the whole side AB.
+    solution: DE = 16 × 3/12 = 4 cm.
+    mistakes:
+      '5.33': c10m6_whole_side
+      '48': c10m6_same_ratio
+  - prompt: A line through the mid-point of one side of a triangle, parallel to another side, meets the third side at…
+    options:
+    - Its mid-point
+    - A vertex
+    - One-third of the way
+    - Nowhere
+    answer: Its mid-point
+    difficulty: 2
+    hints:
+    - AD/DB = 1.
+    - So AE/EC = 1 too.
+    solution: By BPT, AD/DB = 1 forces AE/EC = 1, so E is the mid-point.
+    mistakes:
+      One-third of the way: c10m6_same_ratio
+  - prompt: Which pair of figures is NOT always similar?
+    options:
+    - Two rhombuses
+    - Two circles
+    - Two equilateral triangles
+    - Two squares
+    answer: Two rhombuses
+    difficulty: 1
+    hints:
+    - Similar needs equal angles.
+    - Can a rhombus be squashed?
+    solution: Rhombuses can have different angles, so they need not be similar.
+    mistakes:
+      Two equilateral triangles: c10m6_tests
+  - prompt: DE ∥ BC in △ABC with AD/DB = 3/4. Find AE/AC as a fraction.
+    answer: 3/7
+    check: 3/7
+    difficulty: 3
+    hints:
+    - AE/EC = 3/4.
+    - AC = AE + EC = 3 + 4 parts.
+    solution: 'Step 1: AE : EC = 3 : 4. Step 2: AE/AC = 3/(3 + 4) = 3/7.'
+    mistakes:
+      3/4: c10m6_whole_side
+  - prompt: Who is the Basic Proportionality Theorem also named after?
+    options:
+    - Thales
+    - Pythagoras
+    - Euclid
+    - Brahmagupta
+    answer: Thales
+    difficulty: 1
+    hints:
+    - A Greek mathematician.
+    - Not the right-triangle one.
+    solution: BPT is also called Thales' theorem.
+    mistakes:
+      Pythagoras: c10m6_tests
+  - prompt: In trapezium ABCD with AB ∥ DC, diagonals meet at O. Which is true?
+    options:
+    - AO/OC = BO/OD
+    - AO = OC
+    - AO/OC = OD/BO
+    - AO + OC = BD
+    answer: AO/OC = BO/OD
+    difficulty: 3
+    hints:
+    - △AOB ~ △COD by AA.
+    - Match the sides in order.
+    solution: △AOB ~ △COD (alternate angles), so AO/OC = BO/OD.
+    mistakes:
+      AO/OC = OD/BO: c10m6_match
 - code: cbse10m.tri.similar
   title: Similarity criteria
   after:
@@ -288,6 +460,39 @@ concepts:
       bin: Not similar
       clue: Could one be tall and thin, the other short and wide?
       why: Isosceles triangles can have different angles, so not always similar.
+  lesson:
+    - teach: 'Two triangles are similar if matching angles are equal and matching sides are in the same ratio. You don''t need to check everything: AA (two angles equal) is enough, because the third angle then matches too.'
+      check:
+        prompt: Two angles of one triangle are 40° and 75°, and of another 40° and 65°. Similar?
+        options:
+        - 'Yes'
+        - 'No'
+        - Cannot tell
+        answer: 'Yes'
+        why: 'The third angles are 65° and 75°: all three match.'
+    - teach: 'SSS: all three side ratios equal. SAS: one angle equal and the two sides around it in the same ratio. SSA is NOT a test. The letter order matters: △ABC ~ △PQR means A↔P, B↔Q, C↔R, so AB/PQ = BC/QR = CA/RP.'
+      picture:
+        kind: compare
+        columns:
+        - title: Valid tests
+          points:
+          - AA
+          - SSS (ratios)
+          - SAS (included angle)
+        - title: Not a test
+          points:
+          - SSA
+          - Just one angle
+          - Just one ratio
+        alt: Valid similarity tests AA, SSS and SAS compared with invalid ones.
+      check:
+        prompt: △ABC ~ △XYZ. Which side matches BC?
+        options:
+        - YZ
+        - XY
+        - XZ
+        answer: YZ
+        why: B↔Y and C↔Z.
   items:
   - prompt: Which is NOT a test for similar triangles?
     options:
@@ -354,3 +559,111 @@ concepts:
     solution: 'Step 1: Perimeters scale like sides: 24/P = 2/3. Step 2: P = 36 cm.'
     mistakes:
       '16': c10_ratio_upside
+  - prompt: △ABC ~ △DEF with AB = 3 cm, DE = 9 cm and AC = 4 cm. Find DF in cm.
+    answer: '12'
+    check: 4 * 9 / 3
+    difficulty: 1
+    hints:
+    - Scale factor DE/AB = 3.
+    - DF matches AC.
+    solution: DF = 4 × 3 = 12 cm.
+    mistakes:
+      '6.75': c10m6_match
+      '1.33': c10m6_match
+  - prompt: Sides 2, 3, 4 and 4, 6, 8. Are the triangles similar?
+    options:
+    - Yes, by SSS
+    - Yes, by AA
+    - 'No'
+    - Only by SAS
+    answer: Yes, by SSS
+    difficulty: 1
+    hints:
+    - Find each ratio.
+    - 4/2, 6/3, 8/4.
+    solution: All ratios are 2, so the triangles are similar by SSS.
+    mistakes:
+      'No': c10m6_tests
+  - prompt: A 6 m pole casts a 4 m shadow while a tower casts a 28 m shadow. Find the tower's height in metres.
+    answer: '42'
+    check: 6 * 28 / 4
+    difficulty: 2
+    hints:
+    - Sun rays make similar triangles.
+    - height/shadow is the same.
+    solution: 6/4 = h/28, so h = 42 m.
+    mistakes:
+      '18.67': c10m6_match
+  - prompt: In △PQR and △XYZ, PQ/XY = PR/XZ and ∠P = ∠X. By which test are they similar?
+    options:
+    - SAS
+    - SSS
+    - AA
+    - SSA
+    answer: SAS
+    difficulty: 2
+    hints:
+    - Two sides in ratio and one angle.
+    - Is ∠P between PQ and PR?
+    solution: ∠P is between PQ and PR, so it is SAS similarity.
+    mistakes:
+      SSA: c10m6_tests
+  - prompt: △ABC ~ △PQR with ∠A = 47° and ∠Q = 83°. Find ∠R in degrees.
+    answer: '50'
+    check: 180 - 47 - 83
+    difficulty: 1
+    hints:
+    - ∠P = ∠A = 47°.
+    - Angles of a triangle add to 180°.
+    solution: ∠R = 180 − 47 − 83 = 50°.
+    mistakes:
+      '47': c10m6_match
+      '83': c10m6_match
+  - prompt: Two similar triangles have perimeters 30 cm and 20 cm. A side of the larger is 12 cm. Find the matching side of the smaller, in cm.
+    answer: '8'
+    check: 12 * 20 / 30
+    difficulty: 2
+    hints:
+    - Perimeters are in the side ratio.
+    - 'Ratio 2 : 3.'
+    solution: Side = 12 × 20/30 = 8 cm.
+    mistakes:
+      '18': c10m6_match
+  - prompt: A girl 90 cm tall walks away from a lamp post 3.6 m high at 1.2 m/s. How long is her shadow after 4 s, in metres?
+    answer: '1.6'
+    check: 4.8 * 0.9 / (3.6 - 0.9)
+    difficulty: 3
+    hints:
+    - After 4 s she is 4.8 m from the post.
+    - s/0.9 = (4.8 + s)/3.6.
+    solution: 'Step 1: 3.6s = 0.9(4.8 + s). Step 2: 2.7s = 4.32, so s = 1.6 m.'
+    mistakes:
+      '1.2': c10m6_match
+  - prompt: Which is NOT enough to prove two triangles similar?
+    options:
+    - Two sides in proportion and a non-included angle equal
+    - Two angles equal
+    - Three sides in proportion
+    - Two sides in proportion and the included angle equal
+    answer: Two sides in proportion and a non-included angle equal
+    difficulty: 2
+    hints:
+    - That is SSA.
+    - The angle must be between the sides.
+    solution: SSA is not a similarity test; the angle must be the included angle (SAS).
+    mistakes:
+      Two sides in proportion and the included angle equal: c10m6_tests
+  - prompt: In △ABC, DE ∥ BC. Which similarity is correct?
+    options:
+    - △ADE ~ △ABC
+    - △ADE ~ △CBA
+    - △ADE ~ △BCA
+    - △DEA ~ △ABC
+    answer: △ADE ~ △ABC
+    difficulty: 2
+    hints:
+    - A is common.
+    - D matches B and E matches C.
+    solution: ∠A common and corresponding angles at D, B and E, C are equal, so △ADE ~ △ABC in that order.
+    mistakes:
+      △ADE ~ △CBA: c10m6_match

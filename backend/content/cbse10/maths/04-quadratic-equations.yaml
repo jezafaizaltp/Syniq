@@ -12,6 +12,11 @@ tips:
   t10_formula_2a: "x = (−b ± √D) / 2a. With a = 2 the bottom is 4, and −b is −1."
   t10_quadratic_power_two: "A quadratic has highest power 2. Look at the highest power in each option."
   t10_split_middle: "Multiply a × c, then find two numbers with that product that add to b. Split the middle term with them, group in pairs and factorise."
+  c10m4_pair: Look for two numbers that multiply to a × c and add to b. Check both conditions before splitting.
+  c10m4_bracket_sign: If a bracket is (x + 3), setting it to 0 gives x = −3, not 3. Flip the sign when you solve each bracket.
+  c10m4_D: "Work out D = b² − 4ac carefully, signs included. Is it above zero, exactly zero or below zero? Then picture the parabola: does it cross, touch or miss the x-axis?"
+  c10m4_sense: In a word problem, a length, age or count cannot be negative. Keep the root that makes sense.
+  c10m4_formula: In x = (−b ± √D) / 2a, divide the whole top by 2a, and start with −b, not b.
 concepts:
 - code: cbse10m.quad.factorise
   title: Solving quadratic equations by factorising
@@ -92,6 +97,43 @@ concepts:
       - when:
           x: 8
         say: That's positive. The negative root makes (x + 8) = 0.
+  lesson:
+    - teach: 'A quadratic equation has the form ax² + bx + c = 0 with a ≠ 0. Its roots are the values of x that make it true. To solve by factorising, split the middle term: find two numbers that multiply to ac and add to b.'
+      check:
+        prompt: For x² + 5x + 6, which two numbers multiply to 6 and add to 5?
+        options:
+        - 2 and 3
+        - 1 and 6
+        - −2 and −3
+        answer: 2 and 3
+        why: 2 × 3 = 6 and 2 + 3 = 5.
+    - teach: 'Then factorise and set each bracket to zero. 2x² − 5x + 3 = 0: ac = 6, numbers −2 and −3. 2x² − 2x − 3x + 3 = 2x(x − 1) − 3(x − 1) = (2x − 3)(x − 1). So x = 3/2 or x = 1.'
+      picture:
+        kind: flow
+        steps:
+        - 2x² − 5x + 3 = 0
+        - 'Split: −2x − 3x'
+        - 2x(x − 1) − 3(x − 1)
+        - (2x − 3)(x − 1) = 0
+        - x = 3/2 or x = 1
+        alt: Solving 2x squared minus 5x plus 3 equals 0 by splitting the middle term.
+      check:
+        prompt: (x + 4)(x − 7) = 0 gives…
+        options:
+        - x = −4 or 7
+        - x = 4 or −7
+        - x = 4 or 7
+        answer: x = −4 or 7
+        why: Each bracket is zero at the opposite sign.
+    - teach: 'Many problems lead to quadratics: areas, consecutive numbers, ages, speeds. Solve, then reject roots that make no sense, like a negative length.'
+      check:
+        prompt: A width comes out as 6 or −9 metres. Which is the answer?
+        options:
+        - 6 m
+        - −9 m
+        - Both
+        answer: 6 m
+        why: A width cannot be negative.
   items:
   - prompt: Solve x² − 5x + 6 = 0. Give the larger root.
     answer: '3'
@@ -155,6 +197,110 @@ concepts:
     solution: 'Step 1: x² + x − 306 = 0. Step 2: (x + 18)(x − 17) = 0. Step 3: x must be positive, so x = 17 (and 17 × 18 = 306).'
     mistakes:
       '18': c10_other_unknown
+  - prompt: Solve x² − 3x − 10 = 0. Give the negative root.
+    answer: '-2'
+    check: '-2'
+    difficulty: 1
+    hints:
+    - Numbers multiplying to −10 and adding to −3.
+    - −5 and 2.
+    solution: 'Step 1: (x − 5)(x + 2) = 0. Step 2: x = 5 or −2; negative root −2.'
+    mistakes:
+      '2': c10m4_bracket_sign
+      '-5': c10m4_bracket_sign
+  - prompt: Solve 6x² − x − 2 = 0. Give the positive root as a fraction.
+    answer: 2/3
+    check: 2/3
+    difficulty: 2
+    hints:
+    - 'ac = −12: numbers −4 and 3.'
+    - 6x² − 4x + 3x − 2.
+    solution: 'Step 1: 2x(3x − 2) + 1(3x − 2) = (2x + 1)(3x − 2). Step 2: x = 2/3 or −1/2.'
+    mistakes:
+      1/2: c10m4_bracket_sign
+      -2/3: c10m4_bracket_sign
+  - prompt: Is x = 3 a root of x² − 2x − 3 = 0?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if x is negative
+    - It has no roots
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Substitute x = 3.
+    - 9 − 6 − 3.
+    solution: 9 − 6 − 3 = 0, so 3 is a root.
+    mistakes:
+      'No': c10m4_pair
+  - prompt: Solve x² = 49. Give the positive root.
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Take the square root.
+    - Remember ± .
+    solution: x = ±7, so the positive root is 7.
+    mistakes:
+      '49': c10m4_formula
+      '-7': c10m4_sense
+  - prompt: The sum of a number and its square is 72. If the number is positive, find it.
+    answer: '8'
+    check: '8'
+    difficulty: 2
+    hints:
+    - x² + x − 72 = 0.
+    - Numbers multiplying to −72, adding to 1.
+    solution: 'Step 1: (x + 9)(x − 8) = 0. Step 2: x = 8 (positive).'
+    mistakes:
+      '9': c10m4_bracket_sign
+      '-9': c10m4_sense
+  - prompt: A right triangle's base is 7 cm more than its height, and its hypotenuse is 13 cm. Find the height, in cm.
+    answer: '5'
+    check: '5'
+    difficulty: 3
+    hints:
+    - h² + (h + 7)² = 169.
+    - 2h² + 14h − 120 = 0, so h² + 7h − 60 = 0.
+    solution: 'Step 1: (h + 12)(h − 5) = 0. Step 2: h = 5 cm (base 12 cm).'
+    mistakes:
+      '12': c10m4_sense
+      '-12': c10m4_sense
+  - prompt: Which equation is NOT quadratic?
+    options:
+    - (x + 1)² = x² + 3
+    - x² + 2x = 0
+    - 2x² = 8
+    - x(x − 1) = 4
+    answer: (x + 1)² = x² + 3
+    difficulty: 2
+    hints:
+    - Expand and simplify each one.
+    - Does the x² survive?
+    solution: '(x + 1)² = x² + 2x + 1, so the equation becomes 2x + 1 = 3: the x² cancels, so it is linear.'
+    mistakes:
+      x(x − 1) = 4: c10m4_pair
+  - prompt: Solve 3x² − 12 = 0. Give the positive root.
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - 3x² = 12.
+    - x² = 4.
+    solution: x² = 4, so x = ±2; positive root 2.
+    mistakes:
+      '4': c10m4_formula
+  - prompt: A train travels 360 km at a uniform speed. If the speed were 5 km/h more, it would take 1 hour less. Find the speed, in km/h.
+    answer: '40'
+    check: '40'
+    difficulty: 3
+    hints:
+    - 360/x − 360/(x + 5) = 1.
+    - x² + 5x − 1800 = 0.
+    solution: 'Step 1: (x + 45)(x − 40) = 0. Step 2: x = 40 km/h.'
+    mistakes:
+      '45': c10m4_bracket_sign
+      '-45': c10m4_sense
 - code: cbse10m.quad.formula
   title: The quadratic formula and nature of roots
   after:
@@ -248,6 +394,41 @@ concepts:
           - -4
           - 4
         say: 'D = b² − 20 is 0 or less here. b² must be more than 20: try a bigger b, either sign.'
+  lesson:
+    - teach: 'Every quadratic ax² + bx + c = 0 can be solved with the quadratic formula: x = (−b ± √(b² − 4ac)) / 2a. It comes from completing the square. For x² − 4x + 1 = 0: x = (4 ± √12)/2 = 2 ± √3.'
+      check:
+        prompt: In the formula, the top starts with…
+        options:
+        - −b
+        - b
+        - a
+        answer: −b
+        why: x = (−b ± √D) / 2a.
+    - teach: The part under the root, D = b² − 4ac, is the discriminant. It tells the nature of the roots without solving.
+      picture:
+        kind: compare
+        columns:
+        - title: D > 0
+          points:
+          - Two distinct real roots
+          - Parabola crosses twice
+        - title: D = 0
+          points:
+          - Two equal real roots
+          - Touches once
+        - title: D < 0
+          points:
+          - No real roots
+          - Misses the axis
+        alt: 'The discriminant decides the roots: positive gives two, zero gives one repeated, negative gives none.'
+      check:
+        prompt: For x² + x + 1 = 0, D = 1 − 4 = −3. The roots are…
+        options:
+        - Not real
+        - Two equal
+        - Two distinct
+        answer: Not real
+        why: D < 0.
   items:
   - prompt: Find the discriminant of x² − 4x + 3.
     answer: '4'
@@ -313,3 +494,110 @@ concepts:
     - x = (−1 ± 7)/4.
     solution: 'Step 1: D = 1² − 4 × 2 × (−6) = 49. Step 2: x = (−1 + 7)/4 = 3/2 or (−1 − 7)/4 = −2.'
     mistakes: {"2": "c10_root_sign", "3": "t10_formula_2a"}
+  - prompt: Find the discriminant of 2x² − 7x + 3.
+    answer: '25'
+    check: 49 - 24
+    difficulty: 1
+    hints:
+    - D = b² − 4ac.
+    - 49 − 4 × 2 × 3.
+    solution: D = 49 − 24 = 25.
+    mistakes:
+      '73': c10m4_D
+      '-25': c10m4_D
+  - prompt: What is the nature of the roots of 2x² − 3x + 5 = 0?
+    options:
+    - No real roots
+    - Two distinct real roots
+    - Two equal real roots
+    - One root only
+    answer: No real roots
+    difficulty: 1
+    hints:
+    - D = 9 − 40.
+    - Is it negative?
+    solution: D = 9 − 40 = −31 < 0, so there are no real roots.
+    mistakes:
+      Two distinct real roots: c10m4_D
+  - prompt: Find the positive k for which 2x² + kx + 3 = 0 has equal roots. It is k = 2√m; find m.
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - 'Equal roots: D = 0.'
+    - k² = 24.
+    solution: 'Step 1: k² − 24 = 0. Step 2: k = √24 = 2√6, so m = 6.'
+    mistakes:
+      '24': c10m4_formula
+      '12': c10m4_D
+  - prompt: Use the formula on x² + 4x − 5 = 0. Give the larger root.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - D = 16 + 20 = 36.
+    - x = (−4 ± 6)/2.
+    solution: 'Step 1: D = 36, √D = 6. Step 2: x = (−4 + 6)/2 = 1 or (−4 − 6)/2 = −5.'
+    mistakes:
+      '5': c10m4_formula
+      '-5': c10m4_formula
+  - prompt: For which value of D does a quadratic have two equal roots?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - The ± part adds nothing.
+    - √D must be 0.
+    solution: When D = 0, both roots are −b/2a.
+    mistakes:
+      '1': c10m4_D
+  - prompt: Is it possible to design a rectangular park with perimeter 80 m and area 400 m²?
+    options:
+    - Yes, a 20 m by 20 m square
+    - No, D is negative
+    - Yes, 30 m by 10 m
+    - No, the area is too small
+    answer: Yes, a 20 m by 20 m square
+    difficulty: 3
+    hints:
+    - l + b = 40 and lb = 400.
+    - 'x² − 40x + 400 = 0: find D.'
+    solution: 'Step 1: x² − 40x + 400 = 0 has D = 1600 − 1600 = 0. Step 2: equal roots x = 20, so a 20 m × 20 m park works.'
+    mistakes:
+      Yes, 30 m by 10 m: c10m4_sense
+      No, D is negative: c10m4_D
+  - prompt: The roots of x² − 2x − 1 = 0 are 1 ± √k. Find k.
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - D = 4 + 4 = 8.
+    - √8 = 2√2, then divide by 2.
+    solution: 'Step 1: x = (2 ± √8)/2. Step 2: = (2 ± 2√2)/2 = 1 ± √2, so k = 2.'
+    mistakes:
+      '8': c10m4_formula
+  - prompt: For 3x² − 2√6 x + 2 = 0, what is the nature of the roots?
+    options:
+    - Two equal real roots
+    - No real roots
+    - Two distinct real roots
+    - Cannot tell
+    answer: Two equal real roots
+    difficulty: 2
+    hints:
+    - b² = (2√6)² = 24.
+    - 4ac = 24.
+    solution: D = 24 − 24 = 0, so the roots are real and equal.
+    mistakes:
+      Two distinct real roots: c10m4_D
+  - prompt: Find the discriminant of x² − 6x + 9 and say the number of distinct real roots. Type the number of distinct roots.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - D = 36 − 36.
+    - Equal roots count as one distinct value.
+    solution: 'D = 0, so both roots equal 3: one distinct real root.'
+    mistakes:
+      '2': c10m4_D
+      '0': c10m4_D

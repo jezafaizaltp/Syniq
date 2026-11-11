@@ -9,6 +9,11 @@ tips:
   t10_d_next_minus: "d = second term − first term. Not a term, and not the sum."
   t10_sum_formula: "Sₙ = n/2 × [2a + (n − 1)d]. Use n − 1, and don't forget to multiply by n/2."
   t10_terms_apart: "Count the steps between the two terms (subtract their positions), then divide the jump in value by that number of steps."
+  c10m5_next_minus: The common difference is any term minus the term just before it, in that order. A falling list has a negative d.
+  c10m5_n_minus_one: To reach the nth term you add d only (n − 1) times, because the first term already counts as one.
+  c10m5_count: To count terms, set aₙ equal to the last term and solve for n. Don't just divide the last term by d.
+  c10m5_sum: Sₙ = n/2 × (first + last), or n/2 × [2a + (n − 1)d]. Don't forget the n/2 in front.
+  c10m5_average: "Think of the sum as the number of terms times the average term. In an AP, the average term is halfway between the first and the last."
 concepts:
 - code: cbse10m.ap.nth
   title: The nth term of an AP
@@ -104,6 +109,59 @@ concepts:
       - when:
           d: -4
         say: 'd = −4 gives a₆ = 30: there are 5 jumps from the 1st term to the 6th, not 6.'
+  lesson:
+    - teach: 'An arithmetic progression (AP) is a list where you add the same number d each time to get the next term: a, a + d, a + 2d, … d is the common difference, and it can be positive, negative or zero. 4, 7, 10, 13 has d = 3; 10, 6, 2, −2 has d = −4.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 14
+        step: 1
+        points:
+        - at: 4
+          label: a₁
+        - at: 7
+          label: a₂
+        - at: 10
+          label: a₃
+        - at: 13
+          label: a₄
+        jumps:
+        - from: 4
+          to: 7
+          label: '+3'
+        - from: 7
+          to: 10
+          label: '+3'
+        - from: 10
+          to: 13
+          label: '+3'
+        alt: The AP 4, 7, 10, 13 on a number line, each jump +3.
+      check:
+        prompt: Common difference of 10, 6, 2, −2?
+        options:
+        - −4
+        - '4'
+        - '2'
+        answer: −4
+        why: 6 − 10 = −4.
+    - teach: 'The nth term is aₙ = a + (n − 1)d. You add d only (n − 1) times because you start at the first term. For 4, 7, 10, …: a₂₀ = 4 + 19 × 3 = 61.'
+      check:
+        prompt: a₁₀ of 4, 7, 10, … ?
+        options:
+        - '31'
+        - '34'
+        - '30'
+        answer: '31'
+        why: 4 + 9 × 3 = 31.
+    - teach: To find which term equals a given number, set a + (n − 1)d equal to it and solve for n. n must come out as a positive whole number, or the number is not in the AP.
+      check:
+        prompt: Which term of 4, 7, 10, … is 43?
+        options:
+        - 14th
+        - 13th
+        - 43rd
+        answer: 14th
+        why: 4 + (n − 1)3 = 43 gives n = 14.
   items:
   - prompt: Find the common difference of the AP 5, 9, 13, 17, …
     answer: '4'
@@ -163,6 +221,102 @@ concepts:
     solution: 'Step 1: The AP is 12, 15, …, 99 with d = 3. Step 2: 99 = 12 + (n − 1)3, so n − 1 = 29. Step 3: n = 30.'
     mistakes:
       '29': c10_n_minus_1
+  - prompt: Find the 30th term of the AP 10, 7, 4, …
+    answer: '-77'
+    check: 10 + 29 * (-3)
+    difficulty: 2
+    hints:
+    - d = −3.
+    - a₃₀ = 10 + 29d.
+    solution: 'Step 1: d = 7 − 10 = −3. Step 2: a₃₀ = 10 + 29(−3) = −77.'
+    mistakes:
+      '97': c10m5_next_minus
+      '-80': c10m5_n_minus_one
+  - prompt: Is 301 a term of the AP 5, 11, 17, 23, …? Type the term number if it is, or 0 if it is not.
+    answer: '0'
+    check: '0'
+    difficulty: 3
+    hints:
+    - 5 + (n − 1)6 = 301.
+    - Is n a whole number?
+    solution: 'Step 1: (n − 1)6 = 296, so n − 1 = 49.33… Step 2: n is not whole, so 301 is not a term.'
+    mistakes:
+      '50': c10m5_count
+  - prompt: How many terms are there in the AP 7, 13, 19, …, 205?
+    answer: '34'
+    check: (205 - 7) // 6 + 1
+    difficulty: 2
+    hints:
+    - 7 + (n − 1)6 = 205.
+    - (n − 1) = 33.
+    solution: 'Step 1: (n − 1)6 = 198, so n − 1 = 33. Step 2: n = 34.'
+    mistakes:
+      '33': c10m5_n_minus_one
+  - prompt: Which list is an AP?
+    options:
+    - 2, 5, 8, 11
+    - 1, 2, 4, 8
+    - 1, 4, 9, 16
+    - 3, 3², 3³
+    answer: 2, 5, 8, 11
+    difficulty: 1
+    hints:
+    - Check the differences.
+    - Must be the same each time.
+    solution: Only 2, 5, 8, 11 has a constant difference (3).
+    mistakes:
+      1, 2, 4, 8: c10m5_next_minus
+  - prompt: Find the 11th term from the last of the AP 10, 7, 4, …, −62.
+    answer: '-32'
+    check: -62 + 10 * 3
+    difficulty: 3
+    hints:
+    - 'Read the AP backwards: −62, −59, …'
+    - From the end, d = +3.
+    solution: 'Step 1: Backwards the AP starts at −62 with d = 3. Step 2: 11th term = −62 + 10 × 3 = −32.'
+    mistakes:
+      '-29': c10m5_n_minus_one
+      '-92': c10m5_next_minus
+  - prompt: If 2x, x + 10 and 3x + 2 are in AP, find x.
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - The middle term minus the first equals the last minus the middle.
+    - (x + 10) − 2x = (3x + 2) − (x + 10).
+    solution: 'Step 1: 10 − x = 2x − 8. Step 2: 3x = 18, so x = 6.'
+    mistakes:
+      '18': c10m5_next_minus
+  - prompt: A salary starts at ₹5000 and rises by ₹200 each year. In which year does it reach ₹7000?
+    answer: '11'
+    check: '11'
+    difficulty: 2
+    hints:
+    - 5000 + (n − 1)200 = 7000.
+    - (n − 1) = 10.
+    solution: 'Step 1: (n − 1)200 = 2000. Step 2: n − 1 = 10, so year 11.'
+    mistakes:
+      '10': c10m5_n_minus_one
+  - prompt: The 17th term of an AP exceeds its 10th term by 7. Find d.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - a₁₇ − a₁₀ = 7d.
+    - 7d = 7.
+    solution: a₁₇ − a₁₀ = (a + 16d) − (a + 9d) = 7d = 7, so d = 1.
+    mistakes:
+      '7': c10m5_n_minus_one
+  - prompt: Find d for the AP √2, 3√2, 5√2, … It is k√2; find k.
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - 3√2 − √2.
+    - Subtract like terms.
+    solution: d = 3√2 − √2 = 2√2, so k = 2.
+    mistakes:
+      '3': c10m5_next_minus
 - code: cbse10m.ap.sum
   title: Sum of the first n terms
   after:
@@ -226,6 +380,34 @@ concepts:
       - when:
           n: 2
         say: a₂ = 14 − 4 = 10. The first term is S₁ itself, with nothing before it.
+  lesson:
+    - teach: 'To add 1 + 2 + … + 100, write it forwards and backwards and add: each pair makes 101, and there are 100 pairs, so twice the sum is 100 × 101 and the sum is 5050. In general, Sₙ = n/2 × (a + l), where l is the last term.'
+      picture:
+        kind: flow
+        steps:
+        - 1 + 2 + … + 100
+        - 100 + 99 + … + 1
+        - Each pair = 101
+        - 100 pairs → 10100
+        - Half → 5050
+        alt: 'Gauss''s trick: writing the sum forwards and backwards, each pair makes 101, giving 5050.'
+      check:
+        prompt: Sum of 2 + 4 + 6 + … + 20 (10 terms)?
+        options:
+        - '110'
+        - '220'
+        - '100'
+        answer: '110'
+        why: 10/2 × (2 + 20) = 110.
+    - teach: 'If you don''t know the last term, use Sₙ = n/2 [2a + (n − 1)d]. For 3, 7, 11, … the first 10 terms sum to 10/2 × (6 + 36) = 210. You can also get a term from sums: aₙ = Sₙ − Sₙ₋₁.'
+      check:
+        prompt: If S₅ = 40 and S₄ = 30, a₅ = ?
+        options:
+        - '10'
+        - '70'
+        - '8'
+        answer: '10'
+        why: a₅ = S₅ − S₄.
   items:
   - prompt: Find the sum 1 + 2 + 3 + … + 100.
     answer: '5050'
@@ -283,3 +465,104 @@ concepts:
     solution: 'Step 1: n/2 (6 + 3n − 3) = 165, so n(3n + 3) = 330. Step 2: n² + n − 110 = 0 = (n + 11)(n − 10). Step 3: n = 10.'
     mistakes:
       '-11': c10_reject_negative
+  - prompt: Find the sum of the first 15 terms of 2, 7, 12, …
+    answer: '555'
+    check: 15 * (4 + 14 * 5) // 2
+    difficulty: 2
+    hints:
+    - a = 2, d = 5, n = 15.
+    - S = 15/2 × (4 + 70).
+    solution: S₁₅ = 15/2 × [4 + 14 × 5] = 15/2 × 74 = 555.
+    mistakes:
+      '1110': c10m5_sum
+      '72': c10m5_sum
+  - prompt: Find the sum of all odd numbers from 1 to 49.
+    answer: '625'
+    check: 25 * 25
+    difficulty: 2
+    hints:
+    - There are 25 odd numbers.
+    - S = 25/2 × (1 + 49).
+    solution: 'Step 1: n = 25. Step 2: S = 25/2 × 50 = 625.'
+    mistakes:
+      '1250': c10m5_sum
+      '49': c10m5_count
+  - prompt: Find the sum of the first 40 positive integers divisible by 6.
+    answer: '4920'
+    check: 40 * (6 + 240) // 2
+    difficulty: 2
+    hints:
+    - 6, 12, …, 240.
+    - S = 40/2 × (6 + 240).
+    solution: S = 20 × 246 = 4920.
+    mistakes:
+      '9840': c10m5_sum
+  - prompt: Sₙ = 3n² + 5n. Find the first term.
+    answer: '8'
+    check: 3 + 5
+    difficulty: 2
+    hints:
+    - a₁ = S₁.
+    - Put n = 1.
+    solution: a₁ = S₁ = 3 + 5 = 8.
+    mistakes:
+      '3': c10m5_sum
+      '5': c10m5_sum
+  - prompt: Sₙ = 3n² + 5n. Find the common difference.
+    answer: '6'
+    check: (3*4 + 10) - 8 - 8
+    difficulty: 3
+    hints:
+    - S₂ = 22, so a₂ = 22 − 8.
+    - d = a₂ − a₁.
+    solution: 'Step 1: S₂ = 12 + 10 = 22, a₂ = 22 − 8 = 14. Step 2: d = 14 − 8 = 6.'
+    mistakes:
+      '14': c10m5_next_minus
+      '3': c10m5_sum
+  - prompt: Find 34 + 32 + 30 + … + 10.
+    answer: '286'
+    check: 13 * (34 + 10) // 2
+    difficulty: 2
+    hints:
+    - d = −2; count the terms first.
+    - 34 + (n − 1)(−2) = 10 gives n = 13.
+    solution: 'Step 1: n = 13. Step 2: S = 13/2 × (34 + 10) = 286.'
+    mistakes:
+      '572': c10m5_sum
+      '264': c10m5_count
+  - prompt: A ladder has rungs whose lengths decrease uniformly from 45 cm at the bottom to 25 cm at the top, with 11 rungs. Find the total length of wood for the rungs, in cm.
+    answer: '385'
+    check: 11 * (45 + 25) // 2
+    difficulty: 2
+    hints:
+    - Sum of an AP with 11 terms.
+    - First 45, last 25.
+    solution: S = 11/2 × (45 + 25) = 11 × 35 = 385 cm.
+    mistakes:
+      '770': c10m5_sum
+      '70': c10m5_sum
+  - prompt: How many terms of 24, 21, 18, … give a sum of 78? Give the smaller answer.
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - n/2 [48 + (n − 1)(−3)] = 78.
+    - n² − 17n + 52 = 0.
+    solution: 'Step 1: (n − 4)(n − 13) = 0. Step 2: n = 4 or 13; both work because the extra terms after the 4th add to zero.'
+    mistakes:
+      '13': c10m5_count
+  - prompt: Which formula gives the sum when you know the first and last terms?
+    options:
+    - Sₙ = n/2 (a + l)
+    - Sₙ = a + (n − 1)d
+    - Sₙ = n(a + l)
+    - Sₙ = a × l
+    answer: Sₙ = n/2 (a + l)
+    difficulty: 1
+    hints:
+    - Average of first and last, times n.
+    - One of these is the nth-term formula.
+    solution: 'The sum is n times the average of the first and last terms: n/2 (a + l).'
+    mistakes:
+      Sₙ = a + (n − 1)d: c10m5_n_minus_one
+      Sₙ = n(a + l): c10m5_average
