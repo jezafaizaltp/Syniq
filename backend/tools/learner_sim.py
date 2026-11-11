@@ -416,6 +416,7 @@ def run(seed: int) -> dict:
             "rules": log["rules"],
             "topics_reached": len(est),
             "idle_steps": log.get("idle", 0),
+            "steps_total": SITTINGS * STEPS,
             "missed": log.get("missed", 0),
             "known_answers": log.get("known_answers", 0),
             "max_explain_run": log.get("max_explain_run", 0),
@@ -469,7 +470,7 @@ def summarise(paths: list[str]) -> None:
               f"secured too early (hidden knowledge under 70%) {m('false_secure')}")
         print(f"  periods missed {m('missed')}, questions on topics already known well {m('known_answers')}, "
               f"reviews {m('reviews')} in-chapter + {m('other_reviews')} other chapters, most explanations in a row {m('max_explain_run')}")
-        print(f"  steps left unused because SYNiq had nothing more to give {m('idle_steps')} of {SITTINGS * STEPS}")
+        print(f"  steps left unused because SYNiq had nothing more to give {m('idle_steps')} of {rs[0].get('steps_total', SITTINGS * STEPS)}")
         print(f"  repeats within a period {m('repeats_in_period')}, watch-out nudges {m('watch_out')}, breaks {m('breaks')}")
         stuck = [s for x in rs for s in x["stuck"]]
         if stuck:

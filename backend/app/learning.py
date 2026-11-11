@@ -1,6 +1,7 @@
 """Glue between the database and the pure adaptive engine."""
 
 import random
+import re
 from datetime import timedelta
 from fractions import Fraction
 
@@ -512,13 +513,21 @@ def normalise(answer: str) -> str:
     return "".join(answer.lower().split()).replace("^2", "²").replace("−", "-")
 
 
+_GROUPED = re.compile(r"^-?\d{1,3}(,\d{2,3})+(\.\d+)?$")
+
+
+def _ungroup(n: str) -> str:
+    """1,00,000 (Indian grouping) and 100,000 are both 100000. Spaces are already gone (normalise)."""
+    return n.replace(",", "") if _GROUPED.match(n) else n
+
+
 def same_answer(a: str, b: str) -> bool:
-    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5)."""
+    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5, 1,00,000 and 100000)."""
     a, b = normalise(a), normalise(b)
     if a == b:
         return True
     try:
-        return Fraction(a) == Fraction(b)
+        return Fraction(_ungroup(a)) == Fraction(_ungroup(b))
     except (ValueError, ZeroDivisionError):
         return False
 

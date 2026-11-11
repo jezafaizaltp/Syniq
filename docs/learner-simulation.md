@@ -110,6 +110,36 @@ What the term run found:
   `engine/mastery.py` were tuned on simulated learners; they should be re-fitted to real pilot answers after the first
   few weeks.
 
+## After "harder questions count" (11 November 2026, `SIM_TERM=1`, 4 runs)
+
+Same term as above, after three changes: a topic is only secure once a harder question is answered right, practice
+steps up after 3 right in a row and down after 2 wrong, and 715 + 37 harder questions were added to the Kerala Class 9
+packs. The test before the term now includes some of the harder questions, so starting scores are a little lower.
+
+| Learner | SYNiq | Fixed version | Gain with SYNiq (after) | Before this change |
+| --- | --- | --- | --- | --- |
+| Meera | 29 → 40 → 35 | 29 → 38 → 32 | +11 | +10 |
+| Arjun | 22 → 39 → 30 | 22 → 33 → 27 | +17 | +15 |
+| Zara | 30 → 48 → 43 | 30 → 41 → 36 | +18 | +17 |
+| Vishnu | 18 → 34 → 25 | 18 → 26 → 21 | +16 | +17 |
+| Control | 29 → 43 → 37 | 29 → 42 → 35 | +14 | +10 |
+| Ammu | 59 → 63 → 61 | 59 → 69 → 64 | +4 | +2 |
+| Rahul | 29 → 37 → 33 | 29 → 36 → 31 | +8 | +9 |
+
+What changed:
+
+- **SYNiq now beats the fixed version two weeks later for six of the seven learners**, including Rahul (absent 4
+  periods in 10), who only matched it before. The control learner gained most (+10 → +14).
+- **Strong learners are still under-stretched.** Ammu gains a little more (+2 → +4) but the fixed version, which keeps
+  her practising every topic, still does better on these ten chapters. In the real app she would be offered the next
+  chapter (the chapter-done screen now has a button for it) rather than sit idle.
+- **"Secured too early" barely moved** (11 to 26 of 38 topics per learner, about the same as before). With only two or
+  three harder questions per topic, a lucky right answer on one still opens the door. The real fix is to re-fit the
+  learning rates to real pilot answers: `python -m tools.fit_mastery` does that once the pilot has a few thousand
+  answers.
+- Ammu still leaves about half her lab time unused (573 of 1,200 steps) because every chapter is done early. (The
+  summary used to print "of 450", the 15-period total, for term runs too; it now prints the run's own total.)
+
 ## Running it
 
 ```
