@@ -10,6 +10,13 @@ tips:
   kalzium_basics: "In an atom model the nucleus is in the middle and tiny dots move in the shells around it: what are they? Kalzium colours the table by states of matter from the Gradients menu."
   electron_config: "Fill shells in order, 2 then 8 then 8, until all electrons are placed: the total is the atomic number. The number of shells is the period, and the last shell's electrons decide chemical properties."
   simulation_light: "A simulation lets you safely study what is hard or dangerous to see in real life. Angles of incidence and refraction are measured from the line drawn at 90° to the surface. Light slows down in water, so think about which way it turns; with the same medium on both sides nothing changes."
+  it7_equal_parts: Equally spaced parallels cut any slanting line into equal parts. Divide the total length by the number of parts.
+  it7_ratio_parts: 'For a ratio a : b, the whole is split into a + b equal parts. Find one part, then multiply.'
+  it7_tool_choice: 'GeoGebra has a separate tool for each job: draw, make parallel, make perpendicular, measure.'
+  it7_count_shells: Read the configuration shell by shell. The number of shells gives the period; the last number is the outer-shell electrons.
+  it7_add_electrons: 'The atomic number equals the total number of electrons: add all the numbers in the configuration.'
+  it7_dense_bend: Going into a denser medium (air → water), light bends towards the normal; going out, it bends away.
+  it7_why_simulate: Simulations help when the real thing is dangerous, costly, too big, too small or too far away.
 
 concepts:
   - code: it9.lab.geogebra
@@ -47,6 +54,56 @@ concepts:
         Join the last mark to B: Join only after the marks are there.
         Draw parallels through the other marks: The parallels copy the direction of the joining line.
         Measure the parts with Distance or Length: Measure at the end to check the parts are equal.
+    lesson:
+      - teach: 'GeoGebra is software for accurate geometry. Its tools are in groups: points, lines, parallel and perpendicular lines, polygons, circles, angles and measurement. Parallel lines never meet; a perpendicular meets a line at 90°.'
+        check:
+          prompt: Lines that meet at 90° are
+          options:
+          - Perpendicular
+          - Parallel
+          - Curved
+          answer: Perpendicular
+          why: Perpendicular means at right angles.
+      - teach: 'To draw a parallel or perpendicular: choose the tool, click the line, then the point it must pass through. Equally spaced parallel lines cut any slanting line into equal pieces. A line parallel to one side of a triangle cuts the other two sides in the same ratio.'
+        picture:
+          kind: flow
+          steps:
+          - Choose Parallel Line tool
+          - Click the line
+          - Click the point
+          - Parallel drawn
+          alt: Drawing a parallel line in GeoGebra.
+        check:
+          prompt: Equally spaced parallels cut a slanting line into
+          options:
+          - Equal parts
+          - Random parts
+          - Two parts only
+          answer: Equal parts
+          why: Equal gaps between parallels give equal pieces.
+      - teach: 'To split a 19-unit line into 3 equal parts: draw it (Segment with Given Length), draw a slanting line from one end, mark 3 equal steps, join the last step to the other end, and draw parallels through the other marks. Measure with Distance or Length.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 19
+          points:
+          - at: 0
+            label: A
+          - at: 6.33
+            label: 1/3
+          - at: 12.67
+            label: 2/3
+          - at: 19
+            label: B
+          alt: A 19-unit line split into three equal parts.
+        check:
+          prompt: Each part of the 19-unit line is about
+          options:
+          - 6.33 units
+          - 19 units
+          - 3 units
+          answer: 6.33 units
+          why: 19 ÷ 3 ≈ 6.33.
     items:
       - prompt: "A line that meets another line at 90° is called"
         options: ["Perpendicular", "Parallel", "Slanting", "Curved"]
@@ -118,6 +175,70 @@ concepts:
         hints: ["A construction made with the right tool stays true when you drag.", "Which tool links the new line to AB?"]
         solution: "Step 1: The Parallel Line tool ties the new line to AB, so it stays parallel when points move. Step 2: A line drawn by eye has no such link and breaks when dragged."
         mistakes: {"GeoGebra cannot keep lines parallel": geogebra_tools, "The triangle was too big": geogebra_tools, "The Distance tool was used": geogebra_tools}
+      - prompt: A 24-unit line is divided into 4 equal parts with parallel lines. How long is each part?
+        answer: '6'
+        check: 24/4
+        difficulty: 1
+        hints:
+        - Divide the length by the number of parts.
+        - 24 ÷ 4.
+        solution: 'Step 1: Length 24. Step 2: 4 parts. Step 3: 6 units each.'
+        mistakes:
+          '20': it7_equal_parts
+          '96': it7_equal_parts
+      - prompt: 'A 15-unit line is divided in the ratio 2 : 3. How long is the longer part?'
+        answer: '9'
+        check: 15*3/5
+        difficulty: 2
+        hints:
+        - 2 + 3 = 5 equal parts.
+        - One part = 15 ÷ 5.
+        solution: 'Step 1: 5 parts. Step 2: Each part = 3. Step 3: Longer = 3 × 3 = 9.'
+        mistakes:
+          '6': it7_ratio_parts
+          '5': it7_ratio_parts
+      - prompt: What tool did carpenters use to mark right angles before software?
+        options:
+        - Try square
+        - Protractor app
+        - GeoGebra
+        - Compass on a phone
+        answer: Try square
+        difficulty: 1
+        hints:
+        - It is an L-shaped tool.
+        - The lesson mentions it with string for circles.
+        solution: 'Step 1: Carpenters need 90° corners. Step 2: An L-shaped metal tool checks them. Step 3: Try square.'
+        mistakes:
+          GeoGebra: geogebra_tools
+      - prompt: Which GeoGebra tool draws a line at 90° to a given line?
+        options:
+        - Perpendicular Line
+        - Parallel Line
+        - Midpoint
+        - Circle
+        answer: Perpendicular Line
+        difficulty: 1
+        hints:
+        - 90° means right angle.
+        - Which word means at right angles?
+        solution: 'Step 1: 90° = right angle. Step 2: Lines at right angles are perpendicular. Step 3: Perpendicular Line tool.'
+        mistakes:
+          Parallel Line: it7_tool_choice
+      - prompt: Which tool draws a segment of an exact length, like 19 units?
+        options:
+        - Segment with Given Length
+        - Free Select
+        - Polygon
+        - Angle
+        answer: Segment with Given Length
+        difficulty: 2
+        hints:
+        - You type the length.
+        - Its name says 'given length'.
+        solution: 'Step 1: Exact length is needed. Step 2: One segment tool asks for it. Step 3: Segment with Given Length.'
+        mistakes:
+          Polygon: it7_tool_choice
 
   - code: it9.lab.kalzium
     title: Exploring elements with Kalzium
@@ -175,6 +296,46 @@ concepts:
         bin: Group 18
         clue: Is the outer shell full?
         why: Noble gas, group 18.
+    lesson:
+      - teach: Kalzium is an interactive periodic table. Click an element to see its atomic number, mass, electron configuration, properties, history and uses. The Atom Model shows shells as circles and electrons as yellow dots.
+        check:
+          prompt: In the Atom Model, electrons are shown as
+          options:
+          - Yellow dots
+          - Blue squares
+          - Red lines
+          answer: Yellow dots
+          why: Shells are circles; electrons are yellow dots.
+      - teach: 'Sodium (11) is 2,8,1: three shells, so period 3; one outer electron, so group 1. Elements with the same outer electrons (Li 2,1; Na 2,8,1; K 2,8,8,1) behave alike. Main groups: 1, 2 and 13–18; transition elements: 3–12; noble gases: 18.'
+        picture:
+          kind: compare
+          columns:
+          - title: Shells
+            points:
+            - 2,8,1 has 3 shells
+            - → period 3
+          - title: Outer electrons
+            points:
+            - last number = 1
+            - → group 1
+          alt: Reading period and group from a configuration.
+        check:
+          prompt: Magnesium is 2,8,2. Its period is
+          options:
+          - '3'
+          - '2'
+          - '8'
+          answer: '3'
+          why: It has three shells.
+      - teach: 'Kalzium options: Scheme → Groups or Family colours the table; Gradients → State of Matter shows solid, liquid or gas (and discovery year); Scheme → Iconic shows main uses; the search bar finds elements by name.'
+        check:
+          prompt: Which option shows if an element is a gas?
+          options:
+          - Gradients → State of Matter
+          - Scheme → Iconic
+          - Atom Model
+          answer: Gradients → State of Matter
+          why: It colours elements by their state.
     items:
       - prompt: "What is the electron configuration of sodium (atomic number 11)?"
         options: ["2,8,1", "2,8,2", "2,1", "2,8,8,1"]
@@ -246,6 +407,65 @@ concepts:
         hints: ["Chemical properties depend mainly on which shell?", "Count the yellow dots in the last circle for each."]
         solution: "Step 1: Chemical properties depend on outermost electrons. Step 2: Both have 1 electron in the last shell, so they react in similar ways."
         mistakes: {"Both have 8 electrons in the second shell": electron_config, "Both have the same atomic mass": kalzium_basics, "Both have three shells": electron_config}
+      - prompt: Potassium is 2,8,8,1. What is its atomic number?
+        answer: '19'
+        check: 2+8+8+1
+        difficulty: 1
+        hints:
+        - Add the electrons in all shells.
+        - 2 + 8 + 8 + 1.
+        solution: 'Step 1: Electrons = protons in a neutral atom. Step 2: 2 + 8 + 8 + 1 = 19. Step 3: 19.'
+        mistakes:
+          '4': it7_add_electrons
+          '1': it7_add_electrons
+      - prompt: An element is 2,8,3. Which group is it in?
+        answer: '13'
+        check: '13'
+        difficulty: 3
+        hints:
+        - Three outer electrons.
+        - Main groups after the transition block start at 13.
+        solution: 'Step 1: Outer shell has 3. Step 2: Group 1 = 1, group 2 = 2, then groups 13–18 for 3–8. Step 3: Group 13.'
+        mistakes:
+          '3': electron_config
+      - prompt: Which groups hold the transition elements?
+        options:
+        - 3 to 12
+        - 1 and 2
+        - 13 to 18
+        - Only 18
+        answer: 3 to 12
+        difficulty: 2
+        hints:
+        - They sit in the middle block of the table.
+        - Main groups are 1, 2 and 13–18.
+        solution: 'Step 1: Main groups take 1, 2 and 13–18. Step 2: The middle block remains. Step 3: 3 to 12.'
+        mistakes:
+          13 to 18: kalzium_basics
+      - prompt: Lithium is 2,1. How many shells does it have?
+        answer: '2'
+        check: '2'
+        difficulty: 1
+        hints:
+        - Count how many numbers there are.
+        - Each number is one shell.
+        solution: 'Step 1: The configuration has two numbers. Step 2: Each is a shell. Step 3: 2 shells.'
+        mistakes:
+          '3': it7_count_shells
+      - prompt: Which Kalzium option shows pictures of an element's main uses?
+        options:
+        - Scheme → Iconic
+        - Gradients → State of Matter
+        - Next button
+        - Search bar
+        answer: Scheme → Iconic
+        difficulty: 2
+        hints:
+        - Uses are shown as icons.
+        - It is under Scheme.
+        solution: 'Step 1: Uses are shown as symbols. Step 2: Symbols = icons. Step 3: Scheme → Iconic.'
+        mistakes:
+          Search bar: kalzium_basics
 
   - code: it9.lab.bending_light
     title: Simulating refraction with PhET
@@ -291,6 +511,46 @@ concepts:
         bin: Goes straight on
         clue: The angle of incidence is zero.
         why: Along the normal it passes straight.
+    lesson:
+      - teach: 'A simulation recreates a real event on a computer so we can study it safely, especially when it is complex, dangerous or out of reach. PhET''s Bending Light shows refraction: a pencil in water looks bent because light bends between media.'
+        check:
+          prompt: Why use a simulation?
+          options:
+          - To study something safely without the real setup
+          - To avoid learning
+          - To play music
+          answer: To study something safely without the real setup
+          why: We can change conditions easily and safely.
+      - teach: 'In Bending Light → Intro, drag the light source, pick the two media with sliders, and use the protractor to measure the angles of incidence and refraction (from the normal). Air → water: the ray bends towards the normal. Same medium on both sides: no bending.'
+        picture:
+          kind: compare
+          columns:
+          - title: Air → water
+            points:
+            - into denser medium
+            - bends towards the normal
+          - title: Water → air
+            points:
+            - into rarer medium
+            - bends away from the normal
+          alt: Direction of bending.
+        check:
+          prompt: Light from water into air bends
+          options:
+          - Away from the normal
+          - Towards the normal
+          - Not at all
+          answer: Away from the normal
+          why: Going into a rarer medium, it bends away.
+      - teach: As the angle of incidence increases, the angle of refraction also increases. A ray along the normal (0°) goes straight through. The Prisms window shows refraction through prisms.
+        check:
+          prompt: A ray hits water at 0° to the normal. It
+          options:
+          - Goes straight
+          - Bends sharply
+          - Reflects back fully
+          answer: Goes straight
+          why: Along the normal there is no bending.
     items:
       - prompt: "Light passes from air into water. How does it bend?"
         options: ["Towards the normal", "Away from the normal", "It does not bend"]
@@ -348,3 +608,101 @@ concepts:
         hints: ["The light now goes from a denser to a rarer medium.", "Air to water bends towards the normal; this is the reverse journey."]
         solution: "Step 1: Water to air is denser to rarer. Step 2: Light then speeds up and bends away from the normal, the reverse of air to water."
         mistakes: {"Towards the normal": simulation_light, "It does not bend": simulation_light, "It turns back up": simulation_light}
+      - prompt: Which PhET section is Bending Light found in?
+        options:
+        - Physics
+        - Biology
+        - Mathematics
+        - Chemistry
+        answer: Physics
+        difficulty: 1
+        hints:
+        - Refraction of light is studied in this science.
+        - It is about light and optics.
+        solution: 'Step 1: Bending light is optics. Step 2: Optics is part of physics. Step 3: Physics.'
+        mistakes:
+          Chemistry: simulation_light
+      - prompt: Which window of Bending Light shows light passing through prisms?
+        options:
+        - Prisms
+        - Intro
+        - Atom Model
+        - Gallery
+        answer: Prisms
+        difficulty: 1
+        hints:
+        - Its name matches the object.
+        - Intro shows two flat media.
+        solution: 'Step 1: Intro shows two media. Step 2: Another window has prisms. Step 3: Prisms.'
+        mistakes:
+          Intro: simulation_light
+      - prompt: Why does a pen in a glass of water look bent?
+        options:
+        - Light bends as it passes from water to air
+        - The pen really bends
+        - The glass is curved only
+        - Water is coloured
+        answer: Light bends as it passes from water to air
+        difficulty: 2
+        hints:
+        - The pen is straight.
+        - What happens to light at the water's surface?
+        solution: 'Step 1: The pen does not bend. Step 2: Light changes direction at the surface. Step 3: Refraction makes it look bent.'
+        mistakes:
+          The pen really bends: it7_dense_bend
+      - prompt: In the simulation, the angle of incidence goes from 30° to 50° (air to water). What happens to the angle of refraction?
+        options:
+        - It increases
+        - It decreases
+        - It stays the same
+        - It becomes 0°
+        answer: It increases
+        difficulty: 2
+        hints:
+        - The two angles move together.
+        - Bigger incidence, bigger refraction.
+        solution: 'Step 1: Incidence rises. Step 2: Refraction follows. Step 3: It increases.'
+        mistakes:
+          It decreases: it7_dense_bend
+      - prompt: Which is the best reason to simulate the inside of a nuclear reactor rather than visit it?
+        options:
+        - It is dangerous to observe directly
+        - Simulations are always prettier
+        - Reactors are boring
+        - Computers are cheap
+        answer: It is dangerous to observe directly
+        difficulty: 2
+        hints:
+        - Think of safety.
+        - Radiation is harmful.
+        solution: 'Step 1: Reactors are dangerous. Step 2: Simulations avoid danger. Step 3: Safety is the reason.'
+        mistakes:
+          Simulations are always prettier: it7_why_simulate
+      - prompt: Light passes from glass into air. Compared with the angle of incidence, the angle of refraction is
+        options:
+        - Larger
+        - Smaller
+        - Equal
+        - Zero
+        answer: Larger
+        difficulty: 3
+        hints:
+        - Glass is denser than air.
+        - Going into a rarer medium, light bends away from the normal.
+        solution: 'Step 1: Glass → air is dense → rare. Step 2: It bends away from the normal. Step 3: The angle gets larger.'
+        mistakes:
+          Smaller: it7_dense_bend
+      - prompt: Why must the media sliders be set before measuring?
+        options:
+        - Bending depends on which two media the light passes between
+        - Sliders change the colour only
+        - They switch the program off
+        - They have no effect
+        answer: Bending depends on which two media the light passes between
+        difficulty: 3
+        hints:
+        - Air–air gives no bending.
+        - Air–water gives some.
+        solution: 'Step 1: Bending happens when media differ. Step 2: The amount depends on the pair. Step 3: Set the media first.'
+        mistakes:
+          They have no effect: it7_why_simulate
