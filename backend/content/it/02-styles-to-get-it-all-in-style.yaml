@@ -5,6 +5,7 @@ chapter: 2
 title: Styles to Get it All in Style
 
 tips:
+  inherit_level: "A table of contents follows heading levels. Ask which heading level this new style was built from."
   ocr: "OCR reads letters from a picture of a page: its name says it sees (optical) letters (characters) and identifies them. The school app's name contains 'Image' and 'Reader'; GIMP only edits pictures."
   writer_styles: "Styles are ready-made sets of formatting (font, size, colour, alignment, spacing) for headings, paragraphs and pages. Change a style once and every place using it changes. Open the Styles window with F11."
   fill_format: "Fill Format Mode: pick a style in the Styles window, click Fill Format Mode, then click each piece of text to give it that style. Press Esc to stop."
@@ -113,6 +114,20 @@ concepts:
         hints: ["OTT is an ODF template format."]
         solution: "Templates open as new unsaved documents; save the file first."
         mistakes: {"The file is damaged": writer_styles}
+      - prompt: "A scanned Malayalam page comes out as nonsense letters in gImageReader. What should you check first?"
+        options: ["The language chosen in Recognize all", "The font size of the page", "Fill Format Mode", "The page style"]
+        answer: "The language chosen in Recognize all"
+        difficulty: 3
+        hints: ["OCR must know which letters to look for.", "Where do you choose the language before recognising?"]
+        solution: "Step 1: OCR matches shapes to the letters of a chosen language. Step 2: If English is chosen, Malayalam letters are misread, so choose Malayalam in Recognize all."
+        mistakes: {"The font size of the page": ocr, "Fill Format Mode": fill_format, "The page style": ocr}
+      - prompt: "A 40-page report has 25 headings formatted by hand. The teacher asks for all headings in green. Why would styles have saved time?"
+        options: ["Changing one style changes every heading using it at once", "Styles make the file smaller", "Styles colour text automatically green", "Styles stop the text from being edited"]
+        answer: "Changing one style changes every heading using it at once"
+        difficulty: 3
+        hints: ["How many changes would you make by hand?", "How many changes with a style?"]
+        solution: "Step 1: By hand, each of the 25 headings must be changed. Step 2: With a style, you modify the style once and all headings that use it change together."
+        mistakes: {"Styles make the file smaller": writer_styles, "Styles colour text automatically green": writer_styles, "Styles stop the text from being edited": writer_styles}
 
   - code: it9.styles.modify_create
     title: Changing and creating styles
@@ -197,6 +212,20 @@ concepts:
         hints: ["TeXmaker helps write documents in it."]
         solution: "LaTeX."
         mistakes: {"GIMP": writer_styles}
+      - prompt: "You made MyStyle1 inheriting from Heading 1. Then you change Heading 1's font to THUMBA. What happens to MyStyle1 text if you did not set its own font?"
+        options: ["It changes to THUMBA as well", "It stays exactly the same", "It becomes plain body text", "It is deleted"]
+        answer: "It changes to THUMBA as well"
+        difficulty: 3
+        hints: ["What does 'inherit' mean for features you did not set?", "A child style takes what it has not changed from its parent."]
+        solution: "Step 1: MyStyle1 takes unset features from Heading 1. Step 2: Its font was not set, so the change to Heading 1's font flows into MyStyle1."
+        mistakes: {"It stays exactly the same": new_style, "It becomes plain body text": new_style, "It is deleted": new_style}
+      - prompt: "Your Malayalam heading does not change when you set a new font under Western font. Why?"
+        options: ["Malayalam uses the CTL font setting", "Malayalam text cannot have styles", "The heading is in a footnote", "You must first export to PDF"]
+        answer: "Malayalam uses the CTL font setting"
+        difficulty: 3
+        hints: ["Writer keeps separate font settings for different scripts.", "Which setting is for complex scripts?"]
+        solution: "Step 1: Writer has Western, Asian and CTL (complex text layout) fonts. Step 2: Malayalam is a complex script, so its font is set in CTL."
+        mistakes: {"Malayalam text cannot have styles": new_style, "The heading is in a footnote": new_style, "You must first export to PDF": new_style}
 
   - code: it9.styles.notes_toc
     title: Footnotes, endnotes and table of contents
@@ -299,3 +328,17 @@ concepts:
         hints: ["'End' of the document."]
         solution: "Endnote."
         mistakes: {"Footnote": footnote}
+      - prompt: "Your subheadings use MyStyle2, but they do not appear in the table of contents. What is the likely cause?"
+        options: ["MyStyle2 was not made to inherit from a Heading level", "The table of contents shows only one heading", "Subheadings never appear in a table of contents", "The page has footnotes"]
+        answer: "MyStyle2 was not made to inherit from a Heading level"
+        difficulty: 3
+        hints: ["How does Writer decide what goes in the table of contents?", "Check the Inherit from box in the Organizer tab."]
+        solution: "Step 1: The table of contents is built from Heading levels. Step 2: A style that does not inherit from a Heading level is not counted, so set Inherit from to Heading 2 and update the index."
+        mistakes: {"The table of contents shows only one heading": inherit_level, "Subheadings never appear in a table of contents": inherit_level, "The page has footnotes": toc}
+      - prompt: "A page has footnotes 1, 2 and 3. You add a new footnote between notes 1 and 2. What number does the old note 3 become?"
+        answer: "4"
+        check: "3 + 1"
+        difficulty: 3
+        hints: ["Footnotes are numbered in order automatically.", "One new note comes before it."]
+        solution: "Step 1: The new note becomes 2. Step 2: Every later note moves up by one, so old 3 becomes 4."
+        mistakes: {"3": footnote}

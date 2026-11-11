@@ -119,6 +119,27 @@ concepts:
         hints: ["100 × 100, 100 × 5, 2 × 100 and 2 × 5."]
         solution: "Step 1: 10000 + 500 + 200 + 10. Step 2: = 10710."
         mistakes: {"10010": product_terms}
+      - prompt: "Use (30 + 4)(20 + 1) to work out 34 × 21."
+        answer: "714"
+        check: "34*21"
+        difficulty: 2
+        hints: ["Multiply every part of the first bracket by every part of the second.", "600 + 30 + 80 + 4."]
+        solution: "Step 1: 30 × 20 = 600, 30 × 1 = 30, 4 × 20 = 80, 4 × 1 = 4. Step 2: 600 + 30 + 80 + 4 = 714."
+        mistakes: {"604": product_terms, "634": product_terms}
+      - prompt: "(x + a)(x + 3) = x² + 8x + 15. What is a?"
+        answer: "5"
+        check: "15/3"
+        difficulty: 3
+        hints: ["The last term is a × 3.", "Also a + 3 must be 8. Check both."]
+        solution: "Step 1: a × 3 = 15, so a = 5. Step 2: Check the middle term: 5 + 3 = 8."
+        mistakes: {"12": product_constant, "8": product_constant}
+      - prompt: "Expand (x − 2)(x − 6)."
+        options: ["x² − 8x + 12", "x² − 8x − 12", "x² + 8x + 12", "x² − 4x + 12"]
+        answer: "x² − 8x + 12"
+        difficulty: 3
+        hints: ["−2 × −6 is positive.", "The middle term is (−2) + (−6) lots of x."]
+        solution: "Step 1: x × x = x². Step 2: x × (−6) + (−2) × x = −8x. Step 3: (−2) × (−6) = +12."
+        mistakes: {"x² − 8x − 12": sign_product, "x² + 8x + 12": sign_product}
 
   - code: math9.ident.square_of_sum
     title: "Square of a sum: (a + b)²"
@@ -229,6 +250,27 @@ concepts:
         hints: ["The middle term is 2 × x × k.", "2k = 14. Check: k² should be 49."]
         solution: "Step 1: 2k = 14, so k = 7. Step 2: Check: 7² = 49."
         mistakes: {"14": missing_double}
+      - prompt: "Use (40 + 1)² to work out 41²."
+        answer: "1681"
+        check: "41**2"
+        difficulty: 2
+        hints: ["(a + b)² = a² + 2ab + b².", "1600 + 80 + 1."]
+        solution: "Step 1: 40² = 1600. Step 2: 2 × 40 × 1 = 80. Step 3: 1² = 1, total 1681."
+        mistakes: {"1601": missing_double, "1602": missing_double}
+      - prompt: "If x + 1/x = 5, what is x² + 1/x²?"
+        answer: "23"
+        check: "5**2 - 2"
+        difficulty: 3
+        hints: ["Square both sides of x + 1/x = 5.", "(x + 1/x)² = x² + 2 + 1/x², because x × 1/x = 1."]
+        solution: "Step 1: (x + 1/x)² = 25. Step 2: x² + 2 + 1/x² = 25. Step 3: x² + 1/x² = 23."
+        mistakes: {"25": missing_double, "27": missing_double}
+      - prompt: "A square of side a + b is cut into pieces. Which set of pieces makes it up?"
+        options: ["One a by a square, one b by b square and two a by b rectangles", "One a by a square and one b by b square", "One a by a square, one b by b square and one a by b rectangle", "Two a by a squares and two b by b squares"]
+        answer: "One a by a square, one b by b square and two a by b rectangles"
+        difficulty: 3
+        hints: ["Draw the square and cut each side at the point a from the corner.", "The two rectangles are the 2ab."]
+        solution: "Step 1: Cutting both sides at a gives four pieces. Step 2: They are a², b² and two ab rectangles. Step 3: So (a + b)² = a² + 2ab + b²."
+        mistakes: {"One a by a square and one b by b square": square_each_term, "One a by a square, one b by b square and one a by b rectangle": missing_double}
 
   - code: math9.ident.square_of_difference
     title: "Square of a difference: (a − b)²"
@@ -341,6 +383,27 @@ concepts:
         hints: ["Expand both (x − y)² and (y − x)².", "y − x is −(x − y), and squaring removes the minus."]
         solution: "Step 1: (x − y)² = x² − 2xy + y². Step 2: (y − x)² = y² − 2xy + x², the same."
         mistakes: {"x² − y²": square_each_term, "x² + y²": square_each_term}
+      - prompt: "Use (50 − 2)² to work out 48²."
+        answer: "2304"
+        check: "48**2"
+        difficulty: 2
+        hints: ["(a − b)² = a² − 2ab + b².", "2500 − 200 + 4."]
+        solution: "Step 1: 50² = 2500. Step 2: 2 × 50 × 2 = 200, taken away. Step 3: 2² = 4 added: 2304."
+        mistakes: {"2496": square_each_term, "2296": sign_last}
+      - prompt: "a + b = 10 and ab = 21. What is (a − b)²?"
+        answer: "16"
+        check: "10**2 - 4*21"
+        difficulty: 3
+        hints: ["(a − b)² = a² + b² − 2ab, and a² + b² = (a + b)² − 2ab.", "So (a − b)² = (a + b)² − 4ab."]
+        solution: "Step 1: (a + b)² = 100. Step 2: (a − b)² = 100 − 4 × 21 = 16. Step 3: Check with a = 7, b = 3: (7 − 3)² = 16."
+        mistakes: {"58": missing_double, "79": missing_double}
+      - prompt: "(x − k)² = x² − 12x + 36. What is k?"
+        answer: "6"
+        check: "12/2"
+        difficulty: 3
+        hints: ["The middle term is −2kx.", "2k = 12."]
+        solution: "Step 1: −2kx = −12x, so k = 6. Step 2: Check: k² = 36."
+        mistakes: {"12": missing_double, "-6": sign_middle}
 
   - code: math9.ident.difference_of_squares
     title: "Sum times difference: (a + b)(a − b)"
@@ -460,6 +523,27 @@ concepts:
         solution: "9x² − 16 = (3x)² − 4² = (3x + 4)(3x − 4)"
 
         mistakes: {"(3x − 4)²": "diff_squares_not_square", "(3x + 4)²": "diff_squares_not_square"}
+      - prompt: "What is 53² − 47²?"
+        answer: "600"
+        check: "53**2 - 47**2"
+        difficulty: 2
+        hints: ["a² − b² = (a + b)(a − b).", "(53 + 47)(53 − 47)."]
+        solution: "Step 1: 53 + 47 = 100. Step 2: 53 − 47 = 6. Step 3: 100 × 6 = 600."
+        mistakes: {"36": squared_difference}
+      - prompt: "A square of side 15 cm has a square of side 5 cm cut from a corner. What area is left, in cm²?"
+        answer: "200"
+        check: "15**2 - 5**2"
+        difficulty: 3
+        hints: ["Area left = 15² − 5².", "Use (15 + 5)(15 − 5)."]
+        solution: "Step 1: 15² − 5² = (15 + 5)(15 − 5). Step 2: 20 × 10 = 200 cm²."
+        mistakes: {"100": squared_difference}
+      - prompt: "x + y = 12 and x − y = 3. What is x² − y²?"
+        answer: "36"
+        check: "12*3"
+        difficulty: 3
+        hints: ["x² − y² = (x + y)(x − y).", "You don't need x and y themselves."]
+        solution: "Step 1: x² − y² = (x + y)(x − y). Step 2: 12 × 3 = 36."
+        mistakes: {"81": squared_difference, "15": diff_squares_use}
   - code: math9.ident.quick_calculation
     title: Quick calculation with identities
     after: [math9.ident.square_of_difference, math9.ident.difference_of_squares]
@@ -567,3 +651,24 @@ concepts:
         hints: ["Use a² − b² = (a + b)(a − b).", "(101 + 99)(101 − 99)."]
         solution: "(101 + 99)(101 − 99) = 200 × 2 = 400"
         mistakes: {"4": squared_difference}
+      - prompt: "Use an identity to work out 98²."
+        answer: "9604"
+        check: "98**2"
+        difficulty: 2
+        hints: ["98 = 100 − 2.", "10000 − 400 + 4."]
+        solution: "Step 1: (100 − 2)² = 10000 − 2 × 100 × 2 + 4. Step 2: 10000 − 400 + 4 = 9604."
+        mistakes: {"9996": square_each_term, "9596": sign_last}
+      - prompt: "Use an identity to work out 37 × 43."
+        answer: "1591"
+        check: "37*43"
+        difficulty: 3
+        hints: ["Both are 3 away from 40.", "(40 − 3)(40 + 3) = 40² − 3²."]
+        solution: "Step 1: 37 × 43 = (40 − 3)(40 + 3). Step 2: 1600 − 9 = 1591."
+        mistakes: {"1609": sum_not_difference}
+      - prompt: "What is 1002² − 998²?"
+        answer: "8000"
+        check: "1002**2 - 998**2"
+        difficulty: 3
+        hints: ["Use a² − b² = (a + b)(a − b).", "(2000)(4)."]
+        solution: "Step 1: 1002 + 998 = 2000. Step 2: 1002 − 998 = 4. Step 3: 2000 × 4 = 8000."
+        mistakes: {"16": squared_difference}

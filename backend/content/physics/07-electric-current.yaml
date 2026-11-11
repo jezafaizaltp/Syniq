@@ -4,6 +4,12 @@ chapter: 7
 title: Electric Current
 
 tips:
+  volt_meaning: "Potential difference is the work done to move each coulomb of charge. Which pair of units says 'work per charge'?"
+  seconds_needed: "Current is coulombs per second, so the time must be in seconds before you multiply."
+  work_vq: "Potential difference is work per coulomb, so the work is V × Q. The time is not needed for this."
+  stretched_wire: "Stretching changes two things: the wire gets longer and also thinner. Each change raises the resistance."
+  mixed_circuit: "Work out the parallel pair first, as one resistor, then add the resistor in series with it."
+  whole_bulbs_only: "Find the most power the fuse allows (P = VI). You can only switch on whole bulbs, and you must stay within that limit."
   charge_time: "Current = charge ÷ time (I = Q ÷ t). Charge = current × time."
   ohm_rearrange: "Ohm's law: V = IR. For current divide V by R; for resistance divide V by I."
   series_add: "In series, resistances add: R = R₁ + R₂ + …"
@@ -101,6 +107,27 @@ concepts:
         hints: ["Electrons are negative."]
         solution: "Electrons move opposite to conventional current, from the negative terminal to the positive."
         mistakes: {"From + to −": current_direction}
+      - prompt: "Which of these is the same as 1 volt?"
+        options: ["1 joule per coulomb", "1 coulomb per second", "1 joule per second", "1 coulomb per joule"]
+        answer: "1 joule per coulomb"
+        difficulty: 2
+        hints: ["V = W ÷ Q.", "Which unit is work and which is charge?"]
+        solution: "Step 1: Potential difference = work ÷ charge. Step 2: So 1 V = 1 J ÷ 1 C. (1 C/s is an ampere; 1 J/s is a watt.)"
+        mistakes: {"1 coulomb per second": volt_meaning, "1 joule per second": volt_meaning, "1 coulomb per joule": volt_meaning}
+      - prompt: "A phone charges at a steady 2 A for 1.5 hours. How much charge flows into it, in C?"
+        answer: "10800"
+        check: "2*1.5*3600"
+        difficulty: 3
+        hints: ["Q = I × t, with t in seconds.", "1.5 hours = 5400 s."]
+        solution: "Step 1: t = 1.5 × 3600 = 5400 s. Step 2: Q = 2 × 5400 = 10,800 C."
+        mistakes: {"3": seconds_needed, "180": seconds_needed, "1.33": charge_time}
+      - prompt: "A bulb has 6 V across it, and 3 C of charge flows through it in 1.5 s. How much energy does the bulb take from the charge in that time, in J?"
+        answer: "18"
+        check: "6*3"
+        difficulty: 3
+        hints: ["V = W ÷ Q.", "W = 6 × 3."]
+        solution: "Step 1: Each coulomb gives up 6 J. Step 2: 3 C give up 6 × 3 = 18 J."
+        mistakes: {"2": work_vq, "27": work_vq, "12": work_vq}
 
   - code: phy9.current.ohm
     title: Ohm's law and resistance
@@ -203,6 +230,27 @@ concepts:
         hints: ["R = 6 ÷ 2 = 3 Ω stays the same."]
         solution: "Step 1: R = 3 Ω. Step 2: I = 9 ÷ 3 = 3 A."
         mistakes: {"5": ohm_rearrange}
+      - prompt: "A wire has a resistance of 10 Ω. It is stretched to twice its length, so its cross-section becomes half as big. What is its new resistance, in Ω?"
+        answer: "40"
+        check: "10*2*2"
+        difficulty: 3
+        hints: ["Twice as long: resistance × 2.", "Half the cross-section: resistance × 2 again."]
+        solution: "Step 1: Double length doubles R: 20 Ω. Step 2: Half the area doubles R again: 40 Ω."
+        mistakes: {"20": stretched_wire, "10": stretched_wire, "5": stretched_wire}
+      - prompt: "On a graph of potential difference V against current I, a resistor's line is straight and passes through (2 A, 10 V). What is its resistance, in Ω?"
+        answer: "5"
+        check: "10/2"
+        difficulty: 2
+        hints: ["R = V ÷ I.", "Read V and I from the point."]
+        solution: "Step 1: R = 10 ÷ 2 = 5 Ω. Step 2: Because the line is straight, R is the same at every point."
+        mistakes: {"0.2": ohm_rearrange, "20": ohm_rearrange}
+      - prompt: "A heater takes 3 A from a 12 V supply. What voltage is needed to make 5 A flow through the same heater, in V?"
+        answer: "20"
+        check: "12/3*5"
+        difficulty: 2
+        hints: ["Find the heater's resistance first.", "R = 12 ÷ 3 = 4 Ω."]
+        solution: "Step 1: R = 4 Ω. Step 2: V = 5 × 4 = 20 V."
+        mistakes: {"14": ohm_rearrange, "7.2": ohm_rearrange}
 
   - code: phy9.current.circuits
     title: Series and parallel circuits
@@ -308,3 +356,24 @@ concepts:
         hints: ["Total R = 6 ÷ 3 = 2 Ω."]
         solution: "Step 1: R = 2 Ω. Step 2: I = 12 ÷ 2 = 6 A (2 A in each branch)."
         mistakes: {"2/3": parallel_reciprocal, "2": parallel_reciprocal}
+      - prompt: "A 5 Ω resistor and an unknown resistor are connected in series to a 12 V battery. A current of 0.8 A flows. What is the unknown resistance, in Ω?"
+        answer: "10"
+        check: "12/0.8 - 5"
+        difficulty: 3
+        hints: ["Total resistance = 12 ÷ 0.8.", "In series, the total is the sum."]
+        solution: "Step 1: Total R = 12 ÷ 0.8 = 15 Ω. Step 2: Unknown = 15 − 5 = 10 Ω."
+        mistakes: {"15": series_add, "9.6": ohm_rearrange}
+      - prompt: "Two 4 Ω resistors are connected in parallel, and this pair is connected in series with a 3 Ω resistor. What is the total resistance, in Ω?"
+        answer: "5"
+        check: "1/(1/4 + 1/4) + 3"
+        difficulty: 3
+        hints: ["Two equal resistors in parallel give half of one.", "Then add 3 Ω."]
+        solution: "Step 1: Parallel pair: 1/R = 1/4 + 1/4, so R = 2 Ω. Step 2: Total = 2 + 3 = 5 Ω."
+        mistakes: {"11": mixed_circuit, "8": mixed_circuit, "1.2": mixed_circuit}
+      - prompt: "A 230 V circuit has a 5 A fuse. What is the largest number of 100 W bulbs that can be on at the same time without blowing the fuse?"
+        answer: "11"
+        check: "1150//100"
+        difficulty: 3
+        hints: ["Maximum power = 230 × 5.", "How many whole 100 W bulbs fit in that?"]
+        solution: "Step 1: Maximum power = 230 × 5 = 1150 W. Step 2: 1150 ÷ 100 = 11.5, so at most 11 whole bulbs."
+        mistakes: {"12": whole_bulbs_only, "11.5": whole_bulbs_only, "46": power_vi}

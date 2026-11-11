@@ -5,6 +5,7 @@ chapter: 4
 title: Data Analysis Made Easy
 
 tips:
+  density_divide: "Density is people per square kilometre. Which number goes on top of the division?"
   calc_formula: "A Calc formula starts with =. Population density = population ÷ area, e.g. =C2/F2. Drag the fill handle (small square at the cell corner) to copy the formula down; the cell addresses change row by row."
   calc_limits: "A file of several sheets has a name like a book of work. For the row limit, check the textbook figure: it is a little over a million (two to the power twenty)."
   lookup_fn: "In a lookup table each group starts at its lower limit. A value belongs to the last group whose lower limit is not more than it: a value exactly at a limit starts the new group. Ranges are named from the Data menu."
@@ -119,6 +120,20 @@ concepts:
         hints: ["The ROUND function also works."]
         solution: "Delete Decimal Place (or ROUND)."
         mistakes: {"AutoFilter": calc_formula}
+      - prompt: "A district has 12,60,000 people on 900 sq km. What is its population density?"
+        answer: "1400"
+        check: "1260000//900"
+        difficulty: 3
+        hints: ["Density = population ÷ area.", "1,260,000 ÷ 900."]
+        solution: "Step 1: Density = 1,260,000 ÷ 900. Step 2: = 1,400 people per sq km."
+        mistakes: {"14": density_divide, "140": density_divide}
+      - prompt: "A student typed =F2/C2 in G2 instead of =C2/F2. What will the column show?"
+        options: ["Area per person, a very small number, not the density", "The correct density", "An error message", "The total population"]
+        answer: "Area per person, a very small number, not the density"
+        difficulty: 3
+        hints: ["C2 is the population and F2 the area.", "What happens if you divide area by population?"]
+        solution: "Step 1: Density is population ÷ area, so C2/F2. Step 2: F2/C2 is area ÷ population: square kilometres per person, a tiny decimal, not people per sq km."
+        mistakes: {"The correct density": density_divide, "An error message": calc_formula, "The total population": calc_formula}
 
   - code: it9.data.lookup_countif
     title: Classifying with LOOKUP and counting with COUNTIF
@@ -241,6 +256,20 @@ concepts:
         hints: ["59 is less than 60."]
         solution: "C."
         mistakes: {"B": lookup_fn}
+      - prompt: "Your lookup table lists the lower limits as 800, 400, 200, 100, 0 (largest first). LOOKUP gives strange categories. Why?"
+        options: ["LOOKUP needs the search vector sorted from smallest to largest", "LOOKUP cannot use numbers", "The range must be named Classification", "COUNTIF must be used first"]
+        answer: "LOOKUP needs the search vector sorted from smallest to largest"
+        difficulty: 3
+        hints: ["How were the lower limits written in the textbook table?", "LOOKUP searches through the list in order."]
+        solution: "Step 1: LOOKUP finds the largest lower limit not more than the value by moving up the list. Step 2: That only works when the limits go 0, 100, 200, 400, 800 in increasing order."
+        mistakes: {"LOOKUP cannot use numbers": lookup_fn, "The range must be named Classification": lookup_fn, "COUNTIF must be used first": countif_fn}
+      - prompt: "In J2:J36, 6 states are Very High, 9 High, 11 Moderate and 4 Low. How many are Very Low?"
+        answer: "5"
+        check: "35 - (6+9+11+4)"
+        difficulty: 3
+        hints: ["How many cells are there from J2 to J36?", "Subtract all the counts you know."]
+        solution: "Step 1: J2 to J36 is 35 cells. Step 2: 6 + 9 + 11 + 4 = 30. Step 3: 35 − 30 = 5."
+        mistakes: {"6": countif_fn, "4": countif_fn}
 
   - code: it9.data.filter_protect
     title: Filtering and protecting data
@@ -331,3 +360,17 @@ concepts:
         hints: ["One counts, one displays."]
         solution: "COUNTIF counts; AutoFilter (or Standard Filter) shows the rows."
         mistakes: {"Protect Sheet and Define Range": countif_fn}
+      - prompt: "You protected a sheet and gave the file to a friend. They can open it but cannot type a correction. What must happen first?"
+        options: ["The sheet is unprotected with the password", "The friend uses AutoFilter", "The file is saved as a new name", "The friend deletes the rows"]
+        answer: "The sheet is unprotected with the password"
+        difficulty: 3
+        hints: ["What does Protect Sheet stop?", "Where is the same option to undo it?"]
+        solution: "Step 1: A protected sheet can be viewed but not edited. Step 2: Tools → Protect Sheet again with the password removes the protection so edits are allowed."
+        mistakes: {"The friend uses AutoFilter": protect_sheet, "The file is saved as a new name": protect_sheet, "The friend deletes the rows": protect_sheet}
+      - prompt: "After filtering to Very High Density, you see 6 rows and add their populations. Then you clear the filter. How many rows are deleted from the sheet?"
+        answer: "0"
+        check: "0"
+        difficulty: 3
+        hints: ["Does a filter hide rows or remove them?"]
+        solution: "Step 1: AutoFilter only hides the rows that do not match. Step 2: Clearing the filter shows them again: nothing was deleted."
+        mistakes: {"29": autofilter, "6": autofilter}

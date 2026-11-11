@@ -5,6 +5,10 @@ chapter: 12
 title: Prisms
 
 tips:
+  sloped_depth: "The depth changes along the pool. Look at the pool from the side: what shape is that end, and how do you find its area?"
+  melt_recast: "Melting keeps the volume the same. Put both volumes in the same unit before dividing: 1 m = 100 cm, so 1 m³ = 100 × 100 × 100 cm³."
+  level_rise: "The water that flows in spreads over the whole floor of the tank. Rise = volume ÷ floor area, with litres changed to m³ first."
+  open_faces: "List the faces that are actually painted. A floor that is not painted is left out."
   added_dimensions: "Volume multiplies the three measurements: length × width × height. Adding them doesn't give a volume."
   area_not_volume: "That is the area of one face. Volume needs all three measurements: for a cube, edge × edge × edge."
   litres: "1 litre = 1000 cm³, so divide the volume in cm³ by 1000."
@@ -122,6 +126,27 @@ concepts:
         hints: ["Volume = 60000 cm³.", "Divide by 1000."]
         solution: "Step 1: 50 × 40 × 30 = 60000 cm³. Step 2: 60000 ÷ 1000 = 60 litres."
         mistakes: {"60000": litres}
+      - prompt: "A swimming pool is 20 m long and 10 m wide. It is 1 m deep at the shallow end and 3 m deep at the deep end, sloping evenly. How many m³ of water does it hold when full?"
+        answer: "400"
+        check: "(1+3)/2*20*10"
+        difficulty: 3
+        hints: ["Seen from the side, the pool is a trapezium.", "Area of the side = average depth × length; then multiply by the width."]
+        solution: "Step 1: The side is a trapezium of area (1 + 3) ÷ 2 × 20 = 40 m². Step 2: The pool is a prism 10 m wide: 40 × 10 = 400 m³."
+        mistakes: {"600": sloped_depth, "200": sloped_depth}
+      - prompt: "A 1 m³ block of iron is melted and made into small cubes with 10 cm edges. How many small cubes are made?"
+        answer: "1000"
+        check: "100**3/10**3"
+        difficulty: 3
+        hints: ["The total volume does not change.", "Write 1 m³ in cm³ first."]
+        solution: "Step 1: 1 m³ = 100 × 100 × 100 = 1,000,000 cm³. Step 2: One small cube is 10³ = 1000 cm³. Step 3: 1,000,000 ÷ 1000 = 1000 cubes."
+        mistakes: {"10": melt_recast, "100": melt_recast}
+      - prompt: "Water flows into a cuboid tank with a floor 4 m long and 3 m wide at 2,400 litres a minute. By how many cm does the water level rise each minute?"
+        answer: "20"
+        check: "2400/1000/(4*3)*100"
+        difficulty: 3
+        hints: ["2,400 litres is how many m³?", "Rise = volume ÷ floor area."]
+        solution: "Step 1: 2,400 litres = 2.4 m³. Step 2: Floor area = 12 m². Step 3: Rise = 2.4 ÷ 12 = 0.2 m = 20 cm."
+        mistakes: {"200": level_rise, "0.2": level_rise}
 
   - code: math9.prism.surface
     title: Surface area of a prism
@@ -230,6 +255,27 @@ concepts:
         hints: ["Each end is ½ × 3 × 4 = 6 cm².", "The side rectangles together are (3 + 4 + 5) × 10."]
         solution: "Step 1: Ends: 2 × 6 = 12 cm². Step 2: Sides: 12 × 10 = 120 cm². Step 3: Total = 132 cm²."
         mistakes: {"126": both_ends, "60": volume_not_area}
+      - prompt: "A cube has a total surface area of 150 cm². What is its volume, in cm³?"
+        answer: "125"
+        check: "(150/6)**(3/2)"
+        difficulty: 3
+        hints: ["Six equal faces share the 150 cm².", "From one face's area, find the edge."]
+        solution: "Step 1: One face = 150 ÷ 6 = 25 cm². Step 2: Edge = √25 = 5 cm. Step 3: Volume = 5³ = 125 cm³."
+        mistakes: {"25": one_face, "15625": one_face}
+      - prompt: "A room is 5 m long, 4 m wide and 3 m high. The four walls and the ceiling are painted, but not the floor. How many m² are painted?"
+        answer: "74"
+        check: "2*(5*3 + 4*3) + 5*4"
+        difficulty: 2
+        hints: ["Walls: two of 5 × 3 and two of 4 × 3.", "Add the ceiling once."]
+        solution: "Step 1: Walls = 2 × 15 + 2 × 12 = 54 m². Step 2: Ceiling = 20 m². Step 3: Painted = 74 m²."
+        mistakes: {"94": open_faces, "54": open_faces, "60": volume_not_area}
+      - prompt: "A closed cylinder has a radius of 7 cm and a height of 10 cm. Using π ≈ 22/7, what is its total surface area, in cm²?"
+        answer: "748"
+        check: "2*22/7*7*10 + 2*22/7*7**2"
+        difficulty: 3
+        hints: ["Curved surface = 2πrh.", "Both circular ends count too."]
+        solution: "Step 1: Curved surface = 2 × 22/7 × 7 × 10 = 440 cm². Step 2: Each end = 22/7 × 49 = 154 cm²; two ends = 308 cm². Step 3: Total = 748 cm²."
+        mistakes: {"594": both_ends, "440": both_ends, "1540": volume_not_area}
 
   - code: math9.prism.scaling
     title: Bigger and smaller prisms
@@ -316,3 +362,24 @@ concepts:
         hints: ["Which number times itself three times gives 64?", "The edge is 4 cm."]
         solution: "Step 1: 4 × 4 × 4 = 64, so the edge is 4 cm. Step 2: One face = 16 cm². Step 3: 6 × 16 = 96 cm²."
         mistakes: {"16": one_face, "64": volume_not_area}
+      - prompt: "Every edge of a cube is made 1.5 times as long. How many times as big does its volume become?"
+        answer: "3.375"
+        check: "1.5**3"
+        difficulty: 3
+        hints: ["Volume uses three lengths.", "Multiply 1.5 by itself three times."]
+        solution: "Step 1: Volume scales by k³. Step 2: 1.5³ = 3.375."
+        mistakes: {"1.5": scale_volume, "2.25": scale_area, "4.5": scale_volume}
+      - prompt: "Two cubes have volumes of 27 cm³ and 125 cm³. What is the ratio of their surface areas?"
+        options: ["9 : 25", "3 : 5", "27 : 125", "6 : 10"]
+        answer: "9 : 25"
+        difficulty: 3
+        hints: ["Find each edge from the volume first.", "Areas go with the square of the edges."]
+        solution: "Step 1: Edges are 3 cm and 5 cm. Step 2: Surface areas are 6 × 9 and 6 × 25, so the ratio is 9 : 25."
+        mistakes: {"3 : 5": scale_area, "27 : 125": scale_area, "6 : 10": scale_area}
+      - prompt: "A model of a hall is made at a scale of 1 : 50. The model holds 2 litres of air. How many litres of air does the real hall hold?"
+        answer: "250000"
+        check: "2*50**3"
+        difficulty: 3
+        hints: ["Every length is 50 times as long.", "Volume grows by 50 × 50 × 50."]
+        solution: "Step 1: Volume scale = 50³ = 125,000. Step 2: 2 × 125,000 = 250,000 litres."
+        mistakes: {"100": scale_volume, "5000": scale_area}

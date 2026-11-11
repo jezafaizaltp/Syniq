@@ -121,6 +121,27 @@ concepts:
         hints: ["Is there one block of digits that repeats for ever?"]
         solution: "Step 1: The gaps between the 1s keep growing. Step 2: So no fixed block repeats. Step 3: It is irrational."
         mistakes: {"Rational: the 1s repeat": non_repeating, "Rational: it is a decimal": non_repeating}
+      - prompt: "Which of √12, √0.25, 0.333… and 22/7 is irrational?"
+        options: ["√12", "√0.25", "0.333…", "22/7"]
+        answer: "√12"
+        difficulty: 2
+        hints: ["Is the number under the root a perfect square?", "√0.25 = 0.5, a fraction."]
+        solution: "Step 1: √0.25 = 0.5, 0.333… = 1/3 and 22/7 are fractions. Step 2: 12 is not a perfect square, so √12 = 2√3 is irrational."
+        mistakes: {"22/7": pi_exact, "√0.25": perfect_square_root}
+      - prompt: "What kind of number is √3 × √12?"
+        options: ["Rational: it is 6", "Irrational, because both are roots", "Irrational: it is √15", "Rational: it is 36"]
+        answer: "Rational: it is 6"
+        difficulty: 3
+        hints: ["Multiply under one root.", "√36 = ?"]
+        solution: "Step 1: √3 × √12 = √36. Step 2: √36 = 6, which is rational."
+        mistakes: {"Irrational, because both are roots": irrational_product, "Irrational: it is √15": added_under_root}
+      - prompt: "How many whole numbers are there between √20 and √90?"
+        answer: "5"
+        check: "9 - 5 + 1"
+        difficulty: 3
+        hints: ["√20 is between 4 and 5; √90 is between 9 and 10.", "Count 5, 6, 7, 8, 9."]
+        solution: "Step 1: 4² = 16 < 20 < 25 = 5², so √20 is between 4 and 5. Step 2: 9² = 81 < 90 < 100, so √90 is between 9 and 10. Step 3: The whole numbers between are 5, 6, 7, 8, 9: five of them."
+        mistakes: {"70": whole_between_roots, "6": whole_between_roots}
 
   - code: math9.real.number_line
     title: Real numbers on the number line
@@ -221,6 +242,27 @@ concepts:
         hints: ["Distance = 3√2 − √2 = 2√2."]
         solution: "Step 1: PQ = 3√2 − √2 = 2√2. Step 2: ≈ 2 × 1.414 = 2.828."
         mistakes: {"5.656": distance_subtract}
+      - prompt: "Put −√5, −2, √3 and 2 in order from smallest to largest."
+        options: ["−√5, −2, √3, 2", "−2, −√5, √3, 2", "−√5, −2, 2, √3", "−2, −√5, 2, √3"]
+        answer: "−√5, −2, √3, 2"
+        difficulty: 2
+        hints: ["√5 is about 2.24, so −√5 is about −2.24.", "√3 is about 1.73."]
+        solution: "Step 1: −√5 ≈ −2.24 is less than −2. Step 2: √3 ≈ 1.73 is less than 2. Step 3: Order: −√5, −2, √3, 2."
+        mistakes: {"−2, −√5, √3, 2": bigger_negative, "−√5, −2, 2, √3": decimal_compare}
+      - prompt: "A right triangle with shorter sides 1 and 2 is drawn from 0 on the number line. Its longest side is swung down onto the line from 0. At which number does it land?"
+        options: ["√5", "3", "√3", "2.5"]
+        answer: "√5"
+        difficulty: 3
+        hints: ["The longest side is √(1² + 2²).", "Swinging keeps its length."]
+        solution: "Step 1: Longest side = √(1 + 4) = √5. Step 2: The compass keeps the length, so it lands at √5 ≈ 2.24."
+        mistakes: {"3": added_sides, "√3": diagonal_swing}
+      - prompt: "On the number line, P is at −√2 and Q is at 2√2. Using √2 ≈ 1.414, how far apart are they, to three decimal places?"
+        answer: "4.242"
+        check: "3*1.414"
+        difficulty: 3
+        hints: ["Distance = bigger − smaller = 2√2 − (−√2).", "That is 3√2."]
+        solution: "Step 1: 2√2 − (−√2) = 3√2. Step 2: 3 × 1.414 = 4.242."
+        mistakes: {"1.414": distance_subtract, "2.828": negative_distance}
 
   - code: math9.real.distance
     title: Distance between points
@@ -328,3 +370,24 @@ concepts:
         hints: ["x is 6 away from 4.", "Bigger than 4 means go right."]
         solution: "Step 1: x is 6 away from 4, so x = 10 or x = −2. Step 2: Bigger than 4: x = 10."
         mistakes: {"-2": other_side, "2": distance_subtract}
+      - prompt: "Which number is halfway between −7 and 3 on the number line?"
+        answer: "-2"
+        check: "(-7 + 3)/2"
+        difficulty: 2
+        hints: ["Add the two numbers and halve.", "(−7 + 3) ÷ 2."]
+        solution: "Step 1: −7 + 3 = −4. Step 2: −4 ÷ 2 = −2. Step 3: Check: −2 is 5 from both."
+        mistakes: {"5": midpoint_half_distance, "-5": midpoint_half_distance}
+      - prompt: "|x + 2| = 5 and x is negative. What is x?"
+        answer: "-7"
+        check: "-2 - 5"
+        difficulty: 3
+        hints: ["|x + 2| is the distance from x to −2.", "Go 5 to the left of −2."]
+        solution: "Step 1: |x − (−2)| = 5, so x is 5 away from −2. Step 2: The two such points are 3 and −7. Step 3: x is negative, so x = −7."
+        mistakes: {"3": other_side, "-3": sign_slip}
+      - prompt: "Point A is at −3.5 and point B is at 6.25. How far apart are they?"
+        answer: "9.75"
+        check: "6.25 - (-3.5)"
+        difficulty: 3
+        hints: ["Distance = bigger − smaller.", "6.25 − (−3.5) = 6.25 + 3.5."]
+        solution: "Step 1: 6.25 − (−3.5) = 6.25 + 3.5. Step 2: = 9.75."
+        mistakes: {"2.75": negative_distance, "-9.75": distance_subtract}

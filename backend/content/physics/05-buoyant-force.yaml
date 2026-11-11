@@ -4,6 +4,11 @@ chapter: 5
 title: Buoyant Force
 
 tips:
+  compare_up_down: "Compare the two forces on the ball: its weight pulls down, the buoyant force pushes up. Which is bigger?"
+  deeper_same: "Buoyant force depends on the volume under the liquid and the liquid's density. Once the cube is fully under, does either of these change as it goes deeper?"
+  half_immersed: "Only the part under the water pushes water aside."
+  other_liquid: "The same volume of liquid is pushed aside, but a lighter liquid weighs less per cm³. Scale the buoyant force by the liquid's density, then subtract."
+  part_above: "The fraction under the water matches the object's density compared with water. The question asks about the rest."
   apparent_weight: "Apparent weight in a liquid = real weight − buoyant force."
   displaced_not_object: "Buoyant force = weight of the liquid pushed aside. It also equals the loss of weight in water (weight in air − weight in water). Change grams to kg before × g."
   density_formula: "Density = mass ÷ volume. Divide the mass by the volume."
@@ -109,6 +114,27 @@ concepts:
         hints: ["Find each buoyant force first: 5 N and 6 N."]
         solution: "Step 1: In water: 15 − 10 = 5 N. Step 2: In salt water: 15 − 9 = 6 N. Step 3: Difference 1 N."
         mistakes: {"-1": apparent_weight}
+      - prompt: "A ball weighing 3 N is held fully under water, where the buoyant force on it is 5 N. What happens when it is let go?"
+        options: ["It rises, because the upward push is bigger than its weight", "It sinks, because it has weight", "It stays where it is", "It rises only if it is hollow"]
+        answer: "It rises, because the upward push is bigger than its weight"
+        difficulty: 2
+        hints: ["Two forces act on it: which way does each point?", "Which is bigger, 3 N down or 5 N up?"]
+        solution: "Step 1: Weight 3 N down, buoyant force 5 N up. Step 2: Net force 2 N upward, so it rises (until it floats with less of it under)."
+        mistakes: {"It sinks, because it has weight": compare_up_down, "It stays where it is": compare_up_down, "It rises only if it is hollow": compare_up_down}
+      - prompt: "An iron cube already fully under water is lowered further down. What happens to the buoyant force on it?"
+        options: ["It stays the same", "It increases", "It decreases", "It becomes zero at the bottom"]
+        answer: "It stays the same"
+        difficulty: 3
+        hints: ["What does the buoyant force depend on?", "Does the volume of water pushed aside change with depth?"]
+        solution: "Step 1: Buoyant force = weight of the water displaced. Step 2: Fully under, the cube always displaces its own volume, so the force does not change with depth. (Pressure grows on top and bottom alike.)"
+        mistakes: {"It increases": deeper_same, "It decreases": deeper_same, "It becomes zero at the bottom": deeper_same}
+      - prompt: "A block weighs 25 N in air, 15 N in water and 17 N in oil. The buoyant force in oil is what fraction of the buoyant force in water?"
+        answer: "0.8"
+        check: "(25-17)/(25-15)"
+        difficulty: 3
+        hints: ["Buoyant force = weight in air − weight in the liquid.", "Water: 10 N. Oil: 8 N."]
+        solution: "Step 1: In water: 25 − 15 = 10 N. Step 2: In oil: 25 − 17 = 8 N. Step 3: 8 ÷ 10 = 0.8."
+        mistakes: {"1.13": apparent_weight, "1.25": apparent_weight, "0.88": apparent_weight}
 
   - code: phy9.buoyancy.archimedes
     title: Archimedes' principle
@@ -190,6 +216,27 @@ concepts:
         solution: "While under water, the bucket and its water feel an upward buoyant force, so less pull is needed."
 
         mistakes: {"Gravity is weaker in a well": "bucket_buoyancy", "The water in the bucket weighs nothing": "bucket_buoyancy"}
+      - prompt: "A wooden block of volume 500 cm³ floats with exactly half of it under water. What is the buoyant force on it, in N? (1 cm³ of water has a mass of 1 g; g = 10 m/s²)"
+        answer: "2.5"
+        check: "250/1000*10"
+        difficulty: 2
+        hints: ["How many cm³ are under water?", "250 cm³ of water has a mass of 250 g."]
+        solution: "Step 1: Volume under water = 250 cm³. Step 2: That water has a mass of 0.25 kg and weighs 2.5 N."
+        mistakes: {"5": half_immersed, "2500": grams_not_kg, "250": grams_not_kg}
+      - prompt: "A stone weighs 6 N in air and 4 N in water. What is its density, in g/cm³? (g = 10 m/s²; 1 cm³ of water has a mass of 1 g)"
+        answer: "3"
+        check: "600/200"
+        difficulty: 3
+        hints: ["Loss of weight = weight of water displaced = 2 N, which is 200 g of water.", "So the stone's volume is 200 cm³. Its mass is 600 g."]
+        solution: "Step 1: Loss of weight = 2 N, so 200 g of water is displaced and the volume is 200 cm³. Step 2: Mass = 6 ÷ 10 = 0.6 kg = 600 g. Step 3: Density = 600 ÷ 200 = 3 g/cm³."
+        mistakes: {"1.5": apparent_weight, "2": density_formula, "1/3": density_formula}
+      - prompt: "A stone weighs 6 N in air and 4 N in water. What would it weigh when fully dipped in a liquid of density 0.8 g/cm³, in N?"
+        answer: "4.4"
+        check: "6 - 2*0.8"
+        difficulty: 3
+        hints: ["In water the buoyant force is 2 N.", "The liquid is 0.8 times as dense, so the buoyant force is 0.8 × 2."]
+        solution: "Step 1: Buoyant force in water = 2 N. Step 2: In the liquid: 0.8 × 2 = 1.6 N. Step 3: Weight in the liquid = 6 − 1.6 = 4.4 N."
+        mistakes: {"4": other_liquid, "4.8": other_liquid, "3.5": other_liquid}
   - code: phy9.buoyancy.density
     title: Density, floating and sinking
     after: [phy9.buoyancy.archimedes]
@@ -285,3 +332,24 @@ concepts:
         hints: ["Fraction submerged = density of object ÷ density of liquid."]
         solution: "0.9 ÷ 1 = 9/10: most of an iceberg is hidden under water."
         mistakes: {"1/10": floating_balance}
+      - prompt: "A wooden block of density 0.6 g/cm³ floats in fresh water. What fraction of its volume is above the water?"
+        answer: "2/5"
+        check: "1 - 6/10"
+        difficulty: 3
+        hints: ["The fraction under water = 0.6 ÷ 1.", "Above = whole − under."]
+        solution: "Step 1: Under water: 0.6 = 3/5. Step 2: Above: 1 − 3/5 = 2/5."
+        mistakes: {"3/5": part_above, "0.6": part_above}
+      - prompt: "A ship sails from a river into the sea. How does it sit in the water?"
+        options: ["It rises a little", "It sinks a little lower", "No change", "It sinks completely"]
+        answer: "It rises a little"
+        difficulty: 3
+        hints: ["The ship's weight stays the same.", "Sea water is denser. How much of it must be pushed aside to match the same weight?"]
+        solution: "Step 1: A floating ship displaces its own weight of water. Step 2: Sea water is denser, so a smaller volume weighs the same. Step 3: Less of the ship is under water, so it rises a little."
+        mistakes: {"It sinks a little lower": sea_water_denser, "No change": floating_balance, "It sinks completely": floats_if_less_dense}
+      - prompt: "An object of volume 200 cm³ and mass 180 g is put into oil of density 0.8 g/cm³. What happens?"
+        options: ["It sinks", "It floats with most of it under", "It floats with half of it under", "You cannot tell without its shape"]
+        answer: "It sinks"
+        difficulty: 2
+        hints: ["Find the object's density first.", "Compare it with 0.8 g/cm³."]
+        solution: "Step 1: Density = 180 ÷ 200 = 0.9 g/cm³. Step 2: 0.9 is more than the oil's 0.8, so it sinks (it would float in water)."
+        mistakes: {"It floats with most of it under": floats_if_less_dense, "It floats with half of it under": floats_if_less_dense, "You cannot tell without its shape": density_formula}

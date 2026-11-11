@@ -5,6 +5,10 @@ chapter: 3
 title: Chemical Bonding
 
 tips:
+  ion_charge_strength: "Melting means pulling the ions apart. Compare the size of the charges on the ions in each compound."
+  lone_pairs: "Count the outer electrons of the central atom, take away those used in bonds, and pair up what is left."
+  ions_in_water: "Current in a solution needs ions that can move. Does the substance break into ions when it dissolves?"
+  electrons_moved: "Count the electrons each metal atom gives, times the number of metal atoms in one unit."
   metals_lose: "Metals lose electrons to become positive ions; non-metals gain electrons to become negative ions."
   ionic_vs_covalent: "Ionic bonds form when a metal gives electrons to a non-metal. Covalent bonds form when non-metals share electrons."
   bond_pairs: "Each shared pair is 2 electrons: a single bond is one pair, a double bond two pairs, a triple bond three pairs. Count the bonds, then the pairs or electrons."
@@ -104,6 +108,27 @@ concepts:
         solution: "Carbon shares 4 electrons to complete its octet: valency 4."
 
         mistakes: {"6": "valency_is_needed", "2": "valency_is_needed"}
+      - prompt: "Element X has the configuration 2, 8, 6. What is its valency, and which ion does it form?"
+        options: ["Valency 2; X²⁻", "Valency 6; X⁶⁺", "Valency 2; X²⁺", "Valency 6; X⁶⁻"]
+        answer: "Valency 2; X²⁻"
+        difficulty: 3
+        hints: ["How many electrons short of 8 is the outer shell?", "Gaining electrons gives a negative ion."]
+        solution: "Step 1: X needs 2 more electrons for an octet, so its valency is 2. Step 2: It gains 2 electrons to form X²⁻."
+        mistakes: {"Valency 6; X⁶⁺": valency_is_needed, "Valency 2; X²⁺": metals_lose, "Valency 6; X⁶⁻": valency_is_needed}
+      - prompt: "A metal X has valency 3 and a non-metal Y has valency 2. What is the formula of their compound?"
+        options: ["X₂Y₃", "X₃Y₂", "XY", "XY₃"]
+        answer: "X₂Y₃"
+        difficulty: 2
+        hints: ["X forms X³⁺ and Y forms Y²⁻.", "Make the total charge zero: what is the smallest number both 3 and 2 go into?"]
+        solution: "Step 1: Charges +3 and −2. Step 2: 2 × (+3) + 3 × (−2) = 0, so X₂Y₃ (like Al₂O₃)."
+        mistakes: {"X₃Y₂": charges_balance, "XY": charges_balance, "XY₃": charges_balance}
+      - prompt: "How many electrons must a phosphorus atom (atomic number 15) gain to complete its octet?"
+        answer: "3"
+        check: "8 - (15-2-8)"
+        difficulty: 2
+        hints: ["Phosphorus is 2, 8, 5.", "How far is 5 from 8?"]
+        solution: "Step 1: Phosphorus has 5 outer electrons. Step 2: It needs 8 − 5 = 3 more."
+        mistakes: {"5": valency_is_needed, "13": valency_is_needed}
   - code: chem9.bonding.ionic
     title: Ionic bonds
     after: [chem9.bonding.octet]
@@ -192,6 +217,27 @@ concepts:
         hints: ["Cross over the charges: Ca₃N₂.", "3 × (+2) = +6 and 2 × (−3) = −6."]
         solution: "Ca₃N₂: three Ca²⁺ (+6) balance two N³⁻ (−6)."
         mistakes: {"2": charges_balance}
+      - prompt: "Aluminium forms Al³⁺ and sulphur forms S²⁻. What is the formula of aluminium sulphide?"
+        options: ["Al₂S₃", "Al₃S₂", "AlS", "AlS₃"]
+        answer: "Al₂S₃"
+        difficulty: 2
+        hints: ["The charges must add to zero.", "Cross over the charge numbers."]
+        solution: "Step 1: Two Al³⁺ give +6; three S²⁻ give −6. Step 2: Formula Al₂S₃."
+        mistakes: {"Al₃S₂": charges_balance, "AlS": charges_balance, "AlS₃": charges_balance}
+      - prompt: "Magnesium oxide melts at about 2850 °C, but sodium chloride melts at about 800 °C. What best explains this?"
+        options: ["Mg²⁺ and O²⁻ carry bigger charges, so they attract more strongly", "Magnesium oxide is covalent", "Magnesium atoms are heavier than sodium atoms", "Oxygen is a gas, so it holds on harder"]
+        answer: "Mg²⁺ and O²⁻ carry bigger charges, so they attract more strongly"
+        difficulty: 3
+        hints: ["Both are ionic. What holds ions together?", "Compare 2+ and 2− with 1+ and 1−."]
+        solution: "Step 1: Both are held by attraction between ions. Step 2: Doubly charged ions attract much more strongly, so more energy is needed to melt MgO."
+        mistakes: {"Magnesium oxide is covalent": ionic_vs_covalent, "Magnesium atoms are heavier than sodium atoms": ion_charge_strength, "Oxygen is a gas, so it holds on harder": ion_charge_strength}
+      - prompt: "When one unit of calcium chloride, CaCl₂, forms from its atoms, how many electrons are transferred in all?"
+        answer: "2"
+        check: "1*2"
+        difficulty: 2
+        hints: ["How many electrons does Ca lose to become Ca²⁺?", "Each Cl takes one."]
+        solution: "Step 1: Ca loses 2 electrons. Step 2: Each of the two Cl atoms gains 1. Step 3: 2 electrons are transferred."
+        mistakes: {"1": electrons_moved, "4": electrons_moved, "3": electrons_moved}
 
   - code: chem9.bonding.covalent
     title: Covalent bonds
@@ -282,3 +328,24 @@ concepts:
         hints: ["Which atom is more electronegative?"]
         solution: "Chlorine pulls the shared pair closer, so it is slightly negative (δ−) and hydrogen slightly positive (δ+)."
         mistakes: {"Neither": polar_electronegativity, "Both equally": polar_electronegativity}
+      - prompt: "In a water molecule, H₂O, how many lone pairs (pairs of electrons not used in bonding) are on the oxygen atom?"
+        answer: "2"
+        check: "(6-2)/2"
+        difficulty: 3
+        hints: ["Oxygen has 6 outer electrons.", "It uses one of its own electrons in each of its two bonds."]
+        solution: "Step 1: Oxygen uses 2 of its 6 electrons in the two O–H bonds. Step 2: The other 4 make 2 lone pairs."
+        mistakes: {"4": lone_pairs, "6": lone_pairs, "1": lone_pairs}
+      - prompt: "How many electrons in all are shared in a molecule of ammonia, NH₃?"
+        answer: "6"
+        check: "3*2"
+        difficulty: 2
+        hints: ["How many N–H bonds are there?", "Each single bond is a shared pair."]
+        solution: "Step 1: Three N–H single bonds. Step 2: 3 pairs = 6 shared electrons."
+        mistakes: {"3": bond_pairs, "8": bond_pairs, "5": bond_pairs}
+      - prompt: "A sugar solution does not conduct electricity, but a salt solution does. Why?"
+        options: ["Sugar is covalent and does not form ions in water", "Sugar does not really dissolve", "Sugar is an ionic compound", "Salt has more electrons than sugar"]
+        answer: "Sugar is covalent and does not form ions in water"
+        difficulty: 2
+        hints: ["What carries current in a solution?", "Does sugar break into charged particles?"]
+        solution: "Step 1: Current in a solution needs moving ions. Step 2: Salt splits into Na⁺ and Cl⁻; covalent sugar molecules stay whole and uncharged."
+        mistakes: {"Sugar does not really dissolve": ions_in_water, "Sugar is an ionic compound": ionic_vs_covalent, "Salt has more electrons than sugar": ions_in_water}

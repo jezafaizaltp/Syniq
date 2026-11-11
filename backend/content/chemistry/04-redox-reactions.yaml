@@ -4,6 +4,8 @@ chapter: 4
 title: Redox Reactions
 
 tips:
+  peroxide: "Hydrogen is +1 here and the total must be 0. Share what is left equally between the two oxygen atoms."
+  per_atom_change: "Find the oxidation number of one atom before and after the reaction. The change is the difference for each atom."
   oil_rig: "Remember OIL RIG: Oxidation Is Loss, Reduction Is Gain (of electrons). Then ask whether the substance gains or loses electrons, or loses or gains oxygen."
   oxidation_number_up: "Oxidation increases the oxidation number; reduction decreases it."
   element_zero: "An element on its own (like Cl₂ or Fe) has oxidation number zero. In a compound, use oxygen as −2 and hydrogen as +1 and make the total come out right."
@@ -101,6 +103,27 @@ concepts:
         solution: "Electrons cannot just disappear: whatever loses them (oxidised) gives them to something that gains them (reduced)."
 
         mistakes: {"Oxygen is always present": "redox_together", "Heat is always given out": "redox_together"}
+      - prompt: "In 2Mg + O₂ → 2MgO, how many electrons does one O₂ molecule gain?"
+        answer: "4"
+        check: "2*2"
+        difficulty: 3
+        hints: ["Each oxygen atom becomes O²⁻.", "An O₂ molecule has two oxygen atoms."]
+        solution: "Step 1: Each O atom gains 2 electrons. Step 2: O₂ gains 2 × 2 = 4 (from two Mg atoms)."
+        mistakes: {"2": forgot_count, "1": forgot_count}
+      - prompt: "In 2Fe³⁺ + Sn²⁺ → 2Fe²⁺ + Sn⁴⁺, which is oxidised?"
+        options: ["Sn²⁺", "Fe³⁺", "Both", "Neither"]
+        answer: "Sn²⁺"
+        difficulty: 3
+        hints: ["Which ion's charge goes up?", "Going up in charge means losing electrons."]
+        solution: "Step 1: Sn²⁺ → Sn⁴⁺ loses 2 electrons: oxidised. Step 2: Each Fe³⁺ → Fe²⁺ gains one: reduced."
+        mistakes: {"Fe³⁺": oil_rig, "Both": redox_together, "Neither": redox_together}
+      - prompt: "In 2H₂S + SO₂ → 3S + 2H₂O, what happens to H₂S?"
+        options: ["It is oxidised: it loses hydrogen", "It is reduced: it gains hydrogen", "Neither, because it gains no oxygen", "It is reduced: it loses oxygen"]
+        answer: "It is oxidised: it loses hydrogen"
+        difficulty: 3
+        hints: ["H₂S becomes S. What does it lose?", "Loss of hydrogen is one kind of oxidation."]
+        solution: "Step 1: H₂S loses its hydrogen to become S. Step 2: Loss of hydrogen is oxidation (S goes from −2 to 0)."
+        mistakes: {"It is reduced: it gains hydrogen": oil_rig, "Neither, because it gains no oxygen": oil_rig, "It is reduced: it loses oxygen": oil_rig}
   - code: chem9.redox.oxidation_number
     title: Oxidation numbers
     after: [chem9.redox.electrons]
@@ -182,6 +205,27 @@ concepts:
         hints: ["The total is −2, not 0.", "2x − 14 = −2."]
         solution: "2x + 7(−2) = −2, so 2x = 12 and x = +6."
         mistakes: {"7": ion_total, "12": forgot_count}
+      - prompt: "What is the oxidation number of nitrogen in nitric acid, HNO₃?"
+        answer: "5"
+        check: "0 - 1 - 3*(-2)"
+        difficulty: 2
+        hints: ["H is +1 and each O is −2.", "1 + x + 3(−2) = 0."]
+        solution: "Step 1: 1 + x − 6 = 0. Step 2: x = +5."
+        mistakes: {"-5": oxygen_minus_two, "1": forgot_count, "7": forgot_count}
+      - prompt: "What is the oxidation number of oxygen in hydrogen peroxide, H₂O₂?"
+        answer: "-1"
+        check: "-2*1/2"
+        difficulty: 3
+        hints: ["Each H is +1.", "2(+1) + 2x = 0."]
+        solution: "Step 1: 2 + 2x = 0. Step 2: x = −1. (Peroxides are the exception to O = −2.)"
+        mistakes: {"-2": peroxide, "-4": peroxide, "1": peroxide}
+      - prompt: "What is the oxidation number of sulphur in the thiosulphate ion, S₂O₃²⁻?"
+        answer: "2"
+        check: "(-2 + 6)/2"
+        difficulty: 3
+        hints: ["The total must equal the ion's charge, −2.", "2x + 3(−2) = −2."]
+        solution: "Step 1: 2x − 6 = −2. Step 2: 2x = 4, so x = +2."
+        mistakes: {"3": ion_total, "4": forgot_count, "8": ion_total}
 
   - code: chem9.redox.agents
     title: Oxidising and reducing agents
@@ -262,3 +306,24 @@ concepts:
         hints: ["Mg: 0 → +2. O: 0 → −2."]
         solution: "Mg is oxidised (reducing agent); O₂ is reduced (oxidising agent)."
         mistakes: {"Mg is the oxidising agent and O₂ is the reducing agent": agent_opposite}
+      - prompt: "In MnO₂ + 4HCl → MnCl₂ + Cl₂ + 2H₂O, which substance is the oxidising agent?"
+        options: ["MnO₂", "HCl", "MnCl₂", "Cl₂"]
+        answer: "MnO₂"
+        difficulty: 3
+        hints: ["Find Mn's oxidation number before and after.", "The oxidising agent is the one that is reduced."]
+        solution: "Step 1: Mn goes from +4 in MnO₂ to +2 in MnCl₂: reduced. Step 2: So MnO₂ is the oxidising agent (HCl is oxidised to Cl₂)."
+        mistakes: {"HCl": agent_opposite, "MnCl₂": agent_opposite, "Cl₂": agent_opposite}
+      - prompt: "In 2KI + Cl₂ → 2KCl + I₂, by how much does the oxidation number of each iodine atom change?"
+        answer: "1"
+        check: "0 - (-1)"
+        difficulty: 2
+        hints: ["What is iodine's oxidation number in KI?", "And in I₂?"]
+        solution: "Step 1: In KI iodine is −1. Step 2: In I₂ it is 0. Step 3: Change = +1 for each atom."
+        mistakes: {"2": per_atom_change, "-1": oxidation_number_up}
+      - prompt: "In 2KI + Cl₂ → 2KCl + I₂, which substance is the reducing agent?"
+        options: ["KI", "Cl₂", "KCl", "I₂"]
+        answer: "KI"
+        difficulty: 2
+        hints: ["Which element's oxidation number goes up?", "The reducing agent is itself oxidised."]
+        solution: "Step 1: Iodine goes from −1 to 0: KI is oxidised. Step 2: So KI is the reducing agent; Cl₂ is the oxidising agent."
+        mistakes: {"Cl₂": agent_opposite, "KCl": agent_opposite, "I₂": agent_opposite}

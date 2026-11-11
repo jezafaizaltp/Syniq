@@ -5,10 +5,16 @@ chapter: 14
 title: Proportion
 
 tips:
+  ratio_after_change: "Find the actual numbers first, then change them. The ratio numbers themselves are not the counts."
+  ratio_add_equal: "Call the numbers 3k and 5k. Add 4 to each, set the new fraction equal to the new ratio, and solve for k."
+  mixture_one_part: "Only one part of the mixture changes. Find how much of the part that stays the same there is, then use the new ratio."
+  bigger_minus_smaller: "The question asks how much more, so find both shares and take one from the other."
+  chain_ratio: "Make the shared person's number the same in both ratios before joining them into one ratio."
+  work_left: "Some of the work is already done. Count only the work that is left, in worker-days."
   ratio_not_simplified: "Divide both numbers by their biggest common factor to get the simplest form."
   added_difference: "In proportion, things change by multiplying, not by adding the same amount."
-  direct_not_inverse: "When one goes up and the other goes down, the product stays the same: multiply, then divide."
-  inverse_not_direct: "When both go up together, the ratio stays the same: find the amount for 1 first."
+  direct_not_inverse: "When both go up together, the ratio stays the same: find the amount for 1 first."
+  inverse_not_direct: "When one goes up and the other goes down, the product stays the same: multiply, then divide."
   share_of_one_part: "That is the size of one part. Multiply by the number of parts this person gets."
   whole_divided_wrong: "First add the ratio numbers to find how many parts the whole is split into."
 
@@ -96,6 +102,27 @@ concepts:
         hints: ["Anu/Chinnu = (Anu/Binu) × (Binu/Chinnu)."]
         solution: "Step 1: Anu/Binu = 5/6. Step 2: Binu/Chinnu = 4/5. Step 3: Anu/Chinnu = 5/6 × 4/5 = 20/30 = 2/3."
         mistakes: {"9/11": added_not_ratio}
+      - prompt: "A class of 35 has boys and girls in the ratio 3 : 4. How many more boys must join so that there are as many boys as girls?"
+        answer: "5"
+        check: "35*4/7 - 35*3/7"
+        difficulty: 3
+        hints: ["Split 35 into 7 equal parts.", "Find the number of boys and girls, then compare."]
+        solution: "Step 1: One part = 35 ÷ 7 = 5. Step 2: Boys = 15, girls = 20. Step 3: 5 more boys are needed."
+        mistakes: {"1": ratio_after_change, "20": bigger_minus_smaller}
+      - prompt: "A recipe uses rice and dal in the ratio 5 : 2. Kavya wants to use all 3 kg of her dal. How many kg of rice does she need?"
+        answer: "7.5"
+        check: "3*5/2"
+        difficulty: 2
+        hints: ["Each part of dal goes with how much rice?", "2 parts are 3 kg, so 1 part is 1.5 kg."]
+        solution: "Step 1: 2 parts = 3 kg, so 1 part = 1.5 kg. Step 2: Rice = 5 parts = 7.5 kg."
+        mistakes: {"6": added_difference, "1.2": ratio_order}
+      - prompt: "Two numbers are in the ratio 3 : 5. When 4 is added to each, the ratio becomes 2 : 3. What is the smaller number?"
+        answer: "12"
+        check: "3*4"
+        difficulty: 3
+        hints: ["Write the numbers as 3k and 5k.", "(3k + 4) ÷ (5k + 4) = 2 ÷ 3."]
+        solution: "Step 1: 3(3k + 4) = 2(5k + 4). Step 2: 9k + 12 = 10k + 8, so k = 4. Step 3: The numbers are 12 and 20."
+        mistakes: {"4": share_of_one_part, "3": ratio_add_equal, "20": ratio_order}
 
   - code: math9.prop.direct
     title: Direct proportion
@@ -193,6 +220,27 @@ concepts:
         hints: ["1/4 of the tank takes 9 ÷ 3 = 3 minutes."]
         solution: "Step 1: 3 quarters take 9 minutes, so 1 quarter takes 3. Step 2: 4 quarters take 12 minutes."
         mistakes: {"27/4": direct_not_inverse, "3": share_of_one_part}
+      - prompt: "A machine makes 450 bottles in 1.5 hours. How many bottles does it make in 4 hours?"
+        answer: "1200"
+        check: "450/1.5*4"
+        difficulty: 2
+        hints: ["How many bottles in 1 hour?", "450 ÷ 1.5 = 300."]
+        solution: "Step 1: In 1 hour: 450 ÷ 1.5 = 300. Step 2: In 4 hours: 300 × 4 = 1200."
+        mistakes: {"1800": share_of_one_part, "168.75": direct_not_inverse}
+      - prompt: "y is in direct proportion to x. When x = 0.6, y = 4.2. What is x when y = 9.8?"
+        answer: "1.4"
+        check: "9.8/(4.2/0.6)"
+        difficulty: 3
+        hints: ["y ÷ x is the same every time.", "4.2 ÷ 0.6 = 7."]
+        solution: "Step 1: y = 7x. Step 2: 9.8 = 7x, so x = 1.4."
+        mistakes: {"6.2": added_difference, "68.6": wrong_inverse}
+      - prompt: "On a map, 2 cm stands for 15 km. A road is 51 km long. How long is it on the map, in cm?"
+        answer: "6.8"
+        check: "51*2/15"
+        difficulty: 3
+        hints: ["How many km does 1 cm stand for?", "1 cm = 7.5 km."]
+        solution: "Step 1: 1 cm stands for 7.5 km. Step 2: 51 ÷ 7.5 = 6.8 cm."
+        mistakes: {"382.5": wrong_inverse, "25.5": share_of_one_part}
 
   - code: math9.prop.inverse
     title: Inverse proportion
@@ -279,6 +327,27 @@ concepts:
         hints: ["12 × 5 = 60 pipe-hours."]
         solution: "Step 1: 12 × 5 = 60 pipe-hours. Step 2: 60 ÷ 3 = 20 pipes."
         mistakes: {"36/5": inverse_not_direct}
+      - prompt: "10 workers can finish a job in 12 days. After 4 days, 2 workers leave. How many more days will the rest take to finish?"
+        answer: "10"
+        check: "10*(12-4)/8"
+        difficulty: 3
+        hints: ["How much work is left, in worker-days?", "10 workers would have needed 8 more days."]
+        solution: "Step 1: Work left = 10 workers × 8 days = 80 worker-days. Step 2: 8 workers take 80 ÷ 8 = 10 days."
+        mistakes: {"15": work_left, "6.4": inverse_not_direct, "8": work_left}
+      - prompt: "A car takes 4 hours for a journey at 45 km/h. How fast must it go, in km/h, to take 3 hours?"
+        answer: "60"
+        check: "45*4/3"
+        difficulty: 2
+        hints: ["The distance stays the same.", "Distance = 45 × 4 = 180 km."]
+        solution: "Step 1: Distance = 180 km. Step 2: Speed = 180 ÷ 3 = 60 km/h."
+        mistakes: {"33.75": inverse_not_direct, "44": added_difference}
+      - prompt: "x and y are in inverse proportion. When x = 2.5, y = 16. What is x when y = 10?"
+        answer: "4"
+        check: "2.5*16/10"
+        difficulty: 2
+        hints: ["x × y stays the same.", "2.5 × 16 = 40."]
+        solution: "Step 1: xy = 40. Step 2: x = 40 ÷ 10 = 4."
+        mistakes: {"1.5625": inverse_not_direct, "8.5": added_difference}
 
   - code: math9.prop.sharing
     title: Sharing in a ratio
@@ -378,3 +447,24 @@ concepts:
         hints: ["The angles add up to 180°.", "2 + 3 + 4 = 9 parts."]
         solution: "Step 1: 180 ÷ 9 = 20. Step 2: 4 × 20 = 80°."
         mistakes: {"20": share_of_one_part, "45": whole_divided_wrong}
+      - prompt: "A, B and C share ₹3,400. A : B = 1 : 2 and B : C = 3 : 4. How many rupees does C get?"
+        answer: "1600"
+        check: "3400/17*8"
+        difficulty: 3
+        hints: ["Make B's number the same in both ratios: 1 : 2 = 3 : 6 and 3 : 4 = 6 : 8.", "A : B : C = 3 : 6 : 8."]
+        solution: "Step 1: A : B : C = 3 : 6 : 8, 17 parts. Step 2: One part = 3400 ÷ 17 = 200. Step 3: C = 8 × 200 = 1600."
+        mistakes: {"200": share_of_one_part, "1360": chain_ratio}
+      - prompt: "A father divides 2.4 acres of land between two children in the ratio 5 : 7. How many acres more does the bigger share have?"
+        answer: "0.4"
+        check: "2.4/12*(7-5)"
+        difficulty: 3
+        hints: ["Split 2.4 acres into 12 equal parts.", "The bigger share has 2 parts more."]
+        solution: "Step 1: One part = 2.4 ÷ 12 = 0.2 acre. Step 2: The difference is 2 parts = 0.4 acre."
+        mistakes: {"1.4": bigger_minus_smaller, "0.2": share_of_one_part, "1": bigger_minus_smaller}
+      - prompt: "500 ml of sugar syrup has sugar and water in the ratio 1 : 4. How many ml of water must be added to make the ratio 1 : 9?"
+        answer: "500"
+        check: "500/5*9 - 500/5*4"
+        difficulty: 3
+        hints: ["The sugar does not change. How much sugar is there?", "Sugar 100 ml needs 900 ml of water for 1 : 9."]
+        solution: "Step 1: Sugar = 100 ml, water = 400 ml. Step 2: For 1 : 9, water must be 900 ml. Step 3: Add 900 − 400 = 500 ml."
+        mistakes: {"900": mixture_one_part, "450": mixture_one_part, "250": added_difference}

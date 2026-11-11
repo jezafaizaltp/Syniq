@@ -135,6 +135,20 @@ concepts:
         hints: ["Divide."]
         solution: "150 ÷ 10 = 15 times."
         mistakes: {"140": net_types}
+      - prompt: "A lab has 20 computers joined by a hub. One computer sends a file to another. Why does the network slow down?"
+        options: ["A hub sends the data to every computer, not only the one it is for", "A hub stores all the files", "A hub converts data into light", "A hub needs Bluetooth"]
+        answer: "A hub sends the data to every computer, not only the one it is for"
+        difficulty: 3
+        hints: ["Compare a hub with a switch.", "Which one sends data only where it should go?"]
+        solution: "Step 1: A switch sends data only to the right computer. Step 2: A hub sends it to all of them, filling the network with unneeded traffic."
+        mistakes: {"A hub stores all the files": net_devices, "A hub converts data into light": net_media, "A hub needs Bluetooth": net_devices}
+      - prompt: "Two school buildings are 2 km apart and need a fast link that loses very little data. Which medium fits best?"
+        options: ["Optical fibre cable", "Bluetooth", "A UTP cable with RJ45", "A hub"]
+        answer: "Optical fibre cable"
+        difficulty: 3
+        hints: ["Bluetooth reaches about 10 m.", "Which medium carries data as light?"]
+        solution: "Step 1: The distance is long and loss must be low. Step 2: Optical fibre carries data as light through glass with minimal loss over long distances."
+        mistakes: {"Bluetooth": net_types, "A UTP cable with RJ45": net_media, "A hub": net_devices}
 
   - code: it9.net.addresses_protocols
     title: MAC addresses, IP addresses and protocols
@@ -262,6 +276,20 @@ concepts:
         hints: ["IPv4 is only 32-bit."]
         solution: "IPv6 has a much larger address space."
         mistakes: {"To make addresses shorter": mac_ip}
+      - prompt: "Why is 192.168.1.300 not a valid IPv4 address?"
+        options: ["Each number can only be from 0 to 255", "It has too few dots", "IPv4 addresses cannot start with 192", "It uses decimal numbers"]
+        answer: "Each number can only be from 0 to 255"
+        difficulty: 3
+        hints: ["Check each of the four numbers.", "What is the largest value one part can take?"]
+        solution: "Step 1: Each of the four parts of an IPv4 address goes from 0 to 255. Step 2: 300 is too large, so the address is invalid."
+        mistakes: {"It has too few dots": mac_ip, "IPv4 addresses cannot start with 192": mac_ip, "It uses decimal numbers": mac_ip}
+      - prompt: "Your phone gets a new IP address at home and at school, but its MAC address stays the same. Why?"
+        options: ["The MAC address is fixed by the maker; the network gives the IP address", "The phone changes its MAC address daily", "IP addresses are fixed by the maker", "MAC addresses only work at school"]
+        answer: "The MAC address is fixed by the maker; the network gives the IP address"
+        difficulty: 3
+        hints: ["Who assigns each address?", "Which protocol hands out IP addresses?"]
+        solution: "Step 1: The manufacturer sets the MAC address. Step 2: Each network's DHCP gives the device an IP address, so it changes from network to network."
+        mistakes: {"The phone changes its MAC address daily": mac_ip, "IP addresses are fixed by the maker": protocols, "MAC addresses only work at school": mac_ip}
 
   - code: it9.net.using_network
     title: Using the lab network and the internet
@@ -387,3 +415,17 @@ concepts:
         hints: ["The textbook lists four things: name, location, IP, login."]
         solution: "The MAC address is not needed."
         mistakes: {"Its IP address": static_ip}
+      - prompt: "Two lab computers were both given the static IP 192.168.1.20. What is likely to happen?"
+        options: ["An address clash: one or both cannot connect properly", "They share files faster", "DHCP fixes it by changing the MAC address", "Nothing, addresses may repeat"]
+        answer: "An address clash: one or both cannot connect properly"
+        difficulty: 3
+        hints: ["Why do devices need addresses at all?", "Can two houses share one postal address without confusion?"]
+        solution: "Step 1: Each device needs a unique address so data reaches the right one. Step 2: Two with the same IP clash and the network cannot tell them apart."
+        mistakes: {"They share files faster": static_ip, "DHCP fixes it by changing the MAC address": static_ip, "Nothing, addresses may repeat": static_ip}
+      - prompt: "ping 192.168.1.15 gets no reply, but ping 192.168.1.16 replies. What can you say?"
+        options: ["The computer at .15 cannot be reached right now", "The whole lab network is broken", "Your own computer has no IP address", "The internet is down"]
+        answer: "The computer at .15 cannot be reached right now"
+        difficulty: 3
+        hints: ["One ping worked. What does that say about your own connection?", "Only one address did not answer."]
+        solution: "Step 1: The reply from .16 shows your computer and the network work. Step 2: So the problem is with the computer at .15: it may be off or unplugged."
+        mistakes: {"The whole lab network is broken": static_ip, "Your own computer has no IP address": static_ip, "The internet is down": domain_iot}

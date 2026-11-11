@@ -4,6 +4,10 @@ chapter: 2
 title: Equations of Motion
 
 tips:
+  displacement_round: "Displacement only cares where you start and where you finish. Draw the path and join start to finish with a straight line."
+  average_of_speeds: "Average speed is total distance ÷ total time. Find how long each part took; don't just average the two speeds."
+  which_equation: "List what you know (u, v, a, t, s) and what you want. Pick the equation that has exactly those."
+  area_under_both: "Split the velocity–time graph into shapes, find the area of each, then add."
   distance_not_displacement: "Displacement is the straight-line change in position, with direction. Distance is the whole path travelled."
   speed_time_swapped: "Speed = distance ÷ time. Divide the distance by the time, not the other way round."
   forgot_initial_velocity: "Start from the initial velocity u. Speed gained is added to what the body already had."
@@ -115,6 +119,27 @@ concepts:
         hints: ["Find the time for each half.", "Total distance is 20 km."]
         solution: "Step 1: Times: 10 ÷ 20 = 0.5 h and 10 ÷ 10 = 1 h. Step 2: Total time 1.5 h. Step 3: 20 ÷ 1.5 = 40/3 ≈ 13.3 km/h (not 15)."
         mistakes: {"15": speed_time_swapped}
+      - prompt: "An athlete runs half a lap of a circular track of radius 35 m. Using π ≈ 22/7, what is the size of the displacement, in m?"
+        answer: "70"
+        check: "2*35"
+        difficulty: 3
+        hints: ["Where does the athlete end up after half a lap?", "Start and finish are at opposite ends of a diameter."]
+        solution: "Step 1: After half a lap the athlete is directly across the circle. Step 2: Displacement = diameter = 2 × 35 = 70 m (the distance run is 110 m)."
+        mistakes: {"110": displacement_round, "0": displacement_round, "35": displacement_round}
+      - prompt: "A car goes 30 km at 60 km/h and then 30 km at 30 km/h. What is its average speed for the whole trip, in km/h?"
+        answer: "40"
+        check: "60/(30/60 + 30/30)"
+        difficulty: 3
+        hints: ["How long does each part take?", "Total distance 60 km ÷ total time."]
+        solution: "Step 1: First part takes 0.5 h, second part 1 h. Step 2: Total time = 1.5 h. Step 3: Average speed = 60 ÷ 1.5 = 40 km/h."
+        mistakes: {"45": average_of_speeds, "90": speed_time_swapped}
+      - prompt: "A bus travels at 54 km/h for 10 minutes. How far does it go, in m?"
+        answer: "9000"
+        check: "54*5/18*10*60"
+        difficulty: 2
+        hints: ["Change 54 km/h to m/s.", "Change 10 minutes to seconds."]
+        solution: "Step 1: 54 km/h = 15 m/s. Step 2: 10 min = 600 s. Step 3: Distance = 15 × 600 = 9000 m."
+        mistakes: {"540": unit_kmh, "150": unit_kmh}
 
   - code: phy9.motion.acceleration
     title: Acceleration
@@ -220,6 +245,27 @@ concepts:
         hints: ["Convert to m/s: 72 km/h = 20 m/s, 36 km/h = 10 m/s."]
         solution: "Step 1: u = 20 m/s, v = 10 m/s. Step 2: a = (10 − 20) ÷ 10 = −1 m/s²."
         mistakes: {"-18/5": unit_kmh, "1": retardation_sign}
+      - prompt: "A ball rolls up a slope at 6 m/s and comes back down. After 5 s it is rolling down at 4 m/s. Taking up the slope as positive, what is its acceleration, in m/s²?"
+        answer: "-2"
+        check: "(-4 - 6)/5"
+        difficulty: 3
+        hints: ["Down the slope is negative, so the final velocity is −4 m/s.", "a = (v − u) ÷ t."]
+        solution: "Step 1: u = +6 m/s, v = −4 m/s. Step 2: a = (−4 − 6) ÷ 5 = −10 ÷ 5 = −2 m/s²."
+        mistakes: {"-0.4": retardation_sign, "0.4": retardation_sign, "2": retardation_sign}
+      - prompt: "A car accelerates uniformly at 1.5 m/s². How many seconds does it take to go from 36 km/h to 72 km/h?"
+        answer: "20/3"
+        check: "(72*5/18 - 36*5/18)/(3/2)"
+        difficulty: 3
+        hints: ["Change both speeds to m/s first.", "t = (v − u) ÷ a."]
+        solution: "Step 1: 36 km/h = 10 m/s, 72 km/h = 20 m/s. Step 2: t = (20 − 10) ÷ 1.5 = 20/3 ≈ 6.7 s."
+        mistakes: {"24": unit_kmh, "15": acceleration_not_change}
+      - prompt: "A velocity–time graph is a straight line from 5 m/s at t = 0 to 25 m/s at t = 4 s. What is the acceleration, in m/s²?"
+        answer: "5"
+        check: "(25-5)/4"
+        difficulty: 2
+        hints: ["Acceleration is the slope of the v–t line.", "Change in velocity ÷ change in time."]
+        solution: "Step 1: Change in velocity = 20 m/s. Step 2: a = 20 ÷ 4 = 5 m/s²."
+        mistakes: {"6.25": forgot_initial_velocity, "20": acceleration_not_change, "60": graph_slope_area}
 
   - code: phy9.motion.equations
     title: The three equations of motion
@@ -323,6 +369,27 @@ concepts:
         hints: ["s = ½at², u = 0."]
         solution: "s = ½ × 10 × 9 = 45 m"
         mistakes: {"90": forgot_half, "15": forgot_square}
+      - prompt: "A train starting from rest reaches 20 m/s after travelling 400 m. What is its acceleration, in m/s²?"
+        answer: "0.5"
+        check: "20**2/(2*400)"
+        difficulty: 3
+        hints: ["You know u, v and s, but not t.", "Use v² = u² + 2as."]
+        solution: "Step 1: 20² = 0 + 2 × a × 400. Step 2: 400 = 800a, so a = 0.5 m/s²."
+        mistakes: {"0.05": forgot_square, "1": forgot_half, "20": which_equation}
+      - prompt: "A car moving at 15 m/s brakes and stops in 3 s with uniform deceleration. How far does it travel while braking, in m?"
+        answer: "22.5"
+        check: "15*3 + 0.5*(-5)*3**2"
+        difficulty: 3
+        hints: ["First find the acceleration: a = (0 − 15) ÷ 3.", "Then s = ut + ½at², with a negative."]
+        solution: "Step 1: a = −5 m/s². Step 2: s = 15 × 3 + ½ × (−5) × 9 = 45 − 22.5 = 22.5 m."
+        mistakes: {"45": forgot_half, "67.5": retardation_sign, "0": retardation_sign}
+      - prompt: "A body moving at 4 m/s accelerates at 3 m/s² until it reaches 10 m/s. How far does it travel while speeding up, in m?"
+        answer: "14"
+        check: "(10**2 - 4**2)/(2*3)"
+        difficulty: 3
+        hints: ["You know u, v and a, but not t.", "v² = u² + 2as."]
+        solution: "Step 1: 100 = 16 + 6s. Step 2: 6s = 84, so s = 14 m."
+        mistakes: {"1": forgot_square, "28": forgot_half, "16.67": forgot_initial_velocity}
 
   - code: phy9.motion.graphs
     title: Motion graphs
@@ -420,3 +487,24 @@ concepts:
         hints: ["A triangle then a rectangle.", "25 + 100."]
         solution: "Step 1: Triangle ½ × 5 × 10 = 25 m. Step 2: Rectangle 10 × 10 = 100 m. Step 3: Total 125 m."
         mistakes: {"150": forgot_half}
+      - prompt: "A velocity–time graph rises in a straight line from 10 m/s to 30 m/s between t = 0 and t = 4 s. How far does the body travel in these 4 s, in m?"
+        answer: "80"
+        check: "10*4 + 0.5*4*20"
+        difficulty: 3
+        hints: ["The area under the line is a rectangle plus a triangle (or one trapezium).", "Rectangle 10 × 4, triangle ½ × 4 × 20."]
+        solution: "Step 1: Rectangle = 10 × 4 = 40 m. Step 2: Triangle = ½ × 4 × 20 = 40 m. Step 3: Total = 80 m."
+        mistakes: {"120": area_under_both, "40": area_under_both, "5": graph_slope_area}
+      - prompt: "A distance–time graph of a car is a curve that gets steeper as time goes on. What is the car doing?"
+        options: ["Speeding up", "Moving at a steady speed", "Slowing down", "Standing still"]
+        answer: "Speeding up"
+        difficulty: 2
+        hints: ["The slope of a distance–time graph is the speed.", "Steeper means a bigger slope."]
+        solution: "Step 1: Slope = speed. Step 2: A slope that keeps getting bigger means the speed is increasing."
+        mistakes: {"Moving at a steady speed": graph_slope_area, "Slowing down": graph_slope_area, "Standing still": horizontal_rest}
+      - prompt: "A body moves at 20 m/s for 5 s, then slows uniformly to rest in the next 4 s. Using the velocity–time graph, how far does it travel in all, in m?"
+        answer: "140"
+        check: "20*5 + 0.5*4*20"
+        difficulty: 3
+        hints: ["The graph is a rectangle followed by a triangle.", "Rectangle 20 × 5, triangle ½ × 4 × 20."]
+        solution: "Step 1: Steady part = 20 × 5 = 100 m. Step 2: Slowing part = ½ × 4 × 20 = 40 m. Step 3: Total = 140 m."
+        mistakes: {"180": forgot_half, "100": area_under_both}

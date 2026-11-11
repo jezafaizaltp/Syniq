@@ -5,6 +5,9 @@ chapter: 2
 title: Periodic Table
 
 tips:
+  compare_outer: "Write both configurations and compare the outermost shells. Same number of outer electrons, same group."
+  d_group: "For a d-block element, add the d electrons of the inner shell and the s electrons of the outer shell."
+  reactivity_down: "Down group 1 the outer electron is further from the nucleus. Is it easier or harder to lose?"
   period_is_shells: "The period number is the number of shells in use, the highest shell number in the configuration."
   group_from_valence: "For s-block elements, group = number of valence electrons. For p-block, group = valence electrons + 10."
   size_across: "Across a period atoms get smaller: more protons pull the same shells in tighter."
@@ -105,6 +108,27 @@ concepts:
         hints: ["Neon is 2, 8."]
         solution: "With a full outer shell (8, or 2 for helium) they have no tendency to gain, lose or share electrons."
         mistakes: {"They are gases": noble_full}
+      - prompt: "An element is in period 3 and group 2. What is its atomic number?"
+        answer: "12"
+        check: "2+8+2"
+        difficulty: 3
+        hints: ["Period 3 means three shells.", "Group 2 means 2 electrons in the outer shell."]
+        solution: "Step 1: Configuration 2, 8, 2. Step 2: Atomic number = 12 (magnesium)."
+        mistakes: {"5": period_is_shells, "6": period_is_shells, "20": period_is_shells}
+      - prompt: "Where is the element with atomic number 19 in the periodic table?"
+        options: ["Group 1, period 4", "Group 1, period 3", "Group 4, period 1", "Group 2, period 4"]
+        answer: "Group 1, period 4"
+        difficulty: 2
+        hints: ["Write its configuration: 2, 8, 8, 1.", "Number of shells → period; outer electrons → group."]
+        solution: "Step 1: 2, 8, 8, 1 uses four shells: period 4. Step 2: One outer electron: group 1 (potassium)."
+        mistakes: {"Group 1, period 3": period_is_shells, "Group 4, period 1": period_is_shells, "Group 2, period 4": group_from_valence}
+      - prompt: "Element A has atomic number 9 and element B has atomic number 17. Which statement is true?"
+        options: ["They are in the same group", "They are in the same period", "Both are metals", "Both are noble gases"]
+        answer: "They are in the same group"
+        difficulty: 2
+        hints: ["A is 2, 7. Write B.", "Compare the outer shells."]
+        solution: "Step 1: A is 2, 7 and B is 2, 8, 7. Step 2: Both have 7 outer electrons, so both are in group 17 (fluorine and chlorine)."
+        mistakes: {"They are in the same period": compare_outer, "Both are metals": compare_outer, "Both are noble gases": noble_full}
 
   - code: chem9.periodic.position
     title: Finding an element's place
@@ -193,6 +217,27 @@ concepts:
         hints: ["p-block: 10 + outer electrons."]
         solution: "3s² 3p¹ is 3 outer electrons; group = 10 + 3 = 13."
         mistakes: {"3": group_from_valence}
+      - prompt: "An element is 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s². Which block and group is it in?"
+        options: ["d-block, group 12", "s-block, group 2", "d-block, group 10", "p-block, group 12"]
+        answer: "d-block, group 12"
+        difficulty: 3
+        hints: ["Which subshell gets the last electron by the filling order: 4s or 3d?", "For d-block, group = d electrons + outer s electrons."]
+        solution: "Step 1: 3d fills after 4s, so the last electron enters 3d: d-block. Step 2: Group = 10 + 2 = 12 (zinc)."
+        mistakes: {"s-block, group 2": block_last_subshell, "d-block, group 10": d_group, "p-block, group 12": block_last_subshell}
+      - prompt: "An element is in period 3 and group 15. Which is its configuration?"
+        options: ["1s² 2s² 2p⁶ 3s² 3p³", "1s² 2s² 2p⁶ 3s² 3p⁵", "1s² 2s² 2p³", "1s² 2s² 2p⁶ 3s² 3p⁶ 3d³ 4s²"]
+        answer: "1s² 2s² 2p⁶ 3s² 3p³"
+        difficulty: 3
+        hints: ["Period 3: the outer shell is 3.", "Group 15 = 10 + outer s and p electrons, so 5 outer electrons."]
+        solution: "Step 1: Outer shell 3. Step 2: 5 outer electrons: 3s² 3p³. Step 3: 1s² 2s² 2p⁶ 3s² 3p³ (phosphorus)."
+        mistakes: {"1s² 2s² 2p⁶ 3s² 3p⁵": group_from_valence, "1s² 2s² 2p³": period_is_shells, "1s² 2s² 2p⁶ 3s² 3p⁶ 3d³ 4s²": d_group}
+      - prompt: "Which of these is in the s-block: calcium (20), aluminium (13), iron (26) or chlorine (17)?"
+        options: ["Calcium", "Aluminium", "Iron", "Chlorine"]
+        answer: "Calcium"
+        difficulty: 2
+        hints: ["Write where each one's last electron goes.", "Ca ends in 4s², Al in 3p¹."]
+        solution: "Step 1: Ca: …4s², last electron in s. Step 2: Al and Cl end in p, Fe in d. So calcium is in the s-block."
+        mistakes: {"Aluminium": block_last_subshell, "Iron": block_last_subshell, "Chlorine": block_last_subshell}
 
   - code: chem9.periodic.trends
     title: Trends in the table
@@ -273,3 +318,24 @@ concepts:
         hints: ["Sodium has 3 shells, lithium 2."]
         solution: "With an extra shell, sodium's outer electron is further away and shielded, so the nucleus holds it less tightly."
         mistakes: {"It has fewer protons": size_down}
+      - prompt: "Put sodium, magnesium, silicon and chlorine (all in period 3) in order of atomic size, largest first."
+        options: ["Na, Mg, Si, Cl", "Cl, Si, Mg, Na", "Mg, Na, Si, Cl", "Na, Cl, Mg, Si"]
+        answer: "Na, Mg, Si, Cl"
+        difficulty: 3
+        hints: ["They are all in the same period.", "Which way does size change across a period?"]
+        solution: "Step 1: Across period 3 the order is Na, Mg, Si, Cl. Step 2: Size decreases across, so Na is largest and Cl smallest."
+        mistakes: {"Cl, Si, Mg, Na": size_across, "Mg, Na, Si, Cl": size_across, "Na, Cl, Mg, Si": size_across}
+      - prompt: "Oxygen and sulphur are both in group 16. Which is more electronegative, and why?"
+        options: ["Oxygen, because its atom is smaller", "Sulphur, because its atom is bigger", "Sulphur, because it has more protons", "Neither: they are in the same group"]
+        answer: "Oxygen, because its atom is smaller"
+        difficulty: 3
+        hints: ["Which is higher up the group?", "In a smaller atom, shared electrons are closer to the nucleus."]
+        solution: "Step 1: Oxygen is above sulphur. Step 2: Its smaller atom pulls shared electrons more strongly, so it is more electronegative."
+        mistakes: {"Sulphur, because its atom is bigger": size_down, "Sulphur, because it has more protons": size_down, "Neither: they are in the same group": fluorine_most}
+      - prompt: "Going down group 1 from lithium to caesium, how does reactivity with water change?"
+        options: ["It increases", "It decreases", "It stays the same", "It increases, then decreases"]
+        answer: "It increases"
+        difficulty: 2
+        hints: ["These metals react by losing their outer electron.", "Down the group, atoms get bigger."]
+        solution: "Step 1: Down the group the outer electron is further from the nucleus. Step 2: It is lost more easily, so reactivity increases."
+        mistakes: {"It decreases": reactivity_down, "It stays the same": reactivity_down, "It increases, then decreases": reactivity_down}
