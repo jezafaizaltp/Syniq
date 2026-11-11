@@ -25,6 +25,16 @@ tips:
   gva_formula: "GVA = gross product value − value of intermediate consumption. GDP = GVA + (product tax − product subsidy)."
   organised_sector: "The organised sector is registered under law, with fixed jobs, contracts and security; the unorganised sector has daily wages and no contract. Gig workers were covered by the 2020 code; the earlier unorganised workers' act came in the late 2000s."
   tertiary_growth: "India's GVA (2022-23) and Kerala's GSVA: the tertiary (service) sector gives the largest share, helped by health and education, banking and insurance, transport and communication, tourism and knowledge-based industries."
+  ss13e_sector_test: 'Ask what the worker does: takes something straight from nature, makes or builds something, or gives a service.'
+  ss13e_add_all: National income adds up every part of the formula. Check you have not left one out.
+  ss13e_net_exports: 'In the expenditure method, exports are added and imports are taken away: (X − M).'
+  ss13e_final_only: Count only what reaches the final user. Goods used up to make something else are already inside the final price.
+  ss13e_inside_vs_residents: GDP asks 'where was it produced?' (inside the country). GNP asks 'who produced it?' (the country's own people and firms, anywhere).
+  ss13e_depreciation: Wear and tear is a loss, so it is taken away from GNP, not added.
+  ss13e_per_head: 'Per capita means per person: divide the total income by the number of people.'
+  ss13e_gva_minus: 'Value added means what this unit added: its output minus the inputs it bought.'
+  ss13e_tax_subsidy: To go from GVA to GDP, add the taxes on products and take away the subsidies.
+  ss13e_registered: Organised work is registered under a law and gives contracts, fixed pay and security. Unorganised work has none of these.
 
 concepts:
   - code: ss9.sectors.three_sectors
@@ -89,6 +99,48 @@ concepts:
         bin: Tertiary
         clue: Moving goods is a service.
         why: Tertiary.
+    lesson:
+      - teach: 'Economic activities are sorted into three sectors. Primary: uses nature directly (farming, fishing, forestry, mining). Secondary: turns raw materials into goods (factories, construction, electricity, gas, water supply). Tertiary: gives services (transport, banking, trade, health, education).'
+        picture:
+          kind: compare
+          columns:
+          - title: Primary
+            points:
+            - from nature
+            - farming, fishing, mining
+          - title: Secondary
+            points:
+            - makes goods
+            - factories, construction, power
+          - title: Tertiary
+            points:
+            - gives services
+            - transport, banks, schools
+          alt: The three sectors of the economy.
+        check:
+          prompt: A coir factory making mats belongs to which sector?
+          options:
+          - Secondary
+          - Primary
+          - Tertiary
+          answer: Secondary
+          why: It turns coconut fibre into a finished product.
+      - teach: The sectors depend on each other. A sugarcane farmer (primary) needs fertiliser and machines (secondary) and trucks and bank loans (tertiary). The sugar mill needs the farmer's cane. Production, distribution and consumption tie them together.
+        picture:
+          kind: flow
+          steps:
+          - Farmer grows cane (primary)
+          - Mill makes sugar (secondary)
+          - Truck and shop sell it (tertiary)
+          alt: Sugar moves through all three sectors.
+        check:
+          prompt: The truck taking sugar to shops is in which sector?
+          options:
+          - Tertiary
+          - Primary
+          - Secondary
+          answer: Tertiary
+          why: Transport is a service.
     items:
       - prompt: "Fishing belongs to which sector?"
         options: ["Primary", "Secondary", "Tertiary"]
@@ -164,6 +216,76 @@ concepts:
         hints: ["Ask of each step: is it using nature directly, making goods, or giving a service?", "Transport is a service."]
         solution: "Step 1: Growing sugarcane uses natural resources directly: primary. Step 2: Making sugar is manufacturing: secondary. Step 3: Transport is a service: tertiary."
         mistakes: {"Secondary, primary, tertiary": sector_kinds, "Primary, tertiary, secondary": sector_kinds}
+      - prompt: Mining and quarrying belong to which sector?
+        options:
+        - Primary
+        - Secondary
+        - Tertiary
+        - None
+        answer: Primary
+        difficulty: 1
+        hints:
+        - Where do the stones and minerals come from?
+        - Taking things straight from nature.
+        solution: 'Step 1: Mining takes minerals from the earth. Step 2: Direct use of nature is one sector. Step 3: Primary.'
+        mistakes:
+          Secondary: ss13e_sector_test
+      - prompt: A teacher in a government school works in which sector?
+        options:
+        - Tertiary
+        - Primary
+        - Secondary
+        - Agricultural
+        answer: Tertiary
+        difficulty: 1
+        hints:
+        - Does a teacher grow, make, or serve?
+        - Education is a service.
+        solution: 'Step 1: A teacher does not grow or make goods. Step 2: Teaching is a service. Step 3: Tertiary.'
+        mistakes:
+          Secondary: ss13e_sector_test
+      - prompt: Building a new bridge belongs to which sector?
+        options:
+        - Secondary
+        - Primary
+        - Tertiary
+        - Service
+        answer: Secondary
+        difficulty: 2
+        hints:
+        - Construction is grouped with industry.
+        - Something new is being built.
+        solution: 'Step 1: Construction makes new structures. Step 2: It is grouped with industry. Step 3: Secondary.'
+        mistakes:
+          Tertiary: ss13e_sector_test
+      - prompt: The secondary sector is also called the
+        options:
+        - Industrial sector
+        - Service sector
+        - Agricultural sector
+        - Unorganised sector
+        answer: Industrial sector
+        difficulty: 1
+        hints:
+        - It is about factories.
+        - Primary is agricultural, tertiary is service.
+        solution: 'Step 1: Primary = agricultural. Step 2: Tertiary = service. Step 3: Secondary = industrial.'
+        mistakes:
+          Service sector: sector_kinds
+      - prompt: The NSO was formed in 2019 by combining which two offices?
+        options:
+        - CSO and NSSO
+        - RBI and SBI
+        - NITI Aayog and Planning Commission
+        - Census and Election Commission
+        answer: CSO and NSSO
+        difficulty: 2
+        hints:
+        - Both were statistics offices.
+        - One was 'Central', the other did 'Sample Surveys'.
+        solution: 'Step 1: NSO is a statistics office. Step 2: It joined the Central Statistical Office and the National Sample Survey Office. Step 3: CSO and NSSO.'
+        mistakes:
+          RBI and SBI: sector_kinds
 
   - code: ss9.sectors.national_income
     title: Measuring national income
@@ -222,6 +344,49 @@ concepts:
         bin: Not counted
         clue: Is it sold in a market?
         why: Household work has no market value, so it is left out.
+    lesson:
+      - teach: National income is the money value of all final goods and services produced in a country in one financial year (1 April to 31 March). Only final goods count. Intermediate goods, like flour used to bake bread, are already inside the final price; counting them again is double counting.
+        picture:
+          kind: flow
+          steps:
+          - Wheat ₹100
+          - Flour ₹150
+          - Bread ₹220
+          - Count only the final ₹220
+          alt: Only the final value is counted to avoid double counting.
+        check:
+          prompt: Why is the flour sold to a bakery not counted separately?
+          options:
+          - Its value is already inside the bread's price
+          - Flour is not a good
+          - Bakeries pay no tax
+          answer: Its value is already inside the bread's price
+          why: Counting it again would be double counting.
+      - teach: 'Three methods give the same answer. Product method: add all final output of the three sectors. Income method: NI = r + w + i + p (rent, wages, interest, profit). Expenditure method: NI = C + I + G + (X − M): consumption, investment, government spending, plus exports minus imports.'
+        picture:
+          kind: compare
+          columns:
+          - title: Product
+            points:
+            - add final output
+            - of all sectors
+          - title: Income
+            points:
+            - r + w + i + p
+            - gives GNI
+          - title: Expenditure
+            points:
+            - C + I + G + (X − M)
+            - gives GNE
+          alt: Three ways to measure national income.
+        check:
+          prompt: In C + I + G + (X − M), M stands for
+          options:
+          - Imports
+          - Money
+          - Machines
+          answer: Imports
+          why: Imports are spending on goods made abroad, so they are taken away.
     items:
       - prompt: "India's financial year starts on"
         options: ["1 April", "1 January", "15 August", "1 June"]
@@ -286,6 +451,83 @@ concepts:
         hints: ["NI = C + I + G + (X − M).", "Imports are subtracted."]
         solution: "Step 1: C + I + G = 950. Step 2: X − M = −50. Step 3: NI = 900."
         mistakes: {"1200": ni_methods, "1000": ni_methods, "950": ni_methods}
+      - prompt: India's financial year ends on
+        options:
+        - 31 March
+        - 31 December
+        - 30 June
+        - 1 April
+        answer: 31 March
+        difficulty: 1
+        hints:
+        - It begins on 1 April.
+        - It runs for twelve months from there.
+        solution: 'Step 1: Starts 1 April. Step 2: Twelve months later is the day before 1 April. Step 3: 31 March.'
+        mistakes:
+          1 April: nnp_pci
+      - prompt: Rent ₹15 crore, wages ₹60 crore, interest ₹10 crore, profit ₹25 crore. National income by the income method (₹ crore)?
+        answer: '110'
+        check: 15 + 60 + 10 + 25
+        difficulty: 2
+        hints:
+        - Use NI = r + w + i + p.
+        - Add all four.
+        solution: 'Step 1: 15 + 60 = 75. Step 2: 75 + 10 + 25 = 110. Step 3: ₹110 crore.'
+        mistakes:
+          '85': ss13e_add_all
+      - prompt: C = 400, I = 150, G = 200, X = 50, M = 100 (₹ crore). National income by the expenditure method?
+        answer: '700'
+        check: 400 + 150 + 200 + (50 - 100)
+        difficulty: 3
+        hints:
+        - Use C + I + G + (X − M).
+        - X − M here is negative.
+        solution: 'Step 1: C + I + G = 750. Step 2: X − M = 50 − 100 = −50. Step 3: 750 − 50 = 700.'
+        mistakes:
+          '900': ss13e_net_exports
+          '800': ss13e_net_exports
+      - prompt: Which is a limitation in measuring national income?
+        options:
+        - Household work is not counted
+        - Every good has a market price
+        - Data is always exact
+        - Only exports are counted
+        answer: Household work is not counted
+        difficulty: 2
+        hints:
+        - Some useful work has no price tag.
+        - Think of cooking and caring at home.
+        solution: 'Step 1: NI counts things with market value. Step 2: Unpaid home work has none. Step 3: It is left out.'
+        mistakes:
+          Every good has a market price: ss13e_final_only
+      - prompt: Which is a final good?
+        options:
+        - A shirt bought by a family
+        - Cotton bought by a spinning mill
+        - Steel bought by a car factory
+        - Paint bought by a furniture maker
+        answer: A shirt bought by a family
+        difficulty: 1
+        hints:
+        - Who uses it, and for what?
+        - A final good is not used to make another product.
+        solution: 'Step 1: Cotton, steel and paint go into other products. Step 2: The family wears the shirt. Step 3: The shirt is final.'
+        mistakes:
+          Cotton bought by a spinning mill: ss13e_final_only
+      - prompt: Which method of measuring national income gives Gross National Income (GNI)?
+        options:
+        - Income method
+        - Expenditure method
+        - Product method
+        - Census method
+        answer: Income method
+        difficulty: 2
+        hints:
+        - It adds what each factor earns.
+        - Rent, wages, interest, profit.
+        solution: 'Step 1: GNE comes from spending. Step 2: Adding earnings of factors gives income. Step 3: Income method.'
+        mistakes:
+          Expenditure method: ni_methods
 
   - code: ss9.sectors.gdp_gnp
     title: GDP, GNP, NNP and per capita income
@@ -337,6 +579,33 @@ concepts:
         bin: Not India's at all
         clue: Foreign embassies here are not our territory.
         why: Not in India's GDP.
+    lesson:
+      - teach: 'GDP is the value of all final goods and services produced inside a country''s borders (including its waters, air space and its embassies abroad), whoever produces them. GNP looks at the country''s own people: GNP = GDP + income Indians earn abroad − income foreigners earn in India.'
+        picture:
+          kind: flow
+          steps:
+          - Start with GDP
+          - + income of Indians abroad
+          - − income of foreigners in India
+          - = GNP
+          alt: How to go from GDP to GNP.
+        check:
+          prompt: An Indian company's profit in Dubai is counted in
+          options:
+          - India's GNP
+          - India's GDP
+          - Neither
+          answer: India's GNP
+          why: GNP counts Indian residents' income, wherever earned.
+      - teach: 'Machines and vehicles wear out: that loss is depreciation. NNP = GNP − depreciation. Per capita income = national income ÷ population. If population grows faster than income, per capita income falls.'
+        check:
+          prompt: Per capita income is found by
+          options:
+          - National income ÷ population
+          - National income × population
+          - GNP − depreciation
+          answer: National income ÷ population
+          why: It is the average income per person.
     items:
       - prompt: "GNP is ₹500 crore and depreciation is ₹40 crore. What is NNP (₹ crore)?"
         answer: "460"
@@ -394,6 +663,93 @@ concepts:
         hints: ["Divide each national income by its population.", "X: 90,000 ÷ 3. Y: 1,20,000 ÷ 6."]
         solution: "Step 1: X = ₹30,000 per person. Step 2: Y = ₹20,000 per person. Step 3: X is higher, though Y's total is bigger."
         mistakes: {"Country Y": per_head, "Both are equal": per_head, "You cannot compare them": per_head}
+      - prompt: GNP is ₹800 crore and depreciation is ₹50 crore. What is NNP (₹ crore)?
+        answer: '750'
+        check: 800 - 50
+        difficulty: 1
+        hints:
+        - NNP = GNP − depreciation.
+        - 800 − 50.
+        solution: 'Step 1: Depreciation is subtracted. Step 2: 800 − 50 = 750. Step 3: ₹750 crore.'
+        mistakes:
+          '850': ss13e_depreciation
+      - prompt: National income is ₹1,00,000 crore and population is 4 crore. Per capita income (₹)?
+        answer: '25000'
+        check: 100000/4
+        difficulty: 2
+        hints:
+        - Per capita = per person.
+        - Divide 1,00,000 by 4 (crores cancel).
+        solution: 'Step 1: ₹1,00,000 crore ÷ 4 crore people. Step 2: The crores cancel. Step 3: ₹25,000 per person.'
+        mistakes:
+          '400000': ss13e_per_head
+      - prompt: A Japanese car company's factory in Chennai produces cars. Their value is counted in
+        options:
+        - India's GDP
+        - India's GNP only
+        - Japan's GDP
+        - Neither country
+        answer: India's GDP
+        difficulty: 2
+        hints:
+        - Where is the factory?
+        - GDP is about where production happens.
+        solution: 'Step 1: The cars are made inside India. Step 2: GDP counts production inside the borders. Step 3: India''s GDP.'
+        mistakes:
+          Japan's GDP: ss13e_inside_vs_residents
+      - prompt: India's GDP is ₹1,500 crore. Indians abroad earn ₹100 crore; foreigners in India earn ₹60 crore. GNP (₹ crore)?
+        answer: '1540'
+        check: 1500 + 100 - 60
+        difficulty: 3
+        hints:
+        - Add Indians' income abroad.
+        - Take away foreigners' income in India.
+        solution: 'Step 1: 1500 + 100 = 1600. Step 2: 1600 − 60 = 1540. Step 3: ₹1,540 crore.'
+        mistakes:
+          '1660': ss13e_inside_vs_residents
+          '1440': ss13e_inside_vs_residents
+      - prompt: The cost of wear and tear of machines and vehicles is called
+        options:
+        - Depreciation
+        - Subsidy
+        - Interest
+        - Rent
+        answer: Depreciation
+        difficulty: 1
+        hints:
+        - Machines lose value as they are used.
+        - This loss is taken away from GNP to get NNP.
+        solution: 'Step 1: Machines wear out. Step 2: The lost value has a name. Step 3: Depreciation.'
+        mistakes:
+          Subsidy: ss13e_depreciation
+      - prompt: Which is part of India's economic territory?
+        options:
+        - Indian embassy in Paris
+        - French embassy in New Delhi
+        - A US factory in Texas
+        - A ship of Japan in Tokyo
+        answer: Indian embassy in Paris
+        difficulty: 2
+        hints:
+        - A country's embassies abroad count as its own territory.
+        - Foreign embassies in India do not count as India's.
+        solution: 'Step 1: Embassies belong to the country that owns them. Step 2: India''s own embassy is Indian territory. Step 3: Indian embassy in Paris.'
+        mistakes:
+          French embassy in New Delhi: ss13e_inside_vs_residents
+      - prompt: National income rises by 6% and population by 2%. What happens to per capita income?
+        options:
+        - It rises
+        - It falls
+        - It stays the same
+        - It becomes zero
+        answer: It rises
+        difficulty: 3
+        hints:
+        - Compare how fast the top and bottom of the division grow.
+        - Income is growing faster than people.
+        solution: 'Step 1: PCI = income ÷ population. Step 2: Income grows faster. Step 3: Per capita income rises.'
+        mistakes:
+          It falls: ss13e_per_head
 
   - code: ss9.sectors.gva
     title: Gross value added and sector shares
@@ -448,6 +804,45 @@ concepts:
         bin: ₹200
         clue: Tax is added, subsidy taken away.
         why: 190 + 15 − 5 = 200.
+    lesson:
+      - teach: Since January 2015 the NSO measures each sector's contribution with Gross Value Added (GVA). GVA = value of output − value of inputs bought (intermediate consumption). GDP = GVA + product taxes − product subsidies.
+        picture:
+          kind: flow
+          steps:
+          - Output value
+          - − inputs bought
+          - = GVA
+          - + product taxes − subsidies
+          - = GDP
+          alt: From output to GVA to GDP.
+        check:
+          prompt: A baker makes bread worth ₹10,000 using flour and gas worth ₹6,000. GVA?
+          options:
+          - ₹4,000
+          - ₹16,000
+          - ₹10,000
+          answer: ₹4,000
+          why: '10,000 − 6,000 = 4,000: what the baker added.'
+      - teach: Over 40 years, agriculture's share in India's GVA fell and services rose to over half. In Kerala, services give about 60–64%. This shift in the importance of sectors is called structural transformation. Tourism, IT (Technopark, Infopark), health, education and banking drove it.
+        picture:
+          kind: bars
+          unit: '% of Kerala GSVA (approx.)'
+          bars:
+          - label: Services
+            value: 62
+          - label: Industry
+            value: 28
+          - label: Agriculture
+            value: 10
+          alt: Kerala's economy is mostly services.
+        check:
+          prompt: Which sector gives the biggest share of Kerala's GSVA?
+          options:
+          - Services
+          - Agriculture
+          - Industry
+          answer: Services
+          why: About three-fifths comes from services.
     items:
       - prompt: "A unit's gross product value is ₹50 lakh and its intermediate consumption is ₹30 lakh. What is its GVA (₹ lakh)?"
         answer: "20"
@@ -512,6 +907,79 @@ concepts:
         hints: ["A share is a part of a total.", "What happens to a slice if the rest of the cake grows faster?"]
         solution: "Step 1: Agriculture grew, but slowly. Step 2: Services and industry grew faster, so agriculture's share of the larger total shrank. This is structural transformation."
         mistakes: {"Farm output really fell": share_not_size, "GVA does not include farming": share_not_size, "The population fell": share_not_size}
+      - prompt: A boat builder's output is worth ₹12 lakh; wood and nails cost ₹7 lakh. GVA (₹ lakh)?
+        answer: '5'
+        check: 12 - 7
+        difficulty: 1
+        hints:
+        - Value added = output − inputs.
+        - 12 − 7.
+        solution: 'Step 1: Output 12 lakh. Step 2: Inputs 7 lakh. Step 3: GVA = 5 lakh.'
+        mistakes:
+          '19': ss13e_gva_minus
+      - prompt: GVA is ₹500 crore, product taxes ₹60 crore, product subsidies ₹10 crore. GDP (₹ crore)?
+        answer: '550'
+        check: 500 + 60 - 10
+        difficulty: 2
+        hints:
+        - GDP = GVA + taxes − subsidies.
+        - 500 + 60 − 10.
+        solution: 'Step 1: 500 + 60 = 560. Step 2: 560 − 10 = 550. Step 3: ₹550 crore.'
+        mistakes:
+          '570': ss13e_tax_subsidy
+          '450': ss13e_tax_subsidy
+      - prompt: A compulsory payment to the government is a
+        options:
+        - Tax
+        - Subsidy
+        - Profit
+        - Wage
+        answer: Tax
+        difficulty: 1
+        hints:
+        - People must pay it by law.
+        - A subsidy is money from the government, not to it.
+        solution: 'Step 1: Subsidy flows from the government. Step 2: The compulsory payment flows to it. Step 3: Tax.'
+        mistakes:
+          Subsidy: ss13e_tax_subsidy
+      - prompt: About what share of India's people are under 35 years of age?
+        options:
+        - About 65%
+        - About 10%
+        - About 25%
+        - About 95%
+        answer: About 65%
+        difficulty: 2
+        hints:
+        - India is a young country.
+        - It is nearly two out of three people.
+        solution: 'Step 1: India has a very young population. Step 2: Nearly two-thirds are under 35. Step 3: About 65%.'
+        mistakes:
+          About 10%: tertiary_growth
+      - prompt: Kerala's agriculture share of GSVA is about 10% and industry about 28%. About what share is services (%)?
+        answer: '62'
+        check: 100 - 10 - 28
+        difficulty: 2
+        hints:
+        - The three shares add to 100%.
+        - 100 − 10 − 28.
+        solution: 'Step 1: Total = 100%. Step 2: 10 + 28 = 38. Step 3: 100 − 38 = 62%.'
+        mistakes:
+          '38': ss13e_add_all
+      - prompt: Why is GVA used instead of total output to find a sector's contribution?
+        options:
+        - It counts only the value each unit adds, avoiding double counting
+        - It includes all taxes
+        - It counts imports twice
+        - It ignores services
+        answer: It counts only the value each unit adds, avoiding double counting
+        difficulty: 3
+        hints:
+        - Total output includes inputs bought from others.
+        - Those inputs were already counted where they were made.
+        solution: 'Step 1: Inputs are produced by other units. Step 2: Counting them again double-counts. Step 3: GVA counts only value added.'
+        mistakes:
+          It includes all taxes: ss13e_gva_minus
 
   - code: ss9.sectors.employment
     title: Jobs in organised and unorganised sectors
@@ -565,6 +1033,48 @@ concepts:
         bin: Unorganised
         clue: Temporary, many firms, no employer contract.
         why: Unorganised; now covered by the Code on Social Security 2020.
+    lesson:
+      - teach: Services earn the biggest share of India's income, but agriculture still gives the most jobs (about 43.5% of workers in 2019-20, down from 66.8% in 1991). So income per worker in agriculture is low.
+        picture:
+          kind: bars
+          unit: '% of workers in primary sector'
+          bars:
+          - label: '1991'
+            value: 66.8
+          - label: 2019-20
+            value: 43.5
+          alt: The primary sector's share of workers fell but is still the largest.
+        check:
+          prompt: Which sector employs the most Indians?
+          options:
+          - Primary
+          - Tertiary
+          - Secondary
+          answer: Primary
+          why: Farming and related work still employ the largest share.
+      - teach: 'Organised sector: registered firms, contracts, fixed pay, job security, safe workplaces. Unorganised sector: unregistered, low pay, long hours, no security. Laws protect unorganised workers: the Unorganised Workers'' Social Security Act 2008, and the Code on Social Security 2020, which also covers gig workers like delivery riders.'
+        picture:
+          kind: compare
+          columns:
+          - title: Organised
+            points:
+            - registered
+            - contract, fixed pay
+            - job security
+          - title: Unorganised
+            points:
+            - not registered
+            - low pay, long hours
+            - no security
+          alt: Organised and unorganised sectors compared.
+        check:
+          prompt: An online food delivery rider is a
+          options:
+          - Gig platform worker
+          - Government officer
+          - Factory owner
+          answer: Gig platform worker
+          why: They do short, flexible jobs through an app, outside a normal employer contract.
     items:
       - prompt: "Which sector employed the largest share of India's workers from 1991 to 2019-20?"
         options: ["Primary sector", "Secondary sector", "Tertiary sector"]
@@ -640,3 +1150,73 @@ concepts:
         hints: ["Compare the share of workers with the share of income.", "If many people share a small part of the income, what is each one's part?"]
         solution: "Step 1: About 43.5% of workers are in the primary sector, but it earns a much smaller share of income. Step 2: Services earn the most with fewer workers. Step 3: So each farm worker earns much less on average."
         mistakes: {"Services employ most people": share_not_size, "Agriculture produces most of the income": share_not_size}
+      - prompt: Which is a feature of the unorganised sector?
+        options:
+        - No job security
+        - Paid holidays
+        - Provident fund
+        - Written contract
+        answer: No job security
+        difficulty: 1
+        hints:
+        - Three options are benefits of registered firms.
+        - Can a worker be dismissed any day?
+        solution: 'Step 1: Holidays, PF and contracts belong to organised jobs. Step 2: Unorganised work lacks them. Step 3: No job security.'
+        mistakes:
+          Paid holidays: ss13e_registered
+      - prompt: A firm registered under the Factories Act belongs to the
+        options:
+        - Organised sector
+        - Unorganised sector
+        - Primary sector
+        - Gig economy
+        answer: Organised sector
+        difficulty: 2
+        hints:
+        - Registration under a law is the key.
+        - Registered firms must follow rules on pay and safety.
+        solution: 'Step 1: It is registered under an Act. Step 2: Registered firms form one sector. Step 3: Organised sector.'
+        mistakes:
+          Unorganised sector: ss13e_registered
+      - prompt: Which law first gave social security to unorganised workers?
+        options:
+        - Unorganised Workers' Social Security Act 2008
+        - Factories Act
+        - Companies Act
+        - Right to Education Act
+        answer: Unorganised Workers' Social Security Act 2008
+        difficulty: 2
+        hints:
+        - Its name says who it protects.
+        - It was passed before the 2020 code.
+        solution: 'Step 1: The 2020 code came later. Step 2: The earlier law names unorganised workers. Step 3: The 2008 Act.'
+        mistakes:
+          Factories Act: organised_sector
+      - prompt: A domestic worker cleans three homes with no contract and no leave. She works in the
+        options:
+        - Unorganised sector
+        - Organised sector
+        - Public sector bank
+        - Primary sector
+        answer: Unorganised sector
+        difficulty: 1
+        hints:
+        - Is she registered or on a contract?
+        - No leave, no contract.
+        solution: 'Step 1: No contract, no benefits. Step 2: That marks unregistered work. Step 3: Unorganised sector.'
+        mistakes:
+          Organised sector: ss13e_registered
+      - prompt: Why do low wages in the unorganised sector widen inequality?
+        options:
+        - Most workers earn little while a few earn much more
+        - Everyone earns the same
+        - Taxes are higher for the poor
+        - It creates more organised jobs
+        answer: Most workers earn little while a few earn much more
+        difficulty: 3
+        hints:
+        - Inequality is a gap between groups.
+        - Who earns more, and who earns less?
+        solution: 'Step 1: Many workers are unorganised and low-paid. Step 2: Organised workers and owners earn more. Step 3: The gap grows.'
+        mistakes:
+          Everyone earns the same: ss13e_registered
