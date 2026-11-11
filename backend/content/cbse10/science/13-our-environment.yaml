@@ -11,10 +11,16 @@ tips:
   t10_cfc: "Which chemicals from old fridges and sprays release chlorine high up?"
   t10_compost: "In compost, tiny living things break down kitchen waste into something useful for soil."
   t10_decomposers: "Decomposers break down dead matter. Which choice can't make food and feeds on dead things?"
+  c10s13_dead: "Producers make food from sunlight. Which group feeds on dead things and breaks them down?"
   t10_energy_loss: "Only about 10% of energy passes to the next level. What happens after a few levels?"
   t10_manmade_eco: "Which ecosystem do people plant and look after?"
   t10_ozone_uv: "The ozone layer absorbs one kind of harmful sunlight that causes skin cancer."
   t10_reduce_waste: "Which choice lets kitchen waste be composted and dry waste be reused?"
+  c10s13_bio_abio: Living parts of an ecosystem are biotic; non-living parts like air, water, soil and temperature are abiotic.
+  c10s13_web: "Most animals eat more than one kind of food, so their chains cross and link up like a net. What is that net called?"
+  c10s13_energy_flow: 'Energy flows one way: from the sun to producers to consumers. It is not passed back, and some is lost as heat at every step.'
+  c10s13_ozone_place: Good ozone is high up in the atmosphere; there it blocks harmful rays from the sun.
+  c10s13_3r: "Using less, using again as it is, and making into something new are three different Rs. Which one fits what happens here?"
 concepts:
 - code: cbse10s.env.ecosystem
   title: Ecosystems and food chains
@@ -92,6 +98,43 @@ concepts:
       - when:
           e: 50000
         say: That's enough for 500 J of frogs. Frogs are two steps up, not three.
+  lesson:
+    - teach: 'An ecosystem is all the living things in an area (biotic: plants, animals, microbes) together with the non-living things (abiotic: temperature, rain, soil, air). Natural ecosystems include forests, ponds and lakes; gardens, crop fields and aquariums are made by people.'
+      check:
+        prompt: Which is an abiotic part of a pond?
+        options:
+        - Water temperature
+        - Fish
+        - Algae
+        answer: Water temperature
+        why: It is non-living.
+    - teach: 'Producers (green plants) make food from sunlight. Consumers eat others: herbivores, carnivores, omnivores, parasites. Decomposers (bacteria, fungi) break down dead matter and return nutrients to the soil. A food chain shows who eats whom; each step is a trophic level. Linked food chains form a food web.'
+      picture:
+        kind: flow
+        steps:
+        - Grass (producer)
+        - Grasshopper (herbivore)
+        - Frog
+        - Snake
+        - Eagle
+        alt: 'A food chain: grass is eaten by a grasshopper, which is eaten by a frog, then a snake, then an eagle; each step is a trophic level.'
+      check:
+        prompt: In the chain shown, the frog is at which trophic level?
+        options:
+        - Third
+        - Second
+        - Fourth
+        answer: Third
+        why: Grass 1, grasshopper 2, frog 3.
+    - teach: 'Plants capture about 1% of the sunlight falling on leaves. Only about 10% of the energy at one level passes to the next (the 10% law); the rest is used or lost as heat. So food chains are short. Chemicals like pesticides that don''t break down build up at each level: biological magnification. Top consumers get the most.'
+      check:
+        prompt: Plants have 1000 J. Herbivores get about…
+        options:
+        - 100 J
+        - 10 J
+        - 900 J
+        answer: 100 J
+        why: 10% passes on.
   items:
   - prompt: Which of these are decomposers?
     options:
@@ -169,6 +212,125 @@ concepts:
     - Gardens and aquariums too.
     solution: Crop fields, gardens and aquariums are artificial ecosystems.
     mistakes: {"A forest": "t10_manmade_eco", "A lake": "t10_manmade_eco"}
+  - prompt: In grass → goat → human, what is the goat?
+    options:
+    - Herbivore (primary consumer)
+    - Producer
+    - Decomposer
+    - Top carnivore
+    answer: Herbivore (primary consumer)
+    difficulty: 1
+    hints:
+    - It eats the plant.
+    - First animal in the chain.
+    solution: The goat eats grass, so it is a herbivore, the primary consumer.
+    mistakes:
+      Producer: c10s_trophic_level
+  - prompt: Which group returns nutrients from dead plants and animals to the soil?
+    options:
+    - Decomposers
+    - Herbivores
+    - Carnivores
+    - Producers
+    answer: Decomposers
+    difficulty: 1
+    hints:
+    - Bacteria and fungi.
+    - They break down dead matter.
+    solution: Decomposers break down dead matter into simple substances for the soil.
+    mistakes:
+      Producers: c10s13_dead
+  - prompt: A crop field is an example of…
+    options:
+    - A man-made ecosystem
+    - A natural ecosystem
+    - A food web
+    - A decomposer
+    answer: A man-made ecosystem
+    difficulty: 1
+    hints:
+    - Who plants and cares for it?
+    - Same as a garden or aquarium.
+    solution: 'Crop fields are planted and looked after by people: man-made (artificial) ecosystems.'
+    mistakes:
+      A natural ecosystem: t10_manmade_eco
+  - prompt: Herbivores get 500 J from plants. By the 10% law, how much reaches the carnivores that eat them, in joules?
+    answer: '50'
+    check: 500 * 0.1
+    difficulty: 2
+    hints:
+    - One step up.
+    - Take 10%.
+    solution: 10% of 500 = 50 J.
+    mistakes:
+      '5': c10s_ten_percent
+      '450': c10s13_energy_flow
+  - prompt: Why is the flow of energy in an ecosystem called one-way?
+    options:
+    - Energy passed to the next level doesn't come back
+    - Energy goes up and down
+    - Animals give energy back to plants
+    - The sun takes it back
+    answer: Energy passed to the next level doesn't come back
+    difficulty: 2
+    hints:
+    - Energy from the sun to plants to animals.
+    - Does a lion give energy back to grass?
+    solution: Energy moves from lower to higher levels and never returns; much is lost as heat.
+    mistakes:
+      Animals give energy back to plants: c10s13_energy_flow
+  - prompt: Many food chains joined together in an ecosystem form a…
+    options:
+    - Food web
+    - Trophic level
+    - Food pyramid only
+    - Decomposer chain
+    answer: Food web
+    difficulty: 1
+    hints:
+    - Most animals eat more than one food.
+    - The chains cross like a net.
+    solution: Interlinked food chains form a food web.
+    mistakes:
+      Trophic level: c10s13_web
+  - prompt: About what percentage of the sunlight falling on leaves do plants capture?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - It is a very small amount.
+    - Much smaller than 10%.
+    solution: Plants capture about 1% of the sunlight falling on their leaves.
+    mistakes:
+      '10': c10s_ten_percent
+  - prompt: Which of these is abiotic?
+    options:
+    - Rainfall
+    - Earthworm
+    - Mushroom
+    - Grass
+    answer: Rainfall
+    difficulty: 1
+    hints:
+    - Abiotic means non-living.
+    - Three of these are alive.
+    solution: Rainfall is a non-living (abiotic) factor.
+    mistakes:
+      Mushroom: c10s13_bio_abio
+  - prompt: Why are human beings often at the top of food chains most affected by pesticides like DDT?
+    options:
+    - The chemical builds up at each trophic level
+    - Humans eat only plants
+    - DDT is made in the body
+    - Pesticides break down quickly
+    answer: The chemical builds up at each trophic level
+    difficulty: 2
+    hints:
+    - DDT doesn't break down.
+    - Each level eats many of the one below.
+    solution: 'Non-biodegradable chemicals accumulate up the chain: biological magnification.'
+    mistakes:
+      Pesticides break down quickly: t10_biomagnification
 - code: cbse10s.env.waste
   title: Ozone and managing waste
   after:
@@ -246,6 +408,48 @@ concepts:
       bin: Non-biodegradable
       clue: Is polythene a kind of plastic?
       why: 'Polythene is a plastic: not biodegradable.'
+  lesson:
+    - teach: Ozone (O₃) high in the atmosphere shields Earth from the sun's harmful ultraviolet (UV) rays, which cause skin cancer. It forms when UV splits O₂ and the free O atoms join with O₂. Chlorofluorocarbons (CFCs) from old fridges and sprays damaged it; a 1987 agreement (UNEP) froze their production.
+      check:
+        prompt: Ozone protects us from…
+        options:
+        - Ultraviolet rays
+        - Visible light
+        - Radio waves
+        answer: Ultraviolet rays
+        why: UV causes skin cancer.
+    - teach: Waste that microbes can break down is biodegradable (peels, paper, cotton). Waste they can't break down is non-biodegradable (plastic, glass, metal cans, DDT). Non-biodegradable waste stays for a very long time and harms soil, water and animals.
+      picture:
+        kind: compare
+        columns:
+        - title: Biodegradable
+          points:
+          - Vegetable peels
+          - Paper
+          - Cotton cloth
+        - title: Non-biodegradable
+          points:
+          - Plastic bags
+          - Glass
+          - Metal cans
+        alt: Biodegradable waste such as peels, paper and cotton is broken down by microbes; plastic bags, glass and metal cans are not.
+      check:
+        prompt: Which is non-biodegradable?
+        options:
+        - Polythene bag
+        - Banana peel
+        - Paper
+        answer: Polythene bag
+        why: Microbes can't break plastic down.
+    - teach: 'We can cut waste: separate wet (kitchen) and dry waste; compost biodegradable waste; reduce, reuse and recycle; carry cloth bags instead of plastic; use steel or glass in place of disposable cups. Kulhads (clay cups) on trains were dropped partly because making them used up fertile topsoil.'
+      check:
+        prompt: Using a glass jar again to store spices is…
+        options:
+        - Reuse
+        - Recycle
+        - Reduce
+        answer: Reuse
+        why: Used again as it is.
   items:
   - prompt: What does the ozone layer protect us from?
     options:
@@ -323,3 +527,125 @@ concepts:
     - Reduce, reuse, recycle.
     solution: Separating waste lets wet waste be composted and dry waste be recycled, so less goes to landfills.
     mistakes: {"Burning plastic in the open": "t10_reduce_waste", "Using more disposable cups": "t10_reduce_waste"}
+  - prompt: Which is biodegradable?
+    options:
+    - Cotton cloth
+    - Plastic bottle
+    - Aluminium can
+    - Glass
+    answer: Cotton cloth
+    difficulty: 1
+    hints:
+    - Made from a plant.
+    - Microbes can break it down.
+    solution: Cotton is natural plant fibre and breaks down.
+    mistakes:
+      Plastic bottle: c10s_biodegradable
+  - prompt: What type of radiation does the ozone layer absorb?
+    options:
+    - Ultraviolet
+    - Infrared
+    - Visible
+    - Radio
+    answer: Ultraviolet
+    difficulty: 1
+    hints:
+    - It causes sunburn and skin cancer.
+    - Beyond violet.
+    solution: Ozone absorbs ultraviolet radiation.
+    mistakes:
+      Infrared: t10_ozone_uv
+  - prompt: Ozone near the ground is harmful, but ozone high up is useful. Why is high-up ozone useful?
+    options:
+    - It blocks UV rays from the sun
+    - It makes rain
+    - It gives us oxygen to breathe
+    - It warms the earth
+    answer: It blocks UV rays from the sun
+    difficulty: 2
+    hints:
+    - It is a shield.
+    - Against which rays?
+    solution: High-up ozone absorbs harmful UV rays before they reach us.
+    mistakes:
+      It gives us oxygen to breathe: c10s13_ozone_place
+  - prompt: Melting old aluminium cans to make new ones is…
+    options:
+    - Recycling
+    - Reusing
+    - Reducing
+    - Composting
+    answer: Recycling
+    difficulty: 1
+    hints:
+    - The can is changed into something new.
+    - Not used as it is.
+    solution: Making a material into a new product is recycling.
+    mistakes:
+      Reusing: c10s13_3r
+  - prompt: Switching off lights and fans when not needed is an example of…
+    options:
+    - Reduce
+    - Reuse
+    - Recycle
+    - Compost
+    answer: Reduce
+    difficulty: 1
+    hints:
+    - Using less.
+    - Saving electricity.
+    solution: Using less energy is reducing.
+    mistakes:
+      Recycle: c10s13_3r
+  - prompt: In which year did UNEP get countries to agree to freeze CFC production?
+    answer: '1987'
+    check: '1987'
+    difficulty: 3
+    hints:
+    - Ozone loss was noticed in the 1980s.
+    - Late in that decade.
+    solution: In 1987 UNEP got an agreement to freeze CFC production at 1986 levels.
+    mistakes:
+      '1997': t10_cfc
+  - prompt: Why were disposable clay cups (kulhads) on trains given up?
+    options:
+    - Making so many used up fertile topsoil
+    - They were too expensive
+    - They were plastic
+    - Trains became faster
+    answer: Making so many used up fertile topsoil
+    difficulty: 3
+    hints:
+    - Clay comes from the ground.
+    - Millions were needed every day.
+    solution: Making huge numbers of kulhads would remove fertile topsoil, so the idea was dropped.
+    mistakes:
+      They were plastic: c10s_biodegradable
+  - prompt: What should be done with wet kitchen waste?
+    options:
+    - Compost it
+    - Burn it with plastic
+    - Throw it in a river
+    - Bury it in plastic bags
+    answer: Compost it
+    difficulty: 1
+    hints:
+    - It is biodegradable.
+    - It can become manure.
+    solution: Kitchen waste can be composted into manure.
+    mistakes:
+      Bury it in plastic bags: t10_compost
+  - prompt: Why is non-biodegradable waste harmful?
+    options:
+    - It stays a long time and harms soil, water and animals
+    - It breaks down too fast
+    - It feeds plants
+    - It makes ozone
+    answer: It stays a long time and harms soil, water and animals
+    difficulty: 2
+    hints:
+    - Microbes can't break it.
+    - It piles up.
+    solution: It persists in the environment and harms living things.
+    mistakes:
+      It breaks down too fast: c10s_biodegradable
