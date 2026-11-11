@@ -1028,6 +1028,9 @@ lesson:
 
 Every Kerala Class 9 topic has a lesson and at least 15 practice questions (a test checks this), so practice can
 adapt, come back to a topic and catch a repeated mistake without the same few questions coming round again.
+CBSE Class 9 (all five subjects on the 2026–27 books, 131 topics) follows the same rule, with its own test. The
+CBSE 9 English and Hindi lessons were written from published summaries, not the printed books, so story details
+need checking, and the Hindi wording has not been read by a Hindi teacher.
 `app/lessons.py` checks lessons. To add lessons or questions to a pack without rewriting it, write a small extra file
 and run `python -m tools.add_to_packs <file>` (see the top of `tools/add_to_packs.py`); it keeps the pack's comments
 and layout and refuses the change if the pack would fail its checks.
