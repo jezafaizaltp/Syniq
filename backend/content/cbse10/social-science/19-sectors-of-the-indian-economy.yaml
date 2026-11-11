@@ -7,15 +7,22 @@ tips:
   c10ss_sectors: "Growing sugarcane is primary. Turning the cane into sugar in a mill is manufacturing: which sector is that?"
   c10ss_double_count: Wheat and flour are already inside the biscuits. Counting them again is double counting.
   c10ss_org_unorg: Job security, leave and provident fund belong to the organised sector.
+  c10ss19_formal: "An appointment letter, paid leave and provident fund are signs of formal, registered work. Which sector gives those?"
   s10_disguised: "Disguised unemployment looks like work. What is hidden?"
   s10_mgnrega: "MGNREGA guarantees a set number of days, a round number."
   s10_primary: "Fishing makes nothing in a factory. It takes something straight from nature."
   s10_private: "Tata and Reliance are owned by private people and shareholders."
   s10_public_aim: "The public sector provides services even when they don't make a profit."
+  c10ss19_cheap_power: "Foreign companies aim for profit. Who would supply power cheaply just to help small industries grow?"
   s10_railways_public: "Who owns Indian Railways?"
   s10_tertiary: "None of these make or grow goods. They give services."
   s10_unorg_protect: "Unorganised workers have no job security. Why do they need help?"
   s10_unorganised: "Street vendors have no fixed pay or written contract."
+  c10ss19_final: Count only final goods and services in GDP. Intermediate goods are already included in the value of the final goods.
+  c10ss19_shift: "Keep two things apart: which sector makes the most value, and which sector employs the most people. In India they are different sectors."
+  c10ss19_jobs: More jobs can come from irrigation, cheap credit, storage, better roads to markets, small industries, tourism, and more schools and health centres.
+  c10ss19_sector_type: 'Ask what the activity does: take from nature, make or manufacture something, or give a service?'
+  c10ss19_public_private: 'Who owns the main assets and runs it: the government, or private individuals and companies?'
 concepts:
 - code: cbse10ss.sectors.three
   title: Primary, secondary and tertiary sectors
@@ -81,6 +88,52 @@ concepts:
       bin: Tertiary
       clue: IT is a service.
       why: Tertiary.
+  lesson:
+    - teach: 'Economic activities fall into three sectors. Primary: using natural resources directly (farming, fishing, mining, forestry). Secondary: making goods from raw materials (factories, construction). Tertiary (services): activities that support the other two (transport, banking, trade, teaching, IT).'
+      picture:
+        kind: compare
+        columns:
+        - title: Primary
+          points:
+          - Farming, fishing
+          - Mining, forestry
+        - title: Secondary
+          points:
+          - Factories
+          - Construction
+          - Electricity
+        - title: Tertiary
+          points:
+          - Banks, transport
+          - Teachers, doctors
+          - IT services
+        alt: 'Primary sector: farming, fishing, mining, forestry. Secondary sector: factories, construction, electricity. Tertiary sector: banks, transport, teachers, doctors, IT services.'
+      check:
+        prompt: A carpenter making furniture works in the…
+        options:
+        - Secondary sector
+        - Primary sector
+        - Tertiary sector
+        answer: Secondary sector
+        why: Wood is turned into a product.
+    - teach: GDP (gross domestic product) is the value of all final goods and services produced in a country in a year. Only final goods are counted, to avoid double counting. In India the tertiary sector now produces the largest share of GDP, but more than half of workers are still in the primary sector.
+      check:
+        prompt: Why count only final goods in GDP?
+        options:
+        - To avoid double counting
+        - Final goods are cheaper
+        - Intermediate goods don't exist
+        answer: To avoid double counting
+        why: Intermediate values are already inside.
+    - teach: 'Agriculture has disguised (hidden) unemployment: more people work than are needed. Seasonal unemployment is common too. To create jobs: irrigation, credit, storage, roads, small industries, and services. MGNREGA (2005) guarantees 100 days of paid work a year to rural households, or an allowance.'
+      check:
+        prompt: Five family members work on a farm that needs only three. This is…
+        options:
+        - Disguised unemployment
+        - Full employment
+        - Seasonal employment
+        answer: Disguised unemployment
+        why: Two add nothing to output.
   items:
   - prompt: Fishing belongs to which sector?
     options:
@@ -154,6 +207,125 @@ concepts:
     - Right to work.
     solution: MGNREGA guarantees 100 days of employment a year.
     mistakes: {"365": "s10_mgnrega", "200": "s10_mgnrega"}
+  - prompt: Mining coal is in which sector?
+    options:
+    - Primary
+    - Secondary
+    - Tertiary
+    - Quaternary
+    answer: Primary
+    difficulty: 1
+    hints:
+    - Taken straight from nature.
+    - Like farming and fishing.
+    solution: Extracting natural resources is primary.
+    mistakes:
+      Secondary: c10ss19_sector_type
+  - prompt: A transporter carrying goods from a factory to shops works in which sector?
+    options:
+    - Tertiary
+    - Primary
+    - Secondary
+    - None
+    answer: Tertiary
+    difficulty: 1
+    hints:
+    - Nothing is grown or made.
+    - It is a service.
+    solution: 'Transport is a service: tertiary.'
+    mistakes:
+      Secondary: c10ss19_sector_type
+  - prompt: A baker buys flour for ₹50 and sells bread for ₹80. If only the bread is counted, what value goes into GDP, in rupees?
+    answer: '80'
+    check: '80'
+    difficulty: 2
+    hints:
+    - Flour is an intermediate good.
+    - Its value is already in the bread.
+    solution: Only the final good (bread, ₹80) is counted.
+    mistakes:
+      '130': c10ss19_final
+      '30': c10ss19_final
+  - prompt: Which sector produces the largest share of India's GDP today?
+    options:
+    - Tertiary
+    - Primary
+    - Secondary
+    - All equal
+    answer: Tertiary
+    difficulty: 2
+    hints:
+    - It has grown fastest since the 1970s.
+    - Services.
+    solution: The service (tertiary) sector is now the largest producer.
+    mistakes:
+      Primary: c10ss19_shift
+  - prompt: Which sector still employs the most workers in India?
+    options:
+    - Primary
+    - Tertiary
+    - Secondary
+    - None
+    answer: Primary
+    difficulty: 2
+    hints:
+    - Many people still farm.
+    - Even though it produces less.
+    solution: More than half of India's workers are in the primary sector.
+    mistakes:
+      Tertiary: c10ss19_shift
+  - prompt: Farm labourers find no work for a few months after harvest. This is…
+    options:
+    - Seasonal unemployment
+    - Disguised unemployment
+    - Full employment
+    - Organised work
+    answer: Seasonal unemployment
+    difficulty: 2
+    hints:
+    - It happens at certain times of the year.
+    - Linked to the farming calendar.
+    solution: Lack of work in some seasons is seasonal unemployment.
+    mistakes:
+      Disguised unemployment: s10_disguised
+  - prompt: Which would create jobs in rural areas?
+    options:
+    - Building a dam and canals for irrigation
+    - Closing local markets
+    - Cutting bank loans
+    - Banning small industries
+    answer: Building a dam and canals for irrigation
+    difficulty: 2
+    hints:
+    - More irrigated land, more crops.
+    - More work on farms.
+    solution: Irrigation lets farmers grow more crops, creating more work.
+    mistakes:
+      Cutting bank loans: c10ss19_jobs
+  - prompt: In which year was MGNREGA passed?
+    answer: '2005'
+    check: '2005'
+    difficulty: 3
+    hints:
+    - Early in this century.
+    - Mid-2000s.
+    solution: The Mahatma Gandhi National Rural Employment Guarantee Act was passed in 2005.
+    mistakes:
+      '100': s10_mgnrega
+  - prompt: Which of these is a tertiary activity?
+    options:
+    - Teaching in a school
+    - Growing rice
+    - Making cement
+    - Catching fish
+    answer: Teaching in a school
+    difficulty: 1
+    hints:
+    - Which one provides a service?
+    - Nothing grown or made.
+    solution: Teaching is a service, so tertiary.
+    mistakes:
+      Making cement: c10ss19_sector_type
 - code: cbse10ss.sectors.organised
   title: Organised and unorganised; public and private
   after:
@@ -219,6 +391,50 @@ concepts:
       bin: Organised
       clue: Regular job.
       why: Organised.
+  lesson:
+    - teach: The organised sector has registered enterprises with regular jobs, fixed hours, paid leave, provident fund and job security, following government rules. The unorganised sector has small, scattered units, often unregistered, with low pay, no security and no paid leave. Most Indian workers are in the unorganised sector.
+      picture:
+        kind: compare
+        columns:
+        - title: Organised
+          points:
+          - Registered
+          - Regular salary
+          - Paid leave, PF
+          - Job security
+        - title: Unorganised
+          points:
+          - Often not registered
+          - Low, irregular pay
+          - No leave
+          - Can be removed any time
+        alt: 'Organised sector: registered, regular salary, paid leave and provident fund, job security. Unorganised sector: often unregistered, low irregular pay, no leave, workers can be removed any time.'
+      check:
+        prompt: A government school teacher with a pension works in the…
+        options:
+        - Organised sector
+        - Unorganised sector
+        - Primary sector
+        answer: Organised sector
+        why: Regular job with benefits.
+    - teach: 'Unorganised workers need protection: landless labourers, small farmers, street vendors, construction workers, and many from SC, ST and minority communities. The government can help with minimum wages, cheap loans, health and social security.'
+      check:
+        prompt: Which worker is usually in the unorganised sector?
+        options:
+        - A street vendor
+        - A bank officer
+        - A railway engineer
+        answer: A street vendor
+        why: No fixed pay or contract.
+    - teach: 'By ownership: public sector (government owns most assets and provides services, e.g. Indian Railways, post offices) and private sector (owned by individuals or companies for profit, e.g. Tata Steel, Reliance). The public sector also provides things the private sector won''t, like cheap electricity for small industries or health and schools for all.'
+      check:
+        prompt: Indian Railways is in the…
+        options:
+        - Public sector
+        - Private sector
+        - Unorganised sector
+        answer: Public sector
+        why: The government owns it.
   items:
   - prompt: Which of these is a feature of the organised sector?
     options:
@@ -299,3 +515,129 @@ concepts:
     - Profit motive.
     solution: 'They are owned by private companies: private sector.'
     mistakes: {"Public sector": "s10_private"}
+  - prompt: Which is a feature of the unorganised sector?
+    options:
+    - No job security or paid leave
+    - Fixed working hours
+    - Provident fund
+    - Medical benefits
+    answer: No job security or paid leave
+    difficulty: 1
+    hints:
+    - Three options are organised-sector benefits.
+    - Which one is missing?
+    solution: Unorganised workers lack job security and paid leave.
+    mistakes:
+      Provident fund: c10ss_org_unorg
+  - prompt: A person working in a big factory with appointment letter, leave and PF is in the…
+    options:
+    - Organised sector
+    - Unorganised sector
+    - Primary sector
+    - Informal sector
+    answer: Organised sector
+    difficulty: 1
+    hints:
+    - Formal terms of work.
+    - Registered with the government.
+    solution: Formal jobs with benefits belong to the organised sector.
+    mistakes:
+      Unorganised sector: c10ss19_formal
+  - prompt: Why does the government provide some services even at a loss?
+    options:
+    - They are needed by everyone, and the private sector won't provide them cheaply
+    - To make big profits
+    - To compete with farmers
+    - Because private firms are banned
+    answer: They are needed by everyone, and the private sector won't provide them cheaply
+    difficulty: 2
+    hints:
+    - Think of roads, water, schools.
+    - Profit isn't the aim.
+    solution: The public sector's aim is welfare, not profit.
+    mistakes:
+      To make big profits: s10_public_aim
+  - prompt: Which company is in the private sector?
+    options:
+    - Reliance Industries
+    - Indian Railways
+    - India Post
+    - Government hospitals
+    answer: Reliance Industries
+    difficulty: 1
+    hints:
+    - Owned by individuals or shareholders.
+    - Run for profit.
+    solution: Reliance is privately owned.
+    mistakes:
+      Indian Railways: c10ss19_public_private
+  - prompt: Who mostly makes up the unorganised sector in rural areas?
+    options:
+    - Landless labourers, small farmers and artisans
+    - Bank officers
+    - IAS officers
+    - Airline pilots
+    answer: Landless labourers, small farmers and artisans
+    difficulty: 2
+    hints:
+    - Small, informal work.
+    - No fixed salary.
+    solution: Rural unorganised workers include landless labourers, sharecroppers, small farmers and artisans.
+    mistakes:
+      Bank officers: s10_unorganised
+  - prompt: How can the government help unorganised workers?
+    options:
+    - Set minimum wages and give cheap loans and social security
+    - Remove all labour laws
+    - Ban small businesses
+    - Stop rural jobs
+    answer: Set minimum wages and give cheap loans and social security
+    difficulty: 2
+    hints:
+    - They need protection.
+    - Money and safety.
+    solution: Minimum wages, credit and social security protect unorganised workers.
+    mistakes:
+      Remove all labour laws: s10_unorg_protect
+  - prompt: Electricity sold cheaply to small industries by a state board shows the role of…
+    options:
+    - The public sector
+    - The unorganised sector
+    - Foreign companies
+    - Moneylenders
+    answer: The public sector
+    difficulty: 2
+    hints:
+    - Cheap supply helps industry grow.
+    - Who would do it at low profit?
+    solution: The public sector supplies such services to support growth.
+    mistakes:
+      Foreign companies: c10ss19_cheap_power
+  - prompt: Why do many workers in the organised sector feel more secure?
+    options:
+    - They have regular pay, leave and protection under labour laws
+    - They earn nothing
+    - They can be fired any day
+    - They work only in villages
+    answer: They have regular pay, leave and protection under labour laws
+    difficulty: 1
+    hints:
+    - Formal terms.
+    - Government rules apply.
+    solution: Laws such as the Factories Act protect organised-sector workers.
+    mistakes:
+      They can be fired any day: c10ss_org_unorg
+  - prompt: A government hospital is an example of which sector, by ownership?
+    options:
+    - Public sector
+    - Private sector
+    - Unorganised sector
+    - Primary sector
+    answer: Public sector
+    difficulty: 1
+    hints:
+    - Who owns it?
+    - Not run for profit.
+    solution: Government-owned services are in the public sector.
+    mistakes:
+      Private sector: c10ss19_public_private
