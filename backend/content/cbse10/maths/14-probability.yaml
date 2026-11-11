@@ -8,6 +8,10 @@ tips:
   t10_count_outcomes: "Count the favourable outcomes and divide by all the outcomes. How many faces are even?"
   t10_deck_counts: "A deck has 4 suits of 13. How many kings are there? How many red face cards (J, Q, K in 2 suits)?"
   t10_prob_range: "A probability can't be less than 0 or more than 1."
+  c10m14_total: The bottom of the fraction is ALL the equally likely outcomes. Count everything that could happen, not just the other outcomes.
+  c10m14_complement: P(not E) = 1 − P(E). The two always add up to 1.
+  c10m14_dice_table: Two dice give 6 × 6 = 36 outcomes. List the pairs that work, like (2, 6), (3, 5)… and remember (2, 6) and (6, 2) are different.
+  c10m14_sure: A sure event has probability 1 and an impossible event 0. Can this one happen at all?
 concepts:
 - code: cbse10m.prob.basic
   title: Theoretical probability
@@ -91,6 +95,47 @@ concepts:
       - when:
           f: 26
         say: 26 red cards, but only 2 of them are kings.
+  lesson:
+    - teach: Probability measures how likely something is, from 0 (impossible) to 1 (sure). When all outcomes are equally likely, P(E) = number of favourable outcomes ÷ total number of outcomes.
+      picture:
+        kind: number_line
+        from: 0
+        to: 1
+        step: 0.25
+        points:
+        - at: 0
+          label: impossible
+        - at: 0.5
+          label: fair coin heads
+        - at: 1
+          label: sure
+        alt: 'A line from 0 to 1: impossible at 0, a fair coin landing heads at one half, a sure event at 1.'
+      check:
+        prompt: A die is thrown. P(a number less than 7)?
+        options:
+        - '1'
+        - '0'
+        - 6/7
+        answer: '1'
+        why: Every face is less than 7, so it is sure.
+    - teach: 'Count carefully. A die has 6 faces. A deck has 52 cards: 4 suits of 13; 26 red, 26 black; 12 face cards (J, Q, K). Two coins give 4 outcomes: HH, HT, TH, TT. Two dice give 36 ordered pairs.'
+      check:
+        prompt: How many outcomes when three coins are tossed?
+        options:
+        - '8'
+        - '6'
+        - '3'
+        answer: '8'
+        why: 2 × 2 × 2 = 8.
+    - teach: P(E) + P(not E) = 1, so P(not E) = 1 − P(E). If the chance of rain is 0.3, the chance of no rain is 0.7.
+      check:
+        prompt: P(win) = 2/5. P(not win)?
+        options:
+        - 3/5
+        - 2/5
+        - 5/2
+        answer: 3/5
+        why: 1 − 2/5 = 3/5.
   items:
   - prompt: A die is thrown once. Find P(an even number). Type a fraction.
     answer: 1/2
@@ -171,3 +216,102 @@ concepts:
     - 1.2 > 1.
     solution: A probability must be between 0 and 1; 1.2 is too big.
     mistakes: {"0": "t10_prob_range", "1": "t10_prob_range"}
+  - prompt: A die is thrown. Find P(a number greater than 4). Type a fraction.
+    answer: 1/3
+    check: 2/6
+    difficulty: 1
+    hints:
+    - Which faces are greater than 4?
+    - Two of the six faces.
+    solution: '5 and 6: 2 of 6 = 1/3.'
+    mistakes:
+      1/2: c10m14_total
+      2/4: c10m14_total
+  - prompt: A die is thrown. Find P(a prime number). Type a fraction.
+    answer: 1/2
+    check: 3/6
+    difficulty: 2
+    hints:
+    - List primes up to 6.
+    - 1 is not prime.
+    solution: '2, 3, 5: 3 of 6 = 1/2.'
+    mistakes:
+      2/3: c10m14_total
+      1/3: c10m14_total
+  - prompt: A die is thrown. Find P(getting 8).
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - What numbers are on a die?
+    - Can 8 come up?
+    solution: 'There is no 8, so the event is impossible: P = 0.'
+    mistakes:
+      1/8: c10m14_sure
+      1/6: c10m14_sure
+  - prompt: Two dice are thrown. Find P(a doublet, the same number on both). Type a fraction.
+    answer: 1/6
+    check: 6/36
+    difficulty: 2
+    hints:
+    - 'Doublets: (1,1), (2,2)… how many?'
+    - Out of 36 pairs.
+    solution: 6 doublets out of 36 = 1/6.
+    mistakes:
+      1/36: c10m14_dice_table
+      1/12: c10m14_dice_table
+  - prompt: Two dice are thrown. Find P(the sum is 7). Type a fraction.
+    answer: 1/6
+    check: 6/36
+    difficulty: 3
+    hints:
+    - 'List pairs: (1,6), (2,5), (3,4)… and their reverses.'
+    - Out of 36.
+    solution: '(1,6), (2,5), (3,4), (4,3), (5,2), (6,1): 6 of 36 = 1/6.'
+    mistakes:
+      1/12: c10m14_dice_table
+      3/36: c10m14_dice_table
+  - prompt: A card is drawn from a deck of 52. Find P(not a face card). Type a fraction.
+    answer: 10/13
+    check: 40/52
+    difficulty: 2
+    hints:
+    - How many face cards are there?
+    - 52 − 12 cards are not face cards.
+    solution: 40 of 52 = 10/13.
+    mistakes:
+      3/13: c10m14_complement
+      12/52: c10m14_complement
+  - prompt: A box has 5 red, 8 white and 4 green marbles. One is taken at random. Find P(not green). Type a fraction.
+    answer: 13/17
+    check: 13/17
+    difficulty: 2
+    hints:
+    - Total = 5 + 8 + 4.
+    - Not green = red or white.
+    solution: 13 not-green out of 17 = 13/17.
+    mistakes:
+      4/17: c10m14_complement
+      13/4: c10m14_total
+  - prompt: Three coins are tossed. Find P(exactly two heads). Type a fraction.
+    answer: 3/8
+    check: 3/8
+    difficulty: 3
+    hints:
+    - There are 8 outcomes.
+    - HHT, HTH, THH.
+    solution: '3 of 8 outcomes have exactly two heads: 3/8.'
+    mistakes:
+      1/3: c10m14_total
+      2/3: c10m14_total
+  - prompt: The probability of an event is 0.08. Find the probability that it does NOT happen.
+    answer: '0.92'
+    check: 1 - 0.08
+    difficulty: 1
+    hints:
+    - P(E) + P(not E) = 1.
+    - 1 − 0.08.
+    solution: 1 − 0.08 = 0.92.
+    mistakes:
+      '0.08': c10m14_complement
+      '0.2': c10m14_complement

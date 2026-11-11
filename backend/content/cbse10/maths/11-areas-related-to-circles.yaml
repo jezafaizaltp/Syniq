@@ -14,6 +14,11 @@ tips:
   t10_sector_fraction: "Sector area = (θ/360) × πr². What fraction of the whole circle is 50π?"
   t10_segment_def: "A segment is cut off by a chord. A sector is cut off by two radii."
   t10_square_minus_circle: "Area outside the circle = square area − circle area. The circle's diameter is the square's side."
+  c10m11_fraction: A sector is the fraction θ/360 of the whole circle. Work out that fraction first, then take it of πr² (area) or 2πr (arc).
+  c10m11_area_vs_arc: Area uses πr² and is in square units. Arc length uses 2πr and is in plain units. Which one does the question want?
+  c10m11_perimeter: A sector's boundary is the arc plus two radii. Did you add both radii?
+  c10m11_segment: Segment = sector − triangle. Find the sector first, then take away the triangle made by the two radii and the chord.
+  c10m11_major: The major part is the whole circle minus the minor part.
 concepts:
 - code: cbse10m.area.sector
   title: Arcs and sectors
@@ -121,6 +126,45 @@ concepts:
           r: 21
           t: 120
         say: 120° sweeps a third of the edge, 44 cm. 22 cm is a sixth.
+  lesson:
+    - teach: 'A sector is a slice of a circle cut by two radii, like a slice of pizza. The angle θ at the centre tells you what fraction of the circle it is: θ/360. A 90° sector is a quarter, a 60° sector is a sixth.'
+      picture:
+        kind: bars
+        unit: degrees out of 360
+        bars:
+        - label: 90° sector
+          value: 90
+        - label: 60° sector
+          value: 60
+        - label: whole circle
+          value: 360
+        alt: Bars comparing a 90° sector, a 60° sector and the whole circle of 360°, showing that 90° is a quarter and 60° is a sixth.
+      check:
+        prompt: What fraction of the circle is a 120° sector?
+        options:
+        - 1/3
+        - 1/4
+        - 1/2
+        answer: 1/3
+        why: 120/360 = 1/3.
+    - teach: 'Area of a sector = (θ/360) × πr². Arc length = (θ/360) × 2πr. Example: r = 7 cm, θ = 90°: area = 1/4 × 22/7 × 49 = 38.5 cm², arc = 1/4 × 2 × 22/7 × 7 = 11 cm.'
+      check:
+        prompt: r = 14 cm, θ = 180°. Arc length? (π = 22/7)
+        options:
+        - 44 cm
+        - 88 cm
+        - 308 cm
+        answer: 44 cm
+        why: Half of 2 × 22/7 × 14 = 88, so 44 cm.
+    - teach: 'The rest of the circle is the major sector: πr² minus the minor sector. A sector''s perimeter is its arc plus two radii.'
+      check:
+        prompt: Minor sector 30 cm², circle 154 cm². Major sector?
+        options:
+        - 124 cm²
+        - 184 cm²
+        - 30 cm²
+        answer: 124 cm²
+        why: 154 − 30 = 124.
   items:
   - prompt: Find the area of a sector of angle 90° in a circle of radius 14 cm. Use π = 22/7. Answer in cm².
     answer: '154'
@@ -180,6 +224,112 @@ concepts:
     solution: 'Step 1: Arc = 22 cm. Step 2: Perimeter = 22 + 14 + 14 = 50 cm.'
     mistakes:
       '22': c10_perimeter_radii
+  - prompt: Find the area of a 60° sector of a circle of radius 6 cm, as kπ cm². Find k.
+    answer: '6'
+    check: 60 / 360 * 36
+    difficulty: 2
+    hints:
+    - 60° is one sixth of the circle.
+    - 'Whole circle: 36π.'
+    solution: Area = (1/6) × 36π = 6π cm², so k = 6.
+    mistakes:
+      '36': c10m11_fraction
+      '2': c10m11_area_vs_arc
+  - prompt: Find the arc length of a 90° sector of a circle of radius 14 cm, in cm. Use π = 22/7.
+    answer: '22'
+    check: 90 / 360 * 2 * 22 / 7 * 14
+    difficulty: 2
+    hints:
+    - 90° is a quarter.
+    - Circumference = 2 × 22/7 × 14 = 88.
+    solution: Arc = 88 ÷ 4 = 22 cm.
+    mistakes:
+      '154': c10m11_area_vs_arc
+      '88': c10m11_fraction
+  - prompt: Find the area of a 120° sector of a circle of radius 3 cm, as kπ cm². Find k.
+    answer: '3'
+    check: 120 / 360 * 9
+    difficulty: 2
+    hints:
+    - 120° is a third.
+    - πr² = 9π.
+    solution: Area = 9π ÷ 3 = 3π, so k = 3.
+    mistakes:
+      '9': c10m11_fraction
+      '2': c10m11_area_vs_arc
+  - prompt: Find the perimeter of a 90° sector of radius 7 cm, in cm. Use π = 22/7.
+    answer: '25'
+    check: 90 / 360 * 2 * 22 / 7 * 7 + 14
+    difficulty: 2
+    hints:
+    - Arc = quarter of 44.
+    - Then add both radii.
+    solution: Arc = 11 cm. Perimeter = 11 + 7 + 7 = 25 cm.
+    mistakes:
+      '11': c10m11_perimeter
+      '18': c10m11_perimeter
+  - prompt: An arc of a circle of radius 10 cm is 5π cm long. Find the angle at the centre, in degrees.
+    answer: '90'
+    check: 5 / 20 * 360
+    difficulty: 3
+    hints:
+    - Circumference = 20π.
+    - What fraction of 20π is 5π?
+    solution: 5π/20π = 1/4, so θ = 360° ÷ 4 = 90°.
+    mistakes:
+      '45': c10m11_area_vs_arc
+      '180': c10m11_fraction
+  - prompt: A circle has radius 6 cm. Its minor sector has angle 60°. Find the major sector's area as kπ cm². Find k.
+    answer: '30'
+    check: 300 / 360 * 36
+    difficulty: 3
+    hints:
+    - The major sector's angle is 360° − 60°.
+    - 'Or: whole 36π minus 6π.'
+    solution: Major = 36π − 6π = 30π cm², so k = 30.
+    mistakes:
+      '6': c10m11_major
+      '36': c10m11_major
+  - prompt: A cow is tied with a 14 m rope at a corner of a big square field. Over what area can it graze, in m²? Use π = 22/7.
+    answer: '154'
+    check: 90 / 360 * 22 / 7 * 14 * 14
+    difficulty: 3
+    hints:
+    - At a corner, the cow sweeps a 90° sector.
+    - Quarter of 22/7 × 196.
+    solution: Area = 1/4 × 616 = 154 m².
+    mistakes:
+      '616': c10m11_fraction
+      '22': c10m11_area_vs_arc
+  - prompt: Doubling the radius of a sector (same angle) does what to its area?
+    options:
+    - Makes it 4 times as big
+    - Doubles it
+    - Leaves it the same
+    - Halves it
+    answer: Makes it 4 times as big
+    difficulty: 2
+    hints:
+    - Area has r².
+    - (2r)² = ?
+    solution: Area depends on r², and (2r)² = 4r², so it becomes 4 times as big.
+    mistakes:
+      Doubles it: c10m11_area_vs_arc
+  - prompt: Which formula gives the length of an arc with angle θ in a circle of radius r?
+    options:
+    - (θ/360) × 2πr
+    - (θ/360) × πr²
+    - θ × r
+    - (360/θ) × 2πr
+    answer: (θ/360) × 2πr
+    difficulty: 1
+    hints:
+    - Length is part of the circumference.
+    - Circumference = 2πr.
+    solution: An arc is the fraction θ/360 of the circumference 2πr.
+    mistakes:
+      (θ/360) × πr²: c10m11_area_vs_arc
+      (360/θ) × 2πr: c10m11_fraction
 - code: cbse10m.area.segment
   title: Segments and combined shapes
   after:
@@ -252,6 +402,41 @@ concepts:
       - when:
           r: 6
         say: 'At r = 6 the whole quarter-circle sector is about 28.3 cm², but the segment is the sector minus the triangle: just 10.3 cm².'
+  lesson:
+    - teach: 'A chord cuts a circle into two segments. The smaller one is the minor segment. To find its area: take the sector with the same angle and subtract the triangle made by the two radii and the chord.'
+      picture:
+        kind: flow
+        steps:
+        - Sector area (θ/360) πr²
+        - Triangle area from the two radii
+        - Segment = sector − triangle
+        alt: 'Three steps: find the sector area, find the triangle made by the two radii, then subtract to get the segment.'
+      check:
+        prompt: Segment area = ?
+        options:
+        - Sector − triangle
+        - Sector + triangle
+        - Circle − sector
+        answer: Sector − triangle
+        why: The triangle part of the sector is not in the segment.
+    - teach: 'Triangle areas you need: for θ = 90°, triangle = ½ r². For θ = 60°, the triangle is equilateral: (√3/4) r². Example: r = 14, θ = 90°: sector = 154, triangle = 98, segment = 56 cm².'
+      check:
+        prompt: r = 10 cm, θ = 90°. Triangle area?
+        options:
+        - 50 cm²
+        - 100 cm²
+        - 25 cm²
+        answer: 50 cm²
+        why: ½ × 10 × 10 = 50.
+    - teach: Major segment = circle − minor segment. For shaded-region questions, list the shapes you see, find each area, and add or subtract.
+      check:
+        prompt: Circle 154 cm², minor segment 14 cm². Major segment?
+        options:
+        - 140 cm²
+        - 168 cm²
+        - 154 cm²
+        answer: 140 cm²
+        why: 154 − 14 = 140.
   items:
   - prompt: Find the area of the minor segment of a circle of radius 14 cm cut off by a 90° angle at the centre. Use π = 22/7. Answer in cm².
     answer: '56'
@@ -313,3 +498,111 @@ concepts:
     - 'Triangle is equilateral: (√3/4) × 36 = 9√3.'
     solution: 'Step 1: Sector = 6π. Step 2: Triangle = 9√3. Step 3: Segment = 6π − 9√3, so a = 6.'
     mistakes: {"9": "c10_subtract_triangle", "12": "t10_sector_fraction"}
+  - prompt: In a circle of radius 10 cm, a chord makes 90° at the centre. Find the minor segment's area in cm². Use π = 3.14.
+    answer: '28.5'
+    check: 0.25 * 3.14 * 100 - 50
+    difficulty: 2
+    hints:
+    - Sector = quarter of 314.
+    - Triangle = ½ × 10 × 10.
+    solution: Sector = 78.5, triangle = 50, segment = 28.5 cm².
+    mistakes:
+      '78.5': c10m11_segment
+      '128.5': c10m11_segment
+  - prompt: For that circle (r = 10 cm, 90° chord), find the major segment's area in cm². Use π = 3.14.
+    answer: '285.5'
+    check: 314 - 28.5
+    difficulty: 3
+    hints:
+    - Whole circle = 314.
+    - Take away the minor segment.
+    solution: Major = 314 − 28.5 = 285.5 cm².
+    mistakes:
+      '28.5': c10m11_major
+      '235.5': c10m11_segment
+  - prompt: A circle of radius 7 cm has a 90° sector. Find the minor segment's area in cm². Use π = 22/7.
+    answer: '14'
+    check: 38.5 - 24.5
+    difficulty: 2
+    hints:
+    - Sector = quarter of 154.
+    - Triangle = ½ × 7 × 7.
+    solution: Sector = 38.5, triangle = 24.5, segment = 14 cm².
+    mistakes:
+      '38.5': c10m11_segment
+      '63': c10m11_segment
+  - prompt: Which shape is between a chord and its arc?
+    options:
+    - A segment
+    - A sector
+    - A triangle
+    - A semicircle
+    answer: A segment
+    difficulty: 1
+    hints:
+    - A sector is between two radii and an arc.
+    - This one has a chord instead of radii.
+    solution: The region between a chord and its arc is a segment.
+    mistakes:
+      A sector: c10m11_segment
+  - prompt: A square of side 14 cm has a quarter circle of radius 14 cm drawn from one corner. Find the area of the square NOT covered, in cm². Use π = 22/7.
+    answer: '42'
+    check: 196 - 154
+    difficulty: 3
+    hints:
+    - Quarter circle = ¼ × 22/7 × 196.
+    - Square = 196.
+    solution: Quarter circle = 154. Uncovered = 196 − 154 = 42 cm².
+    mistakes:
+      '154': c10m11_major
+      '350': c10m11_segment
+  - prompt: A chord subtends 60° at the centre of a circle of radius 12 cm. The triangle it forms with the centre is…
+    options:
+    - Equilateral
+    - Right-angled
+    - Scalene
+    - Obtuse
+    answer: Equilateral
+    difficulty: 2
+    hints:
+    - Two sides are radii, so it is isosceles.
+    - The base angles share 120°.
+    solution: Base angles = 60° each, so all angles are 60° and it is equilateral.
+    mistakes:
+      Right-angled: c10m11_segment
+  - prompt: A circular park of radius 21 m has a path cut off by a chord at 90°. Find the minor segment's area in m². Use π = 22/7.
+    answer: '126'
+    check: 0.25 * 22 / 7 * 441 - 0.5 * 441
+    difficulty: 3
+    hints:
+    - Sector = ¼ × 22/7 × 441.
+    - Triangle = ½ × 21 × 21.
+    solution: Sector = 346.5, triangle = 220.5, segment = 126 m².
+    mistakes:
+      '346.5': c10m11_segment
+      '567': c10m11_segment
+  - prompt: Two circles of radius 7 cm each touch each other and are inside a rectangle 28 cm × 14 cm. Find the area of the rectangle not covered, in cm². Use π = 22/7.
+    answer: '84'
+    check: 28 * 14 - 2 * 154
+    difficulty: 3
+    hints:
+    - Each circle is 154 cm².
+    - Rectangle = 392.
+    solution: 392 − 308 = 84 cm².
+    mistakes:
+      '238': c10m11_major
+      '308': c10m11_major
+  - prompt: Which needs a subtraction to find its area?
+    options:
+    - A minor segment
+    - A sector
+    - A full circle
+    - A semicircle
+    answer: A minor segment
+    difficulty: 1
+    hints:
+    - Three of these come straight from (θ/360)πr².
+    - Which one has a triangle taken away?
+    solution: Segment = sector − triangle; the others come straight from (θ/360)πr².
+    mistakes:
+      A sector: c10m11_segment

@@ -13,6 +13,13 @@ tips:
   t10_tangent_perp: "The radius drawn to the point of contact meets the tangent at a right angle."
   t10_tangents_inside: "Every line through a point inside the circle cuts the circle twice. Can any of them be a tangent?"
   t10_two_tangents: "From an outside point there are exactly two tangents, one on each side."
+  c10m10_pyth: The radius, the tangent and the line to the centre make a right triangle with the right angle at the point of contact. Which one is the hypotenuse?
+  c10m10_secant: A tangent touches the circle at exactly one point. A line that cuts it at two points is a secant.
+  c10m10_on_circle: "Two tangents come from a point outside the circle. Here the point sits on the circle itself."
+  c10m10_through: "A tangent only touches the circle once. This line goes in and out again."
+  c10m10_kite: In quadrilateral OAPB the angles at A and B are 90° each. The four angles add up to 360°.
+  c10m10_split_tangent: Each side of the figure is made of two tangent pieces. Pieces from the same corner are equal; name them and add.
+  c10m10_parallel: Tangents at the two ends of a diameter are both perpendicular to that diameter. What does that make them?
 concepts:
 - code: cbse10m.circ.tangent
   title: Tangent to a circle
@@ -95,6 +102,58 @@ concepts:
       - when:
           degrees: 30
         say: 30° is at P. At O it's what's left from 180° after 90° and 30°.
+  lesson:
+    - teach: A line can meet a circle in two points (a secant), in no points, or in exactly one point. A line that touches the circle at exactly one point is a tangent, and that point is the point of contact.
+      check:
+        prompt: A line meets a circle at exactly one point. It is a…
+        options:
+        - Tangent
+        - Secant
+        - Chord
+        answer: Tangent
+        why: One point of contact means it only touches.
+    - teach: 'Key theorem: the tangent at any point is perpendicular to the radius through that point. So the radius, the tangent and the line from the centre to an outside point form a right triangle with the right angle at the point of contact.'
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 0
+          - 0
+          A:
+          - 0
+          - 3
+          P:
+          - 4
+          - 3
+        segments:
+        - - O
+          - A
+        - - A
+          - P
+        - - O
+          - P
+        angles:
+        - at: A
+          from: O
+          to: P
+        alt: Centre O, radius OA = 3 up to the point of contact A, tangent AP = 4 along the top, and OP = 5 as the hypotenuse; the right angle is at A.
+      check:
+        prompt: In the picture, which side is the hypotenuse?
+        options:
+        - OP
+        - OA
+        - AP
+        answer: OP
+        why: It is opposite the right angle at A.
+    - teach: 'Use Pythagoras: OP² = OA² + AP². With radius 3 and OP = 5, the tangent AP = √(25 − 9) = 4. From a point inside the circle there is no tangent; from a point on the circle there is exactly one.'
+      check:
+        prompt: Radius 5 cm, P is 13 cm from the centre. Tangent length?
+        options:
+        - 12 cm
+        - 8 cm
+        - 18 cm
+        answer: 12 cm
+        why: √(169 − 25) = 12.
   items:
   - prompt: How many tangents can be drawn to a circle from a point outside it?
     options:
@@ -164,6 +223,116 @@ concepts:
     solution: 'Step 1: The small radius is perpendicular to the chord and bisects it. Step 2: Half-chord = √(5² − 3²) = 4. Step 3: Chord = 8 cm.'
     mistakes:
       '4': c10_half_chord
+  - prompt: The radius of a circle is 8 cm and a point P is 17 cm from the centre. Find the length of the tangent from P, in cm.
+    answer: '15'
+    check: (17**2 - 8**2) ** 0.5
+    difficulty: 2
+    hints:
+    - Right angle at the point of contact.
+    - Tangent² = 17² − 8².
+    solution: Tangent = √(289 − 64) = √225 = 15 cm.
+    mistakes:
+      '9': c10m10_pyth
+      '25': c10m10_pyth
+  - prompt: The tangent from P is 12 cm and the radius is 9 cm. How far is P from the centre, in cm?
+    answer: '15'
+    check: (12**2 + 9**2) ** 0.5
+    difficulty: 2
+    hints:
+    - OP is the hypotenuse.
+    - OP² = 12² + 9².
+    solution: OP = √(144 + 81) = √225 = 15 cm.
+    mistakes:
+      '3': c10m10_pyth
+      '21': c10m10_pyth
+  - prompt: How many tangents can a circle have in all?
+    options:
+    - Infinitely many
+    - One
+    - Two
+    - Four
+    answer: Infinitely many
+    difficulty: 1
+    hints:
+    - There is a tangent at every point on the circle.
+    - How many points does a circle have?
+    solution: Each point of the circle has its own tangent, so there are infinitely many.
+    mistakes:
+      Two: c10m10_secant
+  - prompt: A line cuts a circle at two points. What is it called?
+    options:
+    - Secant
+    - Tangent
+    - Radius
+    - Diameter
+    answer: Secant
+    difficulty: 1
+    hints:
+    - A tangent only touches.
+    - This one goes through.
+    solution: A line meeting a circle in two points is a secant.
+    mistakes:
+      Tangent: c10m10_through
+  - prompt: Tangents are drawn at the two ends of a diameter. How are they related?
+    options:
+    - They are parallel
+    - They meet at the centre
+    - They are perpendicular
+    - They are the same line
+    answer: They are parallel
+    difficulty: 2
+    hints:
+    - Each tangent makes 90° with the diameter.
+    - Two lines at 90° to the same line…
+    solution: Both are perpendicular to the same diameter, so they are parallel.
+    mistakes:
+      They are perpendicular: c10m10_parallel
+  - prompt: PQ is a tangent at Q to a circle with centre O. ∠OPQ = 35°. Find ∠POQ in degrees.
+    answer: '55'
+    check: 180 - 90 - 35
+    difficulty: 2
+    hints:
+    - ∠OQP = 90°.
+    - Angles of triangle OPQ add to 180°.
+    solution: ∠POQ = 180° − 90° − 35° = 55°.
+    mistakes:
+      '145': c10m10_pyth
+      '35': c10m10_pyth
+  - prompt: A chord of the outer of two concentric circles (radii 10 cm and 6 cm) touches the inner circle. Find the chord's length in cm.
+    answer: '16'
+    check: 2 * (10**2 - 6**2) ** 0.5
+    difficulty: 3
+    hints:
+    - The inner radius meets the chord at 90°, at the chord's midpoint.
+    - Half-chord = √(10² − 6²).
+    solution: Half-chord = √(100 − 36) = 8, so the chord is 16 cm.
+    mistakes:
+      '8': c10m10_pyth
+  - prompt: The tangent at a point P of a circle and the radius OP meet at what angle, in degrees?
+    answer: '90'
+    check: '90'
+    difficulty: 1
+    hints:
+    - This is the main theorem of the chapter.
+    - 'Think of the picture: radius up, tangent across.'
+    solution: 'The tangent is perpendicular to the radius at the point of contact: 90°.'
+    mistakes:
+      '180': c10m10_pyth
+      '45': c10m10_pyth
+  - prompt: A point P lies on a circle. How many tangents to the circle pass through P?
+    options:
+    - Exactly one
+    - None
+    - Two
+    - Infinitely many
+    answer: Exactly one
+    difficulty: 1
+    hints:
+    - 'Inside: none. Outside: two.'
+    - On the circle itself…
+    solution: Through a point on the circle there is exactly one tangent.
+    mistakes:
+      Two: c10m10_on_circle
 - code: cbse10m.circ.two_tangents
   title: Two tangents from an outside point
   after:
@@ -274,6 +443,68 @@ concepts:
           - 1
           - 6
         say: P must be outside the circle, further than the radius, or there is no tangent from it.
+  lesson:
+    - teach: 'From a point P outside a circle you can draw exactly two tangents, PA and PB. They are always equal in length: triangles OAP and OBP are congruent (right angle, equal radii, shared OP).'
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 3
+          - 5
+          A:
+          - 4.8
+          - 7.4
+          B:
+          - 4.8
+          - 2.6
+          P:
+          - 8
+          - 5
+        segments:
+        - - O
+          - A
+        - - O
+          - B
+        - - A
+          - P
+        - - B
+          - P
+        - - O
+          - P
+        angles:
+        - at: A
+          from: O
+          to: P
+        - at: B
+          from: O
+          to: P
+        alt: Circle centre O with tangents PA and PB from the outside point P; radii OA and OB meet the tangents at right angles, and OP joins the centre to P.
+      check:
+        prompt: PA = 9 cm. What is PB?
+        options:
+        - 9 cm
+        - 18 cm
+        - 4.5 cm
+        answer: 9 cm
+        why: Tangents from one outside point are equal.
+    - teach: OP bisects the angle APB, and in quadrilateral OAPB the angles at A and B are 90°. So ∠AOB + ∠APB = 180°. If ∠APB = 70°, then ∠AOB = 110° and ∠OPA = 35°.
+      check:
+        prompt: ∠APB = 50°. Then ∠AOB = ?
+        options:
+        - 130°
+        - 50°
+        - 100°
+        answer: 130°
+        why: 180° − 50° = 130°.
+    - teach: When a circle sits inside a quadrilateral touching all four sides, each side is split into two tangent pieces. Pieces from the same corner are equal, so AB + CD = AD + BC. For a triangle around a circle, name the pieces from each corner and add.
+      check:
+        prompt: A quadrilateral around a circle has AB = 5, CD = 7, BC = 6. AD = ?
+        options:
+        - '6'
+        - '8'
+        - '18'
+        answer: '6'
+        why: AB + CD = 12 = BC + AD, so AD = 6.
   items:
   - prompt: From a point P, two tangents PA and PB are drawn. PA = 7 cm. Find PB in cm.
     answer: '7'
@@ -335,3 +566,108 @@ concepts:
     solution: Each tangent = √(13² − 5²) = √144 = 12 cm.
     mistakes:
       '194': c10_pythag_subtract
+  - prompt: Two tangents from P make ∠APB = 110°. Find ∠AOB in degrees.
+    answer: '70'
+    check: 180 - 110
+    difficulty: 2
+    hints:
+    - In OAPB, the angles at A and B are 90° each.
+    - ∠AOB + ∠APB = 180°.
+    solution: ∠AOB = 180° − 110° = 70°.
+    mistakes:
+      '110': c10m10_kite
+      '250': c10m10_kite
+  - prompt: ∠AOB = 140° for tangents PA and PB. Find ∠APB in degrees.
+    answer: '40'
+    check: 180 - 140
+    difficulty: 2
+    hints:
+    - The four angles of OAPB add to 360°.
+    - Two of them are right angles.
+    solution: ∠APB = 360° − 90° − 90° − 140° = 40°.
+    mistakes:
+      '140': c10m10_kite
+      '220': c10m10_kite
+  - prompt: Tangents PA and PB make ∠APB = 90° and the radius is 5 cm. What shape is OAPB?
+    options:
+    - A square
+    - A rhombus that is not a square
+    - A trapezium
+    - A kite that is not a square
+    answer: A square
+    difficulty: 3
+    hints:
+    - All four angles are 90°.
+    - OA = OB and PA = PB; is PA also 5?
+    solution: All angles are 90° so it is a rectangle; OA = OB = 5 and PA = PB, and a rectangle with two equal neighbouring sides (OA = AP here, since ∠OPA = 45°) is a square.
+    mistakes:
+      A kite that is not a square: c10m10_kite
+  - prompt: A circle touches the sides of quadrilateral PQRS. PQ = 8, QR = 9, RS = 10. Find SP.
+    answer: '9'
+    check: 8 + 10 - 9
+    difficulty: 2
+    hints:
+    - Opposite sides add up equally.
+    - PQ + RS = QR + SP.
+    solution: PQ + RS = 18 = QR + SP, so SP = 18 − 9 = 9.
+    mistakes:
+      '27': c10m10_split_tangent
+      '11': c10m10_split_tangent
+  - prompt: A triangle ABC is drawn around a circle. The tangent pieces from A, B and C are 4 cm, 6 cm and 8 cm. Find BC in cm.
+    answer: '14'
+    check: 6 + 8
+    difficulty: 2
+    hints:
+    - Side BC is made of the piece from B and the piece from C.
+    - Add those two.
+    solution: BC = 6 + 8 = 14 cm.
+    mistakes:
+      '10': c10m10_split_tangent
+      '12': c10m10_split_tangent
+  - prompt: For that triangle (pieces 4, 6, 8 cm from A, B, C), find the perimeter in cm.
+    answer: '36'
+    check: 2 * (4 + 6 + 8)
+    difficulty: 2
+    hints:
+    - Each piece is used on two sides.
+    - Perimeter = 2 × (sum of the pieces).
+    solution: Perimeter = 2 × (4 + 6 + 8) = 36 cm.
+    mistakes:
+      '18': c10m10_split_tangent
+  - prompt: Tangents PA and PB make ∠APB = 70°. Find ∠PAB in degrees.
+    answer: '55'
+    check: (180 - 70) / 2
+    difficulty: 3
+    hints:
+    - PA = PB, so triangle PAB is isosceles.
+    - The two base angles share 180° − 70°.
+    solution: ∠PAB = (180° − 70°) ÷ 2 = 55°.
+    mistakes:
+      '70': c10m10_kite
+      '110': c10m10_kite
+  - prompt: Which statement is NOT true for tangents PA and PB from P to a circle with centre O?
+    options:
+    - OP is perpendicular to PA
+    - PA = PB
+    - OP bisects ∠APB
+    - OA is perpendicular to PA
+    answer: OP is perpendicular to PA
+    difficulty: 2
+    hints:
+    - The right angle is at the point of contact A.
+    - Where does PA meet OP?
+    solution: The right angle is between OA and PA, not OP and PA. The other three are true.
+    mistakes:
+      OA is perpendicular to PA: c10m10_pyth
+      PA = PB: c10m10_split_tangent
+  - prompt: The radius is 3 cm and P is 5 cm from the centre. Find the length of each tangent from P, in cm.
+    answer: '4'
+    check: (5**2 - 3**2) ** 0.5
+    difficulty: 1
+    hints:
+    - Right angle at the point of contact.
+    - √(25 − 9).
+    solution: Each tangent = √(25 − 9) = 4 cm.
+    mistakes:
+      '2': c10m10_pyth
+      '8': c10m10_split_tangent

@@ -7,6 +7,12 @@ tips:
   t10_sin_string: "The string is the hypotenuse, the height is opposite. Which ratio links those two?"
   t10_tan60: "h = 30 × tan 60°. What is tan 60° written with a root?"
   t10_tan_height: "tan = height ÷ distance. Find tan 45° from the table, then multiply."
+  c10m9_which_ratio: 'Mark what you know and what you want: height (opposite), distance on the ground (adjacent) or the slanting line (hypotenuse). Pick the ratio that uses exactly those two.'
+  c10m9_elev_depr: The angle of depression from the top equals the angle of elevation from the bottom, because they are alternate angles between parallel horizontal lines.
+  c10m9_look_down: "Elevation is measured looking up from the horizontal. This angle is measured the other way."
+  c10m9_upside: Check which side goes on top. tan θ = height ÷ ground distance, so the ground distance = height ÷ tan θ.
+  c10m9_two_points: With two observation points, write one tan equation for each triangle and subtract the ground distances.
+  c10m9_observer: Add the observer's eye height (or the building's height) to the part you worked out from the triangle.
 concepts:
 - code: cbse10m.trig.heights
   title: Heights and distances
@@ -117,6 +123,58 @@ concepts:
           h: 10
           d: 10
         say: Equal height and distance is 45°. For 30°, stand further back.
+  lesson:
+    - teach: To find a height you cannot climb, stand at a known distance and measure the angle up to the top. The line of sight, the ground and the tower form a right triangle. The angle between the ground and the line of sight is the angle of elevation.
+      picture:
+        kind: geometry
+        points:
+          P:
+          - 0
+          - 0
+          B:
+          - 6
+          - 0
+          T:
+          - 6
+          - 4
+        segments:
+        - - P
+          - B
+        - - B
+          - T
+        - - P
+          - T
+        angles:
+        - at: P
+          from: B
+          to: T
+        alt: Observer at P on the ground, tower BT standing at B; the line of sight PT makes the angle of elevation at P.
+      check:
+        prompt: In this triangle, the tower's height is which side for the angle at P?
+        options:
+        - Opposite
+        - Adjacent
+        - Hypotenuse
+        answer: Opposite
+        why: BT is across from the angle at P.
+    - teach: 'Choose the ratio that links what you know and what you want. Height and ground distance: tan θ = height ÷ distance. Height and a slanting string or ladder: sin θ = height ÷ length. Example: 20 m from a tree, elevation 45°: height = 20 × tan 45° = 20 m.'
+      check:
+        prompt: A ladder of length L leans at angle θ to the ground. Which gives the height it reaches?
+        options:
+        - L sin θ
+        - L cos θ
+        - L tan θ
+        answer: L sin θ
+        why: Height is opposite, ladder is the hypotenuse, so sin.
+    - teach: 'Looking down from a height, the angle between the horizontal and your line of sight is the angle of depression. It equals the angle of elevation seen from the object below (alternate angles). Example: from a 30 m building, a car is at depression 30°. Then tan 30° = 30 ÷ d, so d = 30√3 m.'
+      check:
+        prompt: From the top of a tower, a stone's angle of depression is 40°. From the stone, the top's angle of elevation is…
+        options:
+        - 40°
+        - 50°
+        - 140°
+        answer: 40°
+        why: Alternate angles between horizontal lines are equal.
   items:
   - prompt: From a point 30 m from the foot of a tower, the angle of elevation of the top is 45°. Find the height in metres.
     answer: '30'
@@ -178,3 +236,134 @@ concepts:
     solution: 'Step 1: tan θ = h/(√3 h) = 1/√3. Step 2: θ = 30°.'
     mistakes:
       '60': c10_trig_upside
+  - prompt: A tree casts a shadow 12 m long when the sun's elevation is 45°. How tall is the tree, in metres?
+    answer: '12'
+    check: 12 * 1
+    difficulty: 1
+    hints:
+    - Height ÷ shadow = tan 45°.
+    - tan 45° = 1.
+    solution: Height = 12 × tan 45° = 12 × 1 = 12 m.
+    mistakes:
+      '6': c10m9_which_ratio
+  - prompt: A ladder 10 m long leans against a wall and makes 60° with the ground. How far is its foot from the wall, in metres?
+    answer: '5'
+    check: 10 * 0.5
+    difficulty: 2
+    hints:
+    - The ground distance is adjacent to the 60° angle and the ladder is the hypotenuse.
+    - cos 60° = 1/2.
+    solution: Distance = 10 × cos 60° = 10 × 1/2 = 5 m.
+    mistakes:
+      '10': c10m9_which_ratio
+      '20': c10m9_upside
+  - prompt: A ladder 8 m long leans against a wall and makes 30° with the ground. How high up the wall does it reach, in metres?
+    answer: '4'
+    check: 8 * 0.5
+    difficulty: 2
+    hints:
+    - Height is opposite the angle, the ladder is the hypotenuse.
+    - sin 30° = 1/2.
+    solution: Height = 8 × sin 30° = 8 × 1/2 = 4 m.
+    mistakes:
+      '8': c10m9_which_ratio
+      '16': c10m9_upside
+  - prompt: From a point on the ground, the top of a 20 m tower is at 30° elevation. The distance to the foot of the tower is k√3 m. Find k.
+    answer: '20'
+    check: '20'
+    difficulty: 2
+    hints:
+    - tan 30° = 20 ÷ d.
+    - tan 30° = 1/√3, so d = 20 ÷ (1/√3).
+    solution: d = 20 ÷ tan 30° = 20√3 m, so k = 20.
+    mistakes:
+      '10': c10m9_upside
+  - prompt: A 1.5 m tall boy stands 30 m from a building and sees its top at 45°. How tall is the building, in metres?
+    answer: '31.5'
+    check: 30 * 1 + 1.5
+    difficulty: 2
+    hints:
+    - The triangle starts at his eye level.
+    - Height above his eyes = 30 × tan 45°.
+    solution: 'Above eye level: 30 m. Add his height: 30 + 1.5 = 31.5 m.'
+    mistakes:
+      '30': c10m9_observer
+  - prompt: A kite flies 60 m high on a straight string that makes 60° with the ground. The string's length is k√3 m. Find k.
+    answer: '40'
+    check: 60 * 2 / 3
+    difficulty: 3
+    hints:
+    - sin 60° = 60 ÷ L.
+    - L = 60 ÷ (√3/2) = 120/√3.
+    solution: L = 120/√3 = 120√3/3 = 40√3 m, so k = 40.
+    mistakes:
+      '30': c10m9_which_ratio
+      '120': c10m9_upside
+  - prompt: From the top of a 50 m cliff, the angle of depression of a car is 45°. How far is the car from the foot of the cliff, in metres?
+    answer: '50'
+    check: 50 / 1
+    difficulty: 1
+    hints:
+    - The car's angle of elevation of the cliff top is also 45°.
+    - tan 45° = 50 ÷ d.
+    solution: tan 45° = 1 = 50 ÷ d, so d = 50 m.
+    mistakes:
+      '25': c10m9_elev_depr
+  - prompt: The sun's elevation changes from 60° to 30°. What happens to a pole's shadow?
+    options:
+    - It gets longer
+    - It gets shorter
+    - It stays the same
+    - It disappears
+    answer: It gets longer
+    difficulty: 2
+    hints:
+    - Shadow = height ÷ tan θ.
+    - tan 30° is smaller than tan 60°.
+    solution: Dividing the same height by a smaller tan gives a bigger shadow, so it gets longer (3 times as long here).
+    mistakes:
+      It gets shorter: c10m9_upside
+  - prompt: A tower is h m tall. From two points on the same side, 10 m apart, the angles of elevation of its top are 45° and 30°. The nearer point is h m from the foot. Which equation is right?
+    options:
+    - h√3 = h + 10
+    - h = h√3 + 10
+    - h + 10 = h/√3
+    - h = 10√3
+    answer: h√3 = h + 10
+    difficulty: 3
+    hints:
+    - From the far point, tan 30° = h ÷ (h + 10).
+    - So h + 10 = h ÷ tan 30°.
+    solution: tan 30° = h/(h + 10) gives h + 10 = h√3, the same as h√3 = h + 10.
+    mistakes:
+      h = h√3 + 10: c10m9_two_points
+      h + 10 = h/√3: c10m9_upside
+  - prompt: Which angle is measured downwards from the horizontal at the observer's eye?
+    options:
+    - Angle of depression
+    - Angle of elevation
+    - Right angle
+    - Reflex angle
+    answer: Angle of depression
+    difficulty: 1
+    hints:
+    - Elevation looks up.
+    - Which one looks down?
+    solution: Looking down below the horizontal gives the angle of depression.
+    mistakes:
+      Angle of elevation: c10m9_look_down
+  - prompt: A 7 m flagstaff stands on a building. From a point on the ground, the building's top is at 45° and the flagstaff's top is at 60°. Which equation finds the distance d to the building?
+    options:
+    - d√3 = d + 7
+    - d = d√3 + 7
+    - d + 7 = d/√3
+    - d = 7
+    answer: d√3 = d + 7
+    difficulty: 3
+    hints:
+    - At 45°, the building's height equals d.
+    - At 60°, building + flagstaff = d × tan 60°.
+    solution: Building = d (tan 45° = 1). Then d + 7 = d√3.
+    mistakes:
+      d = d√3 + 7: c10m9_two_points
+      d = 7: c10m9_two_points

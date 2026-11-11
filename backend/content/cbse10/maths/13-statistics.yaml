@@ -12,6 +12,12 @@ tips:
   t10_median_formula: "Median = l + (n/2 − cf)/f × h, where cf is the total BEFORE the median class."
   t10_modal_class: "The modal class is the class with the highest frequency, not the middle class."
   t10_mode_formula: "Mode = l + (f₁ − f₀)/(2f₁ − f₀ − f₂) × h. Find l, f₁, f₀, f₂ from the modal class and its neighbours."
+  c10m13_classmark: Each class is stood in for by its middle value, (lower + upper) ÷ 2. Check you used the middle, not an end.
+  c10m13_sum_f: Add up the frequency column to get Σf, the number of values. Divide by that.
+  c10m13_assumed: With an assumed mean, the answer is a + Σfd ÷ Σf. Don't forget to add back a.
+  c10m13_step: With the step-deviation method, uᵢ = (xᵢ − a) ÷ h, so mean = a + h × Σfu ÷ Σf. Did you multiply back by h?
+  c10m13_median_class: The median class is where the cumulative frequency first reaches n/2.
+  c10m13_mode_l: In the mode formula, l is the LOWER limit of the modal class, f₀ is the class before it and f₂ the class after it.
 concepts:
 - code: cbse10m.stats.mean
   title: Mean of grouped data
@@ -107,6 +113,46 @@ concepts:
       - when:
           fx: 110
         say: Σfx is right; check there are exactly 10 students.
+  lesson:
+    - teach: 'When data is grouped (like marks 0–10, 10–20…), we don''t know each exact value. So we let each class be represented by its middle value, the class mark: (lower + upper) ÷ 2. The class mark of 10–20 is 15.'
+      check:
+        prompt: Class mark of 40–50?
+        options:
+        - '45'
+        - '40'
+        - '10'
+        answer: '45'
+        why: (40 + 50) ÷ 2 = 45.
+    - teach: 'Direct method: make columns f, x and f × x. Mean = Σfx ÷ Σf. Example: classes 0–10, 10–20, 20–30 with frequencies 3, 5, 2: Σfx = 3×5 + 5×15 + 2×25 = 140, Σf = 10, mean = 14.'
+      picture:
+        kind: bars
+        touching: true
+        unit: students; class marks 5, 15, 25
+        bars:
+        - label: 0–10
+          value: 3
+        - label: 10–20
+          value: 5
+        - label: 20–30
+          value: 2
+        alt: Histogram of 3, 5 and 2 students in classes 0–10, 10–20 and 20–30; with class marks 5, 15, 25 the mean is 140 ÷ 10 = 14.
+      check:
+        prompt: Σfx = 600 and Σf = 20. Mean?
+        options:
+        - '30'
+        - '580'
+        - '12000'
+        answer: '30'
+        why: 600 ÷ 20 = 30.
+    - teach: 'Shortcuts for big numbers: assumed mean a, with dᵢ = xᵢ − a, gives mean = a + Σfd ÷ Σf. Step deviation divides by the class width h too: uᵢ = dᵢ ÷ h, mean = a + h × Σfu ÷ Σf. All three methods give the same mean.'
+      check:
+        prompt: a = 50, h = 10, Σfu = 5, Σf = 25. Mean?
+        options:
+        - '52'
+        - '50.2'
+        - '55'
+        answer: '52'
+        why: 50 + 10 × 5/25 = 52.
   items:
   - prompt: Find the class mark of 20–30.
     answer: '25'
@@ -160,6 +206,122 @@ concepts:
     - The middle is a fair guess.
     solution: Grouping loses the exact values, so each class is represented by its mid-point, assuming values are spread evenly.
     mistakes: {"It makes the mean bigger": "t10_class_mark_reason", "Class marks are always whole numbers": "t10_class_mark_reason"}
+  - prompt: Find the class mark of 35–45.
+    answer: '40'
+    check: (35 + 45) / 2
+    difficulty: 1
+    hints:
+    - Find the middle of the class.
+    - Add the limits and halve.
+    solution: (35 + 45) ÷ 2 = 40.
+    mistakes:
+      '10': c10m13_classmark
+      '35': c10m13_classmark
+  - prompt: Classes 0–10, 10–20, 20–30 have frequencies 3, 5, 2. Find the mean.
+    answer: '14'
+    check: (3*5 + 5*15 + 2*25) / 10
+    difficulty: 2
+    hints:
+    - Class marks 5, 15, 25.
+    - Σfx = 15 + 75 + 50.
+    solution: Σfx = 140, Σf = 10, mean = 14.
+    mistakes:
+      '46.67': c10m13_sum_f
+      '140': c10m13_sum_f
+  - prompt: Classes 10–20, 20–30, 30–40 have frequencies 4, 4, 2. Find the mean.
+    answer: '23'
+    check: (4*15 + 4*25 + 2*35) / 10
+    difficulty: 2
+    hints:
+    - Class marks 15, 25, 35.
+    - Σfx = 60 + 100 + 70.
+    solution: Σfx = 230, Σf = 10, mean = 23.
+    mistakes:
+      '76.67': c10m13_sum_f
+      '25': c10m13_classmark
+  - prompt: With assumed mean a = 45, Σf = 40 and Σfd = 80, find the mean.
+    answer: '47'
+    check: 45 + 80 / 40
+    difficulty: 2
+    hints:
+    - Mean = a + Σfd ÷ Σf.
+    - 80 ÷ 40 = 2.
+    solution: 45 + 2 = 47.
+    mistakes:
+      '2': c10m13_assumed
+      '43': c10m13_assumed
+  - prompt: 'Step deviation: a = 35, h = 10, Σf = 50, Σfu = −15. Find the mean.'
+    answer: '32'
+    check: 35 + 10 * (-15) / 50
+    difficulty: 3
+    hints:
+    - Mean = a + h × Σfu ÷ Σf.
+    - −15 ÷ 50 = −0.3.
+    solution: 35 + 10 × (−0.3) = 35 − 3 = 32.
+    mistakes:
+      '34.7': c10m13_step
+      '38': c10m13_step
+  - prompt: In the step-deviation method, what is uᵢ?
+    options:
+    - (xᵢ − a) ÷ h
+    - xᵢ − a
+    - xᵢ ÷ h
+    - fᵢ × xᵢ
+    answer: (xᵢ − a) ÷ h
+    difficulty: 1
+    hints:
+    - Start with the deviation dᵢ = xᵢ − a.
+    - Then make the numbers smaller.
+    solution: uᵢ = dᵢ ÷ h = (xᵢ − a) ÷ h.
+    mistakes:
+      xᵢ − a: c10m13_step
+  - prompt: The mean of grouped data is 25. Σf = 20. Find Σfx.
+    answer: '500'
+    check: 25 * 20
+    difficulty: 2
+    hints:
+    - Mean = Σfx ÷ Σf.
+    - So Σfx = mean × Σf.
+    solution: Σfx = 25 × 20 = 500.
+    mistakes:
+      '45': c10m13_sum_f
+      '1.25': c10m13_sum_f
+  - prompt: Classes 0–10, 10–20, 20–30 have frequencies 2, k, 3, and the mean is 16. Find k.
+    answer: '5'
+    check: (85 - 80) / (16 - 15)
+    difficulty: 3
+    hints:
+    - Class marks 5, 15, 25, so Σfx = 10 + 15k + 75 and Σf = 5 + k.
+    - Solve (85 + 15k) ÷ (5 + k) = 16.
+    solution: '85 + 15k = 80 + 16k, so k = 5. Check: (10 + 75 + 75) ÷ 10 = 16.'
+    mistakes:
+      '4': c10m13_sum_f
+      '1': c10m13_sum_f
+  - prompt: Daily wages (₹) 100–120, 120–140, 140–160 have 2, 6, 2 workers. Find the mean wage.
+    answer: '130'
+    check: (2*110 + 6*130 + 2*150) / 10
+    difficulty: 2
+    hints:
+    - Find the middle of each wage class first.
+    - Σf = 10.
+    solution: Σfx = 220 + 780 + 300 = 1300; mean = 1300 ÷ 10 = ₹130.
+    mistakes:
+      '433.33': c10m13_sum_f
+      '120': c10m13_classmark
+  - prompt: Which method gives a DIFFERENT mean from the other two?
+    options:
+    - 'None: all three give the same mean'
+    - Direct method
+    - Assumed mean method
+    - Step-deviation method
+    answer: 'None: all three give the same mean'
+    difficulty: 1
+    hints:
+    - The shortcuts only change the arithmetic.
+    - Do they change the data?
+    solution: Assumed mean and step deviation are just easier arithmetic; all three give the same mean.
+    mistakes:
+      Step-deviation method: c10m13_step
 - code: cbse10m.stats.median_mode
   title: Median and mode of grouped data
   after:
@@ -252,6 +414,46 @@ concepts:
           - 25.01
           - 30
         say: The mode leans up because f₂ is bigger than f₀. Balance the neighbours.
+  lesson:
+    - teach: The mode is the most common value. For grouped data, first find the modal class (highest frequency). Then Mode = l + (f₁ − f₀) ÷ (2f₁ − f₀ − f₂) × h, where l is the lower limit of the modal class, f₁ its frequency, f₀ and f₂ the frequencies of the classes before and after, and h the width.
+      picture:
+        kind: bars
+        touching: true
+        unit: frequency
+        bars:
+        - label: 10–20
+          value: 4
+        - label: 20–30
+          value: 10
+        - label: 30–40
+          value: 6
+        alt: Histogram with the tallest bar 20–30 (10), between 4 and 6; the modal class is 20–30.
+      check:
+        prompt: In the picture, f₀ is…
+        options:
+        - '4'
+        - '10'
+        - '6'
+        answer: '4'
+        why: The class just before the modal class.
+    - teach: The median is the middle value. Make a cumulative frequency (cf) column, find n/2, and the median class is where cf first reaches n/2. Median = l + (n/2 − cf) ÷ f × h, with cf the total BEFORE the median class and f the median class's frequency.
+      check:
+        prompt: n = 40. The cfs are 5, 12, 25, 40. Median class is the…
+        options:
+        - third class
+        - second class
+        - fourth class
+        answer: third class
+        why: cf first reaches 20 at 25.
+    - teach: Mean, median and mode are linked roughly by 3 Median = Mode + 2 Mean. Know two, and you can estimate the third. The cumulative frequency curve (ogive) also shows the median where it crosses n/2.
+      check:
+        prompt: Mode 30, mean 24. Median?
+        options:
+        - '26'
+        - '27'
+        - '28'
+        answer: '26'
+        why: (30 + 48) ÷ 3 = 26.
   items:
   - prompt: Frequencies of 0–10, 10–20, 20–30, 30–40, 40–50 are 5, 8, 12, 6, 4. Which is the modal class?
     options:
@@ -315,3 +517,110 @@ concepts:
     - The first cf ≥ 25 is 25, at 20–30.
     solution: 'Step 1: n/2 = 25. Step 2: cf reaches 25 exactly at the end of 20–30, so the median class is 20–30 with cf before 15 and f = 10. Step 3: Median = 20 + (25 − 15)/10 × 10 = 30.'
     mistakes: {"25": "t10_median_formula", "20": "t10_median_formula"}
+  - prompt: Classes 10–20, 20–30, 30–40 have frequencies 4, 10, 6. Find the mode.
+    answer: '26'
+    check: 20 + (10 - 4) / (20 - 4 - 6) * 10
+    difficulty: 2
+    hints:
+    - Modal class 20–30, l = 20, f₁ = 10.
+    - (10 − 4) ÷ (20 − 4 − 6) = 6/10.
+    solution: Mode = 20 + 6/10 × 10 = 20 + 6 = 26.
+    mistakes:
+      '30': c10m13_mode_l
+  - prompt: Classes 0–10, 10–20, 20–30, 30–40 have frequencies 3, 7, 12, 7. Which is the modal class?
+    options:
+    - 20–30
+    - 10–20
+    - 30–40
+    - 0–10
+    answer: 20–30
+    difficulty: 1
+    hints:
+    - Find the biggest frequency.
+    - 12 is the biggest.
+    solution: The highest frequency 12 belongs to 20–30.
+    mistakes:
+      10–20: c10m13_mode_l
+  - prompt: For classes 0–10, 10–20, 20–30, 30–40 with frequencies 3, 7, 12, 7, find the mode.
+    answer: '25'
+    check: 20 + (12 - 7) / (24 - 7 - 7) * 10
+    difficulty: 3
+    hints:
+    - l = 20, f₁ = 12, and the classes either side both have 7.
+    - (12 − 7) ÷ (24 − 14) = 5/10.
+    solution: Mode = 20 + 5/10 × 10 = 25.
+    mistakes:
+      '30': c10m13_mode_l
+  - prompt: Frequencies 5, 15, 20, 10 for classes 0–10, 10–20, 20–30, 30–40. What is the cumulative frequency of 20–30?
+    answer: '40'
+    check: 5 + 15 + 20
+    difficulty: 1
+    hints:
+    - Add every class up to and including 20–30.
+    - 5 + 15 + …
+    solution: 5 + 15 + 20 = 40.
+    mistakes:
+      '20': c10m13_median_class
+      '35': c10m13_median_class
+  - prompt: For that data (5, 15, 20, 10; n = 50), find the median.
+    answer: '22.5'
+    check: 20 + (25 - 20) / 20 * 10
+    difficulty: 3
+    hints:
+    - n/2 = 25, so the median class is 20–30 (cf before it 20).
+    - Median = 20 + (25 − 20) ÷ 20 × 10.
+    solution: Median = 20 + 5/20 × 10 = 22.5.
+    mistakes:
+      '25': c10m13_median_class
+      '26.25': c10m13_median_class
+  - prompt: Using 3 Median = Mode + 2 Mean, find the mode if the median is 20 and the mean is 18.
+    answer: '24'
+    check: 3 * 20 - 2 * 18
+    difficulty: 2
+    hints:
+    - Mode = 3 Median − 2 Mean.
+    - 60 − 36.
+    solution: Mode = 60 − 36 = 24.
+    mistakes:
+      '19': t10_empirical
+      '96': t10_empirical
+  - prompt: In the median formula, what is cf?
+    options:
+    - The cumulative frequency of the class before the median class
+    - The frequency of the median class
+    - The total frequency n
+    - The cumulative frequency of the median class
+    answer: The cumulative frequency of the class before the median class
+    difficulty: 2
+    hints:
+    - We count how many values come before the median class starts.
+    - Before, not including.
+    solution: cf is the running total up to the class just before the median class.
+    mistakes:
+      The cumulative frequency of the median class: c10m13_median_class
+      The frequency of the median class: c10m13_median_class
+  - prompt: Which graph is used to find the median of grouped data?
+    options:
+    - Ogive (cumulative frequency curve)
+    - Pie chart
+    - Bar graph of frequencies
+    - Pictograph
+    answer: Ogive (cumulative frequency curve)
+    difficulty: 1
+    hints:
+    - The median is about running totals.
+    - Which graph plots running totals?
+    solution: On an ogive, the value where the curve reaches n/2 is the median.
+    mistakes:
+      Bar graph of frequencies: c10m13_median_class
+  - prompt: n = 60 and the cumulative frequencies are 8, 20, 35, 50, 60. Which class number is the median class?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - n/2 = 30.
+    - Where does cf first reach 30?
+    solution: cf first reaches 30 at 35, the 3rd class.
+    mistakes:
+      '2': c10m13_median_class
+      '4': c10m13_median_class
