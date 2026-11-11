@@ -40,6 +40,19 @@ def test_every_kerala9_topic_has_at_least_two_harder_questions():
     assert not thin, thin
 
 
+def test_every_kerala9_topic_teaches_first_then_gives_fifteen_questions():
+    """The Class 9 pilot: SYNiq teaches a topic (its lesson) before practice, and practice needs enough questions to
+    adapt, revisit and spot repeated mistakes without the learner meeting the same few again and again."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if code_of(pack) in KERALA9 and "demo" not in str(path)
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {

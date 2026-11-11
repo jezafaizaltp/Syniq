@@ -29,6 +29,7 @@ tips:
   transition_stage: Better medicine lowers deaths first; families take longer to have fewer children.
   census_gap: The census is held once every ten years. Count on from the last one.
   dependents_only: Dependents are children (0–14) and the elderly (65+). People aged 15–64 are the working age.
+  ss5d_which_count: 'Check which number the question wants: the overall sex ratio, the child sex ratio (0–6), or Kerala''s own figure. The notes give each one separately.'
 
 concepts:
   - code: ss9.demography.census
@@ -481,6 +482,21 @@ concepts:
         solution: 'Step 1: Literacy comes from schooling. Step 2: Long life comes from health care. Step 3: Kerala invested in both.'
         mistakes:
           Low rainfall: transition_stage
+      - prompt: 'In Census 2011, India''s overall sex ratio was:'
+        options:
+        - '943'
+        - '1084'
+        - '919'
+        - '1000'
+        answer: '943'
+        difficulty: 1
+        hints:
+        - It is below 1000, so there were fewer females than males.
+        - It is higher than the child sex ratio.
+        solution: India's sex ratio in 2011 was 943 females per 1000 males (Kerala 1084, child sex ratio 919).
+        mistakes:
+          '919': ss5d_which_count
+          '1084': ss5d_which_count
   - code: ss9.demography.growth
     title: Population growth and the demographic dividend
     after: [ss9.demography.composition]
@@ -690,3 +706,13 @@ concepts:
         solution: 'Step 1: Migrants earn abroad. Step 2: They send money to families at home. Step 3: This money is called remittances.'
         mistakes:
           Dividends: transition_stage
+      - prompt: Birth rate is 24 per 1000 and death rate is 9 per 1000. What is the natural growth rate, per 1000?
+        answer: '15'
+        check: 24-9
+        difficulty: 1
+        hints:
+        - Natural growth uses only births and deaths.
+        - Take deaths away from births.
+        solution: Natural growth rate = 24 − 9 = 15 per 1000.
+        mistakes:
+          '33': growth_formula
