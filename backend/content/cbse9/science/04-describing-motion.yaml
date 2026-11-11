@@ -107,6 +107,58 @@ concepts:
           a: 40
           b: 100
         say: 'Closer: 57.1 km/h. 60 km at 60 km/h is 1 hour, and the first half already used 45 minutes.'
+  lesson:
+    - teach: 'Distance is the total length of the path travelled; it has no direction. Displacement is the straight-line change in position from start to finish, with a direction. Walk 3 m east then 3 m back west: distance 6 m, displacement 0.'
+      picture:
+        kind: geometry
+        points:
+          S:
+          - 1
+          - 2
+          P:
+          - 7
+          - 2
+          F:
+          - 7
+          - 7
+        segments:
+        - - S
+          - P
+          - 4 m
+        - - P
+          - F
+          - 3 m
+        - - S
+          - F
+          - 5 m
+        caption: Path 4 m + 3 m = 7 m; displacement straight from S to F = 5 m.
+        alt: 'Walking 4 m east then 3 m north: distance travelled 7 m, but displacement from start S to finish F is 5 m.'
+      check:
+        prompt: You walk 4 m east then 3 m north. What is your distance travelled?
+        options:
+        - 7 m
+        - 5 m
+        - 1 m
+        answer: 7 m
+        why: 'Distance adds the path: 4 + 3. The displacement is 5 m.'
+    - teach: Speed = distance ÷ time, in m/s (or km/h). Velocity is speed in a stated direction, so it is a vector like displacement. If a car goes round a bend at a steady 40 km/h, its speed is constant but its velocity changes.
+      check:
+        prompt: Which is a scalar (no direction)?
+        options:
+        - Speed
+        - Velocity
+        - Displacement
+        answer: Speed
+        why: Speed has size only; velocity and displacement have direction too.
+    - teach: 'Average speed = total distance ÷ total time, NOT the average of the speeds. 60 km at 30 km/h takes 2 h; 60 km at 60 km/h takes 1 h; average = 120 km ÷ 3 h = 40 km/h. To convert km/h to m/s multiply by 5/18: 36 km/h = 10 m/s.'
+      check:
+        prompt: Convert 54 km/h to m/s.
+        options:
+        - 15 m/s
+        - 54 m/s
+        - 194.4 m/s
+        answer: 15 m/s
+        why: 54 × 5/18 = 15.
   items:
   - prompt: A car travels 150 km in 3 hours. What is its average speed in km/h?
     answer: '50'
@@ -180,6 +232,94 @@ concepts:
     solution: 600 ÷ 120 = 5 m/s.
     mistakes:
       '300': minutes_to_seconds
+  - prompt: A runner covers 100 m in 20 s. What is her speed in m/s?
+    answer: '5'
+    check: 100/20
+    difficulty: 1
+    hints:
+    - Speed = distance ÷ time.
+    - 100 ÷ 20.
+    solution: 100 ÷ 20 = 5 m/s.
+    mistakes:
+      '2000': speed_divide
+      '0.2': speed_divide
+  - prompt: Convert 90 km/h to m/s.
+    answer: '25'
+    check: 90*5/18
+    difficulty: 1
+    hints:
+    - Multiply by 5/18.
+    - 90 × 5 ÷ 18.
+    solution: 90 × 5/18 = 25 m/s.
+    mistakes:
+      '324': kmh_to_ms
+      '90': kmh_to_ms
+  - prompt: A child walks 5 m forward and then 5 m back to the start. What is the displacement in m?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - Where does the child end up?
+    - Displacement is start to finish.
+    solution: The child ends where he started, so displacement is 0 (distance is 10 m).
+    mistakes:
+      '10': displacement_shortest
+  - prompt: A car travels 240 km in 4 hours. What is its average speed in km/h?
+    answer: '60'
+    check: 240/4
+    difficulty: 2
+    hints:
+    - Total distance ÷ total time.
+    - 240 ÷ 4.
+    solution: 240 ÷ 4 = 60 km/h.
+    mistakes:
+      '960': speed_divide
+  - prompt: A boy walks 6 m north and then 8 m east. What is his displacement in m?
+    answer: '10'
+    check: sqrt(36 + 64)
+    difficulty: 2
+    hints:
+    - The two walks make a right angle.
+    - √(6² + 8²).
+    solution: √(36 + 64) = √100 = 10 m (distance is 14 m).
+    mistakes:
+      '14': displacement_shortest
+      '2': displacement_shortest
+  - prompt: A bird flies 3 km in 10 minutes. What is its speed in m/s?
+    answer: '5'
+    check: 3000/600
+    difficulty: 2
+    hints:
+    - 3 km = 3000 m; 10 min = 600 s.
+    - 3000 ÷ 600.
+    solution: 3000 ÷ 600 = 5 m/s.
+    mistakes:
+      '0.3': minutes_to_seconds
+      '300': minutes_to_seconds
+  - prompt: A train goes 120 km at 60 km/h and returns at 40 km/h. What is its average speed for the whole trip, in km/h?
+    answer: '48'
+    check: 240/(2 + 3)
+    difficulty: 3
+    hints:
+    - 'Times: 2 h out, 3 h back.'
+    - Total distance 240 km ÷ 5 h.
+    solution: 240 km ÷ 5 h = 48 km/h, not 50.
+    mistakes:
+      '50': average_speed_total
+  - prompt: Two cars move at 50 km/h, one north and one south. What can you say?
+    options:
+    - Same speed, different velocities
+    - Same velocity
+    - Different speeds
+    - Both have zero velocity
+    answer: Same speed, different velocities
+    difficulty: 3
+    hints:
+    - Velocity includes direction.
+    - Their speeds match.
+    solution: Speed is the same, 50 km/h, but velocity differs because the directions are opposite.
+    mistakes:
+      Same velocity: vector_direction
 - code: cbse9ex.motion.equations
   title: Acceleration and equations of motion
   after:
@@ -278,6 +418,43 @@ concepts:
           - -10
           - -2.5
         say: 'The speed is right in m/s now. Check the braking: −2 m/s².'
+  lesson:
+    - teach: 'Acceleration is how fast velocity changes: a = (v − u) ÷ t, in m/s². u is the starting velocity, v the final one. A car going from 0 to 20 m/s in 5 s has a = 20 ÷ 5 = 4 m/s². Slowing down gives a negative acceleration (retardation).'
+      check:
+        prompt: A bike slows from 15 m/s to 5 m/s in 2 s. What is its acceleration?
+        options:
+        - −5 m/s²
+        - 5 m/s²
+        - −10 m/s²
+        answer: −5 m/s²
+        why: (5 − 15) ÷ 2 = −5.
+    - teach: 'For steady (uniform) acceleration, three equations link u, v, a, t and s (displacement): v = u + at; s = ut + ½at²; v² − u² = 2as. Pick the one that has the quantities you know and the one you want.'
+      picture:
+        kind: flow
+        steps:
+        - 'List what you know: u, v, a, t, s'
+        - Pick the equation without the one you neither know nor need
+        - v = u + at (no s)
+        - s = ut + ½at² (no v)
+        - v² − u² = 2as (no t)
+        alt: How to choose among the three equations of motion by which quantity is missing.
+      check:
+        prompt: You know u, a and s and want v. Which equation?
+        options:
+        - v² − u² = 2as
+        - v = u + at
+        - s = ut + ½at²
+        answer: v² − u² = 2as
+        why: It has no t, which you don't know.
+    - teach: 'Example: a stone falls from rest (u = 0) with a = 10 m/s² for 3 s. v = 0 + 10 × 3 = 30 m/s. s = 0 + ½ × 10 × 9 = 45 m. Always check units and signs.'
+      check:
+        prompt: From rest, a = 4 m/s² for 5 s. What is s?
+        options:
+        - 50 m
+        - 20 m
+        - 100 m
+        answer: 50 m
+        why: ½ × 4 × 25 = 50.
   items:
   - prompt: A car speeds up from 10 m/s to 30 m/s in 5 s. Find its acceleration in m/s².
     answer: '4'
@@ -355,6 +532,93 @@ concepts:
     - Speed is constant.
     solution: 'Its direction changes all the time, so its velocity changes: it accelerates.'
     mistakes: {"The speed keeps increasing": "circular_constant_velocity", "It stops often": "circular_constant_velocity"}
+  - prompt: A scooter speeds up from 4 m/s to 16 m/s in 6 s. Find its acceleration in m/s².
+    answer: '2'
+    check: (16 - 4)/6
+    difficulty: 1
+    hints:
+    - a = (v − u)/t.
+    - 12 ÷ 6.
+    solution: (16 − 4) ÷ 6 = 2 m/s².
+    mistakes:
+      '12': acc_divide_time
+      '3.33': accel_change_over_time
+  - prompt: A car starts from rest with acceleration 3 m/s². What is its velocity after 8 s, in m/s?
+    answer: '24'
+    check: 0 + 3*8
+    difficulty: 1
+    hints:
+    - v = u + at.
+    - u = 0.
+    solution: v = 0 + 3 × 8 = 24 m/s.
+    mistakes:
+      '11': v_u_at
+  - prompt: A bus moving at 15 m/s stops in 5 s. What is its acceleration in m/s²?
+    answer: '-3'
+    check: (0 - 15)/5
+    difficulty: 1
+    hints:
+    - v = 0.
+    - (0 − 15) ÷ 5.
+    solution: (0 − 15) ÷ 5 = −3 m/s² (it is slowing down).
+    mistakes:
+      '3': accel_change_over_time
+      '-75': acc_divide_time
+  - prompt: A car at 10 m/s accelerates at 2 m/s² for 4 s. How far does it go in that time, in m?
+    answer: '56'
+    check: 10*4 + 0.5*2*16
+    difficulty: 2
+    hints:
+    - s = ut + ½at².
+    - 40 + 16.
+    solution: s = 10 × 4 + ½ × 2 × 16 = 40 + 16 = 56 m.
+    mistakes:
+      '40': v_u_at
+      '72': v_u_at
+  - prompt: A ball falls from rest for 2 s with acceleration 10 m/s². How far does it fall, in m?
+    answer: '20'
+    check: 0.5*10*4
+    difficulty: 2
+    hints:
+    - u = 0.
+    - s = ½ × 10 × 2².
+    solution: ½ × 10 × 4 = 20 m.
+    mistakes:
+      '10': v_squared_root
+      '40': v_squared_root
+  - prompt: A train at 20 m/s brakes with acceleration −2 m/s². How far does it travel before stopping, in m?
+    answer: '100'
+    check: (0 - 400)/(2*-2)
+    difficulty: 2
+    hints:
+    - v² − u² = 2as, with v = 0.
+    - 0 − 400 = 2(−2)s.
+    solution: −400 = −4s, so s = 100 m.
+    mistakes:
+      '-100': accel_change_over_time
+      '10': v_squared_root
+  - prompt: A car accelerates from rest at 5 m/s² over 40 m. What is its final speed, in m/s?
+    answer: '20'
+    check: sqrt(2*5*40)
+    difficulty: 3
+    hints:
+    - v² = u² + 2as.
+    - v² = 400.
+    solution: v² = 0 + 2 × 5 × 40 = 400, so v = 20 m/s.
+    mistakes:
+      '400': v_squared_root
+      '200': v_squared_root
+  - prompt: A ball is thrown up at 20 m/s and slows at 10 m/s². How long until it stops rising, in s?
+    answer: '2'
+    check: 20/10
+    difficulty: 3
+    hints:
+    - At the top, v = 0.
+    - 0 = 20 − 10t.
+    solution: 0 = 20 − 10t gives t = 2 s.
+    mistakes:
+      '200': acc_divide_time
+      '0.5': acc_divide_time
 - code: cbse9ex.motion.graphs
   title: Motion graphs and uniform circular motion
   after:
@@ -444,6 +708,61 @@ concepts:
           m: -1
           c: 0
         say: This starts at the start point. The object begins 6 m away.
+  lesson:
+    - teach: A position–time graph shows where an object is at each moment. A straight sloping line means uniform velocity; its slope (rise ÷ run) is the velocity. A flat line means the object is not moving. A curve means the velocity is changing.
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 10
+        x_label: time (s)
+        y_label: position (m)
+        points:
+          (0, 0):
+          - 0
+          - 0
+          (4, 8):
+          - 4
+          - 8
+          (8, 8):
+          - 8
+          - 8
+        segments:
+        - - (0, 0)
+          - (4, 8)
+          - moving
+        - - (4, 8)
+          - (8, 8)
+          - at rest
+        caption: 'Slope 8 ÷ 4 = 2 m/s, then a flat line: at rest.'
+        alt: Position–time graph rising steadily from (0, 0) to (4, 8), then flat to (8, 8) while the object is at rest.
+      check:
+        prompt: A position–time line rises 30 m in 6 s. What is the velocity?
+        options:
+        - 5 m/s
+        - 180 m/s
+        - 36 m/s
+        answer: 5 m/s
+        why: Slope = 30 ÷ 6 = 5.
+    - teach: A velocity–time graph shows velocity at each moment. A flat line means constant velocity. A straight sloping line means uniform acceleration, and its slope is the acceleration. The area under the graph is the displacement.
+      check:
+        prompt: A v–t graph is a flat line at 10 m/s for 6 s. What is the displacement?
+        options:
+        - 60 m
+        - 16 m
+        - 0 m
+        answer: 60 m
+        why: 'The area is a rectangle: 10 × 6 = 60.'
+    - teach: 'In uniform circular motion, an object moves round a circle at steady speed, but its direction keeps changing, so its velocity changes: it is accelerating. Its speed = circumference ÷ time for one round = 2πr ÷ t.'
+      check:
+        prompt: A stone whirled on a string at steady speed is…
+        options:
+        - accelerating, because its direction changes
+        - not accelerating
+        - moving with constant velocity
+        answer: accelerating, because its direction changes
+        why: Velocity includes direction; a change of direction is a change of velocity.
   items:
   - prompt: On a position–time graph, a horizontal line means the object is…
     options:
@@ -515,3 +834,114 @@ concepts:
     - 2 × 22/7 × 35 = 220 m.
     solution: 'Step 1: Circumference = 220 m. Step 2: Speed = 220 ÷ 44 = 5 m/s.'
     mistakes: {"2.5": "circle_distance_speed", "0.8": "circle_distance_speed"}
+  - prompt: On a position–time graph, a straight line rises 40 m in 8 s. What is the velocity in m/s?
+    answer: '5'
+    check: 40/8
+    difficulty: 1
+    hints:
+    - Velocity = slope.
+    - 40 ÷ 8.
+    solution: 40 ÷ 8 = 5 m/s.
+    mistakes:
+      '320': graph_slope_meaning
+  - prompt: On a velocity–time graph, a horizontal line means…
+    options:
+    - Constant velocity
+    - At rest
+    - Uniform acceleration
+    - Slowing down
+    answer: Constant velocity
+    difficulty: 1
+    hints:
+    - The velocity value isn't changing.
+    - It is not necessarily zero.
+    solution: 'A flat v–t line means the velocity stays the same: no acceleration.'
+    mistakes:
+      At rest: flat_position_graph
+  - prompt: On a velocity–time graph, what does the area under the line give?
+    options:
+    - Displacement
+    - Acceleration
+    - Speed
+    - Time
+    answer: Displacement
+    difficulty: 1
+    hints:
+    - Area = velocity × time for a rectangle.
+    - Velocity × time = ?
+    solution: Velocity × time is displacement, so the area under a v–t graph is displacement.
+    mistakes:
+      Acceleration: graph_slope_meaning
+  - prompt: A v–t graph goes straight from 5 m/s to 25 m/s in 4 s. What is the acceleration in m/s²?
+    answer: '5'
+    check: (25 - 5)/4
+    difficulty: 2
+    hints:
+    - Slope = change in v ÷ time.
+    - 20 ÷ 4.
+    solution: (25 − 5) ÷ 4 = 5 m/s².
+    mistakes:
+      '20': acc_divide_time
+      '6.25': graph_slope_meaning
+  - prompt: A v–t graph is a flat line at 12 m/s from 0 to 5 s. What distance is covered, in m?
+    answer: '60'
+    check: 12*5
+    difficulty: 2
+    hints:
+    - Area of a rectangle.
+    - 12 × 5.
+    solution: 12 × 5 = 60 m.
+    mistakes:
+      '2.4': graph_slope_meaning
+      '17': graph_slope_meaning
+  - prompt: A v–t graph rises straight from 0 to 30 m/s in 6 s. What distance is covered, in m?
+    answer: '90'
+    check: 0.5*6*30
+    difficulty: 2
+    hints:
+    - The area is a triangle.
+    - ½ × 6 × 30.
+    solution: ½ × base × height = ½ × 6 × 30 = 90 m.
+    mistakes:
+      '180': graph_slope_meaning
+      '5': graph_slope_meaning
+  - prompt: Which position–time graph shows an object speeding up?
+    options:
+    - A curve getting steeper
+    - A straight sloping line
+    - A flat line
+    - A straight line going down
+    answer: A curve getting steeper
+    difficulty: 2
+    hints:
+    - Slope = velocity.
+    - Speeding up means the slope grows.
+    solution: A steepening curve has an increasing slope, so the velocity increases.
+    mistakes:
+      A straight sloping line: graph_slope_meaning
+      A flat line: flat_position_graph
+  - prompt: A satellite circles Earth at a steady speed. Which is true?
+    options:
+    - Its velocity changes all the time
+    - Its velocity is constant
+    - It is not accelerating
+    - Its speed changes all the time
+    answer: Its velocity changes all the time
+    difficulty: 3
+    hints:
+    - Its direction keeps changing.
+    - Velocity includes direction.
+    solution: 'Speed stays the same but direction changes, so velocity changes: it is accelerating.'
+    mistakes:
+      Its velocity is constant: circular_constant_velocity
+  - prompt: A cyclist goes round a circular track of radius 70 m in 88 s. What is the speed in m/s? (π = 22/7)
+    answer: '5'
+    check: 2*22/7*70/88
+    difficulty: 3
+    hints:
+    - One round = 2πr = 440 m.
+    - 440 ÷ 88.
+    solution: 2 × 22/7 × 70 = 440 m; 440 ÷ 88 = 5 m/s.
+    mistakes:
+      '2.5': circle_distance_speed
+      '0.8': circle_distance_speed
