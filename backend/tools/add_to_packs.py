@@ -74,7 +74,9 @@ def main(paths: list[str]) -> int:
         extra = yaml.safe_load(Path(p).read_text())
         target = CONTENT / extra["pack"]
         new = merge(target.read_text(), extra)
-        errors = cp.check_pack(yaml.safe_load(new), known)
+        # Tip tags are shared by every pack, so a new tip must not reuse a tag that already has a text.
+        errors = [f"tip tag '{t}' already exists; pick a new name" for t in (extra.get("tips") or {}) if t in known]
+        errors += cp.check_pack(yaml.safe_load(new), known)
         if errors:
             failed += 1
             print(f"{extra['pack']}: NOT changed")
