@@ -15,6 +15,16 @@ tips:
   s8_pyramid_base: "The base of a pyramid shows the youngest age groups."
   s8_rugged: "Which choice makes it hard for people to live and farm?"
   s8_sex_ratio: "Sex ratio compares females and males: females per 1000 males."
+  s8pp_neighbour: "Which neighbour of India had held first place for centuries?"
+  s8pp_change: "Births add people, deaths take people away, and migration moves them in or out."
+  s8pp_compare: "Higher density means more people in each km². Which number is bigger, and by how much?"
+  s8pp_type: "Ask: does the person cross a country's border, and do they come back after a season?"
+  s8pp_divide: Density is people divided by area, not multiplied or added.
+  s8pp_growth: Natural growth is births minus deaths. Subtract; don't add.
+  s8pp_land: People settle where land is flat, soil fertile, water close and jobs nearby. Which choice has those?
+  s8pp_pushpull: Push factors drive people out of a place; pull factors draw them to a new one. Which way does this one act?
+  s8pp_age: "Working age runs from 15 to 64. Is the person younger than that, inside that range, or older?"
+  s8pp_ratio: Sex ratio counts females for every 1000 males. More than 1000 means more females.
 concepts:
 - code: cbse8ss.pop.growth
   title: Population growth and density
@@ -71,6 +81,52 @@ concepts:
       - when:
           v: 22
         say: That adds. When both are close, growth is slow.
+  lesson:
+    - teach: Population changes through births, deaths and migration. The natural growth rate is the birth rate minus the death rate. If 25 babies are born and 8 people die per 1000 people in a year, the natural growth rate is 17 per 1000.
+      check:
+        prompt: Birth rate 18 per 1000, death rate 6 per 1000. What is the natural growth rate per 1000?
+        options:
+        - '12'
+        - '24'
+        - '3'
+        answer: '12'
+        why: 18 − 6 = 12.
+    - teach: 'India overtook China in 2023 as the world''s most populous country, with over 140 crore people. Population density is the number of people per square kilometre: people ÷ area.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: 1 km
+        - size: 1
+          label: 1 km
+        rows:
+        - size: 1
+          label: 1 km
+        - size: 1
+          label: 1 km
+        cells:
+        - - 100 people
+          - 100 people
+        - - 100 people
+          - 100 people
+        alt: 'An area of 4 km² holding 400 people: 400 ÷ 4 = 100 people per km².'
+      check:
+        prompt: 800 people live on 4 km². What is the density?
+        options:
+        - 200 per km²
+        - 3200 per km²
+        - 804 per km²
+        answer: 200 per km²
+        why: 800 ÷ 4 = 200 people per km².
+    - teach: Density depends on relief, climate, soil, water and jobs. Flat, fertile, well-watered plains like the Ganga plains are crowded; Bihar and West Bengal are among the densest states. Steep, forested, cold hills like Arunachal Pradesh have few people per km².
+      check:
+        prompt: Why is Bihar densely populated?
+        options:
+        - Flat fertile plains with rivers
+        - Very cold deserts
+        - Thick mountain forests
+        answer: Flat fertile plains with rivers
+        why: Good farmland and water support many people.
   items:
   - prompt: A district has 2,00,000 people on 400 km². What is its population density, in people per km²?
     answer: '500'
@@ -143,6 +199,121 @@ concepts:
     - Few people live there.
     solution: Mountains make farming and building difficult, so few people live there.
     mistakes: {"Many jobs": "s8_rugged"}
+  - prompt: A village of 3000 people covers 10 km². What is its density in people per km²?
+    answer: '300'
+    check: 3000/10
+    difficulty: 1
+    hints:
+    - Density is people for every square kilometre.
+    - Divide the people by the area.
+    solution: 3000 ÷ 10 = 300 people per km².
+    mistakes:
+      '30000': s8pp_divide
+      '3010': s8pp_divide
+  - prompt: Birth rate 22 per 1000 and death rate 9 per 1000. What is the natural growth rate per 1000?
+    answer: '13'
+    check: 22-9
+    difficulty: 1
+    hints:
+    - Growth comes from births, minus those who die.
+    - Take the death rate from the birth rate.
+    solution: 22 − 9 = 13 per 1000.
+    mistakes:
+      '31': s8pp_growth
+  - prompt: Which country did India overtake in 2023 as the most populous?
+    options:
+    - China
+    - USA
+    - Indonesia
+    answer: China
+    difficulty: 1
+    hints:
+    - It is India's large neighbour to the north-east.
+    - It had been the most populous for centuries.
+    solution: India passed China in 2023.
+    mistakes:
+      USA: s8pp_neighbour
+      Indonesia: s8pp_neighbour
+  - prompt: Which place is likely to have the lowest population density?
+    options:
+    - A cold, steep mountain area
+    - A fertile river delta
+    - A big city's centre
+    answer: A cold, steep mountain area
+    difficulty: 1
+    hints:
+    - Where is it hardest to farm and build?
+    - Think of Arunachal or Ladakh.
+    solution: Cold, steep land has little farming, so few people live there.
+    mistakes:
+      A fertile river delta: s8pp_land
+      A big city's centre: s8pp_land
+  - prompt: A town has 50,000 people. 2000 move in and 500 move out in a year. Ignoring births and deaths, what is the new population?
+    answer: '51500'
+    check: 50000+2000-500
+    difficulty: 2
+    hints:
+    - Those who arrive add to it; those who leave subtract.
+    - Start from 50,000.
+    solution: 50,000 + 2000 − 500 = 51,500.
+    mistakes:
+      '52500': s8pp_growth
+  - prompt: If births and deaths are equal and no one moves, what happens to population?
+    options:
+    - It stays the same
+    - It doubles
+    - It falls to zero
+    answer: It stays the same
+    difficulty: 2
+    hints:
+    - Births add, deaths remove.
+    - What if both are equal?
+    solution: Equal births and deaths cancel out, so population stays steady.
+    mistakes:
+      It doubles: s8pp_change
+      It falls to zero: s8pp_change
+  - prompt: Kerala has about 860 people per km² and Arunachal about 17. Which statement is true?
+    options:
+    - Kerala is far more crowded per km²
+    - Arunachal is more crowded
+    - Both are the same
+    answer: Kerala is far more crowded per km²
+    difficulty: 2
+    hints:
+    - Higher density means more people in each km².
+    - Compare the two numbers.
+    solution: 860 is about 50 times 17, so Kerala is far denser.
+    mistakes:
+      Arunachal is more crowded: s8pp_compare
+      Both are the same: s8pp_compare
+  - prompt: Which of these helps lower the death rate?
+    options:
+    - Better hospitals and clean drinking water
+    - More traffic
+    - Less food
+    answer: Better hospitals and clean drinking water
+    difficulty: 1
+    hints:
+    - What keeps people alive longer?
+    - Disease spreads through dirty water.
+    solution: Health care and clean water prevent many deaths.
+    mistakes:
+      More traffic: s8pp_change
+      Less food: s8pp_change
+  - prompt: Which is NOT one of the three ways a population changes?
+    options:
+    - Changes in rainfall
+    - Births
+    - Migration
+    answer: Changes in rainfall
+    difficulty: 2
+    hints:
+    - Population changes through people arriving, being born, dying or leaving.
+    - Which choice is about weather?
+    solution: Births, deaths and migration change population; rainfall only affects it indirectly.
+    mistakes:
+      Births: s8pp_change
+      Migration: s8pp_change
 - code: cbse8ss.pop.structure
   title: Migration and population structure
   after:
@@ -199,6 +370,59 @@ concepts:
       bin: Pull
       clue: Attracts.
       why: Pull.
+  lesson:
+    - teach: 'Migration is people moving from one place to another: village to city for work or study, seasonal (for harvests), or to another country. Push factors drive people out: no jobs, drought, conflict. Pull factors draw them in: jobs, schools, hospitals.'
+      picture:
+        kind: compare
+        columns:
+        - title: Push (leave)
+          points:
+          - No jobs
+          - Drought or floods
+          - Conflict
+        - title: Pull (come)
+          points:
+          - Jobs
+          - Schools and colleges
+          - Hospitals
+        alt: Push factors like no jobs, drought and conflict drive people out; pull factors like jobs, schools and hospitals draw them in.
+      check:
+        prompt: 'A good college in the city is a:'
+        options:
+        - Pull factor
+        - Push factor
+        - Death rate
+        answer: Pull factor
+        why: It attracts people to the city.
+    - teach: Population structure is the mix of ages and sexes. A population pyramid shows age groups as bars. A wide base means many children. People of working age are 15–64.
+      picture:
+        kind: bars
+        bars:
+        - label: 0–14
+          value: 26
+        - label: 15–64
+          value: 67
+        - label: 65+
+          value: 7
+        unit: '% of Indians (approx.)'
+        alt: About 26% of Indians are 0–14, 67% are 15–64 and 7% are 65 or older.
+      check:
+        prompt: Which age group is the working-age population?
+        options:
+        - 15–64
+        - 0–14
+        - 65 and above
+        answer: 15–64
+        why: Ages 15 to 64 are counted as working age.
+    - teach: 'The sex ratio is the number of females per 1000 males: 943 in India in 2011, with Kerala highest at 1084. India''s many young people are a ''demographic dividend'', a big gain if they get education, health care and jobs.'
+      check:
+        prompt: Kerala's sex ratio was 1084. What does that tell us?
+        options:
+        - There were more females than males
+        - There were more males than females
+        - Equal numbers
+        answer: There were more females than males
+        why: 1084 females for every 1000 males.
   items:
   - prompt: Which is a push factor for migration?
     options:
@@ -274,3 +498,121 @@ concepts:
     - Wide = many.
     solution: A wide base means a large share of children and young people.
     mistakes: {"Many elderly people": "s8_pyramid_base"}
+  - prompt: 'A farmer''s son moves to Bengaluru because his village has had no rain for three years. The drought is a:'
+    options:
+    - Push factor
+    - Pull factor
+    - Birth rate
+    answer: Push factor
+    difficulty: 1
+    hints:
+    - Is it driving him out or drawing him in?
+    - Bad conditions at home push.
+    solution: Drought drives people away from home, so it is a push factor.
+    mistakes:
+      Pull factor: s8pp_pushpull
+      Birth rate: s8pp_pushpull
+  - prompt: 'Workers go to Punjab only for the wheat harvest and return home after. This is:'
+    options:
+    - Seasonal migration
+    - International migration
+    - Permanent migration
+    answer: Seasonal migration
+    difficulty: 2
+    hints:
+    - They move only for part of the year.
+    - Harvests come in seasons.
+    solution: Moving for a season and returning is seasonal migration.
+    mistakes:
+      International migration: s8pp_type
+      Permanent migration: s8pp_type
+  - prompt: A state has 950 females per 1000 males. Are there more males or females?
+    options:
+    - More males
+    - More females
+    - Equal
+    answer: More males
+    difficulty: 2
+    hints:
+    - Compare 950 with 1000.
+    - Fewer than 1000 females for 1000 males.
+    solution: 950 is less than 1000, so there are more males.
+    mistakes:
+      More females: s8pp_ratio
+      Equal: s8pp_ratio
+  - prompt: Which population pyramid shows an ageing country?
+    options:
+    - Narrow base and wide top
+    - Wide base and narrow top
+    - A single tall bar
+    answer: Narrow base and wide top
+    difficulty: 3
+    hints:
+    - Ageing means many old people, few children.
+    - The top bars are the oldest ages.
+    solution: Few children (narrow base) and many elderly (wide top) means an ageing population, as in Japan.
+    mistakes:
+      Wide base and narrow top: s8_pyramid_base
+      A single tall bar: s8_pyramid_base
+  - prompt: Why could a large young population become a problem instead of a dividend?
+    options:
+    - If young people lack education and jobs
+    - If they all go to school
+    - If hospitals improve
+    answer: If young people lack education and jobs
+    difficulty: 2
+    hints:
+    - A dividend needs skills and work.
+    - What if there are no jobs?
+    solution: Without education, health and jobs, many young people cannot earn, and the benefit is lost.
+    mistakes:
+      If they all go to school: s8_dividend
+      If hospitals improve: s8_dividend
+  - prompt: A 70-year-old grandmother belongs to which age group?
+    options:
+    - Elderly (65+)
+    - Working age (15–64)
+    - Children (0–14)
+    answer: Elderly (65+)
+    difficulty: 1
+    hints:
+    - Check where 70 falls.
+    - Working age ends at 64.
+    solution: 70 is above 64, so she is in the elderly group.
+    mistakes:
+      Working age (15–64): s8pp_age
+      Children (0–14): s8pp_age
+  - prompt: In a town, 1000 males and 1020 females live. What is the sex ratio?
+    answer: '1020'
+    check: 1020/1000*1000
+    difficulty: 2
+    hints:
+    - Sex ratio counts females for every 1000 males.
+    - There are exactly 1000 males here.
+    solution: With exactly 1000 males, the number of females, 1020, is the sex ratio.
+    mistakes:
+      '1000': s8pp_ratio
+  - prompt: Many nurses from Kerala work in Gulf countries. What kind of migration is this?
+    options:
+    - International migration
+    - Seasonal migration
+    - Rural to rural migration
+    answer: International migration
+    difficulty: 1
+    hints:
+    - They cross a country's border.
+    - The Gulf is outside India.
+    solution: Moving to another country is international migration.
+    mistakes:
+      Seasonal migration: s8pp_type
+      Rural to rural migration: s8pp_type
+  - prompt: If 67% of Indians are 15–64 and 7% are 65+, what percentage are children 0–14?
+    answer: '26'
+    check: 100-67-7
+    difficulty: 2
+    hints:
+    - All three groups together make 100%.
+    - Take both groups away from 100.
+    solution: 100 − 67 − 7 = 26%.
+    mistakes:
+      '33': s8pp_age
