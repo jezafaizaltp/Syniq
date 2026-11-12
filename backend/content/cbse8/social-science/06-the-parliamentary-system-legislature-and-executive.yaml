@@ -15,6 +15,15 @@ tips:
   s8_question_hour: "Question Hour is how MPs hold ministers to account."
   s8_speaker: "The President is not in the Lok Sabha. Who runs its meetings?"
   s8_vp_rs: "The Speaker runs the Lok Sabha. Who chairs the Rajya Sabha?"
+  s8p_smaller: '543 belongs to the House of the People. The Council of States is the smaller House: add its elected and nominated members.'
+  s8p_ask: "Which choice is a set time when MPs put questions to ministers, who must answer?"
+  s8p_add: Joining together means adding the seats, not finding the difference.
+  s8p_three: 'Parliament has three parts: the President and two Houses. Which House is elected directly by the people?'
+  s8p_term: How often do we vote for the Lok Sabha in a normal term?
+  s8p_bill: A bill must pass both Houses and then be signed by the head of state.
+  s8p_majority: Half of 543 is 271.5, so a majority needs the next whole number above it.
+  s8p_budget: Which House has the final say on money, because it is elected directly by the people?
+  s8p_real_power: The head of state signs, but who actually runs the government day to day?
 concepts:
 - code: cbse8ss.parl.houses
   title: 'Parliament: Lok Sabha and Rajya Sabha'
@@ -74,6 +83,60 @@ concepts:
       bin: Rajya Sabha
       clue: Council of States.
       why: Rajya Sabha.
+  lesson:
+    - teach: 'India''s Parliament has three parts: the President, the Lok Sabha (House of the People) and the Rajya Sabha (Council of States). Parliament makes laws, approves the government''s money (the budget), and questions the government.'
+      check:
+        prompt: Which of these is part of Parliament?
+        options:
+        - The President
+        - The Supreme Court
+        - The Election Commission
+        answer: The President
+        why: Parliament is the President plus the two Houses.
+    - teach: 'The Lok Sabha has up to 543 elected members, chosen directly by voters for 5 years, and is led by the Speaker. The Rajya Sabha has up to 250 members: most are elected by state assemblies, and 12 are nominated by the President for their work in art, science, literature or social service. It is permanent: one-third retire every two years. The Vice-President chairs it.'
+      picture:
+        kind: compare
+        columns:
+        - title: Lok Sabha
+          points:
+          - Up to 543 elected
+          - Voters elect directly
+          - 5-year term
+          - Speaker presides
+        - title: Rajya Sabha
+          points:
+          - Up to 250 (12 nominated)
+          - Elected by state assemblies
+          - 'Permanent: 1/3 retire every 2 years'
+          - Vice-President chairs
+        alt: 'Lok Sabha: 543 directly elected for 5 years, led by the Speaker. Rajya Sabha: up to 250, chosen by states, permanent, chaired by the Vice-President.'
+      check:
+        prompt: Who chooses most Rajya Sabha members?
+        options:
+        - Members of state legislative assemblies
+        - Voters directly
+        - The Prime Minister
+        answer: Members of state legislative assemblies
+        why: That is why it is called the Council of States.
+    - teach: A bill becomes law when both Houses pass it and the President gives assent. Money bills start only in the Lok Sabha, and the Lok Sabha has the final word on them.
+      picture:
+        kind: flow
+        steps:
+        - Bill in Lok Sabha
+        - Passed
+        - Bill in Rajya Sabha
+        - Passed
+        - President's assent
+        - Law
+        alt: A bill passes the Lok Sabha and the Rajya Sabha, then gets the President's assent and becomes law.
+      check:
+        prompt: A bill has passed both Houses. What is the last step?
+        options:
+        - The President's assent
+        - A Supreme Court vote
+        - A public vote
+        answer: The President's assent
+        why: The President signs it, and then it becomes law.
   items:
   - prompt: How many elected members does the Lok Sabha have at most?
     answer: '543'
@@ -146,6 +209,120 @@ concepts:
     - Staggered terms.
     solution: The Rajya Sabha is never dissolved; members serve 6 years with one-third retiring every 2 years.
     mistakes: {"Its members are appointed for life": "s8_permanent"}
+  - prompt: For how many years is the Lok Sabha elected?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - It is the gap between two general elections.
+    - Think of 2019 and 2024.
+    solution: The Lok Sabha's normal term is 5 years.
+    mistakes:
+      '6': s8p_term
+  - prompt: Which House is the 'House of the People'?
+    options:
+    - Lok Sabha
+    - Rajya Sabha
+    - Vidhan Sabha
+    answer: Lok Sabha
+    difficulty: 1
+    hints:
+    - '''Lok'' means people.'
+    - Its members are directly elected.
+    solution: The Lok Sabha is elected directly by the people.
+    mistakes:
+      Rajya Sabha: s8p_three
+      Vidhan Sabha: s8p_three
+  - prompt: What is the largest number of members the Rajya Sabha can have?
+    answer: '250'
+    check: 238+12
+    difficulty: 2
+    hints:
+    - It is smaller than the Lok Sabha's 543.
+    - 238 are elected and 12 nominated.
+    solution: 'Up to 250: 238 elected by states and union territories, and 12 nominated.'
+    mistakes:
+      '543': s8p_smaller
+  - prompt: How many seats must a party win to have a majority in a 543-seat Lok Sabha?
+    answer: '272'
+    check: (543+1)/2
+    difficulty: 3
+    hints:
+    - A majority means more than half.
+    - Half of 543 is 271.5.
+    solution: More than half of 543 is 272 seats.
+    mistakes:
+      '271': s8p_majority
+  - prompt: Why can the Rajya Sabha never be dissolved?
+    options:
+    - Only one-third of members retire every two years
+    - Its members are never elected
+    - The President lives in it
+    answer: Only one-third of members retire every two years
+    difficulty: 2
+    hints:
+    - Members leave in turns, not all at once.
+    - Think of a class where a few leave every year.
+    solution: Because members retire in batches, the House always exists.
+    mistakes:
+      Its members are never elected: s8_permanent
+      The President lives in it: s8_permanent
+  - prompt: Which House has the final say on a money bill?
+    options:
+    - Lok Sabha
+    - Rajya Sabha
+    - Both equally
+    answer: Lok Sabha
+    difficulty: 3
+    hints:
+    - Money bills start in one House only.
+    - It is the directly elected House.
+    solution: Money bills begin in the Lok Sabha, and the Rajya Sabha can only delay them up to 14 days.
+    mistakes:
+      Rajya Sabha: s8p_budget
+      Both equally: s8p_budget
+  - prompt: A famous scientist becomes a Rajya Sabha member without an election. How?
+    options:
+    - The President nominated her
+    - She won a Lok Sabha seat
+    - The Speaker appointed her
+    answer: The President nominated her
+    difficulty: 2
+    hints:
+    - 12 members are chosen for their work in art, science, literature or social service.
+    - Who nominates them?
+    solution: The President nominates 12 members for their special knowledge.
+    mistakes:
+      She won a Lok Sabha seat: s8_nominated_rs
+      The Speaker appointed her: s8_nominated_rs
+  - prompt: What is one main job of Parliament?
+    options:
+    - Making laws for the country
+    - Deciding court cases
+    - Running elections
+    answer: Making laws for the country
+    difficulty: 1
+    hints:
+    - It is called the legislature.
+    - Courts decide cases; the Election Commission runs elections.
+    solution: 'Parliament is the legislature: it makes laws, passes the budget and checks the government.'
+    mistakes:
+      Deciding court cases: s8p_three
+      Running elections: s8p_three
+  - prompt: Which is the correct order for a bill to become law?
+    options:
+    - Passed by both Houses, then President's assent
+    - President's assent, then passed by both Houses
+    - Passed by Lok Sabha only
+    answer: Passed by both Houses, then President's assent
+    difficulty: 2
+    hints:
+    - The President signs last.
+    - Both Houses must agree.
+    solution: Both Houses pass the bill, and then the President signs it.
+    mistakes:
+      President's assent, then passed by both Houses: s8p_bill
+      Passed by Lok Sabha only: s8p_bill
 - code: cbse8ss.parl.exec
   title: The executive and accountability
   after:
@@ -185,6 +362,42 @@ concepts:
       The President appoints that leader Prime Minister: The President appoints whoever has the majority's support.
       Ministers run departments: Ministers are chosen after the PM is appointed.
       Lok Sabha can pass a no-confidence motion: Parliament checks a government that is already in office.
+  lesson:
+    - teach: The executive carries out the laws. The President is the head of state, but real power lies with the Council of Ministers, led by the Prime Minister. The President usually acts on its advice.
+      check:
+        prompt: Who holds real executive power in India?
+        options:
+        - The Council of Ministers led by the Prime Minister
+        - The President alone
+        - The Speaker
+        answer: The Council of Ministers led by the Prime Minister
+        why: The President is head of state; the PM and ministers run the government.
+    - teach: After an election, the party or coalition with a majority in the Lok Sabha forms the government. The President appoints its leader as Prime Minister, and on the PM's advice appoints other ministers, each heading departments like health or education.
+      picture:
+        kind: flow
+        steps:
+        - Election
+        - Majority in Lok Sabha
+        - President appoints PM
+        - PM picks ministers
+        alt: After an election, the majority in the Lok Sabha decides the PM, whom the President appoints; the PM chooses ministers.
+      check:
+        prompt: After an election, who becomes Prime Minister?
+        options:
+        - The leader of the majority in the Lok Sabha
+        - The oldest MP
+        - The Chief Justice
+        answer: The leader of the majority in the Lok Sabha
+        why: The government must have the Lok Sabha's support.
+    - teach: Ministers are collectively responsible to the Lok Sabha. If it passes a no-confidence motion, the whole government must resign. MPs question ministers in Question Hour, debate policies and study them in committees. The opposition questions and criticises the government.
+      check:
+        prompt: Why does the opposition matter in a democracy?
+        options:
+        - It questions the government and offers other ideas
+        - It runs the government
+        - It appoints judges
+        answer: It questions the government and offers other ideas
+        why: A strong opposition keeps the government careful and accountable.
   items:
   - prompt: Who is the head of state in India?
     options:
@@ -264,3 +477,125 @@ concepts:
     - Head of government.
     solution: The Prime Minister heads the Council of Ministers.
     mistakes: {"The President": "s8_council"}
+  - prompt: Who appoints the Prime Minister?
+    options:
+    - The President
+    - The Speaker
+    - The Chief Justice
+    answer: The President
+    difficulty: 1
+    hints:
+    - It is the head of state.
+    - The appointment follows the Lok Sabha majority.
+    solution: The President appoints the leader of the majority as PM.
+    mistakes:
+      The Speaker: s8_head_state
+      The Chief Justice: s8_head_state
+  - prompt: 'A minister of education heads:'
+    options:
+    - A department of the government
+    - The Rajya Sabha
+    - The Supreme Court
+    answer: A department of the government
+    difficulty: 1
+    hints:
+    - Ministers are part of the executive.
+    - Each looks after one area of work.
+    solution: Each minister heads one or more departments, like education or health.
+    mistakes:
+      The Rajya Sabha: s8_council
+      The Supreme Court: s8_council
+  - prompt: What does 'collective responsibility' mean?
+    options:
+    - All ministers stand or fall together before the Lok Sabha
+    - Each minister answers only to himself
+    - Ministers answer to the courts
+    answer: All ministers stand or fall together before the Lok Sabha
+    difficulty: 3
+    hints:
+    - Think of what a no-confidence motion does.
+    - Does one minister leave, or all?
+    solution: If the Lok Sabha loses confidence, the whole Council of Ministers resigns together.
+    mistakes:
+      Each minister answers only to himself: s8_no_confidence
+      Ministers answer to the courts: s8_no_confidence
+  - prompt: Which of these is a way Parliament checks the government?
+    options:
+    - Question Hour
+    - Signing bills into law
+    - Counting votes
+    answer: Question Hour
+    difficulty: 2
+    hints:
+    - MPs ask, ministers must answer.
+    - It happens at the start of the sitting.
+    solution: In Question Hour MPs ask ministers about their work, and ministers must reply.
+    mistakes:
+      Signing bills into law: s8p_ask
+      Counting votes: s8p_ask
+  - prompt: Who is the formal head of the Indian state, in whose name the government acts?
+    options:
+    - The President
+    - The Prime Minister
+    - The Vice-President
+    answer: The President
+    difficulty: 2
+    hints:
+    - Laws are signed by this person.
+    - The PM leads the government, not the state.
+    solution: The President is head of state; the PM is head of government.
+    mistakes:
+      The Prime Minister: s8p_real_power
+      The Vice-President: s8_vp_rs
+  - prompt: Why can a government not ignore the Lok Sabha?
+    options:
+    - It must keep a majority there or resign
+    - The Lok Sabha appoints judges
+    - The Lok Sabha runs elections
+    answer: It must keep a majority there or resign
+    difficulty: 2
+    hints:
+    - What happens after a no-confidence motion passes?
+    - Support of the House keeps it in office.
+    solution: A government stays only while it has the Lok Sabha's confidence.
+    mistakes:
+      The Lok Sabha appoints judges: s8_no_confidence
+      The Lok Sabha runs elections: s8_no_confidence
+  - prompt: Parties A (200 seats) and B (80 seats) join as a coalition in the 543-seat Lok Sabha. How many seats do they have together?
+    answer: '280'
+    check: 200+80
+    difficulty: 1
+    hints:
+    - Add the two parties' seats.
+    - Then compare with 272 for a majority.
+    solution: 200 + 80 = 280 seats, more than 272, so the coalition can form the government.
+    mistakes:
+      '120': s8p_add
+  - prompt: Using the coalition of 280 seats, can it form the government?
+    options:
+    - Yes, 280 is more than 272
+    - No, it needs all 543
+    - No, coalitions are not allowed
+    answer: Yes, 280 is more than 272
+    difficulty: 2
+    hints:
+    - A majority is more than half of 543.
+    - Compare 280 with 272.
+    solution: 272 is a majority; 280 is more, so the coalition can form the government.
+    mistakes:
+      No, it needs all 543: s8p_majority
+      No, coalitions are not allowed: s8_pm
+  - prompt: Which branch carries out the laws Parliament makes?
+    options:
+    - The executive
+    - The judiciary
+    - The Election Commission
+    answer: The executive
+    difficulty: 2
+    hints:
+    - '''Execute'' means carry out.'
+    - The judiciary decides cases.
+    solution: The executive (President, PM and ministers, and government officials) carries out laws.
+    mistakes:
+      The judiciary: s8p_real_power
+      The Election Commission: s8p_real_power
