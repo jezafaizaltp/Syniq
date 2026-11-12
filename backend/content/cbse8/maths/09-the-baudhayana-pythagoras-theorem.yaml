@@ -14,6 +14,12 @@ tips:
   t8_scale_triple: "Multiply every number in the triple by 3, including the hypotenuse."
   t8_triple_check: "Check a² + b² = c² for each set."
   t8_triple_formula: "Work out m² − n², 2mn and m² + n² with m = 3, n = 2. Which is largest?"
+  c8m9_hyp_longest: The hypotenuse is the longest side, opposite the right angle. To find a shorter side, subtract the squares.
+  c8m9_root: You have found the square of the side. Take the square root to get the side itself.
+  c8m9_longest_last: 'Test with the longest side as c: is a² + b² equal to c²?'
+  c8m9_multiply_all: Multiplying a triple by a number multiplies all three sides by it.
+  c8m9_area_double: The square on the diagonal of a square has twice the area of the square.
+  c8m9_formula: Put the values of m and n into m² − n², 2mn and m² + n² one at a time.
 concepts:
 - code: cbse8m.pyth.theorem
   title: The Baudhayana–Pythagoras theorem
@@ -112,6 +118,55 @@ concepts:
           a: 7
           b: 18
         say: '7 + 18 = 25 again. Add the squares instead: 625 − 49 = ?'
+  lesson:
+    - teach: 'In a right-angled triangle, the side opposite the right angle is the hypotenuse, and it is the longest side. Draw a square on each side. The square on the hypotenuse has the same area as the other two squares put together: c² = a² + b².'
+      picture:
+        kind: compare
+        columns:
+        - title: Sides 3, 4, 5
+          points:
+          - 3² = 9
+          - 4² = 16
+          - 5² = 25
+        - title: Check
+          points:
+          - 9 + 16 = 25
+          - so 3² + 4² = 5²
+        alt: In a right triangle with sides 3, 4 and 5, the squares 9 and 16 add to 25, the square on the hypotenuse.
+      check:
+        prompt: In a right triangle, which side is the hypotenuse?
+        options:
+        - The side opposite the right angle
+        - The shortest side
+        - Either side next to the right angle
+        answer: The side opposite the right angle
+        why: The hypotenuse is opposite the right angle, and it is always the longest side.
+    - teach: 'To find the hypotenuse, square the two shorter sides, add, and take the square root. Legs 5 and 12: 25 + 144 = 169, so the hypotenuse is √169 = 13. To find a shorter side, subtract: hypotenuse² − other side².'
+      picture:
+        kind: flow
+        steps:
+        - legs 5 and 12
+        - 25 + 144 = 169
+        - √169
+        - hypotenuse 13
+        alt: Legs 5 and 12 give 25 plus 144, which is 169; its square root, 13, is the hypotenuse.
+      check:
+        prompt: A right triangle has hypotenuse 10 and one leg 6. How long is the other leg?
+        options:
+        - '8'
+        - '4'
+        - '16'
+        answer: '8'
+        why: 10² − 6² = 100 − 36 = 64, and √64 = 8.
+    - teach: 'Baudhayana wrote this rule in the Sulba Sutras, around 800 BCE, for the diagonal of a rectangle: the diagonal makes a right triangle with two sides. It also works backwards: if a² + b² = c², the triangle has a right angle. Builders used a rope with 3, 4 and 5 equal parts to make a right angle.'
+      check:
+        prompt: Do sides 6, 8 and 11 make a right triangle?
+        options:
+        - No, 6² + 8² is 100, not 121
+        - Yes, because 6 + 8 > 11
+        - Yes, every triangle does
+        answer: No, 6² + 8² is 100, not 121
+        why: 36 + 64 = 100, but 11² = 121, so there is no right angle.
   items:
   - prompt: A right triangle has legs 6 cm and 8 cm. Find the hypotenuse, in cm.
     answer: '10'
@@ -173,6 +228,113 @@ concepts:
     - 81 + 144 = 225.
     solution: √(81 + 144) = √225 = 15 cm.
     mistakes: {"21": "added_sides", "225": "t8_pyth_hyp"}
+  - prompt: A right triangle has legs 9 cm and 12 cm. Find the hypotenuse, in cm.
+    answer: '15'
+    check: sqrt(9**2 + 12**2)
+    difficulty: 1
+    hints:
+    - 9² + 12² = 81 + 144.
+    - √225.
+    solution: 'Step 1: 81 + 144 = 225. Step 2: √225 = 15 cm.'
+    mistakes:
+      '21': c8_pyth_add_sides
+      '225': c8m9_root
+  - prompt: A right triangle has hypotenuse 17 and one leg 8. Find the other leg.
+    answer: '15'
+    check: sqrt(17**2 - 8**2)
+    difficulty: 2
+    hints:
+    - The hypotenuse is the longest side.
+    - 17² − 8² = 289 − 64.
+    solution: 'Step 1: 289 − 64 = 225. Step 2: √225 = 15.'
+    mistakes:
+      '9': c8_pyth_add_sides
+      '353': c8m9_hyp_longest
+  - prompt: A 13 m ladder leans against a wall with its foot 5 m from the wall. How high up the wall does it reach, in m?
+    answer: '12'
+    check: sqrt(13**2 - 5**2)
+    difficulty: 2
+    hints:
+    - The ladder is the hypotenuse.
+    - 13² − 5².
+    solution: 'Step 1: 169 − 25 = 144. Step 2: √144 = 12 m.'
+    mistakes:
+      '8': c8_pyth_add_sides
+      '144': c8m9_root
+  - prompt: A rectangular field is 24 m by 7 m. How long is its diagonal, in m?
+    answer: '25'
+    check: sqrt(24**2 + 7**2)
+    difficulty: 1
+    hints:
+    - The diagonal is the hypotenuse of a right triangle.
+    - 24² + 7² = 576 + 49.
+    solution: 'Step 1: 576 + 49 = 625. Step 2: √625 = 25 m.'
+    mistakes:
+      '31': c8_pyth_add_sides
+      '625': c8m9_root
+  - prompt: Which set of sides makes a right triangle?
+    options:
+    - 10, 24, 26
+    - 4, 5, 6
+    - 5, 6, 7
+    - 2, 3, 4
+    answer: 10, 24, 26
+    difficulty: 2
+    hints:
+    - Square the two shorter sides and add.
+    - Compare with the square of the longest.
+    solution: '100 + 576 = 676 = 26². For 4, 5, 6: 16 + 25 = 41, not 36. The others fail too.'
+    mistakes:
+      4, 5, 6: t8_pyth_test
+      5, 6, 7: t8_pyth_test
+      2, 3, 4: t8_pyth_test
+  - prompt: A square has a diagonal of √50 cm. How long is each side, in cm?
+    answer: '5'
+    check: sqrt(50/2)
+    difficulty: 3
+    hints:
+    - side² + side² = diagonal².
+    - 2 × side² = 50.
+    solution: 'Step 1: 2 × side² = 50. Step 2: side² = 25. Step 3: side = 5 cm.'
+    mistakes:
+      '25': c8m9_root
+      '50': t8_diag_square
+  - prompt: A boy walks 8 km east and then 6 km north. How far is he from his starting point, in km?
+    answer: '10'
+    check: sqrt(8**2 + 6**2)
+    difficulty: 2
+    hints:
+    - East and north are at right angles.
+    - 8² + 6².
+    solution: 'Step 1: 64 + 36 = 100. Step 2: √100 = 10 km.'
+    mistakes:
+      '14': c8_pyth_add_sides
+      '100': c8m9_root
+  - prompt: A TV screen is 32 inches wide and 24 inches high. How long is its diagonal, in inches?
+    answer: '40'
+    check: sqrt(32**2 + 24**2)
+    difficulty: 2
+    hints:
+    - 32² + 24² = 1024 + 576.
+    - √1600.
+    solution: 'Step 1: 1024 + 576 = 1600. Step 2: √1600 = 40 inches.'
+    mistakes:
+      '56': c8_pyth_add_sides
+      '1600': c8m9_root
+  - prompt: Sides 20, 21 and 29. Is this a right triangle?
+    options:
+    - Yes, because 20² + 21² = 29²
+    - No, because 20 + 21 ≠ 29
+    - No, because 29 is too long
+    answer: Yes, because 20² + 21² = 29²
+    difficulty: 2
+    hints:
+    - Square the two shorter sides.
+    - 400 + 441 = ?
+    solution: 400 + 441 = 841 = 29², so the angle between the sides 20 and 21 is a right angle.
+    mistakes:
+      No, because 20 + 21 ≠ 29: c8_pyth_add_sides
+      No, because 29 is too long: c8m9_longest_last
 - code: cbse8m.pyth.triples
   title: Integer right triangles and doubling a square
   after:
@@ -247,6 +409,56 @@ concepts:
       bin: Not a right triangle
       clue: 49 + 64 against 100?
       why: 113 is not 100. No.
+  lesson:
+    - teach: Whole numbers a, b, c with a² + b² = c² make a Baudhayana (Pythagorean) triple. The best known are (3, 4, 5), (5, 12, 13), (8, 15, 17) and (7, 24, 25).
+      picture:
+        kind: compare
+        columns:
+        - title: Triple
+          points:
+          - 3, 4, 5
+          - 5, 12, 13
+          - 8, 15, 17
+        - title: Check
+          points:
+          - 9 + 16 = 25
+          - 25 + 144 = 169
+          - 64 + 225 = 289
+        alt: 'Three triples and their checks: 9 plus 16 is 25, 25 plus 144 is 169, 64 plus 225 is 289.'
+      check:
+        prompt: Is (6, 8, 10) a triple?
+        options:
+        - 'Yes'
+        - 'No'
+        - Only for squares
+        answer: 'Yes'
+        why: 36 + 64 = 100 = 10². It is (3, 4, 5) doubled.
+    - teach: 'Multiply a triple by any whole number and you get another: (3, 4, 5) × 3 = (9, 12, 15). To make new triples, pick whole numbers m > n and work out m² − n², 2mn and m² + n². With m = 2, n = 1 you get (3, 4, 5).'
+      picture:
+        kind: flow
+        steps:
+        - m = 4, n = 1
+        - m² − n² = 15
+        - 2mn = 8
+        - m² + n² = 17
+        alt: With m equal to 4 and n equal to 1 the formula gives 15, 8 and 17.
+      check:
+        prompt: Multiply (5, 12, 13) by 2. What is the new triple?
+        options:
+        - 10, 24, 26
+        - 7, 14, 15
+        - 10, 24, 13
+        answer: 10, 24, 26
+        why: All three numbers are doubled.
+    - teach: 'The square drawn on the diagonal of a square has twice its area. That is how Baudhayana doubled a square: to get a square of area 2, draw the square on the diagonal of a square of area 1. Its side is √2, which is not a whole number.'
+      check:
+        prompt: A square has area 9 cm². What is the area of the square on its diagonal?
+        options:
+        - 18 cm²
+        - 81 cm²
+        - 12 cm²
+        answer: 18 cm²
+        why: diagonal² = 3² + 3² = 18, so the square on the diagonal has area 18 cm².
   items:
   - prompt: Which set is a Baudhayana–Pythagoras triple?
     options:
@@ -310,3 +522,110 @@ concepts:
     - 9 + 16 = 25.
     solution: Sides 3, 4, 5 satisfy a² + b² = c², so the angle between the 3 and 4 sides is 90°.
     mistakes: {"Because 3 + 4 + 5 = 12": "t8_rope_345", "Because ropes bend at 90°": "t8_rope_345"}
+  - prompt: Complete the triple (8, 15, c). Find c.
+    answer: '17'
+    check: sqrt(8**2 + 15**2)
+    difficulty: 1
+    hints:
+    - 64 + 225.
+    - √289.
+    solution: 64 + 225 = 289 = 17², so c = 17.
+    mistakes:
+      '23': c8_pyth_add_sides
+      '289': c8m9_root
+  - prompt: Complete the triple (12, b, 13). Find b.
+    answer: '5'
+    check: sqrt(13**2 - 12**2)
+    difficulty: 2
+    hints:
+    - 13 is the hypotenuse.
+    - 169 − 144.
+    solution: 169 − 144 = 25 = 5², so b = 5.
+    mistakes:
+      '1': c8_pyth_add_sides
+      '25': c8m9_root
+  - prompt: Multiply the triple (8, 15, 17) by 2. What is the new hypotenuse?
+    answer: '34'
+    check: 17*2
+    difficulty: 1
+    hints:
+    - The hypotenuse is the largest number.
+    - Double it.
+    solution: (16, 30, 34). The hypotenuse is 34.
+    mistakes:
+      '19': c8m9_multiply_all
+      '17': c8m9_multiply_all
+  - prompt: Using m = 4 and n = 3 in (m² − n², 2mn, m² + n²), what is the largest number?
+    answer: '25'
+    check: 4**2 + 3**2
+    difficulty: 2
+    hints:
+    - The largest is m² + n².
+    - 16 + 9.
+    solution: m² − n² = 7, 2mn = 24, m² + n² = 25. The triple is (7, 24, 25).
+    mistakes:
+      '24': c8m9_formula
+      '7': c8m9_formula
+  - prompt: Using m = 5 and n = 2, what is 2mn?
+    answer: '20'
+    check: 2*5*2
+    difficulty: 1
+    hints:
+    - 2 × m × n.
+    - 2 × 5 × 2.
+    solution: 2 × 5 × 2 = 20. The triple is (21, 20, 29).
+    mistakes:
+      '9': c8m9_formula
+      '10': c8m9_formula
+  - prompt: Which is NOT a Baudhayana–Pythagoras triple?
+    options:
+    - 6, 7, 9
+    - 9, 12, 15
+    - 20, 21, 29
+    - 12, 16, 20
+    answer: 6, 7, 9
+    difficulty: 2
+    hints:
+    - Check a² + b² = c² for each.
+    - 36 + 49 = 85. Is 85 = 9²?
+    solution: 36 + 49 = 85, but 9² = 81. The others are (3, 4, 5) × 3, (20, 21, 29) and (3, 4, 5) × 4.
+    mistakes:
+      9, 12, 15: t8_triple_check
+      20, 21, 29: t8_triple_check
+      12, 16, 20: t8_triple_check
+  - prompt: A square has area 50 cm². What is the area of the square drawn on its diagonal, in cm²?
+    answer: '100'
+    check: 2*50
+    difficulty: 2
+    hints:
+    - diagonal² = side² + side².
+    - Each side² is the area, 50.
+    solution: diagonal² = 50 + 50 = 100, so the new square has area 100 cm².
+    mistakes:
+      '2500': c8m9_area_double
+      '50': c8m9_area_double
+  - prompt: Why does multiplying a triple by 3 give another triple?
+    options:
+    - (3a)² + (3b)² = 9(a² + b²) = 9c² = (3c)²
+    - Because 3 is odd
+    - Because 3 + 4 + 5 = 12
+    answer: (3a)² + (3b)² = 9(a² + b²) = 9c² = (3c)²
+    difficulty: 3
+    hints:
+    - 'Square 3a: you get 9a².'
+    - Take out the common 9.
+    solution: Every square is multiplied by 9, so the rule a² + b² = c² still holds with 3a, 3b and 3c.
+    mistakes:
+      Because 3 is odd: c8m9_multiply_all
+      Because 3 + 4 + 5 = 12: c8m9_multiply_all
+  - prompt: Complete the triple (20, 48, c). Find c.
+    answer: '52'
+    check: sqrt(20**2 + 48**2)
+    difficulty: 3
+    hints:
+    - 20 and 48 are both 4 times something.
+    - (5, 12, 13) × 4.
+    solution: '20 = 4 × 5 and 48 = 4 × 12, so c = 4 × 13 = 52. Check: 400 + 2304 = 2704 = 52².'
+    mistakes:
+      '68': c8_pyth_add_sides
+      '13': c8m9_multiply_all

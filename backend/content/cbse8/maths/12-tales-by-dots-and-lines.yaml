@@ -15,6 +15,12 @@ tips:
   t8_median_order: "Order the numbers first, then take the middle one."
   t8_outlier: "Look at 54 next to the other values. What does one very large value do to the average?"
   t8_outlier_mean: "Adding one huge value: which changes more, the average or the middle value?"
+  c8m12_count: Count how many values there are, and divide the total by that number.
+  c8m12_balance: 'The mean is the balance point: the amounts above it and below it cancel out.'
+  c8m12_scale: If every value is multiplied by the same number, the mean is multiplied by it too.
+  c8m12_new_total: Work out the total before and the total after. The difference is the new value.
+  c8m12_middle_position: With n values in order, the median is in position (n + 1) ÷ 2.
+  c8m12_mode_vs_median: The median is the middle value in order, not the most common one.
 concepts:
 - code: cbse8m.data.mean
   title: The mean as a balance point
@@ -89,6 +95,63 @@ concepts:
       - when:
           total: 36
         say: 36 = 4 × 9. Five scores need 5 × 9 = 45.
+  lesson:
+    - teach: 'The mean (average) is the sum of the values divided by how many there are. For 3, 5, 7, 9: sum 24, count 4, mean 6. It is what each value would be if the total were shared out equally.'
+      picture:
+        kind: bars
+        bars:
+        - label: Mon
+          value: 3
+        - label: Tue
+          value: 5
+        - label: Wed
+          value: 7
+        - label: Thu
+          value: 9
+        alt: Bars of 3, 5, 7 and 9; levelled out, each would be 6.
+      check:
+        prompt: Find the mean of 2, 4, 9.
+        options:
+        - '5'
+        - '15'
+        - '4'
+        answer: '5'
+        why: 2 + 4 + 9 = 15, and 15 ÷ 3 = 5.
+    - teach: 'The mean is a balance point. The distances of the values above it add up to the same as the distances below it. For 3, 5, 7, 9 with mean 6: below are 3 and 1 (total 4), above are 1 and 3 (total 4).'
+      picture:
+        kind: number_line
+        from: 2
+        to: 10
+        step: 1
+        points:
+        - at: 3
+          label: '3'
+        - at: 5
+          label: '5'
+        - at: 6
+          label: mean
+        - at: 7
+          label: '7'
+        - at: 9
+          label: '9'
+        alt: On a number line from 2 to 10, the values 3, 5, 7 and 9 balance around 6.
+      check:
+        prompt: Values 4, 6, 11. The mean is 7. What do the distances below the mean add to?
+        options:
+        - '4'
+        - '7'
+        - '11'
+        answer: '4'
+        why: '4 is 3 below and 6 is 1 below: 3 + 1 = 4, matching 11, which is 4 above.'
+    - teach: 'Mean = sum ÷ count, so sum = mean × count. This finds a missing value: if 4 values have mean 10, they add to 40. Adding the same number to every value adds it to the mean. With a frequency table, multiply each value by its frequency, add, and divide by the total frequency.'
+      check:
+        prompt: 5 numbers have a mean of 8. What is their sum?
+        options:
+        - '40'
+        - '13'
+        - '8'
+        answer: '40'
+        why: sum = mean × count = 8 × 5 = 40.
   items:
   - prompt: Find the mean of 4, 8, 6, 10 and 12.
     answer: '8'
@@ -149,6 +212,108 @@ concepts:
     - One is much bigger.
     solution: The outlier 54 drags the mean far above the other values; the median, 4, is more typical.
     mistakes: {"There are too few values": "t8_outlier", "4 appears twice": "t8_outlier"}
+  - prompt: Find the mean of 12, 15, 9, 20 and 14.
+    answer: '14'
+    check: (12 + 15 + 9 + 20 + 14)/5
+    difficulty: 1
+    hints:
+    - Add them first.
+    - 70 ÷ 5.
+    solution: 'Step 1: 12 + 15 + 9 + 20 + 14 = 70. Step 2: 70 ÷ 5 = 14.'
+    mistakes:
+      '70': c8_mean_divide
+      '17.5': c8m12_count
+  - prompt: A cricketer scores 45, 30, 60, 25 and 40 runs. What is his mean score?
+    answer: '40'
+    check: (45 + 30 + 60 + 25 + 40)/5
+    difficulty: 1
+    hints:
+    - Total the runs.
+    - Divide by 5 innings.
+    solution: 'Step 1: total = 200. Step 2: 200 ÷ 5 = 40 runs.'
+    mistakes:
+      '200': c8_mean_divide
+      '50': c8m12_count
+  - prompt: The mean of 6 numbers is 15. What is their sum?
+    answer: '90'
+    check: 6*15
+    difficulty: 1
+    hints:
+    - Sum = mean × count.
+    - 15 × 6.
+    solution: Sum = 15 × 6 = 90.
+    mistakes:
+      '21': t8_mean_sum
+      '2.5': t8_mean_sum
+  - prompt: The mean of 8, 12, x and 16 is 13. Find x.
+    answer: '16'
+    check: 13*4 - (8 + 12 + 16)
+    difficulty: 2
+    hints:
+    - The four values add to 13 × 4 = 52.
+    - 52 − (8 + 12 + 16).
+    solution: 'Step 1: total = 52. Step 2: 8 + 12 + 16 = 36. Step 3: x = 52 − 36 = 16.'
+    mistakes:
+      '13': t8_mean_unknown
+      '-23': t8_mean_unknown
+  - prompt: The mean of 4 numbers is 20. A fifth number is added and the mean becomes 22. What is the fifth number?
+    answer: '30'
+    check: 22*5 - 20*4
+    difficulty: 3
+    hints:
+    - Old total = 20 × 4.
+    - New total = 22 × 5.
+    solution: 'Step 1: old total = 80. Step 2: new total = 110. Step 3: fifth number = 110 − 80 = 30.'
+    mistakes:
+      '22': c8m12_new_total
+      '2': c8m12_new_total
+  - prompt: Each value in 3, 7, 8 is doubled. What is the new mean?
+    answer: '12'
+    check: 2*(3 + 7 + 8)/3
+    difficulty: 2
+    hints:
+    - The old mean is 6.
+    - Doubling every value doubles the mean.
+    solution: Old mean = 18 ÷ 3 = 6. New values 6, 14, 16 have mean 36 ÷ 3 = 12.
+    mistakes:
+      '6': c8m12_scale
+      '8': c8m12_scale
+  - prompt: 'Marks: 4 (2 students), 6 (5 students), 8 (3 students). Find the mean mark. Type a decimal.'
+    answer: '6.2'
+    check: (4*2 + 6*5 + 8*3)/10
+    difficulty: 2
+    hints:
+    - Multiply each mark by its number of students.
+    - 8 + 30 + 24 = 62, over 10 students.
+    solution: 'Step 1: 4×2 + 6×5 + 8×3 = 62. Step 2: 2 + 5 + 3 = 10 students. Step 3: 62 ÷ 10 = 6.2.'
+    mistakes:
+      '6': t8_freq_mean
+      '20.67': t8_freq_mean
+  - prompt: Values 10, 12, 14 have mean 12. Which statement is true?
+    options:
+    - 10 is 2 below and 14 is 2 above, so they balance
+    - The mean is always the middle number written
+    - The mean is the largest value
+    answer: 10 is 2 below and 14 is 2 above, so they balance
+    difficulty: 2
+    hints:
+    - How far is each value from 12?
+    - Compare the amounts below and above.
+    solution: 10 is 2 below 12 and 14 is 2 above, so they balance at 12. The mean is a balance point.
+    mistakes:
+      The mean is always the middle number written: c8m12_balance
+      The mean is the largest value: c8m12_balance
+  - prompt: Daily temperatures were 31, 33, 30, 34 and 32 °C. What was the mean temperature, in °C?
+    answer: '32'
+    check: (31 + 33 + 30 + 34 + 32)/5
+    difficulty: 1
+    hints:
+    - 'Total: 160.'
+    - 160 ÷ 5.
+    solution: 'Step 1: total = 160. Step 2: 160 ÷ 5 = 32 °C.'
+    mistakes:
+      '160': c8_mean_divide
+      '40': c8m12_count
 - code: cbse8m.data.median
   title: The median, and mean versus median
   after:
@@ -208,6 +373,54 @@ concepts:
       - when:
           v: 4
         say: With an even count there are two middle values, 4 and 6. Take the number halfway between.
+  lesson:
+    - teach: 'The median is the middle value once the data are put in order. For 7, 3, 9, 5, 1: in order 1, 3, 5, 7, 9, so the median is 5. With n values, it is in position (n + 1) ÷ 2. Always order first.'
+      picture:
+        kind: flow
+        steps:
+        - 7, 3, 9, 5, 1
+        - 'order: 1, 3, 5, 7, 9'
+        - middle (3rd) value
+        - median = 5
+        alt: Put 7, 3, 9, 5, 1 in order as 1, 3, 5, 7, 9; the middle value, 5, is the median.
+      check:
+        prompt: Find the median of 8, 2, 6.
+        options:
+        - '6'
+        - '2'
+        - '16'
+        answer: '6'
+        why: 'In order: 2, 6, 8. The middle one is 6.'
+    - teach: 'With an even number of values there are two middle ones. The median is halfway between them: add them and halve. For 2, 4, 6, 10 the middle two are 4 and 6, so the median is 5.'
+      check:
+        prompt: Find the median of 3, 5, 9, 11.
+        options:
+        - '7'
+        - '5'
+        - '9'
+        answer: '7'
+        why: The middle two are 5 and 9, and (5 + 9) ÷ 2 = 7.
+    - teach: One very large or very small value can drag the mean a long way, but hardly moves the median. For 3, 4, 5, 6, 100 the mean is 23.6, but the median is 5, which is more typical. That is why median incomes are often reported.
+      picture:
+        kind: compare
+        columns:
+        - title: 3, 4, 5, 6, 7
+          points:
+          - mean 5
+          - median 5
+        - title: 3, 4, 5, 6, 100
+          points:
+          - mean 23.6
+          - median 5
+        alt: Changing the largest value from 7 to 100 moves the mean from 5 to 23.6, but the median stays 5.
+      check:
+        prompt: Which is less affected by one very large value?
+        options:
+        - The median
+        - The mean
+        - Both change equally
+        answer: The median
+        why: The median depends only on the middle position, so one extreme value barely changes it.
   items:
   - prompt: Find the median of 7, 2, 9, 4, 6.
     answer: '6'
@@ -268,3 +481,108 @@ concepts:
     - It must be 10 itself.
     solution: The middle value must be 10, and 10 sits between 8 and 12, so the fifth number is 10.
     mistakes: {"11": "t8_median_fifth", "12": "t8_median_fifth"}
+  - prompt: Find the median of 15, 8, 22, 11, 19.
+    answer: '15'
+    check: '15'
+    difficulty: 1
+    hints:
+    - Put them in order.
+    - 8, 11, 15, 19, 22.
+    solution: 'In order: 8, 11, 15, 19, 22. The middle (3rd) value is 15.'
+    mistakes:
+      '22': c8_median_order
+      '19': c8_median_order
+  - prompt: Find the median of 4, 9, 2, 7, 5, 8.
+    answer: '6'
+    check: (5 + 7)/2
+    difficulty: 2
+    hints:
+    - 'Order: 2, 4, 5, 7, 8, 9.'
+    - Halfway between the 3rd and 4th.
+    solution: 'Step 1: 2, 4, 5, 7, 8, 9. Step 2: middle two are 5 and 7. Step 3: (5 + 7) ÷ 2 = 6.'
+    mistakes:
+      '4.5': c8_median_order
+      '5': t8_median_even
+  - prompt: Find the median of 21, 25, 18, 30, 25, 19, 40.
+    answer: '25'
+    check: '25'
+    difficulty: 2
+    hints:
+    - Put them in order.
+    - There are 7 values, so the 4th is the middle.
+    solution: 'In order: 18, 19, 21, 25, 25, 30, 40. The 4th value is 25.'
+    mistakes:
+      '30': c8_median_order
+      '19': c8_median_order
+  - prompt: There are 9 values in order. Which position is the median?
+    answer: '5'
+    check: (9 + 1)/2
+    difficulty: 1
+    hints:
+    - (n + 1) ÷ 2.
+    - (9 + 1) ÷ 2.
+    solution: '(9 + 1) ÷ 2 = 5, so the 5th value is the median: 4 values are below it and 4 above.'
+    mistakes:
+      '4.5': c8m12_middle_position
+      '4': c8m12_middle_position
+  - prompt: 'Monthly pocket money of 5 friends: ₹100, ₹120, ₹150, ₹130, ₹1000. Which is the better typical value?'
+    options:
+    - The median, ₹130
+    - The mean, ₹300
+    - The largest, ₹1000
+    answer: The median, ₹130
+    difficulty: 2
+    hints:
+    - One friend gets far more than the others.
+    - Which average does that one value pull up?
+    solution: The mean is 1500 ÷ 5 = ₹300, pulled up by ₹1000. The median (₹130) is close to what most friends get.
+    mistakes:
+      The mean, ₹300: t8_outlier_mean
+      The largest, ₹1000: t8_outlier_mean
+  - prompt: 'Ages: 12 (3 children), 13 (6 children), 14 (2 children). Find the median age.'
+    answer: '13'
+    check: '13'
+    difficulty: 2
+    hints:
+    - There are 11 children, so the median is the 6th.
+    - 'Count: the first 3 are 12, the next 6 are 13.'
+    solution: 11 children, so the median is the 6th. Ages 1–3 are 12, ages 4–9 are 13. The 6th is 13.
+    mistakes:
+      '12': t8_median_freq
+      '6': c8m12_mode_vs_median
+  - prompt: Find the median of 1.5, 2.8, 2.1, 3.0, 1.9. Type a decimal.
+    answer: '2.1'
+    check: '2.1'
+    difficulty: 2
+    hints:
+    - Order them.
+    - 1.5, 1.9, 2.1, 2.8, 3.0.
+    solution: 'In order: 1.5, 1.9, 2.1, 2.8, 3.0. The middle is 2.1.'
+    mistakes:
+      '2.26': c8_median_order
+      '2.8': c8_median_order
+  - prompt: The data 6, 7, 8, 9 has a value 50 added. What happens?
+    options:
+    - The mean rises a lot; the median rises a little
+    - Both rise by the same amount
+    - Neither changes
+    answer: The mean rises a lot; the median rises a little
+    difficulty: 3
+    hints:
+    - 'Mean before: 7.5. Mean after: 80 ÷ 5.'
+    - 'Median before: 7.5. Median after: the 3rd of 6, 7, 8, 9, 50.'
+    solution: Mean goes from 7.5 to 16. Median goes from 7.5 to 8. One extreme value moves the mean far more.
+    mistakes:
+      Both rise by the same amount: t8_outlier
+      Neither changes: t8_outlier
+  - prompt: Four numbers in order are 3, 7, x, 12, and their median is 8. Find x.
+    answer: '9'
+    check: 2*8 - 7
+    difficulty: 3
+    hints:
+    - The median is halfway between 7 and x.
+    - (7 + x) ÷ 2 = 8.
+    solution: (7 + x) ÷ 2 = 8, so 7 + x = 16 and x = 9.
+    mistakes:
+      '8': t8_median_even
+      '16': t8_median_even
