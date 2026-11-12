@@ -164,7 +164,20 @@ def my_today(db: DbSession = Depends(get_db), user: User = Depends(current_user)
         concept = db.get(Concept, cid)
         m = db.scalars(select(Mastery).where(Mastery.student_id == user.id, Mastery.concept_id == cid)).first()
         topics.append({"title": concept.title, "progress": progress_label(m.p_known, m.attempts) if m else "learning"})
-    return {"answered": len(today), "right": sum(a.correct for a in today), "topics": topics}
+    lessons = db.scalars(
+        select(LearningEvent.id).where(LearningEvent.student_id == user.id, LearningEvent.kind == "lesson_done", LearningEvent.created_at >= start)
+    ).all()
+    from .. import mentor
+
+    # The mentor's most useful next step, so the day ends with where to start next time.
+    steps = [s for s in mentor.plan(db, user)["steps"] if s["kind"] != "first_lesson"]
+    return {
+        "answered": len(today),
+        "right": sum(a.correct for a in today),
+        "topics": topics,
+        "lessons": len(lessons),
+        "next": steps[0] if steps else None,
+    }
 
 
 # Rows that belong to one student, in an order that respects foreign keys.

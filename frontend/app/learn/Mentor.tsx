@@ -5,7 +5,7 @@ import { api } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 
-type MentorStep = {
+export type MentorStep = {
   kind: "fix_mistake" | "relearn" | "review" | "carry_on" | "start_topic" | "first_lesson";
   concept_id?: number | null;
   topic?: string | null;
@@ -25,6 +25,23 @@ type Week = {
 };
 export type MentorPlan = { part_of_day: "morning" | "afternoon" | "evening"; steps: MentorStep[]; week: Week };
 
+/** A next step in the learner's words: "Revise Linear equations", "Carry on with ...". */
+export function stepTitle(t: (key: Key, vars?: Record<string, string | number>) => string, s: MentorStep): string {
+  const topic = s.topic ?? "";
+  switch (s.kind) {
+    case "fix_mistake":
+      return t("mentor.fix_mistake");
+    case "relearn":
+      return t("mentor.relearn", { topic });
+    case "review":
+      return t("mentor.review", { topic });
+    case "carry_on":
+      return t("mentor.carry_on", { topic });
+    default:
+      return s.topic ? t("mentor.start_topic", { topic }) : t("mentor.next_chapter", { chapter: s.chapter ?? "" });
+  }
+}
+
 const ICON: Record<string, string> = { fix_mistake: "🎯", relearn: "🔄", review: "🔁", carry_on: "➡️", start_topic: "🌱" };
 
 /**
@@ -41,21 +58,7 @@ export default function Mentor({ onOpen }: { onOpen: (chapterId: number) => void
 
   if (!plan || !me) return null;
 
-  function title(s: MentorStep): string {
-    const topic = s.topic ?? "";
-    switch (s.kind) {
-      case "fix_mistake":
-        return t("mentor.fix_mistake");
-      case "relearn":
-        return t("mentor.relearn", { topic });
-      case "review":
-        return t("mentor.review", { topic });
-      case "carry_on":
-        return t("mentor.carry_on", { topic });
-      default:
-        return s.topic ? t("mentor.start_topic", { topic }) : t("mentor.next_chapter", { chapter: s.chapter ?? "" });
-    }
-  }
+  const title = (s: MentorStep) => stepTitle(t, s);
 
   function why(s: MentorStep): string {
     if (s.kind === "fix_mistake") return t("mentor.why_fix_mistake", { topic: s.topic ?? "" });

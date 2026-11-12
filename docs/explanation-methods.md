@@ -89,6 +89,10 @@ secure, repeated mistakes fixed, lessons finished, times they got something
 wrong and later right, and the way of explaining that has helped most lately.
 Never marks, ranks or comparisons with anyone else.
 
+When the learner signs out, "Before you go" (`GET /me/today`) says back what
+they did today, lessons included, and the mentor's most useful step to start
+with next time.
+
 Parents see the same good news on My children, in their own words
 (`mentor.growth`, part of `GET /guardian/children/{id}/week`): lessons finished,
 topics made secure, repeated mistakes fixed, times the child got past a wrong

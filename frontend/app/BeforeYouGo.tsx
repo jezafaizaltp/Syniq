@@ -4,8 +4,15 @@ import { useEffect, useRef } from "react";
 import { api } from "@/lib/api";
 import type { Key } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
+import { stepTitle, type MentorStep } from "./learn/Mentor";
 
-export type Today = { answered: number; right: number; topics: { title: string; progress: string }[] };
+export type Today = {
+  answered: number;
+  right: number;
+  topics: { title: string; progress: string }[];
+  lessons?: number;
+  next?: MentorStep | null;
+};
 
 export async function loadToday(): Promise<Today | null> {
   try {
@@ -44,7 +51,7 @@ export default function BeforeYouGo({ today, onSignOut, onStay }: { today: Today
     <div className="modal-backdrop" onKeyDown={onKey}>
       <div ref={box} className="card modal" role="dialog" aria-modal="true" aria-labelledby="byg-title">
         <h2 id="byg-title">{t("today.title")}</h2>
-        <p>{t("today.answered", { n: today.answered })}</p>
+        {today.answered > 0 && <p>{t("today.answered", { n: today.answered })}</p>}
         {today.topics.length > 0 && (
           <>
             <p>{t("today.topics")}</p>
@@ -56,6 +63,12 @@ export default function BeforeYouGo({ today, onSignOut, onStay }: { today: Today
               ))}
             </ul>
           </>
+        )}
+        {!!today.lessons && <p>{t(today.lessons === 1 ? "today.lessons_one" : "today.lessons", { n: today.lessons })}</p>}
+        {today.next && (
+          <p>
+            {t("today.next")} <strong>{stepTitle(t, today.next)}</strong>
+          </p>
         )}
         <p className="muted">{t("today.see_you")}</p>
         <div className="row">
