@@ -172,12 +172,12 @@ def test_every_tip_tag_is_defined():
     assert not missing, sorted(missing)
 
 
-def test_every_kerala9_maths_and_science_lesson_step_can_be_explained_another_way():
-    """The pilot: every idea in Maths, Physics, Chemistry and Biology has at least two ways to explain it."""
+def test_every_kerala9_lesson_step_can_be_explained_another_way():
+    """The pilot: every idea in Maths, Science, Social Science, English and IT has at least two ways to explain it."""
     one_way = [
         f"{c['code']} step {n}"
         for path, pack in PACKS
-        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology")
+        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology", "social-science", "english", "it")
         for c in pack["concepts"]
         for n, step in enumerate(c.get("lesson") or [], start=1)
         if not step.get("ways")
