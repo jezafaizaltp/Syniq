@@ -14,6 +14,12 @@ tips:
   t7_round_lakh: "Look at the ten-thousands digit. Below 5, round down to the lakh below; 5 or more, round up."
   t7_round_then_multiply: "Round 1,248 to the nearest hundred first, then multiply by 6."
   t7_round_thousand: "Round each number to the nearest thousand first, then add the rounded numbers."
+  c7m1_commas: 'Indian commas: first after 3 digits from the right, then after every 2 digits.'
+  c7m1_places: "Count places from the right, one digit at a time, naming each place as you go. Each Indian comma starts a new group."
+  c7m1_convert: 1 million = 10 lakh and 1 crore = 10 million. Multiply or divide by 10 as needed.
+  c7m1_round: 'Look only at the digit just to the right of the place you round to: 5 or more goes up, less than 5 stays.'
+  c7m1_estimate: Round each number first, then do the easy sum or product.
+  c7m1_zeros: Count the zeros in each number and add them when you multiply.
 concepts:
 - code: cbse7m.large.read
   title: Reading and writing large numbers
@@ -111,6 +117,59 @@ concepts:
           l: 0
           t: 50
         say: 4 crore is 40 million. 4 million is 40 lakh.
+  lesson:
+    - teach: In the Indian system, places go ones, tens, hundreds, thousands, ten thousands, lakhs, ten lakhs, crores. 1 lakh = 1,00,000 and 1 crore = 1,00,00,000 = 100 lakh. Commas come after the first 3 digits from the right, then after every 2 digits.
+      picture:
+        kind: compare
+        columns:
+        - title: Indian
+          points:
+          - 1,00,000 = 1 lakh
+          - 10,00,000 = 10 lakh
+          - 1,00,00,000 = 1 crore
+        - title: International
+          points:
+          - 100,000 = hundred thousand
+          - 1,000,000 = 1 million
+          - 10,000,000 = 10 million
+        alt: 1 lakh is a hundred thousand, 10 lakh is a million, and 1 crore is 10 million.
+      check:
+        prompt: Where do the commas go in 45678912 in the Indian system?
+        options:
+        - 4,56,78,912
+        - 45,678,912
+        - 456,78,912
+        answer: 4,56,78,912
+        why: First comma after 3 digits from the right (912), then every 2 digits.
+    - teach: 'The international system puts commas every 3 digits: thousands, millions, billions. 1 million = 10 lakh, and 1 billion = 100 crore.'
+      check:
+        prompt: How many lakh make 5 million?
+        options:
+        - '50'
+        - '5'
+        - '500'
+        answer: '50'
+        why: 1 million = 10 lakh, so 5 million = 50 lakh.
+    - teach: 'To compare large numbers, first count the digits: more digits means larger. If the digits are equal, compare from the left until two digits differ.'
+      picture:
+        kind: compare
+        columns:
+        - title: 4,58,201
+          points:
+          - 6 digits
+          - 4 lakh …
+        - title: 4,61,009
+          points:
+          - 6 digits
+          - 4 lakh 6 ten-thousands … larger
+        alt: Both numbers have 6 digits; the lakh digits are both 4; the ten-thousand digits are 5 and 6, so 4,61,009 is larger.
+      check:
+        prompt: 'Which is larger: 7,89,999 or 8,00,001?'
+        options:
+        - 8,00,001
+        - 7,89,999
+        answer: 8,00,001
+        why: Both have 6 digits; the lakh digit 8 beats 7.
   items:
   - prompt: How many zeros are there in one lakh?
     answer: '5'
@@ -175,6 +234,114 @@ concepts:
     - 1 followed by 7 zeros.
     solution: 10000000 has 8 digits.
     mistakes: {"7": "t7_crore_digits", "9": "t7_crore_digits"}
+  - prompt: Write 'six lakh four thousand thirty' in figures. How many digits does it have?
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - Six lakh is a 6-digit number.
+    - 6,04,030
+    solution: 'Step 1: six lakh = 6,00,000. Step 2: add 4,000 and 30 to get 6,04,030. Step 3: it has 6 digits.'
+    mistakes:
+      '5': c7m1_places
+      '7': c7m1_places
+  - prompt: How many thousands make one lakh?
+    answer: '100'
+    check: 100000/1000
+    difficulty: 1
+    hints:
+    - 1 lakh = 1,00,000.
+    - Divide by 1,000.
+    solution: 'Step 1: 1,00,000 ÷ 1,000. Step 2: that is 100. So 100 thousands make a lakh.'
+    mistakes:
+      '10': c7m1_zeros
+      '1000': c7m1_zeros
+  - prompt: A city has 25 lakh people. How many million is that?
+    answer: '2.5'
+    check: 25/10
+    difficulty: 2
+    hints:
+    - 10 lakh make 1 million.
+    - Divide the lakhs by 10.
+    solution: 'Step 1: 1 million = 10 lakh. Step 2: 25 ÷ 10 = 2.5. So 2.5 million.'
+    mistakes:
+      '25': c7m1_convert
+      '250': c7m1_convert
+  - prompt: Which is 1,20,05,300 in words?
+    options:
+    - One crore twenty lakh five thousand three hundred
+    - Twelve crore five thousand three hundred
+    - One crore two lakh fifty-three hundred
+    answer: One crore twenty lakh five thousand three hundred
+    difficulty: 2
+    hints:
+    - 'Read group by group: 1 | 20 | 05 | 300.'
+    - The groups are crore, lakh, thousand, then hundreds.
+    solution: 'Step 1: 1 crore. Step 2: 20 lakh. Step 3: 05 thousand. Step 4: 300. Together: one crore twenty lakh five thousand three hundred.'
+    mistakes:
+      Twelve crore five thousand three hundred: c7m1_commas
+      One crore two lakh fifty-three hundred: c7m1_commas
+  - prompt: In 3,47,92,615, what is the place of the digit 7?
+    options:
+    - Lakhs
+    - Ten lakhs
+    - Ten thousands
+    answer: Lakhs
+    difficulty: 2
+    hints:
+    - Count places from the right.
+    - 615 is ones-tens-hundreds; 92 is thousands-ten thousands; then?
+    solution: 'Step 1: from the right, 5 ones, 1 tens, 6 hundreds, 2 thousands, 9 ten thousands. Step 2: the next digit 7 is in the lakhs place.'
+    mistakes:
+      Ten lakhs: c7m1_places
+      Ten thousands: c7m1_places
+  - prompt: How many crore make one billion?
+    answer: '100'
+    check: 1000000000/10000000
+    difficulty: 3
+    hints:
+    - 1 billion has 9 zeros; 1 crore has 7.
+    - 'Divide: the difference in zeros is 2.'
+    solution: 'Step 1: 1,000,000,000 ÷ 1,00,00,000. Step 2: 10⁹ ÷ 10⁷ = 10² = 100. So 100 crore.'
+    mistakes:
+      '10': c7m1_convert
+      '1000': c7m1_convert
+  - prompt: 'Arrange from smallest: 9,99,999; 10,00,000; 9,99,909. Which is the smallest?'
+    options:
+    - 9,99,909
+    - 9,99,999
+    - 10,00,000
+    answer: 9,99,909
+    difficulty: 2
+    hints:
+    - 10,00,000 has 7 digits, so it is largest.
+    - Compare the other two from the left until digits differ.
+    solution: 'Step 1: 10,00,000 is largest (7 digits). Step 2: 9,99,999 vs 9,99,909 differ at the tens: 9 > 0. So 9,99,909 is the smallest.'
+    mistakes:
+      9,99,999: t7_compare_digits
+      10,00,000: t7_compare_digits
+  - prompt: What is the largest 7-digit number? Type it without commas.
+    answer: '9999999'
+    check: 10**7-1
+    difficulty: 1
+    hints:
+    - Use the largest digit in every place.
+    - One less than the smallest 8-digit number.
+    solution: 'Step 1: largest digit is 9. Step 2: seven 9s give 99,99,999. That is 1 crore − 1.'
+    mistakes:
+      '99999999': c7m1_places
+      '1000000': c7m1_places
+  - prompt: '1 crore minus 1 lakh: how many lakh is the answer?'
+    answer: '99'
+    check: 100-1
+    difficulty: 2
+    hints:
+    - 1 crore = 100 lakh.
+    - Take away one lakh.
+    solution: 'Step 1: 1 crore = 100 lakh. Step 2: 100 − 1 = 99 lakh.'
+    mistakes:
+      '9': c7m1_convert
+      '999': c7m1_convert
 - code: cbse7m.large.estimate
   title: Estimating and rounding large numbers
   after:
@@ -230,6 +397,43 @@ concepts:
       - when:
           v: 45000
         say: The hundreds digit is 5. Exactly 5 rounds up.
+  lesson:
+    - teach: 'Some numbers must be exact, like money in a bank. Others can be approximate, like a crowd at a match. To round, look at the digit just right of the place you round to: 5 or more rounds up, less than 5 rounds down.'
+      picture:
+        kind: number_line
+        from: 48000
+        to: 50000
+        step: 1000
+        points:
+        - at: 48763
+          label: 48,763
+        alt: 48,763 sits between 48,000 and 49,000 on the number line, nearer to 49,000.
+      check:
+        prompt: Round 48,763 to the nearest thousand.
+        options:
+        - 49,000
+        - 48,000
+        - 48,800
+        answer: 49,000
+        why: The hundreds digit is 7, which is 5 or more, so round up.
+    - teach: Estimation checks whether an answer makes sense. Round each number first, then calculate. 4,890 + 3,120 is about 5,000 + 3,000 = 8,000.
+      check:
+        prompt: Estimate 6,120 + 2,950 by rounding each to the nearest thousand.
+        options:
+        - 9,000
+        - 8,000
+        - 10,000
+        answer: 9,000
+        why: 6,000 + 3,000 = 9,000.
+    - teach: 'Friendly pairs make products easy: 5 × 2 = 10, 25 × 4 = 100, 125 × 8 = 1000. Rearrange the numbers so the friendly pair goes first: 25 × 37 × 4 = (25 × 4) × 37 = 3,700.'
+      check:
+        prompt: Find 4 × 63 × 25 quickly.
+        options:
+        - 6,300
+        - '630'
+        - 63,000
+        answer: 6,300
+        why: 4 × 25 = 100, and 100 × 63 = 6,300.
   items:
   - prompt: Round 48,763 to the nearest thousand.
     answer: '49000'
@@ -290,3 +494,105 @@ concepts:
     - 1,200 × 6.
     solution: '1,200 × 6 = 7,200 notebooks (exact: 7,488).'
     mistakes: {"7488": "t7_round_then_multiply", "6000": "t7_round_then_multiply"}
+  - prompt: Round 7,64,850 to the nearest ten thousand.
+    answer: '760000'
+    check: '760000'
+    difficulty: 2
+    hints:
+    - Look at the thousands digit.
+    - It is 4, less than 5.
+    solution: 'Step 1: the ten-thousands digit is 6. Step 2: the next digit is 4, less than 5, so round down. Step 3: 7,60,000.'
+    mistakes:
+      '770000': c7m1_round
+      '765000': c7m1_round
+  - prompt: Round 2,58,000 to the nearest lakh.
+    answer: '300000'
+    check: '300000'
+    difficulty: 2
+    hints:
+    - Look at the ten-thousands digit.
+    - It is 5.
+    solution: 'Step 1: the lakh digit is 2. Step 2: the next digit 5 means round up. Step 3: 3,00,000.'
+    mistakes:
+      '200000': c7m1_round
+      '260000': c7m1_round
+  - prompt: Estimate 812 × 49 by rounding to 800 × 50.
+    answer: '40000'
+    check: 800*50
+    difficulty: 2
+    hints:
+    - Multiply 8 × 5 first.
+    - Then count the zeros.
+    solution: 'Step 1: 8 × 5 = 40. Step 2: add three zeros (two from 800, one from 50). Step 3: 40,000.'
+    mistakes:
+      '4000': c7m1_zeros
+      '400000': c7m1_zeros
+  - prompt: Find 125 × 23 × 8 quickly.
+    answer: '23000'
+    check: 125*23*8
+    difficulty: 2
+    hints:
+    - Pair 125 with 8.
+    - 125 × 8 = 1,000.
+    solution: 'Step 1: 125 × 8 = 1,000. Step 2: 1,000 × 23 = 23,000.'
+    mistakes:
+      '2300': t7_friendly_pair
+      '230000': t7_friendly_pair
+  - prompt: Which needs an exact number?
+    options:
+    - The marks on your report card
+    - People at a fair
+    - Stars in the sky
+    answer: The marks on your report card
+    difficulty: 1
+    hints:
+    - Which one would be unfair if it were rounded?
+    - A crowd can be about 5,000.
+    solution: Marks must be exact; crowds and stars are estimated.
+    mistakes:
+      People at a fair: t7_exact_needed
+      Stars in the sky: t7_exact_needed
+  - prompt: A train carries 1,186 people per trip and makes 9 trips. Estimate the total by rounding 1,186 to the nearest hundred.
+    answer: '10800'
+    check: 1200*9
+    difficulty: 2
+    hints:
+    - 1,186 rounds to 1,200.
+    - Multiply by 9.
+    solution: 'Step 1: 1,186 ≈ 1,200. Step 2: 1,200 × 9 = 10,800.'
+    mistakes:
+      '9900': c7m1_round
+      '10674': c7m1_estimate
+  - prompt: Round 5,49,999 to the nearest lakh.
+    answer: '500000'
+    check: '500000'
+    difficulty: 3
+    hints:
+    - Look only at the ten-thousands digit.
+    - It is 4.
+    solution: 'Step 1: the lakh digit is 5. Step 2: the next digit is 4, less than 5, so round down. Step 3: 5,00,000.'
+    mistakes:
+      '600000': c7m1_round
+      '550000': c7m1_round
+  - prompt: A school collects ₹4,950 one week and ₹3,080 the next. About how much is that, to the nearest thousand?
+    answer: '8000'
+    check: 5000+3000
+    difficulty: 1
+    hints:
+    - Round each amount to the nearest thousand.
+    - ₹4,950 ≈ ₹5,000.
+    solution: 'Step 1: 4,950 ≈ 5,000 and 3,080 ≈ 3,000. Step 2: 5,000 + 3,000 = 8,000.'
+    mistakes:
+      '7000': c7m1_estimate
+      '9000': c7m1_estimate
+  - prompt: Find 50 × 47 × 2 quickly.
+    answer: '4700'
+    check: 50*47*2
+    difficulty: 1
+    hints:
+    - Find the friendly pair.
+    - 50 × 2 = 100.
+    solution: 'Step 1: 50 × 2 = 100. Step 2: 100 × 47 = 4,700.'
+    mistakes:
+      '470': t7_friendly_pair
+      '47000': t7_friendly_pair
