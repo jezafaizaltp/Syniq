@@ -173,11 +173,11 @@ def test_every_tip_tag_is_defined():
 
 
 def test_every_kerala9_lesson_step_can_be_explained_another_way():
-    """The pilot: every idea in Maths, Science, Social Science, English and IT has at least two ways to explain it."""
+    """The pilot: every idea in every Kerala Class 9 subject has at least two ways to explain it."""
     one_way = [
         f"{c['code']} step {n}"
         for path, pack in PACKS
-        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology", "social-science", "english", "it")
+        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology", "social-science", "english", "it", "hindi", "malayalam")
         for c in pack["concepts"]
         for n, step in enumerate(c.get("lesson") or [], start=1)
         if not step.get("ways")
