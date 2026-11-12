@@ -117,5 +117,7 @@ def test_week_summary_for_parent_and_days_for_student():
     parent = login("parent@demo.syniq")
     kids = client.get("/guardian/children", headers=parent).json()
     week = client.get(f"/guardian/children/{kids[0]['id']}/week", headers=parent).json()
-    assert set(week) == {"days", "answered", "topics", "achievements"}
+    assert set(week) == {"days", "answered", "topics", "achievements", "grew"}
+    # The child's mentor's good news, for the parent: counts and a way, never a mark.
+    assert set(week["grew"]) == {"lessons", "secured", "fixed", "came_back", "helped_most"}
     assert client.get(f"/guardian/children/{kids[0]['id']}/week", headers=login("mother@demo.syniq")).status_code in (403, 404)

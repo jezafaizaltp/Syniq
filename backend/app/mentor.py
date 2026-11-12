@@ -125,6 +125,12 @@ def plan(db: DbSession, user: User, lang: str = "en") -> dict:
     return {"part_of_day": part_of_day(now), "steps": steps, "week": week(db, user, rows, patterns, now)}
 
 
+def growth(db: DbSession, user: User) -> dict:
+    """This week's good news on its own, for the parent's view of the same week the learner sees."""
+    rows = db.scalars(select(Mastery).where(Mastery.student_id == user.id, Mastery.attempts > 0)).all()
+    return week(db, user, rows, learning.mistake_patterns(db, user.id), utcnow())
+
+
 def week(db: DbSession, user: User, rows: list[Mastery], patterns, now) -> dict:
     since = now - WEEK
     attempts = db.scalars(select(Attempt).where(Attempt.student_id == user.id, Attempt.created_at >= since)).all()

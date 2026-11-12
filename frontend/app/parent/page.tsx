@@ -23,7 +23,8 @@ type Child = {
 type Specialist = { id: number; name: string; title: string; shared_with: number[] };
 type Progress = { questions_practised: number; note: string; concepts: { title: string; progress: string }[] };
 
-type Week = { days: number; answered: number; topics: { title: string; progress: string }[]; achievements?: string[] };
+type Grew = { lessons: number; secured: number; fixed: number; came_back: number; helped_most: string | null };
+type Week = { days: number; answered: number; topics: { title: string; progress: string }[]; achievements?: string[]; grew?: Grew };
 
 const CONSENT_SCOPES = ["core_learning", "mood_checkins", "school_sharing", "thinking_puzzles"] as const;
 type Thinking = { on: boolean; puzzles: number; kinds: { domain: string; trend: "growing" | "steady" | "just_started" }[] };
@@ -124,16 +125,18 @@ export default function Parent() {
           {c.consent.core_learning && weeks[c.id] && (
             <>
               <h3>{t("parent.week_title")}</h3>
-              <p>
-                {weeks[c.id].answered
-                  ? t("parent.week_line", { name: c.name, days: weeks[c.id].days, answered: weeks[c.id].answered })
-                  : t("parent.week_none", { name: c.name })}
-              </p>
+              {weeks[c.id].answered ? (
+                <p>{t("parent.week_line", { name: c.name, days: weeks[c.id].days, answered: weeks[c.id].answered })}</p>
+              ) : (
+                // A lesson with no practice yet is still learning this week: don't say "hasn't practised" above it.
+                !grewAny(weeks[c.id].grew) && <p>{t("parent.week_none", { name: c.name })}</p>
+              )}
               {weeks[c.id].topics.length > 0 && (
                 <p className="muted">
                   {t("parent.week_topics")} {weeks[c.id].topics.map((x) => `${x.title} (${t(`progress.${x.progress}` as Key)})`).join(", ")}
                 </p>
               )}
+              {weeks[c.id].grew && <GrewList grew={weeks[c.id].grew!} name={c.name} />}
               {!!weeks[c.id].achievements?.length && (
                 <p>
                   🏅 {t("parent.week_achievements", { name: c.name })}{" "}
@@ -279,5 +282,29 @@ export default function Parent() {
         </section>
       ))}
     </div>
+  );
+}
+
+const grewAny = (g?: Grew) => !!g && !!(g.lessons || g.secured || g.fixed || g.came_back || g.helped_most);
+
+/** The same good news the child's mentor shows, in a parent's words: one line each, only what is true. */
+function GrewList({ grew, name }: { grew: Grew; name: string }) {
+  const { t } = useSession();
+  const lines: string[] = [];
+  const count = (key: string, n: number) => {
+    if (n) lines.push(t((n === 1 ? `${key}_one` : key) as Key, { n, name }));
+  };
+  count("parent.grew_lessons", grew.lessons);
+  count("parent.grew_secured", grew.secured);
+  count("parent.grew_fixed", grew.fixed);
+  count("parent.grew_came_back", grew.came_back);
+  if (grew.helped_most) lines.push(t("parent.grew_helped", { name, way: t(`way.${grew.helped_most}` as Key) }));
+  if (!lines.length) return null;
+  return (
+    <ul className="parent-grew">
+      {lines.map((l) => (
+        <li key={l}>{l}</li>
+      ))}
+    </ul>
   );
 }

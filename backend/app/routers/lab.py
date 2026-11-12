@@ -285,7 +285,14 @@ def child_week(student_id: int, db: DbSession = Depends(get_db), user: User = De
     from .. import rewards
 
     # New achievements, as words in the app: a moment to notice together, never a score.
-    return {**_week_summary(db, student_id), "achievements": rewards.new_this_week(db, db.get(User, student_id), utcnow())}
+    from .. import mentor
+
+    child = db.get(User, student_id)
+    g = mentor.growth(db, child)
+    # The same good news the child's mentor shows: lessons finished, topics made secure, mistakes fixed,
+    # getting past a wrong answer, and the way of explaining that has helped most lately. Never a mark.
+    grew = {k: g[k] for k in ("lessons", "secured", "fixed", "came_back", "helped_most")}
+    return {**_week_summary(db, student_id), "achievements": rewards.new_this_week(db, child, utcnow()), "grew": grew}
 
 
 @router.get("/me/days", tags=["student"])
