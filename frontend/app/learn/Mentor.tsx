@@ -66,17 +66,21 @@ export default function Mentor({ onOpen }: { onOpen: (chapterId: number) => void
 
   const w = plan.week;
   const growth: string[] = [];
-  if (w.days) growth.push(t("mentor.week_days", { n: w.days }));
-  if (w.secured) growth.push(t("mentor.week_secured", { n: w.secured }));
-  if (w.fixed) growth.push(t("mentor.week_fixed", { n: w.fixed }));
-  if (w.lessons) growth.push(t("mentor.week_lessons", { n: w.lessons }));
-  if (w.came_back) growth.push(t("mentor.week_came_back", { n: w.came_back }));
+  // One or many: "You finished a lesson", "You finished 3 lessons".
+  const count = (key: string, n: number) => {
+    if (n) growth.push(t((n === 1 ? `${key}_one` : key) as Key, { n }));
+  };
+  count("mentor.week_days", w.days);
+  count("mentor.week_secured", w.secured);
+  count("mentor.week_fixed", w.fixed);
+  count("mentor.week_lessons", w.lessons);
+  count("mentor.week_came_back", w.came_back);
   if (w.helped_most) growth.push(t("mentor.week_helped", { way: t(`way.${w.helped_most}` as Key) }));
   const steps = plan.steps.filter((s) => s.kind !== "first_lesson");
 
   return (
     <section className="card mentor-card" aria-labelledby="mentor-hello">
-      <h2 id="mentor-hello">{t(`mentor.${plan.part_of_day}` as Key, { name: me.name.split(" ")[0] })}</h2>
+      <h2 id="mentor-hello">{t(`mentor.${plan.part_of_day}` as Key)}</h2>
       {steps.length > 0 ? (
         <>
           <p className="muted">{t("mentor.plan")}</p>

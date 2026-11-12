@@ -24,7 +24,7 @@ from sqlalchemy.orm import Session as DbSession
 from . import learning
 from .engine import mastery as m
 from .engine import methods
-from .models import Attempt, Chapter, Concept, Item, LearningEvent, Mastery, Subject, User, utcnow
+from .models import Attempt, Chapter, Concept, Decision, Item, LearningEvent, Mastery, Subject, User, utcnow
 
 IST = timedelta(hours=5, minutes=30)
 WEEK = timedelta(days=7)
@@ -48,14 +48,23 @@ def _where(db: DbSession, concept_id: int) -> dict | None:
     return {"concept_id": concept.id, "topic": concept.title, "chapter_id": chapter.id, "chapter": chapter.title, "subject": subject.name}
 
 
+def _last_topic(db: DbSession, user: User, rows: list[Mastery]) -> int | None:
+    """The topic worked on last: the latest answer, or else the latest lesson or explanation (no answers yet)."""
+    if rows:
+        return max(rows, key=lambda r: r.updated_at or utcnow()).concept_id
+    return db.scalars(
+        select(Decision.concept_id)
+        .where(Decision.student_id == user.id, Decision.concept_id.is_not(None))
+        .order_by(Decision.created_at.desc(), Decision.id.desc())
+    ).first()
+
+
 def _carry_on(db: DbSession, user: User, rows: list[Mastery]) -> dict | None:
     """The next topic to learn in the chapter worked on last, or the next chapter once that one is secure."""
     from .routers.student import next_chapter  # the same rule the end of a chapter uses
 
-    if not rows:
-        return None
-    last = max(rows, key=lambda r: r.updated_at or utcnow())
-    concept = db.get(Concept, last.concept_id)
+    last = _last_topic(db, user, rows)
+    concept = db.get(Concept, last) if last else None
     if not concept:
         return None
     practisable = select(Item.concept_id).where(Item.status == "approved")
@@ -66,7 +75,8 @@ def _carry_on(db: DbSession, user: User, rows: list[Mastery]) -> dict | None:
         if not r or not m.is_secure(r.p_known, r.attempts):
             where = _where(db, t.id)
             if where:
-                where["started"] = bool(r and r.attempts)
+                # Taught already (a lesson or an explanation), even with nothing answered yet: carry on.
+                where["started"] = bool(r) or t.id == last
             return where
     nxt = next_chapter(db, user, concept.chapter_id)
     if not nxt:
@@ -109,7 +119,7 @@ def plan(db: DbSession, user: User, lang: str = "en") -> dict:
     carry = _carry_on(db, user, rows)
     if carry and (carry["concept_id"] is None or carry["concept_id"] not in used) and len(steps) < MAX_STEPS:
         steps.append({"kind": "carry_on" if carry.pop("started") else "start_topic", **carry})
-    if not rows:
+    if not steps:
         steps.append({"kind": "first_lesson"})
 
     return {"part_of_day": part_of_day(now), "steps": steps, "week": week(db, user, rows, patterns, now)}

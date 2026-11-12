@@ -108,6 +108,9 @@ def test_mentor_starts_a_new_learner_and_then_points_the_way():
         concept = db.scalars(select(Concept).where(Concept.code == "math9.pairs.sum_difference")).first()
         chapter_id = concept.chapter_id
     step = client.post("/learn/next", json={"chapter_id": chapter_id}, headers=h).json()
+    # Taught the lesson, nothing answered yet: carry on with that topic.
+    first = client.get("/me/mentor", headers=h).json()["steps"]
+    assert first[0]["kind"] == "carry_on" and first[0]["chapter_id"] == chapter_id
     step = client.post("/learn/next", json={"chapter_id": chapter_id, "current_concept_id": step["concept"]["id"]}, headers=h).json()
     item = step["item"]
     for _ in range(3):
