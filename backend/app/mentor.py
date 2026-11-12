@@ -24,7 +24,7 @@ from sqlalchemy.orm import Session as DbSession
 from . import learning
 from .engine import mastery as m
 from .engine import methods
-from .models import Attempt, Chapter, Concept, Decision, Item, LearningEvent, Mastery, Subject, User, utcnow
+from .models import Attempt, Chapter, Concept, Decision, Goal, Item, LearningEvent, Mastery, Subject, User, utcnow
 
 IST = timedelta(hours=5, minutes=30)
 WEEK = timedelta(days=7)
@@ -122,7 +122,16 @@ def plan(db: DbSession, user: User, lang: str = "en") -> dict:
     if not steps:
         steps.append({"kind": "first_lesson"})
 
-    return {"part_of_day": part_of_day(now), "steps": steps, "week": week(db, user, rows, patterns, now)}
+    return {"part_of_day": part_of_day(now), "steps": steps, "week": week(db, user, rows, patterns, now), "goal": _goal(db, user)}
+
+
+def _goal(db: DbSession, user: User) -> dict | None:
+    """The learner's own goal from My space that comes due first (or the newest with no date), as a reminder."""
+    goals = db.scalars(select(Goal).where(Goal.student_id == user.id, Goal.done.is_(False))).all()
+    if not goals:
+        return None
+    g = min(goals, key=lambda g: (g.due_on is None, g.due_on or "", -g.id))
+    return {"text": g.text, "due_on": g.due_on}
 
 
 def growth(db: DbSession, user: User) -> dict:

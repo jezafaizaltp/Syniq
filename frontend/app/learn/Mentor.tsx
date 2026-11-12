@@ -23,7 +23,12 @@ type Week = {
   came_back: number;
   helped_most: string | null;
 };
-export type MentorPlan = { part_of_day: "morning" | "afternoon" | "evening"; steps: MentorStep[]; week: Week };
+export type MentorPlan = {
+  part_of_day: "morning" | "afternoon" | "evening";
+  steps: MentorStep[];
+  week: Week;
+  goal?: { text: string; due_on: string | null } | null;
+};
 
 /** A next step in the learner's words: "Revise Linear equations", "Carry on with ...". */
 export function stepTitle(t: (key: Key, vars?: Record<string, string | number>) => string, s: MentorStep): string {
@@ -110,6 +115,12 @@ export default function Mentor({ onOpen }: { onOpen: (chapterId: number) => void
         </>
       ) : (
         <p>{t("mentor.first_lesson")}</p>
+      )}
+      {plan.goal && (
+        <p className="mentor-goal">
+          🎯 {t("mentor.your_goal")} <strong>{plan.goal.text}</strong>
+          {plan.goal.due_on && <span className="muted"> · {t("space.by", { date: plan.goal.due_on })}</span>}
+        </p>
       )}
       {(growth.length > 0 || w.answered === 0) && steps.length > 0 && (
         <div className="mentor-week">

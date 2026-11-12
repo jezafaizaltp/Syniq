@@ -75,7 +75,8 @@ Counts only, never names.
 
 The student's home page opens with their mentor (`app/mentor.py`, `GET
 /me/mentor`): a hello for the time of day in India, at most three next steps,
-most useful first, and what went well this week.
+most useful first, the learner's own goal from My space that comes due first,
+and what went well this week.
 
 1. A mistake made more than once and not fixed yet (a few questions that
    catch it; three right and it is fixed).

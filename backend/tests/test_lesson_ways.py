@@ -177,3 +177,12 @@ def test_teacher_sees_lesson_ideas_the_class_found_hard_and_what_helped():
     row = next(r for r in rows if r["concept_id"] == cid and r["idea"] == 2)
     assert row["tried"] == 3 and row["missed_first"] == 2 and row["helped"] == second_way
     assert row["check"] == check["prompt"] and "Class" not in str(row)  # counts only, no names
+
+
+def test_mentor_reminds_the_learner_of_their_own_goal():
+    new_student("gita.goal@demo.syniq")
+    h = login("gita.goal@demo.syniq")
+    assert client.get("/me/mentor", headers=h).json()["goal"] is None
+    client.post("/me/goals", json={"text": "Finish Pairs of Equations", "due_on": None}, headers=h)
+    client.post("/me/goals", json={"text": "Revise motion", "due_on": "2026-12-01"}, headers=h)
+    assert client.get("/me/mentor", headers=h).json()["goal"] == {"text": "Revise motion", "due_on": "2026-12-01"}  # due first
