@@ -129,6 +129,15 @@ def choose(
     return best, "history"
 
 
+def ranked(topic_stats: dict | None, prior: Prior | None, preferred: str | None = None, ties: list[str] | None = None) -> list[str]:
+    """All methods, most likely to work first: the learner's own choice, then by score, then `ties`."""
+    order = ties or STYLES
+    out = sorted(STYLES, key=lambda s: (-round(score(s, topic_stats, prior), 9), order.index(s) if s in order else len(order)))
+    if preferred in STYLES:
+        out = [preferred] + [s for s in out if s != preferred]
+    return out
+
+
 def best_method(stats: dict | None, minimum: int = CLEAR_PATTERN_MIN) -> str | None:
     """The method that has clearly helped most, once there's enough evidence, else None."""
     rated = [(s, *counts(stats, s)) for s in STYLES]

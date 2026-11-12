@@ -42,6 +42,7 @@ import Mistake from "./Mistake";
 import { methodName } from "../space/Methods";
 import Picture, { type PictureSpec } from "./Picture";
 import Activity, { type ActivitySpec } from "./Activity";
+import Mentor from "./Mentor";
 import Lesson, { type LessonStep } from "./Lesson";
 import Notes from "./Notes";
 import ReadAlong from "./ReadAlong";
@@ -102,10 +103,6 @@ type SpotResult = {
   star_earned?: boolean;
   stars: number | null;
   new_sticker?: string | null;
-};
-type Overview = {
-  subjects: { id: number; name: string; carry_on: { chapter_id: number; title: string } }[];
-  review_due: { concept_id: number; title: string; chapter_id: number }[];
 };
 /** What the student said before starting: easier first questions if they feel low, and how long they have. */
 type Prefs = { gentle: boolean; minutes: number };
@@ -178,7 +175,6 @@ export default function Learn() {
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [chapter, setChapter] = useState<ChapterDetail | null>(null);
   const [prefs, setPrefs] = useState<Prefs | null>(null);
-  const [overview, setOverview] = useState<Overview | null>(null);
   const [checks, setChecks] = useState<CheckRow[]>([]);
   const [activeCheck, setActiveCheck] = useState<ActiveCheck | null>(null);
   const canLearn = me?.role === "student" && !!me.consent?.core_learning;
@@ -206,10 +202,6 @@ export default function Learn() {
   useEffect(() => {
     if (canLearn) loadChecks();
   }, [canLearn]);
-
-  useEffect(() => {
-    if (canLearn && !chapter) api<Overview>("/me/overview").then(setOverview).catch(() => setOverview(null));
-  }, [canLearn, chapter]);
 
   // Opened from "My space" with ?chapter=<id> (revise a topic, carry on a chapter).
   useEffect(() => {
@@ -280,8 +272,6 @@ export default function Learn() {
     );
   }
 
-  const due = overview?.review_due[0];
-  const carryOn = overview?.subjects[0]?.carry_on;
 
   return (
     <div className="wrap">
@@ -317,14 +307,7 @@ export default function Learn() {
               </button>
             </div>
           )}
-          {(due || carryOn) && (
-            <div className="card next-step-card">
-              <h2>{t("next.title")}</h2>
-              <button onClick={async () => setChapter(await api<ChapterDetail>(`/chapters/${due ? due.chapter_id : carryOn!.chapter_id}`))}>
-                {due ? t("next.revise", { topic: due.title }) : t("next.carry_on", { chapter: carryOn!.title })}
-              </button>
-            </div>
-          )}
+          <Mentor onOpen={async (id) => setChapter(await api<ChapterDetail>(`/chapters/${id}`))} />
           {roundsDue.length > 0 && (
             <div className="card sunny">
               <h2>{t(`check.round_open.${roundsDue[0].kind}` as Key)}</h2>

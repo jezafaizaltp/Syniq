@@ -237,10 +237,8 @@ def method_priors(db: DbSession, student_id: int, concept_ids: list[int]) -> dic
     return out
 
 
-def next_action(
-    db: DbSession, student: User, chapter_id: int, current_concept_id: int | None, gentle: bool = False
-) -> tuple[Action, Decision]:
-    chapter, states = build_states(db, student, chapter_id)
+def style_lean(db: DbSession, student: User) -> tuple[str | None, list[str] | None, str | None]:
+    """(chosen style, order when the evidence is even, puzzle lean): what sets the first way before answers do."""
     settings = student.settings or {}
     preferred = settings.get("preferred_style")
     if not preferred and "visual_first" in detect.effective_support(settings):
@@ -253,6 +251,26 @@ def next_action(
     puzzle_lean = thinking_lean(db, student, grade)
     if puzzle_lean:
         ties = [puzzle_lean] + [s for s in (ties or methods.STYLES) if s != puzzle_lean]
+    return preferred, ties, puzzle_lean
+
+
+def style_order(db: DbSession, student: User, concept_id: int) -> list[str]:
+    """Every way of explaining, the one most likely to work for this learner on this topic first.
+
+    Same evidence as the first explanation (engine/methods.py): this topic, the subject, other subjects and
+    similar learners, plus the learner's own choice. Used to order a lesson's ways for each step."""
+    preferred, ties, _ = style_lean(db, student)
+    row = db.scalars(select(Mastery).where(Mastery.student_id == student.id, Mastery.concept_id == concept_id)).first()
+    prior = method_priors(db, student.id, [concept_id]).get(concept_id)
+    return methods.ranked((row.format_stats if row else None), prior, preferred, ties)
+
+
+def next_action(
+    db: DbSession, student: User, chapter_id: int, current_concept_id: int | None, gentle: bool = False
+) -> tuple[Action, Decision]:
+    chapter, states = build_states(db, student, chapter_id)
+    settings = student.settings or {}
+    preferred, ties, puzzle_lean = style_lean(db, student)
     now = utcnow()
     # A topic whose questions have all been answered in this sitting is set aside for now:
     # moving to another topic beats asking the same questions again.
