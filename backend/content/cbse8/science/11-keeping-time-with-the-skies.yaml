@@ -15,6 +15,11 @@ tips:
   t8_orbit_tilt: "The Moon goes round us every month, but its path is tilted. Do the three bodies line up every time?"
   t8_red_moon: "During a lunar eclipse the Earth's air bends a little red sunlight into its shadow."
   t8_solar_eclipse: "In a solar eclipse the Sun is hidden. Which body blocks it?"
+  c8s11_lit_half: The Sun always lights half of the Moon. The phase depends on how much of that lit half faces us.
+  c8s11_order: After new moon the lit part grows (waxing) until full moon, then shrinks (waning).
+  c8s11_count_days: A lunar month is about 29.5 days; a solar year about 365¼. Compare 12 lunar months with a year.
+  c8s11_middle: In an eclipse, the body in the middle casts the shadow. Which one is in the middle here?
+  c8s11_eyes: Looking straight at the Sun, even partly covered, can burn the eye. Which way never points your eyes at it?
 
 concepts:
 - code: cbse8s.sky.moon
@@ -77,6 +82,58 @@ concepts:
       - when:
           v: 15
         say: That's the full moon. The last quarter is a week later.
+  lesson:
+    - teach: 'The Moon makes no light of its own; it shines by reflecting sunlight. The Sun always lights half of the Moon. As the Moon goes round the Earth, we see different amounts of that lit half: these are its phases.'
+      picture:
+        kind: flow
+        steps:
+        - New moon
+        - Waxing crescent
+        - First quarter
+        - Waxing gibbous
+        - Full moon
+        - Waning back
+        alt: The Moon's phases go from new moon through crescent, quarter and gibbous to full moon, then wane back.
+      check:
+        prompt: Why do we see phases of the Moon?
+        options:
+        - We see different amounts of its sunlit half as it orbits
+        - The Earth's shadow covers it each night
+        - The Moon changes shape
+        answer: We see different amounts of its sunlit half as it orbits
+        why: Half the Moon is always lit; its position decides how much of that half faces us.
+    - teach: 'At new moon (amavasya) the Moon is between the Earth and the Sun, so its lit side faces away and we see nothing. At full moon (purnima) the Earth is between, and we see the whole lit face. A full cycle takes about 29.5 days: a lunar month.'
+      picture:
+        kind: compare
+        columns:
+        - title: New moon (amavasya)
+          points:
+          - Moon between Earth and Sun
+          - Lit side faces away
+          - Moon not seen
+        - title: Full moon (purnima)
+          points:
+          - Earth between Sun and Moon
+          - Lit side faces us
+          - Whole disc seen
+        alt: At new moon the Moon is between Earth and Sun and can't be seen; at full moon the Earth is between and the whole disc shows.
+      check:
+        prompt: About how many days pass from one full moon to the next?
+        options:
+        - '29.5'
+        - '7'
+        - '365'
+        answer: '29.5'
+        why: One full cycle of phases takes about 29.5 days.
+    - teach: 'A solar year is about 365¼ days, so every 4 years the quarter-days add up to an extra day: a leap year with 29 February. Twelve lunar months make only about 354 days, so lunar calendars slip against the seasons; many Indian calendars add an extra month (adhik maas) now and then to stay in step.'
+      check:
+        prompt: Why do we have a leap year every 4 years?
+        options:
+        - Four quarter-days add up to one extra day
+        - The Moon slows down
+        - To match the school year
+        answer: Four quarter-days add up to one extra day
+        why: ¼ + ¼ + ¼ + ¼ = 1 day, added as 29 February.
   items:
   - prompt: Why does the Moon shine?
     options:
@@ -152,6 +209,123 @@ concepts:
     - A round bright disc.
     solution: We see the whole lit face at full moon (purnima).
     mistakes: {"New moon": "t8_full_moon", "Crescent": "t8_full_moon"}
+  - prompt: Which phase comes right after new moon?
+    options:
+    - Waxing crescent
+    - Full moon
+    - Waning gibbous
+    answer: Waxing crescent
+    difficulty: 1
+    hints:
+    - After new moon the lit part starts to grow.
+    - First a thin curve appears.
+    solution: 'After new moon a thin, growing crescent appears: the waxing crescent.'
+    mistakes:
+      Full moon: c8s11_order
+      Waning gibbous: c8s11_order
+  - prompt: At full moon, where is the Earth?
+    options:
+    - Between the Sun and the Moon
+    - Behind the Sun
+    - Beside the Moon on the same side
+    answer: Between the Sun and the Moon
+    difficulty: 2
+    hints:
+    - We see the whole lit face.
+    - The Sun is behind us, lighting the Moon's face.
+    solution: At full moon the Earth lies between the Sun and the Moon, so we see the fully lit face.
+    mistakes:
+      Behind the Sun: t8_full_moon
+      Beside the Moon on the same side: t8_full_moon
+  - prompt: Waxing means the lit part we see is…
+    options:
+    - Growing
+    - Shrinking
+    - Staying the same
+    answer: Growing
+    difficulty: 1
+    hints:
+    - Waxing comes after new moon.
+    - It leads to full moon.
+    solution: Waxing means the lit part grows each night, from new moon towards full moon.
+    mistakes:
+      Shrinking: c8s11_order
+      Staying the same: c8s11_order
+  - prompt: About how many days do 12 lunar months add up to? Round to the nearest whole number.
+    answer: '354'
+    check: round(12*29.5)
+    difficulty: 2
+    hints:
+    - One lunar month is about 29.5 days.
+    - 12 × 29.5.
+    solution: 12 × 29.5 = 354 days, about 11 days short of a solar year.
+    mistakes:
+      '365': c8s11_count_days
+      '360': c8s11_count_days
+  - prompt: How many days does a leap year have?
+    answer: '366'
+    check: 365 + 1
+    difficulty: 1
+    hints:
+    - A normal year has 365.
+    - One day is added.
+    solution: 365 + 1 = 366 days, with 29 February.
+    mistakes:
+      '365': t8_leap_year
+      '364': t8_leap_year
+  - prompt: Which year is a leap year?
+    options:
+    - '2028'
+    - '2026'
+    - '2027'
+    answer: '2028'
+    difficulty: 2
+    hints:
+    - Leap years can be divided exactly by 4.
+    - 2028 ÷ 4 = 507.
+    solution: 2028 is divisible by 4, so it is a leap year; 2026 and 2027 are not.
+    mistakes:
+      '2026': t8_leap_year
+      '2027': t8_leap_year
+  - prompt: The Moon looks bright at night although it makes no light. Why?
+    options:
+    - It reflects sunlight
+    - It glows from inside
+    - It reflects light from the Earth's cities
+    answer: It reflects sunlight
+    difficulty: 1
+    hints:
+    - Where does the light come from?
+    - The Sun lights it like a lamp lights a ball.
+    solution: The Moon reflects sunlight towards us.
+    mistakes:
+      It glows from inside: t8_moon_reflects
+      It reflects light from the Earth's cities: t8_moon_reflects
+  - prompt: Lunar calendars fall about 11 days behind the solar year each year. After about 3 years, how far behind are they, in days?
+    answer: '33'
+    check: 3*11
+    difficulty: 3
+    hints:
+    - 11 days each year.
+    - 3 × 11.
+    solution: 3 × 11 = 33 days, about one month, which is why an extra month (adhik maas) is added.
+    mistakes:
+      '11': t8_adhik_maas
+      '14': t8_adhik_maas
+  - prompt: At new moon, why can't we see the Moon?
+    options:
+    - Its lit side faces away from us
+    - It is hidden behind the Sun
+    - The Earth's shadow covers it
+    answer: Its lit side faces away from us
+    difficulty: 2
+    hints:
+    - The Moon is between the Earth and the Sun.
+    - Which side is lit?
+    solution: The Sun lights the side facing it, which is away from us, so we see a dark Moon.
+    mistakes:
+      It is hidden behind the Sun: c8s11_lit_half
+      The Earth's shadow covers it: c8s11_lit_half
 - code: cbse8s.sky.eclipse
   title: Eclipses and Indian astronomy
   after:
@@ -224,6 +398,48 @@ concepts:
       bin: Lunar eclipse
       clue: Everyone who can see the Moon sees it.
       why: Lunar.
+  lesson:
+    - teach: 'A solar eclipse happens when the Moon passes between the Sun and the Earth, and the Moon''s shadow falls on the Earth. It can only happen at new moon. Never look at the Sun directly, even during an eclipse: use eclipse glasses or a pinhole projector.'
+      picture:
+        kind: flow
+        steps:
+        - Sun
+        - Moon (in the middle)
+        - Earth in the Moon's shadow
+        alt: In a solar eclipse the Moon is in the middle and its shadow falls on the Earth.
+      check:
+        prompt: In a solar eclipse, whose shadow falls on whom?
+        options:
+        - The Moon's shadow falls on the Earth
+        - The Earth's shadow falls on the Moon
+        - The Sun's shadow falls on the Moon
+        answer: The Moon's shadow falls on the Earth
+        why: The Moon is in the middle and blocks sunlight from part of the Earth.
+    - teach: A lunar eclipse happens when the Earth comes between the Sun and the Moon, and the Earth's shadow falls on the Moon. It can only happen at full moon. The Moon often looks red, because a little sunlight bends through the Earth's atmosphere onto it.
+      picture:
+        kind: flow
+        steps:
+        - Sun
+        - Earth (in the middle)
+        - Moon in the Earth's shadow
+        alt: In a lunar eclipse the Earth is in the middle and its shadow falls on the Moon.
+      check:
+        prompt: A lunar eclipse can happen only at…
+        options:
+        - Full moon
+        - New moon
+        - First quarter
+        answer: Full moon
+        why: Only at full moon are the Sun, Earth and Moon lined up with the Earth in the middle.
+    - teach: Eclipses don't happen every month because the Moon's path is slightly tilted compared with the Earth's, so the three usually don't line up exactly. Around 500 CE the Indian astronomer Aryabhata explained eclipses as shadows, not as a demon swallowing the Sun or Moon.
+      check:
+        prompt: Why isn't there an eclipse at every new moon?
+        options:
+        - The Moon's orbit is tilted, so they rarely line up exactly
+        - The Sun is too far away
+        - Clouds hide it
+        answer: The Moon's orbit is tilted, so they rarely line up exactly
+        why: Most months the Moon passes a little above or below the line between the Earth and the Sun.
   items:
   - prompt: In a solar eclipse, which body is in the middle?
     options:
@@ -303,3 +519,129 @@ concepts:
     - Like sunset colours.
     solution: The Earth's atmosphere refracts reddish sunlight into its shadow, lighting the Moon dimly red.
     mistakes: {"The Moon is hot": "t8_red_moon", "The Moon makes red light": "t8_red_moon"}
+  - prompt: In a lunar eclipse, which body is in the middle?
+    options:
+    - The Earth
+    - The Moon
+    - The Sun
+    answer: The Earth
+    difficulty: 1
+    hints:
+    - Whose shadow falls on the Moon?
+    - The middle body casts the shadow.
+    solution: The Earth is in the middle, and its shadow falls on the Moon.
+    mistakes:
+      The Moon: c8s11_middle
+      The Sun: c8s11_middle
+  - prompt: A solar eclipse can happen only at…
+    options:
+    - New moon
+    - Full moon
+    - Last quarter
+    answer: New moon
+    difficulty: 1
+    hints:
+    - The Moon must be between the Sun and the Earth.
+    - Which phase is that?
+    solution: Only at new moon is the Moon between the Sun and the Earth.
+    mistakes:
+      Full moon: t8_solar_eclipse
+      Last quarter: t8_solar_eclipse
+  - prompt: Which is a safe way to see a solar eclipse?
+    options:
+    - Look at a pinhole projection on paper
+    - Look at the Sun through sunglasses
+    - Look at it through binoculars
+    answer: Look at a pinhole projection on paper
+    difficulty: 2
+    hints:
+    - Never point your eyes at the Sun.
+    - Watch an image of it instead.
+    solution: A pinhole projector throws an image on paper, so you never look at the Sun itself.
+    mistakes:
+      Look at the Sun through sunglasses: c8s11_eyes
+      Look at it through binoculars: c8s11_eyes
+  - prompt: Who explained eclipses as shadows around 500 CE?
+    options:
+    - Aryabhata
+    - Edward Jenner
+    - Hans Christian Oersted
+    answer: Aryabhata
+    difficulty: 1
+    hints:
+    - An Indian astronomer.
+    - A satellite was named after him.
+    solution: Aryabhata explained eclipses as the shadows of the Earth and the Moon.
+    mistakes:
+      Edward Jenner: t8_aryabhata
+      Hans Christian Oersted: t8_aryabhata
+  - prompt: During a total lunar eclipse, the Moon often looks…
+    options:
+    - Reddish
+    - Bright blue
+    - Invisible and black
+    answer: Reddish
+    difficulty: 2
+    hints:
+    - Some sunlight bends through the Earth's air.
+    - Like the colour of a sunset.
+    solution: Light bent through the Earth's atmosphere is mostly red, so the Moon glows reddish.
+    mistakes:
+      Bright blue: t8_red_moon
+      Invisible and black: t8_red_moon
+  - prompt: In which eclipse does the Moon block the Sun?
+    options:
+    - Solar eclipse
+    - Lunar eclipse
+    - Both
+    answer: Solar eclipse
+    difficulty: 1
+    hints:
+    - The Sun is hidden.
+    - '''Solar'' is about the Sun.'
+    solution: In a solar eclipse the Moon blocks the Sun's light from part of the Earth.
+    mistakes:
+      Lunar eclipse: c8s11_middle
+      Both: c8s11_middle
+  - prompt: Why can a lunar eclipse be seen from a much wider area than a total solar eclipse?
+    options:
+    - The Earth's big shadow covers the whole Moon, seen from all of night-side Earth
+    - The Moon is brighter than the Sun
+    - Lunar eclipses last only a second
+    answer: The Earth's big shadow covers the whole Moon, seen from all of night-side Earth
+    difficulty: 3
+    hints:
+    - Who can see the Moon at night?
+    - The Moon's shadow on Earth is small.
+    solution: Everyone on the night side sees the shadowed Moon; a total solar eclipse is seen only in the Moon's small shadow.
+    mistakes:
+      The Moon is brighter than the Sun: t8_lunar_eclipse
+      Lunar eclipses last only a second: t8_lunar_eclipse
+  - prompt: Why are eclipses rare compared with new and full moons?
+    options:
+    - The Moon's orbit is tilted, so exact line-ups are rare
+    - The Sun moves away
+    - The Earth stops rotating
+    answer: The Moon's orbit is tilted, so exact line-ups are rare
+    difficulty: 2
+    hints:
+    - The Moon usually passes above or below the Sun–Earth line.
+    - Its path is slightly tilted.
+    solution: Because of the tilt, the Sun, Earth and Moon line up exactly only a few times a year.
+    mistakes:
+      The Sun moves away: t8_orbit_tilt
+      The Earth stops rotating: t8_orbit_tilt
+  - prompt: In a solar eclipse, what is the order of the three bodies?
+    options:
+    - Sun, Moon, Earth
+    - Sun, Earth, Moon
+    - Moon, Sun, Earth
+    answer: Sun, Moon, Earth
+    difficulty: 2
+    hints:
+    - The Moon blocks the Sun.
+    - So the Moon is in the middle.
+    solution: 'Sun – Moon – Earth: the Moon is between, casting its shadow on the Earth.'
+    mistakes:
+      Sun, Earth, Moon: c8s11_middle
+      Moon, Sun, Earth: c8s11_middle

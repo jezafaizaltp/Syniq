@@ -15,6 +15,12 @@ tips:
   t8_plane_image: "Look in a bathroom mirror. Is your image upside down? Bigger? Smaller?"
   t8_refraction: "Reflection is bouncing back and dispersion splits white light into colours. Bending as light enters water has another name."
   t8_shallow_pool: "Light from the pool floor bends at the surface. Where does that make the floor appear?"
+  c8s10_equal_angles: Both angles are measured from the normal, the line at right angles to the mirror. The rule says they are equal.
+  c8s10_from_mirror: Measure the angle from the normal, not from the mirror's surface. The two add up to 90°.
+  c8s10_mirror_kind: Does the job need a wide view (bulging out) or a magnified view (curved in)?
+  c8s10_lens_kind: Thicker in the middle brings light together; thinner in the middle spreads it out.
+  c8s10_speed_change: Light bends because it changes speed when it enters a different material.
+  c8s10_image_far: The image is as far behind the mirror as you are in front. Add both distances.
 concepts:
 - code: cbse8s.light.mirrors
   title: Reflection and mirrors
@@ -100,6 +106,100 @@ concepts:
       - when:
           degrees: 45
         say: 45° is each ray from the normal. The angle between the rays is both added.
+  lesson:
+    - teach: 'Light travels in straight lines and bounces off surfaces: reflection. Draw a normal, a line at right angles to the mirror where the ray hits. The angle of incidence (incoming ray to normal) equals the angle of reflection (reflected ray to normal).'
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 5
+          - 2
+          N:
+          - 5
+          - 8
+          A:
+          - 1
+          - 6
+          B:
+          - 9
+          - 6
+          _L:
+          - 0
+          - 2
+          _R:
+          - 10
+          - 2
+        segments:
+        - - _L
+          - _R
+        - - O
+          - N
+        - - A
+          - O
+        - - O
+          - B
+        angles:
+        - at: O
+          from: A
+          to: N
+          label: i
+        - at: O
+          from: N
+          to: B
+          label: r
+        alt: A ray A to O hits a flat mirror and reflects to B; the angles i and r on either side of the normal ON are equal.
+      check:
+        prompt: A ray hits a mirror with an angle of incidence of 50°. What is the angle of reflection?
+        options:
+        - 50°
+        - 40°
+        - 130°
+        answer: 50°
+        why: The angle of reflection always equals the angle of incidence.
+    - teach: 'A plane (flat) mirror gives an image that is upright, the same size as the object, as far behind the mirror as the object is in front, and laterally inverted: left and right are swapped.'
+      picture:
+        kind: compare
+        columns:
+        - title: You
+          points:
+          - Standing 2 m in front
+          - Right hand raised
+        - title: Your image
+          points:
+          - Upright, same size, 2 m behind
+          - Its left hand raised
+        alt: A plane mirror image is upright, the same size, the same distance behind, with left and right swapped.
+      check:
+        prompt: You raise your right hand in front of a mirror. Which hand does your image raise?
+        options:
+        - Its left hand
+        - Its right hand
+        - Both hands
+        answer: Its left hand
+        why: 'A plane mirror swaps left and right: lateral inversion.'
+    - teach: 'Curved mirrors: a concave mirror curves inwards and can make a magnified image up close, so dentists and shaving mirrors use it; it also focuses light in torches. A convex mirror bulges outwards and always gives a smaller, upright image of a wide area, so vehicles use it as a rear-view mirror.'
+      picture:
+        kind: compare
+        columns:
+        - title: Concave (curves in)
+          points:
+          - Magnifies up close
+          - Dentist's mirror
+          - Torch reflector
+        - title: Convex (bulges out)
+          points:
+          - Smaller image, wide view
+          - Rear-view mirror
+          - Road-bend mirror
+        alt: Concave mirrors magnify and are used by dentists and in torches; convex mirrors give a wide view and are used as rear-view mirrors.
+      check:
+        prompt: Which mirror is placed at sharp bends on hill roads?
+        options:
+        - Convex
+        - Concave
+        - Plane
+        answer: Convex
+        why: A convex mirror shows a wide area, so drivers can see traffic coming round the bend.
   items:
   - prompt: A ray hits a plane mirror at an angle of incidence of 35°. What is the angle of reflection, in degrees?
     answer: '35'
@@ -173,6 +273,120 @@ concepts:
     - Same size, right way up.
     solution: A plane mirror gives an upright, same-size, virtual image.
     mistakes: {"It is upside down": "t8_plane_image", "It is smaller": "t8_plane_image"}
+  - prompt: A ray makes an angle of 30° with the mirror's surface. What is the angle of incidence, in degrees?
+    answer: '60'
+    check: 90 - 30
+    difficulty: 3
+    hints:
+    - Angles are measured from the normal.
+    - The normal is at 90° to the mirror.
+    solution: 90° − 30° = 60° from the normal.
+    mistakes:
+      '30': c8s10_from_mirror
+      '120': c8s10_from_mirror
+  - prompt: The angle of reflection is 25°. What is the angle between the incident ray and the reflected ray, in degrees?
+    answer: '50'
+    check: 2*25
+    difficulty: 2
+    hints:
+    - The angle of incidence is also 25°.
+    - Add them.
+    solution: 25° + 25° = 50°.
+    mistakes:
+      '25': c8s10_equal_angles
+      '65': c8s_angle_from_normal
+  - prompt: An object is 3 m in front of a plane mirror. How far behind the mirror is its image, in m?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - The image is as far behind as the object is in front.
+    - Same distance.
+    solution: The image is 3 m behind the mirror.
+    mistakes:
+      '6': c8s10_image_far
+      '1.5': c8s_image_distance
+  - prompt: You walk 1 m towards a plane mirror. By how much does the distance between you and your image shrink, in m?
+    answer: '2'
+    check: 2*1
+    difficulty: 3
+    hints:
+    - You move 1 m closer.
+    - Your image also moves 1 m closer.
+    solution: You get 1 m closer and so does your image, so the gap between you shrinks by 2 m.
+    mistakes:
+      '1': c8s10_image_far
+      '0': c8s10_image_far
+  - prompt: Which mirror is used in a torch to send light out in a strong beam?
+    options:
+    - Concave
+    - Convex
+    - Plane
+    answer: Concave
+    difficulty: 2
+    hints:
+    - It must gather the bulb's light into one direction.
+    - It curves inwards like a bowl.
+    solution: A concave reflector sends the bulb's light out in a strong, nearly parallel beam.
+    mistakes:
+      Convex: c8s10_mirror_kind
+      Plane: c8s10_mirror_kind
+  - prompt: In a plane mirror, the word TOP appears as…
+    options:
+    - Left and right swapped
+    - Upside down
+    - Exactly the same
+    answer: Left and right swapped
+    difficulty: 2
+    hints:
+    - A plane mirror image is upright.
+    - But one direction is reversed.
+    solution: 'The image is upright but laterally inverted: left and right are swapped.'
+    mistakes:
+      Upside down: t8_lateral_inversion
+      Exactly the same: t8_lateral_inversion
+  - prompt: Why does a convex mirror let a driver see more of the road behind?
+    options:
+    - It gives a smaller image of a wider area
+    - It magnifies everything
+    - It shows things upside down
+    answer: It gives a smaller image of a wider area
+    difficulty: 2
+    hints:
+    - It bulges outwards.
+    - More fits in when things look smaller.
+    solution: A convex mirror shrinks the image, so a wide stretch of road fits into it.
+    mistakes:
+      It magnifies everything: t8_convex_rear
+      It shows things upside down: t8_convex_rear
+  - prompt: Which surface reflects light most regularly, giving a clear image?
+    options:
+    - A smooth, shiny surface
+    - A rough wall
+    - A sheet of paper
+    answer: A smooth, shiny surface
+    difficulty: 1
+    hints:
+    - Rough surfaces scatter light every way.
+    - Mirrors are polished.
+    solution: Smooth, shiny surfaces reflect rays in an orderly way, making a clear image.
+    mistakes:
+      A rough wall: t8_plane_image
+      A sheet of paper: t8_plane_image
+  - prompt: What is the normal in reflection?
+    options:
+    - A line at right angles to the mirror where the ray hits
+    - The ray coming in
+    - The mirror's surface
+    answer: A line at right angles to the mirror where the ray hits
+    difficulty: 1
+    hints:
+    - Angles are measured from it.
+    - It is perpendicular to the mirror.
+    solution: The normal is the line at 90° to the mirror at the point where the ray strikes.
+    mistakes:
+      The ray coming in: c8s10_from_mirror
+      The mirror's surface: c8s10_from_mirror
 - code: cbse8s.light.lenses
   title: Refraction and lenses
   after:
@@ -244,6 +458,57 @@ concepts:
       bin: Concave lens
       clue: Never magnifies.
       why: Concave.
+  lesson:
+    - teach: Light bends when it passes from one transparent material into another, because its speed changes. This bending is refraction. It makes a pencil in water look bent and a pool look shallower than it really is.
+      picture:
+        kind: flow
+        steps:
+        - Light from the pool floor
+        - leaves water into air
+        - bends away
+        - floor looks higher
+        alt: Light from the bottom of a pool bends as it leaves the water, so the floor looks higher and the pool shallower.
+      check:
+        prompt: Why does a straw in a glass of water look bent?
+        options:
+        - Light bends as it passes from water to air
+        - The straw really bends
+        - Water is coloured
+        answer: Light bends as it passes from water to air
+        why: Refraction changes the direction of light from the straw, so it looks bent at the surface.
+    - teach: A convex lens is thicker in the middle. It brings parallel rays of light together at a point, the focus. It is used in magnifying glasses, cameras, microscopes and spectacles for long sight. A concave lens is thinner in the middle and spreads light out; it corrects short sight (myopia).
+      picture:
+        kind: compare
+        columns:
+        - title: Convex lens
+          points:
+          - Thicker in the middle
+          - Brings light together
+          - Magnifier, camera
+          - Long sight
+        - title: Concave lens
+          points:
+          - Thinner in the middle
+          - Spreads light out
+          - Short sight (myopia)
+        alt: A convex lens is thicker in the middle and converges light; a concave lens is thinner in the middle and spreads light.
+      check:
+        prompt: Which lens is thicker in the middle than at the edges?
+        options:
+        - Convex
+        - Concave
+        - Neither
+        answer: Convex
+        why: A convex lens bulges in the middle; that shape brings light together.
+    - teach: Light can also be trapped inside glass. In an optical fibre, light reflects again and again off the inside walls and travels along even when the fibre bends. Optical fibres carry internet signals and let doctors see inside the body with an endoscope.
+      check:
+        prompt: How does light travel along a bent optical fibre?
+        options:
+        - By reflecting again and again inside it
+        - By going straight through the sides
+        - It can't, fibres must be straight
+        answer: By reflecting again and again inside it
+        why: The light keeps bouncing off the inside walls, so it follows the fibre's bends.
   items:
   - prompt: What is the bending of light as it passes from air into water called?
     options:
@@ -323,3 +588,129 @@ concepts:
     - Used for internet cables.
     solution: Light reflects repeatedly off the inner walls, so it travels along even a bent fibre.
     mistakes: {"By absorbing it": "t8_optical_fibre", "By bending it once": "t8_optical_fibre"}
+  - prompt: Which lens brings sunlight to a point that can burn paper?
+    options:
+    - Convex
+    - Concave
+    - A flat glass sheet
+    answer: Convex
+    difficulty: 1
+    hints:
+    - It must bring the rays together.
+    - It is thicker in the middle.
+    solution: A convex lens converges the Sun's rays at its focus, making a hot spot.
+    mistakes:
+      Concave: c8s10_lens_kind
+      A flat glass sheet: c8s10_lens_kind
+  - prompt: A person can see near things clearly but far things look blurred. Which lens helps?
+    options:
+    - Concave
+    - Convex
+    - No lens
+    answer: Concave
+    difficulty: 2
+    hints:
+    - This is short sight (myopia).
+    - The lens must spread light out a little.
+    solution: Short sight is corrected with a concave lens.
+    mistakes:
+      Convex: t8_myopia
+      No lens: t8_myopia
+  - prompt: Why does light bend when it goes from air into glass?
+    options:
+    - Its speed changes
+    - Glass is heavier
+    - Glass is cold
+    answer: Its speed changes
+    difficulty: 2
+    hints:
+    - Light travels slower in glass.
+    - A change in speed changes direction.
+    solution: Light slows down in glass, and this change of speed makes it bend.
+    mistakes:
+      Glass is heavier: c8s10_speed_change
+      Glass is cold: c8s10_speed_change
+  - prompt: A coin at the bottom of a bucket of water looks…
+    options:
+    - Raised, nearer the surface
+    - Deeper than it is
+    - Exactly where it is
+    answer: Raised, nearer the surface
+    difficulty: 2
+    hints:
+    - The same thing happens with a pool.
+    - Light bends as it leaves the water.
+    solution: Refraction makes the coin appear higher than it really is.
+    mistakes:
+      Deeper than it is: t8_shallow_pool
+      Exactly where it is: t8_shallow_pool
+  - prompt: Which instrument uses convex lenses to make tiny things look bigger?
+    options:
+    - Microscope
+    - Periscope
+    - Kaleidoscope
+    answer: Microscope
+    difficulty: 1
+    hints:
+    - It is used to see cells.
+    - Periscopes and kaleidoscopes use mirrors.
+    solution: A microscope uses convex lenses to magnify tiny objects.
+    mistakes:
+      Periscope: t8_magnifier
+      Kaleidoscope: t8_magnifier
+  - prompt: Where do parallel rays meet after passing through a convex lens?
+    options:
+    - At the focus
+    - At the edge of the lens
+    - They never meet
+    answer: At the focus
+    difficulty: 2
+    hints:
+    - A convex lens converges light.
+    - The meeting point has a name.
+    solution: A convex lens brings parallel rays together at its focus.
+    mistakes:
+      At the edge of the lens: t8_converge
+      They never meet: t8_converge
+  - prompt: Why is a pool more dangerous than it looks?
+    options:
+    - Refraction makes it look shallower than it is
+    - Water magnifies swimmers
+    - Light can't reach the bottom
+    answer: Refraction makes it look shallower than it is
+    difficulty: 2
+    hints:
+    - The floor looks higher than it is.
+    - Light bends as it leaves the water.
+    solution: Light from the floor bends at the surface, so the pool looks shallower; the real depth is greater.
+    mistakes:
+      Water magnifies swimmers: t8_refraction
+      Light can't reach the bottom: t8_refraction
+  - prompt: What do doctors use to see inside the stomach without surgery?
+    options:
+    - An endoscope with optical fibres
+    - A concave mirror
+    - A periscope
+    answer: An endoscope with optical fibres
+    difficulty: 2
+    hints:
+    - It is a thin, bendy tube.
+    - Light travels along it by reflecting inside.
+    solution: An endoscope uses optical fibres to carry light in and the image out.
+    mistakes:
+      A concave mirror: t8_optical_fibre
+      A periscope: t8_optical_fibre
+  - prompt: Which lens is used in the spectacles of someone who can't read small print up close?
+    options:
+    - Convex
+    - Concave
+    - Plane glass
+    answer: Convex
+    difficulty: 3
+    hints:
+    - 'This is long sight: near things are blurred.'
+    - The lens must bring light together a little.
+    solution: Long sight is corrected with a convex lens, which helps focus light from near objects.
+    mistakes:
+      Concave: c8s10_lens_kind
+      Plane glass: c8s10_lens_kind
