@@ -16,6 +16,15 @@ tips:
   t8_quad_angle_sum: "Add the parts: x + 2x + 3x + 4x. The angles of a quadrilateral add to 360°."
   t8_rhombus_sides: "A rhombus has four equal sides. The perimeter is all four added."
   t8_square_both: "A rectangle needs four right angles; a rhombus needs four equal sides. Which shape has both?"
+  c8m4_triangle_sum: That uses 180°, the sum for a triangle. A quadrilateral is two triangles.
+  c8m4_ratio_parts: Add the ratio numbers to get the total parts. One part is 360° divided by that.
+  c8m4_polygon_sum: From one corner, an n-sided shape splits into n − 2 triangles. Multiply that by 180°.
+  c8m4_exterior: 'Walk all the way round any convex shape: you turn through one full turn in total.'
+  c8m4_opposite_equal: Opposite angles of a parallelogram are equal. Which angle is opposite this one?
+  c8m4_rhombus_half: The diagonals of a rhombus cut each other in half at right angles. Each half makes a right triangle with a side.
+  c8m4_rectangle_diagonals: A rectangle's diagonals are equal in length and cut each other in half.
+  c8m4_family: 'Check the definition: does the shape need right angles, equal sides, or both?'
+  c8m4_kite_def: A kite has two pairs of equal sides that sit next to each other, not opposite.
 concepts:
 - code: cbse8m.quad.angles
   title: Angles in a quadrilateral
@@ -90,6 +99,61 @@ concepts:
       - when:
           degrees: 180
         say: That's the triangle total. A quadrilateral is two triangles, so its angles make 360°.
+  lesson:
+    - teach: A quadrilateral has 4 sides, 4 corners and 4 angles. Draw one diagonal and it splits into 2 triangles. Each triangle's angles add to 180°, so the 4 angles of any quadrilateral add to 2 × 180° = 360°.
+      picture:
+        kind: flow
+        steps:
+        - Quadrilateral ABCD
+        - Draw diagonal AC
+        - 'Two triangles: 180° + 180°'
+        - Angle sum = 360°
+        alt: One diagonal splits a quadrilateral into two triangles, so its angles add to 360 degrees.
+      check:
+        prompt: What do the 4 angles of any quadrilateral add up to?
+        options:
+        - 360°
+        - 180°
+        - 400°
+        answer: 360°
+        why: A diagonal makes two triangles of 180° each, and 2 × 180° = 360°.
+    - teach: To find a missing angle, add the angles you know and take the total from 360°. If the angles are given as x, 2x, …, add them up, set the sum equal to 360° and solve for x.
+      check:
+        prompt: Three angles of a quadrilateral are 90°, 90° and 100°. What is the fourth?
+        options:
+        - 80°
+        - 0°
+        - 100°
+        answer: 80°
+        why: 90 + 90 + 100 = 280, and 360 − 280 = 80.
+    - teach: 'The same idea works for any polygon. From one corner, a shape with n sides splits into n − 2 triangles, so its angles add to (n − 2) × 180°. A pentagon: 3 × 180° = 540°. Walking round any convex shape you turn once, so its exterior angles always add to 360°.'
+      picture:
+        kind: compare
+        columns:
+        - title: Sides
+          points:
+          - '4'
+          - '5'
+          - '6'
+        - title: Triangles
+          points:
+          - '2'
+          - '3'
+          - '4'
+        - title: Angle sum
+          points:
+          - 360°
+          - 540°
+          - 720°
+        alt: Four sides give two triangles and 360 degrees, five give three and 540, six give four and 720.
+      check:
+        prompt: What do the angles of a hexagon (6 sides) add up to?
+        options:
+        - 720°
+        - 540°
+        - 1080°
+        answer: 720°
+        why: 6 − 2 = 4 triangles, and 4 × 180° = 720°.
   items:
   - prompt: Three angles of a quadrilateral are 80°, 95° and 110°. Find the fourth, in degrees.
     answer: '75'
@@ -150,6 +214,117 @@ concepts:
     - 3 × 180.
     solution: 'Diagonals from one vertex split a pentagon into 3 triangles: 3 × 180° = 540°.'
     mistakes: {"360": "t8_polygon_triangles", "900": "t8_polygon_triangles"}
+  - prompt: Three angles of a quadrilateral are 100°, 85° and 70°. Find the fourth, in degrees.
+    answer: '105'
+    check: 360 - (100 + 85 + 70)
+    difficulty: 1
+    hints:
+    - Add the three angles.
+    - Take the total from 360°.
+    solution: 'Step 1: 100 + 85 + 70 = 255. Step 2: 360 − 255 = 105°.'
+    mistakes:
+      '75': c8m4_triangle_sum
+  - prompt: Two angles of a quadrilateral are right angles and the third is 65°. Find the fourth, in degrees.
+    answer: '115'
+    check: 360 - 90 - 90 - 65
+    difficulty: 1
+    hints:
+    - A right angle is 90°.
+    - 360 − (90 + 90 + 65).
+    solution: 'Step 1: 90 + 90 + 65 = 245. Step 2: 360 − 245 = 115°.'
+    mistakes:
+      '25': t8_fourth_angle
+  - prompt: 'The angles of a quadrilateral are in the ratio 1 : 2 : 3 : 3. Find the smallest angle, in degrees.'
+    answer: '40'
+    check: 360/(1 + 2 + 3 + 3)
+    difficulty: 2
+    hints:
+    - How many parts are there altogether?
+    - 360° ÷ 9 parts.
+    solution: 'Step 1: 1 + 2 + 3 + 3 = 9 parts. Step 2: one part = 360° ÷ 9 = 40°. The smallest angle is 1 part = 40°.'
+    mistakes:
+      '20': c8m4_ratio_parts
+      '120': c8m4_ratio_parts
+  - prompt: The angles of a quadrilateral are x, x + 10, x + 20 and x + 30 degrees. Find x.
+    answer: '75'
+    check: (360 - 60)/4
+    difficulty: 3
+    hints:
+    - 'Add them: 4x + 60.'
+    - 4x + 60 = 360.
+    solution: 'Step 1: x + (x + 10) + (x + 20) + (x + 30) = 4x + 60. Step 2: 4x + 60 = 360, so 4x = 300. Step 3: x = 75.'
+    mistakes:
+      '90': t8_quad_angle_sum
+      '30': c8m4_triangle_sum
+  - prompt: What do the angles of an octagon (8 sides) add up to, in degrees?
+    answer: '1080'
+    check: (8 - 2)*180
+    difficulty: 2
+    hints:
+    - How many triangles from one corner?
+    - (8 − 2) × 180°.
+    solution: 'Step 1: an octagon splits into 8 − 2 = 6 triangles. Step 2: 6 × 180° = 1080°.'
+    mistakes:
+      '1440': c8m4_polygon_sum
+      '360': c8m4_polygon_sum
+  - prompt: A regular hexagon has 6 equal angles. How big is each, in degrees?
+    answer: '120'
+    check: (6 - 2)*180/6
+    difficulty: 2
+    hints:
+    - First find the angle sum of a hexagon.
+    - Then share it among 6 equal angles.
+    solution: 'Step 1: angle sum = 4 × 180° = 720°. Step 2: 720° ÷ 6 = 120°.'
+    mistakes:
+      '60': c8m4_polygon_sum
+      '720': c8m4_polygon_sum
+  - prompt: What do the exterior angles of a pentagon add up to, in degrees?
+    answer: '360'
+    check: '360'
+    difficulty: 2
+    hints:
+    - Imagine walking round the pentagon.
+    - At each corner you turn by the exterior angle.
+    solution: Walking once round any convex shape you turn through one full turn, so the exterior angles always add to 360°.
+    mistakes:
+      '540': c8m4_exterior
+      '180': c8m4_exterior
+  - prompt: A quadrilateral has one angle of 90° and the other three angles are equal. How big is each of those, in degrees?
+    answer: '90'
+    check: (360 - 90)/3
+    difficulty: 2
+    hints:
+    - The three equal angles share what is left of 360°.
+    - 360 − 90 = 270.
+    solution: 'Step 1: 360 − 90 = 270. Step 2: 270 ÷ 3 = 90°. So it is a rectangle.'
+    mistakes:
+      '30': c8m4_triangle_sum
+      '270': t8_equal_angles
+  - prompt: Can a quadrilateral have angles 100°, 100°, 100° and 100°?
+    options:
+    - No, they add to 400°, not 360°
+    - Yes, it is a square
+    - Yes, any four equal angles work
+    answer: No, they add to 400°, not 360°
+    difficulty: 1
+    hints:
+    - Add the four angles.
+    - What must they add up to?
+    solution: 4 × 100° = 400°, but the angles of a quadrilateral always add to 360°. So no such shape exists.
+    mistakes:
+      Yes, it is a square: c8_angle_sum_360
+      Yes, any four equal angles work: c8_angle_sum_360
+  - prompt: How many triangles does a diagonal from one corner make in a 10-sided polygon?
+    answer: '8'
+    check: 10 - 2
+    difficulty: 2
+    hints:
+    - Try a square (2) and a pentagon (3) first.
+    - The pattern is sides − 2.
+    solution: 'A square gives 2, a pentagon 3, so n sides give n − 2. For 10 sides: 10 − 2 = 8 triangles.'
+    mistakes:
+      '10': c8m4_polygon_sum
+      '7': c8m4_polygon_sum
 - code: cbse8m.quad.types
   title: Parallelograms, rhombuses, kites and trapeziums
   after:
@@ -245,6 +420,55 @@ concepts:
       bin: Parallelogram
       clue: Two pairs of parallel sides give these angles.
       why: A parallelogram.
+  lesson:
+    - teach: A trapezium has at least one pair of parallel sides. A parallelogram has both pairs of opposite sides parallel. In a parallelogram, opposite sides are equal, opposite angles are equal, angles next to each other add to 180°, and the diagonals cut each other in half.
+      picture:
+        kind: compare
+        columns:
+        - title: Trapezium
+          points:
+          - One pair of parallel sides
+          - Angles add to 360°
+        - title: Parallelogram
+          points:
+          - Two pairs of parallel sides
+          - Opposite sides and angles equal
+          - Diagonals bisect each other
+        alt: A trapezium has one pair of parallel sides; a parallelogram has two, with equal opposite sides and angles.
+      check:
+        prompt: In a parallelogram, one angle is 65°. What is the angle opposite it?
+        options:
+        - 65°
+        - 115°
+        - 25°
+        answer: 65°
+        why: Opposite angles of a parallelogram are equal.
+    - teach: 'Special parallelograms: a rectangle has four right angles and equal diagonals. A rhombus has four equal sides and its diagonals cross at right angles. A square is both a rectangle and a rhombus.'
+      picture:
+        kind: flow
+        steps:
+        - Parallelogram
+        - add right angles → rectangle
+        - add equal sides → rhombus
+        - both → square
+        alt: A parallelogram with right angles is a rectangle, with equal sides a rhombus, and with both a square.
+      check:
+        prompt: Which shape must have diagonals that cross at right angles?
+        options:
+        - Rhombus
+        - Rectangle
+        - Any parallelogram
+        answer: Rhombus
+        why: In a rhombus all sides are equal, which makes the diagonals cross at 90°. A rectangle's diagonals are equal but usually not at right angles.
+    - teach: A kite has two pairs of equal sides that sit next to each other. Its diagonals cross at right angles, and the long one cuts the short one in half. Unlike a parallelogram, its opposite sides are not usually equal.
+      check:
+        prompt: Which describes a kite?
+        options:
+        - Two pairs of equal sides next to each other
+        - Two pairs of parallel sides
+        - All four sides equal
+        answer: Two pairs of equal sides next to each other
+        why: That is the definition of a kite. Two pairs of parallel sides make a parallelogram.
   items:
   - prompt: In a parallelogram one angle is 70°. Find the angle next to it, in degrees.
     answer: '110'
@@ -326,3 +550,106 @@ concepts:
     - 36 ÷ 4.
     solution: Each side = 36 ÷ 4 = 9 cm.
     mistakes: {"18": "t8_rhombus_sides", "144": "t8_rhombus_sides"}
+  - prompt: In parallelogram ABCD, angle A = 75°. Find angle C, in degrees.
+    answer: '75'
+    check: '75'
+    difficulty: 1
+    hints:
+    - A and C are opposite corners.
+    - Opposite angles of a parallelogram are …
+    solution: 'A and C are opposite angles of a parallelogram, so they are equal: angle C = 75°.'
+    mistakes:
+      '105': c8m4_opposite_equal
+  - prompt: In parallelogram PQRS, angle P = 3x and angle Q = 2x. Find x, in degrees.
+    answer: '36'
+    check: 180/5
+    difficulty: 2
+    hints:
+    - P and Q are next to each other.
+    - Angles next to each other add to 180°.
+    solution: 'Step 1: 3x + 2x = 180°. Step 2: 5x = 180°, so x = 36°.'
+    mistakes:
+      '72': c8m4_ratio_parts
+      '18': c8_adjacent_vs_opposite
+  - prompt: The diagonals of a rectangle cross at O. If OA = 5 cm, how long is diagonal BD, in cm?
+    answer: '10'
+    check: 2*5
+    difficulty: 2
+    hints:
+    - OA is half of diagonal AC.
+    - In a rectangle the diagonals are equal.
+    solution: 'Step 1: AC = 2 × 5 = 10 cm. Step 2: a rectangle''s diagonals are equal, so BD = 10 cm.'
+    mistakes:
+      '5': c8m4_rectangle_diagonals
+  - prompt: The diagonals of a rhombus are 6 cm and 8 cm. How long is each side, in cm?
+    answer: '5'
+    check: sqrt(3**2 + 4**2)
+    difficulty: 3
+    hints:
+    - The diagonals cut each other in half at right angles.
+    - Half-diagonals are 3 cm and 4 cm.
+    solution: 'Step 1: the halves are 3 cm and 4 cm. Step 2: they meet at a right angle, so side² = 3² + 4² = 25. Step 3: side = 5 cm.'
+    mistakes:
+      '7': c8m4_rhombus_half
+      '14': c8m4_rhombus_half
+  - prompt: A parallelogram has sides 7 cm and 4 cm. What is its perimeter, in cm?
+    answer: '22'
+    check: 2*(7 + 4)
+    difficulty: 1
+    hints:
+    - Opposite sides are equal.
+    - There are two 7 cm sides and two 4 cm sides.
+    solution: Perimeter = 7 + 4 + 7 + 4 = 22 cm.
+    mistakes:
+      '11': c8m4_opposite_equal
+      '28': c8m4_opposite_equal
+  - prompt: Which is always true?
+    options:
+    - Every square is a rhombus
+    - Every rhombus is a square
+    - Every rectangle is a square
+    answer: Every square is a rhombus
+    difficulty: 2
+    hints:
+    - A rhombus needs four equal sides.
+    - Does a square have four equal sides? Does every rhombus have right angles?
+    solution: A square has four equal sides, so it is a rhombus. A rhombus need not have right angles, so it need not be a square.
+    mistakes:
+      Every rhombus is a square: c8m4_family
+      Every rectangle is a square: c8m4_family
+  - prompt: In a trapezium ABCD, AB is parallel to DC and angle A = 110°. Find angle D, in degrees.
+    answer: '70'
+    check: 180 - 110
+    difficulty: 2
+    hints:
+    - A and D are on the same slanting side, between the parallel lines.
+    - Such angles add to 180°.
+    solution: 'AB ∥ DC, so angles A and D (between the parallels, on side AD) add to 180°: D = 180 − 110 = 70°.'
+    mistakes:
+      '110': c8_adjacent_vs_opposite
+      '250': c8_angle_sum_360
+  - prompt: Which shape has two pairs of equal sides that are next to each other, and not opposite?
+    options:
+    - Kite
+    - Parallelogram
+    - Rectangle
+    answer: Kite
+    difficulty: 1
+    hints:
+    - In a parallelogram the equal sides are opposite each other.
+    - Which shape looks like the toy?
+    solution: A kite has two pairs of equal sides next to each other. In parallelograms and rectangles the equal sides are opposite.
+    mistakes:
+      Parallelogram: c8m4_kite_def
+      Rectangle: c8m4_kite_def
+  - prompt: In a rhombus, one angle is 50°. Find the largest angle, in degrees.
+    answer: '130'
+    check: 180 - 50
+    difficulty: 2
+    hints:
+    - A rhombus is a parallelogram.
+    - Angles next to each other add to 180°.
+    solution: Angles next to each other add to 180°, so the other angle is 180 − 50 = 130°. The angles are 50°, 130°, 50°, 130°.
+    mistakes:
+      '50': c8_adjacent_vs_opposite
+      '310': c8_angle_sum_360

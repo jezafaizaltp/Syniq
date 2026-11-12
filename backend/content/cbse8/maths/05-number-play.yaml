@@ -15,6 +15,15 @@ tips:
   t8_odd_sum_count: "How many odd numbers are there from 1 to 39? The sum of the first n odd numbers is n²."
   t8_power_of_two: "Try writing each as consecutive numbers: 15 = 7 + 8, 9 = 4 + 5, 10 = 1 + 2 + 3 + 4. Which one can't be done?"
   t8_remainder_9: "The remainder when dividing by 9 equals the remainder of the digit sum divided by 9."
+  c8m5_div3: Add the digits. Is that sum a multiple of 3?
+  c8m5_div8: For 8, look only at the last three digits. Do they make a multiple of 8?
+  c8m5_last_digit: For 2, 5 and 10 only the last digit matters. What does each rule need?
+  c8m5_remainder_3: The remainder on dividing by 3 is the same as the remainder of the digit sum.
+  c8m5_parity: 'Pair up the odd numbers: each pair adds to an even number. Is one left over?'
+  c8m5_odd_n: Count how many odd numbers there are first. The sum of the first n odd numbers is n × n.
+  c8m5_gauss: 'Pair the first and last numbers: each pair has the same sum. How many pairs?'
+  c8m5_consec_five: With five consecutive numbers, the middle one is the average. Divide the total by 5.
+  c8m5_even_n: 2 + 4 + … is 2 × (1 + 2 + …). How many even numbers are there?
 
 concepts:
 - code: cbse8m.np.divisibility
@@ -78,6 +87,53 @@ concepts:
       bin: None of these
       clue: 'Digits, last two digits, alternating sum: check each.'
       why: Digit sum 14, last two 27, alternating 4 − 1 + 2 − 7 = −2. None.
+  lesson:
+    - teach: Some divisibility checks need only the last digits. For 2, the last digit is even. For 5, it ends in 0 or 5. For 10, it ends in 0. For 4, the last two digits make a multiple of 4. For 8, the last three digits make a multiple of 8. This works because 100 is a multiple of 4 and 1000 is a multiple of 8.
+      picture:
+        kind: compare
+        columns:
+        - title: Divisor
+          points:
+          - 2, 5, 10
+          - '4'
+          - '8'
+        - title: Look at
+          points:
+          - last digit
+          - last two digits
+          - last three digits
+        alt: For 2, 5 and 10 look at the last digit, for 4 the last two digits, for 8 the last three.
+      check:
+        prompt: Is 7,316 divisible by 4?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: The last two digits are 16, and 16 = 4 × 4.
+    - teach: 'For 3 and 9, add the digits. If the digit sum is a multiple of 3, so is the number; the same for 9. The digit sum even gives the remainder: 247 has digit sum 13, and 13 leaves 4 after dividing by 9, so 247 does too.'
+      picture:
+        kind: flow
+        steps:
+        - 4,725
+        - 4 + 7 + 2 + 5 = 18
+        - 18 is a multiple of 9
+        - 4,725 is divisible by 9
+        alt: The digits of 4725 add to 18, a multiple of 9, so 4725 is divisible by 9.
+      check:
+        prompt: Is 1,236 divisible by 3?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: 1 + 2 + 3 + 6 = 12, and 12 is a multiple of 3.
+    - teach: For 11, add and subtract the digits in turn from the right. If the result is 0 or a multiple of 11, the number is divisible by 11. For 6, a number must pass both the test for 2 and the test for 3, because 6 = 2 × 3 and they share no factor.
+      check:
+        prompt: Is 2,728 divisible by 11?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: 'From the right: 8 − 2 + 7 − 2 = 11, a multiple of 11.'
   items:
   - prompt: Which number is divisible by 9?
     options:
@@ -149,6 +205,120 @@ concepts:
     - 2 + 4 + 7 + 5 + 1 + 3 = 22.
     solution: Digit sum 22, and 22 = 2 × 9 + 4, so the remainder is 4.
     mistakes: {"22": "t8_remainder_9", "3": "t8_remainder_9"}
+  - prompt: Which number is divisible by 8?
+    options:
+    - 5,128
+    - 5,132
+    - 5,140
+    answer: 5,128
+    difficulty: 2
+    hints:
+    - Look only at the last three digits.
+    - Divide each by 8.
+    solution: 'Step 1: last three digits 128, 132, 140. Step 2: 128 = 8 × 16, but 132 and 140 are not multiples of 8. So 5,128.'
+    mistakes:
+      5,132: c8m5_div8
+      5,140: c8m5_div8
+  - prompt: What is the smallest digit that can replace ★ so that 52★ is divisible by 3?
+    answer: '2'
+    check: (3 - (5 + 2) % 3) % 3
+    difficulty: 2
+    hints:
+    - 5 + 2 = 7.
+    - Which smallest digit makes 7 + ★ a multiple of 3?
+    solution: 'Step 1: 5 + 2 = 7. Step 2: 7 + 2 = 9 is a multiple of 3. Step 3: 0 and 1 give 7 and 8, which are not. So ★ = 2.'
+    mistakes:
+      '5': c8m5_div3
+      '8': c8m5_div3
+  - prompt: What is the remainder when 7,451 is divided by 3?
+    answer: '2'
+    check: 7451 % 3
+    difficulty: 2
+    hints:
+    - Add the digits.
+    - 7 + 4 + 5 + 1 = 17. What does 17 leave after dividing by 3?
+    solution: 'Step 1: digit sum = 17. Step 2: 17 = 3 × 5 + 2. So the remainder is 2.'
+    mistakes:
+      '8': c8m5_remainder_3
+      '1': c8m5_remainder_3
+  - prompt: Which number is divisible by both 2 and 5?
+    options:
+    - 3,470
+    - 3,475
+    - 3,472
+    answer: 3,470
+    difficulty: 1
+    hints:
+    - For 2 it must end in an even digit.
+    - For 5 it must end in 0 or 5.
+    solution: Only a number ending in 0 is both even and a multiple of 5. So 3,470 (it is divisible by 10).
+    mistakes:
+      3,475: c8m5_last_digit
+      3,472: c8m5_last_digit
+  - prompt: Which number is divisible by 6?
+    options:
+    - 4,326
+    - 4,327
+    - 4,328
+    answer: 4,326
+    difficulty: 2
+    hints:
+    - It must be even and its digit sum a multiple of 3.
+    - 'Check 4,326 and 4,328: which digit sum is a multiple of 3?'
+    solution: 'Step 1: 4,327 is odd, so not. Step 2: 4 + 3 + 2 + 6 = 15, a multiple of 3; 4 + 3 + 2 + 8 = 17 is not. So 4,326.'
+    mistakes:
+      4,327: t8_div_6
+      4,328: c8m5_div3
+  - prompt: What is the remainder when 85,236 is divided by 9?
+    answer: '6'
+    check: 85236 % 9
+    difficulty: 2
+    hints:
+    - Add the digits.
+    - 8 + 5 + 2 + 3 + 6 = 24.
+    solution: 'Step 1: digit sum = 24. Step 2: 24 = 9 × 2 + 6. The remainder is 6.'
+    mistakes:
+      '24': t8_remainder_9
+      '3': t8_remainder_9
+  - prompt: Is 9,152 divisible by 11?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if the last digit is 1
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Alternately add and subtract the digits from the right.
+    - 2 − 5 + 1 − 9.
+    solution: 'From the right: 2 − 5 + 1 − 9 = −11, a multiple of 11. So yes: 9,152 = 11 × 832.'
+    mistakes:
+      'No': t8_div11
+      Only if the last digit is 1: t8_div11
+  - prompt: A number is divisible by 4 and by 9. Which must it also be divisible by?
+    options:
+    - '36'
+    - '13'
+    - 18 only if it is odd
+    answer: '36'
+    difficulty: 3
+    hints:
+    - 4 and 9 share no common factor except 1.
+    - When two numbers share no factor, divisible by both means divisible by their product.
+    solution: 4 and 9 have no common factor, so a number divisible by both is divisible by 4 × 9 = 36.
+    mistakes:
+      '13': t8_div_6
+      18 only if it is odd: t8_div_6
+  - prompt: Find the missing digit ★ so that 6★84 is divisible by 9.
+    answer: '0'
+    check: (9 - (6 + 8 + 4) % 9) % 9
+    difficulty: 3
+    hints:
+    - 6 + 8 + 4 = 18.
+    - 18 is already a multiple of 9.
+    solution: 'Step 1: 6 + 8 + 4 = 18. Step 2: 18 is a multiple of 9 already, so ★ must add 0 (or 9). The digit that works first is 0: 6,084 = 9 × 676.'
+    mistakes:
+      '1': t8_digit_missing
+      '3': t8_digit_missing
 - code: cbse8m.np.patterns
   title: Sums of odd, even and consecutive numbers
   after:
@@ -234,6 +404,55 @@ concepts:
       - when:
           n: 7
         say: 7 odd numbers make 49. One more step.
+  lesson:
+    - teach: 'Even + even = even, odd + odd = even, and odd + even = odd. Add odd numbers in pairs: each pair is even. So an even count of odd numbers adds to an even number, and an odd count leaves one odd number over, so the sum is odd.'
+      picture:
+        kind: compare
+        columns:
+        - title: Add
+          points:
+          - even + even
+          - odd + odd
+          - odd + even
+        - title: Result
+          points:
+          - even
+          - even
+          - odd
+        alt: Even plus even and odd plus odd are even; odd plus even is odd.
+      check:
+        prompt: Is the sum of 10 odd numbers odd or even?
+        options:
+        - Even
+        - Odd
+        answer: Even
+        why: 10 odd numbers make 5 pairs, and each pair adds to an even number.
+    - teach: 'Sums of patterns have shortcuts. 1 + 2 + … + n: pair the first and last (1 + n), the next pair also makes 1 + n, and there are n/2 pairs, so the sum is n(n + 1)/2. The first n odd numbers add to n²: 1 + 3 + 5 = 9 = 3².'
+      picture:
+        kind: flow
+        steps:
+        - 1 + 2 + … + 10
+        - 'pairs: 1+10, 2+9, 3+8 … each 11'
+        - 5 pairs
+        - 5 × 11 = 55
+        alt: 'Pair the numbers 1 to 10 as 1 plus 10, 2 plus 9 and so on: five pairs of 11 make 55.'
+      check:
+        prompt: What is 1 + 2 + 3 + … + 20?
+        options:
+        - '210'
+        - '200'
+        - '420'
+        answer: '210'
+        why: 20 × 21 ÷ 2 = 210.
+    - teach: 'Consecutive numbers: in an odd count of them, the middle one is the average. Three consecutive numbers that add to 45 are 14, 15, 16, because 45 ÷ 3 = 15. Every counting number except the powers of 2 (1, 2, 4, 8, 16, …) can be written as a sum of two or more consecutive numbers.'
+      check:
+        prompt: Five consecutive numbers add to 50. What is the middle one?
+        options:
+        - '10'
+        - '25'
+        - '12'
+        answer: '10'
+        why: 'With an odd count, the middle one is the average: 50 ÷ 5 = 10. The numbers are 8, 9, 10, 11, 12.'
   items:
   - prompt: Find 1 + 2 + 3 + ... + 50.
     answer: '1275'
@@ -297,3 +516,111 @@ concepts:
     - Powers of 2 can't.
     solution: 16 is a power of 2, and powers of 2 are the only numbers that cannot be written this way.
     mistakes: {"15": "t8_power_of_two", "10": "t8_power_of_two"}
+  - prompt: Find 1 + 2 + 3 + … + 100.
+    answer: '5050'
+    check: 100*101/2
+    difficulty: 1
+    hints:
+    - Pair 1 with 100, 2 with 99, …
+    - 50 pairs.
+    solution: 'Step 1: each pair adds to 101. Step 2: there are 50 pairs. Step 3: 50 × 101 = 5050.'
+    mistakes:
+      '10100': c8m5_gauss
+      '5000': c8m5_gauss
+  - prompt: Find 1 + 3 + 5 + … + 19.
+    answer: '100'
+    check: ((19 + 1)/2)**2
+    difficulty: 2
+    hints:
+    - How many odd numbers from 1 to 19?
+    - There are 10. The sum of the first n odd numbers is n².
+    solution: 'Step 1: 1, 3, …, 19 are the first 10 odd numbers. Step 2: their sum is 10² = 100.'
+    mistakes:
+      '361': c8m5_odd_n
+      '81': c8m5_odd_n
+  - prompt: Is the sum of 9 odd numbers odd or even?
+    options:
+    - Odd
+    - Even
+    - It could be either
+    answer: Odd
+    difficulty: 1
+    hints:
+    - Pair them up.
+    - 9 odd numbers make 4 pairs and one left over.
+    solution: 4 pairs give an even total, and the one odd number left over makes the sum odd.
+    mistakes:
+      Even: c8m5_parity
+      It could be either: c8m5_parity
+  - prompt: Five consecutive numbers add to 85. What is the largest of them?
+    answer: '19'
+    check: 85/5 + 2
+    difficulty: 2
+    hints:
+    - The middle number is the average.
+    - 85 ÷ 5 = 17 is the middle.
+    solution: 'Step 1: middle = 85 ÷ 5 = 17. Step 2: the numbers are 15, 16, 17, 18, 19. The largest is 19.'
+    mistakes:
+      '17': c8m5_consec_five
+      '21': c8m5_consec_five
+  - prompt: Find 2 + 4 + 6 + … + 50.
+    answer: '650'
+    check: 25*26
+    difficulty: 2
+    hints:
+    - 'Take out a 2: 2 × (1 + 2 + … + 25).'
+    - 1 + 2 + … + 25 = 25 × 26 ÷ 2.
+    solution: 'Step 1: 1 + 2 + … + 25 = 325. Step 2: 2 × 325 = 650.'
+    mistakes:
+      '325': c8m5_even_n
+      '1300': c8m5_even_n
+  - prompt: Which of these can be written as a sum of two or more consecutive counting numbers?
+    options:
+    - '12'
+    - '8'
+    - '32'
+    answer: '12'
+    difficulty: 3
+    hints:
+    - Powers of 2 cannot be.
+    - Try 3 + 4 + 5.
+    solution: 12 = 3 + 4 + 5. But 8 and 32 are powers of 2, and those cannot be written this way.
+    mistakes:
+      '8': t8_power_of_two
+      '32': t8_power_of_two
+  - prompt: Add any odd number and any even number. What kind of number do you always get?
+    options:
+    - Odd
+    - Even
+    - It depends on the numbers
+    answer: Odd
+    difficulty: 1
+    hints:
+    - Try 3 + 4 and 7 + 10.
+    - An odd number has one left over when paired.
+    solution: The even number pairs up completely and the odd one has one left over, so the total is always odd.
+    mistakes:
+      Even: c8m5_parity
+      It depends on the numbers: c8m5_parity
+  - prompt: The sum of the first n odd numbers is 144. What is n?
+    answer: '12'
+    check: sqrt(144)
+    difficulty: 2
+    hints:
+    - The sum of the first n odd numbers is n².
+    - Which number squared is 144?
+    solution: n² = 144, so n = 12.
+    mistakes:
+      '72': c8m5_odd_n
+      '144': c8m5_odd_n
+  - prompt: Four consecutive even numbers add to 52. What is the smallest?
+    answer: '10'
+    check: (52 - (2 + 4 + 6))/4
+    difficulty: 3
+    hints:
+    - Call them n, n + 2, n + 4, n + 6.
+    - 4n + 12 = 52.
+    solution: 'Step 1: n + (n + 2) + (n + 4) + (n + 6) = 4n + 12. Step 2: 4n + 12 = 52, so 4n = 40 and n = 10. The numbers are 10, 12, 14, 16.'
+    mistakes:
+      '13': c8m5_consec_five
+      '12': c8m5_consec_five

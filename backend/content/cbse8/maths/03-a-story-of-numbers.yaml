@@ -15,6 +15,14 @@ tips:
   t8_roman_subtract: "In Roman numerals a smaller symbol before a bigger one is subtracted: CM = 900, XC = 90. Split the numeral into chunks."
   t8_to_binary: "Split 10 into powers of 2 (8, 4, 2, 1). Write 1 where a power is used and 0 where it isn't."
   t8_zero_placeholder: "Remove the zero from 305. What number do you get? So what is the zero doing?"
+  c8m3_base60_value: The left part counts sixties. Multiply it by 60, then add the ones.
+  c8m3_additive: In an additive system a symbol is worth the same wherever it stands. In which system does position not change the value?
+  c8m3_order: 'Compare where the X sits in each: before the L, or after it?'
+  c8m3_base_places: In base b the places from the right are worth 1, b, b², … Multiply each digit by its place value and add.
+  c8m3_count_places: 'Count the places from the right: ones, tens, hundreds, thousands, ten thousands, …'
+  c8m3_to_base: Find the biggest power of the base that fits, note how many times it fits, then repeat with what is left.
+  c8m3_binary_long: Write the number 100 in base 10 and in base 2. Which needs more digits?
+  c8m3_egypt_count: One symbol stands for each 100, each 10 and each 1. How many of each does 999 need?
 concepts:
 - code: cbse8m.story.systems
   title: Early ways of writing numbers
@@ -61,6 +69,55 @@ concepts:
       LX: LX is 50 + 10 = 60. The X after L adds; before L (XL) it subtracts.
       XC: XC is 100 − 10 = 90, bigger than 60.
       CX: CX is 100 + 10 = 110, the biggest.
+  lesson:
+    - teach: 'The first numbers were tallies: one mark, knot or pebble for each thing. The Egyptians grouped them, with a symbol for 1, another for 10, for 100, for 1000 and so on. To read a number you add up all the symbols: three 100-symbols and two 1-symbols make 302. This is an additive system.'
+      picture:
+        kind: flow
+        steps:
+        - 'Tally marks: one mark per thing'
+        - Egyptian symbols for 1, 10, 100, 1000
+        - Add up every symbol you see
+        alt: Counting grew from one tally mark per thing to Egyptian symbols for 1, 10, 100 and 1000 that are added up.
+      check:
+        prompt: An Egyptian number has 1 symbol for 1000, 2 for 10 and 5 for 1. What number is it?
+        options:
+        - '1025'
+        - '1205'
+        - '8'
+        answer: '1025'
+        why: 1000 + 10 + 10 + 5 = 1025. Each symbol is simply added.
+    - teach: 'Roman numerals use I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000. Usually you add from left to right: LX = 50 + 10 = 60. But a smaller symbol written just before a bigger one is taken away: XL = 50 − 10 = 40, and CM = 900.'
+      picture:
+        kind: compare
+        columns:
+        - title: 'Smaller after: add'
+          points:
+          - LX = 50 + 10 = 60
+          - VI = 5 + 1 = 6
+          - MC = 1000 + 100 = 1100
+        - title: 'Smaller before: take away'
+          points:
+          - XL = 50 − 10 = 40
+          - IV = 5 − 1 = 4
+          - CM = 1000 − 100 = 900
+        alt: In Roman numerals a smaller symbol after a bigger one is added, and before it is taken away.
+      check:
+        prompt: What number is XC?
+        options:
+        - '90'
+        - '110'
+        - '100'
+        answer: '90'
+        why: 'X (10) comes before C (100), so it is taken away: 100 − 10 = 90.'
+    - teach: Systems like these need more and more symbols for bigger numbers, and they have no zero, so numbers cannot be lined up in columns to add or multiply. The Babylonians counted in sixties, which is why an hour still has 60 minutes and a minute 60 seconds.
+      check:
+        prompt: Why are Roman numerals hard to add in columns?
+        options:
+        - They have no place value or zero
+        - They use letters instead of pictures
+        - They only go up to 1000
+        answer: They have no place value or zero
+        why: Column sums need each place (ones, tens, …) to line up, and a zero to fill an empty place. Roman numerals have neither.
   items:
   - prompt: What number is XLVII?
     answer: '47'
@@ -129,6 +186,123 @@ concepts:
     - 300 + 40 + 2.
     solution: 3 × 100 + 4 × 10 + 2 × 1 = 342.
     mistakes: {"9": "t8_egyptian", "243": "t8_egyptian"}
+  - prompt: What number is XCIV?
+    answer: '94'
+    check: 100 - 10 + 5 - 1
+    difficulty: 1
+    hints:
+    - Split it into XC and IV.
+    - XC = 90. What is IV?
+    solution: 'Step 1: XC = 100 − 10 = 90. Step 2: IV = 5 − 1 = 4. Step 3: 90 + 4 = 94.'
+    mistakes:
+      '116': c8_roman_subtract
+  - prompt: What number is CDXLIV?
+    answer: '444'
+    check: (500 - 100) + (50 - 10) + (5 - 1)
+    difficulty: 2
+    hints:
+    - Split it into CD, XL and IV.
+    - Each pair has a smaller symbol before a bigger one.
+    solution: 'Step 1: CD = 400. Step 2: XL = 40. Step 3: IV = 4. Step 4: 400 + 40 + 4 = 444.'
+    mistakes:
+      '666': c8_roman_subtract
+  - prompt: What number is MDCLXVI?
+    answer: '1666'
+    check: 1000 + 500 + 100 + 50 + 10 + 5 + 1
+    difficulty: 1
+    hints:
+    - Each symbol here is smaller than the one before it.
+    - So you just add them all.
+    solution: 'Every symbol is followed by a smaller one, so add: 1000 + 500 + 100 + 50 + 10 + 5 + 1 = 1666.'
+    mistakes:
+      '1444': c8m3_order
+  - prompt: Which is 49 in Roman numerals?
+    options:
+    - XLIX
+    - IL
+    - XXXXIX
+    - LIX
+    answer: XLIX
+    difficulty: 2
+    hints:
+    - Write 40 and 9 separately.
+    - 40 is XL. What is 9?
+    solution: 'Step 1: 40 = XL. Step 2: 9 = IX. Step 3: 49 = XLIX. Romans only put I before V or X, so IL is not used.'
+    mistakes:
+      IL: t8_roman_subtract
+      LIX: c8_roman_subtract
+      XXXXIX: t8_roman_build
+  - prompt: An Egyptian number shows 2 symbols for 1000, 5 for 100 and 7 for 1. What number is it?
+    answer: '2507'
+    check: 2*1000 + 5*100 + 7
+    difficulty: 1
+    hints:
+    - There are no symbols for 10 here.
+    - Add 2 × 1000, 5 × 100 and 7 × 1.
+    solution: 'Step 1: 2 × 1000 = 2000. Step 2: 5 × 100 = 500. Step 3: 7 ones. Step 4: 2000 + 500 + 7 = 2507. In our system a zero holds the empty tens place.'
+    mistakes:
+      '257': t8_zero_placeholder
+      '14': t8_egyptian
+  - prompt: How many Egyptian symbols are needed to write 999?
+    answer: '27'
+    check: 9 + 9 + 9
+    difficulty: 2
+    hints:
+    - 999 is 9 hundreds, 9 tens and 9 ones.
+    - Each hundred, ten and one needs its own symbol.
+    solution: 'Step 1: 9 hundreds need 9 symbols. Step 2: 9 tens need 9 more. Step 3: 9 ones need 9 more. Step 4: 9 + 9 + 9 = 27 symbols.'
+    mistakes:
+      '3': c8m3_egypt_count
+      '999': c8m3_egypt_count
+  - prompt: 'In base 60, a number is written as 2 | 15: 2 sixties and 15 ones. What is it in base 10?'
+    answer: '135'
+    check: 2*60 + 15
+    difficulty: 2
+    hints:
+    - The 2 counts sixties.
+    - 2 × 60, then add 15.
+    solution: 'Step 1: 2 sixties = 120. Step 2: 120 + 15 = 135.'
+    mistakes:
+      '215': c8m3_base60_value
+      '17': c8m3_base60_value
+  - prompt: A film runs for 1 hour 25 minutes. How many minutes is that?
+    answer: '85'
+    check: 60 + 25
+    difficulty: 1
+    hints:
+    - An hour has 60 minutes.
+    - Add the extra 25.
+    solution: 1 hour = 60 minutes, and 60 + 25 = 85 minutes. Counting time is still counting in sixties.
+    mistakes:
+      '125': c8m3_base60_value
+  - prompt: Which is an additive number system, where symbols are simply added up?
+    options:
+    - Egyptian numerals
+    - Our base-10 numerals
+    - Binary numbers
+    answer: Egyptian numerals
+    difficulty: 1
+    hints:
+    - In our numerals, the 5 in 50 and in 500 are worth different amounts.
+    - Which system gives a symbol the same value wherever it is?
+    solution: Egyptian symbols are always worth the same and are added up. In base 10 and binary, a digit's value depends on its place.
+    mistakes:
+      Our base-10 numerals: c8m3_additive
+      Binary numbers: c8m3_additive
+  - prompt: Why does XL mean 40 but LX mean 60?
+    options:
+    - A smaller symbol before a bigger one is taken away; after it, it is added
+    - Romans read from right to left
+    - L is worth different amounts in different numbers
+    answer: A smaller symbol before a bigger one is taken away; after it, it is added
+    difficulty: 2
+    hints:
+    - L is always 50 and X is always 10.
+    - What changes between XL and LX?
+    solution: In XL the X (10) comes before the L (50), so 50 − 10 = 40. In LX it comes after, so 50 + 10 = 60.
+    mistakes:
+      L is worth different amounts in different numbers: c8m3_order
+      Romans read from right to left: c8m3_order
 - code: cbse8m.story.base
   title: Place value and number bases
   after:
@@ -242,6 +416,56 @@ concepts:
           - 9
           - 15
         say: 'Too big. 8 needs only the eights place: 1000.'
+  lesson:
+    - teach: 'In our numerals the value of a digit depends on its place. In 555 the three 5s are worth 500, 50 and 5. Each place is worth 10 times the place to its right, so this is base 10. A zero keeps a place empty: in 305 the 0 says there are no tens.'
+      picture:
+        kind: compare
+        columns:
+        - title: Digit
+          points:
+          - 5 (left)
+          - 5 (middle)
+          - 5 (right)
+        - title: Worth
+          points:
+          - 5 hundreds = 500
+          - 5 tens = 50
+          - 5 ones = 5
+        alt: In 555 the same digit 5 is worth 500, 50 and 5 because of its place.
+      check:
+        prompt: What is the 3 worth in 4,328?
+        options:
+        - '300'
+        - '3'
+        - '3000'
+        answer: '300'
+        why: The 3 is in the hundreds place, so it is worth 3 × 100 = 300.
+    - teach: 'Any number can be the base. In base b the places from the right are worth 1, b, b², b³, … and the digits go from 0 up to b − 1. Binary is base 2: places 1, 2, 4, 8, 16, and only the digits 0 and 1. So 1011₂ = 8 + 0 + 2 + 1 = 11.'
+      picture:
+        kind: flow
+        steps:
+        - 1011₂
+        - places 8, 4, 2, 1
+        - 1×8 + 0×4 + 1×2 + 1×1
+        - = 11
+        alt: To read 1011 in base 2, give the places the values 8, 4, 2 and 1, multiply by the digits and add to get 11.
+      check:
+        prompt: What is 101₂ in base 10?
+        options:
+        - '5'
+        - '101'
+        - '3'
+        answer: '5'
+        why: 'Places 4, 2, 1: 1×4 + 0×2 + 1×1 = 5.'
+    - teach: 'To write a number in another base, take the biggest place value that fits, see how many times it fits, then repeat with what is left. For 13 in binary: 8 fits (5 left), 4 fits (1 left), 2 does not, 1 fits. So 13 = 1101₂.'
+      check:
+        prompt: Which is 6 in binary?
+        options:
+        - '110'
+        - '011'
+        - '6'
+        answer: '110'
+        why: '6 = 4 + 2, so the 4 and 2 places get a 1 and the 1 place gets a 0: 110₂.'
   items:
   - prompt: What is the place value of 7 in 47,302?
     answer: '7000'
@@ -306,3 +530,115 @@ concepts:
     - 'Base 2: digits below 2.'
     solution: In base b the digits go from 0 to b − 1, so base 2 uses 0 and 1.
     mistakes: {"1 and 2": "t8_base_digits", "0, 1 and 2": "t8_base_digits"}
+  - prompt: Write the binary number 10110₂ in base 10.
+    answer: '22'
+    check: 16 + 4 + 2
+    difficulty: 2
+    hints:
+    - The places from the right are 1, 2, 4, 8, 16.
+    - Add the places that have a 1.
+    solution: 'Step 1: places 16, 8, 4, 2, 1. Step 2: the 1s are in the 16, 4 and 2 places. Step 3: 16 + 4 + 2 = 22.'
+    mistakes:
+      '10110': c8m3_base_places
+      '3': t8_binary_places
+  - prompt: Write 25 in binary. Type the digits.
+    answer: '11001'
+    check: '11001'
+    difficulty: 3
+    hints:
+    - 'Powers of 2: 16, 8, 4, 2, 1.'
+    - 25 = 16 + 8 + 1.
+    solution: 'Step 1: 16 fits, 9 left. Step 2: 8 fits, 1 left. Step 3: 4 and 2 do not fit. Step 4: 1 fits. So 25 = 11001₂.'
+    mistakes:
+      '10011': c8m3_to_base
+      '25': c8m3_to_base
+  - prompt: Write the base-4 number 123₄ in base 10.
+    answer: '27'
+    check: 1*16 + 2*4 + 3
+    difficulty: 2
+    hints:
+    - In base 4 the places are 1, 4, 16.
+    - 1 × 16 + 2 × 4 + 3 × 1.
+    solution: 'Step 1: places 16, 4, 1. Step 2: 16 + 8 + 3 = 27.'
+    mistakes:
+      '123': c8m3_base_places
+      '6': c8m3_base_places
+  - prompt: What is the place value of 4 in 3,48,215?
+    answer: '40000'
+    check: 4*10**4
+    difficulty: 1
+    hints:
+    - Count the places from the right.
+    - The 4 is fifth from the right.
+    solution: 'From the right: 5 ones, 1 ten, 2 hundreds, 8 thousands, 4 ten thousands. So the 4 is worth 40,000.'
+    mistakes:
+      '4': c8_face_value
+      '4000': c8m3_count_places
+  - prompt: Write 7 in base 2.
+    answer: '111'
+    check: '111'
+    difficulty: 1
+    hints:
+    - 'Powers of 2: 4, 2, 1.'
+    - 7 = 4 + 2 + 1.
+    solution: '7 = 4 + 2 + 1, so every place gets a 1: 111₂.'
+    mistakes:
+      '7': c8m3_to_base
+      '1110': c8m3_to_base
+  - prompt: What is the largest 3-digit base-5 number, written in base 10?
+    answer: '124'
+    check: 5**3 - 1
+    difficulty: 3
+    hints:
+    - The biggest digit in base 5 is 4.
+    - Work out 444₅ with places 25, 5, 1.
+    solution: 'Step 1: the largest digit is 4, so the number is 444₅. Step 2: 4×25 + 4×5 + 4 = 100 + 20 + 4 = 124. (It is one less than 5³ = 125.)'
+    mistakes:
+      '444': c8m3_base_places
+      '999': t8_base_digits
+  - prompt: How many different digits does base 8 use?
+    answer: '8'
+    check: '8'
+    difficulty: 1
+    hints:
+    - 'Base 10 uses 0 to 9: ten digits.'
+    - Base 8 uses 0 up to one less than 8.
+    solution: 'Base 8 uses 0, 1, 2, 3, 4, 5, 6, 7: eight digits.'
+    mistakes:
+      '9': t8_base_digits
+      '7': t8_base_digits
+  - prompt: In 5,505, the leftmost 5 is worth how many times the 5 next to it?
+    answer: '10'
+    check: 5000/500
+    difficulty: 2
+    hints:
+    - The leftmost 5 is in the thousands place.
+    - The next 5 is in the hundreds place.
+    solution: 'Step 1: the first 5 is worth 5000. Step 2: the second is worth 500. Step 3: 5000 ÷ 500 = 10.'
+    mistakes:
+      '1': c8_face_value
+      '100': c8m3_count_places
+  - prompt: Work out 100₂ + 11₂ and give the answer in base 10.
+    answer: '7'
+    check: 4 + 3
+    difficulty: 2
+    hints:
+    - Change each to base 10 first.
+    - 100₂ = 4. What is 11₂?
+    solution: 'Step 1: 100₂ = 4. Step 2: 11₂ = 2 + 1 = 3. Step 3: 4 + 3 = 7.'
+    mistakes:
+      '111': c8m3_base_places
+  - prompt: Why do computers use base 2?
+    options:
+    - Each place only needs two states, like on and off
+    - Base-2 numbers are shorter
+    - Base 2 has no zero
+    answer: Each place only needs two states, like on and off
+    difficulty: 1
+    hints:
+    - Binary only uses 0 and 1.
+    - A switch can be off or on.
+    solution: A circuit can easily be off (0) or on (1), so two digits are enough. Binary numbers are actually longer than base-10 ones.
+    mistakes:
+      Base-2 numbers are shorter: c8m3_binary_long
+      Base 2 has no zero: t8_base_digits
