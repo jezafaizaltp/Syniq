@@ -15,6 +15,12 @@ tips:
   t7_triangle_inequality: "Any two sides must add to MORE than the third side. Test the two shortest."
   t7_triangle_types: "Equilateral needs all three sides equal and scalene needs all three different. What if exactly two sides match?"
   t7_two_right: "Two right angles already add to 180°. How much is left for the third angle?"
+  c7m7_two_short: Add the two shorter sides and compare with the longest. The two shorter must add to MORE than the longest.
+  c7m7_kinds: 'By sides: all three equal, exactly two equal, or none equal. Count the equal sides.'
+  c7m7_range: The third side must be longer than the difference of the other two and shorter than their sum.
+  c7m7_sum180: The three angles of a triangle always add to 180°. Subtract the angles you know from 180°.
+  c7m7_exterior: An exterior angle equals the two interior angles that are NOT next to it, added together.
+  c7m7_iso_angles: In an isosceles triangle the two base angles are equal. Take the top angle from 180°, then share what is left equally.
 concepts:
 - code: cbse7m.tri.sides
   title: Triangles and the triangle inequality
@@ -82,6 +88,58 @@ concepts:
       bin: No triangle
       clue: 3 + 6 against 10.
       why: 9 < 10.
+  lesson:
+    - teach: 'Three lines that meet in pairs make a triangle: 3 sides, 3 angles and 3 corners (vertices). By sides, a triangle is equilateral (all three equal), isosceles (two equal) or scalene (none equal).'
+      picture:
+        kind: compare
+        columns:
+        - title: Equilateral
+          points:
+          - 5, 5, 5 cm
+          - all sides equal
+        - title: Isosceles
+          points:
+          - 5, 5, 3 cm
+          - two sides equal
+        - title: Scalene
+          points:
+          - 4, 5, 6 cm
+          - no sides equal
+        alt: Three kinds of triangle by their sides.
+      check:
+        prompt: A triangle has sides 6 cm, 8 cm and 6 cm. What kind is it?
+        options:
+        - Isosceles
+        - Scalene
+        - Equilateral
+        answer: Isosceles
+        why: Exactly two sides are equal.
+    - teach: 'Not any three lengths make a triangle. Try 2, 3 and 7 cm sticks: the two short ones together reach only 5 cm, so they cannot meet over the 7 cm stick. The rule (triangle inequality): any two sides together must be longer than the third. Quick test: do the two shorter sides add to more than the longest?'
+      picture:
+        kind: bars
+        bars:
+        - label: 2 + 3
+          value: 5
+        - label: longest
+          value: 7
+        unit: cm
+        alt: The two short sticks add to 5 cm, shorter than the 7 cm stick, so they cannot form a triangle.
+      check:
+        prompt: Can sticks of 4 cm, 5 cm and 7 cm make a triangle?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: 4 + 5 = 9, which is more than 7.
+    - teach: If two sides are known, the third must be more than their difference and less than their sum. With sides 5 and 8, the third side is between 3 and 13 (not equal to either). To build a triangle with three given sides, draw one side, then draw arcs from each end with the compass set to the other two lengths.
+      check:
+        prompt: Two sides are 5 cm and 8 cm. Which could be the third side?
+        options:
+        - 10 cm
+        - 13 cm
+        - 2 cm
+        answer: 10 cm
+        why: It must be between 8 − 5 = 3 and 8 + 5 = 13.
   items:
   - prompt: Can sides of 3 cm, 4 cm and 8 cm make a triangle?
     options:
@@ -154,6 +212,151 @@ concepts:
     - Less than 13.
     solution: The third side must be less than 13, so at most 12 cm.
     mistakes: {"13": "t7_third_side_max", "14": "t7_third_side_max"}
+  - prompt: Can sides of 6 cm, 7 cm and 12 cm make a triangle?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if it has a right angle
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Add the two shorter sides.
+    - Is 6 + 7 more than 12?
+    solution: 6 + 7 = 13, which is more than 12, so the sides can make a triangle.
+    mistakes:
+      'No': c7m7_two_short
+      Only if it has a right angle: c7m7_two_short
+  - prompt: Can sides of 1 cm, 2 cm and 6 cm make a triangle?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only an isosceles one
+    answer: 'No'
+    difficulty: 1
+    hints:
+    - Add the two shorter sides.
+    - Compare 1 + 2 with 6.
+    solution: 1 + 2 = 3, which is less than 6. The short sides cannot meet.
+    mistakes:
+      'Yes': c7m7_two_short
+      Only an isosceles one: c7m7_two_short
+  - prompt: A triangle has sides 9 cm, 9 cm and 9 cm. What kind is it?
+    options:
+    - Equilateral
+    - Isosceles only
+    - Scalene
+    answer: Equilateral
+    difficulty: 1
+    hints:
+    - Count the equal sides.
+    - All three are the same.
+    solution: All three sides are equal, so it is equilateral.
+    mistakes:
+      Isosceles only: c7m7_kinds
+      Scalene: c7m7_kinds
+  - prompt: A triangle has sides 4 cm, 7 cm and 9 cm. What kind is it?
+    options:
+    - Scalene
+    - Isosceles
+    - Equilateral
+    answer: Scalene
+    difficulty: 1
+    hints:
+    - Are any two sides the same?
+    - 4, 7 and 9 are all different.
+    solution: No two sides are equal, so it is scalene.
+    mistakes:
+      Isosceles: c7m7_kinds
+      Equilateral: c7m7_kinds
+  - prompt: Two sides of a triangle are 6 cm and 10 cm. The third side is a whole number of cm. What is the smallest it can be?
+    answer: '5'
+    check: 10-6+1
+    difficulty: 2
+    hints:
+    - The third side must be more than 10 − 6.
+    - The next whole number above 4.
+    solution: 'Step 1: it must be more than 10 − 6 = 4 cm. Step 2: the smallest whole number above 4 is 5.'
+    mistakes:
+      '4': c7m7_range
+      '16': c7m7_range
+  - prompt: Two sides of a triangle are 6 cm and 10 cm. The third side is a whole number of cm. What is the largest it can be?
+    answer: '15'
+    check: 6+10-1
+    difficulty: 2
+    hints:
+    - The third side must be less than 6 + 10.
+    - The whole number just below 16.
+    solution: 'Step 1: it must be less than 6 + 10 = 16 cm. Step 2: the largest whole number below 16 is 15.'
+    mistakes:
+      '16': c7m7_range
+      '4': c7m7_range
+  - prompt: An isosceles triangle has two sides of 3 cm. Which length could the third side NOT be?
+    options:
+    - 7 cm
+    - 5 cm
+    - 1 cm
+    answer: 7 cm
+    difficulty: 2
+    hints:
+    - The two 3 cm sides together make 6 cm.
+    - The third side must be shorter than 6 cm.
+    solution: 3 + 3 = 6, so the third side must be less than 6 cm. 1 cm and 5 cm work; 7 cm does not.
+    mistakes:
+      5 cm: c7m7_two_short
+      1 cm: c7m7_range
+  - prompt: Which set of lengths can make a triangle?
+    options:
+    - 5 cm, 5 cm, 9 cm
+    - 2 cm, 4 cm, 6 cm
+    - 3 cm, 3 cm, 7 cm
+    answer: 5 cm, 5 cm, 9 cm
+    difficulty: 2
+    hints:
+    - For each set, add the two shorter sides.
+    - The sum must be more than the longest, not equal to it.
+    solution: 5 + 5 = 10 > 9 works. 2 + 4 = 6 is only equal to 6 (flat), and 3 + 3 = 6 < 7.
+    mistakes:
+      2 cm, 4 cm, 6 cm: c7m7_two_short
+      3 cm, 3 cm, 7 cm: c7m7_two_short
+  - prompt: How many whole-number lengths (in cm) can the third side have if two sides are 3 cm and 7 cm?
+    answer: '5'
+    check: (3+7-1)-(7-3+1)+1
+    difficulty: 3
+    hints:
+    - Find the smallest and largest whole numbers allowed.
+    - More than 4 and less than 10.
+    solution: 'Step 1: the third side is more than 7 − 3 = 4 and less than 7 + 3 = 10. Step 2: that allows 5, 6, 7, 8, 9: five lengths.'
+    mistakes:
+      '6': c7m7_range
+      '7': c7m7_range
+  - prompt: A triangle has a perimeter of 12 cm and all sides are whole numbers. Which of these is possible?
+    options:
+    - 4, 4, 4
+    - 2, 4, 6
+    - 1, 5, 6
+    answer: 4, 4, 4
+    difficulty: 3
+    hints:
+    - All three add to 12. Check the triangle rule on each.
+    - Two shorter sides must add to more than the longest.
+    solution: '4 + 4 > 4 works. In 2, 4, 6: 2 + 4 = 6 (flat). In 1, 5, 6: 1 + 5 = 6 (flat).'
+    mistakes:
+      2, 4, 6: c7m7_two_short
+      1, 5, 6: c7m7_two_short
+  - prompt: Why can no side of a triangle be half the perimeter or more?
+    options:
+    - The other two sides together would be no longer than it
+    - The angles would add to more than 180°
+    - The triangle would become equilateral
+    answer: The other two sides together would be no longer than it
+    difficulty: 3
+    hints:
+    - If one side is half the perimeter, what do the other two add to?
+    - Use the rule about two sides and the third.
+    solution: If one side is half the perimeter, the other two make up the other half, so they are only equal to it, not longer. The triangle would lie flat.
+    mistakes:
+      The angles would add to more than 180°: c7m7_two_short
+      The triangle would become equilateral: c7m7_kinds
 - code: cbse7m.tri.angles
   title: Angle sum and exterior angles
   after:
@@ -239,6 +442,105 @@ concepts:
       - when:
           degrees: 35
         say: Not isosceles. 180 − 90 − 35 = ?
+  lesson:
+    - teach: 'Draw any triangle, tear off its three corners and place them side by side: they fit exactly on a straight line. So the three angles of every triangle add to 180°. If two angles are 70° and 50°, the third is 180° − 120° = 60°.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 1
+          B:
+          - 9
+          - 1
+          C:
+          - 4
+          - 7
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        angles:
+        - at: A
+          from: B
+          to: C
+          label: 70°
+        - at: B
+          from: C
+          to: A
+          label: 50°
+        - at: C
+          from: A
+          to: B
+          label: 60°
+        alt: Triangle ABC with angles 70°, 50° and 60°, which add to 180°.
+      check:
+        prompt: Two angles of a triangle are 90° and 30°. What is the third?
+        options:
+        - 60°
+        - 90°
+        - 120°
+        answer: 60°
+        why: 180 − 90 − 30 = 60.
+    - teach: 'Special triangles have special angles. Equilateral: all three are 60°. Isosceles: the two angles opposite the equal sides (base angles) are equal. Right triangle: one angle is 90°, so the other two add to 90°.'
+      check:
+        prompt: An isosceles triangle has base angles of 50° each. What is the top angle?
+        options:
+        - 80°
+        - 50°
+        - 130°
+        answer: 80°
+        why: 180 − 50 − 50 = 80.
+    - teach: Extend one side of a triangle and you get an exterior angle. It equals the two interior angles far from it (not the one next to it), added together. With interior angles 40° and 60°, the exterior angle at the third corner is 100°.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 1
+          B:
+          - 6
+          - 1
+          C:
+          - 3
+          - 6
+          D:
+          - 9
+          - 1
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        - - B
+          - D
+        angles:
+        - at: A
+          from: B
+          to: C
+          label: 40°
+        - at: C
+          from: A
+          to: B
+          label: 60°
+        - at: B
+          from: D
+          to: C
+          label: 100°
+        alt: Side AB is extended to D. The exterior angle at B is 100°, equal to 40° + 60°.
+      check:
+        prompt: The two far interior angles are 35° and 75°. What is the exterior angle?
+        options:
+        - 110°
+        - 70°
+        - 40°
+        answer: 110°
+        why: 35 + 75 = 110.
   items:
   - prompt: Two angles of a triangle are 50° and 60°. Find the third, in degrees.
     answer: '70'
@@ -299,3 +601,130 @@ concepts:
     - Nothing left for the third angle.
     solution: Two right angles already make 180°, leaving 0° for the third.
     mistakes: {"Yes": "t7_two_right", "Only if it is large": "t7_two_right"}
+  - prompt: Two angles of a triangle are 80° and 45°. Find the third, in degrees.
+    answer: '55'
+    check: 180-80-45
+    difficulty: 1
+    hints:
+    - All three add to 180°.
+    - 180 − 80 − 45.
+    solution: 'Step 1: 80 + 45 = 125. Step 2: 180 − 125 = 55°.'
+    mistakes:
+      '125': c7m7_sum180
+      '65': c7m7_sum180
+  - prompt: Two angles of a triangle are 25° and 100°. Find the third, in degrees.
+    answer: '55'
+    check: 180-25-100
+    difficulty: 1
+    hints:
+    - Add the two you know.
+    - Take that from 180.
+    solution: 'Step 1: 25 + 100 = 125. Step 2: 180 − 125 = 55°.'
+    mistakes:
+      '75': c7m7_sum180
+      '125': c7m7_sum180
+  - prompt: A right triangle has one acute angle of 62°. Find the other acute angle, in degrees.
+    answer: '28'
+    check: 90-62
+    difficulty: 1
+    hints:
+    - The right angle is 90°, so the other two add to 90°.
+    - 90 − 62.
+    solution: 'Step 1: the two acute angles add to 180 − 90 = 90°. Step 2: 90 − 62 = 28°.'
+    mistakes:
+      '118': c7m7_sum180
+      '38': c7m7_sum180
+  - prompt: Can a triangle have angles 60°, 60° and 70°?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only if it is isosceles
+    answer: 'No'
+    difficulty: 1
+    hints:
+    - Add them.
+    - Do they make 180°?
+    solution: 60 + 60 + 70 = 190°, not 180°, so no triangle has these angles.
+    mistakes:
+      'Yes': c7m7_sum180
+      Only if it is isosceles: c7m7_sum180
+  - prompt: An isosceles triangle has a top angle of 110°. Find each base angle, in degrees.
+    answer: '35'
+    check: (180-110)/2
+    difficulty: 2
+    hints:
+    - Take 110 from 180 first.
+    - Share what is left between two equal angles.
+    solution: 'Step 1: 180 − 110 = 70. Step 2: 70 ÷ 2 = 35° each.'
+    mistakes:
+      '70': c7m7_iso_angles
+      '110': c7m7_iso_angles
+  - prompt: An isosceles triangle has base angles of 65° each. Find the top angle, in degrees.
+    answer: '50'
+    check: 180-65-65
+    difficulty: 2
+    hints:
+    - Both base angles are 65°.
+    - 180 − 65 − 65.
+    solution: 'Step 1: 65 + 65 = 130. Step 2: 180 − 130 = 50°.'
+    mistakes:
+      '115': c7m7_iso_angles
+      '65': c7m7_iso_angles
+  - prompt: In triangle PQR, ∠P = 30° and ∠Q = 85°. Find the exterior angle at R, in degrees.
+    answer: '115'
+    check: 30+85
+    difficulty: 2
+    hints:
+    - Use the two angles far from R.
+    - 30 + 85.
+    solution: 'Step 1: the exterior angle at R equals ∠P + ∠Q. Step 2: 30 + 85 = 115°.'
+    mistakes:
+      '65': c7m7_exterior
+      '55': c7m7_exterior
+  - prompt: An exterior angle of a triangle is 120°. One far interior angle is 50°. Find the other far interior angle, in degrees.
+    answer: '70'
+    check: 120-50
+    difficulty: 2
+    hints:
+    - The two far angles add to the exterior angle.
+    - 120 − 50.
+    solution: 'Step 1: far angles add to 120°. Step 2: 120 − 50 = 70°.'
+    mistakes:
+      '60': c7m7_exterior
+      '10': c7m7_exterior
+  - prompt: The angles of a triangle are x, 2x and 3x. Find x, in degrees.
+    answer: '30'
+    check: 180/6
+    difficulty: 3
+    hints:
+    - x + 2x + 3x = 180.
+    - 6x = 180.
+    solution: 'Step 1: x + 2x + 3x = 6x = 180. Step 2: x = 180 ÷ 6 = 30°. (The angles are 30°, 60°, 90°.)'
+    mistakes:
+      '60': c7m7_sum180
+      '36': c7m7_sum180
+  - prompt: Can a triangle have an obtuse angle and a right angle?
+    options:
+    - No, those two alone would be more than 180°
+    - Yes, if the third angle is small
+    - Yes, in an isosceles triangle
+    answer: No, those two alone would be more than 180°
+    difficulty: 3
+    hints:
+    - An obtuse angle is more than 90°.
+    - Add it to 90°.
+    solution: 90° plus anything over 90° is already more than 180°, leaving nothing for the third angle.
+    mistakes:
+      Yes, if the third angle is small: c7m7_sum180
+      Yes, in an isosceles triangle: c7m7_iso_angles
+  - prompt: Two angles of a triangle are equal and the third is 30° more than each of them. Find the third angle, in degrees.
+    answer: '80'
+    check: (180-30)/3+30
+    difficulty: 3
+    hints:
+    - Call each equal angle a; the third is a + 30.
+    - a + a + (a + 30) = 180.
+    solution: 'Step 1: 3a + 30 = 180, so 3a = 150 and a = 50. Step 2: the third angle is 50 + 30 = 80°.'
+    mistakes:
+      '50': c7m7_sum180
+      '60': c7m7_sum180

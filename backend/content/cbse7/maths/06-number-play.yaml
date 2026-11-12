@@ -15,6 +15,12 @@ tips:
   t7_parity_sum: "Even + even is even. What must the third number be for the total to be odd?"
   t7_row_missing: "The row must total 15. Take 2 and 7 away from 15."
   t7_virahanka: "Each number is the sum of the two before it. Add the last two."
+  c7m6_pairs: Think in pairs. Split each number into twos and see whether one is left over, then check what happens to the leftover ones.
+  c7m6_count_odd: Count how many odd numbers are being added, then think about their leftover ones. Can those leftovers all pair up?
+  c7m6_times: Look at each factor in the product. If any one factor splits into pairs exactly, the whole product does too.
+  c7m6_magic: In a 3 × 3 magic square using 1 to 9, every line adds to the same total. Use what the other two numbers already make.
+  c7m6_add_two: Each new number is made from the two numbers just before it. Add those two.
+  c7m6_digits: Add the digits one at a time, then check what that total divides by.
 concepts:
 - code: cbse7m.play.parity
   title: Even, odd and parity
@@ -81,6 +87,57 @@ concepts:
       bin: Odd
       clue: How many of these numbers have a leftover? 1, 3, 5, 7, 9.
       why: 'Five leftovers: the total, 55, is odd.'
+  lesson:
+    - teach: 'Even numbers can be put into pairs with nothing left over: 8 is four pairs. Odd numbers always leave one over: 7 is three pairs and one extra. Even numbers end in 0, 2, 4, 6 or 8; odd numbers end in 1, 3, 5, 7 or 9.'
+      picture:
+        kind: compare
+        columns:
+        - title: Even (8)
+          points:
+          - ●● ●● ●● ●●
+          - 4 pairs, none left over
+        - title: Odd (7)
+          points:
+          - ●● ●● ●● ●
+          - 3 pairs, 1 left over
+        alt: Eight dots make four pairs; seven dots make three pairs and one left over.
+      check:
+        prompt: Is 346 even or odd?
+        options:
+        - Even
+        - Odd
+        answer: Even
+        why: It ends in 6, so it splits into pairs exactly.
+    - teach: 'When you add, the leftover ones decide. Odd + odd: the two leftovers make a new pair, so the sum is even. Even + odd: one leftover stays, so the sum is odd. For many numbers: the sum is odd exactly when there is an odd count of odd numbers.'
+      picture:
+        kind: compare
+        columns:
+        - title: Adding
+          points:
+          - even + even = even
+          - odd + odd = even
+          - even + odd = odd
+        - title: Multiplying
+          points:
+          - even × anything = even
+          - odd × odd = odd
+        alt: Parity rules for adding and multiplying.
+      check:
+        prompt: Is 15 + 27 even or odd?
+        options:
+        - Even
+        - Odd
+        answer: Even
+        why: 'Two odd numbers: the two leftovers pair up.'
+    - teach: Parity solves puzzles without adding. Can 3 odd numbers add to 30? Three odds is an odd count of odds, so the sum is odd, and 30 is even. So it is impossible, whatever numbers you try.
+      check:
+        prompt: Can four odd numbers add up to 21?
+        options:
+        - No, four odd numbers always give an even sum
+        - Yes, for example 5 + 5 + 5 + 6
+        - Yes, if the numbers are large
+        answer: No, four odd numbers always give an even sum
+        why: An even count of odd numbers gives an even sum, and 21 is odd. (6 is not odd.)
   items:
   - prompt: Is 37 + 49 even or odd?
     options:
@@ -157,6 +214,168 @@ concepts:
     - even + ? = odd.
     solution: even + even = even, and only even + odd gives odd.
     mistakes: {"Even": "t7_parity_sum", "Either": "t7_parity_sum"}
+  - prompt: Is 58 + 34 even or odd?
+    options:
+    - Even
+    - Odd
+    - It cannot be told without adding
+    answer: Even
+    difficulty: 1
+    hints:
+    - Both numbers end in an even digit.
+    - What does even + even give?
+    solution: Both are even, and even + even is even (58 + 34 = 92).
+    mistakes:
+      Odd: c7m6_pairs
+      It cannot be told without adding: c7m6_pairs
+  - prompt: Is 41 + 26 even or odd?
+    options:
+    - Odd
+    - Even
+    - Neither
+    answer: Odd
+    difficulty: 1
+    hints:
+    - One number is odd, one is even.
+    - The one leftover from the odd number has no partner.
+    solution: Odd + even is odd (41 + 26 = 67).
+    mistakes:
+      Even: c7m6_pairs
+      Neither: c7m6_pairs
+  - prompt: Is 16 × 33 even or odd?
+    options:
+    - Even
+    - Odd
+    - It depends on the answer's last digit only
+    answer: Even
+    difficulty: 1
+    hints:
+    - Look at each factor.
+    - Is either factor even?
+    solution: 16 is even, and even × anything is even (16 × 33 = 528).
+    mistakes:
+      Odd: c7m6_times
+      It depends on the answer's last digit only: c7m6_times
+  - prompt: How many even numbers are there from 1 to 30?
+    answer: '15'
+    check: 30/2
+    difficulty: 1
+    hints:
+    - Even numbers are 2, 4, 6, …
+    - Every pair 1–2, 3–4, … has one even number.
+    solution: 'Step 1: 1 to 30 makes 15 pairs (1–2, 3–4, …, 29–30). Step 2: each pair has one even number, so 15.'
+    mistakes:
+      '30': c7m6_pairs
+      '14': c7m6_pairs
+  - prompt: Is 13 + 25 + 37 even or odd?
+    options:
+    - Odd
+    - Even
+    - Neither
+    answer: Odd
+    difficulty: 2
+    hints:
+    - Count how many of the numbers are odd.
+    - Three is an odd count.
+    solution: All three are odd. An odd count of odd numbers gives an odd sum (13 + 25 + 37 = 75).
+    mistakes:
+      Even: c7m6_count_odd
+      Neither: c7m6_count_odd
+  - prompt: Is 7 × 9 × 11 even or odd?
+    options:
+    - Odd
+    - Even
+    - Cannot tell
+    answer: Odd
+    difficulty: 2
+    hints:
+    - Look for any even factor.
+    - Odd × odd stays odd.
+    solution: None of the factors is even, and odd × odd is odd every time (7 × 9 × 11 = 693).
+    mistakes:
+      Even: c7m6_times
+      Cannot tell: c7m6_times
+  - prompt: Is 3 × 8 + 5 even or odd?
+    options:
+    - Odd
+    - Even
+    - Neither
+    answer: Odd
+    difficulty: 2
+    hints:
+    - Work out the parity of 3 × 8 first.
+    - Then add an odd number to it.
+    solution: 'Step 1: 3 × 8 is even (one factor is even). Step 2: even + odd = odd (24 + 5 = 29).'
+    mistakes:
+      Even: c7m6_times
+      Neither: c7m6_pairs
+  - prompt: Riya adds six odd numbers. Is the total even or odd?
+    options:
+    - Even
+    - Odd
+    - It depends on which numbers
+    answer: Even
+    difficulty: 2
+    hints:
+    - Count the odd numbers.
+    - Six is an even count.
+    solution: The six leftovers make three new pairs, so the total is even whichever odd numbers she picks.
+    mistakes:
+      Odd: c7m6_count_odd
+      It depends on which numbers: c7m6_count_odd
+  - prompt: How many odd numbers are there from 1 to 99?
+    answer: '50'
+    check: (99+1)/2
+    difficulty: 2
+    hints:
+    - 'Pair them: 1–2, 3–4, …'
+    - 99 has no partner, but it is odd.
+    solution: 'Step 1: 1 to 98 makes 49 pairs, each with one odd number. Step 2: 99 is one more odd number. Step 3: 49 + 1 = 50.'
+    mistakes:
+      '49': c7m6_pairs
+      '99': c7m6_pairs
+  - prompt: Can you pick five numbers from 1, 3, 5, 7, 9 (repeats allowed) that add to 30?
+    options:
+    - No, five odd numbers always add to an odd number
+    - Yes, 9 + 9 + 9 + 3 + 0
+    - Yes, 7 + 7 + 7 + 5 + 4
+    answer: No, five odd numbers always add to an odd number
+    difficulty: 3
+    hints:
+    - Every number you may use is odd.
+    - Five is an odd count of odd numbers.
+    solution: Five odd numbers give an odd sum, and 30 is even, so it is impossible (0 and 4 are not in the list).
+    mistakes:
+      Yes, 9 + 9 + 9 + 3 + 0: c7m6_count_odd
+      Yes, 7 + 7 + 7 + 5 + 4: c7m6_count_odd
+  - prompt: A grid of 3 rows and 5 columns of squares. Is the number of squares even or odd?
+    options:
+    - Odd
+    - Even
+    - It depends on the size of the squares
+    answer: Odd
+    difficulty: 3
+    hints:
+    - The number of squares is rows × columns.
+    - Are 3 and 5 both odd?
+    solution: 3 × 5 = 15 squares. Both sides are odd, and odd × odd is odd.
+    mistakes:
+      Even: c7m6_times
+      It depends on the size of the squares: c7m6_times
+  - prompt: a is odd and b is even. Which of these must be odd?
+    options:
+    - a + b
+    - a × b
+    - b + b
+    answer: a + b
+    difficulty: 3
+    hints:
+    - Test each with small numbers, like a = 3 and b = 4.
+    - One option adds an odd to an even.
+    solution: a + b = odd + even = odd. a × b has an even factor, so it is even; b + b is even + even, so even.
+    mistakes:
+      a × b: c7m6_times
+      b + b: c7m6_pairs
 - code: cbse7m.play.patterns
   title: Magic squares and number patterns
   after:
@@ -260,6 +479,59 @@ concepts:
           - 3
           - 9
         say: 'Row 3 goes over: 4 + 9 is 13 already.'
+  lesson:
+    - teach: A 3 × 3 magic square puts 1 to 9 in a grid so every row, column and diagonal has the same sum. All nine numbers add to 45, and the 3 rows share that total, so each row adds to 45 ÷ 3 = 15. The centre must be 5, the middle number.
+      picture:
+        kind: compare
+        columns:
+        - title: Top row
+          points:
+          - 2  7  6
+          - 2 + 7 + 6 = 15
+        - title: Middle row
+          points:
+          - 9  5  1
+          - 9 + 5 + 1 = 15
+        - title: Bottom row
+          points:
+          - 4  3  8
+          - 4 + 3 + 8 = 15
+        alt: 'A magic square: rows 2 7 6, 9 5 1, 4 3 8. Every row, column and diagonal adds to 15.'
+      check:
+        prompt: In the square 2 7 6 / 9 5 1 / 4 3 8, what does the diagonal 2, 5, 8 add to?
+        options:
+        - '15'
+        - '14'
+        - '16'
+        answer: '15'
+        why: 2 + 5 + 8 = 15, the magic sum.
+    - teach: 'Virahanka numbers grow by adding the two numbers before: 1, 2, 3, 5, 8, 13, 21, 34, … They count the ways to fill a rhythm of n beats with short (1 beat) and long (2 beat) syllables. Virahanka described them centuries before Fibonacci.'
+      picture:
+        kind: flow
+        steps:
+        - '1'
+        - '2'
+        - 1 + 2 = 3
+        - 2 + 3 = 5
+        - 3 + 5 = 8
+        - 5 + 8 = 13
+        alt: Each Virahanka number is the sum of the two before it.
+      check:
+        prompt: What comes after 13 and 21?
+        options:
+        - '34'
+        - '29'
+        - '42'
+        answer: '34'
+        why: 13 + 21 = 34.
+    - teach: 'Digit sums help with division. A number divides by 3 when its digit sum divides by 3, and by 9 when its digit sum divides by 9. 5,832: 5 + 8 + 3 + 2 = 18, which divides by 9, so 5,832 divides by 9.'
+      check:
+        prompt: Is 1,234 divisible by 3?
+        options:
+        - 'No'
+        - 'Yes'
+        answer: 'No'
+        why: 1 + 2 + 3 + 4 = 10, and 10 does not divide by 3.
   items:
   - prompt: What is the magic sum of a 3 × 3 magic square using 1 to 9?
     answer: '15'
@@ -319,3 +591,136 @@ concepts:
     - Digit-sum rule for 3 and 9.
     solution: If the digit sum is divisible by 9, so is the number (4,725 = 9 × 525).
     mistakes: {"4,725 is even": "t7_digit_sum_9", "4,725 is prime": "t7_digit_sum_9"}
+  - prompt: In a 3 × 3 magic square with sum 15, one row has 8 and 3. What is the third number?
+    answer: '4'
+    check: 15-8-3
+    difficulty: 1
+    hints:
+    - The row must add to 15.
+    - 8 + 3 = 11. What makes it up to 15?
+    solution: 'Step 1: 8 + 3 = 11. Step 2: 15 − 11 = 4.'
+    mistakes:
+      '11': c7m6_magic
+      '26': c7m6_magic
+  - prompt: 'Virahanka numbers: 1, 2, 3, 5, 8, 13, 21, … What comes after 21?'
+    answer: '34'
+    check: 13+21
+    difficulty: 1
+    hints:
+    - Add the two numbers just before.
+    - 13 + 21.
+    solution: 'Step 1: the two before are 13 and 21. Step 2: 13 + 21 = 34.'
+    mistakes:
+      '29': c7m6_add_two
+      '42': c7m6_add_two
+  - prompt: What is the digit sum of 3,051?
+    answer: '9'
+    check: 3+0+5+1
+    difficulty: 1
+    hints:
+    - Add each digit.
+    - 3 + 0 + 5 + 1.
+    solution: 'Step 1: 3 + 0 = 3. Step 2: 3 + 5 + 1 = 9.'
+    mistakes:
+      '8': c7m6_digits
+      '10': c7m6_digits
+  - prompt: Is 7,425 divisible by 9?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only by 3
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Find the digit sum.
+    - Does the digit sum divide by 9?
+    solution: 7 + 4 + 2 + 5 = 18, and 18 divides by 9, so 7,425 does too (7,425 = 9 × 825).
+    mistakes:
+      'No': c7m6_digits
+      Only by 3: c7m6_digits
+  - prompt: Is 2,021 divisible by 3?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only by 9
+    answer: 'No'
+    difficulty: 2
+    hints:
+    - Find the digit sum.
+    - Does 5 divide by 3?
+    solution: 2 + 0 + 2 + 1 = 5, which does not divide by 3, so 2,021 does not either.
+    mistakes:
+      'Yes': c7m6_digits
+      Only by 9: c7m6_digits
+  - prompt: In a 3 × 3 magic square using 1 to 9, a diagonal has 4 in one corner and 5 in the centre. What is in the opposite corner?
+    answer: '6'
+    check: 15-4-5
+    difficulty: 2
+    hints:
+    - The diagonal must add to 15.
+    - 4 + 5 = 9. What makes it 15?
+    solution: 'Step 1: 4 + 5 = 9. Step 2: 15 − 9 = 6.'
+    mistakes:
+      '9': c7m6_magic
+      '1': c7m6_magic
+  - prompt: If the numbers 2 to 10 are used in a 3 × 3 magic square, what is the magic sum?
+    answer: '18'
+    check: (2+3+4+5+6+7+8+9+10)/3
+    difficulty: 2
+    hints:
+    - Add 2 to 10 first.
+    - Share that total among 3 rows.
+    solution: 'Step 1: 2 + 3 + … + 10 = 54. Step 2: 54 ÷ 3 = 18.'
+    mistakes:
+      '15': c7m6_magic
+      '54': c7m6_magic
+  - prompt: How many ways can a 4-beat rhythm be filled with short (1 beat) and long (2 beat) syllables?
+    answer: '5'
+    check: 2+3
+    difficulty: 2
+    hints:
+    - 3 beats have 3 ways and 2 beats have 2 ways.
+    - Add the counts for the two beat-lengths before 4.
+    solution: 'Step 1: a 4-beat rhythm starts with a short (then 3 beats: 3 ways) or a long (then 2 beats: 2 ways). Step 2: 3 + 2 = 5.'
+    mistakes:
+      '4': c7m6_add_two
+      '6': c7m6_add_two
+  - prompt: Which digit can go in the blank so that 4_2 divides by 9?
+    answer: '3'
+    check: 9-4-2
+    difficulty: 3
+    hints:
+    - The digit sum must be 9 or 18.
+    - 4 + 2 is already 6.
+    solution: 'Step 1: 4 + ? + 2 must divide by 9. Step 2: 6 + 3 = 9, so the digit is 3 (432 = 9 × 48). 6 + 12 would need a two-digit blank.'
+    mistakes:
+      '6': c7m6_digits
+      '9': c7m6_digits
+  - prompt: In a magic square using 1 to 9, why can 9 not be in a corner?
+    options:
+    - A corner is in 3 lines, but 9 only fits in 2 lines adding to 15 (9+1+5, 9+2+4)
+    - 9 is too large to fit in the grid
+    - Corners must hold even numbers only, and 9 is odd
+    answer: A corner is in 3 lines, but 9 only fits in 2 lines adding to 15 (9+1+5, 9+2+4)
+    difficulty: 3
+    hints:
+    - A corner sits in a row, a column and a diagonal.
+    - List the ways to make 15 using 9.
+    solution: With 9, only 9 + 1 + 5 and 9 + 2 + 4 make 15 from different numbers 1 to 9. A corner needs 3 lines, so 9 must go on an edge middle.
+    mistakes:
+      9 is too large to fit in the grid: c7m6_magic
+      Corners must hold even numbers only, and 9 is odd: c7m6_magic
+  - prompt: Virahanka numbers 1, 2, 3, 5, 8, … Which of these is NOT a Virahanka number?
+    options:
+    - '20'
+    - '21'
+    - '34'
+    answer: '20'
+    difficulty: 3
+    hints:
+    - 'Keep adding pairs: 8, 13, 21, 34.'
+    - Which number is skipped over?
+    solution: The list goes 8, 13, 21, 34, so 21 and 34 are in it and 20 is not.
+    mistakes:
+      '21': c7m6_add_two
+      '34': c7m6_add_two
