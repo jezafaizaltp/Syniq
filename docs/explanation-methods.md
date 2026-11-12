@@ -40,6 +40,45 @@ Rules that always hold:
   the student sees one line saying why, for example "Pictures first, since this
   has helped you before."
 
+## Inside each lesson
+
+A new topic is taught first, one idea at a time. A lesson step can be written
+in more than one way (`ways` in the pack, see `backend/content/README.md`,
+"Lessons"). The same scores order each step's ways for each learner
+(`learning.style_order`), so a learner whose answers go well after real-life
+examples sees the real-life way first.
+
+- "Explain another way" shows the next way at any time.
+- A wrong check answer is not the end of the idea: the next way appears, the
+  answer they tried is set aside, and they get one more try before the answer
+  and the reason are shown.
+- "I know some of this: check me first" turns it round: the check comes first,
+  and the teaching opens only for ideas they miss.
+- Credit: a wrong first answer counts against the way on screen; a right
+  answer on the second try, or after the learner asked for another way, counts
+  for that way. These go into the same per-topic counts as the "did this
+  help?" taps, so the next lesson and the next first explanation adapt.
+- At the end, the learner sees how many ideas they got first time and which
+  way helped with which idea. Nothing is marked.
+
+## The mentor
+
+The student's home page opens with their mentor (`app/mentor.py`, `GET
+/me/mentor`): a hello for the time of day in India, at most three next steps,
+most useful first, and what went well this week.
+
+1. A mistake made more than once and not fixed yet (a few questions that
+   catch it; three right and it is fixed).
+2. A topic stuck right now (three wrong in a row): learn it again another way.
+3. The topic most overdue for revision.
+4. Carry on: the next topic not yet secure in the chapter they worked on last,
+   or the next chapter; a brand-new learner is asked to pick a subject.
+
+"This week" lists only good news that is true: days practised, topics made
+secure, repeated mistakes fixed, lessons finished, times they got something
+wrong and later right, and the way of explaining that has helped most lately.
+Never marks, ranks or comparisons with anyone else.
+
 ## What people see
 
 | Who | Where | What |

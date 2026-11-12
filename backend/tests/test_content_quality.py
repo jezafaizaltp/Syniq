@@ -170,3 +170,16 @@ def test_every_tip_tag_is_defined():
     tags = cp.known_tags() | {t for _, p in PACKS for t in (p.get("tips") or {})}
     missing = {(rel(path), tag) for path, _, _, item in all_items() for tag in (item.get("mistakes") or {}).values() if tag not in tags}
     assert not missing, sorted(missing)
+
+
+def test_every_kerala9_maths_and_science_lesson_step_can_be_explained_another_way():
+    """The pilot: every idea in Maths, Physics, Chemistry and Biology has at least two ways to explain it."""
+    one_way = [
+        f"{c['code']} step {n}"
+        for path, pack in PACKS
+        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology")
+        for c in pack["concepts"]
+        for n, step in enumerate(c.get("lesson") or [], start=1)
+        if not step.get("ways")
+    ]
+    assert not one_way, one_way
