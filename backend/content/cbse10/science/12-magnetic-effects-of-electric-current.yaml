@@ -5,16 +5,24 @@ title: Magnetic Effects of Electric Current
 tips:
   c10s_hand_rules: "One rule uses the right hand gripping the wire, thumb along the current, to show the field. Fleming's left-hand rule gives the force on a wire instead."
   c10s_overload_short: "A short circuit is when live and neutral wires touch. When too many appliances draw current from one socket, it has a different name."
+  c10s12_too_many: "Overloading means too many appliances on one socket. Here no appliance is involved: the two wires touch each other."
   t10_ac_50: "India's mains voltage is 220 V, but the question asks for the frequency. Indian AC changes direction a fixed number of cycles each second, fewer than the US's 60."
+  c10s12_hz_volts: "50 is the frequency in hertz. This question asks for the voltage of the mains supply."
   t10_earth_wire: "If the metal body of an appliance becomes live, where should that current go instead of through you?"
   t10_field_n_to_s: "A compass placed outside a magnet points away from N and towards S."
   t10_fleming_left: "Fore-finger Field, seCond finger Current, thuMb Motion."
   t10_force_perpendicular: "The force is zero when the wire runs along the field. When is it biggest?"
+  c10s12_along: "The force is biggest when the wire crosses the field at right angles. Picture the wire turning until it lies along the field lines: what happens to the force?"
   t10_lines_no_cross: "A compass needle at one point can only point one way."
   t10_motor: "Which device turns electrical energy into movement using a magnet and a coil?"
   t10_soft_iron: "An electromagnet should switch off when the current stops. Which core loses its magnetism easily?"
   t10_solenoid_uniform: "Inside a long coil the field lines are straight and equally spaced. What does that mean?"
   t10_stronger_magnet: "The field of a coil comes from the current. What would make more of it?"
+  c10s12_field_strength: Field lines bunch together where the field is strong and spread out where it is weak.
+  c10s12_wire_field: The field around a straight wire forms circles. It is stronger closer to the wire and with more current.
+  c10s12_reverse: Reversing the current, or the field, reverses the force. Reversing both brings it back.
+  c10s12_wires: 'Indian wiring: live (red), neutral (black) and earth (green). Which wire does this job?'
+  c10s12_safety: A fuse or MCB cuts the current when it gets too large; the earth wire carries leakage safely to the ground.
 concepts:
 - code: cbse10s.mag.field
   title: Magnetic fields of currents
@@ -79,6 +87,50 @@ concepts:
       bin: Stronger
       clue: Where are the circles of field lines closest?
       why: 'Near the wire the field lines are close together: stronger.'
+  lesson:
+    - teach: A compass needle is a small magnet. Around a bar magnet, field lines go from the north pole to the south pole outside the magnet, and S to N inside, forming closed loops. Where lines are close the field is strong. Two lines never cross.
+      check:
+        prompt: Where is the field of a bar magnet strongest?
+        options:
+        - Near the poles
+        - In the middle of its side
+        - Far away
+        answer: Near the poles
+        why: Lines are crowded there.
+    - teach: 'Oersted found that a current in a wire deflects a compass: electricity makes magnetism. Around a straight wire, field lines are concentric circles. The right-hand thumb rule: grip the wire with the thumb along the current; the curled fingers show the field.'
+      picture:
+        kind: compare
+        columns:
+        - title: Straight wire
+          points:
+          - Circles around the wire
+          - Stronger near the wire
+        - title: Circular loop
+          points:
+          - Lines straight at the centre
+          - More turns, stronger field
+        - title: Solenoid
+          points:
+          - Like a bar magnet
+          - Uniform field inside
+        alt: 'Straight wire: circular field lines, stronger near the wire. Circular loop: nearly straight lines at its centre, stronger with more turns. Solenoid: field like a bar magnet with a uniform field inside.'
+      check:
+        prompt: Doubling the current in a straight wire makes the field…
+        options:
+        - Stronger
+        - Weaker
+        - Reverse
+        answer: Stronger
+        why: The field grows with current.
+    - teach: A solenoid is a long coil of wire. Its field is like a bar magnet's, with a uniform field inside. Putting a soft iron core inside makes an electromagnet, which is magnetic only while current flows. More turns, more current or a core make it stronger.
+      check:
+        prompt: An electromagnet loses its magnetism when…
+        options:
+        - The current stops
+        - It gets cold
+        - It is turned around
+        answer: The current stops
+        why: Soft iron loses magnetism easily.
   items:
   - prompt: 'Magnetic field lines outside a bar magnet go:'
     options:
@@ -159,6 +211,132 @@ concepts:
     - Steel would stay magnetised.
     solution: Soft iron becomes strongly magnetic but doesn't keep its magnetism, so the electromagnet can be switched off.
     mistakes: {"It is a good insulator": "t10_soft_iron", "It never becomes magnetic": "t10_soft_iron"}
+  - prompt: Who first showed that an electric current produces a magnetic field?
+    options:
+    - Hans Christian Oersted
+    - Michael Faraday
+    - Isaac Newton
+    - Georg Ohm
+    answer: Hans Christian Oersted
+    difficulty: 1
+    hints:
+    - He saw a compass needle move near a wire.
+    - In 1820.
+    solution: Oersted noticed a compass deflect near a current-carrying wire.
+    mistakes:
+      Georg Ohm: c10s12_wire_field
+  - prompt: What shape are the field lines around a straight current-carrying wire?
+    options:
+    - Concentric circles
+    - Straight parallel lines
+    - Spirals going out
+    - Zig-zags
+    answer: Concentric circles
+    difficulty: 1
+    hints:
+    - Sprinkle iron filings on a card around the wire.
+    - They wrap around it.
+    solution: The field lines are circles centred on the wire.
+    mistakes:
+      Straight parallel lines: t10_solenoid_uniform
+  - prompt: A compass is moved further from a current-carrying wire. What happens to its deflection?
+    options:
+    - It gets smaller
+    - It gets bigger
+    - It stays the same
+    - It reverses
+    answer: It gets smaller
+    difficulty: 2
+    hints:
+    - How does the field change with distance?
+    - Lines spread out further away.
+    solution: The field weakens with distance, so the needle turns less.
+    mistakes:
+      It gets bigger: c10s12_wire_field
+  - prompt: The current in a wire is reversed. What happens to the direction of its magnetic field?
+    options:
+    - It reverses
+    - It stays the same
+    - It disappears
+    - It becomes straight
+    answer: It reverses
+    difficulty: 1
+    hints:
+    - Use the right-hand thumb rule.
+    - Point the thumb the other way.
+    solution: Reversing the current reverses the field.
+    mistakes:
+      It stays the same: c10s_hand_rules
+  - prompt: Field lines are closer together at A than at B. Where is the field stronger?
+    options:
+    - At A
+    - At B
+    - The same at both
+    - Cannot tell
+    answer: At A
+    difficulty: 1
+    hints:
+    - Crowded lines mean something.
+    - Think of the poles of a magnet.
+    solution: Closer lines show a stronger field.
+    mistakes:
+      At B: c10s12_field_strength
+  - prompt: A solenoid behaves like a…
+    options:
+    - Bar magnet
+    - Horseshoe battery
+    - Light bulb
+    - Resistor only
+    answer: Bar magnet
+    difficulty: 1
+    hints:
+    - One end acts as a north pole.
+    - The other end as a south pole.
+    solution: A current-carrying solenoid has a field like a bar magnet.
+    mistakes:
+      Resistor only: t10_solenoid_uniform
+  - prompt: Which of these does NOT make an electromagnet stronger?
+    options:
+    - Using a plastic core
+    - More turns
+    - More current
+    - A soft iron core
+    answer: Using a plastic core
+    difficulty: 2
+    hints:
+    - Three of these help.
+    - Which core material doesn't help?
+    solution: Plastic is not magnetic, so it doesn't strengthen the field.
+    mistakes:
+      More turns: t10_stronger_magnet
+  - prompt: Where do magnetic field lines go inside a bar magnet?
+    options:
+    - From south to north
+    - From north to south
+    - Nowhere
+    - In circles around it
+    answer: From south to north
+    difficulty: 2
+    hints:
+    - Outside they go N to S.
+    - They form closed loops.
+    solution: To close the loop, lines inside run from S to N.
+    mistakes:
+      From north to south: t10_field_n_to_s
+  - prompt: Why is the field inside a long solenoid useful?
+    options:
+    - It is uniform, the same at all points
+    - It is zero
+    - It changes direction
+    - It is circular
+    answer: It is uniform, the same at all points
+    difficulty: 2
+    hints:
+    - The lines inside are straight and parallel.
+    - Equally spaced.
+    solution: Straight, parallel, equally spaced lines mean a uniform field, useful for magnetising things.
+    mistakes:
+      It is circular: c10s12_wire_field
 - code: cbse10s.mag.motor
   title: Force on a current and domestic circuits
   after:
@@ -240,6 +418,50 @@ concepts:
       bin: Fuse or MCB
       clue: A fuse melts. Which safety device just switches back on?
       why: A miniature circuit breaker (MCB) trips and can be reset.
+  lesson:
+    - teach: 'A current-carrying wire in a magnetic field feels a force. The force is largest when the current is at right angles to the field. Fleming''s left-hand rule: first finger = field, second finger = current, thumb = motion (force). Reversing current or field reverses the force.'
+      check:
+        prompt: In Fleming's left-hand rule, the first finger shows…
+        options:
+        - Field
+        - Current
+        - Force
+        answer: Field
+        why: First finger, Field.
+    - teach: This force is used in electric motors (fans, mixers, washing machines) and loudspeakers. It is also used in MRI scanners, where magnetic fields inside the body make images.
+      check:
+        prompt: An electric motor changes electrical energy into…
+        options:
+        - Mechanical energy
+        - Heat only
+        - Light
+        answer: Mechanical energy
+        why: It makes things turn.
+    - teach: 'Domestic circuits in India: 220 V AC at 50 Hz. Live wire (red), neutral (black) and earth (green). Appliances are in parallel. The earth wire protects from shocks by taking leakage current to the ground. Fuses and MCBs protect against overloading and short circuits.'
+      picture:
+        kind: compare
+        columns:
+        - title: Live
+          points:
+          - Red insulation
+          - 220 V
+        - title: Neutral
+          points:
+          - Black insulation
+          - 0 V
+        - title: Earth
+          points:
+          - Green insulation
+          - Safety path to the ground
+        alt: Live wire has red insulation at 220 V, neutral has black at 0 V, earth has green and gives a safety path to the ground.
+      check:
+        prompt: Which wire has green insulation?
+        options:
+        - Earth
+        - Live
+        - Neutral
+        answer: Earth
+        why: Green is earth.
   items:
   - prompt: 'In Fleming''s left-hand rule, the thumb shows the direction of:'
     options:
@@ -316,3 +538,128 @@ concepts:
     - Fans and mixers.
     solution: An electric motor turns because current-carrying coils are pushed by the magnetic field.
     mistakes: {"Electric heater": "t10_motor", "Fuse": "t10_motor"}
+  - prompt: In Fleming's left-hand rule, which finger shows the current?
+    options:
+    - Second (middle) finger
+    - First finger
+    - Thumb
+    - Little finger
+    answer: Second (middle) finger
+    difficulty: 1
+    hints:
+    - seCond finger, Current.
+    - First is field, thumb is motion.
+    solution: The second (middle) finger points along the current.
+    mistakes:
+      First finger: t10_fleming_left
+      Thumb: t10_fleming_left
+  - prompt: A wire runs parallel to a magnetic field. What is the force on it?
+    options:
+    - Zero
+    - Maximum
+    - Half the maximum
+    - It depends on the colour
+    answer: Zero
+    difficulty: 2
+    hints:
+    - Force is greatest at right angles.
+    - What about along the field?
+    solution: A wire along the field feels no force.
+    mistakes:
+      Maximum: c10s12_along
+  - prompt: Both the current and the field are reversed. What happens to the force on the wire?
+    options:
+    - It stays in the same direction
+    - It reverses
+    - It becomes zero
+    - It doubles
+    answer: It stays in the same direction
+    difficulty: 3
+    hints:
+    - Each reversal flips the force once.
+    - Two flips…
+    solution: Two reversals cancel, so the force keeps its direction.
+    mistakes:
+      It reverses: c10s12_reverse
+  - prompt: Which colour is the live wire's insulation in Indian homes?
+    options:
+    - Red
+    - Black
+    - Green
+    - Blue
+    answer: Red
+    difficulty: 1
+    hints:
+    - It carries the 220 V.
+    - Danger colour.
+    solution: The live wire has red insulation.
+    mistakes:
+      Green: c10s12_wires
+      Black: c10s12_wires
+  - prompt: What is the potential difference between the live and neutral wires in India, in volts?
+    answer: '220'
+    check: '220'
+    difficulty: 1
+    hints:
+    - Mains supply voltage.
+    - Two hundred and something.
+    solution: Indian mains supply is 220 V.
+    mistakes:
+      '50': c10s12_hz_volts
+      '110': c10s12_wires
+  - prompt: When the live wire touches the neutral wire directly, the current rises sharply. This is…
+    options:
+    - A short circuit
+    - Overloading
+    - Earthing
+    - Fleming's rule
+    answer: A short circuit
+    difficulty: 2
+    hints:
+    - Resistance becomes almost zero.
+    - No appliance in between.
+    solution: Live touching neutral is a short circuit.
+    mistakes:
+      Overloading: c10s12_too_many
+  - prompt: Which device in modern homes switches off automatically when the current is too large?
+    options:
+    - Miniature circuit breaker (MCB)
+    - Voltmeter
+    - Ammeter
+    - Earth wire
+    answer: Miniature circuit breaker (MCB)
+    difficulty: 2
+    hints:
+    - It replaces old fuses.
+    - You can switch it back on.
+    solution: An MCB trips when the current is too large and can be reset.
+    mistakes:
+      Earth wire: c10s12_safety
+  - prompt: Why do appliances with metal bodies, like a fridge, have a three-pin plug?
+    options:
+    - The third pin connects the earth wire for safety
+    - To use more power
+    - To make it look strong
+    - To change AC to DC
+    answer: The third pin connects the earth wire for safety
+    difficulty: 2
+    hints:
+    - Metal bodies can become live if a wire touches them.
+    - Where should that current go?
+    solution: The longer third pin connects the body to earth, so leaked current goes to the ground, not through a person.
+    mistakes:
+      To use more power: t10_earth_wire
+  - prompt: Which device uses the force on a current in a magnetic field to make sound?
+    options:
+    - Loudspeaker
+    - Bulb
+    - Fuse
+    - Heater
+    answer: Loudspeaker
+    difficulty: 2
+    hints:
+    - A coil vibrates a cone.
+    - It turns electrical signals into sound.
+    solution: In a loudspeaker the force on a coil in a magnet's field moves the cone.
+    mistakes:
+      Heater: t10_motor

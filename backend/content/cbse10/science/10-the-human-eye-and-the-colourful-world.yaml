@@ -12,9 +12,15 @@ tips:
   t10_near_point: "A normal eye can read comfortably at about a hand-span and a half from the face."
   t10_no_scattering: "With no air there is nothing to scatter sunlight. What colour does the sky look?"
   t10_retina: "The cornea and lens focus light. Which layer at the back has rods and cones?"
+  c10s10_front: "The screen with light-sensitive cells is at the back of the eye. This question is about the very first clear layer at the front."
   t10_scattering_blue: "Tiny air particles scatter short wavelengths more. Which colour has a short wavelength?"
   t10_sunrise_minutes: "Atmospheric refraction lifts the Sun's image by a little, worth only a couple of minutes."
   t10_violet_most: "Shorter wavelengths bend more in a prism. Which end of the rainbow has the shortest wavelength?"
+  c10s10_eye_parts: 'Follow light into the eye: through the clear front, past the coloured ring with its hole, through the lens, onto the screen at the back. Which part does this job?'
+  c10s10_defect_lens: Short sight needs rays spread apart before they enter the eye; long sight needs them brought together. Which does this person need?
+  c10s10_far_near: Far point for a normal eye is infinity; near point is 25 cm. Which one has moved for this person?
+  c10s10_prism_path: A prism bends light twice, once going in and once coming out, both times towards its base.
+  c10s10_size_scatter: Very tiny particles scatter blue the most. Bigger particles scatter all colours about equally, which looks white.
 concepts:
 - code: cbse10s.eye.defects
   title: The eye and its defects
@@ -92,6 +98,57 @@ concepts:
       bin: Myopia
       clue: Does the eye need to spread the light out or bring it together?
       why: A concave lens spreads light so it focuses further back, on the retina.
+  lesson:
+    - teach: Light enters the eye through the cornea, passes the pupil (the hole in the iris), and the lens focuses it onto the retina, which has light-sensitive cells that send signals along the optic nerve to the brain. The iris controls the pupil's size.
+      picture:
+        kind: flow
+        steps:
+        - Cornea
+        - Pupil (in the iris)
+        - Eye lens
+        - Retina
+        - Optic nerve to brain
+        alt: Light passes the cornea, through the pupil in the iris, is focused by the eye lens onto the retina, and signals go along the optic nerve to the brain.
+      check:
+        prompt: Which part controls how much light enters?
+        options:
+        - Iris
+        - Retina
+        - Optic nerve
+        answer: Iris
+        why: It changes the pupil's size.
+    - teach: 'Ciliary muscles change the lens''s shape so we can focus near and far: accommodation. A normal eye sees clearly from 25 cm (near point) to infinity (far point). In old age the lens may become cloudy (cataract), treated by surgery.'
+      check:
+        prompt: Near point of a normal young eye?
+        options:
+        - 25 cm
+        - 2.5 cm
+        - 250 cm
+        answer: 25 cm
+        why: Least distance of distinct vision.
+    - teach: 'Defects: myopia (short sight) — distant things blurred, image in front of the retina; corrected with a concave lens. Hypermetropia (long sight) — near things blurred, image behind the retina; corrected with a convex lens. Presbyopia (age) — weak focusing; often bifocal lenses.'
+      picture:
+        kind: compare
+        columns:
+        - title: Myopia
+          points:
+          - Far objects blurred
+          - Image in front of retina
+          - Concave lens
+        - title: Hypermetropia
+          points:
+          - Near objects blurred
+          - Image behind retina
+          - Convex lens
+        alt: 'Myopia: far objects blurred, image in front of the retina, fixed with a concave lens. Hypermetropia: near objects blurred, image behind the retina, fixed with a convex lens.'
+      check:
+        prompt: A child can't read the blackboard from the back. Which lens?
+        options:
+        - Concave
+        - Convex
+        - Bifocal
+        answer: Concave
+        why: 'Far objects are blurred: myopia.'
   items:
   - prompt: Which part of the eye has light-sensitive cells?
     options:
@@ -168,6 +225,129 @@ concepts:
     - Upper part for far, lower for near.
     solution: Bifocals have a concave upper part for far vision and a convex lower part for near vision.
     mistakes: {"Their pupils are too big": "t10_bifocal", "Their retina has stopped working": "t10_bifocal"}
+  - prompt: Which muscles change the shape of the eye lens?
+    options:
+    - Ciliary muscles
+    - Iris muscles
+    - Optic muscles
+    - Retina muscles
+    answer: Ciliary muscles
+    difficulty: 2
+    hints:
+    - They hold the lens.
+    - They help accommodation.
+    solution: Ciliary muscles relax or contract to change the lens's curvature.
+    mistakes:
+      Iris muscles: c10s10_eye_parts
+  - prompt: Light enters the eye mainly through which thin clear front surface, where most bending happens?
+    options:
+    - Cornea
+    - Retina
+    - Iris
+    - Optic nerve
+    answer: Cornea
+    difficulty: 2
+    hints:
+    - It is the transparent bulge at the front.
+    - It does most of the refraction.
+    solution: Most refraction of light happens at the cornea.
+    mistakes:
+      Retina: c10s10_front
+  - prompt: A person's far point is 2 m instead of infinity. What defect is this?
+    options:
+    - Myopia
+    - Hypermetropia
+    - Presbyopia
+    - Cataract
+    answer: Myopia
+    difficulty: 2
+    hints:
+    - They can't see beyond 2 m clearly.
+    - Far things are blurred.
+    solution: 'Distant objects blurred: myopia (short sight).'
+    mistakes:
+      Hypermetropia: c10s10_far_near
+  - prompt: A person's near point is 1 m. Which lens helps them read a book?
+    options:
+    - Convex
+    - Concave
+    - Plane
+    - Cylindrical
+    answer: Convex
+    difficulty: 2
+    hints:
+    - Near objects are blurred.
+    - The lens must help bring rays together.
+    solution: This is hypermetropia, corrected with a converging (convex) lens.
+    mistakes:
+      Concave: c10s10_defect_lens
+  - prompt: The eye lens becomes cloudy in old age, blurring vision. This is…
+    options:
+    - Cataract
+    - Myopia
+    - Colour blindness
+    - Night blindness
+    answer: Cataract
+    difficulty: 1
+    hints:
+    - It is about the lens turning milky.
+    - It is treated by surgery.
+    solution: A cloudy lens is a cataract; surgery can restore vision.
+    mistakes:
+      Myopia: c10s10_eye_parts
+  - prompt: What happens to the pupil in bright light?
+    options:
+    - It becomes smaller
+    - It becomes bigger
+    - It stays the same
+    - It closes completely
+    answer: It becomes smaller
+    difficulty: 1
+    hints:
+    - Too much light can harm the retina.
+    - The iris adjusts it.
+    solution: In bright light the iris makes the pupil smaller to let in less light.
+    mistakes:
+      It becomes bigger: c10s10_eye_parts
+  - prompt: A myopic person needs a lens of focal length −80 cm. What is its power in dioptres?
+    answer: '-1.25'
+    check: 1 / (-0.8)
+    difficulty: 3
+    hints:
+    - P = 1/f in metres.
+    - −80 cm = −0.8 m.
+    solution: P = 1/(−0.8) = −1.25 D.
+    mistakes:
+      '1.25': c10s10_defect_lens
+      '-0.0125': c10s_power_metres
+  - prompt: Why can't we see clearly an object held 5 cm from the eye?
+    options:
+    - It is closer than the near point
+    - It is beyond the far point
+    - The retina is too big
+    - The pupil is closed
+    answer: It is closer than the near point
+    difficulty: 2
+    hints:
+    - The lens can only bend so much.
+    - Remember 25 cm.
+    solution: The eye can't focus objects closer than its near point (about 25 cm).
+    mistakes:
+      It is beyond the far point: t10_near_point
+  - prompt: Where is the image formed in an eye with hypermetropia (for a near object)?
+    options:
+    - Behind the retina
+    - In front of the retina
+    - On the cornea
+    - On the iris
+    answer: Behind the retina
+    difficulty: 2
+    hints:
+    - Near objects are blurred.
+    - The lens can't bend the rays enough.
+    solution: The rays would meet behind the retina, so the image is blurred.
+    mistakes:
+      In front of the retina: c10s10_defect_lens
 - code: cbse10s.eye.colours
   title: Prisms, dispersion and scattering
   after:
@@ -239,6 +419,53 @@ concepts:
       bin: Atmospheric refraction
       clue: Why might a disc of light flicker less than a point?
       why: A planet is a small disc, so the bending averages out.
+  lesson:
+    - teach: 'A glass prism bends light twice, towards its base. White light splits into seven colours: VIBGYOR. This is dispersion: each colour bends by a different amount; violet bends most, red least. A rainbow is dispersion by raindrops, seen with the sun behind you.'
+      picture:
+        kind: bars
+        unit: how much it bends (more = taller)
+        bars:
+        - label: red
+          value: 1
+        - label: orange
+          value: 2
+        - label: yellow
+          value: 3
+        - label: green
+          value: 4
+        - label: blue
+          value: 5
+        - label: indigo
+          value: 6
+        - label: violet
+          value: 7
+        alt: In a prism red bends the least and violet bends the most, with orange, yellow, green, blue and indigo in between.
+      check:
+        prompt: Which colour is at the bottom of a prism's spectrum, bent most?
+        options:
+        - Violet
+        - Red
+        - Green
+        answer: Violet
+        why: Violet bends the most.
+    - teach: 'Atmospheric refraction: air layers have different densities, so light bends as it passes through. Stars twinkle because their starlight keeps bending by slightly changing amounts. The sun appears about 2 minutes before sunrise and stays 2 minutes after sunset.'
+      check:
+        prompt: Planets don't twinkle much because…
+        options:
+        - They are closer and look like small discs
+        - They have no light
+        - They are hotter
+        answer: They are closer and look like small discs
+        why: Many points average out the flicker.
+    - teach: 'Scattering: tiny particles in the air scatter blue light (short wavelength) more than red, so the sky is blue. At sunrise and sunset, light travels through more air, the blue is scattered away, and red reaches us. Danger signals are red because red is scattered least. The path of a beam through dust is visible: the Tyndall effect.'
+      check:
+        prompt: Why are danger lights red?
+        options:
+        - Red is scattered least, so it is seen far away
+        - Red is cheapest
+        - Red bends most
+        answer: Red is scattered least, so it is seen far away
+        why: Longest wavelength, least scattering.
   items:
   - prompt: 'The splitting of white light into its colours is called:'
     options:
@@ -315,3 +542,126 @@ concepts:
     - Nothing to scatter light.
     solution: Without air to scatter sunlight, the sky looks dark.
     mistakes: {"Blue": "t10_no_scattering", "White": "t10_no_scattering"}
+  - prompt: Light passes through a prism. Which colour bends the least?
+    options:
+    - Red
+    - Violet
+    - Blue
+    - Green
+    answer: Red
+    difficulty: 1
+    hints:
+    - The opposite end from violet.
+    - Longest wavelength.
+    solution: Red light bends the least.
+    mistakes:
+      Violet: t10_violet_most
+  - prompt: Why does the sun look reddish at sunrise?
+    options:
+    - Its light travels through more air, so blue is scattered away
+    - The sun is cooler in the morning
+    - The sun is red then
+    - Clouds are red
+    answer: Its light travels through more air, so blue is scattered away
+    difficulty: 2
+    hints:
+    - The sun is near the horizon.
+    - Light passes a thicker layer of air.
+    solution: Near the horizon light crosses more air; most blue is scattered off, so red reaches us.
+    mistakes:
+      The sun is cooler in the morning: t10_scattering_blue
+  - prompt: Clouds look white. Why?
+    options:
+    - Their water droplets are large and scatter all colours equally
+    - Water is white
+    - They reflect only blue
+    - They absorb red
+    answer: Their water droplets are large and scatter all colours equally
+    difficulty: 3
+    hints:
+    - Small particles scatter blue.
+    - What about bigger droplets?
+    solution: Larger droplets scatter all colours about equally, which mixes to white.
+    mistakes:
+      They reflect only blue: c10s10_size_scatter
+  - prompt: A beam of sunlight entering a dark room through a small hole is visible because of…
+    options:
+    - The Tyndall effect
+    - Dispersion
+    - Total internal reflection
+    - Refraction in a prism
+    answer: The Tyndall effect
+    difficulty: 2
+    hints:
+    - Dust in the air scatters light.
+    - It is named after a scientist.
+    solution: 'Dust particles scatter the light so the beam''s path is seen: the Tyndall effect.'
+    mistakes:
+      Dispersion: c10s_dispersion_scatter
+  - prompt: How many colours are in the spectrum of white light (VIBGYOR)?
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Count the letters of VIBGYOR.
+    - Violet to red.
+    solution: 'Violet, indigo, blue, green, yellow, orange, red: 7.'
+    mistakes:
+      '6': c10s10_prism_path
+      '3': c10s10_prism_path
+  - prompt: A second prism placed upside down after the first one turns the spectrum back into…
+    options:
+    - White light
+    - Only red
+    - Only violet
+    - Darkness
+    answer: White light
+    difficulty: 2
+    hints:
+    - Newton tried this.
+    - The second prism undoes the bending.
+    solution: The inverted prism recombines the colours into white light.
+    mistakes:
+      Only red: c10s10_prism_path
+  - prompt: To see a rainbow, where should the sun be?
+    options:
+    - Behind you
+    - In front of you
+    - Directly overhead
+    - Below the horizon
+    answer: Behind you
+    difficulty: 2
+    hints:
+    - Raindrops send the colours back towards you.
+    - You face the rain.
+    solution: A rainbow is seen opposite the sun, with the sun behind the viewer.
+    mistakes:
+      In front of you: c10s10_prism_path
+  - prompt: Why does a star seem a little higher in the sky than it really is?
+    options:
+    - Atmospheric refraction bends its light
+    - The earth is moving
+    - Stars are moving up
+    - Scattering of blue
+    answer: Atmospheric refraction bends its light
+    difficulty: 2
+    hints:
+    - Air gets denser near the ground.
+    - Light bends as it comes down.
+    solution: Starlight bends towards the normal through denser air, so the star appears higher.
+    mistakes:
+      Scattering of blue: t10_atmospheric_refraction
+  - prompt: Which colour of light has the longest wavelength?
+    options:
+    - Red
+    - Violet
+    - Blue
+    - Green
+    answer: Red
+    difficulty: 1
+    hints:
+    - It is scattered least.
+    - The end of VIBGYOR.
+    solution: Red has the longest wavelength (about 700 nm).
+    mistakes:
+      Violet: t10_scattering_blue

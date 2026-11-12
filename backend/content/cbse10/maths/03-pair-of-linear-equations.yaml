@@ -15,6 +15,10 @@ tips:
   t10_substitution: "Replace y with 2x in the second equation, so there is only one letter left."
   t10_sum_diff: "Add the two equations x + y = 50 and x − y = 8 to remove y. Which number is asked for: larger or smaller?"
   t10_unequal_slope_ratio: "Exactly one solution happens when a₁/a₂ ≠ b₁/b₂. Check each pair for that."
+  c10m3_ratio_test: 'Compare a₁/a₂, b₁/b₂ and c₁/c₂. Different first two: lines cross. First two equal but third different: parallel. All three equal: the same line.'
+  c10m3_check_both: Put your answer back into BOTH equations. If one fails, a sign or a step went wrong.
+  c10m3_which_unknown: Make sure you give the unknown the question asks for, not the other one you found on the way.
+  c10m3_set_up: Name the two unknowns first, then turn each sentence of the problem into one equation.
 concepts:
 - code: cbse10m.pair.graph
   title: Pairs of lines and their solutions
@@ -110,6 +114,44 @@ concepts:
           m: 2
           c: 2
         say: 'Right slope, but 2y = 4x + 2 means y = 2x + 1: the constant halves too.'
+  lesson:
+    - teach: Each linear equation in two variables is a straight line. Two such equations are two lines, and a solution is a point on both. Two lines can cross once (one solution), be parallel (no solution), or lie on top of each other (infinitely many solutions).
+      picture:
+        kind: compare
+        columns:
+        - title: Intersecting
+          points:
+          - Cross once
+          - One solution
+          - Consistent
+        - title: Parallel
+          points:
+          - Never meet
+          - No solution
+          - Inconsistent
+        - title: Coincident
+          points:
+          - Same line
+          - Infinitely many
+          - Dependent
+        alt: 'Three ways two lines can sit: intersecting with one solution, parallel with none, coincident with infinitely many.'
+      check:
+        prompt: Parallel lines give how many solutions?
+        options:
+        - None
+        - One
+        - Infinitely many
+        answer: None
+        why: They never meet.
+    - teach: 'Without drawing, compare the ratios for a₁x + b₁y + c₁ = 0 and a₂x + b₂y + c₂ = 0. If a₁/a₂ ≠ b₁/b₂: intersecting. If a₁/a₂ = b₁/b₂ ≠ c₁/c₂: parallel. If all three ratios are equal: coincident.'
+      check:
+        prompt: For x + y − 4 = 0 and 2x + 2y − 8 = 0, the ratios are 1/2, 1/2, 1/2. The lines are…
+        options:
+        - Coincident
+        - Parallel
+        - Intersecting
+        answer: Coincident
+        why: All three ratios are equal.
   items:
   - prompt: Two lines cross at exactly one point. How many solutions does the pair of equations have?
     options:
@@ -181,6 +223,121 @@ concepts:
     - k/3 = 2/1.
     solution: 'Step 1: For no solution, k/3 = 2/1. Step 2: k = 6. Step 3: Then c₁/c₂ = 5/1 ≠ 2, so the lines are parallel.'
     mistakes: {"3": "t10_no_solution_k", "1.5": "t10_no_solution_k"}
+  - prompt: For 3x + 2y = 5 and 2x − 3y = 7, are the lines intersecting, parallel or coincident?
+    options:
+    - Intersecting
+    - Parallel
+    - Coincident
+    - Cannot tell
+    answer: Intersecting
+    difficulty: 1
+    hints:
+    - Compare a₁/a₂ and b₁/b₂.
+    - 3/2 and 2/(−3).
+    solution: a₁/a₂ = 3/2 and b₁/b₂ = −2/3 are different, so the lines intersect.
+    mistakes:
+      Parallel: c10m3_ratio_test
+  - prompt: For 2x − 3y = 8 and 4x − 6y = 9, how many solutions are there?
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - 'Ratios: 2/4, −3/−6, 8/9.'
+    - First two equal, third different.
+    solution: 'a₁/a₂ = b₁/b₂ = 1/2 but c₁/c₂ = 8/9, so the lines are parallel: no solution.'
+    mistakes:
+      '1': c10m3_ratio_test
+  - prompt: A pair of equations has no solution. What is it called?
+    options:
+    - Inconsistent
+    - Consistent
+    - Dependent
+    - Coincident
+    answer: Inconsistent
+    difficulty: 1
+    hints:
+    - Consistent means at least one solution.
+    - This one has none.
+    solution: A pair with no solution is inconsistent.
+    mistakes:
+      Dependent: c10m3_ratio_test
+  - prompt: For which k are 3x + y = 1 and (2k − 1)x + (k − 1)y = 2k + 1 parallel? Use a₁/a₂ = b₁/b₂.
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - 3/(2k − 1) = 1/(k − 1).
+    - Cross-multiply.
+    solution: 'Step 1: 3(k − 1) = 2k − 1. Step 2: 3k − 3 = 2k − 1, so k = 2. Step 3: Check: with k = 2 the second line is 3x + y = 5, and c₁/c₂ = 1/5 is not 1, so the lines are parallel.'
+    mistakes:
+      '1': c10m3_ratio_test
+      '-2': c10m3_ratio_test
+  - prompt: The lines y = x + 1 and y = −x + 5 cross at (2, k). Find k.
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Put x = 2 into either line.
+    - y = 2 + 1.
+    solution: 'y = 2 + 1 = 3. Check: −2 + 5 = 3.'
+    mistakes:
+      '2': c10m3_which_unknown
+  - prompt: Which pair of equations is dependent (infinitely many solutions)?
+    options:
+    - x + 2y = 3 and 3x + 6y = 9
+    - x + 2y = 3 and 3x + 6y = 8
+    - x + 2y = 3 and x − 2y = 3
+    - x = 3 and y = 3
+    answer: x + 2y = 3 and 3x + 6y = 9
+    difficulty: 2
+    hints:
+    - Look for one equation that is a multiple of the other.
+    - All three ratios equal.
+    solution: 3x + 6y = 9 is 3 × (x + 2y = 3), so the lines coincide.
+    mistakes:
+      x + 2y = 3 and 3x + 6y = 8: c10m3_ratio_test
+  - prompt: Where does the line 2x + y = 6 cross the y-axis?
+    options:
+    - (0, 6)
+    - (3, 0)
+    - (6, 0)
+    - (0, 3)
+    answer: (0, 6)
+    difficulty: 1
+    hints:
+    - On the y-axis, x = 0.
+    - Put x = 0.
+    solution: x = 0 gives y = 6, so (0, 6).
+    mistakes:
+      (3, 0): c10m3_which_unknown
+  - prompt: Is the pair 5x − 8y + 1 = 0 and 3x − (24/5)y + 3/5 = 0 consistent?
+    options:
+    - Yes, infinitely many solutions
+    - No, no solution
+    - Yes, exactly one solution
+    - Cannot tell
+    answer: Yes, infinitely many solutions
+    difficulty: 3
+    hints:
+    - Find a₁/a₂, b₁/b₂, c₁/c₂.
+    - 5/3, −8/(−24/5) = 5/3, 1/(3/5) = 5/3.
+    solution: 'All three ratios equal 5/3, so the lines coincide: consistent with infinitely many solutions.'
+    mistakes:
+      No, no solution: c10m3_ratio_test
+  - prompt: Lines x = 2 and y = −1 meet at which point?
+    options:
+    - (2, −1)
+    - (−1, 2)
+    - (2, 2)
+    - They do not meet
+    answer: (2, −1)
+    difficulty: 1
+    hints:
+    - x = 2 is a vertical line.
+    - y = −1 is a horizontal line.
+    solution: A vertical and a horizontal line meet at (2, −1).
+    mistakes:
+      (−1, 2): c10m3_which_unknown
 - code: cbse10m.pair.algebra
   title: Solving by substitution and elimination
   after:
@@ -268,6 +425,43 @@ concepts:
       - when:
           df: 3
         say: The difference is right; the two must also add to ₹11.
+  lesson:
+    - teach: 'Substitution: make one variable the subject of one equation and put it into the other. Solve x + y = 7 and 2x − y = 2: from the first, y = 7 − x. Then 2x − (7 − x) = 2, so 3x = 9, x = 3, and y = 4.'
+      check:
+        prompt: After substituting, what is x?
+        options:
+        - '3'
+        - '4'
+        - '7'
+        answer: '3'
+        why: 3x = 9.
+    - teach: 'Elimination: make the coefficients of one variable equal (or opposite), then subtract (or add) to remove it. 3x + 2y = 12 and 5x − 2y = 4: add them, 8x = 16, x = 2; then 6 + 2y = 12, y = 3. Always check your answer in both equations.'
+      picture:
+        kind: flow
+        steps:
+        - Match one variable's coefficients
+        - Add or subtract
+        - Solve for the other
+        - Substitute back
+        - Check in both
+        alt: 'Steps of elimination: match coefficients, add or subtract, solve, substitute back, check.'
+      check:
+        prompt: In 3x + 2y = 12 and 5x − 2y = 4, why add the equations?
+        options:
+        - The y terms cancel
+        - The x terms cancel
+        - To double everything
+        answer: The y terms cancel
+        why: +2y and −2y make 0.
+    - teach: 'Word problems: name the two unknowns, write one equation from each condition, solve, and check the answer makes sense in the story.'
+      check:
+        prompt: First step in a word problem?
+        options:
+        - Name the two unknowns
+        - Guess the answer
+        - Draw a circle
+        answer: Name the two unknowns
+        why: Then each condition becomes an equation.
   items:
   - prompt: Solve x + y = 14 and x − y = 4. What is x?
     answer: '9'
@@ -335,3 +529,90 @@ concepts:
     - (x + 3)/(y + 3) = 5/6 gives 6x − 5y = −3.
     solution: 'Step 1: 11x + 22 = 9y + 18, so 11x − 9y = −4. Step 2: 6x + 18 = 5y + 15, so 6x − 5y = −3. Step 3: Solving: x = 7, y = 9. Check: 9/11 and 10/12 = 5/6 ✓.'
     mistakes: {"9": "c10_other_unknown", "5": "t10_fraction_equations"}
+  - prompt: Solve 2x + 3y = 13 and x − y = −1. What is y?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - From the second, x = y − 1.
+    - Substitute into the first.
+    solution: 'Step 1: x = y − 1. Step 2: 2(y − 1) + 3y = 13, so 5y = 15, y = 3 (and x = 2).'
+    mistakes:
+      '2': c10m3_which_unknown
+  - prompt: Solve 5x + 3y = 35 and 2x − 3y = −7. What is x?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - Add the equations.
+    - The y terms cancel.
+    solution: 'Step 1: 7x = 28, so x = 4. Step 2: 20 + 3y = 35, y = 5.'
+    mistakes:
+      '5': c10m3_which_unknown
+      '7': c10m3_check_both
+  - prompt: The sum of a two-digit number's digits is 9, and nine times the number equals twice the number with digits reversed. Find the number.
+    answer: '18'
+    check: '18'
+    difficulty: 3
+    hints:
+    - Number = 10x + y, with x + y = 9.
+    - 9(10x + y) = 2(10y + x).
+    solution: 'Step 1: 88x = 11y, so y = 8x. Step 2: x + 8x = 9, x = 1, y = 8. The number is 18.'
+    mistakes:
+      '81': c10m3_check_both
+  - prompt: A father is 3 times as old as his son. In 12 years he will be twice as old. Find the son's present age.
+    answer: '12'
+    check: '12'
+    difficulty: 2
+    hints:
+    - Father = 3s now.
+    - 3s + 12 = 2(s + 12).
+    solution: 'Step 1: 3s + 12 = 2s + 24. Step 2: s = 12 years.'
+    mistakes:
+      '36': c10m3_which_unknown
+      '24': c10m3_set_up
+  - prompt: Solve x/2 + y/3 = 4 and x − y = 3. What is x?
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - 'Multiply the first by 6: 3x + 2y = 24.'
+    - y = x − 3.
+    solution: 'Step 1: 3x + 2(x − 3) = 24, so 5x = 30, x = 6 (y = 3).'
+    mistakes:
+      '3': c10m3_which_unknown
+  - prompt: 5 apples and 3 oranges cost ₹62; 2 apples and 1 orange cost ₹23. Find the cost of one orange, in rupees.
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - Let apple = a, orange = o.
+    - 'From the second: o = 23 − 2a.'
+    solution: 'Step 1: 5a + 3(23 − 2a) = 62, so −a = −7, a = 7. Step 2: o = 23 − 14 = 9.'
+    mistakes:
+      '7': c10m3_which_unknown
+  - prompt: Which method suits 2x + 3y = 8 and 4x − 3y = 4 best?
+    options:
+    - Add the equations to eliminate y
+    - Subtract to eliminate x
+    - Draw a graph only
+    - Guess and check
+    answer: Add the equations to eliminate y
+    difficulty: 1
+    hints:
+    - Look at the y coefficients.
+    - +3y and −3y.
+    solution: The y terms are opposites, so adding removes y at once.
+    mistakes:
+      Subtract to eliminate x: c10m3_check_both
+  - prompt: A boat goes 30 km downstream in 2 hours and 18 km upstream in 2 hours. Find the speed of the stream, in km/h.
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Downstream speed = b + s = 15.
+    - Upstream speed = b − s = 9.
+    solution: 'Step 1: b + s = 15, b − s = 9. Step 2: Subtract: 2s = 6, s = 3 km/h (boat 12 km/h).'
+    mistakes:
+      '12': c10m3_which_unknown
+      '6': c10m3_check_both

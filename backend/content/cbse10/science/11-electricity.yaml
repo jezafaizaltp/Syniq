@@ -15,6 +15,12 @@ tips:
   t10_kwh_joules: "1 kWh = 1000 W × 3600 s. Multiply both."
   t10_nichrome: "A heater needs a wire that gets hot and doesn't burn away. Which property makes a wire get hot?"
   t10_p_vi: "Power = voltage × current. Multiply."
+  c10s11_q_it: Charge = current × time (Q = I t), with time in seconds. Which of the three do you need?
+  c10s11_v_wq: 'Potential difference is work done per unit charge: V = W ÷ Q.'
+  c10s11_resistivity: R = ρ l ÷ A. Longer wire, more resistance; thicker wire, less. Resistivity depends only on the material.
+  c10s11_series_total: In series, the same current flows through every part and the resistances simply add.
+  c10s11_parallel_v: In parallel, every branch gets the full voltage and the currents of the branches add up.
+  c10s11_power_forms: Power can be written P = VI = I²R = V²/R. Pick the form that uses the numbers you have.
 concepts:
 - code: cbse10s.elec.ohm
   title: Current, potential difference and Ohm's law
@@ -105,6 +111,48 @@ concepts:
           r1: 4
           r2: 3
         say: In series the current depends on the total, R₁ + R₂. 1 A from 12 V needs 12 Ω in all.
+  lesson:
+    - teach: 'Electric current is the rate of flow of charge: I = Q ÷ t, measured in amperes (A). One coulomb is the charge of about 6 × 10¹⁸ electrons. An ammeter, connected in series, measures current. Conventional current flows from + to −, opposite to the electrons.'
+      check:
+        prompt: 10 C passes in 5 s. Current?
+        options:
+        - 2 A
+        - 50 A
+        - 0.5 A
+        answer: 2 A
+        why: 10 ÷ 5 = 2.
+    - teach: 'Potential difference V = W ÷ Q, in volts, measured by a voltmeter in parallel. Ohm''s law: at constant temperature, V = IR, where R is resistance in ohms (Ω). Resistance depends on length, area and material: R = ρ l ÷ A, where ρ is resistivity.'
+      picture:
+        kind: compare
+        columns:
+        - title: More resistance
+          points:
+          - Longer wire
+          - Thinner wire
+          - Higher resistivity (nichrome)
+        - title: Less resistance
+          points:
+          - Shorter wire
+          - Thicker wire
+          - Lower resistivity (copper)
+        alt: Resistance is higher for a longer, thinner wire of high-resistivity material like nichrome, and lower for a shorter, thicker wire of copper.
+      check:
+        prompt: V = 12 V, I = 3 A. R?
+        options:
+        - 4 Ω
+        - 36 Ω
+        - 0.25 Ω
+        answer: 4 Ω
+        why: R = V ÷ I.
+    - teach: 'Series: R = R₁ + R₂ + …; the current is the same everywhere and the voltages add. Parallel: 1/R = 1/R₁ + 1/R₂ + …; every branch has the full voltage and the total resistance is less than the smallest one. Houses are wired in parallel so each appliance gets full voltage and can be switched on its own.'
+      check:
+        prompt: 4 Ω and 4 Ω in parallel give…
+        options:
+        - 2 Ω
+        - 8 Ω
+        - 4 Ω
+        answer: 2 Ω
+        why: 1/R = 1/4 + 1/4 = 1/2.
   items:
   - prompt: A charge of 30 C flows through a wire in 1 minute. What is the current, in amperes?
     answer: '0.5'
@@ -173,6 +221,113 @@ concepts:
     - Copper would just carry the current.
     solution: Nichrome's high resistivity produces heat, and it doesn't burn easily at high temperature.
     mistakes: {"It has very low resistance": "t10_nichrome", "It is a good insulator": "t10_nichrome"}
+  - prompt: A current of 2 A flows for 5 minutes. How much charge flows, in coulombs?
+    answer: '600'
+    check: 2 * 5 * 60
+    difficulty: 2
+    hints:
+    - Q = I t.
+    - Change minutes to seconds.
+    solution: Q = 2 × 300 = 600 C.
+    mistakes:
+      '10': c10s_time_seconds
+  - prompt: How much work is done moving 4 C of charge across a potential difference of 6 V, in joules?
+    answer: '24'
+    check: 6 * 4
+    difficulty: 2
+    hints:
+    - V = W ÷ Q.
+    - So W = V × Q.
+    solution: W = 6 × 4 = 24 J.
+    mistakes:
+      '1.5': c10s11_v_wq
+      '0.67': c10s11_v_wq
+  - prompt: Resistors of 2 Ω, 3 Ω and 5 Ω are in series. What is the total resistance, in ohms?
+    answer: '10'
+    check: 2 + 3 + 5
+    difficulty: 1
+    hints:
+    - In series, resistances add.
+    - Add all three.
+    solution: 2 + 3 + 5 = 10 Ω.
+    mistakes:
+      '0.97': c10s_series_parallel
+  - prompt: A 12 V battery is joined to 2 Ω and 4 Ω in series. What is the current, in amperes?
+    answer: '2'
+    check: 12 / (2 + 4)
+    difficulty: 2
+    hints:
+    - Total R = 6 Ω.
+    - I = V ÷ R.
+    solution: I = 12 ÷ 6 = 2 A.
+    mistakes:
+      '6': c10s11_series_total
+      '9': c10s11_series_total
+  - prompt: Three 6 Ω resistors are in parallel. What is the total resistance, in ohms?
+    answer: '2'
+    check: 1 / (1/6 + 1/6 + 1/6)
+    difficulty: 2
+    hints:
+    - 1/R = 1/6 + 1/6 + 1/6.
+    - = 3/6.
+    solution: 1/R = 1/2, so R = 2 Ω.
+    mistakes:
+      '18': c10s_series_parallel
+      '6': c10s_series_parallel
+  - prompt: In a parallel circuit with a 6 V battery, each of two branches has 3 Ω. What is the total current, in amperes?
+    answer: '4'
+    check: 6/3 + 6/3
+    difficulty: 3
+    hints:
+    - Each branch gets the full 6 V.
+    - Find each branch current, then add.
+    solution: 'Each branch: 6 ÷ 3 = 2 A. Total = 4 A.'
+    mistakes:
+      '1': c10s11_parallel_v
+      '2': c10s11_parallel_v
+  - prompt: If a wire's length is halved (same material and thickness), what happens to its resistance?
+    options:
+    - It halves
+    - It doubles
+    - It stays the same
+    - It becomes four times
+    answer: It halves
+    difficulty: 2
+    hints:
+    - R = ρ l ÷ A.
+    - R is proportional to l.
+    solution: Halving l halves R.
+    mistakes:
+      It doubles: c10s11_resistivity
+  - prompt: What is the SI unit of resistivity?
+    options:
+    - Ω m
+    - Ω
+    - Ω/m
+    - V/A
+    answer: Ω m
+    difficulty: 2
+    hints:
+    - ρ = R A ÷ l.
+    - Ω × m² ÷ m.
+    solution: ρ = RA/l has units Ω m² / m = Ω m.
+    mistakes:
+      Ω: c10s11_resistivity
+      Ω/m: c10s11_resistivity
+  - prompt: Why are household appliances connected in parallel, not series?
+    options:
+    - Each gets full voltage and can be switched separately
+    - It uses less wire
+    - It increases total resistance
+    - Series is not allowed by law
+    answer: Each gets full voltage and can be switched separately
+    difficulty: 2
+    hints:
+    - In series, one switched-off device breaks the circuit.
+    - And they would share the voltage.
+    solution: Parallel wiring gives each appliance the full 220 V and independent switching.
+    mistakes:
+      It increases total resistance: c10s11_parallel_v
 - code: cbse10s.elec.power
   title: Heating effect and electric power
   after:
@@ -272,6 +427,43 @@ concepts:
           - 100
           - 1000
         say: That's safe, but a more powerful one still fits under 5 A.
+  lesson:
+    - teach: 'A current through a resistor produces heat. Joule''s law of heating: H = I²Rt. Doubling the current gives four times the heat. This heat is used in heaters, irons, toasters and filament bulbs (tungsten, high melting point), and in fuses.'
+      check:
+        prompt: If current doubles, heat produced becomes…
+        options:
+        - 4 times
+        - 2 times
+        - Half
+        answer: 4 times
+        why: Heat depends on I².
+    - teach: 'Electric power is the rate of using energy: P = VI = I²R = V²/R, in watts. Energy used = power × time. Commercially, energy is measured in kilowatt hours (kWh), called units: 1 kWh = 3.6 × 10⁶ J.'
+      picture:
+        kind: flow
+        steps:
+        - Power in kW
+        - × hours used
+        - = kWh (units)
+        - × rate per unit
+        - = cost
+        alt: 'To find the electricity cost: power in kilowatts times hours gives units (kWh); units times the rate per unit gives the cost.'
+      check:
+        prompt: A 2 kW heater runs 3 hours. Units used?
+        options:
+        - '6'
+        - '5'
+        - '1.5'
+        answer: '6'
+        why: 2 × 3 = 6 kWh.
+    - teach: 'A fuse is a wire with a low melting point placed in series. If too much current flows, it heats up and melts, breaking the circuit. A fuse''s rating should be just above the normal current: I = P ÷ V. A 1100 W iron at 220 V draws 5 A.'
+      check:
+        prompt: Where is a fuse connected?
+        options:
+        - In series with the device
+        - In parallel with the device
+        - Across the switch
+        answer: In series with the device
+        why: All the current must pass through it.
   items:
   - prompt: An electric iron draws 4 A at 220 V. What is its power, in watts?
     answer: '880'
@@ -333,3 +525,105 @@ concepts:
     - It is in series with the appliance.
     solution: If the current is too large, the fuse heats up, melts and breaks the circuit, protecting the wiring.
     mistakes: {"So it heats the room": "t10_fuse", "So it conducts better": "t10_fuse"}
+  - prompt: A bulb is rated 60 W, 220 V. What is the energy it uses in 1 minute, in joules?
+    answer: '3600'
+    check: 60 * 60
+    difficulty: 2
+    hints:
+    - Energy = power × time.
+    - Time in seconds.
+    solution: 60 × 60 = 3600 J.
+    mistakes:
+      '60': c10s_time_seconds
+  - prompt: A heater of resistance 20 Ω draws 5 A. What is its power, in watts?
+    answer: '500'
+    check: 5**2 * 20
+    difficulty: 2
+    hints:
+    - P = I²R.
+    - 5² = 25.
+    solution: P = 25 × 20 = 500 W.
+    mistakes:
+      '100': c10s_square_current
+      '4': c10s11_power_forms
+  - prompt: A 220 V supply runs a device of resistance 110 Ω. What is the power, in watts?
+    answer: '440'
+    check: 220**2 / 110
+    difficulty: 2
+    hints:
+    - P = V²/R.
+    - 220² = 48400.
+    solution: P = 48400 ÷ 110 = 440 W.
+    mistakes:
+      '2': c10s11_power_forms
+      '24200': c10s11_power_forms
+  - prompt: A 1100 W iron runs on 220 V. What current does it draw, in amperes?
+    answer: '5'
+    check: 1100 / 220
+    difficulty: 1
+    hints:
+    - P = VI.
+    - I = P ÷ V.
+    solution: I = 1100 ÷ 220 = 5 A.
+    mistakes:
+      '0.2': t10_p_vi
+  - prompt: Four 250 W bulbs run 5 hours a day. How many units are used per day?
+    answer: '5'
+    check: 4 * 0.25 * 5
+    difficulty: 2
+    hints:
+    - Total power = 1000 W = 1 kW.
+    - kWh = kW × hours.
+    solution: 1 kW × 5 h = 5 kWh.
+    mistakes:
+      '5000': c10s_kwh_units
+      '1.25': c10s_kwh_units
+  - prompt: Why is tungsten used for bulb filaments?
+    options:
+    - Its melting point is very high
+    - It is cheap
+    - It is a good insulator
+    - It melts easily
+    answer: Its melting point is very high
+    difficulty: 1
+    hints:
+    - Filaments glow white-hot.
+    - They must not melt.
+    solution: Tungsten melts at about 3380 °C, so it can glow without melting.
+    mistakes:
+      It melts easily: t10_fuse
+  - prompt: How much heat does 2 A produce in a 10 Ω resistor in 1 minute, in joules?
+    answer: '2400'
+    check: 2**2 * 10 * 60
+    difficulty: 3
+    hints:
+    - H = I²Rt with t in seconds.
+    - 4 × 10 × 60.
+    solution: H = 4 × 10 × 60 = 2400 J.
+    mistakes:
+      '40': c10s_time_seconds
+      '1200': c10s_square_current
+  - prompt: Two bulbs, 100 W and 60 W, are joined in parallel to 220 V. What total power do they use, in watts?
+    answer: '160'
+    check: 100 + 60
+    difficulty: 2
+    hints:
+    - In parallel each gets its rated voltage.
+    - Powers add.
+    solution: 'Each works at its rating: 100 + 60 = 160 W.'
+    mistakes:
+      '40': c10s11_parallel_v
+  - prompt: What is the commercial unit of electrical energy?
+    options:
+    - Kilowatt hour
+    - Watt
+    - Joule per second
+    - Volt
+    answer: Kilowatt hour
+    difficulty: 1
+    hints:
+    - Your electricity bill counts 'units'.
+    - It is energy, not power.
+    solution: 1 unit = 1 kilowatt hour (kWh).
+    mistakes:
+      Watt: t10_kwh_joules

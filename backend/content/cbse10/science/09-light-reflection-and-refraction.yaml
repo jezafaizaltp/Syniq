@@ -14,6 +14,12 @@ tips:
   t10_focus_midway: "The focus is midway between the pole and the centre of curvature."
   t10_magnification_sign: "m = −v/u. Put in both negatives carefully: the image is real and inverted, so m is negative."
   t10_power_focal: "f = 1/P in metres. Convert to cm and keep the sign: negative power means a diverging lens."
+  c10s9_laws: The angle of incidence equals the angle of reflection, and both are measured from the normal, not from the mirror surface.
+  c10s9_mirror_formula: Use 1/v + 1/u = 1/f for mirrors. Put every distance in with its sign, then solve for the unknown.
+  c10s9_lens_formula: For lenses it is 1/v − 1/u = 1/f. Watch the minus sign and the sign of u.
+  c10s9_image_kind: Real images form in front of a mirror (or behind a lens) and are inverted; virtual images can't be caught on a screen and are upright.
+  c10s9_magnification: Magnification m = image height ÷ object height. A negative m means the image is upside down; |m| bigger than 1 means bigger.
+  c10s9_snell: Use n = sin i ÷ sin r, or n = speed in vacuum ÷ speed in the medium. Which one fits the numbers you have?
 concepts:
 - code: cbse10s.light.mirrors
   title: Reflection and spherical mirrors
@@ -133,6 +139,47 @@ concepts:
       - when:
           u: -30
         say: At C the image is the same size and inverted.
+  lesson:
+    - teach: Light travels in straight lines. When it reflects, the angle of incidence equals the angle of reflection, both measured from the normal; the incident ray, reflected ray and normal lie in one plane. A plane mirror gives a virtual, upright image as far behind as the object is in front.
+      check:
+        prompt: A ray hits a mirror at 30° to the normal. Angle of reflection?
+        options:
+        - 30°
+        - 60°
+        - 90°
+        answer: 30°
+        why: i = r.
+    - teach: 'Spherical mirrors: concave (curves inwards, converges light) and convex (bulges out, diverges light). Words: pole P (centre of the mirror), centre of curvature C, radius R, principal focus F, focal length f = R/2.'
+      picture:
+        kind: number_line
+        from: -40
+        to: 0
+        step: 10
+        points:
+        - at: -40
+          label: C
+        - at: -20
+          label: F
+        - at: 0
+          label: P (mirror)
+        alt: 'Along the principal axis in front of a concave mirror of radius 40 cm: C at 40 cm, F at 20 cm, the pole P at the mirror.'
+      check:
+        prompt: R = 40 cm. Focal length?
+        options:
+        - 20 cm
+        - 40 cm
+        - 80 cm
+        answer: 20 cm
+        why: f = R/2.
+    - teach: 'Mirror formula: 1/v + 1/u = 1/f, magnification m = −v/u = h′/h. Sign convention: measure from the pole; distances in the direction of incoming light are +, against it are −. Concave f is −, convex f is +. Concave mirrors: torches, shaving mirrors, dentists. Convex: vehicle rear-view mirrors.'
+      check:
+        prompt: For a concave mirror, f is…
+        options:
+        - Negative
+        - Positive
+        - Zero
+        answer: Negative
+        why: F is in front, against the light direction.
   items:
   - prompt: 'The focal length of a spherical mirror is related to its radius of curvature R by:'
     options:
@@ -202,6 +249,115 @@ concepts:
     - The image is virtual.
     solution: Between P and F the image is virtual, erect and enlarged, behind the mirror.
     mistakes: {"At the centre of curvature": "t10_concave_enlarged", "Beyond C": "t10_concave_enlarged"}
+  - prompt: A convex mirror has radius of curvature 24 cm. What is its focal length in cm, with sign?
+    answer: '12'
+    check: 24 / 2
+    difficulty: 2
+    hints:
+    - f = R/2.
+    - For a convex mirror, F is behind the mirror.
+    solution: f = +24/2 = +12 cm.
+    mistakes:
+      '-12': c10s_sign_convention
+      '48': c10s_focal_half
+  - prompt: An object is 20 cm in front of a concave mirror of focal length 10 cm. Find v in cm, with sign.
+    answer: '-20'
+    check: 1 / (1/(-10) - 1/(-20))
+    difficulty: 3
+    hints:
+    - u = −20, f = −10.
+    - 1/v = 1/f − 1/u = −1/10 + 1/20.
+    solution: '1/v = −1/20, so v = −20 cm: the image is at C, real and inverted.'
+    mistakes:
+      '20': c10s_sign_convention
+      '-6.67': c10s9_mirror_formula
+  - prompt: For that image (u = −20 cm, v = −20 cm), what is the magnification?
+    answer: '-1'
+    check: -(-20) / (-20)
+    difficulty: 2
+    hints:
+    - m = −v/u.
+    - Put both negatives in carefully.
+    solution: 'm = −(−20)/(−20) = −1: same size, inverted.'
+    mistakes:
+      '1': c10s9_magnification
+  - prompt: Which mirror is used by dentists to see large images of teeth?
+    options:
+    - Concave
+    - Convex
+    - Plane
+    - None of these
+    answer: Concave
+    difficulty: 1
+    hints:
+    - They need an enlarged, upright image.
+    - Which mirror can enlarge?
+    solution: A concave mirror with the tooth inside F gives an enlarged, upright image.
+    mistakes:
+      Convex: t10_convex_wide
+  - prompt: Where is the object placed in front of a concave mirror to get a real image at infinity?
+    options:
+    - At the focus F
+    - At C
+    - Beyond C
+    - Between P and F
+    answer: At the focus F
+    difficulty: 2
+    hints:
+    - Rays from F become parallel after reflection.
+    - Parallel rays meet at infinity.
+    solution: Rays from F reflect parallel, so the image is at infinity (used in torches).
+    mistakes:
+      At C: c10s9_image_kind
+  - prompt: An image formed by a mirror has m = +0.5. What kind of image is it?
+    options:
+    - Virtual, upright and half size
+    - Real, inverted and half size
+    - Real and upright
+    - Virtual and twice the size
+    answer: Virtual, upright and half size
+    difficulty: 2
+    hints:
+    - Positive m means upright.
+    - 0.5 means smaller.
+    solution: 'm positive and less than 1: virtual, upright and diminished (as in a convex mirror).'
+    mistakes:
+      Real, inverted and half size: c10s9_magnification
+  - prompt: A ray of light makes an angle of 35° with a plane mirror surface. What is the angle of reflection, in degrees?
+    answer: '55'
+    check: 90 - 35
+    difficulty: 3
+    hints:
+    - Angles are measured from the normal.
+    - The normal is at 90° to the mirror.
+    solution: Angle of incidence = 90° − 35° = 55°, so the reflection is also 55°.
+    mistakes:
+      '35': c10s9_laws
+  - prompt: An object 4 cm tall gives an image 12 cm tall and inverted. What is the magnification?
+    answer: '-3'
+    check: -12 / 4
+    difficulty: 2
+    hints:
+    - m = h′/h.
+    - Inverted means a negative image height.
+    solution: m = −12/4 = −3.
+    mistakes:
+      '3': c10s9_magnification
+      '-0.33': c10s9_magnification
+  - prompt: Why are convex mirrors put up at sharp bends in hill roads?
+    options:
+    - It shows a wide field of view
+    - It makes images bigger
+    - It makes real images
+    - It focuses light to a point
+    answer: It shows a wide field of view
+    difficulty: 1
+    hints:
+    - Convex mirrors bulge outwards.
+    - They spread rays out.
+    solution: Convex mirrors show a wide area with small upright images, so they are used for safety views.
+    mistakes:
+      It makes images bigger: t10_convex_wide
 - code: cbse10s.light.lenses
   title: Refraction and lenses
   after:
@@ -323,6 +479,47 @@ concepts:
           - 1.3
           - 1.35
         say: 'That uses n''s number as the speed. Light in water is slower than in air, but only a little: v = 3 ÷ 1.33.'
+  lesson:
+    - teach: 'Refraction is the bending of light when it passes from one medium to another, because its speed changes. Going into a denser medium (air → glass) it slows and bends towards the normal; coming out it bends away. Snell''s law: sin i / sin r = constant, the refractive index n.'
+      picture:
+        kind: bars
+        unit: refractive index
+        bars:
+        - label: air
+          value: 1.0003
+        - label: water
+          value: 1.33
+        - label: glass
+          value: 1.5
+        - label: diamond
+          value: 2.42
+        alt: 'Refractive indices: air about 1, water 1.33, crown glass 1.5, diamond 2.42; the higher the value, the more light slows and bends.'
+      check:
+        prompt: In which does light travel slowest?
+        options:
+        - Diamond
+        - Water
+        - Air
+        answer: Diamond
+        why: Highest refractive index.
+    - teach: 'Lenses: convex (thicker in the middle, converging) and concave (thinner in the middle, diverging). Lens formula: 1/v − 1/u = 1/f, magnification m = v/u. Convex f is +, concave f is −. A convex lens can give real inverted images or, with the object inside F, a virtual enlarged one (a magnifying glass).'
+      check:
+        prompt: A magnifying glass is a…
+        options:
+        - Convex lens
+        - Concave lens
+        - Plane glass
+        answer: Convex lens
+        why: Object inside F gives an enlarged image.
+    - teach: 'Power of a lens P = 1/f, with f in metres; the unit is the dioptre (D). Convex lenses have + power, concave −. Lenses in contact add their powers: P = P₁ + P₂.'
+      check:
+        prompt: f = +0.25 m. Power?
+        options:
+        - +4 D
+        - −4 D
+        - +0.25 D
+        answer: +4 D
+        why: 1/0.25 = 4.
   items:
   - prompt: 'When light goes from air into glass, it bends:'
     options:
@@ -390,3 +587,113 @@ concepts:
     - Diverging lens.
     solution: A concave (diverging) lens always gives a virtual, erect, diminished image.
     mistakes: {"Convex lens": "t10_concave_lens", "Both": "t10_concave_lens"}
+  - prompt: A concave lens has focal length 20 cm. What is its power in dioptres, with sign?
+    answer: '-5'
+    check: 1 / (-0.2)
+    difficulty: 2
+    hints:
+    - Change 20 cm to metres.
+    - Concave means negative.
+    solution: P = 1/(−0.2) = −5 D.
+    mistakes:
+      '5': t10_power_focal
+      '-0.05': c10s_power_metres
+  - prompt: Two lenses of power +3 D and −1 D are placed in contact. What is the total power in dioptres?
+    answer: '2'
+    check: 3 + (-1)
+    difficulty: 2
+    hints:
+    - Powers in contact add.
+    - Keep the signs.
+    solution: P = 3 − 1 = +2 D.
+    mistakes:
+      '4': t10_power_focal
+  - prompt: Light enters water (n = 1.33) from air. Its speed in water is about 3 × 10⁸ ÷ 1.33 m/s. Is it faster or slower than in air?
+    options:
+    - Slower
+    - Faster
+    - The same
+    - It stops
+    answer: Slower
+    difficulty: 1
+    hints:
+    - Dividing by a number bigger than 1.
+    - Denser medium.
+    solution: v = c/n, so it is slower in water.
+    mistakes:
+      Faster: c10s_index_ratio
+  - prompt: An object is 20 cm from a convex lens of focal length 10 cm. Find v in cm, with sign.
+    answer: '20'
+    check: 1 / (1/10 + 1/(-20))
+    difficulty: 3
+    hints:
+    - u = −20, f = +10.
+    - 1/v = 1/f + 1/u.
+    solution: 1/v = 1/10 − 1/20 = 1/20, so v = +20 cm (real, inverted, same size).
+    mistakes:
+      '-20': c10s9_lens_formula
+      '6.67': c10s9_lens_formula
+  - prompt: A ray of light hits a glass slab at 0° to the normal (straight in). What happens?
+    options:
+    - It goes straight through without bending
+    - It bends towards the normal
+    - It bends away from the normal
+    - It is all reflected
+    answer: It goes straight through without bending
+    difficulty: 2
+    hints:
+    - Angle of incidence is 0.
+    - sin 0 = 0.
+    solution: A ray along the normal doesn't bend, though it slows down.
+    mistakes:
+      It bends towards the normal: c10s_bend_direction
+  - prompt: After passing through a rectangular glass slab, the ray comes out…
+    options:
+    - Parallel to the incoming ray, shifted sideways
+    - Along the same line
+    - At right angles
+    - Back the way it came
+    answer: Parallel to the incoming ray, shifted sideways
+    difficulty: 2
+    hints:
+    - It bends in, then bends out the same amount.
+    - The two faces are parallel.
+    solution: The emergent ray is parallel to the incident ray but laterally displaced.
+    mistakes:
+      Along the same line: c10s_bend_direction
+  - prompt: A pencil in a glass of water looks bent at the surface. Why?
+    options:
+    - Refraction of light
+    - Reflection of light
+    - Dispersion
+    - Scattering
+    answer: Refraction of light
+    difficulty: 1
+    hints:
+    - Light changes medium at the surface.
+    - Its direction changes.
+    solution: Light from the pencil bends as it leaves water, so the pencil looks bent.
+    mistakes:
+      Reflection of light: c10s_bend_direction
+  - prompt: A convex lens gives m = −2 for an object at u = −15 cm. Find v in cm.
+    answer: '30'
+    check: -2 * (-15)
+    difficulty: 3
+    hints:
+    - For a lens, m = v/u.
+    - v = m × u.
+    solution: v = −2 × (−15) = +30 cm.
+    mistakes:
+      '-30': c10s9_magnification
+      '7.5': c10s9_magnification
+  - prompt: sin i = 0.6 and sin r = 0.4 for light entering a medium. Find the refractive index.
+    answer: '1.5'
+    check: 0.6 / 0.4
+    difficulty: 2
+    hints:
+    - n = sin i / sin r.
+    - Divide.
+    solution: n = 0.6 ÷ 0.4 = 1.5.
+    mistakes:
+      '0.67': c10s9_snell
+      '0.24': c10s9_snell

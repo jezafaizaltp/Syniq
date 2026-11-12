@@ -11,6 +11,12 @@ tips:
   t10_sec_identity: "1 + tan²A = sec²A. Square the secant."
   t10_tan_def: "tan = opposite/adjacent. Write sin and cos as sides over the hypotenuse and see which division gives that."
   t10_trig_table: "Use the pattern: sin at 0°, 30°, 45°, 60°, 90° is √0/2, √1/2, √2/2, √3/2, √4/2, and cos runs the other way. tan = sin ÷ cos. Put each value in, then work out."
+  c10m8_soh: 'Name the sides from the angle''s point of view: opposite is across from it, adjacent is next to it, hypotenuse is the longest. sin = opp/hyp, cos = adj/hyp, tan = opp/adj.'
+  c10m8_third_side: You know two sides of the right triangle. Find the third with Pythagoras before you write the ratio you need.
+  c10m8_flip: cosec, sec and cot are the upside-down versions of sin, cos and tan. Check whether the fraction should be flipped.
+  c10m8_table: 'Rebuild the table: sin goes 0, 1/2, 1/√2, √3/2, 1 for 0°, 30°, 45°, 60°, 90°; cos runs the same values backwards.'
+  c10m8_tan_row: "Go along the tan row of your table, angle by angle, and stop where the value matches the one given."
+  c10m8_identity: Use sin²A + cos²A = 1 (or 1 + tan²A = sec²A). Square the ratios before you add them.
 concepts:
 - code: cbse10m.trig.ratios
   title: Trigonometric ratios
@@ -125,6 +131,58 @@ concepts:
           o: 6
           a: 8
         say: 'That''s the triangle with hypotenuse 10. Scale every side by the same amount: the ratio stays 0.6.'
+  lesson:
+    - teach: In a right triangle, pick one acute angle A. The side across from A is the opposite, the side next to A (not the hypotenuse) is the adjacent, and the longest side, across from the right angle, is the hypotenuse.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 0
+          - 0
+          B:
+          - 4
+          - 0
+          C:
+          - 4
+          - 3
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        angles:
+        - at: A
+          from: B
+          to: C
+        alt: 'Right triangle ABC with the right angle at B: AB = 4 is adjacent to angle A, BC = 3 is opposite, AC = 5 is the hypotenuse.'
+      check:
+        prompt: In the picture, which side is opposite angle A?
+        options:
+        - BC
+        - AB
+        - AC
+        answer: BC
+        why: BC is across from A.
+    - teach: 'sin A = opposite/hypotenuse, cos A = adjacent/hypotenuse, tan A = opposite/adjacent. Their reciprocals: cosec A = 1/sin A, sec A = 1/cos A, cot A = 1/tan A. Also tan A = sin A/cos A. With sides 3, 4, 5: sin A = 3/5, cos A = 4/5, tan A = 3/4.'
+      check:
+        prompt: With opposite 3, adjacent 4, hypotenuse 5, sec A = ?
+        options:
+        - 5/4
+        - 4/5
+        - 5/3
+        answer: 5/4
+        why: sec = 1/cos = 5/4.
+    - teach: The ratios depend only on the angle, not on the size of the triangle. Given one ratio, draw a triangle with those sides, find the third side by Pythagoras, and read off the others. If tan A = 8/15, the hypotenuse is √(64 + 225) = 17, so sin A = 8/17.
+      check:
+        prompt: If cos A = 12/13, what is sin A?
+        options:
+        - 5/13
+        - 12/5
+        - 13/5
+        answer: 5/13
+        why: Third side √(169 − 144) = 5.
   items:
   - prompt: In a right triangle the side opposite angle A is 3 and the hypotenuse is 5. Find sin A. Type a fraction.
     answer: 3/5
@@ -188,6 +246,112 @@ concepts:
     solution: 'Step 1: Opposite = √(25² − 7²) = √576 = 24. Step 2: tan A = 24/7.'
     mistakes:
       7/24: c10_trig_upside
+  - prompt: In a right triangle, opposite = 8 and adjacent = 15. Find sin A as a fraction.
+    answer: 8/17
+    check: 8/17
+    difficulty: 2
+    hints:
+    - Hypotenuse = √(64 + 225).
+    - = 17.
+    solution: 'Step 1: Hypotenuse = 17. Step 2: sin A = 8/17.'
+    mistakes:
+      8/15: c10m8_soh
+      15/17: c10m8_soh
+  - prompt: If sin A = 12/13, find cos A as a fraction.
+    answer: 5/13
+    check: 5/13
+    difficulty: 2
+    hints:
+    - Adjacent = √(169 − 144).
+    - = 5.
+    solution: Adjacent = 5, so cos A = 5/13.
+    mistakes:
+      13/12: c10m8_flip
+      12/5: c10m8_soh
+  - prompt: If tan A = 4/3, find cosec A as a fraction.
+    answer: 5/4
+    check: 5/4
+    difficulty: 2
+    hints:
+    - Hypotenuse = 5.
+    - cosec = hyp/opp.
+    solution: 'Step 1: sides 4, 3, 5. Step 2: sin A = 4/5, so cosec A = 5/4.'
+    mistakes:
+      4/5: c10m8_flip
+      5/3: c10m8_soh
+  - prompt: Which ratio is adjacent/opposite?
+    options:
+    - cot A
+    - tan A
+    - sec A
+    - sin A
+    answer: cot A
+    difficulty: 1
+    hints:
+    - tan is opposite/adjacent.
+    - This is its reciprocal.
+    solution: cot A = 1/tan A = adjacent/opposite.
+    mistakes:
+      tan A: c10m8_flip
+  - prompt: In △PQR, right-angled at Q, PQ = 5 and QR = 12. Find tan R as a fraction.
+    answer: 5/12
+    check: 5/12
+    difficulty: 2
+    hints:
+    - 'Look from R: opposite is PQ.'
+    - Adjacent is QR.
+    solution: tan R = PQ/QR = 5/12.
+    mistakes:
+      12/5: c10m8_soh
+  - prompt: Can sin A be 4/3 for an acute angle A?
+    options:
+    - No, sin A is never more than 1
+    - 'Yes'
+    - Only if A = 90°
+    - Only for large triangles
+    answer: No, sin A is never more than 1
+    difficulty: 2
+    hints:
+    - sin = opposite/hypotenuse.
+    - Can the opposite be longer than the hypotenuse?
+    solution: The hypotenuse is the longest side, so opp/hyp ≤ 1; 4/3 is impossible.
+    mistakes:
+      'Yes': c10m8_soh
+  - prompt: If 3 cot A = 4, find (1 − tan²A)/(1 + tan²A) as a fraction.
+    answer: 7/25
+    check: 7/25
+    difficulty: 3
+    hints:
+    - tan A = 3/4, tan²A = 9/16.
+    - (7/16)/(25/16).
+    solution: 'Step 1: tan²A = 9/16. Step 2: (1 − 9/16)/(1 + 9/16) = (7/16)/(25/16) = 7/25.'
+    mistakes:
+      1/7: c10m8_flip
+      25/7: c10m8_flip
+  - prompt: If ∠A and ∠B are acute and cos A = cos B, then…
+    options:
+    - ∠A = ∠B
+    - ∠A > ∠B
+    - ∠A + ∠B = 90°
+    - Nothing can be said
+    answer: ∠A = ∠B
+    difficulty: 2
+    hints:
+    - Ratios depend only on the angle.
+    - Same cos, same angle (acute).
+    solution: For acute angles, equal cos values mean equal angles.
+    mistakes:
+      ∠A + ∠B = 90°: c10m8_table
+  - prompt: Find sin A × cosec A for any acute A.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - cosec A = 1/sin A.
+    - A number times its reciprocal.
+    solution: sin A × 1/sin A = 1.
+    mistakes:
+      '0': c10m8_flip
 - code: cbse10m.trig.values
   title: Ratios of special angles and identities
   after:
@@ -257,6 +421,50 @@ concepts:
       - when:
           degrees: 110
         say: 'Keep A between 0° and 90°: sin A = cos(90° − A).'
+  lesson:
+    - teach: 'Special angles: draw an equilateral triangle of side 2 and cut it in half to get 30° and 60° (sides 1, √3, 2); a right isosceles triangle with legs 1 gives 45° (hypotenuse √2).'
+      picture:
+        kind: compare
+        columns:
+        - title: sin
+          points:
+          - 0° → 0
+          - 30° → 1/2
+          - 45° → 1/√2
+          - 60° → √3/2
+          - 90° → 1
+        - title: cos
+          points:
+          - 0° → 1
+          - 30° → √3/2
+          - 45° → 1/√2
+          - 60° → 1/2
+          - 90° → 0
+        - title: tan
+          points:
+          - 0° → 0
+          - 30° → 1/√3
+          - 45° → 1
+          - 60° → √3
+          - 90° → not defined
+        alt: Table of sin, cos and tan for 0, 30, 45, 60 and 90 degrees.
+      check:
+        prompt: cos 60° = ?
+        options:
+        - 1/2
+        - √3/2
+        - '1'
+        answer: 1/2
+        why: cos runs the sin values backwards.
+    - teach: 'Three identities hold for every allowed angle: sin²A + cos²A = 1; 1 + tan²A = sec²A; 1 + cot²A = cosec²A. They come from Pythagoras: divide opp² + adj² = hyp² by hyp², adj² or opp².'
+      check:
+        prompt: sec²A − tan²A = ?
+        options:
+        - '1'
+        - '0'
+        - '2'
+        answer: '1'
+        why: 1 + tan²A = sec²A.
   items:
   - prompt: Find sin 30° + cos 60°.
     answer: '1'
@@ -322,3 +530,103 @@ concepts:
     - (13/12)².
     solution: 'Step 1: 1 + tan²A = sec²A. Step 2: (13/12)² = 169/144.'
     mistakes: {"13/12": "t10_sec_identity", "25/144": "t10_sec_identity"}
+  - prompt: Find sin 60° cos 30° + sin 30° cos 60°.
+    answer: '1'
+    check: 3/4 + 1/4
+    difficulty: 2
+    hints:
+    - √3/2 × √3/2 = 3/4.
+    - 1/2 × 1/2 = 1/4.
+    solution: 3/4 + 1/4 = 1.
+    mistakes:
+      1/2: c10m8_table
+      3/4: c10m8_table
+  - prompt: Find 4 sin 30° × cos 60°.
+    answer: '1'
+    check: 4 * 0.5 * 0.5
+    difficulty: 1
+    hints:
+    - sin 30° = 1/2.
+    - cos 60° = 1/2.
+    solution: 4 × 1/2 × 1/2 = 1.
+    mistakes:
+      '2': c10m8_table
+      '4': c10m8_table
+  - prompt: If tan(A + B) = √3 and A + B is acute, find A + B in degrees.
+    answer: '60'
+    check: '60'
+    difficulty: 1
+    hints:
+    - Which angle has tan = √3?
+    - Look at the tan row.
+    solution: tan 60° = √3, so A + B = 60°.
+    mistakes:
+      '30': c10m8_tan_row
+      '45': c10m8_tan_row
+  - prompt: Simplify (1 + tan²A)cos²A.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - 1 + tan²A = sec²A.
+    - sec²A × cos²A.
+    solution: sec²A × cos²A = 1.
+    mistakes:
+      '0': c10m8_identity
+      '2': c10m8_identity
+  - prompt: If sin A = 3/5, find sin²A + cos²A.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - It is an identity.
+    - True for any A.
+    solution: sin²A + cos²A = 1 always.
+    mistakes:
+      6/5: c10m8_identity
+      9/25: c10m8_identity
+  - prompt: Which is undefined?
+    options:
+    - tan 90°
+    - sin 90°
+    - cos 90°
+    - tan 0°
+    answer: tan 90°
+    difficulty: 1
+    hints:
+    - tan = sin/cos.
+    - cos 90° = 0.
+    solution: tan 90° = 1/0, which is not defined.
+    mistakes:
+      cos 90°: c10m8_table
+  - prompt: Find sin 30° + tan 45° − cosec 60°, taking √3 ≈ 1.732. Give 2 decimal places.
+    answer: '0.35'
+    check: round(0.5 + 1 - 2/1.732, 2)
+    difficulty: 3
+    hints:
+    - cosec 60° = 2/√3 ≈ 1.155.
+    - 0.5 + 1 − 1.155.
+    solution: 1/2 + 1 − 2/√3 ≈ 1.5 − 1.155 = 0.35.
+    mistakes:
+      '1.5': c10m8_flip
+  - prompt: If sec A = 5/4, find tan A as a fraction (A acute).
+    answer: 3/4
+    check: 3/4
+    difficulty: 2
+    hints:
+    - tan²A = sec²A − 1.
+    - 25/16 − 1 = 9/16.
+    solution: tan²A = 9/16, so tan A = 3/4.
+    mistakes:
+      4/3: c10m8_flip
+      9/16: c10m8_identity
+  - prompt: Find cos 45°/(sec 30° + cosec 30°) when written as 3√2 − √6 over k. Find k.
+    answer: '8'
+    check: '8'
+    difficulty: 3
+    hints:
+    - sec 30° = 2/√3, cosec 30° = 2.
+    - (1/√2) ÷ ((2 + 2√3)/√3).
+    solution: 'Step 1: = √3/(√2(2 + 2√3)) = √3/(2√2(1 + √3)). Step 2: Multiply by (√3 − 1)/(√3 − 1): √3(√3 − 1)/(2√2 × 2) = (3 − √3)/(4√2) = (3√2 − √6)/8, so k = 8.'
+    mistakes:
+      '4': c10m8_table

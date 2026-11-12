@@ -12,6 +12,13 @@ tips:
   t10_combined_volume: "Add the two volumes. Cone = (1/3)πr²h with its own height."
   t10_compare_volumes: "Write both volumes in terms of r: cylinder πr² × h with h = 2r, sphere (4/3)πr³. Compare the numbers in front of πr³."
   t10_cylinder_minus_cone: "Remaining = cylinder − cone = πr²h − (1/3)πr²h."
+  c10m12_hidden_faces: When solids are joined, the faces that touch are hidden. Count only what you could paint from outside.
+  c10m12_csa_tsa: Curved surface is only the bent part. Total surface adds the flat circles too. Which does the question ask?
+  c10m12_formula: 'Check the formula: cylinder curved 2πrh, cone curved πrl, sphere 4πr², hemisphere curved 2πr².'
+  c10m12_vol_formula: 'Volumes: cylinder πr²h, cone (1/3)πr²h, sphere (4/3)πr³, hemisphere (2/3)πr³.'
+  c10m12_recast: When a solid is melted and recast, its volume stays the same. Set the two volumes equal.
+  c10m12_units: 'That is the volume in cubic metres. The question asks for litres: how many litres are in one cubic metre?'
+  c10m12_radius: Use the radius, which is half the diameter.
 concepts:
 - code: cbse10m.solid.surface
   title: Surface area of combined solids
@@ -96,6 +103,42 @@ concepts:
           - 1
           - 4
         say: 'Too short: the slant must be nearly 6.7 cm. Count only the outside: the glued circles inside are hidden.'
+  lesson:
+    - teach: 'Many real objects are two solids joined together: a capsule is a cylinder with two hemispheres, an ice-cream cone is a cone with a hemisphere. Their surface area is the area you could paint from outside.'
+      picture:
+        kind: flow
+        steps:
+        - Name the solids
+        - List the outside surfaces
+        - Leave out the faces that touch
+        - Add the areas
+        alt: 'Four steps for a combined solid: name the parts, list the outside surfaces, leave out the hidden joining faces, add up.'
+      check:
+        prompt: A cone sits on a hemisphere of the same radius. Which surface is hidden?
+        options:
+        - The flat circles where they join
+        - The cone's curved side
+        - The hemisphere's curved side
+        answer: The flat circles where they join
+        why: The joining faces press against each other.
+    - teach: 'Curved surfaces: cylinder 2πrh, cone πrl with slant l = √(r² + h²), sphere 4πr², hemisphere 2πr². A hemisphere''s total surface also has its flat circle: 3πr².'
+      check:
+        prompt: Curved surface of a hemisphere of radius r?
+        options:
+        - 2πr²
+        - 4πr²
+        - 3πr²
+        answer: 2πr²
+        why: Half of the sphere's 4πr².
+    - teach: 'Example: a tent is a cylinder (r = 7 m, h = 3 m) with a cone on top (slant 10 m). Canvas = 2πrh + πrl = 2 × 22/7 × 7 × 3 + 22/7 × 7 × 10 = 132 + 220 = 352 m². There is no floor and no hidden join to paint.'
+      check:
+        prompt: Why don't we add the cone's base circle to the tent's canvas?
+        options:
+        - It is hidden where the cone meets the cylinder
+        - It is too small
+        - Cones have no base
+        answer: It is hidden where the cone meets the cylinder
+        why: That face is inside the tent.
   items:
   - prompt: Find the curved surface area of a hemisphere of radius 7 cm, in cm². Use π = 22/7.
     answer: '308'
@@ -158,6 +201,110 @@ concepts:
     - 600 − 25π + 50π.
     solution: 'Step 1: Cube = 600. Step 2: Remove the hidden circle (25π) and add the dome (50π). Step 3: Total = 600 + 25π, so b = 25.'
     mistakes: {"50": "c10_hidden_faces", "75": "c10_hidden_faces"}
+  - prompt: Find the curved surface area of a cylinder of radius 7 cm and height 10 cm, in cm². Use π = 22/7.
+    answer: '440'
+    check: 2 * 22 / 7 * 7 * 10
+    difficulty: 1
+    hints:
+    - Curved surface = 2πrh.
+    - 2 × 22/7 × 7 = 44.
+    solution: 44 × 10 = 440 cm².
+    mistakes:
+      '1540': c10m12_formula
+      '220': c10m12_formula
+  - prompt: Find the curved surface area of a cone of radius 7 cm and slant height 10 cm, in cm². Use π = 22/7.
+    answer: '220'
+    check: 22 / 7 * 7 * 10
+    difficulty: 1
+    hints:
+    - Cone curved surface = πrl.
+    - 22/7 × 7 = 22.
+    solution: 22 × 10 = 220 cm².
+    mistakes:
+      '440': c10m12_formula
+  - prompt: Find the surface area of a sphere of radius 7 cm, in cm². Use π = 22/7.
+    answer: '616'
+    check: 4 * 22 / 7 * 49
+    difficulty: 1
+    hints:
+    - Sphere = 4πr².
+    - 22/7 × 49 = 154.
+    solution: 4 × 154 = 616 cm².
+    mistakes:
+      '154': c10m12_formula
+      '308': c10m12_formula
+  - prompt: Find the total surface area of a solid hemisphere of radius 7 cm, in cm². Use π = 22/7.
+    answer: '462'
+    check: 3 * 22 / 7 * 49
+    difficulty: 2
+    hints:
+    - Curved part 2πr² plus the flat circle πr².
+    - 3 × 154.
+    solution: TSA = 3πr² = 3 × 154 = 462 cm².
+    mistakes:
+      '308': c10m12_csa_tsa
+      '616': c10m12_formula
+  - prompt: A capsule is a cylinder of radius 7 mm and length 10 mm with a hemisphere at each end. Find its surface area, in mm². Use π = 22/7.
+    answer: '1056'
+    check: 2 * 22 / 7 * 7 * 10 + 4 * 22 / 7 * 49
+    difficulty: 3
+    hints:
+    - Two hemispheres make one sphere.
+    - Cylinder curved 440 + sphere 616.
+    solution: 440 + 616 = 1056 mm².
+    mistakes:
+      '1364': c10m12_hidden_faces
+      '748': c10m12_formula
+  - prompt: A tent is a cylinder of radius 7 m and height 3 m with a cone of slant height 10 m on top. How much canvas, in m²? Use π = 22/7.
+    answer: '352'
+    check: 2 * 22 / 7 * 7 * 3 + 22 / 7 * 7 * 10
+    difficulty: 3
+    hints:
+    - Cylinder curved 2πrh + cone curved πrl.
+    - 132 + 220.
+    solution: Canvas = 132 + 220 = 352 m².
+    mistakes:
+      '506': c10m12_hidden_faces
+      '198': c10m12_formula
+  - prompt: Find the slant height of a cone with radius 5 cm and height 12 cm, in cm.
+    answer: '13'
+    check: (5**2 + 12**2) ** 0.5
+    difficulty: 2
+    hints:
+    - l = √(r² + h²).
+    - √(25 + 144).
+    solution: l = √169 = 13 cm.
+    mistakes:
+      '17': c10m12_formula
+      '7': c10m12_formula
+  - prompt: A hemisphere of diameter 14 cm is cut from the top of a cylinder of radius 7 cm. Compared with the flat top, the scooped surface is…
+    options:
+    - Twice the area
+    - The same area
+    - Half the area
+    - Four times the area
+    answer: Twice the area
+    difficulty: 3
+    hints:
+    - Flat top = πr².
+    - Hemisphere curved = 2πr².
+    solution: 2πr² is twice πr², so the scooped surface is twice the flat top.
+    mistakes:
+      The same area: c10m12_formula
+  - prompt: A toy is a cone on a hemisphere of radius 3.5 cm. Which is NOT part of its outside surface?
+    options:
+    - The cone's flat base
+    - The cone's curved side
+    - The hemisphere's curved side
+    - Every part of it is outside
+    answer: The cone's flat base
+    difficulty: 1
+    hints:
+    - Where do the two pieces join?
+    - Can you paint that face?
+    solution: The cone's base sits on the hemisphere's flat face; both are hidden.
+    mistakes:
+      Every part of it is outside: c10m12_hidden_faces
 - code: cbse10m.solid.volume
   title: Volume of combined solids
   after:
@@ -249,6 +396,45 @@ concepts:
           - 5
           - 6
         say: That's the cylinder's whole volume near 150.8. After carving, only ⅔ stays.
+  lesson:
+    - teach: Volume is how much space a solid fills. For joined solids, add the volumes of the parts. For a hollow or cut-out solid, subtract the part removed. Faces don't matter for volume.
+      check:
+        prompt: A cone is drilled out of a cylinder. Volume left = ?
+        options:
+        - Cylinder − cone
+        - Cylinder + cone
+        - Cone − cylinder
+        answer: Cylinder − cone
+        why: The cone's space is gone.
+    - teach: 'Formulas: cylinder πr²h, cone (1/3)πr²h, sphere (4/3)πr³, hemisphere (2/3)πr³. A cone holds one third of a cylinder with the same base and height.'
+      picture:
+        kind: bars
+        unit: × πr³ when h = r
+        bars:
+        - label: cylinder
+          value: 1
+        - label: hemisphere
+          value: 0.67
+        - label: cone
+          value: 0.33
+        alt: With height equal to the radius, the cylinder holds 1 πr³, the hemisphere two thirds and the cone one third.
+      check:
+        prompt: 'Same base and height: a cylinder holds 30 litres. The cone holds…'
+        options:
+        - 10 litres
+        - 15 litres
+        - 90 litres
+        answer: 10 litres
+        why: One third.
+    - teach: Melting and recasting keeps the volume the same. If a sphere is melted into small balls, number of balls = big volume ÷ small volume. 1 m³ = 1000 litres and 1000 cm³ = 1 litre.
+      check:
+        prompt: A metal sphere is melted into a cylinder. What stays the same?
+        options:
+        - Volume
+        - Surface area
+        - Radius
+        answer: Volume
+        why: No metal is lost.
   items:
   - prompt: Find the volume of a cone of radius 3 cm and height 7 cm, in cm³. Use π = 22/7.
     answer: '66'
@@ -311,3 +497,100 @@ concepts:
     solution: 'Step 1: 3 m³. Step 2: 3 × 1000 = 3000 litres.'
     mistakes:
       '3': c10_litres
+  - prompt: Find the volume of a cylinder of radius 7 cm and height 10 cm, in cm³. Use π = 22/7.
+    answer: '1540'
+    check: 22 / 7 * 49 * 10
+    difficulty: 1
+    hints:
+    - V = πr²h.
+    - 22/7 × 49 = 154.
+    solution: 154 × 10 = 1540 cm³.
+    mistakes:
+      '440': c10m12_vol_formula
+      '513.33': c10m12_vol_formula
+  - prompt: Find the volume of a sphere of radius 3 cm, as kπ cm³. Find k.
+    answer: '36'
+    check: 4 / 3 * 27
+    difficulty: 2
+    hints:
+    - V = (4/3)πr³.
+    - r³ = 27.
+    solution: (4/3) × 27 = 36, so V = 36π.
+    mistakes:
+      '108': c10m12_vol_formula
+      '12': c10m12_vol_formula
+  - prompt: Find the volume of a cone of radius 6 cm and height 7 cm, in cm³. Use π = 22/7.
+    answer: '264'
+    check: 1 / 3 * 22 / 7 * 36 * 7
+    difficulty: 2
+    hints:
+    - V = (1/3)πr²h.
+    - 22/7 × 36 × 7 = 792.
+    solution: 792 ÷ 3 = 264 cm³.
+    mistakes:
+      '792': c10m12_vol_formula
+  - prompt: A metal sphere of radius 6 cm is melted into small spheres of radius 1 cm. How many small spheres?
+    answer: '216'
+    check: 6**3 / 1**3
+    difficulty: 3
+    hints:
+    - Volumes are equal in total.
+    - 'The (4/3)π cancels: compare r³.'
+    solution: 6³ ÷ 1³ = 216 small spheres.
+    mistakes:
+      '6': c10m12_recast
+      '36': c10m12_recast
+  - prompt: A sphere of radius 3 cm is melted and recast into a cylinder of radius 3 cm. Find the cylinder's height in cm.
+    answer: '4'
+    check: 4 / 3 * 27 / 9
+    difficulty: 3
+    hints:
+    - (4/3)π × 27 = π × 9 × h.
+    - 36 = 9h.
+    solution: h = 36 ÷ 9 = 4 cm.
+    mistakes:
+      '3': c10m12_recast
+      '12': c10m12_recast
+  - prompt: A hemispherical bowl has diameter 42 cm. How many litres does it hold? Use π = 22/7. (1000 cm³ = 1 litre)
+    answer: '19.404'
+    check: 2 / 3 * 22 / 7 * 21**3 / 1000
+    difficulty: 3
+    hints:
+    - Radius = 21 cm.
+    - V = (2/3)πr³ in cm³, then ÷ 1000.
+    solution: V = (2/3) × 22/7 × 9261 = 19404 cm³ = 19.404 litres.
+    mistakes:
+      '155.232': c10m12_radius
+      '38.808': c10m12_vol_formula
+  - prompt: An ice-cream cone has radius 3 cm and height 7 cm with a hemisphere of ice-cream on top. Its volume is kπ cm³. Find k.
+    answer: '39'
+    check: 1 / 3 * 9 * 7 + 2 / 3 * 27
+    difficulty: 3
+    hints:
+    - Cone (1/3)π × 9 × 7 = 21π.
+    - Hemisphere (2/3)π × 27 = 18π.
+    solution: 21π + 18π = 39π, so k = 39.
+    mistakes:
+      '21': c10m12_hidden_faces
+      '57': c10m12_vol_formula
+  - prompt: A cylinder and a cone have the same radius and height. The cylinder's volume is how many times the cone's?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Cone has a (1/3) in front.
+    - Divide πr²h by (1/3)πr²h.
+    solution: πr²h ÷ (1/3)πr²h = 3.
+    mistakes:
+      '2': c10m12_vol_formula
+  - prompt: A water tank is a cylinder of radius 1 m and height 7 m. How many litres does it hold? Use π = 22/7. (1 m³ = 1000 litres)
+    answer: '22000'
+    check: 22 / 7 * 1 * 7 * 1000
+    difficulty: 2
+    hints:
+    - V = πr²h in m³.
+    - Then × 1000.
+    solution: V = 22/7 × 1 × 7 = 22 m³ = 22000 litres.
+    mistakes:
+      '22': c10m12_units
+      '44000': c10m12_formula

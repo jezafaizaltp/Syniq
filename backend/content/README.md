@@ -710,7 +710,7 @@ For learners on the CBSE board, under `cbse9/`, with subject codes `cbse9-math`,
 
 ## CBSE Class 10 (NCERT)
 
-Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. All five subjects are written. English covers the nine First Flight units (each prose lesson with its poems) as chapters 1–9 and nine Footprints without Feet stories as chapters 10–18. Hindi A covers twelve Kshitij 2 lessons (chapters 1–12, numbered in SYNiq's own order) and three Kritika 2 lessons (chapters 13–15); Hindi B is not written yet, and the Hindi wording has not been read by a Hindi teacher. The language content was written from memory of the NCERT texts, so names and details need checking against the books. Social Science numbers its chapters across the four books (History 1–5, Geography 6–12, Civics 13–17, Economics 18–22). Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
+Under `cbse10/`, with subject codes `cbse10-math`, `cbse10-sci`, `cbse10-ss`, `cbse10-eng` and `cbse10-hin`. All five subjects are written. English covers the nine First Flight units (each prose lesson with its poems) as chapters 1–9 and nine Footprints without Feet stories as chapters 10–18. Hindi A covers twelve Kshitij 2 lessons (chapters 1–12, numbered in SYNiq's own order) and three Kritika 2 lessons (chapters 13–15); Hindi B (subject `cbse10-hinb`, under `cbse10/hindi-b/`) covers fourteen Sparsh 2 lessons (chapters 1–14) and three Sanchayan 2 lessons (chapters 15–17); each student sees A or B. The Hindi wording has not been read by a Hindi teacher. The language content was written from memory of the NCERT texts, so names and details need checking against the books. Social Science numbers its chapters across the four books (History 1–5, Geography 6–12, Civics 13–17, Economics 18–22). Chapter names follow the rationalised NCERT Class 10 books (2023–24 onwards), from memory: they have not been compared with a printed copy yet, and the topics inside each chapter were chosen by Claude. Every chapter has at least one picture explanation.
 
 | Chapter | Topics | Questions |
 | --- | --- | --- |
@@ -1031,6 +1031,9 @@ adapt, come back to a topic and catch a repeated mistake without the same few qu
 CBSE Class 9 (all five subjects on the 2026–27 books, 131 topics) follows the same rule, with its own test. The
 CBSE 9 English and Hindi lessons were written from published summaries, not the printed books, so story details
 need checking, and the Hindi wording has not been read by a Hindi teacher.
+CBSE Class 10 (all six subjects including Hindi A and Hindi B, 148 topics) follows the same rule too, with its own
+test. Its English and Hindi lessons were written from memory of the NCERT texts, so story details need checking
+against the books, and the Hindi wording has not been read by a Hindi teacher.
 `app/lessons.py` checks lessons. To add lessons or questions to a pack without rewriting it, write a small extra file
 and run `python -m tools.add_to_packs <file>` (see the top of `tools/add_to_packs.py`); it keeps the pack's comments
 and layout and refuses the change if the pack would fail its checks.

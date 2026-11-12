@@ -11,6 +11,10 @@ tips:
   t10_product_c_over_a: "Product of zeroes = c/a; sum of zeroes = −b/a. Check which one is asked."
   t10_put_zero_in: "If 3 is a zero, then putting x = 3 makes the polynomial 0. Substitute and solve for k."
   t10_zero_crossings: "Each place the graph meets the x-axis is one zero. Count the meeting points."
+  c10m2_count_meets: Count only the points where the curve meets the x-axis. Points where it meets the y-axis are not zeroes.
+  c10m2_x_not_y: A zero is an x-value. Read the x-coordinate of the meeting point, not the y-coordinate.
+  c10m2_signs: For ax² + bx + c, the sum of zeroes is −b/a (note the minus) and the product is c/a. Check which one the question wants and keep the signs.
+  c10m2_build: A quadratic with zeroes summing to S and multiplying to P is x² − Sx + P. Watch the minus in front of S.
 concepts:
 - code: cbse10m.poly.zeroes_graph
   title: Zeroes of a polynomial on a graph
@@ -142,6 +146,39 @@ concepts:
       - when:
           low: 0
         say: It touches the axis at one point. Lift it a little more.
+  lesson:
+    - teach: A zero of a polynomial p(x) is a value of x that makes p(x) = 0. On the graph of y = p(x), a zero is where the curve meets the x-axis, because there y = 0. So the zeroes are the x-coordinates of those meeting points.
+      check:
+        prompt: The graph of y = p(x) meets the x-axis at (−1, 0) and (4, 0). What are the zeroes?
+        options:
+        - −1 and 4
+        - 0 and 0
+        - −1 only
+        answer: −1 and 4
+        why: Zeroes are the x-coordinates where y = 0.
+    - teach: 'A linear polynomial ax + b has exactly one zero, −b/a: its graph is a straight line crossing the x-axis once. A quadratic''s graph is a parabola: opening up if a > 0, down if a < 0. It can cross the x-axis twice, touch it once, or miss it. So a quadratic has at most 2 zeroes, and a cubic at most 3.'
+      picture:
+        kind: compare
+        columns:
+        - title: Parabola
+          points:
+          - 'Crosses twice: 2 zeroes'
+          - 'Touches once: 1 zero'
+          - 'Misses: no zeroes'
+        - title: Degree
+          points:
+          - 'Linear: exactly 1'
+          - 'Quadratic: at most 2'
+          - 'Cubic: at most 3'
+        alt: How many zeroes a parabola can have, and the most zeroes for each degree.
+      check:
+        prompt: A parabola opening downwards has its highest point at (2, −3). How many zeroes?
+        options:
+        - '0'
+        - '1'
+        - '2'
+        answer: '0'
+        why: Its highest point is below the x-axis, so it never reaches it.
   items:
   - prompt: The graph of y = p(x) meets the x-axis at exactly 3 points. How many zeroes does p(x) have?
     options:
@@ -215,6 +252,117 @@ concepts:
     solution: 'Step 1: x² − 5x + 6 = (x − 2)(x − 3). Step 2: The zeroes are 2 and 3, so the other crossing is at x = 3.'
     mistakes:
       '-3': c10_zero_sign
+  - prompt: Find the zero of p(x) = 2x + 9. Type a fraction like −9/2.
+    answer: -9/2
+    check: -9/2
+    difficulty: 1
+    hints:
+    - Set 2x + 9 = 0.
+    - Solve for x.
+    solution: 'Step 1: 2x + 9 = 0. Step 2: x = −9/2.'
+    mistakes:
+      9/2: c10m2_signs
+      '-9': c10m2_x_not_y
+  - prompt: The graph of y = p(x) cuts the x-axis at x = −2, 0 and 5. How many zeroes does p(x) have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Count the meeting points.
+    - x = 0 counts too.
+    solution: Three meeting points with the x-axis mean three zeroes.
+    mistakes:
+      '2': c10m2_count_meets
+  - prompt: The graph of a polynomial meets the y-axis at (0, 6) and the x-axis at (2, 0) and (3, 0). Which are its zeroes?
+    options:
+    - 2 and 3
+    - 6, 2 and 3
+    - 0 and 6
+    - 6 only
+    answer: 2 and 3
+    difficulty: 2
+    hints:
+    - Only x-axis meetings count.
+    - The y-axis point is not a zero.
+    solution: 'The zeroes are the x-values where the curve meets the x-axis: 2 and 3.'
+    mistakes:
+      6, 2 and 3: c10m2_count_meets
+      0 and 6: c10m2_x_not_y
+  - prompt: Is x = 2 a zero of p(x) = x² − 3x + 2?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if x is negative
+    - It cannot be checked
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Put x = 2 into p(x).
+    - Is the result 0?
+    solution: p(2) = 4 − 6 + 2 = 0, so 2 is a zero.
+    mistakes:
+      'No': c10m2_x_not_y
+  - prompt: Which polynomial's graph is a parabola opening downwards?
+    options:
+    - −x² + 4
+    - x² − 4
+    - 2x + 1
+    - x³
+    answer: −x² + 4
+    difficulty: 2
+    hints:
+    - It must be quadratic.
+    - Look at the sign of x².
+    solution: A quadratic with a negative x² coefficient opens downwards.
+    mistakes:
+      x² − 4: c10m2_signs
+  - prompt: A polynomial of degree 4 can have at most how many zeroes?
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - 'Degree 2: at most 2.'
+    - Same pattern.
+    solution: A polynomial of degree n has at most n zeroes, so at most 4.
+    mistakes:
+      '2': c10m2_count_meets
+  - prompt: How many zeroes does x² + 4 have?
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - x² is never negative.
+    - Can x² + 4 ever be 0?
+    solution: 'x² + 4 ≥ 4 for every x, so its parabola stays above the x-axis: no zeroes.'
+    mistakes:
+      '2': c10m2_count_meets
+      '-4': c10m2_x_not_y
+  - prompt: y = x² − 9 meets the x-axis at x = 3 and one other point. What is the other x?
+    answer: '-3'
+    check: '-3'
+    difficulty: 2
+    hints:
+    - x² − 9 = (x − 3)(x + 3).
+    - Set the other bracket to 0.
+    solution: 'Step 1: x² − 9 = (x − 3)(x + 3). Step 2: x + 3 = 0 gives x = −3.'
+    mistakes:
+      '9': c10m2_x_not_y
+      '3': c10m2_signs
+  - prompt: The line y = 4x − 8 crosses the x-axis at which point?
+    options:
+    - (2, 0)
+    - (0, −8)
+    - (−2, 0)
+    - (8, 0)
+    answer: (2, 0)
+    difficulty: 2
+    hints:
+    - On the x-axis, y = 0.
+    - Solve 4x − 8 = 0.
+    solution: 4x − 8 = 0 gives x = 2, so the point is (2, 0).
+    mistakes:
+      (0, −8): c10m2_x_not_y
+      (−2, 0): c10m2_signs
 - code: cbse10m.poly.relations
   title: Zeroes and coefficients
   after:
@@ -299,6 +447,46 @@ concepts:
       - when:
           cc: 12
         say: 'Product +12: both zeroes have the same sign. c = −12 needs one positive and one negative.'
+  lesson:
+    - teach: 'For a quadratic ax² + bx + c with zeroes α and β: sum α + β = −b/a, product αβ = c/a. For x² − 5x + 6 (zeroes 2 and 3): sum = −(−5)/1 = 5 and product = 6/1 = 6. Check: 2 + 3 = 5 and 2 × 3 = 6.'
+      picture:
+        kind: compare
+        columns:
+        - title: Sum of zeroes
+          points:
+          - −b/a
+          - x² − 5x + 6 → 5
+        - title: Product of zeroes
+          points:
+          - c/a
+          - x² − 5x + 6 → 6
+        alt: Sum of zeroes is minus b over a; product is c over a, shown for x squared minus 5x plus 6.
+      check:
+        prompt: Sum of the zeroes of 3x² − 6x + 1?
+        options:
+        - '2'
+        - −2
+        - 1/3
+        answer: '2'
+        why: −b/a = −(−6)/3 = 2.
+    - teach: 'To build a quadratic from its zeroes: if the sum is S and the product is P, the quadratic is k(x² − Sx + P) for any non-zero k. Zeroes 4 and −1: S = 3, P = −4, giving x² − 3x − 4.'
+      check:
+        prompt: Quadratic with zeroes summing to 5 and multiplying to 4?
+        options:
+        - x² − 5x + 4
+        - x² + 5x + 4
+        - x² − 4x + 5
+        answer: x² − 5x + 4
+        why: x² − Sx + P.
+    - teach: 'For a cubic ax³ + bx² + cx + d with zeroes α, β, γ: α + β + γ = −b/a, αβ + βγ + γα = c/a and αβγ = −d/a.'
+      check:
+        prompt: Product of the zeroes of 2x³ − 4x² + x − 6?
+        options:
+        - '3'
+        - −3
+        - '6'
+        answer: '3'
+        why: −d/a = −(−6)/2 = 3.
   items:
   - prompt: Find the sum of the zeroes of x² − 7x + 10.
     answer: '7'
@@ -371,3 +559,93 @@ concepts:
     - 9 + 3k − 12 = 0.
     solution: 'Step 1: 3² + 3k − 12 = 0. Step 2: 3k = 3, so k = 1. Step 3: Check: x² + x − 12 = (x − 3)(x + 4).'
     mistakes: {"-1": "t10_put_zero_in", "3": "t10_put_zero_in"}
+  - prompt: Find the sum of the zeroes of x² + 3x − 10.
+    answer: '-3'
+    check: '-3'
+    difficulty: 1
+    hints:
+    - Sum = −b/a.
+    - b = 3, a = 1.
+    solution: Sum = −3/1 = −3.
+    mistakes:
+      '3': c10m2_signs
+      '-10': c10m2_signs
+  - prompt: Find the product of the zeroes of x² + 3x − 10.
+    answer: '-10'
+    check: '-10'
+    difficulty: 1
+    hints:
+    - Product = c/a.
+    - c = −10, a = 1.
+    solution: Product = −10/1 = −10.
+    mistakes:
+      '10': c10m2_signs
+      '-3': c10m2_signs
+  - prompt: Which quadratic has zeroes −2 and 5?
+    options:
+    - x² − 3x − 10
+    - x² + 3x − 10
+    - x² − 3x + 10
+    - x² + 7x + 10
+    answer: x² − 3x − 10
+    difficulty: 2
+    hints:
+    - Sum = 3, product = −10.
+    - Use x² − Sx + P.
+    solution: 'Step 1: S = −2 + 5 = 3, P = −10. Step 2: x² − 3x − 10.'
+    mistakes:
+      x² + 3x − 10: c10m2_build
+  - prompt: Find the sum of the zeroes of 4x² − 3. Type 0 if it is zero.
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - There is no x term.
+    - So b = 0.
+    solution: b = 0, so the sum = −0/4 = 0.
+    mistakes:
+      '-3': c10m2_signs
+      3/4: c10m2_signs
+  - prompt: Find the product of the zeroes of 4x² − 3. Type a fraction.
+    answer: -3/4
+    check: -3/4
+    difficulty: 2
+    hints:
+    - Product = c/a.
+    - c = −3, a = 4.
+    solution: Product = −3/4.
+    mistakes:
+      3/4: c10m2_signs
+      '-3': c10m2_signs
+  - prompt: If α and β are zeroes of x² − 6x + 8, find α² + β².
+    answer: '20'
+    check: 6**2 - 2*8
+    difficulty: 3
+    hints:
+    - α² + β² = (α + β)² − 2αβ.
+    - Sum = 6, product = 8.
+    solution: 'Step 1: α + β = 6, αβ = 8. Step 2: α² + β² = 36 − 16 = 20.'
+    mistakes:
+      '36': c10m2_build
+      '100': c10m2_build
+  - prompt: For the cubic x³ − 2x² − 5x + 6, find the product of its zeroes.
+    answer: '-6'
+    check: '-6'
+    difficulty: 3
+    hints:
+    - Product = −d/a.
+    - d = 6, a = 1.
+    solution: αβγ = −6/1 = −6. (Zeroes are 1, −2 and 3.)
+    mistakes:
+      '6': c10m2_signs
+  - prompt: One zero of x² − 8x + k is 2. Find k.
+    answer: '12'
+    check: '12'
+    difficulty: 2
+    hints:
+    - Sum of zeroes = 8, so the other is 6.
+    - k = product of zeroes.
+    solution: 'Step 1: Other zero = 8 − 2 = 6. Step 2: k = 2 × 6 = 12.'
+    mistakes:
+      '6': c10m2_build
+      '16': c10m2_build

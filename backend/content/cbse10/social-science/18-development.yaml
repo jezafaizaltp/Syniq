@@ -6,6 +6,7 @@ title: Development
 tips:
   c10ss_per_capita: 'Per capita means per person: divide the total by the number of people.'
   c10ss_hdr: "The World Bank ranks by income. The Human Development Report, using income, health and education, is published by a UN body for development."
+  c10ss18_wb: "The UNDP publishes the Human Development Report, which uses more than income. Which body ranks countries by income alone?"
   c10ss_renewable_overuse: Groundwater is renewable, but only if we use it no faster than rain recharges it.
   s10_average: "Average = total ÷ number of people. Add all five incomes first."
   s10_average_hides: "Two villages can have the same average with very different spreads."
@@ -16,6 +17,11 @@ tips:
   s10_many_experts: "Sustainability touches nature, money and values. One field is not enough."
   s10_rainwater: "Borewells drain groundwater. Which choice saves and collects water?"
   s10_sustainable: "Sustainable means it can go on. Think about future generations."
+  c10ss18_goals: 'Different people have different, even conflicting, goals: what is development for one may be harm for another. Whose goal is this?'
+  c10ss18_hdi: "The HDI looks beyond money. Besides income, it asks how long people live and how many years they study."
+  c10ss18_public: Some things money can't buy for you alone, like clean air, safe streets or a good public hospital. These come best through collective (public) provision.
+  c10ss18_bmi: BMI = weight in kg ÷ (height in metres)². Below 18.5 is undernourished; above 25 is overweight.
+  c10ss18_ratios: "These are measures of people and learning, not of buildings or births. Who exactly is being counted: everyone above a certain age, or children of one age group in school?"
 concepts:
 - code: cbse10ss.dev.measure
   title: Measuring development
@@ -90,6 +96,47 @@ concepts:
           - 10
           - 90
         say: 'Per capita is too low: with more people you need more total income.'
+  lesson:
+    - teach: 'Different people want different things: a landless worker wants more days of work, a rich farmer wants higher prices, a girl wants freedom like her brother. Besides income, people want equal treatment, security, freedom and respect. So development has many goals, and one person''s development can be another''s loss (a dam may give power but flood homes).'
+      check:
+        prompt: For a landless rural labourer, development most likely means…
+        options:
+        - More days of work and better wages
+        - Higher crop prices
+        - More cars on roads
+        answer: More days of work and better wages
+        why: That is their main need.
+    - teach: Countries are often compared by per capita income (average income = total income ÷ population), used by the World Bank. But averages hide inequality. So we also look at the infant mortality rate (deaths of children under 1 per 1000 live births), literacy rate and net attendance ratio. The UNDP's Human Development Index combines income, health and education.
+      picture:
+        kind: compare
+        columns:
+        - title: World Bank
+          points:
+          - Per capita income
+          - Rich, middle, low-income countries
+        - title: UNDP HDI
+          points:
+          - Income
+          - Life expectancy (health)
+          - Years of schooling (education)
+        alt: The World Bank ranks countries by per capita income; the UNDP's Human Development Index uses income, life expectancy and years of schooling.
+      check:
+        prompt: Per capita income is…
+        options:
+        - Total income ÷ population
+        - Total income × population
+        - Income of the richest person
+        answer: Total income ÷ population
+        why: It is the average income.
+    - teach: 'Money alone can''t buy everything: clean air, safe water, pollution-free surroundings or protection from disease come best through public facilities. Kerala has a low infant mortality rate because of good basic health and education facilities; the public distribution system (ration shops) helps nutrition.'
+      check:
+        prompt: Why does Kerala do well on health despite moderate income?
+        options:
+        - Good public health and education facilities
+        - It is the richest state
+        - It has the most factories
+        answer: Good public health and education facilities
+        why: Public services matter.
   items:
   - prompt: A country of 5 people has a total income of ₹50 000. What is its average (per capita) income, in rupees?
     answer: '10000'
@@ -163,6 +210,126 @@ concepts:
     - Not just income.
     solution: Kerala's good public health and education explain its low IMR, despite moderate income.
     mistakes: {"It has the highest income in India": "s10_kerala_imr"}
+  - prompt: A country has a total income of ₹3000 crore and 30 crore people. What is its per capita income, in rupees?
+    answer: '100'
+    check: 3000 / 30
+    difficulty: 2
+    hints:
+    - Per capita = total ÷ number of people.
+    - The crores cancel.
+    solution: 3000 crore ÷ 30 crore = ₹100.
+    mistakes:
+      '90000': c10ss_per_capita
+      '10': c10ss_per_capita
+  - prompt: Which of these is a 'non-material' goal that people want?
+    options:
+    - Respect and equal treatment
+    - A higher salary
+    - A bigger house
+    - More land
+    answer: Respect and equal treatment
+    difficulty: 1
+    hints:
+    - Not things money can buy.
+    - Feelings of dignity.
+    solution: Equal treatment, freedom, security and respect are non-material goals.
+    mistakes:
+      A higher salary: c10ss18_goals
+  - prompt: What three things does the Human Development Index combine?
+    options:
+    - Income, health and education
+    - Army, police and courts
+    - Roads, rail and air
+    - Land, labour and capital
+    answer: Income, health and education
+    difficulty: 2
+    hints:
+    - Not income alone.
+    - How long people live and how much they learn.
+    solution: HDI uses per capita income, life expectancy and years of schooling.
+    mistakes:
+      Land, labour and capital: c10ss18_hdi
+  - prompt: A person weighs 45 kg and is 1.5 m tall. What is their BMI?
+    answer: '20'
+    check: 45 / 1.5**2
+    difficulty: 3
+    hints:
+    - BMI = weight ÷ height².
+    - 1.5² = 2.25.
+    solution: 45 ÷ 2.25 = 20, which is in the normal range.
+    mistakes:
+      '30': c10ss18_bmi
+      '67.5': c10ss18_bmi
+  - prompt: What does the literacy rate measure?
+    options:
+    - The share of people aged 7 and above who can read and write
+    - The number of schools
+    - Children's marks in exams
+    - The number of teachers
+    answer: The share of people aged 7 and above who can read and write
+    difficulty: 2
+    hints:
+    - It is about people, not buildings.
+    - From age 7.
+    solution: Literacy rate is the proportion of literate people aged 7 and above.
+    mistakes:
+      The number of schools: c10ss18_ratios
+  - prompt: Why is it often cheaper and better to provide some goods collectively?
+    options:
+    - Things like security, clean air and hospitals can't be bought well by one person alone
+    - Collective goods are always free
+    - Individuals can't spend money
+    - Governments own all shops
+    answer: Things like security, clean air and hospitals can't be bought well by one person alone
+    difficulty: 2
+    hints:
+    - Can you buy a pollution-free city on your own?
+    - Think of a whole colony's safety.
+    solution: Some needs are best met together, through public facilities.
+    mistakes:
+      Collective goods are always free: c10ss18_public
+  - prompt: Why might building a dam be 'development' for some and not for others?
+    options:
+    - It gives electricity to some but displaces people living there
+    - Everyone gains equally
+    - Dams harm no one
+    - Dams have no use
+    answer: It gives electricity to some but displaces people living there
+    difficulty: 2
+    hints:
+    - Think of who benefits and who loses.
+    - Goals can conflict.
+    solution: Industrialists may gain power, while tribals lose land and homes.
+    mistakes:
+      Everyone gains equally: c10ss18_goals
+  - prompt: Which organisation classifies countries by per capita income in its World Development Report?
+    options:
+    - World Bank
+    - UNDP
+    - WHO
+    - UNICEF
+    answer: World Bank
+    difficulty: 2
+    hints:
+    - UNDP publishes the Human Development Report.
+    - This one looks at income.
+    solution: The World Bank uses per capita income to classify countries.
+    mistakes:
+      UNDP: c10ss18_wb
+  - prompt: What is the net attendance ratio?
+    options:
+    - The share of children of a given age group attending school
+    - The number of children born
+    - The share of adults who vote
+    - The share of girls in jobs
+    answer: The share of children of a given age group attending school
+    difficulty: 2
+    hints:
+    - It is about school.
+    - Children of the right age.
+    solution: It is the proportion of children of an age group who attend school.
+    mistakes:
+      The number of children born: c10ss18_ratios
 - code: cbse10ss.dev.sustain
   title: Sustainable development
   after:
@@ -214,6 +381,48 @@ concepts:
       bin: Not sustainable
       clue: The soil gets worse.
       why: Not sustainable.
+  lesson:
+    - teach: 'Development must be sustainable: it should meet today''s needs without harming future generations. Groundwater is being overused in many parts of India; crude oil reserves may run out in a few decades. Pollution and climate change cross borders, so environmental problems are shared by all.'
+      check:
+        prompt: Sustainable development is about…
+        options:
+        - Meeting present needs without harming future ones
+        - Using everything quickly
+        - Stopping all growth
+        answer: Meeting present needs without harming future ones
+        why: It keeps resources for tomorrow.
+    - teach: Renewable resources (groundwater, forests) can be replenished, but only if we don't use them faster than nature restores them. Non-renewable resources (crude oil, coal) are fixed stocks that get exhausted. One third of India's districts show overuse of groundwater.
+      picture:
+        kind: compare
+        columns:
+        - title: Renewable
+          points:
+          - Groundwater, forests
+          - Replenished by nature
+          - Overuse still harms
+        - title: Non-renewable
+          points:
+          - Crude oil, coal
+          - Fixed stock
+          - Will run out
+        alt: Renewable resources like groundwater and forests are replenished by nature but can still be overused; non-renewable resources like crude oil and coal are fixed stocks that will run out.
+      check:
+        prompt: Crude oil is…
+        options:
+        - Non-renewable
+        - Renewable
+        - Unlimited
+        answer: Non-renewable
+        why: It took millions of years to form.
+    - teach: 'Sustainability needs experts from many fields: scientists, economists, philosophers and social scientists working together. Each of us can help: rainwater harvesting, saving energy, using public transport and reducing waste.'
+      check:
+        prompt: Which helps sustainable water use?
+        options:
+        - Rainwater harvesting
+        - Digging more deep borewells
+        - Wasting tap water
+        answer: Rainwater harvesting
+        why: It recharges groundwater.
   items:
   - prompt: What is sustainable development?
     options:
@@ -294,3 +503,129 @@ concepts:
     - Nature, money and values.
     solution: Sustainability needs scientists, economists, philosophers and other social scientists working together.
     mistakes: {"Only economists": "s10_many_experts"}
+  - prompt: Groundwater is overused in about what fraction of India's districts?
+    options:
+    - About one-third
+    - None
+    - All of them
+    - About one in a hundred
+    answer: About one-third
+    difficulty: 3
+    hints:
+    - It is a serious and widespread problem.
+    - Less than half.
+    solution: About one-third of the country's districts are overusing groundwater.
+    mistakes:
+      None: c10ss_renewable_overuse
+  - prompt: Why is crude oil a worry for the future?
+    options:
+    - It is non-renewable and reserves are limited
+    - It grows back each year
+    - It is renewable
+    - Nobody uses it
+    answer: It is non-renewable and reserves are limited
+    difficulty: 2
+    hints:
+    - How long did it take to form?
+    - Can we make more?
+    solution: Crude oil is a fixed stock; at current rates, reserves may last only a few decades.
+    mistakes:
+      It is renewable: s10_crude_oil
+  - prompt: Which of these is a renewable resource?
+    options:
+    - Groundwater
+    - Crude oil
+    - Coal
+    - Natural gas
+    answer: Groundwater
+    difficulty: 1
+    hints:
+    - Rain recharges it.
+    - Fossil fuels don't come back.
+    solution: Groundwater is renewable if used no faster than it is recharged.
+    mistakes:
+      Coal: s10_crude_oil
+  - prompt: Why must countries work together on climate change?
+    options:
+    - Pollution and climate effects cross national borders
+    - Only one country is affected
+    - It is a local village issue
+    - It can't be changed
+    answer: Pollution and climate effects cross national borders
+    difficulty: 2
+    hints:
+    - The atmosphere is shared.
+    - One country's emissions affect others.
+    solution: Environmental damage is global, so solutions need cooperation.
+    mistakes:
+      It is a local village issue: s10_global_env
+  - prompt: Which daily habit supports sustainable development?
+    options:
+    - Using public transport
+    - Leaving taps running
+    - Burning plastic
+    - Buying more than needed
+    answer: Using public transport
+    difficulty: 1
+    hints:
+    - Less fuel per person.
+    - Less pollution.
+    solution: Public transport saves fuel and reduces pollution.
+    mistakes:
+      Buying more than needed: s10_sustainable
+  - prompt: Why is sustainability studied by many kinds of experts together?
+    options:
+    - It involves nature, the economy and society all at once
+    - Only economists can study it
+    - Only scientists care
+    - It is very simple
+    answer: It involves nature, the economy and society all at once
+    difficulty: 2
+    hints:
+    - Think of science, money and values.
+    - No one field covers it all.
+    solution: Sustainability links environment, economics and ethics, so experts collaborate.
+    mistakes:
+      Only economists can study it: s10_many_experts
+  - prompt: What happens if groundwater is pumped faster than rain can recharge it?
+    options:
+    - The water table falls
+    - The water table rises
+    - Nothing changes
+    - Rivers get bigger
+    answer: The water table falls
+    difficulty: 1
+    hints:
+    - More out than in.
+    - Wells must go deeper.
+    solution: Overuse lowers the water table, which is a sign of unsustainable use.
+    mistakes:
+      Nothing changes: c10ss_renewable_overuse
+  - prompt: A town replaces diesel buses with electric ones run on solar power. This is an example of…
+    options:
+    - Sustainable development
+    - Overuse of resources
+    - Non-renewable energy
+    - Higher pollution
+    answer: Sustainable development
+    difficulty: 2
+    hints:
+    - Cleaner and renewable.
+    - It helps future generations.
+    solution: Using renewable energy for transport supports sustainability.
+    mistakes:
+      Non-renewable energy: s10_sustainable
+  - prompt: Which statement about renewable resources is true?
+    options:
+    - They can be overused if used faster than nature replaces them
+    - They can never run out whatever we do
+    - They are the same as fossil fuels
+    - They are always free
+    answer: They can be overused if used faster than nature replaces them
+    difficulty: 2
+    hints:
+    - Think of groundwater.
+    - Renewable doesn't mean unlimited.
+    solution: Renewable resources still deplete if their use exceeds their renewal.
+    mistakes:
+      They can never run out whatever we do: c10ss_renewable_overuse

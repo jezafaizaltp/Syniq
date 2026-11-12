@@ -18,6 +18,11 @@ tips:
   t10_prime_divides: "The prime factors of a² are those of a, each twice. If p appears in a², where else must it appear?"
   t10_prime_only: "In a prime factorisation every factor must be prime. Check each factor: can 4 or 14 be split further?"
   t10_simplify_each: "Work out each option: √16, (√3)², 6/2. The one with a root that can't be simplified is irrational."
+  c10m1_ladder: 'Break the number down one prime at a time: divide by 2 while you can, then 3, then 5, and so on, until you reach 1.'
+  c10m1_smallest_common: For the HCF, keep only the primes both numbers share, each with the smaller power. For the LCM, keep every prime, each with the larger power.
+  c10m1_product_rule: For two numbers, HCF × LCM equals the product of the numbers. Rearrange that to find the missing one.
+  c10m1_root_check: Is the number under the root a perfect square? If not, its square root cannot be written as a fraction.
+  c10m1_mix_rule: "When a fraction is added to, taken from or multiplies (non-zero) a root that is not a whole number, can the root ever disappear? Check whether any roots cancel or combine into a perfect square."
 
 concepts:
   - code: cbse10m.real.fundamental
@@ -117,6 +122,59 @@ concepts:
         - when:
             hcf: 3
           say: They share a 3. For HCF 1, keep the 3s in one number only.
+    lesson:
+      - teach: The Fundamental Theorem of Arithmetic says every composite number can be written as a product of primes in exactly one way, apart from the order. For example, 360 = 2³ × 3² × 5. Whichever way you start dividing, you end with the same primes.
+        picture:
+          kind: flow
+          steps:
+          - '360'
+          - ÷2 → 180
+          - ÷2 → 90
+          - ÷2 → 45
+          - ÷3 → 15
+          - ÷3 → 5
+          - ÷5 → 1
+          alt: 'Dividing 360 by primes step by step: three 2s, two 3s and one 5.'
+        check:
+          prompt: What is 360 as a product of primes?
+          options:
+          - 2³ × 3² × 5
+          - 2² × 3³ × 5
+          - 2 × 3 × 60
+          answer: 2³ × 3² × 5
+          why: Three 2s, two 3s and one 5 multiply to 360.
+      - teach: 'To find the HCF, take each prime the numbers share, with its smallest power. To find the LCM, take every prime that appears, with its greatest power. For 12 = 2² × 3 and 18 = 2 × 3²: HCF = 2 × 3 = 6 and LCM = 2² × 3² = 36.'
+        picture:
+          kind: compare
+          columns:
+          - title: HCF
+            points:
+            - Common primes only
+            - Smallest power
+            - 12, 18 → 2 × 3 = 6
+          - title: LCM
+            points:
+            - All primes
+            - Greatest power
+            - 12, 18 → 2² × 3² = 36
+          alt: HCF uses common primes with the smallest powers; LCM uses all primes with the greatest powers.
+        check:
+          prompt: For 12 and 18, the LCM is…
+          options:
+          - '36'
+          - '6'
+          - '216'
+          answer: '36'
+          why: 2² × 3² = 36.
+      - teach: 'For any two positive integers a and b, HCF(a, b) × LCM(a, b) = a × b. Check: 6 × 36 = 216 = 12 × 18. This shortcut works for two numbers only, not three.'
+        check:
+          prompt: HCF × LCM of 12 and 18 equals…
+          options:
+          - 12 × 18
+          - 12 + 18
+          - 18 − 12
+          answer: 12 × 18
+          why: That is the product rule for two numbers.
     items:
       - prompt: "Which is the prime factorisation of 140?"
         options: ["2² × 5 × 7", "2 × 5 × 14", "4 × 5 × 7", "2³ × 5 × 7"]
@@ -182,6 +240,101 @@ concepts:
         solution: "Step 1: To end in 0, a number must have both 2 and 5 as prime factors. Step 2: 6ⁿ = 2ⁿ × 3ⁿ, and by the Fundamental Theorem these are its only primes. Step 3: There is no 5, so 6ⁿ never ends in 0."
 
         mistakes: {"Yes, when n = 5": "t10_ends_in_zero", "Only when n is a multiple of 10": "t10_ends_in_zero"}
+      - prompt: Find the HCF of 96 and 404.
+        answer: '4'
+        check: '4'
+        difficulty: 2
+        hints:
+        - 96 = 2⁵ × 3.
+        - 404 = 2² × 101.
+        solution: 'Step 1: 96 = 2⁵ × 3 and 404 = 2² × 101. Step 2: The only common prime is 2, smallest power 2². Step 3: HCF = 4.'
+        mistakes:
+          '2': c10m1_smallest_common
+          '8': c10m1_smallest_common
+      - prompt: Find the LCM of 96 and 404.
+        answer: '9696'
+        check: 96 * 404 // 4
+        difficulty: 2
+        hints:
+        - Use HCF × LCM = product.
+        - The HCF is 4.
+        solution: 'Step 1: 96 × 404 = 38784. Step 2: LCM = 38784 ÷ 4 = 9696.'
+        mistakes:
+          '38784': c10m1_product_rule
+          '4': c10m1_smallest_common
+      - prompt: What is the prime factorisation of 3825?
+        options:
+        - 3² × 5² × 17
+        - 3 × 5² × 51
+        - 3² × 5 × 85
+        - 5² × 153
+        answer: 3² × 5² × 17
+        difficulty: 2
+        hints:
+        - It ends in 5, so divide by 5.
+        - Keep going until every factor is prime.
+        solution: 'Step 1: 3825 ÷ 5 = 765, ÷ 5 = 153. Step 2: 153 = 9 × 17 = 3² × 17. Step 3: 3825 = 3² × 5² × 17.'
+        mistakes:
+          3 × 5² × 51: c10m1_ladder
+          5² × 153: c10m1_ladder
+      - prompt: LCM of two numbers is 120 and their HCF is 4. One number is 24. Find the other.
+        answer: '20'
+        check: 120 * 4 // 24
+        difficulty: 2
+        hints:
+        - HCF × LCM = product of the numbers.
+        - Divide that product by 24.
+        solution: 'Step 1: Product = 4 × 120 = 480. Step 2: Other number = 480 ÷ 24 = 20.'
+        mistakes:
+          '5': c10m1_product_rule
+          '480': c10m1_product_rule
+      - prompt: Find the HCF of 6, 72 and 120.
+        answer: '6'
+        check: '6'
+        difficulty: 1
+        hints:
+        - 6 = 2 × 3.
+        - Does 6 divide 72 and 120?
+        solution: 'Step 1: 6 = 2 × 3, 72 = 2³ × 3², 120 = 2³ × 3 × 5. Step 2: Common primes with smallest powers: 2 × 3 = 6.'
+        mistakes:
+          '2': c10m1_smallest_common
+          '12': c10m1_smallest_common
+      - prompt: Is 7 × 11 × 13 + 13 a prime number or a composite number?
+        options:
+        - Composite
+        - Prime
+        - Neither
+        - It cannot be decided
+        answer: Composite
+        difficulty: 3
+        hints:
+        - Look for a common factor in both parts.
+        - Take 13 out.
+        solution: 'Step 1: 7 × 11 × 13 + 13 = 13 × (77 + 1) = 13 × 78. Step 2: It has factors other than 1 and itself, so it is composite.'
+        mistakes:
+          Prime: c10m1_ladder
+      - prompt: Sonia takes 18 minutes to drive one round of a field; Ravi takes 12 minutes. They start together at the same point in the same direction. After how many minutes do they meet again at the start?
+        answer: '36'
+        check: '36'
+        difficulty: 2
+        hints:
+        - They meet when both have done whole rounds.
+        - Find the LCM of 18 and 12.
+        solution: 'Step 1: 18 = 2 × 3², 12 = 2² × 3. Step 2: LCM = 2² × 3² = 36 minutes.'
+        mistakes:
+          '6': c10m1_smallest_common
+          '216': c10m1_product_rule
+      - prompt: How many times does the prime 2 appear in the prime factorisation of 1024?
+        answer: '10'
+        check: '10'
+        difficulty: 2
+        hints:
+        - 1024 is a power of 2.
+        - 'Keep halving: 512, 256, ...'
+        solution: 1024 = 2¹⁰, so 2 appears 10 times.
+        mistakes:
+          '9': c10m1_ladder
+          '512': c10m1_ladder
   - code: cbse10m.real.irrational
     title: Proving numbers irrational
     after: [cbse10m.real.fundamental]
@@ -246,6 +399,44 @@ concepts:
         bin: Irrational
         clue: Is π itself rational?
         why: π is irrational, and taking away 3 can't fix that.
+    lesson:
+      - teach: 'A rational number can be written as p/q, with integers p, q and q ≠ 0. An irrational number cannot. √2, √3, √5 and √p for any prime p are irrational. A key fact used to prove this: if a prime p divides a², then p divides a.'
+        check:
+          prompt: Which of these is rational?
+          options:
+          - √16
+          - √7
+          - √3
+          answer: √16
+          why: √16 = 4 = 4/1.
+      - teach: 'Proof that √3 is irrational, by contradiction. Suppose √3 = a/b with a, b coprime. Then 3b² = a², so 3 divides a², and so 3 divides a. Write a = 3c: then 3b² = 9c², so b² = 3c², and 3 divides b too. But a and b were coprime: contradiction. So √3 is irrational.'
+        picture:
+          kind: flow
+          steps:
+          - Assume √3 = a/b, coprime
+          - 3b² = a²
+          - 3 divides a
+          - a = 3c, so b² = 3c²
+          - 3 divides b
+          - Contradiction
+          alt: Steps of the proof that root 3 is irrational, ending in a contradiction.
+        check:
+          prompt: Why is the end a contradiction?
+          options:
+          - 3 divides both a and b, but they were coprime
+          - b became zero
+          - a became negative
+          answer: 3 divides both a and b, but they were coprime
+          why: Coprime numbers share no factor except 1.
+      - teach: 'Mixing: rational + irrational is irrational (so 5 + √2 is irrational); a non-zero rational × irrational is irrational (so 3√2 is irrational). But two irrationals can give a rational: √2 × √2 = 2, and (3 + √2) + (3 − √2) = 6.'
+        check:
+          prompt: Is 7√5 rational or irrational?
+          options:
+          - Irrational
+          - Rational
+          - It depends
+          answer: Irrational
+          why: Non-zero rational times irrational is irrational.
     items:
       - prompt: "Which of these is irrational?"
         options: ["√5", "√25", "0.25", "7/3"]
@@ -296,3 +487,111 @@ concepts:
         hints: ["Try √2 × √2 and √2 + (−√2).", "√4 is a whole number."]
         solution: "Step 1: √2 × √2 = 2 and √2 + (−√2) = 0 are rational, so the second and third fail. Step 2: √4 = 2 is rational. Step 3: (p/q)(r/s) = pr/qs is always rational."
         mistakes: {"Irrational × irrational is irrational": "t10_irrational_closure", "√(any whole number) is irrational": "t10_irrational_closure"}
+      - prompt: Which of these numbers cannot be written as p/q?
+        options:
+        - 6 + √2
+        - √25
+        - '0.75'
+        - 22/7
+        answer: 6 + √2
+        difficulty: 1
+        hints:
+        - Which one has a root that is not a perfect square?
+        - Rational + irrational is irrational.
+        solution: √2 is irrational, so 6 + √2 is irrational. √25 = 5, 0.75 = 3/4 and 22/7 are rational.
+        mistakes:
+          √25: c10m1_root_check
+          22/7: c10m1_root_check
+      - prompt: Which of these is rational?
+        options:
+        - √3 × √12
+        - √3 + √12
+        - √12
+        - 2√3
+        answer: √3 × √12
+        difficulty: 2
+        hints:
+        - Multiply under one root.
+        - Is 36 a perfect square?
+        solution: 'Step 1: √3 × √12 = √36. Step 2: √36 = 6, which is rational.'
+        mistakes:
+          √3 + √12: c10m1_mix_rule
+          2√3: c10m1_mix_rule
+      - prompt: In proving √5 irrational, after assuming √5 = a/b we get 5b² = a². What can we conclude next?
+        options:
+        - 5 divides a
+        - 5 divides b only
+        - a = b
+        - b = 5
+        answer: 5 divides a
+        difficulty: 2
+        hints:
+        - 5 divides a².
+        - Use the prime-divides-square fact.
+        solution: 'Step 1: 5b² = a², so 5 divides a². Step 2: 5 is prime, so 5 divides a.'
+        mistakes:
+          5 divides b only: c10m1_root_check
+      - prompt: Is 1/√2 rational or irrational?
+        options:
+        - Irrational
+        - Rational
+        - An integer
+        - Zero
+        answer: Irrational
+        difficulty: 2
+        hints:
+        - 1/√2 = √2/2.
+        - That is ½ times an irrational.
+        solution: 1/√2 = (1/2)√2, a non-zero rational times an irrational, so it is irrational.
+        mistakes:
+          Rational: c10m1_mix_rule
+      - prompt: Simplify (√5 + √2)(√5 − √2).
+        answer: '3'
+        check: 5 - 2
+        difficulty: 2
+        hints:
+        - Use (a + b)(a − b) = a² − b².
+        - Square each root.
+        solution: 'Step 1: (√5)² − (√2)² = 5 − 2. Step 2: = 3.'
+        mistakes:
+          '7': c10m1_mix_rule
+      - prompt: Which statement about irrational numbers is correct?
+        options:
+        - The sum of two irrationals can be rational
+        - The sum of two irrationals is always irrational
+        - Every square root is irrational
+        - π = 22/7 exactly
+        answer: The sum of two irrationals can be rational
+        difficulty: 3
+        hints:
+        - Try (2 + √3) + (2 − √3).
+        - 22/7 is only an approximation.
+        solution: (2 + √3) + (2 − √3) = 4, rational. So two irrationals can sum to a rational.
+        mistakes:
+          The sum of two irrationals is always irrational: c10m1_mix_rule
+          Every square root is irrational: c10m1_root_check
+      - prompt: √18 simplifies to k√2. Find k.
+        answer: '3'
+        check: '3'
+        difficulty: 1
+        hints:
+        - 18 = 9 × 2.
+        - √9 = 3.
+        solution: √18 = √(9 × 2) = 3√2, so k = 3.
+        mistakes:
+          '9': c10m1_root_check
+          '2': c10m1_root_check
+      - prompt: Is 5 − 2√3 rational or irrational?
+        options:
+        - Irrational
+        - Rational
+        - Zero
+        - Negative rational
+        answer: Irrational
+        difficulty: 1
+        hints:
+        - 2√3 is irrational.
+        - Rational minus irrational?
+        solution: 2√3 is irrational, and a rational minus an irrational is irrational.
+        mistakes:
+          Rational: c10m1_mix_rule

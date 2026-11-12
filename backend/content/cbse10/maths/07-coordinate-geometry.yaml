@@ -12,6 +12,10 @@ tips:
   t10_equidistant: "A point on the x-axis is (x, 0). Set its squared distances to both points equal and solve."
   t10_midpoint_average: "Mid-point = average of the two ends: add the x-values (or y-values) and divide by 2."
   t10_section_ratio: "Use x = (kx₂ + x₁)/(k + 1) with the x-values, then solve for k."
+  c10m7_square_then_add: Find the change in x and the change in y, square EACH, add them, then take the square root of the total.
+  c10m7_minus_minus: 'Subtracting a negative coordinate adds: 3 − (−2) = 5. Write the brackets in before you square.'
+  c10m7_ratio_order: 'In the section formula, m₁ goes with the SECOND point and m₂ with the FIRST: (m₁x₂ + m₂x₁)/(m₁ + m₂).'
+  c10m7_average: 'The mid-point is the average of the two x''s and the average of the two y''s: add and halve.'
 concepts:
 - code: cbse10m.coord.distance
   title: Distance formula
@@ -89,6 +93,49 @@ concepts:
           x: -1
           y: 4
         say: 1 + 4 = 5 adds the moves, but the distance is √(1 + 16) ≈ 4.1. Use x² + 4² = 5².
+  lesson:
+    - teach: 'The distance between P(x₁, y₁) and Q(x₂, y₂) comes from Pythagoras: draw the right triangle with a horizontal leg x₂ − x₁ and a vertical leg y₂ − y₁. So PQ = √[(x₂ − x₁)² + (y₂ − y₁)²].'
+      picture:
+        kind: geometry
+        axes: true
+        range:
+        - -1
+        - 8
+        points:
+          P:
+          - 1
+          - 1
+          Q:
+          - 7
+          - 5
+          _R:
+          - 7
+          - 1
+        segments:
+        - - P
+          - Q
+        - - P
+          - _R
+        - - _R
+          - Q
+        alt: Points P(1, 1) and Q(7, 5) joined, with a right triangle showing horizontal leg 6 and vertical leg 4.
+      check:
+        prompt: For P(1, 1) and Q(7, 5), the legs are…
+        options:
+        - 6 and 4
+        - 8 and 6
+        - 1 and 5
+        answer: 6 and 4
+        why: 7 − 1 = 6 and 5 − 1 = 4.
+    - teach: So PQ = √(36 + 16) = √52 = 2√13. From the origin, the distance to (x, y) is √(x² + y²). Distances help to check collinearity (the two shorter distances add to the longest) and to classify triangles and quadrilaterals.
+      check:
+        prompt: Distance of (5, 12) from the origin?
+        options:
+        - '13'
+        - '17'
+        - '7'
+        answer: '13'
+        why: √(25 + 144) = 13.
   items:
   - prompt: Find the distance between (1, 2) and (4, 6).
     answer: '5'
@@ -151,6 +198,112 @@ concepts:
     - (x − 2)² + 25 = (x + 2)² + 81.
     solution: 'Step 1: (x − 2)² + 25 = (x + 2)² + 81. Step 2: −4x + 29 = 4x + 85, so −8x = 56. Step 3: x = −7.'
     mistakes: {"7": "c10_minus_negative", "0": "t10_equidistant"}
+  - prompt: Find the distance between (2, 3) and (10, −3).
+    answer: '10'
+    check: ((10-2)**2 + (-3-3)**2) ** 0.5
+    difficulty: 1
+    hints:
+    - 'Changes: 8 and −6.'
+    - √(64 + 36).
+    solution: √(8² + 6²) = √100 = 10.
+    mistakes:
+      '14': c10m7_square_then_add
+      '8': c10m7_minus_minus
+  - prompt: Find the distance between (−5, 7) and (−1, 3). It is k√2; find k.
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - 'Changes: 4 and −4.'
+    - √32 = 4√2.
+    solution: √(16 + 16) = √32 = 4√2, so k = 4.
+    mistakes:
+      '8': c10m7_square_then_add
+      '32': c10m7_square_then_add
+  - prompt: Do (0, 0), (3, 0) and (0, 4) form a right triangle? Type the length of the longest side.
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - Two sides are 3 and 4.
+    - Third side from (3, 0) to (0, 4).
+    solution: Sides 3, 4 and √(9 + 16) = 5; 3² + 4² = 5², so yes.
+    mistakes:
+      '7': c10m7_square_then_add
+  - prompt: Find y if the distance between (2, y) and (2, 5) is 3 and y > 5.
+    answer: '8'
+    check: '8'
+    difficulty: 1
+    hints:
+    - Same x, so distance = |y − 5|.
+    - y − 5 = 3.
+    solution: y − 5 = 3, so y = 8.
+    mistakes:
+      '2': c10m7_minus_minus
+  - prompt: A(1, 1), B(4, 1), C(4, 5), D(1, 5). What shape is ABCD?
+    options:
+    - Rectangle
+    - Square
+    - Rhombus
+    - Trapezium only
+    answer: Rectangle
+    difficulty: 2
+    hints:
+    - AB = 3 and BC = 4.
+    - Diagonals AC and BD both 5.
+    solution: 'Opposite sides 3 and 4, diagonals equal (5): a rectangle, not a square.'
+    mistakes:
+      Square: c10m7_square_then_add
+  - prompt: Are (1, 1), (2, 2) and (4, 4) collinear?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only two of them
+    - Cannot tell
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - 'Distances: √2, 2√2, 3√2.'
+    - Do two add to the third?
+    solution: √2 + 2√2 = 3√2, so the points are collinear (all on y = x).
+    mistakes:
+      'No': c10m7_square_then_add
+  - prompt: Find the point on the y-axis equidistant from (6, 5) and (−4, 3). Give its y-coordinate.
+    answer: '9'
+    check: '9'
+    difficulty: 3
+    hints:
+    - Point (0, y).
+    - 36 + (y − 5)² = 16 + (y − 3)².
+    solution: 'Step 1: 36 + y² − 10y + 25 = 16 + y² − 6y + 9. Step 2: 61 − 10y = 25 − 6y, so 4y = 36, y = 9.'
+    mistakes:
+      '-9': c10m7_minus_minus
+  - prompt: What is the distance between (a, b) and (−a, −b)?
+    options:
+    - 2√(a² + b²)
+    - √(a² + b²)
+    - 2(a + b)
+    - '0'
+    answer: 2√(a² + b²)
+    difficulty: 3
+    hints:
+    - 'Changes: −2a and −2b.'
+    - √(4a² + 4b²).
+    solution: √(4a² + 4b²) = 2√(a² + b²).
+    mistakes:
+      √(a² + b²): c10m7_minus_minus
+      '0': c10m7_minus_minus
+  - prompt: Find the distance of (−6, 8) from the origin.
+    answer: '10'
+    check: '10'
+    difficulty: 1
+    hints:
+    - √(x² + y²).
+    - 36 + 64.
+    solution: √(36 + 64) = √100 = 10.
+    mistakes:
+      '2': c10m7_square_then_add
+      '14': c10m7_square_then_add
 - code: cbse10m.coord.section
   title: Section formula
   after:
@@ -214,6 +367,40 @@ concepts:
           x: -4
           y: 2
         say: 'That''s 2/3 of the way, the trisection point nearer B. Nearer A is 1 : 2.'
+  lesson:
+    - teach: 'The mid-point of A(x₁, y₁) and B(x₂, y₂) is ((x₁ + x₂)/2, (y₁ + y₂)/2): the average of the x''s and of the y''s. For (2, 3) and (8, 9) it is (5, 6).'
+      check:
+        prompt: Mid-point of (−4, 2) and (6, 8)?
+        options:
+        - (1, 5)
+        - (5, 1)
+        - (2, 10)
+        answer: (1, 5)
+        why: (−4 + 6)/2 = 1 and (2 + 8)/2 = 5.
+    - teach: 'Section formula: the point dividing AB internally in the ratio m₁ : m₂ is ((m₁x₂ + m₂x₁)/(m₁ + m₂), (m₁y₂ + m₂y₁)/(m₁ + m₂)). Note the crossing: m₁ multiplies the coordinate of B. Points of trisection divide AB in 1 : 2 and 2 : 1.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 9
+        step: 1
+        points:
+        - at: 0
+          label: A
+        - at: 3
+          label: '1 : 2'
+        - at: 6
+          label: '2 : 1'
+        - at: 9
+          label: B
+        alt: A segment from A to B split into three equal parts by the two points of trisection.
+      check:
+        prompt: 'A(0, 0), B(9, 0). Point dividing AB in 1 : 2?'
+        options:
+        - (3, 0)
+        - (6, 0)
+        - (4.5, 0)
+        answer: (3, 0)
+        why: (1 × 9 + 2 × 0)/3 = 3.
   items:
   - prompt: Find the x-coordinate of the mid-point of (2, 5) and (8, 1).
     answer: '5'
@@ -272,3 +459,106 @@ concepts:
     - −4k − 4 = 3k − 6.
     solution: 'Step 1: −4(k + 1) = 3k − 6. Step 2: −7k = −2, so k = 2/7. The ratio is 2 : 7.'
     mistakes: {"7/2": "c10_section_swap", "2": "t10_section_ratio"}
+  - prompt: 'Find the x-coordinate of the point dividing (4, −3) and (8, 5) in the ratio 3 : 1.'
+    answer: '7'
+    check: (3*8 + 1*4) / 4
+    difficulty: 2
+    hints:
+    - x = (m₁x₂ + m₂x₁)/(m₁ + m₂).
+    - (3 × 8 + 1 × 4)/4.
+    solution: x = (24 + 4)/4 = 7.
+    mistakes:
+      '5': c10m7_ratio_order
+      '6': c10m7_average
+  - prompt: 'Find the y-coordinate of the same point (dividing (4, −3) and (8, 5) in 3 : 1).'
+    answer: '3'
+    check: (3*5 + 1*(-3)) / 4
+    difficulty: 2
+    hints:
+    - (3 × 5 + 1 × (−3))/4.
+    - 15 − 3 = 12.
+    solution: y = (15 − 3)/4 = 3.
+    mistakes:
+      '-1': c10m7_ratio_order
+      '1': c10m7_average
+  - prompt: The mid-point of (x, 4) and (6, −2) is (5, 1). Find x.
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - (x + 6)/2 = 5.
+    - x + 6 = 10.
+    solution: x + 6 = 10, so x = 4.
+    mistakes:
+      '10': c10m7_average
+      '16': c10m7_average
+  - prompt: Find the points of trisection of (2, −2) and (−7, 4). Give the x-coordinate of the one nearer (2, −2).
+    answer: '-1'
+    check: (1*(-7) + 2*2) / 3
+    difficulty: 2
+    hints:
+    - 'Nearer A means ratio 1 : 2.'
+    - (1 × (−7) + 2 × 2)/3.
+    solution: x = (−7 + 4)/3 = −1. (The point is (−1, 0).)
+    mistakes:
+      '-4': c10m7_ratio_order
+  - prompt: 'In what ratio does the x-axis divide the join of (1, −5) and (−4, 5)? Type it as k for k : 1.'
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - On the x-axis, y = 0.
+    - (5k − 5)/(k + 1) = 0.
+    solution: '5k − 5 = 0, so k = 1: the ratio is 1 : 1 (the mid-point).'
+    mistakes:
+      '5': c10m7_ratio_order
+  - prompt: (1, 2), (4, y), (x, 6) and (3, 5) are vertices of a parallelogram in order. Find x using equal mid-points of the diagonals.
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - 'Diagonals: (1, 2)–(x, 6) and (4, y)–(3, 5).'
+    - (1 + x)/2 = (4 + 3)/2.
+    solution: 'Diagonals bisect each other: 1 + x = 7, so x = 6. (Also 2 + 6 = y + 5 gives y = 3.)'
+    mistakes:
+      '7': c10m7_average
+  - prompt: Find the mid-point of (−2, −3) and (4, −7).
+    options:
+    - (1, −5)
+    - (3, −5)
+    - (1, 2)
+    - (−3, 5)
+    answer: (1, −5)
+    difficulty: 1
+    hints:
+    - 'Average the x''s: (−2 + 4)/2.'
+    - 'Average the y''s: (−3 − 7)/2.'
+    solution: (2/2, −10/2) = (1, −5).
+    mistakes:
+      (3, −5): c10m7_minus_minus
+      (1, 2): c10m7_minus_minus
+  - prompt: 'A is (3, 0) and B is (9, 6). P divides AB in 2 : 1. Find the y-coordinate of P.'
+    answer: '4'
+    check: (2*6 + 1*0) / 3
+    difficulty: 1
+    hints:
+    - (2 × 6 + 1 × 0)/3.
+    - 12/3.
+    solution: y = 12/3 = 4. (P = (7, 4).)
+    mistakes:
+      '2': c10m7_ratio_order
+      '3': c10m7_average
+  - prompt: Which formula gives the mid-point of A(x₁, y₁) and B(x₂, y₂)?
+    options:
+    - ((x₁ + x₂)/2, (y₁ + y₂)/2)
+    - ((x₂ − x₁)/2, (y₂ − y₁)/2)
+    - (x₁x₂, y₁y₂)
+    - ((x₁ + y₁)/2, (x₂ + y₂)/2)
+    answer: ((x₁ + x₂)/2, (y₁ + y₂)/2)
+    difficulty: 1
+    hints:
+    - 'It is the section formula with 1 : 1.'
+    - Add, don't subtract.
+    solution: With m₁ = m₂ = 1 the section formula gives the averages of the coordinates.
+    mistakes:
+      ((x₂ − x₁)/2, (y₂ − y₁)/2): c10m7_minus_minus

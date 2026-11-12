@@ -66,6 +66,19 @@ def test_every_cbse9_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse9/") for _ in pack["concepts"]) >= 131
 
 
+def test_every_cbse10_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 10 (all six subjects, Hindi A and B) follows the same rule: a lesson before practice, and 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse10/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse10/") for _ in pack["concepts"]) >= 148
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
