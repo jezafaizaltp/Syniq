@@ -153,3 +153,27 @@ def test_lesson_starts_with_questions_only_when_the_learner_already_knows_some()
         db.add(LearningEvent(student_id=sid, kind="lesson_done", detail=f"{cid}:3/4:taught"))
         db.commit()
         assert learning.lesson_check_first(db, student, cid) == "seen_before"
+
+
+def test_teacher_sees_lesson_ideas_the_class_found_hard_and_what_helped():
+    with SessionLocal() as db:
+        concept = db.scalars(select(Concept).where(Concept.code.like("phy9.%"), Concept.lesson.is_not(None)).order_by(Concept.id)).first()
+        cid, check = concept.id, concept.lesson[1]["check"]
+        first_way, second_way = [w["style"] for w in lessons.public_lesson(concept.lesson, cid)[1]["ways"]][:2]
+    wrong = next(o for o in check["options"] if o != check["answer"])
+    for n, first_right in enumerate([False, False, True]):
+        email = f"class{n}.idea@demo.syniq"
+        new_student(email)
+        h = login(email)
+        body = {"concept_id": cid, "step": 1, "style": first_way, "attempt": 1, "can_retry": True}
+        if first_right:
+            client.post("/learn/lesson-check", json={**body, "choice": check["answer"]}, headers=h)
+            continue
+        assert client.post("/learn/lesson-check", json={**body, "choice": wrong}, headers=h).json()["retry"] is True
+        client.post("/learn/lesson-check", json={**body, "choice": check["answer"], "style": second_way, "attempt": 2}, headers=h)
+    teacher = login("teacher@demo.syniq")
+    class_id = client.get("/teacher/classes", headers=teacher).json()[0]["id"]
+    rows = client.get(f"/teacher/classes/{class_id}/lesson-trouble", headers=teacher).json()
+    row = next(r for r in rows if r["concept_id"] == cid and r["idea"] == 2)
+    assert row["tried"] == 3 and row["missed_first"] == 2 and row["helped"] == second_way
+    assert row["check"] == check["prompt"] and "Class" not in str(row)  # counts only, no names

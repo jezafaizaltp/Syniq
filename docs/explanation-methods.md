@@ -65,6 +65,12 @@ examples sees the real-life way first.
 - At the end, the learner sees how many ideas they got first time and which
   way helped with which idea. Nothing is marked.
 
+Teachers see the other side on the re-teach sheet (`GET
+/teacher/classes/{id}/lesson-trouble`): lesson ideas that half or more of the
+students who reached them missed the first time, with the idea's check and,
+where one stands out, the way of explaining that helped most on the second try.
+Counts only, never names.
+
 ## The mentor
 
 The student's home page opens with their mentor (`app/mentor.py`, `GET

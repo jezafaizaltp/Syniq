@@ -28,7 +28,7 @@ from ..auth import (
 )
 from .. import i18n, learning, rewards
 from ..db import get_db
-from ..engine import checkup, detect
+from ..engine import checkup, detect, methods
 from ..engine.mastery import progress_label
 from ..models import (
     Attempt,
@@ -39,6 +39,7 @@ from ..models import (
     Explanation,
     GuardianLink,
     Item,
+    LearningEvent,
     Mastery,
     Session,
     User,
@@ -255,6 +256,60 @@ def class_hard_trouble(class_id: int, db: DbSession = Depends(get_db), user: Use
         out.append({"concept_id": cid, "topic": c.title, "chapter": ch.title, "students": students})
     audit(db, user, "view_class_hard_trouble")
     return sorted(out, key=lambda e: (-len(e["students"]), e["topic"]))
+
+
+LESSON_TROUBLE_MIN_TRIED = 3  # an idea is listed once this many students have answered its check
+
+
+@router.get("/teacher/classes/{class_id}/lesson-trouble", tags=["teacher"])
+def class_lesson_trouble(class_id: int, db: DbSession = Depends(get_db), user: User = Depends(require_role("teacher", "admin"))):
+    """Lesson ideas that half or more of the class missed the first time, and the way that helped them after.
+
+    Counts only, never names: it is about the idea, not who missed it. "Helped" is the way of explaining on screen
+    when a student who had missed it then got it right, so the teacher knows how to go over it on the board.
+    """
+    _teacher_class(db, user, class_id)
+    ids = [s.id for s in _shared_students(db, class_id)]
+    events = db.execute(
+        select(LearningEvent.student_id, LearningEvent.kind, LearningEvent.detail)
+        .where(LearningEvent.student_id.in_(ids), LearningEvent.kind.in_(("lesson_right", "lesson_wrong")))
+        .order_by(LearningEvent.created_at, LearningEvent.id)
+    ).all() if ids else []
+    first: dict[tuple[int, int], dict[int, bool]] = {}  # (topic, idea) -> student -> right the first time
+    helped: dict[tuple[int, int], Counter] = {}
+    for sid, kind, detail in events:
+        parts = (detail or "").split(":")
+        if len(parts) != 4 or not parts[0].isdigit() or not parts[1].isdigit():
+            continue
+        key, style, attempt = (int(parts[0]), int(parts[1])), parts[2], parts[3]
+        seen = first.setdefault(key, {})
+        if attempt == "1" and sid not in seen:
+            seen[sid] = kind == "lesson_right"
+        elif attempt == "2" and kind == "lesson_right" and seen.get(sid) is False and style in methods.STYLES:
+            helped.setdefault(key, Counter())[style] += 1
+    out = []
+    for (cid, step), answers in first.items():
+        missed = sum(1 for ok in answers.values() if not ok)
+        if len(answers) < LESSON_TROUBLE_MIN_TRIED or missed * 2 < len(answers):
+            continue
+        c = db.get(Concept, cid)
+        if not c or not c.lesson or step >= len(c.lesson):
+            continue
+        best = helped.get((cid, step))
+        out.append(
+            {
+                "concept_id": cid,
+                "topic": c.title,
+                "chapter": db.get(Chapter, c.chapter_id).title,
+                "idea": step + 1,
+                "check": c.lesson[step]["check"]["prompt"],
+                "tried": len(answers),
+                "missed_first": missed,
+                "helped": best.most_common(1)[0][0] if best else None,
+            }
+        )
+    audit(db, user, "view_class_lesson_trouble")
+    return sorted(out, key=lambda e: (-e["missed_first"] / e["tried"], -e["tried"], e["topic"], e["idea"]))[:10]
 
 
 @router.get("/teacher/classes/{class_id}/chapter-progress", tags=["teacher"])
