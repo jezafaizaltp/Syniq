@@ -13,6 +13,12 @@ tips:
   t7_perp_bisector_point: "Every point on the perpendicular bisector is the same distance from A and from B."
   t7_tiling_angles: "At a corner the angles must add to 360°. Divide 360 by one tile's angle."
   t7_tiling_sum: "Add the three angles: 135 + 135 + 90."
+  c7m14_bisector: A bisector cuts into two EQUAL parts. A perpendicular bisector of a line also meets it at a right angle.
+  c7m14_equal_dist: Every point on the perpendicular bisector of AB is the same distance from A as from B.
+  c7m14_hexagon: In a circle, the compass set to the radius steps round exactly 6 times, so each side of the hexagon equals the radius.
+  c7m14_turn: Imagine standing at the point and turning all the way round once. How many degrees is one full turn?
+  c7m14_360: At a point where tiles meet, the corner angles must add to exactly 360°. Divide 360 by the corner angle.
+  c7m14_same_area: Moving or turning pieces changes the shape, not the total area.
 concepts:
 - code: cbse7m.cons.bisect
   title: Constructions with ruler and compass
@@ -51,6 +57,69 @@ concepts:
       From A, draw arcs above and below the line: Set the compass width before drawing any arc.
       From B, with the same width, draw arcs that cross them: The arcs from B must cross the arcs already drawn from A.
       Join the two crossing points: The crossing points only exist once both sets of arcs are drawn.
+  lesson:
+    - teach: A compass draws circles and copies lengths exactly. To draw the perpendicular bisector of AB, open the compass to more than half of AB. Draw arcs from A and from B, above and below the line. Join the two crossing points. This line cuts AB in half at 90°.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 2
+          - 5
+          B:
+          - 8
+          - 5
+          P:
+          - 5
+          - 9
+          Q:
+          - 5
+          - 1
+          M:
+          - 5
+          - 5
+        segments:
+        - - A
+          - B
+        - - P
+          - Q
+        - - A
+          - M
+          - 3 cm
+        - - M
+          - B
+          - 3 cm
+        angles:
+        - at: M
+          from: B
+          to: P
+          label: 90°
+        alt: 'PQ is the perpendicular bisector of AB: it meets AB at M, the midpoint, at 90°.'
+      check:
+        prompt: AB = 8 cm. The perpendicular bisector meets AB at M. How long is MB?
+        options:
+        - 4 cm
+        - 8 cm
+        - 2 cm
+        answer: 4 cm
+        why: It cuts AB into two equal halves.
+    - teach: 'Every point on the perpendicular bisector is the same distance from A and from B. That is why the arcs work: each crossing point is one compass-width from both ends.'
+      check:
+        prompt: P is on the perpendicular bisector of AB and PA = 6 cm. What is PB?
+        options:
+        - 6 cm
+        - 3 cm
+        - 12 cm
+        answer: 6 cm
+        why: Points on it are equally far from A and B.
+    - teach: 'To bisect an angle, draw an arc from the corner cutting both arms. From those two points draw equal arcs that cross. The line from the corner through the crossing splits the angle into two equal parts. A regular hexagon: keep the compass at the circle''s radius and step round the circle; it fits exactly 6 times.'
+      check:
+        prompt: An angle of 120° is bisected. What is each part?
+        options:
+        - 60°
+        - 240°
+        - 30°
+        answer: 60°
+        why: 120 ÷ 2 = 60.
   items:
   - prompt: A perpendicular bisector cuts AB at what angle, in degrees?
     answer: '90'
@@ -114,6 +183,139 @@ concepts:
     - It fits 6 times.
     solution: The side of the hexagon equals the radius.
     mistakes: {"The diameter": "t7_hexagon_compass", "Half the radius": "t7_hexagon_compass"}
+  - prompt: An angle of 84° is bisected. What is each part, in degrees?
+    answer: '42'
+    check: 84/2
+    difficulty: 1
+    hints:
+    - Bisect means cut into two equal parts.
+    - 84 ÷ 2.
+    solution: 'Step 1: bisecting halves the angle. Step 2: 84 ÷ 2 = 42°.'
+    mistakes:
+      '168': c7m14_bisector
+      '84': c7m14_bisector
+  - prompt: PQ = 14 cm. Its perpendicular bisector meets it at M. How long is PM, in cm?
+    answer: '7'
+    check: 14/2
+    difficulty: 1
+    hints:
+    - M is the midpoint.
+    - 14 ÷ 2.
+    solution: 'The perpendicular bisector cuts PQ into two equal halves: 14 ÷ 2 = 7 cm.'
+    mistakes:
+      '14': c7m14_bisector
+      '28': c7m14_bisector
+  - prompt: A regular hexagon is stepped round a circle of radius 5 cm. How long is each side, in cm?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - The compass stays at the radius.
+    - Each step is one side.
+    solution: 'Each side is one compass step, which equals the radius: 5 cm.'
+    mistakes:
+      '10': c7m14_hexagon
+      '30': c7m14_hexagon
+  - prompt: Which tool is used to draw arcs of equal length?
+    options:
+    - Compass
+    - Protractor
+    - Set square
+    answer: Compass
+    difficulty: 1
+    hints:
+    - Which tool keeps a fixed opening?
+    - It draws circles.
+    solution: A compass keeps the same opening, so it draws arcs and copies equal lengths.
+    mistakes:
+      Protractor: c7m14_bisector
+      Set square: c7m14_bisector
+  - prompt: A point R is on the perpendicular bisector of AB. RA = 9 cm. What is RB, in cm?
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - What is special about points on the perpendicular bisector?
+    - They are equally far from A and B.
+    solution: Every point on the perpendicular bisector is equidistant from A and B, so RB = RA = 9 cm.
+    mistakes:
+      '4.5': c7m14_equal_dist
+      '18': c7m14_equal_dist
+  - prompt: When drawing the perpendicular bisector of a 10 cm line, which compass opening works?
+    options:
+    - 6 cm
+    - 4 cm
+    - 3 cm
+    answer: 6 cm
+    difficulty: 2
+    hints:
+    - The opening must be more than half the line.
+    - Half of 10 is 5.
+    solution: The arcs from both ends only cross if the opening is more than half of 10 cm, so 6 cm works and 4 cm and 3 cm do not.
+    mistakes:
+      4 cm: c7m14_bisector
+      3 cm: c7m14_bisector
+  - prompt: An angle is bisected and each part is 37°. What was the whole angle, in degrees?
+    answer: '74'
+    check: 37*2
+    difficulty: 2
+    hints:
+    - The two parts are equal.
+    - 37 + 37.
+    solution: 'Step 1: both parts are 37°. Step 2: 37 × 2 = 74°.'
+    mistakes:
+      '18.5': c7m14_bisector
+      '37': c7m14_bisector
+  - prompt: Which is the first step in drawing a line through P parallel to line l?
+    options:
+    - Draw any line through P that crosses l, making an angle
+    - Draw a circle centred at P
+    - Measure the distance from P to l with a scale only
+    answer: Draw any line through P that crosses l, making an angle
+    difficulty: 2
+    hints:
+    - Parallel lines make equal corresponding angles with a crossing line.
+    - You need an angle to copy.
+    solution: First draw a crossing line through P. Then copy the angle it makes with l at P; equal corresponding angles give a parallel line.
+    mistakes:
+      Draw a circle centred at P: c7m14_bisector
+      Measure the distance from P to l with a scale only: c7m14_bisector
+  - prompt: A right angle is bisected, and then one of the halves is bisected again. What is the smallest angle made, in degrees?
+    answer: '22.5'
+    check: 90/4
+    difficulty: 3
+    hints:
+    - Half of 90 first.
+    - Then half again.
+    solution: 'Step 1: 90 ÷ 2 = 45°. Step 2: 45 ÷ 2 = 22.5°.'
+    mistakes:
+      '45': c7m14_bisector
+      '30': c7m14_bisector
+  - prompt: A circle has radius 6 cm. A regular hexagon is drawn in it by stepping the compass. What is the hexagon's perimeter, in cm?
+    answer: '36'
+    check: 6*6
+    difficulty: 3
+    hints:
+    - Each side equals the radius.
+    - 6 sides of 6 cm.
+    solution: 'Step 1: each side = 6 cm. Step 2: 6 × 6 = 36 cm.'
+    mistakes:
+      '72': c7m14_hexagon
+      '12': c7m14_hexagon
+  - prompt: A water tank must be the same distance from two houses A and B. Where can it go?
+    options:
+    - Anywhere on the perpendicular bisector of AB
+    - Only at A
+    - Anywhere on the line AB itself
+    answer: Anywhere on the perpendicular bisector of AB
+    difficulty: 3
+    hints:
+    - Which line holds every point equally far from A and B?
+    - It cuts AB in half at 90°.
+    solution: Every point on the perpendicular bisector of AB is equally far from A and B, so the tank can go anywhere on it.
+    mistakes:
+      Only at A: c7m14_equal_dist
+      Anywhere on the line AB itself: c7m14_equal_dist
 - code: cbse7m.cons.tiling
   title: Tilings and plane patterns
   after:
@@ -168,6 +370,49 @@ concepts:
       - when:
           degrees: 225
         say: That's 360 − 135, only one octagon taken away.
+  lesson:
+    - teach: 'A tiling covers a floor with shapes, leaving no gaps and no overlaps. At each point where corners meet, the angles must add to 360°, a full turn. Four squares meet at a point: 4 × 90° = 360°.'
+      picture:
+        kind: compare
+        columns:
+        - title: Triangles
+          points:
+          - 60° corners
+          - 6 × 60° = 360°
+        - title: Squares
+          points:
+          - 90° corners
+          - 4 × 90° = 360°
+        - title: Hexagons
+          points:
+          - 120° corners
+          - 3 × 120° = 360°
+        alt: The three regular shapes that tile on their own, and why.
+      check:
+        prompt: How many 120° corners fit round a point?
+        options:
+        - '3'
+        - '4'
+        - '6'
+        answer: '3'
+        why: 3 × 120 = 360.
+    - teach: 'A regular polygon tiles on its own only when its angle divides 360° exactly. A regular pentagon''s angle is 108°: 3 × 108 = 324 (a gap) and 4 × 108 = 432 (overlap), so pentagons cannot tile alone. Any triangle and any quadrilateral can tile, because their angles add to 180° or 360°.'
+      check:
+        prompt: Can regular pentagons tile a floor on their own?
+        options:
+        - 'No'
+        - 'Yes'
+        answer: 'No'
+        why: 108° does not divide 360° exactly.
+    - teach: 'Mixed tilings use two or more shapes: two regular octagons (135° each) and a square (90°) make 135 + 135 + 90 = 360°. A tangram is a square cut into 7 pieces; rearranged into a boat or a cat, the area stays the same.'
+      check:
+        prompt: A tangram square of area 16 cm² is made into a boat. What is the boat's area?
+        options:
+        - 16 cm²
+        - 8 cm²
+        - 32 cm²
+        answer: 16 cm²
+        why: The same 7 pieces are used, so the area does not change.
   items:
   - prompt: How many squares meet at each corner of a square tiling?
     answer: '4'
@@ -232,3 +477,136 @@ concepts:
     - Nothing added or removed.
     solution: The same pieces cover the same area.
     mistakes: {"It is bigger": "t7_area_same", "It depends on the shape": "t7_area_same"}
+  - prompt: Equilateral triangles have 60° corners. How many fit around one point?
+    answer: '6'
+    check: 360/60
+    difficulty: 1
+    hints:
+    - The angles round a point add to 360°.
+    - 360 ÷ 60.
+    solution: 'Step 1: 360 ÷ 60 = 6. Step 2: 6 triangles meet at each point.'
+    mistakes:
+      '3': c7m14_360
+      '4': c7m14_360
+  - prompt: Which shape can tile a floor on its own?
+    options:
+    - Regular hexagon
+    - Regular pentagon
+    - Circle
+    answer: Regular hexagon
+    difficulty: 1
+    hints:
+    - Check whether the corner angle divides 360°.
+    - A hexagon's angle is 120°.
+    solution: 3 × 120° = 360°, so hexagons fit with no gaps. Pentagons (108°) leave gaps, and circles always leave gaps.
+    mistakes:
+      Regular pentagon: c7m14_360
+      Circle: c7m14_360
+  - prompt: Around a point, the corner angles of tiles must add to how many degrees?
+    answer: '360'
+    check: '360'
+    difficulty: 1
+    hints:
+    - Think of a full turn.
+    - No gaps and no overlaps.
+    solution: The corners go all the way round the point, a full turn of 360°.
+    mistakes:
+      '180': c7m14_turn
+      '90': c7m14_turn
+  - prompt: Two tiles meet at a point with angles of 120° each. What angle is still needed to make 360°, in degrees?
+    answer: '120'
+    check: 360-240
+    difficulty: 2
+    hints:
+    - Add the two angles.
+    - Take that from 360.
+    solution: 'Step 1: 120 + 120 = 240. Step 2: 360 − 240 = 120°.'
+    mistakes:
+      '240': c7m14_360
+      '60': c7m14_360
+  - prompt: Three tiles meet at a point with angles 90°, 150° and x. Find x, in degrees.
+    answer: '120'
+    check: 360-90-150
+    difficulty: 2
+    hints:
+    - They add to 360°.
+    - 360 − 90 − 150.
+    solution: 'Step 1: 90 + 150 = 240. Step 2: 360 − 240 = 120°.'
+    mistakes:
+      '240': c7m14_360
+      '60': c7m14_360
+  - prompt: Why can any triangle tile a floor?
+    options:
+    - Its three angles add to 180°, so two of each angle make 360° at a point
+    - All triangles have 60° angles
+    - Triangles have no corners
+    answer: Its three angles add to 180°, so two of each angle make 360° at a point
+    difficulty: 2
+    hints:
+    - What do a triangle's angles add to?
+    - Use each angle twice.
+    solution: Copies of a triangle placed so each angle appears twice at a point give 2 × 180° = 360°, with no gaps.
+    mistakes:
+      All triangles have 60° angles: c7m14_360
+      Triangles have no corners: c7m14_360
+  - prompt: A regular octagon's angle is 135°. Can regular octagons alone tile a floor?
+    options:
+    - No, 135° does not divide 360° exactly
+    - Yes, 3 meet at each point
+    - Yes, 2 meet at each point
+    answer: No, 135° does not divide 360° exactly
+    difficulty: 2
+    hints:
+    - Try 2 × 135 and 3 × 135.
+    - Is either exactly 360?
+    solution: 2 × 135 = 270 (gap) and 3 × 135 = 405 (overlap). Octagons need squares to fill the gaps.
+    mistakes:
+      Yes, 3 meet at each point: c7m14_360
+      Yes, 2 meet at each point: c7m14_360
+  - prompt: A tangram made from a square of side 8 cm is rearranged into a cat. What is the cat's area, in cm²?
+    answer: '64'
+    check: 8*8
+    difficulty: 2
+    hints:
+    - Find the area of the square.
+    - Rearranging does not change area.
+    solution: 'Step 1: square area = 8 × 8 = 64 cm². Step 2: the cat uses the same pieces, so 64 cm².'
+    mistakes:
+      '32': c7m14_same_area
+      '16': c7m14_same_area
+  - prompt: At a point, 3 equilateral triangles (60°) and some squares (90°) meet. How many squares?
+    answer: '2'
+    check: (360-3*60)/90
+    difficulty: 3
+    hints:
+    - 3 × 60 = 180.
+    - How many 90s make the remaining 180?
+    solution: 'Step 1: triangles give 180°. Step 2: 360 − 180 = 180, and 180 ÷ 90 = 2 squares.'
+    mistakes:
+      '3': c7m14_360
+      '1': c7m14_360
+  - prompt: Each angle of a regular 12-sided shape is 150°. One square (90°) meets two of these at a point. Does this close up with no gap?
+    options:
+    - No, it overlaps by 30°
+    - Yes, it makes exactly 360°
+    - No, it leaves a 30° gap
+    answer: No, it overlaps by 30°
+    difficulty: 3
+    hints:
+    - Add 150 + 150 + 90.
+    - Compare with 360.
+    solution: 150 + 150 + 90 = 390°, which is 30° more than 360°, so the tiles would overlap.
+    mistakes:
+      No, it leaves a 30° gap: c7m14_360
+      Yes, it makes exactly 360°: c7m14_360
+  - prompt: The 7 tangram pieces include 2 large triangles that each cover 1/4 of the square. What fraction of the square do the other 5 pieces cover?
+    answer: 1/2
+    check: 1-Rational(1,4)*2
+    difficulty: 3
+    hints:
+    - The two large triangles cover 1/4 + 1/4.
+    - Take that from the whole.
+    solution: 'Step 1: 1/4 + 1/4 = 1/2. Step 2: 1 − 1/2 = 1/2 is left for the other 5 pieces.'
+    mistakes:
+      3/4: c7m14_same_area
+      1/4: c7m14_same_area
