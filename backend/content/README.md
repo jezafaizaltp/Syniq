@@ -1034,6 +1034,30 @@ need checking, and the Hindi wording has not been read by a Hindi teacher.
 CBSE Class 10 (all six subjects including Hindi A and Hindi B, 148 topics) follows the same rule too, with its own
 test. Its English and Hindi lessons were written from memory of the NCERT texts, so story details need checking
 against the books, and the Hindi wording has not been read by a Hindi teacher.
+### More than one way to explain each idea
+
+A step can also carry `ways`: the same idea explained another way, each complete on its own so the check can be
+answered from any of them. The step's own `teach` counts as its `style` (default `text`); each way names a different
+style from `text`, `visual`, `step_by_step` and `real_world`, and a `visual` way needs a picture.
+
+```yaml
+  - teach: Two numbers add up to 34, and one is 10 more than the other...
+    check: {...}
+    ways:
+      - style: real_world
+        teach: Your friend has coins in two pockets...
+      - style: visual
+        teach: Think of two strips of paper...
+        picture: {kind: flow, steps: [...], alt: "..."}
+```
+
+Each learner meets first the way most likely to work for them (`learning.style_order`, the same evidence as
+`engine/methods.py`), can tap "Explain another way" at any time, and after a wrong check answer gets the next way and
+one more try before the answer is shown. A wrong answer counts against the way on screen; a right answer after
+another way counts for that way, so the order keeps adapting. Every Kerala Class 9 Maths, Physics, Chemistry and
+Biology lesson step has at least one other way (a test checks this). To add ways to existing lessons, give
+`add_to_packs` a `ways:` list per topic, one list per step.
+
 `app/lessons.py` checks lessons. To add lessons or questions to a pack without rewriting it, write a small extra file
 and run `python -m tools.add_to_packs <file>` (see the top of `tools/add_to_packs.py`); it keeps the pack's comments
 and layout and refuses the change if the pack would fail its checks.

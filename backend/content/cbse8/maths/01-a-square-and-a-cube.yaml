@@ -16,6 +16,9 @@ tips:
   t8_square_and_cube: "Check both: is it n × n for a whole n? Is it m × m × m for a whole m? Only one choice passes both."
   t8_square_last_digit: "Look at the last digit. Squares can only end in 0, 1, 4, 5, 6 or 9. Which number ends in a digit no square can?"
   t8_subtract_cube: "Work out 9³, take it from 1729, then find the cube root of what is left."
+  c8m1_pairs: Split the number into prime factors and group equal primes in pairs (for a square root) or in threes (for a cube root). Take one prime from each group.
+  c8m1_units: Look only at the last digit of the number and ask which last digits a square or cube can end in.
+  c8m1_missing: Factorise, then see which prime is short of a full pair (square) or a full triple (cube). Multiply by just enough to complete it.
 concepts:
 - code: cbse8m.sq.squares
   title: Square numbers and square roots
@@ -102,6 +105,59 @@ concepts:
           - 40
           - 44
         say: 40 × 40 = 1600, not enough yet. 2025 ends in 25, so try a side ending in 5.
+  lesson:
+    - teach: 'A square number is a number times itself: 7 × 7 = 49, written 7². It is the area of a square with whole-number sides. The square numbers start 1, 4, 9, 16, 25, 36, 49, 64, 81, 100.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 1
+          B:
+          - 7
+          - 1
+          C:
+          - 7
+          - 7
+          D:
+          - 1
+          - 7
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - D
+        - - D
+          - A
+        alt: A square ABCD with equal sides; if each side is 7 units, its area is 7 × 7 = 49 square units, so 49 is a square number.
+      check:
+        prompt: What is 9²?
+        options:
+        - '81'
+        - '18'
+        - '99'
+        answer: '81'
+        why: 9 × 9 = 81; squaring is not doubling.
+    - teach: 'Squares follow patterns. A square number never ends in 2, 3, 7 or 8. The sum of the first n odd numbers is n²: 1 + 3 + 5 = 9 = 3². Between n² and (n + 1)² there are 2n whole numbers that are not squares.'
+      check:
+        prompt: Which of these could be a square number?
+        options:
+        - 1,296
+        - 2,437
+        - 5,328
+        answer: 1,296
+        why: Squares never end in 7 or 8; 1,296 = 36².
+    - teach: 'The square root undoes squaring: √49 = 7 because 7² = 49. To find a square root, split the number into prime factors, pair equal primes, and take one from each pair. 324 = 2 × 2 × 3 × 3 × 3 × 3, so √324 = 2 × 3 × 3 = 18.'
+      check:
+        prompt: 784 = 2 × 2 × 2 × 2 × 7 × 7. What is √784?
+        options:
+        - '28'
+        - '14'
+        - '392'
+        answer: '28'
+        why: 'One from each pair: 2 × 2 × 7 = 28.'
   items:
   - prompt: Find 14².
     answer: '196'
@@ -172,6 +228,109 @@ concepts:
     - Count 82 to 99.
     solution: 'Step 1: Between 81 and 100 are 82, 83, ..., 99. Step 2: That is 99 − 82 + 1 = 18 numbers (in general 2n between n² and (n+1)²).'
     mistakes: {"19": "t8_between_squares", "20": "t8_between_squares"}
+  - prompt: Find 25².
+    answer: '625'
+    check: 25**2
+    difficulty: 1
+    hints:
+    - Multiply 25 by itself.
+    - 25 × 25 = 25 × 20 + 25 × 5.
+    solution: 25² = 625.
+    mistakes:
+      '50': c8_square_not_double
+  - prompt: Find √529.
+    answer: '23'
+    check: sqrt(529)
+    difficulty: 2
+    hints:
+    - 20² = 400 and 25² = 625.
+    - It ends in 9, so the root ends in 3 or 7.
+    solution: 23² = 529, so √529 = 23.
+    mistakes:
+      '27': c8m1_pairs
+  - prompt: What is the sum of the first 10 odd numbers?
+    answer: '100'
+    check: 10**2
+    difficulty: 2
+    hints:
+    - 1 + 3 + 5 + … has a square pattern.
+    - The sum of the first n odd numbers is n².
+    solution: The first 10 odd numbers add up to 10² = 100.
+    mistakes:
+      '50': t8_odd_sum_square
+  - prompt: Which of these is a perfect square?
+    options:
+    - 1,024
+    - 1,022
+    - 1,027
+    - 1,028
+    answer: 1,024
+    difficulty: 2
+    hints:
+    - Squares never end in 2, 3, 7 or 8.
+    - 32 × 32 = ?
+    solution: 1,024 = 32²; the others end in 2, 7 or 8.
+    mistakes:
+      1,022: c8m1_units
+      1,027: c8m1_units
+      1,028: c8m1_units
+  - prompt: What is the smallest number you must multiply 180 by to get a perfect square?
+    answer: '5'
+    check: 900/180
+    difficulty: 3
+    hints:
+    - 180 = 2 × 2 × 3 × 3 × 5.
+    - Which prime has no partner?
+    solution: 180 = 2² × 3² × 5; multiplying by 5 gives 900 = 30².
+    mistakes:
+      '2': c8m1_missing
+      '3': c8m1_missing
+  - prompt: A square garden has an area of 1,296 m². What is the length of one side, in m?
+    answer: '36'
+    check: sqrt(1296)
+    difficulty: 2
+    hints:
+    - Side = √area.
+    - 1,296 = 2⁴ × 3⁴.
+    solution: √1296 = 2² × 3² = 36 m.
+    mistakes:
+      '648': t8_side_from_area
+  - prompt: How many whole numbers lie strictly between 15² and 16²?
+    answer: '30'
+    check: 2*15
+    difficulty: 3
+    hints:
+    - Between n² and (n+1)² there are 2n numbers.
+    - Here n = 15.
+    solution: There are 2 × 15 = 30 numbers between 225 and 256.
+    mistakes:
+      '31': t8_between_squares
+      '15': t8_between_squares
+  - prompt: 'A Pythagorean-style triple: 6² + 8² = ?²  Find the missing number.'
+    answer: '10'
+    check: sqrt(36+64)
+    difficulty: 2
+    hints:
+    - Work out 36 + 64.
+    - Then take the square root.
+    solution: 36 + 64 = 100 = 10².
+    mistakes:
+      '14': t8_complete_triples
+  - prompt: What digit can the square of a number ending in 4 end in?
+    options:
+    - '6'
+    - '4'
+    - '8'
+    - '2'
+    answer: '6'
+    difficulty: 2
+    hints:
+    - Only the last digit matters.
+    - Work out 4 × 4.
+    solution: 4 × 4 = 16, so the square ends in 6 (e.g. 14² = 196).
+    mistakes:
+      '4': t8_square_last_digit
+      '8': c8m1_units
 - code: cbse8m.sq.cubes
   title: Cube numbers and cube roots
   after:
@@ -254,6 +413,42 @@ concepts:
       - when:
           n: 13
         say: '13 × 13 × 13 = 2197: a bit too many.'
+  lesson:
+    - teach: 'A cube number is a number used three times in a multiplication: 4 × 4 × 4 = 64, written 4³. It is the number of unit cubes in a solid cube with that edge. Cubes start 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000.'
+      check:
+        prompt: What is 5³?
+        options:
+        - '125'
+        - '15'
+        - '25'
+        answer: '125'
+        why: 5 × 5 × 5 = 125; cubing is not tripling.
+    - teach: 'The cube root undoes cubing: ∛125 = 5. Split the number into primes and group equal primes in threes; take one from each group. 3375 = 3 × 3 × 3 × 5 × 5 × 5, so ∛3375 = 3 × 5 = 15.'
+      picture:
+        kind: flow
+        steps:
+        - Factorise into primes
+        - Group equal primes in threes
+        - Take one from each group
+        - Multiply them
+        alt: 'Steps for a cube root: factorise into primes, group equal primes in threes, take one from each group, multiply.'
+      check:
+        prompt: 2744 = 2 × 2 × 2 × 7 × 7 × 7. What is ∛2744?
+        options:
+        - '14'
+        - '28'
+        - '49'
+        answer: '14'
+        why: 'One from each triple: 2 × 7 = 14.'
+    - teach: 'If a prime is short of a full triple, the number is not a perfect cube. To make it one, multiply (or divide) by the missing primes. 1729 is the famous Hardy–Ramanujan number: the smallest number that is a sum of two cubes in two different ways, 1³ + 12³ and 9³ + 10³.'
+      check:
+        prompt: What must 32 = 2⁵ be multiplied by to become a perfect cube?
+        options:
+        - '2'
+        - '4'
+        - '8'
+        answer: '2'
+        why: 2⁵ × 2 = 2⁶ = 64 = 4³.
   items:
   - prompt: Find 6³.
     answer: '216'
@@ -314,3 +509,100 @@ concepts:
     - 1729 − 729 = 1000.
     solution: 'Step 1: 9³ = 729. Step 2: b³ = 1729 − 729 = 1000, so b = 10.'
     mistakes: {"1000": "t8_subtract_cube", "11": "t8_subtract_cube"}
+  - prompt: Find 11³.
+    answer: '1331'
+    check: 11**3
+    difficulty: 1
+    hints:
+    - 11 × 11 = 121.
+    - Then multiply 121 by 11.
+    solution: 11³ = 1331.
+    mistakes:
+      '33': c8_cube_not_triple
+      '121': c8_cube_not_triple
+  - prompt: Find ∛512.
+    answer: '8'
+    check: '8'
+    difficulty: 1
+    hints:
+    - Which number used three times gives 512?
+    - 8 × 8 = 64.
+    solution: 8³ = 512, so ∛512 = 8.
+    mistakes:
+      '16': t8_cube_root
+  - prompt: Use prime factors to find ∛9261.
+    answer: '21'
+    check: '21'
+    difficulty: 3
+    hints:
+    - 9261 = 3 × 3 × 3 × 7 × 7 × 7.
+    - Take one from each triple.
+    solution: ∛9261 = 3 × 7 = 21.
+    mistakes:
+      '63': c8m1_pairs
+  - prompt: What is the smallest number you must divide 3000 by to get a perfect cube?
+    answer: '3'
+    check: 3000/1000
+    difficulty: 2
+    hints:
+    - 3000 = 2³ × 5³ × 3.
+    - Which prime is not in a triple?
+    solution: Dividing by 3 leaves 1000 = 10³.
+    mistakes:
+      '10': c8m1_missing
+  - prompt: A cube-shaped box holds exactly 343 unit cubes. How long is its edge?
+    answer: '7'
+    check: '7'
+    difficulty: 2
+    hints:
+    - Number of unit cubes = edge³.
+    - Find the cube root of 343.
+    solution: ∛343 = 7 units.
+    mistakes:
+      '49': t8_cube_root
+  - prompt: Which of these is a perfect cube?
+    options:
+    - '216'
+    - '200'
+    - '256'
+    - '300'
+    answer: '216'
+    difficulty: 2
+    hints:
+    - Check 5³, 6³, 7³.
+    - 6 × 6 × 6 = ?
+    solution: 216 = 6³; 256 is 2⁸, a square but not a cube.
+    mistakes:
+      '256': t8_square_and_cube
+  - prompt: What is the smallest number you must multiply 500 by to get a perfect cube?
+    answer: '2'
+    check: 1000/500
+    difficulty: 3
+    hints:
+    - 500 = 2 × 2 × 5 × 5 × 5.
+    - Which prime needs one more to make a triple?
+    solution: 500 = 2² × 5³; × 2 gives 2³ × 5³ = 1000 = 10³.
+    mistakes:
+      '4': c8m1_missing
+      '5': c8m1_missing
+  - prompt: Find 2³ + 3³ + 4³.
+    answer: '99'
+    check: 2**3+3**3+4**3
+    difficulty: 2
+    hints:
+    - Work out each cube first.
+    - 8, 27 and 64.
+    solution: 8 + 27 + 64 = 99.
+    mistakes:
+      '27': c8_cube_not_triple
+  - prompt: The edge of a cube is doubled. How many times larger is its volume?
+    answer: '8'
+    check: 2**3
+    difficulty: 3
+    hints:
+    - Volume = edge³.
+    - (2a)³ = ?
+    solution: (2a)³ = 8a³, so the volume becomes 8 times.
+    mistakes:
+      '2': c8_cube_not_triple
+      '4': c8_cube_not_triple

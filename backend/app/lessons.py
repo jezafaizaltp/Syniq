@@ -16,15 +16,66 @@ Pack format (backend/content/README.md, "Lessons"):
           options: [right one, wrong one, wrong one]
           answer: right one
           why: Why the right answer is right, in a sentence or two.
+        ways:                     # optional: the same idea explained another way, so each learner
+          - style: visual         # meets it first the way that works for them (engine/methods.py)
+            teach: ...            # and can ask for another way at any time. Each way is complete on
+            picture: {...}        # its own: the check question can be answered from any of them.
+          - style: real_world
+            teach: ...
+
+The step's own `teach` is its `style` (default text). A wrong check answer brings the next way and one more try
+before the answer is shown; the way that then works is credited to the learner's method counts.
 """
 
 from __future__ import annotations
 
 import random
 
+from .engine.methods import STYLES
 from .pictures import check_picture
 
 MIN_STEPS, MAX_STEPS = 2, 8
+MAX_WAYS = 3
+
+
+def ways_of(step: dict) -> list[dict]:
+    """Every way this step is taught: its own teaching first, then the others in the order written."""
+    main = {"style": step.get("style") or "text", "teach": str(step["teach"]).strip(), "picture": step.get("picture")}
+    extra = [{"style": w["style"], "teach": str(w["teach"]).strip(), "picture": w.get("picture")} for w in step.get("ways") or []]
+    return [main] + extra
+
+
+def _check_ways(step: dict, where: str) -> list[str]:
+    errors = []
+    style = step.get("style", "text")
+    if style not in STYLES:
+        errors.append(f"{where}: unknown style {style}")
+    if "ways" not in step:
+        return errors
+    ways = step["ways"]
+    if not isinstance(ways, list) or not 1 <= len(ways) <= MAX_WAYS:
+        return errors + [f"{where}: ways must be a list of 1 to {MAX_WAYS}"]
+    seen = {style}
+    for k, way in enumerate(ways, start=1):
+        w = f"{where} way {k}"
+        if not isinstance(way, dict):
+            errors.append(f"{w} must be a mapping")
+            continue
+        unknown = set(way) - {"style", "teach", "picture"}
+        if unknown:
+            errors.append(f"{w}: unknown field {sorted(unknown)[0]}")
+        if way.get("style") not in STYLES:
+            errors.append(f"{w}: style must be one of {', '.join(STYLES)}")
+        elif way["style"] in seen:
+            errors.append(f"{w}: style {way['style']} is used twice in this step")
+        seen.add(way.get("style"))
+        if len(str(way.get("teach") or "").strip()) < 40:
+            errors.append(f"{w}: 'teach' must explain the idea (40 characters or more)")
+        if "picture" in way:
+            errors += [f"{w}: {e}" for e in check_picture(way["picture"])]
+        if way.get("style") == "visual" and "picture" not in way and "picture" not in step:
+            errors.append(f"{w}: a visual way needs a picture")
+    return errors
 
 
 def check_lesson(lesson) -> list[str]:
@@ -38,13 +89,14 @@ def check_lesson(lesson) -> list[str]:
         if not isinstance(step, dict):
             errors.append(f"{where} must be a mapping")
             continue
-        unknown = set(step) - {"teach", "picture", "check"}
+        unknown = set(step) - {"teach", "picture", "check", "style", "ways"}
         if unknown:
             errors.append(f"{where}: unknown field {sorted(unknown)[0]}")
         if not str(step.get("teach") or "").strip():
             errors.append(f"{where}: missing 'teach'")
         if "picture" in step:
             errors += [f"{where}: {e}" for e in check_picture(step["picture"])]
+        errors += _check_ways(step, where)
         check = step.get("check")
         if not isinstance(check, dict):
             errors.append(f"{where}: missing 'check'")
@@ -65,16 +117,37 @@ def check_lesson(lesson) -> list[str]:
     return errors
 
 
-def public_lesson(lesson: list[dict] | None, concept_id: int) -> list[dict] | None:
-    """The lesson as the learner gets it: options shuffled (the same way each time), no answers or reasons."""
+def order_ways(ways: list[dict], order: list[str] | None) -> list[dict]:
+    """The step's ways, the one most likely to work for this learner first (order = their styles, best first)."""
+    if not order:
+        return ways
+    rank = {s: i for i, s in enumerate(order)}
+    return sorted(ways, key=lambda w: rank.get(w["style"], len(rank)))
+
+
+def public_lesson(lesson: list[dict] | None, concept_id: int, order: list[str] | None = None) -> list[dict] | None:
+    """The lesson as the learner gets it: each step's ways in this learner's order, options shuffled (the same way
+    each time), no answers or reasons. `teach` and `picture` are the first way's, for older apps."""
     if not lesson:
         return None
     steps = []
     for n, step in enumerate(lesson):
         options = [str(o) for o in step["check"]["options"]]
         random.Random(concept_id * 100 + n).shuffle(options)
-        steps.append({"teach": step["teach"].strip(), "picture": step.get("picture"), "check": {"prompt": step["check"]["prompt"], "options": options}})
+        ways = order_ways(ways_of(step), order)
+        steps.append(
+            {
+                "teach": ways[0]["teach"],
+                "picture": ways[0]["picture"],
+                "ways": ways,
+                "check": {"prompt": step["check"]["prompt"], "options": options},
+            }
+        )
     return steps
+
+
+def way_styles(lesson: list[dict], step: int) -> set[str]:
+    return {w["style"] for w in ways_of(lesson[step])} if 0 <= step < len(lesson) else set()
 
 
 def mark(lesson: list[dict], step: int, choice: str) -> dict:

@@ -14,6 +14,11 @@ tips:
   t8_three_dates: "Dates one under another are n, n + 7, n + 14. Add them and solve."
   t8_trick_algebra: "Call your number x and follow every step with x, simplifying as you go. The x disappears at the end; what number is left?"
   t8_undo_steps: "Follow the steps with x: they always bring you back to x. So the answer equals the number you started with."
+  c8m13_follow_x: Write x for the starting number and do each step to the expression. Simplify after every step.
+  c8m13_undo: 'Undo the steps in reverse order: the last step first, each one turned round.'
+  c8m13_pyramid_up: Each block is the sum of the two blocks directly below it. Fill in one row at a time.
+  c8m13_calendar_steps: On a calendar, one step right is +1 and one step down is +7.
+  c8m13_two_digit: Write the two-digit number as 10a + b. Its reverse is 10b + a.
 
 concepts:
 - code: cbse8m.alg.tricks
@@ -90,6 +95,50 @@ concepts:
       - when:
           k: 12
         say: Halving cuts it to 6. The end is always k ÷ 2, whatever x is.
+  lesson:
+    - teach: 'In a ''think of a number'' trick, everyone ends with the same answer. Call the number x and follow the steps: double it (2x), add 6 (2x + 6), halve it (x + 3), take away your number (3). The x cancels, so the answer is always 3.'
+      picture:
+        kind: flow
+        steps:
+        - x
+        - 'double: 2x'
+        - 'add 6: 2x + 6'
+        - 'halve: x + 3'
+        - 'minus x: 3'
+        alt: 'Starting from x: 2x, then 2x plus 6, then x plus 3, then 3. The x cancels out.'
+      check:
+        prompt: Think of a number, add 5, then take away your number. What do you always get?
+        options:
+        - '5'
+        - Your number
+        - '0'
+        answer: '5'
+        why: x + 5 − x = 5, whatever x is.
+    - teach: 'If a trick tells you the result, you can find the starting number by undoing the steps in reverse: the last step first. Multiplying is undone by dividing, adding by subtracting. If ''times 3, then add 4'' gives 19, then 19 − 4 = 15 and 15 ÷ 3 = 5.'
+      check:
+        prompt: Double a number, then add 3. The result is 17. What was the number?
+        options:
+        - '7'
+        - '10'
+        - '40'
+        answer: '7'
+        why: 'Undo in reverse: 17 − 3 = 14, then 14 ÷ 2 = 7.'
+    - teach: In a number pyramid, each block is the sum of the two blocks below it. With bottom row a, b, c, the middle row is a + b and b + c, and the top is a + 2b + c. The middle number counts twice.
+      picture:
+        kind: flow
+        steps:
+        - 'bottom: a, b, c'
+        - 'middle: a + b, b + c'
+        - 'top: a + 2b + c'
+        alt: A pyramid with bottom a, b, c has middle row a plus b and b plus c, and top a plus 2b plus c.
+      check:
+        prompt: A pyramid's bottom row is 1, 4, 2. What is the top?
+        options:
+        - '11'
+        - '7'
+        - '8'
+        answer: '11'
+        why: 1 + 2 × 4 + 2 = 11 (middle row 5 and 6).
   items:
   - prompt: Think of a number, double it, add 8, halve it, then subtract the number you thought of. What do you always get?
     answer: '4'
@@ -149,6 +198,113 @@ concepts:
     - x + 3 − 3 = x.
     solution: The steps give back x, so the number was 9.
     mistakes: {"45": "t8_undo_steps", "3": "t8_undo_steps"}
+  - prompt: Think of a number, multiply by 3, add 12, divide by 3, then subtract your number. What do you always get?
+    answer: '4'
+    check: 12/3
+    difficulty: 1
+    hints:
+    - 'Start with x: 3x, then 3x + 12.'
+    - 'Divide by 3: x + 4.'
+    solution: x → 3x → 3x + 12 → x + 4 → 4. You always get 4.
+    mistakes:
+      '12': c8m13_follow_x
+      '0': c8m13_follow_x
+  - prompt: Think of a number, add 7, double it, subtract 14, then halve it. If you started with 23, what do you get?
+    answer: '23'
+    check: ((23 + 7)*2 - 14)/2
+    difficulty: 2
+    hints:
+    - 'Use x: x + 7, then 2x + 14.'
+    - 'Subtract 14: 2x. Halve: x.'
+    solution: x → x + 7 → 2x + 14 → 2x → x. You get back your number, 23.
+    mistakes:
+      '7': t8_undo_steps
+      '30': c8m13_follow_x
+  - prompt: Multiply a number by 4, then subtract 5. The result is 27. What was the number?
+    answer: '8'
+    check: (27 + 5)/4
+    difficulty: 1
+    hints:
+    - 'Undo the last step first: add 5.'
+    - Then divide by 4.
+    solution: 27 + 5 = 32, and 32 ÷ 4 = 8.
+    mistakes:
+      '5.5': c8m13_undo
+      '103': c8m13_undo
+  - prompt: A pyramid's bottom row is 5, 3, 8. What is the top block?
+    answer: '19'
+    check: 5 + 2*3 + 8
+    difficulty: 1
+    hints:
+    - 'Middle row: 5 + 3 and 3 + 8.'
+    - Add 8 and 11.
+    solution: 'Middle row: 8 and 11. Top: 8 + 11 = 19.'
+    mistakes:
+      '16': t8_pyramid_algebra
+      '11': c8m13_pyramid_up
+  - prompt: A pyramid has bottom row 2, x, 5 and top 21. Find x.
+    answer: '7'
+    check: (21 - 2 - 5)/2
+    difficulty: 2
+    hints:
+    - Top = 2 + 2x + 5.
+    - 2x + 7 = 21.
+    solution: 2 + 2x + 5 = 21, so 2x = 14 and x = 7.
+    mistakes:
+      '14': t8_pyramid_solve
+      '21': t8_pyramid_solve
+  - prompt: Think of a number, multiply by 2, add 10, halve it, subtract 5. What is the result in terms of x?
+    options:
+    - x
+    - x + 5
+    - 2x
+    - '5'
+    answer: x
+    difficulty: 2
+    hints:
+    - 2x, then 2x + 10.
+    - 'Halve: x + 5. Then subtract 5.'
+    solution: x → 2x → 2x + 10 → x + 5 → x. The trick gives back your number.
+    mistakes:
+      x + 5: c8m13_follow_x
+      2x: c8m13_follow_x
+      '5': c8m13_follow_x
+  - prompt: A 4-row pyramid has bottom row 1, 2, 3, 4. What is the top block?
+    answer: '20'
+    check: 1 + 3*2 + 3*3 + 4
+    difficulty: 3
+    hints:
+    - 'Row 2: 3, 5, 7.'
+    - 'Row 3: 8, 12.'
+    solution: 'Row 2: 3, 5, 7. Row 3: 8, 12. Top: 20.'
+    mistakes:
+      '10': c8m13_pyramid_up
+      '12': c8m13_pyramid_up
+  - prompt: Think of a number, add 4, multiply by 5, subtract 20. The answer is always…
+    options:
+    - 5 times your number
+    - '20'
+    - your number
+    answer: 5 times your number
+    difficulty: 2
+    hints:
+    - x + 4, then 5(x + 4) = 5x + 20.
+    - Subtract 20.
+    solution: x → x + 4 → 5x + 20 → 5x. So the answer is always 5 times your number.
+    mistakes:
+      '20': c8m13_follow_x
+      your number: c8m13_follow_x
+  - prompt: Add 9 to a number, then divide by 2. The result is 11. What was the number?
+    answer: '13'
+    check: 11*2 - 9
+    difficulty: 2
+    hints:
+    - 'Undo the division first: × 2.'
+    - Then undo + 9.
+    solution: 11 × 2 = 22, and 22 − 9 = 13.
+    mistakes:
+      '1': c8m13_undo
+      '10': c8m13_undo
 - code: cbse8m.alg.grids
   title: Calendar magic and divisibility tricks
   after:
@@ -227,6 +383,56 @@ concepts:
       - when:
           n: 22
         say: That's the bottom date. The top one is 14 less.
+  lesson:
+    - teach: On a calendar, if a date is n, the date to its right is n + 1 and the date just below is n + 7, a week later. With this, algebra explains calendar tricks.
+      picture:
+        kind: compare
+        columns:
+        - title: Position
+          points:
+          - a date
+          - one to the right
+          - one below
+        - title: Date
+          points:
+          - n
+          - n + 1
+          - n + 7
+        alt: On a calendar a date n has n plus 1 to its right and n plus 7 below it.
+      check:
+        prompt: What date is directly below the 9th?
+        options:
+        - 16th
+        - 10th
+        - 18th
+        answer: 16th
+        why: 'One row down is one week later: 9 + 7 = 16.'
+    - teach: 'In a 2 × 2 square of dates, n, n + 1, n + 7, n + 8, the two diagonals always have the same sum: n + (n + 8) = (n + 1) + (n + 7) = 2n + 8. In a 3 × 3 block the nine dates add to 9 times the middle date, because the others pair up around it.'
+      check:
+        prompt: A 3 × 3 calendar block has 14 in the middle. What is the total of all 9 dates?
+        options:
+        - '126'
+        - '112'
+        - '140'
+        answer: '126'
+        why: 9 × 14 = 126.
+    - teach: Algebra explains number tricks too. A two-digit number with digits a and b is 10a + b. Its reverse is 10b + a. Their sum is 11a + 11b = 11(a + b), always a multiple of 11. Their difference is 9(a − b), always a multiple of 9.
+      picture:
+        kind: flow
+        steps:
+        - 53 = 10×5 + 3
+        - 35 = 10×3 + 5
+        - 53 + 35 = 11 × 8 = 88
+        - 53 − 35 = 9 × 2 = 18
+        alt: 53 plus 35 is 11 times 8, and 53 minus 35 is 9 times 2.
+      check:
+        prompt: What is 74 + 47 divided by 11?
+        options:
+        - '11'
+        - '7'
+        - '121'
+        answer: '11'
+        why: 74 + 47 = 11 × (7 + 4) = 121, and 121 ÷ 11 = 11.
   items:
   - prompt: On a calendar, what is the date directly below the 12th?
     answer: '19'
@@ -286,3 +492,110 @@ concepts:
     - 3n + 21 = 45.
     solution: 3n + 21 = 45, so n = 8 (dates 8, 15, 22).
     mistakes: {"15": "t8_three_dates", "22": "t8_three_dates"}
+  - prompt: On a calendar, what date is two rows below the 5th?
+    answer: '19'
+    check: 5 + 2*7
+    difficulty: 1
+    hints:
+    - One row down is +7.
+    - Two rows down is +14.
+    solution: 5 + 7 + 7 = 19.
+    mistakes:
+      '7': c8m13_calendar_steps
+      '12': c8m13_calendar_steps
+  - prompt: A 3 × 3 calendar block adds to 162. What is the middle date?
+    answer: '18'
+    check: 162/9
+    difficulty: 2
+    hints:
+    - The total is 9 times the middle date.
+    - 162 ÷ 9.
+    solution: 162 ÷ 9 = 18.
+    mistakes:
+      '54': t8_calendar_block
+      '20.25': t8_calendar_block
+  - prompt: A 2 × 2 calendar square has top-left date 15. What is the sum of either diagonal?
+    answer: '38'
+    check: 2*15 + 8
+    difficulty: 2
+    hints:
+    - The dates are 15, 16, 22, 23.
+    - 15 + 23.
+    solution: 15 + 23 = 38, and 16 + 22 = 38. Both diagonals give 2n + 8.
+    mistakes:
+      '31': t8_calendar_diagonal
+      '76': t8_calendar_diagonal
+  - prompt: Three dates in a row across a calendar add to 51. What is the first date?
+    answer: '16'
+    check: (51 - 3)/3
+    difficulty: 2
+    hints:
+    - The dates are n, n + 1, n + 2.
+    - 3n + 3 = 51.
+    solution: 3n + 3 = 51, so 3n = 48 and n = 16. The dates are 16, 17, 18.
+    mistakes:
+      '17': c8m13_calendar_steps
+      '10': t8_three_dates
+  - prompt: Find 85 − 58, then divide by 9.
+    answer: '3'
+    check: (85 - 58)/9
+    difficulty: 1
+    hints:
+    - 85 − 58 = 27.
+    - 27 ÷ 9.
+    solution: 85 − 58 = 27 = 9 × 3. (Also 8 − 5 = 3.)
+    mistakes:
+      '27': t8_reverse_9
+      '13': c8m13_two_digit
+  - prompt: A two-digit number plus its reverse is 132. What is the sum of its digits?
+    answer: '12'
+    check: 132/11
+    difficulty: 3
+    hints:
+    - Number + reverse = 11(a + b).
+    - 132 ÷ 11.
+    solution: 11(a + b) = 132, so a + b = 12.
+    mistakes:
+      '66': t8_reverse_11
+      '6': c8m13_two_digit
+  - prompt: Why is a two-digit number minus its reverse always a multiple of 9?
+    options:
+    - (10a + b) − (10b + a) = 9a − 9b = 9(a − b)
+    - Because 9 is the largest digit
+    - Because the digits are the same
+    answer: (10a + b) − (10b + a) = 9a − 9b = 9(a − b)
+    difficulty: 2
+    hints:
+    - Write the number as 10a + b.
+    - Subtract 10b + a and collect terms.
+    solution: (10a + b) − (10b + a) = 9a − 9b = 9(a − b), which is 9 times a whole number.
+    mistakes:
+      Because 9 is the largest digit: c8m13_two_digit
+      Because the digits are the same: c8m13_two_digit
+  - prompt: Four dates in a column on a calendar add to 58. What is the top date?
+    answer: '4'
+    check: (58 - 42)/4
+    difficulty: 3
+    hints:
+    - They are n, n + 7, n + 14, n + 21.
+    - 4n + 42 = 58.
+    solution: 4n + 42 = 58, so 4n = 16 and n = 4. The dates are 4, 11, 18, 25.
+    mistakes:
+      '14.5': t8_three_dates
+      '11': t8_calendar_below
+  - prompt: In a 2 × 2 calendar square, the top-left date is n. What is the bottom-right date?
+    options:
+    - n + 8
+    - n + 7
+    - n + 2
+    - n + 14
+    answer: n + 8
+    difficulty: 1
+    hints:
+    - Bottom-right is one step down and one step right.
+    - +7 and +1.
+    solution: One row down is +7 and one step right is +1, so n + 8.
+    mistakes:
+      n + 7: c8m13_calendar_steps
+      n + 2: c8m13_calendar_steps
+      n + 14: c8m13_calendar_steps

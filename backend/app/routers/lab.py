@@ -164,7 +164,20 @@ def my_today(db: DbSession = Depends(get_db), user: User = Depends(current_user)
         concept = db.get(Concept, cid)
         m = db.scalars(select(Mastery).where(Mastery.student_id == user.id, Mastery.concept_id == cid)).first()
         topics.append({"title": concept.title, "progress": progress_label(m.p_known, m.attempts) if m else "learning"})
-    return {"answered": len(today), "right": sum(a.correct for a in today), "topics": topics}
+    lessons = db.scalars(
+        select(LearningEvent.id).where(LearningEvent.student_id == user.id, LearningEvent.kind == "lesson_done", LearningEvent.created_at >= start)
+    ).all()
+    from .. import mentor
+
+    # The mentor's most useful next step, so the day ends with where to start next time.
+    steps = [s for s in mentor.plan(db, user)["steps"] if s["kind"] != "first_lesson"]
+    return {
+        "answered": len(today),
+        "right": sum(a.correct for a in today),
+        "topics": topics,
+        "lessons": len(lessons),
+        "next": steps[0] if steps else None,
+    }
 
 
 # Rows that belong to one student, in an order that respects foreign keys.
@@ -285,7 +298,14 @@ def child_week(student_id: int, db: DbSession = Depends(get_db), user: User = De
     from .. import rewards
 
     # New achievements, as words in the app: a moment to notice together, never a score.
-    return {**_week_summary(db, student_id), "achievements": rewards.new_this_week(db, db.get(User, student_id), utcnow())}
+    from .. import mentor
+
+    child = db.get(User, student_id)
+    g = mentor.growth(db, child)
+    # The same good news the child's mentor shows: lessons finished, topics made secure, mistakes fixed,
+    # getting past a wrong answer, and the way of explaining that has helped most lately. Never a mark.
+    grew = {k: g[k] for k in ("lessons", "secured", "fixed", "came_back", "helped_most")}
+    return {**_week_summary(db, student_id), "achievements": rewards.new_this_week(db, child, utcnow()), "grew": grew}
 
 
 @router.get("/me/days", tags=["student"])

@@ -357,7 +357,7 @@ class LearningEvent(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
-    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break | spot_star | spot_seen | tip_yes | tip_no | lesson_right | lesson_wrong
+    kind: Mapped[str] = mapped_column(String(30))  # read_aloud | break | spot_star | spot_seen | tip_yes | tip_no | lesson_right | lesson_wrong | lesson_done
     # The question it was about (spot puzzles, tip feedback) and the mistake tip's tag, when there is one.
     item_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
     detail: Mapped[str | None] = mapped_column(String(60), nullable=True)

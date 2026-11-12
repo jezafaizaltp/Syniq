@@ -14,6 +14,12 @@ tips:
   t8_pie_angle: "Angle = fraction of the total × 360°."
   t8_taps_inverse: "Fewer hours needs more taps. Find total tap-hours, then divide by the new hours."
   t8_three_part_share: "Add the parts (2 + 3 + 4), find one part, then take the largest number of parts."
+  c8m10_scale_units: 'Multiply the map distance by the scale''s second number, then change cm into km: 1 km = 1,00,000 cm.'
+  c8m10_scale_back: Change the real distance into cm first, then divide by the scale's second number.
+  c8m10_pie_total: A full circle is 360°. Each slice's angle = its part ÷ the whole × 360°.
+  c8m10_product_fixed: In inverse proportion the product stays the same. Find the product first, then divide.
+  c8m10_direct_or_inverse: 'Ask: when one goes up, does the other go up too (direct) or down (inverse)?'
+  c8m10_parts_three: Add all three ratio numbers to get the total parts, find one part, then multiply.
 concepts:
 - code: cbse8m.prop2.maps
   title: Map scales and ratios with three terms
@@ -89,6 +95,58 @@ concepts:
       - when:
           u: 5
         say: 10 ÷ 2? The middle (2 parts) minus the smallest (1 part) is just 1 part.
+  lesson:
+    - teach: 'A map scale such as 1 : 50,000 means 1 cm on the map stands for 50,000 cm on the ground, which is 500 m. Multiply the map distance by the scale number, then change units: 1 m = 100 cm and 1 km = 1,00,000 cm.'
+      picture:
+        kind: flow
+        steps:
+        - '4 cm on a 1 : 50,000 map'
+        - 4 × 50,000 = 2,00,000 cm
+        - = 2000 m
+        - = 2 km
+        alt: 4 cm on a 1 to 50,000 map is 200,000 cm, which is 2000 m or 2 km.
+      check:
+        prompt: 'On a 1 : 1,00,000 map, how far is 1 cm on the ground?'
+        options:
+        - 1 km
+        - 100 m
+        - 10 km
+        answer: 1 km
+        why: 1,00,000 cm = 1000 m = 1 km.
+    - teach: 'A ratio can have three terms. In concrete, cement : sand : gravel = 1 : 2 : 3 means 6 parts in all. To share a total, add all the terms, find one part, then multiply by each term. 60 kg of mix has 10 kg cement, 20 kg sand and 30 kg gravel.'
+      picture:
+        kind: compare
+        columns:
+        - title: Cement
+          points:
+          - 1 part
+          - 10 kg
+        - title: Sand
+          points:
+          - 2 parts
+          - 20 kg
+        - title: Gravel
+          points:
+          - 3 parts
+          - 30 kg
+        alt: 60 kg of concrete in the ratio 1 to 2 to 3 is 10 kg cement, 20 kg sand and 30 kg gravel.
+      check:
+        prompt: 'Share 24 sweets in the ratio 1 : 2 : 3. How many in the smallest share?'
+        options:
+        - '4'
+        - '8'
+        - '6'
+        answer: '4'
+        why: 1 + 2 + 3 = 6 parts, so one part is 24 ÷ 6 = 4.
+    - teach: A pie chart shows parts of a whole as slices of a circle. The whole circle is 360°, so a slice's angle is its fraction of the whole times 360°. A quarter of the class is a 90° slice; a slice of 120° is one third.
+      check:
+        prompt: In a pie chart, a slice is half the whole. What is its angle?
+        options:
+        - 180°
+        - 50°
+        - 90°
+        answer: 180°
+        why: ½ × 360° = 180°.
   items:
   - prompt: 'A map''s scale is 1 : 1,00,000. Two places are 5 cm apart on it. How far apart are they really, in km?'
     answer: '5'
@@ -148,6 +206,110 @@ concepts:
     - = 50,00,000 cm.
     solution: '50 km = 50,00,000 cm, so the scale is 1 : 50,00,000.'
     mistakes: {"1 : 50": "t8_km_to_cm", "1 : 50,000": "t8_km_to_cm"}
+  - prompt: 'A map''s scale is 1 : 50,000. Two towns are 8 cm apart on it. How far apart are they really, in km?'
+    answer: '4'
+    check: 8*50000/100000
+    difficulty: 2
+    hints:
+    - 8 × 50,000 cm.
+    - Divide by 1,00,000 for km.
+    solution: 'Step 1: 8 × 50,000 = 4,00,000 cm. Step 2: 4,00,000 ÷ 1,00,000 = 4 km.'
+    mistakes:
+      '400000': c8m10_scale_units
+      '40': c8m10_scale_units
+  - prompt: 'On a 1 : 25,000 map, a lake is 6 cm long. How long is it really, in m?'
+    answer: '1500'
+    check: 6*25000/100
+    difficulty: 2
+    hints:
+    - 6 × 25,000 cm.
+    - Divide by 100 for metres.
+    solution: 'Step 1: 6 × 25,000 = 1,50,000 cm. Step 2: ÷ 100 = 1500 m.'
+    mistakes:
+      '150000': c8m10_scale_units
+      '150': c8m10_scale_units
+  - prompt: 'Two cities are 30 km apart. On a 1 : 10,00,000 map, how far apart are they, in cm?'
+    answer: '3'
+    check: 30*100000/1000000
+    difficulty: 3
+    hints:
+    - Change 30 km into cm.
+    - 30 km = 30,00,000 cm. Divide by 10,00,000.
+    solution: 'Step 1: 30 km = 30,00,000 cm. Step 2: 30,00,000 ÷ 10,00,000 = 3 cm.'
+    mistakes:
+      '30': c8m10_scale_back
+      '0.3': c8m10_scale_back
+  - prompt: 'Share ₹1500 among three friends in the ratio 3 : 5 : 7. What does the middle friend get, in rupees?'
+    answer: '500'
+    check: 1500/15*5
+    difficulty: 2
+    hints:
+    - 3 + 5 + 7 = 15 parts.
+    - One part is ₹100.
+    solution: 'Step 1: 15 parts. Step 2: one part = ₹100. Step 3: 5 parts = ₹500.'
+    mistakes:
+      '100': c8m10_parts_three
+      '300': c8m10_parts_three
+  - prompt: 'A drink is made of juice : water : syrup = 2 : 5 : 1. How much water is in 4 litres of drink, in litres?'
+    answer: '2.5'
+    check: 4/8*5
+    difficulty: 2
+    hints:
+    - 2 + 5 + 1 = 8 parts.
+    - One part is 0.5 litres.
+    solution: 'Step 1: 8 parts. Step 2: one part = 4 ÷ 8 = 0.5 L. Step 3: water = 5 × 0.5 = 2.5 L.'
+    mistakes:
+      '20': c8m10_parts_three
+      '0.5': c8m10_parts_three
+  - prompt: In a pie chart of 72 students, 24 chose football. What is the angle of the football slice, in degrees?
+    answer: '120'
+    check: 24/72*360
+    difficulty: 1
+    hints:
+    - 24 out of 72 is one third.
+    - One third of 360°.
+    solution: 24/72 = 1/3, and 1/3 × 360° = 120°.
+    mistakes:
+      '24': c8m10_pie_total
+      '33': t8_pie_angle
+  - prompt: A pie-chart slice has an angle of 45°. What percentage of the whole is it? Type a decimal.
+    answer: '12.5'
+    check: 45/360*100
+    difficulty: 2
+    hints:
+    - 45 ÷ 360 = 1/8.
+    - 1/8 as a percentage.
+    solution: 45/360 = 1/8 = 12.5%.
+    mistakes:
+      '45': t8_angle_fraction
+      '8': t8_angle_fraction
+  - prompt: A family spends ₹3000 on food out of a monthly budget of ₹12,000. What angle does food get in a pie chart, in degrees?
+    answer: '90'
+    check: 3000/12000*360
+    difficulty: 2
+    hints:
+    - 3000 is what fraction of 12,000?
+    - One quarter of 360°.
+    solution: 3000/12,000 = 1/4, and 1/4 × 360° = 90°.
+    mistakes:
+      '25': c8m10_pie_total
+      '3000': c8m10_pie_total
+  - prompt: Which scale means 1 cm on the map is 2 km on the ground?
+    options:
+    - '1 : 2,00,000'
+    - '1 : 2000'
+    - '1 : 20,000'
+    - '1 : 2'
+    answer: '1 : 2,00,000'
+    difficulty: 3
+    hints:
+    - Change 2 km into cm.
+    - 2 km = 2000 m = 2,00,000 cm.
+    solution: '2 km = 2,00,000 cm, so the scale is 1 : 2,00,000.'
+    mistakes:
+      '1 : 2000': t8_map_scale
+      '1 : 20,000': t8_map_scale
+      '1 : 2': t8_map_scale
 - code: cbse8m.prop2.inverse
   title: Inverse proportion
   after:
@@ -226,6 +388,61 @@ concepts:
           - 4
           - 11
         say: 'Still too many: they''d finish before 24 days.'
+  lesson:
+    - teach: Two quantities are in inverse proportion when one goes up as the other goes down, so that their product stays the same. More workers take fewer days; a faster car takes less time for the same trip. If x × y is always the same number, x and y are inversely proportional.
+      picture:
+        kind: compare
+        columns:
+        - title: Workers
+          points:
+          - '2'
+          - '4'
+          - '8'
+        - title: Days
+          points:
+          - '12'
+          - '6'
+          - '3'
+        - title: Product
+          points:
+          - '24'
+          - '24'
+          - '24'
+        alt: '2 workers take 12 days, 4 take 6 and 8 take 3: the product is always 24.'
+      check:
+        prompt: Which pair is in inverse proportion?
+        options:
+        - Number of taps and time to fill a tank
+        - Number of pens and their cost
+        - Distance and time at a fixed speed
+        answer: Number of taps and time to fill a tank
+        why: More taps fill the tank faster, so the time goes down and taps × time stays the same.
+    - teach: To solve an inverse-proportion problem, find the fixed product first, then divide by the new value. 5 workers take 12 days, so the job is 60 worker-days. 10 workers take 60 ÷ 10 = 6 days.
+      picture:
+        kind: flow
+        steps:
+        - 5 workers × 12 days
+        - = 60 worker-days
+        - 10 workers
+        - 60 ÷ 10 = 6 days
+        alt: 5 workers taking 12 days is 60 worker-days, so 10 workers take 6 days.
+      check:
+        prompt: A car at 40 km/h takes 3 hours. How long at 60 km/h?
+        options:
+        - 2 hours
+        - 4.5 hours
+        - 1 hour
+        answer: 2 hours
+        why: The distance is 40 × 3 = 120 km, and 120 ÷ 60 = 2 hours.
+    - teach: 'Before you start, decide whether the problem is direct or inverse. Ask: if one quantity doubles, does the other double (direct) or halve (inverse)? Scaling the wrong way is the most common slip.'
+      check:
+        prompt: Food lasts 20 people for 6 days. With more people, the food lasts…
+        options:
+        - fewer days
+        - more days
+        - the same number of days
+        answer: fewer days
+        why: 'More people eat it faster: this is inverse proportion.'
   items:
   - prompt: 6 workers build a wall in 10 days. How many days do 12 workers take?
     answer: '5'
@@ -291,3 +508,108 @@ concepts:
     - 3x × ? = xy.
     solution: To keep x × y fixed, y must be divided by 3.
     mistakes: {"It triples": "t8_inverse_triple", "It stays the same": "t8_inverse_triple"}
+  - prompt: 8 workers finish a job in 15 days. How many days do 12 workers take?
+    answer: '10'
+    check: 8*15/12
+    difficulty: 1
+    hints:
+    - Find the worker-days first.
+    - 8 × 15 = 120.
+    solution: 'Step 1: 8 × 15 = 120 worker-days. Step 2: 120 ÷ 12 = 10 days.'
+    mistakes:
+      '22.5': c8_inverse_not_direct
+      '11': c8m10_product_fixed
+  - prompt: A trip takes 6 hours at 50 km/h. How long does it take at 75 km/h, in hours?
+    answer: '4'
+    check: 6*50/75
+    difficulty: 1
+    hints:
+    - Distance = 50 × 6 = 300 km.
+    - 300 ÷ 75.
+    solution: 'Step 1: distance = 300 km. Step 2: 300 ÷ 75 = 4 hours.'
+    mistakes:
+      '9': c8_inverse_not_direct
+      '300': c8m10_product_fixed
+  - prompt: Food lasts 50 hostel students for 30 days. How long would it last 75 students?
+    answer: '20'
+    check: 50*30/75
+    difficulty: 2
+    hints:
+    - 'Student-days: 50 × 30.'
+    - Divide by 75.
+    solution: 'Step 1: 1500 student-days. Step 2: 1500 ÷ 75 = 20 days.'
+    mistakes:
+      '45': t8_inverse_calc
+      '55': c8m10_product_fixed
+  - prompt: 6 pipes fill a tank in 80 minutes. How long would 8 pipes take, in minutes?
+    answer: '60'
+    check: 6*80/8
+    difficulty: 2
+    hints:
+    - 'Pipe-minutes: 6 × 80.'
+    - Divide by 8.
+    solution: 'Step 1: 480 pipe-minutes. Step 2: 480 ÷ 8 = 60 minutes.'
+    mistakes:
+      '106.67': c8_inverse_not_direct
+      '78': c8m10_product_fixed
+  - prompt: Which pair is NOT in inverse proportion?
+    options:
+    - Cost of apples and number of apples
+    - Speed and time for a fixed trip
+    - Workers and days for a fixed job
+    answer: Cost of apples and number of apples
+    difficulty: 2
+    hints:
+    - Double the number of apples. What happens to the cost?
+    - Inverse means one goes up while the other goes down.
+    solution: 'More apples cost more: that is direct proportion. The other two pairs are inverse.'
+    mistakes:
+      Speed and time for a fixed trip: c8m10_direct_or_inverse
+      Workers and days for a fixed job: c8m10_direct_or_inverse
+  - prompt: x and y are in inverse proportion. When x = 4, y = 15. Find y when x = 10.
+    answer: '6'
+    check: 4*15/10
+    difficulty: 2
+    hints:
+    - x × y = 4 × 15 = 60.
+    - 60 ÷ 10.
+    solution: 'Step 1: x × y = 60. Step 2: y = 60 ÷ 10 = 6.'
+    mistakes:
+      '37.5': c8_inverse_not_direct
+      '21': c8m10_product_fixed
+  - prompt: A book has 300 pages with 24 lines each. If each page had 30 lines, how many pages would it have?
+    answer: '240'
+    check: 300*24/30
+    difficulty: 3
+    hints:
+    - Total lines = 300 × 24.
+    - Divide by 30 lines a page.
+    solution: 'Step 1: 7200 lines in all. Step 2: 7200 ÷ 30 = 240 pages.'
+    mistakes:
+      '375': c8_inverse_not_direct
+      '294': c8m10_product_fixed
+  - prompt: If x and y are in inverse proportion and y is halved, what happens to x?
+    options:
+    - It doubles
+    - It halves
+    - It stays the same
+    answer: It doubles
+    difficulty: 1
+    hints:
+    - x × y must stay the same.
+    - If y is halved, x must make up for it.
+    solution: x × y is fixed, so if y becomes half, x must become twice as big.
+    mistakes:
+      It halves: t8_inverse_triple
+      It stays the same: t8_inverse_triple
+  - prompt: 15 cows graze a field in 8 days. How many cows would graze it in 5 days?
+    answer: '24'
+    check: 15*8/5
+    difficulty: 3
+    hints:
+    - Fewer days needs more cows.
+    - 'Cow-days: 15 × 8 = 120.'
+    solution: 'Step 1: 120 cow-days. Step 2: 120 ÷ 5 = 24 cows.'
+    mistakes:
+      '9.375': c8_inverse_not_direct
+      '18': c8m10_product_fixed

@@ -12,6 +12,8 @@ Each extra file names its pack and what to add to each topic:
       math9.pairs.sum_difference:
         lesson: [...]                          # app/lessons.py; replaces any lesson the topic has
         items: [...]                           # new questions, added after the topic's own
+        ways:                                  # more ways to teach each lesson step, in step order
+          - [{style: real_world, teach: ...}]  # step 1's other ways (app/lessons.py); [] leaves a step as it is
 
 The pack's text is changed in place (comments and layout kept), then the whole pack is checked with the same
 rules as the loader. Nothing is written if the check fails.
@@ -57,6 +59,21 @@ def _value_end(lines: list[str], at: int, end: int, key: int) -> int:
     return stop
 
 
+def with_ways(pack: dict, code: str, ways: list, lesson: list | None = None) -> list:
+    """The topic's lesson (or the new one given) with each step's other ways added."""
+    if lesson is None:
+        lesson = next(c for c in pack["concepts"] if c["code"] == code)["lesson"]
+    if len(ways) != len(lesson):
+        raise SystemExit(f"{code}: {len(ways)} lists of ways for a lesson of {len(lesson)} steps")
+    out = []
+    for step, more in zip(lesson, ways):
+        step = dict(step)
+        if more:
+            step["ways"] = list(step.get("ways") or []) + list(more)
+        out.append(step)
+    return out
+
+
 def merge(text: str, extra: dict) -> str:
     lines = text.split("\n")
     if extra.get("tips"):
@@ -65,6 +82,8 @@ def merge(text: str, extra: dict) -> str:
             at += 1
         lines[at + 1 : at + 1] = _dump(extra["tips"], 2)
     for code, add in (extra.get("topics") or {}).items():
+        if add.get("ways"):
+            add = {**add, "lesson": with_ways(yaml.safe_load("\n".join(lines)), code, add["ways"], add.get("lesson"))}
         start, end, key = _block(lines, code)
         if add.get("items"):
             items_at = next(n for n in range(start, end) if lines[n].rstrip() == " " * key + "items:")

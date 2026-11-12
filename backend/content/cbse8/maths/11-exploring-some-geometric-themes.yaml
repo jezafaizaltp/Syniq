@@ -13,6 +13,12 @@ tips:
   t8_natural_fractal: "Look for a shape where each small part looks like a mini copy of the whole."
   t8_self_similar: "Zoom into a fern or a coastline. What does the small part look like?"
   t8_top_view: "Imagine looking straight down at a tin can. What shape do you see?"
+  c8m11_powers: 'The same step repeats, so the number multiplies each time: use a power, not addition.'
+  c8m11_area_left: Each step keeps the same fraction of what was there. Multiply that fraction once per step.
+  c8m11_euler_solve: Put the numbers you know into F + V − E = 2 and solve for the one you don't.
+  c8m11_count_faces: Count the faces you can see, then the ones hidden at the back and bottom.
+  c8m11_view: 'Imagine your eye exactly where the question says: straight above, or level in front.'
+  c8m11_koch_length: Each side is replaced by 4 pieces, each a third as long. The total length is multiplied by 4/3.
 
 concepts:
 - code: cbse8m.geo.fractals
@@ -97,6 +103,56 @@ concepts:
           - 3
           - 8
         say: Still at least 0.1. The area shrinks, but by only a quarter each time.
+  lesson:
+    - teach: A fractal is a shape made by repeating the same step at smaller and smaller sizes, so a small part looks like the whole. Ferns, cauliflower, coastlines and river networks look like this in nature.
+      check:
+        prompt: What makes a shape a fractal?
+        options:
+        - Small parts look like the whole shape
+        - It has many straight sides
+        - It is perfectly round
+        answer: Small parts look like the whole shape
+        why: A fractal repeats the same pattern at smaller sizes, so each part is a mini copy of the whole.
+    - teach: 'The Sierpinski gasket: start with a filled triangle. Join the midpoints of the sides and remove the middle triangle, leaving 3 smaller triangles. Repeat on each one. After n steps there are 3ⁿ small triangles, and each step keeps 3/4 of the shaded area.'
+      picture:
+        kind: flow
+        steps:
+        - 'Step 0: 1 triangle'
+        - 'Step 1: 3 triangles'
+        - 'Step 2: 9 triangles'
+        - 'Step 3: 27 triangles'
+        alt: 'The Sierpinski gasket has 1, 3, 9, then 27 triangles: three times as many at each step.'
+      check:
+        prompt: How many shaded triangles are in the Sierpinski gasket after 2 steps?
+        options:
+        - '9'
+        - '6'
+        - '4'
+        answer: '9'
+        why: 'Each step triples the number: 1 → 3 → 9.'
+    - teach: 'The Koch snowflake: start with a triangle. Replace the middle third of each side with two sides of a small bump, so each side becomes 4 sides, each one third as long. The number of sides is multiplied by 4 each step, and the perimeter by 4/3.'
+      picture:
+        kind: compare
+        columns:
+        - title: Step
+          points:
+          - '0'
+          - '1'
+          - '2'
+        - title: Sides
+          points:
+          - '3'
+          - '12'
+          - '48'
+        alt: 'The Koch snowflake has 3 sides, then 12, then 48: four times as many each step.'
+      check:
+        prompt: A Koch snowflake has 12 sides. How many after one more step?
+        options:
+        - '48'
+        - '16'
+        - '24'
+        answer: '48'
+        why: 'Every side becomes 4 sides: 12 × 4 = 48.'
   items:
   - prompt: In the Sierpinski gasket, how many shaded triangles are there after 4 steps?
     answer: '81'
@@ -161,6 +217,111 @@ concepts:
     - Each small leaflet is like the whole leaf.
     solution: Each part of a fern leaf looks like a small copy of the whole leaf.
     mistakes: {"A cricket ball": "t8_natural_fractal", "A brick": "t8_natural_fractal"}
+  - prompt: In the Sierpinski gasket, how many shaded triangles are there after 3 steps?
+    answer: '27'
+    check: 3**3
+    difficulty: 1
+    hints:
+    - Each step triples the count.
+    - 1 → 3 → 9 → ?
+    solution: 3 × 3 × 3 = 27 triangles.
+    mistakes:
+      '9': c8m11_powers
+      '12': c8m11_powers
+  - prompt: A Koch snowflake starts with 3 sides. How many sides after 2 steps?
+    answer: '48'
+    check: 3*4**2
+    difficulty: 2
+    hints:
+    - Each step multiplies the sides by 4.
+    - 3 → 12 → ?
+    solution: 3 × 4 = 12, then 12 × 4 = 48 sides.
+    mistakes:
+      '24': t8_koch_sides
+      '11': c8m11_powers
+  - prompt: In the Sierpinski carpet, a square is cut into 9 and the middle one removed; this is repeated. How many small squares remain after 3 steps?
+    answer: '512'
+    check: 8**3
+    difficulty: 3
+    hints:
+    - Each step keeps 8 of every 9 squares.
+    - 8 × 8 × 8.
+    solution: 'After each step there are 8 times as many squares: 8, 64, 512.'
+    mistakes:
+      '24': t8_fractal_steps
+      '729': t8_fractal_steps
+  - prompt: Each step of the Sierpinski gasket keeps 3/4 of the shaded area. What fraction of the area is left after 3 steps?
+    answer: 27/64
+    check: Rational(3, 4)**3
+    difficulty: 3
+    hints:
+    - Multiply by 3/4 three times.
+    - (3 × 3 × 3)/(4 × 4 × 4).
+    solution: (3/4)³ = 27/64.
+    mistakes:
+      9/12: c8m11_area_left
+      1/4: c8m11_area_left
+  - prompt: A Koch snowflake starts as a triangle with sides of 9 cm, so its perimeter is 27 cm. What is the perimeter after 1 step, in cm?
+    answer: '36'
+    check: 27*4/3
+    difficulty: 3
+    hints:
+    - Each side becomes 4 pieces of 3 cm.
+    - Each side is now 12 cm long.
+    solution: 'Each 9 cm side becomes 4 pieces of 3 cm = 12 cm. Three sides: 3 × 12 = 36 cm.'
+    mistakes:
+      '27': c8m11_koch_length
+      '108': c8m11_koch_length
+  - prompt: Which is a fractal-like pattern in nature?
+    options:
+    - Branches of a tree
+    - A smooth pebble
+    - A brick
+    answer: Branches of a tree
+    difficulty: 1
+    hints:
+    - Look for a shape whose parts look like smaller copies of the whole.
+    - A branch splits like the tree splits.
+    solution: A tree splits into branches, which split into smaller branches that look like small trees.
+    mistakes:
+      A smooth pebble: t8_natural_fractal
+      A brick: t8_natural_fractal
+  - prompt: In the Sierpinski gasket, how many triangles are removed in step 2 alone?
+    answer: '3'
+    check: 3**1
+    difficulty: 2
+    hints:
+    - After step 1 there are 3 shaded triangles.
+    - One middle triangle is removed from each.
+    solution: 'Step 2 removes one middle triangle from each of the 3 shaded triangles: 3 removed.'
+    mistakes:
+      '9': c8m11_powers
+      '1': c8m11_powers
+  - prompt: Why does a fractal never really end?
+    options:
+    - The same step can be repeated forever at smaller sizes
+    - It is drawn on a computer
+    - It has no corners
+    answer: The same step can be repeated forever at smaller sizes
+    difficulty: 2
+    hints:
+    - What happens after each step?
+    - Can you always apply the step again?
+    solution: After every step there are smaller pieces, and the same step can be done on them again, without end.
+    mistakes:
+      It is drawn on a computer: t8_self_similar
+      It has no corners: t8_self_similar
+  - prompt: In the Sierpinski gasket, how many triangles are there after 5 steps?
+    answer: '243'
+    check: 3**5
+    difficulty: 2
+    hints:
+    - 3 multiplied by itself 5 times.
+    - 81 × 3.
+    solution: 3⁵ = 243 triangles.
+    mistakes:
+      '15': c8m11_powers
+      '125': c8m11_powers
 - code: cbse8m.geo.solids
   title: Solids, nets and views
   after:
@@ -242,6 +403,72 @@ concepts:
       bin: Cylinder
       clue: Round from above, straight sides from the front.
       why: A cylinder.
+  lesson:
+    - teach: 'A solid shape has faces (flat surfaces), edges (where two faces meet) and vertices (corners). A cube has 6 faces, 12 edges and 8 vertices. For any polyhedron, a solid with flat faces, Euler''s formula holds: F + V − E = 2.'
+      picture:
+        kind: compare
+        columns:
+        - title: Solid
+          points:
+          - Cube
+          - Triangular prism
+          - Square pyramid
+        - title: F, V, E
+          points:
+          - 6, 8, 12
+          - 5, 6, 9
+          - 5, 5, 8
+        - title: F + V − E
+          points:
+          - '2'
+          - '2'
+          - '2'
+        alt: A cube, triangular prism and square pyramid all give F plus V minus E equals 2.
+      check:
+        prompt: A square pyramid has 5 faces and 5 vertices. How many edges?
+        options:
+        - '8'
+        - '10'
+        - '12'
+        answer: '8'
+        why: 'F + V − E = 2: 5 + 5 − E = 2, so E = 8.'
+    - teach: 'A net is a flat shape that folds up into a solid. A cube has 11 different nets made of 6 squares. Not every arrangement of 6 squares works: if two squares would fold onto the same side, it is not a net.'
+      check:
+        prompt: How many squares does every net of a cube have?
+        options:
+        - '6'
+        - '8'
+        - '4'
+        answer: '6'
+        why: A cube has 6 faces, and each face is one square of the net.
+    - teach: A solid looks different from different sides. From the front, a cylinder looks like a rectangle, but from the top it looks like a circle. A cone from the front is a triangle, and from the top a circle with a dot in the middle.
+      picture:
+        kind: compare
+        columns:
+        - title: Solid
+          points:
+          - Cylinder
+          - Cone
+          - Cube
+        - title: Front view
+          points:
+          - Rectangle
+          - Triangle
+          - Square
+        - title: Top view
+          points:
+          - Circle
+          - Circle with a dot
+          - Square
+        alt: 'Front and top views: a cylinder is a rectangle and a circle, a cone a triangle and a circle with a dot, a cube a square both ways.'
+      check:
+        prompt: What does a cylinder standing upright look like from the front?
+        options:
+        - A rectangle
+        - A circle
+        - A triangle
+        answer: A rectangle
+        why: From the front you see its height and width, which make a rectangle.
   items:
   - prompt: How many edges does a cube have?
     answer: '12'
@@ -309,3 +536,111 @@ concepts:
     - There are eleven.
     solution: There are exactly 11 different nets that fold into a cube.
     mistakes: {"6": "t8_cube_nets", "1": "t8_cube_nets"}
+  - prompt: How many vertices does a cube have?
+    answer: '8'
+    check: 4 + 4
+    difficulty: 1
+    hints:
+    - Count the corners on the top face.
+    - And the same number on the bottom.
+    solution: '4 corners on top and 4 on the bottom: 8 vertices.'
+    mistakes:
+      '6': c8m11_count_faces
+      '12': t8_cube_edges
+  - prompt: A polyhedron has 8 faces and 6 vertices. How many edges does it have?
+    answer: '12'
+    check: 8 + 6 - 2
+    difficulty: 2
+    hints:
+    - F + V − E = 2.
+    - 8 + 6 − E = 2.
+    solution: 14 − E = 2, so E = 12. (This is an octahedron.)
+    mistakes:
+      '16': c8m11_euler_solve
+      '2': c8m11_euler_solve
+  - prompt: A pentagonal prism has 7 faces and 15 edges. How many vertices does it have?
+    answer: '10'
+    check: 2 - 7 + 15
+    difficulty: 2
+    hints:
+    - F + V − E = 2.
+    - 7 + V − 15 = 2.
+    solution: V = 2 − 7 + 15 = 10. (5 on top and 5 on the bottom.)
+    mistakes:
+      '20': c8m11_euler_solve
+      '24': c8m11_euler_solve
+  - prompt: How many faces does a triangular pyramid (tetrahedron) have?
+    answer: '4'
+    check: 1 + 3
+    difficulty: 1
+    hints:
+    - One triangle is the base.
+    - How many triangles meet at the top?
+    solution: '1 triangular base and 3 triangular sides: 4 faces.'
+    mistakes:
+      '3': c8m11_count_faces
+      '5': c8m11_count_faces
+  - prompt: What does a cone look like from directly above?
+    options:
+    - A circle with a dot in the middle
+    - A triangle
+    - A square
+    answer: A circle with a dot in the middle
+    difficulty: 1
+    hints:
+    - Look straight down on it.
+    - You see the round base and the tip in the centre.
+    solution: From above you see the round base as a circle, with the tip as a dot in the centre.
+    mistakes:
+      A triangle: c8m11_view
+      A square: t8_top_view
+  - prompt: What does a cuboid lying flat look like from the top?
+    options:
+    - A rectangle
+    - A circle
+    - A triangle
+    answer: A rectangle
+    difficulty: 1
+    hints:
+    - Its top face is flat.
+    - What shape is each face of a cuboid?
+    solution: Every face of a cuboid is a rectangle, so its top view is a rectangle.
+    mistakes:
+      A circle: c8m11_view
+      A triangle: c8m11_view
+  - prompt: A square pyramid has how many edges?
+    answer: '8'
+    check: 4 + 4
+    difficulty: 2
+    hints:
+    - 4 edges round the square base.
+    - And one from each base corner to the top.
+    solution: 4 base edges + 4 slanting edges = 8 edges.
+    mistakes:
+      '4': c8m11_count_faces
+      '5': c8m11_count_faces
+  - prompt: Does Euler's formula hold for a cube? (F = 6, V = 8, E = 12)
+    options:
+    - Yes, 6 + 8 − 12 = 2
+    - No, 6 + 8 + 12 = 26
+    - No, it only works for pyramids
+    answer: Yes, 6 + 8 − 12 = 2
+    difficulty: 1
+    hints:
+    - Work out F + V − E.
+    - 6 + 8 − 12.
+    solution: 6 + 8 − 12 = 2, so Euler's formula holds.
+    mistakes:
+      No, 6 + 8 + 12 = 26: t8_euler
+      No, it only works for pyramids: t8_euler
+  - prompt: A solid has 10 faces and 16 vertices. How many edges must it have?
+    answer: '24'
+    check: 10 + 16 - 2
+    difficulty: 3
+    hints:
+    - F + V − E = 2.
+    - 26 − E = 2.
+    solution: 10 + 16 − E = 2, so E = 24. (An octagonal prism.)
+    mistakes:
+      '28': c8m11_euler_solve
+      '4': c8m11_euler_solve

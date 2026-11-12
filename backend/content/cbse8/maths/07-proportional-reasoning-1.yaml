@@ -13,6 +13,13 @@ tips:
   t8_share_ratio: "Simplify the investments to a ratio, find one part of the profit, then multiply by Sita's parts."
   t8_simplify_ratio: "Divide both parts by their highest common factor. Keep the order of the ratio."
   t8_unit_multiply: "Multiply the inches by 2.54. Watch where the decimal point goes."
+  c8m7_scale_factor: How many times bigger did the first quantity get? The other one grows by the same factor.
+  c8m7_per_one: Find the amount for one first (divide), then multiply up.
+  c8m7_order: 'Keep the order the question asks for: the first quantity named goes first.'
+  c8m7_whole_vs_part: The question asks for a share, not one part. Multiply one part by the number of parts in that share.
+  c8m7_rate_compare: Work out how much for one unit in each case, then compare.
+  c8m7_unit_to_small: Going to a smaller unit gives a bigger number. Multiply by the conversion factor.
+  c8m7_unit_to_big: Going to a bigger unit gives a smaller number. Divide by the conversion factor.
 concepts:
 - code: cbse8m.prop1.ratio
   title: Ratios in simplest form
@@ -101,6 +108,55 @@ concepts:
           a: 18
           b: 42
         say: 'Right comparison. Now simplify: both divide by 6.'
+  lesson:
+    - teach: 'A ratio a : b compares two amounts of the same kind by division, not by subtraction. 6 boys and 9 girls is 6 : 9. Divide both terms by the same number to simplify: 6 : 9 = 2 : 3. Multiplying both by the same number gives an equivalent ratio: 2 : 3 = 4 : 6 = 10 : 15.'
+      picture:
+        kind: compare
+        columns:
+        - title: Ratio
+          points:
+          - '6 : 9'
+          - ÷ 3 both
+          - '2 : 3'
+        - title: Equivalent
+          points:
+          - '2 : 3'
+          - × 5 both
+          - '10 : 15'
+        alt: 6 to 9 divided by 3 gives 2 to 3; 2 to 3 multiplied by 5 gives 10 to 15.
+      check:
+        prompt: 'Which is 18 : 24 in simplest form?'
+        options:
+        - '3 : 4'
+        - '9 : 12'
+        - '6 : 8'
+        answer: '3 : 4'
+        why: 'The highest common factor is 6: 18 ÷ 6 = 3 and 24 ÷ 6 = 4.'
+    - teach: 'Before comparing, put both amounts in the same unit. 30 minutes : 2 hours is 30 : 120 = 1 : 4, not 30 : 2. Then simplify.'
+      check:
+        prompt: 'Write 50 paise : ₹2 in simplest form.'
+        options:
+        - '1 : 4'
+        - '25 : 1'
+        - '50 : 2'
+        answer: '1 : 4'
+        why: '₹2 = 200 paise, so 50 : 200 = 1 : 4.'
+    - teach: 'Two quantities are proportional when their ratio stays the same. If 3 pens cost ₹24, then 6 pens cost ₹48: double one, double the other. Find the factor (or the amount for one) and use it on the other quantity.'
+      picture:
+        kind: flow
+        steps:
+        - 3 pens → ₹24
+        - 1 pen → ₹8
+        - 5 pens → ₹40
+        alt: 3 pens cost 24 rupees, so 1 pen costs 8 and 5 pens cost 40.
+      check:
+        prompt: 4 notebooks cost ₹100. What do 6 cost, in the same proportion?
+        options:
+        - ₹150
+        - ₹102
+        - ₹120
+        answer: ₹150
+        why: One notebook costs ₹25, so 6 cost 6 × 25 = ₹150.
   items:
   - prompt: 'Write 24 : 36 in simplest form.'
     options:
@@ -170,6 +226,134 @@ concepts:
     - 2/5 = 16/40 and 3/8 = 15/40.
     solution: 2/5 = 0.4 and 3/8 = 0.375, so mix A is sweeter, with 2/5 spoon per cup.
     mistakes: {"3/8": "t8_compare_per_cup", "5/2": "t8_compare_per_cup"}
+  - prompt: 'Which is 45 : 60 in simplest form?'
+    options:
+    - '3 : 4'
+    - '9 : 12'
+    - '4 : 3'
+    - '15 : 20'
+    answer: '3 : 4'
+    difficulty: 1
+    hints:
+    - Find the highest common factor of 45 and 60.
+    - It is 15.
+    solution: '45 ÷ 15 = 3 and 60 ÷ 15 = 4, so 3 : 4.'
+    mistakes:
+      '9 : 12': t8_simplify_ratio
+      '4 : 3': c8m7_order
+      '15 : 20': t8_simplify_ratio
+  - prompt: 'Write 45 minutes : 1 hour in simplest form.'
+    options:
+    - '3 : 4'
+    - '45 : 1'
+    - '4 : 3'
+    - '45 : 100'
+    answer: '3 : 4'
+    difficulty: 2
+    hints:
+    - Change 1 hour into minutes first.
+    - '45 : 60.'
+    solution: 'Step 1: 1 hour = 60 minutes. Step 2: 45 : 60 = 3 : 4.'
+    mistakes:
+      '45 : 1': t8_same_units
+      '4 : 3': c8m7_order
+      '45 : 100': t8_same_units
+  - prompt: 'The ratio of red to blue beads is 5 : 2. There are 35 red beads. How many blue beads are there?'
+    answer: '14'
+    check: 35/5*2
+    difficulty: 1
+    hints:
+    - 35 is 7 times 5.
+    - So blue is 7 times 2.
+    solution: 'Step 1: 35 ÷ 5 = 7. Step 2: 7 × 2 = 14 blue beads.'
+    mistakes:
+      '32': c8_ratio_not_difference
+      '87.5': c8m7_order
+  - prompt: 5 kg of rice costs ₹300. How much do 8 kg cost, in rupees?
+    answer: '480'
+    check: 300/5*8
+    difficulty: 1
+    hints:
+    - Find the cost of 1 kg first.
+    - ₹300 ÷ 5 = ₹60.
+    solution: 'Step 1: 1 kg costs 300 ÷ 5 = ₹60. Step 2: 8 kg cost 8 × 60 = ₹480.'
+    mistakes:
+      '303': c8_ratio_not_difference
+      '187.5': c8m7_per_one
+  - prompt: 'Which ratio is NOT equivalent to 2 : 5?'
+    options:
+    - '4 : 7'
+    - '4 : 10'
+    - '6 : 15'
+    - '10 : 25'
+    answer: '4 : 7'
+    difficulty: 2
+    hints:
+    - Equivalent ratios come from multiplying both terms by the same number.
+    - 'Is 4 : 7 the same as 2 : 5 multiplied by something?'
+    solution: '4 : 10, 6 : 15 and 10 : 25 are 2 : 5 times 2, 3 and 5. 4 : 7 adds 2 to both terms, which does not keep the ratio.'
+    mistakes:
+      '4 : 10': t8_equivalent_ratio
+      '6 : 15': t8_equivalent_ratio
+      '10 : 25': t8_equivalent_ratio
+  - prompt: A recipe uses 3 cups of flour for 12 cookies. How many cups are needed for 20 cookies?
+    answer: '5'
+    check: 3*20/12
+    difficulty: 2
+    hints:
+    - How much flour for 4 cookies?
+    - 12 cookies = 3 cups, so 4 cookies = 1 cup.
+    solution: 'Step 1: 1 cup makes 12 ÷ 3 = 4 cookies. Step 2: 20 ÷ 4 = 5 cups.'
+    mistakes:
+      '11': c8_ratio_not_difference
+      '80': c8m7_per_one
+  - prompt: 'A model car is made in the ratio 1 : 40. The real car is 4 m long. How long is the model, in cm?'
+    answer: '10'
+    check: 400/40
+    difficulty: 3
+    hints:
+    - Change 4 m into cm.
+    - 400 cm ÷ 40.
+    solution: 'Step 1: 4 m = 400 cm. Step 2: 400 ÷ 40 = 10 cm.'
+    mistakes:
+      '160': c8m7_order
+      '0.1': t8_same_units
+  - prompt: Shop A sells 4 pens for ₹50. Shop B sells 6 pens for ₹72. Which is cheaper per pen?
+    options:
+    - Shop B
+    - Shop A
+    - They cost the same
+    answer: Shop B
+    difficulty: 2
+    hints:
+    - Work out the price of one pen at each shop.
+    - 50 ÷ 4 and 72 ÷ 6.
+    solution: 'Shop A: 50 ÷ 4 = ₹12.50 a pen. Shop B: 72 ÷ 6 = ₹12 a pen. Shop B is cheaper.'
+    mistakes:
+      Shop A: c8m7_rate_compare
+      They cost the same: c8m7_rate_compare
+  - prompt: 'The ratio of a rectangle''s length to breadth is 5 : 3. Its breadth is 12 cm. What is its length, in cm?'
+    answer: '20'
+    check: 12/3*5
+    difficulty: 2
+    hints:
+    - 12 is how many times 3?
+    - Multiply 5 by the same number.
+    solution: 'Step 1: 12 ÷ 3 = 4. Step 2: 5 × 4 = 20 cm.'
+    mistakes:
+      '14': c8_ratio_not_difference
+      '7.2': c8m7_order
+  - prompt: 'If 2 : 7 = x : 42, find x.'
+    answer: '12'
+    check: 2*42/7
+    difficulty: 2
+    hints:
+    - What was 7 multiplied by to get 42?
+    - Multiply 2 by the same number.
+    solution: 'Step 1: 42 ÷ 7 = 6. Step 2: x = 2 × 6 = 12.'
+    mistakes:
+      '37': c8_ratio_not_difference
+      '147': c8m7_order
 - code: cbse8m.prop1.share
   title: Sharing in a ratio and unit conversions
   after:
@@ -246,6 +430,56 @@ concepts:
       - when:
           u: 50
         say: 100 ÷ 2? The difference between 3 parts and 2 parts is 1 part.
+  lesson:
+    - teach: 'To share an amount in the ratio a : b, add the parts to get the total number of parts, find the size of one part, then multiply. ₹500 in the ratio 3 : 2: there are 5 parts, one part is ₹100, so the shares are ₹300 and ₹200.'
+      picture:
+        kind: flow
+        steps:
+        - '₹500 in 3 : 2'
+        - 3 + 2 = 5 parts
+        - 1 part = ₹100
+        - ₹300 and ₹200
+        alt: 'Sharing 500 rupees in the ratio 3 to 2: 5 parts of 100 rupees give 300 and 200.'
+      check:
+        prompt: 'Share 40 sweets in the ratio 1 : 3. How many are in the bigger share?'
+        options:
+        - '30'
+        - '10'
+        - '13'
+        answer: '30'
+        why: 1 + 3 = 4 parts, one part is 10, and the bigger share is 3 parts = 30.
+    - teach: 'Check your shares: they must add back to the total, and their ratio must match. If you get ₹300 and ₹200 from ₹500 in 3 : 2, then 300 + 200 = 500 and 300 : 200 = 3 : 2.'
+      check:
+        prompt: 'Someone shared ₹90 in 2 : 1 and got ₹60 and ₹45. What went wrong?'
+        options:
+        - The shares don't add up to ₹90
+        - Nothing, it is right
+        - 'The ratio should be 1 : 2'
+        answer: The shares don't add up to ₹90
+        why: 60 + 45 = 105, not 90. The right shares are ₹60 and ₹30.
+    - teach: Changing units is proportional reasoning with a fixed ratio. 1 km = 1000 m, 1 kg = 1000 g, 1 hour = 60 minutes, 1 inch ≈ 2.54 cm. To go to a smaller unit, multiply; to go to a bigger unit, divide.
+      picture:
+        kind: compare
+        columns:
+        - title: Bigger unit → smaller
+          points:
+          - 2.5 km → 2500 m
+          - 3 h → 180 min
+          - × the factor
+        - title: Smaller unit → bigger
+          points:
+          - 4500 g → 4.5 kg
+          - 150 min → 2.5 h
+          - ÷ the factor
+        alt: To change to a smaller unit multiply by the factor; to a bigger unit divide.
+      check:
+        prompt: How many grams are in 2.4 kg?
+        options:
+        - '2400'
+        - '240'
+        - '0.0024'
+        answer: '2400'
+        why: 1 kg = 1000 g, so 2.4 × 1000 = 2400 g.
   items:
   - prompt: 'Share ₹600 in the ratio 2 : 3. What is the larger share, in rupees?'
     answer: '360'
@@ -303,3 +537,102 @@ concepts:
     - 10 × 2.54.
     solution: 10 × 2.54 = 25.4 cm.
     mistakes: {"254": "t8_unit_multiply", "2.54": "t8_unit_multiply"}
+  - prompt: 'Share ₹1200 in the ratio 5 : 3. What is the smaller share, in rupees?'
+    answer: '450'
+    check: 1200/(5 + 3)*3
+    difficulty: 1
+    hints:
+    - 5 + 3 = 8 parts.
+    - One part is 1200 ÷ 8.
+    solution: 'Step 1: 8 parts. Step 2: one part = ₹150. Step 3: 3 parts = ₹450.'
+    mistakes:
+      '150': c8m7_whole_vs_part
+      '750': c8_parts_total
+  - prompt: 'Share 90 marbles in the ratio 4 : 5. How many are in the larger share?'
+    answer: '50'
+    check: 90/9*5
+    difficulty: 1
+    hints:
+    - 4 + 5 = 9 parts.
+    - One part is 10.
+    solution: 'Step 1: 9 parts. Step 2: one part = 10. Step 3: 5 parts = 50.'
+    mistakes:
+      '10': c8m7_whole_vs_part
+      '18': c8_parts_total
+  - prompt: 'Share ₹1800 in the ratio 1 : 2 : 3. What is the largest share, in rupees?'
+    answer: '900'
+    check: 1800/6*3
+    difficulty: 2
+    hints:
+    - 1 + 2 + 3 = 6 parts.
+    - One part is ₹300.
+    solution: 'Step 1: 6 parts. Step 2: one part = ₹300. Step 3: 3 parts = ₹900.'
+    mistakes:
+      '600': c8_parts_total
+      '300': c8m7_whole_vs_part
+  - prompt: How many minutes are in 3.5 hours?
+    answer: '210'
+    check: 3.5*60
+    difficulty: 1
+    hints:
+    - 1 hour = 60 minutes.
+    - 3.5 × 60.
+    solution: 3.5 × 60 = 210 minutes.
+    mistakes:
+      '350': t8_hours_to_minutes
+      '35': c8m7_unit_to_small
+  - prompt: Change 4250 g into kilograms.
+    answer: '4.25'
+    check: 4250/1000
+    difficulty: 1
+    hints:
+    - 1 kg = 1000 g.
+    - Going to a bigger unit, divide.
+    solution: 4250 ÷ 1000 = 4.25 kg.
+    mistakes:
+      '4250000': c8m7_unit_to_big
+      '42.5': c8m7_unit_to_big
+  - prompt: Two friends put ₹300 and ₹500 into a small stall and share a profit of ₹2400 in the same ratio. How much does the first friend get, in rupees?
+    answer: '900'
+    check: 2400*300/800
+    difficulty: 2
+    hints:
+    - '300 : 500 = 3 : 5.'
+    - 8 parts; one part is ₹300.
+    solution: 'Step 1: 300 : 500 = 3 : 5. Step 2: 2400 ÷ 8 = 300 per part. Step 3: 3 × 300 = ₹900.'
+    mistakes:
+      '1200': c8_parts_total
+      '1500': c8m7_order
+  - prompt: A road is 12 km long. How many metres is that?
+    answer: '12000'
+    check: 12*1000
+    difficulty: 1
+    hints:
+    - 1 km = 1000 m.
+    - Multiply.
+    solution: 12 × 1000 = 12,000 m.
+    mistakes:
+      '1200': t8_km_to_m
+      '0.012': c8m7_unit_to_small
+  - prompt: 'Ages of a father and son are in the ratio 7 : 2 and add up to 54 years. How old is the son?'
+    answer: '12'
+    check: 54/9*2
+    difficulty: 2
+    hints:
+    - 7 + 2 = 9 parts.
+    - One part is 54 ÷ 9.
+    solution: 'Step 1: 9 parts. Step 2: one part = 6 years. Step 3: son = 2 parts = 12 years.'
+    mistakes:
+      '42': c8m7_order
+      '6': c8m7_whole_vs_part
+  - prompt: 1 mile is about 1.6 km. About how many km is 25 miles?
+    answer: '40'
+    check: 25*1.6
+    difficulty: 2
+    hints:
+    - Multiply by 1.6.
+    - 25 × 1.6 = 25 + 15.
+    solution: 25 × 1.6 = 40 km.
+    mistakes:
+      '15.625': c8m7_unit_to_small
+      '26.6': c8_ratio_not_difference

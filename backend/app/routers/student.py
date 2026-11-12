@@ -142,7 +142,9 @@ def learn_next(
             payload["method_why"] = why  # the app says, in the student's words, why this way first
         if action.rule_id == "R4_introduce":
             # A new topic is taught first: the lesson's steps, then this explanation as the sum-up.
-            payload["lesson"] = lessons.public_lesson(concept.lesson, concept.id)
+            payload["lesson"] = lessons.public_lesson(concept.lesson, concept.id, learning.style_order(db, user, concept.id))
+            # Knows some of it already: questions first, teaching only for what they miss.
+            payload["lesson_check_first"] = learning.lesson_check_first(db, user, concept.id) if concept.lesson else None
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         working_on = learning.patterns.active(learning.mistake_patterns(db, user.id))
         item = None
@@ -165,18 +167,29 @@ def lesson(concept_id: int, db: DbSession = Depends(get_db), user: User = Depend
     concept = db.get(Concept, concept_id)
     if not concept or not concept.lesson:
         raise HTTPException(404, "No lesson for this topic yet")
-    return {"concept_id": concept.id, "title": concept.title, "steps": lessons.public_lesson(concept.lesson, concept.id)}
+    order = learning.style_order(db, user, concept.id)
+    return {"concept_id": concept.id, "title": concept.title, "steps": lessons.public_lesson(concept.lesson, concept.id, order)}
 
 
 class LessonCheck(BaseModel):
     concept_id: int
     step: int = Field(ge=0)
     choice: str = Field(max_length=500)
+    # The way of explaining on screen when the learner answered (none: checked before any teaching).
+    style: str | None = None
+    attempt: int = Field(default=1, ge=1, le=2)
+    # The learner asked for another way before answering.
+    switched: bool = False
+    # A wrong first answer gets another way and one more try before the answer is shown.
+    can_retry: bool = False
 
 
 @router.post("/learn/lesson-check")
 def lesson_check(body: LessonCheck, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
-    """A check question inside a lesson: right or not, and why. Not marked: mastery comes from practice."""
+    """A check question inside a lesson: right or not, and why. Not marked: mastery comes from practice.
+
+    It does teach the engine which ways of explaining work for this learner: a wrong answer just after a way
+    counts against it, a right answer after another way (offered or asked for) counts for that one."""
     concept = db.get(Concept, body.concept_id)
     if not concept or not concept.lesson:
         raise HTTPException(404, "No lesson for this topic yet")
@@ -184,9 +197,37 @@ def lesson_check(body: LessonCheck, db: DbSession = Depends(get_db), user: User 
         result = lessons.mark(concept.lesson, body.step, body.choice)
     except IndexError:
         raise HTTPException(404, "No such step") from None
-    db.add(LearningEvent(student_id=user.id, kind="lesson_right" if result["right"] else "lesson_wrong", detail=f"{concept.id}:{body.step}"))
+    style = body.style if body.style in lessons.way_styles(concept.lesson, body.step) else None
+    if style and user.role == "student":
+        if body.attempt == 1 and not result["right"]:
+            learning.record_felt(db, user, concept.id, style, helped=False)
+        elif result["right"] and (body.attempt == 2 or body.switched):
+            learning.record_felt(db, user, concept.id, style, helped=True)
+    kind = "lesson_right" if result["right"] else "lesson_wrong"
+    db.add(LearningEvent(student_id=user.id, kind=kind, detail=f"{concept.id}:{body.step}:{style or '-'}:{body.attempt}"))
     db.commit()
+    if not result["right"] and body.can_retry and body.attempt == 1:
+        return {"right": False, "retry": True}
     return result
+
+
+class LessonDone(BaseModel):
+    concept_id: int
+    steps: int = Field(ge=0, le=20)
+    first_time: int = Field(ge=0, le=20)
+    check_first: bool = False
+
+
+@router.post("/learn/lesson-done")
+def lesson_done(body: LessonDone, db: DbSession = Depends(get_db), user: User = Depends(require_learning_consent)):
+    """A lesson finished: kept so the learner's mentor can say what they've done this week."""
+    concept = db.get(Concept, body.concept_id)
+    if not concept or not concept.lesson:
+        raise HTTPException(404, "No lesson for this topic yet")
+    mode = "check_first" if body.check_first else "taught"
+    db.add(LearningEvent(student_id=user.id, kind="lesson_done", detail=f"{concept.id}:{min(body.first_time, body.steps)}/{body.steps}:{mode}"))
+    db.commit()
+    return {"ok": True}
 
 
 @router.get("/concepts/{concept_id}/explanations/{style}")

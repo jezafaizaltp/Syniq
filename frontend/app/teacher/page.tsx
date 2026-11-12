@@ -344,13 +344,11 @@ export default function Teacher() {
           Mistakes students have made more than once, most common first, with who is still working on each. SYNiq already
           gives each of them extra practice on that trap; a short re-teach to just these students can help too.
         </p>
-        {mistakes.length > 0 && (
-          <p>
-            <Link href={`/teacher/reteach?class=${classId}`}>Print a re-teach sheet for these mistakes →</Link>
-            <br />
-            <Link href={`/teacher/chapter?class=${classId}`}>Print a chapter planning sheet (counts only) →</Link>
-          </p>
-        )}
+        <p>
+          <Link href={`/teacher/reteach?class=${classId}`}>Print a re-teach sheet: these mistakes, harder questions and hard lesson ideas →</Link>
+          <br />
+          <Link href={`/teacher/chapter?class=${classId}`}>Print a chapter planning sheet (counts only) →</Link>
+        </p>
         {mistakes.length === 0 ? (
           <p>No repeat mistakes yet.</p>
         ) : (

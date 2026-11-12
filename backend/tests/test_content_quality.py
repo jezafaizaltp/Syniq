@@ -79,6 +79,19 @@ def test_every_cbse10_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse10/") for _ in pack["concepts"]) >= 148
 
 
+def test_every_cbse8_maths_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 8 Maths (Ganita Prakash): a lesson before practice, and at least 15 questions, like Classes 9 and 10."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse8/maths/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/maths/") for _ in pack["concepts"]) >= 28
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
@@ -170,3 +183,16 @@ def test_every_tip_tag_is_defined():
     tags = cp.known_tags() | {t for _, p in PACKS for t in (p.get("tips") or {})}
     missing = {(rel(path), tag) for path, _, _, item in all_items() for tag in (item.get("mistakes") or {}).values() if tag not in tags}
     assert not missing, sorted(missing)
+
+
+def test_every_kerala9_lesson_step_can_be_explained_another_way():
+    """The pilot: every idea in every Kerala Class 9 subject has at least two ways to explain it."""
+    one_way = [
+        f"{c['code']} step {n}"
+        for path, pack in PACKS
+        if rel(path).split("/")[0] in ("maths", "physics", "chemistry", "biology", "social-science", "english", "it", "hindi", "malayalam")
+        for c in pack["concepts"]
+        for n, step in enumerate(c.get("lesson") or [], start=1)
+        if not step.get("ways")
+    ]
+    assert not one_way, one_way

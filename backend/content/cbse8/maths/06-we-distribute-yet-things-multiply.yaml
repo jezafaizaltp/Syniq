@@ -11,6 +11,11 @@ tips:
   t8_distribute: "35 × 102 = 35 × 100 + 35 × 2. Multiply each part, then add."
   t8_distribute_minus: "8 × (50 − 1) means 8 × 50 minus 8 × 1. The 8 multiplies BOTH parts."
   t8_wrong_identity: "Test each with a = 1, b = 1. Which one gives the wrong value?"
+  c8m6_split: Split the awkward number into a round number plus or minus a small one, multiply each part, then combine.
+  c8m6_four_parts: 'Two brackets give four products: each term in the first times each term in the second.'
+  c8m6_sign: A minus times a plus gives a minus; a minus times a minus gives a plus. Check the sign of each product.
+  c8m6_near_square: Write both numbers as one middle number plus and minus the same amount.
+  c8m6_square_split: Split the number into a round number and a small part, then use the square of a sum or a difference.
 concepts:
 - code: cbse8m.dist.property
   title: The distributive property for quick multiplying
@@ -106,6 +111,74 @@ concepts:
           b: 100
           c: -5
         say: That's 7 × 95. 105 is 5 more than 100.
+  lesson:
+    - teach: 'The distributive property says a(b + c) = ab + ac and a(b − c) = ab − ac. Picture a rectangle a wide and (b + c) long: it splits into two smaller rectangles, ab and ac. The number outside multiplies every term inside.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 3
+          label: b
+        - size: 2
+          label: c
+        rows:
+        - size: 2
+          label: a
+        cells:
+        - - a × b
+          - a × c
+        alt: A rectangle of width a and length b plus c splits into two parts, a times b and a times c.
+      check:
+        prompt: Expand 4(x + 3).
+        options:
+        - 4x + 12
+        - 4x + 3
+        - x + 12
+        answer: 4x + 12
+        why: 'The 4 multiplies both terms: 4 × x and 4 × 3 = 12.'
+    - teach: It makes mental sums easy. Split one number into a round number and a small part. 47 × 101 = 47 × 100 + 47 × 1 = 4747. 25 × 98 = 25 × 100 − 25 × 2 = 2450.
+      picture:
+        kind: flow
+        steps:
+        - 25 × 98
+        - = 25 × (100 − 2)
+        - = 2500 − 50
+        - = 2450
+        alt: 25 times 98 becomes 25 times 100 minus 25 times 2, which is 2500 minus 50, or 2450.
+      check:
+        prompt: Work out 12 × 99 as 12 × 100 − 12.
+        options:
+        - '1188'
+        - '1212'
+        - '1200'
+        answer: '1188'
+        why: 1200 − 12 = 1188.
+    - teach: 'Two brackets: (a + b)(c + d) = ac + ad + bc + bd. Every term in the first bracket multiplies every term in the second, like the four parts of a rectangle split both ways. Then collect like terms: (x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 4
+          label: x
+        - size: 3
+          label: '3'
+        rows:
+        - size: 4
+          label: x
+        - size: 2
+          label: '2'
+        cells:
+        - - x²
+          - 3x
+        - - 2x
+          - '6'
+        alt: 'A rectangle x plus 2 by x plus 3 splits into four parts: x squared, 3x, 2x and 6.'
+      check:
+        prompt: In (x + 4)(x + 1), what is the number term?
+        options:
+        - '4'
+        - '5'
+        - '1'
+        answer: '4'
+        why: The number term is 4 × 1 = 4.
   items:
   - prompt: 'Use the distributive property: 35 × 102.'
     answer: '3570'
@@ -168,6 +241,115 @@ concepts:
     solution: (x + 3)(x + 5) = x² + 5x + 3x + 15 = x² + 8x + 15.
     mistakes:
       '15': c8_middle_term
+  - prompt: 'Use the distributive property: 56 × 101.'
+    answer: '5656'
+    check: 56*100 + 56
+    difficulty: 1
+    hints:
+    - 101 = 100 + 1.
+    - 56 × 100 + 56 × 1.
+    solution: 'Step 1: 56 × 100 = 5600. Step 2: 56 × 1 = 56. Step 3: 5600 + 56 = 5656.'
+    mistakes:
+      '5600': c8m6_split
+      '5601': c8_distribute_all
+  - prompt: Work out 98 × 15 using 100 × 15 − 2 × 15.
+    answer: '1470'
+    check: 98*15
+    difficulty: 1
+    hints:
+    - 100 × 15 = 1500.
+    - Take away 2 × 15 = 30.
+    solution: 'Step 1: 1500. Step 2: 2 × 15 = 30. Step 3: 1500 − 30 = 1470.'
+    mistakes:
+      '1530': c8_minus_part
+      '1498': c8m6_split
+  - prompt: Expand 7(2x − 5). What is the number term? Type it with its sign.
+    answer: '-35'
+    check: -7*5
+    difficulty: 2
+    hints:
+    - 7 multiplies both 2x and −5.
+    - 7 × (−5).
+    solution: 7(2x − 5) = 14x − 35. The number term is −35.
+    mistakes:
+      '-5': c8_distribute_all
+      '35': c8m6_sign
+  - prompt: Expand (x + 7)(x + 2). What is the coefficient of x?
+    answer: '9'
+    check: 7 + 2
+    difficulty: 1
+    hints:
+    - The x terms are 2x and 7x.
+    - Add them.
+    solution: (x + 7)(x + 2) = x² + 2x + 7x + 14 = x² + 9x + 14. The coefficient of x is 9.
+    mistakes:
+      '14': c8_middle_term
+  - prompt: Expand (x + 5)(x − 3). What is the number term? Type it with its sign.
+    answer: '-15'
+    check: 5*(-3)
+    difficulty: 2
+    hints:
+    - The number term is 5 × (−3).
+    - A plus times a minus is a minus.
+    solution: (x + 5)(x − 3) = x² − 3x + 5x − 15 = x² + 2x − 15. The number term is −15.
+    mistakes:
+      '15': c8m6_sign
+      '2': c8_middle_term
+  - prompt: Expand (2x + 1)(x + 4).
+    options:
+    - 2x² + 9x + 4
+    - 2x² + 5x + 4
+    - 2x² + 8x + 4
+    - 3x + 5
+    answer: 2x² + 9x + 4
+    check: expand((2*x + 1)*(x + 4))
+    difficulty: 3
+    hints:
+    - 'Four products: 2x × x, 2x × 4, 1 × x, 1 × 4.'
+    - 8x + x = 9x.
+    solution: 'Step 1: 2x × x = 2x². Step 2: 2x × 4 = 8x. Step 3: 1 × x = x. Step 4: 1 × 4 = 4. Step 5: 2x² + 9x + 4.'
+    mistakes:
+      2x² + 5x + 4: c8m6_four_parts
+      2x² + 8x + 4: c8m6_four_parts
+      3x + 5: c8m6_four_parts
+  - prompt: Find 21 × 19 using (20 + 1)(20 − 1).
+    answer: '399'
+    check: 20**2 - 1
+    difficulty: 2
+    hints:
+    - (a + b)(a − b) = a² − b².
+    - 20² − 1².
+    solution: 'Step 1: 20² = 400. Step 2: 1² = 1. Step 3: 400 − 1 = 399.'
+    mistakes:
+      '401': t8_diff_squares
+      '400': t8_diff_squares
+  - prompt: Which is equal to 6 × 203?
+    options:
+    - 6 × 200 + 6 × 3
+    - 6 × 200 + 3
+    - 6 × 2 + 6 × 3
+    - 600 + 18
+    answer: 6 × 200 + 6 × 3
+    difficulty: 1
+    hints:
+    - 203 = 200 + 3.
+    - The 6 multiplies both parts.
+    solution: 6 × (200 + 3) = 6 × 200 + 6 × 3 = 1200 + 18 = 1218.
+    mistakes:
+      6 × 200 + 3: c8_distribute_all
+      6 × 2 + 6 × 3: c8m6_split
+      600 + 18: c8m6_split
+  - prompt: Simplify 3(x + 4) + 2(x − 1). What is the number term?
+    answer: '10'
+    check: 3*4 + 2*(-1)
+    difficulty: 2
+    hints:
+    - Expand each bracket first.
+    - 3x + 12 + 2x − 2.
+    solution: 'Step 1: 3(x + 4) = 3x + 12. Step 2: 2(x − 1) = 2x − 2. Step 3: 5x + 10. The number term is 10.'
+    mistakes:
+      '14': c8m6_sign
+      '3': c8_distribute_all
 - code: cbse8m.dist.identities
   title: Squares of sums and differences
   after:
@@ -268,6 +450,66 @@ concepts:
           a: 10
           b: 7
         say: 10 − 7 = 3, and 3² = 9. You need 10 − b = 7.
+  lesson:
+    - teach: (a + b)² means (a + b)(a + b). Multiplying out gives a² + ab + ba + b² = a² + 2ab + b². In a square of side a + b, there is an a² square, a b² square and two ab rectangles. Leaving out 2ab is the most common slip.
+      picture:
+        kind: area_grid
+        cols:
+        - size: 4
+          label: a
+        - size: 2
+          label: b
+        rows:
+        - size: 4
+          label: a
+        - size: 2
+          label: b
+        cells:
+        - - a²
+          - ab
+        - - ab
+          - b²
+        alt: A square of side a plus b splits into a squared, two rectangles a times b, and b squared.
+      check:
+        prompt: Expand (x + 3)².
+        options:
+        - x² + 6x + 9
+        - x² + 9
+        - x² + 3x + 9
+        answer: x² + 6x + 9
+        why: 'a² + 2ab + b² with a = x, b = 3: x² + 2 × 3 × x + 9 = x² + 6x + 9.'
+    - teach: '(a − b)² = a² − 2ab + b², and (a + b)(a − b) = a² − b² (the middle terms cancel). These speed up arithmetic: 99² = (100 − 1)² = 10000 − 200 + 1 = 9801, and 102 × 98 = 100² − 2² = 9996.'
+      picture:
+        kind: compare
+        columns:
+        - title: Identity
+          points:
+          - (a + b)²
+          - (a − b)²
+          - (a + b)(a − b)
+        - title: Becomes
+          points:
+          - a² + 2ab + b²
+          - a² − 2ab + b²
+          - a² − b²
+        alt: 'Three identities: a plus b squared, a minus b squared, and a plus b times a minus b.'
+      check:
+        prompt: Use (a + b)(a − b) = a² − b² to find 31 × 29.
+        options:
+        - '899'
+        - '900'
+        - '901'
+        answer: '899'
+        why: 31 × 29 = (30 + 1)(30 − 1) = 900 − 1 = 899.
+    - teach: 'To pick the right identity, look at the numbers. Close above a round number: use (a + b)². Close below: use (a − b)². Two numbers the same distance either side of a round number: use a² − b².'
+      check:
+        prompt: Which identity is quickest for 48 × 52?
+        options:
+        - (a + b)(a − b) = a² − b²
+        - (a + b)² = a² + 2ab + b²
+        - (a − b)² = a² − 2ab + b²
+        answer: (a + b)(a − b) = a² − b²
+        why: 48 and 52 are 2 either side of 50, so 48 × 52 = 50² − 2².
   items:
   - prompt: Use (a + b)² to find 101².
     answer: '10201'
@@ -330,3 +572,112 @@ concepts:
     - (199 − 1)(199 + 1) = 198 × 200.
     solution: 199² − 1² = 198 × 200 = 39600.
     mistakes: {"39601": "t8_diff_squares", "39800": "t8_diff_squares"}
+  - prompt: Use (a + b)² to find 102².
+    answer: '10404'
+    check: 102**2
+    difficulty: 1
+    hints:
+    - 102 = 100 + 2.
+    - 100² + 2 × 100 × 2 + 2².
+    solution: 'Step 1: 100² = 10000. Step 2: 2 × 100 × 2 = 400. Step 3: 2² = 4. Step 4: 10000 + 400 + 4 = 10404.'
+    mistakes:
+      '10004': c8_forgot_2ab
+      '10204': c8_forgot_2ab
+  - prompt: Use (a − b)² to find 99².
+    answer: '9801'
+    check: 99**2
+    difficulty: 1
+    hints:
+    - 99 = 100 − 1.
+    - 100² − 2 × 100 × 1 + 1².
+    solution: 'Step 1: 10000. Step 2: minus 200. Step 3: plus 1. Step 4: 9801.'
+    mistakes:
+      '9999': c8_forgot_2ab
+      '10001': c8_forgot_2ab
+      '9799': c8m6_sign
+  - prompt: Use a² − b² to find 63 × 57.
+    answer: '3591'
+    check: 63*57
+    difficulty: 2
+    hints:
+    - 63 and 57 are 3 either side of 60.
+    - 60² − 3².
+    solution: 'Step 1: 63 × 57 = (60 + 3)(60 − 3). Step 2: 3600 − 9 = 3591.'
+    mistakes:
+      '3609': t8_diff_squares
+      '3600': c8m6_near_square
+  - prompt: Expand (x − 4)². What is the coefficient of x? Type it with its sign.
+    answer: '-8'
+    check: -2*4
+    difficulty: 2
+    hints:
+    - (a − b)² = a² − 2ab + b².
+    - −2 × x × 4.
+    solution: (x − 4)² = x² − 8x + 16. The coefficient of x is −8.
+    mistakes:
+      '-4': c8_forgot_2ab
+      '8': c8m6_sign
+  - prompt: Expand (2x + 5)².
+    options:
+    - 4x² + 20x + 25
+    - 4x² + 25
+    - 2x² + 10x + 25
+    - 4x² + 10x + 25
+    answer: 4x² + 20x + 25
+    check: expand((2*x + 5)**2)
+    difficulty: 3
+    hints:
+    - a = 2x and b = 5.
+    - a² = 4x², 2ab = 2 × 2x × 5.
+    solution: 'Step 1: (2x)² = 4x². Step 2: 2 × 2x × 5 = 20x. Step 3: 5² = 25. So 4x² + 20x + 25.'
+    mistakes:
+      4x² + 25: c8_forgot_2ab
+      2x² + 10x + 25: c8m6_square_split
+      4x² + 10x + 25: c8_forgot_2ab
+  - prompt: Find 75² − 25².
+    answer: '5000'
+    check: 75**2 - 25**2
+    difficulty: 2
+    hints:
+    - a² − b² = (a + b)(a − b).
+    - (75 + 25)(75 − 25).
+    solution: 'Step 1: 75 + 25 = 100. Step 2: 75 − 25 = 50. Step 3: 100 × 50 = 5000.'
+    mistakes:
+      '2500': t8_diff_squares
+      '50': t8_diff_squares
+  - prompt: Use (a + b)² to find 41².
+    answer: '1681'
+    check: 41**2
+    difficulty: 1
+    hints:
+    - 41 = 40 + 1.
+    - 1600 + 80 + 1.
+    solution: 'Step 1: 40² = 1600. Step 2: 2 × 40 × 1 = 80. Step 3: 1² = 1. Step 4: 1681.'
+    mistakes:
+      '1601': c8_forgot_2ab
+      '1641': c8_forgot_2ab
+  - prompt: Which identity is quickest for 97²?
+    options:
+    - (a − b)² with a = 100, b = 3
+    - (a + b)² with a = 90, b = 7
+    - a² − b² with a = 97, b = 0
+    answer: (a − b)² with a = 100, b = 3
+    difficulty: 2
+    hints:
+    - 97 is just below a round number.
+    - Which round number is it close to?
+    solution: 97 = 100 − 3, so 97² = 100² − 2 × 100 × 3 + 3² = 10000 − 600 + 9 = 9409.
+    mistakes:
+      (a + b)² with a = 90, b = 7: c8m6_square_split
+      a² − b² with a = 97, b = 0: c8m6_square_split
+  - prompt: If a + b = 10 and ab = 21, find a² + b².
+    answer: '58'
+    check: 10**2 - 2*21
+    difficulty: 3
+    hints:
+    - (a + b)² = a² + 2ab + b².
+    - 100 = a² + b² + 42.
+    solution: 'Step 1: (a + b)² = 100. Step 2: a² + b² = 100 − 2 × 21 = 58. (Check: a = 3, b = 7 gives 9 + 49 = 58.)'
+    mistakes:
+      '79': c8_forgot_2ab
+      '100': c8_forgot_2ab

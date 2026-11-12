@@ -40,6 +40,65 @@ Rules that always hold:
   the student sees one line saying why, for example "Pictures first, since this
   has helped you before."
 
+## Inside each lesson
+
+A new topic is taught first, one idea at a time. A lesson step can be written
+in more than one way (`ways` in the pack, see `backend/content/README.md`,
+"Lessons"). The same scores order each step's ways for each learner
+(`learning.style_order`), so a learner whose answers go well after real-life
+examples sees the real-life way first.
+
+- "Explain another way" shows the next way at any time.
+- A wrong check answer is not the end of the idea: the next way appears, the
+  answer they tried is set aside, and they get one more try before the answer
+  and the reason are shown.
+- "I know some of this: check me first" turns it round: the check comes first,
+  and the teaching opens only for ideas they miss. The lesson starts this way
+  by itself when there is real evidence the learner knows some of it (a right
+  answer in the start check, or the lesson done before and remembered:
+  `learning.lesson_check_first`), but never while they are stuck on the topic.
+  It says why, and "Teach me each idea first" is always one tap away.
+- Credit: a wrong first answer counts against the way on screen; a right
+  answer on the second try, or after the learner asked for another way, counts
+  for that way. These go into the same per-topic counts as the "did this
+  help?" taps, so the next lesson and the next first explanation adapt.
+- At the end, the learner sees how many ideas they got first time and which
+  way helped with which idea. Nothing is marked.
+
+Teachers see the other side on the re-teach sheet (`GET
+/teacher/classes/{id}/lesson-trouble`): lesson ideas that half or more of the
+students who reached them missed the first time, with the idea's check and,
+where one stands out, the way of explaining that helped most on the second try.
+Counts only, never names.
+
+## The mentor
+
+The student's home page opens with their mentor (`app/mentor.py`, `GET
+/me/mentor`): a hello for the time of day in India, at most three next steps,
+most useful first, the learner's own goal from My space that comes due first,
+and what went well this week.
+
+1. A mistake made more than once and not fixed yet (a few questions that
+   catch it; three right and it is fixed).
+2. A topic stuck right now (three wrong in a row): learn it again another way.
+3. The topic most overdue for revision.
+4. Carry on: the next topic not yet secure in the chapter they worked on last,
+   or the next chapter; a brand-new learner is asked to pick a subject.
+
+"This week" lists only good news that is true: days practised, topics made
+secure, repeated mistakes fixed, lessons finished, times they got something
+wrong and later right, and the way of explaining that has helped most lately.
+Never marks, ranks or comparisons with anyone else.
+
+When the learner signs out, "Before you go" (`GET /me/today`) says back what
+they did today, lessons included, and the mentor's most useful step to start
+with next time.
+
+Parents see the same good news on My children, in their own words
+(`mentor.growth`, part of `GET /guardian/children/{id}/week`): lessons finished,
+topics made secure, repeated mistakes fixed, times the child got past a wrong
+answer, and the way of explaining that has helped most lately.
+
 ## What people see
 
 | Who | Where | What |
@@ -61,3 +120,15 @@ an explanation of that style in the content packs, a word for it in
 `frontend/lib/i18n.ts` (`style.*` and `method.*`) and in `METHOD_WORDS` /
 `STYLE_WORDS` in `frontend/lib/api.ts`. The matcher handles any number of
 styles.
+
+## Showing it
+
+On a demo database (`python -m app.seed`), `python -m tools.demo_week` (from
+`backend/`) makes Meera (`meera@demo.syniq`, password `syniq-demo`) and plays a
+week of real lessons and practice through the app's own endpoints: a lesson
+where a second way helped, a repeat mistake, a stuck topic and a topic due for
+revision. Her mentor then shows all three kinds of next step, her parent
+(`parent@demo.syniq`) sees her week, and the teacher's re-teach sheet
+(`teacher@demo.syniq`) lists the lesson idea the class found hard. Running it
+again resets her week. It refuses to run without the demo class, so it can't
+touch a school's real data.

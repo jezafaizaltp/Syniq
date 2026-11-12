@@ -113,7 +113,7 @@ export default function Nav() {
             onClick={async () => {
               // A student hears what they did today first, unless they did nothing yet.
               const day = me.role === "student" ? await loadToday() : null;
-              if (day && day.answered > 0) setToday(day);
+              if (day && (day.answered > 0 || !!day.lessons)) setToday(day);
               else leave();
             }}
           >

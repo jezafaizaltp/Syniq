@@ -56,6 +56,8 @@ def test_lab_period_tools():
     # The student hears their own day back.
     mine = client.get("/me/today", headers=kiran).json()
     assert mine["answered"] == k["answered_today"]
+    # And where to start next time: the mentor's most useful step.
+    assert mine["lessons"] == 0 and mine["next"]["kind"] in ("fix_mistake", "relearn", "review", "carry_on", "start_topic")
     assert client.get("/me/today", headers=teacher).status_code == 403
 
     # A teacher can give a new password to a student in their class, not to anyone else.

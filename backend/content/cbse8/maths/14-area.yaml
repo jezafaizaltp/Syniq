@@ -13,6 +13,12 @@ tips:
   t8_rhombus_area: "Area of a rhombus = ½ × d₁ × d₂. Solve for the missing diagonal."
   t8_trapezium: "Area = ½ × (sum of parallel sides) × height. Solve for the height."
   t8_triangle_height: "Triangle area = ½ × base × height. Put in the area and base and solve for height."
+  c8m14_square_units: Area is measured in square units. Count how many unit squares fit, or multiply length × breadth.
+  c8m14_height: The height must be at right angles to the base, not the slanting side.
+  c8m14_half_sum: Add the two parallel sides, halve the sum, then multiply by the height.
+  c8m14_diag_half: 'Multiply the two diagonals, then halve: the diagonals make a rectangle twice the rhombus.'
+  c8m14_split: Split the shape into rectangles and triangles, find each area, then add.
+  c8m14_scale_area: When every length is multiplied by k, the area is multiplied by k × k.
 concepts:
 - code: cbse8m.area.basic
   title: Areas of rectangles, triangles and parallelograms
@@ -118,6 +124,53 @@ concepts:
           h: 5
           b: 6
         say: 6 × 5 = 30 forgets the half. Triangle area is half of base × height.
+  lesson:
+    - teach: Area is the amount of surface a shape covers, counted in unit squares such as cm² or m². A rectangle l by b holds l rows of b squares, so its area is l × b. A square of side s has area s². 1 m² = 100 cm × 100 cm = 10,000 cm².
+      picture:
+        kind: area_grid
+        cols:
+        - size: 5
+          label: 5 cm
+        rows:
+        - size: 3
+          label: 3 cm
+        cells:
+        - - 15 cm²
+        alt: A rectangle 5 cm by 3 cm has an area of 15 square centimetres.
+      check:
+        prompt: What is the area of a rectangle 8 cm by 5 cm?
+        options:
+        - 40 cm²
+        - 26 cm²
+        - 13 cm²
+        answer: 40 cm²
+        why: 8 × 5 = 40 square centimetres. 26 cm is the perimeter.
+    - teach: A diagonal cuts a rectangle into two equal right triangles, so a triangle's area is ½ × base × height. This works for any triangle if the height is measured at right angles to the base, from the base to the opposite corner.
+      picture:
+        kind: flow
+        steps:
+        - 'Rectangle: base × height'
+        - Cut along a diagonal
+        - Each triangle is half
+        - ½ × base × height
+        alt: A rectangle cut along its diagonal gives two triangles, each half its area.
+      check:
+        prompt: A triangle has base 12 cm and height 5 cm. What is its area?
+        options:
+        - 30 cm²
+        - 60 cm²
+        - 17 cm²
+        answer: 30 cm²
+        why: ½ × 12 × 5 = 30 cm².
+    - teach: 'Cut a triangle off one end of a parallelogram and slide it to the other end: you get a rectangle with the same base and height. So a parallelogram''s area is base × height, where the height is at right angles to the base, not the slanting side.'
+      check:
+        prompt: A parallelogram has base 10 m, slanting side 6 m and height 4 m. What is its area?
+        options:
+        - 40 m²
+        - 60 m²
+        - 32 m²
+        answer: 40 m²
+        why: Area = base × height = 10 × 4 = 40 m². The slanting side is not the height.
   items:
   - prompt: Find the area of a rectangle 12 cm by 7 cm, in cm².
     answer: '84'
@@ -176,6 +229,108 @@ concepts:
     - 12².
     solution: Side 12 m, area 144 m².
     mistakes: {"48": "t8_perimeter_to_area", "2304": "t8_perimeter_to_area"}
+  - prompt: Find the area of a square of side 13 cm, in cm².
+    answer: '169'
+    check: 13**2
+    difficulty: 1
+    hints:
+    - Area of a square = side × side.
+    - 13 × 13.
+    solution: 13 × 13 = 169 cm².
+    mistakes:
+      '52': c8_area_not_perimeter
+      '26': c8_area_not_perimeter
+  - prompt: A rectangle has area 96 m² and length 12 m. Find its breadth, in m.
+    answer: '8'
+    check: 96/12
+    difficulty: 1
+    hints:
+    - Area = length × breadth.
+    - 96 ÷ 12.
+    solution: breadth = 96 ÷ 12 = 8 m.
+    mistakes:
+      '84': c8m14_square_units
+      '36': c8m14_square_units
+  - prompt: A right triangle has legs 9 cm and 14 cm. Find its area, in cm².
+    answer: '63'
+    check: 9*14/2
+    difficulty: 1
+    hints:
+    - The two legs are the base and the height.
+    - ½ × 9 × 14.
+    solution: ½ × 9 × 14 = 63 cm².
+    mistakes:
+      '126': c8_triangle_half
+      '23': c8_area_not_perimeter
+  - prompt: A parallelogram has base 15 cm, slanting side 9 cm and height 8 cm. Find its area, in cm².
+    answer: '120'
+    check: 15*8
+    difficulty: 2
+    hints:
+    - Area = base × height.
+    - The slanting side is not the height.
+    solution: 15 × 8 = 120 cm².
+    mistakes:
+      '135': c8m14_height
+      '48': c8m14_height
+  - prompt: How many cm² are in 0.5 m²?
+    answer: '5000'
+    check: 0.5*10000
+    difficulty: 2
+    hints:
+    - 1 m² = 10,000 cm².
+    - Half of that.
+    solution: 0.5 × 10,000 = 5000 cm².
+    mistakes:
+      '50': c8_area_units
+      '500': c8_area_units
+  - prompt: A parallelogram has area 72 cm² and base 9 cm. Find its height, in cm.
+    answer: '8'
+    check: 72/9
+    difficulty: 2
+    hints:
+    - Area = base × height.
+    - 72 ÷ 9.
+    solution: height = 72 ÷ 9 = 8 cm.
+    mistakes:
+      '16': c8_triangle_half
+      '4': t8_parallelogram_area
+  - prompt: A floor 6 m by 4 m is covered with square tiles of side 50 cm. How many tiles are needed?
+    answer: '96'
+    check: (600*400)/(50*50)
+    difficulty: 3
+    hints:
+    - Floor area = 24 m². Each tile = 0.25 m².
+    - 'Or: 12 tiles along by 8 tiles across.'
+    solution: 'Step 1: 600 cm ÷ 50 = 12 tiles along. Step 2: 400 cm ÷ 50 = 8 across. Step 3: 12 × 8 = 96 tiles.'
+    mistakes:
+      '48': c8m14_square_units
+      '960': c8_area_units
+  - prompt: A square's sides are doubled. What happens to its area?
+    options:
+    - It becomes 4 times as big
+    - It doubles
+    - It stays the same
+    answer: It becomes 4 times as big
+    difficulty: 2
+    hints:
+    - Try a square of side 3, then side 6.
+    - 9 and 36.
+    solution: 'Side 3 gives 9; side 6 gives 36, which is 4 times as big. Both length and breadth doubled: 2 × 2 = 4.'
+    mistakes:
+      It doubles: c8m14_scale_area
+      It stays the same: c8m14_scale_area
+  - prompt: A triangle has area 45 cm² and height 9 cm. Find its base, in cm.
+    answer: '10'
+    check: 2*45/9
+    difficulty: 2
+    hints:
+    - Area = ½ × base × height.
+    - 45 = ½ × base × 9.
+    solution: base × 9 = 90, so base = 10 cm.
+    mistakes:
+      '5': c8_triangle_half
+      '20': t8_triangle_height
 - code: cbse8m.area.polygons
   title: Areas of rhombuses, trapeziums and other polygons
   after:
@@ -296,6 +451,52 @@ concepts:
           a: 3
           b: 5
         say: (3 + 5) × 8 = 64 forgets to halve. The average of a and b times h is 64.
+  lesson:
+    - teach: A trapezium has two parallel sides, a and b, a distance h apart. Two copies, one turned round, make a parallelogram with base a + b and height h. So one trapezium has area ½ × (a + b) × h.
+      picture:
+        kind: flow
+        steps:
+        - Trapezium with sides a and b
+        - Add a copy turned round
+        - 'Parallelogram: base a + b, height h'
+        - 'Half of it: ½(a + b)h'
+        alt: Two copies of a trapezium make a parallelogram of base a plus b, so one trapezium is half of a plus b times h.
+      check:
+        prompt: A trapezium has parallel sides 6 cm and 10 cm, 4 cm apart. What is its area?
+        options:
+        - 32 cm²
+        - 64 cm²
+        - 20 cm²
+        answer: 32 cm²
+        why: ½ × (6 + 10) × 4 = ½ × 16 × 4 = 32 cm².
+    - teach: 'A rhombus (or a kite) has diagonals that cross at right angles. Draw a rectangle round it, using the diagonals as its sides: the rhombus is exactly half of it. So the area is ½ × d₁ × d₂.'
+      picture:
+        kind: compare
+        columns:
+        - title: Rectangle round it
+          points:
+          - d₁ × d₂
+        - title: Rhombus
+          points:
+          - ½ × d₁ × d₂
+        alt: The rectangle drawn round a rhombus has area d1 times d2; the rhombus is half of that.
+      check:
+        prompt: A rhombus has diagonals 8 cm and 6 cm. What is its area?
+        options:
+        - 24 cm²
+        - 48 cm²
+        - 14 cm²
+        answer: 24 cm²
+        why: ½ × 8 × 6 = 24 cm².
+    - teach: Any other shape can be split into rectangles, triangles and trapeziums. Find each area and add them. For a shape with a piece cut out, find the whole and subtract the missing piece.
+      check:
+        prompt: A 10 m × 8 m garden has a 2 m × 2 m pond. What is the area of grass?
+        options:
+        - 76 m²
+        - 80 m²
+        - 84 m²
+        answer: 76 m²
+        why: 80 − 4 = 76 m².
   items:
   - prompt: A trapezium has parallel sides 8 cm and 4 cm and height 5 cm. Find its area, in cm².
     answer: '30'
@@ -353,3 +554,107 @@ concepts:
     - 'Triangle: ½ × 10 × 6 = 30 m².'
     solution: 200 + 30 = 230 m².
     mistakes: {"260": "t8_add_triangle", "200": "t8_add_triangle"}
+  - prompt: A trapezium has parallel sides 9 cm and 15 cm and height 6 cm. Find its area, in cm².
+    answer: '72'
+    check: (9 + 15)*6/2
+    difficulty: 1
+    hints:
+    - 'Add the parallel sides: 24.'
+    - ½ × 24 × 6.
+    solution: ½ × (9 + 15) × 6 = 12 × 6 = 72 cm².
+    mistakes:
+      '144': c8m14_half_sum
+      '810': c8m14_half_sum
+  - prompt: A rhombus has diagonals 14 cm and 9 cm. Find its area, in cm².
+    answer: '63'
+    check: 14*9/2
+    difficulty: 1
+    hints:
+    - ½ × d₁ × d₂.
+    - ½ × 14 × 9.
+    solution: ½ × 14 × 9 = 63 cm².
+    mistakes:
+      '126': c8m14_diag_half
+      '23': c8m14_diag_half
+  - prompt: A trapezium has area 60 cm², height 5 cm and one parallel side 10 cm. Find the other parallel side, in cm.
+    answer: '14'
+    check: 2*60/5 - 10
+    difficulty: 3
+    hints:
+    - ½ × (10 + x) × 5 = 60.
+    - 10 + x = 24.
+    solution: 'Step 1: (10 + x) × 5 = 120. Step 2: 10 + x = 24. Step 3: x = 14 cm.'
+    mistakes:
+      '2': t8_trapezium
+      '24': t8_trapezium
+  - prompt: A kite has diagonals 20 cm and 12 cm. Find its area, in cm².
+    answer: '120'
+    check: 20*12/2
+    difficulty: 1
+    hints:
+    - A kite's diagonals cross at right angles, like a rhombus's.
+    - ½ × 20 × 12.
+    solution: ½ × 20 × 12 = 120 cm².
+    mistakes:
+      '240': c8m14_diag_half
+      '32': c8m14_diag_half
+  - prompt: A rhombus has side 5 cm and height 4 cm. Find its area, in cm².
+    answer: '20'
+    check: 5*4
+    difficulty: 2
+    hints:
+    - A rhombus is a parallelogram.
+    - Area = base × height.
+    solution: A rhombus is a parallelogram, so area = 5 × 4 = 20 cm².
+    mistakes:
+      '10': c8_triangle_half
+      '25': c8m14_height
+  - prompt: A 12 m × 9 m room has a 3 m × 2 m cupboard space in one corner that is not carpeted. What area is carpeted, in m²?
+    answer: '102'
+    check: 12*9 - 3*2
+    difficulty: 2
+    hints:
+    - 'Whole room: 108 m².'
+    - Take away the cupboard.
+    solution: 'Step 1: 12 × 9 = 108. Step 2: 3 × 2 = 6. Step 3: 108 − 6 = 102 m².'
+    mistakes:
+      '114': t8_cut_out
+      '108': t8_cut_out
+  - prompt: A shape is a 10 cm × 6 cm rectangle with a triangle of base 6 cm and height 4 cm on one short side. Find the total area, in cm².
+    answer: '72'
+    check: 10*6 + 6*4/2
+    difficulty: 2
+    hints:
+    - 'Rectangle: 60 cm².'
+    - 'Triangle: ½ × 6 × 4.'
+    solution: 'Step 1: 60. Step 2: 12. Step 3: 60 + 12 = 72 cm².'
+    mistakes:
+      '84': c8_triangle_half
+      '48': c8m14_split
+  - prompt: Which formula gives the area of a trapezium with parallel sides a and b and height h?
+    options:
+    - ½ × (a + b) × h
+    - a × b × h
+    - ½ × a × b
+    - (a + b) × h
+    answer: ½ × (a + b) × h
+    difficulty: 1
+    hints:
+    - Two copies make a parallelogram of base a + b.
+    - One trapezium is half of it.
+    solution: Two trapeziums make a parallelogram with area (a + b) × h, so one is ½ × (a + b) × h.
+    mistakes:
+      a × b × h: c8m14_half_sum
+      ½ × a × b: c8m14_half_sum
+      (a + b) × h: c8m14_half_sum
+  - prompt: A field is a trapezium with parallel sides 40 m and 60 m, 30 m apart. A farmer sells it at ₹200 per m². How much does it fetch, in rupees?
+    answer: '300000'
+    check: (40 + 60)*30/2*200
+    difficulty: 3
+    hints:
+    - 'Area first: ½ × 100 × 30.'
+    - Then multiply by ₹200.
+    solution: 'Step 1: area = ½ × 100 × 30 = 1500 m². Step 2: 1500 × 200 = ₹3,00,000.'
+    mistakes:
+      '600000': c8m14_half_sum
+      '1500': c8m14_square_units

@@ -15,6 +15,8 @@ tips:
   t8_standard_form: "Standard form is a number from 1 up to (not including) 10, times a power of 10. Count how far the point moves."
   t8_zero_negative_power: "Any number to the power 0 is 1. A power of −1 means 'one over'."
   t8_zeros_count: "10ⁿ is 1 followed by n zeros. Count them."
+  c8m2_law: 'Same base: when multiplying, add the exponents; when dividing, subtract; a power of a power, multiply them. Check which of the three the question is.'
+  c8m2_shift: Standard form is a number from 1 up to (but not including) 10, times a power of 10. Count how many places the decimal point moves, and in which direction.
 concepts:
 - code: cbse8m.pow.laws
   title: Powers and the laws of exponents
@@ -103,6 +105,48 @@ concepts:
           - 0.0009
           - 0.99
         say: More 2s below than on top now. Make a and b the same.
+  lesson:
+    - teach: 'A power is repeated multiplication: 2⁵ = 2 × 2 × 2 × 2 × 2 = 32. The 2 is the base and the 5 is the exponent. 2⁵ is not 2 × 5. Powers grow very fast: folding paper doubles its thickness each time.'
+      check:
+        prompt: What is 3⁴?
+        options:
+        - '81'
+        - '12'
+        - '64'
+        answer: '81'
+        why: 3 × 3 × 3 × 3 = 81.
+    - teach: 'With the same base: multiply → add exponents (aᵐ × aⁿ = aᵐ⁺ⁿ); divide → subtract (aᵐ ÷ aⁿ = aᵐ⁻ⁿ); power of a power → multiply ((aᵐ)ⁿ = aᵐⁿ). Also (ab)ⁿ = aⁿbⁿ.'
+      picture:
+        kind: compare
+        columns:
+        - title: Rule
+          points:
+          - aᵐ × aⁿ
+          - aᵐ ÷ aⁿ
+          - (aᵐ)ⁿ
+        - title: Becomes
+          points:
+          - aᵐ⁺ⁿ (add)
+          - aᵐ⁻ⁿ (subtract)
+          - aᵐⁿ (multiply)
+        alt: 'Laws of exponents: multiplying powers adds exponents, dividing subtracts them, and a power of a power multiplies them.'
+      check:
+        prompt: Write 7⁶ ÷ 7² as one power of 7. What is the exponent?
+        options:
+        - '4'
+        - '3'
+        - '8'
+        answer: '4'
+        why: 'Dividing: 6 − 2 = 4.'
+    - teach: 'Any non-zero number to the power 0 is 1: a⁰ = 1, because aⁿ ÷ aⁿ = 1. A negative exponent means a reciprocal: a⁻ⁿ = 1/aⁿ, so 2⁻³ = 1/8. A negative base with an odd exponent stays negative: (−3)³ = −27.'
+      check:
+        prompt: What is 5⁻²?
+        options:
+        - 1/25
+        - −25
+        - −10
+        answer: 1/25
+        why: 5⁻² = 1/5² = 1/25.
   items:
   - prompt: Find 3⁴.
     answer: '81'
@@ -171,6 +215,98 @@ concepts:
     solution: 'After 8 hours: 2⁸ = 256.'
     mistakes:
       '16': c8_power_not_times
+  - prompt: Find 2⁷.
+    answer: '128'
+    check: 2**7
+    difficulty: 1
+    hints:
+    - Keep doubling from 2.
+    - 2, 4, 8, 16, 32, 64, …
+    solution: 2⁷ = 128.
+    mistakes:
+      '14': c8_power_not_times
+  - prompt: Write 3² × 3⁵ as one power of 3. What is the exponent?
+    answer: '7'
+    check: 2+5
+    difficulty: 1
+    hints:
+    - Same base, multiplying.
+    - Add the exponents.
+    solution: 3² × 3⁵ = 3⁷.
+    mistakes:
+      '10': c8m2_law
+  - prompt: Simplify (2³)⁴. Give the exponent of 2.
+    answer: '12'
+    check: 3*4
+    difficulty: 2
+    hints:
+    - A power of a power.
+    - Multiply the exponents.
+    solution: (2³)⁴ = 2¹².
+    mistakes:
+      '7': c8m2_law
+  - prompt: Find (−1)¹⁰¹.
+    answer: '-1'
+    check: (-1)**101
+    difficulty: 2
+    hints:
+    - −1 times itself flips sign each time.
+    - Is 101 odd or even?
+    solution: An odd power of −1 is −1.
+    mistakes:
+      '1': c8_negative_base
+  - prompt: Find 2⁻⁴. Type a fraction.
+    answer: 1/16
+    check: Rational(1,16)
+    difficulty: 2
+    hints:
+    - A negative exponent means 1 over the power.
+    - 2⁴ = 16.
+    solution: 2⁻⁴ = 1/2⁴ = 1/16.
+    mistakes:
+      '-8': t8_zero_negative_power
+      '-16': t8_zero_negative_power
+  - prompt: Simplify (5³ × 5⁴) ÷ 5⁵.
+    answer: '25'
+    check: 5**2
+    difficulty: 2
+    hints:
+    - Add 3 + 4 first.
+    - Then subtract 5.
+    solution: 5⁷ ÷ 5⁵ = 5² = 25.
+    mistakes:
+      '5': c8m2_law
+  - prompt: Find 2⁰ + 3⁰ + 4⁰.
+    answer: '3'
+    check: 2**0+3**0+4**0
+    difficulty: 2
+    hints:
+    - Any non-zero number to the power 0 is 1.
+    - Add three ones.
+    solution: 1 + 1 + 1 = 3.
+    mistakes:
+      '0': t8_zero_negative_power
+      '9': t8_zero_negative_power
+  - prompt: A sheet of paper is folded in half 6 times. How many layers thick is it?
+    answer: '64'
+    check: 2**6
+    difficulty: 2
+    hints:
+    - Each fold doubles the layers.
+    - Start from 1 layer.
+    solution: 2⁶ = 64 layers.
+    mistakes:
+      '12': c8_power_not_times
+  - prompt: Simplify 2⁵ × 5⁵.
+    answer: '100000'
+    check: 10**5
+    difficulty: 3
+    hints:
+    - (ab)ⁿ = aⁿbⁿ, so read it backwards.
+    - 2 × 5 = 10.
+    solution: 2⁵ × 5⁵ = (2 × 5)⁵ = 10⁵ = 100000.
+    mistakes:
+      '1000': t8_zeros_count
 - code: cbse8m.pow.ten
   title: Powers of 10 and large numbers
   after:
@@ -258,6 +394,42 @@ concepts:
           m: 7
           k: 5
         say: '7,00,000: one zero short.'
+  lesson:
+    - teach: 'Powers of 10 make big numbers easy: 10³ = 1000, 10⁶ = 1 million, 10⁷ = 1 crore. The exponent tells how many zeros follow the 1. In the Indian system, 1 lakh = 10⁵ and 1 crore = 10⁷.'
+      check:
+        prompt: How many zeros are in 1 crore written out?
+        options:
+        - '7'
+        - '5'
+        - '6'
+        answer: '7'
+        why: 1 crore = 10⁷ = 1,00,00,000.
+    - teach: 'Standard form (scientific notation) writes a number as a × 10ⁿ, where 1 ≤ a < 10. For a big number, move the decimal point left and count the moves: 3,40,000 = 3.4 × 10⁵. For a small number, move it right and the exponent is negative: 0.0056 = 5.6 × 10⁻³.'
+      picture:
+        kind: flow
+        steps:
+        - Place point after first non-zero digit
+        - Count how far it moved
+        - Left = positive power
+        - Right = negative power
+        alt: 'Steps for standard form: place the decimal point after the first non-zero digit, count the moves, moving left gives a positive power of ten, moving right a negative one.'
+      check:
+        prompt: Which is 72,000 in standard form?
+        options:
+        - 7.2 × 10⁴
+        - 72 × 10³
+        - 7.2 × 10³
+        answer: 7.2 × 10⁴
+        why: The point moves 4 places, and 7.2 is between 1 and 10.
+    - teach: 'Standard form helps compare and estimate. The Sun is about 1.5 × 10⁸ km from Earth; a human hair is about 1 × 10⁻⁴ m thick. To multiply, multiply the front numbers and add the powers: (2 × 10³) × (4 × 10²) = 8 × 10⁵.'
+      check:
+        prompt: Find (3 × 10²) × (2 × 10⁴).
+        options:
+        - 6 × 10⁶
+        - 5 × 10⁶
+        - 6 × 10⁸
+        answer: 6 × 10⁶
+        why: 3 × 2 = 6, and 2 + 4 = 6.
   items:
   - prompt: How many zeros does 10⁹ have when written out?
     answer: '9'
@@ -321,3 +493,108 @@ concepts:
     - 3 × 10⁵ × 10² = 3 × 10⁷.
     solution: 3 × 10⁵ × 10² = 3 × 10⁷ = 3,00,00,000 km.
     mistakes: {"300000": "t8_multiply_powers_ten", "3000000": "t8_multiply_powers_ten"}
+  - prompt: Write 10⁴ as an ordinary number.
+    answer: '10000'
+    check: 10**4
+    difficulty: 1
+    hints:
+    - The exponent counts the zeros.
+    - 1 followed by 4 zeros.
+    solution: 10⁴ = 10000.
+    mistakes:
+      '40': c8_power_not_times
+  - prompt: Which is 6,30,00,000 in standard form?
+    options:
+    - 6.3 × 10⁷
+    - 6.3 × 10⁶
+    - 63 × 10⁶
+    - 6.3 × 10⁸
+    answer: 6.3 × 10⁷
+    difficulty: 2
+    hints:
+    - Count the digits after the 6.
+    - There are 7 of them.
+    solution: 6,30,00,000 = 6.3 × 10⁷.
+    mistakes:
+      6.3 × 10⁶: c8m2_shift
+      63 × 10⁶: t8_standard_form
+  - prompt: Which is 0.0045 in standard form?
+    options:
+    - 4.5 × 10⁻³
+    - 4.5 × 10³
+    - 45 × 10⁻⁴
+    - 4.5 × 10⁻²
+    answer: 4.5 × 10⁻³
+    difficulty: 2
+    hints:
+    - Move the point right until one non-zero digit is in front.
+    - Small numbers have negative powers.
+    solution: 0.0045 = 4.5 × 10⁻³ (point moved 3 places right).
+    mistakes:
+      4.5 × 10³: t8_small_standard
+      4.5 × 10⁻²: c8m2_shift
+  - prompt: Write 3.07 × 10⁵ as an ordinary number.
+    answer: '307000'
+    check: Rational(307,100)*10**5
+    difficulty: 2
+    hints:
+    - Move the point 5 places right.
+    - Fill empty places with zeros.
+    solution: 3.07 × 10⁵ = 307000.
+    mistakes:
+      '30700': c8m2_shift
+  - prompt: How many thousands make one million?
+    answer: '1000'
+    check: 10**6/10**3
+    difficulty: 2
+    hints:
+    - 1 million = 10⁶.
+    - 1 thousand = 10³.
+    solution: 10⁶ ÷ 10³ = 10³ = 1000.
+    mistakes:
+      '100': t8_lakh_crore
+  - prompt: Find (2 × 10⁵) × (3 × 10³). Give the answer as an ordinary number.
+    answer: '600000000'
+    check: 6*10**8
+    difficulty: 3
+    hints:
+    - Multiply 2 × 3.
+    - 'Add the powers: 5 + 3.'
+    solution: 6 × 10⁸ = 600000000.
+    mistakes:
+      '6000000': t8_multiply_powers_ten
+  - prompt: How many crores make 10⁹?
+    answer: '100'
+    check: 10**9/10**7
+    difficulty: 3
+    hints:
+    - 1 crore = 10⁷.
+    - Divide the powers.
+    solution: 10⁹ ÷ 10⁷ = 10² = 100 crore.
+    mistakes:
+      '2': t8_lakh_crore
+  - prompt: 'Which number is larger: 4 × 10⁶ or 9 × 10⁵?'
+    options:
+    - 4 × 10⁶
+    - 9 × 10⁵
+    - They are equal
+    - Cannot tell
+    answer: 4 × 10⁶
+    difficulty: 2
+    hints:
+    - Compare the powers of 10 first.
+    - 10⁶ is ten times 10⁵.
+    solution: 4 × 10⁶ = 40 lakh; 9 × 10⁵ = 9 lakh.
+    mistakes:
+      9 × 10⁵: c8m2_shift
+  - prompt: A hair is about 0.00008 m thick. Write this in standard form; what is the exponent of 10?
+    answer: '-5'
+    check: '-5'
+    difficulty: 3
+    hints:
+    - Move the point right to get 8.
+    - Count the moves; the power is negative.
+    solution: 0.00008 = 8 × 10⁻⁵.
+    mistakes:
+      '5': t8_small_standard
+      '-4': c8m2_shift

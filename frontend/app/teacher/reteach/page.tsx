@@ -7,6 +7,22 @@ import { api } from "@/lib/api";
 import { useSession } from "@/lib/session";
 
 type HardTrouble = { concept_id: number; topic: string; chapter: string; students: { student_id: number; name: string }[] };
+type LessonTrouble = {
+  concept_id: number;
+  topic: string;
+  chapter: string;
+  idea: number;
+  check: string;
+  tried: number;
+  missed_first: number;
+  helped: string | null;
+};
+const HELPED: Record<string, string> = {
+  text: "explaining it in plain words",
+  visual: "drawing it",
+  step_by_step: "going step by step",
+  real_world: "a real-life example",
+};
 type Mistake = { tag: string; text: string; working_on: { student_id: number; name: string }[]; fixed: number; topics: string[] };
 
 /** One page for a short re-teach: each repeated mistake, the topics it shows up in, and who to sit with. */
@@ -18,6 +34,7 @@ function Sheet() {
   const [rows, setRows] = useState<Mistake[] | null>(null);
   const [name, setName] = useState("");
   const [hard, setHard] = useState<HardTrouble[]>([]);
+  const [ideas, setIdeas] = useState<LessonTrouble[]>([]);
   useEffect(() => {
     if (!loading && (!me || (me.role !== "teacher" && me.role !== "admin"))) router.replace("/");
   }, [me, loading, router]);
@@ -25,6 +42,7 @@ function Sheet() {
     if (!me || !classId) return;
     api<Mistake[]>(`/teacher/classes/${classId}/mistakes`).then(setRows);
     api<HardTrouble[]>(`/teacher/classes/${classId}/hard-trouble`).then(setHard).catch(() => setHard([]));
+    api<LessonTrouble[]>(`/teacher/classes/${classId}/lesson-trouble`).then(setIdeas).catch(() => setIdeas([]));
     api<{ id: number; name: string }[]>("/teacher/classes").then((cs) => setName(cs.find((c) => c.id === classId)?.name ?? ""));
   }, [me, classId]);
   if (!rows) return null;
@@ -43,7 +61,7 @@ function Sheet() {
           Mistakes students in this class have made more than once and are still working on. Students are listed in
           alphabetical order, never ranked. Keep this sheet with you; don&apos;t put it on the wall.
         </p>
-        {open.length === 0 && hard.length === 0 && <p>Nothing to re-teach right now.</p>}
+        {open.length === 0 && hard.length === 0 && ideas.length === 0 && <p>Nothing to re-teach right now.</p>}
         {open.map((m) => (
           <article key={m.tag} className="reteach">
             <h2>{m.text}</h2>
@@ -69,6 +87,30 @@ function Sheet() {
                 </h3>
                 <p>
                   <strong>Sit with:</strong> {h.students.map((s) => s.name).join(", ")}
+                </p>
+              </article>
+            ))}
+          </>
+        )}
+        {ideas.length > 0 && (
+          <>
+            <h2>Lesson ideas the class found hard</h2>
+            <p className="muted">
+              Ideas from SYNiq&apos;s lessons that half or more of the students who reached them missed the first time.
+              Counts only: it&apos;s about the idea, not who. Where one way of explaining helped most on the second try,
+              it&apos;s named, so you can use it on the board.
+            </p>
+            {ideas.map((l) => (
+              <article key={`${l.concept_id}-${l.idea}`} className="reteach">
+                <h3>
+                  {l.topic}, idea {l.idea} <span className="muted">({l.chapter})</span>
+                </h3>
+                <p>
+                  <strong>Its check:</strong> {l.check}
+                </p>
+                <p className="muted">
+                  {l.missed_first} of {l.tried} missed it the first time.
+                  {l.helped && ` What helped most after: ${HELPED[l.helped] ?? l.helped}.`}
                 </p>
               </article>
             ))}

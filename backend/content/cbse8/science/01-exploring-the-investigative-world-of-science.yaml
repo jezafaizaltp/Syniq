@@ -13,6 +13,13 @@ tips:
   t8_one_variable: "If two things change at once, can you tell which one caused the result?"
   t8_repeat: "One result could be a fluke. What does doing it again several times tell you?"
   t8_scientific_temper: "Scientific temper means asking 'what's the evidence?' and being ready to change your mind."
+  c8s1_testable: Could you do an experiment that shows whether it is right or wrong? That is what makes it a hypothesis.
+  c8s1_seen: Is it something someone saw or measured, or a guess about why it happened?
+  c8s1_evidence: Which choice asks for evidence instead of just trusting what you hear?
+  c8s1_steps: 'Put the steps in order: observe, ask, guess, predict, test, record, conclude.'
+  c8s1_what_changes: The thing you change on purpose is the independent variable. The thing you measure is the dependent one.
+  c8s1_keep_same: Everything except the one thing you are testing must stay the same.
+  c8s1_compare: What would you compare the result with, to see whether the change made any difference?
 
 concepts:
 - code: cbse8s.inv.method
@@ -53,6 +60,57 @@ concepts:
       'Test it: set two bowls, one warm and one cool': You need a guess before you can design a test for it.
       Look honestly at what happened: There are no results to look at until the test is done.
       'Decide: keep the guess, or change it to fit the evidence': A conclusion comes from the results, so it is last.
+  lesson:
+    - teach: 'Science starts with noticing something and asking why. An observation is what you see or measure: ''the puddle dried by noon''. A hypothesis is a testable guess about why: ''puddles dry faster in sunshine''. A good hypothesis can be checked with an experiment.'
+      picture:
+        kind: compare
+        columns:
+        - title: Observation
+          points:
+          - What you saw or measured
+          - The puddle dried by noon
+        - title: Hypothesis
+          points:
+          - A testable guess about why
+          - Puddles dry faster in sunshine
+        alt: An observation is what you saw; a hypothesis is a testable guess about why it happened.
+      check:
+        prompt: Which is a hypothesis?
+        options:
+        - Seeds grow faster in warm soil
+        - The seed sprouted on day 4
+        - I like plants
+        answer: Seeds grow faster in warm soil
+        why: It is a guess that an experiment can test. 'Sprouted on day 4' is an observation.
+    - teach: 'An investigation goes: observe, ask a question, make a hypothesis, predict what will happen, test it, record the results, and draw a conclusion. If the results don''t support the hypothesis, that is still useful: change the hypothesis and test again.'
+      picture:
+        kind: flow
+        steps:
+        - Observe
+        - Ask
+        - Hypothesis
+        - Predict
+        - Test
+        - Record
+        - Conclude
+        alt: 'The steps of an investigation: observe, ask, hypothesis, predict, test, record, conclude.'
+      check:
+        prompt: What comes straight after recording the results?
+        options:
+        - Drawing a conclusion
+        - Making a hypothesis
+        - Asking a question
+        answer: Drawing a conclusion
+        why: Once results are recorded, you decide what they show about the hypothesis.
+    - teach: Scientific temper means asking for evidence before believing a claim, being honest about results even when they are unexpected, and repeating experiments so a result is not a one-time fluke.
+      check:
+        prompt: A friend says a lucky stone helps you pass exams. What would a scientist do?
+        options:
+        - Ask for evidence and test the claim
+        - Believe it because a friend said so
+        - Buy two stones to be safe
+        answer: Ask for evidence and test the claim
+        why: Scientific temper means checking claims with evidence instead of accepting them.
   items:
   - prompt: What is a hypothesis?
     options:
@@ -132,6 +190,132 @@ concepts:
     - Repeats check it.
     solution: Repeating checks that results are consistent and not caused by a one-off error.
     mistakes: {"Because the first try never counts": "t8_repeat", "To change the hypothesis": "t8_repeat"}
+  - prompt: Which is an observation?
+    options:
+    - The milk turned sour after two days
+    - Milk turns sour because of microbes
+    - Milk will turn sour faster in heat
+    answer: The milk turned sour after two days
+    difficulty: 1
+    hints:
+    - An observation is something you saw.
+    - The other two are guesses about why or what will happen.
+    solution: '''The milk turned sour after two days'' was seen. The others are a hypothesis and a prediction.'
+    mistakes:
+      Milk turns sour because of microbes: c8s1_seen
+      Milk will turn sour faster in heat: c8s1_seen
+  - prompt: Which hypothesis can be tested?
+    options:
+    - Plants given more light grow taller
+    - Plants are happier with music they like
+    - Plants are beautiful
+    answer: Plants given more light grow taller
+    difficulty: 2
+    hints:
+    - Can you measure it?
+    - You can measure light and height.
+    solution: You can give plants different amounts of light and measure their height. Happiness and beauty can't be measured that way.
+    mistakes:
+      Plants are happier with music they like: c8s1_testable
+      Plants are beautiful: c8s1_testable
+  - prompt: What is a prediction in an investigation?
+    options:
+    - What you expect to happen if your hypothesis is right
+    - The result you recorded
+    - The question you asked
+    answer: What you expect to happen if your hypothesis is right
+    difficulty: 2
+    hints:
+    - It comes before the test.
+    - It says what should happen.
+    solution: A prediction says what should happen in the test if the hypothesis is right, for example 'the plant in the light will be taller'.
+    mistakes:
+      The result you recorded: c8s1_steps
+      The question you asked: c8s1_steps
+  - prompt: Which step comes first in an investigation?
+    options:
+    - Observing something and asking a question
+    - Drawing a conclusion
+    - Recording the results
+    answer: Observing something and asking a question
+    difficulty: 1
+    hints:
+    - What makes you curious in the first place?
+    - You can't record results before you test.
+    solution: Investigations start by noticing something and asking a question about it.
+    mistakes:
+      Drawing a conclusion: c8s1_steps
+      Recording the results: c8s1_steps
+  - prompt: A student's result surprises her and doesn't fit her hypothesis. What should she write in her report?
+    options:
+    - The real result, and that it didn't fit
+    - The result she expected
+    - Nothing, and start again
+    answer: The real result, and that it didn't fit
+    difficulty: 2
+    hints:
+    - Science depends on honest records.
+    - A surprising result can teach you something.
+    solution: Honest records matter most. An unexpected result can show the hypothesis needs changing.
+    mistakes:
+      The result she expected: t8_honest_evidence
+      Nothing, and start again: t8_honest_evidence
+  - prompt: An advert says a drink makes you 'twice as clever'. What is the best question to ask?
+    options:
+    - What evidence shows this?
+    - How much does it cost?
+    - What colour is it?
+    answer: What evidence shows this?
+    difficulty: 1
+    hints:
+    - Think like a scientist.
+    - A claim needs support.
+    solution: A scientific temper asks for evidence before accepting a claim.
+    mistakes:
+      How much does it cost?: c8s1_evidence
+      What colour is it?: c8s1_evidence
+  - prompt: 'Three students timed how long ice took to melt: 10, 11 and 25 minutes. What should they do?'
+    options:
+    - Repeat the test to check the odd result
+    - Report only 25 minutes
+    - Add the times and stop
+    answer: Repeat the test to check the odd result
+    difficulty: 3
+    hints:
+    - One result is very different from the others.
+    - Was it a fluke or a real effect?
+    solution: 25 minutes is far from the others, so something may have been different. Repeating the test checks whether it is reliable.
+    mistakes:
+      Report only 25 minutes: t8_repeat
+      Add the times and stop: t8_repeat
+  - prompt: What is a conclusion?
+    options:
+    - What the results show about the hypothesis
+    - The first guess you make
+    - A list of equipment
+    answer: What the results show about the hypothesis
+    difficulty: 1
+    hints:
+    - It comes at the end.
+    - It uses the results.
+    solution: A conclusion says whether the results support the hypothesis.
+    mistakes:
+      The first guess you make: c8s1_steps
+      A list of equipment: c8s1_steps
+  - prompt: Why do scientists share their methods in detail?
+    options:
+    - So others can repeat the experiment and check it
+    - To make the report longer
+    - So nobody else can copy it
+    answer: So others can repeat the experiment and check it
+    difficulty: 2
+    hints:
+    - How do we know a result is real?
+    - Others should get the same result.
+    solution: If others repeat the method and get the same result, everyone can trust it more.
+    mistakes:
+      To make the report longer: t8_repeat
+      So nobody else can copy it: t8_repeat
 - code: cbse8s.inv.fair
   title: Fair tests and variables
   after:
@@ -203,6 +387,59 @@ concepts:
       bin: Not a fair test
       clue: Did both get the same time to grow?
       why: 'Different times: not a fair comparison.'
+  lesson:
+    - teach: 'A fair test changes only one thing at a time. The thing you change is the independent variable. The thing you measure is the dependent variable. Everything else stays the same: these are the controlled variables.'
+      picture:
+        kind: compare
+        columns:
+        - title: Change (one thing)
+          points:
+          - Amount of light
+        - title: Measure
+          points:
+          - Plant height
+        - title: Keep the same
+          points:
+          - Water, soil, pot, plant type
+        alt: In a fair test of light on plants, change the light, measure the height, and keep water, soil, pot and plant type the same.
+      check:
+        prompt: Testing whether salt dissolves faster in hot water, what do you change?
+        options:
+        - The temperature of the water
+        - The amount of salt
+        - The size of the glass
+        answer: The temperature of the water
+        why: You are testing the effect of temperature, so that is the one thing you change.
+    - teach: If you change two things at once, you can't tell which one caused the result. Watering plants more and giving them fertiliser at the same time leaves you guessing which helped.
+      check:
+        prompt: A student gives one plant more light AND more water. It grows taller. What can she conclude?
+        options:
+        - 'Nothing sure: two things changed'
+        - Light makes plants grow
+        - Water makes plants grow
+        answer: 'Nothing sure: two things changed'
+        why: Either change, or both, could have caused it. Only one thing should change.
+    - teach: A control is a set-up without the change, kept for comparison. To test a fertiliser, grow some plants with it and some without, with everything else the same. The plants without are the control.
+      picture:
+        kind: compare
+        columns:
+        - title: Test
+          points:
+          - With fertiliser
+          - Same water, light, soil
+        - title: Control
+          points:
+          - No fertiliser
+          - Same water, light, soil
+        alt: The test plants get fertiliser, the control plants don't, and everything else is the same.
+      check:
+        prompt: Why do we need a control?
+        options:
+        - To compare with, to see if the change made a difference
+        - To make the test take longer
+        - Because it uses more equipment
+        answer: To compare with, to see if the change made a difference
+        why: Without something to compare with, you can't tell whether the change had any effect.
   items:
   - prompt: In a fair test, how many things should you change at a time?
     options:
@@ -282,3 +519,129 @@ concepts:
     - Keep everything else the same.
     solution: Using identical plants removes other reasons for differences in growth.
     mistakes: {"Because big plants are better": "t8_one_variable", "It doesn't matter": "t8_one_variable"}
+  - prompt: Testing how the height of a ramp affects how far a ball rolls, what is the independent variable?
+    options:
+    - The height of the ramp
+    - How far the ball rolls
+    - The size of the ball
+    answer: The height of the ramp
+    difficulty: 2
+    hints:
+    - Which one do you change on purpose?
+    - The distance is what you measure.
+    solution: You change the ramp height on purpose, so it is the independent variable. The distance is the dependent variable.
+    mistakes:
+      How far the ball rolls: c8s1_what_changes
+      The size of the ball: c8s1_keep_same
+  - prompt: Testing which paper towel soaks up most water, what must stay the same?
+    options:
+    - The size of each towel and the amount of water
+    - The brand of towel
+    - Nothing needs to stay the same
+    answer: The size of each towel and the amount of water
+    difficulty: 2
+    hints:
+    - The brand is what you are testing.
+    - What else could change the result?
+    solution: The brand is changed. The towel size and the water must be the same so the test is fair.
+    mistakes:
+      The brand of towel: c8s1_keep_same
+      Nothing needs to stay the same: c8s1_keep_same
+  - prompt: Testing whether music helps plants grow, which is the best control?
+    options:
+    - Identical plants, cared for the same way, with no music
+    - Plants in a different room with less light
+    - No plants at all
+    answer: Identical plants, cared for the same way, with no music
+    difficulty: 2
+    hints:
+    - The control has everything the same except the change.
+    - Here the change is music.
+    solution: The control must match the test plants in everything except the music.
+    mistakes:
+      Plants in a different room with less light: c8s1_compare
+      No plants at all: c8s1_compare
+  - prompt: Testing how the temperature of water affects how fast sugar dissolves, what is the dependent variable?
+    options:
+    - The time the sugar takes to dissolve
+    - The temperature of the water
+    - The amount of sugar
+    answer: The time the sugar takes to dissolve
+    difficulty: 2
+    hints:
+    - The dependent variable is what you measure.
+    - What do you time?
+    solution: You measure how long the sugar takes to dissolve, so that is the dependent variable.
+    mistakes:
+      The temperature of the water: c8s1_what_changes
+      The amount of sugar: c8s1_keep_same
+  - prompt: A test of two soaps uses hot water for one and cold water for the other. What is wrong?
+    options:
+    - 'Two things changed: the soap and the water temperature'
+    - Nothing is wrong
+    - They should use three soaps
+    answer: 'Two things changed: the soap and the water temperature'
+    difficulty: 1
+    hints:
+    - How many things are different between the two tests?
+    - Only the soap should differ.
+    solution: Both the soap and the water temperature changed, so you can't tell which caused any difference.
+    mistakes:
+      Nothing is wrong: t8_one_variable
+      They should use three soaps: t8_one_variable
+  - prompt: Why should each pot in a plant test get the same amount of water?
+    options:
+    - So water can't be the reason for any difference
+    - To save water
+    - Because plants dislike water
+    answer: So water can't be the reason for any difference
+    difficulty: 1
+    hints:
+    - What could change the plants' growth?
+    - Keep everything except the test the same.
+    solution: If water is the same for all, it can't explain any difference. Then only the tested change can.
+    mistakes:
+      To save water: c8s1_keep_same
+      Because plants dislike water: c8s1_keep_same
+  - prompt: A student drops balls from different heights and measures the bounce. Which is a controlled variable?
+    options:
+    - The type of ball
+    - The drop height
+    - The bounce height
+    answer: The type of ball
+    difficulty: 3
+    hints:
+    - Drop height is changed, bounce height is measured.
+    - What must stay the same?
+    solution: Drop height is the independent variable, bounce height the dependent. The type of ball must stay the same.
+    mistakes:
+      The drop height: c8s1_what_changes
+      The bounce height: c8s1_what_changes
+  - prompt: Why test several plants in each group instead of just one?
+    options:
+    - One plant might be unusual, so more give a fairer result
+    - To use up the seeds
+    - So the test is quicker
+    answer: One plant might be unusual, so more give a fairer result
+    difficulty: 2
+    hints:
+    - What if one seed was weak?
+    - Many results together are more reliable.
+    solution: A single plant could be unusual. Several plants per group make the result more reliable.
+    mistakes:
+      To use up the seeds: t8_repeat
+      So the test is quicker: t8_repeat
+  - prompt: Testing whether a dark or a light shirt gets hotter in the sun, which set-up is fair?
+    options:
+    - Same kind and size of shirt, both in the sun for the same time
+    - Dark shirt in the sun, light shirt in the shade
+    - Dark shirt for 1 hour, light shirt for 10 minutes
+    answer: Same kind and size of shirt, both in the sun for the same time
+    difficulty: 1
+    hints:
+    - Only the colour should be different.
+    - Check the place and the time in each set-up.
+    solution: Only the colour changes; the shirt type, size, place and time stay the same. The other set-ups change two things.
+    mistakes:
+      Dark shirt in the sun, light shirt in the shade: c8s1_keep_same
+      Dark shirt for 1 hour, light shirt for 10 minutes: c8s1_keep_same
