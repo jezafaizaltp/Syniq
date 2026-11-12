@@ -15,6 +15,12 @@ tips:
   t7_spoon_conductor: "The bulb lights up only if current passes through the spoon."
   t7_switch: "A switch makes a gap or closes it."
   t7_wet_hands: "Ordinary water with dissolved salts conducts electricity. What could happen to you?"
+  c7s3_loop: Electricity flows only round an unbroken loop, from one end of the cell, through every part, back to the other end. Look for any gap.
+  c7s3_switch: 'A switch is a gate in the loop: it can join the path or break it.'
+  c7s3_terminals: Every cell has two ends, marked + and −. Cells in a row join the + of one to the − of the next.
+  c7s3_symbol: 'Learn the picture-symbols: two lines of different lengths for a cell, a circle with a cross for a bulb, a gap with a lever for a switch.'
+  c7s3_metal: Most metals, and graphite, let electricity pass. Materials that are not metals usually block it.
+  c7s3_safe: Our bodies and impure water let electricity through, so wet hands and mains sockets are dangerous.
 concepts:
 - code: cbse7s.elec.circuit
   title: Electric circuits
@@ -77,6 +83,60 @@ concepts:
       bin: Bulb stays off
       clue: Can current pass through plastic?
       why: An insulator breaks the circuit.
+  lesson:
+    - teach: 'An electric cell has two terminals: positive (+) and negative (−). A battery is two or more cells joined together. A circuit is a complete path that goes from one terminal, through wires and a bulb, back to the other terminal. The bulb glows only when the path is closed.'
+      picture:
+        kind: flow
+        steps:
+        - Cell + terminal
+        - Wire
+        - Switch (closed)
+        - Bulb
+        - Wire
+        - Cell − terminal
+        alt: 'A closed circuit: current goes from the cell, through switch and bulb, and back.'
+      check:
+        prompt: 'A bulb glows only when the circuit is:'
+        options:
+        - Closed
+        - Open
+        - Broken
+        answer: Closed
+        why: Electricity needs a complete loop.
+    - teach: A switch opens or closes the circuit. Off means a gap (open circuit), so no current flows. On means the gap is closed. In a torch, the cells, switch and bulb make a circuit; the cells are placed + of one touching − of the next.
+      check:
+        prompt: 'When a torch switch is turned off, the circuit is:'
+        options:
+        - Open
+        - Closed
+        - Joined twice
+        answer: Open
+        why: Off makes a gap in the path.
+    - teach: Circuit diagrams use symbols. A cell is a long line (+) and a short line (−). A bulb is a circle with a cross. A switch is a break with a small lever. Wires are straight lines. A bulb's thin coiled wire (filament) glows; if it breaks, the bulb is fused and the circuit is open.
+      picture:
+        kind: compare
+        columns:
+        - title: Part
+          points:
+          - Cell
+          - Bulb
+          - Switch
+          - Wire
+        - title: Symbol
+          points:
+          - long line + short line
+          - circle with a cross
+          - gap with a lever
+          - straight line
+        alt: Circuit parts and their symbols.
+      check:
+        prompt: 'In a cell symbol, the long line stands for:'
+        options:
+        - The positive terminal
+        - The negative terminal
+        - The bulb
+        answer: The positive terminal
+        why: Long line +, short line −.
   items:
   - prompt: When does a bulb in a circuit glow?
     options:
@@ -157,6 +217,160 @@ concepts:
     - A fused bulb breaks the path.
     solution: A broken filament or loose wire makes a gap, so no current flows.
     mistakes: {"The circuit is closed": "t7_bulb_fault", "The cell is new": "t7_bulb_fault"}
+  - prompt: What are the two terminals of a cell?
+    options:
+    - Positive and negative
+    - Top and bottom only
+    - On and off
+    answer: Positive and negative
+    difficulty: 1
+    hints:
+    - They are marked with signs.
+    - + and −.
+    solution: Every cell has a positive (+) and a negative (−) terminal.
+    mistakes:
+      Top and bottom only: c7s3_terminals
+      On and off: c7s3_switch
+  - prompt: A wire in the circuit comes loose. What happens to the bulb?
+    options:
+    - It stops glowing
+    - It glows brighter
+    - Nothing changes
+    answer: It stops glowing
+    difficulty: 1
+    hints:
+    - Is the loop still complete?
+    - A gap stops the current.
+    solution: A loose wire makes a gap, the circuit becomes open, and the bulb goes off.
+    mistakes:
+      It glows brighter: c7s3_loop
+      Nothing changes: c7s3_loop
+  - prompt: 'In a circuit diagram, a circle with a cross inside stands for:'
+    options:
+    - A bulb
+    - A cell
+    - A switch
+    answer: A bulb
+    difficulty: 1
+    hints:
+    - It is the part that lights up.
+    - Cells are drawn as two lines.
+    solution: The bulb symbol is a circle with a cross.
+    mistakes:
+      A cell: c7s3_symbol
+      A switch: c7s3_symbol
+  - prompt: Which device opens and closes a circuit?
+    options:
+    - Switch
+    - Bulb
+    - Cell
+    answer: Switch
+    difficulty: 1
+    hints:
+    - You turn it on and off.
+    - It makes or breaks the path.
+    solution: A switch makes a gap (off) or closes it (on).
+    mistakes:
+      Bulb: c7s3_switch
+      Cell: c7s3_switch
+  - prompt: Two cells are put in a torch with + touching +. What happens?
+    options:
+    - The bulb does not light properly
+    - The bulb glows extra bright
+    - The cells charge each other
+    answer: The bulb does not light properly
+    difficulty: 2
+    hints:
+    - How should cells be joined?
+    - + of one should touch − of the next.
+    solution: Cells must be joined + to −; joined + to + they work against each other and the bulb does not light properly.
+    mistakes:
+      The bulb glows extra bright: c7s3_terminals
+      The cells charge each other: c7s3_terminals
+  - prompt: A new cell and closed switch, but the bulb does not glow. The bulb's filament is broken. Why does that stop it?
+    options:
+    - The broken filament makes a gap in the loop
+    - The cell is too strong
+    - Bulbs need two switches
+    answer: The broken filament makes a gap in the loop
+    difficulty: 2
+    hints:
+    - Current passes through the filament.
+    - What does a break in it do?
+    solution: The current must flow through the filament; a break leaves a gap, so the circuit is open.
+    mistakes:
+      The cell is too strong: c7s3_loop
+      Bulbs need two switches: c7s3_switch
+  - prompt: Why does a battery of 2 cells make a bulb glow brighter than 1 cell?
+    options:
+    - Two cells push more current round the circuit
+    - Two cells make the wire shorter
+    - Two cells close the switch
+    answer: Two cells push more current round the circuit
+    difficulty: 2
+    hints:
+    - A battery is cells joined together.
+    - More cells, more push.
+    solution: Joining cells + to − adds their push, so more current flows and the bulb glows brighter.
+    mistakes:
+      Two cells make the wire shorter: c7s3_terminals
+      Two cells close the switch: c7s3_switch
+  - prompt: Which is an open circuit?
+    options:
+    - A torch with its switch off
+    - A torch with its switch on and a good bulb
+    - A lit bulb connected to a cell
+    answer: A torch with its switch off
+    difficulty: 2
+    hints:
+    - Open means there is a gap.
+    - Where could the gap be?
+    solution: A switch turned off leaves a gap, so the circuit is open and no current flows.
+    mistakes:
+      A torch with its switch on and a good bulb: c7s3_switch
+      A lit bulb connected to a cell: c7s3_loop
+  - prompt: A bulb is connected to both wires at only one terminal of a cell. Will it glow?
+    options:
+    - No, the loop must go from one terminal to the other
+    - Yes, one terminal is enough
+    - Yes, but only if the cell is new
+    answer: No, the loop must go from one terminal to the other
+    difficulty: 3
+    hints:
+    - Where must the loop start and end?
+    - Both ends of the cell are needed.
+    solution: A circuit needs a path from + to −; both wires at one terminal make no loop, so no current.
+    mistakes:
+      Yes, one terminal is enough: c7s3_terminals
+      Yes, but only if the cell is new: c7s3_loop
+  - prompt: In a room, two bulbs are on separate switches. Turning one off leaves the other glowing. Why?
+    options:
+    - Each bulb has its own complete path
+    - The bulbs share one switch
+    - Switches don't affect bulbs
+    answer: Each bulb has its own complete path
+    difficulty: 3
+    hints:
+    - Each switch breaks only its own path.
+    - The other path is still closed.
+    solution: Each bulb is on its own loop; opening one switch breaks only that loop.
+    mistakes:
+      The bulbs share one switch: c7s3_switch
+      Switches don't affect bulbs: c7s3_switch
+  - prompt: Why should old cells not be thrown in fire or opened?
+    options:
+    - They contain harmful chemicals and can burst
+    - They will start working again
+    - They turn into new cells
+    answer: They contain harmful chemicals and can burst
+    difficulty: 3
+    hints:
+    - What is inside a cell?
+    - Think about safety.
+    solution: Cells contain chemicals that can leak, burst or burn, so they must be disposed of safely.
+    mistakes:
+      They will start working again: c7s3_safe
+      They turn into new cells: c7s3_safe
 - code: cbse7s.elec.conductors
   title: Conductors and insulators
   after:
@@ -225,6 +439,57 @@ concepts:
       bin: Insulator
       clue: Used on electric poles to hold wires.
       why: Insulator.
+  lesson:
+    - teach: 'Some materials let electricity pass through them: conductors. Metals like copper, aluminium and iron are good conductors. Others do not: insulators, such as plastic, rubber, wood, glass and dry paper.'
+      picture:
+        kind: compare
+        columns:
+        - title: Conductors
+          points:
+          - copper
+          - aluminium
+          - iron
+          - graphite
+        - title: Insulators
+          points:
+          - plastic
+          - rubber
+          - wood
+          - glass
+        alt: Examples of conductors and insulators.
+      check:
+        prompt: Which is a conductor?
+        options:
+        - An aluminium foil strip
+        - A rubber band
+        - A wooden ruler
+        answer: An aluminium foil strip
+        why: Aluminium is a metal.
+    - teach: 'Test a material with a circuit tester: a cell, a bulb and two wires with a gap. Put the material across the gap. If the bulb glows, the material conducts. Graphite (pencil lead) is a non-metal that still conducts; the bulb glows dimly.'
+      picture:
+        kind: flow
+        steps:
+        - Cell and bulb with a gap
+        - Place the object across the gap
+        - Bulb glows → conductor
+        - Bulb stays off → insulator
+        alt: How to test a material with a circuit tester.
+      check:
+        prompt: 'A key placed across the gap lights the bulb. The key is:'
+        options:
+        - A conductor
+        - An insulator
+        answer: A conductor
+        why: It completes the circuit.
+    - teach: 'Wires use both: copper inside to carry current, plastic outside to keep us safe. Electricians wear rubber gloves. Our bodies and impure water conduct, so never touch switches with wet hands or put anything into a socket.'
+      check:
+        prompt: Why are screwdrivers given plastic handles?
+        options:
+        - Plastic is an insulator and protects the user
+        - Plastic conducts better
+        - Plastic makes it heavier
+        answer: Plastic is an insulator and protects the user
+        why: Insulators stop current reaching the hand.
   items:
   - prompt: Which is a good conductor of electricity?
     options:
@@ -305,3 +570,157 @@ concepts:
     - Graphite is carbon.
     solution: Graphite conducts electricity even though it is a non-metal.
     mistakes: {"An insulator": "t7_graphite", "A metal": "t7_graphite"}
+  - prompt: Which is an insulator?
+    options:
+    - Glass
+    - Iron
+    - Copper
+    answer: Glass
+    difficulty: 1
+    hints:
+    - Insulators block electricity.
+    - Which is not a metal?
+    solution: Glass does not let electricity pass; iron and copper are metals and conduct.
+    mistakes:
+      Iron: c7s3_metal
+      Copper: c7s3_metal
+  - prompt: 'Electric wires have copper inside because copper is:'
+    options:
+    - A good conductor
+    - An insulator
+    - Cheap plastic
+    answer: A good conductor
+    difficulty: 1
+    hints:
+    - The inside must carry current.
+    - Copper is a metal.
+    solution: Copper conducts electricity well, so current flows through the wire.
+    mistakes:
+      An insulator: c7s3_metal
+      Cheap plastic: c7s3_metal
+  - prompt: A rubber eraser is placed across the gap in a tester. Does the bulb glow?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only dimly
+    answer: 'No'
+    difficulty: 1
+    hints:
+    - Rubber is used in electricians' gloves.
+    - Does it let current through?
+    solution: Rubber is an insulator, so the gap stays open and the bulb stays off.
+    mistakes:
+      'Yes': c7s3_metal
+      Only dimly: c7s3_metal
+  - prompt: Which of these would make the tester bulb glow?
+    options:
+    - A safety pin
+    - A plastic comb
+    - A cotton thread
+    answer: A safety pin
+    difficulty: 1
+    hints:
+    - Look for a metal.
+    - Plastic and cotton block current.
+    solution: A safety pin is steel (a metal), so it conducts and the bulb glows.
+    mistakes:
+      A plastic comb: c7s3_metal
+      A cotton thread: c7s3_metal
+  - prompt: Why do electricians wear rubber gloves?
+    options:
+    - Rubber is an insulator and stops shocks
+    - Rubber conducts electricity
+    - Rubber keeps hands warm only
+    answer: Rubber is an insulator and stops shocks
+    difficulty: 2
+    hints:
+    - What does rubber do to current?
+    - It protects the body.
+    solution: Rubber does not conduct, so current cannot pass into the electrician's hands.
+    mistakes:
+      Rubber conducts electricity: c7s3_metal
+      Rubber keeps hands warm only: c7s3_safe
+  - prompt: Pencil lead makes the tester bulb glow dimly. What does this show?
+    options:
+    - Graphite conducts, though it is not a metal
+    - Graphite is a metal
+    - Graphite is an insulator
+    answer: Graphite conducts, though it is not a metal
+    difficulty: 2
+    hints:
+    - The bulb glowed, so current passed.
+    - Is graphite a metal?
+    solution: Graphite is a non-metal form of carbon, but it conducts, so the bulb glows a little.
+    mistakes:
+      Graphite is a metal: c7s3_metal
+      Graphite is an insulator: c7s3_metal
+  - prompt: Why is it dangerous to touch a switch with wet hands?
+    options:
+    - Impure water conducts and can give you a shock
+    - Water is an insulator
+    - The switch will rust instantly
+    answer: Impure water conducts and can give you a shock
+    difficulty: 2
+    hints:
+    - Tap water has dissolved salts.
+    - Can current reach your body through it?
+    solution: Tap water has impurities that conduct, so current can pass into the body and cause a shock.
+    mistakes:
+      Water is an insulator: c7s3_safe
+      The switch will rust instantly: c7s3_safe
+  - prompt: Which part of an electric plug is made of a conductor?
+    options:
+    - The metal pins
+    - The plastic cover
+    - The rubber grip
+    answer: The metal pins
+    difficulty: 2
+    hints:
+    - Which part carries current into the socket?
+    - It is shiny.
+    solution: The metal pins conduct current; the plastic cover insulates our hands.
+    mistakes:
+      The plastic cover: c7s3_metal
+      The rubber grip: c7s3_metal
+  - prompt: A student says, 'Air is an insulator, so a bulb with a gap does not glow.' Is the student right?
+    options:
+    - Yes, the air gap stops the current
+    - No, air is a good conductor
+    - No, bulbs do not need a loop
+    answer: Yes, the air gap stops the current
+    difficulty: 3
+    hints:
+    - What is in a gap?
+    - Does current cross it?
+    solution: Air does not normally conduct, so a gap filled with air keeps the circuit open.
+    mistakes:
+      No, air is a good conductor: c7s3_metal
+      No, bulbs do not need a loop: c7s3_loop
+  - prompt: Why are electric poles' wires held on porcelain or glass pieces?
+    options:
+    - They are insulators and stop current flowing into the pole
+    - They conduct electricity to the ground
+    - They make the wires shine
+    answer: They are insulators and stop current flowing into the pole
+    difficulty: 3
+    hints:
+    - What would happen if current reached the pole?
+    - Glass and porcelain block current.
+    solution: Porcelain and glass are insulators, so current stays in the wire instead of leaking into the pole.
+    mistakes:
+      They conduct electricity to the ground: c7s3_metal
+      They make the wires shine: c7s3_metal
+  - prompt: A metal spoon and a wooden spoon are both tested. Only one lights the bulb. Which, and why?
+    options:
+    - The metal spoon, because metals conduct
+    - The wooden spoon, because wood conducts
+    - Neither should light it
+    answer: The metal spoon, because metals conduct
+    difficulty: 3
+    hints:
+    - Which material is a conductor?
+    - Wood is used for handles.
+    solution: Metal conducts and completes the circuit; dry wood is an insulator.
+    mistakes:
+      The wooden spoon, because wood conducts: c7s3_metal
+      Neither should light it: c7s3_metal
