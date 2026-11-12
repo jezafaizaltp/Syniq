@@ -120,3 +120,15 @@ an explanation of that style in the content packs, a word for it in
 `frontend/lib/i18n.ts` (`style.*` and `method.*`) and in `METHOD_WORDS` /
 `STYLE_WORDS` in `frontend/lib/api.ts`. The matcher handles any number of
 styles.
+
+## Showing it
+
+On a demo database (`python -m app.seed`), `python -m tools.demo_week` (from
+`backend/`) makes Meera (`meera@demo.syniq`, password `syniq-demo`) and plays a
+week of real lessons and practice through the app's own endpoints: a lesson
+where a second way helped, a repeat mistake, a stuck topic and a topic due for
+revision. Her mentor then shows all three kinds of next step, her parent
+(`parent@demo.syniq`) sees her week, and the teacher's re-teach sheet
+(`teacher@demo.syniq`) lists the lesson idea the class found hard. Running it
+again resets her week. It refuses to run without the demo class, so it can't
+touch a school's real data.
