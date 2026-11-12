@@ -121,6 +121,7 @@ type Step = {
   method_why?: "history" | "similar" | "everyone";
   activity?: ActivitySpec | null;
   lesson?: LessonStep[] | null;
+  lesson_check_first?: string | null;
   has_lesson?: boolean;
   next_chapter?: { id: number; number: number; title: string } | null;
 };
@@ -967,7 +968,13 @@ function Session({
               <h2 ref={headingRef} tabIndex={-1}>
                 {t("lesson.heading", { topic: step.concept?.title ?? "" })}
               </h2>
-              <Lesson key={step.decision_id} conceptId={step.concept!.id} steps={step.lesson} onDone={() => setLessonDone(step.decision_id)} />
+              <Lesson
+                key={step.decision_id}
+                conceptId={step.concept!.id}
+                steps={step.lesson}
+                suggestCheckFirst={step.lesson_check_first}
+                onDone={() => setLessonDone(step.decision_id)}
+              />
             </>
           ) : null}
 

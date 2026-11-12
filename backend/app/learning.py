@@ -265,6 +265,29 @@ def style_order(db: DbSession, student: User, concept_id: int) -> list[str]:
     return methods.ranked((row.format_stats if row else None), prior, preferred, ties)
 
 
+CHECK_FIRST_FROM = 0.5  # one right answer in the start check gets here; a guess at a new topic does not
+
+
+def lesson_check_first(db: DbSession, student: User, concept_id: int) -> str | None:
+    """Whether to open a topic's lesson with the questions first, and why.
+
+    Only when there is real evidence the learner knows some of it already (a right answer in the start check, or
+    the lesson done before and remembered) and they aren't stuck on it right now: a stuck learner needs the
+    teaching, not a quiz. "seen_before" or "knows_some"; None means teach first, as usual. The learner can always
+    switch back to being taught."""
+    row = db.scalars(select(Mastery).where(Mastery.student_id == student.id, Mastery.concept_id == concept_id)).first()
+    if not row or row.p_known < CHECK_FIRST_FROM or (row.wrong_streak or 0) >= 2:
+        return None
+    done = db.scalars(
+        select(LearningEvent.id).where(
+            LearningEvent.student_id == student.id,
+            LearningEvent.kind == "lesson_done",
+            LearningEvent.detail.like(f"{concept_id}:%"),
+        )
+    ).first()
+    return "seen_before" if done else "knows_some"
+
+
 def next_action(
     db: DbSession, student: User, chapter_id: int, current_concept_id: int | None, gentle: bool = False
 ) -> tuple[Action, Decision]:

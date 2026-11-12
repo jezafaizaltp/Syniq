@@ -27,7 +27,18 @@ const WAY_ICON: Record<string, string> = { text: "💬", visual: "🖼️", step
  * answer is shown, so the mistake becomes a second way in, not a dead end. "I know some of this" turns it round:
  * the question first, and the teaching only for the ideas that need it. Nothing is marked.
  */
-export default function Lesson({ conceptId, steps, onDone }: { conceptId: number; steps: LessonStep[]; onDone: () => void }) {
+export default function Lesson({
+  conceptId,
+  steps,
+  onDone,
+  suggestCheckFirst = null,
+}: {
+  conceptId: number;
+  steps: LessonStep[];
+  onDone: () => void;
+  // The server's reason to start with the questions: "seen_before" or "knows_some" (learning.lesson_check_first).
+  suggestCheckFirst?: string | null;
+}) {
   const { t } = useSession();
   const [at, setAt] = useState(0);
   const [wayAt, setWayAt] = useState(0);
@@ -37,7 +48,7 @@ export default function Lesson({ conceptId, steps, onDone }: { conceptId: number
   const [chosen, setChosen] = useState<string | null>(null);
   const [marked, setMarked] = useState<Marked | null>(null);
   const [busy, setBusy] = useState(false);
-  const [checkFirst, setCheckFirst] = useState(false);
+  const [checkFirst, setCheckFirst] = useState(!!suggestCheckFirst);
   // In "check first", the teaching opens only after a wrong answer (or when asked for).
   const [opened, setOpened] = useState(false);
   const [outcomes, setOutcomes] = useState<Outcome[]>([]);
@@ -149,6 +160,7 @@ export default function Lesson({ conceptId, steps, onDone }: { conceptId: number
 
       {at === 0 && attempt === 1 && !marked && (
         <p className="lesson-mode">
+          {checkFirst && suggestCheckFirst && <span className="muted">{t(`lesson.suggest_${suggestCheckFirst}` as Key)} </span>}
           <button className="secondary small" aria-pressed={checkFirst} onClick={() => setCheckFirst(!checkFirst)}>
             {checkFirst ? t("lesson.teach_me") : t("lesson.check_first")}
           </button>

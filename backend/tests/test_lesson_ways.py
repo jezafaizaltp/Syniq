@@ -132,3 +132,24 @@ def test_part_of_day_is_india_time():
     assert mentor.part_of_day(datetime(2026, 11, 12, 3, 0)) == "morning"  # 8:30 in India
     assert mentor.part_of_day(datetime(2026, 11, 12, 9, 0)) == "afternoon"  # 14:30
     assert mentor.part_of_day(datetime(2026, 11, 12, 14, 0)) == "evening"  # 19:30
+
+
+def test_lesson_starts_with_questions_only_when_the_learner_already_knows_some():
+    from app import learning
+
+    sid = new_student("meera.checkfirst@demo.syniq")
+    with SessionLocal() as db:
+        student = db.get(User, sid)
+        cid = db.scalars(select(Concept.id).where(Concept.code == "math9.pairs.sum_difference")).first()
+        assert learning.lesson_check_first(db, student, cid) is None  # new topic: teach first
+        row = learning.get_mastery(db, sid, cid)
+        row.p_known = 0.52  # one right answer in the start check
+        db.commit()
+        assert learning.lesson_check_first(db, student, cid) == "knows_some"
+        row.wrong_streak = 2  # stuck right now: the teaching, not a quiz
+        db.commit()
+        assert learning.lesson_check_first(db, student, cid) is None
+        row.wrong_streak = 0
+        db.add(LearningEvent(student_id=sid, kind="lesson_done", detail=f"{cid}:3/4:taught"))
+        db.commit()
+        assert learning.lesson_check_first(db, student, cid) == "seen_before"

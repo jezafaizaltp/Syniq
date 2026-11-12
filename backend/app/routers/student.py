@@ -143,6 +143,8 @@ def learn_next(
         if action.rule_id == "R4_introduce":
             # A new topic is taught first: the lesson's steps, then this explanation as the sum-up.
             payload["lesson"] = lessons.public_lesson(concept.lesson, concept.id, learning.style_order(db, user, concept.id))
+            # Knows some of it already: questions first, teaching only for what they miss.
+            payload["lesson_check_first"] = learning.lesson_check_first(db, user, concept.id) if concept.lesson else None
     elif action.kind in ("practice", "review", "prereq_review") and concept:
         working_on = learning.patterns.active(learning.mistake_patterns(db, user.id))
         item = None

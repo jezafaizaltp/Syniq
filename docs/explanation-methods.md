@@ -53,7 +53,11 @@ examples sees the real-life way first.
   answer they tried is set aside, and they get one more try before the answer
   and the reason are shown.
 - "I know some of this: check me first" turns it round: the check comes first,
-  and the teaching opens only for ideas they miss.
+  and the teaching opens only for ideas they miss. The lesson starts this way
+  by itself when there is real evidence the learner knows some of it (a right
+  answer in the start check, or the lesson done before and remembered:
+  `learning.lesson_check_first`), but never while they are stuck on the topic.
+  It says why, and "Teach me each idea first" is always one tap away.
 - Credit: a wrong first answer counts against the way on screen; a right
   answer on the second try, or after the learner asked for another way, counts
   for that way. These go into the same per-topic counts as the "did this
@@ -78,6 +82,11 @@ most useful first, and what went well this week.
 secure, repeated mistakes fixed, lessons finished, times they got something
 wrong and later right, and the way of explaining that has helped most lately.
 Never marks, ranks or comparisons with anyone else.
+
+Parents see the same good news on My children, in their own words
+(`mentor.growth`, part of `GET /guardian/children/{id}/week`): lessons finished,
+topics made secure, repeated mistakes fixed, times the child got past a wrong
+answer, and the way of explaining that has helped most lately.
 
 ## What people see
 
