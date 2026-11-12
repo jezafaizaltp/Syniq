@@ -14,6 +14,12 @@ tips:
   t7_multiply_fractions: "Multiply tops and bottoms, then simplify. Cancel common factors first to keep it easy."
   t7_pieces_divide: "How many 3/4 m pieces fit in 6 m? Divide 6 by 3/4: multiply by 4/3."
   t7_reciprocal: "The reciprocal flips the fraction upside down."
+  c7m8_of: '''Of'' means multiply. Divide by the bottom number to find one part, then multiply by the top number.'
+  c7m8_tops_bottoms: Multiply top by top and bottom by bottom. Do not add, and do not keep a bottom number the same.
+  c7m8_cancel: Look for a top number and a bottom number that share a factor, and divide both by it before multiplying.
+  c7m8_mixed: 'Turn a mixed number into an improper fraction first: whole × bottom + top, over the same bottom.'
+  c7m8_flip: 'To divide by a fraction, multiply by its reciprocal: flip the second fraction, not the first.'
+  c7m8_fit: Ask how many of the small pieces fit into the amount. Dividing by a fraction less than 1 gives more pieces, not fewer.
 concepts:
 - code: cbse7m.frac.multiply
   title: Multiplying fractions
@@ -108,6 +114,63 @@ concepts:
           n: 3
           d: 6
         say: 'Still not simplest: divide by 3.'
+  lesson:
+    - teach: '''A fraction of'' a number means multiply. To find 2/5 of 30, split 30 into 5 equal parts (6 each) and take 2 of them: 12. So 2/5 × 30 = 30 ÷ 5 × 2 = 12.'
+      picture:
+        kind: bars
+        bars:
+        - label: 1/5 of 30
+          value: 6
+        - label: 2/5 of 30
+          value: 12
+        - label: all of 30
+          value: 30
+        unit: sweets
+        alt: One fifth of 30 is 6, two fifths is 12.
+      check:
+        prompt: What is 3/4 of 12?
+        options:
+        - '9'
+        - '3'
+        - '16'
+        answer: '9'
+        why: 12 ÷ 4 = 3, and 3 × 3 = 9.
+    - teach: 'Fraction × fraction: multiply the tops and multiply the bottoms. 1/2 × 3/4 = 3/8. In a picture, shade 3/4 of a rectangle, then take half of the shaded part: 3 of 8 small cells.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 3
+          label: 3/4
+        - size: 1
+          label: 1/4
+        rows:
+        - size: 1
+          label: 1/2
+        - size: 1
+          label: 1/2
+        cells:
+        - - 3/8
+          - 1/8
+        - - 3/8
+          - 1/8
+        alt: A rectangle split into 3/4 and 1/4 across and halves down. Half of the 3/4 part is 3/8 of the whole.
+      check:
+        prompt: What is 2/3 × 1/5?
+        options:
+        - 2/15
+        - 3/8
+        - 2/8
+        answer: 2/15
+        why: 2 × 1 = 2 on top, 3 × 5 = 15 below.
+    - teach: 'Cancel before multiplying to keep numbers small: 3/8 × 4/9: 3 and 9 share 3, 4 and 8 share 4, giving 1/2 × 1/3 = 1/6. Mixed numbers become improper fractions first: 2½ = 5/2. Multiplying by a fraction less than 1 makes a number smaller.'
+      check:
+        prompt: Which is less than 20?
+        options:
+        - 20 × 3/5
+        - 20 × 5/3
+        - 20 × 1
+        answer: 20 × 3/5
+        why: 3/5 is less than 1, so it shrinks 20 (to 12).
   items:
   - prompt: Find 3/4 of 20.
     answer: '15'
@@ -168,6 +231,130 @@ concepts:
     - Multiplying by less than 1.
     solution: 'Multiplying by a fraction less than 1 gives less: 12 × 2/3 = 8.'
     mistakes: {"It is more than 12": "t7_multiply_by_proper", "It is 24": "t7_multiply_by_proper"}
+  - prompt: Find 2/5 of 35.
+    answer: '14'
+    check: 35/5*2
+    difficulty: 1
+    hints:
+    - Find 1/5 of 35 first.
+    - Then take two of those parts.
+    solution: 'Step 1: 35 ÷ 5 = 7. Step 2: 7 × 2 = 14.'
+    mistakes:
+      '7': c7m8_of
+      '70': c7m8_of
+  - prompt: Find 5/6 of 24.
+    answer: '20'
+    check: 24/6*5
+    difficulty: 1
+    hints:
+    - Find 1/6 of 24.
+    - Multiply that part by 5.
+    solution: 'Step 1: 24 ÷ 6 = 4. Step 2: 4 × 5 = 20.'
+    mistakes:
+      '4': c7m8_of
+      '144': c7m8_of
+  - prompt: Find 3/7 × 2/5. Give the answer as a fraction.
+    answer: 6/35
+    check: Rational(3,7)*Rational(2,5)
+    difficulty: 1
+    hints:
+    - Multiply the top numbers.
+    - Multiply the bottom numbers.
+    solution: 'Step 1: 3 × 2 = 6 on top. Step 2: 7 × 5 = 35 below, giving 6/35.'
+    mistakes:
+      5/12: c7m8_tops_bottoms
+      6/7: c7m8_tops_bottoms
+  - prompt: Find 4 × 2/9. Give the answer as a fraction.
+    answer: 8/9
+    check: 4*Rational(2,9)
+    difficulty: 1
+    hints:
+    - A whole number multiplies only the top.
+    - 4 × 2 on top, 9 stays below.
+    solution: 'Step 1: 4 = 4/1. Step 2: 4 × 2 = 8 and 1 × 9 = 9, giving 8/9.'
+    mistakes:
+      8/36: c7m8_tops_bottoms
+      6/9: c7m8_tops_bottoms
+  - prompt: Find 5/12 × 6/25 in its simplest form.
+    answer: 1/10
+    check: Rational(5,12)*Rational(6,25)
+    difficulty: 2
+    hints:
+    - 5 and 25 share 5; 6 and 12 share 6.
+    - Cancel, then multiply.
+    solution: 'Step 1: cancel 5 with 25 (1 and 5) and 6 with 12 (1 and 2). Step 2: 1/2 × 1/5 = 1/10.'
+    mistakes:
+      1/5: c7m8_cancel
+      11/37: c7m8_tops_bottoms
+  - prompt: Find 2½ × 3. Give the answer as a mixed number or decimal.
+    answer: '7.5'
+    check: Rational(5,2)*3
+    difficulty: 2
+    hints:
+    - Write 2½ as an improper fraction.
+    - 5/2 × 3.
+    solution: 'Step 1: 2½ = 5/2. Step 2: 5/2 × 3 = 15/2 = 7½ = 7.5.'
+    mistakes:
+      '6.5': c7m8_mixed
+      '6': c7m8_mixed
+  - prompt: A tank holds 60 litres. It is 3/4 full. How many litres are in it?
+    answer: '45'
+    check: 60*Rational(3,4)
+    difficulty: 2
+    hints:
+    - Find 3/4 of 60.
+    - 60 ÷ 4 = 15.
+    solution: 'Step 1: 60 ÷ 4 = 15. Step 2: 15 × 3 = 45 litres.'
+    mistakes:
+      '15': c7m8_of
+      '80': c7m8_of
+  - prompt: Which is greater than 15?
+    options:
+    - 15 × 4/3
+    - 15 × 3/4
+    - 15 × 1/2
+    answer: 15 × 4/3
+    difficulty: 2
+    hints:
+    - Compare each fraction with 1.
+    - Which fraction is more than 1?
+    solution: 4/3 is more than 1, so it makes 15 bigger (20). The others are less than 1 and make it smaller.
+    mistakes:
+      15 × 3/4: c7m8_fit
+      15 × 1/2: c7m8_fit
+  - prompt: Find 1⅓ × 1½.
+    answer: '2'
+    check: Rational(4,3)*Rational(3,2)
+    difficulty: 3
+    hints:
+    - Change both to improper fractions.
+    - 4/3 × 3/2.
+    solution: 'Step 1: 1⅓ = 4/3 and 1½ = 3/2. Step 2: 4/3 × 3/2 = 12/6 = 2.'
+    mistakes:
+      '1': c7m8_mixed
+      '1.5': c7m8_mixed
+  - prompt: Meena spends 1/3 of her ₹180 on books and 1/4 of what is left on a pen. How many rupees does the pen cost?
+    answer: '30'
+    check: (180-180/3)/4
+    difficulty: 3
+    hints:
+    - Find what is left after the books.
+    - Then find 1/4 of that.
+    solution: 'Step 1: books cost 180 ÷ 3 = ₹60, so ₹120 is left. Step 2: 120 ÷ 4 = ₹30 for the pen.'
+    mistakes:
+      '45': c7m8_of
+      '60': c7m8_of
+  - prompt: Find 2/3 of 3/4 of 48.
+    answer: '24'
+    check: Rational(2,3)*Rational(3,4)*48
+    difficulty: 3
+    hints:
+    - Find 3/4 of 48 first.
+    - Then take 2/3 of that.
+    solution: 'Step 1: 3/4 of 48 = 36. Step 2: 2/3 of 36 = 24. (Or 2/3 × 3/4 = 1/2, and half of 48 is 24.)'
+    mistakes:
+      '36': c7m8_of
+      '32': c7m8_of
 - code: cbse7m.frac.divide
   title: Dividing fractions
   after:
@@ -248,6 +435,55 @@ concepts:
           n: 6
           d: 4
         say: 'Right value, not simplest: both divide by 2.'
+  lesson:
+    - teach: Dividing asks 'how many of these fit into that?' How many halves fit into 4? Each whole holds 2 halves, so 4 ÷ 1/2 = 8. Dividing by a fraction less than 1 gives a bigger answer.
+      picture:
+        kind: number_line
+        from: 0
+        to: 4
+        step: 0.5
+        points:
+        - at: 0.5
+          label: '1'
+        - at: 2
+          label: '4'
+        - at: 4
+          label: '8'
+        alt: 'From 0 to 4 in jumps of a half: 8 jumps.'
+      check:
+        prompt: How many quarters fit into 2?
+        options:
+        - '8'
+        - '2'
+        - 1/2
+        answer: '8'
+        why: Each whole holds 4 quarters, and 2 × 4 = 8.
+    - teach: 'The reciprocal of a fraction is it flipped: 3/7 becomes 7/3. A number times its reciprocal is 1. To divide by a fraction, multiply by its reciprocal: 3/5 ÷ 2/3 = 3/5 × 3/2 = 9/10.'
+      picture:
+        kind: flow
+        steps:
+        - 3/5 ÷ 2/3
+        - keep 3/5, flip 2/3 to 3/2
+        - 3/5 × 3/2
+        - 9/10
+        alt: Dividing by 2/3 becomes multiplying by 3/2.
+      check:
+        prompt: What is the reciprocal of 4/9?
+        options:
+        - 9/4
+        - 4/9
+        - −4/9
+        answer: 9/4
+        why: 'Flip it: 4/9 × 9/4 = 1.'
+    - teach: 'A whole number has a reciprocal too: 5 = 5/1, so its reciprocal is 1/5. Dividing a fraction by 4 is the same as taking a quarter of it: 2/3 ÷ 4 = 2/3 × 1/4 = 2/12 = 1/6.'
+      check:
+        prompt: What is 3/4 ÷ 3?
+        options:
+        - 1/4
+        - 9/4
+        - '4'
+        answer: 1/4
+        why: 3/4 × 1/3 = 3/12 = 1/4.
   items:
   - prompt: Find 3 ÷ 1/4.
     answer: '12'
@@ -309,3 +545,127 @@ concepts:
     - 10 × 1/2 = 5.
     solution: 'Dividing by a half doubles: 20; multiplying by a half halves: 5.'
     mistakes: {"10 × 1/2": "t7_divide_by_half", "They are equal": "t7_divide_by_half"}
+  - prompt: Find 5 ÷ 1/3.
+    answer: '15'
+    check: 5/Rational(1,3)
+    difficulty: 1
+    hints:
+    - How many thirds fit into one whole?
+    - 3 thirds in each of 5 wholes.
+    solution: 'Step 1: each whole holds 3 thirds. Step 2: 5 × 3 = 15.'
+    mistakes:
+      5/3: c7m8_fit
+      '1.6667': c7m8_fit
+  - prompt: What is the reciprocal of 8? Give a fraction.
+    answer: 1/8
+    check: Rational(1,8)
+    difficulty: 1
+    hints:
+    - Write 8 as 8/1.
+    - Flip it.
+    solution: 8 = 8/1, and flipping gives 1/8 (8 × 1/8 = 1).
+    mistakes:
+      '8': c7m8_flip
+      '-8': c7m8_flip
+  - prompt: Find 4/5 ÷ 2. Give the answer as a fraction.
+    answer: 2/5
+    check: Rational(4,5)/2
+    difficulty: 1
+    hints:
+    - Dividing by 2 is taking half.
+    - 4/5 × 1/2.
+    solution: 'Step 1: 4/5 × 1/2 = 4/10. Step 2: 4/10 = 2/5.'
+    mistakes:
+      8/5: c7m8_flip
+      2/10: c7m8_flip
+  - prompt: Find 3/4 ÷ 3/8.
+    answer: '2'
+    check: Rational(3,4)/Rational(3,8)
+    difficulty: 2
+    hints:
+    - Flip 3/8 and multiply.
+    - 3/4 × 8/3.
+    solution: 'Step 1: 3/4 × 8/3. Step 2: = 24/12 = 2.'
+    mistakes:
+      9/32: c7m8_flip
+      1/2: c7m8_flip
+  - prompt: Find 2/7 ÷ 4/21 in simplest form, as a fraction.
+    answer: 3/2
+    check: Rational(2,7)/Rational(4,21)
+    difficulty: 2
+    hints:
+    - Multiply by 21/4.
+    - Cancel 7 with 21 and 2 with 4.
+    solution: 'Step 1: 2/7 × 21/4. Step 2: cancel to 1/1 × 3/2 = 3/2 (1½).'
+    mistakes:
+      8/147: c7m8_flip
+      2/3: c7m8_flip
+  - prompt: A 9 m rope is cut into pieces 3/4 m long. How many pieces?
+    answer: '12'
+    check: 9/Rational(3,4)
+    difficulty: 2
+    hints:
+    - How many 3/4 m pieces fit into 9 m?
+    - 9 × 4/3.
+    solution: 'Step 1: 9 ÷ 3/4 = 9 × 4/3. Step 2: = 36/3 = 12 pieces.'
+    mistakes:
+      27/4: c7m8_fit
+      '6.75': c7m8_fit
+  - prompt: Which is the largest?
+    options:
+    - 6 ÷ 1/3
+    - 6 × 1/3
+    - 6 ÷ 3
+    answer: 6 ÷ 1/3
+    difficulty: 2
+    hints:
+    - Work each out.
+    - How many thirds fit in 6?
+    solution: 6 ÷ 1/3 = 18, 6 × 1/3 = 2 and 6 ÷ 3 = 2. Dividing by a fraction less than 1 gives the biggest.
+    mistakes:
+      6 × 1/3: c7m8_fit
+      6 ÷ 3: c7m8_fit
+  - prompt: Find 2½ ÷ 1¼.
+    answer: '2'
+    check: Rational(5,2)/Rational(5,4)
+    difficulty: 2
+    hints:
+    - Change both to improper fractions.
+    - 5/2 ÷ 5/4 = 5/2 × 4/5.
+    solution: 'Step 1: 2½ = 5/2 and 1¼ = 5/4. Step 2: 5/2 × 4/5 = 20/10 = 2.'
+    mistakes:
+      25/8: c7m8_flip
+      1/2: c7m8_flip
+  - prompt: A jug holds 3½ litres. How many glasses of 1/4 litre can it fill?
+    answer: '14'
+    check: Rational(7,2)/Rational(1,4)
+    difficulty: 3
+    hints:
+    - Write 3½ as 7/2.
+    - 7/2 ÷ 1/4 = 7/2 × 4.
+    solution: 'Step 1: 3½ = 7/2. Step 2: 7/2 × 4 = 28/2 = 14 glasses.'
+    mistakes:
+      7/8: c7m8_fit
+      '12': c7m8_mixed
+  - prompt: A number divided by 2/5 gives 15. What is the number?
+    answer: '6'
+    check: 15*Rational(2,5)
+    difficulty: 3
+    hints:
+    - Undo the division by multiplying.
+    - 15 × 2/5.
+    solution: 'Step 1: number ÷ 2/5 = 15, so number = 15 × 2/5. Step 2: 30/5 = 6.'
+    mistakes:
+      75/2: c7m8_flip
+      '37.5': c7m8_flip
+  - prompt: Two-thirds of a cake is shared equally among 4 children. What fraction of the whole cake does each get?
+    answer: 1/6
+    check: Rational(2,3)/4
+    difficulty: 3
+    hints:
+    - Divide 2/3 by 4.
+    - 2/3 × 1/4.
+    solution: 'Step 1: 2/3 ÷ 4 = 2/3 × 1/4. Step 2: 2/12 = 1/6.'
+    mistakes:
+      8/3: c7m8_flip
+      1/4: c7m8_fit

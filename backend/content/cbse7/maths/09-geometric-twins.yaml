@@ -14,6 +14,11 @@ tips:
   t7_right_isosceles: "90° plus two equal angles makes 180°. Share what is left."
   t7_sas: "Two sides and the angle BETWEEN them. Which rule has the A in the middle?"
   t7_sss: "All three sides equal. Which rule uses only sides?"
+  c7m9_same: 'Congruent needs two things at once: the same shape AND the same size. Check both.'
+  c7m9_order: 'Read the matching order letter by letter: the 1st letters match, the 2nd letters match, the 3rd letters match.'
+  c7m9_rules: 'Name what is given: S for a side, A for an angle, in the order they sit round the triangle. Is the angle between the two sides, or the side between the two angles?'
+  c7m9_aaa: Equal angles fix the shape, not the size. A small and a big triangle can have the same angles.
+  c7m9_base: Equal sides face equal angles. Find which angles sit opposite the equal sides.
 concepts:
 - code: cbse7m.cong.figures
   title: Congruent figures and triangles
@@ -86,6 +91,64 @@ concepts:
       bin: Not enough
       clue: Where is the angle?
       why: That can give two different triangles.
+  lesson:
+    - teach: Two figures are congruent when one fits exactly on top of the other, maybe after sliding, turning or flipping it. They have the same shape and the same size. Two ₹5 coins are congruent; a ₹5 coin and a ₹1 coin are not.
+      check:
+        prompt: Which pair is congruent?
+        options:
+        - Two pages torn from the same notebook
+        - A photo and its enlarged print
+        - A small and a large square
+        answer: Two pages torn from the same notebook
+        why: They are the same shape and the same size.
+    - teach: 'When we write △ABC ≅ △PQR, the order tells us which parts match: A with P, B with Q, C with R. So side AB = PQ, BC = QR, CA = RP, and ∠A = ∠P, ∠B = ∠Q, ∠C = ∠R.'
+      picture:
+        kind: compare
+        columns:
+        - title: △ABC
+          points:
+          - A
+          - B
+          - C
+          - AB, BC, CA
+        - title: △PQR
+          points:
+          - P
+          - Q
+          - R
+          - PQ, QR, RP
+        alt: Corners and sides of ABC matched in order with PQR.
+      check:
+        prompt: If △ABC ≅ △PQR, which angle equals ∠C?
+        options:
+        - ∠R
+        - ∠P
+        - ∠Q
+        answer: ∠R
+        why: C is third in ABC, and R is third in PQR.
+    - teach: 'You need only three matching parts to know two triangles are congruent: SSS (three sides), SAS (two sides and the angle between them), ASA (two angles and the side between them), RHS (right angle, hypotenuse and one side). AAA is not enough: three equal angles give the same shape but maybe a different size.'
+      picture:
+        kind: compare
+        columns:
+        - title: Enough
+          points:
+          - SSS
+          - SAS
+          - ASA
+          - RHS
+        - title: Not enough
+          points:
+          - AAA (size can change)
+          - SSA (angle not between the sides)
+        alt: Congruence rules that work and ones that do not.
+      check:
+        prompt: Two triangles have two angles and the side between them equal. Which rule shows they are congruent?
+        options:
+        - ASA
+        - SSS
+        - AAA
+        answer: ASA
+        why: Angle, side, angle, with the side between the angles.
   items:
   - prompt: What does congruent mean?
     options:
@@ -162,6 +225,154 @@ concepts:
     - EF matches BC.
     solution: EF = BC = 8 cm.
     mistakes: {"6": "t7_ef_matches", "7": "t7_ef_matches"}
+  - prompt: Two squares each have sides of 4 cm. Are they congruent?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if they are the same colour
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Squares always have the same shape.
+    - Is the size the same?
+    solution: 'Both are squares with 4 cm sides, so the same shape and size: congruent.'
+    mistakes:
+      'No': c7m9_same
+      Only if they are the same colour: c7m9_same
+  - prompt: Two circles have radii 3 cm and 5 cm. Are they congruent?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only if drawn on the same page
+    answer: 'No'
+    difficulty: 1
+    hints:
+    - They have the same shape.
+    - Do they have the same size?
+    solution: Their sizes differ, so they cannot fit exactly on each other.
+    mistakes:
+      'Yes': c7m9_same
+      Only if drawn on the same page: c7m9_same
+  - prompt: If △ABC ≅ △XYZ, which side equals AC?
+    options:
+    - XZ
+    - XY
+    - YZ
+    answer: XZ
+    difficulty: 1
+    hints:
+    - A matches X.
+    - C matches Z.
+    solution: A ↔ X and C ↔ Z, so AC = XZ.
+    mistakes:
+      XY: c7m9_order
+      YZ: c7m9_order
+  - prompt: If △LMN ≅ △DEF, which angle equals ∠M?
+    options:
+    - ∠E
+    - ∠D
+    - ∠F
+    answer: ∠E
+    difficulty: 1
+    hints:
+    - M is the 2nd letter of LMN.
+    - Find the 2nd letter of DEF.
+    solution: M is second in LMN and E is second in DEF, so ∠M = ∠E.
+    mistakes:
+      ∠D: c7m9_order
+      ∠F: c7m9_order
+  - prompt: In △ABC and △PQR, AB = PQ, ∠B = ∠Q and BC = QR. Which rule shows they are congruent?
+    options:
+    - SAS
+    - ASA
+    - SSS
+    answer: SAS
+    difficulty: 2
+    hints:
+    - Two sides are given, and one angle.
+    - Is ∠B between AB and BC?
+    solution: '∠B sits between sides AB and BC, so this is side, angle, side: SAS.'
+    mistakes:
+      ASA: c7m9_rules
+      SSS: c7m9_rules
+  - prompt: Two right triangles have equal hypotenuses and one other equal side. Which rule shows they are congruent?
+    options:
+    - RHS
+    - SSS
+    - AAA
+    answer: RHS
+    difficulty: 2
+    hints:
+    - Both have a right angle.
+    - Right angle, hypotenuse, side.
+    solution: Right angle, Hypotenuse and a Side match, so the RHS rule applies.
+    mistakes:
+      SSS: c7m9_rules
+      AAA: c7m9_aaa
+  - prompt: △PQR ≅ △STU. ∠P = 50°, ∠Q = 60°. Find ∠U, in degrees.
+    answer: '70'
+    check: 180-50-60
+    difficulty: 2
+    hints:
+    - ∠U matches ∠R.
+    - Find ∠R from the angle sum.
+    solution: 'Step 1: ∠R = 180 − 50 − 60 = 70°. Step 2: R ↔ U, so ∠U = 70°.'
+    mistakes:
+      '50': c7m9_order
+      '60': c7m9_order
+  - prompt: Two triangles both have angles 40°, 60° and 80°. Must they be congruent?
+    options:
+    - No, one can be bigger than the other
+    - Yes, by AAA
+    - Yes, by ASA
+    answer: No, one can be bigger than the other
+    difficulty: 2
+    hints:
+    - Think of a small and a large copy of the same triangle.
+    - Do equal angles fix the size?
+    solution: Equal angles give the same shape only. Without a matching side, sizes can differ, so they need not be congruent.
+    mistakes:
+      Yes, by AAA: c7m9_aaa
+      Yes, by ASA: c7m9_rules
+  - prompt: △ABC ≅ △DEF with AB = 5 cm, BC = 7 cm and CA = 6 cm. Find the perimeter of △DEF, in cm.
+    answer: '18'
+    check: 5+7+6
+    difficulty: 2
+    hints:
+    - Congruent triangles have the same sides.
+    - Add all three.
+    solution: 'Step 1: DEF has the same sides, 5, 7 and 6 cm. Step 2: 5 + 7 + 6 = 18 cm.'
+    mistakes:
+      '12': c7m9_same
+      '13': c7m9_same
+  - prompt: In △ABC and △PQR, AB = PQ, BC = QR and ∠A = ∠P. Is this enough to be sure they are congruent?
+    options:
+    - No, the angle is not between the two sides
+    - Yes, by SAS
+    - Yes, by SSS
+    answer: No, the angle is not between the two sides
+    difficulty: 3
+    hints:
+    - Which sides meet at A?
+    - The angle at A is between AB and AC, not AB and BC.
+    solution: SAS needs the angle between the two given sides. ∠A is not between AB and BC, so this is SSA, which is not enough.
+    mistakes:
+      Yes, by SAS: c7m9_rules
+      Yes, by SSS: c7m9_rules
+  - prompt: A kite ABCD has AB = AD and CB = CD. The diagonal AC is drawn. Why is △ABC ≅ △ADC?
+    options:
+    - 'SSS: AB = AD, CB = CD and AC is shared'
+    - 'AAA: the angles look equal'
+    - 'RHS: there is a right angle at C'
+    answer: 'SSS: AB = AD, CB = CD and AC is shared'
+    difficulty: 3
+    hints:
+    - List the equal sides.
+    - Which side do both triangles share?
+    solution: 'AB = AD and CB = CD are given, and AC belongs to both triangles. Three equal sides: SSS.'
+    mistakes:
+      'AAA: the angles look equal': c7m9_aaa
+      'RHS: there is a right angle at C': c7m9_rules
 - code: cbse7m.cong.isosceles
   title: Isosceles and equilateral triangles
   after:
@@ -242,6 +453,70 @@ concepts:
       - when:
           degrees: 120
         say: 120° is the exterior angle. Inside, three equal angles share 180°.
+  lesson:
+    - teach: 'Fold an isosceles triangle along its line of symmetry: the two equal sides land on each other, and so do the two base angles. The angles opposite the equal sides are equal.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 5
+          - 8
+          B:
+          - 2
+          - 1
+          C:
+          - 8
+          - 1
+          M:
+          - 5
+          - 1
+        segments:
+        - - A
+          - B
+          - 5 cm
+        - - A
+          - C
+          - 5 cm
+        - - B
+          - C
+        - - A
+          - M
+        angles:
+        - at: B
+          from: C
+          to: A
+          label: 65°
+        - at: C
+          from: A
+          to: B
+          label: 65°
+        alt: Isosceles triangle with AB = AC = 5 cm and equal base angles of 65°, with its fold line AM.
+      check:
+        prompt: In △PQR, PQ = PR. Which two angles are equal?
+        options:
+        - ∠Q and ∠R
+        - ∠P and ∠Q
+        - ∠P and ∠R
+        answer: ∠Q and ∠R
+        why: ∠R faces PQ and ∠Q faces PR, the equal sides.
+    - teach: 'It works the other way too: if two angles of a triangle are equal, the sides opposite them are equal, so the triangle is isosceles. The fold line AM splits the triangle into two congruent halves (by SSS), which is why the base angles match.'
+      check:
+        prompt: In △XYZ, ∠X = ∠Y. Which sides are equal?
+        options:
+        - YZ and XZ
+        - XY and YZ
+        - XY and XZ
+        answer: YZ and XZ
+        why: YZ faces ∠X and XZ faces ∠Y.
+    - teach: An equilateral triangle has all three sides equal, so all three angles are equal, and 180° ÷ 3 = 60° each. An isosceles right triangle has angles 90°, 45° and 45°.
+      check:
+        prompt: An equilateral triangle has sides of 7 cm. What is each angle?
+        options:
+        - 60°
+        - 90°
+        - 45°
+        answer: 60°
+        why: All angles are equal and add to 180°.
   items:
   - prompt: An isosceles triangle has base angles of 50° each. Find the top angle, in degrees.
     answer: '80'
@@ -305,3 +580,133 @@ concepts:
     - Split equally.
     solution: (180° − 90°) ÷ 2 = 45°.
     mistakes: {"90": "t7_right_isosceles", "60": "t7_right_isosceles"}
+  - prompt: An isosceles triangle has base angles of 72° each. Find the top angle, in degrees.
+    answer: '36'
+    check: 180-72-72
+    difficulty: 1
+    hints:
+    - Add the two base angles.
+    - Take that from 180.
+    solution: 'Step 1: 72 + 72 = 144. Step 2: 180 − 144 = 36°.'
+    mistakes:
+      '108': c7m7_iso_angles
+      '72': c7m7_iso_angles
+  - prompt: An equilateral triangle has a side of 12 cm. Find its perimeter, in cm.
+    answer: '36'
+    check: 12*3
+    difficulty: 1
+    hints:
+    - All three sides are equal.
+    - 12 × 3.
+    solution: 'Step 1: each side is 12 cm. Step 2: 3 × 12 = 36 cm.'
+    mistakes:
+      '24': c7m9_same
+      '48': c7m9_same
+  - prompt: In △ABC, AB = AC and ∠B = 55°. Find ∠C, in degrees.
+    answer: '55'
+    check: '55'
+    difficulty: 1
+    hints:
+    - Which angles face the equal sides?
+    - ∠B and ∠C are the base angles.
+    solution: 'AB = AC, so the angles opposite them, ∠C and ∠B, are equal: 55°.'
+    mistakes:
+      '70': c7m9_base
+      '125': c7m9_base
+  - prompt: In △DEF, ∠D = ∠F = 50°. Which two sides are equal?
+    options:
+    - EF and DE
+    - DF and DE
+    - DF and EF
+    answer: EF and DE
+    difficulty: 2
+    hints:
+    - Find the side opposite ∠D.
+    - Find the side opposite ∠F.
+    solution: EF faces ∠D and DE faces ∠F. Equal angles face equal sides, so EF = DE.
+    mistakes:
+      DF and DE: c7m9_base
+      DF and EF: c7m9_base
+  - prompt: An isosceles triangle has a top angle of 30°. Find each base angle, in degrees.
+    answer: '75'
+    check: (180-30)/2
+    difficulty: 2
+    hints:
+    - 180 − 30 first.
+    - Share the rest equally.
+    solution: 'Step 1: 180 − 30 = 150. Step 2: 150 ÷ 2 = 75° each.'
+    mistakes:
+      '150': c7m7_iso_angles
+      '30': c7m7_iso_angles
+  - prompt: An isosceles triangle has two sides of 8 cm and a base of 5 cm. Find its perimeter, in cm.
+    answer: '21'
+    check: 8+8+5
+    difficulty: 2
+    hints:
+    - There are two 8 cm sides.
+    - 8 + 8 + 5.
+    solution: 'Step 1: the sides are 8, 8 and 5 cm. Step 2: 8 + 8 + 5 = 21 cm.'
+    mistakes:
+      '13': c7m9_base
+      '18': c7m9_base
+  - prompt: A triangle has angles 45°, 45° and 90°. Which is true?
+    options:
+    - It is isosceles and right-angled
+    - It is equilateral
+    - It is scalene
+    answer: It is isosceles and right-angled
+    difficulty: 2
+    hints:
+    - Two angles are equal.
+    - One angle is 90°.
+    solution: Two equal angles mean two equal sides (isosceles), and the 90° angle makes it right-angled.
+    mistakes:
+      It is equilateral: c7m9_base
+      It is scalene: c7m9_base
+  - prompt: In an isosceles triangle, one base angle is 40°. Find the top angle, in degrees.
+    answer: '100'
+    check: 180-40-40
+    difficulty: 2
+    hints:
+    - Both base angles are 40°.
+    - 180 − 80.
+    solution: 'Step 1: base angles 40° + 40° = 80°. Step 2: 180 − 80 = 100°.'
+    mistakes:
+      '140': c7m7_iso_angles
+      '40': c7m7_iso_angles
+  - prompt: In △ABC, AB = AC and the exterior angle at C (with BC extended) is 110°. Find ∠A, in degrees.
+    answer: '40'
+    check: 180-2*(180-110)
+    difficulty: 3
+    hints:
+    - 'Find ∠C first: it makes a straight line with 110°.'
+    - ∠B = ∠C, then use the angle sum.
+    solution: 'Step 1: ∠C = 180 − 110 = 70°. Step 2: ∠B = 70° too. Step 3: ∠A = 180 − 140 = 40°.'
+    mistakes:
+      '70': c7m9_base
+      '110': c7m7_exterior
+  - prompt: Can an isosceles triangle have a base angle of 95°?
+    options:
+    - No, two such angles would already be over 180°
+    - Yes, if the top angle is small
+    - Yes, if it is a right triangle
+    answer: No, two such angles would already be over 180°
+    difficulty: 3
+    hints:
+    - Both base angles are equal.
+    - 95 + 95 = ?
+    solution: 95 + 95 = 190, which is more than 180, so it is impossible. Base angles are always less than 90°.
+    mistakes:
+      Yes, if the top angle is small: c7m7_sum180
+      Yes, if it is a right triangle: c7m7_sum180
+  - prompt: An isosceles triangle has a perimeter of 30 cm and a base of 8 cm. How long is each equal side, in cm?
+    answer: '11'
+    check: (30-8)/2
+    difficulty: 3
+    hints:
+    - Take the base away from the perimeter.
+    - Share the rest between two equal sides.
+    solution: 'Step 1: 30 − 8 = 22. Step 2: 22 ÷ 2 = 11 cm each.'
+    mistakes:
+      '22': c7m9_base
+      '7.33': c7m9_base
