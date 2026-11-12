@@ -13,6 +13,11 @@ tips:
   t7_perimeter_square: "4s means 4 × s. Multiply."
   t7_substitute: "Put 4 in place of a: 2 × 4 + 5. Multiply first."
   t7_subtract_from: "'Subtract 4 from x' means start with x and take 4 away."
+  c7m4_sub: 'Replace the letter with the number, then follow the order: × before + and −.'
+  c7m4_words: 'Read the words in order: ''more than'' adds, ''less than'' and ''subtract … from'' take away, ''times'' multiplies.'
+  c7m4_like: Only terms with the same letter part combine. Add the numbers in front; leave the letter as it is.
+  c7m4_bracket: Multiply the number outside by every term inside the bracket.
+  c7m4_pattern: Put the step number in for n and work it out; check with a small case you can count.
 concepts:
 - code: cbse7m.alg.write
   title: Writing expressions with letter-numbers
@@ -72,6 +77,71 @@ concepts:
       - when:
           n: 20
         say: 100 ÷ 5 = 20 forgets the box. The pencils cost 100 − 20.
+  lesson:
+    - teach: A letter-number stands for a number that can change. If a pencil costs ₹5, n pencils cost 5 × n, written 5n. 'Four more than n' is n + 4; 'three times m' is 3m.
+      check:
+        prompt: A box has p pencils. Write the number of pencils in 6 boxes.
+        options:
+        - 6p
+        - p + 6
+        - 6 − p
+        answer: 6p
+        why: '6 boxes of p each: 6 × p = 6p.'
+    - teach: 'Order matters for subtraction: ''subtract 4 from x'' is x − 4, but ''4 less than x'' is also x − 4, while ''x less than 4'' is 4 − x. To find the value of an expression, put in the number: if a = 4, 2a + 5 = 2 × 4 + 5 = 13.'
+      picture:
+        kind: flow
+        steps:
+        - 2a + 5
+        - a = 4
+        - 2 × 4 + 5
+        - 8 + 5 = 13
+        alt: 'Substitute a = 4 into 2a + 5: 2 × 4 + 5 = 13.'
+      check:
+        prompt: If y = 3, find 10 − 2y.
+        options:
+        - '4'
+        - '24'
+        - '16'
+        answer: '4'
+        why: 2 × 3 = 6, then 10 − 6 = 4.
+    - teach: Formulas use letters too. The perimeter of a square of side s is 4s; of a rectangle with length l and breadth b it is 2(l + b). A taxi fare of ₹50 plus ₹15 per km is 50 + 15k for k km.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 2
+          B:
+          - 8
+          - 2
+          C:
+          - 8
+          - 6
+          D:
+          - 1
+          - 6
+        segments:
+        - - A
+          - B
+          - l
+        - - B
+          - C
+          - b
+        - - C
+          - D
+          - l
+        - - D
+          - A
+          - b
+        alt: A rectangle with two sides of length l and two of breadth b, so its perimeter is 2(l + b).
+      check:
+        prompt: Find the perimeter 2(l + b) when l = 6 and b = 4.
+        options:
+        - '20'
+        - '24'
+        - '10'
+        answer: '20'
+        why: 6 + 4 = 10, and 2 × 10 = 20.
   items:
   - prompt: Which expression means '4 more than n'?
     options:
@@ -137,6 +207,114 @@ concepts:
     - s is the side.
     solution: 4 × 7 = 28 cm.
     mistakes: {"11": "t7_perimeter_square", "47": "t7_perimeter_square"}
+  - prompt: Which expression means '7 less than t'?
+    options:
+    - t − 7
+    - 7 − t
+    - 7t
+    answer: t − 7
+    difficulty: 1
+    hints:
+    - Start with t, then take 7 away.
+    - 7 less than 10 would be 3.
+    solution: 'Start from t and take away 7: t − 7.'
+    mistakes:
+      7 − t: c7m4_words
+      7t: c7m4_words
+  - prompt: If m = 9, find 4m − 6.
+    answer: '30'
+    check: 4*9-6
+    difficulty: 1
+    hints:
+    - Replace m with 9.
+    - 4 × 9 = 36.
+    solution: 'Step 1: 4 × 9 = 36. Step 2: 36 − 6 = 30.'
+    mistakes:
+      '43': c7m4_sub
+      '-2': c7m4_sub
+  - prompt: Find 3(x + 2) when x = 5.
+    answer: '21'
+    check: 3*(5+2)
+    difficulty: 2
+    hints:
+    - Work out the bracket first.
+    - 5 + 2 = 7.
+    solution: 'Step 1: 5 + 2 = 7. Step 2: 3 × 7 = 21.'
+    mistakes:
+      '17': c7m4_sub
+      '11': c7m4_sub
+  - prompt: Each bus seats 40 children. Which expression gives the seats in b buses?
+    options:
+    - 40b
+    - b + 40
+    - 40 − b
+    answer: 40b
+    difficulty: 1
+    hints:
+    - Each bus adds 40 seats.
+    - Repeated adding is multiplying.
+    solution: b buses × 40 seats each = 40b.
+    mistakes:
+      b + 40: c7m4_words
+      40 − b: c7m4_words
+  - prompt: A taxi charges ₹40 plus ₹12 per km. Find the fare for 10 km.
+    answer: '160'
+    check: 40+12*10
+    difficulty: 2
+    hints:
+    - Fare = 40 + 12k.
+    - Put k = 10.
+    solution: 'Step 1: 12 × 10 = 120. Step 2: 40 + 120 = ₹160.'
+    mistakes:
+      '520': c7m4_sub
+      '62': c7m4_sub
+  - prompt: Find the perimeter of a rectangle with l = 9 cm and b = 5 cm, using 2(l + b).
+    answer: '28'
+    check: 2*(9+5)
+    difficulty: 1
+    hints:
+    - Add l and b first.
+    - Then double.
+    solution: 'Step 1: 9 + 5 = 14. Step 2: 2 × 14 = 28 cm.'
+    mistakes:
+      '14': c7m4_sub
+      '45': c7m4_sub
+  - prompt: Sara is s years old. Her mother is 4 times as old plus 2 years. Which expression gives her mother's age?
+    options:
+    - 4s + 2
+    - 4(s + 2)
+    - s + 4 + 2
+    answer: 4s + 2
+    difficulty: 2
+    hints:
+    - First 4 times s.
+    - Then add 2.
+    solution: 4 times s is 4s; plus 2 gives 4s + 2.
+    mistakes:
+      4(s + 2): c7m4_words
+      s + 4 + 2: c7m4_words
+  - prompt: If p = 2 and q = 7, find 5p + q.
+    answer: '17'
+    check: 5*2+7
+    difficulty: 2
+    hints:
+    - Put in both numbers.
+    - 5 × 2 = 10.
+    solution: 'Step 1: 5 × 2 = 10. Step 2: 10 + 7 = 17.'
+    mistakes:
+      '59': c7m4_sub
+      '14': c7m4_sub
+  - prompt: A square has perimeter 4s. If the perimeter is 36 cm, what is s?
+    answer: '9'
+    check: 36/4
+    difficulty: 3
+    hints:
+    - 4 × s = 36.
+    - Which number times 4 is 36?
+    solution: 'Step 1: 4s = 36. Step 2: s = 36 ÷ 4 = 9 cm.'
+    mistakes:
+      '32': c7m4_sub
+      '144': c7m4_sub
 - code: cbse7m.alg.simplify
   title: Simplifying expressions and patterns
   after:
@@ -204,6 +382,61 @@ concepts:
       bin: Stays as it is
       clue: Three different kinds.
       why: Nothing to combine.
+  lesson:
+    - teach: 'Like terms have the same letter part, such as 3n and 5n. They can be added: 3n + 5n = 8n. Unlike terms, such as 3n and 5, cannot be combined.'
+      picture:
+        kind: compare
+        columns:
+        - title: Like terms
+          points:
+          - 3n and 5n
+          - 2a and 7a
+          - 'combine: 8n, 9a'
+        - title: Unlike terms
+          points:
+          - 3n and 5
+          - 2a and 2b
+          - stay separate
+        alt: Like terms like 3n and 5n combine to 8n; unlike terms like 3n and 5 stay separate.
+      check:
+        prompt: Simplify 6k + 2k − 3k.
+        options:
+        - 5k
+        - 11k
+        - '5'
+        answer: 5k
+        why: 6 + 2 − 3 = 5, so 5k.
+    - teach: 'Group like terms to simplify: 7a + 4 − 2a + 6 = (7a − 2a) + (4 + 6) = 5a + 10. Multiply a bracket out term by term: 3(x + 2) = 3x + 6.'
+      check:
+        prompt: Which equals 4(y − 3)?
+        options:
+        - 4y − 12
+        - 4y − 3
+        - y − 12
+        answer: 4y − 12
+        why: 4 × y and 4 × 3 = 12.
+    - teach: Patterns can be described with letters. A row of n matchstick squares needs 3n + 1 sticks; the nth odd number is 2n − 1. Two expressions are equal if they give the same value for every number, like 2(n + 3) and 2n + 6.
+      picture:
+        kind: bars
+        bars:
+        - label: 1 square
+          value: 4
+        - label: 2 squares
+          value: 7
+        - label: 3 squares
+          value: 10
+        - label: 4 squares
+          value: 13
+        unit: matchsticks
+        alt: 'Matchsticks needed: 4, 7, 10, 13 for 1 to 4 squares, going up by 3 each time.'
+      check:
+        prompt: How many sticks for 5 squares, using 3n + 1?
+        options:
+        - '16'
+        - '15'
+        - '20'
+        answer: '16'
+        why: 3 × 5 + 1 = 16.
   items:
   - prompt: Simplify 3n + 5n. What number goes in front of n?
     answer: '8'
@@ -274,3 +507,114 @@ concepts:
     solution: 4n and 3 are unlike terms and cannot be combined (they only match when n = 1).
     mistakes:
       Yes, 4 + 3 = 7: c7_unlike_terms
+  - prompt: Simplify 9x − 4x + 2x. What number goes in front of x?
+    answer: '7'
+    check: 9-4+2
+    difficulty: 1
+    hints:
+    - All are like terms.
+    - 9 − 4 + 2.
+    solution: 'Step 1: 9 − 4 = 5. Step 2: 5 + 2 = 7, so 7x.'
+    mistakes:
+      '3': c7m4_like
+      '15': c7m4_like
+  - prompt: Simplify 5m + 8 + 3m − 2.
+    options:
+    - 8m + 6
+    - 14m
+    - 8m + 10
+    answer: 8m + 6
+    difficulty: 2
+    hints:
+    - Group the m terms and the number terms.
+    - 5m + 3m and 8 − 2.
+    solution: 'Step 1: 5m + 3m = 8m. Step 2: 8 − 2 = 6. So 8m + 6.'
+    mistakes:
+      14m: c7m4_like
+      8m + 10: c7m4_like
+  - prompt: Which equals 5(2a + 1)?
+    options:
+    - 10a + 5
+    - 10a + 1
+    - 7a + 5
+    answer: 10a + 5
+    difficulty: 2
+    hints:
+    - Multiply 5 by each term inside.
+    - 5 × 2a and 5 × 1.
+    solution: 5 × 2a = 10a and 5 × 1 = 5, giving 10a + 5.
+    mistakes:
+      10a + 1: c7m4_bracket
+      7a + 5: c7m4_bracket
+  - prompt: The nth even number is 2n. What is the 23rd even number?
+    answer: '46'
+    check: 2*23
+    difficulty: 1
+    hints:
+    - Put n = 23.
+    - 2 × 23.
+    solution: 2 × 23 = 46.
+    mistakes:
+      '25': c7m4_pattern
+      '45': c7m4_pattern
+  - prompt: Matchstick triangles in a row need 2n + 1 sticks. How many for 12 triangles?
+    answer: '25'
+    check: 2*12+1
+    difficulty: 2
+    hints:
+    - Put n = 12.
+    - 2 × 12 = 24.
+    solution: 'Step 1: 2 × 12 = 24. Step 2: 24 + 1 = 25.'
+    mistakes:
+      '36': c7m4_pattern
+      '24': c7m4_pattern
+  - prompt: Are 3(n + 4) and 3n + 4 equal for every n?
+    options:
+    - No, 3(n + 4) = 3n + 12
+    - Yes, always
+    - Only when n = 0
+    answer: No, 3(n + 4) = 3n + 12
+    difficulty: 3
+    hints:
+    - Open the bracket fully.
+    - Does 3 multiply the 4 as well?
+    solution: 3(n + 4) = 3n + 12, which is always 8 more than 3n + 4, so they are never equal.
+    mistakes:
+      Yes, always: c7m4_bracket
+      Only when n = 0: c7m4_bracket
+  - prompt: Simplify 4p + 3q + 2p − q.
+    options:
+    - 6p + 2q
+    - 8pq
+    - 6p + 4q
+    answer: 6p + 2q
+    difficulty: 2
+    hints:
+    - 'p terms: 4p + 2p.'
+    - 'q terms: 3q − q.'
+    solution: 'Step 1: 4p + 2p = 6p. Step 2: 3q − q = 2q. So 6p + 2q.'
+    mistakes:
+      8pq: c7m4_like
+      6p + 4q: c7m4_like
+  - prompt: The nth odd number is 2n − 1. Which odd number is the 40th?
+    answer: '79'
+    check: 2*40-1
+    difficulty: 2
+    hints:
+    - Put n = 40.
+    - 2 × 40 = 80.
+    solution: 'Step 1: 2 × 40 = 80. Step 2: 80 − 1 = 79.'
+    mistakes:
+      '81': c7m4_pattern
+      '39': c7m4_pattern
+  - prompt: If 3n + 1 sticks make n squares, how many squares can you make with 22 sticks?
+    answer: '7'
+    check: (22-1)/3
+    difficulty: 3
+    hints:
+    - 3n + 1 = 22.
+    - Take away 1, then divide by 3.
+    solution: 'Step 1: 3n = 21. Step 2: n = 7 squares.'
+    mistakes:
+      '21': c7m4_pattern
+      '8': c7m4_pattern
