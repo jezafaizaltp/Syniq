@@ -15,6 +15,11 @@ tips:
   s7_temp_range: "Difference = maximum − minimum: 34 − 22."
   s7_total_rain: "Add all five days: 10 + 0 + 25 + 5 + 10."
   s7_wind_vane: "An anemometer measures wind speed. Which instrument points the direction?"
+  c7ss2_tools: 'Match each instrument to what it measures: hotness, rain collected, air pushing down, wind speed, wind direction, or moisture in the air.'
+  c7ss2_short_long: One word is about the sky today or this week; the other is the usual pattern over many years.
+  c7ss2_sum: Add all the daily amounts for the total. For the average, share that total equally among the days.
+  c7ss2_range: The daily range is the highest temperature minus the lowest temperature.
+  c7ss2_users: 'Think about whose work or safety changes most with tomorrow''s sky: people at sea, in the air, or in the fields.'
 concepts:
 - code: cbse7ss.wea.elements
   title: Elements of weather
@@ -77,6 +82,54 @@ concepts:
       bin: Wind vane
       clue: Points the way.
       why: Wind vane.
+  lesson:
+    - teach: 'Weather is the condition of the air at a place for a short time: today, or this week. It has several elements: temperature (how hot or cold), precipitation (rain, snow, hail), air pressure (the weight of air pressing down), wind (speed and direction) and humidity (water vapour in the air).'
+      picture:
+        kind: compare
+        columns:
+        - title: Element
+          points:
+          - temperature
+          - rainfall
+          - air pressure
+          - wind speed
+          - wind direction
+          - humidity
+        - title: Instrument
+          points:
+          - thermometer
+          - rain gauge
+          - barometer
+          - anemometer
+          - wind vane
+          - hygrometer
+        alt: Weather elements and the instruments that measure them.
+      check:
+        prompt: 'An anemometer measures:'
+        options:
+        - Wind speed
+        - Rainfall
+        - Temperature
+        answer: Wind speed
+        why: Its spinning cups turn faster in stronger wind.
+    - teach: Weather stations record these every day, including the maximum (highest) and minimum (lowest) temperature. The difference between them is the daily range. If the maximum is 33 °C and minimum 24 °C, the range is 9 °C.
+      check:
+        prompt: Maximum 30 °C, minimum 18 °C. What is the daily range?
+        options:
+        - 12 °C
+        - 48 °C
+        - 24 °C
+        answer: 12 °C
+        why: 30 − 18 = 12.
+    - teach: 'Rainfall is measured in millimetres (mm) with a rain gauge: a funnel leads rain into a measuring jar. The India Meteorological Department (IMD) collects data from stations, satellites and radar and issues forecasts and warnings.'
+      check:
+        prompt: 'Rainfall is measured in:'
+        options:
+        - Millimetres
+        - Kilograms
+        - Degrees
+        answer: Millimetres
+        why: It is the depth of water collected.
   items:
   - prompt: Which instrument measures rainfall?
     options:
@@ -153,6 +206,126 @@ concepts:
     - IMD.
     solution: The IMD forecasts India's weather.
     mistakes: {"ISRO only": "s7_imd"}
+  - prompt: Which instrument measures temperature?
+    options:
+    - Thermometer
+    - Barometer
+    - Wind vane
+    answer: Thermometer
+    difficulty: 1
+    hints:
+    - It shows how hot or cold it is.
+    - Its scale is in °C.
+    solution: A thermometer measures temperature in degrees Celsius.
+    mistakes:
+      Barometer: c7ss2_tools
+      Wind vane: c7ss2_tools
+  - prompt: Which instrument measures humidity?
+    options:
+    - Hygrometer
+    - Rain gauge
+    - Anemometer
+    answer: Hygrometer
+    difficulty: 1
+    hints:
+    - Humidity is moisture in the air.
+    - The instrument's name starts like 'hydro', water.
+    solution: A hygrometer measures how much water vapour is in the air.
+    mistakes:
+      Rain gauge: c7ss2_tools
+      Anemometer: c7ss2_tools
+  - prompt: 'Rain, snow and hail are all forms of:'
+    options:
+    - Precipitation
+    - Humidity
+    - Air pressure
+    answer: Precipitation
+    difficulty: 1
+    hints:
+    - Water falling from clouds.
+    - It is measured with a rain gauge.
+    solution: Any water falling from clouds, as rain, snow or hail, is precipitation.
+    mistakes:
+      Humidity: c7ss2_tools
+      Air pressure: c7ss2_tools
+  - prompt: Maximum 38 °C and minimum 26 °C. What is the daily temperature range, in °C?
+    answer: '12'
+    check: 38-26
+    difficulty: 1
+    hints:
+    - Range = highest − lowest.
+    - 38 − 26.
+    solution: Range = 38 − 26 = 12 °C.
+    mistakes:
+      '64': c7ss2_range
+      '32': c7ss2_range
+  - prompt: A wind vane points towards the north-east. What does it tell us?
+    options:
+    - The direction the wind is coming from
+    - How fast the wind is
+    - How much rain fell
+    answer: The direction the wind is coming from
+    difficulty: 2
+    hints:
+    - A wind vane turns with the wind.
+    - It is not about speed.
+    solution: A wind vane shows wind direction; an anemometer shows speed.
+    mistakes:
+      How fast the wind is: c7ss2_tools
+      How much rain fell: c7ss2_tools
+  - prompt: Why does a day near the sea often feel sticky and uncomfortable?
+    options:
+    - Humidity is high
+    - Air pressure is zero
+    - There is no wind at all anywhere
+    answer: Humidity is high
+    difficulty: 2
+    hints:
+    - Air over the sea holds lots of water vapour.
+    - Sweat dries slowly.
+    solution: High humidity means sweat cannot evaporate easily, so we feel sticky.
+    mistakes:
+      Air pressure is zero: c7ss2_tools
+      There is no wind at all anywhere: c7ss2_tools
+  - prompt: Which organisation issues weather forecasts and cyclone warnings in India?
+    options:
+    - India Meteorological Department
+    - Reserve Bank of India
+    - Election Commission
+    answer: India Meteorological Department
+    difficulty: 2
+    hints:
+    - Meteorology is the study of weather.
+    - It is a government weather office.
+    solution: The India Meteorological Department (IMD) gathers weather data and issues forecasts.
+    mistakes:
+      Reserve Bank of India: c7ss2_users
+      Election Commission: c7ss2_users
+  - prompt: A town's temperature range on a winter day is 15 °C. The minimum was 8 °C. What was the maximum, in °C?
+    answer: '23'
+    check: 8+15
+    difficulty: 3
+    hints:
+    - Maximum − minimum = range.
+    - So maximum = minimum + range.
+    solution: Maximum = 8 + 15 = 23 °C.
+    mistakes:
+      '7': c7ss2_range
+      '15': c7ss2_range
+  - prompt: A falling barometer reading often warns of what?
+    options:
+    - Stormy or rainy weather coming
+    - A very dry, clear week
+    - An earthquake
+    answer: Stormy or rainy weather coming
+    difficulty: 3
+    hints:
+    - Low pressure is linked to rising air.
+    - Rising air forms clouds.
+    solution: Low and falling air pressure usually brings clouds, rain or storms.
+    mistakes:
+      A very dry, clear week: c7ss2_tools
+      An earthquake: c7ss2_tools
 - code: cbse7ss.wea.weather
   title: Weather versus climate and why it matters
   after:
@@ -211,6 +384,60 @@ concepts:
       - when:
           v: 15
         say: Thursday and Sunday had 15. Wednesday had more.
+  lesson:
+    - teach: Weather changes from hour to hour and day to day. Climate is the average weather of a place over many years, usually 30 or more. 'It is raining in Mumbai today' is weather. 'Mumbai gets heavy rain from June to September every year' is climate.
+      picture:
+        kind: compare
+        columns:
+        - title: Weather
+          points:
+          - short time
+          - today, this week
+          - changes often
+        - title: Climate
+          points:
+          - long time
+          - average of 30+ years
+          - changes slowly
+        alt: Weather and climate compared.
+      check:
+        prompt: '''Shimla is cold in winter every year'' describes:'
+        options:
+        - Climate
+        - Weather
+        answer: Climate
+        why: It is the usual pattern over many years.
+    - teach: We can work things out from daily records. Total rainfall = add each day. Average = total ÷ number of days. If 4 days had 5, 10, 0 and 25 mm, the total is 40 mm and the average 10 mm a day.
+      picture:
+        kind: bars
+        bars:
+        - label: Mon
+          value: 5
+        - label: Tue
+          value: 10
+        - label: Wed
+          value: 0
+        - label: Thu
+          value: 25
+        unit: mm
+        alt: 'Rainfall over four days: 5, 10, 0 and 25 mm.'
+      check:
+        prompt: Rain was 6, 4 and 2 mm on three days. What was the total?
+        options:
+        - 12 mm
+        - 4 mm
+        - 8 mm
+        answer: 12 mm
+        why: 6 + 4 + 2 = 12.
+    - teach: 'Weather affects daily life: what we wear, travel, sports and farming. Forecasts help farmers plan sowing, pilots plan flights, fishermen decide whether to go to sea, and disaster teams prepare for cyclones and floods.'
+      check:
+        prompt: Why do fishermen check the weather forecast before going out?
+        options:
+        - Storms at sea can be dangerous
+        - Fish only swim on sunny days
+        - Boats need humidity
+        answer: Storms at sea can be dangerous
+        why: A cyclone warning can save lives.
   items:
   - prompt: '''It is very hot in Delhi today.'' This describes:'
     options:
@@ -283,3 +510,120 @@ concepts:
     - Daily decision.
     solution: Fishermen check forecasts before sailing.
     mistakes: {"Library staff": "s7_forecast_users"}
+  - prompt: '''There is a thunderstorm in Kolkata this evening.'' This describes:'
+    options:
+    - Weather
+    - Climate
+    - Neither
+    answer: Weather
+    difficulty: 1
+    hints:
+    - It is about one evening.
+    - Short time.
+    solution: It describes conditions at one time and place, so it is weather.
+    mistakes:
+      Climate: c7ss2_short_long
+      Neither: c7ss2_short_long
+  - prompt: '''Rajasthan is hot and dry most of the year.'' This describes:'
+    options:
+    - Climate
+    - Weather
+    - A forecast
+    answer: Climate
+    difficulty: 1
+    hints:
+    - '''Most of the year'' is a long pattern.'
+    - It is the usual condition.
+    solution: It describes the usual pattern over a long time, so it is climate.
+    mistakes:
+      Weather: c7ss2_short_long
+      A forecast: c7ss2_short_long
+  - prompt: Rainfall over a week was 12, 8, 0, 0, 20, 5 and 4 mm. What was the total, in mm?
+    answer: '49'
+    check: 12+8+0+0+20+5+4
+    difficulty: 1
+    hints:
+    - Add all seven days.
+    - Zero days add nothing.
+    solution: 12 + 8 + 0 + 0 + 20 + 5 + 4 = 49 mm.
+    mistakes:
+      '7': c7ss2_sum
+      '20': c7ss2_sum
+  - prompt: Temperatures over 4 days were 30, 32, 28 and 34 °C. What was the average, in °C?
+    answer: '31'
+    check: (30+32+28+34)/4
+    difficulty: 2
+    hints:
+    - Add all four first.
+    - Then divide by 4.
+    solution: Total = 124 °C; average = 124 ÷ 4 = 31 °C.
+    mistakes:
+      '124': c7ss2_sum
+      '34': c7ss2_sum
+  - prompt: Which job depends most on short-term weather forecasts?
+    options:
+    - A pilot planning a flight
+    - A librarian sorting books
+    - A tailor stitching shirts
+    answer: A pilot planning a flight
+    difficulty: 2
+    hints:
+    - Whose work happens out in the sky?
+    - Storms and fog affect it.
+    solution: Pilots need to know about storms, winds and fog before flying.
+    mistakes:
+      A librarian sorting books: c7ss2_users
+      A tailor stitching shirts: c7ss2_users
+  - prompt: Why do farmers watch for the monsoon forecast?
+    options:
+    - To decide when to sow their crops
+    - To decide which books to read
+    - To set the price of gold
+    answer: To decide when to sow their crops
+    difficulty: 2
+    hints:
+    - Many crops need rain to start growing.
+    - Sowing too early or late is risky.
+    solution: Knowing when rain will come helps farmers sow at the right time.
+    mistakes:
+      To decide which books to read: c7ss2_users
+      To set the price of gold: c7ss2_users
+  - prompt: How many years of weather records are usually used to describe climate?
+    options:
+    - About 30 years or more
+    - One week
+    - One year
+    answer: About 30 years or more
+    difficulty: 2
+    hints:
+    - Climate is a long-term average.
+    - Decades, not days.
+    solution: Climate is worked out from the average of at least about 30 years of records.
+    mistakes:
+      One week: c7ss2_short_long
+      One year: c7ss2_short_long
+  - prompt: Rain in 5 days totalled 60 mm. Four days had 10, 15, 5 and 20 mm. How much fell on the fifth day, in mm?
+    answer: '10'
+    check: 60-10-15-5-20
+    difficulty: 3
+    hints:
+    - Add the four known days.
+    - Take that from 60.
+    solution: Known days add to 50 mm; 60 − 50 = 10 mm on the fifth day.
+    mistakes:
+      '50': c7ss2_sum
+      '12': c7ss2_sum
+  - prompt: Kerala had one dry week in July. Does this mean Kerala's climate is dry?
+    options:
+    - No, one week is weather; climate is the long-term pattern
+    - Yes, one week decides the climate
+    - Yes, July is always dry everywhere
+    answer: No, one week is weather; climate is the long-term pattern
+    difficulty: 3
+    hints:
+    - How long is one week compared with 30 years?
+    - Climate uses many years.
+    solution: A single dry week is weather. Over many years, Kerala is very wet, so its climate is wet.
+    mistakes:
+      Yes, one week decides the climate: c7ss2_short_long
+      Yes, July is always dry everywhere: c7ss2_short_long
