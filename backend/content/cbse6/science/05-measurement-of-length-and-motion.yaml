@@ -15,6 +15,12 @@ tips:
   t6_periodic_example: "Which motion repeats itself regularly?"
   t6_position_change: "If an object's place changes over time, it is moving."
   t6_standard_units: "Your handspan and your friend's are different sizes. Would you get the same measurement?"
+  c6s5_convert: 'Bigger unit to smaller unit: multiply. Smaller to bigger: divide. Recall how many of the small unit make one big one.'
+  c6s5_start: If the object does not start at zero, take the starting mark away from the end mark.
+  c6s5_standard: A standard unit must be the same for everyone, everywhere.
+  c6s5_curve: A ruler can't bend. Use something that can, then straighten it.
+  c6s5_kind: 'Ask: is the path a straight line, a circle, or does it repeat itself again and again?'
+  c6s5_reference: Moving or not depends on what you compare it with.
 concepts:
 - code: cbse6s.meas.length
   title: Measuring length
@@ -64,6 +70,52 @@ concepts:
       - when:
           v: 9
         say: 9 cm is the pin's length, but the pin ends at the 11 cm mark on this broken ruler. Mark where it ends.
+  lesson:
+    - teach: Measuring means comparing with a unit. Long ago people used handspans, cubits and footsteps, but these differ from person to person. So the world agreed on standard units. The SI unit of length is the metre (m).
+      check:
+        prompt: Two children measure a table in handspans and get 8 and 10. Why?
+        options:
+        - Their handspans are different lengths
+        - The table changed
+        - One cannot count
+        answer: Their handspans are different lengths
+        why: Body units vary, which is why standard units are needed.
+    - teach: 1 km = 1000 m, 1 m = 100 cm, 1 cm = 10 mm. To change a big unit into a smaller one, multiply; to change small into big, divide.
+      picture:
+        kind: flow
+        steps:
+        - 1 km
+        - = 1000 m
+        - 1 m = 100 cm
+        - 1 cm = 10 mm
+        alt: 1 kilometre is 1000 metres, 1 metre is 100 centimetres, 1 centimetre is 10 millimetres.
+      check:
+        prompt: How many millimetres are in 4 cm?
+        options:
+        - '40'
+        - '400'
+        - '4'
+        answer: '40'
+        why: 1 cm = 10 mm, so 4 × 10 = 40.
+    - teach: 'Measure carefully: lay the ruler along the object, start at 0 (or at a clear mark and subtract), and keep your eye straight above the mark. For a curved line, lay a thread along it, mark the thread, then straighten it on the ruler.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 12
+        step: 1
+        jumps:
+        - from: 3
+          to: 10
+          label: 7 cm
+        alt: An object starting at the 3 cm mark and ending at 10 cm is 7 cm long.
+      check:
+        prompt: An eraser runs from the 1 cm mark to the 5.5 cm mark. How long is it?
+        options:
+        - 4.5 cm
+        - 5.5 cm
+        - 6.5 cm
+        answer: 4.5 cm
+        why: 5.5 − 1 = 4.5.
   items:
   - prompt: How many centimetres are in 1 metre?
     answer: '100'
@@ -129,6 +181,114 @@ concepts:
     - Straight down.
     solution: Looking straight down avoids error.
     mistakes: {"From the left side": "t6_eye_position", "From far away": "t6_eye_position"}
+  - prompt: Convert 2.4 m into centimetres.
+    answer: '240'
+    check: 2.4*100
+    difficulty: 1
+    hints:
+    - 1 m = 100 cm.
+    - Multiply by 100.
+    solution: 'Step 1: 2.4 × 100. Step 2: = 240 cm.'
+    mistakes:
+      '24': c6s5_convert
+      '2400': c6s5_convert
+  - prompt: Convert 750 cm into metres.
+    answer: '7.5'
+    check: 750/100
+    difficulty: 2
+    hints:
+    - 'Small unit to big unit: divide.'
+    - Divide by 100.
+    solution: 'Step 1: 750 ÷ 100. Step 2: = 7.5 m.'
+    mistakes:
+      '75': c6s5_convert
+      '75000': c6s5_convert
+  - prompt: A school is 1.2 km from home. How far is that in metres?
+    answer: '1200'
+    check: 1.2*1000
+    difficulty: 1
+    hints:
+    - 1 km = 1000 m.
+    - Multiply by 1000.
+    solution: 'Step 1: 1.2 × 1000. Step 2: = 1,200 m.'
+    mistakes:
+      '120': c6s5_convert
+      '12': c6s5_convert
+  - prompt: How many millimetres are in 1 m?
+    answer: '1000'
+    check: 100*10
+    difficulty: 2
+    hints:
+    - 1 m = 100 cm.
+    - Each cm is 10 mm.
+    solution: 'Step 1: 1 m = 100 cm. Step 2: 100 × 10 = 1,000 mm.'
+    mistakes:
+      '100': c6s5_convert
+      '10': c6s5_convert
+  - prompt: A ruler's end is broken. A leaf lies from the 4 cm mark to the 12.5 cm mark. How long is it (in cm)?
+    answer: '8.5'
+    check: 12.5-4
+    difficulty: 2
+    hints:
+    - Start mark is not zero.
+    - End minus start.
+    solution: 'Step 1: 12.5 − 4. Step 2: = 8.5 cm.'
+    mistakes:
+      '12.5': c6s5_start
+      '16.5': c6s5_start
+  - prompt: Which is the best way to measure the length of a curved line on a map?
+    options:
+    - Lay a thread along it, then measure the thread
+    - Use a straight ruler only
+    - Guess by looking
+    answer: Lay a thread along it, then measure the thread
+    difficulty: 1
+    hints:
+    - A ruler is straight.
+    - What can follow a curve?
+    solution: 'Step 1: a thread bends along the curve. Step 2: straighten it on a ruler to find the length.'
+    mistakes:
+      Use a straight ruler only: c6s5_curve
+      Guess by looking: c6s5_curve
+  - prompt: Which unit is best for the distance between Delhi and Mumbai?
+    options:
+    - Kilometre
+    - Centimetre
+    - Millimetre
+    answer: Kilometre
+    difficulty: 1
+    hints:
+    - It is a very long distance.
+    - Choose the biggest unit.
+    solution: 'Step 1: cities are hundreds of km apart. Step 2: kilometres keep the number small and clear.'
+    mistakes:
+      Centimetre: c6s5_convert
+      Millimetre: c6s5_convert
+  - prompt: Why must everyone in the world use the same standard units?
+    options:
+    - So measurements mean the same everywhere
+    - Because metres are prettier
+    - To make maths harder
+    answer: So measurements mean the same everywhere
+    difficulty: 2
+    hints:
+    - Think of buying cloth in another town.
+    - A metre must be the same length there.
+    solution: 'Step 1: if units changed from place to place, trade and science would be confused. Step 2: standard units mean the same everywhere.'
+    mistakes:
+      Because metres are prettier: c6s5_standard
+      To make maths harder: c6s5_standard
+  - prompt: A room is 5 m 40 cm long. How long is it in centimetres?
+    answer: '540'
+    check: 5*100+40
+    difficulty: 3
+    hints:
+    - Change 5 m into cm first.
+    - Then add the 40 cm.
+    solution: 'Step 1: 5 m = 500 cm. Step 2: 500 + 40 = 540 cm.'
+    mistakes:
+      '5040': c6s5_convert
+      '45': c6s5_convert
 - code: cbse6s.meas.motion
   title: Types of motion
   after:
@@ -191,6 +351,53 @@ concepts:
       bin: Periodic (repeats)
       clue: Does it repeat the same movement?
       why: 'To and fro, again and again: periodic.'
+  lesson:
+    - teach: An object is in motion if its position changes with time compared with something fixed (a reference). A passenger sitting in a moving bus is at rest compared with the bus but moving compared with the trees outside.
+      check:
+        prompt: 'A book is on a seat in a moving train. Compared with the platform, the book is:'
+        options:
+        - Moving
+        - At rest
+        - Neither
+        answer: Moving
+        why: Its position changes compared with the platform.
+    - teach: 'Linear motion is along a straight line: a march past, a falling stone. Circular motion goes round a fixed point: a merry-go-round, the tip of a fan blade.'
+      picture:
+        kind: compare
+        columns:
+        - title: Linear
+          points:
+          - train on straight track
+          - falling apple
+          - march past
+        - title: Circular
+          points:
+          - fan blade tip
+          - merry-go-round
+          - giant wheel
+        - title: Periodic
+          points:
+          - swing
+          - pendulum
+          - clock hands
+        alt: Examples of straight-line, circular and repeating motion.
+      check:
+        prompt: 'A stone dropped from a roof shows:'
+        options:
+        - Linear motion
+        - Circular motion
+        - Periodic motion
+        answer: Linear motion
+        why: It falls in a straight line.
+    - teach: 'Periodic motion repeats itself after equal intervals of time: a swing, a pendulum, a heartbeat. A motion can be more than one kind: a clock hand moves in a circle and repeats every hour, so it is circular and periodic.'
+      check:
+        prompt: 'The Earth going round the Sun once every year is:'
+        options:
+        - Circular and periodic
+        - Only linear
+        - Not motion
+        answer: Circular and periodic
+        why: It goes round and repeats every year.
   items:
   - prompt: 'A train moving on a straight track shows:'
     options:
@@ -270,3 +477,126 @@ concepts:
     - Every 12 hours.
     solution: Clock hands repeat their motion regularly.
     mistakes: {"A ball rolling once down a slope": "t6_periodic_example", "A stone thrown far": "t6_periodic_example"}
+  - prompt: A child on a swing shows which motion?
+    options:
+    - Periodic
+    - Linear
+    - No motion
+    answer: Periodic
+    difficulty: 1
+    hints:
+    - The swing goes to and fro.
+    - Does it repeat?
+    solution: 'Step 1: the swing repeats the same path. Step 2: it takes equal time each time, so periodic.'
+    mistakes:
+      Linear: c6s5_kind
+      No motion: c6s5_kind
+  - prompt: 'A car moving on a straight highway shows:'
+    options:
+    - Linear motion
+    - Circular motion
+    - Periodic motion
+    answer: Linear motion
+    difficulty: 1
+    hints:
+    - Look at the shape of the path.
+    - The road is straight.
+    solution: 'Step 1: the path is a straight line. Step 2: so it is linear motion.'
+    mistakes:
+      Circular motion: c6s5_kind
+      Periodic motion: c6s5_kind
+  - prompt: 'A giant wheel at a fair turns round and round. Its seats show:'
+    options:
+    - Circular motion
+    - Linear motion
+    - No motion
+    answer: Circular motion
+    difficulty: 1
+    hints:
+    - The seats go round a centre.
+    - What shape is the path?
+    solution: 'Step 1: the seats move round a fixed centre. Step 2: that is circular motion.'
+    mistakes:
+      Linear motion: c6s5_kind
+      No motion: c6s5_kind
+  - prompt: 'Riya sits in a moving bus. Compared with her seat, she is:'
+    options:
+    - At rest
+    - Moving
+    - Spinning
+    answer: At rest
+    difficulty: 2
+    hints:
+    - Does her position change compared with the seat?
+    - She moves together with it.
+    solution: 'Step 1: her position does not change compared with the seat. Step 2: so, compared with the seat, she is at rest.'
+    mistakes:
+      Moving: c6s5_reference
+      Spinning: c6s5_reference
+  - prompt: Which is an example of periodic motion in your body?
+    options:
+    - Heartbeat
+    - Growing taller
+    - Hair getting longer
+    answer: Heartbeat
+    difficulty: 2
+    hints:
+    - Periodic means repeating at equal times.
+    - Which one goes 'lub-dub' again and again?
+    solution: 'Step 1: growing taller and hair growth don''t repeat. Step 2: the heartbeat repeats regularly: periodic.'
+    mistakes:
+      Growing taller: c6s5_kind
+      Hair getting longer: c6s5_kind
+  - prompt: 'A sewing machine needle moves up and down again and again. This is:'
+    options:
+    - Periodic motion
+    - Circular motion
+    - Linear only, never repeating
+    answer: Periodic motion
+    difficulty: 2
+    hints:
+    - The motion repeats.
+    - Each up-and-down takes the same time.
+    solution: 'Step 1: the needle repeats the same up-down movement. Step 2: at equal time gaps, so periodic.'
+    mistakes:
+      Circular motion: c6s5_kind
+      Linear only, never repeating: c6s5_kind
+  - prompt: 'The blades of a moving fan show circular motion. The whole fan (fixed to the ceiling) shows:'
+    options:
+    - No change of position
+    - Linear motion
+    - Periodic swinging
+    answer: No change of position
+    difficulty: 3
+    hints:
+    - Does the fan move across the room?
+    - Only the blades turn.
+    solution: 'Step 1: the fan stays fixed to the ceiling. Step 2: only its blades turn; the fan as a whole does not change position.'
+    mistakes:
+      Linear motion: c6s5_reference
+      Periodic swinging: c6s5_kind
+  - prompt: A pendulum makes 30 swings in 60 seconds. How long does one swing take (in seconds)?
+    answer: '2'
+    check: 60/30
+    difficulty: 2
+    hints:
+    - Share 60 seconds equally among 30 swings.
+    - 60 ÷ 30.
+    solution: 'Step 1: 60 ÷ 30. Step 2: = 2 seconds per swing.'
+    mistakes:
+      '30': c6s5_kind
+      '0.5': c6s5_kind
+  - prompt: Trees seem to run backwards when you look out of a moving train. Why?
+    options:
+    - You are moving forward compared with them
+    - Trees really move
+    - The window is moving the trees
+    answer: You are moving forward compared with them
+    difficulty: 3
+    hints:
+    - Which is really changing position?
+    - Compare you and the ground.
+    solution: 'Step 1: the trees are fixed to the ground. Step 2: you move forward, so compared with you they seem to go back.'
+    mistakes:
+      Trees really move: c6s5_reference
+      The window is moving the trees: c6s5_reference
