@@ -15,6 +15,16 @@ tips:
   s8_sahara: "The Thar is in India and much smaller. Which desert covers north Africa?"
   s8_third_pole: "The North and South Poles are full of ice. What does Tibet hold that is like them?"
   s8_urals: "The Alps are inside Europe. Which range divides Europe from Asia?"
+  s8w_ocean_order: "Picture the globe: which ocean is at the very top, which circles the bottom, and which touches India?"
+  s8w_land: "Land and oceans together make the whole surface, 100%. Take away the ocean share."
+  s8w_water: "All of Earth's water together is 100%. Take away the ocean share."
+  s8w_mountains: "Match the range to its continent: the Andes are in South America and the Himalayas in Asia. Which is left for Europe?"
+  s8w_diff: "How much longer means find the difference: take the shorter length from the longer one."
+  s8w_current: Warm currents carry heat from the tropics; cold currents bring cold water from the poles.
+  s8w_projection: A round Earth cannot be flattened without stretching. Which part does the Mercator map stretch?
+  s8w_continent_size: "Which continent is also a single country, and smaller even than Europe?"
+  s8w_desert: Hot deserts are near the tropics; cold deserts are high or far from the sea.
+  s8w_rivers: "Picture the river on a map: does it flow through Egypt, Brazil or China?"
 concepts:
 - code: cbse8ss.world.oceans
   title: Oceans and maps of the world
@@ -70,6 +80,49 @@ concepts:
       bin: Pacific
       clue: Biggest.
       why: Pacific.
+  lesson:
+    - teach: 'Oceans cover about 71% of the Earth''s surface and hold about 97% of its water, so Earth is called the blue planet. There are five oceans: Pacific (largest and deepest), Atlantic, Indian, Southern and Arctic (smallest).'
+      picture:
+        kind: bars
+        bars:
+        - label: Pacific
+          value: 165
+        - label: Atlantic
+          value: 106
+        - label: Indian
+          value: 70
+        - label: Southern
+          value: 22
+        - label: Arctic
+          value: 14
+        unit: million km²
+        alt: 'Ocean sizes: Pacific about 165, Atlantic 106, Indian 70, Southern 22, Arctic 14 million square km.'
+      check:
+        prompt: Which ocean is third largest?
+        options:
+        - Indian
+        - Atlantic
+        - Arctic
+        answer: Indian
+        why: Pacific, then Atlantic, then Indian.
+    - teach: Ocean currents are rivers of water inside the sea. Warm currents carry heat from the tropics; cold ones bring cold water from the poles. The warm Gulf Stream keeps western Europe's winters mild. The deepest point is Challenger Deep in the Pacific's Mariana Trench, over 11,000 m down.
+      check:
+        prompt: What does a warm ocean current do to the coast it flows past?
+        options:
+        - Makes it milder and warmer
+        - Makes it colder
+        - Makes it a desert
+        answer: Makes it milder and warmer
+        why: Warm water warms the air above it.
+    - teach: Coral reefs, like Australia's Great Barrier Reef, are called the rainforests of the sea because so many creatures live there. Warming and pollution are damaging them. Because Earth is round, flat maps stretch it; the Mercator map keeps directions for sailors but makes places near the poles look much bigger.
+      check:
+        prompt: On a Mercator map, Greenland looks as big as Africa. Why?
+        options:
+        - The map stretches areas near the poles
+        - Greenland is really that big
+        - Africa is shrinking
+        answer: The map stretches areas near the poles
+        why: Africa is about 14 times bigger than Greenland.
   items:
   - prompt: About what percentage of the Earth's surface is covered by oceans? Type the number only.
     answer: '71'
@@ -146,6 +199,124 @@ concepts:
     - Area distortion.
     solution: Mercator keeps directions but greatly enlarges high-latitude areas.
     mistakes: {"It shows wrong directions": "s8_mercator"}
+  - prompt: Which ocean lies to the south of India?
+    options:
+    - Indian Ocean
+    - Pacific Ocean
+    - Arctic Ocean
+    answer: Indian Ocean
+    difficulty: 1
+    hints:
+    - It is named after our country.
+    - The Arctic is at the far north.
+    solution: The Indian Ocean lies south of India.
+    mistakes:
+      Pacific Ocean: s8w_ocean_order
+      Arctic Ocean: s8w_ocean_order
+  - prompt: Which ocean surrounds Antarctica?
+    options:
+    - Southern Ocean
+    - Arctic Ocean
+    - Indian Ocean
+    answer: Southern Ocean
+    difficulty: 2
+    hints:
+    - Antarctica is at the South Pole.
+    - The Arctic is at the North Pole.
+    solution: The Southern Ocean circles Antarctica.
+    mistakes:
+      Arctic Ocean: s8_arctic
+      Indian Ocean: s8w_ocean_order
+  - prompt: About what percentage of Earth's surface is land, if oceans cover 71%?
+    answer: '29'
+    check: 100-71
+    difficulty: 1
+    hints:
+    - Land and water together make the whole surface.
+    - Take 71 from 100.
+    solution: 100 − 71 = 29% is land.
+    mistakes:
+      '71': s8w_land
+  - prompt: What kind of current brings cold water from the poles?
+    options:
+    - A cold current
+    - A warm current
+    - A river current
+    answer: A cold current
+    difficulty: 1
+    hints:
+    - Poles are icy.
+    - Water from there is not warm.
+    solution: Cold currents flow from polar regions towards the equator.
+    mistakes:
+      A warm current: s8w_current
+      A river current: s8w_current
+  - prompt: In which ocean is the Mariana Trench, the deepest place on Earth?
+    options:
+    - Pacific
+    - Atlantic
+    - Indian
+    answer: Pacific
+    difficulty: 2
+    hints:
+    - It is also the largest ocean.
+    - It lies east of the Philippines.
+    solution: The Mariana Trench is in the western Pacific.
+    mistakes:
+      Atlantic: s8_pacific
+      Indian: s8_pacific
+  - prompt: Which threatens coral reefs most today?
+    options:
+    - Warming seas and pollution
+    - Too many mountains
+    - Cold winds from the Sahara
+    answer: Warming seas and pollution
+    difficulty: 2
+    hints:
+    - Corals are sensitive to water temperature.
+    - Warm water makes them turn white.
+    solution: Warmer water bleaches corals; pollution and plastic harm them too.
+    mistakes:
+      Too many mountains: s8_coral
+      Cold winds from the Sahara: s8_coral
+  - prompt: Why do sailors still like the Mercator map?
+    options:
+    - It keeps directions correct for steering
+    - It shows the true size of countries
+    - It shows ocean depths
+    answer: It keeps directions correct for steering
+    difficulty: 3
+    hints:
+    - Its sizes are wrong, but something else is right.
+    - A straight line on it is a constant compass direction.
+    solution: Mercator keeps directions true, which helps navigation, though sizes near the poles are stretched.
+    mistakes:
+      It shows the true size of countries: s8w_projection
+      It shows ocean depths: s8w_projection
+  - prompt: If oceans hold 97% of Earth's water, what percentage is everywhere else (ice, rivers, lakes, ground)?
+    answer: '3'
+    check: 100-97
+    difficulty: 2
+    hints:
+    - All the water together is 100%.
+    - Take the ocean share from the whole.
+    solution: 100 − 97 = 3%, and most of that is frozen as ice.
+    mistakes:
+      '97': s8w_water
+  - prompt: Which ocean is the smallest and mostly frozen?
+    options:
+    - Arctic
+    - Southern
+    - Indian
+    answer: Arctic
+    difficulty: 1
+    hints:
+    - It is at the top of the globe.
+    - Polar bears live near it.
+    solution: The Arctic Ocean, around the North Pole, is the smallest.
+    mistakes:
+      Southern: s8w_ocean_order
+      Indian: s8w_ocean_order
 - code: cbse8ss.world.continents
   title: Continents and their landforms
   after:
@@ -214,6 +385,53 @@ concepts:
       bin: Asia
       clue: Mongolia.
       why: Asia.
+  lesson:
+    - teach: 'There are seven continents: Asia (largest), Africa, North America, South America, Antarctica, Europe and Australia (smallest). Asia and Europe share one landmass; the Ural Mountains mark the line between them.'
+      picture:
+        kind: bars
+        bars:
+        - label: Asia
+          value: 44
+        - label: Africa
+          value: 30
+        - label: N. America
+          value: 24
+        - label: S. America
+          value: 18
+        - label: Antarctica
+          value: 14
+        - label: Europe
+          value: 10
+        - label: Australia
+          value: 9
+        unit: million km²
+        alt: Continent sizes from Asia (44) down to Australia (about 9) million square km.
+      check:
+        prompt: Which continent is second largest?
+        options:
+        - Africa
+        - Europe
+        - Antarctica
+        answer: Africa
+        why: Asia is first, Africa second.
+    - teach: 'The Himalayas and Tibetan Plateau are called the Third Pole: their glaciers feed the Indus, Brahmaputra and Yangtze. The Alps are in Europe and the Andes run along South America, with the Amazon rainforest and river east of them.'
+      check:
+        prompt: Which mountain range runs along the west of South America?
+        options:
+        - Andes
+        - Alps
+        - Urals
+        answer: Andes
+        why: The Andes are the longest mountain range on land.
+    - teach: The Sahara in Africa is the largest hot desert, and the Nile, about 6,650 km, is often called the longest river. The Atacama in Chile is one of the driest places, the Gobi is a cold desert, and Antarctica is the coldest, driest continent, holding about 70% of the world's fresh water as ice.
+      check:
+        prompt: Which desert is cold rather than hot?
+        options:
+        - Gobi
+        - Sahara
+        - Thar
+        answer: Gobi
+        why: The Gobi in Mongolia and China has freezing winters.
   items:
   - prompt: How many continents are there?
     answer: '7'
@@ -289,3 +507,125 @@ concepts:
     - The coldest continent.
     solution: Antarctica's ice sheet holds about 70% of Earth's fresh water.
     mistakes: {"Asia": "s8_antarctica"}
+  - prompt: Which is the smallest continent?
+    options:
+    - Australia
+    - Europe
+    - Antarctica
+    answer: Australia
+    difficulty: 1
+    hints:
+    - It is also a single country.
+    - Europe is a little bigger.
+    solution: Australia is the smallest continent.
+    mistakes:
+      Europe: s8w_continent_size
+      Antarctica: s8w_continent_size
+  - prompt: On which continent is the Nile?
+    options:
+    - Africa
+    - Asia
+    - South America
+    answer: Africa
+    difficulty: 1
+    hints:
+    - It flows through Egypt.
+    - The Amazon is in South America.
+    solution: The Nile flows north through Africa into the Mediterranean.
+    mistakes:
+      Asia: s8w_rivers
+      South America: s8w_rivers
+  - prompt: Which river flows through the world's largest rainforest?
+    options:
+    - Amazon
+    - Nile
+    - Yangtze
+    answer: Amazon
+    difficulty: 2
+    hints:
+    - The rainforest is in South America.
+    - It starts in the Andes.
+    solution: The Amazon flows through the Amazon rainforest to the Atlantic.
+    mistakes:
+      Nile: s8w_rivers
+      Yangtze: s8w_rivers
+  - prompt: Which mountains are in Europe?
+    options:
+    - Alps
+    - Andes
+    - Himalayas
+    answer: Alps
+    difficulty: 1
+    hints:
+    - Switzerland is among them.
+    - The Andes are in South America; the Himalayas in Asia.
+    solution: The Alps run through France, Switzerland, Italy and Austria.
+    mistakes:
+      Andes: s8w_mountains
+      Himalayas: s8_third_pole
+  - prompt: Which of these rivers is fed by glaciers of the 'Third Pole'?
+    options:
+    - Brahmaputra
+    - Nile
+    - Amazon
+    answer: Brahmaputra
+    difficulty: 2
+    hints:
+    - The Third Pole is the Himalaya–Tibet region.
+    - Which river flows through Assam?
+    solution: The Brahmaputra rises in Tibet and is fed by Himalayan glaciers.
+    mistakes:
+      Nile: s8_third_pole
+      Amazon: s8_third_pole
+  - prompt: The Nile is about 6,650 km and the Ganga about 2,525 km. About how much longer is the Nile?
+    answer: '4125'
+    check: 6650-2525
+    difficulty: 2
+    hints:
+    - Find the difference.
+    - Take the Ganga's length from the Nile's.
+    solution: 6650 − 2525 = 4125 km longer.
+    mistakes:
+      '9175': s8w_diff
+  - prompt: Why is Antarctica called the driest continent though it is covered in ice?
+    options:
+    - Very little rain or snow falls there each year
+    - It has no ice at all
+    - It is the hottest place
+    answer: Very little rain or snow falls there each year
+    difficulty: 3
+    hints:
+    - Dry means little precipitation.
+    - The ice has built up over a very long time.
+    solution: Antarctica gets very little new snow each year; its ice built up over millions of years.
+    mistakes:
+      It has no ice at all: s8_antarctica
+      It is the hottest place: s8_antarctica
+  - prompt: The Atacama, one of the driest places on Earth, is on which continent?
+    options:
+    - South America
+    - Africa
+    - Australia
+    answer: South America
+    difficulty: 3
+    hints:
+    - It is in Chile.
+    - It lies west of the Andes.
+    solution: The Atacama Desert is in northern Chile, South America.
+    mistakes:
+      Africa: s8w_desert
+      Australia: s8w_desert
+  - prompt: Which continent has no permanent population of its own, only research stations?
+    options:
+    - Antarctica
+    - Australia
+    - Europe
+    answer: Antarctica
+    difficulty: 2
+    hints:
+    - It is the coldest continent.
+    - India has stations there, Maitri and Bharati.
+    solution: Only scientists live in Antarctica for some months at a time.
+    mistakes:
+      Australia: s8_antarctica
+      Europe: s8_antarctica

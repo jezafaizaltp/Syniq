@@ -15,6 +15,12 @@ tips:
   t8_symbol_fe: "Some symbols come from Latin names. Iron is 'ferrum'."
   t8_water_formula: "Water has two hydrogen atoms and one oxygen atom. Write the count as a small number after the symbol."
   t8_winnowing: "Which method uses wind to blow away lighter bits?"
+  c8s8_one_kind: Is it made of just one kind of atom, or of different kinds joined together?
+  c8s8_symbols: Some symbols come from Latin names, so they don't match the English name's first letters.
+  c8s8_formula_count: The small number after a symbol tells how many atoms of that element. No number means one.
+  c8s8_new_properties: In a compound the elements are joined and the properties change completely; in a mixture each part keeps its own.
+  c8s8_method: 'Pick the method that uses a difference between the parts: size, magnetism, whether it dissolves, or how heavy it is.'
+  c8s8_same_throughout: Can you see separate parts, or does it look the same everywhere?
 
 concepts:
 - code: cbse8s.nature.elements
@@ -90,6 +96,58 @@ concepts:
       bin: Compound
       clue: Carbon, hydrogen and oxygen joined.
       why: A compound.
+  lesson:
+    - teach: An element is a pure substance made of only one kind of atom. It can't be broken into anything simpler by chemical means. Oxygen (O), hydrogen (H), carbon (C), iron (Fe) and gold (Au) are elements. About 118 are known.
+      picture:
+        kind: compare
+        columns:
+        - title: Element
+          points:
+          - Hydrogen
+          - Oxygen
+          - Iron
+          - Sodium
+        - title: Symbol
+          points:
+          - H
+          - O
+          - 'Fe (Latin: ferrum)'
+          - 'Na (Latin: natrium)'
+        alt: 'Symbols of some elements: hydrogen H, oxygen O, iron Fe from Latin ferrum, sodium Na from Latin natrium.'
+      check:
+        prompt: Which is an element?
+        options:
+        - Carbon
+        - Water
+        - Salt
+        answer: Carbon
+        why: Carbon is made of one kind of atom. Water and salt are made of two elements joined together.
+    - teach: 'A compound forms when elements join chemically in a fixed ratio. Its properties are completely new: hydrogen and oxygen are gases that burn and help burning, but water (H₂O) puts out fire. A formula shows the atoms: H₂O has 2 hydrogen atoms and 1 oxygen atom.'
+      picture:
+        kind: flow
+        steps:
+        - Hydrogen (gas, burns)
+        - + Oxygen (gas, helps burning)
+        - 'join chemically 2 : 1'
+        - Water H₂O (liquid, puts out fire)
+        alt: Hydrogen and oxygen gases join in the ratio 2 to 1 to make water, which has completely new properties.
+      check:
+        prompt: How many atoms are in one molecule of H₂O?
+        options:
+        - '3'
+        - '2'
+        - '1'
+        answer: '3'
+        why: 2 hydrogen atoms + 1 oxygen atom = 3 atoms.
+    - teach: 'Elements are grouped as metals (shiny, conduct heat and electricity, can be beaten into sheets: iron, copper), non-metals (usually dull, poor conductors: oxygen, sulphur, carbon) and metalloids, which are in between (silicon).'
+      check:
+        prompt: Which is a metal?
+        options:
+        - Copper
+        - Sulphur
+        - Oxygen
+        answer: Copper
+        why: Copper is shiny and conducts electricity well, which is why wires are made of it.
   items:
   - prompt: Which is an element?
     options:
@@ -165,6 +223,126 @@ concepts:
     - 1 + 2.
     solution: 'CO₂ has 1 carbon atom and 2 oxygen atoms: 3 atoms.'
     mistakes: {"2": "t8_count_atoms", "1": "t8_count_atoms"}
+  - prompt: Which of these is a compound?
+    options:
+    - Carbon dioxide
+    - Oxygen
+    - Gold
+    answer: Carbon dioxide
+    difficulty: 1
+    hints:
+    - A compound has more than one element joined together.
+    - Oxygen and gold each have one kind of atom.
+    solution: Carbon dioxide (CO₂) is carbon and oxygen joined chemically.
+    mistakes:
+      Oxygen: c8s8_one_kind
+      Gold: c8s8_one_kind
+  - prompt: What is the chemical symbol of sodium?
+    options:
+    - Na
+    - So
+    - S
+    answer: Na
+    difficulty: 2
+    hints:
+    - It comes from its Latin name, natrium.
+    - S is sulphur.
+    solution: Sodium's symbol Na comes from the Latin natrium.
+    mistakes:
+      So: c8s8_symbols
+      S: c8s8_symbols
+  - prompt: How many atoms are in one molecule of NH₃ (ammonia)?
+    answer: '4'
+    check: 1 + 3
+    difficulty: 2
+    hints:
+    - N has no small number, so there is 1.
+    - H₃ means 3 hydrogen atoms.
+    solution: 1 nitrogen + 3 hydrogen = 4 atoms.
+    mistakes:
+      '3': c8s8_formula_count
+      '2': c8s8_formula_count
+  - prompt: How many oxygen atoms are in one molecule of H₂SO₄?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - Look at the number after O.
+    - O₄.
+    solution: O₄ means 4 oxygen atoms. (There are also 2 H and 1 S.)
+    mistakes:
+      '7': c8s8_formula_count
+      '1': c8s8_formula_count
+  - prompt: Sodium is a soft metal that reacts violently with water, and chlorine is a poisonous gas. Joined, they make table salt. What does this show?
+    options:
+    - A compound has properties different from its elements
+    - Salt is a mixture
+    - Elements keep their properties in a compound
+    answer: A compound has properties different from its elements
+    difficulty: 3
+    hints:
+    - Is salt dangerous to eat?
+    - Compare salt with sodium and chlorine.
+    solution: 'Salt is safe to eat although sodium and chlorine are dangerous: a compound has completely new properties.'
+    mistakes:
+      Salt is a mixture: c8s8_new_properties
+      Elements keep their properties in a compound: c8s8_new_properties
+  - prompt: Which property is typical of metals?
+    options:
+    - They conduct electricity
+    - They are always gases
+    - They break when beaten
+    answer: They conduct electricity
+    difficulty: 1
+    hints:
+    - What are wires made of?
+    - Metals can be beaten into sheets.
+    solution: Metals conduct heat and electricity and can be beaten into sheets.
+    mistakes:
+      They are always gases: c8s8_one_kind
+      They break when beaten: c8s8_one_kind
+  - prompt: Which is the symbol for gold?
+    options:
+    - Au
+    - Go
+    - G
+    answer: Au
+    difficulty: 2
+    hints:
+    - From the Latin aurum.
+    - It isn't the English letters.
+    solution: Gold's symbol Au comes from the Latin aurum.
+    mistakes:
+      Go: c8s8_symbols
+      G: c8s8_symbols
+  - prompt: Why can't an element be broken down into simpler substances?
+    options:
+    - It is made of only one kind of atom
+    - It is too hard
+    - It is always a metal
+    answer: It is made of only one kind of atom
+    difficulty: 2
+    hints:
+    - What is an element made of?
+    - There is nothing simpler to split it into.
+    solution: An element has only one kind of atom, so chemical means can't split it into anything simpler.
+    mistakes:
+      It is too hard: c8s8_one_kind
+      It is always a metal: c8s8_one_kind
+  - prompt: 'In water, hydrogen and oxygen are always in the mass ratio 1 : 8. What does a fixed ratio tell you?'
+    options:
+    - Water is a compound
+    - Water is a mixture
+    - Water is an element
+    answer: Water is a compound
+    difficulty: 2
+    hints:
+    - Mixtures can have any amounts.
+    - Compounds always have the same proportions.
+    solution: Elements in a compound combine in a fixed ratio; a mixture's parts can be in any amounts.
+    mistakes:
+      Water is a mixture: t8_mixture_vs_compound
+      Water is an element: c8s8_one_kind
 - code: cbse8s.nature.mixtures
   title: Mixtures and separating them
   after:
@@ -232,6 +410,66 @@ concepts:
       bin: Sieving
       clue: Different-sized particles.
       why: A sieve keeps the bigger bran.
+  lesson:
+    - teach: 'A mixture has two or more substances mixed but not joined chemically. They can be in any amounts, each part keeps its own properties, and they can be separated by physical methods. Sand and iron filings stay a mixture: the iron is still magnetic.'
+      picture:
+        kind: compare
+        columns:
+        - title: Mixture
+          points:
+          - Any amounts
+          - Parts keep their properties
+          - Separated physically
+        - title: Compound
+          points:
+          - Fixed ratio
+          - New properties
+          - Separated only chemically
+        alt: A mixture has any amounts, its parts keep their properties and can be separated physically; a compound has a fixed ratio and new properties.
+      check:
+        prompt: Which is a mixture?
+        options:
+        - Air
+        - Water
+        - Carbon dioxide
+        answer: Air
+        why: Air is several gases mixed in varying amounts. Water and carbon dioxide are compounds.
+    - teach: A homogeneous mixture looks the same all through, like salt water or air. A heterogeneous mixture has parts you can see, like sand in water or a salad.
+      check:
+        prompt: Which is a heterogeneous mixture?
+        options:
+        - Sand in water
+        - Sugar dissolved in water
+        - Air
+        answer: Sand in water
+        why: You can see the sand separate from the water, so it is not the same throughout.
+    - teach: 'Choose a separating method by how the parts differ. Size: sieving or hand-picking. Magnetism: a magnet. Heavy and light: winnowing. A solid that doesn''t dissolve: filtration. A solid that dissolves: evaporation. Different coloured dyes: chromatography.'
+      picture:
+        kind: compare
+        columns:
+        - title: Mixture
+          points:
+          - Iron + sand
+          - Husk + grain
+          - Chalk + water
+          - Salt + water
+          - Inks
+        - title: Method
+          points:
+          - Magnet
+          - Winnowing
+          - Filtration
+          - Evaporation
+          - Chromatography
+        alt: 'Methods: magnet for iron and sand, winnowing for husk and grain, filtration for chalk and water, evaporation for salt water, chromatography for inks.'
+      check:
+        prompt: Which method separates chalk powder from water?
+        options:
+        - Filtration
+        - Using a magnet
+        - Winnowing
+        answer: Filtration
+        why: Chalk doesn't dissolve, so filter paper catches it and lets the water through.
   items:
   - prompt: Which method separates iron filings from sand?
     options:
@@ -311,3 +549,129 @@ concepts:
     - Mixed iron can still be pulled out by a magnet.
     solution: Mixture parts aren't chemically joined, so they keep their properties and can be separated physically.
     mistakes: {"It has a fixed ratio": "t8_mixture_vs_compound", "It always contains water": "t8_mixture_vs_compound"}
+  - prompt: Which method separates small stones from rice?
+    options:
+    - Hand-picking
+    - Evaporation
+    - Chromatography
+    answer: Hand-picking
+    difficulty: 1
+    hints:
+    - The stones are big enough to see.
+    - You can remove them by hand.
+    solution: Stones are easy to see and few, so they are picked out by hand.
+    mistakes:
+      Evaporation: c8s8_method
+      Chromatography: c8s8_method
+  - prompt: Which method separates flour from bran?
+    options:
+    - Sieving
+    - Using a magnet
+    - Evaporation
+    answer: Sieving
+    difficulty: 1
+    hints:
+    - The bran pieces are bigger.
+    - Which tool lets small bits through?
+    solution: A sieve lets fine flour through and keeps the bigger bran.
+    mistakes:
+      Using a magnet: c8s8_method
+      Evaporation: c8s8_method
+  - prompt: Which of these mixtures is homogeneous, the same all the way through?
+    options:
+    - Lemonade (sugar, lemon juice and water)
+    - Oil and water
+    - Sand and pebbles
+    answer: Lemonade (sugar, lemon juice and water)
+    difficulty: 2
+    hints:
+    - It looks the same all through.
+    - Oil floats on water.
+    solution: In lemonade the sugar and juice are spread evenly. Oil and water, and sand and pebbles, show separate parts.
+    mistakes:
+      Oil and water: c8s8_same_throughout
+      Sand and pebbles: c8s8_same_throughout
+  - prompt: How can you get clean water from muddy water?
+    options:
+    - Let the mud settle, pour off the water, then filter it
+    - Use a magnet
+    - Add more mud
+    answer: Let the mud settle, pour off the water, then filter it
+    difficulty: 2
+    hints:
+    - Mud is heavier and doesn't dissolve.
+    - Settling, pouring off, then filtering.
+    solution: Sedimentation lets mud settle, decantation pours off the water, and filtration removes fine bits.
+    mistakes:
+      Use a magnet: c8s8_method
+      Add more mud: c8s8_method
+  - prompt: Why can iron filings be separated from sulphur powder with a magnet, but not from iron sulphide?
+    options:
+    - In iron sulphide, iron is joined chemically and is no longer magnetic iron
+    - Iron sulphide is too heavy
+    - Magnets don't work on powders
+    answer: In iron sulphide, iron is joined chemically and is no longer magnetic iron
+    difficulty: 3
+    hints:
+    - Iron and sulphur mixed is a mixture.
+    - Heated together they make a compound.
+    solution: In the mixture, iron keeps its magnetism. In the compound iron sulphide, the properties are new.
+    mistakes:
+      Iron sulphide is too heavy: t8_mixture_vs_compound
+      Magnets don't work on powders: t8_magnet_iron
+  - prompt: Salt is made from sea water in salt pans. Which method is used?
+    options:
+    - Evaporation
+    - Filtration
+    - Sieving
+    answer: Evaporation
+    difficulty: 1
+    hints:
+    - Salt is dissolved in the water.
+    - The Sun dries the water away.
+    solution: The Sun's heat evaporates the water and leaves the salt behind.
+    mistakes:
+      Filtration: t8_evaporate_salt
+      Sieving: t8_evaporate_salt
+  - prompt: Why can't you get sugar out of sugar water by filtering?
+    options:
+    - Dissolved sugar passes through the filter paper
+    - Sugar is too big
+    - Filter paper dissolves
+    answer: Dissolved sugar passes through the filter paper
+    difficulty: 2
+    hints:
+    - Sugar particles are spread among the water particles.
+    - They are tiny.
+    solution: Dissolved sugar particles are tiny and pass through the paper with the water; evaporation is needed.
+    mistakes:
+      Sugar is too big: c8s8_method
+      Filter paper dissolves: c8s8_method
+  - prompt: Which tells you a substance is a mixture, not a compound?
+    options:
+    - Its parts can be in any amounts and keep their own properties
+    - It has a fixed formula
+    - It has a single melting point
+    answer: Its parts can be in any amounts and keep their own properties
+    difficulty: 2
+    hints:
+    - Think of a fruit salad.
+    - A compound has a fixed formula.
+    solution: Mixtures have any proportions and their parts keep their properties; compounds have fixed ratios and new properties.
+    mistakes:
+      It has a fixed formula: t8_mixture_vs_compound
+      It has a single melting point: t8_mixture_vs_compound
+  - prompt: Which method can show that a green leaf's colour is a mix of several pigments?
+    options:
+    - Chromatography
+    - Winnowing
+    - Using a magnet
+    answer: Chromatography
+    difficulty: 2
+    hints:
+    - It separates coloured substances.
+    - They travel different distances up paper.
+    solution: In chromatography the pigments move up the paper at different speeds and separate.
+    mistakes:
+      Winnowing: t8_chromatography
+      Using a magnet: t8_chromatography

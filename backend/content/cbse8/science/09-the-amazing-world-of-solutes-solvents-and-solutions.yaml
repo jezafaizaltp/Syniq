@@ -15,6 +15,12 @@ tips:
   t8_solubility_temp: "Sugar dissolves faster and more in hot tea than in cold. What does heat do to solubility?"
   t8_solute: "The solute is what gets dissolved; the solvent does the dissolving."
   t8_universal: "Water dissolves very many substances, but does it dissolve oil?"
+  c8s9_roles: The solute is the thing that dissolves; the solvent is what it dissolves in, usually the larger amount.
+  c8s9_add_masses: Nothing is lost when something dissolves. Add the mass of what dissolves to the mass of the liquid.
+  c8s9_saturated: A saturated solution can't take any more at that temperature. What could let it take more?
+  c8s9_gas_warm: 'Gases are the opposite of most solids: they dissolve less as the water gets warmer.'
+  c8s9_density_calc: Density = mass ÷ volume. Divide the grams by the cubic centimetres.
+  c8s9_compare_water: Compare the density with water's, 1 g/cm³. Less dense floats; more dense sinks.
 concepts:
 - code: cbse8s.sol.solutions
   title: Solutes, solvents and solubility
@@ -111,6 +117,53 @@ concepts:
           w: 100
           s: 14
         say: 14 g all dissolves. The water takes 36 g first; only the extra stays.
+  lesson:
+    - teach: When sugar dissolves in water, the sugar is the solute, the water is the solvent, and the sugar water is a solution. A solution is a mixture that is the same throughout. Water dissolves so many things that it is called the universal solvent.
+      picture:
+        kind: flow
+        steps:
+        - Solute (sugar)
+        - + Solvent (water)
+        - = Solution (sugar water)
+        alt: Sugar, the solute, dissolves in water, the solvent, to make sugar water, a solution.
+      check:
+        prompt: In lemon juice mixed into water, what is the solvent?
+        options:
+        - Water
+        - Lemon juice
+        - The glass
+        answer: Water
+        why: The solvent is the liquid the other substance dissolves in, here the water.
+    - teach: There is a limit to how much solute a solvent can dissolve. A saturated solution can dissolve no more at that temperature. Heating usually lets more solid dissolve, so solubility of most solids increases with temperature.
+      check:
+        prompt: Extra sugar lies undissolved at the bottom of a glass of water. How can you dissolve more?
+        options:
+        - Warm the water
+        - Cool the water
+        - Add more sugar
+        answer: Warm the water
+        why: The solution is saturated; warming it lets it hold more sugar.
+    - teach: 'Gases behave the other way: they dissolve less in warm water. Fish breathe oxygen dissolved in water, so very warm water from factories can leave them short of oxygen. When something dissolves, no mass is lost: 10 g of salt in 90 g of water makes 100 g of solution.'
+      picture:
+        kind: compare
+        columns:
+        - title: Warmer water
+          points:
+          - More sugar or salt dissolves
+          - Less oxygen dissolves
+        - title: Colder water
+          points:
+          - Less sugar or salt dissolves
+          - More oxygen dissolves
+        alt: Warmer water dissolves more sugar and salt but less oxygen; colder water the other way round.
+      check:
+        prompt: 25 g of sugar dissolves in 175 g of water. What is the mass of the solution?
+        options:
+        - 200 g
+        - 175 g
+        - 150 g
+        answer: 200 g
+        why: 'Mass is kept: 25 + 175 = 200 g.'
   items:
   - prompt: In salt water, which is the solute?
     options:
@@ -186,6 +239,126 @@ concepts:
     - 40 + 160.
     solution: '40 + 160 = 200 g: mass is not lost when dissolving.'
     mistakes: {"160": "t8_mass_conserved", "120": "t8_mass_conserved"}
+  - prompt: In salt water, which is the solvent?
+    options:
+    - Water
+    - Salt
+    - Both
+    answer: Water
+    difficulty: 1
+    hints:
+    - The solvent does the dissolving.
+    - Salt is what gets dissolved.
+    solution: The water dissolves the salt, so water is the solvent and salt is the solute.
+    mistakes:
+      Salt: c8s9_roles
+      Both: c8s9_roles
+  - prompt: 30 g of salt dissolves in 120 g of water. What is the mass of the solution, in grams?
+    answer: '150'
+    check: 30 + 120
+    difficulty: 1
+    hints:
+    - Mass is not lost.
+    - 30 + 120.
+    solution: 30 + 120 = 150 g.
+    mistakes:
+      '120': c8s9_add_masses
+      '90': c8s9_add_masses
+  - prompt: A solution has a mass of 250 g and contains 50 g of sugar. How much water is in it, in grams?
+    answer: '200'
+    check: 250 - 50
+    difficulty: 2
+    hints:
+    - Solution = solute + solvent.
+    - 250 − 50.
+    solution: 250 − 50 = 200 g of water.
+    mistakes:
+      '300': c8s9_add_masses
+      '250': c8s9_add_masses
+  - prompt: Why are fizzy drinks kept cold?
+    options:
+    - Gases stay dissolved better in cold liquid
+    - Cold drinks have more sugar
+    - Cold stops the bottle breaking
+    answer: Gases stay dissolved better in cold liquid
+    difficulty: 2
+    hints:
+    - The fizz is dissolved carbon dioxide.
+    - How does temperature affect dissolved gas?
+    solution: Carbon dioxide dissolves better in cold liquid, so cold drinks stay fizzy longer.
+    mistakes:
+      Cold drinks have more sugar: c8s9_gas_warm
+      Cold stops the bottle breaking: c8s9_gas_warm
+  - prompt: Which substance does NOT dissolve in water?
+    options:
+    - Sand
+    - Salt
+    - Sugar
+    answer: Sand
+    difficulty: 1
+    hints:
+    - Stir each into water.
+    - Which one settles at the bottom?
+    solution: Sand stays as grains and settles; salt and sugar dissolve.
+    mistakes:
+      Salt: t8_universal
+      Sugar: t8_universal
+  - prompt: How can you tell that a solution is saturated?
+    options:
+    - Extra solute stays undissolved however much you stir
+    - It changes colour
+    - It starts to boil
+    answer: Extra solute stays undissolved however much you stir
+    difficulty: 2
+    hints:
+    - It can't take any more.
+    - What happens to extra solute?
+    solution: In a saturated solution, added solute stays at the bottom at that temperature.
+    mistakes:
+      It changes colour: c8s9_saturated
+      It starts to boil: c8s9_saturated
+  - prompt: A hot saturated sugar solution is cooled. What happens?
+    options:
+    - Some sugar comes out as crystals
+    - More sugar dissolves
+    - The water disappears
+    answer: Some sugar comes out as crystals
+    difficulty: 3
+    hints:
+    - Cold water can hold less sugar.
+    - Where does the extra go?
+    solution: Cooling lowers how much sugar can stay dissolved, so the extra forms crystals.
+    mistakes:
+      More sugar dissolves: t8_solubility_temp
+      The water disappears: t8_solubility_temp
+  - prompt: Why does stirring help sugar dissolve faster?
+    options:
+    - It brings fresh water to the sugar
+    - It makes the sugar heavier
+    - It cools the water
+    answer: It brings fresh water to the sugar
+    difficulty: 2
+    hints:
+    - Water next to the sugar gets sweet.
+    - Stirring moves it away.
+    solution: Stirring moves sweet water away and brings fresh water to the sugar grains.
+    mistakes:
+      It makes the sugar heavier: c8s9_saturated
+      It cools the water: c8s9_saturated
+  - prompt: In a solution of iodine in alcohol (tincture of iodine), which is the solute?
+    options:
+    - Iodine
+    - Alcohol
+    - Water
+    answer: Iodine
+    difficulty: 2
+    hints:
+    - Which one is dissolved?
+    - The alcohol is the liquid.
+    solution: Iodine dissolves in alcohol, so iodine is the solute and alcohol the solvent.
+    mistakes:
+      Alcohol: t8_solute
+      Water: t8_solute
 - code: cbse8s.sol.density
   title: Density, floating and sinking
   after:
@@ -279,6 +452,56 @@ concepts:
           m: 300
           v: 180
         say: '300 × 0.6 = 180 multiplies. Divide: 300 ÷ 0.6.'
+  lesson:
+    - teach: 'Density tells how much mass is packed into each unit of volume: density = mass ÷ volume, in g/cm³. Water''s density is 1 g/cm³. A block of 40 g and 10 cm³ has a density of 4 g/cm³.'
+      picture:
+        kind: flow
+        steps:
+        - Mass 40 g
+        - Volume 10 cm³
+        - 40 ÷ 10
+        - Density 4 g/cm³
+        alt: A block of 40 grams and 10 cubic centimetres has a density of 4 grams per cubic centimetre.
+      check:
+        prompt: A stone has mass 30 g and volume 10 cm³. What is its density?
+        options:
+        - 3 g/cm³
+        - 300 g/cm³
+        - 20 g/cm³
+        answer: 3 g/cm³
+        why: 30 ÷ 10 = 3 g/cm³.
+    - teach: An object floats in a liquid if it is less dense than the liquid, and sinks if it is denser. Wood (about 0.6 g/cm³) floats on water; iron (about 7.9 g/cm³) sinks. Oil is less dense than water, so it floats on top.
+      picture:
+        kind: compare
+        columns:
+        - title: Floats on water
+          points:
+          - Wood 0.6
+          - Ice 0.92
+          - Oil 0.9
+        - title: Sinks in water
+          points:
+          - Iron 7.9
+          - Stone 2.5
+          - Glass 2.5
+        alt: Wood, ice and oil are less dense than water and float; iron, stone and glass are denser and sink.
+      check:
+        prompt: A block has density 0.8 g/cm³. What does it do in water?
+        options:
+        - Floats
+        - Sinks
+        - Dissolves
+        answer: Floats
+        why: 0.8 is less than water's 1 g/cm³, so it floats.
+    - teach: 'Density belongs to the material, not the size of the piece: a big and a small iron nail have the same density. Dissolving salt makes water denser, so things float more easily in sea water, and an egg that sinks in tap water can float in strong salt water.'
+      check:
+        prompt: A big log and a small twig of the same wood are put in water. What happens?
+        options:
+        - Both float
+        - The log sinks, the twig floats
+        - Both sink
+        answer: Both float
+        why: They are the same material, so they have the same density and both float.
   items:
   - prompt: A block has a mass of 60 g and a volume of 20 cm³. Find its density, in g/cm³.
     answer: '3'
@@ -351,3 +574,117 @@ concepts:
     - Not on the size.
     solution: Same material, same density, whatever the size.
     mistakes: {"The big one is denser": "t8_density_material", "The small one is denser": "t8_density_material"}
+  - prompt: A metal block has mass 270 g and volume 100 cm³. Find its density, in g/cm³.
+    answer: '2.7'
+    check: 270/100
+    difficulty: 1
+    hints:
+    - Density = mass ÷ volume.
+    - 270 ÷ 100.
+    solution: 270 ÷ 100 = 2.7 g/cm³. (This is aluminium.)
+    mistakes:
+      '27000': c8s_density_divide
+      '370': c8s9_density_calc
+  - prompt: A liquid has density 0.8 g/cm³. What is the mass of 50 cm³ of it, in grams?
+    answer: '40'
+    check: 0.8*50
+    difficulty: 2
+    hints:
+    - Mass = density × volume.
+    - 0.8 × 50.
+    solution: 0.8 × 50 = 40 g.
+    mistakes:
+      '62.5': t8_mass_density
+      '50.8': t8_mass_density
+  - prompt: A stone of density 2.5 g/cm³ has mass 100 g. What is its volume, in cm³?
+    answer: '40'
+    check: 100/2.5
+    difficulty: 3
+    hints:
+    - Volume = mass ÷ density.
+    - 100 ÷ 2.5.
+    solution: 100 ÷ 2.5 = 40 cm³.
+    mistakes:
+      '250': c8s9_density_calc
+      '97.5': c8s9_density_calc
+  - prompt: Which will sink in water?
+    options:
+    - A block of density 1.4 g/cm³
+    - A block of density 0.7 g/cm³
+    - A block of density 0.95 g/cm³
+    answer: A block of density 1.4 g/cm³
+    difficulty: 1
+    hints:
+    - Water is 1 g/cm³.
+    - Which one is denser than water?
+    solution: Only 1.4 g/cm³ is denser than water, so that block sinks.
+    mistakes:
+      A block of density 0.7 g/cm³: c8s9_compare_water
+      A block of density 0.95 g/cm³: c8s9_compare_water
+  - prompt: Why does ice float on water?
+    options:
+    - Ice is less dense than liquid water
+    - Ice is lighter than air
+    - Ice has no mass
+    answer: Ice is less dense than liquid water
+    difficulty: 2
+    hints:
+    - Ice's density is about 0.92 g/cm³.
+    - Compare with water.
+    solution: Ice (about 0.92 g/cm³) is less dense than water (1 g/cm³), so it floats.
+    mistakes:
+      Ice is lighter than air: c8s9_compare_water
+      Ice has no mass: c8s9_compare_water
+  - prompt: An egg sinks in tap water. What can make it float?
+    options:
+    - Stirring a lot of salt into the water
+    - Using a bigger glass
+    - Adding ice
+    answer: Stirring a lot of salt into the water
+    difficulty: 2
+    hints:
+    - Salt water is denser.
+    - The egg floats if the liquid is denser than it.
+    solution: Salt makes the water denser than the egg, so the egg floats.
+    mistakes:
+      Using a bigger glass: t8_salt_denser
+      Adding ice: t8_salt_denser
+  - prompt: A small piece is cut off a block of density 3 g/cm³. What is the small piece's density?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - Density depends on the material.
+    - The material hasn't changed.
+    solution: Cutting doesn't change the material, so the density is still 3 g/cm³.
+    mistakes:
+      '1': t8_density_material
+      '1.5': t8_density_material
+  - prompt: Oil, water and honey are poured into a glass. Which ends up at the bottom?
+    options:
+    - Honey
+    - Oil
+    - Water
+    answer: Honey
+    difficulty: 2
+    hints:
+    - The densest liquid sinks lowest.
+    - Honey is thick and heavy for its size.
+    solution: Honey is the densest, so it sinks to the bottom; water sits in the middle and oil on top.
+    mistakes:
+      Oil: t8_oil_density
+      Water: t8_oil_density
+  - prompt: 'Which has the greater density: 1 kg of cotton or 1 kg of iron?'
+    options:
+    - Iron
+    - Cotton
+    - They are the same
+    answer: Iron
+    difficulty: 3
+    hints:
+    - Their masses are equal.
+    - Which takes up far less space?
+    solution: Both have mass 1 kg, but iron takes up much less volume, so its density is much greater.
+    mistakes:
+      Cotton: c8s9_density_calc
+      They are the same: c8s9_density_calc

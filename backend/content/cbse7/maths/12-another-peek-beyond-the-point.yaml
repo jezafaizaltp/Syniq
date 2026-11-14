@@ -13,6 +13,10 @@ tips:
   t7_divide_decimal: "Share 7.5 into 3 equal parts. Keep the point lined up."
   t7_divide_to_decimal: "7 ÷ 4: after 1 whole, keep dividing the remainder by adding zeros after a point."
   t7_pieces_quarter: "How many quarters of a metre fit in 1 m? And in 3 m?"
+  c7m12_places: Multiply as if there were no points, then count the decimal places in both numbers together and give the answer that many places.
+  c7m12_shift: Multiplying by 10, 100 or 1000 moves the point right by 1, 2 or 3 places; dividing moves it left.
+  c7m12_whole_divisor: 'Make the divisor a whole number: multiply BOTH numbers by the same 10 or 100, then divide.'
+  c7m12_size: Estimate first. Multiplying by a number less than 1 makes it smaller; dividing by a number less than 1 makes it bigger.
 concepts:
 - code: cbse7m.dec2.multiply
   title: Multiplying decimals
@@ -79,6 +83,60 @@ concepts:
       bin: '3'
       clue: 6 × 5 = 30; one place.
       why: 3.0.
+  lesson:
+    - teach: 'Multiplying by 10 moves every digit one place to the left, so the point seems to move one place right: 3.47 × 10 = 34.7, × 100 = 347, × 1000 = 3470.'
+      picture:
+        kind: flow
+        steps:
+        - '3.47'
+        - × 10 → 34.7
+        - × 100 → 347
+        - × 1000 → 3470
+        alt: Each multiplication by 10 moves the decimal point one place right.
+      check:
+        prompt: Find 0.62 × 100.
+        options:
+        - '62'
+        - '6.2'
+        - '620'
+        answer: '62'
+        why: Two places right.
+    - teach: 'To multiply decimals, multiply as whole numbers, then count the decimal places. 0.3 × 0.2: 3 × 2 = 6, and there are 2 places in total, so 0.06. In a picture: 0.3 of a 10 by 10 square times 0.2 of it covers 6 of the 100 small squares.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 3
+          label: '0.3'
+        - size: 7
+          label: '0.7'
+        rows:
+        - size: 2
+          label: '0.2'
+        - size: 8
+          label: '0.8'
+        cells:
+        - - '0.06'
+          - '0.14'
+        - - '0.24'
+          - '0.56'
+        alt: A unit square split 0.3 and 0.7 across, 0.2 and 0.8 down. The corner rectangle is 0.06; the four parts add to 1.
+      check:
+        prompt: Find 0.4 × 0.2.
+        options:
+        - '0.08'
+        - '0.8'
+        - '8'
+        answer: '0.08'
+        why: '4 × 2 = 8, with 2 decimal places: 0.08.'
+    - teach: Estimate to check where the point goes. 4.8 × 2.1 is about 5 × 2 = 10, and 48 × 21 = 1008 with 2 places gives 10.08, which fits.
+      check:
+        prompt: Which is the best estimate of 6.9 × 3.2?
+        options:
+        - '21'
+        - '2.1'
+        - '210'
+        answer: '21'
+        why: About 7 × 3 = 21.
   items:
   - prompt: Find 2.35 × 100.
     answer: '235'
@@ -136,6 +194,130 @@ concepts:
     - 1025 × 4 = 4100.
     solution: 102.5 × 4 = ₹410.
     mistakes: {"4100": "t7_cost_decimal", "408": "t7_cost_decimal"}
+  - prompt: Find 4.06 × 1000.
+    answer: '4060'
+    check: 4.06*1000
+    difficulty: 1
+    hints:
+    - Move the point 3 places right.
+    - Fill empty places with zeros.
+    solution: 'Step 1: 4.06 → 40.6 → 406 → 4060. Step 2: three places right gives 4060.'
+    mistakes:
+      '406': c7m12_shift
+      '40.6': c7m12_shift
+  - prompt: Find 0.7 × 0.6.
+    answer: '0.42'
+    check: 0.7*0.6
+    difficulty: 1
+    hints:
+    - 7 × 6 = 42.
+    - 'Count the decimal places: one in each number.'
+    solution: 'Step 1: 7 × 6 = 42. Step 2: 2 decimal places in total, so 0.42.'
+    mistakes:
+      '4.2': c7m12_places
+      '42': c7m12_places
+  - prompt: Find 2.5 × 6.
+    answer: '15'
+    check: 2.5*6
+    difficulty: 1
+    hints:
+    - 25 × 6 = 150.
+    - One decimal place.
+    solution: 'Step 1: 25 × 6 = 150. Step 2: one place: 15.0 = 15.'
+    mistakes:
+      '150': c7m12_places
+      '1.5': c7m12_places
+  - prompt: Find 1.5 × 0.04.
+    answer: '0.06'
+    check: 1.5*0.04
+    difficulty: 2
+    hints:
+    - 15 × 4 = 60.
+    - Count 1 + 2 = 3 decimal places.
+    solution: 'Step 1: 15 × 4 = 60. Step 2: 3 decimal places: 0.060 = 0.06.'
+    mistakes:
+      '0.6': c7m12_places
+      '6': c7m12_places
+  - prompt: Find 3.2 × 2.5.
+    answer: '8'
+    check: 3.2*2.5
+    difficulty: 2
+    hints:
+    - 32 × 25 = 800.
+    - Two decimal places in total.
+    solution: 'Step 1: 32 × 25 = 800. Step 2: 2 places: 8.00 = 8.'
+    mistakes:
+      '80': c7m12_places
+      '0.8': c7m12_places
+  - prompt: Rice costs ₹48.5 per kg. Find the cost of 2.4 kg, in rupees.
+    answer: '116.4'
+    check: 48.5*2.4
+    difficulty: 2
+    hints:
+    - 485 × 24 = 11640.
+    - Two decimal places in total.
+    solution: 'Step 1: 485 × 24 = 11640. Step 2: 2 places: 116.40 = ₹116.40.'
+    mistakes:
+      '1164': c7m12_places
+      '11.64': c7m12_places
+  - prompt: A square garden has sides of 1.2 m. Find its area, in m².
+    answer: '1.44'
+    check: 1.2*1.2
+    difficulty: 2
+    hints:
+    - Area of a square = side × side.
+    - 12 × 12 = 144.
+    solution: 'Step 1: 1.2 × 1.2. Step 2: 12 × 12 = 144, with 2 places: 1.44 m².'
+    mistakes:
+      '14.4': c7m12_places
+      '4.8': c7m12_size
+  - prompt: Which is less than 50?
+    options:
+    - 50 × 0.9
+    - 50 × 1.1
+    - 50 × 2
+    answer: 50 × 0.9
+    difficulty: 2
+    hints:
+    - Compare each multiplier with 1.
+    - Which is less than 1?
+    solution: 0.9 is less than 1, so 50 × 0.9 = 45 is less than 50.
+    mistakes:
+      50 × 1.1: c7m12_size
+      50 × 2: c7m12_size
+  - prompt: Find 0.25 × 0.4 × 10.
+    answer: '1'
+    check: 0.25*0.4*10
+    difficulty: 3
+    hints:
+    - 0.25 × 0.4 first.
+    - 25 × 4 = 100, with 3 places.
+    solution: 'Step 1: 0.25 × 0.4 = 0.100 = 0.1. Step 2: 0.1 × 10 = 1.'
+    mistakes:
+      '10': c7m12_places
+      '0.1': c7m12_shift
+  - prompt: A car uses 0.08 litres of petrol per km. How much does it use for 125 km, in litres?
+    answer: '10'
+    check: 0.08*125
+    difficulty: 3
+    hints:
+    - 8 × 125 = 1000.
+    - Two decimal places.
+    solution: 'Step 1: 8 × 125 = 1000. Step 2: 2 places: 10.00 = 10 litres.'
+    mistakes:
+      '100': c7m12_places
+      '1': c7m12_places
+  - prompt: Given 37 × 46 = 1702, find 3.7 × 0.46.
+    answer: '1.702'
+    check: 3.7*0.46
+    difficulty: 3
+    hints:
+    - 'Count decimal places: 1 + 2.'
+    - Put 3 places in 1702.
+    solution: 'Step 1: 3.7 has 1 place and 0.46 has 2, so 3 in all. Step 2: 1.702. (Check: about 4 × 0.5 = 2.)'
+    mistakes:
+      '17.02': c7m12_places
+      '0.1702': c7m12_places
 - code: cbse7m.dec2.divide
   title: Dividing decimals
   after:
@@ -203,6 +385,50 @@ concepts:
       bin: '60'
       clue: 'Two places: 120 ÷ 2.'
       why: '60.'
+  lesson:
+    - teach: 'Dividing by 10, 100 or 1000 moves the point 1, 2 or 3 places left: 52.8 ÷ 10 = 5.28, ÷ 100 = 0.528. Decimal ÷ whole number: divide as usual and keep the point in line: 8.4 ÷ 4 = 2.1.'
+      picture:
+        kind: flow
+        steps:
+        - '52.8'
+        - ÷ 10 → 5.28
+        - ÷ 100 → 0.528
+        - ÷ 1000 → 0.0528
+        alt: Each division by 10 moves the point one place left.
+      check:
+        prompt: Find 6.3 ÷ 3.
+        options:
+        - '2.1'
+        - '21'
+        - '0.21'
+        answer: '2.1'
+        why: 63 ÷ 3 = 21, with the point kept in place.
+    - teach: 'To divide by a decimal, make the divisor whole: multiply both numbers by the same power of 10. The answer does not change. 2.4 ÷ 0.08 = 240 ÷ 8 = 30.'
+      picture:
+        kind: flow
+        steps:
+        - 2.4 ÷ 0.08
+        - × 100 both
+        - 240 ÷ 8
+        - '30'
+        alt: Multiplying both numbers by 100 turns 2.4 ÷ 0.08 into 240 ÷ 8.
+      check:
+        prompt: Find 1.5 ÷ 0.3.
+        options:
+        - '5'
+        - '0.5'
+        - '50'
+        answer: '5'
+        why: 15 ÷ 3 = 5.
+    - teach: 'Dividing by a number less than 1 gives a bigger answer: 2 ÷ 0.5 = 4, because two halves fit in each whole. When division does not come out evenly, add zeros after the point and keep going: 3 ÷ 8 = 0.375.'
+      check:
+        prompt: Find 5 ÷ 0.5.
+        options:
+        - '10'
+        - '2.5'
+        - '0.1'
+        answer: '10'
+        why: Two halves in each of 5 wholes.
   items:
   - prompt: Find 45.6 ÷ 100.
     answer: '0.456'
@@ -264,3 +490,127 @@ concepts:
     - 6 × 0.5 = 3.
     solution: 'Dividing by a number less than 1 makes it bigger: 12 vs 3.'
     mistakes: {"6 × 0.5": "t7_divide_by_point5", "They are equal": "t7_divide_by_point5"}
+  - prompt: Find 368.5 ÷ 1000.
+    answer: '0.3685'
+    check: 368.5/1000
+    difficulty: 1
+    hints:
+    - Move the point 3 places left.
+    - 368.5 → 36.85 → 3.685 → …
+    solution: 'Step 1: three places left. Step 2: 368.5 → 0.3685.'
+    mistakes:
+      '3.685': c7m12_shift
+      '368500': c7m12_shift
+  - prompt: Find 9.6 ÷ 4.
+    answer: '2.4'
+    check: 9.6/4
+    difficulty: 1
+    hints:
+    - 96 ÷ 4 = 24.
+    - Keep the point in line.
+    solution: 'Step 1: 96 ÷ 4 = 24. Step 2: one decimal place: 2.4.'
+    mistakes:
+      '24': c7m12_places
+      '0.24': c7m12_places
+  - prompt: Find 0.36 ÷ 0.6.
+    answer: '0.6'
+    check: 0.36/0.6
+    difficulty: 1
+    hints:
+    - 'Multiply both by 10: 3.6 ÷ 6.'
+    - 36 ÷ 6 = 6, then place the point.
+    solution: 'Step 1: 0.36 ÷ 0.6 = 3.6 ÷ 6. Step 2: = 0.6.'
+    mistakes:
+      '6': c7m12_whole_divisor
+      '0.06': c7m12_whole_divisor
+  - prompt: Find 4.5 ÷ 0.05.
+    answer: '90'
+    check: 4.5/0.05
+    difficulty: 2
+    hints:
+    - Multiply both by 100.
+    - 450 ÷ 5.
+    solution: 'Step 1: 4.5 ÷ 0.05 = 450 ÷ 5. Step 2: = 90.'
+    mistakes:
+      '9': c7m12_whole_divisor
+      '0.9': c7m12_whole_divisor
+  - prompt: Write 5 ÷ 8 as a decimal.
+    answer: '0.625'
+    check: 5/8
+    difficulty: 2
+    hints:
+    - Write 5 as 5.000 and divide.
+    - 50 ÷ 8 = 6 remainder 2, and so on.
+    solution: 'Step 1: 5.000 ÷ 8: 50 ÷ 8 = 6 r 2; 20 ÷ 8 = 2 r 4; 40 ÷ 8 = 5. Step 2: 0.625.'
+    mistakes:
+      '1.6': c7m12_size
+      '0.58': c7m12_places
+  - prompt: A 7.5 m pipe is cut into 6 equal parts. How long is each part, in m?
+    answer: '1.25'
+    check: 7.5/6
+    difficulty: 2
+    hints:
+    - 7.5 ÷ 6.
+    - 'Add a zero: 7.50 ÷ 6.'
+    solution: 'Step 1: 7.50 ÷ 6. Step 2: 6 into 7 is 1 r 1.5 → 1.25 m.'
+    mistakes:
+      '12.5': c7m12_places
+      '0.8': c7m12_size
+  - prompt: ₹22.50 buys 1.5 kg of tomatoes. What is the cost per kg, in rupees?
+    answer: '15'
+    check: 22.5/1.5
+    difficulty: 2
+    hints:
+    - Divide cost by weight.
+    - 'Multiply both by 10: 225 ÷ 15.'
+    solution: 'Step 1: 22.5 ÷ 1.5 = 225 ÷ 15. Step 2: = ₹15 per kg.'
+    mistakes:
+      '1.5': c7m12_whole_divisor
+      '150': c7m12_whole_divisor
+  - prompt: Which is greater than 8?
+    options:
+    - 8 ÷ 0.4
+    - 8 ÷ 4
+    - 8 × 0.4
+    answer: 8 ÷ 0.4
+    difficulty: 2
+    hints:
+    - Dividing by a number less than 1 makes it bigger.
+    - Work out 8 ÷ 0.4.
+    solution: 8 ÷ 0.4 = 20, which is greater than 8. 8 ÷ 4 = 2 and 8 × 0.4 = 3.2 are smaller.
+    mistakes:
+      8 ÷ 4: c7m12_size
+      8 × 0.4: c7m12_size
+  - prompt: A bottle holds 1.2 litres. How many 0.15 litre cups can it fill?
+    answer: '8'
+    check: 1.2/0.15
+    difficulty: 3
+    hints:
+    - Multiply both by 100.
+    - 120 ÷ 15.
+    solution: 'Step 1: 1.2 ÷ 0.15 = 120 ÷ 15. Step 2: = 8 cups.'
+    mistakes:
+      '0.8': c7m12_whole_divisor
+      '80': c7m12_whole_divisor
+  - prompt: A number multiplied by 0.25 gives 3. What is the number?
+    answer: '12'
+    check: 3/0.25
+    difficulty: 3
+    hints:
+    - Undo the multiplication by dividing.
+    - 3 ÷ 0.25 = 300 ÷ 25.
+    solution: 'Step 1: number = 3 ÷ 0.25. Step 2: 300 ÷ 25 = 12. Check: 12 × 0.25 = 3.'
+    mistakes:
+      '0.75': c7m12_size
+      '1.2': c7m12_whole_divisor
+  - prompt: Given 1755 ÷ 27 = 65, find 17.55 ÷ 2.7.
+    answer: '6.5'
+    check: 17.55/2.7
+    difficulty: 3
+    hints:
+    - 'Make the divisor whole: × 10 both.'
+    - 175.5 ÷ 27.
+    solution: 'Step 1: 17.55 ÷ 2.7 = 175.5 ÷ 27. Step 2: that is 1755 ÷ 27 ÷ 10 = 65 ÷ 10 = 6.5.'
+    mistakes:
+      '65': c7m12_whole_divisor
+      '0.65': c7m12_whole_divisor

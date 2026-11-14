@@ -13,6 +13,11 @@ tips:
   t7_lcm: "The LCM is the smallest number both divide into. List multiples of the bigger one until the other divides it."
   t7_primes_only: "Every factor must be prime. Can 10, 6 or 30 be broken down further?"
   t7_two_primes: "77 is their product and 7 divides only one of them. A prime's only factors are 1 and itself. What do two different primes both share?"
+  c7m11_shared: Write both numbers as products of primes, then keep only the primes BOTH have, each as often as it appears in both.
+  c7m11_every: For the smallest common multiple, use every prime that appears, each the greatest number of times it appears in either number.
+  c7m11_which: Sharing or cutting into the biggest equal groups uses the common factor; things happening together again uses the common multiple.
+  c7m11_tree: Keep splitting until every branch ends in a prime. Then multiply the primes back to check you get the number.
+  c7m11_product: For two numbers, HCF × LCM equals the two numbers multiplied together.
 concepts:
 - code: cbse7m.hcf.primes
   title: Prime factorisation and HCF
@@ -92,6 +97,56 @@ concepts:
       - when:
           val: 5
         say: Both are divisible by 3 too.
+  lesson:
+    - teach: 'Every whole number above 1 is a product of primes in just one way. Split it in a factor tree until every branch ends in a prime: 72 = 8 × 9 = 2 × 2 × 2 × 3 × 3 = 2³ × 3².'
+      picture:
+        kind: flow
+        steps:
+        - '72'
+        - 8 × 9
+        - 2 × 4 × 3 × 3
+        - 2 × 2 × 2 × 3 × 3
+        - 2³ × 3²
+        alt: Factor tree steps from 72 down to 2³ × 3².
+      check:
+        prompt: Which is the prime factorisation of 45?
+        options:
+        - 3 × 3 × 5
+        - 5 × 9
+        - 3 × 15
+        answer: 3 × 3 × 5
+        why: 9 and 15 are not prime; 3, 3 and 5 are.
+    - teach: The HCF (highest common factor) is the largest number that divides both. Write both as primes and multiply the primes they share. 30 = 2 × 3 × 5 and 42 = 2 × 3 × 7 share 2 and 3, so the HCF is 6.
+      picture:
+        kind: compare
+        columns:
+        - title: '30'
+          points:
+          - 2 × 3 × 5
+        - title: Shared
+          points:
+          - 2 × 3 = 6
+        - title: '42'
+          points:
+          - 2 × 3 × 7
+        alt: 30 and 42 share the primes 2 and 3, so their HCF is 6.
+      check:
+        prompt: Find the HCF of 20 = 2 × 2 × 5 and 30 = 2 × 3 × 5.
+        options:
+        - '10'
+        - '5'
+        - '60'
+        answer: '10'
+        why: 'They share one 2 and one 5: 2 × 5 = 10.'
+    - teach: 'HCF solves ''largest equal pieces with nothing left over'' problems. 18 m and 24 m ropes cut into the longest equal pieces: the HCF is 6, so pieces are 6 m long. Two numbers with no common prime have HCF 1 (they are co-prime).'
+      check:
+        prompt: What is the HCF of 8 and 15?
+        options:
+        - '1'
+        - '8'
+        - '120'
+        answer: '1'
+        why: 8 = 2³ and 15 = 3 × 5 share no prime.
   items:
   - prompt: Which is the prime factorisation of 60?
     options:
@@ -152,6 +207,133 @@ concepts:
     - Nothing else is shared.
     solution: Two different primes share only the factor 1.
     mistakes: {"77": "t7_two_primes", "7": "t7_two_primes"}
+  - prompt: Which is the prime factorisation of 84?
+    options:
+    - 2 × 2 × 3 × 7
+    - 4 × 3 × 7
+    - 2 × 6 × 7
+    answer: 2 × 2 × 3 × 7
+    difficulty: 1
+    hints:
+    - 84 = 4 × 21.
+    - Break 4 and 21 into primes.
+    solution: 84 = 4 × 21 = 2 × 2 × 3 × 7. 4 and 6 are not prime.
+    mistakes:
+      4 × 3 × 7: c7m11_tree
+      2 × 6 × 7: c7m11_tree
+  - prompt: Find the HCF of 16 and 40.
+    answer: '8'
+    check: '8'
+    difficulty: 1
+    hints:
+    - 16 = 2⁴, 40 = 2³ × 5.
+    - How many 2s do both have?
+    solution: 'Step 1: 16 = 2 × 2 × 2 × 2 and 40 = 2 × 2 × 2 × 5. Step 2: they share three 2s: 2 × 2 × 2 = 8.'
+    mistakes:
+      '4': c7m11_shared
+      '80': c7m11_which
+  - prompt: Find the HCF of 27 and 36.
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - 27 = 3³, 36 = 2² × 3².
+    - Shared 3s?
+    solution: 'Step 1: 27 = 3 × 3 × 3 and 36 = 2 × 2 × 3 × 3. Step 2: they share two 3s: 9.'
+    mistakes:
+      '3': c7m11_shared
+      '108': c7m11_which
+  - prompt: Find the HCF of 35 and 64.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - 35 = 5 × 7.
+    - 64 is only 2s.
+    solution: 35 = 5 × 7 and 64 = 2⁶ share no prime, so the HCF is 1.
+    mistakes:
+      '7': c7m11_shared
+      '5': c7m11_shared
+  - prompt: Find the HCF of 48 and 72.
+    answer: '24'
+    check: '24'
+    difficulty: 2
+    hints:
+    - 48 = 2⁴ × 3, 72 = 2³ × 3².
+    - Take the smaller count of each prime.
+    solution: 'Step 1: 48 = 2⁴ × 3 and 72 = 2³ × 3². Step 2: shared: 2³ × 3 = 24.'
+    mistakes:
+      '12': c7m11_shared
+      '144': c7m11_which
+  - prompt: Find the HCF of 12, 18 and 30.
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - 12 = 2² × 3, 18 = 2 × 3², 30 = 2 × 3 × 5.
+    - Which primes are in all three?
+    solution: 'Step 1: all three contain one 2 and one 3. Step 2: HCF = 2 × 3 = 6.'
+    mistakes:
+      '3': c7m11_shared
+      '180': c7m11_which
+  - prompt: Two ropes of 45 m and 60 m are cut into equal pieces as long as possible, with nothing left. How long is each piece, in m?
+    answer: '15'
+    check: '15'
+    difficulty: 2
+    hints:
+    - 'Longest equal pieces: use the HCF.'
+    - 45 = 3² × 5, 60 = 2² × 3 × 5.
+    solution: 'Step 1: 45 and 60 share 3 and 5. Step 2: HCF = 15, so each piece is 15 m.'
+    mistakes:
+      '5': c7m11_shared
+      '180': c7m11_which
+  - prompt: A hall is 16 m by 20 m. What is the largest square tile side, in m, that covers it with whole tiles?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - The side must divide both 16 and 20.
+    - Find the HCF.
+    solution: 'Step 1: 16 = 2⁴ and 20 = 2² × 5. Step 2: HCF = 2² = 4 m.'
+    mistakes:
+      '2': c7m11_shared
+      '80': c7m11_which
+  - prompt: There are 60 boys and 84 girls. They form the largest possible equal teams with only boys or only girls in each. How many students in each team?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - The team size must divide 60 and 84.
+    - Find the HCF of 60 and 84.
+    solution: 'Step 1: 60 = 2² × 3 × 5 and 84 = 2² × 3 × 7. Step 2: HCF = 2² × 3 = 12 students per team.'
+    mistakes:
+      '6': c7m11_shared
+      '420': c7m11_which
+  - prompt: The HCF of two numbers is 1. Which pair could they be?
+    options:
+    - 9 and 16
+    - 9 and 15
+    - 8 and 12
+    answer: 9 and 16
+    difficulty: 3
+    hints:
+    - Find a pair with no common prime.
+    - 9 = 3², 16 = 2⁴.
+    solution: 9 and 16 share no prime, so their HCF is 1. 9 and 15 share 3; 8 and 12 share 4.
+    mistakes:
+      9 and 15: c7m11_shared
+      8 and 12: c7m11_shared
+  - prompt: A number's prime factorisation is 2 × 3² × 5. What is the number?
+    answer: '90'
+    check: 2*3**2*5
+    difficulty: 3
+    hints:
+    - 3² means 3 × 3.
+    - 2 × 9 × 5.
+    solution: 'Step 1: 3² = 9. Step 2: 2 × 9 × 5 = 90.'
+    mistakes:
+      '30': c7m11_tree
+      '60': c7m11_tree
 - code: cbse7m.hcf.lcm
   title: LCM and its link with HCF
   after:
@@ -218,6 +400,58 @@ concepts:
       - when:
           v: 30
         say: They meet at 30, but they already met earlier.
+  lesson:
+    - teach: 'The LCM (lowest common multiple) is the smallest number both numbers divide into. List multiples: 4 → 4, 8, 12, 16 …; 6 → 6, 12, 18 …; the first shared one is 12, so LCM(4, 6) = 12.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 24
+        step: 2
+        points:
+        - at: 12
+          label: both
+        - at: 24
+          label: both
+        alt: Multiples of 4 and of 6 first meet at 12, then at 24.
+      check:
+        prompt: Find the LCM of 3 and 5.
+        options:
+        - '15'
+        - '8'
+        - '1'
+        answer: '15'
+        why: 15 is the first number in both lists.
+    - teach: 'With primes: use every prime that appears, each the greatest number of times. 12 = 2² × 3 and 18 = 2 × 3², so LCM = 2² × 3² = 36. For two numbers, HCF × LCM = their product: 6 × 36 = 12 × 18 = 216.'
+      picture:
+        kind: compare
+        columns:
+        - title: '12'
+          points:
+          - 2² × 3
+        - title: '18'
+          points:
+          - 2 × 3²
+        - title: LCM
+          points:
+          - 2² × 3² = 36
+        alt: 'The LCM of 12 and 18 takes the highest power of each prime: 36.'
+      check:
+        prompt: Find the LCM of 10 = 2 × 5 and 15 = 3 × 5.
+        options:
+        - '30'
+        - '150'
+        - '5'
+        answer: '30'
+        why: 2 × 3 × 5 = 30.
+    - teach: LCM answers 'when will they happen together again?'. Buses leave every 10 and 15 minutes from the same stop at 8:00. They leave together again after LCM(10, 15) = 30 minutes, at 8:30.
+      check:
+        prompt: Two lights blink every 4 s and 10 s, together now. After how many seconds will they blink together again?
+        options:
+        - '20'
+        - '40'
+        - '14'
+        answer: '20'
+        why: LCM(4, 10) = 20.
   items:
   - prompt: Find the LCM of 6 and 8.
     answer: '24'
@@ -278,3 +512,130 @@ concepts:
     - 2 × 12 = 24 = 4 × 6.
     solution: HCF × LCM always equals the product of the two numbers.
     mistakes: {"HCF + LCM = their sum": "t7_hcf_lcm_rule", "LCM is smaller than HCF": "t7_hcf_lcm_rule"}
+  - prompt: Find the LCM of 9 and 12.
+    answer: '36'
+    check: '36'
+    difficulty: 1
+    hints:
+    - 9 = 3², 12 = 2² × 3.
+    - Take the highest power of each prime.
+    solution: 'Step 1: 9 = 3² and 12 = 2² × 3. Step 2: LCM = 2² × 3² = 36.'
+    mistakes:
+      '108': c7m11_every
+      '3': c7m11_which
+  - prompt: Find the LCM of 5 and 7.
+    answer: '35'
+    check: 5*7
+    difficulty: 1
+    hints:
+    - 5 and 7 share no factor.
+    - Multiply them.
+    solution: They share no prime, so LCM = 5 × 7 = 35.
+    mistakes:
+      '12': c7m11_every
+      '1': c7m11_which
+  - prompt: Find the LCM of 8 and 12.
+    answer: '24'
+    check: '24'
+    difficulty: 1
+    hints:
+    - 8 = 2³, 12 = 2² × 3.
+    - 2³ × 3.
+    solution: 'Step 1: highest power of 2 is 2³, of 3 is 3. Step 2: 8 × 3 = 24.'
+    mistakes:
+      '96': c7m11_every
+      '4': c7m11_which
+  - prompt: Find the LCM of 6, 9 and 15.
+    answer: '90'
+    check: '90'
+    difficulty: 2
+    hints:
+    - 6 = 2 × 3, 9 = 3², 15 = 3 × 5.
+    - 2 × 3² × 5.
+    solution: 'Step 1: primes 2, 3, 5 with highest powers 2, 3², 5. Step 2: 2 × 9 × 5 = 90.'
+    mistakes:
+      '810': c7m11_every
+      '3': c7m11_which
+  - prompt: Two numbers have HCF 6 and LCM 60. One number is 12. Find the other.
+    answer: '30'
+    check: 6*60/12
+    difficulty: 2
+    hints:
+    - HCF × LCM = product of the numbers.
+    - 6 × 60 ÷ 12.
+    solution: 'Step 1: 6 × 60 = 360. Step 2: 360 ÷ 12 = 30.'
+    mistakes:
+      '5': c7m11_product
+      '720': c7m11_product
+  - prompt: Buses on two routes leave a stop every 12 and 20 minutes. Both leave at 7:00. After how many minutes do they next leave together?
+    answer: '60'
+    check: '60'
+    difficulty: 2
+    hints:
+    - '''Together again'' means the LCM.'
+    - 12 = 2² × 3, 20 = 2² × 5.
+    solution: 'Step 1: LCM = 2² × 3 × 5. Step 2: = 60 minutes (at 8:00).'
+    mistakes:
+      '4': c7m11_which
+      '240': c7m11_every
+  - prompt: What is the smallest number of sweets that can be shared equally among 8 or among 10 children with none left?
+    answer: '40'
+    check: '40'
+    difficulty: 2
+    hints:
+    - The number must be a multiple of 8 and of 10.
+    - Find the LCM.
+    solution: 'Step 1: 8 = 2³ and 10 = 2 × 5. Step 2: LCM = 2³ × 5 = 40 sweets.'
+    mistakes:
+      '80': c7m11_every
+      '2': c7m11_which
+  - prompt: Which needs the LCM rather than the HCF?
+    options:
+    - When will two blinking lights blink together again?
+    - What is the longest rod that measures two lengths exactly?
+    - What is the largest tile to cover a floor exactly?
+    answer: When will two blinking lights blink together again?
+    difficulty: 2
+    hints:
+    - Which question asks about a time when two things meet again?
+    - The others ask for the largest piece or measure.
+    solution: Happening together again is a common multiple; largest equal pieces or measures are common factors.
+    mistakes:
+      What is the longest rod that measures two lengths exactly?: c7m11_which
+      What is the largest tile to cover a floor exactly?: c7m11_which
+  - prompt: What is the smallest number that leaves remainder 1 when divided by 4, by 6 and by 9?
+    answer: '37'
+    check: 36+1
+    difficulty: 3
+    hints:
+    - Find the LCM of 4, 6 and 9 first.
+    - Then add the remainder.
+    solution: 'Step 1: LCM(4, 6, 9) = 2² × 3² = 36. Step 2: 36 + 1 = 37.'
+    mistakes:
+      '36': c7m11_every
+      '217': c7m11_every
+  - prompt: The LCM of two numbers is 45 and their product is 135. Find their HCF.
+    answer: '3'
+    check: 135/45
+    difficulty: 3
+    hints:
+    - HCF × LCM = product.
+    - 135 ÷ 45.
+    solution: 'Step 1: HCF × 45 = 135. Step 2: HCF = 135 ÷ 45 = 3.'
+    mistakes:
+      '6075': c7m11_product
+      '90': c7m11_product
+  - prompt: Is the LCM of two numbers ever smaller than the larger number?
+    options:
+    - No, it is a multiple of the larger number, so at least that big
+    - Yes, when the numbers are co-prime
+    - Yes, when one number divides the other
+    answer: No, it is a multiple of the larger number, so at least that big
+    difficulty: 3
+    hints:
+    - The LCM is a multiple of both numbers.
+    - Can a multiple of 9 be less than 9?
+    solution: The LCM is a multiple of each number, so it is at least as big as the larger one. When one divides the other (like 3 and 9), the LCM equals the larger (9).
+    mistakes:
+      Yes, when the numbers are co-prime: c7m11_every
+      Yes, when one number divides the other: c7m11_every

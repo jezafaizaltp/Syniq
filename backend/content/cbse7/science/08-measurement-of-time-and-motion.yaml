@@ -15,6 +15,12 @@ tips:
   t7_si_second: "The SI unit of time is the smallest of these."
   t7_speed_distance_time: "Speed = distance ÷ time."
   t7_time_distance_speed: "Time = distance ÷ speed."
+  c7s8_convert: Put all times in the same unit first. Recall how many minutes make an hour and how many seconds make a minute; multiply to go to a smaller unit, divide to go to a bigger one.
+  c7s8_period: The time period is the time for ONE complete swing (there and back). Divide the total time by the number of swings.
+  c7s8_length: Only the length of the string changes how long one swing takes. The weight of the bob and a small push do not.
+  c7s8_formula: Speed = distance ÷ time. Distance = speed × time. Time = distance ÷ speed. Pick the one that gives the unknown.
+  c7s8_average: Average speed = TOTAL distance ÷ TOTAL time, not the average of the two speeds.
+  c7s8_meters: One dial shows how fast you are going right now; the other counts how far the vehicle has gone in all.
 concepts:
 - code: cbse7s.motion.time
   title: Measuring time
@@ -93,6 +99,66 @@ concepts:
           s: 25
           t: 50
         say: That gives 2 s per swing. For 1 s each, 25 swings take 25 s.
+  lesson:
+    - teach: Long ago people measured time with sundials (shadows), sand clocks, candle clocks and water clocks. In ancient India, a ghatika was a bowl with a small hole that sank in water in a fixed time. Today we use quartz clocks, and atomic clocks are the most accurate.
+      picture:
+        kind: flow
+        steps:
+        - Sundial
+        - Water clock (ghatika)
+        - Sand clock
+        - Pendulum clock
+        - Quartz and atomic clocks
+        alt: How clocks developed over time.
+      check:
+        prompt: 'A sundial measures time using:'
+        options:
+        - The Sun's shadow
+        - Falling sand
+        - A swinging weight
+        answer: The Sun's shadow
+        why: The shadow moves as the Sun moves across the sky.
+    - teach: A simple pendulum is a small weight (bob) hanging on a string. One oscillation is one complete swing from one side to the other and back. The time period is the time for one oscillation. It stays the same swing after swing, which is why pendulums can keep time.
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 5
+          - 9
+          A:
+          - 2
+          - 3
+          M:
+          - 5
+          - 2
+          B:
+          - 8
+          - 3
+        segments:
+        - - O
+          - A
+        - - O
+          - M
+        - - O
+          - B
+        alt: A pendulum hung from O swinging from A through M to B; A to B and back is one oscillation.
+      check:
+        prompt: 'A pendulum makes 10 oscillations in 20 seconds. Its time period is:'
+        options:
+        - 2 seconds
+        - 10 seconds
+        - 200 seconds
+        answer: 2 seconds
+        why: 20 ÷ 10 = 2.
+    - teach: 'The time period depends on the length of the string: a longer string gives a longer time period. The weight of the bob does not change it. The SI unit of time is the second (s): 60 s = 1 minute, 60 minutes = 1 hour, so 1 hour = 3600 s.'
+      check:
+        prompt: 'To make a pendulum swing more slowly, you should:'
+        options:
+        - Make the string longer
+        - Use a heavier bob
+        - Push it harder
+        answer: Make the string longer
+        why: A longer string gives a longer time period.
   items:
   - prompt: How many seconds are there in one hour?
     answer: '3600'
@@ -161,6 +227,139 @@ concepts:
     - 120 + 15.
     solution: 120 + 15 = 135 minutes.
     mistakes: {"215": "t7_hours_minutes", "75": "t7_hours_minutes"}
+  - prompt: How many seconds are in 5 minutes?
+    answer: '300'
+    check: 5*60
+    difficulty: 1
+    hints:
+    - 1 minute = 60 seconds.
+    - 5 × 60.
+    solution: Each minute has 60 seconds, so 5 × 60 = 300 seconds.
+    mistakes:
+      '500': c7s8_convert
+      '65': c7s8_convert
+  - prompt: How many minutes are in 3 hours?
+    answer: '180'
+    check: 3*60
+    difficulty: 1
+    hints:
+    - 1 hour = 60 minutes.
+    - 3 × 60.
+    solution: Each hour has 60 minutes, so 3 × 60 = 180 minutes.
+    mistakes:
+      '300': c7s8_convert
+      '63': c7s8_convert
+  - prompt: 'One complete swing of a pendulum, from one end to the other and back, is called:'
+    options:
+    - An oscillation
+    - A period of rest
+    - A second
+    answer: An oscillation
+    difficulty: 1
+    hints:
+    - It is one full to-and-fro movement.
+    - The time for it is the time period.
+    solution: One complete to-and-fro swing is one oscillation.
+    mistakes:
+      A period of rest: c7s8_period
+      A second: c7s8_period
+  - prompt: Which clock is the most accurate?
+    options:
+    - Atomic clock
+    - Sundial
+    - Sand clock
+    answer: Atomic clock
+    difficulty: 1
+    hints:
+    - It is used for GPS and satellites.
+    - It is the most modern.
+    solution: Atomic clocks keep time to a tiny fraction of a second over millions of years.
+    mistakes:
+      Sundial: c7s8_convert
+      Sand clock: c7s8_convert
+  - prompt: A pendulum makes 25 oscillations in 50 seconds. Find its time period, in seconds.
+    answer: '2'
+    check: 50/25
+    difficulty: 2
+    hints:
+    - Time period = total time ÷ number of oscillations.
+    - 50 ÷ 25.
+    solution: Time period = 50 ÷ 25 = 2 seconds.
+    mistakes:
+      '1250': c7s8_period
+      '0.5': c7s8_period
+  - prompt: A pendulum has a time period of 1.5 s. How long do 20 oscillations take, in seconds?
+    answer: '30'
+    check: 1.5*20
+    difficulty: 2
+    hints:
+    - Each oscillation takes 1.5 s.
+    - 20 × 1.5.
+    solution: Total time = 20 × 1.5 = 30 seconds.
+    mistakes:
+      '13.3': c7s8_period
+      '21.5': c7s8_period
+  - prompt: Ravi replaces a light bob with a heavier one, keeping the same string. What happens to the time period?
+    options:
+    - It stays the same
+    - It doubles
+    - It becomes zero
+    answer: It stays the same
+    difficulty: 2
+    hints:
+    - What does the time period depend on?
+    - The string was not changed.
+    solution: The time period depends on the string's length, not the bob's weight, so it stays the same.
+    mistakes:
+      It doubles: c7s8_length
+      It becomes zero: c7s8_length
+  - prompt: A school day lasts from 9:00 am to 3:30 pm. How long is it, in minutes?
+    answer: '390'
+    check: 6*60+30
+    difficulty: 2
+    hints:
+    - 9:00 to 3:00 is 6 hours.
+    - Add 30 minutes.
+    solution: 6 hours 30 minutes = 6 × 60 + 30 = 390 minutes.
+    mistakes:
+      '630': c7s8_convert
+      '330': c7s8_convert
+  - prompt: Two pendulums have strings of 50 cm and 100 cm. Which has the longer time period?
+    options:
+    - The 100 cm one
+    - The 50 cm one
+    - Both are the same
+    answer: The 100 cm one
+    difficulty: 3
+    hints:
+    - Which feature sets the time period?
+    - Longer string, slower swing.
+    solution: A longer string gives a longer time period, so the 100 cm pendulum swings more slowly.
+    mistakes:
+      The 50 cm one: c7s8_length
+      Both are the same: c7s8_length
+  - prompt: How many seconds are in one day?
+    answer: '86400'
+    check: 24*60*60
+    difficulty: 3
+    hints:
+    - 1 day = 24 hours, 1 hour = 3600 s.
+    - 24 × 3600.
+    solution: 24 hours × 3600 seconds = 86,400 seconds.
+    mistakes:
+      '1440': c7s8_convert
+      '3600': c7s8_convert
+  - prompt: A ghatika bowl sinks in 24 minutes. How many times would it sink in one day (24 hours)?
+    answer: '60'
+    check: 24*60/24
+    difficulty: 3
+    hints:
+    - Change 24 hours to minutes first.
+    - Then divide by 24 minutes.
+    solution: 24 hours = 1440 minutes, and 1440 ÷ 24 = 60. A day was 60 ghatikas.
+    mistakes:
+      '1': c7s8_convert
+      '1440': c7s8_convert
 - code: cbse7s.motion.speed
   title: Speed, distance and time
   after:
@@ -258,6 +457,67 @@ concepts:
           - 46
           - 300
         say: 'Too fast: distance ÷ time must be 45.'
+  lesson:
+    - teach: 'Speed tells how fast something moves: the distance covered in a unit of time. Speed = distance ÷ time. A bus that covers 150 km in 3 hours has a speed of 50 km/h. Speed can be in km/h or m/s.'
+      picture:
+        kind: flow
+        steps:
+        - 'Distance: 150 km'
+        - 'Time: 3 h'
+        - Speed = 150 ÷ 3
+        - = 50 km/h
+        alt: Finding speed by dividing distance by time.
+      check:
+        prompt: A runner covers 200 m in 40 s. What is her speed?
+        options:
+        - 5 m/s
+        - 8000 m/s
+        - 240 m/s
+        answer: 5 m/s
+        why: 200 ÷ 40 = 5.
+    - teach: 'Rearranging the rule: distance = speed × time, and time = distance ÷ speed. A car at 60 km/h for 2 hours travels 120 km. Uniform motion covers equal distances in equal times; most real motion is non-uniform, so we use average speed = total distance ÷ total time.'
+      picture:
+        kind: compare
+        columns:
+        - title: Find
+          points:
+          - speed
+          - distance
+          - time
+        - title: Use
+          points:
+          - distance ÷ time
+          - speed × time
+          - distance ÷ speed
+        alt: Three forms of the speed rule.
+      check:
+        prompt: A train goes 240 km at 80 km/h. How long does it take?
+        options:
+        - 3 hours
+        - 160 hours
+        - 19200 hours
+        answer: 3 hours
+        why: 240 ÷ 80 = 3.
+    - teach: A speedometer shows a vehicle's speed at each moment; an odometer counts the total distance travelled. On a distance–time graph, uniform motion gives a straight line; a steeper line means a higher speed.
+      picture:
+        kind: bars
+        bars:
+        - label: after 1 h
+          value: 40
+        - label: after 2 h
+          value: 80
+        - label: after 3 h
+          value: 120
+        unit: km
+        alt: 'A bus in uniform motion: 40 km more each hour.'
+      check:
+        prompt: Which instrument shows how far a car has travelled in total?
+        options:
+        - Odometer
+        - Speedometer
+        - Thermometer
+        answer: Odometer
+        why: It counts the total distance.
   items:
   - prompt: A car travels 120 km in 2 hours. Find its speed in km/h.
     answer: '60'
@@ -318,3 +578,133 @@ concepts:
     - Total time = 2 h.
     solution: 100 ÷ 2 = 50 km/h.
     mistakes: {"100": "t7_average_speed", "20": "t7_average_speed"}
+  - prompt: A scooter travels 90 km in 2 hours. Find its speed in km/h.
+    answer: '45'
+    check: 90/2
+    difficulty: 1
+    hints:
+    - Speed = distance ÷ time.
+    - 90 ÷ 2.
+    solution: Speed = 90 ÷ 2 = 45 km/h.
+    mistakes:
+      '180': c7s8_formula
+      '92': c7s8_formula
+  - prompt: A bird flies at 12 m/s for 10 s. How far does it fly, in metres?
+    answer: '120'
+    check: 12*10
+    difficulty: 1
+    hints:
+    - Distance = speed × time.
+    - 12 × 10.
+    solution: Distance = 12 × 10 = 120 metres.
+    mistakes:
+      '1.2': c7s8_formula
+      '22': c7s8_formula
+  - prompt: A cyclist rides 36 km at 12 km/h. How many hours does it take?
+    answer: '3'
+    check: 36/12
+    difficulty: 1
+    hints:
+    - Time = distance ÷ speed.
+    - 36 ÷ 12.
+    solution: Time = 36 ÷ 12 = 3 hours.
+    mistakes:
+      '432': c7s8_formula
+      '24': c7s8_formula
+  - prompt: Which instrument shows the speed of a vehicle?
+    options:
+    - Speedometer
+    - Odometer
+    - Thermometer
+    answer: Speedometer
+    difficulty: 1
+    hints:
+    - Its name has 'speed' in it.
+    - The needle moves as you go faster.
+    solution: The speedometer shows the speed at each moment.
+    mistakes:
+      Odometer: c7s8_meters
+      Thermometer: c7s8_meters
+  - prompt: A car goes 30 km in 30 minutes. What is its speed in km/h?
+    answer: '60'
+    check: 30/0.5
+    difficulty: 2
+    hints:
+    - 30 minutes is half an hour.
+    - 30 ÷ 0.5.
+    solution: 30 minutes = 0.5 h, so speed = 30 ÷ 0.5 = 60 km/h.
+    mistakes:
+      '1': c7s8_convert
+      '900': c7s8_formula
+  - prompt: A bus travels 60 km in the first hour and 40 km in the second hour. Find its average speed in km/h.
+    answer: '50'
+    check: (60+40)/2
+    difficulty: 2
+    hints:
+    - Total distance and total time.
+    - 100 km in 2 h.
+    solution: Average speed = (60 + 40) ÷ 2 = 100 ÷ 2 = 50 km/h.
+    mistakes:
+      '100': c7s8_average
+      '20': c7s8_average
+  - prompt: A car moves 10 m every second. Is its motion uniform or non-uniform?
+    options:
+    - Uniform
+    - Non-uniform
+    - It is not moving
+    answer: Uniform
+    difficulty: 2
+    hints:
+    - Is the distance the same each second?
+    - Equal distances in equal times.
+    solution: It covers equal distances (10 m) in equal times (1 s), so its motion is uniform.
+    mistakes:
+      Non-uniform: c7s8_formula
+      It is not moving: c7s8_formula
+  - prompt: Arun walks 2 km in 30 minutes. What is his speed in km/h?
+    answer: '4'
+    check: 2/0.5
+    difficulty: 2
+    hints:
+    - 30 minutes = 0.5 h.
+    - 2 ÷ 0.5.
+    solution: Speed = 2 ÷ 0.5 = 4 km/h.
+    mistakes:
+      '1': c7s8_formula
+      '15': c7s8_convert
+  - prompt: A car's odometer reads 24,500 km at the start of a trip and 24,740 km at the end. The trip took 4 hours. What was the average speed in km/h?
+    answer: '60'
+    check: (24740-24500)/4
+    difficulty: 3
+    hints:
+    - Distance = end reading − start reading.
+    - Then divide by 4 hours.
+    solution: Distance = 24,740 − 24,500 = 240 km. Average speed = 240 ÷ 4 = 60 km/h.
+    mistakes:
+      '6185': c7s8_meters
+      '240': c7s8_formula
+  - prompt: Convert 36 km/h into m/s.
+    answer: '10'
+    check: 36*1000/3600
+    difficulty: 3
+    hints:
+    - 36 km = 36,000 m and 1 h = 3600 s.
+    - 36,000 ÷ 3600.
+    solution: 36 km/h = 36,000 m ÷ 3600 s = 10 m/s.
+    mistakes:
+      '36': c7s8_convert
+      '129.6': c7s8_convert
+  - prompt: Two cars travel for 2 hours. Car A covers 100 km and car B covers 140 km. On a distance–time graph, which line is steeper?
+    options:
+    - Car B's
+    - Car A's
+    - They are equally steep
+    answer: Car B's
+    difficulty: 3
+    hints:
+    - Which car is faster?
+    - A faster object gives a steeper line.
+    solution: Car B's speed (70 km/h) is greater than A's (50 km/h), so B's line is steeper.
+    mistakes:
+      Car A's: c7s8_formula
+      They are equally steep: c7s8_formula

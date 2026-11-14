@@ -15,6 +15,12 @@ tips:
   t7_outlier: "Which value is far away from all the others?"
   t7_range: "Range = largest − smallest."
   t7_typical_value: "One very large value pulls the mean up. Which typical value ignores it?"
+  c7m13_share: 'The mean is a fair share: add all the values, then divide by HOW MANY values there are.'
+  c7m13_total: Mean × number of values gives the total. Use the total to find a missing value.
+  c7m13_order: Put the values in order first. The median is the one in the middle, not the middle of the list as written.
+  c7m13_two_middle: With an even number of values there are two in the middle. Take the number halfway between them.
+  c7m13_spread: 'The range shows spread: largest value minus smallest value.'
+  c7m13_far: A value far from all the others pulls the mean towards it, but barely moves the median.
 concepts:
 - code: cbse7m.data.mean
   title: Collecting data and the mean
@@ -87,6 +93,62 @@ concepts:
       - when:
           x: 9
         say: The others average 8, so x must pull up. Total 6 × 9 = 54.
+  lesson:
+    - teach: A data investigation starts with a question (How long do we sleep?), then collects, organises and reads the data. A dot plot puts a dot above a number line for each value, so you can see clusters, gaps and values far from the rest (outliers).
+      picture:
+        kind: number_line
+        from: 5
+        to: 11
+        step: 1
+        points:
+        - at: 7
+          label: ●●
+        - at: 8
+          label: ●●●●
+        - at: 9
+          label: ●●●
+        - at: 11
+          label: ●
+        alt: 'Dot plot of hours of sleep: most dots at 7, 8 and 9; one dot alone at 11.'
+      check:
+        prompt: In the dot plot, which value stands apart from the rest?
+        options:
+        - '11'
+        - '8'
+        - '7'
+        answer: '11'
+        why: There is a gap before it, and only one dot.
+    - teach: 'The mean (average) is the fair share: add all the values and divide by how many there are. Heights 140, 145, 150, 145 cm: total 580, and 580 ÷ 4 = 145 cm.'
+      picture:
+        kind: bars
+        bars:
+        - label: Asha
+          value: 4
+        - label: Binu
+          value: 8
+        - label: Charu
+          value: 6
+        - label: fair share
+          value: 6
+        unit: mangoes
+        alt: '4, 8 and 6 mangoes evened out give 6 each: the mean.'
+      check:
+        prompt: Find the mean of 4, 8 and 6.
+        options:
+        - '6'
+        - '18'
+        - '8'
+        answer: '6'
+        why: 18 ÷ 3 = 6.
+    - teach: 'Total = mean × number of values. If 5 test scores have a mean of 7, they add to 35. If four of them add to 27, the fifth is 8. One outlier can drag the mean: 3, 4, 5 has mean 4, but 3, 4, 5, 40 has mean 13.'
+      check:
+        prompt: The mean of 6 numbers is 5. What is their total?
+        options:
+        - '30'
+        - '11'
+        - '1'
+        answer: '30'
+        why: 6 × 5 = 30.
   items:
   - prompt: Find the mean of 6, 8, 7, 9 and 10.
     answer: '8'
@@ -151,6 +213,133 @@ concepts:
     - You see the spread.
     solution: Dots above a number line show where values bunch up, gaps and unusual values.
     mistakes: {"The exact mean": "t7_dot_plot", "Percentages": "t7_dot_plot"}
+  - prompt: Find the mean of 3, 7, 8 and 10.
+    answer: '7'
+    check: (3+7+8+10)/4
+    difficulty: 1
+    hints:
+    - Add the four values.
+    - Divide by 4.
+    solution: 'Step 1: 3 + 7 + 8 + 10 = 28. Step 2: 28 ÷ 4 = 7.'
+    mistakes:
+      '28': c7m13_share
+      '9.33': c7m13_share
+  - prompt: Find the mean of 20, 25, 30, 35 and 40.
+    answer: '30'
+    check: (20+25+30+35+40)/5
+    difficulty: 1
+    hints:
+    - Add the five values.
+    - Divide by 5.
+    solution: 'Step 1: 20 + 25 + 30 + 35 + 40 = 150. Step 2: 150 ÷ 5 = 30.'
+    mistakes:
+      '150': c7m13_share
+      '37.5': c7m13_share
+  - prompt: The mean of 5 numbers is 12. What is their total?
+    answer: '60'
+    check: 5*12
+    difficulty: 1
+    hints:
+    - Total = mean × how many.
+    - 5 × 12.
+    solution: 'Step 1: total = 12 × 5. Step 2: = 60.'
+    mistakes:
+      '17': c7m13_total
+      '2.4': c7m13_total
+  - prompt: A cricketer scores 45, 30, 60 and 25 in four matches. What is the mean score?
+    answer: '40'
+    check: (45+30+60+25)/4
+    difficulty: 1
+    hints:
+    - Add the scores.
+    - Divide by the number of matches.
+    solution: 'Step 1: 45 + 30 + 60 + 25 = 160. Step 2: 160 ÷ 4 = 40.'
+    mistakes:
+      '160': c7m13_share
+      '53.33': c7m13_share
+  - prompt: The mean of 6, 9, x and 13 is 10. Find x.
+    answer: '12'
+    check: 4*10-6-9-13
+    difficulty: 2
+    hints:
+    - The four values add to 4 × 10.
+    - Subtract the ones you know.
+    solution: 'Step 1: total = 40. Step 2: x = 40 − 6 − 9 − 13 = 12.'
+    mistakes:
+      '10': c7m13_total
+      '2': c7m13_total
+  - prompt: 'Rainfall in 5 days (mm): 4, 6, 5, 7, 48. Which value is the outlier?'
+    options:
+    - '48'
+    - '4'
+    - '7'
+    answer: '48'
+    difficulty: 2
+    hints:
+    - Which value is far from the others?
+    - Most values are between 4 and 7.
+    solution: 48 is far from all the other values (4 to 7), so it is the outlier.
+    mistakes:
+      '4': c7m13_far
+      '7': c7m13_far
+  - prompt: The mean of 4 children's ages is 11 years. A fifth child aged 16 joins. What is the new mean age?
+    answer: '12'
+    check: (4*11+16)/5
+    difficulty: 2
+    hints:
+    - Old total = 4 × 11.
+    - Add 16 and divide by 5.
+    solution: 'Step 1: old total = 44. Step 2: new total = 60. Step 3: 60 ÷ 5 = 12.'
+    mistakes:
+      '13.5': c7m13_share
+      '15': c7m13_share
+  - prompt: 'Daily steps for a week: 4000, 5000, 6000, 5000, 4000, 6000, 5000. What is the mean?'
+    answer: '5000'
+    check: (4000+5000+6000+5000+4000+6000+5000)/7
+    difficulty: 2
+    hints:
+    - Add all seven days.
+    - Divide by 7.
+    solution: 'Step 1: total = 35000. Step 2: 35000 ÷ 7 = 5000 steps.'
+    mistakes:
+      '35000': c7m13_share
+      '4375': c7m13_share
+  - prompt: The mean of 8 numbers is 15. One number, 29, is removed. What is the mean of the rest?
+    answer: '13'
+    check: (8*15-29)/7
+    difficulty: 3
+    hints:
+    - Total of 8 numbers = 120.
+    - Take 29 away and share among 7.
+    solution: 'Step 1: total = 8 × 15 = 120. Step 2: 120 − 29 = 91. Step 3: 91 ÷ 7 = 13.'
+    mistakes:
+      '11.375': c7m13_share
+      '14': c7m13_total
+  - prompt: Marks 7, 8, 9 have mean 8. If 2 is added to every mark, what is the new mean?
+    answer: '10'
+    check: (9+10+11)/3
+    difficulty: 3
+    hints:
+    - Each value goes up by 2.
+    - The fair share goes up by the same amount.
+    solution: 'Step 1: new marks 9, 10, 11 add to 30. Step 2: 30 ÷ 3 = 10, which is 8 + 2.'
+    mistakes:
+      '8': c7m13_share
+      '14': c7m13_share
+  - prompt: Which statement about the mean is true?
+    options:
+    - It can be a value that is not in the data
+    - It is always one of the data values
+    - It is always the most common value
+    answer: It can be a value that is not in the data
+    difficulty: 3
+    hints:
+    - Try the mean of 1 and 2.
+    - Is 1.5 in the data?
+    solution: The mean of 1 and 2 is 1.5, which is not one of the values. The mean is a fair share, not a picked value.
+    mistakes:
+      It is always one of the data values: c7m13_share
+      It is always the most common value: c7m13_share
 - code: cbse7m.data.median
   title: The median and choosing a typical value
   after:
@@ -214,6 +403,50 @@ concepts:
       - when:
           v: 4
         say: With four values, take halfway between the middle two, 4 and 8.
+  lesson:
+    - teach: 'The median is the middle value when the data are put in order. For 9, 3, 7, 5, 11: order them, 3, 5, 7, 9, 11, and the middle one is 7. Half the values are below it, half above.'
+      picture:
+        kind: flow
+        steps:
+        - 9, 3, 7, 5, 11
+        - 'order: 3, 5, 7, 9, 11'
+        - 'middle: 7'
+        alt: Order the values, then pick the middle one.
+      check:
+        prompt: Find the median of 4, 1, 9.
+        options:
+        - '4'
+        - '1'
+        - '9'
+        answer: '4'
+        why: 'In order: 1, 4, 9. The middle is 4.'
+    - teach: 'With an even number of values, the median is halfway between the two middle ones. 2, 5, 7, 12: the middle two are 5 and 7, so the median is (5 + 7) ÷ 2 = 6. The range, largest minus smallest, shows how spread out the data are: 12 − 2 = 10.'
+      check:
+        prompt: Find the median of 3, 4, 8, 10.
+        options:
+        - '6'
+        - '4'
+        - '8'
+        answer: '6'
+        why: (4 + 8) ÷ 2 = 6.
+    - teach: 'An outlier pulls the mean but not the median. Monthly pocket money: ₹50, 60, 70, 80, 1000. Mean = ₹252, which fits nobody. Median = ₹70, much more typical. Use the median when there are extreme values.'
+      picture:
+        kind: bars
+        bars:
+        - label: median
+          value: 70
+        - label: mean
+          value: 252
+        unit: ₹
+        alt: The median ₹70 is typical; the mean ₹252 is pulled up by ₹1000.
+      check:
+        prompt: House prices in a lane include one mansion. Which gives a more typical price?
+        options:
+        - The median
+        - The mean
+        - The largest price
+        answer: The median
+        why: The mansion pulls the mean up but barely moves the median.
   items:
   - prompt: Find the median of 3, 5, 7, 8, 12.
     answer: '7'
@@ -273,3 +506,130 @@ concepts:
     - 50 ÷ 5.
     solution: 50 ÷ 5 = 10.
     mistakes: {"3": "t7_mean_outlier", "50": "t7_mean_outlier"}
+  - prompt: Find the median of 12, 4, 9, 15, 7.
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Put them in order.
+    - 4, 7, 9, 12, 15.
+    solution: 'Step 1: in order 4, 7, 9, 12, 15. Step 2: the middle is 9.'
+    mistakes:
+      '7': c7m13_order
+      '15': c7m13_order
+  - prompt: Find the range of 21, 8, 15, 30, 12.
+    answer: '22'
+    check: 30-8
+    difficulty: 1
+    hints:
+    - Find the largest and smallest values.
+    - 30 − 8.
+    solution: 'Step 1: largest 30, smallest 8. Step 2: 30 − 8 = 22.'
+    mistakes:
+      '9': c7m13_spread
+      '38': c7m13_spread
+  - prompt: Find the median of 1, 3, 3, 6, 7, 8, 9.
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - They are already in order.
+    - '7 values: the 4th is the middle.'
+    solution: 'Step 1: 7 values, so the 4th is the middle. Step 2: it is 6.'
+    mistakes:
+      '3': c7m13_order
+      '5.29': c7m13_share
+  - prompt: Find the median of 10, 2, 8, 6.
+    answer: '7'
+    check: (6+8)/2
+    difficulty: 2
+    hints:
+    - 'Order: 2, 6, 8, 10.'
+    - Halfway between the middle two.
+    solution: 'Step 1: in order 2, 6, 8, 10. Step 2: (6 + 8) ÷ 2 = 7.'
+    mistakes:
+      '8': c7m13_two_middle
+      '5': c7m13_order
+  - prompt: Find the median of 15, 22, 18, 30, 11, 25.
+    answer: '20'
+    check: (18+22)/2
+    difficulty: 2
+    hints:
+    - 'Order: 11, 15, 18, 22, 25, 30.'
+    - The middle two are 18 and 22.
+    solution: 'Step 1: in order 11, 15, 18, 22, 25, 30. Step 2: (18 + 22) ÷ 2 = 20.'
+    mistakes:
+      '18': c7m13_two_middle
+      '26': c7m13_order
+  - prompt: 'Salaries (₹ thousands): 20, 22, 25, 24, 150. Which is the better typical value?'
+    options:
+    - The median, 24
+    - The mean, 48.2
+    - The range, 130
+    answer: The median, 24
+    difficulty: 2
+    hints:
+    - Is there a value far from the rest?
+    - Which measure ignores extreme values?
+    solution: 150 is an outlier that pulls the mean up to 48.2. The median, 24, is close to most salaries.
+    mistakes:
+      The mean, 48.2: c7m13_far
+      The range, 130: c7m13_spread
+  - prompt: 'Test marks: 6, 9, 7, 9, 4. Find the median.'
+    answer: '7'
+    check: '7'
+    difficulty: 2
+    hints:
+    - Order first.
+    - 4, 6, 7, 9, 9.
+    solution: 'Step 1: in order 4, 6, 7, 9, 9. Step 2: the middle is 7.'
+    mistakes:
+      '9': c7m13_order
+      '8': c7m13_order
+  - prompt: The data 4, 6, 9, 10 has an extra value 100 added. What happens?
+    options:
+    - The mean jumps a lot; the median changes a little
+    - The median jumps a lot; the mean changes a little
+    - Both stay the same
+    answer: The mean jumps a lot; the median changes a little
+    difficulty: 2
+    hints:
+    - Find the old and new mean.
+    - Find the old and new median.
+    solution: Mean goes from 7.25 to 25.8. Median goes from 7.5 to 9. The far value pulls the mean much more.
+    mistakes:
+      The median jumps a lot; the mean changes a little: c7m13_far
+      Both stay the same: c7m13_far
+  - prompt: Five numbers in order have median 12. Four of them are 5, 8, 15, 20. What is the fifth?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - The median is the middle (3rd) value.
+    - The middle value itself must be 12.
+    solution: 'Step 1: in order, the 3rd value is the median. Step 2: 5, 8, ?, 15, 20 needs 12 in the middle, so the fifth number is 12.'
+    mistakes:
+      '11.5': c7m13_two_middle
+      '10': c7m13_share
+  - prompt: The range of a set is 25 and the smallest value is 18. What is the largest value?
+    answer: '43'
+    check: 18+25
+    difficulty: 3
+    hints:
+    - Range = largest − smallest.
+    - Largest = smallest + range.
+    solution: 'Step 1: largest − 18 = 25. Step 2: largest = 43.'
+    mistakes:
+      '7': c7m13_spread
+      '25': c7m13_spread
+  - prompt: Six values in order are 2, 4, x, 10, 12, 14. The median is 9. Find x.
+    answer: '8'
+    check: 2*9-10
+    difficulty: 3
+    hints:
+    - The median is halfway between x and 10.
+    - (x + 10) ÷ 2 = 9.
+    solution: 'Step 1: (x + 10) ÷ 2 = 9, so x + 10 = 18. Step 2: x = 8.'
+    mistakes:
+      '9': c7m13_two_middle
+      '7': c7m13_two_middle

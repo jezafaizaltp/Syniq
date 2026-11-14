@@ -13,6 +13,11 @@ tips:
   t7_undo_divide: "x divided by 4 is 5. Undo the dividing by multiplying both sides by 4."
   t7_undo_steps: "Undo in reverse order: first undo the adding or subtracting on both sides, then undo the multiplying."
   t7_word_equation: "Write it as 2n + 3 = 19. Undo +3, then undo ×2."
+  c7m15_undo: 'Undo each step with its opposite: adding is undone by subtracting, multiplying by dividing. Do it to BOTH sides.'
+  c7m15_order: In a two-step equation, undo the adding or subtracting first, then the multiplying or dividing.
+  c7m15_check: Put your value back into the equation. If both sides come out equal, it is right.
+  c7m15_words: 'Turn the words into maths one phrase at a time: ''more than'' adds, ''less than'' or ''decreased by'' subtracts, ''times'' or ''twice'' multiplies.'
+  c7m15_unknown: Choose a letter for the thing you do not know, write every other amount using it, then make the equation.
 concepts:
 - code: cbse7m.eqn.solve
   title: Solving simple equations
@@ -79,6 +84,54 @@ concepts:
       - when:
           x: 16
         say: '16 is 2x. One more step: divide by 2.'
+  lesson:
+    - teach: 'An equation is a balance: both sides are equal. x + 5 = 12 means some number plus 5 balances 12. Whatever you do to one side, do to the other, and it stays balanced. Take 5 from both sides: x = 7.'
+      picture:
+        kind: compare
+        columns:
+        - title: Left pan
+          points:
+          - x + 5
+          - take away 5
+          - x
+        - title: Right pan
+          points:
+          - '12'
+          - take away 5
+          - '7'
+        alt: 'A balance: x + 5 on one side and 12 on the other. Taking 5 from both keeps it level, leaving x = 7.'
+      check:
+        prompt: Solve x − 4 = 10.
+        options:
+        - '14'
+        - '6'
+        - '40'
+        answer: '14'
+        why: Add 4 to both sides.
+    - teach: 'Undo each operation with its opposite. 4x = 28: divide both sides by 4, x = 7. x/3 = 6: multiply both sides by 3, x = 18. For two steps, like 3x − 2 = 13, undo the − 2 first (add 2: 3x = 15), then the × 3 (divide by 3: x = 5).'
+      picture:
+        kind: flow
+        steps:
+        - 3x − 2 = 13
+        - 'add 2: 3x = 15'
+        - 'divide by 3: x = 5'
+        alt: Solving 3x − 2 = 13 in two steps.
+      check:
+        prompt: Solve 2x + 1 = 11.
+        options:
+        - '5'
+        - '6'
+        - '10'
+        answer: '5'
+        why: 2x = 10, so x = 5.
+    - teach: 'Always check by putting the answer back in. For 3x − 2 = 13 with x = 5: 3 × 5 − 2 = 13 ✓. If the two sides are not equal, look again.'
+      check:
+        prompt: Is x = 3 a solution of 4x + 2 = 16?
+        options:
+        - 'No'
+        - 'Yes'
+        answer: 'No'
+        why: 4 × 3 + 2 = 14, not 16.
   items:
   - prompt: Solve x + 7 = 15.
     answer: '8'
@@ -140,6 +193,130 @@ concepts:
     - 3 × 4 − 2.
     solution: 3 × 4 − 2 = 10 ✓, so yes.
     mistakes: {"No": "t7_check_solution", "Cannot tell": "t7_check_solution"}
+  - prompt: Solve x + 12 = 30.
+    answer: '18'
+    check: 30-12
+    difficulty: 1
+    hints:
+    - Undo + 12.
+    - Take 12 from both sides.
+    solution: 'Step 1: x + 12 − 12 = 30 − 12. Step 2: x = 18.'
+    mistakes:
+      '42': c7m15_undo
+      '2.5': c7m15_undo
+  - prompt: Solve y − 9 = 4.
+    answer: '13'
+    check: 4+9
+    difficulty: 1
+    hints:
+    - Undo − 9.
+    - Add 9 to both sides.
+    solution: 'Step 1: y − 9 + 9 = 4 + 9. Step 2: y = 13.'
+    mistakes:
+      '-5': c7m15_undo
+      '5': c7m15_undo
+  - prompt: Solve 6m = 54.
+    answer: '9'
+    check: 54/6
+    difficulty: 1
+    hints:
+    - Undo × 6.
+    - Divide both sides by 6.
+    solution: 'Step 1: 6m ÷ 6 = 54 ÷ 6. Step 2: m = 9.'
+    mistakes:
+      '48': c7m15_undo
+      '324': c7m15_undo
+  - prompt: Solve p/5 = 8.
+    answer: '40'
+    check: 8*5
+    difficulty: 1
+    hints:
+    - Undo ÷ 5.
+    - Multiply both sides by 5.
+    solution: 'Step 1: p/5 × 5 = 8 × 5. Step 2: p = 40.'
+    mistakes:
+      '1.6': c7m15_undo
+      '13': c7m15_undo
+  - prompt: Solve 4x + 3 = 27.
+    answer: '6'
+    check: (27-3)/4
+    difficulty: 2
+    hints:
+    - Undo + 3 first.
+    - Then undo × 4.
+    solution: 'Step 1: 4x = 27 − 3 = 24. Step 2: x = 24 ÷ 4 = 6. Check: 4 × 6 + 3 = 27 ✓.'
+    mistakes:
+      '7.5': c7m15_order
+      '24': c7m15_order
+  - prompt: Solve 7y − 5 = 30.
+    answer: '5'
+    check: (30+5)/7
+    difficulty: 2
+    hints:
+    - Undo − 5 first.
+    - Then divide by 7.
+    solution: 'Step 1: 7y = 30 + 5 = 35. Step 2: y = 35 ÷ 7 = 5.'
+    mistakes:
+      '25': c7m15_order
+      '3.57': c7m15_order
+  - prompt: Solve x/2 + 4 = 10.
+    answer: '12'
+    check: (10-4)*2
+    difficulty: 2
+    hints:
+    - 'Undo + 4 first: x/2 = 6.'
+    - Then multiply by 2.
+    solution: 'Step 1: x/2 = 10 − 4 = 6. Step 2: x = 6 × 2 = 12.'
+    mistakes:
+      '3': c7m15_undo
+      '28': c7m15_order
+  - prompt: Is y = 7 a solution of 3y − 4 = 17?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if y is negative
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Put 7 in place of y.
+    - 3 × 7 − 4 = ?
+    solution: 3 × 7 − 4 = 21 − 4 = 17, which matches the right side.
+    mistakes:
+      'No': c7m15_check
+      Only if y is negative: c7m15_check
+  - prompt: Solve 2(x + 3) = 20.
+    answer: '7'
+    check: 20/2-3
+    difficulty: 3
+    hints:
+    - 'Undo × 2 first: x + 3 = 10.'
+    - Then undo + 3.
+    solution: 'Step 1: x + 3 = 20 ÷ 2 = 10. Step 2: x = 10 − 3 = 7. Check: 2 × 10 = 20 ✓.'
+    mistakes:
+      '8.5': c7m15_order
+      '17': c7m15_order
+  - prompt: Solve 5x + 4 = 3x + 18.
+    answer: '7'
+    check: (18-4)/(5-3)
+    difficulty: 3
+    hints:
+    - Take 3x from both sides.
+    - Then 2x + 4 = 18.
+    solution: 'Step 1: 5x − 3x + 4 = 18, so 2x + 4 = 18. Step 2: 2x = 14. Step 3: x = 7.'
+    mistakes:
+      '14': c7m15_order
+      '2.75': c7m15_undo
+  - prompt: Solve 15 − 2x = 3.
+    answer: '6'
+    check: (15-3)/2
+    difficulty: 3
+    hints:
+    - 'Add 2x to both sides: 15 = 3 + 2x.'
+    - Then 2x = 12.
+    solution: 'Step 1: 15 = 3 + 2x. Step 2: 2x = 12. Step 3: x = 6. Check: 15 − 12 = 3 ✓.'
+    mistakes:
+      '-6': c7m15_undo
+      '9': c7m15_order
 - code: cbse7m.eqn.words
   title: Forming equations from word problems
   after:
@@ -211,6 +388,42 @@ concepts:
       - when:
           n: 17
         say: That's the last of the three.
+  lesson:
+    - teach: 'To solve a word problem: pick a letter for the unknown, write the facts as an equation, solve it, and check the answer in the words. ''A number plus 15 is 40'': n + 15 = 40, so n = 25. Check: 25 + 15 = 40 ✓.'
+      picture:
+        kind: flow
+        steps:
+        - Choose a letter
+        - Write the equation
+        - Solve
+        - Check in the words
+        alt: Four steps for turning a word problem into an equation.
+      check:
+        prompt: Which equation matches 'three times a number is 36'?
+        options:
+        - 3n = 36
+        - n + 3 = 36
+        - n/3 = 36
+        answer: 3n = 36
+        why: '''Three times'' means multiply by 3.'
+    - teach: Write everything using the same letter. 'Anu has ₹5 more than Binu; together they have ₹45.' Let Binu have b. Anu has b + 5. So b + (b + 5) = 45, 2b + 5 = 45, 2b = 40, b = 20. Binu has ₹20 and Anu ₹25.
+      check:
+        prompt: Tom is 3 years older than Sam. Sam is s. How old is Tom?
+        options:
+        - s + 3
+        - s − 3
+        - 3s
+        answer: s + 3
+        why: Older means add.
+    - teach: 'Shapes give equations too. A rectangle has length 2 cm more than its breadth b, and perimeter 28 cm: 2(b + b + 2) = 28, so 2b + 2 = 14, 2b = 12, b = 6 cm and length 8 cm.'
+      check:
+        prompt: A square's perimeter is 36 cm. Side s satisfies which equation?
+        options:
+        - 4s = 36
+        - s + 4 = 36
+        - 2s = 36
+        answer: 4s = 36
+        why: A square has 4 equal sides.
   items:
   - prompt: I double a number and add 3 to get 19. What is the number?
     answer: '8'
@@ -270,3 +483,130 @@ concepts:
     - Decreased means subtract.
     solution: 'The number minus 6 is 14: n − 6 = 14.'
     mistakes: {"6 − n = 14": "t7_decreased_by", "n + 6 = 14": "t7_decreased_by"}
+  - prompt: A number increased by 18 is 45. What is the number?
+    answer: '27'
+    check: 45-18
+    difficulty: 1
+    hints:
+    - Write n + 18 = 45.
+    - Take 18 from both sides.
+    solution: 'Step 1: n + 18 = 45. Step 2: n = 45 − 18 = 27.'
+    mistakes:
+      '63': c7m15_words
+      '2.5': c7m15_words
+  - prompt: Five times a number is 65. What is the number?
+    answer: '13'
+    check: 65/5
+    difficulty: 1
+    hints:
+    - Write 5n = 65.
+    - Divide both sides by 5.
+    solution: 'Step 1: 5n = 65. Step 2: n = 65 ÷ 5 = 13.'
+    mistakes:
+      '60': c7m15_words
+      '325': c7m15_words
+  - prompt: Which equation matches 'half of a number is 9'?
+    options:
+    - n/2 = 9
+    - 2n = 9
+    - n − 2 = 9
+    answer: n/2 = 9
+    difficulty: 1
+    hints:
+    - Half means divide by 2.
+    - Which one divides the number?
+    solution: Half of n is n ÷ 2, so n/2 = 9 (and n = 18).
+    mistakes:
+      2n = 9: c7m15_words
+      n − 2 = 9: c7m15_words
+  - prompt: Which equation matches '7 less than a number is 20'?
+    options:
+    - n − 7 = 20
+    - 7 − n = 20
+    - n + 7 = 20
+    answer: n − 7 = 20
+    difficulty: 1
+    hints:
+    - '''7 less than a number'' starts with the number.'
+    - Then 7 is taken away from it.
+    solution: 'Start with the number and take 7 away: n − 7 = 20 (so n = 27).'
+    mistakes:
+      7 − n = 20: c7m15_words
+      n + 7 = 20: c7m15_words
+  - prompt: I think of a number, multiply it by 4 and subtract 7 to get 25. What is the number?
+    answer: '8'
+    check: (25+7)/4
+    difficulty: 2
+    hints:
+    - Write 4n − 7 = 25.
+    - Add 7, then divide by 4.
+    solution: 'Step 1: 4n − 7 = 25. Step 2: 4n = 32. Step 3: n = 8. Check: 32 − 7 = 25 ✓.'
+    mistakes:
+      '4.5': c7m15_order
+      '32': c7m15_order
+  - prompt: A pen costs ₹12 more than a pencil. Together they cost ₹30. How much is the pencil, in rupees?
+    answer: '9'
+    check: (30-12)/2
+    difficulty: 2
+    hints:
+    - Let the pencil cost p. The pen costs p + 12.
+    - p + p + 12 = 30.
+    solution: 'Step 1: 2p + 12 = 30. Step 2: 2p = 18. Step 3: p = ₹9 (pen ₹21).'
+    mistakes:
+      '18': c7m15_order
+      '21': c7m15_unknown
+  - prompt: A rectangle's length is twice its breadth. Its perimeter is 42 cm. Find the breadth, in cm.
+    answer: '7'
+    check: 42/6
+    difficulty: 2
+    hints:
+    - Let the breadth be b; length is 2b.
+    - 2(2b + b) = 42, so 6b = 42.
+    solution: 'Step 1: 2(2b + b) = 6b = 42. Step 2: b = 7 cm (length 14 cm).'
+    mistakes:
+      '14': c7m15_unknown
+      '21': c7m15_unknown
+  - prompt: Ria's mother is 3 times as old as Ria. The sum of their ages is 48. How old is Ria?
+    answer: '12'
+    check: 48/4
+    difficulty: 2
+    hints:
+    - Let Ria be r; her mother is 3r.
+    - r + 3r = 48.
+    solution: 'Step 1: 4r = 48. Step 2: r = 12 (mother 36).'
+    mistakes:
+      '16': c7m15_unknown
+      '36': c7m15_unknown
+  - prompt: Four consecutive numbers add to 74. What is the largest?
+    answer: '20'
+    check: (74-6)/4+3
+    difficulty: 3
+    hints:
+    - Call them n, n + 1, n + 2, n + 3.
+    - 4n + 6 = 74.
+    solution: 'Step 1: 4n + 6 = 74, so 4n = 68 and n = 17. Step 2: the numbers are 17, 18, 19, 20; the largest is 20.'
+    mistakes:
+      '17': c7m15_unknown
+      '18.5': c7m15_order
+  - prompt: A class has 40 students. There are 6 more girls than boys. How many boys are there?
+    answer: '17'
+    check: (40-6)/2
+    difficulty: 3
+    hints:
+    - Let boys = b, girls = b + 6.
+    - 2b + 6 = 40.
+    solution: 'Step 1: b + b + 6 = 40. Step 2: 2b = 34. Step 3: b = 17 boys (23 girls).'
+    mistakes:
+      '23': c7m15_unknown
+      '20': c7m15_unknown
+  - prompt: A taxi charges ₹50 to start plus ₹15 per km. A ride cost ₹230. How many km was it?
+    answer: '12'
+    check: (230-50)/15
+    difficulty: 3
+    hints:
+    - Write 50 + 15k = 230.
+    - Take away 50, then divide by 15.
+    solution: 'Step 1: 15k = 230 − 50 = 180. Step 2: k = 180 ÷ 15 = 12 km.'
+    mistakes:
+      '15.33': c7m15_order
+      '18': c7m15_order

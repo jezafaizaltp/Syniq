@@ -92,6 +92,120 @@ def test_every_cbse8_maths_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/maths/") for _ in pack["concepts"]) >= 28
 
 
+def test_every_cbse8_science_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 8 Science (Curiosity): a lesson before practice, and at least 15 questions, like Maths."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse8/science/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/science/") for _ in pack["concepts"]) >= 26
+
+
+def test_every_cbse8_social_science_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 8 Social Science (Exploring Society): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse8/social-science/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/social-science/") for _ in pack["concepts"]) >= 30
+
+
+def test_every_cbse8_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 8 English (Poorvi): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse8/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/english/") for _ in pack["concepts"]) >= 15
+
+
+def test_every_cbse8_hindi_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 8 Hindi (Malhar): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse8/hindi/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse8/hindi/") for _ in pack["concepts"]) >= 10
+
+
+
+def test_every_cbse7_maths_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 7 Maths (Ganita Prakash, Parts 1 and 2): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse7/maths/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse7/maths/") for _ in pack["concepts"]) >= 30
+
+
+def test_every_cbse7_science_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 7 Science (Curiosity): a lesson before practice, and at least 15 questions, like Maths."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse7/science/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse7/science/") for _ in pack["concepts"]) >= 24
+
+def test_every_cbse7_social_science_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 7 Social Science (Exploring Society): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse7/social-science/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse7/social-science/") for _ in pack["concepts"]) >= 40
+
+def test_every_cbse7_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 7 English (Poorvi): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse7/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse7/english/") for _ in pack["concepts"]) >= 15
+
+def test_every_cbse7_hindi_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 7 Hindi (Malhar): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse7/hindi/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse7/hindi/") for _ in pack["concepts"]) >= 10
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {

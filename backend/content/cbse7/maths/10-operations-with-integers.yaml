@@ -12,6 +12,11 @@ tips:
   t7_sign_rules: "A negative times a positive is negative. A negative divided by a negative is positive."
   t7_temperature_rise: "Start at −4 and move 9 to the right. Count through 0."
   t7_three_negatives: "Count the minus signs: two make plus, and the third makes it minus again."
+  c7m10_direction: On the number line, adding a positive moves right and adding a negative moves left. Start at the first number and move.
+  c7m10_opposite: Subtracting a number is the same as adding its opposite. Change the minus-negative into a plus.
+  c7m10_signs: Same signs multiply or divide to a positive; different signs give a negative. Work out the size first, then the sign.
+  c7m10_count_neg: Count the negative factors. An even count makes the product positive, an odd count makes it negative.
+  c7m10_zero_pairs: Pair each positive token with a negative token; each pair is zero. What is left over is the answer.
 concepts:
 - code: cbse7m.int.addsub
   title: Adding and subtracting integers
@@ -77,6 +82,57 @@ concepts:
       - when:
           v: 8
         say: 'Both moves take you left: you end up below zero.'
+  lesson:
+    - teach: 'Integers are the whole numbers and their negatives: …, −3, −2, −1, 0, 1, 2, 3, … On a number line, adding a positive number moves right and adding a negative number moves left. 3 + (−5): start at 3, move 5 left, land on −2.'
+      picture:
+        kind: number_line
+        from: -4
+        to: 4
+        step: 1
+        points:
+        - at: 3
+          label: start
+        - at: -2
+          label: end
+        alt: Start at 3 and move 5 steps left to reach −2.
+      check:
+        prompt: Find (−4) + 6.
+        options:
+        - '2'
+        - −10
+        - −2
+        answer: '2'
+        why: Start at −4 and move 6 right.
+    - teach: 'Tokens help: a + token and a − token cancel to make zero (a zero pair). For (+3) + (−7): three zero pairs vanish and 4 negative tokens are left, so the answer is −4.'
+      picture:
+        kind: compare
+        columns:
+        - title: Tokens
+          points:
+          - + + +
+          - − − − − − − −
+        - title: After pairing
+          points:
+          - 3 zero pairs
+          - '− − − − left: −4'
+        alt: Three plus tokens cancel three of seven minus tokens, leaving four minus tokens.
+      check:
+        prompt: Find (+2) + (−5).
+        options:
+        - −3
+        - '3'
+        - −7
+        answer: −3
+        why: Two zero pairs vanish and three negatives are left.
+    - teach: Subtracting is adding the opposite. 2 − (−4) = 2 + 4 = 6, because taking away a debt leaves you richer. And −1 − 6 = −1 + (−6) = −7.
+      check:
+        prompt: Find 5 − (−3).
+        options:
+        - '8'
+        - '2'
+        - −8
+        answer: '8'
+        why: 5 + 3 = 8.
   items:
   - prompt: Find 5 + (−8).
     answer: '-3'
@@ -134,6 +190,130 @@ concepts:
     - Move up.
     solution: −2 + 7 = 5.
     mistakes: {"9": "t7_floors", "-9": "t7_floors"}
+  - prompt: Find 9 + (−4).
+    answer: '5'
+    check: 9+(-4)
+    difficulty: 1
+    hints:
+    - Start at 9.
+    - Move 4 to the left.
+    solution: 'Step 1: start at 9. Step 2: move 4 left to land on 5.'
+    mistakes:
+      '13': c7m10_direction
+      '-5': c7m10_direction
+  - prompt: Find (−6) + 2.
+    answer: '-4'
+    check: -6+2
+    difficulty: 1
+    hints:
+    - Start at −6.
+    - Move 2 to the right.
+    solution: 'Step 1: start at −6. Step 2: move 2 right to land on −4.'
+    mistakes:
+      '-8': c7m10_direction
+      '4': c7m10_direction
+  - prompt: Find 3 − 8.
+    answer: '-5'
+    check: 3-8
+    difficulty: 1
+    hints:
+    - Start at 3 and move 8 left.
+    - You pass 0.
+    solution: 'Step 1: 3 left to 0 uses 3 steps. Step 2: 5 more steps left reach −5.'
+    mistakes:
+      '5': c7m10_direction
+      '11': c7m10_direction
+  - prompt: Find (−9) + (−3).
+    answer: '-12'
+    check: -9+(-3)
+    difficulty: 1
+    hints:
+    - Both are negative.
+    - Move 3 more to the left from −9.
+    solution: 'Step 1: start at −9. Step 2: move 3 left to −12.'
+    mistakes:
+      '-6': c7m10_direction
+      '12': c7m10_direction
+  - prompt: Find 7 − (−5).
+    answer: '12'
+    check: 7-(-5)
+    difficulty: 2
+    hints:
+    - Change − (−5) to + 5.
+    - 7 + 5.
+    solution: 'Step 1: 7 − (−5) = 7 + 5. Step 2: = 12.'
+    mistakes:
+      '2': c7m10_opposite
+      '-12': c7m10_opposite
+  - prompt: Find (−8) − (−3).
+    answer: '-5'
+    check: -8-(-3)
+    difficulty: 2
+    hints:
+    - Change − (−3) to + 3.
+    - −8 + 3.
+    solution: 'Step 1: −8 − (−3) = −8 + 3. Step 2: = −5.'
+    mistakes:
+      '-11': c7m10_opposite
+      '5': c7m10_opposite
+  - prompt: The temperature in Leh was 3 °C at noon and fell by 11 degrees by night. What was the night temperature, in °C?
+    answer: '-8'
+    check: 3-11
+    difficulty: 2
+    hints:
+    - Falling means subtract.
+    - 3 − 11.
+    solution: 'Step 1: 3 − 11. Step 2: move 11 left from 3, past 0, to −8 °C.'
+    mistakes:
+      '8': c7m10_direction
+      '14': c7m10_direction
+  - prompt: How much warmer is 5 °C than −7 °C, in degrees?
+    answer: '12'
+    check: 5-(-7)
+    difficulty: 2
+    hints:
+    - 'Find the difference: 5 − (−7).'
+    - From −7 up to 0, then up to 5.
+    solution: 'Step 1: 5 − (−7) = 5 + 7. Step 2: = 12 degrees.'
+    mistakes:
+      '-2': c7m10_opposite
+      '2': c7m10_opposite
+  - prompt: Find (−15) + 20 + (−8) + 6.
+    answer: '3'
+    check: -15+20-8+6
+    difficulty: 3
+    hints:
+    - Add the positives and the negatives separately.
+    - 26 and −23.
+    solution: 'Step 1: positives 20 + 6 = 26; negatives −15 + (−8) = −23. Step 2: 26 + (−23) = 3.'
+    mistakes:
+      '-3': c7m10_zero_pairs
+      '49': c7m10_direction
+  - prompt: A submarine is 120 m below sea level (−120 m). It rises 45 m, then dives 30 m. Where is it now, in m?
+    answer: '-105'
+    check: -120+45-30
+    difficulty: 3
+    hints:
+    - Rising adds, diving subtracts.
+    - −120 + 45 − 30.
+    solution: 'Step 1: −120 + 45 = −75. Step 2: −75 − 30 = −105 m.'
+    mistakes:
+      '-135': c7m10_direction
+      '105': c7m10_direction
+  - prompt: Which expression has the largest value?
+    options:
+    - 4 − (−6)
+    - 4 + (−6)
+    - −4 − 6
+    answer: 4 − (−6)
+    difficulty: 3
+    hints:
+    - Work each one out.
+    - Subtracting a negative adds.
+    solution: 4 − (−6) = 10, 4 + (−6) = −2 and −4 − 6 = −10. The largest is 10.
+    mistakes:
+      4 + (−6): c7m10_opposite
+      −4 − 6: c7m10_opposite
 - code: cbse7m.int.multdiv
   title: Multiplying and dividing integers
   after:
@@ -203,6 +383,54 @@ concepts:
       bin: Zero
       clue: Sharing nothing.
       why: '0.'
+  lesson:
+    - teach: '3 × (−4) means three lots of −4: −4 + −4 + −4 = −12. So a positive times a negative is negative. The pattern 3 × (−4) = −12, 2 × (−4) = −8, 1 × (−4) = −4, 0 × (−4) = 0 goes up by 4 each time, so (−1) × (−4) = 4: a negative times a negative is positive.'
+      picture:
+        kind: flow
+        steps:
+        - 3 × (−4) = −12
+        - 2 × (−4) = −8
+        - 1 × (−4) = −4
+        - 0 × (−4) = 0
+        - (−1) × (−4) = 4
+        alt: The products rise by 4 each step, so (−1) × (−4) is 4.
+      check:
+        prompt: Find 5 × (−3).
+        options:
+        - −15
+        - '15'
+        - −8
+        answer: −15
+        why: Five lots of −3.
+    - teach: 'Sign rules, first written by Brahmagupta in 628 CE as fortunes and debts: same signs give a positive, different signs give a negative. Division follows the same rules: (−18) ÷ 3 = −6 and (−18) ÷ (−3) = 6.'
+      picture:
+        kind: compare
+        columns:
+        - title: Same signs → +
+          points:
+          - (+) × (+) = +
+          - (−) × (−) = +
+        - title: Different signs → −
+          points:
+          - (+) × (−) = −
+          - (−) × (+) = −
+        alt: Same signs make a positive, different signs make a negative.
+      check:
+        prompt: Find (−24) ÷ (−6).
+        options:
+        - '4'
+        - −4
+        - '18'
+        answer: '4'
+        why: Same signs give a positive.
+    - teach: With several factors, count the negatives. Two negatives make a positive pair, so an even count of negatives gives a positive product and an odd count gives a negative one. (−1) × (−1) × (−1) = −1.
+      check:
+        prompt: Is (−2) × (−2) × (−2) × (−2) positive or negative?
+        options:
+        - Positive
+        - Negative
+        answer: Positive
+        why: 'Four negatives: an even count.'
   items:
   - prompt: Find (−3) × (−4).
     answer: '12'
@@ -259,3 +487,127 @@ concepts:
     - A loss is negative.
     solution: 4 × (−15) = −60.
     mistakes: {"60": "t7_loss_negative", "-19": "t7_loss_negative"}
+  - prompt: Find (−6) × 7.
+    answer: '-42'
+    check: -6*7
+    difficulty: 1
+    hints:
+    - 6 × 7 = 42.
+    - Different signs give a negative.
+    solution: 'Step 1: 6 × 7 = 42. Step 2: the signs differ, so −42.'
+    mistakes:
+      '42': c7m10_signs
+      '-13': c7m10_signs
+  - prompt: Find (−8) × (−5).
+    answer: '40'
+    check: -8*-5
+    difficulty: 1
+    hints:
+    - Multiply the sizes first, 8 × 5, ignoring the signs.
+    - Same signs give a positive.
+    solution: 'Step 1: 8 × 5 = 40. Step 2: both negative, so +40.'
+    mistakes:
+      '-40': c7m10_signs
+      '-13': c7m10_signs
+  - prompt: Find 36 ÷ (−9).
+    answer: '-4'
+    check: 36/-9
+    difficulty: 1
+    hints:
+    - 36 ÷ 9 = 4.
+    - Different signs give a negative.
+    solution: 'Step 1: 36 ÷ 9 = 4. Step 2: the signs differ, so −4.'
+    mistakes:
+      '4': c7m10_signs
+      '-27': c7m10_signs
+  - prompt: Find (−45) ÷ (−5).
+    answer: '9'
+    check: -45/-5
+    difficulty: 1
+    hints:
+    - 45 ÷ 5 = 9.
+    - Same signs give a positive.
+    solution: 'Step 1: 45 ÷ 5 = 9. Step 2: both negative, so +9.'
+    mistakes:
+      '-9': c7m10_signs
+      '-40': c7m10_signs
+  - prompt: Find (−1) × (−1) × (−1) × (−1) × (−1).
+    answer: '-1'
+    check: (-1)**5
+    difficulty: 2
+    hints:
+    - Count the negative factors.
+    - Five is odd.
+    solution: 'Five negative factors is an odd count, so the product is negative: −1.'
+    mistakes:
+      '1': c7m10_count_neg
+      '-5': c7m10_count_neg
+  - prompt: Find (−4) × 3 × (−5).
+    answer: '60'
+    check: -4*3*-5
+    difficulty: 2
+    hints:
+    - Multiply the sizes first, 4 × 3 × 5, ignoring the signs.
+    - Two negative factors.
+    solution: 'Step 1: 4 × 3 × 5 = 60. Step 2: two negatives (even), so +60.'
+    mistakes:
+      '-60': c7m10_count_neg
+      '-6': c7m10_signs
+  - prompt: A diver goes down 4 m every minute. Write her change in depth after 6 minutes as an integer, in m.
+    answer: '-24'
+    check: 6*-4
+    difficulty: 2
+    hints:
+    - 'Going down is negative: −4 each minute.'
+    - 6 × (−4).
+    solution: 'Step 1: each minute is −4 m. Step 2: 6 × (−4) = −24 m.'
+    mistakes:
+      '24': c7m10_signs
+      '-10': c7m10_signs
+  - prompt: Find (−3) × (−3) − 10.
+    answer: '-1'
+    check: -3*-3-10
+    difficulty: 2
+    hints:
+    - Multiply first.
+    - (−3) × (−3) is positive.
+    solution: 'Step 1: (−3) × (−3) = 9. Step 2: 9 − 10 = −1.'
+    mistakes:
+      '-19': c7m10_signs
+      '1': c7m10_direction
+  - prompt: In a quiz, a right answer gives +4 and a wrong one gives −2. Sana gets 7 right and 5 wrong. What is her score?
+    answer: '18'
+    check: 7*4+5*-2
+    difficulty: 3
+    hints:
+    - 'Right: 7 × 4. Wrong: 5 × (−2).'
+    - Add the two.
+    solution: 'Step 1: 7 × 4 = 28. Step 2: 5 × (−2) = −10. Step 3: 28 + (−10) = 18.'
+    mistakes:
+      '38': c7m10_signs
+      '-18': c7m10_direction
+  - prompt: What number times (−7) gives 63?
+    answer: '-9'
+    check: 63/-7
+    difficulty: 3
+    hints:
+    - Divide 63 by −7.
+    - Different signs give a negative.
+    solution: 'Step 1: 63 ÷ (−7). Step 2: 63 ÷ 7 = 9, and the signs differ, so −9. Check: (−9) × (−7) = 63.'
+    mistakes:
+      '9': c7m10_signs
+      '-56': c7m10_signs
+  - prompt: Which of these is positive?
+    options:
+    - (−2) × (−3) × (−4) × (−1)
+    - (−2) × (−3) × (−4)
+    - (−2) × 3 × 4
+    answer: (−2) × (−3) × (−4) × (−1)
+    difficulty: 3
+    hints:
+    - Count the negative factors in each.
+    - Which has an even count?
+    solution: The first has four negatives (even), so it is positive (24). The others have three and one negatives, so they are negative.
+    mistakes:
+      (−2) × (−3) × (−4): c7m10_count_neg
+      (−2) × 3 × 4: c7m10_count_neg

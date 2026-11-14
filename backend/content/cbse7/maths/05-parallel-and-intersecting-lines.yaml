@@ -15,6 +15,10 @@ tips:
   t7_right_angles: "Each angle next to a 90° angle must make 180° with it, and opposite angles are equal."
   t7_straight_angle: "Angles next to each other on a straight line add to 180°."
   t7_x_3x: "x and 3x sit on a straight line, so x + 3x = 180°."
+  c7m5_opposite: Angles across from each other at a crossing are equal; angles side by side on a line add to 180°.
+  c7m5_line: Angles that sit together on a straight line add to 180°.
+  c7m5_names: 'Corresponding: same position at each crossing (F shape). Alternate: opposite sides, between the lines (Z shape). Same-side interior: between the lines, same side (C shape).'
+  c7m5_parallel: With parallel lines, corresponding and alternate angles are equal, and same-side interior angles add to 180°.
 concepts:
 - code: cbse7m.lines.types
   title: Intersecting, perpendicular and parallel lines
@@ -91,6 +95,92 @@ concepts:
       - when:
           degrees: 180
         say: 180° is a straight line. Perpendicular lines meet at a right angle.
+  lesson:
+    - teach: Two lines in a plane either meet at one point (intersecting) or never meet (parallel). Parallel lines stay the same distance apart, like railway tracks. Lines that meet at 90° are perpendicular, like the edges at a page corner.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 2
+          B:
+          - 9
+          - 2
+          C:
+          - 1
+          - 6
+          D:
+          - 9
+          - 6
+        segments:
+        - - A
+          - B
+        - - C
+          - D
+        alt: 'Two horizontal lines AB and CD that never meet: parallel lines.'
+      check:
+        prompt: Which pair are perpendicular?
+        options:
+        - The two edges meeting at a corner of a book
+        - Two railway rails
+        - Two lines of a ruled notebook
+        answer: The two edges meeting at a corner of a book
+        why: They meet at a right angle, 90°.
+    - teach: When two lines cross, they make 4 angles. Vertically opposite angles are equal. Angles next to each other on a line (a linear pair) add to 180°.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 2
+          B:
+          - 9
+          - 8
+          C:
+          - 1
+          - 8
+          D:
+          - 9
+          - 2
+          O:
+          - 5
+          - 5
+        segments:
+        - - A
+          - B
+        - - C
+          - D
+        angles:
+        - at: O
+          from: B
+          to: C
+          label: 40°
+        - at: O
+          from: A
+          to: D
+          label: 40°
+        - at: O
+          from: C
+          to: A
+          label: 140°
+        alt: Two crossing lines make opposite angles of 40° each, and the neighbouring angle is 140°.
+      check:
+        prompt: Two lines cross and one angle is 70°. What is its vertically opposite angle?
+        options:
+        - 70°
+        - 110°
+        - 20°
+        answer: 70°
+        why: Vertically opposite angles are equal.
+    - teach: 'If one angle at a crossing is 90°, all four are 90°: the lines are perpendicular, written AB ⊥ CD. Parallel lines are written AB ∥ CD.'
+      check:
+        prompt: What does PQ ∥ RS mean?
+        options:
+        - PQ is parallel to RS
+        - PQ is perpendicular to RS
+        - PQ is equal to RS
+        answer: PQ is parallel to RS
+        why: ∥ is the symbol for parallel.
   items:
   - prompt: Two lines cross. One angle is 40°. What is the angle opposite it, in degrees?
     answer: '40'
@@ -159,6 +249,109 @@ concepts:
     - ∥ means parallel.
     solution: '⊥ means perpendicular: meeting at 90°.'
     mistakes: {"AB is parallel to CD": "t7_perp_symbol", "AB crosses CD at 45°": "t7_perp_symbol"}
+  - prompt: Two lines cross. One angle is 65°. What is the angle next to it, in degrees?
+    answer: '115'
+    check: 180-65
+    difficulty: 1
+    hints:
+    - Neighbouring angles on a line add to 180°.
+    - 180 − 65.
+    solution: 'Step 1: they form a linear pair. Step 2: 180 − 65 = 115°.'
+    mistakes:
+      '65': c7m5_opposite
+      '25': c7m5_line
+  - prompt: Two lines cross. One angle is 125°. What is the angle opposite it, in degrees?
+    answer: '125'
+    check: '125'
+    difficulty: 1
+    hints:
+    - Opposite angles at a crossing match.
+    - No calculation needed.
+    solution: Vertically opposite angles are equal, so 125°.
+    mistakes:
+      '55': c7m5_opposite
+  - prompt: Two crossing lines make angles x and 2x side by side. Find x in degrees.
+    answer: '60'
+    check: 180/3
+    difficulty: 2
+    hints:
+    - Side by side means they add to 180°.
+    - x + 2x = 3x.
+    solution: 'Step 1: x + 2x = 180. Step 2: 3x = 180. Step 3: x = 60°.'
+    mistakes:
+      '90': c7m5_line
+      '45': c7m5_line
+  - prompt: Two lines cross. One angle is 50°. What do all four angles add up to, in degrees?
+    answer: '360'
+    check: 50+130+50+130
+    difficulty: 2
+    hints:
+    - 'Find all four: 50, 130, 50, 130.'
+    - 'Or: they go all the way round the point.'
+    solution: 'Step 1: angles 50°, 130°, 50°, 130°. Step 2: total 360°, a full turn.'
+    mistakes:
+      '180': c7m5_line
+  - prompt: Which is an example of parallel lines?
+    options:
+    - Opposite edges of a blackboard
+    - The hands of a clock at 3 o'clock
+    - The letter X
+    answer: Opposite edges of a blackboard
+    difficulty: 1
+    hints:
+    - Parallel lines never meet.
+    - Clock hands at 3 o'clock meet at the centre.
+    solution: Opposite edges of a rectangle never meet and stay the same distance apart.
+    mistakes:
+      The hands of a clock at 3 o'clock: t7_parallel_never_meet
+      The letter X: t7_parallel_never_meet
+  - prompt: Two crossing lines make a linear pair where one angle is 30° more than the other. Find the smaller angle.
+    answer: '75'
+    check: (180-30)/2
+    difficulty: 3
+    hints:
+    - Let the angles be x and x + 30.
+    - x + x + 30 = 180.
+    solution: 'Step 1: 2x + 30 = 180. Step 2: 2x = 150. Step 3: x = 75°.'
+    mistakes:
+      '90': c7m5_line
+      '105': c7m5_line
+  - prompt: 'At 3 o''clock, the hands of a clock are:'
+    options:
+    - Perpendicular
+    - Parallel
+    - On top of each other
+    answer: Perpendicular
+    difficulty: 1
+    hints:
+    - One hand points up, one to the right.
+    - What angle is that?
+    solution: The hands make 90°, so they are perpendicular.
+    mistakes:
+      Parallel: t7_right_angles
+      On top of each other: t7_right_angles
+  - prompt: Two lines cross. One angle is 90°. What is the sum of the other three, in degrees?
+    answer: '270'
+    check: 360-90
+    difficulty: 2
+    hints:
+    - All four add to 360°.
+    - 'Or: each of the others is also 90°.'
+    solution: 'Step 1: all four angles are 90°. Step 2: 3 × 90 = 270°.'
+    mistakes:
+      '90': c7m5_opposite
+      '180': c7m5_line
+  - prompt: How many points do two different intersecting straight lines share?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Picture an X.
+    - Where do the lines touch?
+    solution: Two different straight lines can cross at only one point.
+    mistakes:
+      '2': t7_parallel_never_meet
+      '0': t7_parallel_never_meet
 - code: cbse7m.lines.transversal
   title: Parallel lines and a transversal
   after:
@@ -229,6 +422,92 @@ concepts:
       - when:
           degrees: 70
         say: 70° adds to 110° to make 180°. Alternate angles (the Z shape) are equal.
+  lesson:
+    - teach: 'A transversal is a line that crosses two (or more) lines. With two lines it makes 8 angles: 4 at each crossing.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 0
+          - 3
+          B:
+          - 10
+          - 3
+          C:
+          - 0
+          - 7
+          D:
+          - 10
+          - 7
+          P:
+          - 3
+          - 0
+          Q:
+          - 7
+          - 10
+          M:
+          - 4.2
+          - 3
+          N:
+          - 5.8
+          - 7
+        segments:
+        - - A
+          - B
+        - - C
+          - D
+        - - P
+          - Q
+        angles:
+        - at: M
+          from: B
+          to: Q
+          label: '1'
+        - at: N
+          from: D
+          to: Q
+          label: '5'
+        alt: 'Two parallel lines cut by a transversal; angles 1 and 5 are in the same position at each crossing: corresponding angles.'
+      check:
+        prompt: How many angles does a transversal make with two lines?
+        options:
+        - '8'
+        - '4'
+        - '6'
+        answer: '8'
+        why: 4 at each of the 2 crossings.
+    - teach: Corresponding angles are in the same position at each crossing (an F shape). Alternate angles are between the lines on opposite sides of the transversal (a Z shape). Same-side interior angles are between the lines on the same side (a C shape).
+      check:
+        prompt: Alternate angles make which letter shape?
+        options:
+        - Z
+        - F
+        - C
+        answer: Z
+        why: They sit in the two corners of a Z.
+    - teach: 'If the two lines are parallel: corresponding angles are equal, alternate angles are equal, and same-side interior angles add to 180°. And the other way round: if corresponding or alternate angles are equal, the lines must be parallel.'
+      picture:
+        kind: compare
+        columns:
+        - title: Pair
+          points:
+          - Corresponding (F)
+          - Alternate (Z)
+          - Same-side interior (C)
+        - title: With parallel lines
+          points:
+          - equal
+          - equal
+          - add to 180°
+        alt: With parallel lines, corresponding and alternate angles are equal; same-side interior angles add to 180°.
+      check:
+        prompt: Parallel lines, same-side interior angle 120°. What is the other?
+        options:
+        - 60°
+        - 120°
+        - 240°
+        answer: 60°
+        why: They add to 180°.
   items:
   - prompt: Two parallel lines are cut by a transversal. One corresponding angle is 65°. What is the other, in degrees?
     answer: '65'
@@ -293,3 +572,111 @@ concepts:
     - Two crossings.
     solution: 4 + 4 = 8 angles.
     mistakes: {"4": "t7_eight_angles", "6": "t7_eight_angles"}
+  - prompt: Parallel lines are cut by a transversal. One corresponding angle is 72°. What is the other, in degrees?
+    answer: '72'
+    check: '72'
+    difficulty: 1
+    hints:
+    - Corresponding angles with parallel lines…
+    - …are equal.
+    solution: 'With parallel lines, corresponding angles are equal: 72°.'
+    mistakes:
+      '108': c7m5_parallel
+  - prompt: Parallel lines are cut by a transversal. One same-side interior angle is 58°. Find the other, in degrees.
+    answer: '122'
+    check: 180-58
+    difficulty: 2
+    hints:
+    - Same-side interior angles add to 180°.
+    - 180 − 58.
+    solution: 'Step 1: they add to 180°. Step 2: 180 − 58 = 122°.'
+    mistakes:
+      '58': c7m5_parallel
+      '32': c7m5_parallel
+  - prompt: Parallel lines are cut by a transversal. One alternate angle is 47°. What is the other, in degrees?
+    answer: '47'
+    check: '47'
+    difficulty: 1
+    hints:
+    - Think of the Z shape.
+    - With parallel lines they match.
+    solution: 'Alternate angles between parallel lines are equal: 47°.'
+    mistakes:
+      '133': c7m5_parallel
+  - prompt: Corresponding angles make which letter shape?
+    options:
+    - F
+    - Z
+    - C
+    answer: F
+    difficulty: 1
+    hints:
+    - They are in the same position at each crossing.
+    - One above the other along the transversal.
+    solution: Corresponding angles sit like the two arms of an F.
+    mistakes:
+      Z: c7m5_names
+      C: c7m5_names
+  - prompt: A transversal makes alternate angles of 80° and 85° with two lines. Are the lines parallel?
+    options:
+    - No, alternate angles would be equal
+    - 'Yes'
+    - Only if extended
+    answer: No, alternate angles would be equal
+    difficulty: 2
+    hints:
+    - For parallel lines, alternate angles are equal.
+    - Are 80° and 85° equal?
+    solution: Unequal alternate angles mean the lines are not parallel; they will meet somewhere.
+    mistakes:
+      'Yes': t7_converse_parallel
+      Only if extended: t7_converse_parallel
+  - prompt: Parallel lines, one angle at a crossing is 110°. What is the angle vertically opposite its corresponding angle, in degrees?
+    answer: '110'
+    check: '110'
+    difficulty: 3
+    hints:
+    - The corresponding angle is 110°.
+    - Its vertically opposite angle is equal to it.
+    solution: 'Step 1: corresponding angle = 110°. Step 2: its vertically opposite angle = 110°.'
+    mistakes:
+      '70': c7m5_opposite
+  - prompt: Parallel lines, same-side interior angles are x and 2x. Find x in degrees.
+    answer: '60'
+    check: 180/3
+    difficulty: 3
+    hints:
+    - Same-side interior angles add to 180°.
+    - x + 2x = 180.
+    solution: 'Step 1: 3x = 180. Step 2: x = 60°.'
+    mistakes:
+      '90': c7m5_parallel
+      '120': c7m5_parallel
+  - prompt: Parallel lines are cut by a transversal. One angle is 35°. Which of these could NOT be another of the 8 angles?
+    options:
+    - 90°
+    - 35°
+    - 145°
+    answer: 90°
+    difficulty: 3
+    hints:
+    - Each angle is either 35° or its partner on the line.
+    - 180 − 35 = 145.
+    solution: All 8 angles are 35° or 145°, so 90° cannot appear.
+    mistakes:
+      35°: c7m5_parallel
+      145°: c7m5_parallel
+  - prompt: Which tells you two lines are parallel?
+    options:
+    - Equal corresponding angles
+    - One angle of 90°
+    - Angles that add to 360°
+    answer: Equal corresponding angles
+    difficulty: 2
+    hints:
+    - Think of the converse rule.
+    - Matching angles in the same position.
+    solution: If corresponding angles are equal, the lines are parallel.
+    mistakes:
+      One angle of 90°: t7_converse_parallel
+      Angles that add to 360°: t7_converse_parallel

@@ -14,6 +14,12 @@ tips:
   t7_pinhole: "Light from the top of the object travels straight through the hole to the bottom of the screen."
   t7_straight_lines: "Light can't bend round corners on its own. What path does it take?"
   t7_translucent: "Transparent lets all light through, opaque none. 'Some' is in between."
+  c7s11_path: Light keeps going in one direction until something stops or turns it. It cannot bend round a corner by itself.
+  c7s11_own: Ask whether the object makes light itself, or is only seen because light from somewhere else bounces off it.
+  c7s11_through: 'Sort by how much light gets through: nearly all, only some (things behind look blurred), or none at all.'
+  c7s11_shadow: A dark patch forms behind an object that stops light. It is always on the side away from the light, and its shape follows the object's outline.
+  c7s11_equal: At a mirror, the ray leaves at the same angle to the normal as it arrived. Measure both angles from the normal, not from the mirror.
+  c7s11_image: In a flat mirror the picture is the same size and the right way up, just as far behind as you are in front, with left and right swapped.
 concepts:
 - code: cbse7s.light.shadow
   title: How light travels and shadows
@@ -91,6 +97,65 @@ concepts:
       bin: Opaque
       clue: Makes a dark shadow.
       why: Opaque.
+  lesson:
+    - teach: Light travels in straight lines. Look at a candle through a straight pipe and you see it; bend the pipe and you cannot. Sunbeams through a gap in the clouds and torch beams in fog are straight too.
+      picture:
+        kind: compare
+        columns:
+        - title: Straight pipe
+          points:
+          - candle seen
+          - light reaches the eye
+        - title: Bent pipe
+          points:
+          - candle not seen
+          - light cannot turn the corner
+        alt: A candle can be seen through a straight pipe but not a bent one.
+      check:
+        prompt: Why can't you see a candle through a bent pipe?
+        options:
+        - Light travels in straight lines
+        - The pipe is too long
+        - Candles give no light
+        answer: Light travels in straight lines
+        why: Light cannot follow the bend.
+    - teach: 'Luminous objects give out their own light: the Sun, a bulb, a candle flame. Non-luminous objects, like the Moon or a book, are seen because light bounces off them into our eyes. Materials are transparent (let almost all light through, like clear glass), translucent (let some through, like butter paper) or opaque (let none through, like wood).'
+      picture:
+        kind: compare
+        columns:
+        - title: Transparent
+          points:
+          - clear glass
+          - clean water
+          - see clearly through
+        - title: Translucent
+          points:
+          - butter paper
+          - frosted glass
+          - see blurred
+        - title: Opaque
+          points:
+          - wood
+          - metal
+          - see nothing
+        alt: Transparent, translucent and opaque materials.
+      check:
+        prompt: 'Frosted glass in a bathroom window is:'
+        options:
+        - Translucent
+        - Transparent
+        - Opaque
+        answer: Translucent
+        why: Some light passes, but you cannot see clearly through it.
+    - teach: An opaque object blocks light and makes a shadow on the side away from the light. You need a light source, an opaque object and a screen. A pinhole camera, a box with a tiny hole, shows an upside-down image because straight rays from the top of an object cross at the hole and land at the bottom.
+      check:
+        prompt: 'The image in a pinhole camera is:'
+        options:
+        - Upside down
+        - The right way up
+        - In colour only at night
+        answer: Upside down
+        why: Rays cross at the pinhole.
   items:
   - prompt: 'Light travels in:'
     options:
@@ -171,6 +236,160 @@ concepts:
     - Straight rays.
     solution: Light cannot follow the bend.
     mistakes: {"The pipe absorbs heat": "t7_straight_lines", "Candles are too dim": "t7_straight_lines"}
+  - prompt: Which of these is luminous?
+    options:
+    - A burning candle
+    - The Moon
+    - A mirror
+    answer: A burning candle
+    difficulty: 1
+    hints:
+    - Which one makes its own light?
+    - The Moon only reflects sunlight.
+    solution: A candle flame gives out its own light, so it is luminous.
+    mistakes:
+      The Moon: c7s11_own
+      A mirror: c7s11_own
+  - prompt: Which material is opaque?
+    options:
+    - A wooden board
+    - Clear glass
+    - Butter paper
+    answer: A wooden board
+    difficulty: 1
+    hints:
+    - Opaque lets no light through.
+    - Can you see through wood?
+    solution: Wood blocks all light, so it is opaque.
+    mistakes:
+      Clear glass: c7s11_through
+      Butter paper: c7s11_through
+  - prompt: 'Clean water in a glass is:'
+    options:
+    - Transparent
+    - Opaque
+    - Luminous
+    answer: Transparent
+    difficulty: 1
+    hints:
+    - Can you see clearly through it?
+    - Almost all light passes.
+    solution: Light passes through clean water, so you can see clearly through it.
+    mistakes:
+      Opaque: c7s11_through
+      Luminous: c7s11_own
+  - prompt: What three things are needed to see a shadow?
+    options:
+    - A light source, an opaque object and a screen
+    - Only a mirror
+    - Only water and glass
+    answer: A light source, an opaque object and a screen
+    difficulty: 1
+    hints:
+    - Something must give light.
+    - Something must block it, and something must show the dark patch.
+    solution: Light from a source is blocked by an opaque object, and the shadow falls on a screen.
+    mistakes:
+      Only a mirror: c7s11_shadow
+      Only water and glass: c7s11_through
+  - prompt: A torch shines on a ball from the left. Where is the ball's shadow?
+    options:
+    - On the right of the ball
+    - On the left of the ball
+    - Inside the torch
+    answer: On the right of the ball
+    difficulty: 2
+    hints:
+    - Shadows are on the side away from the light.
+    - The light comes from the left.
+    solution: The ball blocks light coming from the left, so the shadow falls on its right side.
+    mistakes:
+      On the left of the ball: c7s11_shadow
+      Inside the torch: c7s11_shadow
+  - prompt: Why do we see the Moon at night?
+    options:
+    - It reflects sunlight
+    - It makes its own light
+    - Stars light it up from behind
+    answer: It reflects sunlight
+    difficulty: 2
+    hints:
+    - Is the Moon luminous?
+    - Where does its light come from?
+    solution: The Moon is non-luminous; sunlight bounces off it into our eyes.
+    mistakes:
+      It makes its own light: c7s11_own
+      Stars light it up from behind: c7s11_own
+  - prompt: 'A sunbeam entering a dark room through a small hole looks like a straight bright line. This shows:'
+    options:
+    - Light travels in straight lines
+    - Light bends round corners
+    - Light is a liquid
+    answer: Light travels in straight lines
+    difficulty: 2
+    hints:
+    - Look at the shape of the beam.
+    - Does it curve?
+    solution: The beam is straight because light travels in straight lines.
+    mistakes:
+      Light bends round corners: c7s11_path
+      Light is a liquid: c7s11_path
+  - prompt: Can the colour of a red ball be seen in its shadow?
+    options:
+    - No, shadows are dark whatever the colour
+    - Yes, the shadow is red
+    - Only in sunlight
+    answer: No, shadows are dark whatever the colour
+    difficulty: 2
+    hints:
+    - A shadow is where light does not reach.
+    - Does the colour pass through the ball?
+    solution: A shadow is simply an area with no light, so it is dark, not coloured.
+    mistakes:
+      Yes, the shadow is red: c7s11_shadow
+      Only in sunlight: c7s11_shadow
+  - prompt: In a pinhole camera, a tree is seen. Why is the image upside down?
+    options:
+    - Rays from the top go down through the hole and rays from the bottom go up
+    - The box is turned over
+    - Light bends inside the box
+    answer: Rays from the top go down through the hole and rays from the bottom go up
+    difficulty: 3
+    hints:
+    - Light travels in straight lines.
+    - Draw a line from the treetop through the hole.
+    solution: Straight rays cross at the pinhole, so the top of the tree lands at the bottom of the screen.
+    mistakes:
+      The box is turned over: c7s11_path
+      Light bends inside the box: c7s11_path
+  - prompt: Your shadow is long in the early morning and short at noon. Why?
+    options:
+    - The Sun is low in the morning and high at noon
+    - You grow during the day
+    - Light is weaker at noon
+    answer: The Sun is low in the morning and high at noon
+    difficulty: 3
+    hints:
+    - Where is the Sun at each time?
+    - Low light makes long shadows.
+    solution: A low Sun sends rays at a slant, stretching the shadow; at noon it is overhead and the shadow is short.
+    mistakes:
+      You grow during the day: c7s11_shadow
+      Light is weaker at noon: c7s11_shadow
+  - prompt: A coin, a sheet of tracing paper and a glass slide are held in front of a torch. Which order shows least light to most light passing through?
+    options:
+    - Coin, tracing paper, glass slide
+    - Glass slide, coin, tracing paper
+    - Tracing paper, glass slide, coin
+    answer: Coin, tracing paper, glass slide
+    difficulty: 3
+    hints:
+    - Which blocks all light?
+    - Which lets almost all through?
+    solution: The coin is opaque (none), tracing paper translucent (some), the glass slide transparent (almost all).
+    mistakes:
+      Glass slide, coin, tracing paper: c7s11_through
+      Tracing paper, glass slide, coin: c7s11_through
 - code: cbse7s.light.reflect
   title: Reflection and mirrors
   after:
@@ -263,6 +482,89 @@ concepts:
       bin: Gets swapped or changed
       clue: Watch a clock in a mirror.
       why: Left-right swap.
+  lesson:
+    - teach: Reflection is light bouncing off a surface. Smooth shiny surfaces like mirrors reflect light neatly, so we see images in them. The ray coming in is the incident ray; the ray going out is the reflected ray; the line at 90° to the mirror where the ray hits is the normal.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 8
+          O:
+          - 5
+          - 2
+          B:
+          - 9
+          - 8
+          N:
+          - 5
+          - 9
+          L:
+          - 1
+          - 2
+          R:
+          - 9
+          - 2
+        segments:
+        - - L
+          - R
+          - mirror
+        - - A
+          - O
+        - - O
+          - B
+        - - O
+          - N
+          - normal
+        angles:
+        - at: O
+          from: N
+          to: A
+          label: i
+        - at: O
+          from: B
+          to: N
+          label: r
+        alt: A ray AO hits a mirror at O and reflects along OB. The normal ON makes equal angles i and r with the two rays.
+      check:
+        prompt: 'The line drawn at 90° to the mirror where the ray hits is called:'
+        options:
+        - The normal
+        - The incident ray
+        - The shadow
+        answer: The normal
+        why: Angles are measured from it.
+    - teach: 'Laws of reflection: the angle of incidence (between incident ray and normal) equals the angle of reflection (between reflected ray and normal), and both rays and the normal lie in one flat plane. If light hits at 40° to the normal, it leaves at 40°.'
+      check:
+        prompt: A ray hits a mirror at 25° to the normal. What is the angle of reflection?
+        options:
+        - 25°
+        - 65°
+        - 50°
+        answer: 25°
+        why: Angle of incidence equals angle of reflection.
+    - teach: 'A plane (flat) mirror makes an image that is upright, the same size, as far behind the mirror as the object is in front, and laterally inverted: raise your right hand and the image raises its left. That is why AMBULANCE is written reversed on the front of ambulances. A periscope uses two mirrors to see over walls.'
+      picture:
+        kind: compare
+        columns:
+        - title: Object
+          points:
+          - you, 2 m in front
+          - right hand raised
+        - title: Image
+          points:
+          - upright, same size
+          - 2 m behind the mirror
+          - left hand appears raised
+        alt: Features of an image in a plane mirror.
+      check:
+        prompt: You stand 3 m from a mirror. How far behind the mirror is your image?
+        options:
+        - 3 m
+        - 6 m
+        - 1.5 m
+        answer: 3 m
+        why: The image is as far behind as you are in front.
   items:
   - prompt: A ray hits a mirror with an angle of incidence of 30°. What is the angle of reflection, in degrees?
     answer: '30'
@@ -335,3 +637,142 @@ concepts:
     - Perpendicular.
     solution: That line is the normal.
     mistakes: {"Ray": "t7_normal", "Shadow": "t7_normal"}
+  - prompt: A ray strikes a mirror with an angle of incidence of 50°. What is the angle of reflection, in degrees?
+    answer: '50'
+    check: '50'
+    difficulty: 1
+    hints:
+    - The two angles are equal.
+    - Both are measured from the normal.
+    solution: By the law of reflection, the angle of reflection equals the angle of incidence, 50°.
+    mistakes:
+      '40': c7s11_equal
+      '100': c7s11_equal
+  - prompt: 'Bouncing back of light from a surface is called:'
+    options:
+    - Reflection
+    - Shadow
+    - Absorption
+    answer: Reflection
+    difficulty: 1
+    hints:
+    - Mirrors do it well.
+    - Light comes back.
+    solution: When light bounces off a surface it is reflection.
+    mistakes:
+      Shadow: c7s11_shadow
+      Absorption: c7s11_equal
+  - prompt: 'Compared with you, the size of your image in a flat mirror is:'
+    options:
+    - The same size as you
+    - Twice your size
+    - Half your size
+    answer: The same size as you
+    difficulty: 1
+    hints:
+    - A flat mirror does not magnify.
+    - Compare your hand and its image.
+    solution: A plane mirror forms an image of the same size as the object.
+    mistakes:
+      Twice your size: c7s11_image
+      Half your size: c7s11_image
+  - prompt: Which surface gives the clearest image?
+    options:
+    - A polished steel plate
+    - A rough wooden table
+    - A cotton sheet
+    answer: A polished steel plate
+    difficulty: 1
+    hints:
+    - Smooth and shiny surfaces reflect neatly.
+    - Rough surfaces scatter light.
+    solution: A smooth, shiny surface reflects light regularly, giving a clear image.
+    mistakes:
+      A rough wooden table: c7s11_equal
+      A cotton sheet: c7s11_equal
+  - prompt: A ray makes an angle of 30° with the mirror surface. What is the angle of incidence (from the normal), in degrees?
+    answer: '60'
+    check: 90-30
+    difficulty: 2
+    hints:
+    - The normal is at 90° to the mirror.
+    - 90 − 30.
+    solution: The angle with the normal is 90 − 30 = 60°.
+    mistakes:
+      '30': c7s11_equal
+      '120': c7s11_equal
+  - prompt: Rahul is 1.5 m in front of a mirror. How far is he from his image, in metres?
+    answer: '3'
+    check: 1.5*2
+    difficulty: 2
+    hints:
+    - The image is 1.5 m behind the mirror.
+    - Add both distances.
+    solution: He is 1.5 m in front and the image is 1.5 m behind, so 1.5 + 1.5 = 3 m apart.
+    mistakes:
+      '1.5': c7s11_image
+      '0.75': c7s11_image
+  - prompt: 'You raise your right hand in front of a mirror. Your image raises its:'
+    options:
+    - Left hand
+    - Right hand
+    - Both hands
+    answer: Left hand
+    difficulty: 2
+    hints:
+    - Mirrors swap one pair of sides.
+    - Which pair?
+    solution: A plane mirror swaps left and right (lateral inversion), so the image raises its left hand.
+    mistakes:
+      Right hand: c7s11_image
+      Both hands: c7s11_image
+  - prompt: Why is 'AMBULANCE' painted back-to-front on the front of an ambulance?
+    options:
+    - Drivers ahead see it the right way in their rear-view mirrors
+    - It looks stylish
+    - It is a spelling mistake
+    answer: Drivers ahead see it the right way in their rear-view mirrors
+    difficulty: 2
+    hints:
+    - Who reads it, and how?
+    - Mirrors swap left and right.
+    solution: The mirror swaps the letters back, so drivers ahead read AMBULANCE correctly.
+    mistakes:
+      It looks stylish: c7s11_image
+      It is a spelling mistake: c7s11_image
+  - prompt: In a periscope, how are the two mirrors placed?
+    options:
+    - Parallel to each other, each at 45°
+    - Facing away from each other
+    - Flat on the floor
+    answer: Parallel to each other, each at 45°
+    difficulty: 3
+    hints:
+    - Light must turn down, then turn again towards the eye.
+    - Each mirror turns it by 90°.
+    solution: Two parallel mirrors at 45° each turn the light by 90°, sending it down the tube and into the eye.
+    mistakes:
+      Facing away from each other: c7s11_equal
+      Flat on the floor: c7s11_equal
+  - prompt: The angle between the incident ray and the reflected ray is 80°. What is the angle of incidence, in degrees?
+    answer: '40'
+    check: 80/2
+    difficulty: 3
+    hints:
+    - The normal splits the 80° into two equal angles.
+    - 80 ÷ 2.
+    solution: The angles of incidence and reflection are equal and together make 80°, so each is 40°.
+    mistakes:
+      '80': c7s11_equal
+      '50': c7s11_equal
+  - prompt: You walk 1 m towards a mirror. How much closer do you get to your image, in metres?
+    answer: '2'
+    check: 1*2
+    difficulty: 3
+    hints:
+    - Your image also moves 1 m towards the mirror.
+    - Both distances shrink.
+    solution: You move 1 m closer to the mirror and the image also moves 1 m closer, so the gap shrinks by 2 m.
+    mistakes:
+      '1': c7s11_image
+      '0.5': c7s11_image
