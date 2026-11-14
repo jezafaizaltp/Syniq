@@ -14,6 +14,13 @@ tips:
   t6_segment: "A segment stops at both ends. A ray stops at one end. A line never stops."
   t6_straight_angle: "A straight angle is a half turn: two right angles."
   t6_vertex_middle: "In ∠PQR the middle letter names the vertex, where the arms meet."
+  c6m2_ends: 'Count the end points of each one: does it stop at two ends, one end or nowhere?'
+  c6m2_name: In an angle's name the middle letter is the corner where the arms meet.
+  c6m2_turn: 'Picture yourself turning on the spot. Work out what fraction of a whole turn this is.'
+  c6m2_type: Compare with 90° first, then with 180°.
+  c6m2_clock: Count the hour gaps between the hands, then use 30° for each gap.
+  c6m2_rest: On a straight line the angles together make a half turn. Take the known part away.
+  c6m2_scale: Read the scale that starts at 0 on the first arm.
 concepts:
 - code: cbse6m.lines.basics
   title: Points, lines, rays and segments
@@ -86,6 +93,72 @@ concepts:
       bin: Line segment
       why: 'It has two ends, the corners: a line segment.'
       clue: Does it have ends?
+  lesson:
+    - teach: 'A point marks a place and is named with a capital letter. A line segment AB joins A and B and stops at both: it has a length. A line goes on forever both ways. A ray starts at one point and goes on forever one way.'
+      picture:
+        kind: compare
+        columns:
+        - title: Segment AB
+          points:
+          - 2 end points
+          - can be measured
+        - title: Ray OA
+          points:
+          - 1 end point, O
+          - goes on forever past A
+        - title: Line AB
+          points:
+          - no end points
+          - goes on forever both ways
+        alt: A segment has two end points, a ray has one, a line has none.
+      check:
+        prompt: Which of these can you measure with a ruler?
+        options:
+        - A line segment
+        - A ray
+        - A line
+        answer: A line segment
+        why: Only a segment stops at both ends, so only it has a fixed length.
+    - teach: Through two points only one straight line can pass. Two different lines can cross at most once. Lines that never meet, like rail tracks, are parallel.
+      check:
+        prompt: Two different straight lines cross. At how many points do they meet?
+        options:
+        - '1'
+        - '2'
+        - Many
+        answer: '1'
+        why: If they shared two points they would be the same line.
+    - teach: 'An angle is two rays that start from the same point. That point is the vertex and the rays are the arms. We name the angle with the vertex in the middle: ∠ABC has vertex B, arms BA and BC.'
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 8
+          - 5
+          B:
+          - 2
+          - 2
+          C:
+          - 9
+          - 2
+        segments:
+        - - B
+          - A
+        - - B
+          - C
+        angles:
+        - at: B
+          from: C
+          to: A
+        alt: 'Angle ABC: two arms BA and BC meet at the vertex B.'
+      check:
+        prompt: What are the arms of ∠XYZ?
+        options:
+        - YX and YZ
+        - XY and XZ
+        - ZX and ZY
+        answer: YX and YZ
+        why: The vertex is the middle letter Y, and both arms start at Y.
   items:
   - prompt: Which has exactly two end points?
     options:
@@ -157,6 +230,123 @@ concepts:
     - Like arms from a body.
     solution: The rays of an angle are its arms.
     mistakes: {"Its vertices": "t6_arms", "Its segments": "t6_arms"}
+  - prompt: Which goes on forever in both directions?
+    options:
+    - A line
+    - A ray
+    - A line segment
+    answer: A line
+    difficulty: 1
+    hints:
+    - Think about where each one stops.
+    - Which has no end point at all?
+    solution: 'Step 1: a segment stops at two ends, a ray at one. Step 2: a line has no end points, so it goes on forever both ways.'
+    mistakes:
+      A ray: c6m2_ends
+      A line segment: c6m2_ends
+  - prompt: How many end points does ray OP have?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - A ray starts somewhere.
+    - Does it stop at the other side?
+    solution: 'Step 1: a ray starts at O. Step 2: it never stops past P, so it has 1 end point.'
+    mistakes:
+      '2': c6m2_ends
+      '0': c6m2_ends
+  - prompt: In ∠LMN, which point is the vertex?
+    options:
+    - M
+    - L
+    - N
+    answer: M
+    difficulty: 1
+    hints:
+    - The vertex letter sits in a special place in the name.
+    - Look at the middle letter.
+    solution: 'Step 1: the middle letter of the name is the vertex. Step 2: in ∠LMN that is M.'
+    mistakes:
+      L: c6m2_name
+      N: c6m2_name
+  - prompt: Which is another correct name for ∠ABC?
+    options:
+    - ∠CBA
+    - ∠BAC
+    - ∠ACB
+    answer: ∠CBA
+    difficulty: 2
+    hints:
+    - The vertex must stay in the middle.
+    - You may swap the two arm letters.
+    solution: 'Step 1: the vertex B must be in the middle. Step 2: swapping the ends gives ∠CBA, the same angle.'
+    mistakes:
+      ∠BAC: c6m2_name
+      ∠ACB: c6m2_name
+  - prompt: Three points A, B, C are on one straight line. How many different line segments can you name using them?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - Pick any two of the three points.
+    - AB, BC and one more.
+    solution: 'Step 1: the pairs are AB, BC and AC. Step 2: that is 3 segments.'
+    mistakes:
+      '2': c6m2_ends
+      '6': c6m2_ends
+  - prompt: How many lines can be drawn through one single point?
+    options:
+    - As many as you like
+    - Exactly one
+    - Exactly two
+    answer: As many as you like
+    difficulty: 2
+    hints:
+    - Turn a ruler around a pin.
+    - Is a second point fixed?
+    solution: 'Step 1: with only one point fixed, a ruler can turn to any direction. Step 2: so endless lines pass through one point.'
+    mistakes:
+      Exactly one: c6m2_ends
+      Exactly two: c6m2_ends
+  - prompt: 'Lines on a ruled notebook page never meet however far you draw them. They are:'
+    options:
+    - Parallel
+    - Crossing
+    - Rays
+    answer: Parallel
+    difficulty: 1
+    hints:
+    - They keep the same distance apart.
+    - There is a special word for lines that never meet.
+    solution: 'Step 1: the lines stay the same distance apart. Step 2: lines that never meet are parallel.'
+    mistakes:
+      Crossing: c6m2_ends
+      Rays: c6m2_ends
+  - prompt: Four points, no three on a straight line. How many segments join them in pairs?
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - Each point joins the other 3.
+    - Each segment gets counted twice that way.
+    solution: 'Step 1: 4 points × 3 others = 12. Step 2: each segment was counted twice, so 12 ÷ 2 = 6.'
+    mistakes:
+      '4': c6m2_ends
+      '12': c6m2_ends
+  - prompt: Ray AB and ray AC point in exactly opposite directions. What do they make together?
+    options:
+    - A straight line through A
+    - A segment BC only
+    - A right angle
+    answer: A straight line through A
+    difficulty: 3
+    hints:
+    - Both start at A.
+    - They go on forever in opposite ways.
+    solution: 'Step 1: both rays start at A. Step 2: going forever in opposite directions, together they form a whole line (a straight angle at A).'
+    mistakes:
+      A segment BC only: c6m2_ends
+      A right angle: c6m2_turn
 - code: cbse6m.lines.angles
   title: Measuring and comparing angles
   after:
@@ -218,6 +408,67 @@ concepts:
       - when:
           degrees: 360
         say: 360° is a full turn, all the way round. A straight angle is half a turn.
+  lesson:
+    - teach: An angle measures how much one arm has turned from the other. A full turn is 360°. Half a turn, a straight angle, is 180°. A quarter turn, a right angle, is 90°, like the corner of a book.
+      picture:
+        kind: compare
+        columns:
+        - title: Right angle
+          points:
+          - quarter turn
+          - 90°
+        - title: Straight angle
+          points:
+          - half turn
+          - 180°
+        - title: Full turn
+          points:
+          - all the way round
+          - 360°
+        alt: A quarter turn is 90 degrees, a half turn 180 degrees, a full turn 360 degrees.
+      check:
+        prompt: How many right angles make a full turn?
+        options:
+        - '4'
+        - '2'
+        - '3'
+        answer: '4'
+        why: 360 ÷ 90 = 4.
+    - teach: Angles less than 90° are acute. Between 90° and 180° they are obtuse. More than 180° but less than 360° they are reflex.
+      picture:
+        kind: number_line
+        from: 0
+        to: 360
+        step: 30
+        points:
+        - at: 90
+          label: right
+        - at: 180
+          label: straight
+        - at: 45
+          label: acute
+        - at: 135
+          label: obtuse
+        - at: 270
+          label: reflex
+        alt: Acute angles are below 90, obtuse between 90 and 180, reflex between 180 and 360.
+      check:
+        prompt: What kind of angle is 200°?
+        options:
+        - Reflex
+        - Obtuse
+        - Acute
+        answer: Reflex
+        why: 200° is more than 180°.
+    - teach: To measure, place the protractor's centre on the vertex and line up 0 with one arm. Read the scale that starts at 0 on that arm where the other arm crosses. On a clock each hour gap is 360 ÷ 12 = 30°.
+      check:
+        prompt: At 2 o'clock, what angle do the clock hands make?
+        options:
+        - 60°
+        - 30°
+        - 120°
+        answer: 60°
+        why: 'The hands are 2 hour gaps apart: 2 × 30° = 60°.'
   items:
   - prompt: How many degrees are in a right angle?
     answer: '90'
@@ -283,3 +534,114 @@ concepts:
     solution: 'Read the scale whose 0 is on the first arm: 130°.'
     mistakes:
       50°: c6_protractor_scale
+  - prompt: How many degrees make a full turn?
+    answer: '360'
+    check: '360'
+    difficulty: 1
+    hints:
+    - A straight angle is half of it.
+    - Double 180.
+    solution: 'Step 1: half a turn is 180°. Step 2: a full turn is 2 × 180° = 360°.'
+    mistakes:
+      '180': c6m2_turn
+      '90': c6m2_turn
+  - prompt: 'An angle of 45° is:'
+    options:
+    - Acute
+    - Obtuse
+    - Reflex
+    answer: Acute
+    difficulty: 1
+    hints:
+    - Compare 45 with 90.
+    - Smaller than a right angle has a special name.
+    solution: 'Step 1: 45° is less than 90°. Step 2: so it is acute.'
+    mistakes:
+      Obtuse: c6m2_type
+      Reflex: c6m2_type
+  - prompt: 'An angle of 300° is:'
+    options:
+    - Reflex
+    - Obtuse
+    - Straight
+    answer: Reflex
+    difficulty: 2
+    hints:
+    - Compare 300 with 180.
+    - More than a half turn.
+    solution: 'Step 1: 300° is more than 180° and less than 360°. Step 2: so it is reflex.'
+    mistakes:
+      Obtuse: c6m2_type
+      Straight: c6m2_type
+  - prompt: What angle do the clock hands make at 6 o'clock?
+    answer: '180'
+    check: 6*30
+    difficulty: 2
+    hints:
+    - Count the hour gaps from 12 to 6.
+    - Each gap is 30°.
+    solution: 'Step 1: there are 6 gaps. Step 2: 6 × 30° = 180°, a straight angle.'
+    mistakes:
+      '6': c6m2_clock
+      '90': c6m2_clock
+  - prompt: What is the smaller angle between the clock hands at 5 o'clock?
+    answer: '150'
+    check: 5*30
+    difficulty: 2
+    hints:
+    - Count the gaps from 12 to 5.
+    - Multiply by 30.
+    solution: 'Step 1: 5 gaps. Step 2: 5 × 30° = 150°.'
+    mistakes:
+      '120': c6m2_clock
+      '180': c6m2_clock
+  - prompt: Two angles sit side by side on a straight line. One is 70°. What is the other?
+    answer: '110'
+    check: 180-70
+    difficulty: 2
+    hints:
+    - Together they make a straight angle.
+    - Subtract 70 from 180.
+    solution: 'Step 1: angles on a straight line add to 180°. Step 2: 180° − 70° = 110°.'
+    mistakes:
+      '20': c6m2_rest
+      '290': c6m2_rest
+  - prompt: You face north and turn clockwise to face east. How many degrees did you turn?
+    answer: '90'
+    check: '90'
+    difficulty: 2
+    hints:
+    - North to east is a quarter of the way round.
+    - A full turn is 360°.
+    solution: 'Step 1: north to east is a quarter turn. Step 2: 360° ÷ 4 = 90°.'
+    mistakes:
+      '180': c6m2_turn
+      '45': c6m2_turn
+  - prompt: 'Lines that meet at a right angle are called:'
+    options:
+    - Perpendicular
+    - Parallel
+    - Reflex
+    answer: Perpendicular
+    difficulty: 1
+    hints:
+    - Think of the corner of a page.
+    - It is not lines that never meet.
+    solution: 'Step 1: the lines make a 90° angle. Step 2: such lines are perpendicular.'
+    mistakes:
+      Parallel: c6m2_type
+      Reflex: c6m2_type
+  - prompt: A protractor shows the other arm at 40 and 140. The first arm lies on 0 of the outer scale, which reads 40 there. What is the angle?
+    options:
+    - 40°
+    - 140°
+    - 180°
+    answer: 40°
+    difficulty: 3
+    hints:
+    - Use only the scale that is 0 on the first arm.
+    - That scale reads which number at the other arm?
+    solution: 'Step 1: the outer scale starts at 0 on the first arm. Step 2: it reads 40 at the other arm, so the angle is 40° (it looks acute too).'
+    mistakes:
+      140°: c6m2_scale
+      180°: c6m2_scale
