@@ -13,6 +13,12 @@ tips:
   t6_radius_half: "The radius is half the diameter."
   t6_rectangle_diagonals: "Measure both diagonals of a rectangle. What do you notice?"
   t6_tool_right_angle: "Which tools have a ready-made 90° corner or measure angles?"
+  c6m8_radius: The radius goes from the centre to the circle; the diameter goes right across through the centre.
+  c6m8_compass: The compass opening is the distance from the centre to every point it draws.
+  c6m8_arcs: A point on an arc is exactly the compass opening away from the arc's centre.
+  c6m8_rect: 'List what a rectangle must have: opposite sides, angles and diagonals.'
+  c6m8_square: A square is a rectangle with all sides equal. Check sides and angles both.
+  c6m8_steps: 'Think of the order: base first, then the right angles, then the heights, then join.'
 concepts:
 - code: cbse6m.cons.circles
   title: Circles and arcs with a compass
@@ -60,6 +66,73 @@ concepts:
       Put the compass point on O: Set the radius first, so the circle comes out the right size.
       Turn the pencil all the way round: The point must be on O first, or the circle won't be centred.
       Check the radius again with the ruler: You can only check a circle once it is drawn.
+  lesson:
+    - teach: A compass draws a circle. The sharp point stays at the centre; the pencil goes round. The opening of the compass is the radius, and every point on the circle is exactly that far from the centre.
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 5
+          - 5
+          P:
+          - 8
+          - 5
+        circles:
+        - centre: O
+          radius: 3
+        segments:
+        - - O
+          - P
+          - radius
+        alt: A circle with centre O; the segment OP from the centre to the circle is the radius.
+      check:
+        prompt: Points A and B are both on a circle with centre O. What is true?
+        options:
+        - OA = OB
+        - OA is longer
+        - AB is the radius
+        answer: OA = OB
+        why: Every point on the circle is one radius from the centre.
+    - teach: 'The diameter is a segment through the centre from one side of the circle to the other. It is two radii long: diameter = 2 × radius. An arc is a part of the circle.'
+      check:
+        prompt: A circle has diameter 14 cm. What is its radius?
+        options:
+        - 7 cm
+        - 28 cm
+        - 14 cm
+        answer: 7 cm
+        why: 'Radius is half the diameter: 14 ÷ 2 = 7.'
+    - teach: Arcs find points at a set distance. From A draw an arc of radius 5 cm, and from B another of radius 5 cm. Where they cross is 5 cm from A and 5 cm from B. Arcs also make designs like waves and flowers.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 2
+          - 3
+          B:
+          - 8
+          - 3
+          P:
+          - 5
+          - 7
+        segments:
+        - - A
+          - B
+        - - A
+          - P
+          - 5 cm
+        - - B
+          - P
+          - 5 cm
+        alt: Two arcs drawn from A and B meet at P, which is the same compass opening from both.
+      check:
+        prompt: Arcs of radius 6 cm from A and 6 cm from B meet at Q. How far is Q from B?
+        options:
+        - 6 cm
+        - 12 cm
+        - 3 cm
+        answer: 6 cm
+        why: Q is on the arc drawn from B with radius 6 cm.
   items:
   - prompt: A circle has radius 4 cm. What is its diameter (in cm)?
     answer: '8'
@@ -133,6 +206,117 @@ concepts:
     - P lies on both arcs.
     solution: P is on both arcs, so it is 4 cm from A and 4 cm from B.
     mistakes: {"6 cm from both": "t6_arcs_meet", "on the line AB": "t6_arcs_meet"}
+  - prompt: A circle has radius 6.5 cm. What is its diameter (in cm)?
+    answer: '13'
+    check: 2*6.5
+    difficulty: 1
+    hints:
+    - Diameter is two radii.
+    - 2 × 6.5.
+    solution: 'Step 1: diameter = 2 × radius. Step 2: 2 × 6.5 = 13 cm.'
+    mistakes:
+      '3.25': c6m8_radius
+      '6.5': c6m8_radius
+  - prompt: A bangle has diameter 8 cm. What is its radius (in cm)?
+    answer: '4'
+    check: 8/2
+    difficulty: 1
+    hints:
+    - Radius is half the diameter.
+    - 8 ÷ 2.
+    solution: 'Step 1: radius = diameter ÷ 2. Step 2: 8 ÷ 2 = 4 cm.'
+    mistakes:
+      '16': c6m8_radius
+      '8': c6m8_radius
+  - prompt: Which segment always passes through the centre of a circle?
+    options:
+    - A diameter
+    - A radius drawn to an arc only
+    - Any chord
+    answer: A diameter
+    difficulty: 1
+    hints:
+    - Think about the longest line across a circle.
+    - It goes right through the middle.
+    solution: 'Step 1: a diameter goes from side to side through the centre. Step 2: other chords miss the centre.'
+    mistakes:
+      A radius drawn to an arc only: c6m8_radius
+      Any chord: c6m8_radius
+  - prompt: Point X is 3 cm from the centre of a circle of radius 5 cm. Where is X?
+    options:
+    - Inside the circle
+    - On the circle
+    - Outside the circle
+    answer: Inside the circle
+    difficulty: 2
+    hints:
+    - Points on the circle are exactly 5 cm away.
+    - 3 cm is less than that.
+    solution: 'Step 1: the circle is 5 cm from the centre. Step 2: 3 cm is closer, so X is inside.'
+    mistakes:
+      On the circle: c6m8_compass
+      Outside the circle: c6m8_compass
+  - prompt: How many circles of radius 2 cm fit side by side, touching, along a 20 cm line through their centres?
+    answer: '5'
+    check: 20/4
+    difficulty: 3
+    hints:
+    - Each circle takes up its diameter.
+    - Diameter = 4 cm.
+    solution: 'Step 1: each circle is 4 cm across. Step 2: 20 ÷ 4 = 5 circles.'
+    mistakes:
+      '10': c6m8_radius
+      '4': c6m8_radius
+  - prompt: Two circles have the same centre, with radii 3 cm and 5 cm. How wide is the ring between them (in cm)?
+    answer: '2'
+    check: 5-3
+    difficulty: 2
+    hints:
+    - Both radii start at the same centre.
+    - Subtract the smaller radius.
+    solution: 'Step 1: the outer circle is 5 cm from the centre, the inner 3 cm. Step 2: 5 − 3 = 2 cm.'
+    mistakes:
+      '8': c6m8_radius
+      '4': c6m8_radius
+  - prompt: From A, an arc of radius 7 cm is drawn. Point R is on that arc. What is AR?
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Every point on the arc is the same distance from A.
+    - That distance is the compass opening.
+    solution: 'Step 1: the arc was drawn from A with radius 7 cm. Step 2: so AR = 7 cm.'
+    mistakes:
+      '14': c6m8_arcs
+      '3.5': c6m8_arcs
+  - prompt: AB = 8 cm. Arcs of radius 3 cm are drawn from A and from B. Do they meet?
+    options:
+    - No, 3 + 3 is less than 8
+    - Yes, at one point
+    - Yes, at two points
+    answer: No, 3 + 3 is less than 8
+    difficulty: 3
+    hints:
+    - Each arc reaches only 3 cm from its centre.
+    - Can they cover the 8 cm gap?
+    solution: 'Step 1: together the arcs reach 3 + 3 = 6 cm. Step 2: the gap is 8 cm, so they never meet.'
+    mistakes:
+      Yes, at one point: c6m8_arcs
+      Yes, at two points: c6m8_arcs
+  - prompt: To draw a circle with diameter 9 cm, how wide do you open the compass?
+    options:
+    - 4.5 cm
+    - 9 cm
+    - 18 cm
+    answer: 4.5 cm
+    difficulty: 2
+    hints:
+    - The compass opening is the radius.
+    - Half of 9.
+    solution: 'Step 1: radius = 9 ÷ 2. Step 2: = 4.5 cm.'
+    mistakes:
+      9 cm: c6m8_compass
+      18 cm: c6m8_compass
 - code: cbse6m.cons.shapes
   title: Constructing squares and rectangles
   after:
@@ -189,6 +373,71 @@ concepts:
     - prompt: Make a square with sides of 4 units.
       width: 4
       height: 4
+  lesson:
+    - teach: A rectangle has opposite sides equal and all four angles 90°. Its two diagonals are equal and cut each other in half. A square is a rectangle whose four sides are all equal.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 1
+          - 2
+          B:
+          - 9
+          - 2
+          C:
+          - 9
+          - 7
+          D:
+          - 1
+          - 7
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - D
+        - - D
+          - A
+        - - A
+          - C
+        - - B
+          - D
+        alt: Rectangle ABCD with both diagonals AC and BD drawn; they are equal and cross at the middle.
+      check:
+        prompt: A rectangle has one diagonal 13 cm. How long is the other diagonal?
+        options:
+        - 13 cm
+        - 6.5 cm
+        - 26 cm
+        answer: 13 cm
+        why: A rectangle's diagonals are equal.
+    - teach: 'To construct rectangle ABCD 7 cm by 4 cm: draw AB = 7 cm. Make right angles at A and B with a protractor or set square. Mark 4 cm up on each to get D and C. Join DC and check that it is 7 cm.'
+      picture:
+        kind: flow
+        steps:
+        - Draw AB = 7 cm
+        - 90° at A and at B
+        - 'Mark 4 cm up: D and C'
+        - Join D to C
+        alt: 'The four steps to build a 7 by 4 rectangle: base, right angles, heights, top side.'
+      check:
+        prompt: After drawing the base AB, what do you draw next?
+        options:
+        - Right angles at A and B
+        - The diagonal AC
+        - The top side DC
+        answer: Right angles at A and B
+        why: The sides must go straight up at 90°, so you fix those angles first.
+    - teach: A square has 4 equal sides and 4 right angles; its diagonals are equal and cross at 90°. A shape with 4 equal sides but no right angles is a rhombus, not a square.
+      check:
+        prompt: A shape has 4 right angles and sides 5, 5, 5, 5 cm. What is it?
+        options:
+        - A square
+        - A rhombus only
+        - A rectangle that is not a square
+        answer: A square
+        why: All sides equal and all angles 90° is the meaning of a square.
   items:
   - prompt: Which is true for every rectangle?
     options:
@@ -257,3 +506,114 @@ concepts:
     - A set square has a 90° corner.
     solution: A set square or protractor gives an exact right angle.
     mistakes: {"Compass only": "t6_tool_right_angle", "Eraser": "t6_tool_right_angle"}
+  - prompt: A square has side 6 cm. What is the total length of all its sides (in cm)?
+    answer: '24'
+    check: 4*6
+    difficulty: 1
+    hints:
+    - A square has 4 equal sides.
+    - 4 × 6.
+    solution: 'Step 1: 4 sides of 6 cm. Step 2: 4 × 6 = 24 cm.'
+    mistakes:
+      '12': c6m8_square
+      '36': c6m8_square
+  - prompt: In rectangle PQRS, PQ = 9 cm. What is RS (in cm)?
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - RS is opposite PQ.
+    - Opposite sides of a rectangle are equal.
+    solution: 'Step 1: RS is the side opposite PQ. Step 2: so RS = 9 cm.'
+    mistakes:
+      '18': c6m8_rect
+      '4.5': c6m8_rect
+  - prompt: The diagonals of a rectangle cross at M. One diagonal is 10 cm. How far is M from a corner (in cm)?
+    answer: '5'
+    check: 10/2
+    difficulty: 2
+    hints:
+    - The diagonals cut each other in half.
+    - Half of 10.
+    solution: 'Step 1: M is the middle of each diagonal. Step 2: 10 ÷ 2 = 5 cm.'
+    mistakes:
+      '10': c6m8_rect
+      '20': c6m8_rect
+  - prompt: At what angle do the diagonals of a square cross?
+    answer: '90'
+    check: '90'
+    difficulty: 2
+    hints:
+    - Fold a paper square along both diagonals.
+    - The four angles in the middle are equal.
+    solution: 'Step 1: the four angles at the centre are equal. Step 2: 360° ÷ 4 = 90°.'
+    mistakes:
+      '45': c6m8_square
+      '180': c6m8_square
+  - prompt: A rectangle has perimeter 22 cm and length 7 cm. What breadth do you construct (in cm)?
+    answer: '4'
+    check: 22/2-7
+    difficulty: 2
+    hints:
+    - Half the perimeter is length + breadth.
+    - 22 ÷ 2 = 11.
+    solution: 'Step 1: length + breadth = 11. Step 2: breadth = 11 − 7 = 4 cm.'
+    mistakes:
+      '15': c6m8_rect
+      '8': c6m8_rect
+  - prompt: Which is NOT always true for a rectangle?
+    options:
+    - All four sides are equal
+    - Opposite sides are equal
+    - All angles are 90°
+    answer: All four sides are equal
+    difficulty: 2
+    hints:
+    - Think of a long, thin rectangle.
+    - Which rule would only fit a square?
+    solution: 'Step 1: every rectangle has equal opposite sides and right angles. Step 2: equal four sides is only for squares.'
+    mistakes:
+      Opposite sides are equal: c6m8_rect
+      All angles are 90°: c6m8_rect
+  - prompt: To make a square with only a compass and ruler, after drawing side AB = 5 cm and a right angle at A, how long do you mark AD?
+    options:
+    - 5 cm
+    - 2.5 cm
+    - 10 cm
+    answer: 5 cm
+    difficulty: 1
+    hints:
+    - All sides of a square are equal.
+    - AD is a side, like AB.
+    solution: 'Step 1: AD is another side of the square. Step 2: so AD = AB = 5 cm.'
+    mistakes:
+      2.5 cm: c6m8_square
+      10 cm: c6m8_square
+  - prompt: Put the steps for a 6 cm × 3 cm rectangle in order.
+    options:
+    - Draw 6 cm base; right angles at both ends; mark 3 cm up; join the top
+    - Mark 3 cm up; draw the base; join; right angles
+    - Join the top; draw the base; right angles; mark 3 cm
+    answer: Draw 6 cm base; right angles at both ends; mark 3 cm up; join the top
+    difficulty: 2
+    hints:
+    - You need a base before anything else.
+    - The top side is joined last.
+    solution: 'Step 1: base first, then the right angles. Step 2: mark the heights, then join them.'
+    mistakes:
+      Mark 3 cm up; draw the base; join; right angles: c6m8_steps
+      Join the top; draw the base; right angles; mark 3 cm: c6m8_steps
+  - prompt: Rhombus ABCD has side 4 cm and no right angles. Is it a square?
+    options:
+    - No, a square needs right angles
+    - Yes, all sides are equal
+    - Yes, it has four sides
+    answer: No, a square needs right angles
+    difficulty: 2
+    hints:
+    - Check sides AND angles.
+    - What does a square need besides equal sides?
+    solution: 'Step 1: the sides are equal. Step 2: but a square also needs four 90° angles, so it is not a square.'
+    mistakes:
+      Yes, all sides are equal: c6m8_square
+      Yes, it has four sides: c6m8_square

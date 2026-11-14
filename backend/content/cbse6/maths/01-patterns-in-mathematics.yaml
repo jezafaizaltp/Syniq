@@ -14,6 +14,14 @@ tips:
   t6_square_next: "1 = 1 × 1, 4 = 2 × 2, 9 = 3 × 3, 16 = 4 × 4. What comes next?"
   t6_step_pattern: "Find the jump between each number and the next, then make the same jump once more."
   t6_virahanka: "Each number is the sum of the two before it. Add the last two."
+  c6m1_diff: Write the gap between each pair of neighbours first. The gaps show the rule.
+  c6m1_growgap: When the gaps themselves grow by one each time, the next gap is one more than the last.
+  c6m1_times: If the gaps keep growing fast, check whether each term is a multiple of the one before.
+  c6m1_twobefore: In this sequence each term is made from the two terms just before it.
+  c6m1_square: A square number is a number times itself. Count which square you need.
+  c6m1_oddsum: Count how many odd numbers you are adding. That count, times itself, is the sum.
+  c6m1_tri: A triangular number is 1 + 2 + 3 + ... up to some number. Count the last one you add.
+  c6m1_shape: Draw the shape and count the dots, sides or squares one by one.
 concepts:
 - code: cbse6m.pat.seq
   title: Number sequences and their rules
@@ -75,6 +83,51 @@ concepts:
       - when:
           count: 36
         say: 36 is a 6 by 6 square. 49 is the next size up.
+  lesson:
+    - teach: A sequence is a list of numbers that follows a rule. To find the rule, look at the gap between each number and the next one. Counting numbers go up by 1, even and odd numbers go up by 2.
+      picture:
+        kind: flow
+        steps:
+        - '3'
+        - 5 (+2)
+        - 7 (+2)
+        - 9 (+2)
+        alt: The odd numbers 3, 5, 7, 9, each one 2 more than the one before.
+      check:
+        prompt: What is the gap between neighbours in 5, 10, 15, 20?
+        options:
+        - '5'
+        - '10'
+        - '15'
+        answer: '5'
+        why: 10 − 5, 15 − 10 and 20 − 15 are all 5.
+    - teach: 'Some gaps grow. Triangular numbers 1, 3, 6, 10, 15 go up by 2, 3, 4, 5, so the next gap is 6. Square numbers 1, 4, 9, 16 go up by 3, 5, 7: the gaps are the odd numbers.'
+      picture:
+        kind: flow
+        steps:
+        - '1'
+        - 3 (+2)
+        - 6 (+3)
+        - 10 (+4)
+        - 15 (+5)
+        alt: Triangular numbers 1, 3, 6, 10, 15 with gaps 2, 3, 4, 5 that grow by one each time.
+      check:
+        prompt: 'Square numbers: 1, 4, 9, 16, 25. What is the gap after 25 to the next square?'
+        options:
+        - '11'
+        - '9'
+        - '10'
+        answer: '11'
+        why: The gaps are 3, 5, 7, 9, so the next gap is 11 (25 + 11 = 36).
+    - teach: 'Other rules multiply or combine. Powers of 2 double each time: 1, 2, 4, 8, 16. Virahanka numbers add the two before: 1, 2, 3, 5, 8, 13, because 5 + 8 = 13.'
+      check:
+        prompt: Which rule makes 1, 3, 9, 27, 81?
+        options:
+        - Multiply by 3
+        - Add 2
+        - Add the two before
+        answer: Multiply by 3
+        why: 1 × 3 = 3, 3 × 3 = 9, 9 × 3 = 27, 27 × 3 = 81.
   items:
   - prompt: 'What is the next number: 2, 4, 6, 8, ...?'
     answer: '10'
@@ -131,6 +184,109 @@ concepts:
     - The nth odd number is 2n − 1.
     solution: 2 × 10 − 1 = 19.
     mistakes: {"21": "t6_nth_odd", "20": "t6_nth_odd"}
+  - prompt: 'What is the next number: 7, 14, 21, 28, ...?'
+    answer: '35'
+    check: 28+7
+    difficulty: 1
+    hints:
+    - Find the gap between neighbours.
+    - Add that gap to the last number.
+    solution: 'Step 1: the gap is 7 each time. Step 2: 28 + 7 = 35.'
+    mistakes:
+      '30': c6m1_diff
+      '29': c6m1_diff
+  - prompt: What is the 6th triangular number? (1, 3, 6, 10, 15, ...)
+    answer: '21'
+    check: 15+6
+    difficulty: 1
+    hints:
+    - The gaps are 2, 3, 4, 5.
+    - The next gap is one more than 5.
+    solution: 'Step 1: the next gap is 6. Step 2: 15 + 6 = 21.'
+    mistakes:
+      '20': c6m1_growgap
+      '25': c6m1_growgap
+  - prompt: What is the 7th square number?
+    answer: '49'
+    check: 7*7
+    difficulty: 1
+    hints:
+    - The 1st square is 1 × 1, the 2nd is 2 × 2.
+    - Multiply 7 by itself.
+    solution: 'Step 1: the 7th square is 7 × 7. Step 2: 7 × 7 = 49.'
+    mistakes:
+      '14': c6m1_square
+      '36': c6m1_square
+      '64': c6m1_square
+  - prompt: 'What comes next: 1, 8, 27, 64, ...?'
+    answer: '125'
+    check: 5**3
+    difficulty: 2
+    hints:
+    - 8 = 2 × 2 × 2 and 27 = 3 × 3 × 3.
+    - The next one uses 5.
+    solution: 'Step 1: these are cube numbers 1³, 2³, 3³, 4³. Step 2: next is 5 × 5 × 5 = 125.'
+    mistakes:
+      '100': c6m1_diff
+      '101': c6m1_diff
+  - prompt: 'Virahanka numbers: 1, 2, 3, 5, 8, 13, 21, ... What is the next one?'
+    answer: '34'
+    check: 13+21
+    difficulty: 2
+    hints:
+    - Look at the two numbers just before.
+    - Add 13 and 21.
+    solution: 'Step 1: each term is the sum of the two before it. Step 2: 13 + 21 = 34.'
+    mistakes:
+      '29': c6m1_twobefore
+      '42': c6m1_twobefore
+  - prompt: 'What comes next: 3, 6, 12, 24, ...?'
+    answer: '48'
+    check: 24*2
+    difficulty: 2
+    hints:
+    - 'The gaps are 3, 6, 12: they double.'
+    - Each term is double the one before.
+    solution: 'Step 1: each term is 2 times the previous term. Step 2: 24 × 2 = 48.'
+    mistakes:
+      '36': c6m1_times
+      '27': c6m1_times
+  - prompt: 'What comes next: 2, 5, 10, 17, 26, ...?'
+    answer: '37'
+    check: 26+11
+    difficulty: 3
+    hints:
+    - 'Write the gaps: 3, 5, 7, 9.'
+    - The next gap is the next odd number.
+    solution: 'Step 1: the gaps are 3, 5, 7, 9, so the next gap is 11. Step 2: 26 + 11 = 37.'
+    mistakes:
+      '35': c6m1_growgap
+      '36': c6m1_growgap
+  - prompt: What is the 15th even number?
+    answer: '30'
+    check: 2*15
+    difficulty: 2
+    hints:
+    - The 1st even number is 2, the 2nd is 4.
+    - The nth even number is 2 × n.
+    solution: 'Step 1: the nth even number is 2 × n. Step 2: 2 × 15 = 30.'
+    mistakes:
+      '29': c6m1_diff
+      '28': c6m1_diff
+  - prompt: Which sequence is the powers of 2?
+    options:
+    - 1, 2, 4, 8, 16
+    - 2, 4, 6, 8, 10
+    - 1, 4, 9, 16, 25
+    answer: 1, 2, 4, 8, 16
+    difficulty: 1
+    hints:
+    - Powers of 2 come from doubling again and again.
+    - Check whether each term is twice the last.
+    solution: 'Step 1: 1 × 2 = 2, 2 × 2 = 4, 4 × 2 = 8, 8 × 2 = 16. Step 2: so 1, 2, 4, 8, 16 is the powers of 2.'
+    mistakes:
+      2, 4, 6, 8, 10: c6m1_times
+      1, 4, 9, 16, 25: c6m1_times
 - code: cbse6m.pat.relations
   title: How sequences are connected
   after:
@@ -172,6 +328,42 @@ concepts:
       - when:
           count: 15
         say: 15 dots is step 5. The next step adds a row of 6.
+  lesson:
+    - teach: Adding odd numbers from 1 always gives a square. 1 + 3 = 4, 1 + 3 + 5 = 9, 1 + 3 + 5 + 7 = 16. Each odd number is an L-shaped border that makes the square one size bigger.
+      picture:
+        kind: flow
+        steps:
+        - 1 = 1 × 1
+        - 1 + 3 = 2 × 2
+        - 1 + 3 + 5 = 3 × 3
+        - 1 + 3 + 5 + 7 = 4 × 4
+        alt: 'Each new odd number adds an L-shaped border: 1, then 4, then 9, then 16, the square numbers.'
+      check:
+        prompt: What is 1 + 3 + 5 + 7 + 9 + 11?
+        options:
+        - '36'
+        - '30'
+        - '25'
+        answer: '36'
+        why: Six odd numbers from 1 add to 6 × 6 = 36.
+    - teach: 'Adding counting numbers from 1 gives triangular numbers: 1 + 2 + 3 + 4 = 10. A quick way: 1 + 2 + ... + n = n × (n + 1) ÷ 2.'
+      check:
+        prompt: What is 1 + 2 + 3 + ... + 10?
+        options:
+        - '55'
+        - '50'
+        - '100'
+        answer: '55'
+        why: 10 × 11 ÷ 2 = 55.
+    - teach: 'Two triangular numbers side by side make a square: 3 + 6 = 9 and 6 + 10 = 16. Shapes also make sequences: a triangle has 3 sides, a square 4, a pentagon 5.'
+      check:
+        prompt: Which two neighbouring triangular numbers add to 25?
+        options:
+        - 10 and 15
+        - 6 and 10
+        - 15 and 21
+        answer: 10 and 15
+        why: 10 + 15 = 25 = 5 × 5.
   items:
   - prompt: What is 1 + 3 + 5 + 7 + 9?
     answer: '25'
@@ -233,3 +425,106 @@ concepts:
     - It is the 7th odd number.
     solution: 7 × 7 − 6 × 6 = 49 − 36 = 13.
     mistakes: {"14": "t6_l_border", "49": "t6_l_border"}
+  - prompt: What is the sum of the first 8 odd numbers?
+    answer: '64'
+    check: 8*8
+    difficulty: 2
+    hints:
+    - Count the odd numbers you add.
+    - That count times itself.
+    solution: 'Step 1: 8 odd numbers from 1 make an 8 × 8 square. Step 2: 8 × 8 = 64.'
+    mistakes:
+      '16': c6m1_oddsum
+      '36': c6m1_oddsum
+  - prompt: 1 + 3 + 5 + ... + 19. How many odd numbers are added here?
+    answer: '10'
+    check: '10'
+    difficulty: 2
+    hints:
+    - The nth odd number is 2n − 1.
+    - Which n gives 19?
+    solution: 'Step 1: 2n − 1 = 19 gives n = 10. Step 2: so 10 odd numbers are added (their sum is 100).'
+    mistakes:
+      '19': c6m1_oddsum
+      '9': c6m1_oddsum
+  - prompt: What is 1 + 2 + 3 + ... + 20?
+    answer: '210'
+    check: 20*21/2
+    difficulty: 3
+    hints:
+    - Use n × (n + 1) ÷ 2.
+    - Here n is 20.
+    solution: 'Step 1: 20 × 21 = 420. Step 2: 420 ÷ 2 = 210.'
+    mistakes:
+      '420': c6m1_tri
+      '200': c6m1_tri
+  - prompt: Add the 6th and 7th triangular numbers (21 and 28).
+    answer: '49'
+    check: 21+28
+    difficulty: 1
+    hints:
+    - Just add the two numbers.
+    - Neighbouring triangular numbers make a square.
+    solution: 'Step 1: 21 + 28 = 49. Step 2: 49 = 7 × 7, a square, as expected.'
+    mistakes:
+      '48': c6m1_tri
+      '59': c6m1_tri
+  - prompt: A 5 × 5 square of dots gets one more L-shaped border to become 6 × 6. How many dots are in the border?
+    answer: '11'
+    check: 36-25
+    difficulty: 2
+    hints:
+    - Count dots before and after.
+    - Subtract 25 from 36.
+    solution: 'Step 1: 6 × 6 = 36 and 5 × 5 = 25. Step 2: 36 − 25 = 11 dots in the border.'
+    mistakes:
+      '6': c6m1_shape
+      '12': c6m1_shape
+  - prompt: 1 + 3 + 5 + 7 + 9 + 11 + 13 = ?
+    answer: '49'
+    check: 7*7
+    difficulty: 1
+    hints:
+    - Count the odd numbers.
+    - There are seven of them.
+    solution: 'Step 1: 7 odd numbers from 1. Step 2: 7 × 7 = 49.'
+    mistakes:
+      '42': c6m1_oddsum
+      '36': c6m1_oddsum
+  - prompt: A hexagon has 6 sides. How many sides does the next shape in triangle, square, pentagon, hexagon have?
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Each shape has one more side.
+    - 6 + 1.
+    solution: 'Step 1: the sides go 3, 4, 5, 6. Step 2: the next shape (heptagon) has 7 sides.'
+    mistakes:
+      '8': c6m1_shape
+      '12': c6m1_shape
+  - prompt: Which picture shows why 1 + 3 + 5 + 7 = 16?
+    options:
+    - Four L-shaped borders building a 4 × 4 square
+    - A row of 16 dots
+    - A triangle with 4 dots on each side
+    answer: Four L-shaped borders building a 4 × 4 square
+    difficulty: 2
+    hints:
+    - Each odd number is one border.
+    - The borders fit together into a square.
+    solution: 'Step 1: 1, 3, 5, 7 are L-shapes that each grow a square by one. Step 2: four of them make a 4 × 4 square of 16.'
+    mistakes:
+      A row of 16 dots: c6m1_shape
+      A triangle with 4 dots on each side: c6m1_shape
+  - prompt: If 1 + 3 + 5 + ... (n odd numbers) = 81, how many odd numbers were added?
+    answer: '9'
+    check: '9'
+    difficulty: 3
+    hints:
+    - The sum is n × n.
+    - Which number times itself is 81?
+    solution: 'Step 1: n × n = 81. Step 2: 9 × 9 = 81, so n = 9.'
+    mistakes:
+      '81': c6m1_oddsum
+      '41': c6m1_oddsum
+      '40': c6m1_oddsum
