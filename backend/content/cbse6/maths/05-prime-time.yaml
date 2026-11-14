@@ -15,6 +15,13 @@ tips:
   t6_largest_prime_factor: "Split 84 into primes. Which prime is the largest?"
   t6_multiply_all: "Multiply step by step: 2 × 2 × 2 = 8, then × 3, then × 3."
   t6_prime_factors: "Every factor must be prime. Can 30, 10, 6, 4 or 15 be split further?"
+  c6m5_factor: A factor divides the number with nothing left over. Test each one by dividing.
+  c6m5_pairs: List factors in pairs that multiply to the number, starting from 1.
+  c6m5_multiple: 'Multiples come from the times table of the number: 1 times, 2 times, 3 times...'
+  c6m5_prime: A prime has exactly two factors. Try dividing by small primes up to its square root.
+  c6m5_common: List the multiples (or factors) of both numbers and look for the ones in both lists.
+  c6m5_tree: Keep splitting until every branch ends in a prime, then multiply them back to check.
+  c6m5_digits: 'Use the divisibility rule for that number: look at the last digits or the digit sum.'
 concepts:
 - code: cbse6m.prime.factors
   title: Factors, multiples and primes
@@ -73,6 +80,58 @@ concepts:
       n: 13
       find: all
       hint: A prime number only makes one long row (or one column).
+  lesson:
+    - teach: 'A factor of a number divides it exactly. Find factors in pairs that multiply to the number: 18 = 1 × 18 = 2 × 9 = 3 × 6, so the factors of 18 are 1, 2, 3, 6, 9, 18. A multiple is the number times 1, 2, 3, ...: multiples of 6 are 6, 12, 18, ...'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 6
+          label: '6'
+        rows:
+        - size: 3
+          label: '3'
+        cells:
+        - - 3 × 6 = 18
+        alt: 18 squares arranged as a 3 by 6 rectangle, showing that 3 and 6 are factors of 18.
+      check:
+        prompt: Which is NOT a factor of 20?
+        options:
+        - '6'
+        - '4'
+        - '5'
+        answer: '6'
+        why: 20 ÷ 6 leaves 2 over; 4 × 5 = 20 so 4 and 5 are factors.
+    - teach: 'A prime number has exactly two factors: 1 and itself (2, 3, 5, 7, 11, 13). A composite number has more than two. 1 has only one factor, so it is neither. 2 is the only even prime.'
+      check:
+        prompt: Is 21 prime or composite?
+        options:
+        - Composite
+        - Prime
+        - Neither
+        answer: Composite
+        why: 21 = 3 × 7, so it has the factors 1, 3, 7, 21.
+    - teach: 'Common multiples are in both lists: multiples of 4 (4, 8, 12, 16, 20, 24) and of 6 (6, 12, 18, 24) share 12 and 24. Common factors divide both. Two numbers with only 1 as a common factor are co-prime, like 9 and 10.'
+      picture:
+        kind: compare
+        columns:
+        - title: Multiples of 4
+          points:
+          - 4, 8, 12, 16, 20, 24
+        - title: Multiples of 6
+          points:
+          - 6, 12, 18, 24
+        - title: In both
+          points:
+          - 12, 24
+        alt: 12 and 24 appear in both the 4 times table and the 6 times table.
+      check:
+        prompt: Are 14 and 21 co-prime?
+        options:
+        - No, both divide by 7
+        - 'Yes'
+        - No, both are even
+        answer: No, both divide by 7
+        why: 14 = 2 × 7 and 21 = 3 × 7 share the factor 7.
   items:
   - prompt: How many factors does 12 have?
     answer: '6'
@@ -137,6 +196,114 @@ concepts:
     - 8 = 2×2×2, 15 = 3×5.
     solution: 8 and 15 share no factor except 1.
     mistakes: {"6 and 9": "t6_coprime", "10 and 15": "t6_coprime"}
+  - prompt: How many factors does 36 have?
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - 'Pairs: 1 × 36, 2 × 18, 3 × 12, 4 × 9, ...'
+    - 6 × 6 gives only one new factor.
+    solution: 'Step 1: factors are 1, 2, 3, 4, 6, 9, 12, 18, 36. Step 2: that is 9 factors.'
+    mistakes:
+      '10': c6m5_pairs
+      '8': c6m5_pairs
+  - prompt: Which number is a multiple of 7?
+    options:
+    - '63'
+    - '47'
+    - '75'
+    answer: '63'
+    difficulty: 1
+    hints:
+    - Think of the 7 times table.
+    - 7 × 9 = ?
+    solution: 'Step 1: 7 × 9 = 63. Step 2: 47 and 75 leave a remainder when divided by 7.'
+    mistakes:
+      '47': c6m5_multiple
+      '75': c6m5_multiple
+  - prompt: Is 51 a prime number?
+    options:
+    - No, 51 = 3 × 17
+    - 'Yes'
+    - No, it is even
+    answer: No, 51 = 3 × 17
+    difficulty: 2
+    hints:
+    - 'Add its digits: 5 + 1.'
+    - That digit sum divides by 3.
+    solution: 'Step 1: digit sum 6 divides by 3, so 3 is a factor. Step 2: 51 = 3 × 17, so it is composite.'
+    mistakes:
+      'Yes': c6m5_prime
+      No, it is even: c6m5_prime
+  - prompt: Which is the smallest prime number?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - 1 is not prime.
+    - What is the next number?
+    solution: 'Step 1: 1 has only one factor, so it is not prime. Step 2: 2 has exactly two factors, so it is the smallest prime.'
+    mistakes:
+      '1': c6m5_prime
+      '3': c6m5_prime
+  - prompt: What is the smallest common multiple of 6 and 8?
+    answer: '24'
+    check: '24'
+    difficulty: 2
+    hints:
+    - 'List the multiples of 8 in order.'
+    - Which of those is also in the 6 times table?
+    solution: 'Step 1: multiples of 8: 8, 16, 24. Step 2: 24 = 6 × 4 is the first one also a multiple of 6.'
+    mistakes:
+      '48': c6m5_common
+      '14': c6m5_common
+  - prompt: What is the largest common factor of 12 and 18?
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - 'Factors of 12: 1, 2, 3, 4, 6, 12.'
+    - Which of these also divide 18?
+    solution: 'Step 1: common factors are 1, 2, 3, 6. Step 2: the largest is 6.'
+    mistakes:
+      '3': c6m5_common
+      '2': c6m5_common
+  - prompt: How many primes are there between 20 and 40?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Skip all even numbers and those ending in 5.
+    - Test 21, 23, 27, 29, 31, 33, 37, 39.
+    solution: 'Step 1: 21, 27, 33, 39 divide by 3. Step 2: 23, 29, 31, 37 are prime: 4 primes.'
+    mistakes:
+      '5': c6m5_prime
+      '3': c6m5_prime
+  - prompt: Which of these pairs is co-prime?
+    options:
+    - 16 and 27
+    - 15 and 25
+    - 12 and 30
+    answer: 16 and 27
+    difficulty: 2
+    hints:
+    - Look for any common factor bigger than 1.
+    - 16 is made of 2s and 27 of 3s.
+    solution: 'Step 1: 16 = 2 × 2 × 2 × 2 and 27 = 3 × 3 × 3. Step 2: no common factor except 1, so they are co-prime.'
+    mistakes:
+      15 and 25: c6m5_common
+      12 and 30: c6m5_common
+  - prompt: Two bells ring every 4 minutes and every 10 minutes. They ring together now. After how many minutes will they next ring together?
+    answer: '20'
+    check: '20'
+    difficulty: 3
+    hints:
+    - You need a common multiple of 4 and 10.
+    - Which is the smallest one?
+    solution: 'Step 1: multiples of 10: 10, 20. Step 2: 20 is also a multiple of 4, so they ring together after 20 minutes.'
+    mistakes:
+      '40': c6m5_common
+      '14': c6m5_common
 - code: cbse6m.prime.factorise
   title: Prime factorisation and divisibility
   after:
@@ -191,6 +358,40 @@ concepts:
       bin: Not divisible by 3
       why: '2 + 2 + 2 + 2 = 8: not a multiple of 3.'
       clue: Add the digits.
+  lesson:
+    - teach: 'Every composite number can be written as a product of primes, and only in one way. Use a factor tree: split 36 into 6 × 6, then each 6 into 2 × 3. So 36 = 2 × 2 × 3 × 3.'
+      picture:
+        kind: flow
+        steps:
+        - '36'
+        - 6 × 6
+        - 2 × 3 × 2 × 3
+        - 2 × 2 × 3 × 3
+        alt: A factor tree splits 36 into 6 and 6, and each 6 into 2 and 3.
+      check:
+        prompt: Which is the prime factorisation of 18?
+        options:
+        - 2 × 3 × 3
+        - 2 × 9
+        - 3 × 6
+        answer: 2 × 3 × 3
+        why: 9 and 6 are not prime; split them until only primes are left.
+    - teach: 'Divisibility tests save time. By 2: last digit even. By 5: ends in 0 or 5. By 10: ends in 0. By 3: digit sum divides by 3. By 9: digit sum divides by 9.'
+      check:
+        prompt: Is 7,425 divisible by 9?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: Digit sum 7 + 4 + 2 + 5 = 18, and 18 divides by 9.
+    - teach: 'By 4: the last two digits divide by 4. By 8: the last three digits divide by 8. By 6: it passes both the test for 2 and the test for 3.'
+      check:
+        prompt: Is 5,132 divisible by 4?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: The last two digits 32 divide by 4.
   items:
   - prompt: What is the prime factorisation of 60?
     options:
@@ -263,3 +464,117 @@ concepts:
     - Pick the biggest.
     solution: 84 = 2 × 2 × 3 × 7, so the largest prime factor is 7.
     mistakes: {"42": "t6_largest_prime_factor", "21": "t6_largest_prime_factor"}
+  - prompt: What is the prime factorisation of 48?
+    options:
+    - 2 × 2 × 2 × 2 × 3
+    - 2 × 2 × 12
+    - 6 × 8
+    answer: 2 × 2 × 2 × 2 × 3
+    difficulty: 2
+    hints:
+    - Keep halving while you can.
+    - 48 → 24 → 12 → 6 → 3.
+    solution: 'Step 1: 48 = 2 × 24 = 2 × 2 × 12 = 2 × 2 × 2 × 6. Step 2: 6 = 2 × 3, so 48 = 2 × 2 × 2 × 2 × 3.'
+    mistakes:
+      2 × 2 × 12: c6m5_tree
+      6 × 8: c6m5_tree
+  - prompt: 'Find the number: 2 × 3 × 5 × 7.'
+    answer: '210'
+    check: 2*3*5*7
+    difficulty: 1
+    hints:
+    - Multiply step by step.
+    - 2 × 3 = 6, 6 × 5 = 30.
+    solution: 'Step 1: 2 × 3 × 5 = 30. Step 2: 30 × 7 = 210.'
+    mistakes:
+      '17': c6m5_tree
+      '105': c6m5_tree
+  - prompt: What is the largest prime factor of 90?
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - Factor 90 into primes.
+    - 90 = 2 × 45 = 2 × 3 × 15.
+    solution: 'Step 1: 90 = 2 × 3 × 3 × 5. Step 2: the largest prime is 5.'
+    mistakes:
+      '9': c6m5_tree
+      '45': c6m5_tree
+  - prompt: Is 2,346 divisible by 6?
+    options:
+    - Yes, it passes the tests for 2 and 3
+    - No, it fails the test for 3
+    - No, it is odd
+    answer: Yes, it passes the tests for 2 and 3
+    difficulty: 2
+    hints:
+    - Check the test for 2 and for 3.
+    - Last digit 6; digit sum 2 + 3 + 4 + 6.
+    solution: 'Step 1: it ends in 6, so it divides by 2. Step 2: digit sum 15 divides by 3. Both pass, so it divides by 6.'
+    mistakes:
+      No, it fails the test for 3: c6m5_digits
+      No, it is odd: c6m5_digits
+  - prompt: Which number is divisible by 9?
+    options:
+    - 4,563
+    - 4,562
+    - 4,567
+    answer: 4,563
+    difficulty: 2
+    hints:
+    - Find each digit sum.
+    - Which digit sum divides by 9?
+    solution: 'Step 1: 4 + 5 + 6 + 3 = 18, which divides by 9. Step 2: the others give 17 and 22.'
+    mistakes:
+      4,562: c6m5_digits
+      4,567: c6m5_digits
+  - prompt: Which number is divisible by 8?
+    options:
+    - 7,128
+    - 7,124
+    - 7,132
+    answer: 7,128
+    difficulty: 3
+    hints:
+    - Look only at the last three digits.
+    - Which of 128, 124, 132 divides by 8?
+    solution: 'Step 1: 128 = 8 × 16. Step 2: 124 and 132 leave remainders, so 7,128 is the one.'
+    mistakes:
+      7,124: c6m5_digits
+      7,132: c6m5_digits
+  - prompt: Using prime factors, are 35 and 66 co-prime?
+    options:
+    - Yes, they share no prime
+    - No, both have the factor 5
+    - No, both have the factor 11
+    answer: Yes, they share no prime
+    difficulty: 2
+    hints:
+    - 35 = 5 × 7.
+    - 66 = 2 × 3 × 11. Any prime in both?
+    solution: 'Step 1: 35 = 5 × 7 and 66 = 2 × 3 × 11. Step 2: no prime is shared, so they are co-prime.'
+    mistakes:
+      No, both have the factor 5: c6m5_tree
+      No, both have the factor 11: c6m5_tree
+  - prompt: 'Which digit can fill the blank so that 52_ is divisible by 3: 1, 2 or 4?'
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - 5 + 2 = 7 so far.
+    - 7 + the digit must divide by 3.
+    solution: 'Step 1: 7 + 2 = 9, which divides by 3. Step 2: so the digit is 2 (522 = 3 × 174).'
+    mistakes:
+      '1': c6m5_digits
+      '4': c6m5_digits
+  - prompt: How many prime factors (counting repeats) does 64 have?
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - 64 is a power of 2.
+    - Count how many 2s multiply to 64.
+    solution: 'Step 1: 64 = 2 × 2 × 2 × 2 × 2 × 2. Step 2: that is 6 prime factors.'
+    mistakes:
+      '8': c6m5_tree
+      '2': c6m5_tree
