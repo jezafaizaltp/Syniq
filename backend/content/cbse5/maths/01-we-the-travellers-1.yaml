@@ -10,6 +10,12 @@ tips:
   m5_estimate: "Round each number to the nearest thousand first, then add."
   m5_lakh: "1 lakh = 1,00,000 and 1 thousand = 1,000. How many 1,000s fit in 1,00,000?"
   m5_subtract_borrow: "Subtract column by column from the ones. When the top digit is smaller, borrow 1 from the next column."
+  c5m1_place: Write the number in a place-value chart. Each step to the left is worth 10 times more.
+  c5m1_compare: Count the digits first. If they match, compare place by place from the left.
+  c5m1_round: Look only at the digit just to the right of the place you round to. 5 or more goes up.
+  c5m1_carry: Line up the ones under the ones. When a column adds to 10 or more, carry 1 to the next column.
+  c5m1_borrow: When the top digit is smaller, borrow 1 from the next place on the left; it becomes 10 here.
+  c5m1_which: 'Decide first: is the story putting amounts together, or finding how much is left or how much more?'
 concepts:
 - code: cbse5m.trav1.place
   title: Big numbers and place value
@@ -100,6 +106,47 @@ concepts:
       - when:
           val: 9250
         say: 'Put 5 before 2: the bigger digit goes in the bigger place.'
+  lesson:
+    - teach: 'Each place in a number is worth 10 times the place on its right: ones, tens, hundreds, thousands, ten thousands, lakh. In 45,307 the 4 is in the ten thousands place, so it is worth 40,000.'
+      picture:
+        kind: compare
+        columns:
+        - title: Ten thousands, thousands
+          points:
+          - 4 → 40,000
+          - 5 → 5,000
+        - title: Hundreds, tens, ones
+          points:
+          - 3 → 300
+          - 0 → 0
+          - 7 → 7
+        alt: 45,307 split into 40,000 + 5,000 + 300 + 0 + 7.
+      check:
+        prompt: What is the 5 worth in 45,307?
+        options:
+        - 5,000
+        - '500'
+        - 50,000
+        answer: 5,000
+        why: The 5 is in the thousands place.
+    - teach: 'In India we put a comma after the thousands and then after every two digits: 1,00,000 is one lakh. One lakh is 100 thousands.'
+      check:
+        prompt: How is one lakh written with commas?
+        options:
+        - 1,00,000
+        - 100,000,0
+        - 10,0000
+        answer: 1,00,000
+        why: Comma after three digits from the right, then after two more.
+    - teach: 'To compare, count the digits: more digits means bigger. If the digit count is the same, compare from the left. To round to the nearest hundred, look at the tens digit: 5 or more rounds up, less than 5 rounds down.'
+      check:
+        prompt: Round 3,640 to the nearest hundred.
+        options:
+        - 3,600
+        - 3,700
+        - 4,000
+        answer: 3,600
+        why: The tens digit is 4, which is less than 5, so round down.
   items:
   - prompt: What is the value of 6 in 36,452?
     answer: '6000'
@@ -164,6 +211,115 @@ concepts:
     solution: 'Start with 1, then 0, then 3, 7, 9: 10,379.'
     mistakes:
       '1379': c5_place_value
+  - prompt: What is the value of 8 in 28,315?
+    answer: '8000'
+    check: 8*1000
+    difficulty: 1
+    hints:
+    - Find which place the 8 is in.
+    - 'Count places from the right: ones, tens, hundreds, thousands.'
+    solution: 'Step 1: 8 is in the thousands place. Step 2: 8 × 1,000 = 8,000.'
+    mistakes:
+      '800': c5m1_place
+      '80000': c5m1_place
+      '8': c5m1_place
+  - prompt: Write 6 ten thousands + 4 thousands + 9 tens + 2 ones as a number (no commas).
+    answer: '64092'
+    check: 60000+4000+90+2
+    difficulty: 2
+    hints:
+    - There are no hundreds, so that place gets a 0.
+    - Fill each place in order from ten thousands to ones.
+    solution: 'Step 1: 60,000 + 4,000 + 0 + 90 + 2. Step 2: the number is 64,092.'
+    mistakes:
+      '6492': c5m1_place
+      '64920': c5m1_place
+  - prompt: Which is the biggest number?
+    options:
+    - 70,215
+    - 7,999
+    - 69,980
+    answer: 70,215
+    difficulty: 1
+    hints:
+    - Count the digits first.
+    - Two have five digits; compare their first digits.
+    solution: 'Step 1: 7,999 has only 4 digits. Step 2: of the 5-digit ones, 7 ten thousands beats 6.'
+    mistakes:
+      7,999: c5m1_compare
+      69,980: c5m1_compare
+  - prompt: Round 12,350 to the nearest thousand.
+    answer: '12000'
+    check: '12000'
+    difficulty: 2
+    hints:
+    - Look at the hundreds digit.
+    - Is the hundreds digit 5 or more?
+    solution: 'Step 1: the hundreds digit is 3. Step 2: 3 is less than 5, so round down to 12,000.'
+    mistakes:
+      '13000': c5m1_round
+      '12400': c5m1_round
+  - prompt: What is the largest 5-digit number you can make with 4, 8, 0, 2, 6 (each used once)?
+    answer: '86420'
+    check: '86420'
+    difficulty: 2
+    hints:
+    - Put the biggest digit in the biggest place.
+    - Then the next biggest, and so on.
+    solution: 'Step 1: order the digits from big to small: 8, 6, 4, 2, 0. Step 2: the number is 86,420.'
+    mistakes:
+      02468: c5m1_place
+      '86402': c5m1_compare
+  - prompt: How many hundreds make one lakh?
+    answer: '1000'
+    check: 100000//100
+    difficulty: 3
+    hints:
+    - One lakh is 1,00,000.
+    - Divide one lakh by 100.
+    solution: 'Step 1: 1,00,000 ÷ 100. Step 2: that is 1,000 hundreds.'
+    mistakes:
+      '100': c5m1_place
+      '10000': c5m1_place
+  - prompt: What number is 1,000 more than 49,500?
+    answer: '50500'
+    check: 49500+1000
+    difficulty: 2
+    hints:
+    - Add 1 to the thousands digit.
+    - 9 thousands + 1 thousand makes 10 thousands, which carries.
+    solution: 'Step 1: 49,500 + 1,000. Step 2: = 50,500.'
+    mistakes:
+      '49600': c5m1_place
+      '59500': c5m1_place
+  - prompt: Which number is 40,000 + 300 + 5?
+    options:
+    - 40,305
+    - 43,005
+    - 4,305
+    answer: 40,305
+    difficulty: 2
+    hints:
+    - There are no thousands and no tens.
+    - Write 0 in those places.
+    solution: 'Step 1: ten thousands 4, thousands 0, hundreds 3, tens 0, ones 5. Step 2: 40,305.'
+    mistakes:
+      43,005: c5m1_place
+      4,305: c5m1_place
+  - prompt: 'Arrange from smallest: 35,210; 35,120; 35,201. Which comes first?'
+    options:
+    - 35,120
+    - 35,201
+    - 35,210
+    answer: 35,120
+    difficulty: 3
+    hints:
+    - The first two digits are the same in all.
+    - Compare the hundreds digits next.
+    solution: 'Step 1: all start 35. Step 2: hundreds digits are 2, 1, 2, so 35,120 is smallest.'
+    mistakes:
+      35,201: c5m1_compare
+      35,210: c5m1_compare
 - code: cbse5m.trav1.add
   title: Adding and subtracting travel distances
   after:
@@ -234,6 +390,43 @@ concepts:
       - when:
           x: 277
         say: 'Check with adding: 233 + 277 = 510. Too much.'
+  lesson:
+    - teach: To add big numbers, write them one under the other with ones under ones. Add from the ones column. If a column makes 10 or more, write the ones digit and carry 1 to the next column.
+      picture:
+        kind: flow
+        steps:
+        - Line up the places
+        - Add the ones
+        - Carry if 10 or more
+        - Add the next column
+        - Read the total
+        alt: Steps for column addition with carrying.
+      check:
+        prompt: In 368 + 245, what do the ones add to?
+        options:
+        - '13'
+        - '3'
+        - '11'
+        answer: '13'
+        why: 8 + 5 = 13; write 3, carry 1.
+    - teach: To subtract, start from the ones too. If the top digit is smaller than the bottom digit, borrow 1 from the next place on the left; it becomes 10 more in this column.
+      check:
+        prompt: In 52 − 17, the ones are 2 − 7. What do you do?
+        options:
+        - Borrow 1 ten to make 12 − 7
+        - Write 7 − 2
+        - Write 0
+        answer: Borrow 1 ten to make 12 − 7
+        why: You cannot take 7 from 2, so you regroup a ten.
+    - teach: Before working it out, estimate by rounding. 3,912 + 2,104 is about 4,000 + 2,000 = 6,000. If your answer is far from the estimate, check again. In a story, 'altogether' means add; 'how many left' or 'how much more' means subtract.
+      check:
+        prompt: Which word tells you to subtract?
+        options:
+        - How many are left
+        - Altogether
+        - In all
+        answer: How many are left
+        why: Finding what remains is taking away.
   items:
   - prompt: A train goes 1,245 km and then a bus goes 368 km. How far is the whole trip in km?
     answer: '1613'
@@ -296,3 +489,111 @@ concepts:
     - 2180 − 1385.
     solution: 2,180 − 1,385 = 795 km.
     mistakes: {"3565": "m5_subtract_borrow", "895": "m5_subtract_borrow"}
+  - prompt: What is 3,658 + 1,476?
+    answer: '5134'
+    check: 3658+1476
+    difficulty: 1
+    hints:
+    - Start with 8 + 6 in the ones.
+    - Carry each time a column reaches 10.
+    solution: 'Step 1: ones 14 (carry 1), tens 13 (carry 1), hundreds 11 (carry 1), thousands 5. Step 2: 5,134.'
+    mistakes:
+      '4024': c5m1_carry
+      '5024': c5m1_carry
+      '4134': c5m1_carry
+  - prompt: What is 7,003 − 2,458?
+    answer: '4545'
+    check: 7003-2458
+    difficulty: 2
+    hints:
+    - The ones are 3 − 8, so you must borrow.
+    - The tens and hundreds are 0, so borrow from the thousands.
+    solution: 'Step 1: regroup 7,003 as 6 thousands, 9 hundreds, 9 tens, 13 ones. Step 2: 13−8=5, 9−5=4, 9−4=5, 6−2=4: 4,545.'
+    mistakes:
+      '5455': c5m1_borrow
+      '5445': c5m1_borrow
+  - prompt: A family drives 2,360 km to Goa and 2,360 km back. How far do they drive in all, in km?
+    answer: '4720'
+    check: 2360*2
+    difficulty: 1
+    hints:
+    - '''In all'' means add.'
+    - Add the same distance twice.
+    solution: 'Step 1: 2,360 + 2,360. Step 2: = 4,720 km.'
+    mistakes:
+      '0': c5m1_which
+      '4620': c5m1_carry
+  - prompt: A train has 1,200 seats. 875 are booked. How many seats are free?
+    answer: '325'
+    check: 1200-875
+    difficulty: 2
+    hints:
+    - Free seats are what is left.
+    - Subtract the booked seats from all seats.
+    solution: 'Step 1: 1,200 − 875. Step 2: = 325.'
+    mistakes:
+      '2075': c5m1_which
+      '475': c5m1_borrow
+  - prompt: Which is the best estimate for 4,890 + 3,120?
+    options:
+    - about 8,000
+    - about 7,000
+    - about 9,000
+    answer: about 8,000
+    difficulty: 2
+    hints:
+    - Round each number to the nearest thousand.
+    - 4,890 is near 5,000 and 3,120 is near 3,000.
+    solution: 'Step 1: 5,000 + 3,000. Step 2: about 8,000.'
+    mistakes:
+      about 7,000: c5m1_round
+      about 9,000: c5m1_round
+  - prompt: Kochi to Delhi is 2,690 km. Kochi to Chennai is 690 km. How much farther is Delhi, in km?
+    answer: '2000'
+    check: 2690-690
+    difficulty: 1
+    hints:
+    - '''How much farther'' means find the difference.'
+    - Look at the last three digits of both.
+    solution: 'Step 1: 2,690 − 690. Step 2: = 2,000 km.'
+    mistakes:
+      '3380': c5m1_which
+      '1990': c5m1_borrow
+  - prompt: 'Fill in: 3,450 + ? = 5,000'
+    answer: '1550'
+    check: 5000-3450
+    difficulty: 3
+    hints:
+    - Find the missing part by subtracting.
+    - 5,000 − 3,450.
+    solution: 'Step 1: missing part = 5,000 − 3,450. Step 2: = 1,550.'
+    mistakes:
+      '8450': c5m1_which
+      '2550': c5m1_borrow
+      '1650': c5m1_borrow
+  - prompt: A bus went 1,425 km on Monday and 1,875 km on Tuesday. How far did it go in both days, in km?
+    answer: '3300'
+    check: 1425+1875
+    difficulty: 2
+    hints:
+    - Add the two distances.
+    - '5 + 5 in the ones makes 10: carry.'
+    solution: 'Step 1: 1,425 + 1,875. Step 2: = 3,300 km.'
+    mistakes:
+      '2200': c5m1_carry
+      '3200': c5m1_carry
+      '450': c5m1_which
+  - prompt: Riya says 6,000 − 1,999 = 5,001. Rahul says 4,001. Who is right?
+    options:
+    - Rahul
+    - Riya
+    - Both
+    answer: Rahul
+    difficulty: 3
+    hints:
+    - 1,999 is just 1 less than 2,000.
+    - 6,000 − 2,000 = 4,000. Then adjust by 1.
+    solution: 'Step 1: 6,000 − 2,000 = 4,000. Step 2: we took away 1 too many, so add 1: 4,001.'
+    mistakes:
+      Riya: c5m1_borrow
+      Both: c5m1_borrow

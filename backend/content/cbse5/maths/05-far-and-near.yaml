@@ -13,6 +13,11 @@ tips:
   m5_rate: "4 km each hour, for 3 hours: 4 + 4 + 4."
   m5_there_and_back: "1 km 250 m = 1250 m. 'There and back' means the trip happens twice."
   m5_unit_convert: "1 km = 1000 m, 1 L = 1000 mL, 1 kg = 1000 g. Change everything to the smaller unit first."
+  c5m5_conv: Going to a smaller unit means more of them, so multiply. Going to a bigger unit means fewer, so divide.
+  c5m5_unit: 'Think about how big the thing is: something on your desk, a room, or a trip between towns?'
+  c5m5_same: Change both distances to the same unit before you compare or add.
+  c5m5_back: There and back is the same path twice.
+  c5m5_rate: If you cover the same distance each hour, multiply by the number of hours.
 concepts:
 - code: cbse5m.far.units
   title: Kilometres, metres and centimetres
@@ -84,6 +89,42 @@ concepts:
       bin: Kilometres
       clue: Too far to walk quickly.
       why: Some km.
+  lesson:
+    - teach: We measure length in kilometres (km), metres (m), centimetres (cm) and millimetres (mm). 1 km = 1,000 m. 1 m = 100 cm. 1 cm = 10 mm.
+      picture:
+        kind: flow
+        steps:
+        - 1 km
+        - = 1,000 m
+        - 1 m = 100 cm
+        - 1 cm = 10 mm
+        alt: Length units from kilometres down to millimetres.
+      check:
+        prompt: How many centimetres make 1 metre?
+        options:
+        - '100'
+        - '10'
+        - 1,000
+        answer: '100'
+        why: '''Centi'' means one hundredth: 100 cm in a metre.'
+    - teach: 'To change to a smaller unit, multiply: 5 km = 5 × 1,000 = 5,000 m. To change to a bigger unit, divide: 3,400 m = 3 km 400 m.'
+      check:
+        prompt: How many metres are in 2 km?
+        options:
+        - 2,000
+        - '200'
+        - '20'
+        answer: 2,000
+        why: Each km is 1,000 m, and 2 × 1,000 = 2,000.
+    - teach: 'Choose the unit that fits: a pencil in cm, a classroom in m, a journey between towns in km. To add, add each unit and carry 1,000 m as 1 km: 2 km 600 m + 1 km 700 m = 3 km 1,300 m = 4 km 300 m.'
+      check:
+        prompt: Which unit is best for the length of your thumb?
+        options:
+        - Centimetres
+        - Kilometres
+        - Metres
+        answer: Centimetres
+        why: A thumb is only a few centimetres long.
   items:
   - prompt: How many metres are in 3 km?
     answer: '3000'
@@ -146,6 +187,111 @@ concepts:
     - There and back is twice.
     solution: 1,250 × 2 = 2,500 m.
     mistakes: {"1250": "m5_there_and_back", "1500": "m5_there_and_back"}
+  - prompt: How many metres are in 7 km?
+    answer: '7000'
+    check: 7*1000
+    difficulty: 1
+    hints:
+    - 1 km = 1,000 m.
+    - Multiply 7 by 1,000.
+    solution: 'Step 1: 7 × 1,000. Step 2: = 7,000 m.'
+    mistakes:
+      '700': c5m5_conv
+      '70': c5m5_conv
+  - prompt: How many centimetres are in 6 m 25 cm?
+    answer: '625'
+    check: 6*100+25
+    difficulty: 2
+    hints:
+    - 6 m = 600 cm.
+    - Add the extra 25 cm.
+    solution: 'Step 1: 6 m = 600 cm. Step 2: 600 + 25 = 625 cm.'
+    mistakes:
+      '6025': c5m5_conv
+      '31': c5m5_conv
+  - prompt: How many millimetres are in 9 cm?
+    answer: '90'
+    check: 9*10
+    difficulty: 1
+    hints:
+    - 1 cm = 10 mm.
+    - Multiply 9 by 10.
+    solution: 'Step 1: 9 × 10. Step 2: = 90 mm.'
+    mistakes:
+      '900': c5m5_conv
+      '9': c5m5_conv
+  - prompt: 4,050 m is 4 km and how many metres?
+    answer: '50'
+    check: 4050-4000
+    difficulty: 2
+    hints:
+    - 4 km = 4,000 m.
+    - What is left after 4,000?
+    solution: 'Step 1: 4,050 − 4,000. Step 2: = 50 m.'
+    mistakes:
+      '500': c5m5_conv
+      '5': c5m5_conv
+  - prompt: Which unit is best for the height of a door?
+    options:
+    - Metres
+    - Kilometres
+    - Millimetres
+    answer: Metres
+    difficulty: 1
+    hints:
+    - A door is taller than you but not as long as a road.
+    - About 2 of this unit.
+    solution: 'Step 1: a door is about 2 m tall. Step 2: metres fit best.'
+    mistakes:
+      Kilometres: c5m5_unit
+      Millimetres: c5m5_unit
+  - prompt: Add 3 km 450 m and 2 km 800 m. How many metres in all?
+    answer: '6250'
+    check: 3450+2800
+    difficulty: 2
+    hints:
+    - Change both to metres first.
+    - 3,450 + 2,800.
+    solution: 'Step 1: 3,450 m + 2,800 m. Step 2: = 6,250 m.'
+    mistakes:
+      '5250': c5m5_same
+      '51250': c5m5_conv
+  - prompt: A ribbon is 2 m long. 75 cm is cut off. How many cm are left?
+    answer: '125'
+    check: 200-75
+    difficulty: 2
+    hints:
+    - 2 m = 200 cm.
+    - Take 75 from 200.
+    solution: 'Step 1: 2 m = 200 cm. Step 2: 200 − 75 = 125 cm.'
+    mistakes:
+      '73': c5m5_same
+      '1925': c5m5_same
+  - prompt: Which is the same as 1 km 5 m?
+    options:
+    - 1,005 m
+    - 1,500 m
+    - 1,050 m
+    answer: 1,005 m
+    difficulty: 3
+    hints:
+    - 1 km = 1,000 m.
+    - Add only 5 more metres.
+    solution: 'Step 1: 1,000 + 5. Step 2: = 1,005 m.'
+    mistakes:
+      1,500 m: c5m5_conv
+      1,050 m: c5m5_conv
+  - prompt: A bus stop is 650 m from home. Ravi goes there and back each day. How many metres does he walk in a day?
+    answer: '1300'
+    check: 650*2
+    difficulty: 2
+    hints:
+    - There and back is the same path twice.
+    - 650 + 650.
+    solution: 'Step 1: 650 × 2. Step 2: = 1,300 m.'
+    mistakes:
+      '650': c5m5_back
+      '1200': c5m5_back
 - code: cbse5m.far.compare
   title: Comparing near and far
   after:
@@ -205,6 +351,41 @@ concepts:
       - when:
           v: 600
         say: '1 km is 1000 m: start there and add 500.'
+  lesson:
+    - teach: 'To compare distances, write them in the same unit first. 900 m and 1 km 50 m: 1 km 50 m = 1,050 m, so 900 m is nearer.'
+      check:
+        prompt: 'Which is farther: 1,200 m or 1 km?'
+        options:
+        - 1,200 m
+        - 1 km
+        - They are equal
+        answer: 1,200 m
+        why: 1 km = 1,000 m, which is less than 1,200 m.
+    - teach: We can estimate distances with our body. One step is about half a metre, so 2 steps make about 1 m and 1 km is about 2,000 steps.
+      picture:
+        kind: flow
+        steps:
+        - 1 step ≈ 1/2 m
+        - 2 steps ≈ 1 m
+        - 2,000 steps ≈ 1 km
+        alt: Steps are a way to estimate distance.
+      check:
+        prompt: About how many steps make 10 m?
+        options:
+        - '20'
+        - '5'
+        - '100'
+        answer: '20'
+        why: 2 steps per metre, and 10 × 2 = 20.
+    - teach: 'People walk about 4 to 5 km in an hour. If you walk the same distance each hour, multiply: 4 km each hour for 3 hours = 12 km.'
+      check:
+        prompt: Walking 5 km each hour, how far do you go in 2 hours?
+        options:
+        - 10 km
+        - 7 km
+        - 5 km
+        answer: 10 km
+        why: 5 + 5 = 10 km.
   items:
   - prompt: Which is nearer?
     options:
@@ -269,3 +450,114 @@ concepts:
     - 2000 ÷ 400.
     solution: 2,000 ÷ 400 = 5 laps.
     mistakes: {"4": "m5_laps", "8": "m5_laps"}
+  - prompt: Which is the nearest?
+    options:
+    - 850 m
+    - 1 km
+    - 1 km 20 m
+    answer: 850 m
+    difficulty: 1
+    hints:
+    - Change all to metres.
+    - 1 km = 1,000 m.
+    solution: 'Step 1: 850 m, 1,000 m, 1,020 m. Step 2: 850 m is smallest, so nearest.'
+    mistakes:
+      1 km: c5m5_same
+      1 km 20 m: c5m5_same
+  - prompt: A temple is 1 km 300 m away and a river 900 m away. How many metres farther is the temple?
+    answer: '400'
+    check: 1300-900
+    difficulty: 2
+    hints:
+    - Change 1 km 300 m to metres.
+    - Then subtract 900.
+    solution: 'Step 1: 1 km 300 m = 1,300 m. Step 2: 1,300 − 900 = 400 m.'
+    mistakes:
+      '600': c5m5_same
+      '2200': c5m5_same
+  - prompt: About how many steps of half a metre make 500 m?
+    answer: '1000'
+    check: 500*2
+    difficulty: 2
+    hints:
+    - 2 steps make 1 m.
+    - Multiply the metres by 2.
+    solution: 'Step 1: 2 steps per metre. Step 2: 500 × 2 = 1,000 steps.'
+    mistakes:
+      '250': c5m5_conv
+      '500': c5m5_conv
+  - prompt: A cyclist rides 12 km in each hour. How far does she ride in 4 hours, in km?
+    answer: '48'
+    check: 12*4
+    difficulty: 1
+    hints:
+    - Same distance each hour.
+    - 12 × 4.
+    solution: 'Step 1: 12 × 4. Step 2: = 48 km.'
+    mistakes:
+      '16': c5m5_rate
+      '3': c5m5_rate
+  - prompt: A running track is 200 m around. How many rounds make 1 km?
+    answer: '5'
+    check: 1000//200
+    difficulty: 2
+    hints:
+    - 1 km = 1,000 m.
+    - How many 200s in 1,000?
+    solution: 'Step 1: 1,000 ÷ 200. Step 2: = 5 rounds.'
+    mistakes:
+      '50': c5m5_conv
+      '200': c5m5_conv
+  - prompt: 'Put in order from nearest: 2 km, 1,500 m, 2 km 100 m. Which is in the middle?'
+    options:
+    - 2 km
+    - 1,500 m
+    - 2 km 100 m
+    answer: 2 km
+    difficulty: 3
+    hints:
+    - Change all to metres.
+    - 2,000; 1,500; 2,100.
+    solution: 'Step 1: 1,500 < 2,000 < 2,100. Step 2: 2 km is in the middle.'
+    mistakes:
+      1,500 m: c5m5_same
+      2 km 100 m: c5m5_same
+  - prompt: Asha walks 4 km in 1 hour. How long will she take to walk 2 km?
+    options:
+    - Half an hour
+    - 2 hours
+    - 1 hour
+    answer: Half an hour
+    difficulty: 3
+    hints:
+    - 2 km is half of 4 km.
+    - Half the distance takes half the time.
+    solution: 'Step 1: 2 km is half of 4 km. Step 2: so half of 1 hour: 30 minutes.'
+    mistakes:
+      2 hours: c5m5_rate
+      1 hour: c5m5_rate
+  - prompt: School is 1 km 200 m away. Ali has walked 700 m. How many more metres must he walk?
+    answer: '500'
+    check: 1200-700
+    difficulty: 2
+    hints:
+    - Change 1 km 200 m to metres.
+    - Subtract what he has walked.
+    solution: 'Step 1: 1,200 m. Step 2: 1,200 − 700 = 500 m.'
+    mistakes:
+      '1900': c5m5_same
+      '300': c5m5_same
+  - prompt: A village is 15 km away. A car goes 30 km in one hour. How long does it take to reach the village?
+    options:
+    - Half an hour
+    - 2 hours
+    - 15 hours
+    answer: Half an hour
+    difficulty: 3
+    hints:
+    - 15 km is half of 30 km.
+    - Half the distance takes half the time.
+    solution: 'Step 1: 15 is half of 30. Step 2: so half an hour.'
+    mistakes:
+      2 hours: c5m5_rate
+      15 hours: c5m5_rate
