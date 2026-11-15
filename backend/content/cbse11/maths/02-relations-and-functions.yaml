@@ -15,6 +15,10 @@ tips:
   m11_range: "The range is the set of second entries of the pairs. Read off the right-hand number of each pair."
   m11_relations_count: "A relation is any subset of A × B. First count the pairs in A × B, then count its subsets."
   m11_substitute: "Replace x with the number, then follow the order: power first, then add."
+  c11m2_pair: In an ordered pair the first entry comes from the first set. Keep the order.
+  c11m2_count: Count the elements of each set first, then multiply or use the power rule.
+  c11m2_func: A function gives each input exactly one output. Check every input once.
+  c11m2_domain: 'Find the inputs that break the rule: zero in a denominator, or a negative under a square root.'
 concepts:
 - code: cbse11m.rel.relations
   title: Cartesian products and relations
@@ -105,6 +109,34 @@ concepts:
           p: 1
           q: 16
         say: 16 is the number of relations, not pairs. 16 pairs would give 2¹⁶ relations. 16 = 2⁴, so A × B needs 4 pairs.
+  lesson:
+    - teach: An ordered pair (a, b) has a first and a second entry; (a, b) = (c, d) only when a = c and b = d. The Cartesian product A × B is the set of all pairs (a, b) with a ∈ A and b ∈ B, so n(A × B) = n(A) · n(B).
+      check:
+        prompt: A = {1, 2}, B = {x, y, z}. How many pairs are in A × B?
+        options:
+        - '6'
+        - '5'
+        - '8'
+        answer: '6'
+        why: 'Each of the 2 elements of A pairs with each of the 3 in B: 2 × 3.'
+    - teach: A relation from A to B is any subset of A × B. Its domain is the set of first entries, its range the set of second entries, and B is the codomain.
+      check:
+        prompt: R = {(1, a), (2, b), (2, c)}. What is the domain of R?
+        options:
+        - '{1, 2}'
+        - '{a, b, c}'
+        - '{1, 2, a, b, c}'
+        answer: '{1, 2}'
+        why: 'The domain collects the first entries: 1 and 2.'
+    - teach: Since a relation is any subset of A × B, and A × B has pq elements when n(A) = p and n(B) = q, there are 2^(pq) relations from A to B.
+      check:
+        prompt: n(A) = 1, n(B) = 2. How many relations from A to B?
+        options:
+        - '4'
+        - '2'
+        - '3'
+        answer: '4'
+        why: A × B has 2 elements, so 2² = 4 subsets.
   items:
   - prompt: If n(A) = 3 and n(B) = 4, how many elements are in A × B?
     answer: '12'
@@ -169,6 +201,114 @@ concepts:
     - √9.
     solution: n(A) = 3 (A = {−1, 0, 1}).
     mistakes: {"9": "m11_cartesian_size", "2": "m11_cartesian_size"}
+  - prompt: If (2a − 1, b + 3) = (5, 7), find a + b.
+    answer: '7'
+    check: 3+4
+    difficulty: 1
+    hints:
+    - Match first entries, then second entries.
+    - Solve two small equations.
+    solution: 'Step 1: 2a − 1 = 5 gives a = 3; b + 3 = 7 gives b = 4. Step 2: a + b = 7.'
+    mistakes:
+      '12': c11m2_pair
+      '6': c11m2_pair
+  - prompt: n(A) = 2, n(B) = 2. How many relations are there from A to B?
+    answer: '16'
+    check: 2**(2*2)
+    difficulty: 2
+    hints:
+    - First count the pairs in A × B.
+    - Every subset of A × B is a relation.
+    solution: 'Step 1: n(A × B) = 4. Step 2: 2⁴ = 16 relations.'
+    mistakes:
+      '4': c11m2_count
+      '8': c11m2_count
+  - prompt: A = {1, 2, 3}. How many elements does A × A × A have?
+    answer: '27'
+    check: 3**3
+    difficulty: 2
+    hints:
+    - Each of the three places can take any of 3 values.
+    - Multiply.
+    solution: 'Step 1: 3 × 3 × 3. Step 2: 27.'
+    mistakes:
+      '9': c11m2_count
+      '6': c11m2_count
+  - prompt: 'R = {(x, x + 2) : x ∈ {1, 2, 3}}. What is the range of R?'
+    options:
+    - '{3, 4, 5}'
+    - '{1, 2, 3}'
+    - '{1, 2, 3, 4, 5}'
+    answer: '{3, 4, 5}'
+    difficulty: 2
+    hints:
+    - List the pairs.
+    - Collect the second entries.
+    solution: 'Step 1: pairs (1, 3), (2, 4), (3, 5). Step 2: range {3, 4, 5}.'
+    mistakes:
+      '{1, 2, 3}': c11m2_pair
+      '{1, 2, 3, 4, 5}': c11m2_pair
+  - prompt: A × B = {(p, 1), (p, 2), (q, 1), (q, 2)}. What is B?
+    options:
+    - '{1, 2}'
+    - '{p, q}'
+    - '{p, q, 1, 2}'
+    answer: '{1, 2}'
+    difficulty: 1
+    hints:
+    - B supplies the second entries.
+    - Collect them without repeats.
+    solution: 'Step 1: second entries 1, 2. Step 2: B = {1, 2}.'
+    mistakes:
+      '{p, q}': c11m2_pair
+      '{p, q, 1, 2}': c11m2_pair
+  - prompt: If n(A × B) = 15 and n(A) = 3, find n(B).
+    answer: '5'
+    check: 15/3
+    difficulty: 1
+    hints:
+    - n(A × B) is a product.
+    - Divide.
+    solution: 'Step 1: 3 · n(B) = 15. Step 2: n(B) = 5.'
+    mistakes:
+      '12': c11m2_count
+      '45': c11m2_count
+  - prompt: R on {1, 2, 3, 4} is defined by a R b if b = a + 1. How many pairs are in R?
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Try each a and see if a + 1 is in the set.
+    - 4 + 1 is not in the set.
+    solution: 'Step 1: (1, 2), (2, 3), (3, 4). Step 2: 3 pairs.'
+    mistakes:
+      '4': c11m2_pair
+      '2': c11m2_pair
+  - prompt: Is A × B equal to B × A when A = {1} and B = {2}?
+    options:
+    - 'No'
+    - 'Yes'
+    - Only if A ⊆ B
+    answer: 'No'
+    difficulty: 2
+    hints:
+    - Write both products out.
+    - Does (1, 2) equal (2, 1)?
+    solution: 'Step 1: A × B = {(1, 2)}, B × A = {(2, 1)}. Step 2: order matters, so they differ.'
+    mistakes:
+      'Yes': c11m2_pair
+      Only if A ⊆ B: c11m2_pair
+  - prompt: A × B has 6 elements, including (a, x), (b, y) and (c, x). If n(B) = 2, what is n(A)?
+    answer: '3'
+    check: 6/2
+    difficulty: 3
+    hints:
+    - List the different first entries you can see.
+    - Check with n(A) · n(B) = 6.
+    solution: 'Step 1: first entries a, b, c, so n(A) ≥ 3. Step 2: 3 × 2 = 6, so n(A) = 3.'
+    mistakes:
+      '6': c11m2_count
+      '2': c11m2_count
 - code: cbse11m.rel.functions
   title: Functions and their graphs
   after:
@@ -248,6 +388,58 @@ concepts:
       bin: Not a function
       clue: How many square roots does 9 have?
       why: 9 has two square roots, 3 and −3.
+  lesson:
+    - teach: 'A function f : A → B is a relation in which every element of A has exactly one image in B. Two inputs may share an output, but one input may not have two outputs.'
+      picture:
+        kind: compare
+        columns:
+        - title: Function
+          points:
+          - 1 → 4
+          - 2 → 5
+          - 3 → 4
+        - title: Not a function
+          points:
+          - 1 → 4
+          - 1 → 5
+          - 2 → 6
+        alt: In a function each input has one output; the right column gives input 1 two outputs.
+      check:
+        prompt: Is {(1, 2), (1, 3), (2, 4)} a function?
+        options:
+        - 'No'
+        - 'Yes'
+        - Only if 2 = 3
+        answer: 'No'
+        why: Input 1 has two images, 2 and 3.
+    - teach: The domain of a real function is the set of x where the rule makes sense. Exclude x that makes a denominator zero; for √(expression) keep the expression ≥ 0.
+      check:
+        prompt: What is the domain of f(x) = √(x + 1)?
+        options:
+        - x ≥ −1
+        - x > 1
+        - all real x
+        answer: x ≥ −1
+        why: We need x + 1 ≥ 0.
+    - teach: 'Special functions: modulus |x| (distance from 0), greatest integer [x] (largest integer ≤ x), signum (1, 0 or −1). Functions combine: (f + g)(x) = f(x) + g(x), (fg)(x) = f(x)·g(x).'
+      picture:
+        kind: number_line
+        from: -3
+        to: 3
+        points:
+        - at: -2
+          label: '[−1.3] = −2'
+        - at: -1.3
+          label: −1.3
+        alt: Greatest integer of −1.3 is −2, the integer just to its left.
+      check:
+        prompt: What is [−1.3]?
+        options:
+        - −2
+        - −1
+        - '1'
+        answer: −2
+        why: The greatest integer not more than −1.3 is −2.
   items:
   - prompt: f(x) = x² + 1. Find f(3).
     answer: '10'
@@ -312,3 +504,114 @@ concepts:
     - x − 3 ≠ 0.
     solution: x cannot be 3.
     mistakes: {"All real numbers": "m11_domain_zero", "x > 3 only": "m11_domain_zero", "x = 3 only": "m11_domain_zero"}
+  - prompt: f(x) = 3x − 4. Find f(−2).
+    answer: '-10'
+    check: 3*(-2)-4
+    difficulty: 1
+    hints:
+    - Put −2 in place of x.
+    - Mind the sign when multiplying.
+    solution: 'Step 1: 3(−2) − 4. Step 2: −6 − 4 = −10.'
+    mistakes:
+      '2': c11m2_func
+      '-2': c11m2_func
+  - prompt: What is the domain of f(x) = 1/(x² − 4)?
+    options:
+    - all real x except 2 and −2
+    - all real x except 4
+    - x > 2
+    answer: all real x except 2 and −2
+    difficulty: 2
+    hints:
+    - When is the denominator zero?
+    - x² = 4 has two solutions.
+    solution: 'Step 1: x² − 4 = 0 at x = ±2. Step 2: exclude both.'
+    mistakes:
+      all real x except 4: c11m2_domain
+      x > 2: c11m2_domain
+  - prompt: f(x) = x² and g(x) = x + 1. Find (fg)(2).
+    answer: '12'
+    check: 4*3
+    difficulty: 2
+    hints:
+    - Find f(2) and g(2) separately.
+    - Multiply them.
+    solution: 'Step 1: f(2) = 4, g(2) = 3. Step 2: 4 × 3 = 12.'
+    mistakes:
+      '7': c11m2_func
+      '9': c11m2_func
+  - prompt: What is the range of f(x) = |x|?
+    options:
+    - '[0, ∞)'
+    - all real numbers
+    - (0, ∞)
+    answer: '[0, ∞)'
+    difficulty: 2
+    hints:
+    - Can a distance be negative?
+    - Can it be zero?
+    solution: 'Step 1: |x| ≥ 0 always, and |0| = 0. Step 2: range [0, ∞).'
+    mistakes:
+      all real numbers: c11m2_func
+      (0, ∞): c11m2_func
+  - prompt: How many functions are there from a 2-element set to a 3-element set?
+    answer: '9'
+    check: 3**2
+    difficulty: 3
+    hints:
+    - Each input chooses one output.
+    - Two inputs, three choices each.
+    solution: 'Step 1: 3 choices for each of 2 inputs. Step 2: 3² = 9.'
+    mistakes:
+      '6': c11m2_count
+      '8': c11m2_count
+  - prompt: What is the domain of f(x) = √(5 − x)?
+    options:
+    - x ≤ 5
+    - x ≥ 5
+    - x < 5
+    answer: x ≤ 5
+    difficulty: 2
+    hints:
+    - The expression under the root must not be negative.
+    - Solve 5 − x ≥ 0.
+    solution: 'Step 1: 5 − x ≥ 0. Step 2: x ≤ 5.'
+    mistakes:
+      x ≥ 5: c11m2_domain
+      x < 5: c11m2_domain
+  - prompt: 'Signum function: what is sgn(−7)?'
+    answer: '-1'
+    check: '-1'
+    difficulty: 1
+    hints:
+    - Signum only tells the sign.
+    - Negative inputs all give the same value.
+    solution: 'Step 1: −7 is negative. Step 2: sgn(−7) = −1.'
+    mistakes:
+      '-7': c11m2_func
+      '7': c11m2_func
+  - prompt: 'f(x) = (x² − 9)/(x − 3). For x ≠ 3, f(x) equals:'
+    options:
+    - x + 3
+    - x − 3
+    - x² − 3
+    answer: x + 3
+    difficulty: 3
+    hints:
+    - Factor the numerator.
+    - Difference of squares.
+    solution: 'Step 1: x² − 9 = (x − 3)(x + 3). Step 2: cancel (x − 3) to get x + 3.'
+    mistakes:
+      x − 3: c11m2_domain
+      x² − 3: c11m2_domain
+  - prompt: f(x) = [x], the greatest integer function. Find f(3.99) + f(−0.5).
+    answer: '2'
+    check: 3+(-1)
+    difficulty: 3
+    hints:
+    - Find each greatest integer separately.
+    - For −0.5 move left to the next integer.
+    solution: 'Step 1: [3.99] = 3, [−0.5] = −1. Step 2: 3 + (−1) = 2.'
+    mistakes:
+      '3': c11m2_func
+      '4': c11m2_func

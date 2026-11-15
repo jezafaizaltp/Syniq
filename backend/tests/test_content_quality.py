@@ -609,6 +609,31 @@ def test_every_cbselkg_world_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbselkg/world/") for _ in pack["concepts"]) >= 6
 
 
+def test_lesson_checks_do_not_repeat_a_practice_question():
+    """A lesson check that is word-for-word a practice question gives the practice answer away."""
+    repeats = [
+        f"{rel(path)} {c['code']}: {step['check']['prompt']}"
+        for path, pack in PACKS
+        for c in pack["concepts"]
+        for step in c.get("lesson") or []
+        if step["check"]["prompt"].strip().lower() in {i["prompt"].strip().lower() for i in c["items"]}
+    ]
+    assert not repeats, repeats
+
+
+def test_every_cbse11_maths_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE 11 Maths: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse11/maths/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse11/maths/") for _ in pack["concepts"]) >= 28
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {

@@ -15,6 +15,10 @@ tips:
   m11_npr: "ⁿPᵣ = n(n − 1)… for r factors. Multiply 3 numbers counting down from 7."
   m11_repeated_letters: "6! counts swaps of identical letters as different. Divide by the factorial of each repeated letter's count."
   m11_with_repeat: "With repetition, every place has all 10 digits available. Multiply 10 for each place."
+  c11m6_order: 'Ask first: does the order matter? Arrangements use nPr; selections use nCr.'
+  c11m6_slots: Draw one box per position and write how many choices go in each box, then multiply.
+  c11m6_fact: Expand the factorials and cancel before multiplying.
+  c11m6_repeat: Divide by the factorial of each group of identical items.
 concepts:
 - code: cbse11m.pc.perm
   title: Counting principle and permutations
@@ -102,6 +106,41 @@ concepts:
           - 7
           - 10
         say: 'Too many letters: nP3 = n(n − 1)(n − 2) is past 120.'
+  lesson:
+    - teach: 'Fundamental principle of counting: if one job can be done in m ways and the next in n ways, together they can be done in m × n ways. Draw a box for each step and multiply.'
+      picture:
+        kind: flow
+        steps:
+        - 'shirt: 3 ways'
+        - 'trousers: 4 ways'
+        - 3 × 4 = 12 outfits
+        alt: Counting outfits by multiplying choices.
+      check:
+        prompt: 3 routes from A to B and 2 from B to C. How many routes from A to C via B?
+        options:
+        - '6'
+        - '5'
+        - '9'
+        answer: '6'
+        why: 3 × 2 = 6.
+    - teach: 'n! (n factorial) = n × (n − 1) × ... × 1, with 0! = 1. Arranging n different things in a row: n! ways. Arranging r of n different things: nPr = n!/(n − r)!.'
+      check:
+        prompt: Find ⁵P₂.
+        options:
+        - '20'
+        - '10'
+        - '25'
+        answer: '20'
+        why: 5!/3! = 5 × 4 = 20.
+    - teach: 'If repetition is allowed, each of r places has n choices: nʳ. If some objects are identical, divide by the factorial of each repeat: letters of LEVEL give 5!/(2! 2!) = 30.'
+      check:
+        prompt: How many arrangements of the letters of NOON?
+        options:
+        - '6'
+        - '24'
+        - '12'
+        answer: '6'
+        why: 4!/(2! 2!) = 24/4 = 6.
   items:
   - prompt: Find 5!.
     answer: '120'
@@ -158,6 +197,105 @@ concepts:
     - All arranged.
     solution: 6! = 720.
     mistakes: {"36": "m11_factorial", "6": "m11_factorial"}
+  - prompt: Find 6!/4!.
+    answer: '30'
+    check: 6*5
+    difficulty: 1
+    hints:
+    - Write 6! = 6 × 5 × 4!.
+    - Cancel 4!.
+    solution: 'Step 1: 6 × 5 × 4!/4!. Step 2: 30.'
+    mistakes:
+      '2': c11m6_fact
+      '720': c11m6_fact
+  - prompt: In how many ways can 4 books be arranged on a shelf?
+    answer: '24'
+    check: '24'
+    difficulty: 1
+    hints:
+    - All the books are different.
+    - 4 choices for the first place, then fewer.
+    solution: 'Step 1: 4 × 3 × 2 × 1. Step 2: 24.'
+    mistakes:
+      '16': c11m6_slots
+      '4': c11m6_slots
+  - prompt: How many 3-letter codes can be made from A–Z if letters may repeat?
+    answer: '17576'
+    check: 26**3
+    difficulty: 2
+    hints:
+    - Each place has the same number of choices.
+    - 26 choices, three times.
+    solution: 'Step 1: 26 × 26 × 26. Step 2: 17576.'
+    mistakes:
+      '15600': c11m6_slots
+      '78': c11m6_slots
+  - prompt: How many arrangements of the letters of APPLE are there?
+    answer: '60'
+    check: 120//2
+    difficulty: 2
+    hints:
+    - 5 letters, one letter repeats.
+    - Divide by 2! for the two Ps.
+    solution: 'Step 1: 5! = 120. Step 2: 120/2! = 60.'
+    mistakes:
+      '120': c11m6_repeat
+      '30': c11m6_repeat
+  - prompt: How many even 3-digit numbers can be formed from 1, 2, 3, 4, 5 without repetition?
+    answer: '24'
+    check: 2*4*3
+    difficulty: 3
+    hints:
+    - 'Fill the units place first: it must be even.'
+    - Then fill the other two places from what is left.
+    solution: 'Step 1: units 2 ways (2 or 4). Step 2: 4 × 3 for the rest: 2 × 12 = 24.'
+    mistakes:
+      '60': c11m6_slots
+      '30': c11m6_slots
+  - prompt: Find ⁸P₂.
+    answer: '56'
+    check: 8*7
+    difficulty: 1
+    hints:
+    - 8!/6!.
+    - Two factors from 8 downwards.
+    solution: 'Step 1: 8 × 7. Step 2: 56.'
+    mistakes:
+      '28': c11m6_order
+      '16': c11m6_fact
+  - prompt: In how many ways can 5 people stand in a line if two particular people must stand together?
+    answer: '48'
+    check: 24*2
+    difficulty: 3
+    hints:
+    - Treat the pair as one block.
+    - The pair can swap places inside the block.
+    solution: 'Step 1: 4 units: 4! = 24. Step 2: × 2 for the pair: 48.'
+    mistakes:
+      '24': c11m6_slots
+      '120': c11m6_slots
+  - prompt: If ⁿP₂ = 30, find n.
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - ⁿP₂ = n(n − 1).
+    - Which two consecutive numbers multiply to 30?
+    solution: 'Step 1: n(n − 1) = 30. Step 2: n = 6.'
+    mistakes:
+      '5': c11m6_fact
+      '15': c11m6_fact
+  - prompt: How many arrangements of the letters of ARRANGE?
+    answer: '1260'
+    check: 5040//4
+    difficulty: 3
+    hints:
+    - '7 letters: A twice, R twice.'
+    - Divide 7! by 2! × 2!.
+    solution: 'Step 1: 7! = 5040. Step 2: 5040/4 = 1260.'
+    mistakes:
+      '5040': c11m6_repeat
+      '2520': c11m6_repeat
 - code: cbse11m.pc.comb
   title: Combinations
   after:
@@ -253,6 +391,48 @@ concepts:
           n: 6
           r: 3
         say: 6C3 = 20, the biggest in the row. Look one step further along.
+  lesson:
+    - teach: A combination is a selection where order does not matter. nCr = n!/(r!(n − r)!) = nPr/r!. Choosing {A, B} is the same as choosing {B, A}.
+      check:
+        prompt: Find ⁶C₂.
+        options:
+        - '15'
+        - '30'
+        - '12'
+        answer: '15'
+        why: 6 × 5/2 = 15.
+    - teach: 'Useful facts: nCr = nC(n − r), nC0 = nCn = 1, and nCr + nC(r − 1) = (n + 1)Cr. So ¹⁰C₈ = ¹⁰C₂ = 45.'
+      check:
+        prompt: Find ²⁰C₁₈.
+        options:
+        - '190'
+        - '380'
+        - '20'
+        answer: '190'
+        why: ²⁰C₁₈ = ²⁰C₂ = 20 × 19/2 = 190.
+    - teach: 'Applications: handshakes among n people = nC2; diagonals of an n-gon = nC2 − n; choose a group then arrange it: nCr × r! = nPr.'
+      picture:
+        kind: compare
+        columns:
+        - title: Order matters
+          points:
+          - arranging
+          - rankings
+          - nPr
+        - title: Order does not matter
+          points:
+          - choosing
+          - committees
+          - nCr
+        alt: When to use permutations and when to use combinations.
+      check:
+        prompt: How many lines through 6 points, no three in a line?
+        options:
+        - '15'
+        - '30'
+        - '6'
+        answer: '15'
+        why: 'Each line is a choice of 2 points: ⁶C₂ = 15.'
   items:
   - prompt: Find ⁵C₂.
     answer: '10'
@@ -309,3 +489,102 @@ concepts:
     - 10 × 6.
     solution: 10 × 6 = 60.
     mistakes: {"16": "m11_choose_both", "126": "m11_choose_both"}
+  - prompt: Find ⁷C₃.
+    answer: '35'
+    check: 7*6*5//6
+    difficulty: 1
+    hints:
+    - Write 7 × 6 × 5 over 3!.
+    - Cancel before multiplying.
+    solution: 'Step 1: 210/6. Step 2: 35.'
+    mistakes:
+      '210': c11m6_order
+      '21': c11m6_fact
+  - prompt: How many ways to choose 4 questions out of 6 to answer?
+    answer: '15'
+    check: '15'
+    difficulty: 1
+    hints:
+    - Order of answering does not matter.
+    - ⁶C₄ = ⁶C₂.
+    solution: 'Step 1: ⁶C₄ = ⁶C₂. Step 2: 15.'
+    mistakes:
+      '360': c11m6_order
+      '24': c11m6_order
+  - prompt: How many diagonals does an octagon have?
+    answer: '20'
+    check: 28-8
+    difficulty: 2
+    hints:
+    - 'Join any two vertices: ⁸C₂ segments.'
+    - Remove the sides.
+    solution: 'Step 1: ⁸C₂ = 28. Step 2: 28 − 8 = 20.'
+    mistakes:
+      '28': c11m6_order
+      '16': c11m6_order
+  - prompt: If ⁿC₃ = ⁿC₅, find n.
+    answer: '8'
+    check: 3+5
+    difficulty: 2
+    hints:
+    - nCr = nC(n − r).
+    - So 3 + 5 = n.
+    solution: 'Step 1: ⁿC₃ = ⁿCₙ₋₃, so n − 3 = 5. Step 2: n = 8.'
+    mistakes:
+      '2': c11m6_fact
+      '15': c11m6_fact
+  - prompt: A committee of 2 men and 3 women is chosen from 4 men and 5 women. How many committees?
+    answer: '60'
+    check: 6*10
+    difficulty: 2
+    hints:
+    - Choose the men and the women separately.
+    - Multiply the two counts.
+    solution: 'Step 1: ⁴C₂ = 6, ⁵C₃ = 10. Step 2: 6 × 10 = 60.'
+    mistakes:
+      '16': c11m6_order
+      '126': c11m6_order
+  - prompt: 12 teams each play every other team once. How many matches?
+    answer: '66'
+    check: 12*11//2
+    difficulty: 2
+    hints:
+    - Each match is a pair of teams.
+    - Use ¹²C₂.
+    solution: 'Step 1: ¹²C₂ = 12 × 11/2. Step 2: 66.'
+    mistakes:
+      '132': c11m6_order
+      '144': c11m6_order
+  - prompt: In how many ways can 5 cards be chosen from 52 so that all 4 aces are included?
+    answer: '48'
+    check: '48'
+    difficulty: 3
+    hints:
+    - The 4 aces are fixed.
+    - Choose the 1 remaining card from the non-aces.
+    solution: 'Step 1: 4 aces fixed. Step 2: ⁴⁸C₁ = 48.'
+    mistakes:
+      '52': c11m6_order
+      '4': c11m6_order
+  - prompt: Find ⁵C₂ + ⁵C₃.
+    answer: '20'
+    check: 10+10
+    difficulty: 2
+    hints:
+    - Work out each term, or use nCr + nC(r − 1) = (n + 1)Cr.
+    - ⁶C₃.
+    solution: 'Step 1: 10 + 10. Step 2: 20 (= ⁶C₃).'
+    mistakes:
+      '15': c11m6_fact
+      '10': c11m6_fact
+  - prompt: From 7 students, 3 are chosen and lined up for a photo. How many line-ups?
+    answer: '210'
+    check: 35*6
+    difficulty: 3
+    hints:
+    - Choose 3, then arrange them.
+    - ⁷C₃ × 3!.
+    solution: 'Step 1: ⁷C₃ = 35. Step 2: 35 × 6 = 210 (= ⁷P₃).'
+    mistakes:
+      '35': c11m6_order
+      '343': c11m6_slots

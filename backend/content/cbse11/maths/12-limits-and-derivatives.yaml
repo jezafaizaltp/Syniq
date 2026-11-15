@@ -15,6 +15,9 @@ tips:
   m11_sinx_x: "Try x = 0.01 rad on a calculator: sin x and x are nearly equal."
   m11_velocity: "Velocity is the derivative of height. Differentiate h(t), then put t = 1."
   m11_xn_limit: "Use lim (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹."
+  c11m12_sub: First try putting the value straight in. Only if you get 0/0 do you need to simplify.
+  c11m12_std: Match the limit to a standard form, such as (xⁿ − aⁿ)/(x − a) or sin x / x, and adjust the inside.
+  c11m12_rule: Name the rule first (power, product or quotient), then differentiate each part carefully.
 concepts:
 - code: cbse11m.calc.limits
   title: Limits
@@ -116,6 +119,42 @@ concepts:
           - 0.031
           - 2.3
         say: 'Still too far above: bring x closer to 2.'
+  lesson:
+    - teach: lim(x→a) f(x) = L means f(x) gets as close as we like to L when x is close to a (from both sides). The value at a itself does not matter. For polynomials just substitute.
+      check:
+        prompt: Find lim(x→2) (3x + 1).
+        options:
+        - '7'
+        - '6'
+        - '5'
+        answer: '7'
+        why: 'Substitute: 3(2) + 1 = 7.'
+    - teach: 'If substitution gives 0/0, factorise and cancel the common factor, then substitute. Example: (x² − 1)/(x − 1) = x + 1, so the limit as x → 1 is 2.'
+      check:
+        prompt: lim(x→4) (x² − 16)/(x − 4) = ?
+        options:
+        - '8'
+        - '0'
+        - '4'
+        answer: '8'
+        why: (x − 4)(x + 4)/(x − 4) = x + 4 → 8.
+    - teach: 'Standard limits: lim(x→a) (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹ and lim(x→0) sin x / x = 1 (x in radians). So sin(kx)/x → k.'
+      picture:
+        kind: flow
+        steps:
+        - Substitute
+        - 0/0?
+        - Factorise or use a standard limit
+        - Substitute again
+        alt: Steps for finding a limit.
+      check:
+        prompt: lim(x→0) sin(5x)/x = ?
+        options:
+        - '5'
+        - '1'
+        - '0'
+        answer: '5'
+        why: sin(5x)/x = 5 · sin(5x)/(5x) → 5 × 1.
   items:
   - prompt: Find lim(x→3) (x² + 1).
     answer: '10'
@@ -172,6 +211,110 @@ concepts:
     - x + 3 at 3.
     solution: '6.'
     mistakes: {"0": "m11_factor_cancel", "3": "m11_factor_cancel"}
+  - prompt: Find lim(x→−1) (x³ + 2x).
+    answer: '-3'
+    check: '-3'
+    difficulty: 1
+    hints:
+    - It is a polynomial.
+    - Put x = −1 in each term.
+    solution: 'Step 1: (−1)³ + 2(−1) = −1 − 2. Step 2: −3.'
+    mistakes:
+      '1': c11m12_sub
+      '-1': c11m12_sub
+  - prompt: Find lim(x→5) (x² − 25)/(x − 5).
+    answer: '10'
+    check: '10'
+    difficulty: 1
+    hints:
+    - Direct substitution gives 0/0.
+    - Use a² − b² = (a − b)(a + b).
+    solution: 'Step 1: (x − 5)(x + 5)/(x − 5) = x + 5. Step 2: 5 + 5 = 10.'
+    mistakes:
+      '0': c11m12_sub
+      '5': c11m12_sub
+  - prompt: Find lim(x→2) (x⁴ − 16)/(x − 2).
+    answer: '32'
+    check: 4*2**3
+    difficulty: 2
+    hints:
+    - 16 = 2⁴.
+    - Use the (xⁿ − aⁿ)/(x − a) form.
+    solution: 'Step 1: n = 4, a = 2. Step 2: 4 × 2³ = 32.'
+    mistakes:
+      '8': c11m12_std
+      '16': c11m12_std
+  - prompt: Find lim(x→0) sin(2x)/sin(3x).
+    answer: 2/3
+    check: 2/3
+    difficulty: 2
+    hints:
+    - Divide top and bottom by x.
+    - Each part becomes a standard sin(kx)/x limit.
+    solution: 'Step 1: [sin 2x / x] / [sin 3x / x] → 2/3. Step 2: 2/3.'
+    mistakes:
+      3/2: c11m12_std
+      '1': c11m12_std
+  - prompt: Find lim(x→0) (1 − cos x)/x.
+    options:
+    - '0'
+    - '1'
+    - does not exist
+    answer: '0'
+    difficulty: 2
+    hints:
+    - This is one of the standard limits.
+    - Compare it with sin x / x.
+    solution: 'Step 1: (1 − cos x)/x is a standard limit. Step 2: its value is 0.'
+    mistakes:
+      '1': c11m12_std
+      does not exist: c11m12_std
+  - prompt: For lim(x→a) f(x) to exist, what must be true?
+    options:
+    - left-hand and right-hand limits are equal
+    - f(a) must be defined
+    - f must be a polynomial
+    answer: left-hand and right-hand limits are equal
+    difficulty: 1
+    hints:
+    - Think about approaching a from both sides.
+    - The value at a itself does not matter.
+    solution: 'Step 1: x can approach a from left or right. Step 2: both must lead to the same number.'
+    mistakes:
+      f(a) must be defined: c11m12_sub
+      f must be a polynomial: c11m12_sub
+  - prompt: Find lim(x→1) (x² + x − 2)/(x − 1).
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - Factorise the top.
+    - One factor will cancel with (x − 1).
+    solution: 'Step 1: (x − 1)(x + 2)/(x − 1) = x + 2. Step 2: 1 + 2 = 3.'
+    mistakes:
+      '0': c11m12_sub
+      '2': c11m12_sub
+  - prompt: Find lim(x→0) tan x / x.
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - tan x = sin x / cos x.
+    - Split into (sin x / x) · (1 / cos x).
+    solution: 'Step 1: (sin x / x)(1/cos x). Step 2: 1 × 1 = 1.'
+    mistakes:
+      '0': c11m12_std
+  - prompt: Find lim(x→3) (x³ − 27)/(x² − 9).
+    answer: 9/2
+    check: 27/6
+    difficulty: 3
+    hints:
+    - Both top and bottom give 0 at x = 3.
+    - 'Factor each: a³ − b³ and a² − b².'
+    solution: 'Step 1: (x − 3)(x² + 3x + 9)/((x − 3)(x + 3)). Step 2: 27/6 = 9/2.'
+    mistakes:
+      '3': c11m12_std
+      27/9: c11m12_std
 - code: cbse11m.calc.derivatives
   title: Derivatives
   after:
@@ -269,6 +412,50 @@ concepts:
           - 12.51
           - 15
         say: Closer. Shrink h a little more.
+  lesson:
+    - teach: The derivative f′(a) = lim(h→0) [f(a + h) − f(a)]/h. It is the slope of the tangent at a, the instantaneous rate of change.
+      check:
+        prompt: 'For f(x) = x², [f(1 + h) − f(1)]/h simplifies to:'
+        options:
+        - 2 + h
+        - h
+        - 2h
+        answer: 2 + h
+        why: (1 + 2h + h² − 1)/h = 2 + h, which tends to 2.
+    - teach: Power rule d/dx(xⁿ) = nxⁿ⁻¹. Constants give 0. Sums are differentiated term by term, and constant multiples stay in front.
+      check:
+        prompt: d/dx (4x³ − 2x + 9) = ?
+        options:
+        - 12x² − 2
+        - 12x² − 2 + 9
+        - 4x² − 2
+        answer: 12x² − 2
+        why: 4·3x² − 2·1 + 0.
+    - teach: Product rule (uv)′ = u′v + uv′. Quotient rule (u/v)′ = (u′v − uv′)/v². Also d/dx sin x = cos x and d/dx cos x = −sin x.
+      picture:
+        kind: compare
+        columns:
+        - title: Function
+          points:
+          - xⁿ
+          - sin x
+          - cos x
+          - uv
+        - title: Derivative
+          points:
+          - nxⁿ⁻¹
+          - cos x
+          - −sin x
+          - u′v + uv′
+        alt: Common derivatives.
+      check:
+        prompt: d/dx (x² sin x) = ?
+        options:
+        - 2x sin x + x² cos x
+        - 2x cos x
+        - 2x sin x − x² cos x
+        answer: 2x sin x + x² cos x
+        why: 'u = x², v = sin x: u′v + uv′.'
   items:
   - prompt: Find the derivative of x³ at x = 2.
     answer: '12'
@@ -329,3 +516,105 @@ concepts:
     - Negative sign.
     solution: d/dx cos x = −sin x.
     mistakes: {"sin x": "m11_deriv_cos", "cos x": "m11_deriv_cos", "−cos x": "m11_deriv_cos"}
+  - prompt: f(x) = x⁴. Find f′(1).
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Use the power rule.
+    - Then substitute x = 1.
+    solution: 'Step 1: f′(x) = 4x³. Step 2: f′(1) = 4.'
+    mistakes:
+      '1': c11m12_rule
+      '3': c11m12_rule
+  - prompt: f(x) = 5x² − 3x + 2. Find f′(2).
+    answer: '17'
+    check: 10*2-3
+    difficulty: 1
+    hints:
+    - Differentiate term by term.
+    - The constant 2 contributes 0.
+    solution: 'Step 1: f′(x) = 10x − 3. Step 2: f′(2) = 17.'
+    mistakes:
+      '19': c11m12_rule
+      '20': c11m12_rule
+  - prompt: What is the derivative of sin x?
+    options:
+    - cos x
+    - −cos x
+    - −sin x
+    answer: cos x
+    difficulty: 1
+    hints:
+    - Think of the slope of the sine curve at x = 0.
+    - Its slope there is 1.
+    solution: 'Step 1: d/dx sin x is the standard result. Step 2: cos x.'
+    mistakes:
+      −cos x: c11m12_rule
+      −sin x: c11m12_rule
+  - prompt: f(x) = 1/x. Find f′(2).
+    answer: -1/4
+    check: -1/4
+    difficulty: 2
+    hints:
+    - Write 1/x as x⁻¹.
+    - Power rule with n = −1.
+    solution: 'Step 1: f′(x) = −x⁻² = −1/x². Step 2: f′(2) = −1/4.'
+    mistakes:
+      1/4: c11m12_rule
+      -1/2: c11m12_rule
+  - prompt: f(x) = (x + 1)(x − 2). Find f′(3).
+    answer: '5'
+    check: 2*3-1
+    difficulty: 2
+    hints:
+    - Expand or use the product rule.
+    - x² − x − 2 is the expanded form.
+    solution: 'Step 1: f′(x) = 2x − 1. Step 2: f′(3) = 5.'
+    mistakes:
+      '4': c11m12_rule
+      '8': c11m12_rule
+  - prompt: Find d/dx (x / (x + 2)) at x = 0.
+    answer: 1/2
+    check: 2/4
+    difficulty: 2
+    hints:
+    - Use the quotient rule.
+    - u = x, v = x + 2.
+    solution: 'Step 1: (1·(x + 2) − x·1)/(x + 2)² = 2/(x + 2)². Step 2: at 0, 2/4 = 1/2.'
+    mistakes:
+      '1': c11m12_rule
+      '0': c11m12_rule
+  - prompt: Find the slope of the tangent to y = x² − 4x at x = 5.
+    answer: '6'
+    check: 2*5-4
+    difficulty: 2
+    hints:
+    - The slope of the tangent is the derivative.
+    - Differentiate, then put x = 5.
+    solution: 'Step 1: y′ = 2x − 4. Step 2: 10 − 4 = 6.'
+    mistakes:
+      '5': c11m12_rule
+      '10': c11m12_rule
+  - prompt: Find d/dx (sin x · cos x) at x = 0.
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - Product rule with u = sin x, v = cos x.
+    - cos 0 = 1, sin 0 = 0.
+    solution: 'Step 1: cos x · cos x + sin x · (−sin x) = cos²x − sin²x. Step 2: at 0: 1.'
+    mistakes:
+      '0': c11m12_rule
+      '-1': c11m12_rule
+  - prompt: Using the first principle, lim(h→0) [(2 + h)³ − 8]/h = ?
+    answer: '12'
+    check: 3*2**2
+    difficulty: 3
+    hints:
+    - This is the derivative of x³ at some point.
+    - Which point? Look at the 2 + h.
+    solution: 'Step 1: it is f′(2) for f(x) = x³. Step 2: 3 × 4 = 12.'
+    mistakes:
+      '8': c11m12_rule
+      '6': c11m12_rule

@@ -13,6 +13,9 @@ tips:
   m11_on_axis: "Two of the coordinates are zero. A point like (3, 0, 0) lies along the x-axis. Which coordinate isn't zero here?"
   m11_plane_distance: "The distance from the xy-plane is the height, given by the z-coordinate."
   m11_plane_eq: "A point in the xy-plane has no height above or below it."
+  c11m11_coord: Read the coordinates in order (x, y, z). Zero coordinates tell you which axis or plane the point is on.
+  c11m11_dist: Subtract matching coordinates, square each difference, add, then take the square root.
+  c11m11_sign: 'Write the sign of each coordinate: + or −. The octant is fixed by those three signs.'
 concepts:
 - code: cbse11m.3d.coords
   title: Coordinates in space
@@ -95,6 +98,50 @@ concepts:
       bin: On an axis
       clue: How many coordinates are 0?
       why: x = z = 0, so it lies on the y-axis.
+  lesson:
+    - teach: 'In space we use three perpendicular axes x, y and z through the origin O. A point is written P(x, y, z): its signed distances from the yz-, zx- and xy-planes.'
+      check:
+        prompt: The point (4, −2, 7) is how far from the xy-plane?
+        options:
+        - '7'
+        - '4'
+        - '2'
+        answer: '7'
+        why: Distance from the xy-plane is |z| = 7.
+    - teach: 'Points on an axis have the other two coordinates 0: on the z-axis (0, 0, z). Points in a coordinate plane have one coordinate 0: in the yz-plane (0, y, z).'
+      check:
+        prompt: Where does (0, 0, −3) lie?
+        options:
+        - on the z-axis
+        - in the xy-plane
+        - on the x-axis
+        answer: on the z-axis
+        why: x = 0 and y = 0, so only z can vary.
+    - teach: 'The three coordinate planes cut space into 8 octants, one for each sign pattern (±, ±, ±). Distance from the origin: √(x² + y² + z²).'
+      picture:
+        kind: compare
+        columns:
+        - title: Octant
+          points:
+          - I
+          - II
+          - V
+          - VIII
+        - title: Signs
+          points:
+          - (+, +, +)
+          - (−, +, +)
+          - (+, +, −)
+          - (+, −, −)
+        alt: Some octants and their sign patterns.
+      check:
+        prompt: Distance of (1, 2, 2) from the origin?
+        options:
+        - '3'
+        - '5'
+        - '9'
+        answer: '3'
+        why: √(1 + 4 + 4) = 3.
   items:
   - prompt: How many octants do the coordinate planes divide space into?
     answer: '8'
@@ -163,6 +210,120 @@ concepts:
     - '|5|.'
     solution: '5.'
     mistakes: {"3": "m11_plane_distance", "-4": "m11_plane_distance"}
+  - prompt: Distance of (6, −2, 3) from the origin?
+    answer: '7'
+    check: (36+4+9)**0.5
+    difficulty: 1
+    hints:
+    - Square each coordinate.
+    - Add, then square root.
+    solution: 'Step 1: 36 + 4 + 9 = 49. Step 2: 7.'
+    mistakes:
+      '11': c11m11_dist
+      '49': c11m11_dist
+  - prompt: In which octant sign pattern is (−1, −5, 2)?
+    options:
+    - (−, −, +)
+    - (+, −, +)
+    - (−, +, −)
+    answer: (−, −, +)
+    difficulty: 1
+    hints:
+    - Check each coordinate's sign in order.
+    - x, then y, then z.
+    solution: 'Step 1: x < 0, y < 0, z > 0. Step 2: (−, −, +).'
+    mistakes:
+      (+, −, +): c11m11_sign
+      (−, +, −): c11m11_sign
+  - prompt: 'Every point on the y-axis has the form:'
+    options:
+    - (0, y, 0)
+    - (x, 0, z)
+    - (0, 0, z)
+    answer: (0, y, 0)
+    difficulty: 1
+    hints:
+    - Moving along the y-axis changes only y.
+    - The other two stay zero.
+    solution: 'Step 1: x = 0, z = 0. Step 2: (0, y, 0).'
+    mistakes:
+      (x, 0, z): c11m11_coord
+      (0, 0, z): c11m11_coord
+  - prompt: Distance of (5, −3, 8) from the yz-plane?
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - The yz-plane is where x = 0.
+    - Distance is |x|.
+    solution: 'Step 1: |x| = 5. Step 2: 5.'
+    mistakes:
+      '3': c11m11_coord
+      '8': c11m11_coord
+  - prompt: Foot of the perpendicular from (3, 4, 5) to the xy-plane?
+    options:
+    - (3, 4, 0)
+    - (0, 0, 5)
+    - (3, 0, 5)
+    answer: (3, 4, 0)
+    difficulty: 2
+    hints:
+    - Drop straight down to z = 0.
+    - x and y stay the same.
+    solution: 'Step 1: set z = 0. Step 2: (3, 4, 0).'
+    mistakes:
+      (0, 0, 5): c11m11_coord
+      (3, 0, 5): c11m11_coord
+  - prompt: How many coordinates are zero for a point in the zx-plane (not on an axis)?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - The zx-plane is y = 0.
+    - x and z are free.
+    solution: 'Step 1: only y = 0. Step 2: 1 coordinate.'
+    mistakes:
+      '2': c11m11_coord
+      '0': c11m11_coord
+  - prompt: Distance of (2, −3, 6) from the z-axis?
+    options:
+    - √13
+    - '6'
+    - '7'
+    answer: √13
+    difficulty: 3
+    hints:
+    - The nearest point on the z-axis is (0, 0, 6).
+    - Only x and y matter.
+    solution: 'Step 1: √(2² + 3²). Step 2: √13.'
+    mistakes:
+      '6': c11m11_coord
+      '7': c11m11_dist
+  - prompt: Which point lies in octant I?
+    options:
+    - (1, 2, 3)
+    - (−1, 2, 3)
+    - (1, −2, 3)
+    answer: (1, 2, 3)
+    difficulty: 1
+    hints:
+    - Octant I has all coordinates positive.
+    - Check each sign.
+    solution: 'Step 1: all positive. Step 2: (1, 2, 3).'
+    mistakes:
+      (−1, 2, 3): c11m11_sign
+      (1, −2, 3): c11m11_sign
+  - prompt: Point (a, 0, 0) is 4 units from the origin and a < 0. Find a.
+    answer: '-4'
+    check: '-4'
+    difficulty: 3
+    hints:
+    - Distance from the origin is |a|.
+    - Choose the negative value.
+    solution: 'Step 1: |a| = 4. Step 2: a = −4.'
+    mistakes:
+      '4': c11m11_sign
+      '-2': c11m11_dist
 - code: cbse11m.3d.distance
   title: Distance between two points in space
   after:
@@ -268,6 +429,42 @@ concepts:
           z: 0
           x: -5
         say: That's 7 from P too, but on the negative side. The question wants x positive.
+  lesson:
+    - teach: 'Distance between P(x₁, y₁, z₁) and Q(x₂, y₂, z₂): PQ = √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²). It is Pythagoras used twice.'
+      check:
+        prompt: Distance between (1, 1, 1) and (3, 1, 1)?
+        options:
+        - '2'
+        - '4'
+        - √2
+        answer: '2'
+        why: Only x changes, by 2.
+    - teach: 'Collinear test: Q lies between P and R on one line exactly when PQ + QR = PR.'
+      picture:
+        kind: flow
+        steps:
+        - find PQ
+        - find QR
+        - find PR
+        - check PQ + QR = PR
+        alt: Steps to test three points for collinearity.
+      check:
+        prompt: PQ = 3, QR = 4, PR = 7. Are P, Q, R collinear?
+        options:
+        - 'Yes'
+        - 'No'
+        - Cannot tell
+        answer: 'Yes'
+        why: 3 + 4 = 7.
+    - teach: 'Distances also check shapes: a triangle is right-angled if the squares of two sides add to the square of the third, and isosceles if two sides are equal.'
+      check:
+        prompt: 'Sides squared are 9, 16 and 25. The triangle is:'
+        options:
+        - right-angled
+        - equilateral
+        - not a triangle
+        answer: right-angled
+        why: 9 + 16 = 25.
   items:
   - prompt: Find the distance between (1, 2, 3) and (4, 6, 15).
     answer: '13'
@@ -335,3 +532,111 @@ concepts:
     - '|k − 5| = 3.'
     solution: k = 8.
     mistakes: {"2": "m11_k_distance", "5": "m11_k_distance"}
+  - prompt: Distance between (2, 3, 5) and (4, 3, 1)?
+    options:
+    - 2√5
+    - √20 + 1
+    - '6'
+    answer: 2√5
+    difficulty: 1
+    hints:
+    - 'Differences: 2, 0, −4.'
+    - √(4 + 0 + 16).
+    solution: 'Step 1: √20. Step 2: 2√5.'
+    mistakes:
+      √20 + 1: c11m11_dist
+      '6': c11m11_dist
+  - prompt: Distance between (−1, 3, 4) and (1, −3, 1)?
+    answer: '7'
+    check: (4+36+9)**0.5
+    difficulty: 2
+    hints:
+    - 'Differences: 2, −6, −3.'
+    - Square and add.
+    solution: 'Step 1: 4 + 36 + 9 = 49. Step 2: 7.'
+    mistakes:
+      '5': c11m11_dist
+      '49': c11m11_dist
+  - prompt: A room is 3 m × 4 m × 12 m. Length of its longest diagonal (m)?
+    answer: '13'
+    check: (9+16+144)**0.5
+    difficulty: 2
+    hints:
+    - Corner to opposite corner.
+    - √(3² + 4² + 12²).
+    solution: 'Step 1: √169. Step 2: 13 m.'
+    mistakes:
+      '19': c11m11_dist
+      '5': c11m11_dist
+  - prompt: Find y > 0 if the distance between (0, y, 0) and (0, 0, 0) is 9.
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Only y is non-zero.
+    - Distance = |y|.
+    solution: 'Step 1: |y| = 9. Step 2: y = 9.'
+    mistakes:
+      '3': c11m11_dist
+      '81': c11m11_dist
+  - prompt: Are (0, 0, 0), (1, 1, 1) and (2, 2, 2) collinear?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only in octant I
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Find the three distances.
+    - √3 + √3 = ?
+    solution: 'Step 1: PQ = √3, QR = √3, PR = 2√3. Step 2: √3 + √3 = 2√3, collinear.'
+    mistakes:
+      'No': c11m11_dist
+      Only in octant I: c11m11_sign
+  - prompt: Find k > 0 if the distance between (k, 0, 0) and (0, 4, 0) is 5.
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - k² + 16 = 25.
+    - Solve for k.
+    solution: 'Step 1: k² = 9. Step 2: k = 3.'
+    mistakes:
+      '1': c11m11_dist
+      '9': c11m11_dist
+  - prompt: Triangle with A(0, 0, 0), B(3, 0, 0), C(0, 4, 0). Length of BC?
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - 'Differences: −3, 4, 0.'
+    - √(9 + 16).
+    solution: 'Step 1: √25. Step 2: 5.'
+    mistakes:
+      '7': c11m11_dist
+      '1': c11m11_dist
+  - prompt: Is the triangle A(0, 0, 0), B(3, 0, 0), C(0, 4, 0) right-angled?
+    options:
+    - Yes, at A
+    - Yes, at B
+    - 'No'
+    answer: Yes, at A
+    difficulty: 3
+    hints:
+    - AB² = 9, AC² = 16, BC² = 25.
+    - Which angle is opposite the longest side?
+    solution: 'Step 1: 9 + 16 = 25. Step 2: right angle opposite BC, at A.'
+    mistakes:
+      Yes, at B: c11m11_dist
+      'No': c11m11_dist
+  - prompt: Distance between (a, b, c) and (a, b, c + 6)?
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - Only one coordinate changes.
+    - By how much?
+    solution: 'Step 1: Δz = 6. Step 2: distance 6.'
+    mistakes:
+      '36': c11m11_dist
+      '0': c11m11_dist

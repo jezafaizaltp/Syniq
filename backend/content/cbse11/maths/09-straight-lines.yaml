@@ -15,6 +15,9 @@ tips:
   m11_slope_tan: "Slope m = tan θ. Use the value of tan at that angle, not the angle itself."
   m11_slope_two: "Slope = (y₂ − y₁)/(x₂ − x₁). Keep the order the same on top and bottom."
   m11_y_intercept: "Put x = 0 and solve for y."
+  c11m9_slope: 'Slope is rise over run: (y₂ − y₁)/(x₂ − x₁). Keep the same order on top and bottom.'
+  c11m9_form: Rearrange to y = mx + c, or read slope −A/B and y-intercept −C/B from Ax + By + C = 0.
+  c11m9_dist: Put the point into Ax + By + C, take the absolute value, then divide by √(A² + B²).
 concepts:
 - code: cbse11m.lines.slope
   title: Slope of a line
@@ -115,6 +118,46 @@ concepts:
           - -10
           - 10
         say: It passes (0, 2), but it's tilted. A horizontal line has slope 0.
+  lesson:
+    - teach: 'Slope m measures steepness: m = tan θ, where θ is the angle the line makes with the positive x-axis. Through (x₁, y₁) and (x₂, y₂), m = (y₂ − y₁)/(x₂ − x₁).'
+      check:
+        prompt: Slope of the line through (0, 0) and (2, 6)?
+        options:
+        - '3'
+        - 1/3
+        - '6'
+        answer: '3'
+        why: (6 − 0)/(2 − 0) = 3.
+    - teach: A horizontal line has slope 0; a vertical line's slope is undefined. Parallel lines have equal slopes; perpendicular lines have m₁ × m₂ = −1.
+      picture:
+        kind: compare
+        columns:
+        - title: Parallel
+          points:
+          - m₁ = m₂
+          - e.g. 2 and 2
+        - title: Perpendicular
+          points:
+          - m₁m₂ = −1
+          - e.g. 2 and −1/2
+        alt: Slope rules for parallel and perpendicular lines.
+      check:
+        prompt: A line has slope −4. Slope of a line perpendicular to it?
+        options:
+        - 1/4
+        - '4'
+        - −1/4
+        answer: 1/4
+        why: −4 × 1/4 = −1.
+    - teach: 'Three points are collinear if the slope from the first to the second equals the slope from the second to the third. The angle between two lines: tan θ = |(m₂ − m₁)/(1 + m₁m₂)|.'
+      check:
+        prompt: Slopes 1 and 0. What is the angle between the lines?
+        options:
+        - 45°
+        - 90°
+        - 30°
+        answer: 45°
+        why: tan θ = |1 − 0|/(1 + 0) = 1, so θ = 45°.
   items:
   - prompt: Find the slope of the line through (1, 2) and (4, 8).
     answer: '2'
@@ -176,6 +219,120 @@ concepts:
     - −10/5.
     solution: Slope = −2.
     mistakes: {"2": "m11_slope_two", "-1/2": "m11_slope_two"}
+  - prompt: Slope of the line through (2, −1) and (5, 8)?
+    answer: '3'
+    check: 9/3
+    difficulty: 1
+    hints:
+    - 'Rise: 8 − (−1).'
+    - 'Run: 5 − 2.'
+    solution: 'Step 1: 9/3. Step 2: 3.'
+    mistakes:
+      7/3: c11m9_slope
+      1/3: c11m9_slope
+  - prompt: 'A line makes 60° with the positive x-axis. Its slope is:'
+    options:
+    - √3
+    - 1/√3
+    - 1/2
+    answer: √3
+    difficulty: 1
+    hints:
+    - m = tan θ.
+    - tan 60°.
+    solution: 'Step 1: m = tan 60°. Step 2: √3.'
+    mistakes:
+      1/√3: c11m9_slope
+      1/2: c11m9_slope
+  - prompt: Slope of the line through (3, 4) and (3, 9)?
+    options:
+    - undefined
+    - '0'
+    - '5'
+    answer: undefined
+    difficulty: 2
+    hints:
+    - Look at the x-coordinates.
+    - Run is zero.
+    solution: 'Step 1: x₂ − x₁ = 0. Step 2: vertical line, slope undefined.'
+    mistakes:
+      '0': c11m9_slope
+      '5': c11m9_slope
+  - prompt: Lines with slopes 3/4 and k are parallel. Find k.
+    options:
+    - 3/4
+    - −4/3
+    - 4/3
+    answer: 3/4
+    difficulty: 1
+    hints:
+    - Parallel lines share a slope.
+    - No sign change needed.
+    solution: 'Step 1: equal slopes. Step 2: k = 3/4.'
+    mistakes:
+      −4/3: c11m9_slope
+      4/3: c11m9_slope
+  - prompt: A(0, 2), B(1, 5), C(3, k) are collinear. Find k.
+    answer: '11'
+    check: 2+3*3
+    difficulty: 2
+    hints:
+    - Slope AB = 3.
+    - Slope BC must also be 3.
+    solution: 'Step 1: (k − 5)/2 = 3. Step 2: k = 11.'
+    mistakes:
+      '8': c11m9_slope
+      '9': c11m9_slope
+  - prompt: Find the acute angle between lines of slopes √3 and 0.
+    options:
+    - 60°
+    - 30°
+    - 90°
+    answer: 60°
+    difficulty: 2
+    hints:
+    - tan θ = |√3 − 0|/(1 + 0).
+    - Which angle has tan = √3?
+    solution: 'Step 1: tan θ = √3. Step 2: θ = 60°.'
+    mistakes:
+      30°: c11m9_slope
+      90°: c11m9_slope
+  - prompt: Are lines with slopes 2 and −1/2 perpendicular?
+    options:
+    - 'Yes'
+    - 'No'
+    - Only if they meet at the origin
+    answer: 'Yes'
+    difficulty: 1
+    hints:
+    - Multiply the slopes.
+    - Is it −1?
+    solution: 'Step 1: 2 × (−1/2) = −1. Step 2: yes.'
+    mistakes:
+      'No': c11m9_slope
+      Only if they meet at the origin: c11m9_slope
+  - prompt: The line through (k, 3) and (2, 7) has slope 2. Find k.
+    answer: '0'
+    check: 2-2
+    difficulty: 3
+    hints:
+    - (7 − 3)/(2 − k) = 2.
+    - Solve for k.
+    solution: 'Step 1: 4 = 2(2 − k). Step 2: k = 0.'
+    mistakes:
+      '4': c11m9_slope
+      '2': c11m9_slope
+  - prompt: Lines of slopes 1/2 and 3. Find tan of the acute angle between them.
+    answer: '1'
+    check: (3-0.5)/(1+1.5)
+    difficulty: 3
+    hints:
+    - '|(m₂ − m₁)/(1 + m₁m₂)|.'
+    - Top 5/2, bottom 5/2.
+    solution: 'Step 1: (5/2)/(5/2). Step 2: tan θ = 1, so θ = 45°.'
+    mistakes:
+      '2.5': c11m9_slope
+      '5': c11m9_slope
 - code: cbse11m.lines.equations
   title: Equations of a line and distance
   after:
@@ -295,6 +452,41 @@ concepts:
           - 6
           c: -2
         say: A point on the y-axis has p = 0.
+  lesson:
+    - teach: 'Point-slope form: y − y₁ = m(x − x₁). Slope-intercept form: y = mx + c, where c is where the line meets the y-axis.'
+      check:
+        prompt: 'Line through (1, 2) with slope 3: what is c in y = 3x + c?'
+        options:
+        - −1
+        - '5'
+        - '2'
+        answer: −1
+        why: 2 = 3(1) + c gives c = −1.
+    - teach: Intercept form x/a + y/b = 1 meets the axes at (a, 0) and (0, b). General form Ax + By + C = 0 has slope −A/B and y-intercept −C/B.
+      check:
+        prompt: Slope of 4x − 2y + 7 = 0?
+        options:
+        - '2'
+        - −2
+        - 1/2
+        answer: '2'
+        why: −A/B = −4/(−2) = 2.
+    - teach: Distance from (x₁, y₁) to Ax + By + C = 0 is |Ax₁ + By₁ + C|/√(A² + B²). Between parallel lines Ax + By + C₁ = 0 and Ax + By + C₂ = 0 it is |C₁ − C₂|/√(A² + B²).
+      picture:
+        kind: flow
+        steps:
+        - substitute the point
+        - take |value|
+        - divide by √(A² + B²)
+        alt: Steps for the distance of a point from a line.
+      check:
+        prompt: Distance from the origin to 3x + 4y − 10 = 0?
+        options:
+        - '2'
+        - '10'
+        - '5'
+        answer: '2'
+        why: '|−10|/5 = 2.'
   items:
   - prompt: Find the y-intercept of the line 3x + 2y − 6 = 0.
     answer: '3'
@@ -350,3 +542,117 @@ concepts:
     - y/6 = 1/2.
     solution: y = 3.
     mistakes: {"2": "m11_intercept_form", "4": "m11_intercept_form"}
+  - prompt: Find the equation of the line with slope 2 and y-intercept −3.
+    options:
+    - y = 2x − 3
+    - y = −3x + 2
+    - y = 2x + 3
+    answer: y = 2x − 3
+    difficulty: 1
+    hints:
+    - Use y = mx + c.
+    - m = 2, c = −3.
+    solution: 'Step 1: substitute. Step 2: y = 2x − 3.'
+    mistakes:
+      y = −3x + 2: c11m9_form
+      y = 2x + 3: c11m9_form
+  - prompt: x-intercept of 2x + 5y − 10 = 0?
+    answer: '5'
+    check: 10/2
+    difficulty: 1
+    hints:
+    - Put y = 0.
+    - Solve 2x = 10.
+    solution: 'Step 1: 2x − 10 = 0. Step 2: x = 5.'
+    mistakes:
+      '2': c11m9_form
+      '-5': c11m9_form
+  - prompt: 'Line through (1, 1) and (3, 5): what is its y-intercept?'
+    answer: '-1'
+    check: 1-2*1
+    difficulty: 2
+    hints:
+    - Find the slope first.
+    - Then use y = mx + c with one point.
+    solution: 'Step 1: m = 4/2 = 2. Step 2: 1 = 2 + c gives c = −1.'
+    mistakes:
+      '1': c11m9_form
+      '3': c11m9_form
+  - prompt: Distance of (2, 1) from 4x − 3y + 5 = 0?
+    answer: '2'
+    check: abs(8-3+5)/5
+    difficulty: 2
+    hints:
+    - 'Substitute: 4(2) − 3(1) + 5.'
+    - Divide by √(16 + 9).
+    solution: 'Step 1: |10|/5. Step 2: 2.'
+    mistakes:
+      '10': c11m9_dist
+      '0': c11m9_dist
+  - prompt: Distance between 5x + 12y + 4 = 0 and 5x + 12y − 22 = 0?
+    answer: '2'
+    check: 26/13
+    difficulty: 2
+    hints:
+    - Same A and B, so parallel.
+    - '|C₁ − C₂|/√(A² + B²).'
+    solution: 'Step 1: |4 − (−22)| = 26, √169 = 13. Step 2: 2.'
+    mistakes:
+      18/13: c11m9_dist
+      '26': c11m9_dist
+  - prompt: Equation of the line through (2, 3) parallel to y = 4x + 1?
+    options:
+    - y = 4x − 5
+    - y = 4x + 3
+    - y = −x/4 + 3.5
+    answer: y = 4x − 5
+    difficulty: 2
+    hints:
+    - Keep the slope 4.
+    - Find c using (2, 3).
+    solution: 'Step 1: 3 = 8 + c gives c = −5. Step 2: y = 4x − 5.'
+    mistakes:
+      y = 4x + 3: c11m9_form
+      y = −x/4 + 3.5: c11m9_slope
+  - prompt: Intercept form of the line meeting the axes at (3, 0) and (0, −2)?
+    options:
+    - x/3 − y/2 = 1
+    - x/3 + y/2 = 1
+    - x/2 − y/3 = 1
+    answer: x/3 − y/2 = 1
+    difficulty: 3
+    hints:
+    - x/a + y/b = 1 with a = 3, b = −2.
+    - Mind the sign of b.
+    solution: 'Step 1: x/3 + y/(−2) = 1. Step 2: x/3 − y/2 = 1.'
+    mistakes:
+      x/3 + y/2 = 1: c11m9_form
+      x/2 − y/3 = 1: c11m9_form
+  - prompt: Equation of the line through (1, 2) perpendicular to y = x?
+    options:
+    - x + y = 3
+    - x − y = −1
+    - y = 2x
+    answer: x + y = 3
+    difficulty: 3
+    hints:
+    - Perpendicular slope is −1.
+    - Use point-slope form.
+    solution: 'Step 1: y − 2 = −(x − 1). Step 2: x + y = 3.'
+    mistakes:
+      x − y = −1: c11m9_slope
+      y = 2x: c11m9_form
+  - prompt: Find k if (k, 2) lies on 3x − y + 4 = 0.
+    options:
+    - −2/3
+    - 2/3
+    - −2
+    answer: −2/3
+    difficulty: 2
+    hints:
+    - Substitute x = k, y = 2.
+    - 3k + 2 = 0.
+    solution: 'Step 1: 3k − 2 + 4 = 0. Step 2: k = −2/3.'
+    mistakes:
+      2/3: c11m9_form
+      −2: c11m9_form

@@ -15,6 +15,10 @@ tips:
   m11_root_product: "Product of roots = c/a."
   m11_root_sum: "Sum of roots = −b/a. Watch the sign of b."
   m11_sqrt_negative: "x² = −9. The square root of a negative number brings in i; √9 is 3."
+  c11m4_i: Powers of i repeat every 4. Divide the power by 4 and use the remainder.
+  c11m4_mult: Multiply like brackets, then replace i² by −1 and collect real and imaginary parts.
+  c11m4_conj: To divide, multiply top and bottom by the conjugate of the bottom.
+  c11m4_disc: Work out D = b² − 4ac carefully, then use x = (−b ± √D)/2a.
 concepts:
 - code: cbse11m.cx.algebra
   title: Complex numbers and their algebra
@@ -136,6 +140,43 @@ concepts:
           re: 2
           im: 0
         say: 'That''s 2, a real number: (1 + i)(1 − i) = 1 − i² = 2. To leave only an i part, the real part c − d must be 0.'
+  lesson:
+    - teach: 'i is a number with i² = −1. Its powers cycle: i, −1, −i, 1, then repeat. A complex number z = a + ib has real part a and imaginary part b.'
+      picture:
+        kind: flow
+        steps:
+        - i¹ = i
+        - i² = −1
+        - i³ = −i
+        - i⁴ = 1
+        - repeat
+        alt: Powers of i cycle every four.
+      check:
+        prompt: What is i⁷?
+        options:
+        - −i
+        - i
+        - −1
+        answer: −i
+        why: 7 leaves remainder 3 on division by 4, and i³ = −i.
+    - teach: Add and subtract real and imaginary parts separately. Multiply like brackets and use i² = −1. The conjugate of a + ib is a − ib, and (a + ib)(a − ib) = a² + b², a real number.
+      check:
+        prompt: Find (2 + i)(2 − i).
+        options:
+        - '5'
+        - '3'
+        - 4 − i
+        answer: '5'
+        why: a² + b² = 4 + 1 = 5.
+    - teach: On the Argand plane z = a + ib is the point (a, b). Its modulus |z| = √(a² + b²) is its distance from the origin. To divide, multiply top and bottom by the conjugate of the bottom.
+      check:
+        prompt: Find |6 − 8i|.
+        options:
+        - '10'
+        - '14'
+        - '2'
+        answer: '10'
+        why: √(36 + 64) = √100 = 10.
   items:
   - prompt: Find the modulus of 3 + 4i.
     answer: '5'
@@ -201,6 +242,120 @@ concepts:
     - (1 − i)/2.
     solution: 1/(1 + i) = (1 − i)/2; imaginary part −1/2.
     mistakes: {"1/2": "m11_rationalise", "-1": "m11_rationalise"}
+  - prompt: What is i²³?
+    options:
+    - −i
+    - i
+    - '1'
+    answer: −i
+    difficulty: 1
+    hints:
+    - Divide 23 by 4.
+    - Look up the remainder in the cycle.
+    solution: 'Step 1: 23 = 4 × 5 + 3. Step 2: i³ = −i.'
+    mistakes:
+      i: c11m4_i
+      '1': c11m4_i
+  - prompt: Find the imaginary part of (3 + 2i)(1 + 4i).
+    answer: '14'
+    check: 3*4+2*1
+    difficulty: 2
+    hints:
+    - Expand all four products.
+    - Collect the terms with i.
+    solution: 'Step 1: 3 + 12i + 2i + 8i² = −5 + 14i. Step 2: imaginary part 14.'
+    mistakes:
+      '8': c11m4_mult
+      '11': c11m4_mult
+  - prompt: Find the real part of (3 + 2i)(1 + 4i).
+    answer: '-5'
+    check: 3-8
+    difficulty: 2
+    hints:
+    - Expand, then use i² = −1.
+    - The 8i² term becomes real.
+    solution: 'Step 1: 3 + 14i + 8(−1). Step 2: real part −5.'
+    mistakes:
+      '11': c11m4_mult
+      '3': c11m4_mult
+  - prompt: Find |1 + i|.
+    options:
+    - √2
+    - '2'
+    - '1'
+    answer: √2
+    difficulty: 1
+    hints:
+    - Use √(a² + b²).
+    - a = 1, b = 1.
+    solution: 'Step 1: √(1 + 1). Step 2: √2.'
+    mistakes:
+      '2': c11m4_mult
+      '1': c11m4_mult
+  - prompt: Express (1 + i)/(1 − i) in the form a + ib.
+    options:
+    - i
+    - '1'
+    - −i
+    answer: i
+    difficulty: 3
+    hints:
+    - Multiply top and bottom by 1 + i.
+    - The bottom becomes 1 + 1.
+    solution: 'Step 1: (1 + i)²/2 = (1 + 2i − 1)/2. Step 2: = i.'
+    mistakes:
+      '1': c11m4_conj
+      −i: c11m4_conj
+  - prompt: If z = 4 − 3i, find z + z̄.
+    answer: '8'
+    check: 4+4
+    difficulty: 1
+    hints:
+    - Write the conjugate first.
+    - The imaginary parts cancel.
+    solution: 'Step 1: z̄ = 4 + 3i. Step 2: z + z̄ = 8.'
+    mistakes:
+      '-6': c11m4_conj
+      '0': c11m4_conj
+  - prompt: Find (1 + i)².
+    options:
+    - 2i
+    - '2'
+    - 1 + i²
+    answer: 2i
+    difficulty: 2
+    hints:
+    - Expand (a + b)².
+    - Use i² = −1.
+    solution: 'Step 1: 1 + 2i + i². Step 2: 1 + 2i − 1 = 2i.'
+    mistakes:
+      '2': c11m4_mult
+      1 + i²: c11m4_mult
+  - prompt: Which point represents −2 + 5i on the Argand plane?
+    options:
+    - (−2, 5)
+    - (5, −2)
+    - (2, −5)
+    answer: (−2, 5)
+    difficulty: 2
+    hints:
+    - Real part on the x-axis.
+    - Imaginary part on the y-axis.
+    solution: 'Step 1: a = −2, b = 5. Step 2: point (−2, 5).'
+    mistakes:
+      (5, −2): c11m4_conj
+      (2, −5): c11m4_conj
+  - prompt: Find i + i² + i³ + i⁴.
+    answer: '0'
+    check: '0'
+    difficulty: 3
+    hints:
+    - Write each power using the cycle.
+    - Add them up.
+    solution: 'Step 1: i − 1 − i + 1. Step 2: 0.'
+    mistakes:
+      '1': c11m4_i
+      '4': c11m4_i
 - code: cbse11m.cx.quadratic
   title: Quadratic equations with complex roots
   after:
@@ -291,6 +446,34 @@ concepts:
           b: 0
           c: -9
         say: 'c = −9 gives x² = 9: real roots ±3. For ±3i, x² must be −9, so x² + 9 = 0.'
+  lesson:
+    - teach: 'For ax² + bx + c = 0 the discriminant D = b² − 4ac decides the roots: D > 0 two real roots, D = 0 equal roots, D < 0 two complex roots.'
+      check:
+        prompt: x² + 4x + 13 = 0. What kind of roots does it have?
+        options:
+        - two complex roots
+        - two real roots
+        - equal real roots
+        answer: two complex roots
+        why: D = 16 − 52 = −36 < 0.
+    - teach: When D < 0 the roots are x = (−b ± i√(−D))/(2a). They come as a conjugate pair p ± iq when the coefficients are real.
+      check:
+        prompt: Solve x² + 16 = 0.
+        options:
+        - ±4i
+        - ±4
+        - ±16i
+        answer: ±4i
+        why: x² = −16 gives x = ±√(−16) = ±4i.
+    - teach: Sum of roots = −b/a and product of roots = c/a, whether the roots are real or complex.
+      check:
+        prompt: Product of the roots of 3x² + x + 6 = 0?
+        options:
+        - '2'
+        - −1/3
+        - '6'
+        answer: '2'
+        why: c/a = 6/3 = 2.
   items:
   - prompt: Find the discriminant of x² + 2x + 5 = 0.
     answer: '-16'
@@ -358,3 +541,117 @@ concepts:
     - Change the sign of i.
     solution: The other root is the conjugate, 2 − 3i.
     mistakes: {"−2 + 3i": "m11_conj_roots", "3 + 2i": "m11_conj_roots", "−2 − 3i": "m11_conj_roots"}
+  - prompt: Find the discriminant of x² − 4x + 8 = 0.
+    answer: '-16'
+    check: 16-32
+    difficulty: 1
+    hints:
+    - D = b² − 4ac.
+    - b = −4, a = 1, c = 8.
+    solution: 'Step 1: 16 − 32. Step 2: D = −16.'
+    mistakes:
+      '16': c11m4_disc
+      '48': c11m4_disc
+  - prompt: Solve x² − 4x + 8 = 0.
+    options:
+    - 2 ± 2i
+    - −2 ± 2i
+    - 4 ± 2i
+    answer: 2 ± 2i
+    difficulty: 2
+    hints:
+    - D = −16.
+    - x = (4 ± 4i)/2.
+    solution: 'Step 1: x = (4 ± √−16)/2. Step 2: x = 2 ± 2i.'
+    mistakes:
+      −2 ± 2i: c11m4_disc
+      4 ± 2i: c11m4_disc
+  - prompt: Sum of the roots of x² + 6x + 10 = 0?
+    answer: '-6'
+    check: '-6'
+    difficulty: 1
+    hints:
+    - Use −b/a.
+    - b = 6.
+    solution: 'Step 1: −6/1. Step 2: −6.'
+    mistakes:
+      '6': c11m4_disc
+      '10': c11m4_disc
+  - prompt: For which k does x² + kx + 9 = 0 have equal roots (k > 0)?
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - Equal roots mean D = 0.
+    - k² = 36.
+    solution: 'Step 1: k² − 36 = 0. Step 2: k = 6.'
+    mistakes:
+      '9': c11m4_disc
+      '3': c11m4_disc
+  - prompt: Solve 2x² + 2x + 1 = 0.
+    options:
+    - (−1 ± i)/2
+    - −1 ± i
+    - (1 ± i)/2
+    answer: (−1 ± i)/2
+    difficulty: 3
+    hints:
+    - D = 4 − 8 = −4.
+    - x = (−2 ± 2i)/4.
+    solution: 'Step 1: x = (−2 ± 2i)/4. Step 2: (−1 ± i)/2.'
+    mistakes:
+      −1 ± i: c11m4_disc
+      (1 ± i)/2: c11m4_disc
+  - prompt: 'One root of a real quadratic is 1 − 4i. The other root is:'
+    options:
+    - 1 + 4i
+    - −1 + 4i
+    - 4 − i
+    answer: 1 + 4i
+    difficulty: 1
+    hints:
+    - Complex roots of real equations come in pairs.
+    - Change only the sign of the imaginary part.
+    solution: 'Step 1: conjugate pair. Step 2: 1 + 4i.'
+    mistakes:
+      −1 + 4i: c11m4_conj
+      4 − i: c11m4_conj
+  - prompt: Roots 3 ± i. What is their product?
+    answer: '10'
+    check: 9+1
+    difficulty: 2
+    hints:
+    - (a + ib)(a − ib) = a² + b².
+    - a = 3, b = 1.
+    solution: 'Step 1: 9 + 1. Step 2: 10.'
+    mistakes:
+      '8': c11m4_conj
+      '6': c11m4_conj
+  - prompt: Which quadratic has roots 3 ± i?
+    options:
+    - x² − 6x + 10 = 0
+    - x² + 6x + 10 = 0
+    - x² − 6x + 8 = 0
+    answer: x² − 6x + 10 = 0
+    difficulty: 3
+    hints:
+    - Use x² − (sum)x + (product) = 0.
+    - Sum 6, product 10.
+    solution: 'Step 1: sum 6, product 10. Step 2: x² − 6x + 10 = 0.'
+    mistakes:
+      x² + 6x + 10 = 0: c11m4_disc
+      x² − 6x + 8 = 0: c11m4_conj
+  - prompt: Is the discriminant of x² + x + 1 = 0 positive, zero or negative?
+    options:
+    - negative
+    - positive
+    - zero
+    answer: negative
+    difficulty: 2
+    hints:
+    - Compute b² − 4ac.
+    - 1 − 4.
+    solution: 'Step 1: D = 1 − 4 = −3. Step 2: negative.'
+    mistakes:
+      positive: c11m4_disc
+      zero: c11m4_disc
