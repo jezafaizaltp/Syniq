@@ -15,6 +15,9 @@ tips:
   p12_rectifier: "Phone chargers plug into the alternating mains and fill a battery, which needs current in one direction only. A rectifier does that conversion."
   p12_reverse_bias: "Reverse bias pulls carriers away from the junction."
   p12_semi_temp: "Heat frees more electrons across the band gap."
+  c12p14_band: 'Compare band gaps: conductors have none (bands overlap), semiconductors about 1 eV, insulators more than 3 eV.'
+  c12p14_dope: 'Pentavalent (5) donors give extra electrons: n-type. Trivalent (3) acceptors leave holes: p-type. nₑnₕ = nᵢ².'
+  c12p14_bias: 'Forward bias: p to +, barrier lowered, current flows. Reverse bias: p to −, barrier raised, almost no current.'
 concepts:
 - code: cbse12p.semi.materials
   title: Semiconductors and doping
@@ -88,6 +91,48 @@ concepts:
       bin: Intrinsic
       clue: Has anything been added?
       why: 'Pure semiconductor: equal electrons and holes.'
+  lesson:
+    - teach: 'Solids are sorted by energy bands. In conductors, the valence and conduction bands overlap. Insulators have a big gap (more than 3 eV). Semiconductors have a small gap: silicon 1.1 eV, germanium 0.7 eV, so some electrons can jump across at room temperature.'
+      check:
+        prompt: Which has the smallest band gap?
+        options:
+        - germanium
+        - silicon
+        - diamond
+        answer: germanium
+        why: 0.7 eV, less than silicon's 1.1 eV.
+    - teach: In a pure (intrinsic) semiconductor, each electron that jumps leaves a hole, so nₑ = nₕ = nᵢ. Heating frees more carriers, so conductivity rises with temperature, unlike metals.
+      check:
+        prompt: 'Heating pure silicon makes its resistance:'
+        options:
+        - fall
+        - rise
+        - stay the same
+        answer: fall
+        why: More electron-hole pairs carry current.
+    - teach: 'Doping adds a tiny amount of impurity. A pentavalent atom (P, As) donates an extra electron: n-type, electrons are majority carriers. A trivalent atom (B, Al) accepts an electron, leaving a hole: p-type, holes are majority carriers. Always nₑnₕ = nᵢ².'
+      picture:
+        kind: compare
+        columns:
+        - title: n-type
+          points:
+          - dopant valency 5
+          - e.g. phosphorus
+          - 'majority: electrons'
+        - title: p-type
+          points:
+          - dopant valency 3
+          - e.g. boron
+          - 'majority: holes'
+        alt: n-type and p-type semiconductors compared.
+      check:
+        prompt: 'Arsenic added to silicon makes it:'
+        options:
+        - n-type
+        - p-type
+        - an insulator
+        answer: n-type
+        why: Arsenic is pentavalent, a donor.
   items:
   - prompt: What is the valency of an atom used to make n-type silicon?
     answer: '5'
@@ -156,6 +201,120 @@ concepts:
     - Over 3 eV.
     solution: An insulator such as diamond.
     mistakes: {"silicon": "p12_band_gap", "germanium": "p12_band_gap", "copper": "p12_band_gap"}
+  - prompt: 'Silicon atoms have valency:'
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Silicon is in group 14.
+    - It forms four bonds in the crystal.
+    solution: 'Step 1: group 14. Step 2: valency 4.'
+    mistakes:
+      '3': c12p14_dope
+      '5': c12p14_dope
+  - prompt: 'Boron added to silicon gives:'
+    options:
+    - p-type
+    - n-type
+    - an intrinsic semiconductor
+    answer: p-type
+    difficulty: 1
+    hints:
+    - Boron has valency 3.
+    - One bond is left short of an electron.
+    solution: 'Step 1: trivalent acceptor. Step 2: p-type.'
+    mistakes:
+      n-type: c12p14_dope
+      an intrinsic semiconductor: c12p14_dope
+  - prompt: Band gap of silicon (eV), as a fraction?
+    answer: 11/10
+    check: Rational(11,10)
+    difficulty: 1
+    hints:
+    - It is a little over 1 eV.
+    - Germanium's is 0.7 eV.
+    solution: 'Step 1: Si ≈ 1.1 eV. Step 2: 11/10.'
+    mistakes:
+      7/10: c12p14_band
+      '3': c12p14_band
+  - prompt: nᵢ = 10¹⁰ cm⁻³ and nₕ = 10¹⁴ cm⁻³. Find nₑ as a power of 10.
+    answer: '6'
+    check: 20 - 14
+    difficulty: 2
+    hints:
+    - nₑnₕ = nᵢ² = 10²⁰.
+    - Divide by 10¹⁴.
+    solution: 'Step 1: 10²⁰/10¹⁴. Step 2: 10⁶, power 6.'
+    mistakes:
+      '14': c12p14_dope
+      '4': c12p14_dope
+  - prompt: In that sample, which type is it?
+    options:
+    - p-type
+    - n-type
+    - intrinsic
+    answer: p-type
+    difficulty: 2
+    hints:
+    - Compare nₕ with nₑ.
+    - Holes are far more numerous.
+    solution: 'Step 1: nₕ ≫ nₑ. Step 2: p-type.'
+    mistakes:
+      n-type: c12p14_dope
+      intrinsic: c12p14_dope
+  - prompt: Is an n-type semiconductor negatively charged overall?
+    options:
+    - no, it is neutral
+    - yes, it has extra electrons
+    - it is positive
+    answer: no, it is neutral
+    difficulty: 2
+    hints:
+    - Each donor atom that gives an electron becomes a positive ion.
+    - Charges balance.
+    solution: 'Step 1: free electron + fixed positive ion. Step 2: overall neutral.'
+    mistakes:
+      yes, it has extra electrons: c12p14_dope
+      it is positive: c12p14_dope
+  - prompt: Photon energy (eV) needed to make an electron-hole pair in germanium, as a fraction?
+    answer: 7/10
+    check: Rational(7,10)
+    difficulty: 2
+    hints:
+    - It must cross the band gap.
+    - Germanium's gap.
+    solution: 'Step 1: Eg(Ge) = 0.7 eV. Step 2: 7/10.'
+    mistakes:
+      11/10: c12p14_band
+      '0': c12p14_band
+  - prompt: Why does a metal's conductivity fall when heated, while a semiconductor's rises?
+    options:
+    - metals' carriers are fixed in number but scatter more; semiconductors gain many carriers
+    - metals lose electrons when hot
+    - semiconductors melt
+    answer: metals' carriers are fixed in number but scatter more; semiconductors gain many carriers
+    difficulty: 3
+    hints:
+    - Think about the number of carriers in each.
+    - And about collisions.
+    solution: 'Step 1: metals: more collisions, same carriers. Step 2: semiconductors: many more carriers outweigh collisions.'
+    mistakes:
+      metals lose electrons when hot: c12p14_band
+      semiconductors melt: c12p14_band
+  - prompt: 'Diamond''s band gap is about 6 eV. It is a:'
+    options:
+    - insulator
+    - semiconductor
+    - conductor
+    answer: insulator
+    difficulty: 3
+    hints:
+    - Compare with 3 eV.
+    - Very few electrons can jump.
+    solution: 'Step 1: 6 eV > 3 eV. Step 2: insulator.'
+    mistakes:
+      semiconductor: c12p14_band
+      conductor: c12p14_band
 - code: cbse12p.semi.diode
   title: p-n junction and diodes
   after:
@@ -222,6 +381,48 @@ concepts:
       bin: Reverse bias
       clue: Which bias makes the current depend on the light falling on it?
       why: Photodiodes are operated in reverse bias.
+  lesson:
+    - teach: Joining p-type and n-type makes a p-n junction. Electrons and holes diffuse across and recombine, leaving a depletion region of fixed ions with no free carriers. This creates a barrier potential, about 0.7 V for silicon and 0.3 V for germanium.
+      check:
+        prompt: 'The depletion region contains:'
+        options:
+        - fixed ions and almost no free carriers
+        - many free electrons
+        - many holes
+        answer: fixed ions and almost no free carriers
+        why: Carriers near the junction have recombined.
+    - teach: 'Forward bias (p to +, n to −) lowers the barrier: current (mA) flows once the voltage passes about 0.7 V for Si. Reverse bias widens the depletion region: only a tiny current (μA) flows, until breakdown at a large voltage.'
+      picture:
+        kind: compare
+        columns:
+        - title: Forward bias
+          points:
+          - p to +
+          - barrier lowered
+          - large current (mA)
+        - title: Reverse bias
+          points:
+          - p to −
+          - barrier raised
+          - tiny current (μA)
+        alt: Forward and reverse bias of a p-n junction diode.
+      check:
+        prompt: 'A silicon diode with 0.3 V forward bias conducts:'
+        options:
+        - very little
+        - strongly
+        - in reverse
+        answer: very little
+        why: 0.3 V is below silicon's 0.7 V barrier.
+    - teach: 'A diode lets current pass one way, so it can rectify AC. Half-wave (one diode) passes one half of each cycle: output frequency equals input. Full-wave (two diodes or a bridge) uses both halves: output ripple frequency is twice the input. A capacitor filter smooths the output.'
+      check:
+        prompt: 'A full-wave rectifier on 60 Hz gives ripple at:'
+        options:
+        - 120 Hz
+        - 60 Hz
+        - 30 Hz
+        answer: 120 Hz
+        why: 'Both halves give a pulse: 2 × 60.'
   items:
   - prompt: A full-wave rectifier runs on 50 Hz AC. Find the output ripple frequency (Hz).
     answer: '100'
@@ -290,3 +491,114 @@ concepts:
     - Chargers.
     solution: AC into DC.
     mistakes: {"DC into AC": "p12_rectifier", "low voltage into high": "p12_rectifier", "light into current": "p12_rectifier"}
+  - prompt: Barrier potential of germanium (V), as a fraction?
+    answer: 3/10
+    check: Rational(3,10)
+    difficulty: 1
+    hints:
+    - Lower than silicon's.
+    - Germanium has a smaller band gap.
+    solution: 'Step 1: about 0.3 V. Step 2: 3/10.'
+    mistakes:
+      7/10: c12p14_bias
+      '1': c12p14_bias
+  - prompt: A half-wave rectifier runs on 60 Hz AC. Output frequency (Hz)?
+    answer: '60'
+    check: '60'
+    difficulty: 1
+    hints:
+    - One pulse per cycle.
+    - Same as input.
+    solution: 'Step 1: one half passes each cycle. Step 2: 60 Hz.'
+    mistakes:
+      '120': c12p14_bias
+      '30': c12p14_bias
+  - prompt: 'In forward bias, the p-side is joined to the battery''s:'
+    options:
+    - positive terminal
+    - negative terminal
+    - either
+    answer: positive terminal
+    difficulty: 1
+    hints:
+    - Holes are pushed towards the junction.
+    - Like charges repel.
+    solution: 'Step 1: + pushes holes forward. Step 2: positive terminal.'
+    mistakes:
+      negative terminal: c12p14_bias
+      either: c12p14_bias
+  - prompt: A silicon diode in series with 100 Ω across 5.7 V (forward). Current (mA), taking 0.7 V drop?
+    answer: '50'
+    check: (Rational(57,10) - Rational(7,10))/100*1000
+    difficulty: 2
+    hints:
+    - Voltage across the resistor = 5.7 − 0.7.
+    - I = V/R.
+    solution: 'Step 1: 5 V / 100 Ω = 0.05 A. Step 2: 50 mA.'
+    mistakes:
+      '57': c12p14_bias
+      '7': c12p14_bias
+  - prompt: 'In forward bias, the depletion region:'
+    options:
+    - becomes narrower
+    - becomes wider
+    - disappears permanently
+    answer: becomes narrower
+    difficulty: 2
+    hints:
+    - The barrier is lowered.
+    - Carriers are pushed into the region.
+    solution: 'Step 1: barrier falls. Step 2: region narrows.'
+    mistakes:
+      becomes wider: c12p14_bias
+      disappears permanently: c12p14_bias
+  - prompt: How many diodes does a bridge rectifier use?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - It is a full-wave design without a centre-tapped transformer.
+    - Diodes form a diamond.
+    solution: 'Step 1: bridge of diodes. Step 2: 4.'
+    mistakes:
+      '2': c12p14_bias
+      '1': c12p14_bias
+  - prompt: Why is a capacitor added after a rectifier?
+    options:
+    - to smooth the pulsing DC
+    - to change DC back to AC
+    - to raise the frequency
+    answer: to smooth the pulsing DC
+    difficulty: 2
+    hints:
+    - Rectified output still rises and falls.
+    - The capacitor stores charge between pulses.
+    solution: 'Step 1: it charges at peaks, discharges between. Step 2: smoother DC.'
+    mistakes:
+      to change DC back to AC: c12p14_bias
+      to raise the frequency: c12p14_bias
+  - prompt: A diode's current rises from 10 mA to 30 mA when the voltage rises from 0.7 V to 0.8 V. Dynamic resistance (Ω)?
+    answer: '5'
+    check: Rational(1,10)/Rational(20,1000)
+    difficulty: 3
+    hints:
+    - r = ΔV/ΔI.
+    - 0.1 V / 0.02 A.
+    solution: 'Step 1: ΔV = 0.1 V, ΔI = 20 mA. Step 2: 5 Ω.'
+    mistakes:
+      1/5: c12p14_bias
+      '50': c12p14_bias
+  - prompt: 'In reverse bias, the small current is due to:'
+    options:
+    - minority carriers
+    - majority carriers
+    - the barrier vanishing
+    answer: minority carriers
+    difficulty: 3
+    hints:
+    - Majority carriers are pushed away.
+    - A few thermally made carriers drift across.
+    solution: 'Step 1: barrier stops majority carriers. Step 2: minority carriers drift: tiny current.'
+    mistakes:
+      majority carriers: c12p14_bias
+      the barrier vanishing: c12p14_bias
