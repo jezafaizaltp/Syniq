@@ -15,6 +15,10 @@ tips:
   c12_spectro: "In the spectrochemical series, halides are weak; CN⁻ and CO are strong."
   c12_square_planar: "Square planar uses one d, one s and two p orbitals."
   c12_t2g: "Octahedral splitting: three lower (t₂g) and two upper (e_g)."
+  c12c5_ox: 'Oxidation state: complex charge = metal''s oxidation state + sum of ligand charges. Neutral ligands (NH₃, H₂O, CO, en) count 0.'
+  c12c5_cn: Coordination number = number of donor atoms bonded to the metal. A bidentate ligand like en counts twice.
+  c12c5_name: 'Naming: ligands in alphabetical order (prefixes like di-, tri- ignored), metal last with oxidation state in Roman numerals; an anionic complex ends in -ate.'
+  c12c5_cft: Strong-field ligands (CN⁻, CO) make electrons pair in t₂g (low spin); weak-field ones (F⁻, Cl⁻, H₂O) let them spread out (high spin).
 concepts:
 - code: cbse12c.coord.naming
   title: Werner's theory, terms and naming
@@ -104,6 +108,50 @@ concepts:
       - when:
           x: 6
         say: '6 is the coordination number: each en binds twice (2 × 2) plus 2 Cl. x − 2 = +1.'
+  lesson:
+    - teach: 'Werner''s theory: a metal shows a primary valence (its oxidation state, satisfied by ionisable ions) and a secondary valence (its coordination number, fixed in direction). In [Co(NH₃)₆]Cl₃, Co has primary valence 3 and secondary valence 6.'
+      check:
+        prompt: How many Cl⁻ ions in [Co(NH₃)₆]Cl₃ precipitate with AgNO₃?
+        options:
+        - '3'
+        - '0'
+        - '6'
+        answer: '3'
+        why: All three are outside the coordination sphere, so they are ionisable.
+    - teach: 'Terms: ligands donate electron pairs. Unidentate (NH₃, Cl⁻), bidentate (en, C₂O₄²⁻), hexadentate (EDTA⁴⁻). Ambidentate ligands bind through either of two atoms (NO₂⁻ via N, ONO⁻ via O; SCN⁻). Coordination number = number of donor atoms bonded.'
+      picture:
+        kind: compare
+        columns:
+        - title: Ligand
+          points:
+          - NH₃
+          - en
+          - C₂O₄²⁻
+          - EDTA⁴⁻
+        - title: Donor atoms
+          points:
+          - '1'
+          - '2'
+          - '2'
+          - '6'
+        alt: Number of donor atoms for common ligands.
+      check:
+        prompt: Coordination number of Fe in [Fe(C₂O₄)₃]³⁻?
+        options:
+        - '6'
+        - '3'
+        - '9'
+        answer: '6'
+        why: 3 oxalates × 2 donor atoms.
+    - teach: 'IUPAC naming: cation first. Inside the complex, ligands alphabetically (anionic ends in -o: chlorido, cyanido; neutral: aqua, ammine, carbonyl), then the metal with its oxidation state in Roman numerals; an anionic complex uses -ate (ferrate, cuprate). Isomers: structural (ionisation, linkage, coordination, solvate) and stereo (cis/trans, optical).'
+      check:
+        prompt: Name the ligand NH₃ in a complex.
+        options:
+        - ammine
+        - amine
+        - ammonia
+        answer: ammine
+        why: Double m for the ligand name.
   items:
   - prompt: What is the coordination number of Co in [Co(NH₃)₆]³⁺?
     answer: '6'
@@ -169,6 +217,117 @@ concepts:
     - Fe is +2.
     solution: Potassium hexacyanidoferrate(II).
     mistakes: {"iron(II)": "c12_ferrate", "ferrate(III)": "c12_ferrate", "iron(III)": "c12_ferrate"}
+  - prompt: Coordination number of Ni in [Ni(CO)₄]?
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Each CO donates through one atom.
+    - Count the ligands.
+    solution: 'Step 1: 4 unidentate ligands. Step 2: 4.'
+    mistakes:
+      '8': c12c5_cn
+      '0': c12c5_cn
+  - prompt: Oxidation state of Ni in [Ni(CO)₄]?
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - CO is neutral.
+    - The complex has no charge.
+    solution: 'Step 1: x + 0 = 0. Step 2: 0.'
+    mistakes:
+      '4': c12c5_ox
+      '2': c12c5_ox
+  - prompt: Oxidation state of Cu in [Cu(NH₃)₄]²⁺?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - NH₃ is neutral.
+    - The charge is +2.
+    solution: 'Step 1: x = +2. Step 2: 2.'
+    mistakes:
+      '4': c12c5_ox
+      '6': c12c5_ox
+  - prompt: Oxidation state of Co in [Co(NH₃)₅Cl]Cl₂?
+    answer: '3'
+    check: 2 + 1
+    difficulty: 2
+    hints:
+    - The complex ion is [Co(NH₃)₅Cl]²⁺.
+    - x + 0 − 1 = +2.
+    solution: 'Step 1: x − 1 = 2. Step 2: x = +3.'
+    mistakes:
+      '2': c12c5_ox
+      '1': c12c5_ox
+  - prompt: Coordination number of Pt in [Pt(en)₂Cl₂]²⁺?
+    answer: '6'
+    check: 2*2 + 2
+    difficulty: 2
+    hints:
+    - en is bidentate.
+    - 2 × 2 + 2.
+    solution: 'Step 1: 4 from en, 2 from Cl. Step 2: 6.'
+    mistakes:
+      '4': c12c5_cn
+      '3': c12c5_cn
+  - prompt: 'NO₂⁻ bonding through N or through O is an example of a(n):'
+    options:
+    - ambidentate ligand
+    - bidentate ligand
+    - chelate
+    answer: ambidentate ligand
+    difficulty: 2
+    hints:
+    - One ligand, two possible donor atoms.
+    - But only one used at a time.
+    solution: 'Step 1: binds via N or O. Step 2: ambidentate.'
+    mistakes:
+      bidentate ligand: c12c5_name
+      chelate: c12c5_name
+  - prompt: 'The IUPAC name of [Co(NH₃)₆]Cl₃ is:'
+    options:
+    - hexaamminecobalt(III) chloride
+    - hexaamminecobaltate(III) chloride
+    - cobalt hexaammine trichloride
+    answer: hexaamminecobalt(III) chloride
+    difficulty: 2
+    hints:
+    - The complex is a cation, so no -ate.
+    - Oxidation state of Co is +3.
+    solution: 'Step 1: hexaammine + cobalt(III). Step 2: chloride outside.'
+    mistakes:
+      hexaamminecobaltate(III) chloride: c12c5_name
+      cobalt hexaammine trichloride: c12c5_name
+  - prompt: '[Co(NH₃)₅Br]SO₄ and [Co(NH₃)₅SO₄]Br are:'
+    options:
+    - ionisation isomers
+    - linkage isomers
+    - optical isomers
+    answer: ionisation isomers
+    difficulty: 3
+    hints:
+    - Which ion is inside and which outside swaps.
+    - They give different ions in water.
+    solution: 'Step 1: Br⁻ and SO₄²⁻ exchange places. Step 2: ionisation isomers.'
+    mistakes:
+      linkage isomers: c12c5_name
+      optical isomers: c12c5_name
+  - prompt: Square planar [Pt(NH₃)₂Cl₂] shows which isomerism?
+    options:
+    - geometrical (cis/trans)
+    - optical
+    - linkage
+    answer: geometrical (cis/trans)
+    difficulty: 3
+    hints:
+    - The two Cl can be side by side or opposite.
+    - No chiral centre in a flat shape.
+    solution: 'Step 1: cis and trans forms. Step 2: geometrical isomerism.'
+    mistakes:
+      optical: c12c5_name
+      linkage: c12c5_name
 - code: cbse12c.coord.bonding
   title: 'Bonding: VBT and crystal field theory'
   after:
@@ -212,6 +371,42 @@ concepts:
       NH₃: NH₃ is a stronger-field ligand than water.
       en (ethane-1,2-diamine): en binds through two N atoms and splits more than NH₃.
       CN⁻: 'CN⁻ is one of the strongest-field ligands: it usually forces low-spin complexes.'
+  lesson:
+    - teach: 'Valence bond theory: the metal uses hybrid orbitals to accept ligand pairs. sp³ gives tetrahedral, dsp² square planar, d²sp³ (inner orbital) or sp³d² (outer orbital) octahedral. Unpaired electrons left over decide magnetic behaviour.'
+      check:
+        prompt: dsp² hybridisation gives which shape?
+        options:
+        - square planar
+        - tetrahedral
+        - octahedral
+        answer: square planar
+        why: Four hybrid orbitals in one plane.
+    - teach: 'Crystal field theory: in an octahedral field the five d orbitals split into a lower t₂g set (3 orbitals) and a higher eg set (2) by Δ₀. Strong-field ligands give a large Δ₀, so electrons pair in t₂g (low spin); weak-field ligands give a small Δ₀, so electrons spread out (high spin).'
+      picture:
+        kind: flow
+        steps:
+        - I⁻ < Br⁻ < Cl⁻
+        - F⁻ < OH⁻
+        - H₂O < NH₃
+        - en < CN⁻ < CO
+        alt: Spectrochemical series from weak-field (I⁻) to strong-field (CO) ligands.
+      check:
+        prompt: Which gives the largest Δ₀?
+        options:
+        - CO
+        - H₂O
+        - Cl⁻
+        answer: CO
+        why: CO is at the strong end of the series.
+    - teach: 'Colour: an electron jumps from t₂g to eg by absorbing visible light; we see the complementary colour. Uses: EDTA to measure water hardness, cisplatin in cancer treatment, complexes in photography and metal extraction.'
+      check:
+        prompt: 'A complex absorbs orange light. It looks:'
+        options:
+        - blue
+        - orange
+        - colourless
+        answer: blue
+        why: We see the complementary colour.
   items:
   - prompt: In an octahedral field, how many d orbitals are in the lower t₂g set?
     answer: '3'
@@ -279,3 +474,117 @@ concepts:
     - Complementary colour seen.
     solution: d–d transitions.
     mistakes: {"emission of X-rays": "c12_complex_colour", "the ligands' own colour only": "c12_complex_colour", "nuclear reactions": "c12_complex_colour"}
+  - prompt: How many d orbitals are in the higher eg set in an octahedral field?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Five orbitals split 3 + 2.
+    - t₂g has 3.
+    solution: 'Step 1: 5 − 3. Step 2: 2.'
+    mistakes:
+      '3': c12c5_cft
+      '5': c12c5_cft
+  - prompt: '[Fe(H₂O)₆]³⁺ is high-spin d⁵. Unpaired electrons?'
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - 'High spin: one in each orbital first.'
+    - Five electrons, five orbitals.
+    solution: 'Step 1: t₂g³ eg². Step 2: 5.'
+    mistakes:
+      '1': c12c5_cft
+      '3': c12c5_cft
+  - prompt: '[Fe(CN)₆]³⁻ is low-spin d⁵. Unpaired electrons?'
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - 'Low spin: all five go into t₂g.'
+    - t₂g has 3 orbitals.
+    solution: 'Step 1: t₂g⁵ = two pairs + one single. Step 2: 1.'
+    mistakes:
+      '5': c12c5_cft
+      '3': c12c5_cft
+  - prompt: Which is a weak-field ligand?
+    options:
+    - F⁻
+    - CN⁻
+    - CO
+    answer: F⁻
+    difficulty: 2
+    hints:
+    - Look at the start of the spectrochemical series.
+    - Halides are weak.
+    solution: 'Step 1: halides are weak-field. Step 2: F⁻.'
+    mistakes:
+      CN⁻: c12c5_cft
+      CO: c12c5_cft
+  - prompt: Hybridisation of Ni in tetrahedral [NiCl₄]²⁻?
+    options:
+    - sp³
+    - dsp²
+    - d²sp³
+    answer: sp³
+    difficulty: 2
+    hints:
+    - 'Cl⁻ is weak-field: no pairing.'
+    - Tetrahedral uses s + 3p.
+    solution: 'Step 1: tetrahedral. Step 2: sp³.'
+    mistakes:
+      dsp²: c12c5_cft
+      d²sp³: c12c5_cft
+  - prompt: Spin-only magnetic moment of [Fe(CN)₆]³⁻ (1 unpaired electron), as √ of a number. Give that number.
+    answer: '3'
+    check: 1*(1 + 2)
+    difficulty: 2
+    hints:
+    - μ = √(n(n + 2)).
+    - n = 1.
+    solution: 'Step 1: 1 × 3. Step 2: √3 BM.'
+    mistakes:
+      '1': c12c5_cft
+      '35': c12c5_cft
+  - prompt: Why is [Ni(CN)₄]²⁻ diamagnetic?
+    options:
+    - strong-field CN⁻ pairs all 8 d electrons (dsp²)
+    - Ni has no d electrons
+    - CN⁻ removes electrons
+    answer: strong-field CN⁻ pairs all 8 d electrons (dsp²)
+    difficulty: 3
+    hints:
+    - Ni²⁺ is d⁸.
+    - Pairing frees one d orbital for dsp².
+    solution: 'Step 1: d⁸ all paired. Step 2: no unpaired electrons, diamagnetic.'
+    mistakes:
+      Ni has no d electrons: c12c5_cft
+      CN⁻ removes electrons: c12c5_cft
+  - prompt: 'Cisplatin is used to treat:'
+    options:
+    - cancer
+    - water hardness
+    - photographs
+    answer: cancer
+    difficulty: 2
+    hints:
+    - It is a platinum complex medicine.
+    - It stops cell division.
+    solution: 'Step 1: [Pt(NH₃)₂Cl₂], cis form. Step 2: anticancer drug.'
+    mistakes:
+      water hardness: c12c5_name
+      photographs: c12c5_name
+  - prompt: '[Ti(H₂O)₆]³⁺ (d¹) looks purple. Why does [Sc(H₂O)₆]³⁺ (d⁰) look colourless?'
+    options:
+    - no d electron can jump from t₂g to eg
+    - Sc is not a metal
+    - water absorbs all colours
+    answer: no d electron can jump from t₂g to eg
+    difficulty: 3
+    hints:
+    - Colour needs a d–d transition.
+    - How many d electrons does Sc³⁺ have?
+    solution: 'Step 1: d⁰. Step 2: no transition, no colour.'
+    mistakes:
+      Sc is not a metal: c12c5_cft
+      water absorbs all colours: c12c5_cft

@@ -15,6 +15,9 @@ tips:
   c12_saytzeff: "Saytzeff: the H is lost from the carbon with fewer H atoms, giving a more substituted double bond."
   c12_sn1: "SN1 goes through a carbocation. Which forms the most stable carbocation?"
   c12_sn2: "SN2 attack comes from the back, flipping the molecule like an umbrella in wind."
+  c12c6_sn: 'SN2: one step, backside attack, inversion; fastest for 1° (least crowded). SN1: carbocation first, racemisation; fastest for 3° (most stable cation).'
+  c12c6_class: 'Classify by the carbon holding the halogen: count how many other carbons are attached to it.'
+  c12c6_aryl: In haloarenes the C–X bond has partial double-bond character, so nucleophilic substitution is hard; halogens still direct electrophiles to ortho and para.
 concepts:
 - code: cbse12c.halo.substitution
   title: 'Haloalkanes: nature and nucleophilic substitution'
@@ -99,6 +102,50 @@ concepts:
       bin: SN1
       clue: Is its carbocation stabilised by the ring?
       why: Resonance stabilises the benzyl cation, so SN1 is easy.
+  lesson:
+    - teach: 'Haloalkanes have a halogen on an sp³ carbon. Classify by that carbon: primary (1°, one other C attached), secondary (2°), tertiary (3°). Special cases: allylic and benzylic (next to C=C or a ring), vinylic and aryl (on the C=C or ring carbon). The C–X bond is polar: C is δ+.'
+      check:
+        prompt: '(CH₃)₃C–Cl is a:'
+        options:
+        - tertiary haloalkane
+        - primary haloalkane
+        - vinylic halide
+        answer: tertiary haloalkane
+        why: The C bearing Cl has three other carbons attached.
+    - teach: 'Preparation: alcohol + HX, PCl₃, PCl₅ or SOCl₂ (SOCl₂ is neat: by-products are gases); alkene + HX; halogen exchange (Finkelstein: NaI in acetone; Swarts: metal fluorides). Boiling points rise with bigger halogens and longer chains.'
+      check:
+        prompt: Why is SOCl₂ preferred for making chloroalkanes from alcohols?
+        options:
+        - the by-products SO₂ and HCl escape as gases
+        - it is the cheapest
+        - it works only on phenols
+        answer: the by-products SO₂ and HCl escape as gases
+        why: This leaves a pure product.
+    - teach: 'Nucleophilic substitution: SN2 is one step, with the nucleophile attacking from the back, inverting the configuration; rate 1° > 2° > 3°. SN1 goes via a carbocation, giving a racemic product; rate 3° > 2° > 1°. Elimination with alcoholic KOH gives alkenes, mainly the more substituted one (Saytzeff). With Mg in dry ether, RX gives a Grignard reagent RMgX.'
+      picture:
+        kind: compare
+        columns:
+        - title: SN2
+          points:
+          - one step
+          - rate = k[RX][Nu⁻]
+          - inversion
+          - 1° fastest
+        - title: SN1
+          points:
+          - two steps, carbocation
+          - rate = k[RX]
+          - racemisation
+          - 3° fastest
+        alt: SN1 and SN2 mechanisms compared.
+      check:
+        prompt: 'An optically active 3° halide reacts by SN1. The product is:'
+        options:
+        - racemic
+        - fully inverted
+        - fully retained
+        answer: racemic
+        why: The flat carbocation is attacked equally from both sides.
   items:
   - prompt: Which reacts fastest by SN2?
     options:
@@ -179,6 +226,126 @@ concepts:
     - Fewer H on the double bond.
     solution: The more substituted alkene.
     mistakes: {"the less substituted alkene": "c12_saytzeff", "an alkyne": "c12_saytzeff", "an alcohol": "c12_saytzeff"}
+  - prompt: 'CH₃CH₂CH₂Br is a:'
+    options:
+    - primary haloalkane
+    - secondary haloalkane
+    - tertiary haloalkane
+    answer: primary haloalkane
+    difficulty: 1
+    hints:
+    - Look at the carbon carrying Br.
+    - How many carbons does it touch?
+    solution: 'Step 1: one C attached. Step 2: primary.'
+    mistakes:
+      secondary haloalkane: c12c6_class
+      tertiary haloalkane: c12c6_class
+  - prompt: 'Which reacts fastest by SN2: CH₃CH₂Br, (CH₃)₂CHBr, (CH₃)₃CBr?'
+    options:
+    - CH₃CH₂Br
+    - (CH₃)₂CHBr
+    - (CH₃)₃CBr
+    answer: CH₃CH₂Br
+    difficulty: 1
+    hints:
+    - SN2 needs room for backside attack.
+    - Least crowded wins.
+    solution: 'Step 1: 1° is least hindered. Step 2: CH₃CH₂Br.'
+    mistakes:
+      (CH₃)₂CHBr: c12c6_sn
+      (CH₃)₃CBr: c12c6_sn
+  - prompt: 'The order of an SN1 reaction is:'
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Only the slow step counts.
+    - It involves just RX.
+    solution: 'Step 1: rate = k[RX]. Step 2: first order.'
+    mistakes:
+      '2': c12c6_sn
+      '0': c12c6_sn
+  - prompt: 'CH₃Br + NaI in acetone gives CH₃I. This is the:'
+    options:
+    - Finkelstein reaction
+    - Swarts reaction
+    - Wurtz reaction
+    answer: Finkelstein reaction
+    difficulty: 2
+    hints:
+    - Halogen exchange with iodide.
+    - NaBr precipitates from acetone.
+    solution: 'Step 1: Br swapped for I. Step 2: Finkelstein.'
+    mistakes:
+      Swarts reaction: c12c6_class
+      Wurtz reaction: c12c6_class
+  - prompt: '2 CH₃Br + 2 Na in dry ether gives:'
+    options:
+    - ethane
+    - methane
+    - propane
+    answer: ethane
+    difficulty: 2
+    hints:
+    - Wurtz reaction joins two alkyl groups.
+    - CH₃ + CH₃.
+    solution: 'Step 1: two methyls join. Step 2: CH₃–CH₃, ethane.'
+    mistakes:
+      methane: c12c6_class
+      propane: c12c6_class
+  - prompt: Which has the highest boiling point?
+    options:
+    - CH₃I
+    - CH₃Br
+    - CH₃Cl
+    answer: CH₃I
+    difficulty: 2
+    hints:
+    - Bigger halogen, stronger van der Waals forces.
+    - Iodine is largest.
+    solution: 'Step 1: size I > Br > Cl. Step 2: CH₃I boils highest.'
+    mistakes:
+      CH₃Br: c12c6_class
+      CH₃Cl: c12c6_class
+  - prompt: '2-bromobutane with alcoholic KOH gives mainly:'
+    options:
+    - but-2-ene
+    - but-1-ene
+    - butan-2-ol
+    answer: but-2-ene
+    difficulty: 2
+    hints:
+    - Alcoholic KOH favours elimination.
+    - 'Saytzeff: more substituted alkene.'
+    solution: 'Step 1: elimination. Step 2: but-2-ene is more substituted.'
+    mistakes:
+      but-1-ene: c12c6_sn
+      butan-2-ol: c12c6_sn
+  - prompt: Butan-2-ol is chiral. How many chiral carbons does it have?
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - A chiral carbon has four different groups.
+    - 'Check C-2: CH₃, C₂H₅, OH, H.'
+    solution: 'Step 1: C-2 has four different groups. Step 2: 1.'
+    mistakes:
+      '2': c12c6_sn
+      '0': c12c6_sn
+  - prompt: 'Grignard reagents must be made in dry ether because they:'
+    options:
+    - react with water to form alkanes
+    - explode in air
+    - dissolve only in water
+    answer: react with water to form alkanes
+    difficulty: 3
+    hints:
+    - RMgX is a very strong base.
+    - It grabs H⁺ from water.
+    solution: 'Step 1: RMgX + H₂O → RH. Step 2: water destroys it.'
+    mistakes:
+      explode in air: c12c6_class
+      dissolve only in water: c12c6_class
 - code: cbse12c.halo.arenes
   title: Haloarenes and environmental effects
   after:
@@ -245,6 +412,48 @@ concepts:
       bin: Meta
       clue: Does –C≡N pull electrons?
       why: 'Strongly: meta.'
+  lesson:
+    - teach: Haloarenes have the halogen directly on a benzene ring. They are made by electrophilic substitution (Cl₂ with FeCl₃) or from diazonium salts (Sandmeyer reaction with CuCl or CuBr).
+      check:
+        prompt: 'Benzene + Cl₂ with FeCl₃ gives:'
+        options:
+        - chlorobenzene
+        - benzyl chloride
+        - hexachlorocyclohexane
+        answer: chlorobenzene
+        why: FeCl₃ makes Cl⁺, which substitutes on the ring.
+    - teach: 'Haloarenes resist nucleophilic substitution: resonance gives the C–X bond partial double-bond character, the carbon is sp², and a phenyl cation is unstable. An –NO₂ group at ortho or para makes it easier. In electrophilic substitution, halogens slow the ring down (deactivating) but still direct to ortho and para.'
+      picture:
+        kind: compare
+        columns:
+        - title: Chloromethane
+          points:
+          - sp³ C–Cl
+          - single bond
+          - easy SN
+        - title: Chlorobenzene
+          points:
+          - sp² C–Cl
+          - partial double bond
+          - hard SN
+        alt: Why chlorobenzene is less reactive to nucleophiles than chloromethane.
+      check:
+        prompt: Which makes chlorobenzene react faster with OH⁻?
+        options:
+        - an –NO₂ group at para
+        - a –CH₃ group at meta
+        - nothing can
+        answer: an –NO₂ group at para
+        why: It withdraws electrons and stabilises the intermediate.
+    - teach: 'Polyhalogen compounds: CH₂Cl₂ (solvent), CHCl₃ (once an anaesthetic; forms toxic phosgene in air and light), CHI₃ (iodoform, antiseptic), CCl₄ (solvent, harms ozone), freons (CFCs, refrigerants that destroy ozone), DDT (insecticide that persists and builds up in food chains).'
+      check:
+        prompt: 'Chloroform is stored in dark bottles filled to the top because:'
+        options:
+        - light and air turn it into poisonous phosgene
+        - it is very heavy
+        - it freezes easily
+        answer: light and air turn it into poisonous phosgene
+        why: Oxidation in light gives COCl₂.
   items:
   - prompt: 'Chlorobenzene is less reactive than chloromethane towards nucleophiles because:'
     options:
@@ -321,3 +530,123 @@ concepts:
     - Four.
     solution: '4.'
     mistakes: {"1": "c12_count_formula", "3": "c12_count_formula"}
+  - prompt: Which is used as an antiseptic?
+    options:
+    - CHI₃
+    - CCl₄
+    - CH₂Cl₂
+    answer: CHI₃
+    difficulty: 1
+    hints:
+    - It is iodoform.
+    - It releases iodine.
+    solution: 'Step 1: iodoform. Step 2: CHI₃.'
+    mistakes:
+      CCl₄: c12c6_aryl
+      CH₂Cl₂: c12c6_aryl
+  - prompt: How many hydrogen atoms are in CH₂Cl₂?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Read the subscript after H.
+    - Dichloromethane.
+    solution: 'Step 1: CH₂. Step 2: 2.'
+    mistakes:
+      '4': c12c6_aryl
+      '1': c12c6_aryl
+  - prompt: 'Chlorobenzene + Cl₂ (FeCl₃) gives mainly:'
+    options:
+    - o- and p-dichlorobenzene
+    - m-dichlorobenzene
+    - no reaction
+    answer: o- and p-dichlorobenzene
+    difficulty: 1
+    hints:
+    - Halogens are o/p directors.
+    - Even though they deactivate.
+    solution: 'Step 1: Cl directs to o/p. Step 2: o- and p- products.'
+    mistakes:
+      m-dichlorobenzene: c12c6_aryl
+      no reaction: c12c6_aryl
+  - prompt: 'Benzenediazonium chloride + CuCl gives chlorobenzene. This is the:'
+    options:
+    - Sandmeyer reaction
+    - Wurtz reaction
+    - Finkelstein reaction
+    answer: Sandmeyer reaction
+    difficulty: 2
+    hints:
+    - Copper(I) salt replaces N₂.
+    - Named after a Swiss chemist.
+    solution: 'Step 1: diazonium + CuCl. Step 2: Sandmeyer.'
+    mistakes:
+      Wurtz reaction: c12c6_aryl
+      Finkelstein reaction: c12c6_aryl
+  - prompt: 'Chlorobenzene + CH₃Cl + Na in dry ether gives toluene. This is the:'
+    options:
+    - Wurtz–Fittig reaction
+    - Fittig reaction
+    - Swarts reaction
+    answer: Wurtz–Fittig reaction
+    difficulty: 2
+    hints:
+    - An aryl halide and an alkyl halide join.
+    - Wurtz (alkyl) + Fittig (aryl).
+    solution: 'Step 1: Ar–X + R–X with Na. Step 2: Wurtz–Fittig.'
+    mistakes:
+      Fittig reaction: c12c6_aryl
+      Swarts reaction: c12c6_aryl
+  - prompt: 'Two chlorobenzenes with Na in dry ether give:'
+    options:
+    - biphenyl
+    - toluene
+    - benzene
+    answer: biphenyl
+    difficulty: 2
+    hints:
+    - Two aryl groups join.
+    - Fittig reaction.
+    solution: 'Step 1: C₆H₅ + C₆H₅. Step 2: biphenyl.'
+    mistakes:
+      toluene: c12c6_aryl
+      benzene: c12c6_aryl
+  - prompt: 'Freons harm the environment by:'
+    options:
+    - releasing chlorine that destroys ozone
+    - making acid rain only
+    - causing earthquakes
+    answer: releasing chlorine that destroys ozone
+    difficulty: 2
+    hints:
+    - UV in the stratosphere breaks them.
+    - Cl atoms are freed.
+    solution: 'Step 1: UV splits CFCs. Step 2: Cl attacks O₃.'
+    mistakes:
+      making acid rain only: c12c6_aryl
+      causing earthquakes: c12c6_aryl
+  - prompt: In DDT, how many chlorine atoms are there? (dichlorodiphenyltrichloroethane)
+    answer: '5'
+    check: 2 + 3
+    difficulty: 3
+    hints:
+    - 'Read the name: di + tri.'
+    - 2 + 3.
+    solution: 'Step 1: dichloro + trichloro. Step 2: 5.'
+    mistakes:
+      '3': c12c6_aryl
+      '6': c12c6_aryl
+  - prompt: Why does DDT become more concentrated in birds of prey than in insects?
+    options:
+    - it is not broken down and builds up along the food chain
+    - birds make DDT themselves
+    - it evaporates from insects
+    answer: it is not broken down and builds up along the food chain
+    difficulty: 3
+    hints:
+    - It is stored in fat.
+    - Each predator eats many prey.
+    solution: 'Step 1: persistent and fat-soluble. Step 2: biomagnification up the chain.'
+    mistakes:
+      birds make DDT themselves: c12c6_aryl
+      it evaporates from insects: c12c6_aryl
