@@ -15,6 +15,9 @@ tips:
   p11_torque: "Torque = force × distance from the pivot. Try pushing a door near its hinges."
   p11_torque_alpha: "τ = Iα, so α = τ/I."
   p11_v_omega: "v = ωr, so ω = v/r."
+  c11p06_com: Multiply each mass by its position, add, then divide by the total mass.
+  c11p06_tq: Torque = force × perpendicular distance from the pivot. Balance means clockwise torque equals anticlockwise torque.
+  c11p06_rot: 'Match the rotational formula to its straight-line twin: m ↔ I, v ↔ ω, F ↔ τ, p ↔ L.'
 concepts:
 - code: cbse11p.rot.com
   title: Centre of mass and torque
@@ -134,6 +137,48 @@ concepts:
           b: 1
           l: 10
         say: 'That puts the 9 kg mass at 0. Swap them: m₁ = 1 kg sits at 0.'
+  lesson:
+    - teach: 'The centre of mass is the mass-weighted average position: x_cm = Σmᵢxᵢ / Σmᵢ. For a uniform symmetric body it is at the geometric centre, even if no mass is there (a ring).'
+      check:
+        prompt: 1 kg at x = 0 and 1 kg at x = 4 m. Centre of mass?
+        options:
+        - 2 m
+        - 4 m
+        - 0 m
+        answer: 2 m
+        why: 'Equal masses: halfway.'
+    - teach: 'Torque is the turning effect of a force: τ = rF sin θ = force × perpendicular distance from the axis. Unit N m. A longer spanner gives more torque for the same force.'
+      check:
+        prompt: 10 N applied at right angles, 0.3 m from a hinge. Torque?
+        options:
+        - 3 N m
+        - 30 N m
+        - 0.03 N m
+        answer: 3 N m
+        why: 10 × 0.3.
+    - teach: 'A rigid body is in equilibrium when the net force is zero AND the net torque is zero. For a balanced see-saw: clockwise moments = anticlockwise moments.'
+      picture:
+        kind: compare
+        columns:
+        - title: Left side
+          points:
+          - mass 20 kg
+          - distance 3 m
+          - moment 60
+        - title: Right side
+          points:
+          - mass 30 kg
+          - distance 2 m
+          - moment 60
+        alt: 'A balanced see-saw: equal moments on both sides.'
+      check:
+        prompt: Can a body have zero net force but still start rotating?
+        options:
+        - yes, if the net torque is not zero
+        - no, never
+        - only if it is moving
+        answer: yes, if the net torque is not zero
+        why: Two equal, opposite forces along different lines (a couple) give torque but no net force.
   items:
   - prompt: Masses 2 kg at x = 0 and 3 kg at x = 5 m. Find the x-coordinate of the centre of mass (in m).
     answer: '3'
@@ -202,6 +247,114 @@ concepts:
     - Two conditions.
     solution: Both net force and net torque must be zero.
     mistakes: {"only net force is zero": "p11_equilibrium", "only net torque is zero": "p11_equilibrium", "it must be at rest on the ground": "p11_equilibrium"}
+  - prompt: Masses 1 kg at x = 0 and 4 kg at x = 10 m. Find x_cm (in m).
+    answer: '8'
+    check: 40/5
+    difficulty: 1
+    hints:
+    - Σmx = 0 + 40.
+    - Divide by total mass 5.
+    solution: 'Step 1: 40/5. Step 2: 8 m.'
+    mistakes:
+      '5': c11p06_com
+      '2': c11p06_com
+  - prompt: A 50 N force acts at right angles to a 0.4 m wrench. Find the torque (in N m).
+    answer: '20'
+    check: 50*0.4
+    difficulty: 1
+    hints:
+    - τ = F × perpendicular distance.
+    - 50 × 0.4.
+    solution: 'Step 1: 50 × 0.4. Step 2: 20 N m.'
+    mistakes:
+      '125': c11p06_tq
+      '50.4': c11p06_tq
+  - prompt: Where is the centre of mass of a uniform rod?
+    options:
+    - at its midpoint
+    - at one end
+    - one-third from an end
+    answer: at its midpoint
+    difficulty: 1
+    hints:
+    - The rod is symmetric.
+    - Equal mass on each side of the middle.
+    solution: 'Step 1: symmetry. Step 2: midpoint.'
+    mistakes:
+      at one end: c11p06_com
+      one-third from an end: c11p06_com
+  - prompt: A 25 kg child sits 1.6 m from a see-saw pivot. Where must a 40 kg adult sit to balance (in m)?
+    answer: '1'
+    check: 25*1.6/40
+    difficulty: 2
+    hints:
+    - 'Moments balance: 25 × 1.6 = 40 × d.'
+    - Solve for d.
+    solution: 'Step 1: 40 = 40d. Step 2: d = 1 m.'
+    mistakes:
+      '1.6': c11p06_tq
+      '2.56': c11p06_tq
+  - prompt: A 30 N force acts at 30° to a 0.5 m spanner. Find the torque (in N m).
+    answer: '7.5'
+    check: 30*0.5*0.5
+    difficulty: 2
+    hints:
+    - τ = rF sin θ.
+    - sin 30° = ½.
+    solution: 'Step 1: 0.5 × 30 × ½. Step 2: 7.5 N m.'
+    mistakes:
+      '15': c11p06_tq
+      '13': c11p06_tq
+  - prompt: Masses 2 kg at (0, 0), 2 kg at (4, 0) and 4 kg at (0, 4). Find y_cm (in m).
+    answer: '2'
+    check: 16/8
+    difficulty: 2
+    hints:
+    - Use y-coordinates only.
+    - Σmy = 0 + 0 + 16.
+    solution: 'Step 1: 16/8. Step 2: 2 m.'
+    mistakes:
+      '4': c11p06_com
+      '1': c11p06_com
+  - prompt: Why is it easier to open a door by pushing near the handle than near the hinge?
+    options:
+    - the perpendicular distance is larger, giving more torque
+    - the door is lighter there
+    - friction is less there
+    answer: the perpendicular distance is larger, giving more torque
+    difficulty: 1
+    hints:
+    - τ = F × d.
+    - Where is d biggest?
+    solution: 'Step 1: larger d. Step 2: same force, more torque.'
+    mistakes:
+      the door is lighter there: c11p06_tq
+      friction is less there: c11p06_tq
+  - prompt: A 2 m uniform plank of weight 100 N rests on supports at its ends. A 300 N load sits 0.5 m from the left end. Find the force on the right support (in N).
+    answer: '125'
+    check: (300*0.5+100*1)/2
+    difficulty: 3
+    hints:
+    - Take moments about the left support.
+    - The plank's weight acts at its middle.
+    solution: 'Step 1: R × 2 = 300 × 0.5 + 100 × 1 = 250. Step 2: R = 125 N.'
+    mistakes:
+      '200': c11p06_tq
+      '75': c11p06_tq
+  - prompt: 'A shell bursts in mid-air into pieces. The centre of mass of the pieces:'
+    options:
+    - continues on the original path
+    - stops at once
+    - moves straight down
+    answer: continues on the original path
+    difficulty: 3
+    hints:
+    - The burst is due to internal forces.
+    - Only external forces change the centre of mass motion.
+    solution: 'Step 1: only gravity acts externally. Step 2: the CM follows the same parabola.'
+    mistakes:
+      stops at once: c11p06_com
+      moves straight down: c11p06_com
 - code: cbse11p.rot.dynamics
   title: Moment of inertia and angular momentum
   after:
@@ -287,6 +440,50 @@ concepts:
           - 0.5
           - 0.99
         say: 'Spreading the arms lowers the kinetic energy. Pulling them in raises it: the skater''s muscles do work.'
+  lesson:
+    - teach: 'Rotation has its own versions of motion words: angle θ, angular velocity ω, angular acceleration α, with v = ωr. Moment of inertia I = Σmr² plays the role of mass.'
+      check:
+        prompt: A point 0.2 m from the axis, ω = 10 rad/s. Its speed?
+        options:
+        - 2 m/s
+        - 50 m/s
+        - 0.02 m/s
+        answer: 2 m/s
+        why: v = ωr = 10 × 0.2.
+    - teach: 'I depends on how mass is spread: ring MR², disc ½MR², rod about centre ML²/12, solid sphere ⅖MR². Mass far from the axis means a bigger I. Rotational KE = ½Iω², and τ = Iα.'
+      check:
+        prompt: 'Same mass and radius: which has the larger I about its axis?'
+        options:
+        - a ring
+        - a disc
+        - they are equal
+        answer: a ring
+        why: All the ring's mass is at radius R.
+    - teach: 'Angular momentum L = Iω. With no external torque, L stays constant: a skater pulling in their arms makes I smaller, so ω grows.'
+      picture:
+        kind: compare
+        columns:
+        - title: Straight line
+          points:
+          - m
+          - v
+          - F = ma
+          - p = mv
+        - title: Rotation
+          points:
+          - I
+          - ω
+          - τ = Iα
+          - L = Iω
+        alt: Straight-line and rotational quantities side by side.
+      check:
+        prompt: 'I halves with no outside torque. ω becomes:'
+        options:
+        - double
+        - half
+        - the same
+        answer: double
+        why: Iω stays fixed.
   items:
   - prompt: A ring of mass 2 kg and radius 0.5 m spins about its axis. Find its moment of inertia (in kg m²).
     answer: 1/2
@@ -343,3 +540,105 @@ concepts:
     - 2/0.4.
     solution: 5 rad/s.
     mistakes: {"0.8": "p11_v_omega", "0.2": "p11_v_omega"}
+  - prompt: Find I of a 3 kg ring of radius 0.2 m about its axis (in kg m²).
+    answer: '0.12'
+    check: 3*0.04
+    difficulty: 1
+    hints:
+    - 'Ring: I = MR².'
+    - 0.2² = 0.04.
+    solution: 'Step 1: 3 × 0.04. Step 2: 0.12 kg m².'
+    mistakes:
+      '0.6': c11p06_rot
+      '0.06': c11p06_rot
+  - prompt: A flywheel with I = 4 kg m² spins at 5 rad/s. Find its rotational KE (in J).
+    answer: '50'
+    check: 0.5*4*25
+    difficulty: 1
+    hints:
+    - K = ½Iω².
+    - ω² = 25.
+    solution: 'Step 1: ½ × 4 × 25. Step 2: 50 J.'
+    mistakes:
+      '10': c11p06_rot
+      '100': c11p06_rot
+  - prompt: Moment of inertia plays the role of ______ in rotation.
+    options:
+    - mass
+    - force
+    - velocity
+    answer: mass
+    difficulty: 1
+    hints:
+    - It resists changes in rotation.
+    - Compare τ = Iα with F = ma.
+    solution: 'Step 1: I sits where m sits. Step 2: mass.'
+    mistakes:
+      force: c11p06_rot
+      velocity: c11p06_rot
+  - prompt: A torque of 6 N m acts on a wheel with I = 0.5 kg m². Find α (in rad/s²).
+    answer: '12'
+    check: 6/0.5
+    difficulty: 2
+    hints:
+    - τ = Iα.
+    - α = τ/I.
+    solution: 'Step 1: 6/0.5. Step 2: 12 rad/s².'
+    mistakes:
+      '3': c11p06_rot
+      '6.5': c11p06_rot
+  - prompt: Find I of a uniform 1.2 m rod of mass 2 kg about an axis through its centre (in kg m²).
+    answer: '0.24'
+    check: 2*1.44/12
+    difficulty: 2
+    hints:
+    - 'Rod about centre: ML²/12.'
+    - L² = 1.44.
+    solution: 'Step 1: 2 × 1.44 / 12. Step 2: 0.24 kg m².'
+    mistakes:
+      '2.88': c11p06_rot
+      '0.96': c11p06_rot
+  - prompt: A disc has I = 2 kg m² and ω = 6 rad/s. Find its angular momentum (in kg m²/s).
+    answer: '12'
+    check: 2*6
+    difficulty: 2
+    hints:
+    - L = Iω.
+    - 2 × 6.
+    solution: 'Step 1: 2 × 6. Step 2: 12 kg m²/s.'
+    mistakes:
+      '36': c11p06_rot
+      '3': c11p06_rot
+  - prompt: A turntable (I = 3 kg m²) spins at 2 rad/s. A lump is dropped on it, making I = 4 kg m². New ω (in rad/s)?
+    answer: 3/2
+    check: 6/4
+    difficulty: 2
+    hints:
+    - 'No outside torque: L is conserved.'
+    - 3 × 2 = 4 × ω.
+    solution: 'Step 1: 6 = 4ω. Step 2: ω = 1.5 rad/s.'
+    mistakes:
+      8/3: c11p06_rot
+      '2': c11p06_rot
+  - prompt: 'A solid sphere of mass 5 kg and radius 0.2 m: find I about a diameter (in kg m²).'
+    answer: '0.08'
+    check: 0.4*5*0.04
+    difficulty: 3
+    hints:
+    - 'Solid sphere: ⅖MR².'
+    - R² = 0.04.
+    solution: 'Step 1: 0.4 × 5 × 0.04. Step 2: 0.08 kg m².'
+    mistakes:
+      '0.2': c11p06_rot
+      '0.1': c11p06_rot
+  - prompt: A 2 kg ring rolls without slipping at 3 m/s. Find its total KE (in J).
+    answer: '18'
+    check: 0.5*2*9+0.5*2*9
+    difficulty: 3
+    hints:
+    - Total KE = ½mv² + ½Iω².
+    - For a ring, ½Iω² = ½mv² too.
+    solution: 'Step 1: 9 + 9. Step 2: 18 J.'
+    mistakes:
+      '9': c11p06_rot
+      '27': c11p06_rot

@@ -15,6 +15,9 @@ tips:
   p11_pe_zero: "U = −GMm/r. Where does this formula give zero?"
   p11_weight_mass: "Weight W = mg, so m = W/g."
   p11_weightless: "At the space station's height, g is still about 90% of its surface value. Both astronaut and craft are falling round the Earth."
+  c11p07_inv: 'Gravity follows an inverse square: change the distance by a factor k and the force changes by 1/k².'
+  c11p07_g: g = GM/R². Weight = mg changes from place to place; mass does not.
+  c11p07_orbit: Escape speed is √2 times the low orbital speed. Orbits and escape do not depend on the satellite's own mass.
 concepts:
 - code: cbse11p.grav.law
   title: Newton's law of gravitation and g
@@ -98,6 +101,48 @@ concepts:
       - when:
           h: 0.25
         say: 'Not high enough yet: g is still 6.27.'
+  lesson:
+    - teach: 'Every two masses attract: F = Gm₁m₂/r², with G = 6.67 × 10⁻¹¹ N m² kg⁻². The force halves if one mass halves, and falls to a quarter if the distance doubles.'
+      check:
+        prompt: 'Both masses doubled, distance the same. The force becomes:'
+        options:
+        - 4 times
+        - 2 times
+        - the same
+        answer: 4 times
+        why: 'F ∝ m₁m₂: 2 × 2.'
+    - teach: 'Kepler: planets move in ellipses with the Sun at one focus; a line to the Sun sweeps equal areas in equal times; T² ∝ a³.'
+      check:
+        prompt: 'A planet moves fastest when it is:'
+        options:
+        - closest to the Sun
+        - farthest from the Sun
+        - it moves at the same speed throughout
+        answer: closest to the Sun
+        why: 'Equal areas: a shorter radius needs a longer arc.'
+    - teach: At the surface g = GM/R² ≈ 9.8 m/s². g falls with height (≈ g(1 − 2h/R)) and with depth (g(1 − d/R)), reaching zero at the centre. Mass never changes; weight mg does.
+      picture:
+        kind: compare
+        columns:
+        - title: Distance ×
+          points:
+          - '2'
+          - '3'
+          - '4'
+        - title: Force ×
+          points:
+          - 1/4
+          - 1/9
+          - 1/16
+        alt: Inverse square law.
+      check:
+        prompt: 'At depth R/2 below the surface, g is:'
+        options:
+        - g/2
+        - g/4
+        - 2g
+        answer: g/2
+        why: g(1 − ½).
   items:
   - prompt: 'If the distance between two masses is doubled, the gravitational force becomes:'
     options:
@@ -170,6 +215,111 @@ concepts:
     - Weight changes.
     solution: Mass stays the same; only weight changes.
     mistakes: {"one sixth": "p11_mass_moon", "six times": "p11_mass_moon", "zero": "p11_mass_moon"}
+  - prompt: If the distance between two masses is halved, the force becomes how many times?
+    answer: '4'
+    check: 2**2
+    difficulty: 1
+    hints:
+    - F ∝ 1/r².
+    - (1/2)² in the denominator.
+    solution: 'Step 1: r → r/2. Step 2: F × 4.'
+    mistakes:
+      '2': c11p07_inv
+      1/4: c11p07_inv
+  - prompt: 'A 70 kg astronaut goes to the Moon. Their mass there is (in kg):'
+    answer: '70'
+    check: '70'
+    difficulty: 1
+    hints:
+    - Mass is the amount of matter.
+    - It does not depend on g.
+    solution: 'Step 1: mass is unchanged. Step 2: 70 kg.'
+    mistakes:
+      '700': c11p07_g
+      '11.7': c11p07_g
+  - prompt: Kepler's second law says a planet sweeps equal ______ in equal times.
+    options:
+    - areas
+    - distances
+    - angles
+    answer: areas
+    difficulty: 1
+    hints:
+    - Picture the line from the Sun to the planet.
+    - It sweeps out a region.
+    solution: 'Step 1: law of areas. Step 2: areas.'
+    mistakes:
+      distances: c11p07_inv
+      angles: c11p07_inv
+  - prompt: An object weighs 900 N on Earth. What does it weigh at a height equal to Earth's radius (in N)?
+    answer: '225'
+    check: 900/4
+    difficulty: 2
+    hints:
+    - Its distance from Earth's centre doubles.
+    - Weight ∝ 1/r².
+    solution: 'Step 1: r → 2R, so ¼. Step 2: 225 N.'
+    mistakes:
+      '450': c11p07_inv
+      '0': c11p07_inv
+  - prompt: Find the gravitational force between two 1000 kg masses 1 m apart (G = 6.67 × 10⁻¹¹), in units of 10⁻⁵ N.
+    answer: '6.67'
+    check: '6.67'
+    difficulty: 2
+    hints:
+    - F = Gm₁m₂/r².
+    - 1000 × 1000 = 10⁶.
+    solution: 'Step 1: 6.67 × 10⁻¹¹ × 10⁶. Step 2: 6.67 × 10⁻⁵ N.'
+    mistakes:
+      '667': c11p07_inv
+      '0.667': c11p07_inv
+  - prompt: Planet A is 4 times farther from its star than planet B. T_A is how many times T_B?
+    answer: '8'
+    check: 4**1.5
+    difficulty: 2
+    hints:
+    - T² ∝ a³.
+    - T ∝ a^(3/2).
+    solution: 'Step 1: 4^(3/2). Step 2: 8.'
+    mistakes:
+      '16': c11p07_inv
+      '64': c11p07_inv
+  - prompt: 'As you go deeper into a mine, g:'
+    options:
+    - decreases
+    - increases
+    - stays the same
+    answer: decreases
+    difficulty: 2
+    hints:
+    - g(d) = g(1 − d/R).
+    - At the centre it is zero.
+    solution: 'Step 1: d grows, (1 − d/R) shrinks. Step 2: decreases.'
+    mistakes:
+      increases: c11p07_g
+      stays the same: c11p07_g
+  - prompt: A planet has twice Earth's mass and twice its radius. g there is what fraction of Earth's g?
+    answer: 1/2
+    check: 2/4
+    difficulty: 3
+    hints:
+    - g = GM/R².
+    - M × 2, R² × 4.
+    solution: 'Step 1: 2/4. Step 2: g/2.'
+    mistakes:
+      '1': c11p07_g
+      '2': c11p07_g
+  - prompt: At what height (as a fraction of R) does g fall by 1%, using g(1 − 2h/R)?
+    answer: 1/200
+    check: '0.005'
+    difficulty: 3
+    hints:
+    - 2h/R = 0.01.
+    - Solve for h/R.
+    solution: 'Step 1: 2h/R = 1/100. Step 2: h = R/200.'
+    mistakes:
+      1/100: c11p07_g
+      1/50: c11p07_g
 - code: cbse11p.grav.orbits
   title: Potential energy, escape speed and satellites
   after:
@@ -262,6 +412,46 @@ concepts:
           - 10
           - 20
         say: Earth's g is 9.8.
+  lesson:
+    - teach: Gravitational PE is U = −GMm/r, taken as zero at infinity, so it is negative everywhere else. Bound objects have negative total energy.
+      check:
+        prompt: Why is gravitational PE negative near a planet?
+        options:
+        - it is taken as zero at infinity and gravity pulls inward
+        - mass is negative
+        - g is negative
+        answer: it is taken as zero at infinity and gravity pulls inward
+        why: You must add energy to pull the body away to infinity.
+    - teach: Escape speed vₑ = √(2GM/R) = √(2gR) ≈ 11.2 km/s for Earth. It does not depend on the launched object's mass.
+      check:
+        prompt: 'A 1 kg and a 100 kg probe launched from Earth. Escape speed:'
+        options:
+        - is the same for both
+        - is greater for 100 kg
+        - is greater for 1 kg
+        answer: is the same for both
+        why: m cancels out of the energy balance.
+    - teach: A satellite at radius r moves at v = √(GM/r) with period T = 2π√(r³/GM). Near the surface v₀ = √(gR) ≈ 7.9 km/s, and vₑ = √2 v₀. Geostationary satellites orbit once in 24 h above the equator.
+      picture:
+        kind: compare
+        columns:
+        - title: Speed
+          points:
+          - orbit near surface
+          - escape
+        - title: Earth value
+          points:
+          - ≈ 7.9 km/s
+          - ≈ 11.2 km/s
+        alt: Orbital and escape speeds for Earth.
+      check:
+        prompt: 'A higher satellite orbit has:'
+        options:
+        - lower speed and longer period
+        - higher speed
+        - the same period
+        answer: lower speed and longer period
+        why: v ∝ 1/√r, T ∝ r^(3/2).
   items:
   - prompt: What is the approximate escape speed from Earth?
     options:
@@ -334,3 +524,117 @@ concepts:
     - r → ∞.
     solution: U = 0 at infinite distance; it is negative elsewhere.
     mistakes: {"at the Earth's surface": "p11_pe_zero", "at the centre of the Earth": "p11_pe_zero", "on the Moon": "p11_pe_zero"}
+  - prompt: 'Escape speed from Earth is about 11.2 km/s. A body launched at 12 km/s will:'
+    options:
+    - escape Earth's gravity
+    - go into a low orbit
+    - fall back
+    answer: escape Earth's gravity
+    difficulty: 1
+    hints:
+    - Compare with escape speed.
+    - 12 > 11.2.
+    solution: 'Step 1: speed above vₑ. Step 2: it escapes.'
+    mistakes:
+      go into a low orbit: c11p07_orbit
+      fall back: c11p07_orbit
+  - prompt: A geostationary satellite orbits above which line?
+    options:
+    - the equator
+    - the prime meridian
+    - the Tropic of Cancer
+    answer: the equator
+    difficulty: 1
+    hints:
+    - It must keep pace with Earth's spin.
+    - It stays over the same spot.
+    solution: 'Step 1: same period and direction as Earth''s spin. Step 2: above the equator.'
+    mistakes:
+      the prime meridian: c11p07_orbit
+      the Tropic of Cancer: c11p07_orbit
+  - prompt: If g = 10 m/s² and R = 6.4 × 10⁶ m, find v₀ = √(gR) in km/s.
+    answer: '8'
+    check: (10*6.4e6)**0.5/1000
+    difficulty: 1
+    hints:
+    - gR = 6.4 × 10⁷.
+    - √(6.4 × 10⁷) = 8000 m/s.
+    solution: 'Step 1: √(6.4 × 10⁷) = 8000 m/s. Step 2: 8 km/s.'
+    mistakes:
+      '11.2': c11p07_orbit
+      '64': c11p07_orbit
+  - prompt: If a planet's mass is 4 times Earth's and radius the same, its escape speed is how many times Earth's?
+    answer: '2'
+    check: 4**0.5
+    difficulty: 2
+    hints:
+    - vₑ = √(2GM/R).
+    - vₑ ∝ √M.
+    solution: 'Step 1: √4. Step 2: 2 times.'
+    mistakes:
+      '4': c11p07_orbit
+      '16': c11p07_orbit
+  - prompt: A satellite's orbit radius is made 4 times larger. Its orbital speed becomes what fraction?
+    answer: 1/2
+    check: 1/2
+    difficulty: 2
+    hints:
+    - v = √(GM/r).
+    - v ∝ 1/√r.
+    solution: 'Step 1: 1/√4. Step 2: half.'
+    mistakes:
+      1/4: c11p07_orbit
+      '2': c11p07_orbit
+  - prompt: 'The total energy of a satellite in orbit is:'
+    options:
+    - negative
+    - zero
+    - positive
+    answer: negative
+    difficulty: 2
+    hints:
+    - E = −GMm/2r.
+    - It is bound to the planet.
+    solution: 'Step 1: KE + PE = −GMm/2r. Step 2: negative.'
+    mistakes:
+      zero: c11p07_orbit
+      positive: c11p07_orbit
+  - prompt: Why does a ball released inside an orbiting space station float?
+    options:
+    - the ball and station fall together
+    - there is no gravity in orbit
+    - air holds it up
+    answer: the ball and station fall together
+    difficulty: 2
+    hints:
+    - Gravity in orbit is still large.
+    - Both share the same acceleration.
+    solution: 'Step 1: both are in free fall. Step 2: no relative motion, so it floats.'
+    mistakes:
+      there is no gravity in orbit: c11p07_orbit
+      air holds it up: c11p07_orbit
+  - prompt: 'Satellite A orbits at radius r and B at 4r. Ratio T_B : T_A?'
+    answer: '8'
+    check: 4**1.5
+    difficulty: 3
+    hints:
+    - T ∝ r^(3/2).
+    - 4^(3/2).
+    solution: 'Step 1: (4)^(3/2) = 8. Step 2: T_B = 8T_A.'
+    mistakes:
+      '4': c11p07_orbit
+      '2': c11p07_orbit
+  - prompt: How much energy is needed to move a satellite from its orbit to infinity, in terms of its orbital KE K?
+    options:
+    - K
+    - 2K
+    - K/2
+    answer: K
+    difficulty: 3
+    hints:
+    - Total energy in orbit = −K.
+    - At infinity total energy = 0.
+    solution: 'Step 1: E = −K in orbit. Step 2: add K.'
+    mistakes:
+      2K: c11p07_orbit
+      K/2: c11p07_orbit

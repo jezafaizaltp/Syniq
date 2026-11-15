@@ -14,6 +14,9 @@ tips:
   p11_shm_v: "v = ω√(A² − x²)."
   p11_spring_period: "T = 2π√(m/k), so T ∝ √m."
   p11_vmax: "v_max = Aω."
+  c11p13_shm: In SHM, speed is greatest at the middle (ωA) and acceleration is greatest at the ends (ω²A).
+  c11p13_period: 'Spring: T = 2π√(m/k). Pendulum: T = 2π√(L/g). A factor inside the square root changes T by its square root.'
+  c11p13_energy: Total energy ½kA² stays fixed; it moves between KE and PE as the body swings.
 concepts:
 - code: cbse11p.osc.shm
   title: Simple harmonic motion
@@ -93,6 +96,46 @@ concepts:
       - when:
           x: 0
         say: 'At the middle the force is zero: that''s where it moves fastest, not where it''s pulled hardest.'
+  lesson:
+    - teach: Periodic motion repeats every period T; frequency ν = 1/T in hertz. Oscillation is to-and-fro motion about a mean position, like a swing.
+      check:
+        prompt: A swing completes 1 oscillation in 4 s. Frequency?
+        options:
+        - 0.25 Hz
+        - 4 Hz
+        - 2 Hz
+        answer: 0.25 Hz
+        why: ν = 1/T.
+    - teach: In simple harmonic motion the restoring force is F = −kx, so a = −ω²x. Position x = A cos(ωt + φ), with amplitude A and ω = 2π/T. SHM is the shadow of uniform circular motion on a diameter.
+      check:
+        prompt: 'In SHM, the acceleration always points:'
+        options:
+        - towards the mean position
+        - away from the mean position
+        - along the velocity
+        answer: towards the mean position
+        why: 'a = −ω²x: opposite to displacement.'
+    - teach: 'Speed v = ω√(A² − x²): largest (ωA) at the mean position, zero at the extremes. Acceleration is largest (ω²A) at the extremes and zero at the mean position.'
+      picture:
+        kind: compare
+        columns:
+        - title: Position
+          points:
+          - mean (x = 0)
+          - extreme (x = ±A)
+        - title: Speed and acceleration
+          points:
+          - speed ωA, a = 0
+          - speed 0, a = ω²A
+        alt: Speed and acceleration at key points in SHM.
+      check:
+        prompt: A = 0.05 m, ω = 10 rad/s. Maximum speed?
+        options:
+        - 0.5 m/s
+        - 5 m/s
+        - 0.005 m/s
+        answer: 0.5 m/s
+        why: ωA = 10 × 0.05.
   items:
   - prompt: A body makes 10 oscillations in 5 s. Find its frequency (in Hz).
     answer: '2'
@@ -157,6 +200,114 @@ concepts:
     - Pulls back to the middle.
     solution: F = −kx.
     mistakes: {"constant": "p11_restoring", "proportional to velocity": "p11_restoring", "zero at the extremes": "p11_restoring"}
+  - prompt: A body makes 30 oscillations in 10 s. Find its period (in s).
+    answer: 1/3
+    check: 10/30
+    difficulty: 1
+    hints:
+    - Period = time for one oscillation.
+    - 10 ÷ 30.
+    solution: 'Step 1: 10/30. Step 2: 1/3 s.'
+    mistakes:
+      '3': c11p13_shm
+      '300': c11p13_shm
+  - prompt: A body in SHM has period 2π s. Find ω (in rad/s).
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - ω = 2π/T.
+    - 2π ÷ 2π.
+    solution: 'Step 1: 2π/2π. Step 2: 1 rad/s.'
+    mistakes:
+      '2': c11p13_shm
+      '4': c11p13_shm
+  - prompt: 'In SHM the speed is greatest:'
+    options:
+    - at the mean position
+    - at the extremes
+    - halfway to the extreme
+    answer: at the mean position
+    difficulty: 1
+    hints:
+    - v = ω√(A² − x²).
+    - When is A² − x² largest?
+    solution: 'Step 1: x = 0 gives the largest value. Step 2: mean position.'
+    mistakes:
+      at the extremes: c11p13_shm
+      halfway to the extreme: c11p13_shm
+  - prompt: A = 0.2 m, ω = 5 rad/s. Find the maximum acceleration (in m/s²).
+    answer: '5'
+    check: 25*0.2
+    difficulty: 2
+    hints:
+    - a_max = ω²A.
+    - 25 × 0.2.
+    solution: 'Step 1: ω² = 25. Step 2: 25 × 0.2 = 5 m/s².'
+    mistakes:
+      '1': c11p13_shm
+      '25': c11p13_shm
+  - prompt: A = 10 cm, ω = 3 rad/s. Find the speed when x = 6 cm (in cm/s).
+    answer: '24'
+    check: 3*(100-36)**0.5
+    difficulty: 2
+    hints:
+    - v = ω√(A² − x²).
+    - √(100 − 36) = 8.
+    solution: 'Step 1: 3 × 8. Step 2: 24 cm/s.'
+    mistakes:
+      '30': c11p13_shm
+      '12': c11p13_shm
+  - prompt: x = 4 cos(πt) cm. Find the period (in s).
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - ω is the number in front of t.
+    - T = 2π/ω.
+    solution: 'Step 1: ω = π. Step 2: T = 2 s.'
+    mistakes:
+      '4': c11p13_shm
+      1/2: c11p13_shm
+  - prompt: Which motion is periodic but NOT simple harmonic?
+    options:
+    - the Earth going round the Sun
+    - a small pendulum swing
+    - a mass bobbing on a spring
+    answer: the Earth going round the Sun
+    difficulty: 2
+    hints:
+    - SHM needs to-and-fro motion about a mean position.
+    - Which one goes round, not back and forth?
+    solution: 'Step 1: orbit repeats but has no to-and-fro restoring force ∝ x. Step 2: periodic, not SHM.'
+    mistakes:
+      a small pendulum swing: c11p13_shm
+      a mass bobbing on a spring: c11p13_shm
+  - prompt: In SHM, a = −16x (SI units). Find the period (in s).
+    options:
+    - π/2
+    - 2π
+    - π/4
+    answer: π/2
+    difficulty: 3
+    hints:
+    - a = −ω²x, so ω² = 16.
+    - T = 2π/ω.
+    solution: 'Step 1: ω = 4. Step 2: T = 2π/4 = π/2 s.'
+    mistakes:
+      2π: c11p13_shm
+      π/4: c11p13_shm
+  - prompt: Maximum speed is 1 m/s and maximum acceleration 4 m/s² in an SHM. Find the amplitude (in m).
+    answer: 1/4
+    check: 1/4
+    difficulty: 3
+    hints:
+    - ωA = 1 and ω²A = 4.
+    - 'Divide: ω = 4.'
+    solution: 'Step 1: ω = 4. Step 2: A = 1/4 m.'
+    mistakes:
+      '4': c11p13_shm
+      1/2: c11p13_shm
 - code: cbse11p.osc.systems
   title: Springs, pendulums and energy
   after:
@@ -239,6 +390,46 @@ concepts:
           - 4.8
           - 5
         say: 'Halving g doesn''t double T: T ∝ 1/√g, so g must drop to a quarter.'
+  lesson:
+    - teach: 'A mass m on a spring of constant k oscillates with T = 2π√(m/k). Heavier mass or softer spring: longer period.'
+      check:
+        prompt: 'Spring constant k is made 4 times larger. The period:'
+        options:
+        - halves
+        - doubles
+        - is 4 times
+        answer: halves
+        why: T ∝ 1/√k.
+    - teach: A simple pendulum (small swings) has T = 2π√(L/g). It does not depend on the bob's mass or (small) amplitude, which is why pendulum clocks keep time.
+      check:
+        prompt: 'A heavier bob on the same string. Period:'
+        options:
+        - stays the same
+        - increases
+        - decreases
+        answer: stays the same
+        why: Mass does not appear in T = 2π√(L/g).
+    - teach: 'Energy in SHM: PE = ½kx², KE = ½k(A² − x²), total ½kA² stays constant. Friction damps the amplitude. A driving force at the natural frequency causes resonance: a very large amplitude.'
+      picture:
+        kind: compare
+        columns:
+        - title: System
+          points:
+          - spring
+          - pendulum
+        - title: Period
+          points:
+          - 2π√(m/k)
+          - 2π√(L/g)
+        alt: Period formulas for a spring and a pendulum.
+      check:
+        prompt: 'At the mean position, the energy is:'
+        options:
+        - all kinetic
+        - all potential
+        - half and half
+        answer: all kinetic
+        why: x = 0 makes PE zero.
   items:
   - prompt: A pendulum's length is made four times larger. By what factor does its period increase?
     answer: '2'
@@ -307,3 +498,111 @@ concepts:
     - Smaller swings.
     solution: The amplitude decays.
     mistakes: {"the natural period": "p11_damped", "the mass": "p11_damped", "the spring constant": "p11_damped"}
+  - prompt: A 1 kg mass on a spring with k = 100 N/m. Find ω (in rad/s).
+    answer: '10'
+    check: (100/1)**0.5
+    difficulty: 1
+    hints:
+    - ω = √(k/m).
+    - √100.
+    solution: 'Step 1: √(100/1). Step 2: 10 rad/s.'
+    mistakes:
+      '100': c11p13_period
+      '0.1': c11p13_period
+  - prompt: A pendulum's length is made 9 times larger. Its period becomes how many times?
+    answer: '3'
+    check: 9**0.5
+    difficulty: 1
+    hints:
+    - T ∝ √L.
+    - √9.
+    solution: 'Step 1: √9. Step 2: 3 times.'
+    mistakes:
+      '9': c11p13_period
+      '81': c11p13_period
+  - prompt: 'Soldiers break step when crossing a bridge to avoid:'
+    options:
+    - resonance
+    - damping
+    - friction
+    answer: resonance
+    difficulty: 1
+    hints:
+    - Their steps act as a driving force.
+    - What happens if it matches the bridge's natural frequency?
+    solution: 'Step 1: matching frequency gives large swings. Step 2: resonance.'
+    mistakes:
+      damping: c11p13_energy
+      friction: c11p13_energy
+  - prompt: A spring (k = 200 N/m) oscillates with amplitude 0.1 m. Find the total energy (in J).
+    answer: '1'
+    check: 0.5*200*0.01
+    difficulty: 2
+    hints:
+    - E = ½kA².
+    - A² = 0.01.
+    solution: 'Step 1: ½ × 200 × 0.01. Step 2: 1 J.'
+    mistakes:
+      '10': c11p13_energy
+      '20': c11p13_energy
+  - prompt: For the same spring and amplitude, find the KE when x = 0.05 m (in J).
+    answer: '0.75'
+    check: 0.5*200*(0.01-0.0025)
+    difficulty: 2
+    hints:
+    - KE = ½k(A² − x²).
+    - 0.01 − 0.0025.
+    solution: 'Step 1: 100 × 0.0075. Step 2: 0.75 J.'
+    mistakes:
+      '0.25': c11p13_energy
+      '1': c11p13_energy
+  - prompt: A pendulum has period 2 s on Earth. On a planet with g four times larger, the period (in s)?
+    answer: '1'
+    check: 2/2
+    difficulty: 2
+    hints:
+    - T ∝ 1/√g.
+    - √4 = 2.
+    solution: 'Step 1: T ÷ 2. Step 2: 1 s.'
+    mistakes:
+      '4': c11p13_period
+      '8': c11p13_period
+  - prompt: A mass on a spring has period 1 s. A spring of the same k is joined in series (total k halves). New period (in s)?
+    options:
+    - √2
+    - '2'
+    - 1/2
+    answer: √2
+    difficulty: 2
+    hints:
+    - T ∝ 1/√k.
+    - k → k/2.
+    solution: 'Step 1: T × √2. Step 2: √2 s.'
+    mistakes:
+      '2': c11p13_period
+      1/2: c11p13_period
+  - prompt: Find the length of a pendulum with period 2 s on Earth (g = π² m/s²), in m.
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - T = 2π√(L/g).
+    - 'Square both sides: L = gT²/4π².'
+    solution: 'Step 1: L = π² × 4 / (4π²). Step 2: 1 m.'
+    mistakes:
+      '2': c11p13_period
+      '4': c11p13_period
+  - prompt: At what displacement (as a fraction of A) are KE and PE equal?
+    options:
+    - A/√2
+    - A/2
+    - A/4
+    answer: A/√2
+    difficulty: 3
+    hints:
+    - ½kx² = ½k(A² − x²).
+    - 2x² = A².
+    solution: 'Step 1: x² = A²/2. Step 2: x = A/√2.'
+    mistakes:
+      A/2: c11p13_energy
+      A/4: c11p13_energy

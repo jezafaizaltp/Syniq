@@ -15,6 +15,9 @@ tips:
   p11_v_u_at: "v = u + at with u = 0."
   p11_vt_area: "Displacement is the area under the v–t graph. Here it is a triangle: ½ × base × height."
   p11_xt_slope: "Slope = change in position ÷ change in time. Which quantity is that?"
+  c11p02_disp: Displacement is final position minus starting position, with a sign. Distance is the whole path length.
+  c11p02_graph: Slope of x–t is velocity; slope of v–t is acceleration; area under v–t is displacement.
+  c11p02_suvat: List u, v, a, s, t, mark what you know, and pick the equation without the unknown you don't need.
 concepts:
 - code: cbse11p.line.kinematics
   title: Position, velocity and acceleration
@@ -131,6 +134,48 @@ concepts:
           disp: 40
           dist: 100
         say: '+40 m ends east of the start. West is the negative direction: walk further west than east.'
+  lesson:
+    - teach: Position is measured from an origin, with a sign for direction. Displacement = final − initial position (can be negative). Distance is the total path length, never negative.
+      check:
+        prompt: A cyclist goes 6 m east, then 6 m west. Displacement?
+        options:
+        - 0 m
+        - 12 m
+        - 6 m
+        answer: 0 m
+        why: They end where they started.
+    - teach: Average velocity = displacement/time; average speed = distance/time. Velocity v = dx/dt is the slope of the x–t graph; acceleration a = dv/dt is the slope of the v–t graph.
+      check:
+        prompt: 'A straight, rising x–t line means:'
+        options:
+        - constant velocity
+        - constant acceleration
+        - at rest
+        answer: constant velocity
+        why: Constant slope means constant velocity.
+    - teach: The area under a v–t graph is the displacement. Relative velocity of B with respect to A is v_B − v_A.
+      picture:
+        kind: compare
+        columns:
+        - title: Graph
+          points:
+          - slope of x–t
+          - slope of v–t
+          - area under v–t
+        - title: Gives
+          points:
+          - velocity
+          - acceleration
+          - displacement
+        alt: What motion graphs tell you.
+      check:
+        prompt: 'v–t graph: constant 5 m/s for 6 s. Displacement?'
+        options:
+        - 30 m
+        - 11 m
+        - 5 m
+        answer: 30 m
+        why: Rectangle area 5 × 6.
   items:
   - prompt: A person walks 4 m east then 3 m west. What is the displacement (in m, east positive)?
     answer: '1'
@@ -190,6 +235,111 @@ concepts:
     - dx/dt.
     solution: Slope of x–t graph = velocity.
     mistakes: {"acceleration": "p11_xt_slope", "displacement": "p11_xt_slope", "distance": "p11_xt_slope"}
+  - prompt: A runner goes 100 m north then 40 m south. Find the displacement (in m, north positive).
+    answer: '60'
+    check: 100-40
+    difficulty: 1
+    hints:
+    - Give south a minus sign.
+    - Add with signs.
+    solution: 'Step 1: +100 − 40. Step 2: 60 m north.'
+    mistakes:
+      '140': c11p02_disp
+      '-60': c11p02_disp
+  - prompt: A car travels 120 km in 2 h. Find its average speed (in km/h).
+    answer: '60'
+    check: 120/2
+    difficulty: 1
+    hints:
+    - Average speed = distance ÷ time.
+    - Divide 120 by 2.
+    solution: 'Step 1: 120/2. Step 2: 60 km/h.'
+    mistakes:
+      '240': c11p02_disp
+      '122': c11p02_disp
+  - prompt: Velocity changes from 30 m/s to 10 m/s in 5 s. Find the acceleration (in m/s²).
+    answer: '-4'
+    check: (10-30)/5
+    difficulty: 1
+    hints:
+    - a = (v − u)/t.
+    - The car is slowing down, so expect a sign.
+    solution: 'Step 1: (10 − 30)/5. Step 2: −4 m/s².'
+    mistakes:
+      '4': c11p02_graph
+      '8': c11p02_graph
+  - prompt: 'A body goes round a circular track of radius 7 m once. Its displacement is:'
+    options:
+    - '0'
+    - 44 m
+    - 14 m
+    answer: '0'
+    difficulty: 2
+    hints:
+    - Where does it finish?
+    - Displacement only cares about start and end.
+    solution: 'Step 1: start = end. Step 2: displacement 0.'
+    mistakes:
+      44 m: c11p02_disp
+      14 m: c11p02_disp
+  - prompt: A v–t graph is a straight line from 0 to 12 m/s in 6 s. Find the displacement (in m).
+    answer: '36'
+    check: 0.5*6*12
+    difficulty: 2
+    hints:
+    - The area is a triangle.
+    - ½ × base × height.
+    solution: 'Step 1: ½ × 6 × 12. Step 2: 36 m.'
+    mistakes:
+      '72': c11p02_graph
+      '2': c11p02_graph
+  - prompt: 'The slope of a velocity–time graph gives:'
+    options:
+    - acceleration
+    - displacement
+    - speed
+    answer: acceleration
+    difficulty: 1
+    hints:
+    - Slope = change in y ÷ change in x.
+    - Change in velocity per unit time.
+    solution: 'Step 1: Δv/Δt. Step 2: acceleration.'
+    mistakes:
+      displacement: c11p02_graph
+      speed: c11p02_graph
+  - prompt: Two trains move towards each other at 40 km/h and 60 km/h. Find the speed of one relative to the other (in km/h).
+    answer: '100'
+    check: 40+60
+    difficulty: 2
+    hints:
+    - 'Opposite directions: one velocity is negative.'
+    - v_A − v_B with signs.
+    solution: 'Step 1: 40 − (−60). Step 2: 100 km/h.'
+    mistakes:
+      '20': c11p02_disp
+      '2400': c11p02_disp
+  - prompt: x = 3t² + 2t (x in m, t in s). Find the velocity at t = 2 s (in m/s).
+    answer: '14'
+    check: 6*2+2
+    difficulty: 3
+    hints:
+    - Velocity is dx/dt.
+    - Differentiate, then put t = 2.
+    solution: 'Step 1: v = 6t + 2. Step 2: 14 m/s.'
+    mistakes:
+      '16': c11p02_graph
+      '12': c11p02_graph
+  - prompt: A car drives 30 km at 30 km/h, then 30 km at 60 km/h. Find the average speed (in km/h).
+    answer: '40'
+    check: 60/(1+0.5)
+    difficulty: 3
+    hints:
+    - Average speed is total distance ÷ total time, not the average of the speeds.
+    - Find each part's time.
+    solution: 'Step 1: times 1 h and 0.5 h. Step 2: 60/1.5 = 40 km/h.'
+    mistakes:
+      '45': c11p02_disp
+      '90': c11p02_disp
 - code: cbse11p.line.equations
   title: Equations of uniformly accelerated motion
   after:
@@ -279,6 +429,42 @@ concepts:
           - 1
           - 39
         say: Not high enough yet. h = u² ÷ 20.
+  lesson:
+    - teach: 'For constant acceleration: v = u + at, s = ut + ½at², v² = u² + 2as. u is starting velocity, v final, a acceleration, s displacement, t time.'
+      check:
+        prompt: u = 4 m/s, a = 3 m/s², t = 2 s. v = ?
+        options:
+        - 10 m/s
+        - 7 m/s
+        - 12 m/s
+        answer: 10 m/s
+        why: 4 + 3 × 2.
+    - teach: Pick the equation that has your three knowns and your unknown. No time given? Use v² = u² + 2as.
+      check:
+        prompt: From rest, a = 4 m/s², over 8 m. Final speed?
+        options:
+        - 8 m/s
+        - 32 m/s
+        - 64 m/s
+        answer: 8 m/s
+        why: v² = 0 + 2 × 4 × 8 = 64.
+    - teach: 'Free fall: a = g ≈ 9.8 m/s² (often 10) downward. Thrown up at u: time to top u/g, maximum height u²/2g. At the top the velocity is zero, but the acceleration is still g.'
+      picture:
+        kind: flow
+        steps:
+        - List u, v, a, s, t
+        - Mark the unknown
+        - Choose the equation
+        - Substitute with signs
+        alt: How to choose an equation of motion.
+      check:
+        prompt: Thrown up at 30 m/s (g = 10). Time to reach the top?
+        options:
+        - 3 s
+        - 6 s
+        - 300 s
+        answer: 3 s
+        why: u/g = 30/10.
   items:
   - prompt: A car starts from rest with acceleration 2 m/s². Find its speed after 5 s (in m/s).
     answer: '10'
@@ -340,3 +526,105 @@ concepts:
     solution: The velocity is zero; acceleration is still g.
     mistakes:
       Acceleration: c11p_free_fall
+  - prompt: A bike starts from rest with acceleration 3 m/s². Find its speed after 4 s (in m/s).
+    answer: '12'
+    check: 3*4
+    difficulty: 1
+    hints:
+    - Use v = u + at.
+    - u = 0.
+    solution: 'Step 1: 0 + 3 × 4. Step 2: 12 m/s.'
+    mistakes:
+      '7': c11p02_suvat
+      '24': c11p02_suvat
+  - prompt: From rest with a = 4 m/s², how far does a car go in 3 s (in m)?
+    answer: '18'
+    check: 0.5*4*9
+    difficulty: 1
+    hints:
+    - s = ut + ½at².
+    - u = 0, so only ½at².
+    solution: 'Step 1: ½ × 4 × 9. Step 2: 18 m.'
+    mistakes:
+      '36': c11p02_suvat
+      '6': c11p02_suvat
+  - prompt: A stone is dropped from rest (g = 10 m/s²). Find its speed after 2 s (in m/s).
+    answer: '20'
+    check: 10*2
+    difficulty: 1
+    hints:
+    - 'Free fall: a = g.'
+    - v = u + gt.
+    solution: 'Step 1: 0 + 10 × 2. Step 2: 20 m/s.'
+    mistakes:
+      '5': c11p02_suvat
+      '40': c11p02_suvat
+  - prompt: A car at 30 m/s brakes to rest in 6 s. Find the deceleration (in m/s²).
+    answer: '5'
+    check: 30/6
+    difficulty: 2
+    hints:
+    - v = u + at with v = 0.
+    - Size of a is u/t.
+    solution: 'Step 1: 0 = 30 + 6a, a = −5. Step 2: deceleration 5 m/s².'
+    mistakes:
+      '180': c11p02_suvat
+      '0.2': c11p02_suvat
+  - prompt: A ball is thrown up at 15 m/s (g = 10). Find the maximum height (in m).
+    answer: '11.25'
+    check: 15**2/20
+    difficulty: 2
+    hints:
+    - At the top v = 0.
+    - H = u²/2g.
+    solution: 'Step 1: 225/20. Step 2: 11.25 m.'
+    mistakes:
+      '22.5': c11p02_suvat
+      '1.5': c11p02_suvat
+  - prompt: A car at 10 m/s accelerates at 2 m/s² for 5 s. Distance covered (in m)?
+    answer: '75'
+    check: 10*5+0.5*2*25
+    difficulty: 2
+    hints:
+    - s = ut + ½at².
+    - Both terms count here.
+    solution: 'Step 1: 50 + 25. Step 2: 75 m.'
+    mistakes:
+      '50': c11p02_suvat
+      '100': c11p02_suvat
+  - prompt: 'At the top of its flight, a ball thrown straight up has:'
+    options:
+    - zero velocity, acceleration g downward
+    - zero velocity and zero acceleration
+    - zero acceleration only
+    answer: zero velocity, acceleration g downward
+    difficulty: 2
+    hints:
+    - Gravity never switches off.
+    - Velocity changes sign at the top.
+    solution: 'Step 1: v = 0 momentarily. Step 2: a = g downward throughout.'
+    mistakes:
+      zero velocity and zero acceleration: c11p02_suvat
+      zero acceleration only: c11p02_suvat
+  - prompt: If the speed of a car doubles, its stopping distance (same braking) becomes how many times?
+    answer: '4'
+    check: 2**2
+    difficulty: 3
+    hints:
+    - Use v² = u² + 2as with v = 0.
+    - s ∝ u².
+    solution: 'Step 1: s = u²/2a. Step 2: (2u)² gives 4 times.'
+    mistakes:
+      '2': c11p02_suvat
+      '8': c11p02_suvat
+  - prompt: From rest with a = 2 m/s², how far does a body go in the 5th second (in m)?
+    answer: '9'
+    check: 0+2*(2*5-1)/2
+    difficulty: 3
+    hints:
+    - 'Distance in nth second: u + a(2n − 1)/2.'
+    - 'Or: s(5) − s(4).'
+    solution: 'Step 1: 25 − 16. Step 2: 9 m.'
+    mistakes:
+      '25': c11p02_suvat
+      '10': c11p02_suvat

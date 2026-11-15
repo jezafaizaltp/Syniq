@@ -14,6 +14,9 @@ tips:
   p11_kelvin_planck: "Kelvin–Planck is about engines. Energy conservation is the first law, not the second."
   p11_work_pv: "W = PΔV. Use the change in volume."
   p11_zeroth: "If A and B are each in thermal equilibrium with C, they share one property. A thermometer reads it."
+  c11p11_first: 'Write ΔQ = ΔU + ΔW with signs: heat in is +, work done BY the gas is +.'
+  c11p11_proc: 'Name the process first: isothermal (ΔU = 0), adiabatic (ΔQ = 0), isochoric (W = 0), isobaric (W = PΔV).'
+  c11p11_eng: 'Efficiency = useful work ÷ heat taken in. For Carnot, use kelvin temperatures: 1 − T_cold/T_hot.'
 concepts:
 - code: cbse11p.thermo.firstlaw
   title: Zeroth and first laws
@@ -100,6 +103,50 @@ concepts:
           - 50
           - 500
         say: 'Adiabatic means no heat flows: Q = 0.'
+  lesson:
+    - teach: 'Two bodies in thermal equilibrium have no net heat flow. Zeroth law: if A and B are each in equilibrium with C, they are in equilibrium with each other. That is why a thermometer works.'
+      check:
+        prompt: 'The zeroth law lets us define:'
+        options:
+        - temperature
+        - heat
+        - work
+        answer: temperature
+        why: 'Bodies in equilibrium share one property: temperature.'
+    - teach: 'First law: ΔQ = ΔU + ΔW. Heat given to a gas raises its internal energy and/or lets it do work. At constant pressure, W = PΔV; generally W is the area under the P–V graph.'
+      check:
+        prompt: Gas gets 800 J heat, does 300 J work. ΔU?
+        options:
+        - 500 J
+        - 1100 J
+        - −500 J
+        answer: 500 J
+        why: 800 − 300.
+    - teach: 'Processes: isothermal (T constant, ΔU = 0, so Q = W), adiabatic (no heat, so ΔU = −W), isochoric (V constant, W = 0, so Q = ΔU), isobaric (P constant, W = PΔV). For gases Cp − Cv = R.'
+      picture:
+        kind: compare
+        columns:
+        - title: Process
+          points:
+          - isothermal
+          - adiabatic
+          - isochoric
+          - isobaric
+        - title: Key fact
+          points:
+          - ΔU = 0
+          - ΔQ = 0
+          - W = 0
+          - W = PΔV
+        alt: The four basic thermodynamic processes.
+      check:
+        prompt: A gas is heated in a sealed rigid box. Work done by it?
+        options:
+        - zero
+        - PΔV > 0
+        - equal to the heat
+        answer: zero
+        why: Volume does not change.
   items:
   - prompt: A gas absorbs 500 J of heat and does 200 J of work. Find the change in internal energy (in J).
     answer: '300'
@@ -168,6 +215,111 @@ concepts:
     - ΔU = −ΔW, and ΔW = −400.
     solution: ΔU = +400 J.
     mistakes: {"-400": "p11_adiabatic", "0": "p11_adiabatic"}
+  - prompt: A gas absorbs 1200 J and its internal energy rises by 700 J. Find the work done by the gas (in J).
+    answer: '500'
+    check: 1200-700
+    difficulty: 1
+    hints:
+    - ΔW = ΔQ − ΔU.
+    - 1200 − 700.
+    solution: 'Step 1: 1200 − 700. Step 2: 500 J.'
+    mistakes:
+      '1900': c11p11_first
+      '-500': c11p11_first
+  - prompt: A gas at constant pressure 2 × 10⁵ Pa expands by 0.01 m³. Find the work done (in J).
+    answer: '2000'
+    check: 2e5*0.01
+    difficulty: 1
+    hints:
+    - W = PΔV.
+    - 2 × 10⁵ × 10⁻².
+    solution: 'Step 1: 2 × 10³. Step 2: 2000 J.'
+    mistakes:
+      '20000': c11p11_first
+      '200': c11p11_first
+  - prompt: 'In an adiabatic process:'
+    options:
+    - no heat enters or leaves
+    - temperature stays constant
+    - volume stays constant
+    answer: no heat enters or leaves
+    difficulty: 1
+    hints:
+    - '''Adiabatic'' means insulated.'
+    - ΔQ = 0.
+    solution: 'Step 1: ΔQ = 0. Step 2: no heat exchange.'
+    mistakes:
+      temperature stays constant: c11p11_proc
+      volume stays constant: c11p11_proc
+  - prompt: A gas expands adiabatically and does 150 J of work. Find ΔU (in J).
+    answer: '-150'
+    check: '-150'
+    difficulty: 2
+    hints:
+    - ΔQ = 0.
+    - ΔU = −ΔW.
+    solution: 'Step 1: 0 = ΔU + 150. Step 2: ΔU = −150 J.'
+    mistakes:
+      '150': c11p11_first
+      '0': c11p11_proc
+  - prompt: In an isothermal expansion an ideal gas does 400 J of work. Heat absorbed (in J)?
+    answer: '400'
+    check: '400'
+    difficulty: 2
+    hints:
+    - 'Isothermal: ΔU = 0.'
+    - So ΔQ = ΔW.
+    solution: 'Step 1: ΔU = 0. Step 2: Q = 400 J.'
+    mistakes:
+      '0': c11p11_proc
+      '-400': c11p11_first
+  - prompt: A gas is heated at constant volume with 250 J. Find ΔU (in J).
+    answer: '250'
+    check: '250'
+    difficulty: 2
+    hints:
+    - 'Isochoric: W = 0.'
+    - All heat goes into U.
+    solution: 'Step 1: W = 0. Step 2: ΔU = 250 J.'
+    mistakes:
+      '0': c11p11_proc
+      '-250': c11p11_first
+  - prompt: Which is NOT a state variable?
+    options:
+    - heat
+    - internal energy
+    - temperature
+    answer: heat
+    difficulty: 2
+    hints:
+    - A state variable depends only on the present state.
+    - Which one depends on the path taken?
+    solution: 'Step 1: heat depends on the path. Step 2: not a state variable.'
+    mistakes:
+      internal energy: c11p11_first
+      temperature: c11p11_first
+  - prompt: For a gas, Cv = 20.8 J/mol K. Find Cp (R = 8.3) in J/mol K.
+    answer: '29.1'
+    check: 20.8+8.3
+    difficulty: 3
+    hints:
+    - 'Mayer: Cp − Cv = R.'
+    - Add R.
+    solution: 'Step 1: 20.8 + 8.3. Step 2: 29.1 J/mol K.'
+    mistakes:
+      '12.5': c11p11_first
+      '20.8': c11p11_first
+  - prompt: A gas goes round a closed cycle and does 60 J of net work. Net heat absorbed (in J)?
+    answer: '60'
+    check: '60'
+    difficulty: 3
+    hints:
+    - A cycle returns to the start state.
+    - ΔU over a full cycle is 0.
+    solution: 'Step 1: ΔU = 0. Step 2: Q = W = 60 J.'
+    mistakes:
+      '0': c11p11_first
+      '-60': c11p11_first
 - code: cbse11p.thermo.secondlaw
   title: Second law and heat engines
   after:
@@ -242,6 +394,42 @@ concepts:
           th: 400
           tc: 100
         say: T_cold = 100 K gives 0.75. Efficiency is 1 − T_cold/T_hot, so T_cold must be 75% of 400.
+  lesson:
+    - teach: A heat engine takes Q₁ from a hot source, does work W, and dumps Q₂ to a cold sink. Efficiency η = W/Q₁ = 1 − Q₂/Q₁, always less than 1.
+      check:
+        prompt: Engine takes 500 J, does 100 J of work. Efficiency?
+        options:
+        - 20%
+        - 80%
+        - 5%
+        answer: 20%
+        why: 100/500.
+    - teach: 'Second law. Kelvin–Planck: no engine can turn all its heat into work. Clausius: heat will not flow from cold to hot by itself; a refrigerator needs work. Its coefficient of performance is Q₂/W.'
+      check:
+        prompt: Fridge removes 600 J using 200 J of work. COP?
+        options:
+        - '3'
+        - '0.33'
+        - '4'
+        answer: '3'
+        why: 600/200.
+    - teach: 'A Carnot engine (two isothermal + two adiabatic steps) is the most efficient possible between two temperatures: η = 1 − T₂/T₁, with T in kelvin.'
+      picture:
+        kind: flow
+        steps:
+        - Take Q₁ from hot T₁
+        - Do work W
+        - Reject Q₂ to cold T₂
+        - η = 1 − T₂/T₁
+        alt: Energy flow through a heat engine.
+      check:
+        prompt: Carnot engine between 400 K and 300 K. Efficiency?
+        options:
+        - 25%
+        - 75%
+        - 33%
+        answer: 25%
+        why: 1 − 300/400.
   items:
   - prompt: An engine takes 1000 J of heat and rejects 600 J. Find its efficiency as a percentage.
     answer: '40'
@@ -307,3 +495,108 @@ concepts:
     - Constant T, then no heat.
     solution: Two isothermals and two adiabatics.
     mistakes: {"two isobaric and two isochoric processes": "p11_carnot", "four isothermal processes": "p11_carnot", "four adiabatic processes": "p11_carnot"}
+  - prompt: An engine takes 2000 J and rejects 1500 J. Find its efficiency (%).
+    answer: '25'
+    check: (2000-1500)/2000*100
+    difficulty: 1
+    hints:
+    - W = Q₁ − Q₂.
+    - η = W/Q₁.
+    solution: 'Step 1: W = 500 J. Step 2: 500/2000 = 25%.'
+    mistakes:
+      '75': c11p11_eng
+      '33': c11p11_eng
+  - prompt: A Carnot engine works between 600 K and 300 K. Find its efficiency (%).
+    answer: '50'
+    check: (1-300/600)*100
+    difficulty: 1
+    hints:
+    - η = 1 − T₂/T₁.
+    - 300/600 = ½.
+    solution: 'Step 1: 1 − ½. Step 2: 50%.'
+    mistakes:
+      '200': c11p11_eng
+      '100': c11p11_eng
+  - prompt: 'Heat flows by itself from:'
+    options:
+    - a hotter body to a colder body
+    - a colder body to a hotter body
+    - either way equally
+    answer: a hotter body to a colder body
+    difficulty: 1
+    hints:
+    - Think of a hot cup in a cool room.
+    - Clausius statement.
+    solution: 'Step 1: spontaneous flow is downhill in temperature. Step 2: hot to cold.'
+    mistakes:
+      a colder body to a hotter body: c11p11_eng
+      either way equally: c11p11_eng
+  - prompt: A Carnot engine works between 227 °C and 27 °C. Find its efficiency (%) (use +273).
+    answer: '40'
+    check: (1-300/500)*100
+    difficulty: 2
+    hints:
+    - Convert to kelvin first.
+    - 500 K and 300 K.
+    solution: 'Step 1: 1 − 300/500. Step 2: 40%.'
+    mistakes:
+      '88': c11p11_eng
+      '60': c11p11_eng
+  - prompt: An engine of efficiency 30% does 600 J of work per cycle. Heat taken in (J)?
+    answer: '2000'
+    check: 600/0.3
+    difficulty: 2
+    hints:
+    - η = W/Q₁.
+    - Q₁ = W/η.
+    solution: 'Step 1: 600/0.3. Step 2: 2000 J.'
+    mistakes:
+      '180': c11p11_eng
+      '1400': c11p11_eng
+  - prompt: A refrigerator has COP 4 and removes 800 J from inside. Work needed (J)?
+    answer: '200'
+    check: 800/4
+    difficulty: 2
+    hints:
+    - COP = Q₂/W.
+    - W = Q₂/COP.
+    solution: 'Step 1: 800/4. Step 2: 200 J.'
+    mistakes:
+      '3200': c11p11_eng
+      '1000': c11p11_eng
+  - prompt: Can a Carnot engine be 100% efficient?
+    options:
+    - only if the cold sink were at 0 K, which cannot be reached
+    - yes, with good design
+    - yes, if friction is removed
+    answer: only if the cold sink were at 0 K, which cannot be reached
+    difficulty: 2
+    hints:
+    - η = 1 − T₂/T₁.
+    - When is T₂/T₁ zero?
+    solution: 'Step 1: needs T₂ = 0 K. Step 2: unreachable, so no.'
+    mistakes:
+      yes, with good design: c11p11_eng
+      yes, if friction is removed: c11p11_eng
+  - prompt: A Carnot engine has efficiency 25% with a sink at 300 K. Find the source temperature (K).
+    answer: '400'
+    check: 300/0.75
+    difficulty: 3
+    hints:
+    - 1 − 300/T₁ = 0.25.
+    - 300/T₁ = 0.75.
+    solution: 'Step 1: T₁ = 300/0.75. Step 2: 400 K.'
+    mistakes:
+      '375': c11p11_eng
+      '1200': c11p11_eng
+  - prompt: 'A Carnot fridge works between 270 K (inside) and 300 K (room). Its COP = T₂/(T₁ − T₂) is:'
+    answer: '9'
+    check: 270/30
+    difficulty: 3
+    hints:
+    - T₁ − T₂ = 30.
+    - 270 ÷ 30.
+    solution: 'Step 1: 270/30. Step 2: 9.'
+    mistakes:
+      '10': c11p11_eng
+      '0.9': c11p11_eng

@@ -15,6 +15,9 @@ tips:
   p11_spring_energy: "U = ½kx². Square the extension."
   p11_work: "W = F × s when force and motion are in the same direction."
   p11_work_energy: "Net work = change in KE = ½m(v² − u²). Square each speed before subtracting."
+  c11p05_work: 'Work uses only the part of the force along the motion: W = Fs cos θ. At 90° the work is zero.'
+  c11p05_ke: Kinetic energy has v squared, so square the speed before multiplying by ½m.
+  c11p05_energy: 'Track where the energy goes: lost PE becomes KE (or heat). Power is energy per second.'
 concepts:
 - code: cbse11p.wep.work
   title: Work and the work-energy theorem
@@ -119,6 +122,48 @@ concepts:
           s: 4
           c: 1
         say: '+60 J would mean friction helps the motion. It acts backwards: θ = 180°, cos θ = −1.'
+  lesson:
+    - teach: 'Work W = Fs cos θ, where θ is the angle between force and displacement. Unit: joule. Positive when the force helps the motion, negative when it opposes (friction), zero when perpendicular.'
+      check:
+        prompt: 'Carrying a bag while walking on level ground, the work done by your upward hold on the bag is:'
+        options:
+        - zero
+        - positive
+        - negative
+        answer: zero
+        why: 'The force is up, the motion is sideways: θ = 90°.'
+    - teach: 'Kinetic energy K = ½mv². Work-energy theorem: net work on a body = change in its kinetic energy.'
+      check:
+        prompt: KE of a 4 kg trolley at 5 m/s?
+        options:
+        - 50 J
+        - 10 J
+        - 100 J
+        answer: 50 J
+        why: ½ × 4 × 25.
+    - teach: For a varying force, work is the area under the F–x graph. A spring (F = −kx) stores ½kx² when stretched or squeezed by x.
+      picture:
+        kind: compare
+        columns:
+        - title: Angle θ
+          points:
+          - 0°
+          - 90°
+          - 180°
+        - title: Work
+          points:
+          - +Fs
+          - '0'
+          - −Fs
+        alt: How the angle changes the work done.
+      check:
+        prompt: Spring k = 400 N/m, squeezed 0.05 m. Energy stored?
+        options:
+        - 0.5 J
+        - 10 J
+        - 20 J
+        answer: 0.5 J
+        why: ½ × 400 × 0.0025.
   items:
   - prompt: A 20 N force moves a box 5 m in its own direction. Find the work done (in J).
     answer: '100'
@@ -180,6 +225,114 @@ concepts:
     solution: KE becomes 4 times.
     mistakes:
       2 times: c11p_ke_square
+  - prompt: A 15 N force pushes a cart 4 m in its own direction. Find the work done (in J).
+    answer: '60'
+    check: 15*4
+    difficulty: 1
+    hints:
+    - θ = 0°, cos 0° = 1.
+    - W = Fs.
+    solution: 'Step 1: 15 × 4. Step 2: 60 J.'
+    mistakes:
+      '19': c11p05_work
+      '3.75': c11p05_work
+  - prompt: Find the kinetic energy of a 0.1 kg ball at 20 m/s (in J).
+    answer: '20'
+    check: 0.5*0.1*400
+    difficulty: 1
+    hints:
+    - K = ½mv².
+    - v² = 400.
+    solution: 'Step 1: ½ × 0.1 × 400. Step 2: 20 J.'
+    mistakes:
+      '1': c11p05_ke
+      '2': c11p05_ke
+  - prompt: 'Friction does work on a sliding box. That work is:'
+    options:
+    - negative
+    - positive
+    - zero
+    answer: negative
+    difficulty: 1
+    hints:
+    - Friction points against the motion.
+    - cos 180° = −1.
+    solution: 'Step 1: θ = 180°. Step 2: W < 0.'
+    mistakes:
+      positive: c11p05_work
+      zero: c11p05_work
+  - prompt: A 40 N force at 60° to the ground pulls a sledge 5 m. Find the work done (in J).
+    answer: '100'
+    check: 40*5*0.5
+    difficulty: 2
+    hints:
+    - Use cos 60°.
+    - cos 60° = ½.
+    solution: 'Step 1: 40 × 5 × ½. Step 2: 100 J.'
+    mistakes:
+      '200': c11p05_work
+      '173': c11p05_work
+  - prompt: A 2 kg cart speeds up from 3 m/s to 5 m/s. Find the net work done on it (in J).
+    answer: '16'
+    check: 0.5*2*(25-9)
+    difficulty: 2
+    hints:
+    - Net work = change in KE.
+    - ½m(v² − u²).
+    solution: 'Step 1: 1 × (25 − 9). Step 2: 16 J.'
+    mistakes:
+      '4': c11p05_ke
+      '2': c11p05_ke
+  - prompt: A spring stores 2 J when stretched 0.1 m. Find its spring constant (in N/m).
+    answer: '400'
+    check: 2*2/0.01
+    difficulty: 2
+    hints:
+    - Energy = ½kx².
+    - Solve for k.
+    solution: 'Step 1: 2 = ½k(0.01). Step 2: k = 400 N/m.'
+    mistakes:
+      '20': c11p05_work
+      '200': c11p05_work
+  - prompt: 'A satellite moves in a circular orbit. The work done by gravity on it per round is:'
+    options:
+    - zero
+    - positive
+    - negative
+    answer: zero
+    difficulty: 2
+    hints:
+    - Gravity points to the centre.
+    - The motion is along the circle.
+    solution: 'Step 1: force ⟂ motion at every point. Step 2: W = 0.'
+    mistakes:
+      positive: c11p05_work
+      negative: c11p05_work
+  - prompt: 'Two bodies have equal momentum; one has 4 times the mass of the other. Ratio KE(heavy) : KE(light) = ?'
+    options:
+    - '1 : 4'
+    - '4 : 1'
+    - '1 : 1'
+    answer: '1 : 4'
+    difficulty: 3
+    hints:
+    - K = p²/2m.
+    - Same p, so K ∝ 1/m.
+    solution: 'Step 1: K = p²/2m. Step 2: heavy has ¼ the KE: 1 : 4.'
+    mistakes:
+      '4 : 1': c11p05_ke
+      '1 : 1': c11p05_ke
+  - prompt: Force rises steadily from 0 to 10 N over 4 m. Find the work done (in J).
+    answer: '20'
+    check: 0.5*4*10
+    difficulty: 3
+    hints:
+    - Work = area under F–x.
+    - It is a triangle.
+    solution: 'Step 1: ½ × 4 × 10. Step 2: 20 J.'
+    mistakes:
+      '40': c11p05_work
+      '10': c11p05_work
 - code: cbse11p.wep.energy
   title: Potential energy, conservation and power
   after:
@@ -283,6 +436,41 @@ concepts:
           x: 0.4
           m: 2
         say: 'Twice the mass gives 4 ÷ √2 ≈ 2.83 m/s, not half: the energy is shared out as ½mv², so v falls as 1/√m.'
+  lesson:
+    - teach: 'Gravitational potential energy near the Earth is mgh. A spring stores ½kx². These come from conservative forces: their work depends only on start and end points.'
+      check:
+        prompt: PE of a 3 kg pot on a 2 m shelf (g = 10)?
+        options:
+        - 60 J
+        - 6 J
+        - 30 J
+        answer: 60 J
+        why: 3 × 10 × 2.
+    - teach: If only conservative forces act, mechanical energy K + U stays constant. A body falling from height h reaches v = √(2gh). Friction turns some energy into heat.
+      check:
+        prompt: 'A ball dropped from 20 m (g = 10) hits the ground at:'
+        options:
+        - 20 m/s
+        - 200 m/s
+        - 10 m/s
+        answer: 20 m/s
+        why: √(2 × 10 × 20) = 20.
+    - teach: Power P = W/t = Fv, in watts. 1 kWh = 3.6 × 10⁶ J is a unit of energy. In every collision momentum is conserved; kinetic energy is conserved only in elastic ones.
+      picture:
+        kind: flow
+        steps:
+        - 'Top: all PE'
+        - 'Halfway: half PE, half KE'
+        - 'Bottom: all KE'
+        alt: Energy changing form as a body falls.
+      check:
+        prompt: A 1 kW heater runs for 3 h. Energy used?
+        options:
+        - 3 kWh
+        - 3000 kWh
+        - 0.33 kWh
+        answer: 3 kWh
+        why: 1 kW × 3 h.
   items:
   - prompt: Find the potential energy of a 2 kg ball 5 m above the ground. Take g = 10 m/s² (in J).
     answer: '100'
@@ -342,3 +530,108 @@ concepts:
     - 2000 × 15.
     solution: 30,000 W.
     mistakes: {"2015": "p11_power_fv", "133": "p11_power_fv"}
+  - prompt: Find the PE of a 50 kg climber 10 m up a wall (g = 10) (in J).
+    answer: '5000'
+    check: 50*10*10
+    difficulty: 1
+    hints:
+    - PE = mgh.
+    - 50 × 10 × 10.
+    solution: 'Step 1: mgh. Step 2: 5000 J.'
+    mistakes:
+      '500': c11p05_energy
+      '70': c11p05_energy
+  - prompt: A pump does 9000 J of work in 1 minute. Find its power (in W).
+    answer: '150'
+    check: 9000/60
+    difficulty: 1
+    hints:
+    - Power = work ÷ time in seconds.
+    - 1 minute = 60 s.
+    solution: 'Step 1: 9000/60. Step 2: 150 W.'
+    mistakes:
+      '9000': c11p05_energy
+      '540000': c11p05_energy
+  - prompt: 'The kilowatt hour is a unit of:'
+    options:
+    - energy
+    - power
+    - force
+    answer: energy
+    difficulty: 1
+    hints:
+    - kW × h.
+    - Power × time.
+    solution: 'Step 1: power × time = energy. Step 2: energy.'
+    mistakes:
+      power: c11p05_energy
+      force: c11p05_energy
+  - prompt: A ball is dropped from 45 m (g = 10). Find its speed on reaching the ground (in m/s).
+    answer: '30'
+    check: (2*10*45)**0.5
+    difficulty: 2
+    hints:
+    - mgh = ½mv².
+    - v = √(2gh).
+    solution: 'Step 1: √900. Step 2: 30 m/s.'
+    mistakes:
+      '900': c11p05_energy
+      '45': c11p05_energy
+  - prompt: A 600 W motor lifts a 30 kg load at steady speed (g = 10). Find the speed (in m/s).
+    answer: '2'
+    check: 600/300
+    difficulty: 2
+    hints:
+    - P = Fv.
+    - F = weight = 300 N.
+    solution: 'Step 1: 600 = 300v. Step 2: v = 2 m/s.'
+    mistakes:
+      '20': c11p05_energy
+      '0.5': c11p05_energy
+  - prompt: A pendulum bob passes its lowest point at 2 m/s (g = 10). How high above that point does it rise (in m)?
+    answer: '0.2'
+    check: 4/20
+    difficulty: 2
+    hints:
+    - All KE at the bottom becomes PE at the top.
+    - h = v²/2g.
+    solution: 'Step 1: 4/20. Step 2: 0.2 m.'
+    mistakes:
+      '0.4': c11p05_energy
+      '2': c11p05_energy
+  - prompt: 'In a perfectly inelastic collision (bodies stick):'
+    options:
+    - momentum is conserved but some KE is lost
+    - both momentum and KE are conserved
+    - neither is conserved
+    answer: momentum is conserved but some KE is lost
+    difficulty: 2
+    hints:
+    - Momentum is conserved in every collision.
+    - Sticking means some energy becomes heat and sound.
+    solution: 'Step 1: p conserved. Step 2: KE partly lost.'
+    mistakes:
+      both momentum and KE are conserved: c11p05_energy
+      neither is conserved: c11p05_energy
+  - prompt: A 1 kg block slides down a 5 m rough slope from rest and reaches 8 m/s at the bottom (drop 5 m, g = 10). How much energy went to friction (in J)?
+    answer: '18'
+    check: 50-32
+    difficulty: 3
+    hints:
+    - PE lost = mgh.
+    - KE gained = ½mv². The rest is heat.
+    solution: 'Step 1: PE 50 J, KE 32 J. Step 2: 18 J to friction.'
+    mistakes:
+      '32': c11p05_energy
+      '50': c11p05_energy
+  - prompt: A 2 kg ball at 4 m/s hits a 2 kg ball at rest in an elastic head-on collision. Speed of the second ball after (in m/s)?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Equal masses, elastic, head-on.
+    - They swap velocities.
+    solution: 'Step 1: equal masses exchange velocities. Step 2: 4 m/s.'
+    mistakes:
+      '2': c11p05_energy
+      '0': c11p05_energy

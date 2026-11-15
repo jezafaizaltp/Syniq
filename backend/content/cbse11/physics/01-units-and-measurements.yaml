@@ -15,6 +15,9 @@ tips:
   p11_sig_product: "When multiplying, the answer keeps as many significant figures as the least precise measurement."
   p11_sig_zeros: "Trailing zeros after a decimal point are significant: they show how precisely you measured."
   p11_units: "Joule is energy, watt power, pascal pressure. Force is named after the man of the three laws."
+  c11p01_sf: Count from the first non-zero digit. Zeros between digits count; trailing zeros after a decimal point count; leading zeros never do.
+  c11p01_unit: Write the prefix as a power of ten, then multiply or divide.
+  c11p01_dim: Replace each quantity by its dimensions in M, L and T, then collect the powers.
 concepts:
 - code: cbse11p.units.si
   title: SI units and significant figures
@@ -100,6 +103,48 @@ concepts:
       bin: Built from base units
       clue: Frequency counts per second. What unit is that?
       why: 1 Hz = 1 s⁻¹, built from the second.
+  lesson:
+    - teach: 'Every measurement is a number and a unit. SI has 7 base units: metre, kilogram, second, ampere, kelvin, mole, candela. Other units, like the newton (kg m s⁻²), are built from them.'
+      check:
+        prompt: Which of these is an SI base unit?
+        options:
+        - kelvin
+        - newton
+        - joule
+        answer: kelvin
+        why: Newton and joule are derived from base units.
+    - teach: 'Prefixes scale units by powers of ten: kilo 10³, centi 10⁻², milli 10⁻³, micro 10⁻⁶, nano 10⁻⁹. So 3 mm = 3 × 10⁻³ m.'
+      check:
+        prompt: 250 g in kilograms?
+        options:
+        - '0.25'
+        - '2.5'
+        - 250 000
+        answer: '0.25'
+        why: 1 g = 10⁻³ kg, so 250 × 10⁻³.
+    - teach: Significant figures show how precise a value is. Leading zeros never count (0.0042 has 2). In × or ÷, the answer keeps as many significant figures as the least precise value.
+      picture:
+        kind: compare
+        columns:
+        - title: Number
+          points:
+          - '0.0042'
+          - '3.00'
+          - '1205'
+        - title: Significant figures
+          points:
+          - '2'
+          - '3'
+          - '4'
+        alt: Examples of counting significant figures.
+      check:
+        prompt: Significant figures in 6.020?
+        options:
+        - '4'
+        - '3'
+        - '2'
+        answer: '4'
+        why: 6, 0, 2 and the trailing zero after the decimal point.
   items:
   - prompt: How many SI base units are there?
     answer: '7'
@@ -160,6 +205,117 @@ concepts:
     - 2.5 has 2.
     solution: 'Two significant figures: 3.1 m².'
     mistakes: {"4": "p11_sig_product", "3": "p11_sig_product"}
+  - prompt: How many significant figures are in 0.0570?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Leading zeros only place the decimal point.
+    - A trailing zero after the point does count.
+    solution: 'Step 1: digits 5, 7, 0 count. Step 2: 3.'
+    mistakes:
+      '5': c11p01_sf
+      '2': c11p01_sf
+  - prompt: Convert 3.6 km/h into m/s.
+    answer: '1'
+    check: 3.6*1000/3600
+    difficulty: 1
+    hints:
+    - 1 km = 1000 m and 1 h = 3600 s.
+    - Multiply by 1000, divide by 3600.
+    solution: 'Step 1: 3.6 × 1000 / 3600. Step 2: 1 m/s.'
+    mistakes:
+      '3.6': c11p01_unit
+      '12.96': c11p01_unit
+  - prompt: Which is the SI unit of power?
+    options:
+    - watt
+    - joule
+    - pascal
+    answer: watt
+    difficulty: 1
+    hints:
+    - Power is energy per second.
+    - J s⁻¹ has its own name.
+    solution: 'Step 1: power = J/s. Step 2: watt.'
+    mistakes:
+      joule: c11p01_unit
+      pascal: c11p01_unit
+  - prompt: Write 4500 nm in metres.
+    options:
+    - 4.5 × 10⁻⁶ m
+    - 4.5 × 10⁻⁹ m
+    - 4.5 × 10⁻³ m
+    answer: 4.5 × 10⁻⁶ m
+    difficulty: 2
+    hints:
+    - 1 nm = 10⁻⁹ m.
+    - 4500 = 4.5 × 10³.
+    solution: 'Step 1: 4.5 × 10³ × 10⁻⁹. Step 2: 4.5 × 10⁻⁶ m.'
+    mistakes:
+      4.5 × 10⁻⁹ m: c11p01_unit
+      4.5 × 10⁻³ m: c11p01_unit
+  - prompt: How many significant figures are in 3.0 × 10⁴?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - The power of ten does not add figures.
+    - Look only at 3.0.
+    solution: 'Step 1: 3.0 has 3 and a trailing 0. Step 2: 2.'
+    mistakes:
+      '5': c11p01_sf
+      '1': c11p01_sf
+  - prompt: 12.5 + 1.25 + 0.125 should be written to how many decimal places?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - For addition, look at decimal places, not significant figures.
+    - Which value has the fewest decimal places?
+    solution: 'Step 1: 12.5 has 1 decimal place. Step 2: answer 13.9 (1 place).'
+    mistakes:
+      '3': c11p01_sf
+      '2': c11p01_sf
+  - prompt: A length is 2.0 cm and a width 1.234 cm. Their product should keep how many significant figures?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - For multiplication use significant figures.
+    - Find the less precise value.
+    solution: 'Step 1: 2.0 has 2 s.f. Step 2: keep 2.'
+    mistakes:
+      '4': c11p01_sf
+      '3': c11p01_sf
+  - prompt: 1 light year is about 9.46 × 10¹⁵ m. Which unit is it a unit of?
+    options:
+    - distance
+    - time
+    - speed
+    answer: distance
+    difficulty: 1
+    hints:
+    - It is given in metres.
+    - It is how far light goes in a year.
+    solution: 'Step 1: value is in m. Step 2: a unit of distance.'
+    mistakes:
+      time: c11p01_unit
+      speed: c11p01_unit
+  - prompt: Round 2.745 to 3 significant figures (round 5 to the even digit).
+    options:
+    - '2.74'
+    - '2.75'
+    - '2.7'
+    answer: '2.74'
+    difficulty: 3
+    hints:
+    - Keep 2, 7, 4 and look at the next digit.
+    - With a 5 followed by nothing, the kept digit ends even.
+    solution: 'Step 1: next digit is 5, kept digit 4 is even. Step 2: 2.74.'
+    mistakes:
+      '2.75': c11p01_sf
+      '2.7': c11p01_sf
 - code: cbse11p.units.dims
   title: Dimensions and dimensional analysis
   after:
@@ -237,6 +393,48 @@ concepts:
       bin: '[L T⁻¹]'
       clue: It's a speed. What are speed's dimensions?
       why: Any speed is [L T⁻¹], however large.
+  lesson:
+    - teach: Dimensions show how a quantity is built from mass [M], length [L] and time [T]. Speed = length/time, so [LT⁻¹]. Acceleration [LT⁻²]. Force = mass × acceleration = [MLT⁻²].
+      check:
+        prompt: Dimensions of momentum (mass × velocity)?
+        options:
+        - '[MLT⁻¹]'
+        - '[MLT⁻²]'
+        - '[ML²T⁻¹]'
+        answer: '[MLT⁻¹]'
+        why: '[M] × [LT⁻¹].'
+    - teach: 'Principle of homogeneity: every term in a correct equation has the same dimensions. So you can check an equation: v = u + at works because at has [LT⁻²][T] = [LT⁻¹].'
+      check:
+        prompt: Which term could be added to a length?
+        options:
+        - ½at²
+        - at
+        - a/t
+        answer: ½at²
+        why: '[LT⁻²][T²] = [L].'
+    - teach: Dimensional analysis can derive relations (pendulum T ∝ √(l/g)) and convert units, but it cannot find pure numbers like 2π, and fails for sums or for sin, log and exp.
+      picture:
+        kind: compare
+        columns:
+        - title: Can do
+          points:
+          - check equations
+          - convert units
+          - guess relations
+        - title: Cannot do
+          points:
+          - find 2π or ½
+          - handle sin or log
+          - tell apart equal-dimension quantities
+        alt: What dimensional analysis can and cannot do.
+      check:
+        prompt: 'Dimensional analysis cannot give:'
+        options:
+        - the 2π in T = 2π√(l/g)
+        - that T depends on l and g
+        - the unit of T
+        answer: the 2π in T = 2π√(l/g)
+        why: 2π has no dimensions.
   items:
   - prompt: What are the dimensions of force?
     options:
@@ -317,3 +515,123 @@ concepts:
     - Limitation.
     solution: Pure-number constants can't be found by dimensions.
     mistakes: {"whether an equation is consistent": "p11_dims_limit", "how to convert units": "p11_dims_limit", "the form of a simple relation": "p11_dims_limit"}
+  - prompt: What are the dimensions of work?
+    options:
+    - '[ML²T⁻²]'
+    - '[MLT⁻²]'
+    - '[ML²T⁻³]'
+    answer: '[ML²T⁻²]'
+    difficulty: 1
+    hints:
+    - Work = force × distance.
+    - Multiply [MLT⁻²] by [L].
+    solution: 'Step 1: [MLT⁻²][L]. Step 2: [ML²T⁻²].'
+    mistakes:
+      '[MLT⁻²]': c11p01_dim
+      '[ML²T⁻³]': c11p01_dim
+  - prompt: What are the dimensions of power?
+    options:
+    - '[ML²T⁻³]'
+    - '[ML²T⁻²]'
+    - '[MLT⁻³]'
+    answer: '[ML²T⁻³]'
+    difficulty: 1
+    hints:
+    - Power = work / time.
+    - Divide [ML²T⁻²] by [T].
+    solution: 'Step 1: [ML²T⁻²]/[T]. Step 2: [ML²T⁻³].'
+    mistakes:
+      '[ML²T⁻²]': c11p01_dim
+      '[MLT⁻³]': c11p01_dim
+  - prompt: Which quantity has no dimensions?
+    options:
+    - refractive index
+    - density
+    - momentum
+    answer: refractive index
+    difficulty: 1
+    hints:
+    - Look for a ratio of two similar things.
+    - It is a ratio of two speeds.
+    solution: 'Step 1: n = c/v is speed ÷ speed. Step 2: no dimensions.'
+    mistakes:
+      density: c11p01_dim
+      momentum: c11p01_dim
+  - prompt: In [MᵃLᵇTᶜ] for energy, what is c?
+    answer: '-2'
+    check: '-2'
+    difficulty: 2
+    hints:
+    - Energy has the same dimensions as work.
+    - Look at the power of T.
+    solution: 'Step 1: energy [ML²T⁻²]. Step 2: c = −2.'
+    mistakes:
+      '2': c11p01_dim
+      '-1': c11p01_dim
+  - prompt: Which equation is dimensionally WRONG?
+    options:
+    - v² = u² + 2at
+    - v = u + at
+    - s = ut + ½at²
+    answer: v² = u² + 2at
+    difficulty: 2
+    hints:
+    - Check each term's dimensions.
+    - Does 2at have the same dimensions as v²?
+    solution: 'Step 1: at is [LT⁻¹], but v² is [L²T⁻²]. Step 2: that equation is wrong.'
+    mistakes:
+      v = u + at: c11p01_dim
+      s = ut + ½at²: c11p01_dim
+  - prompt: Dimensions of pressure (force per area)?
+    options:
+    - '[ML⁻¹T⁻²]'
+    - '[MLT⁻²]'
+    - '[ML²T⁻²]'
+    answer: '[ML⁻¹T⁻²]'
+    difficulty: 2
+    hints:
+    - Area is [L²].
+    - Divide force by [L²].
+    solution: 'Step 1: [MLT⁻²]/[L²]. Step 2: [ML⁻¹T⁻²].'
+    mistakes:
+      '[MLT⁻²]': c11p01_dim
+      '[ML²T⁻²]': c11p01_dim
+  - prompt: Which two quantities have the same dimensions?
+    options:
+    - work and torque
+    - force and power
+    - speed and acceleration
+    answer: work and torque
+    difficulty: 2
+    hints:
+    - Both are a force multiplied by a length.
+    - Write each in M, L and T.
+    solution: 'Step 1: both are [ML²T⁻²]. Step 2: work and torque.'
+    mistakes:
+      force and power: c11p01_dim
+      speed and acceleration: c11p01_dim
+  - prompt: If T ∝ lᵃgᵇ for a pendulum, find a (l is length, g is acceleration).
+    answer: 1/2
+    check: 1/2
+    difficulty: 3
+    hints:
+    - '[T] = [L]ᵃ[LT⁻²]ᵇ.'
+    - Match powers of T first, then L.
+    solution: 'Step 1: T: −2b = 1, b = −½. Step 2: L: a + b = 0, a = ½.'
+    mistakes:
+      -1/2: c11p01_dim
+      '1': c11p01_dim
+  - prompt: Dimensions of the gravitational constant G in F = Gm₁m₂/r²?
+    options:
+    - '[M⁻¹L³T⁻²]'
+    - '[ML³T⁻²]'
+    - '[M⁻²L²T⁻²]'
+    answer: '[M⁻¹L³T⁻²]'
+    difficulty: 3
+    hints:
+    - 'Make G the subject: G = Fr²/(m₁m₂).'
+    - Put in [MLT⁻²][L²]/[M²].
+    solution: 'Step 1: [MLT⁻²][L²][M⁻²]. Step 2: [M⁻¹L³T⁻²].'
+    mistakes:
+      '[ML³T⁻²]': c11p01_dim
+      '[M⁻²L²T⁻²]': c11p01_dim

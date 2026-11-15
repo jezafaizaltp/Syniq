@@ -15,6 +15,9 @@ tips:
   p11_ke_temp: "Average KE = (3/2)kT. Only one variable appears."
   p11_mean_free: "'Free path' is how far a molecule goes freely before it hits another."
   p11_moles: "Moles = mass ÷ molar mass."
+  c11p12_gas: Use kelvin. Write which quantity is fixed, then use PV = constant, V/T = constant or P/T = constant.
+  c11p12_ke: Average KE ∝ T, so v_rms ∝ √T. Double the kelvin temperature and v_rms grows by √2, not 2.
+  c11p12_dof: 'Count the ways a molecule can store energy: 3 to move, plus 2 to spin for a diatomic. Each gets ½k_BT.'
 concepts:
 - code: cbse11p.kinetic.gas
   title: Ideal gas and pressure of a gas
@@ -113,6 +116,48 @@ concepts:
           t: 450
           v: 10
         say: 'At constant pressure the gas expands as it warms: V rises in step with T in kelvin.'
+  lesson:
+    - teach: 'An ideal gas obeys PV = μRT (μ moles, R = 8.314 J/mol K, T in kelvin). Keep T fixed: PV constant (Boyle). Keep P fixed: V ∝ T (Charles). Keep V fixed: P ∝ T.'
+      check:
+        prompt: 'Pressure doubles at fixed temperature. Volume:'
+        options:
+        - halves
+        - doubles
+        - stays the same
+        answer: halves
+        why: PV stays constant.
+    - teach: 'Kinetic theory pictures a gas as tiny molecules in random motion, with elastic collisions and no forces between them except while colliding. Their hits on the walls make pressure: P = ⅓nmv̄².'
+      check:
+        prompt: 'Gas pressure comes from:'
+        options:
+        - molecules hitting the walls
+        - the weight of the gas
+        - forces between molecules
+        answer: molecules hitting the walls
+        why: Each bounce changes momentum and pushes the wall.
+    - teach: 'Real gases behave most like ideal gases at low pressure and high temperature, when molecules are far apart and fast. Dalton: total pressure of a mixture = sum of partial pressures.'
+      picture:
+        kind: compare
+        columns:
+        - title: Held fixed
+          points:
+          - T
+          - P
+          - V
+        - title: Law
+          points:
+          - PV = constant
+          - V/T = constant
+          - P/T = constant
+        alt: Gas laws by which quantity is fixed.
+      check:
+        prompt: A mixture has partial pressures 0.3 atm and 0.5 atm. Total?
+        options:
+        - 0.8 atm
+        - 0.2 atm
+        - 0.15 atm
+        answer: 0.8 atm
+        why: Add them.
   items:
   - prompt: A gas at 2 atm occupies 6 L. At the same temperature, what is its volume (in L) at 3 atm?
     answer: '4'
@@ -177,6 +222,111 @@ concepts:
     - 1 × 600/300.
     solution: 2 atm.
     mistakes: {"1": "p11_gay_lussac", "0.5": "p11_gay_lussac", "4": "p11_gay_lussac"}
+  - prompt: A gas at 1 atm occupies 12 L. At the same temperature, find its volume at 4 atm (in L).
+    answer: '3'
+    check: 12/4
+    difficulty: 1
+    hints:
+    - 'Boyle: P₁V₁ = P₂V₂.'
+    - 12 = 4V.
+    solution: 'Step 1: 12/4. Step 2: 3 L.'
+    mistakes:
+      '48': c11p12_gas
+      '9': c11p12_gas
+  - prompt: How many moles are in 64 g of oxygen gas (O₂, molar mass 32 g/mol)?
+    answer: '2'
+    check: 64/32
+    difficulty: 1
+    hints:
+    - Moles = mass ÷ molar mass.
+    - 64 ÷ 32.
+    solution: 'Step 1: 64/32. Step 2: 2 mol.'
+    mistakes:
+      '4': c11p12_gas
+      '0.5': c11p12_gas
+  - prompt: 'In the ideal gas equation, temperature must be in:'
+    options:
+    - kelvin
+    - degrees Celsius
+    - degrees Fahrenheit
+    answer: kelvin
+    difficulty: 1
+    hints:
+    - V ∝ T must give V = 0 at T = 0.
+    - Which scale starts at absolute zero?
+    solution: 'Step 1: gas laws use absolute temperature. Step 2: kelvin.'
+    mistakes:
+      degrees Celsius: c11p12_gas
+      degrees Fahrenheit: c11p12_gas
+  - prompt: A gas has 2 L at 27 °C. At constant pressure, find its volume at 177 °C (in L).
+    answer: '3'
+    check: 2*450/300
+    difficulty: 2
+    hints:
+    - 'Convert to kelvin: 300 K and 450 K.'
+    - V ∝ T.
+    solution: 'Step 1: 2 × 450/300. Step 2: 3 L.'
+    mistakes:
+      '13.1': c11p12_gas
+      '1.33': c11p12_gas
+  - prompt: A sealed tyre at 2 atm warms from 300 K to 330 K. New pressure (atm)?
+    answer: '2.2'
+    check: 2*330/300
+    difficulty: 2
+    hints:
+    - 'Fixed volume: P ∝ T.'
+    - Multiply by 330/300.
+    solution: 'Step 1: 2 × 1.1. Step 2: 2.2 atm.'
+    mistakes:
+      '2.03': c11p12_gas
+      '1.82': c11p12_gas
+  - prompt: Using PV = μRT, how many moles of gas are in 8.314 × 10⁻³ m³ at 10⁵ Pa and 300 K?
+    answer: 1/3
+    check: 100/300
+    difficulty: 2
+    hints:
+    - μ = PV/RT.
+    - PV = 831.4 J.
+    solution: 'Step 1: 831.4/(8.314 × 300) = 100/300. Step 2: 1/3 mol.'
+    mistakes:
+      '3': c11p12_gas
+      '100': c11p12_gas
+  - prompt: Which is NOT an assumption of kinetic theory?
+    options:
+    - molecules attract each other strongly
+    - collisions are elastic
+    - molecules move randomly
+    answer: molecules attract each other strongly
+    difficulty: 2
+    hints:
+    - Ideal-gas molecules ignore each other between hits.
+    - Which statement brings in forces?
+    solution: 'Step 1: no intermolecular forces assumed. Step 2: that option is not an assumption.'
+    mistakes:
+      collisions are elastic: c11p12_gas
+      molecules move randomly: c11p12_gas
+  - prompt: A gas at 300 K and 1 atm is compressed to half its volume and heated to 600 K. New pressure (atm)?
+    answer: '4'
+    check: 1*2*600/300
+    difficulty: 3
+    hints:
+    - PV/T is constant.
+    - P₂ = P₁ × (V₁/V₂) × (T₂/T₁).
+    solution: 'Step 1: 1 × 2 × 2. Step 2: 4 atm.'
+    mistakes:
+      '1': c11p12_gas
+      '2': c11p12_gas
+  - prompt: Air is 4/5 nitrogen and 1/5 oxygen by molecules. At 1 atm total, the partial pressure of oxygen (atm)?
+    answer: '0.2'
+    check: 1/5
+    difficulty: 3
+    hints:
+    - Partial pressure ∝ share of molecules.
+    - One fifth of 1 atm.
+    solution: 'Step 1: 1/5 × 1 atm. Step 2: 0.2 atm.'
+    mistakes:
+      '0.8': c11p12_gas
+      '0.25': c11p12_gas
 - code: cbse11p.kinetic.energy
   title: Kinetic energy, equipartition and mean free path
   after:
@@ -257,6 +407,46 @@ concepts:
           t: 300
           m: 14
         say: '14 is one N atom. Nitrogen gas is N₂: 28 g/mol.'
+  lesson:
+    - teach: The average kinetic energy of a gas molecule is (3/2)k_B T. Temperature is a measure of this average molecular KE. Different gases at the same T have the same average KE per molecule.
+      check:
+        prompt: 'Kelvin temperature doubles. Average molecular KE:'
+        options:
+        - doubles
+        - is four times
+        - is √2 times
+        answer: doubles
+        why: KE ∝ T.
+    - teach: 'rms speed v_rms = √(3RT/M): lighter molecules and hotter gases move faster. Since v ∝ √T, four times the temperature gives twice the speed.'
+      check:
+        prompt: At the same temperature, which moves faster on average?
+        options:
+        - hydrogen
+        - oxygen
+        - both the same
+        answer: hydrogen
+        why: Smaller M, larger √(3RT/M).
+    - teach: 'Equipartition: each degree of freedom gets ½k_B T. Monatomic: 3 (Cv = 3R/2, γ = 5/3). Diatomic at room temperature: 5 (Cv = 5R/2, γ = 7/5). Mean free path is the average distance between collisions.'
+      picture:
+        kind: compare
+        columns:
+        - title: Gas
+          points:
+          - monatomic
+          - diatomic
+        - title: f, Cv, γ
+          points:
+          - 3, 3R/2, 5/3
+          - 5, 5R/2, 7/5
+        alt: Degrees of freedom and specific heats.
+      check:
+        prompt: Degrees of freedom of N₂ at room temperature?
+        options:
+        - '5'
+        - '3'
+        - '6'
+        answer: '5'
+        why: 3 to move plus 2 to rotate.
   items:
   - prompt: The rms speed of a gas is 400 m/s at 300 K. What is it (in m/s) at 1200 K?
     answer: '800'
@@ -325,3 +515,114 @@ concepts:
     - Average.
     solution: It's the average distance travelled between collisions.
     mistakes: {"the size of a molecule": "p11_mean_free", "the length of the container": "p11_mean_free", "the distance travelled in one second": "p11_mean_free"}
+  - prompt: v_rms of a gas is 300 m/s at 200 K. Find it at 800 K (in m/s).
+    answer: '600'
+    check: 300*2
+    difficulty: 1
+    hints:
+    - v ∝ √T.
+    - T × 4 means v × 2.
+    solution: 'Step 1: √4 = 2. Step 2: 600 m/s.'
+    mistakes:
+      '1200': c11p12_ke
+      '424': c11p12_ke
+  - prompt: 'γ for a diatomic gas at room temperature is:'
+    options:
+    - 7/5
+    - 5/3
+    - 4/3
+    answer: 7/5
+    difficulty: 1
+    hints:
+    - Cv = 5R/2, Cp = 7R/2.
+    - γ = Cp/Cv.
+    solution: 'Step 1: (7R/2)/(5R/2). Step 2: 7/5.'
+    mistakes:
+      5/3: c11p12_dof
+      4/3: c11p12_dof
+  - prompt: 'At absolute zero, ideal-gas molecular KE would be:'
+    options:
+    - zero
+    - maximum
+    - unchanged
+    answer: zero
+    difficulty: 1
+    hints:
+    - KE = (3/2)k_B T.
+    - Put T = 0.
+    solution: 'Step 1: T = 0. Step 2: KE = 0.'
+    mistakes:
+      maximum: c11p12_ke
+      unchanged: c11p12_ke
+  - prompt: Ratio of v_rms of hydrogen (M = 2) to oxygen (M = 32) at the same temperature?
+    answer: '4'
+    check: (32/2)**0.5
+    difficulty: 2
+    hints:
+    - v ∝ 1/√M.
+    - √(32/2).
+    solution: 'Step 1: √16. Step 2: 4.'
+    mistakes:
+      '16': c11p12_ke
+      1/4: c11p12_ke
+  - prompt: Find the average KE of one molecule at 300 K (k_B = 1.38 × 10⁻²³ J/K), in units of 10⁻²¹ J.
+    answer: '6.21'
+    check: 1.5*1.38e-23*300/1e-21
+    difficulty: 2
+    hints:
+    - KE = (3/2)k_B T.
+    - 1.5 × 1.38 × 300 × 10⁻²³.
+    solution: 'Step 1: 621 × 10⁻²³ J. Step 2: 6.21 × 10⁻²¹ J.'
+    mistakes:
+      '4.14': c11p12_ke
+      '12.42': c11p12_ke
+  - prompt: 'Cv for a monatomic ideal gas, in units of R:'
+    answer: 3/2
+    check: 3/2
+    difficulty: 2
+    hints:
+    - f = 3.
+    - Cv = (f/2)R.
+    solution: 'Step 1: f/2 = 3/2. Step 2: 3R/2.'
+    mistakes:
+      5/2: c11p12_dof
+      '3': c11p12_dof
+  - prompt: 'Two gases at the same temperature have the same:'
+    options:
+    - average KE per molecule
+    - rms speed
+    - density
+    answer: average KE per molecule
+    difficulty: 2
+    hints:
+    - KE depends only on T.
+    - Speed also depends on molecular mass.
+    solution: 'Step 1: (3/2)k_B T is the same. Step 2: same average KE.'
+    mistakes:
+      rms speed: c11p12_ke
+      density: c11p12_ke
+  - prompt: 'Molar specific heat of a solid by Dulong–Petit, in units of R:'
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Each atom vibrates in 3 directions.
+    - 'Each vibration has KE and PE: 2 × ½k_BT per direction.'
+    solution: 'Step 1: 3 × k_BT per atom. Step 2: Cv = 3R.'
+    mistakes:
+      3/2: c11p12_dof
+      5/2: c11p12_dof
+  - prompt: 'If gas density n doubles at the same temperature, the mean free path:'
+    options:
+    - halves
+    - doubles
+    - stays the same
+    answer: halves
+    difficulty: 3
+    hints:
+    - l = 1/(√2 nπd²).
+    - l ∝ 1/n.
+    solution: 'Step 1: n × 2. Step 2: l ÷ 2.'
+    mistakes:
+      doubles: c11p12_ke
+      stays the same: c11p12_ke

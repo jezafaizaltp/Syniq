@@ -15,6 +15,9 @@ tips:
   p11_radiation: "Space between the Sun and Earth is nearly empty. Which kind of heat transfer needs no medium?"
   p11_volume_exp: "A cube grows in length, width and height, each by α."
   p11_water_anomaly: "Water shrinks as it cools, until just above freezing, when it starts to expand again. That's why lakes freeze from the top."
+  c11p10_scale: Use F = 9C/5 + 32 and K = C + 273. Do the multiplication before adding 32.
+  c11p10_exp: Expansion = coefficient × original size × temperature change. Area uses 2α, volume uses 3α.
+  c11p10_heat: Q = mcΔT warms; Q = mL changes state with no temperature change. In mixing, heat lost = heat gained.
 concepts:
 - code: cbse11p.thermal.expansion
   title: Temperature and thermal expansion
@@ -96,6 +99,48 @@ concepts:
           - 100
           - 110
         say: Water would be boiling. 300 K is about room temperature.
+  lesson:
+    - teach: 'Temperature tells how hot something is; heat is energy that flows because of a temperature difference. Scales: F = 9C/5 + 32, and K = C + 273.15. Absolute zero is 0 K = −273.15 °C.'
+      check:
+        prompt: Convert 37 °C to Fahrenheit.
+        options:
+        - 98.6 °F
+        - 66.6 °F
+        - 310 °F
+        answer: 98.6 °F
+        why: 9 × 37 / 5 + 32.
+    - teach: 'Most solids expand when heated: ΔL = αLΔT. Area grows with 2α and volume with γ = 3α. Gaps in rail tracks and sagging power lines allow for this.'
+      check:
+        prompt: Rod 2 m, α = 1.2 × 10⁻⁵ /°C, heated 100 °C. ΔL?
+        options:
+        - 2.4 mm
+        - 24 mm
+        - 0.24 mm
+        answer: 2.4 mm
+        why: 1.2 × 10⁻⁵ × 2 × 100 = 2.4 × 10⁻³ m.
+    - teach: 'Water is unusual: between 0 °C and 4 °C it contracts when heated, so it is densest at 4 °C. Ponds freeze from the top and the water below stays liquid for fish.'
+      picture:
+        kind: compare
+        columns:
+        - title: Expansion
+          points:
+          - length
+          - area
+          - volume
+        - title: Coefficient
+          points:
+          - α
+          - 2α
+          - 3α
+        alt: Linear, area and volume expansion coefficients.
+      check:
+        prompt: 'Water at 4 °C is cooled to 2 °C. Its volume:'
+        options:
+        - increases
+        - decreases
+        - stays the same
+        answer: increases
+        why: Below 4 °C water expands as it cools.
   items:
   - prompt: Convert 100 °C to Fahrenheit.
     answer: '212'
@@ -160,6 +205,114 @@ concepts:
     - Each grows by α.
     solution: γ = 3α.
     mistakes: {"α": "p11_volume_exp", "2α": "p11_volume_exp", "α/3": "p11_volume_exp"}
+  - prompt: Convert 50 °C to Fahrenheit.
+    answer: '122'
+    check: 9*50/5+32
+    difficulty: 1
+    hints:
+    - F = 9C/5 + 32.
+    - 9 × 50 ÷ 5 = 90.
+    solution: 'Step 1: 90 + 32. Step 2: 122 °F.'
+    mistakes:
+      '90': c11p10_scale
+      '82': c11p10_scale
+  - prompt: Convert 0 K to Celsius (use 273).
+    answer: '-273'
+    check: '-273'
+    difficulty: 1
+    hints:
+    - C = K − 273.
+    - 0 − 273.
+    solution: 'Step 1: 0 − 273. Step 2: −273 °C.'
+    mistakes:
+      '273': c11p10_scale
+      '0': c11p10_scale
+  - prompt: Why are small gaps left between railway rails?
+    options:
+    - to allow for expansion in heat
+    - to save steel
+    - to drain rain water
+    answer: to allow for expansion in heat
+    difficulty: 1
+    hints:
+    - Rails get hot in summer.
+    - Hot steel gets longer.
+    solution: 'Step 1: rails expand when hot. Step 2: gaps prevent buckling.'
+    mistakes:
+      to save steel: c11p10_exp
+      to drain rain water: c11p10_exp
+  - prompt: Convert 212 °F to Celsius.
+    answer: '100'
+    check: (212-32)*5/9
+    difficulty: 2
+    hints:
+    - Subtract 32 first.
+    - Then multiply by 5/9.
+    solution: 'Step 1: 180 × 5/9. Step 2: 100 °C.'
+    mistakes:
+      '117.8': c11p10_scale
+      '180': c11p10_scale
+  - prompt: A 5 m steel rail (α = 1.2 × 10⁻⁵ /°C) warms by 40 °C. Find its increase in length (in mm).
+    answer: '2.4'
+    check: 1.2e-5*5*40*1000
+    difficulty: 2
+    hints:
+    - ΔL = αLΔT.
+    - Convert metres to mm at the end.
+    solution: 'Step 1: 1.2 × 10⁻⁵ × 5 × 40 = 2.4 × 10⁻³ m. Step 2: 2.4 mm.'
+    mistakes:
+      '24': c11p10_exp
+      '0.24': c11p10_exp
+  - prompt: A metal has α = 2 × 10⁻⁵ /K. What is its volume coefficient γ?
+    options:
+    - 6 × 10⁻⁵ /K
+    - 2 × 10⁻⁵ /K
+    - 4 × 10⁻⁵ /K
+    answer: 6 × 10⁻⁵ /K
+    difficulty: 2
+    hints:
+    - γ = 3α for solids.
+    - 3 × 2.
+    solution: 'Step 1: 3 × 2 × 10⁻⁵. Step 2: 6 × 10⁻⁵ /K.'
+    mistakes:
+      2 × 10⁻⁵ /K: c11p10_exp
+      4 × 10⁻⁵ /K: c11p10_exp
+  - prompt: Why do lakes freeze from the top down?
+    options:
+    - water is densest at 4 °C, so colder water stays on top
+    - ice is heavier than water
+    - the bottom is warmed by fish
+    answer: water is densest at 4 °C, so colder water stays on top
+    difficulty: 2
+    hints:
+    - Dense water sinks.
+    - Which temperature is densest?
+    solution: 'Step 1: 4 °C water sinks. Step 2: colder, lighter water freezes on top.'
+    mistakes:
+      ice is heavier than water: c11p10_exp
+      the bottom is warmed by fish: c11p10_exp
+  - prompt: A metal plate of area 1 m² (α = 1.5 × 10⁻⁵ /°C) is heated by 100 °C. Find its increase in area (in cm²).
+    answer: '30'
+    check: 2*1.5e-5*1*100*10000
+    difficulty: 3
+    hints:
+    - ΔA = 2αAΔT.
+    - 1 m² = 10⁴ cm².
+    solution: 'Step 1: 3 × 10⁻³ m². Step 2: 30 cm².'
+    mistakes:
+      '15': c11p10_exp
+      '45': c11p10_exp
+  - prompt: A temperature difference of 25 °C equals how many kelvin?
+    answer: '25'
+    check: '25'
+    difficulty: 3
+    hints:
+    - Kelvin and Celsius degrees are the same size.
+    - Only the starting point differs.
+    solution: 'Step 1: a change is not shifted by 273. Step 2: 25 K.'
+    mistakes:
+      '298': c11p10_scale
+      '45': c11p10_scale
 - code: cbse11p.thermal.heat
   title: Specific heat, latent heat and heat transfer
   after:
@@ -279,6 +432,48 @@ concepts:
           b: 2
           tb: 20
         say: 'Masses swapped: it''s 2 kg of hot water and 3 kg of cold.'
+  lesson:
+    - teach: 'Specific heat capacity c is the heat to warm 1 kg by 1 K: Q = mcΔT. Water''s c (≈ 4200 J/kg K) is very high, so it heats and cools slowly; that keeps coastal climates mild.'
+      check:
+        prompt: Heat to warm 1 kg of water by 5 °C (c = 4200)?
+        options:
+        - 21 000 J
+        - 840 J
+        - 4205 J
+        answer: 21 000 J
+        why: 1 × 4200 × 5.
+    - teach: 'During melting or boiling, heat changes the state without changing temperature: Q = mL. Ice: L_f ≈ 3.3 × 10⁵ J/kg. In a mixture, heat lost by the hot body = heat gained by the cold one.'
+      check:
+        prompt: 'While ice is melting at 0 °C, its temperature:'
+        options:
+        - stays 0 °C
+        - rises steadily
+        - falls
+        answer: stays 0 °C
+        why: The heat goes into changing state.
+    - teach: 'Heat travels by conduction (through solids, H = KAΔT/L), convection (moving fluid, sea breezes) and radiation (no medium needed, Sun''s heat). Newton''s law of cooling: cooling rate ∝ temperature difference with the surroundings.'
+      picture:
+        kind: compare
+        columns:
+        - title: Way
+          points:
+          - conduction
+          - convection
+          - radiation
+        - title: Example
+          points:
+          - hot spoon handle
+          - sea breeze
+          - sunlight
+        alt: Three ways heat moves.
+      check:
+        prompt: 'Heat reaches you from a campfire mainly by:'
+        options:
+        - radiation
+        - conduction
+        - convection
+        answer: radiation
+        why: It crosses the air directly; hot air rises away from you.
   items:
   - prompt: How much heat (in J) warms 2 kg of water by 10 °C? (c = 4200 J/kg°C)
     answer: '84000'
@@ -347,3 +542,111 @@ concepts:
     - Small difference, slow cooling.
     solution: Rate of cooling ∝ (T − T_surroundings).
     mistakes: {"the mass of the body": "p11_cooling", "time": "p11_cooling", "the square of temperature": "p11_cooling"}
+  - prompt: Find the heat needed to warm 0.5 kg of water from 20 °C to 100 °C (c = 4200) (in J).
+    answer: '168000'
+    check: 0.5*4200*80
+    difficulty: 1
+    hints:
+    - ΔT = 80.
+    - Q = mcΔT.
+    solution: 'Step 1: 0.5 × 4200 × 80. Step 2: 168 000 J.'
+    mistakes:
+      '210000': c11p10_heat
+      '42000': c11p10_heat
+  - prompt: 'Sea breeze during the day is an example of:'
+    options:
+    - convection
+    - conduction
+    - radiation
+    answer: convection
+    difficulty: 1
+    hints:
+    - Air moves.
+    - Warm air over land rises.
+    solution: 'Step 1: moving air carries heat. Step 2: convection.'
+    mistakes:
+      conduction: c11p10_heat
+      radiation: c11p10_heat
+  - prompt: Find the heat to melt 2 kg of ice at 0 °C (L = 3.3 × 10⁵ J/kg) (in J).
+    answer: '660000'
+    check: 2*3.3e5
+    difficulty: 1
+    hints:
+    - Q = mL.
+    - No temperature change.
+    solution: 'Step 1: 2 × 3.3 × 10⁵. Step 2: 6.6 × 10⁵ J.'
+    mistakes:
+      '165000': c11p10_heat
+      '330000': c11p10_heat
+  - prompt: 2 kg of water at 60 °C is mixed with 1 kg of water at 30 °C. Find the final temperature (°C).
+    answer: '50'
+    check: (2*60+1*30)/3
+    difficulty: 2
+    hints:
+    - Heat lost = heat gained.
+    - 'Same c cancels: mass-weighted average.'
+    solution: 'Step 1: (120 + 30)/3. Step 2: 50 °C.'
+    mistakes:
+      '45': c11p10_heat
+      '40': c11p10_heat
+  - prompt: A 0.5 kg metal block absorbs 4500 J and warms by 10 °C. Find its specific heat (in J/kg °C).
+    answer: '900'
+    check: 4500/(0.5*10)
+    difficulty: 2
+    hints:
+    - c = Q/(mΔT).
+    - mΔT = 5.
+    solution: 'Step 1: 4500/5. Step 2: 900 J/kg °C.'
+    mistakes:
+      '450': c11p10_heat
+      '22500': c11p10_heat
+  - prompt: Why does a pressure cooker cook food faster?
+    options:
+    - higher pressure raises the boiling point of water
+    - it makes water boil at a lower temperature
+    - steel conducts heat better
+    answer: higher pressure raises the boiling point of water
+    difficulty: 2
+    hints:
+    - Boiling point depends on pressure.
+    - Hotter water cooks faster.
+    solution: 'Step 1: pressure up, boiling point up. Step 2: food gets hotter water.'
+    mistakes:
+      it makes water boil at a lower temperature: c11p10_heat
+      steel conducts heat better: c11p10_heat
+  - prompt: A cup of tea cools from 80 °C in a 20 °C room. When will it cool fastest?
+    options:
+    - at the start, when it is hottest
+    - at the end
+    - at the same rate throughout
+    answer: at the start, when it is hottest
+    difficulty: 2
+    hints:
+    - Cooling rate ∝ difference with surroundings.
+    - When is the difference biggest?
+    solution: 'Step 1: difference largest at 80 °C. Step 2: fastest at the start.'
+    mistakes:
+      at the end: c11p10_heat
+      at the same rate throughout: c11p10_heat
+  - prompt: A copper rod 0.5 m long, area 10⁻⁴ m², K = 400 W/m K, has ends at 100 °C and 0 °C. Find the heat flow (in W).
+    answer: '8'
+    check: 400*1e-4*100/0.5
+    difficulty: 3
+    hints:
+    - H = KAΔT/L.
+    - 400 × 10⁻⁴ × 100 / 0.5.
+    solution: 'Step 1: 4/0.5. Step 2: 8 W.'
+    mistakes:
+      '2': c11p10_heat
+      '4': c11p10_heat
+  - prompt: Heat (in J) to turn 0.1 kg of ice at 0 °C into water at 20 °C? (L = 3.3 × 10⁵ J/kg, c = 4200)
+    answer: '41400'
+    check: 0.1*3.3e5+0.1*4200*20
+    difficulty: 3
+    hints:
+    - 'Two steps: melt, then warm.'
+    - Add mL and mcΔT.
+    solution: 'Step 1: 33 000 + 8400. Step 2: 41 400 J.'
+    mistakes:
+      '33000': c11p10_heat
+      '8400': c11p10_heat
