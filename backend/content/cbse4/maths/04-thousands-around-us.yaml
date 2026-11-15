@@ -8,6 +8,10 @@ tips:
   m4_hundreds: "Count in hundreds: 100, 200, ... up to 1000. How many steps?"
   m4_largest_4digit: "The largest digit is 9. Put it in every place."
   m4_one_more: "2,999 + 1: the 9s all roll over, like a car's meter."
+  c4m4_place: 'Write the number in a place chart: Th | H | T | O. Which column is the digit in?'
+  c4m4_carry: Work from the ones place leftwards. When a place reaches 10 or more, carry 1 to the next place.
+  c4m4_borrow: Start at the ones. If the top digit is smaller, borrow 1 from the next place to make 10 more.
+  c4m4_compare: 'Compare digits from the left: thousands first, then hundreds, and so on.'
 concepts:
 - code: cbse4m.thou.place
   title: Numbers up to 9999
@@ -99,6 +103,60 @@ concepts:
       - when:
           val: 1374
         say: Close! Put 4 before 7.
+  lesson:
+    - teach: 10 ones make a ten, 10 tens make a hundred, and 10 hundreds make a thousand (1,000). Each place is 10 times the place to its right.
+      check:
+        prompt: How many tens make one hundred?
+        options:
+        - '10'
+        - '100'
+        - '1'
+        answer: '10'
+        why: 10 tens = 100.
+    - teach: 'A 4-digit number has thousands, hundreds, tens and ones. 3,452 = 3 thousands + 4 hundreds + 5 tens + 2 ones = 3000 + 400 + 50 + 2. A zero keeps an empty place: 4,027 has no hundreds.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: Th
+        - size: 1
+          label: H
+        - size: 1
+          label: T
+        - size: 1
+          label: O
+        rows:
+        - size: 1
+          label: 3,452
+        - size: 1
+          label: 4,027
+        cells:
+        - - '3'
+          - '4'
+          - '5'
+          - '2'
+        - - '4'
+          - '0'
+          - '2'
+          - '7'
+        alt: 'Place chart: 3,452 is 3 thousands, 4 hundreds, 5 tens, 2 ones; 4,027 is 4 thousands, 0 hundreds, 2 tens, 7 ones.'
+      check:
+        prompt: What is the value of 5 in 3,452?
+        options:
+        - '50'
+        - '5'
+        - '500'
+        answer: '50'
+        why: '5 is in the tens place: 5 tens = 50.'
+    - teach: 'To compare 4-digit numbers, start from the left. 4,120 vs 4,098: thousands are equal (4), hundreds 1 vs 0, so 4,120 is bigger. The smallest 4-digit number is 1,000; the largest is 9,999.'
+      check:
+        prompt: 'Which is bigger: 6,301 or 6,130?'
+        options:
+        - 6,301
+        - 6,130
+        - they are equal
+        answer: 6,301
+        why: Thousands equal; hundreds 3 is more than 1.
   items:
   - prompt: What is the value of 4 in 3,452?
     answer: '400'
@@ -161,6 +219,115 @@ concepts:
     - It rolls over.
     solution: 2,999 + 1 = 3,000.
     mistakes: {"2100": "m4_one_more", "3999": "m4_one_more"}
+  - prompt: 'Write the number: 5 thousands + 3 hundreds + 0 tens + 8 ones.'
+    answer: '5308'
+    check: 5000+300+8
+    difficulty: 1
+    hints:
+    - 'Put each digit in its place: Th, H, T, O.'
+    - A zero fills the empty tens place.
+    solution: 'Step 1: 5000 + 300 + 0 + 8. Step 2: = 5,308.'
+    mistakes:
+      '538': c4m4_place
+      '5380': c4m4_place
+  - prompt: What is the value of 7 in 7,215?
+    answer: '7000'
+    check: 7*1000
+    difficulty: 1
+    hints:
+    - Which place is the 7 in?
+    - It is the leftmost of four digits.
+    solution: 'Step 1: 7 is in the thousands place. Step 2: Value = 7 × 1000 = 7,000.'
+    mistakes:
+      '7': c4m4_place
+      '700': c4m4_place
+  - prompt: What number is 1 less than 4,000?
+    answer: '3999'
+    check: 4000-1
+    difficulty: 2
+    hints:
+    - Going back from a round thousand changes many digits.
+    - What comes just before 4,000 when counting?
+    solution: 'Step 1: 4,000 − 1. Step 2: = 3,999.'
+    mistakes:
+      '3000': c4m4_borrow
+      '4001': c4m4_borrow
+      '3900': c4m4_borrow
+  - prompt: What is 100 more than 2,950?
+    answer: '3050'
+    check: 2950+100
+    difficulty: 2
+    hints:
+    - Add 1 to the hundreds digit.
+    - 9 hundreds + 1 hundred makes 10 hundreds.
+    solution: 'Step 1: 2,950 + 100. Step 2: = 3,050.'
+    mistakes:
+      '2960': c4m4_place
+      '3950': c4m4_place
+      '2050': c4m4_place
+  - prompt: Which is the smallest?
+    options:
+    - 3,089
+    - 3,098
+    - 3,809
+    answer: 3,089
+    difficulty: 2
+    hints:
+    - All start with 3 thousands.
+    - Compare hundreds, then tens.
+    solution: 'Step 1: 3,809 has 8 hundreds, the others 0. Step 2: 3,089 vs 3,098: tens 8 < 9, so 3,089 is smallest.'
+    mistakes:
+      3,098: c4m4_compare
+      3,809: c4m4_compare
+  - prompt: What is the smallest 4-digit number?
+    answer: '1000'
+    check: '1000'
+    difficulty: 1
+    hints:
+    - It needs 4 digits.
+    - The first digit cannot be 0.
+    solution: 'Step 1: The first digit must be at least 1. Step 2: Then the smallest is 1,000.'
+    mistakes:
+      '0001': c4m4_place
+      '999': c4m4_place
+      '1111': c4m4_place
+  - prompt: Using the digits 7, 2, 9, 4 once each, what is the biggest 4-digit number?
+    answer: '9742'
+    check: '9742'
+    difficulty: 3
+    hints:
+    - Put the biggest digit in the biggest place.
+    - Then the next biggest, and so on.
+    solution: 'Step 1: Order the digits from biggest: 9, 7, 4, 2. Step 2: The number is 9,742.'
+    mistakes:
+      '2479': c4m4_compare
+      '7294': c4m4_compare
+      '9724': c4m4_compare
+  - prompt: How many hundreds are there in 4,000?
+    answer: '40'
+    check: 4000//100
+    difficulty: 3
+    hints:
+    - 1,000 = 10 hundreds.
+    - There are 4 thousands.
+    solution: 'Step 1: Each thousand is 10 hundreds. Step 2: 4 × 10 = 40 hundreds.'
+    mistakes:
+      '4': c4m4_place
+      '400': c4m4_place
+  - prompt: A stadium has 6,045 seats. How is this read?
+    options:
+    - six thousand forty-five
+    - six thousand four hundred five
+    - six hundred forty-five
+    answer: six thousand forty-five
+    difficulty: 2
+    hints:
+    - The hundreds digit is 0.
+    - Read thousands, then the tens and ones.
+    solution: 'Step 1: 6 thousands, 0 hundreds, 4 tens, 5 ones. Step 2: Read: six thousand forty-five.'
+    mistakes:
+      six thousand four hundred five: c4m4_place
+      six hundred forty-five: c4m4_place
 - code: cbse4m.thou.addsub
   title: Adding and taking away bigger numbers
   after:
@@ -225,6 +392,42 @@ concepts:
       bin: '2635'
       clue: 5 + 0, 6 + 7 (carry), 3 + 2 + 1, 1 + 1.
       why: '2635.'
+  lesson:
+    - teach: To add big numbers, line up the places and start from the ones. If a place adds to 10 or more, write the ones digit and carry 1 to the next place.
+      check:
+        prompt: In 1,346 + 1,227, the ones are 6 + 7 = 13. What do you write in the ones place?
+        options:
+        - '3'
+        - '13'
+        - '1'
+        answer: '3'
+        why: Write 3 and carry 1 ten to the tens place.
+    - teach: 'To take away, also start from the ones. If the top digit is too small, borrow 1 from the next place: that adds 10 to the place you are working on. 5,000 − 1,250 = 3,750.'
+      picture:
+        kind: flow
+        steps:
+        - Line up Th H T O
+        - Start at the ones
+        - Too small? Borrow 1 from the left (+10)
+        - Move left place by place
+        alt: Steps for subtracting 4-digit numbers with borrowing.
+      check:
+        prompt: What is 3,000 − 1?
+        options:
+        - 2,999
+        - 2,000
+        - 3,001
+        answer: 2,999
+        why: Borrowing passes through every zero, leaving 9s.
+    - teach: 'Estimate to check: round to the nearest hundred or thousand. 2,980 + 1,020 is about 3,000 + 1,000 = 4,000. If your answer is far from the estimate, check again.'
+      check:
+        prompt: About how much is 4,910 + 2,080?
+        options:
+        - about 7,000
+        - about 6,000
+        - about 9,000
+        answer: about 7,000
+        why: Round to 5,000 + 2,000 = 7,000.
   items:
   - prompt: What is 2,345 + 1,278?
     answer: '3623'
@@ -285,3 +488,113 @@ concepts:
     - 3,000 + 1,000.
     solution: About 3,000 + 1,000 = 4,000.
     mistakes: {"about 3,000": "m5_estimate"}
+  - prompt: What is 3,456 + 2,378?
+    answer: '5834'
+    check: 3456+2378
+    difficulty: 2
+    hints:
+    - 'Start at the ones: 6 + 8.'
+    - Remember each carry.
+    solution: 'Step 1: Ones 6+8 = 14 (write 4, carry 1); tens 5+7+1 = 13 (write 3, carry 1). Step 2: Hundreds 4+3+1 = 8; thousands 3+2 = 5. Answer 5,834.'
+    mistakes:
+      '5724': c4m4_carry
+      '5734': c4m4_carry
+      '5824': c4m4_carry
+  - prompt: What is 6,000 − 2,345?
+    answer: '3655'
+    check: 6000-2345
+    difficulty: 3
+    hints:
+    - Borrowing must go through all the zeros.
+    - 6,000 can be seen as 5 thousands, 9 hundreds, 9 tens, 10 ones.
+    solution: 'Step 1: 6,000 = 5 Th 9 H 9 T 10 O. Step 2: 10−5=5, 9−4=5, 9−3=6, 5−2=3: 3,655.'
+    mistakes:
+      '4345': c4m4_borrow
+      '3665': c4m4_borrow
+      '4665': c4m4_borrow
+  - prompt: A library had 2,450 books. It bought 875 more. How many books now?
+    answer: '3325'
+    check: 2450+875
+    difficulty: 2
+    hints:
+    - Bought more means add.
+    - 'Line up the places carefully: 875 has no thousands.'
+    solution: 'Step 1: 2,450 + 875. Step 2: = 3,325.'
+    mistakes:
+      '3225': c4m4_carry
+      '2325': c4m4_carry
+      '11200': c4m4_place
+  - prompt: A train has 1,200 seats. 965 are filled. How many are empty?
+    answer: '235'
+    check: 1200-965
+    difficulty: 2
+    hints:
+    - Empty = total − filled.
+    - Borrow across the zeros.
+    solution: 'Step 1: 1,200 − 965. Step 2: = 235.'
+    mistakes:
+      '335': c4m4_borrow
+      '245': c4m4_borrow
+      '2165': c4m4_borrow
+  - prompt: What is 4,999 + 1?
+    answer: '5000'
+    check: 4999+1
+    difficulty: 1
+    hints:
+    - The ones become 10.
+    - Every 9 carries over.
+    solution: 'Step 1: Each 9 + carry makes 10. Step 2: 4,999 + 1 = 5,000.'
+    mistakes:
+      '4000': c4m4_carry
+      '49910': c4m4_carry
+      '4990': c4m4_carry
+  - prompt: Which is the best estimate for 5,120 − 2,890?
+    options:
+    - about 2,000
+    - about 8,000
+    - about 4,000
+    answer: about 2,000
+    difficulty: 2
+    hints:
+    - Round each number to the nearest thousand.
+    - Then take away.
+    solution: 'Step 1: 5,120 ≈ 5,000 and 2,890 ≈ 3,000. Step 2: 5,000 − 3,000 = 2,000.'
+    mistakes:
+      about 8,000: c4m4_borrow
+      about 4,000: c4m4_borrow
+  - prompt: A farmer picked 1,375 mangoes on Monday and 1,625 on Tuesday. How many in all?
+    answer: '3000'
+    check: 1375+1625
+    difficulty: 2
+    hints:
+    - Add place by place.
+    - 5 + 5 in the ones starts a chain of carries.
+    solution: 'Step 1: 1,375 + 1,625. Step 2: = 3,000.'
+    mistakes:
+      '2990': c4m4_carry
+      '2900': c4m4_carry
+      '2000': c4m4_carry
+  - prompt: Leela has ₹2,500 and buys a cycle for ₹1,850. How much is left?
+    answer: '650'
+    check: 2500-1850
+    difficulty: 2
+    hints:
+    - Left over means take away.
+    - Start at the ones and borrow when needed.
+    solution: 'Step 1: ₹2,500 − ₹1,850. Step 2: = ₹650.'
+    mistakes:
+      '750': c4m4_borrow
+      '1650': c4m4_borrow
+      '1350': c4m4_borrow
+  - prompt: 'Find the missing number: 2,600 + ___ = 4,000'
+    answer: '1400'
+    check: 4000-2600
+    difficulty: 3
+    hints:
+    - Missing part = total − known part.
+    - Count up from 2,600 to 3,000, then to 4,000.
+    solution: 'Step 1: 2,600 → 3,000 is 400; 3,000 → 4,000 is 1,000. Step 2: 400 + 1,000 = 1,400.'
+    mistakes:
+      '6600': c4m4_borrow
+      '2400': c4m4_borrow
+      '1600': c4m4_borrow

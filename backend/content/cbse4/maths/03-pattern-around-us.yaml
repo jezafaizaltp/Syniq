@@ -11,6 +11,9 @@ tips:
   m4_odd: "Odd numbers end in 1, 3, 5, 7 or 9."
   m4_odd_odd: "Try it: 1 + 1, 3 + 5, 7 + 9. Are the answers odd or even?"
   m4_repeating: "A repeating pattern uses the same group again and again."
+  c4m3_core: Find the smallest part that keeps repeating. Put a line after each copy, then see what starts next.
+  c4m3_rule: Find the change from one number to the next. Is it the same each time? Add, take away, or double?
+  c4m3_oddeven: 'Look only at the last digit: 0, 2, 4, 6, 8 means even; 1, 3, 5, 7, 9 means odd.'
 concepts:
 - code: cbse4m.pat.shapes
   title: Shape and colour patterns
@@ -67,6 +70,42 @@ concepts:
       - when:
           v: 8
         say: That's 2 repeats. You need 4.
+  lesson:
+    - teach: 'A repeating pattern has a core: the smallest part that repeats. In red, blue, red, blue the core is red-blue. To continue a pattern, find the core and repeat it.'
+      check:
+        prompt: What is the core of ★ ● ● ★ ● ● ★ ● ●?
+        options:
+        - ★ ● ●
+        - ★ ●
+        - ● ●
+        answer: ★ ● ●
+        why: ★ ● ● repeats three times.
+    - teach: 'Mark the core with lines: ★●● | ★●● | ★●● |. After the last line, the core starts again from its first item.'
+      picture:
+        kind: flow
+        steps:
+        - ★ ● ●
+        - ★ ● ●
+        - ★ ● ●
+        - ★ ...
+        alt: The core star-dot-dot repeated three times, then starting again with a star.
+      check:
+        prompt: 'What comes next: A A B A A B A A ...?'
+        options:
+        - B
+        - A
+        - C
+        answer: B
+        why: The core is A A B; after A A comes B.
+    - teach: 'Patterns can also turn. An arrow points up, right, down, left, then up again: each step is a quarter turn clockwise. Patterns are in rangoli, sari borders and floor tiles.'
+      check:
+        prompt: An arrow points right, down, left, up, right, ... What comes next?
+        options:
+        - down
+        - up
+        - left
+        answer: down
+        why: It turns a quarter turn clockwise each time; after right comes down.
   items:
   - prompt: 'What comes next: red, blue, red, blue, red, ...?'
     options:
@@ -143,6 +182,122 @@ concepts:
     solution: After two filled beads comes an empty one.
     mistakes:
       ●: c4_rule
+  - prompt: In the bead pattern red, red, yellow, red, red, yellow, ... what colour is the 9th bead?
+    options:
+    - yellow
+    - red
+    - green
+    answer: yellow
+    difficulty: 3
+    hints:
+    - The core has 3 beads.
+    - 'Which positions end a core: 3, 6, 9 ...?'
+    solution: 'Step 1: The core red-red-yellow has 3 beads; every 3rd bead is yellow. Step 2: 9 = 3 × 3, so the 9th is yellow.'
+    mistakes:
+      red: c4m3_core
+      green: c4m3_core
+  - prompt: How many items are in the core of 1, 2, 3, 4, 1, 2, 3, 4, ...?
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Where does the pattern start again?
+    - Count the items before it repeats.
+    solution: 'Step 1: After 4 it starts again at 1. Step 2: The core 1, 2, 3, 4 has 4 items.'
+    mistakes:
+      '2': c4m3_core
+      '8': c4m3_core
+  - prompt: 'What comes next: ○ □ △ ○ □ △ ○ □ ...?'
+    options:
+    - △
+    - ○
+    - □
+    answer: △
+    difficulty: 1
+    hints:
+    - Find the core of 3 shapes.
+    - After ○ □ comes ...
+    solution: 'Step 1: The core is ○ □ △. Step 2: After ○ □ comes △.'
+    mistakes:
+      ○: c4m3_core
+      □: c4m3_core
+  - prompt: 'A border has the core: flower, leaf, leaf. How many leaves are there in 4 cores?'
+    answer: '8'
+    check: 2*4
+    difficulty: 2
+    hints:
+    - How many leaves are in one core?
+    - Repeat that 4 times.
+    solution: 'Step 1: One core has 2 leaves. Step 2: 2 × 4 = 8 leaves.'
+    mistakes:
+      '4': c4m3_core
+      '12': c4m3_core
+      '6': c4m3_core
+  - prompt: Which of these is NOT a repeating pattern?
+    options:
+    - cat, dog, cow, fish
+    - up, down, up, down
+    - 1, 0, 1, 0
+    answer: cat, dog, cow, fish
+    difficulty: 2
+    hints:
+    - A repeating pattern must start again.
+    - Which list never repeats anything?
+    solution: 'Step 1: up-down and 1-0 repeat. Step 2: cat, dog, cow, fish never repeats.'
+    mistakes:
+      up, down, up, down: c4m3_core
+      1, 0, 1, 0: c4m3_core
+  - prompt: An arrow turns a quarter turn clockwise each step. It starts pointing up. Where does it point after 2 steps?
+    options:
+    - down
+    - right
+    - left
+    answer: down
+    difficulty: 2
+    hints:
+    - Step 1 goes from up to right.
+    - Turn one more quarter.
+    solution: 'Step 1: Up → right. Step 2: Right → down.'
+    mistakes:
+      right: c4m3_core
+      left: c4m3_core
+  - prompt: A tile row goes blue, white, blue, white, ... The row has 10 tiles. How many are blue?
+    answer: '5'
+    check: 10//2
+    difficulty: 2
+    hints:
+    - The core has 2 tiles.
+    - How many cores fit in 10 tiles?
+    solution: 'Step 1: 10 tiles make 5 cores of blue-white. Step 2: Each core has 1 blue, so 5 blue tiles.'
+    mistakes:
+      '10': c4m3_core
+      '4': c4m3_core
+      '6': c4m3_core
+  - prompt: 'What comes next: ▲ ▲ ▼ ▲ ▲ ▼ ▲ ...?'
+    options:
+    - ▲
+    - ▼
+    - ■
+    answer: ▲
+    difficulty: 1
+    hints:
+    - The core has 3 shapes.
+    - After the first ▲ of a core, what comes?
+    solution: 'Step 1: The core is ▲ ▲ ▼. Step 2: A new core started with ▲, so ▲ comes next.'
+    mistakes:
+      ▼: c4m3_core
+      ■: c4m3_core
+  - prompt: Clap, clap, stamp, clap, clap, stamp. How many claps are there in 5 cores?
+    answer: '10'
+    check: 2*5
+    difficulty: 3
+    hints:
+    - Count the claps in one core.
+    - Multiply by the number of cores.
+    solution: 'Step 1: One core has 2 claps. Step 2: 2 × 5 = 10 claps.'
+    mistakes:
+      '15': c4m3_core
+      '5': c4m3_core
 - code: cbse4m.pat.numbers
   title: Number patterns
   after:
@@ -218,6 +373,47 @@ concepts:
       - when:
           v: 12
         say: 'Each number doubles: 8 + 8.'
+  lesson:
+    - teach: 'A number pattern follows a rule. Find the rule by checking how each number changes into the next. 5, 10, 15, 20: each time add 5, so 25 comes next.'
+      check:
+        prompt: What is the rule in 4, 8, 12, 16?
+        options:
+        - add 4
+        - add 2
+        - double
+        answer: add 4
+        why: 8 − 4 = 4, 12 − 8 = 4, 16 − 12 = 4.
+    - teach: 'Rules can also take away or double. 50, 45, 40: take away 5. 3, 6, 12, 24: double each time. Always check the rule on more than one pair.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 25
+        step: 5
+        jumps:
+        - from: 3
+          to: 6
+        - from: 6
+          to: 12
+        - from: 12
+          to: 24
+        alt: Jumps on a number line from 3 to 6 to 12 to 24, each jump twice as long.
+      check:
+        prompt: 'What comes next: 2, 4, 8, 16, ...?'
+        options:
+        - '32'
+        - '18'
+        - '20'
+        answer: '32'
+        why: 'The rule is double: 16 × 2 = 32.'
+    - teach: Even numbers end in 0, 2, 4, 6 or 8; odd numbers end in 1, 3, 5, 7 or 9. Odd + odd = even, even + even = even, odd + even = odd.
+      check:
+        prompt: Is 7 + 9 odd or even?
+        options:
+        - even
+        - odd
+        - neither
+        answer: even
+        why: Odd + odd always gives even (7 + 9 = 16).
   items:
   - prompt: 'What comes next: 5, 10, 15, 20, ...?'
     answer: '25'
@@ -283,3 +479,111 @@ concepts:
     - 70 − 10.
     solution: 70 − 10 = 60.
     mistakes: {"80": "m5_pattern_rule", "69": "m5_pattern_rule"}
+  - prompt: 'What comes next: 12, 15, 18, 21, ...?'
+    answer: '24'
+    check: 21+3
+    difficulty: 1
+    hints:
+    - How much is added each time?
+    - Add the same amount to 21.
+    solution: 'Step 1: The rule is add 3. Step 2: 21 + 3 = 24.'
+    mistakes:
+      '22': c4m3_rule
+      '23': c4m3_rule
+      '25': c4m3_rule
+  - prompt: 'What comes next: 64, 32, 16, 8, ...?'
+    answer: '4'
+    check: 8//2
+    difficulty: 2
+    hints:
+    - Each number is smaller. By taking away, or by halving?
+    - Check 64 → 32 and 32 → 16.
+    solution: 'Step 1: Each number is half the one before. Step 2: Half of 8 is 4.'
+    mistakes:
+      '0': c4m3_rule
+      '6': c4m3_rule
+  - prompt: 'What is the missing number: 7, 14, ___, 28, 35?'
+    answer: '21'
+    check: 14+7
+    difficulty: 2
+    hints:
+    - Find the rule from 7 to 14.
+    - Check it with 28 to 35.
+    solution: 'Step 1: The rule is add 7. Step 2: 14 + 7 = 21.'
+    mistakes:
+      '20': c4m3_rule
+      '22': c4m3_rule
+  - prompt: Which number is even?
+    options:
+    - '58'
+    - '43'
+    - '71'
+    answer: '58'
+    difficulty: 1
+    hints:
+    - Only the last digit matters.
+    - Which last digit is in 0, 2, 4, 6, 8?
+    solution: 'Step 1: Last digits are 8, 3, 1. Step 2: 8 is even, so 58 is even.'
+    mistakes:
+      '43': c4m3_oddeven
+      '71': c4m3_oddeven
+  - prompt: 'Even + odd always gives:'
+    options:
+    - an odd number
+    - an even number
+    - zero
+    answer: an odd number
+    difficulty: 2
+    hints:
+    - Try 4 + 3.
+    - Try 10 + 5 too.
+    solution: 'Step 1: 4 + 3 = 7 and 10 + 5 = 15. Step 2: Both are odd, so even + odd is odd.'
+    mistakes:
+      an even number: c4m3_oddeven
+      zero: c4m3_oddeven
+  - prompt: Bus tickets go 1001, 1003, 1005, 1007, ... What is the next ticket?
+    answer: '1009'
+    check: 1007+2
+    difficulty: 2
+    hints:
+    - How much do the numbers grow each time?
+    - Add the same amount to the last ticket.
+    solution: 'Step 1: The rule is add 2. Step 2: 1007 + 2 = 1009.'
+    mistakes:
+      '1008': c4m3_rule
+      '1010': c4m3_rule
+  - prompt: 'Each week Arun saves ₹10 more than the week before: ₹10, ₹20, ₹30, ... How much in week 6?'
+    answer: '60'
+    check: 10*6
+    difficulty: 2
+    hints:
+    - Write the weeks 1 to 6 under the amounts.
+    - Week number × 10.
+    solution: 'Step 1: Week 1 ₹10, week 2 ₹20, so week n is n × 10. Step 2: 6 × 10 = ₹60.'
+    mistakes:
+      '50': c4m3_rule
+      '70': c4m3_rule
+  - prompt: How many odd numbers are there from 1 to 20?
+    answer: '10'
+    check: 20//2
+    difficulty: 3
+    hints:
+    - Numbers go odd, even, odd, even ...
+    - In 20 numbers, half are odd.
+    solution: 'Step 1: Odd and even take turns. Step 2: Half of 20 is 10 odd numbers.'
+    mistakes:
+      '20': c4m3_oddeven
+      '9': c4m3_oddeven
+      '11': c4m3_oddeven
+  - prompt: 'What comes next: 1, 4, 9, 16, ...?'
+    answer: '25'
+    check: 5*5
+    difficulty: 3
+    hints:
+    - 'Look at the jumps: +3, +5, +7 ...'
+    - The next jump is 2 more than the last.
+    solution: 'Step 1: The jumps are 3, 5, 7, so next is 9. Step 2: 16 + 9 = 25 (also 5 × 5).'
+    mistakes:
+      '20': c4m3_rule
+      '23': c4m3_rule
+      '32': c4m3_rule
