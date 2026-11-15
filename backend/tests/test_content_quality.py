@@ -401,6 +401,19 @@ def test_every_cbse3_evs_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse3/evs/") for _ in pack["concepts"]) >= 12
 
 
+def test_every_cbse3_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 3 English (Santoor): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse3/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse3/english/") for _ in pack["concepts"]) >= 12
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
