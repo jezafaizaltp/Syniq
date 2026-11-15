@@ -15,6 +15,13 @@ tips:
   t6_same_denominator: "With the same bottom, add only the tops. The bottom stays the same."
   t6_sharing: "Shared equally means divide: 3 ÷ 4."
   t6_unlike_subtract: "Make the bottoms the same first: 3/4 = 6/8."
+  c6m7_parts: The bottom number counts the equal parts in the whole; the top counts the parts taken.
+  c6m7_equiv: Multiply or divide the top and the bottom by the same number.
+  c6m7_lowest: Divide top and bottom by the biggest number that goes into both.
+  c6m7_mixed: Ask how many whole ones fit, then what is left over as a fraction.
+  c6m7_compare: Make the bottom numbers the same first, then compare the tops.
+  c6m7_add: Only add the tops once the bottoms match. The bottom number stays the same.
+  c6m7_of: To find a fraction of an amount, divide by the bottom number, then multiply by the top.
 concepts:
 - code: cbse6m.frac.meaning
   title: Fractions as equal shares
@@ -56,6 +63,76 @@ concepts:
       num: 3
       den: 6
       equivalent: false
+  lesson:
+    - teach: A fraction names equal parts of a whole. In 3/5 the bottom number (denominator) 5 says the whole is cut into 5 equal parts; the top number (numerator) 3 says we take 3 of them. The parts must be equal.
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: 1/5
+        - size: 1
+          label: 1/5
+        - size: 1
+          label: 1/5
+        - size: 1
+          label: 2/5 left
+        rows:
+        - size: 1
+          label: whole
+        cells:
+        - - taken
+          - taken
+          - taken
+          - not taken
+        alt: 'A strip cut into fifths: 3 fifths taken and 2 fifths left, showing 3/5.'
+      check:
+        prompt: A pizza is cut into 8 equal slices and 5 are eaten. What fraction is eaten?
+        options:
+        - 5/8
+        - 3/8
+        - 8/5
+        answer: 5/8
+        why: 8 equal parts in all, 5 taken.
+    - teach: 'Equivalent fractions show the same amount: 1/2 = 2/4 = 4/8. Multiply (or divide) the top and bottom by the same number. Lowest terms means you can''t divide any more: 15/20 = 3/4 after dividing by 5.'
+      picture:
+        kind: compare
+        columns:
+        - title: 1/2
+          points:
+          - 1 of 2 parts
+        - title: 2/4
+          points:
+          - 2 of 4 parts
+        - title: 4/8
+          points:
+          - 4 of 8 parts
+        alt: One half, two quarters and four eighths cover exactly the same amount of a bar.
+      check:
+        prompt: Which fraction equals 3/4?
+        options:
+        - 9/12
+        - 6/12
+        - 3/8
+        answer: 9/12
+        why: 3 × 3 = 9 and 4 × 3 = 12.
+    - teach: 'A fraction bigger than 1, like 11/4, is improper. As a mixed number: 4 goes into 11 two times with 3 left, so 11/4 = 2 3/4. On a number line, 11/4 sits between 2 and 3.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 3
+        step: 0.25
+        points:
+        - at: 2.75
+          label: 11/4
+        alt: On a number line marked in quarters, 11/4 is three quarters past 2.
+      check:
+        prompt: Write 2 1/3 as an improper fraction.
+        options:
+        - 7/3
+        - 5/3
+        - 6/3
+        answer: 7/3
+        why: 2 wholes = 6/3, plus 1/3 = 7/3.
   items:
   - prompt: In the fraction 5/8, what does 8 tell us?
     options:
@@ -124,6 +201,111 @@ concepts:
     - × 5.
     solution: 1/2 = 5/10 (both × 5).
     mistakes: {"2/5": "t6_half_equivalent", "1/4": "t6_half_equivalent"}
+  - prompt: A ribbon is cut into 6 equal pieces. 1 piece is used. What fraction is left?
+    answer: 5/6
+    check: Rational(5,6)
+    difficulty: 1
+    hints:
+    - How many pieces are left?
+    - Out of how many equal pieces?
+    solution: 'Step 1: 6 − 1 = 5 pieces left. Step 2: 5 out of 6 = 5/6.'
+    mistakes:
+      1/6: c6m7_parts
+      6/5: c6m7_parts
+  - prompt: 'Find the missing number: 3/5 = 12/?'
+    answer: '20'
+    check: '20'
+    difficulty: 1
+    hints:
+    - 3 became 12. What was it multiplied by?
+    - Do the same to 5.
+    solution: 'Step 1: 3 × 4 = 12. Step 2: 5 × 4 = 20.'
+    mistakes:
+      '14': c6m7_equiv
+      '15': c6m7_equiv
+  - prompt: Write 24/36 in lowest terms.
+    answer: 2/3
+    check: Rational(24,36)
+    difficulty: 2
+    hints:
+    - Find the biggest number that divides 24 and 36.
+    - It is 12.
+    solution: 'Step 1: both divide by 12. Step 2: 24 ÷ 12 = 2 and 36 ÷ 12 = 3, so 2/3.'
+    mistakes:
+      3/4: c6m7_lowest
+      1/3: c6m7_lowest
+  - prompt: Write 17/5 as a mixed number.
+    options:
+    - 3 2/5
+    - 2 7/5
+    - 3 5/2
+    answer: 3 2/5
+    difficulty: 2
+    hints:
+    - How many 5s fit in 17?
+    - What is left over?
+    solution: 'Step 1: 5 goes into 17 three times (15). Step 2: 2 is left, so 3 2/5.'
+    mistakes:
+      2 7/5: c6m7_mixed
+      3 5/2: c6m7_mixed
+  - prompt: Write 4 1/2 as an improper fraction.
+    answer: 9/2
+    check: Rational(9,2)
+    difficulty: 2
+    hints:
+    - 4 wholes is how many halves?
+    - Then add 1 more half.
+    solution: 'Step 1: 4 = 8/2. Step 2: 8/2 + 1/2 = 9/2.'
+    mistakes:
+      5/2: c6m7_mixed
+      6/2: c6m7_mixed
+  - prompt: What is 2/5 of 30 marbles?
+    answer: '12'
+    check: Rational(2,5)*30
+    difficulty: 2
+    hints:
+    - First find 1/5 of 30.
+    - Then take 2 of those parts.
+    solution: 'Step 1: 30 ÷ 5 = 6. Step 2: 2 × 6 = 12 marbles.'
+    mistakes:
+      '6': c6m7_of
+      '15': c6m7_of
+  - prompt: A class has 40 students; 15 are girls. What fraction are girls, in lowest terms?
+    answer: 3/8
+    check: Rational(15,40)
+    difficulty: 2
+    hints:
+    - Write girls over all students.
+    - Then simplify by 5.
+    solution: 'Step 1: 15/40. Step 2: divide by 5: 3/8.'
+    mistakes:
+      8/3: c6m7_parts
+      3/5: c6m7_parts
+  - prompt: On a number line from 0 to 1 cut into 8 equal parts, where is the 5th mark?
+    answer: 5/8
+    check: Rational(5,8)
+    difficulty: 1
+    hints:
+    - Each part is 1/8.
+    - Five parts from 0.
+    solution: 'Step 1: each part is 1/8. Step 2: 5 parts = 5/8.'
+    mistakes:
+      1/5: c6m7_parts
+      8/5: c6m7_parts
+  - prompt: Which picture does NOT show 1/4 shaded?
+    options:
+    - A circle cut into 4 unequal parts with one shaded
+    - A square cut into 4 equal parts with one shaded
+    - A bar cut into 8 equal parts with two shaded
+    answer: A circle cut into 4 unequal parts with one shaded
+    difficulty: 3
+    hints:
+    - Fractions need equal parts.
+    - 2 out of 8 equal parts is also a quarter.
+    solution: 'Step 1: 2/8 = 1/4 and 1 of 4 equal parts = 1/4. Step 2: unequal parts don''t show a fraction, so the circle is wrong.'
+    mistakes:
+      A square cut into 4 equal parts with one shaded: c6m7_parts
+      A bar cut into 8 equal parts with two shaded: c6m7_equiv
 - code: cbse6m.frac.ops
   title: Comparing, adding and subtracting fractions
   after:
@@ -176,6 +358,42 @@ concepts:
       num: 3
       den: 6
       equivalent: false
+  lesson:
+    - teach: 'Comparing: with the same bottom number, the bigger top wins (5/9 > 2/9). With the same top number, the smaller bottom wins, because the parts are bigger (1/4 > 1/6). Otherwise rewrite both with a common bottom number.'
+      check:
+        prompt: Which is bigger, 2/3 or 3/5?
+        options:
+        - 2/3
+        - 3/5
+        - They are equal
+        answer: 2/3
+        why: 2/3 = 10/15 and 3/5 = 9/15, and 10 > 9.
+    - teach: 'Adding or subtracting with the same bottom number: add or subtract the tops, keep the bottom. 4/9 + 2/9 = 6/9 = 2/3. Never add the bottoms: the size of the parts doesn''t change.'
+      picture:
+        kind: flow
+        steps:
+        - 4 ninths
+        - + 2 ninths
+        - = 6 ninths
+        - = 2/3
+        alt: 4 ninths and 2 more ninths make 6 ninths, which is 2/3. The parts stay ninths.
+      check:
+        prompt: What is 7/10 − 3/10?
+        options:
+        - 4/10
+        - 4/0
+        - 10/10
+        answer: 4/10
+        why: 'Subtract the tops: 7 − 3 = 4; the parts are still tenths.'
+    - teach: 'With different bottom numbers, first make them the same using a common multiple. 1/4 + 1/6: 12 is a multiple of both, so 3/12 + 2/12 = 5/12. For mixed numbers, add the wholes and the fractions separately.'
+      check:
+        prompt: What is 1/3 + 1/6?
+        options:
+        - 1/2
+        - 2/9
+        - 2/6
+        answer: 1/2
+        why: 1/3 = 2/6, so 2/6 + 1/6 = 3/6 = 1/2.
   items:
   - prompt: 'Add: 2/7 + 3/7'
     answer: 5/7
@@ -241,3 +459,108 @@ concepts:
     - 'Fractions: 1/2 + 1/4 = 3/4.'
     solution: 3 3/4 km = 15/4 km.
     mistakes: {"3": "t6_mixed_add", "13/4": "t6_mixed_add"}
+  - prompt: 'Add: 3/8 + 1/8'
+    answer: 1/2
+    check: Rational(3,8)+Rational(1,8)
+    difficulty: 1
+    hints:
+    - 'Same bottom number: add the tops.'
+    - Then simplify.
+    solution: 'Step 1: 3/8 + 1/8 = 4/8. Step 2: 4/8 = 1/2.'
+    mistakes:
+      4/16: c6m7_add
+      1/4: c6m7_add
+  - prompt: 'Subtract: 5/6 − 1/3'
+    answer: 1/2
+    check: Rational(5,6)-Rational(1,3)
+    difficulty: 2
+    hints:
+    - Change 1/3 into sixths.
+    - 1/3 = 2/6.
+    solution: 'Step 1: 5/6 − 2/6 = 3/6. Step 2: 3/6 = 1/2.'
+    mistakes:
+      4/3: c6m7_add
+      4/6: c6m7_add
+  - prompt: 'Add: 2/5 + 1/4'
+    answer: 13/20
+    check: Rational(2,5)+Rational(1,4)
+    difficulty: 2
+    hints:
+    - A common bottom number for 5 and 4 is 20.
+    - Rewrite both as twentieths.
+    solution: 'Step 1: 2/5 = 8/20 and 1/4 = 5/20. Step 2: 8/20 + 5/20 = 13/20.'
+    mistakes:
+      3/9: c6m7_add
+      3/20: c6m7_add
+  - prompt: Which is smaller, 4/7 or 4/9?
+    options:
+    - 4/9
+    - 4/7
+    - They are equal
+    answer: 4/9
+    difficulty: 1
+    hints:
+    - The tops are the same.
+    - Ninths are smaller pieces than sevenths.
+    solution: 'Step 1: same top, so compare the size of the pieces. Step 2: ninths are smaller, so 4/9 is smaller.'
+    mistakes:
+      4/7: c6m7_compare
+      They are equal: c6m7_compare
+  - prompt: 'Arrange from smallest to largest: 1/2, 3/8, 3/4'
+    options:
+    - 3/8, 1/2, 3/4
+    - 1/2, 3/8, 3/4
+    - 3/4, 1/2, 3/8
+    answer: 3/8, 1/2, 3/4
+    difficulty: 2
+    hints:
+    - Write all three as eighths.
+    - 1/2 = 4/8, 3/4 = 6/8.
+    solution: 'Step 1: 3/8, 4/8, 6/8. Step 2: so 3/8 < 1/2 < 3/4.'
+    mistakes:
+      1/2, 3/8, 3/4: c6m7_compare
+      3/4, 1/2, 3/8: c6m7_compare
+  - prompt: Meena drank 1/3 of a bottle of water and Ravi drank 1/4. How much did they drink together?
+    answer: 7/12
+    check: Rational(1,3)+Rational(1,4)
+    difficulty: 2
+    hints:
+    - Use twelfths.
+    - 1/3 = 4/12 and 1/4 = 3/12.
+    solution: 'Step 1: 4/12 + 3/12. Step 2: = 7/12 of a bottle.'
+    mistakes:
+      2/7: c6m7_add
+      2/12: c6m7_add
+  - prompt: A cake is cut into 12 pieces. Asha eats 1/4 of it. How many pieces does she eat?
+    answer: '3'
+    check: Rational(1,4)*12
+    difficulty: 1
+    hints:
+    - Find a quarter of 12.
+    - 12 ÷ 4.
+    solution: 'Step 1: 1/4 of 12 = 12 ÷ 4. Step 2: = 3 pieces.'
+    mistakes:
+      '4': c6m7_of
+      '8': c6m7_of
+  - prompt: 'Add: 2 1/3 + 1 1/2'
+    answer: 23/6
+    check: Rational(7,3)+Rational(3,2)
+    difficulty: 3
+    hints:
+    - 'Add the wholes: 2 + 1.'
+    - 'Add the fractions using sixths: 1/3 + 1/2.'
+    solution: 'Step 1: wholes: 3. Step 2: 1/3 + 1/2 = 2/6 + 3/6 = 5/6. So 3 5/6 = 23/6.'
+    mistakes:
+      7/2: c6m7_add
+      17/6: c6m7_add
+  - prompt: A tank is 3/4 full. 1/8 of the tank is used. What fraction is still full?
+    answer: 5/8
+    check: Rational(3,4)-Rational(1,8)
+    difficulty: 3
+    hints:
+    - Write 3/4 as eighths.
+    - 3/4 = 6/8.
+    solution: 'Step 1: 6/8 − 1/8. Step 2: = 5/8 of the tank.'
+    mistakes:
+      2/4: c6m7_add
+      1/2: c6m7_add

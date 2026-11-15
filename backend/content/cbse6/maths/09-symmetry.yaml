@@ -14,6 +14,12 @@ tips:
   t6_rotation_order: "Turn the square slowly. How many times in one full turn does it look the same?"
   t6_square_symmetry: "Fold a paper square: across the middle both ways, and along both diagonals."
   t6_triangle_symmetry: "Each line goes from a corner to the middle of the opposite side."
+  c6m9_fold: 'Imagine folding along the line: do the two halves land exactly on each other?'
+  c6m9_regular: A regular shape has as many lines of symmetry as it has sides.
+  c6m9_letters: Check the letter for a standing (up-down) mirror line and a lying (left-right) one separately.
+  c6m9_order: Count how many times the shape looks the same during one full turn.
+  c6m9_angle: The smallest turn times the order makes one full turn of 360°.
+  c6m9_mirror: In a mirror image, each point is the same distance from the line, on the other side.
 concepts:
 - code: cbse6m.sym.line
   title: Line symmetry
@@ -50,6 +56,76 @@ concepts:
     - .##
     - ..#
     prompt: The dashed line is a mirror. Tap squares on the right to finish the shape so both halves match.
+  lesson:
+    - teach: A shape has line symmetry if a line splits it into two halves that match exactly when folded. That line is the line of symmetry, or mirror line. A butterfly and a leaf have one.
+      picture:
+        kind: geometry
+        points:
+          A:
+          - 5
+          - 9
+          B:
+          - 2
+          - 2
+          C:
+          - 8
+          - 2
+          M:
+          - 5
+          - 2
+        segments:
+        - - A
+          - B
+        - - B
+          - C
+        - - C
+          - A
+        - - A
+          - M
+          - fold
+        alt: An isosceles triangle with its fold line from the top corner down to the middle of the base; the two halves match.
+      check:
+        prompt: 'A shape is folded along a line and the halves match exactly. The line is a:'
+        options:
+        - Line of symmetry
+        - Diagonal only
+        - Radius
+        answer: Line of symmetry
+        why: Matching halves on folding is what line symmetry means.
+    - teach: 'Count the lines for common shapes: a rectangle has 2, a square 4, an equilateral triangle 3, an isosceles triangle 1, a circle endlessly many. A regular shape with n equal sides has n lines.'
+      picture:
+        kind: compare
+        columns:
+        - title: Rectangle
+          points:
+          - 2 lines
+          - through the middles of the sides
+        - title: Square
+          points:
+          - 4 lines
+          - 2 through middles, 2 diagonals
+        - title: Circle
+          points:
+          - endless lines
+          - any line through the centre
+        alt: A rectangle has 2 lines of symmetry, a square 4, and a circle endlessly many.
+      check:
+        prompt: How many lines of symmetry does a regular pentagon have?
+        options:
+        - '5'
+        - '1'
+        - '10'
+        answer: '5'
+        why: A regular shape with 5 sides has 5 lines.
+    - teach: Letters can be symmetric too. A, M, T have a standing line; B, C, D, E have a lying line; H, I, O, X have both. Rangoli and kolam designs are drawn with symmetry, so each half mirrors the other.
+      check:
+        prompt: Which letter has a horizontal (lying) line of symmetry?
+        options:
+        - E
+        - A
+        - L
+        answer: E
+        why: The top half of E folds onto the bottom half.
   items:
   - prompt: How many lines of symmetry does a square have?
     answer: '4'
@@ -115,6 +191,120 @@ concepts:
     - 6 sides.
     solution: A regular hexagon has 6.
     mistakes: {"3": "t6_hexagon_symmetry", "12": "t6_hexagon_symmetry"}
+  - prompt: How many lines of symmetry does an isosceles triangle (only two sides equal) have?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Fold it from the top corner between the equal sides.
+    - Is there any other fold that works?
+    solution: 'Step 1: one fold from the top corner to the middle of the base works. Step 2: no other fold matches, so 1 line.'
+    mistakes:
+      '3': c6m9_fold
+      '2': c6m9_fold
+  - prompt: How many lines of symmetry does a regular octagon have?
+    answer: '8'
+    check: '8'
+    difficulty: 1
+    hints:
+    - Count its sides.
+    - Regular shapes have as many lines as sides.
+    solution: 'Step 1: an octagon has 8 equal sides. Step 2: so it has 8 lines of symmetry.'
+    mistakes:
+      '4': c6m9_regular
+      '16': c6m9_regular
+  - prompt: Which shape has no line of symmetry?
+    options:
+    - A scalene triangle (all sides different)
+    - A square
+    - A circle
+    answer: A scalene triangle (all sides different)
+    difficulty: 2
+    hints:
+    - Try folding each one.
+    - Which one has no two equal sides?
+    solution: 'Step 1: squares and circles fold neatly. Step 2: a triangle with all sides different has no fold that matches.'
+    mistakes:
+      A square: c6m9_fold
+      A circle: c6m9_fold
+  - prompt: Which letter has no line of symmetry?
+    options:
+    - F
+    - A
+    - H
+    answer: F
+    difficulty: 2
+    hints:
+    - Try a standing line and a lying line.
+    - Which letter changes both ways?
+    solution: 'Step 1: A has a standing line and H has both. Step 2: F matches neither way.'
+    mistakes:
+      A: c6m9_letters
+      H: c6m9_letters
+  - prompt: Which word has a vertical (standing) line of symmetry when written in capitals?
+    options:
+    - TOT
+    - TOP
+    - BOX
+    answer: TOT
+    difficulty: 3
+    hints:
+    - Each letter must be symmetric on its own.
+    - The word must also read the same backwards.
+    solution: 'Step 1: T and O each have a standing line. Step 2: TOT reads the same from both sides, so the whole word is symmetric.'
+    mistakes:
+      TOP: c6m9_letters
+      BOX: c6m9_letters
+  - prompt: Point P is 3 squares to the left of a vertical mirror line. Where is its mirror image?
+    options:
+    - 3 squares to the right of the line
+    - 6 squares to the right of the line
+    - On the line
+    answer: 3 squares to the right of the line
+    difficulty: 2
+    hints:
+    - The image is the same distance from the line.
+    - It is on the other side.
+    solution: 'Step 1: a reflection keeps the distance from the mirror. Step 2: so the image is 3 squares to the right.'
+    mistakes:
+      6 squares to the right of the line: c6m9_mirror
+      On the line: c6m9_mirror
+  - prompt: How many lines of symmetry does the number 8 have, drawn as two equal circles stacked?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Fold it top to bottom.
+    - Fold it left to right.
+    solution: 'Step 1: a standing line splits it into left and right halves. Step 2: a lying line splits the two circles. So 2.'
+    mistakes:
+      '1': c6m9_fold
+      '4': c6m9_fold
+  - prompt: A rangoli design has 6 lines of symmetry. If you draw one petal, how many matching petals will the full design have, one between each pair of neighbouring lines?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - 6 lines cut the circle into how many equal slices?
+    - Each line through the centre makes 2 cuts.
+    solution: 'Step 1: 6 lines through the centre make 12 equal slices. Step 2: one petal per slice gives 12 petals.'
+    mistakes:
+      '6': c6m9_mirror
+      '3': c6m9_mirror
+  - prompt: Is the diagonal of a rectangle (not a square) a line of symmetry?
+    options:
+    - No, the halves don't fold onto each other
+    - Yes, it cuts it into two equal triangles
+    - Yes, always
+    answer: No, the halves don't fold onto each other
+    difficulty: 3
+    hints:
+    - Cut a paper rectangle and fold along the diagonal.
+    - Equal pieces is not the same as matching when folded.
+    solution: 'Step 1: the diagonal makes two equal triangles. Step 2: but folding along it does not lay one on the other, so it is not a line of symmetry.'
+    mistakes:
+      Yes, it cuts it into two equal triangles: c6m9_fold
+      Yes, always: c6m9_fold
 - code: cbse6m.sym.rotation
   title: Rotational symmetry
   after:
@@ -164,6 +354,42 @@ concepts:
       - when:
           degrees: 120
         say: '120° is a third of a turn: the triangle''s turn. A hexagon has 6 sides, so its turn is a sixth of 360°.'
+  lesson:
+    - teach: A shape has rotational symmetry if it looks exactly the same after turning less than a full turn about its centre. A square looks the same after a quarter turn of 90°.
+      picture:
+        kind: flow
+        steps:
+        - 0°
+        - '90°: same'
+        - '180°: same'
+        - '270°: same'
+        - '360°: back'
+        alt: A square turned 90, 180 and 270 degrees looks the same each time, then a full turn brings it back.
+      check:
+        prompt: Does the letter S look the same after a half turn (180°)?
+        options:
+        - 'Yes'
+        - 'No'
+        answer: 'Yes'
+        why: 'Turn a page with S upside down: it still reads S.'
+    - teach: 'The order of rotational symmetry is how many times the shape looks the same in one full turn. A square: 4. An equilateral triangle: 3. A rectangle: 2. A regular hexagon: 6.'
+      check:
+        prompt: A windmill has 4 equal blades. What is its order of rotational symmetry?
+        options:
+        - '4'
+        - '2'
+        - '8'
+        answer: '4'
+        why: It looks the same 4 times in one full turn.
+    - teach: The smallest angle of symmetry × order = 360°. For order 3, the angle is 360 ÷ 3 = 120°. For order 5, it is 72°.
+      check:
+        prompt: A shape has order 8. What is its smallest angle of symmetry?
+        options:
+        - 45°
+        - 8°
+        - 90°
+        answer: 45°
+        why: 360 ÷ 8 = 45.
   items:
   - prompt: What is the order of rotational symmetry of a square?
     answer: '4'
@@ -224,3 +450,111 @@ concepts:
     - 3 equal sides.
     solution: 'An equilateral triangle matches every 120°: order 3.'
     mistakes: {"Square": "t6_order3", "Isosceles triangle": "t6_order3"}
+  - prompt: What is the order of rotational symmetry of a regular hexagon?
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - Count how often it looks the same in a full turn.
+    - A regular shape has the same order as its number of sides.
+    solution: 'Step 1: it looks the same every 60°. Step 2: 360 ÷ 60 = 6.'
+    mistakes:
+      '3': c6m9_order
+      '12': c6m9_order
+  - prompt: A flower has 5 identical petals equally spaced. What is its smallest angle of symmetry (in degrees)?
+    answer: '72'
+    check: 360/5
+    difficulty: 2
+    hints:
+    - The order is 5.
+    - 360 ÷ 5.
+    solution: 'Step 1: order 5. Step 2: 360 ÷ 5 = 72°.'
+    mistakes:
+      '5': c6m9_angle
+      '60': c6m9_angle
+  - prompt: A shape looks the same every 90°. What is its order?
+    answer: '4'
+    check: 360/90
+    difficulty: 1
+    hints:
+    - How many 90° turns make a full turn?
+    - 360 ÷ 90.
+    solution: 'Step 1: 360 ÷ 90 = 4. Step 2: so the order is 4.'
+    mistakes:
+      '90': c6m9_angle
+      '2': c6m9_angle
+  - prompt: A shape has order 2. What is its smallest angle of symmetry (in degrees)?
+    answer: '180'
+    check: 360/2
+    difficulty: 1
+    hints:
+    - Order times angle is 360.
+    - 360 ÷ 2.
+    solution: 'Step 1: 360 ÷ 2. Step 2: = 180°, a half turn.'
+    mistakes:
+      '90': c6m9_angle
+      '2': c6m9_angle
+  - prompt: Which letter has rotational symmetry of order 2?
+    options:
+    - Z
+    - A
+    - T
+    answer: Z
+    difficulty: 2
+    hints:
+    - Turn each letter upside down.
+    - Which one still looks the same?
+    solution: 'Step 1: Z turned 180° is still Z. Step 2: A and T look different after a half turn.'
+    mistakes:
+      A: c6m9_order
+      T: c6m9_order
+  - prompt: A wheel has 12 equally spaced spokes. What is its smallest angle of symmetry (in degrees)?
+    answer: '30'
+    check: 360/12
+    difficulty: 2
+    hints:
+    - The order is 12.
+    - 360 ÷ 12.
+    solution: 'Step 1: 12 spokes give order 12. Step 2: 360 ÷ 12 = 30°.'
+    mistakes:
+      '12': c6m9_angle
+      '36': c6m9_angle
+  - prompt: Which shape has NO rotational symmetry (order 1)?
+    options:
+    - An isosceles triangle (only two sides equal)
+    - A square
+    - A circle
+    answer: An isosceles triangle (only two sides equal)
+    difficulty: 2
+    hints:
+    - Turn each shape less than a full turn.
+    - Which one only fits back after 360°?
+    solution: 'Step 1: squares and circles fit back many times. Step 2: the isosceles triangle fits only after a full turn.'
+    mistakes:
+      A square: c6m9_order
+      A circle: c6m9_order
+  - prompt: A design looks the same every 40°. What is its order of rotational symmetry?
+    answer: '9'
+    check: 360/40
+    difficulty: 3
+    hints:
+    - How many 40° turns make 360°?
+    - 360 ÷ 40.
+    solution: 'Step 1: 360 ÷ 40. Step 2: = 9.'
+    mistakes:
+      '40': c6m9_angle
+      '8': c6m9_angle
+  - prompt: A square tile pattern is turned 90° and looks the same. Turned 45°, it does not. Which is true?
+    options:
+    - Its order is 4
+    - Its order is 8
+    - It has no rotational symmetry
+    answer: Its order is 4
+    difficulty: 3
+    hints:
+    - The smallest working turn is 90°.
+    - 360 ÷ 90.
+    solution: 'Step 1: the smallest turn that works is 90°. Step 2: 360 ÷ 90 = 4, so order 4.'
+    mistakes:
+      Its order is 8: c6m9_angle
+      It has no rotational symmetry: c6m9_order

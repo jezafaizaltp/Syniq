@@ -15,6 +15,13 @@ tips:
   t6_smallest_digits: "The smallest 6-digit number is 1 followed by five zeros."
   t6_subtract_borrow: "Subtract column by column from the right, borrowing where needed."
   t6_times3_plus1: "Multiply by 3 first, then add 1."
+  c6m3_digsum: Add the digits one at a time, not the whole number.
+  c6m3_pal: Read the number from the right. Does it match reading from the left?
+  c6m3_neigh: 'Compare the number with each neighbour: it must beat every one of them.'
+  c6m3_place: 'Line up the places: ones, tens, hundreds, thousands, ten thousands, lakhs.'
+  c6m3_order: For the largest number put the biggest digits on the left; for the smallest, the smallest non-zero digit first.
+  c6m3_steps: Do one step of the rule at a time and write down each result.
+  c6m3_estimate: Round to an easy number first, then multiply.
 concepts:
 - code: cbse6m.numplay.patterns
   title: Numbers that tell stories
@@ -69,6 +76,46 @@ concepts:
       bin: Not a palindrome
       why: 'Backwards it is 1321: the middle digits swap.'
       clue: Read it backwards. Do the middle digits match?
+  lesson:
+    - teach: Numbers can describe a picture. In a supercell grid, a cell is a supercell if its number is bigger than every neighbour that touches it (left, right, above, below).
+      picture:
+        kind: compare
+        columns:
+        - title: 'Row: 12, 45, 30'
+          points:
+          - 45 > 12 and 45 > 30
+          - 45 is a supercell
+        - title: 'Row: 50, 20, 60'
+          points:
+          - 20 < 50
+          - 20 is not a supercell
+        alt: 45 beats both neighbours so it is a supercell; 20 is smaller than its neighbours so it is not.
+      check:
+        prompt: In the row 18, 9, 25, 14, which number is a supercell?
+        options:
+        - '25'
+        - '9'
+        - '14'
+        answer: '25'
+        why: 25 is bigger than both its neighbours 9 and 14.
+    - teach: 'The digit sum adds the digits: 472 → 4 + 7 + 2 = 13. A palindrome reads the same from both sides, like 252 or 7337. Reversing a number and adding often gives a palindrome: 25 + 52 = 77.'
+      check:
+        prompt: What is 36 + 63?
+        options:
+        - '99'
+        - '96'
+        - '69'
+        answer: '99'
+        why: 36 + 63 = 99, and 99 reads the same both ways.
+    - teach: 'Place value: 1,00,000 (one lakh) is the smallest 6-digit number and 99,999 is the largest 5-digit number. To make the largest number from digits, put them in falling order; for the smallest, rising order, but never start with 0.'
+      check:
+        prompt: Using the digits 3, 0, 7, 1 once each, what is the smallest 4-digit number?
+        options:
+        - '1037'
+        - '0137'
+        - '1307'
+        answer: '1037'
+        why: A 4-digit number cannot start with 0, so start with 1, then 0, 3, 7.
   items:
   - prompt: Which number is a palindrome?
     options:
@@ -133,6 +180,114 @@ concepts:
     - One lakh.
     solution: "The smallest 6-digit number starts with 1 followed by five zeros: 1,00,000 (one lakh)."
     mistakes: {"999999": "t6_smallest_digits", "10000": "t6_smallest_digits"}
+  - prompt: What is the digit sum of 90,817?
+    answer: '25'
+    check: 9+0+8+1+7
+    difficulty: 1
+    hints:
+    - Add 9, 0, 8, 1 and 7.
+    - Go one digit at a time.
+    solution: 'Step 1: 9 + 0 + 8 = 17. Step 2: 17 + 1 + 7 = 25.'
+    mistakes:
+      '24': c6m3_digsum
+      '26': c6m3_digsum
+  - prompt: Which of these is NOT a palindrome?
+    options:
+    - '1231'
+    - '1221'
+    - '45654'
+    answer: '1231'
+    difficulty: 1
+    hints:
+    - Read each one backwards.
+    - Which one changes?
+    solution: 'Step 1: 1221 and 45654 read the same backwards. Step 2: 1231 backwards is 1321, so it is not a palindrome.'
+    mistakes:
+      '1221': c6m3_pal
+      '45654': c6m3_pal
+  - prompt: Reverse 57 and add it to 57. What do you get?
+    answer: '132'
+    check: 57+75
+    difficulty: 2
+    hints:
+    - The reverse of 57 is 75.
+    - Add 57 and 75.
+    solution: 'Step 1: 57 + 75 = 132. Step 2: 132 is not yet a palindrome; doing it again gives 132 + 231 = 363.'
+    mistakes:
+      '114': c6m3_pal
+      '122': c6m3_pal
+  - prompt: Using 4, 9, 2, 6, 0 once each, what is the largest 5-digit number?
+    answer: '96420'
+    check: '96420'
+    difficulty: 2
+    hints:
+    - Put the biggest digit first.
+    - Arrange in falling order.
+    solution: 'Step 1: order the digits from biggest: 9, 6, 4, 2, 0. Step 2: the number is 96,420.'
+    mistakes:
+      '20469': c6m3_order
+      '96402': c6m3_order
+  - prompt: Using 4, 9, 2, 6, 0 once each, what is the smallest 5-digit number?
+    answer: '20469'
+    check: '20469'
+    difficulty: 2
+    hints:
+    - A 5-digit number cannot start with 0.
+    - Start with the smallest non-zero digit, then 0.
+    solution: 'Step 1: start with 2, the smallest non-zero digit. Step 2: then 0, 4, 6, 9 gives 20,469.'
+    mistakes:
+      '2469': c6m3_order
+      '24690': c6m3_order
+  - prompt: In the row 62, 47, 53, 38, 71, which numbers are supercells (bigger than both or the only neighbour)?
+    options:
+    - 62, 53 and 71
+    - 62 and 71 only
+    - 47 and 38
+    answer: 62, 53 and 71
+    difficulty: 3
+    hints:
+    - Check each number against its neighbours.
+    - The end numbers have only one neighbour.
+    solution: 'Step 1: 62 > 47, 53 > 47 and 38, 71 > 38. Step 2: 47 and 38 are smaller than a neighbour. So 62, 53 and 71.'
+    mistakes:
+      62 and 71 only: c6m3_neigh
+      47 and 38: c6m3_neigh
+  - prompt: What is 99,999 + 1?
+    answer: '100000'
+    check: 99999+1
+    difficulty: 1
+    hints:
+    - The largest 5-digit number plus one.
+    - It becomes the smallest 6-digit number.
+    solution: 'Step 1: adding 1 carries all the way. Step 2: 99,999 + 1 = 1,00,000.'
+    mistakes:
+      '999910': c6m3_place
+      '10000': c6m3_place
+  - prompt: How many 2-digit palindromes are there (11, 22, ...)?
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - Both digits must be the same.
+    - The first digit can't be 0.
+    solution: 'Step 1: they are 11, 22, 33, ..., 99. Step 2: that is 9 numbers.'
+    mistakes:
+      '10': c6m3_pal
+      '8': c6m3_pal
+  - prompt: What is the digit 7 worth in 3,72,415?
+    options:
+    - 70,000
+    - 7,000
+    - 7,00,000
+    answer: 70,000
+    difficulty: 2
+    hints:
+    - Count places from the right.
+    - 7 is in the ten thousands place.
+    solution: 'Step 1: from the right: 5 ones, 1 ten, 4 hundreds, 2 thousands, 7 ten thousands. Step 2: so 7 is worth 70,000.'
+    mistakes:
+      7,000: c6m3_place
+      7,00,000: c6m3_place
 - code: cbse6m.numplay.games
   title: Number puzzles and estimation
   after:
@@ -190,6 +345,52 @@ concepts:
           - 0
           - 5000
         say: That's 5,000 or less, but 365 × 20 is more than 300 × 20 = 6,000.
+  lesson:
+    - teach: 'Kaprekar''s routine: take a 4-digit number whose digits are not all equal. Make the largest and the smallest numbers from its digits and subtract. Repeat with the answer. You always reach 6174 within 7 steps.'
+      picture:
+        kind: flow
+        steps:
+        - '3524'
+        - 5432 − 2345 = 3087
+        - 8730 − 0378 = 8352
+        - 8532 − 2358 = 6174
+        alt: Starting from 3524, three Kaprekar steps reach 6174.
+      check:
+        prompt: For 2111, what is the largest number you can make from its digits?
+        options:
+        - '2111'
+        - '1112'
+        - '1211'
+        answer: '2111'
+        why: Put the biggest digit 2 first, then the 1s.
+    - teach: 'The Collatz game: if the number is even, halve it; if it is odd, multiply by 3 and add 1. Keep going. Every starting number anyone has tried ends at 1, but nobody has proved it always will.'
+      picture:
+        kind: flow
+        steps:
+        - '5'
+        - '16'
+        - '8'
+        - '4'
+        - '2'
+        - '1'
+        alt: From 5 (odd) you get 16, then halve to 8, 4, 2 and 1.
+      check:
+        prompt: 'Collatz: what comes after 7?'
+        options:
+        - '22'
+        - '3.5'
+        - '21'
+        answer: '22'
+        why: 7 is odd, so 3 × 7 + 1 = 22.
+    - teach: Estimation means a good guess using easy numbers. Days in 10 years are about 10 × 365 = 3,650. Round first, then calculate, then ask whether the answer makes sense.
+      check:
+        prompt: About how many hours are in a week?
+        options:
+        - About 170
+        - About 70
+        - About 700
+        answer: About 170
+        why: 7 × 24 = 168, which is about 170.
   items:
   - prompt: 'Kaprekar step: largest minus smallest for 5432 and 2345. What is 5432 − 2345?'
     answer: '3087'
@@ -246,3 +447,111 @@ concepts:
     - Ignore leap days.
     solution: 12 × 365 = 4,380 days.
     mistakes: {"377": "t6_days_years", "3650": "t6_days_years"}
+  - prompt: 'Kaprekar: for 4321, what is 4321 − 1234?'
+    answer: '3087'
+    check: 4321-1234
+    difficulty: 2
+    hints:
+    - Subtract carefully, column by column.
+    - Borrow where needed.
+    solution: 'Step 1: 4321 − 1234. Step 2: the answer is 3087.'
+    mistakes:
+      '3187': c6m3_steps
+      '3097': c6m3_steps
+  - prompt: 'Kaprekar: from 3087, the largest number is 8730 and the smallest is 0378. What is 8730 − 378?'
+    answer: '8352'
+    check: 8730-378
+    difficulty: 2
+    hints:
+    - 0378 is just 378.
+    - Subtract 378 from 8730.
+    solution: 'Step 1: 8730 − 378. Step 2: 8730 − 300 = 8430, then − 78 = 8352.'
+    mistakes:
+      '8452': c6m3_steps
+      '8362': c6m3_steps
+  - prompt: Why can't Kaprekar's routine start from 5555?
+    options:
+    - All its digits are the same, so largest − smallest is 0
+    - It is an odd number
+    - It is too big
+    answer: All its digits are the same, so largest − smallest is 0
+    difficulty: 2
+    hints:
+    - Make the largest and smallest numbers from 5555.
+    - What is their difference?
+    solution: 'Step 1: largest and smallest are both 5555. Step 2: 5555 − 5555 = 0, so the routine gets stuck.'
+    mistakes:
+      It is an odd number: c6m3_steps
+      It is too big: c6m3_steps
+  - prompt: 'Collatz: start at 10. How many steps does it take to reach 1? (10 → 5 → ...)'
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - 'Write each number: 10, 5, 16, ...'
+    - Count the arrows, not the numbers.
+    solution: 'Step 1: 10 → 5 → 16 → 8 → 4 → 2 → 1. Step 2: that is 6 steps.'
+    mistakes:
+      '7': c6m3_steps
+      '5': c6m3_steps
+  - prompt: 'Collatz: what comes after 9?'
+    answer: '28'
+    check: 3*9+1
+    difficulty: 1
+    hints:
+    - Is 9 even or odd?
+    - 'Odd: multiply by 3, then add 1.'
+    solution: 'Step 1: 9 is odd. Step 2: 3 × 9 + 1 = 28.'
+    mistakes:
+      '27': c6m3_steps
+      '4': c6m3_steps
+  - prompt: 'Collatz: what comes after 28?'
+    answer: '14'
+    check: 28/2
+    difficulty: 1
+    hints:
+    - Is 28 even or odd?
+    - 'Even: halve it.'
+    solution: 'Step 1: 28 is even. Step 2: 28 ÷ 2 = 14.'
+    mistakes:
+      '85': c6m3_steps
+      '56': c6m3_steps
+  - prompt: About how many minutes are in a day?
+    options:
+    - About 1,440
+    - About 240
+    - About 14,400
+    answer: About 1,440
+    difficulty: 2
+    hints:
+    - A day has 24 hours.
+    - Each hour has 60 minutes.
+    solution: 'Step 1: 24 × 60. Step 2: = 1,440 minutes.'
+    mistakes:
+      About 240: c6m3_estimate
+      About 14,400: c6m3_estimate
+  - prompt: A child walks 1,200 steps to school and back each day. About how many steps in 5 school days?
+    answer: '6000'
+    check: 1200*5
+    difficulty: 2
+    hints:
+    - Multiply the daily steps by 5.
+    - 12 × 5 = 60, then add the zeros.
+    solution: 'Step 1: 1,200 × 5. Step 2: = 6,000 steps.'
+    mistakes:
+      '600': c6m3_estimate
+      '60000': c6m3_estimate
+  - prompt: A 24-hour clock shows 13:31, which reads the same both ways. What is the next time that does?
+    options:
+    - '14:41'
+    - '13:41'
+    - '14:14'
+    answer: '14:41'
+    difficulty: 3
+    hints:
+    - 'With hour 13, 13:31 is the only one.'
+    - Try the hour 14 and reverse its digits for the minutes.
+    solution: 'Step 1: for hour 13 the only palindrome is 13:31. Step 2: for hour 14, the minutes must be 41, so 14:41.'
+    mistakes:
+      '13:41': c6m3_pal
+      '14:14': c6m3_pal
