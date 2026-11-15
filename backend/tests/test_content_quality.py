@@ -479,6 +479,19 @@ def test_every_cbse1_maths_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse1/maths/") for _ in pack["concepts"]) >= 26
 
 
+def test_every_cbse1_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE Class 1 English (Mridang): a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbse1/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse1/english/") for _ in pack["concepts"]) >= 9
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
