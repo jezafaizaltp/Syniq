@@ -505,6 +505,32 @@ def test_every_cbse1_hindi_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbse1/hindi/") for _ in pack["concepts"]) >= 19
 
 
+def test_every_cbseukg_maths_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE UKG Maths: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbseukg/maths/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbseukg/maths/") for _ in pack["concepts"]) >= 10
+
+
+def test_every_cbseukg_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE UKG English: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbseukg/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbseukg/english/") for _ in pack["concepts"]) >= 8
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
