@@ -10,6 +10,10 @@ tips:
   m3_jumps_10: "Each jump adds 10. Count 5 jumps: 120, 130, ..."
   m3_take_tens: "Take away 4 tens from 18 tens."
   m3_ten_tens: "Count in tens ten times: 10, 20, 30, ... What do you reach?"
+  c3m3_tens: Bundle the number into tens first. How many tens, and how many ones are left?
+  c3m3_jump: Count on in tens on a number line, saying each jump out loud.
+  c3m3_next: Say the number aloud, then say the very next counting number (or the one before).
+  c3m3_place: Split the number into hundreds, tens and ones before you add or compare.
 
 concepts:
 - code: cbse3m.dc.tens
@@ -73,6 +77,45 @@ concepts:
       - when:
           v: 100
         say: That's one century. Double means two hundreds.
+  lesson:
+    - teach: 10 ones make 1 ten. 10 tens make 1 hundred. So 100 is 10 tens, and 200 is 20 tens.
+      picture:
+        kind: number_line
+        from: 0
+        to: 200
+        step: 10
+        points:
+        - at: 100
+          label: 1 hundred
+        - at: 200
+          label: 2 hundreds
+        alt: A number line from 0 to 200 marking 100 and 200.
+      check:
+        prompt: How many tens make 200?
+        options:
+        - '20'
+        - '2'
+        - '10'
+        answer: '20'
+        why: Each hundred is 10 tens, so 2 hundreds are 20 tens.
+    - teach: Numbers after 100 have hundreds, tens and ones. 137 = 1 hundred, 3 tens, 7 ones = 100 + 30 + 7.
+      check:
+        prompt: '1 hundred, 2 tens and 5 ones make:'
+        options:
+        - '125'
+        - '152'
+        - '1025'
+        answer: '125'
+        why: 100 + 20 + 5 = 125.
+    - teach: 'In cricket, 100 runs is a century and 200 runs is a double century. To see how far a score is from 200, count on in tens: from 160: 170, 180, 190, 200 is 4 tens, so 40 more.'
+      check:
+        prompt: A batter has 180. How many more runs for 200?
+        options:
+        - '20'
+        - '120'
+        - '2'
+        answer: '20'
+        why: 180 to 190 to 200 is 2 jumps of ten.
   items:
   - prompt: '10 tens make:'
     answer: '100'
@@ -135,6 +178,108 @@ concepts:
     - Compare the tens.
     solution: 181 has 8 tens and 1 one, the most.
     mistakes: {"180": "m5_compare_digits"}
+  - prompt: '1 hundred and 4 tens make:'
+    answer: '140'
+    check: 100+40
+    difficulty: 1
+    hints:
+    - 1 hundred is 100.
+    - 4 tens is 40.
+    solution: 'Step 1: 100 + 40. Step 2: = 140.'
+    mistakes:
+      '14': c3m3_place
+      '104': c3m3_place
+  - prompt: How many tens are in 150?
+    answer: '15'
+    check: 150/10
+    difficulty: 2
+    hints:
+    - 100 has 10 tens.
+    - 50 has 5 more tens.
+    solution: 'Step 1: 100 = 10 tens, 50 = 5 tens. Step 2: 10 + 5 = 15 tens.'
+    mistakes:
+      '5': c3m3_tens
+      '1': c3m3_tens
+  - prompt: What number has 1 hundred, 9 tens and 9 ones?
+    answer: '199'
+    check: 100+90+9
+    difficulty: 1
+    hints:
+    - 100 + 90 + 9.
+    - Write each part in its place.
+    solution: 'Step 1: 100 + 90 = 190. Step 2: 190 + 9 = 199.'
+    mistakes:
+      '1099': c3m3_place
+      '109': c3m3_place
+  - prompt: 'Count in tens: 140, 150, 160, ___. What comes next?'
+    answer: '170'
+    check: 160+10
+    difficulty: 1
+    hints:
+    - Each step goes up by 10.
+    - Add 10 to 160.
+    solution: 'Step 1: The numbers go up by 10. Step 2: 160 + 10 = 170.'
+    mistakes:
+      '161': c3m3_jump
+      '200': c3m3_jump
+  - prompt: A batter has scored 130 runs. How many more runs are needed for a double century?
+    answer: '70'
+    check: 200-130
+    difficulty: 2
+    hints:
+    - A double century is 200.
+    - Count on in tens from 130.
+    solution: 'Step 1: 130 → 200 is 7 jumps of 10. Step 2: 70 more runs.'
+    mistakes:
+      '170': c3m3_jump
+      '7': c3m3_tens
+  - prompt: Which number is between 160 and 170?
+    options:
+    - '165'
+    - '156'
+    - '175'
+    answer: '165'
+    difficulty: 1
+    hints:
+    - It must be bigger than 160.
+    - It must be smaller than 170.
+    solution: 'Step 1: 165 is more than 160. Step 2: 165 is less than 170.'
+    mistakes:
+      '156': c3m3_place
+      '175': c3m3_place
+  - prompt: In 172, what is the value of the digit 7?
+    answer: '70'
+    check: '70'
+    difficulty: 2
+    hints:
+    - Which place is the 7 in?
+    - It is in the tens place.
+    solution: 'Step 1: 172 = 100 + 70 + 2. Step 2: The 7 stands for 70.'
+    mistakes:
+      '7': c3m3_place
+      '700': c3m3_place
+  - prompt: Write one hundred eighty-three in numbers.
+    answer: '183'
+    check: '183'
+    difficulty: 2
+    hints:
+    - One hundred = 100, eighty = 80, three = 3.
+    - Put the digits in place.
+    solution: 'Step 1: 100 + 80 + 3. Step 2: = 183.'
+    mistakes:
+      '10083': c3m3_place
+      '1803': c3m3_place
+  - prompt: A school has 18 bundles of 10 notebooks and 6 loose ones. How many notebooks?
+    answer: '186'
+    check: 18*10+6
+    difficulty: 3
+    hints:
+    - 18 tens is how many?
+    - Then add the 6 loose ones.
+    solution: 'Step 1: 18 tens = 180. Step 2: 180 + 6 = 186.'
+    mistakes:
+      '24': c3m3_tens
+      '1806': c3m3_tens
 - code: cbse3m.dc.add
   title: Adding and taking away tens
   after:
@@ -212,6 +357,47 @@ concepts:
       bin: '190'
       clue: A hundred and 9 tens.
       why: '190.'
+  lesson:
+    - teach: 'To add tens, add only the tens. 130 + 40: 13 tens + 4 tens = 17 tens = 170. The ones stay as they are.'
+      check:
+        prompt: 110 + 50 = ?
+        options:
+        - '160'
+        - '115'
+        - '610'
+        answer: '160'
+        why: 11 tens + 5 tens = 16 tens = 160.
+    - teach: 'On a number line, adding tens is jumping forward by 10s. Taking away tens is jumping back. 170 − 30: jump back 3 times: 160, 150, 140.'
+      picture:
+        kind: number_line
+        from: 130
+        to: 180
+        step: 10
+        jumps:
+        - from: 140
+          to: 150
+        - from: 150
+          to: 160
+        - from: 160
+          to: 170
+        alt: 'Three jumps of 10 between 140 and 170: going back from 170 lands on 140.'
+      check:
+        prompt: 190 − 20 = ?
+        options:
+        - '170'
+        - '210'
+        - '188'
+        answer: '170'
+        why: 'Two jumps back of 10 from 190: 180, 170.'
+    - teach: The number just after is 1 more; the number just before is 1 less. After 159 comes 160. Before 160 comes 159.
+      check:
+        prompt: What comes just before 180?
+        options:
+        - '179'
+        - '181'
+        - '170'
+        answer: '179'
+        why: 1 less than 180 is 179.
   items:
   - prompt: 120 + 30 = ?
     answer: '150'
@@ -269,3 +455,102 @@ concepts:
     - Write 1, 6, 4.
     solution: 100 + 60 + 4 = 164.
     mistakes: {"1604": "m3_expanded", "174": "m3_expanded"}
+  - prompt: 140 + 50 = ?
+    answer: '190'
+    check: 140+50
+    difficulty: 1
+    hints:
+    - 14 tens and 5 tens.
+    - How many tens together?
+    solution: 'Step 1: 14 tens + 5 tens = 19 tens. Step 2: = 190.'
+    mistakes:
+      '145': c3m3_tens
+      '640': c3m3_tens
+  - prompt: 200 − 60 = ?
+    answer: '140'
+    check: 200-60
+    difficulty: 2
+    hints:
+    - 200 is 20 tens.
+    - Take away 6 tens.
+    solution: 'Step 1: 20 tens − 6 tens = 14 tens. Step 2: = 140.'
+    mistakes:
+      '260': c3m3_jump
+      '160': c3m3_jump
+  - prompt: What comes just after 169?
+    answer: '170'
+    check: 169+1
+    difficulty: 1
+    hints:
+    - Add 1 to 169.
+    - 9 ones and 1 more make a new ten.
+    solution: 'Step 1: 169 + 1. Step 2: = 170.'
+    mistakes:
+      '168': c3m3_next
+      '1610': c3m3_next
+  - prompt: What comes just before 101?
+    answer: '100'
+    check: 101-1
+    difficulty: 1
+    hints:
+    - Take 1 away.
+    - One less than 101.
+    solution: 'Step 1: 101 − 1. Step 2: = 100.'
+    mistakes:
+      '102': c3m3_next
+      '99': c3m3_next
+  - prompt: Start at 200 and make 4 jumps back of 10. Where do you land?
+    answer: '160'
+    check: 200-40
+    difficulty: 2
+    hints:
+    - Each jump takes away 10.
+    - 190, 180, ...
+    solution: 'Step 1: 4 jumps of 10 = 40. Step 2: 200 − 40 = 160.'
+    mistakes:
+      '196': c3m3_jump
+      '240': c3m3_jump
+  - prompt: 'Skip count by 5s: 150, 155, 160, ___. What comes next?'
+    answer: '165'
+    check: 160+5
+    difficulty: 1
+    hints:
+    - Each step adds 5.
+    - Add 5 to 160.
+    solution: 'Step 1: The pattern adds 5. Step 2: 160 + 5 = 165.'
+    mistakes:
+      '170': c3m3_jump
+      '161': c3m3_jump
+  - prompt: A team made 120 runs on day 1 and 60 runs on day 2. How many runs in all?
+    answer: '180'
+    check: 120+60
+    difficulty: 2
+    hints:
+    - Put the two days together.
+    - 12 tens + 6 tens.
+    solution: 'Step 1: 120 + 60. Step 2: = 180 runs.'
+    mistakes:
+      '60': c3m3_tens
+      '126': c3m3_tens
+  - prompt: 100 + 70 + 8 = ?
+    answer: '178'
+    check: 100+70+8
+    difficulty: 1
+    hints:
+    - Put each part in its place.
+    - Hundreds, tens, ones.
+    solution: 'Step 1: 100 + 70 = 170. Step 2: 170 + 8 = 178.'
+    mistakes:
+      '1078': c3m3_place
+      '187': c3m3_place
+  - prompt: Sam had 190 stamps and gave away 30. Then Sam got 20 new ones. How many now?
+    answer: '180'
+    check: 190-30+20
+    difficulty: 3
+    hints:
+    - First take away 30.
+    - Then add 20.
+    solution: 'Step 1: 190 − 30 = 160. Step 2: 160 + 20 = 180.'
+    mistakes:
+      '240': c3m3_jump
+      '140': c3m3_jump

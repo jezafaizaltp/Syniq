@@ -6,6 +6,10 @@ title: Vacation with My Nani Maa
 tips:
   m3_add_places: "Add ones to ones and tens to tens: 4 + 3, then 2 tens + 1 ten."
   m3_ten_and_ten: "Put the two amounts together and add them."
+  c3m4_carry: Add the ones first. If they make 10 or more, move one ten over to the tens.
+  c3m4_borrow: If the top ones digit is smaller, open one ten into 10 ones before taking away.
+  c3m4_which: 'Ask: are things being put together, or taken away, or compared?'
+  c3m4_back: Check by adding your answer back to the number you took away.
 
 concepts:
 - code: cbse3m.nani.add
@@ -74,6 +78,56 @@ concepts:
       bin: '90'
       clue: 6 tens and 3 tens.
       why: 9 tens.
+  lesson:
+    - teach: 'Adding means putting together. Nani has 13 mangoes and picks 5 more: together that is 13 + 5 = 18. Words like ''in all'', ''altogether'' and ''more'' (when things join) tell you to add.'
+      check:
+        prompt: Nani has 10 hens and buys 4 more. How many hens in all?
+        options:
+        - '14'
+        - '6'
+        - '104'
+        answer: '14'
+        why: 'Buying more puts hens together: 10 + 4 = 14.'
+    - teach: 'For 2-digit numbers, add tens with tens and ones with ones. 32 + 25: tens 30 + 20 = 50, ones 2 + 5 = 7, so 57.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: tens
+        - size: 1
+          label: ones
+        rows:
+        - size: 1
+          label: '32'
+        - size: 1
+          label: '25'
+        - size: 1
+          label: sum
+        cells:
+        - - '30'
+          - '2'
+        - - '20'
+          - '5'
+        - - '50'
+          - '7'
+        alt: '32 + 25 split into tens and ones: 50 and 7 make 57.'
+      check:
+        prompt: 41 + 36 = ?
+        options:
+        - '77'
+        - '68'
+        - '717'
+        answer: '77'
+        why: 40 + 30 = 70 and 1 + 6 = 7, so 77.
+    - teach: 'If the ones make 10 or more, carry 1 ten. 27 + 16: ones 7 + 6 = 13, that is 1 ten and 3 ones. Tens 20 + 10 + 10 = 40. Answer 43.'
+      check:
+        prompt: 18 + 14 = ?
+        options:
+        - '32'
+        - '22'
+        - '212'
+        answer: '32'
+        why: 8 + 4 = 12 (carry 1 ten), 10 + 10 + 10 = 30, so 32.
   items:
   - prompt: Nani has 12 hens and 7 chicks. How many birds in all?
     answer: '19'
@@ -132,6 +186,108 @@ concepts:
     - 4 tens + 3 tens.
     solution: 46 + 30 = 76.
     mistakes: {"49": "m3_add_places", "79": "m3_add_places"}
+  - prompt: Nani picked 23 guavas and Raju picked 14. How many guavas in all?
+    answer: '37'
+    check: 23+14
+    difficulty: 1
+    hints:
+    - Put the two amounts together.
+    - Add tens, then ones.
+    solution: 'Step 1: 20 + 10 = 30, 3 + 4 = 7. Step 2: 37 guavas.'
+    mistakes:
+      '9': c3m4_which
+      '27': c3m4_carry
+  - prompt: 52 + 36 = ?
+    answer: '88'
+    check: 52+36
+    difficulty: 1
+    hints:
+    - 'Tens: 50 + 30.'
+    - 'Ones: 2 + 6.'
+    solution: 'Step 1: 50 + 30 = 80. Step 2: 2 + 6 = 8, so 88.'
+    mistakes:
+      '16': c3m4_which
+      '818': c3m4_carry
+  - prompt: 39 + 25 = ?
+    answer: '64'
+    check: 39+25
+    difficulty: 2
+    hints:
+    - Do 9 + 5 first.
+    - The ones make more than 10.
+    solution: 'Step 1: 9 + 5 = 14, carry 1 ten. Step 2: 30 + 20 + 10 = 60, so 64.'
+    mistakes:
+      '54': c3m4_carry
+      '514': c3m4_carry
+  - prompt: A bus took 26 people to the fair. Another bus took 38. How many people went?
+    answer: '64'
+    check: 26+38
+    difficulty: 2
+    hints:
+    - Add the two buses.
+    - 6 + 8 is more than 10.
+    solution: 'Step 1: 6 + 8 = 14, carry 1 ten. Step 2: 20 + 30 + 10 = 60, so 64.'
+    mistakes:
+      '54': c3m4_carry
+      '12': c3m4_which
+  - prompt: There are 45 coconuts on one tree and 45 on another. How many coconuts?
+    answer: '90'
+    check: 45+45
+    difficulty: 2
+    hints:
+    - 5 + 5 makes a full ten.
+    - Add the tens and the carried ten.
+    solution: 'Step 1: 5 + 5 = 10, carry 1. Step 2: 40 + 40 + 10 = 90.'
+    mistakes:
+      '80': c3m4_carry
+      '810': c3m4_carry
+  - prompt: Which words tell you to add?
+    options:
+    - how many in all
+    - how many are left
+    - how many fewer
+    answer: how many in all
+    difficulty: 1
+    hints:
+    - Adding is putting together.
+    - Which words mean everything together?
+    solution: 'Step 1: ''Left'' and ''fewer'' mean taking away or comparing. Step 2: ''In all'' means put together.'
+    mistakes:
+      how many are left: c3m4_which
+      how many fewer: c3m4_which
+  - prompt: Raju walked 18 steps to the well and 18 steps back. How many steps in all?
+    answer: '36'
+    check: 18+18
+    difficulty: 2
+    hints:
+    - Double 18.
+    - 8 + 8 makes more than 10.
+    solution: 'Step 1: 8 + 8 = 16, carry 1. Step 2: 10 + 10 + 10 = 30, so 36.'
+    mistakes:
+      '26': c3m4_carry
+      '216': c3m4_carry
+  - prompt: 60 + 27 = ?
+    answer: '87'
+    check: 60+27
+    difficulty: 1
+    hints:
+    - 60 has no ones.
+    - Just add the tens, keep the 7 ones.
+    solution: 'Step 1: 60 + 20 = 80. Step 2: 80 + 7 = 87.'
+    mistakes:
+      '67': c3m4_carry
+      '33': c3m4_which
+  - prompt: Nani made 24 laddoos in the morning, 17 at noon and 10 in the evening. How many laddoos?
+    answer: '51'
+    check: 24+17+10
+    difficulty: 3
+    hints:
+    - Add two numbers first, then the third.
+    - 24 + 17 needs a carry.
+    solution: 'Step 1: 24 + 17 = 41. Step 2: 41 + 10 = 51.'
+    mistakes:
+      '41': c3m4_which
+      '61': c3m4_carry
 - code: cbse3m.nani.sub
   title: Taking away and comparing
   after:
@@ -197,6 +353,43 @@ concepts:
       bin: '35'
       clue: '2 − 7: break a ten.'
       why: 12 − 7 = 5, 3 tens left.
+  lesson:
+    - teach: 'Taking away (subtraction) means some go away and we find what is left. 20 mangoes, 6 eaten: 20 − 6 = 14 left. Words like ''left'', ''gave away'', ''ate'' tell you to subtract.'
+      check:
+        prompt: 15 birds, 5 fly away. How many are left?
+        options:
+        - '10'
+        - '20'
+        - '5'
+        answer: '10'
+        why: 'Flying away takes them out: 15 − 5 = 10.'
+    - teach: 'To compare, find the difference: bigger minus smaller. 14 cows and 9 goats: 14 − 9 = 5 more cows. ''How many more'' and ''how many fewer'' both use the difference.'
+      picture:
+        kind: bars
+        unit: animals
+        bars:
+        - label: cows
+          value: 14
+        - label: goats
+          value: 9
+        alt: 14 cows and 9 goats; the difference is 5.
+      check:
+        prompt: 12 boys and 8 girls. How many fewer girls?
+        options:
+        - '4'
+        - '20'
+        - '8'
+        answer: '4'
+        why: 12 − 8 = 4.
+    - teach: 'If the top ones digit is too small, borrow a ten. 52 − 18: 2 − 8 cannot be done, so open one ten: 12 − 8 = 4, and 4 tens − 1 ten = 3 tens. Answer 34. Check: 34 + 18 = 52.'
+      check:
+        prompt: 31 − 14 = ?
+        options:
+        - '17'
+        - '23'
+        - '27'
+        answer: '17'
+        why: '11 − 4 = 7 and 2 − 1 = 1 ten, so 17. Check: 17 + 14 = 31.'
   items:
   - prompt: 25 mangoes, 8 were eaten. How many are left?
     answer: '17'
@@ -256,3 +449,108 @@ concepts:
     solution: 14 − 9 = 5.
     mistakes:
       '23': c3_count_once
+  - prompt: Nani had 48 eggs. 15 broke. How many eggs are left?
+    answer: '33'
+    check: 48-15
+    difficulty: 1
+    hints:
+    - Broken eggs are taken away.
+    - 'Ones: 8 − 5; tens: 4 − 1.'
+    solution: 'Step 1: 8 − 5 = 3. Step 2: 40 − 10 = 30, so 33.'
+    mistakes:
+      '63': c3m4_which
+      '43': c3m4_borrow
+  - prompt: 63 − 27 = ?
+    answer: '36'
+    check: 63-27
+    difficulty: 2
+    hints:
+    - Can you take 7 from 3?
+    - Open one ten first.
+    solution: 'Step 1: 13 − 7 = 6. Step 2: 5 tens − 2 tens = 3 tens, so 36.'
+    mistakes:
+      '44': c3m4_borrow
+      '90': c3m4_which
+  - prompt: A train has 70 seats. 45 are taken. How many seats are empty?
+    answer: '25'
+    check: 70-45
+    difficulty: 2
+    hints:
+    - Take the taken seats away from all seats.
+    - 0 − 5 needs a borrowed ten.
+    solution: 'Step 1: 10 − 5 = 5. Step 2: 6 tens − 4 tens = 2 tens, so 25.'
+    mistakes:
+      '35': c3m4_borrow
+      '115': c3m4_which
+  - prompt: Raju has 23 marbles and Meena has 31. How many more does Meena have?
+    answer: '8'
+    check: 31-23
+    difficulty: 2
+    hints:
+    - Bigger minus smaller.
+    - Count on from 23 to 31.
+    solution: 'Step 1: 31 − 23. Step 2: 11 − 3 = 8, 2 tens − 2 tens = 0, so 8.'
+    mistakes:
+      '54': c3m4_which
+      '12': c3m4_borrow
+  - prompt: Which question needs subtraction?
+    options:
+    - How many sweets are left after eating 4?
+    - How many sweets in two boxes?
+    - How many sweets if Nani adds 6?
+    answer: How many sweets are left after eating 4?
+    difficulty: 1
+    hints:
+    - Subtraction takes away.
+    - Look for 'left'.
+    solution: 'Step 1: Eating takes sweets away. Step 2: ''Left'' means subtract.'
+    mistakes:
+      How many sweets in two boxes?: c3m4_which
+      How many sweets if Nani adds 6?: c3m4_which
+  - prompt: 90 − 34 = ?
+    answer: '56'
+    check: 90-34
+    difficulty: 2
+    hints:
+    - 0 − 4 needs a borrowed ten.
+    - 10 − 4, then 8 tens − 3 tens.
+    solution: 'Step 1: 10 − 4 = 6. Step 2: 8 tens − 3 tens = 5 tens, so 56.'
+    mistakes:
+      '64': c3m4_borrow
+      '66': c3m4_borrow
+  - prompt: You worked out 45 − 19 = 26. Which sum checks it?
+    options:
+    - 26 + 19
+    - 45 + 19
+    - 26 + 45
+    answer: 26 + 19
+    difficulty: 2
+    hints:
+    - Add the answer back to what you took away.
+    - You should get 45.
+    solution: 'Step 1: 26 + 19 = 45. Step 2: It matches, so the answer is right.'
+    mistakes:
+      45 + 19: c3m4_back
+      26 + 45: c3m4_back
+  - prompt: Nani's village is 80 km away. We have travelled 52 km. How many km are left?
+    answer: '28'
+    check: 80-52
+    difficulty: 2
+    hints:
+    - Distance left = total − travelled.
+    - 0 − 2 needs a borrowed ten.
+    solution: 'Step 1: 10 − 2 = 8. Step 2: 7 tens − 5 tens = 2 tens, so 28 km.'
+    mistakes:
+      '32': c3m4_borrow
+      '132': c3m4_which
+  - prompt: Nani had 60 rupees. She spent 25 on vegetables and 18 on milk. How much is left?
+    answer: '17'
+    check: 60-25-18
+    difficulty: 3
+    hints:
+    - Take away one amount, then the other.
+    - 60 − 25 first.
+    solution: 'Step 1: 60 − 25 = 35. Step 2: 35 − 18 = 17 rupees.'
+    mistakes:
+      '35': c3m4_which
+      '23': c3m4_borrow

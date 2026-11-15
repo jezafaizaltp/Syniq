@@ -7,6 +7,10 @@ tips:
   m3_cm: "A pencil is short. Use the smaller unit on your ruler."
   m3_cm_in_m: "'Centi' means hundredth: a centimetre is one hundredth of a metre."
   m3_odd_jump: "The numbers go up by 2 each time and stay odd."
+  c3m10_core: Find the smallest part that repeats, mark where it starts again, and keep going.
+  c3m10_rule: Look at how much changes from one number to the next. Is it the same every time?
+  c3m10_unit: 'Think how long the thing is: does it fit on your ruler (cm), or is it longer than you (m)?'
+  c3m10_zero: Read where the thing starts and where it ends on the scale. The length is the gap between them.
 
 concepts:
 - code: cbse3m.party.pattern
@@ -78,6 +82,46 @@ concepts:
       - when:
           v: 15
         say: Take away 2, not 1.
+  lesson:
+    - teach: 'A repeating pattern has a core: the smallest part that repeats. In red, red, blue, red, red, blue, the core is ''red, red, blue''. Once you know the core, you can say what comes next.'
+      check:
+        prompt: 'What is the core of: cap, bell, cap, bell, cap, bell?'
+        options:
+        - cap, bell
+        - cap
+        - cap, bell, cap
+        answer: cap, bell
+        why: Those two repeat again and again.
+    - teach: Number patterns follow a rule. 3, 6, 9, 12 adds 3 each time. 40, 36, 32 takes away 4 each time. Find the rule by checking the gap between neighbours.
+      picture:
+        kind: number_line
+        from: 0
+        to: 15
+        jumps:
+        - from: 3
+          to: 6
+        - from: 6
+          to: 9
+        - from: 9
+          to: 12
+        alt: '3, 6, 9, 12 on a number line: each jump is 3.'
+      check:
+        prompt: Rule for 5, 10, 15, 20?
+        options:
+        - add 5
+        - add 10
+        - take away 5
+        answer: add 5
+        why: Each number is 5 more than the one before.
+    - teach: 'A growing pattern gets bigger each step: 1 star, 2 stars, 3 stars... or 2, 4, 6, 8. A shrinking pattern gets smaller.'
+      check:
+        prompt: What comes next? 1, 2, 3, 4, ___
+        options:
+        - '5'
+        - '4'
+        - '6'
+        answer: '5'
+        why: It grows by 1 each time.
   items:
   - prompt: What comes next? red, yellow, red, yellow, ___
     options:
@@ -142,6 +186,114 @@ concepts:
     - Add 2.
     solution: 7 + 2 = 9.
     mistakes: {"8": "m3_odd_jump", "11": "m3_odd_jump"}
+  - prompt: What comes next? 5, 10, 15, 20, ___
+    answer: '25'
+    check: 20+5
+    difficulty: 1
+    hints:
+    - What is added each time?
+    - 20 + 5.
+    solution: 'Step 1: The rule is add 5. Step 2: 20 + 5 = 25.'
+    mistakes:
+      '30': c3m10_rule
+      '21': c3m10_rule
+  - prompt: What comes next? 30, 27, 24, 21, ___
+    answer: '18'
+    check: 21-3
+    difficulty: 2
+    hints:
+    - Is the pattern going up or down?
+    - How much less each time?
+    solution: 'Step 1: The rule is take away 3. Step 2: 21 − 3 = 18.'
+    mistakes:
+      '24': c3m10_rule
+      '20': c3m10_rule
+  - prompt: 'Flags: green, white, white, green, white, white, ___'
+    options:
+    - green
+    - white
+    - orange
+    answer: green
+    difficulty: 1
+    hints:
+    - Find the core.
+    - green, white, white...
+    solution: 'Step 1: The core is green, white, white. Step 2: It starts again with green.'
+    mistakes:
+      white: c3m10_core
+      orange: c3m10_core
+  - prompt: What comes next? 100, 90, 80, 70, ___
+    answer: '60'
+    check: 70-10
+    difficulty: 1
+    hints:
+    - Take away the same each time.
+    - 70 − 10.
+    solution: 'Step 1: The rule is take away 10. Step 2: 70 − 10 = 60.'
+    mistakes:
+      '80': c3m10_rule
+      '69': c3m10_rule
+  - prompt: In the pattern A, B, C, A, B, C, what is the 8th letter?
+    options:
+    - B
+    - A
+    - C
+    answer: B
+    difficulty: 3
+    hints:
+    - The core has 3 letters.
+    - The 7th letter starts a new core.
+    solution: 'Step 1: Letters 7, 8, 9 are A, B, C. Step 2: The 8th is B.'
+    mistakes:
+      A: c3m10_core
+      C: c3m10_core
+  - prompt: What comes next? 2, 4, 8, 16, ___
+    answer: '32'
+    check: 16*2
+    difficulty: 3
+    hints:
+    - The gaps are not the same.
+    - Each number is double the one before.
+    solution: 'Step 1: Rule: double it. Step 2: 16 × 2 = 32.'
+    mistakes:
+      '18': c3m10_rule
+      '24': c3m10_rule
+  - prompt: A garland has 3 marigolds then 1 rose, again and again. How many marigolds come before the 2nd rose?
+    answer: '6'
+    check: 3*2
+    difficulty: 2
+    hints:
+    - Each core has 3 marigolds and 1 rose.
+    - Count two cores.
+    solution: 'Step 1: 2 cores up to the 2nd rose. Step 2: 3 + 3 = 6 marigolds.'
+    mistakes:
+      '3': c3m10_core
+      '8': c3m10_core
+  - prompt: What is the rule? 11, 22, 33, 44
+    options:
+    - add 11
+    - add 10
+    - add 2
+    answer: add 11
+    difficulty: 2
+    hints:
+    - Find the gap from 11 to 22.
+    - Is the gap the same each time?
+    solution: 'Step 1: 22 − 11 = 11. Step 2: Every gap is 11, so the rule is add 11.'
+    mistakes:
+      add 10: c3m10_rule
+      add 2: c3m10_rule
+  - prompt: What comes next? 1, 3, 5, 7, 9, ___
+    answer: '11'
+    check: 9+2
+    difficulty: 1
+    hints:
+    - Odd numbers.
+    - Add 2 each time.
+    solution: 'Step 1: Rule: add 2. Step 2: 9 + 2 = 11.'
+    mistakes:
+      '10': c3m10_rule
+      '13': c3m10_rule
 - code: cbse3m.party.length
   title: Measuring length
   after:
@@ -196,6 +348,42 @@ concepts:
       bin: Metres
       clue: Very long cloth.
       why: Metres.
+  lesson:
+    - teach: 'We can measure with our body: hand spans, foot lengths, steps. But different people have different hand sizes, so their counts differ. That is why we use a fixed unit.'
+      check:
+        prompt: Why do a child and a teacher get different hand-span counts for the same table?
+        options:
+        - their hands are different sizes
+        - the table changes
+        - one counted wrong
+        answer: their hands are different sizes
+        why: A bigger hand covers more each time, so fewer spans are needed.
+    - teach: A scale (ruler) measures in centimetres (cm). Put one end of the object at 0 and read the number at the other end. A pencil from 0 to 15 is 15 cm.
+      picture:
+        kind: number_line
+        from: 0
+        to: 20
+        jumps:
+        - from: 0
+          to: 15
+        alt: A pencil lying from 0 to 15 on a ruler measures 15 cm.
+      check:
+        prompt: An eraser lies from 0 to 4 on a scale. How long is it?
+        options:
+        - 4 cm
+        - 0 cm
+        - 40 cm
+        answer: 4 cm
+        why: 'Start at 0, end at 4: 4 cm.'
+    - teach: For long things like a room or a ribbon, we use metres (m). 1 metre = 100 centimetres. So 2 m = 200 cm.
+      check:
+        prompt: Which unit for the length of a classroom?
+        options:
+        - metre
+        - centimetre
+        - litre
+        answer: metre
+        why: A classroom is very long, so metres are easier.
   items:
   - prompt: Which unit is best for the length of a pencil?
     options:
@@ -261,3 +449,111 @@ concepts:
     - 25 + 15.
     solution: 25 + 15 = 40 cm.
     mistakes: {"10": "m3_add_places", "30": "m3_add_places"}
+  - prompt: How many centimetres are in 2 metres?
+    answer: '200'
+    check: 2*100
+    difficulty: 1
+    hints:
+    - 1 m = 100 cm.
+    - Double it.
+    solution: 'Step 1: 100 + 100. Step 2: = 200 cm.'
+    mistakes:
+      '20': c3m10_unit
+      '102': c3m10_unit
+  - prompt: Which unit is best for the length of an eraser?
+    options:
+    - centimetre
+    - metre
+    - kilogram
+    answer: centimetre
+    difficulty: 1
+    hints:
+    - An eraser is small.
+    - It fits on a ruler.
+    solution: 'Step 1: An eraser is a few cm long. Step 2: Use centimetres.'
+    mistakes:
+      metre: c3m10_unit
+      kilogram: c3m10_unit
+  - prompt: A crayon lies from 0 to 9 on a scale. How long is it in cm?
+    answer: '9'
+    check: '9'
+    difficulty: 1
+    hints:
+    - Where does it start?
+    - Where does it end?
+    solution: 'Step 1: From 0 to 9. Step 2: 9 cm.'
+    mistakes:
+      '10': c3m10_zero
+      '8': c3m10_zero
+  - prompt: A ribbon of 50 cm and another of 35 cm are joined. How long is the new ribbon?
+    answer: '85'
+    check: 50+35
+    difficulty: 2
+    hints:
+    - Joining means adding.
+    - 50 + 35.
+    solution: 'Step 1: 50 + 35. Step 2: = 85 cm.'
+    mistakes:
+      '15': c3m10_zero
+      '75': c3m10_zero
+  - prompt: A 100 cm string is cut and 40 cm is used. How much is left?
+    answer: '60'
+    check: 100-40
+    difficulty: 2
+    hints:
+    - Take away what is used.
+    - 100 − 40.
+    solution: 'Step 1: 100 − 40. Step 2: = 60 cm.'
+    mistakes:
+      '140': c3m10_zero
+      '40': c3m10_zero
+  - prompt: 'Which is longer: 1 metre or 90 cm?'
+    options:
+    - 1 metre
+    - 90 cm
+    - they are equal
+    answer: 1 metre
+    difficulty: 2
+    hints:
+    - Change 1 metre into cm.
+    - Compare 100 and 90.
+    solution: 'Step 1: 1 m = 100 cm. Step 2: 100 > 90, so 1 metre is longer.'
+    mistakes:
+      90 cm: c3m10_unit
+      they are equal: c3m10_unit
+  - prompt: A table is 6 hand spans long for a teacher. Would a child's count be more or fewer spans?
+    options:
+    - more, because a child's span is smaller
+    - fewer, because a child's span is smaller
+    - the same
+    answer: more, because a child's span is smaller
+    difficulty: 3
+    hints:
+    - Smaller steps need more of them.
+    - Who has the smaller hand?
+    solution: 'Step 1: A child''s span is smaller. Step 2: So more spans fit along the table.'
+    mistakes:
+      fewer, because a child's span is smaller: c3m10_unit
+      the same: c3m10_unit
+  - prompt: A pencil lies from 2 to 10 on a scale. How long is it in cm?
+    answer: '8'
+    check: 10-2
+    difficulty: 3
+    hints:
+    - It does not start at 0.
+    - Count from 2 to 10.
+    solution: 'Step 1: End − start. Step 2: 10 − 2 = 8 cm.'
+    mistakes:
+      '10': c3m10_zero
+      '12': c3m10_zero
+  - prompt: For a class party, 4 streamers of 1 metre each are needed. How many cm is that?
+    answer: '400'
+    check: 4*100
+    difficulty: 2
+    hints:
+    - 1 m = 100 cm.
+    - 4 × 100.
+    solution: 'Step 1: Each is 100 cm. Step 2: 4 × 100 = 400 cm.'
+    mistakes:
+      '40': c3m10_unit
+      '104': c3m10_unit
