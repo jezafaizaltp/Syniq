@@ -557,6 +557,58 @@ def test_every_cbseukg_world_topic_teaches_first_then_gives_fifteen_questions():
     assert sum(1 for path, pack in PACKS if rel(path).startswith("cbseukg/world/") for _ in pack["concepts"]) >= 6
 
 
+def test_every_cbselkg_maths_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE LKG Maths: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbselkg/maths/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbselkg/maths/") for _ in pack["concepts"]) >= 8
+
+
+def test_every_cbselkg_english_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE LKG English: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbselkg/english/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbselkg/english/") for _ in pack["concepts"]) >= 8
+
+
+def test_every_cbselkg_hindi_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE LKG Hindi: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbselkg/hindi/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbselkg/hindi/") for _ in pack["concepts"]) >= 6
+
+
+def test_every_cbselkg_world_topic_teaches_first_then_gives_fifteen_questions():
+    """CBSE LKG My World: a lesson before practice, and at least 15 questions."""
+    short = [
+        f"{rel(path)} {c['code']}: lesson={'lesson' in c}, questions={len(c['items'])}"
+        for path, pack in PACKS
+        if rel(path).startswith("cbselkg/world/")
+        for c in pack["concepts"]
+        if "lesson" not in c or len(c["items"]) < 15
+    ]
+    assert not short, short
+    assert sum(1 for path, pack in PACKS if rel(path).startswith("cbselkg/world/") for _ in pack["concepts"]) >= 6
+
+
 # The answer's words or number appear in these first hints, but they don't give it away: the number is part of the
 # question itself, or the hint lists every level or both choices.
 FIRST_HINT_MAY_NAME = {
