@@ -13,6 +13,12 @@ tips:
   m5_scale: "Each cm on the map stands for 1 km on the ground. Multiply the map distance by 1 km."
   m5_scale_divide: "Each cm stands for 10 km. How many 10s make 80?"
   m5_sunrise: "The Sun sets in the west. Morning sunlight comes from the opposite side."
+  c5m14_dir: 'Draw a cross and mark the four directions round it, starting with the top of the map. Opposites sit at the two ends of the same line.'
+  c5m14_turn: Stand facing the direction given, then turn your body the way the question says.
+  c5m14_grid: Read the column letter along the bottom first, then the row number up the side.
+  c5m14_net: Steps in opposite directions cancel out. Work out how far North or South and how far East or West you end up.
+  c5m14_scale: Map distance × what 1 cm stands for = real distance.
+  c5m14_back: To go from real distance to map distance, divide by what 1 cm stands for.
 concepts:
 - code: cbse5m.map.direction
   title: Directions and grid positions
@@ -74,6 +80,46 @@ concepts:
       bin: West
       clue: With the top pointing up.
       why: West.
+  lesson:
+    - teach: The four main directions are North, East, South and West. On most maps North is at the top, South at the bottom, East on the right and West on the left.
+      picture:
+        kind: compare
+        columns:
+        - title: Up and down
+          points:
+          - 'North: top'
+          - 'South: bottom'
+        - title: Right and left
+          points:
+          - 'East: right'
+          - 'West: left'
+        alt: On a map North is up, South down, East right and West left.
+      check:
+        prompt: On a map, which direction is on the right?
+        options:
+        - East
+        - West
+        - North
+        answer: East
+        why: North up, so East is to the right.
+    - teach: The Sun rises in the East and sets in the West. Facing North, East is on your right and West on your left; South is behind you.
+      check:
+        prompt: Facing North, what is behind you?
+        options:
+        - South
+        - East
+        - West
+        answer: South
+        why: South is opposite North.
+    - teach: 'A grid map names each box by its column letter and row number, like B3. Directions on a grid: ''2 blocks North, then 3 blocks East''. Walking 4 North then 4 South brings you back to the start.'
+      check:
+        prompt: You walk 3 blocks East then 3 blocks West. Where are you?
+        options:
+        - Back at the start
+        - 6 blocks East
+        - 3 blocks North
+        answer: Back at the start
+        why: East and West are opposite, so they cancel.
   items:
   - prompt: On most maps, which direction is at the top?
     options:
@@ -151,6 +197,127 @@ concepts:
     - Opposite of where it sets.
     solution: The Sun rises in the East.
     mistakes: {"West": "m5_sunrise"}
+  - prompt: What is the opposite of North?
+    options:
+    - South
+    - East
+    - West
+    answer: South
+    difficulty: 1
+    hints:
+    - Opposite means facing the other way.
+    - Top and bottom of a map.
+    solution: 'Step 1: North is top. Step 2: bottom is South.'
+    mistakes:
+      East: c5m14_dir
+      West: c5m14_dir
+  - prompt: Where does the Sun set?
+    options:
+    - West
+    - East
+    - North
+    answer: West
+    difficulty: 1
+    hints:
+    - It rises on one side and sets on the opposite.
+    - It rises in the East.
+    solution: 'Step 1: rises in the East. Step 2: sets in the opposite: West.'
+    mistakes:
+      East: c5m14_dir
+      North: c5m14_dir
+  - prompt: Facing East, which way is on your left?
+    options:
+    - North
+    - South
+    - West
+    answer: North
+    difficulty: 3
+    hints:
+    - Face East (right side of the map).
+    - Your left hand points up the map.
+    solution: 'Step 1: facing East, up the map is on your left. Step 2: up is North.'
+    mistakes:
+      South: c5m14_turn
+      West: c5m14_turn
+  - prompt: On a grid, which box is in column A and row 2?
+    options:
+    - A2
+    - 2A
+    - B1
+    answer: A2
+    difficulty: 1
+    hints:
+    - Letter first, then number.
+    - Column A, row 2.
+    solution: 'Step 1: column letter A. Step 2: row 2: A2.'
+    mistakes:
+      2A: c5m14_grid
+      B1: c5m14_grid
+  - prompt: You walk 5 blocks North then 2 blocks South. How many blocks North of the start are you?
+    answer: '3'
+    check: 5-2
+    difficulty: 2
+    hints:
+    - South takes you back toward the start.
+    - 5 − 2.
+    solution: 'Step 1: 5 North, 2 back South. Step 2: 3 blocks North.'
+    mistakes:
+      '7': c5m14_net
+      '2': c5m14_net
+  - prompt: 'Kerala is on which coast of India: the coast facing the Arabian Sea in the West, or the Bay of Bengal in the East?'
+    options:
+    - West
+    - East
+    - North
+    answer: West
+    difficulty: 2
+    hints:
+    - The Arabian Sea is on the left of India's map.
+    - Left is which direction?
+    solution: 'Step 1: Kerala faces the Arabian Sea. Step 2: that is the West coast.'
+    mistakes:
+      East: c5m14_dir
+      North: c5m14_dir
+  - prompt: From box C3 you move 1 box right. Which box are you in?
+    options:
+    - D3
+    - C4
+    - B3
+    answer: D3
+    difficulty: 2
+    hints:
+    - Moving right changes the column letter.
+    - The next letter after C.
+    solution: 'Step 1: right changes column C → D. Step 2: row stays 3: D3.'
+    mistakes:
+      C4: c5m14_grid
+      B3: c5m14_grid
+  - prompt: Facing West, you make a half turn. Which way do you face?
+    options:
+    - East
+    - North
+    - South
+    answer: East
+    difficulty: 2
+    hints:
+    - A half turn faces the opposite way.
+    - Opposite of West.
+    solution: 'Step 1: half turn = opposite. Step 2: opposite of West is East.'
+    mistakes:
+      North: c5m14_turn
+      South: c5m14_turn
+  - prompt: Ali walks 4 blocks East, 2 North, then 4 West. How far from the start is he, in blocks?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - East and West cancel each other.
+    - Only the North blocks are left.
+    solution: 'Step 1: 4 East and 4 West cancel. Step 2: he is 2 blocks North.'
+    mistakes:
+      '10': c5m14_net
+      '6': c5m14_net
+      '0': c5m14_net
 - code: cbse5m.map.scale
   title: Map scale and distances
   after:
@@ -229,6 +396,42 @@ concepts:
           - 6
           - 10
         say: 'Too big: 4 cm would go past 20 km.'
+  lesson:
+    - teach: A map is a small drawing of a big place. The scale tells what 1 cm on the map stands for. If 1 cm = 1 km, then 6 cm on the map is 6 km in real life.
+      check:
+        prompt: 1 cm = 2 km. A road is 3 cm on the map. How long is it really?
+        options:
+        - 6 km
+        - 5 km
+        - 3 km
+        answer: 6 km
+        why: 3 × 2 = 6.
+    - teach: 'To find a real distance: measure the map with a ruler, then multiply by the scale. With 1 cm = 50 m, a 4 cm path is 4 × 50 = 200 m.'
+      picture:
+        kind: flow
+        steps:
+        - 'Measure on map: 4 cm'
+        - 'Scale: 1 cm = 50 m'
+        - 4 × 50
+        - 'Real: 200 m'
+        alt: Multiply map centimetres by the scale to get the real distance.
+      check:
+        prompt: 1 cm = 100 m. A lane is 5 cm on the map. How long is it?
+        options:
+        - 500 m
+        - 105 m
+        - 50 m
+        answer: 500 m
+        why: 5 × 100 = 500.
+    - teach: 'To draw a real distance on a map, divide by the scale: 80 km with 1 cm = 10 km is 8 cm. To find the shortest route, add each route''s parts and compare.'
+      check:
+        prompt: 1 cm = 5 km. Two towns are 20 km apart. How far apart on the map?
+        options:
+        - 4 cm
+        - 100 cm
+        - 15 cm
+        answer: 4 cm
+        why: 20 ÷ 5 = 4.
   items:
   - prompt: On a map, 1 cm = 1 km. Two towns are 6 cm apart on the map. How many km apart are they really?
     answer: '6'
@@ -291,3 +494,108 @@ concepts:
     solution: 10 ÷ 2 = 5 km.
     mistakes:
       '20': c5_scale
+  - prompt: On a map 1 cm = 3 km. Two villages are 5 cm apart. How many km apart are they really?
+    answer: '15'
+    check: 5*3
+    difficulty: 1
+    hints:
+    - Map cm × scale.
+    - 5 × 3.
+    solution: 'Step 1: 5 × 3. Step 2: = 15 km.'
+    mistakes:
+      '8': c5m14_scale
+      '2': c5m14_scale
+  - prompt: On a map 1 cm = 20 m. A path is 6 cm. How many metres is the real path?
+    answer: '120'
+    check: 6*20
+    difficulty: 1
+    hints:
+    - Multiply by the scale.
+    - 6 × 20.
+    solution: 'Step 1: 6 × 20. Step 2: = 120 m.'
+    mistakes:
+      '26': c5m14_scale
+      '14': c5m14_scale
+  - prompt: On a map 1 cm = 4 km. Two places are 32 km apart. How many cm apart on the map?
+    answer: '8'
+    check: 32//4
+    difficulty: 2
+    hints:
+    - Real distance ÷ scale.
+    - 32 ÷ 4.
+    solution: 'Step 1: 32 ÷ 4. Step 2: = 8 cm.'
+    mistakes:
+      '128': c5m14_back
+      '28': c5m14_back
+  - prompt: 'Route A: 2 km + 5 km. Route B: 3 km + 3 km. Which is shorter?'
+    options:
+    - Route B
+    - Route A
+    - They are equal
+    answer: Route B
+    difficulty: 1
+    hints:
+    - Add each route.
+    - A = 7 km, B = ?
+    solution: 'Step 1: A = 7 km, B = 6 km. Step 2: B is shorter.'
+    mistakes:
+      Route A: c5m14_scale
+      They are equal: c5m14_scale
+  - prompt: On a map 2 cm = 1 km. A road is 14 cm. How many km is it?
+    answer: '7'
+    check: 14//2
+    difficulty: 2
+    hints:
+    - Every 2 cm is 1 km.
+    - 14 ÷ 2.
+    solution: 'Step 1: 14 ÷ 2. Step 2: = 7 km.'
+    mistakes:
+      '28': c5m14_scale
+      '12': c5m14_scale
+  - prompt: On a map 1 cm = 25 km. A river is 8 cm long on the map. How long is it really, in km?
+    answer: '200'
+    check: 8*25
+    difficulty: 2
+    hints:
+    - 8 × 25.
+    - 4 × 25 = 100.
+    solution: 'Step 1: 8 × 25. Step 2: = 200 km.'
+    mistakes:
+      '33': c5m14_scale
+      '100': c5m14_scale
+  - prompt: Which scale makes the biggest drawing of the same town?
+    options:
+    - 1 cm = 100 m
+    - 1 cm = 1 km
+    - 1 cm = 10 km
+    answer: 1 cm = 100 m
+    difficulty: 3
+    hints:
+    - Each cm stands for less ground in a bigger drawing.
+    - Which scale gives the most cm for the same town?
+    solution: 'Step 1: 1 cm for only 100 m needs many cm for a town. Step 2: so the drawing is biggest.'
+    mistakes:
+      1 cm = 1 km: c5m14_back
+      1 cm = 10 km: c5m14_back
+  - prompt: On a map 1 cm = 50 m. The school is 3 cm from home and the park is 5 cm. How many metres farther is the park?
+    answer: '100'
+    check: (5-3)*50
+    difficulty: 3
+    hints:
+    - Find the difference on the map first.
+    - Then multiply by the scale.
+    solution: 'Step 1: 5 − 3 = 2 cm. Step 2: 2 × 50 = 100 m.'
+    mistakes:
+      '400': c5m14_scale
+      '2': c5m14_scale
+  - prompt: On a map 1 cm = 10 km. Route X is 3 cm + 4 cm. How many km is Route X?
+    answer: '70'
+    check: (3+4)*10
+    difficulty: 2
+    hints:
+    - Add the map lengths first.
+    - Then multiply by 10.
+    solution: 'Step 1: 3 + 4 = 7 cm. Step 2: 7 × 10 = 70 km.'
+    mistakes:
+      '7': c5m14_scale
+      '17': c5m14_scale

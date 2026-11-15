@@ -9,6 +9,11 @@ tips:
   m5_both_land: "The 4-jumper lands only on the 4 times table. Which choice is in that table?"
   m5_not_land: "The frog lands on the 4 times table. Which number is NOT in it?"
   m5_skip5: "Jumps of 5 always land on numbers ending in 0 or 5."
+  c5m13_land: An animal starting at 0 lands on the times table of its jump size.
+  c5m13_count: Number of jumps = distance ÷ jump size.
+  c5m13_start: If it does not start at 0, add the jumps on to the start number.
+  c5m13_meet: List where each animal lands. The first number in both lists is where they meet.
+  c5m13_ahead: Each jump, the longer jumper gains the difference between the two jumps.
 concepts:
 - code: cbse5m.jumps.skip
   title: Skip counting with jumps
@@ -89,6 +94,51 @@ concepts:
       - when:
           v: 30
         say: 30 is 35 − 5. How many 5s make 35?
+  lesson:
+    - teach: A frog that jumps 3 steps each time from 0 lands on 3, 6, 9, 12 ... These are the multiples of 3. After 5 jumps it is at 3 × 5 = 15.
+      picture:
+        kind: number_line
+        from: 0
+        to: 15
+        step: 1
+        jumps:
+        - from: 0
+          to: 3
+        - from: 3
+          to: 6
+        - from: 6
+          to: 9
+        - from: 9
+          to: 12
+        - from: 12
+          to: 15
+        alt: A frog jumping 3 at a time lands on 3, 6, 9, 12 and 15.
+      check:
+        prompt: A frog jumps 4 from 0. Where is it after 3 jumps?
+        options:
+        - '12'
+        - '7'
+        - '4'
+        answer: '12'
+        why: 4 × 3 = 12.
+    - teach: 'To find how many jumps reach a number, divide: to reach 30 with jumps of 3 takes 30 ÷ 3 = 10 jumps. If the number does not divide exactly, the animal never lands on it.'
+      check:
+        prompt: Jumping 5 from 0, will a frog land on 22?
+        options:
+        - 'No'
+        - 'Yes'
+        - Only after 22 jumps
+        answer: 'No'
+        why: 22 is not in the 5 times table.
+    - teach: 'If it starts somewhere else, add the jumps to the start. From 2 with jumps of 5: 2, 7, 12, 17. After 3 jumps it is at 2 + 3 × 5 = 17.'
+      check:
+        prompt: Starting at 1, jumping 3 each time, where is it after 2 jumps?
+        options:
+        - '7'
+        - '6'
+        - '4'
+        answer: '7'
+        why: 1 + 3 + 3 = 7.
   items:
   - prompt: A frog jumps 3 steps each time, starting at 0. Where is it after 7 jumps?
     answer: '21'
@@ -155,6 +205,114 @@ concepts:
     - Is 30 in the 4 table?
     solution: 30 ÷ 4 leaves 2, so the frog skips 30.
     mistakes: {"28": "m5_not_land"}
+  - prompt: A frog jumps 6 steps each time from 0. Where is it after 5 jumps?
+    answer: '30'
+    check: 6*5
+    difficulty: 1
+    hints:
+    - Jump size × number of jumps.
+    - 6 × 5.
+    solution: 'Step 1: 6 × 5. Step 2: = 30.'
+    mistakes:
+      '11': c5m13_land
+      '25': c5m13_land
+  - prompt: A rabbit jumps 7 each time from 0. How many jumps to reach 63?
+    answer: '9'
+    check: 63//7
+    difficulty: 2
+    hints:
+    - Distance ÷ jump size.
+    - 63 ÷ 7.
+    solution: 'Step 1: 63 ÷ 7. Step 2: = 9 jumps.'
+    mistakes:
+      '56': c5m13_count
+      '8': c5m13_count
+  - prompt: A frog jumps 3 each time from 0. Which number will it land on?
+    options:
+    - '27'
+    - '28'
+    - '29'
+    answer: '27'
+    difficulty: 1
+    hints:
+    - It lands on the 3 times table.
+    - 3 × 9 = ?
+    solution: 'Step 1: 3 × 9 = 27. Step 2: so it lands on 27.'
+    mistakes:
+      '28': c5m13_land
+      '29': c5m13_land
+  - prompt: A grasshopper starts at 4 and jumps 3 each time. Where is it after 5 jumps?
+    answer: '19'
+    check: 4+5*3
+    difficulty: 2
+    hints:
+    - 5 jumps of 3 is 15.
+    - Add the starting number.
+    solution: 'Step 1: 5 × 3 = 15. Step 2: 4 + 15 = 19.'
+    mistakes:
+      '15': c5m13_start
+      '12': c5m13_start
+  - prompt: A kangaroo jumps 9 m each time. How far in 7 jumps, in m?
+    answer: '63'
+    check: 9*7
+    difficulty: 1
+    hints:
+    - 9 × 7.
+    - Think of 9 × 7 as 10 × 7 − 7.
+    solution: 'Step 1: 9 × 7. Step 2: = 63 m.'
+    mistakes:
+      '16': c5m13_land
+      '56': c5m13_land
+  - prompt: Which number would a frog jumping 6 from 0 NOT land on?
+    options:
+    - '40'
+    - '36'
+    - '42'
+    answer: '40'
+    difficulty: 2
+    hints:
+    - It lands on the 6 times table.
+    - Is 40 ÷ 6 exact?
+    solution: 'Step 1: 36 = 6×6, 42 = 6×7. Step 2: 40 is not in the 6 table.'
+    mistakes:
+      '36': c5m13_land
+      '42': c5m13_land
+  - prompt: A frog jumps 8 from 0. After how many jumps does it pass 50 for the first time?
+    answer: '7'
+    check: '7'
+    difficulty: 3
+    hints:
+    - 8 × 6 = 48.
+    - Is 48 past 50?
+    solution: 'Step 1: 8 × 6 = 48, still below 50. Step 2: 8 × 7 = 56, past 50: 7 jumps.'
+    mistakes:
+      '6': c5m13_count
+      '50': c5m13_count
+  - prompt: A rabbit starts at 3 and jumps 4 each time. Which number does it land on?
+    options:
+    - '15'
+    - '16'
+    - '12'
+    answer: '15'
+    difficulty: 3
+    hints:
+    - 'List the landings: 3, 7, 11 ...'
+    - Keep adding 4.
+    solution: 'Step 1: 3, 7, 11, 15. Step 2: it lands on 15.'
+    mistakes:
+      '16': c5m13_start
+      '12': c5m13_start
+  - prompt: A frog needs 12 jumps to reach 48 from 0. How long is each jump?
+    answer: '4'
+    check: 48//12
+    difficulty: 2
+    hints:
+    - Total distance ÷ number of jumps.
+    - 48 ÷ 12.
+    solution: 'Step 1: 48 ÷ 12. Step 2: = 4.'
+    mistakes:
+      '36': c5m13_count
+      '60': c5m13_count
 - code: cbse5m.jumps.meet
   title: When two jumpers meet
   after:
@@ -219,6 +377,46 @@ concepts:
       - when:
           v: 20
         say: 20 is in the 5 list, but not the 8 list.
+  lesson:
+    - teach: 'Two animals start at 0. One jumps 2, the other 3. The first lands on 2, 4, 6, 8 ...; the second on 3, 6, 9 ... They both land on 6, 12, 18: the common multiples.'
+      picture:
+        kind: compare
+        columns:
+        - title: Jumps of 2
+          points:
+          - 2, 4, 6
+          - 8, 10, 12
+        - title: Jumps of 3
+          points:
+          - 3, 6, 9
+          - 12, 15, 18
+        alt: Jumps of 2 and jumps of 3 both land on 6 and 12.
+      check:
+        prompt: Where do jumps of 2 and 5 first meet?
+        options:
+        - '10'
+        - '7'
+        - '5'
+        answer: '10'
+        why: 10 is the first number in both lists.
+    - teach: 'The first meeting point is the smallest common multiple. For jumps of 4 and 6, list: 4, 8, 12 and 6, 12. They first meet at 12.'
+      check:
+        prompt: Where do jumps of 3 and 4 first meet?
+        options:
+        - '12'
+        - '7'
+        - '24'
+        answer: '12'
+        why: 3, 6, 9, 12 and 4, 8, 12.
+    - teach: If a deer jumps 5 m and a frog 2 m, each jump the deer gains 3 m. After 4 jumps each, the deer is 3 × 4 = 12 m ahead.
+      check:
+        prompt: A horse jumps 4 m and a goat 3 m. After 5 jumps each, how far ahead is the horse?
+        options:
+        - 5 m
+        - 7 m
+        - 35 m
+        answer: 5 m
+        why: 'It gains 1 m each jump: 1 × 5 = 5 m.'
   items:
   - prompt: A frog jumps 2 and a rabbit jumps 3, both from 0. What is the first number they both land on?
     answer: '6'
@@ -279,3 +477,109 @@ concepts:
     - 9, 18.
     solution: They first meet at 18.
     mistakes: {"36": "m5_lcm", "54": "m5_lcm"}
+  - prompt: A frog jumps 3 and a rabbit 4, both from 0. What is the first number they both land on?
+    answer: '12'
+    check: '12'
+    difficulty: 1
+    hints:
+    - List the 3 table and the 4 table.
+    - Look for the first match.
+    solution: 'Step 1: 3, 6, 9, 12 and 4, 8, 12. Step 2: 12.'
+    mistakes:
+      '7': c5m13_meet
+      '24': c5m13_meet
+  - prompt: Jumps of 5 and 10 from 0. Where do they first meet?
+    answer: '10'
+    check: '10'
+    difficulty: 1
+    hints:
+    - The 10 jumper lands on 10 first.
+    - Does the 5 jumper land on 10?
+    solution: 'Step 1: 5, 10 and 10. Step 2: they first meet at 10.'
+    mistakes:
+      '50': c5m13_meet
+      '15': c5m13_meet
+  - prompt: Jumps of 6 and 8 from 0. Where do they first meet?
+    answer: '24'
+    check: '24'
+    difficulty: 2
+    hints:
+    - Write the first few landings of the 8 jumper.
+    - Which of those is in the 6 table?
+    solution: 'Step 1: 8, 16, 24; 6, 12, 18, 24. Step 2: 24.'
+    mistakes:
+      '48': c5m13_meet
+      '14': c5m13_meet
+  - prompt: A cheetah jumps 7 m and a cat 2 m. After 3 jumps each, how many metres ahead is the cheetah?
+    answer: '15'
+    check: (7-2)*3
+    difficulty: 2
+    hints:
+    - Each jump the cheetah gains 7 − 2.
+    - Multiply by the number of jumps.
+    solution: 'Step 1: gains 5 m each jump. Step 2: 5 × 3 = 15 m.'
+    mistakes:
+      '21': c5m13_ahead
+      '5': c5m13_ahead
+      '27': c5m13_ahead
+  - prompt: 'Jumps of 2 and 3 from 0 both land on:'
+    options:
+    - '18'
+    - '16'
+    - '15'
+    answer: '18'
+    difficulty: 2
+    hints:
+    - It must be in the 2 table and the 3 table.
+    - Even and in the 3 table.
+    solution: 'Step 1: 18 = 2 × 9 = 3 × 6. Step 2: both land on 18.'
+    mistakes:
+      '16': c5m13_meet
+      '15': c5m13_meet
+  - prompt: Jumps of 4 and 10 from 0. Where do they first meet?
+    answer: '20'
+    check: '20'
+    difficulty: 2
+    hints:
+    - Write the first few landings of the 10 jumper.
+    - Which is in the 4 table?
+    solution: 'Step 1: 10 is not in the 4 table, 20 is. Step 2: 20.'
+    mistakes:
+      '40': c5m13_meet
+      '14': c5m13_meet
+  - prompt: Jumps of 3 and 6 from 0. What is the second number they both land on?
+    answer: '12'
+    check: '12'
+    difficulty: 3
+    hints:
+    - Write where the 6 jumper lands.
+    - All of those are in the 3 table too.
+    solution: 'Step 1: common landings are 6, 12, 18. Step 2: the second is 12.'
+    mistakes:
+      '6': c5m13_meet
+      '18': c5m13_meet
+  - prompt: After 6 jumps each, a deer is 18 m ahead of a frog. The frog jumps 2 m. How far does the deer jump?
+    answer: '5'
+    check: 18//6+2
+    difficulty: 3
+    hints:
+    - 'Find how much the deer gains each jump: 18 ÷ 6.'
+    - Add that to the frog's jump.
+    solution: 'Step 1: gains 3 m each jump. Step 2: 2 + 3 = 5 m.'
+    mistakes:
+      '3': c5m13_ahead
+      '20': c5m13_ahead
+  - prompt: Two animals jumping 5 and 7 from 0. Where do they first meet?
+    options:
+    - '35'
+    - '12'
+    - '70'
+    answer: '35'
+    difficulty: 3
+    hints:
+    - Write the first few landings of the 7 jumper.
+    - Which is in the 5 table?
+    solution: 'Step 1: 7, 14, 21, 28 are not in the 5 table; 35 is. Step 2: 35.'
+    mistakes:
+      '12': c5m13_meet
+      '70': c5m13_meet

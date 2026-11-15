@@ -9,6 +9,12 @@ tips:
   m5_hours_days: "One day has 24 hours. Two days have 24 + 24."
   m5_seconds: "Seconds are very short. Which event is over in less than a minute?"
   m5_time_minutes: "Count on: first to the next whole hour, then the rest of the hours, then the minutes. 1 hour = 60 minutes."
+  c5m12_conv: '60 seconds make a minute and 60 minutes make an hour; 24 hours make a day. Bigger to smaller: multiply.'
+  c5m12_race: In a race, the fastest runner takes the least time.
+  c5m12_unit: 'Think about how long it lasts: a blink, a lesson, or a whole day?'
+  c5m12_count: 'Count up from the start time: first to the next full hour, then the extra minutes.'
+  c5m12_carry: When minutes reach 60, swap 60 minutes for 1 hour.
+  c5m12_24: After 12 noon, take away 12 to get the p.m. time.
 concepts:
 - code: cbse5m.time.units
   title: Seconds, minutes and hours
@@ -74,6 +80,42 @@ concepts:
       bin: 135 minutes
       clue: Two hours, then a quarter of 60.
       why: 120 + 15.
+  lesson:
+    - teach: Time is measured in seconds, minutes, hours and days. 1 minute = 60 seconds. 1 hour = 60 minutes. 1 day = 24 hours.
+      picture:
+        kind: flow
+        steps:
+        - 60 seconds
+        - = 1 minute
+        - 60 minutes = 1 hour
+        - 24 hours = 1 day
+        alt: Units of time from seconds up to days.
+      check:
+        prompt: How many seconds make 1 minute?
+        options:
+        - '60'
+        - '100'
+        - '24'
+        answer: '60'
+        why: The second hand goes round once in 60 seconds.
+    - teach: 'To change to a smaller unit, multiply: 4 minutes = 4 × 60 = 240 seconds. To change to a bigger unit, divide and find what is left: 150 seconds = 2 minutes 30 seconds.'
+      check:
+        prompt: How many minutes are in 3 hours?
+        options:
+        - '180'
+        - '36'
+        - '300'
+        answer: '180'
+        why: 3 × 60 = 180.
+    - teach: Short events are timed in seconds (a 100 m race), longer ones in minutes (a lesson), longer still in hours (a train journey). In a race, the winner has the smallest time.
+      check:
+        prompt: 'Race times: 15 s, 13 s, 14 s. Which time won?'
+        options:
+        - 13 s
+        - 15 s
+        - 14 s
+        answer: 13 s
+        why: Least time means fastest.
   items:
   - prompt: How many seconds are in 3 minutes?
     answer: '180'
@@ -141,6 +183,114 @@ concepts:
     - 24 × 2.
     solution: 24 × 2 = 48 hours.
     mistakes: {"24": "m5_hours_days", "36": "m5_hours_days"}
+  - prompt: How many seconds are in 5 minutes?
+    answer: '300'
+    check: 5*60
+    difficulty: 1
+    hints:
+    - 1 minute = 60 seconds.
+    - 5 × 60.
+    solution: 'Step 1: 5 × 60. Step 2: = 300 seconds.'
+    mistakes:
+      '500': c5m12_conv
+      '65': c5m12_conv
+  - prompt: How many hours are in 3 days?
+    answer: '72'
+    check: 3*24
+    difficulty: 1
+    hints:
+    - 1 day = 24 hours.
+    - 3 × 24.
+    solution: 'Step 1: 3 × 24. Step 2: = 72 hours.'
+    mistakes:
+      '180': c5m12_conv
+      '36': c5m12_conv
+  - prompt: 200 seconds is 3 minutes and how many seconds?
+    answer: '20'
+    check: 200-180
+    difficulty: 2
+    hints:
+    - 3 minutes = 180 seconds.
+    - What is left from 200?
+    solution: 'Step 1: 3 × 60 = 180. Step 2: 200 − 180 = 20 seconds.'
+    mistakes:
+      '0': c5m12_conv
+      '2': c5m12_conv
+  - prompt: 'Race times: Meena 18 s, Arun 16 s, Lata 17 s. Who came last?'
+    options:
+    - Meena
+    - Arun
+    - Lata
+    answer: Meena
+    difficulty: 2
+    hints:
+    - Last means slowest.
+    - Slowest takes the most time.
+    solution: 'Step 1: biggest time = slowest. Step 2: 18 s is Meena.'
+    mistakes:
+      Arun: c5m12_race
+      Lata: c5m12_race
+  - prompt: Which is best measured in hours?
+    options:
+    - A train journey from Kochi to Chennai
+    - Tying a shoelace
+    - A sneeze
+    answer: A train journey from Kochi to Chennai
+    difficulty: 1
+    hints:
+    - Hours are for long things.
+    - Which takes the longest?
+    solution: 'Step 1: a train journey takes many hours. Step 2: so hours fit.'
+    mistakes:
+      Tying a shoelace: c5m12_unit
+      A sneeze: c5m12_unit
+  - prompt: How many minutes are in 1 hour 45 minutes?
+    answer: '105'
+    check: 60+45
+    difficulty: 2
+    hints:
+    - 1 hour = 60 minutes.
+    - Add 45.
+    solution: 'Step 1: 60 + 45. Step 2: = 105 minutes.'
+    mistakes:
+      '145': c5m12_conv
+      '75': c5m12_conv
+  - prompt: Ravi ran a lap in 1 minute 10 seconds. How many seconds is that?
+    answer: '70'
+    check: 60+10
+    difficulty: 2
+    hints:
+    - 1 minute = 60 seconds.
+    - Add 10.
+    solution: 'Step 1: 60 + 10. Step 2: = 70 seconds.'
+    mistakes:
+      '110': c5m12_conv
+      '11': c5m12_conv
+  - prompt: 'Which is longer: 2 minutes or 100 seconds?'
+    options:
+    - 2 minutes
+    - 100 seconds
+    - They are equal
+    answer: 2 minutes
+    difficulty: 2
+    hints:
+    - Change 2 minutes to seconds.
+    - 2 × 60 = 120.
+    solution: 'Step 1: 2 minutes = 120 s. Step 2: 120 > 100, so 2 minutes.'
+    mistakes:
+      100 seconds: c5m12_conv
+      They are equal: c5m12_conv
+  - prompt: Sara beat Tom by 3 seconds. Tom's time was 21 seconds. What was Sara's time, in seconds?
+    answer: '18'
+    check: 21-3
+    difficulty: 3
+    hints:
+    - Beating someone means a smaller time.
+    - 21 − 3.
+    solution: 'Step 1: Sara was faster, so less time. Step 2: 21 − 3 = 18 s.'
+    mistakes:
+      '24': c5m12_race
+      '21': c5m12_race
 - code: cbse5m.time.duration
   title: How long something takes
   after:
@@ -202,6 +352,42 @@ concepts:
       - when:
           v: 75
         say: 425 − 350 = 75 treats an hour as 100 minutes. 3:50 to 4:00 is 10, then 25 more.
+  lesson:
+    - teach: 'Duration is how long something lasts: end time − start time. Count up from the start. 9:15 to 10:40: 9:15 → 10:15 is 1 hour, then 10:15 → 10:40 is 25 minutes. So 1 hour 25 minutes.'
+      picture:
+        kind: flow
+        steps:
+        - Start 9:15
+        - +1 hour → 10:15
+        - +25 min → 10:40
+        - Total 1 h 25 min
+        alt: Counting up from 9:15 to 10:40 in an hour and then 25 minutes.
+      check:
+        prompt: How long from 2:00 to 2:45?
+        options:
+        - 45 minutes
+        - 2 hours 45 minutes
+        - 15 minutes
+        answer: 45 minutes
+        why: Same hour, so 45 − 0 = 45 minutes.
+    - teach: 'When adding times, if the minutes reach 60 or more, change 60 minutes into 1 hour: 40 min + 35 min = 75 min = 1 hour 15 minutes.'
+      check:
+        prompt: '50 minutes + 20 minutes is:'
+        options:
+        - 1 hour 10 minutes
+        - 70 hours
+        - 1 hour 20 minutes
+        answer: 1 hour 10 minutes
+        why: 70 minutes = 60 + 10.
+    - teach: 'The 24-hour clock counts hours from 0 to 23. Times after noon are more than 12: 14:00 is 2 p.m. (14 − 12). 09:00 is 9 a.m. Trains and buses often use it.'
+      check:
+        prompt: What is 18:00 in the 12-hour clock?
+        options:
+        - 6 p.m.
+        - 8 p.m.
+        - 6 a.m.
+        answer: 6 p.m.
+        why: 18 − 12 = 6, and it is after noon.
   items:
   - prompt: A class starts at 9:15 and ends at 10:00. How many minutes is it?
     answer: '45'
@@ -264,3 +450,118 @@ concepts:
     - Add three 50s.
     solution: 50 × 3 = 150 seconds.
     mistakes: {"53": "m5_times_carry", "100": "m5_times_carry"}
+  - prompt: A test starts at 10:20 and ends at 11:05. How many minutes is it?
+    answer: '45'
+    check: 40+5
+    difficulty: 2
+    hints:
+    - Count up to 11:00 first.
+    - Then add the extra minutes.
+    solution: 'Step 1: 10:20 → 11:00 is 40 min. Step 2: + 5 = 45 minutes.'
+    mistakes:
+      '85': c5m12_count
+      '55': c5m12_count
+  - prompt: A movie runs from 6:15 p.m. to 8:30 p.m. How many minutes is that?
+    answer: '135'
+    check: 2*60+15
+    difficulty: 2
+    hints:
+    - 6:15 to 8:15 is 2 hours.
+    - Then 15 more minutes.
+    solution: 'Step 1: 2 hours = 120 min. Step 2: 120 + 15 = 135 minutes.'
+    mistakes:
+      '215': c5m12_count
+      '225': c5m12_count
+      '75': c5m12_count
+  - prompt: What is 20:00 in the 12-hour clock?
+    options:
+    - 8 p.m.
+    - 10 p.m.
+    - 8 a.m.
+    answer: 8 p.m.
+    difficulty: 1
+    hints:
+    - It is after 12.
+    - 20 − 12.
+    solution: 'Step 1: 20 − 12 = 8. Step 2: after noon, so 8 p.m.'
+    mistakes:
+      10 p.m.: c5m12_24
+      8 a.m.: c5m12_24
+  - prompt: 35 minutes + 40 minutes is 1 hour and how many minutes?
+    answer: '15'
+    check: 35+40-60
+    difficulty: 2
+    hints:
+    - 35 + 40 = 75.
+    - Take out 60 minutes for the hour.
+    solution: 'Step 1: 75 minutes. Step 2: 75 − 60 = 15, so 1 hour 15 minutes.'
+    mistakes:
+      '75': c5m12_carry
+      '5': c5m12_carry
+  - prompt: School starts at 8:40 a.m. Asha leaves home 25 minutes before. When does she leave?
+    options:
+    - 8:15 a.m.
+    - 9:05 a.m.
+    - 8:25 a.m.
+    answer: 8:15 a.m.
+    difficulty: 2
+    hints:
+    - '''Before'' means take away.'
+    - 8:40 − 25 minutes.
+    solution: 'Step 1: 40 − 25 = 15. Step 2: 8:15 a.m.'
+    mistakes:
+      9:05 a.m.: c5m12_count
+      8:25 a.m.: c5m12_count
+  - prompt: A swimmer does 4 lengths, each taking 45 seconds. How many seconds in all?
+    answer: '180'
+    check: 4*45
+    difficulty: 2
+    hints:
+    - Same time for each length.
+    - 4 × 45.
+    solution: 'Step 1: 4 × 45. Step 2: = 180 seconds (3 minutes).'
+    mistakes:
+      '49': c5m12_conv
+      '160': c5m12_conv
+  - prompt: A train leaves at 22:30 and arrives at 23:50. How long is the trip?
+    options:
+    - 1 hour 20 minutes
+    - 1 hour 50 minutes
+    - 20 minutes
+    answer: 1 hour 20 minutes
+    difficulty: 3
+    hints:
+    - 22:30 to 23:30 is 1 hour.
+    - Then 23:30 to 23:50.
+    solution: 'Step 1: 1 hour to 23:30. Step 2: + 20 minutes = 1 hour 20 minutes.'
+    mistakes:
+      1 hour 50 minutes: c5m12_count
+      20 minutes: c5m12_count
+  - prompt: Homework took 1 hour 20 minutes and reading 50 minutes. How long in all?
+    options:
+    - 2 hours 10 minutes
+    - 1 hour 70 minutes
+    - 2 hours 30 minutes
+    answer: 2 hours 10 minutes
+    difficulty: 3
+    hints:
+    - 20 + 50 = 70 minutes.
+    - 70 minutes = 1 hour 10 minutes.
+    solution: 'Step 1: 1 h 70 min. Step 2: = 2 hours 10 minutes.'
+    mistakes:
+      1 hour 70 minutes: c5m12_carry
+      2 hours 30 minutes: c5m12_carry
+  - prompt: A bus leaves at 9:45 a.m. The trip takes 40 minutes. When does it arrive?
+    options:
+    - 10:25 a.m.
+    - 9:85 a.m.
+    - 10:45 a.m.
+    answer: 10:25 a.m.
+    difficulty: 3
+    hints:
+    - 9:45 + 15 minutes = 10:00.
+    - Then 25 minutes more.
+    solution: 'Step 1: 9:45 → 10:00 uses 15 min. Step 2: 25 min left: 10:25 a.m.'
+    mistakes:
+      9:85 a.m.: c5m12_carry
+      10:45 a.m.: c5m12_count
