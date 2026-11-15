@@ -14,6 +14,10 @@ tips:
   m12_mod_classes: "List the possible remainders when an integer is divided by 3. Each remainder gives one class. Count them."
   m12_relations_count: "A relation on A is any subset of A × A. A × A has 4 pairs; count the subsets."
   m12_universal: "A × A contains every possible pair. Which relation relates everything to everything?"
+  c12m1_prop: 'Test each property separately: reflexive (every (a, a)), symmetric (flip every pair), transitive (chain pairs).'
+  c12m1_count: 'Count pairs first: a set with n elements has n² ordered pairs, and each pair is either in or out.'
+  c12m1_func: 'One-one: no two inputs share an output. Onto: every element of the codomain is hit.'
+  c12m1_comp: 'Work from the inside out: (g∘f)(x) means apply f first, then g.'
 concepts:
 - code: cbse12m.rel.types
   title: Types of relations
@@ -88,6 +92,47 @@ concepts:
       bin: Equivalence relation
       clue: Is a triangle similar to itself? Does similarity pass along a chain?
       why: Similarity is reflexive, symmetric and transitive.
+  lesson:
+    - teach: A relation R on a set A is any collection of ordered pairs (a, b) with a, b in A, so it is a subset of A × A. The empty relation has no pairs; the universal relation is all of A × A. If A has n elements, A × A has n² pairs, and each can be in or out, so there are 2^(n²) relations.
+      check:
+        prompt: A = {1, 2, 3}. How many ordered pairs are in A × A?
+        options:
+        - '9'
+        - '6'
+        - '8'
+        answer: '9'
+        why: '3 choices for the first entry times 3 for the second: 3 × 3 = 9.'
+    - teach: 'Three key properties. Reflexive: (a, a) is in R for every a. Symmetric: whenever (a, b) is in R, so is (b, a). Transitive: whenever (a, b) and (b, c) are in R, so is (a, c). Check each one on its own; a relation can have any mix of them.'
+      check:
+        prompt: R = {(1, 2), (2, 1)} on {1, 2}. Which property fails?
+        options:
+        - reflexive
+        - symmetric
+        - none fail
+        answer: reflexive
+        why: (1, 1) and (2, 2) are missing, so it is not reflexive; it is symmetric.
+    - teach: 'A relation with all three properties is an equivalence relation. It splits the set into disjoint equivalence classes: groups of elements related to each other. Congruence modulo 3 on integers splits them by remainder 0, 1 or 2.'
+      picture:
+        kind: compare
+        columns:
+        - title: Class [0]
+          points:
+          - …, −3, 0, 3, 6, …
+        - title: Class [1]
+          points:
+          - …, −2, 1, 4, 7, …
+        - title: Class [2]
+          points:
+          - …, −1, 2, 5, 8, …
+        alt: Integers split into three equivalence classes by remainder when divided by 3.
+      check:
+        prompt: Under congruence modulo 3, which class contains 10?
+        options:
+        - '[1]'
+        - '[0]'
+        - '[2]'
+        answer: '[1]'
+        why: 10 = 3 × 3 + 1, so the remainder is 1.
   items:
   - prompt: How many relations are possible on a set with 2 elements?
     answer: '16'
@@ -160,6 +205,114 @@ concepts:
     - Largest relation.
     solution: The universal relation.
     mistakes: {"empty relation": "m12_universal", "identity relation": "m12_universal", "inverse relation": "m12_universal"}
+  - prompt: How many relations are possible on a set with 3 elements? Give the power of 2.
+    answer: '9'
+    check: 3**2
+    difficulty: 1
+    hints:
+    - First count the ordered pairs in A × A.
+    - The number of relations is 2 raised to that count.
+    solution: 'Step 1: A × A has 3² = 9 pairs. Step 2: 2⁹ relations, so the power is 9.'
+    mistakes:
+      '3': c12m1_count
+      '6': c12m1_count
+  - prompt: How many relations are possible on a set with 1 element?
+    answer: '2'
+    check: 2**(1**2)
+    difficulty: 1
+    hints:
+    - A × A has just one pair.
+    - That pair is either in or out.
+    solution: 'Step 1: 1 pair. Step 2: 2¹ = 2 relations (empty and universal).'
+    mistakes:
+      '1': c12m1_count
+      '4': c12m1_count
+  - prompt: Congruence modulo 5 on the integers gives how many equivalence classes?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - Classes are decided by the remainder.
+    - List the possible remainders on division by 5.
+    solution: 'Step 1: remainders 0, 1, 2, 3, 4. Step 2: 5 classes.'
+    mistakes:
+      '4': c12m1_prop
+      '6': c12m1_prop
+  - prompt: 'R = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)} on {1, 2, 3} is:'
+    options:
+    - an equivalence relation
+    - reflexive but not symmetric
+    - symmetric but not reflexive
+    answer: an equivalence relation
+    difficulty: 2
+    hints:
+    - Check all three diagonal pairs.
+    - Then check flips and chains like (1, 2), (2, 1) → (1, 1).
+    solution: 'Step 1: all (a, a) present: reflexive. Step 2: (1, 2) and (2, 1) both present: symmetric. Step 3: every chain lands in R: transitive.'
+    mistakes:
+      reflexive but not symmetric: c12m1_prop
+      symmetric but not reflexive: c12m1_prop
+  - prompt: R = {(1, 2), (2, 3)} on {1, 2, 3} fails to be transitive because which pair is missing?
+    options:
+    - (1, 3)
+    - (3, 1)
+    - (2, 1)
+    answer: (1, 3)
+    difficulty: 2
+    hints:
+    - Chain (1, 2) with (2, 3).
+    - Transitivity demands the pair that skips the middle.
+    solution: 'Step 1: (1, 2), (2, 3) ∈ R. Step 2: transitivity needs (1, 3), which is absent.'
+    mistakes:
+      (3, 1): c12m1_prop
+      (2, 1): c12m1_prop
+  - prompt: '''a − b is even'' on the integers is:'
+    options:
+    - an equivalence relation
+    - reflexive only
+    - not symmetric
+    answer: an equivalence relation
+    difficulty: 2
+    hints:
+    - Is a − a even? Is b − a even when a − b is?
+    - Add (a − b) and (b − c).
+    solution: 'Step 1: a − a = 0 is even. Step 2: b − a = −(a − b) is even. Step 3: a − c = (a − b) + (b − c) is even.'
+    mistakes:
+      reflexive only: c12m1_prop
+      not symmetric: c12m1_prop
+  - prompt: How many equivalence classes does 'a − b is even' create on the integers?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Which integers are related to 0?
+    - Which are related to 1?
+    solution: 'Step 1: evens form one class. Step 2: odds form the other: 2 classes.'
+    mistakes:
+      '1': c12m1_prop
+      '3': c12m1_prop
+  - prompt: The smallest reflexive relation on {a, b, c} has how many pairs?
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Reflexive needs every (x, x).
+    - Add nothing else.
+    solution: 'Step 1: (a, a), (b, b), (c, c) are required. Step 2: 3 pairs.'
+    mistakes:
+      '0': c12m1_prop
+      '9': c12m1_count
+  - prompt: On {1, 2, 3}, how many pairs must be added to {(1, 2)} to make the smallest equivalence relation containing it?
+    answer: '4'
+    check: 5 - 1
+    difficulty: 3
+    hints:
+    - Add the three diagonal pairs.
+    - Then add the flip of (1, 2), and check transitivity.
+    solution: 'Step 1: add (1, 1), (2, 2), (3, 3). Step 2: add (2, 1). Step 3: chains give nothing new: 5 pairs in all, so 4 added.'
+    mistakes:
+      '3': c12m1_prop
+      '5': c12m1_prop
 - code: cbse12m.rel.functions
   title: Types of functions and composition
   after:
@@ -235,6 +388,50 @@ concepts:
       bin: Neither
       clue: Is 0.5 ever an output? Do 1.2 and 1.7 share one?
       why: Only integers come out, and many inputs share each one.
+  lesson:
+    - teach: 'A function f: A → B sends each element of A to exactly one element of B. f is one-one (injective) if different inputs give different outputs: f(x₁) = f(x₂) forces x₁ = x₂. On a graph, every horizontal line meets it at most once.'
+      check:
+        prompt: Is f(x) = x² on ℝ one-one?
+        options:
+        - no, because f(2) = f(−2)
+        - yes, every square is different
+        - yes, it is a polynomial
+        answer: no, because f(2) = f(−2)
+        why: Two different inputs give the same output 4.
+    - teach: 'f is onto (surjective) if every element of the codomain B is an output: the range equals B. Bijective means one-one and onto. A function has an inverse f⁻¹ exactly when it is bijective; f⁻¹ undoes f. On a set of n elements there are n! bijections onto itself.'
+      picture:
+        kind: compare
+        columns:
+        - title: One-one
+          points:
+          - no shared outputs
+          - horizontal line test
+        - title: Onto
+          points:
+          - range = codomain
+          - every target hit
+        - title: Bijective
+          points:
+          - both
+          - has an inverse
+        alt: One-one, onto and bijective functions compared.
+      check:
+        prompt: f(x) = 2x + 1 on ℝ. Find f⁻¹(7).
+        options:
+        - '3'
+        - '15'
+        - '4'
+        answer: '3'
+        why: 'Solve 2x + 1 = 7: x = 3.'
+    - teach: 'Composition: (g∘f)(x) = g(f(x)). Apply f first, then g. Order matters: g∘f and f∘g are usually different. If f and g are bijective, so is g∘f.'
+      check:
+        prompt: f(x) = x + 2, g(x) = 3x. Find (g∘f)(1).
+        options:
+        - '9'
+        - '5'
+        - '6'
+        answer: '9'
+        why: f(1) = 3, then g(3) = 9.
   items:
   - prompt: If f(x) = 2x + 1 and g(x) = x², find (g∘f)(1).
     answer: '9'
@@ -299,3 +496,108 @@ concepts:
     - Perfect pairing.
     solution: Bijective.
     mistakes: {"one-one only": "m12_bijective", "onto only": "m12_bijective", "constant": "m12_bijective"}
+  - prompt: f(x) = x + 2 and g(x) = 3x. Find (f∘g)(1).
+    answer: '5'
+    check: 3*1 + 2
+    difficulty: 1
+    hints:
+    - Apply g first because it is on the inside.
+    - Then apply f to that result.
+    solution: 'Step 1: g(1) = 3. Step 2: f(3) = 5.'
+    mistakes:
+      '9': c12m1_comp
+      '6': c12m1_comp
+  - prompt: f(x) = 4x − 8. Find f⁻¹(0).
+    answer: '2'
+    check: 8/4
+    difficulty: 1
+    hints:
+    - f⁻¹(0) is the input that gives 0.
+    - Solve 4x − 8 = 0.
+    solution: 'Step 1: 4x − 8 = 0. Step 2: x = 2.'
+    mistakes:
+      '-8': c12m1_func
+      '8': c12m1_func
+  - prompt: How many bijections are there from a set of 4 elements onto itself?
+    answer: '24'
+    check: 4*3*2*1
+    difficulty: 1
+    hints:
+    - The first element has 4 choices of image.
+    - Each next one has one fewer.
+    solution: 'Step 1: 4 × 3 × 2 × 1. Step 2: 24.'
+    mistakes:
+      '16': c12m1_count
+      '256': c12m1_count
+  - prompt: 'f(x) = x³ from ℝ to ℝ is:'
+    options:
+    - bijective
+    - one-one but not onto
+    - neither
+    answer: bijective
+    difficulty: 2
+    hints:
+    - Different reals have different cubes.
+    - Every real number is the cube of some real.
+    solution: 'Step 1: x³ is strictly increasing: one-one. Step 2: cube roots exist for all reals: onto.'
+    mistakes:
+      one-one but not onto: c12m1_func
+      neither: c12m1_func
+  - prompt: 'f: ℕ → ℕ, f(x) = 2x is:'
+    options:
+    - one-one but not onto
+    - onto but not one-one
+    - bijective
+    answer: one-one but not onto
+    difficulty: 2
+    hints:
+    - Can two naturals have the same double?
+    - Is 3 ever an output?
+    solution: 'Step 1: 2x₁ = 2x₂ gives x₁ = x₂: one-one. Step 2: odd numbers are never hit: not onto.'
+    mistakes:
+      onto but not one-one: c12m1_func
+      bijective: c12m1_func
+  - prompt: f(x) = 3x + 1. Find f⁻¹(10).
+    answer: '3'
+    check: (10 - 1)/3
+    difficulty: 2
+    hints:
+    - Set 3x + 1 equal to 10.
+    - Undo +1, then undo ×3.
+    solution: 'Step 1: 3x + 1 = 10. Step 2: x = 3.'
+    mistakes:
+      '31': c12m1_comp
+      11/3: c12m1_comp
+  - prompt: f(x) = x², g(x) = x − 1. Find (g∘f)(3) − (f∘g)(3).
+    answer: '4'
+    check: (3**2 - 1) - (3 - 1)**2
+    difficulty: 2
+    hints:
+    - Work out each composition separately.
+    - Inside function first each time.
+    solution: 'Step 1: (g∘f)(3) = 9 − 1 = 8. Step 2: (f∘g)(3) = 2² = 4. Step 3: 8 − 4 = 4.'
+    mistakes:
+      '0': c12m1_comp
+      '-4': c12m1_comp
+  - prompt: How many one-one functions are there from {1, 2} to {a, b, c}?
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - 1 can go to any of 3 letters.
+    - 2 must go to a different letter.
+    solution: 'Step 1: 3 choices for 1. Step 2: 2 for 2. Step 3: 3 × 2 = 6.'
+    mistakes:
+      '9': c12m1_count
+      '8': c12m1_count
+  - prompt: How many functions are there from {1, 2} to {a, b, c} in total?
+    answer: '9'
+    check: 3**2
+    difficulty: 3
+    hints:
+    - Each input picks one output freely.
+    - Outputs may repeat.
+    solution: 'Step 1: 3 choices for 1, 3 for 2. Step 2: 3 × 3 = 9.'
+    mistakes:
+      '6': c12m1_func
+      '8': c12m1_count

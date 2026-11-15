@@ -12,6 +12,10 @@ tips:
   m12_unit_vector: "'Unit' means one."
   m12_vec_add: "Add matching components: j-part of a + j-part of b."
   m12_vec_mag: "|v| = √(x² + y²)."
+  c12m10_comp: 'Work component by component: i with i, j with j, k with k.'
+  c12m10_mag: Magnitude is √(x² + y² + z²). Square each component, add, then take the root.
+  c12m10_dot: 'Dot product: multiply matching components and add. Zero means perpendicular.'
+  c12m10_cross: '|a × b| is the parallelogram''s area; the triangle is half of it. i × j = k, j × k = i, k × i = j.'
 concepts:
 - code: cbse12m.vec.basics
   title: Vectors and their addition
@@ -141,6 +145,41 @@ concepts:
       - when:
           l: 1
         say: '+1 points along +x. cos α = −1 means α = 180°: the negative x-axis.'
+  lesson:
+    - teach: A vector has both size (magnitude) and direction. In components, r = xi + yj + zk, where i, j, k are unit vectors along the axes. Its magnitude is |r| = √(x² + y² + z²).
+      check:
+        prompt: Magnitude of 6i + 8j?
+        options:
+        - '10'
+        - '14'
+        - '48'
+        answer: '10'
+        why: √(36 + 64) = √100 = 10.
+    - teach: Add vectors component by component; this matches the triangle and parallelogram laws. Multiplying by a scalar k scales each component. The vector from A to B is B − A. A unit vector in the direction of a is â = a/|a|.
+      picture:
+        kind: flow
+        steps:
+        - a = (a₁, a₂, a₃)
+        - b = (b₁, b₂, b₃)
+        - a + b = (a₁ + b₁, a₂ + b₂, a₃ + b₃)
+        alt: Adding two vectors component by component.
+      check:
+        prompt: A = (1, 1, 0), B = (4, 5, 0). AB as a vector?
+        options:
+        - 3i + 4j
+        - 5i + 6j
+        - −3i − 4j
+        answer: 3i + 4j
+        why: B − A = (3, 4, 0).
+    - teach: 'Direction cosines of r are l = x/|r|, m = y/|r|, n = z/|r|; they satisfy l² + m² + n² = 1. Section formula: the point dividing AB in ratio m : n internally has position vector (mb + na)/(m + n).'
+      check:
+        prompt: Midpoint of a = 2i and b = 6i?
+        options:
+        - 4i
+        - 8i
+        - 3i
+        answer: 4i
+        why: (a + b)/2 = 8i/2 = 4i.
   items:
   - prompt: Find the magnitude of 3i + 4j.
     answer: '5'
@@ -205,6 +244,105 @@ concepts:
     - Unit vector components.
     solution: l² + m² + n² = 1.
     mistakes: {"l + m + n = 1": "m12_dir_cos", "lmn = 1": "m12_dir_cos", "l = m = n": "m12_dir_cos"}
+  - prompt: Find the magnitude of i + 2j + 2k.
+    answer: '3'
+    check: sqrt(1 + 4 + 4)
+    difficulty: 1
+    hints:
+    - Square each component.
+    - Add and take the square root.
+    solution: 'Step 1: 1 + 4 + 4 = 9. Step 2: √9 = 3.'
+    mistakes:
+      '5': c12m10_mag
+      '9': c12m10_mag
+  - prompt: a = 3i − j + 2k, b = i + 4j − k. Find the k-component of a + b.
+    answer: '1'
+    check: 2 + (-1)
+    difficulty: 1
+    hints:
+    - Only the k-parts matter.
+    - Add 2 and −1.
+    solution: 'Step 1: 2 + (−1). Step 2: 1.'
+    mistakes:
+      '3': c12m10_comp
+      '-3': c12m10_comp
+  - prompt: a = 2i + 5j. Find the j-component of 3a.
+    answer: '15'
+    check: 3*5
+    difficulty: 1
+    hints:
+    - Scale every component by 3.
+    - Look at the j-part.
+    solution: 'Step 1: 3a = 6i + 15j. Step 2: 15.'
+    mistakes:
+      '8': c12m10_comp
+      '5': c12m10_comp
+  - prompt: 'Unit vector along 3i + 4j: what is its i-component, as a fraction?'
+    answer: 3/5
+    check: 3/5
+    difficulty: 2
+    hints:
+    - Divide by the magnitude.
+    - '|3i + 4j| = 5.'
+    solution: 'Step 1: â = (3i + 4j)/5. Step 2: i-component 3/5.'
+    mistakes:
+      '3': c12m10_mag
+      3/7: c12m10_mag
+  - prompt: Find the direction cosine n of 2i + 3j + 6k, as a fraction.
+    answer: 6/7
+    check: 6/sqrt(4 + 9 + 36)
+    difficulty: 2
+    hints:
+    - n = z/|r|.
+    - '|r| = √49.'
+    solution: 'Step 1: |r| = 7. Step 2: n = 6/7.'
+    mistakes:
+      '6': c12m10_mag
+      6/11: c12m10_mag
+  - prompt: A = (2, 0, 1), B = (5, 4, 1). Find |AB|.
+    answer: '5'
+    check: sqrt(3**2 + 4**2)
+    difficulty: 2
+    hints:
+    - AB = B − A.
+    - Then take its magnitude.
+    solution: 'Step 1: AB = (3, 4, 0). Step 2: 5.'
+    mistakes:
+      '7': c12m10_mag
+      '25': c12m10_mag
+  - prompt: Find l² + m² + n² for the vector 5i − 2j + k.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - This is true for every non-zero vector.
+    - Direction cosines of a unit direction.
+    solution: 'Step 1: (25 + 4 + 1)/30. Step 2: 1.'
+    mistakes:
+      '30': c12m10_mag
+      '0': c12m10_mag
+  - prompt: 'P divides AB internally in the ratio 1 : 2, with a = 3i and b = 9i. Find the i-component of P.'
+    answer: '5'
+    check: (1*9 + 2*3)/3
+    difficulty: 3
+    hints:
+    - Use (mb + na)/(m + n) with m = 1, n = 2.
+    - (9 + 6)/3.
+    solution: 'Step 1: (1 × 9 + 2 × 3)/3 = 15/3. Step 2: 5.'
+    mistakes:
+      '7': c12m10_comp
+      '6': c12m10_comp
+  - prompt: For which k are 2i + 3j and ki + 6j collinear?
+    answer: '4'
+    check: 2*2
+    difficulty: 3
+    hints:
+    - Collinear means one is a multiple of the other.
+    - 6 = 2 × 3, so the multiple is 2.
+    solution: 'Step 1: ratio 6/3 = 2. Step 2: k = 2 × 2 = 4.'
+    mistakes:
+      '3': c12m10_comp
+      '6': c12m10_comp
 - code: cbse12m.vec.products
   title: Dot and cross products
   after:
@@ -311,6 +449,42 @@ concepts:
           y: 2
           z: 2
         say: That's a itself, with |a| = 3. Double it.
+  lesson:
+    - teach: 'The dot (scalar) product: a·b = |a||b| cos θ = a₁b₁ + a₂b₂ + a₃b₃. It is a number. If a·b = 0 for non-zero vectors, they are perpendicular. Projection of a on b = a·b/|b|.'
+      check:
+        prompt: '(i + j)·(i − j) equals:'
+        options:
+        - '0'
+        - '2'
+        - '1'
+        answer: '0'
+        why: 1 × 1 + 1 × (−1) = 0, so they are perpendicular.
+    - teach: 'The cross (vector) product: a × b has magnitude |a||b| sin θ and direction by the right-hand rule. a × b = −(b × a); parallel vectors give 0. i × j = k, j × k = i, k × i = j (reverse order gives the minus).'
+      picture:
+        kind: flow
+        steps:
+        - i × j = k
+        - j × k = i
+        - k × i = j
+        - 'reverse order: minus sign'
+        alt: The cyclic rule for cross products of i, j, k.
+      check:
+        prompt: 'k × j equals:'
+        options:
+        - −i
+        - i
+        - '0'
+        answer: −i
+        why: j × k = i, so k × j = −i.
+    - teach: '|a × b| is the area of the parallelogram with sides a and b; half of it is the triangle''s area. Use cos θ = a·b/(|a||b|) to find the angle between vectors.'
+      check:
+        prompt: Angle between i and i + j?
+        options:
+        - 45°
+        - 90°
+        - 30°
+        answer: 45°
+        why: cos θ = 1/(1 × √2), so θ = 45°.
   items:
   - prompt: Find (2i + 3j)·(4i − j).
     answer: '5'
@@ -375,3 +549,105 @@ concepts:
     solution: Perpendicular.
     mistakes:
       parallel: c12_dot
+  - prompt: Find (3i + j)·(2i + 5j).
+    answer: '11'
+    check: 3*2 + 1*5
+    difficulty: 1
+    hints:
+    - Multiply matching components.
+    - Add the products.
+    solution: 'Step 1: 6 + 5. Step 2: 11.'
+    mistakes:
+      '17': c12m10_dot
+      '6': c12m10_dot
+  - prompt: Find (i + j + k)·(2i − j + 3k).
+    answer: '4'
+    check: 2 - 1 + 3
+    difficulty: 1
+    hints:
+    - Match i with i, j with j, k with k.
+    - Then add.
+    solution: 'Step 1: 2 − 1 + 3. Step 2: 4.'
+    mistakes:
+      '6': c12m10_dot
+      '2': c12m10_dot
+  - prompt: 'j × k equals:'
+    options:
+    - i
+    - −i
+    - k
+    answer: i
+    difficulty: 1
+    hints:
+    - Use the cycle i → j → k → i.
+    - In cycle order the sign is +.
+    solution: 'Step 1: j, k is cyclic order. Step 2: i.'
+    mistakes:
+      −i: c12m10_cross
+      k: c12m10_cross
+  - prompt: For which k are 2i + kj and 3i − 6j perpendicular?
+    answer: '1'
+    check: 6/6
+    difficulty: 2
+    hints:
+    - Perpendicular means dot product 0.
+    - 6 − 6k = 0.
+    solution: 'Step 1: 2 × 3 + k(−6) = 0. Step 2: k = 1.'
+    mistakes:
+      '-1': c12m10_dot
+      '3': c12m10_dot
+  - prompt: Find the projection of 4i + 3j on i.
+    answer: '4'
+    check: (4*1)/1
+    difficulty: 2
+    hints:
+    - Projection = a·b/|b|.
+    - '|i| = 1.'
+    solution: 'Step 1: a·i = 4. Step 2: 4/1 = 4.'
+    mistakes:
+      '5': c12m10_dot
+      '3': c12m10_dot
+  - prompt: '|a| = 2, |b| = 3, θ = 60°. Find a·b.'
+    answer: '3'
+    check: 2*3*Rational(1,2)
+    difficulty: 2
+    hints:
+    - a·b = |a||b| cos θ.
+    - cos 60° = 1/2.
+    solution: 'Step 1: 6 × 1/2. Step 2: 3.'
+    mistakes:
+      '6': c12m10_dot
+      9/2: c12m10_dot
+  - prompt: Find the area of the parallelogram with sides i + j and i − j.
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Compute (i + j) × (i − j).
+    - i × (−j) = −k, j × i = −k.
+    solution: 'Step 1: −k − k = −2k. Step 2: |−2k| = 2.'
+    mistakes:
+      '0': c12m10_cross
+      '1': c12m10_cross
+  - prompt: Find the area of the triangle with sides a = 2i + 2j and b = 3j.
+    answer: '3'
+    check: Rational(1,2)*6
+    difficulty: 3
+    hints:
+    - a × b = (2i + 2j) × 3j.
+    - 2i × 3j = 6k, 2j × 3j = 0.
+    solution: 'Step 1: |a × b| = 6. Step 2: half is 3.'
+    mistakes:
+      '6': c12m10_cross
+      '12': c12m10_cross
+  - prompt: '|a| = 3, |b| = 4, a·b = 6. Find |a × b|² .'
+    answer: '108'
+    check: 3**2*4**2 - 6**2
+    difficulty: 3
+    hints:
+    - '|a × b|² + (a·b)² = |a|²|b|².'
+    - 144 − 36.
+    solution: 'Step 1: 9 × 16 − 36. Step 2: 108.'
+    mistakes:
+      '144': c12m10_cross
+      '36': c12m10_cross

@@ -11,6 +11,9 @@ tips:
   m12_sin_cos_inv: "sin⁻¹x + cos⁻¹x is the same for every x in [−1, 1]. Try x = 0."
   m12_tan_cot: "tan⁻¹x + cot⁻¹x is constant. Try x = 1: each part is 45°."
   m12_tan_sum: "tan⁻¹a + tan⁻¹b = tan⁻¹[(a + b)/(1 − ab)]. Work it out, then convert."
+  c12m2_range: 'The answer must lie in the principal range: sin⁻¹ and tan⁻¹ in [−90°, 90°], cos⁻¹ in [0°, 180°].'
+  c12m2_neg: 'For a negative input: sin⁻¹ and tan⁻¹ just take the minus sign outside; cos⁻¹(−x) = 180° − cos⁻¹x.'
+  c12m2_ident: 'Use the identity that matches: sin⁻¹x + cos⁻¹x = 90°, or the tan⁻¹ addition formula.'
 concepts:
 - code: cbse12m.invtrig.basics
   title: Domains and principal values
@@ -76,6 +79,53 @@ concepts:
       - when:
           degrees: 300
         say: 300° isn't in 0° to 180°, so cos⁻¹ can't give it back. cos 300° = cos 60° = ½, and cos⁻¹(½) = 60°.
+  lesson:
+    - teach: 'sin x is not one-one on ℝ: sin 30° = sin 150°. To get an inverse we restrict the domain to a piece where it is one-one. For sine we use [−π/2, π/2]; then sin⁻¹: [−1, 1] → [−π/2, π/2]. The value in this range is the principal value.'
+      check:
+        prompt: Why must the domain of sin x be restricted before inverting?
+        options:
+        - sin x repeats values, so it is not one-one
+        - sin x is undefined at 0
+        - sin x is always positive
+        answer: sin x repeats values, so it is not one-one
+        why: Only a one-one function can have an inverse.
+    - teach: 'Principal ranges: sin⁻¹ → [−π/2, π/2], cos⁻¹ → [0, π], tan⁻¹ → (−π/2, π/2). So sin⁻¹(1/2) = π/6 (30°), cos⁻¹(1/2) = π/3 (60°), tan⁻¹(√3) = π/3 (60°).'
+      picture:
+        kind: compare
+        columns:
+        - title: Function
+          points:
+          - sin⁻¹x
+          - cos⁻¹x
+          - tan⁻¹x
+        - title: Domain
+          points:
+          - '[−1, 1]'
+          - '[−1, 1]'
+          - all reals
+        - title: Principal range
+          points:
+          - '[−90°, 90°]'
+          - '[0°, 180°]'
+          - (−90°, 90°)
+        alt: Domains and principal ranges of the three main inverse trigonometric functions.
+      check:
+        prompt: Find cos⁻¹(1/2) in degrees.
+        options:
+        - '60'
+        - '30'
+        - '120'
+        answer: '60'
+        why: cos 60° = 1/2, and 60° is in [0°, 180°].
+    - teach: For negative inputs, stay inside the range. sin⁻¹(−1/2) = −30° (not 210°). cos⁻¹(−1/2) = 180° − 60° = 120°. The graph of each inverse is the reflection of the restricted trig graph in the line y = x.
+      check:
+        prompt: Find tan⁻¹(−1) in degrees.
+        options:
+        - '-45'
+        - '135'
+        - '45'
+        answer: '-45'
+        why: tan(−45°) = −1, and −45° is in (−90°, 90°).
   items:
   - prompt: Find sin⁻¹(1/2) in degrees.
     answer: '30'
@@ -142,6 +192,108 @@ concepts:
     solution: The angle whose sine is x.
     mistakes:
       1/sin x: c12_notpower
+  - prompt: Find sin⁻¹(1) in degrees.
+    answer: '90'
+    check: '90'
+    difficulty: 1
+    hints:
+    - Which angle has sine 1?
+    - It must be in [−90°, 90°].
+    solution: 'Step 1: sin 90° = 1. Step 2: 90° is in range.'
+    mistakes:
+      '0': c12m2_range
+      '180': c12m2_range
+  - prompt: Find cos⁻¹(0) in degrees.
+    answer: '90'
+    check: '90'
+    difficulty: 1
+    hints:
+    - Where is cosine zero?
+    - Choose the one in [0°, 180°].
+    solution: 'Step 1: cos 90° = 0. Step 2: 90°.'
+    mistakes:
+      '0': c12m2_range
+      '270': c12m2_range
+  - prompt: Find tan⁻¹(√3) in degrees.
+    answer: '60'
+    check: '60'
+    difficulty: 1
+    hints:
+    - Recall the tangents of the standard angles.
+    - Which one gives √3?
+    solution: 'Step 1: tan 60° = √3. Step 2: 60°.'
+    mistakes:
+      '30': c12m2_range
+      '240': c12m2_range
+  - prompt: Find cos⁻¹(−√3/2) in degrees.
+    answer: '150'
+    check: 180 - 30
+    difficulty: 2
+    hints:
+    - First find cos⁻¹(√3/2).
+    - For a negative input of cos⁻¹, subtract from 180°.
+    solution: 'Step 1: cos⁻¹(√3/2) = 30°. Step 2: 180° − 30° = 150°.'
+    mistakes:
+      '-30': c12m2_neg
+      '210': c12m2_neg
+  - prompt: Find sin⁻¹(−√3/2) in degrees.
+    answer: '-60'
+    check: '-60'
+    difficulty: 2
+    hints:
+    - sin 60° = √3/2.
+    - Sine's range lets the angle be negative.
+    solution: 'Step 1: sin⁻¹(√3/2) = 60°. Step 2: sin⁻¹(−x) = −sin⁻¹x = −60°.'
+    mistakes:
+      '120': c12m2_neg
+      '240': c12m2_neg
+  - prompt: Find tan⁻¹(−1/√3) in degrees.
+    answer: '-30'
+    check: '-30'
+    difficulty: 2
+    hints:
+    - tan 30° = 1/√3.
+    - Keep the answer in (−90°, 90°).
+    solution: 'Step 1: tan⁻¹(1/√3) = 30°. Step 2: −30°.'
+    mistakes:
+      '150': c12m2_neg
+      '330': c12m2_neg
+  - prompt: 'The domain of cos⁻¹x is:'
+    options:
+    - '[−1, 1]'
+    - all real numbers
+    - '[0, π]'
+    answer: '[−1, 1]'
+    difficulty: 2
+    hints:
+    - Inputs of cos⁻¹ are cosine values.
+    - Cosine never goes beyond ±1.
+    solution: 'Step 1: cos x takes values in [−1, 1]. Step 2: so cos⁻¹ accepts only those.'
+    mistakes:
+      all real numbers: c12m2_range
+      '[0, π]': c12m2_range
+  - prompt: Find cos⁻¹(1/2) + sin⁻¹(−1/2) in degrees.
+    answer: '30'
+    check: 60 + (-30)
+    difficulty: 3
+    hints:
+    - Find each value separately.
+    - Mind the sign of the second.
+    solution: 'Step 1: cos⁻¹(1/2) = 60°. Step 2: sin⁻¹(−1/2) = −30°. Step 3: 30°.'
+    mistakes:
+      '90': c12m2_neg
+      '-90': c12m2_neg
+  - prompt: Find cos⁻¹(−1/√2) − tan⁻¹(1) in degrees.
+    answer: '90'
+    check: 135 - 45
+    difficulty: 3
+    hints:
+    - cos⁻¹(1/√2) is 45°.
+    - Use 180° minus for the negative input.
+    solution: 'Step 1: cos⁻¹(−1/√2) = 135°. Step 2: tan⁻¹1 = 45°. Step 3: 90°.'
+    mistakes:
+      '-90': c12m2_neg
+      '0': c12m2_neg
 - code: cbse12m.invtrig.properties
   title: Properties and simplification
   after:
@@ -210,6 +362,42 @@ concepts:
       bin: Not always true
       clue: Try x = 300°.
       why: cos⁻¹(cos 300°) = 60°. It's only x when x is in 0° to 180°.
+  lesson:
+    - teach: 'sin(sin⁻¹x) = x for every x in [−1, 1]. But sin⁻¹(sin x) = x only when x is already in [−π/2, π/2]. Otherwise find the angle in the principal range with the same sine. Example: sin⁻¹(sin 150°) = 30°.'
+      check:
+        prompt: Find sin⁻¹(sin 120°) in degrees.
+        options:
+        - '60'
+        - '120'
+        - '-60'
+        answer: '60'
+        why: sin 120° = sin 60°, and 60° is in [−90°, 90°].
+    - teach: 'Complementary identities: sin⁻¹x + cos⁻¹x = π/2 and tan⁻¹x + cot⁻¹x = π/2. Negatives: sin⁻¹(−x) = −sin⁻¹x, tan⁻¹(−x) = −tan⁻¹x, cos⁻¹(−x) = π − cos⁻¹x.'
+      check:
+        prompt: Find sin⁻¹(0.7) + cos⁻¹(0.7) in degrees.
+        options:
+        - '90'
+        - '180'
+        - '126'
+        answer: '90'
+        why: The two always add to π/2 = 90°.
+    - teach: 'Addition rule: tan⁻¹x + tan⁻¹y = tan⁻¹((x + y)/(1 − xy)) when xy < 1. Example: tan⁻¹(1/2) + tan⁻¹(1/3) = tan⁻¹((5/6)/(5/6)) = tan⁻¹1 = 45°.'
+      picture:
+        kind: flow
+        steps:
+        - 'Add: x + y'
+        - 'Multiply: 1 − xy'
+        - Divide
+        - Take tan⁻¹
+        alt: Steps for adding two inverse tangents with the formula.
+      check:
+        prompt: 'tan⁻¹(1/2) + tan⁻¹(1/3): what is (x + y)/(1 − xy)?'
+        options:
+        - '1'
+        - 5/6
+        - 6/5
+        answer: '1'
+        why: (5/6) ÷ (1 − 1/6) = (5/6) ÷ (5/6) = 1.
   items:
   - prompt: Find sin⁻¹(0.3) + cos⁻¹(0.3) in degrees.
     answer: '90'
@@ -274,3 +462,102 @@ concepts:
     - Like sin and cos.
     solution: π/2.
     mistakes: {"π": "m12_tan_cot", "0": "m12_tan_cot", "π/4": "m12_tan_cot"}
+  - prompt: Find tan⁻¹(2) + cot⁻¹(2) in degrees.
+    answer: '90'
+    check: '90'
+    difficulty: 1
+    hints:
+    - There is an identity pairing tan⁻¹ and cot⁻¹.
+    - It does not depend on the input.
+    solution: 'Step 1: tan⁻¹x + cot⁻¹x = π/2. Step 2: 90°.'
+    mistakes:
+      '45': c12m2_ident
+      '180': c12m2_ident
+  - prompt: Find cos(cos⁻¹(0.25)) as a fraction.
+    answer: 1/4
+    check: 1/4
+    difficulty: 1
+    hints:
+    - cos undoes cos⁻¹.
+    - 0.25 is in [−1, 1].
+    solution: 'Step 1: cos(cos⁻¹x) = x. Step 2: 1/4.'
+    mistakes:
+      '4': c12m2_ident
+      3/4: c12m2_ident
+  - prompt: If sin⁻¹x = 40°, find cos⁻¹x in degrees.
+    answer: '50'
+    check: 90 - 40
+    difficulty: 1
+    hints:
+    - The two add to a fixed angle.
+    - Subtract from that angle.
+    solution: 'Step 1: sin⁻¹x + cos⁻¹x = 90°. Step 2: 90° − 40° = 50°.'
+    mistakes:
+      '140': c12m2_ident
+      '40': c12m2_ident
+  - prompt: Find sin⁻¹(sin 150°) in degrees.
+    answer: '30'
+    check: 180 - 150
+    difficulty: 2
+    hints:
+    - 150° is outside [−90°, 90°].
+    - Find an angle in range with the same sine.
+    solution: 'Step 1: sin 150° = sin 30°. Step 2: 30° is in range.'
+    mistakes:
+      '150': c12m2_range
+      '-30': c12m2_range
+  - prompt: Find cos⁻¹(cos 300°) in degrees.
+    answer: '60'
+    check: 360 - 300
+    difficulty: 2
+    hints:
+    - 300° is outside [0°, 180°].
+    - cos(360° − θ) = cos θ.
+    solution: 'Step 1: cos 300° = cos 60°. Step 2: 60° is in range.'
+    mistakes:
+      '300': c12m2_range
+      '-60': c12m2_range
+  - prompt: Find tan⁻¹(1) + tan⁻¹(0) in degrees.
+    answer: '45'
+    check: 45 + 0
+    difficulty: 1
+    hints:
+    - Evaluate each separately.
+    - tan 0° = 0.
+    solution: 'Step 1: 45° + 0°. Step 2: 45°.'
+    mistakes:
+      '90': c12m2_ident
+      '0': c12m2_ident
+  - prompt: Find tan⁻¹(1/4) + tan⁻¹(3/5) in degrees.
+    answer: '45'
+    check: '45'
+    difficulty: 2
+    hints:
+    - Use the tan⁻¹ addition formula.
+    - x + y = 17/20; 1 − xy = 17/20.
+    solution: 'Step 1: (1/4 + 3/5)/(1 − 3/20) = (17/20)/(17/20) = 1. Step 2: tan⁻¹1 = 45°.'
+    mistakes:
+      '90': c12m2_ident
+      '30': c12m2_ident
+  - prompt: Find cos⁻¹(−0.3) + cos⁻¹(0.3) in degrees.
+    answer: '180'
+    check: '180'
+    difficulty: 3
+    hints:
+    - Use the rule for cos⁻¹ of a negative.
+    - cos⁻¹(−x) = 180° − cos⁻¹x.
+    solution: 'Step 1: cos⁻¹(−0.3) = 180° − cos⁻¹(0.3). Step 2: the sum is 180°.'
+    mistakes:
+      '90': c12m2_neg
+      '0': c12m2_neg
+  - prompt: 'Find 2 tan⁻¹(1/3) + tan⁻¹(1/7) in degrees. (Hint: first find 2 tan⁻¹(1/3) = tan⁻¹(3/4).)'
+    answer: '45'
+    check: '45'
+    difficulty: 3
+    hints:
+    - Now add tan⁻¹(3/4) and tan⁻¹(1/7).
+    - (3/4 + 1/7)/(1 − 3/28) = ?
+    solution: 'Step 1: (25/28)/(25/28) = 1. Step 2: tan⁻¹1 = 45°.'
+    mistakes:
+      '90': c12m2_ident
+      '60': c12m2_ident

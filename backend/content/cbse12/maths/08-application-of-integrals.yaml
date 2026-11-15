@@ -13,6 +13,9 @@ tips:
   m12_rectangle_area: "y = 3 is a horizontal line, so the region is a rectangle: width × height."
   m12_sqrt_area: "∫√x dx = (2/3)x^(3/2). Evaluate at 4."
   m12_strip: "A vertical strip has width dx and height y."
+  c12m8_set: Sketch the region first, decide the limits from where it starts and stops, then integrate y dx (or x dy).
+  c12m8_known: 'Use the known formula: circle πa², ellipse πab, quadrant πa²/4.'
+  c12m8_below: Parts below the x-axis give a negative integral; take the absolute value of each part separately.
 concepts:
 - code: cbse12m.area.curve
   title: Area under simple curves
@@ -96,6 +99,46 @@ concepts:
           a: 0
           b: 1
         say: From 0 to 1, x² is below x. Go on to 3 and compare again.
+  lesson:
+    - teach: The area between the curve y = f(x) (with f ≥ 0), the x-axis, and the lines x = a and x = b is ∫ₐᵇ y dx. Think of it as adding up many thin vertical strips, each of area y × dx.
+      picture:
+        kind: bars
+        bars:
+        - label: x=0.5
+          value: 0.25
+        - label: x=1
+          value: 1
+        - label: x=1.5
+          value: 2.25
+        - label: x=2
+          value: 4
+        alt: Thin strips under y = x² whose heights grow with x; adding them gives the area.
+      check:
+        prompt: Area under y = x from x = 0 to x = 2?
+        options:
+        - '2'
+        - '4'
+        - '1'
+        answer: '2'
+        why: ∫₀² x dx = 4/2 = 2.
+    - teach: If part of the curve is below the x-axis, the integral there is negative. For total area, split at the crossing points and add the absolute values. Area against the y-axis uses ∫ x dy between y = c and y = d.
+      check:
+        prompt: ∫₋₁⁰ x dx = −1/2. What is the area of that region?
+        options:
+        - 1/2
+        - -1/2
+        - '0'
+        answer: 1/2
+        why: 'Area is always positive: take the absolute value.'
+    - teach: 'Known areas help you check: circle x² + y² = a² has area πa²; ellipse x²/a² + y²/b² = 1 has area πab. These come from integrating the upper half and using symmetry.'
+      check:
+        prompt: Area of the ellipse x²/25 + y²/16 = 1, as a multiple of π?
+        options:
+        - '20'
+        - '41'
+        - '9'
+        answer: '20'
+        why: πab = π × 5 × 4 = 20π.
   items:
   - prompt: Find the area under y = x² from x = 0 to x = 3.
     answer: '9'
@@ -160,6 +203,105 @@ concepts:
     - a = 3, b = 2.
     solution: 6π square units.
     mistakes: {"13π": "m12_ellipse_area", "36π": "m12_ellipse_area", "5π": "m12_ellipse_area"}
+  - prompt: Find the area under y = x² from x = 0 to x = 1, as a fraction.
+    answer: 1/3
+    check: Rational(1,3)
+    difficulty: 1
+    hints:
+    - Integrate x².
+    - x³/3 from 0 to 1.
+    solution: 'Step 1: 1/3 − 0. Step 2: 1/3.'
+    mistakes:
+      '1': c12m8_set
+      1/2: c12m8_set
+  - prompt: Find the area under y = 4 from x = 0 to x = 3.
+    answer: '12'
+    check: 4*3
+    difficulty: 1
+    hints:
+    - The region is a rectangle.
+    - Height times width.
+    solution: 'Step 1: 4 × 3. Step 2: 12.'
+    mistakes:
+      '7': c12m8_set
+      '4': c12m8_set
+  - prompt: Area enclosed by x² + y² = 9, as a multiple of π.
+    answer: '9'
+    check: 3**2
+    difficulty: 1
+    hints:
+    - The radius is √9.
+    - Use πa².
+    solution: 'Step 1: a = 3. Step 2: 9π.'
+    mistakes:
+      '3': c12m8_known
+      '6': c12m8_known
+  - prompt: Find the area under y = x + 1 from x = 0 to x = 2.
+    answer: '4'
+    check: 2**2/2 + 2
+    difficulty: 2
+    hints:
+    - Antiderivative x²/2 + x.
+    - Evaluate from 0 to 2.
+    solution: 'Step 1: 2 + 2. Step 2: 4.'
+    mistakes:
+      '3': c12m8_set
+      '6': c12m8_set
+  - prompt: Find the total area between y = x³ and the x-axis from x = −1 to x = 1, as a fraction.
+    answer: 1/2
+    check: 2*Rational(1,4)
+    difficulty: 2
+    hints:
+    - The integral over [−1, 1] is 0, but area is not.
+    - Find the area on [0, 1] and double it.
+    solution: 'Step 1: ∫₀¹ x³ = 1/4. Step 2: 2 × 1/4 = 1/2.'
+    mistakes:
+      '0': c12m8_below
+      1/4: c12m8_below
+  - prompt: Area of the ellipse x²/4 + y² = 1, as a multiple of π.
+    answer: '2'
+    check: 2*1
+    difficulty: 2
+    hints:
+    - a² = 4 and b² = 1.
+    - Use πab.
+    solution: 'Step 1: a = 2, b = 1. Step 2: 2π.'
+    mistakes:
+      '4': c12m8_known
+      '5': c12m8_known
+  - prompt: Find the area between the y-axis and x = y² from y = 0 to y = 3.
+    answer: '9'
+    check: 3**3/3
+    difficulty: 2
+    hints:
+    - 'Use horizontal strips: ∫ x dy.'
+    - ∫₀³ y² dy.
+    solution: 'Step 1: y³/3 from 0 to 3. Step 2: 9.'
+    mistakes:
+      '27': c12m8_set
+      '3': c12m8_set
+  - prompt: Find the total area between y = sin x and the x-axis from x = 0 to x = 2π.
+    answer: '4'
+    check: 2 + 2
+    difficulty: 3
+    hints:
+    - The integral over 0 to 2π is 0; split at π.
+    - Each hump has area 2.
+    solution: 'Step 1: ∫₀^π sin x = 2, ∫_π^(2π) sin x = −2. Step 2: 2 + 2 = 4.'
+    mistakes:
+      '0': c12m8_below
+      '2': c12m8_below
+  - prompt: Find the area under y = 1/x from x = 1 to x = e.
+    answer: '1'
+    check: log(E)
+    difficulty: 3
+    hints:
+    - ∫1/x dx = ln x.
+    - ln e − ln 1.
+    solution: 'Step 1: 1 − 0. Step 2: 1.'
+    mistakes:
+      '0': c12m8_set
+      '2': c12m8_set
 - code: cbse12m.area.region
   title: Setting up area integrals
   after:
@@ -224,6 +366,42 @@ concepts:
       bin: Vertical strips, ∫ y dx
       clue: Is it y in terms of x?
       why: ∫₀¹ eˣ dx = e − 1.
+  lesson:
+    - teach: 'To set up an area, sketch the region and choose strips. Vertical strips: width dx, height = top curve − bottom curve. Horizontal strips: height dy, width = right curve − left curve. Pick whichever needs one integral, not two.'
+      check:
+        prompt: 'For a vertical strip, the strip''s height is:'
+        options:
+        - top y minus bottom y
+        - right x minus left x
+        - always 1
+        answer: top y minus bottom y
+        why: A vertical strip stretches from the lower boundary to the upper one.
+    - teach: 'Example: the region between y = x and y = x² from 0 to 1. Top is y = x, bottom is y = x². Area = ∫₀¹ (x − x²)dx = 1/2 − 1/3 = 1/6.'
+      picture:
+        kind: flow
+        steps:
+        - Sketch both curves
+        - Find where they meet
+        - Top − bottom
+        - Integrate between meeting points
+        alt: Steps for setting up the area between two curves.
+      check:
+        prompt: Where do y = x and y = x² meet?
+        options:
+        - x = 0 and x = 1
+        - x = 1 only
+        - x = 0 and x = 2
+        answer: x = 0 and x = 1
+        why: x = x² gives x(x − 1) = 0.
+    - teach: 'Use symmetry to halve work: the region under y² = 4x from x = 0 to x = a is symmetric about the x-axis, so find the upper half and double it. A quadrant of x² + y² = a² has area πa²/4.'
+      check:
+        prompt: 'Quadrant of x² + y² = 36: area as a multiple of π?'
+        options:
+        - '9'
+        - '36'
+        - '6'
+        answer: '9'
+        why: π × 36/4 = 9π.
   items:
   - prompt: Find the area of a quadrant of the circle x² + y² = 16, as a multiple of π.
     answer: '4'
@@ -291,3 +469,105 @@ concepts:
     - Adding strips.
     solution: A long S, meaning sum.
     mistakes: {"integer": "m12_integral_sign", "infinity": "m12_integral_sign", "slope": "m12_integral_sign"}
+  - prompt: Find the area between y = x and y = x² from x = 0 to x = 1, as a fraction.
+    answer: 1/6
+    check: Rational(1,2) - Rational(1,3)
+    difficulty: 1
+    hints:
+    - Top curve minus bottom curve.
+    - ∫₀¹ (x − x²) dx.
+    solution: 'Step 1: 1/2 − 1/3. Step 2: 1/6.'
+    mistakes:
+      1/2: c12m8_set
+      1/3: c12m8_set
+  - prompt: Find the area of a quadrant of x² + y² = 1, as a fraction of π.
+    answer: 1/4
+    check: Rational(1,4)
+    difficulty: 1
+    hints:
+    - Whole circle area π × 1².
+    - A quadrant is one quarter.
+    solution: 'Step 1: π. Step 2: π/4.'
+    mistakes:
+      '1': c12m8_known
+      1/2: c12m8_known
+  - prompt: Find the area of the triangle bounded by y = 2x, the x-axis and x = 3.
+    answer: '9'
+    check: 3**2
+    difficulty: 1
+    hints:
+    - ∫₀³ 2x dx.
+    - Or ½ × base × height.
+    solution: 'Step 1: x² from 0 to 3. Step 2: 9.'
+    mistakes:
+      '18': c12m8_set
+      '6': c12m8_set
+  - prompt: Find the area between y = 4 and y = x² (for −2 ≤ x ≤ 2), as a fraction.
+    answer: 32/3
+    check: 2*(8 - Rational(8,3))
+    difficulty: 2
+    hints:
+    - Top is y = 4, bottom is y = x².
+    - 'Use symmetry: double ∫₀² (4 − x²)dx.'
+    solution: 'Step 1: ∫₀² (4 − x²) = 8 − 8/3 = 16/3. Step 2: × 2 = 32/3.'
+    mistakes:
+      16/3: c12m8_set
+      '16': c12m8_set
+  - prompt: Find the area bounded by y² = 4x and x = 1, as a fraction.
+    answer: 8/3
+    check: 2*2*Rational(2,3)
+    difficulty: 2
+    hints:
+    - 'Upper half: y = 2√x.'
+    - Double ∫₀¹ 2√x dx.
+    solution: 'Step 1: ∫₀¹ 2√x dx = 2 × 2/3 = 4/3. Step 2: × 2 = 8/3.'
+    mistakes:
+      4/3: c12m8_set
+      '2': c12m8_set
+  - prompt: Find the area between y = 2x and y = x² from x = 0 to x = 2, as a fraction.
+    answer: 4/3
+    check: 4 - Rational(8,3)
+    difficulty: 2
+    hints:
+    - They meet at x = 0 and x = 2.
+    - ∫₀² (2x − x²) dx.
+    solution: 'Step 1: x² − x³/3 from 0 to 2 = 4 − 8/3. Step 2: 4/3.'
+    mistakes:
+      8/3: c12m8_set
+      '4': c12m8_set
+  - prompt: Which strips are easier for the region between x = y² and x = 4?
+    options:
+    - horizontal strips
+    - vertical strips
+    - neither works
+    answer: horizontal strips
+    difficulty: 2
+    hints:
+    - The curves are given as x in terms of y.
+    - Left boundary x = y², right boundary x = 4.
+    solution: 'Step 1: width = 4 − y². Step 2: one integral in y from −2 to 2.'
+    mistakes:
+      vertical strips: c12m8_set
+      neither works: c12m8_set
+  - prompt: Find the area between x = y² and x = 4, as a fraction.
+    answer: 32/3
+    check: 2*(8 - Rational(8,3))
+    difficulty: 3
+    hints:
+    - ∫₋₂² (4 − y²) dy.
+    - Use symmetry about the x-axis.
+    solution: 'Step 1: 2 × (8 − 8/3) = 2 × 16/3. Step 2: 32/3.'
+    mistakes:
+      16/3: c12m8_set
+      '8': c12m8_set
+  - prompt: Area of the part of the circle x² + y² = 16 in the first quadrant to the right of x = 0 and above y = 0, minus the triangle with vertices (0,0), (4,0), (0,4). Give the answer as 4π − k. Find k.
+    answer: '8'
+    check: Rational(1,2)*4*4
+    difficulty: 3
+    hints:
+    - The quadrant has area 16π/4 = 4π.
+    - The triangle has area ½ × 4 × 4.
+    solution: 'Step 1: quadrant 4π. Step 2: triangle 8, so 4π − 8; k = 8.'
+    mistakes:
+      '16': c12m8_known
+      '4': c12m8_known

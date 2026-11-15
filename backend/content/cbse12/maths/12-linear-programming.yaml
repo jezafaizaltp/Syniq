@@ -14,6 +14,9 @@ tips:
   m12_lp_count: "3 cakes use 6 hours. How many hours are left for pies?"
   m12_lp_terms: "The thing we want to make as large or small as possible is the 'objective'."
   m12_nonneg: "You cannot make a negative number of items. Which constraints say x and y are not negative?"
+  c12m12_form: Name the decision variables first, then turn each limited resource into one inequality.
+  c12m12_corner: List every corner of the feasible region, work out Z at each, then pick the largest or smallest.
+  c12m12_region: A point is feasible only if it satisfies every constraint, including x ≥ 0 and y ≥ 0.
 concepts:
 - code: cbse12m.lp.formulate
   title: Formulating linear programming problems
@@ -70,6 +73,42 @@ concepts:
       bin: Objective function
       clue: Is it a quantity to make as small as possible?
       why: A cost to minimise is also an objective function, just in a different problem.
+  lesson:
+    - teach: A linear programming problem (LPP) asks for the best value (maximum or minimum) of a linear objective Z = ax + by. The unknowns x and y are decision variables, such as how many chairs and tables to make.
+      check:
+        prompt: Which of these is a linear objective function?
+        options:
+        - Z = 4x + 7y
+        - Z = x² + y
+        - Z = xy
+        answer: Z = 4x + 7y
+        why: Only first powers of x and y, with no products.
+    - teach: 'Constraints come from limited resources: hours, material, money, space. Each becomes a linear inequality. Example: a chair takes 2 h and a table 3 h, with 12 h available: 2x + 3y ≤ 12. You cannot make negative items, so x ≥ 0, y ≥ 0.'
+      picture:
+        kind: flow
+        steps:
+        - Choose variables x, y
+        - Write Z to maximise or minimise
+        - One inequality per resource
+        - Add x ≥ 0, y ≥ 0
+        alt: Steps for turning a word problem into a linear programming problem.
+      check:
+        prompt: Each kg of A costs ₹5 and each kg of B ₹8; the budget is ₹40. Which constraint fits?
+        options:
+        - 5x + 8y ≤ 40
+        - 5x + 8y ≥ 40
+        - x + y ≤ 40
+        answer: 5x + 8y ≤ 40
+        why: Total spending cannot go over the budget.
+    - teach: 'Common types: manufacturing (maximise profit within machine hours), diet (minimise cost while meeting nutrient minimums, so ≥ constraints), transportation (minimise shipping cost).'
+      check:
+        prompt: 'In a diet problem, nutrient constraints usually use:'
+        options:
+        - ≥
+        - ≤
+        - '='
+        answer: ≥
+        why: The diet must provide at least the needed amount.
   items:
   - prompt: 'In an LPP, the function to maximise or minimise is called the:'
     options:
@@ -141,6 +180,117 @@ concepts:
     - Name of the method.
     solution: Linear.
     mistakes: {"quadratic": "m12_linear", "exponential": "m12_linear", "trigonometric": "m12_linear"}
+  - prompt: A toy needs 3 hours; 15 hours are available. What is the most toys that can be made?
+    answer: '5'
+    check: 15/3
+    difficulty: 1
+    hints:
+    - Write 3x ≤ 15.
+    - Solve for x.
+    solution: 'Step 1: 3x ≤ 15. Step 2: x ≤ 5.'
+    mistakes:
+      '45': c12m12_form
+      '12': c12m12_form
+  - prompt: Profit Z = 50x + 40y. Find Z when x = 2 and y = 5.
+    answer: '300'
+    check: 50*2 + 40*5
+    difficulty: 1
+    hints:
+    - Substitute both values.
+    - Add the two products.
+    solution: 'Step 1: 100 + 200. Step 2: 300.'
+    mistakes:
+      '90': c12m12_form
+      '450': c12m12_form
+  - prompt: 'The unknowns x and y in an LPP are called:'
+    options:
+    - decision variables
+    - constraints
+    - corner points
+    answer: decision variables
+    difficulty: 1
+    hints:
+    - They are what we choose.
+    - Their values decide Z.
+    solution: 'Step 1: we decide x and y. Step 2: decision variables.'
+    mistakes:
+      constraints: c12m12_form
+      corner points: c12m12_form
+  - prompt: Food A has 2 units of vitamin per kg, food B has 1 unit; at least 8 units are needed. Which constraint is right?
+    options:
+    - 2x + y ≥ 8
+    - 2x + y ≤ 8
+    - x + 2y ≥ 8
+    answer: 2x + y ≥ 8
+    difficulty: 2
+    hints:
+    - Vitamin from A is 2x, from B is y.
+    - '''At least'' means the total cannot fall below 8.'
+    solution: 'Step 1: total vitamin 2x + y. Step 2: ≥ 8.'
+    mistakes:
+      2x + y ≤ 8: c12m12_form
+      x + 2y ≥ 8: c12m12_form
+  - prompt: A bag needs 4 m of cloth and a cap 1 m; 20 m are available. If 3 bags are made, what is the most caps?
+    answer: '8'
+    check: 20 - 4*3
+    difficulty: 2
+    hints:
+    - Cloth used by 3 bags.
+    - The rest goes to caps.
+    solution: 'Step 1: 12 m for bags. Step 2: 8 m left, 8 caps.'
+    mistakes:
+      '5': c12m12_form
+      '17': c12m12_form
+  - prompt: Is (2, 3) feasible for x + y ≤ 6, x ≤ 3, x, y ≥ 0?
+    options:
+    - 'yes'
+    - no, x + y is too big
+    - no, x is too big
+    answer: 'yes'
+    difficulty: 2
+    hints:
+    - Check each inequality in turn.
+    - 2 + 3 = 5.
+    solution: 'Step 1: 5 ≤ 6, 2 ≤ 3, both non-negative. Step 2: feasible.'
+    mistakes:
+      no, x + y is too big: c12m12_region
+      no, x is too big: c12m12_region
+  - prompt: Cost Z = 6x + 4y. Find Z at (1, 4).
+    answer: '22'
+    check: 6*1 + 4*4
+    difficulty: 2
+    hints:
+    - Put x = 1, y = 4.
+    - 6 + 16.
+    solution: 'Step 1: 6 + 16. Step 2: 22.'
+    mistakes:
+      '28': c12m12_form
+      '10': c12m12_form
+  - prompt: 'A firm makes x chairs (profit ₹30) and y tables (profit ₹50). Machine time: chair 1 h, table 2 h, 40 h available. Which pair is the full model?'
+    options:
+    - Max Z = 30x + 50y; x + 2y ≤ 40; x, y ≥ 0
+    - Min Z = 30x + 50y; x + 2y ≥ 40
+    - Max Z = x + 2y; 30x + 50y ≤ 40
+    answer: Max Z = 30x + 50y; x + 2y ≤ 40; x, y ≥ 0
+    difficulty: 3
+    hints:
+    - Profit goes in the objective.
+    - Hours go in the constraint.
+    solution: 'Step 1: maximise profit 30x + 50y. Step 2: hours x + 2y ≤ 40, with x, y ≥ 0.'
+    mistakes:
+      Min Z = 30x + 50y; x + 2y ≥ 40: c12m12_form
+      Max Z = x + 2y; 30x + 50y ≤ 40: c12m12_form
+  - prompt: With the chair-table model above, how many tables can be made if no chairs are made?
+    answer: '20'
+    check: 40/2
+    difficulty: 3
+    hints:
+    - Put x = 0 in the hours constraint.
+    - 2y ≤ 40.
+    solution: 'Step 1: 2y ≤ 40. Step 2: y ≤ 20.'
+    mistakes:
+      '40': c12m12_form
+      '80': c12m12_form
 - code: cbse12m.lp.graphical
   title: Graphical method and corner points
   after:
@@ -232,6 +382,50 @@ concepts:
           z: 9
           ok: 0
         say: Z = 9, but the point is outside the region.
+  lesson:
+    - teach: 'Graphical method: draw each constraint as a line, shade the side that satisfies it, and find the region where all shadings overlap: the feasible region. Every point there is a possible plan.'
+      check:
+        prompt: Which side of x + y = 4 is x + y ≤ 4?
+        options:
+        - the side containing the origin
+        - the side away from the origin
+        - only the line itself
+        answer: the side containing the origin
+        why: At (0, 0), 0 ≤ 4 is true.
+    - teach: 'Corner point theorem: if the feasible region is bounded, the maximum and minimum of Z occur at corner points. So find all corners (where boundary lines meet), compute Z at each, and compare.'
+      picture:
+        kind: compare
+        columns:
+        - title: Corner
+          points:
+          - (0, 0)
+          - (4, 0)
+          - (0, 3)
+          - (2, 2)
+        - title: Z = 3x + 4y
+          points:
+          - '0'
+          - '12'
+          - '12'
+          - '14'
+        alt: Table of corner points with the value of Z at each; the largest is 14 at (2, 2).
+      check:
+        prompt: In the table, where is Z = 3x + 4y largest?
+        options:
+        - (2, 2)
+        - (4, 0)
+        - (0, 3)
+        answer: (2, 2)
+        why: Z = 6 + 8 = 14, the largest value.
+    - teach: If the region is unbounded, a max or min may not exist; check by drawing Z greater (or less) than the candidate value and seeing whether it meets the region. If no point satisfies all constraints, the problem is infeasible.
+      check:
+        prompt: 'Constraints x + y ≤ 2 and x + y ≥ 5 together give:'
+        options:
+        - no feasible region
+        - a bounded region
+        - an unbounded region
+        answer: no feasible region
+        why: No (x, y) can make the sum both ≤ 2 and ≥ 5.
   items:
   - prompt: Maximise Z = 3x + 2y with x + y ≤ 4, x, y ≥ 0. Find the maximum Z.
     answer: '12'
@@ -300,3 +494,108 @@ concepts:
     - No solution.
     solution: Infeasible.
     mistakes: {"unbounded": "m12_infeasible", "optimal": "m12_infeasible", "linear": "m12_infeasible"}
+  - prompt: Maximise Z = 2x + 5y with x + y ≤ 6, x, y ≥ 0. Find the maximum Z.
+    answer: '30'
+    check: 5*6
+    difficulty: 1
+    hints:
+    - 'Corners: (0, 0), (6, 0), (0, 6).'
+    - Compute Z at each.
+    solution: 'Step 1: Z = 0, 12, 30. Step 2: max 30 at (0, 6).'
+    mistakes:
+      '12': c12m12_corner
+      '42': c12m12_corner
+  - prompt: Minimise Z = 3x + y with x + y ≥ 3, x, y ≥ 0. Find the minimum Z.
+    answer: '3'
+    check: 0*3 + 3
+    difficulty: 1
+    hints:
+    - 'Corners of the region: (3, 0) and (0, 3).'
+    - Compare Z at both.
+    solution: 'Step 1: Z(3, 0) = 9, Z(0, 3) = 3. Step 2: minimum 3 (Z grows elsewhere).'
+    mistakes:
+      '9': c12m12_corner
+      '0': c12m12_region
+  - prompt: Maximise Z = x + 3y with x ≤ 4, y ≤ 5, x, y ≥ 0. Find the maximum Z.
+    answer: '19'
+    check: 4 + 3*5
+    difficulty: 1
+    hints:
+    - The region is a rectangle.
+    - Try the corner (4, 5).
+    solution: 'Step 1: Z(4, 5) = 4 + 15. Step 2: 19.'
+    mistakes:
+      '15': c12m12_corner
+      '4': c12m12_corner
+  - prompt: Where do x + 2y = 8 and 3x + 2y = 12 meet? Give x.
+    answer: '2'
+    check: (12 - 8)/2
+    difficulty: 2
+    hints:
+    - Subtract the first equation from the second.
+    - 2x = 4.
+    solution: 'Step 1: 2x = 4, x = 2. Step 2: y = 3.'
+    mistakes:
+      '3': c12m12_corner
+      '4': c12m12_corner
+  - prompt: Maximise Z = x + y with x + 2y ≤ 8, 3x + 2y ≤ 12, x, y ≥ 0. Find the maximum Z.
+    answer: '5'
+    check: 2 + 3
+    difficulty: 2
+    hints:
+    - 'Corners: (0, 0), (4, 0), (2, 3), (0, 4).'
+    - Find Z at each.
+    solution: 'Step 1: Z = 0, 4, 5, 4. Step 2: max 5 at (2, 3).'
+    mistakes:
+      '4': c12m12_corner
+      '7': c12m12_corner
+  - prompt: Is (3, 3) in the feasible region of x + 2y ≤ 8, 3x + 2y ≤ 12?
+    options:
+    - 'no'
+    - 'yes'
+    - only on the boundary
+    answer: 'no'
+    difficulty: 2
+    hints:
+    - Test x + 2y.
+    - 3 + 6 = 9.
+    solution: 'Step 1: 9 > 8, so the first constraint fails. Step 2: not feasible.'
+    mistakes:
+      'yes': c12m12_region
+      only on the boundary: c12m12_region
+  - prompt: How many corner points does the region x + y ≤ 5, x ≤ 3, x, y ≥ 0 have?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - List where the boundary lines meet.
+    - (0, 0), (3, 0), (3, 2), (0, 5).
+    solution: 'Step 1: four corners. Step 2: 4.'
+    mistakes:
+      '3': c12m12_corner
+      '5': c12m12_corner
+  - prompt: Maximise Z = 4x + 3y on that region (x + y ≤ 5, x ≤ 3, x, y ≥ 0). Find the maximum.
+    answer: '18'
+    check: 4*3 + 3*2
+    difficulty: 3
+    hints:
+    - Evaluate Z at (0, 0), (3, 0), (3, 2), (0, 5).
+    - Compare.
+    solution: 'Step 1: Z = 0, 12, 18, 15. Step 2: max 18 at (3, 2).'
+    mistakes:
+      '15': c12m12_corner
+      '12': c12m12_corner
+  - prompt: 'Maximise Z = x + y with x − y ≥ 0, x, y ≥ 0 (no other limits). The maximum:'
+    options:
+    - does not exist; the region is unbounded
+    - is 0
+    - is 1
+    answer: does not exist; the region is unbounded
+    difficulty: 3
+    hints:
+    - Try large points like (100, 50).
+    - Is there any ceiling?
+    solution: 'Step 1: Z keeps growing as x grows. Step 2: no maximum.'
+    mistakes:
+      is 0: c12m12_region
+      is 1: c12m12_region

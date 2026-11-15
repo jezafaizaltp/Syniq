@@ -14,6 +14,10 @@ tips:
   m12_parametric: "dy/dx = (dy/dt)/(dx/dt). Find each, then put t = 2."
   m12_power_rule: "d/dx xⁿ = nxⁿ⁻¹. Then substitute x = 2."
   m12_tan_inv_deriv: "Let y = tan⁻¹x, so tan y = x. Differentiate both sides: sec²y · dy/dx = 1, and use sec²y = 1 + tan²y = 1 + x²."
+  c12m5_lim: 'Continuity at a needs three things to agree: the left-hand limit, the right-hand limit and f(a).'
+  c12m5_chain: Differentiate the outside function, keep the inside, then multiply by the derivative of the inside.
+  c12m5_rule: Recall the standard derivative exactly before substituting a value.
+  c12m5_param: For parametric curves, divide dy/dt by dx/dt.
 concepts:
 - code: cbse12m.cont.continuity
   title: Continuity
@@ -115,6 +119,46 @@ concepts:
           k: 1
           jump: -3
         say: 'That''s a jump of 3 the other way: the left piece ends above the right. It must reach only 2.'
+  lesson:
+    - teach: 'f is continuous at x = a if you can draw through that point without lifting your pen. Exactly: the left-hand limit, the right-hand limit and f(a) all exist and are equal: lim(x→a) f(x) = f(a).'
+      check:
+        prompt: f(x) = x + 1 for x < 1 and f(x) = 3 for x ≥ 1. Is f continuous at 1?
+        options:
+        - no, the left limit is 2 but f(1) = 3
+        - yes, both pieces are lines
+        - yes, f(1) exists
+        answer: no, the left limit is 2 but f(1) = 3
+        why: The two sides do not meet, so there is a jump.
+    - teach: Polynomials, sin x, cos x, eˣ and |x| are continuous everywhere. A rational function is continuous except where its denominator is 0; tan x fails at odd multiples of π/2. Sums, products, quotients (non-zero denominator) and compositions of continuous functions are continuous.
+      check:
+        prompt: Where is f(x) = 1/(x − 4) discontinuous?
+        options:
+        - x = 4
+        - x = 0
+        - x = −4
+        answer: x = 4
+        why: The denominator is zero there.
+    - teach: 'Differentiable at a point means continuous there, but not the other way round: |x| is continuous at 0 but has a sharp corner, so it is not differentiable there. The greatest integer function [x] jumps at every integer.'
+      picture:
+        kind: compare
+        columns:
+        - title: Continuous
+          points:
+          - no jumps or holes
+          - e.g. |x| at 0
+        - title: Differentiable
+          points:
+          - smooth, no corners
+          - e.g. x² everywhere
+        alt: Continuity versus differentiability.
+      check:
+        prompt: 'f(x) = |x − 3| is not differentiable at:'
+        options:
+        - x = 3
+        - x = 0
+        - x = −3
+        answer: x = 3
+        why: The corner of the V shape is where x − 3 = 0.
   items:
   - prompt: f(x) = kx + 1 for x ≤ 2 and 3x − 1 for x > 2. Find k so that f is continuous at 2.
     answer: '2'
@@ -187,6 +231,105 @@ concepts:
     - Not defined.
     solution: x = 0.
     mistakes: {"x = 1": "m12_one_over_x", "every point": "m12_one_over_x", "no point": "m12_one_over_x"}
+  - prompt: f(x) = kx for x ≤ 1 and x + 3 for x > 1. Find k so f is continuous at 1.
+    answer: '4'
+    check: 1 + 3
+    difficulty: 1
+    hints:
+    - Match the two pieces at x = 1.
+    - k × 1 must equal 1 + 3.
+    solution: 'Step 1: left value k, right limit 4. Step 2: k = 4.'
+    mistakes:
+      '3': c12m5_lim
+      '1': c12m5_lim
+  - prompt: Find lim(x→2) (x² − 4)/(x − 2).
+    answer: '4'
+    check: 2 + 2
+    difficulty: 1
+    hints:
+    - Factor the top as a difference of squares.
+    - Cancel the common factor.
+    solution: 'Step 1: (x − 2)(x + 2)/(x − 2) = x + 2. Step 2: at x = 2, 4.'
+    mistakes:
+      '0': c12m5_lim
+      '2': c12m5_lim
+  - prompt: tan x is discontinuous at x = π/2. How many degrees is that?
+    answer: '90'
+    check: 180/2
+    difficulty: 1
+    hints:
+    - π radians is 180°.
+    - Halve it.
+    solution: 'Step 1: π/2 = 180°/2. Step 2: 90°.'
+    mistakes:
+      '45': c12m5_rule
+      '180': c12m5_rule
+  - prompt: f(x) = (x² − 1)/(x − 1) for x ≠ 1 and f(1) = k. Find k for continuity at 1.
+    answer: '2'
+    check: 1 + 1
+    difficulty: 2
+    hints:
+    - Simplify the fraction for x ≠ 1.
+    - Then let x approach 1.
+    solution: 'Step 1: (x − 1)(x + 1)/(x − 1) = x + 1. Step 2: limit 2, so k = 2.'
+    mistakes:
+      '0': c12m5_lim
+      '1': c12m5_lim
+  - prompt: f(x) = ax + 1 for x ≤ 3 and bx + 3 for x > 3, continuous at 3, with a = 2. Find b.
+    answer: 4/3
+    check: (2*3 + 1 - 3)/3
+    difficulty: 2
+    hints:
+    - Find the left value at 3 with a = 2.
+    - Set 3b + 3 equal to it.
+    solution: 'Step 1: left value 7. Step 2: 3b + 3 = 7, b = 4/3.'
+    mistakes:
+      '2': c12m5_lim
+      7/3: c12m5_lim
+  - prompt: How many points of discontinuity does [x] have in the interval (0, 4)?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - '[x] jumps at integers.'
+    - List the integers strictly between 0 and 4.
+    solution: 'Step 1: 1, 2, 3. Step 2: 3 points.'
+    mistakes:
+      '4': c12m5_lim
+      '5': c12m5_lim
+  - prompt: f(x) = (x² − 9)/(x² − 5x + 6) is undefined at how many real points?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Find where the denominator is zero.
+    - Factor x² − 5x + 6.
+    solution: 'Step 1: (x − 2)(x − 3) = 0. Step 2: x = 2 and 3: 2 points.'
+    mistakes:
+      '1': c12m5_lim
+      '0': c12m5_lim
+  - prompt: f(x) = |x| + |x − 1| is not differentiable at how many points?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - Each |…| has a corner where it is zero.
+    - Find where x = 0 and x − 1 = 0.
+    solution: 'Step 1: corners at x = 0 and x = 1. Step 2: 2 points.'
+    mistakes:
+      '1': c12m5_lim
+      '0': c12m5_lim
+  - prompt: f(x) = x² sin(1/x) for x ≠ 0 and f(0) = 0. What is lim(x→0) f(x)?
+    answer: '0'
+    check: '0'
+    difficulty: 3
+    hints:
+    - sin(1/x) stays between −1 and 1.
+    - So |f(x)| ≤ x².
+    solution: 'Step 1: −x² ≤ f(x) ≤ x². Step 2: both sides go to 0, so the limit is 0 = f(0).'
+    mistakes:
+      '1': c12m5_lim
+      '-1': c12m5_lim
 - code: cbse12m.cont.derivatives
   title: Differentiation rules
   after:
@@ -262,6 +405,42 @@ concepts:
       bin: 2x
       clue: Does the 7 change the slope?
       why: The 7 vanishes.
+  lesson:
+    - teach: 'Chain rule: for y = f(g(x)), dy/dx = f′(g(x)) × g′(x). Differentiate the outside, keep the inside, multiply by the inside''s derivative. Example: y = (3x + 2)⁴ gives 4(3x + 2)³ × 3.'
+      picture:
+        kind: flow
+        steps:
+        - Spot outside and inside
+        - Differentiate outside
+        - Keep inside unchanged
+        - Multiply by inside's derivative
+        alt: Steps of the chain rule.
+      check:
+        prompt: y = (x² + 1)³. Find dy/dx at x = 1.
+        options:
+        - '24'
+        - '12'
+        - '6'
+        answer: '24'
+        why: 3(x² + 1)² × 2x = 3 × 4 × 2 = 24.
+    - teach: 'Standard derivatives: sin x → cos x; cos x → −sin x; tan x → sec²x; eˣ → eˣ; ln x → 1/x; sin⁻¹x → 1/√(1 − x²); tan⁻¹x → 1/(1 + x²). Combine them with the chain rule.'
+      check:
+        prompt: y = e^(2x). dy/dx at x = 0?
+        options:
+        - '2'
+        - '1'
+        - '0'
+        answer: '2'
+        why: dy/dx = 2e^(2x); at 0 it is 2.
+    - teach: 'Other techniques: implicit differentiation (differentiate both sides, treating y as a function of x), logarithmic differentiation (take ln first, for xˣ or long products), parametric dy/dx = (dy/dt)/(dx/dt), and second derivatives (differentiate twice).'
+      check:
+        prompt: x = 2t, y = t². Find dy/dx at t = 3.
+        options:
+        - '3'
+        - '6'
+        - '2'
+        answer: '3'
+        why: dy/dt = 2t = 6, dx/dt = 2, so 6/2 = 3.
   items:
   - prompt: If y = x³, find dy/dx at x = 2.
     answer: '12'
@@ -323,3 +502,102 @@ concepts:
     - Never zero denominator.
     solution: 1/(1 + x²).
     mistakes: {"1/√(1 − x²)": "m12_tan_inv_deriv", "sec²x": "m12_tan_inv_deriv", "−1/(1 + x²)": "m12_tan_inv_deriv"}
+  - prompt: y = x⁴. Find dy/dx at x = 1.
+    answer: '4'
+    check: 4*1**3
+    difficulty: 1
+    hints:
+    - Bring down the power, reduce it by one.
+    - Then put x = 1.
+    solution: 'Step 1: 4x³. Step 2: 4.'
+    mistakes:
+      '1': c12m5_rule
+      '3': c12m5_rule
+  - prompt: y = cos(2x). Find dy/dx at x = 0.
+    answer: '0'
+    check: -2*sin(0)
+    difficulty: 1
+    hints:
+    - Derivative of cos is −sin, times the inside's derivative.
+    - sin 0 = 0.
+    solution: 'Step 1: −2 sin 2x. Step 2: at 0, 0.'
+    mistakes:
+      '-2': c12m5_chain
+      '2': c12m5_chain
+  - prompt: y = (3x − 1)⁴. Find dy/dx at x = 1.
+    answer: '96'
+    check: 4*(3*1 - 1)**3*3
+    difficulty: 1
+    hints:
+    - 'Outside: power 4. Inside: 3x − 1.'
+    - Multiply by 3 at the end.
+    solution: 'Step 1: 4(3x − 1)³ × 3. Step 2: 4 × 8 × 3 = 96.'
+    mistakes:
+      '32': c12m5_chain
+      '12': c12m5_chain
+  - prompt: y = ln(3x). Find dy/dx at x = 2 as a fraction.
+    answer: 1/2
+    check: 1/2
+    difficulty: 2
+    hints:
+    - ln(3x) = ln 3 + ln x.
+    - The constant ln 3 has derivative 0.
+    solution: 'Step 1: dy/dx = 1/x. Step 2: at 2, 1/2.'
+    mistakes:
+      3/2: c12m5_chain
+      1/6: c12m5_chain
+  - prompt: y = sin⁻¹x. Find dy/dx at x = 0.
+    answer: '1'
+    check: 1/sqrt(1 - 0**2)
+    difficulty: 2
+    hints:
+    - Use 1/√(1 − x²).
+    - Put x = 0.
+    solution: 'Step 1: 1/√1. Step 2: 1.'
+    mistakes:
+      '0': c12m5_rule
+      '-1': c12m5_rule
+  - prompt: x² + y² = 25. Find dy/dx at the point (3, 4) as a fraction.
+    answer: -3/4
+    check: -3/4
+    difficulty: 2
+    hints:
+    - 'Differentiate both sides: 2x + 2y dy/dx = 0.'
+    - Solve for dy/dx = −x/y.
+    solution: 'Step 1: dy/dx = −x/y. Step 2: −3/4.'
+    mistakes:
+      3/4: c12m5_rule
+      -4/3: c12m5_rule
+  - prompt: y = x³. Find d²y/dx² at x = 2.
+    answer: '12'
+    check: 6*2
+    difficulty: 2
+    hints:
+    - Differentiate twice.
+    - First 3x², then again.
+    solution: 'Step 1: y″ = 6x. Step 2: 12.'
+    mistakes:
+      '24': c12m5_rule
+      '8': c12m5_rule
+  - prompt: x = t³, y = t². Find dy/dx at t = 2 as a fraction.
+    answer: 1/3
+    check: (2*2)/(3*2**2)
+    difficulty: 3
+    hints:
+    - Find dy/dt and dx/dt.
+    - Divide, then put t = 2.
+    solution: 'Step 1: dy/dt = 2t = 4, dx/dt = 3t² = 12. Step 2: 4/12 = 1/3.'
+    mistakes:
+      '3': c12m5_param
+      4/3: c12m5_param
+  - prompt: y = xˣ. Find dy/dx at x = 1.
+    answer: '1'
+    check: 1**1*(log(1) + 1)
+    difficulty: 3
+    hints:
+    - 'Take ln: ln y = x ln x.'
+    - 'Differentiate: (1/y) dy/dx = ln x + 1.'
+    solution: 'Step 1: dy/dx = xˣ(ln x + 1). Step 2: at 1, 1 × (0 + 1) = 1.'
+    mistakes:
+      '0': c12m5_rule
+      '2': c12m5_rule

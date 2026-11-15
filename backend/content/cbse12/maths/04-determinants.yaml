@@ -11,6 +11,10 @@ tips:
   m12_diag_det: "For a diagonal matrix, the determinant is the product of the diagonal."
   m12_solve_system: "Subtract the second equation from the first to remove y."
   m12_unique: "A non-zero determinant means A⁻¹ exists, so X = A⁻¹B has one answer."
+  c12m4_exp: Expand along a row with the sign pattern + − +; each entry multiplies the 2 × 2 determinant left after crossing out its row and column.
+  c12m4_prop: 'Use the property: |kA| = kⁿ|A| for an n × n matrix, |AB| = |A||B|, |Aᵀ| = |A|.'
+  c12m4_cof: Cofactor Aᵢⱼ = (−1)^(i+j) × minor. Check the sign from the position before you finish.
+  c12m4_solve: Write the system as AX = B, find |A|, then use X = A⁻¹B (or elimination to check).
 concepts:
 - code: cbse12m.det.value
   title: Determinant values and area
@@ -86,6 +90,57 @@ concepts:
       - when:
           dv: 10
         say: That's +10. The sign shows which side of AB C is on; the area ignores it. Move C to the other side.
+  lesson:
+    - teach: 'Every square matrix A has a number called its determinant, |A|. For 2 × 2, |[[a, b], [c, d]]| = ad − bc. For 3 × 3, expand along any row or column: each entry times its cofactor, with signs in the pattern + − + / − + − / + − +.'
+      check:
+        prompt: Find |[[5, 2], [3, 4]]|.
+        options:
+        - '14'
+        - '26'
+        - '7'
+        answer: '14'
+        why: 5 × 4 − 2 × 3 = 20 − 6 = 14.
+    - teach: 'Useful properties: |Aᵀ| = |A|; swapping two rows changes the sign; two equal rows give 0; |AB| = |A||B|; for an n × n matrix, |kA| = kⁿ|A|. A triangular matrix has determinant equal to the product of its diagonal.'
+      check:
+        prompt: A is 3 × 3 with |A| = 2. Find |3A|.
+        options:
+        - '54'
+        - '6'
+        - '18'
+        answer: '54'
+        why: '|3A| = 3³ × 2 = 27 × 2 = 54.'
+    - teach: Area of a triangle with vertices (x₁, y₁), (x₂, y₂), (x₃, y₃) = ½|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|. If this is 0, the three points lie on one line (collinear).
+      picture:
+        kind: geometry
+        points:
+          O:
+          - 0
+          - 0
+          A:
+          - 6
+          - 0
+          B:
+          - 0
+          - 4
+        segments:
+        - - O
+          - A
+        - - A
+          - B
+        - - B
+          - O
+        labels:
+          OA: '6'
+          OB: '4'
+        alt: Right triangle with vertices (0, 0), (6, 0) and (0, 4).
+      check:
+        prompt: Area of the triangle with vertices (0, 0), (6, 0), (0, 4)?
+        options:
+        - '12'
+        - '24'
+        - '10'
+        answer: '12'
+        why: ½|0 + 6(4 − 0) + 0| = ½ × 24 = 12.
   items:
   - prompt: Find the determinant of [[3, 4], [1, 2]].
     answer: '2'
@@ -147,6 +202,105 @@ concepts:
     - On one line.
     solution: Collinear.
     mistakes: {"a right triangle": "m12_collinear", "equidistant": "m12_collinear", "on a circle": "m12_collinear"}
+  - prompt: Find the determinant of [[7, 3], [2, 1]].
+    answer: '1'
+    check: 7*1 - 3*2
+    difficulty: 1
+    hints:
+    - Main diagonal product minus the other.
+    - 7 × 1 and 3 × 2.
+    solution: 'Step 1: 7 − 6. Step 2: 1.'
+    mistakes:
+      '13': c12m4_exp
+      '-1': c12m4_exp
+  - prompt: Find the determinant of [[2, 5], [4, 10]].
+    answer: '0'
+    check: 2*10 - 5*4
+    difficulty: 1
+    hints:
+    - Compute ad − bc.
+    - Notice the second row is twice the first.
+    solution: 'Step 1: 20 − 20. Step 2: 0 (rows proportional).'
+    mistakes:
+      '40': c12m4_exp
+      '-40': c12m4_exp
+  - prompt: Find the determinant of [[1, 0, 0], [5, 2, 0], [7, 8, 3]].
+    answer: '6'
+    check: 1*2*3
+    difficulty: 1
+    hints:
+    - Everything above the diagonal is 0.
+    - The matrix is triangular.
+    solution: 'Step 1: product of diagonal. Step 2: 1 × 2 × 3 = 6.'
+    mistakes:
+      '26': c12m4_exp
+      '0': c12m4_exp
+  - prompt: Find the determinant of [[1, 2, 0], [3, 1, 0], [0, 0, 2]].
+    answer: '-10'
+    check: 2*(1*1 - 2*3)
+    difficulty: 2
+    hints:
+    - Expand along the third row or column.
+    - Only the entry 2 contributes.
+    solution: 'Step 1: 2 × |[[1, 2], [3, 1]]|. Step 2: 2 × (1 − 6) = −10.'
+    mistakes:
+      '10': c12m4_cof
+      '-5': c12m4_exp
+  - prompt: '|A| = 4 and |B| = −2 for 2 × 2 matrices. Find |AB|.'
+    answer: '-8'
+    check: 4*(-2)
+    difficulty: 2
+    hints:
+    - The determinant of a product…
+    - …is the product of the determinants.
+    solution: 'Step 1: |AB| = |A||B|. Step 2: 4 × (−2) = −8.'
+    mistakes:
+      '2': c12m4_prop
+      '8': c12m4_prop
+  - prompt: A is 3 × 3 with |A| = 5. Find |Aᵀ|.
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - Transposing swaps rows and columns.
+    - Does that change the determinant?
+    solution: 'Step 1: |Aᵀ| = |A|. Step 2: 5.'
+    mistakes:
+      '-5': c12m4_prop
+      '125': c12m4_prop
+  - prompt: Find the area of the triangle with vertices (1, 1), (4, 1) and (1, 5).
+    answer: '6'
+    check: Rational(1,2)*abs(1*(1-5) + 4*(5-1) + 1*(1-1))
+    difficulty: 2
+    hints:
+    - Use the area formula with x₁ = 1, y₁ = 1.
+    - Or notice the base and height lines.
+    solution: 'Step 1: 1(1 − 5) + 4(5 − 1) + 1(0) = −4 + 16 = 12. Step 2: ½ × 12 = 6.'
+    mistakes:
+      '12': c12m4_exp
+      '3': c12m4_exp
+  - prompt: Find k if (1, 2), (3, 6) and (k, 10) are collinear.
+    answer: '5'
+    check: 10/2
+    difficulty: 3
+    hints:
+    - Collinear means the area is 0.
+    - Or note y = 2x passes through the first two points.
+    solution: 'Step 1: the line through (1, 2) and (3, 6) is y = 2x. Step 2: 10 = 2k, k = 5.'
+    mistakes:
+      '4': c12m4_exp
+      '6': c12m4_exp
+  - prompt: 'Swapping two rows of a 3 × 3 matrix with |A| = 7 gives a determinant of:'
+    answer: '-7'
+    check: '-7'
+    difficulty: 3
+    hints:
+    - One swap of rows…
+    - …changes only the sign.
+    solution: 'Step 1: a row swap multiplies by −1. Step 2: −7.'
+    mistakes:
+      '7': c12m4_prop
+      '0': c12m4_prop
 - code: cbse12m.det.systems
   title: Adjoint, inverse and solving equations
   after:
@@ -260,6 +414,42 @@ concepts:
           - 1
           - 20
         say: '(1, 1) doesn''t satisfy equation 2 yet: 2(1) + k(1) must equal m.'
+  lesson:
+    - teach: 'Minor Mᵢⱼ: the determinant left after deleting row i and column j. Cofactor Aᵢⱼ = (−1)^(i+j) Mᵢⱼ. For [[a, b], [c, d]]: A₁₁ = d, A₁₂ = −c, A₂₁ = −b, A₂₂ = a.'
+      check:
+        prompt: For [[2, 7], [5, 3]], find the cofactor A₂₁.
+        options:
+        - '-7'
+        - '7'
+        - '-5'
+        answer: '-7'
+        why: 'Delete row 2, column 1: minor 7; sign (−1)³ = −1.'
+    - teach: The adjoint adj A is the transpose of the matrix of cofactors. A(adj A) = |A|I, so A⁻¹ = adj A / |A| when |A| ≠ 0.
+      check:
+        prompt: 'A is 2 × 2 with |A| = 3. A(adj A) equals:'
+        options:
+        - 3I
+        - I
+        - 9I
+        answer: 3I
+        why: A(adj A) = |A|I.
+    - teach: 'A system like 2x + 3y = 8, x + y = 3 can be written AX = B. If |A| ≠ 0 there is exactly one solution, X = A⁻¹B. If |A| = 0, compute (adj A)B: if it is not zero, there is no solution; if it is zero, there may be infinitely many or none.'
+      picture:
+        kind: flow
+        steps:
+        - Write AX = B
+        - Find |A|
+        - '|A| ≠ 0: X = A⁻¹B'
+        - '|A| = 0: check (adj A)B'
+        alt: Deciding and solving a system of linear equations with matrices.
+      check:
+        prompt: 'If |A| = 0 and (adj A)B ≠ 0, the system has:'
+        options:
+        - no solution
+        - a unique solution
+        - exactly two solutions
+        answer: no solution
+        why: The system is inconsistent.
   items:
   - prompt: Solve 2x + y = 5, x + y = 3. Find x.
     answer: '2'
@@ -324,3 +514,105 @@ concepts:
     solution: Singular.
     mistakes:
       non-singular: c12_singular
+  - prompt: Solve 3x + y = 7, x + y = 3. Find x.
+    answer: '2'
+    check: (7 - 3)/2
+    difficulty: 1
+    hints:
+    - Subtract the second equation from the first.
+    - That removes y.
+    solution: 'Step 1: 2x = 4. Step 2: x = 2.'
+    mistakes:
+      '1': c12m4_solve
+      '4': c12m4_solve
+  - prompt: Solve 3x + y = 7, x + y = 3. Find y.
+    answer: '1'
+    check: 3 - 2
+    difficulty: 1
+    hints:
+    - Find x first.
+    - Put it into x + y = 3.
+    solution: 'Step 1: x = 2. Step 2: y = 1.'
+    mistakes:
+      '2': c12m4_solve
+      '3': c12m4_solve
+  - prompt: For [[4, 1], [6, 2]], find the cofactor A₂₂.
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Delete row 2 and column 2.
+    - Sign (−1)⁴ is +.
+    solution: 'Step 1: minor is 4. Step 2: cofactor 4.'
+    mistakes:
+      '2': c12m4_cof
+      '-4': c12m4_cof
+  - prompt: For [[4, 1], [6, 2]], find the cofactor A₁₂.
+    answer: '-6'
+    check: '-6'
+    difficulty: 2
+    hints:
+    - Delete row 1, column 2.
+    - Then apply (−1)^(1+2).
+    solution: 'Step 1: minor is 6. Step 2: sign −, so −6.'
+    mistakes:
+      '6': c12m4_cof
+      '-1': c12m4_cof
+  - prompt: A is 3 × 3 with |A| = 2. Find |adj A|.
+    answer: '4'
+    check: 2**2
+    difficulty: 3
+    hints:
+    - '|adj A| = |A|^(n − 1).'
+    - Here n = 3.
+    solution: 'Step 1: |adj A| = 2². Step 2: 4.'
+    mistakes:
+      '2': c12m4_prop
+      '8': c12m4_prop
+  - prompt: Solve x + 2y = 7, 2x − y = 4. Find x.
+    answer: '3'
+    check: (7 + 2*4)/5
+    difficulty: 2
+    hints:
+    - Double the second equation and add to the first to remove y.
+    - x + 2y + 4x − 2y = 7 + 8.
+    solution: 'Step 1: 5x = 15. Step 2: x = 3.'
+    mistakes:
+      '2': c12m4_solve
+      '5': c12m4_solve
+  - prompt: Solve x + 2y = 7, 2x − y = 4. Find y.
+    answer: '2'
+    check: (7 - 3)/2
+    difficulty: 2
+    hints:
+    - Use x = 3.
+    - 3 + 2y = 7.
+    solution: 'Step 1: 2y = 4. Step 2: y = 2.'
+    mistakes:
+      '3': c12m4_solve
+      '4': c12m4_solve
+  - prompt: For which k does the system x + 2y = 3, 2x + ky = 5 fail to have a unique solution?
+    answer: '4'
+    check: 2*2
+    difficulty: 3
+    hints:
+    - A unique solution needs |A| ≠ 0.
+    - Set 1 × k − 2 × 2 = 0.
+    solution: 'Step 1: |A| = k − 4. Step 2: k = 4.'
+    mistakes:
+      '2': c12m4_solve
+      '1': c12m4_solve
+  - prompt: 'With k = 4 in x + 2y = 3, 2x + 4y = 5, the system has:'
+    options:
+    - no solution
+    - infinitely many solutions
+    - a unique solution
+    answer: no solution
+    difficulty: 3
+    hints:
+    - Double the first equation.
+    - 'Compare with the second: 2x + 4y = 6 vs 5.'
+    solution: 'Step 1: 2x + 4y would equal both 6 and 5. Step 2: impossible, so no solution.'
+    mistakes:
+      infinitely many solutions: c12m4_solve
+      a unique solution: c12m4_solve

@@ -13,6 +13,10 @@ tips:
   m12_independent: "For independent events, P(A ∩ B) = P(A) × P(B)."
   m12_sum_one: "All probabilities in a distribution add to 1."
   m12_total_prob: "P(red) = P(bag 1)P(red|1) + P(bag 2)P(red|2)."
+  c12m13_cond: 'Given B means B is now the whole sample space: count only outcomes inside B, then see how many are also in A.'
+  c12m13_ind: Independent means P(A ∩ B) = P(A) × P(B). Mutually exclusive means P(A ∩ B) = 0. They are different ideas.
+  c12m13_bayes: 'Bayes: the cause''s share of the total. Top = P(cause) × P(result | cause); bottom = the sum of that over all causes.'
+  c12m13_ev: E(X) = Σ x × p. Multiply each value by its probability, then add.
 concepts:
 - code: cbse12m.prob.conditional
   title: Conditional probability and independence
@@ -110,6 +114,48 @@ concepts:
           - 0
           - 0.29
         say: B makes A LESS likely here. Raise the overlap.
+  lesson:
+    - teach: 'P(A|B), read ''A given B'', is the probability of A when we already know B happened. B becomes the new sample space: P(A|B) = P(A ∩ B)/P(B), with P(B) ≠ 0.'
+      check:
+        prompt: A die shows a number greater than 3. Probability it is 5?
+        options:
+        - 1/3
+        - 1/6
+        - 1/2
+        answer: 1/3
+        why: Given {4, 5, 6}, one of three outcomes is 5.
+    - teach: 'Multiplication rule: P(A ∩ B) = P(B) × P(A|B). A and B are independent if knowing B does not change A: P(A|B) = P(A), or P(A ∩ B) = P(A)P(B). Mutually exclusive events (cannot both happen) with non-zero probabilities are never independent.'
+      picture:
+        kind: compare
+        columns:
+        - title: Independent
+          points:
+          - P(A ∩ B) = P(A)P(B)
+          - one doesn't affect the other
+          - two coin tosses
+        - title: Mutually exclusive
+          points:
+          - P(A ∩ B) = 0
+          - cannot happen together
+          - a die shows 1 or 2
+        alt: Independent events compared with mutually exclusive events.
+      check:
+        prompt: P(A) = 0.4, P(B) = 0.5, independent. P(A ∩ B)?
+        options:
+        - '0.2'
+        - '0.9'
+        - '0.1'
+        answer: '0.2'
+        why: 0.4 × 0.5 = 0.2.
+    - teach: 'Total probability: if E₁, E₂, … split the sample space (one and only one happens), then P(A) = P(E₁)P(A|E₁) + P(E₂)P(A|E₂) + … Draw a tree: multiply along branches, add the branches that end in A.'
+      check:
+        prompt: P(E₁) = P(E₂) = 1/2, P(A|E₁) = 1/2, P(A|E₂) = 1/4. P(A)?
+        options:
+        - 3/8
+        - 3/4
+        - 1/8
+        answer: 3/8
+        why: 1/4 + 1/8 = 3/8.
   items:
   - prompt: A die is rolled; the result is even. Find the probability it is 6, as a fraction.
     answer: 1/3
@@ -171,6 +217,108 @@ concepts:
     - Total probability.
     solution: 2/5.
     mistakes: {"4/5": "m12_total_prob", "3/5": "m12_total_prob", "1/5": "m12_total_prob"}
+  - prompt: A card is drawn from 1 to 10; it is even. Find the probability it is 4, as a fraction.
+    answer: 1/5
+    check: Rational(1,5)
+    difficulty: 1
+    hints:
+    - The evens are 2, 4, 6, 8, 10.
+    - How many of these are 4?
+    solution: 'Step 1: 5 evens. Step 2: 1/5.'
+    mistakes:
+      1/10: c12m13_cond
+      1/2: c12m13_cond
+  - prompt: P(A ∩ B) = 0.3 and P(B) = 0.6. Find P(A|B) as a fraction.
+    answer: 1/2
+    check: Rational(3,6)
+    difficulty: 1
+    hints:
+    - Divide the joint probability by P(B).
+    - 0.3/0.6.
+    solution: 'Step 1: 0.3/0.6. Step 2: 1/2.'
+    mistakes:
+      9/50: c12m13_cond
+      1/5: c12m13_cond
+  - prompt: A and B are independent with P(A) = 1/4, P(B) = 2/3. Find P(A ∩ B) as a fraction.
+    answer: 1/6
+    check: Rational(1,4)*Rational(2,3)
+    difficulty: 1
+    hints:
+    - 'Independent: multiply.'
+    - 1/4 × 2/3.
+    solution: 'Step 1: 2/12. Step 2: 1/6.'
+    mistakes:
+      11/12: c12m13_ind
+      3/7: c12m13_ind
+  - prompt: Two dice are rolled; the sum is 4. Find the probability both show 2, as a fraction.
+    answer: 1/3
+    check: Rational(1,3)
+    difficulty: 2
+    hints:
+    - List outcomes with sum 4.
+    - (1, 3), (2, 2), (3, 1).
+    solution: 'Step 1: 3 outcomes. Step 2: one is (2, 2): 1/3.'
+    mistakes:
+      1/36: c12m13_cond
+      1/12: c12m13_cond
+  - prompt: P(A) = 0.5, P(B) = 0.4, P(A ∩ B) = 0.2. Are A and B independent?
+    options:
+    - 'yes'
+    - 'no'
+    - cannot tell
+    answer: 'yes'
+    difficulty: 2
+    hints:
+    - Compare P(A)P(B) with P(A ∩ B).
+    - 0.5 × 0.4 = ?
+    solution: 'Step 1: P(A)P(B) = 0.2. Step 2: equals P(A ∩ B), so independent.'
+    mistakes:
+      'no': c12m13_ind
+      cannot tell: c12m13_ind
+  - prompt: Two cards are drawn without replacement from 3 red and 2 black. Find P(both red) as a fraction.
+    answer: 3/10
+    check: Rational(3,5)*Rational(2,4)
+    difficulty: 2
+    hints:
+    - 'First red: 3/5.'
+    - 'Second red given the first was red: 2/4.'
+    solution: 'Step 1: 3/5 × 2/4. Step 2: 6/20 = 3/10.'
+    mistakes:
+      9/25: c12m13_cond
+      1/2: c12m13_cond
+  - prompt: P(A) = 0.6, P(B) = 0.5, independent. Find P(A ∪ B) as a fraction.
+    answer: 4/5
+    check: Rational(6,10) + Rational(5,10) - Rational(3,10)
+    difficulty: 2
+    hints:
+    - P(A ∪ B) = P(A) + P(B) − P(A ∩ B).
+    - P(A ∩ B) = 0.3.
+    solution: 'Step 1: 0.6 + 0.5 − 0.3. Step 2: 0.8 = 4/5.'
+    mistakes:
+      11/10: c12m13_ind
+      3/10: c12m13_ind
+  - prompt: Bag 1 (chosen with probability 1/3) has 2 white of 4; bag 2 (probability 2/3) has 1 white of 4. Find P(white) as a fraction.
+    answer: 1/3
+    check: Rational(1,3)*Rational(2,4) + Rational(2,3)*Rational(1,4)
+    difficulty: 3
+    hints:
+    - Use total probability.
+    - 1/3 × 1/2 + 2/3 × 1/4.
+    solution: 'Step 1: 1/6 + 1/6. Step 2: 1/3.'
+    mistakes:
+      3/8: c12m13_cond
+      1/2: c12m13_cond
+  - prompt: A family has two children; at least one is a girl. Find P(both are girls) as a fraction (each child equally likely girl or boy).
+    answer: 1/3
+    check: Rational(1,3)
+    difficulty: 3
+    hints:
+    - List GG, GB, BG, BB.
+    - Remove the one that has no girl.
+    solution: 'Step 1: GG, GB, BG remain. Step 2: 1/3.'
+    mistakes:
+      1/2: c12m13_cond
+      1/4: c12m13_cond
 - code: cbse12m.prob.bayes
   title: Bayes' theorem and random variables
   after:
@@ -278,6 +426,42 @@ concepts:
           - 0.5
           - 1
         say: Still 0.5 or more. A big machine can rarely be to blame only if its faulty rate is tiny compared with B's.
+  lesson:
+    - teach: 'Bayes'' theorem reverses a conditional: from P(result | cause) it finds P(cause | result). P(Eᵢ|A) = P(Eᵢ)P(A|Eᵢ) / Σ P(Eⱼ)P(A|Eⱼ). The bottom is just total probability P(A).'
+      check:
+        prompt: 'Bayes'' theorem finds:'
+        options:
+        - the chance of a cause, given what was observed
+        - the mean of a random variable
+        - the number of outcomes
+        answer: the chance of a cause, given what was observed
+        why: It works backwards from the result to the cause.
+    - teach: 'Example: bag I (chosen with probability 1/2) has 3 red of 4; bag II (1/2) has 1 red of 4. A red ball is drawn. P(red) = 3/8 + 1/8 = 1/2. P(bag I | red) = (3/8)/(1/2) = 3/4.'
+      picture:
+        kind: flow
+        steps:
+        - 'Branch: P(cause)'
+        - Times P(result | cause)
+        - 'Add all branches: P(result)'
+        - Your branch ÷ total
+        alt: Steps of Bayes' theorem on a probability tree.
+      check:
+        prompt: In the example, find P(bag II | red).
+        options:
+        - 1/4
+        - 1/8
+        - 1/2
+        answer: 1/4
+        why: (1/8)/(1/2) = 1/4, and 3/4 + 1/4 = 1.
+    - teach: A random variable X assigns a number to each outcome. Its probability distribution lists values xᵢ with probabilities pᵢ, all ≥ 0 and adding to 1. The mean or expectation is E(X) = Σ xᵢpᵢ.
+      check:
+        prompt: X = 1 or 3 with probabilities 1/2 each. E(X)?
+        options:
+        - '2'
+        - '4'
+        - 3/2
+        answer: '2'
+        why: 1 × 1/2 + 3 × 1/2 = 2.
   items:
   - prompt: Machine A makes 60% of bulbs (2% faulty), B 40% (5% faulty). Find P(faulty) as a fraction.
     answer: 4/125
@@ -337,3 +521,102 @@ concepts:
     - Posterior.
     solution: The probability of a cause given what was observed.
     mistakes: {"the mean only": "m12_bayes_use", "the number of outcomes": "m12_bayes_use", "areas": "m12_bayes_use"}
+  - prompt: Bag I (prob 1/2) has 2 red of 5; bag II (prob 1/2) has 4 red of 5. A red is drawn. Find P(bag II | red) as a fraction.
+    answer: 2/3
+    check: (Rational(1,2)*Rational(4,5))/(Rational(1,2)*Rational(2,5) + Rational(1,2)*Rational(4,5))
+    difficulty: 1
+    hints:
+    - 'Bag II''s branch: 1/2 × 4/5.'
+    - Divide by the total of both branches.
+    solution: 'Step 1: 2/5 ÷ (1/5 + 2/5) = 2/5 ÷ 3/5. Step 2: 2/3.'
+    mistakes:
+      4/5: c12m13_bayes
+      1/3: c12m13_bayes
+  - prompt: X takes 1, 2, 3 with probabilities 1/2, 1/3, 1/6. Find E(X) as a fraction.
+    answer: 5/3
+    check: 1*Rational(1,2) + 2*Rational(1,3) + 3*Rational(1,6)
+    difficulty: 1
+    hints:
+    - Multiply each value by its probability.
+    - 1/2 + 2/3 + 1/2.
+    solution: 'Step 1: 3/6 + 4/6 + 3/6 = 10/6. Step 2: 5/3.'
+    mistakes:
+      '2': c12m13_ev
+      '1': c12m13_ev
+  - prompt: A distribution has probabilities 1/4, 1/4 and k. Find k as a fraction.
+    answer: 1/2
+    check: 1 - Rational(1,4) - Rational(1,4)
+    difficulty: 1
+    hints:
+    - The probabilities must add to 1.
+    - 1 − 1/4 − 1/4.
+    solution: 'Step 1: 1 − 1/2. Step 2: 1/2.'
+    mistakes:
+      1/4: c12m13_ev
+      3/4: c12m13_ev
+  - prompt: A coin is tossed twice; X = number of heads. Find E(X).
+    answer: '1'
+    check: 0*Rational(1,4) + 1*Rational(1,2) + 2*Rational(1,4)
+    difficulty: 2
+    hints:
+    - P(X = 0) = 1/4, P(X = 1) = 1/2, P(X = 2) = 1/4.
+    - Multiply and add.
+    solution: 'Step 1: 0 + 1/2 + 1/2. Step 2: 1.'
+    mistakes:
+      '2': c12m13_ev
+      1/2: c12m13_ev
+  - prompt: Factory A makes 70% of items (1% faulty), B makes 30% (4% faulty). Find P(faulty) as a fraction.
+    answer: 19/1000
+    check: Rational(70,100)*Rational(1,100) + Rational(30,100)*Rational(4,100)
+    difficulty: 2
+    hints:
+    - Total probability over the two factories.
+    - 0.7 × 0.01 + 0.3 × 0.04.
+    solution: 'Step 1: 0.007 + 0.012. Step 2: 0.019 = 19/1000.'
+    mistakes:
+      1/20: c12m13_bayes
+      1/40: c12m13_bayes
+  - prompt: With factories A (70%, 1% faulty) and B (30%, 4% faulty), find P(made by B | faulty) as a fraction.
+    answer: 12/19
+    check: Rational(12,1000)/Rational(19,1000)
+    difficulty: 2
+    hints:
+    - 'B''s branch: 0.3 × 0.04 = 0.012.'
+    - Divide by 0.019.
+    solution: 'Step 1: 12/1000 ÷ 19/1000. Step 2: 12/19.'
+    mistakes:
+      7/19: c12m13_bayes
+      3/10: c12m13_bayes
+  - prompt: A test spots a condition in 90% of people who have it and wrongly flags 10% who do not; 10% of people have it. Find P(has it | flagged) as a fraction.
+    answer: 1/2
+    check: (Rational(1,10)*Rational(9,10))/(Rational(1,10)*Rational(9,10) + Rational(9,10)*Rational(1,10))
+    difficulty: 3
+    hints:
+    - 'Branch 1: 0.1 × 0.9; branch 2: 0.9 × 0.1.'
+    - They are equal.
+    solution: 'Step 1: 0.09 ÷ (0.09 + 0.09). Step 2: 1/2.'
+    mistakes:
+      9/10: c12m13_bayes
+      1/10: c12m13_bayes
+  - prompt: 'A game: win ₹10 with probability 1/5, else lose ₹2. Find the expected gain in ₹ as a fraction.'
+    answer: 2/5
+    check: 10*Rational(1,5) + (-2)*Rational(4,5)
+    difficulty: 3
+    hints:
+    - Losing has probability 4/5.
+    - 10 × 1/5 + (−2) × 4/5.
+    solution: 'Step 1: 2 − 8/5. Step 2: 2/5.'
+    mistakes:
+      '2': c12m13_ev
+      '8': c12m13_ev
+  - prompt: Three urns, each chosen with probability 1/3, hold 1, 2 and 3 white balls out of 4. A white ball is drawn. Find P(urn 3 | white) as a fraction.
+    answer: 1/2
+    check: Rational(3,4)/(Rational(1,4) + Rational(2,4) + Rational(3,4))
+    difficulty: 3
+    hints:
+    - Equal priors cancel.
+    - 3/4 ÷ (1/4 + 2/4 + 3/4).
+    solution: 'Step 1: 3/4 ÷ 6/4. Step 2: 1/2.'
+    mistakes:
+      3/4: c12m13_bayes
+      1/3: c12m13_bayes

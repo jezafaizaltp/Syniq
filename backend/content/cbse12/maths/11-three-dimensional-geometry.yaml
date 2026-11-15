@@ -11,6 +11,9 @@ tips:
   m12_intersect: "Zero distance means the lines share a point."
   m12_parallel_distance: "Both lines run along i. How far apart are the points (0, 0, 0) and (0, 1, 0) in the sideways direction?"
   m12_skew_distance: "Shortest distance = |(a₂ − a₁) · (b₁ × b₂)| / |b₁ × b₂|. One line is the x-axis."
+  c12m11_dr: Direction ratios of the line through two points are the differences of their coordinates, in the same order.
+  c12m11_angle: cos θ = |a₁a₂ + b₁b₂ + c₁c₂| divided by the product of the two lengths. A zero numerator means perpendicular.
+  c12m11_dist: 'Use the right formula: skew lines need (b₁ × b₂)·(a₂ − a₁); parallel lines need b × (a₂ − a₁).'
 concepts:
 - code: cbse12m.3d.lines
   title: Direction ratios and equation of a line
@@ -111,6 +114,42 @@ concepts:
           - 0.5
           - 30
         say: That's parallel to (2, −1, 2), the opposite of perpendicular. You need 2(x − 1) − (y − 2) + 2(z − 3) = 0.
+  lesson:
+    - teach: A line's direction is described by direction ratios (a, b, c), any numbers proportional to its direction cosines. For the line through (x₁, y₁, z₁) and (x₂, y₂, z₂), take (x₂ − x₁, y₂ − y₁, z₂ − z₁).
+      check:
+        prompt: Direction ratios of the line through (1, 0, 2) and (3, 1, 5)?
+        options:
+        - (2, 1, 3)
+        - (4, 1, 7)
+        - (1, 0, 2)
+        answer: (2, 1, 3)
+        why: 'Subtract: (3 − 1, 1 − 0, 5 − 2).'
+    - teach: 'Equation of a line through point a parallel to vector b: r = a + λb. In Cartesian form, through (x₁, y₁, z₁) with direction ratios (a, b, c): (x − x₁)/a = (y − y₁)/b = (z − z₁)/c. Each value of λ gives one point.'
+      picture:
+        kind: flow
+        steps:
+        - Pick a point a on the line
+        - Pick a direction b
+        - r = a + λb
+        - λ = 0, 1, 2, … gives points
+        alt: Building the vector equation of a line.
+      check:
+        prompt: r = (1, 2, 0) + λ(1, 1, 1). Point at λ = 2?
+        options:
+        - (3, 4, 2)
+        - (2, 3, 1)
+        - (1, 2, 2)
+        answer: (3, 4, 2)
+        why: (1 + 2, 2 + 2, 0 + 2).
+    - teach: 'Angle between lines with direction ratios (a₁, b₁, c₁) and (a₂, b₂, c₂): cos θ = |a₁a₂ + b₁b₂ + c₁c₂| / (√(a₁² + b₁² + c₁²) √(a₂² + b₂² + c₂²)). They are perpendicular when a₁a₂ + b₁b₂ + c₁c₂ = 0 and parallel when the ratios are proportional.'
+      check:
+        prompt: 'Lines with direction ratios (1, 2, 3) and (2, 4, 6) are:'
+        options:
+        - parallel
+        - perpendicular
+        - skew
+        answer: parallel
+        why: (2, 4, 6) = 2 × (1, 2, 3).
   items:
   - prompt: The line through (1, 2, 3) and (4, 6, 3) has direction ratios (3, 4, k). Find k.
     answer: '0'
@@ -176,6 +215,108 @@ concepts:
     solution: Direction.
     mistakes:
       starting point: c12_line
+  - prompt: The line through (2, 1, 0) and (5, 1, 4) has direction ratios (3, k, 4). Find k.
+    answer: '0'
+    check: 1 - 1
+    difficulty: 1
+    hints:
+    - Subtract the y-coordinates.
+    - 1 − 1.
+    solution: 'Step 1: y₂ − y₁ = 0. Step 2: k = 0.'
+    mistakes:
+      '1': c12m11_dr
+      '2': c12m11_dr
+  - prompt: r = (0, 1, 2) + λ(2, 0, 1). Find the x-coordinate when λ = 3.
+    answer: '6'
+    check: 0 + 3*2
+    difficulty: 1
+    hints:
+    - x = 0 + 2λ.
+    - Put λ = 3.
+    solution: 'Step 1: 0 + 6. Step 2: 6.'
+    mistakes:
+      '5': c12m11_dr
+      '3': c12m11_dr
+  - prompt: 'Direction ratios (2, 3, 6): find the length √(a² + b² + c²).'
+    answer: '7'
+    check: sqrt(4 + 9 + 36)
+    difficulty: 1
+    hints:
+    - Square and add.
+    - Then take the root.
+    solution: 'Step 1: 49. Step 2: 7.'
+    mistakes:
+      '11': c12m11_dr
+      '49': c12m11_dr
+  - prompt: Lines with direction ratios (2, −1, 1) and (1, k, −1) are perpendicular. Find k.
+    answer: '1'
+    check: 2 - 1
+    difficulty: 2
+    hints:
+    - Set a₁a₂ + b₁b₂ + c₁c₂ = 0.
+    - 2 − k − 1 = 0.
+    solution: 'Step 1: 1 − k = 0. Step 2: k = 1.'
+    mistakes:
+      '-1': c12m11_angle
+      '3': c12m11_angle
+  - prompt: Find the angle (degrees) between lines with direction ratios (1, 1, 0) and (0, 1, 1).
+    answer: '60'
+    check: '60'
+    difficulty: 2
+    hints:
+    - 'Dot of ratios: 0 + 1 + 0.'
+    - Lengths √2 and √2.
+    solution: 'Step 1: cos θ = 1/2. Step 2: θ = 60°.'
+    mistakes:
+      '45': c12m11_angle
+      '90': c12m11_angle
+  - prompt: Lines have direction ratios (1, 2, 2) and (2, 2, 1). Find cos θ as a fraction.
+    answer: 8/9
+    check: Rational(8,9)
+    difficulty: 2
+    hints:
+    - 'Numerator: 2 + 4 + 2.'
+    - Both lengths are 3.
+    solution: 'Step 1: 8/(3 × 3). Step 2: 8/9.'
+    mistakes:
+      8/3: c12m11_angle
+      1/9: c12m11_angle
+  - prompt: In (x − 1)/2 = (y + 3)/4 = (z − 5)/(−1), what is the y-coordinate of the point the line passes through?
+    answer: '-3'
+    check: '-3'
+    difficulty: 2
+    hints:
+    - The form is (y − y₁)/b.
+    - y + 3 = y − (−3).
+    solution: 'Step 1: y₁ = −3. Step 2: the point is (1, −3, 5).'
+    mistakes:
+      '3': c12m11_dr
+      '4': c12m11_dr
+  - prompt: Lines with direction ratios (3, k, 6) and (1, 2, 2) are parallel. Find k.
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - Parallel lines have proportional ratios.
+    - 3/1 = k/2 = 6/2.
+    solution: 'Step 1: the multiplier is 3. Step 2: k = 6.'
+    mistakes:
+      '2': c12m11_angle
+      '4': c12m11_angle
+  - prompt: Do r = λ(1, 0, 0) and r = (0, 0, 1) + μ(0, 1, 0) intersect?
+    options:
+    - no, they are skew
+    - yes, at the origin
+    - yes, they are parallel
+    answer: no, they are skew
+    difficulty: 3
+    hints:
+    - The first has z = 0 always; the second z = 1 always.
+    - Are the directions parallel?
+    solution: 'Step 1: z-values never match, so no meeting point. Step 2: directions are not parallel, so the lines are skew.'
+    mistakes:
+      yes, at the origin: c12m11_dist
+      yes, they are parallel: c12m11_dist
 - code: cbse12m.3d.distance
   title: Shortest distance between lines
   after:
@@ -272,6 +413,42 @@ concepts:
           - 3
           - 6
         say: 'Too far apart. Only z sets the gap here: the shortest distance is |z|.'
+  lesson:
+    - teach: Distance between points (x₁, y₁, z₁) and (x₂, y₂, z₂) is √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²). From the origin, it is just √(x² + y² + z²).
+      check:
+        prompt: Distance from the origin to (2, 3, 6)?
+        options:
+        - '7'
+        - '11'
+        - '49'
+        answer: '7'
+        why: √(4 + 9 + 36) = 7.
+    - teach: 'In space, two lines can be parallel, intersecting, or skew (neither). The shortest distance between skew lines is along their common perpendicular: for r = a₁ + λb₁ and r = a₂ + μb₂, d = |(b₁ × b₂)·(a₂ − a₁)| / |b₁ × b₂|.'
+      picture:
+        kind: flow
+        steps:
+        - Find b₁ × b₂
+        - Find a₂ − a₁
+        - Dot them, take |…|
+        - Divide by |b₁ × b₂|
+        alt: Steps for the shortest distance between skew lines.
+      check:
+        prompt: 'If d = 0 for two non-parallel lines, they:'
+        options:
+        - intersect
+        - are skew
+        - are parallel
+        answer: intersect
+        why: Zero gap means they meet.
+    - teach: For parallel lines r = a₁ + λb and r = a₂ + μb, use d = |b × (a₂ − a₁)| / |b|. (b₁ × b₂ would be 0, so the skew formula cannot be used.)
+      check:
+        prompt: Why can't the skew formula be used for parallel lines?
+        options:
+        - b₁ × b₂ = 0, so we would divide by zero
+        - parallel lines always meet
+        - the dot product is negative
+        answer: b₁ × b₂ = 0, so we would divide by zero
+        why: Parallel directions have zero cross product.
   items:
   - prompt: Find the distance between (1, 2, 2) and the origin.
     answer: '3'
@@ -335,3 +512,105 @@ concepts:
     - Gap along j.
     solution: '1.'
     mistakes: {"0": "m12_parallel_distance", "2": "m12_parallel_distance"}
+  - prompt: Find the distance between (2, 3, 1) and (5, 7, 1).
+    answer: '5'
+    check: sqrt(9 + 16)
+    difficulty: 1
+    hints:
+    - 'Differences: 3, 4, 0.'
+    - Square, add, root.
+    solution: 'Step 1: √(9 + 16 + 0). Step 2: 5.'
+    mistakes:
+      '7': c12m11_dist
+      '25': c12m11_dist
+  - prompt: Find the distance from the origin to (4, 4, 2).
+    answer: '6'
+    check: sqrt(16 + 16 + 4)
+    difficulty: 1
+    hints:
+    - Square each coordinate.
+    - √36.
+    solution: 'Step 1: 36. Step 2: 6.'
+    mistakes:
+      '10': c12m11_dist
+      '36': c12m11_dist
+  - prompt: Find the distance between (0, 0, 0) and (1, 1, 1), squared.
+    answer: '3'
+    check: 1 + 1 + 1
+    difficulty: 1
+    hints:
+    - Squared distance skips the root.
+    - Add the squares.
+    solution: 'Step 1: 1 + 1 + 1. Step 2: 3.'
+    mistakes:
+      '1': c12m11_dist
+      '9': c12m11_dist
+  - prompt: Parallel lines r = λk and r = 2i + μk. Find the distance between them.
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Both are parallel to the z-axis.
+    - One passes through the origin, the other through (2, 0, 0).
+    solution: 'Step 1: b = k, a₂ − a₁ = 2i; k × 2i = 2j. Step 2: |2j|/1 = 2.'
+    mistakes:
+      '0': c12m11_dist
+      '4': c12m11_dist
+  - prompt: Lines r = λi and r = 3k + μj. Find the shortest distance.
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - b₁ × b₂ = i × j = k.
+    - a₂ − a₁ = 3k.
+    solution: 'Step 1: k·3k = 3. Step 2: |k| = 1, so d = 3.'
+    mistakes:
+      '0': c12m11_dist
+      '1': c12m11_dist
+  - prompt: For lines with b₁ = i + j and b₂ = i − j, find |b₁ × b₂|.
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - (i + j) × (i − j).
+    - = −k − k.
+    solution: 'Step 1: −2k. Step 2: 2.'
+    mistakes:
+      '0': c12m11_dist
+      '1': c12m11_dist
+  - prompt: With b₁ = i + j, b₂ = i − j, a₁ = 0 and a₂ = 4k, find the shortest distance.
+    answer: '4'
+    check: Abs(-2*4)/2
+    difficulty: 3
+    hints:
+    - b₁ × b₂ = −2k.
+    - (−2k)·(4k) = −8.
+    solution: 'Step 1: |−8| = 8. Step 2: 8/2 = 4.'
+    mistakes:
+      '8': c12m11_dist
+      '2': c12m11_dist
+  - prompt: Parallel lines r = λi and r = (0, 3, 4) + μi. Find the distance between them.
+    answer: '5'
+    check: sqrt(9 + 16)
+    difficulty: 3
+    hints:
+    - b = i, a₂ − a₁ = 3j + 4k.
+    - i × (3j + 4k) = 3k − 4j.
+    solution: 'Step 1: |3k − 4j| = 5. Step 2: divide by |i| = 1: 5.'
+    mistakes:
+      '7': c12m11_dist
+      '25': c12m11_dist
+  - prompt: 'The shortest distance between two lines is 0 and they are not parallel. They are:'
+    options:
+    - intersecting
+    - skew
+    - coincident and parallel
+    answer: intersecting
+    difficulty: 3
+    hints:
+    - Zero distance means a shared point.
+    - Not parallel rules out coincident lines.
+    solution: 'Step 1: they meet. Step 2: intersecting.'
+    mistakes:
+      skew: c12m11_dist
+      coincident and parallel: c12m11_dist

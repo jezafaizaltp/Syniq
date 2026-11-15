@@ -13,6 +13,10 @@ tips:
   m12_row_col: "Multiply matching entries and add: 1×3 + 2×4."
   m12_singular: "A matrix has no inverse when its determinant is zero. Work out ad − bc for each."
   m12_skew: "Skew-symmetric means aᵢⱼ = −aⱼᵢ. On the diagonal, i = j, so aᵢᵢ = −aᵢᵢ."
+  c12m3_order: Order is rows × columns. For AB, the columns of A must equal the rows of B; AB has A's rows and B's columns.
+  c12m3_mult: 'Entry (i, j) of AB = row i of A times column j of B: multiply matching entries and add.'
+  c12m3_inv: 'For [[a, b], [c, d]]: swap a and d, change the signs of b and c, divide by ad − bc.'
+  c12m3_trans: 'Transpose swaps rows and columns: entry (i, j) moves to (j, i).'
 concepts:
 - code: cbse12m.mat.basics
   title: Types of matrices and operations
@@ -124,6 +128,43 @@ concepts:
           ba: 1
           gap: 0
         say: 'With A square (m = n), AB and BA are the same size. Try A as 2 × 3 and B as 3 × 2: AB is 2 × 2, BA is 3 × 3.'
+  lesson:
+    - teach: 'A matrix is a rectangular array of numbers. Its order is m × n: m rows and n columns, so it has mn entries. Special types: row, column, square, diagonal, scalar, identity I (1s on the diagonal, 0s elsewhere) and zero matrix.'
+      check:
+        prompt: A matrix has 2 rows and 5 columns. What is its order?
+        options:
+        - 2 × 5
+        - 5 × 2
+        - '10'
+        answer: 2 × 5
+        why: Order is written rows × columns.
+    - teach: Add matrices of the same order entry by entry. To multiply AB, the number of columns of A must equal the number of rows of B. Entry (i, j) of AB is row i of A times column j of B. In general AB ≠ BA.
+      picture:
+        kind: flow
+        steps:
+        - Row i of A
+        - Column j of B
+        - Multiply matching entries
+        - Add the products
+        - Entry (i, j) of AB
+        alt: How one entry of a matrix product is calculated.
+      check:
+        prompt: Multiply the row [2 3] by the column [4; 1].
+        options:
+        - '11'
+        - '8'
+        - '14'
+        answer: '11'
+        why: 2 × 4 + 3 × 1 = 8 + 3 = 11.
+    - teach: The transpose Aᵀ swaps rows and columns, and (AB)ᵀ = BᵀAᵀ. A is symmetric if Aᵀ = A and skew-symmetric if Aᵀ = −A (so its diagonal is all zero). Every square matrix is ½(A + Aᵀ) (symmetric) plus ½(A − Aᵀ) (skew-symmetric).
+      check:
+        prompt: A is skew-symmetric with a₁₂ = 5. What is a₂₁?
+        options:
+        - '-5'
+        - '5'
+        - '0'
+        answer: '-5'
+        why: Aᵀ = −A means a₂₁ = −a₁₂.
   items:
   - prompt: How many entries does a 3 × 4 matrix have?
     answer: '12'
@@ -189,6 +230,108 @@ concepts:
     - So aᵢᵢ = 0.
     solution: All zero.
     mistakes: {"all one": "m12_skew", "equal": "m12_skew", "negative": "m12_skew"}
+  - prompt: How many entries does a 4 × 5 matrix have?
+    answer: '20'
+    check: 4*5
+    difficulty: 1
+    hints:
+    - Count rows and columns.
+    - Multiply them.
+    solution: 'Step 1: 4 rows, 5 columns. Step 2: 20 entries.'
+    mistakes:
+      '9': c12m3_order
+      '45': c12m3_order
+  - prompt: A is 3 × 2 and B is 2 × 4. How many rows does AB have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - AB takes its rows from one matrix.
+    - Which one comes first?
+    solution: 'Step 1: AB is 3 × 4. Step 2: 3 rows.'
+    mistakes:
+      '2': c12m3_order
+      '4': c12m3_order
+  - prompt: A = [[1, 2], [3, 4]], B = [[2, 0], [1, 3]]. Find the (1, 1) entry of A + B.
+    answer: '3'
+    check: 1 + 2
+    difficulty: 1
+    hints:
+    - Add matching entries.
+    - Look at the top-left of each.
+    solution: 'Step 1: 1 + 2. Step 2: 3.'
+    mistakes:
+      '2': c12m3_mult
+      '4': c12m3_mult
+  - prompt: A = [[1, 2], [3, 4]], B = [[2, 0], [1, 3]]. Find the (1, 1) entry of AB.
+    answer: '4'
+    check: 1*2 + 2*1
+    difficulty: 2
+    hints:
+    - Row 1 of A is [1 2].
+    - Column 1 of B is [2; 1].
+    solution: 'Step 1: 1 × 2 + 2 × 1. Step 2: 4.'
+    mistakes:
+      '2': c12m3_mult
+      '3': c12m3_mult
+  - prompt: A = [[1, 2], [3, 4]], B = [[2, 0], [1, 3]]. Find the (1, 1) entry of BA.
+    answer: '2'
+    check: 2*1 + 0*3
+    difficulty: 2
+    hints:
+    - Now B comes first.
+    - Row 1 of B times column 1 of A.
+    solution: 'Step 1: [2 0]·[1; 3] = 2 + 0. Step 2: 2. (Compare AB''s 4: AB ≠ BA.)'
+    mistakes:
+      '4': c12m3_mult
+      '3': c12m3_mult
+  - prompt: If A is 2 × 3, what is the order of Aᵀ?
+    options:
+    - 3 × 2
+    - 2 × 3
+    - 3 × 3
+    answer: 3 × 2
+    difficulty: 1
+    hints:
+    - Rows become columns.
+    - Swap the two numbers.
+    solution: 'Step 1: transpose swaps rows and columns. Step 2: 3 × 2.'
+    mistakes:
+      2 × 3: c12m3_trans
+      3 × 3: c12m3_trans
+  - prompt: A = [[2, 1], [0, 3]]. Find the (1, 2) entry of A².
+    answer: '5'
+    check: 2*1 + 1*3
+    difficulty: 2
+    hints:
+    - A² = A × A.
+    - Row 1 of A times column 2 of A.
+    solution: 'Step 1: [2 1]·[1; 3] = 2 + 3. Step 2: 5.'
+    mistakes:
+      '1': c12m3_mult
+      '2': c12m3_mult
+  - prompt: A = [[1, 4], [2, 3]]. Find the (1, 2) entry of the symmetric part ½(A + Aᵀ).
+    answer: '3'
+    check: (4 + 2)/2
+    difficulty: 3
+    hints:
+    - Aᵀ's (1, 2) entry is A's (2, 1) entry.
+    - Average the two.
+    solution: 'Step 1: (A + Aᵀ)₁₂ = 4 + 2 = 6. Step 2: half is 3.'
+    mistakes:
+      '4': c12m3_trans
+      '6': c12m3_trans
+  - prompt: A = [[1, 4], [2, 3]]. Find the (1, 2) entry of the skew-symmetric part ½(A − Aᵀ).
+    answer: '1'
+    check: (4 - 2)/2
+    difficulty: 3
+    hints:
+    - Subtract the transposed entry.
+    - Then halve.
+    solution: 'Step 1: 4 − 2 = 2. Step 2: half is 1.'
+    mistakes:
+      '2': c12m3_trans
+      '-1': c12m3_trans
 - code: cbse12m.mat.inverse
   title: Transpose, symmetry and inverse
   after:
@@ -338,6 +481,42 @@ concepts:
           - 1
           - 10
         say: 'Singular, but not symmetric: b and c must be equal (A = Aᵀ).'
+  lesson:
+    - teach: The inverse A⁻¹ of a square matrix A satisfies AA⁻¹ = A⁻¹A = I. It exists only when A is non-singular, which for 2 × 2 means ad − bc ≠ 0. If an inverse exists, it is unique.
+      check:
+        prompt: A = [[2, 4], [1, 2]]. Does A have an inverse?
+        options:
+        - no, because ad − bc = 0
+        - yes, every square matrix does
+        - yes, because all entries are positive
+        answer: no, because ad − bc = 0
+        why: 2 × 2 − 4 × 1 = 0, so A is singular.
+    - teach: 'For A = [[a, b], [c, d]] with ad − bc ≠ 0: A⁻¹ = 1/(ad − bc) × [[d, −b], [−c, a]]. Swap a and d, change the signs of b and c, divide every entry by ad − bc.'
+      picture:
+        kind: flow
+        steps:
+        - Find ad − bc
+        - Swap a and d
+        - Negate b and c
+        - Divide by ad − bc
+        alt: Steps to find the inverse of a 2 by 2 matrix.
+      check:
+        prompt: A = [[3, 1], [5, 2]]. What is the bottom-left entry of A⁻¹?
+        options:
+        - '-5'
+        - '5'
+        - '3'
+        answer: '-5'
+        why: ad − bc = 6 − 5 = 1; bottom-left is −c/1 = −5.
+    - teach: 'Useful rules: (AB)⁻¹ = B⁻¹A⁻¹ (order reverses, like taking off socks and shoes), (A⁻¹)⁻¹ = A, and (Aᵀ)⁻¹ = (A⁻¹)ᵀ. Check an inverse by multiplying: you should get I.'
+      check:
+        prompt: '(ABC)⁻¹ equals:'
+        options:
+        - C⁻¹B⁻¹A⁻¹
+        - A⁻¹B⁻¹C⁻¹
+        - B⁻¹A⁻¹C⁻¹
+        answer: C⁻¹B⁻¹A⁻¹
+        why: The order reverses completely.
   items:
   - prompt: For A = [[2, 1], [5, 3]], find ad − bc.
     answer: '1'
@@ -401,3 +580,105 @@ concepts:
     - Like socks and shoes.
     solution: B⁻¹A⁻¹.
     mistakes: {"A⁻¹B⁻¹": "m12_reverse_order", "AB": "m12_reverse_order", "BA": "m12_reverse_order"}
+  - prompt: A = [[5, 2], [7, 3]]. Find ad − bc.
+    answer: '1'
+    check: 5*3 - 2*7
+    difficulty: 1
+    hints:
+    - Multiply the main diagonal, then the other diagonal.
+    - Subtract.
+    solution: 'Step 1: 15 − 14. Step 2: 1.'
+    mistakes:
+      '29': c12m3_inv
+      '-1': c12m3_inv
+  - prompt: A = [[5, 2], [7, 3]]. Find the top-right entry of A⁻¹.
+    answer: '-2'
+    check: -2/1
+    difficulty: 1
+    hints:
+    - The top-right entry comes from b.
+    - Change its sign and divide by ad − bc.
+    solution: 'Step 1: ad − bc = 1. Step 2: −b/1 = −2.'
+    mistakes:
+      '2': c12m3_inv
+      '7': c12m3_inv
+  - prompt: A = [[5, 2], [7, 3]]. Find the top-left entry of A⁻¹.
+    answer: '3'
+    check: 3/1
+    difficulty: 1
+    hints:
+    - The top-left entry comes from d.
+    - Divide by ad − bc.
+    solution: 'Step 1: d/(ad − bc) = 3/1. Step 2: 3.'
+    mistakes:
+      '5': c12m3_inv
+      '-3': c12m3_inv
+  - prompt: A = [[4, 3], [2, 2]]. Find the bottom-right entry of A⁻¹.
+    answer: '2'
+    check: 4/(4*2 - 3*2)
+    difficulty: 2
+    hints:
+    - ad − bc first.
+    - Bottom-right comes from a.
+    solution: 'Step 1: ad − bc = 8 − 6 = 2. Step 2: a/2 = 4/2 = 2.'
+    mistakes:
+      '1': c12m3_inv
+      '4': c12m3_inv
+  - prompt: A = [[4, 3], [2, 2]]. Find the top-right entry of A⁻¹ as a fraction.
+    answer: -3/2
+    check: -3/2
+    difficulty: 2
+    hints:
+    - ad − bc = 2.
+    - Change the sign of b, then divide.
+    solution: 'Step 1: −b = −3. Step 2: −3/2.'
+    mistakes:
+      3/2: c12m3_inv
+      '-3': c12m3_inv
+  - prompt: For which k is [[k, 2], [3, 6]] singular?
+    answer: '1'
+    check: 6/6
+    difficulty: 2
+    hints:
+    - Singular means ad − bc = 0.
+    - Solve 6k − 6 = 0.
+    solution: 'Step 1: 6k − 6 = 0. Step 2: k = 1.'
+    mistakes:
+      '2': c12m3_inv
+      '0': c12m3_inv
+  - prompt: '(Aᵀ)⁻¹ equals:'
+    options:
+    - (A⁻¹)ᵀ
+    - A
+    - −A
+    answer: (A⁻¹)ᵀ
+    difficulty: 2
+    hints:
+    - Transpose AA⁻¹ = I.
+    - Use (XY)ᵀ = YᵀXᵀ.
+    solution: 'Step 1: (A⁻¹)ᵀAᵀ = (AA⁻¹)ᵀ = I. Step 2: so (Aᵀ)⁻¹ = (A⁻¹)ᵀ.'
+    mistakes:
+      A: c12m3_trans
+      −A: c12m3_trans
+  - prompt: A = [[2, 1], [1, 1]]. Find the sum of all entries of A⁻¹.
+    answer: '1'
+    check: (1 - 1 - 1 + 2)/1
+    difficulty: 3
+    hints:
+    - ad − bc = 2 − 1.
+    - A⁻¹ = [[1, −1], [−1, 2]].
+    solution: 'Step 1: A⁻¹ = [[1, −1], [−1, 2]]. Step 2: 1 − 1 − 1 + 2 = 1.'
+    mistakes:
+      '5': c12m3_inv
+      '3': c12m3_inv
+  - prompt: If A⁻¹ = [[1, 2], [0, 1]], what is the (1, 2) entry of A?
+    answer: '-2'
+    check: -2/1
+    difficulty: 3
+    hints:
+    - A = (A⁻¹)⁻¹.
+    - Invert [[1, 2], [0, 1]]; its ad − bc is 1.
+    solution: 'Step 1: inverse of [[1, 2], [0, 1]] is [[1, −2], [0, 1]]. Step 2: entry −2.'
+    mistakes:
+      '2': c12m3_inv
+      1/2: c12m3_inv
