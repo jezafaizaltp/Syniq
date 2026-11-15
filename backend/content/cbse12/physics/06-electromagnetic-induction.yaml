@@ -15,6 +15,9 @@ tips:
   p12_peak_emf: "e₀ = NBAω."
   p12_self_emf: "EMF = L dI/dt."
   p12_units: "Tesla is field, weber flux, farad capacitance. Inductance is named after the American who studied self-induction."
+  c12p6_flux: Flux Φ = BA cos θ, with θ between B and the area's normal. EMF depends on how fast Φ changes, not on Φ itself.
+  c12p6_lenz: 'Lenz: the induced current makes a field that opposes the change in flux (it does not simply oppose the field).'
+  c12p6_L: Self-induced EMF = L × (rate of change of current); energy = ½LI²; generator peak EMF = NBAω.
 concepts:
 - code: cbse12p.emi.faraday
   title: Faraday's and Lenz's laws
@@ -126,6 +129,42 @@ concepts:
           - 110
           - 200
         say: 'Too big: A = 0.01 m² = 100 cm².'
+  lesson:
+    - teach: 'Faraday and Henry found that a changing magnetic flux through a coil induces an EMF. Flux Φ = BA cos θ (weber). Faraday''s law: ε = −N dΦ/dt. Only change matters: a magnet resting inside a coil induces nothing.'
+      check:
+        prompt: A magnet is pushed into a coil, then held still. When is there an EMF?
+        options:
+        - only while it is moving
+        - only while it is still
+        - all the time
+        answer: only while it is moving
+        why: EMF needs a changing flux.
+    - teach: 'Lenz''s law gives the direction: the induced current opposes the change that produced it. Push a N pole in and the coil''s near face becomes N, pushing back. This is energy conservation: you must do work to make the current.'
+      picture:
+        kind: flow
+        steps:
+        - Flux changes
+        - EMF induced (Faraday)
+        - Current flows
+        - Its field opposes the change (Lenz)
+        alt: Chain of events in electromagnetic induction.
+      check:
+        prompt: 'A N pole is pulled away from a coil. The near face of the coil becomes:'
+        options:
+        - S, attracting it back
+        - N, pushing it away
+        - neither
+        answer: S, attracting it back
+        why: It opposes the decrease in flux by trying to keep the magnet close.
+    - teach: 'A rod of length l moving at speed v across field B has motional EMF ε = Blv. Changing flux in a solid metal sets up swirling eddy currents: useful in magnetic braking and induction furnaces, wasteful in transformer cores (so cores are laminated).'
+      check:
+        prompt: Why are transformer cores made of thin insulated sheets?
+        options:
+        - to reduce eddy currents
+        - to make them lighter
+        - to increase resistance of the coils
+        answer: to reduce eddy currents
+        why: Thin sheets break up the paths for eddy currents.
   items:
   - prompt: Flux through a 100-turn coil changes by 0.02 Wb in 0.1 s. Find the induced EMF (V).
     answer: '20'
@@ -195,6 +234,111 @@ concepts:
     - Less heating.
     solution: Eddy currents.
     mistakes: {"voltage": "p12_lamination", "magnetic field": "p12_lamination", "number of turns": "p12_lamination"}
+  - prompt: Flux through a 50-turn coil changes by 0.04 Wb in 0.2 s. Find the EMF (V).
+    answer: '10'
+    check: 50*Rational(4,100)/Rational(2,10)
+    difficulty: 1
+    hints:
+    - ε = N ΔΦ/Δt.
+    - 50 × 0.04/0.2.
+    solution: 'Step 1: 2/0.2. Step 2: 10 V.'
+    mistakes:
+      2/5: c12p6_flux
+      1/5: c12p6_flux
+  - prompt: A 1 m rod moves at 5 m/s across a 0.4 T field. Find the EMF (V).
+    answer: '2'
+    check: Rational(4,10)*1*5
+    difficulty: 1
+    hints:
+    - ε = Blv.
+    - 0.4 × 1 × 5.
+    solution: 'Step 1: 0.4 × 5. Step 2: 2 V.'
+    mistakes:
+      '10': c12p6_flux
+      4/5: c12p6_flux
+  - prompt: B = 2 T makes 60° with the normal to a 0.5 m² loop. Find the flux (Wb) as a fraction.
+    answer: 1/2
+    check: 2*Rational(1,2)*Rational(1,2)
+    difficulty: 1
+    hints:
+    - Φ = BA cos θ.
+    - cos 60° = 1/2.
+    solution: 'Step 1: 2 × 0.5 × 0.5. Step 2: 1/2 Wb.'
+    mistakes:
+      '1': c12p6_flux
+      '0': c12p6_flux
+  - prompt: A loop's flux falls from 0.6 Wb to 0.2 Wb in 2 s (1 turn). Find the EMF (V) as a fraction.
+    answer: 1/5
+    check: (Rational(6,10) - Rational(2,10))/2
+    difficulty: 2
+    hints:
+    - ΔΦ = 0.4 Wb.
+    - Divide by the time.
+    solution: 'Step 1: 0.4/2. Step 2: 0.2 = 1/5 V.'
+    mistakes:
+      2/5: c12p6_flux
+      4/5: c12p6_flux
+  - prompt: A 0.2 m² loop sits in a field rising from 0 to 0.5 T in 0.1 s (field along the normal). EMF (V)?
+    answer: '1'
+    check: Rational(2,10)*Rational(5,10)/Rational(1,10)
+    difficulty: 2
+    hints:
+    - ΔΦ = A × ΔB.
+    - 0.2 × 0.5 = 0.1 Wb.
+    solution: 'Step 1: 0.1 Wb / 0.1 s. Step 2: 1 V.'
+    mistakes:
+      1/10: c12p6_flux
+      '10': c12p6_flux
+  - prompt: 'Lenz''s law says the induced current:'
+    options:
+    - opposes the change in flux causing it
+    - always opposes the magnetic field
+    - always flows clockwise
+    answer: opposes the change in flux causing it
+    difficulty: 2
+    hints:
+    - It is about the change, not the field itself.
+    - Think of a magnet being pulled away.
+    solution: 'Step 1: opposition is to the change. Step 2: that keeps energy conserved.'
+    mistakes:
+      always opposes the magnetic field: c12p6_lenz
+      always flows clockwise: c12p6_lenz
+  - prompt: 'A rod moves parallel to a magnetic field. The motional EMF is:'
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - It must cut field lines to make an EMF.
+    - Moving along B cuts none.
+    solution: 'Step 1: no flux cutting. Step 2: 0.'
+    mistakes:
+      '1': c12p6_flux
+      '-1': c12p6_lenz
+  - prompt: A 0.5 m rod moves at 2 m/s across 1 T, in a circuit of 0.5 Ω. Find the current (A).
+    answer: '2'
+    check: 1*Rational(1,2)*2/Rational(1,2)
+    difficulty: 3
+    hints:
+    - EMF = Blv = 1 V.
+    - I = ε/R.
+    solution: 'Step 1: ε = 1 V. Step 2: I = 1/0.5 = 2 A.'
+    mistakes:
+      '1': c12p6_flux
+      1/2: c12p6_flux
+  - prompt: 'A copper plate swinging between magnet poles slows down quickly because of:'
+    options:
+    - eddy currents
+    - friction with air only
+    - gravity
+    answer: eddy currents
+    difficulty: 3
+    hints:
+    - Flux through the plate changes as it swings.
+    - The induced currents oppose the motion.
+    solution: 'Step 1: changing flux makes swirling currents. Step 2: they brake the plate (Lenz).'
+    mistakes:
+      friction with air only: c12p6_lenz
+      gravity: c12p6_lenz
 - code: cbse12p.emi.inductance
   title: Inductance and the AC generator
   after:
@@ -299,6 +443,42 @@ concepts:
           - 5.5
           - 9.5
         say: 'Too much: ½ × 2 × I² = 25.'
+  lesson:
+    - teach: 'Self-inductance: a coil''s own changing current changes its flux, so it induces an EMF opposing the change: ε = −L dI/dt. Φ = LI. Unit: henry (H). A long solenoid has L = μ₀n²Al.'
+      check:
+        prompt: Current in a 3 H coil changes at 2 A/s. EMF size?
+        options:
+        - 6 V
+        - 1.5 V
+        - 5 V
+        answer: 6 V
+        why: L × dI/dt = 3 × 2.
+    - teach: 'Mutual inductance: a changing current in coil 1 induces an EMF in a nearby coil 2: ε₂ = −M dI₁/dt. An inductor stores energy U = ½LI² in its magnetic field.'
+      check:
+        prompt: Energy in a 2 H inductor with 2 A?
+        options:
+        - 4 J
+        - 8 J
+        - 2 J
+        answer: 4 J
+        why: ½ × 2 × 2² = 4.
+    - teach: 'AC generator: a coil of N turns, area A, rotates at ω in field B. Flux NBA cos ωt changes, giving ε = NBAω sin ωt, with peak ε₀ = NBAω. Mechanical energy becomes electrical energy.'
+      picture:
+        kind: flow
+        steps:
+        - Turbine turns coil
+        - Flux NBA cos ωt changes
+        - EMF NBAω sin ωt
+        - AC output
+        alt: How an AC generator turns rotation into alternating EMF.
+      check:
+        prompt: 'Doubling the rotation speed of a generator makes the peak EMF:'
+        options:
+        - double
+        - half
+        - the same
+        answer: double
+        why: ε₀ ∝ ω.
   items:
   - prompt: Current in a 2 H inductor changes by 3 A in 1 s. Find the induced EMF (V).
     answer: '6'
@@ -362,3 +542,105 @@ concepts:
     - Dynamo.
     solution: Mechanical energy into electrical.
     mistakes: {"electrical into mechanical": "p12_generator", "heat into light": "p12_generator", "chemical into electrical": "p12_generator"}
+  - prompt: Current in a 0.5 H coil changes by 4 A in 0.1 s. Find the EMF (V).
+    answer: '20'
+    check: Rational(1,2)*4/Rational(1,10)
+    difficulty: 1
+    hints:
+    - ε = L ΔI/Δt.
+    - 0.5 × 40.
+    solution: 'Step 1: rate 40 A/s. Step 2: 20 V.'
+    mistakes:
+      '2': c12p6_L
+      1/5: c12p6_L
+  - prompt: Energy (J) stored in a 0.2 H inductor with 10 A.
+    answer: '10'
+    check: Rational(1,2)*Rational(2,10)*10**2
+    difficulty: 1
+    hints:
+    - U = ½LI².
+    - ½ × 0.2 × 100.
+    solution: 'Step 1: 0.1 × 100. Step 2: 10 J.'
+    mistakes:
+      '20': c12p6_L
+      '1': c12p6_L
+  - prompt: 'Generator: N = 200, B = 0.05 T, A = 0.1 m², ω = 100 rad/s. Peak EMF (V)?'
+    answer: '100'
+    check: 200*Rational(5,100)*Rational(1,10)*100
+    difficulty: 1
+    hints:
+    - ε₀ = NBAω.
+    - 200 × 0.05 × 0.1 × 100.
+    solution: 'Step 1: 1 × 100. Step 2: 100 V.'
+    mistakes:
+      '10': c12p6_L
+      '1000': c12p6_L
+  - prompt: M = 0.2 H; coil 1's current changes at 10 A/s. EMF in coil 2 (V)?
+    answer: '2'
+    check: Rational(2,10)*10
+    difficulty: 2
+    hints:
+    - ε₂ = M dI₁/dt.
+    - 0.2 × 10.
+    solution: 'Step 1: 0.2 × 10. Step 2: 2 V.'
+    mistakes:
+      '50': c12p6_L
+      1/50: c12p6_L
+  - prompt: A coil's flux is 0.6 Wb when it carries 3 A. Find L (H) as a fraction.
+    answer: 1/5
+    check: Rational(6,10)/3
+    difficulty: 2
+    hints:
+    - Φ = LI.
+    - L = Φ/I.
+    solution: 'Step 1: 0.6/3. Step 2: 0.2 = 1/5 H.'
+    mistakes:
+      9/5: c12p6_L
+      '5': c12p6_L
+  - prompt: The number of turns per metre of a solenoid is doubled (same length and area). L becomes how many times larger?
+    answer: '4'
+    check: 2**2
+    difficulty: 2
+    hints:
+    - L = μ₀n²Al.
+    - n is squared.
+    solution: 'Step 1: n → 2n. Step 2: L × 4.'
+    mistakes:
+      '2': c12p6_L
+      '8': c12p6_L
+  - prompt: Current in an inductor doubles. Stored energy becomes how many times larger?
+    answer: '4'
+    check: 2**2
+    difficulty: 2
+    hints:
+    - U ∝ I².
+    - Square the factor.
+    solution: 'Step 1: (2)² = 4. Step 2: 4 times.'
+    mistakes:
+      '2': c12p6_L
+      '8': c12p6_L
+  - prompt: At what angle (degrees) between the coil's normal and B is the generator's EMF largest?
+    answer: '90'
+    check: '90'
+    difficulty: 3
+    hints:
+    - ε ∝ sin ωt while Φ ∝ cos ωt.
+    - Flux changes fastest when it is zero.
+    solution: 'Step 1: Φ = 0 at 90°. Step 2: dΦ/dt is largest there, so EMF peaks at 90°.'
+    mistakes:
+      '0': c12p6_L
+      '45': c12p6_L
+  - prompt: A switch suddenly breaks the current in a big coil, and a spark jumps. Why?
+    options:
+    - the fast drop in current induces a large self-EMF
+    - the coil runs out of charge
+    - the battery voltage rises
+    answer: the fast drop in current induces a large self-EMF
+    difficulty: 3
+    hints:
+    - ε = L dI/dt.
+    - dI/dt is huge when current stops suddenly.
+    solution: 'Step 1: rapid change gives a large EMF. Step 2: it can jump the gap as a spark.'
+    mistakes:
+      the coil runs out of charge: c12p6_lenz
+      the battery voltage rises: c12p6_lenz

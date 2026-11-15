@@ -15,6 +15,9 @@ tips:
   p12_mu_r: "μr = 1 + χ."
   p12_soft_iron: "A core must magnetise and demagnetise easily each cycle with little loss."
   p12_torque_magnet: "τ = mB sin θ."
+  c12p5_dipole: 'A magnet behaves like a dipole: τ = mB sin θ and U = −mB cos θ, with θ the angle between m and B.'
+  c12p5_mat: 'Sort by susceptibility: diamagnetic small negative (repelled), paramagnetic small positive (weakly attracted), ferromagnetic large (strongly attracted).'
+  c12p5_earth: Declination is the angle between true and magnetic north; dip is the angle of the Earth's field below the horizontal.
 concepts:
 - code: cbse12p.magmat.bar
   title: Bar magnets and the Earth's magnetism
@@ -89,6 +92,53 @@ concepts:
       - when:
           r: 10
         say: At the same distance the equatorial field is only half the axial field. Come closer.
+  lesson:
+    - teach: 'A bar magnet acts like a current-carrying solenoid: a magnetic dipole with moment m. Its field lines are closed loops, running from N to S outside and S to N inside. There are no isolated poles: cut a magnet and each piece has both N and S.'
+      check:
+        prompt: Why do magnetic field lines have no start or end?
+        options:
+        - there are no magnetic monopoles
+        - they are too long to see
+        - they stop at the poles
+        answer: there are no magnetic monopoles
+        why: Without isolated poles, lines must form closed loops.
+    - teach: 'In a uniform field B, a magnet feels torque τ = mB sin θ and has potential energy U = −mB cos θ. It is most stable aligned with the field (θ = 0, U = −mB). Gauss''s law for magnetism: net flux through any closed surface is zero.'
+      picture:
+        kind: compare
+        columns:
+        - title: θ
+          points:
+          - 0°
+          - 90°
+          - 180°
+        - title: Torque
+          points:
+          - '0'
+          - mB (max)
+          - '0'
+        - title: Energy U
+          points:
+          - −mB (stable)
+          - '0'
+          - +mB (unstable)
+        alt: Torque and potential energy of a magnet at 0, 90 and 180 degrees to a field.
+      check:
+        prompt: At which angle is a magnet in unstable equilibrium?
+        options:
+        - 180°
+        - 0°
+        - 90°
+        answer: 180°
+        why: Torque is zero but U is highest; a nudge flips it.
+    - teach: The Earth behaves like a giant magnet. At any place, the declination is the angle between geographic and magnetic north; the dip (inclination) is the angle the field makes with the horizontal. The horizontal component of the field is what a compass needle follows.
+      check:
+        prompt: 'At the magnetic poles, the dip is:'
+        options:
+        - 90°
+        - 0°
+        - 45°
+        answer: 90°
+        why: The field points straight down (or up) there.
   items:
   - prompt: A magnet of moment 2 A m² is at 90° to a 0.5 T field. Find the torque (N m).
     answer: '1'
@@ -157,6 +207,105 @@ concepts:
     - Vertical plane.
     solution: The angle of dip.
     mistakes: {"declination": "p12_dip", "latitude": "p12_dip", "azimuth": "p12_dip"}
+  - prompt: A magnet of moment 4 A m² is at 90° to a 0.25 T field. Find the torque (N m).
+    answer: '1'
+    check: 4*Rational(1,4)
+    difficulty: 1
+    hints:
+    - τ = mB sin θ.
+    - sin 90° = 1.
+    solution: 'Step 1: 4 × 0.25. Step 2: 1 N m.'
+    mistakes:
+      '0': c12p5_dipole
+      '16': c12p5_dipole
+  - prompt: Potential energy (J) of a 3 A m² magnet aligned with a 2 T field.
+    answer: '-6'
+    check: -3*2
+    difficulty: 1
+    hints:
+    - U = −mB cos θ.
+    - 'Aligned: θ = 0.'
+    solution: 'Step 1: −3 × 2 × 1. Step 2: −6 J.'
+    mistakes:
+      '6': c12p5_dipole
+      '0': c12p5_dipole
+  - prompt: Potential energy (J) of the same magnet at 90° to the field.
+    answer: '0'
+    check: '0'
+    difficulty: 1
+    hints:
+    - cos 90° = 0.
+    - U = −mB cos θ.
+    solution: 'Step 1: cos 90° = 0. Step 2: U = 0.'
+    mistakes:
+      '-6': c12p5_dipole
+      '6': c12p5_dipole
+  - prompt: Work (J) to turn a 3 A m² magnet in a 2 T field from 0° to 180°.
+    answer: '12'
+    check: 3*2 - (-3*2)
+    difficulty: 2
+    hints:
+    - W = U_final − U_initial.
+    - U(180°) = +6, U(0°) = −6.
+    solution: 'Step 1: 6 − (−6). Step 2: 12 J.'
+    mistakes:
+      '6': c12p5_dipole
+      '0': c12p5_dipole
+  - prompt: A magnet's axial field at distance r is 2(μ₀/4π)m/r³. At distance 2r, by what factor is it smaller?
+    answer: '8'
+    check: 2**3
+    difficulty: 2
+    hints:
+    - Dipole fields fall as 1/r³.
+    - Cube the factor.
+    solution: 'Step 1: (2)³ = 8. Step 2: 8 times smaller.'
+    mistakes:
+      '4': c12p5_dipole
+      '2': c12p5_dipole
+  - prompt: A closed surface surrounds the N pole of a bar magnet only. Net magnetic flux through it?
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - Gauss's law for magnetism.
+    - Lines that go out also come back in.
+    solution: 'Step 1: no monopoles. Step 2: net flux 0.'
+    mistakes:
+      '1': c12p5_dipole
+      '-1': c12p5_dipole
+  - prompt: 'At the magnetic equator, the dip angle (degrees) is:'
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - The field there is horizontal.
+    - Dip is measured from the horizontal.
+    solution: 'Step 1: horizontal field. Step 2: 0°.'
+    mistakes:
+      '90': c12p5_earth
+      '45': c12p5_earth
+  - prompt: A bar magnet is cut into 3 equal pieces across its length. Total number of poles?
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - Each piece is a full magnet.
+    - Each has N and S.
+    solution: 'Step 1: 3 pieces. Step 2: 6 poles.'
+    mistakes:
+      '2': c12p5_dipole
+      '3': c12p5_dipole
+  - prompt: The dip is 60°. Find B_H/B (horizontal component over total field) as a fraction.
+    answer: 1/2
+    check: Rational(1,2)
+    difficulty: 3
+    hints:
+    - B_H = B cos(dip).
+    - cos 60°.
+    solution: 'Step 1: B_H/B = cos 60°. Step 2: 1/2.'
+    mistakes:
+      3/4: c12p5_earth
+      '1': c12p5_earth
 - code: cbse12p.magmat.materials
   title: Magnetic properties of materials
   after:
@@ -243,6 +392,53 @@ concepts:
       bin: Ferromagnetic
       clue: Strongly magnetic below about 20 °C. Which kind?
       why: Ferromagnetic (below its Curie temperature).
+  lesson:
+    - teach: Materials respond to a field H by becoming magnetised, M. Susceptibility χ = M/H; relative permeability μr = 1 + χ; B = μ₀(H + M) = μH.
+      check:
+        prompt: χ = 0.2. μr?
+        options:
+        - '1.2'
+        - '0.8'
+        - '0.2'
+        answer: '1.2'
+        why: μr = 1 + χ.
+    - teach: 'Diamagnetic (χ small, negative: bismuth, copper, water) are weakly repelled; superconductors are perfect diamagnets (Meissner effect). Paramagnetic (χ small, positive: aluminium, sodium, oxygen) are weakly attracted; Curie''s law χ ∝ 1/T. Ferromagnetic (χ large: iron, cobalt, nickel) are strongly attracted because of domains.'
+      picture:
+        kind: compare
+        columns:
+        - title: Dia
+          points:
+          - χ < 0, small
+          - weakly repelled
+          - Bi, Cu, water
+        - title: Para
+          points:
+          - χ > 0, small
+          - weakly attracted
+          - Al, Na, O₂
+        - title: Ferro
+          points:
+          - χ ≫ 1
+          - strongly attracted
+          - Fe, Co, Ni
+        alt: Diamagnetic, paramagnetic and ferromagnetic materials compared.
+      check:
+        prompt: 'Copper near a strong magnet is:'
+        options:
+        - weakly repelled
+        - strongly attracted
+        - unaffected in every way
+        answer: weakly repelled
+        why: Copper is diamagnetic.
+    - teach: 'Above its Curie temperature, a ferromagnet becomes paramagnetic. Hysteresis: after removing H, some magnetism remains (retentivity); a reverse H (coercivity) is needed to remove it. Soft iron (low retentivity, low coercivity, small loss) suits transformer cores and electromagnets; steel suits permanent magnets.'
+      check:
+        prompt: 'A permanent magnet should have:'
+        options:
+        - high retentivity and high coercivity
+        - low retentivity
+        - low coercivity
+        answer: high retentivity and high coercivity
+        why: It must keep its magnetism and resist losing it.
   items:
   - prompt: A material has χ = 0.5. Find its relative permeability μr.
     answer: '1.5'
@@ -319,3 +515,117 @@ concepts:
     - They line up.
     solution: Its magnetic domains.
     mistakes: {"free protons": "p12_domains", "high density": "p12_domains", "colour": "p12_domains"}
+  - prompt: A material has μr = 1.0002. Find χ in units of 10⁻⁴.
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - χ = μr − 1.
+    - 0.0002 = 2 × 10⁻⁴.
+    solution: 'Step 1: χ = 0.0002. Step 2: 2.'
+    mistakes:
+      '1': c12p5_mat
+      '20': c12p5_mat
+  - prompt: 'Liquid oxygen near a strong magnet is:'
+    options:
+    - weakly attracted
+    - weakly repelled
+    - strongly repelled
+    answer: weakly attracted
+    difficulty: 1
+    hints:
+    - Oxygen is paramagnetic.
+    - Small positive χ.
+    solution: 'Step 1: paramagnetic. Step 2: weakly attracted.'
+    mistakes:
+      weakly repelled: c12p5_mat
+      strongly repelled: c12p5_mat
+  - prompt: Which of these is ferromagnetic?
+    options:
+    - nickel
+    - aluminium
+    - bismuth
+    answer: nickel
+    difficulty: 1
+    hints:
+    - Iron, cobalt and one more.
+    - Strongly attracted to magnets.
+    solution: 'Step 1: Fe, Co, Ni. Step 2: nickel.'
+    mistakes:
+      aluminium: c12p5_mat
+      bismuth: c12p5_mat
+  - prompt: 'Curie''s law: a paramagnet has χ = 0.004 at 200 K. Find χ at 400 K, in units of 10⁻³.'
+    answer: '2'
+    check: 4*200/400
+    difficulty: 2
+    hints:
+    - χ ∝ 1/T.
+    - Temperature doubles.
+    solution: 'Step 1: χ halves. Step 2: 0.002 = 2 × 10⁻³.'
+    mistakes:
+      '8': c12p5_mat
+      '4': c12p5_mat
+  - prompt: H = 1000 A/m and M = 2000 A/m in a material. Find χ.
+    answer: '2'
+    check: 2000/1000
+    difficulty: 2
+    hints:
+    - χ = M/H.
+    - 2000/1000.
+    solution: 'Step 1: χ = 2. Step 2: μr = 3.'
+    mistakes:
+      '3': c12p5_mat
+      1/2: c12p5_mat
+  - prompt: In the same material, find μr.
+    answer: '3'
+    check: 1 + 2
+    difficulty: 2
+    hints:
+    - μr = 1 + χ.
+    - χ = 2.
+    solution: 'Step 1: 1 + 2. Step 2: 3.'
+    mistakes:
+      '2': c12p5_mat
+      '1': c12p5_mat
+  - prompt: 'The Meissner effect is the expulsion of magnetic field from a:'
+    options:
+    - superconductor
+    - ferromagnet
+    - paramagnet
+    answer: superconductor
+    difficulty: 2
+    hints:
+    - It is a perfect diamagnet.
+    - It happens below a critical temperature.
+    solution: 'Step 1: χ = −1. Step 2: superconductor.'
+    mistakes:
+      ferromagnet: c12p5_mat
+      paramagnet: c12p5_mat
+  - prompt: Why is soft iron used for transformer cores?
+    options:
+    - it has low hysteresis loss
+    - it keeps its magnetism for years
+    - it is repelled by fields
+    answer: it has low hysteresis loss
+    difficulty: 3
+    hints:
+    - The field reverses many times a second.
+    - A narrow hysteresis loop wastes little energy.
+    solution: 'Step 1: AC reverses magnetisation constantly. Step 2: soft iron loses little energy each cycle.'
+    mistakes:
+      it keeps its magnetism for years: c12p5_mat
+      it is repelled by fields: c12p5_mat
+  - prompt: 'Iron loses its strong magnetism above about 1043 K. This temperature is called the:'
+    options:
+    - Curie temperature
+    - boiling point
+    - critical angle
+    answer: Curie temperature
+    difficulty: 3
+    hints:
+    - Above it, iron becomes paramagnetic.
+    - Named after a scientist.
+    solution: 'Step 1: ferro → para transition. Step 2: Curie temperature.'
+    mistakes:
+      boiling point: c12p5_mat
+      critical angle: c12p5_mat

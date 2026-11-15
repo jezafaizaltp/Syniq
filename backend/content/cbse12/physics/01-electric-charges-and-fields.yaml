@@ -13,6 +13,10 @@ tips:
   p12_quantised: "Quantised means it comes in packets of a fixed smallest size."
   p12_sheet: "E = σ/2ε₀ for an infinite sheet. Is r in that formula?"
   p12_shell: "Gauss's law: a surface inside the shell encloses no charge."
+  c12p1_inv: 'Coulomb''s law is an inverse-square law: F depends on 1/r², so doubling r divides F by 4.'
+  c12p1_units: Convert μC to C (× 10⁻⁶) before using k = 9 × 10⁹, then match the units the question asks for.
+  c12p1_gauss: 'Gauss''s law: flux depends only on the charge inside the closed surface, Φ = q_in/ε₀.'
+  c12p1_dipole: For a dipole, p = q × (separation). Torque τ = pE sin θ is largest at 90° and zero when p is along E.
 concepts:
 - code: cbse12p.charge.coulomb
   title: Charge and Coulomb's law
@@ -111,6 +115,44 @@ concepts:
           - 0.1
           - 30
         say: Still a push. One of the charges must be 0.
+  lesson:
+    - teach: 'Charge comes in two kinds; like charges repel and unlike attract. It is conserved (never created or destroyed overall), additive, and quantised: any charge is a whole number of electron charges, q = ne, e = 1.6 × 10⁻¹⁹ C.'
+      check:
+        prompt: Which charge is impossible on an object?
+        options:
+        - 0.8 × 10⁻¹⁹ C
+        - 3.2 × 10⁻¹⁹ C
+        - 1.6 × 10⁻¹⁸ C
+        answer: 0.8 × 10⁻¹⁹ C
+        why: It is half of e, not a whole multiple.
+    - teach: 'Coulomb''s law: F = kq₁q₂/r², with k = 9 × 10⁹ N m² C⁻². Force is along the line joining the charges. With several charges, add the force vectors from each one (superposition).'
+      picture:
+        kind: bars
+        bars:
+        - label: r
+          value: 16
+        - label: 2r
+          value: 4
+        - label: 4r
+          value: 1
+        alt: 'Force between two charges at distances r, 2r and 4r: it falls to a quarter each time the distance doubles.'
+      check:
+        prompt: 'The distance between two charges is halved. The force becomes:'
+        options:
+        - 4 times larger
+        - 2 times larger
+        - half
+        answer: 4 times larger
+        why: 'F ∝ 1/r²: (1/2)² in the bottom gives × 4.'
+    - teach: Electric field E = F/q₀ is force per unit positive test charge; for a point charge E = kq/r². Field lines start on + and end on −, never cross. A dipole (charges ±q a distance 2a apart) has moment p = q × 2a; in a uniform field it feels torque τ = pE sin θ.
+      check:
+        prompt: When is the torque on a dipole in a uniform field zero?
+        options:
+        - when p is along E
+        - when p is at 90° to E
+        - never
+        answer: when p is along E
+        why: sin 0° = 0.
   items:
   - prompt: How many electrons make a charge of 1.6 × 10⁻¹⁸ C? (e = 1.6 × 10⁻¹⁹ C)
     answer: '10'
@@ -175,6 +217,108 @@ concepts:
     - Smallest unit.
     solution: It exists only as whole multiples of e.
     mistakes: {"it is always positive": "p12_quantised", "it can't be transferred": "p12_quantised", "it is infinite": "p12_quantised"}
+  - prompt: How many electrons make a charge of 3.2 × 10⁻¹⁸ C? (e = 1.6 × 10⁻¹⁹ C)
+    answer: '20'
+    check: 32/Rational(16,10)
+    difficulty: 1
+    hints:
+    - n = q/e.
+    - Compare 3.2 × 10⁻¹⁸ with 1.6 × 10⁻¹⁹.
+    solution: 'Step 1: 3.2 × 10⁻¹⁸ / 1.6 × 10⁻¹⁹. Step 2: 2 × 10 = 20.'
+    mistakes:
+      '2': c12p1_units
+      '200': c12p1_units
+  - prompt: Two 2 μC charges are 1 m apart. Find the force in units of 10⁻³ N (k = 9 × 10⁹).
+    answer: '36'
+    check: 9*2*2
+    difficulty: 1
+    hints:
+    - F = kq₁q₂/r².
+    - 2 × 10⁻⁶ × 2 × 10⁻⁶ = 4 × 10⁻¹².
+    solution: 'Step 1: 9 × 10⁹ × 4 × 10⁻¹² = 36 × 10⁻³ N. Step 2: 36.'
+    mistakes:
+      '18': c12p1_units
+      '9': c12p1_units
+  - prompt: The distance between two charges is tripled. By what factor does the force become smaller?
+    answer: '9'
+    check: 3**2
+    difficulty: 1
+    hints:
+    - Force depends on 1/r².
+    - Square the factor.
+    solution: 'Step 1: r → 3r. Step 2: F → F/9.'
+    mistakes:
+      '3': c12p1_inv
+      '6': c12p1_inv
+  - prompt: Find the field (in units of 10³ N/C) 3 m from a 1 μC charge (k = 9 × 10⁹).
+    answer: '1'
+    check: 9*1/9
+    difficulty: 2
+    hints:
+    - E = kq/r².
+    - 9 × 10⁹ × 10⁻⁶ / 9.
+    solution: 'Step 1: 9 × 10³ / 9. Step 2: 1 × 10³ N/C.'
+    mistakes:
+      '3': c12p1_inv
+      '9': c12p1_inv
+  - prompt: A dipole has charges ±3 μC, 2 mm apart. Find p in units of 10⁻⁹ C m.
+    answer: '6'
+    check: 3*2
+    difficulty: 2
+    hints:
+    - p = q × separation.
+    - 3 × 10⁻⁶ × 2 × 10⁻³.
+    solution: 'Step 1: 6 × 10⁻⁹ C m. Step 2: 6.'
+    mistakes:
+      '3': c12p1_dipole
+      '12': c12p1_dipole
+  - prompt: A dipole with p = 2 × 10⁻⁸ C m sits at 30° to a field of 10⁴ N/C. Find the torque in units of 10⁻⁴ N m.
+    answer: '1'
+    check: 2*Rational(1,2)
+    difficulty: 2
+    hints:
+    - τ = pE sin θ.
+    - sin 30° = 1/2.
+    solution: 'Step 1: 2 × 10⁻⁸ × 10⁴ × 1/2 = 10⁻⁴. Step 2: 1.'
+    mistakes:
+      '2': c12p1_dipole
+      '0': c12p1_dipole
+  - prompt: 'Charging a body by touching it with a charged body is called:'
+    options:
+    - conduction
+    - induction
+    - friction
+    answer: conduction
+    difficulty: 1
+    hints:
+    - Contact is involved.
+    - Charge flows across.
+    solution: 'Step 1: touching transfers charge. Step 2: conduction.'
+    mistakes:
+      induction: c12p1_units
+      friction: c12p1_units
+  - prompt: Field on the axis of a dipole at distance r is 2kp/r³. On the equatorial line at the same r, it is how many times smaller?
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - Equatorial field is kp/r³.
+    - Divide the two.
+    solution: 'Step 1: (2kp/r³)/(kp/r³). Step 2: 2.'
+    mistakes:
+      '4': c12p1_dipole
+      '1': c12p1_dipole
+  - prompt: +4 μC and +1 μC are 3 m apart. How far (m) from the 4 μC charge, between them, is the field zero?
+    answer: '2'
+    check: 3*2/(2 + 1)
+    difficulty: 3
+    hints:
+    - Set k(4)/x² = k(1)/(3 − x)².
+    - 'Take square roots: 2/x = 1/(3 − x).'
+    solution: 'Step 1: 2(3 − x) = x. Step 2: x = 2 m.'
+    mistakes:
+      '1': c12p1_inv
+      3/2: c12p1_inv
 - code: cbse12p.charge.gauss
   title: Electric flux and Gauss's law
   after:
@@ -240,6 +384,43 @@ concepts:
       bin: Leaves it the same
       clue: Is it still enclosed?
       why: Still enclosed, so the same total flux.
+  lesson:
+    - teach: 'Electric flux through a small area: Φ = E ΔS cos θ, where θ is the angle between E and the area''s normal. It counts how much field passes through. Unit: N m² C⁻¹.'
+      check:
+        prompt: E is parallel to the surface (θ = 90° with the normal). Flux?
+        options:
+        - '0'
+        - E ΔS
+        - half of E ΔS
+        answer: '0'
+        why: 'cos 90° = 0: no field passes through.'
+    - teach: 'Gauss''s law: total flux through any closed surface = q_enclosed/ε₀. Shape and size don''t matter; charges outside add nothing to the total. Choose a symmetric ''Gaussian surface'' to find fields quickly.'
+      picture:
+        kind: flow
+        steps:
+        - Spot the symmetry
+        - Pick a Gaussian surface
+        - Flux = E × area
+        - Set equal to q_in/ε₀
+        - Solve for E
+        alt: Steps for using Gauss's law to find a field.
+      check:
+        prompt: A closed surface encloses +q and −q. Total flux?
+        options:
+        - '0'
+        - 2q/ε₀
+        - q/ε₀
+        answer: '0'
+        why: Net enclosed charge is zero.
+    - teach: 'Results: long straight wire E = λ/(2πε₀r); infinite plane sheet E = σ/(2ε₀), the same at any distance; thin spherical shell: E = kq/r² outside, zero inside.'
+      check:
+        prompt: 'For a long wire, doubling r makes E:'
+        options:
+        - half
+        - a quarter
+        - unchanged
+        answer: half
+        why: E ∝ 1/r for a line of charge.
   items:
   - prompt: A field of 100 N/C passes straight through an area of 0.5 m². Find the flux (N m²/C).
     answer: '50'
@@ -309,3 +490,105 @@ concepts:
     solution: Nothing.
     mistakes:
       q/ε₀: c12p_flux
+  - prompt: A field of 200 N/C passes straight through 0.2 m². Find the flux (N m²/C).
+    answer: '40'
+    check: 200*Rational(2,10)
+    difficulty: 1
+    hints:
+    - Φ = EΔS cos θ.
+    - Straight through means θ = 0.
+    solution: 'Step 1: 200 × 0.2 × 1. Step 2: 40.'
+    mistakes:
+      '1000': c12p1_gauss
+      '20': c12p1_gauss
+  - prompt: A field of 80 N/C makes 60° with the normal of a 0.5 m² area. Find the flux (N m²/C).
+    answer: '20'
+    check: 80*Rational(1,2)*Rational(1,2)
+    difficulty: 1
+    hints:
+    - Use cos 60°.
+    - 80 × 0.5 × 0.5.
+    solution: 'Step 1: 40 × 1/2. Step 2: 20.'
+    mistakes:
+      '40': c12p1_gauss
+      '35': c12p1_gauss
+  - prompt: A closed surface encloses charges 3q, −q and 2q. The flux is how many times q/ε₀?
+    answer: '4'
+    check: 3 - 1 + 2
+    difficulty: 1
+    hints:
+    - Add the enclosed charges.
+    - Mind the sign.
+    solution: 'Step 1: 3q − q + 2q = 4q. Step 2: 4q/ε₀.'
+    mistakes:
+      '6': c12p1_gauss
+      '2': c12p1_gauss
+  - prompt: 'A charge q sits at the centre of a cube. The flux through one face is q/ε₀ divided by:'
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - Total flux is q/ε₀.
+    - By symmetry, it is shared equally by the faces.
+    solution: 'Step 1: 6 equal faces. Step 2: q/(6ε₀).'
+    mistakes:
+      '4': c12p1_gauss
+      '8': c12p1_gauss
+  - prompt: Field of a charged shell (radius 1 m, q = 1 μC) at 3 m from the centre, in units of 10³ N/C (k = 9 × 10⁹).
+    answer: '1'
+    check: 9/9
+    difficulty: 2
+    hints:
+    - Outside, the shell acts like a point charge.
+    - kq/r² with r = 3.
+    solution: 'Step 1: 9 × 10³/9. Step 2: 1 × 10³ N/C.'
+    mistakes:
+      '0': c12p1_gauss
+      '3': c12p1_inv
+  - prompt: 'The same shell: field at 0.5 m from the centre?'
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - 0.5 m is inside the shell.
+    - What charge does a Gaussian sphere there enclose?
+    solution: 'Step 1: no charge enclosed. Step 2: E = 0.'
+    mistakes:
+      '36': c12p1_gauss
+      '4': c12p1_gauss
+  - prompt: 'An infinite sheet has field E at 1 cm. Its field at 10 cm is:'
+    options:
+    - E
+    - E/10
+    - E/100
+    answer: E
+    difficulty: 2
+    hints:
+    - Look at the sheet formula σ/(2ε₀).
+    - Does r appear?
+    solution: 'Step 1: no r in the formula. Step 2: still E.'
+    mistakes:
+      E/10: c12p1_gauss
+      E/100: c12p1_inv
+  - prompt: A long wire gives 600 N/C at 2 cm. Find the field (N/C) at 6 cm.
+    answer: '200'
+    check: 600*2/6
+    difficulty: 3
+    hints:
+    - For a line, E ∝ 1/r.
+    - r is tripled.
+    solution: 'Step 1: E → E/3. Step 2: 200 N/C.'
+    mistakes:
+      '67': c12p1_inv
+      '1800': c12p1_inv
+  - prompt: Flux through a closed surface is 2 × 10⁵ N m²/C. With ε₀ = 8.85 × 10⁻¹², the enclosed charge is about how many μC? (round to the nearest whole number)
+    answer: '2'
+    check: round(2*10**5*885/10**14*10**6)
+    difficulty: 3
+    hints:
+    - q = ε₀Φ.
+    - 8.85 × 10⁻¹² × 2 × 10⁵.
+    solution: 'Step 1: 17.7 × 10⁻⁷ C ≈ 1.77 μC. Step 2: about 2 μC.'
+    mistakes:
+      '18': c12p1_units
+      '1': c12p1_units

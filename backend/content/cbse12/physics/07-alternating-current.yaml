@@ -14,6 +14,10 @@ tips:
   p12_transmission: "For the same power, higher voltage means lower current. Loss in wires is I²R."
   p12_xc: "X_C = 1/(ωC). Convert μF to F."
   p12_xl: "X_L = ωL."
+  c12p7_rms: rms = peak/√2. Meters and supply ratings (like 220 V) are rms values.
+  c12p7_react: X_L = ωL grows with frequency; X_C = 1/(ωC) shrinks with frequency. Z = √(R² + (X_L − X_C)²).
+  c12p7_trans: 'Ideal transformer: Vs/Vp = Ns/Np = Ip/Is. More secondary turns means higher voltage and lower current.'
+  c12p7_power: Average power = V_rms × I_rms × cos φ. Pure L or C gives cos φ = 0, so no average power.
 concepts:
 - code: cbse12p.ac.circuits
   title: AC circuits and reactance
@@ -148,6 +152,53 @@ concepts:
           - 1
           - 9
         say: 'A smaller capacitor blocks more: X_C is too big.'
+  lesson:
+    - teach: 'AC voltage varies as v = v_m sin ωt. Because it keeps changing sign, we use rms values: V_rms = V_m/√2, I_rms = I_m/√2. Household 220 V is an rms value, so its peak is about 311 V.'
+      check:
+        prompt: Peak current 10√2 A. rms current?
+        options:
+        - 10 A
+        - 20 A
+        - 10√2 A
+        answer: 10 A
+        why: I_rms = I_m/√2.
+    - teach: 'In a resistor V and I are in phase. In an inductor I lags V by 90°, with reactance X_L = ωL. In a capacitor I leads V by 90°, with reactance X_C = 1/(ωC). Series LCR: Z = √(R² + (X_L − X_C)²), tan φ = (X_L − X_C)/R.'
+      picture:
+        kind: compare
+        columns:
+        - title: Element
+          points:
+          - R
+          - L
+          - C
+        - title: Opposition
+          points:
+          - R
+          - X_L = ωL
+          - X_C = 1/(ωC)
+        - title: Current vs V
+          points:
+          - in phase
+          - lags 90°
+          - leads 90°
+        alt: 'Resistor, inductor and capacitor in AC: opposition and phase.'
+      check:
+        prompt: 'Raising the frequency makes X_C:'
+        options:
+        - smaller
+        - larger
+        - unchanged
+        answer: smaller
+        why: X_C = 1/(ωC) falls as ω rises.
+    - teach: 'Resonance: when X_L = X_C, they cancel, so Z = R and the current is largest. This happens at ω₀ = 1/√(LC). Radios tune stations this way.'
+      check:
+        prompt: L = 1 H, C = 1 μF. ω₀?
+        options:
+        - 1000 rad/s
+        - 1 rad/s
+        - 10⁶ rad/s
+        answer: 1000 rad/s
+        why: 1/√(10⁻⁶) = 1000.
   items:
   - prompt: The peak voltage is 200√2 V. Find the rms voltage (V).
     answer: '200'
@@ -212,6 +263,108 @@ concepts:
     - Lags.
     solution: Lags the voltage by 90°.
     mistakes: {"leads the voltage by 90°": "p12_inductor_phase", "is in phase": "p12_inductor_phase", "is zero": "p12_inductor_phase"}
+  - prompt: Peak voltage 100√2 V. Find V_rms (V).
+    answer: '100'
+    check: 100*sqrt(2)/sqrt(2)
+    difficulty: 1
+    hints:
+    - Divide the peak by √2.
+    - The √2 cancels.
+    solution: 'Step 1: 100√2/√2. Step 2: 100 V.'
+    mistakes:
+      '200': c12p7_rms
+      '141': c12p7_rms
+  - prompt: Find X_L (Ω) for L = 0.5 H at ω = 200 rad/s.
+    answer: '100'
+    check: Rational(1,2)*200
+    difficulty: 1
+    hints:
+    - X_L = ωL.
+    - 200 × 0.5.
+    solution: 'Step 1: 200 × 0.5. Step 2: 100 Ω.'
+    mistakes:
+      '400': c12p7_react
+      1/100: c12p7_react
+  - prompt: Find X_C (Ω) for C = 10 μF at ω = 1000 rad/s.
+    answer: '100'
+    check: 1/(1000*10*10**-6)
+    difficulty: 1
+    hints:
+    - X_C = 1/(ωC).
+    - 1/(1000 × 10⁻⁵).
+    solution: 'Step 1: 1/0.01. Step 2: 100 Ω.'
+    mistakes:
+      1/100: c12p7_react
+      '10': c12p7_react
+  - prompt: 'Series circuit: R = 6 Ω, X_L = 10 Ω, X_C = 2 Ω. Find Z (Ω).'
+    answer: '10'
+    check: sqrt(6**2 + (10 - 2)**2)
+    difficulty: 2
+    hints:
+    - X_L − X_C = 8.
+    - √(36 + 64).
+    solution: 'Step 1: √100. Step 2: 10 Ω.'
+    mistakes:
+      '18': c12p7_react
+      '14': c12p7_react
+  - prompt: Same circuit with 50 V rms supply. Find I_rms (A).
+    answer: '5'
+    check: 50/10
+    difficulty: 2
+    hints:
+    - I = V/Z.
+    - Z = 10 Ω.
+    solution: 'Step 1: 50/10. Step 2: 5 A.'
+    mistakes:
+      25/9: c12p7_react
+      50/6: c12p7_react
+  - prompt: L = 0.1 H and C = 10 μF. Find the resonant ω (rad/s).
+    answer: '1000'
+    check: 1/sqrt(Rational(1,10)*10*10**-6)
+    difficulty: 2
+    hints:
+    - ω₀ = 1/√(LC).
+    - LC = 10⁻⁶.
+    solution: 'Step 1: √(10⁻⁶) = 10⁻³. Step 2: 1000 rad/s.'
+    mistakes:
+      '100': c12p7_react
+      '10000': c12p7_react
+  - prompt: 'In a pure capacitor, the current:'
+    options:
+    - leads the voltage by 90°
+    - lags the voltage by 90°
+    - is in phase
+    answer: leads the voltage by 90°
+    difficulty: 2
+    hints:
+    - Charge must flow before the voltage builds.
+    - Opposite of the inductor.
+    solution: 'Step 1: i = C dv/dt peaks when v crosses zero. Step 2: leads by 90°.'
+    mistakes:
+      lags the voltage by 90°: c12p7_react
+      is in phase: c12p7_react
+  - prompt: R = 4 Ω, X_L = 7 Ω, X_C = 3 Ω. Find the phase angle φ (degrees).
+    answer: '45'
+    check: '45'
+    difficulty: 3
+    hints:
+    - tan φ = (X_L − X_C)/R.
+    - 4/4.
+    solution: 'Step 1: tan φ = 1. Step 2: φ = 45°.'
+    mistakes:
+      '60': c12p7_react
+      '30': c12p7_react
+  - prompt: 'At resonance, a series LCR circuit with R = 20 Ω on 220 V rms draws I_rms (A) of:'
+    answer: '11'
+    check: 220/20
+    difficulty: 3
+    hints:
+    - At resonance Z = R.
+    - 220/20.
+    solution: 'Step 1: Z = 20 Ω. Step 2: 11 A.'
+    mistakes:
+      '0': c12p7_react
+      '22': c12p7_react
 - code: cbse12p.ac.power
   title: Power in AC and transformers
   after:
@@ -302,6 +455,42 @@ concepts:
           - 1
           - 9
         say: The secondary delivers 10 A.
+  lesson:
+    - teach: 'Average AC power is P = V_rms I_rms cos φ, where cos φ is the power factor. For a pure resistor cos φ = 1. For a pure inductor or capacitor cos φ = 0: current flows but no average power is used (wattless current).'
+      check:
+        prompt: V_rms = 100 V, I_rms = 2 A, cos φ = 0.5. P?
+        options:
+        - 100 W
+        - 200 W
+        - 50 W
+        answer: 100 W
+        why: 100 × 2 × 0.5.
+    - teach: 'A transformer changes AC voltage using mutual induction. Ideal: Vs/Vp = Ns/Np = Ip/Is. Step-up (Ns > Np) raises voltage and lowers current; step-down does the opposite. Losses: copper (I²R), eddy currents, hysteresis, flux leakage.'
+      picture:
+        kind: flow
+        steps:
+        - AC in primary
+        - Changing flux in core
+        - EMF in secondary
+        - Vs = Vp × Ns/Np
+        alt: How a transformer passes energy from primary to secondary.
+      check:
+        prompt: Np = 200, Ns = 50, Vp = 240 V. Vs?
+        options:
+        - 60 V
+        - 960 V
+        - 240 V
+        answer: 60 V
+        why: 240 × 50/200.
+    - teach: Power is sent over long lines at very high voltage. For the same power P = VI, higher V means lower I, and line loss I²R falls sharply. Step-down transformers bring it back to 220 V near homes. An LC circuit oscillates at ω = 1/√(LC), swapping energy between C and L.
+      check:
+        prompt: 'Doubling transmission voltage (same power) makes I²R loss:'
+        options:
+        - a quarter
+        - half
+        - double
+        answer: a quarter
+        why: I halves, so I² is a quarter.
   items:
   - prompt: A transformer has 100 primary and 500 secondary turns, with 220 V in. Find the output voltage (V).
     answer: '1100'
@@ -366,3 +555,102 @@ concepts:
     - Heat loss ∝ I².
     solution: To reduce I²R heating losses.
     mistakes: {"increase the current": "p12_transmission", "make it safer at home": "p12_transmission", "increase resistance": "p12_transmission"}
+  - prompt: 'Transformer: 50 primary turns, 1000 secondary, 12 V in. Output voltage (V)?'
+    answer: '240'
+    check: 12*1000/50
+    difficulty: 1
+    hints:
+    - Vs = Vp × Ns/Np.
+    - 12 × 20.
+    solution: 'Step 1: ratio 20. Step 2: 240 V.'
+    mistakes:
+      3/5: c12p7_trans
+      '600': c12p7_trans
+  - prompt: A transformer turns 240 V into 12 V. Find Np/Ns.
+    answer: '20'
+    check: 240/12
+    difficulty: 1
+    hints:
+    - Vp/Vs = Np/Ns.
+    - 240/12.
+    solution: 'Step 1: 240/12. Step 2: 20.'
+    mistakes:
+      1/20: c12p7_trans
+      '12': c12p7_trans
+  - prompt: V_rms = 220 V, I_rms = 10 A, cos φ = 1. Average power (W)?
+    answer: '2200'
+    check: 220*10
+    difficulty: 1
+    hints:
+    - P = V I cos φ.
+    - cos φ = 1.
+    solution: 'Step 1: 220 × 10. Step 2: 2200 W.'
+    mistakes:
+      '0': c12p7_power
+      '230': c12p7_power
+  - prompt: 'Ideal transformer: 220 V, 5 A in; 1100 V out. Output current (A)?'
+    answer: '1'
+    check: 220*5/1100
+    difficulty: 2
+    hints:
+    - Power in = power out.
+    - 220 × 5 = 1100 × Is.
+    solution: 'Step 1: 1100 W. Step 2: Is = 1 A.'
+    mistakes:
+      '25': c12p7_trans
+      '5': c12p7_trans
+  - prompt: 'The power factor of a pure resistor is:'
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - V and I are in phase.
+    - cos 0°.
+    solution: 'Step 1: φ = 0. Step 2: cos φ = 1.'
+    mistakes:
+      '0': c12p7_power
+      '-1': c12p7_power
+  - prompt: R = 3 Ω, Z = 5 Ω. Find the power factor as a fraction.
+    answer: 3/5
+    check: Rational(3,5)
+    difficulty: 2
+    hints:
+    - cos φ = R/Z.
+    - 3/5.
+    solution: 'Step 1: R/Z. Step 2: 3/5.'
+    mistakes:
+      4/5: c12p7_power
+      5/3: c12p7_power
+  - prompt: A line of resistance 10 Ω carries 100 A. Power lost (kW)?
+    answer: '100'
+    check: 100**2*10/1000
+    difficulty: 2
+    hints:
+    - P = I²R.
+    - 10⁴ × 10 W.
+    solution: 'Step 1: 10⁵ W. Step 2: 100 kW.'
+    mistakes:
+      '1': c12p7_power
+      '1000': c12p7_power
+  - prompt: Same power sent at 10 times the voltage. The loss becomes how many times smaller?
+    answer: '100'
+    check: 10**2
+    difficulty: 3
+    hints:
+    - Current falls by 10.
+    - Loss ∝ I².
+    solution: 'Step 1: I → I/10. Step 2: I² → I²/100.'
+    mistakes:
+      '10': c12p7_power
+      '1000': c12p7_power
+  - prompt: An LC circuit has L = 0.01 H and C = 1 μF. Find its angular frequency ω (rad/s).
+    answer: '10000'
+    check: 1/sqrt(Rational(1,100)*10**-6)
+    difficulty: 3
+    hints:
+    - ω = 1/√(LC).
+    - LC = 10⁻⁸.
+    solution: 'Step 1: √(10⁻⁸) = 10⁻⁴. Step 2: 10⁴ rad/s.'
+    mistakes:
+      '1000': c12p7_react
+      '100000': c12p7_react
