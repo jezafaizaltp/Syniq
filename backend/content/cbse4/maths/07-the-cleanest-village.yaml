@@ -8,6 +8,9 @@ tips:
   c4_carry_sub: 'When the top digit is smaller, borrow 1 from the next place: it becomes 10 more in this place.'
   m4_add_words: "'How many more' and 'left' are take-away words. Which words put things together?"
   m4_four_times: "Four children, ₹25 each: 25 + 25 + 25 + 25."
+  c4m7_words: 'Find the key words: ''in all'' or ''altogether'' means put together; ''left'', ''more than'' or ''difference'' means take away.'
+  c4m7_place: Write the numbers one under the other with ones under ones, then work from the right.
+  c4m7_paise: Remember ₹1 = 100 paise. Keep rupees with rupees and paise with paise.
 concepts:
 - code: cbse4m.clean.addsub
   title: Adding and subtracting in real life
@@ -55,7 +58,7 @@ concepts:
       bin: Subtract
       clue: Some are gone.
       why: 40 − 15.
-    - label: Asha is 12, her brother 8. How many more years is Asha?
+    - label: Asha is 12, Asha's brother 8. How many more years is Asha?
       bin: Subtract
       clue: '''How many more'' compares two numbers.'
       why: 12 − 8.
@@ -63,6 +66,45 @@ concepts:
       bin: Subtract
       clue: Difference compares.
       why: 50 − 35.
+  lesson:
+    - teach: In a word problem, first find what is asked. Words like 'in all', 'altogether' and 'total' mean add. Words like 'left', 'how many more' and 'difference' mean take away.
+      check:
+        prompt: '''How many more houses does Ward A have than Ward B?'' This means:'
+        options:
+        - subtract
+        - add
+        - multiply
+        answer: subtract
+        why: '''How many more'' asks for the difference.'
+    - teach: 'Then write the numbers in places and work from the ones. The village collected 1,245 kg dry waste and 868 kg wet waste: 1,245 + 868 = 2,113 kg in all.'
+      picture:
+        kind: bars
+        unit: kg
+        bars:
+        - label: dry waste
+          value: 1245
+        - label: wet waste
+          value: 868
+        - label: in all
+          value: 2113
+        alt: Bars for dry waste 1,245 kg, wet waste 868 kg and in all 2,113 kg.
+      check:
+        prompt: 'Which is more: dry waste 1,245 kg or wet waste 868 kg?'
+        options:
+        - dry waste
+        - wet waste
+        - same
+        answer: dry waste
+        why: 1,245 has thousands; 868 does not.
+    - teach: Check your answer by doing the opposite. If 520 − 136 = 384, then 384 + 136 should give back 520.
+      check:
+        prompt: 'To check 700 − 250 = 450, you can do:'
+        options:
+        - 450 + 250
+        - 450 − 250
+        - 700 + 250
+        answer: 450 + 250
+        why: Adding back the part taken away should give the start number.
   items:
   - prompt: A village collected 1,245 kg of dry waste and 868 kg of wet waste. How many kg in all?
     answer: '2113'
@@ -123,6 +165,117 @@ concepts:
     - 1000 − 875.
     solution: 1,000 − 875 = 125.
     mistakes: {"225": "m5_subtract_borrow", "1875": "m5_subtract_borrow"}
+  - prompt: A village planted 1,350 trees last year and 1,275 this year. How many trees altogether?
+    answer: '2625'
+    check: 1350+1275
+    difficulty: 2
+    hints:
+    - '''Altogether'' means add.'
+    - Work from the ones place.
+    solution: 'Step 1: 1,350 + 1,275. Step 2: = 2,625 trees.'
+    mistakes:
+      '2525': c4m7_place
+      '75': c4m7_words
+  - prompt: A school collected 900 plastic bottles. 345 were sent for recycling. How many are left?
+    answer: '555'
+    check: 900-345
+    difficulty: 2
+    hints:
+    - '''Left'' means take away.'
+    - Borrow across the zeros.
+    solution: 'Step 1: 900 − 345. Step 2: = 555.'
+    mistakes:
+      '1245': c4m7_words
+      '665': c4m7_place
+      '655': c4m7_place
+  - prompt: Street A has 186 lights and Street B has 214. What is the difference?
+    answer: '28'
+    check: 214-186
+    difficulty: 2
+    hints:
+    - Difference = bigger − smaller.
+    - Which number is bigger?
+    solution: 'Step 1: 214 − 186. Step 2: = 28.'
+    mistakes:
+      '400': c4m7_words
+      '132': c4m7_place
+      '38': c4m7_place
+  - prompt: Which key words tell you to subtract?
+    options:
+    - how many left
+    - in all
+    - altogether
+    answer: how many left
+    difficulty: 1
+    hints:
+    - Subtracting makes the amount smaller.
+    - Which words talk about what remains?
+    solution: 'Step 1: ''In all'' and ''altogether'' mean add. Step 2: ''How many left'' means subtract.'
+    mistakes:
+      in all: c4m7_words
+      altogether: c4m7_words
+  - prompt: On Monday 425 people joined a clean-up, on Tuesday 380 and on Wednesday 295. How many in all?
+    answer: '1100'
+    check: 425+380+295
+    difficulty: 3
+    hints:
+    - Add two days first.
+    - Then add the third.
+    solution: 'Step 1: 425 + 380 = 805. Step 2: 805 + 295 = 1,100.'
+    mistakes:
+      '1000': c4m7_place
+      '1090': c4m7_place
+      '805': c4m7_place
+  - prompt: A water tank holds 2,000 litres. 1,365 litres are used. How many litres are left?
+    answer: '635'
+    check: 2000-1365
+    difficulty: 3
+    hints:
+    - Start at the ones; borrow through the zeros.
+    - Check by adding your answer to 1,365.
+    solution: 'Step 1: 2,000 − 1,365. Step 2: = 635. Check: 635 + 1,365 = 2,000.'
+    mistakes:
+      '1365': c4m7_words
+      '745': c4m7_place
+      '1635': c4m7_place
+  - prompt: A ward had 650 houses with a dustbin. After a drive, 820 houses have one. How many houses got a new dustbin?
+    answer: '170'
+    check: 820-650
+    difficulty: 2
+    hints:
+    - Find how much the number went up.
+    - After − before.
+    solution: 'Step 1: 820 − 650. Step 2: = 170 houses.'
+    mistakes:
+      '1470': c4m7_words
+      '230': c4m7_place
+      '270': c4m7_place
+  - prompt: To check 1,000 − 375 = 625, which sum should equal 1,000?
+    options:
+    - 625 + 375
+    - 625 − 375
+    - 1,000 + 375
+    answer: 625 + 375
+    difficulty: 2
+    hints:
+    - Adding undoes taking away.
+    - Put back what was taken away.
+    solution: 'Step 1: Add the answer and the part taken away. Step 2: 625 + 375 = 1,000, so it is correct.'
+    mistakes:
+      625 − 375: c4m7_words
+      1,000 + 375: c4m7_words
+  - prompt: Out of 1,500 people in a village, 865 are adults. How many are children?
+    answer: '635'
+    check: 1500-865
+    difficulty: 2
+    hints:
+    - Children = everyone − adults.
+    - Line up the places.
+    solution: 'Step 1: 1,500 − 865. Step 2: = 635 children.'
+    mistakes:
+      '2365': c4m7_words
+      '745': c4m7_place
+      '765': c4m7_place
 - code: cbse4m.clean.money
   title: 'Money: rupees and paise'
   after:
@@ -187,6 +340,48 @@ concepts:
       - when:
           x: 75
         say: That's three toys.
+  lesson:
+    - teach: ₹1 = 100 paise. We write 12 rupees 50 paise as ₹12.50. The dot separates rupees from paise.
+      check:
+        prompt: How do we write 7 rupees 25 paise?
+        options:
+        - ₹7.25
+        - ₹725
+        - ₹72.5
+        answer: ₹7.25
+        why: Rupees before the dot, paise after it.
+    - teach: 'To add or subtract money, keep rupees under rupees and paise under paise. If paise reach 100, make ₹1. ₹12.50 + ₹3.50 = ₹15.100 is wrong: 100 paise = ₹1, so ₹16.00.'
+      picture:
+        kind: compare
+        columns:
+        - title: Rupees
+          points:
+          - 12 + 3 = 15
+          - + 1 from paise
+          - = 16
+        - title: Paise
+          points:
+          - 50 + 50 = 100
+          - 100 paise = ₹1
+          - 0 paise left
+        alt: 'Adding ₹12.50 and ₹3.50: paise make ₹1, total ₹16.00.'
+      check:
+        prompt: What is ₹4.50 + ₹2.50?
+        options:
+        - ₹7.00
+        - ₹6.100
+        - ₹6.00
+        answer: ₹7.00
+        why: 50 + 50 paise = ₹1; 4 + 2 + 1 = ₹7.
+    - teach: 'Change is what you get back: paid − cost. Pay ₹100 for a ₹65 broom and get ₹35 change. Count up to check: 65 + 35 = 100.'
+      check:
+        prompt: You pay ₹50 for a ₹32 notebook. What change do you get?
+        options:
+        - ₹18
+        - ₹28
+        - ₹82
+        answer: ₹18
+        why: 50 − 32 = 18; 32 + 18 = 50.
   items:
   - prompt: How many paise are in ₹1?
     answer: '100'
@@ -242,3 +437,110 @@ concepts:
     - 200 − 145.
     solution: 200 − 145 = ₹55.
     mistakes: {"65": "m5_subtract_borrow", "345": "m5_subtract_borrow"}
+  - prompt: How many paise are in ₹3?
+    answer: '300'
+    check: 3*100
+    difficulty: 1
+    hints:
+    - ₹1 = 100 paise.
+    - Three lots of that.
+    solution: 'Step 1: ₹1 = 100 paise. Step 2: 3 × 100 = 300 paise.'
+    mistakes:
+      '30': c4m7_paise
+      '3': c4m7_paise
+      '103': c4m7_paise
+  - prompt: A mop costs ₹85 and a bucket costs ₹140. What is the total in rupees?
+    answer: '225'
+    check: 85+140
+    difficulty: 1
+    hints:
+    - Total means add.
+    - 85 + 140.
+    solution: 'Step 1: ₹85 + ₹140. Step 2: = ₹225.'
+    mistakes:
+      '215': c4m7_place
+      '55': c4m7_words
+  - prompt: You pay ₹500 for a dustbin costing ₹375. How much change in rupees?
+    answer: '125'
+    check: 500-375
+    difficulty: 2
+    hints:
+    - Change = paid − cost.
+    - Count up from 375 to 500.
+    solution: 'Step 1: ₹500 − ₹375. Step 2: = ₹125.'
+    mistakes:
+      '875': c4m7_words
+      '225': c4m7_place
+      '135': c4m7_place
+  - prompt: How many rupees make 700 paise?
+    answer: '7'
+    check: 700//100
+    difficulty: 2
+    hints:
+    - Every 100 paise make ₹1.
+    - How many hundreds in 700?
+    solution: 'Step 1: 100 paise = ₹1. Step 2: 700 ÷ 100 = ₹7.'
+    mistakes:
+      '70': c4m7_paise
+      '700': c4m7_paise
+  - prompt: Which is the correct way to write 20 rupees 5 paise?
+    options:
+    - ₹20.05
+    - ₹20.5
+    - ₹205
+    answer: ₹20.05
+    difficulty: 3
+    hints:
+    - Paise always use two places after the dot.
+    - 5 paise is fewer than 10 paise.
+    solution: 'Step 1: Paise take two places: 05. Step 2: So ₹20.05 (₹20.5 would be 50 paise).'
+    mistakes:
+      ₹20.5: c4m7_paise
+      ₹205: c4m7_paise
+  - prompt: Six friends each give ₹15 for gloves. How many rupees in all?
+    answer: '90'
+    check: 15*6
+    difficulty: 2
+    hints:
+    - 'Equal amounts given many times: multiply.'
+    - 15 × 6.
+    solution: 'Step 1: ₹15 × 6. Step 2: = ₹90.'
+    mistakes:
+      '21': c4m7_words
+      '60': c4m7_place
+      '80': c4m7_place
+  - prompt: A pen costs ₹12.50 and a pencil ₹7.50. What is the total cost in rupees?
+    answer: '20'
+    check: 12.5+7.5
+    difficulty: 3
+    hints:
+    - 'Add the paise first: 50 + 50.'
+    - 100 paise make one rupee.
+    solution: 'Step 1: 50 + 50 paise = ₹1. Step 2: 12 + 7 + 1 = ₹20.'
+    mistakes:
+      '19': c4m7_paise
+      '19.1': c4m7_paise
+  - prompt: Sweets cost ₹40 a box. How many boxes can you buy with ₹200?
+    answer: '5'
+    check: 200//40
+    difficulty: 2
+    hints:
+    - How many 40s make 200?
+    - Count 40, 80, 120 ...
+    solution: 'Step 1: 200 ÷ 40. Step 2: = 5 boxes.'
+    mistakes:
+      '4': c4m7_words
+      '160': c4m7_words
+      '50': c4m7_words
+  - prompt: Riya had ₹250. Riya spent ₹95 on a book and ₹60 on a bag. How much is left?
+    answer: '95'
+    check: 250-95-60
+    difficulty: 3
+    hints:
+    - Find the total spent first.
+    - Then take it from ₹250.
+    solution: 'Step 1: Spent ₹95 + ₹60 = ₹155. Step 2: ₹250 − ₹155 = ₹95.'
+    mistakes:
+      '155': c4m7_words
+      '405': c4m7_words
+      '105': c4m7_place

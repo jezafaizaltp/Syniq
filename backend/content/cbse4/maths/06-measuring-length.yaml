@@ -10,6 +10,9 @@ tips:
   m4_ruler: "Start at 0 and count to where the pencil ends. The end mark is the length."
   m4_standard: "A grown-up's hand span and a child's are different sizes."
   m4_tallest: "Tallest means the biggest number. Compare 120, 132 and 128."
+  c4m6_zero: Check where the object starts on the ruler. If it is not at 0, count the cm gaps from its start to its end.
+  c4m6_unit: Change everything into the same unit first. Remember 1 m = 100 cm and 1 km = 1000 m.
+  c4m6_size: Picture the thing next to a ruler (about 30 cm) or a door (about 2 m). Which unit fits?
 concepts:
 - code: cbse4m.len.cm
   title: Centimetres and metres
@@ -64,6 +67,43 @@ concepts:
       - when:
           v: 100
         say: That's a whole metre.
+  lesson:
+    - teach: Hand spans and steps are different for different people, so two people may get different answers. Standard units like centimetres (cm) and metres (m) are the same everywhere.
+      check:
+        prompt: Why might two children get different lengths for the same table using hand spans?
+        options:
+        - Their hands are different sizes
+        - The table changes size
+        - Spans are always exact
+        answer: Their hands are different sizes
+        why: A span is not a fixed length.
+    - teach: 'A ruler measures in cm. Put the start of the object at 0 and read where it ends. If it starts at another mark, take the start away from the end: from 3 to 11 is 11 − 3 = 8 cm.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 12
+        step: 1
+        jumps:
+        - from: 3
+          to: 11
+        alt: A ruler from 0 to 12 cm; an object lies from 3 to 11, which is 8 cm long.
+      check:
+        prompt: An eraser lies from 4 to 9 on a ruler. How long is it?
+        options:
+        - 5 cm
+        - 9 cm
+        - 13 cm
+        answer: 5 cm
+        why: 9 − 4 = 5 cm.
+    - teach: Short things are measured in cm (a pencil, a book). Longer things in metres (a room, a rope). 1 metre = 100 centimetres.
+      check:
+        prompt: Which is best measured in cm?
+        options:
+        - a notebook
+        - a playground
+        - a road
+        answer: a notebook
+        why: A notebook is short; cm fits.
   items:
   - prompt: How many centimetres are in 1 metre?
     answer: '100'
@@ -129,6 +169,117 @@ concepts:
     - Not the same.
     solution: Hand spans vary, so standard units let everyone agree.
     mistakes: {"hand spans are too exact": "m4_standard"}
+  - prompt: A leaf lies from 2 to 10 on a ruler. How long is it in cm?
+    answer: '8'
+    check: 10-2
+    difficulty: 1
+    hints:
+    - It does not start at 0.
+    - Take the start away from the end.
+    solution: 'Step 1: End 10, start 2. Step 2: 10 − 2 = 8 cm.'
+    mistakes:
+      '10': c4m6_zero
+      '12': c4m6_zero
+  - prompt: How many centimetres are in 5 metres?
+    answer: '500'
+    check: 5*100
+    difficulty: 1
+    hints:
+    - 1 m = 100 cm.
+    - Five lots of that.
+    solution: 'Step 1: 1 m = 100 cm. Step 2: 5 × 100 = 500 cm.'
+    mistakes:
+      '50': c4m6_unit
+      '105': c4m6_unit
+      '5000': c4m6_unit
+  - prompt: How many metres is 700 cm?
+    answer: '7'
+    check: 700//100
+    difficulty: 2
+    hints:
+    - Every 100 cm makes 1 m.
+    - How many hundreds in 700?
+    solution: 'Step 1: 100 cm = 1 m. Step 2: 700 ÷ 100 = 7 m.'
+    mistakes:
+      '70': c4m6_unit
+      '700': c4m6_unit
+  - prompt: Which is about 1 metre long?
+    options:
+    - a big step of a grown-up
+    - a matchstick
+    - a fingernail
+    answer: a big step of a grown-up
+    difficulty: 2
+    hints:
+    - 1 m = 100 cm, more than three rulers.
+    - Which one is much longer than a ruler?
+    solution: 'Step 1: A matchstick and a fingernail are only a few cm. Step 2: A grown-up''s big step is about 1 m.'
+    mistakes:
+      a matchstick: c4m6_size
+      a fingernail: c4m6_size
+  - prompt: Which unit is best for the height of a door?
+    options:
+    - metres
+    - centimetres only, no metres
+    - kilometres
+    answer: metres
+    difficulty: 2
+    hints:
+    - A door is taller than a grown-up.
+    - Kilometres are for distances between towns.
+    solution: 'Step 1: A door is about 2 m tall. Step 2: Metres fit best.'
+    mistakes:
+      centimetres only, no metres: c4m6_size
+      kilometres: c4m6_size
+  - prompt: A pencil is 15 cm. How long are 4 such pencils laid end to end?
+    answer: '60'
+    check: 15*4
+    difficulty: 2
+    hints:
+    - Add 15 four times.
+    - Or multiply.
+    solution: 'Step 1: 15 × 4. Step 2: = 60 cm.'
+    mistakes:
+      '19': c4m6_unit
+      '45': c4m6_unit
+      '75': c4m6_unit
+  - prompt: A broken ruler starts at 5. A crayon lies from 5 to 13. How long is the crayon?
+    answer: '8'
+    check: 13-5
+    difficulty: 2
+    hints:
+    - Do not just read the end number.
+    - Count the cm gaps from 5 to 13.
+    solution: 'Step 1: End 13, start 5. Step 2: 13 − 5 = 8 cm.'
+    mistakes:
+      '13': c4m6_zero
+      '18': c4m6_zero
+  - prompt: Mira measured a table as 8 hand spans. Mira's teacher measured it as 6 hand spans. Whose hand span is bigger?
+    options:
+    - the teacher's
+    - Mira's
+    - they are the same
+    answer: the teacher's
+    difficulty: 3
+    hints:
+    - Same table, fewer spans.
+    - Fewer spans means each span covers more.
+    solution: 'Step 1: The teacher needed fewer spans for the same length. Step 2: So the teacher''s span is bigger.'
+    mistakes:
+      Mira's: c4m6_size
+      they are the same: c4m6_size
+  - prompt: A 1 m stick is cut into pieces of 20 cm. How many pieces?
+    answer: '5'
+    check: 100//20
+    difficulty: 3
+    hints:
+    - Change 1 m into cm.
+    - How many 20s make that?
+    solution: 'Step 1: 1 m = 100 cm. Step 2: 100 ÷ 20 = 5 pieces.'
+    mistakes:
+      '20': c4m6_unit
+      '50': c4m6_unit
+      '4': c4m6_unit
 - code: cbse4m.len.compare
   title: Comparing and adding lengths
   after:
@@ -192,6 +343,45 @@ concepts:
       bin: Shorter than 1 m
       clue: Is 10 cm as long as 100 cm?
       why: Much shorter.
+  lesson:
+    - teach: To compare or add lengths, first use the same unit. 1 m 20 cm = 100 cm + 20 cm = 120 cm. Now it can be compared with 115 cm easily.
+      check:
+        prompt: How many cm is 1 m 45 cm?
+        options:
+        - '145'
+        - '1045'
+        - '46'
+        answer: '145'
+        why: 100 cm + 45 cm = 145 cm.
+    - teach: 'Add and subtract lengths like numbers. 45 cm + 38 cm = 83 cm. If cm go past 100, make a metre: 1 m 50 cm + 70 cm = 1 m 120 cm = 2 m 20 cm.'
+      picture:
+        kind: bars
+        unit: cm
+        bars:
+        - label: Anu
+          value: 120
+        - label: Meera
+          value: 128
+        - label: Ravi
+          value: 132
+        alt: 'Heights of three children in cm: Anu 120, Meera 128, Ravi 132.'
+      check:
+        prompt: Meera is 128 cm and Anu is 120 cm. How much taller is Meera?
+        options:
+        - 8 cm
+        - 12 cm
+        - 248 cm
+        answer: 8 cm
+        why: 128 − 120 = 8.
+    - teach: For long distances we use kilometres (km). 1 km = 1000 m. A walk to a nearby village may be 2 km = 2000 m.
+      check:
+        prompt: How many metres is 3 km?
+        options:
+        - '3000'
+        - '300'
+        - '30'
+        answer: '3000'
+        why: 3 × 1000 = 3000 m.
   items:
   - prompt: 1 m 20 cm is how many centimetres?
     answer: '120'
@@ -253,3 +443,112 @@ concepts:
     solution: 200 − 75 = 125 cm.
     mistakes:
       '1925': c4_cm_m
+  - prompt: 2 m 5 cm is how many centimetres?
+    answer: '205'
+    check: 200+5
+    difficulty: 2
+    hints:
+    - 2 m is how many cm?
+    - Add the extra 5 cm.
+    solution: 'Step 1: 2 m = 200 cm. Step 2: 200 + 5 = 205 cm.'
+    mistakes:
+      '25': c4m6_unit
+      '250': c4m6_unit
+      '2005': c4m6_unit
+  - prompt: 'Which is longer: 1 m 30 cm or 125 cm?'
+    options:
+    - 1 m 30 cm
+    - 125 cm
+    - both are equal
+    answer: 1 m 30 cm
+    difficulty: 2
+    hints:
+    - Change both into cm.
+    - 1 m = 100 cm.
+    solution: 'Step 1: 1 m 30 cm = 130 cm. Step 2: 130 > 125, so 1 m 30 cm is longer.'
+    mistakes:
+      125 cm: c4m6_unit
+      both are equal: c4m6_unit
+  - prompt: A cloth of 90 cm and another of 65 cm are joined. How long is the cloth in cm?
+    answer: '155'
+    check: 90+65
+    difficulty: 1
+    hints:
+    - Joined means add.
+    - 90 + 65.
+    solution: 'Step 1: 90 + 65. Step 2: = 155 cm (1 m 55 cm).'
+    mistakes:
+      '145': c4m6_unit
+      '25': c4m6_unit
+  - prompt: A wire is 3 m long. 1 m 40 cm is used. How many cm are left?
+    answer: '160'
+    check: 300-140
+    difficulty: 3
+    hints:
+    - Change both lengths into cm.
+    - Then take away.
+    solution: 'Step 1: 3 m = 300 cm; 1 m 40 cm = 140 cm. Step 2: 300 − 140 = 160 cm.'
+    mistakes:
+      '260': c4m6_unit
+      '140': c4m6_unit
+      '1': c4m6_unit
+  - prompt: Home to school is 800 m. How far is it there and back?
+    answer: '1600'
+    check: 800*2
+    difficulty: 2
+    hints:
+    - There and back means the trip twice.
+    - Add 800 twice.
+    solution: 'Step 1: 800 + 800. Step 2: = 1,600 m (1 km 600 m).'
+    mistakes:
+      '800': c4m6_unit
+      '1000': c4m6_unit
+  - prompt: Which is the longest?
+    options:
+    - 2 km
+    - 1500 m
+    - 900 m
+    answer: 2 km
+    difficulty: 2
+    hints:
+    - Change km into m.
+    - 1 km = 1000 m.
+    solution: 'Step 1: 2 km = 2000 m. Step 2: 2000 > 1500 > 900, so 2 km is longest.'
+    mistakes:
+      1500 m: c4m6_unit
+      900 m: c4m6_unit
+  - prompt: Arjun is 1 m 25 cm tall. Last year Arjun was 118 cm. How many cm did Arjun grow?
+    answer: '7'
+    check: 125-118
+    difficulty: 3
+    hints:
+    - Change 1 m 25 cm into cm.
+    - Then find the difference.
+    solution: 'Step 1: 1 m 25 cm = 125 cm. Step 2: 125 − 118 = 7 cm.'
+    mistakes:
+      '107': c4m6_unit
+      '93': c4m6_unit
+      '17': c4m6_unit
+  - prompt: How many metres are in half a kilometre?
+    answer: '500'
+    check: 1000//2
+    difficulty: 2
+    hints:
+    - 1 km = how many m?
+    - Halve it.
+    solution: 'Step 1: 1 km = 1000 m. Step 2: Half = 500 m.'
+    mistakes:
+      '50': c4m6_unit
+      '250': c4m6_unit
+  - prompt: A running track is 400 m around. How many rounds make 2 km?
+    answer: '5'
+    check: 2000//400
+    difficulty: 3
+    hints:
+    - Change 2 km into metres.
+    - How many 400s fit?
+    solution: 'Step 1: 2 km = 2000 m. Step 2: 2000 ÷ 400 = 5 rounds.'
+    mistakes:
+      '2': c4m6_unit
+      '4': c4m6_unit
+      '8': c4m6_unit
