@@ -13,6 +13,9 @@ tips:
   c11_ph_base: "pOH = −log[OH⁻] first, then pH = 14 − pOH."
   c11_pkw: "pH + pOH = 14 at 25 °C."
   c11_q_k: "Q < K means there are too few products for equilibrium yet."
+  c11c06_k: Kc = products over reactants, each concentration raised to its coefficient. Leave out pure solids and liquids.
+  c11c06_lc: 'Le Chatelier: the system pushes back against the change. More pressure favours fewer gas moles; heating favours the endothermic side.'
+  c11c06_ph: pH = −log[H⁺]. Each pH unit is a factor of 10. pH + pOH = 14 at 25 °C.
 concepts:
 - code: cbse11c.eq.chemical
   title: Chemical equilibrium and Le Chatelier
@@ -85,6 +88,50 @@ concepts:
       bin: 'Shifts left: less NH₃'
       clue: Where is the extra? Which way would use it up?
       why: The system breaks up some of the extra NH₃, though more remains overall.
+  lesson:
+    - teach: At equilibrium the forward and backward reactions go on at equal rates, so concentrations stop changing. It is dynamic, not stopped.
+      check:
+        prompt: 'At equilibrium, the forward reaction:'
+        options:
+        - continues at the same rate as the backward one
+        - has stopped
+        - is faster than the backward one
+        answer: continues at the same rate as the backward one
+        why: Dynamic balance.
+    - teach: 'For aA + bB ⇌ cC + dD, Kc = [C]ᶜ[D]ᵈ / ([A]ᵃ[B]ᵇ). Large K favours products. Compare the reaction quotient Q with K: Q < K goes forward, Q > K goes backward.'
+      check:
+        prompt: 'Q = 2, K = 10. The reaction:'
+        options:
+        - moves forward
+        - moves backward
+        - is at equilibrium
+        answer: moves forward
+        why: 'Q < K: more products needed.'
+    - teach: 'Le Chatelier: a system at equilibrium shifts to oppose a change. Add reactant: shifts forward. Raise pressure: shifts to fewer gas moles. Heat: shifts the endothermic way. A catalyst only speeds both ways; K is unchanged.'
+      picture:
+        kind: compare
+        columns:
+        - title: Change
+          points:
+          - add reactant
+          - raise pressure
+          - raise temperature
+          - add catalyst
+        - title: Shift
+          points:
+          - forward
+          - to fewer gas moles
+          - endothermic way
+          - none
+        alt: How an equilibrium responds to changes.
+      check:
+        prompt: '2SO₂ + O₂ ⇌ 2SO₃ (exothermic). Heating shifts it:'
+        options:
+        - backward
+        - forward
+        - nowhere
+        answer: backward
+        why: Backward is the endothermic direction.
   items:
   - prompt: For H₂ + I₂ ⇌ 2HI, [H₂] = [I₂] = 0.1 M and [HI] = 0.8 M. Find Kc.
     answer: '64'
@@ -158,6 +205,117 @@ concepts:
     solution: Kc = [CO₂].
     mistakes:
       '[CaO][CO₂]/[CaCO₃]': c11c_kc
+  - prompt: For A ⇌ 2B, [A] = 0.5 M and [B] = 1 M. Find Kc.
+    answer: '2'
+    check: 1**2/0.5
+    difficulty: 1
+    hints:
+    - Kc = [B]²/[A].
+    - Square [B].
+    solution: 'Step 1: 1/0.5. Step 2: 2.'
+    mistakes:
+      '0.5': c11c06_k
+      '4': c11c06_k
+  - prompt: 'A very large K (like 10¹⁰) means at equilibrium there are mostly:'
+    options:
+    - products
+    - reactants
+    - equal amounts
+    answer: products
+    difficulty: 1
+    hints:
+    - Look at what sits on the top of the K fraction.
+    - A big fraction has a big top.
+    solution: 'Step 1: large numerator. Step 2: products.'
+    mistakes:
+      reactants: c11c06_k
+      equal amounts: c11c06_k
+  - prompt: 'Removing product from a system at equilibrium shifts it:'
+    options:
+    - forward
+    - backward
+    - nowhere
+    answer: forward
+    difficulty: 1
+    hints:
+    - The system replaces what was removed.
+    - Le Chatelier.
+    solution: 'Step 1: oppose the loss. Step 2: make more product.'
+    mistakes:
+      backward: c11c06_lc
+      nowhere: c11c06_lc
+  - prompt: For N₂ + 3H₂ ⇌ 2NH₃, [N₂] = 1, [H₂] = 1, [NH₃] = 2 (M). Find Kc.
+    answer: '4'
+    check: 2**2/(1*1**3)
+    difficulty: 2
+    hints:
+    - Kc = [NH₃]²/([N₂][H₂]³).
+    - Only [NH₃] is not 1.
+    solution: 'Step 1: 4/1. Step 2: 4.'
+    mistakes:
+      '2': c11c06_k
+      1/4: c11c06_k
+  - prompt: For H₂ + I₂ ⇌ 2HI, does changing the pressure shift the equilibrium?
+    options:
+    - no, gas moles are equal on both sides
+    - yes, towards HI
+    - yes, towards H₂
+    answer: no, gas moles are equal on both sides
+    difficulty: 2
+    hints:
+    - Count gas moles each side.
+    - 2 on the left, 2 on the right.
+    solution: 'Step 1: Δn = 0. Step 2: no shift.'
+    mistakes:
+      yes, towards HI: c11c06_lc
+      yes, towards H₂: c11c06_lc
+  - prompt: Kc for A ⇌ B is 4. What is Kc for B ⇌ A?
+    answer: 1/4
+    check: 1/4
+    difficulty: 2
+    hints:
+    - Reversing swaps top and bottom.
+    - Take the reciprocal.
+    solution: 'Step 1: 1/K. Step 2: 1/4.'
+    mistakes:
+      '4': c11c06_k
+      '-4': c11c06_k
+  - prompt: For the Haber process (exothermic), which condition increases the yield of NH₃?
+    options:
+    - high pressure
+    - high temperature
+    - adding a catalyst
+    answer: high pressure
+    difficulty: 2
+    hints:
+    - 4 gas moles become 2.
+    - Heating favours the backward, endothermic way.
+    solution: 'Step 1: fewer gas moles on the product side. Step 2: high pressure.'
+    mistakes:
+      high temperature: c11c06_lc
+      adding a catalyst: c11c06_lc
+  - prompt: For 2A ⇌ B, Kc = 2. If [A] = 0.5 M at equilibrium, find [B] (M).
+    answer: '0.5'
+    check: 2*0.25
+    difficulty: 3
+    hints:
+    - Kc = [B]/[A]².
+    - '[B] = Kc × [A]².'
+    solution: 'Step 1: 2 × 0.25. Step 2: 0.5 M.'
+    mistakes:
+      '1': c11c06_k
+      '0.25': c11c06_k
+  - prompt: For N₂ + 3H₂ ⇌ 2NH₃, Kp = Kc(RT)^Δn. What is Δn?
+    answer: '-2'
+    check: 2-4
+    difficulty: 3
+    hints:
+    - Δn = gas moles of products − of reactants.
+    - 2 − 4.
+    solution: 'Step 1: 2 − 4. Step 2: −2.'
+    mistakes:
+      '2': c11c06_k
+      '4': c11c06_k
 - code: cbse11c.eq.ionic
   title: Ionic equilibrium, acids, bases and pH
   after:
@@ -229,6 +387,48 @@ concepts:
       - when:
           v: 7
         say: 'One tenfold dilution doesn''t make it neutral: there''s just 10 times less acid.'
+  lesson:
+    - teach: 'Brønsted–Lowry: an acid donates a proton (H⁺) and a base accepts one. When HCl gives H⁺ to water, Cl⁻ is its conjugate base. Lewis acids accept an electron pair (BF₃).'
+      check:
+        prompt: 'In NH₃ + H₂O ⇌ NH₄⁺ + OH⁻, NH₃ acts as:'
+        options:
+        - a base
+        - an acid
+        - neither
+        answer: a base
+        why: It accepts a proton.
+    - teach: 'Water self-ionises: Kw = [H⁺][OH⁻] = 10⁻¹⁴ at 25 °C. pH = −log[H⁺], and pH + pOH = 14. Neutral water has pH 7. Each pH unit is a factor of ten.'
+      check:
+        prompt: '[H⁺] = 10⁻⁵ M. pH?'
+        options:
+        - '5'
+        - '9'
+        - −5
+        answer: '5'
+        why: −log 10⁻⁵.
+    - teach: 'A buffer (weak acid + its salt, like acetic acid + sodium acetate) resists pH change: pH = pKa + log([salt]/[acid]). For a sparingly soluble salt, Ksp is the product of ion concentrations; a precipitate forms when the ionic product exceeds Ksp.'
+      picture:
+        kind: compare
+        columns:
+        - title: pH
+          points:
+          - below 7
+          - '7'
+          - above 7
+        - title: Solution
+          points:
+          - acidic
+          - neutral
+          - basic
+        alt: The pH scale at 25 °C.
+      check:
+        prompt: Buffer with [salt] = [acid] and pKa 4.76. pH?
+        options:
+        - '4.76'
+        - '7'
+        - '9.24'
+        answer: '4.76'
+        why: log 1 = 0.
   items:
   - prompt: Find the pH of 0.001 M HCl.
     answer: '3'
@@ -294,3 +494,111 @@ concepts:
     - Absorbs small additions.
     solution: It resists pH change.
     mistakes: {"always has pH 7": "c11_buffer", "is a strong acid": "c11_buffer", "has no ions": "c11_buffer"}
+  - prompt: Find the pH of 0.0001 M HNO₃ (a strong acid).
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - '[H⁺] = 10⁻⁴.'
+    - pH = −log[H⁺].
+    solution: 'Step 1: [H⁺] = 10⁻⁴ M. Step 2: pH 4.'
+    mistakes:
+      '10': c11c06_ph
+      '-4': c11c06_ph
+  - prompt: A solution has pOH 3 at 25 °C. Find its pH.
+    answer: '11'
+    check: 14-3
+    difficulty: 1
+    hints:
+    - pH + pOH = 14.
+    - 14 − 3.
+    solution: 'Step 1: 14 − 3. Step 2: 11.'
+    mistakes:
+      '3': c11c06_ph
+      '17': c11c06_ph
+  - prompt: 'The conjugate base of H₂SO₄ is:'
+    options:
+    - HSO₄⁻
+    - SO₄²⁻
+    - H₃SO₄⁺
+    answer: HSO₄⁻
+    difficulty: 1
+    hints:
+    - Remove one H⁺.
+    - Charge drops by one.
+    solution: 'Step 1: H₂SO₄ − H⁺. Step 2: HSO₄⁻.'
+    mistakes:
+      SO₄²⁻: c11c06_ph
+      H₃SO₄⁺: c11c06_ph
+  - prompt: Find the pH of 0.001 M KOH at 25 °C.
+    answer: '11'
+    check: 14-3
+    difficulty: 2
+    hints:
+    - '[OH⁻] = 10⁻³, so pOH = 3.'
+    - pH = 14 − pOH.
+    solution: 'Step 1: pOH 3. Step 2: pH 11.'
+    mistakes:
+      '3': c11c06_ph
+      '13': c11c06_ph
+  - prompt: Solution X has pH 2 and Y has pH 6. [H⁺] in X is how many times that in Y?
+    answer: '10000'
+    check: 10**4
+    difficulty: 2
+    hints:
+    - Each pH unit is ×10.
+    - Difference is 4 units.
+    solution: 'Step 1: 10⁴. Step 2: 10 000 times.'
+    mistakes:
+      '4': c11c06_ph
+      '3': c11c06_ph
+  - prompt: Which is a Lewis acid?
+    options:
+    - BF₃
+    - NH₃
+    - OH⁻
+    answer: BF₃
+    difficulty: 2
+    hints:
+    - A Lewis acid accepts an electron pair.
+    - Which central atom is short of an octet?
+    solution: 'Step 1: B in BF₃ has 6 electrons. Step 2: it accepts a pair.'
+    mistakes:
+      NH₃: c11c06_ph
+      OH⁻: c11c06_ph
+  - prompt: 'Adding sodium acetate to acetic acid solution makes the acid ionise less. This is the:'
+    options:
+    - common ion effect
+    - buffer capacity
+    - hydrolysis
+    answer: common ion effect
+    difficulty: 2
+    hints:
+    - Both supply the same ion.
+    - Which ion is shared?
+    solution: 'Step 1: acetate ion is common. Step 2: equilibrium shifts back.'
+    mistakes:
+      buffer capacity: c11c06_ph
+      hydrolysis: c11c06_ph
+  - prompt: A weak acid has Ka = 10⁻⁵ and concentration 0.1 M. Find its degree of ionisation α (α = √(Ka/C)).
+    answer: '0.01'
+    check: (1e-5/0.1)**0.5
+    difficulty: 3
+    hints:
+    - Ka/C = 10⁻⁴.
+    - Take the square root.
+    solution: 'Step 1: √(10⁻⁴). Step 2: 0.01.'
+    mistakes:
+      '0.0001': c11c06_ph
+      '0.1': c11c06_ph
+  - prompt: AgCl has Ksp = 1.0 × 10⁻¹⁰. Find its solubility in water (mol/L), in units of 10⁻⁵.
+    answer: '1'
+    check: (1e-10)**0.5/1e-5
+    difficulty: 3
+    hints:
+    - Ksp = s × s.
+    - s = √Ksp.
+    solution: 'Step 1: s² = 10⁻¹⁰. Step 2: s = 10⁻⁵ mol/L.'
+    mistakes:
+      '10': c11c06_ph
+      '0.5': c11c06_ph
