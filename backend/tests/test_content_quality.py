@@ -5,6 +5,7 @@ These read the YAML packs only, so they run in seconds.
 """
 
 import re
+import pytest
 
 from app import content_packs as cp
 from app.learning import same_answer
@@ -902,14 +903,16 @@ def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions()
 
 
 CBSE9 = {"cbse9-eng", "cbse9-hin", "cbse9-math", "cbse9-sci", "cbse9-ss"}
+CBSE11 = {"cbse11-bio", "cbse11-chem", "cbse11-eng", "cbse11-math", "cbse11-phy"}
 
 
-def test_every_cbse9_step_has_more_ways_and_every_topic_board_style_questions():
-    """CBSE Class 9 (the 2026-27 books): every lesson step can be taught at least three ways, one of them drawn, and
-    every topic has at least one question in a CBSE board format (assertion-reason allowed here)."""
+@pytest.mark.parametrize("subjects", [CBSE9, CBSE11], ids=["cbse9", "cbse11"])
+def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects):
+    """CBSE Class 9 (the 2026-27 books) and Class 11: every lesson step can be taught at least three ways, one of them
+    drawn, and every topic has at least one question in a CBSE board format (assertion-reason allowed here)."""
     thin, no_exam = [], []
     for path, pack in PACKS:
-        if code_of(pack) not in CBSE9:
+        if code_of(pack) not in subjects:
             continue
         for c in pack["concepts"]:
             for n, step in enumerate(c.get("lesson") or [], start=1):

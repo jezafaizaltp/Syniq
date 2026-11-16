@@ -116,6 +116,20 @@ concepts:
         - globulin
         answer: fibrinogen
         why: It becomes fibrin threads.
+      ways:
+      - style: visual
+        teach: What a blood sample separates into when it is spun.
+        picture:
+          kind: bars
+          unit: '% of blood volume'
+          bars:
+          - label: Plasma
+            value: 55
+          - label: Formed elements
+            value: 45
+          alt: Spun blood separates into pale plasma, a little over half the volume, and formed elements, a little under half.
+      - style: real_world
+        teach: 'Blood banks often split one donation into parts: red cells for a patient after heavy bleeding, platelets for a dengue patient whose count has fallen, and plasma for burn patients. One donor can help several people.'
     - teach: 'RBCs (about 5 million per mm³) are biconcave, have no nucleus in mammals, carry haemoglobin and live about 120 days. WBCs defend: neutrophils (most), lymphocytes, monocytes, eosinophils, basophils. Platelets help clotting.'
       check:
         prompt: Which WBCs make antibodies?
@@ -125,6 +139,30 @@ concepts:
         - basophils
         answer: lymphocytes
         why: B-lymphocytes make antibodies.
+      ways:
+      - style: visual
+        teach: Red cells, white cells and platelets compared.
+        picture:
+          kind: compare
+          columns:
+          - title: Red cells
+            points:
+            - most numerous
+            - no nucleus in mammals
+            - carry O₂ with haemoglobin
+          - title: White cells
+            points:
+            - have a nucleus
+            - fewer in number
+            - fight infection
+          - title: Platelets
+            points:
+            - cell fragments
+            - from megakaryocytes
+            - help blood clot
+          alt: Red cells are most numerous, lack a nucleus and carry oxygen; white cells have a nucleus and fight infection; platelets are cell fragments that help blood clot.
+      - style: step_by_step
+        teach: 'Step 1: Is the white cell granular? Neutrophils, eosinophils and basophils are. Step 2: Neutrophils and monocytes eat germs (phagocytes). Step 3: Eosinophils rise in allergies. Step 4: Basophils release histamine and heparin. Step 5: Lymphocytes (B and T) make the immune response.'
     - teach: 'ABO groups depend on antigens A and B on RBCs; O has none, AB has both. Rh⁺ people carry the Rh antigen. Clotting: thrombokinase → prothrombin to thrombin → fibrinogen to fibrin, needing Ca²⁺. Lymph carries fats and immune cells.'
       picture:
         kind: compare
@@ -150,6 +188,11 @@ concepts:
         - both antigens
         answer: no A or B antigens
         why: Nothing for the recipient's antibodies to attack.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Note the donor''s antigens on red cells. Step 2: Note the antibodies in the receiver''s plasma. Step 3: If they match (anti-A meets A), the red cells clump: unsafe. Step 4: Group O red cells have no A or B, so they suit every ABO group in an emergency.'
+      - style: real_world
+        teach: When you cut a finger, the bleeding stops in a few minutes because a mesh of fibrin threads traps blood cells into a clot. People with haemophilia lack a clotting factor, so a small cut can bleed for a long time.
   items:
   - prompt: Plasma makes up about what percentage of blood?
     answer: '55'
@@ -348,6 +391,74 @@ concepts:
     mistakes:
       they never need energy: c11b15_blood
       they live for years: c11b15_blood
+  - prompt: 'Assertion (A): Mammalian red blood cells cannot divide.
+
+      Reason (R): Mature mammalian red blood cells have no nucleus.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Without a nucleus there is no DNA to copy, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Serum contains fibrinogen.
+
+      Reason (R): Serum is plasma without clotting factors.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: fibrinogen is a clotting factor, so it is absent from serum. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A patient with group B blood needs a transfusion. Donors with groups A, B, AB and O are available. Which two groups are safe?'
+    options:
+    - B and O
+    - B and AB
+    - A and O
+    answer: B and O
+    hints:
+    - Which antibody is in group B plasma?
+    - Which donor red cells carry the A antigen?
+    solution: Group B plasma has anti-A, so donor cells with A (groups A and AB) would clump; B and O are safe.
+    mistakes:
+      B and AB: c11b15_blood
+      A and O: c11b15_blood
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: An Rh⁻ mother is carrying her second Rh⁺ baby. Her first baby was also Rh⁺. Why might this baby be at risk?'
+    options:
+    - Her anti-Rh antibodies can cross the placenta and destroy the baby's red cells
+    - Her red cells will enter the baby
+    - Rh⁺ babies cannot make haemoglobin
+    answer: Her anti-Rh antibodies can cross the placenta and destroy the baby's red cells
+    hints:
+    - What did the mother's body make after the first birth?
+    - Can antibodies cross the placenta?
+    solution: After the first birth she made anti-Rh antibodies; in the next Rh⁺ pregnancy they attack the baby's red cells (erythroblastosis foetalis).
+    mistakes:
+      Her red cells will enter the baby: c11b15_blood
+      Rh⁺ babies cannot make haemoglobin: c11b15_blood
+    exam: competency
+    difficulty: 2
 - code: cbse11b.circ.heart
   title: Heart, cardiac cycle and circulation
   after:
@@ -401,6 +512,21 @@ concepts:
         - semilunar
         answer: tricuspid
         why: Three flaps on the right side.
+      ways:
+      - style: visual
+        teach: The path blood takes through the heart and lungs.
+        picture:
+          kind: flow
+          steps:
+          - Body → vena cava → right atrium
+          - Tricuspid valve → right ventricle
+          - Pulmonary artery → lungs
+          - Pulmonary veins → left atrium
+          - Mitral valve → left ventricle
+          - Aorta → body
+          alt: Blood from the body enters the right atrium and right ventricle, goes to the lungs, returns to the left atrium and left ventricle, and leaves through the aorta to the body.
+      - style: real_world
+        teach: When a doctor listens with a stethoscope, the 'lub' is the tricuspid and mitral valves shutting and the 'dub' is the semilunar valves shutting. A whooshing sound between them can mean a leaky valve, called a murmur.
     - teach: The heartbeat starts in the SA node (pacemaker), passes to the AV node, the bundle of His and Purkinje fibres. One cardiac cycle takes about 0.8 s at 72 beats per minute. 'Lub' is the AV valves closing; 'dub' the semilunar valves closing.
       check:
         prompt: 'The ''dub'' sound comes from:'
@@ -410,6 +536,21 @@ concepts:
         - atria contracting
         answer: semilunar valves closing
         why: Second heart sound.
+      ways:
+      - style: visual
+        teach: How the heartbeat signal spreads through the heart.
+        picture:
+          kind: flow
+          steps:
+          - SA node fires (pacemaker)
+          - Atria contract
+          - AV node delays the signal
+          - Bundle of His
+          - Purkinje fibres
+          - Ventricles contract
+          alt: The SA node fires, the atria contract, the AV node delays the signal, which then runs down the bundle of His and Purkinje fibres so the ventricles contract.
+      - style: step_by_step
+        teach: 'Step 1: Cardiac cycle time = 60 ÷ heart rate. Step 2: At 60 beats a minute each cycle lasts 1 s. Step 3: Cardiac output = stroke volume × heart rate. Step 4: For example, 60 mL × 80 beats = 4800 mL a minute.'
     - teach: 'Cardiac output = stroke volume (about 70 mL) × heart rate (about 72) ≈ 5 L/min. ECG: P wave (atria excited), QRS (ventricles excited), T wave (ventricles recover). Double circulation: pulmonary (heart–lungs) and systemic (heart–body).'
       picture:
         kind: flow
@@ -429,6 +570,11 @@ concepts:
         - SA node firing
         answer: ventricles recovering (repolarisation)
         why: It follows the QRS complex.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: The P wave shows the atria being excited, just before they contract. Step 2: The QRS complex shows the ventricles being excited. Step 3: The T wave shows the ventricles recovering. Step 4: Counting QRS complexes in a minute gives the heart rate.'
+      - style: real_world
+        teach: Smartwatches and hospital monitors draw the ECG trace you see in films. A doctor who sees an unusual shape, say a missing P wave, can tell which part of the heart's wiring is not working properly.
   items:
   - prompt: Heart rate is 72 beats per minute. How long (in s) is one cardiac cycle, to one decimal place?
     answer: '0.8'
@@ -618,3 +764,71 @@ concepts:
     mistakes:
       '350': c11b15_heart
       '14': c11b15_heart
+  - prompt: 'Assertion (A): The left ventricle has a thicker wall than the right ventricle.
+
+      Reason (R): The left ventricle pumps blood to the whole body, against higher pressure.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Pumping into the systemic circulation needs more force, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The SA node is called the pacemaker of the heart.
+
+      Reason (R): The SA node starts each heartbeat at the highest rate in the heart.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. It fires fastest and so sets the rhythm, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A person''s heart rate is 60 per minute and stroke volume is 75 mL. Find the cardiac output and the length of one cardiac cycle.'
+    options:
+    - 4500 mL/min and 1 s
+    - 4500 mL/min and 0.8 s
+    - 135 mL/min and 1 s
+    answer: 4500 mL/min and 1 s
+    hints:
+    - Output = stroke volume × heart rate.
+    - Cycle time = 60 ÷ heart rate.
+    solution: Output = 75 × 60 = 4500 mL/min; cycle = 60 ÷ 60 = 1 s.
+    mistakes:
+      4500 mL/min and 0.8 s: b11_cardiac_cycle
+      135 mL/min and 1 s: c11b_cardiac
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: An ECG shows normal P waves, but they are not followed by QRS complexes at the usual time. Which part of the conduction system is probably not passing the signal on?'
+    options:
+    - AV node
+    - SA node
+    - Pulmonary vein
+    answer: AV node
+    hints:
+    - P waves are normal, so the atria are fine.
+    - Which node passes the signal from atria to ventricles?
+    solution: The signal starts but does not reach the ventricles on time, so the block is at the AV node.
+    mistakes:
+      SA node: c11b15_heart
+      Pulmonary vein: c11b15_heart
+    exam: competency
+    difficulty: 2
