@@ -114,6 +114,11 @@ concepts:
         - '0'
         answer: '5'
         why: x + 5 − x = 5, whatever x is.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Call the secret number n. Step 2: Write each instruction in algebra: add 5 → n + 5; times 2 → 2n + 10; take away 4 → 2n + 6; halve → n + 3; subtract n → 3. Step 3: The n is gone, so everyone ends with 3.'
+      - style: real_world
+        teach: Magicians at birthday parties use such tricks to 'read your mind'. Once you write the steps with a letter, you can see the trick is just algebra in which the secret number cancels out.
     - teach: 'If a trick tells you the result, you can find the starting number by undoing the steps in reverse: the last step first. Multiplying is undone by dividing, adding by subtracting. If ''times 3, then add 4'' gives 19, then 19 − 4 = 15 and 15 ÷ 3 = 5.'
       check:
         prompt: Double a number, then add 3. The result is 17. What was the number?
@@ -123,6 +128,19 @@ concepts:
         - '40'
         answer: '7'
         why: 'Undo in reverse: 17 − 3 = 14, then 14 ÷ 2 = 7.'
+      ways:
+      - style: visual
+        teach: 'Undoing a trick: run the steps backwards with the opposite operation.'
+        picture:
+          kind: flow
+          steps:
+          - 'Result: 35'
+          - 'Last step was +5 → subtract 5: 30'
+          - 'Before that ×6 → divide by 6: 5'
+          - 'Starting number: 5'
+          alt: 'If ''times 6 then add 5'' gives 35, undo the last step first: 35 minus 5 is 30, and 30 divided by 6 is 5, the starting number.'
+      - style: step_by_step
+        teach: 'Step 1: List the steps in order. Step 2: Reverse the list. Step 3: Swap each operation for its opposite: + ↔ −, × ↔ ÷. Step 4: Apply them to the result. Step 5: Check by doing the original steps on your answer.'
     - teach: In a number pyramid, each block is the sum of the two blocks below it. With bottom row a, b, c, the middle row is a + b and b + c, and the top is a + 2b + c. The middle number counts twice.
       picture:
         kind: flow
@@ -139,6 +157,11 @@ concepts:
         - '8'
         answer: '11'
         why: 1 + 2 × 4 + 2 = 11 (middle row 5 and 6).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the bottom row: 6, 1, 4. Step 2: Middle row: 6 + 1 = 7 and 1 + 4 = 5. Step 3: Top: 7 + 5 = 12. Step 4: Check with the rule a + 2b + c: 6 + 2 + 4 = 12. The middle number counts twice.'
+      - style: real_world
+        teach: Puzzle books and some school maths competitions use number pyramids with missing blocks. Writing the unknown as x and using a + 2b + c turns a guessing game into a one-line equation.
   items:
   - prompt: Think of a number, double it, add 8, halve it, then subtract the number you thought of. What do you always get?
     answer: '4'
@@ -305,6 +328,55 @@ concepts:
     mistakes:
       '1': c8m13_undo
       '10': c8m13_undo
+  - prompt: 'Assertion (A): In a 3-row number pyramid, the middle bottom number affects the top twice as much as the end numbers.
+
+      Reason (R): The top is a + 2b + c.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The middle number b appears twice in the formula, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A trick says: think of a number, multiply by 4, add 20, divide by 4, then subtract your number. A student always gets 5. Explain why using n.'
+    options:
+    - (4n + 20) ÷ 4 − n = n + 5 − n = 5
+    - 4n + 20 − n = 5
+    - The student just got lucky
+    answer: (4n + 20) ÷ 4 − n = n + 5 − n = 5
+    hints:
+    - Write each step with n.
+    - What happens to n at the end?
+    solution: 4n + 20 divided by 4 is n + 5; subtracting n leaves 5 for any starting number.
+    mistakes:
+      4n + 20 − n = 5: c8m13_follow_x
+      The student just got lucky: t8_trick_algebra
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A number pyramid has bottom row 3, x, 9 and top 36. Find x.'
+    options:
+    - '12'
+    - '24'
+    - '6'
+    answer: '12'
+    hints:
+    - Top = a + 2b + c.
+    - 3 + 2x + 9 = 36.
+    solution: 12 + 2x = 36, so 2x = 24 and x = 12.
+    mistakes:
+      '24': t8_pyramid_algebra
+      '6': c8m13_pyramid_up
+    exam: competency
+    difficulty: 2
 - code: cbse8m.alg.grids
   title: Calendar magic and divisibility tricks
   after:
@@ -407,6 +479,11 @@ concepts:
         - 18th
         answer: 16th
         why: 'One row down is one week later: 9 + 7 = 16.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Pick any date n. Step 2: The date to its right is n + 1; the date below is n + 7. Step 3: A 2 × 2 square is n, n + 1, n + 7, n + 8. Step 4: Diagonals: n + (n + 8) and (n + 1) + (n + 7), both 2n + 8. Try it on any calendar.'
+      - style: real_world
+        teach: Ask a friend to box any 2 × 2 square on a calendar and tell you just the sum of one diagonal. Halve it and take away 4 to get the top-left date. They will think you are a mind reader.
     - teach: 'In a 2 × 2 square of dates, n, n + 1, n + 7, n + 8, the two diagonals always have the same sum: n + (n + 8) = (n + 1) + (n + 7) = 2n + 8. In a 3 × 3 block the nine dates add to 9 times the middle date, because the others pair up around it.'
       check:
         prompt: A 3 × 3 calendar block has 14 in the middle. What is the total of all 9 dates?
@@ -416,6 +493,24 @@ concepts:
         - '140'
         answer: '126'
         why: 9 × 14 = 126.
+      ways:
+      - style: visual
+        teach: Why a 3 × 3 calendar block adds to 9 times its middle date.
+        picture:
+          kind: compare
+          columns:
+          - title: Row above
+            points:
+            - m − 8, m − 7, m − 6
+          - title: Middle row
+            points:
+            - m − 1, m, m + 1
+          - title: Row below
+            points:
+            - m + 6, m + 7, m + 8
+          alt: Around a middle date m, the nine dates are m minus or plus 1, 6, 7 and 8 in pairs, which cancel out, so the nine dates add to 9m.
+      - style: step_by_step
+        teach: 'Step 1: Write each date in terms of the middle one, m. Step 2: Pair the dates opposite each other: (m − 8) and (m + 8), (m − 7) and (m + 7), and so on. Step 3: Each pair adds to 2m. Step 4: Four pairs plus m make 9m.'
     - teach: Algebra explains number tricks too. A two-digit number with digits a and b is 10a + b. Its reverse is 10b + a. Their sum is 11a + 11b = 11(a + b), always a multiple of 11. Their difference is 9(a − b), always a multiple of 9.
       picture:
         kind: flow
@@ -433,6 +528,11 @@ concepts:
         - '121'
         answer: '11'
         why: 74 + 47 = 11 × (7 + 4) = 121, and 121 ÷ 11 = 11.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: A two-digit number with digits a, b is 10a + b. Step 2: Its reverse is 10b + a. Step 3: Subtract: 9a − 9b = 9(a − b). Step 4: So 63 − 36 = 9 × 3 = 27: the difference is always 9 times the gap between the digits.'
+      - style: real_world
+        teach: Shopkeepers who check bills sometimes notice that a mistake from swapping two digits, such as writing 74 for 47, always makes the total wrong by a multiple of 9. This helps them find the error quickly.
   items:
   - prompt: On a calendar, what is the date directly below the 12th?
     answer: '19'
@@ -599,3 +699,52 @@ concepts:
       n + 7: c8m13_calendar_steps
       n + 2: c8m13_calendar_steps
       n + 14: c8m13_calendar_steps
+  - prompt: 'Assertion (A): A two-digit number added to its reverse always gives a multiple of 11.
+
+      Reason (R): (10a + b) + (10b + a) = 11(a + b).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The sum is 11 times a whole number, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A 3 × 3 block of dates on a calendar adds up to 189. What is the date in the middle, and what is the date in the top-left corner?'
+    options:
+    - Middle 21, top-left 13
+    - Middle 21, top-left 20
+    - Middle 63, top-left 55
+    answer: Middle 21, top-left 13
+    hints:
+    - The block adds to 9 times the middle date.
+    - Top-left is 8 less than the middle.
+    solution: 189 ÷ 9 = 21 is the middle; top-left is 21 − 8 = 13.
+    mistakes:
+      Middle 21, top-left 20: t8_calendar_block
+      Middle 63, top-left 55: t8_calendar_block
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A two-digit number minus its reverse is 54. What can you say about its digits?'
+    options:
+    - They differ by 6
+    - They add to 6
+    - They differ by 54
+    answer: They differ by 6
+    hints:
+    - The difference is 9(a − b).
+    - Divide 54 by 9.
+    solution: 9(a − b) = 54, so a − b = 6 (for example 71 − 17 = 54).
+    mistakes:
+      They add to 6: c8m13_two_digit
+      They differ by 54: t8_reverse_9
+    exam: competency
+    difficulty: 2

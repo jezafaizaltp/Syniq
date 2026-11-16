@@ -113,6 +113,23 @@ concepts:
         - It is perfectly round
         answer: Small parts look like the whole shape
         why: A fractal repeats the same pattern at smaller sizes, so each part is a mini copy of the whole.
+      ways:
+      - style: visual
+        teach: Where self-repeating patterns show up in nature.
+        picture:
+          kind: compare
+          columns:
+          - title: Plants
+            points:
+            - 'fern: each leaflet looks like the leaf'
+            - 'cauliflower: each floret like the head'
+          - title: Land and water
+            points:
+            - 'coastline: wiggles inside wiggles'
+            - 'rivers: branches split into smaller branches'
+          alt: Ferns and cauliflowers have parts that look like the whole, and coastlines and river networks repeat their wiggles and branches at smaller sizes.
+      - style: real_world
+        teach: 'Break off one floret of a cauliflower and look closely: it looks like a tiny cauliflower. Break a piece off that floret and it looks the same again. That is the self-similarity that defines a fractal.'
     - teach: 'The Sierpinski gasket: start with a filled triangle. Join the midpoints of the sides and remove the middle triangle, leaving 3 smaller triangles. Repeat on each one. After n steps there are 3ⁿ small triangles, and each step keeps 3/4 of the shaded area.'
       picture:
         kind: flow
@@ -130,6 +147,11 @@ concepts:
         - '4'
         answer: '9'
         why: 'Each step triples the number: 1 → 3 → 9.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start with 1 shaded triangle. Step 2: Each step turns every shaded triangle into 3 smaller ones. Step 3: So the count is multiplied by 3 each step: 1, 3, 9, … Step 4: After n steps there are 3ⁿ triangles, each with 1/4 of the area of the one before.'
+      - style: real_world
+        teach: Kolam and rangoli artists sometimes repeat a motif inside itself, drawing smaller copies of a pattern within each part. Some temple towers (gopurams) also repeat the shape of the whole tower in smaller towers on it.
     - teach: 'The Koch snowflake: start with a triangle. Replace the middle third of each side with two sides of a small bump, so each side becomes 4 sides, each one third as long. The number of sides is multiplied by 4 each step, and the perimeter by 4/3.'
       picture:
         kind: compare
@@ -153,6 +175,11 @@ concepts:
         - '24'
         answer: '48'
         why: 'Every side becomes 4 sides: 12 × 4 = 48.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Each Koch step turns every side into 4 sides. Step 2: Each new side is 1/3 as long. Step 3: So the perimeter is multiplied by 4/3 each time. Step 4: It keeps growing without limit, even though the snowflake fits inside a fixed circle.'
+      - style: real_world
+        teach: Measuring Kerala's coastline with a 1 km stick gives a shorter answer than with a 1 m stick, because the smaller stick follows more of the tiny bays and rocks. Like the Koch snowflake, the length depends on how closely you look.
   items:
   - prompt: In the Sierpinski gasket, how many shaded triangles are there after 4 steps?
     answer: '81'
@@ -322,6 +349,55 @@ concepts:
     mistakes:
       '15': c8m11_powers
       '125': c8m11_powers
+  - prompt: 'Assertion (A): The perimeter of the Koch snowflake grows at every step.
+
+      Reason (R): Each step multiplies the perimeter by 4/3.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Multiplying by 4/3, more than 1, makes it grow each time, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In the Sierpinski gasket, each step keeps 3/4 of the shaded area. If the first triangle has an area of 64 cm², what shaded area is left after 2 steps?'
+    options:
+    - 36 cm²
+    - 48 cm²
+    - 16 cm²
+    answer: 36 cm²
+    hints:
+    - Multiply by 3/4 twice.
+    - 64 × 3/4 = 48 after one step.
+    solution: 64 × 3/4 = 48, then 48 × 3/4 = 36 cm².
+    mistakes:
+      48 cm²: t8_fraction_steps
+      16 cm²: t8_fraction_steps
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student draws a pattern by repeating a shape side by side in a row. Is it a fractal?'
+    options:
+    - 'No: a fractal repeats the shape inside itself at smaller sizes'
+    - 'Yes: any repeating pattern is a fractal'
+    - 'Yes: if it has triangles'
+    answer: 'No: a fractal repeats the shape inside itself at smaller sizes'
+    hints:
+    - Do the copies get smaller?
+    - Does a small part look like the whole?
+    solution: A fractal's parts are smaller copies of the whole; a row of equal copies is just a repeating pattern.
+    mistakes:
+      'Yes: any repeating pattern is a fractal': t8_self_similar
+      'Yes: if it has triangles': t8_self_similar
+    exam: competency
+    difficulty: 2
 - code: cbse8m.geo.solids
   title: Solids, nets and views
   after:
@@ -432,6 +508,11 @@ concepts:
         - '12'
         answer: '8'
         why: 'F + V − E = 2: 5 + 5 − E = 2, so E = 8.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Count the faces (F) of a pentagonal pyramid: 6. Step 2: Count the vertices (V): 6. Step 3: Count the edges (E): 10. Step 4: Check Euler''s formula: F + V − E = 6 + 6 − 10 = 2.'
+      - style: real_world
+        teach: 'A cardboard box, a die and a Rubik''s cube are cuboids or cubes: 6 faces, 12 edges, 8 corners. A tent may be a triangular prism, and a packet of Toblerone chocolate is one too.'
     - teach: 'A net is a flat shape that folds up into a solid. A cube has 11 different nets made of 6 squares. Not every arrangement of 6 squares works: if two squares would fold onto the same side, it is not a net.'
       check:
         prompt: How many squares does every net of a cube have?
@@ -441,6 +522,25 @@ concepts:
         - '4'
         answer: '6'
         why: A cube has 6 faces, and each face is one square of the net.
+      ways:
+      - style: visual
+        teach: A cube net that works and one that does not.
+        picture:
+          kind: compare
+          columns:
+          - title: 'Works: cross shape'
+            points:
+            - a column of 4 squares
+            - one square on each side of the second
+            - folds into a closed cube
+          - title: 'Fails: 2×3 block'
+            points:
+            - 6 squares in a 2 by 3 rectangle
+            - two squares fold onto the same face
+            - leaves a gap
+          alt: A cross of a column of four squares with one square on each side folds into a cube; a two-by-three block of six squares does not, because squares overlap and a face is left open.
+      - style: real_world
+        teach: Sweet boxes and medicine cartons arrive at shops as flat sheets. Unfold one carefully and you will see its net, with small extra tabs that are glued to hold it closed.
     - teach: A solid looks different from different sides. From the front, a cylinder looks like a rectangle, but from the top it looks like a circle. A cone from the front is a triangle, and from the top a circle with a dot in the middle.
       picture:
         kind: compare
@@ -469,6 +569,11 @@ concepts:
         - A triangle
         answer: A rectangle
         why: From the front you see its height and width, which make a rectangle.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Imagine standing in front of the solid: draw what you see (front view). Step 2: Imagine looking straight down: draw the top view. Step 3: Look from one side: draw the side view. Step 4: A cuboid lying flat gives three rectangles of different sizes.'
+      - style: real_world
+        teach: Architects draw a building's front, side and top views (elevations and plan) so builders know exactly what to make. Your house plan from the panchayat or municipality is a top view.
   items:
   - prompt: How many edges does a cube have?
     answer: '12'
@@ -644,3 +749,52 @@ concepts:
     mistakes:
       '28': c8m11_euler_solve
       '4': c8m11_euler_solve
+  - prompt: 'Assertion (A): A solid with 8 faces and 12 vertices must have 18 edges.
+
+      Reason (R): For any polyhedron, F + V − E = 2.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 8 + 12 − E = 2 gives E = 18, so R explains A. A hexagonal prism is such a solid.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A solid has 12 faces and 30 edges. How many vertices must it have?'
+    options:
+    - '20'
+    - '18'
+    - '42'
+    answer: '20'
+    hints:
+    - Use F + V − E = 2.
+    - 12 + V − 30 = 2.
+    solution: V = 2 − 12 + 30 = 20.
+    mistakes:
+      '18': c8m11_euler_solve
+      '42': t8_euler
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: From the front a solid looks like a rectangle and from the top like a circle. What is it?'
+    options:
+    - A cylinder
+    - A cone
+    - A cube
+    answer: A cylinder
+    hints:
+    - Which solid has a circular top?
+    - Which of those looks like a rectangle from the side?
+    solution: A cylinder standing up looks like a rectangle from the front and a circle from above.
+    mistakes:
+      A cone: t8_front_view
+      A cube: t8_top_view
+    exam: competency
+    difficulty: 2

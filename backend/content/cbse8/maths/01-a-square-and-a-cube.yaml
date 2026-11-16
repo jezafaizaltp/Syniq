@@ -140,6 +140,11 @@ concepts:
         - '99'
         answer: '81'
         why: 9 × 9 = 81; squaring is not doubling.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take a number, say 8. Step 2: Multiply it by itself: 8 × 8 = 64. Step 3: Write it as 8². Step 4: Check with a picture: 8 rows of 8 dots make a square, so 64 is a square number.'
+      - style: real_world
+        teach: 'A chessboard has 8 rows and 8 columns of squares, so it has 8² = 64 small squares. Floor tiles laid in a square room form square numbers too: a 5-by-5 room needs 25 square tiles.'
     - teach: 'Squares follow patterns. A square number never ends in 2, 3, 7 or 8. The sum of the first n odd numbers is n²: 1 + 3 + 5 = 9 = 3². Between n² and (n + 1)² there are 2n whole numbers that are not squares.'
       check:
         prompt: Which of these could be a square number?
@@ -149,6 +154,26 @@ concepts:
         - 5,328
         answer: 1,296
         why: Squares never end in 7 or 8; 1,296 = 36².
+      ways:
+      - style: visual
+        teach: Adding odd numbers in L-shapes builds bigger and bigger squares.
+        picture:
+          kind: bars
+          unit: running total
+          bars:
+          - label: '1'
+            value: 1
+          - label: 1+3
+            value: 4
+          - label: 1+3+5
+            value: 9
+          - label: 1+3+5+7
+            value: 16
+          - label: …+9
+            value: 25
+          alt: 'Adding odd numbers gives 1, 4, 9, 16, 25: each new odd number adds an L-shaped border to the previous square.'
+      - style: step_by_step
+        teach: 'Step 1: Look at the last digit of the number. Step 2: If it is 2, 3, 7 or 8, it cannot be a square. Step 3: If not, it might be: check by finding a square root. Example: 5,438 ends in 8, so it is not a square, without any working.'
     - teach: 'The square root undoes squaring: √49 = 7 because 7² = 49. To find a square root, split the number into prime factors, pair equal primes, and take one from each pair. 324 = 2 × 2 × 3 × 3 × 3 × 3, so √324 = 2 × 3 × 3 = 18.'
       check:
         prompt: 784 = 2 × 2 × 2 × 2 × 7 × 7. What is √784?
@@ -158,6 +183,19 @@ concepts:
         - '392'
         answer: '28'
         why: 'One from each pair: 2 × 2 × 7 = 28.'
+      ways:
+      - style: visual
+        teach: Finding a square root by pairing prime factors.
+        picture:
+          kind: flow
+          steps:
+          - 576 = 2×2×2×2×2×2×3×3
+          - 'Pair them: (2×2)(2×2)(2×2)(3×3)'
+          - 'One from each pair: 2×2×2×3'
+          - √576 = 24
+          alt: 576 splits into six 2s and two 3s; pairing them and taking one from each pair gives 2 × 2 × 2 × 3 = 24, so the square root of 576 is 24.
+      - style: real_world
+        teach: 'A school wants a square flower bed of area 400 m². To fence it, they need the side: √400 = 20 m, so the fence is 4 × 20 = 80 m long. Square roots turn an area back into a length.'
   items:
   - prompt: Find 14².
     answer: '196'
@@ -331,6 +369,74 @@ concepts:
     mistakes:
       '4': t8_square_last_digit
       '8': c8m1_units
+  - prompt: 'Assertion (A): 2,738 is not a perfect square.
+
+      Reason (R): A perfect square never ends in 2, 3, 7 or 8.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 2,738 ends in 8, and squares never end in 8, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The square of an even number is odd.
+
+      Reason (R): The square of an odd number is odd.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: an even number squared is even (e.g. 6² = 36). R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A rangoli artist has 361 small lamps and wants to arrange them in a perfect square with none left over. How many lamps go in each row?'
+    options:
+    - '19'
+    - '18'
+    - '21'
+    answer: '19'
+    hints:
+    - You need the square root of 361.
+    - Try a number ending in 1 or 9 near 20.
+    solution: 19 × 19 = 361, so each row has 19 lamps.
+    mistakes:
+      '18': c8_root_not_half
+      '21': c8_root_not_half
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Riya claims that 1 + 3 + 5 + … + 19 is 100. Is she right, and why?'
+    options:
+    - 'Yes: it is the sum of the first 10 odd numbers, which is 10²'
+    - 'No: it is 19²'
+    - 'No: it is 2 × 19'
+    answer: 'Yes: it is the sum of the first 10 odd numbers, which is 10²'
+    hints:
+    - How many odd numbers are there from 1 to 19?
+    - The sum of the first n odd numbers is n².
+    solution: There are 10 odd numbers from 1 to 19, and their sum is 10² = 100.
+    mistakes:
+      'No: it is 19²': t8_odd_sum_square
+      'No: it is 2 × 19': c8_square_not_double
+    exam: competency
+    difficulty: 2
 - code: cbse8m.sq.cubes
   title: Cube numbers and cube roots
   after:
@@ -423,6 +529,26 @@ concepts:
         - '25'
         answer: '125'
         why: 5 × 5 × 5 = 125; cubing is not tripling.
+      ways:
+      - style: visual
+        teach: The first few cube numbers grow very quickly.
+        picture:
+          kind: bars
+          unit: n³
+          bars:
+          - label: 1³
+            value: 1
+          - label: 2³
+            value: 8
+          - label: 3³
+            value: 27
+          - label: 4³
+            value: 64
+          - label: 5³
+            value: 125
+          alt: Cube numbers 1, 8, 27, 64 and 125 rise steeply as the edge grows from 1 to 5.
+      - style: real_world
+        teach: A Rubik's cube is a 3-by-3-by-3 block, built from 3³ = 27 small cubes (one hidden in the middle). A bigger 4-by-4-by-4 puzzle needs 4³ = 64 little cubes.
     - teach: 'The cube root undoes cubing: ∛125 = 5. Split the number into primes and group equal primes in threes; take one from each group. 3375 = 3 × 3 × 3 × 5 × 5 × 5, so ∛3375 = 3 × 5 = 15.'
       picture:
         kind: flow
@@ -440,6 +566,11 @@ concepts:
         - '49'
         answer: '14'
         why: 'One from each triple: 2 × 7 = 14.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Split the number into primes. Example: 10648 = 2×2×2×11×11×11. Step 2: Group equal primes in threes: (2×2×2)(11×11×11). Step 3: Take one from each group: 2 × 11. Step 4: ∛10648 = 22.'
+      - style: real_world
+        teach: A water tank shaped like a cube holds 8000 litres, which is 8 cubic metres. Its edge is ∛8 = 2 m. Engineers use cube roots like this to turn a volume back into a length.
     - teach: 'If a prime is short of a full triple, the number is not a perfect cube. To make it one, multiply (or divide) by the missing primes. 1729 is the famous Hardy–Ramanujan number: the smallest number that is a sum of two cubes in two different ways, 1³ + 12³ and 9³ + 10³.'
       check:
         prompt: What must 32 = 2⁵ be multiplied by to become a perfect cube?
@@ -449,6 +580,20 @@ concepts:
         - '8'
         answer: '2'
         why: 2⁵ × 2 = 2⁶ = 64 = 4³.
+      ways:
+      - style: visual
+        teach: Making 1372 into a perfect cube by filling in the missing prime.
+        picture:
+          kind: flow
+          steps:
+          - 1372 = 2×2 × 7×7×7
+          - '7s: one full triple'
+          - '2s: only two, one short'
+          - 'Multiply by 2: 2744'
+          - 2744 = 14³
+          alt: 1372 is two 2s and three 7s; the 2s are one short of a triple, so multiplying by 2 gives 2744, which is 14 cubed.
+      - style: step_by_step
+        teach: 'Step 1: Factorise into primes. Step 2: Group equal primes in threes. Step 3: Any prime left in a group smaller than three shows what is missing. Step 4: Multiply by the missing primes to make a cube, or divide by the leftover ones.'
   items:
   - prompt: Find 6³.
     answer: '216'
@@ -606,3 +751,71 @@ concepts:
     mistakes:
       '2': c8_cube_not_triple
       '4': c8_cube_not_triple
+  - prompt: 'Assertion (A): If the edge of a cube is tripled, its volume becomes 27 times as large.
+
+      Reason (R): Volume of a cube = edge³, and 3³ = 27.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. (3a)³ = 27a³, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The cube of an odd number is even.
+
+      Reason (R): The cube of an even number is even.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: odd × odd × odd is odd (e.g. 3³ = 27). R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A cube-shaped gift box is packed with 2197 small 1 cm cubes, filling it exactly. How long is each edge of the box?'
+    options:
+    - 13 cm
+    - 12 cm
+    - 14 cm
+    answer: 13 cm
+    hints:
+    - Edge = ∛volume.
+    - Which number ending in 3 cubes to end in 7?
+    solution: 13 × 13 × 13 = 2197, so the edge is 13 cm.
+    mistakes:
+      12 cm: t8_cube_root
+      14 cm: t8_cube_root
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Arun says 128 is a perfect cube because it is a power of 2. Is he right?'
+    options:
+    - 'No: 128 = 2⁷, and 7 twos cannot all be grouped in threes'
+    - 'Yes: every power of 2 is a cube'
+    - 'Yes: 128 = 4³'
+    answer: 'No: 128 = 2⁷, and 7 twos cannot all be grouped in threes'
+    hints:
+    - Write 128 as a power of 2.
+    - Can 7 be split evenly into threes?
+    solution: 128 = 2⁷; grouping in threes leaves one 2 over, so it is not a perfect cube (4³ = 64, 5³ = 125).
+    mistakes:
+      'Yes: every power of 2 is a cube': t8_complete_triples
+      'Yes: 128 = 4³': c8_cube_not_triple
+    exam: competency
+    difficulty: 2

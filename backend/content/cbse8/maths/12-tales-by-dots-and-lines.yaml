@@ -117,6 +117,11 @@ concepts:
         - '4'
         answer: '5'
         why: 2 + 4 + 9 = 15, and 15 ÷ 3 = 5.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Add all the values: 6 + 9 + 11 + 14 = 40. Step 2: Count them: 4. Step 3: Divide the sum by the count: 40 ÷ 4 = 10. Step 4: The mean is 10: if the total were shared equally, each value would be 10.'
+      - style: real_world
+        teach: Four friends bring ₹30, ₹50, ₹20 and ₹60 for a picnic and decide to pool it and share equally. The pool is ₹160, so each person's fair share is ₹40, the mean.
     - teach: 'The mean is a balance point. The distances of the values above it add up to the same as the distances below it. For 3, 5, 7, 9 with mean 6: below are 3 and 1 (total 4), above are 1 and 3 (total 4).'
       picture:
         kind: number_line
@@ -143,6 +148,11 @@ concepts:
         - '11'
         answer: '4'
         why: '4 is 3 below and 6 is 1 below: 3 + 1 = 4, matching 11, which is 4 above.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the mean of 2, 6, 7, 13: it is 7. Step 2: Distances below: 7 − 2 = 5 and 7 − 6 = 1, total 6. Step 3: Distances above: 13 − 7 = 6, total 6. Step 4: The totals balance, like a seesaw resting on the mean.'
+      - style: real_world
+        teach: Put coins on a ruler at the marks 2, 6, 7 and 13 cm. The ruler balances on a pencil placed at 7 cm, the mean. A coin far out on one side needs more coins on the other to balance it.
     - teach: 'Mean = sum ÷ count, so sum = mean × count. This finds a missing value: if 4 values have mean 10, they add to 40. Adding the same number to every value adds it to the mean. With a frequency table, multiply each value by its frequency, add, and divide by the total frequency.'
       check:
         prompt: 5 numbers have a mean of 8. What is their sum?
@@ -152,6 +162,26 @@ concepts:
         - '8'
         answer: '40'
         why: sum = mean × count = 8 × 5 = 40.
+      ways:
+      - style: visual
+        teach: Finding the mean from a frequency table of goals scored.
+        picture:
+          kind: compare
+          columns:
+          - title: Goals × matches
+            points:
+            - 0 goals × 2 matches = 0
+            - 1 goal × 4 matches = 4
+            - 2 goals × 3 matches = 6
+            - 3 goals × 1 match = 3
+          - title: Totals
+            points:
+            - 'goals: 0 + 4 + 6 + 3 = 13'
+            - 'matches: 2 + 4 + 3 + 1 = 10'
+            - 'mean: 13 ÷ 10 = 1.3 goals'
+          alt: Multiply each goal count by the number of matches and add to get 13 goals in 10 matches, so the mean is 1.3 goals a match.
+      - style: step_by_step
+        teach: 'Step 1: Use sum = mean × count. Step 2: If 5 values have mean 18, their sum is 90. Step 3: If four of them add to 70, the fifth is 90 − 70 = 20. Step 4: Check: the new mean is 90 ÷ 5 = 18.'
   items:
   - prompt: Find the mean of 4, 8, 6, 10 and 12.
     answer: '8'
@@ -314,6 +344,55 @@ concepts:
     mistakes:
       '160': c8_mean_divide
       '40': c8m12_count
+  - prompt: 'Assertion (A): If 5 is added to every value in a set, the mean goes up by 5.
+
+      Reason (R): The sum goes up by 5 times the count, and dividing by the count gives 5 more.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The extra 5n in the sum gives an extra 5 in the mean, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A shop sold 42, 38, 51, 45 and 49 kg of rice on five days. What was the mean sale per day?'
+    options:
+    - 45 kg
+    - 225 kg
+    - 44 kg
+    answer: 45 kg
+    hints:
+    - Add the five sales.
+    - Divide by 5.
+    solution: 42 + 38 + 51 + 45 + 49 = 225; 225 ÷ 5 = 45 kg.
+    mistakes:
+      225 kg: c8_mean_divide
+      44 kg: c8m12_count
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: The mean height of 4 plants is 30 cm. A fifth plant is added and the mean becomes 32 cm. How tall is the fifth plant?'
+    options:
+    - 40 cm
+    - 32 cm
+    - 2 cm
+    answer: 40 cm
+    hints:
+    - Old total = 4 × 30.
+    - New total = 5 × 32.
+    solution: Old total 120, new total 160, so the fifth plant is 160 − 120 = 40 cm.
+    mistakes:
+      32 cm: t8_mean_unknown
+      2 cm: c8m12_new_total
+    exam: competency
+    difficulty: 2
 - code: cbse8m.data.median
   title: The median, and mean versus median
   after:
@@ -391,6 +470,11 @@ concepts:
         - '16'
         answer: '6'
         why: 'In order: 2, 6, 8. The middle one is 6.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Put the values in order: 12, 4, 9, 15, 7 → 4, 7, 9, 12, 15. Step 2: Count them: 5. Step 3: The middle position is (5 + 1) ÷ 2 = 3rd. Step 4: The median is 9.'
+      - style: real_world
+        teach: 'Line up five friends by height: the one standing in the middle has the median height. Two are shorter and two are taller, whatever their exact heights are.'
     - teach: 'With an even number of values there are two middle ones. The median is halfway between them: add them and halve. For 2, 4, 6, 10 the middle two are 4 and 6, so the median is 5.'
       check:
         prompt: Find the median of 3, 5, 9, 11.
@@ -400,6 +484,27 @@ concepts:
         - '9'
         answer: '7'
         why: The middle two are 5 and 9, and (5 + 9) ÷ 2 = 7.
+      ways:
+      - style: visual
+        teach: 'Median of an even number of values: halfway between the middle two.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 12
+          points:
+          - at: 3
+            label: '3'
+          - at: 5
+            label: '5'
+          - at: 9
+            label: '9'
+          - at: 11
+            label: '11'
+          - at: 7
+            label: median 7
+          alt: For 3, 5, 9 and 11, the two middle values are 5 and 9, and the median, 7, is halfway between them on the number line.
+      - style: step_by_step
+        teach: 'Step 1: Order the data. Step 2: With an even count, find the two middle values: for 6 values, the 3rd and 4th. Step 3: Add them and halve. Example: 2, 5, 8, 12, 14, 20 → (8 + 12) ÷ 2 = 10.'
     - teach: One very large or very small value can drag the mean a long way, but hardly moves the median. For 3, 4, 5, 6, 100 the mean is 23.6, but the median is 5, which is more typical. That is why median incomes are often reported.
       picture:
         kind: compare
@@ -421,6 +526,11 @@ concepts:
         - Both change equally
         answer: The median
         why: The median depends only on the middle position, so one extreme value barely changes it.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the mean and the median. Step 2: Is there one value far from the others? Step 3: If so, the mean is pulled towards it but the median barely moves. Step 4: Choose the median as the typical value when there are extreme values.'
+      - style: real_world
+        teach: In a cricket team, ten players score between 10 and 40 runs and one scores 150. The mean makes the team look stronger than most players were; the median gives a fairer picture of a typical player.
   items:
   - prompt: Find the median of 7, 2, 9, 4, 6.
     answer: '6'
@@ -586,3 +696,52 @@ concepts:
     mistakes:
       '8': t8_median_even
       '16': t8_median_even
+  - prompt: 'Assertion (A): The median is a better typical value than the mean for the data 2, 3, 4, 5, 90.
+
+      Reason (R): One extreme value pulls the mean far from most of the data.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The mean is 20.8 but the median is 4, closer to most values; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The daily rainfall (mm) in a week was 0, 4, 12, 0, 3, 25, 6. Find the median rainfall.'
+    options:
+    - 4 mm
+    - 0 mm
+    - 7.1 mm
+    answer: 4 mm
+    hints:
+    - Put the 7 values in order first.
+    - The middle position is the 4th.
+    solution: 'In order: 0, 0, 3, 4, 6, 12, 25. The 4th value is 4 mm.'
+    mistakes:
+      0 mm: c8_median_order
+      7.1 mm: c8m12_middle_position
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: The marks of 6 students are 35, 40, 42, 48, 50, 95. A teacher wants one number to describe a typical student. Which is better, and why?'
+    options:
+    - The median, 45, because 95 pulls the mean up
+    - The mean, 51.7, because it uses every mark
+    - The highest mark, 95
+    answer: The median, 45, because 95 pulls the mean up
+    hints:
+    - Is any mark far from the others?
+    - Which measure is less affected by it?
+    solution: Median = (42 + 48) ÷ 2 = 45. The mean, about 51.7, is pulled up by 95, so the median is more typical.
+    mistakes:
+      The mean, 51.7, because it uses every mark: t8_outlier_mean
+      The highest mark, 95: c8_median_order
+    exam: competency
+    difficulty: 2

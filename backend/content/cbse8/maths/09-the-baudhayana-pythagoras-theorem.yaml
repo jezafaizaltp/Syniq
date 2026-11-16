@@ -141,6 +141,11 @@ concepts:
         - Either side next to the right angle
         answer: The side opposite the right angle
         why: The hypotenuse is opposite the right angle, and it is always the longest side.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the right angle. Step 2: The side across from it is the hypotenuse, the longest side. Step 3: Square each of the three sides. Step 4: Check that the two smaller squares add up to the biggest. Example: 28, 45, 53 → 784 + 2025 = 2809 = 53².'
+      - style: real_world
+        teach: Masons check that a wall corner is square by marking 60 cm along one wall and 80 cm along the other. If the gap between the marks is exactly 100 cm, the corner is a right angle, since 60² + 80² = 100².
     - teach: 'To find the hypotenuse, square the two shorter sides, add, and take the square root. Legs 5 and 12: 25 + 144 = 169, so the hypotenuse is √169 = 13. To find a shorter side, subtract: hypotenuse² − other side².'
       picture:
         kind: flow
@@ -158,6 +163,11 @@ concepts:
         - '16'
         answer: '8'
         why: 10² − 6² = 100 − 36 = 64, and √64 = 8.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is the missing side the hypotenuse? Add the squares of the other two. Step 2: Is it a shorter side? Subtract: hypotenuse² − other side². Step 3: Take the square root. Example: hypotenuse 25, one leg 20: 625 − 400 = 225, so the other leg is 15.'
+      - style: real_world
+        teach: A fire brigade ladder must reach a window 16 m high, with its foot 12 m from the building for safety. The ladder must be √(256 + 144) = √400 = 20 m long. Rescue teams work this out before they set up.
     - teach: 'Baudhayana wrote this rule in the Sulba Sutras, around 800 BCE, for the diagonal of a rectangle: the diagonal makes a right triangle with two sides. It also works backwards: if a² + b² = c², the triangle has a right angle. Builders used a rope with 3, 4 and 5 equal parts to make a right angle.'
       check:
         prompt: Do sides 6, 8 and 11 make a right triangle?
@@ -167,6 +177,19 @@ concepts:
         - Yes, every triangle does
         answer: No, 6² + 8² is 100, not 121
         why: 36 + 64 = 100, but 11² = 121, so there is no right angle.
+      ways:
+      - style: visual
+        teach: 'Using the converse: is this triangle right-angled?'
+        picture:
+          kind: flow
+          steps:
+          - Sides 11, 60, 61
+          - 'Square the two shorter: 121 + 3600 = 3721'
+          - 'Square the longest: 61² = 3721'
+          - Equal, so the angle opposite 61 is 90°
+          alt: For sides 11, 60 and 61, the squares of the two shorter sides add to 3721, which equals 61 squared, so the triangle has a right angle opposite the longest side.
+      - style: real_world
+        teach: The Sulba Sutras were written to help build fire altars of exact shapes and sizes. Priests stretched ropes with pegs to lay out right angles and diagonals, using this rule more than 2,500 years ago.
   items:
   - prompt: A right triangle has legs 6 cm and 8 cm. Find the hypotenuse, in cm.
     answer: '10'
@@ -335,6 +358,74 @@ concepts:
     mistakes:
       No, because 20 + 21 ≠ 29: c8_pyth_add_sides
       No, because 29 is too long: c8m9_longest_last
+  - prompt: 'Assertion (A): A triangle with sides 33 cm, 56 cm and 65 cm is right-angled.
+
+      Reason (R): 33² + 56² = 65².'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 1089 + 3136 = 4225 = 65², and by the converse the triangle is right-angled; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In a right triangle, the hypotenuse is the shortest side.
+
+      Reason (R): The hypotenuse is opposite the right angle.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the hypotenuse is the longest side. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A kite is flying on a string 50 m long. The kite is directly above a point 30 m away from the person holding it. How high is the kite?'
+    options:
+    - 40 m
+    - 20 m
+    - 58 m
+    answer: 40 m
+    hints:
+    - The string is the hypotenuse.
+    - Height² = 50² − 30².
+    solution: 2500 − 900 = 1600, and √1600 = 40, so the kite is 40 m high.
+    mistakes:
+      20 m: c8_pyth_add_sides
+      58 m: t8_pyth_leg
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A carpenter makes a rectangular frame 30 cm by 40 cm and measures one diagonal as 52 cm. What should the carpenter conclude?'
+    options:
+    - 'The corners are not right angles: the diagonal should be 50 cm'
+    - The frame is perfect
+    - The diagonal should be 70 cm
+    answer: 'The corners are not right angles: the diagonal should be 50 cm'
+    hints:
+    - Find the diagonal of a true 30 × 40 rectangle.
+    - √(900 + 1600).
+    solution: A true rectangle would have diagonal √2500 = 50 cm, so the frame is not square at the corners.
+    mistakes:
+      The frame is perfect: t8_pyth_test
+      The diagonal should be 70 cm: c8_pyth_add_sides
+    exam: competency
+    difficulty: 2
 - code: cbse8m.pyth.triples
   title: Integer right triangles and doubling a square
   after:
@@ -433,6 +524,11 @@ concepts:
         - Only for squares
         answer: 'Yes'
         why: 36 + 64 = 100 = 10². It is (3, 4, 5) doubled.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take three whole numbers, smallest first. Step 2: Square the two smaller ones and add. Step 3: Square the largest. Step 4: If the results match, it is a triple. Example: 12, 35, 37 → 144 + 1225 = 1369 = 37².'
+      - style: real_world
+        teach: Ancient Egyptian builders are said to have used a rope with 12 equal knots, pegged as a 3-4-5 triangle, to mark square corners. Farmers in India still check field corners with a similar rope trick.
     - teach: 'Multiply a triple by any whole number and you get another: (3, 4, 5) × 3 = (9, 12, 15). To make new triples, pick whole numbers m > n and work out m² − n², 2mn and m² + n². With m = 2, n = 1 you get (3, 4, 5).'
       picture:
         kind: flow
@@ -450,6 +546,11 @@ concepts:
         - 10, 24, 13
         answer: 10, 24, 26
         why: All three numbers are doubled.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Pick m and n with m > n, say m = 7, n = 2. Step 2: m² − n² = 49 − 4 = 45. Step 3: 2mn = 28. Step 4: m² + n² = 53. Step 5: Check: 45² + 28² = 2025 + 784 = 2809 = 53².'
+      - style: real_world
+        teach: Computer games and design software use triples to place objects on a grid with exact whole-number distances, so a character moving 12 squares across and 16 up travels exactly 20 squares.
     - teach: 'The square drawn on the diagonal of a square has twice its area. That is how Baudhayana doubled a square: to get a square of area 2, draw the square on the diagonal of a square of area 1. Its side is √2, which is not a whole number.'
       check:
         prompt: A square has area 9 cm². What is the area of the square on its diagonal?
@@ -459,6 +560,23 @@ concepts:
         - 12 cm²
         answer: 18 cm²
         why: diagonal² = 3² + 3² = 18, so the square on the diagonal has area 18 cm².
+      ways:
+      - style: visual
+        teach: Doubling a square by drawing a new square on its diagonal.
+        picture:
+          kind: compare
+          columns:
+          - title: Original square
+            points:
+            - side 3 cm
+            - area 9 cm²
+          - title: Square on its diagonal
+            points:
+            - side = diagonal = √18 cm
+            - area 18 cm², twice as much
+          alt: A square of side 3 cm has area 9 square cm; the square drawn on its diagonal has side root 18 and area 18 square cm, exactly double.
+      - style: step_by_step
+        teach: 'Step 1: Let the square have side s. Step 2: The diagonal makes a right triangle with legs s and s. Step 3: Diagonal² = s² + s² = 2s². Step 4: The square on the diagonal has area 2s², twice the original.'
   items:
   - prompt: Which set is a Baudhayana–Pythagoras triple?
     options:
@@ -629,3 +747,52 @@ concepts:
     mistakes:
       '68': c8_pyth_add_sides
       '13': c8m9_multiply_all
+  - prompt: 'Assertion (A): (15, 20, 25) is a Baudhayana–Pythagoras triple.
+
+      Reason (R): It is (3, 4, 5) multiplied by 5.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Multiplying a triple by a whole number gives a triple, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Using m = 6 and n = 1 in (m² − n², 2mn, m² + n²), find the triple.'
+    options:
+    - (35, 12, 37)
+    - (36, 12, 37)
+    - (35, 6, 37)
+    answer: (35, 12, 37)
+    hints:
+    - m² − n² = 36 − 1.
+    - 2mn = 2 × 6 × 1.
+    solution: '36 − 1 = 35, 2 × 6 × 1 = 12, 36 + 1 = 37: (35, 12, 37). Check: 1225 + 144 = 1369 = 37².'
+    mistakes:
+      (36, 12, 37): t8_rope_345
+      (35, 6, 37): t8_rope_345
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Raju says (5, 6, 7) is a triple because the numbers are consecutive, like (3, 4, 5). Is he right?'
+    options:
+    - 'No: 25 + 36 = 61, but 7² = 49'
+    - 'Yes: consecutive numbers always work'
+    - 'Yes: 5 + 6 > 7'
+    answer: 'No: 25 + 36 = 61, but 7² = 49'
+    hints:
+    - Test with squares, not by pattern.
+    - Compare 5² + 6² with 7².
+    solution: 5² + 6² = 61 and 7² = 49; they are not equal, so it is not a triple.
+    mistakes:
+      'Yes: consecutive numbers always work': t8_pyth_test
+      'Yes: 5 + 6 > 7': c8_pyth_add_sides
+    exam: competency
+    difficulty: 2
