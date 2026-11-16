@@ -118,6 +118,11 @@ concepts:
         - '7'
         answer: '11'
         why: There is a gap before it, and only one dot.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Ask a question: how many books did each of us read this month? Step 2: Collect the answers: 2, 3, 3, 4, 3, 2, 9. Step 3: Draw a number line and put one dot above each answer. Step 4: Read the plot: a cluster from 2 to 4, a gap, and 9 standing alone as an outlier.'
+      - style: real_world
+        teach: A shoe-shop owner notes the size of every pair sold. A quick dot plot shows tall piles of dots at sizes 6 and 7, so those sizes are ordered most. Numbers only start to help once they are organised.
     - teach: 'The mean (average) is the fair share: add all the values and divide by how many there are. Heights 140, 145, 150, 145 cm: total 580, and 580 ÷ 4 = 145 cm.'
       picture:
         kind: bars
@@ -140,6 +145,11 @@ concepts:
         - '8'
         answer: '6'
         why: 18 ÷ 3 = 6.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: The marks are 6, 9, 4 and 5. Step 2: Add them: 24. Step 3: Count them: 4 values. Step 4: Divide: 24 ÷ 4 = 6. The mean mark is 6.'
+      - style: real_world
+        teach: 'Three friends have 2, 5 and 8 sweets. They pool all 15 and share them equally: 5 each. The mean is what everyone would get if the total were shared out fairly.'
     - teach: 'Total = mean × number of values. If 5 test scores have a mean of 7, they add to 35. If four of them add to 27, the fifth is 8. One outlier can drag the mean: 3, 4, 5 has mean 4, but 3, 4, 5, 40 has mean 13.'
       check:
         prompt: The mean of 6 numbers is 5. What is their total?
@@ -149,6 +159,19 @@ concepts:
         - '1'
         answer: '30'
         why: 6 × 5 = 30.
+      ways:
+      - style: visual
+        teach: Working backwards from a mean to find a value that is missing.
+        picture:
+          kind: flow
+          steps:
+          - 4 friends have a mean of 9 marbles
+          - Total = 4 × 9 = 36
+          - 'Three of them have 7, 10 and 6: that is 23'
+          - The fourth has 36 − 23 = 13
+          alt: Four friends with a mean of 9 marbles have 36 in total; three of them have 23, so the fourth has 13.
+      - style: real_world
+        teach: Four friends earn ₹100 each washing cars, and a fifth earns ₹600 for a bigger job. The mean is 1,000 ÷ 5 = ₹200, twice what four of the five actually got. One far-off value drags the mean.
   items:
   - prompt: Find the mean of 6, 8, 7, 9 and 10.
     answer: '8'
@@ -340,6 +363,74 @@ concepts:
     mistakes:
       It is always one of the data values: c7m13_share
       It is always the most common value: c7m13_share
+  - prompt: 'Assertion (A): The mean of 4, 6 and 11 is 7.
+
+      Reason (R): The mean is the sum of the values divided by the number of values.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 4 + 6 + 11 = 21 and 21 ÷ 3 = 7; R is the rule that gives A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The mean of a set of data is always one of the values in the set.
+
+      Reason (R): The mean is found by sharing the total equally among all the values.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the mean of 2 and 5 is 3.5, which is neither value. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A batter scores 32, 48, 51 and 29 runs in four matches. How many runs are needed in the fifth match for the mean of the five scores to be exactly 42?'
+    options:
+    - 50 runs
+    - 42 runs
+    - 210 runs
+    answer: 50 runs
+    hints:
+    - What must five scores total for a mean of 42?
+    - How many runs have been scored so far?
+    solution: 'Needed total = 5 × 42 = 210. So far: 32 + 48 + 51 + 29 = 160. Fifth score = 210 − 160 = 50.'
+    mistakes:
+      42 runs: c7m13_total
+      210 runs: c7m13_total
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Six students have a mean height of 150 cm. A new student of height 164 cm joins. A classmate says the mean becomes (150 + 164) ÷ 2 = 157 cm. What is the new mean really?'
+    options:
+    - 152 cm
+    - 157 cm
+    - 164 cm
+    answer: 152 cm
+    hints:
+    - Find the total height of the first six students.
+    - Add the new height and divide by the new number of students.
+    solution: 'Six students total 6 × 150 = 900 cm. With the new student: 1,064 cm for 7 students. 1,064 ÷ 7 = 152 cm.'
+    mistakes:
+      157 cm: c7m13_share
+      164 cm: c7m13_share
+    exam: competency
+    difficulty: 2
 - code: cbse7m.data.median
   title: The median and choosing a typical value
   after:
@@ -420,6 +511,11 @@ concepts:
         - '9'
         answer: '4'
         why: 'In order: 1, 4, 9. The middle is 4.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: The data are 14, 6, 10, 21, 8. Step 2: Put them in order: 6, 8, 10, 14, 21. Step 3: Cross off one from each end until one is left: 10. Step 4: The median is 10: two values lie below it and two above.'
+      - style: real_world
+        teach: Line up five children by height, shortest to tallest. The child standing in the middle has the median height. No adding or dividing is needed, only putting things in order.
     - teach: 'With an even number of values, the median is halfway between the two middle ones. 2, 5, 7, 12: the middle two are 5 and 7, so the median is (5 + 7) ÷ 2 = 6. The range, largest minus smallest, shows how spread out the data are: 12 − 2 = 10.'
       check:
         prompt: Find the median of 3, 4, 8, 10.
@@ -429,6 +525,28 @@ concepts:
         - '8'
         answer: '6'
         why: (4 + 8) ÷ 2 = 6.
+      ways:
+      - style: visual
+        teach: 'Four values on a number line: the median sits halfway between the two middle values, 6 and 10.'
+        picture:
+          kind: number_line
+          from: 2
+          to: 14
+          step: 1
+          points:
+          - at: 3
+            label: '3'
+          - at: 6
+            label: '6'
+          - at: 8
+            label: median 8
+          - at: 10
+            label: '10'
+          - at: 13
+            label: '13'
+          alt: The values 3, 6, 10 and 13 on a number line, with the median 8 marked halfway between the two middle values 6 and 10.
+      - style: step_by_step
+        teach: 'Step 1: A week''s temperatures are 24, 31, 27, 22, 29, 30 and 26 °C. Step 2: Find the largest: 31. Step 3: Find the smallest: 22. Step 4: Range = 31 − 22 = 9 °C: the week''s temperatures were spread over 9 degrees.'
     - teach: 'An outlier pulls the mean but not the median. Monthly pocket money: ₹50, 60, 70, 80, 1000. Mean = ₹252, which fits nobody. Median = ₹70, much more typical. Use the median when there are extreme values.'
       picture:
         kind: bars
@@ -447,6 +565,11 @@ concepts:
         - The largest price
         answer: The median
         why: The mansion pulls the mean up but barely moves the median.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: The ages at a birthday party are 7, 8, 8, 9 and a grandparent of 68. Step 2: Mean = 100 ÷ 5 = 20, but nobody at the party is near 20. Step 3: Median = 8, the middle value. Step 4: The median describes the typical guest better, because one extreme age pulls the mean.'
+      - style: real_world
+        teach: When newspapers report what a typical family earns, they often give the median income. A few very rich families would lift the mean far above what most families actually earn, but they hardly move the median.
   items:
   - prompt: Find the median of 3, 5, 7, 8, 12.
     answer: '7'
@@ -633,3 +756,71 @@ concepts:
     mistakes:
       '9': c7m13_two_middle
       '7': c7m13_two_middle
+  - prompt: 'Assertion (A): For the data 2, 3, 4, 5, 46, the median describes a typical value better than the mean.
+
+      Reason (R): An outlier changes the mean a lot but hardly changes the median.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The mean is 60 ÷ 5 = 12, larger than four of the five values, while the median is 4; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The median of 9, 2, 7 is 2, because 2 is written in the middle.
+
+      Reason (R): The data must be arranged in order before the median is found.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: in order the data are 2, 7, 9, so the median is 7. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The weekly wages of six people in a shop are ₹900, ₹950, ₹1,000, ₹1,100, ₹1,150 and ₹4,500 (the manager). Which statement is correct?'
+    options:
+    - The median, ₹1,050, is more typical than the mean, ₹1,600
+    - The mean, ₹1,600, is more typical because it uses every value
+    - The median is ₹1,000, the third value
+    answer: The median, ₹1,050, is more typical than the mean, ₹1,600
+    hints:
+    - With six values, which two are in the middle?
+    - Which measure does the manager's wage pull upwards?
+    solution: Median = (1,000 + 1,100) ÷ 2 = ₹1,050. Mean = 9,600 ÷ 6 = ₹1,600, more than five of the six wages. The median is more typical.
+    mistakes:
+      The mean, ₹1,600, is more typical because it uses every value: c7m13_far
+      The median is ₹1,000, the third value: c7m13_two_middle
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Seven students score 12, 15, 9, 20, 15, 11 and 16. One more student then scores 15. Does the median change?'
+    options:
+    - 'No: it stays 15'
+    - 'Yes: it becomes 15.5'
+    - 'Yes: it becomes 14'
+    answer: 'No: it stays 15'
+    hints:
+    - Order the seven scores and find the middle one.
+    - Add the new score, order again, and look at the two middle scores.
+    solution: 'In order: 9, 11, 12, 15, 15, 16, 20, median 15. With the extra 15, the two middle scores are both 15, so the median is still 15.'
+    mistakes:
+      'Yes: it becomes 15.5': c7m13_two_middle
+      'Yes: it becomes 14': c7m13_order
+    exam: competency
+    difficulty: 2

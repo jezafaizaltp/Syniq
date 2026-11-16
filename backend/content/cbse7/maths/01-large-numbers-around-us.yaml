@@ -141,6 +141,11 @@ concepts:
         - 456,78,912
         answer: 4,56,78,912
         why: First comma after 3 digits from the right (912), then every 2 digits.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the number without commas: 45607892. Step 2: From the right, mark off 3 digits: 45607,892. Step 3: Then mark off 2 digits at a time: 4,56,07,892. Step 4: Read each group: 4 crore 56 lakh 7 thousand 892.'
+      - style: real_world
+        teach: 'Indian newspapers use lakh and crore every day. A small car may cost ₹8,50,000: eight lakh fifty thousand rupees. India''s population is about 140 crore, written 1,40,00,00,000.'
     - teach: 'The international system puts commas every 3 digits: thousands, millions, billions. 1 million = 10 lakh, and 1 billion = 100 crore.'
       check:
         prompt: How many lakh make 5 million?
@@ -150,6 +155,27 @@ concepts:
         - '500'
         answer: '50'
         why: 1 million = 10 lakh, so 5 million = 50 lakh.
+      ways:
+      - style: visual
+        teach: The same numbers written with Indian commas and with international commas.
+        picture:
+          kind: compare
+          columns:
+          - title: Indian system
+            points:
+            - 1,00,000 = 1 lakh
+            - 10,00,000 = 10 lakh
+            - 1,00,00,000 = 1 crore
+            - 100,00,00,000 = 100 crore
+          - title: International system
+            points:
+            - 100,000 = 100 thousand
+            - 1,000,000 = 1 million
+            - 10,000,000 = 10 million
+            - 1,000,000,000 = 1 billion
+          alt: One lakh is 100 thousand, ten lakh is one million, one crore is ten million and 100 crore is one billion; only the commas and names differ.
+      - style: real_world
+        teach: A video marked '5M views' has been watched 5 million times, which is 50 lakh. The world has about 8 billion people, which is 800 crore. Websites and science books mostly use millions and billions.
     - teach: 'To compare large numbers, first count the digits: more digits means larger. If the digits are equal, compare from the left until two digits differ.'
       picture:
         kind: compare
@@ -170,6 +196,11 @@ concepts:
         - 7,89,999
         answer: 8,00,001
         why: Both have 6 digits; the lakh digit 8 beats 7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Compare 8,76,540 and 12,03,005. Step 2: Count the digits: 6 and 7. Step 3: Seven digits beat six, so 12,03,005 is larger, even though it starts with a smaller digit. Step 4: With equal counts, compare from the left: 4,56,210 and 4,58,100 agree in 4 and 5, then 6 < 8.'
+      - style: real_world
+        teach: 'In the 2011 census, Kerala had about 3,34,00,000 people and Tamil Nadu about 7,21,00,000. Both numbers have 8 digits, so compare from the left: 3 is less than 7, so Tamil Nadu had more people.'
   items:
   - prompt: How many zeros are there in one lakh?
     answer: '5'
@@ -342,6 +373,74 @@ concepts:
     mistakes:
       '9': c7m1_convert
       '999': c7m1_convert
+  - prompt: 'Assertion (A): 1 crore is equal to 10 million.
+
+      Reason (R): 1 million is 10 lakh, and 1 crore is 100 lakh.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 100 lakh ÷ 10 lakh = 10, so a crore is 10 million; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 99,99,999 is greater than 1,00,00,000.
+
+      Reason (R): A whole number with more digits is greater than one with fewer digits.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 99,99,999 has 7 digits and 1,00,00,000 has 8, so the second is greater. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: An Indian newspaper reports that a film earned ₹250 crore. A foreign website gives the same amount in billions of rupees. What does the website show?'
+    options:
+    - 2.5 billion
+    - 25 billion
+    - 0.25 billion
+    answer: 2.5 billion
+    hints:
+    - How many crore make one billion?
+    - Divide 250 by that number.
+    solution: 100 crore = 1 billion, so 250 crore = 250 ÷ 100 = 2.5 billion.
+    mistakes:
+      25 billion: c7m1_convert
+      0.25 billion: c7m1_convert
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Three towns have populations 9,87,650; 10,02,300 and 9,89,100. A student says 9,89,100 is the largest because it starts with 9. Which town is really the largest, and why?'
+    options:
+    - 10,02,300, because it has seven digits
+    - 9,89,100, because 9 is the biggest first digit
+    - 9,87,650, because it has the most large digits
+    answer: 10,02,300, because it has seven digits
+    hints:
+    - Count the digits in each number first.
+    - Only compare first digits when the counts are equal.
+    solution: 10,02,300 has 7 digits; the other two have 6. More digits means a larger number, so 10,02,300 is the largest.
+    mistakes:
+      9,89,100, because 9 is the biggest first digit: t7_compare_digits
+      9,87,650, because it has the most large digits: t7_compare_digits
+    exam: competency
+    difficulty: 2
 - code: cbse7m.large.estimate
   title: Estimating and rounding large numbers
   after:
@@ -416,6 +515,11 @@ concepts:
         - 48,800
         answer: 49,000
         why: The hundreds digit is 7, which is 5 or more, so round up.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Round 6,37,480 to the nearest ten thousand. Step 2: The ten-thousands digit is 3. Step 3: Look at the digit to its right: 7. Step 4: 7 is 5 or more, so the 3 becomes 4 and the digits after it become zeros: 6,40,000.'
+      - style: real_world
+        teach: A headline says 'About 60,000 fans filled the stadium' when 58,912 tickets were sold. The rounded figure is easier to remember and good enough for a reader. But the ticket office, counting money, still uses the exact 58,912.
     - teach: Estimation checks whether an answer makes sense. Round each number first, then calculate. 4,890 + 3,120 is about 5,000 + 3,000 = 8,000.
       check:
         prompt: Estimate 6,120 + 2,950 by rounding each to the nearest thousand.
@@ -425,6 +529,19 @@ concepts:
         - 10,000
         answer: 9,000
         why: 6,000 + 3,000 = 9,000.
+      ways:
+      - style: visual
+        teach: Using a quick estimate to check whether an exact answer is sensible.
+        picture:
+          kind: flow
+          steps:
+          - 'Sum to check: 6,820 + 2,190'
+          - 'Round each: 7,000 + 2,000'
+          - 'Estimate: about 9,000'
+          - Exact answer 9,010 is close, so it looks right
+          alt: To check 6,820 + 2,190, round to 7,000 + 2,000 = 9,000; the exact answer 9,010 is close to the estimate, so it is sensible.
+      - style: real_world
+        teach: 'Before paying at a shop, add roughly: items of ₹198, ₹305 and ₹492 come to about 200 + 300 + 500 = ₹1,000. If the bill says ₹1,950, something has probably been entered twice.'
     - teach: 'Friendly pairs make products easy: 5 × 2 = 10, 25 × 4 = 100, 125 × 8 = 1000. Rearrange the numbers so the friendly pair goes first: 25 × 37 × 4 = (25 × 4) × 37 = 3,700.'
       check:
         prompt: Find 4 × 63 × 25 quickly.
@@ -434,6 +551,19 @@ concepts:
         - 63,000
         answer: 6,300
         why: 4 × 25 = 100, and 100 × 63 = 6,300.
+      ways:
+      - style: visual
+        teach: Spot the friendly pair, multiply it first, and the rest is easy.
+        picture:
+          kind: flow
+          steps:
+          - 4 × 68 × 25
+          - 'Friendly pair: 4 and 25'
+          - (4 × 25) × 68
+          - 100 × 68 = 6,800
+          alt: In 4 × 68 × 25, multiply the friendly pair 4 × 25 = 100 first, then 100 × 68 = 6,800.
+      - style: step_by_step
+        teach: 'Step 1: Look for 5 and 2, 25 and 4, or 125 and 8. Step 2: In 8 × 13 × 125, the pair is 8 and 125. Step 3: Multiply the pair first: 1,000. Step 4: Then 1,000 × 13 = 13,000.'
   items:
   - prompt: Round 48,763 to the nearest thousand.
     answer: '49000'
@@ -596,3 +726,71 @@ concepts:
     mistakes:
       '470': t7_friendly_pair
       '47000': t7_friendly_pair
+  - prompt: 'Assertion (A): 4,62,000 rounded to the nearest lakh is 5,00,000.
+
+      Reason (R): When the digit to the right of the rounding place is 5 or more, we round up.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The ten-thousands digit is 6, which is 5 or more, so 4 lakh rounds up to 5 lakh; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 3,49,999 rounded to the nearest lakh is 4,00,000.
+
+      Reason (R): To round to the nearest lakh, we look at the ten-thousands digit.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the ten-thousands digit is 4, less than 5, so it rounds down to 3,00,000. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A hall has 48 rows with 62 chairs in each row. The manager wants a quick estimate of the number of seats. Which estimate is best?'
+    options:
+    - About 3,000
+    - About 300
+    - About 30,000
+    answer: About 3,000
+    hints:
+    - Round 48 and 62 to the nearest ten.
+    - Multiply the rounded numbers and count the zeros.
+    solution: 48 is about 50 and 62 is about 60. 50 × 60 = 3,000, so there are about 3,000 seats.
+    mistakes:
+      About 300: c7m1_zeros
+      About 30,000: c7m1_zeros
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Arun adds 7,820 and 6,150 on a calculator and the screen shows 73,970. Without redoing the sum, how can Arun tell it is wrong?'
+    options:
+    - Rounding gives about 8,000 + 6,000 = 14,000, so 73,970 is far too big
+    - The answer should end in 5
+    - A sum of two numbers can never have five digits
+    answer: Rounding gives about 8,000 + 6,000 = 14,000, so 73,970 is far too big
+    hints:
+    - Round each number to the nearest thousand.
+    - Compare the rough total with the screen.
+    solution: 7,820 is about 8,000 and 6,150 is about 6,000, so the sum is near 14,000. 73,970 is about five times too big, so a key was pressed wrongly.
+    mistakes:
+      The answer should end in 5: c7m1_estimate
+      A sum of two numbers can never have five digits: c7m1_estimate
+    exam: competency
+    difficulty: 2

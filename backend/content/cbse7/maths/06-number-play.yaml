@@ -108,6 +108,11 @@ concepts:
         - Odd
         answer: Even
         why: It ends in 6, so it splits into pairs exactly.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: To test 5,274, look only at its last digit. Step 2: It is 4. Step 3: 4 is one of 0, 2, 4, 6, 8, so 5,274 is even. Step 4: Why this works: the rest, 5,270, is a number of tens, and every ten splits into pairs.'
+      - style: real_world
+        teach: On many streets the houses on one side have odd numbers and those on the other side have even numbers. When a class lines up in pairs, 22 children pair up exactly; with 23, one child is left without a partner.
     - teach: 'When you add, the leftover ones decide. Odd + odd: the two leftovers make a new pair, so the sum is even. Even + odd: one leftover stays, so the sum is odd. For many numbers: the sum is odd exactly when there is an odd count of odd numbers.'
       picture:
         kind: compare
@@ -129,6 +134,11 @@ concepts:
         - Odd
         answer: Even
         why: 'Two odd numbers: the two leftovers pair up.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take 15 + 22 + 31. Step 2: Mark each number: odd, even, odd. Step 3: Count the odd ones: there are 2. Step 4: Their two leftovers make a pair, so the sum is even (it is 68).'
+      - style: real_world
+        teach: 'Two people each have an odd number of gloves, so each has one glove without a partner. Put all the gloves together and the two leftover gloves make a pair: odd + odd = even.'
     - teach: Parity solves puzzles without adding. Can 3 odd numbers add to 30? Three odds is an odd count of odds, so the sum is odd, and 30 is even. So it is impossible, whatever numbers you try.
       check:
         prompt: Can four odd numbers add up to 21?
@@ -138,6 +148,20 @@ concepts:
         - Yes, if the numbers are large
         answer: No, four odd numbers always give an even sum
         why: An even count of odd numbers gives an even sum, and 21 is odd. (6 is not odd.)
+      ways:
+      - style: visual
+        teach: Using leftovers to settle a puzzle without trying any numbers.
+        picture:
+          kind: flow
+          steps:
+          - 'Puzzle: can 4 odd numbers add to 35?'
+          - Each odd number leaves 1 over
+          - '4 leftovers make 2 pairs: nothing left over'
+          - So the sum is even
+          - '35 is odd: impossible'
+          alt: Four odd numbers leave four leftovers, which pair up, so their sum is even; 35 is odd, so four odd numbers can never add to 35.
+      - style: real_world
+        teach: 'A light is off. Each flick of the switch changes it. After 7 flicks you need not replay them one by one: 7 is odd, so the light has changed and is on. After any even number of flicks it is back where it started.'
   items:
   - prompt: Is 37 + 49 even or odd?
     options:
@@ -376,6 +400,74 @@ concepts:
     mistakes:
       a × b: c7m6_times
       b + b: c7m6_pairs
+  - prompt: 'Assertion (A): The sum of any two odd numbers is even.
+
+      Reason (R): Each odd number leaves one over, and the two leftovers make a pair.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The two leftover ones pair up, so nothing is left over and the sum is even; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The product of an odd number and an even number is odd.
+
+      Reason (R): A product is even if at least one of its factors is even.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: by R, one even factor makes the whole product even, for example 3 × 4 = 12. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Seven children each bring an odd number of sweets to a party. Rahim says the total could be 40. Is that possible?'
+    options:
+    - 'No: seven odd numbers always give an odd total'
+    - Yes, if the numbers are chosen carefully
+    - Yes, because 40 is much bigger than 7
+    answer: 'No: seven odd numbers always give an odd total'
+    hints:
+    - How many leftover ones are there altogether?
+    - Can seven leftovers all pair up?
+    solution: 'Seven odd numbers leave seven leftovers: three pairs and one over. So the total is odd, and 40 is even: it is impossible.'
+    mistakes:
+      Yes, if the numbers are chosen carefully: c7m6_count_odd
+      Yes, because 40 is much bigger than 7: c7m6_count_odd
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Without multiplying, decide whether 37 × 48 × 51 is even or odd.'
+    options:
+    - Even, because one factor, 48, is even
+    - Odd, because two of the three factors are odd
+    - It cannot be known without multiplying
+    answer: Even, because one factor, 48, is even
+    hints:
+    - 'Look at each factor: is any of them even?'
+    - What does one even factor do to a product?
+    solution: 48 splits into pairs exactly, so 37 × 48 × 51 does too. One even factor is enough to make a product even.
+    mistakes:
+      Odd, because two of the three factors are odd: c7m6_times
+      It cannot be known without multiplying: c7m6_times
+    exam: competency
+    difficulty: 2
 - code: cbse7m.play.patterns
   title: Magic squares and number patterns
   after:
@@ -505,6 +597,11 @@ concepts:
         - '16'
         answer: '15'
         why: 2 + 5 + 8 = 15, the magic sum.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Add 1 to 9: the total is 45. Step 2: Three rows share it equally: 45 ÷ 3 = 15 for each row. Step 3: Put 5 in the centre. Step 4: Cells opposite each other across the centre must then add to 10, such as 1 and 9 or 2 and 8.'
+      - style: real_world
+        teach: A 4 × 4 magic square called the Chautisa Yantra is carved on a temple wall at Khajuraho and is about a thousand years old. Every row, column and diagonal of its sixteen numbers adds to 34; 'chautis' means thirty-four.
     - teach: 'Virahanka numbers grow by adding the two numbers before: 1, 2, 3, 5, 8, 13, 21, 34, … They count the ways to fill a rhythm of n beats with short (1 beat) and long (2 beat) syllables. Virahanka described them centuries before Fibonacci.'
       picture:
         kind: flow
@@ -524,6 +621,11 @@ concepts:
         - '42'
         answer: '34'
         why: 13 + 21 = 34.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start with 1 and 2. Step 2: Add the last two numbers: 1 + 2 = 3. Step 3: Again: 2 + 3 = 5, then 3 + 5 = 8. Step 4: Keep going: every new number is the sum of the two just before it.'
+      - style: real_world
+        teach: 'Clap a rhythm of 3 beats using short claps (1 beat) and long claps (2 beats). There are exactly 3 ways: short-short-short, short-long and long-short. For 2 beats there are 2 ways. These counts are the Virahanka numbers.'
     - teach: 'Digit sums help with division. A number divides by 3 when its digit sum divides by 3, and by 9 when its digit sum divides by 9. 5,832: 5 + 8 + 3 + 2 = 18, which divides by 9, so 5,832 divides by 9.'
       check:
         prompt: Is 1,234 divisible by 3?
@@ -532,6 +634,20 @@ concepts:
         - 'Yes'
         answer: 'No'
         why: 1 + 2 + 3 + 4 = 10, and 10 does not divide by 3.
+      ways:
+      - style: visual
+        teach: Testing whether a number divides by 9 using only the sum of its digits.
+        picture:
+          kind: flow
+          steps:
+          - Is 7,362 divisible by 9?
+          - 'Add the digits: 7 + 3 + 6 + 2'
+          - Digit sum = 18
+          - 18 divides by 9
+          - So 7,362 divides by 9
+          alt: The digits of 7,362 add to 18, and 18 divides by 9, so 7,362 is divisible by 9.
+      - style: step_by_step
+        teach: 'Step 1: Take 4,512. Step 2: Add its digits: 4 + 5 + 1 + 2 = 12. Step 3: 12 divides by 3 but not by 9. Step 4: So 4,512 divides by 3 (it is 3 × 1,504) but does not divide by 9.'
   items:
   - prompt: What is the magic sum of a 3 × 3 magic square using 1 to 9?
     answer: '15'
@@ -724,3 +840,71 @@ concepts:
     mistakes:
       '21': c7m6_add_two
       '34': c7m6_add_two
+  - prompt: 'Assertion (A): The number 2,781 is divisible by 9.
+
+      Reason (R): A number is divisible by 9 when the sum of its digits is divisible by 9.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 2 + 7 + 8 + 1 = 18, which divides by 9, so by R the number divides by 9.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In a 3 × 3 magic square using 1 to 9, each row adds up to 45.
+
+      Reason (R): The numbers 1 to 9 add up to 45.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the total 45 is shared by three rows, so each row adds to 15. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A teacher writes the Virahanka numbers 1, 2, 3, 5, 8, 13, 21, 34 on the board and asks for the next two numbers. What are they?'
+    options:
+    - 55 and 89
+    - 55 and 68
+    - 47 and 60
+    answer: 55 and 89
+    hints:
+    - How is each number made from the ones before it?
+    - Use your first new number to find the second.
+    solution: 21 + 34 = 55, and 34 + 55 = 89.
+    mistakes:
+      55 and 68: c7m6_add_two
+      47 and 60: c7m6_add_two
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A shopkeeper wants to pack 1,236 sweets into boxes of 9 with none left over. Without dividing, can it be done?'
+    options:
+    - 'No: the digit sum is 12, which does not divide by 9'
+    - 'Yes: the digit sum is 12, which divides by 3'
+    - 'Yes: the number ends in 6'
+    answer: 'No: the digit sum is 12, which does not divide by 9'
+    hints:
+    - Add the digits of 1,236.
+    - Which number must the digit sum divide by for boxes of 9?
+    solution: '1 + 2 + 3 + 6 = 12. 12 does not divide by 9, so 1,236 does not either: some sweets would be left over.'
+    mistakes:
+      'Yes: the digit sum is 12, which divides by 3': c7m6_digits
+      'Yes: the number ends in 6': c7m6_digits
+    exam: competency
+    difficulty: 2

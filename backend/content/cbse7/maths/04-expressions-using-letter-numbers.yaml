@@ -18,6 +18,7 @@ tips:
   c7m4_like: Only terms with the same letter part combine. Add the numbers in front; leave the letter as it is.
   c7m4_bracket: Multiply the number outside by every term inside the bracket.
   c7m4_pattern: Put the step number in for n and work it out; check with a small case you can count.
+  pqc7m4_fixed: Which amount is paid only once, and which is paid again every time? Only the repeated amount is multiplied by the letter.
 concepts:
 - code: cbse7m.alg.write
   title: Writing expressions with letter-numbers
@@ -87,6 +88,27 @@ concepts:
         - 6 − p
         answer: 6p
         why: '6 boxes of p each: 6 × p = 6p.'
+      ways:
+      - style: visual
+        teach: The same idea written first in words and then with a letter-number.
+        picture:
+          kind: compare
+          columns:
+          - title: In words
+            points:
+            - 5 more than n
+            - 3 less than n
+            - twice n
+            - n shared among 4
+          - title: With letters
+            points:
+            - n + 5
+            - n − 3
+            - 2n
+            - n ÷ 4
+          alt: Five more than n is n + 5, three less than n is n − 3, twice n is 2n, and n shared among 4 is n ÷ 4.
+      - style: real_world
+        teach: 'A shop sells notebooks at ₹30 each. Nobody knows how many you will buy, so the bill is ''30 × the number of notebooks''. Calling that number n, the bill is 30n: ₹60 when n = 2 and ₹150 when n = 5.'
     - teach: 'Order matters for subtraction: ''subtract 4 from x'' is x − 4, but ''4 less than x'' is also x − 4, while ''x less than 4'' is 4 − x. To find the value of an expression, put in the number: if a = 4, 2a + 5 = 2 × 4 + 5 = 13.'
       picture:
         kind: flow
@@ -104,6 +126,11 @@ concepts:
         - '16'
         answer: '4'
         why: 2 × 3 = 6, then 10 − 6 = 4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: To find 3b − 4 when b = 6, write the expression. Step 2: Replace b with 6: 3 × 6 − 4. Step 3: Multiply first: 18 − 4. Step 4: Subtract: 14.'
+      - style: real_world
+        teach: '''5 less than your age'' and ''your age less than 5'' are different. If you are 12, the first is 12 − 5 = 7, but the second is 5 − 12, which cannot be done with counting numbers. The word order decides which number comes first.'
     - teach: Formulas use letters too. The perimeter of a square of side s is 4s; of a rectangle with length l and breadth b it is 2(l + b). A taxi fare of ₹50 plus ₹15 per km is 50 + 15k for k km.
       picture:
         kind: geometry
@@ -142,6 +169,11 @@ concepts:
         - '10'
         answer: '20'
         why: 6 + 4 = 10, and 2 × 10 = 20.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: An auto charges ₹30 to start and ₹10 for every km. Step 2: Fixed part: 30. Changing part: 10 × k. Step 3: Formula: fare = 30 + 10k. Step 4: For 6 km: 30 + 10 × 6 = ₹90.'
+      - style: real_world
+        teach: A library charges a fine of ₹2 for each day a book is late, so the fine for d days is 2d. A tailor charges ₹100 per shirt plus ₹50 for delivery, so n shirts cost 100n + 50. One formula covers every customer.
   items:
   - prompt: Which expression means '4 more than n'?
     options:
@@ -315,6 +347,74 @@ concepts:
     mistakes:
       '32': c7m4_sub
       '144': c7m4_sub
+  - prompt: 'Assertion (A): If one pen costs ₹8, then n pens cost ₹8n.
+
+      Reason (R): 8n means 8 multiplied by n.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The cost is 8 × the number of pens, and 8n is the short way to write 8 × n; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): ''x less than 10'' is written as x − 10.
+
+      Reason (R): In subtraction, the order of the two numbers matters.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: ''x less than 10'' starts from 10 and takes x away, so it is 10 − x. R is true, and it is why the order must be right.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A swimming pool charges a joining fee of ₹100 and then ₹40 for every visit. Which expression gives the cost of v visits, and what is the cost of 5 visits?'
+    options:
+    - 100 + 40v; ₹300
+    - 140v; ₹700
+    - 100v + 40; ₹540
+    answer: 100 + 40v; ₹300
+    hints:
+    - Which amount is paid once, and which for every visit?
+    - Put v = 5 into your expression.
+    solution: 'The fee of ₹100 is paid once and ₹40 is paid v times: 100 + 40v. For v = 5: 100 + 200 = ₹300.'
+    mistakes:
+      140v; ₹700: pqc7m4_fixed
+      100v + 40; ₹540: pqc7m4_fixed
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: For a = 3, a student works out 2a + 5 as 23 + 5 = 28. What is the correct value, and what was the slip?'
+    options:
+    - 11; 2a means 2 × a, not the digits 2 and 3 side by side
+    - 28; nothing is wrong
+    - 16; add first, then multiply
+    answer: 11; 2a means 2 × a, not the digits 2 and 3 side by side
+    hints:
+    - What does a number written next to a letter mean?
+    - Multiply before you add.
+    solution: 2a = 2 × 3 = 6, so 2a + 5 = 6 + 5 = 11. The student wrote the 3 beside the 2 instead of multiplying.
+    mistakes:
+      28; nothing is wrong: c7_letter_times
+      16; add first, then multiply: c7m4_sub
+    exam: competency
+    difficulty: 2
 - code: cbse7m.alg.simplify
   title: Simplifying expressions and patterns
   after:
@@ -406,6 +506,11 @@ concepts:
         - '5'
         answer: 5k
         why: 6 + 2 − 3 = 5, so 5k.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look at 4x + 7 + 2x. Step 2: Find the terms with the same letter part: 4x and 2x. Step 3: Add the numbers in front: 4 + 2 = 6, giving 6x. Step 4: The 7 has no x, so it stays as it is: 6x + 7.'
+      - style: real_world
+        teach: 2 mangoes and 4 mangoes make 6 mangoes, but 2 mangoes and 4 bananas stay as 2 mangoes and 4 bananas. Like terms are the same kind of fruit; unlike terms are different kinds and cannot be merged.
     - teach: 'Group like terms to simplify: 7a + 4 − 2a + 6 = (7a − 2a) + (4 + 6) = 5a + 10. Multiply a bracket out term by term: 3(x + 2) = 3x + 6.'
       check:
         prompt: Which equals 4(y − 3)?
@@ -415,6 +520,20 @@ concepts:
         - y − 12
         answer: 4y − 12
         why: 4 × y and 4 × 3 = 12.
+      ways:
+      - style: visual
+        teach: Simplifying by collecting the letter terms and the plain numbers separately.
+        picture:
+          kind: flow
+          steps:
+          - 6b + 9 − 2b − 4
+          - 'Group like terms: (6b − 2b) + (9 − 4)'
+          - 'Letter terms: 4b'
+          - 'Numbers: 5'
+          - 'Simplified: 4b + 5'
+          alt: In 6b + 9 − 2b − 4, the letter terms give 4b and the numbers give 5, so the expression simplifies to 4b + 5.
+      - style: real_world
+        teach: 'A teacher gives each of 4 groups x sheets of paper and 2 markers. Altogether that is 4(x + 2) = 4x + 8: four lots of paper and four lots of markers. The bracket is multiplied out term by term.'
     - teach: Patterns can be described with letters. A row of n matchstick squares needs 3n + 1 sticks; the nth odd number is 2n − 1. Two expressions are equal if they give the same value for every number, like 2(n + 3) and 2n + 6.
       picture:
         kind: bars
@@ -437,6 +556,11 @@ concepts:
         - '20'
         answer: '16'
         why: 3 × 5 + 1 = 16.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Build 1, 2 and 3 matchstick triangles in a row and count the sticks: 3, 5, 7. Step 2: Each new triangle adds 2 sticks. Step 3: So the rule is 2 × n plus the 1 stick that started the row: 2n + 1. Step 4: Check with n = 3: 2 × 3 + 1 = 7. It matches.'
+      - style: real_world
+        teach: 'A straight fence made of panels needs a post at each end of every panel. 1 panel needs 2 posts, 2 panels need 3 and 3 panels need 4: always one more than the panels. For n panels the builder orders n + 1 posts.'
   items:
   - prompt: Simplify 3n + 5n. What number goes in front of n?
     answer: '8'
@@ -618,3 +742,71 @@ concepts:
     mistakes:
       '21': c7m4_pattern
       '8': c7m4_pattern
+  - prompt: 'Assertion (A): 5x + 3x = 8x.
+
+      Reason (R): Like terms are added by adding the numbers in front of the same letter part.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 5x and 3x are like terms, and 5 + 3 = 8 gives 8x; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 2(n + 5) is equal to 2n + 5.
+
+      Reason (R): A number outside a bracket multiplies every term inside it.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: by the rule in R, 2(n + 5) = 2n + 10. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Square tables are joined in a row for a feast. One table seats 4 people, two joined tables seat 6 and three seat 8. Which rule gives the seats for n tables, and how many people do 15 tables seat?'
+    options:
+    - 2n + 2; 32 people
+    - 4n; 60 people
+    - 2n + 4; 34 people
+    answer: 2n + 2; 32 people
+    hints:
+    - How many seats does each extra table add?
+    - Check your rule with n = 1, 2 and 3 before using it.
+    solution: 'Each table adds 2 seats along its sides, plus 2 seats at the ends of the row: 2n + 2. For n = 15: 30 + 2 = 32.'
+    mistakes:
+      4n; 60 people: c7m4_pattern
+      2n + 4; 34 people: c7m4_pattern
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student simplifies 6x + 5 − 2x + 3 and writes 12x. What is the correct answer?'
+    options:
+    - 4x + 8
+    - 12x
+    - 8x + 8
+    answer: 4x + 8
+    hints:
+    - Collect the x terms first.
+    - Then collect the plain numbers. Can the two results be merged?
+    solution: 'x terms: 6x − 2x = 4x. Numbers: 5 + 3 = 8. They are unlike terms, so the answer is 4x + 8.'
+    mistakes:
+      12x: c7_unlike_terms
+      8x + 8: c7m4_like
+    exam: competency
+    difficulty: 2
