@@ -114,6 +114,33 @@ concepts:
         - '23'
         answer: '12'
         why: 23 − 11.
+      ways:
+      - style: visual
+        teach: The three particles of the atom, their charges and masses.
+        picture:
+          kind: compare
+          columns:
+          - title: Proton
+            points:
+            - charge +1
+            - mass ≈ 1 u
+            - in nucleus
+            - count = Z
+          - title: Neutron
+            points:
+            - charge 0
+            - mass ≈ 1 u
+            - in nucleus
+            - count = A − Z
+          - title: Electron
+            points:
+            - charge −1
+            - mass ≈ 1/1840 u
+            - outside nucleus
+            - count = Z (neutral)
+          alt: Protons have charge plus 1 and mass about 1 u; neutrons have no charge and mass about 1 u; electrons have charge minus 1 and tiny mass. Protons number Z, neutrons A minus Z.
+      - style: step_by_step
+        teach: 'Step 1: Z = number of protons. Step 2: Neutrons = A − Z. Step 3: Electrons = Z for a neutral atom; subtract the charge for an ion. Example: ²⁷Al³⁺ (Z = 13): 13 protons, 14 neutrons, 10 electrons.'
     - teach: 'Rutherford''s gold-foil experiment: most α-particles went straight through, a few bounced back. So the atom is mostly empty, with a tiny, dense, positive nucleus. His model could not explain why atoms are stable or why spectra have lines.'
       check:
         prompt: 'Most α-particles passing straight through the foil showed that the atom is:'
@@ -123,6 +150,25 @@ concepts:
         - negatively charged
         answer: mostly empty space
         why: Nothing was in their way.
+      ways:
+      - style: visual
+        teach: What Rutherford saw in the gold-foil experiment and what he concluded.
+        picture:
+          kind: compare
+          columns:
+          - title: Observation
+            points:
+            - most α-particles pass straight
+            - some deflect
+            - about 1 in 20,000 bounce back
+          - title: Conclusion
+            points:
+            - atom mostly empty space
+            - positive charge concentrated
+            - tiny, dense nucleus
+          alt: Most alpha particles passed straight through, so the atom is mostly empty; some were deflected and a very few bounced back, so the positive charge and mass sit in a tiny dense nucleus.
+      - style: real_world
+        teach: If an atom were the size of a cricket stadium, its nucleus would be about the size of a pea at the centre. That is why almost every α-particle Rutherford fired sailed straight through the gold foil.
     - teach: 'Bohr: electrons move in fixed orbits with fixed energies. For hydrogen Eₙ = −13.6/n² eV and rₙ = 52.9 n² pm. Light is emitted when an electron drops to a lower orbit. de Broglie: particles have wavelength λ = h/mv.'
       picture:
         kind: compare
@@ -146,6 +192,11 @@ concepts:
         - 17.6 pm
         answer: 476.1 pm
         why: 52.9 × 9.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Eₙ = −13.6/n² eV. Step 2: rₙ = 52.9 n² pm. Step 3: Photon energy = E_upper − E_lower. Example: n = 4 → n = 2: −0.85 − (−3.4) = 2.55 eV, a blue-green line. Step 4: de Broglie λ = h/mv: heavier or faster means shorter λ.'
+      - style: real_world
+        teach: 'Street lamps with sodium vapour glow a pure yellow-orange: the electrons can only drop between fixed energy levels, so only certain colours come out. Every element has its own set of lines, like a barcode, which is how astronomers tell what stars are made of.'
   items:
   - prompt: How many neutrons are in an atom with Z = 17 and A = 35?
     answer: '18'
@@ -321,6 +372,55 @@ concepts:
     mistakes:
       double: c11c02_bohr
       four times: c11c02_bohr
+  - prompt: 'Assertion (A): Isotopes of an element have the same chemical properties.
+
+      Reason (R): Chemical properties depend mainly on the number of electrons, which is the same for all isotopes of an element.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Isotopes differ only in neutrons; with the same electrons they react the same way, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Carbon-14, used to date old wood, has Z = 6 and A = 14. How many neutrons does it have?'
+    options:
+    - '8'
+    - '6'
+    - '14'
+    answer: '8'
+    hints:
+    - Neutrons = A − Z.
+    - 14 − 6.
+    solution: 14 − 6 = 8 neutrons.
+    mistakes:
+      '6': c11_neutrons
+      '14': c11c02_count
+    exam: case
+    difficulty: 2
+  - prompt: What is the energy of the photon emitted when an electron in hydrogen drops from n = 3 to n = 2?
+    options:
+    - 1.89 eV
+    - 1.51 eV
+    - 3.4 eV
+    answer: 1.89 eV
+    hints:
+    - Use Eₙ = −13.6/n² for n = 3 and n = 2.
+    - Photon energy = E₃ − E₂.
+    solution: −1.51 − (−3.4) = 1.89 eV (the red line of hydrogen).
+    mistakes:
+      1.51 eV: c11_bohr_energy
+      3.4 eV: c11c02_bohr
+    exam: short
+    difficulty: 2
 - code: cbse11c.atom.quantum
   title: Quantum numbers and electronic configuration
   after:
@@ -400,6 +500,23 @@ concepts:
         - 0, 1 and 2
         answer: 0 and 1
         why: l goes from 0 to n − 1.
+      ways:
+      - style: visual
+        teach: The four quantum numbers and what each one tells you.
+        picture:
+          kind: compare
+          columns:
+          - title: n and l
+            points:
+            - 'n = 1, 2, 3 …: shell, size'
+            - 'l = 0 to n − 1: shape (s p d f)'
+          - title: m and s
+            points:
+            - 'm = −l … +l: orientation'
+            - 's = +½ or −½: spin'
+          alt: n gives the shell and size, l from 0 to n minus 1 gives the shape, m from minus l to plus l gives the orientation, and s is the spin, plus or minus one half.
+      - style: real_world
+        teach: 'Quantum numbers work like a postal address: n is the city, l the street, m the house and s the room. No two electrons in an atom share the full address, which is Pauli''s rule.'
     - teach: A subshell has 2l + 1 orbitals (s 1, p 3, d 5, f 7). Each orbital holds 2 electrons with opposite spins (Pauli). A shell holds 2n² electrons.
       check:
         prompt: Maximum electrons in a p subshell?
@@ -409,6 +526,24 @@ concepts:
         - '2'
         answer: '6'
         why: 3 orbitals × 2.
+      ways:
+      - style: visual
+        teach: Orbitals per subshell and the most electrons each can hold.
+        picture:
+          kind: bars
+          unit: electrons
+          bars:
+          - label: 's: 1 orbital'
+            value: 2
+          - label: 'p: 3 orbitals'
+            value: 6
+          - label: 'd: 5 orbitals'
+            value: 10
+          - label: 'f: 7 orbitals'
+            value: 14
+          alt: An s subshell has 1 orbital holding 2 electrons, p has 3 holding 6, d has 5 holding 10, and f has 7 holding 14.
+      - style: step_by_step
+        teach: 'Step 1: Orbitals in a subshell = 2l + 1. Step 2: Electrons in a subshell = 2(2l + 1). Step 3: Orbitals in shell n = n². Step 4: Electrons in shell n = 2n². For n = 5: 25 orbitals, 50 electrons.'
     - teach: 'Filling order (Aufbau, lower n + l first): 1s 2s 2p 3s 3p 4s 3d 4p … Hund''s rule: fill orbitals of a subshell singly before pairing. Cr and Cu are exceptions (3d⁵4s¹, 3d¹⁰4s¹).'
       picture:
         kind: flow
@@ -430,6 +565,11 @@ concepts:
         - 1s² 2p⁴
         answer: 1s² 2s² 2p²
         why: 2 + 2 + 2.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find n + l for each subshell. Step 2: Fill the lowest n + l first; if tied, the lower n first. Step 3: Put 2 in s, 6 in p, 10 in d. Example: phosphorus (Z = 15): 1s² 2s² 2p⁶ 3s² 3p³, with 3 unpaired electrons by Hund''s rule.'
+      - style: real_world
+        teach: 'Passengers boarding an empty bus each take a separate double seat before anyone sits beside a stranger. Electrons filling p or d orbitals do the same: one in each first, with the same spin, and only then do they pair up. That is Hund''s rule.'
   items:
   - prompt: What is the maximum number of electrons in the n = 3 shell?
     answer: '18'
@@ -611,3 +751,52 @@ concepts:
     mistakes:
       '2': c11c02_qn
       '18': c11c02_qn
+  - prompt: 'Assertion (A): The 4s orbital is filled before the 3d orbital.
+
+      Reason (R): The 4s orbital has a lower (n + l) value than 3d.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 4s has n + l = 4 while 3d has 5; the lower n + l fills first, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A student writes the configuration of chromium (Z = 24) as [Ar] 3d⁴ 4s². What is the correct configuration?'
+    options:
+    - '[Ar] 3d⁵ 4s¹'
+    - '[Ar] 3d⁶'
+    - '[Ar] 3d⁴ 4s²'
+    answer: '[Ar] 3d⁵ 4s¹'
+    hints:
+    - Chromium is a known exception.
+    - Which arrangement gives a half-filled d subshell?
+    solution: 'A half-filled 3d⁵ is extra stable, so one 4s electron moves to 3d: [Ar] 3d⁵ 4s¹.'
+    mistakes:
+      '[Ar] 3d⁶': c11c_aufbau
+      '[Ar] 3d⁴ 4s²': c11_config
+    exam: competency
+    difficulty: 2
+  - prompt: How many orbitals have n = 3?
+    options:
+    - '9'
+    - '18'
+    - '3'
+    answer: '9'
+    hints:
+    - Orbitals in a shell = n².
+    - Or add 3s, 3p and 3d orbitals.
+    solution: n² = 9 (1 + 3 + 5).
+    mistakes:
+      '18': c11_shell_max
+      '3': c11c02_qn
+    exam: one_mark
+    difficulty: 2

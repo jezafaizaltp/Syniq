@@ -98,6 +98,19 @@ concepts:
         - is faster than the backward one
         answer: continues at the same rate as the backward one
         why: Dynamic balance.
+      ways:
+      - style: visual
+        teach: 'Approaching equilibrium: the forward rate falls, the backward rate rises, until they meet.'
+        picture:
+          kind: flow
+          steps:
+          - 'Start: only reactants, forward rate high'
+          - Products build up, backward rate grows
+          - Rates become equal
+          - 'Equilibrium: amounts steady, both reactions still running'
+          alt: At first only the forward reaction runs fast; as products form the backward reaction speeds up; when the two rates are equal the amounts stay steady, though both reactions keep going.
+      - style: real_world
+        teach: 'A busy railway platform at rush hour: people get on and off the train all the time, but if as many get on as get off each minute, the number of people on the train stays the same. Equilibrium is like that: busy, but balanced.'
     - teach: 'For aA + bB ⇌ cC + dD, Kc = [C]ᶜ[D]ᵈ / ([A]ᵃ[B]ᵇ). Large K favours products. Compare the reaction quotient Q with K: Q < K goes forward, Q > K goes backward.'
       check:
         prompt: 'Q = 2, K = 10. The reaction:'
@@ -107,6 +120,27 @@ concepts:
         - is at equilibrium
         answer: moves forward
         why: 'Q < K: more products needed.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write products over reactants, each raised to its coefficient. Step 2: Leave out pure solids and liquids. Step 3: Put in the concentrations. Example: N₂O₄ ⇌ 2NO₂ with [N₂O₄] = 0.2 and [NO₂] = 0.6: Kc = 0.6²/0.2 = 1.8.'
+      - style: visual
+        teach: Comparing Q with K tells you which way the reaction will go.
+        picture:
+          kind: compare
+          columns:
+          - title: Q < K
+            points:
+            - too few products
+            - goes forward
+          - title: Q = K
+            points:
+            - at equilibrium
+            - no net change
+          - title: Q > K
+            points:
+            - too many products
+            - goes backward
+          alt: If the reaction quotient Q is less than K the reaction goes forward; if equal it is at equilibrium; if greater it goes backward.
     - teach: 'Le Chatelier: a system at equilibrium shifts to oppose a change. Add reactant: shifts forward. Raise pressure: shifts to fewer gas moles. Heat: shifts the endothermic way. A catalyst only speeds both ways; K is unchanged.'
       picture:
         kind: compare
@@ -132,6 +166,11 @@ concepts:
         - nowhere
         answer: backward
         why: Backward is the endothermic direction.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Name the change: concentration, pressure, temperature or catalyst. Step 2: Ask how the system can undo it. Step 3: More pressure → side with fewer gas moles. Step 4: Heat → endothermic direction, and K itself changes. A catalyst changes neither the position nor K.'
+      - style: real_world
+        teach: 'Open a cold soda bottle and the pressure drops: the CO₂ ⇌ dissolved CO₂ equilibrium shifts towards gas and bubbles fizz out. Leave it in the sun and the warmer drink holds even less gas. Le Chatelier at work.'
   items:
   - prompt: For H₂ + I₂ ⇌ 2HI, [H₂] = [I₂] = 0.1 M and [HI] = 0.8 M. Find Kc.
     answer: '64'
@@ -316,6 +355,55 @@ concepts:
     mistakes:
       '2': c11c06_k
       '4': c11c06_k
+  - prompt: 'Assertion (A): Adding a catalyst does not change the equilibrium constant.
+
+      Reason (R): A catalyst speeds up the forward and backward reactions equally.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Because both rates rise equally, equilibrium is reached sooner but at the same position, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In the reaction PCl₅(g) ⇌ PCl₃(g) + Cl₂(g) (endothermic), which change increases the amount of Cl₂ at equilibrium?'
+    options:
+    - Raising the temperature
+    - Raising the pressure
+    - Adding a catalyst
+    answer: Raising the temperature
+    hints:
+    - Heat favours the endothermic direction.
+    - Which way has more gas moles?
+    solution: The forward reaction is endothermic, so heating shifts it forward and makes more Cl₂. Raising the pressure would shift it back to fewer moles.
+    mistakes:
+      Raising the pressure: c11_le_chatelier_p
+      Adding a catalyst: c11_catalyst
+    exam: case
+    difficulty: 2
+  - prompt: For 2SO₂(g) + O₂(g) ⇌ 2SO₃(g), what is the expression for Kc?
+    options:
+    - '[SO₃]²/([SO₂]²[O₂])'
+    - '[SO₂]²[O₂]/[SO₃]²'
+    - '[SO₃]/([SO₂][O₂])'
+    answer: '[SO₃]²/([SO₂]²[O₂])'
+    hints:
+    - Products go on top.
+    - Each concentration is raised to its coefficient.
+    solution: Kc = [SO₃]²/([SO₂]²[O₂]).
+    mistakes:
+      '[SO₂]²[O₂]/[SO₃]²': c11c_kc
+      '[SO₃]/([SO₂][O₂])': c11_kc
+    exam: one_mark
+    difficulty: 2
 - code: cbse11c.eq.ionic
   title: Ionic equilibrium, acids, bases and pH
   after:
@@ -397,6 +485,25 @@ concepts:
         - neither
         answer: a base
         why: It accepts a proton.
+      ways:
+      - style: visual
+        teach: 'Acid–base pairs: an acid gives H⁺ and becomes its conjugate base.'
+        picture:
+          kind: compare
+          columns:
+          - title: Acid → conjugate base
+            points:
+            - HNO₃ → NO₃⁻
+            - NH₄⁺ → NH₃
+            - H₂O → OH⁻
+          - title: Base → conjugate acid
+            points:
+            - NH₃ → NH₄⁺
+            - H₂O → H₃O⁺
+            - CO₃²⁻ → HCO₃⁻
+          alt: An acid such as nitric acid loses H plus to become its conjugate base nitrate; a base such as ammonia gains H plus to become its conjugate acid ammonium.
+      - style: step_by_step
+        teach: 'Step 1: Find who gives the H⁺: that''s the acid. Step 2: Remove one H⁺ from it: its conjugate base. Step 3: Add one H⁺ to the base: its conjugate acid. Step 4: For Lewis, look for electron-pair acceptors like AlCl₃.'
     - teach: 'Water self-ionises: Kw = [H⁺][OH⁻] = 10⁻¹⁴ at 25 °C. pH = −log[H⁺], and pH + pOH = 14. Neutral water has pH 7. Each pH unit is a factor of ten.'
       check:
         prompt: '[H⁺] = 10⁻⁵ M. pH?'
@@ -406,6 +513,27 @@ concepts:
         - −5
         answer: '5'
         why: −log 10⁻⁵.
+      ways:
+      - style: visual
+        teach: 'The pH scale: each step down means ten times more H⁺.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 14
+          points:
+          - at: 1
+            label: stomach acid
+          - at: 3
+            label: lemon
+          - at: 7
+            label: pure water
+          - at: 8
+            label: sea water
+          - at: 12
+            label: lime water
+          alt: On the pH scale from 0 to 14, stomach acid is about 1, lemon juice about 3, pure water 7, sea water about 8 and lime water about 12.
+      - style: step_by_step
+        teach: 'Step 1: Strong acid: [H⁺] = its concentration. Step 2: pH = −log[H⁺]. Step 3: Strong base: find pOH from [OH⁻], then pH = 14 − pOH. Example: 10⁻⁵ M HCl has pH 5; 10⁻⁴ M NaOH has pOH 4, pH 10.'
     - teach: 'A buffer (weak acid + its salt, like acetic acid + sodium acetate) resists pH change: pH = pKa + log([salt]/[acid]). For a sparingly soluble salt, Ksp is the product of ion concentrations; a precipitate forms when the ionic product exceeds Ksp.'
       picture:
         kind: compare
@@ -429,6 +557,11 @@ concepts:
         - '9.24'
         answer: '4.76'
         why: log 1 = 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For a buffer, pH = pKa + log([salt]/[acid]). Step 2: Equal salt and acid → pH = pKa. Step 3: For Ksp of AB, s² = Ksp. Step 4: A precipitate forms when ionic product > Ksp. Example: Ksp of BaSO₄ = 1.1 × 10⁻¹⁰ gives s ≈ 1.05 × 10⁻⁵ M.'
+      - style: real_world
+        teach: Your blood stays at pH about 7.4 even after a fizzy drink or hard exercise, thanks to the carbonic acid–bicarbonate buffer. If blood pH moved even half a unit, you would become seriously ill.
   items:
   - prompt: Find the pH of 0.001 M HCl.
     answer: '3'
@@ -602,3 +735,52 @@ concepts:
     mistakes:
       '10': c11c06_ph
       '0.5': c11c06_ph
+  - prompt: 'Assertion (A): The pH of pure water at 25 °C is 7.
+
+      Reason (R): In pure water, [H⁺] = [OH⁻] = 10⁻⁷ M at 25 °C.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. With [H⁺] = 10⁻⁷ M, pH = −log 10⁻⁷ = 7, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: Soil with pH 5 is too acidic for a crop that grows best at pH 7. How many times higher is its [H⁺] than the crop''s ideal?'
+    options:
+    - '100'
+    - '2'
+    - '20'
+    answer: '100'
+    hints:
+    - Each pH unit is a factor of 10.
+    - 5 is two units below 7.
+    solution: 10² = 100 times more H⁺. Farmers add lime to raise the pH.
+    mistakes:
+      '2': c11c_ph
+      '20': c11c06_ph
+    exam: competency
+    difficulty: 2
+  - prompt: Find the pH of a 0.05 M Ba(OH)₂ solution at 25 °C (a strong base).
+    options:
+    - '13'
+    - '12.7'
+    - '1'
+    answer: '13'
+    hints:
+    - Each Ba(OH)₂ gives 2 OH⁻.
+    - '[OH⁻] = 0.1 M, so pOH = 1.'
+    solution: '[OH⁻] = 0.1 M, pOH = 1, pH = 14 − 1 = 13.'
+    mistakes:
+      '12.7': c11_ph_base
+      '1': c11_pkw
+    exam: short
+    difficulty: 2
