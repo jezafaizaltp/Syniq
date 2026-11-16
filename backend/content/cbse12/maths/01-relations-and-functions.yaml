@@ -14,6 +14,14 @@ tips:
   m12_mod_classes: "List the possible remainders when an integer is divided by 3. Each remainder gives one class. Count them."
   m12_relations_count: "A relation on A is any subset of A × A. A × A has 4 pairs; count the subsets."
   m12_universal: "A × A contains every possible pair. Which relation relates everything to everything?"
+  c12m1_prop: 'Test each property separately: reflexive (every (a, a)), symmetric (flip every pair), transitive (chain pairs).'
+  c12m1_count: 'Count pairs first: a set with n elements has n² ordered pairs, and each pair is either in or out.'
+  c12m1_func: 'One-one: no two inputs share an output. Onto: every element of the codomain is hit.'
+  c12m1_comp: 'Work from the inside out: (g∘f)(x) means apply f first, then g.'
+  pq12m1_pairs_power: 'Each of the n² pairs is either in or out of the relation: two choices for every pair.'
+  pq12m1_check_reflexive: 'Check every element a: is (a, a) in R? One missing pair is enough to fail.'
+  pq12m1_onto_codomain: Onto means every element of the codomain is reached. Is any value never an output?
+  pq12m1_order_comp: g∘f means do f first, then put the result into g.
 concepts:
 - code: cbse12m.rel.types
   title: Types of relations
@@ -88,6 +96,80 @@ concepts:
       bin: Equivalence relation
       clue: Is a triangle similar to itself? Does similarity pass along a chain?
       why: Similarity is reflexive, symmetric and transitive.
+  lesson:
+    - teach: A relation R on a set A is any collection of ordered pairs (a, b) with a, b in A, so it is a subset of A × A. The empty relation has no pairs; the universal relation is all of A × A. If A has n elements, A × A has n² pairs, and each can be in or out, so there are 2^(n²) relations.
+      check:
+        prompt: A = {1, 2, 3}. How many ordered pairs are in A × A?
+        options:
+        - '9'
+        - '6'
+        - '8'
+        answer: '9'
+        why: '3 choices for the first entry times 3 for the second: 3 × 3 = 9.'
+      ways:
+      - style: visual
+        teach: For A = {1, 2}, A × A has 2² = 4 pairs. A relation is any choice of some of these pairs, so there are 2⁴ = 16 relations on A.
+        picture:
+          kind: area_grid
+          cols:
+          - size: 2
+            label: '1'
+          - size: 2
+            label: '2'
+          rows:
+          - size: 2
+            label: '1'
+          - size: 2
+            label: '2'
+          cells:
+          - - (1, 1)
+            - (1, 2)
+          - - (2, 1)
+            - (2, 2)
+          alt: 'A 2 by 2 grid of the ordered pairs (1,1), (1,2), (2,1), (2,2): all of A cross A.'
+      - style: step_by_step
+        teach: 'Step 1: Count A: n elements. Step 2: A × A has n × n = n² pairs. Step 3: A relation picks some of these pairs; each pair is either in or out. Step 4: So there are 2^(n²) relations. For n = 3: 9 pairs and 2⁹ = 512 relations.'
+    - teach: 'Three key properties. Reflexive: (a, a) is in R for every a. Symmetric: whenever (a, b) is in R, so is (b, a). Transitive: whenever (a, b) and (b, c) are in R, so is (a, c). Check each one on its own; a relation can have any mix of them.'
+      check:
+        prompt: R = {(1, 2), (2, 1)} on {1, 2}. Which property fails?
+        options:
+        - reflexive
+        - symmetric
+        - none fail
+        answer: reflexive
+        why: (1, 1) and (2, 2) are missing, so it is not reflexive; it is symmetric.
+      ways:
+      - style: step_by_step
+        teach: 'Test R = {(1, 1), (2, 2), (3, 3), (1, 2)} on A = {1, 2, 3}. Step 1: Reflexive? (1, 1), (2, 2), (3, 3) are all there: yes. Step 2: Symmetric? (1, 2) is in but (2, 1) is not: no. Step 3: Transitive? (1, 1) and (1, 2) give (1, 2), which is in; no chain breaks: yes.'
+      - style: real_world
+        teach: '''Is the same age as'' among students: everyone is their own age (reflexive), if A is B''s age then B is A''s (symmetric), and same-age chains hold (transitive). ''Is taller than'' fails reflexive and symmetric but is transitive. ''Is a friend of'' is symmetric but need not be transitive.'
+    - teach: 'A relation with all three properties is an equivalence relation. It splits the set into disjoint equivalence classes: groups of elements related to each other. Congruence modulo 3 on integers splits them by remainder 0, 1 or 2.'
+      picture:
+        kind: compare
+        columns:
+        - title: Class [0]
+          points:
+          - …, −3, 0, 3, 6, …
+        - title: Class [1]
+          points:
+          - …, −2, 1, 4, 7, …
+        - title: Class [2]
+          points:
+          - …, −1, 2, 5, 8, …
+        alt: Integers split into three equivalence classes by remainder when divided by 3.
+      check:
+        prompt: Under congruence modulo 3, which class contains 10?
+        options:
+        - '[1]'
+        - '[0]'
+        - '[2]'
+        answer: '[1]'
+        why: 10 = 3 × 3 + 1, so the remainder is 1.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Check R is reflexive, symmetric and transitive. Step 2: Pick an element, say 0, and collect everything related to it: {…, −3, 0, 3, 6, …}. Step 3: Pick an element not yet used, 1: {…, −2, 1, 4, …}. Step 4: Repeat until every element is in a class. The classes never overlap.'
+      - style: real_world
+        teach: 'Sorting students into houses by birth month: ''born in the same month as'' is an equivalence relation, and its classes are the 12 month-groups. Every student is in exactly one group, and no two groups share a student.'
   items:
   - prompt: How many relations are possible on a set with 2 elements?
     answer: '16'
@@ -160,6 +242,167 @@ concepts:
     - Largest relation.
     solution: The universal relation.
     mistakes: {"empty relation": "m12_universal", "identity relation": "m12_universal", "inverse relation": "m12_universal"}
+  - prompt: How many relations are possible on a set with 3 elements? Give the power of 2.
+    answer: '9'
+    check: 3**2
+    difficulty: 1
+    hints:
+    - First count the ordered pairs in A × A.
+    - The number of relations is 2 raised to that count.
+    solution: 'Step 1: A × A has 3² = 9 pairs. Step 2: 2⁹ relations, so the power is 9.'
+    mistakes:
+      '3': c12m1_count
+      '6': c12m1_count
+  - prompt: How many relations are possible on a set with 1 element?
+    answer: '2'
+    check: 2**(1**2)
+    difficulty: 1
+    hints:
+    - A × A has just one pair.
+    - That pair is either in or out.
+    solution: 'Step 1: 1 pair. Step 2: 2¹ = 2 relations (empty and universal).'
+    mistakes:
+      '1': c12m1_count
+      '4': c12m1_count
+  - prompt: Congruence modulo 5 on the integers gives how many equivalence classes?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - Classes are decided by the remainder.
+    - List the possible remainders on division by 5.
+    solution: 'Step 1: remainders 0, 1, 2, 3, 4. Step 2: 5 classes.'
+    mistakes:
+      '4': c12m1_prop
+      '6': c12m1_prop
+  - prompt: 'R = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)} on {1, 2, 3} is:'
+    options:
+    - an equivalence relation
+    - reflexive but not symmetric
+    - symmetric but not reflexive
+    answer: an equivalence relation
+    difficulty: 2
+    hints:
+    - Check all three diagonal pairs.
+    - Then check flips and chains like (1, 2), (2, 1) → (1, 1).
+    solution: 'Step 1: all (a, a) present: reflexive. Step 2: (1, 2) and (2, 1) both present: symmetric. Step 3: every chain lands in R: transitive.'
+    mistakes:
+      reflexive but not symmetric: c12m1_prop
+      symmetric but not reflexive: c12m1_prop
+  - prompt: R = {(1, 2), (2, 3)} on {1, 2, 3} fails to be transitive because which pair is missing?
+    options:
+    - (1, 3)
+    - (3, 1)
+    - (2, 1)
+    answer: (1, 3)
+    difficulty: 2
+    hints:
+    - Chain (1, 2) with (2, 3).
+    - Transitivity demands the pair that skips the middle.
+    solution: 'Step 1: (1, 2), (2, 3) ∈ R. Step 2: transitivity needs (1, 3), which is absent.'
+    mistakes:
+      (3, 1): c12m1_prop
+      (2, 1): c12m1_prop
+  - prompt: '''a − b is even'' on the integers is:'
+    options:
+    - an equivalence relation
+    - reflexive only
+    - not symmetric
+    answer: an equivalence relation
+    difficulty: 2
+    hints:
+    - Is a − a even? Is b − a even when a − b is?
+    - Add (a − b) and (b − c).
+    solution: 'Step 1: a − a = 0 is even. Step 2: b − a = −(a − b) is even. Step 3: a − c = (a − b) + (b − c) is even.'
+    mistakes:
+      reflexive only: c12m1_prop
+      not symmetric: c12m1_prop
+  - prompt: How many equivalence classes does 'a − b is even' create on the integers?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - Which integers are related to 0?
+    - Which are related to 1?
+    solution: 'Step 1: evens form one class. Step 2: odds form the other: 2 classes.'
+    mistakes:
+      '1': c12m1_prop
+      '3': c12m1_prop
+  - prompt: The smallest reflexive relation on {a, b, c} has how many pairs?
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Reflexive needs every (x, x).
+    - Add nothing else.
+    solution: 'Step 1: (a, a), (b, b), (c, c) are required. Step 2: 3 pairs.'
+    mistakes:
+      '0': c12m1_prop
+      '9': c12m1_count
+  - prompt: On {1, 2, 3}, how many pairs must be added to {(1, 2)} to make the smallest equivalence relation containing it?
+    answer: '4'
+    check: 5 - 1
+    difficulty: 3
+    hints:
+    - Add the three diagonal pairs.
+    - Then add the flip of (1, 2), and check transitivity.
+    solution: 'Step 1: add (1, 1), (2, 2), (3, 3). Step 2: add (2, 1). Step 3: chains give nothing new: 5 pairs in all, so 4 added.'
+    mistakes:
+      '3': c12m1_prop
+      '5': c12m1_prop
+  - prompt: 'Assertion (A): The relation R = {(a, b): a − b is divisible by 3} on the integers is an equivalence relation.
+
+      Reason (R): A relation that is reflexive, symmetric and transitive is an equivalence relation.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: a − a = 0 is divisible by 3 (reflexive); if 3 divides a − b it divides b − a (symmetric); if 3 divides a − b and b − c, it divides their sum a − c (transitive). By R it is an equivalence relation, so A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The relation R = {(1, 1), (2, 2), (1, 2)} on A = {1, 2, 3} is reflexive.
+
+      Reason (R): A relation on A is reflexive if (a, a) belongs to it for every a in A.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: '(3, 3) is missing, so R is not reflexive: A is false. R is the correct definition.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: How many relations are there on a set with 2 elements?
+    options:
+    - '16'
+    - '4'
+    - '8'
+    answer: '16'
+    hints:
+    - First count the ordered pairs in A × A.
+    - Each pair can be in or out.
+    solution: 'A × A has 2² = 4 pairs, and each is in or out of a relation: 2⁴ = 16 relations.'
+    mistakes:
+      '4': pq12m1_pairs_power
+      '8': pq12m1_pairs_power
+    exam: one_mark
+    difficulty: 1
 - code: cbse12m.rel.functions
   title: Types of functions and composition
   after:
@@ -235,6 +478,89 @@ concepts:
       bin: Neither
       clue: Is 0.5 ever an output? Do 1.2 and 1.7 share one?
       why: Only integers come out, and many inputs share each one.
+  lesson:
+    - teach: 'A function f: A → B sends each element of A to exactly one element of B. f is one-one (injective) if different inputs give different outputs: f(x₁) = f(x₂) forces x₁ = x₂. On a graph, every horizontal line meets it at most once.'
+      check:
+        prompt: Is f(x) = x² on ℝ one-one?
+        options:
+        - no, because f(2) = f(−2)
+        - yes, every square is different
+        - yes, it is a polynomial
+        answer: no, because f(2) = f(−2)
+        why: Two different inputs give the same output 4.
+      ways:
+      - style: visual
+        teach: 'Arrow pictures: on the left two inputs share an output (not one-one); on the right every input has its own output (one-one).'
+        picture:
+          kind: compare
+          columns:
+          - title: Not one-one
+            points:
+            - 1 → a
+            - 2 → a
+            - 3 → b
+            - Two inputs share 'a'
+          - title: One-one
+            points:
+            - 1 → a
+            - 2 → b
+            - 3 → c
+            - Every output used at most once
+          alt: Left, inputs 1 and 2 both go to a, so the function is not one-one. Right, 1, 2 and 3 go to different outputs, so it is one-one.
+      - style: step_by_step
+        teach: 'Step 1: Suppose f(x₁) = f(x₂). Step 2: For f(x) = 3x + 2: 3x₁ + 2 = 3x₂ + 2. Step 3: Solve: x₁ = x₂. Step 4: So equal outputs force equal inputs: one-one. For f(x) = x² on ℝ, f(2) = f(−2), so it is not one-one.'
+    - teach: 'f is onto (surjective) if every element of the codomain B is an output: the range equals B. Bijective means one-one and onto. A function has an inverse f⁻¹ exactly when it is bijective; f⁻¹ undoes f. On a set of n elements there are n! bijections onto itself.'
+      picture:
+        kind: compare
+        columns:
+        - title: One-one
+          points:
+          - no shared outputs
+          - horizontal line test
+        - title: Onto
+          points:
+          - range = codomain
+          - every target hit
+        - title: Bijective
+          points:
+          - both
+          - has an inverse
+        alt: One-one, onto and bijective functions compared.
+      check:
+        prompt: f(x) = 2x + 1 on ℝ. Find f⁻¹(7).
+        options:
+        - '3'
+        - '15'
+        - '4'
+        answer: '3'
+        why: 'Solve 2x + 1 = 7: x = 3.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take any y in the codomain. Step 2: Solve f(x) = y for x. For f(x) = 3x + 2 on ℝ: x = (y − 2)/3. Step 3: Check that x is in the domain: it is a real number for every y. Step 4: So every y is reached: onto. f(x) = x² from ℝ to ℝ is not onto, since y = −1 is never reached.'
+      - style: real_world
+        teach: 'Seat allotment in an exam hall with exactly as many seats as students: each student gets one seat (function), no two share a seat (one-one), and no seat is empty (onto). That is a bijection, and the seat list can be read backwards to find each student: the inverse.'
+    - teach: 'Composition: (g∘f)(x) = g(f(x)). Apply f first, then g. Order matters: g∘f and f∘g are usually different. If f and g are bijective, so is g∘f.'
+      check:
+        prompt: f(x) = x + 2, g(x) = 3x. Find (g∘f)(1).
+        options:
+        - '9'
+        - '5'
+        - '6'
+        answer: '9'
+        why: f(1) = 3, then g(3) = 9.
+      ways:
+      - style: visual
+        teach: 'g∘f is a two-machine line: x goes into f first, and what comes out goes into g.'
+        picture:
+          kind: flow
+          steps:
+          - x = 2
+          - f(x) = x + 1 → 3
+          - g(y) = y² → 9
+          - (g∘f)(2) = 9
+          alt: 2 goes into f to give 3, then 3 goes into g to give 9, so g of f of 2 is 9.
+      - style: step_by_step
+        teach: 'With f(x) = x + 1 and g(x) = x². Step 1: (g∘f)(x) = g(x + 1) = (x + 1)². Step 2: (f∘g)(x) = f(x²) = x² + 1. Step 3: At x = 2: g∘f gives 9 but f∘g gives 5. So order matters.'
   items:
   - prompt: If f(x) = 2x + 1 and g(x) = x², find (g∘f)(1).
     answer: '9'
@@ -299,3 +625,155 @@ concepts:
     - Perfect pairing.
     solution: Bijective.
     mistakes: {"one-one only": "m12_bijective", "onto only": "m12_bijective", "constant": "m12_bijective"}
+  - prompt: f(x) = x + 2 and g(x) = 3x. Find (f∘g)(1).
+    answer: '5'
+    check: 3*1 + 2
+    difficulty: 1
+    hints:
+    - Apply g first because it is on the inside.
+    - Then apply f to that result.
+    solution: 'Step 1: g(1) = 3. Step 2: f(3) = 5.'
+    mistakes:
+      '9': c12m1_comp
+      '6': c12m1_comp
+  - prompt: f(x) = 4x − 8. Find f⁻¹(0).
+    answer: '2'
+    check: 8/4
+    difficulty: 1
+    hints:
+    - f⁻¹(0) is the input that gives 0.
+    - Solve 4x − 8 = 0.
+    solution: 'Step 1: 4x − 8 = 0. Step 2: x = 2.'
+    mistakes:
+      '-8': c12m1_func
+      '8': c12m1_func
+  - prompt: How many bijections are there from a set of 4 elements onto itself?
+    answer: '24'
+    check: 4*3*2*1
+    difficulty: 1
+    hints:
+    - The first element has 4 choices of image.
+    - Each next one has one fewer.
+    solution: 'Step 1: 4 × 3 × 2 × 1. Step 2: 24.'
+    mistakes:
+      '16': c12m1_count
+      '256': c12m1_count
+  - prompt: 'f(x) = x³ from ℝ to ℝ is:'
+    options:
+    - bijective
+    - one-one but not onto
+    - neither
+    answer: bijective
+    difficulty: 2
+    hints:
+    - Different reals have different cubes.
+    - Every real number is the cube of some real.
+    solution: 'Step 1: x³ is strictly increasing: one-one. Step 2: cube roots exist for all reals: onto.'
+    mistakes:
+      one-one but not onto: c12m1_func
+      neither: c12m1_func
+  - prompt: 'f: ℕ → ℕ, f(x) = 2x is:'
+    options:
+    - one-one but not onto
+    - onto but not one-one
+    - bijective
+    answer: one-one but not onto
+    difficulty: 2
+    hints:
+    - Can two naturals have the same double?
+    - Is 3 ever an output?
+    solution: 'Step 1: 2x₁ = 2x₂ gives x₁ = x₂: one-one. Step 2: odd numbers are never hit: not onto.'
+    mistakes:
+      onto but not one-one: c12m1_func
+      bijective: c12m1_func
+  - prompt: f(x) = 3x + 1. Find f⁻¹(10).
+    answer: '3'
+    check: (10 - 1)/3
+    difficulty: 2
+    hints:
+    - Set 3x + 1 equal to 10.
+    - Undo +1, then undo ×3.
+    solution: 'Step 1: 3x + 1 = 10. Step 2: x = 3.'
+    mistakes:
+      '31': c12m1_comp
+      11/3: c12m1_comp
+  - prompt: f(x) = x², g(x) = x − 1. Find (g∘f)(3) − (f∘g)(3).
+    answer: '4'
+    check: (3**2 - 1) - (3 - 1)**2
+    difficulty: 2
+    hints:
+    - Work out each composition separately.
+    - Inside function first each time.
+    solution: 'Step 1: (g∘f)(3) = 9 − 1 = 8. Step 2: (f∘g)(3) = 2² = 4. Step 3: 8 − 4 = 4.'
+    mistakes:
+      '0': c12m1_comp
+      '-4': c12m1_comp
+  - prompt: How many one-one functions are there from {1, 2} to {a, b, c}?
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - 1 can go to any of 3 letters.
+    - 2 must go to a different letter.
+    solution: 'Step 1: 3 choices for 1. Step 2: 2 for 2. Step 3: 3 × 2 = 6.'
+    mistakes:
+      '9': c12m1_count
+      '8': c12m1_count
+  - prompt: How many functions are there from {1, 2} to {a, b, c} in total?
+    answer: '9'
+    check: 3**2
+    difficulty: 3
+    hints:
+    - Each input picks one output freely.
+    - Outputs may repeat.
+    solution: 'Step 1: 3 choices for 1, 3 for 2. Step 2: 3 × 3 = 9.'
+    mistakes:
+      '6': c12m1_func
+      '8': c12m1_count
+  - prompt: 'Assertion (A): f: ℝ → ℝ, f(x) = x² is not one-one.
+
+      Reason (R): f(2) = f(−2) = 4.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Two different inputs, 2 and −2, give the same output, which is exactly why f fails to be one-one. A is true and R explains it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A school gives each of its 40 students a locker from 40 lockers, with no two students sharing. Thinking of this as a function from students to lockers, it is'
+    options:
+    - one-one and onto
+    - one-one but not onto
+    - onto but not one-one
+    answer: one-one and onto
+    hints:
+    - Do two students ever share a locker?
+    - Is any locker left empty when 40 students get 40 lockers?
+    solution: No two students share (one-one), and with 40 students in 40 lockers none is left empty (onto). So it is a bijection.
+    mistakes:
+      one-one but not onto: pq12m1_onto_codomain
+    exam: case
+    difficulty: 2
+  - prompt: If f(x) = 2x and g(x) = x + 3, then (g∘f)(4) is
+    options:
+    - '11'
+    - '14'
+    - '7'
+    answer: '11'
+    hints:
+    - Work out f(4) first.
+    - Then put that into g.
+    solution: f(4) = 8, then g(8) = 8 + 3 = 11.
+    mistakes:
+      '14': pq12m1_order_comp
+    exam: one_mark
+    difficulty: 1

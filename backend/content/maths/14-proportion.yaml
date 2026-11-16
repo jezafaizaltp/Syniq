@@ -5,6 +5,8 @@ chapter: 14
 title: Proportion
 
 tips:
+  k9_map_scale: "Find how many km 1 cm stands for first, then work out how many cm the road needs."
+  k9_per_hour: "450 bottles take 1.5 hours, not 1. Find how many it makes in 1 hour first."
   ratio_after_change: "Find the actual numbers first, then change them. The ratio numbers themselves are not the counts."
   ratio_add_equal: "Call the numbers 3k and 5k. Add 4 to each, set the new fraction equal to the new ratio, and solve for k."
   mixture_one_part: "Only one part of the mixture changes. Find how much of the part that stays the same there is, then use the new ratio."
@@ -17,6 +19,10 @@ tips:
   inverse_not_direct: "When one goes up and the other goes down, the product stays the same: multiply, then divide."
   share_of_one_part: "That is the size of one part. Multiply by the number of parts this person gets."
   whole_divided_wrong: "First add the ratio numbers to find how many parts the whole is split into."
+  pqk9m14_ratio_order: 'Keep the order the question gives: the first named amount comes first.'
+  pqk9m14_multiply_not_add: Equal ratios come from multiplying both parts, not adding the same number.
+  pqk9m14_direct_or_inverse: 'Ask: if one goes up, does the other go up too (direct) or down (inverse)?'
+  pqk9m14_total_parts: Add all the ratio numbers to get the total number of parts.
 
 concepts:
   - code: math9.prop.ratio
@@ -72,6 +78,18 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: read which thing is named first. Step 2: write its amount first. Step 3: write the other amount after the colon. ''Bananas to mangoes'' with 8 bananas and 5 mangoes is 8 : 5. Swap the order and the ratio means something different.'
+        - style: visual
+          teach: '12 boys and 18 girls: boys to girls is 12 : 18, and the order matters.'
+          picture:
+            kind: bars
+            bars:
+            - label: boys
+              value: 12
+            - label: girls
+              value: 18
+            alt: Bars for 12 boys and 18 girls, giving the ratio of boys to girls 12 to 18.
+        - style: real_world
+          teach: 'A cricket team''s ratio of wins to losses is 7 : 3. Swap the order to 3 : 7 and it reads like a losing team. The first amount named in the question goes first in the ratio.'
       - teach: 'Like fractions, a ratio stays the same when both numbers are multiplied or divided by the same number. 12 : 18 = 2 : 3 (dividing both by 6), and 4 : 5 = 20 : 25 (multiplying both by 5). The simplest form uses the smallest whole numbers.'
         check:
           prompt: 'Write 15 : 25 in its simplest form.'
@@ -84,6 +102,15 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find a number that divides both sides of the ratio. Step 2: divide both by it. Step 3: repeat until no number other than 1 divides both. 12 : 18, divide by 6: 2 : 3. Multiplying both sides by the same number gives an equal ratio too.'
+        - style: visual
+          teach: The same ratio written three ways, by dividing or multiplying both parts.
+          picture:
+            kind: flow
+            steps:
+            - '12 : 18'
+            - '÷ 6 → 2 : 3'
+            - '× 5 → 10 : 15'
+            alt: '12 to 18 divided by 6 is 2 to 3, and multiplied by 5 is 10 to 15: all the same ratio.'
       - teach: 'Use a ratio to find a missing amount. Red to blue beads is 3 : 7 and there are 21 blue. 7 became 21, which is times 3, so red is 3 × 3 = 9. Adding the same number to both (3 + 14, 7 + 14) does not keep the ratio.'
         check:
           prompt: 'Tea to milk is 2 : 5. There are 15 cups of milk. How many cups of tea?'
@@ -96,6 +123,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Mixing paint 3 tins red to 7 tins blue. You now use 21 tins blue: that is 3 times as much, so you need 3 times as much red, 9 tins. Adding 14 tins to both would change the colour. Ratios grow by multiplying.'
+        - style: visual
+          teach: Multiplying keeps the ratio; adding the same number changes it.
+          picture:
+            kind: compare
+            columns:
+            - title: × 3
+              points:
+              - '3 : 7 → 9 : 21'
+              - same ratio ✓
+            - title: + 14
+              points:
+              - '3 : 7 → 17 : 21'
+              - different ratio ✗
+            alt: Multiplying 3 to 7 by 3 gives 9 to 21, the same ratio; adding 14 to both gives 17 to 21, a different ratio.
     items:
       - prompt: "A class has 12 boys and 18 girls. What is the ratio of boys to girls in simplest form?"
         options: ["2 : 3", "3 : 2", "12 : 30", "6 : 9"]
@@ -227,6 +268,21 @@ concepts:
         solution: 'Step 1: 4k + 12 = 5k + 6. Step 2: k = 6. Step 3: The numbers are 12 and 30, so the larger is 30.'
         mistakes:
           '12': ratio_after_change
+      - prompt: 'In a garden, the ratio of mango trees to coconut trees is 4 : 9. There are 36 coconut trees. How many mango trees are there?'
+        options:
+        - '16'
+        - '31'
+        - '81'
+        answer: '16'
+        hints:
+        - '9 became 36: what was it multiplied by?'
+        - 36 ÷ 9 = 4.
+        solution: 36 ÷ 9 = 4, so mango trees = 4 × 4 = 16.
+        mistakes:
+          '31': pqk9m14_multiply_not_add
+          '81': pqk9m14_ratio_order
+        exam: short
+        difficulty: 1
 
   - code: math9.prop.direct
     title: Direct proportion
@@ -294,6 +350,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: double one amount. Step 2: does the other double too? Step 3: halve it: does the other halve? If yes both times, they are in direct proportion: one divided by the other stays the same, like cost ÷ number of pens.'
+        - style: visual
+          teach: 'Pens and cost go up together: cost ÷ pens is always 12.'
+          picture:
+            kind: bars
+            bars:
+            - label: 1 pen
+              value: 12
+            - label: 2 pens
+              value: 24
+            - label: 5 pens
+              value: 60
+            unit: ₹
+            alt: '1 pen costs 12 rupees, 2 pens 24 and 5 pens 60: the cost per pen stays 12.'
       - teach: 'The unitary method: find the value for one, then multiply. 5 pens cost ₹60, so 1 pen costs ₹12, and 8 pens cost 8 × 12 = ₹96.'
         picture:
           kind: flow
@@ -313,6 +382,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: divide to find the value for one: 5 pens for ₹60, so 1 pen is ₹12. Step 2: multiply by how many you want: 8 pens, 8 × 12 = ₹96.'
+        - style: real_world
+          teach: 'At the ration shop, 5 kg of rice costs ₹60. To find the price of 8 kg, first find 1 kg: ₹12. Then 8 kg is 8 × 12 = ₹96. Finding the price of one first is the unitary method.'
       - teach: In letters, y = kx, where k is the amount for one. If y = 10 when x = 4, then k = 10 ÷ 4 = 2.5, and when x = 6, y = 2.5 × 6 = 15. Maps and scales are direct proportion too.
         check:
           prompt: y is in direct proportion to x, and y = 12 when x = 3. What is y when x = 5?
@@ -325,6 +396,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write y = kx. Step 2: put in the known pair to find k: k = y ÷ x. Step 3: use that k with the new x. If y = 10 when x = 4, k = 2.5; when x = 6, y = 15.'
+        - style: visual
+          teach: 'y = kx: find k from one pair, then use it.'
+          picture:
+            kind: flow
+            steps:
+            - y = 10 when x = 4
+            - k = 10 ÷ 4 = 2.5
+            - x = 6
+            - y = 2.5 × 6 = 15
+            alt: y is 10 when x is 4, so k is 2.5; when x is 6, y is 15.
     items:
       - prompt: "5 pens cost ₹60. How many rupees do 8 pens cost?"
         answer: "96"
@@ -374,7 +455,7 @@ concepts:
         difficulty: 2
         hints: ["How many bottles in 1 hour?", "450 ÷ 1.5 = 300."]
         solution: "Step 1: In 1 hour: 450 ÷ 1.5 = 300. Step 2: In 4 hours: 300 × 4 = 1200."
-        mistakes: {"1800": share_of_one_part, "168.75": direct_not_inverse}
+        mistakes: {"1800": "k9_per_hour", "168.75": "direct_not_inverse"}
       - prompt: "y is in direct proportion to x. When x = 0.6, y = 4.2. What is x when y = 9.8?"
         answer: "1.4"
         check: "9.8/(4.2/0.6)"
@@ -388,7 +469,7 @@ concepts:
         difficulty: 3
         hints: ["How many km does 1 cm stand for?", "1 cm = 7.5 km."]
         solution: "Step 1: 1 cm stands for 7.5 km. Step 2: 51 ÷ 7.5 = 6.8 cm."
-        mistakes: {"382.5": wrong_inverse, "25.5": share_of_one_part}
+        mistakes: {"382.5": "wrong_inverse", "25.5": "k9_map_scale"}
       - prompt: 6 notebooks cost ₹180. How many rupees do 10 notebooks cost?
         answer: '300'
         check: 180/6*10
@@ -451,6 +532,21 @@ concepts:
         solution: 'Step 1: 2/5 takes 6 minutes, so 1/5 takes 3 minutes. Step 2: The whole tank is 5/5. Step 3: 5 × 3 = 15 minutes.'
         mistakes:
           '2.4': inverse_not_direct
+      - prompt: 'Situation: A car uses 6 litres of petrol for 84 km. How far will it go on 10 litres?'
+        options:
+        - 140 km
+        - 50.4 km
+        - 88 km
+        answer: 140 km
+        hints:
+        - Find the distance for 1 litre first.
+        - 84 ÷ 6 = 14 km per litre.
+        solution: '1 litre: 84 ÷ 6 = 14 km. 10 litres: 14 × 10 = 140 km.'
+        mistakes:
+          50.4 km: pqk9m14_direct_or_inverse
+          88 km: pqk9m14_multiply_not_add
+        exam: case
+        difficulty: 2
 
   - code: math9.prop.inverse
     title: Inverse proportion
@@ -507,6 +603,21 @@ concepts:
         ways:
         - style: real_world
           teach: 'Sharing a box of 60 laddoos: 6 friends get 10 each, 12 friends get only 5 each. More people, fewer each. When one amount goes up as the other goes down, so that doubling one halves the other, they are in inverse proportion.'
+        - style: visual
+          teach: 'Workers × days stays 60: more workers, fewer days.'
+          picture:
+            kind: bars
+            bars:
+            - label: 3 workers
+              value: 20
+            - label: 4 workers
+              value: 15
+            - label: 6 workers
+              value: 10
+            - label: 12 workers
+              value: 5
+            unit: days
+            alt: '3 workers take 20 days, 4 take 15, 6 take 10 and 12 take 5: the product is always 60.'
       - teach: 'In inverse proportion, the product stays the same. 6 workers take 10 days: the job is 6 × 10 = 60 worker-days. With 4 workers, it takes 60 ÷ 4 = 15 days. Find the product first, then divide.'
         picture:
           kind: flow
@@ -526,6 +637,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: multiply the two amounts you know: 6 workers × 10 days = 60 worker-days. Step 2: this total job stays the same. Step 3: divide by the new amount: 60 ÷ 4 workers = 15 days.'
+        - style: real_world
+          teach: 'A school trip has ₹6,000 of fuel money for the bus. If 40 students share the cost, each pays ₹150. If only 30 go, each pays ₹200. Fewer people, bigger share: the total stays the same.'
       - teach: 'Check by asking: if one goes up, should the other go down? If yes, multiply then divide (inverse). If both go up together, use the unitary method (direct). Mixing them up gives answers that are clearly too big or too small.'
         check:
           prompt: Food lasts 10 people for 6 days. Will it last 15 people longer or shorter?
@@ -537,6 +650,22 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: ask: if one amount goes up, should the other go up or down? Step 2: both up: direct, find one and multiply. Step 3: one up, one down: inverse, multiply then divide. Step 4: check the answer moved the right way.'
+        - style: visual
+          teach: Decide direct or inverse before you calculate.
+          picture:
+            kind: compare
+            columns:
+            - title: Direct
+              points:
+              - both go up together
+              - more pens, more cost
+              - use the unitary method
+            - title: Inverse
+              points:
+              - one up, the other down
+              - more workers, fewer days
+              - multiply, then divide
+            alt: In direct proportion both amounts go up together; in inverse proportion one goes up as the other goes down.
     items:
       - prompt: "6 workers can build a wall in 10 days. How many days will 4 workers take?"
         answer: "15"
@@ -666,6 +795,35 @@ concepts:
         solution: 'Step 1: Work left = 15 × 6 = 90 worker-days. Step 2: Now 20 workers. Step 3: 90 ÷ 20 = 4.5 days.'
         mistakes:
           '6': work_left
+      - prompt: 'Situation: 8 workers can build a wall in 15 days. How many days will 12 workers take?'
+        options:
+        - 10 days
+        - 22.5 days
+        - 19 days
+        answer: 10 days
+        hints:
+        - 'More workers, fewer days: inverse proportion.'
+        - Total work = 8 × 15 = 120 worker-days.
+        solution: 8 × 15 = 120 worker-days. 120 ÷ 12 = 10 days.
+        mistakes:
+          22.5 days: pqk9m14_direct_or_inverse
+          19 days: pqk9m14_multiply_not_add
+        exam: case
+        difficulty: 2
+      - prompt: At 40 km/h a journey takes 3 hours. How long does it take at 60 km/h?
+        options:
+        - 2 hours
+        - 4.5 hours
+        - 1 hour
+        answer: 2 hours
+        hints:
+        - Faster means less time.
+        - Distance = 40 × 3 = 120 km.
+        solution: 'Distance = 120 km. At 60 km/h: 120 ÷ 60 = 2 hours.'
+        mistakes:
+          4.5 hours: pqk9m14_direct_or_inverse
+        exam: short
+        difficulty: 1
 
   - code: math9.prop.sharing
     title: Sharing in a ratio
@@ -743,6 +901,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: add the numbers of the ratio: 2 + 3 = 5 parts. Step 2: divide the total by the parts: 500 ÷ 5 = 100 per part. Step 3: multiply each person''s number by one part: 2 × 100 and 3 × 100. Step 4: check the shares add back to the total.'
+        - style: real_world
+          teach: 'Ravi put ₹200 and Sita ₹300 into a stall, so they share its profit 2 : 3. A ₹500 profit becomes 5 parts of ₹100: Ravi gets ₹200, Sita ₹300. Whoever put in more gets more.'
       - teach: 'For three people, add all three numbers. 72 sweets in the ratio 1 : 2 : 3 make 6 parts of 12: shares of 12, 24 and 36. A common slip is dividing by just one of the numbers.'
         check:
           prompt: '90 is shared in the ratio 2 : 3 : 4. What is one part?'
@@ -755,6 +915,18 @@ concepts:
         ways:
         - style: real_world
           teach: 'Three friends put money into a business in the ratio 1 : 2 : 3, so there are 6 shares in all. If the profit is 72, each share is 72 ÷ 6 = 12. The friends get 12, 24 and 36. Divide by the total of all the ratio numbers, not just one.'
+        - style: visual
+          teach: '72 sweets shared 1 : 2 : 3: six parts of 12.'
+          picture:
+            kind: bars
+            bars:
+            - label: 1 part
+              value: 12
+            - label: 2 parts
+              value: 24
+            - label: 3 parts
+              value: 36
+            alt: 72 sweets in the ratio 1 to 2 to 3 give shares of 12, 24 and 36.
       - teach: 'Sometimes you know a share and want the whole. Shared 4 : 5, the smaller share is ₹240. 4 parts = ₹240, so 1 part = ₹60, and the whole is 9 parts = ₹540.'
         check:
           prompt: 'Shared 3 : 2, the bigger share is ₹90. What was the total?'
@@ -767,6 +939,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find which part of the ratio you know: shared 4 : 5, the smaller share is 4 parts. Step 2: find one part: 240 ÷ 4 = 60. Step 3: the whole is all the parts: 4 + 5 = 9, so 9 × 60 = 540.'
+        - style: visual
+          teach: 'From one share back to the whole: find one part, then count all the parts.'
+          picture:
+            kind: flow
+            steps:
+            - 'ratio 4 : 5'
+            - 4 parts = ₹240
+            - 1 part = ₹60
+            - whole = 9 parts = ₹540
+            alt: If 4 parts are 240 rupees, one part is 60 and all 9 parts are 540 rupees.
     items:
       - prompt: "₹500 is shared between Ravi and Sita in the ratio 2 : 3. How many rupees does Ravi get?"
         answer: "200"
@@ -893,3 +1075,18 @@ concepts:
         solution: 'Step 1: B : C = 2 : 3 = 4 : 6. Step 2: A : B : C = 3 : 4 : 6, 13 parts. Step 3: 2600 ÷ 13 = 200, so A gets 3 × 200 = ₹600.'
         mistakes:
           '1200': chain_ratio
+      - prompt: 'Situation: ₹1,800 is shared among three children in the ratio 2 : 3 : 4. What is the largest share?'
+        options:
+        - ₹800
+        - ₹600
+        - ₹450
+        answer: ₹800
+        hints:
+        - Total parts = 2 + 3 + 4 = 9.
+        - One part = 1800 ÷ 9.
+        solution: One part = ₹200. The largest share is 4 parts = ₹800.
+        mistakes:
+          ₹600: pqk9m14_total_parts
+          ₹450: pqk9m14_total_parts
+        exam: case
+        difficulty: 2

@@ -12,6 +12,10 @@ tips:
   c10m14_complement: P(not E) = 1 − P(E). The two always add up to 1.
   c10m14_dice_table: Two dice give 6 × 6 = 36 outcomes. List the pairs that work, like (2, 6), (3, 5)… and remember (2, 6) and (6, 2) are different.
   c10m14_sure: A sure event has probability 1 and an impossible event 0. Can this one happen at all?
+  pq10m14_not_event: 'That is the chance of green. ''Not green'' is everything else: 1 − P(green).'
+  pq10m14_whole_box: Divide by all the marbles in the box, the green ones included.
+  pq10m14_order_counts: '(3, 6) and (6, 3) are different outcomes: count both.'
+  pq10m14_sums_unequal: The 11 possible sums are not equally likely. Count the 36 ordered pairs instead.
 concepts:
 - code: cbse10m.prob.basic
   title: Theoretical probability
@@ -118,6 +122,11 @@ concepts:
         - 6/7
         answer: '1'
         why: Every face is less than 7, so it is sure.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: List all the equally likely outcomes. For a die: 1, 2, 3, 4, 5, 6. Step 2: Mark the ones you want. For ''a prime number'': 2, 3, 5. Step 3: P = favourable ÷ total = 3/6 = 1/2.'
+      - style: real_world
+        teach: 'A weather app''s ''30% chance of rain'' means P(rain) = 0.3. A lottery ticket''s chance of winning might be 0.000001: almost 0, but not impossible. The sun rising tomorrow is as close to 1 as anything gets.'
     - teach: 'Count carefully. A die has 6 faces. A deck has 52 cards: 4 suits of 13; 26 red, 26 black; 12 face cards (J, Q, K). Two coins give 4 outcomes: HH, HT, TH, TT. Two dice give 36 ordered pairs.'
       check:
         prompt: How many outcomes when three coins are tossed?
@@ -127,6 +136,30 @@ concepts:
         - '3'
         answer: '8'
         why: 2 × 2 × 2 = 8.
+      ways:
+      - style: visual
+        teach: The three sample spaces you meet most, with their counts.
+        picture:
+          kind: compare
+          columns:
+          - title: One die
+            points:
+            - '6 outcomes: 1 to 6'
+            - 'Even: 2, 4, 6'
+            - 'Prime: 2, 3, 5'
+          - title: Deck of 52 cards
+            points:
+            - 4 suits of 13
+            - 26 red, 26 black
+            - '12 face cards: J, Q, K'
+            - 4 aces
+          - title: Two coins or two dice
+            points:
+            - 'Coins: HH, HT, TH, TT'
+            - 'Dice: 6 × 6 = 36 ordered pairs'
+          alt: A die has 6 outcomes; a deck has 52 cards in 4 suits of 13, 26 red, 12 face cards; two coins give 4 outcomes and two dice 36.
+      - style: step_by_step
+        teach: 'Step 1: Two dice: list outcomes as (first, second); there are 36. Step 2: Sum 8: (2, 6), (3, 5), (4, 4), (5, 3), (6, 2), so 5 pairs. Step 3: P(sum 8) = 5/36. Step 4: (3, 5) and (5, 3) are different outcomes, so count both.'
     - teach: P(E) + P(not E) = 1, so P(not E) = 1 − P(E). If the chance of rain is 0.3, the chance of no rain is 0.7.
       check:
         prompt: P(win) = 2/5. P(not win)?
@@ -136,6 +169,31 @@ concepts:
         - 5/2
         answer: 3/5
         why: 1 − 2/5 = 3/5.
+      ways:
+      - style: visual
+        teach: An event and its opposite fill the whole line from 0 to 1 between them.
+        picture:
+          kind: number_line
+          from: 0
+          to: 1
+          step: 0.1
+          points:
+          - at: 0
+            label: impossible
+          - at: 0.3
+            label: P(rain)
+          - at: 1
+            label: sure
+          jumps:
+          - from: 0
+            to: 0.3
+            label: '0.3'
+          - from: 0.3
+            to: 1
+            label: P(no rain) = 0.7
+          alt: A line from 0 to 1. The chance of rain, 0.3, and the chance of no rain, 0.7, together make 1.
+      - style: step_by_step
+        teach: 'Step 1: Find P(E). For drawing a king: 4/52 = 1/13. Step 2: P(not E) = 1 − P(E) = 1 − 1/13 = 12/13. Step 3: Check: 1/13 + 12/13 = 1.'
   items:
   - prompt: A die is thrown once. Find P(an even number). Type a fraction.
     answer: 1/2
@@ -315,3 +373,71 @@ concepts:
     mistakes:
       '0.08': c10m14_complement
       '0.2': c10m14_complement
+  - prompt: 'Assertion (A): The probability of getting a number greater than 6 on an ordinary die is 0.
+
+      Reason (R): The probability of an impossible event is 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: No face shows more than 6, so the event is impossible and by R its probability is 0. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The probability that it will rain tomorrow can be 1.2.
+
+      Reason (R): The probability of any event lies between 0 and 1, inclusive.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R, no probability can be more than 1, so 1.2 is not possible: A is false and R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A box holds 5 red, 8 white and 4 green marbles. One marble is picked at random. What is the probability that it is not green?'
+    options:
+    - 13/17
+    - 4/17
+    - 4/13
+    answer: 13/17
+    hints:
+    - Total marbles = 5 + 8 + 4.
+    - P(not green) = 1 − P(green).
+    solution: Total = 17, P(green) = 4/17, so P(not green) = 1 − 4/17 = 13/17.
+    mistakes:
+      4/17: pq10m14_not_event
+      4/13: pq10m14_whole_box
+    exam: case
+    difficulty: 2
+  - prompt: Two dice are thrown together. The probability that the sum of the numbers is 9 is
+    options:
+    - 1/9
+    - 1/18
+    - 4/11
+    answer: 1/9
+    hints:
+    - There are 36 ordered outcomes.
+    - List the pairs that add to 9, counting (3, 6) and (6, 3) separately.
+    solution: '(3, 6), (4, 5), (5, 4), (6, 3): 4 outcomes out of 36. P = 4/36 = 1/9.'
+    mistakes:
+      1/18: pq10m14_order_counts
+      4/11: pq10m14_sums_unequal
+    exam: one_mark
+    difficulty: 2

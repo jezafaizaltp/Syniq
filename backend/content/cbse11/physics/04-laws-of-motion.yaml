@@ -15,6 +15,9 @@ tips:
   p11_recoil: "Total momentum stays zero: m_gun v_gun = m_bullet v_bullet. Solve for v_gun."
   p11_rolling: "Why do we put wheels on heavy suitcases instead of dragging them?"
   p11_turn_force: "Gravity acts down, not sideways. What sideways push from the road stops the car skidding out?"
+  c11p04_fma: Find the net force first, then use F = ma. Keep units in kg, m and s.
+  c11p04_mom: Total momentum before equals total momentum after when no outside force acts. Watch the directions.
+  c11p04_fric: Friction = μ × normal force. On a flat floor the normal force equals mg.
 concepts:
 - code: cbse11p.laws.newton
   title: Newton's three laws
@@ -101,6 +104,41 @@ concepts:
           - -10
           - -3
         say: 'Too much: the reading is now below 560 N. 70(10 + a) = 560.'
+  lesson:
+    - teach: 'First law: a body stays at rest or keeps moving in a straight line at steady speed unless a net force acts. This resistance to change is inertia; more mass means more inertia.'
+      check:
+        prompt: 'Dust flies off a carpet when it is beaten. This shows:'
+        options:
+        - inertia of rest
+        - the third law
+        - friction
+        answer: inertia of rest
+        why: The carpet moves; the dust tends to stay where it was.
+    - teach: 'Second law: F = dp/dt = ma, where momentum p = mv. Impulse = F × Δt = change in momentum. A longer stopping time means a smaller force (why we bend knees when landing).'
+      check:
+        prompt: Net force 12 N on a 3 kg mass. Acceleration?
+        options:
+        - 4 m/s²
+        - 36 m/s²
+        - 9 m/s²
+        answer: 4 m/s²
+        why: a = F/m = 12/3.
+    - teach: 'Third law: forces come in equal and opposite pairs acting on different bodies. With no outside force, total momentum is conserved (gun recoil, rockets).'
+      picture:
+        kind: flow
+        steps:
+        - 'Gun and bullet at rest: total p = 0'
+        - Bullet gets forward p
+        - Gun gets equal backward p
+        alt: Momentum conservation in recoil.
+      check:
+        prompt: 'A swimmer pushes water backward. The water pushes the swimmer:'
+        options:
+        - forward with an equal force
+        - backward
+        - forward with a smaller force
+        answer: forward with an equal force
+        why: Action and reaction are equal and opposite.
   items:
   - prompt: A force gives a 5 kg mass an acceleration of 4 m/s². Find the force (in N).
     answer: '20'
@@ -165,6 +203,111 @@ concepts:
     - First law.
     solution: The body tends to stay in motion.
     mistakes: {"inertia of rest": "p11_inertia", "the third law": "p11_inertia", "friction only": "p11_inertia"}
+  - prompt: Find the force needed to give an 8 kg mass an acceleration of 2.5 m/s² (in N).
+    answer: '20'
+    check: 8*2.5
+    difficulty: 1
+    hints:
+    - F = ma.
+    - 8 × 2.5.
+    solution: 'Step 1: 8 × 2.5. Step 2: 20 N.'
+    mistakes:
+      '3.2': c11p04_fma
+      '10.5': c11p04_fma
+  - prompt: Find the momentum of a 0.5 kg ball moving at 12 m/s (in kg m/s).
+    answer: '6'
+    check: 0.5*12
+    difficulty: 1
+    hints:
+    - p = mv.
+    - Half of 12.
+    solution: 'Step 1: 0.5 × 12. Step 2: 6 kg m/s.'
+    mistakes:
+      '24': c11p04_mom
+      '12.5': c11p04_mom
+  - prompt: 'A body moves at constant velocity. The net force on it is:'
+    options:
+    - zero
+    - in the direction of motion
+    - opposite to the motion
+    answer: zero
+    difficulty: 1
+    hints:
+    - Constant velocity means no acceleration.
+    - Use F = ma.
+    solution: 'Step 1: a = 0. Step 2: net force = 0.'
+    mistakes:
+      in the direction of motion: c11p04_fma
+      opposite to the motion: c11p04_fma
+  - prompt: A 0.2 kg ball hits a wall at 10 m/s and bounces back at 10 m/s. Find the size of the change in momentum (in kg m/s).
+    answer: '4'
+    check: 0.2*20
+    difficulty: 2
+    hints:
+    - Velocity reverses, so take signs.
+    - Δp = m(v − u) with v = −10.
+    solution: 'Step 1: 0.2 × (−10 − 10) = −4. Step 2: size 4 kg m/s.'
+    mistakes:
+      '0': c11p04_mom
+      '2': c11p04_mom
+  - prompt: A 5 kg gun fires a 0.05 kg bullet at 300 m/s. Find the recoil speed (in m/s).
+    answer: '3'
+    check: 0.05*300/5
+    difficulty: 2
+    hints:
+    - Total momentum stays 0.
+    - 5 × V = 0.05 × 300.
+    solution: 'Step 1: 15 = 5V. Step 2: V = 3 m/s.'
+    mistakes:
+      '300': c11p04_mom
+      '15': c11p04_mom
+  - prompt: A 1500 kg car goes from 0 to 20 m/s in 10 s. Find the net force (in N).
+    answer: '3000'
+    check: 1500*2
+    difficulty: 2
+    hints:
+    - Find a first.
+    - Then F = ma.
+    solution: 'Step 1: a = 2 m/s². Step 2: 1500 × 2 = 3000 N.'
+    mistakes:
+      '30000': c11p04_fma
+      '1500': c11p04_fma
+  - prompt: Why does a cricketer pull the hands back while catching a fast ball?
+    options:
+    - to increase the stopping time and reduce the force
+    - to reduce the ball's momentum change
+    - to increase the force
+    answer: to increase the stopping time and reduce the force
+    difficulty: 2
+    hints:
+    - Impulse F × t = Δp is fixed by the ball.
+    - If t grows, what happens to F?
+    solution: 'Step 1: Δp is the same. Step 2: longer time gives a smaller force.'
+    mistakes:
+      to reduce the ball's momentum change: c11p04_mom
+      to increase the force: c11p04_mom
+  - prompt: A 2 kg block at 3 m/s sticks to a 1 kg block at rest. Find their common speed (in m/s).
+    answer: '2'
+    check: 6/3
+    difficulty: 3
+    hints:
+    - Momentum before = momentum after.
+    - After, the mass is 3 kg.
+    solution: 'Step 1: 2 × 3 = 3V. Step 2: V = 2 m/s.'
+    mistakes:
+      '3': c11p04_mom
+      '1.5': c11p04_mom
+  - prompt: Masses 3 kg and 2 kg hang over a smooth pulley (g = 10). Find their acceleration (in m/s²).
+    answer: '2'
+    check: (3-2)*10/5
+    difficulty: 3
+    hints:
+    - Net force = difference of weights.
+    - Total mass moves together.
+    solution: 'Step 1: net force (3 − 2) × 10 = 10 N. Step 2: a = 10/5 = 2 m/s².'
+    mistakes:
+      '10': c11p04_fma
+      '5': c11p04_fma
 - code: cbse11p.laws.friction
   title: Friction and circular motion
   after:
@@ -272,6 +415,48 @@ concepts:
           m: 20
           mu: 0.6
         say: μ = 0.6 gives 120 N. Friction is μ × 200 N here, so μ = 60 ÷ 200.
+  lesson:
+    - teach: Friction opposes relative motion between surfaces. Static friction adjusts up to a limit μₛN; once sliding, kinetic friction is f = μₖN, a little smaller. Rolling friction is much smaller still.
+      check:
+        prompt: Box of weight 50 N on a floor, μₖ = 0.2. Kinetic friction?
+        options:
+        - 10 N
+        - 50 N
+        - 250 N
+        answer: 10 N
+        why: 0.2 × 50.
+    - teach: Net force = applied force − friction. Then a = F_net/m. If the push is less than the limiting static friction, the box does not move at all.
+      check:
+        prompt: A 30 N push, friction 18 N, mass 6 kg. Acceleration?
+        options:
+        - 2 m/s²
+        - 5 m/s²
+        - 8 m/s²
+        answer: 2 m/s²
+        why: (30 − 18)/6.
+    - teach: Turning in a circle needs a centripetal force mv²/r. On a flat road friction gives it, so v_max = √(μrg). In a lift, apparent weight is m(g + a) going up faster and m(g − a) going down faster.
+      picture:
+        kind: compare
+        columns:
+        - title: Lift
+          points:
+          - speeding up upward
+          - steady speed
+          - speeding up downward
+        - title: Apparent weight
+          points:
+          - m(g + a)
+          - mg
+          - m(g − a)
+        alt: Apparent weight in a lift.
+      check:
+        prompt: A 50 kg person in a lift moving at steady speed (g = 10). Apparent weight?
+        options:
+        - 500 N
+        - 0 N
+        - 550 N
+        answer: 500 N
+        why: 'No acceleration: just mg.'
   items:
   - prompt: A 10 kg box is on a floor with μ = 0.3. Taking g = 10 m/s², find the kinetic friction (in N).
     answer: '30'
@@ -336,3 +521,114 @@ concepts:
     - Tyres grip.
     solution: Friction provides it.
     mistakes: {"The engine": "p11_turn_force", "Gravity": "p11_turn_force", "Air resistance": "p11_turn_force"}
+  - prompt: A 20 kg crate on a floor has μₖ = 0.25 (g = 10). Find the kinetic friction (in N).
+    answer: '50'
+    check: 0.25*200
+    difficulty: 1
+    hints:
+    - Normal force = mg.
+    - f = μN.
+    solution: 'Step 1: N = 200 N. Step 2: 0.25 × 200 = 50 N.'
+    mistakes:
+      '5': c11p04_fric
+      '80': c11p04_fric
+  - prompt: Kinetic friction is usually ______ limiting static friction.
+    options:
+    - less than
+    - greater than
+    - equal to
+    answer: less than
+    difficulty: 1
+    hints:
+    - Is it harder to start pushing or to keep pushing?
+    - μₖ compared with μₛ.
+    solution: 'Step 1: μₖ < μₛ. Step 2: less than.'
+    mistakes:
+      greater than: c11p04_fric
+      equal to: c11p04_fric
+  - prompt: Why are ball bearings used in machines?
+    options:
+    - to replace sliding with rolling friction
+    - to increase friction
+    - to add weight
+    answer: to replace sliding with rolling friction
+    difficulty: 1
+    hints:
+    - Which kind of friction is smallest?
+    - Balls roll.
+    solution: 'Step 1: rolling friction is small. Step 2: less energy lost.'
+    mistakes:
+      to increase friction: c11p04_fric
+      to add weight: c11p04_fric
+  - prompt: A 4 kg block is pushed with 30 N; friction is 10 N. Find its acceleration (in m/s²).
+    answer: '5'
+    check: (30-10)/4
+    difficulty: 2
+    hints:
+    - Net force = push − friction.
+    - Divide by mass.
+    solution: 'Step 1: 20 N net. Step 2: 20/4 = 5 m/s².'
+    mistakes:
+      '7.5': c11p04_fric
+      '10': c11p04_fric
+  - prompt: A 50 kg person is in a lift accelerating downward at 2 m/s² (g = 10). Find the apparent weight (in N).
+    answer: '400'
+    check: 50*(10-2)
+    difficulty: 2
+    hints:
+    - 'Going down faster: m(g − a).'
+    - 50 × 8.
+    solution: 'Step 1: 50 × (10 − 2). Step 2: 400 N.'
+    mistakes:
+      '600': c11p04_fric
+      '500': c11p04_fric
+  - prompt: A 500 kg car takes a curve of radius 20 m at 10 m/s. Find the centripetal force needed (in N).
+    answer: '2500'
+    check: 500*100/20
+    difficulty: 2
+    hints:
+    - F = mv²/r.
+    - 500 × 100 ÷ 20.
+    solution: 'Step 1: 50 000/20. Step 2: 2500 N.'
+    mistakes:
+      '250': c11p04_fric
+      '5000': c11p04_fric
+  - prompt: 'In free fall (a = g), the apparent weight of a person is:'
+    options:
+    - zero
+    - mg
+    - 2mg
+    answer: zero
+    difficulty: 2
+    hints:
+    - Use m(g − a).
+    - Here a = g.
+    solution: 'Step 1: m(g − g). Step 2: 0.'
+    mistakes:
+      mg: c11p04_fric
+      2mg: c11p04_fric
+  - prompt: μ = 0.4 between tyres and a flat road, curve radius 10 m (g = 10). Find the maximum safe speed (in m/s).
+    options:
+    - 2√10
+    - '40'
+    - '4'
+    answer: 2√10
+    difficulty: 3
+    hints:
+    - v_max = √(μrg).
+    - 0.4 × 10 × 10 = 40.
+    solution: 'Step 1: v² = 40. Step 2: v = √40 = 2√10 ≈ 6.3 m/s.'
+    mistakes:
+      '40': c11p04_fric
+      '4': c11p04_fric
+  - prompt: A 10 kg box needs at least 40 N to start moving (g = 10). Find μₛ.
+    answer: '0.4'
+    check: 40/100
+    difficulty: 3
+    hints:
+    - Limiting friction = μₛN.
+    - N = 100 N.
+    solution: 'Step 1: 40 = μₛ × 100. Step 2: μₛ = 0.4.'
+    mistakes:
+      '4': c11p04_fric
+      '2.5': c11p04_fric

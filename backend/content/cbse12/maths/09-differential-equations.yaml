@@ -14,6 +14,9 @@ tips:
   m12_if: "IF = e^(∫P dx) with P = 1/x, and e^(ln x) = x."
   m12_order_de: "Order = highest derivative present. The power on dy/dx doesn't matter."
   m12_particular: "A general solution has constants; giving them values makes it specific."
+  c12m9_od: 'Order: the highest derivative present. Degree: the power of that highest derivative, once the equation is a polynomial in derivatives.'
+  c12m9_sep: 'Separate: all y-terms with dy, all x-terms with dx, integrate both sides, then use the given condition to find C.'
+  c12m9_if: Write it as dy/dx + Py = Q, then IF = e^(∫P dx). Read P carefully, including its sign.
 concepts:
 - code: cbse12m.de.basics
   title: Order, degree and solutions
@@ -91,6 +94,50 @@ concepts:
       bin: Degree not defined
       clue: Is dy/dx in a power or an exponent?
       why: 'dy/dx is in an exponent: no degree.'
+  lesson:
+    - teach: A differential equation contains derivatives of an unknown function, like dy/dx = 3y or y″ + y = 0. Its order is the order of the highest derivative present.
+      check:
+        prompt: Order of y‴ + 2y′ = x?
+        options:
+        - '3'
+        - '1'
+        - '2'
+        answer: '3'
+        why: The highest derivative is the third, y‴.
+    - teach: Its degree is the power of the highest-order derivative, but only when the equation is a polynomial in the derivatives. If a derivative sits inside sin, eˣ, log and so on, the degree is not defined.
+      picture:
+        kind: compare
+        columns:
+        - title: Equation
+          points:
+          - (y″)² + y′ = 0
+          - y′ + e^(y′) = x
+        - title: Order
+          points:
+          - '2'
+          - '1'
+        - title: Degree
+          points:
+          - '2'
+          - not defined
+        alt: Order and degree for two example equations.
+      check:
+        prompt: Degree of (y″)² + (y′)³ = 0?
+        options:
+        - '2'
+        - '3'
+        - not defined
+        answer: '2'
+        why: The highest derivative y″ is squared; the cube is on a lower derivative.
+    - teach: A general solution has as many arbitrary constants as the order. A particular solution fixes them using given conditions. To check a solution, substitute it into the equation.
+      check:
+        prompt: Is y = e^(2x) a solution of y′ = 2y?
+        options:
+        - 'yes'
+        - 'no'
+        - only at x = 0
+        answer: 'yes'
+        why: y′ = 2e^(2x) = 2y.
   items:
   - prompt: Find the order of d²y/dx² + 3(dy/dx)³ = 0.
     answer: '2'
@@ -155,6 +202,111 @@ concepts:
     - Initial condition.
     solution: A particular solution.
     mistakes: {"a general solution": "m12_particular", "an order": "m12_particular", "a degree": "m12_particular"}
+  - prompt: Find the order of y′ + 5y = 0.
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Look for the highest derivative.
+    - y′ is a first derivative.
+    solution: 'Step 1: only y′ appears. Step 2: order 1.'
+    mistakes:
+      '5': c12m9_od
+      '0': c12m9_od
+  - prompt: Find the order of (y″)⁴ + y′ = 0.
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - Order looks at which derivative, not its power.
+    - The highest is y″.
+    solution: 'Step 1: highest derivative y″. Step 2: order 2.'
+    mistakes:
+      '4': c12m9_od
+      '1': c12m9_od
+  - prompt: Find the degree of (y″)⁴ + y′ = 0.
+    answer: '4'
+    check: '4'
+    difficulty: 1
+    hints:
+    - Degree is the power of the highest derivative.
+    - Which derivative is highest?
+    solution: 'Step 1: y″ is highest. Step 2: its power is 4.'
+    mistakes:
+      '2': c12m9_od
+      '1': c12m9_od
+  - prompt: How many arbitrary constants does the general solution of a 3rd-order equation have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - Each integration adds one constant.
+    - Match the order.
+    solution: 'Step 1: order 3. Step 2: 3 constants.'
+    mistakes:
+      '1': c12m9_od
+      '2': c12m9_od
+  - prompt: Find the degree of y‴ + (y″)² + (y′)⁵ = 0.
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - Find the highest derivative first.
+    - What power does it have?
+    solution: 'Step 1: y‴ is highest. Step 2: its power is 1.'
+    mistakes:
+      '5': c12m9_od
+      '2': c12m9_od
+  - prompt: 'The degree of y″ + cos(y′) = 0 is:'
+    options:
+    - not defined
+    - '1'
+    - '2'
+    answer: not defined
+    difficulty: 2
+    hints:
+    - Is the equation a polynomial in derivatives?
+    - y′ is inside a cosine.
+    solution: 'Step 1: cos(y′) is not a polynomial. Step 2: degree not defined.'
+    mistakes:
+      '1': c12m9_od
+      '2': c12m9_od
+  - prompt: y = A cos x + B sin x satisfies which equation?
+    options:
+    - y″ + y = 0
+    - y′ + y = 0
+    - y″ − y = 0
+    answer: y″ + y = 0
+    difficulty: 2
+    hints:
+    - Differentiate twice.
+    - Compare y″ with y.
+    solution: 'Step 1: y″ = −A cos x − B sin x = −y. Step 2: y″ + y = 0.'
+    mistakes:
+      y′ + y = 0: c12m9_od
+      y″ − y = 0: c12m9_od
+  - prompt: y = Ce^(3x) solves y′ = 3y. If y(0) = 4, find C.
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - Put x = 0.
+    - e⁰ = 1.
+    solution: 'Step 1: y(0) = C. Step 2: C = 4.'
+    mistakes:
+      '3': c12m9_od
+      '12': c12m9_od
+  - prompt: y = x² + C solves y′ = 2x. If y(1) = 5, find y(3).
+    answer: '13'
+    check: 3**2 + 4
+    difficulty: 3
+    hints:
+    - Use y(1) = 5 to find C.
+    - Then put x = 3.
+    solution: 'Step 1: 1 + C = 5, C = 4. Step 2: y(3) = 9 + 4 = 13.'
+    mistakes:
+      '9': c12m9_od
+      '14': c12m9_od
 - code: cbse12m.de.solve
   title: Separable, homogeneous and linear equations
   after:
@@ -255,6 +407,42 @@ concepts:
           d: 5
           t: 35
         say: '80 − 10 = 70, but decay isn''t subtraction: it halves every 5 years. 80 → 40 → 20 → 10.'
+  lesson:
+    - teach: 'Variables separable: if you can write g(y)dy = f(x)dx, integrate both sides and add a constant. Example: dy/dx = xy gives dy/y = x dx, so ln|y| = x²/2 + C.'
+      check:
+        prompt: Separate dy/dx = y/x. Which form is right?
+        options:
+        - dy/y = dx/x
+        - y dy = x dx
+        - dy = y dx
+        answer: dy/y = dx/x
+        why: Divide by y and multiply by dx.
+    - teach: 'Homogeneous: dy/dx = F(y/x), like dy/dx = (x + y)/x. Substitute y = vx, so dy/dx = v + x dv/dx; the equation becomes separable in v and x.'
+      check:
+        prompt: 'After y = vx, dy/dx equals:'
+        options:
+        - v + x dv/dx
+        - dv/dx
+        - v x
+        answer: v + x dv/dx
+        why: Product rule on vx.
+    - teach: 'Linear first order: dy/dx + Py = Q (P, Q functions of x). Multiply by the integrating factor IF = e^(∫P dx); the left side becomes d(y × IF)/dx, so y × IF = ∫Q × IF dx + C. Growth and decay: dy/dt = ky gives y = y₀e^(kt).'
+      picture:
+        kind: flow
+        steps:
+        - Write dy/dx + Py = Q
+        - IF = e^(∫P dx)
+        - y × IF = ∫Q × IF dx + C
+        - Use the condition to find C
+        alt: Steps for solving a linear first-order differential equation.
+      check:
+        prompt: IF of dy/dx + 2y = 1?
+        options:
+        - e^(2x)
+        - e^x
+        - 2x
+        answer: e^(2x)
+        why: P = 2, ∫2 dx = 2x.
   items:
   - prompt: Solve dy/dx = 2x with y(0) = 1. Find y(2).
     answer: '5'
@@ -327,3 +515,114 @@ concepts:
     - y = y₀e^(kt).
     solution: Exponential growth.
     mistakes: {"linear growth": "m12_exp_growth", "decay": "m12_exp_growth", "oscillation": "m12_exp_growth"}
+  - prompt: Solve dy/dx = 4x with y(0) = 2. Find y(1).
+    answer: '4'
+    check: 2*1**2 + 2
+    difficulty: 1
+    hints:
+    - Integrate both sides.
+    - Use y(0) to find C.
+    solution: 'Step 1: y = 2x² + C, C = 2. Step 2: y(1) = 4.'
+    mistakes:
+      '6': c12m9_sep
+      '2': c12m9_sep
+  - prompt: Solve dy/dx = cos x with y(0) = 1. Find y(π/2).
+    answer: '2'
+    check: sin(pi/2) + 1
+    difficulty: 1
+    hints:
+    - ∫cos x dx = sin x.
+    - C from y(0) = 1.
+    solution: 'Step 1: y = sin x + 1. Step 2: y(π/2) = 2.'
+    mistakes:
+      '1': c12m9_sep
+      '0': c12m9_sep
+  - prompt: 'Solve dy/dx = y with y(0) = 3. y(x) equals:'
+    options:
+    - 3eˣ
+    - eˣ + 3
+    - 3x
+    answer: 3eˣ
+    difficulty: 1
+    hints:
+    - 'Separate: dy/y = dx.'
+    - ln|y| = x + C.
+    solution: 'Step 1: y = Ceˣ. Step 2: C = 3.'
+    mistakes:
+      eˣ + 3: c12m9_sep
+      3x: c12m9_sep
+  - prompt: 'The integrating factor of dy/dx − 3y = x is:'
+    options:
+    - e^(−3x)
+    - e^(3x)
+    - −3x
+    answer: e^(−3x)
+    difficulty: 2
+    hints:
+    - Here P = −3.
+    - IF = e^(∫P dx).
+    solution: 'Step 1: ∫(−3)dx = −3x. Step 2: e^(−3x).'
+    mistakes:
+      e^(3x): c12m9_if
+      −3x: c12m9_if
+  - prompt: 'The integrating factor of dy/dx + (2/x)y = 1 (x > 0) is:'
+    options:
+    - x²
+    - 2x
+    - e^(2x)
+    answer: x²
+    difficulty: 2
+    hints:
+    - ∫(2/x)dx = 2 ln x.
+    - e^(2 ln x) simplifies.
+    solution: 'Step 1: e^(2 ln x) = e^(ln x²). Step 2: x².'
+    mistakes:
+      2x: c12m9_if
+      e^(2x): c12m9_if
+  - prompt: 'With y = vx, the equation dy/dx = (x + y)/x becomes:'
+    options:
+    - x dv/dx = 1
+    - dv/dx = v
+    - x dv/dx = v
+    answer: x dv/dx = 1
+    difficulty: 2
+    hints:
+    - (x + vx)/x = 1 + v.
+    - Set v + x dv/dx = 1 + v.
+    solution: 'Step 1: v + x dv/dx = 1 + v. Step 2: x dv/dx = 1.'
+    mistakes:
+      dv/dx = v: c12m9_sep
+      x dv/dx = v: c12m9_sep
+  - prompt: A population grows by dP/dt = 0.1P (t in years). If P(0) = 1000, what is P after 10 years, as a multiple of e?
+    answer: '1000'
+    check: 1000*exp(Rational(1,10)*10)/E
+    difficulty: 2
+    hints:
+    - P = P₀e^(kt).
+    - k t = 0.1 × 10.
+    solution: 'Step 1: P = 1000e^(1). Step 2: 1000e.'
+    mistakes:
+      '100': c12m9_sep
+      '10000': c12m9_sep
+  - prompt: Solve dy/dx + y = 1 with y(0) = 0. Find the limit of y as x → ∞.
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - IF = eˣ; d(y eˣ)/dx = eˣ.
+    - y eˣ = eˣ + C; use y(0) = 0.
+    solution: 'Step 1: y = 1 − e^(−x). Step 2: as x → ∞, y → 1.'
+    mistakes:
+      '0': c12m9_if
+      '-1': c12m9_if
+  - prompt: Solve dy/dx = xy with y(0) = 1. Find ln y(2).
+    answer: '2'
+    check: 2**2/2
+    difficulty: 3
+    hints:
+    - dy/y = x dx.
+    - ln y = x²/2 + C, with C = 0.
+    solution: 'Step 1: ln y = x²/2. Step 2: at x = 2, ln y = 2.'
+    mistakes:
+      '4': c12m9_sep
+      '1': c12m9_sep

@@ -3,6 +3,10 @@ subject: cbse10-math
 chapter: 5
 title: Arithmetic Progressions
 tips:
+  c10m5_term_vs_sum: "That formula gives one term, not a sum. Which formula adds up all the terms using the first and last?"
+  c10m5_from_sums: "Sₙ gives sums, not terms. Find a₁ = S₁ and a₂ = S₂ − S₁ first, then subtract the terms."
+  c10m5_sum_formula: "In Sₙ = n/2 [2a + (n − 1)d], the bracket uses (n − 1), not n."
+  c10m5_whole_n: "Solve aₙ = 301 for n. A term number must be a whole number: is yours, exactly?"
   c10_n_minus_1: 'The nth term adds d only (n − 1) times: the first term already counts as one term.'
   c10_d_sign: d = next term − this term. If the terms go down, d is negative.
   c10_halve_sum: 'Pairing gives twice the sum. Remember to divide by 2: Sₙ = n/2 × (first + last).'
@@ -14,6 +18,11 @@ tips:
   c10m5_count: To count terms, set aₙ equal to the last term and solve for n. Don't just divide the last term by d.
   c10m5_sum: Sₙ = n/2 × (first + last), or n/2 × [2a + (n − 1)d]. Don't forget the n/2 in front.
   c10m5_average: "Think of the sum as the number of terms times the average term. In an AP, the average term is halfway between the first and the last."
+  c10m5_raises_count: In the 1st year there is no raise yet. How many raises have there been by the 8th year?
+  c10m5_found_n_minus_1: You found n − 1. One more step to get n.
+  c10m5_last_not_total: That is what one class plants. The question asks for the total of all classes.
+  c10m5_count_double: That adds 1 + 2 + … + 12. Each class plants twice its class number.
+  c10m5_s1_whole: 'The first term is S₁: put n = 1 into the whole formula.'
 concepts:
 - code: cbse10m.ap.nth
   title: The nth term of an AP
@@ -144,6 +153,11 @@ concepts:
         - '2'
         answer: −4
         why: 6 − 10 = −4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Subtract a term from the next one: 7 − 4 = 3. Step 2: Do it again: 10 − 7 = 3, 13 − 10 = 3. Step 3: The same gap every time means an AP with d = 3. Step 4: For 10, 6, 2, −2 the gap is 6 − 10 = −4, so d = −4. Step 5: If the gaps change, as in 1, 4, 9, 16, it is not an AP.'
+      - style: real_world
+        teach: 'Saving ₹50 more each week, stairs that rise 15 cm per step, a taxi that charges ₹30 plus ₹12 for every km: each grows by the same amount every time, so each list of values is an AP.'
     - teach: 'The nth term is aₙ = a + (n − 1)d. You add d only (n − 1) times because you start at the first term. For 4, 7, 10, …: a₂₀ = 4 + 19 × 3 = 61.'
       check:
         prompt: a₁₀ of 4, 7, 10, … ?
@@ -153,6 +167,36 @@ concepts:
         - '30'
         answer: '31'
         why: 4 + 9 × 3 = 31.
+      ways:
+      - style: visual
+        teach: 'Each term is one jump of d from the one before. To reach the 4th term from the 1st you make 3 jumps, not 4: a₄ = a + 3d.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 16
+          step: 1
+          points:
+          - at: 4
+            label: a₁
+          - at: 7
+            label: a₂
+          - at: 10
+            label: a₃
+          - at: 13
+            label: a₄
+          jumps:
+          - from: 4
+            to: 7
+            label: '+3'
+          - from: 7
+            to: 10
+            label: '+3'
+          - from: 10
+            to: 13
+            label: '+3'
+          alt: Terms 4, 7, 10 and 13 on a number line, joined by three jumps of plus 3.
+      - style: step_by_step
+        teach: 'Step 1: Read a and d: for 4, 7, 10, … a = 4 and d = 3. Step 2: For the 20th term, n = 20, so n − 1 = 19. Step 3: a₂₀ = 4 + 19 × 3. Step 4: = 4 + 57 = 61.'
     - teach: To find which term equals a given number, set a + (n − 1)d equal to it and solve for n. n must come out as a positive whole number, or the number is not in the AP.
       check:
         prompt: Which term of 4, 7, 10, … is 43?
@@ -162,6 +206,26 @@ concepts:
         - 43rd
         answer: 14th
         why: 4 + (n − 1)3 = 43 gives n = 14.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is 301 a term of 5, 11, 17, …? Here a = 5 and d = 6. Step 2: Set 5 + (n − 1) × 6 = 301. Step 3: (n − 1) × 6 = 296, so n − 1 = 49.33… Step 4: n is not a whole number, so 301 is not a term.'
+      - style: real_world
+        teach: 'A lift stops at floors 2, 5, 8, 11, … Does it stop at floor 26? 2 + (n − 1) × 3 = 26 gives n − 1 = 8, n = 9: yes, at its 9th stop. Floor 25? n − 1 = 23/3, not whole: the lift never stops there.'
+      - style: visual
+        teach: A lift stopping at floors 2, 5, 8, 11, … lands on 26 but jumps right over 25.
+        picture:
+          kind: number_line
+          from: 2
+          to: 29
+          step: 3
+          points:
+          - at: 2
+            label: 1st stop
+          - at: 26
+            label: 9th stop
+          - at: 25
+            label: '25: missed'
+          alt: 'Stops every 3 floors from floor 2: 2, 5, 8, and so on up to 26, the 9th stop; floor 25 falls between stops.'
   items:
   - prompt: Find the common difference of the AP 5, 9, 13, 17, …
     answer: '4'
@@ -241,7 +305,7 @@ concepts:
     - Is n a whole number?
     solution: 'Step 1: (n − 1)6 = 296, so n − 1 = 49.33… Step 2: n is not whole, so 301 is not a term.'
     mistakes:
-      '50': c10m5_count
+      '50': c10m5_whole_n
   - prompt: How many terms are there in the AP 7, 13, 19, …, 205?
     answer: '34'
     check: (205 - 7) // 6 + 1
@@ -317,6 +381,53 @@ concepts:
     solution: d = 3√2 − √2 = 2√2, so k = 2.
     mistakes:
       '3': c10m5_next_minus
+  - prompt: 'Assertion (A): The 10th term of the AP 5, 8, 11, … is 32.
+
+      Reason (R): The nth term of an AP is aₙ = a + (n − 1)d.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: By R, a₁₀ = 5 + 9 × 3 = 32. So A is true, and R is how we get it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A job starts at ₹20,000 a month, with a raise of ₹1,500 a month every year. What is the monthly salary in the 8th year?'
+    options:
+    - ₹30,500
+    - ₹32,000
+    - ₹12,000
+    answer: ₹30,500
+    hints:
+    - The salaries form an AP with a = 20,000 and d = 1,500.
+    - Use aₙ = a + (n − 1)d with n = 8.
+    solution: a₈ = 20,000 + 7 × 1,500 = 20,000 + 10,500 = ₹30,500 a month.
+    mistakes:
+      ₹32,000: c10m5_raises_count
+    exam: case
+    difficulty: 2
+  - prompt: Which term of the AP 3, 8, 13, … is 78?
+    options:
+    - 16th
+    - 15th
+    - 17th
+    answer: 16th
+    hints:
+    - Set a + (n − 1)d = 78 with a = 3 and d = 5.
+    - (n − 1) × 5 = 75.
+    solution: 3 + (n − 1) × 5 = 78, so (n − 1) × 5 = 75, n − 1 = 15 and n = 16.
+    mistakes:
+      15th: c10m5_found_n_minus_1
+    exam: one_mark
+    difficulty: 1
 - code: cbse10m.ap.sum
   title: Sum of the first n terms
   after:
@@ -399,6 +510,11 @@ concepts:
         - '100'
         answer: '110'
         why: 10/2 × (2 + 20) = 110.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the sum forwards: 1 + 2 + … + 100. Step 2: Write it backwards underneath: 100 + 99 + … + 1. Step 3: Add each column: every pair makes 101. Step 4: There are 100 pairs, so 2S = 100 × 101 = 10100. Step 5: S = 5050.'
+      - style: real_world
+        teach: 'Logs are stacked with 20 in the bottom row, 19 in the next, and so on up to 1 at the top. Total logs = n/2 × (first + last) = 20/2 × (20 + 1) = 210. Pair the bottom row with the top row: 20 + 1 = 21, and there are 10 such pairs.'
     - teach: 'If you don''t know the last term, use Sₙ = n/2 [2a + (n − 1)d]. For 3, 7, 11, … the first 10 terms sum to 10/2 × (6 + 36) = 210. You can also get a term from sums: aₙ = Sₙ − Sₙ₋₁.'
       check:
         prompt: If S₅ = 40 and S₄ = 30, a₅ = ?
@@ -408,6 +524,20 @@ concepts:
         - '8'
         answer: '10'
         why: a₅ = S₅ − S₄.
+      ways:
+      - style: visual
+        teach: Using the formula without the last term, box by box, for the first 10 terms of 3, 7, 11, …
+        picture:
+          kind: flow
+          steps:
+          - a = 3, d = 4, n = 10
+          - S = n/2 × [2a + (n − 1)d]
+          - = 5 × [6 + 9 × 4]
+          - = 5 × 42
+          - = 210
+          alt: With a 3, d 4 and n 10, the sum is 5 times 6 plus 36, which is 5 times 42, or 210.
+      - style: step_by_step
+        teach: 'Step 1: If Sₙ = n² + 2n, then S₅ = 25 + 10 = 35 and S₄ = 16 + 8 = 24. Step 2: The 5th term is a₅ = S₅ − S₄ = 11. Step 3: The first term is S₁ = 3. Step 4: Check: the AP is 3, 5, 7, 9, 11, and 3 + 5 + 7 + 9 + 11 = 35 ✓.'
   items:
   - prompt: Find the sum 1 + 2 + 3 + … + 100.
     answer: '5050'
@@ -427,7 +557,7 @@ concepts:
     - Sₙ = n/2 [2a + (n − 1)d].
     - 5 × (4 + 27).
     solution: 'Step 1: a = 2, d = 3, n = 10. Step 2: S₁₀ = 5 × (4 + 9 × 3) = 5 × 31 = 155.'
-    mistakes: {"29": "t10_sum_formula", "170": "c10_n_minus_1"}
+    mistakes: {"29": "t10_sum_formula", "170": "c10m5_sum_formula"}
   - prompt: Find the sum of the first 20 odd numbers.
     answer: '400'
     check: 20^2
@@ -454,7 +584,7 @@ concepts:
     - a = 50, d = 10, n = 12.
     - 6 × (100 + 110).
     solution: 'Step 1: S₁₂ = 12/2 × (2 × 50 + 11 × 10) = 6 × 210 = 1260.'
-    mistakes: {"160": "t10_sum_formula", "1320": "c10_n_minus_1"}
+    mistakes: {"160": "t10_sum_formula", "1320": "c10m5_sum_formula"}
   - prompt: How many terms of 3, 6, 9, … must be added to get 165?
     answer: '10'
     check: '10'
@@ -517,7 +647,7 @@ concepts:
     - d = a₂ − a₁.
     solution: 'Step 1: S₂ = 12 + 10 = 22, a₂ = 22 − 8 = 14. Step 2: d = 14 − 8 = 6.'
     mistakes:
-      '14': c10m5_next_minus
+      '14': c10m5_from_sums
       '3': c10m5_sum
   - prompt: Find 34 + 32 + 30 + … + 10.
     answer: '286'
@@ -564,5 +694,55 @@ concepts:
     - One of these is the nth-term formula.
     solution: 'The sum is n times the average of the first and last terms: n/2 (a + l).'
     mistakes:
-      Sₙ = a + (n − 1)d: c10m5_n_minus_one
+      Sₙ = a + (n − 1)d: c10m5_term_vs_sum
       Sₙ = n(a + l): c10m5_average
+  - prompt: 'Assertion (A): The sum of the first 20 odd numbers is 400.
+
+      Reason (R): The sum of the first n odd numbers is n².'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R, the first 20 odd numbers add to 20² = 400. Check with the formula: 20/2 × (1 + 39) = 400. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: In a tree-planting drive, Class 1 plants 2 trees, Class 2 plants 4, Class 3 plants 6, and so on up to Class 12. How many trees are planted in all?'
+    options:
+    - '156'
+    - '24'
+    - '78'
+    - '144'
+    answer: '156'
+    hints:
+    - The numbers 2, 4, 6, … form an AP. How many terms are there?
+    - n = 12, first term 2, last term 24. Use Sₙ = n/2 × (a + l).
+    solution: S₁₂ = 12/2 × (2 + 24) = 6 × 26 = 156 trees.
+    mistakes:
+      '24': c10m5_last_not_total
+      '78': c10m5_count_double
+    exam: case
+    difficulty: 2
+  - prompt: If the sum of the first n terms of an AP is Sₙ = 3n² + n, what is its first term?
+    options:
+    - '4'
+    - '3'
+    - '1'
+    answer: '4'
+    hints:
+    - The first term is the sum of the first 1 term.
+    - Put n = 1 into 3n² + n.
+    solution: a₁ = S₁ = 3 × 1² + 1 = 4.
+    mistakes:
+      '3': c10m5_s1_whole
+      '1': c10m5_s1_whole
+    exam: one_mark
+    difficulty: 1

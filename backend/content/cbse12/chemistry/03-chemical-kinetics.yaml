@@ -13,6 +13,9 @@ tips:
   c12_pseudo: "Water is in such excess that its concentration barely changes; only the ester matters."
   c12_rate_factor: "Rate ∝ [A]². Square the change in [A]."
   c12_temp_factor: "50 − 20 = 30 °C is three 10-degree steps. Double for each step."
+  c12c3_order: Order = sum of the powers in the experimental rate law. Rate changes by (factor)^(power) for each reactant.
+  c12c3_half: 'First order: t½ = 0.693/k, the same at every stage. After n half-lives, (1/2)ⁿ is left.'
+  c12c3_temp: Higher temperature or a catalyst means more molecules can pass the activation energy barrier.
 concepts:
 - code: cbse12c.kin.rate
   title: Rate, rate law and order
@@ -101,6 +104,48 @@ concepts:
           r3: 9
           tot: 2
         say: Order 2 in A is right, but the overall order must be 3.
+  lesson:
+    - teach: The rate of a reaction is how fast concentration changes. For aA → products, rate = −(1/a) d[A]/dt. The average rate is over an interval; the instantaneous rate is the slope at one moment. Rate depends on concentration, temperature, catalysts and surface area.
+      check:
+        prompt: 'For 2A → B, if [A] falls at 0.4 mol L⁻¹ s⁻¹, the reaction rate is:'
+        options:
+        - 0.2 mol L⁻¹ s⁻¹
+        - 0.4 mol L⁻¹ s⁻¹
+        - 0.8 mol L⁻¹ s⁻¹
+        answer: 0.2 mol L⁻¹ s⁻¹
+        why: Divide by the coefficient 2.
+    - teach: 'Rate law: rate = k[A]ˣ[B]ʸ, found by experiment. The order is x + y and can be 0, a fraction or a whole number. Molecularity is the number of species colliding in one elementary step (1, 2 or 3).'
+      picture:
+        kind: compare
+        columns:
+        - title: Order
+          points:
+          - from experiment
+          - can be 0 or fractional
+          - for the overall reaction
+        - title: Molecularity
+          points:
+          - from the mechanism
+          - whole number 1–3
+          - for one elementary step
+        alt: Order and molecularity compared.
+      check:
+        prompt: rate = k[A]^(1/2)[B]. Overall order?
+        options:
+        - 3/2
+        - '1'
+        - '2'
+        answer: 3/2
+        why: 1/2 + 1.
+    - teach: 'Units of k depend on order: zero order mol L⁻¹ s⁻¹, first order s⁻¹, second order L mol⁻¹ s⁻¹. A reaction like ester hydrolysis in a large excess of water behaves as first order (pseudo first order) because [water] barely changes.'
+      check:
+        prompt: 'k has units L mol⁻¹ s⁻¹. The order is:'
+        options:
+        - '2'
+        - '1'
+        - '0'
+        answer: '2'
+        why: That is the pattern for second order.
   items:
   - prompt: Rate = k[A]²[B]. What is the overall order?
     answer: '3'
@@ -169,6 +214,111 @@ concepts:
     - Acts first order.
     solution: A pseudo first-order reaction.
     mistakes: {"zero-order reaction": "c12_pseudo", "third-order reaction": "c12_pseudo", "fast reaction": "c12_pseudo"}
+  - prompt: rate = k[A][B]². Overall order?
+    answer: '3'
+    check: 1 + 2
+    difficulty: 1
+    hints:
+    - Add the powers.
+    - 1 + 2.
+    solution: 'Step 1: 1 + 2. Step 2: 3.'
+    mistakes:
+      '2': c12c3_order
+      '1': c12c3_order
+  - prompt: rate = k[A]³. [A] is doubled. Rate grows by what factor?
+    answer: '8'
+    check: 2**3
+    difficulty: 1
+    hints:
+    - Raise the factor to the order.
+    - 2³.
+    solution: 'Step 1: 2³. Step 2: 8.'
+    mistakes:
+      '6': c12c3_order
+      '2': c12c3_order
+  - prompt: 'Zero-order reaction: [A] is tripled. Rate grows by what factor?'
+    answer: '1'
+    check: 3**0
+    difficulty: 1
+    hints:
+    - Zero order means rate = k.
+    - '[A]⁰ = 1.'
+    solution: 'Step 1: rate does not depend on [A]. Step 2: factor 1.'
+    mistakes:
+      '3': c12c3_order
+      '0': c12c3_order
+  - prompt: rate = k[A][B]. [A] doubles and [B] triples. Rate factor?
+    answer: '6'
+    check: 2*3
+    difficulty: 2
+    hints:
+    - Each is first order.
+    - Multiply the factors.
+    solution: 'Step 1: 2 × 3. Step 2: 6.'
+    mistakes:
+      '5': c12c3_order
+      '36': c12c3_order
+  - prompt: Doubling [A] makes the rate 4 times larger. Order with respect to A?
+    answer: '2'
+    check: '2'
+    difficulty: 2
+    hints:
+    - 2ˣ = 4.
+    - Solve for x.
+    solution: 'Step 1: 2ˣ = 4. Step 2: x = 2.'
+    mistakes:
+      '4': c12c3_order
+      '1': c12c3_order
+  - prompt: For N₂ + 3H₂ → 2NH₃, if [NH₃] rises at 0.2 mol L⁻¹ s⁻¹, [H₂] falls at what rate (mol L⁻¹ s⁻¹), as a fraction?
+    answer: 3/10
+    check: Rational(2,10)*3/2
+    difficulty: 2
+    hints:
+    - Rate = (1/2)d[NH₃]/dt = −(1/3)d[H₂]/dt.
+    - 0.1 × 3.
+    solution: 'Step 1: reaction rate 0.1. Step 2: H₂ falls at 0.3.'
+    mistakes:
+      1/5: c12c3_order
+      3/5: c12c3_order
+  - prompt: 'The units of k for a zero-order reaction are:'
+    options:
+    - mol L⁻¹ s⁻¹
+    - s⁻¹
+    - L mol⁻¹ s⁻¹
+    answer: mol L⁻¹ s⁻¹
+    difficulty: 2
+    hints:
+    - rate = k.
+    - Same units as rate.
+    solution: 'Step 1: k = rate. Step 2: mol L⁻¹ s⁻¹.'
+    mistakes:
+      s⁻¹: c12c3_order
+      L mol⁻¹ s⁻¹: c12c3_order
+  - prompt: 'Experiments: [A] = 0.1 gives rate 2; [A] = 0.3 gives rate 18 (same units). Order in A?'
+    answer: '2'
+    check: '2'
+    difficulty: 3
+    hints:
+    - '[A] × 3, rate × 9.'
+    - 3ˣ = 9.
+    solution: 'Step 1: 3ˣ = 9. Step 2: x = 2.'
+    mistakes:
+      '3': c12c3_order
+      '1': c12c3_order
+  - prompt: Why can molecularity never be zero or fractional?
+    options:
+    - it counts actual molecules colliding in a step
+    - it is found by experiment
+    - it equals the order
+    answer: it counts actual molecules colliding in a step
+    difficulty: 3
+    hints:
+    - You cannot have half a molecule.
+    - It describes one elementary step.
+    solution: 'Step 1: it is a count. Step 2: always 1, 2 or 3.'
+    mistakes:
+      it is found by experiment: c12c3_order
+      it equals the order: c12c3_order
 - code: cbse12c.kin.integrated
   title: Integrated rate laws and temperature
   after:
@@ -265,6 +415,46 @@ concepts:
           - 45
           - 50
         say: '94% gone isn''t 94% of the time: it halves each 5 minutes. 100 → 50 → 25 → 12.5 → 6.25.'
+  lesson:
+    - teach: 'Zero order: [A] = [A]₀ − kt, falling in a straight line; t½ = [A]₀/(2k). First order: k = (2.303/t) log([A]₀/[A]) and t½ = 0.693/k, which does not depend on how much you start with. Radioactive decay is first order.'
+      check:
+        prompt: First order, t½ = 20 min. Time for 100 g to become 50 g? Time for 50 g to become 25 g?
+        options:
+        - 20 min each
+        - 20 then 10 min
+        - 20 then 40 min
+        answer: 20 min each
+        why: First-order half-life is constant.
+    - teach: After n half-lives, the fraction left is (1/2)ⁿ. So 3 half-lives leave 1/8; 4 leave 1/16.
+      picture:
+        kind: bars
+        bars:
+        - label: '0'
+          value: 100
+        - label: 1 t½
+          value: 50
+        - label: 2 t½
+          value: 25
+        - label: 3 t½
+          value: 12.5
+        alt: 'Amount left halves every half-life: 100, 50, 25, 12.5.'
+      check:
+        prompt: Fraction left after 4 half-lives?
+        options:
+        - 1/16
+        - 1/8
+        - 1/4
+        answer: 1/16
+        why: (1/2)⁴.
+    - teach: 'Temperature: many reactions roughly double in rate per 10 °C. Arrhenius: k = Ae^(−Ea/RT). Only collisions with enough energy (≥ Ea) and the right orientation react. A catalyst gives a lower-Ea path, so more collisions succeed; it does not change ΔH.'
+      check:
+        prompt: 'A catalyst changes:'
+        options:
+        - the activation energy
+        - the enthalpy change ΔH
+        - the equilibrium constant
+        answer: the activation energy
+        why: It offers a new pathway with lower Ea.
   items:
   - prompt: A first-order reaction has k = 0.0693 s⁻¹. Find t½ (s).
     answer: '10'
@@ -329,3 +519,105 @@ concepts:
     solution: It doesn't depend on the initial concentration.
     mistakes:
       doubles as concentration doubles: c12c_half
+  - prompt: First order, k = 0.00693 s⁻¹. Find t½ (s).
+    answer: '100'
+    check: Rational(693,1000)/Rational(693,100000)
+    difficulty: 1
+    hints:
+    - t½ = 0.693/k.
+    - 0.693/0.00693.
+    solution: 'Step 1: 0.693/0.00693. Step 2: 100 s.'
+    mistakes:
+      '10': c12c3_half
+      '1000': c12c3_half
+  - prompt: Starting with 64 g, how much (g) is left after 4 half-lives?
+    answer: '4'
+    check: 64/2**4
+    difficulty: 1
+    hints:
+    - Halve 4 times.
+    - 64 → 32 → 16 → 8 → ?
+    solution: 'Step 1: 64/16. Step 2: 4 g.'
+    mistakes:
+      '16': c12c3_half
+      '8': c12c3_half
+  - prompt: t½ = 6 h. How many hours until 1/8 is left?
+    answer: '18'
+    check: 3*6
+    difficulty: 1
+    hints:
+    - 1/8 = (1/2)³.
+    - 3 half-lives.
+    solution: 'Step 1: 3 × 6. Step 2: 18 h.'
+    mistakes:
+      '48': c12c3_half
+      '12': c12c3_half
+  - prompt: Rate doubles per 10 °C. Factor from 25 °C to 65 °C?
+    answer: '16'
+    check: 2**4
+    difficulty: 2
+    hints:
+    - 40 °C rise = 4 steps of 10.
+    - 2⁴.
+    solution: 'Step 1: 4 doublings. Step 2: 16.'
+    mistakes:
+      '8': c12c3_temp
+      '4': c12c3_temp
+  - prompt: 'Zero order: [A]₀ = 0.8 mol/L, k = 0.02 mol L⁻¹ s⁻¹. Find t½ (s).'
+    answer: '20'
+    check: Rational(8,10)/(2*Rational(2,100))
+    difficulty: 2
+    hints:
+    - t½ = [A]₀/(2k).
+    - 0.8/0.04.
+    solution: 'Step 1: 0.8/0.04. Step 2: 20 s.'
+    mistakes:
+      '40': c12c3_half
+      '10': c12c3_half
+  - prompt: 'Zero order: [A]₀ = 1 mol/L, k = 0.1 mol L⁻¹ min⁻¹. [A] after 4 min (mol/L), as a fraction?'
+    answer: 3/5
+    check: 1 - Rational(1,10)*4
+    difficulty: 2
+    hints:
+    - '[A] = [A]₀ − kt.'
+    - 1 − 0.4.
+    solution: 'Step 1: 1 − 0.4. Step 2: 0.6 = 3/5.'
+    mistakes:
+      2/5: c12c3_half
+      1/2: c12c3_half
+  - prompt: 'First order: 99% complete takes how many times longer than 90% complete?'
+    answer: '2'
+    check: log(100,10)/log(10,10)
+    difficulty: 3
+    hints:
+    - t ∝ log([A]₀/[A]).
+    - log 100 vs log 10.
+    solution: 'Step 1: log 100 = 2, log 10 = 1. Step 2: twice as long.'
+    mistakes:
+      '10': c12c3_half
+      '9': c12c3_half
+  - prompt: 'First order: 75% of a reactant is used in 30 min. Find t½ (min).'
+    answer: '15'
+    check: 30/2
+    difficulty: 3
+    hints:
+    - 25% left = 1/4 = (1/2)².
+    - Two half-lives in 30 min.
+    solution: 'Step 1: 2 half-lives. Step 2: t½ = 15 min.'
+    mistakes:
+      '30': c12c3_half
+      '10': c12c3_half
+  - prompt: Why does raising temperature speed up a reaction so much?
+    options:
+    - a larger fraction of molecules have energy ≥ Ea
+    - molecules get bigger
+    - Ea increases
+    answer: a larger fraction of molecules have energy ≥ Ea
+    difficulty: 3
+    hints:
+    - Think of the energy distribution of molecules.
+    - More are in the high-energy tail.
+    solution: 'Step 1: the distribution shifts to higher energy. Step 2: many more effective collisions.'
+    mistakes:
+      molecules get bigger: c12c3_temp
+      Ea increases: c12c3_temp

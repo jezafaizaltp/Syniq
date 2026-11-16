@@ -15,6 +15,9 @@ tips:
   p12_path_diff: "Path difference = nλ."
   p12_polarisation: "Only waves that vibrate sideways can be filtered by direction."
   p12_polaroid: "An ideal polaroid passes half of unpolarised light."
+  c12p10_int: 'Bright: path difference nλ. Dark: (n + ½)λ. Fringe width β = λD/d, so it grows with λ and D and shrinks with d.'
+  c12p10_pol: "Ask what a polaroid does to each kind of light: one kind is just halved at any angle; the other follows I₀cos²θ and changes as you turn it."
+  c12p10_diff: 'Single slit: minima at a sin θ = nλ; the central maximum is twice as wide as the others, angular width 2λ/a.'
 concepts:
 - code: cbse12p.wave.huygens
   title: Huygens' principle and interference
@@ -107,6 +110,48 @@ concepts:
           - 0.5
           - 1.9
         say: 'The fringes spread out further from the slits: β ∝ D. Move the screen back.'
+  lesson:
+    - teach: 'A wavefront joins points vibrating in the same phase. Huygens'' principle: every point on a wavefront acts as a source of secondary wavelets; their common tangent a moment later is the new wavefront. This explains reflection and refraction, with n = v₁/v₂.'
+      check:
+        prompt: 'Light goes from air into glass. According to Huygens'' construction, the wavelets in glass are:'
+        options:
+        - smaller, because light is slower
+        - larger, because light is faster
+        - the same size
+        answer: smaller, because light is slower
+        why: In the same time they travel a shorter distance.
+    - teach: Two coherent sources (constant phase difference) overlap to give interference. Bright (constructive) where the path difference is nλ; dark (destructive) where it is (n + ½)λ. Ordinary bulbs are not coherent; two slits lit by one source are.
+      check:
+        prompt: 'Path difference 2.5λ gives:'
+        options:
+        - a dark fringe
+        - a bright fringe
+        - no light at all anywhere
+        answer: a dark fringe
+        why: 2.5λ = (2 + ½)λ.
+    - teach: 'Young''s double slit: fringes are equally spaced with fringe width β = λD/d (D = screen distance, d = slit gap). Intensity I = 4I₀cos²(φ/2): bright fringes are four times one slit''s intensity.'
+      picture:
+        kind: bars
+        bars:
+        - label: −2β
+          value: 4
+        - label: −β
+          value: 4
+        - label: '0'
+          value: 4
+        - label: β
+          value: 4
+        - label: 2β
+          value: 4
+        alt: Bright fringes of equal brightness spaced evenly at distances β apart on the screen.
+      check:
+        prompt: 'Doubling D makes β:'
+        options:
+        - double
+        - half
+        - the same
+        answer: double
+        why: β ∝ D.
   items:
   - prompt: In Young's experiment λ = 600 nm, D = 1 m, d = 1 mm. Find the fringe width (mm).
     answer: '0.6'
@@ -175,6 +220,108 @@ concepts:
     - (n + ½)λ.
     solution: (n + ½)λ.
     mistakes: {"a whole multiple of λ": "p12_dark_fringe", "zero": "p12_dark_fringe", "2λ only": "p12_dark_fringe"}
+  - prompt: 'Young''s experiment: λ = 500 nm, D = 2 m, d = 1 mm. Find β (mm).'
+    answer: '1'
+    check: 500*10**-9*2/(10**-3)*1000
+    difficulty: 1
+    hints:
+    - β = λD/d.
+    - 5 × 10⁻⁷ × 2 / 10⁻³.
+    solution: 'Step 1: 10⁻³ m. Step 2: 1 mm.'
+    mistakes:
+      '2': c12p10_int
+      1/2: c12p10_int
+  - prompt: The wavelength is doubled (same D and d). By what factor does β change?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - β ∝ λ.
+    - Double λ.
+    solution: 'Step 1: β ∝ λ. Step 2: factor 2.'
+    mistakes:
+      '4': c12p10_int
+      1/2: c12p10_int
+  - prompt: For destructive interference with n = 1 and λ = 600 nm, find the path difference (nm).
+    answer: '900'
+    check: Rational(3,2)*600
+    difficulty: 1
+    hints:
+    - 'Dark: (n + ½)λ.'
+    - 1.5 × 600.
+    solution: 'Step 1: 1.5 × 600. Step 2: 900 nm.'
+    mistakes:
+      '600': c12p10_int
+      '1200': c12p10_int
+  - prompt: Light speeds are 3 × 10⁸ m/s in air and 2 × 10⁸ m/s in glass. By Huygens, n of glass as a fraction?
+    answer: 3/2
+    check: Rational(3,2)
+    difficulty: 2
+    hints:
+    - n = v₁/v₂.
+    - 3/2.
+    solution: 'Step 1: 3 × 10⁸/2 × 10⁸. Step 2: 3/2.'
+    mistakes:
+      2/3: c12p10_int
+      '1': c12p10_int
+  - prompt: Each slit alone gives intensity I₀. Intensity at a bright fringe, in units of I₀?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - Amplitudes add, then square.
+    - (2A)² = 4A².
+    solution: 'Step 1: amplitude doubles. Step 2: intensity × 4.'
+    mistakes:
+      '2': c12p10_int
+      '1': c12p10_int
+  - prompt: Distance of the 3rd bright fringe from the centre, if β = 0.5 mm (mm), as a fraction?
+    answer: 3/2
+    check: 3*Rational(1,2)
+    difficulty: 2
+    hints:
+    - Bright fringes are at nβ.
+    - 3 × 0.5.
+    solution: 'Step 1: 3β. Step 2: 1.5 mm.'
+    mistakes:
+      5/4: c12p10_int
+      '1': c12p10_int
+  - prompt: The whole Young's apparatus is put in water (n = 4/3). β becomes what fraction of its value in air?
+    answer: 3/4
+    check: Rational(3,4)
+    difficulty: 2
+    hints:
+    - λ in water = λ/n.
+    - β ∝ λ.
+    solution: 'Step 1: λ → 3λ/4. Step 2: β → 3β/4.'
+    mistakes:
+      4/3: c12p10_int
+      '1': c12p10_int
+  - prompt: Why don't two separate torch bulbs give a steady interference pattern?
+    options:
+    - they are not coherent
+    - their light is too bright
+    - they are too far apart to shine
+    answer: they are not coherent
+    difficulty: 3
+    hints:
+    - Their phase difference changes randomly.
+    - The fringes would shift too fast to see.
+    solution: 'Step 1: independent sources have random phases. Step 2: not coherent, so no steady pattern.'
+    mistakes:
+      their light is too bright: c12p10_int
+      they are too far apart to shine: c12p10_int
+  - prompt: At a point the phase difference is 120° (2π/3). Intensity in units of I₀ (single-slit intensity)?
+    answer: '1'
+    check: 4*cos(pi/3)**2
+    difficulty: 3
+    hints:
+    - I = 4I₀cos²(φ/2).
+    - cos 60° = 1/2.
+    solution: 'Step 1: 4 × 1/4. Step 2: I₀.'
+    mistakes:
+      '2': c12p10_int
+      '3': c12p10_int
 - code: cbse12p.wave.diffraction
   title: Diffraction and polarisation
   after:
@@ -266,6 +413,48 @@ concepts:
           - 0.1
           - 1
         say: A narrower slit spreads the light further.
+  lesson:
+    - teach: Diffraction is the bending of waves round edges and through openings. It is noticeable when the opening is comparable to the wavelength. Light's tiny wavelength is why we usually see sharp shadows; sound bends easily round doors.
+      check:
+        prompt: Why do we hear round corners but not see round them?
+        options:
+        - sound's wavelength is much larger than light's
+        - light is faster
+        - sound is a particle
+        answer: sound's wavelength is much larger than light's
+        why: Diffraction is large when the gap is comparable to λ.
+    - teach: 'Single slit of width a: minima where a sin θ = nλ (n = 1, 2, …). The central maximum is the brightest and twice as wide as the others, with angular width 2λ/a: a narrower slit spreads light more.'
+      picture:
+        kind: bars
+        bars:
+        - label: 2nd side
+          value: 1
+        - label: 1st side
+          value: 4
+        - label: central
+          value: 100
+        - label: 1st side
+          value: 4
+        - label: 2nd side
+          value: 1
+        alt: 'Single-slit pattern: a very bright central maximum with much weaker side maxima.'
+      check:
+        prompt: 'Halving the slit width makes the central maximum:'
+        options:
+        - twice as wide
+        - half as wide
+        - unchanged
+        answer: twice as wide
+        why: Width ∝ 1/a.
+    - teach: 'Polarisation shows light is transverse. A polaroid passes only one direction of vibration: unpolarised light comes out at half intensity, polarised. A second polaroid at angle θ passes I = I₀cos²θ (Malus''s law). Reflected light is fully polarised at Brewster''s angle, tan iₚ = n.'
+      check:
+        prompt: 'Two polaroids crossed at 90°: transmitted intensity?'
+        options:
+        - zero
+        - half
+        - a quarter
+        answer: zero
+        why: cos² 90° = 0.
   items:
   - prompt: Unpolarised light of intensity 100 units passes one polaroid. Find the transmitted intensity.
     answer: '50'
@@ -334,3 +523,108 @@ concepts:
     - Most light.
     solution: The brightest and widest.
     mistakes: {"dark": "p12_central_max", "the narrowest": "p12_central_max", "absent": "p12_central_max"}
+  - prompt: Unpolarised light of intensity 60 units passes one polaroid. Transmitted intensity?
+    answer: '30'
+    check: 60/2
+    difficulty: 1
+    hints:
+    - One polaroid halves unpolarised light.
+    - 60/2.
+    solution: 'Step 1: half passes. Step 2: 30.'
+    mistakes:
+      '60': c12p10_pol
+      '15': c12p10_pol
+  - prompt: Polarised light of intensity 40 units meets a polaroid at 45°. Transmitted intensity?
+    answer: '20'
+    check: 40*Rational(1,2)
+    difficulty: 1
+    hints:
+    - I = I₀cos²θ.
+    - cos² 45° = 1/2.
+    solution: 'Step 1: 40 × 1/2. Step 2: 20.'
+    mistakes:
+      '40': c12p10_pol
+      '10': c12p10_pol
+  - prompt: Brewster angle (degrees) for n = 1?
+    answer: '45'
+    check: '45'
+    difficulty: 1
+    hints:
+    - tan iₚ = n.
+    - tan 45° = 1.
+    solution: 'Step 1: tan iₚ = 1. Step 2: 45°.'
+    mistakes:
+      '60': c12p10_pol
+      '30': c12p10_pol
+  - prompt: 'Single slit: a = 2 × 10⁻⁶ m, λ = 500 nm. Find sin θ for the first minimum, as a fraction.'
+    answer: 1/4
+    check: 500*10**-9/(2*10**-6)
+    difficulty: 2
+    hints:
+    - a sin θ = λ.
+    - 5 × 10⁻⁷ / 2 × 10⁻⁶.
+    solution: 'Step 1: 0.25. Step 2: 1/4.'
+    mistakes:
+      '4': c12p10_diff
+      1/2: c12p10_diff
+  - prompt: Angular width of the central maximum is 2λ/a. For λ = 600 nm, a = 0.3 mm, find it in units of 10⁻³ rad.
+    answer: '4'
+    check: 2*600*10**-9/(3*10**-4)*1000
+    difficulty: 2
+    hints:
+    - 2 × 6 × 10⁻⁷ / 3 × 10⁻⁴.
+    - = 4 × 10⁻³.
+    solution: 'Step 1: 1.2 × 10⁻⁶/3 × 10⁻⁴. Step 2: 4 × 10⁻³ rad.'
+    mistakes:
+      '2': c12p10_diff
+      '8': c12p10_diff
+  - prompt: Unpolarised light (100 units) passes two polaroids at 60° to each other. Final intensity?
+    answer: 25/2
+    check: 100/2*Rational(1,4)
+    difficulty: 2
+    hints:
+    - 'First polaroid: half.'
+    - 'Second: × cos² 60°.'
+    solution: 'Step 1: 50 after the first. Step 2: 50 × 1/4 = 12.5 = 25/2.'
+    mistakes:
+      '25': c12p10_pol
+      '50': c12p10_pol
+  - prompt: 'Rotating a polaroid in front of light makes the brightness rise and fall. The light was:'
+    options:
+    - polarised
+    - unpolarised
+    - of mixed colours
+    answer: polarised
+    difficulty: 2
+    hints:
+    - Unpolarised light gives the same intensity at every angle.
+    - Malus's law needs a fixed direction.
+    solution: 'Step 1: intensity depends on angle. Step 2: so the light was polarised.'
+    mistakes:
+      unpolarised: c12p10_pol
+      of mixed colours: c12p10_pol
+  - prompt: 'Brewster angle for glass of n = √3 is 60°. The angle (degrees) between reflected and refracted rays then is:'
+    answer: '90'
+    check: '90'
+    difficulty: 3
+    hints:
+    - Add the Brewster angle and the angle of refraction.
+    - The two rays are perpendicular.
+    solution: 'Step 1: refracted angle 30°. Step 2: rays are at 90°.'
+    mistakes:
+      '60': c12p10_pol
+      '120': c12p10_pol
+  - prompt: 'In single-slit diffraction, the 2nd minimum appears where a sin θ equals:'
+    options:
+    - 2λ
+    - λ/2
+    - 3λ/2
+    answer: 2λ
+    difficulty: 3
+    hints:
+    - 'Minima: a sin θ = nλ.'
+    - n = 2.
+    solution: 'Step 1: n = 2. Step 2: 2λ.'
+    mistakes:
+      λ/2: c12p10_diff
+      3λ/2: c12p10_diff

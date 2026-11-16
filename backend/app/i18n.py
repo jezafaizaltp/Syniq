@@ -390,6 +390,18 @@ MESSAGES: dict[str, dict[str, str]] = {
     "resp.what_is": {"en": "What is {sum}?", "ml": "{sum} എത്ര?"},
     "resp.quick_challenge": {"en": "Quick challenge: {sum} = ?", "ml": "ചെറിയൊരു ചലഞ്ച്: {sum} = ?"},
     # --- Tips for common mistakes in the demo maths chapter (routers/student.py)
+    "tip.ar_test_a": {
+        "en": "Test the Assertion on its own first. Is it true in every case the question allows?",
+        "ml": "ആദ്യം പ്രസ്താവന (A) മാത്രം പരിശോധിക്കൂ. ചോദ്യം അനുവദിക്കുന്ന എല്ലാ സാഹചര്യത്തിലും അത് ശരിയാണോ?",
+    },
+    "tip.ar_test_r": {
+        "en": "Now test the Reason on its own. Try it on one quick example.",
+        "ml": "ഇനി കാരണം (R) മാത്രം പരിശോധിക്കൂ. ഒരു ചെറിയ ഉദാഹരണത്തിൽ നോക്കൂ.",
+    },
+    "tip.ar_link": {
+        "en": "Both can be true and still not connected. Ask: does R say why A happens?",
+        "ml": "രണ്ടും ശരിയായാലും അവ തമ്മിൽ ബന്ധം ഉണ്ടാകണമെന്നില്ല. ചോദിക്കൂ: A എന്തുകൊണ്ട് സംഭവിക്കുന്നു എന്ന് R പറയുന്നുണ്ടോ?",
+    },
     "tip.square_each_term": {
         "en": "Squaring a sum is not the same as squaring each part: (a + b)² also has a middle term, 2ab.",
         "ml": "ഒരു തുകയുടെ വർഗം, ഓരോ ഭാഗത്തിന്റെയും വർഗം കൂട്ടുന്നതല്ല: (a + b)²-ൽ 2ab എന്ന നടുവിലെ പദവും ഉണ്ട്.",

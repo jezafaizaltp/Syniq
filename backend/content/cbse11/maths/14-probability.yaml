@@ -13,6 +13,9 @@ tips:
   m11_prob_dice: "Count the pairs that make the sum and divide by 36."
   m11_sample_space: "List them: HH, HT, ... Each coin has 2 outcomes; multiply."
   m11_union_prob: "P(A ∪ B) = P(A) + P(B) − P(A ∩ B). The overlap was counted twice."
+  c11m14_space: 'List the sample space carefully, or count it: each coin gives 2 choices, each die 6, and choices multiply.'
+  c11m14_count: Count the favourable outcomes one by one, then divide by the total number of outcomes.
+  c11m14_rule: For 'A or B', add the two probabilities and take away the overlap once. For 'not A', subtract from 1.
 concepts:
 - code: cbse11m.prob.events
   title: Random experiments, sample spaces and events
@@ -90,6 +93,48 @@ concepts:
       bin: Mutually exclusive
       clue: Can two equal numbers add to 7?
       why: Two equal numbers make an even total, never 7.
+  lesson:
+    - teach: 'A random experiment has outcomes we cannot predict for sure. The sample space S is the set of all its outcomes. One coin: {H, T}. One die: {1, 2, 3, 4, 5, 6}.'
+      check:
+        prompt: Sample space for tossing one coin and rolling one die has how many outcomes?
+        options:
+        - '12'
+        - '8'
+        - '6'
+        answer: '12'
+        why: 2 × 6 = 12.
+    - teach: An event is a subset of S. A sure event is S itself; an impossible event is ∅. The complement A′ is everything in S that is not in A.
+      check:
+        prompt: One die. A = {2, 4, 6}. A′ = ?
+        options:
+        - '{1, 3, 5}'
+        - '{1, 2, 3}'
+        - '{6}'
+        answer: '{1, 3, 5}'
+        why: All outcomes not in A.
+    - teach: A ∪ B means 'A or B', A ∩ B means 'A and B'. A and B are mutually exclusive if A ∩ B = ∅ (they cannot happen together); exhaustive if A ∪ B = S.
+      picture:
+        kind: compare
+        columns:
+        - title: Words
+          points:
+          - A or B
+          - A and B
+          - not A
+        - title: Sets
+          points:
+          - A ∪ B
+          - A ∩ B
+          - A′
+        alt: Words and set symbols for events.
+      check:
+        prompt: 'One die: ''getting 1'' and ''getting 6'' are:'
+        options:
+        - mutually exclusive but not exhaustive
+        - exhaustive
+        - the same event
+        answer: mutually exclusive but not exhaustive
+        why: They cannot both happen, but 2–5 are left out.
   items:
   - prompt: How many outcomes are there when two coins are tossed?
     answer: '4'
@@ -153,6 +198,114 @@ concepts:
     - Empty set.
     solution: It is an impossible event.
     mistakes: {"a sure event": "m11_impossible", "a simple event": "m11_impossible", "a compound event": "m11_impossible"}
+  - prompt: How many outcomes are there when four coins are tossed?
+    answer: '16'
+    check: 2**4
+    difficulty: 1
+    hints:
+    - Each coin has 2 outcomes.
+    - Multiply for four coins.
+    solution: 'Step 1: 2 × 2 × 2 × 2. Step 2: 16.'
+    mistakes:
+      '8': c11m14_space
+      '4': c11m14_space
+  - prompt: Two dice are rolled. In how many outcomes is the sum 10?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - List pairs (first die, second die).
+    - Remember (4, 6) and (6, 4) are different.
+    solution: 'Step 1: (4, 6), (5, 5), (6, 4). Step 2: 3.'
+    mistakes:
+      '2': c11m14_count
+      '4': c11m14_count
+  - prompt: 'Two coins are tossed. Event A: at least one head. How many outcomes are in A?'
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - S = {HH, HT, TH, TT}.
+    - Leave out only the outcome with no head.
+    solution: 'Step 1: HH, HT, TH. Step 2: 3.'
+    mistakes:
+      '2': c11m14_count
+      '1': c11m14_count
+  - prompt: 'An event that is the whole sample space is called:'
+    options:
+    - a sure event
+    - an impossible event
+    - a simple event
+    answer: a sure event
+    difficulty: 1
+    hints:
+    - Every outcome belongs to it.
+    - So it always happens.
+    solution: 'Step 1: E = S contains every outcome. Step 2: it is a sure event.'
+    mistakes:
+      an impossible event: c11m14_space
+      a simple event: c11m14_space
+  - prompt: One die. A = {1, 2, 3}, B = {3, 4}. A ∩ B = ?
+    options:
+    - '{3}'
+    - '{1, 2, 3, 4}'
+    - ∅
+    answer: '{3}'
+    difficulty: 2
+    hints:
+    - ∩ means 'and'.
+    - Which outcome is in both?
+    solution: 'Step 1: common outcomes of A and B. Step 2: {3}.'
+    mistakes:
+      '{1, 2, 3, 4}': c11m14_rule
+      ∅: c11m14_rule
+  - prompt: 'One die. A: ''number less than 3'', B: ''number more than 3''. A and B are:'
+    options:
+    - mutually exclusive, not exhaustive
+    - mutually exclusive and exhaustive
+    - not mutually exclusive
+    answer: mutually exclusive, not exhaustive
+    difficulty: 2
+    hints:
+    - Can a number be both less than 3 and more than 3?
+    - Is every outcome covered? Check 3.
+    solution: 'Step 1: A ∩ B = ∅. Step 2: 3 is in neither, so not exhaustive.'
+    mistakes:
+      mutually exclusive and exhaustive: c11m14_space
+      not mutually exclusive: c11m14_space
+  - prompt: Two dice are rolled. How many outcomes show a doublet (same number on both)?
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - (1, 1) is one doublet.
+    - How many numbers can repeat?
+    solution: 'Step 1: (1,1), (2,2), …, (6,6). Step 2: 6.'
+    mistakes:
+      '36': c11m14_count
+      '12': c11m14_count
+  - prompt: A family has 3 children. How many outcomes have exactly two girls?
+    answer: '3'
+    check: '3'
+    difficulty: 3
+    hints:
+    - Write G or B for each child, in order.
+    - Where can the one boy be?
+    solution: 'Step 1: GGB, GBG, BGG. Step 2: 3.'
+    mistakes:
+      '2': c11m14_count
+      '1': c11m14_count
+  - prompt: A coin is tossed until a head appears, at most 3 times. How many outcomes in S?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Stop as soon as you get H.
+    - H, TH, TTH, …
+    solution: 'Step 1: S = {H, TH, TTH, TTT}. Step 2: 4.'
+    mistakes:
+      '8': c11m14_space
+      '3': c11m14_space
 - code: cbse11m.prob.axioms
   title: Probability of events
   after:
@@ -261,6 +414,41 @@ concepts:
           - 0.45
           - 0.6
         say: That works, but it isn't the smallest. Push P(A ∪ B) up to its limit, 1.
+  lesson:
+    - teach: 'Every probability lies between 0 and 1: P(∅) = 0 and P(S) = 1. With equally likely outcomes, P(A) = n(A)/n(S).'
+      check:
+        prompt: A die is rolled. P(a multiple of 3)?
+        options:
+        - 1/3
+        - 1/2
+        - 1/6
+        answer: 1/3
+        why: '{3, 6}: 2 of 6.'
+    - teach: 'Complement rule: P(not A) = 1 − P(A). Very useful for ''at least one'' questions: P(at least one) = 1 − P(none).'
+      check:
+        prompt: Two coins. P(at least one tail)?
+        options:
+        - 3/4
+        - 1/4
+        - 1/2
+        answer: 3/4
+        why: 1 − P(HH) = 1 − 1/4.
+    - teach: 'Addition rule: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). If A and B are mutually exclusive, the overlap is 0, so just add.'
+      picture:
+        kind: flow
+        steps:
+        - Add P(A) and P(B)
+        - Overlap counted twice
+        - Subtract P(A ∩ B) once
+        alt: Why the addition rule subtracts the overlap.
+      check:
+        prompt: P(A) = 0.3, P(B) = 0.5, A and B mutually exclusive. P(A or B)?
+        options:
+        - '0.8'
+        - '0.15'
+        - '0.2'
+        answer: '0.8'
+        why: 'No overlap: 0.3 + 0.5.'
   items:
   - prompt: A die is rolled. Find the probability of getting a number greater than 4.
     answer: 1/3
@@ -318,3 +506,105 @@ concepts:
     - 0.7.
     solution: 0.7 = 7/10.
     mistakes: {"9/10": "m11_union_prob", "1/2": "m11_union_prob"}
+  - prompt: A die is rolled. Find the probability of a prime number.
+    answer: 1/2
+    check: 3/6
+    difficulty: 1
+    hints:
+    - 'Primes on a die: list them.'
+    - Remember 1 is not prime.
+    solution: 'Step 1: {2, 3, 5}. Step 2: 3/6 = 1/2.'
+    mistakes:
+      2/3: c11m14_count
+      1/3: c11m14_count
+  - prompt: P(A) = 2/7. Find P(not A).
+    answer: 5/7
+    check: 1-2/7
+    difficulty: 1
+    hints:
+    - Use the complement rule.
+    - Subtract from 1.
+    solution: 'Step 1: 1 − 2/7. Step 2: 5/7.'
+    mistakes:
+      2/7: c11m14_rule
+      7/2: c11m14_rule
+  - prompt: A card is drawn from a pack of 52. Find P(a red queen).
+    answer: 1/26
+    check: 2/52
+    difficulty: 1
+    hints:
+    - There are 4 queens.
+    - Half of them are red.
+    solution: 'Step 1: 2 red queens. Step 2: 2/52 = 1/26.'
+    mistakes:
+      1/13: c11m14_count
+      1/52: c11m14_count
+  - prompt: Which of these can NOT be a probability?
+    options:
+    - '1.2'
+    - '0'
+    - '0.99'
+    answer: '1.2'
+    difficulty: 1
+    hints:
+    - Probabilities have a lower and an upper limit.
+    - What is the largest possible value?
+    solution: 'Step 1: 0 ≤ P ≤ 1. Step 2: 1.2 is too big.'
+    mistakes:
+      '0': c11m14_rule
+      '0.99': c11m14_rule
+  - prompt: Two dice are rolled. Find P(sum = 10).
+    answer: 1/12
+    check: 3/36
+    difficulty: 2
+    hints:
+    - Count the pairs that add to 10.
+    - There are 36 outcomes in all.
+    solution: 'Step 1: (4,6), (5,5), (6,4) = 3. Step 2: 3/36 = 1/12.'
+    mistakes:
+      1/18: c11m14_count
+      1/6: c11m14_count
+  - prompt: P(A) = 0.6, P(B) = 0.3, P(A ∩ B) = 0.1. Find P(A ∪ B).
+    answer: 4/5
+    check: 0.6+0.3-0.1
+    difficulty: 2
+    hints:
+    - Use the addition rule.
+    - Subtract the overlap once.
+    solution: 'Step 1: 0.6 + 0.3 − 0.1. Step 2: 0.8 = 4/5.'
+    mistakes:
+      9/10: c11m14_rule
+      '1': c11m14_rule
+  - prompt: Four coins are tossed. Find P(at least one head).
+    answer: 15/16
+    check: 1-1/16
+    difficulty: 2
+    hints:
+    - Find P(no head) first.
+    - Then use the complement.
+    solution: 'Step 1: P(TTTT) = 1/16. Step 2: 1 − 1/16 = 15/16.'
+    mistakes:
+      1/16: c11m14_rule
+      1/2: c11m14_rule
+  - prompt: 'A card is drawn from 52. Find P(a face card or a spade). (Face cards: J, Q, K.)'
+    answer: 11/26
+    check: (12+13-3)/52
+    difficulty: 3
+    hints:
+    - 12 face cards, 13 spades.
+    - Some cards are both.
+    solution: 'Step 1: 12 + 13 − 3 = 22. Step 2: 22/52 = 11/26.'
+    mistakes:
+      25/52: c11m14_rule
+      3/52: c11m14_rule
+  - prompt: A bag has 4 red, 5 blue and 6 green balls. One is drawn. Find P(not blue).
+    answer: 2/3
+    check: 10/15
+    difficulty: 3
+    hints:
+    - Total balls = 15.
+    - Not blue means red or green.
+    solution: 'Step 1: 4 + 6 = 10 not blue. Step 2: 10/15 = 2/3.'
+    mistakes:
+      1/3: c11m14_rule
+      3/5: c11m14_rule

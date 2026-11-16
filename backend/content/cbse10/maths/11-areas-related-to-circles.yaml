@@ -19,6 +19,11 @@ tips:
   c10m11_perimeter: A sector's boundary is the arc plus two radii. Did you add both radii?
   c10m11_segment: Segment = sector − triangle. Find the sector first, then take away the triangle made by the two radii and the chord.
   c10m11_major: The major part is the whole circle minus the minor part.
+  pq10m11_two_wipers: That is what one wiper cleans. The car has two.
+  pq10m11_arc_not_area: That is the length of the arcs in cm. Area uses πr², not 2πr.
+  pq10m11_add_radii: The arc is only part of the edge. A sector's edge also has two radii.
+  pq10m11_wet_not_dry: That is the watered part. The question asks what is left dry.
+  pq10m11_four_quarters: There are four sprinklers. Four quarter circles together make a whole circle.
 concepts:
 - code: cbse10m.area.sector
   title: Arcs and sectors
@@ -147,6 +152,11 @@ concepts:
         - 1/2
         answer: 1/3
         why: 120/360 = 1/3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Read the angle θ at the centre. Step 2: Write the fraction θ/360. Step 3: 90° gives 90/360 = 1/4; 60° gives 1/6; 120° gives 1/3. Step 4: The sector is that fraction of the whole circle, for area and for the curved edge alike.'
+      - style: real_world
+        teach: 'A pizza cut into 8 equal slices: each slice is a sector with angle 360° ÷ 8 = 45°, so it is 45/360 = 1/8 of the pizza. Its crust is 1/8 of the whole crust.'
     - teach: 'Area of a sector = (θ/360) × πr². Arc length = (θ/360) × 2πr. Example: r = 7 cm, θ = 90°: area = 1/4 × 22/7 × 49 = 38.5 cm², arc = 1/4 × 2 × 22/7 × 7 = 11 cm.'
       check:
         prompt: r = 14 cm, θ = 180°. Arc length? (π = 22/7)
@@ -156,6 +166,20 @@ concepts:
         - 308 cm
         answer: 44 cm
         why: Half of 2 × 22/7 × 14 = 88, so 44 cm.
+      ways:
+      - style: visual
+        teach: A quarter circle of radius 7, worked box by box.
+        picture:
+          kind: flow
+          steps:
+          - r = 7 cm, θ = 90°
+          - Fraction = 90/360 = 1/4
+          - Area = 1/4 × 22/7 × 49 = 38.5
+          - Arc = 1/4 × 2 × 22/7 × 7 = 11
+          - 38.5 cm² and 11 cm
+          alt: For radius 7 and angle 90 degrees, the fraction is a quarter, the area is 38.5 square centimetres and the arc is 11 centimetres.
+      - style: real_world
+        teach: 'A car wiper 21 cm long sweeps through 120°. The area it cleans is a sector: 120/360 × 22/7 × 21² = 1/3 × 1386 = 462 cm².'
     - teach: 'The rest of the circle is the major sector: πr² minus the minor sector. A sector''s perimeter is its arc plus two radii.'
       check:
         prompt: Minor sector 30 cm², circle 154 cm². Major sector?
@@ -165,6 +189,39 @@ concepts:
         - 30 cm²
         answer: 124 cm²
         why: 154 − 30 = 124.
+      ways:
+      - style: visual
+        teach: The 90° slice is the minor sector; the rest of the circle (270°) is the major sector.
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 5
+            - 5
+            A:
+            - 8
+            - 5
+            B:
+            - 5
+            - 8
+          circles:
+          - centre: O
+            radius: 3
+          segments:
+          - - O
+            - A
+            - r
+          - - O
+            - B
+            - r
+          angles:
+          - at: O
+            from: A
+            to: B
+            label: 90°
+          alt: A circle with two radii making a 90 degree minor sector; the rest of the circle is the major sector.
+      - style: step_by_step
+        teach: 'Step 1: Minor sector with r = 7, θ = 90°: 38.5 cm². Step 2: Whole circle: 22/7 × 49 = 154 cm². Step 3: Major sector = 154 − 38.5 = 115.5 cm². Step 4: Perimeter of the minor sector = arc + two radii = 11 + 7 + 7 = 25 cm.'
   items:
   - prompt: Find the area of a sector of angle 90° in a circle of radius 14 cm. Use π = 22/7. Answer in cm².
     answer: '154'
@@ -330,6 +387,55 @@ concepts:
     mistakes:
       (θ/360) × πr²: c10m11_area_vs_arc
       (360/θ) × 2πr: c10m11_fraction
+  - prompt: 'Assertion (A): The area of a sector of angle 60° in a circle of radius 6 cm is 6π cm².
+
+      Reason (R): The area of a sector of angle θ is (θ/360) × πr².'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R: 60/360 × π × 36 = 6π cm². A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A car has two wipers that do not overlap. Each is 21 cm long and sweeps through 120°. What total area do they clean in one sweep?'
+    options:
+    - 924 cm²
+    - 462 cm²
+    - 88 cm²
+    answer: 924 cm²
+    hints:
+    - Each wiper cleans a sector with r = 21 and θ = 120°.
+    - One sector = 120/360 × 22/7 × 441.
+    solution: 'One sector = 1/3 × 22/7 × 441 = 462 cm². Two wipers: 2 × 462 = 924 cm².'
+    mistakes:
+      462 cm²: pq10m11_two_wipers
+      88 cm²: pq10m11_arc_not_area
+    exam: case
+    difficulty: 2
+  - prompt: The perimeter of a sector of radius 7 cm and angle 90° is
+    options:
+    - 25 cm
+    - 11 cm
+    - 18 cm
+    answer: 25 cm
+    hints:
+    - Perimeter = arc + the two straight edges.
+    - Arc = 1/4 × 2 × 22/7 × 7.
+    solution: Arc = 11 cm. Perimeter = 11 + 7 + 7 = 25 cm.
+    mistakes:
+      11 cm: pq10m11_add_radii
+      18 cm: pq10m11_add_radii
+    exam: one_mark
+    difficulty: 1
 - code: cbse10m.area.segment
   title: Segments and combined shapes
   after:
@@ -419,6 +525,11 @@ concepts:
         - Circle − sector
         answer: Sector − triangle
         why: The triangle part of the sector is not in the segment.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the sector with the same angle at the centre. Step 2: Find the triangle made by the two radii and the chord. Step 3: Segment = sector − triangle. Step 4: For the major segment, take the minor segment away from the whole circle.'
+      - style: real_world
+        teach: Cut a round roti with one straight cut near the edge. The small piece that falls off is a minor segment. To find its area, take the wedge (sector) from the centre to that edge, then remove the triangle from the centre to the cut.
     - teach: 'Triangle areas you need: for θ = 90°, triangle = ½ r². For θ = 60°, the triangle is equilateral: (√3/4) r². Example: r = 14, θ = 90°: sector = 154, triangle = 98, segment = 56 cm².'
       check:
         prompt: r = 10 cm, θ = 90°. Triangle area?
@@ -428,6 +539,19 @@ concepts:
         - 25 cm²
         answer: 50 cm²
         why: ½ × 10 × 10 = 50.
+      ways:
+      - style: visual
+        teach: 'A 90° segment of radius 14, box by box: sector first, then the triangle, then take one from the other.'
+        picture:
+          kind: flow
+          steps:
+          - r = 14, θ = 90°
+          - Sector = 1/4 × 22/7 × 196 = 154
+          - Triangle = ½ × 14 × 14 = 98
+          - Segment = 154 − 98 = 56 cm²
+          alt: For radius 14 and 90 degrees, the sector is 154, the triangle 98, and the segment 56 square centimetres.
+      - style: step_by_step
+        teach: 'A 60° segment. Step 1: r = 6, θ = 60°. Step 2: Sector = 60/360 × π × 36 = 6π. Step 3: The triangle is equilateral (two radii and a 60° angle): √3/4 × 36 = 9√3. Step 4: Segment = 6π − 9√3 ≈ 18.85 − 15.59 = 3.26 cm².'
     - teach: Major segment = circle − minor segment. For shaded-region questions, list the shapes you see, find each area, and add or subtract.
       check:
         prompt: Circle 154 cm², minor segment 14 cm². Major segment?
@@ -437,6 +561,23 @@ concepts:
         - 154 cm²
         answer: 140 cm²
         why: 154 − 14 = 140.
+      ways:
+      - style: visual
+        teach: 'Every shaded-region question is one of two kinds: shapes joined, or a shape cut out.'
+        picture:
+          kind: compare
+          columns:
+          - title: 'Joined: add'
+            points:
+            - Two parts side by side
+            - e.g. a rectangle with a semicircle on top
+          - title: 'Cut out: subtract'
+            points:
+            - A part removed from a bigger shape
+            - e.g. a square with a circle taken out
+          alt: When shapes are joined, add their areas; when one is cut out of another, subtract.
+      - style: step_by_step
+        teach: 'Step 1: List the shapes in the figure: a square of side 14 with a quarter circle of radius 7 at each corner. Step 2: Square = 196 cm². Step 3: Four quarter circles make one full circle: 22/7 × 49 = 154 cm². Step 4: Shaded = 196 − 154 = 42 cm².'
   items:
   - prompt: Find the area of the minor segment of a circle of radius 14 cm cut off by a 90° angle at the centre. Use π = 22/7. Answer in cm².
     answer: '56'
@@ -497,7 +638,7 @@ concepts:
     - Sector = (60/360) × π × 36 = 6π.
     - 'Triangle is equilateral: (√3/4) × 36 = 9√3.'
     solution: 'Step 1: Sector = 6π. Step 2: Triangle = 9√3. Step 3: Segment = 6π − 9√3, so a = 6.'
-    mistakes: {"9": "c10_subtract_triangle", "12": "t10_sector_fraction"}
+    mistakes: {"9": "c10_subtract_triangle", "12": "c10m11_segment"}
   - prompt: In a circle of radius 10 cm, a chord makes 90° at the centre. Find the minor segment's area in cm². Use π = 3.14.
     answer: '28.5'
     check: 0.25 * 3.14 * 100 - 50
@@ -606,3 +747,37 @@ concepts:
     solution: Segment = sector − triangle; the others come straight from (θ/360)πr².
     mistakes:
       A sector: c10m11_segment
+  - prompt: 'Assertion (A): The minor segment of a circle of radius 14 cm with central angle 90° has area 56 cm².
+
+      Reason (R): Area of a segment = area of the sector − area of the triangle made by the radii and the chord.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R: sector 154 − triangle 98 = 56 cm². A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A square garden 28 m on each side has a sprinkler at each corner. Each sprinkler waters a quarter circle of radius 14 m. What area of the garden stays dry?'
+    options:
+    - 168 m²
+    - 616 m²
+    - 630 m²
+    answer: 168 m²
+    hints:
+    - Dry area = whole square − watered area.
+    - Four quarter circles of radius 14 make one circle of radius 14.
+    solution: Square = 28 × 28 = 784 m². Watered = 22/7 × 14 × 14 = 616 m². Dry = 784 − 616 = 168 m².
+    mistakes:
+      616 m²: pq10m11_wet_not_dry
+      630 m²: pq10m11_four_quarters
+    exam: case
+    difficulty: 2

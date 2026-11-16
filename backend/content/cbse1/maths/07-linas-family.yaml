@@ -9,6 +9,9 @@ tips:
   m1_second: "First, then ...?"
   m1_third: "Count: A is first, B is second ..."
   m1_younger: "A baby has not been alive as long as Lina."
+  c1m7_order: "Point to the front of the line and count the places one by one from there."
+  c1m7_age: Who was born earlier? Born earlier means older.
+  c1m7_count: Say each person's name and count once for each.
 
 concepts:
 - code: cbse1m.lina.order
@@ -37,9 +40,45 @@ concepts:
     - Arun (taller than Lina)
     - Meera (the tallest, last)
     reasons:
-      Lina (a little taller than Tinu): Lina is taller than Tinu, so she comes after him.
-      Arun (taller than Lina): Arun is taller than Lina, so he stands after her.
-      Meera (the tallest, last): Meera is the tallest, so she comes last.
+      Lina (a little taller than Tinu): Lina is taller than Tinu, so Lina comes after Tinu.
+      Arun (taller than Lina): Arun is taller than Lina, so Arun stands after Lina.
+      Meera (the tallest, last): Meera is the tallest, so Meera comes last.
+  lesson:
+    - teach: 'Order words tell place in a line: first (1st), second (2nd), third (3rd), fourth (4th) ... The one at the end is last.'
+      picture:
+        kind: flow
+        steps:
+        - 1st first
+        - 2nd second
+        - 3rd third
+        - '4th fourth: last'
+        alt: 'Places in a line: first, second, third, fourth and last.'
+      check:
+        prompt: Who is second in A, B, C, D?
+        options:
+        - B
+        - A
+        - C
+        answer: B
+        why: A is first, B is second.
+    - teach: In a family some people are older and some are younger. Grandparents are older than parents. A baby is younger than everyone.
+      check:
+        prompt: Who is usually the oldest in a family?
+        options:
+        - a grandparent
+        - a baby
+        - a cousin of 5
+        answer: a grandparent
+        why: Grandparents were born long before the others.
+    - teach: 'Before and after: in 1st, 2nd, 3rd, the 2nd comes after the 1st and before the 3rd.'
+      check:
+        prompt: Which place comes just before third?
+        options:
+        - second
+        - fourth
+        - last
+        answer: second
+        why: First, second, then third.
   items:
   - prompt: Who is at the very front of a line?
     options:
@@ -75,7 +114,7 @@ concepts:
     answer: older
     difficulty: 1
     hints:
-    - She was born long before.
+    - Grandmother was born long before.
     - Grandmother.
     solution: Grandmother is older.
     mistakes: {"younger": "m1_older"}
@@ -91,7 +130,7 @@ concepts:
     - Born after Lina.
     solution: The baby is younger.
     mistakes: {"older": "m1_younger"}
-  - prompt: 4 children are in a line. Lina is last. What number is she?
+  - prompt: 4 children are in a line. Lina is last. What number is Lina?
     answer: '4'
     check: '4'
     difficulty: 2
@@ -113,6 +152,129 @@ concepts:
     - A, B, C.
     solution: C is third.
     mistakes: {"D in A, B, C, D": "m1_third"}
+  - prompt: Which place comes just after second?
+    options:
+    - third
+    - first
+    - fourth
+    answer: third
+    difficulty: 1
+    hints:
+    - First, second, ...
+    - Count one more place.
+    solution: 'Step 1: First, second. Step 2: Then third.'
+    mistakes:
+      first: c1m7_order
+      fourth: c1m7_order
+  - prompt: Father is ___ than grandfather.
+    options:
+    - younger
+    - older
+    - the same age
+    answer: younger
+    difficulty: 1
+    hints:
+    - Grandfather is father's father.
+    - Who was born first?
+    solution: 'Step 1: Grandfather was born first. Step 2: Father is younger.'
+    mistakes:
+      older: c1m7_age
+      the same age: c1m7_age
+  - prompt: In P, Q, R, S, T, which is last?
+    options:
+    - T
+    - P
+    - S
+    answer: T
+    difficulty: 1
+    hints:
+    - Last is at the end.
+    - Look at the end of the line.
+    solution: 'Step 1: The line ends at T. Step 2: T is last.'
+    mistakes:
+      P: c1m7_order
+      S: c1m7_order
+  - prompt: In a race Meena comes 1st, Arun 2nd, Tinu 3rd. Who wins?
+    options:
+    - Meena
+    - Arun
+    - Tinu
+    answer: Meena
+    difficulty: 1
+    hints:
+    - The winner finishes before everyone.
+    - Who is 1st?
+    solution: 'Step 1: The winner is 1st. Step 2: Meena.'
+    mistakes:
+      Arun: c1m7_order
+      Tinu: c1m7_order
+  - prompt: Which is fourth in 🍎 🍌 🍇 🍊 🍓?
+    options:
+    - 🍊
+    - 🍇
+    - 🍓
+    answer: 🍊
+    difficulty: 2
+    hints:
+    - Count from the left.
+    - 1st 🍎, 2nd 🍌, ...
+    solution: 'Step 1: 🍎 1st, 🍌 2nd, 🍇 3rd. Step 2: 🍊 is 4th.'
+    mistakes:
+      🍇: c1m7_order
+      🍓: c1m7_order
+  - prompt: 'Who is younger: a 2-year-old or a 7-year-old?'
+    options:
+    - the 2-year-old
+    - the 7-year-old
+    - both the same
+    answer: the 2-year-old
+    difficulty: 2
+    hints:
+    - Younger has lived fewer years.
+    - '2 or 7: which is less?'
+    solution: 'Step 1: 2 years is less than 7 years. Step 2: The 2-year-old is younger.'
+    mistakes:
+      the 7-year-old: c1m7_age
+      both the same: c1m7_age
+  - prompt: 5 children are in a line. Who is in the middle place?
+    options:
+    - third
+    - second
+    - fifth
+    answer: third
+    difficulty: 2
+    hints:
+    - Same number on each side.
+    - 2 in front, 2 behind.
+    solution: 'Step 1: 1st, 2nd, 3rd, 4th, 5th. Step 2: 3rd has 2 on each side.'
+    mistakes:
+      second: c1m7_order
+      fifth: c1m7_order
+  - prompt: Arun is 3rd in a line of 6. How many children are behind Arun?
+    answer: '3'
+    check: 6-3
+    difficulty: 3
+    hints:
+    - Places 4th, 5th, 6th are behind.
+    - Count them.
+    solution: 'Step 1: Behind 3rd are 4th, 5th, 6th. Step 2: That is 3 children.'
+    mistakes:
+      '2': c1m7_order
+      '4': c1m7_order
+  - prompt: Tinu is 2nd from the front in a line of 4. What place is Tinu from the back?
+    options:
+    - 3rd
+    - 2nd
+    - 1st
+    answer: 3rd
+    difficulty: 3
+    hints:
+    - Draw 4 dots. Mark the 2nd from the front.
+    - Now count from the other end.
+    solution: 'Step 1: From the front Tinu is 2nd. Step 2: From the back: 4th, 3rd: Tinu is 3rd.'
+    mistakes:
+      2nd: c1m7_order
+      1st: c1m7_order
 - code: cbse1m.lina.count
   title: Counting family members
   after:
@@ -120,7 +282,7 @@ concepts:
   notes: |
     Counting people in a family, adding members, simple pictographs of family size.
   explanations:
-    text: 'Lina''s family has her mother, father, grandmother, her brother and Lina: 5 people. We can count families and compare them.'
+    text: 'Lina''s family has a mother, father, grandmother, a brother and Lina: 5 people. We can count families and compare them.'
     visual: 'Draw Lina''s family: 5 faces in a row, and count them.'
     step_by_step: 'Step 1: Name each person. Step 2: Count them one by one. Step 3: Compare with another family.'
     real_world: When a baby is born, the family grows by one.
@@ -148,7 +310,7 @@ concepts:
       mistakes:
       - when:
           v: 4
-        say: Did you count Lina herself? She is in the family too.
+        say: Did you count Lina too? Lina is in the family.
       - when:
           v: 6
         say: Each person is counted once. Touch each name.
@@ -164,6 +326,45 @@ concepts:
       - when:
           v: 1
         say: The baby counts too. 1, 2.
+  lesson:
+    - teach: 'We can count the people in a family. Name each person and count once for each: mother 1, father 2, grandmother 3, brother 4, Lina 5.'
+      check:
+        prompt: A family has mother, father and one child. How many people?
+        options:
+        - '3'
+        - '2'
+        - '4'
+        answer: '3'
+        why: Mother 1, father 2, child 3.
+    - teach: 'Families can be big or small. We compare family sizes: 6 is more than 4. When someone new joins, the family grows by one.'
+      picture:
+        kind: bars
+        unit: people
+        bars:
+        - label: Family A
+          value: 4
+        - label: Family B
+          value: 6
+        - label: Family C
+          value: 2
+        alt: 'Family sizes: A 4, B 6, C 2.'
+      check:
+        prompt: Family A has 4, family B has 6. Which is bigger?
+        options:
+        - B
+        - A
+        - both the same
+        answer: B
+        why: 6 is more than 4.
+    - teach: 'Counting body parts in a family: each person has 2 eyes, 2 hands, 1 nose. For 3 people: eyes 2, 4, 6.'
+      check:
+        prompt: How many noses do 4 people have?
+        options:
+        - '4'
+        - '8'
+        - '2'
+        answer: '4'
+        why: Each person has 1 nose, so 4 people have 4.
   items:
   - prompt: 'Lina''s family: mother, father, grandmother, brother and Lina. How many people?'
     answer: '5'
@@ -231,3 +432,105 @@ concepts:
     solution: Amar's family (3) is smallest.
     mistakes:
       Zoya: c1_more_less
+  - prompt: A family has grandfather, grandmother, mother, father and 2 children. How many people?
+    answer: '6'
+    check: 1+1+1+1+2
+    difficulty: 1
+    hints:
+    - Count each person once.
+    - 2 children means 2 people.
+    solution: 'Step 1: 4 grown-ups. Step 2: 4 + 2 = 6 people.'
+    mistakes:
+      '5': c1m7_count
+      '4': c1m7_count
+  - prompt: A family of 4 has a new baby. How many now?
+    answer: '5'
+    check: 4+1
+    difficulty: 1
+    hints:
+    - The family grows by one.
+    - 4 and 1 more.
+    solution: 'Step 1: 4 + 1. Step 2: 5 people.'
+    mistakes:
+      '4': c1m7_count
+      '6': c1m7_count
+  - prompt: How many hands do 2 people have?
+    answer: '4'
+    check: 2+2
+    difficulty: 1
+    hints:
+    - Each person has 2 hands.
+    - 2 and 2.
+    solution: 'Step 1: 2 hands each. Step 2: 2 + 2 = 4 hands.'
+    mistakes:
+      '2': c1m7_count
+      '3': c1m7_count
+  - prompt: Family A has 3, family B has 5. Which is smaller?
+    options:
+    - A
+    - B
+    - both the same
+    answer: A
+    difficulty: 1
+    hints:
+    - Smaller means fewer people.
+    - 3 or 5?
+    solution: 'Step 1: 3 is less than 5. Step 2: Family A is smaller.'
+    mistakes:
+      B: c1_more_less
+      both the same: c1_more_less
+  - prompt: A family of 5 eats dinner. Each needs 1 plate. How many plates?
+    answer: '5'
+    check: '5'
+    difficulty: 1
+    hints:
+    - One plate for each person.
+    - Count the people.
+    solution: 'Step 1: 1 plate per person. Step 2: 5 plates.'
+    mistakes:
+      '4': c1m7_count
+      '6': c1m7_count
+  - prompt: A family of 6. 2 go to the market. How many are at home?
+    answer: '4'
+    check: 6-2
+    difficulty: 2
+    hints:
+    - Some leave.
+    - 6 take away 2.
+    solution: 'Step 1: 6 − 2. Step 2: 4 at home.'
+    mistakes:
+      '8': c1m7_count
+      '2': c1m7_count
+  - prompt: How many eyes do 4 people have?
+    answer: '8'
+    check: 2+2+2+2
+    difficulty: 2
+    hints:
+    - Count in twos.
+    - 2, 4, 6, ...
+    solution: 'Step 1: 2, 4, 6, 8. Step 2: 8 eyes.'
+    mistakes:
+      '4': c1m7_count
+      '6': c1m7_count
+  - prompt: Lina's family is 5. Amar's family is 3. How many people in both families?
+    answer: '8'
+    check: 5+3
+    difficulty: 2
+    hints:
+    - Put both families together.
+    - Start at 5, count on 3.
+    solution: 'Step 1: 5 + 3. Step 2: = 8 people.'
+    mistakes:
+      '2': c1m7_count
+      '7': c1m7_count
+  - prompt: A family of 4 has 1 grandparent come to live with them and 1 baby born. How many now?
+    answer: '6'
+    check: 4+1+1
+    difficulty: 3
+    hints:
+    - Two people join.
+    - 4, then 5, then ...
+    solution: 'Step 1: 4 + 1 = 5. Step 2: 5 + 1 = 6 people.'
+    mistakes:
+      '5': c1m7_count
+      '4': c1m7_count

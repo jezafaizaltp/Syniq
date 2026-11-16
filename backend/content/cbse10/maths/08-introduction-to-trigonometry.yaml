@@ -3,6 +3,9 @@ subject: cbse10-math
 chapter: 8
 title: Introduction to Trigonometry
 tips:
+  c10m8_tan_order: "Draw the triangle: sec = hypotenuse/adjacent. tan is opposite/adjacent, so check which side goes on top."
+  c10m8_dont_forget: "Did you include all three parts? The last term, cosec 60°, is taken away."
+  c10m8_same_ratio: "Adding to 90° links sin of one with cos of the other. Here both are cos: what does an equal cos say about acute angles?"
   c10_trig_upside: 'Check which side goes on top: sin and cos have the hypotenuse on the bottom; tan is opposite over adjacent.'
   c10_trig_which: That's tan, not sin. sin uses the hypotenuse, so find it with Pythagoras first.
   c10_sin_cos_swap: "The sin row and cos row run in opposite directions: the angle whose sine is ½ is the angle whose cosine is √3/2. Read the right row."
@@ -17,6 +20,10 @@ tips:
   c10m8_table: 'Rebuild the table: sin goes 0, 1/2, 1/√2, √3/2, 1 for 0°, 30°, 45°, 60°, 90°; cos runs the same values backwards.'
   c10m8_tan_row: "Go along the tan row of your table, angle by angle, and stop where the value matches the one given."
   c10m8_identity: Use sin²A + cos²A = 1 (or 1 + tan²A = sec²A). Square the ratios before you add them.
+  pq10m8_sin_not_tan: 'That is opposite ÷ slope. tan uses opposite ÷ adjacent: find the ground length first.'
+  pq10m8_cos_not_tan: That is adjacent ÷ hypotenuse. Which ratio is tan?
+  pq10m8_forgot_tan: sin²30° + cos²30° is only part of the sum. Add tan 45° too.
+  pq10m8_check_values: Look up the real values of sin 30°, sin 60° and sin 90°, then compare both sides.
 concepts:
 - code: cbse10m.trig.ratios
   title: Trigonometric ratios
@@ -165,6 +172,11 @@ concepts:
         - AC
         answer: BC
         why: BC is across from A.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the right angle; the side across from it is the hypotenuse. Step 2: Stand at angle A. Step 3: The side across from A is the opposite. Step 4: The remaining side, touching A, is the adjacent. Step 5: Switch to the other acute angle and opposite and adjacent swap; the hypotenuse stays.'
+      - style: real_world
+        teach: A ladder leans on a wall. The ladder is the hypotenuse. For the angle at the ground, the height it reaches up the wall is the opposite side, and the gap between its foot and the wall is the adjacent side.
     - teach: 'sin A = opposite/hypotenuse, cos A = adjacent/hypotenuse, tan A = opposite/adjacent. Their reciprocals: cosec A = 1/sin A, sec A = 1/cos A, cot A = 1/tan A. Also tan A = sin A/cos A. With sides 3, 4, 5: sin A = 3/5, cos A = 4/5, tan A = 3/4.'
       check:
         prompt: With opposite 3, adjacent 4, hypotenuse 5, sec A = ?
@@ -174,6 +186,43 @@ concepts:
         - 5/3
         answer: 5/4
         why: sec = 1/cos = 5/4.
+      ways:
+      - style: visual
+        teach: 'From angle A: opposite 3, adjacent 4, hypotenuse 5. So sin A = 3/5, cos A = 4/5 and tan A = 3/4. A memory aid: SOH CAH TOA.'
+        picture:
+          kind: geometry
+          points:
+            A:
+            - 1
+            - 1
+            B:
+            - 9
+            - 1
+            C:
+            - 9
+            - 7
+          segments:
+          - - A
+            - B
+            - adjacent 4
+          - - B
+            - C
+            - opposite 3
+          - - A
+            - C
+            - hypotenuse 5
+          angles:
+          - at: A
+            from: B
+            to: C
+            label: A
+          - at: B
+            from: A
+            to: C
+            label: 90°
+          alt: A right triangle with the right angle at B. From angle A, the adjacent side is 4, the opposite side is 3 and the hypotenuse is 5.
+      - style: step_by_step
+        teach: 'Step 1: Label the sides from A: opposite 3, adjacent 4, hypotenuse 5. Step 2: SOH: sin A = opposite/hypotenuse = 3/5. Step 3: CAH: cos A = adjacent/hypotenuse = 4/5. Step 4: TOA: tan A = opposite/adjacent = 3/4. Step 5: Flip each for the reciprocals: cosec A = 5/3, sec A = 5/4, cot A = 4/3.'
     - teach: The ratios depend only on the angle, not on the size of the triangle. Given one ratio, draw a triangle with those sides, find the third side by Pythagoras, and read off the others. If tan A = 8/15, the hypotenuse is √(64 + 225) = 17, so sin A = 8/17.
       check:
         prompt: If cos A = 12/13, what is sin A?
@@ -183,6 +232,20 @@ concepts:
         - 13/5
         answer: 5/13
         why: Third side √(169 − 144) = 5.
+      ways:
+      - style: visual
+        teach: Given one ratio, build the triangle and read the rest.
+        picture:
+          kind: flow
+          steps:
+          - tan A = 8/15
+          - opposite 8, adjacent 15
+          - hyp = √(64 + 225) = 17
+          - sin A = 8/17
+          - cos A = 15/17
+          alt: From tan A equals 8 over 15, the sides are 8 and 15, the hypotenuse is 17, so sin A is 8 over 17 and cos A is 15 over 17.
+      - style: real_world
+        teach: 'A ramp rises 1 m for every 12 m along the ground. A short ramp and a long ramp with the same slope have the same steepness: tan A = 1/12 for both. The ratio depends only on the angle, not on how big the triangle is.'
   items:
   - prompt: In a right triangle the side opposite angle A is 3 and the hypotenuse is 5. Find sin A. Type a fraction.
     answer: 3/5
@@ -341,7 +404,7 @@ concepts:
     - Same cos, same angle (acute).
     solution: For acute angles, equal cos values mean equal angles.
     mistakes:
-      ∠A + ∠B = 90°: c10m8_table
+      ∠A + ∠B = 90°: c10m8_same_ratio
   - prompt: Find sin A × cosec A for any acute A.
     answer: '1'
     check: '1'
@@ -352,6 +415,40 @@ concepts:
     solution: sin A × 1/sin A = 1.
     mistakes:
       '0': c10m8_flip
+  - prompt: 'Assertion (A): For an acute angle A, sin A can never be greater than 1.
+
+      Reason (R): In a right triangle, the hypotenuse is the longest side.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: sin A = opposite ÷ hypotenuse, and by R the opposite is shorter than the hypotenuse, so the fraction is less than 1. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A wheelchair ramp rises 5 m along a slope 13 m long. What is the tan of the angle the ramp makes with the ground?'
+    options:
+    - 5/12
+    - 5/13
+    - 12/13
+    answer: 5/12
+    hints:
+    - The slope is the hypotenuse. Find the ground length with Pythagoras.
+    - Ground = √(13² − 5²).
+    solution: Ground = √(169 − 25) = √144 = 12 m. tan = opposite/adjacent = 5/12.
+    mistakes:
+      5/13: pq10m8_sin_not_tan
+      12/13: pq10m8_cos_not_tan
+    exam: case
+    difficulty: 2
 - code: cbse10m.trig.values
   title: Ratios of special angles and identities
   after:
@@ -456,6 +553,30 @@ concepts:
         - '1'
         answer: 1/2
         why: cos runs the sin values backwards.
+      ways:
+      - style: visual
+        teach: 'The special-angle values in one table. Read sin down 30°, 45°, 60°: it goes 1/2, 1/√2, √3/2, and cos goes the other way.'
+        picture:
+          kind: compare
+          columns:
+          - title: 30°
+            points:
+            - sin = 1/2
+            - cos = √3/2
+            - tan = 1/√3
+          - title: 45°
+            points:
+            - sin = 1/√2
+            - cos = 1/√2
+            - tan = 1
+          - title: 60°
+            points:
+            - sin = √3/2
+            - cos = 1/2
+            - tan = √3
+          alt: At 30 degrees sin is a half, cos root 3 over 2, tan 1 over root 3. At 45 degrees sin and cos are 1 over root 2 and tan is 1. At 60 degrees sin is root 3 over 2, cos a half, tan root 3.
+      - style: step_by_step
+        teach: 'Step 1: Draw an equilateral triangle with side 2; every angle is 60°. Step 2: Cut it down the middle: the base halves to 1 and the top angle halves to 30°. Step 3: The height is √(4 − 1) = √3. Step 4: Read off: sin 30° = 1/2, cos 30° = √3/2, sin 60° = √3/2, cos 60° = 1/2. Step 5: For 45°, legs 1 and 1 give hypotenuse √2, so sin 45° = cos 45° = 1/√2.'
     - teach: 'Three identities hold for every allowed angle: sin²A + cos²A = 1; 1 + tan²A = sec²A; 1 + cot²A = cosec²A. They come from Pythagoras: divide opp² + adj² = hyp² by hyp², adj² or opp².'
       check:
         prompt: sec²A − tan²A = ?
@@ -465,6 +586,19 @@ concepts:
         - '2'
         answer: '1'
         why: 1 + tan²A = sec²A.
+      ways:
+      - style: visual
+        teach: All three identities come from Pythagoras, divided by a different side each time.
+        picture:
+          kind: flow
+          steps:
+          - opp² + adj² = hyp²
+          - '÷ hyp²: sin²A + cos²A = 1'
+          - '÷ adj²: tan²A + 1 = sec²A'
+          - '÷ opp²: cot²A + 1 = cosec²A'
+          alt: Dividing opposite squared plus adjacent squared equals hypotenuse squared by each side squared gives the three identities.
+      - style: step_by_step
+        teach: 'Step 1: To simplify (1 − cos²A) × cosec²A, look for an identity. Step 2: From sin²A + cos²A = 1, 1 − cos²A = sin²A. Step 3: So the expression is sin²A × cosec²A. Step 4: cosec A = 1/sin A, so this is sin²A × 1/sin²A = 1.'
   items:
   - prompt: Find sin 30° + cos 60°.
     answer: '1'
@@ -608,7 +742,7 @@ concepts:
     - 0.5 + 1 − 1.155.
     solution: 1/2 + 1 − 2/√3 ≈ 1.5 − 1.155 = 0.35.
     mistakes:
-      '1.5': c10m8_flip
+      '1.5': c10m8_dont_forget
   - prompt: If sec A = 5/4, find tan A as a fraction (A acute).
     answer: 3/4
     check: 3/4
@@ -618,7 +752,7 @@ concepts:
     - 25/16 − 1 = 9/16.
     solution: tan²A = 9/16, so tan A = 3/4.
     mistakes:
-      4/3: c10m8_flip
+      4/3: c10m8_tan_order
       9/16: c10m8_identity
   - prompt: Find cos 45°/(sec 30° + cosec 30°) when written as 3√2 − √6 over k. Find k.
     answer: '8'
@@ -630,3 +764,51 @@ concepts:
     solution: 'Step 1: = √3/(√2(2 + 2√3)) = √3/(2√2(1 + √3)). Step 2: Multiply by (√3 − 1)/(√3 − 1): √3(√3 − 1)/(2√2 × 2) = (3 − √3)/(4√2) = (3√2 − √6)/8, so k = 8.'
     mistakes:
       '4': c10m8_table
+  - prompt: 'Assertion (A): sec²θ − tan²θ = 1 for every angle θ where both are defined.
+
+      Reason (R): 1 + tan²θ = sec²θ.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Subtract tan²θ from both sides of R to get A. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: The value of sin²30° + cos²30° + tan 45° is
+    options:
+    - '2'
+    - '1'
+    - 3/2
+    answer: '2'
+    hints:
+    - 'Group the first two terms: what identity do they make?'
+    - tan 45° = 1.
+    solution: sin²30° + cos²30° = 1 and tan 45° = 1, so the total is 2.
+    mistakes:
+      '1': pq10m8_forgot_tan
+    exam: one_mark
+    difficulty: 1
+  - prompt: A student writes sin(30° + 60°) = sin 30° + sin 60°. Which check shows this is wrong?
+    options:
+    - sin 90° = 1, but 1/2 + √3/2 is more than 1
+    - sin 30° is not defined
+    - sin 60° is greater than 1
+    answer: sin 90° = 1, but 1/2 + √3/2 is more than 1
+    hints:
+    - Work out both sides with the special values.
+    - The left side is sin 90°.
+    solution: 'Left: sin 90° = 1. Right: 1/2 + √3/2 ≈ 0.5 + 0.87 = 1.37. They differ, so sin(A + B) is not sin A + sin B.'
+    mistakes:
+      sin 30° is not defined: pq10m8_check_values
+      sin 60° is greater than 1: pq10m8_check_values
+    exam: competency
+    difficulty: 2

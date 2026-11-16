@@ -15,6 +15,9 @@ tips:
   c12_lone_pair: "A base accepts H⁺. Which part of the amine can share electrons with it?"
   c12_nitro_reduction: "Reducing –NO₂ gives –NH₂ on the benzene ring."
   c12_sandmeyer: "Copper(I) salts replace the diazo group: the reaction is named after its discoverer."
+  c12c9_base: 'Basicity depends on how free the N lone pair is: alkyl groups push electrons in (stronger), an aryl ring pulls the pair into resonance (weaker).'
+  c12c9_class: 'Classify an amine by how many carbon groups are on N: one is 1°, two is 2°, three is 3°.'
+  c12c9_rxn: "Match the reagent to the test: CHCl₃/KOH, Hinsberg's reagent, or NaNO₂/HCl. Diazonium salts break down easily, so how cold must the mixture be?"
 concepts:
 - code: cbse12c.amine.basicity
   title: Structure, preparation and basicity
@@ -61,6 +64,42 @@ concepts:
       Trimethylamine, (CH₃)₃N: Methyl groups push electrons onto N, but three of them crowd it and its ion is poorly solvated by water.
       Methylamine, CH₃NH₂: One methyl pushes electrons in, and its ion is well solvated by water.
       Dimethylamine, (CH₃)₂NH: Two methyls give the best balance of electron push and solvation in water.
+  lesson:
+    - teach: 'Amines are derived from ammonia by replacing H atoms with alkyl or aryl groups: primary (1°, RNH₂), secondary (2°, R₂NH), tertiary (3°, R₃N). Nitrogen is pyramidal with a lone pair, which makes amines basic.'
+      check:
+        prompt: '(CH₃)₂NH is a:'
+        options:
+        - secondary amine
+        - primary amine
+        - tertiary amine
+        answer: secondary amine
+        why: Two carbon groups on N.
+    - teach: 'Preparation: reduce nitro compounds (Sn/HCl or Fe/HCl), ammonolysis of alkyl halides (gives a mixture), reduce nitriles or amides, Gabriel phthalimide synthesis (pure 1° aliphatic amines), Hoffmann bromamide degradation (amide → amine with one carbon fewer).'
+      picture:
+        kind: flow
+        steps:
+        - RCONH₂
+        - + Br₂ + NaOH
+        - loses C=O carbon
+        - RNH₂ (one C fewer)
+        alt: Hoffmann bromamide degradation shortens the chain by one carbon.
+      check:
+        prompt: 'Hoffmann degradation of ethanamide (CH₃CONH₂) gives:'
+        options:
+        - methanamine
+        - ethanamine
+        - propanamine
+        answer: methanamine
+        why: 'One carbon is lost: CH₃NH₂.'
+    - teach: 'Basicity: alkyl groups push electrons to N (+I), so alkylamines are stronger bases than NH₃. In water the order is 2° > 3° > 1° for ethylamines, balancing +I, solvation and crowding. Aryl amines like aniline are weaker than NH₃ because the lone pair is spread into the ring.'
+      check:
+        prompt: 'Which is the weaker base: aniline or ammonia?'
+        options:
+        - aniline
+        - ammonia
+        - equal
+        answer: aniline
+        why: Its lone pair is delocalised into the benzene ring.
   items:
   - prompt: Which is the weakest base?
     options:
@@ -137,6 +176,126 @@ concepts:
     - Like NH₃.
     solution: The lone pair on nitrogen.
     mistakes: {"the hydrogen atoms": "c12_lone_pair", "the carbon chain": "c12_lone_pair", "oxygen atoms": "c12_lone_pair"}
+  - prompt: How many hydrogen atoms are on N in a primary amine?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - RNH₂.
+    - Read the subscript.
+    solution: 'Step 1: –NH₂. Step 2: 2.'
+    mistakes:
+      '1': c12c9_class
+      '3': c12c9_class
+  - prompt: '(C₂H₅)₃N is a:'
+    options:
+    - tertiary amine
+    - secondary amine
+    - primary amine
+    answer: tertiary amine
+    difficulty: 1
+    hints:
+    - Count the ethyl groups on N.
+    - There are three.
+    solution: 'Step 1: three C groups on N. Step 2: tertiary.'
+    mistakes:
+      secondary amine: c12c9_class
+      primary amine: c12c9_class
+  - prompt: Which is a stronger base than ammonia?
+    options:
+    - methylamine
+    - aniline
+    - p-nitroaniline
+    answer: methylamine
+    difficulty: 1
+    hints:
+    - Alkyl groups push electrons in.
+    - Aryl groups pull them away.
+    solution: 'Step 1: +I effect of CH₃. Step 2: methylamine.'
+    mistakes:
+      aniline: c12c9_base
+      p-nitroaniline: c12c9_base
+  - prompt: Hoffmann degradation of butanamide gives an amine with how many carbons?
+    answer: '3'
+    check: 4 - 1
+    difficulty: 2
+    hints:
+    - Butanamide has 4 carbons.
+    - One is lost.
+    solution: 'Step 1: 4 − 1. Step 2: propanamine, 3 carbons.'
+    mistakes:
+      '4': c12c9_rxn
+      '5': c12c9_rxn
+  - prompt: Why can't Gabriel synthesis make aniline?
+    options:
+    - aryl halides do not undergo SN2 with phthalimide
+    - aniline is a gas
+    - phthalimide contains no nitrogen
+    answer: aryl halides do not undergo SN2 with phthalimide
+    difficulty: 2
+    hints:
+    - Gabriel needs nucleophilic substitution on the halide.
+    - Aryl C–X bonds resist it.
+    solution: 'Step 1: aryl halide is unreactive. Step 2: no aromatic amine forms.'
+    mistakes:
+      aniline is a gas: c12c9_rxn
+      phthalimide contains no nitrogen: c12c9_rxn
+  - prompt: 'CH₃CN reduced with LiAlH₄ gives:'
+    options:
+    - ethanamine
+    - methanamine
+    - ethanamide
+    answer: ethanamine
+    difficulty: 2
+    hints:
+    - –CN becomes –CH₂NH₂.
+    - No carbon is lost.
+    solution: 'Step 1: CH₃–CH₂NH₂. Step 2: ethanamine.'
+    mistakes:
+      methanamine: c12c9_rxn
+      ethanamide: c12c9_rxn
+  - prompt: 'Arrange in water by increasing basicity: C₂H₅NH₂, (C₂H₅)₂NH, (C₂H₅)₃N.'
+    options:
+    - C₂H₅NH₂ < (C₂H₅)₃N < (C₂H₅)₂NH
+    - (C₂H₅)₃N < (C₂H₅)₂NH < C₂H₅NH₂
+    - C₂H₅NH₂ < (C₂H₅)₂NH < (C₂H₅)₃N
+    answer: C₂H₅NH₂ < (C₂H₅)₃N < (C₂H₅)₂NH
+    difficulty: 2
+    hints:
+    - In water, 2° is strongest.
+    - 1° is weakest of the three.
+    solution: 'Step 1: 2° > 3° > 1°. Step 2: written in increasing order.'
+    mistakes:
+      (C₂H₅)₃N < (C₂H₅)₂NH < C₂H₅NH₂: c12c9_base
+      C₂H₅NH₂ < (C₂H₅)₂NH < (C₂H₅)₃N: c12c9_base
+  - prompt: 'Which is the weaker base: aniline or p-methylaniline?'
+    options:
+    - aniline
+    - p-methylaniline
+    - equal
+    answer: aniline
+    difficulty: 3
+    hints:
+    - –CH₃ pushes electrons into the ring.
+    - That makes the lone pair more available.
+    solution: 'Step 1: CH₃ is electron-donating. Step 2: p-toluidine is stronger, so aniline is weaker.'
+    mistakes:
+      p-methylaniline: c12c9_base
+      equal: c12c9_base
+  - prompt: 'Ammonolysis of an alkyl halide is a poor way to make pure 1° amines because:'
+    options:
+    - the product reacts further to give 2°, 3° amines and salts
+    - no reaction happens
+    - it gives only alkenes
+    answer: the product reacts further to give 2°, 3° amines and salts
+    difficulty: 3
+    hints:
+    - The amine formed is itself a nucleophile.
+    - It attacks more alkyl halide.
+    solution: 'Step 1: RNH₂ reacts with RX. Step 2: a mixture forms.'
+    mistakes:
+      no reaction happens: c12c9_rxn
+      it gives only alkenes: c12c9_rxn
 - code: cbse12c.amine.reactions
   title: Reactions of amines and diazonium salts
   after:
@@ -213,6 +372,48 @@ concepts:
       bin: Tertiary (3°)
       clue: How many methyl groups on N?
       why: 'Three: tertiary.'
+  lesson:
+    - teach: 'Tests: primary amines (aliphatic and aromatic) heated with CHCl₃ and alcoholic KOH give foul-smelling isocyanides (carbylamine test). Hinsberg''s reagent (benzenesulfonyl chloride): 1° gives a product soluble in alkali, 2° gives an insoluble product, 3° does not react.'
+      picture:
+        kind: compare
+        columns:
+        - title: Amine
+          points:
+          - 1°
+          - 2°
+          - 3°
+        - title: Hinsberg result
+          points:
+          - product dissolves in KOH
+          - insoluble product
+          - no reaction
+        alt: How primary, secondary and tertiary amines respond to Hinsberg's reagent.
+      check:
+        prompt: 'An amine gives a foul smell with CHCl₃ and KOH. It is:'
+        options:
+        - primary
+        - secondary
+        - tertiary
+        answer: primary
+        why: Only 1° amines give the carbylamine reaction.
+    - teach: 'Aniline''s –NH₂ strongly activates the ring: bromine water at once gives 2,4,6-tribromoaniline. Acetylation (to acetanilide) tones this down to get a single substitution. In strong acid, aniline becomes anilinium ion, which directs meta, so nitration gives some meta product.'
+      check:
+        prompt: Why acetylate aniline before nitration?
+        options:
+        - to control the reactivity and protect –NH₂
+        - to make it a gas
+        - to make it more basic
+        answer: to control the reactivity and protect –NH₂
+        why: Acetanilide is less activating and is not oxidised.
+    - teach: 'Aromatic 1° amines with NaNO₂ + HCl at 0–5 °C give diazonium salts, ArN₂⁺Cl⁻. These are very useful: Sandmeyer (CuCl, CuBr, CuCN), warming with water (→ phenol), KI (→ iodobenzene), H₃PO₂ (→ benzene), and coupling with phenols or amines to make coloured azo dyes.'
+      check:
+        prompt: 'Benzenediazonium chloride + KI gives:'
+        options:
+        - iodobenzene
+        - phenol
+        - benzene
+        answer: iodobenzene
+        why: I⁻ replaces –N₂⁺, releasing N₂.
   items:
   - prompt: 'The carbylamine test (foul smell) is given by:'
     options:
@@ -293,3 +494,129 @@ concepts:
     - Bright colours.
     solution: Coupling diazonium salts with phenols or amines.
     mistakes: {"burning amines": "c12_azo", "oxidising alcohols": "c12_azo", "polymerising ethene": "c12_azo"}
+  - prompt: Diazotisation is carried out at about which temperature range?
+    options:
+    - 0–5 °C
+    - 100 °C
+    - room temperature only
+    answer: 0–5 °C
+    difficulty: 1
+    hints:
+    - Diazonium salts break down when warm.
+    - An ice bath is used.
+    solution: 'Step 1: unstable salts. Step 2: 0–5 °C.'
+    mistakes:
+      100 °C: c12c9_rxn
+      room temperature only: c12c9_rxn
+  - prompt: 'Benzenediazonium chloride warmed with water gives:'
+    options:
+    - phenol
+    - aniline
+    - chlorobenzene
+    answer: phenol
+    difficulty: 1
+    hints:
+    - –OH replaces –N₂⁺.
+    - N₂ escapes.
+    solution: 'Step 1: hydrolysis. Step 2: phenol.'
+    mistakes:
+      aniline: c12c9_rxn
+      chlorobenzene: c12c9_rxn
+  - prompt: 'Benzenediazonium chloride + CuCN gives:'
+    options:
+    - benzonitrile
+    - benzene
+    - phenol
+    answer: benzonitrile
+    difficulty: 1
+    hints:
+    - Sandmeyer with cyanide.
+    - –CN replaces –N₂⁺.
+    solution: 'Step 1: Sandmeyer. Step 2: C₆H₅CN.'
+    mistakes:
+      benzene: c12c9_rxn
+      phenol: c12c9_rxn
+  - prompt: Which reagent replaces –N₂⁺ with –H, giving benzene?
+    options:
+    - H₃PO₂
+    - KI
+    - CuCl
+    answer: H₃PO₂
+    difficulty: 2
+    hints:
+    - A mild reducing agent.
+    - Hypophosphorous acid.
+    solution: 'Step 1: reduction removes N₂. Step 2: H₃PO₂.'
+    mistakes:
+      KI: c12c9_rxn
+      CuCl: c12c9_rxn
+  - prompt: 'Ethylamine with nitrous acid gives mainly:'
+    options:
+    - ethanol and nitrogen gas
+    - a stable diazonium salt
+    - no reaction
+    answer: ethanol and nitrogen gas
+    difficulty: 2
+    hints:
+    - Aliphatic diazonium salts are very unstable.
+    - N₂ bubbles off.
+    solution: 'Step 1: unstable diazonium forms. Step 2: gives alcohol + N₂.'
+    mistakes:
+      a stable diazonium salt: c12c9_rxn
+      no reaction: c12c9_rxn
+  - prompt: 'Aniline + acetyl chloride gives:'
+    options:
+    - acetanilide
+    - anilinium chloride only
+    - benzamide
+    answer: acetanilide
+    difficulty: 2
+    hints:
+    - Acylation of –NH₂.
+    - An amide forms.
+    solution: 'Step 1: –NH₂ → –NHCOCH₃. Step 2: acetanilide.'
+    mistakes:
+      anilinium chloride only: c12c9_rxn
+      benzamide: c12c9_rxn
+  - prompt: 'A secondary amine with Hinsberg''s reagent gives a product that is:'
+    options:
+    - insoluble in alkali
+    - soluble in alkali
+    - not formed at all
+    answer: insoluble in alkali
+    difficulty: 2
+    hints:
+    - The sulphonamide has no H left on N.
+    - Without that H it cannot form a salt.
+    solution: 'Step 1: no acidic N–H. Step 2: insoluble in KOH.'
+    mistakes:
+      soluble in alkali: c12c9_rxn
+      not formed at all: c12c9_rxn
+  - prompt: 'Direct nitration of aniline gives a good amount of meta product because:'
+    options:
+    - in acid, –NH₂ becomes –NH₃⁺, a meta director
+    - –NH₂ is always meta directing
+    - nitric acid is weak
+    answer: in acid, –NH₂ becomes –NH₃⁺, a meta director
+    difficulty: 3
+    hints:
+    - The mixture is strongly acidic.
+    - Anilinium ion withdraws electrons.
+    solution: 'Step 1: protonation gives C₆H₅NH₃⁺. Step 2: it directs meta.'
+    mistakes:
+      –NH₂ is always meta directing: c12c9_base
+      nitric acid is weak: c12c9_rxn
+  - prompt: 'Benzenediazonium chloride coupled with phenol in alkali gives:'
+    options:
+    - an orange azo dye (p-hydroxyazobenzene)
+    - benzene
+    - aniline
+    answer: an orange azo dye (p-hydroxyazobenzene)
+    difficulty: 3
+    hints:
+    - Coupling keeps both nitrogens.
+    - –N=N– links two rings.
+    solution: 'Step 1: electrophilic coupling at para. Step 2: coloured azo compound.'
+    mistakes:
+      benzene: c12c9_rxn
+      aniline: c12c9_rxn

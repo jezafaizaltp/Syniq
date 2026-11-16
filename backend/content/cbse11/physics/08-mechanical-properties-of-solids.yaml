@@ -14,6 +14,8 @@ tips:
   p11_poisson: "Stretch a rubber band: it gets longer and thinner. Poisson's ratio compares those two changes."
   p11_strain: "Strain = ΔL/L. Convert 1 mm to metres first."
   p11_youngs: "Y = (F/A)/(ΔL/L). Find stress and strain separately, convert mm to m."
+  c11p08_ss: Stress is force ÷ area. Strain is change ÷ original size, with no unit. Convert mm to m first.
+  c11p08_mod: "A modulus is stress ÷ strain. Pick the one that matches the kind of change: stretching (Y), twisting the shape (G), or squeezing from all sides (B)."
 concepts:
 - code: cbse11p.solids.stress
   title: Stress, strain and Hooke's law
@@ -53,6 +55,42 @@ concepts:
       'Plastic region: it no longer springs back': Permanent stretch only begins once the wire has yielded.
       'Ultimate tensile strength: greatest stress': The highest stress is reached well into the plastic region, after the wire has been permanently stretched.
       'Fracture: the wire breaks': 'Breaking is last: after the greatest stress the wire narrows (necks) and then snaps.'
+  lesson:
+    - teach: Elastic bodies return to shape when the force is removed; plastic ones stay deformed. Stress = restoring force per unit area, σ = F/A, in pascal (N/m²).
+      check:
+        prompt: 40 N acts on an area of 0.002 m². Stress?
+        options:
+        - 20 000 Pa
+        - 0.08 Pa
+        - 80 Pa
+        answer: 20 000 Pa
+        why: 40 ÷ 0.002.
+    - teach: 'Strain is the fractional change: ΔL/L for length, Δx/L for shear, ΔV/V for volume. It is a ratio, so it has no unit. Hooke''s law: for small deformations stress ∝ strain.'
+      check:
+        prompt: A 4 m wire stretches 2 mm. Strain?
+        options:
+        - 5 × 10⁻⁴
+        - '0.5'
+        - 2 × 10⁻³
+        answer: 5 × 10⁻⁴
+        why: 0.002 ÷ 4.
+    - teach: A stress–strain curve passes the proportional limit, the yield point, the ultimate strength and then fracture. Ductile metals (copper) stretch a long way before breaking; brittle ones (glass) snap soon after the elastic limit.
+      picture:
+        kind: flow
+        steps:
+        - Proportional limit
+        - Elastic limit / yield
+        - Ultimate strength
+        - Fracture
+        alt: Stages along a stress–strain curve.
+      check:
+        prompt: 'A material drawn into thin wires without breaking is:'
+        options:
+        - ductile
+        - brittle
+        - an elastomer
+        answer: ductile
+        why: It has a long plastic region.
   items:
   - prompt: A force of 200 N acts on a wire of cross-section 2 × 10⁻⁶ m². Find the stress in units of 10⁶ N/m².
     answer: '100'
@@ -126,6 +164,117 @@ concepts:
     - Body under water.
     solution: Hydraulic (volume) stress acts equally from all sides.
     mistakes: {"shearing stress": "p11_hydraulic", "tensile stress": "p11_hydraulic", "torsional stress": "p11_hydraulic"}
+  - prompt: A 500 N load hangs on a wire of area 5 × 10⁻⁶ m². Find the stress in units of 10⁸ Pa.
+    answer: '1'
+    check: 500/5e-6/1e8
+    difficulty: 1
+    hints:
+    - σ = F/A.
+    - 500 ÷ (5 × 10⁻⁶) = 10⁸.
+    solution: 'Step 1: 10⁸ Pa. Step 2: 1 × 10⁸.'
+    mistakes:
+      '100': c11p08_ss
+      '2500': c11p08_ss
+  - prompt: A 1.5 m rod is compressed by 0.3 mm. Find the strain in units of 10⁻⁴.
+    answer: '2'
+    check: 0.0003/1.5/1e-4
+    difficulty: 1
+    hints:
+    - Change 0.3 mm to metres.
+    - Divide by 1.5 m.
+    solution: 'Step 1: 3 × 10⁻⁴ / 1.5 = 2 × 10⁻⁴. Step 2: 2.'
+    mistakes:
+      '0.2': c11p08_ss
+      '5': c11p08_ss
+  - prompt: 'The SI unit of stress is the same as the unit of:'
+    options:
+    - pressure
+    - force
+    - energy
+    answer: pressure
+    difficulty: 1
+    hints:
+    - Stress = force ÷ area.
+    - Which other quantity is force ÷ area?
+    solution: 'Step 1: N/m². Step 2: pascal, as for pressure.'
+    mistakes:
+      force: c11p08_ss
+      energy: c11p08_ss
+  - prompt: 'Glass breaks soon after its elastic limit. It is:'
+    options:
+    - brittle
+    - ductile
+    - plastic
+    answer: brittle
+    difficulty: 1
+    hints:
+    - Little or no plastic region.
+    - Opposite of ductile.
+    solution: 'Step 1: small plastic region. Step 2: brittle.'
+    mistakes:
+      ductile: c11p08_ss
+      plastic: c11p08_ss
+  - prompt: A shearing force moves the top face of a 0.1 m cube by 0.5 mm. Find the shear strain in units of 10⁻³.
+    answer: '5'
+    check: 0.0005/0.1/1e-3
+    difficulty: 2
+    hints:
+    - Shear strain = Δx/L.
+    - 0.0005 ÷ 0.1.
+    solution: 'Step 1: 5 × 10⁻³. Step 2: 5.'
+    mistakes:
+      '0.5': c11p08_ss
+      '50': c11p08_ss
+  - prompt: 'Rubber stretches a lot and returns, but does not obey Hooke''s law. It is called:'
+    options:
+    - an elastomer
+    - a ductile metal
+    - a brittle solid
+    answer: an elastomer
+    difficulty: 2
+    hints:
+    - Large elastic stretch.
+    - Stress and strain are not proportional.
+    solution: 'Step 1: big reversible stretch without proportionality. Step 2: elastomer.'
+    mistakes:
+      a ductile metal: c11p08_ss
+      a brittle solid: c11p08_ss
+  - prompt: Two wires of the same material carry the same load; one has twice the diameter. Its stress is what fraction of the thin wire's?
+    answer: 1/4
+    check: 1/4
+    difficulty: 2
+    hints:
+    - Area ∝ diameter².
+    - Stress = F/A.
+    solution: 'Step 1: area × 4. Step 2: stress ÷ 4.'
+    mistakes:
+      1/2: c11p08_ss
+      '2': c11p08_ss
+  - prompt: A steel wire can bear a maximum stress of 8 × 10⁸ Pa. What largest load (in N) can a wire of area 10⁻⁶ m² carry?
+    answer: '800'
+    check: 8e8*1e-6
+    difficulty: 3
+    hints:
+    - F = σ × A.
+    - 8 × 10⁸ × 10⁻⁶.
+    solution: 'Step 1: 8 × 10². Step 2: 800 N.'
+    mistakes:
+      '80': c11p08_ss
+      '8000': c11p08_ss
+  - prompt: Which stage comes right after the yield point on a ductile metal's curve?
+    options:
+    - plastic flow up to the ultimate strength
+    - the proportional limit
+    - Hooke's law region
+    answer: plastic flow up to the ultimate strength
+    difficulty: 3
+    hints:
+    - Past yield the metal does not return to shape.
+    - Stress then climbs to a maximum.
+    solution: 'Step 1: after yield, plastic deformation. Step 2: up to ultimate strength.'
+    mistakes:
+      the proportional limit: c11p08_ss
+      Hooke's law region: c11p08_ss
 - code: cbse11p.solids.moduli
   title: Elastic moduli
   after:
@@ -241,6 +390,48 @@ concepts:
           - 0.0011
           - 0.05
         say: Too much. Strain = stress ÷ Y, so you need a stress of 200 MPa.
+  lesson:
+    - teach: 'Modulus of elasticity = stress ÷ strain. Young''s modulus Y = (F/A)/(ΔL/L) = FL/(AΔL) is for stretching. Steel''s Y ≈ 2 × 10¹¹ Pa: it is stiff, not ''stretchy''.'
+      check:
+        prompt: Stress 6 × 10⁷ Pa, strain 3 × 10⁻⁴. Y?
+        options:
+        - 2 × 10¹¹ Pa
+        - 1.8 × 10⁴ Pa
+        - 5 × 10⁻¹² Pa
+        answer: 2 × 10¹¹ Pa
+        why: 6 × 10⁷ ÷ 3 × 10⁻⁴.
+    - teach: Shear modulus G = (F/A)/θ for a change of shape (G ≈ Y/3). Bulk modulus B = −p/(ΔV/V) for a change of volume; compressibility = 1/B. Liquids and gases only have B.
+      check:
+        prompt: Which modulus does a gas have?
+        options:
+        - bulk only
+        - Young's only
+        - shear only
+        answer: bulk only
+        why: Fluids cannot hold a fixed length or shape.
+    - teach: Poisson's ratio = lateral strain ÷ longitudinal strain (no unit). Elastic energy stored per unit volume = ½ × stress × strain.
+      picture:
+        kind: compare
+        columns:
+        - title: Change
+          points:
+          - length
+          - shape
+          - volume
+        - title: Modulus
+          points:
+          - Young's Y
+          - shear G
+          - bulk B
+        alt: Which modulus goes with which change.
+      check:
+        prompt: Stress 2 × 10⁶ Pa, strain 10⁻³. Energy per unit volume?
+        options:
+        - 1000 J/m³
+        - 2000 J/m³
+        - 500 J/m³
+        answer: 1000 J/m³
+        why: ½ × 2 × 10⁶ × 10⁻³.
   items:
   - prompt: Stress is 2 × 10⁸ Pa and strain is 10⁻³. Find Young's modulus in units of 10¹¹ Pa.
     answer: '2'
@@ -309,3 +500,114 @@ concepts:
     - Ratio of two strains.
     solution: Poisson's ratio = lateral strain ÷ longitudinal strain.
     mistakes: {"stress with strain": "p11_poisson", "shear with bulk modulus": "p11_poisson", "force with area": "p11_poisson"}
+  - prompt: Stress 4 × 10⁸ Pa produces strain 2 × 10⁻³. Find Y in units of 10¹¹ Pa.
+    answer: '2'
+    check: 4e8/2e-3/1e11
+    difficulty: 1
+    hints:
+    - Y = stress/strain.
+    - 4 × 10⁸ ÷ 2 × 10⁻³ = 2 × 10¹¹.
+    solution: 'Step 1: 2 × 10¹¹ Pa. Step 2: 2.'
+    mistakes:
+      '8': c11p08_mod
+      '0.5': c11p08_mod
+  - prompt: 'Bulk modulus describes resistance to a change in:'
+    options:
+    - volume
+    - length
+    - shape
+    answer: volume
+    difficulty: 1
+    hints:
+    - '''Bulk'' means the whole body.'
+    - Think of squeezing evenly from all sides.
+    solution: 'Step 1: B = −p/(ΔV/V). Step 2: volume.'
+    mistakes:
+      length: c11p08_mod
+      shape: c11p08_mod
+  - prompt: Which is most compressible?
+    options:
+    - a gas
+    - a liquid
+    - a solid
+    answer: a gas
+    difficulty: 1
+    hints:
+    - Compressibility = 1/B.
+    - Which has the smallest B?
+    solution: 'Step 1: gases have the lowest B. Step 2: most compressible.'
+    mistakes:
+      a liquid: c11p08_mod
+      a solid: c11p08_mod
+  - prompt: A 3 m wire of area 2 × 10⁻⁶ m² stretches 1.5 mm under 200 N. Find Y in units of 10¹¹ Pa.
+    answer: '2'
+    check: 200*3/(2e-6*1.5e-3)/1e11
+    difficulty: 2
+    hints:
+    - Y = FL/(AΔL).
+    - Use ΔL = 1.5 × 10⁻³ m.
+    solution: 'Step 1: 600/(3 × 10⁻⁹) = 2 × 10¹¹. Step 2: 2.'
+    mistakes:
+      '0.5': c11p08_mod
+      '20': c11p08_mod
+  - prompt: Pressure 10⁶ Pa reduces a volume by 0.05%. Find the bulk modulus in units of 10⁹ Pa.
+    answer: '2'
+    check: 1e6/5e-4/1e9
+    difficulty: 2
+    hints:
+    - ΔV/V = 5 × 10⁻⁴.
+    - B = p/(ΔV/V).
+    solution: 'Step 1: 10⁶ / 5 × 10⁻⁴ = 2 × 10⁹. Step 2: 2.'
+    mistakes:
+      '0.5': c11p08_mod
+      '20': c11p08_mod
+  - prompt: 'A wire''s length is doubled (same material, area, load). Its extension becomes:'
+    options:
+    - double
+    - half
+    - the same
+    answer: double
+    difficulty: 2
+    hints:
+    - ΔL = FL/(AY).
+    - ΔL ∝ L.
+    solution: 'Step 1: ΔL ∝ L. Step 2: double.'
+    mistakes:
+      half: c11p08_mod
+      the same: c11p08_mod
+  - prompt: Why are steel girders made I-shaped?
+    options:
+    - depth gives stiffness against bending while saving material
+    - to make them lighter only
+    - to increase Young's modulus
+    answer: depth gives stiffness against bending while saving material
+    difficulty: 2
+    hints:
+    - Bending sag δ ∝ 1/d³.
+    - Material in the middle carries little load.
+    solution: 'Step 1: depth d matters most. Step 2: I-shape keeps depth with less steel.'
+    mistakes:
+      to make them lighter only: c11p08_mod
+      to increase Young's modulus: c11p08_mod
+  - prompt: A wire stretches; its length strain is 2 × 10⁻³ and its diameter strain is 6 × 10⁻⁴. Poisson's ratio?
+    answer: '0.3'
+    check: 6e-4/2e-3
+    difficulty: 3
+    hints:
+    - Lateral ÷ longitudinal.
+    - Lateral is the diameter.
+    solution: 'Step 1: 6 × 10⁻⁴ / 2 × 10⁻³. Step 2: 0.3.'
+    mistakes:
+      '3.33': c11p08_mod
+      '1.2': c11p08_mod
+  - prompt: 'Two wires of the same material: B is twice as long and has twice the diameter of A. Same load. Extension of B ÷ extension of A?'
+    answer: 1/2
+    check: 2/4
+    difficulty: 3
+    hints:
+    - ΔL ∝ L/A.
+    - Area ∝ d².
+    solution: 'Step 1: L × 2, A × 4. Step 2: 2/4 = ½.'
+    mistakes:
+      '1': c11p08_mod
+      '2': c11p08_mod

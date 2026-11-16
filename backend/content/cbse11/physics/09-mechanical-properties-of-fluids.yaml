@@ -14,6 +14,9 @@ tips:
   p11_terminal: "As speed grows, air drag grows. At terminal velocity, the forces on the drop add up to zero."
   p11_torricelli: "v = √(2gh). Take the square root."
   p11_viscosity_heat: "Warm honey or cold honey: which pours more easily?"
+  c11p09_p: 'Pressure in a liquid grows with depth: ρgh. Add atmospheric pressure only if the question asks for total pressure.'
+  c11p09_flow: 'Narrow part of a pipe: faster flow (A₁v₁ = A₂v₂). Faster flow on a level streamline: lower pressure.'
+  c11p09_st: A drop has one surface (2S/r); a soap bubble has two (4S/r).
 concepts:
 - code: cbse11p.fluids.pressure
   title: Pressure and Pascal's law
@@ -118,6 +121,48 @@ concepts:
           a1: 10
           f1: 20
         say: 20 N on 10 cm² is 2 N/cm². Pressure = force ÷ area.
+  lesson:
+    - teach: 'Pressure P = F/A. In a liquid at rest it acts equally in all directions and grows with depth: P = Pa + ρgh. The extra part ρgh is gauge pressure; it depends on depth, not on the vessel''s shape.'
+      check:
+        prompt: Gauge pressure 2 m down in water (ρ = 1000, g = 10)?
+        options:
+        - 20 000 Pa
+        - 2000 Pa
+        - 200 Pa
+        answer: 20 000 Pa
+        why: 1000 × 10 × 2.
+    - teach: 'Pascal''s law: pressure applied to an enclosed fluid reaches every part undiminished. So in a hydraulic lift F₂ = F₁ × A₂/A₁: a small push on a small piston lifts a big load.'
+      check:
+        prompt: 'A₂ is 20 times A₁. A 50 N push lifts:'
+        options:
+        - 1000 N
+        - 2.5 N
+        - 70 N
+        answer: 1000 N
+        why: 50 × 20.
+    - teach: 'Archimedes: a body in a fluid feels an upthrust equal to the weight of fluid it pushes aside. It floats if it can displace its own weight before it is fully under.'
+      picture:
+        kind: compare
+        columns:
+        - title: Depth
+          points:
+          - 1 m
+          - 5 m
+          - 10 m
+        - title: Gauge pressure in water
+          points:
+          - 10 kPa
+          - 50 kPa
+          - 100 kPa
+        alt: Pressure rising with depth in water.
+      check:
+        prompt: A block displaces 0.002 m³ of water (ρ = 1000, g = 10). Upthrust?
+        options:
+        - 20 N
+        - 2 N
+        - 200 N
+        answer: 20 N
+        why: 1000 × 0.002 × 10.
   items:
   - prompt: Find the gauge pressure (in Pa) at 10 m depth in water (ρ = 1000 kg/m³, g = 10 m/s²).
     answer: '100000'
@@ -186,6 +231,111 @@ concepts:
     - Displaced fluid.
     solution: Upthrust = weight of displaced fluid.
     mistakes: {"its own weight": "p11_archimedes", "its volume": "p11_archimedes", "the fluid pressure at the top": "p11_archimedes"}
+  - prompt: Find the gauge pressure at 5 m depth in sea water (ρ = 1030, g = 10) (in Pa).
+    answer: '51500'
+    check: 1030*10*5
+    difficulty: 1
+    hints:
+    - ρgh.
+    - 1030 × 10 × 5.
+    solution: 'Step 1: ρgh. Step 2: 51 500 Pa.'
+    mistakes:
+      '5150': c11p09_p
+      '152800': c11p09_p
+  - prompt: A 600 N person stands on shoes of total area 0.03 m². Find the pressure (in Pa).
+    answer: '20000'
+    check: 600/0.03
+    difficulty: 1
+    hints:
+    - P = F/A.
+    - 600 ÷ 0.03.
+    solution: 'Step 1: 600/0.03. Step 2: 20 000 Pa.'
+    mistakes:
+      '18': c11p09_p
+      '2000': c11p09_p
+  - prompt: Why is a dam built thicker at the bottom?
+    options:
+    - water pressure is greater at greater depth
+    - to look stronger
+    - water is heavier at the top
+    answer: water pressure is greater at greater depth
+    difficulty: 1
+    hints:
+    - P = ρgh.
+    - Which part has the largest h?
+    solution: 'Step 1: pressure rises with depth. Step 2: the base must resist more.'
+    mistakes:
+      to look stronger: c11p09_p
+      water is heavier at the top: c11p09_p
+  - prompt: A hydraulic press has pistons of area 0.02 m² and 0.8 m². What force on the small piston lifts 20 000 N?
+    answer: '500'
+    check: 20000*0.02/0.8
+    difficulty: 2
+    hints:
+    - Same pressure on both pistons.
+    - F₁ = F₂ × A₁/A₂.
+    solution: 'Step 1: 20 000 × 0.02/0.8. Step 2: 500 N.'
+    mistakes:
+      '800000': c11p09_p
+      '400': c11p09_p
+  - prompt: Find the total pressure 20 m under a lake (Pa = 1 × 10⁵ Pa, ρ = 1000, g = 10), in units of 10⁵ Pa.
+    answer: '3'
+    check: (1e5+1000*10*20)/1e5
+    difficulty: 2
+    hints:
+    - Total = Pa + ρgh.
+    - ρgh = 2 × 10⁵.
+    solution: 'Step 1: 1 + 2 = 3. Step 2: 3 × 10⁵ Pa.'
+    mistakes:
+      '2': c11p09_p
+      '21': c11p09_p
+  - prompt: 'Three vessels of different shapes are filled with water to the same height. The pressure at the bottom is:'
+    options:
+    - the same in all
+    - largest in the widest
+    - largest in the narrowest
+    answer: the same in all
+    difficulty: 2
+    hints:
+    - P = Pa + ρgh.
+    - Does shape appear in that formula?
+    solution: 'Step 1: same h, same liquid. Step 2: same pressure.'
+    mistakes:
+      largest in the widest: c11p09_p
+      largest in the narrowest: c11p09_p
+  - prompt: A 1 kg block of volume 4 × 10⁻⁴ m³ is fully under water (g = 10). Find its apparent weight (in N).
+    answer: '6'
+    check: 10-1000*4e-4*10
+    difficulty: 2
+    hints:
+    - Upthrust = ρVg.
+    - Apparent weight = weight − upthrust.
+    solution: 'Step 1: upthrust 4 N. Step 2: 10 − 4 = 6 N.'
+    mistakes:
+      '4': c11p09_p
+      '14': c11p09_p
+  - prompt: A mercury barometer reads 76 cm. If water were used instead (13.6 times less dense), about how tall would the column be (in m)?
+    answer: '10.3'
+    check: round(0.76*13.6,1)
+    difficulty: 3
+    hints:
+    - 'Same pressure: ρh is the same.'
+    - h_water = 0.76 × 13.6.
+    solution: 'Step 1: 0.76 × 13.6 ≈ 10.3. Step 2: about 10.3 m.'
+    mistakes:
+      '0.056': c11p09_p
+      '76': c11p09_p
+  - prompt: Wood of density 600 kg/m³ floats in water. What fraction of its volume is under water?
+    answer: 3/5
+    check: 600/1000
+    difficulty: 3
+    hints:
+    - 'Floating: weight = upthrust.'
+    - Fraction under = ρ_wood/ρ_water.
+    solution: 'Step 1: 600/1000. Step 2: 3/5.'
+    mistakes:
+      2/5: c11p09_p
+      5/3: c11p09_p
 - code: cbse11p.fluids.flow
   title: Fluid flow, viscosity and surface tension
   after:
@@ -289,6 +439,46 @@ concepts:
           - 0.01
           - 0.9
         say: The second pipe is wider, so the water slows. Make the diameters equal.
+  lesson:
+    - teach: 'In steady (streamline) flow, the same volume passes every section each second: A₁v₁ = A₂v₂. So water speeds up where a pipe narrows, as when you squeeze a hose.'
+      check:
+        prompt: 'Area halves. The flow speed:'
+        options:
+        - doubles
+        - halves
+        - stays the same
+        answer: doubles
+        why: Av is constant.
+    - teach: 'Bernoulli: P + ½ρv² + ρgh is constant along a streamline. Where flow is faster, pressure is lower. This explains aeroplane lift and atomisers. Water from a hole h below the surface leaves at v = √(2gh).'
+      check:
+        prompt: 'Air flows faster over the top of a wing. The pressure on top is:'
+        options:
+        - lower
+        - higher
+        - the same
+        answer: lower
+        why: 'Faster flow, lower pressure: the wing is pushed up.'
+    - teach: 'Viscosity is fluid friction (η, Pa s); for liquids it falls when heated. A sphere falling through fluid reaches terminal velocity when drag 6πηrv balances weight minus upthrust. Surface tension S (N/m): extra pressure 2S/r in a drop, 4S/r in a soap bubble.'
+      picture:
+        kind: compare
+        columns:
+        - title: Pipe section
+          points:
+          - wide
+          - narrow
+        - title: Speed and pressure
+          points:
+          - slow, higher pressure
+          - fast, lower pressure
+        alt: Continuity and Bernoulli in a pipe.
+      check:
+        prompt: Why does a soap bubble use 4S/r and not 2S/r?
+        options:
+        - it has two surfaces
+        - it is larger
+        - soap has double S
+        answer: it has two surfaces
+        why: An inner and an outer film.
   items:
   - prompt: Water flows at 2 m/s in a pipe of area 6 cm². What is its speed (in m/s) where the area is 3 cm²?
     answer: '4'
@@ -358,3 +548,111 @@ concepts:
     - Net force zero.
     solution: At terminal velocity the drag force balances the net downward force.
     mistakes: {"gravity switches off": "p11_terminal", "air pressure pushes it up": "p11_terminal", "surface tension stops it": "p11_terminal"}
+  - prompt: Water flows at 3 m/s in a pipe of area 10 cm². Find its speed where the area is 5 cm² (in m/s).
+    answer: '6'
+    check: 3*10/5
+    difficulty: 1
+    hints:
+    - A₁v₁ = A₂v₂.
+    - Area halves.
+    solution: 'Step 1: 30 = 5v. Step 2: v = 6 m/s.'
+    mistakes:
+      '1.5': c11p09_flow
+      '15': c11p09_flow
+  - prompt: Water leaks from a hole 20 m below the surface (g = 10). Find its speed (in m/s).
+    answer: '20'
+    check: (2*10*20)**0.5
+    difficulty: 1
+    hints:
+    - 'Torricelli: v = √(2gh).'
+    - √400.
+    solution: 'Step 1: √(400). Step 2: 20 m/s.'
+    mistakes:
+      '400': c11p09_flow
+      '200': c11p09_flow
+  - prompt: Viscosity of honey ______ when it is warmed.
+    options:
+    - decreases
+    - increases
+    - does not change
+    answer: decreases
+    difficulty: 1
+    hints:
+    - Warm honey pours faster.
+    - Less internal friction.
+    solution: 'Step 1: liquids get runnier when heated. Step 2: decreases.'
+    mistakes:
+      increases: c11p09_flow
+      does not change: c11p09_flow
+  - prompt: Find the excess pressure inside a water drop of radius 1 mm (S = 0.07 N/m) (in Pa).
+    answer: '140'
+    check: 2*0.07/0.001
+    difficulty: 2
+    hints:
+    - 'A drop has one surface: 2S/r.'
+    - r = 10⁻³ m.
+    solution: 'Step 1: 0.14/0.001. Step 2: 140 Pa.'
+    mistakes:
+      '280': c11p09_st
+      '70': c11p09_st
+  - prompt: 'Two sheets of paper held apart; you blow between them. They:'
+    options:
+    - move together
+    - move apart
+    - stay still
+    answer: move together
+    difficulty: 2
+    hints:
+    - Air between is moving fast.
+    - Fast air means lower pressure.
+    solution: 'Step 1: pressure between drops. Step 2: outside air pushes them together.'
+    mistakes:
+      move apart: c11p09_flow
+      stay still: c11p09_flow
+  - prompt: A pipe of diameter 4 cm narrows to 2 cm. Water enters at 1 m/s. Find its speed in the narrow part (in m/s).
+    answer: '4'
+    check: 1*(4/2)**2
+    difficulty: 2
+    hints:
+    - Area ∝ diameter².
+    - Diameter halves, area quarters.
+    solution: 'Step 1: A₂ = A₁/4. Step 2: v₂ = 4 m/s.'
+    mistakes:
+      '2': c11p09_flow
+      '0.25': c11p09_flow
+  - prompt: Above about what Reynolds number does flow in a pipe usually become turbulent?
+    options:
+    - '2000'
+    - '20'
+    - '2'
+    answer: '2000'
+    difficulty: 2
+    hints:
+    - Re = ρvd/η compares inertia with viscosity.
+    - Low Re is smooth flow.
+    solution: 'Step 1: Re above roughly 2000. Step 2: turbulent.'
+    mistakes:
+      '20': c11p09_flow
+      '2': c11p09_flow
+  - prompt: Terminal velocity v ∝ r². A drop of radius 2r falls at how many times the terminal speed of a drop of radius r?
+    answer: '4'
+    check: 2**2
+    difficulty: 3
+    hints:
+    - v = 2r²(ρ − σ)g/9η.
+    - Square the factor 2.
+    solution: 'Step 1: (2)². Step 2: 4 times.'
+    mistakes:
+      '2': c11p09_flow
+      '8': c11p09_flow
+  - prompt: Water rises 3 cm in a capillary tube. How high does it rise in a tube of half the radius (in cm)?
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - h = 2S cos θ/(ρgr).
+    - h ∝ 1/r.
+    solution: 'Step 1: r halves, h doubles. Step 2: 6 cm.'
+    mistakes:
+      '1.5': c11p09_st
+      '12': c11p09_st

@@ -14,6 +14,9 @@ tips:
   c11_molar_mass: "Add the atomic masses of every atom: two H and one O."
   c11_mole_ratio: "Read the coefficients: 2 mol H₂ gives 2 mol H₂O. Scale up."
   c11_percent: "% O = mass of O in one molecule ÷ molar mass × 100."
+  c11c01_mole: Moles = mass ÷ molar mass. Add up atomic masses carefully, counting every atom in the formula.
+  c11c01_ratio: Use the balanced equation's numbers as a mole ratio. Convert grams to moles first.
+  c11c01_conc: Molarity uses litres of SOLUTION; molality uses kilograms of SOLVENT. Change mL to L first.
 concepts:
 - code: cbse11c.basic.mole
   title: Laws of combination and the mole
@@ -103,6 +106,43 @@ concepts:
           mm: 32
           m: 32
         say: 32 g is one mole, 6.022 × 10²³ molecules. You need twice that.
+  lesson:
+    - teach: 'Laws of combination: mass is conserved in a reaction (Lavoisier); a compound always has the same elements in the same mass ratio (Proust); gases react in simple whole-number volume ratios (Gay-Lussac).'
+      check:
+        prompt: 10 g of A reacts fully with 5 g of B. Mass of products?
+        options:
+        - 15 g
+        - 5 g
+        - 50 g
+        answer: 15 g
+        why: Mass is conserved.
+    - teach: 'Atomic masses are measured in u, where 1 u is 1/12 of a carbon-12 atom. Molecular mass is the sum of atomic masses in the formula: CO₂ = 12 + 2 × 16 = 44 u.'
+      check:
+        prompt: Molecular mass of NH₃ (N = 14, H = 1)?
+        options:
+        - 17 u
+        - 15 u
+        - 42 u
+        answer: 17 u
+        why: 14 + 3 × 1.
+    - teach: 'One mole is 6.022 × 10²³ particles. Its mass in grams equals the molecular mass: 1 mol of CO₂ is 44 g. So moles n = mass ÷ molar mass.'
+      picture:
+        kind: flow
+        steps:
+        - Mass (g)
+        - ÷ molar mass
+        - Moles
+        - × 6.022 × 10²³
+        - Particles
+        alt: Converting between mass, moles and particles.
+      check:
+        prompt: How many moles are in 36 g of water (M = 18)?
+        options:
+        - '2'
+        - '0.5'
+        - '648'
+        answer: '2'
+        why: 36 ÷ 18.
   items:
   - prompt: Find the molar mass of water, H₂O, in g/mol (H = 1, O = 16).
     answer: '18'
@@ -167,6 +207,111 @@ concepts:
     - Twelfth.
     solution: 1 u = 1/12 of a C-12 atom's mass.
     mistakes: {"the mass of a hydrogen atom": "c11_amu", "1/16 of an oxygen atom": "c11_amu", "the mass of a proton exactly": "c11_amu"}
+  - prompt: Find the molar mass of CaCO₃ (Ca = 40, C = 12, O = 16) in g/mol.
+    answer: '100'
+    check: 40+12+48
+    difficulty: 1
+    hints:
+    - Count three oxygen atoms.
+    - Add 40 + 12 + 3 × 16.
+    solution: 'Step 1: 40 + 12 + 48. Step 2: 100 g/mol.'
+    mistakes:
+      '68': c11c01_mole
+      '84': c11c01_mole
+  - prompt: How many moles are in 11.5 g of sodium (Na = 23)?
+    answer: '0.5'
+    check: 11.5/23
+    difficulty: 1
+    hints:
+    - n = m/M.
+    - 11.5 ÷ 23.
+    solution: 'Step 1: 11.5/23. Step 2: 0.5 mol.'
+    mistakes:
+      '2': c11c01_mole
+      '264.5': c11c01_mole
+  - prompt: 'The mass of 1 mol of any substance in grams equals its:'
+    options:
+    - molecular (or formula) mass
+    - atomic number
+    - number of atoms
+    answer: molecular (or formula) mass
+    difficulty: 1
+    hints:
+    - Think of 1 mol of CO₂.
+    - Its mass is the same number as its u value.
+    solution: 'Step 1: 1 mol CO₂ = 44 g; CO₂ = 44 u. Step 2: molecular mass.'
+    mistakes:
+      atomic number: c11c01_mole
+      number of atoms: c11c01_mole
+  - prompt: Find the mass (in g) of 0.25 mol of H₂SO₄ (H = 1, S = 32, O = 16).
+    answer: '24.5'
+    check: 0.25*98
+    difficulty: 2
+    hints:
+    - Molar mass of H₂SO₄ = 2 + 32 + 64.
+    - Multiply by 0.25.
+    solution: 'Step 1: M = 98. Step 2: 0.25 × 98 = 24.5 g.'
+    mistakes:
+      '392': c11c01_mole
+      '12.25': c11c01_mole
+  - prompt: How many atoms are in 0.5 mol of carbon, in units of 10²³ (use 6.022)?
+    answer: '3.011'
+    check: 0.5*6.022
+    difficulty: 2
+    hints:
+    - Particles = n × Nₐ.
+    - Half of 6.022.
+    solution: 'Step 1: 0.5 × 6.022. Step 2: 3.011 × 10²³.'
+    mistakes:
+      '12.044': c11c01_mole
+      '6.022': c11c01_mole
+  - prompt: 'Carbon and oxygen form CO and CO₂. With 12 g of C, oxygen masses are 16 g and 32 g, a 1 : 2 ratio. This shows the law of:'
+    options:
+    - multiple proportions
+    - definite proportions
+    - conservation of mass
+    answer: multiple proportions
+    difficulty: 2
+    hints:
+    - Two different compounds of the same elements.
+    - Fixed mass of one element, simple ratio of the other.
+    solution: 'Step 1: two compounds, simple ratio. Step 2: multiple proportions.'
+    mistakes:
+      definite proportions: c11c01_ratio
+      conservation of mass: c11c01_ratio
+  - prompt: Chlorine is 75% ³⁵Cl and 25% ³⁷Cl. Find its average atomic mass (u).
+    answer: '35.5'
+    check: 0.75*35+0.25*37
+    difficulty: 2
+    hints:
+    - Weighted average of isotope masses.
+    - 0.75 × 35 + 0.25 × 37.
+    solution: 'Step 1: 26.25 + 9.25. Step 2: 35.5 u.'
+    mistakes:
+      '36': c11c01_mole
+      '72': c11c01_mole
+  - prompt: At STP (molar volume 22.4 L), what volume (in L) does 8 g of O₂ (M = 32) occupy?
+    answer: '5.6'
+    check: 8/32*22.4
+    difficulty: 3
+    hints:
+    - Find moles first.
+    - Multiply by 22.4.
+    solution: 'Step 1: 0.25 mol. Step 2: 0.25 × 22.4 = 5.6 L.'
+    mistakes:
+      '179.2': c11c01_mole
+      '11.2': c11c01_mole
+  - prompt: How many hydrogen atoms are in 1 mol of CH₄, in units of 10²³ (use 6.022)?
+    answer: '24.088'
+    check: 4*6.022
+    difficulty: 3
+    hints:
+    - Each CH₄ has 4 H atoms.
+    - 4 × Nₐ.
+    solution: 'Step 1: 4 mol of H atoms. Step 2: 4 × 6.022 = 24.088 × 10²³.'
+    mistakes:
+      '6.022': c11c01_mole
+      '30.11': c11c01_mole
 - code: cbse11c.basic.stoich
   title: Formulae, concentration and stoichiometry
   after:
@@ -268,6 +413,48 @@ concepts:
           - 0
           - 11
         say: 'Now H₂ runs out first: 4 N₂ need 12 H₂.'
+  lesson:
+    - teach: Percentage of an element = (its total mass in the formula ÷ molar mass) × 100. The empirical formula is the simplest whole-number ratio; molecular formula = n × empirical formula.
+      check:
+        prompt: Empirical formula of C₂H₄?
+        options:
+        - CH₂
+        - C₂H₄
+        - CH
+        answer: CH₂
+        why: Divide by 2.
+    - teach: A balanced equation gives mole ratios. In N₂ + 3H₂ → 2NH₃, 1 mol N₂ uses 3 mol H₂ and makes 2 mol NH₃. The reactant that runs out first is the limiting reagent.
+      check:
+        prompt: N₂ + 3H₂ → 2NH₃. 2 mol N₂ makes how much NH₃?
+        options:
+        - 4 mol
+        - 2 mol
+        - 6 mol
+        answer: 4 mol
+        why: 'Ratio 1 : 2.'
+    - teach: Molarity M = moles of solute ÷ litres of solution. Molality m = moles of solute ÷ kg of solvent; it does not change with temperature because masses do not.
+      picture:
+        kind: compare
+        columns:
+        - title: Unit
+          points:
+          - molarity (M)
+          - molality (m)
+          - mole fraction
+        - title: Divides by
+          points:
+          - litres of solution
+          - kg of solvent
+          - total moles
+        alt: Concentration units.
+      check:
+        prompt: 0.2 mol in 500 mL of solution. Molarity?
+        options:
+        - 0.4 M
+        - 0.1 M
+        - 100 M
+        answer: 0.4 M
+        why: 0.2 ÷ 0.5 L.
   items:
   - prompt: 4 g of NaOH (M = 40) is dissolved to make 250 mL of solution. Find its molarity (mol/L).
     answer: '0.4'
@@ -332,3 +519,111 @@ concepts:
     - Mass doesn't.
     solution: Molality uses mass of solvent, so it doesn't change.
     mistakes: {"molarity": "c11_molality", "grams per litre": "c11_molality", "normality": "c11_molality"}
+  - prompt: 5.85 g of NaCl (M = 58.5) is dissolved to make 500 mL of solution. Find the molarity.
+    answer: '0.2'
+    check: 0.1/0.5
+    difficulty: 1
+    hints:
+    - 'Moles first: 5.85 ÷ 58.5.'
+    - Divide by 0.5 L.
+    solution: 'Step 1: 0.1 mol. Step 2: 0.1/0.5 = 0.2 M.'
+    mistakes:
+      '0.05': c11c01_conc
+      '0.0002': c11c01_conc
+  - prompt: In CH₄ + 2O₂ → CO₂ + 2H₂O, how many moles of O₂ burn 3 mol of CH₄?
+    answer: '6'
+    check: 3*2
+    difficulty: 1
+    hints:
+    - 'Ratio CH₄ : O₂ = 1 : 2.'
+    - Double 3.
+    solution: 'Step 1: 3 × 2. Step 2: 6 mol.'
+    mistakes:
+      '3': c11c01_ratio
+      '1.5': c11c01_ratio
+  - prompt: 'The empirical formula of benzene, C₆H₆, is:'
+    options:
+    - CH
+    - C₆H₆
+    - C₃H₃
+    answer: CH
+    difficulty: 1
+    hints:
+    - Simplest whole-number ratio.
+    - Divide both by 6.
+    solution: 'Step 1: 6 : 6 = 1 : 1. Step 2: CH.'
+    mistakes:
+      C₆H₆: c11c01_ratio
+      C₃H₃: c11c01_ratio
+  - prompt: Find the percentage of carbon by mass in CO₂ (C = 12, O = 16), to 1 decimal place.
+    answer: '27.3'
+    check: round(12/44*100,1)
+    difficulty: 2
+    hints:
+    - 12 ÷ 44 × 100.
+    - Molar mass of CO₂ is 44.
+    solution: 'Step 1: 12/44 = 0.2727. Step 2: 27.3%.'
+    mistakes:
+      '72.7': c11c01_ratio
+      '37.5': c11c01_ratio
+  - prompt: How many grams of CO₂ form when 12 g of carbon burns completely (C + O₂ → CO₂)?
+    answer: '44'
+    check: 1*44
+    difficulty: 2
+    hints:
+    - 12 g C is 1 mol.
+    - 1 mol C gives 1 mol CO₂.
+    solution: 'Step 1: 1 mol CO₂. Step 2: 44 g.'
+    mistakes:
+      '12': c11c01_ratio
+      '32': c11c01_ratio
+  - prompt: '2 mol of H₂ and 2 mol of O₂ react: 2H₂ + O₂ → 2H₂O. The limiting reagent is:'
+    options:
+    - H₂
+    - O₂
+    - neither
+    answer: H₂
+    difficulty: 2
+    hints:
+    - 2 mol H₂ needs how much O₂?
+    - Which one runs out first?
+    solution: 'Step 1: 2 mol H₂ needs only 1 mol O₂. Step 2: H₂ runs out; O₂ is left over.'
+    mistakes:
+      O₂: c11c01_ratio
+      neither: c11c01_ratio
+  - prompt: 'A compound has empirical formula CH₂O and molar mass 180. Its molecular formula is:'
+    options:
+    - C₆H₁₂O₆
+    - C₃H₆O₃
+    - CH₂O
+    answer: C₆H₁₂O₆
+    difficulty: 2
+    hints:
+    - Empirical mass of CH₂O = 30.
+    - 180 ÷ 30 = n.
+    solution: 'Step 1: n = 6. Step 2: C₆H₁₂O₆.'
+    mistakes:
+      C₃H₆O₃: c11c01_ratio
+      CH₂O: c11c01_ratio
+  - prompt: 4 g of NaOH (M = 40) is dissolved in 500 g of water. Find the molality (mol/kg).
+    answer: '0.2'
+    check: 0.1/0.5
+    difficulty: 3
+    hints:
+    - Moles of NaOH = 0.1.
+    - Divide by kg of water.
+    solution: 'Step 1: 0.1 mol. Step 2: 0.1/0.5 kg = 0.2 m.'
+    mistakes:
+      '0.008': c11c01_conc
+      '0.05': c11c01_conc
+  - prompt: A solution has 1 mol of ethanol and 4 mol of water. Find the mole fraction of ethanol.
+    answer: '0.2'
+    check: 1/5
+    difficulty: 3
+    hints:
+    - Mole fraction = its moles ÷ total moles.
+    - Total = 5.
+    solution: 'Step 1: 1/5. Step 2: 0.2.'
+    mistakes:
+      '0.25': c11c01_conc
+      '4': c11c01_conc

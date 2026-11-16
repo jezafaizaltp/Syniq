@@ -15,6 +15,10 @@ tips:
   b12_sickle: "A single base change, GAG → GUG, swaps the amino acid at position 6 of the β chain."
   b12_test_cross: "Tt × tt gives Tt and tt in equal numbers."
   b12_trisomy: "Down's syndrome has one extra copy of chromosome 21."
+  c12b4_cross: Write each parent's gametes first, then fill the Punnett square and count the boxes.
+  c12b4_dom: 'Check what the heterozygote looks like: like one parent (dominance), in between (incomplete), or both shown (co-dominance).'
+  c12b4_chrom: "Start from the normal human count, then add one for a trisomy or take one away for a monosomy."
+  c12b4_sex: Ask which parent gives the X and which can give the Y, and whether the trait sits on the X.
 concepts:
 - code: cbse12b.inh.mendel
   title: Mendel's laws
@@ -109,6 +113,55 @@ concepts:
           - 25
           - 100
         say: Some offspring still get a T. Dwarf parents (tt) can only pass on t.
+  lesson:
+    - teach: 'Mendel crossed garden peas with 7 pairs of contrasting traits (tall/dwarf, round/wrinkled seed and so on). Crossing pure tall (TT) with pure dwarf (tt) gave an F₁ of all tall plants (Tt). Selfing F₁ gave F₂ in a 3 tall : 1 dwarf ratio. This shows the law of dominance and the law of segregation: the two alleles separate into different gametes.'
+      picture:
+        kind: flow
+        steps:
+        - TT × tt
+        - gametes T and t
+        - F₁ all Tt (tall)
+        - Tt × Tt
+        - 'F₂ 1 TT : 2 Tt : 1 tt'
+        alt: A monohybrid cross from pure parents to the F2 genotype ratio.
+      check:
+        prompt: Selfing a Tt plant gives tall and dwarf plants in which phenotype ratio?
+        options:
+        - '3 : 1'
+        - '1 : 1'
+        - '9 : 3 : 3 : 1'
+        answer: '3 : 1'
+        why: TT and Tt are tall (3 boxes), tt is dwarf (1 box).
+    - teach: 'A test cross crosses an unknown dominant-looking plant with the homozygous recessive. If all offspring are dominant, the plant was TT; if half are recessive, it was Tt. Not every gene shows simple dominance: in snapdragon red × white gives pink (incomplete dominance), and in ABO blood groups Iᴬ and Iᴮ both show in AB (co-dominance), with three alleles in total (multiple alleles).'
+      check:
+        prompt: 'In a test cross, the unknown plant is crossed with a:'
+        options:
+        - homozygous recessive
+        - homozygous dominant
+        - heterozygous plant
+        answer: homozygous recessive
+        why: The recessive parent only gives recessive alleles, so the unknown's alleles show directly.
+    - teach: 'A dihybrid cross follows two genes, e.g. seed shape (R/r) and colour (Y/y). RrYy × RrYy gives an F₂ of 9 round yellow : 3 round green : 3 wrinkled yellow : 1 wrinkled green. The genes sort into gametes independently of each other: the law of independent assortment (true for genes on different chromosomes).'
+      picture:
+        kind: bars
+        bars:
+        - label: round yellow
+          value: 9
+        - label: round green
+          value: 3
+        - label: wrinkled yellow
+          value: 3
+        - label: wrinkled green
+          value: 1
+        alt: Bars showing the 9:3:3:1 dihybrid F2 ratio.
+      check:
+        prompt: Out of 16 F₂ boxes of a dihybrid cross, how many show both recessive traits?
+        options:
+        - '1'
+        - '3'
+        - '9'
+        answer: '1'
+        why: Only rryy is both recessive.
   items:
   - prompt: In a monohybrid F₂ of 400 plants, how many are expected to show the recessive trait?
     answer: '100'
@@ -177,6 +230,117 @@ concepts:
     - Punnett square.
     solution: '1 : 2 : 1.'
     mistakes: {"3 : 1": "b12_genotype_ratio", "9 : 3 : 3 : 1": "b12_genotype_ratio", "1 : 1": "b12_genotype_ratio"}
+  - prompt: How many pairs of contrasting traits did Mendel study in peas?
+    answer: '7'
+    check: '7'
+    difficulty: 1
+    hints:
+    - Height, seed shape, seed colour, flower colour and more.
+    - Count of trait pairs in his famous table.
+    solution: 'Step 1: list them (height, seed shape, seed colour, pod shape, pod colour, flower colour, flower position). Step 2: 7.'
+    mistakes:
+      '2': c12b4_cross
+      '14': c12b4_cross
+  - prompt: In a monohybrid F₂ of 800 plants, about how many are heterozygous?
+    answer: '400'
+    check: '400'
+    difficulty: 2
+    hints:
+    - 'Use the genotype ratio 1 : 2 : 1.'
+    - Heterozygotes are 2 parts out of 4.
+    solution: 'Step 1: Tt = 2/4 = 1/2. Step 2: 1/2 × 800 = 400.'
+    mistakes:
+      '200': c12b4_cross
+      '600': c12b4_cross
+  - prompt: 'A tall plant crossed with a dwarf plant gives 50% tall and 50% dwarf. The tall parent was:'
+    options:
+    - Tt
+    - TT
+    - tt
+    answer: Tt
+    difficulty: 2
+    hints:
+    - This is a test cross result.
+    - Which tall parent can give a t gamete?
+    solution: 'Step 1: dwarf parent gives only t. Step 2: half dwarf means the tall parent gave t half the time, so Tt.'
+    mistakes:
+      TT: c12b4_cross
+      tt: c12b4_cross
+  - prompt: In snapdragon, selfing pink (Rr) plants gives red, pink and white in which ratio?
+    options:
+    - '1 : 2 : 1'
+    - '3 : 1'
+    - '1 : 1'
+    answer: '1 : 2 : 1'
+    difficulty: 2
+    hints:
+    - With incomplete dominance each genotype looks different.
+    - So phenotype ratio equals genotype ratio.
+    solution: 'Step 1: RR red, Rr pink, rr white. Step 2: 1 : 2 : 1.'
+    mistakes:
+      '3 : 1': c12b4_dom
+      '1 : 1': c12b4_dom
+  - prompt: A person with blood group AB has which genotype?
+    options:
+    - IᴬIᴮ
+    - Iᴬi
+    - ii
+    answer: IᴬIᴮ
+    difficulty: 1
+    hints:
+    - Both A and B antigens are present.
+    - Each antigen needs its own allele.
+    solution: 'Step 1: both antigens shown (co-dominance). Step 2: IᴬIᴮ.'
+    mistakes:
+      Iᴬi: c12b4_dom
+      ii: c12b4_dom
+  - prompt: Parents Iᴬi and Iᴮi can have children of how many different blood groups?
+    answer: '4'
+    check: '4'
+    difficulty: 3
+    hints:
+    - Make a 2 × 2 Punnett square.
+    - List IᴬIᴮ, Iᴬi, Iᴮi and ii, then name each group.
+    solution: 'Step 1: AB, A, B, O. Step 2: 4 groups.'
+    mistakes:
+      '2': c12b4_cross
+      '3': c12b4_cross
+  - prompt: In a dihybrid F₂ of 320 plants, how many are expected to be round green?
+    answer: '60'
+    check: '60'
+    difficulty: 2
+    hints:
+    - Round green is one of the 3-part classes.
+    - Find 3/16 of the total.
+    solution: 'Step 1: 3/16 × 320. Step 2: 60.'
+    mistakes:
+      '20': c12b4_cross
+      '180': c12b4_cross
+  - prompt: How many different kinds of gametes does an RrYy plant make?
+    answer: '4'
+    check: '4'
+    difficulty: 2
+    hints:
+    - Each gamete gets one allele of each gene.
+    - Combine R or r with Y or y.
+    solution: 'Step 1: RY, Ry, rY, ry. Step 2: 4.'
+    mistakes:
+      '2': c12b4_cross
+      '16': c12b4_cross
+  - prompt: 'The law of independent assortment is seen in a:'
+    options:
+    - dihybrid cross
+    - monohybrid cross
+    - test cross of one gene
+    answer: dihybrid cross
+    difficulty: 1
+    hints:
+    - Assortment needs at least two genes.
+    - Which cross follows two traits?
+    solution: 'Step 1: two genes sort independently. Step 2: dihybrid cross.'
+    mistakes:
+      monohybrid cross: c12b4_cross
+      test cross of one gene: c12b4_cross
 - code: cbse12b.inh.chromosomes
   title: Chromosomal theory, sex determination and disorders
   after:
@@ -253,6 +417,53 @@ concepts:
       bin: Haplo-diploid
       clue: Haploid males, diploid females. Which kind?
       why: Haplo-diploid.
+  lesson:
+    - teach: 'Sutton and Boveri noticed that chromosomes behave like Mendel''s factors: they come in pairs and separate at meiosis. This is the chromosomal theory of inheritance. Morgan, working with Drosophila, found that genes on the same chromosome tend to stay together (linkage), but can be separated by crossing over (recombination); tightly linked genes show little recombination.'
+      check:
+        prompt: 'Morgan did his linkage experiments on:'
+        options:
+        - Drosophila
+        - garden pea
+        - snapdragon
+        answer: Drosophila
+        why: Fruit flies breed fast and have few chromosomes.
+    - teach: 'Sex determination differs between animals: humans XX female and XY male (male heterogametic, so the father''s sperm decides the sex); grasshopper XX female and XO male; birds ZW female and ZZ male (female heterogametic). Polygenic traits like human skin colour are controlled by several genes; pleiotropy is one gene affecting many traits (e.g. phenylketonuria).'
+      picture:
+        kind: compare
+        columns:
+        - title: Organism
+          points:
+          - humans
+          - grasshopper
+          - birds
+        - title: Female
+          points:
+          - XX
+          - XX
+          - ZW
+        - title: Male
+          points:
+          - XY
+          - XO
+          - ZZ
+        alt: Sex chromosomes of females and males in humans, grasshoppers and birds.
+      check:
+        prompt: 'In birds, the sex of the chick is decided by the:'
+        options:
+        - mother's egg
+        - father's sperm
+        - temperature
+        answer: mother's egg
+        why: Females are ZW, so the egg carries Z or W.
+    - teach: 'Mendelian disorders come from a single gene: haemophilia and colour blindness (X-linked recessive, seen more in males), sickle-cell anaemia and phenylketonuria (autosomal recessive), thalassemia. Chromosomal disorders come from extra or missing chromosomes: Down''s syndrome (trisomy 21), Klinefelter''s (44 + XXY), Turner''s (44 + XO). Pedigree charts trace a trait through a family.'
+      check:
+        prompt: 'Klinefelter''s syndrome has the sex chromosomes:'
+        options:
+        - XXY
+        - XO
+        - XYY only in females
+        answer: XXY
+        why: One extra X with a Y.
   items:
   - prompt: How many chromosomes does a person with Down's syndrome have?
     answer: '47'
@@ -321,3 +532,115 @@ concepts:
     - Close together.
     solution: Linked.
     mistakes: {"independent": "b12_linkage", "dominant": "b12_linkage", "recessive": "b12_linkage"}
+  - prompt: Who proposed the chromosomal theory of inheritance?
+    options:
+    - Sutton and Boveri
+    - Watson and Crick
+    - Hershey and Chase
+    answer: Sutton and Boveri
+    difficulty: 1
+    hints:
+    - They linked Mendel's factors to chromosomes.
+    - Early 1900s cytologists.
+    solution: 'Step 1: chromosomes pair and separate like factors. Step 2: Sutton and Boveri.'
+    mistakes:
+      Watson and Crick: c12b4_cross
+      Hershey and Chase: c12b4_cross
+  - prompt: A grasshopper male has how many sex chromosomes?
+    answer: '1'
+    check: '1'
+    difficulty: 2
+    hints:
+    - Grasshoppers follow the XO type.
+    - O means the second sex chromosome is absent.
+    solution: 'Step 1: male XO. Step 2: one X only.'
+    mistakes:
+      '2': c12b4_sex
+      '0': c12b4_sex
+  - prompt: A colour-blind man (XᶜY) and a normal non-carrier woman have a daughter. What percentage chance is she a carrier?
+    answer: '100'
+    check: '100'
+    difficulty: 3
+    hints:
+    - What does every daughter get from her father?
+    - Which X does this father have?
+    solution: 'Step 1: daughter gets the father''s only X, which is Xᶜ. Step 2: she is XᶜX, a carrier: 100%.'
+    mistakes:
+      '50': c12b4_sex
+      '0': c12b4_sex
+      '25': c12b4_sex
+  - prompt: Why is haemophilia seen more often in males?
+    options:
+    - males have only one X, so one recessive allele shows
+    - the gene is on the Y chromosome
+    - males have two X chromosomes
+    answer: males have only one X, so one recessive allele shows
+    difficulty: 2
+    hints:
+    - The gene is X-linked recessive.
+    - Think about how many X chromosomes a male has.
+    solution: 'Step 1: no second X to mask it. Step 2: one copy is enough in males.'
+    mistakes:
+      the gene is on the Y chromosome: c12b4_sex
+      males have two X chromosomes: c12b4_sex
+  - prompt: How many chromosomes does a person with Klinefelter's syndrome have?
+    answer: '47'
+    check: '47'
+    difficulty: 2
+    hints:
+    - 44 autosomes plus the sex chromosomes.
+    - Count the letters in XXY.
+    solution: 'Step 1: 44 + 3. Step 2: 47.'
+    mistakes:
+      '46': c12b4_chrom
+      '45': c12b4_chrom
+  - prompt: 'Down''s syndrome is caused by an extra copy of chromosome number:'
+    answer: '21'
+    check: '21'
+    difficulty: 1
+    hints:
+    - It is a trisomy of an autosome.
+    - It is one of the smallest autosomes.
+    solution: 'Step 1: trisomy. Step 2: chromosome 21.'
+    mistakes:
+      '18': c12b4_chrom
+      '23': c12b4_chrom
+  - prompt: 'Human skin colour, controlled by several genes, is an example of:'
+    options:
+    - polygenic inheritance
+    - pleiotropy
+    - co-dominance
+    answer: polygenic inheritance
+    difficulty: 1
+    hints:
+    - Many genes add up to one trait.
+    - Poly means many.
+    solution: 'Step 1: several genes, a range of shades. Step 2: polygenic.'
+    mistakes:
+      pleiotropy: c12b4_dom
+      co-dominance: c12b4_dom
+  - prompt: Two carriers of sickle-cell anaemia (HbᴬHbˢ) have a child. What percentage chance is the child affected?
+    answer: '25'
+    check: '25'
+    difficulty: 2
+    hints:
+    - It is autosomal recessive.
+    - Make a Punnett square for two heterozygotes.
+    solution: 'Step 1: 1 HbᴬHbᴬ : 2 HbᴬHbˢ : 1 HbˢHbˢ. Step 2: affected = 1/4 = 25%.'
+    mistakes:
+      '50': c12b4_cross
+      '75': c12b4_cross
+  - prompt: 'Loss or gain of a single base pair that shifts the reading of later codons is a:'
+    options:
+    - frameshift mutation
+    - trisomy
+    - crossing over
+    answer: frameshift mutation
+    difficulty: 2
+    hints:
+    - Codons are read in groups of three.
+    - What happens to the reading frame?
+    solution: 'Step 1: insertion or deletion. Step 2: frameshift mutation.'
+    mistakes:
+      trisomy: c12b4_chrom
+      crossing over: c12b4_chrom

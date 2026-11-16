@@ -19,6 +19,7 @@ tips:
   it3_hour_formula: Hour hand direction = hour × 30 + minute × 0.5. Work out each part, then add.
   it3_store_input: The typed reply has to be kept somewhere so the program can compare it later.
   it3_both_match: An alarm must check that the hour AND the minute both match.
+  pqk9i3_per_minute: 'The hour hand moves a little every minute too: 30° per hour ÷ 60 minutes.'
 
 concepts:
   - code: it9.software.interface
@@ -65,6 +66,22 @@ concepts:
         ways:
         - style: real_world
           teach: 'Think of building with LEGO bricks instead of carving wood: you join ready-made pieces. Block coding apps like Scratch and PictoBlox work that way: you drag and drop blocks written in simple words, so you don''t need to memorise commands. Professionals often type text languages like Python, Java and C++, but blocks are great for beginners.'
+        - style: visual
+          teach: 'Two ways to write an app: typing text code or joining blocks.'
+          picture:
+            kind: compare
+            columns:
+            - title: Text languages
+              points:
+              - Python, Java, C++
+              - type every command
+              - used by professionals
+            - title: Block coding
+              points:
+              - Scratch, PictoBlox
+              - drag and drop blocks
+              - good for beginners
+            alt: Text languages like Python need typed commands; block coding apps like Scratch and PictoBlox use drag-and-drop blocks.
       - teach: 'Making an app has two steps: (1) prepare the interface (layout: what the user sees) and (2) give instructions (coding). For an alarm clock in PictoBlox: delete the default sprite, add the dial, then the hour, minute and second hands and an alarm button.'
         picture:
           kind: flow
@@ -86,6 +103,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'When building a house, you put up the walls before wiring the switches. Apps are the same: first the interface (what the user sees), then the instructions (the code). For a PictoBlox alarm clock: delete the default sprite, add the dial, then the hour, minute and second hands, and an alarm button.'
+        - style: step_by_step
+          teach: 'Step 1: Delete the default sprite. Step 2: Add the dial. Step 3: Add the hour, minute and second hands. Step 4: Add an alarm button. That finishes the interface; only then (step two of making an app) do you write the code.'
       - teach: Each hand must turn around the dial's centre. In the Costume Editor, set the rotation centre (pivot point, a small crosshair) at the base of each hand. Use 'go to front layer' / 'go to back layer' so hands appear above the dial.
         check:
           prompt: Where should a clock hand's pivot point be?
@@ -98,6 +117,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'A real clock hand is fixed at one end and swings around it. In PictoBlox, set that fixed point too: in the Costume Editor, put the rotation centre (the pivot point, a small crosshair) at the base of each hand, so it turns around the dial''s centre. Use ''go to front layer'' or ''go to back layer'' so the hands appear above the dial.'
+        - style: visual
+          teach: Setting a clock hand so it turns around the right point.
+          picture:
+            kind: flow
+            steps:
+            - open the hand in the Costume Editor
+            - move the crosshair (pivot) to its base
+            - '''go to front layer'''
+            - hand now turns about the dial's centre
+            alt: In the Costume Editor move the pivot crosshair to the base of the hand and bring it to the front layer, so it turns around the dial's centre.
     items:
       - prompt: "Block programming creates programs by"
         options: ["Dragging and dropping code blocks", "Typing long instructions from memory", "Drawing pictures only", "Recording your voice"]
@@ -253,6 +282,21 @@ concepts:
         solution: 'Step 1: Typed code fails on small spelling or spacing errors. Step 2: Blocks avoid that. Step 3: You focus on logic.'
         mistakes:
           Python cannot make games: it3_block_vs_text
+      - prompt: 'Situation: When you run your clock, the second hand spins around its own middle instead of the dial''s centre. What should you fix?'
+        options:
+        - Set the rotation centre at the base of the hand
+        - Change the hand's colour
+        - Delete the alarm button
+        answer: Set the rotation centre at the base of the hand
+        hints:
+        - A real clock hand is fixed at one end.
+        - Which point does a sprite turn around?
+        solution: The pivot point must be at the base of the hand so it swings around the dial's centre.
+        mistakes:
+          Change the hand's colour: pivot_point
+          Delete the alarm button: pivot_point
+        exam: case
+        difficulty: 2
 
   - code: it9.software.clock_code
     title: Coding the clock hands
@@ -326,6 +370,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Work out the second hand''s turn. Step 1: a full circle is 360°. Step 2: the second hand takes 60 steps to go round. Step 3: 360 ÷ 60 = 6° per second. Step 4: so its direction is current second × 6. The minute hand also moves 6° each minute. In PictoBlox: point in direction (current second × 6).'
+        - style: real_world
+          teach: 'Look at a wall clock: from 12 to 3 is a quarter turn, 90°, and takes 15 seconds for the second hand. 90 ÷ 15 = 6°: each tick turns the hand 6°. So at 20 seconds it points 20 × 6 = 120°, at the 4.'
       - teach: The hour hand moves 360 ÷ 12 = 30° each hour, and 30 ÷ 60 = 0.5° each minute. So direction = hour × 30 + minute × 0.5. The 'current' block in Sensing gives the computer's time; Operators blocks do the maths.
         picture:
           kind: flow
@@ -345,6 +391,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Work out the hour hand. Step 1: 12 hours make 360°, so 360 ÷ 12 = 30° per hour. Step 2: each hour has 60 minutes, so 30 ÷ 60 = 0.5° per minute. Step 3: direction = hour × 30 + minute × 0.5. Get the time from the ''current'' block in Sensing, and do the maths with Operators blocks.'
+        - style: real_world
+          teach: 'At 3:30 a real clock''s hour hand is not on the 3: it is halfway to the 4. That is because it creeps 0.5° every minute. 3 × 30 + 30 × 0.5 = 90 + 15 = 105°.'
     items:
       - prompt: "How many degrees does the second hand turn each second?"
         answer: "6"
@@ -474,6 +522,21 @@ concepts:
         solution: 'Step 1: Programs start with an event. Step 2: The flag is the usual start. Step 3: Green flag.'
         mistakes:
           Saving the file: block_coding
+      - prompt: 'Situation: The time is 4:20. Which direction should the hour hand point in?'
+        options:
+        - 130°
+        - 120°
+        - 140°
+        answer: 130°
+        hints:
+        - hour × 30 + minute × 0.5.
+        - 4 × 30 = 120 and 20 × 0.5 = 10.
+        solution: 4 × 30 + 20 × 0.5 = 120 + 10 = 130°.
+        mistakes:
+          120°: pqk9i3_per_minute
+          140°: it3_hour_formula
+        exam: short
+        difficulty: 2
 
   - code: it9.software.alarm_python
     title: Input, variables, sound and Python
@@ -539,6 +602,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'A variable is like a labelled box on a shelf: the label stays, but you can change what is inside. When the ''ask and wait'' block (Sensing) gets the user''s answer, store it in boxes named Hour and Minute, so the alarm can check them later.'
+        - style: visual
+          teach: From the user's typed answer to a stored value, in the alarm clock.
+          picture:
+            kind: flow
+            steps:
+            - ask 'Alarm hour?' and wait
+            - user types 6
+            - set Hour to answer
+            - Hour holds 6 until changed
+            alt: The program asks for the alarm hour, the user types 6, and the variable Hour stores 6.
       - teach: The alarm rings when Hour = current hour AND Minute = current minute. Use the = and 'and' blocks. Add a sound from the Sounds tab and play it with 'start sound', repeating a few times.
         picture:
           kind: flow
@@ -559,6 +632,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Build the alarm check. Step 1: compare Hour with the current hour using an = block. Step 2: compare Minute with the current minute. Step 3: join both with an ''and'' block, so it is true only when both match; checking only the hour would ring all hour long. Step 4: add a sound from the Sounds tab and play it with ''start sound'', repeated a few times.'
+        - style: real_world
+          teach: 'A railway gate opens only when both the signal is green AND the train has passed. The alarm is the same: it rings only when Hour matches the current hour AND Minute matches the current minute. One match alone is not enough.'
       - teach: Professionals mostly write text code (Python, Java, C++). Python was created in 1991 under Guido van Rossum and is used from games to AI. Syntax is the grammar of code; in Python, indentation and quotes are part of it.
         check:
           prompt: What is syntax?
@@ -571,6 +646,22 @@ concepts:
         ways:
         - style: real_world
           teach: 'Every language has grammar: ''ate I rice'' sounds wrong. Code has grammar too, called syntax: the correct structure a computer expects. In Python, indentation (spaces at the start of lines) and quotes are part of it. Python was created in 1991 under Guido van Rossum and is used from games to AI; professionals mostly write text code like Python, Java and C++.'
+        - style: visual
+          teach: 'Block coding and Python side by side: what you do and what you must remember.'
+          picture:
+            kind: compare
+            columns:
+            - title: Block coding
+              points:
+              - drag blocks
+              - no syntax to remember
+              - for learning
+            - title: Python (1991)
+              points:
+              - type code
+              - 'syntax: indentation, quotes'
+              - games to AI
+            alt: Block coding uses dragged blocks with no syntax; Python, created in 1991, is typed and needs correct syntax like indentation and quotes.
     items:
       - prompt: "Which block lets the user type in the alarm time?"
         options: ["ask and wait", "go to front layer", "point in direction", "change size"]
@@ -719,3 +810,18 @@ concepts:
         solution: 'Step 1: Python mode shows code. Step 2: Adding sprites creates matching lines. Step 3: Some code is generated.'
         mistakes:
           The sprites disappear: python_syntax
+      - prompt: 'Situation: Hour is 6 and Minute is 30. The computer''s time is 6:15. Does the alarm ring?'
+        options:
+        - No, the minutes do not match
+        - Yes, the hours match
+        - Yes, it always rings at 6
+        answer: No, the minutes do not match
+        hints:
+        - The check uses 'and'.
+        - Do both parts match?
+        solution: With 'and', both Hour and Minute must match. 30 is not 15, so it does not ring yet.
+        mistakes:
+          Yes, the hours match: it3_both_match
+          Yes, it always rings at 6: it3_both_match
+        exam: competency
+        difficulty: 2

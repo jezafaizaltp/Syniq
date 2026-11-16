@@ -15,6 +15,10 @@ tips:
   p12_solenoid_uniform: "Inside a long solenoid, field lines are straight, parallel and evenly spaced."
   p12_wire_field: "B = μ₀I/(2πr)."
   p12_wire_inverse: "B ∝ 1/r for a long wire, not 1/r²."
+  c12p4_force: Magnetic force on a charge is qvB sin θ and on a wire IlB sin θ; θ is the angle between v (or I) and B.
+  c12p4_circle: In a uniform field a charge circles with r = mv/(qB); the period 2πm/(qB) does not depend on speed.
+  c12p4_field: 'Pick the right formula for the shape: wire μ₀I/(2πr), loop centre μ₀NI/(2R), solenoid μ₀nI.'
+  c12p4_meter: 'Ammeter: small shunt in parallel. Voltmeter: large resistance in series.'
 concepts:
 - code: cbse12p.mag.force
   title: Magnetic force and motion of charges
@@ -131,6 +135,43 @@ concepts:
           m: 2
           q: 2
         say: 'An α-particle has 2 protons AND 2 neutrons: mass 4.'
+  lesson:
+    - teach: 'Oersted found that a current deflects a compass: moving charges make magnetic fields. A charge q moving with velocity v in field B feels F = qvB sin θ, at right angles to both v and B. Since the force is always perpendicular to v, it does no work and never changes the speed.'
+      check:
+        prompt: 'A charge moves at 90° to B. Its speed:'
+        options:
+        - stays the same
+        - increases
+        - decreases
+        answer: stays the same
+        why: The force is perpendicular to motion, so no work is done.
+    - teach: 'In a uniform field, a charge moving at right angles to B goes in a circle: qvB = mv²/r, so r = mv/(qB) and period T = 2πm/(qB), the same at any speed. If v also has a part along B, the path is a helix.'
+      picture:
+        kind: flow
+        steps:
+        - Force qvB ⟂ v
+        - Acts as centripetal force
+        - qvB = mv²/r
+        - r = mv/(qB)
+        - T = 2πm/(qB)
+        alt: How the magnetic force produces circular motion and its radius.
+      check:
+        prompt: 'Doubling a proton''s speed in the same field makes its circle radius:'
+        options:
+        - double
+        - half
+        - the same
+        answer: double
+        why: r ∝ v.
+    - teach: 'A wire of length l carrying current I in field B feels F = IlB sin θ (Fleming''s left-hand rule). Parallel currents in the same direction attract. A coil of N turns, area A has magnetic moment m = NIA and feels torque τ = NIAB sin θ: this turns a galvanometer''s coil.'
+      check:
+        prompt: 'Two parallel wires carry currents in opposite directions. They:'
+        options:
+        - repel
+        - attract
+        - feel no force
+        answer: repel
+        why: Opposite currents repel; like currents attract.
   items:
   - prompt: A 2 m wire carries 5 A at right angles to a 0.3 T field. Find the force (N).
     answer: '3'
@@ -199,6 +240,111 @@ concepts:
     - Shunt.
     solution: A low shunt resistance in parallel.
     mistakes: {"a high resistance in series": "p12_ammeter", "a capacitor": "p12_ammeter", "a battery": "p12_ammeter"}
+  - prompt: A 0.5 m wire carries 4 A at right angles to a 0.2 T field. Find the force (N) as a fraction.
+    answer: 2/5
+    check: 4*Rational(1,2)*Rational(2,10)
+    difficulty: 1
+    hints:
+    - F = IlB.
+    - 4 × 0.5 × 0.2.
+    solution: 'Step 1: 0.4 N. Step 2: 2/5.'
+    mistakes:
+      '4': c12p4_force
+      1/10: c12p4_force
+  - prompt: A wire carries 2 A at 30° to a 0.5 T field; length 1 m. Find the force (N) as a fraction.
+    answer: 1/2
+    check: 2*1*Rational(1,2)*Rational(1,2)
+    difficulty: 1
+    hints:
+    - F = IlB sin θ.
+    - sin 30° = 1/2.
+    solution: 'Step 1: 2 × 1 × 0.5 × 0.5. Step 2: 1/2 N.'
+    mistakes:
+      '1': c12p4_force
+      1/4: c12p4_force
+  - prompt: A coil of 50 turns, area 0.02 m², carries 3 A. Find its magnetic moment (A m²).
+    answer: '3'
+    check: 50*Rational(2,100)*3
+    difficulty: 1
+    hints:
+    - m = NIA.
+    - 50 × 3 × 0.02.
+    solution: 'Step 1: 150 × 0.02. Step 2: 3 A m².'
+    mistakes:
+      '300': c12p4_force
+      '1': c12p4_force
+  - prompt: A coil with m = 2 A m² sits at 90° to a 0.4 T field. Torque (N m) as a fraction?
+    answer: 4/5
+    check: 2*Rational(4,10)
+    difficulty: 2
+    hints:
+    - τ = mB sin θ.
+    - sin 90° = 1.
+    solution: 'Step 1: 2 × 0.4. Step 2: 0.8 = 4/5.'
+    mistakes:
+      '0': c12p4_force
+      1/5: c12p4_force
+  - prompt: A charge 2 × 10⁻⁶ C moves at 10⁴ m/s at right angles to a 0.5 T field. Force in units of 10⁻² N?
+    answer: '1'
+    check: 2*10**-6*10**4*Rational(1,2)*100
+    difficulty: 2
+    hints:
+    - F = qvB.
+    - 2 × 10⁻⁶ × 10⁴ × 0.5.
+    solution: 'Step 1: 10⁻² N. Step 2: 1.'
+    mistakes:
+      '2': c12p4_force
+      '10': c12p4_force
+  - prompt: A particle circles in a magnetic field with radius 4 cm. Its speed is halved. New radius (cm)?
+    answer: '2'
+    check: 4/2
+    difficulty: 2
+    hints:
+    - r = mv/(qB).
+    - r ∝ v.
+    solution: 'Step 1: v → v/2. Step 2: r → 2 cm.'
+    mistakes:
+      '8': c12p4_circle
+      '1': c12p4_circle
+  - prompt: 'Its speed is doubled instead. The time for one revolution:'
+    options:
+    - stays the same
+    - doubles
+    - halves
+    answer: stays the same
+    difficulty: 2
+    hints:
+    - T = 2πm/(qB).
+    - Does v appear?
+    solution: 'Step 1: T has no v. Step 2: unchanged (bigger circle, faster).'
+    mistakes:
+      doubles: c12p4_circle
+      halves: c12p4_circle
+  - prompt: 'A galvanometer becomes a voltmeter by connecting:'
+    options:
+    - a high resistance in series
+    - a low resistance in parallel
+    - a capacitor in series
+    answer: a high resistance in series
+    difficulty: 3
+    hints:
+    - A voltmeter should draw very little current.
+    - It is placed across a component.
+    solution: 'Step 1: large series resistance limits current. Step 2: high R in series.'
+    mistakes:
+      a low resistance in parallel: c12p4_meter
+      a capacitor in series: c12p4_meter
+  - prompt: A galvanometer (G = 99 Ω) gives full deflection at 1 mA. What shunt (Ω) makes it read up to 100 mA?
+    answer: '1'
+    check: Rational(1,1000)*99/(Rational(100,1000) - Rational(1,1000))
+    difficulty: 3
+    hints:
+    - Shunt carries the extra 99 mA.
+    - 'Same voltage: 1 mA × 99 Ω = 99 mA × S.'
+    solution: 'Step 1: 0.099 V across both. Step 2: S = 0.099/0.099 = 1 Ω.'
+    mistakes:
+      '99': c12p4_meter
+      '100': c12p4_meter
 - code: cbse12p.mag.field
   title: Biot–Savart and Ampère's laws
   after:
@@ -314,6 +460,52 @@ concepts:
           - 5.5
           - 10
         say: Too much current.
+  lesson:
+    - teach: 'Biot–Savart law: a small current element I dl produces dB = (μ₀/4π) I dl sin θ / r². Adding these up for a circular loop gives B = μ₀NI/(2R) at the centre. μ₀ = 4π × 10⁻⁷ T m A⁻¹.'
+      check:
+        prompt: 'Doubling the current in a loop makes the field at its centre:'
+        options:
+        - double
+        - four times
+        - half
+        answer: double
+        why: B ∝ I.
+    - teach: 'Ampère''s circuital law: ∮B·dl = μ₀I_enclosed. It gives the field of a long straight wire, B = μ₀I/(2πr), circling the wire (right-hand thumb rule). For a long solenoid with n turns per metre, B = μ₀nI inside, uniform, and nearly zero outside.'
+      picture:
+        kind: compare
+        columns:
+        - title: Long wire
+          points:
+          - B = μ₀I/(2πr)
+          - falls as 1/r
+          - circles the wire
+        - title: Solenoid
+          points:
+          - B = μ₀nI
+          - uniform inside
+          - ≈ 0 outside
+        - title: Loop centre
+          points:
+          - B = μ₀NI/(2R)
+          - along the axis
+        alt: Magnetic field formulas for a long wire, a solenoid and the centre of a loop.
+      check:
+        prompt: 'Inside a long solenoid, moving from the axis towards the wall, B:'
+        options:
+        - stays the same
+        - increases
+        - falls to zero
+        answer: stays the same
+        why: The field inside is uniform.
+    - teach: 'A toroid (solenoid bent into a ring) has B = μ₀NI/(2πr) inside its core and zero outside. Directions: curl right-hand fingers with the current; the thumb gives B for a loop or solenoid.'
+      check:
+        prompt: Field outside an ideal toroid?
+        options:
+        - zero
+        - μ₀NI/(2πr)
+        - μ₀nI
+        answer: zero
+        why: The field is confined to the core.
   items:
   - prompt: Find B (in units of 10⁻⁵ T) 0.1 m from a long wire carrying 5 A.
     answer: '1'
@@ -382,3 +574,105 @@ concepts:
     - Has π.
     solution: 4π × 10⁻⁷ T m/A.
     mistakes: {"9 × 10⁹ N m²/C²": "p12_constants", "8.85 × 10⁻¹² F/m": "p12_constants", "1.6 × 10⁻¹⁹ C": "p12_constants"}
+  - prompt: Find B (in units of 10⁻⁵ T) 0.2 m from a long wire carrying 10 A.
+    answer: '1'
+    check: 2*10**-7*10/Rational(2,10)*10**5
+    difficulty: 1
+    hints:
+    - B = μ₀I/(2πr) = 2 × 10⁻⁷ I/r.
+    - 2 × 10⁻⁷ × 10/0.2.
+    solution: 'Step 1: 10⁻⁵ T. Step 2: 1.'
+    mistakes:
+      '2': c12p4_field
+      '5': c12p4_field
+  - prompt: A solenoid has 500 turns per metre and 4 A. Find B in units of π × 10⁻⁴ T.
+    answer: '8'
+    check: 4*500*4*10**-7*10**4
+    difficulty: 1
+    hints:
+    - B = μ₀nI = 4π × 10⁻⁷ × 500 × 4.
+    - Collect the π.
+    solution: 'Step 1: 4π × 10⁻⁷ × 2000 = 8π × 10⁻⁴. Step 2: 8.'
+    mistakes:
+      '2': c12p4_field
+      '16': c12p4_field
+  - prompt: Distance from a long wire is tripled. By what factor does B fall?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - B ∝ 1/r for a wire.
+    - Not 1/r².
+    solution: 'Step 1: r → 3r. Step 2: B → B/3.'
+    mistakes:
+      '9': c12p4_field
+      '6': c12p4_field
+  - prompt: A loop of radius 0.1 m, 1 turn, carries 1 A. Find B at the centre in units of π × 10⁻⁶ T.
+    answer: '2'
+    check: 4*10**-7*1/(2*Rational(1,10))*10**6
+    difficulty: 2
+    hints:
+    - B = μ₀I/(2R).
+    - 4π × 10⁻⁷/0.2.
+    solution: 'Step 1: 2π × 10⁻⁶ T. Step 2: 2.'
+    mistakes:
+      '4': c12p4_field
+      '1': c12p4_field
+  - prompt: The same loop is wound with 10 turns. B at the centre in units of π × 10⁻⁶ T?
+    answer: '20'
+    check: 2*10
+    difficulty: 2
+    hints:
+    - B ∝ N.
+    - Multiply by 10.
+    solution: 'Step 1: 10 × 2π × 10⁻⁶. Step 2: 20.'
+    mistakes:
+      '2': c12p4_field
+      '200': c12p4_field
+  - prompt: 'Ampère''s law: a closed path encloses currents 5 A up and 2 A down. ∮B·dl equals μ₀ times:'
+    answer: '3'
+    check: 5 - 2
+    difficulty: 2
+    hints:
+    - Only enclosed current counts, with direction.
+    - Net upward current.
+    solution: 'Step 1: 5 − 2. Step 2: 3 A.'
+    mistakes:
+      '7': c12p4_field
+      '10': c12p4_field
+  - prompt: Two long parallel wires 0.1 m apart each carry 5 A. Force per metre in units of 10⁻⁵ N/m?
+    answer: '5'
+    check: 2*10**-7*5*5/Rational(1,10)*10**5
+    difficulty: 3
+    hints:
+    - F/l = μ₀I₁I₂/(2πd) = 2 × 10⁻⁷ I₁I₂/d.
+    - 2 × 10⁻⁷ × 25/0.1.
+    solution: 'Step 1: 5 × 10⁻⁵ N/m. Step 2: 5.'
+    mistakes:
+      '25': c12p4_field
+      '1': c12p4_field
+  - prompt: A toroid has 400 turns and carries 2 A; mean radius 0.2 m. B in units of 10⁻⁴ T?
+    answer: '8'
+    check: 2*10**-7*400*2/Rational(2,10)*10**4
+    difficulty: 3
+    hints:
+    - B = μ₀NI/(2πr) = 2 × 10⁻⁷ NI/r.
+    - 2 × 10⁻⁷ × 800/0.2.
+    solution: 'Step 1: 8 × 10⁻⁴ T. Step 2: 8.'
+    mistakes:
+      '16': c12p4_field
+      '4': c12p4_field
+  - prompt: 'The direction of B at the centre of a loop with counter-clockwise current (seen from above) is:'
+    options:
+    - upward, towards the viewer
+    - downward, away from the viewer
+    - along the wire
+    answer: upward, towards the viewer
+    difficulty: 3
+    hints:
+    - Curl right-hand fingers with the current.
+    - Your thumb points along B.
+    solution: 'Step 1: counter-clockwise curl. Step 2: thumb up, towards the viewer.'
+    mistakes:
+      downward, away from the viewer: c12p4_field
+      along the wire: c12p4_field

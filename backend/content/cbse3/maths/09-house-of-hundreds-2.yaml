@@ -7,6 +7,10 @@ tips:
   m3_check_add: "Adding back what you took away gets you to where you started."
   m3_hundreds_add: "3 hundreds and 4 hundreds make how many hundreds?"
   m3_sub_places: "Take ones from ones, tens from tens, hundreds from hundreds."
+  c3m9_line: 'Write the numbers one under the other: hundreds under hundreds, tens under tens, ones under ones.'
+  c3m9_carry: If a column adds to 10 or more, write the ones and carry 1 to the next column on the left.
+  c3m9_borrow: If the top digit is smaller, open one from the next column on the left before taking away.
+  c3m9_about: Round each number to the nearest hundred first, then add or take away.
 
 concepts:
 - code: cbse3m.hh2.add
@@ -72,6 +76,61 @@ concepts:
       bin: '500'
       clue: 8 tens + 2 tens is ten tens.
       why: 'Carry a hundred: 500.'
+  lesson:
+    - teach: 'To add 3-digit numbers, line up the places and add ones, then tens, then hundreds. 213 + 154: ones 3 + 4 = 7, tens 1 + 5 = 6, hundreds 2 + 1 = 3. Answer 367.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: H
+        - size: 1
+          label: T
+        - size: 1
+          label: O
+        rows:
+        - size: 1
+          label: '213'
+        - size: 1
+          label: '+154'
+        - size: 1
+          label: sum
+        cells:
+        - - '2'
+          - '1'
+          - '3'
+        - - '1'
+          - '5'
+          - '4'
+        - - '3'
+          - '6'
+          - '7'
+        alt: '213 + 154 in columns: 3 hundreds, 6 tens, 7 ones.'
+      check:
+        prompt: 321 + 456 = ?
+        options:
+        - '777'
+        - '765'
+        - '7107'
+        answer: '777'
+        why: 1 + 6 = 7, 2 + 5 = 7, 3 + 4 = 7.
+    - teach: 'When a column makes 10 or more, carry. 147 + 238: ones 7 + 8 = 15, write 5 carry 1. Tens 4 + 3 + 1 = 8. Hundreds 1 + 2 = 3. Answer 385.'
+      check:
+        prompt: 126 + 157 = ?
+        options:
+        - '283'
+        - '273'
+        - '2713'
+        answer: '283'
+        why: '6 + 7 = 13: write 3 carry 1; 2 + 5 + 1 = 8; 1 + 1 = 2.'
+    - teach: 'Estimating helps check: round each number to the nearest hundred. 298 + 405 is about 300 + 400 = 700. If your answer is far from 700, check again.'
+      check:
+        prompt: '195 + 310 is about:'
+        options:
+        - '500'
+        - '300'
+        - '900'
+        answer: '500'
+        why: 195 is about 200 and 310 is about 300; 200 + 300 = 500.
   items:
   - prompt: 234 + 152 = ?
     answer: '386'
@@ -132,6 +191,108 @@ concepts:
     mistakes:
       '415': c3_place
       '4115': c3_place
+  - prompt: 415 + 263 = ?
+    answer: '678'
+    check: 415+263
+    difficulty: 1
+    hints:
+    - 'Ones: 5 + 3.'
+    - Then tens, then hundreds.
+    solution: 'Step 1: 5 + 3 = 8, 1 + 6 = 7, 4 + 2 = 6. Step 2: = 678.'
+    mistakes:
+      '668': c3m9_line
+      '6178': c3m9_carry
+  - prompt: 500 + 300 + 100 = ?
+    answer: '900'
+    check: 500+300+100
+    difficulty: 1
+    hints:
+    - Count the hundreds.
+    - 5 + 3 + 1 hundreds.
+    solution: 'Step 1: 9 hundreds. Step 2: = 900.'
+    mistakes:
+      '800': c3m9_line
+      '810': c3m9_line
+  - prompt: 238 + 145 = ?
+    answer: '383'
+    check: 238+145
+    difficulty: 2
+    hints:
+    - 8 + 5 is more than 10.
+    - Carry 1 to the tens.
+    solution: 'Step 1: 8 + 5 = 13, write 3 carry 1. Step 2: 3 + 4 + 1 = 8, 2 + 1 = 3: 383.'
+    mistakes:
+      '373': c3m9_carry
+      '3713': c3m9_carry
+  - prompt: A library has 356 English books and 218 Hindi books. How many books?
+    answer: '574'
+    check: 356+218
+    difficulty: 2
+    hints:
+    - Add the two kinds.
+    - 6 + 8 needs a carry.
+    solution: 'Step 1: 6 + 8 = 14, carry 1. Step 2: 5 + 1 + 1 = 7, 3 + 2 = 5: 574.'
+    mistakes:
+      '564': c3m9_carry
+      '138': c3m9_line
+  - prompt: 460 + 270 = ?
+    answer: '730'
+    check: 460+270
+    difficulty: 2
+    hints:
+    - 6 tens + 7 tens is more than 10 tens.
+    - Carry 1 hundred.
+    solution: 'Step 1: 6 + 7 = 13 tens, write 3 carry 1. Step 2: 4 + 2 + 1 = 7: 730.'
+    mistakes:
+      '630': c3m9_carry
+      '6130': c3m9_carry
+  - prompt: '402 + 97 is about:'
+    options:
+    - '500'
+    - '400'
+    - '1300'
+    answer: '500'
+    difficulty: 2
+    hints:
+    - Round 402 and 97 to nearest hundreds.
+    - About 400 + 100.
+    solution: 'Step 1: 402 ≈ 400, 97 ≈ 100. Step 2: About 500.'
+    mistakes:
+      '400': c3m9_about
+      '1300': c3m9_about
+  - prompt: 199 + 1 = ?
+    answer: '200'
+    check: 199+1
+    difficulty: 1
+    hints:
+    - 9 ones + 1 fills a ten.
+    - The tens also fill a hundred.
+    solution: 'Step 1: 199 + 1. Step 2: = 200.'
+    mistakes:
+      '1910': c3m9_carry
+      '190': c3m9_carry
+  - prompt: A farmer picked 275 mangoes on Monday and 325 on Tuesday. How many mangoes?
+    answer: '600'
+    check: 275+325
+    difficulty: 3
+    hints:
+    - 5 + 5 makes a ten.
+    - Carry each time.
+    solution: 'Step 1: 5 + 5 = 10, carry 1; 7 + 2 + 1 = 10, carry 1. Step 2: 2 + 3 + 1 = 6: 600.'
+    mistakes:
+      '500': c3m9_carry
+      '590': c3m9_carry
+  - prompt: A school bus travels 128 km on Monday, 130 km on Tuesday and 142 km on Wednesday. How far in all?
+    answer: '400'
+    check: 128+130+142
+    difficulty: 3
+    hints:
+    - Add two days first.
+    - Then add the third.
+    solution: 'Step 1: 128 + 130 = 258. Step 2: 258 + 142 = 400 km.'
+    mistakes:
+      '390': c3m9_carry
+      '258': c3m9_line
 - code: cbse3m.hh2.sub
   title: Subtracting 3-digit numbers
   after:
@@ -197,6 +358,44 @@ concepts:
       bin: '499'
       clue: Take a hundred, then one more.
       why: '499.'
+  lesson:
+    - teach: 'To subtract 3-digit numbers, line up the places and take away ones, then tens, then hundreds. 768 − 325: 8 − 5 = 3, 6 − 2 = 4, 7 − 3 = 4. Answer 443.'
+      check:
+        prompt: 975 − 432 = ?
+        options:
+        - '543'
+        - '547'
+        - '1407'
+        answer: '543'
+        why: 5 − 2 = 3, 7 − 3 = 4, 9 − 4 = 5.
+    - teach: 'If a top digit is smaller, borrow from the next place. 532 − 218: 2 − 8 cannot be done, so open 1 ten: 12 − 8 = 4. Tens: 2 − 1 = 1. Hundreds: 5 − 2 = 3. Answer 314.'
+      picture:
+        kind: flow
+        steps:
+        - 532 − 218
+        - '2 < 8: open a ten'
+        - 12 − 8 = 4
+        - 2 − 1 = 1 ten
+        - 5 − 2 = 3 hundreds
+        - '314'
+        alt: Steps for 532 − 218 with one borrow, giving 314.
+      check:
+        prompt: 641 − 125 = ?
+        options:
+        - '516'
+        - '524'
+        - '526'
+        answer: '516'
+        why: 11 − 5 = 6, 3 − 2 = 1, 6 − 1 = 5.
+    - teach: Always check by adding back. If 600 − 245 = 355, then 355 + 245 should be 600. If it is not, look again.
+      check:
+        prompt: 'To check 420 − 160 = 260, add:'
+        options:
+        - 260 + 160
+        - 420 + 160
+        - 420 + 260
+        answer: 260 + 160
+        why: Answer + what you took away gives back the start.
   items:
   - prompt: 586 − 243 = ?
     answer: '343'
@@ -254,3 +453,105 @@ concepts:
     - 325 + 175.
     solution: 325 + 175 = 500.
     mistakes: {"150": "m3_check_add", "325": "m3_check_add"}
+  - prompt: 879 − 254 = ?
+    answer: '625'
+    check: 879-254
+    difficulty: 1
+    hints:
+    - 'Ones first: 9 − 4.'
+    - Then tens and hundreds.
+    solution: 'Step 1: 9 − 4 = 5, 7 − 5 = 2, 8 − 2 = 6. Step 2: = 625.'
+    mistakes:
+      '1133': c3m9_line
+      '635': c3m9_line
+  - prompt: 900 − 400 = ?
+    answer: '500'
+    check: 900-400
+    difficulty: 1
+    hints:
+    - Only the hundreds change.
+    - 9 hundreds − 4 hundreds.
+    solution: 'Step 1: 9 − 4 = 5 hundreds. Step 2: = 500.'
+    mistakes:
+      '1300': c3m9_line
+      '400': c3m9_line
+  - prompt: 563 − 238 = ?
+    answer: '325'
+    check: 563-238
+    difficulty: 2
+    hints:
+    - '3 − 8: open a ten.'
+    - 13 − 8, then 5 − 3.
+    solution: 'Step 1: 13 − 8 = 5, 5 − 3 = 2. Step 2: 5 − 2 = 3: 325.'
+    mistakes:
+      '335': c3m9_borrow
+      '801': c3m9_line
+  - prompt: A shop had 350 notebooks and sold 125. How many are left?
+    answer: '225'
+    check: 350-125
+    difficulty: 2
+    hints:
+    - 0 − 5 needs a borrow.
+    - 10 − 5, then 4 − 2.
+    solution: 'Step 1: 10 − 5 = 5, 4 − 2 = 2. Step 2: 3 − 1 = 2: 225.'
+    mistakes:
+      '235': c3m9_borrow
+      '475': c3m9_line
+  - prompt: 720 − 60 = ?
+    answer: '660'
+    check: 720-60
+    difficulty: 2
+    hints:
+    - 2 tens − 6 tens needs a borrow.
+    - Open 1 hundred into 10 tens.
+    solution: 'Step 1: 12 tens − 6 tens = 6 tens. Step 2: 6 hundreds stay: 660.'
+    mistakes:
+      '760': c3m9_borrow
+      '160': c3m9_line
+  - prompt: If 800 − 350 = 450, what is 450 + 350?
+    answer: '800'
+    check: 450+350
+    difficulty: 1
+    hints:
+    - Adding back undoes taking away.
+    - You get the start number.
+    solution: 'Step 1: 450 + 350. Step 2: = 800.'
+    mistakes:
+      '100': c3m9_line
+      '700': c3m9_carry
+  - prompt: Village A has 485 people. Village B has 312. How many more people are in Village A?
+    answer: '173'
+    check: 485-312
+    difficulty: 2
+    hints:
+    - Bigger minus smaller.
+    - 5 − 2, 8 − 1, 4 − 3.
+    solution: 'Step 1: 5 − 2 = 3, 8 − 1 = 7, 4 − 3 = 1. Step 2: = 173.'
+    mistakes:
+      '797': c3m9_line
+      '183': c3m9_line
+  - prompt: A rope is 500 cm long. 178 cm is cut off. How long is the rope now?
+    answer: '322'
+    check: 500-178
+    difficulty: 3
+    hints:
+    - 500 has 0 tens and 0 ones; borrow from the hundreds.
+    - Think of 500 as 4 hundreds, 9 tens, 10 ones.
+    solution: 'Step 1: 10 − 8 = 2, 9 − 7 = 2, 4 − 1 = 3. Step 2: = 322 cm.'
+    mistakes:
+      '478': c3m9_borrow
+      '432': c3m9_borrow
+  - prompt: Is 600 − 230 = 470 correct?
+    options:
+    - no, because 470 + 230 = 700
+    - yes, because 600 − 200 = 400
+    - yes, because 470 is less than 600
+    answer: no, because 470 + 230 = 700
+    difficulty: 3
+    hints:
+    - Check by adding back.
+    - Does it give 600?
+    solution: 'Step 1: 470 + 230 = 700, not 600. Step 2: So it is wrong (the right answer is 370).'
+    mistakes:
+      yes, because 600 − 200 = 400: c3m9_line
+      yes, because 470 is less than 600: c3m9_line

@@ -20,6 +20,9 @@ tips:
   hydro_chain: "In a dam: stored water (potential) falls (kinetic) and turns a generator (electrical)."
   pe_position: "Potential energy comes from position, like water held high. Moving things have kinetic energy."
   work_joule: "Each quantity has its own unit: force in newtons, power in watts. Work (force × distance) has a unit named after James Prescott ___."
+  pqk9p06_w_fs: W = F × s, using only the distance moved along the force.
+  pqk9p06_ke_square: KE = ½mv². Square the speed before multiplying.
+  pqk9p06_units_kwh: Units (kWh) = power in kW × time in hours. Change W to kW first.
 
 concepts:
   - code: phy9.energy.work
@@ -75,6 +78,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: is there a force on the object? Step 2: did the object move? Step 3: did it move along the direction of the force? Only if all three are yes is work done. Pushing a wall that doesn''t move fails step 2, so no work.'
+        - style: visual
+          teach: Work in physics needs a force and a movement along it.
+          picture:
+            kind: compare
+            columns:
+            - title: Work done
+              points:
+              - pushing a trolley that rolls
+              - lifting a bag onto a shelf
+            - title: No work done
+              points:
+              - pushing a wall that won't move
+              - reading a book
+            alt: Pushing a rolling trolley and lifting a bag do work; pushing a wall that won't move and reading do no work in physics.
       - teach: 'How much work? Multiply the force by the distance moved in the direction of the force: W = F × s. The unit is the joule (J): 1 J is the work done when 1 N moves something 1 m. A 10 N push over 3 m does 30 J of work.'
         picture:
           kind: flow
@@ -94,6 +111,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the force in newtons. Step 2: find the distance moved along the force in metres. Step 3: multiply: W = F × s. The answer is in joules.'
+        - style: real_world
+          teach: 'Dragging a 50 N gunny sack 4 m across the shop floor: W = 50 × 4 = 200 J. Drag it twice as far and you do twice the work, 400 J. Twice the force over the same 4 m also gives 400 J.'
       - teach: 'Direction matters. If the force is at right angles to the motion, it does no work: carrying a bag across a level floor, your hand pushes up but the bag moves sideways. If the force acts against the motion, like friction on a sliding box, the work is negative.'
         check:
           prompt: A box slides 5 m while friction of 4 N acts against it. What work does friction do?
@@ -106,6 +125,24 @@ concepts:
         ways:
         - style: real_world
           teach: 'Carrying a bucket across the courtyard, your arm pulls up, but the bucket moves sideways: your pull does no work on it in physics. Friction on a sliding chair pulls backwards while the chair moves forwards: that is negative work, taking energy away.'
+        - style: visual
+          teach: The angle between force and motion decides the sign of the work.
+          picture:
+            kind: compare
+            columns:
+            - title: Along the motion
+              points:
+              - pushing a cart forward
+              - positive work
+            - title: At 90° to it
+              points:
+              - holding a bag while walking
+              - zero work
+            - title: Against it
+              points:
+              - friction on a sliding box
+              - negative work
+            alt: A force along the motion does positive work, at right angles it does zero work, and against the motion it does negative work.
       - teach: Lifting is a special case. To lift a mass m steadily, you push up with a force equal to its weight, mg. Through a height h, the work is mgh. Lifting a 2 kg bag 3 m (g = 10 m/s²) takes 2 × 10 × 3 = 60 J.
         check:
           prompt: How much work lifts a 4 kg pot 2 m? (g = 10 m/s²)
@@ -118,6 +155,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: to lift something steadily, the force you need equals its weight, mg. Step 2: multiply that force by the height h. Step 3: W = mgh. Step 4: use g = 10 m/s² unless told otherwise.'
+        - style: visual
+          teach: 'Lifting a 2 kg bag up 3 m: force equals the weight, times the height.'
+          picture:
+            kind: flow
+            steps:
+            - m = 2 kg
+            - force = mg = 2 × 10 = 20 N
+            - height = 3 m
+            - W = 20 × 3 = 60 J
+            alt: Lifting a 2 kilogram bag needs 20 newtons; through 3 metres that is 60 joules of work.
     items:
       - prompt: "A force of 40 N pushes a box 5 m in the direction of the force. How much work is done, in J?"
         answer: "200"
@@ -248,6 +295,36 @@ concepts:
         solution: 'Step 1: Climbing: W = mgh = 40 × 10 × 5 = 2000 J. Step 2: The level walk is at right angles to gravity: no work against it. Step 3: Total = 2000 J.'
         mistakes:
           '10000': lift_then_carry
+      - prompt: 'Situation: A porter carries a 20 kg suitcase on his head and walks 50 m along a level platform. How much work does he do against gravity?'
+        options:
+        - Zero
+        - 1000 J
+        - 10000 J
+        answer: Zero
+        hints:
+        - Which way does his head push the suitcase?
+        - Which way does the suitcase move?
+        solution: He pushes up but the suitcase moves sideways, at right angles to the force, so no work is done against gravity.
+        mistakes:
+          1000 J: orbit_right_angle
+          10000 J: orbit_right_angle
+        exam: case
+        difficulty: 2
+      - prompt: A boy pulls a box with a 25 N force and moves it 8 m along the force. The work done is
+        options:
+        - 200 J
+        - 33 J
+        - 3.1 J
+        answer: 200 J
+        hints:
+        - W = F × s.
+        - 25 × 8.
+        solution: W = 25 × 8 = 200 J.
+        mistakes:
+          33 J: pqk9p06_w_fs
+          3.1 J: work_divided
+        exam: one_mark
+        difficulty: 1
 
   - code: phy9.energy.kinetic_potential
     title: Kinetic and potential energy
@@ -314,6 +391,20 @@ concepts:
         ways:
         - style: real_world
           teach: A rolling bowling ball knocks the pins over; water raised in a tank turns a tap's flow into a fountain. Anything that can make a push move something has energy. Energy is the capacity to do work, measured in joules, just like work.
+        - style: visual
+          teach: Two ways a body can hold energy, the ability to do work.
+          picture:
+            kind: compare
+            columns:
+            - title: Because it moves
+              points:
+              - a rolling ball
+              - kinetic energy
+            - title: Because of where it is
+              points:
+              - a raised hammer
+              - potential energy
+            alt: A rolling ball has energy because it moves, kinetic energy; a raised hammer has it because of its height, potential energy.
       - teach: 'Energy of motion is kinetic energy: KE = ½mv². The speed is squared, so it matters most. A 2 kg ball at 4 m/s has KE = ½ × 2 × 16 = 16 J. Double the speed to 8 m/s and KE becomes 64 J: four times as much.'
         picture:
           kind: bars
@@ -335,6 +426,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write the mass m and the speed v. Step 2: square the speed. Step 3: multiply by the mass and halve it: KE = ½mv². Because the speed is squared, double speed gives four times the energy; triple gives nine times.'
+        - style: visual
+          teach: Double the speed, four times the kinetic energy.
+          picture:
+            kind: bars
+            bars:
+            - label: 2 m/s
+              value: 4
+            - label: 4 m/s
+              value: 16
+            - label: 8 m/s
+              value: 64
+            unit: J (2 kg ball)
+            alt: A 2 kilogram ball has 4 joules at 2 metres per second, 16 at 4 and 64 at 8.
       - teach: 'Energy due to height is gravitational potential energy: PE = mgh. Lifting a body stores the work you did in it. A 3 kg coconut 10 m up a tree has PE = 3 × 10 × 10 = 300 J (g = 10 m/s²). Double the height, double the PE.'
         check:
           prompt: A 1 kg book sits on a shelf 2 m high. What is its PE? (g = 10 m/s²)
@@ -347,6 +451,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write the mass in kg. Step 2: multiply by g = 10 m/s². Step 3: multiply by the height in metres. That is PE = mgh in joules. Double the height, double the stored energy.'
+        - style: visual
+          teach: Potential energy grows in step with height.
+          picture:
+            kind: bars
+            bars:
+            - label: 5 m
+              value: 150
+            - label: 10 m
+              value: 300
+            - label: 20 m
+              value: 600
+            unit: J (3 kg coconut)
+            alt: A 3 kilogram coconut has 150 joules of potential energy at 5 metres, 300 at 10 and 600 at 20.
       - teach: 'Energy has many forms: elastic (a stretched rubber band, a wound spring), chemical (food, fuel, a battery), heat, light, sound and electrical. Machines and living things change energy from one form to another.'
         check:
           prompt: What kind of energy does a stretched catapult rubber store?
@@ -359,6 +476,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Look around: a wound-up toy car stores energy in its spring, food stores chemical energy, a mobile battery stores electrical energy, and a stretched catapult stores elastic energy. Machines and our bodies keep changing energy from one form to another.'
+        - style: visual
+          teach: Everyday things and the energy they store.
+          picture:
+            kind: compare
+            columns:
+            - title: Stored
+              points:
+              - 'wound spring: elastic'
+              - 'food, fuel, cell: chemical'
+            - title: On the move
+              points:
+              - heat, light, sound
+              - electrical
+            alt: Energy is stored as elastic energy in a spring and chemical energy in food, fuel and cells, and carried as heat, light, sound and electricity.
     items:
       - prompt: "What is the kinetic energy of a 2 kg ball moving at 3 m/s, in J?"
         answer: "9"
@@ -492,6 +623,36 @@ concepts:
         solution: 'Step 1: The parked car and the book have only PE (they are not moving). Step 2: The rolling ball has KE but no height. Step 3: The flying bird is both moving and high up.'
         mistakes:
           A car parked on a hilltop: pe_position
+      - prompt: 'Situation: A 1000 kg car speeds up from 10 m/s to 20 m/s. How much does its kinetic energy increase?'
+        options:
+        - 150000 J
+        - 50000 J
+        - 10000 J
+        answer: 150000 J
+        hints:
+        - 'Find KE at each speed: ½ × 1000 × v².'
+        - 200000 − 50000.
+        solution: KE at 10 m/s = 50 000 J; at 20 m/s = 200 000 J. Increase = 150 000 J.
+        mistakes:
+          50000 J: pqk9p06_ke_square
+          10000 J: ke_speed_squared
+        exam: case
+        difficulty: 2
+      - prompt: A body of mass 4 kg has 200 J of potential energy. How high is it? (g = 10 m/s²)
+        options:
+        - 5 m
+        - 50 m
+        - 8000 m
+        answer: 5 m
+        hints:
+        - PE = mgh.
+        - 200 = 4 × 10 × h.
+        solution: h = 200 ÷ 40 = 5 m.
+        mistakes:
+          50 m: pe_mgh
+          8000 m: pe_mgh
+        exam: short
+        difficulty: 2
 
   - code: phy9.energy.conservation
     title: Conservation of energy and power
@@ -551,6 +712,15 @@ concepts:
         ways:
         - style: real_world
           teach: Switch on a torch. The cell's chemical energy becomes electricity, then light, and the bulb gets warm too. Add up all of it and nothing has been lost or gained. Energy only changes form; it is never created or destroyed.
+        - style: visual
+          teach: A torch changes energy from one form to another; none is lost.
+          picture:
+            kind: flow
+            steps:
+            - chemical (cell)
+            - electrical (wires)
+            - light + heat (bulb)
+            alt: In a torch, chemical energy in the cell becomes electrical energy and then light and heat in the bulb.
       - teach: Watch a falling coconut. At the top it has only PE. As it falls, PE turns into KE. Just before it lands, it has only KE. Ignoring air, PE + KE stays the same all the way down. A 2 kg coconut dropped from 10 m has 200 J at the top, so 200 J of KE just before landing.
         picture:
           kind: bars
@@ -576,6 +746,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: at the top of the fall, all the energy is PE = mgh. Step 2: as it falls, PE decreases and KE increases by the same amount. Step 3: at any point, PE + KE equals the starting total. Step 4: just before landing it is all KE.'
+        - style: real_world
+          teach: 'On a playground swing, at the highest point you stop for a moment: all PE. Swinging through the bottom you are fastest: all KE. Then up again, KE back into PE. Without friction you''d swing to the same height for ever.'
       - teach: 'Power tells how fast work is done: P = W ÷ t, measured in watts (1 W = 1 J/s). Two people climbing the same stairs do the same work, but the one who climbs faster has more power. 1 kW = 1000 W.'
         check:
           prompt: A machine does 1000 J of work in 4 s. What is its power?
@@ -588,6 +760,17 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the work done, in joules. Step 2: find the time taken, in seconds. Step 3: divide: P = W ÷ t, in watts. Faster for the same work means more power.'
+        - style: visual
+          teach: Same stairs, same work; the faster climber has more power.
+          picture:
+            kind: bars
+            bars:
+            - label: Anu, 10 s
+              value: 300
+            - label: Biju, 20 s
+              value: 150
+            unit: W (3000 J of work)
+            alt: Doing 3000 joules of work, Anu climbing in 10 seconds has a power of 300 watts and Biju in 20 seconds 150 watts.
       - teach: The electricity bill counts energy in kilowatt-hours (kWh), called units. Power in kW × time in hours = kWh. A 1 kW iron used for 2 hours uses 2 units. 1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J.
         check:
           prompt: A 500 W mixer runs for 2 hours. How many units does it use?
@@ -600,6 +783,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: change the power to kW: 500 W = 0.5 kW. Step 2: write the time in hours. Step 3: multiply kW × hours: that is kWh, the ''units'' on the electricity bill.'
+        - style: visual
+          teach: 'Counting electricity units: kilowatts times hours.'
+          picture:
+            kind: flow
+            steps:
+            - 'iron: 1000 W = 1 kW'
+            - used 2 hours
+            - 1 × 2 = 2 kWh
+            - = 2 units on the bill
+            alt: A 1000 watt iron is 1 kilowatt; used for 2 hours it uses 2 kilowatt-hours, 2 units.
     items:
       - prompt: "A 1 kg stone is dropped from 20 m. What is its kinetic energy just before hitting the ground, in J? (g = 10 m/s²; ignore air)"
         answer: "200"
@@ -730,3 +923,33 @@ concepts:
         solution: 'Step 1: Same mass, same height, so the same work mgh. Step 2: Asha takes less time. Step 3: Same work in less time means more power.'
         mistakes:
           Asha does more work: power_per_time
+      - prompt: 'Situation: A family runs a 2000 W water heater for 30 minutes every day. How many units does it use in 30 days?'
+        options:
+        - 30 units
+        - 60 units
+        - 1800 units
+        answer: 30 units
+        hints:
+        - 'Each day: 2 kW × 0.5 h.'
+        - Then × 30 days.
+        solution: 2 kW × 0.5 h = 1 kWh a day, so 30 units in 30 days.
+        mistakes:
+          60 units: minutes_to_hours
+          1800 units: pqk9p06_units_kwh
+        exam: case
+        difficulty: 2
+      - prompt: A pump lifts 500 kg of water to a tank 10 m high in 50 s. What is its power? (g = 10 m/s²)
+        options:
+        - 1000 W
+        - 50000 W
+        - 100 W
+        answer: 1000 W
+        hints:
+        - Work = mgh = 500 × 10 × 10.
+        - Power = work ÷ time.
+        solution: W = 50 000 J. P = 50 000 ÷ 50 = 1000 W.
+        mistakes:
+          50000 W: power_per_time
+          100 W: power_per_time
+        exam: short
+        difficulty: 2

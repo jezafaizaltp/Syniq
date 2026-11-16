@@ -14,6 +14,9 @@ tips:
   c11_neutrons: "Neutrons = mass number − atomic number."
   c11_rutherford: "Most α-particles went straight through, a very few bounced back. What does that say about where mass and charge are?"
   c11_shell_max: "Maximum electrons in shell n = 2n²."
+  c11c02_count: Protons = Z. Neutrons = A − Z. Electrons = Z for a neutral atom, then adjust for the charge.
+  c11c02_bohr: In Bohr's model, rₙ ∝ n² and Eₙ ∝ −1/n². Square n before using it.
+  c11c02_qn: l runs from 0 to n − 1; m runs from −l to +l; each orbital holds 2 electrons.
 concepts:
 - code: cbse11c.atom.models
   title: Particles, atomic models and Bohr's model
@@ -101,6 +104,48 @@ concepts:
           u: 3
           d: 2
         say: 'That''s the longest Balmer line, the red one. Shorter wavelength means more energy: a bigger fall.'
+  lesson:
+    - teach: Atoms contain electrons (Thomson), protons and neutrons (Chadwick). Atomic number Z = protons; mass number A = protons + neutrons. Isotopes have the same Z but different A.
+      check:
+        prompt: Neutrons in ²³Na (Z = 11)?
+        options:
+        - '12'
+        - '11'
+        - '23'
+        answer: '12'
+        why: 23 − 11.
+    - teach: 'Rutherford''s gold-foil experiment: most α-particles went straight through, a few bounced back. So the atom is mostly empty, with a tiny, dense, positive nucleus. His model could not explain why atoms are stable or why spectra have lines.'
+      check:
+        prompt: 'Most α-particles passing straight through the foil showed that the atom is:'
+        options:
+        - mostly empty space
+        - solid all through
+        - negatively charged
+        answer: mostly empty space
+        why: Nothing was in their way.
+    - teach: 'Bohr: electrons move in fixed orbits with fixed energies. For hydrogen Eₙ = −13.6/n² eV and rₙ = 52.9 n² pm. Light is emitted when an electron drops to a lower orbit. de Broglie: particles have wavelength λ = h/mv.'
+      picture:
+        kind: compare
+        columns:
+        - title: Orbit n
+          points:
+          - '1'
+          - '2'
+          - '3'
+        - title: Energy (eV)
+          points:
+          - −13.6
+          - −3.4
+          - −1.51
+        alt: Energy levels of hydrogen in Bohr's model.
+      check:
+        prompt: Hydrogen n = 3 radius, if n = 1 is 52.9 pm?
+        options:
+        - 476.1 pm
+        - 158.7 pm
+        - 17.6 pm
+        answer: 476.1 pm
+        why: 52.9 × 9.
   items:
   - prompt: How many neutrons are in an atom with Z = 17 and A = 35?
     answer: '18'
@@ -168,6 +213,114 @@ concepts:
     - Wave–particle.
     solution: λ = h/mv.
     mistakes: {"no mass": "c11_de_broglie", "fixed orbits": "c11_de_broglie", "zero momentum": "c11_de_broglie"}
+  - prompt: How many electrons are in a Cl⁻ ion (Z = 17)?
+    answer: '18'
+    check: 17+1
+    difficulty: 1
+    hints:
+    - A neutral Cl atom has 17 electrons.
+    - A minus charge means one extra electron.
+    solution: 'Step 1: 17 + 1. Step 2: 18.'
+    mistakes:
+      '17': c11c02_count
+      '16': c11c02_count
+  - prompt: How many neutrons are in ⁵⁶Fe (Z = 26)?
+    answer: '30'
+    check: 56-26
+    difficulty: 1
+    hints:
+    - Neutrons = A − Z.
+    - 56 − 26.
+    solution: 'Step 1: 56 − 26. Step 2: 30.'
+    mistakes:
+      '26': c11c02_count
+      '82': c11c02_count
+  - prompt: 'Atoms of different elements with the same mass number are called:'
+    options:
+    - isobars
+    - isotopes
+    - isotones
+    answer: isobars
+    difficulty: 1
+    hints:
+    - Same A, different Z.
+    - Compare ⁴⁰Ar and ⁴⁰Ca.
+    solution: 'Step 1: same mass number. Step 2: isobars.'
+    mistakes:
+      isotopes: c11c02_count
+      isotones: c11c02_count
+  - prompt: Hydrogen's n = 1 energy is −13.6 eV. Find the energy of n = 3 (in eV, to 2 decimal places).
+    answer: '-1.51'
+    check: round(-13.6/9,2)
+    difficulty: 2
+    hints:
+    - Eₙ = −13.6/n².
+    - n² = 9.
+    solution: 'Step 1: −13.6/9. Step 2: −1.51 eV.'
+    mistakes:
+      '-4.53': c11c02_bohr
+      '-122.4': c11c02_bohr
+  - prompt: Find the energy (in eV) needed to remove the electron from hydrogen's ground state.
+    answer: '13.6'
+    check: '13.6'
+    difficulty: 2
+    hints:
+    - Removing the electron takes it to n = ∞, energy 0.
+    - Start from −13.6 eV.
+    solution: 'Step 1: 0 − (−13.6). Step 2: 13.6 eV.'
+    mistakes:
+      '-13.6': c11c02_bohr
+      '3.4': c11c02_bohr
+  - prompt: Radiation has frequency 6 × 10¹⁴ Hz. Find its wavelength (c = 3 × 10⁸ m/s), in nm.
+    answer: '500'
+    check: 3e8/6e14*1e9
+    difficulty: 2
+    hints:
+    - λ = c/ν.
+    - Convert metres to nanometres.
+    solution: 'Step 1: 5 × 10⁻⁷ m. Step 2: 500 nm.'
+    mistakes:
+      '2000': c11c02_bohr
+      '50': c11c02_bohr
+  - prompt: 'Bohr''s model could NOT explain:'
+    options:
+    - spectra of atoms with many electrons
+    - hydrogen's line spectrum
+    - stability of the hydrogen atom
+    answer: spectra of atoms with many electrons
+    difficulty: 2
+    hints:
+    - It worked well for one-electron species.
+    - What about helium and beyond?
+    solution: 'Step 1: fits H only. Step 2: fails for multi-electron atoms.'
+    mistakes:
+      hydrogen's line spectrum: c11c02_bohr
+      stability of the hydrogen atom: c11c02_bohr
+  - prompt: An electron in hydrogen drops from n = 2 to n = 1. Energy of the photon emitted (in eV)?
+    answer: '10.2'
+    check: 13.6-3.4
+    difficulty: 3
+    hints:
+    - E₂ = −3.4 eV, E₁ = −13.6 eV.
+    - Photon energy = difference.
+    solution: 'Step 1: −3.4 − (−13.6). Step 2: 10.2 eV.'
+    mistakes:
+      '17': c11c02_bohr
+      '3.4': c11c02_bohr
+  - prompt: 'If a particle''s speed doubles, its de Broglie wavelength becomes:'
+    options:
+    - half
+    - double
+    - four times
+    answer: half
+    difficulty: 3
+    hints:
+    - λ = h/mv.
+    - λ ∝ 1/v.
+    solution: 'Step 1: v × 2. Step 2: λ ÷ 2.'
+    mistakes:
+      double: c11c02_bohr
+      four times: c11c02_bohr
 - code: cbse11c.atom.quantum
   title: Quantum numbers and electronic configuration
   after:
@@ -237,6 +390,46 @@ concepts:
       bin: Possible
       clue: Check each rule in turn.
       why: 'A 4d electron: l < n, mₗ in −2 … +2, spin −½.'
+  lesson:
+    - teach: 'The quantum-mechanical model describes orbitals: regions where an electron is likely to be. Four quantum numbers label an electron: n (shell, size), l (subshell shape: 0 = s, 1 = p, 2 = d, 3 = f), m (orientation, −l to +l) and s (spin, ±½).'
+      check:
+        prompt: 'For n = 2, the allowed values of l are:'
+        options:
+        - 0 and 1
+        - 1 and 2
+        - 0, 1 and 2
+        answer: 0 and 1
+        why: l goes from 0 to n − 1.
+    - teach: A subshell has 2l + 1 orbitals (s 1, p 3, d 5, f 7). Each orbital holds 2 electrons with opposite spins (Pauli). A shell holds 2n² electrons.
+      check:
+        prompt: Maximum electrons in a p subshell?
+        options:
+        - '6'
+        - '3'
+        - '2'
+        answer: '6'
+        why: 3 orbitals × 2.
+    - teach: 'Filling order (Aufbau, lower n + l first): 1s 2s 2p 3s 3p 4s 3d 4p … Hund''s rule: fill orbitals of a subshell singly before pairing. Cr and Cu are exceptions (3d⁵4s¹, 3d¹⁰4s¹).'
+      picture:
+        kind: flow
+        steps:
+        - 1s
+        - 2s
+        - 2p
+        - 3s
+        - 3p
+        - 4s
+        - 3d
+        - 4p
+        alt: Order in which orbitals fill.
+      check:
+        prompt: Configuration of carbon (Z = 6)?
+        options:
+        - 1s² 2s² 2p²
+        - 1s² 2s⁴
+        - 1s² 2p⁴
+        answer: 1s² 2s² 2p²
+        why: 2 + 2 + 2.
   items:
   - prompt: What is the maximum number of electrons in the n = 3 shell?
     answer: '18'
@@ -307,3 +500,114 @@ concepts:
     solution: 4s (n + l = 4) fills before 3d (n + l = 5).
     mistakes:
       3d: c11c_aufbau
+  - prompt: Maximum electrons in the n = 2 shell?
+    answer: '8'
+    check: 2*2**2
+    difficulty: 1
+    hints:
+    - Use 2n².
+    - n = 2.
+    solution: 'Step 1: 2 × 4. Step 2: 8.'
+    mistakes:
+      '4': c11c02_qn
+      '2': c11c02_qn
+  - prompt: How many orbitals are in an f subshell?
+    answer: '7'
+    check: 2*3+1
+    difficulty: 1
+    hints:
+    - f means l = 3.
+    - Orbitals = 2l + 1.
+    solution: 'Step 1: 2 × 3 + 1. Step 2: 7.'
+    mistakes:
+      '14': c11c02_qn
+      '3': c11c02_qn
+  - prompt: Which rule says no two electrons in an atom can have the same four quantum numbers?
+    options:
+    - Pauli exclusion principle
+    - Hund's rule
+    - Aufbau principle
+    answer: Pauli exclusion principle
+    difficulty: 1
+    hints:
+    - It limits each orbital to two electrons.
+    - Opposite spins are required.
+    solution: 'Step 1: unique quantum numbers. Step 2: Pauli.'
+    mistakes:
+      Hund's rule: c11c02_qn
+      Aufbau principle: c11c02_qn
+  - prompt: Electronic configuration of potassium (Z = 19)?
+    options:
+    - 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹
+    - 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹
+    - 1s² 2s² 2p⁶ 3s² 3p⁷
+    answer: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹
+    difficulty: 2
+    hints:
+    - After 3p comes 4s, not 3d.
+    - A p subshell holds at most 6.
+    solution: 'Step 1: 18 electrons up to 3p⁶. Step 2: the 19th goes into 4s.'
+    mistakes:
+      1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹: c11c02_qn
+      1s² 2s² 2p⁶ 3s² 3p⁷: c11c02_qn
+  - prompt: For l = 2, how many values can m take?
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - m goes from −l to +l.
+    - −2, −1, 0, 1, 2.
+    solution: 'Step 1: count −2 to +2. Step 2: 5.'
+    mistakes:
+      '2': c11c02_qn
+      '3': c11c02_qn
+  - prompt: How many unpaired electrons does nitrogen (1s² 2s² 2p³) have?
+    answer: '3'
+    check: '3'
+    difficulty: 2
+    hints:
+    - 'Hund''s rule: fill p orbitals singly first.'
+    - Three p orbitals, three electrons.
+    solution: 'Step 1: one electron in each 2p orbital. Step 2: 3 unpaired.'
+    mistakes:
+      '1': c11c02_qn
+      '5': c11c02_qn
+  - prompt: Which orbital has the higher energy?
+    options:
+    - 3d
+    - 4s
+    - they are equal
+    answer: 3d
+    difficulty: 2
+    hints:
+    - Use the n + l rule.
+    - '3d: 3 + 2; 4s: 4 + 0.'
+    solution: 'Step 1: 3d has n + l = 5, 4s has 4. Step 2: 3d is higher.'
+    mistakes:
+      4s: c11c02_qn
+      they are equal: c11c02_qn
+  - prompt: 'Copper (Z = 29) has the configuration [Ar] 3d¹⁰ 4s¹ rather than 3d⁹ 4s² because:'
+    options:
+    - a full d subshell is extra stable
+    - 4s is higher than 4p
+    - Pauli's rule forbids 4s²
+    answer: a full d subshell is extra stable
+    difficulty: 3
+    hints:
+    - Count the d electrons in each version.
+    - Full and half-full subshells are special.
+    solution: 'Step 1: 3d¹⁰ is completely filled. Step 2: extra stability.'
+    mistakes:
+      4s is higher than 4p: c11c02_qn
+      Pauli's rule forbids 4s²: c11c02_qn
+  - prompt: How many electrons in an atom can have n = 3 and l = 1?
+    answer: '6'
+    check: 3*2
+    difficulty: 3
+    hints:
+    - n = 3, l = 1 is the 3p subshell.
+    - 3 orbitals × 2 electrons.
+    solution: 'Step 1: 3p has 3 orbitals. Step 2: 6 electrons.'
+    mistakes:
+      '2': c11c02_qn
+      '18': c11c02_qn

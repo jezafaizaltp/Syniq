@@ -15,6 +15,9 @@ tips:
   b12_monarch: "Monarch caterpillars feed on milkweed, which contains poison."
   b12_mutualism: "Alga gives food, fungus gives shelter and water. Both gain."
   b12_pop_change: "N = N₀ + births + immigration − deaths − emigration."
+  c12b11_rate: 'Rates are ''per individual'': divide the number born, died or moved by the starting population.'
+  c12b11_curve: "Compare unlimited and limited resources: one gives a J-curve, the other levels off at K. When N is tiny compared with K, how much does the limit matter?"
+  c12b11_int: "Score each species: + benefits, − harmed, 0 unaffected. Then match the pair of scores to the name of the interaction."
 concepts:
 - code: cbse12b.pop.attributes
   title: Populations and growth
@@ -139,6 +142,62 @@ concepts:
           - 50
           - 450
         say: Logistic is still more than half the exponential rate.
+  lesson:
+    - teach: 'A population is a group of the same species in an area. It has features a single organism does not: birth rate (natality), death rate (mortality), sex ratio and age structure. Rates are per individual: if 8 of 80 die in a year, the death rate is 8/80 = 0.1 per individual per year.'
+      check:
+        prompt: 50 deer give birth to 10 fawns in a year. What is the birth rate per deer per year?
+        options:
+        - '0.2'
+        - '10'
+        - '5'
+        answer: '0.2'
+        why: 10 ÷ 50 = 0.2.
+    - teach: 'Age pyramids show pre-reproductive, reproductive and post-reproductive groups. A triangle with a wide base means many young: an expanding population. A bell shape means stable. An urn shape (narrow base) means declining. Population size changes by births (B) and immigration (I) adding, deaths (D) and emigration (E) removing: Nₜ₊₁ = Nₜ + (B + I) − (D + E).'
+      picture:
+        kind: compare
+        columns:
+        - title: Shape
+          points:
+          - triangle
+          - bell
+          - urn
+        - title: Population
+          points:
+          - expanding
+          - stable
+          - declining
+        alt: Age pyramid shapes and what they show about a population.
+      check:
+        prompt: Which two processes add to a population?
+        options:
+        - natality and immigration
+        - mortality and emigration
+        - natality and emigration
+        answer: natality and immigration
+        why: Births and arrivals add individuals.
+    - teach: 'With unlimited resources a population grows exponentially, dN/dt = rN, giving a J-shaped curve; r is the intrinsic rate of natural increase. In nature resources run out, so growth slows and levels off at the carrying capacity K: the logistic (Verhulst–Pearl) model dN/dt = rN(K − N)/K gives an S-shaped (sigmoid) curve.'
+      picture:
+        kind: compare
+        columns:
+        - title: Exponential
+          points:
+          - unlimited resources
+          - dN/dt = rN
+          - J-curve
+        - title: Logistic
+          points:
+          - limited resources
+          - dN/dt = rN(K − N)/K
+          - S-curve levelling at K
+        alt: Exponential and logistic growth compared.
+      check:
+        prompt: 'In the logistic model, growth stops when N equals:'
+        options:
+        - K
+        - 0.5 K
+        - r
+        answer: K
+        why: Then (K − N)/K = 0.
   items:
   - prompt: A pond has 20 lotus plants; 8 new ones are added in a year. Find the birth rate per plant per year as a fraction.
     answer: 2/5
@@ -207,6 +266,124 @@ concepts:
     - Narrow base.
     solution: Declining.
     mistakes: {"expanding": "b12_age_pyramid", "stable": "b12_age_pyramid", "exploding": "b12_age_pyramid"}
+  - prompt: A population of 200 has 30 births, 10 deaths, 5 immigrants and 15 emigrants in a year. What is its new size?
+    answer: '210'
+    check: '210'
+    difficulty: 2
+    hints:
+    - Add births and immigrants.
+    - Subtract deaths and emigrants.
+    solution: 'Step 1: 200 + 35 = 235. Step 2: 235 − 25 = 210.'
+    mistakes:
+      '230': c12b11_rate
+      '250': c12b11_rate
+      '190': c12b11_rate
+  - prompt: In a herd of 60 deer, 12 die in a year. Find the death rate per deer per year.
+    answer: 1/5
+    check: Rational(12,60)
+    difficulty: 1
+    hints:
+    - Divide deaths by the starting number.
+    - Simplify the fraction.
+    solution: 'Step 1: 12/60. Step 2: 1/5 = 0.2.'
+    mistakes:
+      '12': c12b11_rate
+      '5': c12b11_rate
+  - prompt: 'In the logistic equation, when N is very small compared with K, growth is nearly:'
+    options:
+    - exponential
+    - zero
+    - negative
+    answer: exponential
+    difficulty: 3
+    hints:
+    - Look at (K − N)/K when N is tiny.
+    - That factor is close to 1.
+    solution: 'Step 1: (K − N)/K ≈ 1. Step 2: dN/dt ≈ rN, exponential.'
+    mistakes:
+      zero: c12b11_curve
+      negative: c12b11_curve
+  - prompt: 'A bell-shaped age pyramid shows a population that is:'
+    options:
+    - stable
+    - expanding
+    - declining
+    answer: stable
+    difficulty: 1
+    hints:
+    - Young and reproductive groups are about equal.
+    - Neither wide nor narrow base.
+    solution: 'Step 1: balanced age groups. Step 2: stable.'
+    mistakes:
+      expanding: c12b11_curve
+      declining: c12b11_curve
+  - prompt: 'r in dN/dt = rN stands for the:'
+    options:
+    - intrinsic rate of natural increase
+    - carrying capacity
+    - number of deaths
+    answer: intrinsic rate of natural increase
+    difficulty: 2
+    hints:
+    - It is birth rate minus death rate per individual.
+    - K is a different symbol.
+    solution: 'Step 1: b − d. Step 2: intrinsic rate of natural increase.'
+    mistakes:
+      carrying capacity: c12b11_curve
+      number of deaths: c12b11_curve
+  - prompt: Which model is more realistic for most natural populations?
+    options:
+    - logistic
+    - exponential
+    - neither
+    answer: logistic
+    difficulty: 1
+    hints:
+    - Resources are finite.
+    - Growth slows near a limit.
+    solution: 'Step 1: limits exist. Step 2: logistic.'
+    mistakes:
+      exponential: c12b11_curve
+      neither: c12b11_curve
+  - prompt: 'The ratio of males to females in a population is its:'
+    options:
+    - sex ratio
+    - natality
+    - density
+    answer: sex ratio
+    difficulty: 1
+    hints:
+    - It is a population feature.
+    - Compares the two sexes.
+    solution: 'Step 1: e.g. 60% female, 40% male. Step 2: sex ratio.'
+    mistakes:
+      natality: c12b11_rate
+      density: c12b11_rate
+  - prompt: A pond of 50 frogs has 25 tadpoles become frogs and 5 frogs die in a year. What is the net growth rate per frog?
+    answer: 2/5
+    check: Rational(20,50)
+    difficulty: 3
+    hints:
+    - Net change = births − deaths.
+    - Divide by the starting number.
+    solution: 'Step 1: 25 − 5 = 20. Step 2: 20/50 = 2/5.'
+    mistakes:
+      '20': c12b11_rate
+      1/2: c12b11_rate
+  - prompt: 'The population density of trees is often better measured by:'
+    options:
+    - percent cover or biomass
+    - counting leaves
+    - weighing the soil
+    answer: percent cover or biomass
+    difficulty: 2
+    hints:
+    - A huge tree and a tiny one should not count the same.
+    - Think about area covered.
+    solution: 'Step 1: individuals differ in size. Step 2: percent cover or biomass.'
+    mistakes:
+      counting leaves: c12b11_rate
+      weighing the soil: c12b11_rate
 - code: cbse12b.pop.interactions
   title: Population interactions
   after:
@@ -303,6 +480,54 @@ concepts:
       bin: Commensalism (+/0)
       clue: The egret eats insects the cattle stir up. Does it cost the cattle?
       why: Egret gains; cattle unaffected.
+  lesson:
+    - teach: 'Populations of different species interact. Mutualism helps both (+/+): lichens (fungus and alga), mycorrhizae, fig and its wasp pollinator. Some orchids like Ophrys trick male bees with a flower petal that looks like a female bee (sexual deceit). Competition harms both (−/−); Gause''s principle says two species competing for exactly the same resource cannot coexist indefinitely. Species can share by resource partitioning, like MacArthur''s warblers feeding in different parts of a tree.'
+      picture:
+        kind: compare
+        columns:
+        - title: Interaction
+          points:
+          - mutualism
+          - competition
+          - predation
+          - parasitism
+          - commensalism
+          - amensalism
+        - title: Signs
+          points:
+          - + / +
+          - − / −
+          - + / −
+          - + / −
+          - + / 0
+          - − / 0
+        alt: Types of population interactions and their plus and minus signs.
+      check:
+        prompt: 'Warblers feeding at different heights of the same tree show:'
+        options:
+        - resource partitioning
+        - parasitism
+        - commensalism
+        answer: resource partitioning
+        why: They split the resource and avoid competing.
+    - teach: 'Predation (+/−) transfers energy and keeps prey numbers in check; prickly pear cactus spread in Australia until a cactus-eating moth was brought in. Prey defend themselves: camouflage, toxins (the monarch butterfly stores poison from the plant it ate as a caterpillar), and plant chemicals like cardiac glycosides in Calotropis, or thorns.'
+      check:
+        prompt: 'Calotropis is avoided by cattle because it has:'
+        options:
+        - cardiac glycosides (toxic)
+        - sweet nectar
+        - no leaves
+        answer: cardiac glycosides (toxic)
+        why: Its chemicals are poisonous to grazers.
+    - teach: 'Parasitism (+/−): ectoparasites live outside (lice, ticks, Cuscuta on plants), endoparasites inside (tapeworm, liver fluke); brood parasites like the cuckoo lay eggs in a crow''s nest. Commensalism (+/0): orchid on a mango branch, barnacles on a whale, cattle egrets catching insects stirred up by grazing cattle, clownfish among sea anemones. Amensalism (−/0): Penicillium harms bacteria without gaining.'
+      check:
+        prompt: 'Cattle egrets and grazing cattle show:'
+        options:
+        - commensalism
+        - parasitism
+        - competition
+        answer: commensalism
+        why: Egrets gain insects; cattle neither gain nor lose.
   items:
   - prompt: 'An orchid growing on a mango branch shows:'
     options:
@@ -383,3 +608,129 @@ concepts:
     - Penicillium unaffected.
     solution: Amensalism.
     mistakes: {"mutualism": "b12_amensalism", "commensalism": "b12_amensalism", "parasitism": "b12_amensalism"}
+  - prompt: 'Cuscuta (dodder) growing on hedge plants is an example of:'
+    options:
+    - parasitism
+    - mutualism
+    - commensalism
+    answer: parasitism
+    difficulty: 1
+    hints:
+    - Cuscuta has no chlorophyll.
+    - It takes food from the host.
+    solution: 'Step 1: gains at host''s cost. Step 2: parasitism.'
+    mistakes:
+      mutualism: c12b11_int
+      commensalism: c12b11_int
+  - prompt: 'The fig and its wasp show:'
+    options:
+    - mutualism
+    - predation
+    - amensalism
+    answer: mutualism
+    difficulty: 1
+    hints:
+    - The wasp pollinates the fig.
+    - The fig gives the wasp a place to lay eggs.
+    solution: 'Step 1: both benefit. Step 2: mutualism.'
+    mistakes:
+      predation: c12b11_int
+      amensalism: c12b11_int
+  - prompt: 'The prickly pear cactus in Australia was controlled by introducing a:'
+    options:
+    - cactus-feeding moth
+    - goat
+    - fungus
+    answer: cactus-feeding moth
+    difficulty: 2
+    hints:
+    - Its natural predator was missing in Australia.
+    - An insect from its home range.
+    solution: 'Step 1: biological control by a predator. Step 2: moth.'
+    mistakes:
+      goat: c12b11_int
+      fungus: c12b11_int
+  - prompt: 'Barnacles growing on a whale''s back show:'
+    options:
+    - commensalism
+    - parasitism
+    - mutualism
+    answer: commensalism
+    difficulty: 2
+    hints:
+    - Barnacles get a ride and food access.
+    - The whale is not affected much.
+    solution: 'Step 1: +/0. Step 2: commensalism.'
+    mistakes:
+      parasitism: c12b11_int
+      mutualism: c12b11_int
+  - prompt: 'Ophrys orchids get pollinated by:'
+    options:
+    - sexual deceit of male bees
+    - wind
+    - birds eating nectar
+    answer: sexual deceit of male bees
+    difficulty: 2
+    hints:
+    - One petal looks like a female bee.
+    - The male 'pseudocopulates' with it.
+    solution: 'Step 1: bee carries pollen between flowers. Step 2: sexual deceit.'
+    mistakes:
+      wind: c12b11_int
+      birds eating nectar: c12b11_int
+  - prompt: 'Goats introduced to the Galapagos harmed the Abingdon tortoise by:'
+    options:
+    - out-competing it for food
+    - eating its eggs
+    - spreading disease
+    answer: out-competing it for food
+    difficulty: 2
+    hints:
+    - Both eat plants.
+    - The goats were better at browsing.
+    solution: 'Step 1: same food. Step 2: competition led to extinction.'
+    mistakes:
+      eating its eggs: c12b11_int
+      spreading disease: c12b11_int
+  - prompt: 'Lice on humans are:'
+    options:
+    - ectoparasites
+    - endoparasites
+    - commensals
+    answer: ectoparasites
+    difficulty: 1
+    hints:
+    - They live on the surface.
+    - Ecto means outside.
+    solution: 'Step 1: outside the host. Step 2: ectoparasites.'
+    mistakes:
+      endoparasites: c12b11_int
+      commensals: c12b11_int
+  - prompt: 'Clownfish living among the stinging tentacles of a sea anemone show:'
+    options:
+    - commensalism
+    - competition
+    - amensalism
+    answer: commensalism
+    difficulty: 2
+    hints:
+    - The fish gets protection from predators.
+    - The anemone does not seem to gain.
+    solution: 'Step 1: +/0. Step 2: commensalism.'
+    mistakes:
+      competition: c12b11_int
+      amensalism: c12b11_int
+  - prompt: 'Predators help an ecosystem mainly by:'
+    options:
+    - keeping prey populations in check
+    - removing all prey
+    - adding nutrients to rocks
+    answer: keeping prey populations in check
+    difficulty: 1
+    hints:
+    - Without them prey can explode in number.
+    - They also help maintain diversity.
+    solution: 'Step 1: control numbers. Step 2: stability and diversity.'
+    mistakes:
+      removing all prey: c12b11_int
+      adding nutrients to rocks: c12b11_int

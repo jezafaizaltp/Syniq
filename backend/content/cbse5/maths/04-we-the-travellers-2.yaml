@@ -10,6 +10,12 @@ tips:
   m5_remainder: "Find the biggest multiple of the divisor that fits, then take it away from the number. What is left is the remainder."
   m5_times_100: "Multiplying by 100 adds two zeros at the end."
   m5_times_carry: "Multiply each place, then add the carries. Check the size: is your answer about right?"
+  c5m4_split: Split the bigger number into tens and ones, multiply each part, then add the parts.
+  c5m4_zeros: Multiplying by 10 puts one zero at the end; by 100 puts two zeros.
+  c5m4_which: 'Decide first: is the story about equal groups put together (multiply) or a total shared out (divide)?'
+  c5m4_long: 'Divide one place at a time from the left: divide, multiply, subtract, bring down the next digit.'
+  c5m4_left: The remainder is what is left after the equal groups. It must be smaller than the number you divide by.
+  c5m4_roundup: 'If some are left over in a story, ask: do those leftovers still need a place of their own?'
 concepts:
 - code: cbse5m.trav2.mult
   title: Multiplying for trips
@@ -94,6 +100,52 @@ concepts:
           - 20
           - 29
         say: Not enough people yet. 25 × 30 = 750.
+  lesson:
+    - teach: Multiplying is adding equal groups quickly. 12 tickets at ₹45 each is 45 + 45 + ... twelve times, which is 45 × 12.
+      check:
+        prompt: 6 buses each carry 40 people. Which sum gives the total?
+        options:
+        - 40 × 6
+        - 40 + 6
+        - 40 − 6
+        answer: 40 × 6
+        why: 6 equal groups of 40.
+    - teach: To multiply by a 2-digit number, split it into tens and ones. 36 × 24 = 36 × 20 + 36 × 4 = 720 + 144 = 864.
+      picture:
+        kind: area_grid
+        cols:
+        - size: 3
+          label: '20'
+        - size: 1
+          label: '4'
+        rows:
+        - size: 3
+          label: '30'
+        - size: 1
+          label: '6'
+        cells:
+        - - '600'
+          - '120'
+        - - '120'
+          - '24'
+        alt: 36 × 24 split into 30 × 20, 30 × 4, 6 × 20 and 6 × 4, which add to 864.
+      check:
+        prompt: What is 23 × 10?
+        options:
+        - '230'
+        - 2,300
+        - '33'
+        answer: '230'
+        why: Multiplying by 10 puts one zero at the end.
+    - teach: 'Multiplying by 10 puts a zero at the end (58 × 10 = 580). Multiplying by 100 puts two zeros (58 × 100 = 5,800). Use this to multiply by 20, 30 or 200 quickly: 15 × 30 = 15 × 3 × 10 = 450.'
+      check:
+        prompt: What is 7 × 200?
+        options:
+        - 1,400
+        - '140'
+        - 14,000
+        answer: 1,400
+        why: 7 × 2 = 14, then two zeros for the 100.
   items:
   - prompt: A bus ticket costs ₹45. How much do 12 tickets cost in rupees?
     answer: '540'
@@ -151,6 +203,111 @@ concepts:
     - 72 × 10 + 72 × 8.
     solution: 72 × 18 = 720 + 576 = 1,296 seats.
     mistakes: {"1206": "m5_times_carry", "90": "m5_times_carry"}
+  - prompt: What is 125 × 6?
+    answer: '750'
+    check: 125*6
+    difficulty: 1
+    hints:
+    - Multiply 100, 20 and 5 by 6 separately.
+    - 600 + 120 + 30.
+    solution: 'Step 1: 100×6=600, 20×6=120, 5×6=30. Step 2: 600+120+30 = 750.'
+    mistakes:
+      '720': c5m4_split
+      '630': c5m4_split
+  - prompt: What is 43 × 100?
+    answer: '4300'
+    check: 43*100
+    difficulty: 1
+    hints:
+    - Multiplying by 100 adds zeros.
+    - How many zeros does 100 have?
+    solution: 'Step 1: 100 has two zeros. Step 2: 43 → 4,300.'
+    mistakes:
+      '430': c5m4_zeros
+      '43000': c5m4_zeros
+  - prompt: What is 27 × 15?
+    answer: '405'
+    check: 27*15
+    difficulty: 2
+    hints:
+    - Split 15 into 10 and 5.
+    - 27 × 10 = 270; now find 27 × 5.
+    solution: 'Step 1: 27 × 10 = 270, 27 × 5 = 135. Step 2: 270 + 135 = 405.'
+    mistakes:
+      '270': c5m4_split
+      '135': c5m4_split
+      '42': c5m4_which
+  - prompt: A van travels 48 km every hour. How far does it go in 12 hours, in km?
+    answer: '576'
+    check: 48*12
+    difficulty: 2
+    hints:
+    - 12 equal groups of 48.
+    - 48 × 10 + 48 × 2.
+    solution: 'Step 1: 48 × 10 = 480, 48 × 2 = 96. Step 2: 480 + 96 = 576 km.'
+    mistakes:
+      '60': c5m4_which
+      '480': c5m4_split
+      '4': c5m4_which
+  - prompt: A hotel room costs ₹850 a night. What do 3 nights cost, in rupees?
+    answer: '2550'
+    check: 850*3
+    difficulty: 1
+    hints:
+    - 3 equal amounts of 850.
+    - 800 × 3 and 50 × 3.
+    solution: 'Step 1: 800×3 = 2,400, 50×3 = 150. Step 2: 2,550.'
+    mistakes:
+      '853': c5m4_which
+      '2450': c5m4_split
+  - prompt: What is 30 × 40?
+    answer: '1200'
+    check: 30*40
+    difficulty: 2
+    hints:
+    - Multiply 3 × 4 first.
+    - Then count the zeros in both numbers.
+    solution: 'Step 1: 3 × 4 = 12. Step 2: two zeros: 1,200.'
+    mistakes:
+      '120': c5m4_zeros
+      '12000': c5m4_zeros
+      '70': c5m4_which
+  - prompt: A plane has 32 rows with 6 seats in each row. How many seats?
+    answer: '192'
+    check: 32*6
+    difficulty: 2
+    hints:
+    - 32 groups of 6.
+    - 30 × 6 and 2 × 6.
+    solution: 'Step 1: 30×6 = 180, 2×6 = 12. Step 2: 192 seats.'
+    mistakes:
+      '38': c5m4_which
+      '182': c5m4_split
+  - prompt: Which is the same as 25 × 16?
+    options:
+    - 25 × 10 + 25 × 6
+    - 25 × 10 + 6
+    - 25 + 16
+    answer: 25 × 10 + 25 × 6
+    difficulty: 3
+    hints:
+    - 16 = 10 + 6.
+    - Each part of 16 must be multiplied by 25.
+    solution: 'Step 1: split 16 into 10 + 6. Step 2: 25 × 10 + 25 × 6 = 250 + 150 = 400.'
+    mistakes:
+      25 × 10 + 6: c5m4_split
+      25 + 16: c5m4_which
+  - prompt: A school trip has 4 buses with 45 children each and 2 teachers per bus. How many people in all?
+    answer: '188'
+    check: 4*45+4*2
+    difficulty: 3
+    hints:
+    - Find the people on one bus first.
+    - 45 children + 2 teachers per bus.
+    solution: 'Step 1: one bus has 45 + 2 = 47. Step 2: 4 × 47 = 188.'
+    mistakes:
+      '180': c5m4_which
+      '182': c5m4_which
 - code: cbse5m.trav2.div
   title: Sharing and dividing
   after:
@@ -259,6 +416,43 @@ concepts:
           - 13
           - 50
         say: More than you have. 8 × 12 = 96.
+  lesson:
+    - teach: 'Dividing shares a total into equal groups, or finds how many groups fit. 96 sweets shared among 4 children: 96 ÷ 4 = 24 each. Check by multiplying back: 24 × 4 = 96.'
+      check:
+        prompt: Which multiplication checks 56 ÷ 7 = 8?
+        options:
+        - 8 × 7 = 56
+        - 8 + 7 = 15
+        - 56 × 7
+        answer: 8 × 7 = 56
+        why: Answer × divisor gives back the total.
+    - teach: 'Long division works one place at a time from the left: divide, multiply, subtract, bring down. For 735 ÷ 5: 7 ÷ 5 = 1 r 2; bring down 3 to make 23; 23 ÷ 5 = 4 r 3; bring down 5 to make 35; 35 ÷ 5 = 7. Answer 147.'
+      picture:
+        kind: flow
+        steps:
+        - Divide
+        - Multiply
+        - Subtract
+        - Bring down
+        - Repeat
+        alt: The four steps of long division, repeated for each digit.
+      check:
+        prompt: What is the first step of long division?
+        options:
+        - Divide the first digit(s)
+        - Add all digits
+        - Bring down the last digit
+        answer: Divide the first digit(s)
+        why: You start dividing from the left.
+    - teach: 'Sometimes some are left over: 50 ÷ 8 = 6 remainder 2. The remainder is always smaller than the divisor. In a story, think about the leftovers: 50 children in cars of 8 need 7 cars, because the last 2 children still need a car.'
+      check:
+        prompt: 26 eggs go in trays of 6. How many full trays?
+        options:
+        - '4'
+        - '5'
+        - '6'
+        answer: '4'
+        why: 4 × 6 = 24; 2 eggs are left over, not a full tray.
   items:
   - prompt: 96 sweets are shared equally among 4 children. How many does each get?
     answer: '24'
@@ -316,3 +510,106 @@ concepts:
     - 12 × 12 = 144.
     solution: 144 ÷ 12 = 12 pieces.
     mistakes: {"10": "m5_divide_check", "132": "m5_divide_check"}
+  - prompt: What is 84 ÷ 4?
+    answer: '21'
+    check: 84//4
+    difficulty: 1
+    hints:
+    - 'Divide the tens first: 8 ÷ 4.'
+    - 'Then the ones: 4 ÷ 4.'
+    solution: 'Step 1: 8 tens ÷ 4 = 2 tens. Step 2: 4 ÷ 4 = 1. Answer 21.'
+    mistakes:
+      '336': c5m4_which
+      '12': c5m4_long
+  - prompt: What is 648 ÷ 6?
+    answer: '108'
+    check: 648//6
+    difficulty: 2
+    hints:
+    - '6 ÷ 6 = 1. Then 4 ÷ 6 does not go: write 0.'
+    - Bring down to make 48.
+    solution: 'Step 1: 6÷6=1; 4÷6=0 r 4. Step 2: 48÷6=8. Answer 108.'
+    mistakes:
+      '18': c5m4_long
+      '180': c5m4_long
+  - prompt: 43 ÷ 5 gives 8 and what remainder?
+    answer: '3'
+    check: 43%5
+    difficulty: 1
+    hints:
+    - 8 × 5 = 40.
+    - How much more is 43 than 40?
+    solution: 'Step 1: 8 × 5 = 40. Step 2: 43 − 40 = 3.'
+    mistakes:
+      '8': c5m4_left
+      '5': c5m4_left
+      '0': c5m4_left
+  - prompt: 38 people need boats. Each boat holds 6. How many boats are needed?
+    answer: '7'
+    check: -(-38//6)
+    difficulty: 2
+    hints:
+    - 38 ÷ 6 = 6 remainder 2.
+    - Do the 2 leftover people need a boat?
+    solution: 'Step 1: 6 boats carry 36. Step 2: 2 people are left, so one more boat: 7.'
+    mistakes:
+      '6': c5m4_roundup
+      '2': c5m4_left
+  - prompt: ₹960 is shared equally among 8 friends. How much does each get, in rupees?
+    answer: '120'
+    check: 960//8
+    difficulty: 2
+    hints:
+    - Shared equally means divide.
+    - 96 ÷ 8 = 12, then think about the zero.
+    solution: 'Step 1: 96 tens ÷ 8 = 12 tens. Step 2: = ₹120.'
+    mistakes:
+      '7680': c5m4_which
+      '12': c5m4_zeros
+  - prompt: A rope is 90 m long. It is cut into pieces of 15 m. How many pieces?
+    answer: '6'
+    check: 90//15
+    difficulty: 2
+    hints:
+    - How many 15s fit in 90?
+    - 'Count in 15s: 15, 30, 45...'
+    solution: 'Step 1: 90 ÷ 15. Step 2: = 6 pieces.'
+    mistakes:
+      '75': c5m4_which
+      '5': c5m4_long
+  - prompt: A train goes 360 km in 4 hours at the same speed. How far does it go in 1 hour, in km?
+    answer: '90'
+    check: 360//4
+    difficulty: 2
+    hints:
+    - Share 360 into 4 equal parts.
+    - 36 ÷ 4 = 9.
+    solution: 'Step 1: 360 ÷ 4. Step 2: = 90 km each hour.'
+    mistakes:
+      '1440': c5m4_which
+      '9': c5m4_zeros
+  - prompt: Which division has remainder 0?
+    options:
+    - 72 ÷ 9
+    - 73 ÷ 9
+    - 70 ÷ 9
+    answer: 72 ÷ 9
+    difficulty: 3
+    hints:
+    - Remainder 0 means it divides exactly.
+    - Which number is in the 9 times table?
+    solution: 'Step 1: 9 × 8 = 72. Step 2: so 72 ÷ 9 has no remainder.'
+    mistakes:
+      73 ÷ 9: c5m4_left
+      70 ÷ 9: c5m4_left
+  - prompt: A box holds 12 pencils. How many full boxes can be packed from 100 pencils?
+    answer: '8'
+    check: 100//12
+    difficulty: 3
+    hints:
+    - 12 × 8 = 96.
+    - Are the 4 leftover pencils a full box?
+    solution: 'Step 1: 100 ÷ 12 = 8 remainder 4. Step 2: only 8 boxes are full.'
+    mistakes:
+      '9': c5m4_roundup
+      '4': c5m4_left

@@ -13,6 +13,9 @@ tips:
   c10m9_upside: Check which side goes on top. tan θ = height ÷ ground distance, so the ground distance = height ÷ tan θ.
   c10m9_two_points: With two observation points, write one tan equation for each triangle and subtract the ground distances.
   c10m9_observer: Add the observer's eye height (or the building's height) to the part you worked out from the triangle.
+  pq10m9_which_ratio: The string is the hypotenuse and the height is opposite the angle. Which ratio links those two?
+  pq10m9_string_slants: The string slants up; it is not along the ground. Use the ratio that has the hypotenuse in it.
+  pq10m9_shadow_flip: tan θ = height ÷ shadow, not shadow ÷ height.
 concepts:
 - code: cbse10m.trig.heights
   title: Heights and distances
@@ -157,6 +160,11 @@ concepts:
         - Hypotenuse
         answer: Opposite
         why: BT is across from the angle at P.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw the tower as a vertical line and the ground as a horizontal line. Step 2: Mark where you stand and join it to the top: that is the line of sight. Step 3: The angle between the ground and the line of sight is the angle of elevation. Step 4: You now have a right triangle, with the right angle at the foot of the tower.'
+      - style: real_world
+        teach: Someone flying a kite looks up at it. The angle their eyes lift from looking straight ahead is the angle of elevation. The string is the slanting side, and the kite's height above their hand is the side opposite that angle.
     - teach: 'Choose the ratio that links what you know and what you want. Height and ground distance: tan θ = height ÷ distance. Height and a slanting string or ladder: sin θ = height ÷ length. Example: 20 m from a tree, elevation 45°: height = 20 × tan 45° = 20 m.'
       check:
         prompt: A ladder of length L leans at angle θ to the ground. Which gives the height it reaches?
@@ -166,6 +174,42 @@ concepts:
         - L tan θ
         answer: L sin θ
         why: Height is opposite, ladder is the hypotenuse, so sin.
+      ways:
+      - style: visual
+        teach: '20 m from the tree, the top is at 45°. Height is opposite the angle and the 20 m is adjacent, so use tan: h = 20 × tan 45° = 20 m.'
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 1
+            - 1
+            F:
+            - 8
+            - 1
+            T:
+            - 8
+            - 8
+          segments:
+          - - O
+            - F
+            - 20 m
+          - - F
+            - T
+            - h
+          - - O
+            - T
+          angles:
+          - at: O
+            from: F
+            to: T
+            label: 45°
+          - at: F
+            from: O
+            to: T
+            label: 90°
+          alt: An observer O 20 metres from the foot F of a tree, looking up at the top T at 45 degrees. The height h is unknown.
+      - style: step_by_step
+        teach: 'Step 1: Mark what you know: distance 20 m and angle 45°. Step 2: Mark what you want: the height h, opposite the angle. Step 3: Opposite and adjacent together means tan. Step 4: tan 45° = h/20, and tan 45° = 1. Step 5: So h = 20 m.'
     - teach: 'Looking down from a height, the angle between the horizontal and your line of sight is the angle of depression. It equals the angle of elevation seen from the object below (alternate angles). Example: from a 30 m building, a car is at depression 30°. Then tan 30° = 30 ÷ d, so d = 30√3 m.'
       check:
         prompt: From the top of a tower, a stone's angle of depression is 40°. From the stone, the top's angle of elevation is…
@@ -175,6 +219,47 @@ concepts:
         - 140°
         answer: 40°
         why: Alternate angles between horizontal lines are equal.
+      ways:
+      - style: visual
+        teach: From the top of a 30 m building, the car is 30° below the horizontal. The same 30° appears at the car looking up (alternate angles), so tan 30° = 30/d.
+        picture:
+          kind: geometry
+          points:
+            B:
+            - 1
+            - 6
+            F:
+            - 1
+            - 1
+            C:
+            - 9.66
+            - 1
+            _H:
+            - 9.66
+            - 6
+          segments:
+          - - F
+            - B
+            - 30 m
+          - - F
+            - C
+            - d
+          - - B
+            - C
+          - - B
+            - _H
+          angles:
+          - at: B
+            from: _H
+            to: C
+            label: 30°
+          - at: C
+            from: F
+            to: B
+            label: 30°
+          alt: A building 30 metres tall. The angle of depression from the top to a car is 30 degrees, equal to the angle of elevation from the car to the top. The ground distance is d.
+      - style: step_by_step
+        teach: 'Step 1: Draw the horizontal line at the top. Step 2: The angle down from it to the car is the angle of depression, 30°. Step 3: By alternate angles, the angle of elevation from the car up to the top is also 30°. Step 4: tan 30° = 30/d, so d = 30 ÷ (1/√3) = 30√3 ≈ 52 m.'
   items:
   - prompt: From a point 30 m from the foot of a tower, the angle of elevation of the top is 45°. Find the height in metres.
     answer: '30'
@@ -367,3 +452,70 @@ concepts:
     mistakes:
       d = d√3 + 7: c10m9_two_points
       d = 7: c10m9_two_points
+  - prompt: 'Assertion (A): If the angle of elevation of the top of a tower from a point 10 m from its foot is 45°, the tower is 10 m tall.
+
+      Reason (R): tan 45° = 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Height = 10 × tan 45°. By R that is 10 × 1 = 10 m. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The angle of depression of a boat seen from a cliff top equals the angle of elevation of the cliff top seen from the boat.
+
+      Reason (R): The two angles are alternate angles between parallel horizontal lines.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'The horizontal at the cliff top and the sea level are parallel, and the line of sight cuts both. By R the angles are alternate angles, so they are equal: A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A kite flies on a 60 m string that makes 30° with the ground. Taking the string as straight, how high is the kite?'
+    options:
+    - 30 m
+    - 30√3 m
+    - 60√3 m
+    answer: 30 m
+    hints:
+    - The string is the hypotenuse; the height is opposite the 30° angle.
+    - sin 30° = height ÷ 60.
+    solution: sin 30° = h/60, so h = 60 × 1/2 = 30 m.
+    mistakes:
+      30√3 m: pq10m9_which_ratio
+      60√3 m: pq10m9_string_slants
+    exam: case
+    difficulty: 2
+  - prompt: A tower's shadow is √3 times its height. The angle of elevation of the sun is
+    options:
+    - 30°
+    - 60°
+    - 45°
+    answer: 30°
+    hints:
+    - tan θ = height ÷ shadow.
+    - height ÷ (√3 × height) = 1/√3.
+    solution: tan θ = h/(√3 h) = 1/√3, so θ = 30°.
+    mistakes:
+      60°: pq10m9_shadow_flip
+    exam: one_mark
+    difficulty: 1

@@ -15,6 +15,9 @@ tips:
   p11_resultant: "R² = A² + B² + 2AB cos θ. cos 120° is negative."
   p11_time_flight: "T = 2u sin θ ÷ g. The 2 covers going up and coming down. Put in u, sin 30° = ½ and g."
   p11_vector: "A vector needs a direction. Speed tells how fast; which one also says which way?"
+  c11p03_vec: Draw the two vectors tail to head. If they are at right angles use Pythagoras; otherwise use R² = A² + B² + 2AB cos θ.
+  c11p03_comp: The component next to the angle uses cos; the one opposite uses sin.
+  c11p03_proj: Split the launch speed into u cos θ (steady) and u sin θ (slowed by g). Then use the formula for T, H or R.
 concepts:
 - code: cbse11p.plane.vectors
   title: Vectors and their addition
@@ -125,6 +128,46 @@ concepts:
           b: 5
           c: 0
         say: At 90° they give 7.07 N. Open the angle further.
+  lesson:
+    - teach: 'A scalar has only size (mass, speed, time). A vector has size and direction (displacement, velocity, force). Vectors add by the triangle rule: put the tail of the second at the head of the first.'
+      check:
+        prompt: Which is a scalar?
+        options:
+        - speed
+        - force
+        - displacement
+        answer: speed
+        why: Speed has no direction attached.
+    - teach: 'For vectors A and B at angle θ: R = √(A² + B² + 2AB cos θ). At 90°, R = √(A² + B²). Same direction gives A + B (largest); opposite gives |A − B| (smallest).'
+      check:
+        prompt: 6 N and 8 N at right angles. Resultant?
+        options:
+        - 10 N
+        - 14 N
+        - 2 N
+        answer: 10 N
+        why: √(36 + 64) = 10.
+    - teach: A vector A at angle θ to the x-axis has components A_x = A cos θ and A_y = A sin θ. In unit-vector form A = A_x î + A_y ĵ, and |A| = √(A_x² + A_y²).
+      picture:
+        kind: compare
+        columns:
+        - title: Component
+          points:
+          - along the angle (x)
+          - across the angle (y)
+        - title: Formula
+          points:
+          - A cos θ
+          - A sin θ
+        alt: Resolving a vector into components.
+      check:
+        prompt: 20 N at 30° to the horizontal. Vertical component?
+        options:
+        - 10 N
+        - 17.3 N
+        - 20 N
+        answer: 10 N
+        why: 20 sin 30° = 10.
   items:
   - prompt: Two forces of 3 N and 4 N act at right angles. Find the resultant (in N).
     answer: '5'
@@ -185,6 +228,114 @@ concepts:
     - 5 + 12.
     solution: 17 N when they point the same way.
     mistakes: {"13": "p11_max_resultant", "7": "p11_max_resultant"}
+  - prompt: Two forces of 5 N and 12 N act at right angles. Find the resultant (in N).
+    answer: '13'
+    check: (25+144)**0.5
+    difficulty: 1
+    hints:
+    - 'Right angle: use Pythagoras.'
+    - √(5² + 12²).
+    solution: 'Step 1: 25 + 144 = 169. Step 2: 13 N.'
+    mistakes:
+      '17': c11p03_vec
+      '7': c11p03_vec
+  - prompt: What is the smallest possible resultant of forces 7 N and 3 N (in N)?
+    answer: '4'
+    check: 7-3
+    difficulty: 1
+    hints:
+    - Smallest when they point opposite ways.
+    - Subtract.
+    solution: 'Step 1: opposite directions. Step 2: 7 − 3 = 4 N.'
+    mistakes:
+      '10': c11p03_vec
+      '0': c11p03_vec
+  - prompt: Pick the vector quantity.
+    options:
+    - momentum
+    - energy
+    - temperature
+    answer: momentum
+    difficulty: 1
+    hints:
+    - Which one has a direction?
+    - p = mv, and v has a direction.
+    solution: 'Step 1: momentum = mass × velocity. Step 2: it is a vector.'
+    mistakes:
+      energy: c11p03_vec
+      temperature: c11p03_vec
+  - prompt: A 30 N force acts at 60° to the horizontal. Find its vertical component (in N, to the nearest whole).
+    answer: '26'
+    check: round(30*0.866)
+    difficulty: 2
+    hints:
+    - Vertical is across from the 60° angle.
+    - sin 60° ≈ 0.866.
+    solution: 'Step 1: 30 sin 60°. Step 2: ≈ 26 N.'
+    mistakes:
+      '15': c11p03_comp
+      '30': c11p03_comp
+  - prompt: Find the magnitude of 5î − 12ĵ.
+    answer: '13'
+    check: (25+144)**0.5
+    difficulty: 2
+    hints:
+    - '|A| = √(A_x² + A_y²).'
+    - The minus sign disappears when squared.
+    solution: 'Step 1: √(25 + 144). Step 2: 13.'
+    mistakes:
+      '7': c11p03_vec
+      '17': c11p03_vec
+  - prompt: Two forces of 4 N each act at 60°. Find the resultant (in N, to 1 decimal place).
+    answer: '6.9'
+    check: round((16+16+2*16*0.5)**0.5,1)
+    difficulty: 2
+    hints:
+    - Use R² = A² + B² + 2AB cos θ.
+    - cos 60° = ½.
+    solution: 'Step 1: R² = 16 + 16 + 16 = 48. Step 2: R = √48 ≈ 6.9 N.'
+    mistakes:
+      '8': c11p03_vec
+      '4': c11p03_vec
+  - prompt: Multiplying a vector by −2 does what?
+    options:
+    - doubles its length and reverses its direction
+    - halves its length
+    - only reverses its direction
+    answer: doubles its length and reverses its direction
+    difficulty: 2
+    hints:
+    - The number 2 changes the length.
+    - The minus sign changes the direction.
+    solution: 'Step 1: |−2| = 2 doubles the length. Step 2: the minus reverses it.'
+    mistakes:
+      halves its length: c11p03_vec
+      only reverses its direction: c11p03_vec
+  - prompt: A = 3î + 4ĵ and B = î − 2ĵ. Find |A + B|.
+    options:
+    - 2√5
+    - '6'
+    - '4'
+    answer: 2√5
+    difficulty: 3
+    hints:
+    - Add î parts and ĵ parts separately.
+    - Then find the magnitude.
+    solution: 'Step 1: A + B = 4î + 2ĵ. Step 2: √20 = 2√5.'
+    mistakes:
+      '6': c11p03_vec
+      '4': c11p03_vec
+  - prompt: Rain falls vertically at 3 m/s; a person walks at 4 m/s. At what speed does the rain seem to hit the person (in m/s)?
+    answer: '5'
+    check: (9+16)**0.5
+    difficulty: 3
+    hints:
+    - Relative velocity = rain velocity − person velocity.
+    - The two are at right angles.
+    solution: 'Step 1: √(3² + 4²). Step 2: 5 m/s.'
+    mistakes:
+      '7': c11p03_vec
+      '1': c11p03_vec
 - code: cbse11p.plane.projectile
   title: Projectile and circular motion
   after:
@@ -292,6 +443,48 @@ concepts:
           - 0
           - 39
         say: Short. The fall from 20 m lasts 2 s, so u = 40 ÷ 2.
+  lesson:
+    - teach: A projectile launched at speed u and angle θ keeps a steady horizontal velocity u cos θ, while its vertical velocity u sin θ is slowed and reversed by g. The path is a parabola.
+      check:
+        prompt: 'At the top of a projectile''s path, its velocity is:'
+        options:
+        - horizontal, u cos θ
+        - zero
+        - vertical
+        answer: horizontal, u cos θ
+        why: Only the vertical part becomes zero.
+    - teach: Time of flight T = 2u sin θ/g. Maximum height H = u² sin²θ/2g. Range R = u² sin 2θ/g, greatest at 45° (R = u²/g). Angles θ and 90° − θ give the same range.
+      check:
+        prompt: u = 10 m/s, θ = 45°, g = 10. Range?
+        options:
+        - 10 m
+        - 5 m
+        - 20 m
+        answer: 10 m
+        why: u²/g = 100/10.
+    - teach: In uniform circular motion the speed stays constant but the direction keeps changing, so there is an acceleration v²/r = ω²r towards the centre. v = ωr and ω = 2π/T.
+      picture:
+        kind: compare
+        columns:
+        - title: Quantity
+          points:
+          - T
+          - H
+          - R
+        - title: Formula
+          points:
+          - 2u sin θ / g
+          - u² sin²θ / 2g
+          - u² sin 2θ / g
+        alt: Projectile formulas.
+      check:
+        prompt: A wheel turns once every 2 s. ω = ?
+        options:
+        - π rad/s
+        - 2π rad/s
+        - 4π rad/s
+        answer: π rad/s
+        why: 2π/2.
   items:
   - prompt: A ball is thrown at 20 m/s at 45°. Taking g = 10 m/s², find its range (in m).
     answer: '40'
@@ -356,3 +549,108 @@ concepts:
     - Complementary angles.
     solution: θ and 90° − θ give the same range.
     mistakes: {"different ranges": "p11_complementary", "zero range": "p11_complementary", "range only at 60°": "p11_complementary"}
+  - prompt: A ball is thrown at 10 m/s at 30° (g = 10). Find its time of flight (in s).
+    answer: '1'
+    check: 2*10*0.5/10
+    difficulty: 1
+    hints:
+    - T = 2u sin θ/g.
+    - sin 30° = ½.
+    solution: 'Step 1: 2 × 10 × ½ / 10. Step 2: 1 s.'
+    mistakes:
+      '2': c11p03_proj
+      '0.5': c11p03_proj
+  - prompt: Find the maximum range of a projectile launched at 30 m/s (g = 10) (in m).
+    answer: '90'
+    check: 900/10
+    difficulty: 1
+    hints:
+    - Maximum range is at 45°.
+    - R_max = u²/g.
+    solution: 'Step 1: 900/10. Step 2: 90 m.'
+    mistakes:
+      '45': c11p03_proj
+      '3': c11p03_proj
+  - prompt: Which part of a projectile's velocity stays constant (no air)?
+    options:
+    - horizontal
+    - vertical
+    - neither
+    answer: horizontal
+    difficulty: 1
+    hints:
+    - Gravity acts only downward.
+    - Nothing pushes or pulls sideways.
+    solution: 'Step 1: no horizontal force. Step 2: horizontal velocity constant.'
+    mistakes:
+      vertical: c11p03_proj
+      neither: c11p03_proj
+  - prompt: A ball is thrown at 20 m/s at 60° (g = 10). Find the maximum height (in m).
+    answer: '15'
+    check: 400*0.75/20
+    difficulty: 2
+    hints:
+    - H = u² sin²θ / 2g.
+    - sin²60° = 3/4.
+    solution: 'Step 1: 400 × ¾ / 20. Step 2: 15 m.'
+    mistakes:
+      '20': c11p03_proj
+      '5': c11p03_proj
+  - prompt: A stone is thrown horizontally at 5 m/s from a 20 m cliff (g = 10). How far from the base does it land (in m)?
+    answer: '10'
+    check: 5*2
+    difficulty: 2
+    hints:
+    - Find the fall time from 20 = ½ g t².
+    - Horizontal distance = 5 × time.
+    solution: 'Step 1: t = 2 s. Step 2: 5 × 2 = 10 m.'
+    mistakes:
+      '20': c11p03_proj
+      '100': c11p03_proj
+  - prompt: A stone on a 0.5 m string whirls at 4 m/s. Find the centripetal acceleration (in m/s²).
+    answer: '32'
+    check: 16/0.5
+    difficulty: 2
+    hints:
+    - a = v²/r.
+    - 16 ÷ 0.5.
+    solution: 'Step 1: 16/0.5. Step 2: 32 m/s².'
+    mistakes:
+      '8': c11p03_proj
+      '2': c11p03_proj
+  - prompt: Which launch angle gives the same range as 20° (same speed)?
+    options:
+    - 70°
+    - 40°
+    - 160°
+    answer: 70°
+    difficulty: 2
+    hints:
+    - Complementary angles give equal ranges.
+    - They add to 90°.
+    solution: 'Step 1: 90° − 20°. Step 2: 70°.'
+    mistakes:
+      40°: c11p03_proj
+      160°: c11p03_proj
+  - prompt: At 45° a projectile's range is 80 m. Find its maximum height (in m).
+    answer: '20'
+    check: 80/4
+    difficulty: 3
+    hints:
+    - At 45°, R = u²/g and H = u²/4g.
+    - So H = R/4.
+    solution: 'Step 1: H/R = 1/4. Step 2: 20 m.'
+    mistakes:
+      '40': c11p03_proj
+      '80': c11p03_proj
+  - prompt: A body moves in a circle of radius 2 m, making 1 round each 2π s. Find its speed (in m/s).
+    answer: '2'
+    check: 2*1
+    difficulty: 3
+    hints:
+    - ω = 2π / T.
+    - v = ωr.
+    solution: 'Step 1: ω = 1 rad/s. Step 2: v = 1 × 2 = 2 m/s.'
+    mistakes:
+      '4': c11p03_proj
+      '1': c11p03_proj

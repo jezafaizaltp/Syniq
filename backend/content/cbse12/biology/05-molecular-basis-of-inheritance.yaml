@@ -15,6 +15,9 @@ tips:
   b12_sense_codons: "Total codons minus the three stop codons."
   b12_splicing: "Capping and tailing add to the ends. Cutting out introns is a different step."
   b12_start_codon: "UAA, UAG and UGA are stop codons. The start codon codes for methionine."
+  c12b5_pair: 'Use base pairing: A pairs with T (U in RNA) and G pairs with C, so A = T and G = C in double-stranded DNA.'
+  c12b5_code: Codons are read three bases at a time; stop codons code for no amino acid.
+  c12b5_exp: 'Link each classic experiment to what it showed: Griffith (transformation), Hershey–Chase (DNA is genetic material), Meselson–Stahl (semi-conservative).'
 concepts:
 - code: cbse12b.mol.dna
   title: DNA structure and replication
@@ -92,6 +95,54 @@ concepts:
       - when:
           a: 50
         say: 'All A–T: only 2 bonds per pair, the weakest. G–C pairs have 3.'
+  lesson:
+    - teach: 'A nucleotide has a nitrogenous base, a deoxyribose sugar and a phosphate. Nucleotides join by phosphodiester bonds. Watson and Crick (1953) showed DNA is a double helix of two antiparallel strands; A pairs with T by 2 hydrogen bonds and G with C by 3. One turn has 10 base pairs and is 3.4 nm long. Chargaff''s rule: A = T and G = C.'
+      picture:
+        kind: compare
+        columns:
+        - title: Pair
+          points:
+          - A–T
+          - G–C
+        - title: H bonds
+          points:
+          - '2'
+          - '3'
+        alt: Base pairs of DNA and the number of hydrogen bonds in each.
+      check:
+        prompt: 'In double-stranded DNA, the amount of A equals the amount of:'
+        options:
+        - T
+        - G
+        - C
+        answer: T
+        why: Every A on one strand pairs with a T on the other.
+    - teach: Griffith showed a 'transforming principle' turned harmless R strain Pneumococcus into deadly S strain. Avery, MacLeod and McCarty showed this principle is DNA. Hershey and Chase grew phages with radioactive phosphorus (DNA) or sulphur (protein); only the phosphorus entered bacteria, proving DNA is the genetic material. Human DNA is about 2.2 m long and is packed around histone octamers as nucleosomes.
+      check:
+        prompt: 'In Hershey and Chase''s experiment, the label that entered bacteria was:'
+        options:
+        - ³²P in DNA
+        - ³⁵S in protein
+        - ¹⁵N in protein
+        answer: ³²P in DNA
+        why: DNA has phosphorus; protein coats stayed outside.
+    - teach: 'DNA replication is semi-conservative: each new molecule keeps one old strand. Meselson and Stahl showed this using heavy ¹⁵N and light ¹⁴N in E. coli. DNA polymerase adds nucleotides only 5′→3′, so the leading strand is made continuously and the lagging strand in short Okazaki fragments joined by DNA ligase.'
+      picture:
+        kind: flow
+        steps:
+        - parent DNA (old + old)
+        - strands separate
+        - each strand is a template
+        - two DNAs (old + new each)
+        alt: 'Semi-conservative replication: each daughter DNA keeps one old strand.'
+      check:
+        prompt: 'Okazaki fragments are joined by:'
+        options:
+        - DNA ligase
+        - helicase
+        - RNA polymerase
+        answer: DNA ligase
+        why: Ligase seals the gaps between fragments.
   items:
   - prompt: A DNA sample has 30% adenine. What percentage is guanine?
     answer: '20'
@@ -160,6 +211,127 @@ concepts:
     - Not S.
     solution: DNA.
     mistakes: {"protein": "b12_hershey", "RNA": "b12_hershey", "lipid": "b12_hershey"}
+  - prompt: A DNA molecule has 1,000 base pairs, of which 300 are G–C pairs. How many hydrogen bonds hold the strands together?
+    answer: '2300'
+    check: '2300'
+    difficulty: 3
+    hints:
+    - Find the number of A–T pairs first.
+    - Multiply each kind of pair by its hydrogen bonds and add.
+    solution: 'Step 1: A–T pairs = 700; 700 × 2 = 1400. Step 2: 300 × 3 = 900; total 2300.'
+    mistakes:
+      '2000': c12b5_pair
+      '2500': c12b5_pair
+      '3000': c12b5_pair
+  - prompt: 'One strand reads 5′-ATGC-3′. The complementary strand read 3′→5′ is:'
+    options:
+    - TACG
+    - ATGC
+    - GCAT
+    answer: TACG
+    difficulty: 1
+    hints:
+    - Pair each base with its partner.
+    - Keep the order, just swap partners.
+    solution: 'Step 1: A–T, T–A, G–C, C–G. Step 2: 3′-TACG-5′.'
+    mistakes:
+      ATGC: c12b5_pair
+      GCAT: c12b5_pair
+  - prompt: How long (in nm) is one turn of the DNA helix?
+    options:
+    - '3.4'
+    - '0.34'
+    - '34'
+    answer: '3.4'
+    difficulty: 2
+    hints:
+    - Base pairs are 0.34 nm apart.
+    - Multiply by the base pairs in one turn.
+    solution: 'Step 1: 10 × 0.34 nm. Step 2: 3.4 nm.'
+    mistakes:
+      '0.34': c12b5_pair
+      '34': c12b5_pair
+  - prompt: 'The two strands of DNA run in opposite directions. They are:'
+    options:
+    - antiparallel
+    - parallel
+    - identical
+    answer: antiparallel
+    difficulty: 1
+    hints:
+    - One runs 5′→3′, the other 3′→5′.
+    - Anti means opposite.
+    solution: 'Step 1: opposite directions. Step 2: antiparallel.'
+    mistakes:
+      parallel: c12b5_pair
+      identical: c12b5_pair
+  - prompt: 'Griffith''s experiment showed:'
+    options:
+    - transformation of R strain bacteria into S strain
+    - DNA replicates semi-conservatively
+    - the genetic code is triplet
+    answer: transformation of R strain bacteria into S strain
+    difficulty: 1
+    hints:
+    - He worked with Streptococcus pneumoniae and mice.
+    - Heat-killed S plus live R killed the mice.
+    solution: 'Step 1: something passed from dead S to live R. Step 2: transformation.'
+    mistakes:
+      DNA replicates semi-conservatively: c12b5_exp
+      the genetic code is triplet: c12b5_exp
+  - prompt: A nucleosome core has how many histone molecules?
+    answer: '8'
+    check: '8'
+    difficulty: 2
+    hints:
+    - It is a histone octamer.
+    - Octa means…
+    solution: 'Step 1: two each of four histones. Step 2: 8.'
+    mistakes:
+      '4': c12b5_pair
+      '2': c12b5_pair
+  - prompt: 'In Meselson–Stahl''s experiment, after one generation in ¹⁴N, the DNA was:'
+    options:
+    - all hybrid (intermediate density)
+    - half heavy, half light
+    - all light
+    answer: all hybrid (intermediate density)
+    difficulty: 3
+    hints:
+    - Each new DNA keeps one old strand.
+    - Old strands had ¹⁵N, new ones ¹⁴N.
+    solution: 'Step 1: every molecule = one ¹⁵N + one ¹⁴N strand. Step 2: all hybrid.'
+    mistakes:
+      half heavy, half light: c12b5_exp
+      all light: c12b5_exp
+  - prompt: 'Loosely packed, active chromatin is called:'
+    options:
+    - euchromatin
+    - heterochromatin
+    - nucleosome
+    answer: euchromatin
+    difficulty: 1
+    hints:
+    - It stains lightly.
+    - It is transcriptionally active.
+    solution: 'Step 1: loose and active. Step 2: euchromatin.'
+    mistakes:
+      heterochromatin: c12b5_exp
+      nucleosome: c12b5_exp
+  - prompt: DNA polymerase adds new nucleotides in which direction?
+    options:
+    - 5′→3′
+    - 3′→5′
+    - both directions
+    answer: 5′→3′
+    difficulty: 2
+    hints:
+    - It needs a free 3′-OH end.
+    - This is why the lagging strand is made in pieces.
+    solution: 'Step 1: adds to the 3′ end. Step 2: grows 5′→3′.'
+    mistakes:
+      3′→5′: c12b5_exp
+      both directions: c12b5_exp
 - code: cbse12b.mol.expression
   title: Transcription, translation and regulation
   after:
@@ -202,6 +374,43 @@ concepts:
       A ribosome starts at AUG with tRNA carrying methionine: Translation happens in the cytoplasm, so the mRNA must be there first.
       tRNAs bring amino acids; peptide bonds join them: The chain grows only after the start codon sets the reading frame.
       A stop codon ends translation: The stop codon is reached at the end, after the chain has been built.
+  lesson:
+    - teach: 'The central dogma: DNA → RNA → protein (retroviruses also copy RNA back to DNA). In transcription, RNA polymerase reads the template strand (3′→5′) between a promoter and a terminator. The other strand is the coding strand: its sequence matches the mRNA except U replaces T. In eukaryotes the first copy (hnRNA) is processed: introns are spliced out, a cap and a poly-A tail are added.'
+      picture:
+        kind: flow
+        steps:
+        - DNA
+        - transcription
+        - mRNA
+        - translation
+        - protein
+        alt: The central dogma from DNA to protein.
+      check:
+        prompt: Which strand has the same sequence as the mRNA (with T for U)?
+        options:
+        - coding strand
+        - template strand
+        - neither
+        answer: coding strand
+        why: The mRNA is copied from the template, so it matches the coding strand.
+    - teach: 'The genetic code is triplet: 64 codons, 61 for amino acids and 3 stop codons (UAA, UAG, UGA). AUG codes for methionine and is the start codon. The code is degenerate (several codons for one amino acid), unambiguous, nearly universal and non-overlapping. tRNA is the adapter: its anticodon pairs with a codon, and it carries the matching amino acid to the ribosome.'
+      check:
+        prompt: How many stop codons are there?
+        options:
+        - '3'
+        - '1'
+        - '4'
+        answer: '3'
+        why: UAA, UAG and UGA.
+    - teach: Genes are switched on and off as needed. In E. coli's lac operon, a repressor blocks the operator; lactose (the inducer) binds the repressor so the z, y and a genes are transcribed. The Human Genome Project found about 3 × 10⁹ bp and roughly 20,000–25,000 genes. DNA fingerprinting compares repeat regions (VNTRs) and is used in forensics and paternity tests.
+      check:
+        prompt: 'When lactose is absent, the lac genes are:'
+        options:
+        - switched off by the repressor
+        - always on
+        - deleted
+        answer: switched off by the repressor
+        why: The repressor sits on the operator.
   items:
   - prompt: How many codons are there in the genetic code?
     answer: '64'
@@ -270,3 +479,124 @@ concepts:
     solution: Lactose.
     mistakes:
       glucose: c12b_flow
+  - prompt: A coding strand reads 5′-ATGCAT-3′. What is the mRNA?
+    options:
+    - AUGCAU
+    - UACGUA
+    - ATGCAT
+    answer: AUGCAU
+    difficulty: 2
+    hints:
+    - mRNA matches the coding strand.
+    - Swap every T for U.
+    solution: 'Step 1: same as coding strand. Step 2: AUGCAU.'
+    mistakes:
+      UACGUA: c12b5_pair
+      ATGCAT: c12b5_pair
+  - prompt: How many stop codons does the genetic code have?
+    answer: '3'
+    check: '3'
+    difficulty: 1
+    hints:
+    - 64 codons in total.
+    - Subtract the codons that code for amino acids.
+    solution: 'Step 1: 64 − 61. Step 2: 3.'
+    mistakes:
+      '1': c12b5_code
+      '4': c12b5_code
+  - prompt: A protein has 150 amino acids. How many bases code for it in mRNA, including one stop codon?
+    answer: '453'
+    check: '453'
+    difficulty: 3
+    hints:
+    - Each amino acid needs one codon of 3 bases.
+    - Add the stop codon's bases.
+    solution: 'Step 1: 150 × 3 = 450. Step 2: + 3 = 453.'
+    mistakes:
+      '450': c12b5_code
+      '150': c12b5_code
+      '50': c12b5_code
+  - prompt: 'One amino acid coded by several codons shows that the code is:'
+    options:
+    - degenerate
+    - ambiguous
+    - overlapping
+    answer: degenerate
+    difficulty: 1
+    hints:
+    - 61 codons but only 20 amino acids.
+    - The word means 'more than one codon per amino acid'.
+    solution: 'Step 1: many codons, one amino acid. Step 2: degenerate.'
+    mistakes:
+      ambiguous: c12b5_code
+      overlapping: c12b5_code
+  - prompt: 'The adapter molecule in translation is:'
+    options:
+    - tRNA
+    - mRNA
+    - rRNA
+    answer: tRNA
+    difficulty: 1
+    hints:
+    - It reads the codon and carries an amino acid.
+    - It has an anticodon loop.
+    solution: 'Step 1: links codon to amino acid. Step 2: tRNA.'
+    mistakes:
+      mRNA: c12b5_code
+      rRNA: c12b5_code
+  - prompt: 'The anticodon for the codon AUG is:'
+    options:
+    - UAC
+    - TAC
+    - AUG
+    answer: UAC
+    difficulty: 2
+    hints:
+    - Anticodons pair with codons.
+    - tRNA is RNA, so it uses U.
+    solution: 'Step 1: A–U, U–A, G–C. Step 2: UAC.'
+    mistakes:
+      TAC: c12b5_pair
+      AUG: c12b5_pair
+  - prompt: 'Retroviruses copy their RNA into DNA using:'
+    options:
+    - reverse transcriptase
+    - RNA polymerase
+    - DNA ligase
+    answer: reverse transcriptase
+    difficulty: 2
+    hints:
+    - This is the reverse of transcription.
+    - HIV uses this enzyme.
+    solution: 'Step 1: RNA → DNA. Step 2: reverse transcriptase.'
+    mistakes:
+      RNA polymerase: c12b5_exp
+      DNA ligase: c12b5_exp
+  - prompt: Which gene of the lac operon codes for β-galactosidase?
+    options:
+    - z
+    - y
+    - a
+    answer: z
+    difficulty: 2
+    hints:
+    - The genes are z, y, a in order.
+    - y codes permease, a codes transacetylase.
+    solution: 'Step 1: the enzyme that splits lactose. Step 2: z gene.'
+    mistakes:
+      y: c12b5_code
+      a: c12b5_code
+  - prompt: 'DNA fingerprinting is based on differences in:'
+    options:
+    - VNTRs (repetitive DNA)
+    - the genetic code
+    - histone proteins
+    answer: VNTRs (repetitive DNA)
+    difficulty: 2
+    hints:
+    - Alec Jeffreys used satellite DNA.
+    - Repeat numbers vary between people.
+    solution: 'Step 1: repeat counts differ. Step 2: VNTRs.'
+    mistakes:
+      the genetic code: c12b5_exp
+      histone proteins: c12b5_exp

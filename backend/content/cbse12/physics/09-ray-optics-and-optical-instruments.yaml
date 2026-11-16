@@ -15,6 +15,10 @@ tips:
   p12_simple_microscope: "Image at D: m = 1 + D/f."
   p12_telescope: "m = f₀/fₑ."
   p12_telescope_length: "In normal adjustment, length = f₀ + fₑ."
+  c12p9_sign: 'Use the sign convention: distances measured from the pole or optical centre; along the incoming light is +, against it is −. A real object has u negative.'
+  c12p9_refr: "Check two things: is the light going from denser to rarer, and is the angle bigger than the critical angle, where sin C = 1/n?"
+  c12p9_power: 'Power P = 1/f with f in metres. Lenses in contact: add powers.'
+  c12p9_inst: Telescope m = f₀/fₑ, length f₀ + fₑ. Simple microscope m = 1 + D/f with D = 25 cm.
 concepts:
 - code: cbse12p.optics.mirrors
   title: Reflection, refraction and lenses
@@ -116,6 +120,42 @@ concepts:
           - -100
           - -0.01
         say: 'm is negative: a real, inverted image. A magnifier needs the object inside f.'
+  lesson:
+    - teach: 'Spherical mirrors: focal length f = R/2. Mirror formula 1/v + 1/u = 1/f, magnification m = −v/u. With the Cartesian sign convention, a concave mirror has negative f and a real object has negative u.'
+      check:
+        prompt: A mirror has radius of curvature 30 cm. Size of its focal length?
+        options:
+        - 15 cm
+        - 60 cm
+        - 30 cm
+        answer: 15 cm
+        why: f = R/2.
+    - teach: 'Refraction: light bends because its speed changes. n = c/v; Snell''s law n₁ sin i = n₂ sin r. A pool looks shallower: apparent depth = real depth/n. Going from denser to rarer, beyond the critical angle C (sin C = 1/n) light is totally internally reflected: optical fibres, mirages, sparkling diamonds.'
+      picture:
+        kind: flow
+        steps:
+        - Light in glass meets air
+        - 'i < C: refracts out'
+        - 'i = C: grazes the surface'
+        - 'i > C: totally reflected'
+        alt: What happens as the angle inside glass increases past the critical angle.
+      check:
+        prompt: n = 2. Critical angle?
+        options:
+        - 30°
+        - 60°
+        - 45°
+        answer: 30°
+        why: sin C = 1/2.
+    - teach: 'Thin lens formula: 1/v − 1/u = 1/f, m = v/u. Lens maker''s formula 1/f = (n − 1)(1/R₁ − 1/R₂). Power P = 1/f (f in metres) in dioptres; convex lenses have positive power. Lenses in contact: P = P₁ + P₂.'
+      check:
+        prompt: f = +25 cm. Power?
+        options:
+        - +4 D
+        - +25 D
+        - +0.25 D
+        answer: +4 D
+        why: 1/0.25 m = 4 D.
   items:
   - prompt: A lens has focal length 0.5 m. Find its power (dioptre).
     answer: '2'
@@ -177,6 +217,108 @@ concepts:
     solution: From a denser to a rarer medium beyond the critical angle.
     mistakes:
       from air into glass: c12p_tir
+  - prompt: A lens has focal length 0.25 m. Find its power (D).
+    answer: '4'
+    check: 1/Rational(1,4)
+    difficulty: 1
+    hints:
+    - P = 1/f in metres.
+    - 1/0.25.
+    solution: 'Step 1: 1/0.25. Step 2: 4 D.'
+    mistakes:
+      '25': c12p9_power
+      1/4: c12p9_power
+  - prompt: Lenses of +5 D and −2 D are in contact. Total power (D)?
+    answer: '3'
+    check: 5 - 2
+    difficulty: 1
+    hints:
+    - Add powers with signs.
+    - 5 + (−2).
+    solution: 'Step 1: 5 − 2. Step 2: 3 D.'
+    mistakes:
+      '7': c12p9_power
+      '-3': c12p9_power
+  - prompt: Light travels at 2.25 × 10⁸ m/s in water. Find n as a fraction (c = 3 × 10⁸).
+    answer: 4/3
+    check: 3/Rational(225,100)
+    difficulty: 1
+    hints:
+    - n = c/v.
+    - 3/2.25.
+    solution: 'Step 1: 3/2.25. Step 2: 4/3.'
+    mistakes:
+      3/4: c12p9_refr
+      3/2: c12p9_refr
+  - prompt: A convex lens (f = 20 cm) has an object at u = −60 cm. Find v (cm).
+    answer: '30'
+    check: 1/(Rational(1,20) - Rational(1,60))
+    difficulty: 2
+    hints:
+    - 1/v = 1/f + 1/u.
+    - 1/20 − 1/60.
+    solution: 'Step 1: 1/v = 2/60. Step 2: v = 30 cm.'
+    mistakes:
+      '15': c12p9_sign
+      '-30': c12p9_sign
+  - prompt: For that image, find the magnification m = v/u as a fraction.
+    answer: -1/2
+    check: 30/(-60)
+    difficulty: 2
+    hints:
+    - m = v/u.
+    - 30/(−60).
+    solution: 'Step 1: −1/2. Step 2: inverted, half size.'
+    mistakes:
+      1/2: c12p9_sign
+      '-2': c12p9_sign
+  - prompt: A concave mirror (f = −10 cm) has an object at u = −30 cm. Find v (cm).
+    answer: '-15'
+    check: 1/(Rational(-1,10) + Rational(1,30))
+    difficulty: 2
+    hints:
+    - 1/v = 1/f − 1/u.
+    - −1/10 + 1/30.
+    solution: 'Step 1: 1/v = −2/30. Step 2: v = −15 cm (real, in front).'
+    mistakes:
+      '15': c12p9_sign
+      '-30': c12p9_sign
+  - prompt: A coin under 4 m of water (n = 4/3) appears at what depth (m)?
+    answer: '3'
+    check: 4/Rational(4,3)
+    difficulty: 2
+    hints:
+    - Apparent = real/n.
+    - 4 ÷ 4/3.
+    solution: 'Step 1: 4 × 3/4. Step 2: 3 m.'
+    mistakes:
+      16/3: c12p9_refr
+      '4': c12p9_refr
+  - prompt: A biconvex lens (n = 1.5) has R₁ = 20 cm, R₂ = −20 cm. Find f (cm).
+    answer: '20'
+    check: 1/(Rational(1,2)*(Rational(1,20) + Rational(1,20)))
+    difficulty: 3
+    hints:
+    - 1/f = (n − 1)(1/R₁ − 1/R₂).
+    - 0.5 × (1/20 + 1/20).
+    solution: 'Step 1: 0.5 × 1/10 = 1/20. Step 2: f = 20 cm.'
+    mistakes:
+      '10': c12p9_power
+      '40': c12p9_power
+  - prompt: Light in glass (n = √2) meets air at 50°. What happens?
+    options:
+    - total internal reflection
+    - it refracts out
+    - it stops
+    answer: total internal reflection
+    difficulty: 3
+    hints:
+    - sin C = 1/√2, so C = 45°.
+    - Compare 50° with C.
+    solution: 'Step 1: C = 45°. Step 2: 50° > 45°, so it is totally reflected.'
+    mistakes:
+      it refracts out: c12p9_refr
+      it stops: c12p9_refr
 - code: cbse12p.optics.instruments
   title: Prisms and optical instruments
   after:
@@ -278,6 +420,48 @@ concepts:
           - 11
           - 109
         say: 'Right power, but too short: scale both focal lengths up.'
+  lesson:
+    - teach: 'A prism bends light twice. The deviation first falls, then rises as the angle of incidence grows; at minimum deviation δm, n = sin((A + δm)/2)/sin(A/2). For a thin prism, δ = (n − 1)A. Different colours have slightly different n, so white light splits: dispersion.'
+      check:
+        prompt: Thin prism, A = 4°, n = 1.5. Deviation?
+        options:
+        - 2°
+        - 6°
+        - 4°
+        answer: 2°
+        why: (1.5 − 1) × 4.
+    - teach: 'Simple microscope (magnifying glass): m = 1 + D/f with the image at D = 25 cm. Compound microscope: objective forms a real enlarged image, eyepiece magnifies it again; m ≈ (L/f₀)(D/fₑ).'
+      picture:
+        kind: compare
+        columns:
+        - title: Microscope
+          points:
+          - small f₀
+          - views near tiny things
+          - m ≈ (L/f₀)(D/fₑ)
+        - title: Telescope
+          points:
+          - large f₀
+          - views far things
+          - m = f₀/fₑ
+        alt: Compound microscope and astronomical telescope compared.
+      check:
+        prompt: Simple microscope with f = 25 cm, image at D. m?
+        options:
+        - '2'
+        - '1'
+        - '25'
+        answer: '2'
+        why: 1 + 25/25 = 2.
+    - teach: 'Astronomical telescope in normal adjustment: m = f₀/fₑ, tube length f₀ + fₑ. A large objective gathers more light. Reflecting telescopes use a mirror: no chromatic aberration, and a mirror is easier to support than a huge lens.'
+      check:
+        prompt: f₀ = 150 cm, fₑ = 5 cm. Magnifying power?
+        options:
+        - '30'
+        - '155'
+        - '750'
+        answer: '30'
+        why: 150/5 = 30.
   items:
   - prompt: A telescope has f₀ = 100 cm and fₑ = 5 cm. Find its magnifying power.
     answer: '20'
@@ -341,3 +525,111 @@ concepts:
     - Different n for each colour.
     solution: Dispersion.
     mistakes: {"reflection": "p12_dispersion", "diffraction": "p12_dispersion", "polarisation": "p12_dispersion"}
+  - prompt: A telescope has f₀ = 120 cm and fₑ = 4 cm. Magnifying power?
+    answer: '30'
+    check: 120/4
+    difficulty: 1
+    hints:
+    - m = f₀/fₑ.
+    - 120/4.
+    solution: 'Step 1: 120/4. Step 2: 30.'
+    mistakes:
+      '124': c12p9_inst
+      '480': c12p9_inst
+  - prompt: Its length in normal adjustment (cm)?
+    answer: '124'
+    check: 120 + 4
+    difficulty: 1
+    hints:
+    - Length = f₀ + fₑ.
+    - 120 + 4.
+    solution: 'Step 1: add. Step 2: 124 cm.'
+    mistakes:
+      '116': c12p9_inst
+      '30': c12p9_inst
+  - prompt: Simple microscope f = 2.5 cm, image at D = 25 cm. Magnifying power?
+    answer: '11'
+    check: 1 + 25/Rational(5,2)
+    difficulty: 1
+    hints:
+    - m = 1 + D/f.
+    - 25/2.5 = 10.
+    solution: 'Step 1: 1 + 10. Step 2: 11.'
+    mistakes:
+      '10': c12p9_inst
+      '9': c12p9_inst
+  - prompt: Thin prism A = 6°, n = 1.6. Deviation (degrees) as a fraction?
+    answer: 18/5
+    check: Rational(6,10)*6
+    difficulty: 2
+    hints:
+    - δ = (n − 1)A.
+    - 0.6 × 6.
+    solution: 'Step 1: 3.6°. Step 2: 18/5.'
+    mistakes:
+      48/5: c12p9_refr
+      '6': c12p9_refr
+  - prompt: Equilateral prism (A = 60°) has minimum deviation 30°. Find n as a surd.
+    options:
+    - √2
+    - √3
+    - 3/2
+    answer: √2
+    difficulty: 2
+    hints:
+    - n = sin((A + δm)/2)/sin(A/2).
+    - sin 45°/sin 30°.
+    solution: 'Step 1: (1/√2)/(1/2). Step 2: √2.'
+    mistakes:
+      √3: c12p9_refr
+      3/2: c12p9_refr
+  - prompt: 'Compound microscope: L = 15 cm, f₀ = 1 cm, fₑ = 5 cm, D = 25 cm. m ≈ ?'
+    answer: '75'
+    check: 15/1*25/5
+    difficulty: 2
+    hints:
+    - m ≈ (L/f₀)(D/fₑ).
+    - 15 × 5.
+    solution: 'Step 1: 15 × 5. Step 2: 75.'
+    mistakes:
+      '21': c12p9_inst
+      '375': c12p9_inst
+  - prompt: Which lens should a telescope's objective have?
+    options:
+    - large focal length and large aperture
+    - small focal length
+    - small aperture
+    answer: large focal length and large aperture
+    difficulty: 2
+    hints:
+    - m = f₀/fₑ.
+    - More light from faint stars.
+    solution: 'Step 1: large f₀ gives magnification. Step 2: large aperture gathers light.'
+    mistakes:
+      small focal length: c12p9_inst
+      small aperture: c12p9_inst
+  - prompt: A telescope has length 105 cm and m = 20 in normal adjustment. Find fₑ (cm).
+    answer: '5'
+    check: 105/21
+    difficulty: 3
+    hints:
+    - f₀ = 20fₑ.
+    - f₀ + fₑ = 21fₑ = 105.
+    solution: 'Step 1: 21fₑ = 105. Step 2: fₑ = 5 cm.'
+    mistakes:
+      '100': c12p9_inst
+      '21': c12p9_inst
+  - prompt: Why does a prism spread white light into colours?
+    options:
+    - n is different for different colours
+    - the prism adds colour
+    - light slows to zero
+    answer: n is different for different colours
+    difficulty: 3
+    hints:
+    - Each colour bends by a different amount.
+    - Violet bends most.
+    solution: 'Step 1: n depends on wavelength. Step 2: colours deviate differently: dispersion.'
+    mistakes:
+      the prism adds colour: c12p9_refr
+      light slows to zero: c12p9_refr

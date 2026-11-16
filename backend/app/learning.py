@@ -656,7 +656,8 @@ def shuffled_options(item: Item) -> list[str] | None:
     Packs list the right answer first, so showing them as written would teach
     "always tap the first one". Seeding by the item id keeps the order the same
     every time the question comes back."""
-    if not item.options:
+    if not item.options or getattr(item, "exam", "") == "assertion_reason":
+        # Assertion-reason choices are the same four in the same order on every paper.
         return item.options
     options = list(item.options)
     random.Random(f"options-{item.id}").shuffle(options)
@@ -690,6 +691,7 @@ def public_item(item: Item, settings: dict | None = None) -> dict:
         "options": shuffled_options(item),
         "difficulty": item.difficulty,
         "hint_count": len(item.hints),
+        "exam": item.exam or "",
     }
     if item.kind == "numeric":
         # Phone number pads have no "/", so fraction answers get the full keyboard.

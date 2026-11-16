@@ -15,6 +15,10 @@ tips:
   c12_secondary: "A car battery is recharged again and again."
   c12_she: "The hydrogen electrode is the reference that all others are measured against."
   c12_weak_dilution: "Dilution lets a weak electrolyte dissociate much more."
+  c12c2_cell: E°cell = E°cathode − E°anode, using reduction potentials. The electrode with the higher E° is the cathode.
+  c12c2_g: "Use ΔG° = −nFE°cell. The minus sign means ΔG° and E°cell always have opposite signs."
+  c12c2_far: Charge Q = It; moles of electrons = Q/96500; then use the ion's charge to get moles of substance.
+  c12c2_cond: 'Λm = κ × 1000/c (κ in S/cm, c in mol/L). Kohlrausch: Λ°m is the sum of the ions'' limiting values.'
 concepts:
 - code: cbse12c.ec.cells
   title: Galvanic cells and Nernst equation
@@ -93,6 +97,42 @@ concepts:
           c: 0.34
           a: 0.8
         say: 'Swapped: silver (+0.80) is more easily reduced than copper (+0.34), so silver is the cathode.'
+  lesson:
+    - teach: A galvanic cell turns chemical energy into electrical energy. In the Daniell cell, Zn|Zn²⁺||Cu²⁺|Cu, zinc is oxidised at the anode (negative) and Cu²⁺ is reduced at the cathode (positive). A salt bridge keeps both solutions neutral. E° = 1.10 V.
+      check:
+        prompt: In the Daniell cell, which electrode loses mass?
+        options:
+        - zinc
+        - copper
+        - neither
+        answer: zinc
+        why: Zinc is oxidised to Zn²⁺ ions that go into solution.
+    - teach: Electrode potentials are measured against the standard hydrogen electrode (0 V). E°cell = E°cathode − E°anode. The more positive reduction potential becomes the cathode. A positive E°cell means the reaction is spontaneous, since ΔG° = −nFE°cell.
+      picture:
+        kind: flow
+        steps:
+        - Look up both E°(reduction)
+        - Higher E° → cathode
+        - E°cell = E°cath − E°anode
+        - ΔG° = −nFE°cell
+        alt: Steps to find a cell's standard EMF and free energy change.
+      check:
+        prompt: E°(Ag⁺/Ag) = 0.80 V, E°(Cu²⁺/Cu) = 0.34 V. Which is the cathode?
+        options:
+        - silver
+        - copper
+        - neither
+        answer: silver
+        why: Silver has the higher reduction potential.
+    - teach: 'Nernst equation at 298 K: E = E° − (0.059/n) log Q. As the reaction proceeds, Q grows and E falls; at equilibrium E = 0 and E° = (0.059/n) log K.'
+      check:
+        prompt: 'At equilibrium, a cell''s E is:'
+        options:
+        - '0'
+        - E°
+        - maximum
+        answer: '0'
+        why: No net reaction, so no driving force.
   items:
   - prompt: E°(Cu²⁺/Cu) = 0.34 V and E°(Zn²⁺/Zn) = −0.76 V. Find E°cell (V).
     answer: '1.1'
@@ -161,6 +201,117 @@ concepts:
     - Negative ΔG.
     solution: Spontaneous.
     mistakes: {"non-spontaneous": "c12_ecell_sign", "at equilibrium": "c12_ecell_sign", "impossible": "c12_ecell_sign"}
+  - prompt: E°(Ag⁺/Ag) = 0.80 V and E°(Cu²⁺/Cu) = 0.34 V. Find E°cell (V) as a fraction.
+    answer: 23/50
+    check: Rational(80,100) - Rational(34,100)
+    difficulty: 1
+    hints:
+    - Cathode is the higher one.
+    - 0.80 − 0.34.
+    solution: 'Step 1: 0.46 V. Step 2: 23/50.'
+    mistakes:
+      57/50: c12c2_cell
+      -23/50: c12c2_cell
+  - prompt: E°(Zn²⁺/Zn) = −0.76 V and SHE = 0 V. E°cell (V) for Zn | SHE, as a fraction?
+    answer: 19/25
+    check: 0 - Rational(-76,100)
+    difficulty: 1
+    hints:
+    - Zinc is the anode.
+    - 0 − (−0.76).
+    solution: 'Step 1: 0.76 V. Step 2: 19/25.'
+    mistakes:
+      -19/25: c12c2_cell
+      '0': c12c2_cell
+  - prompt: In a galvanic cell, the cathode carries which sign?
+    options:
+    - positive
+    - negative
+    - no charge
+    answer: positive
+    difficulty: 1
+    hints:
+    - Electrons arrive there from the outside wire.
+    - They are used up by reduction.
+    solution: 'Step 1: reduction pulls electrons. Step 2: cathode is positive.'
+    mistakes:
+      negative: c12c2_cell
+      no charge: c12c2_cell
+  - prompt: n = 1, E°cell = 1 V. ΔG° in kJ/mol (F = 96,500), as a fraction?
+    answer: -193/2
+    check: -1*96500*1/1000
+    difficulty: 2
+    hints:
+    - ΔG° = −nFE°.
+    - −96500 J.
+    solution: 'Step 1: −96.5 kJ/mol. Step 2: −193/2.'
+    mistakes:
+      193/2: c12c2_g
+      '-96500': c12c2_g
+  - prompt: 'A cell reaction has ΔG° > 0. Its E°cell is:'
+    options:
+    - negative
+    - positive
+    - zero
+    answer: negative
+    difficulty: 2
+    hints:
+    - ΔG° = −nFE°.
+    - Signs are opposite.
+    solution: 'Step 1: positive ΔG° gives negative E°. Step 2: non-spontaneous.'
+    mistakes:
+      positive: c12c2_g
+      zero: c12c2_g
+  - prompt: For a cell with n = 2, E° = 0.059 V. Find log K.
+    answer: '2'
+    check: Rational(59,1000)*2/Rational(59,1000)
+    difficulty: 2
+    hints:
+    - E° = (0.059/n) log K.
+    - log K = nE°/0.059.
+    solution: 'Step 1: 2 × 0.059/0.059. Step 2: 2 (K = 100).'
+    mistakes:
+      '1': c12c2_g
+      '4': c12c2_g
+  - prompt: 'Nernst: E° = 1.10 V, n = 2, Q = 10. Find E (V) as a fraction (use 0.059).'
+    answer: 2141/2000
+    check: Rational(110,100) - Rational(59,1000)/2*1
+    difficulty: 2
+    hints:
+    - log 10 = 1.
+    - 1.10 − 0.0295.
+    solution: 'Step 1: 1.10 − 0.0295 = 1.0705 V. Step 2: 2141/2000.'
+    mistakes:
+      1041/1000: c12c2_cell
+      1159/1000: c12c2_cell
+  - prompt: Can a copper vessel safely store a silver nitrate solution? (E° Cu²⁺/Cu = 0.34, Ag⁺/Ag = 0.80)
+    options:
+    - no, copper displaces silver
+    - yes, nothing happens
+    - only when cold
+    answer: no, copper displaces silver
+    difficulty: 3
+    hints:
+    - Which way is E°cell positive?
+    - Cu → Cu²⁺ with Ag⁺ → Ag.
+    solution: 'Step 1: E° = 0.80 − 0.34 > 0. Step 2: Cu reacts, silver deposits.'
+    mistakes:
+      yes, nothing happens: c12c2_cell
+      only when cold: c12c2_cell
+  - prompt: Why does a cell's voltage fall as it is used?
+    options:
+    - Q grows, so E = E° − (0.059/n) log Q falls
+    - E° falls with time
+    - the salt bridge disappears
+    answer: Q grows, so E = E° − (0.059/n) log Q falls
+    difficulty: 3
+    hints:
+    - Products build up.
+    - Look at the Nernst equation.
+    solution: 'Step 1: products increase, reactants decrease. Step 2: Q rises, E falls until 0.'
+    mistakes:
+      E° falls with time: c12c2_cell
+      the salt bridge disappears: c12c2_cell
 - code: cbse12c.ec.conductance
   title: Conductance, electrolysis and batteries
   after:
@@ -268,6 +419,42 @@ concepts:
       - when:
           q: 965
         say: That's half the charge. 1930 s at 1 A.
+  lesson:
+    - teach: 'Electrolyte solutions conduct by moving ions. Conductivity κ (S/cm) is the conductance of a 1 cm cube. Molar conductivity Λm = κ × 1000/c (c in mol/L) compares solutions fairly. On dilution, Λm rises: slightly for strong electrolytes, sharply for weak ones (more ionisation).'
+      check:
+        prompt: 'Diluting acetic acid makes its Λm:'
+        options:
+        - rise sharply
+        - fall
+        - stay the same
+        answer: rise sharply
+        why: A weak acid ionises much more on dilution.
+    - teach: 'Kohlrausch''s law: at infinite dilution, Λ°m = ν₊λ°₊ + ν₋λ°₋, each ion contributing independently. It lets us find Λ°m for weak electrolytes from strong ones.'
+      check:
+        prompt: λ°(Na⁺) = 50, λ°(Cl⁻) = 76 S cm² mol⁻¹. Λ°m(NaCl)?
+        options:
+        - '126'
+        - '26'
+        - '3800'
+        answer: '126'
+        why: 50 + 76.
+    - teach: 'Electrolysis uses current to drive a reaction. Faraday: m = ZIt; 1 F = 96,500 C per mole of electrons. Batteries: primary (dry cell, not rechargeable), secondary (lead storage, rechargeable), fuel cells (H₂ + O₂ → water). Rusting is electrochemical corrosion; paint, galvanising and sacrificial zinc prevent it.'
+      picture:
+        kind: flow
+        steps:
+        - Q = I × t
+        - mol e⁻ = Q/96500
+        - mol metal = mol e⁻ ÷ charge
+        - mass = mol × M
+        alt: Steps for a Faraday's law calculation.
+      check:
+        prompt: 'Galvanising protects iron by coating it with:'
+        options:
+        - zinc
+        - copper
+        - tin only
+        answer: zinc
+        why: Zinc corrodes first, protecting the iron.
   items:
   - prompt: A current of 2 A flows for 965 s. Find the charge (C).
     answer: '1930'
@@ -336,3 +523,105 @@ concepts:
     - Acetic acid.
     solution: Increases sharply.
     mistakes: {"decreases": "c12_weak_dilution", "stays constant": "c12_weak_dilution", "becomes zero": "c12_weak_dilution"}
+  - prompt: A current of 5 A flows for 193 s. Find the charge (C).
+    answer: '965'
+    check: 5*193
+    difficulty: 1
+    hints:
+    - Q = It.
+    - 5 × 193.
+    solution: 'Step 1: 5 × 193. Step 2: 965 C.'
+    mistakes:
+      193/5: c12c2_far
+      '198': c12c2_far
+  - prompt: How many moles of electrons is 9650 C? Fraction (F = 96,500).
+    answer: 1/10
+    check: Rational(9650,96500)
+    difficulty: 1
+    hints:
+    - Divide by F.
+    - 9650/96500.
+    solution: 'Step 1: 0.1 mol. Step 2: 1/10.'
+    mistakes:
+      '10': c12c2_far
+      '1': c12c2_far
+  - prompt: κ = 0.01 S/cm for a 0.05 mol/L solution. Λm (S cm² mol⁻¹)?
+    answer: '200'
+    check: Rational(1,100)*1000/Rational(5,100)
+    difficulty: 1
+    hints:
+    - Λm = 1000κ/c.
+    - 10/0.05.
+    solution: 'Step 1: 1000 × 0.01 = 10. Step 2: 10/0.05 = 200.'
+    mistakes:
+      1/5: c12c2_cond
+      '50': c12c2_cond
+  - prompt: Moles of Cu deposited by 2 mol of electrons (Cu²⁺ + 2e⁻ → Cu)?
+    answer: '1'
+    check: 2/2
+    difficulty: 2
+    hints:
+    - 2 electrons per Cu atom.
+    - 2 ÷ 2.
+    solution: 'Step 1: 2/2. Step 2: 1 mol Cu.'
+    mistakes:
+      '2': c12c2_far
+      '4': c12c2_far
+  - prompt: Mass of silver (g) deposited by 96,500 C (Ag⁺ + e⁻ → Ag, M = 108)?
+    answer: '108'
+    check: 96500/96500*108
+    difficulty: 2
+    hints:
+    - 96,500 C = 1 mol e⁻.
+    - 1 mol e⁻ gives 1 mol Ag.
+    solution: 'Step 1: 1 mol Ag. Step 2: 108 g.'
+    mistakes:
+      '54': c12c2_far
+      '216': c12c2_far
+  - prompt: λ°(H⁺) = 350 and λ°(CH₃COO⁻) = 41 S cm² mol⁻¹. Λ°m of acetic acid?
+    answer: '391'
+    check: 350 + 41
+    difficulty: 2
+    hints:
+    - 'Kohlrausch: add ion values.'
+    - 350 + 41.
+    solution: 'Step 1: add. Step 2: 391 S cm² mol⁻¹.'
+    mistakes:
+      '309': c12c2_cond
+      '14350': c12c2_cond
+  - prompt: 'A dry cell is a:'
+    options:
+    - primary cell
+    - secondary cell
+    - fuel cell
+    answer: primary cell
+    difficulty: 2
+    hints:
+    - It cannot be recharged.
+    - Used once, then thrown away.
+    solution: 'Step 1: not rechargeable. Step 2: primary.'
+    mistakes:
+      secondary cell: c12c2_far
+      fuel cell: c12c2_far
+  - prompt: Λm of acetic acid at some dilution is 39.1 and Λ°m is 391. Degree of dissociation, as a fraction?
+    answer: 1/10
+    check: Rational(391,10)/391
+    difficulty: 3
+    hints:
+    - α = Λm/Λ°m.
+    - 39.1/391.
+    solution: 'Step 1: 39.1/391. Step 2: 0.1 = 1/10.'
+    mistakes:
+      '10': c12c2_cond
+      1/100: c12c2_cond
+  - prompt: Mass of Cu (g) deposited by 2 A for 965 s (Cu²⁺ + 2e⁻, M = 63.5), as a fraction?
+    answer: 127/200
+    check: 2*965/96500/2*Rational(635,10)
+    difficulty: 3
+    hints:
+    - Q = 1930 C = 0.02 mol e⁻.
+    - Cu moles = 0.01.
+    solution: 'Step 1: 0.01 mol Cu. Step 2: 0.635 g = 127/200.'
+    mistakes:
+      127/100: c12c2_far
+      127/400: c12c2_far

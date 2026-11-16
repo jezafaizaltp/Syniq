@@ -14,6 +14,9 @@ tips:
   m4_short_hand: "The short hand shows the hour it has passed. Between 4 and 5 means it is after 4."
   m4_week_days: "Say the days: Monday to Sunday. Count them."
   m4_week_later: "A week is 7 days. Add 7 to the date."
+  c4m12_hands: The short hand tells the hour; the long hand tells minutes, and each number it passes is 5 minutes.
+  c4m12_count: 'Count on: first to the next full hour, then the rest of the minutes. Add the two parts.'
+  c4m12_cal: 'Use the calendar facts: 7 days a week, 12 months a year, and the knuckle trick for 30 or 31 days.'
 concepts:
 - code: cbse4m.time.clock
   title: Reading the clock
@@ -75,6 +78,50 @@ concepts:
       - when:
           v: 15
         say: 15 minutes is the 3. The 9 is three quarters of the way round.
+  lesson:
+    - teach: 'A clock has two hands. The short hand shows the hour. The long hand shows minutes: each number on the clock is 5 minutes for the long hand, so at 4 it is 20 minutes past.'
+      check:
+        prompt: The long hand points to 8. How many minutes past the hour?
+        options:
+        - '40'
+        - '8'
+        - '45'
+        answer: '40'
+        why: 8 × 5 = 40 minutes.
+    - teach: 'Special times: long hand at 3 is quarter past (15 min), at 6 is half past (30 min), at 9 is quarter to (45 min). 1 hour = 60 minutes.'
+      picture:
+        kind: compare
+        columns:
+        - title: Long hand at 3
+          points:
+          - 15 minutes
+          - quarter past
+        - title: Long hand at 6
+          points:
+          - 30 minutes
+          - half past
+        - title: Long hand at 9
+          points:
+          - 45 minutes
+          - quarter to
+        alt: Where the long hand points for quarter past, half past and quarter to.
+      check:
+        prompt: 'Quarter to 7 is the same as:'
+        options:
+        - '6:45'
+        - '7:15'
+        - '7:45'
+        answer: '6:45'
+        why: 15 minutes before 7:00 is 6:45.
+    - teach: 'a.m. means before noon (morning); p.m. means after noon. To find how long something takes, count on: 9:00 to 11:30 is 2 hours, then 30 minutes more, so 2 h 30 min.'
+      check:
+        prompt: School starts at 8 a.m. and ends at 2 p.m. How many hours?
+        options:
+        - '6'
+        - '10'
+        - '4'
+        answer: '6'
+        why: '8 to 12 is 4 hours, 12 to 2 is 2 more: 6.'
   items:
   - prompt: How many minutes are in 1 hour?
     answer: '60'
@@ -140,6 +187,121 @@ concepts:
     - Count the hours.
     solution: 3 hours.
     mistakes: {"9": "m4_hours_noon", "11": "m4_hours_noon"}
+  - prompt: The long hand points to 11. How many minutes past the hour?
+    answer: '55'
+    check: 11*5
+    difficulty: 1
+    hints:
+    - Each number is 5 minutes.
+    - Count by fives to 11.
+    solution: 'Step 1: 11 × 5. Step 2: = 55 minutes.'
+    mistakes:
+      '11': c4m12_hands
+      '50': c4m12_hands
+      '60': c4m12_hands
+  - prompt: How many minutes are in 3 hours?
+    answer: '180'
+    check: 3*60
+    difficulty: 1
+    hints:
+    - 1 hour = 60 minutes.
+    - Three lots of 60.
+    solution: 'Step 1: 60 × 3. Step 2: = 180 minutes.'
+    mistakes:
+      '300': c4m12_count
+      '120': c4m12_count
+      '63': c4m12_count
+  - prompt: Dinner is at quarter past 8 in the evening. Which is it?
+    options:
+    - 8:15 p.m.
+    - 8:15 a.m.
+    - 8:45 p.m.
+    answer: 8:15 p.m.
+    difficulty: 2
+    hints:
+    - Quarter past means 15 minutes after.
+    - Evening is after noon.
+    solution: 'Step 1: Quarter past 8 = 8:15. Step 2: Evening = p.m., so 8:15 p.m.'
+    mistakes:
+      8:15 a.m.: c4m12_hands
+      8:45 p.m.: c4m12_hands
+  - prompt: A film starts at 3:30 and ends at 5:00. How many minutes long is it?
+    answer: '90'
+    check: 30+60
+    difficulty: 2
+    hints:
+    - 3:30 to 4:00 first.
+    - Then 4:00 to 5:00.
+    solution: 'Step 1: 3:30 to 4:00 = 30 min. Step 2: 4:00 to 5:00 = 60 min; total 90 minutes.'
+    mistakes:
+      '150': c4m12_count
+      '70': c4m12_count
+      '130': c4m12_count
+  - prompt: The short hand is just past 2 and the long hand is on 4. What time is it?
+    options:
+    - '2:20'
+    - '4:10'
+    - '2:04'
+    answer: '2:20'
+    difficulty: 2
+    hints:
+    - The short hand gives the hour.
+    - The long hand on 4 means 4 × 5 minutes.
+    solution: 'Step 1: Hour = 2. Step 2: Minutes = 4 × 5 = 20, so 2:20.'
+    mistakes:
+      '4:10': c4m12_hands
+      '2:04': c4m12_hands
+  - prompt: It is 10:45 now. What time will it be in 30 minutes?
+    options:
+    - '11:15'
+    - '11:45'
+    - 10:75
+    answer: '11:15'
+    difficulty: 3
+    hints:
+    - 15 minutes takes you to 11:00.
+    - Then add the rest.
+    solution: 'Step 1: 10:45 + 15 min = 11:00. Step 2: 15 more minutes = 11:15.'
+    mistakes:
+      '11:45': c4m12_count
+      10:75: c4m12_count
+  - prompt: Which is in the morning?
+    options:
+    - 7:00 a.m.
+    - 7:00 p.m.
+    - 11:00 p.m.
+    answer: 7:00 a.m.
+    difficulty: 1
+    hints:
+    - a.m. is before noon.
+    - Which one says a.m.?
+    solution: 'Step 1: a.m. = before noon. Step 2: 7:00 a.m. is in the morning.'
+    mistakes:
+      7:00 p.m.: c4m12_hands
+      11:00 p.m.: c4m12_hands
+  - prompt: A train leaves at 11 a.m. and arrives at 3 p.m. How many hours is the journey?
+    answer: '4'
+    check: 1+3
+    difficulty: 3
+    hints:
+    - 11 a.m. to 12 noon first.
+    - Then noon to 3 p.m.
+    solution: 'Step 1: 11 to 12 = 1 hour. Step 2: 12 to 3 = 3 hours; total 4 hours.'
+    mistakes:
+      '8': c4m12_count
+      '14': c4m12_count
+      '3': c4m12_count
+  - prompt: How many minutes is a quarter of an hour plus half an hour?
+    answer: '45'
+    check: 15+30
+    difficulty: 2
+    hints:
+    - A quarter hour is 15 minutes.
+    - Half an hour is 30 minutes.
+    solution: 'Step 1: 15 + 30. Step 2: = 45 minutes.'
+    mistakes:
+      '75': c4m12_count
+      '35': c4m12_count
 - code: cbse4m.time.calendar
   title: Days, weeks, months and years
   after:
@@ -197,6 +359,50 @@ concepts:
       - when:
           v: 31
         say: 'April has 30 days. Remember: 30 days have September, April, June and November.'
+  lesson:
+    - teach: 1 week = 7 days. 1 year = 12 months = 365 days. Every 4 years a leap year has 366 days, because February gets a 29th day.
+      check:
+        prompt: How many days does a leap year have?
+        options:
+        - '366'
+        - '365'
+        - '360'
+        answer: '366'
+        why: February has 29 days instead of 28.
+    - teach: 'Months have 30 or 31 days (February 28 or 29). The knuckle trick: on your fist, knuckles are 31-day months and dips are shorter months: Jan (knuckle), Feb (dip), Mar (knuckle), Apr (dip) ...'
+      picture:
+        kind: compare
+        columns:
+        - title: 31 days
+          points:
+          - Jan, Mar, May
+          - Jul, Aug
+          - Oct, Dec
+        - title: 30 days
+          points:
+          - Apr, Jun
+          - Sep, Nov
+        - title: 28 or 29 days
+          points:
+          - Feb
+        alt: Months grouped by number of days.
+      check:
+        prompt: How many days does June have?
+        options:
+        - '30'
+        - '31'
+        - '28'
+        answer: '30'
+        why: June is one of the four 30-day months.
+    - teach: 'On a calendar, each row is one week. To find the date one week later, go straight down one row: add 7. Two weeks later: add 14.'
+      check:
+        prompt: Today is the 9th. What date is it one week later?
+        options:
+        - 16th
+        - 10th
+        - 18th
+        answer: 16th
+        why: 9 + 7 = 16.
   items:
   - prompt: How many days are in a week?
     answer: '7'
@@ -256,3 +462,121 @@ concepts:
     - Rhyme.
     solution: April has 30 days.
     mistakes: {"January": "m4_30_days"}
+  - prompt: How many days are in 5 weeks?
+    answer: '35'
+    check: 7*5
+    difficulty: 1
+    hints:
+    - 1 week = 7 days.
+    - Five lots of 7.
+    solution: 'Step 1: 7 × 5. Step 2: = 35 days.'
+    mistakes:
+      '12': c4m12_cal
+      '30': c4m12_cal
+      '25': c4m12_cal
+  - prompt: Which month has 31 days?
+    options:
+    - August
+    - September
+    - November
+    answer: August
+    difficulty: 2
+    hints:
+    - Use the knuckle trick.
+    - July and the month after both land on knuckles.
+    solution: 'Step 1: September and November have 30 days. Step 2: August has 31.'
+    mistakes:
+      September: c4m12_cal
+      November: c4m12_cal
+  - prompt: Today is Monday. What day will it be after 3 days?
+    options:
+    - Thursday
+    - Wednesday
+    - Friday
+    answer: Thursday
+    difficulty: 1
+    hints:
+    - Count on 3 days from Monday.
+    - Tuesday is 1, then ...
+    solution: 'Step 1: Tuesday (1), Wednesday (2), Thursday (3). Step 2: Thursday.'
+    mistakes:
+      Wednesday: c4m12_cal
+      Friday: c4m12_cal
+  - prompt: How many days are there in January and February together in a year that is not a leap year?
+    answer: '59'
+    check: 31+28
+    difficulty: 2
+    hints:
+    - January has 31 days.
+    - February has 28 in an ordinary year.
+    solution: 'Step 1: 31 + 28. Step 2: = 59 days.'
+    mistakes:
+      '60': c4m12_cal
+      '61': c4m12_cal
+      '62': c4m12_cal
+  - prompt: A holiday starts on the 12th and lasts 2 weeks. On which date does it end (2 weeks later)?
+    answer: '26'
+    check: 12+14
+    difficulty: 2
+    hints:
+    - 2 weeks = how many days?
+    - Add that to 12.
+    solution: 'Step 1: 2 weeks = 14 days. Step 2: 12 + 14 = 26.'
+    mistakes:
+      '14': c4m12_cal
+      '19': c4m12_cal
+      '24': c4m12_cal
+  - prompt: How many months are in 3 years?
+    answer: '36'
+    check: 12*3
+    difficulty: 2
+    hints:
+    - 1 year = 12 months.
+    - Three lots of 12.
+    solution: 'Step 1: 12 × 3. Step 2: = 36 months.'
+    mistakes:
+      '15': c4m12_cal
+      '30': c4m12_cal
+      '1095': c4m12_cal
+  - prompt: If 1st March is a Sunday, what day is 8th March?
+    options:
+    - Sunday
+    - Monday
+    - Saturday
+    answer: Sunday
+    difficulty: 2
+    hints:
+    - 8 − 1 = 7 days later.
+    - 7 days later is the same weekday.
+    solution: 'Step 1: 8th March is 7 days after 1st. Step 2: 7 days later is the same weekday: Sunday.'
+    mistakes:
+      Monday: c4m12_cal
+      Saturday: c4m12_cal
+  - prompt: Which month comes just after the 6th month of the year?
+    options:
+    - July
+    - June
+    - August
+    answer: July
+    difficulty: 1
+    hints:
+    - Count Jan 1, Feb 2 ... to the 6th.
+    - Then one more.
+    solution: 'Step 1: The 6th month is June. Step 2: The next one is July.'
+    mistakes:
+      June: c4m12_cal
+      August: c4m12_cal
+  - prompt: A plant grows for 100 days. About how many weeks is that?
+    options:
+    - about 14 weeks
+    - about 10 weeks
+    - about 20 weeks
+    answer: about 14 weeks
+    difficulty: 3
+    hints:
+    - How many 7s are close to 100?
+    - 7 × 14 = 98.
+    solution: 'Step 1: 7 × 14 = 98, close to 100. Step 2: So about 14 weeks.'
+    mistakes:
+      about 10 weeks: c4m12_cal
+      about 20 weeks: c4m12_cal

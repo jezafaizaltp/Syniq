@@ -74,8 +74,9 @@ export default function Lesson({
     setChosen(option);
     setBusy(true);
     const style = teaching ? way.style : null;
-    // A second try is offered when there is something new to look at: another way, or the teaching itself.
-    const canRetry = attempt === 1 && (!teaching || ways.length > 1);
+    // Always one more try before the answer is shown: with another way when the idea has one, otherwise after
+    // reading the idea again with the first answer set aside. The answer is never the first thing a mistake brings.
+    const canRetry = attempt === 1;
     try {
       const r = await post<Marked>("/learn/lesson-check", {
         concept_id: conceptId,

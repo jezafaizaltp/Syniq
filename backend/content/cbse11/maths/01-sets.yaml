@@ -15,6 +15,10 @@ tips:
   m11_proper_subset: "A proper subset leaves at least one element out. Of all 2ⁿ subsets, which one is not proper?"
   m11_square_list: "List the natural numbers one at a time and square each: stop as soon as the square reaches 30."
   m11_union_count: "Write A ∪ B out in full, listing shared elements only once, then count."
+  c11m1_list: Write the set out in roster form first, then count or compare element by element.
+  c11m1_subset: 'Each element is either in a subset or not: two choices per element.'
+  c11m1_venn: Draw the Venn diagram and fill the overlap first, then the outer parts.
+  c11m1_interval: Square bracket means the end point is included; round bracket means it is not.
 concepts:
 - code: cbse11m.sets.basics
   title: Sets, subsets and intervals
@@ -86,6 +90,57 @@ concepts:
       bin: Well-defined set
       clue: Can you find one? Is there more than one?
       why: Only 2 is even and prime, so this is the set {2}, a singleton.
+  lesson:
+    - teach: 'A set is a well-defined collection of distinct objects. Roster form lists them: {2, 4, 6}. Set-builder form describes them: {x : x is an even natural number, x ≤ 6}. Repeated elements count once.'
+      check:
+        prompt: How many elements does {a, b, a, c, b} have?
+        options:
+        - '3'
+        - '5'
+        - '2'
+        answer: '3'
+        why: 'Repeats count once: the distinct elements are a, b, c.'
+    - teach: A ⊆ B means every element of A is in B. For a set with n elements, each element is either in or out of a subset, giving 2ⁿ subsets; leaving out the set itself gives 2ⁿ − 1 proper subsets. The power set P(A) is the set of all subsets.
+      picture:
+        kind: bars
+        unit: subsets
+        bars:
+        - label: n = 1
+          value: 2
+        - label: n = 2
+          value: 4
+        - label: n = 3
+          value: 8
+        - label: n = 4
+          value: 16
+        alt: The number of subsets doubles with each extra element.
+      check:
+        prompt: How many subsets does a 2-element set {p, q} have?
+        options:
+        - '4'
+        - '2'
+        - '3'
+        answer: '4'
+        why: '∅, {p}, {q}, {p, q}: 2² = 4.'
+    - teach: Intervals are subsets of R. (a, b) excludes both ends; [a, b] includes both; [a, b) includes a but not b. The empty set ∅ has no elements, and N ⊂ Z ⊂ Q ⊂ R.
+      picture:
+        kind: number_line
+        from: 0
+        to: 8
+        points:
+        - at: 2
+          label: '[2'
+        - at: 6
+          label: 6)
+        alt: 'The interval [2, 6) on a number line: 2 included, 6 excluded.'
+      check:
+        prompt: Is 6 in the interval [2, 6)?
+        options:
+        - 'No'
+        - 'Yes'
+        - Only if 6 is rational
+        answer: 'No'
+        why: The round bracket at 6 means 6 is excluded.
   items:
   - prompt: How many subsets does the set {a, b, c} have?
     answer: '8'
@@ -150,6 +205,117 @@ concepts:
     - 2⁵.
     solution: 2⁵ = 32.
     mistakes: {"25": "m11_power_set", "10": "m11_power_set", "31": "m11_power_set"}
+  - prompt: How many proper subsets does {1, 2, 3} have?
+    answer: '7'
+    check: 2**3-1
+    difficulty: 1
+    hints:
+    - Count all subsets first, using two choices per element.
+    - Then leave out the set itself.
+    solution: 'Step 1: 2³ = 8 subsets. Step 2: 8 − 1 = 7 proper subsets.'
+    mistakes:
+      '8': c11m1_subset
+      '6': c11m1_subset
+  - prompt: 'How many elements are in {x : x is a prime number, x < 20}?'
+    answer: '8'
+    check: '8'
+    difficulty: 2
+    hints:
+    - List the primes one by one.
+    - Remember 1 is not prime.
+    solution: 'Step 1: 2, 3, 5, 7, 11, 13, 17, 19. Step 2: 8 elements.'
+    mistakes:
+      '9': c11m1_list
+      '7': c11m1_list
+  - prompt: Which set is infinite?
+    options:
+    - '{x : x is a multiple of 3}'
+    - '{x : x is a letter of ''SCHOOL''}'
+    - '{x : x is a month of the year}'
+    answer: '{x : x is a multiple of 3}'
+    difficulty: 1
+    hints:
+    - Try listing each set. Does the list ever stop?
+    - Months and letters can be counted to the end.
+    solution: 'Step 1: letters and months are finite. Step 2: multiples of 3 go on forever.'
+    mistakes:
+      '{x : x is a letter of ''SCHOOL''}': c11m1_list
+      '{x : x is a month of the year}': c11m1_list
+  - prompt: A has 3 elements. How many elements does P(P(A)) have?
+    answer: '256'
+    check: 2**(2**3)
+    difficulty: 3
+    hints:
+    - First find how many elements P(A) has.
+    - Then use the same rule again on P(A).
+    solution: 'Step 1: n(P(A)) = 2³ = 8. Step 2: n(P(P(A))) = 2⁸ = 256.'
+    mistakes:
+      '64': c11m1_subset
+      '16': c11m1_subset
+  - prompt: 'Write {x ∈ R : −1 < x ≤ 4} in interval notation.'
+    options:
+    - (−1, 4]
+    - '[−1, 4)'
+    - '[−1, 4]'
+    answer: (−1, 4]
+    difficulty: 2
+    hints:
+    - Is −1 included? Is 4 included?
+    - Strict inequality gets a round bracket.
+    solution: 'Step 1: −1 excluded, 4 included. Step 2: (−1, 4].'
+    mistakes:
+      '[−1, 4)': c11m1_interval
+      '[−1, 4]': c11m1_interval
+  - prompt: 'Are A = {x : x² = 4} and B = {−2, 2} equal sets?'
+    options:
+    - 'Yes'
+    - No, A has only 2
+    - No, B has extra elements
+    answer: 'Yes'
+    difficulty: 2
+    hints:
+    - Solve x² = 4 fully.
+    - Equal sets have exactly the same elements.
+    solution: 'Step 1: x² = 4 gives x = ±2. Step 2: A = {−2, 2} = B.'
+    mistakes:
+      No, A has only 2: c11m1_list
+      No, B has extra elements: c11m1_list
+  - prompt: Which statement is true?
+    options:
+    - ∅ ⊆ A for every set A
+    - ∅ ∈ A for every set A
+    - '{∅} = ∅'
+    answer: ∅ ⊆ A for every set A
+    difficulty: 3
+    hints:
+    - Check 'every element of ∅ is in A'. Is there anything to fail?
+    - '{∅} has one element; ∅ has none.'
+    solution: 'Step 1: ∅ has no elements, so it is a subset of every set. Step 2: it need not be an element, and {∅} ≠ ∅.'
+    mistakes:
+      ∅ ∈ A for every set A: c11m1_subset
+      '{∅} = ∅': c11m1_list
+  - prompt: How many integers lie in the interval [−3, 2)?
+    answer: '5'
+    check: '5'
+    difficulty: 2
+    hints:
+    - List the integers from the left end.
+    - Stop before the excluded end.
+    solution: 'Step 1: −3, −2, −1, 0, 1. Step 2: 5 integers.'
+    mistakes:
+      '6': c11m1_interval
+      '4': c11m1_interval
+  - prompt: A set has 64 subsets. How many elements does it have?
+    answer: '6'
+    check: '6'
+    difficulty: 2
+    hints:
+    - Subsets = 2 to the power n.
+    - Which power of 2 gives 64?
+    solution: 'Step 1: 2ⁿ = 64. Step 2: n = 6.'
+    mistakes:
+      '8': c11m1_subset
+      '32': c11m1_subset
 - code: cbse11m.sets.ops
   title: Operations on sets and Venn diagrams
   after:
@@ -258,6 +424,42 @@ concepts:
           - 31
           - 38
         say: The union is still short of 39. The 8 in the gap are the ones in both sets.
+  lesson:
+    - teach: Union A ∪ B holds elements in A or B (or both). Intersection A ∩ B holds elements in both. Difference A − B holds elements of A not in B. Sets with A ∩ B = ∅ are disjoint.
+      check:
+        prompt: A = {1, 2, 3}, B = {2, 3, 4}. What is A ∩ B?
+        options:
+        - '{2, 3}'
+        - '{1, 2, 3, 4}'
+        - '{1}'
+        answer: '{2, 3}'
+        why: Only 2 and 3 are in both sets.
+    - teach: 'The complement A′ = U − A holds everything in the universal set U that is not in A. De Morgan''s laws: (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′.'
+      check:
+        prompt: U = {1, ..., 6}, A = {1, 2}. What is A′?
+        options:
+        - '{3, 4, 5, 6}'
+        - '{1, 2}'
+        - ∅
+        answer: '{3, 4, 5, 6}'
+        why: Everything in U except 1 and 2.
+    - teach: 'Counting with Venn diagrams: n(A ∪ B) = n(A) + n(B) − n(A ∩ B), because the overlap is counted twice. Fill the overlap first, then each ''only'' region.'
+      picture:
+        kind: flow
+        steps:
+        - fill A ∩ B
+        - A only = n(A) − n(A ∩ B)
+        - B only = n(B) − n(A ∩ B)
+        - add the three regions
+        alt: Steps to fill a two-set Venn diagram.
+      check:
+        prompt: n(A) = 10, n(B) = 8, n(A ∩ B) = 3. Find n(A ∪ B).
+        options:
+        - '15'
+        - '18'
+        - '21'
+        answer: '15'
+        why: 10 + 8 − 3 = 15; the overlap is counted once.
   items:
   - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A ∪ B?
     answer: '5'
@@ -318,3 +520,114 @@ concepts:
     - The odd numbers.
     solution: 'A′ = {1, 3, 5, 7, 9}: 5 elements.'
     mistakes: {"10": "m11_complement", "15": "m11_complement"}
+  - prompt: A = {a, b, c, d}, B = {c, d, e}. How many elements are in B − A?
+    answer: '1'
+    check: '1'
+    difficulty: 1
+    hints:
+    - Keep elements of B that are not in A.
+    - Cross out c and d.
+    solution: 'Step 1: B − A = {e}. Step 2: 1 element.'
+    mistakes:
+      '2': c11m1_list
+      '3': c11m1_list
+  - prompt: n(A ∪ B) = 50, n(A) = 28, n(B) = 32. Find n(A ∩ B).
+    answer: '10'
+    check: 28+32-50
+    difficulty: 2
+    hints:
+    - Use n(A ∪ B) = n(A) + n(B) − n(A ∩ B).
+    - Rearrange for the overlap.
+    solution: 'Step 1: 50 = 28 + 32 − n(A ∩ B). Step 2: n(A ∩ B) = 10.'
+    mistakes:
+      '60': c11m1_venn
+      '4': c11m1_venn
+  - prompt: In a group of 60, 35 take tea, 30 take coffee and 10 take both. How many take neither?
+    answer: '5'
+    check: 60-(35+30-10)
+    difficulty: 3
+    hints:
+    - First find how many take at least one.
+    - Subtract that from the whole group.
+    solution: 'Step 1: n(T ∪ C) = 35 + 30 − 10 = 55. Step 2: 60 − 55 = 5.'
+    mistakes:
+      '15': c11m1_venn
+      '0': c11m1_venn
+  - prompt: '(A ∩ B)′ equals:'
+    options:
+    - A′ ∪ B′
+    - A′ ∩ B′
+    - A ∪ B
+    answer: A′ ∪ B′
+    difficulty: 2
+    hints:
+    - Complement flips ∩ and ∪.
+    - Shade outside the overlap on a Venn diagram.
+    solution: 'Step 1: De Morgan: complement of an intersection. Step 2: A′ ∪ B′.'
+    mistakes:
+      A′ ∩ B′: c11m1_venn
+      A ∪ B: c11m1_venn
+  - prompt: Which pair of sets is disjoint?
+    options:
+    - '{2, 4, 6} and {1, 3, 5}'
+    - '{1, 2} and {2, 3}'
+    - '{a, b} and {b}'
+    answer: '{2, 4, 6} and {1, 3, 5}'
+    difficulty: 1
+    hints:
+    - Disjoint sets share no element.
+    - Look for a common element in each pair.
+    solution: 'Step 1: the other pairs share 2 or b. Step 2: evens and odds share nothing.'
+    mistakes:
+      '{1, 2} and {2, 3}': c11m1_list
+      '{a, b} and {b}': c11m1_list
+  - prompt: 'A ∪ A′ equals:'
+    options:
+    - U
+    - ∅
+    - A
+    answer: U
+    difficulty: 1
+    hints:
+    - A′ is everything outside A.
+    - Together, what is covered?
+    solution: 'Step 1: A and its complement cover everything. Step 2: U.'
+    mistakes:
+      ∅: c11m1_venn
+      A: c11m1_venn
+  - prompt: n(A) = 20, n(B) = 15, n(A ∩ B) = 6. How many elements are in A only?
+    answer: '14'
+    check: 20-6
+    difficulty: 2
+    hints:
+    - Fill the overlap first.
+    - Take the overlap away from A.
+    solution: 'Step 1: overlap 6. Step 2: A only = 20 − 6 = 14.'
+    mistakes:
+      '20': c11m1_venn
+      '9': c11m1_venn
+  - prompt: 'If A ⊆ B, then A ∩ B equals:'
+    options:
+    - A
+    - B
+    - ∅
+    answer: A
+    difficulty: 2
+    hints:
+    - Every element of A is already in B.
+    - What do they have in common?
+    solution: 'Step 1: all of A lies in B. Step 2: A ∩ B = A.'
+    mistakes:
+      B: c11m1_venn
+      ∅: c11m1_venn
+  - prompt: U has 50 elements, n(A′) = 18. Find n(A).
+    answer: '32'
+    check: 50-18
+    difficulty: 3
+    hints:
+    - A and A′ split U with no overlap.
+    - Subtract.
+    solution: 'Step 1: n(A) + n(A′) = n(U). Step 2: n(A) = 50 − 18 = 32.'
+    mistakes:
+      '68': c11m1_venn
+      '18': c11m1_venn

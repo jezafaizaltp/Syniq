@@ -7,6 +7,10 @@ tips:
   m3_biggest_3digit: "The biggest digit is 9. Use it in every place."
   m3_order: "Smallest to largest: each number must be bigger than the one before it."
   m3_smaller: "Both start with 36. Compare the ones digit."
+  c3m6_place: 'Write the number in three boxes: hundreds, tens, ones. Read each box.'
+  c3m6_zero: If a place has nothing, write 0 there so the other digits stay in their places.
+  c3m6_first: Compare the hundreds digits first. Only look at tens if the hundreds are the same.
+  c3m6_next: Say the number, then count one more (or one less). Watch for 9s turning into 0s.
 
 concepts:
 - code: cbse3m.hh.place
@@ -90,6 +94,51 @@ concepts:
           t: 0
           o: 6
         say: That's 706. The 6 is in the tens place.
+  lesson:
+    - teach: 'Big numbers have three places: hundreds, tens and ones. 10 tens make 1 hundred. In 268, the 2 means 2 hundreds, the 6 means 6 tens, and the 8 means 8 ones.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 1
+          label: hundreds
+        - size: 1
+          label: tens
+        - size: 1
+          label: ones
+        rows:
+        - size: 1
+          label: '268'
+        cells:
+        - - 2 → 200
+          - 6 → 60
+          - 8 → 8
+        alt: '268 in a place value table: 200, 60 and 8.'
+      check:
+        prompt: In 268, what does the 6 stand for?
+        options:
+        - '60'
+        - '6'
+        - '600'
+        answer: '60'
+        why: 'The 6 is in the tens place: 6 tens = 60.'
+    - teach: 'We can write a number as a sum of its places: 268 = 200 + 60 + 8. This is called the expanded form.'
+      check:
+        prompt: 500 + 30 + 9 = ?
+        options:
+        - '539'
+        - '5309'
+        - '593'
+        answer: '539'
+        why: '5 hundreds, 3 tens, 9 ones: 539.'
+    - teach: Zero keeps a place empty. 3 hundreds and 7 ones, with no tens, is 307, not 37. The 0 holds the tens place.
+      check:
+        prompt: '6 hundreds and 2 ones (no tens) make:'
+        options:
+        - '602'
+        - '62'
+        - '620'
+        answer: '602'
+        why: The 0 in the middle shows there are no tens.
   items:
   - prompt: '3 hundreds, 4 tens and 5 ones make:'
     answer: '345'
@@ -156,6 +205,108 @@ concepts:
     mistakes:
       '6012': c3_place
       '60012': c3_place
+  - prompt: What is the value of 9 in 912?
+    answer: '900'
+    check: '900'
+    difficulty: 1
+    hints:
+    - Which place is the 9 in?
+    - It is in the hundreds place.
+    solution: 'Step 1: 912 = 900 + 10 + 2. Step 2: The 9 stands for 900.'
+    mistakes:
+      '9': c3m6_place
+      '90': c3m6_place
+  - prompt: 400 + 70 + 3 = ?
+    answer: '473'
+    check: 400+70+3
+    difficulty: 1
+    hints:
+    - Hundreds, then tens, then ones.
+    - 4, 7, 3.
+    solution: 'Step 1: 4 hundreds, 7 tens, 3 ones. Step 2: = 473.'
+    mistakes:
+      '4073': c3m6_place
+      '437': c3m6_place
+  - prompt: '8 hundreds and 6 tens (no ones) make:'
+    answer: '860'
+    check: 800+60
+    difficulty: 2
+    hints:
+    - There are no ones.
+    - Which place needs a 0?
+    solution: 'Step 1: 800 + 60. Step 2: = 860.'
+    mistakes:
+      '86': c3m6_zero
+      '806': c3m6_zero
+  - prompt: How many tens are in 300?
+    answer: '30'
+    check: 300/10
+    difficulty: 2
+    hints:
+    - 1 hundred = 10 tens.
+    - 3 hundreds = how many tens?
+    solution: 'Step 1: Each hundred is 10 tens. Step 2: 3 × 10 = 30 tens.'
+    mistakes:
+      '3': c3m6_place
+      '300': c3m6_place
+  - prompt: Write 'seven hundred eight' in numbers.
+    answer: '708'
+    check: '708'
+    difficulty: 2
+    hints:
+    - Seven hundred = 700, eight = 8.
+    - Are there any tens?
+    solution: 'Step 1: 700 + 8, no tens. Step 2: = 708.'
+    mistakes:
+      '78': c3m6_zero
+      '7008': c3m6_zero
+  - prompt: What is the smallest 3-digit number?
+    answer: '100'
+    check: '100'
+    difficulty: 1
+    hints:
+    - 99 is the biggest 2-digit number.
+    - What comes after 99?
+    solution: 'Step 1: 99 has only 2 digits. Step 2: 99 + 1 = 100, the smallest 3-digit number.'
+    mistakes:
+      '111': c3m6_place
+      '101': c3m6_place
+  - prompt: Which number has 5 in the tens place?
+    options:
+    - '153'
+    - '531'
+    - '315'
+    answer: '153'
+    difficulty: 2
+    hints:
+    - The tens place is the middle digit.
+    - Look at the middle of each number.
+    solution: 'Step 1: Middle digits: 5, 3, 1. Step 2: 153 has 5 in the tens place.'
+    mistakes:
+      '531': c3m6_place
+      '315': c3m6_place
+  - prompt: A shop packs pencils in boxes of 100 and packets of 10. It has 2 boxes, 4 packets and 6 loose pencils. How many pencils?
+    answer: '246'
+    check: 200+40+6
+    difficulty: 3
+    hints:
+    - Boxes are hundreds, packets are tens.
+    - 200 + 40 + 6.
+    solution: 'Step 1: 2 boxes = 200, 4 packets = 40. Step 2: 200 + 40 + 6 = 246.'
+    mistakes:
+      '12': c3m6_place
+      '2406': c3m6_place
+  - prompt: What is 999 + 1?
+    answer: '1000'
+    check: 999+1
+    difficulty: 3
+    hints:
+    - 9 ones and 1 more make a ten.
+    - Every place fills up.
+    solution: 'Step 1: Ones, tens and hundreds all fill up. Step 2: 999 + 1 = 1000.'
+    mistakes:
+      '9910': c3m6_next
+      '100': c3m6_next
 - code: cbse3m.hh.compare
   title: Comparing and ordering 3-digit numbers
   after:
@@ -212,6 +363,45 @@ concepts:
       bin: Second is bigger
       clue: How many digits?
       why: 102 has hundreds.
+  lesson:
+    - teach: 'To compare two 3-digit numbers, look at the hundreds first. More hundreds means a bigger number: 612 > 589 because 6 hundreds is more than 5 hundreds, even though 89 looks big.'
+      check:
+        prompt: Which is bigger, 701 or 699?
+        options:
+        - '701'
+        - '699'
+        - they are equal
+        answer: '701'
+        why: 7 hundreds is more than 6 hundreds.
+    - teach: If the hundreds are the same, compare the tens. If the tens are the same too, compare the ones. 452 < 458 because 2 ones < 8 ones.
+      picture:
+        kind: number_line
+        from: 440
+        to: 460
+        step: 2
+        points:
+        - at: 452
+          label: '452'
+        - at: 458
+          label: '458'
+        alt: 452 lies to the left of 458 on the number line, so it is smaller.
+      check:
+        prompt: Which is smaller, 345 or 354?
+        options:
+        - '345'
+        - '354'
+        - they are equal
+        answer: '345'
+        why: Same hundreds; 4 tens < 5 tens.
+    - teach: 'To make the biggest number from digits, put the biggest digit in the hundreds place, then the next biggest. From 3, 8, 5: 853. For the smallest, start with the smallest digit: 358.'
+      check:
+        prompt: 'Smallest number from 6, 2, 9:'
+        options:
+        - '269'
+        - '962'
+        - '296'
+        answer: '269'
+        why: Smallest digit first, then the next smallest.
   items:
   - prompt: Which is bigger, 532 or 498?
     options:
@@ -287,3 +477,114 @@ concepts:
     solution: 7, 4, 1 makes 741.
     mistakes:
       '147': c3_place
+  - prompt: Which is bigger, 480 or 408?
+    options:
+    - '480'
+    - '408'
+    - they are equal
+    answer: '480'
+    difficulty: 1
+    hints:
+    - Hundreds are the same.
+    - Compare the tens.
+    solution: 'Step 1: Both have 4 hundreds. Step 2: 8 tens > 0 tens, so 480 is bigger.'
+    mistakes:
+      '408': c3m6_first
+      they are equal: c3m6_first
+  - prompt: What comes just after 509?
+    answer: '510'
+    check: 509+1
+    difficulty: 1
+    hints:
+    - Add 1.
+    - 9 ones and 1 more make a ten.
+    solution: 'Step 1: 509 + 1. Step 2: = 510.'
+    mistakes:
+      '5010': c3m6_next
+      '508': c3m6_next
+  - prompt: What comes just before 400?
+    answer: '399'
+    check: 400-1
+    difficulty: 2
+    hints:
+    - Take 1 away.
+    - The hundreds go down by 1 and the 0s become 9s.
+    solution: 'Step 1: 400 − 1. Step 2: = 399.'
+    mistakes:
+      '401': c3m6_next
+      '300': c3m6_next
+  - prompt: Make the biggest number from the digits 2, 9, 4.
+    answer: '942'
+    check: '942'
+    difficulty: 2
+    hints:
+    - Put the biggest digit first.
+    - Then the next biggest.
+    solution: 'Step 1: Order: 9, 4, 2. Step 2: = 942.'
+    mistakes:
+      '249': c3m6_first
+      '924': c3m6_first
+  - prompt: Which list is from largest to smallest?
+    options:
+    - 730, 703, 370
+    - 370, 703, 730
+    - 703, 730, 370
+    answer: 730, 703, 370
+    difficulty: 2
+    hints:
+    - Find the largest first.
+    - Compare hundreds, then tens.
+    solution: 'Step 1: 730 > 703 (3 tens > 0 tens). Step 2: Both > 370.'
+    mistakes:
+      370, 703, 730: c3m6_first
+      703, 730, 370: c3m6_first
+  - prompt: Which number is between 250 and 260?
+    options:
+    - '256'
+    - '265'
+    - '246'
+    answer: '256'
+    difficulty: 1
+    hints:
+    - It must have 2 hundreds and 5 tens.
+    - More than 250, less than 260.
+    solution: 'Step 1: 256 > 250. Step 2: 256 < 260.'
+    mistakes:
+      '265': c3m6_first
+      '246': c3m6_first
+  - prompt: Village A has 615 people and Village B has 651. Which village has more people?
+    options:
+    - Village B
+    - Village A
+    - both the same
+    answer: Village B
+    difficulty: 2
+    hints:
+    - Both have 6 hundreds.
+    - Compare the tens.
+    solution: 'Step 1: Same hundreds. Step 2: 5 tens > 1 ten, so 651 is more.'
+    mistakes:
+      Village A: c3m6_first
+      both the same: c3m6_first
+  - prompt: 'Count on by 100: 250, 350, 450, ___'
+    answer: '550'
+    check: 450+100
+    difficulty: 1
+    hints:
+    - Only the hundreds digit changes.
+    - Add 1 hundred.
+    solution: 'Step 1: Each step adds 100. Step 2: 450 + 100 = 550.'
+    mistakes:
+      '460': c3m6_next
+      '451': c3m6_next
+  - prompt: Using 0, 5 and 7 once each, what is the smallest 3-digit number?
+    answer: '507'
+    check: '507'
+    difficulty: 3
+    hints:
+    - A 3-digit number cannot start with 0.
+    - Start with the smallest digit that is not 0.
+    solution: 'Step 1: 5 goes first. Step 2: Then 0, then 7: 507.'
+    mistakes:
+      '57': c3m6_zero
+      '570': c3m6_first

@@ -48,7 +48,7 @@ def _with_ways(cid):
     with SessionLocal() as db:
         c = db.get(Concept, cid)
         before = c.lesson
-        c.lesson = [{**s, "ways": STEP["ways"]} if n < 2 else s for n, s in enumerate(c.lesson)]
+        c.lesson = [{**s, "ways": STEP["ways"]} for s in c.lesson]  # same known ways on every step
         db.commit()
         return before
 

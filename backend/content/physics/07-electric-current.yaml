@@ -20,6 +20,9 @@ tips:
   electrons_move: "In a metal, the nucleus and its protons are fixed in place. Only the loosely held outer particles are free to drift along the wire."
   nichrome_high: "A heater needs a material that resists current strongly and gets hot: high resistivity."
   resistance_length: "Resistance is proportional to length: twice as long, twice the resistance."
+  pqk9p07_i_qt: I = Q ÷ t, with t in seconds. Change minutes to seconds first.
+  pqk9p07_v_ir: 'Cover the one you want in V = IR: V is I × R, I is V ÷ R, R is V ÷ I.'
+  pqk9p07_series_parallel: 'Series: resistances add. Parallel: total is smaller than the smallest one.'
 
 concepts:
   - code: phy9.current.charge
@@ -77,6 +80,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'Think of people walking through a school gate. Current is like counting how many pass through each second. In a wire, we count charge in coulombs: if 2 coulombs pass every second, the current is 2 amperes. I = Q ÷ t.'
+        - style: visual
+          teach: Current counts how much charge passes each second.
+          picture:
+            kind: flow
+            steps:
+            - Q = 10 C passes
+            - in t = 2 s
+            - I = 10 ÷ 2
+            - I = 5 A
+            alt: 10 coulombs passing in 2 seconds is a current of 5 amperes.
       - teach: In a metal wire, the particles that move are electrons, tiny negative charges. They drift from the − end to the + end of the cell. But long before electrons were found, scientists agreed that current flows from + to −. We still draw this 'conventional current', opposite to the electrons.
         picture:
           kind: compare
@@ -101,6 +114,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: in a metal wire, the charges that move are electrons, and they are negative. Step 2: negative charges are pulled towards +, so electrons drift from − to +. Step 3: the arrows on circuit diagrams were agreed before electrons were known, so they point from + to −.'
+        - style: real_world
+          teach: Electrons are like a slow crowd shuffling one way through a corridor. We still draw the arrow for current the other way, from + to −, because that rule was fixed before anyone knew about electrons. Both describe the same flow.
       - teach: 'Charge flows only when there is a potential difference (voltage), kept up by a cell or battery. Potential difference is the work done to move each coulomb: V = W ÷ Q. 1 volt = 1 joule per coulomb. A 3 V cell gives each coulomb 3 J of energy.'
         check:
           prompt: A 9 V battery pushes 2 C of charge round a circuit. How much work does it do?
@@ -113,6 +128,19 @@ concepts:
         ways:
         - style: real_world
           teach: 'A water tank on the roof pushes water through the pipes because it is high up. A cell pushes charge round a circuit in a similar way: its potential difference, in volts, is the energy it gives each coulomb. A 3 V cell gives each coulomb 3 J.'
+        - style: visual
+          teach: Each volt gives every coulomb one joule of energy.
+          picture:
+            kind: bars
+            bars:
+            - label: 1.5 V cell
+              value: 1.5
+            - label: 3 V (2 cells)
+              value: 3
+            - label: 9 V battery
+              value: 9
+            unit: J per coulomb
+            alt: A 1.5 volt cell gives each coulomb 1.5 joules, two cells 3 joules and a 9 volt battery 9 joules.
       - teach: 'Meters: an ammeter measures current, so all the current must pass through it. Connect it in series. A voltmeter measures the potential difference across a part, so it goes side by side with it: in parallel.'
         check:
           prompt: How is a voltmeter connected to measure the voltage across a bulb?
@@ -125,6 +153,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: the ammeter must count all the current, so break the circuit and put it in the loop: series. Step 2: the voltmeter compares two points, so connect its two leads either side of the part: parallel.'
+        - style: visual
+          teach: Where each meter goes in a circuit, and what it measures there.
+          picture:
+            kind: compare
+            columns:
+            - title: Ammeter
+              points:
+              - measures current
+              - in series, in the loop
+            - title: Voltmeter
+              points:
+              - measures potential difference
+              - in parallel, across the part
+            alt: An ammeter measures current and goes in series in the loop; a voltmeter measures potential difference and goes in parallel across a part.
     items:
       - prompt: "10 C of charge flows through a wire in 2 s. What is the current, in A?"
         answer: "5"
@@ -253,6 +295,36 @@ concepts:
         solution: 'Step 1: 10 minutes = 600 s. Step 2: Q = 0.2 × 600. Step 3: Q = 120 C.'
         mistakes:
           '2': seconds_needed
+      - prompt: 'Situation: A mobile charger delivers a current of 2 A for 30 minutes. How much charge flows?'
+        options:
+        - 3600 C
+        - 60 C
+        - 15 C
+        answer: 3600 C
+        hints:
+        - Q = I × t.
+        - 30 minutes = 1800 s.
+        solution: Q = 2 × 1800 = 3600 C.
+        mistakes:
+          60 C: pqk9p07_i_qt
+          15 C: charge_time
+        exam: case
+        difficulty: 2
+      - prompt: How much work is done in moving 4 C of charge across a potential difference of 6 V?
+        options:
+        - 24 J
+        - 1.5 J
+        - 10 J
+        answer: 24 J
+        hints:
+        - V = W ÷ Q.
+        - W = V × Q.
+        solution: W = 6 × 4 = 24 J.
+        mistakes:
+          1.5 J: work_vq
+          10 J: work_vq
+        exam: short
+        difficulty: 2
 
   - code: phy9.current.ohm
     title: Ohm's law and resistance
@@ -336,6 +408,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: connect a wire to one cell and read the current. Step 2: add a second cell: the voltage doubles, and so does the current. Step 3: V ÷ I stays the same number. Step 4: that number is the resistance R. So V = IR.'
+        - style: real_world
+          teach: 'Set up the experiment yourself: one cell gives 0.2 A, two cells 0.4 A, three cells 0.6 A. Divide V by I each time and you get the same number. That steady number is the wire''s resistance.'
       - teach: Use V = IR three ways. To find V, multiply I × R. To find I, divide V ÷ R. To find R, divide V ÷ I. A 10 Ω lamp on 5 V takes I = 5 ÷ 10 = 0.5 A.
         check:
           prompt: A 20 Ω resistor has 0.5 A flowing through it. What is the voltage across it?
@@ -348,6 +422,24 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write V = IR. Step 2: cover the one you want to find. Step 3: if it is V, multiply I and R; if it is I, divide V by R; if it is R, divide V by I.'
+        - style: visual
+          teach: One rule, V = IR, rearranged to find any one of the three.
+          picture:
+            kind: compare
+            columns:
+            - title: Find V
+              points:
+              - V = I × R
+              - 0.5 × 10 = 5 V
+            - title: Find I
+              points:
+              - I = V ÷ R
+              - 5 ÷ 10 = 0.5 A
+            - title: Find R
+              points:
+              - R = V ÷ I
+              - 5 ÷ 0.5 = 10 Ω
+            alt: V equals I times R, I equals V over R, and R equals V over I, shown with 5 volts, 0.5 amperes and 10 ohms.
       - teach: 'What decides resistance? A longer wire has more resistance (double the length, double R). A thicker wire has less (double the area, half R). The material matters too: copper has low resistivity, nichrome high. Heat usually raises it.'
         check:
           prompt: 'A wire is replaced with one of the same material and length but twice the thickness (area). Its resistance:'
@@ -360,6 +452,19 @@ concepts:
         ways:
         - style: real_world
           teach: 'Think of drinking juice through a straw. A long thin straw is hard work; a short wide one is easy. A wire is similar: longer means more resistance, thicker means less. The material matters too: copper lets current through easily, nichrome does not.'
+        - style: visual
+          teach: Longer wire, more resistance; thicker wire, less.
+          picture:
+            kind: bars
+            bars:
+            - label: 1 m wire
+              value: 2
+            - label: 2 m wire
+              value: 4
+            - label: 1 m, twice as thick
+              value: 1
+            unit: Ω (example)
+            alt: A 1 metre wire of 2 ohms becomes 4 ohms at 2 metres long, and 1 ohm if it is twice as thick.
       - teach: That is why house wiring is thick copper, which wastes little energy, while the coil in an iron or heater is nichrome, which resists strongly and gets hot. The bulb filament is tungsten, which glows white-hot without melting.
         check:
           prompt: Why are connecting wires made of copper?
@@ -372,6 +477,24 @@ concepts:
         ways:
         - style: real_world
           teach: Look at a heater coil glowing red, while the cable bringing current to it stays cool. The cable is thick copper, low resistance, so little energy is lost. The coil is nichrome, high resistance, so it heats up. A bulb's tungsten filament gets white-hot without melting.
+        - style: visual
+          teach: Each metal is picked for its job by how it resists current.
+          picture:
+            kind: compare
+            columns:
+            - title: Copper
+              points:
+              - low resistance
+              - house wiring
+            - title: Nichrome
+              points:
+              - high resistance
+              - heater, iron coil
+            - title: Tungsten
+              points:
+              - very high melting point
+              - bulb filament
+            alt: Copper with low resistance is used for wiring, nichrome with high resistance for heater coils, and tungsten with a very high melting point for bulb filaments.
     items:
       - prompt: "A 4 Ω resistor has 12 V across it. What current flows, in A?"
         answer: "3"
@@ -505,6 +628,36 @@ concepts:
         solution: 'Step 1: R = 8 ÷ 0.4 = 20 Ω. Step 2: I = 20 ÷ 20. Step 3: I = 1 A.'
         mistakes:
           '0.4': ohm_rearrange
+      - prompt: 'Situation: An electric kettle on 230 V draws 5 A. What is the resistance of its heating coil?'
+        options:
+        - 46 Ω
+        - 1150 Ω
+        - 0.02 Ω
+        answer: 46 Ω
+        hints:
+        - R = V ÷ I.
+        - 230 ÷ 5.
+        solution: R = 230 ÷ 5 = 46 Ω.
+        mistakes:
+          1150 Ω: pqk9p07_v_ir
+          0.02 Ω: ohm_rearrange
+        exam: case
+        difficulty: 2
+      - prompt: A wire of resistance 8 Ω is stretched to twice its length (its area halves). Its new resistance is
+        options:
+        - 32 Ω
+        - 16 Ω
+        - 8 Ω
+        answer: 32 Ω
+        hints:
+        - Double length doubles R.
+        - Half the area doubles R again.
+        solution: 8 × 2 × 2 = 32 Ω.
+        mistakes:
+          16 Ω: stretched_wire
+          8 Ω: resistance_length
+        exam: short
+        difficulty: 2
 
   - code: phy9.current.circuits
     title: Series and parallel circuits
@@ -581,6 +734,17 @@ concepts:
         ways:
         - style: real_world
           teach: 'A string of festival lights in series is a single loop: the same current goes through every bulb, and if one bulb fails, the whole string goes dark. Resistances in series add up, like stretches of a long narrow path one after another.'
+        - style: visual
+          teach: 'Series: one loop, the same current everywhere, resistances add.'
+          picture:
+            kind: flow
+            steps:
+            - cell
+            - 3 Ω bulb
+            - 6 Ω bulb
+            - 'back to cell: one path'
+            - R = 3 + 6 = 9 Ω
+            alt: In a series loop the current goes from the cell through a 3 ohm and a 6 ohm bulb and back, so the total resistance is 9 ohms.
       - teach: In a parallel circuit, each part has its own path between the same two points. Each gets the full supply voltage, and the currents add up. The total resistance is found from 1/R = 1/R₁ + 1/R₂. It is always smaller than the smallest resistor, because the current has more ways to go.
         check:
           prompt: Two 10 Ω resistors are in parallel. What is the total resistance?
@@ -593,6 +757,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'Opening more checkout counters at a shop lets more people through at once. Resistors in parallel are like extra counters: the current has more paths, so the total resistance is less than any one of them. Each gets the same voltage.'
+        - style: visual
+          teach: 3 Ω and 6 Ω in parallel give 2 Ω, less than either.
+          picture:
+            kind: flow
+            steps:
+            - 1/R = 1/3 + 1/6
+            - = 2/6 + 1/6 = 3/6
+            - 1/R = 1/2
+            - R = 2 Ω
+            alt: One over R equals a third plus a sixth, which is a half, so R is 2 ohms.
       - teach: Homes are wired in parallel. Every appliance gets the full 230 V, and each has its own switch, so turning off the fan doesn't turn off the light.
         check:
           prompt: In a house, one bulb burns out. What happens to the others?
@@ -605,6 +779,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: every appliance at home is connected across the same two supply wires. Step 2: so each gets the full 230 V. Step 3: each has its own switch on its own branch. Step 4: switching off or losing one branch leaves the others working.'
+        - style: visual
+          teach: Why homes use parallel wiring and not series.
+          picture:
+            kind: compare
+            columns:
+            - title: Series
+              points:
+              - voltage shared
+              - one off, all off
+            - title: Parallel
+              points:
+              - each gets 230 V
+              - own switch for each
+            alt: In series appliances share the voltage and one going off turns all off; in parallel each gets 230 volts and has its own switch.
       - teach: 'Electric power is how fast electrical energy is used: P = VI, in watts. A 230 V iron taking 4 A uses 920 W. Energy = power × time: in kWh, multiply kW by hours.'
         check:
           prompt: A lamp on 230 V takes 0.5 A. What is its power?
@@ -617,6 +805,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write the voltage V and the current I. Step 2: multiply: P = VI, in watts. Step 3: for energy, change to kW and multiply by hours to get kWh.'
+        - style: visual
+          teach: Power ratings of common appliances on 230 V.
+          picture:
+            kind: bars
+            bars:
+            - label: LED bulb
+              value: 9
+            - label: fan
+              value: 60
+            - label: iron
+              value: 920
+            - label: water heater
+              value: 2000
+            unit: W
+            alt: An LED bulb uses about 9 watts, a fan 60, an iron 920 and a water heater 2000.
     items:
       - prompt: "Resistors of 3 Ω and 6 Ω are connected in series. What is the total resistance, in Ω?"
         answer: "9"
@@ -753,3 +956,33 @@ concepts:
         solution: 'Step 1: Two 6 Ω in parallel = 3 Ω. Step 2: Total = 2 + 3 = 5 Ω. Step 3: I = 10 ÷ 5 = 2 A.'
         mistakes:
           '0.71': mixed_circuit
+      - prompt: 'Situation: Two 10 Ω bulbs are joined in parallel across a 5 V supply. What current comes from the supply?'
+        options:
+        - 1 A
+        - 0.25 A
+        - 0.5 A
+        answer: 1 A
+        hints:
+        - Each bulb gets the full 5 V.
+        - Each bulb takes 5 ÷ 10 A; add them.
+        solution: 'Each bulb takes 0.5 A, so the supply gives 1 A. (Or: total R = 5 Ω, I = 5 ÷ 5 = 1 A.)'
+        mistakes:
+          0.25 A: pqk9p07_series_parallel
+          0.5 A: parallel_reciprocal
+        exam: case
+        difficulty: 2
+      - prompt: A 230 V television takes a current of 0.5 A. Its power is
+        options:
+        - 115 W
+        - 460 W
+        - 230.5 W
+        answer: 115 W
+        hints:
+        - P = V × I.
+        - 230 × 0.5.
+        solution: P = 230 × 0.5 = 115 W.
+        mistakes:
+          460 W: power_vi
+          230.5 W: power_vi
+        exam: one_mark
+        difficulty: 1

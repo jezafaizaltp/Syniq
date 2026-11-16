@@ -3,6 +3,9 @@ subject: cbse10-math
 chapter: 4
 title: Quadratic Equations
 tips:
+  c10m4_check_both: "Check both conditions: does your rectangle really have an area of 400 m²?"
+  c10m4_root_not_square2: "That is the value of x², not x. One more step: take the square root."
+  c10m4_root_not_square: "You need the number whose square is 49, not 49 itself: take the square root."
   c10_root_sign: "Factorise, then set each bracket to zero: (x − k) = 0 gives x = +k, and (x + k) = 0 gives x = −k. Check by substituting."
   c10_reject_negative: A length, age or number of people can't be negative. Keep the root that makes sense.
   c10_discriminant_sign: "D = b² − 4ac subtracts 4ac. Square b (it is always positive), then take away 4 × a × c, minding the sign of c."
@@ -17,6 +20,11 @@ tips:
   c10m4_D: "Work out D = b² − 4ac carefully, signs included. Is it above zero, exactly zero or below zero? Then picture the parabola: does it cross, touch or miss the x-axis?"
   c10m4_sense: In a word problem, a length, age or count cannot be negative. Keep the root that makes sense.
   c10m4_formula: In x = (−b ± √D) / 2a, divide the whole top by 2a, and start with −b, not b.
+  c10m4_check_root_back: 'Put your width back in: does width × (width + 3) give the area?'
+  c10m4_negative_length: A width can't be negative. Keep the root that makes sense in the story.
+  c10m4_d_work: 'Work out D = b² − 4ac carefully: square b (its sign goes), then take away 4 × a × c. Is D above, at or below 0?'
+  c10m4_d_four: D = k² − 4 × 1 × 16. Don't drop the 4.
+  c10m4_root_k: 'That is k². One more step: take the square root.'
 concepts:
 - code: cbse10m.quad.factorise
   title: Solving quadratic equations by factorising
@@ -107,6 +115,29 @@ concepts:
         - −2 and −3
         answer: 2 and 3
         why: 2 × 3 = 6 and 2 + 3 = 5.
+      ways:
+      - style: visual
+        teach: 'x² + 5x + 6 as a rectangle: an x² square, 2 strips of x, 3 strips of x and 6 unit squares. Its sides are (x + 2) and (x + 3), so x² + 5x + 6 = (x + 2)(x + 3).'
+        picture:
+          kind: area_grid
+          cols:
+          - size: 3
+            label: x
+          - size: 2
+            label: '+2'
+          rows:
+          - size: 3
+            label: x
+          - size: 3
+            label: '+3'
+          cells:
+          - - x²
+            - 2x
+          - - 3x
+            - '6'
+          alt: A rectangle with sides x plus 2 and x plus 3, split into x squared, 2x, 3x and 6.
+      - style: step_by_step
+        teach: 'Step 1: For 2x² − 5x + 3, multiply a × c: 2 × 3 = 6. Step 2: List pairs that multiply to 6: 1 and 6, 2 and 3, −1 and −6, −2 and −3. Step 3: Pick the pair that adds to b = −5: −2 and −3. Step 4: Split the middle term: 2x² − 2x − 3x + 3.'
     - teach: 'Then factorise and set each bracket to zero. 2x² − 5x + 3 = 0: ac = 6, numbers −2 and −3. 2x² − 2x − 3x + 3 = 2x(x − 1) − 3(x − 1) = (2x − 3)(x − 1). So x = 3/2 or x = 1.'
       picture:
         kind: flow
@@ -125,6 +156,11 @@ concepts:
         - x = 4 or 7
         answer: x = −4 or 7
         why: Each bracket is zero at the opposite sign.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Split: 2x² − 2x − 3x + 3. Step 2: Group in pairs: 2x(x − 1) − 3(x − 1). Step 3: Take out the shared bracket: (x − 1)(2x − 3). Step 4: Set each bracket to 0: x = 1 or x = 3/2. Step 5: Check x = 1: 2 − 5 + 3 = 0 ✓.'
+      - style: real_world
+        teach: 'Think of two switches in a row: the light goes off if either switch is off. A product is 0 only if one of its factors is 0. So (2x − 3)(x − 1) = 0 means 2x − 3 = 0 or x − 1 = 0, and each gives one root.'
     - teach: 'Many problems lead to quadratics: areas, consecutive numbers, ages, speeds. Solve, then reject roots that make no sense, like a negative length.'
       check:
         prompt: A width comes out as 6 or −9 metres. Which is the answer?
@@ -134,6 +170,20 @@ concepts:
         - Both
         answer: 6 m
         why: A width cannot be negative.
+      ways:
+      - style: visual
+        teach: A park problem from story to answer. The negative root is thrown away because a width can't be negative.
+        picture:
+          kind: flow
+          steps:
+          - Width w, length w + 3, area 40
+          - w(w + 3) = 40
+          - w² + 3w − 40 = 0
+          - (w + 8)(w − 5) = 0
+          - 'w = 5 (not −8): 5 m by 8 m'
+          alt: Width w and length w plus 3 with area 40 give w squared plus 3w minus 40 equals 0, so w is 5, giving 5 metres by 8 metres.
+      - style: real_world
+        teach: 'Two consecutive positive whole numbers multiply to 156. Call them n and n + 1: n² + n − 156 = 0, so (n + 13)(n − 12) = 0. n = −13 is not positive, so n = 12 and the numbers are 12 and 13. Check: 12 × 13 = 156 ✓.'
   items:
   - prompt: Solve x² − 5x + 6 = 0. Give the larger root.
     answer: '3'
@@ -242,7 +292,7 @@ concepts:
     - Remember ± .
     solution: x = ±7, so the positive root is 7.
     mistakes:
-      '49': c10m4_formula
+      '49': c10m4_root_not_square
       '-7': c10m4_sense
   - prompt: The sum of a number and its square is 72. If the number is positive, find it.
     answer: '8'
@@ -289,7 +339,7 @@ concepts:
     - x² = 4.
     solution: x² = 4, so x = ±2; positive root 2.
     mistakes:
-      '4': c10m4_formula
+      '4': c10m4_root_not_square2
   - prompt: A train travels 360 km at a uniform speed. If the speed were 5 km/h more, it would take 1 hour less. Find the speed, in km/h.
     answer: '40'
     check: '40'
@@ -301,6 +351,40 @@ concepts:
     mistakes:
       '45': c10m4_bracket_sign
       '-45': c10m4_sense
+  - prompt: 'Assertion (A): x = −2 is a root of x² + 5x + 6 = 0.
+
+      Reason (R): x² + 5x + 6 = (x + 2)(x + 3).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: By R, the equation is (x + 2)(x + 3) = 0, which is 0 when x = −2 (or −3). So A is true, and R is why.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A rectangular park is 3 m longer than it is wide, and its area is 180 m². What is its width?'
+    options:
+    - 12 m
+    - 15 m
+    - −15 m
+    answer: 12 m
+    hints:
+    - Call the width w. Then the length is w + 3.
+    - w(w + 3) = 180 gives w² + 3w − 180 = 0. Find two numbers that multiply to −180 and add to 3.
+    solution: w² + 3w − 180 = 0 factorises as (w + 15)(w − 12) = 0. w = −15 makes no sense for a width, so w = 12 m (length 15 m, area 180 m² ✓).
+    mistakes:
+      15 m: c10m4_check_root_back
+      −15 m: c10m4_negative_length
+    exam: case
+    difficulty: 2
 - code: cbse10m.quad.formula
   title: The quadratic formula and nature of roots
   after:
@@ -404,6 +488,20 @@ concepts:
         - a
         answer: −b
         why: x = (−b ± √D) / 2a.
+      ways:
+      - style: visual
+        teach: The formula used on x² − 4x + 1 = 0, box by box.
+        picture:
+          kind: flow
+          steps:
+          - a = 1, b = −4, c = 1
+          - D = 16 − 4 = 12
+          - x = (4 ± √12) / 2
+          - √12 = 2√3
+          - x = 2 ± √3
+          alt: With a 1, b minus 4, c 1, D is 12, so x equals 4 plus or minus root 12 over 2, which is 2 plus or minus root 3.
+      - style: step_by_step
+        teach: 'Step 1: Read a, b and c, with their signs. Step 2: Work out D = b² − 4ac. Step 3: If D < 0, stop: there are no real roots. Step 4: Otherwise x = (−b ± √D) / 2a. Step 5: Simplify the root and divide, giving two answers, one with + and one with −.'
     - teach: The part under the root, D = b² − 4ac, is the discriminant. It tells the nature of the roots without solving.
       picture:
         kind: compare
@@ -429,6 +527,11 @@ concepts:
         - Two distinct
         answer: Not real
         why: D < 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Work out D = b² − 4ac. Step 2: D > 0: two different real roots. Step 3: D = 0: two equal roots, both −b/2a. Step 4: D < 0: no real roots. Example: x² + 2x + 5 has D = 4 − 20 = −16, so it has no real roots.'
+      - style: real_world
+        teach: 'Throw a ball up and ask: does it reach a height of h metres? That question is a quadratic. D > 0: it passes h twice, going up and coming down. D = 0: it just touches h at the very top. D < 0: it never gets that high.'
   items:
   - prompt: Find the discriminant of x² − 4x + 3.
     answer: '4'
@@ -564,7 +667,7 @@ concepts:
     - 'x² − 40x + 400 = 0: find D.'
     solution: 'Step 1: x² − 40x + 400 = 0 has D = 1600 − 1600 = 0. Step 2: equal roots x = 20, so a 20 m × 20 m park works.'
     mistakes:
-      Yes, 30 m by 10 m: c10m4_sense
+      Yes, 30 m by 10 m: c10m4_check_both
       No, D is negative: c10m4_D
   - prompt: The roots of x² − 2x − 1 = 0 are 1 ± √k. Find k.
     answer: '2'
@@ -601,3 +704,72 @@ concepts:
     mistakes:
       '2': c10m4_D
       '0': c10m4_D
+  - prompt: 'Assertion (A): x² − 6x + 9 = 0 has two equal roots.
+
+      Reason (R): A quadratic equation has two equal real roots when b² − 4ac = 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: D = 36 − 4 × 1 × 9 = 0, so by R the roots are equal (both 3). A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 2x² − 4x + 3 = 0 has two real roots.
+
+      Reason (R): If b² − 4ac < 0, a quadratic equation has no real roots.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: D = 16 − 24 = −8 < 0, so by R there are no real roots. A is false and R is true.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: For which positive value of k does x² + kx + 16 = 0 have two equal roots?
+    options:
+    - '8'
+    - '4'
+    - '64'
+    - '16'
+    answer: '8'
+    hints:
+    - Equal roots means D = b² − 4ac = 0.
+    - k² − 4 × 1 × 16 = 0.
+    solution: 'D = k² − 64 = 0, so k² = 64 and k = 8 (positive). Check: x² + 8x + 16 = (x + 4)², equal roots −4.'
+    mistakes:
+      '4': c10m4_d_four
+      '64': c10m4_root_k
+    exam: one_mark
+    difficulty: 1
+  - prompt: The nature of the roots of 3x² − 2x + 1 = 0 is
+    options:
+    - No real roots
+    - Two equal real roots
+    - Two different real roots
+    answer: No real roots
+    hints:
+    - Find D = b² − 4ac.
+    - b² = 4 and 4ac = 12.
+    solution: D = (−2)² − 4 × 3 × 1 = 4 − 12 = −8 < 0, so there are no real roots.
+    mistakes:
+      Two different real roots: c10m4_d_work
+      Two equal real roots: c10m4_d_work
+    exam: one_mark
+    difficulty: 2

@@ -9,6 +9,10 @@ tips:
   m3_change_def: "The shopkeeper gives back what you paid extra. Is that adding or taking away?"
   m3_make_100: "Add each choice. Which one makes exactly 100?"
   m3_notes: "Count in 10s until you reach 50. How many notes?"
+  c3m12_total: Line up the prices and add them, rupee by rupee or ten by ten.
+  c3m12_count_up: Start at the price and count up to the money you gave. The count is your change.
+  c3m12_notes: Lay the notes or coins out and skip count their values until you reach the amount.
+  c3m12_check: 'Check: price + change should be exactly the money you gave.'
 
 concepts:
 - code: cbse3m.gt.money
@@ -82,6 +86,49 @@ concepts:
           t: 0
           f: 5
         say: 5 coins of ₹5 is ₹25. Count in 5s to 50.
+  lesson:
+    - teach: Indian money comes as coins (₹1, ₹2, ₹5, ₹10, ₹20) and notes (₹10, ₹20, ₹50, ₹100, ₹200, ₹500). Each has a number on it that tells its value.
+      check:
+        prompt: Which is a note, not a coin, in India?
+        options:
+        - ₹100
+        - ₹1
+        - ₹2
+        answer: ₹100
+        why: ₹1 and ₹2 come as coins; ₹100 is a note.
+    - teach: One amount can be made in many ways. ₹50 = one ₹50 note, or five ₹10 notes, or two ₹20 notes and one ₹10 note. Skip count to check.
+      picture:
+        kind: compare
+        columns:
+        - title: Way 1
+          points:
+          - ₹50 note
+        - title: Way 2
+          points:
+          - ₹10 × 5
+        - title: Way 3
+          points:
+          - ₹20
+          - ₹20
+          - ₹10
+        alt: Three different ways to make ₹50.
+      check:
+        prompt: How many ₹5 coins make ₹20?
+        options:
+        - '4'
+        - '5'
+        - '15'
+        answer: '4'
+        why: '5, 10, 15, 20: four coins.'
+    - teach: 'To find the total cost, add the prices. A pen ₹12 and a notebook ₹25: 12 + 25 = ₹37.'
+      check:
+        prompt: A ball costs ₹20 and a bat ₹30. Total?
+        options:
+        - ₹50
+        - ₹10
+        - ₹2030
+        answer: ₹50
+        why: 20 + 30 = 50.
   items:
   - prompt: A pencil costs ₹5 and an eraser ₹3. Total cost in ₹?
     answer: '8'
@@ -143,6 +190,111 @@ concepts:
     - Check each.
     solution: ₹50 + ₹50 = ₹100.
     mistakes: {"five ₹10 notes": "m3_make_100"}
+  - prompt: How many ₹20 notes make ₹100?
+    answer: '5'
+    check: 100/20
+    difficulty: 1
+    hints:
+    - Skip count by 20.
+    - 20, 40, 60...
+    solution: 'Step 1: 20, 40, 60, 80, 100. Step 2: 5 notes.'
+    mistakes:
+      '4': c3m12_notes
+      '80': c3m12_notes
+  - prompt: ₹50 + ₹20 + ₹5 = ₹?
+    answer: '75'
+    check: 50+20+5
+    difficulty: 1
+    hints:
+    - Add the big ones first.
+    - 50 + 20, then + 5.
+    solution: 'Step 1: 50 + 20 = 70. Step 2: 70 + 5 = 75.'
+    mistakes:
+      '70': c3m12_total
+      '502005': c3m12_total
+  - prompt: A notebook costs ₹28 and a pencil box ₹35. Total in ₹?
+    answer: '63'
+    check: 28+35
+    difficulty: 2
+    hints:
+    - Add tens and ones.
+    - 8 + 5 needs a carry.
+    solution: 'Step 1: 8 + 5 = 13, carry 1. Step 2: 20 + 30 + 10 = 60, total 63.'
+    mistakes:
+      '53': c3m12_total
+      '7': c3m12_total
+  - prompt: Which does NOT make ₹30?
+    options:
+    - ₹20 + ₹5
+    - ₹10 + ₹10 + ₹10
+    - ₹20 + ₹10
+    answer: ₹20 + ₹5
+    difficulty: 2
+    hints:
+    - Add each set.
+    - Which total is not 30?
+    solution: 'Step 1: 20 + 5 = 25. Step 2: The others make 30.'
+    mistakes:
+      ₹10 + ₹10 + ₹10: c3m12_notes
+      ₹20 + ₹10: c3m12_notes
+  - prompt: How many ₹1 coins make ₹10?
+    answer: '10'
+    check: '10'
+    difficulty: 1
+    hints:
+    - Each coin is ₹1.
+    - Count to 10.
+    solution: 'Step 1: One rupee for each coin. Step 2: 10 coins.'
+    mistakes:
+      '1': c3m12_notes
+      '5': c3m12_notes
+  - prompt: 3 ₹10 notes and 4 ₹2 coins make how many ₹?
+    answer: '38'
+    check: 3*10+4*2
+    difficulty: 2
+    hints:
+    - 'Notes: 10, 20, 30.'
+    - 'Coins: 2, 4, 6, 8.'
+    solution: 'Step 1: Notes = 30, coins = 8. Step 2: 30 + 8 = 38.'
+    mistakes:
+      '7': c3m12_notes
+      '34': c3m12_notes
+  - prompt: A toy costs ₹65. Which is enough to pay?
+    options:
+    - ₹50 + ₹20
+    - ₹50 + ₹10
+    - ₹20 + ₹20 + ₹20
+    answer: ₹50 + ₹20
+    difficulty: 2
+    hints:
+    - Add each set.
+    - It must be ₹65 or more.
+    solution: 'Step 1: 70, 60, 60. Step 2: Only ₹70 is enough.'
+    mistakes:
+      ₹50 + ₹10: c3m12_total
+      ₹20 + ₹20 + ₹20: c3m12_total
+  - prompt: Kiran saves ₹5 each day for 6 days. How much is saved?
+    answer: '30'
+    check: 5*6
+    difficulty: 2
+    hints:
+    - ₹5, six times.
+    - Skip count by 5.
+    solution: 'Step 1: 5, 10, 15, 20, 25, 30. Step 2: ₹30.'
+    mistakes:
+      '11': c3m12_total
+      '25': c3m12_notes
+  - prompt: Fruit costs ₹40, vegetables ₹35 and milk ₹25. What is the total in ₹?
+    answer: '100'
+    check: 40+35+25
+    difficulty: 3
+    hints:
+    - Add two first.
+    - 35 + 25 makes a round number.
+    solution: 'Step 1: 35 + 25 = 60. Step 2: 60 + 40 = 100.'
+    mistakes:
+      '90': c3m12_total
+      '95': c3m12_total
 - code: cbse3m.gt.change
   title: Paying and getting change
   after:
@@ -208,6 +360,45 @@ concepts:
       - when:
           x: 8
         say: ₹8 came back to you. The price is 50 − 8.
+  lesson:
+    - teach: 'When you pay more than the price, the shopkeeper gives back change. Change = money given − price. Pay ₹20 for a ₹15 snack: change is ₹5.'
+      check:
+        prompt: Pay ₹10 for a ₹6 pencil. Change?
+        options:
+        - ₹4
+        - ₹16
+        - ₹6
+        answer: ₹4
+        why: 10 − 6 = 4.
+    - teach: 'Shopkeepers often count up from the price. Price ₹36, paid ₹50: 36 → 40 is 4, 40 → 50 is 10, so change is 4 + 10 = ₹14.'
+      picture:
+        kind: number_line
+        from: 30
+        to: 50
+        step: 2
+        jumps:
+        - from: 36
+          to: 40
+        - from: 40
+          to: 50
+        alt: Counting up from 36 to 40 (4) and 40 to 50 (10) gives ₹14 change.
+      check:
+        prompt: 'Price ₹45, paid ₹50. Count up: change?'
+        options:
+        - ₹5
+        - ₹15
+        - ₹95
+        answer: ₹5
+        why: 45 → 50 is 5.
+    - teach: 'Always check: price + change = money given. If ₹36 + ₹14 = ₹50, the change was right.'
+      check:
+        prompt: Price ₹28, change ₹2. How much was paid?
+        options:
+        - ₹30
+        - ₹26
+        - ₹56
+        answer: ₹30
+        why: 28 + 2 = 30.
   items:
   - prompt: You pay ₹20 for a ₹12 toy. Change in ₹?
     answer: '8'
@@ -270,3 +461,108 @@ concepts:
     - Extra money.
     solution: Change = money paid − price.
     mistakes: {"price plus money paid": "m3_change_def"}
+  - prompt: Pay ₹50 for a ₹42 kite. Change in ₹?
+    answer: '8'
+    check: 50-42
+    difficulty: 1
+    hints:
+    - Count up from 42 to 50.
+    - 42 → 50.
+    solution: 'Step 1: 50 − 42. Step 2: = ₹8.'
+    mistakes:
+      '92': c3m12_count_up
+      '12': c3m12_count_up
+  - prompt: Pay ₹100 for a ₹75 shirt. Change in ₹?
+    answer: '25'
+    check: 100-75
+    difficulty: 2
+    hints:
+    - 75 → 80 → 100.
+    - 5 + 20.
+    solution: 'Step 1: 75 → 80 is 5, 80 → 100 is 20. Step 2: 5 + 20 = ₹25.'
+    mistakes:
+      '35': c3m12_count_up
+      '175': c3m12_count_up
+  - prompt: Pay ₹20 for a ₹20 book. Change in ₹?
+    answer: '0'
+    check: 20-20
+    difficulty: 1
+    hints:
+    - You paid exactly the price.
+    - 20 − 20.
+    solution: 'Step 1: 20 − 20. Step 2: = ₹0, no change.'
+    mistakes:
+      '20': c3m12_count_up
+      '40': c3m12_count_up
+  - prompt: Price ₹64, change ₹36. How much was paid in ₹?
+    answer: '100'
+    check: 64+36
+    difficulty: 2
+    hints:
+    - Price + change = paid.
+    - 64 + 36.
+    solution: 'Step 1: 64 + 36. Step 2: = ₹100.'
+    mistakes:
+      '28': c3m12_check
+      '90': c3m12_check
+  - prompt: 'A shopkeeper says: price ₹18, you paid ₹20, change ₹3. Is that right?'
+    options:
+    - no, the change should be ₹2
+    - yes, it is right
+    - no, the change should be ₹38
+    answer: no, the change should be ₹2
+    difficulty: 2
+    hints:
+    - 'Check: price + change = paid.'
+    - 18 + 3 = ?
+    solution: 'Step 1: 18 + 3 = 21, not 20. Step 2: Change should be 20 − 18 = ₹2.'
+    mistakes:
+      yes, it is right: c3m12_check
+      no, the change should be ₹38: c3m12_count_up
+  - prompt: Pay ₹200 for a ₹150 bag. Change in ₹?
+    answer: '50'
+    check: 200-150
+    difficulty: 2
+    hints:
+    - 150 → 200.
+    - How many tens?
+    solution: 'Step 1: 200 − 150. Step 2: = ₹50.'
+    mistakes:
+      '150': c3m12_count_up
+      '350': c3m12_count_up
+  - prompt: Pay ₹50 for two pens at ₹15 each. Change in ₹?
+    answer: '20'
+    check: 50-15*2
+    difficulty: 3
+    hints:
+    - Find the cost of two pens first.
+    - Then take that from ₹50.
+    solution: 'Step 1: 15 + 15 = 30. Step 2: 50 − 30 = ₹20.'
+    mistakes:
+      '35': c3m12_total
+      '30': c3m12_count_up
+  - prompt: Which pays for a ₹27 snack with the least change?
+    options:
+    - ₹30
+    - ₹50
+    - ₹100
+    answer: ₹30
+    difficulty: 2
+    hints:
+    - Find the change for each.
+    - Which is smallest?
+    solution: 'Step 1: Changes would be ₹3, ₹23, ₹73. Step 2: ₹30 gives the least change.'
+    mistakes:
+      ₹50: c3m12_count_up
+      ₹100: c3m12_count_up
+  - prompt: Pay ₹100 for a ₹48 toy. Change in ₹?
+    answer: '52'
+    check: 100-48
+    difficulty: 3
+    hints:
+    - 48 → 50 → 100.
+    - 2 + 50.
+    solution: 'Step 1: 48 → 50 is 2, 50 → 100 is 50. Step 2: 2 + 50 = ₹52.'
+    mistakes:
+      '62': c3m12_count_up
+      '42': c3m12_count_up

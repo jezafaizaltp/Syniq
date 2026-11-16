@@ -10,6 +10,10 @@ tips:
   m3_days_wait: "Count on from 10 to 25, or take 10 away from 25."
   m3_minutes_hour: "The long hand goes all the way round once in an hour. Count the small marks on the clock face."
   m3_short_hand: "The long hand moves fast and shows minutes. The short hand moves slowly."
+  c3m13_order: Say the days (or months) in order from the start, pointing at each one.
+  c3m13_count: Count on from the first date to the second, one day at a time, or subtract.
+  c3m13_hands: 'Look at the long hand first: on 12 means o''clock, on 6 means half past. Then read the short hand.'
+  c3m13_hours: Count the hours on your fingers from the start time to the end time.
 
 concepts:
 - code: cbse3m.time.calendar
@@ -69,6 +73,42 @@ concepts:
       - when:
           v: 14
         say: That's yesterday.
+  lesson:
+    - teach: 'A week has 7 days: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. Then it starts again with Sunday.'
+      check:
+        prompt: Which day comes after Saturday?
+        options:
+        - Sunday
+        - Friday
+        - Monday
+        answer: Sunday
+        why: 'The week goes round: after Saturday comes Sunday.'
+    - teach: 'A year has 12 months: January, February, March, April, May, June, July, August, September, October, November, December. Most months have 30 or 31 days; February has 28 (29 in a leap year).'
+      picture:
+        kind: flow
+        steps:
+        - Jan-Mar
+        - Apr-Jun
+        - Jul-Sep
+        - Oct-Dec
+        alt: The 12 months of the year in four groups of three.
+      check:
+        prompt: Which month comes before June?
+        options:
+        - May
+        - July
+        - April
+        answer: May
+        why: May, then June.
+    - teach: 'On a calendar you can count days. From the 5th to the 12th: 12 − 5 = 7 days, which is one week.'
+      check:
+        prompt: From the 3rd to the 10th of a month, how many days?
+        options:
+        - '7'
+        - '13'
+        - '3'
+        answer: '7'
+        why: 10 − 3 = 7.
   items:
   - prompt: How many days are in a week?
     answer: '7'
@@ -133,6 +173,117 @@ concepts:
     - Count up.
     solution: 15 days.
     mistakes: {"35": "m3_days_wait", "14": "m3_days_wait"}
+  - prompt: How many days are in 3 weeks?
+    answer: '21'
+    check: 7*3
+    difficulty: 1
+    hints:
+    - One week = 7 days.
+    - 7 + 7 + 7.
+    solution: 'Step 1: 7 × 3. Step 2: = 21 days.'
+    mistakes:
+      '10': c3m13_count
+      '14': c3m13_count
+  - prompt: Which day comes before Wednesday?
+    options:
+    - Tuesday
+    - Thursday
+    - Monday
+    answer: Tuesday
+    difficulty: 1
+    hints:
+    - Say the days in order.
+    - Sunday, Monday, ...
+    solution: 'Step 1: Monday, Tuesday, Wednesday. Step 2: Tuesday is just before.'
+    mistakes:
+      Thursday: c3m13_order
+      Monday: c3m13_order
+  - prompt: Which month comes after October?
+    options:
+    - November
+    - September
+    - December
+    answer: November
+    difficulty: 1
+    hints:
+    - Say the months in order.
+    - September, October, ...
+    solution: 'Step 1: October, then November. Step 2: November.'
+    mistakes:
+      September: c3m13_order
+      December: c3m13_order
+  - prompt: Today is the 8th. A birthday is on the 20th. How many days to wait?
+    answer: '12'
+    check: 20-8
+    difficulty: 2
+    hints:
+    - Subtract the dates.
+    - 20 − 8.
+    solution: 'Step 1: 20 − 8. Step 2: = 12 days.'
+    mistakes:
+      '28': c3m13_count
+      '13': c3m13_count
+  - prompt: Which month is the shortest?
+    options:
+    - February
+    - January
+    - December
+    answer: February
+    difficulty: 1
+    hints:
+    - Most months have 30 or 31 days.
+    - One has only 28 or 29.
+    solution: 'Step 1: January and December have 31. Step 2: February has 28 or 29.'
+    mistakes:
+      January: c3m13_order
+      December: c3m13_order
+  - prompt: If today is Monday, what day will it be in 3 days?
+    options:
+    - Thursday
+    - Wednesday
+    - Friday
+    answer: Thursday
+    difficulty: 2
+    hints:
+    - Count on 3 days.
+    - Tuesday is 1.
+    solution: 'Step 1: Tuesday (1), Wednesday (2), Thursday (3). Step 2: Thursday.'
+    mistakes:
+      Wednesday: c3m13_order
+      Friday: c3m13_order
+  - prompt: How many months are in half a year?
+    answer: '6'
+    check: 12/2
+    difficulty: 2
+    hints:
+    - A year has 12 months.
+    - Half of 12.
+    solution: 'Step 1: 12 ÷ 2. Step 2: = 6 months.'
+    mistakes:
+      '12': c3m13_count
+      '24': c3m13_count
+  - prompt: January has 31 days. How many days are in January and February together in a year when February has 28 days?
+    answer: '59'
+    check: 31+28
+    difficulty: 3
+    hints:
+    - Add the two months.
+    - 31 + 28.
+    solution: 'Step 1: 31 + 28. Step 2: = 59 days.'
+    mistakes:
+      '58': c3m13_count
+      '60': c3m13_count
+  - prompt: A school holiday starts on the 1st and lasts 2 weeks. How many days is that?
+    answer: '14'
+    check: 7*2
+    difficulty: 2
+    hints:
+    - 1 week = 7 days.
+    - 2 weeks?
+    solution: 'Step 1: 7 + 7. Step 2: = 14 days.'
+    mistakes:
+      '7': c3m13_count
+      '2': c3m13_count
 - code: cbse3m.time.clock
   title: Reading the clock
   after:
@@ -184,6 +335,46 @@ concepts:
       bin: Half past
       clue: Long hand straight down.
       why: Half past 12.
+  lesson:
+    - teach: A clock has two hands. The short hand shows the hour. The long hand shows the minutes. When the long hand points at 12, the time is exactly 'o'clock'.
+      check:
+        prompt: Long hand on 12, short hand on 8. What time?
+        options:
+        - 8 o'clock
+        - 12 o'clock
+        - half past 8
+        answer: 8 o'clock
+        why: Long hand on 12 means o'clock; the short hand says the hour is 8.
+    - teach: 'The long hand goes all the way round in 60 minutes, which is 1 hour. Halfway round, at 6, is 30 minutes: we say ''half past''. The short hand is then halfway between two numbers.'
+      picture:
+        kind: compare
+        columns:
+        - title: Long hand on 12
+          points:
+          - o'clock
+          - 0 minutes past
+        - title: Long hand on 6
+          points:
+          - half past
+          - 30 minutes past
+        alt: Long hand on 12 means o'clock; on 6 means half past.
+      check:
+        prompt: Long hand on 6, short hand between 2 and 3. What time?
+        options:
+        - half past 2
+        - half past 3
+        - 6 o'clock
+        answer: half past 2
+        why: Half past means 30 minutes after; the short hand has passed 2 but not reached 3.
+    - teach: 'To find how long something takes, count the hours from start to end. School from 9 o''clock to 1 o''clock: 10, 11, 12, 1 is 4 hours.'
+      check:
+        prompt: From 4 o'clock to 6 o'clock is how many hours?
+        options:
+        - '2'
+        - '10'
+        - '6'
+        answer: '2'
+        why: '5, 6: two hours.'
   items:
   - prompt: 'The short hand on a clock shows the:'
     options:
@@ -252,3 +443,120 @@ concepts:
     - 5 − 2.
     solution: 3 hours.
     mistakes: {"7": "m3_count_hours", "2": "m3_count_hours"}
+  - prompt: Long hand on 12, short hand on 11. What time is it?
+    options:
+    - 11 o'clock
+    - 12 o'clock
+    - half past 11
+    answer: 11 o'clock
+    difficulty: 1
+    hints:
+    - Long hand on 12 means o'clock.
+    - Read the short hand.
+    solution: 'Step 1: o''clock. Step 2: Short hand on 11: 11 o''clock.'
+    mistakes:
+      12 o'clock: c3m13_hands
+      half past 11: c3m13_hands
+  - prompt: How many minutes are in 2 hours?
+    answer: '120'
+    check: 60*2
+    difficulty: 2
+    hints:
+    - 1 hour = 60 minutes.
+    - 60 + 60.
+    solution: 'Step 1: 60 + 60. Step 2: = 120 minutes.'
+    mistakes:
+      '62': c3m13_hours
+      '100': c3m13_hours
+  - prompt: Long hand on 6, short hand between 7 and 8. What time is it?
+    options:
+    - half past 7
+    - half past 8
+    - 6 o'clock
+    answer: half past 7
+    difficulty: 2
+    hints:
+    - Long hand on 6 means half past.
+    - The short hand has passed which number?
+    solution: 'Step 1: Half past. Step 2: It has passed 7, so half past 7.'
+    mistakes:
+      half past 8: c3m13_hands
+      6 o'clock: c3m13_hands
+  - prompt: A match starts at 3 o'clock and ends at 7 o'clock. How many hours?
+    answer: '4'
+    check: 7-3
+    difficulty: 1
+    hints:
+    - Count from 3 to 7.
+    - 4, 5, 6, 7.
+    solution: 'Step 1: 7 − 3. Step 2: = 4 hours.'
+    mistakes:
+      '10': c3m13_hours
+      '3': c3m13_hours
+  - prompt: What time is 1 hour after 6 o'clock?
+    options:
+    - 7 o'clock
+    - 5 o'clock
+    - half past 6
+    answer: 7 o'clock
+    difficulty: 1
+    hints:
+    - Add 1 hour.
+    - The short hand moves to the next number.
+    solution: 'Step 1: 6 + 1 = 7. Step 2: 7 o''clock.'
+    mistakes:
+      5 o'clock: c3m13_hours
+      half past 6: c3m13_hours
+  - prompt: Which is usually done in the morning?
+    options:
+    - brushing teeth after waking up
+    - eating dinner
+    - going to bed
+    answer: brushing teeth after waking up
+    difficulty: 1
+    hints:
+    - Think of the start of your day.
+    - What do you do right after waking?
+    solution: 'Step 1: Dinner and bed are at night. Step 2: Brushing after waking is in the morning.'
+    mistakes:
+      eating dinner: c3m13_order
+      going to bed: c3m13_order
+  - prompt: A cake bakes for half an hour. How many minutes is that?
+    answer: '30'
+    check: 60/2
+    difficulty: 1
+    hints:
+    - 1 hour = 60 minutes.
+    - Half of 60.
+    solution: 'Step 1: 60 ÷ 2. Step 2: = 30 minutes.'
+    mistakes:
+      '60': c3m13_hours
+      '15': c3m13_hours
+  - prompt: Long hand on 12, short hand on 12, at night. What is it called?
+    options:
+    - midnight
+    - noon
+    - half past 12
+    answer: midnight
+    difficulty: 2
+    hints:
+    - 12 o'clock happens twice a day.
+    - At night it has a special name.
+    solution: 'Step 1: 12 o''clock at night. Step 2: It is called midnight.'
+    mistakes:
+      noon: c3m13_hands
+      half past 12: c3m13_hands
+  - prompt: A train leaves at half past 2 and the trip takes 2 hours. When does it arrive?
+    options:
+    - half past 4
+    - 4 o'clock
+    - half past 3
+    answer: half past 4
+    difficulty: 3
+    hints:
+    - Add 2 hours to the hour.
+    - The 'half past' stays the same.
+    solution: 'Step 1: 2 + 2 = 4. Step 2: Still half past: half past 4.'
+    mistakes:
+      4 o'clock: c3m13_hours
+      half past 3: c3m13_hours

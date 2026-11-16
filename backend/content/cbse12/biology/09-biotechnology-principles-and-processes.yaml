@@ -14,6 +14,9 @@ tips:
   b12_pcr: "Each cycle doubles the DNA: 2ⁿ copies after n cycles."
   b12_scissors: "Restriction enzymes cut DNA at specific places."
   b12_taq: "PCR heats DNA to about 94 °C every cycle. The enzyme comes from a hot-spring bacterium."
+  c12b9_tool: 'Match the tool to its job: restriction enzyme cuts, ligase joins, vector carries, gel separates by size, PCR copies.'
+  c12b9_pcr: Each PCR cycle doubles the DNA, so after n cycles one molecule becomes 2ⁿ copies.
+  c12b9_step: 'Put rDNA steps in order: isolate DNA, cut, amplify (PCR), ligate into vector, insert into host, select, grow and purify the product.'
 concepts:
 - code: cbse12b.biotech.tools
   title: Tools of recombinant DNA technology
@@ -87,6 +90,57 @@ concepts:
       bin: Selectable marker
       clue: Which tool sorts transformed cells from the rest?
       why: A selectable marker.
+  lesson:
+    - teach: Biotechnology rests on genetic engineering (changing DNA) and bioprocess engineering (growing cells in sterile, large-scale conditions). Cohen and Boyer made the first recombinant DNA in 1972 by linking an antibiotic-resistance gene to a Salmonella plasmid. Restriction enzymes cut DNA at specific palindromic sequences; EcoRI cuts GAATTC, leaving single-stranded sticky ends that pair with matching ends. DNA ligase joins them.
+      picture:
+        kind: flow
+        steps:
+        - DNA with GAATTC
+        - EcoRI cuts
+        - sticky ends
+        - matching ends pair
+        - ligase seals
+        alt: How a restriction enzyme and ligase make recombinant DNA.
+      check:
+        prompt: 'A palindromic DNA sequence reads the same:'
+        options:
+        - on both strands in the 5′→3′ direction
+        - forwards and backwards on one strand only
+        - only after cutting
+        answer: on both strands in the 5′→3′ direction
+        why: GAATTC on one strand matches GAATTC on the other, read 5′→3′.
+    - teach: 'Gel electrophoresis separates DNA pieces by size: DNA is negative, so it moves to the anode through agarose gel; smaller pieces move further. Ethidium bromide stains DNA, which glows orange under UV light. Bands are cut out and the DNA extracted (elution).'
+      picture:
+        kind: number_line
+        from: 0
+        to: 10
+        points:
+        - at: 0
+          label: well (−)
+        - at: 3
+          label: large piece
+        - at: 8
+          label: small piece
+        - at: 10
+          label: anode (+)
+        alt: In a gel, small DNA pieces travel further from the well towards the anode than large ones.
+      check:
+        prompt: 'In a gel, the band furthest from the well holds the:'
+        options:
+        - smallest DNA pieces
+        - largest DNA pieces
+        - proteins only
+        answer: smallest DNA pieces
+        why: Small pieces slip through the gel more easily.
+    - teach: 'A cloning vector (plasmid or phage) needs: an origin of replication (ori) to copy itself, selectable markers (e.g. ampicillin or tetracycline resistance in pBR322) to pick out transformed cells, and unique cloning sites. Agrobacterium''s Ti plasmid carries genes into plants; disarmed retroviruses into animal cells. Host cells are made competent with CaCl₂ and heat shock, or DNA is added by microinjection or a gene gun.'
+      check:
+        prompt: 'The ''ori'' in a vector is needed for:'
+        options:
+        - starting replication
+        - cutting DNA
+        - killing bacteria
+        answer: starting replication
+        why: Without ori, the plasmid cannot be copied.
   items:
   - prompt: How many base pairs long is the EcoRI recognition site GAATTC?
     answer: '6'
@@ -163,6 +217,132 @@ concepts:
     - Plasmid of Salmonella.
     solution: Stanley Cohen and Herbert Boyer.
     mistakes: {"Watson and Crick": "b12_cohen_boyer", "Mendel and Morgan": "b12_cohen_boyer", "Fleming and Florey": "b12_cohen_boyer"}
+  - prompt: EcoRI is obtained from which bacterium?
+    options:
+    - Escherichia coli
+    - Thermus aquaticus
+    - Agrobacterium
+    answer: Escherichia coli
+    difficulty: 1
+    hints:
+    - Its name is built from the bacterium's name.
+    - E-co for the genus and species.
+    solution: 'Step 1: E + co + R strain RY13 + I. Step 2: E. coli.'
+    mistakes:
+      Thermus aquaticus: c12b9_tool
+      Agrobacterium: c12b9_tool
+  - prompt: 'DNA ligase is called molecular:'
+    options:
+    - glue
+    - scissors
+    - taxi
+    answer: glue
+    difficulty: 1
+    hints:
+    - It joins pieces together.
+    - Scissors cut; this does the opposite.
+    solution: 'Step 1: seals the sugar-phosphate backbone. Step 2: molecular glue.'
+    mistakes:
+      scissors: c12b9_tool
+      taxi: c12b9_tool
+  - prompt: 'DNA is stained in a gel with:'
+    options:
+    - ethidium bromide
+    - iodine
+    - safranin
+    answer: ethidium bromide
+    difficulty: 1
+    hints:
+    - It glows under UV light.
+    - It slips between DNA bases.
+    solution: 'Step 1: intercalating dye. Step 2: ethidium bromide.'
+    mistakes:
+      iodine: c12b9_tool
+      safranin: c12b9_tool
+  - prompt: Which plasmid of Agrobacterium tumefaciens is used to carry genes into plants?
+    options:
+    - Ti plasmid
+    - pBR322
+    - λ phage
+    answer: Ti plasmid
+    difficulty: 2
+    hints:
+    - It naturally causes tumours.
+    - The name stands for tumour-inducing.
+    solution: 'Step 1: disarmed tumour plasmid. Step 2: Ti.'
+    mistakes:
+      pBR322: c12b9_tool
+      λ phage: c12b9_tool
+  - prompt: 'Bacterial cells are made competent to take up DNA by treating them with:'
+    options:
+    - calcium chloride and heat shock
+    - ethidium bromide
+    - Taq polymerase
+    answer: calcium chloride and heat shock
+    difficulty: 2
+    hints:
+    - A divalent cation is used.
+    - Then ice, then 42 °C, then ice.
+    solution: 'Step 1: Ca²⁺ ions. Step 2: heat shock lets DNA in.'
+    mistakes:
+      ethidium bromide: c12b9_tool
+      Taq polymerase: c12b9_tool
+  - prompt: 'Shooting DNA-coated gold or tungsten particles into plant cells uses a:'
+    options:
+    - gene gun (biolistics)
+    - microinjection needle
+    - gel
+    answer: gene gun (biolistics)
+    difficulty: 2
+    hints:
+    - High-velocity microparticles.
+    - Bio + ballistics.
+    solution: 'Step 1: particles fired into cells. Step 2: gene gun.'
+    mistakes:
+      microinjection needle: c12b9_tool
+      gel: c12b9_tool
+  - prompt: Which is the complementary strand of 5′-GAATTC-3′ (read 5′→3′)?
+    options:
+    - GAATTC
+    - CTTAAG
+    - GTTAAC
+    answer: GAATTC
+    difficulty: 3
+    hints:
+    - Write the partner of each base, then read it backwards.
+    - Palindromes give the same answer.
+    solution: 'Step 1: complement 3′-CTTAAG-5′. Step 2: read 5′→3′: GAATTC.'
+    mistakes:
+      CTTAAG: c12b9_tool
+      GTTAAC: c12b9_tool
+  - prompt: 'In pBR322, the selectable markers are resistance to:'
+    options:
+    - ampicillin and tetracycline
+    - penicillin and streptomycin
+    - kanamycin only
+    answer: ampicillin and tetracycline
+    difficulty: 2
+    hints:
+    - Two antibiotic genes.
+    - Written as ampᴿ and tetᴿ.
+    solution: 'Step 1: two resistance genes. Step 2: ampicillin, tetracycline.'
+    mistakes:
+      penicillin and streptomycin: c12b9_tool
+      kanamycin only: c12b9_tool
+  - prompt: Why must the same restriction enzyme cut both the vector and the foreign DNA?
+    options:
+    - so their sticky ends match
+    - so DNA moves to the anode
+    - so bacteria die
+    answer: so their sticky ends match
+    difficulty: 2
+    hints:
+    - Think about how the pieces join.
+    - Overhangs must pair.
+    solution: 'Step 1: same enzyme, same overhang. Step 2: ends pair and ligase seals.'
+    mistakes:
+      so DNA moves to the anode: c12b9_tool
+      so bacteria die: c12b9_tool
 - code: cbse12b.biotech.process
   title: Processes of recombinant DNA technology
   after:
@@ -213,6 +393,51 @@ concepts:
       Select the recombinant cells: Selection sorts the host cells, so they must be transformed first.
       Grow them in a bioreactor: Only the selected recombinants are scaled up.
       'Downstream processing: purify the product': The product can only be purified after it has been made.
+  lesson:
+    - teach: 'First, DNA is isolated: enzymes break cell walls (lysozyme for bacteria, cellulase for plants, chitinase for fungi), RNase and protease remove RNA and proteins, and chilled ethanol makes pure DNA come out as fine threads. It is cut with restriction enzymes and checked on a gel.'
+      picture:
+        kind: flow
+        steps:
+        - break cells (lysozyme etc.)
+        - remove RNA and protein
+        - add chilled ethanol
+        - DNA threads spooled out
+        alt: Steps to isolate DNA from cells.
+      check:
+        prompt: 'Cell walls of fungi are broken with:'
+        options:
+        - chitinase
+        - cellulase
+        - lysozyme
+        answer: chitinase
+        why: Fungal walls contain chitin.
+    - teach: 'PCR (Kary Mullis) makes millions of copies of a gene. Each cycle: denaturation (~94 °C, strands separate), annealing (primers bind), extension (heat-stable Taq polymerase from Thermus aquaticus builds new strands). Each cycle doubles the DNA, so n cycles give 2ⁿ copies.'
+      picture:
+        kind: flow
+        steps:
+        - denature ~94 °C
+        - anneal primers
+        - extend with Taq
+        - DNA doubled
+        - repeat
+        alt: One cycle of PCR.
+      check:
+        prompt: How many copies after 5 PCR cycles, starting from one?
+        options:
+        - '32'
+        - '10'
+        - '25'
+        answer: '32'
+        why: 2 × 2 × 2 × 2 × 2 = 32.
+    - teach: 'The gene is ligated into a vector and put into a host. Transformed cells are picked by antibiotic resistance or by insertional inactivation: in blue–white screening, a gene inserted into lacZ stops β-galactosidase, so recombinant colonies stay white. Hosts are grown in large bioreactors (stirred-tank) with controlled temperature, pH and oxygen, then the product goes through downstream processing: separation, purification, formulation and quality testing.'
+      check:
+        prompt: 'In blue–white screening, blue colonies are:'
+        options:
+        - non-recombinant
+        - recombinant
+        - dead
+        answer: non-recombinant
+        why: Their lacZ gene still works.
   items:
   - prompt: Starting with one DNA molecule, how many copies are there after 10 PCR cycles?
     answer: '1024'
@@ -285,3 +510,127 @@ concepts:
     - Purify.
     solution: Downstream processing.
     mistakes: {"upstream processing": "b12_downstream", "transformation": "b12_downstream", "ligation": "b12_downstream"}
+  - prompt: Who invented PCR?
+    options:
+    - Kary Mullis
+    - Alec Jeffreys
+    - Herbert Boyer
+    answer: Kary Mullis
+    difficulty: 1
+    hints:
+    - He won the 1993 Nobel Prize in Chemistry.
+    - Not the DNA fingerprinting scientist.
+    solution: 'Step 1: invented in 1983. Step 2: Kary Mullis.'
+    mistakes:
+      Alec Jeffreys: c12b9_tool
+      Herbert Boyer: c12b9_tool
+  - prompt: Starting with 4 DNA molecules, how many are there after 3 PCR cycles?
+    answer: '32'
+    check: '32'
+    difficulty: 2
+    hints:
+    - Each cycle doubles every molecule.
+    - Multiply the start by 2³.
+    solution: 'Step 1: 2³ = 8. Step 2: 4 × 8 = 32.'
+    mistakes:
+      '12': c12b9_pcr
+      '8': c12b9_pcr
+      '64': c12b9_pcr
+  - prompt: 'In PCR, short DNA pieces that start the copying are:'
+    options:
+    - primers
+    - probes
+    - plasmids
+    answer: primers
+    difficulty: 1
+    hints:
+    - They bind at each end of the target.
+    - Polymerase extends them.
+    solution: 'Step 1: give a free 3′ end. Step 2: primers.'
+    mistakes:
+      probes: c12b9_tool
+      plasmids: c12b9_tool
+  - prompt: 'Taq polymerase comes from:'
+    options:
+    - Thermus aquaticus
+    - Escherichia coli
+    - Agrobacterium tumefaciens
+    answer: Thermus aquaticus
+    difficulty: 1
+    hints:
+    - A bacterium from hot springs.
+    - Taq is short for its name.
+    solution: 'Step 1: thermophile. Step 2: Thermus aquaticus.'
+    mistakes:
+      Escherichia coli: c12b9_tool
+      Agrobacterium tumefaciens: c12b9_tool
+  - prompt: 'Bacterial cell walls are broken during DNA isolation with:'
+    options:
+    - lysozyme
+    - chitinase
+    - cellulase
+    answer: lysozyme
+    difficulty: 1
+    hints:
+    - Also found in tears.
+    - It breaks peptidoglycan.
+    solution: 'Step 1: bacteria have peptidoglycan walls. Step 2: lysozyme.'
+    mistakes:
+      chitinase: c12b9_step
+      cellulase: c12b9_step
+  - prompt: 'Insertion of foreign DNA into the lacZ gene stops production of:'
+    options:
+    - β-galactosidase
+    - Taq polymerase
+    - ampicillin
+    answer: β-galactosidase
+    difficulty: 2
+    hints:
+    - lacZ codes an enzyme.
+    - That enzyme turns the substrate blue.
+    solution: 'Step 1: insertional inactivation. Step 2: no β-galactosidase, white colonies.'
+    mistakes:
+      Taq polymerase: c12b9_step
+      ampicillin: c12b9_step
+  - prompt: Which step comes right after cutting the DNA with a restriction enzyme in rDNA work (before ligation)?
+    options:
+    - amplifying the gene by PCR
+    - downstream processing
+    - selecting transformants
+    answer: amplifying the gene by PCR
+    difficulty: 3
+    hints:
+    - Many copies are needed before joining.
+    - Selection and processing come at the end.
+    solution: 'Step 1: isolate, cut. Step 2: amplify by PCR, then ligate.'
+    mistakes:
+      downstream processing: c12b9_step
+      selecting transformants: c12b9_step
+  - prompt: The most commonly used bioreactors are of which type?
+    options:
+    - stirred-tank
+    - open pond
+    - test tube
+    answer: stirred-tank
+    difficulty: 2
+    hints:
+    - They keep the culture mixed.
+    - A stirrer spreads oxygen evenly.
+    solution: 'Step 1: mixing and aeration. Step 2: stirred-tank.'
+    mistakes:
+      open pond: c12b9_step
+      test tube: c12b9_step
+  - prompt: In PCR, what happens at about 94 °C?
+    options:
+    - the DNA strands separate
+    - primers bind
+    - Taq builds new strands
+    answer: the DNA strands separate
+    difficulty: 2
+    hints:
+    - High heat breaks hydrogen bonds.
+    - This is the first step of each cycle.
+    solution: 'Step 1: denaturation. Step 2: two single strands.'
+    mistakes:
+      primers bind: c12b9_pcr
+      Taq builds new strands: c12b9_pcr

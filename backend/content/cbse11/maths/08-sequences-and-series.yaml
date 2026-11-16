@@ -15,6 +15,9 @@ tips:
   m11_sum_cubes: "Σk³ = [n(n + 1)/2]². Find the sum of the first n numbers, then square it."
   m11_sum_squares: "Σk² = n(n + 1)(2n + 1)/6. You are adding squares, not the numbers."
   m11_which_term: "Set a + (n − 1)d equal to 81 and solve for n."
+  c11m8_d: 'Find the common difference d = a₂ − a₁ first, and count n carefully: the first term uses (n − 1) = 0.'
+  c11m8_r: Find the common ratio r = a₂ ÷ a₁ first; the nth term uses r to the power n − 1.
+  c11m8_sum: Write the right sum formula first, then substitute a, d or r, and n.
 concepts:
 - code: cbse11m.seq.ap
   title: Sequences and arithmetic progressions
@@ -134,6 +137,42 @@ concepts:
           d: -3
           an: 0
         say: 'That''s the term that equals 0 (the 8th). The sum is still positive there: the negative terms after it have to cancel the positive ones.'
+  lesson:
+    - teach: 'A sequence is an ordered list a₁, a₂, a₃, ...; a series is the sum of its terms. In an arithmetic progression (AP) each term is the previous one plus a fixed d: aₙ = a + (n − 1)d.'
+      check:
+        prompt: Find the 5th term of 2, 6, 10, ...
+        options:
+        - '18'
+        - '22'
+        - '20'
+        answer: '18'
+        why: a + 4d = 2 + 16 = 18.
+    - teach: 'Sum of the first n terms of an AP: Sₙ = n/2 [2a + (n − 1)d] = n/2 (first + last). Gauss''s trick pairs the first and last terms.'
+      picture:
+        kind: flow
+        steps:
+        - 1 + 100 = 101
+        - 2 + 99 = 101
+        - '... 50 pairs'
+        - 50 × 101 = 5050
+        alt: Pairing terms to add 1 to 100.
+      check:
+        prompt: Find 1 + 2 + ... + 20.
+        options:
+        - '210'
+        - '200'
+        - '420'
+        answer: '210'
+        why: 20 × 21/2 = 210.
+    - teach: The arithmetic mean of a and b is (a + b)/2. Inserting n means between a and b makes an AP of n + 2 terms.
+      check:
+        prompt: Arithmetic mean of 7 and 19?
+        options:
+        - '13'
+        - '12'
+        - '26'
+        answer: '13'
+        why: (7 + 19)/2 = 13.
   items:
   - prompt: Find the 10th term of the AP 3, 7, 11, ...
     answer: '39'
@@ -193,6 +232,108 @@ concepts:
     - '+5.'
     solution: 4, 9, 14, 19 increases by 5 each time.
     mistakes: {"2, 4, 8, 16": "m11_is_ap", "1, 4, 9, 16": "m11_is_ap", "1, 1, 2, 3": "m11_is_ap"}
+  - prompt: Find the 15th term of the AP 10, 7, 4, ...
+    answer: '-32'
+    check: 10+14*(-3)
+    difficulty: 2
+    hints:
+    - Here d is negative.
+    - Use a + 14d.
+    solution: 'Step 1: d = −3. Step 2: 10 − 42 = −32.'
+    mistakes:
+      '52': c11m8_d
+      '-35': c11m8_d
+  - prompt: Find the sum of the first 10 odd numbers.
+    answer: '100'
+    check: 10**2
+    difficulty: 1
+    hints:
+    - 1 + 3 + 5 + ... ten terms.
+    - First 1, last 19.
+    solution: 'Step 1: S = 10/2 × (1 + 19). Step 2: 100.'
+    mistakes:
+      '110': c11m8_sum
+      '55': c11m8_sum
+  - prompt: How many terms of 3, 6, 9, ... make a sum of 165?
+    answer: '10'
+    check: '10'
+    difficulty: 3
+    hints:
+    - Sₙ = 3n(n + 1)/2.
+    - Solve n(n + 1) = 110.
+    solution: 'Step 1: 3n(n + 1)/2 = 165 gives n(n + 1) = 110. Step 2: n = 10.'
+    mistakes:
+      '11': c11m8_sum
+      '55': c11m8_sum
+  - prompt: The 3rd term of an AP is 12 and the 7th is 24. Find d.
+    answer: '3'
+    check: (24-12)/4
+    difficulty: 2
+    hints:
+    - From term 3 to term 7 is 4 steps of d.
+    - Divide the difference by 4.
+    solution: 'Step 1: 4d = 12. Step 2: d = 3.'
+    mistakes:
+      '12': c11m8_d
+      '4': c11m8_d
+  - prompt: Insert 3 arithmetic means between 2 and 18. What is the middle one?
+    answer: '10'
+    check: (2+18)/2
+    difficulty: 2
+    hints:
+    - The AP has 5 terms from 2 to 18.
+    - Find d, or use symmetry.
+    solution: 'Step 1: 2, 6, 10, 14, 18 (d = 4). Step 2: middle mean 10.'
+    mistakes:
+      '8': c11m8_d
+      '6': c11m8_d
+  - prompt: Is 1, 4, 9, 16, ... an AP?
+    options:
+    - 'No'
+    - Yes, d = 3
+    - Yes, d = 5
+    answer: 'No'
+    difficulty: 1
+    hints:
+    - Find the differences between neighbours.
+    - Are they all equal?
+    solution: 'Step 1: differences 3, 5, 7. Step 2: not constant, so not an AP.'
+    mistakes:
+      Yes, d = 3: c11m8_d
+      Yes, d = 5: c11m8_d
+  - prompt: Sum of all two-digit multiples of 5?
+    answer: '945'
+    check: 18*(10+95)/2
+    difficulty: 3
+    hints:
+    - They run 10, 15, ..., 95.
+    - Count the terms, then use n/2 (first + last).
+    solution: 'Step 1: 18 terms. Step 2: 18/2 × (10 + 95) = 945.'
+    mistakes:
+      '1050': c11m8_sum
+      '900': c11m8_sum
+  - prompt: Which term of 100, 96, 92, ... is 0?
+    answer: '26'
+    check: '26'
+    difficulty: 2
+    hints:
+    - Set 100 + (n − 1)(−4) = 0.
+    - Solve for n.
+    solution: 'Step 1: (n − 1) × 4 = 100. Step 2: n = 26.'
+    mistakes:
+      '25': c11m8_d
+      '24': c11m8_d
+  - prompt: If 2k, k + 10 and 3k + 2 are in AP, find k.
+    answer: '6'
+    check: '6'
+    difficulty: 3
+    hints:
+    - Middle term = mean of the outer two.
+    - 2(k + 10) = 2k + 3k + 2.
+    solution: 'Step 1: 2k + 20 = 5k + 2. Step 2: k = 6.'
+    mistakes:
+      '18': c11m8_d
+      '4': c11m8_d
 - code: cbse11m.seq.gp
   title: Geometric progressions
   after:
@@ -290,6 +431,47 @@ concepts:
           r: 0.2
           a: 15
         say: 'a = 15 gives S∞ = 15 ÷ 0.8 = 18.75. With r > 0 the sum is bigger than a: a = S∞ × (1 − r).'
+  lesson:
+    - teach: 'In a geometric progression (GP) each term is the previous one times a fixed ratio r: aₙ = arⁿ⁻¹. Example: 3, 6, 12, 24 has r = 2.'
+      check:
+        prompt: Common ratio of 81, 27, 9, ...?
+        options:
+        - 1/3
+        - '3'
+        - −54
+        answer: 1/3
+        why: 27/81 = 1/3.
+    - teach: 'Sum of n terms of a GP: Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1. If |r| < 1 the infinite sum exists: S∞ = a/(1 − r).'
+      picture:
+        kind: bars
+        unit: partial sum
+        bars:
+        - label: S1
+          value: 1
+        - label: S2
+          value: 1.5
+        - label: S3
+          value: 1.75
+        - label: S4
+          value: 1.875
+        alt: Partial sums of 1 + 1/2 + 1/4 + ... creep towards 2.
+      check:
+        prompt: Sum to infinity of 3 + 1 + 1/3 + ...?
+        options:
+        - 9/2
+        - '4'
+        - '6'
+        answer: 9/2
+        why: a/(1 − r) = 3/(2/3) = 9/2.
+    - teach: 'The geometric mean of a and b is √(ab), and for positive numbers AM ≥ GM. Special sums: Σn = n(n+1)/2, Σn² = n(n+1)(2n+1)/6, Σn³ = [n(n+1)/2]².'
+      check:
+        prompt: Geometric mean of 2 and 18?
+        options:
+        - '6'
+        - '10'
+        - '36'
+        answer: '6'
+        why: √(36) = 6.
   items:
   - prompt: Find the 6th term of the GP 2, 6, 18, ...
     answer: '486'
@@ -347,3 +529,105 @@ concepts:
     - 15².
     solution: 15² = 225.
     mistakes: {"15": "m11_sum_cubes", "125": "m11_sum_cubes"}
+  - prompt: Find the 5th term of 5, 10, 20, ...
+    answer: '80'
+    check: 5*2**4
+    difficulty: 1
+    hints:
+    - r = 2.
+    - Multiply by r four times.
+    solution: 'Step 1: 5 × 2⁴. Step 2: 80.'
+    mistakes:
+      '160': c11m8_r
+      '40': c11m8_r
+  - prompt: Find 3 + 6 + 12 + ... to 6 terms.
+    answer: '189'
+    check: 3*(2**6-1)
+    difficulty: 2
+    hints:
+    - a = 3, r = 2, n = 6.
+    - Use a(rⁿ − 1)/(r − 1).
+    solution: 'Step 1: 3(64 − 1)/1. Step 2: 189.'
+    mistakes:
+      '96': c11m8_sum
+      '192': c11m8_sum
+  - prompt: Sum to infinity of 6 − 3 + 3/2 − ...?
+    answer: '4'
+    check: 6/(1+0.5)
+    difficulty: 3
+    hints:
+    - r is negative here.
+    - a/(1 − r) with r = −1/2.
+    solution: 'Step 1: r = −1/2. Step 2: 6/(3/2) = 4.'
+    mistakes:
+      '12': c11m8_r
+      '9': c11m8_r
+  - prompt: Which term of 2, 4, 8, ... is 512?
+    answer: '9'
+    check: '9'
+    difficulty: 2
+    hints:
+    - 2 × 2ⁿ⁻¹ = 2ⁿ.
+    - 512 is which power of 2?
+    solution: 'Step 1: 2ⁿ = 512 = 2⁹. Step 2: n = 9.'
+    mistakes:
+      '8': c11m8_r
+      '10': c11m8_r
+  - prompt: Find 1² + 2² + ... + 6².
+    answer: '91'
+    check: 6*7*13//6
+    difficulty: 2
+    hints:
+    - Use n(n + 1)(2n + 1)/6.
+    - n = 6.
+    solution: 'Step 1: 6 × 7 × 13/6. Step 2: 91.'
+    mistakes:
+      '21': c11m8_sum
+      '441': c11m8_sum
+  - prompt: Find 1³ + 2³ + ... + 10³.
+    answer: '3025'
+    check: 55**2
+    difficulty: 2
+    hints:
+    - Σn³ = (Σn)².
+    - 1 + ... + 10 = 55.
+    solution: 'Step 1: 55². Step 2: 3025.'
+    mistakes:
+      '385': c11m8_sum
+      '55': c11m8_sum
+  - prompt: If 4, x, 9 are in GP (x > 0), find x.
+    answer: '6'
+    check: '6'
+    difficulty: 1
+    hints:
+    - Middle term² = product of neighbours.
+    - x² = 36.
+    solution: 'Step 1: x² = 4 × 9. Step 2: x = 6.'
+    mistakes:
+      '6.5': c11m8_d
+      '36': c11m8_r
+  - prompt: Write 0.333... as a fraction using an infinite GP.
+    options:
+    - 1/3
+    - 3/10
+    - 33/100
+    answer: 1/3
+    difficulty: 3
+    hints:
+    - 0.3 + 0.03 + 0.003 + ...
+    - a = 0.3, r = 0.1.
+    solution: 'Step 1: 0.3/(1 − 0.1) = 0.3/0.9. Step 2: 1/3.'
+    mistakes:
+      3/10: c11m8_sum
+      33/100: c11m8_sum
+  - prompt: For positive a and b with a + b = 10, what is the largest possible √(ab)?
+    answer: '5'
+    check: '5'
+    difficulty: 3
+    hints:
+    - Use AM ≥ GM.
+    - AM = 5.
+    solution: 'Step 1: √(ab) ≤ (a + b)/2 = 5. Step 2: largest value 5, when a = b = 5.'
+    mistakes:
+      '10': c11m8_r
+      '25': c11m8_r

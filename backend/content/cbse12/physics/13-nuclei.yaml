@@ -15,6 +15,9 @@ tips:
   p12_neutrons: "N = A − Z."
   p12_nuclear_force: "It holds protons together against repulsion, but only over about a femtometre."
   p12_nuclear_radius: "R ∝ A^(1/3). Find the number that, multiplied by itself three times, gives A."
+  c12p13_count: A is the mass number (protons + neutrons), Z the atomic number (protons). Neutrons N = A − Z.
+  c12p13_be: 'Binding energy = mass defect × 931.5 MeV per u. Per nucleon: divide by A.'
+  c12p13_react: "One process splits heavy nuclei and the other joins light ones. Compare the energy released per kilogram of fuel, not per reaction."
 concepts:
 - code: cbse12p.nuclei.structure
   title: Nuclear structure and binding energy
@@ -88,6 +91,46 @@ concepts:
       - when:
           a: 9
         say: '9 = 3², but R goes as the CUBE root of A: A = 3³.'
+  lesson:
+    - teach: A nucleus has Z protons and N neutrons; mass number A = Z + N. Isotopes share Z (same element), isobars share A, isotones share N. Atomic masses are measured in u, where 1 u = 1/12 of a carbon-12 atom = 1.66 × 10⁻²⁷ kg.
+      check:
+        prompt: '¹²C and ¹⁴C are:'
+        options:
+        - isotopes
+        - isobars
+        - isotones
+        answer: isotopes
+        why: Same Z = 6, different A.
+    - teach: Nuclear radius R = R₀A^(1/3) with R₀ ≈ 1.2 fm, so volume ∝ A and nuclear density is about the same for all nuclei (≈ 2.3 × 10¹⁷ kg/m³). The nuclear force holding nucleons together is very strong, short-range, and does not depend on charge.
+      check:
+        prompt: A nucleus has 8 times the mass number of another. Its radius is how many times larger?
+        options:
+        - '2'
+        - '8'
+        - '4'
+        answer: '2'
+        why: 8^(1/3) = 2.
+    - teach: 'A nucleus weighs less than its separate nucleons: the mass defect ΔM. Binding energy E_b = ΔMc², with 1 u ↔ 931.5 MeV. Binding energy per nucleon peaks at about 8.75 MeV near A = 56 (iron), so iron is the most stable; very light and very heavy nuclei can release energy by moving towards it.'
+      picture:
+        kind: bars
+        bars:
+        - label: ²H
+          value: 1.1
+        - label: ⁴He
+          value: 7.1
+        - label: ⁵⁶Fe
+          value: 8.8
+        - label: ²³⁵U
+          value: 7.6
+        alt: 'Binding energy per nucleon: low for deuterium, high for helium, highest for iron-56, slightly lower for uranium-235.'
+      check:
+        prompt: 'Which releases energy: splitting U-235 or splitting Fe-56?'
+        options:
+        - splitting U-235
+        - splitting Fe-56
+        - both
+        answer: splitting U-235
+        why: U-235's pieces have higher binding energy per nucleon; iron is already at the peak.
   items:
   - prompt: How many neutrons are in ²³⁵U (Z = 92)?
     answer: '143'
@@ -152,6 +195,117 @@ concepts:
     - About 2–3 fm.
     solution: Strong and short-range.
     mistakes: {"weak and long-range": "p12_nuclear_force", "the same as gravity": "p12_nuclear_force", "only between protons": "p12_nuclear_force"}
+  - prompt: How many neutrons are in ⁵⁶Fe (Z = 26)?
+    answer: '30'
+    check: 56 - 26
+    difficulty: 1
+    hints:
+    - N = A − Z.
+    - 56 − 26.
+    solution: 'Step 1: 56 − 26. Step 2: 30.'
+    mistakes:
+      '26': c12p13_count
+      '82': c12p13_count
+  - prompt: A mass defect of 0.02 u gives how much energy (MeV)? Use 931.5 MeV/u, as a fraction.
+    answer: 1863/100
+    check: Rational(2,100)*Rational(9315,10)
+    difficulty: 1
+    hints:
+    - E = ΔM × 931.5.
+    - 0.02 × 931.5.
+    solution: 'Step 1: 18.63 MeV. Step 2: 1863/100.'
+    mistakes:
+      9315/2: c12p13_be
+      1863/10: c12p13_be
+  - prompt: A nucleus with A = 20 has binding energy 160 MeV. Binding energy per nucleon (MeV)?
+    answer: '8'
+    check: 160/20
+    difficulty: 1
+    hints:
+    - Divide by A.
+    - 160/20.
+    solution: 'Step 1: 160/20. Step 2: 8 MeV.'
+    mistakes:
+      '3200': c12p13_be
+      '180': c12p13_be
+  - prompt: If R = R₀A^(1/3), how many times larger is the radius of A = 64 than A = 1?
+    answer: '4'
+    check: 64**Rational(1,3)
+    difficulty: 2
+    hints:
+    - Take the cube root of 64.
+    - 4 × 4 × 4 = 64.
+    solution: 'Step 1: 64^(1/3). Step 2: 4.'
+    mistakes:
+      '8': c12p13_count
+      '64': c12p13_count
+  - prompt: '¹⁴C and ¹⁴N are:'
+    options:
+    - isobars
+    - isotopes
+    - isotones
+    answer: isobars
+    difficulty: 2
+    hints:
+    - Compare A and Z.
+    - Same A = 14, different Z.
+    solution: 'Step 1: equal mass numbers. Step 2: isobars.'
+    mistakes:
+      isotopes: c12p13_count
+      isotones: c12p13_count
+  - prompt: 'Nuclear density compared for a light and a heavy nucleus is:'
+    options:
+    - about the same
+    - much larger for heavy nuclei
+    - much larger for light nuclei
+    answer: about the same
+    difficulty: 2
+    hints:
+    - Volume ∝ R³ ∝ A.
+    - Mass ∝ A too.
+    solution: 'Step 1: mass/volume ∝ A/A. Step 2: constant.'
+    mistakes:
+      much larger for heavy nuclei: c12p13_count
+      much larger for light nuclei: c12p13_count
+  - prompt: Helium-4 has binding energy about 28 MeV. Binding energy per nucleon (MeV)?
+    answer: '7'
+    check: 28/4
+    difficulty: 2
+    hints:
+    - Divide by the number of nucleons.
+    - 28/4.
+    solution: 'Step 1: 4 nucleons. Step 2: 7 MeV.'
+    mistakes:
+      '14': c12p13_be
+      '112': c12p13_be
+  - prompt: 'Deuterium: m_p + m_n − m_D = 0.0024 u. Binding energy (MeV) using 931.5, rounded to 1 decimal place?'
+    options:
+    - '2.2'
+    - '22.4'
+    - '0.2'
+    answer: '2.2'
+    difficulty: 3
+    hints:
+    - E = 0.0024 × 931.5.
+    - About 2.24.
+    solution: 'Step 1: 0.0024 × 931.5 ≈ 2.24 MeV. Step 2: 2.2.'
+    mistakes:
+      '22.4': c12p13_be
+      '0.2': c12p13_be
+  - prompt: 'The nuclear force between two protons compared with between two neutrons at the same distance is:'
+    options:
+    - about the same
+    - much stronger
+    - zero
+    answer: about the same
+    difficulty: 3
+    hints:
+    - The nuclear force ignores charge.
+    - Charge independence.
+    solution: 'Step 1: charge independent. Step 2: about equal.'
+    mistakes:
+      much stronger: c12p13_count
+      zero: c12p13_count
 - code: cbse12p.nuclei.energy
   title: Nuclear fission and fusion
   after:
@@ -225,6 +379,43 @@ concepts:
       bin: Fusion
       clue: Two light nuclei make a heavier one. Which process?
       why: A fusion reaction.
+  lesson:
+    - teach: 'Nuclear fission: a slow neutron hits ²³⁵U, which splits into two medium nuclei plus 2–3 neutrons and about 200 MeV. Those neutrons can split more nuclei: a chain reaction.'
+      picture:
+        kind: flow
+        steps:
+        - Neutron hits U-235
+        - U-236 splits
+        - Two fragments + 2–3 neutrons
+        - ~200 MeV released
+        - Neutrons cause more fissions
+        alt: Steps in a fission chain reaction.
+      check:
+        prompt: Why can fission sustain itself?
+        options:
+        - each fission releases more neutrons
+        - uranium heats up
+        - the fragments fuse again
+        answer: each fission releases more neutrons
+        why: The new neutrons trigger further fissions.
+    - teach: In a reactor the chain is controlled. A moderator (heavy water, graphite) slows neutrons so they cause fission. Control rods (cadmium, boron) absorb neutrons to keep the rate steady. A coolant carries heat away to make steam for turbines. India has reactors at Tarapur, Kudankulam and elsewhere.
+      check:
+        prompt: 'Pushing control rods further in makes the reaction rate:'
+        options:
+        - fall
+        - rise
+        - stay the same
+        answer: fall
+        why: More neutrons are absorbed.
+    - teach: 'Nuclear fusion: light nuclei join (hydrogen into helium), releasing even more energy per nucleon. It needs temperatures of millions of kelvin so nuclei can overcome their electrical repulsion. Fusion powers the Sun and stars.'
+      check:
+        prompt: 'Fusion happens naturally in:'
+        options:
+        - the core of stars
+        - uranium mines
+        - car engines
+        answer: the core of stars
+        why: Only there are temperature and pressure high enough.
   items:
   - prompt: About how much energy (MeV) is released per fission of uranium-235?
     answer: '200'
@@ -297,3 +488,120 @@ concepts:
     - Thermonuclear.
     solution: Positive nuclei must move fast enough to overcome repulsion.
     mistakes: {"it needs light": "p12_fusion", "it absorbs energy": "p12_fusion", "neutrons are slow": "p12_fusion"}
+  - prompt: Each fission releases 200 MeV. Energy (MeV) from 50 fissions?
+    answer: '10000'
+    check: 200*50
+    difficulty: 1
+    hints:
+    - Multiply.
+    - 200 × 50.
+    solution: 'Step 1: 200 × 50. Step 2: 10000 MeV.'
+    mistakes:
+      '250': c12p13_react
+      '4': c12p13_react
+  - prompt: Each fission releases 2 neutrons, each causing another fission. Fissions in the 4th generation (starting with 1)?
+    answer: '8'
+    check: 2**3
+    difficulty: 1
+    hints:
+    - 1, 2, 4, …
+    - Double each generation.
+    solution: 'Step 1: 1, 2, 4, 8. Step 2: 8.'
+    mistakes:
+      '16': c12p13_react
+      '6': c12p13_react
+  - prompt: Which material is used as a moderator?
+    options:
+    - heavy water
+    - cadmium
+    - lead
+    answer: heavy water
+    difficulty: 1
+    hints:
+    - It slows neutrons without absorbing them much.
+    - Cadmium absorbs them.
+    solution: 'Step 1: moderators slow neutrons. Step 2: heavy water.'
+    mistakes:
+      cadmium: c12p13_react
+      lead: c12p13_react
+  - prompt: Which is used in control rods?
+    options:
+    - boron
+    - graphite
+    - heavy water
+    answer: boron
+    difficulty: 2
+    hints:
+    - Control rods absorb neutrons.
+    - Cadmium is another.
+    solution: 'Step 1: strong neutron absorbers. Step 2: boron.'
+    mistakes:
+      graphite: c12p13_react
+      heavy water: c12p13_react
+  - prompt: 200 MeV in joules, in units of 10⁻¹¹ J (1 MeV = 1.6 × 10⁻¹³ J)?
+    answer: 16/5
+    check: 200*Rational(16,10)*10**-13*10**11
+    difficulty: 2
+    hints:
+    - Multiply by 1.6 × 10⁻¹³.
+    - 200 × 1.6 = 320.
+    solution: 'Step 1: 3.2 × 10⁻¹¹ J. Step 2: 16/5.'
+    mistakes:
+      '32': c12p13_react
+      '16': c12p13_react
+  - prompt: Why are neutrons, not protons, used to start fission?
+    options:
+    - neutrons are not repelled by the nucleus
+    - neutrons are heavier than uranium
+    - protons are too slow
+    answer: neutrons are not repelled by the nucleus
+    difficulty: 2
+    hints:
+    - The nucleus is positive.
+    - What charge does a neutron have?
+    solution: 'Step 1: neutrons are neutral. Step 2: no repulsion, so they reach the nucleus easily.'
+    mistakes:
+      neutrons are heavier than uranium: c12p13_react
+      protons are too slow: c12p13_react
+  - prompt: 'In the Sun, fusion turns hydrogen into:'
+    options:
+    - helium
+    - uranium
+    - iron
+    answer: helium
+    difficulty: 2
+    hints:
+    - The next light element.
+    - Four hydrogens make one.
+    solution: 'Step 1: light nuclei combine. Step 2: helium.'
+    mistakes:
+      uranium: c12p13_react
+      iron: c12p13_react
+  - prompt: Why is uncontrolled fission dangerous?
+    options:
+    - the number of fissions grows extremely fast, releasing huge energy
+    - it uses up all the oxygen
+    - it freezes the reactor
+    answer: the number of fissions grows extremely fast, releasing huge energy
+    difficulty: 3
+    hints:
+    - Think of the doubling chain.
+    - No neutrons are absorbed.
+    solution: 'Step 1: exponential growth. Step 2: explosive energy release.'
+    mistakes:
+      it uses up all the oxygen: c12p13_react
+      it freezes the reactor: c12p13_react
+  - prompt: Per kilogram of fuel, which releases more energy?
+    options:
+    - fusion
+    - fission
+    - burning coal
+    answer: fusion
+    difficulty: 3
+    hints:
+    - Compare energy per nucleon.
+    - The binding energy curve rises steeply for light nuclei.
+    solution: 'Step 1: fusion gains more MeV per nucleon. Step 2: fusion.'
+    mistakes:
+      fission: c12p13_react
+      burning coal: c12p13_react

@@ -15,6 +15,10 @@ tips:
   p12_series: "Resistors in series add directly."
   p12_terminal: "V = E − Ir. Some voltage is lost inside the cell."
   p12_wheatstone: "Balance: P/Q = R/S."
+  c12p3_ohm: Use V = IR with all three in base units (V, A, Ω). Rearrange for the one you need.
+  c12p3_comb: 'Series: add resistances. Parallel: add reciprocals, then flip; the total is smaller than the smallest.'
+  c12p3_power: P = VI = I²R = V²/R. Choose the form with the two quantities you know.
+  c12p3_cell: 'A real cell loses Ir inside itself: terminal V = ε − Ir, and I = ε/(R + r).'
 concepts:
 - code: cbse12p.current.ohm
   title: Current, resistance and Ohm's law
@@ -107,6 +111,48 @@ concepts:
           v: 12
           n: 4
         say: n = 4 gives 160 Ω and only 0.075 A. You need R = 40 Ω.
+  lesson:
+    - teach: 'Current is the rate of flow of charge: I = q/t, in amperes. In a metal, free electrons drift slowly against the field with drift speed v_d; I = neAv_d, where n is the number of free electrons per m³.'
+      check:
+        prompt: 6 C passes a point in 2 s. Current?
+        options:
+        - 3 A
+        - 12 A
+        - 1/3 A
+        answer: 3 A
+        why: I = q/t = 6/2.
+    - teach: 'Ohm''s law: V = IR for ohmic conductors at fixed temperature. Resistance R = ρl/A: longer wires resist more, thicker wires less. Resistivity ρ depends on the material, and for metals it rises with temperature.'
+      picture:
+        kind: compare
+        columns:
+        - title: Change
+          points:
+          - length × 2
+          - area × 2
+          - heat a metal
+        - title: Resistance
+          points:
+          - × 2
+          - ÷ 2
+          - rises
+        alt: How changing length, area or temperature affects a wire's resistance.
+      check:
+        prompt: 'A wire is replaced by one of the same material, same length, double area. R becomes:'
+        options:
+        - half
+        - double
+        - the same
+        answer: half
+        why: R ∝ 1/A.
+    - teach: 'Series: R = R₁ + R₂ + … (same current). Parallel: 1/R = 1/R₁ + 1/R₂ + … (same voltage). Power P = VI = I²R = V²/R; energy = Pt.'
+      check:
+        prompt: 'Two 10 Ω resistors in parallel give:'
+        options:
+        - 5 Ω
+        - 20 Ω
+        - 10 Ω
+        answer: 5 Ω
+        why: 1/R = 1/10 + 1/10 = 1/5.
   items:
   - prompt: A 12 V battery drives current through 4 Ω. Find the current (A).
     answer: '3'
@@ -167,6 +213,105 @@ concepts:
     - Positive α.
     solution: It increases.
     mistakes: {"decreases": "p12_resistivity_temp", "stays the same": "p12_resistivity_temp", "becomes zero": "p12_resistivity_temp"}
+  - prompt: A 9 V battery drives 3 A. Find the resistance (Ω).
+    answer: '3'
+    check: 9/3
+    difficulty: 1
+    hints:
+    - R = V/I.
+    - 9/3.
+    solution: 'Step 1: R = 9/3. Step 2: 3 Ω.'
+    mistakes:
+      '27': c12p3_ohm
+      1/3: c12p3_ohm
+  - prompt: Total resistance (Ω) of 2, 3 and 5 Ω in series.
+    answer: '10'
+    check: 2 + 3 + 5
+    difficulty: 1
+    hints:
+    - 'Series: add.'
+    - 2 + 3 + 5.
+    solution: 'Step 1: sum. Step 2: 10 Ω.'
+    mistakes:
+      '30': c12p3_comb
+      '1': c12p3_comb
+  - prompt: Total resistance (Ω) of 12 Ω and 4 Ω in parallel.
+    answer: '3'
+    check: 1/(Rational(1,12) + Rational(1,4))
+    difficulty: 1
+    hints:
+    - 1/R = 1/12 + 1/4.
+    - = 4/12.
+    solution: 'Step 1: 1/R = 1/3. Step 2: R = 3 Ω.'
+    mistakes:
+      '16': c12p3_comb
+      '8': c12p3_comb
+  - prompt: A heater draws 5 A at 220 V. Find its power (W).
+    answer: '1100'
+    check: 220*5
+    difficulty: 1
+    hints:
+    - P = VI.
+    - 220 × 5.
+    solution: 'Step 1: 220 × 5. Step 2: 1100 W.'
+    mistakes:
+      '44': c12p3_power
+      '225': c12p3_power
+  - prompt: A 4 Ω resistor carries 3 A. Find the power (W).
+    answer: '36'
+    check: 3**2*4
+    difficulty: 2
+    hints:
+    - P = I²R.
+    - 9 × 4.
+    solution: 'Step 1: I² = 9. Step 2: 36 W.'
+    mistakes:
+      '12': c12p3_power
+      '48': c12p3_power
+  - prompt: A wire of 8 Ω is stretched to twice its length (volume fixed). New resistance (Ω)?
+    answer: '32'
+    check: 8*4
+    difficulty: 2
+    hints:
+    - Length doubles and area halves.
+    - R ∝ l/A.
+    solution: 'Step 1: factor 2 × 2 = 4. Step 2: 32 Ω.'
+    mistakes:
+      '16': c12p3_comb
+      '8': c12p3_comb
+  - prompt: A wire has resistivity 2 × 10⁻⁸ Ω m, length 10 m and area 10⁻⁶ m². Find R (Ω) as a fraction.
+    answer: 1/5
+    check: 2*10/100
+    difficulty: 2
+    hints:
+    - R = ρl/A.
+    - 2 × 10⁻⁸ × 10 / 10⁻⁶.
+    solution: 'Step 1: 2 × 10⁻⁷ / 10⁻⁶ = 0.2. Step 2: 1/5 Ω.'
+    mistakes:
+      '2': c12p3_ohm
+      1/50: c12p3_ohm
+  - prompt: 'Three 6 Ω resistors: two in parallel, then in series with the third. Total (Ω)?'
+    answer: '9'
+    check: 3 + 6
+    difficulty: 3
+    hints:
+    - Parallel pair first.
+    - Then add the third.
+    solution: 'Step 1: 6 ∥ 6 = 3 Ω. Step 2: 3 + 6 = 9 Ω.'
+    mistakes:
+      '18': c12p3_comb
+      '2': c12p3_comb
+  - prompt: A 60 W bulb runs for 5 hours. Energy used in kWh, as a fraction?
+    answer: 3/10
+    check: Rational(60,1000)*5
+    difficulty: 3
+    hints:
+    - Energy = P × t.
+    - 60 W = 0.06 kW.
+    solution: 'Step 1: 0.06 × 5. Step 2: 0.3 = 3/10 kWh.'
+    mistakes:
+      '300': c12p3_power
+      '12': c12p3_power
 - code: cbse12p.current.circuits
   title: Cells, Kirchhoff's rules and the Wheatstone bridge
   after:
@@ -279,6 +424,42 @@ concepts:
           - 3
           - 20
         say: A bigger R takes less current, so the power falls. The most power flows when R = r.
+  lesson:
+    - teach: A real cell has an EMF ε and an internal resistance r. With current I flowing out, the terminal voltage is V = ε − Ir, and in a circuit with external R, I = ε/(R + r).
+      check:
+        prompt: ε = 3 V, r = 1 Ω, R = 2 Ω. Current?
+        options:
+        - 1 A
+        - 1.5 A
+        - 3 A
+        answer: 1 A
+        why: 3/(2 + 1) = 1.
+    - teach: 'Kirchhoff''s junction rule: current in = current out (charge is conserved). Loop rule: around any closed loop, the sum of EMFs equals the sum of IR drops (energy is conserved).'
+      picture:
+        kind: flow
+        steps:
+        - Label currents with directions
+        - Junction rule at nodes
+        - Loop rule round each loop
+        - Solve the equations
+        alt: Steps for solving a circuit with Kirchhoff's rules.
+      check:
+        prompt: '5 A enters a junction; one wire leaves with 2 A. The other leaving wire carries:'
+        options:
+        - 3 A
+        - 7 A
+        - 2 A
+        answer: 3 A
+        why: 'In = out: 5 = 2 + 3.'
+    - teach: 'Wheatstone bridge: four resistors P, Q, R, S with a galvanometer across the middle. It is balanced (no galvanometer current) when P/Q = R/S. This lets you find an unknown resistance.'
+      check:
+        prompt: P = 1 Ω, Q = 2 Ω, R = 5 Ω. S for balance?
+        options:
+        - 10 Ω
+        - 2.5 Ω
+        - 8 Ω
+        answer: 10 Ω
+        why: S = RQ/P = 5 × 2/1.
   items:
   - prompt: A cell of EMF 2 V and internal resistance 0.5 Ω gives 1 A. Find its terminal voltage (V).
     answer: '1.5'
@@ -343,3 +524,105 @@ concepts:
     - 3 × 2.
     solution: 6 V.
     mistakes: {"2 V": "p12_cells_series", "2/3 V": "p12_cells_series", "8 V": "p12_cells_series"}
+  - prompt: A cell of EMF 12 V and internal resistance 2 Ω gives 2 A. Find its terminal voltage (V).
+    answer: '8'
+    check: 12 - 2*2
+    difficulty: 1
+    hints:
+    - V = ε − Ir.
+    - 12 − 4.
+    solution: 'Step 1: Ir = 4 V. Step 2: 8 V.'
+    mistakes:
+      '16': c12p3_cell
+      '10': c12p3_cell
+  - prompt: A cell (ε = 9 V, r = 1 Ω) is joined to 8 Ω. Find the current (A).
+    answer: '1'
+    check: 9/(8 + 1)
+    difficulty: 1
+    hints:
+    - I = ε/(R + r).
+    - 9/9.
+    solution: 'Step 1: total 9 Ω. Step 2: 1 A.'
+    mistakes:
+      9/8: c12p3_cell
+      '9': c12p3_cell
+  - prompt: 'Four 1.5 V cells in series give a total EMF (V) of:'
+    answer: '6'
+    check: 4*Rational(3,2)
+    difficulty: 1
+    hints:
+    - Series cells add their EMFs.
+    - 4 × 1.5.
+    solution: 'Step 1: 4 × 1.5. Step 2: 6 V.'
+    mistakes:
+      3/2: c12p3_cell
+      3/8: c12p3_cell
+  - prompt: 'Wheatstone bridge: P = 3 Ω, Q = 6 Ω, S = 8 Ω. Find R (Ω) for balance.'
+    answer: '4'
+    check: 3*8/6
+    difficulty: 2
+    hints:
+    - P/Q = R/S.
+    - R = PS/Q.
+    solution: 'Step 1: R = 3 × 8/6. Step 2: 4 Ω.'
+    mistakes:
+      '16': c12p3_ohm
+      9/4: c12p3_ohm
+  - prompt: 'Kirchhoff''s loop rule is based on conservation of:'
+    options:
+    - energy
+    - charge
+    - momentum
+    answer: energy
+    difficulty: 2
+    hints:
+    - Think of going round and back to the start.
+    - Potential gains and drops cancel.
+    solution: 'Step 1: net work round a loop is zero. Step 2: energy conservation.'
+    mistakes:
+      charge: c12p3_cell
+      momentum: c12p3_cell
+  - prompt: A cell's terminal voltage is 10 V when open and 8 V when giving 1 A. Find r (Ω).
+    answer: '2'
+    check: (10 - 8)/1
+    difficulty: 2
+    hints:
+    - Open circuit gives ε.
+    - ε − V = Ir.
+    solution: 'Step 1: 10 − 8 = 2 V lost. Step 2: r = 2 Ω.'
+    mistakes:
+      '8': c12p3_cell
+      '10': c12p3_cell
+  - prompt: Two cells, each ε = 2 V, r = 1 Ω, in series with a 2 Ω resistor. Find the current (A).
+    answer: '1'
+    check: 4/(2 + 2)
+    difficulty: 2
+    hints:
+    - EMFs add, internal resistances add.
+    - 4 V across 4 Ω total.
+    solution: 'Step 1: ε = 4 V, total R = 2 + 2 = 4 Ω. Step 2: 1 A.'
+    mistakes:
+      '2': c12p3_cell
+      4/3: c12p3_cell
+  - prompt: 'Single loop: 12 V battery (no internal resistance), resistors 2 Ω and 4 Ω in series. Find the voltage across the 4 Ω (V).'
+    answer: '8'
+    check: 12/6*4
+    difficulty: 3
+    hints:
+    - Current = 12/6.
+    - Drop across 4 Ω = I × 4.
+    solution: 'Step 1: I = 2 A. Step 2: 2 × 4 = 8 V.'
+    mistakes:
+      '4': c12p3_ohm
+      '6': c12p3_ohm
+  - prompt: A cell (ε = 6 V, r = 0.5 Ω) is short-circuited (R = 0). Find the current (A).
+    answer: '12'
+    check: 6/Rational(1,2)
+    difficulty: 3
+    hints:
+    - I = ε/(R + r) with R = 0.
+    - 6/0.5.
+    solution: 'Step 1: only r limits the current. Step 2: 12 A.'
+    mistakes:
+      '3': c12p3_cell
+      '6': c12p3_cell

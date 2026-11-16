@@ -14,6 +14,9 @@ tips:
   p12_uv: "Ozone absorbs radiation that causes sunburn."
   p12_visible: "Visible light runs from violet (~400 nm) to red."
   p12_xray: "These pass through soft tissue but are stopped by bone."
+  c12p8_c: "All EM waves travel at the speed of light in vacuum, and c = fλ. Put λ in metres first, then divide."
+  c12p8_order: "Order the bands by wavelength, longest first, and place the given wavelength among them. Frequency goes the opposite way."
+  c12p8_use: "Match each band with its typical use, from the longest waves to the shortest. Which band reflects well off aircraft and also heats food?"
 concepts:
 - code: cbse12p.emw.nature
   title: Displacement current and nature of EM waves
@@ -78,6 +81,50 @@ concepts:
       bin: Wrong
       clue: Is a steady current accelerating its charges?
       why: Steady currents make static fields, not waves.
+  lesson:
+    - teach: 'While a capacitor charges, no charge crosses the gap, yet a magnetic field appears there. Maxwell explained this with displacement current i_d = ε₀ dΦ_E/dt: a changing electric field produces a magnetic field, just as a changing magnetic field produces an electric field.'
+      check:
+        prompt: 'Displacement current exists between capacitor plates because:'
+        options:
+        - the electric field there is changing
+        - electrons jump across
+        - the plates touch
+        answer: the electric field there is changing
+        why: i_d depends on dΦ_E/dt, not on moving charge.
+    - teach: 'So changing E and B fields can keep creating each other and travel through space: an electromagnetic wave. E and B oscillate at right angles to each other and to the direction of travel (transverse). Accelerating charges produce them, and they need no medium.'
+      picture:
+        kind: compare
+        columns:
+        - title: E field
+          points:
+          - along y
+          - E₀ = cB₀
+        - title: B field
+          points:
+          - along z
+          - in phase with E
+        - title: Wave
+          points:
+          - travels along x
+          - speed c
+        alt: In an EM wave, E, B and the direction of travel are mutually perpendicular.
+      check:
+        prompt: 'EM waves can travel through:'
+        options:
+        - vacuum
+        - only air
+        - only solids
+        answer: vacuum
+        why: They are self-sustaining fields and need no medium.
+    - teach: In vacuum all EM waves travel at c = 1/√(μ₀ε₀) = 3 × 10⁸ m/s, and c = fλ. Peak fields are linked by E₀ = cB₀. EM waves carry energy and momentum, so they exert radiation pressure. Hertz first produced and detected them in the laboratory.
+      check:
+        prompt: E₀ = 300 V/m. B₀?
+        options:
+        - 10⁻⁶ T
+        - 10⁶ T
+        - 300 T
+        answer: 10⁻⁶ T
+        why: B₀ = E₀/c = 300/(3 × 10⁸).
   items:
   - prompt: An EM wave has frequency 3 × 10⁸ Hz. Find its wavelength in vacuum (m).
     answer: '1'
@@ -146,6 +193,114 @@ concepts:
     solution: Speed.
     mistakes:
       wavelength: c12p_em
+  - prompt: An EM wave has frequency 1.5 × 10⁸ Hz. Find its wavelength in vacuum (m).
+    answer: '2'
+    check: 3*10**8/(Rational(15,10)*10**8)
+    difficulty: 1
+    hints:
+    - λ = c/f.
+    - 3 × 10⁸ / 1.5 × 10⁸.
+    solution: 'Step 1: 3/1.5. Step 2: 2 m.'
+    mistakes:
+      1/2: c12p8_c
+      '4': c12p8_c
+  - prompt: An EM wave has wavelength 3 cm. Find its frequency in GHz (10⁹ Hz).
+    answer: '10'
+    check: 3*10**8/Rational(3,100)/10**9
+    difficulty: 1
+    hints:
+    - f = c/λ.
+    - λ = 0.03 m.
+    solution: 'Step 1: 3 × 10⁸/0.03 = 10¹⁰ Hz. Step 2: 10 GHz.'
+    mistakes:
+      '1': c12p8_c
+      '100': c12p8_c
+  - prompt: E₀ = 90 V/m in an EM wave. Find B₀ in units of 10⁻⁷ T.
+    answer: '3'
+    check: 90/(3*10**8)*10**7
+    difficulty: 1
+    hints:
+    - B₀ = E₀/c.
+    - 90/(3 × 10⁸).
+    solution: 'Step 1: 3 × 10⁻⁷ T. Step 2: 3.'
+    mistakes:
+      '30': c12p8_c
+      '27': c12p8_c
+  - prompt: 'EM waves are produced by charges that are:'
+    options:
+    - accelerating
+    - at rest
+    - moving at constant velocity
+    answer: accelerating
+    difficulty: 2
+    hints:
+    - A steady current makes only a steady field.
+    - The fields must change in time.
+    solution: 'Step 1: changing fields need changing motion. Step 2: accelerating charges.'
+    mistakes:
+      at rest: c12p8_c
+      moving at constant velocity: c12p8_c
+  - prompt: 'In an EM wave, the angle (degrees) between E and B is:'
+    answer: '90'
+    check: '90'
+    difficulty: 2
+    hints:
+    - The fields are mutually perpendicular.
+    - Both are also perpendicular to the motion.
+    solution: 'Step 1: E ⟂ B. Step 2: 90°.'
+    mistakes:
+      '0': c12p8_c
+      '180': c12p8_c
+  - prompt: Maxwell's displacement current completed which law?
+    options:
+    - Ampère's circuital law
+    - Ohm's law
+    - Coulomb's law
+    answer: Ampère's circuital law
+    difficulty: 2
+    hints:
+    - The law relates B around a loop to current.
+    - It failed for a charging capacitor.
+    solution: 'Step 1: ∮B·dl = μ₀(i + i_d). Step 2: Ampère''s law.'
+    mistakes:
+      Ohm's law: c12p8_c
+      Coulomb's law: c12p8_c
+  - prompt: A radio station broadcasts at 100 MHz. Wavelength (m)?
+    answer: '3'
+    check: 3*10**8/(100*10**6)
+    difficulty: 2
+    hints:
+    - 100 MHz = 10⁸ Hz.
+    - λ = c/f.
+    solution: 'Step 1: 3 × 10⁸/10⁸. Step 2: 3 m.'
+    mistakes:
+      '30': c12p8_c
+      1/3: c12p8_c
+  - prompt: Light takes about 500 s to reach Earth from the Sun. Distance in units of 10¹¹ m?
+    answer: 3/2
+    check: 3*10**8*500/10**11
+    difficulty: 3
+    hints:
+    - distance = c × t.
+    - 3 × 10⁸ × 500.
+    solution: 'Step 1: 1.5 × 10¹¹ m. Step 2: 3/2.'
+    mistakes:
+      '15': c12p8_c
+      '3': c12p8_c
+  - prompt: Why can EM waves exert pressure on a surface?
+    options:
+    - they carry momentum
+    - they have mass like particles of dust
+    - they are made of air
+    answer: they carry momentum
+    difficulty: 3
+    hints:
+    - Pressure comes from a change of momentum.
+    - Absorbing the wave transfers it.
+    solution: 'Step 1: EM waves carry momentum. Step 2: absorbing or reflecting it gives a force.'
+    mistakes:
+      they have mass like particles of dust: c12p8_c
+      they are made of air: c12p8_c
 - code: cbse12p.emw.spectrum
   title: The electromagnetic spectrum
   after:
@@ -197,6 +352,45 @@ concepts:
       Ultraviolet: 'UV is just beyond violet: shorter than visible light.'
       X-rays: X-rays are shorter than UV, around 1 nm and below.
       Gamma rays: Gamma rays from nuclei are the shortest of all.
+  lesson:
+    - teach: 'All EM waves are the same kind of wave, differing only in wavelength (and frequency). In order of decreasing wavelength: radio, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays. Frequency and photon energy increase in the same order.'
+      picture:
+        kind: flow
+        steps:
+        - Radio
+        - Microwave
+        - Infrared
+        - Visible
+        - Ultraviolet
+        - X-rays
+        - Gamma
+        alt: The EM spectrum from longest wavelength (radio) to shortest (gamma).
+      check:
+        prompt: Which has a longer wavelength than visible light?
+        options:
+        - infrared
+        - ultraviolet
+        - X-rays
+        answer: infrared
+        why: Infrared sits just beyond red, at longer wavelengths.
+    - teach: 'Uses: radio for broadcasting; microwaves for radar, mobile phones and ovens; infrared for heating, remote controls and night vision (it keeps the Earth warm by the greenhouse effect); visible light, 400–700 nm, for seeing.'
+      check:
+        prompt: 'Microwave ovens heat food mainly because microwaves:'
+        options:
+        - make water molecules vibrate
+        - contain hot air
+        - are radioactive
+        answer: make water molecules vibrate
+        why: The energy goes into water molecules' motion.
+    - teach: Ultraviolet from the Sun is mostly absorbed by the ozone layer; it can damage skin and eyes but is used to sterilise. X-rays pass through soft tissue and show bones. Gamma rays come from nuclei and are used to treat cancer.
+      check:
+        prompt: Which rays come from atomic nuclei?
+        options:
+        - gamma rays
+        - infrared
+        - radio waves
+        answer: gamma rays
+        why: They are emitted in nuclear reactions and decay.
   items:
   - prompt: Which EM waves have the shortest wavelength?
     options:
@@ -273,3 +467,126 @@ concepts:
     - f = c/λ.
     solution: Radio waves.
     mistakes: {"visible light": "p12_frequency_order", "X-rays": "p12_frequency_order", "ultraviolet": "p12_frequency_order"}
+  - prompt: Which has the highest frequency?
+    options:
+    - gamma rays
+    - X-rays
+    - ultraviolet
+    answer: gamma rays
+    difficulty: 1
+    hints:
+    - Highest frequency means shortest wavelength.
+    - The very end of the spectrum.
+    solution: 'Step 1: shortest λ. Step 2: gamma rays.'
+    mistakes:
+      X-rays: c12p8_order
+      ultraviolet: c12p8_order
+  - prompt: 'Radar uses:'
+    options:
+    - microwaves
+    - gamma rays
+    - ultraviolet
+    answer: microwaves
+    difficulty: 1
+    hints:
+    - Short radio-like waves that reflect off aircraft.
+    - Also used in ovens.
+    solution: 'Step 1: radar needs cm-scale waves. Step 2: microwaves.'
+    mistakes:
+      gamma rays: c12p8_use
+      ultraviolet: c12p8_use
+  - prompt: Visible light has wavelengths from about 400 nm to 700 nm. Find the width of this band (nm).
+    answer: '300'
+    check: 700 - 400
+    difficulty: 1
+    hints:
+    - Subtract the ends.
+    - 700 − 400.
+    solution: 'Step 1: 700 − 400. Step 2: 300 nm.'
+    mistakes:
+      '1100': c12p8_order
+      '400': c12p8_order
+  - prompt: Which waves are used to sterilise surgical instruments and water?
+    options:
+    - ultraviolet
+    - infrared
+    - radio waves
+    answer: ultraviolet
+    difficulty: 2
+    hints:
+    - They damage living cells.
+    - Just beyond violet.
+    solution: 'Step 1: they kill germs. Step 2: ultraviolet.'
+    mistakes:
+      infrared: c12p8_use
+      radio waves: c12p8_use
+  - prompt: The greenhouse effect traps which radiation near the Earth?
+    options:
+    - infrared
+    - X-rays
+    - gamma rays
+    answer: infrared
+    difficulty: 2
+    hints:
+    - It is heat radiation.
+    - The Earth's surface gives it out.
+    solution: 'Step 1: Earth re-emits heat. Step 2: infrared is trapped by gases.'
+    mistakes:
+      X-rays: c12p8_use
+      gamma rays: c12p8_use
+  - prompt: 'Arrange by increasing frequency: X-rays, radio, visible.'
+    options:
+    - radio, visible, X-rays
+    - X-rays, visible, radio
+    - visible, radio, X-rays
+    answer: radio, visible, X-rays
+    difficulty: 2
+    hints:
+    - Radio has the longest wavelength.
+    - Frequency rises as wavelength falls.
+    solution: 'Step 1: λ: radio > visible > X-ray. Step 2: f: radio < visible < X-ray.'
+    mistakes:
+      X-rays, visible, radio: c12p8_order
+      visible, radio, X-rays: c12p8_order
+  - prompt: Which waves are used in cancer treatment?
+    options:
+    - gamma rays
+    - microwaves
+    - infrared
+    answer: gamma rays
+    difficulty: 2
+    hints:
+    - Very high energy is needed to destroy cells.
+    - From radioactive sources.
+    solution: 'Step 1: high-energy radiation. Step 2: gamma rays.'
+    mistakes:
+      microwaves: c12p8_use
+      infrared: c12p8_use
+  - prompt: A wave of wavelength 500 nm is in which part of the spectrum?
+    options:
+    - visible
+    - infrared
+    - X-rays
+    answer: visible
+    difficulty: 3
+    hints:
+    - Compare with 400–700 nm.
+    - 500 is inside.
+    solution: 'Step 1: 400 < 500 < 700. Step 2: visible (green).'
+    mistakes:
+      infrared: c12p8_order
+      X-rays: c12p8_order
+  - prompt: Why do welders wear special glasses?
+    options:
+    - to block the strong ultraviolet from the arc
+    - to block radio waves
+    - to see in the dark
+    answer: to block the strong ultraviolet from the arc
+    difficulty: 3
+    hints:
+    - Welding arcs are very hot.
+    - This radiation harms the eyes.
+    solution: 'Step 1: arcs give off intense UV. Step 2: glasses protect the eyes.'
+    mistakes:
+      to block radio waves: c12p8_use
+      to see in the dark: c12p8_use

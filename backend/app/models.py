@@ -283,6 +283,9 @@ class Item(Base):
     # What a teacher wrote on the paper review sheet. Kept apart from review_note, which the
     # content loader rewrites, so it survives a reload until someone marks it fixed.
     fix_note: Mapped[str] = mapped_column(Text, default="")
+    # Board-exam format this question is written in ("" = ordinary practice). See EXAM_STYLES
+    # in content_packs. Written in the format, never copied from a past paper.
+    exam: Mapped[str] = mapped_column(String(20), default="", server_default="")
 
 
 class TutorQuestion(Base):

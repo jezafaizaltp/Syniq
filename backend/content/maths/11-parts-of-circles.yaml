@@ -5,6 +5,8 @@ chapter: 11
 title: Parts of Circles
 
 tips:
+  k9_chord_distance: "The distance is one side of the right triangle made with the radius and half the chord. Don't double it."
+  k9_chord_half: "The perpendicular from the centre cuts the chord into two equal halves: each part is half of it, not double."
   half_chord: "The perpendicular from the centre cuts the chord in half. Double the half you found."
   same_side: "On the same side of the centre, subtract the two distances; on opposite sides, add them."
   double_not_half: "The angle at the circle is half the angle at the centre on the same arc, not double."
@@ -18,6 +20,11 @@ tips:
   perpendicular_bisects: "The perpendicular from the centre always cuts a chord exactly in half."
   same_arc_equal: "Angles at the circle on the same arc are equal: both are half the centre angle."
   sector_fraction: "A sector's fraction is its angle over 360: 90/360."
+  pqk9m11_half_chord: The perpendicular from the centre halves the chord. Use half the chord in Pythagoras, then double.
+  pqk9m11_centre_twice: The angle at the centre is twice the angle at the circle, not half.
+  pqk9m11_cyclic: Opposite angles of a cyclic quadrilateral add to 180°.
+  pqk9m11_semicircle: An angle standing on a diameter is always a right angle.
+  pqk9m11_arc_or_area: Arc length uses 2πr; sector area uses πr². Which does the question want?
 
 concepts:
   - code: math9.circparts.chords
@@ -95,6 +102,46 @@ concepts:
         ways:
         - style: real_world
           teach: 'Stretch a string across a round plate, from edge to edge. Slide it towards the middle and it gets longer; slide it to the edge and it gets shorter. It is longest when it passes through the centre: that string is the diameter, twice the radius.'
+        - style: visual
+          teach: 'Chords of a circle: the diameter through the centre is the longest; chords further out get shorter.'
+          picture:
+            kind: geometry
+            points:
+              O:
+              - 5
+              - 5
+              _a:
+              - 1
+              - 5
+              _b:
+              - 9
+              - 5
+              _c:
+              - 1.54
+              - 7
+              _d:
+              - 8.46
+              - 7
+              _e:
+              - 3
+              - 8.46
+              _f:
+              - 7
+              - 8.46
+            circles:
+            - centre: O
+              radius: 4
+            segments:
+            - - _a
+              - _b
+              - diameter
+            - - _c
+              - _d
+              - chord
+            - - _e
+              - _f
+              - shorter chord
+            alt: A circle with a diameter through the centre and two chords higher up; the chord further from the centre is shorter.
       - teach: 'Draw a line from the centre perpendicular to a chord (meeting it at a right angle). It cuts the chord into two equal halves. Fold a paper circle so a chord lands on itself: the fold goes through the centre and the chord''s middle.'
         check:
           prompt: A chord is 10 cm long. The perpendicular from the centre meets it at M. How long is each half?
@@ -107,6 +154,41 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: draw a chord. Step 2: from the centre, draw a line that meets the chord at a right angle. Step 3: measure the two parts of the chord. They are equal: the perpendicular from the centre cuts the chord in half.'
+        - style: visual
+          teach: The perpendicular from the centre cuts the chord into two equal halves.
+          picture:
+            kind: geometry
+            points:
+              O:
+              - 5
+              - 5
+              A:
+              - 1
+              - 8
+              B:
+              - 9
+              - 8
+              M:
+              - 5
+              - 8
+            circles:
+            - centre: O
+              radius: 5
+            segments:
+            - - A
+              - M
+              - half
+            - - M
+              - B
+              - half
+            - - O
+              - M
+            angles:
+            - at: M
+              from: O
+              to: B
+              label: 90°
+            alt: A chord AB with the perpendicular from the centre O meeting it at M, the midpoint, so AM equals MB.
       - teach: 'So the radius, half the chord and the distance from the centre make a right triangle, with the radius as the longest side: r² = (half chord)² + d². Radius 5 and distance 3: half chord = √(25 − 9) = 4, so the chord is 8.'
         picture:
           kind: flow
@@ -127,6 +209,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: draw the radius to one end of the chord. Step 2: draw the perpendicular from the centre to the chord. Step 3: you now have a right triangle: radius is the longest side, half chord and distance are the other two. Step 4: half chord = √(r² − d²).'
+        - style: real_world
+          teach: 'Find the centre of a round plate: draw two chords, and the perpendicular through the middle of each. Both pass through the centre, so where they cross is the centre. Carpenters use this to find the middle of a round table top.'
     items:
       - prompt: "The perpendicular from the centre of a circle to a chord:"
         options: ["cuts the chord into two equal parts", "is always as long as the chord", "cuts the chord in the ratio 1 : 2", "never meets the chord"]
@@ -208,7 +292,7 @@ concepts:
         solution: 'Step 1: The perpendicular bisects PQ. Step 2: NQ = PQ ÷ 2. Step 3: = 7 cm.'
         mistakes:
           '14': perpendicular_bisects
-          '28': double_not_half
+          '28': k9_chord_half
       - prompt: A circle has a radius of 13 cm. A chord is 5 cm from the centre. How long is the chord, in cm?
         answer: '24'
         check: 2*sqrt(13**2 - 5**2)
@@ -229,7 +313,7 @@ concepts:
         solution: 'Step 1: Half chord = 12. Step 2: r² = 144 + 81 = 225. Step 3: r = 15 cm.'
         mistakes:
           '25': half_chord
-          '30': double_not_half
+          '30': radius_diameter
       - prompt: A circle has a radius of 17 cm and a chord 30 cm long. How far is the chord from the centre, in cm?
         answer: '8'
         check: sqrt(17**2 - 15**2)
@@ -239,7 +323,7 @@ concepts:
         - d² = 17² − 15².
         solution: 'Step 1: Half chord = 15. Step 2: d² = 289 − 225 = 64. Step 3: d = 8 cm.'
         mistakes:
-          '16': double_not_half
+          '16': k9_chord_distance
       - prompt: 'In a circle of radius 5 cm, which chord is closer to the centre: a 6 cm chord or an 8 cm chord?'
         options:
         - The 8 cm chord
@@ -263,6 +347,21 @@ concepts:
         solution: 'Step 1: 6 cm chord is 4 cm from the centre. Step 2: 8 cm chord is 3 cm from the centre. Step 3: Opposite sides: 4 + 3 = 7 cm.'
         mistakes:
           '1': same_side
+      - prompt: A chord is 3 cm from the centre of a circle of radius 5 cm. How long is the chord?
+        options:
+        - 8 cm
+        - 4 cm
+        - √34 cm
+        answer: 8 cm
+        hints:
+        - Half chord² = 5² − 3².
+        - Half chord = 4.
+        solution: Half the chord = √(25 − 9) = 4 cm, so the chord = 8 cm.
+        mistakes:
+          4 cm: pqk9m11_half_chord
+          √34 cm: pqk9m11_half_chord
+        exam: short
+        difficulty: 2
 
   - code: math9.circparts.angles
     title: Angles in circles
@@ -336,6 +435,45 @@ concepts:
         ways:
         - style: real_world
           teach: 'Stand at the centre of a round ground and look at a goal post: your view of it is a wide angle. Walk to the edge of the ground, on the far side, and the same goal post looks half as wide. The angle at the centre is always twice the angle at the circle.'
+        - style: visual
+          teach: Arc AB makes 80° at the centre O and half of that, 40°, at C on the circle.
+          picture:
+            kind: geometry
+            points:
+              O:
+              - 5
+              - 5
+              A:
+              - 1.94
+              - 2.43
+              B:
+              - 8.06
+              - 2.43
+              C:
+              - 5
+              - 9
+            circles:
+            - centre: O
+              radius: 4
+            segments:
+            - - O
+              - A
+            - - O
+              - B
+            - - C
+              - A
+            - - C
+              - B
+            angles:
+            - at: O
+              from: A
+              to: B
+              label: 2x
+            - at: C
+              from: A
+              to: B
+              label: x
+            alt: Arc AB makes an angle 2x at the centre O and an angle x at the point C on the circle.
       - teach: 'Two results follow. Angles on the same arc, from points on the same side, are all equal (each is half the same centre angle). And a diameter makes 180° at the centre, so any angle standing on a diameter is 90°: the angle in a semicircle is a right angle.'
         check:
           prompt: AB is a diameter and C is on the circle. What is angle ACB?
@@ -348,6 +486,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: a diameter is a straight line through the centre, so its angle at the centre is 180°. Step 2: the angle at the circle is half the angle at the centre. Step 3: half of 180° is 90°. So any angle standing on a diameter is a right angle.'
+        - style: visual
+          teach: Three facts that follow from the centre-angle rule.
+          picture:
+            kind: compare
+            columns:
+            - title: Same arc
+              points:
+              - angles from the same side
+              - are equal
+            - title: On a diameter
+              points:
+              - centre angle 180°
+              - angle at circle 90°
+            alt: Angles on the same arc from the same side are equal; an angle standing on a diameter is 90 degrees.
       - teach: A quadrilateral with all four corners on a circle is called cyclic. Its opposite angles add up to 180°. If one angle is 110°, the angle opposite it is 70°.
         check:
           prompt: A cyclic quadrilateral has an angle of 95°. What is the opposite angle?
@@ -360,6 +512,15 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: check all four corners of the quadrilateral are on the circle. Step 2: pick an angle and its opposite one. Step 3: they add to 180°. Step 4: so the opposite angle is 180° minus the angle you know.'
+        - style: visual
+          teach: Opposite angles in a cyclic quadrilateral add to 180°.
+          picture:
+            kind: flow
+            steps:
+            - ∠A = 110°
+            - ∠A + ∠C = 180°
+            - ∠C = 70°
+            alt: In a cyclic quadrilateral, angle A of 110 degrees means the opposite angle C is 70 degrees.
     items:
       - prompt: "An arc makes an angle of 80° at the centre. What angle does it make at a point on the rest of the circle, in degrees?"
         answer: "40"
@@ -484,8 +645,53 @@ concepts:
         - AB² = AC² + BC².
         solution: 'Step 1: Angle ACB = 90°, since AB is a diameter. Step 2: AB² = 25 + 144 = 169. Step 3: AB = 13 cm.'
         mistakes:
-          '6.5': half_chord
+          '6.5': radius_diameter
           '17': missed_right_angle
+      - prompt: An arc subtends 130° at the centre of a circle. What angle does it subtend at a point on the remaining part of the circle?
+        options:
+        - 65°
+        - 260°
+        - 50°
+        answer: 65°
+        hints:
+        - The centre angle is twice the angle at the circle.
+        - 130° ÷ 2.
+        solution: Angle at the circle = 130° ÷ 2 = 65°.
+        mistakes:
+          260°: pqk9m11_centre_twice
+          50°: pqk9m11_centre_twice
+        exam: one_mark
+        difficulty: 1
+      - prompt: ABCD is a cyclic quadrilateral with ∠B = 85°. Find ∠D.
+        options:
+        - 95°
+        - 85°
+        - 275°
+        answer: 95°
+        hints:
+        - B and D are opposite corners.
+        - ∠B + ∠D = 180°.
+        solution: ∠D = 180° − 85° = 95°.
+        mistakes:
+          85°: pqk9m11_cyclic
+          275°: pqk9m11_cyclic
+        exam: one_mark
+        difficulty: 2
+      - prompt: 'Situation: A semicircular arch has its ends at A and B, with AB a diameter. A lamp at point C on the arch is joined to A and B by cables. What is ∠ACB?'
+        options:
+        - 90°
+        - 180°
+        - 45°
+        answer: 90°
+        hints:
+        - AB is a diameter.
+        - What angle stands on a diameter?
+        solution: The angle in a semicircle is a right angle, so ∠ACB = 90°.
+        mistakes:
+          180°: pqk9m11_semicircle
+          45°: pqk9m11_semicircle
+        exam: case
+        difficulty: 2
 
   - code: math9.circparts.arcs_sectors
     title: Arcs and sectors
@@ -553,6 +759,36 @@ concepts:
         ways:
         - style: real_world
           teach: 'A clock face: from 12 to 3 the hand turns 90°, a quarter of the full 360°, and covers a quarter of the edge. An arc''s length is the same fraction of the whole circumference as its angle is of 360°.'
+        - style: visual
+          teach: A 90° arc is a quarter of the way round; a 60° arc is a sixth.
+          picture:
+            kind: geometry
+            points:
+              O:
+              - 5
+              - 5
+              A:
+              - 9
+              - 5
+              B:
+              - 5
+              - 9
+            circles:
+            - centre: O
+              radius: 4
+            segments:
+            - - O
+              - A
+              - r
+            - - O
+              - B
+              - r
+            angles:
+            - at: O
+              from: A
+              to: B
+              label: 90° = 1/4
+            alt: A circle with two radii making a 90 degree angle at the centre, cutting off a quarter of the circle.
       - teach: 'A sector is a slice of the circle between two radii, like a slice of pizza. Its area is the same fraction of the whole area: (θ/360) × πr². A 90° sector of a circle of radius 14 cm is 1/4 × 616 = 154 cm².'
         check:
           prompt: A circle has an area of 300 cm². What is the area of a 60° sector?
@@ -565,6 +801,15 @@ concepts:
         ways:
         - style: real_world
           teach: 'A round cake of 300 cm² cut into 6 equal slices: each slice has a 60° angle at the centre and an area of 300 ÷ 6 = 50 cm². A sector is a slice: its area is (angle ÷ 360) of the whole circle''s area.'
+        - style: visual
+          teach: A 90° sector of radius 14, as a quarter of the whole circle's area.
+          picture:
+            kind: flow
+            steps:
+            - 'whole: 22/7 × 14² = 616 cm²'
+            - 'fraction: 90/360 = 1/4'
+            - 'sector: 616 ÷ 4 = 154 cm²'
+            alt: The whole circle of radius 14 has area 616; a 90 degree sector is a quarter of it, 154 square centimetres.
       - teach: 'Watch which formula you need: arc length uses 2πr (a distance around), sector area uses πr² (a space inside). And you can go backwards: if an arc is 1/4 of the circumference, its angle is 90°.'
         check:
           prompt: An arc is half of the circle's circumference. What is its angle at the centre?
@@ -577,6 +822,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: ask: is it a length around (arc) or a space inside (sector)? Step 2: arc uses 2πr, sector uses πr². Step 3: multiply by angle ÷ 360. Going backwards: if an arc is a quarter of the way round, its angle is a quarter of 360°.'
+        - style: visual
+          teach: Arc length and sector area use the same fraction, but different formulas.
+          picture:
+            kind: compare
+            columns:
+            - title: Arc length
+              points:
+              - (θ/360) × 2πr
+              - a distance, in cm
+            - title: Sector area
+              points:
+              - (θ/360) × πr²
+              - a space, in cm²
+            alt: Arc length is theta over 360 times 2 pi r, measured in centimetres; sector area is theta over 360 times pi r squared, in square centimetres.
     items:
       - prompt: "What fraction of a circle is a sector with a 90° angle? Type a fraction like 1/2."
         answer: "1/4"
@@ -709,3 +968,18 @@ concepts:
         solution: 'Step 1: Full circle = 2 × 22/7 × 21 = 132 cm. Step 2: 20 minutes = 1/3 of a turn. Step 3: 132 ÷ 3 = 44 cm.'
         mistakes:
           '462': arc_not_area
+      - prompt: 'Situation: A clock''s minute hand is 7 cm long. How far does its tip travel in 15 minutes? (π = 22/7)'
+        options:
+        - 11 cm
+        - 38.5 cm
+        - 44 cm
+        answer: 11 cm
+        hints:
+        - '15 minutes is a quarter turn: 90°.'
+        - Arc = 1/4 × 2 × 22/7 × 7.
+        solution: 'The tip moves along a quarter of a circle of radius 7: 1/4 × 44 = 11 cm.'
+        mistakes:
+          38.5 cm: pqk9m11_arc_or_area
+          44 cm: pqk9m11_arc_or_area
+        exam: case
+        difficulty: 2

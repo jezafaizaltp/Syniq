@@ -8,6 +8,10 @@ tips:
   m4_greater: "The open mouth of > and < always eats the bigger number."
   m4_heaviest: "Which of these animals is the biggest land animal?"
   m4_smallest: "All start with 1. Compare the hundreds digit next."
+  c4m10_sign: The open mouth of the sign always faces the bigger number.
+  c4m10_left: 'Compare from the leftmost digit: first the thousands, then the hundreds, then tens.'
+  c4m10_many: 'Same amount each day or each leap: multiply. Then check the unit stays the same.'
+  c4m10_diff: '''How many more'' or ''how much heavier'' means take the smaller from the bigger.'
 concepts:
 - code: cbse4m.animals.compare
   title: Comparing animal numbers
@@ -70,6 +74,45 @@ concepts:
       bin: Both the same (=)
       clue: Work out double 12.
       why: 24 = 24.
+  lesson:
+    - teach: 'We use signs to compare numbers. > means greater than, < means less than, = means equal. The open side always faces the bigger number: 120 > 45.'
+      check:
+        prompt: 'Which sign makes this true: 38 ___ 83?'
+        options:
+        - <
+        - '>'
+        - '='
+        answer: <
+        why: 38 is less than 83, so the open side faces 83.
+    - teach: 'To compare big numbers, start from the left. 3,167 vs 3,082: thousands equal, hundreds 1 vs 0, so 3,167 is greater. A number with more digits is always bigger: 1,099 > 999.'
+      picture:
+        kind: bars
+        unit: animals
+        bars:
+        - label: elephants
+          value: 120
+        - label: leopards
+          value: 60
+        - label: tigers
+          value: 45
+        alt: Bars for elephants 120, leopards 60 and tigers 45 in a park.
+      check:
+        prompt: 'Which is greater: 2,409 or 2,490?'
+        options:
+        - 2,490
+        - 2,409
+        - they are equal
+        answer: 2,490
+        why: Same thousands and hundreds; tens 9 > 0.
+    - teach: Double means 2 times; half means share into 2 equal parts. Double 450 = 900, and half of 900 = 450. Doubling and halving undo each other.
+      check:
+        prompt: What is double 35?
+        options:
+        - '70'
+        - '60'
+        - '37'
+        answer: '70'
+        why: 35 + 35 = 70.
   items:
   - prompt: 'Which sign makes this true: 120 ___ 45?'
     options:
@@ -134,6 +177,120 @@ concepts:
     - Same thousands, look at hundreds.
     solution: 1,099 has 0 hundreds, so it is smallest.
     mistakes: {"1,909": "m4_smallest"}
+  - prompt: 'Which sign makes this true: 1,005 ___ 1,050?'
+    options:
+    - <
+    - '>'
+    - '='
+    answer: <
+    difficulty: 2
+    hints:
+    - Compare the hundreds first, then the tens.
+    - Which number has more tens?
+    solution: 'Step 1: Both have 1 thousand and 0 hundreds. Step 2: Tens 0 < 5, so 1,005 < 1,050.'
+    mistakes:
+      '>': c4m10_sign
+      '=': c4m10_left
+  - prompt: What is half of 840?
+    answer: '420'
+    check: 840//2
+    difficulty: 2
+    hints:
+    - Halve the hundreds and the tens separately.
+    - Half of 800 and half of 40.
+    solution: 'Step 1: Half of 800 = 400, half of 40 = 20. Step 2: 400 + 20 = 420.'
+    mistakes:
+      '1680': c4m10_many
+      '402': c4m10_left
+      '42': c4m10_left
+  - prompt: What is double 1,250?
+    answer: '2500'
+    check: 1250*2
+    difficulty: 2
+    hints:
+    - Add the number to itself.
+    - Double 1,000 and double 250, then add.
+    solution: 'Step 1: Double 1,000 = 2,000; double 250 = 500. Step 2: 2,000 + 500 = 2,500.'
+    mistakes:
+      '625': c4m10_many
+      '2250': c4m10_many
+      '1252': c4m10_many
+  - prompt: 'Arrange from smallest to biggest: 890, 1,200, 980'
+    options:
+    - 890, 980, 1,200
+    - 1,200, 980, 890
+    - 980, 890, 1,200
+    answer: 890, 980, 1,200
+    difficulty: 2
+    hints:
+    - The 4-digit number is the biggest.
+    - Compare the two 3-digit numbers by hundreds.
+    solution: 'Step 1: 1,200 has 4 digits, so it is biggest. Step 2: 890 < 980, so 890, 980, 1,200.'
+    mistakes:
+      1,200, 980, 890: c4m10_left
+      980, 890, 1,200: c4m10_left
+  - prompt: A forest had 260 deer. Now it has double that number. How many deer now?
+    answer: '520'
+    check: 260*2
+    difficulty: 1
+    hints:
+    - Double means 2 times.
+    - 260 + 260.
+    solution: 'Step 1: 260 × 2. Step 2: = 520 deer.'
+    mistakes:
+      '130': c4m10_many
+      '262': c4m10_many
+      '460': c4m10_many
+  - prompt: Park A has 315 leopards and Park B has 278. How many more in Park A?
+    answer: '37'
+    check: 315-278
+    difficulty: 2
+    hints:
+    - '''How many more'' means subtract.'
+    - Borrow when the top digit is smaller.
+    solution: 'Step 1: 315 − 278. Step 2: = 37.'
+    mistakes:
+      '593': c4m10_diff
+      '163': c4m10_diff
+      '47': c4m10_diff
+  - prompt: Which number is between 2,500 and 2,600?
+    options:
+    - 2,550
+    - 2,650
+    - 2,450
+    answer: 2,550
+    difficulty: 1
+    hints:
+    - It must be bigger than 2,500.
+    - It must also be smaller than 2,600.
+    solution: 'Step 1: 2,450 is too small; 2,650 too big. Step 2: 2,550 is between them.'
+    mistakes:
+      2,650: c4m10_left
+      2,450: c4m10_left
+  - prompt: A sanctuary counted 1,240 birds in winter and half as many in summer. How many in summer?
+    answer: '620'
+    check: 1240//2
+    difficulty: 3
+    hints:
+    - Half as many means divide by 2.
+    - Halve 1,200 and 40 separately.
+    solution: 'Step 1: Half of 1,200 = 600, half of 40 = 20. Step 2: 600 + 20 = 620.'
+    mistakes:
+      '2480': c4m10_many
+      '612': c4m10_left
+      '610': c4m10_left
+  - prompt: Elephants 145, tigers 68, leopards 87. How many animals altogether?
+    answer: '300'
+    check: 145+68+87
+    difficulty: 3
+    hints:
+    - 68 + 87 first could be easier.
+    - Then add 145.
+    solution: 'Step 1: 68 + 87 = 155. Step 2: 155 + 145 = 300.'
+    mistakes:
+      '290': c4m10_diff
+      '213': c4m10_diff
+      '310': c4m10_diff
 - code: cbse4m.animals.measure
   title: Big animal measurements
   after:
@@ -190,6 +347,48 @@ concepts:
       - when:
           d: 2
         say: 2 days isn't 2 weeks. Each week has 7 days.
+  lesson:
+    - teach: 'Big animals need a lot. An elephant eats about 150 kg of food and drinks about 100 L of water a day. For many days, multiply: 150 kg × 2 days = 300 kg.'
+      check:
+        prompt: An elephant drinks 100 L a day. How much in 3 days?
+        options:
+        - 300 L
+        - 103 L
+        - 1,000 L
+        answer: 300 L
+        why: 100 × 3 = 300.
+    - teach: 'Multiply bigger numbers by splitting: 150 × 7 = 100 × 7 + 50 × 7 = 700 + 350 = 1,050 kg in a week.'
+      picture:
+        kind: area_grid
+        cols:
+        - size: 2
+          label: '100'
+        - size: 1
+          label: '50'
+        rows:
+        - size: 1
+          label: × 7
+        cells:
+        - - '700'
+          - '350'
+        alt: 150 × 7 split as 100 × 7 = 700 and 50 × 7 = 350, total 1,050.
+      check:
+        prompt: What is 120 × 4 (think 100 × 4 + 20 × 4)?
+        options:
+        - '480'
+        - '124'
+        - '440'
+        answer: '480'
+        why: 400 + 80 = 480.
+    - teach: 'To compare weights or lengths, use the same unit, then subtract. A mother elephant of 3,000 kg and a baby of 120 kg: 3,000 − 120 = 2,880 kg heavier.'
+      check:
+        prompt: A tiger leaps 6 m and a leopard 5 m. How much farther is the tiger's leap?
+        options:
+        - 1 m
+        - 11 m
+        - 30 m
+        answer: 1 m
+        why: 6 − 5 = 1.
   items:
   - prompt: An elephant eats 150 kg of food a day. How many kg in 2 days?
     answer: '300'
@@ -249,3 +448,114 @@ concepts:
     - Big ears.
     solution: The elephant is heaviest.
     mistakes: {"tiger": "m4_heaviest"}
+  - prompt: An elephant eats 150 kg of food a day. How many kg in 4 days?
+    answer: '600'
+    check: 150*4
+    difficulty: 2
+    hints:
+    - 'Same amount each day: multiply.'
+    - 100 × 4 + 50 × 4.
+    solution: 'Step 1: 400 + 200. Step 2: = 600 kg.'
+    mistakes:
+      '154': c4m10_many
+      '450': c4m10_many
+      '500': c4m10_many
+  - prompt: A tiger leaps 6 m each time. How far in 7 leaps?
+    answer: '42'
+    check: 6*7
+    difficulty: 1
+    hints:
+    - 7 leaps of 6 m each.
+    - 6 × 7.
+    solution: 'Step 1: 6 × 7. Step 2: = 42 m.'
+    mistakes:
+      '13': c4m10_many
+      '36': c4m10_many
+      '48': c4m10_many
+  - prompt: A rhino weighs 2,300 kg and a hippo weighs 1,800 kg. How much heavier is the rhino?
+    answer: '500'
+    check: 2300-1800
+    difficulty: 2
+    hints:
+    - '''How much heavier'' means take away.'
+    - Count up from 1,800 to 2,300.
+    solution: 'Step 1: 2,300 − 1,800. Step 2: = 500 kg.'
+    mistakes:
+      '4100': c4m10_diff
+      '1500': c4m10_diff
+      '600': c4m10_diff
+  - prompt: Two elephants each drink 100 L a day. How many litres do both drink in 3 days?
+    answer: '600'
+    check: 100*2*3
+    difficulty: 3
+    hints:
+    - First find how much both drink in one day.
+    - Then multiply by the days.
+    solution: 'Step 1: Both drink 200 L a day. Step 2: 200 × 3 = 600 L.'
+    mistakes:
+      '300': c4m10_many
+      '200': c4m10_many
+      '105': c4m10_many
+  - prompt: 'Which is longer: a python of 5 m or a crocodile of 450 cm?'
+    options:
+    - the python
+    - the crocodile
+    - they are equal
+    answer: the python
+    difficulty: 2
+    hints:
+    - Change 5 m into cm.
+    - 1 m = 100 cm.
+    solution: 'Step 1: 5 m = 500 cm. Step 2: 500 > 450, so the python is longer.'
+    mistakes:
+      the crocodile: c4m10_left
+      they are equal: c4m10_left
+  - prompt: A zoo has 600 kg of grass. An elephant eats 150 kg a day. How many days will it last for one elephant?
+    answer: '4'
+    check: 600//150
+    difficulty: 3
+    hints:
+    - How many 150s make 600?
+    - Count 150, 300, 450, 600.
+    solution: 'Step 1: 600 ÷ 150. Step 2: = 4 days.'
+    mistakes:
+      '450': c4m10_diff
+      '6': c4m10_many
+      '5': c4m10_many
+  - prompt: A cheetah runs 30 m in one second. How far in 5 seconds?
+    answer: '150'
+    check: 30*5
+    difficulty: 2
+    hints:
+    - Same distance each second.
+    - 30 × 5.
+    solution: 'Step 1: 30 × 5. Step 2: = 150 m.'
+    mistakes:
+      '35': c4m10_many
+      '120': c4m10_many
+      '180': c4m10_many
+  - prompt: A baby elephant weighs 115 kg. In a year it gains 250 kg. How much does it weigh now?
+    answer: '365'
+    check: 115+250
+    difficulty: 1
+    hints:
+    - 'Gains means it gets heavier: add.'
+    - 115 + 250.
+    solution: 'Step 1: 115 + 250. Step 2: = 365 kg.'
+    mistakes:
+      '135': c4m10_diff
+      '355': c4m10_diff
+  - prompt: Which animal could weigh about 200 kg?
+    options:
+    - a tiger
+    - a mouse
+    - a sparrow
+    answer: a tiger
+    difficulty: 1
+    hints:
+    - 200 kg is heavier than three grown-ups.
+    - Which is a big animal?
+    solution: 'Step 1: A mouse and a sparrow weigh only grams. Step 2: A tiger can weigh about 200 kg.'
+    mistakes:
+      a mouse: c4m10_left
+      a sparrow: c4m10_left

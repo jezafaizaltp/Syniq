@@ -7,6 +7,10 @@ tips:
   m3_equal_groups: "Equal groups have the same number in each."
   m3_repeat_add: "Count how many 2s there are, then count in 2s."
   m3_turnaround: "Swapping the numbers in a multiplication does not change the answer."
+  c3m7_group: Draw the groups as circles and put the same number of dots in each.
+  c3m7_skip: 'Skip count: say the table out loud, one jump for each group.'
+  c3m7_times: The first number is how many groups, the second is how many in each group.
+  c3m7_array: Count the rows, count how many in one row, then skip count.
 
 concepts:
 - code: cbse3m.rb.groups
@@ -90,6 +94,47 @@ concepts:
           p: 5
           l: 10
         say: 5 + 10 adds. 5 plates of how many make 15?
+  lesson:
+    - teach: Equal groups have the same number in each group. 4 plates with 3 laddoos on every plate are equal groups. If one plate has 5, the groups are not equal.
+      check:
+        prompt: Which of these are equal groups?
+        options:
+        - 3 bags with 4 sweets each
+        - one bag of 2 and one of 6
+        - a bag of 3 and a bag of 5
+        answer: 3 bags with 4 sweets each
+        why: Only there does every bag have the same number.
+    - teach: 'To count equal groups, add the same number again and again. 4 plates of 3: 3 + 3 + 3 + 3 = 12. This is called repeated addition.'
+      picture:
+        kind: compare
+        columns:
+        - title: Plate 1
+          points:
+          - 3 laddoos
+        - title: Plate 2
+          points:
+          - 3 laddoos
+        - title: Plate 3
+          points:
+          - 3 laddoos
+        alt: Three plates with 3 laddoos on each, 9 in all.
+      check:
+        prompt: 3 plates with 3 laddoos each. How many?
+        options:
+        - '9'
+        - '6'
+        - '33'
+        answer: '9'
+        why: 3 + 3 + 3 = 9.
+    - teach: We write repeated addition as multiplication. 4 groups of 3 is 4 × 3 = 12. Read '×' as 'groups of' or 'times'.
+      check:
+        prompt: '5 × 2 means:'
+        options:
+        - 5 groups of 2
+        - 5 and 2 together
+        - 2 taken away from 5
+        answer: 5 groups of 2
+        why: The × sign means groups of.
   items:
   - prompt: 3 plates with 4 laddoos each. How many laddoos?
     answer: '12'
@@ -157,6 +202,114 @@ concepts:
     - Same number in each.
     solution: 3 bags with 5 each are equal groups.
     mistakes: {"a bag of 3 and a bag of 7": "m3_equal_groups"}
+  - prompt: 5 rakhis with 3 beads each. How many beads?
+    answer: '15'
+    check: 5*3
+    difficulty: 1
+    hints:
+    - 3 beads, 5 times.
+    - 3 + 3 + 3 + 3 + 3.
+    solution: 'Step 1: 3 + 3 + 3 + 3 + 3. Step 2: = 15 beads.'
+    mistakes:
+      '8': c3m7_times
+      '12': c3m7_skip
+  - prompt: 4 + 4 + 4 = ? Write it as a multiplication answer.
+    answer: '12'
+    check: 3*4
+    difficulty: 1
+    hints:
+    - How many 4s are added?
+    - 3 groups of 4.
+    solution: 'Step 1: 3 groups of 4 = 3 × 4. Step 2: = 12.'
+    mistakes:
+      '8': c3m7_skip
+      '16': c3m7_skip
+  - prompt: Which is the same as 6 + 6 + 6 + 6?
+    options:
+    - 4 × 6
+    - 6 × 6
+    - 4 + 6
+    answer: 4 × 6
+    difficulty: 2
+    hints:
+    - Count how many 6s.
+    - That many groups of 6.
+    solution: 'Step 1: There are 4 sixes. Step 2: 4 groups of 6 = 4 × 6.'
+    mistakes:
+      6 × 6: c3m7_times
+      4 + 6: c3m7_times
+  - prompt: A sister ties a rakhi on each of 3 brothers and gives each 2 sweets. How many sweets?
+    answer: '6'
+    check: 3*2
+    difficulty: 1
+    hints:
+    - 3 groups of 2.
+    - 2 + 2 + 2.
+    solution: 'Step 1: 3 brothers × 2 sweets. Step 2: = 6 sweets.'
+    mistakes:
+      '5': c3m7_times
+      '32': c3m7_times
+  - prompt: There are 7 boxes with 2 diyas in each. How many diyas?
+    answer: '14'
+    check: 7*2
+    difficulty: 2
+    hints:
+    - Skip count in 2s, 7 times.
+    - 2, 4, 6...
+    solution: 'Step 1: 2, 4, 6, 8, 10, 12, 14. Step 2: 14 diyas.'
+    mistakes:
+      '9': c3m7_times
+      '12': c3m7_skip
+  - prompt: Why are 2 bags of 3 and 1 bag of 5 not equal groups?
+    options:
+    - the bags do not hold the same number
+    - there are too many bags
+    - 5 is an odd number
+    answer: the bags do not hold the same number
+    difficulty: 2
+    hints:
+    - What must be true about every group?
+    - Compare the bags.
+    solution: 'Step 1: Equal groups need the same number in each. Step 2: 3 and 5 are different.'
+    mistakes:
+      there are too many bags: c3m7_group
+      5 is an odd number: c3m7_group
+  - prompt: 6 children each bring 5 flowers. How many flowers?
+    answer: '30'
+    check: 6*5
+    difficulty: 2
+    hints:
+    - Skip count in 5s.
+    - 5, 10, 15... six times.
+    solution: 'Step 1: 5, 10, 15, 20, 25, 30. Step 2: 30 flowers.'
+    mistakes:
+      '11': c3m7_times
+      '25': c3m7_skip
+  - prompt: 10 + 10 + 10 + 10 = ?
+    answer: '40'
+    check: 4*10
+    difficulty: 1
+    hints:
+    - Count in tens.
+    - 4 tens.
+    solution: 'Step 1: 4 groups of 10. Step 2: = 40.'
+    mistakes:
+      '14': c3m7_skip
+      '30': c3m7_skip
+  - prompt: Rakhis cost ₹5 each. Meena buys 4 rakhis and gets ₹2 back from ₹22. Is ₹22 the right amount to pay with?
+    options:
+    - yes, 4 rakhis cost ₹20 and ₹2 comes back
+    - no, 4 rakhis cost ₹9
+    - no, 4 rakhis cost ₹25
+    answer: yes, 4 rakhis cost ₹20 and ₹2 comes back
+    difficulty: 3
+    hints:
+    - Find the cost of 4 rakhis first.
+    - 4 groups of 5.
+    solution: 'Step 1: 4 × 5 = 20. Step 2: 22 − 20 = 2 back, so it works.'
+    mistakes:
+      no, 4 rakhis cost ₹9: c3m7_times
+      no, 4 rakhis cost ₹25: c3m7_skip
 - code: cbse3m.rb.tables
   title: Times tables of 2, 3, 4, 5 and 10
   after:
@@ -209,6 +362,48 @@ concepts:
       - when:
           v: 8
         say: 6 + 2 adds. Count in 2s six times.
+  lesson:
+    - teach: 'A times table comes from skip counting. The 3 table is 3, 6, 9, 12, 15... So 4 × 3 is the 4th number: 12.'
+      picture:
+        kind: number_line
+        from: 0
+        to: 15
+        jumps:
+        - from: 0
+          to: 3
+        - from: 3
+          to: 6
+        - from: 6
+          to: 9
+        - from: 9
+          to: 12
+        alt: Four jumps of 3 on a number line land on 12.
+      check:
+        prompt: 'Skip count by 4: 4, 8, 12, ___'
+        options:
+        - '16'
+        - '14'
+        - '13'
+        answer: '16'
+        why: 'Each jump adds 4: 12 + 4 = 16.'
+    - teach: Some tables have easy patterns. The 5 table ends in 5 or 0. The 10 table ends in 0. The 2 table is all even numbers.
+      check:
+        prompt: Which number is in the 5 table?
+        options:
+        - '35'
+        - '32'
+        - '41'
+        answer: '35'
+        why: Numbers in the 5 table end in 5 or 0.
+    - teach: 'An array is objects in rows and columns. 3 rows of 4 chairs is 3 × 4 = 12. Turn it round and it is 4 rows of 3: still 12. So 3 × 4 = 4 × 3.'
+      check:
+        prompt: If 2 × 7 = 14, what is 7 × 2?
+        options:
+        - '14'
+        - '9'
+        - '27'
+        answer: '14'
+        why: Turning the order round does not change the answer.
   items:
   - prompt: 5 × 4 = ?
     answer: '20'
@@ -267,3 +462,105 @@ concepts:
     - 8 + 8.
     solution: 2 × 8 = 16.
     mistakes: {"10": "m5_times_table", "14": "m5_times_table"}
+  - prompt: 4 × 4 = ?
+    answer: '16'
+    check: 4*4
+    difficulty: 1
+    hints:
+    - Skip count by 4.
+    - 4, 8, 12...
+    solution: 'Step 1: 4, 8, 12, 16. Step 2: = 16.'
+    mistakes:
+      '8': c3m7_times
+      '12': c3m7_skip
+  - prompt: 5 × 6 = ?
+    answer: '30'
+    check: 5*6
+    difficulty: 1
+    hints:
+    - Skip count by 5, six times.
+    - 5, 10, 15...
+    solution: 'Step 1: 5, 10, 15, 20, 25, 30. Step 2: = 30.'
+    mistakes:
+      '11': c3m7_times
+      '25': c3m7_skip
+  - prompt: 3 × 7 = ?
+    answer: '21'
+    check: 3*7
+    difficulty: 2
+    hints:
+    - Same as 7 × 3.
+    - Skip count by 3 seven times.
+    solution: 'Step 1: 3, 6, 9, 12, 15, 18, 21. Step 2: = 21.'
+    mistakes:
+      '10': c3m7_times
+      '18': c3m7_skip
+  - prompt: 10 × 9 = ?
+    answer: '90'
+    check: 10*9
+    difficulty: 1
+    hints:
+    - 9 tens.
+    - Count in tens 9 times.
+    solution: 'Step 1: 9 groups of 10. Step 2: = 90.'
+    mistakes:
+      '19': c3m7_times
+      '80': c3m7_skip
+  - prompt: Which number is NOT in the 2 table?
+    options:
+    - '15'
+    - '14'
+    - '18'
+    answer: '15'
+    difficulty: 2
+    hints:
+    - The 2 table has only even numbers.
+    - Which one is odd?
+    solution: 'Step 1: 14 and 18 are even. Step 2: 15 is odd, so it is not in the 2 table.'
+    mistakes:
+      '14': c3m7_skip
+      '18': c3m7_skip
+  - prompt: A garden has 5 rows with 4 plants in each row. How many plants?
+    answer: '20'
+    check: 5*4
+    difficulty: 2
+    hints:
+    - Rows × plants in a row.
+    - 4, 8, 12...
+    solution: 'Step 1: 5 rows of 4. Step 2: 4, 8, 12, 16, 20.'
+    mistakes:
+      '9': c3m7_array
+      '16': c3m7_array
+  - prompt: If 4 × 6 = 24, what is 6 × 4?
+    answer: '24'
+    check: 6*4
+    difficulty: 1
+    hints:
+    - Order does not change the answer.
+    - Turn the array round.
+    solution: 'Step 1: 6 × 4 = 4 × 6. Step 2: = 24.'
+    mistakes:
+      '10': c3m7_times
+      '46': c3m7_times
+  - prompt: 'Skip count by 3: 9, 12, 15, ___'
+    answer: '18'
+    check: 15+3
+    difficulty: 1
+    hints:
+    - Each step adds 3.
+    - 15 + 3.
+    solution: 'Step 1: Add 3. Step 2: 15 + 3 = 18.'
+    mistakes:
+      '16': c3m7_skip
+      '20': c3m7_skip
+  - prompt: Chairs are in 3 rows of 5. Two more rows of 5 are added. How many chairs now?
+    answer: '25'
+    check: 5*5
+    difficulty: 3
+    hints:
+    - How many rows are there now?
+    - Then rows × 5.
+    solution: 'Step 1: 3 + 2 = 5 rows. Step 2: 5 × 5 = 25 chairs.'
+    mistakes:
+      '15': c3m7_array
+      '17': c3m7_array

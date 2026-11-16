@@ -19,7 +19,7 @@ tips:
   solubility_per_100g: "Solubility is grams per 100 g of solvent, and concentration in g/L is grams per 1000 mL. Scale the numbers you have up or down to the amount asked."
   tyndall_true_solution: "True solutions do not scatter light; colloids do (Tyndall effect)."
   particle_size: "True solution particles are smallest (< 1 nm), colloids in between (1–100 nm), suspensions largest (> 100 nm)."
-  alloy_solid_solution: "In brass, zinc is dissolved in copper. Both are solids, so it's a solid-in-solid solution."
+  alloy_solid_solution: "The solvent is the part present in the larger amount, the one the other is dissolved in. Which metal is there more of?"
   concentration_ratio: "Compare salt per gram of water: the same salt in less water is more concentrated."
   fog_aerosol: "Fog is tiny water droplets (liquid) spread through air (gas)."
   gas_in_liquid: "Ask of each choice: what is dissolved, and what is it dissolved in? Find the one where a gas is dissolved in a liquid, like the fizz in a drink."
@@ -27,6 +27,8 @@ tips:
   solids_more_soluble_hot: "For most solids, more dissolves in hot water. It's gases that dissolve less when warm."
   suspension_settles: "In a true solution particles are too small to see; in the in-between kind they stay spread out. Only a mixture with big enough particles falls to the bottom when left."
   universal_not_all: "Water dissolves very many substances, but not everything: oil doesn't dissolve in it."
+  pqk9c06_whole_solution: Divide by the whole solution (solute + solvent), not just the water.
+  pqk9c06_scale_100: Solubility is per 100 g of water. Scale it up or down to your mass of water.
 
 concepts:
   - code: chem9.solutions.parts
@@ -85,6 +87,24 @@ concepts:
         ways:
         - style: real_world
           teach: 'Make a glass of sugar water and taste the top, middle and bottom: all equally sweet. That evenly mixed liquid is a solution. The thing that dissolved (sugar) is the solute; the thing it dissolved in (water) is the solvent. Usually the solvent is the one there is more of.'
+        - style: visual
+          teach: The three words of a solution, using sugar water.
+          picture:
+            kind: compare
+            columns:
+            - title: Solute
+              points:
+              - sugar
+              - what dissolves
+            - title: Solvent
+              points:
+              - water
+              - what it dissolves in
+            - title: Solution
+              points:
+              - sugar water
+              - same all through
+            alt: In sugar water, sugar is the solute that dissolves, water is the solvent, and the sugar water, the same all through, is the solution.
       - teach: 'The mass of a solution is the solute plus the solvent: nothing is lost when it dissolves. 20 g of sugar in 180 g of water makes 200 g of solution.'
         check:
           prompt: 30 g of salt is dissolved in 120 g of water. What is the mass of the solution?
@@ -97,6 +117,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: weigh the solute. Step 2: weigh the solvent. Step 3: add them: that is the mass of the solution. Dissolving hides the solute from sight, but none of its mass is lost.'
+        - style: visual
+          teach: 'Nothing is lost when sugar dissolves: masses simply add.'
+          picture:
+            kind: bars
+            bars:
+            - label: sugar
+              value: 20
+            - label: water
+              value: 180
+            - label: solution
+              value: 200
+            unit: g
+            alt: 20 grams of sugar and 180 grams of water make 200 grams of solution.
       - teach: 'Solutions are not only solids in liquids. Air is a gas in a gas, soda water is a gas in a liquid, and brass is a solid in a solid. Water dissolves so many substances that it is called the universal solvent, but some solutes need other solvents: iodine dissolves in alcohol, paint in turpentine.'
         picture:
           kind: compare
@@ -122,6 +155,8 @@ concepts:
         ways:
         - style: real_world
           teach: Solutions are everywhere, not just in a glass. Air is gases mixed in gases. Soda is carbon dioxide gas in water. Brass and bronze are metals mixed into metals. Water dissolves a great many things, but paint needs turpentine, and iodine dissolves well in alcohol.
+        - style: step_by_step
+          teach: 'Step 1: name the state of the solute: solid, liquid or gas. Step 2: name the state of the solvent. Step 3: put them together: soda water is gas in liquid, brass is solid in solid, air is gas in gas. Step 4: if water won''t dissolve it, try another solvent, like alcohol for iodine.'
     items:
       - prompt: "In a solution of sugar in water, what is the solute?"
         options: ["Sugar", "Water", "Sugar water", "Air"]
@@ -259,6 +294,36 @@ concepts:
         solution: 'Step 1: Solution = 300 g. Step 2: Water = 270 g. Step 3: Sugar = 300 − 270 = 30 g.'
         mistakes:
           '570': solution_minus_solute
+      - prompt: 'Situation: To make a salt solution, Rahul dissolves 25 g of salt in 225 g of water. What is the mass of the solution?'
+        options:
+        - 250 g
+        - 225 g
+        - 200 g
+        answer: 250 g
+        hints:
+        - Solution = solute + solvent.
+        - 25 + 225.
+        solution: 25 + 225 = 250 g of solution.
+        mistakes:
+          225 g: mass_of_solution
+          200 g: solution_minus_solute
+        exam: case
+        difficulty: 2
+      - prompt: In brass, which is a solution of zinc in copper, the solvent is
+        options:
+        - copper
+        - zinc
+        - there is no solvent
+        answer: copper
+        hints:
+        - The solvent is the part present in the larger amount.
+        - Zinc dissolves in copper.
+        solution: Copper is the major part, so it is the solvent; zinc is the solute.
+        mistakes:
+          zinc: solute_solvent_swapped
+          there is no solvent: alloy_solid_solution
+        exam: one_mark
+        difficulty: 1
 
   - code: chem9.solutions.concentration
     title: Concentration
@@ -333,6 +398,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Lime juice with a lot of sugar in it is ''strong'' and sweet; with a little sugar it is ''weak''. Concentration tells how much solute is packed into an amount of solution. A little solute: dilute. A lot: concentrated.'
+        - style: visual
+          teach: 'Dilute and concentrated: the same water, different amounts of solute.'
+          picture:
+            kind: compare
+            columns:
+            - title: Dilute
+              points:
+              - 1 spoon sugar in a glass
+              - little solute
+            - title: Concentrated
+              points:
+              - 5 spoons sugar in a glass
+              - a lot of solute
+            alt: One spoon of sugar in a glass makes a dilute solution; five spoons make a concentrated one.
       - teach: 'Mass percentage = mass of solute ÷ mass of solution × 100. Use the whole solution, not just the water. 10 g of salt in 40 g of water: solution = 50 g, so 10 ÷ 50 × 100 = 20%.'
         picture:
           kind: flow
@@ -353,6 +432,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the mass of the solution: solute + solvent. Step 2: divide the solute''s mass by the solution''s mass. Step 3: multiply by 100. 10 g salt in 40 g water: 10 ÷ 50 × 100 = 20%.'
+        - style: real_world
+          teach: A shop sells 500 g bottles of saline with 4.5 g of salt in them. Mass percentage = 4.5 ÷ 500 × 100 = 0.9%. Notice the 500 g is the whole bottle of solution, not just the water.
       - teach: 'Concentration can also be grams per litre (g/L). 2 g in 250 mL is 8 g in 1000 mL: 8 g/L. When you add water, the solute stays the same; only the total grows, so the concentration falls.'
         check:
           prompt: Water is added to a salt solution. What stays the same?
@@ -365,6 +446,16 @@ concepts:
         ways:
         - style: real_world
           teach: When you add water to squash, the amount of squash in the glass doesn't change, but it is spread through more liquid, so it tastes weaker. Diluting keeps the solute the same and lowers the concentration. In g/L, scale the amount up to 1000 mL.
+        - style: visual
+          teach: Turning grams in a glass into grams per litre (g/L).
+          picture:
+            kind: flow
+            steps:
+            - 2 g in 250 mL
+            - × 4 to reach 1000 mL
+            - 8 g in 1000 mL
+            - = 8 g/L
+            alt: 2 grams in 250 millilitres is the same as 8 grams in 1000 millilitres, or 8 grams per litre.
     items:
       - prompt: "20 g of sugar is dissolved in 80 g of water. What is the mass percentage of sugar?"
         answer: "20"
@@ -497,6 +588,36 @@ concepts:
         mistakes:
           '10': mix_percent
           '20': mix_percent
+      - prompt: 'Situation: A farmer needs 2 kg of a 5% fertiliser solution. How much fertiliser should be dissolved?'
+        options:
+        - 100 g
+        - 40 g
+        - 400 g
+        answer: 100 g
+        hints:
+        - 5% of the solution's mass is solute.
+        - 5/100 × 2000 g.
+        solution: 5% of 2000 g = 100 g of fertiliser, with 1900 g of water.
+        mistakes:
+          40 g: percent_times_100
+          400 g: percent_times_100
+        exam: case
+        difficulty: 2
+      - prompt: 12 g of glucose is dissolved in 48 g of water. The mass percentage of glucose is
+        options:
+        - 20%
+        - 25%
+        - 12%
+        answer: 20%
+        hints:
+        - Mass of solution = 12 + 48.
+        - 12 ÷ 60 × 100.
+        solution: 12 ÷ 60 × 100 = 20%.
+        mistakes:
+          25%: pqk9c06_whole_solution
+          12%: mass_of_solution
+        exam: short
+        difficulty: 2
 
   - code: chem9.solutions.solubility
     title: Solubility and saturation
@@ -569,6 +690,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: add a spoon of salt to water and stir: it dissolves, so the solution can still take more (unsaturated). Step 2: keep adding. Step 3: when some stays on the bottom however much you stir, the solution is saturated: full at that temperature.'
+        - style: visual
+          teach: 'Adding salt spoon by spoon: from unsaturated to saturated.'
+          picture:
+            kind: flow
+            steps:
+            - 'spoon 1: dissolves'
+            - 'spoon 5: dissolves'
+            - 'spoon 10: some stays at the bottom'
+            - saturated
+            alt: 'Salt keeps dissolving spoon after spoon until some stays at the bottom: the solution is now saturated.'
       - teach: Solubility is the mass of solute that saturates 100 g of solvent at a given temperature. If 36 g of salt saturates 100 g of water at 20 °C, then 200 g of water holds 72 g, and 50 g of water holds 18 g.
         check:
           prompt: Solubility is 30 g per 100 g of water. How much saturates 300 g of water?
@@ -581,6 +712,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: solubility is given for 100 g of water. Step 2: divide your mass of water by 100. Step 3: multiply the solubility by that number. 300 g water: 3 × the solubility.'
+        - style: visual
+          teach: Solubility of salt 36 g per 100 g of water, scaled to other amounts of water.
+          picture:
+            kind: bars
+            bars:
+            - label: 50 g water
+              value: 18
+            - label: 100 g water
+              value: 36
+            - label: 200 g water
+              value: 72
+            unit: g salt to saturate
+            alt: At 20 degrees, 50 grams of water takes 18 grams of salt, 100 grams takes 36 and 200 grams takes 72.
       - teach: 'Temperature matters. Most solids dissolve more in hot water, so a hot saturated solution forms crystals as it cools. Gases do the opposite: they dissolve less when warm. That''s why a warm soda goes flat and fish struggle in warm ponds. Higher pressure makes gases dissolve more.'
         picture:
           kind: compare
@@ -605,6 +749,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Sugar dissolves much better in hot tea than in cold juice: most solids dissolve more when hot. Gases are the other way round: a warm soda loses its fizz fast, and warm ponds hold less oxygen for fish. Sealing a soda bottle under pressure keeps more gas in.'
+        - style: step_by_step
+          teach: 'Step 1: decide if the solute is a solid or a gas. Step 2: for most solids, heating raises solubility, so more dissolves. Step 3: for gases, heating lowers it, so gas escapes. Step 4: cooling a hot saturated solution of a solid makes crystals form.'
     items:
       - prompt: "A solution in which no more solute can dissolve at that temperature is called:"
         options: ["Saturated", "Unsaturated", "Dilute", "Colloidal"]
@@ -747,6 +893,36 @@ concepts:
         solution: 'Step 1: The water can hold 45 g. Step 2: Only 40 g is added. Step 3: All of it dissolves and 5 g more could still dissolve: unsaturated.'
         mistakes:
           A saturated solution with 5 g left over: extra_stays
+      - prompt: 'Situation: The solubility of potassium nitrate is 110 g per 100 g of water at 60 °C and 30 g at 20 °C. A saturated solution in 100 g of water is cooled from 60 °C to 20 °C. How much comes out as crystals?'
+        options:
+        - 80 g
+        - 140 g
+        - 30 g
+        answer: 80 g
+        hints:
+        - How much was dissolved at 60 °C?
+        - How much can stay dissolved at 20 °C?
+        solution: 110 g was dissolved; only 30 g can stay at 20 °C, so 110 − 30 = 80 g crystallises out.
+        mistakes:
+          140 g: pqk9c06_scale_100
+          30 g: solubility_per_100g
+        exam: case
+        difficulty: 2
+      - prompt: Fish sometimes struggle in a pond on very hot days because
+        options:
+        - less oxygen dissolves in warm water
+        - more oxygen dissolves in warm water
+        - warm water has no oxygen
+        answer: less oxygen dissolves in warm water
+        hints:
+        - Oxygen is a gas.
+        - What does heat do to gas solubility?
+        solution: Gases dissolve less as water warms up, so warm ponds hold less oxygen for the fish.
+        mistakes:
+          more oxygen dissolves in warm water: gases_less_soluble_hot
+          warm water has no oxygen: gases_less_soluble_hot
+        exam: competency
+        difficulty: 2
 
   - code: chem9.solutions.mixtures
     title: True solutions, colloids and suspensions
@@ -818,6 +994,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Compare three glasses: salt water is clear, and nothing ever settles. Milk looks cloudy, but nothing settles either. Muddy water is cloudy and the mud sinks to the bottom. The difference is particle size: tiny in a solution, middle-sized in a colloid like milk, big in a suspension.'
+        - style: step_by_step
+          teach: 'Step 1: look at the mixture: clear, or cloudy? Step 2: leave it to stand: does anything settle? Step 3: clear and never settling: true solution. Step 4: cloudy but never settling: colloid. Cloudy and settling: suspension.'
       - teach: 'Shine a torch beam through each. In a true solution you can''t see the beam. In a colloid the particles scatter light and the beam''s path glows: the Tyndall effect. You see it when sunlight streams through a dusty room or headlights shine in fog.'
         check:
           prompt: 'A torch beam is clearly visible through a liquid. The liquid is probably:'
@@ -830,6 +1008,22 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: shine a torch through the liquid in a dark room. Step 2: if you can''t see the beam''s path, it is a true solution. Step 3: if the path glows, the particles are scattering light: a colloid. This is the Tyndall effect, the same as sunbeams in a dusty room.'
+        - style: visual
+          teach: A torch beam through salt water and through diluted milk.
+          picture:
+            kind: compare
+            columns:
+            - title: Salt water
+              points:
+              - beam invisible
+              - particles too small
+              - true solution
+            - title: Diluted milk
+              points:
+              - beam path glows
+              - particles scatter light
+              - 'colloid: Tyndall effect'
+            alt: A torch beam can't be seen in salt water, a true solution, but its path glows in diluted milk, a colloid, because the particles scatter light.
       - teach: Filter paper stops only big particles. Suspensions can be filtered; true solutions and colloids pass through. And only suspensions settle on standing.
         check:
           prompt: Which can be separated with filter paper?
@@ -842,6 +1036,27 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: pour the mixture through filter paper. Step 2: if solid is left on the paper, it was a suspension. Step 3: if everything passes through, it is a solution or a colloid. Step 4: let it stand: only a suspension settles.'
+        - style: visual
+          teach: Three kinds of mixture, compared by particle size and behaviour.
+          picture:
+            kind: compare
+            columns:
+            - title: True solution
+              points:
+              - under 1 nm
+              - passes filter
+              - never settles
+            - title: Colloid
+              points:
+              - 1 to 100 nm
+              - passes filter
+              - never settles
+            - title: Suspension
+              points:
+              - over 100 nm
+              - stopped by filter
+              - settles
+            alt: True solutions have particles under 1 nanometre, colloids 1 to 100, and suspensions over 100; only suspensions are stopped by filter paper and settle.
     items:
       - prompt: "Which of these shows the Tyndall effect?"
         options: ["Milk diluted with water", "Salt solution", "Sugar solution", "Copper sulphate solution"]
@@ -986,3 +1201,33 @@ concepts:
         solution: 'Step 1: 1 mm = 1,000,000 nm. Step 2: 1,000,000 ÷ 200. Step 3: = 5000 particles (these are suspension-sized).'
         mistakes:
           '200000000': particle_size
+      - prompt: 'Situation: Sunlight streaming through a gap in the roof of a dusty room shows a bright path. What is this called?'
+        options:
+        - The Tyndall effect
+        - Saturation
+        - Crystallisation
+        answer: The Tyndall effect
+        hints:
+        - Small particles in the air scatter the light.
+        - The same thing happens with a torch through milk.
+        solution: 'Dust particles in the air scatter the light, making its path visible: the Tyndall effect.'
+        mistakes:
+          Saturation: colloid_signs
+          Crystallisation: colloid_signs
+        exam: case
+        difficulty: 2
+      - prompt: Chalk powder stirred into water can be separated by
+        options:
+        - filtering
+        - 'nothing: it is a true solution'
+        - shining a torch
+        answer: filtering
+        hints:
+        - Are the chalk particles big or small?
+        - Does it settle on standing?
+        solution: Chalk in water is a suspension with big particles, so filter paper stops them.
+        mistakes:
+          'nothing: it is a true solution': suspension_settles
+          shining a torch: particle_size
+        exam: one_mark
+        difficulty: 1

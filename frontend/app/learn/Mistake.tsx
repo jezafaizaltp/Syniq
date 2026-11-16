@@ -26,6 +26,28 @@ function Dots({ n, label }: { n: number; label: string }) {
   );
 }
 
+const squash = (x: string) => x.replace(/\s+/g, "").replace(/[−–]/g, "-").toLowerCase();
+
+/** Whether the picture shows an expression from the question (5+ characters with a digit), e.g. "x²-5x+6". */
+export function drawsPrompt(picture: PictureSpec | null | undefined, prompt: string): boolean {
+  if (!picture || !prompt) return false;
+  const drawn = squash(JSON.stringify(picture));
+  const mathy = (w: string) => /\d/.test(w) || /^[+\-−×÷=<>]$/.test(w) || /^[a-z][²³]?$/i.test(w);
+  const runs: string[] = [];
+  let run: string[] = [];
+  for (const w of prompt.split(/\s+/)) {
+    const clean = w.replace(/[.,;:?!]+$/, "");
+    if (clean && mathy(clean)) run.push(clean);
+    if (!clean || !mathy(clean) || clean !== w) {
+      if (run.length) runs.push(run.join(""));
+      run = [];
+    }
+  }
+  if (run.length) runs.push(run.join(""));
+  const chunks = runs.flatMap((r) => squash(r).split("=")).filter((c) => c.length >= 5 && /\d/.test(c));
+  return chunks.some((c) => drawn.includes(c));
+}
+
 /**
  * The mistake is the way in: the learner's answer sits next to the right one, drawn
  * where the numbers are small. The tip about this exact mistake (children) comes next,
@@ -35,10 +57,12 @@ export default function Mistake({
   yours,
   right,
   picture,
+  prompt = "",
   children,
 }: {
   yours: string;
   right: string;
+  prompt?: string;
   picture?: PictureSpec | null;
   children?: ReactNode;
 }) {
@@ -66,9 +90,10 @@ export default function Mistake({
         alt: `${t("fb.you_said")} ${yours}, ${t("fb.right_answer")} ${right}. ${picture!.alt}`,
       }
     : picture;
-  // The topic's picture often works a different example. Say so, so its numbers don't look like this question's.
-  const esc = right.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const aboutThis = onLine || (right.trim() !== "" && new RegExp(`(^|[^\\w.])${esc}(?![\\w])`).test(JSON.stringify(picture ?? "")));
+  // The topic's picture often works a different example. Call it this question's only when it is drawn on this
+  // question's own numbers: the answers marked on its number line, or an expression from the question written in
+  // it. Small numbers turn up in almost any picture, so the right answer alone doesn't count.
+  const aboutThis = onLine || drawsPrompt(picture, prompt);
   return (
     <div className="mistake">
       <div className="mistake-pair">

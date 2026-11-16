@@ -12,6 +12,10 @@ tips:
   m12_int_reciprocal: "The power rule fails for x⁻¹ (it would divide by zero). Which function has derivative 1/x?"
   m12_integrate_power: "∫xⁿ dx = xⁿ⁺¹/(n + 1). Then evaluate at 2."
   m12_odd_function: "x³ is odd: the area on the left cancels the area on the right."
+  c12m7_power: For xⁿ, raise the power by one and divide by the new power. Check by differentiating your answer.
+  c12m7_sub: Look for an inside function whose derivative is also present; substitute t for it.
+  c12m7_eval: 'Find the antiderivative first, then subtract: F(upper) − F(lower).'
+  c12m7_prop: 'Check symmetry first: an odd function over [−a, a] gives 0; an even one gives twice the half.'
 concepts:
 - code: cbse12m.int.indefinite
   title: Indefinite integrals and methods
@@ -86,6 +90,43 @@ concepts:
       bin: eˣ + C
       clue: 'Simplify first: eˣ · eˣ ÷ eˣ = ?'
       why: It simplifies to eˣ.
+  lesson:
+    - teach: 'Integration reverses differentiation. If F′(x) = f(x), then ∫f(x)dx = F(x) + C. The + C is there because constants differentiate to 0. Standard forms: ∫xⁿdx = xⁿ⁺¹/(n + 1) (n ≠ −1), ∫1/x dx = ln|x|, ∫eˣdx = eˣ, ∫cos x dx = sin x, ∫sin x dx = −cos x, ∫sec²x dx = tan x.'
+      check:
+        prompt: '∫x⁴ dx equals:'
+        options:
+        - x⁵/5 + C
+        - 4x³ + C
+        - x⁵ + C
+        answer: x⁵/5 + C
+        why: Raise the power to 5 and divide by 5.
+    - teach: 'Substitution: if the integrand contains g(x) and g′(x), put t = g(x), dt = g′(x)dx. Example: ∫2x(x² + 1)³dx, with t = x² + 1, becomes ∫t³dt = t⁴/4 + C = (x² + 1)⁴/4 + C.'
+      picture:
+        kind: flow
+        steps:
+        - Spot inside g(x)
+        - Put t = g(x)
+        - Replace dx using dt = g′(x)dx
+        - Integrate in t
+        - Put g(x) back
+        alt: Steps for integration by substitution.
+      check:
+        prompt: For ∫cos(3x)dx, what is a good substitution?
+        options:
+        - t = 3x
+        - t = cos x
+        - t = x³
+        answer: t = 3x
+        why: dt = 3dx, giving (1/3)∫cos t dt = (1/3)sin 3x + C.
+    - teach: 'By parts: ∫u v dx = u∫v dx − ∫(u′ ∫v dx)dx. Choose u by ILATE (Inverse trig, Log, Algebraic, Trig, Exponential). Partial fractions split rational functions, and special forms like ∫dx/(x² + a²) = (1/a)tan⁻¹(x/a) + C.'
+      check:
+        prompt: 'For ∫x ln x dx by parts, u should be:'
+        options:
+        - ln x
+        - x
+        - x ln x
+        answer: ln x
+        why: In ILATE, L (log) comes before A (algebraic).
   items:
   - prompt: If F(x) = ∫3x² dx with F(0) = 0, find F(2).
     answer: '8'
@@ -158,6 +199,114 @@ concepts:
     solution: Because adding any constant gives the same derivative.
     mistakes:
       It is optional: c12_constant
+  - prompt: F(x) = ∫4x³ dx with F(0) = 0. Find F(2).
+    answer: '16'
+    check: 2**4
+    difficulty: 1
+    hints:
+    - Raise the power by one, divide by the new power.
+    - Then put x = 2.
+    solution: 'Step 1: F(x) = x⁴. Step 2: F(2) = 16.'
+    mistakes:
+      '32': c12m7_power
+      '24': c12m7_power
+  - prompt: F(x) = ∫(6x² − 2) dx with F(0) = 0. Find F(1).
+    answer: '0'
+    check: 2*1**3 - 2*1
+    difficulty: 1
+    hints:
+    - Integrate each term.
+    - ∫6x² = 2x³, ∫2 = 2x.
+    solution: 'Step 1: F(x) = 2x³ − 2x. Step 2: F(1) = 0.'
+    mistakes:
+      '4': c12m7_power
+      '10': c12m7_power
+  - prompt: '∫sec²x dx equals:'
+    options:
+    - tan x + C
+    - sec x + C
+    - −tan x + C
+    answer: tan x + C
+    difficulty: 1
+    hints:
+    - Which function has derivative sec²x?
+    - Think of differentiation tables.
+    solution: 'Step 1: d(tan x)/dx = sec²x. Step 2: tan x + C.'
+    mistakes:
+      sec x + C: c12m7_power
+      −tan x + C: c12m7_power
+  - prompt: F(x) = ∫eˣ dx with F(0) = 1. Find F(0) + F′(0).
+    answer: '2'
+    check: 1 + 1
+    difficulty: 2
+    hints:
+    - F(x) = eˣ + C; use F(0) = 1 to find C.
+    - F′(x) is the integrand.
+    solution: 'Step 1: F(x) = eˣ, C = 0. Step 2: F(0) + F′(0) = 1 + 1 = 2.'
+    mistakes:
+      '1': c12m7_power
+      '0': c12m7_power
+  - prompt: F(x) = ∫2x(x² + 1)³ dx with F(0) = 1/4. Find F(1).
+    answer: '4'
+    check: (1**2 + 1)**4/4
+    difficulty: 2
+    hints:
+    - Substitute t = x² + 1.
+    - The antiderivative is (x² + 1)⁴/4.
+    solution: 'Step 1: F(x) = (x² + 1)⁴/4 (C = 0). Step 2: F(1) = 16/4 = 4.'
+    mistakes:
+      '16': c12m7_sub
+      '2': c12m7_sub
+  - prompt: '∫dx/(x² + 9) equals:'
+    options:
+    - (1/3)tan⁻¹(x/3) + C
+    - tan⁻¹(x/3) + C
+    - (1/9)tan⁻¹x + C
+    answer: (1/3)tan⁻¹(x/3) + C
+    difficulty: 2
+    hints:
+    - Use the form ∫dx/(x² + a²).
+    - Here a = 3.
+    solution: 'Step 1: (1/a)tan⁻¹(x/a). Step 2: a = 3.'
+    mistakes:
+      tan⁻¹(x/3) + C: c12m7_sub
+      (1/9)tan⁻¹x + C: c12m7_sub
+  - prompt: '∫x eˣ dx equals:'
+    options:
+    - eˣ(x − 1) + C
+    - x eˣ + C
+    - eˣ(x + 1) + C
+    answer: eˣ(x − 1) + C
+    difficulty: 2
+    hints:
+    - Use by parts with u = x.
+    - x eˣ − ∫eˣ dx.
+    solution: 'Step 1: x eˣ − eˣ. Step 2: eˣ(x − 1) + C.'
+    mistakes:
+      x eˣ + C: c12m7_sub
+      eˣ(x + 1) + C: c12m7_sub
+  - prompt: 1/((x − 1)(x + 1)) = A/(x − 1) + B/(x + 1). Find A as a fraction.
+    answer: 1/2
+    check: 1/(1 + 1)
+    difficulty: 3
+    hints:
+    - 'Multiply out: 1 = A(x + 1) + B(x − 1).'
+    - Put x = 1.
+    solution: 'Step 1: x = 1 gives 1 = 2A. Step 2: A = 1/2.'
+    mistakes:
+      '1': c12m7_sub
+      -1/2: c12m7_sub
+  - prompt: F(x) = ∫sin(2x) dx with F(0) = −1/2. Find F(π/2).
+    answer: 1/2
+    check: -cos(pi)/2
+    difficulty: 3
+    hints:
+    - Substitute t = 2x.
+    - F(x) = −cos(2x)/2.
+    solution: 'Step 1: F(x) = −cos 2x / 2 (C = 0 since F(0) = −1/2). Step 2: F(π/2) = −cos π / 2 = 1/2.'
+    mistakes:
+      -1/2: c12m7_sub
+      '1': c12m7_sub
 - code: cbse12m.int.definite
   title: Definite integrals
   after:
@@ -260,6 +409,48 @@ concepts:
           - 1
           - 8
         say: That's −4, but with b above a. Here, put b below a.
+  lesson:
+    - teach: 'The fundamental theorem: ∫ₐᵇ f(x)dx = F(b) − F(a), where F is any antiderivative (the + C cancels). For f ≥ 0, this is the area under the curve between x = a and x = b.'
+      check:
+        prompt: Evaluate ∫₀³ 2x dx.
+        options:
+        - '9'
+        - '6'
+        - '3'
+        answer: '9'
+        why: F(x) = x², so 9 − 0 = 9.
+    - teach: 'Properties: ∫ₐᵇ f = −∫ᵦₐ f; ∫ₐᵇ f(x)dx = ∫ₐᵇ f(a + b − x)dx; you can split at any point c. These often turn a hard integral into an easy one.'
+      check:
+        prompt: If ∫₀² f = 5, what is ∫₂⁰ f?
+        options:
+        - '-5'
+        - '5'
+        - '0'
+        answer: '-5'
+        why: Swapping the limits changes the sign.
+    - teach: 'Symmetry: on [−a, a], an odd function (f(−x) = −f(x), like x³ or sin x) integrates to 0; an even function (f(−x) = f(x), like x² or cos x) gives 2∫₀ᵃ f.'
+      picture:
+        kind: compare
+        columns:
+        - title: Odd f
+          points:
+          - f(−x) = −f(x)
+          - x³, sin x
+          - ∫₋ₐᵃ f = 0
+        - title: Even f
+          points:
+          - f(−x) = f(x)
+          - x², cos x
+          - ∫₋ₐᵃ f = 2∫₀ᵃ f
+        alt: Odd and even functions and their integrals over a symmetric interval.
+      check:
+        prompt: Evaluate ∫₋₁¹ sin x dx.
+        options:
+        - '0'
+        - '2'
+        - 2 sin 1
+        answer: '0'
+        why: sin x is odd, so the two halves cancel.
   items:
   - prompt: Evaluate ∫₀² x dx.
     answer: '2'
@@ -320,3 +511,105 @@ concepts:
     - Two equal halves.
     solution: 2∫₀ᵃ f(x)dx.
     mistakes: {"0": "m12_even_function", "∫₀ᵃ f(x)dx": "m12_even_function", "−∫₀ᵃ f(x)dx": "m12_even_function"}
+  - prompt: Evaluate ∫₁² 3x² dx.
+    answer: '7'
+    check: 2**3 - 1**3
+    difficulty: 1
+    hints:
+    - Antiderivative of 3x² is x³.
+    - Upper minus lower.
+    solution: 'Step 1: 8 − 1. Step 2: 7.'
+    mistakes:
+      '8': c12m7_eval
+      '9': c12m7_eval
+  - prompt: Evaluate ∫₀⁴ (x + 1) dx.
+    answer: '12'
+    check: 4**2/2 + 4
+    difficulty: 1
+    hints:
+    - 'Antiderivative: x²/2 + x.'
+    - Put in 4, subtract value at 0.
+    solution: 'Step 1: 8 + 4. Step 2: 12.'
+    mistakes:
+      '20': c12m7_eval
+      '5': c12m7_eval
+  - prompt: Evaluate ∫₀^(π/2) cos x dx.
+    answer: '1'
+    check: sin(pi/2) - sin(0)
+    difficulty: 1
+    hints:
+    - ∫cos x = sin x.
+    - sin(π/2) − sin 0.
+    solution: 'Step 1: 1 − 0. Step 2: 1.'
+    mistakes:
+      '0': c12m7_eval
+      '-1': c12m7_eval
+  - prompt: Evaluate ∫₁^e (1/x) dx.
+    answer: '1'
+    check: log(E) - log(1)
+    difficulty: 2
+    hints:
+    - ∫1/x = ln x.
+    - ln e = 1, ln 1 = 0.
+    solution: 'Step 1: ln e − ln 1. Step 2: 1.'
+    mistakes:
+      '0': c12m7_eval
+      '-1': c12m7_eval
+  - prompt: Evaluate ∫₋₃³ x⁵ dx.
+    answer: '0'
+    check: '0'
+    difficulty: 2
+    hints:
+    - Is x⁵ odd or even?
+    - Symmetric limits.
+    solution: 'Step 1: x⁵ is odd. Step 2: the integral is 0.'
+    mistakes:
+      '243': c12m7_prop
+      '486': c12m7_prop
+  - prompt: Evaluate ∫₋₂² x² dx as a fraction.
+    answer: 16/3
+    check: 2*(2**3)/3
+    difficulty: 2
+    hints:
+    - x² is even.
+    - Double ∫₀² x² dx.
+    solution: 'Step 1: ∫₀² x² = 8/3. Step 2: 2 × 8/3 = 16/3.'
+    mistakes:
+      '0': c12m7_prop
+      8/3: c12m7_prop
+  - prompt: Evaluate ∫₀¹ eˣ dx. Give the answer in terms of e.
+    options:
+    - e − 1
+    - e
+    - '1'
+    answer: e − 1
+    difficulty: 2
+    hints:
+    - ∫eˣ = eˣ.
+    - Remember e⁰ = 1.
+    solution: 'Step 1: e¹ − e⁰. Step 2: e − 1.'
+    mistakes:
+      e: c12m7_eval
+      '1': c12m7_eval
+  - prompt: Evaluate ∫₀^(π/2) sin²x dx + ∫₀^(π/2) cos²x dx, as a multiple of π.
+    answer: 1/2
+    check: Rational(1,2)
+    difficulty: 3
+    hints:
+    - Add the integrands first.
+    - sin²x + cos²x = 1.
+    solution: 'Step 1: ∫₀^(π/2) 1 dx = π/2. Step 2: (1/2)π.'
+    mistakes:
+      '1': c12m7_prop
+      1/4: c12m7_prop
+  - prompt: Using ∫ₐᵇ f(x)dx = ∫ₐᵇ f(a + b − x)dx, ∫₀^(π/2) sin x/(sin x + cos x) dx equals what multiple of π?
+    answer: 1/4
+    check: Rational(1,4)
+    difficulty: 3
+    hints:
+    - Replace x by π/2 − x to get cos x/(cos x + sin x).
+    - 'Add the two forms: 2I = ∫₀^(π/2) 1 dx.'
+    solution: 'Step 1: 2I = π/2. Step 2: I = π/4.'
+    mistakes:
+      1/2: c12m7_prop
+      '1': c12m7_prop

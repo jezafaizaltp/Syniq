@@ -15,6 +15,9 @@ tips:
   p12_stopping: "eV₀ = K_max, so V₀ in volts equals K_max in eV."
   p12_threshold: "Waves could build up energy over time at any frequency, so they predict no cut-off."
   p12_work_function: "An electron needs at least this energy to escape the metal surface."
+  c12p11_photo: 'Einstein: K_max = hν − φ₀. Energy of one photon decides K_max; intensity only decides how many photons (and electrons).'
+  c12p11_units: Use hc ≈ 1240 eV nm to go between wavelength (nm) and photon energy (eV).
+  c12p11_db: "de Broglie: λ = h/p. If λ is the same for both, what else must be the same?"
 concepts:
 - code: cbse12p.dual.photoelectric
   title: Photoelectric effect
@@ -113,6 +116,42 @@ concepts:
           - 0.01
           - 2.9
         say: 'Not enough energy per photon: shorter wavelength.'
+  lesson:
+    - teach: Electrons can leave a metal by heating (thermionic), a strong field (field emission), or light (photoelectric). Hertz, Hallwachs and Lenard found that light frees electrons only above a threshold frequency ν₀ for each metal, however bright the light.
+      check:
+        prompt: Very bright red light below threshold falls on a metal. Emission?
+        options:
+        - none
+        - many electrons
+        - a few slow electrons
+        answer: none
+        why: Below ν₀ no electrons are emitted, whatever the intensity.
+    - teach: 'Observations: photocurrent ∝ intensity; maximum kinetic energy depends on frequency, not intensity; emission is instant. The wave theory could not explain these. Einstein: light comes in photons of energy E = hν. One photon frees one electron: K_max = hν − φ₀, where φ₀ = hν₀ is the work function.'
+      picture:
+        kind: flow
+        steps:
+        - Photon energy hν arrives
+        - φ₀ used to free the electron
+        - Rest becomes K_max
+        - 'Stopping potential: eV₀ = K_max'
+        alt: Energy bookkeeping in Einstein's photoelectric equation.
+      check:
+        prompt: hν = 6 eV, φ₀ = 4 eV. K_max?
+        options:
+        - 2 eV
+        - 10 eV
+        - 24 eV
+        answer: 2 eV
+        why: 6 − 4.
+    - teach: 'The stopping potential V₀ is the reverse voltage that just stops the fastest electrons: eV₀ = K_max. Photons also carry momentum p = h/λ. Useful: hc ≈ 1240 eV nm, so a 620 nm photon has 2 eV.'
+      check:
+        prompt: K_max = 1.5 eV. Stopping potential?
+        options:
+        - 1.5 V
+        - 3 V
+        - 0.75 V
+        answer: 1.5 V
+        why: eV₀ = K_max, so V₀ = 1.5 V.
   items:
   - prompt: Photons of 5 eV hit a metal with work function 2 eV. Find K_max (eV).
     answer: '3'
@@ -181,6 +220,111 @@ concepts:
     - Photon idea needed.
     solution: The existence of a threshold frequency.
     mistakes: {"interference": "p12_threshold", "diffraction": "p12_threshold", "reflection": "p12_threshold"}
+  - prompt: Photons of 4 eV hit a metal with work function 2.5 eV. K_max (eV) as a fraction?
+    answer: 3/2
+    check: 4 - Rational(5,2)
+    difficulty: 1
+    hints:
+    - K_max = hν − φ₀.
+    - 4 − 2.5.
+    solution: 'Step 1: 1.5 eV. Step 2: 3/2.'
+    mistakes:
+      13/2: c12p11_photo
+      '10': c12p11_photo
+  - prompt: Find the energy (eV) of a photon of wavelength 620 nm (hc = 1240 eV nm).
+    answer: '2'
+    check: 1240/620
+    difficulty: 1
+    hints:
+    - E = hc/λ.
+    - 1240/620.
+    solution: 'Step 1: 1240/620. Step 2: 2 eV.'
+    mistakes:
+      1/2: c12p11_units
+      '620': c12p11_units
+  - prompt: A metal's work function is 3.1 eV. Find its threshold wavelength (nm) (hc = 1240 eV nm).
+    answer: '400'
+    check: 1240/Rational(31,10)
+    difficulty: 1
+    hints:
+    - λ₀ = hc/φ₀.
+    - 1240/3.1.
+    solution: 'Step 1: 1240/3.1. Step 2: 400 nm.'
+    mistakes:
+      '4': c12p11_units
+      '3844': c12p11_units
+  - prompt: Light of 310 nm hits a metal with φ₀ = 2 eV. K_max (eV)? (hc = 1240 eV nm)
+    answer: '2'
+    check: 1240/310 - 2
+    difficulty: 2
+    hints:
+    - 'Photon energy first: 1240/310.'
+    - Subtract φ₀.
+    solution: 'Step 1: 4 eV photon. Step 2: 4 − 2 = 2 eV.'
+    mistakes:
+      '4': c12p11_photo
+      '6': c12p11_photo
+  - prompt: The stopping potential is 2.5 V. K_max in units of 10⁻¹⁹ J (e = 1.6 × 10⁻¹⁹ C)?
+    answer: '4'
+    check: Rational(5,2)*Rational(16,10)
+    difficulty: 2
+    hints:
+    - K_max = eV₀.
+    - 2.5 × 1.6.
+    solution: 'Step 1: 4 × 10⁻¹⁹ J. Step 2: 4.'
+    mistakes:
+      5/2: c12p11_units
+      '16': c12p11_units
+  - prompt: Light frequency is raised (intensity fixed, above threshold). What happens?
+    options:
+    - K_max increases
+    - more electrons per second only
+    - nothing changes
+    answer: K_max increases
+    difficulty: 2
+    hints:
+    - Each photon now has more energy.
+    - K_max = hν − φ₀.
+    solution: 'Step 1: hν rises. Step 2: K_max rises.'
+    mistakes:
+      more electrons per second only: c12p11_photo
+      nothing changes: c12p11_photo
+  - prompt: 'Doubling the intensity of light (same frequency, above threshold) makes the photocurrent:'
+    options:
+    - double
+    - stay the same
+    - halve
+    answer: double
+    difficulty: 2
+    hints:
+    - Intensity means number of photons.
+    - One photon frees one electron.
+    solution: 'Step 1: twice the photons. Step 2: twice the electrons.'
+    mistakes:
+      stay the same: c12p11_photo
+      halve: c12p11_photo
+  - prompt: Two lights, 2 eV and 5 eV photons, hit a metal with φ₀ = 3 eV. How many of them cause emission?
+    answer: '1'
+    check: '1'
+    difficulty: 3
+    hints:
+    - Compare each photon with φ₀.
+    - Only photons with hν > φ₀ work.
+    solution: 'Step 1: 2 < 3 fails, 5 > 3 works. Step 2: 1.'
+    mistakes:
+      '2': c12p11_photo
+      '0': c12p11_photo
+  - prompt: Momentum of a photon of wavelength 663 nm in units of 10⁻²⁷ kg m/s (h = 6.63 × 10⁻³⁴)?
+    answer: '1'
+    check: Rational(663,100)*10**-34/(663*10**-9)*10**27
+    difficulty: 3
+    hints:
+    - p = h/λ.
+    - 6.63 × 10⁻³⁴ / 6.63 × 10⁻⁷.
+    solution: 'Step 1: 10⁻²⁷. Step 2: 1.'
+    mistakes:
+      '10': c12p11_db
+      1/10: c12p11_db
 - code: cbse12p.dual.matter
   title: Matter waves
   after:
@@ -254,6 +398,48 @@ concepts:
       - when:
           v: 200
         say: Twice 100 V shrinks λ only by √2. Half the wavelength needs 4 × 100 V.
+  lesson:
+    - teach: de Broglie suggested that if light waves behave like particles, particles might behave like waves. A particle of momentum p has wavelength λ = h/p = h/(mv).
+      check:
+        prompt: 'Doubling a particle''s momentum makes its λ:'
+        options:
+        - half
+        - double
+        - the same
+        answer: half
+        why: λ ∝ 1/p.
+    - teach: For everyday objects λ is unbelievably tiny, so we never notice the wave. For electrons it is comparable to atomic spacing. An electron accelerated through V volts has λ = h/√(2meV) ≈ 1.227/√V nm.
+      picture:
+        kind: compare
+        columns:
+        - title: Cricket ball
+          points:
+          - m ≈ 0.16 kg
+          - λ ≈ 10⁻³⁴ m
+          - wave unnoticed
+        - title: Electron at 100 V
+          points:
+          - m ≈ 9 × 10⁻³¹ kg
+          - λ ≈ 0.12 nm
+          - diffracts off crystals
+        alt: Matter wavelength of a cricket ball compared with an electron.
+      check:
+        prompt: To find λ for an electron at 400 V, you need √400. What is it?
+        options:
+        - '20'
+        - '200'
+        - '40'
+        answer: '20'
+        why: 20 × 20 = 400, so λ ≈ 0.061 nm.
+    - teach: Davisson and Germer saw electrons diffract from a nickel crystal, confirming matter waves. Electron microscopes use very short electron wavelengths to see much finer detail than light microscopes.
+      check:
+        prompt: 'Electron microscopes beat light microscopes because electrons have:'
+        options:
+        - much shorter wavelengths
+        - more colours
+        - no mass
+        answer: much shorter wavelengths
+        why: Shorter λ resolves finer detail.
   items:
   - prompt: An electron is accelerated through 100 V. Find its wavelength (nm) using 1.227/√V, to three decimals.
     answer: '0.123'
@@ -322,3 +508,117 @@ concepts:
     - λ = h/p.
     solution: Moving particles behave like waves.
     mistakes: {"light is only a wave": "p12_de_broglie_hyp", "electrons have no mass": "p12_de_broglie_hyp", "atoms can't be split": "p12_de_broglie_hyp"}
+  - prompt: An electron is accelerated through 400 V. Using λ ≈ 1.227/√V nm, which is closest to λ?
+    options:
+    - '0.061'
+    - '0.123'
+    - '0.031'
+    answer: '0.061'
+    difficulty: 1
+    hints:
+    - √400 = 20.
+    - 1.227/20.
+    solution: 'Step 1: 1.227/20. Step 2: about 0.061 nm.'
+    mistakes:
+      '0.123': c12p11_db
+      '0.031': c12p11_db
+  - prompt: A particle's mass and speed both double. Its de Broglie wavelength becomes what fraction?
+    answer: 1/4
+    check: Rational(1,4)
+    difficulty: 1
+    hints:
+    - λ = h/(mv).
+    - mv becomes 4 times.
+    solution: 'Step 1: p × 4. Step 2: λ ÷ 4.'
+    mistakes:
+      1/2: c12p11_db
+      '4': c12p11_db
+  - prompt: Momentum 3.315 × 10⁻²⁴ kg m/s. λ in units of 10⁻¹⁰ m (h = 6.63 × 10⁻³⁴)?
+    answer: '2'
+    check: Rational(663,100)/Rational(3315,1000)
+    difficulty: 1
+    hints:
+    - λ = h/p.
+    - 6.63/3.315 = 2.
+    solution: 'Step 1: 2 × 10⁻¹⁰ m. Step 2: 2.'
+    mistakes:
+      1/2: c12p11_db
+      '1': c12p11_db
+  - prompt: Accelerating voltage for electrons is made 4 times larger. λ becomes what fraction?
+    answer: 1/2
+    check: 1/sqrt(4)
+    difficulty: 2
+    hints:
+    - λ ∝ 1/√V.
+    - √4 = 2.
+    solution: 'Step 1: λ ∝ 1/√V. Step 2: halves.'
+    mistakes:
+      1/4: c12p11_db
+      '2': c12p11_db
+  - prompt: A 0.1 kg ball moves at 6.63 m/s. λ in units of 10⁻³³ m (h = 6.63 × 10⁻³⁴)?
+    answer: '1'
+    check: Rational(663,100)*10**-34/(Rational(1,10)*Rational(663,100))*10**33
+    difficulty: 2
+    hints:
+    - p = 0.663 kg m/s.
+    - 6.63 × 10⁻³⁴/0.663.
+    solution: 'Step 1: 10⁻³³ m. Step 2: 1.'
+    mistakes:
+      '10': c12p11_db
+      1/10: c12p11_db
+  - prompt: An electron and a proton have the same speed. Which has the longer wavelength?
+    options:
+    - the electron
+    - the proton
+    - both equal
+    answer: the electron
+    difficulty: 2
+    hints:
+    - λ = h/(mv).
+    - Which is lighter?
+    solution: 'Step 1: same v, smaller m. Step 2: the electron''s λ is longer.'
+    mistakes:
+      the proton: c12p11_db
+      both equal: c12p11_db
+  - prompt: An electron and a proton have the same kinetic energy. Which has the shorter wavelength?
+    options:
+    - the proton
+    - the electron
+    - both equal
+    answer: the proton
+    difficulty: 3
+    hints:
+    - p = √(2mK).
+    - Larger m gives larger p.
+    solution: 'Step 1: proton has bigger p. Step 2: shorter λ.'
+    mistakes:
+      the electron: c12p11_db
+      both equal: c12p11_db
+  - prompt: Which experiment confirmed the wave nature of electrons?
+    options:
+    - Davisson–Germer
+    - Geiger–Marsden
+    - Millikan oil drop
+    answer: Davisson–Germer
+    difficulty: 2
+    hints:
+    - Electrons diffracted from a crystal.
+    - A nickel target was used.
+    solution: 'Step 1: electron diffraction. Step 2: Davisson–Germer.'
+    mistakes:
+      Geiger–Marsden: c12p11_db
+      Millikan oil drop: c12p11_db
+  - prompt: 'A photon and an electron have the same wavelength. They have the same:'
+    options:
+    - momentum
+    - energy
+    - speed
+    answer: momentum
+    difficulty: 3
+    hints:
+    - For both, λ = h/p.
+    - Same λ means same p.
+    solution: 'Step 1: p = h/λ for both. Step 2: equal momentum.'
+    mistakes:
+      energy: c12p11_db
+      speed: c12p11_db

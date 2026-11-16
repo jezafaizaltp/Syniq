@@ -9,6 +9,9 @@ tips:
   m4_hours_count: "Count on from 8:00 to 11:00, one hour at a time."
   m4_timetable: "A timetable lists times. For buses and trains, which times?"
   m4_wheels_total: "Cars have 4 wheels and bicycles 2. Work out each group, then add."
+  c4m13_groups: 'Same number for each person, row or vehicle: multiply. Splitting into equal groups: divide.'
+  c4m13_wheels: Write each vehicle's wheels first, multiply for each kind, then add the kinds together.
+  c4m13_time: Count on from the start time to the next full hour, then on to the end time.
 concepts:
 - code: cbse4m.trans.multiply
   title: Tickets, fares and seats
@@ -72,6 +75,45 @@ concepts:
       - when:
           n: 15
         say: 15 × 15 = 225, not 300. How many 15s make 300?
+  lesson:
+    - teach: 'At a transport museum, many things come in equal groups. A ticket of ₹25 for 6 children: ₹25 × 6 = ₹150. A bus with 12 rows of 4 seats: 12 × 4 = 48 seats.'
+      check:
+        prompt: A van has 5 rows of 3 seats. How many seats?
+        options:
+        - '15'
+        - '8'
+        - '53'
+        answer: '15'
+        why: 5 × 3 = 15.
+    - teach: 'Different vehicles have different numbers of wheels: bicycle 2, auto-rickshaw 3, car 4. For a mix, multiply each kind and then add.'
+      picture:
+        kind: bars
+        unit: wheels
+        bars:
+        - label: bicycle
+          value: 2
+        - label: auto-rickshaw
+          value: 3
+        - label: car
+          value: 4
+        alt: Wheels on a bicycle (2), an auto-rickshaw (3) and a car (4).
+      check:
+        prompt: How many wheels do 2 cars and 1 bicycle have?
+        options:
+        - '10'
+        - '6'
+        - '8'
+        answer: '10'
+        why: 2 × 4 = 8, plus 2 = 10.
+    - teach: 'To share people into vehicles, divide. 48 children in buses of 16 seats: 48 ÷ 16 = 3 buses. If it does not divide exactly, you need one more vehicle for the leftover people.'
+      check:
+        prompt: 50 children, buses of 16 seats. How many buses so nobody is left out?
+        options:
+        - '4'
+        - '3'
+        - '5'
+        answer: '4'
+        why: 3 buses take 48; 2 are left, so 1 more bus.
   items:
   - prompt: A museum ticket costs ₹25. How much for 6 children in rupees?
     answer: '150'
@@ -128,6 +170,116 @@ concepts:
     solution: 72 × 8 = 576.
     mistakes:
       '80': c4_fare
+  - prompt: A museum ticket costs ₹30. How much for 8 children in rupees?
+    answer: '240'
+    check: 30*8
+    difficulty: 1
+    hints:
+    - 'Same price for each: multiply.'
+    - 3 × 8, then add a zero.
+    solution: 'Step 1: 3 × 8 = 24. Step 2: 30 × 8 = ₹240.'
+    mistakes:
+      '38': c4m13_groups
+      '200': c4m13_groups
+      '248': c4m13_groups
+  - prompt: How many wheels do 6 bicycles have?
+    answer: '12'
+    check: 6*2
+    difficulty: 1
+    hints:
+    - A bicycle has 2 wheels.
+    - 6 × 2.
+    solution: 'Step 1: 2 wheels each. Step 2: 6 × 2 = 12.'
+    mistakes:
+      '8': c4m13_wheels
+      '6': c4m13_wheels
+      '24': c4m13_wheels
+  - prompt: How many wheels do 3 cars and 4 auto-rickshaws have altogether?
+    answer: '24'
+    check: 3*4+4*3
+    difficulty: 3
+    hints:
+    - Cars have 4 wheels; autos have 3.
+    - Find each total, then add.
+    solution: 'Step 1: 3 cars × 4 = 12; 4 autos × 3 = 12. Step 2: 12 + 12 = 24.'
+    mistakes:
+      '7': c4m13_wheels
+      '28': c4m13_wheels
+      '21': c4m13_wheels
+  - prompt: 72 visitors ride in groups of 9 on a toy train. How many rides?
+    answer: '8'
+    check: 72//9
+    difficulty: 2
+    hints:
+    - How many 9s make 72?
+    - Use the 9 times table.
+    solution: 'Step 1: 72 ÷ 9. Step 2: = 8 rides.'
+    mistakes:
+      '63': c4m13_groups
+      '81': c4m13_groups
+      '9': c4m13_groups
+  - prompt: A plane has 30 rows of 6 seats. How many seats?
+    answer: '180'
+    check: 30*6
+    difficulty: 2
+    hints:
+    - Rows × seats in each row.
+    - 3 × 6, then add a zero.
+    solution: 'Step 1: 3 × 6 = 18. Step 2: 30 × 6 = 180.'
+    mistakes:
+      '36': c4m13_groups
+      '18': c4m13_groups
+      '1800': c4m13_groups
+  - prompt: A train has 10 coaches. Each coach has 64 seats. How many seats?
+    answer: '640'
+    check: 64*10
+    difficulty: 2
+    hints:
+    - Multiplying by 10 adds a zero.
+    - 64 × 10.
+    solution: 'Step 1: 64 × 10. Step 2: = 640.'
+    mistakes:
+      '74': c4m13_groups
+      '6400': c4m13_groups
+      '604': c4m13_groups
+  - prompt: A parking lot has only cars. There are 28 wheels. How many cars?
+    answer: '7'
+    check: 28//4
+    difficulty: 3
+    hints:
+    - Each car has 4 wheels.
+    - How many 4s make 28?
+    solution: 'Step 1: 28 ÷ 4. Step 2: = 7 cars.'
+    mistakes:
+      '24': c4m13_wheels
+      '14': c4m13_wheels
+      '112': c4m13_wheels
+  - prompt: Bus fare is ₹15 a person. A family of 5 goes and comes back by bus. Total fare in rupees?
+    answer: '150'
+    check: 15*5*2
+    difficulty: 3
+    hints:
+    - Find the fare for 5 people one way.
+    - Going and coming back doubles it.
+    solution: 'Step 1: 15 × 5 = ₹75 one way. Step 2: 75 × 2 = ₹150.'
+    mistakes:
+      '75': c4m13_groups
+      '20': c4m13_groups
+      '30': c4m13_groups
+  - prompt: 'Which needs more wheels: 5 auto-rickshaws or 4 cars?'
+    options:
+    - 4 cars
+    - 5 auto-rickshaws
+    - both need the same
+    answer: 4 cars
+    difficulty: 2
+    hints:
+    - Find 5 × 3.
+    - Find 4 × 4 and compare.
+    solution: 'Step 1: 5 autos × 3 = 15 wheels; 4 cars × 4 = 16 wheels. Step 2: 16 > 15, so 4 cars need more.'
+    mistakes:
+      5 auto-rickshaws: c4m13_wheels
+      both need the same: c4m13_wheels
 - code: cbse4m.trans.time
   title: Journeys and timetables
   after:
@@ -189,6 +341,43 @@ concepts:
       - when:
           v: 120
         say: 'Count up: 2:30 to 4:30 is 2 hours, then 30 more minutes.'
+  lesson:
+    - teach: A timetable lists when buses or trains leave (departure) and reach (arrival). Journey time = arrival time − departure time.
+      check:
+        prompt: A bus leaves at 9:00 and arrives at 12:00. How long is the journey?
+        options:
+        - 3 hours
+        - 21 hours
+        - 9 hours
+        answer: 3 hours
+        why: 9 to 12 is 3 hours.
+    - teach: 'When minutes are not round, count on in two jumps: 8:15 to 10:00 is 1 h 45 min, then 10:00 to 10:45 is 45 min more: 2 h 30 min, or 150 minutes.'
+      picture:
+        kind: flow
+        steps:
+        - 8:15 departure
+        - 'to 9:00: 45 min'
+        - 'to 10:00: 1 h'
+        - 'to 10:45: 45 min'
+        - total 2 h 30 min
+        alt: 'Counting on from 8:15 to 10:45 in jumps: 45 min, 1 hour, 45 min.'
+      check:
+        prompt: How many minutes from 4:40 to 5:10?
+        options:
+        - '30'
+        - '70'
+        - '50'
+        answer: '30'
+        why: 20 minutes to 5:00, then 10 more.
+    - teach: 'Distance = speed × time. A bus that goes 40 km each hour travels 40 × 3 = 120 km in 3 hours. To find the time, divide: 120 km ÷ 40 km per hour = 3 hours.'
+      check:
+        prompt: A car goes 50 km each hour. How far in 2 hours?
+        options:
+        - 100 km
+        - 52 km
+        - 25 km
+        answer: 100 km
+        why: 50 × 2 = 100.
   items:
   - prompt: A bus leaves at 8:00 and arrives at 11:00. How many hours is the journey?
     answer: '3'
@@ -248,3 +437,114 @@ concepts:
     - 20 + 20 + 20.
     solution: 60 ÷ 20 = 3 hours.
     mistakes: {"40": "m5_divide_check", "1200": "m5_divide_check"}
+  - prompt: A train leaves at 6:30 and arrives at 9:30. How many hours is the journey?
+    answer: '3'
+    check: 9-6
+    difficulty: 1
+    hints:
+    - Both times end in :30.
+    - Count the hours from 6 to 9.
+    solution: 'Step 1: 6:30 → 9:30. Step 2: 3 hours.'
+    mistakes:
+      '4': c4m13_time
+      '15': c4m13_time
+      '2': c4m13_time
+  - prompt: A bus leaves at 7:45 and arrives at 9:15. How many minutes is the journey?
+    answer: '90'
+    check: 15+60+15
+    difficulty: 3
+    hints:
+    - 7:45 to 8:00 first.
+    - Then 8:00 to 9:00, then to 9:15.
+    solution: 'Step 1: 15 + 60 + 15. Step 2: = 90 minutes.'
+    mistakes:
+      '130': c4m13_time
+      '70': c4m13_time
+      '150': c4m13_time
+  - prompt: A train goes 60 km each hour. How far in 4 hours?
+    answer: '240'
+    check: 60*4
+    difficulty: 2
+    hints:
+    - Distance = speed × time.
+    - 6 × 4, then add a zero.
+    solution: 'Step 1: 60 × 4. Step 2: = 240 km.'
+    mistakes:
+      '64': c4m13_groups
+      '15': c4m13_groups
+      '200': c4m13_groups
+  - prompt: A cycle goes 10 km each hour. How many hours to go 50 km?
+    answer: '5'
+    check: 50//10
+    difficulty: 2
+    hints:
+    - How many 10s make 50?
+    - Time = distance ÷ speed.
+    solution: 'Step 1: 50 ÷ 10. Step 2: = 5 hours.'
+    mistakes:
+      '500': c4m13_groups
+      '40': c4m13_groups
+      '60': c4m13_groups
+  - prompt: Bus 1 leaves at 9:10, bus 2 at 9:40. How many minutes apart are they?
+    answer: '30'
+    check: 40-10
+    difficulty: 1
+    hints:
+    - Both are in the 9 o'clock hour.
+    - Subtract the minutes.
+    solution: 'Step 1: 40 − 10. Step 2: = 30 minutes.'
+    mistakes:
+      '50': c4m13_time
+      '20': c4m13_time
+  - prompt: A journey takes 2 hours 15 minutes. How many minutes is that?
+    answer: '135'
+    check: 2*60+15
+    difficulty: 2
+    hints:
+    - Change hours into minutes first.
+    - Then add the 15.
+    solution: 'Step 1: 2 hours = 120 minutes. Step 2: 120 + 15 = 135 minutes.'
+    mistakes:
+      '215': c4m13_time
+      '35': c4m13_time
+      '125': c4m13_time
+  - prompt: A train leaves at 10:20 a.m. The journey takes 3 hours. When does it arrive?
+    options:
+    - 1:20 p.m.
+    - 1:20 a.m.
+    - 12:20 p.m.
+    answer: 1:20 p.m.
+    difficulty: 3
+    hints:
+    - Add 3 hours to 10:20.
+    - After 12 noon the clock starts again at 1, and it is p.m.
+    solution: 'Step 1: 10:20 + 2 h = 12:20 p.m. Step 2: + 1 h = 1:20 p.m.'
+    mistakes:
+      1:20 a.m.: c4m13_time
+      12:20 p.m.: c4m13_time
+  - prompt: Which column of a timetable tells you when a train reaches the station?
+    options:
+    - arrival
+    - departure
+    - train number
+    answer: arrival
+    difficulty: 1
+    hints:
+    - Departure is when it leaves.
+    - Which word means to come in?
+    solution: 'Step 1: Departure = leaving. Step 2: Arrival = reaching the station.'
+    mistakes:
+      departure: c4m13_time
+      train number: c4m13_time
+  - prompt: A bus travels 45 km each hour for 2 hours, then 30 km more. How far altogether?
+    answer: '120'
+    check: 45*2+30
+    difficulty: 3
+    hints:
+    - 'Distance in the first 2 hours: 45 × 2.'
+    - Then add the extra 30.
+    solution: 'Step 1: 45 × 2 = 90 km. Step 2: 90 + 30 = 120 km.'
+    mistakes:
+      '77': c4m13_groups
+      '105': c4m13_groups
+      '90': c4m13_groups

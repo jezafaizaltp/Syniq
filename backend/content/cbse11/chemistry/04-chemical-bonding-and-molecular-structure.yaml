@@ -15,6 +15,9 @@ tips:
   c11_sf6: "Six bond pairs and no lone pairs around S point to the corners of a shape with eight faces."
   c11_sigma_count: "Every single bond is one σ; a double bond is one σ + one π. Count all bonds: 4 C–H and the C=C."
   c11_tetrahedral: "Methane has four bond pairs around C, spread as a tetrahedron."
+  c11c04_shape: Count bond pairs and lone pairs on the central atom. Lone pairs push harder and squeeze the bond angles.
+  c11c04_bond: "Ask whether electrons are transferred or shared. A large electronegativity difference, as between a metal and a non-metal, means transfer."
+  c11c04_mo: 'Bond order = ½(bonding − antibonding electrons). Count σ bonds: every single bond is one σ, every double bond has one σ and one π.'
 concepts:
 - code: cbse11c.bond.types
   title: Ionic and covalent bonds, VSEPR
@@ -103,6 +106,52 @@ concepts:
       bin: Bent
       clue: S has two bonded O and one lone pair. Can it be straight?
       why: 'Three electron groups, one a lone pair: the molecule is bent, about 119°.'
+  lesson:
+    - teach: 'Atoms bond to reach a stable octet. Ionic bonds form by transferring electrons (Na gives one to Cl: Na⁺Cl⁻). Covalent bonds form by sharing pairs: single, double or triple.'
+      check:
+        prompt: 'The bond in Cl₂ is:'
+        options:
+        - covalent
+        - ionic
+        - metallic
+        answer: covalent
+        why: Two identical atoms share electrons.
+    - teach: 'VSEPR: electron pairs around the central atom spread out as far as possible. Lone pairs repel more than bond pairs, so CH₄ is 109.5°, NH₃ (one lone pair) 107°, H₂O (two lone pairs) 104.5°.'
+      check:
+        prompt: Shape of H₂O?
+        options:
+        - bent
+        - linear
+        - tetrahedral
+        answer: bent
+        why: Two bond pairs plus two lone pairs.
+    - teach: 'A polar bond has a dipole μ = q × d. A molecule''s dipoles can cancel by symmetry: CO₂ (linear) has μ = 0, H₂O (bent) does not. Shapes by pairs: 2 linear, 3 trigonal planar, 4 tetrahedral, 5 trigonal bipyramidal, 6 octahedral.'
+      picture:
+        kind: compare
+        columns:
+        - title: Electron pairs
+          points:
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+        - title: Shape (no lone pairs)
+          points:
+          - linear
+          - trigonal planar
+          - tetrahedral
+          - trigonal bipyramidal
+          - octahedral
+        alt: VSEPR shapes for two to six electron pairs.
+      check:
+        prompt: Shape of BF₃?
+        options:
+        - trigonal planar
+        - pyramidal
+        - T-shaped
+        answer: trigonal planar
+        why: Three bond pairs, no lone pair.
   items:
   - prompt: What is the shape of NH₃?
     options:
@@ -175,6 +224,126 @@ concepts:
     - 6 − 2 − 3.
     solution: '+1.'
     mistakes: {"-1": "c11_formal_charge", "0": "c11_formal_charge", "3": "c11_formal_charge"}
+  - prompt: What is the shape of BeCl₂?
+    options:
+    - linear
+    - bent
+    - trigonal planar
+    answer: linear
+    difficulty: 1
+    hints:
+    - Be has two bond pairs and no lone pairs.
+    - Two pairs spread out opposite.
+    solution: 'Step 1: 2 bond pairs. Step 2: linear, 180°.'
+    mistakes:
+      bent: c11c04_shape
+      trigonal planar: c11c04_shape
+  - prompt: 'The bond in MgO is:'
+    options:
+    - ionic
+    - covalent
+    - hydrogen
+    answer: ionic
+    difficulty: 1
+    hints:
+    - A metal with a non-metal.
+    - Mg gives two electrons to O.
+    solution: 'Step 1: electron transfer. Step 2: ionic.'
+    mistakes:
+      covalent: c11c04_bond
+      hydrogen: c11c04_bond
+  - prompt: Which molecule does NOT obey the octet rule at its central atom?
+    options:
+    - BF₃
+    - CH₄
+    - NH₃
+    answer: BF₃
+    difficulty: 1
+    hints:
+    - Count electrons around the central atom.
+    - Boron forms only three bonds.
+    solution: 'Step 1: B has 6 electrons around it. Step 2: BF₃.'
+    mistakes:
+      CH₄: c11c04_bond
+      NH₃: c11c04_bond
+  - prompt: What is the bond angle (degrees) in water, to one decimal place?
+    answer: '104.5'
+    check: '104.5'
+    difficulty: 2
+    hints:
+    - Start from tetrahedral 109.5°.
+    - Two lone pairs squeeze it more than NH₃'s one.
+    solution: 'Step 1: lone pairs reduce the angle. Step 2: 104.5°.'
+    mistakes:
+      '107': c11c04_shape
+      '109.5': c11c04_shape
+  - prompt: Which has a dipole moment?
+    options:
+    - NH₃
+    - BF₃
+    - CH₄
+    answer: NH₃
+    difficulty: 2
+    hints:
+    - Symmetric shapes cancel their bond dipoles.
+    - Which shape is not symmetric?
+    solution: 'Step 1: pyramidal NH₃ does not cancel. Step 2: NH₃.'
+    mistakes:
+      BF₃: c11c04_shape
+      CH₄: c11c04_shape
+  - prompt: What is the shape of PCl₅?
+    options:
+    - trigonal bipyramidal
+    - square planar
+    - octahedral
+    answer: trigonal bipyramidal
+    difficulty: 2
+    hints:
+    - Five bond pairs, no lone pairs.
+    - Three around the middle, two above and below.
+    solution: 'Step 1: 5 pairs. Step 2: trigonal bipyramidal.'
+    mistakes:
+      square planar: c11c04_shape
+      octahedral: c11c04_shape
+  - prompt: 'Ozone (O₃) is described by resonance structures. Its two O–O bonds are:'
+    options:
+    - equal in length
+    - one single and one double
+    - both triple
+    answer: equal in length
+    difficulty: 2
+    hints:
+    - The real molecule is a blend of the structures.
+    - Each bond is in between single and double.
+    solution: 'Step 1: resonance hybrid. Step 2: both bonds equal.'
+    mistakes:
+      one single and one double: c11c04_bond
+      both triple: c11c04_bond
+  - prompt: Find the formal charge on N in NH₄⁺ (N has 5 valence electrons, 0 non-bonding, 8 bonding).
+    answer: '1'
+    check: 5-0-8/2
+    difficulty: 3
+    hints:
+    - FC = V − L − ½B.
+    - 5 − 0 − 4.
+    solution: 'Step 1: 5 − 0 − 4. Step 2: +1.'
+    mistakes:
+      '0': c11c04_bond
+      '-1': c11c04_bond
+  - prompt: By Fajans' rules, which is most covalent?
+    options:
+    - AlCl₃
+    - NaCl
+    - MgCl₂
+    answer: AlCl₃
+    difficulty: 3
+    hints:
+    - A small, highly charged cation distorts the anion most.
+    - Compare Na⁺, Mg²⁺ and Al³⁺.
+    solution: 'Step 1: Al³⁺ is smallest with the highest charge. Step 2: AlCl₃.'
+    mistakes:
+      NaCl: c11c04_bond
+      MgCl₂: c11c04_bond
 - code: cbse11c.bond.theories
   title: Hybridisation, molecular orbitals and hydrogen bonds
   after:
@@ -245,6 +414,48 @@ concepts:
       bin: sp³d²
       clue: S has 6 σ bonds. How many orbitals mix?
       why: '6 groups → six hybrids, one s + three p + two d: octahedral.'
+  lesson:
+    - teach: 'Valence bond theory: bonds form when orbitals overlap. Head-on overlap gives a σ bond; sideways overlap gives a π bond. A double bond is 1σ + 1π; a triple is 1σ + 2π.'
+      check:
+        prompt: Bonds in N≡N?
+        options:
+        - 1σ and 2π
+        - 3σ
+        - 2σ and 1π
+        answer: 1σ and 2π
+        why: Only one σ in any multiple bond.
+    - teach: 'Hybridisation mixes orbitals: sp (linear, 180°), sp² (trigonal planar, 120°), sp³ (tetrahedral, 109.5°), sp³d (PCl₅), sp³d² (SF₆).'
+      check:
+        prompt: Hybridisation of C in CH₄?
+        options:
+        - sp³
+        - sp²
+        - sp
+        answer: sp³
+        why: Four σ bonds, tetrahedral.
+    - teach: 'Molecular orbital theory: bond order = ½(bonding − antibonding electrons). Bond order 0 means the molecule does not exist (He₂). Unpaired electrons make a substance paramagnetic (O₂). Hydrogen bonds (H with F, O or N) raise boiling points.'
+      picture:
+        kind: compare
+        columns:
+        - title: Hybridisation
+          points:
+          - sp
+          - sp²
+          - sp³
+        - title: Shape and angle
+          points:
+          - linear, 180°
+          - trigonal planar, 120°
+          - tetrahedral, 109.5°
+        alt: Hybridisation and geometry.
+      check:
+        prompt: Bond order with 8 bonding and 4 antibonding electrons?
+        options:
+        - '2'
+        - '4'
+        - '6'
+        answer: '2'
+        why: ½(8 − 4).
   items:
   - prompt: What is the hybridisation of carbon in ethene, C₂H₄?
     options:
@@ -313,3 +524,117 @@ concepts:
     - Strong intermolecular force.
     solution: Hydrogen bonds between molecules.
     mistakes: {"ionic bonding": "c11_h_bond", "metallic bonding": "c11_h_bond", "its large molar mass": "c11_h_bond"}
+  - prompt: Hybridisation of carbon in ethyne, C₂H₂?
+    options:
+    - sp
+    - sp²
+    - sp³
+    answer: sp
+    difficulty: 1
+    hints:
+    - Ethyne has a triple bond.
+    - Each C forms two σ bonds.
+    solution: 'Step 1: two σ bonds, linear. Step 2: sp.'
+    mistakes:
+      sp²: c11c04_mo
+      sp³: c11c04_mo
+  - prompt: How many π bonds are in ethyne, C₂H₂?
+    answer: '2'
+    check: '2'
+    difficulty: 1
+    hints:
+    - A triple bond is 1σ + 2π.
+    - C–H bonds are σ.
+    solution: 'Step 1: one C≡C. Step 2: 2 π bonds.'
+    mistakes:
+      '3': c11c04_mo
+      '1': c11c04_mo
+  - prompt: 'Hydrogen bonding can occur when H is bonded to:'
+    options:
+    - F, O or N
+    - C or S
+    - any metal
+    answer: F, O or N
+    difficulty: 1
+    hints:
+    - It needs a very electronegative, small atom.
+    - Think of HF, H₂O, NH₃.
+    solution: 'Step 1: highly electronegative small atoms. Step 2: F, O, N.'
+    mistakes:
+      C or S: c11c04_mo
+      any metal: c11c04_mo
+  - prompt: O₂ has 10 bonding and 6 antibonding valence electrons. Find its bond order.
+    answer: '2'
+    check: (10-6)/2
+    difficulty: 2
+    hints:
+    - Bond order = ½(Nb − Na).
+    - ½ × 4.
+    solution: 'Step 1: ½(10 − 6). Step 2: 2.'
+    mistakes:
+      '4': c11c04_mo
+      '8': c11c04_mo
+  - prompt: How many σ bonds are in ethane, C₂H₆?
+    answer: '7'
+    check: 6+1
+    difficulty: 2
+    hints:
+    - Count six C–H bonds.
+    - Plus one C–C.
+    solution: 'Step 1: 6 + 1. Step 2: 7 σ bonds.'
+    mistakes:
+      '6': c11c04_mo
+      '8': c11c04_mo
+  - prompt: Hybridisation of the central atom in SF₆?
+    options:
+    - sp³d²
+    - sp³d
+    - sp³
+    answer: sp³d²
+    difficulty: 2
+    hints:
+    - Six bond pairs.
+    - Octahedral needs six hybrid orbitals.
+    solution: 'Step 1: 6 hybrid orbitals: s + 3p + 2d. Step 2: sp³d².'
+    mistakes:
+      sp³d: c11c04_mo
+      sp³: c11c04_mo
+  - prompt: Which species is diamagnetic?
+    options:
+    - N₂
+    - O₂
+    - B₂
+    answer: N₂
+    difficulty: 2
+    hints:
+    - Diamagnetic means every electron is paired.
+    - O₂ and B₂ each have two unpaired electrons.
+    solution: 'Step 1: N₂''s MOs are fully paired. Step 2: N₂.'
+    mistakes:
+      O₂: c11c04_mo
+      B₂: c11c04_mo
+  - prompt: Bond order of O₂⁺ (10 bonding, 5 antibonding)?
+    answer: 5/2
+    check: (10-5)/2
+    difficulty: 3
+    hints:
+    - One electron is removed from an antibonding orbital.
+    - ½(10 − 5).
+    solution: 'Step 1: ½ × 5. Step 2: 2.5.'
+    mistakes:
+      '2': c11c04_mo
+      '3': c11c04_mo
+  - prompt: 'o-Nitrophenol boils lower than p-nitrophenol because o-nitrophenol has:'
+    options:
+    - intramolecular hydrogen bonds
+    - no hydrogen bonds at all
+    - ionic bonds
+    answer: intramolecular hydrogen bonds
+    difficulty: 3
+    hints:
+    - In the ortho form, –OH and –NO₂ sit side by side.
+    - A hydrogen bond inside one molecule does not link molecules together.
+    solution: 'Step 1: H-bond within the molecule. Step 2: weaker attraction between molecules, lower boiling point.'
+    mistakes:
+      no hydrogen bonds at all: c11c04_mo
+      ionic bonds: c11c04_mo

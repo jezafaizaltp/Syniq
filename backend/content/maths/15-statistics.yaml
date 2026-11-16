@@ -5,6 +5,9 @@ chapter: 15
 title: Statistics
 
 tips:
+  k9_mode_not_mean2: "That is the most common mark (the mode). The mean adds up all the marks and divides by the number of students."
+  k9_use_mean: "Use the mean: total of value × frequency, divided by the total frequency, must equal 20. Solve that for f."
+  k9_mode_not_mean: "That is the most common value (the mode). The mean adds up all the goals and divides by the number of matches."
   removed_value_mean: "Find the total first (mean × count). Take the removed number out of the total, then divide by how many numbers are left."
   needed_total: "Work with totals: the total needed for the new mean, minus the total already scored."
   misread_value: "Fix the total, not the mean: take out the wrong number, put in the right one, then divide again."
@@ -27,6 +30,11 @@ tips:
   missing_value_mean: "Total = mean × count = 60. Take away the three known numbers."
   mode_value: "The mode is the value that appears most, not how often it appears."
   two_modes: "When two values tie for the most, both are modes."
+  pqk9m15_divide_count: Divide the total by how many values there are.
+  pqk9m15_sort_first: Put the values in order first, then find the middle.
+  pqk9m15_mode_value: The mode is the value that appears most, not how many times it appears.
+  pqk9m15_total_back: Mean × count gives the total. Take away the values you know.
+  pqk9m15_freq_total: Divide by the total frequency (how many matches), not by the number of rows.
 
 concepts:
   - code: math9.stats.mean
@@ -101,6 +109,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Four friends bring 6, 8, 7 and 9 pencils to a picnic and pour them into one box: 30 pencils. Sharing them out equally, each friend gets 30 ÷ 4 = 7.5. That fair share is the mean, the average.'
+        - style: step_by_step
+          teach: 'Step 1: Add all the blocks: 6 + 8 + 7 + 9 = 30. Step 2: Count the towers: 4. Step 3: Share equally: 30 ÷ 4 = 7.5. Step 4: That level height, 7.5, is the mean.'
       - teach: 'Mean = sum of the values ÷ how many values there are. Divide by the count of values, not by the biggest value or by 2. For 45, 30, 72 and 53: the sum is 200 and there are 4 scores, so the mean is 50.'
         check:
           prompt: What is the mean of 10, 20, 30, 40 and 50?
@@ -113,6 +123,15 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: add all the values. Step 2: count how many values there are. Step 3: divide the sum by that count. For 45, 30, 72, 53: sum 200, count 4, mean 50.'
+        - style: visual
+          teach: 'Mean of 45, 30, 72 and 53: sum first, then divide by the count.'
+          picture:
+            kind: flow
+            steps:
+            - 45 + 30 + 72 + 53 = 200
+            - count = 4
+            - 200 ÷ 4 = 50
+            alt: The four scores add to 200, and 200 divided by 4 is 50.
       - teach: Mean × count = total, which lets you work backwards. If 4 numbers have mean 15, their total is 60. If three of them are 10, 12 and 20 (total 42), the fourth is 60 − 42 = 18.
         check:
           prompt: The mean of 3 numbers is 10. What is their total?
@@ -125,6 +144,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: mean × count gives the total. Step 2: add up the values you know. Step 3: the missing value is the total minus that. Mean 15 of 4 numbers: total 60; known 10 + 12 + 20 = 42; missing 18.'
+        - style: visual
+          teach: Working back from a mean to a missing value.
+          picture:
+            kind: flow
+            steps:
+            - mean 15 of 4 numbers
+            - total = 15 × 4 = 60
+            - 'known: 10 + 12 + 20 = 42'
+            - missing = 60 − 42 = 18
+            alt: Four numbers with mean 15 total 60; three of them add to 42, so the fourth is 18.
     items:
       - prompt: "What is the mean of 6, 8, 7, 9 and 10?"
         answer: "8"
@@ -252,6 +281,21 @@ concepts:
         mistakes:
           '42': needed_total
           '44': needed_total
+      - prompt: 'Situation: Anu''s marks in four tests are 36, 42, 38 and 40. What must she score in the fifth test to make her mean 40?'
+        options:
+        - '44'
+        - '40'
+        - '39'
+        answer: '44'
+        hints:
+        - Total needed for a mean of 40 over 5 tests = 200.
+        - 36 + 42 + 38 + 40 = 156.
+        solution: She needs 5 × 40 = 200 in total. She has 156, so she needs 200 − 156 = 44.
+        mistakes:
+          '40': pqk9m15_total_back
+          '39': pqk9m15_total_back
+        exam: case
+        difficulty: 2
 
   - code: math9.stats.median
     title: Median
@@ -304,6 +348,23 @@ concepts:
         ways:
         - style: real_world
           teach: 'Line up five students from shortest to tallest. The one standing in the middle of the line has the median height. If they stand in any order, the middle person tells you nothing: line them up first.'
+        - style: visual
+          teach: 'Heights sorted into order: the middle one is the median.'
+          picture:
+            kind: bars
+            bars:
+            - label: '142'
+              value: 142
+            - label: '148'
+              value: 148
+            - label: 150 (middle)
+              value: 150
+            - label: '155'
+              value: 155
+            - label: '160'
+              value: 160
+            unit: cm
+            alt: Five heights in order, 142, 148, 150, 155 and 160 centimetres; the middle one, 150, is the median.
       - teach: 'With an even number of values there are two middle ones, so take their mean. 3, 4, 7, 9, 10, 12 in order: the middle two are 7 and 9, so the median is 8.'
         check:
           prompt: What is the median of 2, 5, 6, 11?
@@ -316,6 +377,15 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: sort the values. Step 2: count them. Step 3: with an odd count, take the one in the middle. Step 4: with an even count, take the two in the middle and find their mean: 7 and 9 give 8.'
+        - style: visual
+          teach: 'An even count has two middle values: take their mean.'
+          picture:
+            kind: flow
+            steps:
+            - 3, 4, 7, 9, 10, 12
+            - 'middle two: 7 and 9'
+            - (7 + 9) ÷ 2 = 8
+            alt: In 3, 4, 7, 9, 10, 12 the middle two values are 7 and 9, so the median is 8.
       - teach: The median is not pulled far by one extreme value. Wages ₹9,000, ₹10,000, ₹11,000, ₹12,000 and ₹1,00,000 have median ₹11,000 but mean ₹28,400. So the median often describes a typical value better.
         check:
           prompt: Five houses cost ₹20 lakh, ₹22 lakh, ₹25 lakh, ₹27 lakh and ₹3 crore. Which average shows a typical house better?
@@ -327,6 +397,20 @@ concepts:
         ways:
         - style: real_world
           teach: One cricketer scores 200 and four others score around 20. The mean shoots up to over 50, which describes nobody in the team. The median stays near 20, the typical score. When one value is far off from the rest, the median gives a fairer picture.
+        - style: visual
+          teach: One huge value pulls the mean far up but hardly moves the median.
+          picture:
+            kind: compare
+            columns:
+            - title: Median
+              points:
+              - ₹11,000
+              - a typical wage
+            - title: Mean
+              points:
+              - ₹28,400
+              - pulled up by ₹1,00,000
+            alt: For the five wages the median is 11,000 rupees, a typical wage, while the mean is 28,400 rupees because one wage is 1 lakh.
     items:
       - prompt: "What is the median of 150, 142, 160, 155 and 148?"
         answer: "150"
@@ -452,6 +536,21 @@ concepts:
         solution: 'Step 1: 12, 13, 13, 14, 15, 16. Step 2: The middle two are 13 and 14. Step 3: Median = 13.5 minutes.'
         mistakes:
           '14': median_even_count
+      - prompt: Find the median of 23, 17, 31, 19, 27, 25.
+        options:
+        - '24'
+        - '25'
+        - '31'
+        answer: '24'
+        hints:
+        - 'Sort them first: 17, 19, 23, 25, 27, 31.'
+        - There are six values, so take the mean of the middle two.
+        solution: 'Sorted: 17, 19, 23, 25, 27, 31. Middle two: 23 and 25. Median = 24.'
+        mistakes:
+          '31': pqk9m15_sort_first
+          '25': pqk9m15_sort_first
+        exam: short
+        difficulty: 2
 
   - code: math9.stats.mode
     title: Mode
@@ -502,6 +601,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write each different value once. Step 2: count how often each appears. Step 3: the value with the biggest count is the mode. Answer with the value itself, not with how many times it appears.'
+        - style: visual
+          teach: Count how often each value appears; the tallest bar is the mode.
+          picture:
+            kind: bars
+            bars:
+            - label: '6'
+              value: 2
+            - label: '7'
+              value: 4
+            - label: '8'
+              value: 1
+            - label: '9'
+              value: 1
+            unit: times
+            alt: In the list, 6 appears twice, 7 four times, 8 once and 9 once, so the mode is 7.
       - teach: A list can have two modes (2, 4, 4, 7, 7 has modes 4 and 7) or no mode at all if every value appears once (1, 2, 3, 4).
         check:
           prompt: How many modes does 5, 5, 6, 8, 8, 9 have?
@@ -514,6 +628,24 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: count how often each value appears. Step 2: find the biggest count. Step 3: if two values share that biggest count, both are modes. If every value appears once, there is no mode.'
+        - style: visual
+          teach: A list can have one mode, two modes, or none.
+          picture:
+            kind: compare
+            columns:
+            - title: One mode
+              points:
+              - 6, 7, 7, 8, 7
+              - mode 7
+            - title: Two modes
+              points:
+              - 2, 4, 4, 7, 7
+              - modes 4 and 7
+            - title: No mode
+              points:
+              - 1, 2, 3, 4
+              - each once
+            alt: 6, 7, 7, 8, 7 has mode 7; 2, 4, 4, 7, 7 has modes 4 and 7; 1, 2, 3, 4 has no mode.
       - teach: 'The mode is the only average that works for things that aren''t numbers: the most popular snack, the shirt size sold most, the commonest colour. A shop owner orders more of the mode.'
         check:
           prompt: 'Votes for a class trip: beach 12, hills 15, zoo 9. Which average makes sense here?'
@@ -526,6 +658,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'A chai shop counts orders: 40 tea, 25 coffee, 10 juice. You can''t add tea and coffee to find a mean, but you can see which is ordered most: tea. The mode works even when the data are names, sizes or colours.'
+        - style: visual
+          teach: The mode works for things that aren't numbers, like the snack sold most.
+          picture:
+            kind: bars
+            bars:
+            - label: banana chips
+              value: 18
+            - label: biscuits
+              value: 11
+            - label: samosa
+              value: 25
+            - label: fruit
+              value: 9
+            alt: 'Snacks sold in a canteen: samosa 25, banana chips 18, biscuits 11, fruit 9. The mode is samosa.'
     items:
       - prompt: "What is the mode of 6, 7, 7, 8, 7, 9, 6, 7?"
         answer: "7"
@@ -662,6 +808,20 @@ concepts:
         mistakes:
           All three averages are 12: which_averages
           Mean and mode are both 12: mean_not_mode
+      - prompt: 'Shoe sizes sold in a day: 6, 7, 8, 7, 9, 7, 6, 8, 7. What is the mode?'
+        options:
+        - '7'
+        - '4'
+        - '8'
+        answer: '7'
+        hints:
+        - Count how many times each size appears.
+        - 7 appears 4 times.
+        solution: Size 7 appears 4 times, more than any other, so the mode is 7.
+        mistakes:
+          '4': pqk9m15_mode_value
+        exam: one_mark
+        difficulty: 1
 
   - code: math9.stats.frequency
     title: Averages from a frequency table
@@ -711,6 +871,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: in a frequency table, each row says a value and how many times it happened. Step 2: to find how many in all, add the frequencies, not the values. Marks 4, 5, 6 by 3, 8, 4 students: 3 + 8 + 4 = 15 students.'
+        - style: visual
+          teach: Goals in 10 matches, shown as a frequency chart.
+          picture:
+            kind: bars
+            bars:
+            - label: 0 goals
+              value: 2
+            - label: 1 goal
+              value: 5
+            - label: 2 goals
+              value: 3
+            unit: matches
+            alt: In 10 matches, 0 goals were scored in 2, 1 goal in 5, and 2 goals in 3.
       - teach: 'Mean from a table: multiply each value by its frequency, add these up, then divide by the total frequency. Goals: 0 × 2 + 1 × 5 + 2 × 3 = 11 goals in 10 matches, so the mean is 1.1. Dividing by the number of different values (3) is a common slip.'
         picture:
           kind: flow
@@ -731,6 +904,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for each row, multiply the value by its frequency. Step 2: add these products to get the grand total. Step 3: divide by the sum of the frequencies, which is how many values there are. Not by the number of rows.'
+        - style: real_world
+          teach: 'A shopkeeper sold 2 shirts at ₹300, 5 at ₹400 and 3 at ₹500. Takings: 600 + 2000 + 1500 = ₹4,100 for 10 shirts, so ₹410 a shirt on average. Value × how many, add up, divide by the total count.'
       - teach: 'The mode is the value with the biggest frequency. For the median, add up frequencies in order until you reach the middle position. 20 families: the middle is between the 10th and 11th. If sizes 2, 3, 4 have 3, 5, 8 families, the running totals are 3, 8, 16, so the 10th and 11th families have size 4.'
         check:
           prompt: Sizes 38, 40, 42 sold 12, 20 and 8 shirts. What is the mode?
@@ -743,6 +918,17 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for the mode, pick the row with the biggest frequency and give its value. Step 2: for the median, find the middle position. Step 3: keep a running total of frequencies down the table. Step 4: the first row where the running total passes the middle position holds the median.'
+        - style: visual
+          teach: 'Median from a table: count along until you reach the middle position. Example: 4 families of size 2, 8 of size 3 and 8 of size 4.'
+          picture:
+            kind: flow
+            steps:
+            - '20 families: middle = 10th and 11th'
+            - 'size 2: families 1–4'
+            - 'size 3: families 5–12'
+            - 10th and 11th are size 3
+            - median = 3
+            alt: With 20 families the middle is between the 10th and 11th; families 5 to 12 have size 3, so the median size is 3.
     items:
       - prompt: "Goals in 10 matches: 0 goals in 2 matches, 1 goal in 5 matches, 2 goals in 3 matches. What is the mean number of goals per match?"
         answer: "1.1"
@@ -750,7 +936,7 @@ concepts:
         difficulty: 1
         hints: ["Total goals = 0×2 + 1×5 + 2×3.", "Divide by the 10 matches."]
         solution: "Step 1: Total goals = 0 + 5 + 6 = 11. Step 2: 11 ÷ 10 = 1.1."
-        mistakes: {"1": mean_not_mode, "11/3": divided_by_values, "10/3": frequency_not_used}
+        mistakes: {"1": "k9_mode_not_mean", "11/3": "divided_by_values", "10/3": "frequency_not_used"}
       - prompt: "Shirt sizes sold: size 38 (12 shirts), size 40 (20 shirts), size 42 (8 shirts). What is the mode?"
         answer: "40"
         check: "40"
@@ -764,7 +950,7 @@ concepts:
         difficulty: 2
         hints: ["Σfx = 5×4 + 6×10 + 7×6.", "Σf = 20."]
         solution: "Step 1: Σfx = 20 + 60 + 42 = 122. Step 2: Σf = 20. Step 3: 122 ÷ 20 = 6.1."
-        mistakes: {"6": mean_not_mode, "122/3": divided_by_values, "18": frequency_not_used}
+        mistakes: {"6": "k9_mode_not_mean2", "122/3": "divided_by_values", "18": "frequency_not_used"}
       - prompt: "Family sizes in a street: 2 people (3 families), 3 people (5 families), 4 people (8 families), 5 people (4 families). How many people live in the street altogether?"
         answer: "73"
         check: "2*3 + 3*5 + 4*8 + 5*4"
@@ -806,7 +992,7 @@ concepts:
         difficulty: 3
         hints: ["Σfx = 50 + 160 + 30f and Σf = 13 + f.", "Set (210 + 30f) ÷ (13 + f) = 20."]
         solution: "Step 1: 210 + 30f = 20(13 + f) = 260 + 20f. Step 2: 10f = 50, so f = 5."
-        mistakes: {"8": mode_not_count, "50": forgot_divide}
+        mistakes: {"8": "k9_use_mean", "50": "forgot_divide"}
       - prompt: 'Children in families: 1 child (4 families), 2 children (5 families), 3 children (1 family). What is the mean number of children per family?'
         answer: '1.7'
         check: (1*4 + 2*5 + 3*1)/10
@@ -869,3 +1055,18 @@ concepts:
         solution: 'Step 1: Σfx = 2 + 8 + 9 + 20 + 10 + 24 = 73. Step 2: Σf = 20 rolls. Step 3: Mean = 73 ÷ 20 = 3.65.'
         mistakes:
           '3.5': frequency_not_used
+      - prompt: 'Situation: Runs scored by a batter: 0 runs in 3 innings, 10 runs in 4 innings, 20 runs in 3 innings. What is the mean score per innings?'
+        options:
+        - '10'
+        - '30'
+        - '100'
+        answer: '10'
+        hints:
+        - Total runs = 0 × 3 + 10 × 4 + 20 × 3.
+        - Total innings = 3 + 4 + 3 = 10.
+        solution: Total runs = 0 + 40 + 60 = 100 in 10 innings, so the mean = 10.
+        mistakes:
+          '30': pqk9m15_freq_total
+          '100': pqk9m15_divide_count
+        exam: case
+        difficulty: 2
