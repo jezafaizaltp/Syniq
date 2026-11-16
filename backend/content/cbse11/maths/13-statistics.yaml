@@ -134,6 +134,25 @@ concepts:
         - '8'
         answer: '12'
         why: 15 − 3 = 12.
+      ways:
+      - style: visual
+        teach: Two classes with the same mean mark, 50, but very different spreads.
+        picture:
+          kind: compare
+          columns:
+          - title: Class A
+            points:
+            - 48, 49, 50, 51, 52
+            - mean 50
+            - range 4
+          - title: Class B
+            points:
+            - 10, 30, 50, 70, 90
+            - mean 50
+            - range 80
+          alt: Class A's marks 48 to 52 and class B's marks 10 to 90 both have mean 50, but class B's range of 80 shows a much bigger spread.
+      - style: real_world
+        teach: 'Two bus routes both take 30 minutes on average. One is always 28–32 minutes; the other is anywhere from 10 to 50. For getting to an exam on time the average is the same, but you would pick the first: spread matters.'
     - teach: 'Mean deviation about the mean: find x̄, take |xᵢ − x̄| for each value, then average: M.D. = Σ|xᵢ − x̄|/n. The absolute value stops + and − deviations cancelling.'
       check:
         prompt: Why use |xᵢ − x̄| and not (xᵢ − x̄)?
@@ -143,6 +162,27 @@ concepts:
         - the mean is unknown
         answer: the plain deviations always add to 0
         why: Σ(xᵢ − x̄) = 0 for any data, so it says nothing about spread.
+      ways:
+      - style: visual
+        teach: 'Mean deviation of 3, 4, 5, 6, 7: the distances from the mean 5.'
+        picture:
+          kind: number_line
+          from: 2
+          to: 8
+          points:
+          - at: 3
+            label: '|3 − 5| = 2'
+          - at: 4
+            label: '1'
+          - at: 5
+            label: mean 5
+          - at: 6
+            label: '1'
+          - at: 7
+            label: '2'
+          alt: Around the mean 5, the values are 2, 1, 0, 1 and 2 away; they add to 6, and 6 divided by 5 gives a mean deviation of 6 over 5.
+      - style: step_by_step
+        teach: 'Step 1: Find the mean x̄. Step 2: Subtract x̄ from each value. Step 3: Drop the signs. Step 4: Add them and divide by n. For 3, 4, 5, 6, 7: (2 + 1 + 0 + 1 + 2)/5 = 6/5.'
     - teach: For frequency data use M.D. = Σfᵢ|xᵢ − x̄|/N, where N = Σfᵢ. Mean deviation can also be taken about the median.
       picture:
         kind: flow
@@ -160,6 +200,11 @@ concepts:
         - '0'
         answer: 4/3
         why: Deviations 2, 0, 2 add to 4; 4/3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Make columns xᵢ, fᵢ, fᵢxᵢ. Step 2: x̄ = Σfᵢxᵢ/N. Step 3: Add columns |xᵢ − x̄| and fᵢ|xᵢ − x̄|. Step 4: M.D. = Σfᵢ|xᵢ − x̄|/N. For grouped data use class marks as xᵢ.'
+      - style: real_world
+        teach: 'A shop records how many customers bought 1, 2, 3 or 4 items. Rather than listing every customer, it multiplies each count by how often it happened. Mean deviation from a frequency table works the same way: weight each distance by its frequency.'
   items:
   - prompt: Find the range of 12, 7, 19, 3, 15.
     answer: '16'
@@ -324,6 +369,55 @@ concepts:
     mistakes:
       '9': c11m13_md
       '4': c11m13_md
+  - prompt: 'Assertion (A): Mean deviation uses absolute values of the deviations.
+
+      Reason (R): The sum of the deviations from the mean, with signs, is always 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Signed deviations always cancel to 0, which is why absolute values are taken: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Daily rainfall (mm) at a hill station for 5 days was 4, 8, 6, 10, 12. Find the mean deviation about the mean.'
+    options:
+    - 2.4 mm
+    - 8 mm
+    - 0 mm
+    answer: 2.4 mm
+    hints:
+    - Mean = 40/5 = 8.
+    - 'Distances: 4, 0, 2, 2, 4.'
+    solution: Σ|xᵢ − 8| = 4 + 0 + 2 + 2 + 4 = 12; 12/5 = 2.4 mm.
+    mistakes:
+      8 mm: m11_mean
+      0 mm: m11_mean_dev
+    exam: case
+    difficulty: 2
+  - prompt: Find the range of the data 31, 17, 45, 22, 38, 9.
+    options:
+    - '36'
+    - '28'
+    - '45'
+    answer: '36'
+    hints:
+    - Find the largest and the smallest.
+    - Subtract.
+    solution: 45 − 9 = 36.
+    mistakes:
+      '28': m11_range_stat
+      '45': m11_dispersion_why
+    exam: one_mark
+    difficulty: 2
 - code: cbse11m.stat.variance
   title: Variance and standard deviation
   after:
@@ -423,6 +517,25 @@ concepts:
         - '0'
         answer: '1'
         why: Deviations −1, 1; squares 1, 1; average 1.
+      ways:
+      - style: visual
+        teach: 'Variance of 2, 4, 6, 8, 10: square each deviation from the mean 6.'
+        picture:
+          kind: bars
+          bars:
+          - label: (2 − 6)² = 16
+            value: 16
+          - label: (4 − 6)² = 4
+            value: 4
+          - label: (6 − 6)² = 0
+            value: 0
+          - label: (8 − 6)² = 4
+            value: 4
+          - label: (10 − 6)² = 16
+            value: 16
+          alt: The squared deviations are 16, 4, 0, 4 and 16; they add to 40, and 40 over 5 gives a variance of 8.
+      - style: step_by_step
+        teach: 'Step 1: Find the mean. Step 2: Subtract it from each value. Step 3: Square each difference. Step 4: Add and divide by n. For 2, 4, 6, 8, 10: (16 + 4 + 0 + 4 + 16)/5 = 8.'
     - teach: 'Standard deviation σ = √variance, in the same units as the data. A short-cut: σ² = Σxᵢ²/n − x̄².'
       check:
         prompt: Variance is 49. Standard deviation?
@@ -432,6 +545,19 @@ concepts:
         - '24.5'
         answer: '7'
         why: σ = √49 = 7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Add up the squares Σxᵢ². Step 2: Divide by n. Step 3: Subtract the square of the mean. Step 4: Take the square root for σ. For 1, 2, 3, 4, 5: 55/5 − 9 = 2, so σ = √2.'
+      - style: visual
+        teach: Variance is in squared units; standard deviation brings it back.
+        picture:
+          kind: flow
+          steps:
+          - Heights in cm
+          - Variance in cm²
+          - σ = √variance
+          - σ back in cm
+          alt: If the data are heights in centimetres, the variance is in square centimetres; taking the square root gives the standard deviation back in centimetres.
     - teach: 'Adding a constant to every value leaves σ unchanged. Multiplying every value by k multiplies σ by |k|. The coefficient of variation CV = σ/x̄ × 100 compares spread: lower CV means more consistent.'
       picture:
         kind: compare
@@ -453,6 +579,11 @@ concepts:
         - '7'
         answer: '10'
         why: σ is multiplied by |5|.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Adding k to every value moves the mean but not the spread: σ stays. Step 2: Multiplying every value by k stretches the spread: σ becomes |k|σ. Step 3: CV = σ/x̄ × 100; the lower CV is the more consistent.'
+      - style: real_world
+        teach: 'If every student gets 5 grace marks, the whole class shifts up but the gaps between students stay the same: σ is unchanged. Doubling every mark doubles each gap, so σ doubles too.'
   items:
   - prompt: Find the variance of 2, 4, 6, 8, 10.
     answer: '8'
@@ -619,3 +750,52 @@ concepts:
     mistakes:
       '4': c11m13_var
       '32': c11m13_var
+  - prompt: 'Assertion (A): If each observation is increased by 10, the standard deviation increases by 10.
+
+      Reason (R): Adding a constant to every observation does not change the deviations from the mean.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'R is true: the mean also rises by 10, so every deviation stays the same and σ does not change. A is false.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: Two batters'' scores have: A mean 50, σ 15; B mean 40, σ 8. Who is more consistent?'
+    options:
+    - B, CV 20%
+    - A, CV 30%
+    - A, because the mean is higher
+    answer: B, CV 20%
+    hints:
+    - Compute CV = σ/x̄ × 100 for each.
+    - Lower CV means more consistent.
+    solution: CV(A) = 15/50 × 100 = 30%; CV(B) = 8/40 × 100 = 20%. B has the lower CV.
+    mistakes:
+      A, CV 30%: m11_cv
+      A, because the mean is higher: c11_cv
+    exam: competency
+    difficulty: 2
+  - prompt: The standard deviation of a data set is 4. If each value is multiplied by 3, what is the new variance?
+    options:
+    - '144'
+    - '48'
+    - '12'
+    answer: '144'
+    hints:
+    - New σ = 3 × 4.
+    - Variance = σ².
+    solution: New σ = 12, so variance = 144.
+    mistakes:
+      '48': c11m13_shift
+      '12': c11m13_var
+    exam: short
+    difficulty: 2

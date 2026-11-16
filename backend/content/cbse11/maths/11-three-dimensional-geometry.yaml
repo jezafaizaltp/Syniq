@@ -108,6 +108,19 @@ concepts:
         - '2'
         answer: '7'
         why: Distance from the xy-plane is |z| = 7.
+      ways:
+      - style: real_world
+        teach: 'To find a pen in a classroom, say how far along the front wall, how far towards the back, and how high above the floor. Those three numbers are (x, y, z): the corner of the room is the origin and the two walls and floor are the coordinate planes.'
+      - style: visual
+        teach: Reaching P(2, 3, 4) from the origin in three moves, one along each axis.
+        picture:
+          kind: flow
+          steps:
+          - Start at O(0, 0, 0)
+          - '2 along the x-axis: (2, 0, 0)'
+          - '3 parallel to the y-axis: (2, 3, 0)'
+          - '4 up, parallel to z: P(2, 3, 4)'
+          alt: From the origin move 2 along x, then 3 parallel to y, then rise 4 parallel to z to reach the point 2, 3, 4.
     - teach: 'Points on an axis have the other two coordinates 0: on the z-axis (0, 0, z). Points in a coordinate plane have one coordinate 0: in the yz-plane (0, y, z).'
       check:
         prompt: Where does (0, 0, −3) lie?
@@ -117,6 +130,29 @@ concepts:
         - on the x-axis
         answer: on the z-axis
         why: x = 0 and y = 0, so only z can vary.
+      ways:
+      - style: visual
+        teach: 'Zeros tell you where a point lives: on an axis, in a plane, or neither.'
+        picture:
+          kind: compare
+          columns:
+          - title: 'Two zeros: on an axis'
+            points:
+            - (4, 0, 0) x-axis
+            - (0, 5, 0) y-axis
+            - (0, 0, −2) z-axis
+          - title: 'One zero: in a plane'
+            points:
+            - (0, 3, 4) yz-plane
+            - (2, 0, 7) zx-plane
+            - (1, 6, 0) xy-plane
+          - title: No zeros
+            points:
+            - (2, −3, 1)
+            - inside an octant
+          alt: A point with two zero coordinates is on an axis, one zero puts it in a coordinate plane, and no zeros puts it inside one of the octants.
+      - style: step_by_step
+        teach: 'Step 1: Count the zeros. Step 2: Two zeros → on the axis of the non-zero coordinate. Step 3: One zero → in the plane named by the other two letters: (0, y, z) is in the yz-plane. Step 4: No zeros → in an octant.'
     - teach: 'The three coordinate planes cut space into 8 octants, one for each sign pattern (±, ±, ±). Distance from the origin: √(x² + y² + z²).'
       picture:
         kind: compare
@@ -142,6 +178,11 @@ concepts:
         - '9'
         answer: '3'
         why: √(1 + 4 + 4) = 3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the sign of each coordinate. Step 2: Match the pattern: (+, +, +) is octant I; (−, +, +) II; (−, −, +) III; (+, −, +) IV; the same four with z negative are V–VIII. Step 3: Distance from O is √(x² + y² + z²).'
+      - style: real_world
+        teach: A box room has a floor and two walls meeting at a corner. Extend the walls and floor through each other and you cut space into 8 'rooms', 4 above the floor and 4 below. Each one is an octant.
   items:
   - prompt: How many octants do the coordinate planes divide space into?
     answer: '8'
@@ -324,6 +365,55 @@ concepts:
     mistakes:
       '4': c11m11_sign
       '-2': c11m11_dist
+  - prompt: 'Assertion (A): The point (−3, 2, −5) lies in the sixth octant.
+
+      Reason (R): In the sixth octant x < 0, y > 0 and z < 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The signs (−, +, −) match octant VI, as R says, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Where does the point (0, −4, 7) lie?
+    options:
+    - In the yz-plane
+    - On the y-axis
+    - In the xy-plane
+    answer: In the yz-plane
+    hints:
+    - How many coordinates are zero?
+    - Which plane has x = 0?
+    solution: Only x is 0, so it lies in the yz-plane.
+    mistakes:
+      On the y-axis: m11_on_axis
+      In the xy-plane: c11m11_coord
+    exam: one_mark
+    difficulty: 2
+  - prompt: Find the distance of the point (−3, 4, 12) from the origin.
+    options:
+    - '13'
+    - √13
+    - '19'
+    answer: '13'
+    hints:
+    - Square each coordinate, then add.
+    - 9 + 16 + 144.
+    solution: √(9 + 16 + 144) = √169 = 13.
+    mistakes:
+      √13: m11_distance_origin
+      '19': c11m11_sign
+    exam: short
+    difficulty: 2
 - code: cbse11m.3d.distance
   title: Distance between two points in space
   after:
@@ -439,6 +529,18 @@ concepts:
         - √2
         answer: '2'
         why: Only x changes, by 2.
+      ways:
+      - style: visual
+        teach: 'Pythagoras twice: across the floor first, then up.'
+        picture:
+          kind: flow
+          steps:
+          - Floor diagonal² = Δx² + Δy²
+          - Space diagonal² = floor² + Δz²
+          - So PQ = √(Δx² + Δy² + Δz²)
+          alt: First use Pythagoras on the floor to get the floor diagonal, then use it again with the height to get the full distance between two points in space.
+      - style: real_world
+        teach: 'Will a 7 m pole fit in a 2 m × 3 m × 6 m container? The longest straight line runs corner to opposite corner: √(4 + 9 + 36) = 7 m. Just fits, slanted from the bottom corner to the top far corner.'
     - teach: 'Collinear test: Q lies between P and R on one line exactly when PQ + QR = PR.'
       picture:
         kind: flow
@@ -456,6 +558,11 @@ concepts:
         - Cannot tell
         answer: 'Yes'
         why: 3 + 4 = 7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Work out PQ, QR and PR. Step 2: Add the two smaller ones. Step 3: If they equal the largest, the three points are collinear. Step 4: If the sum is bigger, they form a triangle.'
+      - style: real_world
+        teach: Walking from home to school via the shop is longer than going straight, unless the shop lies right on the straight road. Then home–shop + shop–school equals home–school exactly, which is the collinear test.
     - teach: 'Distances also check shapes: a triangle is right-angled if the squares of two sides add to the square of the third, and isosceles if two sides are equal.'
       check:
         prompt: 'Sides squared are 9, 16 and 25. The triangle is:'
@@ -465,6 +572,23 @@ concepts:
         - not a triangle
         answer: right-angled
         why: 9 + 16 = 25.
+      ways:
+      - style: visual
+        teach: 'Checking the triangle with sides 3, 4 and 5: the squares of the two shorter sides add to the square of the longest.'
+        picture:
+          kind: bars
+          bars:
+          - label: 3² = 9
+            value: 9
+          - label: 4² = 16
+            value: 16
+          - label: 9 + 16
+            value: 25
+          - label: 5² = 25
+            value: 25
+          alt: The squares 9 and 16 add to 25, the same as 5 squared, so the triangle with sides 3, 4 and 5 is right-angled.
+      - style: step_by_step
+        teach: 'Step 1: Find all three side lengths with the distance formula. Step 2: Two equal → isosceles; all equal → equilateral. Step 3: Square the sides: if two squares add to the third, there is a right angle opposite the longest side.'
   items:
   - prompt: Find the distance between (1, 2, 3) and (4, 6, 15).
     answer: '13'
@@ -640,3 +764,52 @@ concepts:
     mistakes:
       '36': c11m11_dist
       '0': c11m11_dist
+  - prompt: 'Assertion (A): The points (0, 7, −10), (1, 6, −6) and (4, 9, −6) form an isosceles triangle.
+
+      Reason (R): Two of the sides of this triangle are each √18 long.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. AB = √(1 + 1 + 16) = √18 and BC = √(9 + 9 + 0) = √18, so two sides are equal: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A drone is at (2, 3, 10) m and a landing pad is at (5, 7, 10) m. How far must the drone fly in a straight line to be directly over the pad?'
+    options:
+    - 5 m
+    - 7 m
+    - √7 m
+    answer: 5 m
+    hints:
+    - The heights are the same.
+    - √(3² + 4² + 0²).
+    solution: √(9 + 16 + 0) = √25 = 5 m.
+    mistakes:
+      7 m: m11_distance_3d
+      √7 m: c11m11_dist
+    exam: case
+    difficulty: 2
+  - prompt: Find k if the distance between (k, 2, 1) and (1, 2, 1) is 3, given k > 1.
+    options:
+    - '4'
+    - −2
+    - '3'
+    answer: '4'
+    hints:
+    - Only the x-coordinates differ.
+    - '|k − 1| = 3.'
+    solution: '|k − 1| = 3 gives k = 4 or −2; k > 1 so k = 4.'
+    mistakes:
+      −2: m11_k_distance
+      '3': c11_dist3d
+    exam: short
+    difficulty: 2

@@ -114,6 +114,36 @@ concepts:
         - '24'
         answer: '13'
         why: n + 1 = 13.
+      ways:
+      - style: visual
+        teach: '(a + b)⁴ term by term: the powers always add to 4.'
+        picture:
+          kind: compare
+          columns:
+          - title: Power of a
+            points:
+            - '4'
+            - '3'
+            - '2'
+            - '1'
+            - '0'
+          - title: Power of b
+            points:
+            - '0'
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+          - title: Coefficient ⁴Cr
+            points:
+            - '1'
+            - '4'
+            - '6'
+            - '4'
+            - '1'
+          alt: In the expansion of a plus b to the 4, the power of a falls 4, 3, 2, 1, 0, the power of b rises 0 to 4, and the coefficients are 1, 4, 6, 4, 1.
+      - style: step_by_step
+        teach: 'Step 1: Write n + 1 blank terms. Step 2: Fill powers of a from n down to 0. Step 3: Fill powers of b from 0 up to n. Step 4: Put nC0, nC1, … nCn in front. Example: (a + b)³ = a³ + 3a²b + 3ab² + b³.'
     - teach: 'The coefficients nCr form Pascal''s triangle (Meru Prastara in Pingala''s work): each number is the sum of the two above it. Row 4 is 1 4 6 4 1.'
       picture:
         kind: flow
@@ -132,6 +162,11 @@ concepts:
         - '5'
         answer: '10'
         why: Row 5 is 1 5 10 10 5 1; it is symmetric.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start each row with 1. Step 2: Add the two numbers just above to get each inner number. Step 3: End with 1. Row 3 (1 3 3 1) gives row 4: 1, 1+3, 3+3, 3+1, 1 = 1 4 6 4 1.'
+      - style: real_world
+        teach: 'Toss 4 coins. There is 1 way to get 4 heads, 4 ways to get 3 heads, 6 ways to get 2, 4 ways to get 1, 1 way to get none: the row 1 4 6 4 1 of Pascal''s triangle counts these.'
     - teach: Putting a = b = 1 shows the coefficients add to 2ⁿ. For (a − b)ⁿ the signs alternate +, −, +, ... .
       check:
         prompt: Sum of the coefficients of (x + y)⁸?
@@ -141,6 +176,18 @@ concepts:
         - '64'
         answer: '256'
         why: 2⁸ = 256.
+      ways:
+      - style: visual
+        teach: 'Sign pattern in (a − b)ⁿ: write −b as the second term and the signs alternate.'
+        picture:
+          kind: flow
+          steps:
+          - (a − b)³ = (a + (−b))³
+          - a³ + 3a²(−b) + 3a(−b)² + (−b)³
+          - a³ − 3a²b + 3ab² − b³
+          alt: Rewrite a minus b as a plus negative b, expand normally, and the odd powers of negative b give minus signs, so the signs alternate.
+      - style: step_by_step
+        teach: 'Step 1: Put a = 1 and b = 1 in (a + b)ⁿ. Step 2: The left side becomes 2ⁿ. Step 3: The right side becomes the sum of all coefficients. So nC0 + nC1 + … + nCn = 2ⁿ. For n = 6 that is 64.'
   items:
   - prompt: How many terms are in the expansion of (a + b)⁷?
     answer: '8'
@@ -301,6 +348,55 @@ concepts:
     mistakes:
       '6': c11m7_count
       '20': c11m7_count
+  - prompt: 'Assertion (A): The expansion of (x + y)⁸ has 8 terms.
+
+      Reason (R): The expansion of (a + b)ⁿ has n + 1 terms.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: By R, (x + y)⁸ has 8 + 1 = 9 terms, so A is false while R is true.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Using the binomial theorem, find (99)³ by writing 99 = 100 − 1.
+    options:
+    - '970299'
+    - '970301'
+    - '999999'
+    answer: '970299'
+    hints:
+    - (100 − 1)³ = 100³ − 3·100²·1 + 3·100·1 − 1.
+    - Watch the alternating signs.
+    solution: 1000000 − 30000 + 300 − 1 = 970299.
+    mistakes:
+      '970301': m11_bin_negative
+      '999999': m11_bin_101
+    exam: short
+    difficulty: 2
+  - prompt: What is the sum of the coefficients in the expansion of (1 + x)¹⁰?
+    options:
+    - '1024'
+    - '10'
+    - '20'
+    answer: '1024'
+    hints:
+    - Put x = 1.
+    - That gives 2 to what power?
+    solution: 'Put x = 1: (1 + 1)¹⁰ = 2¹⁰ = 1024.'
+    mistakes:
+      '10': m11_sum_coeff
+      '20': m11_sum_coeff
+    exam: one_mark
+    difficulty: 2
 - code: cbse11m.bin.terms
   title: General and middle terms
   after:
@@ -400,6 +496,19 @@ concepts:
         - T6
         answer: T5
         why: b⁴ needs r = 4, which is T(r+1) = T5.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write T(r+1) = nCr aⁿ⁻ʳ bʳ with your a and b. Step 2: Collect the power of x. Step 3: Set it equal to the power you want and solve for r. Step 4: Put r back in. Example: x³ in (x + 2)⁵: x^(5−r) = x³, r = 2, ⁵C₂ · 2² = 40.'
+      - style: visual
+        teach: Finding the x³ term of (x + 2)⁵ by walking along the general term.
+        picture:
+          kind: flow
+          steps:
+          - T(r+1) = ⁵Cr x^(5−r) 2ʳ
+          - 'Want x³: 5 − r = 3'
+          - r = 2
+          - ⁵C₂ · 2² = 10 · 4 = 40
+          alt: Write the general term, set the power of x to 3, find r equals 2, and get the coefficient 10 times 4, which is 40.
     - teach: 'Middle term: if n is even there is one, T(n/2 + 1); if n is odd there are two, T((n+1)/2) and T((n+3)/2).'
       check:
         prompt: What is the middle term number of (a + b)⁸?
@@ -409,6 +518,23 @@ concepts:
         - '9'
         answer: '5'
         why: n/2 + 1 = 5.
+      ways:
+      - style: visual
+        teach: Where the middle term sits for even and odd n.
+        picture:
+          kind: compare
+          columns:
+          - title: 'n = 10 (even): 11 terms'
+            points:
+            - one middle term
+            - T6 = T(n/2 + 1)
+          - title: 'n = 7 (odd): 8 terms'
+            points:
+            - two middle terms
+            - T4 and T5
+          alt: With n equal to 10 there are 11 terms and one middle term, the 6th; with n equal to 7 there are 8 terms and two middle terms, the 4th and 5th.
+      - style: real_world
+        teach: 'In a queue of 11 people, the one in the middle is the 6th: 5 ahead and 5 behind. In a queue of 8 there is no single middle person: the 4th and 5th share it. The terms of (a + b)ⁿ queue up the same way, n + 1 of them.'
     - teach: 'Term independent of x: set the power of x in the general term to 0. In (x + 1/x)⁴, T(r+1) has x^(4 − 2r), so r = 2 and the term is ⁴C₂ = 6.'
       check:
         prompt: In (x + 1/x)², what is the term independent of x?
@@ -418,6 +544,25 @@ concepts:
         - '4'
         answer: '2'
         why: 'x² + 2 + 1/x²: the constant is 2.'
+      ways:
+      - style: visual
+        teach: In (x + 1/x)⁶ the power of x drops by 2 each term; the constant sits where it hits 0.
+        picture:
+          kind: number_line
+          from: -6
+          to: 6
+          points:
+          - at: 6
+            label: 'r = 0: x⁶'
+          - at: 2
+            label: 'r = 2: x²'
+          - at: 0
+            label: 'r = 3: constant'
+          - at: -6
+            label: 'r = 6: x⁻⁶'
+          alt: Powers of x go 6, 4, 2, 0, minus 2 and so on; the term with power 0 is at r equals 3.
+      - style: step_by_step
+        teach: 'Step 1: Write the general term and combine the powers of x into one: x^(6 − 2r). Step 2: Set that power to 0: r = 3. Step 3: The term is ⁶C₃ = 20. If r comes out as a fraction, no such term exists.'
   items:
   - prompt: Find the 3rd term coefficient in (x + 2)⁵ (the number multiplying x³).
     answer: '40'
@@ -577,3 +722,52 @@ concepts:
     mistakes:
       '-84': c11m7_coeff
       '126': c11m7_term
+  - prompt: 'Assertion (A): The middle term of (x + y)¹⁰ is the 6th term.
+
+      Reason (R): When n is even, the expansion of (a + b)ⁿ has a single middle term, the (n/2 + 1)th term.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true: 10/2 + 1 = 6, and R gives the rule used, so R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the coefficient of x⁵ in (x + 3)⁸.
+    options:
+    - '1512'
+    - '56'
+    - '504'
+    answer: '1512'
+    hints:
+    - x^(8 − r) = x⁵ means r = 3.
+    - ⁸C₃ · 3³.
+    solution: 'r = 3: ⁸C₃ · 3³ = 56 × 27 = 1512.'
+    mistakes:
+      '56': m11_bin_coeff_x
+      '504': c11m7_coeff
+    exam: short
+    difficulty: 2
+  - prompt: Find the term independent of x in (x² + 1/x)⁶.
+    options:
+    - '15'
+    - '20'
+    - '6'
+    answer: '15'
+    hints:
+    - T(r+1) = ⁶Cr x^(2(6−r)) x^(−r).
+    - Set 12 − 3r = 0.
+    solution: 'Power 12 − 3r = 0 gives r = 4: ⁶C₄ = 15.'
+    mistakes:
+      '20': m11_independent
+      '6': c11m7_term
+    exam: competency
+    difficulty: 2

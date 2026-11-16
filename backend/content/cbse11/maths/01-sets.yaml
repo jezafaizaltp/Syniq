@@ -100,6 +100,25 @@ concepts:
         - '2'
         answer: '3'
         why: 'Repeats count once: the distinct elements are a, b, c.'
+      ways:
+      - style: visual
+        teach: 'The same set written two ways: as a list and as a rule.'
+        picture:
+          kind: compare
+          columns:
+          - title: Roster form
+            points:
+            - '{2, 4, 6}'
+            - list every element
+            - repeats written once
+          - title: Set-builder form
+            points:
+            - '{x : x even, x ≤ 6}'
+            - give the rule
+            - good for big sets
+          alt: Roster form lists the elements 2, 4, 6; set-builder form gives the rule x is an even natural number up to 6. Both describe the same set.
+      - style: real_world
+        teach: 'A class register is a roster: every name written out. ''All students taller than 150 cm'' is set-builder: a rule that decides who belongs. ''Good singers'' is not a set, because people disagree on who is in it.'
     - teach: A ⊆ B means every element of A is in B. For a set with n elements, each element is either in or out of a subset, giving 2ⁿ subsets; leaving out the set itself gives 2ⁿ − 1 proper subsets. The power set P(A) is the set of all subsets.
       picture:
         kind: bars
@@ -122,6 +141,11 @@ concepts:
         - '3'
         answer: '4'
         why: '∅, {p}, {q}, {p, q}: 2² = 4.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Count the elements, n. Step 2: Each element is either in a subset or out: 2 choices. Step 3: Multiply: 2ⁿ subsets. Step 4: Drop the set itself for proper subsets: 2ⁿ − 1. For {a, b, c}: 8 subsets, 7 proper.'
+      - style: real_world
+        teach: 'A pizza shop offers 3 toppings and you may take any mix, even none. Each topping is yes or no, so there are 2 × 2 × 2 = 8 possible pizzas: exactly the 8 subsets of a 3-element set.'
     - teach: Intervals are subsets of R. (a, b) excludes both ends; [a, b] includes both; [a, b) includes a but not b. The empty set ∅ has no elements, and N ⊂ Z ⊂ Q ⊂ R.
       picture:
         kind: number_line
@@ -141,6 +165,11 @@ concepts:
         - Only if 6 is rational
         answer: 'No'
         why: The round bracket at 6 means 6 is excluded.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look at the left bracket: [ means a is in, ( means a is out. Step 2: Do the same for the right end. Step 3: Read it aloud: [2, 5) is ''from 2, including 2, up to 5, not including 5''.'
+      - style: real_world
+        teach: A bus pass valid 'from 1 June to 30 June, both days included' is a closed interval [1, 30]. An offer 'until midnight' that ends the moment the clock strikes 12 leaves the end out, like a round bracket.
   items:
   - prompt: How many subsets does the set {a, b, c} have?
     answer: '8'
@@ -316,6 +345,55 @@ concepts:
     mistakes:
       '8': c11m1_subset
       '32': c11m1_subset
+  - prompt: 'Assertion (A): The set of all natural numbers less than 1 is the empty set.
+
+      Reason (R): The smallest natural number is 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. No natural number is below 1, because 1 is the smallest; that is why the set is empty, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A canteen lets you choose any of 4 add-ons (cheese, onion, corn, olives) for your sandwich, including none. How many different sandwiches are possible?'
+    options:
+    - '16'
+    - '15'
+    - '8'
+    answer: '16'
+    hints:
+    - Each add-on is a yes or a no.
+    - How many choices for 4 add-ons together?
+    solution: 'Each of the 4 add-ons is in or out: 2⁴ = 16 sandwiches, counting the plain one.'
+    mistakes:
+      '15': m11_proper_subset
+      '8': m11_power_set
+    exam: competency
+    difficulty: 2
+  - prompt: 'Write the interval {x : −3 < x ≤ 4, x ∈ R} in interval notation.'
+    options:
+    - (−3, 4]
+    - '[−3, 4)'
+    - '[−3, 4]'
+    answer: (−3, 4]
+    hints:
+    - Is −3 itself allowed?
+    - Is 4 itself allowed?
+    solution: −3 is left out (strict <) and 4 is included (≤), so (−3, 4].
+    mistakes:
+      '[−3, 4)': m11_brackets
+      '[−3, 4]': c11m1_interval
+    exam: one_mark
+    difficulty: 2
 - code: cbse11m.sets.ops
   title: Operations on sets and Venn diagrams
   after:
@@ -434,6 +512,27 @@ concepts:
         - '{1}'
         answer: '{2, 3}'
         why: Only 2 and 3 are in both sets.
+      ways:
+      - style: visual
+        teach: Union, intersection and difference for A = {1, 2, 3, 4} and B = {3, 4, 5}.
+        picture:
+          kind: compare
+          columns:
+          - title: A ∪ B
+            points:
+            - '{1, 2, 3, 4, 5}'
+            - in A or B
+          - title: A ∩ B
+            points:
+            - '{3, 4}'
+            - in both
+          - title: A − B
+            points:
+            - '{1, 2}'
+            - in A, not in B
+          alt: 'For A equal to 1, 2, 3, 4 and B equal to 3, 4, 5: the union is 1 to 5, the intersection is 3 and 4, and A minus B is 1 and 2.'
+      - style: real_world
+        teach: Club A is the chess club, club B the quiz club. The union is everyone in at least one club; the intersection is students in both; A − B is chess players who skip quiz. If no one is in both, the clubs are disjoint.
     - teach: 'The complement A′ = U − A holds everything in the universal set U that is not in A. De Morgan''s laws: (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′.'
       check:
         prompt: U = {1, ..., 6}, A = {1, 2}. What is A′?
@@ -443,6 +542,19 @@ concepts:
         - ∅
         answer: '{3, 4, 5, 6}'
         why: Everything in U except 1 and 2.
+      ways:
+      - style: visual
+        teach: Shading outside both circles shows (A ∪ B)′ is the same as A′ ∩ B′.
+        picture:
+          kind: flow
+          steps:
+          - Shade A ∪ B
+          - 'Take what is left in U: (A ∪ B)′'
+          - That is outside A AND outside B
+          - So it equals A′ ∩ B′
+          alt: Shade the union, take the part of U left over, notice it is outside A and outside B, so it equals A complement intersect B complement.
+      - style: step_by_step
+        teach: 'Step 1: Write the complement of the whole bracket. Step 2: Put a dash on each set inside. Step 3: Flip the sign: ∪ becomes ∩ and ∩ becomes ∪. So (A ∩ B)′ = A′ ∪ B′.'
     - teach: 'Counting with Venn diagrams: n(A ∪ B) = n(A) + n(B) − n(A ∩ B), because the overlap is counted twice. Fill the overlap first, then each ''only'' region.'
       picture:
         kind: flow
@@ -460,6 +572,11 @@ concepts:
         - '21'
         answer: '15'
         why: 10 + 8 − 3 = 15; the overlap is counted once.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Put n(A ∩ B) in the overlap. Step 2: A only = n(A) − overlap. Step 3: B only = n(B) − overlap. Step 4: Add the three regions. With n(A) = 35, n(B) = 30, overlap 10: 25 + 10 + 20 = 55.'
+      - style: real_world
+        teach: In a class, 20 students play cricket and 15 play football, and 5 play both. Counting heads at the cricket nets and then the football field counts those 5 twice, so the real total is 20 + 15 − 5 = 30.
   items:
   - prompt: A = {1, 2, 3, 4}, B = {3, 4, 5}. How many elements are in A ∪ B?
     answer: '5'
@@ -631,3 +748,52 @@ concepts:
     mistakes:
       '68': c11m1_venn
       '18': c11m1_venn
+  - prompt: 'Assertion (A): If A ⊂ B, then A ∩ B = A.
+
+      Reason (R): Every element of A is also an element of B.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Since every element of A is in B (R), the common part is all of A, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In a survey of 60 students, 35 read English newspapers, 30 read Malayalam newspapers and 12 read both. How many read neither?'
+    options:
+    - '7'
+    - '19'
+    - '5'
+    answer: '7'
+    hints:
+    - First find how many read at least one.
+    - Then subtract from 60.
+    solution: At least one = 35 + 30 − 12 = 53; neither = 60 − 53 = 7.
+    mistakes:
+      '19': m11_inclusion
+      '5': c11m1_venn
+    exam: case
+    difficulty: 2
+  - prompt: U = {1, 2, 3, 4, 5, 6}, A = {2, 4, 6}, B = {4, 5}. Find (A ∪ B)′.
+    options:
+    - '{1, 3}'
+    - '{1, 3, 5}'
+    - '{4}'
+    answer: '{1, 3}'
+    hints:
+    - Find A ∪ B first.
+    - Then list what is in U but not in it.
+    solution: A ∪ B = {2, 4, 5, 6}, so (A ∪ B)′ = {1, 3}.
+    mistakes:
+      '{1, 3, 5}': m11_de_morgan
+      '{4}': m11_complement
+    exam: short
+    difficulty: 2

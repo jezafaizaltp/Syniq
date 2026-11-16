@@ -105,6 +105,21 @@ concepts:
         - x < 9
         answer: x > 9
         why: Add 7 to both sides.
+      ways:
+      - style: visual
+        teach: Solving 3x + 4 < 19 step by step, ending on a number line.
+        picture:
+          kind: number_line
+          from: 0
+          to: 8
+          points:
+          - at: 5
+            label: x < 5 (open dot)
+          - at: 4
+            label: largest integer 4
+          alt: A number line with an open dot at 5 and everything to its left shaded; 4 is the largest whole number that works.
+      - style: step_by_step
+        teach: 'Step 1: Move the constant: 3x + 4 < 19 gives 3x < 15. Step 2: Divide by the positive 3: x < 5. Step 3: The sign stays the same because 3 is positive. Step 4: Show it with an open dot at 5.'
     - teach: 'Multiplying or dividing by a negative number reverses the sign: from −3x ≤ 12 we get x ≥ −4.'
       picture:
         kind: number_line
@@ -122,6 +137,11 @@ concepts:
         - x < 4
         answer: x < −4
         why: Dividing by −5 reverses > to <.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Spot the negative number you must divide by. Step 2: Divide both sides by it. Step 3: Turn the sign round. Example: −3x ≤ 12 → x ≥ −4. Step 4: Check with x = 0: −3(0) ≤ 12 is true and 0 ≥ −4 too.'
+      - style: real_world
+        teach: '5 is more than 2. Now owe the money instead: a debt of ₹5 is worse than a debt of ₹2, so −5 < −2. Turning numbers negative turns the order round, and so does multiplying an inequality by a negative.'
     - teach: 'A double inequality like 1 < 3x − 2 ≤ 7 is solved on all three parts at once: add 2 to get 3 < 3x ≤ 9, divide by 3 to get 1 < x ≤ 3.'
       check:
         prompt: Solve 2 ≤ x + 3 < 6.
@@ -131,6 +151,21 @@ concepts:
         - −1 < x ≤ 3
         answer: −1 ≤ x < 3
         why: Subtract 3 from all three parts; the signs stay.
+      ways:
+      - style: visual
+        teach: '1 < x ≤ 3: an open dot at 1, a closed dot at 3, shaded between.'
+        picture:
+          kind: number_line
+          from: -1
+          to: 5
+          points:
+          - at: 1
+            label: 'open: x > 1'
+          - at: 3
+            label: 'closed: x ≤ 3'
+          alt: A number line with an open dot at 1, a filled dot at 3 and the part between them shaded.
+      - style: step_by_step
+        teach: 'Step 1: Do the same thing to all three parts: add 2 to get 3 < 3x ≤ 9. Step 2: Divide all three parts by 3: 1 < x ≤ 3. Step 3: Read off the integers that fit: 2 and 3.'
   items:
   - prompt: Solve 3x + 4 < 19. What is the largest integer x can be?
     answer: '4'
@@ -312,6 +347,55 @@ concepts:
     mistakes:
       '65': c11m5_words
       '64': c11m5_ends
+  - prompt: 'Assertion (A): If −2x > 8, then x > −4.
+
+      Reason (R): Dividing both sides of an inequality by a negative number reverses the sign.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Dividing by −2 must reverse the sign, giving x < −4, so A is false. R is the correct rule.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Solve (x − 2)/3 ≥ (x + 1)/4. What is the least value x can take?
+    options:
+    - '11'
+    - −11
+    - '5'
+    answer: '11'
+    hints:
+    - Multiply both sides by 12, a positive number.
+    - 4(x − 2) ≥ 3(x + 1).
+    solution: 4x − 8 ≥ 3x + 3, so x ≥ 11. The least value is 11.
+    mistakes:
+      −11: c11m5_flip
+      '5': m11_convert_ineq
+    exam: short
+    difficulty: 2
+  - prompt: Which number line shows x ≥ −2?
+    options:
+    - A filled dot at −2, shaded to the right
+    - An open dot at −2, shaded to the right
+    - A filled dot at −2, shaded to the left
+    answer: A filled dot at −2, shaded to the right
+    hints:
+    - Is −2 itself included?
+    - Greater than means which direction?
+    solution: ≥ includes −2 (filled dot) and greater means to the right.
+    mistakes:
+      An open dot at −2, shaded to the right: m11_strict
+      A filled dot at −2, shaded to the left: m11_number_line
+    exam: one_mark
+    difficulty: 2
 - code: cbse11m.ineq.applications
   title: Inequalities in real problems
   after:
@@ -444,6 +528,23 @@ concepts:
         - s < 200
         answer: s ≤ 200
         why: At most means 200 or less.
+      ways:
+      - style: visual
+        teach: Four everyday phrases and the inequality signs they turn into.
+        picture:
+          kind: compare
+          columns:
+          - title: Includes the number
+            points:
+            - at least 50 → x ≥ 50
+            - at most 20 → x ≤ 20
+          - title: Leaves it out
+            points:
+            - more than 5 → x > 5
+            - less than 8 → x < 8
+          alt: At least means greater than or equal, at most means less than or equal; more than and less than leave the number itself out.
+      - style: real_world
+        teach: 'A lift sign says ''maximum 8 people'': that is at most 8, p ≤ 8. A ride sign says ''at least 120 cm tall'': h ≥ 120. A child of exactly 120 cm may ride; with ''more than 120 cm'' they could not.'
     - teach: 'Budgets: cost of items ≤ money. If a notebook costs ₹45 and you have ₹500, then 45n ≤ 500, so n ≤ 11.1; since n is whole, at most 11 notebooks.'
       check:
         prompt: Pencils cost ₹8. You have ₹60. At most how many pencils?
@@ -453,6 +554,22 @@ concepts:
         - '7.5'
         answer: '7'
         why: 8n ≤ 60 gives n ≤ 7.5; whole pencils, so 7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Let n be the number of items. Step 2: Write cost ≤ money: 45n ≤ 500. Step 3: Divide: n ≤ 11.1. Step 4: n must be a whole number, so round DOWN: at most 11 notebooks.'
+      - style: visual
+        teach: '₹500 for notebooks at ₹45: 11 fit, the 12th does not.'
+        picture:
+          kind: bars
+          unit: ₹
+          bars:
+          - label: budget
+            value: 500
+          - label: 11 notebooks
+            value: 495
+          - label: 12 notebooks
+            value: 540
+          alt: The budget bar is 500 rupees; 11 notebooks cost 495, just under it; 12 notebooks cost 540, over the budget.
     - teach: 'Triangle sides: each side must be less than the sum of the other two and more than their difference. With sides 4 and 7, the third side x satisfies 3 < x < 11.'
       check:
         prompt: 'Two sides are 6 and 10. The third side must be less than:'
@@ -462,6 +579,21 @@ concepts:
         - '60'
         answer: '16'
         why: Any side is less than the sum of the other two.
+      ways:
+      - style: visual
+        teach: 'Sides 4 and 7: the third side x must lie strictly between 3 and 11.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 12
+          points:
+          - at: 3
+            label: 7 − 4 = 3 (open)
+          - at: 11
+            label: 7 + 4 = 11 (open)
+          alt: A number line with open dots at 3 and 11; the third side must lie between them.
+      - style: real_world
+        teach: 'Try to make a triangle with sticks of 4 cm, 7 cm and 12 cm: the two short sticks can''t even reach across the long one. With 4, 7 and 2 the short ones flop flat. Only a third stick between 3 cm and 11 cm closes the triangle.'
   items:
   - prompt: Pens cost ₹35 each. What is the greatest number you can buy with ₹1,000?
     answer: '28'
@@ -633,3 +765,52 @@ concepts:
     mistakes:
       '68': c11m5_ends
       '50': c11m5_words
+  - prompt: 'Assertion (A): A student who needs an average of at least 60 in two tests and scored 52 in the first must score at least 68 in the second.
+
+      Reason (R): (52 + x)/2 ≥ 60 gives x ≥ 68.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Solving the average condition in R gives exactly the score in A, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A phone plan costs ₹199 a month plus ₹2 per GB beyond the free data. Asha wants the monthly bill to stay at most ₹299. What is the greatest number of extra GB she can use?'
+    options:
+    - '50'
+    - '149'
+    - '49'
+    answer: '50'
+    hints:
+    - Write 199 + 2g ≤ 299.
+    - Solve for g.
+    solution: 2g ≤ 100, so g ≤ 50. Asha can use at most 50 extra GB.
+    mistakes:
+      '149': m11_convert_ineq
+      '49': m11_strict
+    exam: case
+    difficulty: 2
+  - prompt: The longest side of a triangle is 3 times the shortest, and the third side is 2 cm shorter than the longest. The perimeter is at least 61 cm. Find the minimum length of the shortest side.
+    options:
+    - 9 cm
+    - 8 cm
+    - 21 cm
+    answer: 9 cm
+    hints:
+    - 'Sides: x, 3x, 3x − 2.'
+    - x + 3x + 3x − 2 ≥ 61.
+    solution: 7x − 2 ≥ 61 → 7x ≥ 63 → x ≥ 9. The shortest side is at least 9 cm.
+    mistakes:
+      8 cm: m11_average_ineq
+      21 cm: c11m5_words
+    exam: short
+    difficulty: 2

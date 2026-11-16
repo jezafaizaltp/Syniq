@@ -142,6 +142,32 @@ concepts:
         - (2, 5)
         answer: (2, −5)
         why: 'Compare with (x − h)² + (y − k)²: h = 2, k = −5.'
+      ways:
+      - style: visual
+        teach: 'A circle with centre (2, 1) and radius 3: every point on it is 3 from the centre.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -2
+          - 6
+          points:
+            C:
+            - 2
+            - 1
+            P:
+            - 5
+            - 1
+          segments:
+          - - C
+            - P
+            - r = 3
+          circles:
+          - centre: C
+            radius: 3
+          alt: A circle centred at 2, 1 with radius 3; its equation is x minus 2 squared plus y minus 1 squared equals 9.
+      - style: real_world
+        teach: 'Torch light on a wall: point it straight on and the bright patch is a circle. Tilt it a little and you get an ellipse; tilt it until the beam edge is parallel to the wall and the patch becomes a parabola. All are slices of the cone of light.'
     - teach: The general circle x² + y² + 2gx + 2fy + c = 0 has centre (−g, −f) and radius √(g² + f² − c). Completing the square gives the same result.
       check:
         prompt: Radius of x² + y² − 4x − 6y + 9 = 0?
@@ -151,6 +177,29 @@ concepts:
         - '4'
         answer: '2'
         why: 'g = −2, f = −3: √(4 + 9 − 9) = 2.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Make the x² and y² coefficients 1. Step 2: Compare with x² + y² + 2gx + 2fy + c = 0: halve the x and y coefficients to get g and f. Step 3: Centre (−g, −f). Step 4: r = √(g² + f² − c). For x² + y² − 6x + 8y = 0: centre (3, −4), r = 5.'
+      - style: visual
+        teach: Completing the square turns x² − 6x into (x − 3)² − 9.
+        picture:
+          kind: area_grid
+          cols:
+          - size: 3
+            label: x
+          - size: 1
+            label: −3
+          rows:
+          - size: 3
+            label: x
+          - size: 1
+            label: −3
+          cells:
+          - - x²
+            - −3x
+          - - −3x
+            - '+9'
+          alt: 'A square grid for x minus 3 squared: x squared, two boxes of minus 3x, and plus 9; so x squared minus 6x needs 9 added to complete the square.'
     - teach: 'A parabola is the set of points equally far from a focus and a directrix. For y² = 4ax: focus (a, 0), directrix x = −a, latus rectum 4a. For x² = 4ay: focus (0, a), opening upward.'
       picture:
         kind: compare
@@ -174,6 +223,11 @@ concepts:
         - (0, 8)
         answer: (0, 2)
         why: 4a = 8 gives a = 2; focus (0, a).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Match the equation to y² = 4ax or x² = 4ay. Step 2: Find a: y² = 12x means 4a = 12, a = 3. Step 3: Focus (3, 0), directrix x = −3, latus rectum 12. Step 4: Squared y opens sideways; squared x opens up or down.'
+      - style: real_world
+        teach: A dish antenna is a parabola turned round its axis. Signals from far away come in parallel and all bounce to one point, the focus, where the receiver sits. Car headlamps use the same shape the other way round.
   items:
   - prompt: Find the radius of the circle x² + y² = 49.
     answer: '7'
@@ -352,6 +406,55 @@ concepts:
     mistakes:
       ellipse: c11m10_para
       hyperbola: c11m10_para
+  - prompt: 'Assertion (A): x² + y² + 2x + 4y + 10 = 0 represents a real circle.
+
+      Reason (R): x² + y² + 2gx + 2fy + c = 0 is a real circle only when g² + f² − c > 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Here g² + f² − c = 1 + 4 − 10 = −5 < 0, so there is no real circle: A is false. R is the correct condition.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the equation of the circle with centre (−2, 3) and radius 4.
+    options:
+    - (x + 2)² + (y − 3)² = 16
+    - (x − 2)² + (y + 3)² = 16
+    - (x + 2)² + (y − 3)² = 4
+    answer: (x + 2)² + (y − 3)² = 16
+    hints:
+    - Use (x − h)² + (y − k)² = r².
+    - h = −2, so x − (−2) = x + 2.
+    solution: (x + 2)² + (y − 3)² = 4² = 16.
+    mistakes:
+      (x − 2)² + (y + 3)² = 16: c11m10_circle
+      (x + 2)² + (y − 3)² = 4: m11_circle_r
+    exam: one_mark
+    difficulty: 2
+  - prompt: 'Case: A satellite dish has a parabolic cross-section y² = 16x (in dm). How far from the vertex should the receiver be placed so that it sits at the focus?'
+    options:
+    - 4 dm
+    - 16 dm
+    - 8 dm
+    answer: 4 dm
+    hints:
+    - Compare y² = 16x with y² = 4ax.
+    - Find a.
+    solution: '4a = 16, so a = 4: the focus is 4 dm from the vertex.'
+    mistakes:
+      16 dm: c11_parabola_a
+      8 dm: c11m10_para
+    exam: case
+    difficulty: 2
 - code: cbse11m.conic.ellipse_hyperbola
   title: Ellipses and hyperbolas
   after:
@@ -465,6 +568,44 @@ concepts:
         - '6'
         answer: '8'
         why: c² = 100 − 36 = 64.
+      ways:
+      - style: visual
+        teach: 'x²/25 + y²/9 = 1: a = 5, b = 3, and the foci sit at ±4 on the major axis.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -6
+          - 6
+          points:
+            F1:
+            - -4
+            - 0
+            F2:
+            - 4
+            - 0
+            A:
+            - 5
+            - 0
+            B:
+            - 0
+            - 3
+            O:
+            - 0
+            - 0
+          segments:
+          - - O
+            - A
+            - a = 5
+          - - O
+            - B
+            - b = 3
+          - - B
+            - F2
+            - '5'
+          alt: An ellipse with a equal to 5 and b equal to 3; the foci are at minus 4 and 4, and the distance from the top point B to a focus is 5.
+      - style: real_world
+        teach: 'Pin two drawing pins in a board, loop a string round them, and trace round with a pencil keeping the string tight. The two pins are the foci and the string length is 2a: you have drawn an ellipse. Planets move in ellipses with the Sun at one focus.'
     - teach: 'Eccentricity e = c/a measures how stretched a conic is: circle e = 0, ellipse 0 < e < 1, parabola e = 1, hyperbola e > 1. Latus rectum of the ellipse or hyperbola: 2b²/a.'
       picture:
         kind: bars
@@ -487,6 +628,11 @@ concepts:
         - hyperbola
         answer: circle
         why: Its two foci coincide at the centre, so c = 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find a and c. Step 2: e = c/a. Step 3: Compare with 1: e = 0 circle, under 1 ellipse, exactly 1 parabola, over 1 hyperbola. Step 4: Latus rectum of an ellipse or hyperbola is 2b²/a. For x²/25 + y²/9 = 1: e = 4/5, L.R. = 18/5.'
+      - style: real_world
+        teach: Eccentricity is a 'stretchiness' score. Earth's orbit has e ≈ 0.017, nearly a circle. Halley's comet has e ≈ 0.97, a long thin ellipse that swings far out and back. A comet with e > 1 visits once and never returns.
     - teach: 'A hyperbola is the set of points whose distances from two foci differ by 2a. For x²/a² − y²/b² = 1: c² = a² + b², foci (±c, 0), e = c/a > 1.'
       check:
         prompt: For x²/9 − y²/16 = 1, find c.
@@ -496,6 +642,25 @@ concepts:
         - '7'
         answer: '5'
         why: c² = 9 + 16 = 25.
+      ways:
+      - style: visual
+        teach: Ellipse and hyperbola use a and b differently to find c.
+        picture:
+          kind: compare
+          columns:
+          - title: Ellipse x²/a² + y²/b² = 1
+            points:
+            - sum of distances = 2a
+            - c² = a² − b²
+            - e < 1
+          - title: Hyperbola x²/a² − y²/b² = 1
+            points:
+            - difference of distances = 2a
+            - c² = a² + b²
+            - e > 1
+          alt: For an ellipse the distances to the foci add to 2a and c squared is a squared minus b squared; for a hyperbola they differ by 2a and c squared is a squared plus b squared.
+      - style: step_by_step
+        teach: 'Step 1: Minus sign between the terms → hyperbola. Step 2: The positive term''s denominator is a². Step 3: c² = a² + b². Step 4: e = c/a. For x²/16 − y²/9 = 1: c = 5, e = 5/4, foci (±5, 0).'
   items:
   - prompt: For x²/25 + y²/9 = 1, find c (the distance from the centre to a focus).
     answer: '4'
@@ -672,3 +837,52 @@ concepts:
     mistakes:
       'Yes': c11m10_ec
       Only if a = b: c11m10_ec
+  - prompt: 'Assertion (A): The eccentricity of a hyperbola is always greater than 1.
+
+      Reason (R): For a hyperbola c² = a² + b², so c > a.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Since c > a, e = c/a > 1; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the eccentricity of the hyperbola x²/9 − y²/16 = 1.
+    options:
+    - 5/3
+    - 4/3
+    - √7/3
+    answer: 5/3
+    hints:
+    - c² = a² + b² = 9 + 16.
+    - e = c/a with a = 3.
+    solution: c = 5, a = 3, so e = 5/3.
+    mistakes:
+      4/3: m11_hyperbola_e
+      √7/3: m11_hyperbola_c
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: An arch is half an ellipse 10 m wide at the base and 3 m high at the centre. Taking the centre of the base as origin, which equation fits the full ellipse?'
+    options:
+    - x²/25 + y²/9 = 1
+    - x²/100 + y²/9 = 1
+    - x²/9 + y²/25 = 1
+    answer: x²/25 + y²/9 = 1
+    hints:
+    - The half-width is a.
+    - The height is b.
+    solution: a = 10/2 = 5 and b = 3, so x²/25 + y²/9 = 1.
+    mistakes:
+      x²/100 + y²/9 = 1: m11_major_axis
+      x²/9 + y²/25 = 1: c11m10_ec
+    exam: competency
+    difficulty: 2
