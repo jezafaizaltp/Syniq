@@ -904,12 +904,13 @@ def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions()
 
 CBSE9 = {"cbse9-eng", "cbse9-hin", "cbse9-math", "cbse9-sci", "cbse9-ss"}
 CBSE11 = {"cbse11-bio", "cbse11-chem", "cbse11-eng", "cbse11-math", "cbse11-phy"}
+CBSE8 = {"cbse8-eng", "cbse8-hin", "cbse8-math", "cbse8-sci", "cbse8-ss"}
 
 
-@pytest.mark.parametrize("subjects", [CBSE9, CBSE11], ids=["cbse9", "cbse11"])
+@pytest.mark.parametrize("subjects", [CBSE9, CBSE11, CBSE8], ids=["cbse9", "cbse11", "cbse8"])
 def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects):
-    """CBSE Class 9 (the 2026-27 books) and Class 11: every lesson step can be taught at least three ways, one of them
-    drawn, and every topic has at least one question in a CBSE board format (assertion-reason allowed here)."""
+    """CBSE Class 9 (the 2026-27 books), Class 11 and Class 8: every lesson step can be taught at least three ways,
+    one of them drawn, and every topic has at least one question in a CBSE board format (assertion-reason allowed)."""
     thin, no_exam = [], []
     for path, pack in PACKS:
         if code_of(pack) not in subjects:
