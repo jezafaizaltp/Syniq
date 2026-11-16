@@ -11,6 +11,8 @@ tips:
   pair_parallel_no_solution: Parallel lines never meet, so a pair of equations with the same slope but different intercepts has no solution.
   pair_found_one_value: You've found one letter; put it back into an equation to find the other.
   check_by_substituting: "Put x = 2 and y = 3 into the left side and see if it equals the right side."
+  pqc9m13_sign_of_y: "y is negative here, so k times y is −k. Keep that sign when you solve for k."
+  pqc9m13_split_sum: "Adding the equations gives x + y; subtracting gives x − y. Use both to separate x from y."
   eliminate_pen: "Double the second equation so the pens match, then subtract to leave only pencils."
   k_both_places: "Put x = k and y = 2k into the equation, collect the k's, then solve."
   linear_power_one: "Linear means every variable has power 1 (or 0). Look for a squared term."
@@ -18,6 +20,7 @@ tips:
   no_solution_ratio: "No solution means parallel lines: the x and y coefficients are in the same ratio, but the constants are not."
   solve_for_y: "Put the given x in, then get y on its own."
   y_intercept_x0: "Put x = 0, so the x-term disappears. Then solve for y."
+  pqc9m13_which_is_x: Decide first which letter stands for which unknown, then write each sentence as an equation.
 concepts:
 - code: cbse9gm.lin2.form
   title: Writing ax + by + c = 0
@@ -92,6 +95,18 @@ concepts:
         - '4'
         answer: −7
         why: x + 4y − 7 = 0, so c = −7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Move every term to the left side, flipping signs as they cross. Step 2: Arrange as x term, y term, number, = 0. Step 3: Read off a, b, c with their signs. 2x + 3y = 12 gives a = 2, b = 3, c = −12.'
+      - style: visual
+        teach: Moving 12 across the equals sign turns +12 into −12.
+        picture:
+          kind: flow
+          steps:
+          - 2x + 3y = 12
+          - 2x + 3y − 12 = 0
+          - a = 2, b = 3, c = −12
+          alt: 2x plus 3y equals 12 becomes 2x plus 3y minus 12 equals 0, so a is 2, b is 3 and c is minus 12.
     - teach: 'Watch the signs when moving terms across the equals sign: they flip. 3x = 2y + 6 becomes 3x − 2y − 6 = 0. An equation with only one letter is still linear in two variables: y = 4 is 0·x + 1·y − 4 = 0.'
       picture:
         kind: flow
@@ -109,6 +124,18 @@ concepts:
         - '4'
         answer: '0'
         why: 'There is no x term, so a = 0: 0x + y − 4 = 0.'
+      ways:
+      - style: visual
+        teach: y = 4 hides an x term with coefficient 0.
+        picture:
+          kind: flow
+          steps:
+          - y = 4
+          - 0·x + 1·y − 4 = 0
+          - a = 0, b = 1, c = −4
+          alt: y equals 4 can be written as 0 x plus 1 y minus 4 equals 0, so a is 0, b is 1 and c is minus 4.
+      - style: real_world
+        teach: A bus pass costs ₹4 a day whatever distance you travel. 'Cost y = 4' doesn't depend on x, the distance, so x has coefficient 0, but it is still an equation in two variables.
     - teach: 'Word problems become equations. ''Two notebooks and three pens cost ₹50'': if a notebook costs ₹x and a pen ₹y, then 2x + 3y = 50. ''Ravi''s age is 5 more than Sita''s'': x = y + 5, or x − y − 5 = 0.'
       check:
         prompt: The sum of two numbers x and y is 25. Which equation shows this?
@@ -118,6 +145,11 @@ concepts:
         - xy = 25
         answer: x + y − 25 = 0
         why: x + y = 25, moved to one side.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Name the unknowns: notebook ₹x, pen ₹y. Step 2: Turn each phrase into maths: ''two notebooks'' = 2x, ''three pens'' = 3y. Step 3: Write the equation: 2x + 3y = 50. Step 4: Rearrange if asked: 2x + 3y − 50 = 0.'
+      - style: real_world
+        teach: 'Auto fare in a town: ₹30 fixed plus ₹15 per km. If the fare is y and the distance x km, then y = 15x + 30, or 15x − y + 30 = 0. Any fare chart can be written like this.'
   items:
   - prompt: Write 3x + 2y = 9 as ax + by + c = 0. What is c?
     answer: '-9'
@@ -297,6 +329,21 @@ concepts:
     mistakes:
       xy − 40 = 0: linear_power_one
       x + y − 40 = 0: twice_which_way
+  - prompt: 'Situation: The cost of a notebook is twice the cost of a pen. Taking a notebook as ₹x and a pen as ₹y, which equation shows this?'
+    options:
+    - x − 2y = 0
+    - 2x − y = 0
+    - x + 2y = 0
+    answer: x − 2y = 0
+    hints:
+    - '''Notebook is twice pen'' means x = 2 × y.'
+    - Move 2y to the left.
+    solution: x = 2y, so x − 2y = 0.
+    mistakes:
+      2x − y = 0: twice_which_way
+      x + 2y = 0: standard_form_sign
+    exam: one_mark
+    difficulty: 2
 - code: cbse9gm.lin2.solutions
   title: Solutions of a linear equation
   after:
@@ -390,6 +437,34 @@ concepts:
         - (5, 5)
         answer: (3, 2)
         why: 3 + 2 = 5.
+      ways:
+      - style: visual
+        teach: Every point on the line x + y = 5 is a solution.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 6
+          points:
+            (0, 5):
+            - 0
+            - 5
+            (2, 3):
+            - 2
+            - 3
+            (4, 1):
+            - 4
+            - 1
+            (5, 0):
+            - 5
+            - 0
+          segments:
+          - - (0, 5)
+            - (5, 0)
+          alt: The points 0, 5 then 2, 3 then 4, 1 then 5, 0 all lie on one straight line, the graph of x plus y equals 5.
+      - style: real_world
+        teach: You have ₹5 to spend on toffees at ₹1 and erasers at ₹1. 5 toffees and 0 erasers, 2 and 3, 4 and 1… many choices fit the same total. With fractions and negatives allowed, the list never ends.
     - teach: 'To check a pair, put both values in: is (2, 1) a solution of 3x − y = 5? 3(2) − 1 = 5. Yes. To find solutions, choose x and solve for y. For 2x + y = 8, x = 0 gives y = 8, x = 3 gives y = 2.'
       picture:
         kind: geometry
@@ -420,6 +495,27 @@ concepts:
         - '10'
         answer: '6'
         why: 2 + y = 8, so y = 6.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Put the x value in. Step 2: Put the y value in. Step 3: Work out the left side. Step 4: Equal to the right side? Then it''s a solution. For 3x − y = 5 and (2, 1): 6 − 1 = 5, yes.'
+      - style: visual
+        teach: Choose x, then solve for y, for 2x + y = 8.
+        picture:
+          kind: compare
+          columns:
+          - title: x = 0
+            points:
+            - y = 8
+            - (0, 8)
+          - title: x = 3
+            points:
+            - y = 2
+            - (3, 2)
+          - title: x = 4
+            points:
+            - y = 0
+            - (4, 0)
+          alt: For 2x plus y equals 8, x equal to 0 gives y 8, x equal to 3 gives y 2, and x equal to 4 gives y 0.
     - teach: If a pair is a solution of an equation with an unknown number k, substitute the pair and solve for k. If (1, 2) solves x + ky = 7, then 1 + 2k = 7, so k = 3.
       check:
         prompt: (2, 1) solves 3x + ky = 10. What is k?
@@ -429,6 +525,11 @@ concepts:
         - '6'
         answer: '4'
         why: 6 + k = 10, so k = 4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Substitute the given pair into the equation with k. Step 2: Simplify to a one-letter equation in k. Step 3: Solve for k. For (1, 2) in x + ky = 7: 1 + 2k = 7, so 2k = 6, k = 3.'
+      - style: real_world
+        teach: A recipe says flour + k × sugar = 7 cups, and you know 1 cup flour with 2 cups sugar worked. Put those in to find k, just like a detective using one known fact to find the missing number.
   items:
   - prompt: Is (2, 3) a solution of x + 2y = 8?
     options:
@@ -601,6 +702,40 @@ concepts:
     solution: 'Any pair with x = 3 works, whatever y is: infinitely many solutions (a vertical line).'
     mistakes:
       Exactly one: one_solution_only
+  - prompt: 'Assertion (A): x = 2, y = 1 is a solution of 2x + 3y = 7.
+
+      Reason (R): A pair is a solution if substituting it makes both sides equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 2(2) + 3(1) = 4 + 3 = 7, so A is true; R is the rule that shows it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: If x = 3, y = −1 is a solution of 2x + ky = 4, find k.
+    options:
+    - '2'
+    - −2
+    - '10'
+    answer: '2'
+    hints:
+    - Substitute x = 3 and y = −1.
+    - 6 − k = 4.
+    solution: 2(3) + k(−1) = 4, so 6 − k = 4 and k = 2.
+    mistakes:
+      −2: pqc9m13_sign_of_y
+      '10': substitute_both
+    exam: short
+    difficulty: 2
 - code: cbse9gm.lin2.pairs
   title: Pairs of linear equations
   after:
@@ -728,6 +863,39 @@ concepts:
         - Only the second
         answer: Yes, both
         why: 4 + 3 = 7 and 4 − 3 = 1.
+      ways:
+      - style: visual
+        teach: x + y = 7 and x − y = 1 cross at (4, 3).
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 8
+          points:
+            (0, 7):
+            - 0
+            - 7
+            (7, 0):
+            - 7
+            - 0
+            (1, 0):
+            - 1
+            - 0
+            (7, 6):
+            - 7
+            - 6
+            (4, 3):
+            - 4
+            - 3
+          segments:
+          - - (0, 7)
+            - (7, 0)
+          - - (1, 0)
+            - (7, 6)
+          alt: The line x plus y equals 7 and the line x minus y equals 1 cross at the point 4, 3, the only pair fitting both.
+      - style: real_world
+        teach: 'Two clues: ''my two numbers add to 7'' and ''one is 1 more than the other''. Each clue alone allows many pairs; together only 4 and 3 work. Two equations work like two clues.'
     - teach: 'Elimination: add or subtract the equations so one letter disappears. x + y = 7 plus x − y = 1 gives 2x = 8, x = 4, then y = 3. Substitution: make one letter the subject (y = 2x) and put it into the other equation.'
       check:
         prompt: y = 3x and x + y = 12. What is x?
@@ -737,6 +905,19 @@ concepts:
         - '9'
         answer: '3'
         why: x + 3x = 12, so 4x = 12 and x = 3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Line up the equations. Step 2: Add or subtract them so one letter cancels. Step 3: Solve for the other letter. Step 4: Put it back in either equation for the first letter. Step 5: Check in both.'
+      - style: visual
+        teach: Adding the two equations makes y disappear.
+        picture:
+          kind: flow
+          steps:
+          - x + y = 7
+          - + (x − y = 1)
+          - 2x = 8
+          - x = 4, y = 3
+          alt: Adding x plus y equals 7 to x minus y equals 1 gives 2x equals 8, so x is 4 and then y is 3.
     - teach: 'Two lines don''t always cross once. Parallel lines (same slope, different intercept) never meet: no solution, e.g. x + y = 2 and x + y = 5. The same line written twice (2x + 2y = 4 and x + y = 2) gives infinitely many. Compare ratios: a₁/a₂, b₁/b₂, c₁/c₂.'
       check:
         prompt: How many solutions do x + 2y = 3 and 2x + 4y = 6 have?
@@ -746,6 +927,27 @@ concepts:
         - None
         answer: Infinitely many
         why: 'The second is the first doubled: the same line.'
+      ways:
+      - style: visual
+        teach: Compare the ratios of the coefficients to know the number of solutions.
+        picture:
+          kind: compare
+          columns:
+          - title: a₁/a₂ ≠ b₁/b₂
+            points:
+            - lines cross
+            - one solution
+          - title: a₁/a₂ = b₁/b₂ ≠ c₁/c₂
+            points:
+            - parallel
+            - no solution
+          - title: all three equal
+            points:
+            - same line
+            - infinitely many
+          alt: Different coefficient ratios give one solution; equal a and b ratios but a different c ratio give parallel lines and no solution; all equal gives the same line.
+      - style: real_world
+        teach: 'Two trains on parallel tracks running at the same speed never meet, however long they travel. Two equations like x + y = 2 and x + y = 5 are the same: their lines never meet, so no pair fits both.'
   items:
   - prompt: Solve x + y = 10 and x − y = 2. What is x?
     answer: '6'
@@ -915,3 +1117,37 @@ concepts:
     mistakes:
       '6': k_both_places
       '1.5': no_solution_ratio
+  - prompt: 'Assertion (A): The pair x + 2y = 4 and 2x + 4y = 12 has no solution.
+
+      Reason (R): For these equations a₁/a₂ = b₁/b₂ ≠ c₁/c₂.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'a₁/a₂ = 1/2, b₁/b₂ = 2/4 = 1/2, c₁/c₂ = 4/12 = 1/3. The lines are parallel, so there is no solution: A is true and R explains it.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: At a fair, 2 adult tickets and 3 child tickets cost ₹190; 3 adult and 2 child tickets cost ₹210. Find the cost of one adult ticket.'
+    options:
+    - ₹50
+    - ₹30
+    - ₹40
+    answer: ₹50
+    hints:
+    - 2x + 3y = 190 and 3x + 2y = 210.
+    - 'Add: 5x + 5y = 400. Subtract: x − y = 20.'
+    solution: x + y = 80 and x − y = 20, so x = 50 and y = 30. An adult ticket is ₹50.
+    mistakes:
+      ₹30: pair_found_one_value
+      ₹40: pqc9m13_split_sum
+    exam: case
+    difficulty: 2

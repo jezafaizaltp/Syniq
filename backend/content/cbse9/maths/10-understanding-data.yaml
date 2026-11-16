@@ -13,6 +13,7 @@ tips:
   share_not_count: "A bigger count doesn't mean a bigger share. Divide each village's bus users by its own population."
   stacked_total: "A stacked bar's height is the sum of its parts."
   weighted_total: "Find the total stars from each group (count × average), add them, then divide by the total number of reviews."
+  pqc9m10_total_first: Find each group's total (count × mean) before you divide.
 concepts:
 - code: cbse9gm.data.weighted
   title: Weighted means and mixtures
@@ -105,6 +106,19 @@ concepts:
         - '100'
         answer: '50'
         why: 'Equal groups, so the plain average works: (400 + 600) ÷ 20 = 50.'
+      ways:
+      - style: visual
+        teach: Totals, not means, are what add up when groups join.
+        picture:
+          kind: bars
+          bars:
+          - label: 30 students, total
+            value: 1800
+          - label: 10 students, total
+            value: 800
+          alt: The 30 students score 1800 marks in all and the 10 students 800, so together 2600 marks over 40 students, a mean of 65.
+      - style: step_by_step
+        teach: 'Step 1: Total of each group = count × mean: 30 × 60 = 1800, 10 × 80 = 800. Step 2: Add totals: 2600. Step 3: Add counts: 40. Step 4: Divide: 2600 ÷ 40 = 65.'
     - teach: Weighted mean = (w₁x₁ + w₂x₂ + …) ÷ (w₁ + w₂ + …), where each value x is multiplied by its weight w (its size or importance). The average of averages is right only when the weights are equal.
       picture:
         kind: bars
@@ -125,6 +139,11 @@ concepts:
         - '84'
         answer: '78'
         why: 0.3 × 50 + 0.7 × 90 = 15 + 63 = 78.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Multiply each value by its weight. Step 2: Add these products. Step 3: Add the weights. Step 4: Divide the first sum by the second. If all weights are equal, this is just the plain average.'
+      - style: real_world
+        teach: 'A report card counts the final exam 60% and the mid-term 40%. Scoring 70 and 90: 0.6 × 70 + 0.4 × 90 = 42 + 36 = 78, not 80. The final pulls harder because it weighs more.'
     - teach: 'Mixtures work the same way. 6 kg of dal at ₹100/kg mixed with 4 kg at ₹150/kg: total cost 600 + 600 = ₹1200 for 10 kg, so ₹120 per kg. The mixture price is always between the two, nearer to the one with more weight.'
       check:
         prompt: 1 kg at ₹40 mixed with 3 kg at ₹80. Price per kg?
@@ -134,6 +153,24 @@ concepts:
         - ₹50
         answer: ₹70
         why: (40 + 240) ÷ 4 = 70.
+      ways:
+      - style: visual
+        teach: The mixture price sits nearer the heavier part.
+        picture:
+          kind: number_line
+          from: 100
+          to: 150
+          step: 10
+          points:
+          - at: 100
+            label: 6 kg at ₹100
+          - at: 120
+            label: mix ₹120
+          - at: 150
+            label: 4 kg at ₹150
+          alt: On a line from 100 to 150 rupees, the mixture price of 120 is nearer 100, where the bigger 6 kilogram share is.
+      - style: real_world
+        teach: 'Mixing 2 cups of hot water at 80 °C with 1 cup at 20 °C: the drink ends up near 60 °C, nearer the hotter side because there is more of it. Prices of mixtures follow the same rule.'
   items:
   - prompt: Class A (20 students) averages 50 and class B (20 students) averages 70. What is the overall average?
     answer: '60'
@@ -288,6 +325,36 @@ concepts:
     solution: 162 ÷ 9 = 18.
     mistakes:
       '16.2': weighted_total
+  - prompt: 'Situation: A shop mixes 5 kg of tea costing ₹300/kg with 3 kg costing ₹380/kg. At what price per kg must it sell the mixture to make no loss or gain?'
+    options:
+    - ₹330
+    - ₹340
+    - ₹320
+    answer: ₹330
+    hints:
+    - Find the total cost of each kind.
+    - Divide total cost by 8 kg.
+    solution: Cost = 5 × 300 + 3 × 380 = 1500 + 1140 = ₹2640 for 8 kg, so ₹2640 ÷ 8 = ₹330 per kg.
+    mistakes:
+      ₹340: weighted_plain_mean
+      ₹320: pqc9m10_total_first
+    exam: case
+    difficulty: 2
+  - prompt: The mean of 20 numbers is 15. Five numbers with mean 12 are removed. What is the mean of the rest?
+    options:
+    - '16'
+    - '18'
+    - '15'
+    answer: '16'
+    hints:
+    - Total of all 20 = 300.
+    - Total removed = 60.
+    solution: Rest total = 300 − 60 = 240 over 15 numbers, so mean = 240 ÷ 15 = 16.
+    mistakes:
+      '18': weighted_plain_mean
+      '15': pqc9m10_total_first
+    exam: short
+    difficulty: 2
 - code: cbse9gm.data.stacked
   title: Stacked and 100% stacked bar charts
   after:
@@ -389,6 +456,21 @@ concepts:
         - '7'
         answer: '20'
         why: 8 + 5 + 7 = 20.
+      ways:
+      - style: visual
+        teach: 'Class 9A as a stack: 14 girls and 16 boys make 30.'
+        picture:
+          kind: bars
+          bars:
+          - label: girls
+            value: 14
+          - label: boys
+            value: 16
+          - label: whole bar
+            value: 30
+          alt: The girls part is 14 and the boys part 16; stacked together they make a bar 30 high.
+      - style: real_world
+        teach: A family's monthly spending bar might stack rent, food and travel. The full height is the total spent; each band shows one part. You can read both the whole and the pieces from one bar.
     - teach: 'To compare shares, turn each part into a percentage of its own total: part ÷ total × 100. In 9A girls are 14/30 ≈ 47%; in 9B 20/40 = 50%. 9B has more girls AND a bigger share, but that isn''t always so.'
       check:
         prompt: 45 of 150 households have a scooter. What percentage is that?
@@ -398,6 +480,23 @@ concepts:
         - 15%
         answer: 30%
         why: 45 ÷ 150 × 100 = 30.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Read the part. Step 2: Read the whole bar. Step 3: Part ÷ whole × 100 gives the share. Step 4: Compare shares, not counts, when the totals differ.'
+      - style: visual
+        teach: Bigger count can still be a smaller share.
+        picture:
+          kind: compare
+          columns:
+          - title: 'Club A: 12 of 20 like chess'
+            points:
+            - count 12
+            - share 60%
+          - title: 'Club B: 15 of 50 like chess'
+            points:
+            - count 15
+            - share 30%
+          alt: Club B has more chess fans, 15 against 12, but a smaller share, 30 percent against 60 percent.
     - teach: 'A 100% stacked bar chart makes every bar the same height, 100%, and shows each part as a percentage. It is best for comparing shares, but it hides the totals: two equal-height bars may stand for 30 people and 3000 people.'
       check:
         prompt: Which chart shows that a big school and a small school have the same share of cyclists?
@@ -407,6 +506,11 @@ concepts:
         - A single total bar
         answer: 100% stacked bars
         why: Every bar is scaled to 100%, so equal shares look equal.
+      ways:
+      - style: real_world
+        teach: Two schools both show 'half the students walk to school' on a 100% bar. One has 40 students, the other 4000. The bars look identical, so a 100% chart is good for shares but hides the size.
+      - style: step_by_step
+        teach: 'Step 1: Want totals and parts? Use a stacked bar. Step 2: Want to compare shares across groups of different sizes? Use a 100% stacked bar. Step 3: In a 100% bar the remaining part is 100% minus the parts shown.'
   items:
   - prompt: A stacked bar for a class has 12 girls on the bottom and 18 boys on top. What is the height of the whole bar?
     answer: '30'
@@ -581,3 +685,37 @@ concepts:
     mistakes:
       '5': percent_of_total
       '13500': percent_of_total
+  - prompt: 'Assertion (A): In a 100% stacked bar chart, every bar has the same height.
+
+      Reason (R): Each bar shows its parts as percentages of its own total.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Because each bar is split into percentages of its own total, every bar reaches 100%. So A is true and R explains it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'A 100% stacked bar shows a village''s crops: rice 45%, coconut 30%, the rest banana. If the village has 200 hectares, how many hectares are banana?'
+    options:
+    - '50'
+    - '25'
+    - '75'
+    answer: '50'
+    hints:
+    - Banana share = 100% − 45% − 30%.
+    - Take that share of 200.
+    solution: Banana = 25% of 200 = 50 hectares.
+    mistakes:
+      '25': share_not_count
+      '75': rest_percent
+    exam: competency
+    difficulty: 2

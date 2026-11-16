@@ -25,6 +25,7 @@ tips:
   x_axis_y_zero: "A line crosses the x-axis where y = 0. Put 0 for y and solve."
   c9m2_highest_not_first: The degree is the highest power anywhere in the polynomial, not the power of the first term written. Scan every term.
   c9m2_rate_is_slope: In a linear rule the number multiplying x is how much changes each step; the number on its own is where you start. Which one does the question ask for?
+  pqc9m2_flip_back: 'Undo the steps in reverse: move the number across, then divide. Check by putting your answer back in.'
 concepts:
 - code: cbse9gm.poly.degree
   title: Polynomials and their degree
@@ -101,6 +102,25 @@ concepts:
         - '7'
         answer: x + 1/x
         why: 1/x is x to the power −1, not a whole-number power.
+      ways:
+      - style: visual
+        teach: 'Which expressions are polynomials: look at every power of x.'
+        picture:
+          kind: compare
+          columns:
+          - title: Polynomial
+            points:
+            - 4x³ − 2x + 7
+            - x² + 5
+            - '9'
+          - title: Not a polynomial
+            points:
+            - √x + 1 (power ½)
+            - 1/x (power −1)
+            - x^½ − 3
+          alt: 4x³ − 2x + 7, x² + 5 and 9 are polynomials; √x + 1, 1/x and x to the half are not, because their powers are not whole numbers.
+      - style: step_by_step
+        teach: 'Step 1: Write each term as a number times x to a power. Step 2: Check every power is 0, 1, 2, 3 … Step 3: If any power is a fraction or negative (√x, 1/x), it is not a polynomial. Step 4: The number in front of each term is its coefficient.'
     - teach: The degree of a polynomial is its highest power of x (with a non-zero coefficient). 3x − 5 has degree 1 (linear), x² + 2x has degree 2 (quadratic), 2x³ − x has degree 3 (cubic). A plain number like 9 has degree 0.
       picture:
         kind: compare
@@ -125,6 +145,11 @@ concepts:
         - '0'
         answer: '2'
         why: The highest power is x², even though it is written last.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: List the powers of x in every term. Step 2: Ignore any term with coefficient 0. Step 3: The largest power is the degree. In 5 + 2x³ − x, the powers are 0, 3, 1, so the degree is 3, even though x³ is not written first.'
+      - style: real_world
+        teach: 'In a cricket team list, the captain is the most important name, wherever it appears. The degree is like that: the highest power decides it, whether that term is written first, last or in the middle.'
     - teach: 'We also name a polynomial by how many terms it has: one term is a monomial, two a binomial, three a trinomial. So 3y² + 5y is a quadratic binomial: degree 2, two terms.'
       check:
         prompt: What kind of polynomial is x³ − 1?
@@ -134,6 +159,25 @@ concepts:
         - Cubic trinomial
         answer: Cubic binomial
         why: Highest power 3 (cubic) and two terms (binomial).
+      ways:
+      - style: visual
+        teach: 'Naming a polynomial twice: by its degree and by its number of terms.'
+        picture:
+          kind: compare
+          columns:
+          - title: By terms
+            points:
+            - '1 term: monomial'
+            - '2 terms: binomial'
+            - '3 terms: trinomial'
+          - title: Example
+            points:
+            - 7x²
+            - 3y² + 5y
+            - x² − 2x + 1
+          alt: 7x² is a monomial, 3y² + 5y a binomial and x² − 2x + 1 a trinomial.
+      - style: step_by_step
+        teach: 'Step 1: Count the terms separated by + or −: that gives monomial, binomial or trinomial. Step 2: Find the highest power: that gives linear, quadratic or cubic. Step 3: Put them together: 3y² + 5y is a quadratic binomial.'
   items:
   - prompt: What is the degree of 5x³ − 2x² + x − 7?
     answer: '3'
@@ -309,6 +353,40 @@ concepts:
     mistakes:
       '3': c9m2_highest_not_first
       '1': c9m2_highest_not_first
+  - prompt: 'Assertion (A): x² + 2√x is a polynomial.
+
+      Reason (R): In a polynomial, every power of the variable must be a whole number.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: √x = x^½, and ½ is not a whole number, so A is false. R is the correct rule.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: What is the degree of 6 − 4y + 3y⁴ − y²?
+    options:
+    - '4'
+    - '1'
+    - '3'
+    answer: '4'
+    hints:
+    - List the power in each term.
+    - Which power is the highest?
+    solution: The powers are 0, 1, 4 and 2; the highest is 4.
+    mistakes:
+      '1': c9m2_highest_not_first
+      '3': degree_count_terms
+    exam: one_mark
+    difficulty: 2
 - code: cbse9gm.poly.zeroes
   title: Values and zeroes of a polynomial
   after:
@@ -398,6 +476,11 @@ concepts:
         - −1
         answer: '1'
         why: 2 × (−3) + 7 = −6 + 7 = 1.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the polynomial with brackets in place of x: ( )² + 2( ). Step 2: Put the number in every bracket: (−1)² + 2(−1). Step 3: Work out powers first: 1 − 2. Step 4: Answer: −1.'
+      - style: real_world
+        teach: 'A taxi fare rule is 20x + 50 for x km. ''What is the fare for 3 km?'' means put x = 3: 20 × 3 + 50 = ₹110. Finding p(3) is just using the rule for that value.'
     - teach: 'A zero of p(x) is a number c that makes p(c) = 0. It is where the graph of y = p(x) touches the x-axis. For 2x − 8: set 2x − 8 = 0, so x = 4. Check: 2 × 4 − 8 = 0.'
       picture:
         kind: geometry
@@ -429,6 +512,31 @@ concepts:
         - '0'
         answer: '6'
         why: 6 − 6 = 0, so x = 6 is the zero.
+      ways:
+      - style: visual
+        teach: The zero of 2x − 8 is where the line y = 2x − 8 meets the x-axis.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -9
+          - 6
+          points:
+            Z(4, 0):
+            - 4
+            - 0
+            _a:
+            - 0
+            - -8
+            _b:
+            - 5
+            - 2
+          segments:
+          - - _a
+            - _b
+          alt: The line y = 2x − 8 crosses the x-axis at 4, so 4 is the zero.
+      - style: real_world
+        teach: "An empty 8-litre bucket is filled at 2 litres a minute. After x minutes it is still short by 8 − 2x litres. It is full when 8 − 2x = 0, at x = 4 minutes. That moment is the zero of 8 − 2x."
     - teach: 'A linear polynomial ax + b has exactly one zero, x = −b/a. Watch the sign: the zero of x + 5 is −5. A polynomial of higher degree can have more zeroes: x² − 4 has zeroes 2 and −2.'
       check:
         prompt: What is the zero of 4x + 2?
@@ -438,6 +546,25 @@ concepts:
         - −2
         answer: −1/2
         why: 4x + 2 = 0 gives x = −2/4 = −1/2.
+      ways:
+      - style: visual
+        teach: Zeroes of a linear polynomial and of a quadratic, side by side.
+        picture:
+          kind: compare
+          columns:
+          - title: x + 5 (linear)
+            points:
+            - x + 5 = 0
+            - x = −5
+            - exactly one zero
+          - title: x² − 4 (quadratic)
+            points:
+            - x² = 4
+            - x = 2 or x = −2
+            - two zeroes
+          alt: x + 5 has one zero, minus 5; x² − 4 has two zeroes, 2 and minus 2.
+      - style: step_by_step
+        teach: 'Step 1: Set ax + b = 0. Step 2: Move b across: ax = −b. Step 3: Divide by a: x = −b/a. For 3x + 12: x = −12/3 = −4. Step 4: Check: 3(−4) + 12 = 0.'
   items:
   - prompt: If p(x) = x² − 3x + 2, find p(4).
     answer: '6'
@@ -600,6 +727,40 @@ concepts:
     mistakes:
       '6': zero_sign_flip
       '2': step_back_to_zero
+  - prompt: 'Assertion (A): −3 is a zero of x + 3.
+
+      Reason (R): A zero c of p(x) makes p(c) = 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: p(−3) = −3 + 3 = 0, so A is true, and R is the definition that makes it true.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A shop''s profit in rupees after selling x pens is p(x) = 5x − 60. How many pens must be sold to break even (profit 0)?'
+    options:
+    - '12'
+    - −12
+    - '300'
+    answer: '12'
+    hints:
+    - Break even means p(x) = 0.
+    - 5x − 60 = 0.
+    solution: 5x = 60, so x = 12 pens.
+    mistakes:
+      −12: zero_sign_flip
+      '300': pqc9m2_flip_back
+    exam: case
+    difficulty: 2
 - code: cbse9gm.linear.growth
   title: Linear growth and decay
   after:
@@ -700,6 +861,24 @@ concepts:
         - 800x
         answer: 300x + 500
         why: ₹300 is added each month (the rate) and ₹500 is paid once at the start.
+      ways:
+      - style: visual
+        teach: 'A phone plan of ₹100 plus ₹2 a minute: the bill rises by the same 2 each minute.'
+        picture:
+          kind: bars
+          bars:
+          - label: 0 min
+            value: 100
+          - label: 1 min
+            value: 102
+          - label: 2 min
+            value: 104
+          - label: 3 min
+            value: 106
+          unit: ₹
+          alt: 'The bill is 100, 102, 104 and 106 rupees after 0, 1, 2 and 3 minutes: always 2 more.'
+      - style: step_by_step
+        teach: 'Step 1: Find the starting value (when x = 0): ₹100. Step 2: Find the change each step: +₹2. Step 3: Write y = (change) × x + (start): y = 2x + 100. Step 4: Check x = 3: 6 + 100 = 106.'
     - teach: If the change per step is positive, the quantity grows (linear growth). If it is negative, it shrinks steadily (linear decay). A candle 20 cm long burning 2 cm an hour is 20 − 2x cm after x hours, and it is gone when 20 − 2x = 0, at x = 10.
       picture:
         kind: bars
@@ -724,6 +903,11 @@ concepts:
         - 6 cm
         answer: 14 cm
         why: 20 − 2 × 3 = 20 − 6 = 14.
+      ways:
+      - style: real_world
+        teach: 'A ₹500 bus pass loses ₹25 each trip: 500, 475, 450… That is linear decay, y = 500 − 25x. It runs out when 500 − 25x = 0, after 20 trips. Growth adds the same each step; decay takes away the same.'
+      - style: step_by_step
+        teach: 'Step 1: Candle starts at 20 cm. Step 2: It loses 2 cm each hour: length = 20 − 2x. Step 3: It is gone when 20 − 2x = 0. Step 4: 2x = 20, so x = 10 hours.'
     - teach: 'In a table, a linear relationship shows equal gaps: x goes 0, 1, 2, 3 and y goes 7, 10, 13, 16 (always +3). If the gaps change (like 1, 2, 4, 8), it is not linear.'
       check:
         prompt: Which list of y-values (for x = 0, 1, 2, 3) is linear?
@@ -733,6 +917,23 @@ concepts:
         - 0, 1, 4, 9
         answer: 9, 7, 5, 3
         why: 'It goes down by 2 every time: equal gaps.'
+      ways:
+      - style: visual
+        teach: Equal gaps mean linear; changing gaps mean not linear.
+        picture:
+          kind: compare
+          columns:
+          - title: Linear
+            points:
+            - 7, 10, 13, 16
+            - 'gaps: +3, +3, +3'
+          - title: Not linear
+            points:
+            - 1, 2, 4, 8
+            - 'gaps: +1, +2, +4'
+          alt: 7, 10, 13, 16 always goes up by 3, so it is linear; 1, 2, 4, 8 has growing gaps, so it is not.
+      - style: real_world
+        teach: 'A tree planted at 7 m tall that grows 3 m a year is 7, 10, 13, 16 m: steady, linear. Money that doubles each year, 1, 2, 4, 8 lakh, grows faster and faster: not linear.'
   items:
   - prompt: A taxi charges ₹40 plus ₹15 per km. What is the fare for 6 km, in ₹?
     answer: '130'
@@ -902,6 +1103,21 @@ concepts:
     mistakes:
       '50': linear_same_gap
       50/1: linear_same_gap
+  - prompt: 'Situation: A tank has 500 litres and leaks 20 litres an hour. After how many hours is it empty?'
+    options:
+    - '25'
+    - '480'
+    - '20'
+    answer: '25'
+    hints:
+    - Water left = 500 − 20x.
+    - Empty means 500 − 20x = 0.
+    solution: 20x = 500, so x = 25 hours.
+    mistakes:
+      '480': growth_vs_decay
+      '20': fixed_plus_rate
+    exam: case
+    difficulty: 2
 - code: cbse9gm.linear.slope
   title: Slope and y-intercept of y = ax + b
   after:
@@ -1029,6 +1245,11 @@ concepts:
         - '6'
         answer: '3'
         why: Rise 7 − 1 = 6, run 2 − 0 = 2, slope 6 ÷ 2 = 3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Pick two points, say (1, 3) and (3, 7). Step 2: Rise = change in y = 7 − 3 = 4. Step 3: Run = change in x = 3 − 1 = 2. Step 4: Slope = rise ÷ run = 2. Use the same order for both subtractions.'
+      - style: real_world
+        teach: A ramp that rises 1 m for every 4 m along has slope ¼; a staircase rising 1 m in 1 m has slope 1, much steeper. Slope tells you how many units y climbs for each 1 unit across.
     - teach: 'The number b is the y-intercept: where the line crosses the y-axis, because at x = 0, y = b. In y = 4x − 3 the slope is 4 and the line crosses the y-axis at −3.'
       check:
         prompt: Where does y = −x + 6 cross the y-axis?
@@ -1038,6 +1259,28 @@ concepts:
         - −6
         answer: '6'
         why: At x = 0, y = 6.
+      ways:
+      - style: visual
+        teach: 'y = 4x − 3 crosses the y-axis at −3: that is b.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -4
+          - 6
+          points:
+            B(0, −3):
+            - 0
+            - -3
+            _a:
+            - 2
+            - 5
+          segments:
+          - - B(0, −3)
+            - _a
+          alt: The line y = 4x − 3 crosses the y-axis at minus 3.
+      - style: real_world
+        teach: 'An auto fare of ₹30 to start plus ₹15 a km is y = 15x + 30. At 0 km you already pay ₹30: that is the y-intercept. The ₹15 per km is the slope.'
     - teach: 'A positive slope climbs left to right, a negative slope falls, slope 0 is flat. Lines with the same slope never meet: they are parallel. The line crosses the x-axis where y = 0, at x = −b/a.'
       check:
         prompt: Which line falls from left to right?
@@ -1047,6 +1290,27 @@ concepts:
         - y = 2
         answer: y = −3x + 1
         why: Its slope −3 is negative.
+      ways:
+      - style: visual
+        teach: What the sign of the slope tells you about the line.
+        picture:
+          kind: compare
+          columns:
+          - title: a > 0
+            points:
+            - climbs left to right
+            - y = 2x + 1
+          - title: a < 0
+            points:
+            - falls left to right
+            - y = −3x + 4
+          - title: a = 0
+            points:
+            - flat
+            - y = 5
+          alt: A positive slope climbs, a negative slope falls and a zero slope is flat.
+      - style: step_by_step
+        teach: 'Step 1: Read a and b from y = ax + b. Step 2: Sign of a: up, down or flat. Step 3: Same a means parallel lines. Step 4: For the x-axis crossing, set y = 0: x = −b/a. For y = 2x − 6: x = 3.'
   items:
   - prompt: What is the slope of y = 3x − 5?
     answer: '3'
@@ -1209,3 +1473,56 @@ concepts:
     mistakes:
       '4': start_height
       '7': slope_negative_down
+  - prompt: 'Assertion (A): The lines y = 3x + 1 and y = 3x − 5 never meet.
+
+      Reason (R): Lines with the same slope are parallel.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both have slope 3, so they are parallel and never meet: A is true, and R is the reason.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The line y = −2x + 6 crosses the y-axis at −2.
+
+      Reason (R): In y = ax + b, the line crosses the y-axis at b.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'At x = 0, y = 6, so it crosses at 6, not −2: A is false. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the slope of the line through (2, 9) and (5, 3).
+    options:
+    - −2
+    - '2'
+    - −½
+    answer: −2
+    hints:
+    - Rise = 3 − 9, run = 5 − 2.
+    - Divide rise by run.
+    solution: (3 − 9) ÷ (5 − 2) = −6 ÷ 3 = −2.
+    mistakes:
+      '2': slope_negative_down
+      −½: slope_rise_run_swap
+    exam: short
+    difficulty: 2

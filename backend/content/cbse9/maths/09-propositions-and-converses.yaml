@@ -13,6 +13,7 @@ tips:
   one_counterexample: "To show 'for all' is false, you need just one case where it fails."
   proposition_true_false: "A proposition is a sentence that is either true or false. Can a question or an order be true or false?"
   square_smaller_fraction: "Try squaring a number between 0 and 1. Is the square bigger or smaller?"
+  pqc9m9_check_each_part: Read the statement as 'If P, then Q'. Find a case where P holds; does Q hold there too?
 concepts:
 - code: cbse9gm.logic.converse
   title: Propositions and their converses
@@ -94,6 +95,11 @@ concepts:
         - What time is it?
         answer: 12 is a multiple of 5
         why: 'It is a statement that can be judged: here it is false, but it is still a proposition.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Ask ''can this sentence be true or false?'' Step 2: If yes, it is a proposition, even if it is false, like ''5 > 9''. Step 3: Questions, orders and wishes (''Is it raining?'', ''Shut the door'') fail the test.'
+      - style: real_world
+        teach: 'A news headline ''Kochi got 30 mm of rain today'' is a proposition: you can check it and it is true or false. ''Stay safe in the rain!'' is advice, not a proposition: nobody can call it true or false.'
     - teach: 'Many propositions have the form ''If P, then Q''. Swap the two parts and you get the converse: ''If Q, then P''. A true statement can have a false converse. ''If it is a square, then it has four sides'' is true; ''If it has four sides, then it is a square'' is false (a rectangle).'
       picture:
         kind: compare
@@ -115,6 +121,23 @@ concepts:
         - If x = 3, then x² ≠ 9
         answer: If x² = 9, then x = 3
         why: 'Swap the two parts. (It is false: x could be −3.)'
+      ways:
+      - style: visual
+        teach: Every square is inside the circle of four-sided shapes, but not the other way round.
+        picture:
+          kind: compare
+          columns:
+          - title: If square, then four sides
+            points:
+            - Every square has four sides
+            - 'TRUE'
+          - title: If four sides, then square
+            points:
+            - A rectangle has four sides
+            - 'Not a square: FALSE'
+          alt: The statement 'if square then four sides' is true; its converse 'if four sides then square' is false because a rectangle has four sides but is not a square.
+      - style: step_by_step
+        teach: 'Step 1: Underline the ''if'' part P and the ''then'' part Q. Step 2: Write ''If Q, then P''. Step 3: Hunt for a case with Q true and P false. Step 4: Found one? The converse is false.'
     - teach: 'When a statement and its converse are both true, we join them with ''if and only if'': ''A triangle has two equal sides if and only if it has two equal angles''. Each part guarantees the other.'
       check:
         prompt: Which can be said with 'if and only if'?
@@ -124,6 +147,18 @@ concepts:
         - x = 2 ↔ x² = 4
         answer: A number is even ↔ it ends in 0, 2, 4, 6 or 8
         why: Both directions are true. The others fail one way (rectangles; x = −2).
+      ways:
+      - style: visual
+        teach: '''If and only if'' means both arrows hold.'
+        picture:
+          kind: flow
+          steps:
+          - Two equal sides
+          - ⇄ both ways
+          - Two equal angles
+          alt: Two equal sides lead to two equal angles, and two equal angles lead back to two equal sides, so we say 'if and only if'.
+      - style: real_world
+        teach: '''You pass the gate if and only if you show your school ID'' means: show the ID and you pass, AND anyone who passed showed an ID. Both directions are promised, not just one.'
   items:
   - prompt: What is the converse of 'If a number ends in 0, then it is divisible by 5'?
     options:
@@ -332,6 +367,55 @@ concepts:
     solution: 2 is prime and even, so the statement is false. One counterexample is enough.
     mistakes:
       True, she checked four primes: examples_not_proof
+  - prompt: 'Assertion (A): The converse of ''If a number is a multiple of 4, then it is even'' is false.
+
+      Reason (R): 6 is even but is not a multiple of 4.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: The converse is 'If a number is even, then it is a multiple of 4'. 6 breaks it, so A is true, and R is the counterexample that shows why.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Write the converse of 'If two angles are vertically opposite, then they are equal'. Is the converse true?
+    options:
+    - If two angles are equal, then they are vertically opposite; false
+    - If two angles are equal, then they are vertically opposite; true
+    - If two angles are not vertically opposite, then they are not equal; true
+    answer: If two angles are equal, then they are vertically opposite; false
+    hints:
+    - Swap the 'if' and 'then' parts.
+    - Can two equal angles sit far apart, not crossing at a point?
+    solution: 'Converse: ''If two angles are equal, then they are vertically opposite.'' False: two base angles of an isosceles triangle are equal but are not vertically opposite.'
+    mistakes:
+      If two angles are equal, then they are vertically opposite; true: converse_assumed_true
+      If two angles are not vertically opposite, then they are not equal; true: converse_swap
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: A notice says ''If you are in Class 9, then you must attend the science fair.'' Meera attends the fair. Can we be sure Meera is in Class 9?'
+    options:
+    - No, the notice does not say only Class 9 attends
+    - Yes, everyone at the fair is in Class 9
+    - Yes, because the notice is true
+    answer: No, the notice does not say only Class 9 attends
+    hints:
+    - 'What you want is the converse: ''If you attend, then you are in Class 9''.'
+    - Does the notice promise the converse?
+    solution: The notice only says Class 9 must attend. Others may attend too, so the converse is not given and we can't be sure.
+    mistakes:
+      Yes, everyone at the fair is in Class 9: converse_assumed_true
+      Yes, because the notice is true: converse_assumed_true
+    exam: case
+    difficulty: 2
 - code: cbse9gm.logic.counterexample
   title: Proving and disproving with counterexamples
   after:
@@ -405,6 +489,23 @@ concepts:
         - Yes, if the numbers were chosen randomly
         answer: No, examples can't prove it for every number
         why: Only a general argument covers every case.
+      ways:
+      - style: visual
+        teach: n² + n + 41 gives primes for a long time, then breaks.
+        picture:
+          kind: compare
+          columns:
+          - title: n = 0 to 39
+            points:
+            - 41, 43, 47, 53, …
+            - all prime
+          - title: n = 40
+            points:
+            - 1600 + 40 + 41 = 1681
+            - = 41 × 41, not prime
+          alt: For n from 0 to 39 the formula gives primes, but at n equal to 40 it gives 1681, which is 41 times 41.
+      - style: real_world
+        teach: 'A shopkeeper checks 20 mangoes from a crate and all are sweet. That doesn''t prove every mango is sweet: the 21st could be sour. Checking examples gives confidence, not proof.'
     - teach: 'To show a claim is false, ONE counterexample is enough. ''Every number ending in 7 is prime'' fails at 27 = 3 × 9. Hunt for a counterexample among small, special or awkward numbers: 0, 1, 2, fractions, negatives.'
       check:
         prompt: Which is a counterexample to 'Every multiple of 3 is odd'?
@@ -414,6 +515,11 @@ concepts:
         - '15'
         answer: '6'
         why: 6 is a multiple of 3 but even.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Read what the claim says about ALL numbers. Step 2: Try awkward ones: 0, 1, 2, a negative, a fraction. Step 3: The moment one fails, stop: that single case disproves the claim.'
+      - style: real_world
+        teach: '''Every bird can fly'' sounds right until someone mentions a penguin. One penguin is enough to break the claim; you don''t need a list of flightless birds.'
     - teach: 'A general proof uses letters for any number. Any even number is 2a, any odd number is 2a + 1. Sum of two evens: 2a + 2b = 2(a + b), a multiple of 2, so always even. That covers every case at once.'
       picture:
         kind: flow
@@ -431,6 +537,19 @@ concepts:
         - a + 1
         answer: 2a + 1
         why: One more than an even number 2a.
+      ways:
+      - style: visual
+        teach: Odd + odd, drawn with letters, covers every case.
+        picture:
+          kind: flow
+          steps:
+          - (2a + 1) + (2b + 1)
+          - = 2a + 2b + 2
+          - = 2(a + b + 1)
+          - 'a multiple of 2: even'
+          alt: Two odd numbers 2a plus 1 and 2b plus 1 add to 2 times a plus b plus 1, which is a multiple of 2, so the sum is even.
+      - style: step_by_step
+        teach: 'Step 1: Write each number in letter form: even = 2a, odd = 2a + 1. Step 2: Do the operation. Step 3: Collect terms. Step 4: Take out 2 (or 3, or whatever the claim needs) to show the pattern for every number.'
   items:
   - prompt: How many counterexamples do you need to show a statement about all numbers is false?
     answer: '1'
@@ -638,3 +757,52 @@ concepts:
     mistakes:
       'True: 3, 5 and 17 are prime': examples_not_proof
       'False: n = 1 gives 3': one_counterexample
+  - prompt: 'Assertion (A): The statement ''n² ≥ n for every real number n'' is false.
+
+      Reason (R): For n = ½, n² = ¼, which is less than ½.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: One counterexample disproves a 'for every' claim. n = ½ gives ¼ < ½, so A is true and R explains it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Prove that the product of any two consecutive whole numbers is even. Which first line starts the proof correctly?
+    options:
+    - Let the numbers be n and n + 1; one of them is even
+    - Take 4 × 5 = 20, which is even
+    - Let the numbers be 2n and 2n
+    answer: Let the numbers be n and n + 1; one of them is even
+    hints:
+    - A proof must work for every pair, not one pair.
+    - Consecutive means 'one more than'.
+    solution: Any two consecutive numbers are n and n + 1. One of them is even, so the product has a factor 2 and is even.
+    mistakes:
+      Take 4 × 5 = 20, which is even: examples_not_proof
+      Let the numbers be 2n and 2n: consecutive_one_even
+    exam: short
+    difficulty: 2
+  - prompt: Which value of n disproves the claim '2ⁿ + 1 is always prime'?
+    options:
+    - '3'
+    - '1'
+    - '2'
+    answer: '3'
+    hints:
+    - Try n = 1, 2, 3 in turn.
+    - Is the result divisible by 3?
+    solution: n = 1 gives 3, n = 2 gives 5 (both prime), n = 3 gives 9 = 3 × 3, not prime.
+    mistakes:
+      '1': pqc9m9_check_each_part
+      '2': pqc9m9_check_each_part
+    exam: competency
+    difficulty: 2

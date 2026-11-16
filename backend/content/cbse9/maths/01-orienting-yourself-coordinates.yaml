@@ -16,6 +16,7 @@ tips:
   vertical_distance: "When both points have the same x, they sit on one vertical line. The distance is just the gap between the y-values."
   c9m1_order_xy: 'Coordinates always come in the order (x, y): first how far across, then how far up or down. Check which number you wrote first.'
   c9m1_distance_sign: A distance is never negative. How far a point is from an axis is the size of the other coordinate, without its sign.
+  pqc9m1_halve: Adding gives twice the middle. One more step finishes the average.
 concepts:
 - code: cbse9gm.coord.plane
   title: The Cartesian plane
@@ -105,6 +106,23 @@ concepts:
         - The midpoint
         answer: The origin
         why: Both axes start counting from 0 there, so it is (0, 0), the origin.
+      ways:
+      - style: visual
+        teach: Two number lines crossing at right angles at 0 make the plane; the crossing is the origin O.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -5
+          - 5
+          points:
+            O:
+            - 0
+            - 0
+          segments: []
+          alt: An x-axis across and a y-axis up and down crossing at the origin O.
+      - style: real_world
+        teach: 'A cinema ticket says Row F, Seat 12: one label is not enough to find your seat, you need two. A point on a page is the same: one number line fixes it along a line, two crossing lines fix it on the page.'
     - teach: 'The two axes cut the page into four parts called quadrants. Start at the top right and go anticlockwise: I, II, III, IV. In I both numbers are positive. In II, x is negative (left). In III both are negative. In IV, y is negative (down).'
       picture:
         kind: geometry
@@ -135,6 +153,11 @@ concepts:
         - Quadrant III
         answer: Quadrant II
         why: 'Left of the y-axis (x negative) and above the x-axis (y positive) is the top left: Quadrant II.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is x positive or negative? Step 2: Is y positive or negative? Step 3: (+, +) is I, (−, +) is II, (−, −) is III, (+, −) is IV. Example: (−2, 5) has x negative and y positive, so it is in quadrant II.'
+      - style: real_world
+        teach: Think of a town map with the bus stand at the centre. Shops to the north-east are in one quarter, north-west in another, and so on. The quadrants are those four quarters of the page, numbered anticlockwise from the top right.
     - teach: A point with a 0 in it sits on an axis, so it belongs to no quadrant. (4, 0) is on the x-axis; (0, −3) is on the y-axis. Always check for a zero before you name a quadrant.
       check:
         prompt: Where is the point (0, 7)?
@@ -144,6 +167,26 @@ concepts:
         - On the x-axis
         answer: On the y-axis
         why: 'Its x-value is 0, so it has not moved left or right: it sits on the y-axis.'
+      ways:
+      - style: visual
+        teach: Points with a zero lie on an axis, not inside any quadrant.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -5
+          - 5
+          points:
+            A(4, 0):
+            - 4
+            - 0
+            B(0, −3):
+            - 0
+            - -3
+          segments: []
+          alt: A at 4, 0 lies on the x-axis and B at 0, minus 3 lies on the y-axis.
+      - style: step_by_step
+        teach: 'Step 1: Look for a 0 in the pair. Step 2: If y = 0, the point is on the x-axis. Step 3: If x = 0, it is on the y-axis. Step 4: If both are 0, it is the origin. Only when neither is 0 do you name a quadrant.'
   items:
   - prompt: In which quadrant is the point (−4, 5)?
     options:
@@ -353,6 +396,40 @@ concepts:
     mistakes:
       '2': quadrant_signs
       '1': quadrant_signs
+  - prompt: 'Assertion (A): The point (0, −7) lies in quadrant IV.
+
+      Reason (R): In quadrant IV, x is positive and y is negative.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'x = 0, so (0, −7) lies on the y-axis, in no quadrant: A is false. R correctly describes quadrant IV.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: On a school map with the gate at the origin, the library is at (−3, 2). In which quadrant is the library?'
+    options:
+    - II
+    - I
+    - IV
+    answer: II
+    hints:
+    - Is x positive or negative?
+    - 'x negative, y positive: which quarter is that?'
+    solution: x = −3 (left) and y = 2 (up), so the library is in quadrant II.
+    mistakes:
+      I: quadrant_signs
+      IV: c9m1_order_xy
+    exam: case
+    difficulty: 2
 - code: cbse9gm.coord.plot
   title: Coordinates of a point
   after:
@@ -453,6 +530,23 @@ concepts:
         - '3'
         answer: −2
         why: 'The ordinate is the second number, the y-value: −2.'
+      ways:
+      - style: visual
+        teach: x is the first number and tells how far across; y is the second and tells how far up or down.
+        picture:
+          kind: compare
+          columns:
+          - title: x (abscissa)
+            points:
+            - first number
+            - + right, − left
+          - title: y (ordinate)
+            points:
+            - second number
+            - + up, − down
+          alt: In the pair x, y, x is first and moves right or left; y is second and moves up or down.
+      - style: real_world
+        teach: 'Giving directions in a market: ''walk 3 shops along, then go up 2 floors''. Along first, then up. The pair (x, y) always works in that order: across first, then up or down.'
     - teach: 'To plot (3, 4): start at O, walk 3 along the x-axis to the right, then 4 up, parallel to the y-axis. Order matters: (4, 3) is a different point, 4 across and 3 up.'
       picture:
         kind: geometry
@@ -477,6 +571,26 @@ concepts:
         - 2 down
         answer: 2 to the left
         why: The first number is x. It is −2, so move 2 to the left, then 5 up.
+      ways:
+      - style: visual
+        teach: '(3, 4) and (4, 3) are two different points: order matters.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 6
+          points:
+            P(3, 4):
+            - 3
+            - 4
+            Q(4, 3):
+            - 4
+            - 3
+          segments: []
+          alt: P at 3, 4 and Q at 4, 3 are at different places on the grid.
+      - style: step_by_step
+        teach: 'Step 1: Start at the origin. Step 2: Move across by x: 3 to the right. Step 3: Move up by y: 4 up. Step 4: Mark the point (3, 4). Swapping the numbers moves you to (4, 3), a different place.'
     - teach: The distance of a point from the y-axis is the size of its x-value, and its distance from the x-axis is the size of its y-value. (−6, 2) is 6 units from the y-axis and 2 units from the x-axis. Distances are never negative.
       check:
         prompt: How far is (4, −7) from the x-axis?
@@ -486,6 +600,35 @@ concepts:
         - −7
         answer: '7'
         why: 'Distance from the x-axis is the size of y: 7. A distance has no minus sign.'
+      ways:
+      - style: visual
+        teach: (−6, 2) is 6 units from the y-axis and 2 units from the x-axis.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -7
+          - 3
+          points:
+            P(−6, 2):
+            - -6
+            - 2
+            _a:
+            - 0
+            - 2
+            _b:
+            - -6
+            - 0
+          segments:
+          - - P(−6, 2)
+            - _a
+            - '6'
+          - - P(−6, 2)
+            - _b
+            - '2'
+          alt: From P at minus 6, 2 it is 6 units across to the y-axis and 2 units down to the x-axis.
+      - style: step_by_step
+        teach: 'Step 1: Distance from the y-axis: take x and drop its sign. Step 2: Distance from the x-axis: take y and drop its sign. For (−6, 2): 6 from the y-axis, 2 from the x-axis. Distances are never negative.'
   items:
   - prompt: What is the abscissa of the point (7, −3)?
     answer: '7'
@@ -665,6 +808,21 @@ concepts:
     mistakes:
       '24': rectangle_area_not_perimeter
       '10': rectangle_area_not_perimeter
+  - prompt: How far is the point (5, −8) from the x-axis?
+    options:
+    - 8 units
+    - 5 units
+    - −8 units
+    answer: 8 units
+    hints:
+    - Distance from the x-axis is measured up or down.
+    - Which number tells you up or down?
+    solution: 'Distance from the x-axis is the size of y: |−8| = 8 units.'
+    mistakes:
+      5 units: vertical_distance
+      −8 units: c9m1_distance_sign
+    exam: one_mark
+    difficulty: 2
 - code: cbse9gm.coord.distance
   title: Distance between two points
   after:
@@ -802,6 +960,25 @@ concepts:
         - '4'
         answer: '7'
         why: Same x, so they are on a vertical line. The gap in y is 6 − (−1) = 7.
+      ways:
+      - style: visual
+        teach: On the same horizontal line, the distance is the gap between the x-values.
+        picture:
+          kind: number_line
+          from: 0
+          to: 8
+          points:
+          - at: 1
+            label: '1'
+          - at: 7
+            label: '7'
+          jumps:
+          - from: 1
+            to: 7
+            label: '6'
+          alt: From 1 to 7 on a number line is a gap of 6.
+      - style: real_world
+        teach: 'Two houses on the same straight road at the 1 km mark and the 7 km mark are 6 km apart: you just subtract. Points on the same horizontal line work the same way: subtract the x-values.'
     - teach: 'For two points that are not lined up, draw a right triangle: go across from one, then up to the other. The across side is the gap in x, the up side is the gap in y, and the distance is the slanted side. Pythagoras gives it: distance = √((gap in x)² + (gap in y)²).'
       picture:
         kind: geometry
@@ -836,6 +1013,11 @@ concepts:
         - '100'
         answer: '10'
         why: √(36 + 64) = √100 = 10. Adding 6 + 8 walks round the corner; squaring without the root gives 100.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Gap in x: subtract the x-values. Step 2: Gap in y: subtract the y-values. Step 3: Square both gaps and add. Step 4: Take the square root. For (1, 2) and (4, 6): 3² + 4² = 25, distance 5.'
+      - style: real_world
+        teach: 'Walking from home to school you go 3 blocks east and 4 blocks north, 7 blocks in all. A crow flies straight: only 5 blocks, the slanted side of the right triangle. The distance formula finds the crow''s path.'
     - teach: 'The distance from the origin to (x, y) is √(x² + y²). Signs don''t matter because squaring removes them: (−3, 4) is √(9 + 16) = 5 from O, the same as (3, 4).'
       check:
         prompt: How far is (−8, −6) from the origin?
@@ -845,6 +1027,38 @@ concepts:
         - '2'
         answer: '10'
         why: √(64 + 36) = √100 = 10.
+      ways:
+      - style: visual
+        teach: 'From the origin to (−3, 4): across 3, up 4, straight distance 5.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -4
+          - 5
+          points:
+            P(−3, 4):
+            - -3
+            - 4
+            O:
+            - 0
+            - 0
+            _c:
+            - -3
+            - 0
+          segments:
+          - - O
+            - _c
+            - '3'
+          - - _c
+            - P(−3, 4)
+            - '4'
+          - - O
+            - P(−3, 4)
+            - '5'
+          alt: A right triangle from O across 3 and up 4 to P at minus 3, 4; the slanted side is 5.
+      - style: step_by_step
+        teach: 'Step 1: Square x: (−3)² = 9. Step 2: Square y: 4² = 16. Step 3: Add: 25. Step 4: Root: 5. The minus sign vanished when you squared, so (−3, 4) and (3, 4) are both 5 from O.'
   items:
   - prompt: Find the distance between (0, 0) and (6, 8).
     answer: '10'
@@ -1012,6 +1226,40 @@ concepts:
     mistakes:
       Yes, OA = OB = 6: distance_added_sides
       No, all sides are different: distance_forgot_root
+  - prompt: 'Assertion (A): The distance between (2, 3) and (5, 7) is 5.
+
+      Reason (R): The distance between (x₁, y₁) and (x₂, y₂) is √((x₂ − x₁)² + (y₂ − y₁)²).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: √(3² + 4²) = √25 = 5, so A is true, and R is exactly the formula used, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A drone flies from a point at (1, 1) to (7, 9) on a field map, in metres. How far does it fly in a straight line?'
+    options:
+    - 10 m
+    - 14 m
+    - 100 m
+    answer: 10 m
+    hints:
+    - 'Gaps: 6 across and 8 up.'
+    - Square, add, then take the root.
+    solution: √(6² + 8²) = √100 = 10 m.
+    mistakes:
+      14 m: distance_added_sides
+      100 m: distance_forgot_root
+    exam: case
+    difficulty: 2
 - code: cbse9gm.coord.midpoint
   title: The midpoint of a segment
   after:
@@ -1112,6 +1360,30 @@ concepts:
         - '6'
         answer: '3'
         why: (−4 + 10)/2 = 6/2 = 3.
+      ways:
+      - style: visual
+        teach: Halfway between 2 and 8 on a number line is their average, 5.
+        picture:
+          kind: number_line
+          from: 0
+          to: 10
+          points:
+          - at: 2
+            label: '2'
+          - at: 5
+            label: '5'
+          - at: 8
+            label: '8'
+          jumps:
+          - from: 2
+            to: 5
+            label: '3'
+          - from: 5
+            to: 8
+            label: '3'
+          alt: 5 is 3 steps from 2 and 3 steps from 8, so it is the midpoint.
+      - style: real_world
+        teach: 'Two friends live at the 2 km and 8 km marks on a road and want to meet halfway. Add and halve: (2 + 8) ÷ 2 = 5 km. On a map they would do this for the east-west number and again for the north-south number.'
     - teach: 'Midpoint of (x₁, y₁) and (x₂, y₂) is ((x₁ + x₂)/2, (y₁ + y₂)/2). For (2, 1) and (6, 7): ((2 + 6)/2, (1 + 7)/2) = (4, 4). A common slip is to add but forget to halve.'
       picture:
         kind: geometry
@@ -1142,6 +1414,11 @@ concepts:
         - (3, 4)
         answer: (3, 2)
         why: ((0 + 6)/2, (4 + 0)/2) = (3, 2). (6, 4) adds without halving.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Add the x-values: 2 + 6 = 8. Step 2: Halve: 4. Step 3: Add the y-values: 1 + 7 = 8. Step 4: Halve: 4. The midpoint is (4, 4). Never stop after adding: the halving is what makes it the middle.'
+      - style: real_world
+        teach: A rope is tied between two poles at (2, 1) and (6, 7) on a garden plan. A lamp is hung at its exact middle. Averaging each coordinate puts the lamp at (4, 4); forgetting to halve would put it at (8, 8), outside the garden.
     - teach: 'Working backwards: if M is the midpoint of AB, then B is as far beyond M as A is before it. So B = (2·xM − xA, 2·yM − yA). With A(1, 2) and M(3, 5), B = (6 − 1, 10 − 2) = (5, 8).'
       check:
         prompt: M(2, 0) is the midpoint of AB and A is (0, 0). What is B?
@@ -1151,6 +1428,19 @@ concepts:
         - (2, 0)
         answer: (4, 0)
         why: A to M is 2 steps right; B is another 2 steps right, at (4, 0).
+      ways:
+      - style: visual
+        teach: 'From A through M to B: B is as far past M as A is before it.'
+        picture:
+          kind: flow
+          steps:
+          - A(1, 2), midpoint M(3, 5)
+          - 'A to M: +2 across, +3 up'
+          - 'M to B: the same again'
+          - B = (5, 8)
+          alt: From A at 1, 2 to M at 3, 5 is 2 across and 3 up; doing the same again from M gives B at 5, 8.
+      - style: step_by_step
+        teach: 'Step 1: Double M: (6, 10). Step 2: Subtract A: (6 − 1, 10 − 2). Step 3: B = (5, 8). Step 4: Check: the midpoint of (1, 2) and (5, 8) is (3, 5). Yes.'
   items:
   - prompt: Find the x-coordinate of the midpoint of (2, 4) and (8, 10).
     answer: '5'
@@ -1333,3 +1623,37 @@ concepts:
     mistakes:
       '4': distance_added_sides
       '8': distance_forgot_root
+  - prompt: 'Assertion (A): The midpoint of (−4, 6) and (8, 2) is (2, 4).
+
+      Reason (R): The midpoint is found by averaging the x-values and averaging the y-values.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: ((−4 + 8)/2, (6 + 2)/2) = (2, 4), so A is true; R is the rule used, so it explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: M(4, −1) is the midpoint of AB, and A is (1, 3). Where is B?'
+    options:
+    - (7, −5)
+    - (2.5, 1)
+    - (5, 2)
+    answer: (7, −5)
+    hints:
+    - B is as far past M as A is before it.
+    - B = (2·4 − 1, 2·(−1) − 3).
+    solution: B = (8 − 1, −2 − 3) = (7, −5).
+    mistakes:
+      (2.5, 1): pqc9m1_halve
+      (5, 2): midpoint_subtracted
+    exam: short
+    difficulty: 2
