@@ -19,6 +19,7 @@ tips:
   power_then_minus: "Work out 2⁶ first, then subtract 1."
   recursive_step: "Use the rule one step at a time: t₂ from t₁, t₃ from t₂, t₄ from t₃. Don't jump."
   rule_check_first: "Test each rule with n = 1, 2, 3. The right one gives 3, 7, 11."
+  pqc9m8_count_gaps: From the 1st term to the nth there are n − 1 gaps, not n.
 concepts:
 - code: cbse9gm.seq.rules
   title: Sequences and their rules
@@ -127,6 +128,23 @@ concepts:
         - '15'
         answer: '19'
         why: 4 × 5 − 1 = 19.
+      ways:
+      - style: visual
+        teach: Using tₙ = 2n + 3 to find any term straight from its position.
+        picture:
+          kind: bars
+          bars:
+          - label: t₁
+            value: 5
+          - label: t₂
+            value: 7
+          - label: t₃
+            value: 9
+          - label: t₁₀
+            value: 23
+          alt: With t n equal to 2n plus 3, the first term is 5, the second 7, the third 9 and the tenth 23.
+      - style: real_world
+        teach: 'Seat numbers in a theatre row follow a rule: seat n is n metres from the aisle plus 3 m of entry space. You can find seat 10''s position straight away without walking past seats 1 to 9. That is an explicit rule.'
     - teach: A recursive rule gives each term from the one before. t₁ = 3 and tₙ = tₙ₋₁ + 5 gives 3, 8, 13, 18, … To reach t₁₀ you must step through all terms, so explicit rules are faster for far terms.
       picture:
         kind: flow
@@ -144,6 +162,11 @@ concepts:
         - '7'
         answer: '9'
         why: t₂ = 3, t₃ = 9.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start with t₁ = 3. Step 2: Add 5 to get t₂ = 8. Step 3: Add 5 again: t₃ = 13. Step 4: Keep going: 18, 23 … To reach t₁₀ you must do nine steps, which is why an explicit rule is quicker for far terms.'
+      - style: real_world
+        teach: 'Climbing stairs, each step depends on the one before: you can''t skip to step 10. A recursive rule is like stairs; an explicit rule is like a lift that goes straight to floor 10.'
     - teach: 'Famous sequences: squares 1, 4, 9, 16 (n²); triangular numbers 1, 3, 6, 10 (n(n + 1)/2); Fibonacci 1, 1, 2, 3, 5, 8, each term the sum of the two before. Indian poets Virahanka and Hemachandra found the Fibonacci numbers centuries before Fibonacci, by counting rhythms of short and long syllables.'
       check:
         prompt: What comes after 3, 5, 8, 13 in the Fibonacci sequence?
@@ -153,6 +176,27 @@ concepts:
         - '26'
         answer: '21'
         why: 8 + 13 = 21.
+      ways:
+      - style: visual
+        teach: Three famous sequences and how each is built.
+        picture:
+          kind: compare
+          columns:
+          - title: Squares
+            points:
+            - 1, 4, 9, 16
+            - n²
+          - title: Triangular
+            points:
+            - 1, 3, 6, 10
+            - n(n + 1)/2
+          - title: Fibonacci
+            points:
+            - 1, 1, 2, 3, 5, 8
+            - add the two before
+          alt: Squares are n squared; triangular numbers are n times n plus 1 over 2; Fibonacci adds the two previous terms.
+      - style: step_by_step
+        teach: 'Step 1: Fibonacci starts 1, 1. Step 2: Add them: 2. Step 3: Add the last two: 1 + 2 = 3. Step 4: 2 + 3 = 5, then 3 + 5 = 8, 5 + 8 = 13. Virahanka and Hemachandra counted poem rhythms and found these same numbers.'
   items:
   - prompt: A sequence has tₙ = 5n − 2. What is the 4th term?
     answer: '18'
@@ -316,6 +360,21 @@ concepts:
     mistakes:
       '29': consecutive_squares
       '1': recursive_step
+  - prompt: 'Situation: A pattern of tiles has t₁ = 4 and each new figure adds 6 tiles. Which explicit rule fits?'
+    options:
+    - tₙ = 6n − 2
+    - tₙ = 4n + 6
+    - tₙ = 6n + 4
+    answer: tₙ = 6n − 2
+    hints:
+    - Terms go 4, 10, 16, …
+    - Test each rule with n = 1.
+    solution: 4, 10, 16 … adds 6 each time, so tₙ = 6n + c; n = 1 gives 4, so c = −2.
+    mistakes:
+      tₙ = 4n + 6: rule_check_first
+      tₙ = 6n + 4: rule_check_first
+    exam: case
+    difficulty: 2
 - code: cbse9gm.seq.ap
   title: Arithmetic progressions
   after:
@@ -407,6 +466,35 @@ concepts:
         - '50'
         answer: −5
         why: 45 − 50 = −5.
+      ways:
+      - style: real_world
+        teach: 'Saving ₹50 in the first week and ₹20 more each week after: 50, 70, 90, 110 … The fixed ₹20 added each time is the common difference d. Spending ₹30 a day from ₹200 gives 200, 170, 140: d = −30.'
+      - style: visual
+        teach: '2, 9, 16, 23: the same jump of 7 each time.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 25
+          points:
+          - at: 2
+            label: '2'
+          - at: 9
+            label: '9'
+          - at: 16
+            label: '16'
+          - at: 23
+            label: '23'
+          jumps:
+          - from: 2
+            to: 9
+            label: '+7'
+          - from: 9
+            to: 16
+            label: '+7'
+          - from: 16
+            to: 23
+            label: '+7'
+          alt: Jumping 7 each time from 2 lands on 9, 16 and 23.
     - teach: 'To reach the nth term you add d only (n − 1) times, because the first term already counts. So tₙ = a + (n − 1)d. For 2, 9, 16, …: t₁₀ = 2 + 9 × 7 = 65.'
       picture:
         kind: number_line
@@ -441,6 +529,11 @@ concepts:
         - '60'
         answer: '61'
         why: 4 + 19 × 3 = 61. Using 20 jumps would give 64.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: First term a = 2, d = 7. Step 2: To get to the 10th term, count the gaps: 10 − 1 = 9. Step 3: Add 9 jumps: 9 × 7 = 63. Step 4: t₁₀ = 2 + 63 = 65.'
+      - style: real_world
+        teach: 'Fence posts 2 m apart: from post 1 to post 10 there are only 9 gaps, so 18 m. The same counting trap appears in tₙ = a + (n − 1)d: the first term is already there, so you add d one time fewer.'
     - teach: 'Sum 1 + 2 + … + n by pairing: 1 with n, 2 with n − 1, and so on; each pair adds to n + 1, and there are n/2 pairs. So the sum is n(n + 1)/2. Also, 1 + 3 + 5 + … (first n odd numbers) = n².'
       check:
         prompt: What is 1 + 2 + … + 20?
@@ -450,6 +543,20 @@ concepts:
         - '200'
         answer: '210'
         why: 20 × 21 ÷ 2 = 210.
+      ways:
+      - style: visual
+        teach: 'Pairing to add 1 to 10: five pairs of 11.'
+        picture:
+          kind: flow
+          steps:
+          - 1 + 10 = 11
+          - 2 + 9 = 11
+          - … 5 pairs in all
+          - 5 × 11 = 55
+          - n(n + 1)/2 = 10 × 11 ÷ 2 = 55
+          alt: 1 and 10, 2 and 9 and so on make 5 pairs of 11, giving 55, which matches n times n plus 1 over 2.
+      - style: step_by_step
+        teach: 'Step 1: Add the first odd numbers: 1 = 1, 1 + 3 = 4, 1 + 3 + 5 = 9. Step 2: Notice 1, 4, 9 are squares. Step 3: So the first n odd numbers add to n². Step 4: The first 12 odd numbers add to 144.'
   items:
   - prompt: What is the common difference of 7, 12, 17, 22, …?
     answer: '5'
@@ -608,6 +715,40 @@ concepts:
     mistakes:
       '5050': sum_formula_half
       '1275': sum_formula_half
+  - prompt: 'Assertion (A): The 20th term of 5, 8, 11, … is 62.
+
+      Reason (R): The nth term of an AP is a + (n − 1)d.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'a = 5, d = 3: t₂₀ = 5 + 19 × 3 = 62. A is true and R gives it.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A theatre''s first row has 20 seats and each row has 4 more than the one in front. How many seats are in the 15th row?'
+    options:
+    - '76'
+    - '80'
+    - '60'
+    answer: '76'
+    hints:
+    - a = 20, d = 4.
+    - From row 1 to row 15 there are 14 gaps.
+    solution: t₁₅ = 20 + 14 × 4 = 76 seats.
+    mistakes:
+      '80': ap_nth_term_n_not_n_minus_1
+      '60': pqc9m8_count_gaps
+    exam: case
+    difficulty: 2
 - code: cbse9gm.seq.gp
   title: Geometric progressions, Tower of Hanoi and fractals
   after:
@@ -711,6 +852,23 @@ concepts:
         - '10'
         answer: '5'
         why: 10 ÷ 2 = 5.
+      ways:
+      - style: visual
+        teach: An AP adds the same number; a GP multiplies by the same number.
+        picture:
+          kind: compare
+          columns:
+          - title: AP (+ d)
+            points:
+            - 3, 6, 9, 12
+            - d = 3
+          - title: GP (× r)
+            points:
+            - 3, 6, 12, 24
+            - r = 2
+          alt: 3, 6, 9, 12 adds 3 each time; 3, 6, 12, 24 doubles each time.
+      - style: real_world
+        teach: 'A rumour told to 2 people, who each tell 2 more, spreads 1, 2, 4, 8, 16: a GP with r = 2. A ball dropped from 100 cm bouncing to half its height goes 100, 50, 25: a GP with r = ½.'
     - teach: 'The nth term multiplies the first term by r, (n − 1) times: tₙ = a × r^(n − 1). For 3, 6, 12, …: t₆ = 3 × 2⁵ = 96. An AP adds; a GP multiplies, so a GP grows much faster.'
       picture:
         kind: bars
@@ -734,6 +892,27 @@ concepts:
         - '14'
         answer: '135'
         why: 5 × 3³ = 5 × 27 = 135.
+      ways:
+      - style: visual
+        teach: 3, 6, 12, … grows much faster than an AP.
+        picture:
+          kind: bars
+          bars:
+          - label: t₁
+            value: 3
+          - label: t₂
+            value: 6
+          - label: t₃
+            value: 12
+          - label: t₄
+            value: 24
+          - label: t₅
+            value: 48
+          - label: t₆
+            value: 96
+          alt: The terms 3, 6, 12, 24, 48 and 96 double each time; the sixth term is 96.
+      - style: step_by_step
+        teach: 'Step 1: a = 3, r = 6 ÷ 3 = 2. Step 2: For the 6th term, multiply by r five times. Step 3: 2⁵ = 32. Step 4: t₆ = 3 × 32 = 96.'
     - teach: 'Tower of Hanoi: to move n discs, move the top n − 1 off, move the biggest disc once, then move the n − 1 back on. So Mₙ = 2Mₙ₋₁ + 1, giving 1, 3, 7, 15, … = 2ⁿ − 1. Fractals like the Sierpinski triangle also grow as a GP: 1, 3, 9, 27 triangles.'
       check:
         prompt: How many moves are needed for 4 discs?
@@ -743,6 +922,24 @@ concepts:
         - '8'
         answer: '15'
         why: 2⁴ − 1 = 15.
+      ways:
+      - style: visual
+        teach: 'Tower of Hanoi: the fewest moves for 1, 2, 3, 4 discs.'
+        picture:
+          kind: bars
+          bars:
+          - label: 1 disc
+            value: 1
+          - label: 2 discs
+            value: 3
+          - label: 3 discs
+            value: 7
+          - label: 4 discs
+            value: 15
+          unit: moves
+          alt: '1 disc needs 1 move, 2 discs 3, 3 discs 7, 4 discs 15: each is one less than a power of 2.'
+      - style: step_by_step
+        teach: 'Step 1: Move the top n − 1 discs to the spare peg (Mₙ₋₁ moves). Step 2: Move the biggest disc once. Step 3: Move the n − 1 discs back on top (Mₙ₋₁ again). Step 4: Mₙ = 2Mₙ₋₁ + 1: 1, 3, 7, 15 … = 2ⁿ − 1.'
   items:
   - prompt: What is the common ratio of 5, 15, 45, 135, …?
     answer: '3'
@@ -904,3 +1101,37 @@ concepts:
     mistakes:
       '36': halve_each_bounce
       '16': halve_each_bounce
+  - prompt: 'Assertion (A): The sequence 2, 6, 18, 54, … is an AP.
+
+      Reason (R): Each term of 2, 6, 18, 54 is 3 times the one before.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'The differences are 4, 12, 36, not equal, so it is not an AP: A is false. R is true: it is a GP with r = 3.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: Bacteria in a dish double every hour, starting with 50. How many are there after 5 hours?'
+    options:
+    - '1600'
+    - '300'
+    - '800'
+    answer: '1600'
+    hints:
+    - After 1 hour there are 100.
+    - 50 × 2⁵.
+    solution: 50 × 2⁵ = 50 × 32 = 1600.
+    mistakes:
+      '300': gp_multiply_not_add
+      '800': gp_count_terms
+    exam: case
+    difficulty: 2

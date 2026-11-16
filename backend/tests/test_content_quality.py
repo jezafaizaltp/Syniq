@@ -901,6 +901,28 @@ def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions()
     assert not wrong_style, wrong_style
 
 
+CBSE9 = {"cbse9-eng", "cbse9-hin", "cbse9-math", "cbse9-sci", "cbse9-ss"}
+
+
+def test_every_cbse9_step_has_more_ways_and_every_topic_board_style_questions():
+    """CBSE Class 9 (the 2026-27 books): every lesson step can be taught at least three ways, one of them drawn, and
+    every topic has at least one question in a CBSE board format (assertion-reason allowed here)."""
+    thin, no_exam = [], []
+    for path, pack in PACKS:
+        if code_of(pack) not in CBSE9:
+            continue
+        for c in pack["concepts"]:
+            for n, step in enumerate(c.get("lesson") or [], start=1):
+                ways = step.get("ways") or []
+                pictured = bool(step.get("picture")) or any(w.get("picture") for w in ways)
+                if len(ways) < 2 or not pictured:
+                    thin.append(f"{rel(path)} {c['code']} step {n}")
+            if not {i.get("exam") for i in c["items"]} - {None}:
+                no_exam.append(f"{rel(path)} {c['code']}")
+    assert not thin, thin
+    assert not no_exam, no_exam
+
+
 def test_assertion_reason_questions_use_the_standard_choices():
     bad = [
         f"{rel(path)}: {item['prompt'][:50]}"

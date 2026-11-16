@@ -18,6 +18,8 @@ tips:
   m3_to_litres: "Find the volume in m³ first, then remember 1 m³ holds 1000 litres."
   sphere_volume: "Volume of a sphere = (4/3)πr³. Cube the radius (21 × 21 × 21) before multiplying."
   volume_lbh: "Volume = length × breadth × height. Area of the faces is a different thing."
+  pqc9m14_open_top: An open tank has no lid. Which faces actually need sheet metal?
+  pqc9m14_litres: 1 m³ holds 1000 litres. Convert after finding the volume.
 concepts:
 - code: cbse9gm.solid.cuboid_cylinder
   title: Cuboids and cylinders
@@ -124,6 +126,24 @@ concepts:
         - 76 cm³
         answer: 40 cm³
         why: 5 × 4 × 2 = 40. (76 cm² is its surface area.)
+      ways:
+      - style: visual
+        teach: A cuboid's 6 faces come in 3 matching pairs.
+        picture:
+          kind: compare
+          columns:
+          - title: top + bottom
+            points:
+            - 2 × l × w
+          - title: front + back
+            points:
+            - 2 × l × h
+          - title: two sides
+            points:
+            - 2 × w × h
+          alt: Top and bottom give 2 l w, front and back 2 l h, the two sides 2 w h; together the surface area 2 of l w plus w h plus h l.
+      - style: step_by_step
+        teach: 'Step 1: Write l, w, h. Step 2: Work out lw, wh and hl. Step 3: Add them and double for surface area. Step 4: Multiply l × w × h for volume. Check units: cm² for area, cm³ for volume.'
     - teach: 'A cube of side a has 6 equal square faces: surface area 6a², volume a³. A cylinder of radius r and height h: unroll its curved side and you get a rectangle 2πr long and h high, so curved surface area = 2πrh. Add the two circles for the total: 2πr(h + r). Volume = πr²h.'
       check:
         prompt: A cylinder has r = 7 cm and h = 5 cm. Curved surface area (π = 22/7)?
@@ -133,6 +153,19 @@ concepts:
         - 154 cm²
         answer: 220 cm²
         why: 2 × 22/7 × 7 × 5 = 220.
+      ways:
+      - style: visual
+        teach: Unrolling a cylinder's side gives a rectangle 2πr by h.
+        picture:
+          kind: flow
+          steps:
+          - cylinder, radius r, height h
+          - cut down the side and unroll
+          - rectangle 2πr × h
+          - curved area = 2πrh
+          alt: Cutting the curved side of a cylinder and unrolling it gives a rectangle 2 pi r long and h high, so its area is 2 pi r h.
+      - style: real_world
+        teach: 'The label on a tin is the curved surface: peel it off and it is a rectangle as long as the tin''s rim and as tall as the tin. The lid and base are the two circles you add for the total area.'
     - teach: 'Units: area in cm² or m², volume in cm³ or m³. 1 litre = 1000 cm³ and 1 m³ = 1000 litres. Before calculating a real object, guess: a classroom bucket holds about 10 litres, a water tank on a roof about 1000.'
       check:
         prompt: A tank holds 2 m³. How many litres is that?
@@ -142,6 +175,23 @@ concepts:
         - '20'
         answer: '2000'
         why: 1 m³ = 1000 L.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the volume in cm³ or m³. Step 2: To get litres, divide cm³ by 1000, or multiply m³ by 1000. Step 3: Sense-check: a bucket is about 10 L, a roof tank about 1000 L.'
+      - style: real_world
+        teach: 'A 2 m × 1 m × 0.5 m water tank holds 1 m³, which is 1000 litres: about 100 buckets. If your answer for a tank says 3 litres, you have probably forgotten a unit change.'
+      - style: visual
+        teach: Rough sizes of everyday containers, to check your answers.
+        picture:
+          kind: bars
+          bars:
+          - label: glass (L)
+            value: 0.25
+          - label: bucket (L)
+            value: 10
+          - label: roof tank (L)
+            value: 1000
+          alt: A glass holds about a quarter of a litre, a bucket about 10 litres and a roof tank about 1000 litres.
   items:
   - prompt: Find the volume of a cuboid 8 cm long, 5 cm wide and 3 cm high, in cm³.
     answer: '120'
@@ -296,6 +346,55 @@ concepts:
     mistakes:
       '8.8': csa_cylinder_2pirh
       '88': volume_used_diameter
+  - prompt: 'Assertion (A): The total surface area of a cube of side 5 cm is 150 cm².
+
+      Reason (R): A cube has 6 equal square faces.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 6 × 5² = 6 × 25 = 150 cm², so A is true; R gives the reason we multiply one face by 6.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: An open (no lid) water tank is 4 m long, 3 m wide and 2 m deep. How much sheet metal is needed to make it?'
+    options:
+    - 40 m²
+    - 52 m²
+    - 24 m²
+    answer: 40 m²
+    hints:
+    - 'Faces: base + 4 walls. No top.'
+    - Base 4 × 3; walls 2(4 × 2) + 2(3 × 2).
+    solution: Base = 12 m²; walls = 16 + 12 = 28 m²; total 40 m².
+    mistakes:
+      52 m²: pqc9m14_open_top
+      24 m²: volume_lbh
+    exam: case
+    difficulty: 2
+  - prompt: A cylindrical tank has radius 1.4 m and height 2 m. How many litres does it hold? (π = 22/7)
+    options:
+    - '12320'
+    - '12.32'
+    - '1232'
+    answer: '12320'
+    hints:
+    - V = πr²h in m³.
+    - Then multiply by 1000 for litres.
+    solution: V = 22/7 × 1.4 × 1.4 × 2 = 12.32 m³ = 12,320 litres.
+    mistakes:
+      '12.32': pqc9m14_litres
+      '1232': m3_to_litres
+    exam: short
+    difficulty: 2
 - code: cbse9gm.solid.cone
   title: Right circular cone
   notes: |
@@ -438,6 +537,34 @@ concepts:
         - 7 cm
         answer: 13 cm
         why: √(25 + 144) = √169 = 13.
+      ways:
+      - style: visual
+        teach: Radius, height and slant height make a right triangle.
+        picture:
+          kind: geometry
+          points:
+            apex:
+            - 5
+            - 9
+            centre:
+            - 5
+            - 1
+            edge:
+            - 9
+            - 1
+          segments:
+          - - apex
+            - centre
+            - h
+          - - centre
+            - edge
+            - r
+          - - apex
+            - edge
+            - l
+          alt: Inside a cone, the height h from apex to centre, the radius r along the base and the slant height l along the side form a right triangle.
+      - style: step_by_step
+        teach: 'Step 1: Spot r and h. Step 2: Square both and add. Step 3: Take the square root: that is l. For r = 6, h = 8: 36 + 64 = 100, l = 10. Use l for surface area, h for volume.'
     - teach: The curved surface of a cone unrolls into a sector, with area πrl. Add the base circle πr² for the total surface area πr(l + r). Note it uses l, not h.
       check:
         prompt: r = 7, l = 10. Curved surface area (π = 22/7)?
@@ -447,6 +574,28 @@ concepts:
         - '374'
         answer: '220'
         why: 22/7 × 7 × 10 = 220.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Curved surface area = πrl (no 2 in front). Step 2: Base circle = πr². Step 3: Total = πrl + πr² = πr(l + r). Step 4: A cone-shaped tent has no base on the ground, so use only πrl for its canvas.'
+      - style: real_world
+        teach: 'A birthday cap is the curved surface of a cone. Cut along its side and lay it flat: you get a fan-shaped piece of a circle, a sector. Its area is πrl, the paper you need.'
+      - style: visual
+        teach: A cone's curved surface unrolls into a sector; the base is a circle.
+        picture:
+          kind: compare
+          columns:
+          - title: Curved surface
+            points:
+            - unrolls to a sector
+            - πrl
+          - title: Base
+            points:
+            - a circle
+            - πr²
+          - title: Total
+            points:
+            - πr(l + r)
+          alt: A cone's curved surface unrolls into a sector of area pi r l; its base is a circle of area pi r squared; the total is pi r times l plus r.
     - teach: 'A cone holds exactly one third of a cylinder with the same base and height: V = ⅓πr²h. Three full cones of water fill the matching cylinder. The volume uses the height h, not the slant height.'
       check:
         prompt: A cylinder of the same base and height holds 600 cm³. How much does the cone hold?
@@ -456,6 +605,19 @@ concepts:
         - 1800 cm³
         answer: 200 cm³
         why: One third of 600.
+      ways:
+      - style: visual
+        teach: Three cones of water exactly fill the matching cylinder.
+        picture:
+          kind: bars
+          bars:
+          - label: cone
+            value: 1
+          - label: cylinder
+            value: 3
+          alt: A cone holds one part and a cylinder with the same base and height holds three parts, so the cone is one third.
+      - style: real_world
+        teach: 'An ice-cream cone and a cup of the same width and height: the cup holds three times as much ice cream. That is why the cone''s volume formula has ⅓ in front.'
   items:
   - prompt: A cone has radius 6 cm and height 8 cm. Find its slant height in cm.
     answer: '10'
@@ -611,6 +773,40 @@ concepts:
     mistakes:
       '550': cone_csa_pirl
       '2750': cone_csa_pirl
+  - prompt: 'Assertion (A): The volume of a cone of radius 3 cm and height 4 cm is 12π cm³.
+
+      Reason (R): The volume of a cone is ⅓πr²l, where l is the slant height.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is true, but R is false
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'V = ⅓π × 9 × 4 = 12π cm³, so A is true. R is false: the volume uses the vertical height h, not the slant height l.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_r
+      Both A and R are true, but R does not explain A: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A conical tent is 8 m high with base radius 6 m. How much canvas is needed (no floor)? (Use π = 3.14)'
+    options:
+    - 188.4 m²
+    - 301.44 m²
+    - 150.72 m²
+    answer: 188.4 m²
+    hints:
+    - l = √(6² + 8²).
+    - Canvas = πrl.
+    solution: l = 10 m; canvas = 3.14 × 6 × 10 = 188.4 m².
+    mistakes:
+      301.44 m²: cone_base
+      150.72 m²: slant_not_height
+    exam: case
+    difficulty: 2
 - code: cbse9gm.solid.sphere
   title: Sphere and hemisphere
   after:
@@ -705,6 +901,19 @@ concepts:
         - 1437 cm²
         answer: 616 cm²
         why: 4 × 22/7 × 49 = 616.
+      ways:
+      - style: visual
+        teach: A sphere's surface is four of its biggest circles.
+        picture:
+          kind: bars
+          bars:
+          - label: circle πr²
+            value: 1
+          - label: sphere 4πr²
+            value: 4
+          alt: A sphere's surface area is four times the area of a circle with the same radius.
+      - style: step_by_step
+        teach: 'Step 1: Find r (halve a diameter). Step 2: Surface area = 4πr². Step 3: Volume = (4/3)πr³: cube r first, then multiply by 4π, then divide by 3. For r = 7: area 616 cm², volume about 1437 cm³.'
     - teach: 'A hemisphere is half a sphere. Its curved surface is half of 4πr², so 2πr². A solid hemisphere also has a flat circle πr² on top: total 3πr². A bowl is open, so only the curved part counts. Volume of a hemisphere = (2/3)πr³.'
       picture:
         kind: compare
@@ -727,6 +936,23 @@ concepts:
         - 616 cm²
         answer: 462 cm²
         why: 3 × 22/7 × 49 = 462.
+      ways:
+      - style: visual
+        teach: A solid hemisphere has a flat top; an open bowl does not.
+        picture:
+          kind: compare
+          columns:
+          - title: Solid hemisphere
+            points:
+            - curved 2πr²
+            - + flat top πr²
+            - = 3πr²
+          - title: Bowl (open)
+            points:
+            - curved 2πr² only
+          alt: A solid hemisphere has a curved part 2 pi r squared plus a flat top pi r squared, 3 pi r squared in all; an open bowl has only the curved 2 pi r squared.
+      - style: real_world
+        teach: To paint the inside of a hemispherical bowl you only cover the curved part, 2πr². To paint a solid half-ball paperweight all over, you also cover the flat circle, so 3πr².
     - teach: 'Watch for diameter: a ball of diameter 14 cm has r = 7. Using 14 as r makes the surface area 4 times too big and the volume 8 times too big.'
       check:
         prompt: A ball has diameter 6 cm. Which radius do you use?
@@ -736,6 +962,23 @@ concepts:
         - 12 cm
         answer: 3 cm
         why: Radius is half the diameter.
+      ways:
+      - style: visual
+        teach: Using the diameter as r makes area 4× and volume 8× too big.
+        picture:
+          kind: bars
+          bars:
+          - label: right area
+            value: 1
+          - label: wrong area
+            value: 4
+          - label: right volume
+            value: 1
+          - label: wrong volume
+            value: 8
+          alt: If the diameter is used instead of the radius, the area comes out 4 times too big and the volume 8 times too big.
+      - style: step_by_step
+        teach: 'Step 1: Read the question: radius or diameter? Step 2: If diameter, halve it. Step 3: Write r = … before any formula. Step 4: Check: a 14 cm ball should hold about 1.4 litres, not 11.'
   items:
   - prompt: Find the surface area of a sphere of radius 7 cm (π = 22/7), in cm².
     answer: '616'
@@ -891,3 +1134,37 @@ concepts:
     mistakes:
       '5.749': m3_to_litres
       '11499': hemisphere_volume
+  - prompt: 'Assertion (A): If the radius of a sphere is doubled, its volume becomes 8 times.
+
+      Reason (R): The volume of a sphere is proportional to the cube of its radius.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: V = (4/3)πr³; doubling r multiplies r³ by 2³ = 8. A is true and R explains it.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: A hemispherical bowl has inner diameter 10.5 cm. How much milk can it hold, in cm³? (π = 22/7)
+    options:
+    - '303.19'
+    - '2425.5'
+    - '606.38'
+    answer: '303.19'
+    hints:
+    - r = 5.25 cm.
+    - Volume = (2/3)πr³.
+    solution: V = 2/3 × 22/7 × 5.25³ ≈ 303.19 cm³ (about 0.303 litres).
+    mistakes:
+      '2425.5': volume_used_diameter
+      '606.38': hemisphere_volume
+    exam: short
+    difficulty: 2

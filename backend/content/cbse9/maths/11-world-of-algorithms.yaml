@@ -13,6 +13,7 @@ tips:
   euclid_continue: "Divide, keep the remainder, then divide the old divisor by it. Stop when the remainder is 0."
   euclid_remainder: "Divide the big number by the small one: how many whole 18s fit in 48, and what is left?"
   euclid_speed: "Both methods give the same GCD. Think about how many steps each needs when the numbers are huge."
+  pqc9m11_last_divisor: Keep going until a remainder is 0. The GCD is the number you divided by at that last step.
 concepts:
 - code: cbse9gm.algo.basics
   title: Algorithms, divisors and the GCD
@@ -69,6 +70,22 @@ concepts:
         - Guess a number you like
         answer: To double a number, add it to itself
         why: It is a clear step that works for every number.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is every instruction exact, with no ''some'' or ''a bit''? Step 2: Does it end after a finite number of steps? Step 3: Does it work for every input, not just one? Three yeses make it an algorithm.'
+      - style: real_world
+        teach: 'Directions ''walk 200 m, turn left at the temple, third house'' are an algorithm: exact and finite. ''Go towards the market and ask around'' is not, because two people could follow it and end up in different places.'
+      - style: visual
+        teach: 'Column addition as an algorithm: the same exact steps for every sum.'
+        picture:
+          kind: flow
+          steps:
+          - add the units
+          - write the units digit
+          - carry the tens
+          - move one column left
+          - repeat until done
+          alt: 'Column addition: add the units, write the units digit, carry the tens, move left and repeat until every column is done.'
     - teach: 'The greatest common divisor (GCD) of two numbers is the biggest number that divides both. One algorithm: list the divisors of each, then pick the largest common one. Divisors of 12: 1, 2, 3, 4, 6, 12. Of 18: 1, 2, 3, 6, 9, 18. GCD = 6.'
       picture:
         kind: compare
@@ -92,6 +109,25 @@ concepts:
         - '40'
         answer: '4'
         why: 'Divisors of 8: 1, 2, 4, 8. Of 20: 1, 2, 4, 5, 10, 20. Largest common: 4.'
+      ways:
+      - style: visual
+        teach: Divisors of 12 and 18 side by side; the biggest shared one is the GCD.
+        picture:
+          kind: compare
+          columns:
+          - title: Divisors of 12
+            points:
+            - 1, 2, 3, 4, 6, 12
+          - title: Divisors of 18
+            points:
+            - 1, 2, 3, 6, 9, 18
+          - title: Common
+            points:
+            - 1, 2, 3, 6
+            - 'largest: 6'
+          alt: 12 and 18 share the divisors 1, 2, 3 and 6; the largest is 6, the GCD.
+      - style: real_world
+        teach: 'You have 12 laddoos and 18 jalebis and want identical plates with nothing left over. The most plates you can make is the GCD: 6 plates, each with 2 laddoos and 3 jalebis.'
     - teach: 'Divisors come in pairs: 36 = 1 × 36 = 2 × 18 = 3 × 12 = 4 × 9 = 6 × 6. One number of each pair is at most √36 = 6, so you only need to test up to √n. Still, for huge numbers listing is slow. A good algorithm is correct AND efficient.'
       check:
         prompt: To list the divisors of 100, up to which number must you test?
@@ -101,6 +137,20 @@ concepts:
         - '100'
         answer: '10'
         why: √100 = 10; each divisor above 10 pairs with one below.
+      ways:
+      - style: visual
+        teach: Divisor pairs of 36 meet in the middle, at √36 = 6.
+        picture:
+          kind: flow
+          steps:
+          - 1 × 36
+          - 2 × 18
+          - 3 × 12
+          - 4 × 9
+          - 6 × 6
+          alt: The divisor pairs of 36 are 1 and 36, 2 and 18, 3 and 12, 4 and 9, and 6 and 6; the small numbers never go past 6.
+      - style: step_by_step
+        teach: 'Step 1: Find √n (for 100, it is 10). Step 2: Test each number from 1 to √n. Step 3: Each one that divides gives a pair: the number and n ÷ number. Step 4: Stop at √n; you have every divisor.'
   items:
   - prompt: Find the GCD of 18 and 24.
     answer: '6'
@@ -276,6 +326,21 @@ concepts:
     mistakes:
       '6': gcd_vs_lcm
       '360': gcd_vs_lcm
+  - prompt: 'Situation: A florist has 36 roses and 60 lilies and wants identical bunches with no flowers left. What is the greatest number of bunches?'
+    options:
+    - '12'
+    - '6'
+    - '180'
+    answer: '12'
+    hints:
+    - Each bunch must share both 36 and 60 equally.
+    - Find the GCD of 36 and 60.
+    solution: GCD(36, 60) = 12, so 12 bunches, each with 3 roses and 5 lilies.
+    mistakes:
+      '6': euclid_stop_early
+      '180': gcd_vs_lcm
+    exam: case
+    difficulty: 2
 - code: cbse9gm.algo.euclid
   title: Euclid's algorithm for the GCD
   after:
@@ -351,6 +416,20 @@ concepts:
         - GCD(20, 2)
         answer: GCD(20, 30)
         why: 50 − 20 = 30, and the GCD doesn't change.
+      ways:
+      - style: visual
+        teach: Subtract the smaller from the larger until the two match.
+        picture:
+          kind: flow
+          steps:
+          - (30, 12)
+          - (18, 12)
+          - (12, 6)
+          - (6, 6)
+          - GCD = 6
+          alt: From 30 and 12, subtract to get 18 and 12, then 12 and 6, then 6 and 6, so the GCD is 6.
+      - style: real_world
+        teach: 'Cutting a 30 × 12 paper strip into squares: cut off 12 × 12 squares until a 6 × 12 piece is left, then cut 6 × 6 squares. The last square size, 6, is the GCD.'
     - teach: Subtracting many times is the same as dividing and keeping the remainder. So GCD(a, b) = GCD(b, r), where r is the remainder of a ÷ b. Repeat until the remainder is 0; the last divisor is the GCD.
       picture:
         kind: flow
@@ -369,6 +448,18 @@ concepts:
         - '2'
         answer: '28'
         why: 100 = 2 × 36 + 28.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Divide the bigger by the smaller and note the remainder. Step 2: Replace the pair by (smaller, remainder). Step 3: Repeat. Step 4: When the remainder is 0, the divisor at that step is the GCD.'
+      - style: visual
+        teach: Euclid's algorithm for 84 and 36, one division per line.
+        picture:
+          kind: flow
+          steps:
+          - 84 = 2 × 36 + 12
+          - 36 = 3 × 12 + 0
+          - GCD = 12
+          alt: 84 divided by 36 leaves 12; 36 divided by 12 leaves 0, so the GCD of 84 and 36 is 12.
     - teach: 'Euclid''s algorithm is fast: the numbers shrink quickly, so even huge numbers need only a few steps, while listing divisors would take ages. It solves real problems like the largest tile that fits a floor exactly.'
       check:
         prompt: In Euclid's algorithm, when do you stop?
@@ -378,6 +469,23 @@ concepts:
         - After three steps
         answer: When the remainder is 0
         why: Then the last divisor is the GCD.
+      ways:
+      - style: visual
+        teach: Listing divisors versus Euclid, for numbers near a million.
+        picture:
+          kind: compare
+          columns:
+          - title: Listing divisors
+            points:
+            - test up to 1000 numbers
+            - slow
+          - title: Euclid
+            points:
+            - about 30 divisions at most
+            - fast
+          alt: For numbers near a million, listing divisors needs up to a thousand tests, while Euclid needs only a few dozen divisions.
+      - style: real_world
+        teach: 'Tiling a 391 cm by 299 cm floor with the largest square tiles that fit exactly: Euclid finds GCD = 23 in three divisions, so 23 cm tiles. Listing divisors of 391 and 299 would take far longer.'
   items:
   - prompt: In Euclid's algorithm for 48 and 18, what is the first remainder?
     answer: '12'
@@ -544,3 +652,37 @@ concepts:
     mistakes:
       '36': euclid_stop_early
       '840': gcd_vs_lcm
+  - prompt: 'Assertion (A): GCD(a, b) = GCD(b, r), where r is the remainder when a is divided by b.
+
+      Reason (R): Any number dividing both a and b also divides a − qb = r.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Since r = a − qb, every common divisor of a and b divides r, and every common divisor of b and r divides a. So the common divisors are the same: A is true and R explains it.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Use Euclid''s algorithm: what is GCD(135, 225)?'
+    options:
+    - '45'
+    - '90'
+    - '15'
+    answer: '45'
+    hints:
+    - 225 = 1 × 135 + 90.
+    - Then 135 = 1 × 90 + 45, and continue.
+    solution: 225 = 1 × 135 + 90; 135 = 1 × 90 + 45; 90 = 2 × 45 + 0. GCD = 45.
+    mistakes:
+      '90': pqc9m11_last_divisor
+      '15': euclid_continue
+    exam: short
+    difficulty: 2

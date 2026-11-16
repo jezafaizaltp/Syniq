@@ -18,6 +18,7 @@ tips:
   rational_plus_irrational: "If √2 + 3 were rational, subtracting 3 would make √2 rational. Is it?"
   simplify_root_first: "Simplify each square root first. If the inside is a perfect square (or a fraction of perfect squares), the root is rational."
   c9m3_terminating_denominator: A fraction in lowest terms has a terminating decimal only when its bottom has no prime factors other than 2 and 5. Simplify first, then factorise the bottom.
+  pqc9m3_lowest_first: Cancel the fraction to lowest terms before you look at the bottom's prime factors.
 concepts:
 - code: cbse9gm.numbers.rational_irrational
   title: Rational and irrational numbers
@@ -104,6 +105,19 @@ concepts:
         - No, it is an integer
         answer: Yes, it is −7/1
         why: Any integer n can be written n/1, so it is rational.
+      ways:
+      - style: visual
+        teach: Each family of numbers contains the one before it.
+        picture:
+          kind: flow
+          steps:
+          - 'natural: 1, 2, 3, …'
+          - 'whole: add 0'
+          - 'integers: add −1, −2, …'
+          - 'rational: all p/q, q ≠ 0'
+          alt: Natural numbers grow into whole numbers by adding 0, into integers by adding negatives, and into rational numbers by adding all fractions.
+      - style: real_world
+        teach: 'Think of family photos: a child''s photo, then the family, then the whole street. Natural numbers sit inside whole numbers, which sit inside integers, which sit inside rationals. 5 belongs to all of them, because 5 = 5/1.'
     - teach: 'Some numbers on the number line can never be written as p/q: √2, √3, √5, π. These are irrational. A square root of a whole number is rational only when the number is a perfect square: √49 = 7, but √50 is irrational.'
       picture:
         kind: number_line
@@ -128,6 +142,11 @@ concepts:
         - '0.25'
         answer: √10
         why: 10 is not a perfect square, so √10 can't be written as a fraction.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look at the number under the root. Step 2: Is it a perfect square (1, 4, 9, 16, 25, 36, 49…)? Step 3: If yes, the root is a whole number and rational: √49 = 7. Step 4: If no, the root is irrational: √50 lies between 7 and 8 and never ends.'
+      - style: real_world
+        teach: 'A square plot of 49 m² has a side of exactly 7 m, which you can measure with a tape. A plot of 50 m² has a side of √50 m: about 7.07…, and the digits never stop or repeat, so no fraction measures it exactly.'
     - teach: 'Rational and irrational numbers together are the real numbers, and every point on the number line is one of them. Between any two rationals there is always another: their average. So there are infinitely many rationals between any two.'
       check:
         prompt: Which rational number lies between 1/3 and 1/2?
@@ -137,6 +156,23 @@ concepts:
         - 5/6
         answer: 5/12
         why: 'Their average: (4/12 + 6/12) ÷ 2 = 5/12.'
+      ways:
+      - style: visual
+        teach: 'Between 1/2 and 1 there is always another rational: their average.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 1
+          points:
+          - at: 0.5
+            label: ½
+          - at: 0.75
+            label: ¾
+          - at: 1
+            label: '1'
+          alt: Three quarters lies halfway between one half and 1, and the process can go on forever.
+      - style: step_by_step
+        teach: 'Step 1: Take two rationals, ½ and 1. Step 2: Average them: (½ + 1) ÷ 2 = ¾. Step 3: Average ½ and ¾: 5/8. Step 4: You can keep going forever, so there are infinitely many rationals between any two.'
   items:
   - prompt: Which of these is irrational?
     options:
@@ -340,6 +376,40 @@ concepts:
     solution: √2 − √2 = 0, which is rational. So two irrationals can add up to a rational.
     mistakes:
       An irrational number: rational_plus_irrational
+  - prompt: 'Assertion (A): √64 is an irrational number.
+
+      Reason (R): The square root of a whole number is irrational unless the number is a perfect square.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: '64 is a perfect square, so √64 = 8, which is rational: A is false. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A square garden has an area of 75 m². Is its side length rational or irrational?'
+    options:
+    - Irrational, because 75 is not a perfect square
+    - Rational, because 75 is a whole number
+    - Rational, because the side is about 8.66 m
+    answer: Irrational, because 75 is not a perfect square
+    hints:
+    - Side = √75.
+    - Is 75 a perfect square?
+    solution: Side = √75 = 5√3, and 75 is not a perfect square, so the side is irrational.
+    mistakes:
+      Rational, because 75 is a whole number: rational_perfect_square
+      Rational, because the side is about 8.66 m: irrational_decimal
+    exam: case
+    difficulty: 2
 - code: cbse9gm.numbers.decimals
   title: Decimal expansions
   after:
@@ -421,6 +491,24 @@ concepts:
         - Non-recurring
         answer: Non-terminating recurring
         why: The 6 repeats forever.
+      ways:
+      - style: visual
+        teach: Every rational number's decimal either stops or repeats.
+        picture:
+          kind: compare
+          columns:
+          - title: Terminating
+            points:
+            - 3/8 = 0.375
+            - the division stops
+          - title: Recurring
+            points:
+            - 2/3 = 0.666…
+            - 5/11 = 0.4545…
+            - a block repeats forever
+          alt: 3/8 is 0.375 and stops; 2/3 and 5/11 go on with a repeating block.
+      - style: step_by_step
+        teach: 'Step 1: Divide the top by the bottom by long division. Step 2: If you reach remainder 0, the decimal terminates. Step 3: If a remainder comes back that you have seen before, the digits will repeat from there. 2 ÷ 3 keeps leaving remainder 2, so 0.666…'
     - teach: 'Which fractions terminate? Write the fraction in lowest terms and factorise the bottom. If its only prime factors are 2 and 5, the decimal terminates: 7/20 (20 = 2² × 5) is 0.35. If any other prime appears, like 3 or 7, it recurs: 1/12 recurs because 12 = 2² × 3.'
       picture:
         kind: compare
@@ -444,6 +532,11 @@ concepts:
         - 4/15
         answer: 9/40
         why: 40 = 2³ × 5, only 2s and 5s.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the fraction in lowest terms: 14/40 = 7/20. Step 2: Factorise the bottom: 20 = 2 × 2 × 5. Step 3: Only 2s and 5s? Then it terminates: 0.35. Step 4: For 1/12, 12 = 2 × 2 × 3: the 3 makes it recur.'
+      - style: real_world
+        teach: Money is counted in tenths and hundredths, which come from 10 = 2 × 5. A bill split between 4 or 5 people works out exactly (2s and 5s). Split ₹100 among 3 and you get ₹33.333…, because 3 is not a factor of any power of 10.
     - teach: 'To turn a recurring decimal into a fraction, multiply to shift the repeating block and subtract. x = 0.3636…: 100x = 36.3636…, so 99x = 36 and x = 36/99 = 4/11. One digit repeating: use 10x; two digits: 100x.'
       check:
         prompt: x = 0.555… What is 10x − x?
@@ -453,6 +546,19 @@ concepts:
         - '50'
         answer: '5'
         why: 10x = 5.555… minus x = 0.555… leaves 5, so 9x = 5 and x = 5/9.
+      ways:
+      - style: visual
+        teach: Turning 0.3636… into a fraction by shifting and subtracting.
+        picture:
+          kind: flow
+          steps:
+          - x = 0.3636…
+          - 100x = 36.3636…
+          - '100x − x: 99x = 36'
+          - x = 36/99 = 4/11
+          alt: Multiply by 100 to shift the repeating block, subtract the original, and get 99x = 36, so x is 4 over 11.
+      - style: real_world
+        teach: 'Two copies of the same long train, one shifted forward by two coaches, line up perfectly after the front. Subtracting them leaves just the front part. Multiplying 0.3636… by 100 and subtracting does the same: the endless tails cancel.'
     - teach: 'Irrational numbers have decimals that never end and never settle into a repeat: √2 = 1.41421356…, π = 3.14159265… That is the decimal test for irrational.'
       check:
         prompt: A decimal goes on forever with no repeating block. What is the number?
@@ -462,6 +568,24 @@ concepts:
         - An integer
         answer: Irrational
         why: Non-terminating and non-recurring decimals belong to irrational numbers.
+      ways:
+      - style: visual
+        teach: 'The decimal test: rational numbers stop or repeat, irrational numbers do neither.'
+        picture:
+          kind: compare
+          columns:
+          - title: Rational
+            points:
+            - 0.375 (stops)
+            - 0.4545… (repeats)
+          - title: Irrational
+            points:
+            - √2 = 1.41421356…
+            - π = 3.14159265…
+            - never ends, never repeats
+          alt: Rational decimals stop or repeat; irrational ones like root 2 and pi never end and never repeat.
+      - style: step_by_step
+        teach: 'Step 1: Look at the decimal. Step 2: Does it stop? Rational. Step 3: Does a block repeat forever? Rational. Step 4: Neither, going on without a pattern? Irrational. 0.101001000100001… has a pattern but no repeating block, so it is irrational.'
   items:
   - prompt: Write 0.777… (the 7 repeats) as a fraction. Type a fraction like 2/3.
     answer: 7/9
@@ -634,6 +758,40 @@ concepts:
     mistakes:
       '7': recurring_digits_count
       '1': recurring_digits_count
+  - prompt: 'Assertion (A): 13/250 has a terminating decimal expansion.
+
+      Reason (R): A fraction in lowest terms terminates if its denominator has no prime factors other than 2 and 5.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 250 = 2 × 5³, only 2s and 5s, so 13/250 = 0.052 terminates. R is the rule that explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Which of these fractions has a terminating decimal?
+    options:
+    - 21/60
+    - 5/12
+    - 4/9
+    answer: 21/60
+    hints:
+    - Cancel each fraction first.
+    - 21/60 = 7/20; look at 20's prime factors.
+    solution: 21/60 = 7/20 and 20 = 2² × 5, so it terminates (0.35). 12 and 9 contain 3.
+    mistakes:
+      5/12: c9m3_terminating_denominator
+      4/9: pqc9m3_lowest_first
+    exam: one_mark
+    difficulty: 2
 - code: cbse9gm.numbers.proof_spiral
   title: Proving √2 is irrational, and the square root spiral
   after:
@@ -685,6 +843,20 @@ concepts:
         - √3 = 3
         answer: √3 is rational, √3 = p/q in lowest terms
         why: We suppose the opposite of what we want to prove.
+      ways:
+      - style: real_world
+        teach: 'A detective says: ''Suppose the butler did it. Then he was in the kitchen at 9. But he was seen in town at 9. Impossible, so the butler didn''t do it.'' Proof by contradiction works the same way.'
+      - style: visual
+        teach: How a proof by contradiction is built, from the guess to the impossible end.
+        picture:
+          kind: flow
+          steps:
+          - 'want: statement S is true'
+          - suppose S is false
+          - reason step by step
+          - reach something impossible
+          - so S must be true
+          alt: To prove S, suppose it is false, reason until you hit an impossibility, and conclude S is true.
     - teach: 'Suppose √2 = p/q in lowest terms. Squaring: p² = 2q², so p² is even and p must be even (odd × odd is odd). Write p = 2k: 4k² = 2q², so q² = 2k² and q is even too. Both even means p/q was not in lowest terms: contradiction. So √2 is irrational.'
       picture:
         kind: flow
@@ -703,6 +875,20 @@ concepts:
         - Because q is even
         answer: An odd number squared is odd
         why: If p were odd, p² would be odd. So p² even forces p even.
+      ways:
+      - style: visual
+        teach: The √2 proof as a chain of steps ending in a contradiction.
+        picture:
+          kind: flow
+          steps:
+          - suppose √2 = p/q, lowest terms
+          - p² = 2q², so p is even
+          - p = 2k gives q² = 2k², so q is even
+          - 'both even: not lowest terms'
+          - 'contradiction: √2 is irrational'
+          alt: Assume root 2 is p over q in lowest terms; then p and q are both even, which contradicts lowest terms.
+      - style: real_world
+        teach: 'If a fraction is in lowest terms, the top and bottom share no factor, like 3/4. Finding that both p and q are even is like finding a ''lowest terms'' fraction that can still be halved: the claim breaks, so √2 can''t be such a fraction.'
     - teach: 'The square root spiral draws these lengths. Start with a right triangle with legs 1 and 1: hypotenuse √2. On that hypotenuse build another right triangle with the other leg 1: hypotenuse √3. Keep going: √4 = 2, √5, √6, … Each step uses √(n + 1) = √(n + 1²).'
       check:
         prompt: In the spiral, the triangle built on √7 has which hypotenuse?
@@ -712,6 +898,19 @@ concepts:
         - '8'
         answer: √8
         why: (√7)² + 1² = 8, so the hypotenuse is √8.
+      ways:
+      - style: visual
+        teach: The first steps of the square root spiral.
+        picture:
+          kind: flow
+          steps:
+          - legs 1, 1 → hypotenuse √2
+          - legs √2, 1 → √3
+          - legs √3, 1 → √4 = 2
+          - legs 2, 1 → √5
+          alt: Each new right triangle uses the last hypotenuse and a side of 1, giving root 2, root 3, 2 and root 5.
+      - style: step_by_step
+        teach: 'Step 1: Right triangle, legs 1 and 1: hypotenuse √(1 + 1) = √2. Step 2: New triangle on it, legs √2 and 1: √(2 + 1) = √3. Step 3: Again: √(3 + 1) = 2. Each step adds 1 under the root.'
   items:
   - prompt: In the proof that √2 is irrational, what do we suppose at the start?
     options:
@@ -916,3 +1115,37 @@ concepts:
     solution: If it were rational r, then √5 = 3 − r would be rational, which is false. So 3 − √5 is irrational.
     mistakes:
       Rational: rational_plus_irrational
+  - prompt: 'Assertion (A): In the square root spiral, the triangle after the one with hypotenuse √7 has hypotenuse √8.
+
+      Reason (R): Each new triangle has legs √n and 1, so its hypotenuse is √(n + 1).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'With legs √7 and 1, the hypotenuse is √(7 + 1) = √8: A is true and R explains it.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: In the proof that √2 is irrational, which fact gives the contradiction?
+    options:
+    - p and q both turn out even, though p/q was in lowest terms
+    - p² turns out negative
+    - q turns out to be 0
+    answer: p and q both turn out even, though p/q was in lowest terms
+    hints:
+    - What did we assume about p/q at the start?
+    - What did we find about p and q?
+    solution: 'We assumed lowest terms, then showed 2 divides both p and q: that contradicts the assumption.'
+    mistakes:
+      p² turns out negative: contradiction_start
+      q turns out to be 0: contradiction_start
+    exam: short
+    difficulty: 2
