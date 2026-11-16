@@ -83,6 +83,29 @@ def test_test_me_checks_the_answer_and_turns_a_mistake_into_the_way_in():
     assert "right" in chat.say(right2)["reply"]
 
 
+def test_a_new_question_while_test_me_waits_is_answered_not_marked():
+    anu = login("anu@demo.syniq")
+    chat = Chat(anu)
+    q = chat.say("Test me", "test")
+    with SessionLocal() as db:
+        right = db.get(Item, q["state"]["quiz"]).answer
+    r = chat.say("What does a square of a sum mean?")
+    assert "You said" not in r["reply"] and f"The answer is {right}" not in r["reply"]
+    assert r["state"].get("quiz") == q["state"]["quiz"]  # still waiting for their answer
+    # A short tentative answer is still an answer.
+    assert "You said" in chat.say("is it 12345?")["reply"]
+
+
+def test_asks_something_and_solution_steps():
+    from app.engine.responses import steps_from
+    from app.tutor_local import asks_something
+
+    assert asks_something("What is the discriminant?") and asks_something("why do we split the middle term")
+    assert not any(asks_something(t) for t in ("Yes", "x = 3", "-7", "is it 4?", "maybe 2"))
+    assert steps_from("x² = 4, so x = ±2; positive root 2.") == ["x² = 4", "so x = ±2", "positive root 2"]
+    assert steps_from("12 = 3 × 4 = 6 + 6") == ["12", "= 3 × 4", "= 6 + 6"]
+
+
 def test_hints_for_the_question_on_the_learn_page_never_give_the_answer():
     anu = login("anu@demo.syniq")
     concept = first_concept(anu)

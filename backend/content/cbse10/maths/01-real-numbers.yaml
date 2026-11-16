@@ -23,6 +23,13 @@ tips:
   c10m1_product_rule: For two numbers, HCF × LCM equals the product of the numbers. Rearrange that to find the missing one.
   c10m1_root_check: Is the number under the root a perfect square? If not, its square root cannot be written as a fraction.
   c10m1_mix_rule: "When a fraction is added to, taken from or multiplies (non-zero) a root that is not a whole number, can the root ever disappear? Check whether any roots cancel or combine into a perfect square."
+  c10m1_hcf_not_lcm: 'That would be the longest equal piece you could cut. Here you want the first time both counts meet: a number both go into.'
+  c10m1_product_not_lcm: Multiplying gives a common multiple, but not the first one. Look for a smaller number both divide.
+  c10m1_divide_by_hcf: 'That is the product of the two numbers. The product equals HCF × LCM, so one more step: divide by the HCF.'
+  c10m1_multiply_out: 'Multiply it out first: (a − b)(a + b) = a² − b². What is left?'
+  c10m1_join_roots: 'Join the roots into one: √a × √b = √(ab). Is the number under the root a perfect square?'
+  c10m1_irr_times_irr: 'Test it before believing it: write √2 × √8 as one root and work it out.'
+  c10m1_not_prime_fact: 'Check each factor: is every number in the product a prime?'
 
 concepts:
   - code: cbse10m.real.fundamental
@@ -143,6 +150,11 @@ concepts:
           - 2 × 3 × 60
           answer: 2³ × 3² × 5
           why: Three 2s, two 3s and one 5 multiply to 360.
+        ways:
+        - style: step_by_step
+          teach: 'Step 1: Divide by the smallest prime that goes in: 360 ÷ 2 = 180. Step 2: Keep dividing by 2: 180 → 90 → 45. Step 3: 45 is odd, so try 3: 45 → 15 → 5. Step 4: 5 is prime, so stop. Step 5: Collect the primes you divided by: 2 × 2 × 2 × 3 × 3 × 5 = 2³ × 3² × 5.'
+        - style: real_world
+          teach: Think of primes as bricks that cannot be broken any smaller. Every whole number is built from them, and each number has exactly one set of bricks. However you take 360 apart, you always find three 2-bricks, two 3-bricks and one 5-brick.
       - teach: 'To find the HCF, take each prime the numbers share, with its smallest power. To find the LCM, take every prime that appears, with its greatest power. For 12 = 2² × 3 and 18 = 2 × 3²: HCF = 2 × 3 = 6 and LCM = 2² × 3² = 36.'
         picture:
           kind: compare
@@ -166,6 +178,11 @@ concepts:
           - '216'
           answer: '36'
           why: 2² × 3² = 36.
+        ways:
+        - style: step_by_step
+          teach: 'Step 1: Write both as prime powers: 12 = 2² × 3 and 18 = 2 × 3². Step 2: HCF: for each prime they share, take the smaller power: 2¹ and 3¹, so HCF = 6. Step 3: LCM: for every prime that appears, take the bigger power: 2² and 3², so LCM = 36.'
+        - style: real_world
+          teach: 'Two bells ring every 12 and 18 minutes. They ring together again after the LCM, 36 minutes. If you cut ribbons of 12 m and 18 m into equal pieces that are as long as possible, each piece is the HCF, 6 m. Meeting again: LCM. Cutting equally: HCF.'
       - teach: 'For any two positive integers a and b, HCF(a, b) × LCM(a, b) = a × b. Check: 6 × 36 = 216 = 12 × 18. This shortcut works for two numbers only, not three.'
         check:
           prompt: HCF × LCM of 12 and 18 equals…
@@ -175,6 +192,20 @@ concepts:
           - 18 − 12
           answer: 12 × 18
           why: That is the product rule for two numbers.
+        ways:
+        - style: visual
+          teach: Line up the four numbers and multiply in pairs. The two products are always the same for two numbers.
+          picture:
+            kind: flow
+            steps:
+            - HCF(12, 18) = 6
+            - LCM(12, 18) = 36
+            - 6 × 36 = 216
+            - 12 × 18 = 216
+            - 'The same: HCF × LCM = a × b'
+            alt: HCF 6 times LCM 36 is 216, the same as 12 times 18.
+        - style: step_by_step
+          teach: 'Step 1: Find the easier one first, say HCF(12, 18) = 6. Step 2: LCM = (12 × 18) ÷ 6 = 216 ÷ 6 = 36. Step 3: Check: 6 × 36 = 216. Careful: with three numbers this fails. For 2, 3 and 4, HCF × LCM = 1 × 12 = 12, but 2 × 3 × 4 = 24.'
     items:
       - prompt: "Which is the prime factorisation of 140?"
         options: ["2² × 5 × 7", "2 × 5 × 14", "4 × 5 × 7", "2³ × 5 × 7"]
@@ -335,6 +366,92 @@ concepts:
         mistakes:
           '9': c10m1_ladder
           '512': c10m1_ladder
+      - prompt: 'Assertion (A): HCF(12, 18) × LCM(12, 18) = 12 × 18.
+
+          Reason (R): For any two positive integers a and b, HCF(a, b) × LCM(a, b) = a × b.'
+        options:
+        - Both A and R are true, and R explains A
+        - Both A and R are true, but R does not explain A
+        - A is true, but R is false
+        - A is false, but R is true
+        answer: Both A and R are true, and R explains A
+        hints:
+        - Decide first whether A is true on its own.
+        - Then decide whether R is true, and whether R is the reason for A.
+        solution: 'A: HCF = 6, LCM = 36, and 6 × 36 = 216 = 12 × 18, so A is true. R is the general rule for two numbers, and A is that rule with a = 12 and b = 18, so R explains A.'
+        difficulty: 2
+        mistakes:
+          Both A and R are true, but R does not explain A: ar_link
+          A is true, but R is false: ar_test_r
+          A is false, but R is true: ar_test_a
+        exam: assertion_reason
+      - prompt: 'Assertion (A): HCF(2, 3, 4) × LCM(2, 3, 4) = 2 × 3 × 4.
+
+          Reason (R): For any two positive integers, HCF × LCM equals their product.'
+        options:
+        - Both A and R are true, and R explains A
+        - Both A and R are true, but R does not explain A
+        - A is true, but R is false
+        - A is false, but R is true
+        answer: A is false, but R is true
+        hints:
+        - Decide first whether A is true on its own.
+        - Then decide whether R is true, and whether R is the reason for A.
+        solution: HCF(2, 3, 4) = 1 and LCM = 12, so the left side is 12, but 2 × 3 × 4 = 24. A is false. R is true, but it is only about two numbers, not three.
+        difficulty: 2
+        mistakes:
+          Both A and R are true, and R explains A: ar_test_a
+          Both A and R are true, but R does not explain A: ar_test_a
+          A is true, but R is false: ar_test_a
+        exam: assertion_reason
+      - prompt: 'Case study: Two traffic lights at a junction change every 48 seconds and 72 seconds. Both turned green together at 7:00 a.m. After how many seconds will they next turn green together?'
+        options:
+        - '144'
+        - '24'
+        - '3456'
+        - '72'
+        answer: '144'
+        hints:
+        - They meet again at a number that both 48 and 72 go into.
+        - 48 = 2⁴ × 3 and 72 = 2³ × 3². Take every prime with its bigger power.
+        solution: 48 = 2⁴ × 3 and 72 = 2³ × 3². LCM = 2⁴ × 3² = 16 × 9 = 144, so after 144 seconds.
+        mistakes:
+          '24': c10m1_hcf_not_lcm
+          '3456': c10m1_product_not_lcm
+        exam: case
+        difficulty: 2
+      - prompt: If HCF(26, 91) = 13, then LCM(26, 91) is
+        options:
+        - '182'
+        - '2366'
+        - '91'
+        - '338'
+        answer: '182'
+        hints:
+        - Use HCF × LCM = product of the two numbers.
+        - 26 × 91 = 2366. Now divide by the HCF.
+        solution: HCF × LCM = 26 × 91 = 2366, so LCM = 2366 ÷ 13 = 182.
+        mistakes:
+          '2366': c10m1_divide_by_hcf
+        exam: one_mark
+        difficulty: 1
+      - prompt: Which of these is the prime factorisation of 156?
+        options:
+        - 2² × 3 × 13
+        - 2 × 6 × 13
+        - 4 × 3 × 13
+        - 2² × 39
+        answer: 2² × 3 × 13
+        hints:
+        - Keep dividing by the smallest prime until only a prime is left.
+        - 156 ÷ 2 = 78, 78 ÷ 2 = 39, 39 ÷ 3 = 13.
+        solution: 156 = 2 × 78 = 2 × 2 × 39 = 2 × 2 × 3 × 13 = 2² × 3 × 13. Every factor is prime.
+        mistakes:
+          2 × 6 × 13: c10m1_not_prime_fact
+          4 × 3 × 13: c10m1_not_prime_fact
+          2² × 39: c10m1_not_prime_fact
+        exam: one_mark
+        difficulty: 1
   - code: cbse10m.real.irrational
     title: Proving numbers irrational
     after: [cbse10m.real.fundamental]
@@ -409,6 +526,25 @@ concepts:
           - √3
           answer: √16
           why: √16 = 4 = 4/1.
+        ways:
+        - style: visual
+          teach: Put the two kinds of number side by side.
+          picture:
+            kind: compare
+            columns:
+            - title: Rational
+              points:
+              - Can be written as p/q with q ≠ 0
+              - 1/2, −3, 0.75, 0.333…
+              - Decimal ends, or repeats forever
+            - title: Irrational
+              points:
+              - Cannot be written as p/q
+              - √2, √3, √5, π
+              - Decimal never ends and never repeats
+            alt: Rational numbers can be written p over q and their decimals end or repeat; irrational numbers cannot and their decimals never repeat.
+        - style: step_by_step
+          teach: 'Step 1: Ask: can it be written as a fraction of two integers? Step 2: 0.75 = 3/4, so it is rational. Step 3: 0.333… = 1/3, so it is rational too. Step 4: √2 has no such fraction (we prove this next), so it is irrational. Step 5: In fact √p is irrational for every prime p.'
       - teach: 'Proof that √3 is irrational, by contradiction. Suppose √3 = a/b with a, b coprime. Then 3b² = a², so 3 divides a², and so 3 divides a. Write a = 3c: then 3b² = 9c², so b² = 3c², and 3 divides b too. But a and b were coprime: contradiction. So √3 is irrational.'
         picture:
           kind: flow
@@ -428,6 +564,11 @@ concepts:
           - a became negative
           answer: 3 divides both a and b, but they were coprime
           why: Coprime numbers share no factor except 1.
+        ways:
+        - style: step_by_step
+          teach: 'Step 1: Pretend √3 = a/b in lowest terms. Step 2: Square both sides: 3b² = a². Step 3: So 3 divides a², and so 3 divides a. Write a = 3c. Step 4: Then 3b² = 9c², so b² = 3c², and 3 divides b. Step 5: Now 3 divides both a and b, but lowest terms means they share no factor. Step 6: The pretending led to nonsense, so √3 is irrational.'
+        - style: real_world
+          teach: 'A proof by contradiction is like a detective story. Suppose the butler did it. Then he was in the kitchen at 9. But he was seen in town at 9. Impossible, so the butler did not do it. Here: suppose √3 is a fraction in lowest terms; then top and bottom both have a factor 3; impossible, so √3 is not a fraction.'
       - teach: 'Mixing: rational + irrational is irrational (so 5 + √2 is irrational); a non-zero rational × irrational is irrational (so 3√2 is irrational). But two irrationals can give a rational: √2 × √2 = 2, and (3 + √2) + (3 − √2) = 6.'
         check:
           prompt: Is 7√5 rational or irrational?
@@ -437,6 +578,28 @@ concepts:
           - It depends
           answer: Irrational
           why: Non-zero rational times irrational is irrational.
+        ways:
+        - style: visual
+          teach: Three rules side by side. The first two always give an irrational; the third can go either way.
+          picture:
+            kind: compare
+            columns:
+            - title: Rational + irrational
+              points:
+              - 5 + √2
+              - Always irrational
+            - title: Rational (not 0) × irrational
+              points:
+              - 3√2
+              - Always irrational
+            - title: Irrational with irrational
+              points:
+              - √2 × √2 = 2
+              - (3 + √2) + (3 − √2) = 6
+              - Can be rational
+            alt: Rational plus irrational is always irrational; non-zero rational times irrational is irrational; two irrationals can give a rational.
+        - style: step_by_step
+          teach: 'Step 1: Suppose 5 + √2 were rational, call it r. Step 2: Then √2 = r − 5. Step 3: A rational minus a rational is rational, so √2 would be rational. Step 4: But √2 is irrational. Step 5: So the supposition was wrong and 5 + √2 is irrational.'
     items:
       - prompt: "Which of these is irrational?"
         options: ["√5", "√25", "0.25", "7/3"]
@@ -595,3 +758,72 @@ concepts:
         solution: 2√3 is irrational, and a rational minus an irrational is irrational.
         mistakes:
           Rational: c10m1_mix_rule
+      - prompt: 'Assertion (A): 5 + √3 is irrational.
+
+          Reason (R): The sum of a rational number and an irrational number is irrational.'
+        options:
+        - Both A and R are true, and R explains A
+        - Both A and R are true, but R does not explain A
+        - A is true, but R is false
+        - A is false, but R is true
+        answer: Both A and R are true, and R explains A
+        hints:
+        - Decide first whether A is true on its own.
+        - Then decide whether R is true, and whether R is the reason for A.
+        solution: 5 is rational and √3 is irrational, so by R their sum is irrational. Both are true and R gives the reason for A.
+        difficulty: 2
+        mistakes:
+          Both A and R are true, but R does not explain A: ar_link
+          A is true, but R is false: ar_test_r
+          A is false, but R is true: ar_test_a
+        exam: assertion_reason
+      - prompt: 'Assertion (A): √2 × √8 is irrational.
+
+          Reason (R): √2 and √8 are both irrational.'
+        options:
+        - Both A and R are true, and R explains A
+        - Both A and R are true, but R does not explain A
+        - A is true, but R is false
+        - A is false, but R is true
+        answer: A is false, but R is true
+        hints:
+        - Decide first whether A is true on its own.
+        - Then decide whether R is true, and whether R is the reason for A.
+        solution: '√2 × √8 = √16 = 4, which is rational, so A is false. R is true: √2 and √8 = 2√2 are both irrational. Two irrationals can multiply to a rational.'
+        difficulty: 2
+        mistakes:
+          Both A and R are true, and R explains A: ar_test_a
+          Both A and R are true, but R does not explain A: ar_test_a
+          A is true, but R is false: ar_test_a
+        exam: assertion_reason
+      - prompt: 'Simplify each one, then choose: which of these is irrational?'
+        options:
+        - √2 + √8
+        - (2 − √5)(2 + √5)
+        - √12 × √3
+        - (3 + √7) − √7
+        answer: √2 + √8
+        hints:
+        - Simplify each one first, then decide.
+        - √8 = 2√2. What is √2 + 2√2?
+        solution: '√2 + √8 = √2 + 2√2 = 3√2, irrational. The others: (2 − √5)(2 + √5) = 4 − 5 = −1, √12 × √3 = √36 = 6, (3 + √7) − √7 = 3: all rational.'
+        mistakes:
+          (2 − √5)(2 + √5): c10m1_multiply_out
+          √12 × √3: c10m1_join_roots
+        exam: one_mark
+        difficulty: 2
+      - prompt: 'Riya says: ''√2 × √8 must be irrational because √2 and √8 are both irrational.'' Who is right?'
+        options:
+        - 'Riya is wrong: the product works out to a whole number'
+        - 'Riya is right: irrational × irrational is always irrational'
+        - Riya is right, because √8 is not a whole number
+        answer: 'Riya is wrong: the product works out to a whole number'
+        hints:
+        - Don't trust the rule; work the product out.
+        - √2 × √8 = √(2 × 8). What is √16?
+        solution: √2 × √8 = √16 = 4, a rational number. So two irrationals can multiply to a rational, and Riya's rule is wrong.
+        mistakes:
+          'Riya is right: irrational × irrational is always irrational': c10m1_irr_times_irr
+          Riya is right, because √8 is not a whole number: c10m1_irr_times_irr
+        exam: competency
+        difficulty: 2

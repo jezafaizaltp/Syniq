@@ -855,3 +855,56 @@ def test_every_kerala9_lesson_step_can_be_explained_another_way():
         if not step.get("ways")
     ]
     assert not one_way, one_way
+
+
+def test_every_cbse10_maths_step_has_more_ways_and_every_topic_board_style_questions():
+    """Class 10 Maths: every lesson step can be taught at least three ways (one with a picture), and every topic
+    has questions in the board-exam formats, including at least one assertion-reason question."""
+    thin, no_exam = [], []
+    for path, pack in PACKS:
+        if not rel(path).startswith("cbse10/maths/"):
+            continue
+        for c in pack["concepts"]:
+            for n, step in enumerate(c.get("lesson") or [], start=1):
+                ways = step.get("ways") or []
+                pictured = bool(step.get("picture")) or any(w.get("picture") for w in ways)
+                if len(ways) < 2 or not pictured:
+                    thin.append(f"{c['code']} step {n}")
+            styles = {i.get("exam") for i in c["items"]}
+            if "assertion_reason" not in styles or len(styles - {None}) < 2:
+                no_exam.append(c["code"])
+    assert not thin, thin
+    assert not no_exam, no_exam
+
+
+def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions():
+    """The Class 9 pilot: every lesson step can be taught at least three ways (the step plus two more, one of them
+    with a picture), and every topic has at least one question in a Kerala exam format (one mark, short, case or
+    competency; Kerala papers don't use assertion-reason)."""
+    thin, no_exam, wrong_style = [], [], []
+    for path, pack in PACKS:
+        if code_of(pack) not in KERALA9 or "demo" in str(path):
+            continue
+        for c in pack["concepts"]:
+            for n, step in enumerate(c.get("lesson") or [], start=1):
+                ways = step.get("ways") or []
+                pictured = bool(step.get("picture")) or any(w.get("picture") for w in ways)
+                if len(ways) < 2 or not pictured:
+                    thin.append(f"{rel(path)} {c['code']} step {n}")
+            styles = {i.get("exam") for i in c["items"]} - {None}
+            if not styles:
+                no_exam.append(f"{rel(path)} {c['code']}")
+            if "assertion_reason" in styles:
+                wrong_style.append(f"{rel(path)} {c['code']}")
+    assert not thin, thin
+    assert not no_exam, no_exam
+    assert not wrong_style, wrong_style
+
+
+def test_assertion_reason_questions_use_the_standard_choices():
+    bad = [
+        f"{rel(path)}: {item['prompt'][:50]}"
+        for path, _, _, item in all_items()
+        if item.get("exam") == "assertion_reason" and item.get("options") != cp.AR_OPTIONS
+    ]
+    assert not bad, bad

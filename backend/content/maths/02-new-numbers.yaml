@@ -4,6 +4,8 @@ chapter: 2
 title: New Numbers
 
 tips:
+  k9_times_divide: "'How many times' means divide one length by the other, not take one away from the other."
+  k9_diag_area: "The diagonal is not the side. The diagonal is the side × √2, so find the side first, then square it."
   half_not_root: "The square root isn't half the number. It is the number that, multiplied by itself, gives the number."
   squared_perimeter: "Find the side first: perimeter ÷ 4. Then multiply the side by itself."
   decimal_places: "Count decimal places: a number with one decimal place, squared, has two (0.3 × 0.3 = 0.09). So the root of a two-place decimal has one place."
@@ -24,6 +26,12 @@ tips:
   root_estimate: "Estimate both roots first: √3 ≈ 1.73 and √5 ≈ 2.24. Pick the number between them."
   spiral_count: "Each new triangle adds 1 under the root of the long side. Write the long sides in order, starting from √2, and stop at the triangle the question asks about."
   terminating_denominator: "Fractions whose bottom has only 2s and 5s stop. A bottom of 3 makes the digits repeat."
+  pqk9m2_root_decimal: Square your answer back. Does it give the number under the root?
+  pqk9m2_between_squares: Find the perfect squares just below and just above the number.
+  pqk9m2_compare_square: Square both numbers first, then compare the squares.
+  pqk9m2_recur: That decimal stops, but this one repeats for ever. Use x and 10x so the repeating part cancels.
+  pqk9m2_pyth: 'Sides don''t add along a diagonal. Use Pythagoras: diagonal² = side² + side².'
+  pqk9m2_nines: With two repeating digits, multiply by 100, so the bottom becomes 99.
 
 concepts:
   - code: math9.newnum.square_roots
@@ -88,6 +96,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Tiles on a square floor: a floor 7 tiles long and 7 tiles wide needs 7 × 7 = 49 tiles. That is 7 squared, written 7². A number of tiles that can be laid as a perfect square, like 1, 4, 9, 16, 25, 36 or 49, is called a perfect square.'
+        - style: step_by_step
+          teach: 'Step 1: Take the number, say 7. Step 2: Multiply it by itself: 7 × 7. Step 3: The answer, 49, is 7 squared, written 7². Step 4: A square of side 7 cm has area 7² = 49 cm².'
       - teach: 'The square root goes the other way. √49 asks: which positive number times itself gives 49? The answer is 7, because 7 × 7 = 49. So if a square has an area of 49 cm², its side is √49 = 7 cm.'
         check:
           prompt: A square has an area of 64 cm². How long is its side?
@@ -100,6 +110,21 @@ concepts:
         ways:
         - style: real_world
           teach: 'Now go backwards. You are given 49 square tiles and must lay them as a square floor. How many tiles long is each side? 7, because 7 × 7 = 49. That is the square root: √49 = 7. A square plot of 49 m² has sides of 7 m.'
+        - style: visual
+          teach: 'The square root reads the area backwards: a square of area 49 cm² has side √49 = 7 cm.'
+          picture:
+            kind: area_grid
+            cols:
+            - size: 7
+              label: 7 cm
+            rows:
+            - size: 7
+              label: 7 cm
+            cells:
+            - - area 49 cm²
+            alt: A square with sides 7 centimetres and area 49 square centimetres.
+        - style: step_by_step
+          teach: 'Step 1: Ask: which positive number times itself gives 49? Step 2: Try 6: 36, too small. Step 3: Try 7: 49, exactly. Step 4: So √49 = 7.'
       - teach: 'Fractions and decimals have square roots too. For a fraction, take the root of the top and of the bottom: √(9/16) = 3/4, because 3/4 × 3/4 = 9/16. For a decimal, think of the digits and the places: √1.44 = 1.2, because 1.2 × 1.2 = 1.44.'
         check:
           prompt: What is √(4/25)?
@@ -112,6 +137,22 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for a fraction, take the root of the top number: √9 = 3. Step 2: take the root of the bottom number: √16 = 4. Step 3: put them together: √(9/16) = 3/4. For a decimal like 1.44, find √144 = 12, then place the point so that squaring gives back two decimal places: 1.2.'
+        - style: visual
+          teach: Roots of fractions and decimals, top and bottom separately.
+          picture:
+            kind: compare
+            columns:
+            - title: Fraction
+              points:
+              - √(9/16)
+              - = √9 / √16
+              - = 3/4
+            - title: Decimal
+              points:
+              - √0.09 = √(9/100)
+              - = 3/10
+              - = 0.3
+            alt: The root of 9 over 16 is 3 over 4; the root of 0.09, which is 9 over 100, is 3 over 10, or 0.3.
       - teach: Check a square root by squaring it back. Is √0.09 = 0.3? 0.3 × 0.3 = 0.09, so yes. A common slip is √0.09 = 0.03, but 0.03 × 0.03 = 0.0009.
         check:
           prompt: Is √0.16 equal to 0.4 or 0.04?
@@ -123,6 +164,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: write down your guess, say √0.09 = 0.3. Step 2: square the guess: 0.3 × 0.3. Step 3: count decimal places: one place times one place gives two places, 0.09. Step 4: if you get back the number you started with, the root is right. 0.03 × 0.03 has four places, 0.0009, so it is wrong.'
+        - style: visual
+          teach: 'Square your answer back to test it: 0.3 passes, 0.03 fails.'
+          picture:
+            kind: compare
+            columns:
+            - title: 0.3 × 0.3
+              points:
+              - = 0.09 ✓
+              - So √0.09 = 0.3
+            - title: 0.03 × 0.03
+              points:
+              - = 0.0009 ✗
+              - Too many decimal places
+            alt: 0.3 times 0.3 is 0.09, which matches; 0.03 times 0.03 is 0.0009, which does not.
     items:
       - prompt: "A square has an area of 49 cm². How long is each side, in cm?"
         answer: "7"
@@ -253,6 +308,35 @@ concepts:
         solution: 'Step 1: The first tile''s side is √16 = 4 cm. Step 2: The second''s is √9 = 3 cm. Step 3: Side by side they make 4 + 3 = 7 cm.'
         mistakes:
           '5': added_squares_instead
+      - prompt: √0.0016 is
+        options:
+        - '0.04'
+        - '0.4'
+        - '0.004'
+        answer: '0.04'
+        hints:
+        - 'Write it as a fraction: 16/10000.'
+        - √16 = 4 and √10000 = 100.
+        solution: '√0.0016 = √(16/10000) = 4/100 = 0.04. Check: 0.04 × 0.04 = 0.0016.'
+        mistakes:
+          '0.4': pqk9m2_root_decimal
+          '0.004': pqk9m2_root_decimal
+        exam: one_mark
+        difficulty: 1
+      - prompt: 'Situation: A square courtyard has an area of 196 m². How much fencing is needed to go all the way round it?'
+        options:
+        - 56 m
+        - 14 m
+        - 49 m
+        answer: 56 m
+        hints:
+        - 'First find the side: √196.'
+        - Perimeter of a square = 4 × side.
+        solution: Side = √196 = 14 m, so the perimeter = 4 × 14 = 56 m.
+        mistakes:
+          14 m: pqk9m1_which_asked
+        exam: case
+        difficulty: 2
 
   - code: math9.newnum.irrational_lengths
     title: Lengths like √2
@@ -316,6 +400,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'A carpenter checks a square frame with sides of 1 m by measuring corner to corner. That diagonal is longer than a side but shorter than two sides. Its square is 1² + 1² = 2, so the diagonal is √2 m, about 1.41 m. Any right-angled corner works this way: square the two short sides and add.'
+        - style: step_by_step
+          teach: 'Step 1: Draw a square with sides 1 cm. Step 2: Draw a diagonal: it makes two right triangles. Step 3: Pythagoras: diagonal² = 1² + 1² = 2. Step 4: So the diagonal is √2 cm, about 1.414 cm.'
       - teach: '√2 is about 1.414, but no fraction multiplied by itself gives exactly 2. Numbers like √2, √3 and √5 can''t be written as a fraction. They are called irrational numbers. √4 = 2 and √9 = 3 are not irrational: they are whole numbers.'
         check:
           prompt: Which of these is irrational?
@@ -328,6 +414,24 @@ concepts:
         ways:
         - style: real_world
           teach: 'Try to measure √2 exactly with any ruler, however fine. You will never land on a mark: 1.4 is too short, 1.42 is too long, 1.414 is still not exact. No fraction squared gives exactly 2. Such numbers are called irrational. But √9 lands exactly on 3, so it is not irrational.'
+        - style: visual
+          teach: Some roots are whole numbers, others can never be written as a fraction.
+          picture:
+            kind: compare
+            columns:
+            - title: Rational
+              points:
+              - √4 = 2
+              - √9 = 3
+              - √(1/4) = 1/2
+            - title: Irrational
+              points:
+              - √2 ≈ 1.414…
+              - √3 ≈ 1.732…
+              - √5 ≈ 2.236…
+            alt: Root 4, root 9 and root of a quarter are rational; root 2, root 3 and root 5 are irrational, with decimals that never end or repeat.
+        - style: step_by_step
+          teach: 'Step 1: Is the number under the root a perfect square (1, 4, 9, 16, …)? Step 2: If yes, the root is a whole number: rational. Step 3: If no, like 2, 3, 5, 7, 8, the root of a whole number is irrational.'
       - teach: 'Squaring a root undoes it: (√7)² = √7 × √7 = 7. And a bigger square has a longer diagonal in step: a square of side 3 has diagonal √(3² + 3²) = √18 = 3√2, which is 3 times the diagonal of a unit square.'
         check:
           prompt: What is (√11)²?
@@ -340,6 +444,38 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: √7 means the number which, multiplied by itself, gives 7. Step 2: so √7 × √7 must be 7, by its own meaning. Step 3: (√7)² is just √7 × √7. So squaring a root gives back the number under it.'
+        - style: visual
+          teach: 'The diagonal grows in step with the side: side 3 gives diagonal 3√2.'
+          picture:
+            kind: geometry
+            points:
+              A:
+              - 1
+              - 1
+              B:
+              - 7
+              - 1
+              C:
+              - 7
+              - 7
+              D:
+              - 1
+              - 7
+            segments:
+            - - A
+              - B
+              - '3'
+            - - B
+              - C
+              - '3'
+            - - C
+              - D
+            - - D
+              - A
+            - - A
+              - C
+              - √18 = 3√2
+            alt: A square with side 3 and its diagonal of root 18, which is 3 root 2.
     items:
       - prompt: "A square has sides of 1 cm. How long is its diagonal, in cm?"
         options: ["√2", "2", "1", "√3"]
@@ -417,14 +553,14 @@ concepts:
         difficulty: 3
         hints: ["If the side is a, then a² + a² = diagonal².", "2a² = 16. The area is a²."]
         solution: "Step 1: a² + a² = 4² = 16. Step 2: 2a² = 16, so a² = 8. Step 3: The area is a² = 8 cm²."
-        mistakes: {"16": diagonal_as_side, "4": half_not_root}
+        mistakes: {"16": "diagonal_as_side", "4": "k9_diag_area"}
       - prompt: "A square has sides of √3 cm. A bigger square has sides of √27 cm. How many times as long is the bigger square's side?"
         answer: "3"
         check: "sqrt(27)/sqrt(3)"
         difficulty: 3
         hints: ["Divide √27 by √3.", "√27 ÷ √3 = √(27 ÷ 3)."]
         solution: "Step 1: √27 ÷ √3 = √9. Step 2: √9 = 3, so the side is 3 times as long."
-        mistakes: {"9": forgot_root, "24": added_not_multiplied}
+        mistakes: {"9": "forgot_root", "24": "k9_times_divide"}
       - prompt: What is √3 × √3?
         options:
         - '3'
@@ -501,6 +637,21 @@ concepts:
         mistakes:
           '2': added_sides
           '8': forgot_root
+      - prompt: The diagonal of a square of side 5 cm is
+        options:
+        - 5√2 cm
+        - 10 cm
+        - √10 cm
+        answer: 5√2 cm
+        hints:
+        - 'Use Pythagoras: diagonal² = 5² + 5².'
+        - √50 = √(25 × 2).
+        solution: diagonal² = 25 + 25 = 50, so the diagonal = √50 = 5√2 cm ≈ 7.07 cm.
+        mistakes:
+          10 cm: pqk9m2_pyth
+          √10 cm: pqk9m2_pyth
+        exam: short
+        difficulty: 2
   - code: math9.newnum.approximations
     title: Estimating square roots
     after: [math9.newnum.irrational_lengths]
@@ -578,6 +729,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: list the perfect squares 1, 4, 9, 16, 25, 36, 49. Step 2: find the two your number sits between. 30 sits between 25 and 36. Step 3: take their roots, 5 and 6. Step 4: √30 lies between them, and nearer 5 because 30 is nearer 25.'
+        - style: visual
+          teach: √30 sits between √25 = 5 and √36 = 6, a little closer to 5.
+          picture:
+            kind: number_line
+            from: 4
+            to: 7
+            step: 0.5
+            points:
+            - at: 5
+              label: √25
+            - at: 5.48
+              label: √30
+            - at: 6
+              label: √36
+            alt: A number line from 4 to 7 with root 25 at 5, root 36 at 6 and root 30 at about 5.48 between them.
       - teach: 'To get closer, square decimals. 1.41² = 1.9881 is just below 2 and 1.42² = 2.0164 is just above, so √2 is between 1.41 and 1.42. Useful values to remember: √2 ≈ 1.414, √3 ≈ 1.732, √5 ≈ 2.236.'
         check:
           prompt: 1.7² = 2.89 and 1.8² = 3.24. So √3 is between which two numbers?
@@ -590,6 +756,17 @@ concepts:
         ways:
         - style: real_world
           teach: 'It''s like guessing a price in a shop game: too low, too high, then closer each time. 1.41 squared is a bit below 2, and 1.42 squared a bit above. So √2 is trapped between 1.41 and 1.42. Each new decimal place traps it more tightly.'
+        - style: visual
+          teach: Squeezing √2 between decimals, one place at a time.
+          picture:
+            kind: flow
+            steps:
+            - 1² = 1 < 2 < 4 = 2²
+            - 1.4² = 1.96, 1.5² = 2.25
+            - 1.41² = 1.9881
+            - 1.42² = 2.0164
+            - √2 is between 1.41 and 1.42
+            alt: 1.41 squared is just below 2 and 1.42 squared is just above, so root 2 lies between 1.41 and 1.42.
       - teach: To compare roots, square them. Which is larger, 3√2 or 2√3? (3√2)² = 9 × 2 = 18 and (2√3)² = 4 × 3 = 12. 18 is larger, so 3√2 is larger.
         check:
           prompt: 'Which is larger: 2√2 or √7?'
@@ -601,6 +778,18 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: square both numbers you want to compare. (3√2)² = 9 × 2 = 18. (2√3)² = 4 × 3 = 12. Step 2: compare the squares. Step 3: the bigger square belongs to the bigger number, because for positive numbers squaring keeps the order.'
+        - style: real_world
+          teach: 'Comparing 3√2 and 2√3 is like comparing two ropes you can''t lay side by side: square both lengths and compare those instead. 18 is more than 12, so 3√2 is the longer rope.'
+        - style: visual
+          teach: 'Square both numbers: the bigger square belongs to the bigger number.'
+          picture:
+            kind: bars
+            bars:
+            - label: (3√2)²
+              value: 18
+            - label: (2√3)²
+              value: 12
+            alt: 3 root 2 squared is 18 and 2 root 3 squared is 12, so 3 root 2 is larger.
     items:
       - prompt: "√30 lies between which two whole numbers?"
         options: ["5 and 6", "4 and 5", "6 and 7", "15 and 16"]
@@ -733,6 +922,36 @@ concepts:
         solution: 'Step 1: 2.2² = 4.84, below 5. Step 2: 2.3² = 5.29, above 5. Step 3: So √5 is between 2.2 and 2.3.'
         mistakes:
           2.5 and 2.6: half_not_root
+      - prompt: Which two whole numbers is √50 between?
+        options:
+        - 7 and 8
+        - 6 and 7
+        - 25 and 26
+        answer: 7 and 8
+        hints:
+        - Which perfect squares are just below and above 50?
+        - 7² = 49 and 8² = 64.
+        solution: 49 < 50 < 64, so 7 < √50 < 8.
+        mistakes:
+          6 and 7: pqk9m2_between_squares
+          25 and 26: pqk9m2_between_squares
+        exam: one_mark
+        difficulty: 1
+      - prompt: 'Which is the largest: 2√5, 3√2 or 4?'
+        options:
+        - 2√5
+        - 3√2
+        - '4'
+        answer: 2√5
+        hints:
+        - Square each one.
+        - (2√5)² = 20, (3√2)² = 18, 4² = 16.
+        solution: 'Squares: 20, 18 and 16. The largest square is 20, so 2√5 is the largest.'
+        mistakes:
+          3√2: pqk9m2_compare_square
+          '4': pqk9m2_compare_square
+        exam: competency
+        difficulty: 2
 
   - code: math9.newnum.recurring
     title: Recurring decimals as fractions
@@ -798,6 +1017,24 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: divide the top by the bottom, by long division. Step 2: watch the remainders. For 1/4 a remainder becomes 0 and the decimal ends: 0.25. For 1/3 the remainder 1 comes back again and again, so the digit 3 repeats for ever: 0.333…'
+        - style: visual
+          teach: Some fractions end as decimals; others repeat for ever.
+          picture:
+            kind: compare
+            columns:
+            - title: Ends
+              points:
+              - 1/4 = 0.25
+              - 3/8 = 0.375
+              - 1/5 = 0.2
+            - title: Recurs
+              points:
+              - 1/3 = 0.333…
+              - 2/9 = 0.222…
+              - 4/11 = 0.3636…
+            alt: One quarter, three eighths and one fifth give decimals that end; one third, two ninths and four elevenths give decimals that repeat.
+        - style: real_world
+          teach: 'Share ₹10 among 3 friends: ₹3.33… each, and the 3s never stop. However finely you cut the paise, the share never comes out exact. That is a recurring decimal.'
       - teach: 'We can turn a recurring decimal back into a fraction. Let x = 0.444… Then 10x = 4.444… Take x away from 10x: the endless 4s cancel, leaving 9x = 4. So x = 4/9.'
         picture:
           kind: flow
@@ -818,6 +1055,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: call the decimal x, say x = 0.444… Step 2: multiply by 10 to shift the digits one place: 10x = 4.444… Step 3: subtract x from 10x. All the 4s after the point match up and cancel, leaving 9x = 4. Step 4: divide: x = 4/9.'
+        - style: real_world
+          teach: 'The trick is like lining up two long rows of identical tiles, one shifted by one tile. Take one row away from the other and every tile cancels except the first: 10x − x leaves just 4, so 9x = 4.'
       - teach: 'With two repeating digits, multiply by 100 instead. x = 0.3636…: 100x = 36.3636…, so 99x = 36 and x = 36/99 = 4/11. Every recurring decimal is a fraction, so it is rational. √2''s decimals never repeat.'
         check:
           prompt: To write 0.2525… (25 repeats) as a fraction, what do you multiply x by?
@@ -830,6 +1069,16 @@ concepts:
         ways:
         - style: real_world
           teach: Think of the repeating part as a block that has to line up, like two rows of identical tiles. With one repeating digit, shift by one place, ×10. With a block of two digits like 36, shift by two places, ×100, so the blocks sit exactly under each other and cancel.
+        - style: visual
+          teach: 'Two repeating digits: shift by two places (× 100) so the repeating parts line up.'
+          picture:
+            kind: flow
+            steps:
+            - x = 0.3636…
+            - 100x = 36.3636…
+            - 99x = 36
+            - x = 36/99 = 4/11
+            alt: x is 0.3636 repeating; 100x is 36.3636 repeating; subtracting gives 99x equals 36, so x is 4 over 11.
     items:
       - prompt: "Which of these fractions gives a recurring decimal?"
         options: ["1/3", "1/4", "1/2", "1/5"]
@@ -955,3 +1204,33 @@ concepts:
         solution: 'Step 1: 0.333… = 1/3. Step 2: 0.666… = 2/3. Step 3: 1/3 + 2/3 = 1, so 0.999… is exactly 1.'
         mistakes:
           '0.9': recurring_subtract
+      - prompt: Write 0.777… as a fraction.
+        options:
+        - 7/9
+        - 7/10
+        - 77/100
+        answer: 7/9
+        hints:
+        - Let x = 0.777… and multiply by 10.
+        - 10x − x = 7.
+        solution: 10x = 7.777…, so 9x = 7 and x = 7/9.
+        mistakes:
+          7/10: pqk9m2_recur
+          77/100: pqk9m2_recur
+        exam: short
+        difficulty: 1
+      - prompt: Write 0.2727… as a fraction in its lowest terms.
+        options:
+        - 3/11
+        - 27/100
+        - 27/90
+        answer: 3/11
+        hints:
+        - Two digits repeat, so multiply by 100.
+        - 99x = 27.
+        solution: 100x = 27.2727…, so 99x = 27 and x = 27/99 = 3/11.
+        mistakes:
+          27/100: pqk9m2_nines
+          27/90: pqk9m2_nines
+        exam: short
+        difficulty: 2

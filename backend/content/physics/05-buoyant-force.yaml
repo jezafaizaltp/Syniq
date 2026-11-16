@@ -21,6 +21,9 @@ tips:
   buoyancy_up: "Gravity pulls a floating object down; buoyancy is the force that balances it. Which way must it act?"
   buoyant_from_volume: "Buoyant force = weight of water displaced: 200 g is 0.2 kg, times 10."
   relative_density: "Relative density = density ÷ density of water (1 g/cm³), so it's the same number with no unit."
+  pqk9p05_loss_is_upthrust: Loss of weight in the liquid = buoyant force. Subtract the two readings.
+  pqk9p05_grams_newton: For water, 1 cm³ is 1 g, and 100 g weighs 1 N.
+  pqk9p05_density_compare: 'Compare the object''s density with the liquid''s: less dense floats, denser sinks.'
 
 concepts:
   - code: phy9.buoyancy.force
@@ -84,6 +87,19 @@ concepts:
         ways:
         - style: real_world
           teach: 'In a swimming pool or a pond, lifting a friend is easy, much easier than on land. The water pushes up on their body and takes part of the weight. Every liquid pushes upward on whatever is put into it: that upward push is the buoyant force.'
+        - style: visual
+          teach: 'A bottle pushed into water: your push goes down, the water''s push comes up.'
+          picture:
+            kind: compare
+            columns:
+            - title: Your hand
+              points:
+              - pushes the bottle down
+            - title: The water
+              points:
+              - pushes the bottle up
+              - buoyant force
+            alt: Your hand pushes an empty bottle down into water while the water pushes it back up with the buoyant force.
       - teach: Why up? Pressure in a liquid grows with depth. The bottom of an object is deeper than its top, so the liquid pushes harder on the bottom than on the top. The difference is an upward push.
         check:
           prompt: Where is the liquid's push on a submerged brick greatest?
@@ -96,6 +112,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: pressure in a liquid grows the deeper you go. Step 2: an object under water has its bottom deeper than its top. Step 3: so the push on the bottom is bigger than the push on the top. Step 4: the difference points upward, and that is the buoyant force.'
+        - style: visual
+          teach: Pressure is bigger at the bottom of the block than at the top, so the net push is up.
+          picture:
+            kind: bars
+            bars:
+            - label: push down on top
+              value: 4
+            - label: push up on bottom
+              value: 7
+            - label: net push up
+              value: 3
+            unit: N (example)
+            alt: Water pushes down on the top of a block with 4 newtons and up on its deeper bottom with 7 newtons, a net upward push of 3 newtons.
       - teach: 'Weigh a stone on a spring balance in air, then with it under water: it seems lighter. Apparent weight = real weight − buoyant force. So the loss of weight tells you the buoyant force. A stone weighing 12 N in air and 9 N in water has a buoyant force of 3 N.'
         picture:
           kind: compare
@@ -119,6 +148,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: hang the stone on a spring balance in air and read its weight. Step 2: lower it into water and read again. Step 3: subtract the second reading from the first. Step 4: the weight it seems to lose is the buoyant force.'
+        - style: real_world
+          teach: Drawing water from a well, the full bucket feels light while it is still under water and suddenly heavy as it comes out. Under water the buoyant force was holding part of its weight.
       - teach: The buoyant force grows with the volume under the liquid and with the liquid's density. Salt water pushes harder than fresh water. But once an object is fully under, going deeper doesn't change the buoyant force.
         check:
           prompt: A fully submerged ball is pushed deeper. What happens to the buoyant force?
@@ -131,6 +162,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Floating in the sea is easier than in a river, because salt water is denser and pushes up harder. A bigger part of you under water also means a bigger push. But once you are fully under, swimming deeper doesn''t change the push: the volume under water stays the same.'
+        - style: visual
+          teach: What the buoyant force depends on, and what it does not.
+          picture:
+            kind: compare
+            columns:
+            - title: Changes it
+              points:
+              - volume under the liquid
+              - density of the liquid
+            - title: Doesn't change it
+              points:
+              - how deep, once fully under
+              - what the object is made of
+            alt: The buoyant force depends on the volume under the liquid and the liquid's density, but not on depth once fully under, or the object's material.
     items:
       - prompt: "A stone weighs 12 N in air and 9 N when fully under water. What is the buoyant force on it, in N?"
         answer: "3"
@@ -264,6 +309,36 @@ concepts:
         solution: 'Step 1: Depth doesn''t matter once fully under. Step 2: The object''s own weight doesn''t change the push. Step 3: A denser liquid gives a bigger buoyant force.'
         mistakes:
           Lowering it deeper in the same liquid: deeper_same
+      - prompt: 'Situation: A spring balance reads 25 N with a metal block in air and 17 N with the block fully in water. What is the buoyant force?'
+        options:
+        - 8 N
+        - 42 N
+        - 17 N
+        answer: 8 N
+        hints:
+        - Buoyant force = loss of weight.
+        - 25 − 17.
+        solution: Buoyant force = 25 − 17 = 8 N.
+        mistakes:
+          42 N: pqk9p05_loss_is_upthrust
+          17 N: apparent_weight
+        exam: case
+        difficulty: 2
+      - prompt: A block fully under water is pushed deeper. The buoyant force on it
+        options:
+        - stays the same
+        - increases
+        - decreases
+        answer: stays the same
+        hints:
+        - 'What sets the buoyant force: volume under the water or depth?'
+        - The displaced volume doesn't change.
+        solution: Once fully under, the volume displaced doesn't change, so the buoyant force stays the same.
+        mistakes:
+          increases: deeper_same
+          decreases: deeper_same
+        exam: one_mark
+        difficulty: 1
 
   - code: phy9.buoyancy.archimedes
     title: Archimedes' principle
@@ -314,6 +389,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: fill a jug right to the brim. Step 2: lower a stone in gently until it is fully under. Step 3: catch and measure the water that overflows. Step 4: its volume equals the stone''s volume, because the stone had to push that much water out of the way.'
+        - style: visual
+          teach: A stone lowered into a full jug pushes out its own volume of water.
+          picture:
+            kind: flow
+            steps:
+            - jug filled to the brim
+            - stone of 150 cm³ lowered in
+            - 150 cm³ of water spills out
+            - displaced volume = stone's volume
+            alt: 'A stone of 150 cubic centimetres lowered into a brim-full jug makes 150 cubic centimetres of water spill: its own volume.'
       - teach: 'Archimedes'' principle: an object wholly or partly in a liquid feels an upward buoyant force equal to the weight of the liquid it displaces. Weigh the spilled water and you know the buoyant force.'
         check:
           prompt: An object displaces water weighing 4 N. What is the buoyant force?
@@ -326,6 +411,21 @@ concepts:
         ways:
         - style: real_world
           teach: 'Legend says Archimedes noticed the bath water rise as he got in. The rule he found: the upward push on anything in a liquid equals the weight of the liquid it pushes aside. Catch and weigh the spilled water, and you know the buoyant force.'
+        - style: visual
+          teach: 'Archimedes: weigh the spilled water and you have the buoyant force.'
+          picture:
+            kind: compare
+            columns:
+            - title: Loss of weight
+              points:
+              - 12 N in air
+              - 9 N in water
+              - lost 3 N
+            - title: Water displaced
+              points:
+              - 300 g spilled
+              - weighs 3 N
+            alt: A stone that loses 3 newtons of weight in water displaces 300 grams of water, which also weighs 3 newtons.
       - teach: 'For water, 1 cm³ has a mass of 1 g, and with g = 10 m/s², 100 g weighs 1 N. So a stone of volume 200 cm³ under water displaces 200 g of water, weighing 2 N: the buoyant force is 2 N. Going backwards, a loss of weight of 4 N means 400 g of water displaced, so the volume is 400 cm³.'
         picture:
           kind: flow
@@ -346,6 +446,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: the object''s volume under water, in cm³, is the volume of water displaced. Step 2: 1 cm³ of water has a mass of 1 g, so that many grams. Step 3: every 100 g weighs 1 N. Step 4: that weight is the buoyant force.'
+        - style: real_world
+          teach: 'Goldsmiths can check a gold ornament this way: weigh it in air and in water. The loss of weight gives the volume of water displaced, so the ornament''s volume. Mass ÷ volume should match the density of pure gold.'
     items:
       - prompt: "According to Archimedes' principle, the buoyant force equals:"
         options: ["The weight of the liquid displaced", "The weight of the object", "The volume of the object", "The density of the liquid"]
@@ -472,6 +574,36 @@ concepts:
         solution: 'Step 1: Buoyant force in water = 2 N. Step 2: In the liquid it is 2 × 1.2 = 2.4 N. Step 3: Apparent weight = 10 − 2.4 = 7.6 N.'
         mistakes:
           '8': other_liquid
+      - prompt: 'Situation: A stone loses 5 N of weight when fully lowered into water. What volume of water does it displace? (1 cm³ of water has mass 1 g; g = 10 m/s²)'
+        options:
+        - 500 cm³
+        - 50 cm³
+        - 5 cm³
+        answer: 500 cm³
+        hints:
+        - 5 N of water has a mass of 500 g.
+        - 1 g of water is 1 cm³.
+        solution: Buoyant force 5 N = weight of 500 g of water, which has volume 500 cm³.
+        mistakes:
+          50 cm³: pqk9p05_grams_newton
+          5 cm³: pqk9p05_grams_newton
+        exam: case
+        difficulty: 2
+      - prompt: A block of volume 80 cm³ is half under water. What is the buoyant force on it? (g = 10 m/s²)
+        options:
+        - 0.4 N
+        - 0.8 N
+        - 40 N
+        answer: 0.4 N
+        hints:
+        - 'Only the part under water counts: 40 cm³.'
+        - 40 g of water weighs 0.4 N.
+        solution: Volume under water = 40 cm³, displacing 40 g of water, which weighs 0.4 N.
+        mistakes:
+          0.8 N: half_immersed
+          40 N: pqk9p05_grams_newton
+        exam: short
+        difficulty: 2
   - code: phy9.buoyancy.density
     title: Density, floating and sinking
     after: [phy9.buoyancy.archimedes]
@@ -530,6 +662,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: measure the mass, in g. Step 2: measure the volume, in cm³. Step 3: divide mass by volume: that is the density in g/cm³. Step 4: divide by water''s density, 1 g/cm³, to get relative density, which has no unit.'
+        - style: visual
+          teach: Density of some materials compared with water's 1 g/cm³.
+          picture:
+            kind: bars
+            bars:
+            - label: wood
+              value: 0.6
+            - label: water
+              value: 1
+            - label: aluminium
+              value: 2.7
+            - label: iron
+              value: 7.9
+            unit: g/cm³
+            alt: 'Densities: wood about 0.6, water 1, aluminium 2.7 and iron 7.9 grams per cubic centimetre.'
       - teach: Whether something floats depends on density. If it is less dense than the liquid, it floats; if it is denser, it sinks. A wooden block (0.6 g/cm³) floats on water; an iron nail (7.9 g/cm³) sinks.
         check:
           prompt: A plastic toy has a density of 1.2 g/cm³. In water, will it float or sink?
@@ -541,6 +688,22 @@ concepts:
         ways:
         - style: real_world
           teach: 'Drop a coconut and a stone into a pond: the coconut floats, the stone sinks. The coconut is less dense than water; the stone is denser. Compare the object''s density with the liquid''s: less floats, more sinks.'
+        - style: visual
+          teach: Less dense than the liquid floats; denser sinks.
+          picture:
+            kind: compare
+            columns:
+            - title: Floats in water
+              points:
+              - wood 0.6
+              - ice 0.92
+              - coconut
+            - title: Sinks in water
+              points:
+              - iron 7.9
+              - stone about 2.5
+              - glass marble
+            alt: Wood and ice are less dense than water and float; iron, stone and glass are denser and sink.
       - teach: 'A floating object sinks until the liquid it displaces weighs as much as the object: the law of flotation. So a floating 5000 N boat displaces 5000 N of water. A steel ship floats because its hollow shape, full of air, makes its average density less than water''s. Ice (0.9 g/cm³) floats with 9/10 under water.'
         picture:
           kind: compare
@@ -565,6 +728,16 @@ concepts:
         ways:
         - style: real_world
           teach: Push a steel plate into water and it sinks; shape the same steel into a hollow bowl and it floats. The bowl sinks until the water it pushes aside weighs as much as the bowl. A floating boat always displaces its own weight of water, so a hollow steel ship floats.
+        - style: visual
+          teach: 'Law of flotation: a floating boat sinks until the water it pushes aside weighs as much as the boat.'
+          picture:
+            kind: flow
+            steps:
+            - boat weighs 5000 N
+            - it settles lower in the water
+            - until it displaces 5000 N of water
+            - then it floats
+            alt: A 5000 newton boat settles until it displaces 5000 newtons of water, then floats.
     items:
       - prompt: "A block has mass 60 g and volume 75 cm³. What is its density, in g/cm³?"
         answer: "0.8"
@@ -708,3 +881,33 @@ concepts:
         solution: 'Step 1: The ship''s weight doesn''t change. Step 2: River water is less dense, so more volume is needed for the same weight. Step 3: The ship sits a little deeper.'
         mistakes:
           It rises a little: sea_water_denser
+      - prompt: 'Situation: An egg sinks in a glass of tap water but floats after salt is stirred in. Why?'
+        options:
+        - Salt water is denser than the egg
+        - Salt makes the egg lighter
+        - Salt water has less buoyant force
+        answer: Salt water is denser than the egg
+        hints:
+        - Did the egg change, or the water?
+        - Compare the egg's density with the liquid's.
+        solution: Dissolving salt makes the water denser. Once the liquid is denser than the egg, the buoyant force can balance its weight and it floats.
+        mistakes:
+          Salt makes the egg lighter: pqk9p05_density_compare
+          Salt water has less buoyant force: sea_water_denser
+        exam: competency
+        difficulty: 2
+      - prompt: A stone has mass 75 g and volume 30 cm³. Its relative density is
+        options:
+        - '2.5'
+        - '0.4'
+        - 2.5 g/cm³
+        answer: '2.5'
+        hints:
+        - Density = 75 ÷ 30 g/cm³.
+        - Relative density has no unit.
+        solution: Density = 2.5 g/cm³. Relative density = 2.5 ÷ 1 = 2.5, with no unit.
+        mistakes:
+          '0.4': density_formula
+          2.5 g/cm³: relative_density_units
+        exam: short
+        difficulty: 2

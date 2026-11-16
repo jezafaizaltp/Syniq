@@ -95,6 +95,19 @@ def terms(text: str) -> list[str]:
     return out
 
 
+_ASKS = re.compile(r"^\s*(what|why|how|when|where|which|who|whom|whose|can|could|should|is|are|does|do|did|explain|tell|define|give|show|എന്ത്|എന്താണ്|क्या|क्यों|कैसे)\b", re.I)
+
+
+def asks_something(text: str) -> bool:
+    """A question or request of its own, not an answer: "What is the discriminant?" while a Test me question waits.
+    Short answers like "yes", "x = 3" or "-7" are answers."""
+    t = text.strip()
+    words = len(t.split())
+    if re.match(r"^\s*(is it|it is|it's|its|maybe|i think|i guess)\b", t, re.I):
+        return False
+    return words >= 3 and (t.endswith("?") or bool(_ASKS.match(t)))
+
+
 def intent_of(text: str) -> str | None:
     for name, pattern in INTENTS:
         if pattern is not None and pattern.search(text):
@@ -105,8 +118,18 @@ def intent_of(text: str) -> str | None:
 _SENTENCE = re.compile(r"(?<=[.!?।])\s+")
 
 
+_ABBREV = re.compile(r"\b(e\.g|i\.e|etc|vs|approx|no|fig|eq|Mr|Mrs|Dr|St)\.$", re.I)
+
+
 def sentences(text: str) -> list[str]:
-    return [s.strip() for s in _SENTENCE.split(" ".join((text or "").split())) if len(s.strip()) > 3]
+    parts: list[str] = []
+    for piece in _SENTENCE.split(" ".join((text or "").split())):
+        # "e.g. area" is one sentence, not two.
+        if parts and _ABBREV.search(parts[-1]):
+            parts[-1] += " " + piece
+        else:
+            parts.append(piece)
+    return [s.strip() for s in parts if len(s.strip()) > 3]
 
 
 # --- What the topic knows --------------------------------------------------------------
@@ -121,6 +144,7 @@ class TopicDoc:
     sentences: list[tuple[str, set[str]]]  # (sentence, its terms)
     all_terms: set[str]
     title_terms: set[str]
+    reasons: set[str] = field(default_factory=set)  # sentences that give a reason: the best answers to "why"
 
 
 @dataclass
@@ -131,6 +155,10 @@ class SubjectIndex:
 
 
 _cache: dict[int, SubjectIndex] = {}
+
+# A sentence that gives a reason. "Why ...?" is answered from these first.
+REASON = re.compile(r"\b(because|since|so that|so the|so it|this is why|that is why|that's why|which is why|otherwise|in order to|the reason|this means|which means|so we|so you)\b", re.I)
+WHY = re.compile(r"^\s*(why|how come|what is the reason|what's the reason)\b", re.I)
 
 
 def _stamp(db: DbSession, subject_id: int) -> tuple:
@@ -162,16 +190,20 @@ def subject_index(db: DbSession, subject_id: int) -> SubjectIndex:
     for concept, chapter in rows:
         # Notes and the plain-words explanation first: they read best as an answer.
         order = sorted(exps.get(concept.id, []), key=lambda e: ["text", "step_by_step", "real_world", "visual"].index(e.style) if e.style in STYLES else 9)
-        texts = [concept.notes] + [e.body for e in order] + worked.get(concept.id, [])[:4]
+        # The lesson's teaching, and the reason each of its checks gives, so "why" questions find a why.
+        steps = [st for st in (concept.lesson or []) if isinstance(st, dict)]
+        whys = [str((st.get("check") or {}).get("why") or "") for st in steps]
+        texts = [concept.notes] + [e.body for e in order] + [str(st.get("teach") or "") for st in steps] + whys + worked.get(concept.id, [])[:4]
         sents, seen = [], set()
         for text in texts:
             for s in sentences(text):
                 if s not in seen:
                     seen.add(s)
                     sents.append((s, set(terms(s))))
+        reasons = {s for s, _ in sents if REASON.search(s)} | {s for w in whys for s in sentences(w)}
         title_terms = set(terms(concept.title))
         all_terms = set().union(title_terms, *(t for _, t in sents)) if sents else title_terms
-        topics[concept.id] = TopicDoc(concept.id, chapter.id, concept.title, chapter.title, chapter.number, sents, all_terms, title_terms)
+        topics[concept.id] = TopicDoc(concept.id, chapter.id, concept.title, chapter.title, chapter.number, sents, all_terms, title_terms, reasons)
     n = max(1, len(topics))
     df: dict[str, int] = {}
     for doc in topics.values():
@@ -261,12 +293,15 @@ def find(index: SubjectIndex, concept_id: int, chapter_id: int, question: str) -
         nearby = best.chapter_id == chapter_id and bool(named) and any(named <= ts for _, ts in best.sentences)
         if not (says_it or about_topic or nearby):
             return None
+    asks_why = bool(WHY.match(question))
     scored = []
     for i, (s, ts) in enumerate(best.sentences):
         score = sum(_weight(index, t) for t in q if t in ts)
         if score:
             # A sentence that says what the thing asked about is answers "what is" questions best.
-            if defines and defines.search(s):
+            if asks_why and s in best.reasons:
+                score *= 2.5
+            elif defines and defines.search(s):
                 score *= 2
             elif re.search(r"\b(is|are|means|called)\b", s):
                 score *= 1.15
@@ -443,7 +478,9 @@ def reply(
 
     # 1. An answer to the question the tutor just asked.
     pending = db.get(Item, state["quiz"]) if state.get("quiz") else None
-    if pending and action is None and len(text) <= 60 and (intent_of(text) is None or text in (pending.options or [])):
+    if pending and action is None and len(text) <= 60 and (
+        text in (pending.options or []) or (intent_of(text) is None and not asks_something(text))
+    ):
         return check_quiz(db, pending, lang, state, text)
     if pending and action == "hint":
         return hint(db, pending, lang, state, protect=True)

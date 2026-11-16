@@ -5,6 +5,8 @@ chapter: 6
 title: Similar Triangles
 
 tips:
+  k9_angle_sum: "Matching angles are equal, and the three angles of a triangle add up to 180°."
+  k9_perimeter_scale: "Perimeters of similar triangles are in the same ratio as their sides. Compare the two perimeters to find the scale first."
   angles_scaled: "Angles don't change when a triangle is enlarged or shrunk. Only the lengths change."
   third_angle: "Find the missing angle first: the angles of a triangle add up to 180°."
   scale_inverted: "Check which way the scale goes: to get the bigger triangle's side, the answer should be bigger than the smaller triangle's side."
@@ -16,6 +18,11 @@ tips:
   shadow_similar: "Similar triangles need equal angles, not equal sizes. The sun's rays meet both at the same angle."
   similar_angle: "The angles add to 180°: 180 − 45 − 60."
   similar_needs_angles: "Similar means all angles equal. Only equilateral triangles always have the same angles."
+  pqk9m6_third_angle: The angles of a triangle add to 180°. Two equal pairs force the third pair to be equal.
+  pqk9m6_match_order: Match smallest with smallest and largest with largest before dividing.
+  pqk9m6_scale: Find the scale factor from a pair you know, then multiply. Don't add the difference.
+  pqk9m6_shadow: height ÷ shadow is the same for both. Match height with height and shadow with shadow.
+  pqk9m6_units: 'Change the map distance with the scale, then turn cm into km: 100000 cm = 1 km.'
 
 concepts:
   - code: math9.similar.equal_angles
@@ -69,6 +76,64 @@ concepts:
         ways:
         - style: real_world
           teach: Zoom in on a photo on your phone. Everything gets bigger, but a person's face keeps the same shape, so the corners and angles don't change. A triangle zoomed to twice the size has every side doubled, and every angle exactly the same as before.
+        - style: visual
+          teach: 'A small triangle and its enlargement: the sides grow, the angles stay exactly the same.'
+          picture:
+            kind: geometry
+            points:
+              A:
+              - 0.5
+              - 1
+              B:
+              - 3.5
+              - 1
+              C:
+              - 1.5
+              - 3.5
+              P:
+              - 5
+              - 1
+              Q:
+              - 9.5
+              - 1
+              R:
+              - 6.5
+              - 4.75
+            segments:
+            - - A
+              - B
+              - '3'
+            - - B
+              - C
+            - - C
+              - A
+            - - P
+              - Q
+              - '4.5'
+            - - Q
+              - R
+            - - R
+              - P
+            angles:
+            - at: A
+              from: B
+              to: C
+              label: x
+            - at: B
+              from: C
+              to: A
+              label: y
+            - at: P
+              from: Q
+              to: R
+              label: x
+            - at: Q
+              from: R
+              to: P
+              label: y
+            alt: A small triangle and a larger copy 1.5 times as big; matching angles x and y are equal.
+        - style: step_by_step
+          teach: 'Step 1: Draw a triangle. Step 2: Draw a bigger one with the same three angles. Step 3: Measure matching sides. Step 4: Every side has grown by the same factor: the shape is the same, only the size changed.'
       - teach: If two triangles have the same three angles, their matching sides are all in the same ratio. Such triangles are called similar, and that ratio is the scale factor. A 3, 4, 5 triangle and a 6, 8, 10 triangle with the same angles have scale factor 2.
         picture:
           kind: compare
@@ -93,6 +158,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: check that the two triangles have the same three angles. Step 2: pair up the sides opposite equal angles. Step 3: divide each big side by its partner. Step 4: all three answers are the same number, the scale factor. 6 ÷ 3, 8 ÷ 4 and 10 ÷ 5 all give 2.'
+        - style: real_world
+          teach: 'A set square and a large blackboard set square have the same angles, 30°, 60° and 90°. The big one''s sides are each, say, 4 times the small one''s. Same angles, sides in one ratio: they are similar.'
       - teach: Two equal angles are enough. The three angles of any triangle add to 180°, so if two angles match, the third is 180° minus those two in both triangles, and it matches too.
         check:
           prompt: One triangle has angles 50° and 60°. Another has 60° and 70°. What is the third angle of the first?
@@ -105,6 +172,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: add the two known angles of the triangle. Step 2: take that from 180°, because the angles of a triangle always add to 180°. Step 3: if another triangle has the same two angles, its third angle comes out the same, so all three match.'
+        - style: visual
+          teach: 'Two angles known, the third is forced: 180° minus the other two, in both triangles.'
+          picture:
+            kind: compare
+            columns:
+            - title: Triangle 1
+              points:
+              - 50°, 60°
+              - third = 180° − 110° = 70°
+            - title: Triangle 2
+              points:
+              - 50°, 60°
+              - third = 180° − 110° = 70°
+            alt: Both triangles with angles 50 and 60 degrees must have a third angle of 70 degrees.
     items:
       - prompt: "Triangle ABC has angles of 40°, 60° and 80°. Triangle PQR has the same shape but sides twice as long. What are PQR's angles?"
         options: ["40°, 60° and 80°", "80°, 120° and 160°", "20°, 30° and 40°", "Can't tell"]
@@ -246,6 +327,21 @@ concepts:
         solution: 'Step 1: Both triangles have the same angles. Step 2: 180 − 25 − 90 = 65. Step 3: So the third angle is 65°.'
         mistakes:
           '130': angles_scaled
+      - prompt: Triangle 1 has two angles of 40° and 75°. Triangle 2 has two angles of 40° and 65°. Are they similar?
+        options:
+        - 'Yes: both have angles 40°, 65° and 75°'
+        - 'No: only one angle matches'
+        - Can't tell without the sides
+        answer: 'Yes: both have angles 40°, 65° and 75°'
+        hints:
+        - Find the third angle of each triangle.
+        - 180° − 40° − 75° = 65°.
+        solution: Triangle 1's third angle is 65° and triangle 2's is 75°. Both have 40°, 65° and 75°, so they are similar.
+        mistakes:
+          'No: only one angle matches': pqk9m6_third_angle
+          Can't tell without the sides: pqk9m6_third_angle
+        exam: competency
+        difficulty: 2
   - code: math9.similar.sides_ratio
     title: Sides in the same ratio
     after: [math9.similar.equal_angles]
@@ -316,6 +412,24 @@ concepts:
         ways:
         - style: real_world
           teach: 'A photocopier set to 300% makes every length 3 times as long. Copy a triangle with sides 2, 3 and 4 cm, and you get 6, 9 and 12 cm. Because every side is the same multiple, the copy has exactly the same angles: the triangles are similar.'
+        - style: step_by_step
+          teach: 'Step 1: Write each triangle''s sides from shortest to longest. Step 2: Divide matching sides. Step 3: If all three answers are equal, the triangles are similar. Step 4: If even one is different, they are not.'
+        - style: visual
+          teach: 'Every side doubled: same multiple each time, so the triangles are similar.'
+          picture:
+            kind: compare
+            columns:
+            - title: Small triangle
+              points:
+              - 3 cm
+              - 4 cm
+              - 5 cm
+            - title: Big triangle
+              points:
+              - 6 cm
+              - 8 cm
+              - 10 cm
+            alt: Sides 3, 4 and 5 centimetres match sides 6, 8 and 10 centimetres, each exactly twice as long, so the triangles are similar.
       - teach: 'Match smallest with smallest, middle with middle, largest with largest, then divide. All three answers must be equal. 4, 6, 9 and 6, 9, 13.5 give 6 ÷ 4 = 1.5, 9 ÷ 6 = 1.5, 13.5 ÷ 9 = 1.5: similar. If one ratio differs, they are not similar.'
         check:
           prompt: Are triangles with sides 3, 4, 5 cm and 6, 8, 11 cm similar?
@@ -327,6 +441,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: sort each triangle''s sides from shortest to longest. Step 2: divide the shortest by the shortest, the middle by the middle, the longest by the longest. Step 3: if all three answers match, the triangles are similar. If even one differs, they are not.'
+        - style: visual
+          teach: '4, 6, 9 and 6, 9, 13.5: every ratio is 1.5.'
+          picture:
+            kind: compare
+            columns:
+            - title: Shortest
+              points:
+              - 6 ÷ 4 = 1.5
+            - title: Middle
+              points:
+              - 9 ÷ 6 = 1.5
+            - title: Longest
+              points:
+              - 13.5 ÷ 9 = 1.5
+            alt: Dividing matching sides of 6, 9, 13.5 by 4, 6, 9 gives 1.5 each time, so the triangles are similar.
       - teach: The perimeter grows by the same factor. A 3, 4, 5 triangle has perimeter 12. A similar triangle with perimeter 36 has scale factor 36 ÷ 12 = 3, so its sides are 9, 12 and 15.
         check:
           prompt: A triangle with perimeter 10 cm is enlarged to perimeter 30 cm. What is the scale factor?
@@ -339,6 +468,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: add the sides of the first triangle to get its perimeter. Step 2: divide the second perimeter by the first: that is the scale factor. Step 3: multiply each side of the first triangle by it to get the sides of the second.'
+        - style: visual
+          teach: The perimeter grows by the same factor as each side.
+          picture:
+            kind: flow
+            steps:
+            - '3, 4, 5: perimeter 12'
+            - New perimeter 36
+            - Factor 36 ÷ 12 = 3
+            - Sides 9, 12, 15
+            alt: A 3, 4, 5 triangle has perimeter 12; a similar triangle with perimeter 36 has factor 3 and sides 9, 12 and 15.
     items:
       - prompt: "Are triangles with sides 2, 3, 4 cm and 4, 6, 8 cm similar?"
         options: ["Yes: every side is doubled", "No: the sides are different", "Only if they have a right angle", "No: 4 − 2 is not 6 − 3"]
@@ -449,7 +588,7 @@ concepts:
         - The scale factor is 36 ÷ 9 = 4.
         solution: 'Step 1: Perimeter 9 cm. Step 2: Scale factor 36 ÷ 9 = 4. Step 3: Longest side 4 × 4 = 16 cm.'
         mistakes:
-          '12': scale_longest
+          '12': k9_perimeter_scale
       - prompt: A drawing of a triangle with sides 3, 6 and 8 cm is shrunk so that its longest side is 2 cm. How long is its shortest side, in cm? Decimals are fine.
         answer: '0.75'
         check: 3*2/8
@@ -470,6 +609,21 @@ concepts:
         solution: 'Step 1: Scale factor = 1.5. Step 2: x = 8 × 1.5. Step 3: x = 12.'
         mistakes:
           '11': matched_wrong_sides
+      - prompt: Are triangles with sides 5, 7, 9 and 10, 14, 17 similar?
+        options:
+        - 'No: 17 ÷ 9 is not 2'
+        - 'Yes: all sides doubled'
+        - 'Yes: two ratios are equal'
+        answer: 'No: 17 ÷ 9 is not 2'
+        hints:
+        - Divide matching sides.
+        - 10 ÷ 5 = 2, 14 ÷ 7 = 2, 17 ÷ 9 = ?
+        solution: 10 ÷ 5 = 2 and 14 ÷ 7 = 2, but 17 ÷ 9 ≈ 1.89. All three must be equal, so they are not similar.
+        mistakes:
+          'Yes: all sides doubled': pqk9m6_match_order
+          'Yes: two ratios are equal': pqk9m6_match_order
+        exam: competency
+        difficulty: 2
 
   - code: math9.similar.matching
     title: Matching sides and finding lengths
@@ -519,6 +673,24 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: read the names in order: ABC ~ PQR. Step 2: the first letters match, A and P; the second, B and Q; the third, C and R. Step 3: a side uses two letters, so swap each letter for its partner: AB becomes PQ, BC becomes QR, CA becomes RP.'
+        - style: visual
+          teach: 'ABC ~ PQR: read the letters in order, and the sides pair up the same way.'
+          picture:
+            kind: compare
+            columns:
+            - title: Triangle ABC
+              points:
+              - A
+              - B
+              - C
+              - AB, BC, CA
+            - title: Triangle PQR
+              points:
+              - P
+              - Q
+              - R
+              - PQ, QR, RP
+            alt: A matches P, B matches Q and C matches R, so AB matches PQ, BC matches QR and CA matches RP.
       - teach: 'To find a length, find the scale factor from a matching pair you know, then multiply. ABC ~ PQR, AB = 6, PQ = 9: the factor is 9 ÷ 6 = 1.5. If BC = 8, then QR = 8 × 1.5 = 12.'
         check:
           prompt: ABC ~ PQR with AB = 4, PQ = 12 and BC = 5. What is QR?
@@ -531,6 +703,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'A map and the real town: if 6 cm on the map is 9 km on the ground, then every 1 cm stands for 1.5 km. So 8 cm on the map is 12 km. With similar triangles, one known pair of sides gives the scale, and the scale gives every other side.'
+        - style: visual
+          teach: Scale factor first, from a pair of matching sides you know, then multiply the side you have.
+          picture:
+            kind: flow
+            steps:
+            - AB = 6, PQ = 9
+            - factor = 9 ÷ 6 = 1.5
+            - BC = 8
+            - QR = 8 × 1.5 = 12
+            alt: AB is 6 and PQ is 9, so the factor is 1.5; BC is 8, so QR is 12.
       - teach: A line parallel to one side of a triangle cuts off a small triangle similar to the whole. In triangle ABC with DE parallel to BC, triangle ADE ~ triangle ABC. Compare AD with the whole AB, not with the leftover DB.
         check:
           prompt: DE is parallel to BC, AD = 2, DB = 4 and BC = 9. Which ratio gives DE?
@@ -543,6 +725,43 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: with DE parallel to BC, the small triangle ADE has the same angles as ABC. Step 2: match AD with the whole side AB, not with DB. Step 3: if AD = 2 and DB = 4, then AB = 6. Step 4: DE/BC = AD/AB.'
+        - style: visual
+          teach: DE ∥ BC cuts off a small triangle ADE similar to ABC. Compare AD with the whole AB.
+          picture:
+            kind: geometry
+            points:
+              A:
+              - 5
+              - 9
+              B:
+              - 1
+              - 1
+              C:
+              - 9
+              - 1
+              D:
+              - 3
+              - 5
+              E:
+              - 7
+              - 5
+            segments:
+            - - A
+              - D
+              - AD
+            - - D
+              - B
+            - - A
+              - E
+            - - E
+              - C
+            - - B
+              - C
+              - BC
+            - - D
+              - E
+              - DE
+            alt: Triangle ABC with DE parallel to BC halfway up; triangle ADE is similar to triangle ABC.
     items:
       - prompt: "Triangle ABC is similar to triangle PQR, with A matching P, B matching Q and C matching R. Which side matches BC?"
         options: ["QR", "PQ", "PR", "AC"]
@@ -671,7 +890,21 @@ concepts:
         - The angles of ABC are 40°, B and 85°.
         solution: 'Step 1: C ↔ R, so angle C = 85°. Step 2: Angle B = 180° − 40° − 85°. Step 3: = 55°.'
         mistakes:
-          '85': similar_angle
+          '85': k9_angle_sum
+      - prompt: Triangle ABC ~ triangle PQR with AB = 4, BC = 6, PQ = 10. Find QR.
+        options:
+        - '15'
+        - '12'
+        - '8'
+        answer: '15'
+        hints:
+        - Scale factor = PQ ÷ AB.
+        - 10 ÷ 4 = 2.5.
+        solution: Factor = 10 ÷ 4 = 2.5, so QR = 6 × 2.5 = 15.
+        mistakes:
+          '12': pqk9m6_scale
+        exam: short
+        difficulty: 1
 
   - code: math9.similar.heights
     title: Heights, shadows and maps
@@ -727,6 +960,47 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: a stick stands straight, so it makes a right angle with the ground. Step 2: the tree does too. Step 3: at the same moment the sun''s rays come in at the same slant for both. Step 4: two equal angles, so the two triangles are similar.'
+        - style: visual
+          teach: The stick and the tree make right triangles with the same sun angle, so they are similar.
+          picture:
+            kind: geometry
+            points:
+              S1:
+              - 1
+              - 1
+              S2:
+              - 1
+              - 2
+              s:
+              - 3
+              - 1
+              T1:
+              - 5
+              - 1
+              T2:
+              - 5
+              - 5
+              t:
+              - 9
+              - 1
+            segments:
+            - - S1
+              - S2
+              - 1 m
+            - - S1
+              - s
+              - 2 m
+            - - S2
+              - s
+            - - T1
+              - T2
+              - h
+            - - T1
+              - t
+              - 8 m
+            - - T2
+              - t
+            alt: A 1 metre stick with a 2 metre shadow, and a tree of height h with an 8 metre shadow; the sun's rays make the same angle in both.
       - teach: So height ÷ shadow is the same for both. A 1 m stick with a 2 m shadow gives 1 ÷ 2 = 0.5. A tree with a 16 m shadow is 16 × 0.5 = 8 m tall. Measuring a short stick lets you find a tall height without climbing.
         picture:
           kind: compare
@@ -750,7 +1024,9 @@ concepts:
           why: Height is half the shadow (2 ÷ 4), so the building is 20 ÷ 2 = 10 m.
         ways:
         - style: real_world
-          teach: 'Stand in the sun next to a friend. If your shadow is twice your height, so is your friend''s, and so is the coconut tree''s. Height ÷ shadow is the same for everything at that moment. Measure that number with a short stick, then multiply the tree''s shadow by it to get the tree''s height.'
+          teach: Stand in the sun next to a friend. If your shadow is twice your height, so is your friend's, and so is the coconut tree's. Height ÷ shadow is the same for everything at that moment. Measure that number with a short stick, then multiply the tree's shadow by it to get the tree's height.
+        - style: step_by_step
+          teach: 'Step 1: Measure the stick (1 m) and its shadow (2 m). Step 2: Divide: 1 ÷ 2 = 0.5. Step 3: Measure the tree''s shadow: 16 m. Step 4: Tree height = 16 × 0.5 = 8 m.'
       - teach: 'Maps and scale drawings are similar figures too. A scale of 1 : 50000 means 1 cm on the map is 50000 cm, which is 500 m, on the ground. Change units carefully: 100 cm = 1 m and 1000 m = 1 km.'
         check:
           prompt: 'On a 1 : 100000 map, 1 cm stands for how much?'
@@ -763,6 +1039,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: read the scale, 1 : 50000. Step 2: 1 cm on the map is 50000 cm on the ground. Step 3: divide by 100 to get metres: 500 m. Step 4: divide by 1000 to get kilometres: 0.5 km.'
+        - style: visual
+          teach: 'A map scale of 1 : 50000, changed into units you can use.'
+          picture:
+            kind: flow
+            steps:
+            - 1 cm on map
+            - = 50000 cm on ground
+            - = 500 m
+            - = 0.5 km
+            alt: One centimetre on a 1 to 50000 map is 50000 centimetres on the ground, which is 500 metres or half a kilometre.
     items:
       - prompt: "A 1 m stick casts a 2 m shadow. At the same time, a tree casts a 16 m shadow. How tall is the tree, in metres?"
         answer: "8"
@@ -888,3 +1174,33 @@ concepts:
         solution: 'Step 1: Height ÷ shadow = 1.5. Step 2: Lamp post = 3 × 1.5. Step 3: = 4.5 m.'
         mistakes:
           '2': scale_inverted
+      - prompt: 'Situation: At 3 p.m., a 1.5 m tall girl casts a 2 m shadow. At the same time a coconut tree casts a 12 m shadow. How tall is the tree?'
+        options:
+        - 9 m
+        - 16 m
+        - 11.5 m
+        answer: 9 m
+        hints:
+        - height ÷ shadow is the same for both.
+        - 1.5 ÷ 2 = 0.75.
+        solution: 1.5 ÷ 2 = 0.75, so the tree is 12 × 0.75 = 9 m tall.
+        mistakes:
+          16 m: pqk9m6_shadow
+          11.5 m: pqk9m6_scale
+        exam: case
+        difficulty: 2
+      - prompt: 'Situation: On a map with scale 1 : 200000, two towns are 4.5 cm apart. How far apart are they on the ground?'
+        options:
+        - 9 km
+        - 90 km
+        - 0.9 km
+        answer: 9 km
+        hints:
+        - Ground distance = 4.5 × 200000 cm.
+        - 100000 cm = 1 km.
+        solution: 4.5 × 200000 = 900000 cm = 9 km.
+        mistakes:
+          90 km: pqk9m6_units
+          0.9 km: pqk9m6_units
+        exam: case
+        difficulty: 2

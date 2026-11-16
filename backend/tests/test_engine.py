@@ -124,3 +124,14 @@ def test_choices_are_shuffled_but_stable():
     # The right answer must not always sit in the first slot.
     assert len(firsts) > 1
     assert shuffled_options(SimpleNamespace(id=1, options=None)) is None
+
+
+def test_assertion_reason_choices_keep_the_exam_order():
+    from types import SimpleNamespace
+
+    from app.content_packs import AR_OPTIONS
+    from app.learning import shuffled_options
+
+    for i in range(1, 21):
+        item = SimpleNamespace(id=i, options=list(AR_OPTIONS), exam="assertion_reason")
+        assert shuffled_options(item) == AR_OPTIONS

@@ -23,6 +23,11 @@ tips:
   end_area_given: "The area of the end is already given, so don't halve it again. Multiply it by the length."
   prism_faces: "Count the faces of a triangular prism: the two triangle ends, plus one flat side for every edge of the triangle."
   prism_volume: "Prism volume = area of the end × length. Multiply, don't add."
+  pqk9m12_end_times_length: Volume of a prism = area of the end × length. Find the end's area first.
+  pqk9m12_litres: 1 litre = 1000 cm³. Divide cm³ by 1000 to get litres.
+  pqk9m12_open_box: 'An open box has no lid: leave out one top face.'
+  pqk9m12_k_power: Lengths × k give areas × k² and volumes × k³.
+  pqk9m12_cube_root: 'Find the edge first: which number times itself three times gives the volume?'
 
 concepts:
   - code: math9.prism.volume
@@ -89,6 +94,24 @@ concepts:
         ways:
         - style: real_world
           teach: Slice a loaf of bread and every slice has the same shape. Cut a brick, a Toblerone-style block or a pencil across, anywhere along its length, and the cut face is the same each time. Solids like these, with the same end shape all the way along, are called prisms.
+        - style: visual
+          teach: 'Three prisms: the end shape stays the same all along the length.'
+          picture:
+            kind: compare
+            columns:
+            - title: Cuboid
+              points:
+              - 'end: rectangle'
+              - e.g. a brick
+            - title: Triangular prism
+              points:
+              - 'end: triangle'
+              - e.g. a tent, a cheese wedge
+            - title: Cylinder
+              points:
+              - 'end: circle'
+              - e.g. a pipe, a tin
+            alt: A cuboid has a rectangle at each end, a triangular prism a triangle, and a cylinder a circle.
       - teach: 'Volume is the space a solid fills, measured in unit cubes. A prism''s volume is the area of its end times its length. Think of stacking layers: a cuboid 5 by 4 has 20 unit cubes in each layer, and 3 layers make 60 cm³.'
         picture:
           kind: flow
@@ -108,6 +131,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the area of one end. Step 2: think of that end as one thin layer of unit cubes. Step 3: count how many layers fit along the length. Step 4: volume = area of the end × length. An end of 20 cm² and a length of 3 cm gives 60 cm³.'
+        - style: real_world
+          teach: 'A stack of 3 equal notebooks: each notebook is a layer. If one layer covers 20 unit squares, the stack holds 3 × 20 = 60 unit cubes. Any prism is a stack of layers shaped like its end.'
       - teach: 'For a triangular prism, the end is a triangle, so its area is ½ × base × height. For a cylinder the end is a circle: πr² × h. Change units at the end: 1 litre = 1000 cm³ and 1 m³ = 1000 litres.'
         check:
           prompt: A tank holds 5000 cm³ of water. How many litres is that?
@@ -120,6 +145,16 @@ concepts:
         ways:
         - style: real_world
           teach: A 1-litre milk packet holds exactly 1000 cm³. So a tank of 5000 cm³ holds 5 litres, and a big water tank of 1 m³ holds 1000 litres. Work out the volume in cm³ or m³ first, then change it to litres at the end.
+        - style: visual
+          teach: End area × length, for three kinds of end.
+          picture:
+            kind: flow
+            steps:
+            - 'triangle end: ½ × b × h'
+            - 'circle end: πr²'
+            - × length = volume
+            - 1000 cm³ = 1 litre
+            alt: Find the end's area, a half base times height for a triangle or pi r squared for a circle, then multiply by the length; 1000 cubic centimetres make a litre.
     items:
       - prompt: "A cuboid is 5 cm long, 4 cm wide and 3 cm high. What is its volume, in cm³?"
         answer: "60"
@@ -253,6 +288,36 @@ concepts:
         mistakes:
           '20': added_dimensions
           '216': melt_recast
+      - prompt: 'Situation: A water tank is a cuboid 2 m long, 1.5 m wide and 1 m deep. How many litres does it hold when full?'
+        options:
+        - 3000 litres
+        - 3 litres
+        - 300 litres
+        answer: 3000 litres
+        hints:
+        - Volume = 2 × 1.5 × 1 m³.
+        - 1 m³ = 1000 litres.
+        solution: Volume = 3 m³ = 3 × 1000 = 3000 litres.
+        mistakes:
+          3 litres: pqk9m12_litres
+          300 litres: pqk9m12_litres
+        exam: case
+        difficulty: 2
+      - prompt: A triangular prism is 10 cm long. Its triangular end has base 6 cm and height 4 cm. Its volume is
+        options:
+        - 120 cm³
+        - 240 cm³
+        - 20 cm³
+        answer: 120 cm³
+        hints:
+        - End area = ½ × 6 × 4.
+        - Then × 10.
+        solution: End area = 12 cm², volume = 12 × 10 = 120 cm³.
+        mistakes:
+          240 cm³: pqk9m12_end_times_length
+          20 cm³: pqk9m12_end_times_length
+        exam: short
+        difficulty: 1
 
   - code: math9.prism.surface
     title: Surface area of a prism
@@ -330,6 +395,30 @@ concepts:
         ways:
         - style: real_world
           teach: 'Wrapping a gift box: the paper you need, with no overlaps, is its surface area. A cube has 6 faces, all the same square. If each face is a × a, the paper needed is 6 × a².'
+        - style: visual
+          teach: 'A cube unfolded: six equal squares, so its surface area is 6a².'
+          picture:
+            kind: area_grid
+            cols:
+            - size: 2
+              label: a
+            - size: 2
+              label: a
+            - size: 2
+              label: a
+            rows:
+            - size: 2
+              label: a
+            - size: 2
+              label: a
+            cells:
+            - - top
+              - front
+              - bottom
+            - - left
+              - back
+              - right
+            alt: 'A cube opened flat into six equal squares: top, front, bottom, back, left and right.'
       - teach: 'A cuboid has three pairs of equal faces: top and bottom (l × w), front and back (l × h), two ends (w × h). Surface area = 2(lw + lh + wh). An open box has no lid, so leave one l × w face out.'
         check:
           prompt: A cuboid is 3 cm by 2 cm by 1 cm. How many different face sizes does it have?
@@ -342,6 +431,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: list the faces in pairs: top and bottom, front and back, left and right. Step 2: find the area of one face from each pair: lw, lh, wh. Step 3: add the three and double it. Step 4: for an open box, take away one top face.'
+        - style: visual
+          teach: 'A cuboid''s six faces come in three equal pairs: add one of each pair and double.'
+          picture:
+            kind: compare
+            columns:
+            - title: Top and bottom
+              points:
+              - 2 × l × w
+            - title: Front and back
+              points:
+              - 2 × l × h
+            - title: Two ends
+              points:
+              - 2 × w × h
+            alt: A cuboid has top and bottom faces 2 l w, front and back faces 2 l h, and two end faces 2 w h.
       - teach: 'For any prism, unroll the side faces: together they make one rectangle, as long as the perimeter of the end and as wide as the prism''s length. Then add the two ends. A cylinder''s curved side unrolls to a rectangle 2πr long and h wide.'
         picture:
           kind: flow
@@ -361,6 +465,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Peel the label off a tin. It comes off as a rectangle: one side is the distance round the tin, the other is its height. Any prism''s side faces unroll the same way: a rectangle as long as the end''s perimeter and as wide as the prism is long. Then add the two ends.'
+        - style: step_by_step
+          teach: 'Step 1: Find the perimeter of the end. Step 2: The side faces unroll into one rectangle: perimeter × length. Step 3: Add the two ends. Step 4: For a cylinder: 2πr × h + 2πr².'
     items:
       - prompt: "How many faces does a triangular prism have?"
         options: ["5", "6", "3", "9"]
@@ -436,7 +542,7 @@ concepts:
         solution: 'Step 1: One face = 25 cm². Step 2: 6 faces. Step 3: 6 × 25 = 150 cm².'
         mistakes:
           '25': one_face
-          '125': area_not_volume
+          '125': volume_not_area
       - prompt: How many faces does a cuboid have?
         answer: '6'
         check: '6'
@@ -490,6 +596,21 @@ concepts:
         solution: 'Step 1: One face = 216 ÷ 6 = 36 cm². Step 2: Edge² = 36. Step 3: Edge = 6 cm.'
         mistakes:
           '36': one_face
+      - prompt: 'Situation: An open box (no lid) is 20 cm long, 10 cm wide and 8 cm high. How much cardboard is needed to make it?'
+        options:
+        - 680 cm²
+        - 880 cm²
+        - 1600 cm²
+        answer: 680 cm²
+        hints:
+        - 'Faces: bottom, front, back and two ends.'
+        - 200 + 2 × 160 + 2 × 80.
+        solution: Bottom 20 × 10 = 200; front and back 2 × 20 × 8 = 320; ends 2 × 10 × 8 = 160. Total = 680 cm².
+        mistakes:
+          880 cm²: pqk9m12_open_box
+          1600 cm²: pqk9m12_end_times_length
+        exam: case
+        difficulty: 2
 
   - code: math9.prism.scaling
     title: Bigger and smaller prisms
@@ -553,6 +674,19 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: build a cube from 1 cm cubes with edges of 2 cm: one layer is 2 × 2 = 4 cubes. Step 2: there are 2 layers, so 8 cubes. Step 3: a 3 cm cube has 3 × 3 = 9 in a layer and 3 layers: 27. The count grows as edge × edge × edge.'
+        - style: visual
+          teach: 'Double the edge of a cube: the surface becomes 4 times, the volume 8 times.'
+          picture:
+            kind: bars
+            bars:
+            - label: edge
+              value: 2
+            - label: surface
+              value: 4
+            - label: volume
+              value: 8
+            unit: times bigger
+            alt: When the edge doubles, the surface area becomes 4 times and the volume 8 times as big.
       - teach: 'The rule for any solid: multiply every length by k, and the surface area is multiplied by k², the volume by k³. Areas have two directions to stretch; volumes have three.'
         check:
           prompt: Every length of a box is tripled. How many times as much cardboard does it need?
@@ -565,6 +699,21 @@ concepts:
         ways:
         - style: real_world
           teach: Making a box 3 times as big each way? Each face is 3 times as long and 3 times as wide, so 9 times the cardboard. But it holds 3 × 3 × 3 = 27 times as much. Area grows with k², volume with k³.
+        - style: visual
+          teach: 'The rule for any scale factor k: one power of k for each direction you measure in.'
+          picture:
+            kind: compare
+            columns:
+            - title: Lengths
+              points:
+              - × k
+            - title: Areas
+              points:
+              - × k²
+            - title: Volumes
+              points:
+              - × k³
+            alt: Multiplying lengths by k multiplies areas by k squared and volumes by k cubed.
       - teach: 'Going backwards: a cube of volume 64 cm³ has edge ∛64 = 4 cm, because 4 × 4 × 4 = 64. Then its surface area is 6 × 4² = 96 cm².'
         check:
           prompt: A cube has a volume of 27 cm³. What is its edge?
@@ -577,6 +726,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for a cube''s volume, ask which number times itself three times gives it. Step 2: 64 = 4 × 4 × 4, so the edge is 4 cm. Step 3: now the surface area is 6 × 4² = 96 cm².'
+        - style: visual
+          teach: From volume back to edge, then on to surface area.
+          picture:
+            kind: flow
+            steps:
+            - volume 64 cm³
+            - edge = ∛64 = 4 cm
+            - one face = 16 cm²
+            - surface = 6 × 16 = 96 cm²
+            alt: A cube of volume 64 has edge 4, face 16 and surface area 96 square centimetres.
     items:
       - prompt: "If every edge of a cube is doubled, how many times as big does its volume become?"
         answer: "8"
@@ -713,3 +872,33 @@ concepts:
         mistakes:
           '1 : 8': scale_volume
           '1 : 2': scale_area
+      - prompt: Each edge of a cube is made 3 times as long. Its volume becomes
+        options:
+        - 27 times as big
+        - 9 times as big
+        - 3 times as big
+        answer: 27 times as big
+        hints:
+        - Volume grows by k³.
+        - 3³ = 27.
+        solution: Volume × 3³ = 27 times as big.
+        mistakes:
+          9 times as big: pqk9m12_k_power
+          3 times as big: pqk9m12_k_power
+        exam: one_mark
+        difficulty: 1
+      - prompt: A cube has volume 125 cm³. Its total surface area is
+        options:
+        - 150 cm²
+        - 125 cm²
+        - 25 cm²
+        answer: 150 cm²
+        hints:
+        - Edge = ∛125.
+        - Edge 5, one face 25 cm².
+        solution: Edge = 5 cm, one face = 25 cm², six faces = 150 cm².
+        mistakes:
+          25 cm²: pqk9m12_cube_root
+          125 cm²: pqk9m12_cube_root
+        exam: short
+        difficulty: 2

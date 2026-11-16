@@ -87,6 +87,8 @@ type Item = {
   watch_out?: boolean;
   /** 1 easy to 3 harder. Harder ones carry a "challenge" tag so a slip there feels normal. */
   difficulty?: number;
+  /** Written in a board-exam format (case study, assertion-reason...), shown as a small tag. */
+  exam?: string;
 };
 type NextStep =
   | { kind: "secure_in"; n: number; topic: string }
@@ -1054,6 +1056,7 @@ function Session({
                 {KIND_HEADINGS[step.kind] ? t(KIND_HEADINGS[step.kind]) : null}
               </h2>
               {(step.item.difficulty ?? 1) >= 3 && <p className="challenge-tag">{t("learn.challenge")}</p>}
+              {step.item.exam && <p className="exam-tag">{t(`learn.exam.${step.item.exam}` as Key)}</p>}
               {step.item.watch_out && !result && <p className="feedback warn watch-out">{t("learn.watch_out")}</p>}
               <ReadAlong style={{ fontSize: "1.2rem" }} text={step.item.prompt} />
               <button
@@ -1153,7 +1156,7 @@ function Session({
               {result && (
                 <>
                   {!result.correct && result.your_answer && result.right_answer ? (
-                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture}>
+                    <Mistake yours={result.your_answer} right={result.right_answer} picture={result.picture} prompt={step.item.prompt}>
                       <Feedback key={step.decision_id} r={result.response} readAloud={readAloud && !listen} tutorOn={tutorOn} />
                     </Mistake>
                   ) : (

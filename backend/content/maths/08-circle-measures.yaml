@@ -5,6 +5,7 @@ chapter: 8
 title: Circle Measures
 
 tips:
+  k9_semi_area: "πr is half the circle's length, not its area. Area uses r × r."
   pi_exact: "22/7 and 3.14 are only close to π. π's decimals go on for ever without repeating, so no fraction is exactly equal to it."
   pi_constant: "For every circle, big or small, circumference ÷ diameter is the same number, π."
   radius_diameter: "The diameter is twice the radius. Check which one the question gives, and which one the formula needs."
@@ -17,6 +18,11 @@ tips:
   fraction_lowest: "Divide the top and bottom by their biggest common factor. Both numbers here end in 0, so start by dividing both by 10."
   pi_digits: "π starts 3.1415… Compare each choice with these first digits, place by place."
   pi_doubled: "2 × 3.14: double each digit carefully."
+  pqk9m8_radius_diam: Check whether you were given the radius or the diameter. Halve the diameter to get r.
+  pqk9m8_area_vs_circ: Distance around uses 2πr; space inside uses πr².
+  pqk9m8_square_factor: Area grows with the square of the radius, not in step with it.
+  pqk9m8_ring: 'A ring''s area is the big circle minus the small circle: subtract areas, not radii.'
+  pqk9m8_semi_perimeter: A semicircle's perimeter is the curved half plus the straight diameter.
 
 concepts:
   - code: math9.circle.pi
@@ -73,6 +79,27 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: wrap a thread once round a round tin and mark it. Step 2: lay the thread straight and measure it: the circumference. Step 3: measure straight across the top through the centre: the diameter. Step 4: divide the first by the second. Any round thing gives a little more than 3.'
+        - style: visual
+          teach: 'Measure, then divide: every round object gives the same answer, a little over 3.'
+          picture:
+            kind: compare
+            columns:
+            - title: Bangle
+              points:
+              - around 22 cm
+              - across 7 cm
+              - 22 ÷ 7 ≈ 3.14
+            - title: Plate
+              points:
+              - around 66 cm
+              - across 21 cm
+              - 66 ÷ 21 ≈ 3.14
+            - title: Bucket rim
+              points:
+              - around 88 cm
+              - across 28 cm
+              - 88 ÷ 28 ≈ 3.14
+            alt: A bangle, a plate and a bucket rim each give circumference divided by diameter of about 3.14.
       - teach: 'That number is called π (pi). For every circle, circumference ÷ diameter = π. π ≈ 3.14, and 22/7 is also close. But π is irrational: its decimals 3.14159… go on for ever without repeating, so 3.14 and 22/7 are only approximations.'
         check:
           prompt: Which is true about π?
@@ -85,6 +112,21 @@ concepts:
         ways:
         - style: real_world
           teach: Try this with a coin, a plate and a cycle wheel. Each time circumference ÷ diameter comes out about 3.14. That fixed number has a name, π. Its decimals go on for ever and never repeat, so 3.14 or 22/7 are only close values, not exact ones.
+        - style: visual
+          teach: π sits a little past 3 on the number line; 22/7 and 3.14 are both close, but neither is exact.
+          picture:
+            kind: number_line
+            from: 3.1
+            to: 3.16
+            step: 0.01
+            points:
+            - at: 3.14
+              label: '3.14'
+            - at: 3.1416
+              label: π
+            - at: 3.1429
+              label: 22/7
+            alt: 'Between 3.10 and 3.16: 3.14 is just below pi, and 22 over 7 is just above it.'
       - teach: Because circumference ÷ diameter = π for every circle, doubling the diameter doubles the circumference. A circle 3 times as wide goes 3 times as far round.
         check:
           prompt: Circle B is 5 times as wide as circle A. How do their circumferences compare?
@@ -97,6 +139,21 @@ concepts:
         ways:
         - style: real_world
           teach: A cycle wheel twice as wide as a toy car's wheel goes twice as far in one turn. Since circumference is always π times diameter, making the diameter 3 times bigger makes the distance round 3 times bigger too.
+        - style: step_by_step
+          teach: 'Step 1: Circumference = π × diameter for every circle. Step 2: Double the diameter: π × 2d = 2 × (π × d). Step 3: So the circumference doubles too. Step 4: In the same way, 3 times as wide means 3 times as far round.'
+        - style: visual
+          teach: Circumference grows exactly as fast as the diameter, because it is always π times it.
+          picture:
+            kind: bars
+            bars:
+            - label: d = 1
+              value: 3.14
+            - label: d = 2
+              value: 6.28
+            - label: d = 3
+              value: 9.42
+            unit: units round
+            alt: 'Diameters 1, 2 and 3 give circumferences of about 3.14, 6.28 and 9.42: twice as wide goes twice as far round.'
     items:
       - prompt: "For any circle, what is circumference ÷ diameter?"
         options: ["π, about 3.14", "2", "It depends on the size of the circle", "π, which is exactly 22/7"]
@@ -232,6 +289,21 @@ concepts:
         solution: 'Step 1: π − 3.14 ≈ 0.0016. Step 2: 22/7 − π ≈ 0.0013. Step 3: So 22/7 is slightly closer.'
         mistakes:
           '3.14': pi_digits
+      - prompt: Which statement about π is true?
+        options:
+        - Its decimals never end and never repeat
+        - π = 22/7 exactly
+        - π = 3.14 exactly
+        answer: Its decimals never end and never repeat
+        hints:
+        - Is π rational or irrational?
+        - 22/7 = 3.142857… and π = 3.141592…
+        solution: π is irrational, so it can't be written as a fraction and its decimals never end or repeat. 22/7 and 3.14 are only approximations.
+        mistakes:
+          π = 22/7 exactly: pqk9m2_recur
+          π = 3.14 exactly: pqk9m2_recur
+        exam: one_mark
+        difficulty: 1
 
   - code: math9.circle.circumference
     title: The perimeter of a circle
@@ -284,6 +356,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the diameter; if you have the radius, double it. Step 2: multiply by π. Step 3: use 22/7 if the numbers have 7 in them, or 3.14 if told to. Radius 7 cm: diameter 14, times 22/7 is 44 cm.'
+        - style: visual
+          teach: Radius 7 cm, one box at a time, gives a circumference of 44 cm.
+          picture:
+            kind: flow
+            steps:
+            - r = 7 cm
+            - d = 2r = 14 cm
+            - C = π × d
+            - = 22/7 × 14 = 44 cm
+            alt: Radius 7 centimetres gives diameter 14, and the circumference is 22 over 7 times 14, which is 44 centimetres.
       - teach: If a question doesn't say which value of π to use, leave π in the answer. Radius 5 gives circumference 2 × π × 5 = 10π cm. That is the exact answer.
         check:
           prompt: A circle has a radius of 4 cm. What is its exact circumference?
@@ -296,6 +378,22 @@ concepts:
         ways:
         - style: real_world
           teach: 'If a recipe says ''salt to taste'', you don''t invent a number. If a question doesn''t say which value of π to use, don''t invent one either: write the answer with π in it, like 10π cm. That is the exact length.'
+        - style: step_by_step
+          teach: 'Step 1: Read the question: does it say which value of π to use? Step 2: If not, keep π as a letter. Step 3: Radius 5: C = 2 × π × 5. Step 4: Write it as 10π cm. That is exact; 31.4 cm is only an estimate.'
+        - style: visual
+          teach: Exact answer keeps π; an approximate one puts in a value for π.
+          picture:
+            kind: compare
+            columns:
+            - title: Exact
+              points:
+              - 2 × π × 5
+              - = 10π cm
+            - title: Approximate
+              points:
+              - π ≈ 3.14
+              - ≈ 31.4 cm
+            alt: For radius 5, the exact circumference is 10 pi centimetres; using 3.14 for pi gives about 31.4 centimetres.
       - teach: 'Going backwards: diameter = circumference ÷ π. A wheel rolls one circumference in each full turn, so a 70 cm wheel goes 220 cm per turn, and 100 turns go 22000 cm = 220 m.'
         check:
           prompt: A wire 22 cm long is bent into a circle. Using π ≈ 22/7, what is its diameter?
@@ -308,6 +406,33 @@ concepts:
         ways:
         - style: real_world
           teach: 'A cycle wheel rolls forward exactly one circumference each turn. Count the turns and multiply: 100 turns of a 220 cm wheel take you 22000 cm, which is 220 m. To go backwards from the circumference to the width, divide by π.'
+        - style: visual
+          teach: One turn of a wheel rolls it forward by exactly one circumference.
+          picture:
+            kind: number_line
+            from: 0
+            to: 700
+            step: 100
+            points:
+            - at: 0
+              label: start
+            - at: 220
+              label: 1 turn
+            - at: 440
+              label: 2 turns
+            - at: 660
+              label: 3 turns
+            jumps:
+            - from: 0
+              to: 220
+              label: 220 cm
+            - from: 220
+              to: 440
+              label: 220 cm
+            - from: 440
+              to: 660
+              label: 220 cm
+            alt: 'A 70 centimetre wheel rolls 220 centimetres with each turn: 220, 440, 660 centimetres after 1, 2 and 3 turns.'
     items:
       - prompt: "A circle has a diameter of 14 cm. Using π ≈ 22/7, what is its circumference, in cm?"
         answer: "44"
@@ -447,6 +572,21 @@ concepts:
         solution: 'Step 1: Full circumference = 2 × 22/7 × 7 = 44 m. Step 2: Half of it is the curve. Step 3: 44 ÷ 2 = 22 m.'
         mistakes:
           '44': whole_not_half
+      - prompt: 'Situation: The wheel of a bicycle has a diameter of 63 cm. How far does the cycle go when the wheel turns 50 times? (π = 22/7)'
+        options:
+        - 99 m
+        - 198 m
+        - 49.5 m
+        answer: 99 m
+        hints:
+        - One turn = one circumference = π × 63 cm.
+        - 22/7 × 63 = 198 cm.
+        solution: One turn = 22/7 × 63 = 198 cm. 50 turns = 9900 cm = 99 m.
+        mistakes:
+          198 m: pqk9m8_radius_diam
+          49.5 m: pqk9m8_radius_diam
+        exam: case
+        difficulty: 2
 
   - code: math9.circle.area
     title: The area of a circle
@@ -513,6 +653,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: cut a round chapati into many thin slices. Step 2: lay them in a row, points up and down in turn. Step 3: they make nearly a rectangle. Step 4: its height is one slice long, the radius. Step 5: its length is half the edge of the chapati, half of 2πr, which is πr.'
+        - style: real_world
+          teach: 'Cut a round chapati into 16 thin wedges and lay them tip-up, tip-down in a row. It looks like a rectangle πr long and r high. Its area, πr × r, is the chapati''s area: πr².'
       - teach: 'So the area of a circle is πr². Radius 7 cm, π ≈ 22/7: area = 22/7 × 7 × 7 = 154 cm². Square the radius, not the diameter: if you''re given the diameter, halve it first.'
         check:
           prompt: A circle has a diameter of 10 cm. What is its exact area?
@@ -525,6 +667,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: find the radius; if you are given the diameter, halve it first. Step 2: square the radius. Step 3: multiply by π. Diameter 14 cm: radius 7, 7² = 49, area 49π cm², or 154 cm² with π ≈ 22/7.'
+        - style: visual
+          teach: Given the diameter, halve it first, then square.
+          picture:
+            kind: flow
+            steps:
+            - d = 14 cm
+            - r = 7 cm
+            - r² = 49
+            - A = 22/7 × 49 = 154 cm²
+            alt: A diameter of 14 gives a radius of 7, r squared 49, and area 154 square centimetres.
       - teach: The area grows with the square of the radius. Double the radius and the area becomes 2² = 4 times as big; triple it and the area becomes 9 times as big. To go back from area to radius, divide by π and take the square root.
         check:
           prompt: A circle's area is 9π cm². What is its radius?
@@ -537,6 +689,19 @@ concepts:
         ways:
         - style: real_world
           teach: 'A pizza twice as wide is not twice as much pizza: it is 4 times as much, because the area grows with the radius squared. Three times as wide is 9 times as much. Going back from area to radius: divide by π, then take the square root.'
+        - style: visual
+          teach: Double the radius, and the area becomes four times as big.
+          picture:
+            kind: bars
+            bars:
+            - label: r = 1
+              value: 1
+            - label: r = 2
+              value: 4
+            - label: r = 3
+              value: 9
+            unit: × πr² of r = 1
+            alt: Areas for radius 1, 2 and 3 are in the ratio 1 to 4 to 9.
     items:
       - prompt: "A circle has a radius of 7 cm. Using π ≈ 22/7, what is its area, in cm²?"
         answer: "154"
@@ -668,6 +833,36 @@ concepts:
         solution: 'Step 1: r = 88 ÷ (2 × 22/7) = 14 m. Step 2: Area = 22/7 × 14². Step 3: = 616 m².'
         mistakes:
           '88': perimeter_not_area
+      - prompt: The radius of a circle is doubled. Its area becomes
+        options:
+        - 4 times as big
+        - 2 times as big
+        - 8 times as big
+        answer: 4 times as big
+        hints:
+        - Area = πr². What is (2r)²?
+        - (2r)² = 4r².
+        solution: π(2r)² = 4πr², so the area becomes 4 times as big.
+        mistakes:
+          2 times as big: pqk9m8_square_factor
+          8 times as big: pqk9m8_square_factor
+        exam: one_mark
+        difficulty: 1
+      - prompt: 'Situation: A circular garden has an area of 616 m². What is its radius? (π = 22/7)'
+        options:
+        - 14 m
+        - 28 m
+        - 196 m
+        answer: 14 m
+        hints:
+        - πr² = 616, so r² = 616 ÷ 22/7.
+        - 616 × 7 ÷ 22 = 196.
+        solution: r² = 616 × 7/22 = 196, so r = √196 = 14 m.
+        mistakes:
+          196 m: pq10m10_root_left
+          28 m: pqk9m8_radius_diam
+        exam: case
+        difficulty: 2
 
   - code: math9.circle.shapes
     title: Half circles, rings and other shapes
@@ -725,6 +920,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for a semicircle''s curved edge, halve the circumference: πr. Step 2: for its area, halve πr². Step 3: for its full perimeter, add the straight edge too, the diameter 2r. Forgetting the straight edge is the usual slip.'
+        - style: visual
+          teach: A semicircle's area and its perimeter, side by side.
+          picture:
+            kind: compare
+            columns:
+            - title: Area
+              points:
+              - ½ × πr²
+            - title: Perimeter
+              points:
+              - 'curved: πr'
+              - '+ straight: 2r'
+              - = πr + 2r
+            alt: A semicircle's area is half pi r squared; its perimeter is the curved pi r plus the straight diameter 2r.
       - teach: 'A ring is a big circle with a small circle taken out. Its area is the big area minus the small area: πR² − πr². A path round a pond of radius 7 m, 3.5 m wide, has R = 10.5 m and r = 7 m.'
         picture:
           kind: flow
@@ -744,6 +953,8 @@ concepts:
         ways:
         - style: real_world
           teach: A round pond with a footpath around it. The path's area is the whole circle, pond plus path, minus the pond. Big radius R goes to the outer edge of the path, small radius r to the pond's edge. Area of path = πR² − πr².
+        - style: step_by_step
+          teach: 'Step 1: Find the big radius R: pond 7 m + path 3.5 m = 10.5 m. Step 2: Big area = π × 10.5². Step 3: Small area = π × 7². Step 4: Path area = big − small = 22/7 × (110.25 − 49) = 192.5 m².'
       - teach: 'For other shapes, break them into parts you know. A square with a semicircle on one side: add the square''s area and the semicircle''s. A square with a circle cut out: subtract. A quarter circle is a quarter of πr².'
         check:
           prompt: A shape is a 10 cm square with a circle of area 78.5 cm² cut out. What is its area?
@@ -756,6 +967,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: look at the shape and find pieces you know: squares, rectangles, circles, half or quarter circles. Step 2: find each piece''s area. Step 3: add pieces that are joined on; subtract pieces that are cut out.'
+        - style: visual
+          teach: Break the shape into parts you know, then add or subtract.
+          picture:
+            kind: compare
+            columns:
+            - title: Square + semicircle
+              points:
+              - add the areas
+              - a² + ½πr²
+            - title: Square − circle
+              points:
+              - subtract the hole
+              - a² − πr²
+            alt: 'A square with a semicircle added: add the areas. A square with a circle cut out: subtract.'
     items:
       - prompt: "What is the area of a semicircle of radius 7 cm, in cm²? Use π ≈ 22/7."
         answer: "77"
@@ -771,7 +996,7 @@ concepts:
         difficulty: 1
         hints: ["Half of a circle's area."]
         solution: "A circle's area is πr², so half is πr²/2."
-        mistakes: {"πr²": whole_not_half, "πr": perimeter_not_area}
+        mistakes: {"πr²": "whole_not_half", "πr": "k9_semi_area"}
       - prompt: "What is the perimeter of a semicircle of radius 7 cm, including its straight side, in cm? Use π ≈ 22/7."
         answer: "36"
         check: "(22/7)*7 + 14"
@@ -888,3 +1113,33 @@ concepts:
         solution: 'Step 1: Square = 784 cm². Step 2: Four quarters = one circle of radius 7 = 154 cm². Step 3: 784 − 154 = 630 cm².'
         mistakes:
           '745.5': whole_not_half
+      - prompt: The perimeter of a semicircular protractor of radius 7 cm is (π = 22/7)
+        options:
+        - 36 cm
+        - 22 cm
+        - 29 cm
+        answer: 36 cm
+        hints:
+        - Curved edge = πr = 22 cm.
+        - Add the straight edge, the diameter.
+        solution: Curved edge = 22/7 × 7 = 22 cm, straight edge = 14 cm, total = 36 cm.
+        mistakes:
+          22 cm: pqk9m8_semi_perimeter
+          29 cm: pqk9m8_semi_perimeter
+        exam: short
+        difficulty: 2
+      - prompt: 'Situation: A circular pond of radius 14 m has a path 7 m wide all round it. What is the area of the path? (π = 22/7)'
+        options:
+        - 770 m²
+        - 154 m²
+        - 1386 m²
+        answer: 770 m²
+        hints:
+        - Outer radius = 14 + 7 = 21 m.
+        - Path = π × 21² − π × 14².
+        solution: π(21² − 14²) = 22/7 × (441 − 196) = 22/7 × 245 = 770 m².
+        mistakes:
+          154 m²: pqk9m8_ring
+          1386 m²: pqk9m8_ring
+        exam: case
+        difficulty: 2

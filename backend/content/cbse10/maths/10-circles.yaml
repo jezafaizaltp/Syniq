@@ -3,6 +3,7 @@ subject: cbse10-math
 chapter: 10
 title: Circles
 tips:
+  c10m10_radius_tangent: "A radius drawn to the point of contact is always perpendicular to the tangent. So that statement IS true: look for the one that isn't."
   c10_pythag_subtract: 'The line to the centre is the hypotenuse. To find the tangent (a shorter side), subtract the squares: √(d² − r²).'
   c10_half_chord: That is half the chord. The radius to the point of contact cuts the chord in half, so double it.
   c10_supplementary: In OAPB the angles at A and B are both 90°, so ∠APB and ∠AOB add to 180°.
@@ -20,6 +21,11 @@ tips:
   c10m10_kite: In quadrilateral OAPB the angles at A and B are 90° each. The four angles add up to 360°.
   c10m10_split_tangent: Each side of the figure is made of two tangent pieces. Pieces from the same corner are equal; name them and add.
   c10m10_parallel: Tangents at the two ends of a diameter are both perpendicular to that diameter. What does that make them?
+  pq10m10_add_lengths: The radius and the road meet at 90°, so the lengths don't add in a line. Use Pythagoras.
+  pq10m10_not_difference: Sides around a right angle don't just subtract. Use Pythagoras.
+  pq10m10_root_left: 'That is r². One more step: take the square root.'
+  pq10m10_wrong_pair: 'Opposite sides pair up: AB + CD = AD + BC.'
+  pq10m10_base_angles: In △OAB, OA = OB, so the two base angles share 180° − ∠AOB.
 concepts:
 - code: cbse10m.circ.tangent
   title: Tangent to a circle
@@ -112,6 +118,52 @@ concepts:
         - Chord
         answer: Tangent
         why: One point of contact means it only touches.
+      ways:
+      - style: visual
+        teach: 'Three lines and one circle: the secant cuts it twice, the tangent touches it once at P, and the third line misses it.'
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 5
+            - 4.5
+            _s1:
+            - 1
+            - 3
+            _s2:
+            - 9
+            - 5
+            _t1:
+            - 1.5
+            - 7.5
+            P:
+            - 5
+            - 7.5
+            _t2:
+            - 8.5
+            - 7.5
+            _m1:
+            - 1
+            - 9.5
+            _m2:
+            - 9
+            - 9.5
+          circles:
+          - centre: O
+            radius: 3
+          segments:
+          - - _s1
+            - _s2
+            - secant
+          - - _t1
+            - _t2
+            - tangent
+          - - _m1
+            - _m2
+            - no meeting point
+          alt: A circle with a secant cutting it at two points, a tangent touching it at one point P, and a line that misses it.
+      - style: real_world
+        teach: 'A bicycle wheel on a flat road touches the road at just one point: the road is a tangent to the wheel. A stick pushed through the wheel so it pokes out on both sides is like a secant.'
     - teach: 'Key theorem: the tangent at any point is perpendicular to the radius through that point. So the radius, the tangent and the line from the centre to an outside point form a right triangle with the right angle at the point of contact.'
       picture:
         kind: geometry
@@ -145,6 +197,11 @@ concepts:
         - AP
         answer: OP
         why: It is opposite the right angle at A.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Mark the centre O and the point of contact A. Step 2: Join OA: it is a radius. Step 3: The tangent at A makes 90° with OA. Step 4: Join O to any outside point P on the tangent: OAP is a right triangle with the right angle at A.'
+      - style: real_world
+        teach: Whirl a stone on a string and let go. The stone flies off along the tangent, at right angles to the string at that moment. The string plays the radius, and the stone's path the tangent.
     - teach: 'Use Pythagoras: OP² = OA² + AP². With radius 3 and OP = 5, the tangent AP = √(25 − 9) = 4. From a point inside the circle there is no tangent; from a point on the circle there is exactly one.'
       check:
         prompt: Radius 5 cm, P is 13 cm from the centre. Tangent length?
@@ -154,6 +211,42 @@ concepts:
         - 18 cm
         answer: 12 cm
         why: √(169 − 25) = 12.
+      ways:
+      - style: visual
+        teach: Radius 3, OP = 5, right angle at A. OP is the hypotenuse, so AP = √(25 − 9) = 4.
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 3
+            - 4
+            A:
+            - 3
+            - 7
+            P:
+            - 7
+            - 7
+          circles:
+          - centre: O
+            radius: 3
+          segments:
+          - - O
+            - A
+            - '3'
+          - - A
+            - P
+            - '4'
+          - - O
+            - P
+            - '5'
+          angles:
+          - at: A
+            from: O
+            to: P
+            label: 90°
+          alt: A circle with centre O and radius OA of 3. The tangent from A reaches P, with OP 5 and AP 4, and a right angle at A.
+      - style: step_by_step
+        teach: 'Step 1: Radius OA = 3 and OP = 5. Step 2: ∠OAP = 90°, so OP is the hypotenuse. Step 3: OP² = OA² + AP²: 25 = 9 + AP². Step 4: AP² = 16, so AP = 4.'
   items:
   - prompt: How many tangents can be drawn to a circle from a point outside it?
     options:
@@ -333,6 +426,55 @@ concepts:
     solution: Through a point on the circle there is exactly one tangent.
     mistakes:
       Two: c10m10_on_circle
+  - prompt: 'Assertion (A): No tangent can be drawn to a circle from a point inside it.
+
+      Reason (R): Every line through a point inside a circle cuts the circle at two points.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A tangent meets the circle at exactly one point. By R, every line through an inside point meets it twice, so none is a tangent. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A bicycle wheel of radius 35 cm stands on a straight road. A pebble lies on the road 84 cm from the point where the wheel touches it. How far is the pebble from the wheel''s centre?'
+    options:
+    - 91 cm
+    - 119 cm
+    - 49 cm
+    answer: 91 cm
+    hints:
+    - The road is a tangent, so it is at 90° to the radius at the touching point.
+    - Distance² = 35² + 84².
+    solution: 35² + 84² = 1225 + 7056 = 8281, and √8281 = 91 cm.
+    mistakes:
+      119 cm: pq10m10_add_lengths
+      49 cm: pq10m10_not_difference
+    exam: case
+    difficulty: 2
+  - prompt: The tangent from a point Q to a circle is 24 cm long, and Q is 25 cm from the centre. The radius is
+    options:
+    - 7 cm
+    - 1 cm
+    - 49 cm
+    answer: 7 cm
+    hints:
+    - The radius, the tangent and the line to the centre form a right triangle.
+    - r² = 25² − 24².
+    solution: r² = 625 − 576 = 49, so r = 7 cm.
+    mistakes:
+      1 cm: pq10m10_not_difference
+      49 cm: pq10m10_root_left
+    exam: one_mark
+    difficulty: 1
 - code: cbse10m.circ.two_tangents
   title: Two tangents from an outside point
   after:
@@ -487,6 +629,11 @@ concepts:
         - 4.5 cm
         answer: 9 cm
         why: Tangents from one outside point are equal.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Join O to A, B and P. Step 2: OA = OB, since both are radii. Step 3: ∠OAP = ∠OBP = 90°, since a tangent is at right angles to the radius. Step 4: OP is shared. Step 5: So △OAP ≅ △OBP (RHS), and PA = PB.'
+      - style: real_world
+        teach: Stand outside a round fountain and stretch two ropes from your hand so each just touches the rim, one on each side. However far you stand, the two ropes come out the same length.
     - teach: OP bisects the angle APB, and in quadrilateral OAPB the angles at A and B are 90°. So ∠AOB + ∠APB = 180°. If ∠APB = 70°, then ∠AOB = 110° and ∠OPA = 35°.
       check:
         prompt: ∠APB = 50°. Then ∠AOB = ?
@@ -496,6 +643,58 @@ concepts:
         - 100°
         answer: 130°
         why: 180° − 50° = 130°.
+      ways:
+      - style: visual
+        teach: In OAPB the angles at A and B are right angles, so the angle at O and the angle at P must share the remaining 180°.
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 3
+            - 5
+            A:
+            - 3.67
+            - 6.89
+            B:
+            - 3.67
+            - 3.11
+            P:
+            - 9
+            - 5
+          circles:
+          - centre: O
+            radius: 2
+          segments:
+          - - O
+            - A
+          - - O
+            - B
+          - - P
+            - A
+          - - P
+            - B
+          - - O
+            - P
+          angles:
+          - at: A
+            from: O
+            to: P
+            label: 90°
+          - at: B
+            from: O
+            to: P
+            label: 90°
+          - at: O
+            from: A
+            to: B
+            label: ∠AOB
+          - at: P
+            from: A
+            to: B
+            label: ∠APB
+          alt: Two tangents PA and PB from P to a circle with centre O. The angles at A and B are right angles.
+      - style: step_by_step
+        teach: 'Step 1: The angles of quadrilateral OAPB add to 360°. Step 2: ∠A and ∠B are 90° each. Step 3: So ∠AOB + ∠APB = 180°. Step 4: If ∠APB = 70°, then ∠AOB = 110°. Step 5: OP cuts ∠APB in half, so ∠OPA = 35°.'
     - teach: When a circle sits inside a quadrilateral touching all four sides, each side is split into two tangent pieces. Pieces from the same corner are equal, so AB + CD = AD + BC. For a triangle around a circle, name the pieces from each corner and add.
       check:
         prompt: A quadrilateral around a circle has AB = 5, CD = 7, BC = 6. AD = ?
@@ -505,6 +704,28 @@ concepts:
         - '18'
         answer: '6'
         why: AB + CD = 12 = BC + AD, so AD = 6.
+      ways:
+      - style: visual
+        teach: 'Pair up the pieces: every piece on one side of the sum has an equal partner on the other side.'
+        picture:
+          kind: compare
+          columns:
+          - title: AB + CD
+            points:
+            - AP + PB
+            - + CR + RD
+          - title: AD + BC
+            points:
+            - AS + SD
+            - + BQ + QC
+          - title: Why they match
+            points:
+            - AP = AS, PB = BQ
+            - CR = CQ, RD = DS
+            - (tangents from the same corner)
+          alt: AB plus CD splits into AP, PB, CR and RD; AD plus BC splits into AS, SD, BQ and QC; each piece equals a partner because tangents from one corner are equal.
+      - style: step_by_step
+        teach: 'Step 1: The circle touches AB, BC, CD and DA at P, Q, R and S. Step 2: From each corner the two pieces are equal: AP = AS, BP = BQ, CR = CQ, DR = DS. Step 3: AB + CD = AP + BP + CR + DR. Step 4: Swap each for its partner: AS + BQ + CQ + DS = AD + BC.'
   items:
   - prompt: From a point P, two tangents PA and PB are drawn. PA = 7 cm. Find PB in cm.
     answer: '7'
@@ -658,7 +879,7 @@ concepts:
     - Where does PA meet OP?
     solution: The right angle is between OA and PA, not OP and PA. The other three are true.
     mistakes:
-      OA is perpendicular to PA: c10m10_pyth
+      OA is perpendicular to PA: c10m10_radius_tangent
       PA = PB: c10m10_split_tangent
   - prompt: The radius is 3 cm and P is 5 cm from the centre. Find the length of each tangent from P, in cm.
     answer: '4'
@@ -671,3 +892,51 @@ concepts:
     mistakes:
       '2': c10m10_pyth
       '8': c10m10_split_tangent
+  - prompt: 'Assertion (A): If PA and PB are tangents from P to a circle with centre O and ∠APB = 80°, then ∠AOB = 100°.
+
+      Reason (R): The angle between two tangents from an outside point and the angle between the radii to the contact points add up to 180°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: By R, ∠AOB = 180° − 80° = 100°. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A circular rangoli is drawn inside a four-sided frame ABCD so that it touches all four sides. AB = 10 cm, BC = 12 cm and CD = 8 cm. Find AD.'
+    options:
+    - 6 cm
+    - 14 cm
+    - 10 cm
+    answer: 6 cm
+    hints:
+    - Tangents from the same corner are equal.
+    - AB + CD = AD + BC.
+    solution: AB + CD = AD + BC, so 10 + 8 = AD + 12 and AD = 6 cm.
+    mistakes:
+      14 cm: pq10m10_wrong_pair
+      10 cm: pq10m10_wrong_pair
+    exam: case
+    difficulty: 2
+  - prompt: PA and PB are tangents from P to a circle with centre O, and ∠APB = 50°. Find ∠OAB.
+    options:
+    - 25°
+    - 65°
+    - 50°
+    answer: 25°
+    hints:
+    - First find ∠AOB.
+    - ∠AOB = 130°, and OA = OB.
+    solution: ∠AOB = 180° − 50° = 130°. In △OAB, OA = OB, so ∠OAB = (180° − 130°)/2 = 25°.
+    mistakes:
+      65°: pq10m10_base_angles
+    exam: short
+    difficulty: 2

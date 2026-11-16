@@ -5,6 +5,7 @@ chapter: 9
 title: Real Numbers
 
 tips:
+  half_not_root: "The square root isn't half the number. It is the number that, multiplied by itself, gives the number."
   irrational_product: "Not always: √2 × √2 = 2, which is rational."
   irrational_sum: "Not always: √2 + (−√2) = 0, which is rational."
   non_repeating: "A decimal is rational only if one fixed block of digits repeats for ever. Here the gaps keep growing, so nothing repeats."
@@ -18,6 +19,9 @@ tips:
   furthest_right: "Further right means bigger. √5 ≈ 2.24 is bigger than 2."
   root_of_square: "√16 = 4, a whole number, so it is rational. The other roots never end or repeat."
   whole_between_roots: "Find the first whole number above the smaller root and the last one below the bigger root, then count them, both ends included. For example, between √5 and √20 lie 3 and 4: two numbers."
+  pqk9m9_simplify_first: 'Simplify before deciding: work the expression out, then ask if it can be written as a fraction.'
+  pqk9m9_distance_sign: Distance is the bigger number minus the smaller one, so it is never negative.
+  pqk9m9_two_answers: '|x − a| = k means k steps either way from a: there are two answers.'
 
 concepts:
   - code: math9.real.kinds
@@ -84,6 +88,23 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: try to write the number as one whole number over another. Step 2: whole numbers work: 5 = 5/1. Step 3: decimals that end work: 0.25 = 25/100 = 1/4. Step 4: decimals that repeat work too: 0.333… = 1/3. If it can be done, the number is rational.'
+        - style: visual
+          teach: 'Real numbers in two families: those that can be fractions and those that can''t.'
+          picture:
+            kind: compare
+            columns:
+            - title: Rational
+              points:
+              - 5 = 5/1
+              - 0.25 = 1/4
+              - −3 = −3/1
+              - 0.333… = 1/3
+            - title: Irrational
+              points:
+              - √2 = 1.41421…
+              - π = 3.14159…
+              - decimals never end or repeat
+            alt: Rational numbers like 5, 0.25, minus 3 and 0.333 repeating can be written as fractions; irrational numbers like root 2 and pi cannot.
       - teach: 'An irrational number can''t be written as a fraction. Its decimals go on for ever without repeating: √2 = 1.41421…, π = 3.14159… Rational and irrational numbers together make up the real numbers.'
         check:
           prompt: 0.1234567891011… (counting on for ever) never repeats. What kind of number is it?
@@ -95,6 +116,24 @@ concepts:
         ways:
         - style: real_world
           teach: Some decimals are like a clock pattern that repeats, 0.272727…; others are like the digits of π, never settling into any pattern. The repeating kind can be turned into a fraction. The never-repeating kind can't, and those numbers are called irrational. Both kinds together are the real numbers.
+        - style: step_by_step
+          teach: 'Step 1: Write the number as a decimal. Step 2: Does it end? Then it is rational. Step 3: Does a block of digits repeat for ever? Rational too. Step 4: Neither ending nor repeating, like √2 or π: irrational.'
+        - style: visual
+          teach: Rational and irrational numbers together fill the whole real line.
+          picture:
+            kind: compare
+            columns:
+            - title: Rational
+              points:
+              - can be a fraction
+              - decimal stops or repeats
+              - ½, 0.333…, −4
+            - title: Irrational
+              points:
+              - no fraction
+              - decimal never repeats
+              - √2, π
+            alt: Rational numbers can be written as fractions and their decimals stop or repeat; irrational numbers like root 2 and pi cannot, and their decimals never repeat.
       - teach: 'Mixing them: a rational plus an irrational is always irrational (1 + √2). But two irrationals can give a rational: √2 × √2 = 2, and √3 + (−√3) = 0. Simplify before deciding.'
         check:
           prompt: What kind of number is √5 × √20?
@@ -107,6 +146,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: before deciding, do the sum. Step 2: multiply or add the roots if you can: √5 × √20 = √100. Step 3: simplify: √100 = 10. Step 4: now decide. 10 is a whole number, so it is rational even though it started as roots.'
+        - style: visual
+          teach: 'Mixing rational and irrational numbers: simplify first, then decide.'
+          picture:
+            kind: compare
+            columns:
+            - title: Always irrational
+              points:
+              - 1 + √2
+              - 3 − √5
+            - title: Can be rational
+              points:
+              - √2 × √2 = 2
+              - √3 + (−√3) = 0
+              - √8 ÷ √2 = 2
+            alt: A rational plus an irrational is irrational; two irrationals can combine to give a rational number.
     items:
       - prompt: "Which of these numbers is irrational?"
         options: ["√5", "0.75", "−3", "22/7"]
@@ -259,6 +313,21 @@ concepts:
         mistakes:
           '1.4': between_root2
           √2.5: non_repeating
+      - prompt: "Which of these numbers is rational? Simplify each one first."
+        options:
+        - √12 × √3
+        - 2 + √3
+        - π − 3
+        answer: √12 × √3
+        hints:
+        - Work each one out first.
+        - √12 × √3 = √36.
+        solution: √12 × √3 = √36 = 6, rational. 2 + √3 and π − 3 are irrational (a rational and an irrational mixed by + or −).
+        mistakes:
+          2 + √3: pqk9m9_simplify_first
+          π − 3: pqk9m9_simplify_first
+        exam: one_mark
+        difficulty: 1
 
   - code: math9.real.number_line
     title: Real numbers on the number line
@@ -328,6 +397,23 @@ concepts:
         ways:
         - style: real_world
           teach: Picture a measuring tape that is perfectly smooth, with no missing points. Fractions have their marks, and so do numbers like √3 and π, even though no ruler mark lands exactly on them. Every point on the tape is some real number, and every real number has its point.
+        - style: visual
+          teach: Rationals and irrationals share one line with no gaps.
+          picture:
+            kind: number_line
+            from: -3
+            to: 4
+            step: 1
+            points:
+            - at: -2.24
+              label: −√5
+            - at: -0.5
+              label: −1/2
+            - at: 1.41
+              label: √2
+            - at: 3.14
+              label: π
+            alt: A number line from minus 3 to 4 with minus root 5, minus a half, root 2 and pi marked in their places.
       - teach: We can mark √2 exactly. Draw a square of side 1 on the line from 0 to 1. Its diagonal is √2. Put the compass point at 0, open it to the diagonal's top corner, and swing an arc down to the line. It lands at √2, about 1.41.
         picture:
           kind: flow
@@ -348,6 +434,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: on the number line, draw a right triangle from 0 with base 1 along the line and height 1 straight up. Step 2: its slanted side is √(1² + 1²) = √2. Step 3: put the compass point on 0 and open it to the top of the slanted side. Step 4: swing it down to the line. The arc lands at √2.'
+        - style: real_world
+          teach: 'A carpenter can''t measure √2 m with a ruler, but can make it exactly: build a 1 m by 1 m square frame and cut a stick to fit the diagonal. The compass on the number line does the same thing on paper.'
       - teach: 'To order numbers with roots, use decimals or compare squares. √3 ≈ 1.732 lies between 1.7 and 7/4 = 1.75. Negative numbers flip the order: −√5 ≈ −2.24 is to the left of −2.'
         check:
           prompt: 'Which is further right on the number line: √10 or 3?'
@@ -359,6 +447,21 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: to compare √10 and 3, square both: 10 and 9. Step 2: the bigger square belongs to the bigger number. Step 3: the bigger number sits further right. For negatives, the order flips: the bigger root is further left.'
+        - style: visual
+          teach: √3 squeezed between two easy numbers, 1.7 and 7/4 = 1.75.
+          picture:
+            kind: number_line
+            from: 1.6
+            to: 1.8
+            step: 0.05
+            points:
+            - at: 1.7
+              label: '1.7'
+            - at: 1.732
+              label: √3
+            - at: 1.75
+              label: 7/4
+            alt: Root 3, about 1.732, lies between 1.7 and 7 over 4, which is 1.75.
     items:
       - prompt: "Between which two whole numbers is √7 on the number line?"
         options: ["2 and 3", "3 and 4", "6 and 7", "1 and 2"]
@@ -436,7 +539,7 @@ concepts:
         - 36 and 49.
         solution: 'Step 1: 36 < 40 < 49. Step 2: √36 = 6 and √49 = 7. Step 3: So √40 is between 6 and 7.'
         mistakes:
-          20 and 21: root_of_square
+          20 and 21: half_not_root
       - prompt: Which of these points is furthest to the left on the number line?
         options:
         - −√10
@@ -462,7 +565,7 @@ concepts:
         solution: 'Step 1: 49 < 60 < 64. Step 2: 60 is 4 from 64 but 11 from 49. Step 3: So √60 ≈ 7.75 and the nearest whole number is 8.'
         mistakes:
           '7': decimal_compare
-          '30': root_of_square
+          '30': half_not_root
       - prompt: Put 1.5, √2 and 1.4 in order from smallest to largest.
         options:
         - 1.4, √2, 1.5
@@ -502,6 +605,21 @@ concepts:
         solution: 'Step 1: 4√3 − √3 = 3√3. Step 2: 3 × 1.732. Step 3: = 5.196.'
         mistakes:
           '8.66': distance_subtract
+      - prompt: Which number lies between √5 and √7?
+        options:
+        - '2.5'
+        - '2.2'
+        - '2.7'
+        answer: '2.5'
+        hints:
+        - Square each choice and compare with 5 and 7.
+        - 2.5² = 6.25.
+        solution: 2.5² = 6.25, which is between 5 and 7, so 2.5 is between √5 and √7. 2.2² = 4.84 is too small and 2.7² = 7.29 is too big.
+        mistakes:
+          '2.2': pqk9m2_compare_square
+          '2.7': pqk9m2_compare_square
+        exam: competency
+        difficulty: 2
 
   - code: math9.real.distance
     title: Distance between points
@@ -576,6 +694,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'If you are on floor 5 and your friend is in basement −2, how many floors apart are you? Count from −2 up to 0 (2 floors) and then up to 5 (5 floors): 7 in all. That is 5 − (−2). A distance is always counted as a positive number.'
+        - style: step_by_step
+          teach: 'Step 1: Find the bigger number: 5. Step 2: Find the smaller one: −2. Step 3: Bigger minus smaller: 5 − (−2) = 7. Step 4: Distances are never negative, so check your answer is positive.'
       - teach: '|a|, called the absolute value of a, is the distance of a from 0. |−9| = 9 and |9| = 9. The distance between x and y is |x − y|, which is the same as |y − x|.'
         check:
           prompt: What is |2 − 11|?
@@ -588,6 +708,28 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: |a| asks: how far is a from 0? Step 2: drop any minus sign, because distance has no direction: |−9| = 9. Step 3: for the distance between x and y, subtract them and then take the absolute value: |2 − 11| = |−9| = 9.'
+        - style: visual
+          teach: '|−9| and |9|: both are 9 steps from 0, so both absolute values are 9.'
+          picture:
+            kind: number_line
+            from: -10
+            to: 10
+            step: 2
+            points:
+            - at: -9
+              label: −9
+            - at: 0
+              label: '0'
+            - at: 9
+              label: '9'
+            jumps:
+            - from: 0
+              to: -9
+              label: 9 steps
+            - from: 0
+              to: 9
+              label: 9 steps
+            alt: Minus 9 and 9 are each 9 steps from 0, so both have absolute value 9.
       - teach: 'The point halfway between a and b is (a + b)/2: halfway between −4 and 10 is 6/2 = 3. And an equation like |x − 3| = 5 has two answers: the points 5 steps either side of 3, which are 8 and −2.'
         check:
           prompt: Which numbers are 4 away from 1?
@@ -600,6 +742,28 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: for |x − 3| = 5, start at 3 on the number line. Step 2: go 5 steps right: 8. Step 3: go 5 steps left: −2. Step 4: both are 5 away from 3, so there are two answers. Halfway between two points is their sum divided by 2.'
+        - style: visual
+          teach: '|x − 3| = 5: go 5 steps each way from 3, landing on −2 and 8.'
+          picture:
+            kind: number_line
+            from: -4
+            to: 10
+            step: 1
+            points:
+            - at: -2
+              label: −2
+            - at: 3
+              label: '3'
+            - at: 8
+              label: '8'
+            jumps:
+            - from: 3
+              to: -2
+              label: '5'
+            - from: 3
+              to: 8
+              label: '5'
+            alt: 'From 3, five steps left reach minus 2 and five steps right reach 8: the two answers to x minus 3 in bars equals 5.'
     items:
       - prompt: "On the number line, how far apart are 3 and 8?"
         answer: "5"
@@ -741,3 +905,33 @@ concepts:
         solution: 'Step 1: AM = 2 − (−5) = 7. Step 2: MB is also 7. Step 3: B = 2 + 7 = 9.'
         mistakes:
           '-1.5': midpoint_half_distance
+      - prompt: Solve |x + 1| = 4.
+        options:
+        - x = 3 or x = −5
+        - x = 3 only
+        - x = 5 or x = −3
+        answer: x = 3 or x = −5
+        hints:
+        - '|x + 1| = |x − (−1)|: distance from −1.'
+        - 4 steps either way from −1.
+        solution: 'x is 4 steps from −1: x = −1 + 4 = 3 or x = −1 − 4 = −5.'
+        mistakes:
+          x = 3 only: pqk9m9_two_answers
+          x = 5 or x = −3: pqk9m9_two_answers
+        exam: short
+        difficulty: 2
+      - prompt: 'Situation: A diver is at −12 m and a bird flies at 7 m above sea level. How far apart are they vertically?'
+        options:
+        - 19 m
+        - 5 m
+        - −19 m
+        answer: 19 m
+        hints:
+        - Distance = bigger − smaller.
+        - 7 − (−12).
+        solution: 7 − (−12) = 19 m.
+        mistakes:
+          5 m: pqk9m7_direction
+          −19 m: pqk9m9_distance_sign
+        exam: case
+        difficulty: 1

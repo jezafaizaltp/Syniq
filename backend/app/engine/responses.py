@@ -206,15 +206,20 @@ def smaller(s: Arithmetic) -> Arithmetic:
 
 
 def steps_from(solution: str) -> list[str]:
-    """Split a written solution into steps: on 'Step n:', '=' chains or sentences."""
+    """Split a written solution into steps: on 'Step n:', then sentences and clauses ('; ', ', so '), and only
+    a bare chain like '3 × 4 = 12 = 6 + 6' on its '=' signs. A sentence with words in it keeps its '=' whole, so
+    'x² = 4, so x = ±2' never breaks into 'x²' / '= 4, so x'."""
     parts = [p.strip(" .") for p in re.split(r"Step \d+:", solution) if p.strip(" .")]
     if len(parts) > 1:
         return parts
-    if "=" in solution:
-        first, *rest = [p.strip() for p in solution.split("=")]
-        return [f"{first}"] + [f"= {p}" for p in rest]
-    sentences = [p.strip() for p in re.split(r"(?<=[.!?])\s+", solution) if p.strip()]
-    return sentences or ([solution] if solution else [])
+    text = solution.strip()
+    clauses = [p.strip(" .;,") for p in re.split(r"(?<=[.!?;])\s+|,\s+(?=(?:so|then|and so)\b)", text) if p.strip(" .;,")]
+    if len(clauses) > 1:
+        return clauses
+    if "=" in text and not re.search(r"[A-Za-z]{3,}", text):
+        first, *rest = [p.strip() for p in text.split("=")]
+        return [first] + [f"= {p}" for p in rest]
+    return [text] if text else []
 
 
 def tap_choices(s: Arithmetic | None, answer: str, seed: int, likely_wrong: list[str] | None = None) -> list[str]:

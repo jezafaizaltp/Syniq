@@ -131,8 +131,27 @@ def check_pack(pack: dict, known_tags: set[str] | None = None) -> list[str]:
     return errors
 
 
+# Board-exam formats a question can be written in. Assertion-reason questions always use
+# the four standard options, so a student meets them exactly as the exam prints them.
+EXAM_STYLES = ("one_mark", "short", "case", "assertion_reason", "competency")
+AR_OPTIONS = [
+    "Both A and R are true, and R explains A",
+    "Both A and R are true, but R does not explain A",
+    "A is true, but R is false",
+    "A is false, but R is true",
+]
+
+
 def check_item(item: dict, tags: set[str]) -> list[str]:
     errors = []
+    exam = item.get("exam")
+    if exam is not None and exam not in EXAM_STYLES:
+        errors.append(f"exam must be one of {', '.join(EXAM_STYLES)}")
+    if exam == "assertion_reason":
+        if [str(o) for o in item.get("options") or []] != AR_OPTIONS:
+            errors.append("an assertion-reason question uses the four standard options, in order")
+        if "Assertion (A):" not in str(item.get("prompt")) or "Reason (R):" not in str(item.get("prompt")):
+            errors.append("an assertion-reason prompt needs 'Assertion (A):' and 'Reason (R):'")
     for field in ("prompt", "answer", "hints", "solution", "difficulty"):
         if item.get(field) in (None, "", []):
             errors.append(f"missing '{field}'")
@@ -304,6 +323,7 @@ def _load_items(db: DbSession, concept: Concept, items: list[dict]) -> tuple[int
         row.solution = spec["solution"].strip()
         row.difficulty = spec["difficulty"]
         row.misconceptions = {str(k): v for k, v in (spec.get("mistakes") or {}).items()}
+        row.exam = spec.get("exam") or ""
         row.status, row.review_note = "approved", REVIEW_NOTE
     for row in existing.values():
         if row.status != "rejected":

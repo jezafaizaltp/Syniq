@@ -18,6 +18,11 @@ tips:
   c10m13_step: With the step-deviation method, uᵢ = (xᵢ − a) ÷ h, so mean = a + h × Σfu ÷ Σf. Did you multiply back by h?
   c10m13_median_class: The median class is where the cumulative frequency first reaches n/2.
   c10m13_mode_l: In the mode formula, l is the LOWER limit of the modal class, f₀ is the class before it and f₂ the class after it.
+  pq10m13_class_mark: Use the class mark, the middle of each class, not its upper limit.
+  pq10m13_sign_d: Σfd is negative here, so the mean comes out below a.
+  pq10m13_cf_before: cf in the formula is the total BEFORE the median class, not including it.
+  pq10m13_not_just_mark: The class mark is only the middle of the class. Use the median formula to place the median inside it.
+  pq10m13_mode_bottom: The bottom of the fraction is 2f₁ − f₀ − f₂.
 concepts:
 - code: cbse10m.stats.mean
   title: Mean of grouped data
@@ -123,6 +128,34 @@ concepts:
         - '10'
         answer: '45'
         why: (40 + 50) ÷ 2 = 45.
+      ways:
+      - style: visual
+        teach: 'Each class is stood in for by its middle point: 0–10 by 5, 10–20 by 15, 20–30 by 25.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 30
+          step: 5
+          points:
+          - at: 5
+            label: '5'
+          - at: 15
+            label: '15'
+          - at: 25
+            label: '25'
+          jumps:
+          - from: 0
+            to: 10
+            label: 0–10
+          - from: 10
+            to: 20
+            label: 10–20
+          - from: 20
+            to: 30
+            label: 20–30
+          alt: A number line from 0 to 30 split into classes 0 to 10, 10 to 20 and 20 to 30, with class marks 5, 15 and 25 in the middle of each.
+      - style: step_by_step
+        teach: 'Step 1: Take a class, say 10–20. Step 2: Add its limits: 10 + 20 = 30. Step 3: Halve: 15. Step 4: Treat every value in that class as if it were 15. That is what makes a grouped mean an estimate.'
     - teach: 'Direct method: make columns f, x and f × x. Mean = Σfx ÷ Σf. Example: classes 0–10, 10–20, 20–30 with frequencies 3, 5, 2: Σfx = 3×5 + 5×15 + 2×25 = 140, Σf = 10, mean = 14.'
       picture:
         kind: bars
@@ -144,6 +177,11 @@ concepts:
         - '12000'
         answer: '30'
         why: 600 ÷ 20 = 30.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Make columns: class, f, x (class mark), fx. Step 2: Fill in x: 5, 15, 25. Step 3: Multiply: fx = 15, 75, 50. Step 4: Add the columns: Σf = 10 and Σfx = 140. Step 5: Mean = 140 ÷ 10 = 14.'
+      - style: real_world
+        teach: 'A shopkeeper knows 3 customers spent ₹0–10, 5 spent ₹10–20 and 2 spent ₹20–30, but not the exact amounts. Pretending each spent the middle amount (₹5, ₹15, ₹25) gives a fair estimate: about ₹140 in all, so about ₹14 each.'
     - teach: 'Shortcuts for big numbers: assumed mean a, with dᵢ = xᵢ − a, gives mean = a + Σfd ÷ Σf. Step deviation divides by the class width h too: uᵢ = dᵢ ÷ h, mean = a + h × Σfu ÷ Σf. All three methods give the same mean.'
       check:
         prompt: a = 50, h = 10, Σfu = 5, Σf = 25. Mean?
@@ -153,6 +191,27 @@ concepts:
         - '55'
         answer: '52'
         why: 50 + 10 × 5/25 = 52.
+      ways:
+      - style: visual
+        teach: Three methods, one answer. Pick the one that keeps the numbers small.
+        picture:
+          kind: compare
+          columns:
+          - title: Direct
+            points:
+            - Mean = Σfx ÷ Σf
+            - Good when x is small
+          - title: Assumed mean
+            points:
+            - d = x − a
+            - Mean = a + Σfd ÷ Σf
+          - title: Step deviation
+            points:
+            - u = (x − a) ÷ h
+            - Mean = a + h × Σfu ÷ Σf
+          alt: Direct method uses sum of f x over sum of f; assumed mean uses deviations d from a; step deviation also divides by the class width h.
+      - style: step_by_step
+        teach: 'Step 1: Pick a = 15, a class mark near the middle. Step 2: d = x − 15 gives −10, 0, 10. Step 3: fd = −30, 0, 20, so Σfd = −10. Step 4: Mean = 15 + (−10 ÷ 10) = 14, the same as the direct method.'
   items:
   - prompt: Find the class mark of 20–30.
     answer: '25'
@@ -322,6 +381,53 @@ concepts:
     solution: Assumed mean and step deviation are just easier arithmetic; all three give the same mean.
     mistakes:
       Step-deviation method: c10m13_step
+  - prompt: 'Assertion (A): The class mark of the class 20–30 is 25.
+
+      Reason (R): Class mark = (lower limit + upper limit) ÷ 2.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R: (20 + 30) ÷ 2 = 25. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: The daily pocket money of 20 students: ₹10–20: 5 students, ₹20–30: 10 students, ₹30–40: 5 students. Find the mean pocket money.'
+    options:
+    - ₹25
+    - ₹30
+    - ₹33
+    answer: ₹25
+    hints:
+    - Use class marks 15, 25 and 35.
+    - Σfx = 5 × 15 + 10 × 25 + 5 × 35.
+    solution: Σfx = 75 + 250 + 175 = 500 and Σf = 20, so the mean = 500 ÷ 20 = ₹25.
+    mistakes:
+      ₹30: pq10m13_class_mark
+    exam: case
+    difficulty: 2
+  - prompt: Using the assumed mean method with a = 50, Σfd = −40 and Σf = 20, the mean is
+    options:
+    - '48'
+    - '52'
+    - '30'
+    answer: '48'
+    hints:
+    - Mean = a + Σfd ÷ Σf.
+    - −40 ÷ 20 = −2.
+    solution: Mean = 50 + (−40 ÷ 20) = 50 − 2 = 48.
+    mistakes:
+      '52': pq10m13_sign_d
+    exam: one_mark
+    difficulty: 1
 - code: cbse10m.stats.median_mode
   title: Median and mode of grouped data
   after:
@@ -436,6 +542,11 @@ concepts:
         - '6'
         answer: '4'
         why: The class just before the modal class.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Classes 0–10, 10–20, 20–30, 30–40 with frequencies 4, 7, 12, 5. Step 2: The modal class is 20–30 (12 is the biggest). Step 3: l = 20, f₁ = 12, f₀ = 7, f₂ = 5, h = 10. Step 4: Mode = 20 + (12 − 7) ÷ (24 − 7 − 5) × 10 = 20 + 5/12 × 10 ≈ 24.17.'
+      - style: real_world
+        teach: 'A shoe shop wants to know which size to stock most: that is the mode, the size bought most often. For grouped data the formula nudges the mode inside the busiest class towards whichever neighbour class is busier.'
     - teach: The median is the middle value. Make a cumulative frequency (cf) column, find n/2, and the median class is where cf first reaches n/2. Median = l + (n/2 − cf) ÷ f × h, with cf the total BEFORE the median class and f the median class's frequency.
       check:
         prompt: n = 40. The cfs are 5, 12, 25, 40. Median class is the…
@@ -445,6 +556,23 @@ concepts:
         - fourth class
         answer: third class
         why: cf first reaches 20 at 25.
+      ways:
+      - style: visual
+        teach: Cumulative frequencies 4, 11, 23, 28. Half of 28 is 14, first reached in 20–30, where the running total jumps from 11 to 23. That is the median class.
+        picture:
+          kind: bars
+          bars:
+          - label: below 10
+            value: 4
+          - label: below 20
+            value: 11
+          - label: below 30
+            value: 23
+          - label: below 40
+            value: 28
+          alt: Bars of cumulative frequency 4, 11, 23 and 28; the halfway mark 14 is first passed in the bar for below 30.
+      - style: step_by_step
+        teach: 'Step 1: n = 28, so n/2 = 14. Step 2: cf column: 4, 11, 23, 28. Step 3: 14 is first passed in 20–30, so l = 20, f = 12, cf before = 11, h = 10. Step 4: Median = 20 + (14 − 11) ÷ 12 × 10 = 20 + 2.5 = 22.5.'
     - teach: Mean, median and mode are linked roughly by 3 Median = Mode + 2 Mean. Know two, and you can estimate the third. The cumulative frequency curve (ogive) also shows the median where it crosses n/2.
       check:
         prompt: Mode 30, mean 24. Median?
@@ -454,6 +582,19 @@ concepts:
         - '28'
         answer: '26'
         why: (30 + 48) ÷ 3 = 26.
+      ways:
+      - style: visual
+        teach: Using the link between the three averages to find a missing one.
+        picture:
+          kind: flow
+          steps:
+          - 3 Median = Mode + 2 Mean
+          - Median 22.5, Mean 21
+          - 67.5 = Mode + 42
+          - Mode = 25.5
+          alt: With median 22.5 and mean 21, three times the median is 67.5, which equals the mode plus 42, so the mode is 25.5.
+      - style: step_by_step
+        teach: 'Step 1: Write 3 Median = Mode + 2 Mean. Step 2: Put in the two you know, e.g. Median = 22.5 and Mean = 21. Step 3: 67.5 = Mode + 42. Step 4: Mode = 25.5. This link is only approximate, so use it when the question asks for it.'
   items:
   - prompt: Frequencies of 0–10, 10–20, 20–30, 30–40, 40–50 are 5, 8, 12, 6, 4. Which is the modal class?
     options:
@@ -624,3 +765,51 @@ concepts:
     mistakes:
       '2': c10m13_median_class
       '4': c10m13_median_class
+  - prompt: 'Assertion (A): If the mean of a distribution is 20 and its median is 22, its mode is about 26.
+
+      Reason (R): Mean, median and mode are roughly linked by 3 Median = Mode + 2 Mean.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R: 3 × 22 = Mode + 2 × 20, so 66 = Mode + 40 and Mode = 26. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: The heights of 40 plants: 0–10 cm: 5, 10–20 cm: 9, 20–30 cm: 14, 30–40 cm: 12. Find the median height.'
+    options:
+    - 24.29 cm
+    - 14.29 cm
+    - 25 cm
+    answer: 24.29 cm
+    hints:
+    - 'n/2 = 20. Make the cf column: 5, 14, 28, 40.'
+    - 'Median class 20–30: l = 20, cf before = 14, f = 14, h = 10.'
+    solution: Median = 20 + (20 − 14) ÷ 14 × 10 = 20 + 60/14 ≈ 20 + 4.29 = 24.29 cm.
+    mistakes:
+      14.29 cm: pq10m13_cf_before
+      25 cm: pq10m13_not_just_mark
+    exam: case
+    difficulty: 2
+  - prompt: The modal class is 40–50, with f₁ = 15, f₀ = 10 and f₂ = 5. The mode is
+    options:
+    - '43.33'
+    - '45'
+    - '50'
+    answer: '43.33'
+    hints:
+    - Mode = l + (f₁ − f₀) ÷ (2f₁ − f₀ − f₂) × h.
+    - 2f₁ − f₀ − f₂ = 30 − 10 − 5.
+    solution: Mode = 40 + (15 − 10) ÷ (30 − 15) × 10 = 40 + 5/15 × 10 ≈ 40 + 3.33 = 43.33.
+    mistakes:
+      '45': pq10m13_mode_bottom
+    exam: one_mark
+    difficulty: 2

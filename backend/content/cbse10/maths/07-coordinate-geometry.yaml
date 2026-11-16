@@ -3,6 +3,9 @@ subject: cbse10-math
 chapter: 7
 title: Coordinate Geometry
 tips:
+  c10m7_mid_add: "The mid-point is the average of the two ends: averages add, they don't subtract."
+  c10m7_add_halve_y: "Do the same for y as for x: add the two y-values, then halve."
+  c10m7_add_halve: "The mid-point adds the x-values and halves them: (−2) + 4, not 4 − (−2)."
   c10_add_not_square: Don't just add the differences. Square each, add the squares, then take the square root.
   c10_minus_negative: 'Subtracting a negative adds: 5 − (−3) = 8.'
   c10_section_swap: 'In the section formula m₁ goes with the second point B and m₂ with A: (m₁x₂ + m₂x₁)/(m₁ + m₂).'
@@ -16,6 +19,11 @@ tips:
   c10m7_minus_minus: 'Subtracting a negative coordinate adds: 3 − (−2) = 5. Write the brackets in before you square.'
   c10m7_ratio_order: 'In the section formula, m₁ goes with the SECOND point and m₂ with the FIRST: (m₁x₂ + m₂x₁)/(m₁ + m₂).'
   c10m7_average: 'The mid-point is the average of the two x''s and the average of the two y''s: add and halve.'
+  c10m7_map_units: That is the distance in map units. Each unit stands for 10 m.
+  c10m7_add_gaps: Adding the two gaps gives the walk along the grid lines. The straight line uses Pythagoras.
+  c10m7_add_coords: 'Don''t add the coordinates: square each one, add, then take the square root.'
+  c10m7_crossed: m₁ multiplies B's coordinates and m₂ multiplies A's. Check which way you crossed.
+  c10m7_not_mid: 'That is the mid-point, which divides in 1 : 1. Use the ratio given.'
 concepts:
 - code: cbse10m.coord.distance
   title: Distance formula
@@ -127,6 +135,11 @@ concepts:
         - 1 and 5
         answer: 6 and 4
         why: 7 − 1 = 6 and 5 − 1 = 4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the horizontal gap: x₂ − x₁. Step 2: Find the vertical gap: y₂ − y₁. Step 3: Square both and add. Step 4: Take the square root. For (1, 2) and (7, 10): gaps 6 and 8, 36 + 64 = 100, so the distance is 10.'
+      - style: real_world
+        teach: 'A drone flies from your home straight to a shop 6 blocks east and 8 blocks north. It doesn''t follow the streets for 14 blocks; it flies the slanting side of the right triangle: √(6² + 8²) = 10 blocks.'
     - teach: So PQ = √(36 + 16) = √52 = 2√13. From the origin, the distance to (x, y) is √(x² + y²). Distances help to check collinearity (the two shorter distances add to the longest) and to classify triangles and quadrilaterals.
       check:
         prompt: Distance of (5, 12) from the origin?
@@ -136,6 +149,38 @@ concepts:
         - '7'
         answer: '13'
         why: √(25 + 144) = 13.
+      ways:
+      - style: visual
+        teach: 'From A(−2, −1) to B(4, 3): across 6 and up 4. The distance is the slanting side: √(36 + 16) = √52 = 2√13.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -6
+          - 6
+          points:
+            A:
+            - -2
+            - -1
+            B:
+            - 4
+            - 3
+            _C:
+            - 4
+            - -1
+          segments:
+          - - A
+            - _C
+            - '6'
+          - - _C
+            - B
+            - '4'
+          - - A
+            - B
+            - √52
+          alt: Points A at minus 2, minus 1 and B at 4, 3, with a right triangle of legs 6 and 4 and hypotenuse root 52.
+      - style: step_by_step
+        teach: 'Collinearity check. Step 1: For A(1, 1), B(2, 2), C(4, 4): AB = √2, BC = √8 = 2√2, AC = √18 = 3√2. Step 2: Add the two shorter ones: √2 + 2√2 = 3√2. Step 3: That equals the longest, AC, so A, B and C lie on one line.'
   items:
   - prompt: Find the distance between (1, 2) and (4, 6).
     answer: '5'
@@ -304,6 +349,55 @@ concepts:
     mistakes:
       '2': c10m7_square_then_add
       '14': c10m7_square_then_add
+  - prompt: 'Assertion (A): The points (0, 0), (3, 4) and (6, 8) are collinear.
+
+      Reason (R): Three points are collinear if the sum of two of the distances between them equals the third.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'The distances are 5, 5 and 10, and 5 + 5 = 10. So by R the points are collinear: A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: On a school map, 1 unit stands for 10 m. The gate is at (2, 3) and the library at (8, 11). How far apart are they?'
+    options:
+    - 100 m
+    - 10 m
+    - 140 m
+    answer: 100 m
+    hints:
+    - Find the distance in map units first.
+    - 'Gaps: 6 across and 8 up.'
+    solution: Distance = √(6² + 8²) = √100 = 10 units, and 10 units × 10 m = 100 m.
+    mistakes:
+      10 m: c10m7_map_units
+      140 m: c10m7_add_gaps
+    exam: case
+    difficulty: 2
+  - prompt: The distance of the point (−5, 12) from the origin is
+    options:
+    - '13'
+    - '17'
+    - '7'
+    answer: '13'
+    hints:
+    - From the origin, distance = √(x² + y²).
+    - (−5)² = 25 and 12² = 144.
+    solution: √(25 + 144) = √169 = 13.
+    mistakes:
+      '17': c10m7_add_coords
+      '7': c10m7_add_coords
+    exam: one_mark
+    difficulty: 1
 - code: cbse10m.coord.section
   title: Section formula
   after:
@@ -377,6 +471,33 @@ concepts:
         - (2, 10)
         answer: (1, 5)
         why: (−4 + 6)/2 = 1 and (2 + 8)/2 = 5.
+      ways:
+      - style: visual
+        teach: 'The mid-point M of A(2, 3) and B(8, 9) sits exactly halfway: the same steps from A to M as from M to B.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -2
+          - 10
+          points:
+            A:
+            - 2
+            - 3
+            M:
+            - 5
+            - 6
+            B:
+            - 8
+            - 9
+          segments:
+          - - A
+            - M
+          - - M
+            - B
+          alt: Points A at 2, 3 and B at 8, 9 with their mid-point M at 5, 6 halfway between.
+      - style: step_by_step
+        teach: 'Step 1: Add the x''s and halve: (2 + 8)/2 = 5. Step 2: Add the y''s and halve: (3 + 9)/2 = 6. Step 3: The mid-point is (5, 6). Step 4: Check: from A to M is +3 across and +3 up, and from M to B is the same.'
     - teach: 'Section formula: the point dividing AB internally in the ratio m₁ : m₂ is ((m₁x₂ + m₂x₁)/(m₁ + m₂), (m₁y₂ + m₂y₁)/(m₁ + m₂)). Note the crossing: m₁ multiplies the coordinate of B. Points of trisection divide AB in 1 : 2 and 2 : 1.'
       picture:
         kind: number_line
@@ -401,6 +522,11 @@ concepts:
         - (4.5, 0)
         answer: (3, 0)
         why: (1 × 9 + 2 × 0)/3 = 3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write A(1, 2), B(7, 8) and the ratio m₁ : m₂ = 1 : 2. Step 2: x = (1 × 7 + 2 × 1)/3 = 9/3 = 3. Step 3: y = (1 × 8 + 2 × 2)/3 = 12/3 = 4. Step 4: The point is (3, 4), one third of the way from A to B.'
+      - style: real_world
+        teach: 'A rope runs from a pole at A to a pole at B, with a knot 2/5 of the way along: the knot divides AB in 2 : 3. The section formula is a weighted average: the knot is nearer A, so A''s coordinates get the bigger weight, 3, and B''s get 2.'
   items:
   - prompt: Find the x-coordinate of the mid-point of (2, 5) and (8, 1).
     answer: '5'
@@ -535,8 +661,8 @@ concepts:
     - 'Average the y''s: (−3 − 7)/2.'
     solution: (2/2, −10/2) = (1, −5).
     mistakes:
-      (3, −5): c10m7_minus_minus
-      (1, 2): c10m7_minus_minus
+      (3, −5): c10m7_add_halve
+      (1, 2): c10m7_add_halve_y
   - prompt: 'A is (3, 0) and B is (9, 6). P divides AB in 2 : 1. Find the y-coordinate of P.'
     answer: '4'
     check: (2*6 + 1*0) / 3
@@ -561,4 +687,53 @@ concepts:
     - Add, don't subtract.
     solution: With m₁ = m₂ = 1 the section formula gives the averages of the coordinates.
     mistakes:
-      ((x₂ − x₁)/2, (y₂ − y₁)/2): c10m7_minus_minus
+      ((x₂ − x₁)/2, (y₂ − y₁)/2): c10m7_mid_add
+  - prompt: 'Assertion (A): The mid-point of (−1, 4) and (5, 2) is (2, 3).
+
+      Reason (R): The mid-point of (x₁, y₁) and (x₂, y₂) is ((x₁ + x₂)/2, (y₁ + y₂)/2).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'By R: ((−1 + 5)/2, (4 + 2)/2) = (2, 3). A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: On a garden plan, two trees stand at A(1, 2) and B(10, 8). A bench is placed on AB so that it divides AB in the ratio 1 : 2, starting from A. Where is the bench?'
+    options:
+    - (4, 4)
+    - (7, 6)
+    - (5.5, 5)
+    answer: (4, 4)
+    hints:
+    - Use the section formula with m₁ = 1 and m₂ = 2.
+    - x = (1 × 10 + 2 × 1)/3.
+    solution: x = (1 × 10 + 2 × 1)/3 = 12/3 = 4 and y = (1 × 8 + 2 × 2)/3 = 12/3 = 4. The bench is at (4, 4), one third of the way from A.
+    mistakes:
+      (7, 6): c10m7_crossed
+      (5.5, 5): c10m7_not_mid
+    exam: case
+    difficulty: 2
+  - prompt: In what ratio does the y-axis divide the segment joining (−4, 2) and (6, 7)?
+    options:
+    - '2 : 3'
+    - '3 : 2'
+    - '1 : 1'
+    answer: '2 : 3'
+    hints:
+    - 'On the y-axis, x = 0. Let the ratio be k : 1.'
+    - (6k − 4)/(k + 1) = 0.
+    solution: 'x = (k × 6 + 1 × (−4))/(k + 1) = 0 gives 6k = 4, k = 2/3. So the ratio is 2 : 3.'
+    mistakes:
+      '3 : 2': c10m7_crossed
+      '1 : 1': c10m7_not_mid
+    exam: short
+    difficulty: 2

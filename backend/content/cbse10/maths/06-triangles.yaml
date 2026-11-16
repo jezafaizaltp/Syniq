@@ -3,6 +3,8 @@ subject: cbse10-math
 chapter: 6
 title: Triangles
 tips:
+  c10m6_thales: "Pythagoras has his own theorem about right triangles. The BPT is named after an earlier Greek thinker."
+  c10m6_always_same_shape: "Ask whether every pair has equal angles: shapes with all angles fixed are always similar."
   c10_ratio_upside: 'Keep each ratio the same way up: small triangle over big triangle on both sides (or big over small on both).'
   c10_part_not_whole: 'AD : DB is part to part. For similar triangles compare AD with the whole side AB.'
   t10_angle_sum: "Similar triangles have equal angles. Find the third angle from 180°."
@@ -15,6 +17,9 @@ tips:
   c10m6_whole_side: For the parallel side DE compared with BC, use the whole side AD/AB, not AD/DB.
   c10m6_match: 'Read the letters in order: if △ABC ~ △PQR then A↔P, B↔Q, C↔R. Pair sides by those letters.'
   c10m6_tests: Similarity needs AA, SSS (all ratios equal) or SAS (an angle between two sides in the same ratio). An angle that is not between the two sides doesn't count.
+  c10m6_ratio_order: 'Keep the same order on both legs: top part over bottom part, each time.'
+  pq10m6_whole_side: DE compares with BC as AD compares with the whole side AB = AD + DB.
+  c10m6_shadow_flip: 'Match height with height and shadow with shadow: height ÷ shadow is the same for the girl and the post.'
 concepts:
 - code: cbse10m.tri.bpt
   title: Basic Proportionality Theorem
@@ -131,6 +136,25 @@ concepts:
         - Two triangles
         answer: Two squares
         why: All angles 90° and all sides in one ratio.
+      ways:
+      - style: visual
+        teach: Some shapes are always similar to each other; some are not.
+        picture:
+          kind: compare
+          columns:
+          - title: Always similar
+            points:
+            - Any two circles
+            - Any two squares
+            - Any two equilateral triangles
+          - title: Not always similar
+            points:
+            - 'Two rectangles: 2 × 1 and 3 × 1'
+            - Two rhombuses with different angles
+            - Two isosceles triangles
+          alt: Circles, squares and equilateral triangles are always similar; rectangles, rhombuses and isosceles triangles need not be.
+      - style: real_world
+        teach: 'A photo and its enlargement are similar: the same shape, with every length multiplied by the same number. A map is similar to the land it shows. But if you stretch a photo only sideways, faces look wide: it is no longer similar.'
     - teach: 'Basic Proportionality Theorem (Thales): if a line parallel to one side of a triangle cuts the other two sides, it divides them in the same ratio. In △ABC with DE ∥ BC (D on AB, E on AC): AD/DB = AE/EC. The converse also holds: if AD/DB = AE/EC, then DE ∥ BC.'
       picture:
         kind: geometry
@@ -168,6 +192,11 @@ concepts:
         - '8'
         answer: '6'
         why: 2/4 = 3/EC gives EC = 6.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Check that the line is parallel to a side: DE ∥ BC. Step 2: Write the ratio of the pieces on one side: AD/DB. Step 3: It equals the ratio on the other side: AE/EC. Step 4: Example: AD = 2, DB = 3, AE = 4. Then 2/3 = 4/EC, so EC = 6.'
+      - style: real_world
+        teach: On a sloping roof frame, a horizontal beam parallel to the floor cuts both sloping sides in the same ratio. If the beam is one third of the way down one side, it is one third of the way down the other side too.
     - teach: 'Because △ADE ~ △ABC, the parallel side compares with the whole sides: DE/BC = AD/AB. Use AB = AD + DB, not DB alone.'
       check:
         prompt: AD = 2, DB = 4, BC = 9. DE = ?
@@ -177,6 +206,47 @@ concepts:
         - '6'
         answer: '3'
         why: DE/9 = 2/6.
+      ways:
+      - style: visual
+        teach: AD = 3, DB = 6 and BC = 12. The small triangle ADE is a scaled-down copy of ABC, so DE/BC = AD/AB = 3/9, and DE = 4.
+        picture:
+          kind: geometry
+          points:
+            A:
+            - 5
+            - 9
+            B:
+            - 1
+            - 1
+            C:
+            - 9
+            - 1
+            D:
+            - 3.67
+            - 6.33
+            E:
+            - 6.33
+            - 6.33
+          segments:
+          - - A
+            - D
+            - '3'
+          - - D
+            - B
+            - '6'
+          - - A
+            - E
+          - - E
+            - C
+          - - B
+            - C
+            - '12'
+          - - D
+            - E
+            - '?'
+          alt: Triangle ABC with DE parallel to BC. AD is 3, DB is 6 and BC is 12; DE is unknown.
+      - style: step_by_step
+        teach: 'Step 1: AD = 3 and DB = 6, so AB = 9. Step 2: DE/BC = AD/AB = 3/9 = 1/3. Step 3: DE = 12 × 1/3 = 4. The trap: using AD/DB = 1/2 would give 6, which is too long.'
   items:
   - prompt: In triangle ABC, DE ∥ BC. AD = 2 cm, DB = 3 cm and AE = 4 cm. Find EC in cm.
     answer: '6'
@@ -316,7 +386,7 @@ concepts:
     - Can a rhombus be squashed?
     solution: Rhombuses can have different angles, so they need not be similar.
     mistakes:
-      Two equilateral triangles: c10m6_tests
+      Two equilateral triangles: c10m6_always_same_shape
   - prompt: DE ∥ BC in △ABC with AD/DB = 3/4. Find AE/AC as a fraction.
     answer: 3/7
     check: 3/7
@@ -340,7 +410,7 @@ concepts:
     - Not the right-triangle one.
     solution: BPT is also called Thales' theorem.
     mistakes:
-      Pythagoras: c10m6_tests
+      Pythagoras: c10m6_thales
   - prompt: In trapezium ABCD with AB ∥ DC, diagonals meet at O. Which is true?
     options:
     - AO/OC = BO/OD
@@ -355,6 +425,53 @@ concepts:
     solution: △AOB ~ △COD (alternate angles), so AO/OC = BO/OD.
     mistakes:
       AO/OC = OD/BO: c10m6_match
+  - prompt: 'Assertion (A): In △ABC, D is on AB and E is on AC with AD = 2, DB = 3, AE = 4 and EC = 6. Then DE ∥ BC.
+
+      Reason (R): If a line divides two sides of a triangle in the same ratio, it is parallel to the third side.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'AD/DB = 2/3 and AE/EC = 4/6 = 2/3: the same ratio. By R (the converse of BPT), DE ∥ BC. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: A slide''s frame has a crossbar DE parallel to the ground BC. On one leg AD = 1.5 m and DB = 1 m. On the other leg EC = 0.8 m. How long is AE?'
+    options:
+    - 1.2 m
+    - 0.53 m
+    - 2 m
+    answer: 1.2 m
+    hints:
+    - The crossbar is parallel to the ground, so use the Basic Proportionality Theorem.
+    - AD/DB = AE/EC, so 1.5/1 = AE/0.8.
+    solution: 'By BPT, AD/DB = AE/EC: 1.5/1 = AE/0.8, so AE = 1.5 × 0.8 = 1.2 m.'
+    mistakes:
+      0.53 m: c10m6_ratio_order
+    exam: case
+    difficulty: 2
+  - prompt: In △ABC, DE ∥ BC with D on AB and E on AC. AD = 4 cm, DB = 6 cm and BC = 15 cm. Find DE.
+    options:
+    - 6 cm
+    - 10 cm
+    - 3.75 cm
+    answer: 6 cm
+    hints:
+    - △ADE ~ △ABC, so DE/BC = AD/AB.
+    - AB = 4 + 6 = 10.
+    solution: DE/BC = AD/AB = 4/10, so DE = 15 × 4/10 = 6 cm.
+    mistakes:
+      10 cm: pq10m6_whole_side
+    exam: short
+    difficulty: 2
 - code: cbse10m.tri.similar
   title: Similarity criteria
   after:
@@ -470,6 +587,63 @@ concepts:
         - Cannot tell
         answer: 'Yes'
         why: 'The third angles are 65° and 75°: all three match.'
+      ways:
+      - style: visual
+        teach: Two triangles with two pairs of equal angles. The third angles must match too, since each triangle's angles add to 180°. So AA is enough for similarity.
+        picture:
+          kind: geometry
+          points:
+            A:
+            - 0.5
+            - 1
+            B:
+            - 3.5
+            - 1
+            C:
+            - 1.5
+            - 3.5
+            P:
+            - 5
+            - 1
+            Q:
+            - 9.5
+            - 1
+            R:
+            - 6.5
+            - 4.75
+          segments:
+          - - A
+            - B
+          - - B
+            - C
+          - - C
+            - A
+          - - P
+            - Q
+          - - Q
+            - R
+          - - R
+            - P
+          angles:
+          - at: A
+            from: B
+            to: C
+            label: x
+          - at: B
+            from: C
+            to: A
+            label: y
+          - at: P
+            from: Q
+            to: R
+            label: x
+          - at: Q
+            from: R
+            to: P
+            label: y
+          alt: A small triangle ABC and a larger triangle PQR. Angle A equals angle P and angle B equals angle Q.
+      - style: real_world
+        teach: 'Measure a tree with its shadow. At the same moment, sunlight hits you and the tree at the same angle, and both of you stand at right angles to the ground: AA, so the triangles are similar. If you are 1.5 m tall with a 2 m shadow and the tree''s shadow is 12 m, then height/12 = 1.5/2, so the tree is 9 m.'
     - teach: 'SSS: all three side ratios equal. SAS: one angle equal and the two sides around it in the same ratio. SSA is NOT a test. The letter order matters: △ABC ~ △PQR means A↔P, B↔Q, C↔R, so AB/PQ = BC/QR = CA/RP.'
       picture:
         kind: compare
@@ -493,6 +667,11 @@ concepts:
         - XZ
         answer: YZ
         why: B↔Y and C↔Z.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Sort the sides of each triangle from shortest to longest: 3, 4, 5 and 6, 8, 10. Step 2: Divide matching sides: 6/3 = 2, 8/4 = 2, 10/5 = 2. Step 3: All three ratios are equal, so the triangles are similar (SSS). Step 4: Write the match in order, shortest with shortest, so the letters line up.'
+      - style: real_world
+        teach: 'A tailor scales a pattern: a sleeve piece 20 cm, 30 cm, 40 cm becomes 25 cm, 37.5 cm, 50 cm for a bigger size. Every side is multiplied by 1.25, so the pieces are similar (SSS) and the sleeve keeps its shape.'
   items:
   - prompt: Which is NOT a test for similar triangles?
     options:
@@ -667,3 +846,55 @@ concepts:
     solution: ∠A common and corresponding angles at D, B and E, C are equal, so △ADE ~ △ABC in that order.
     mistakes:
       △ADE ~ △CBA: c10m6_match
+  - prompt: 'Assertion (A): Triangles with sides 3, 4, 5 and 6, 8, 10 are similar.
+
+      Reason (R): If the three sides of one triangle are proportional to the three sides of another, the triangles are similar.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 6/3 = 8/4 = 10/5 = 2, so the sides are proportional and by R (SSS) the triangles are similar. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Any two rectangles are similar.
+
+      Reason (R): All the angles of any two rectangles are equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'R is true: every angle of a rectangle is 90°. But similar polygons also need sides in the same ratio: a 2 × 1 and a 3 × 1 rectangle are not similar. A is false. (Equal angles are enough only for triangles.)'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: At 4 p.m., a 1.6 m tall girl casts a 2 m shadow. At the same moment a lamp post casts a 7.5 m shadow. How tall is the post?'
+    options:
+    - 6 m
+    - 9.4 m
+    - 4.3 m
+    answer: 6 m
+    hints:
+    - The two triangles (person-shadow and post-shadow) are similar by AA.
+    - 'height/shadow is the same: 1.6/2 = h/7.5.'
+    solution: 1.6/2 = h/7.5, so h = 7.5 × 0.8 = 6 m.
+    mistakes:
+      9.4 m: c10m6_shadow_flip
+    exam: case
+    difficulty: 2

@@ -20,6 +20,7 @@ tips:
   it4_hide_not_delete: A filter only hides rows; nothing is deleted.
   it4_protect_view: A protected sheet can still be opened and read, but not changed without the password.
   it4_menu_names: Each Calc menu groups related jobs. File is for saving, Tools for protection; which menu works on the values in your table?
+  pqk9i4_divide_order: 'Density is people ÷ area: the population cell goes first.'
 
 concepts:
   - code: it9.data.density_formula
@@ -84,6 +85,16 @@ concepts:
         ways:
         - style: real_world
           teach: 'A school register is raw data: names, marks, attendance. Once it is sorted and totalled, it helps the teacher decide who needs help. Data can be numbers, words or images. In Calc, a file can hold many sheets, like a notebook with many pages: that whole file is a workbook. Each sheet can have up to 1,048,576 rows and 1,024 columns.'
+        - style: visual
+          teach: 'From raw data to a decision: what a spreadsheet helps you do.'
+          picture:
+            kind: flow
+            steps:
+            - 'raw data: numbers, words, images'
+            - organise it in sheets (a workbook)
+            - analyse it with formulas
+            - use it to decide
+            alt: Raw data is organised into sheets of a workbook, analysed with formulas, and used to make decisions.
       - teach: 'Population density = total population ÷ land area (people per sq km). In Calc, every formula starts with =. In G2 type =C2/F2 (population ÷ area) and press Enter, then drag the fill handle down to copy it: the row numbers change automatically (=C3/F3, =C4/F4...).'
         picture:
           kind: flow
@@ -104,6 +115,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Find population density in Calc. Step 1: density = total population ÷ land area (people per sq km). Step 2: in G2 type =C2/F2 (every formula starts with =) and press Enter. Step 3: drag the fill handle down. Step 4: Calc changes the row numbers for you: =C3/F3, =C4/F4 and so on.'
+        - style: real_world
+          teach: 'Two villages each have 1,000 people. One covers 2 sq km, the other 10 sq km. The first is far more crowded: 500 people per sq km against 100. Density tells you how crowded a place is, not just how many live there.'
       - teach: Use ROUND or Delete Decimal Place to tidy decimals. Online spreadsheets (Google Sheets, Excel online, Zoho Sheet) let many people edit together.
         check:
           prompt: Which lets several people edit one sheet at the same time?
@@ -116,6 +129,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Long decimals like 859.2347 are hard to read; round them with ROUND or the Delete Decimal Place button. And when a whole class must fill one sheet, use an online spreadsheet such as Google Sheets, Excel online or Zoho Sheet: many people can edit the same sheet at the same time.'
+        - style: visual
+          teach: Tidying a long decimal so the table is easy to read.
+          picture:
+            kind: compare
+            columns:
+            - title: Before
+              points:
+              - '859.2347'
+              - hard to read
+            - title: After ROUND
+              points:
+              - '859'
+              - neat whole number
+            alt: 859.2347 rounded with ROUND becomes 859, which is easier to read.
     items:
       - prompt: "Population density is calculated as"
         options: ["Total population ÷ land area", "Land area ÷ total population", "Total population × land area", "Total population − land area"]
@@ -249,6 +276,21 @@ concepts:
         solution: 'Step 1: Kerala 860. Step 2: India 382. Step 3: 860 − 382 = 478.'
         mistakes:
           '1242': m5_subtract_not_add
+      - prompt: 'Situation: In Calc, the population is in C5 and the land area in F5. Which formula gives the density in G5?'
+        options:
+        - =C5/F5
+        - =F5/C5
+        - C5/F5
+        answer: =C5/F5
+        hints:
+        - Density = population ÷ area.
+        - Every Calc formula starts with a sign.
+        solution: Population ÷ area, starting with =, gives =C5/F5.
+        mistakes:
+          =F5/C5: pqk9i4_divide_order
+          C5/F5: calc_formula
+        exam: one_mark
+        difficulty: 2
 
   - code: it9.data.lookup_countif
     title: Classifying with LOOKUP and counting with COUNTIF
@@ -342,6 +384,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'Think of grading marks into A, B, C by lower limits. Densities are grouped the same way: below 100 very low; 100-199 low; 200-399 moderate; 400-799 high; 800 and above very high. LOOKUP looks at each value and puts it in its group, using a table of lower limits (0, 100, 200, 400, 800) named with Data → Define Range (e.g. Criteria).'
+        - style: step_by_step
+          teach: 'Step 1: Write the lower limits in order: 0, 100, 200, 400, 800. Step 2: Write the category beside each one. Step 3: Select them and use Data → Define Range, naming it Criteria. Step 4: LOOKUP can now place any density in its group.'
       - teach: 'LOOKUP: Function Wizard (fx) → LOOKUP → Search Criterion (G2), Search Vector (Criteria), OK, then fill down. The lower limits must be sorted smallest to largest. COUNTIF counts cells that meet a condition: Range J2:J36, Criteria the category name.'
         picture:
           kind: compare
@@ -366,6 +410,8 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Classify, then count. Step 1: fx → LOOKUP. Step 2: Search Criterion = G2, Search Vector = Criteria (sorted smallest to largest), OK. Step 3: fill down. Step 4: to count a category, use COUNTIF with Range J2:J36 and Criteria the category name. COUNTIF counts cells that meet a condition.'
+        - style: real_world
+          teach: 'After the class test, the teacher first gives each student a grade, then counts how many got A. LOOKUP is the first job: putting each value in its group. COUNTIF is the second: counting how many are in one group.'
     items:
       - prompt: "A state has a density of 350 per sq km. Which category is it in?"
         options: ["Moderate population density", "Low population density", "High population density", "Very high population density"]
@@ -503,6 +549,21 @@ concepts:
         solution: 'Step 1: COUNTIF needs where and what. Step 2: Range = where. Step 3: The cells to be checked.'
         mistakes:
           The answer: countif_fn
+      - prompt: 'Situation: A state has a density of 400. Using the groups 0, 100, 200, 400, 800, which category does LOOKUP give it?'
+        options:
+        - high
+        - moderate
+        - very high
+        answer: high
+        hints:
+        - LOOKUP uses lower limits.
+        - 400 is the lower limit of which group?
+        solution: 400 is the lower limit of the 400–799 group, so the category is high.
+        mistakes:
+          moderate: it4_lower_limit
+          very high: it4_lower_limit
+        exam: case
+        difficulty: 2
 
   - code: it9.data.filter_protect
     title: Filtering and protecting data
@@ -572,6 +633,8 @@ concepts:
         ways:
         - style: real_world
           teach: 'On a shopping site you tick ''size M'' and only M shirts show; the others are still in the shop. AutoFilter does that in Calc: click a heading cell, Data → AutoFilter, then use the arrow to tick only, say, ''Very High Density''. Other rows are hidden, not deleted. Data → More Filters → Standard Filter lets you set conditions.'
+        - style: step_by_step
+          teach: 'Step 1: Click a heading cell. Step 2: Data → AutoFilter; arrows appear in the headings. Step 3: Click the arrow on the category column. Step 4: Tick only ''Very High Density''. Step 5: The other rows are hidden, not deleted; untick to see them again.'
       - teach: Tools → Protect Sheet with a password stops changes. The file can still be opened and viewed. To edit again, unprotect with the same password. You can also protect only certain cells.
         check:
           prompt: After protecting a sheet, others can
@@ -584,6 +647,20 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Protect a sheet in steps. Step 1: Tools → Protect Sheet. Step 2: set a password. Now nobody can change it, but it can still be opened and viewed. Step 3: to edit again, unprotect it with the same password. You can also protect only certain cells.'
+        - style: visual
+          teach: What a protected sheet still lets you do, and what it stops.
+          picture:
+            kind: compare
+            columns:
+            - title: Still possible
+              points:
+              - open the file
+              - view the data
+            - title: Stopped
+              points:
+              - changing cells
+              - until unprotected with the password
+            alt: A protected sheet can still be opened and viewed, but cells cannot be changed until it is unprotected with the password.
     items:
       - prompt: "What does AutoFilter do?"
         options: ["Displays only rows that meet chosen criteria", "Deletes rows that do not meet criteria", "Sorts data alphabetically", "Creates a chart"]
@@ -732,3 +809,18 @@ concepts:
         solution: 'Step 1: Protection is toggled in Tools. Step 2: Choose Protect Sheet again. Step 3: Enter the password.'
         mistakes:
           Use AutoFilter: it4_protect_view
+      - prompt: 'Situation: You share a marks sheet with classmates so they can see it but not change it. What should you use?'
+        options:
+        - Tools → Protect Sheet with a password
+        - Data → AutoFilter
+        - Delete the marks column
+        answer: Tools → Protect Sheet with a password
+        hints:
+        - They must still be able to view it.
+        - Which tool stops changes only?
+        solution: Protect Sheet stops changes but still lets people open and view the file.
+        mistakes:
+          Data → AutoFilter: it4_protect_view
+          Delete the marks column: it4_hide_not_delete
+        exam: case
+        difficulty: 2

@@ -3,6 +3,9 @@ subject: cbse10-math
 chapter: 3
 title: Pair of Linear Equations in Two Variables
 tips:
+  c10m3_order: "A point is written (x, y): the x-value always comes first."
+  c10m3_axis: "On the y-axis, x = 0. Put x = 0 in the equation; the point you gave is on the x-axis."
+  c10m3_put_x_in: "k is the y-value at the crossing. Put x = 2 into either equation to find it."
   c10_other_unknown: 'That is the other unknown. Read the question again: which one does it ask for?'
   c10_divide_count: That is the cost of more than one. Divide by how many there are to get the cost of one.
   t10_all_ratios_equal: "If all three ratios are equal, one equation is just a multiple of the other: the same line."
@@ -19,6 +22,13 @@ tips:
   c10m3_check_both: Put your answer back into BOTH equations. If one fails, a sign or a step went wrong.
   c10m3_which_unknown: Make sure you give the unknown the question asks for, not the other one you found on the way.
   c10m3_set_up: Name the two unknowns first, then turn each sentence of the problem into one equation.
+  c10m3_ratio_flip: 'Keep the same order on both sides: a₁/a₂ = b₁/b₂ means 3/6 = k/4.'
+  c10m3_check_c: Check all three ratios, including c₁/c₂, before deciding.
+  c10m3_one_point: One shared point needs a₁/a₂ ≠ b₁/b₂. Are those two ratios really different?
+  c10m3_which_ticket: That is one ticket's price, but which ticket? Check what each letter stands for.
+  c10m3_two_tickets: That is the price of more than one ticket. One more step.
+  c10m3_signs_elim: +4y and −4y are opposites. Opposites vanish when you add, not when you subtract.
+  c10m3_not_matched: 4y and −2y don't cancel yet. Make their sizes match first.
 concepts:
 - code: cbse10m.pair.graph
   title: Pairs of lines and their solutions
@@ -143,6 +153,11 @@ concepts:
         - Infinitely many
         answer: None
         why: They never meet.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw each line from two easy points. For x + y = 4 use (0, 4) and (4, 0). Step 2: Draw the second line the same way. Step 3: If they cross, the crossing point is the one solution. Step 4: If they are parallel, they never meet: no solution. Step 5: If one lies on top of the other, every point on it works: infinitely many solutions.'
+      - style: real_world
+        teach: Two friends walk along two straight roads. If the roads cross, they can meet at exactly one spot. If the roads run side by side, they never meet. If both walk the same road, every point is a meeting point.
     - teach: 'Without drawing, compare the ratios for a₁x + b₁y + c₁ = 0 and a₂x + b₂y + c₂ = 0. If a₁/a₂ ≠ b₁/b₂: intersecting. If a₁/a₂ = b₁/b₂ ≠ c₁/c₂: parallel. If all three ratios are equal: coincident.'
       check:
         prompt: For x + y − 4 = 0 and 2x + 2y − 8 = 0, the ratios are 1/2, 1/2, 1/2. The lines are…
@@ -152,6 +167,30 @@ concepts:
         - Intersecting
         answer: Coincident
         why: All three ratios are equal.
+      ways:
+      - style: visual
+        teach: Compare the ratios, then read the answer from the matching column.
+        picture:
+          kind: compare
+          columns:
+          - title: Intersecting
+            points:
+            - a₁/a₂ ≠ b₁/b₂
+            - Exactly one solution
+            - Consistent
+          - title: Parallel
+            points:
+            - a₁/a₂ = b₁/b₂ ≠ c₁/c₂
+            - No solution
+            - Inconsistent
+          - title: Coincident
+            points:
+            - a₁/a₂ = b₁/b₂ = c₁/c₂
+            - Infinitely many solutions
+            - Consistent (dependent)
+          alt: Different a and b ratios give one solution; equal a and b ratios but a different c ratio give none; all three equal give infinitely many.
+      - style: step_by_step
+        teach: 'Step 1: Write both as ax + by + c = 0, e.g. 2x + 3y − 5 = 0 and 4x + 6y − 7 = 0. Step 2: a₁/a₂ = 2/4 = 1/2. Step 3: b₁/b₂ = 3/6 = 1/2. Step 4: c₁/c₂ = −5/−7 = 5/7. Step 5: The first two match but the third doesn''t: parallel lines, no solution.'
   items:
   - prompt: Two lines cross at exactly one point. How many solutions does the pair of equations have?
     options:
@@ -281,7 +320,7 @@ concepts:
     - y = 2 + 1.
     solution: 'y = 2 + 1 = 3. Check: −2 + 5 = 3.'
     mistakes:
-      '2': c10m3_which_unknown
+      '2': c10m3_put_x_in
   - prompt: Which pair of equations is dependent (infinitely many solutions)?
     options:
     - x + 2y = 3 and 3x + 6y = 9
@@ -309,7 +348,7 @@ concepts:
     - Put x = 0.
     solution: x = 0 gives y = 6, so (0, 6).
     mistakes:
-      (3, 0): c10m3_which_unknown
+      (3, 0): c10m3_axis
   - prompt: Is the pair 5x − 8y + 1 = 0 and 3x − (24/5)y + 3/5 = 0 consistent?
     options:
     - Yes, infinitely many solutions
@@ -337,7 +376,56 @@ concepts:
     - y = −1 is a horizontal line.
     solution: A vertical and a horizontal line meet at (2, −1).
     mistakes:
-      (−1, 2): c10m3_which_unknown
+      (−1, 2): c10m3_order
+  - prompt: 'Assertion (A): The pair x + 2y = 3 and 2x + 4y = 7 has no solution.
+
+      Reason (R): If a₁/a₂ = b₁/b₂ ≠ c₁/c₂, the two lines are parallel.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'a₁/a₂ = 1/2, b₁/b₂ = 2/4 = 1/2, c₁/c₂ = 3/7. The first two are equal and the third is different, so by R the lines are parallel and never meet: A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: For what value of k do 3x + ky = 5 and 6x + 4y = 9 have no solution?
+    options:
+    - '2'
+    - '8'
+    - '4'
+    - '6'
+    answer: '2'
+    hints:
+    - No solution means a₁/a₂ = b₁/b₂ ≠ c₁/c₂.
+    - Solve 3/6 = k/4.
+    solution: 'Need 3/6 = k/4, so k/4 = 1/2 and k = 2. Check c: 5/9 ≠ 1/2, so the lines are parallel.'
+    mistakes:
+      '8': c10m3_ratio_flip
+    exam: one_mark
+    difficulty: 1
+  - prompt: 'Case study: On a town map, a bus route runs along x + y = 6 and a cycle track along 2x + 2y = 12. How many points do they share?'
+    options:
+    - Infinitely many
+    - Exactly one
+    - None
+    answer: Infinitely many
+    hints:
+    - Compare a₁/a₂, b₁/b₂ and c₁/c₂.
+    - Divide the second equation by 2. What do you notice?
+    solution: '1/2 = 1/2 = 6/12: all three ratios are equal, so the lines coincide. The route and the track run along the same line and share every point.'
+    mistakes:
+      None: c10m3_check_c
+      Exactly one: c10m3_one_point
+    exam: case
+    difficulty: 2
 - code: cbse10m.pair.algebra
   title: Solving by substitution and elimination
   after:
@@ -435,6 +523,20 @@ concepts:
         - '7'
         answer: '3'
         why: 3x = 9.
+      ways:
+      - style: visual
+        teach: 'Substitution, one line at a time: make y the subject, put it in, solve for x, then find y.'
+        picture:
+          kind: flow
+          steps:
+          - x + y = 7, so y = 7 − x
+          - 2x − (7 − x) = 2
+          - 3x − 7 = 2
+          - x = 3
+          - y = 7 − 3 = 4
+          alt: From x plus y equals 7, y equals 7 minus x; put it in the second equation to get 3x minus 7 equals 2, so x is 3 and y is 4.
+      - style: real_world
+        teach: Substitution is like a swap at a shop. If 1 pen costs the same as 2 pencils, you can replace every pen on the bill by 2 pencils. Now there is only one kind of item, and the bill is easy to work out.
     - teach: 'Elimination: make the coefficients of one variable equal (or opposite), then subtract (or add) to remove it. 3x + 2y = 12 and 5x − 2y = 4: add them, 8x = 16, x = 2; then 6 + 2y = 12, y = 3. Always check your answer in both equations.'
       picture:
         kind: flow
@@ -453,6 +555,11 @@ concepts:
         - To double everything
         answer: The y terms cancel
         why: +2y and −2y make 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look for a variable with equal or opposite coefficients: here +2y and −2y. Step 2: They are opposite, so add the equations: 8x = 16. Step 3: x = 2. Step 4: Put x = 2 into either equation: 6 + 2y = 12, so y = 3. Step 5: Check in the other: 5(2) − 2(3) = 4. ✓'
+      - style: real_world
+        teach: 'Elimination is like comparing two shopping bills. Bill 1: 2 pens and 3 notebooks. Bill 2: 2 pens and 4 notebooks. Subtract one bill from the other: the pens cancel, and the difference is exactly one notebook''s price.'
     - teach: 'Word problems: name the two unknowns, write one equation from each condition, solve, and check the answer makes sense in the story.'
       check:
         prompt: First step in a word problem?
@@ -462,6 +569,20 @@ concepts:
         - Draw a circle
         answer: Name the two unknowns
         why: Then each condition becomes an equation.
+      ways:
+      - style: visual
+        teach: 'A word problem in four boxes: name the unknowns, write the equations, solve them, check in the story.'
+        picture:
+          kind: flow
+          steps:
+          - 'Name: pen ₹x, notebook ₹y'
+          - 2x + 3y = 110
+          - x + 2y = 70
+          - 'Solve: y = 30, x = 10'
+          - 'Check: 20 + 90 = 110 ✓'
+          alt: Name the unknowns, write one equation for each fact, solve, and check in the story.
+      - style: real_world
+        teach: '2 pens and 3 notebooks cost ₹110; 1 pen and 2 notebooks cost ₹70. Let a pen be ₹x and a notebook ₹y: 2x + 3y = 110 and x + 2y = 70. Double the second: 2x + 4y = 140. Subtract the first: y = 30. Then x = 70 − 60 = 10. Check: 2(10) + 3(30) = 110 ✓.'
   items:
   - prompt: Solve x + y = 14 and x − y = 4. What is x?
     answer: '9'
@@ -616,3 +737,52 @@ concepts:
     mistakes:
       '12': c10m3_which_unknown
       '6': c10m3_check_both
+  - prompt: 'Assertion (A): x = 2, y = 1 is a solution of the pair x + y = 3 and x − y = 1.
+
+      Reason (R): A solution of a pair of linear equations must satisfy both equations.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 2 + 1 = 3 and 2 − 1 = 1, so the values satisfy both equations and A is true. R is what 'solution of a pair' means, so it is the reason A holds.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case study: At a fair, 5 adult and 3 child tickets cost ₹490, and 2 adult and 3 child tickets cost ₹250. What is the price of one adult ticket?'
+    options:
+    - ₹80
+    - ₹30
+    - ₹160
+    answer: ₹80
+    hints:
+    - Let an adult ticket be ₹a and a child ticket ₹c. Write two equations.
+    - Both have 3c. Subtract one equation from the other.
+    solution: '5a + 3c = 490 and 2a + 3c = 250. Subtract: 3a = 240, so a = 80. Then 160 + 3c = 250, c = 30. Check: 400 + 90 = 490 ✓.'
+    mistakes:
+      ₹30: c10m3_which_ticket
+      ₹160: c10m3_two_tickets
+    exam: case
+    difficulty: 2
+  - prompt: To solve 3x + 4y = 10 and 2x − 2y = 2 by elimination, which step removes y in one go?
+    options:
+    - Multiply the second equation by 2, then add
+    - Multiply the second equation by 2, then subtract
+    - Add the equations as they are
+    answer: Multiply the second equation by 2, then add
+    hints:
+    - You want the y terms to be the same size.
+    - 2 × (−2y) = −4y. What happens to +4y and −4y?
+    solution: Doubling the second gives 4x − 4y = 4. Adding to 3x + 4y = 10 gives 7x = 14, so x = 2 and then y = 1.
+    mistakes:
+      Multiply the second equation by 2, then subtract: c10m3_signs_elim
+      Add the equations as they are: c10m3_not_matched
+    exam: competency
+    difficulty: 2

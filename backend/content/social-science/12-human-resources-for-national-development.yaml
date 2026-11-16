@@ -9,7 +9,7 @@ tips:
   natural_not_capital: "Capital is something made by people to help produce more. Which choice is a gift of nature?"
   workforce_count: "Start from everyone, remove those below 15, then remove those not willing or able to work."
   investment_return: "An investment is spent now to earn more later. What does education add to a person's future work?"
-  off_season: "Seasonal unemployment comes from having work only part of the year. What could give work in the other months?"
+  off_season: "Is the work missing all year, or only in some months? Name the unemployment by when it happens."
   poverty_blocks: "Building human capital needs food, health care and schooling. Can a poor family afford these?"
   k9_hc_info: "The course exists, but the family never heard of it. What is missing: the training, or knowing about it?"
   k9_hc_training: "The nurses learned a new skill on the job. Which of the five factors is learning at work?"
@@ -21,7 +21,7 @@ tips:
   k9_tractor_factor: "A tractor is made by people and used to produce more. It isn't nature, and it isn't human effort."
   k9_land_factor: "Soil and water are gifts of nature, not made by people. Which factor covers all natural resources?"
   factors_production: "Natural resources are land; human effort is labour; things made by people to help produce, like machines, are capital; the person who brings them all together and takes the risk is the entrepreneur."
-  factor_rewards: "Each factor gets its own payment: land earns rent, capital earns interest, the organiser earns profit, and the human effort of workers earns another. For costs, add up every payment."
+  factor_rewards: "Each factor of production earns its own kind of payment. Which factor is money lent by a bank?"
   barter: "Barter is exchanging goods for goods. Its problems include difficulty in fixing the price of goods and needing someone who wants exactly what you have."
   money_evolution: "Money changed over time: goods for goods, then metals, then coins, then paper, and most recently money that exists only on computers and cards."
   human_resource: "Human resources are people as workers. Productivity is how much one worker or factor can produce. India passed China in population in 2023. Education and training can raise productivity, which is why this resource is called dynamic."
@@ -39,6 +39,8 @@ tips:
   ss12h_times_divide: '''How many times'' means divide the new amount by the old one.'
   ss12h_hc_five: "Ask what actually changed for the person in the story: did they move, get healthier, learn on the job, study, or simply find out about something?"
   ss12h_unemp_cause: 'Ask why the person has no work: no jobs at all, machines took the job, the season is over, or too many people share one job.'
+  pqk9s12_factor_reward: 'Each factor earns its own payment: what does land earn, what does labour earn, what does capital earn?'
+  pqk9s12_unemployment_kind: 'No job: open. Machines took it: structural. Only some months: seasonal. Extra people, same output: disguised.'
 
 concepts:
   - code: ss9.hr.factors
@@ -124,6 +126,20 @@ concepts:
         ways:
         - style: real_world
           teach: To start a tea shop you need a place (land), someone to make tea (labour), a stove and kettle (capital), and a person who plans and runs it all (entrepreneurship). These four factors of production go into making any good or service.
+        - style: visual
+          teach: The four factors of production, with a tea shop as the example.
+          picture:
+            kind: compare
+            columns:
+            - title: Land and labour
+              points:
+              - 'land: the shop''s place, water'
+              - 'labour: the person making tea'
+            - title: Capital and enterprise
+              points:
+              - 'capital: stove, kettle'
+              - 'entrepreneur: the owner who organises'
+            alt: For a tea shop, land is the place and water, labour is the person making tea, capital is the stove and kettle, and the entrepreneur is the owner who organises it all.
       - teach: 'Each factor gets a reward: land gets rent, labour gets wages, capital gets interest, and the entrepreneur gets profit, which is what is left after paying the others.'
         picture:
           kind: flow
@@ -156,6 +172,8 @@ concepts:
               points:
               - Capital earns interest
               - Entrepreneur earns profit
+        - style: real_world
+          teach: A tea shop earns ₹10,000 in a month. The owner pays ₹2,000 rent for the room, ₹4,000 wages to the helper and ₹500 interest on the loan for the stove. What is left, ₹3,500, is the owner's profit.
       - teach: 'Before money, people bartered: swapped goods for goods. It was hard to agree prices (how many coconuts for a goat?). Money developed step by step: barter goods, gold and metals, coins, paper money, plastic cards, electronic money.'
         check:
           prompt: What was a big problem with barter?
@@ -168,6 +186,18 @@ concepts:
         ways:
         - style: real_world
           teach: 'Try buying a pencil by offering your sandwich: the shopkeeper may not want it, and how much sandwich is one pencil worth? That was barter''s problem. So money grew step by step: barter goods, gold and metals, coins, paper money, cards, and now electronic money.'
+        - style: visual
+          teach: Money developed step by step from swapping goods.
+          picture:
+            kind: flow
+            steps:
+            - 'barter: goods for goods'
+            - gold and metals
+            - coins
+            - paper money
+            - plastic cards
+            - electronic money
+            alt: Money developed from barter to gold and metals, then coins, paper money, plastic cards and electronic money.
     items:
       - prompt: "Soil and water used in paddy cultivation belong to which factor of production?"
         options: ["Land", "Labour", "Capital", "Entrepreneurship"]
@@ -291,6 +321,36 @@ concepts:
         solution: 'Step 1: Costs = 10,000 + 50,000 + 5,000 = 65,000. Step 2: 1,00,000 − 65,000 = 35,000. Step 3: Profit ₹35,000.'
         mistakes:
           '65000': profit_left
+      - prompt: 'Situation: A farmer takes a bank loan to buy a tractor. What does the bank earn as its reward for this capital?'
+        options:
+        - Interest
+        - Rent
+        - Wages
+        answer: Interest
+        hints:
+        - The tractor is capital.
+        - What is capital's reward?
+        solution: Capital earns interest, so the bank's reward on the loan for the tractor is interest.
+        mistakes:
+          Rent: pqk9s12_factor_reward
+          Wages: factor_rewards
+        exam: case
+        difficulty: 2
+      - prompt: The main problem with barter was
+        options:
+        - agreeing how much one thing was worth in another
+        - coins were too heavy
+        - cards were not accepted
+        answer: agreeing how much one thing was worth in another
+        hints:
+        - How many coconuts for a goat?
+        - There was no common measure.
+        solution: 'Without money, it was hard to agree values: how many coconuts equal a goat?'
+        mistakes:
+          coins were too heavy: barter
+          cards were not accepted: money_evolution
+        exam: one_mark
+        difficulty: 1
 
   - code: ss9.hr.human_resources
     title: Human resources, productivity and labour force
@@ -354,6 +414,16 @@ concepts:
         ways:
         - style: real_world
           teach: Rubber latex in a tree is useless until people tap it, process it and make tyres. People who can work and turn natural resources into useful goods and services are human resources. How much they can produce, their productivity, decides their quality.
+        - style: visual
+          teach: People turn natural resources into useful products.
+          picture:
+            kind: flow
+            steps:
+            - latex in a rubber tree
+            - people tap and process it
+            - factory makes tyres
+            - a useful product
+            alt: Latex in a rubber tree becomes useful only when people tap and process it and a factory makes it into tyres.
       - teach: 'India has the world''s largest population. But size alone is not strength: quality matters more. Healthy, educated, skilled people produce far more. That is why human resource is called the dynamic factor: education, training and health care can raise it.'
         check:
           prompt: Which makes human resources stronger?
@@ -366,6 +436,21 @@ concepts:
         ways:
         - style: real_world
           teach: A big team of unfit, untrained players loses to a small trained one. India has the world's largest population, but numbers alone aren't strength. Health, education and skills multiply what people produce, which is why human resource is called the dynamic factor.
+        - style: visual
+          teach: 'Size versus quality: why trained people produce more.'
+          picture:
+            kind: compare
+            columns:
+            - title: Size alone
+              points:
+              - many people
+              - untrained, unhealthy
+              - low output
+            - title: Quality
+              points:
+              - educated, skilled, healthy
+              - high productivity
+            alt: Many untrained, unhealthy people produce little; educated, skilled and healthy people have high productivity.
       - teach: 'The labour force (PLFS 2023) is people aged 15 and above who are willing and able to work. To count it: start from everyone, remove those under 15, then remove those not willing or not able.'
         picture:
           kind: flow
@@ -386,6 +471,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: start with everyone in the country. Step 2: remove everyone under 15. Step 3: remove those not willing to work. Step 4: remove those not able to work. Who is left is the labour force (PLFS 2023).'
+        - style: visual
+          teach: Counting the labour force, by removing groups step by step.
+          picture:
+            kind: flow
+            steps:
+            - everyone in the country
+            - remove those under 15
+            - remove those not willing or able
+            - 'the rest: labour force'
+            alt: Start with everyone, remove those under 15, remove those not willing or able to work, and the rest is the labour force.
     items:
       - prompt: "The term 'human resources' means"
         options: ["People who can work and be used in production", "All machines in a factory", "Natural resources like water", "Money in banks"]
@@ -505,6 +600,36 @@ concepts:
         solution: 'Step 1: Old = 4 shirts. Step 2: New = 12 shirts. Step 3: 12 ÷ 4 = 3 times.'
         mistakes:
           '8': ss12h_times_divide
+      - prompt: 'Situation: A village has 1,000 people. 300 are under 15, and 150 of the rest are not willing or able to work. How big is the labour force?'
+        options:
+        - '550'
+        - '700'
+        - '850'
+        answer: '550'
+        hints:
+        - 'Remove the under-15s first: 1000 − 300.'
+        - Then remove those not willing or able.
+        solution: 1000 − 300 = 700 aged 15+; 700 − 150 = 550 in the labour force.
+        mistakes:
+          '700': workforce_count
+          '850': labour_force
+        exam: case
+        difficulty: 2
+      - prompt: Human resource is called the dynamic factor because
+        options:
+        - its quality can be raised by education, training and health
+        - it never changes
+        - it is the same as land
+        answer: its quality can be raised by education, training and health
+        hints:
+        - Dynamic means able to change and grow.
+        - What can improve people's productivity?
+        solution: Education, training and health care can raise people's productivity, so human resource can grow in quality.
+        mistakes:
+          it never changes: ss12h_size_vs_quality
+          it is the same as land: human_resource
+        exam: short
+        difficulty: 2
 
   - code: ss9.hr.capital_formation
     title: Human capital formation
@@ -577,6 +702,17 @@ concepts:
         ways:
         - style: real_world
           teach: 'A farmer adds value to land by improving it. A country adds value to its people by improving their skills, knowledge and health: that value is human capital, and building it up through education, health, migration, job training and access to information is human capital formation.'
+        - style: visual
+          teach: Five ways a country adds to its human capital.
+          picture:
+            kind: flow
+            steps:
+            - education
+            - health
+            - migration
+            - job training
+            - access to information
+            alt: Human capital grows through education, health, migration, job training and access to information.
       - teach: 'Health: WHO says health is physical, mental and social well-being. Ill people cannot work well, so production slows. Kerala''s network of sub-centres, primary health centres, taluk and district hospitals is a model. Migration and job training add new skills; access to information lets people use schemes.'
         check:
           prompt: How does poor health hurt a country's economy?
@@ -589,6 +725,16 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: health means physical, mental and social well-being. Step 2: sick people can''t work well, so production drops. Step 3: Kerala''s sub-centres, primary health centres, taluk and district hospitals keep people healthy. Step 4: migration and job training add skills, and information helps people use schemes.'
+        - style: visual
+          teach: Kerala's public health network, from the village up.
+          picture:
+            kind: flow
+            steps:
+            - sub-centre
+            - primary health centre
+            - taluk hospital
+            - district hospital
+            alt: Kerala's public health network runs from sub-centres to primary health centres, taluk hospitals and district hospitals.
     items:
       - prompt: "The economic value of human resources is called"
         options: ["Human capital", "Labour force", "Population", "Rent"]
@@ -709,6 +855,36 @@ concepts:
         solution: 'Step 1: The notice told him the course existed. Step 2: Knowing about services is a factor. Step 3: Access to information.'
         mistakes:
           Migration: ss12h_hc_five
+      - prompt: 'Situation: A woman in a village learns about a government loan scheme through the panchayat notice board and starts a tailoring unit. Which factor of human capital formation helped her?'
+        options:
+        - Access to information
+        - Migration
+        - Disguised unemployment
+        answer: Access to information
+        hints:
+        - How did she find out about the scheme?
+        - Knowing about schemes lets people use them.
+        solution: Learning about the scheme is access to information, one of the factors that builds human capital.
+        mistakes:
+          Migration: hc_factors
+          Disguised unemployment: k9_hc_info
+        exam: case
+        difficulty: 2
+      - prompt: According to WHO, health means
+        options:
+        - physical, mental and social well-being
+        - only the absence of disease
+        - only physical strength
+        answer: physical, mental and social well-being
+        hints:
+        - It is more than not being ill.
+        - Three kinds of well-being.
+        solution: WHO defines health as physical, mental and social well-being.
+        mistakes:
+          only the absence of disease: health
+          only physical strength: k9_hc_health
+        exam: one_mark
+        difficulty: 1
 
   - code: ss9.hr.challenges
     title: "Challenges: poverty and unemployment"
@@ -782,6 +958,17 @@ concepts:
         ways:
         - style: step_by_step
           teach: 'Step 1: low income means poor food, little schooling and more illness. Step 2: that means low productivity. Step 3: low productivity brings low income again. Step 4: this loop is the vicious circle of poverty, and better health, education and skills break it.'
+        - style: visual
+          teach: The vicious circle of poverty, and where to break it.
+          picture:
+            kind: flow
+            steps:
+            - low income
+            - poor food, little schooling, illness
+            - low productivity
+            - low income again
+            - 'break it: health, education, skills'
+            alt: Low income leads to poor food, little schooling and illness, then low productivity and low income again; health, education and skills break the circle.
       - teach: 'Unemployment: a healthy, capable person willing to work at the current wage finds no work. Open: no job at all. Structural: new technology took the job. Seasonal: work only in some seasons. Disguised: more people on a job than needed; output does not change if some leave.'
         picture:
           kind: compare
@@ -806,6 +993,20 @@ concepts:
         ways:
         - style: real_world
           teach: 'Five people working a small field that three could manage: if two leave, the harvest is the same. That is disguised unemployment. Open unemployment is no job at all; structural is a job lost to new technology; seasonal is work only in some seasons, like an ice-cream seller in the monsoon.'
+        - style: visual
+          teach: Four kinds of unemployment, and how to tell them apart.
+          picture:
+            kind: compare
+            columns:
+            - title: Open, structural
+              points:
+              - 'open: no job at all'
+              - 'structural: new technology took it'
+            - title: Seasonal, disguised
+              points:
+              - 'seasonal: work only some months'
+              - 'disguised: extra people, same output'
+            alt: Open unemployment means no job at all and structural means technology took it; seasonal means work only some months and disguised means extra people add nothing to output.
     items:
       - prompt: "The state of not being able to meet even basic needs is"
         options: ["Poverty", "Migration", "Productivity", "Human capital"]
@@ -929,3 +1130,33 @@ concepts:
         solution: 'Step 1: Low income limits spending. Step 2: Food and schooling suffer. Step 3: Poor nutrition and little education.'
         mistakes:
           High productivity: poverty_cycle
+      - prompt: 'Situation: A family of six all work on a small paddy field that three people could manage. If three leave, the harvest stays the same. What is this?'
+        options:
+        - Disguised unemployment
+        - Seasonal unemployment
+        - Structural unemployment
+        answer: Disguised unemployment
+        hints:
+        - Does output fall if some leave?
+        - They look employed but add nothing.
+        solution: More people than needed, with no change in output when some leave, is disguised unemployment.
+        mistakes:
+          Seasonal unemployment: pqk9s12_unemployment_kind
+          Structural unemployment: unemployment_types
+        exam: case
+        difficulty: 2
+      - prompt: A boat-builder in a coastal town has work only before the fishing season. This is
+        options:
+        - seasonal unemployment
+        - disguised unemployment
+        - open unemployment
+        answer: seasonal unemployment
+        hints:
+        - Work comes only at a certain time of year.
+        - The rest of the year there is none.
+        solution: Work available only in some seasons means seasonal unemployment.
+        mistakes:
+          disguised unemployment: pqk9s12_unemployment_kind
+          open unemployment: off_season
+        exam: one_mark
+        difficulty: 1
