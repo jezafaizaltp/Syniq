@@ -138,6 +138,34 @@ concepts:
         - displacement
         answer: speed
         why: Speed has no direction attached.
+      ways:
+      - style: visual
+        teach: 'Triangle rule: 9 m east then 12 m north gives a resultant of 15 m.'
+        picture:
+          kind: geometry
+          points:
+            O:
+            - 1
+            - 1
+            A:
+            - 7
+            - 1
+            B:
+            - 7
+            - 9
+          segments:
+          - - O
+            - A
+            - 9 m east
+          - - A
+            - B
+            - 12 m north
+          - - O
+            - B
+            - R = 15 m
+          alt: An arrow 9 metres east followed by an arrow 12 metres north; the arrow from the start to the end is the resultant, 15 metres long.
+      - style: real_world
+        teach: 'Speed is a scalar: the speedometer reads 40 km/h whichever way you turn. Velocity is a vector: 40 km/h north is different from 40 km/h south. A pilot must add the wind''s velocity to the plane''s to know where it really goes.'
     - teach: 'For vectors A and B at angle θ: R = √(A² + B² + 2AB cos θ). At 90°, R = √(A² + B²). Same direction gives A + B (largest); opposite gives |A − B| (smallest).'
       check:
         prompt: 6 N and 8 N at right angles. Resultant?
@@ -147,6 +175,22 @@ concepts:
         - 2 N
         answer: 10 N
         why: √(36 + 64) = 10.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Note A, B and the angle θ between them. Step 2: R = √(A² + B² + 2AB cos θ). Step 3: θ = 0 gives A + B, the largest. θ = 180° gives |A − B|, the smallest. θ = 90° gives √(A² + B²).'
+      - style: visual
+        teach: 'Forces of 7 N and 24 N: the resultant depends on the angle between them.'
+        picture:
+          kind: bars
+          unit: N
+          bars:
+          - label: same way (0°)
+            value: 31
+          - label: at 90°
+            value: 25
+          - label: opposite (180°)
+            value: 17
+          alt: Forces of 7 and 24 newtons give a resultant of 31 newtons in the same direction, 25 at right angles and 17 in opposite directions.
     - teach: A vector A at angle θ to the x-axis has components A_x = A cos θ and A_y = A sin θ. In unit-vector form A = A_x î + A_y ĵ, and |A| = √(A_x² + A_y²).
       picture:
         kind: compare
@@ -168,6 +212,11 @@ concepts:
         - 20 N
         answer: 10 N
         why: 20 sin 30° = 10.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Measure θ from the x-axis. Step 2: A_x = A cos θ (the side next to the angle). Step 3: A_y = A sin θ. Step 4: Check: √(A_x² + A_y²) = A. Example: 20 N at 30°: A_x ≈ 17.3 N, A_y = 10 N.'
+      - style: real_world
+        teach: 'Pulling a suitcase by a slanted handle: part of your pull drags it forward (the horizontal component) and part lifts it a little (the vertical component). A lower handle angle puts more of your pull into moving forward.'
   items:
   - prompt: Two forces of 3 N and 4 N act at right angles. Find the resultant (in N).
     answer: '5'
@@ -336,6 +385,55 @@ concepts:
     mistakes:
       '7': c11p03_vec
       '1': c11p03_vec
+  - prompt: 'Assertion (A): Two vectors of magnitudes 3 and 5 can never have a resultant of magnitude 1.
+
+      Reason (R): The resultant of two vectors lies between the difference and the sum of their magnitudes.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. The resultant must lie between 5 − 3 = 2 and 5 + 3 = 8, so 1 is impossible: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A boat heads straight across a river at 4 m/s while the river flows at 3 m/s. What is the boat''s actual speed relative to the bank?'
+    options:
+    - 5 m/s
+    - 7 m/s
+    - 1 m/s
+    answer: 5 m/s
+    hints:
+    - The two velocities are at right angles.
+    - Use √(A² + B²).
+    solution: √(16 + 9) = 5 m/s.
+    mistakes:
+      7 m/s: p11_resultant
+      1 m/s: c11p_vector_add
+    exam: case
+    difficulty: 2
+  - prompt: A vector A = 3î + 4ĵ. What angle does it make with the x-axis (tan θ)?
+    options:
+    - tan θ = 4/3
+    - tan θ = 3/4
+    - tan θ = 5/3
+    answer: tan θ = 4/3
+    hints:
+    - tan θ = A_y/A_x.
+    - A_y = 4, A_x = 3.
+    solution: tan θ = 4/3.
+    mistakes:
+      tan θ = 3/4: p11_component
+      tan θ = 5/3: c11p03_comp
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.plane.projectile
   title: Projectile and circular motion
   after:
@@ -453,6 +551,25 @@ concepts:
         - vertical
         answer: horizontal, u cos θ
         why: Only the vertical part becomes zero.
+      ways:
+      - style: visual
+        teach: A projectile's motion splits into two independent parts.
+        picture:
+          kind: compare
+          columns:
+          - title: Horizontal
+            points:
+            - u cos θ
+            - no acceleration
+            - same speed all along
+          - title: Vertical
+            points:
+            - u sin θ at the start
+            - acceleration g down
+            - zero at the top
+          alt: Horizontally the projectile keeps a steady speed u cos theta; vertically it starts at u sin theta, slows under gravity, stops at the top and comes back down.
+      - style: real_world
+        teach: 'Drop one ball and fire another sideways from the same height at the same moment: they hit the floor together. Sideways speed doesn''t change how fast gravity pulls down; the two motions are independent.'
     - teach: Time of flight T = 2u sin θ/g. Maximum height H = u² sin²θ/2g. Range R = u² sin 2θ/g, greatest at 45° (R = u²/g). Angles θ and 90° − θ give the same range.
       check:
         prompt: u = 10 m/s, θ = 45°, g = 10. Range?
@@ -462,6 +579,26 @@ concepts:
         - 20 m
         answer: 10 m
         why: u²/g = 100/10.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Vertical: time up = u sin θ/g, total T = 2u sin θ/g. Step 2: Height H = u² sin²θ/2g. Step 3: Range R = horizontal speed × T = u² sin 2θ/g. Step 4: sin 2θ is biggest at θ = 45°.'
+      - style: visual
+        teach: 'Range for u = 25 m/s (g = 10) at different angles: 30° and 60° tie, 45° is best.'
+        picture:
+          kind: bars
+          unit: m
+          bars:
+          - label: 15°
+            value: 31.3
+          - label: 30°
+            value: 54.1
+          - label: 45°
+            value: 62.5
+          - label: 60°
+            value: 54.1
+          - label: 75°
+            value: 31.3
+          alt: 'Ranges are about 31 metres at 15 degrees, 54 at 30, 62.5 at 45, 54 at 60 and 31 at 75: complementary angles give the same range and 45 degrees gives the most.'
     - teach: In uniform circular motion the speed stays constant but the direction keeps changing, so there is an acceleration v²/r = ω²r towards the centre. v = ωr and ω = 2π/T.
       picture:
         kind: compare
@@ -485,6 +622,11 @@ concepts:
         - 4π rad/s
         answer: π rad/s
         why: 2π/2.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: ω = 2π/T. Step 2: v = ωr. Step 3: Centripetal acceleration a = v²/r = ω²r, pointing to the centre. Example: r = 2 m, v = 4 m/s: a = 8 m/s².'
+      - style: real_world
+        teach: 'Swing a bucket of water in a circle: let go and it flies off in a straight line along the tangent. The string''s pull towards your hand is what kept turning it: that''s the centripetal force.'
   items:
   - prompt: A ball is thrown at 20 m/s at 45°. Taking g = 10 m/s², find its range (in m).
     answer: '40'
@@ -654,3 +796,52 @@ concepts:
     mistakes:
       '4': c11p03_proj
       '1': c11p03_proj
+  - prompt: 'Assertion (A): In uniform circular motion, the acceleration is zero because the speed is constant.
+
+      Reason (R): Acceleration is the rate of change of velocity, and the direction of velocity keeps changing in circular motion.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the direction changes, so there is a centripetal acceleration. R is true and shows why.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A footballer kicks a ball at 20 m/s at 30° to the ground. Taking g = 10 m/s², what is its maximum height?'
+    options:
+    - 5 m
+    - 20 m
+    - 15 m
+    answer: 5 m
+    hints:
+    - H = u² sin²θ/2g.
+    - sin 30° = ½, so sin²30° = ¼.
+    solution: H = 400 × ¼/20 = 5 m.
+    mistakes:
+      20 m: p11_proj_height
+      15 m: c11p03_proj
+    exam: competency
+    difficulty: 2
+  - prompt: A stone tied to a 0.5 m string is whirled at 2 revolutions per second. Find its centripetal acceleration (take π² ≈ 10).
+    options:
+    - 80 m/s²
+    - 8 m/s²
+    - 40 m/s²
+    answer: 80 m/s²
+    hints:
+    - ω = 2π × 2 = 4π rad/s.
+    - a = ω²r.
+    solution: a = (4π)² × 0.5 = 16π² × 0.5 = 8π² ≈ 80 m/s².
+    mistakes:
+      8 m/s²: p11_centripetal
+      40 m/s²: p11_centripetal
+    exam: short
+    difficulty: 2

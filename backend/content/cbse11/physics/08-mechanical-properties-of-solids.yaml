@@ -65,6 +65,23 @@ concepts:
         - 80 Pa
         answer: 20 000 Pa
         why: 40 ÷ 0.002.
+      ways:
+      - style: visual
+        teach: Elastic and plastic materials after the force is removed.
+        picture:
+          kind: compare
+          columns:
+          - title: Elastic
+            points:
+            - returns to shape
+            - rubber band, steel spring
+          - title: Plastic
+            points:
+            - stays deformed
+            - clay, putty, wet dough
+          alt: An elastic material like a steel spring returns to its shape when released; a plastic one like clay stays deformed.
+      - style: step_by_step
+        teach: 'Step 1: Find the force F. Step 2: Find the cross-section area A in m² (1 mm² = 10⁻⁶ m²). Step 3: Stress = F/A in N/m² (Pa). 500 N on 2 × 10⁻⁶ m² gives 2.5 × 10⁸ Pa.'
     - teach: 'Strain is the fractional change: ΔL/L for length, Δx/L for shear, ΔV/V for volume. It is a ratio, so it has no unit. Hooke''s law: for small deformations stress ∝ strain.'
       check:
         prompt: A 4 m wire stretches 2 mm. Strain?
@@ -74,6 +91,27 @@ concepts:
         - 2 × 10⁻³
         answer: 5 × 10⁻⁴
         why: 0.002 ÷ 4.
+      ways:
+      - style: visual
+        teach: Three kinds of strain, each a fraction with no unit.
+        picture:
+          kind: compare
+          columns:
+          - title: Longitudinal
+            points:
+            - ΔL/L
+            - stretching a wire
+          - title: Shear
+            points:
+            - Δx/L = θ
+            - sliding the top of a book
+          - title: Volume
+            points:
+            - ΔV/V
+            - squeezing a ball under water
+          alt: 'Longitudinal strain is change in length over length, shear strain is sideways shift over height, and volume strain is change in volume over volume: all ratios with no unit.'
+      - style: real_world
+        teach: A 4 m wire stretching 1 mm and a 40 m cable stretching 10 mm have the same strain, 1 part in 4000. Strain compares the change with the original size, so it lets you compare a guitar string and a bridge cable fairly.
     - teach: A stress–strain curve passes the proportional limit, the yield point, the ultimate strength and then fracture. Ductile metals (copper) stretch a long way before breaking; brittle ones (glass) snap soon after the elastic limit.
       picture:
         kind: flow
@@ -91,6 +129,11 @@ concepts:
         - an elastomer
         answer: ductile
         why: It has a long plastic region.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Up to the proportional limit, stress ∝ strain (straight line). Step 2: Past the elastic limit/yield point, the wire won''t fully return. Step 3: The highest stress is the ultimate strength. Step 4: Then fracture. A long gap between yield and fracture means ductile.'
+      - style: real_world
+        teach: 'Copper is drawn into thin electric wires because it stretches far before snapping: it is ductile. A glass rod given the same treatment snaps almost as soon as it stops behaving elastically: it is brittle.'
   items:
   - prompt: A force of 200 N acts on a wire of cross-section 2 × 10⁻⁶ m². Find the stress in units of 10⁶ N/m².
     answer: '100'
@@ -275,6 +318,55 @@ concepts:
     mistakes:
       the proportional limit: c11p08_ss
       Hooke's law region: c11p08_ss
+  - prompt: 'Assertion (A): Strain has no unit.
+
+      Reason (R): Strain is the ratio of a change in a dimension to the original dimension.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. A ratio of two lengths (or two volumes) has no unit: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A crane''s steel cable of cross-section 5 × 10⁻⁴ m² lifts a 10,000 N load. What is the stress in the cable?'
+    options:
+    - 2 × 10⁷ Pa
+    - 5 × 10⁷ Pa
+    - 2 × 10³ Pa
+    answer: 2 × 10⁷ Pa
+    hints:
+    - Stress = F/A.
+    - 10⁴ ÷ (5 × 10⁻⁴).
+    solution: 10⁴/(5 × 10⁻⁴) = 2 × 10⁷ Pa.
+    mistakes:
+      5 × 10⁷ Pa: c11p_stress
+      2 × 10³ Pa: c11p08_ss
+    exam: case
+    difficulty: 2
+  - prompt: Which material is described as ductile?
+    options:
+    - Copper
+    - Glass
+    - Cast iron
+    answer: Copper
+    hints:
+    - Ductile materials can be drawn into wires.
+    - Which one stretches far before breaking?
+    solution: Copper has a long plastic region before fracture, so it is ductile. Glass and cast iron are brittle.
+    mistakes:
+      Glass: p11_brittle
+      Cast iron: p11_brittle
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.solids.moduli
   title: Elastic moduli
   after:
@@ -400,6 +492,26 @@ concepts:
         - 5 × 10⁻¹² Pa
         answer: 2 × 10¹¹ Pa
         why: 6 × 10⁷ ÷ 3 × 10⁻⁴.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Stress = F/A. Step 2: Strain = ΔL/L. Step 3: Y = stress ÷ strain = FL/(AΔL). Example: 50 N, 3 m, 10⁻⁶ m², 1.5 mm: Y = 150/(1.5 × 10⁻⁹) = 10¹¹ Pa.'
+      - style: visual
+        teach: 'Young''s modulus for some common materials: a bigger Y means stiffer.'
+        picture:
+          kind: bars
+          unit: × 10⁹ Pa
+          bars:
+          - label: steel
+            value: 200
+          - label: copper
+            value: 120
+          - label: aluminium
+            value: 70
+          - label: wood
+            value: 13
+          - label: rubber
+            value: 0.05
+          alt: Young's modulus is about 200 billion pascals for steel, 120 for copper, 70 for aluminium, about 13 for wood and tiny for rubber.
     - teach: Shear modulus G = (F/A)/θ for a change of shape (G ≈ Y/3). Bulk modulus B = −p/(ΔV/V) for a change of volume; compressibility = 1/B. Liquids and gases only have B.
       check:
         prompt: Which modulus does a gas have?
@@ -409,6 +521,27 @@ concepts:
         - shear only
         answer: bulk only
         why: Fluids cannot hold a fixed length or shape.
+      ways:
+      - style: visual
+        teach: Which elastic modulus goes with which kind of change in a body.
+        picture:
+          kind: compare
+          columns:
+          - title: Young's Y
+            points:
+            - change in length
+            - solids only
+          - title: Shear G
+            points:
+            - change in shape
+            - solids only
+          - title: Bulk B
+            points:
+            - change in volume
+            - solids, liquids, gases
+          alt: Young's modulus is for change in length and shear modulus for change in shape, both only for solids; bulk modulus is for change in volume and applies to solids, liquids and gases.
+      - style: real_world
+        teach: 'You can''t stretch or twist water: pour it and it just flows into a new shape, so liquids have no Young''s or shear modulus. But squeeze it in a strong cylinder and it pushes back hard: water has a large bulk modulus.'
     - teach: Poisson's ratio = lateral strain ÷ longitudinal strain (no unit). Elastic energy stored per unit volume = ½ × stress × strain.
       picture:
         kind: compare
@@ -432,6 +565,11 @@ concepts:
         - 500 J/m³
         answer: 1000 J/m³
         why: ½ × 2 × 10⁶ × 10⁻³.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Poisson''s ratio = (sideways strain) ÷ (lengthwise strain). Step 2: It has no unit, and for most metals it is about 0.3. Step 3: Energy stored per unit volume = ½ × stress × strain.'
+      - style: real_world
+        teach: Stretch a rubber band and watch it get thinner as it gets longer. That sideways squeeze compared with the lengthwise stretch is Poisson's ratio.
   items:
   - prompt: Stress is 2 × 10⁸ Pa and strain is 10⁻³. Find Young's modulus in units of 10¹¹ Pa.
     answer: '2'
@@ -611,3 +749,52 @@ concepts:
     mistakes:
       '1': c11p08_mod
       '2': c11p08_mod
+  - prompt: 'Assertion (A): Steel is more elastic than rubber.
+
+      Reason (R): For the same stress, steel shows much less strain than rubber, so its Young''s modulus is larger.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. In physics 'more elastic' means a larger modulus; steel's small strain for the same stress gives it the bigger Y, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Two wires of the same material have lengths in the ratio 1 : 2 and the same load and area. Their extensions are in the ratio:'
+    options:
+    - '1 : 2'
+    - '2 : 1'
+    - '1 : 4'
+    answer: '1 : 2'
+    hints:
+    - ΔL = FL/(AY).
+    - Only L differs.
+    solution: 'ΔL ∝ L, so the ratio is 1 : 2.'
+    mistakes:
+      '2 : 1': c11p_young
+      '1 : 4': p11_youngs
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: Why are the girders of bridges made in an I-shape rather than a solid square bar of the same mass?'
+    options:
+    - The I-shape bends less for the same mass
+    - The I-shape has a higher Young's modulus
+    - The I-shape is less dense
+    answer: The I-shape bends less for the same mass
+    hints:
+    - The material and its Y are the same either way.
+    - Where does most bending stress act?
+    solution: Bending stress is largest at the top and bottom, so putting material there (the flanges) makes the beam bend less for the same mass.
+    mistakes:
+      The I-shape has a higher Young's modulus: c11p08_mod
+      The I-shape is less dense: c11p08_mod
+    exam: competency
+    difficulty: 2

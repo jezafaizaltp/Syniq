@@ -109,6 +109,30 @@ concepts:
         - 310 °F
         answer: 98.6 °F
         why: 9 × 37 / 5 + 32.
+      ways:
+      - style: visual
+        teach: Key temperatures on the Celsius, Fahrenheit and kelvin scales.
+        picture:
+          kind: compare
+          columns:
+          - title: Celsius
+            points:
+            - ice melts 0
+            - body 37
+            - hot bath 45
+          - title: Fahrenheit
+            points:
+            - '32'
+            - '98.6'
+            - '113'
+          - title: Kelvin
+            points:
+            - '273.15'
+            - '310.15'
+            - '318.15'
+          alt: Ice melts at 0 Celsius, 32 Fahrenheit, 273.15 kelvin; body temperature is 37 Celsius, 98.6 Fahrenheit, 310.15 kelvin; a hot bath at 45 Celsius is 113 Fahrenheit, 318.15 kelvin.
+      - style: step_by_step
+        teach: 'Step 1: Celsius to Fahrenheit: multiply by 9/5, then add 32. 37 °C → 66.6 + 32 = 98.6 °F. Step 2: Fahrenheit to Celsius: subtract 32 first, then multiply by 5/9. Step 3: Celsius to kelvin: add 273.15.'
     - teach: 'Most solids expand when heated: ΔL = αLΔT. Area grows with 2α and volume with γ = 3α. Gaps in rail tracks and sagging power lines allow for this.'
       check:
         prompt: Rod 2 m, α = 1.2 × 10⁻⁵ /°C, heated 100 °C. ΔL?
@@ -118,6 +142,22 @@ concepts:
         - 0.24 mm
         answer: 2.4 mm
         why: 1.2 × 10⁻⁵ × 2 × 100 = 2.4 × 10⁻³ m.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find α for the material. Step 2: ΔL = αLΔT. Example: a 10 m steel rail (α = 1.2 × 10⁻⁵ /°C) warmed by 40 °C grows 10 × 1.2 × 10⁻⁵ × 40 = 4.8 mm. Step 3: For area use 2α, for volume γ = 3α.'
+      - style: visual
+        teach: 'A 10 m steel rail on a hot day: how much it grows for each rise in temperature.'
+        picture:
+          kind: bars
+          unit: mm
+          bars:
+          - label: +10 °C
+            value: 1.2
+          - label: +20 °C
+            value: 2.4
+          - label: +40 °C
+            value: 4.8
+          alt: 'A 10 metre steel rail grows 1.2 millimetres for a 10 degree rise, 2.4 for 20 degrees and 4.8 for 40 degrees: the growth is proportional to the temperature rise.'
     - teach: 'Water is unusual: between 0 °C and 4 °C it contracts when heated, so it is densest at 4 °C. Ponds freeze from the top and the water below stays liquid for fish.'
       picture:
         kind: compare
@@ -141,6 +181,11 @@ concepts:
         - stays the same
         answer: increases
         why: Below 4 °C water expands as it cools.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Above 4 °C water expands on heating, like most liquids. Step 2: Between 0 °C and 4 °C it does the opposite: it contracts on heating. Step 3: So 4 °C water is densest and sinks. Step 4: Colder water and then ice stay on top, insulating the water below.'
+      - style: real_world
+        teach: 'In very cold places a lake freezes over while fish keep swimming below. The top layer of ice and the coldest water float, while the bottom stays at about 4 °C all winter. A bottle of water left in a freezer cracks for the same reason: water expands as it freezes.'
   items:
   - prompt: Convert 100 °C to Fahrenheit.
     answer: '212'
@@ -313,6 +358,55 @@ concepts:
     mistakes:
       '298': c11p10_scale
       '45': c11p10_scale
+  - prompt: 'Assertion (A): Small gaps are left between the steel rails of a railway track.
+
+      Reason (R): Steel expands when heated.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. The gaps give room for the rails to expand in summer without bending: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A 2 m brass rod (α = 2 × 10⁻⁵ /°C) is heated from 20 °C to 70 °C. By how much does it lengthen?'
+    options:
+    - 2 mm
+    - 0.2 mm
+    - 20 mm
+    answer: 2 mm
+    hints:
+    - ΔL = αLΔT.
+    - 2 × 10⁻⁵ × 2 × 50.
+    solution: ΔL = 2 × 10⁻⁵ × 2 × 50 = 2 × 10⁻³ m = 2 mm.
+    mistakes:
+      0.2 mm: p11_linear_exp
+      20 mm: c11p10_exp
+    exam: case
+    difficulty: 2
+  - prompt: A doctor reads a patient's temperature as 104 °F. What is it in Celsius?
+    options:
+    - 40 °C
+    - 72 °C
+    - 57.8 °C
+    answer: 40 °C
+    hints:
+    - Subtract 32 first.
+    - Then multiply by 5/9.
+    solution: (104 − 32) × 5/9 = 72 × 5/9 = 40 °C.
+    mistakes:
+      72 °C: c11p_temp
+      57.8 °C: c11p10_scale
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.thermal.heat
   title: Specific heat, latent heat and heat transfer
   after:
@@ -442,6 +536,24 @@ concepts:
         - 4205 J
         answer: 21 000 J
         why: 1 × 4200 × 5.
+      ways:
+      - style: visual
+        teach: 'Heat needed to warm 1 kg of each material by 1 °C: water needs the most.'
+        picture:
+          kind: bars
+          unit: J
+          bars:
+          - label: water
+            value: 4200
+          - label: aluminium
+            value: 900
+          - label: iron
+            value: 450
+          - label: copper
+            value: 390
+          alt: Warming 1 kilogram by 1 degree needs about 4200 joules for water, 900 for aluminium, 450 for iron and 390 for copper.
+      - style: real_world
+        teach: On a sunny day at the beach the sand burns your feet while the sea stays cool. The same sunlight warms both, but water's specific heat is about five times that of sand, so it heats up far less. At night the sea stays warm while the sand cools.
     - teach: 'During melting or boiling, heat changes the state without changing temperature: Q = mL. Ice: L_f ≈ 3.3 × 10⁵ J/kg. In a mixture, heat lost by the hot body = heat gained by the cold one.'
       check:
         prompt: 'While ice is melting at 0 °C, its temperature:'
@@ -451,6 +563,19 @@ concepts:
         - falls
         answer: stays 0 °C
         why: The heat goes into changing state.
+      ways:
+      - style: visual
+        teach: 'Heating ice to steam: the temperature stays flat while the state changes.'
+        picture:
+          kind: flow
+          steps:
+          - 'Ice warms to 0 °C: Q = mcΔT'
+          - 'Melts at 0 °C: Q = mL_f, no rise'
+          - 'Water warms to 100 °C: Q = mcΔT'
+          - 'Boils at 100 °C: Q = mL_v, no rise'
+          alt: Ice warms up to 0 degrees, then melts with no temperature rise, then the water warms to 100 degrees, then boils with no temperature rise.
+      - style: step_by_step
+        teach: 'Step 1: Write heat lost by the hot body: m₁c(T₁ − T). Step 2: Heat gained by the cold body: m₂c(T − T₂). Step 3: Set them equal and solve for T. Step 4: If ice melts, add mL to the gained side.'
     - teach: 'Heat travels by conduction (through solids, H = KAΔT/L), convection (moving fluid, sea breezes) and radiation (no medium needed, Sun''s heat). Newton''s law of cooling: cooling rate ∝ temperature difference with the surroundings.'
       picture:
         kind: compare
@@ -474,6 +599,11 @@ concepts:
         - convection
         answer: radiation
         why: It crosses the air directly; hot air rises away from you.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Solid touching solid → conduction, H = KAΔT/L. Step 2: A fluid carrying heat as it moves → convection. Step 3: Through empty space → radiation. Step 4: Cooling: the bigger the gap from the room''s temperature, the faster it cools.'
+      - style: real_world
+        teach: A steel spoon in hot tea warms up to the handle (conduction). Hot air rising from a stove makes the curtains sway (convection). You feel the warmth of a fire on your face from across the room (radiation).
   items:
   - prompt: How much heat (in J) warms 2 kg of water by 10 °C? (c = 4200 J/kg°C)
     answer: '84000'
@@ -650,3 +780,52 @@ concepts:
     mistakes:
       '33000': c11p10_heat
       '8400': c11p10_heat
+  - prompt: 'Assertion (A): A burn from steam at 100 °C is more severe than one from water at 100 °C.
+
+      Reason (R): Steam gives out its latent heat of vaporisation when it condenses on the skin.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Steam releases a large latent heat as it turns to water on the skin, then cools like water: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: 0.2 kg of water at 60 °C is mixed with 0.3 kg of water at 10 °C. Find the final temperature.'
+    options:
+    - 30 °C
+    - 35 °C
+    - 25 °C
+    answer: 30 °C
+    hints:
+    - Heat lost = heat gained.
+    - 0.2(60 − T) = 0.3(T − 10).
+    solution: 12 − 0.2T = 0.3T − 3 → 0.5T = 15 → T = 30 °C.
+    mistakes:
+      35 °C: p11_mixing
+      25 °C: c11p10_heat
+    exam: competency
+    difficulty: 2
+  - prompt: Which mode of heat transfer needs no material medium?
+    options:
+    - Radiation
+    - Conduction
+    - Convection
+    answer: Radiation
+    hints:
+    - How does the Sun's heat reach the Earth?
+    - There is near-vacuum in between.
+    solution: Radiation travels through empty space, as the Sun's heat reaches us.
+    mistakes:
+      Conduction: p11_radiation
+      Convection: p11_radiation
+    exam: one_mark
+    difficulty: 2

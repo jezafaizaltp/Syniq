@@ -144,6 +144,30 @@ concepts:
         - 6 m
         answer: 0 m
         why: They end where they started.
+      ways:
+      - style: visual
+        teach: 'Walk 6 m east then 2 m west: distance 8 m, displacement only 4 m.'
+        picture:
+          kind: number_line
+          from: -1
+          to: 7
+          points:
+          - at: 0
+            label: start
+          - at: 6
+            label: turn
+          - at: 4
+            label: 'end: +4 m'
+          jumps:
+          - from: 0
+            to: 6
+            label: 6 m east
+          - from: 6
+            to: 4
+            label: 2 m west
+          alt: 'Starting at 0, a walk of 6 metres east and 2 metres back west ends at plus 4: the path is 8 metres but the displacement is 4 metres.'
+      - style: real_world
+        teach: 'A running race on a 400 m track: after one full lap your distance is 400 m but your displacement is zero, because you finish where you started. Displacement only cares about start and end points.'
     - teach: Average velocity = displacement/time; average speed = distance/time. Velocity v = dx/dt is the slope of the x–t graph; acceleration a = dv/dt is the slope of the v–t graph.
       check:
         prompt: 'A straight, rising x–t line means:'
@@ -153,6 +177,25 @@ concepts:
         - at rest
         answer: constant velocity
         why: Constant slope means constant velocity.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Average velocity = total displacement ÷ total time. Step 2: Average speed = total distance ÷ total time. Step 3: On an x–t graph, velocity is the slope. Step 4: On a v–t graph, acceleration is the slope.'
+      - style: visual
+        teach: What the slope tells you on each kind of graph.
+        picture:
+          kind: compare
+          columns:
+          - title: x–t graph
+            points:
+            - slope = velocity
+            - 'straight line: steady v'
+            - 'flat: at rest'
+          - title: v–t graph
+            points:
+            - slope = acceleration
+            - area = displacement
+            - 'flat: steady v'
+          alt: On a position-time graph the slope is velocity and a flat line means rest; on a velocity-time graph the slope is acceleration and the area is displacement.
     - teach: The area under a v–t graph is the displacement. Relative velocity of B with respect to A is v_B − v_A.
       picture:
         kind: compare
@@ -176,6 +219,11 @@ concepts:
         - 5 m
         answer: 30 m
         why: Rectangle area 5 × 6.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Split the area under the v–t graph into rectangles and triangles. Step 2: Find each area. Step 3: Add: that''s the displacement. Step 4: For relative velocity, subtract: v_BA = v_B − v_A, with signs for direction.'
+      - style: real_world
+        teach: 'Two trains on parallel tracks both at 60 km/h in the same direction: from one, the other seems to stand still (60 − 60 = 0). If they run towards each other, each sees the other rush by at 120 km/h.'
   items:
   - prompt: A person walks 4 m east then 3 m west. What is the displacement (in m, east positive)?
     answer: '1'
@@ -340,6 +388,55 @@ concepts:
     mistakes:
       '45': c11p02_disp
       '90': c11p02_disp
+  - prompt: 'Assertion (A): The magnitude of displacement can be less than the distance travelled.
+
+      Reason (R): Displacement depends only on the initial and final positions, not on the path taken.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Since displacement ignores the path, a winding route makes distance longer than displacement: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A car''s v–t graph rises in a straight line from 0 to 20 m/s in 10 s. How far does it travel in those 10 s?'
+    options:
+    - 100 m
+    - 200 m
+    - 2 m
+    answer: 100 m
+    hints:
+    - Distance = area under the v–t graph.
+    - The area is a triangle.
+    solution: Area = ½ × 10 × 20 = 100 m.
+    mistakes:
+      200 m: p11_vt_area
+      2 m: c11p02_graph
+    exam: case
+    difficulty: 2
+  - prompt: Two cars move towards each other on a straight road at 15 m/s and 25 m/s. What is the speed of one relative to the other?
+    options:
+    - 40 m/s
+    - 10 m/s
+    - 25 m/s
+    answer: 40 m/s
+    hints:
+    - Take one direction as positive.
+    - v_B − v_A with opposite signs.
+    solution: 25 − (−15) = 40 m/s.
+    mistakes:
+      10 m/s: p11_relative
+      25 m/s: p11_relative
+    exam: short
+    difficulty: 2
 - code: cbse11p.line.equations
   title: Equations of uniformly accelerated motion
   after:
@@ -439,6 +536,25 @@ concepts:
         - 12 m/s
         answer: 10 m/s
         why: 4 + 3 × 2.
+      ways:
+      - style: visual
+        teach: A v–t graph for constant acceleration explains the first two equations.
+        picture:
+          kind: area_grid
+          cols:
+          - size: 3
+            label: t
+          rows:
+          - size: 1
+            label: v − u = at
+          - size: 2
+            label: u
+          cells:
+          - - 'triangle: ½ × t × at'
+          - - 'rectangle: ut'
+          alt: Under a v-t graph rising from u to v, the area is a rectangle ut plus a triangle half t times at, giving s equals ut plus half a t squared.
+      - style: real_world
+        teach: A scooter starts from rest at a signal and speeds up steadily by 1.5 m/s every second. After 6 s it is at 9 m/s (v = u + at). It has covered only 27 m (s = ½at²), because it was slow at first.
     - teach: Pick the equation that has your three knowns and your unknown. No time given? Use v² = u² + 2as.
       check:
         prompt: From rest, a = 4 m/s², over 8 m. Final speed?
@@ -448,6 +564,24 @@ concepts:
         - 64 m/s
         answer: 8 m/s
         why: v² = 0 + 2 × 4 × 8 = 64.
+      ways:
+      - style: visual
+        teach: Pick the equation by which quantity is missing from your problem.
+        picture:
+          kind: compare
+          columns:
+          - title: No s
+            points:
+            - v = u + at
+          - title: No v
+            points:
+            - s = ut + ½at²
+          - title: No t
+            points:
+            - v² = u² + 2as
+          alt: If displacement is not involved use v equals u plus at; if final velocity is not involved use s equals ut plus half at squared; if time is not involved use v squared equals u squared plus 2as.
+      - style: step_by_step
+        teach: 'Step 1: List u, v, a, s, t. Step 2: Mark the three you know and the one you want. Step 3: Choose the equation without the fifth. Step 4: Put signs in: decelerating means a is negative. Example: stop from 15 m/s at −5 m/s²: 0 = 225 − 10s, s = 22.5 m.'
     - teach: 'Free fall: a = g ≈ 9.8 m/s² (often 10) downward. Thrown up at u: time to top u/g, maximum height u²/2g. At the top the velocity is zero, but the acceleration is still g.'
       picture:
         kind: flow
@@ -465,6 +599,11 @@ concepts:
         - 300 s
         answer: 3 s
         why: u/g = 30/10.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take up as positive, so a = −g. Step 2: At the top v = 0. Step 3: Time up = u/g. Step 4: Height H = u²/2g. Step 5: It takes the same time to come down and lands at speed u.'
+      - style: real_world
+        teach: 'Drop a coin and a ball from the same balcony: without air they land together, since both speed up at g. Air slows a feather, which is why the feather-and-hammer drop on the Moon showed them landing together.'
   items:
   - prompt: A car starts from rest with acceleration 2 m/s². Find its speed after 5 s (in m/s).
     answer: '10'
@@ -628,3 +767,52 @@ concepts:
     mistakes:
       '25': c11p02_suvat
       '10': c11p02_suvat
+  - prompt: 'Assertion (A): At the highest point of a ball thrown straight up, its acceleration is zero.
+
+      Reason (R): At the highest point, the ball''s velocity is momentarily zero.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: gravity still acts, so the acceleration is g downward. R is true: only the velocity is zero there.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: A car moving at 30 m/s brakes with a deceleration of 5 m/s². How far does it travel before stopping?
+    options:
+    - 90 m
+    - 180 m
+    - 6 m
+    answer: 90 m
+    hints:
+    - 'No time given: use v² = u² + 2as.'
+    - v = 0, a = −5.
+    solution: 0 = 900 − 10s → s = 90 m.
+    mistakes:
+      180 m: p11_stopping
+      6 m: c11p02_suvat
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: A stone is dropped into a well and hits the water after 3 s. Taking g = 10 m/s², how deep is the water surface below the top?'
+    options:
+    - 45 m
+    - 30 m
+    - 90 m
+    answer: 45 m
+    hints:
+    - Dropped means u = 0.
+    - s = ½gt².
+    solution: s = ½ × 10 × 9 = 45 m (ignoring the time for sound to travel up).
+    mistakes:
+      30 m: p11_free_fall
+      90 m: c11p_free_fall
+    exam: competency
+    difficulty: 2

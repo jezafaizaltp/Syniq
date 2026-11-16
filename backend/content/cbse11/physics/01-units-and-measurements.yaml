@@ -113,6 +113,28 @@ concepts:
         - joule
         answer: kelvin
         why: Newton and joule are derived from base units.
+      ways:
+      - style: visual
+        teach: The seven SI base units and what each one measures.
+        picture:
+          kind: compare
+          columns:
+          - title: Mechanics
+            points:
+            - 'length: metre (m)'
+            - 'mass: kilogram (kg)'
+            - 'time: second (s)'
+          - title: Electricity and heat
+            points:
+            - 'current: ampere (A)'
+            - 'temperature: kelvin (K)'
+          - title: Chemistry and light
+            points:
+            - 'amount: mole (mol)'
+            - 'luminous intensity: candela (cd)'
+          alt: 'The seven SI base units: metre, kilogram and second for mechanics; ampere and kelvin for electricity and heat; mole and candela for chemistry and light.'
+      - style: real_world
+        teach: 'A recipe from abroad says ''8 oz flour, bake at 350 °F''. Without a shared system you must convert everything. SI is that shared system: a scientist in Kochi and one in Kyoto both write 9.8 m s⁻² and mean the same thing.'
     - teach: 'Prefixes scale units by powers of ten: kilo 10³, centi 10⁻², milli 10⁻³, micro 10⁻⁶, nano 10⁻⁹. So 3 mm = 3 × 10⁻³ m.'
       check:
         prompt: 250 g in kilograms?
@@ -122,6 +144,29 @@ concepts:
         - 250 000
         answer: '0.25'
         why: 1 g = 10⁻³ kg, so 250 × 10⁻³.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Spot the prefix. Step 2: Replace it with its power of ten: k → 10³, c → 10⁻², m → 10⁻³, μ → 10⁻⁶, n → 10⁻⁹. Step 3: Multiply. 3 mm = 3 × 10⁻³ m; 5 km = 5 × 10³ m.'
+      - style: visual
+        teach: Prefixes on a powers-of-ten ladder, from nano to kilo.
+        picture:
+          kind: number_line
+          from: -9
+          to: 3
+          points:
+          - at: -9
+            label: nano 10⁻⁹
+          - at: -6
+            label: micro 10⁻⁶
+          - at: -3
+            label: milli 10⁻³
+          - at: -2
+            label: centi
+          - at: 0
+            label: base unit
+          - at: 3
+            label: kilo 10³
+          alt: 'A line of powers of ten from minus 9 to 3: nano at minus 9, micro at minus 6, milli at minus 3, centi at minus 2, the base unit at 0 and kilo at 3.'
     - teach: Significant figures show how precise a value is. Leading zeros never count (0.0042 has 2). In × or ÷, the answer keeps as many significant figures as the least precise value.
       picture:
         kind: compare
@@ -145,6 +190,11 @@ concepts:
         - '2'
         answer: '4'
         why: 6, 0, 2 and the trailing zero after the decimal point.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Non-zero digits always count. Step 2: Zeros between them count. Step 3: Leading zeros never count. Step 4: Trailing zeros after a decimal point count: 2.500 has 4. Step 5: In × or ÷, round to the fewest significant figures of the inputs.'
+      - style: real_world
+        teach: 'A ruler marked in mm can''t tell you a length to a thousandth of a mm. If you measure 4.2 cm and 3.17 cm and multiply on a calculator, its 8 digits are fake precision: your answer can only be as good as the 4.2, so 2 figures.'
   items:
   - prompt: How many SI base units are there?
     answer: '7'
@@ -316,6 +366,55 @@ concepts:
     mistakes:
       '2.75': c11p01_sf
       '2.7': c11p01_sf
+  - prompt: 'Assertion (A): The number 0.00450 has three significant figures.
+
+      Reason (R): Leading zeros are not significant, but trailing zeros after the decimal point are.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. The leading zeros don''t count; 4, 5 and the trailing 0 do, giving 3: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'The length and breadth of a sheet are 4.234 m and 1.005 m. The area, to the correct significant figures, is:'
+    options:
+    - 4.255 m²
+    - 4.25517 m²
+    - 4.3 m²
+    answer: 4.255 m²
+    hints:
+    - Each length has 4 significant figures.
+    - Round the product to that many.
+    solution: 4.234 × 1.005 = 4.25517; both have 4 significant figures, so 4.255 m².
+    mistakes:
+      4.25517 m²: p11_sig_product
+      4.3 m²: c11p01_sf
+    exam: short
+    difficulty: 2
+  - prompt: Which of these is NOT an SI base unit?
+    options:
+    - Newton
+    - Kelvin
+    - Mole
+    answer: Newton
+    hints:
+    - Which one can be written using other units?
+    - Recall F = ma.
+    solution: 'The newton is derived: kg m s⁻². Kelvin and mole are base units.'
+    mistakes:
+      Kelvin: p11_si_base
+      Mole: p11_si_base
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.units.dims
   title: Dimensions and dimensional analysis
   after:
@@ -403,6 +502,19 @@ concepts:
         - '[ML²T⁻¹]'
         answer: '[MLT⁻¹]'
         why: '[M] × [LT⁻¹].'
+      ways:
+      - style: visual
+        teach: Building dimensions up from length and time, one step at a time.
+        picture:
+          kind: flow
+          steps:
+          - Length [L]
+          - Speed = L/T → [LT⁻¹]
+          - Acceleration = speed/T → [LT⁻²]
+          - Force = M × acc → [MLT⁻²]
+          alt: 'Start from length, divide by time for speed, divide again for acceleration, multiply by mass for force: M L T to the minus 2.'
+      - style: step_by_step
+        teach: 'Step 1: Write the quantity''s defining formula. Step 2: Replace each quantity with its dimensions. Step 3: Combine the powers. Momentum mv: [M][LT⁻¹] = [MLT⁻¹]. Numbers like ½ or 2π have no dimensions.'
     - teach: 'Principle of homogeneity: every term in a correct equation has the same dimensions. So you can check an equation: v = u + at works because at has [LT⁻²][T] = [LT⁻¹].'
       check:
         prompt: Which term could be added to a length?
@@ -412,6 +524,24 @@ concepts:
         - a/t
         answer: ½at²
         why: '[LT⁻²][T²] = [L].'
+      ways:
+      - style: visual
+        teach: 'Checking v = u + at term by term: every term must have the same dimensions.'
+        picture:
+          kind: compare
+          columns:
+          - title: v
+            points:
+            - '[LT⁻¹]'
+          - title: u
+            points:
+            - '[LT⁻¹]'
+          - title: at
+            points:
+            - '[LT⁻²][T] = [LT⁻¹]'
+          alt: v, u, and a times t all have dimensions L T to the minus 1, so the equation v equals u plus at is dimensionally correct.
+      - style: real_world
+        teach: 'You can''t add 5 apples to 3 kilometres. A physics equation is the same: each term must be the same kind of quantity. If you find a speed added to an acceleration, the equation is wrong, however neat it looks.'
     - teach: Dimensional analysis can derive relations (pendulum T ∝ √(l/g)) and convert units, but it cannot find pure numbers like 2π, and fails for sums or for sin, log and exp.
       picture:
         kind: compare
@@ -435,6 +565,11 @@ concepts:
         - the unit of T
         answer: the 2π in T = 2π√(l/g)
         why: 2π has no dimensions.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Guess T ∝ lᵃgᵇ. Step 2: Write dimensions: [T] = [L]ᵃ[LT⁻²]ᵇ. Step 3: Match powers: T: −2b = 1, L: a + b = 0. Step 4: b = −½, a = ½, so T ∝ √(l/g). The 2π must come from experiment or theory.'
+      - style: real_world
+        teach: 'Dimensions are like checking a bill''s currency: they tell you the answer is in rupees, not whether it''s ₹100 or ₹200. So dimensional analysis gives T ∝ √(l/g) but can''t tell you the 2π in front.'
   items:
   - prompt: What are the dimensions of force?
     options:
@@ -635,3 +770,52 @@ concepts:
     mistakes:
       '[ML³T⁻²]': c11p01_dim
       '[M⁻²L²T⁻²]': c11p01_dim
+  - prompt: 'Assertion (A): A dimensionally correct equation must be physically correct.
+
+      Reason (R): Dimensional analysis cannot find dimensionless constants.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: s = ut + at² is dimensionally correct but wrong (the ½ is missing). R is true, and that is part of why such errors slip through.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the dimensions of pressure (force per unit area).
+    options:
+    - '[ML⁻¹T⁻²]'
+    - '[MLT⁻²]'
+    - '[ML²T⁻²]'
+    answer: '[ML⁻¹T⁻²]'
+    hints:
+    - Force is [MLT⁻²].
+    - Divide by area [L²].
+    solution: '[MLT⁻²]/[L²] = [ML⁻¹T⁻²].'
+    mistakes:
+      '[MLT⁻²]': p11_dims_pressure
+      '[ML²T⁻²]': c11p01_dim
+    exam: one_mark
+    difficulty: 2
+  - prompt: 'Case: A student writes the speed of a wave on a string as v = √(T/μ), where T is tension (a force) and μ is mass per unit length. What are the dimensions of T/μ?'
+    options:
+    - '[L²T⁻²]'
+    - '[LT⁻¹]'
+    - '[MLT⁻²]'
+    answer: '[L²T⁻²]'
+    hints:
+    - '[T] = [MLT⁻²], [μ] = [ML⁻¹].'
+    - Divide, then compare with v².
+    solution: '[MLT⁻²]/[ML⁻¹] = [L²T⁻²], which is [v²], so the formula is dimensionally correct.'
+    mistakes:
+      '[LT⁻¹]': p11_dims_check
+      '[MLT⁻²]': c11p_dims
+    exam: case
+    difficulty: 2
