@@ -17,6 +17,7 @@ tips:
   speed_divide: "Speed = distance ÷ time. Divide the kilometres by the hours."
   v_u_at: "From rest, u = 0. Use v = u + at."
   vector_direction: "A vector has size AND direction. Which quantity changes if you turn round, even at the same pace?"
+  pqc9s4_pick_equation: List u, v, a, t and s. Which three do you know? Pick the equation that has those and the one you want.
 concepts:
 - code: cbse9ex.motion.speed
   title: Distance, displacement, speed and velocity
@@ -141,6 +142,34 @@ concepts:
         - 1 m
         answer: 7 m
         why: 'Distance adds the path: 4 + 3. The displacement is 5 m.'
+      ways:
+      - style: visual
+        teach: 'Walk 4 m east, then 3 m north: the path and the straight line differ.'
+        picture:
+          kind: geometry
+          points:
+            Start:
+            - 1
+            - 1
+            Turn:
+            - 9
+            - 1
+            End:
+            - 9
+            - 7
+          segments:
+          - - Start
+            - Turn
+            - 4 m
+          - - Turn
+            - End
+            - 3 m
+          - - Start
+            - End
+            - 5 m
+          alt: Walking 4 metres east then 3 metres north covers a distance of 7 metres, but the displacement, the straight line from start to end, is 5 metres.
+      - style: real_world
+        teach: 'An auto meter charges for distance: every metre of the winding road. A crow flying from your house to school covers the displacement: the straight line. The meter''s number is always the bigger one, or equal.'
     - teach: Speed = distance ÷ time, in m/s (or km/h). Velocity is speed in a stated direction, so it is a vector like displacement. If a car goes round a bend at a steady 40 km/h, its speed is constant but its velocity changes.
       check:
         prompt: Which is a scalar (no direction)?
@@ -150,6 +179,23 @@ concepts:
         - Displacement
         answer: Speed
         why: Speed has size only; velocity and displacement have direction too.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Speed = distance ÷ time, no direction. Step 2: Velocity = displacement ÷ time, with a direction. Step 3: If direction changes, velocity changes even when speed stays the same, like on a bend.'
+      - style: visual
+        teach: Same speed, different velocities, as a car goes round a bend.
+        picture:
+          kind: compare
+          columns:
+          - title: Before the bend
+            points:
+            - 40 km/h
+            - heading north
+          - title: After the bend
+            points:
+            - 40 km/h
+            - heading east
+          alt: 'Before the bend the car goes 40 kilometres per hour north, after it 40 kilometres per hour east: same speed, different velocity.'
     - teach: 'Average speed = total distance ÷ total time, NOT the average of the speeds. 60 km at 30 km/h takes 2 h; 60 km at 60 km/h takes 1 h; average = 120 km ÷ 3 h = 40 km/h. To convert km/h to m/s multiply by 5/18: 36 km/h = 10 m/s.'
       check:
         prompt: Convert 54 km/h to m/s.
@@ -159,6 +205,27 @@ concepts:
         - 194.4 m/s
         answer: 15 m/s
         why: 54 × 5/18 = 15.
+      ways:
+      - style: visual
+        teach: Average speed comes from total distance and total time, not from averaging speeds.
+        picture:
+          kind: compare
+          columns:
+          - title: Leg 1
+            points:
+            - 60 km at 30 km/h
+            - 2 h
+          - title: Leg 2
+            points:
+            - 60 km at 60 km/h
+            - 1 h
+          - title: Whole trip
+            points:
+            - 120 km in 3 h
+            - 40 km/h
+          alt: 60 kilometres at 30 takes 2 hours and 60 kilometres at 60 takes 1 hour, so 120 kilometres in 3 hours is an average of 40, not 45.
+      - style: step_by_step
+        teach: 'Step 1: Add all the distances. Step 2: Find each leg''s time (distance ÷ speed) and add them. Step 3: Divide total distance by total time. To change km/h to m/s, multiply by 5/18; m/s to km/h, multiply by 18/5.'
   items:
   - prompt: A car travels 150 km in 3 hours. What is its average speed in km/h?
     answer: '50'
@@ -320,6 +387,40 @@ concepts:
     solution: Speed is the same, 50 km/h, but velocity differs because the directions are opposite.
     mistakes:
       Same velocity: vector_direction
+  - prompt: 'Assertion (A): An athlete who completes one full round of a circular track has zero displacement.
+
+      Reason (R): Displacement depends only on the start and end positions.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: After one full round the athlete is back at the start, so displacement is zero. R gives the reason, so it explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: Rahim cycles to a shop 2 km away at 10 km/h and returns at 20 km/h. What is the average speed for the whole trip?'
+    options:
+    - About 13.3 km/h
+    - 15 km/h
+    - 0 km/h
+    answer: About 13.3 km/h
+    hints:
+    - Time to go = 2 ÷ 10 h, time back = 2 ÷ 20 h.
+    - Total distance 4 km ÷ total time.
+    solution: 'Times: 0.2 h + 0.1 h = 0.3 h. Average speed = 4 km ÷ 0.3 h ≈ 13.3 km/h.'
+    mistakes:
+      15 km/h: average_speed_total
+      0 km/h: displacement_shortest
+    exam: case
+    difficulty: 2
 - code: cbse9ex.motion.equations
   title: Acceleration and equations of motion
   after:
@@ -428,6 +529,27 @@ concepts:
         - −10 m/s²
         answer: −5 m/s²
         why: (5 − 15) ÷ 2 = −5.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write u (start velocity) and v (end velocity). Step 2: Find v − u. Step 3: Divide by the time t. A negative answer means slowing down. 0 to 20 m/s in 5 s: a = 20 ÷ 5 = 4 m/s².'
+      - style: visual
+        teach: Speeding up by 4 m/s every second, from rest.
+        picture:
+          kind: bars
+          bars:
+          - label: 0 s
+            value: 0
+          - label: 1 s
+            value: 4
+          - label: 2 s
+            value: 8
+          - label: 3 s
+            value: 12
+          - label: 4 s
+            value: 16
+          - label: 5 s
+            value: 20
+          alt: Velocity grows by 4 metres per second every second, from 0 at the start to 20 after 5 seconds, so the acceleration is 4 metres per second squared.
     - teach: 'For steady (uniform) acceleration, three equations link u, v, a, t and s (displacement): v = u + at; s = ut + ½at²; v² − u² = 2as. Pick the one that has the quantities you know and the one you want.'
       picture:
         kind: flow
@@ -446,6 +568,24 @@ concepts:
         - s = ut + ½at²
         answer: v² − u² = 2as
         why: It has no t, which you don't know.
+      ways:
+      - style: visual
+        teach: Each equation of motion leaves out one quantity.
+        picture:
+          kind: compare
+          columns:
+          - title: v = u + at
+            points:
+            - no s
+          - title: s = ut + ½at²
+            points:
+            - no v
+          - title: v² − u² = 2as
+            points:
+            - no t
+          alt: v equals u plus a t has no s; s equals u t plus half a t squared has no v; v squared minus u squared equals 2 a s has no t.
+      - style: step_by_step
+        teach: 'Step 1: Write the five letters u, v, a, t, s. Step 2: Fill in the ones you know. Step 3: Find the letter you don''t know and don''t need. Step 4: Use the equation that leaves that letter out.'
     - teach: 'Example: a stone falls from rest (u = 0) with a = 10 m/s² for 3 s. v = 0 + 10 × 3 = 30 m/s. s = 0 + ½ × 10 × 9 = 45 m. Always check units and signs.'
       check:
         prompt: From rest, a = 4 m/s² for 5 s. What is s?
@@ -455,6 +595,11 @@ concepts:
         - 100 m
         answer: 50 m
         why: ½ × 4 × 25 = 50.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Stone dropped: u = 0, a = 10 m/s², t = 3 s. Step 2: v = u + at = 30 m/s. Step 3: s = ut + ½at² = ½ × 10 × 9 = 45 m. Step 4: Check with v² = 2as: 900 = 2 × 10 × 45. It matches.'
+      - style: real_world
+        teach: 'A driver brakes from 20 m/s to rest with a = −5 m/s². Using v² − u² = 2as: 0 − 400 = −10s, so s = 40 m. That is why roads mark stopping distances: higher speed needs far more room.'
   items:
   - prompt: A car speeds up from 10 m/s to 30 m/s in 5 s. Find its acceleration in m/s².
     answer: '4'
@@ -619,6 +764,40 @@ concepts:
     mistakes:
       '200': acc_divide_time
       '0.5': acc_divide_time
+  - prompt: 'Assertion (A): A body moving with uniform velocity has zero acceleration.
+
+      Reason (R): Acceleration is the rate of change of velocity.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'If velocity doesn''t change, its rate of change is zero, so A follows from R: both true and R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: A bus moving at 20 m/s brakes with a retardation of 4 m/s². How far does it travel before stopping?
+    options:
+    - 50 m
+    - 100 m
+    - 5 m
+    answer: 50 m
+    hints:
+    - u = 20, v = 0, a = −4. Time isn't given.
+    - Use v² − u² = 2as.
+    solution: 0 − 400 = 2 × (−4) × s, so s = 400 ÷ 8 = 50 m.
+    mistakes:
+      100 m: pqc9s4_pick_equation
+      5 m: acc_divide_time
+    exam: short
+    difficulty: 2
 - code: cbse9ex.motion.graphs
   title: Motion graphs and uniform circular motion
   after:
@@ -745,6 +924,35 @@ concepts:
         - 36 m/s
         answer: 5 m/s
         why: Slope = 30 ÷ 6 = 5.
+      ways:
+      - style: visual
+        teach: 'A position–time graph: steady slope, then a flat stop.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 9
+          points:
+            O:
+            - 0
+            - 0
+            A:
+            - 4
+            - 8
+            B:
+            - 8
+            - 8
+          segments:
+          - - O
+            - A
+            - moving
+          - - A
+            - B
+            - at rest
+          alt: Position rises steadily from O to A, showing uniform velocity, then stays flat from A to B, showing the object at rest.
+      - style: step_by_step
+        teach: 'Step 1: Pick two points on the line. Step 2: Rise = change in position. Step 3: Run = change in time. Step 4: Velocity = rise ÷ run. Flat line: rise is 0, so velocity is 0.'
     - teach: A velocity–time graph shows velocity at each moment. A flat line means constant velocity. A straight sloping line means uniform acceleration, and its slope is the acceleration. The area under the graph is the displacement.
       check:
         prompt: A v–t graph is a flat line at 10 m/s for 6 s. What is the displacement?
@@ -754,6 +962,36 @@ concepts:
         - 0 m
         answer: 60 m
         why: 'The area is a rectangle: 10 × 6 = 60.'
+      ways:
+      - style: visual
+        teach: The area under a velocity–time graph gives the distance.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 10
+          points:
+            O:
+            - 0
+            - 0
+            P:
+            - 5
+            - 5
+            Q:
+            - 5
+            - 0
+          segments:
+          - - O
+            - P
+            - slope = a
+          - - P
+            - Q
+          - - O
+            - Q
+          alt: A velocity–time line rising from O to P; the slope is the acceleration and the triangle under it is the distance travelled.
+      - style: step_by_step
+        teach: 'Step 1: On a v–t graph, the slope is acceleration. Step 2: The area underneath is displacement. Step 3: For a triangle, area = ½ × base × height. 0 to 20 m/s in 10 s: a = 2 m/s², s = ½ × 10 × 20 = 100 m.'
     - teach: 'In uniform circular motion, an object moves round a circle at steady speed, but its direction keeps changing, so its velocity changes: it is accelerating. Its speed = circumference ÷ time for one round = 2πr ÷ t.'
       check:
         prompt: A stone whirled on a string at steady speed is…
@@ -763,6 +1001,19 @@ concepts:
         - moving with constant velocity
         answer: accelerating, because its direction changes
         why: Velocity includes direction; a change of direction is a change of velocity.
+      ways:
+      - style: real_world
+        teach: A giant wheel turns at a steady speed, yet your direction keeps changing as you go round, so your velocity changes. You are accelerating, which is why you feel pushed into your seat.
+      - style: visual
+        teach: Speed in a circle is one circumference per round time.
+        picture:
+          kind: flow
+          steps:
+          - radius r
+          - one round = 2πr
+          - divide by time t
+          - speed = 2πr ÷ t
+          alt: One round of a circle of radius r is 2 pi r, so the speed is 2 pi r divided by the time for one round.
   items:
   - prompt: On a position–time graph, a horizontal line means the object is…
     options:
@@ -945,3 +1196,37 @@ concepts:
     mistakes:
       '2.5': circle_distance_speed
       '0.8': circle_distance_speed
+  - prompt: 'Assertion (A): Uniform circular motion is accelerated motion.
+
+      Reason (R): In uniform circular motion the speed of the object keeps changing.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is true, but R is false
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is true because the direction, and so the velocity, keeps changing. R is false: the speed stays constant.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_r
+      Both A and R are true, but R does not explain A: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: An athlete runs round a circular track of radius 35 m in 44 s. What is the athlete's speed? (π = 22/7)
+    options:
+    - 5 m/s
+    - 0.8 m/s
+    - 10 m/s
+    answer: 5 m/s
+    hints:
+    - Distance for one round = 2πr.
+    - Divide by 44 s.
+    solution: 2 × 22/7 × 35 = 220 m; 220 ÷ 44 = 5 m/s.
+    mistakes:
+      0.8 m/s: circle_distance_speed
+      10 m/s: circle_distance_speed
+    exam: one_mark
+    difficulty: 2

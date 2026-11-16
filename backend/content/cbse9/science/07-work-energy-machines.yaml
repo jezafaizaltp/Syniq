@@ -18,6 +18,7 @@ tips:
   ramp_ma: "Ideal mechanical advantage of a ramp = length ÷ height. Divide, don't multiply."
   units_kwh: "One unit = 1 kWh. Multiply the power in kW by the hours."
   work_force_distance: "Work = force × distance moved in the direction of the force. Multiply, don't add."
+  pqc9s7_kw_hours: Change watts to kilowatts and minutes to hours before multiplying.
 concepts:
 - code: cbse9ex.energy.work
   title: Work, kinetic and potential energy
@@ -103,6 +104,23 @@ concepts:
         - Depends on the load
         answer: Zero
         why: The load doesn't move, so displacement and work are zero.
+      ways:
+      - style: visual
+        teach: Work needs both a force and movement in its direction.
+        picture:
+          kind: compare
+          columns:
+          - title: Work done
+            points:
+            - push box 3 m
+            - W = 20 × 3 = 60 J
+          - title: No work
+            points:
+            - push a wall
+            - displacement 0, W = 0
+          alt: Pushing a box 3 metres with 20 newtons does 60 joules of work; pushing a wall that doesn't move does no work.
+      - style: real_world
+        teach: 'A porter carrying a suitcase on their head across flat ground does no work on it in physics: the force (up) is at right angles to the movement (sideways). Lifting it onto the head does do work.'
     - teach: Energy is the ability to do work, also in joules. A moving object has kinetic energy, Eₖ = ½mv². An object raised to a height has potential energy, Eₚ = mgh (g ≈ 10 m/s²). Doubling speed makes kinetic energy four times as big, because v is squared.
       check:
         prompt: A 2 kg ball moves at 4 m/s. What is its kinetic energy?
@@ -112,6 +130,21 @@ concepts:
         - 32 J
         answer: 16 J
         why: ½ × 2 × 16 = 16.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For kinetic energy, square the speed first, then × mass × ½. Step 2: For potential energy, multiply m × g × h with g = 10 m/s². Step 3: Doubling speed gives 4 × the kinetic energy.'
+      - style: visual
+        teach: Kinetic energy grows with the square of the speed.
+        picture:
+          kind: bars
+          bars:
+          - label: v = 1
+            value: 1
+          - label: v = 2
+            value: 4
+          - label: v = 3
+            value: 9
+          alt: 'At speeds of 1, 2 and 3 units the kinetic energy is 1, 4 and 9 units: double the speed means four times the energy.'
     - teach: Energy is never made or destroyed; it only changes form. A falling ball loses potential energy and gains the same amount of kinetic energy. Just before it lands, all the mgh has become ½mv².
       picture:
         kind: bars
@@ -138,6 +171,27 @@ concepts:
         - 0 J
         answer: 40 J
         why: Half of the potential energy has become kinetic; the total stays 80 J.
+      ways:
+      - style: visual
+        teach: As a ball falls, potential energy turns into kinetic energy.
+        picture:
+          kind: compare
+          columns:
+          - title: Top
+            points:
+            - Eₚ = 100 J
+            - Eₖ = 0
+          - title: Halfway
+            points:
+            - Eₚ = 50 J
+            - Eₖ = 50 J
+          - title: Just before landing
+            points:
+            - Eₚ = 0
+            - Eₖ = 100 J
+          alt: At the top the ball has 100 joules of potential and no kinetic energy; halfway it has 50 of each; just before landing it has 100 joules of kinetic energy.
+      - style: real_world
+        teach: On a playground swing, you are slowest at the highest points (most potential energy) and fastest at the bottom (most kinetic). Energy keeps switching between the two forms.
   items:
   - prompt: A force of 10 N moves a box 5 m in its direction. Find the work done, in J.
     answer: '50'
@@ -297,6 +351,40 @@ concepts:
     mistakes:
       '100': v_squared_root
       '50': ke_half
+  - prompt: 'Assertion (A): No work is done when a satellite moves round the Earth in a circular orbit.
+
+      Reason (R): The force of gravity on the satellite is at right angles to its motion.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Work = force × displacement along the force. Gravity points to the centre and the motion is along the circle, so work is zero: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A 2 kg mango falls from a branch 5 m high. What is its speed just before it hits the ground? (g = 10 m/s²)'
+    options:
+    - 10 m/s
+    - 100 m/s
+    - 50 m/s
+    answer: 10 m/s
+    hints:
+    - Eₚ at the top = mgh = 100 J.
+    - All of it becomes ½mv² = 100 J.
+    solution: mgh = 2 × 10 × 5 = 100 J = ½ × 2 × v², so v² = 100 and v = 10 m/s.
+    mistakes:
+      100 m/s: v_squared_root
+      50 m/s: ke_half
+    exam: case
+    difficulty: 2
 - code: cbse9ex.energy.power
   title: Power and commercial unit of energy
   after:
@@ -393,6 +481,23 @@ concepts:
         - 1260 W
         answer: 20 W
         why: 1200 ÷ 60 = 20.
+      ways:
+      - style: real_world
+        teach: Two students carry the same bag of books up the stairs. Both do the same work, but the one who runs up in 10 s has more power than the one who walks up in 30 s.
+      - style: visual
+        teach: The same work done faster means more power.
+        picture:
+          kind: compare
+          columns:
+          - title: Walker
+            points:
+            - 3000 J in 30 s
+            - 100 W
+          - title: Runner
+            points:
+            - 3000 J in 10 s
+            - 300 W
+          alt: Both do 3000 joules of work; the walker takes 30 seconds, 100 watts, and the runner 10 seconds, 300 watts.
     - teach: Joules are tiny for household use, so electricity is sold in kilowatt hours (kWh), called units. 1 kWh is the energy used by a 1 kW appliance in 1 hour = 1000 × 3600 J = 3.6 × 10⁶ J. Energy in kWh = power in kW × time in hours.
       picture:
         kind: flow
@@ -410,6 +515,21 @@ concepts:
         - '250'
         answer: '1'
         why: 0.5 kW × 2 h = 1 kWh.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Change the power to kW (divide watts by 1000). Step 2: Change the time to hours. Step 3: Multiply: energy in kWh, or units. A 2000 W geyser for 30 minutes: 2 kW × 0.5 h = 1 unit.'
+      - style: visual
+        teach: Daily electricity units used by appliances in a home.
+        picture:
+          kind: bars
+          bars:
+          - label: fan 60 W × 10 h
+            value: 0.6
+          - label: TV 100 W × 4 h
+            value: 0.4
+          - label: iron 1000 W × 1 h
+            value: 1
+          alt: A 60 watt fan for 10 hours uses 0.6 units, a 100 watt TV for 4 hours 0.4 units, and a 1000 watt iron for 1 hour 1 unit.
     - teach: 'Lifting yourself up stairs: work = mgh, power = mgh ÷ t. A 50 kg student climbing 6 m in 12 s: W = 50 × 10 × 6 = 3000 J, P = 3000 ÷ 12 = 250 W.'
       check:
         prompt: Running up the same stairs in half the time needs…
@@ -419,6 +539,11 @@ concepts:
         - Half the power
         answer: Twice the power
         why: The work is the same; doing it in half the time doubles the power.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Weight = m × g. Step 2: Work = weight × height climbed. Step 3: Power = work ÷ time. A 50 kg student up 6 m in 12 s: 500 N × 6 m = 3000 J, 3000 ÷ 12 = 250 W.'
+      - style: real_world
+        teach: A lift motor rated at 5 kW can raise a 500 kg load 1 m every second (5000 J/s). A weaker 2.5 kW motor does the same job in twice the time. Power ratings tell you how fast the work gets done.
   items:
   - prompt: A motor does 600 J of work in 20 s. Find its power, in W.
     answer: '30'
@@ -584,6 +709,40 @@ concepts:
     solution: 24 + 1.6 + 2 = 27.6 units.
     mistakes:
       '26.8': units_kwh
+  - prompt: 'Assertion (A): 1 kWh = 3.6 × 10⁶ J.
+
+      Reason (R): 1 kW = 1000 W and 1 h = 3600 s.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 1 kWh = 1000 J/s × 3600 s = 3.6 × 10⁶ J. Both true and R shows why.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: A household uses four 50 W bulbs for 5 hours a day. How many units does it use in 30 days?
+    options:
+    - '30'
+    - '1'
+    - '30000'
+    answer: '30'
+    hints:
+    - Total power = 200 W = 0.2 kW.
+    - Energy per day = 0.2 × 5 kWh.
+    solution: 0.2 kW × 5 h = 1 kWh a day; × 30 days = 30 units.
+    mistakes:
+      '1': units_kwh
+      '30000': pqc9s7_kw_hours
+    exam: short
+    difficulty: 2
 - code: cbse9ex.energy.machines
   title: Simple machines
   after:
@@ -680,6 +839,19 @@ concepts:
         - 1/4
         answer: '4'
         why: 600 ÷ 150 = 4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Load = the weight you move. Step 2: Effort = the force you apply. Step 3: MA = load ÷ effort. MA 20 means one person''s push lifts something 20 times heavier.'
+      - style: visual
+        teach: A car jack lets a small effort lift a big load.
+        picture:
+          kind: bars
+          bars:
+          - label: effort
+            value: 500
+          - label: load
+            value: 10000
+          alt: An effort of 500 newtons lifts a load of 10,000 newtons, a mechanical advantage of 20.
     - teach: 'A lever turns about a fulcrum. It balances when load × load arm = effort × effort arm. Class 1: fulcrum in the middle (see-saw, scissors). Class 2: load in the middle (nutcracker, wheelbarrow), MA > 1. Class 3: effort in the middle (tongs, your forearm), MA < 1 but faster movement.'
       picture:
         kind: compare
@@ -705,6 +877,27 @@ concepts:
         - Class 3
         answer: Class 2
         why: The wheel is the fulcrum at one end, the load in the middle, the effort at the handles.
+      ways:
+      - style: visual
+        teach: The three lever classes, by what sits in the middle.
+        picture:
+          kind: compare
+          columns:
+          - title: Class 1
+            points:
+            - fulcrum in middle
+            - see-saw, scissors
+          - title: Class 2
+            points:
+            - load in middle
+            - nutcracker, wheelbarrow
+          - title: Class 3
+            points:
+            - effort in middle
+            - tongs, forearm
+          alt: Class 1 levers have the fulcrum in the middle, class 2 the load, and class 3 the effort.
+      - style: step_by_step
+        teach: 'Step 1: Find the fulcrum, load and effort. Step 2: Measure each arm from the fulcrum. Step 3: Balance: load × load arm = effort × effort arm. 900 N × 0.5 m = effort × 1.5 m, so effort = 300 N.'
     - teach: 'Machines never give more work than you put in. A ramp lets you push a heavy box up with less force, but over a longer distance: ideal MA = length ÷ height. A single fixed pulley only changes direction (MA = 1). Real machines lose some energy to friction.'
       check:
         prompt: A ramp is 10 m long and 2 m high. Ideal MA?
@@ -714,6 +907,33 @@ concepts:
         - '8'
         answer: '5'
         why: 10 ÷ 2 = 5.
+      ways:
+      - style: real_world
+        teach: Wheeling a scooter up a ramp into a house needs less force than lifting it, but you push it a longer way. The work (force × distance) is about the same; the ramp just spreads it out.
+      - style: visual
+        teach: A longer ramp needs less force for the same height.
+        picture:
+          kind: geometry
+          points:
+            A:
+            - 1
+            - 1
+            B:
+            - 9
+            - 1
+            C:
+            - 9
+            - 3
+          segments:
+          - - A
+            - C
+            - ramp 4 m
+          - - B
+            - C
+            - height 1 m
+          - - A
+            - B
+          alt: A ramp 4 metres long rising 1 metre high has an ideal mechanical advantage of 4.
   items:
   - prompt: A machine lifts a 500 N load with an effort of 100 N. What is its mechanical advantage?
     answer: '5'
@@ -893,3 +1113,37 @@ concepts:
     mistakes:
       '600': machine_saves_work
       '3000': work_force_distance
+  - prompt: 'Assertion (A): A simple machine can never give more work output than work input.
+
+      Reason (R): Some energy is always lost to friction in a real machine.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, but R does not explain A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both are true. But A holds even for an ideal frictionless machine, because energy can't be created; friction is not the reason, so R doesn't explain A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: A ramp 6 m long is used to push a 1200 N barrel up to a platform 1.5 m high. Ignoring friction, what effort is needed?
+    options:
+    - 300 N
+    - 4800 N
+    - 1200 N
+    answer: 300 N
+    hints:
+    - Ideal MA = length ÷ height = 4.
+    - Effort = load ÷ MA.
+    solution: MA = 6 ÷ 1.5 = 4, so effort = 1200 ÷ 4 = 300 N.
+    mistakes:
+      4800 N: ma_inverted
+      1200 N: machine_saves_work
+    exam: one_mark
+    difficulty: 2
