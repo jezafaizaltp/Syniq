@@ -113,6 +113,19 @@ concepts:
         - work
         answer: temperature
         why: 'Bodies in equilibrium share one property: temperature.'
+      ways:
+      - style: visual
+        teach: 'Zeroth law: two bodies that each match a third body also match each other.'
+        picture:
+          kind: flow
+          steps:
+          - A is in equilibrium with C
+          - B is in equilibrium with C
+          - So A and B are in equilibrium
+          - They share one temperature
+          alt: If body A and body B are each in thermal equilibrium with C, the thermometer, then A and B are in equilibrium with each other and have the same temperature.
+      - style: real_world
+        teach: 'A thermometer under your tongue and then in your sibling''s mouth both read 37 °C. The thermometer is the third body C: because each of you matches it, you match each other, with no heat flowing between you.'
     - teach: 'First law: ΔQ = ΔU + ΔW. Heat given to a gas raises its internal energy and/or lets it do work. At constant pressure, W = PΔV; generally W is the area under the P–V graph.'
       check:
         prompt: Gas gets 800 J heat, does 300 J work. ΔU?
@@ -122,6 +135,22 @@ concepts:
         - −500 J
         answer: 500 J
         why: 800 − 300.
+      ways:
+      - style: visual
+        teach: 'First law as an energy account: heat in is split between internal energy and work.'
+        picture:
+          kind: bars
+          unit: J
+          bars:
+          - label: heat in ΔQ
+            value: 900
+          - label: internal energy ΔU
+            value: 650
+          - label: work by gas ΔW
+            value: 250
+          alt: '900 joules of heat go into a gas: 650 joules raise its internal energy and 250 joules are done as work, adding back to 900.'
+      - style: step_by_step
+        teach: 'Step 1: Heat into the gas is +, heat out is −. Step 2: Work done BY the gas is +, work done ON it is −. Step 3: Use ΔQ = ΔU + ΔW. Step 4: At constant pressure W = PΔV; otherwise, the area under the P–V curve.'
     - teach: 'Processes: isothermal (T constant, ΔU = 0, so Q = W), adiabatic (no heat, so ΔU = −W), isochoric (V constant, W = 0, so Q = ΔU), isobaric (P constant, W = PΔV). For gases Cp − Cv = R.'
       picture:
         kind: compare
@@ -147,6 +176,11 @@ concepts:
         - equal to the heat
         answer: zero
         why: Volume does not change.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Name the process. Step 2: Find which quantity is zero: isothermal ΔU = 0, adiabatic Q = 0, isochoric W = 0. Step 3: Put that zero into ΔQ = ΔU + ΔW. Step 4: The other two are then equal (or opposite).'
+      - style: real_world
+        teach: 'Pump up a cycle tyre fast and the pump barrel gets hot: there''s no time for heat to escape, so the work you do goes into the air''s internal energy (adiabatic). A pressure cooker on a low flame heats food at almost fixed volume (isochoric).'
   items:
   - prompt: A gas absorbs 500 J of heat and does 200 J of work. Find the change in internal energy (in J).
     answer: '300'
@@ -320,6 +354,55 @@ concepts:
     mistakes:
       '0': c11p11_first
       '-60': c11p11_first
+  - prompt: 'Assertion (A): In an isothermal expansion of an ideal gas, all the heat absorbed is converted into work.
+
+      Reason (R): The internal energy of an ideal gas depends only on its temperature.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. With T fixed, ΔU = 0 by R, so ΔQ = ΔW: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A gas in a cylinder absorbs 800 J of heat while its piston is pushed out at a constant pressure of 10⁵ Pa through 3 × 10⁻³ m³. Find the change in internal energy.'
+    options:
+    - 500 J
+    - 1100 J
+    - 300 J
+    answer: 500 J
+    hints:
+    - Work by the gas = PΔV.
+    - ΔU = ΔQ − ΔW.
+    solution: W = 10⁵ × 3 × 10⁻³ = 300 J; ΔU = 800 − 300 = 500 J.
+    mistakes:
+      1100 J: c11p_firstlaw
+      300 J: p11_work_pv
+    exam: case
+    difficulty: 2
+  - prompt: In which process is the work done by the gas equal to the decrease in its internal energy?
+    options:
+    - Adiabatic
+    - Isothermal
+    - Isochoric
+    answer: Adiabatic
+    hints:
+    - Which process has ΔQ = 0?
+    - Then ΔU = −ΔW.
+    solution: 'With no heat exchange, ΔU = −ΔW: the gas uses its own internal energy to do work.'
+    mistakes:
+      Isothermal: p11_isothermal
+      Isochoric: p11_isochoric
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.thermo.secondlaw
   title: Second law and heat engines
   after:
@@ -404,6 +487,19 @@ concepts:
         - 5%
         answer: 20%
         why: 100/500.
+      ways:
+      - style: visual
+        teach: 'A heat engine: heat in from the hot source, some becomes work, the rest goes to the sink.'
+        picture:
+          kind: flow
+          steps:
+          - Hot source gives Q₁
+          - Engine does work W = Q₁ − Q₂
+          - Cold sink takes Q₂
+          - η = W/Q₁ = 1 − Q₂/Q₁
+          alt: Heat Q1 flows from the hot source into the engine, the engine does work W, and the rest, Q2, goes to the cold sink; efficiency is W over Q1.
+      - style: real_world
+        teach: A car engine burns petrol at a very high temperature but turns only about a third of the energy into motion. The rest leaves as hot exhaust and through the radiator. No engine can avoid sending some heat to a colder place.
     - teach: 'Second law. Kelvin–Planck: no engine can turn all its heat into work. Clausius: heat will not flow from cold to hot by itself; a refrigerator needs work. Its coefficient of performance is Q₂/W.'
       check:
         prompt: Fridge removes 600 J using 200 J of work. COP?
@@ -413,6 +509,25 @@ concepts:
         - '4'
         answer: '3'
         why: 600/200.
+      ways:
+      - style: visual
+        teach: 'Engine and refrigerator are mirror images: the fridge uses work to move heat uphill.'
+        picture:
+          kind: compare
+          columns:
+          - title: Heat engine
+            points:
+            - heat flows hot → cold
+            - gives out work
+            - η = W/Q₁
+          - title: Refrigerator
+            points:
+            - heat pumped cold → hot
+            - needs work in
+            - COP = Q₂/W
+          alt: A heat engine lets heat flow from hot to cold and gives out work; a refrigerator uses work to pump heat from cold to hot, and its coefficient of performance is Q2 over W.
+      - style: step_by_step
+        teach: 'Step 1: Kelvin–Planck: some heat must always be rejected, so η < 1. Step 2: Clausius: heat goes cold → hot only if work is put in. Step 3: Refrigerator COP = heat removed ÷ work, and it can be more than 1. A fridge removing 900 J with 300 J of work has COP 3.'
     - teach: 'A Carnot engine (two isothermal + two adiabatic steps) is the most efficient possible between two temperatures: η = 1 − T₂/T₁, with T in kelvin.'
       picture:
         kind: flow
@@ -430,6 +545,11 @@ concepts:
         - 33%
         answer: 25%
         why: 1 − 300/400.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Convert both temperatures to kelvin. Step 2: η = 1 − T₂/T₁. Step 3: Turn it into a percentage. Example: 400 K and 280 K: η = 1 − 0.7 = 0.3 = 30%. Step 4: A real engine between the same temperatures does worse.'
+      - style: real_world
+        teach: 'Power stations use very hot steam and cool it with river or sea water: the bigger the gap between source and sink temperatures, the higher the best possible efficiency. That is why engineers keep pushing boiler temperatures up.'
   items:
   - prompt: An engine takes 1000 J of heat and rejects 600 J. Find its efficiency as a percentage.
     answer: '40'
@@ -600,3 +720,52 @@ concepts:
     mistakes:
       '10': c11p11_eng
       '0.9': c11p11_eng
+  - prompt: 'Assertion (A): A Carnot engine working between 400 K and 400 K does no work.
+
+      Reason (R): The efficiency of a Carnot engine is 1 − T₂/T₁.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. With T₂ = T₁, η = 1 − 1 = 0, so no work is done: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: An advert says a refrigerator has a COP of 5 and removes 1000 J of heat from inside per cycle. How much work does it need per cycle?'
+    options:
+    - 200 J
+    - 5000 J
+    - 1200 J
+    answer: 200 J
+    hints:
+    - COP = Q₂/W.
+    - W = Q₂/COP.
+    solution: W = 1000/5 = 200 J.
+    mistakes:
+      5000 J: p11_cop
+      1200 J: c11p11_eng
+    exam: competency
+    difficulty: 2
+  - prompt: A Carnot engine takes heat from a source at 527 °C and rejects to a sink at 127 °C. Find its efficiency.
+    options:
+    - 50%
+    - 76%
+    - 24%
+    answer: 50%
+    hints:
+    - Add 273 to each temperature.
+    - η = 1 − T₂/T₁.
+    solution: T₁ = 800 K, T₂ = 400 K, η = 1 − 400/800 = 50%.
+    mistakes:
+      76%: c11p_carnot
+      24%: p11_carnot
+    exam: short
+    difficulty: 2

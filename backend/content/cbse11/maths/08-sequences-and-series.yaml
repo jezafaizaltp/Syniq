@@ -147,6 +147,23 @@ concepts:
         - '20'
         answer: '18'
         why: a + 4d = 2 + 16 = 18.
+      ways:
+      - style: visual
+        teach: 'The AP 3, 7, 11, 15: every bar is 4 taller than the one before.'
+        picture:
+          kind: bars
+          bars:
+          - label: a₁
+            value: 3
+          - label: a₂
+            value: 7
+          - label: a₃
+            value: 11
+          - label: a₄
+            value: 15
+          alt: Bars of height 3, 7, 11 and 15 rise by the same step of 4 each time, the common difference.
+      - style: step_by_step
+        teach: 'Step 1: a = first term. Step 2: d = second term − first. Step 3: aₙ = a + (n − 1)d: from term 1 to term n you take n − 1 steps. For 5, 8, 11, …: a₁₂ = 5 + 11 × 3 = 38.'
     - teach: 'Sum of the first n terms of an AP: Sₙ = n/2 [2a + (n − 1)d] = n/2 (first + last). Gauss''s trick pairs the first and last terms.'
       picture:
         kind: flow
@@ -164,6 +181,11 @@ concepts:
         - '420'
         answer: '210'
         why: 20 × 21/2 = 210.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Know the last term? Use Sₙ = n/2 (first + last). Step 2: Don''t know it? Use Sₙ = n/2 [2a + (n − 1)d]. Example: 3, 7, 11, … 10 terms: 5 × (6 + 36) = 210.'
+      - style: real_world
+        teach: 'Saving ₹10 the first week, ₹20 the second, ₹30 the third and so on: after 10 weeks pair week 1 with week 10, week 2 with week 9 … each pair is ₹110 and there are 5 pairs, so ₹550.'
     - teach: The arithmetic mean of a and b is (a + b)/2. Inserting n means between a and b makes an AP of n + 2 terms.
       check:
         prompt: Arithmetic mean of 7 and 19?
@@ -173,6 +195,27 @@ concepts:
         - '26'
         answer: '13'
         why: (7 + 19)/2 = 13.
+      ways:
+      - style: visual
+        teach: Inserting 3 arithmetic means between 2 and 14 makes an AP of 5 terms.
+        picture:
+          kind: number_line
+          from: 0
+          to: 16
+          points:
+          - at: 2
+            label: '2'
+          - at: 5
+            label: A₁ = 5
+          - at: 8
+            label: A₂ = 8
+          - at: 11
+            label: A₃ = 11
+          - at: 14
+            label: '14'
+          alt: Between 2 and 14 the points 5, 8 and 11 are equally spaced 3 apart, making an AP of five terms.
+      - style: step_by_step
+        teach: 'Step 1: With n means there are n + 2 terms. Step 2: Last = a + (n + 1)d, so d = (b − a)/(n + 1). Step 3: Add d again and again. Between 2 and 14 with 3 means: d = 12/4 = 3, giving 5, 8, 11.'
   items:
   - prompt: Find the 10th term of the AP 3, 7, 11, ...
     answer: '39'
@@ -334,6 +377,55 @@ concepts:
     mistakes:
       '18': c11m8_d
       '4': c11m8_d
+  - prompt: 'Assertion (A): The sum of the first 100 natural numbers is 5050.
+
+      Reason (R): Sₙ = n(n + 1)/2 for the first n natural numbers.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true: 100 × 101/2 = 5050, using R, so R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: An auditorium has 20 seats in the first row, and each row has 2 more seats than the row in front. There are 30 rows. How many seats are there in all?'
+    options:
+    - '1470'
+    - '78'
+    - '1500'
+    answer: '1470'
+    hints:
+    - a = 20, d = 2, n = 30.
+    - Sₙ = n/2 [2a + (n − 1)d].
+    solution: S₃₀ = 15 × (40 + 58) = 15 × 98 = 1470.
+    mistakes:
+      '78': m11_ap_nth
+      '1500': m11_ap_sum
+    exam: case
+    difficulty: 2
+  - prompt: Which term of the AP 5, 9, 13, … is 81?
+    options:
+    - 20th
+    - 19th
+    - 21st
+    answer: 20th
+    hints:
+    - 5 + (n − 1) × 4 = 81.
+    - Solve for n.
+    solution: (n − 1) × 4 = 76 → n − 1 = 19 → n = 20.
+    mistakes:
+      19th: m11_which_term
+      21st: c11m8_d
+    exam: short
+    difficulty: 2
 - code: cbse11m.seq.gp
   title: Geometric progressions
   after:
@@ -441,6 +533,23 @@ concepts:
         - −54
         answer: 1/3
         why: 27/81 = 1/3.
+      ways:
+      - style: visual
+        teach: 'The GP 3, 6, 12, 24: each bar doubles the one before.'
+        picture:
+          kind: bars
+          bars:
+          - label: a₁
+            value: 3
+          - label: a₂
+            value: 6
+          - label: a₃
+            value: 12
+          - label: a₄
+            value: 24
+          alt: 'Bars of height 3, 6, 12 and 24 each double the previous bar: the common ratio is 2.'
+      - style: real_world
+        teach: 'A rumour told to 2 new people each hour, a bacteria colony doubling every 20 minutes, money growing at a fixed rate every year: each step multiplies by the same number. Adding the same amount is an AP; multiplying is a GP.'
     - teach: 'Sum of n terms of a GP: Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1. If |r| < 1 the infinite sum exists: S∞ = a/(1 − r).'
       picture:
         kind: bars
@@ -463,6 +572,11 @@ concepts:
         - '6'
         answer: 9/2
         why: a/(1 − r) = 3/(2/3) = 9/2.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find a and r. Step 2: If r > 1 use Sₙ = a(rⁿ − 1)/(r − 1). Step 3: If |r| < 1 and the sum goes on forever, use S∞ = a/(1 − r). Example: 3 + 1 + 1/3 + … = 3/(1 − 1/3) = 9/2.'
+      - style: real_world
+        teach: 'Walk half the way to a wall, then half of what is left, then half again. You cover 1/2 + 1/4 + 1/8 + … of the distance and get ever closer to the wall but never pass it: the infinite sum is exactly 1.'
     - teach: 'The geometric mean of a and b is √(ab), and for positive numbers AM ≥ GM. Special sums: Σn = n(n+1)/2, Σn² = n(n+1)(2n+1)/6, Σn³ = [n(n+1)/2]².'
       check:
         prompt: Geometric mean of 2 and 18?
@@ -472,6 +586,25 @@ concepts:
         - '36'
         answer: '6'
         why: √(36) = 6.
+      ways:
+      - style: visual
+        teach: 'For 2 and 18: the arithmetic mean is 10, the geometric mean is 6.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 20
+          points:
+          - at: 2
+            label: '2'
+          - at: 6
+            label: GM = 6
+          - at: 10
+            label: AM = 10
+          - at: 18
+            label: '18'
+          alt: Between 2 and 18 the geometric mean 6 lies to the left of the arithmetic mean 10, showing AM is at least GM.
+      - style: step_by_step
+        teach: 'Step 1: AM of a and b = (a + b)/2. Step 2: GM = √(ab). Step 3: For positive a, b, AM ≥ GM, with equality only when a = b. Step 4: For Σn³, square Σn: 1³ + 2³ + 3³ = (1 + 2 + 3)² = 36.'
   items:
   - prompt: Find the 6th term of the GP 2, 6, 18, ...
     answer: '486'
@@ -631,3 +764,52 @@ concepts:
     mistakes:
       '10': c11m8_r
       '25': c11m8_r
+  - prompt: 'Assertion (A): The sum to infinity of 2 + 4 + 8 + … exists.
+
+      Reason (R): The sum to infinity of a GP exists only when |r| < 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Here r = 2, so the terms keep growing and there is no infinite sum: A is false. R is the correct condition.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A ball is dropped from 10 m and each bounce reaches 4/5 of the previous height. How high does it rise after the 2nd bounce?'
+    options:
+    - 6.4 m
+    - 8 m
+    - 1.6 m
+    answer: 6.4 m
+    hints:
+    - 'After bounce 1: 10 × 4/5.'
+    - Multiply by 4/5 again.
+    solution: 10 × (4/5)² = 10 × 16/25 = 6.4 m.
+    mistakes:
+      8 m: c11m8_r
+      1.6 m: c11_gp_ratio
+    exam: competency
+    difficulty: 2
+  - prompt: Find the sum of the first 6 terms of the GP 3, 6, 12, …
+    options:
+    - '189'
+    - '96'
+    - '192'
+    answer: '189'
+    hints:
+    - a = 3, r = 2, n = 6.
+    - Sₙ = a(rⁿ − 1)/(r − 1).
+    solution: 3(2⁶ − 1)/(2 − 1) = 3 × 63 = 189.
+    mistakes:
+      '96': m11_gp_sum
+      '192': c11m8_sum
+    exam: short
+    difficulty: 2

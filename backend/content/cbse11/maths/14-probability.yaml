@@ -103,6 +103,23 @@ concepts:
         - '6'
         answer: '12'
         why: 2 × 6 = 12.
+      ways:
+      - style: visual
+        teach: 'A coin tossed and a die rolled together: 2 × 6 = 12 outcomes.'
+        picture:
+          kind: compare
+          columns:
+          - title: Coin shows H
+            points:
+            - H1, H2, H3
+            - H4, H5, H6
+          - title: Coin shows T
+            points:
+            - T1, T2, T3
+            - T4, T5, T6
+          alt: 'With heads the outcomes are H1 to H6, with tails T1 to T6: twelve outcomes in all.'
+      - style: step_by_step
+        teach: 'Step 1: List what can happen at each stage. Step 2: Multiply the counts: a coin and a die give 2 × 6 = 12; three dice give 6 × 6 × 6 = 216. Step 3: Write the outcomes in order so none is missed: H1, H2, … T6.'
     - teach: An event is a subset of S. A sure event is S itself; an impossible event is ∅. The complement A′ is everything in S that is not in A.
       check:
         prompt: One die. A = {2, 4, 6}. A′ = ?
@@ -112,6 +129,21 @@ concepts:
         - '{6}'
         answer: '{1, 3, 5}'
         why: All outcomes not in A.
+      ways:
+      - style: visual
+        teach: 'Rolling a die: the event ''even'' and its complement ''odd'' split the sample space.'
+        picture:
+          kind: compare
+          columns:
+          - title: 'A: even'
+            points:
+            - 2, 4, 6
+          - title: 'A′: not even'
+            points:
+            - 1, 3, 5
+          alt: The sample space 1 to 6 splits into the event even, 2, 4, 6, and its complement odd, 1, 3, 5.
+      - style: real_world
+        teach: 'Tomorrow''s weather: ''rain'' is an event. ''Not rain'' is its complement. ''Either rain or no rain'' is certain, the sure event S. ''Rain and no rain at the same place and time'' cannot happen, the impossible event ∅.'
     - teach: A ∪ B means 'A or B', A ∩ B means 'A and B'. A and B are mutually exclusive if A ∩ B = ∅ (they cannot happen together); exhaustive if A ∪ B = S.
       picture:
         kind: compare
@@ -135,6 +167,11 @@ concepts:
         - the same event
         answer: mutually exclusive but not exhaustive
         why: They cannot both happen, but 2–5 are left out.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For ''A or B'', collect outcomes in at least one: A ∪ B. Step 2: For ''A and B'', keep only shared outcomes: A ∩ B. Step 3: If A ∩ B = ∅, they are mutually exclusive. Step 4: If A ∪ B = S, they are exhaustive.'
+      - style: real_world
+        teach: 'A traffic light at one moment is red, amber or green: never two at once (mutually exclusive) and always one of them (exhaustive). Being a cricketer and a singer is not exclusive: one person can be both.'
   items:
   - prompt: How many outcomes are there when two coins are tossed?
     answer: '4'
@@ -306,6 +343,55 @@ concepts:
     mistakes:
       '8': c11m14_space
       '3': c11m14_space
+  - prompt: 'Assertion (A): When a die is rolled, the events ''getting an even number'' and ''getting a number greater than 3'' are mutually exclusive.
+
+      Reason (R): Two events are mutually exclusive if they have no outcome in common.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both events contain 4 and 6, so they can happen together: A is false. R is the correct definition.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: Three coins are tossed. How many outcomes have exactly two heads?
+    options:
+    - '3'
+    - '2'
+    - '8'
+    answer: '3'
+    hints:
+    - List all 8 outcomes.
+    - Pick those with exactly two H.
+    solution: 'HHT, HTH, THH: 3 outcomes.'
+    mistakes:
+      '2': m11_sample_space
+      '8': c11m14_space
+    exam: one_mark
+    difficulty: 2
+  - prompt: 'Situation: A bag has 3 red and 2 blue balls. One ball is drawn. Are the events ''red'' and ''blue'' mutually exclusive and exhaustive?'
+    options:
+    - Both mutually exclusive and exhaustive
+    - Mutually exclusive only
+    - Exhaustive only
+    answer: Both mutually exclusive and exhaustive
+    hints:
+    - Can one ball be red and blue?
+    - Is there any other colour?
+    solution: No ball is both colours, and every ball is one of them, so the events are mutually exclusive and exhaustive.
+    mistakes:
+      Mutually exclusive only: m11_exclusive
+      Exhaustive only: m11_exclusive
+    exam: competency
+    difficulty: 2
 - code: cbse11m.prob.axioms
   title: Probability of events
   after:
@@ -424,6 +510,24 @@ concepts:
         - 1/6
         answer: 1/3
         why: '{3, 6}: 2 of 6.'
+      ways:
+      - style: visual
+        teach: Probability lives on a scale from 0 (impossible) to 1 (certain).
+        picture:
+          kind: number_line
+          from: 0
+          to: 1
+          step: 0.1
+          points:
+          - at: 0
+            label: 'impossible: 7 on a die'
+          - at: 0.5
+            label: even on a die
+          - at: 1
+            label: 'certain: number ≤ 6'
+          alt: On a scale from 0 to 1, rolling a 7 is at 0, rolling an even number is at one half, and rolling 6 or less is at 1.
+      - style: step_by_step
+        teach: 'Step 1: Count the outcomes in S. Step 2: Check they are equally likely. Step 3: Count the outcomes in A. Step 4: P(A) = n(A)/n(S). For a prime number on a die, A = {2, 3, 5}: 3/6 = 1/2.'
     - teach: 'Complement rule: P(not A) = 1 − P(A). Very useful for ''at least one'' questions: P(at least one) = 1 − P(none).'
       check:
         prompt: Two coins. P(at least one tail)?
@@ -433,6 +537,19 @@ concepts:
         - 1/2
         answer: 3/4
         why: 1 − P(HH) = 1 − 1/4.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Spot the words ''at least one''. Step 2: Find P(none) instead, it''s usually one easy case. Step 3: Subtract from 1. Three coins, at least one head: P(no heads) = 1/8, so 7/8.'
+      - style: visual
+        teach: 'At least one head in 3 tosses: everything except TTT.'
+        picture:
+          kind: bars
+          bars:
+          - label: TTT (no head)
+            value: 1
+          - label: at least one head
+            value: 7
+          alt: Of 8 equally likely outcomes, only one has no head, so 7 out of 8 have at least one head.
     - teach: 'Addition rule: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). If A and B are mutually exclusive, the overlap is 0, so just add.'
       picture:
         kind: flow
@@ -449,6 +566,11 @@ concepts:
         - '0.2'
         answer: '0.8'
         why: 'No overlap: 0.3 + 0.5.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find P(A) and P(B). Step 2: Find the overlap P(A ∩ B). Step 3: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). Red card or ace: 26/52 + 4/52 − 2/52 = 28/52 = 7/13.'
+      - style: real_world
+        teach: 'In a class, 60% like tea, 50% like coffee and 30% like both. Adding 60 + 50 counts the tea-and-coffee lovers twice, giving more than 100%. Subtract the overlap: 80% like at least one.'
   items:
   - prompt: A die is rolled. Find the probability of getting a number greater than 4.
     answer: 1/3
@@ -608,3 +730,52 @@ concepts:
     mistakes:
       1/3: c11m14_rule
       3/5: c11m14_rule
+  - prompt: 'Assertion (A): P(A) = 0.6 and P(B) = 0.7 cannot be the probabilities of two mutually exclusive events.
+
+      Reason (R): For mutually exclusive events P(A ∪ B) = P(A) + P(B), which can never exceed 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. 0.6 + 0.7 = 1.3 > 1 is impossible for a probability, which is why such events cannot be exclusive: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In a class of 40, 18 study French, 15 study German and 7 study both. A student is picked at random. Find the probability that the student studies neither.'
+    options:
+    - 7/20
+    - 13/20
+    - 1/5
+    answer: 7/20
+    hints:
+    - At least one = 18 + 15 − 7.
+    - Neither = 40 − that.
+    solution: At least one = 26, neither = 14; 14/40 = 7/20.
+    mistakes:
+      13/20: c11_complement
+      1/5: m11_union_prob
+    exam: case
+    difficulty: 2
+  - prompt: Two dice are thrown. Find the probability that the sum is at least 11.
+    options:
+    - 1/12
+    - 1/18
+    - 1/36
+    answer: 1/12
+    hints:
+    - 'Sum 11: (5, 6), (6, 5). Sum 12: (6, 6).'
+    - Count and divide by 36.
+    solution: 3 outcomes out of 36 = 1/12.
+    mistakes:
+      1/18: m11_list_sum
+      1/36: m11_prob_dice
+    exam: short
+    difficulty: 2

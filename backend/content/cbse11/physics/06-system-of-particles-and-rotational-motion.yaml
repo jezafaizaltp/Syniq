@@ -147,6 +147,23 @@ concepts:
         - 0 m
         answer: 2 m
         why: 'Equal masses: halfway.'
+      ways:
+      - style: visual
+        teach: '4 kg at x = 0 and 1 kg at x = 5 m: the centre of mass sits nearer the heavier mass.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 5
+          points:
+          - at: 0
+            label: 4 kg
+          - at: 1
+            label: centre of mass
+          - at: 5
+            label: 1 kg
+          alt: On a line from 0 to 5 metres, a 4 kilogram mass at 0 and a 1 kilogram mass at 5 have their centre of mass at 1 metre, closer to the heavier one.
+      - style: step_by_step
+        teach: 'Step 1: Multiply each mass by its position. Step 2: Add these products. Step 3: Divide by the total mass. (4 × 0 + 1 × 5)/(4 + 1) = 5/5 = 1 m. Step 4: Check: it must lie between the masses, nearer the heavier one.'
     - teach: 'Torque is the turning effect of a force: τ = rF sin θ = force × perpendicular distance from the axis. Unit N m. A longer spanner gives more torque for the same force.'
       check:
         prompt: 10 N applied at right angles, 0.3 m from a hinge. Torque?
@@ -156,6 +173,22 @@ concepts:
         - 0.03 N m
         answer: 3 N m
         why: 10 × 0.3.
+      ways:
+      - style: visual
+        teach: The same 40 N push gives more torque the further it acts from the hinge.
+        picture:
+          kind: bars
+          unit: N m
+          bars:
+          - label: at 0.1 m
+            value: 4
+          - label: at 0.25 m
+            value: 10
+          - label: at 0.5 m
+            value: 20
+          alt: A 40 newton force gives 4 newton metres of torque at 0.1 metres, 10 at 0.25 metres and 20 at 0.5 metres from the axis.
+      - style: real_world
+        teach: 'Door handles sit at the edge far from the hinges. Try pushing a door open near the hinge: it takes a much bigger push. Same turning effect, smaller distance, so you need more force: τ = force × perpendicular distance.'
     - teach: 'A rigid body is in equilibrium when the net force is zero AND the net torque is zero. For a balanced see-saw: clockwise moments = anticlockwise moments.'
       picture:
         kind: compare
@@ -179,6 +212,11 @@ concepts:
         - only if it is moving
         answer: yes, if the net torque is not zero
         why: Two equal, opposite forces along different lines (a couple) give torque but no net force.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Pick the pivot. Step 2: For each force, moment = force × distance from the pivot. Step 3: Clockwise total = anticlockwise total. 25 kg at 2 m vs 50 kg at d: 25 × 2 = 50 × d, so d = 1 m.'
+      - style: real_world
+        teach: A shopkeeper's beam balance hangs level only when the moments on both sides match. With equal arms, that means equal weights. A steelyard with one short arm lets a small weight far out balance a heavy sack close in.
   items:
   - prompt: Masses 2 kg at x = 0 and 3 kg at x = 5 m. Find the x-coordinate of the centre of mass (in m).
     answer: '3'
@@ -355,6 +393,55 @@ concepts:
     mistakes:
       stops at once: c11p06_com
       moves straight down: c11p06_com
+  - prompt: 'Assertion (A): The centre of mass of a ring lies at its centre, where there is no mass.
+
+      Reason (R): The centre of mass is the mass-weighted average position, which need not be at a point occupied by mass.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. By symmetry the average position of a uniform ring is its centre, which is empty: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A 1 m uniform rod of mass 2 kg has a 1 kg mass fixed at its right end. How far from the left end is the centre of mass of the system?'
+    options:
+    - 2/3 m
+    - 1/2 m
+    - 1/3 m
+    answer: 2/3 m
+    hints:
+    - The rod's own mass acts at its middle, 0.5 m.
+    - (2 × 0.5 + 1 × 1)/3.
+    solution: x_cm = (1 + 1)/3 = 2/3 m from the left end.
+    mistakes:
+      1/2 m: p11_com
+      1/3 m: c11p06_com
+    exam: case
+    difficulty: 2
+  - prompt: 'Torque is zero when the force acts:'
+    options:
+    - along the line through the axis
+    - at right angles to the arm
+    - at the far end of the arm
+    answer: along the line through the axis
+    hints:
+    - τ = rF sin θ.
+    - When is sin θ zero?
+    solution: If the force points along r (θ = 0), sin θ = 0, so τ = 0.
+    mistakes:
+      at right angles to the arm: p11_torque
+      at the far end of the arm: c11p_torque
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.rot.dynamics
   title: Moment of inertia and angular momentum
   after:
@@ -450,6 +537,29 @@ concepts:
         - 0.02 m/s
         answer: 2 m/s
         why: v = ωr = 10 × 0.2.
+      ways:
+      - style: visual
+        teach: Each straight-line quantity has a rotational partner.
+        picture:
+          kind: compare
+          columns:
+          - title: Straight line
+            points:
+            - distance x
+            - velocity v
+            - mass m
+            - force F = ma
+            - KE ½mv²
+          - title: Rotation
+            points:
+            - angle θ
+            - angular velocity ω
+            - moment of inertia I
+            - torque τ = Iα
+            - KE ½Iω²
+          alt: Distance, velocity, mass, force and kinetic energy in straight-line motion match angle, angular velocity, moment of inertia, torque and rotational kinetic energy.
+      - style: step_by_step
+        teach: 'Step 1: Find ω in rad/s (1 rev/s = 2π rad/s). Step 2: Speed of a point v = ωr. Step 3: For a set of masses, I = Σmr², each m times its distance from the axis squared.'
     - teach: 'I depends on how mass is spread: ring MR², disc ½MR², rod about centre ML²/12, solid sphere ⅖MR². Mass far from the axis means a bigger I. Rotational KE = ½Iω², and τ = Iα.'
       check:
         prompt: 'Same mass and radius: which has the larger I about its axis?'
@@ -459,6 +569,22 @@ concepts:
         - they are equal
         answer: a ring
         why: All the ring's mass is at radius R.
+      ways:
+      - style: visual
+        teach: 'Same mass and radius, different spreads: the ring is hardest to spin.'
+        picture:
+          kind: bars
+          unit: × MR²
+          bars:
+          - label: ring
+            value: 1
+          - label: disc
+            value: 0.5
+          - label: solid sphere
+            value: 0.4
+          alt: For the same mass and radius, a ring has moment of inertia M R squared, a disc half of that, and a solid sphere two fifths.
+      - style: real_world
+        teach: A tightrope walker carries a long pole. Its mass is far from the body, so the walker's moment of inertia is large and the body turns slowly when they start to tip, giving time to correct the balance.
     - teach: 'Angular momentum L = Iω. With no external torque, L stays constant: a skater pulling in their arms makes I smaller, so ω grows.'
       picture:
         kind: compare
@@ -484,6 +610,11 @@ concepts:
         - the same
         answer: double
         why: Iω stays fixed.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Check there is no outside torque. Step 2: Write I₁ω₁ = I₂ω₂. Step 3: Solve. If I falls to a third, ω triples. Example: 3 rev/s with I cut to a third gives 9 rev/s.'
+      - style: real_world
+        teach: 'A diver leaps off the board stretched out and then tucks into a ball: the spin speeds up. Opening out again just before entering the water slows the spin. Angular momentum stays the same throughout.'
   items:
   - prompt: A ring of mass 2 kg and radius 0.5 m spins about its axis. Find its moment of inertia (in kg m²).
     answer: 1/2
@@ -642,3 +773,52 @@ concepts:
     mistakes:
       '9': c11p06_rot
       '27': c11p06_rot
+  - prompt: 'Assertion (A): A solid disc and a ring of the same mass and radius rotate at the same ω; the ring has more rotational kinetic energy.
+
+      Reason (R): The ring has a larger moment of inertia because all its mass is at the rim.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. KE = ½Iω² and the ring's I (MR²) is double the disc's (½MR²), so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: A torque of 10 N m acts on a wheel with I = 2 kg m². Find its angular acceleration.
+    options:
+    - 5 rad/s²
+    - 20 rad/s²
+    - 0.2 rad/s²
+    answer: 5 rad/s²
+    hints:
+    - τ = Iα.
+    - α = τ/I.
+    solution: α = 10/2 = 5 rad/s².
+    mistakes:
+      20 rad/s²: p11_torque_alpha
+      0.2 rad/s²: c11p06_rot
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: A child on a spinning playground roundabout walks from the edge towards the centre. What happens to the spin, ignoring friction?'
+    options:
+    - It speeds up
+    - It slows down
+    - It stays the same
+    answer: It speeds up
+    hints:
+    - What happens to I as mass moves inwards?
+    - Iω stays constant.
+    solution: Mass moves nearer the axis, I falls, so ω must rise to keep L = Iω constant.
+    mistakes:
+      It slows down: c11p_angular_momentum
+      It stays the same: c11p_angular_momentum
+    exam: competency
+    difficulty: 2

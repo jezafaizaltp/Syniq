@@ -128,6 +128,30 @@ concepts:
         - isolated
         answer: closed
         why: Energy passes, matter does not.
+      ways:
+      - style: visual
+        teach: 'Open, closed and isolated systems: what can cross the boundary.'
+        picture:
+          kind: compare
+          columns:
+          - title: Open
+            points:
+            - 'matter: yes'
+            - 'energy: yes'
+            - tea in an open cup
+          - title: Closed
+            points:
+            - 'matter: no'
+            - 'energy: yes'
+            - tea in a sealed steel tumbler
+          - title: Isolated
+            points:
+            - 'matter: no'
+            - 'energy: no'
+            - tea in an ideal flask
+          alt: An open system exchanges matter and energy, like tea in an open cup; a closed system exchanges only energy, like a sealed tumbler; an isolated system exchanges neither, like an ideal flask.
+      - style: real_world
+        teach: 'Climbing a hill, your change in height depends only on where you start and finish: a state function. The distance you walk and the sweat you lose depend on the path you took, like heat and work.'
     - teach: 'First law (chemistry signs): ΔU = q + w, where q is heat absorbed and w is work done on the system. Expansion work w = −pΔV. Enthalpy H = U + pV, so ΔH = ΔU + Δn_g RT.'
       check:
         prompt: System absorbs 50 J and does 20 J of work. ΔU?
@@ -137,6 +161,23 @@ concepts:
         - −30 J
         answer: 30 J
         why: q = +50, w = −20.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Chemistry signs: q is + when the system absorbs heat; w is + when work is done ON the system. Step 2: ΔU = q + w. Step 3: Expansion against p: w = −pΔV. Step 4: ΔH = ΔU + Δn_g RT, counting only gas moles.'
+      - style: visual
+        teach: 'Sign rules in chemistry: what makes q and w positive or negative.'
+        picture:
+          kind: compare
+          columns:
+          - title: Positive
+            points:
+            - 'q: heat absorbed by system'
+            - 'w: work done on system (compression)'
+          - title: Negative
+            points:
+            - 'q: heat released by system'
+            - 'w: work done by system (expansion)'
+          alt: In chemistry, q is positive when the system absorbs heat and negative when it releases heat; w is positive when work is done on the system and negative when the system does work by expanding.
     - teach: 'Hess''s law: the total ΔH is the same whatever route is taken. So ΔH(reaction) = Σ ΔfH(products) − Σ ΔfH(reactants). Negative ΔH: exothermic; positive: endothermic.'
       picture:
         kind: flow
@@ -153,6 +194,11 @@ concepts:
         - it depends
         answer: '0'
         why: Elements in their standard state have ΔfH = 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the balanced equation. Step 2: Multiply each ΔfH by its coefficient. Step 3: Sum for products minus sum for reactants. Step 4: Elements in their standard state have ΔfH = 0. Example: 2CO + O₂ → 2CO₂ with ΔfH(CO) = −110, ΔfH(CO₂) = −393: 2(−393) − 2(−110) = −566 kJ.'
+      - style: real_world
+        teach: 'Walking from Kozhikode to Kochi by road or by a longer coastal route, you end up the same height above sea level. Hess''s law says enthalpy change works like that height: the route of the reaction doesn''t matter.'
   items:
   - prompt: A system absorbs 300 J of heat and 100 J of work is done on it. Find ΔU (in J).
     answer: '400'
@@ -333,6 +379,55 @@ concepts:
     mistakes:
       '70': c11c05_hess
       '30': c11c05_hess
+  - prompt: 'Assertion (A): The enthalpy of formation of O₂(g) is zero.
+
+      Reason (R): The standard enthalpy of formation of an element in its most stable state is taken as zero.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. O₂ gas is oxygen's standard state, so by the convention in R its ΔfH is zero.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: For N₂(g) + 3H₂(g) → 2NH₃(g), ΔH = −92.4 kJ at 298 K. Find ΔU (R = 8.314 J/mol K).'
+    options:
+    - −87.4 kJ
+    - −97.4 kJ
+    - −92.4 kJ
+    answer: −87.4 kJ
+    hints:
+    - Δn_g = 2 − 4 = −2.
+    - ΔU = ΔH − Δn_g RT.
+    solution: Δn_g RT = −2 × 8.314 × 298 ≈ −4.96 kJ. ΔU = −92.4 + 4.96 ≈ −87.4 kJ.
+    mistakes:
+      −97.4 kJ: c11c_sign
+      −92.4 kJ: c11c05_sign
+    exam: case
+    difficulty: 2
+  - prompt: Which of these is an extensive property?
+    options:
+    - Volume
+    - Temperature
+    - Density
+    answer: Volume
+    hints:
+    - Extensive properties depend on how much matter there is.
+    - If you double the sample, which doubles?
+    solution: Doubling the sample doubles its volume; temperature and density stay the same.
+    mistakes:
+      Temperature: c11_state_function
+      Density: c11_state_function
+    exam: one_mark
+    difficulty: 2
 - code: cbse11c.thermo.spont
   title: Entropy and Gibbs energy
   after:
@@ -483,6 +578,19 @@ concepts:
         - steam condensing
         answer: water evaporating
         why: A gas is more spread out than a liquid.
+      ways:
+      - style: visual
+        teach: Entropy rises as particles get more freedom to spread out.
+        picture:
+          kind: flow
+          steps:
+          - 'Solid: particles fixed in place'
+          - 'Liquid: particles slide past each other'
+          - 'Gas: particles fly anywhere'
+          - 'Entropy: solid < liquid < gas'
+          alt: 'In a solid the particles are fixed, in a liquid they slide past each other, in a gas they move freely: entropy increases from solid to liquid to gas.'
+      - style: real_world
+        teach: 'A drop of ink spreads through a glass of water on its own, but you''ll never see it gather back into a drop. Spontaneous changes go the way energy and matter spread out more: entropy rises.'
     - teach: 'Gibbs energy G = H − TS, so ΔG = ΔH − TΔS. ΔG < 0: spontaneous; ΔG = 0: equilibrium; ΔG > 0: not spontaneous. Temperature can flip the sign when ΔH and ΔS have the same sign.'
       check:
         prompt: ΔH = −20 kJ, ΔS = +0.05 kJ/K. Spontaneous?
@@ -492,6 +600,25 @@ concepts:
         - never
         answer: at all temperatures
         why: Both terms make ΔG negative.
+      ways:
+      - style: visual
+        teach: Signs of ΔH and ΔS decide when a reaction is spontaneous.
+        picture:
+          kind: compare
+          columns:
+          - title: ΔH −, ΔS +
+            points:
+            - always spontaneous
+          - title: ΔH and ΔS same sign
+            points:
+            - '−,−: spontaneous at low T'
+            - '+,+: spontaneous at high T'
+          - title: ΔH +, ΔS −
+            points:
+            - never spontaneous
+          alt: Negative enthalpy change with positive entropy change is always spontaneous; positive enthalpy with negative entropy never is; when both have the same sign, temperature decides.
+      - style: step_by_step
+        teach: 'Step 1: Put ΔS in kJ (divide J by 1000). Step 2: ΔG = ΔH − TΔS. Step 3: Read the sign. Example: ΔH = +30 kJ/mol, ΔS = 0.12 kJ/(mol K), T = 300 K: ΔG = 30 − 36 = −6 kJ/mol, spontaneous.'
     - teach: 'At equilibrium ΔG = 0, so T = ΔH/ΔS is the switch-over temperature. Also ΔG° = −RT ln K: a negative ΔG° means K > 1. Third law: a perfect crystal at 0 K has zero entropy.'
       picture:
         kind: compare
@@ -517,6 +644,11 @@ concepts:
         - 3000 K
         answer: 300 K
         why: 30 ÷ 0.1.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: At equilibrium ΔG = 0. Step 2: So T = ΔH/ΔS. Example: ΔH = 30 kJ/mol, ΔS = 0.12 kJ/(mol K): T = 250 K. Step 3: ΔG° = −RT ln K: ΔG° < 0 means K > 1, products favoured.'
+      - style: real_world
+        teach: 'Ice and water sit together at 0 °C without either winning: ΔG for melting is exactly zero there. Warm the room a degree and melting becomes spontaneous; cool it and freezing does.'
   items:
   - prompt: ΔH = 40 kJ/mol and ΔS = 0.1 kJ/(mol K). Find ΔG (kJ/mol) at 500 K.
     answer: '-10'
@@ -704,3 +836,52 @@ concepts:
     mistakes:
       '180': c11c05_gibbs
       '20': c11c05_gibbs
+  - prompt: 'Assertion (A): The melting of ice at 298 K is spontaneous even though it absorbs heat.
+
+      Reason (R): At 298 K the TΔS term is larger than ΔH, so ΔG is negative.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Melting has ΔH > 0 but ΔS > 0; at 298 K, TΔS outweighs ΔH, making ΔG negative, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: For a reaction ΔH = −20 kJ/mol and ΔS = +0.05 kJ/(mol K). Is it spontaneous at 300 K?'
+    options:
+    - Yes, ΔG = −35 kJ/mol
+    - No, ΔG = +35 kJ/mol
+    - Yes, ΔG = −5 kJ/mol
+    answer: Yes, ΔG = −35 kJ/mol
+    hints:
+    - ΔG = ΔH − TΔS.
+    - TΔS = 300 × 0.05 = 15.
+    solution: ΔG = −20 − 15 = −35 kJ/mol < 0, so it is spontaneous (in fact at every temperature).
+    mistakes:
+      No, ΔG = +35 kJ/mol: c11c_gibbs
+      Yes, ΔG = −5 kJ/mol: c11c05_gibbs
+    exam: competency
+    difficulty: 2
+  - prompt: For a process with ΔH = +50 kJ/mol and ΔS = +0.125 kJ/(mol K), above what temperature does it become spontaneous?
+    options:
+    - 400 K
+    - 6.25 K
+    - 250 K
+    answer: 400 K
+    hints:
+    - Find T where ΔG = 0.
+    - T = ΔH/ΔS.
+    solution: T = 50/0.125 = 400 K; above it, TΔS > ΔH and ΔG < 0.
+    mistakes:
+      6.25 K: c11_delta_g_zero
+      250 K: c11_delta_g_zero
+    exam: short
+    difficulty: 2

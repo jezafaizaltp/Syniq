@@ -126,6 +126,27 @@ concepts:
         - stays the same
         answer: halves
         why: PV stays constant.
+      ways:
+      - style: visual
+        teach: Which quantity is held fixed decides which gas law you get.
+        picture:
+          kind: compare
+          columns:
+          - title: T fixed (Boyle)
+            points:
+            - PV = constant
+            - squeeze → pressure rises
+          - title: P fixed (Charles)
+            points:
+            - V ∝ T
+            - heat → it expands
+          - title: V fixed
+            points:
+            - P ∝ T
+            - heat → pressure rises
+          alt: With temperature fixed, P times V is constant; with pressure fixed, volume is proportional to kelvin temperature; with volume fixed, pressure is proportional to kelvin temperature.
+      - style: step_by_step
+        teach: 'Step 1: Change °C to kelvin. Step 2: Decide what is held fixed. Step 3: Write P₁V₁/T₁ = P₂V₂/T₂ and cross out the fixed one. Step 4: Solve. Example: 5 L at 250 K, constant P, heated to 350 K: V₂ = 5 × 350/250 = 7 L.'
     - teach: 'Kinetic theory pictures a gas as tiny molecules in random motion, with elastic collisions and no forces between them except while colliding. Their hits on the walls make pressure: P = ⅓nmv̄².'
       check:
         prompt: 'Gas pressure comes from:'
@@ -135,6 +156,19 @@ concepts:
         - forces between molecules
         answer: molecules hitting the walls
         why: Each bounce changes momentum and pushes the wall.
+      ways:
+      - style: visual
+        teach: How molecular motion turns into the pressure on a wall.
+        picture:
+          kind: flow
+          steps:
+          - Molecules move at random
+          - Each hits the wall and bounces back elastically
+          - Each bounce changes its momentum
+          - Billions of hits per second = steady push = pressure
+          alt: Gas molecules move at random, bounce elastically off the wall, and each bounce changes their momentum; billions of such hits per second make a steady push on the wall, which is pressure.
+      - style: real_world
+        teach: 'Throw tennis balls at a door again and again: each bounce gives the door a small push, and many fast balls make a steady force. Gas molecules do this to a balloon''s skin, keeping it blown up.'
     - teach: 'Real gases behave most like ideal gases at low pressure and high temperature, when molecules are far apart and fast. Dalton: total pressure of a mixture = sum of partial pressures.'
       picture:
         kind: compare
@@ -158,6 +192,11 @@ concepts:
         - 0.15 atm
         answer: 0.8 atm
         why: Add them.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Real gases have molecules of some size and weak attractions. Step 2: At low pressure, molecules are far apart, so their size hardly matters. Step 3: At high temperature, they move so fast that attractions hardly matter. Step 4: For a mixture, add the partial pressures.'
+      - style: real_world
+        teach: Air in a cycle tyre on a hot afternoon behaves almost ideally, so P ∝ T works well. Squeeze a gas to hundreds of atmospheres or cool it near the point where it turns liquid, and the simple law starts to fail.
   items:
   - prompt: A gas at 2 atm occupies 6 L. At the same temperature, what is its volume (in L) at 3 atm?
     answer: '4'
@@ -327,6 +366,55 @@ concepts:
     mistakes:
       '0.8': c11p12_gas
       '0.25': c11p12_gas
+  - prompt: 'Assertion (A): The pressure of a gas in a closed rigid container rises when it is heated.
+
+      Reason (R): Faster molecules hit the walls harder and more often.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Heating raises molecular speeds, giving more frequent and harder hits on the walls, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A gas cylinder holds gas at 15 atm at 27 °C. A fire heats it to 327 °C. Assuming it doesn''t leak, what is the pressure now?'
+    options:
+    - 30 atm
+    - 181.7 atm
+    - 15 atm
+    answer: 30 atm
+    hints:
+    - 'Use kelvin: 300 K and 600 K.'
+    - At fixed volume, P ∝ T.
+    solution: P₂ = 15 × 600/300 = 30 atm. That is why cylinders must be kept away from heat.
+    mistakes:
+      181.7 atm: c11p_gaslaw
+      15 atm: p11_gay_lussac
+    exam: case
+    difficulty: 2
+  - prompt: Under which conditions does a real gas deviate most from ideal behaviour?
+    options:
+    - High pressure and low temperature
+    - Low pressure and high temperature
+    - Low pressure and low temperature
+    answer: High pressure and low temperature
+    hints:
+    - When are molecules closest together?
+    - When do attractions matter most?
+    solution: At high pressure molecules are crowded and at low temperature they are slow, so size and attractions matter most.
+    mistakes:
+      Low pressure and high temperature: p11_ideal
+      Low pressure and low temperature: c11p12_gas
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.kinetic.energy
   title: Kinetic energy, equipartition and mean free path
   after:
@@ -417,6 +505,22 @@ concepts:
         - is √2 times
         answer: doubles
         why: KE ∝ T.
+      ways:
+      - style: visual
+        teach: Average kinetic energy per molecule rises in step with the kelvin temperature.
+        picture:
+          kind: bars
+          unit: × 10⁻²¹ J
+          bars:
+          - label: 100 K
+            value: 2.07
+          - label: 200 K
+            value: 4.14
+          - label: 400 K
+            value: 8.28
+          alt: The average kinetic energy per molecule is about 2.07 times 10 to the minus 21 joules at 100 kelvin, double at 200 kelvin and four times at 400 kelvin.
+      - style: real_world
+        teach: 'A balloon of helium and one of oxygen at the same room temperature: their molecules have the same average kinetic energy. The tiny helium atoms make up for their small mass by moving much faster.'
     - teach: 'rms speed v_rms = √(3RT/M): lighter molecules and hotter gases move faster. Since v ∝ √T, four times the temperature gives twice the speed.'
       check:
         prompt: At the same temperature, which moves faster on average?
@@ -426,6 +530,25 @@ concepts:
         - both the same
         answer: hydrogen
         why: Smaller M, larger √(3RT/M).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: v_rms = √(3RT/M) with M in kg/mol. Step 2: For a change of temperature, v ∝ √T: nine times T gives three times v. Step 3: For different gases at the same T, v ∝ 1/√M.'
+      - style: visual
+        teach: How the rms speed of a gas changes as its kelvin temperature is multiplied.
+        picture:
+          kind: compare
+          columns:
+          - title: T multiplied by
+            points:
+            - '4'
+            - '9'
+            - '16'
+          - title: v_rms multiplied by
+            points:
+            - '2'
+            - '3'
+            - '4'
+          alt: Multiplying the kelvin temperature by 4, 9 or 16 multiplies the rms speed by 2, 3 or 4, because speed goes as the square root of temperature.
     - teach: 'Equipartition: each degree of freedom gets ½k_B T. Monatomic: 3 (Cv = 3R/2, γ = 5/3). Diatomic at room temperature: 5 (Cv = 5R/2, γ = 7/5). Mean free path is the average distance between collisions.'
       picture:
         kind: compare
@@ -447,6 +570,11 @@ concepts:
         - '6'
         answer: '5'
         why: 3 to move plus 2 to rotate.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Count degrees of freedom f: 3 for a single atom; 5 for a two-atom molecule at room temperature (3 moving + 2 turning). Step 2: Cv = (f/2)R. Step 3: Cp = Cv + R. Step 4: γ = Cp/Cv.'
+      - style: real_world
+        teach: 'In a crowded corridor you can''t walk far before bumping into someone; in an empty one you can go a long way. Gas molecules are the same: the denser the gas, the shorter the mean free path between collisions.'
   items:
   - prompt: The rms speed of a gas is 400 m/s at 300 K. What is it (in m/s) at 1200 K?
     answer: '800'
@@ -626,3 +754,52 @@ concepts:
     mistakes:
       doubles: c11p12_ke
       stays the same: c11p12_ke
+  - prompt: 'Assertion (A): At the same temperature, hydrogen molecules move faster on average than oxygen molecules.
+
+      Reason (R): At the same temperature, all gas molecules have the same average kinetic energy.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Same average KE with a smaller mass means a higher speed, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A gas is heated from 27 °C to 927 °C. By what factor does its rms speed increase?'
+    options:
+    - '2'
+    - '4'
+    - √34
+    answer: '2'
+    hints:
+    - 'Convert to kelvin: 300 K to 1200 K.'
+    - v_rms ∝ √T.
+    solution: T rises 4 times (300 K → 1200 K), so v_rms doubles.
+    mistakes:
+      '4': c11p_rms
+      √34: c11p12_ke
+    exam: competency
+    difficulty: 2
+  - prompt: A diatomic gas at room temperature has Cv = 5R/2. Find Cp.
+    options:
+    - 7R/2
+    - 3R/2
+    - 5R/2
+    answer: 7R/2
+    hints:
+    - 'Mayer''s relation: Cp − Cv = R.'
+    - Add R to Cv.
+    solution: Cp = 5R/2 + R = 7R/2.
+    mistakes:
+      3R/2: p11_cv
+      5R/2: c11p12_dof
+    exam: short
+    difficulty: 2

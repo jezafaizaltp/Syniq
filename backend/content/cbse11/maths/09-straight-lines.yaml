@@ -128,6 +128,37 @@ concepts:
         - '6'
         answer: '3'
         why: (6 − 0)/(2 − 0) = 3.
+      ways:
+      - style: visual
+        teach: 'From (2, 1) to (5, 7): rise 6 over run 3, so the slope is 2.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 8
+          points:
+            A:
+            - 2
+            - 1
+            B:
+            - 5
+            - 7
+            _c:
+            - 5
+            - 1
+          segments:
+          - - A
+            - B
+          - - A
+            - _c
+            - run 3
+          - - _c
+            - B
+            - rise 6
+          alt: A right triangle under the line from A at 2, 1 to B at 5, 7 has run 3 and rise 6, so the slope is 6 over 3, which is 2.
+      - style: real_world
+        teach: 'A road sign saying ''1 in 10 gradient'' means you climb 1 m for every 10 m along: slope 0.1. A wheelchair ramp is kept to about 1 in 12. The steeper the hill, the bigger the slope.'
     - teach: A horizontal line has slope 0; a vertical line's slope is undefined. Parallel lines have equal slopes; perpendicular lines have m₁ × m₂ = −1.
       picture:
         kind: compare
@@ -149,6 +180,11 @@ concepts:
         - −1/4
         answer: 1/4
         why: −4 × 1/4 = −1.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find both slopes. Step 2: Equal slopes → parallel. Step 3: Multiply them: −1 → perpendicular. Step 4: To get a perpendicular slope, flip the fraction and change its sign: 4/5 becomes −5/4.'
+      - style: real_world
+        teach: 'Railway tracks are parallel: they climb at exactly the same slope. A ladder against a wall meets the floor; the wall is vertical with undefined slope, and the floor is horizontal with slope 0.'
     - teach: 'Three points are collinear if the slope from the first to the second equals the slope from the second to the third. The angle between two lines: tan θ = |(m₂ − m₁)/(1 + m₁m₂)|.'
       check:
         prompt: Slopes 1 and 0. What is the angle between the lines?
@@ -158,6 +194,35 @@ concepts:
         - 30°
         answer: 45°
         why: tan θ = |1 − 0|/(1 + 0) = 1, so θ = 45°.
+      ways:
+      - style: visual
+        teach: 'A(0, 1), B(1, 3), C(2, 5): the slopes AB and BC are both 2, so the points are on one line.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 6
+          points:
+            A:
+            - 0
+            - 1
+            B:
+            - 1
+            - 3
+            C:
+            - 2
+            - 5
+          segments:
+          - - A
+            - B
+            - slope 2
+          - - B
+            - C
+            - slope 2
+          alt: Points A at 0, 1, B at 1, 3 and C at 2, 5 lie on one straight line because the slope from A to B and from B to C are both 2.
+      - style: step_by_step
+        teach: 'Step 1: Angle between two lines: find m₁ and m₂. Step 2: Put them in tan θ = |(m₂ − m₁)/(1 + m₁m₂)|. Step 3: If 1 + m₁m₂ = 0 the lines are perpendicular. Example: m₁ = 1, m₂ = 0: tan θ = 1, θ = 45°.'
   items:
   - prompt: Find the slope of the line through (1, 2) and (4, 8).
     answer: '2'
@@ -333,6 +398,55 @@ concepts:
     mistakes:
       '2.5': c11m9_slope
       '5': c11m9_slope
+  - prompt: 'Assertion (A): The lines y = 2x + 3 and y = 2x − 5 never meet.
+
+      Reason (R): Lines with equal slopes and different y-intercepts are parallel.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true: the slopes are both 2 and the intercepts differ, so they are parallel and never meet; R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A straight road rises 15 m over a horizontal distance of 300 m. An engineer calls its slope the ''gradient''. What is the gradient?'
+    options:
+    - 1/20
+    - '20'
+    - 1/15
+    answer: 1/20
+    hints:
+    - Slope = rise ÷ run.
+    - 15 ÷ 300.
+    solution: 15/300 = 1/20.
+    mistakes:
+      '20': c11m9_slope
+      1/15: m11_slope_two
+    exam: case
+    difficulty: 2
+  - prompt: Find k if the line through (2, k) and (4, 7) is parallel to a line of slope 3.
+    options:
+    - '1'
+    - '13'
+    - −1
+    answer: '1'
+    hints:
+    - Set (7 − k)/(4 − 2) = 3.
+    - Solve for k.
+    solution: (7 − k)/2 = 3 → 7 − k = 6 → k = 1.
+    mistakes:
+      '13': m11_slope_two
+      −1: c11_slope
+    exam: short
+    difficulty: 2
 - code: cbse11m.lines.equations
   title: Equations of a line and distance
   after:
@@ -462,6 +576,31 @@ concepts:
         - '2'
         answer: −1
         why: 2 = 3(1) + c gives c = −1.
+      ways:
+      - style: visual
+        teach: 'y = 2x + 1: it crosses the y-axis at 1 and climbs 2 for every 1 across.'
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -3
+          - 6
+          points:
+            (0, 1):
+            - 0
+            - 1
+            (2, 5):
+            - 2
+            - 5
+            (−2, −3):
+            - -2
+            - -3
+          segments:
+          - - (−2, −3)
+            - (2, 5)
+          alt: The line y equals 2x plus 1 passes through 0, 1 on the y-axis and climbs to 2, 5, rising 2 for every 1 across.
+      - style: step_by_step
+        teach: 'Step 1: Have a point and a slope? Write y − y₁ = m(x − x₁). Step 2: Expand and tidy into y = mx + c. Example: through (1, 2) with m = 3: y − 2 = 3(x − 1), so y = 3x − 1 and c = −1.'
     - teach: Intercept form x/a + y/b = 1 meets the axes at (a, 0) and (0, b). General form Ax + By + C = 0 has slope −A/B and y-intercept −C/B.
       check:
         prompt: Slope of 4x − 2y + 7 = 0?
@@ -471,6 +610,28 @@ concepts:
         - 1/2
         answer: '2'
         why: −A/B = −4/(−2) = 2.
+      ways:
+      - style: visual
+        teach: x/3 + y/2 = 1 cuts the x-axis at 3 and the y-axis at 2.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -1
+          - 5
+          points:
+            (3, 0):
+            - 3
+            - 0
+            (0, 2):
+            - 0
+            - 2
+          segments:
+          - - (3, 0)
+            - (0, 2)
+          alt: The line joining 3, 0 and 0, 2 is x over 3 plus y over 2 equals 1; its intercepts are 3 and 2.
+      - style: step_by_step
+        teach: 'Step 1: From Ax + By + C = 0, slope = −A/B. Step 2: y-intercept: put x = 0, so −C/B. Step 3: x-intercept: put y = 0, so −C/A. For 4x + 3y − 12 = 0: slope −4/3, y-intercept 4, x-intercept 3.'
     - teach: Distance from (x₁, y₁) to Ax + By + C = 0 is |Ax₁ + By₁ + C|/√(A² + B²). Between parallel lines Ax + By + C₁ = 0 and Ax + By + C₂ = 0 it is |C₁ − C₂|/√(A² + B²).
       picture:
         kind: flow
@@ -487,6 +648,11 @@ concepts:
         - '5'
         answer: '2'
         why: '|−10|/5 = 2.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Write the line as Ax + By + C = 0. Step 2: Put the point into the left side and take the absolute value. Step 3: Divide by √(A² + B²). Example: (1, 2) to 3x + 4y − 1 = 0: |3 + 8 − 1|/5 = 2.'
+      - style: real_world
+        teach: The shortest path from your house to a straight canal is straight across at right angles, not slanting. The point-to-line distance formula measures exactly that perpendicular path.
   items:
   - prompt: Find the y-intercept of the line 3x + 2y − 6 = 0.
     answer: '3'
@@ -656,3 +822,52 @@ concepts:
     mistakes:
       2/3: c11m9_form
       −2: c11m9_form
+  - prompt: 'Assertion (A): The distance of the origin from the line 3x + 4y = 10 is 2.
+
+      Reason (R): The perpendicular distance of (x₁, y₁) from Ax + By + C = 0 is |Ax₁ + By₁ + C|/√(A² + B²).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true: |0 + 0 − 10|/5 = 2, found with R, so R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the equation of the line with intercepts 4 and −3 on the x- and y-axes.
+    options:
+    - 3x − 4y = 12
+    - 4x − 3y = 12
+    - 3x + 4y = 12
+    answer: 3x − 4y = 12
+    hints:
+    - x/4 + y/(−3) = 1.
+    - Multiply through by 12.
+    solution: x/4 − y/3 = 1 → 3x − 4y = 12.
+    mistakes:
+      4x − 3y = 12: m11_intercept_form
+      3x + 4y = 12: c11m9_form
+    exam: short
+    difficulty: 2
+  - prompt: Find the distance between the parallel lines 3x + 4y + 7 = 0 and 3x + 4y − 3 = 0.
+    options:
+    - '2'
+    - 4/5
+    - '10'
+    answer: '2'
+    hints:
+    - Use |C₁ − C₂|/√(A² + B²).
+    - '|7 − (−3)| = 10.'
+    solution: 10/√(9 + 16) = 10/5 = 2.
+    mistakes:
+      4/5: m11_parallel_dist
+      '10': c11m9_dist
+    exam: one_mark
+    difficulty: 2

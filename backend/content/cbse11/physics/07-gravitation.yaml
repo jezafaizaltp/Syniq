@@ -111,6 +111,24 @@ concepts:
         - the same
         answer: 4 times
         why: 'F ∝ m₁m₂: 2 × 2.'
+      ways:
+      - style: visual
+        teach: 'Inverse square: as the distance grows, the force falls much faster.'
+        picture:
+          kind: bars
+          unit: × F
+          bars:
+          - label: r
+            value: 1
+          - label: 4r
+            value: 0.0625
+          - label: 5r
+            value: 0.04
+          - label: 10r
+            value: 0.01
+          alt: At distance r the force is F; at 4r it is one sixteenth of F, at 5r one twenty-fifth, and at 10r one hundredth.
+      - style: step_by_step
+        teach: 'Step 1: Write F = Gm₁m₂/r². Step 2: Spot what changes: a mass or the distance. Step 3: A mass changes by k → F changes by k. Step 4: Distance changes by k → F changes by 1/k². Double one mass and double r: F × 2 ÷ 4 = F/2.'
     - teach: 'Kepler: planets move in ellipses with the Sun at one focus; a line to the Sun sweeps equal areas in equal times; T² ∝ a³.'
       check:
         prompt: 'A planet moves fastest when it is:'
@@ -120,6 +138,27 @@ concepts:
         - it moves at the same speed throughout
         answer: closest to the Sun
         why: 'Equal areas: a shorter radius needs a longer arc.'
+      ways:
+      - style: visual
+        teach: Kepler's three laws of planetary motion, side by side in one look.
+        picture:
+          kind: compare
+          columns:
+          - title: 1. Orbits
+            points:
+            - ellipses
+            - Sun at one focus
+          - title: 2. Areas
+            points:
+            - equal areas in equal times
+            - faster when nearer the Sun
+          - title: 3. Periods
+            points:
+            - T² ∝ a³
+            - far planets take much longer
+          alt: Planets move in ellipses with the Sun at a focus, sweep equal areas in equal times so they move faster near the Sun, and their period squared is proportional to the semi-major axis cubed.
+      - style: real_world
+        teach: Earth is closest to the Sun in early January and farthest in early July, so it moves a little faster in January. Saturn is about 9.5 times farther out than Earth; Kepler's third law gives a year of about 29 Earth years, which is what we see.
     - teach: At the surface g = GM/R² ≈ 9.8 m/s². g falls with height (≈ g(1 − 2h/R)) and with depth (g(1 − d/R)), reaching zero at the centre. Mass never changes; weight mg does.
       picture:
         kind: compare
@@ -143,6 +182,11 @@ concepts:
         - 2g
         answer: g/2
         why: g(1 − ½).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: At the surface g = GM/R². Step 2: Going up by small h: g'' ≈ g(1 − 2h/R). Step 3: Going down by d: g'' = g(1 − d/R). Step 4: At the centre d = R so g'' = 0. Mass stays the same throughout; weight mg'' changes.'
+      - style: real_world
+        teach: A 60 kg astronaut is still 60 kg on the Moon, but weighs only about a sixth as much, because the Moon's g is about 1.6 m/s². A scale shows weight; a beam balance compares masses and reads the same on both.
   items:
   - prompt: 'If the distance between two masses is doubled, the gravitational force becomes:'
     options:
@@ -320,6 +364,55 @@ concepts:
     mistakes:
       1/100: c11p07_g
       1/50: c11p07_g
+  - prompt: 'Assertion (A): The acceleration due to gravity is zero at the centre of the Earth.
+
+      Reason (R): At the centre, the pull of the Earth''s mass is equal in all directions and cancels.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. At the centre, mass all around pulls equally every way, so the net pull is zero: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A planet has the same density as Earth but twice its radius. What is g on its surface compared with Earth''s?'
+    options:
+    - 2g
+    - g/2
+    - 4g
+    answer: 2g
+    hints:
+    - g = GM/R² and M = ρ × (4/3)πR³.
+    - So g ∝ ρR.
+    solution: g = (4/3)πGρR, so with the same ρ and double R, g doubles.
+    mistakes:
+      g/2: p11_inverse_square
+      4g: c11p07_g
+    exam: case
+    difficulty: 2
+  - prompt: At what height above the Earth's surface does g become 1/4 of its surface value? (R = Earth's radius)
+    options:
+    - h = R
+    - h = 2R
+    - h = R/4
+    answer: h = R
+    hints:
+    - g ∝ 1/r² from the centre.
+    - 1/4 means r doubles.
+    solution: r = 2R from the centre, so the height above the surface is R.
+    mistakes:
+      h = 2R: p11_g_centre
+      h = R/4: c11p07_inv
+    exam: short
+    difficulty: 2
 - code: cbse11p.grav.orbits
   title: Potential energy, escape speed and satellites
   after:
@@ -422,6 +515,25 @@ concepts:
         - g is negative
         answer: it is taken as zero at infinity and gravity pulls inward
         why: You must add energy to pull the body away to infinity.
+      ways:
+      - style: visual
+        teach: 'U = −GMm/r: zero far away, more negative as you come closer.'
+        picture:
+          kind: number_line
+          from: -4
+          to: 0
+          points:
+          - at: -4
+            label: 'at R: −GMm/R'
+          - at: -2
+            label: 'at 2R: half as deep'
+          - at: -1
+            label: at 4R
+          - at: 0
+            label: 'infinity: 0'
+          alt: Potential energy is most negative at the surface, half as deep at twice the radius, and rises towards zero far away at infinity.
+      - style: real_world
+        teach: Think of the Earth's gravity as a deep well. Zero is ground level outside the well, at infinity. Anything near the Earth is down inside, at a negative level, and must be given energy to climb out.
     - teach: Escape speed vₑ = √(2GM/R) = √(2gR) ≈ 11.2 km/s for Earth. It does not depend on the launched object's mass.
       check:
         prompt: 'A 1 kg and a 100 kg probe launched from Earth. Escape speed:'
@@ -431,6 +543,19 @@ concepts:
         - is greater for 1 kg
         answer: is the same for both
         why: m cancels out of the energy balance.
+      ways:
+      - style: visual
+        teach: Escape speed comes from making kinetic energy fill the well exactly.
+        picture:
+          kind: flow
+          steps:
+          - 'Start: ½mv² − GMm/R'
+          - 'Just escapes: 0 at infinity'
+          - ½mv² = GMm/R
+          - vₑ = √(2GM/R) ≈ 11.2 km/s
+          alt: 'Set the starting kinetic energy plus potential energy equal to zero at infinity: half m v squared equals G M m over R, giving the escape speed root 2GM over R, about 11.2 kilometres per second.'
+      - style: step_by_step
+        teach: 'Step 1: Total energy at launch = ½mv² − GMm/R. Step 2: To just escape, it must reach 0. Step 3: Solve: v = √(2GM/R) = √(2gR). Step 4: m cancels, so a pebble and a rocket need the same escape speed.'
     - teach: A satellite at radius r moves at v = √(GM/r) with period T = 2π√(r³/GM). Near the surface v₀ = √(gR) ≈ 7.9 km/s, and vₑ = √2 v₀. Geostationary satellites orbit once in 24 h above the equator.
       picture:
         kind: compare
@@ -452,6 +577,11 @@ concepts:
         - the same period
         answer: lower speed and longer period
         why: v ∝ 1/√r, T ∝ r^(3/2).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Gravity gives the centripetal force: GMm/r² = mv²/r. Step 2: So v = √(GM/r). Step 3: Period T = 2πr/v = 2π√(r³/GM). Step 4: Near the surface v₀ = √(gR) ≈ 7.9 km/s, and vₑ = √2 × v₀.'
+      - style: real_world
+        teach: INSAT and GSAT weather and TV satellites sit about 36,000 km up over the equator, going round once in 24 h. They keep pace with the Earth, so a dish on a roof can point at one spot and never move.
   items:
   - prompt: What is the approximate escape speed from Earth?
     options:
@@ -638,3 +768,52 @@ concepts:
     mistakes:
       2K: c11p07_orbit
       K/2: c11p07_orbit
+  - prompt: 'Assertion (A): Astronauts in an orbiting space station feel weightless.
+
+      Reason (R): There is no gravity at the height of the space station.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is true, but R is false
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is true: they and the station fall freely together, so nothing presses on them. R is false: gravity there is still about 90% of its surface value.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_r
+      Both A and R are true, but R does not explain A: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: If Earth's radius shrank to half with the same mass, what would the escape speed become?
+    options:
+    - √2 times
+    - 2 times
+    - half
+    answer: √2 times
+    hints:
+    - vₑ = √(2GM/R).
+    - 'R halves: what happens to √(1/R)?'
+    solution: vₑ ∝ 1/√R, so halving R multiplies vₑ by √2.
+    mistakes:
+      2 times: p11_escape_sq
+      half: c11p_escape
+    exam: short
+    difficulty: 2
+  - prompt: 'Situation: Why do geostationary satellites have to be above the equator?'
+    options:
+    - Their orbit must turn with the Earth about its axis
+    - The air is thinnest above the equator
+    - Gravity is strongest above the equator
+    answer: Their orbit must turn with the Earth about its axis
+    hints:
+    - A geostationary satellite stays over one spot.
+    - Which orbit turns about the same axis as the Earth?
+    solution: To stay over one point it must circle the Earth's axis in step with the surface, which only an equatorial orbit does.
+    mistakes:
+      The air is thinnest above the equator: p11_geostationary
+      Gravity is strongest above the equator: c11p07_orbit
+    exam: competency
+    difficulty: 2

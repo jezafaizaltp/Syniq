@@ -176,6 +176,11 @@ concepts:
         - '15'
         answer: '30'
         why: π/6 × 180/π = 30.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Remember π rad = 180°. Step 2: Degrees to radians: multiply by π/180. Step 3: Radians to degrees: multiply by 180/π. Example: 135° × π/180 = 3π/4. Step 4: For arc length, use l = rθ with θ in radians.'
+      - style: real_world
+        teach: 'Walk along the edge of a round pond for a distance equal to its radius: the angle you turned through at the centre is 1 radian, about 57°. A wheel of radius 30 cm turning 2 radians rolls 60 cm.'
     - teach: On the unit circle, a point at angle x is (cos x, sin x). So sin² x + cos² x = 1 for every x, and dividing by cos² x gives 1 + tan² x = sec² x.
       check:
         prompt: If cos x = 0.6, what is sin² x?
@@ -185,6 +190,46 @@ concepts:
         - '0.4'
         answer: '0.64'
         why: sin² x = 1 − 0.36 = 0.64.
+      ways:
+      - style: visual
+        teach: A point at angle x on the unit circle has coordinates (cos x, sin x).
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -2
+          - 2
+          points:
+            O:
+            - 0
+            - 0
+            P:
+            - 0.8
+            - 0.6
+            _f:
+            - 0.8
+            - 0
+          segments:
+          - - O
+            - P
+            - '1'
+          - - O
+            - _f
+            - cos x
+          - - _f
+            - P
+            - sin x
+          circles:
+          - centre: O
+            radius: 1
+          angles:
+          - at: O
+            from: _f
+            to: P
+            label: x
+          alt: A unit circle with radius OP equal to 1 at angle x; the horizontal leg is cos x and the vertical leg is sin x, so sin squared plus cos squared is 1.
+      - style: step_by_step
+        teach: 'Step 1: The right triangle under OP has hypotenuse 1. Step 2: Pythagoras gives cos² x + sin² x = 1. Step 3: Divide every term by cos² x: 1 + tan² x = sec² x. Step 4: Divide by sin² x instead: cot² x + 1 = cosec² x.'
     - teach: 'Signs by quadrant (ASTC): All positive in Q1, Sine in Q2, Tangent in Q3, Cosine in Q4. sin and cos repeat every 2π; tan repeats every π. sin(−x) = −sin x, cos(−x) = cos x.'
       picture:
         kind: compare
@@ -210,6 +255,11 @@ concepts:
         - tan x
         answer: sin x
         why: 'ASTC: sine is positive in Q2.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the quadrant of the angle. Step 2: Use ASTC: All, Sine, Tangent, Cosine are positive in Q1, Q2, Q3, Q4. Step 3: Give the value its sign. Example: 210° is in Q3, so sin 210° is negative: −1/2.'
+      - style: real_world
+        teach: 'A Ferris wheel seat goes up on one side and down the other. Its height above the centre follows sin: positive on the top half, negative on the bottom half. After one full turn (2π) everything repeats.'
   items:
   - prompt: Convert 60° into radians, as a multiple of π. Write the coefficient of π.
     answer: 1/3
@@ -385,6 +435,55 @@ concepts:
     mistakes:
       2π: c11m3_quad
       π/2: c11m3_quad
+  - prompt: 'Assertion (A): sin(−x) = −sin x for every real x.
+
+      Reason (R): The point at angle −x on the unit circle is the mirror image of the point at x in the x-axis.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Reflecting in the x-axis keeps cos and flips the sign of sin, which is why sin(−x) = −sin x: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: The minute hand of a clock is 7 cm long. How far does its tip move in 20 minutes? (Take π = 22/7.)'
+    options:
+    - 44/3 cm
+    - 22/3 cm
+    - 140 cm
+    answer: 44/3 cm
+    hints:
+    - 20 minutes is what part of a full turn?
+    - Convert that angle to radians, then use l = rθ.
+    solution: 20 minutes = 1/3 turn = 2π/3 rad. l = 7 × 2π/3 = 7 × 44/21 = 44/3 cm.
+    mistakes:
+      22/3 cm: m11_arc
+      140 cm: c11m3_rad
+    exam: competency
+    difficulty: 2
+  - prompt: If sin x = 3/5 and x lies in the second quadrant, find cos x.
+    options:
+    - −4/5
+    - 4/5
+    - −3/4
+    answer: −4/5
+    hints:
+    - Use sin² x + cos² x = 1.
+    - Which sign does cos have in quadrant II?
+    solution: cos² x = 1 − 9/25 = 16/25. In Q2 cos is negative, so cos x = −4/5.
+    mistakes:
+      4/5: c11m3_quad
+      −3/4: m11_pythag_trig
+    exam: short
+    difficulty: 2
 - code: cbse11m.trig.identities
   title: Compound angles and trigonometric identities
   after:
@@ -465,6 +564,25 @@ concepts:
         - sin A cos B + cos A sin B
         answer: cos A cos B − sin A sin B
         why: For cos of a sum the sign in the middle is minus.
+      ways:
+      - style: visual
+        teach: Splitting 15° into 45° − 30° to find both its sine and its cosine.
+        picture:
+          kind: compare
+          columns:
+          - title: sin 15°
+            points:
+            - = sin(45° − 30°)
+            - = sin45 cos30 − cos45 sin30
+            - = (√6 − √2)/4
+          - title: cos 15°
+            points:
+            - = cos(45° − 30°)
+            - = cos45 cos30 + sin45 sin30
+            - = (√6 + √2)/4
+          alt: sin 15 degrees is sin of 45 minus 30, giving root 6 minus root 2 over 4; cos 15 degrees is cos of 45 minus 30, giving root 6 plus root 2 over 4.
+      - style: step_by_step
+        teach: 'Step 1: Write the angle as a sum or difference of 30°, 45°, 60°, 90°. Step 2: Pick the right formula: sin keeps the sign, cos flips it. Step 3: Put in the known values. Step 4: Simplify the surds.'
     - teach: 'Double angles (put B = A): sin 2A = 2 sin A cos A; cos 2A = cos² A − sin² A = 1 − 2 sin² A = 2 cos² A − 1; tan 2A = 2 tan A/(1 − tan² A).'
       check:
         prompt: If sin A = 1/2 (A acute), find cos 2A.
@@ -474,6 +592,24 @@ concepts:
         - −1/2
         answer: 1/2
         why: cos 2A = 1 − 2 × 1/4 = 1/2.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Know only cos A? Use cos 2A = 2cos² A − 1. Step 2: Know only sin A? Use cos 2A = 1 − 2sin² A. Step 3: Know both? sin 2A = 2 sin A cos A. Example: cos A = 1/4 gives cos 2A = 2/16 − 1 = −7/8.'
+      - style: visual
+        teach: 'Three forms of cos 2A: choose the one that uses what you know.'
+        picture:
+          kind: compare
+          columns:
+          - title: Know sin and cos
+            points:
+            - cos² A − sin² A
+          - title: Know only sin
+            points:
+            - 1 − 2 sin² A
+          - title: Know only cos
+            points:
+            - 2 cos² A − 1
+          alt: cos 2A equals cos squared minus sin squared, or 1 minus 2 sin squared, or 2 cos squared minus 1; use the form that needs only what you know.
     - teach: 'Allied angles: sin(π − x) = sin x, cos(π − x) = −cos x, sin(π/2 − x) = cos x, cos(π + x) = −cos x. Decide the sign from the quadrant of the original angle.'
       picture:
         kind: flow
@@ -491,6 +627,11 @@ concepts:
         - sin x
         answer: −cos x
         why: π − x lies in Q2, where cosine is negative.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is the reference π or 2π? The function stays the same. Is it π/2 or 3π/2? sin ↔ cos swap. Step 2: Treat x as small and find the quadrant of the original angle. Step 3: Attach that quadrant''s sign. Example: cos(π + x) is in Q3, cos negative: −cos x.'
+      - style: real_world
+        teach: 'Facing north and turning by 180° + a little bit points you almost south: everything is reversed. That is why cos(π + x) = −cos x and sin(π + x) = −sin x: half a turn flips both coordinates.'
   items:
   - prompt: Find sin 75°.
     options:
@@ -681,3 +822,52 @@ concepts:
     mistakes:
       '1': c11m3_ident
       25/27: c11m3_ident
+  - prompt: 'Assertion (A): cos 2A = 1 − 2 sin² A.
+
+      Reason (R): cos 2A = cos² A − sin² A and cos² A = 1 − sin² A.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Putting cos² A = 1 − sin² A into cos² A − sin² A gives 1 − 2 sin² A, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Find the value of cos 105°.
+    options:
+    - (√2 − √6)/4
+    - (√6 − √2)/4
+    - (√6 + √2)/4
+    answer: (√2 − √6)/4
+    hints:
+    - 105° = 60° + 45°.
+    - cos(A + B) = cos A cos B − sin A sin B.
+    solution: cos 60 cos 45 − sin 60 sin 45 = (1/2)(1/√2) − (√3/2)(1/√2) = (1 − √3)/(2√2) = (√2 − √6)/4.
+    mistakes:
+      (√6 − √2)/4: c11m3_allied
+      (√6 + √2)/4: m11_compound_cos
+    exam: short
+    difficulty: 2
+  - prompt: If tan A = 1/2, find tan 2A.
+    options:
+    - 4/3
+    - '1'
+    - 1/4
+    answer: 4/3
+    hints:
+    - tan 2A = 2 tan A/(1 − tan² A).
+    - 'Work the bottom: 1 − 1/4.'
+    solution: 2(1/2)/(1 − 1/4) = 1/(3/4) = 4/3.
+    mistakes:
+      '1': m11_double_angle
+      1/4: m11_tan_sum
+    exam: one_mark
+    difficulty: 2

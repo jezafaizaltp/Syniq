@@ -17,6 +17,7 @@ tips:
   c11p09_p: 'Pressure in a liquid grows with depth: ρgh. Add atmospheric pressure only if the question asks for total pressure.'
   c11p09_flow: 'Narrow part of a pipe: faster flow (A₁v₁ = A₂v₂). Faster flow on a level streamline: lower pressure.'
   c11p09_st: A drop has one surface (2S/r); a soap bubble has two (4S/r).
+  pqc11p9_surfaces: "Count the surfaces of the film: a drop has one, but a soap film has an inside and an outside. Each surface adds its own 2S/r."
 concepts:
 - code: cbse11p.fluids.pressure
   title: Pressure and Pascal's law
@@ -131,6 +132,24 @@ concepts:
         - 200 Pa
         answer: 20 000 Pa
         why: 1000 × 10 × 2.
+      ways:
+      - style: visual
+        teach: Gauge pressure in water grows steadily with depth (ρ = 1000 kg/m³, g = 10).
+        picture:
+          kind: bars
+          unit: kPa
+          bars:
+          - label: 2 m
+            value: 20
+          - label: 5 m
+            value: 50
+          - label: 15 m
+            value: 150
+          - label: 20 m
+            value: 200
+          alt: 'Gauge pressure in water is 20 kilopascals at 2 metres, 50 at 5 metres, 150 at 15 metres and 200 at 20 metres: it grows in step with depth.'
+      - style: real_world
+        teach: A dam wall is built much thicker at the bottom than at the top, because water pressure grows with depth. A swimmer diving to the bottom of a deep pool feels the pressure in their ears rise the same way.
     - teach: 'Pascal''s law: pressure applied to an enclosed fluid reaches every part undiminished. So in a hydraulic lift F₂ = F₁ × A₂/A₁: a small push on a small piston lifts a big load.'
       check:
         prompt: 'A₂ is 20 times A₁. A 50 N push lifts:'
@@ -140,6 +159,19 @@ concepts:
         - 70 N
         answer: 1000 N
         why: 50 × 20.
+      ways:
+      - style: visual
+        teach: 'A hydraulic lift: the same pressure on a 40 times bigger piston gives a 40 times bigger force.'
+        picture:
+          kind: flow
+          steps:
+          - Push 100 N on A₁ = 0.01 m²
+          - Pressure = 10,000 Pa everywhere
+          - 'On A₂ = 0.4 m²: F = 10,000 × 0.4'
+          - Lifts 4,000 N
+          alt: A 100 newton push on a small piston makes a pressure of 10,000 pascals that reaches the large piston of area 0.4 square metres, giving a lifting force of 4,000 newtons.
+      - style: step_by_step
+        teach: 'Step 1: Pressure on the small piston P = F₁/A₁. Step 2: Pascal: the same P reaches the big piston. Step 3: F₂ = P × A₂ = F₁ × A₂/A₁. Step 4: The small piston moves further, so no energy is gained.'
     - teach: 'Archimedes: a body in a fluid feels an upthrust equal to the weight of fluid it pushes aside. It floats if it can displace its own weight before it is fully under.'
       picture:
         kind: compare
@@ -163,6 +195,11 @@ concepts:
         - 200 N
         answer: 20 N
         why: 1000 × 0.002 × 10.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Upthrust = weight of fluid displaced = ρ_fluid × V_displaced × g. Step 2: Compare with the body''s weight. Step 3: Upthrust can match the weight before fully under → floats. Can''t → sinks. Step 4: Floating fraction under water = ρ_body/ρ_fluid.'
+      - style: real_world
+        teach: 'A steel ship floats though a steel nail sinks: the hull''s shape pushes aside a huge volume of water, whose weight equals the ship''s. Ships ride a little lower in fresh river water than in the denser sea.'
   items:
   - prompt: Find the gauge pressure (in Pa) at 10 m depth in water (ρ = 1000 kg/m³, g = 10 m/s²).
     answer: '100000'
@@ -336,6 +373,55 @@ concepts:
     mistakes:
       2/5: c11p09_p
       5/3: c11p09_p
+  - prompt: 'Assertion (A): The pressure at the bottom of a tall thin jar and a short wide basin can be different even if they hold the same volume of water.
+
+      Reason (R): Liquid pressure depends on depth, not on the shape of the vessel or the volume of liquid.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. The tall jar has a greater depth of water, so more pressure at the bottom: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A car service station lift has a small piston of area 0.02 m² and a large one of area 1 m². What force on the small piston lifts a 15,000 N car?'
+    options:
+    - 300 N
+    - 750,000 N
+    - 15,000 N
+    answer: 300 N
+    hints:
+    - F₁ = F₂ × A₁/A₂.
+    - 15,000 × 0.02.
+    solution: F₁ = 15,000 × 0.02/1 = 300 N.
+    mistakes:
+      750,000 N: p11_hydraulic_lift
+      15,000 N: c11p09_p
+    exam: case
+    difficulty: 2
+  - prompt: A block of wood of density 600 kg/m³ floats in water (1000 kg/m³). What fraction of its volume is under water?
+    options:
+    - 3/5
+    - 2/5
+    - 5/3
+    answer: 3/5
+    hints:
+    - 'Floating: weight = upthrust.'
+    - Fraction under = ρ_wood/ρ_water.
+    solution: 600/1000 = 3/5 of the block is under water.
+    mistakes:
+      2/5: p11_archimedes
+      5/3: p11_archimedes
+    exam: short
+    difficulty: 2
 - code: cbse11p.fluids.flow
   title: Fluid flow, viscosity and surface tension
   after:
@@ -449,6 +535,23 @@ concepts:
         - stays the same
         answer: doubles
         why: Av is constant.
+      ways:
+      - style: visual
+        teach: 'A pipe narrowing from 8 cm² to 2 cm²: a quarter of the area, four times the speed.'
+        picture:
+          kind: compare
+          columns:
+          - title: Wide part
+            points:
+            - A₁ = 8 cm²
+            - v₁ = 1.5 m/s
+          - title: Narrow part
+            points:
+            - A₂ = 2 cm²
+            - v₂ = 6 m/s
+          alt: Water moving at 1.5 metres per second in an 8 square centimetre section speeds up to 6 metres per second in a 2 square centimetre section, since A times v stays the same.
+      - style: real_world
+        teach: Put your thumb over the end of a garden hose and the water shoots out much further. The same volume must pass every second through a smaller opening, so it has to move faster.
     - teach: 'Bernoulli: P + ½ρv² + ρgh is constant along a streamline. Where flow is faster, pressure is lower. This explains aeroplane lift and atomisers. Water from a hole h below the surface leaves at v = √(2gh).'
       check:
         prompt: 'Air flows faster over the top of a wing. The pressure on top is:'
@@ -458,6 +561,18 @@ concepts:
         - the same
         answer: lower
         why: 'Faster flow, lower pressure: the wing is pushed up.'
+      ways:
+      - style: visual
+        teach: Along a horizontal streamline, the faster the flow, the lower the pressure.
+        picture:
+          kind: flow
+          steps:
+          - 'Wide pipe: slow flow, high pressure'
+          - 'Narrow throat: fast flow, low pressure'
+          - 'Wide again: slow, pressure rises'
+          alt: In a pipe with a narrow throat, the fluid flows slowly at high pressure in the wide parts and fast at low pressure in the throat.
+      - style: real_world
+        teach: 'In a strong wind, a tin roof can lift off: the fast air above has lower pressure than the still air inside the house, which pushes up. Blow over a strip of paper held below your lips and it rises for the same reason.'
     - teach: 'Viscosity is fluid friction (η, Pa s); for liquids it falls when heated. A sphere falling through fluid reaches terminal velocity when drag 6πηrv balances weight minus upthrust. Surface tension S (N/m): extra pressure 2S/r in a drop, 4S/r in a soap bubble.'
       picture:
         kind: compare
@@ -479,6 +594,11 @@ concepts:
         - soap has double S
         answer: it has two surfaces
         why: An inner and an outer film.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: A sphere falling through a liquid feels weight down, upthrust and drag 6πηrv up. Step 2: Drag grows with speed. Step 3: When up = down, acceleration stops: terminal velocity. Step 4: Surface tension: extra pressure 2S/r in a drop, 4S/r in a bubble (two surfaces).'
+      - style: real_world
+        teach: 'Raindrops fall from clouds kilometres up but reach only a few metres per second, not hundreds: air drag rises with speed until it balances their weight. Honey poured from a warm jar flows faster than from a cold one: heating lowers viscosity.'
   items:
   - prompt: Water flows at 2 m/s in a pipe of area 6 cm². What is its speed (in m/s) where the area is 3 cm²?
     answer: '4'
@@ -656,3 +776,52 @@ concepts:
     mistakes:
       '1.5': c11p09_st
       '12': c11p09_st
+  - prompt: 'Assertion (A): Water flows faster in the narrow parts of a pipe.
+
+      Reason (R): For steady flow, the product of area and speed is the same at every section.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Since Av is constant, a smaller A needs a larger v: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A tank has a small hole 1.8 m below the water surface. Taking g = 10 m/s², with what speed does water come out?'
+    options:
+    - 6 m/s
+    - 36 m/s
+    - 18 m/s
+    answer: 6 m/s
+    hints:
+    - 'Torricelli: v = √(2gh).'
+    - √(2 × 10 × 1.8).
+    solution: v = √36 = 6 m/s.
+    mistakes:
+      36 m/s: p11_torricelli
+      18 m/s: c11p09_flow
+    exam: competency
+    difficulty: 2
+  - prompt: 'The excess pressure inside a soap bubble of radius r and surface tension S is:'
+    options:
+    - 4S/r
+    - 2S/r
+    - S/r
+    answer: 4S/r
+    hints:
+    - A soap bubble has two surfaces.
+    - A drop has one surface and 2S/r.
+    solution: Two surfaces double a drop's 2S/r, giving 4S/r.
+    mistakes:
+      2S/r: pqc11p9_surfaces
+      S/r: pqc11p9_surfaces
+    exam: one_mark
+    difficulty: 2

@@ -106,6 +106,27 @@ concepts:
         - 2 Hz
         answer: 0.25 Hz
         why: ν = 1/T.
+      ways:
+      - style: visual
+        teach: 'Periodic, oscillatory and simple harmonic: each is a narrower kind of the one before.'
+        picture:
+          kind: compare
+          columns:
+          - title: Periodic
+            points:
+            - repeats every T
+            - Earth round the Sun
+          - title: Oscillatory
+            points:
+            - to and fro about a mean
+            - a swing
+          - title: Simple harmonic
+            points:
+            - F = −kx exactly
+            - small pendulum swings
+          alt: Periodic motion just repeats, like the Earth's orbit; oscillatory motion goes to and fro about a mean position, like a swing; simple harmonic motion is oscillation with a restoring force exactly proportional to displacement.
+      - style: step_by_step
+        teach: 'Step 1: Count oscillations and time. Step 2: Period T = time ÷ number of oscillations. Step 3: Frequency ν = 1/T, in Hz. Example: 24 swings in 12 s: T = 0.5 s, ν = 2 Hz. Step 4: ω = 2πν.'
     - teach: In simple harmonic motion the restoring force is F = −kx, so a = −ω²x. Position x = A cos(ωt + φ), with amplitude A and ω = 2π/T. SHM is the shadow of uniform circular motion on a diameter.
       check:
         prompt: 'In SHM, the acceleration always points:'
@@ -115,6 +136,43 @@ concepts:
         - along the velocity
         answer: towards the mean position
         why: 'a = −ω²x: opposite to displacement.'
+      ways:
+      - style: visual
+        teach: SHM is the shadow of a point going round a circle at steady speed.
+        picture:
+          kind: geometry
+          axes: true
+          range:
+          - -3
+          - 3
+          points:
+            O:
+            - 0
+            - 0
+            P:
+            - 1.2
+            - 1.6
+            x:
+            - 1.2
+            - 0
+          segments:
+          - - O
+            - P
+            - A
+          - - P
+            - x
+            - shadow drop
+          circles:
+          - centre: O
+            radius: 2
+          angles:
+          - at: O
+            from: x
+            to: P
+            label: ωt
+          alt: A point P moves round a circle of radius A; its shadow x on the horizontal diameter moves to and fro as x equals A cos omega t, which is simple harmonic motion.
+      - style: real_world
+        teach: 'Shine a torch sideways at a ball stuck on a turning potter''s wheel: its shadow on the wall slides to and fro, fastest in the middle and pausing at each end. That shadow is doing simple harmonic motion.'
     - teach: 'Speed v = ω√(A² − x²): largest (ωA) at the mean position, zero at the extremes. Acceleration is largest (ω²A) at the extremes and zero at the mean position.'
       picture:
         kind: compare
@@ -136,6 +194,11 @@ concepts:
         - 0.005 m/s
         answer: 0.5 m/s
         why: ωA = 10 × 0.05.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Maximum speed v_max = ωA, at the mean position. Step 2: At any x, v = ω√(A² − x²). Step 3: Maximum acceleration a_max = ω²A, at the extremes. Example: A = 0.5 m, ω = 4 rad/s: v_max = 2 m/s, a_max = 8 m/s².'
+      - style: real_world
+        teach: On a playground swing you feel almost weightless and pause at the highest points, where speed is zero but acceleration is greatest. You whoosh fastest through the bottom, where acceleration is zero.
   items:
   - prompt: A body makes 10 oscillations in 5 s. Find its frequency (in Hz).
     answer: '2'
@@ -308,6 +371,55 @@ concepts:
     mistakes:
       '4': c11p13_shm
       1/2: c11p13_shm
+  - prompt: 'Assertion (A): In SHM, the acceleration is zero at the mean position.
+
+      Reason (R): In SHM, acceleration is proportional to displacement from the mean position.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. At the mean position x = 0, so a = −ω²x = 0: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A piston in an engine moves in SHM with amplitude 0.05 m at 50 oscillations per second. Find its maximum speed (take π = 3.14).'
+    options:
+    - 15.7 m/s
+    - 2.5 m/s
+    - 4930 m/s
+    answer: 15.7 m/s
+    hints:
+    - ω = 2πν = 100π rad/s.
+    - v_max = ωA.
+    solution: v_max = 100π × 0.05 = 5π ≈ 15.7 m/s.
+    mistakes:
+      2.5 m/s: p11_vmax
+      4930 m/s: p11_amax
+    exam: case
+    difficulty: 2
+  - prompt: The displacement of a particle is x = 3 sin(2πt) m. What is its amplitude?
+    options:
+    - 3 m
+    - 2π m
+    - 6 m
+    answer: 3 m
+    hints:
+    - Compare with x = A sin(ωt).
+    - Which number multiplies the sine?
+    solution: A = 3 m; ω = 2π rad/s.
+    mistakes:
+      2π m: c11p_shm
+      6 m: c11p13_shm
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.osc.systems
   title: Springs, pendulums and energy
   after:
@@ -400,6 +512,25 @@ concepts:
         - is 4 times
         answer: halves
         why: T ∝ 1/√k.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: T = 2π√(m/k). Step 2: Mass × 9 → T × 3; k × 4 → T ÷ 2. Step 3: ω = √(k/m). Example: m = 0.5 kg, k = 50 N/m: ω = √100 = 10 rad/s, T = 2π/10 ≈ 0.63 s.'
+      - style: visual
+        teach: How a spring's period responds when you change the mass on it.
+        picture:
+          kind: compare
+          columns:
+          - title: Mass multiplied by
+            points:
+            - '4'
+            - '9'
+            - 1/4
+          - title: Period multiplied by
+            points:
+            - '2'
+            - '3'
+            - 1/2
+          alt: Multiplying the mass on a spring by 4 doubles the period, by 9 triples it, and by one quarter halves it, because period goes as the square root of mass.
     - teach: A simple pendulum (small swings) has T = 2π√(L/g). It does not depend on the bob's mass or (small) amplitude, which is why pendulum clocks keep time.
       check:
         prompt: 'A heavier bob on the same string. Period:'
@@ -409,6 +540,23 @@ concepts:
         - decreases
         answer: stays the same
         why: Mass does not appear in T = 2π√(L/g).
+      ways:
+      - style: visual
+        teach: The period of a pendulum depends on its length and on g, but not on the bob's mass.
+        picture:
+          kind: compare
+          columns:
+          - title: Changes T
+            points:
+            - 'length L: T ∝ √L'
+            - 'gravity g: T ∝ 1/√g'
+          - title: Does not change T
+            points:
+            - mass of the bob
+            - small amplitude
+          alt: A pendulum's period grows with the square root of its length and falls with the square root of g; the bob's mass and a small amplitude make no difference.
+      - style: real_world
+        teach: 'Old grandfather clocks have a screw under the bob. If the clock runs slow, you raise the bob a little: a shorter pendulum swings faster. Changing the bob for a heavier one would not help at all.'
     - teach: 'Energy in SHM: PE = ½kx², KE = ½k(A² − x²), total ½kA² stays constant. Friction damps the amplitude. A driving force at the natural frequency causes resonance: a very large amplitude.'
       picture:
         kind: compare
@@ -430,6 +578,11 @@ concepts:
         - half and half
         answer: all kinetic
         why: x = 0 makes PE zero.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Total energy E = ½kA², fixed. Step 2: PE at x = ½kx². Step 3: KE = E − PE = ½k(A² − x²). Step 4: At x = A/3, PE is a ninth of E and KE eight ninths. Damping slowly drains E; resonance pumps it up.'
+      - style: real_world
+        teach: 'Pushing a child on a swing works best if you push once each swing, in time with it: the amplitude grows and grows. That is resonance. Pushing at random times does little, and friction slowly brings the swing to rest: damping.'
   items:
   - prompt: A pendulum's length is made four times larger. By what factor does its period increase?
     answer: '2'
@@ -606,3 +759,52 @@ concepts:
     mistakes:
       A/2: c11p13_energy
       A/4: c11p13_energy
+  - prompt: 'Assertion (A): A pendulum clock taken to the top of a high mountain runs slow.
+
+      Reason (R): g is smaller at height, so the period T = 2π√(L/g) becomes longer.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. Lower g lengthens each swing, so the clock ticks fewer times per hour: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A 2 kg mass on a spring oscillates with period π/5 s. Find the spring constant.'
+    options:
+    - 200 N/m
+    - 20 N/m
+    - 100 N/m
+    answer: 200 N/m
+    hints:
+    - T = 2π√(m/k), so k = 4π²m/T².
+    - T² = π²/25.
+    solution: k = 4π² × 2/(π²/25) = 8 × 25 = 200 N/m.
+    mistakes:
+      20 N/m: p11_spring_period
+      100 N/m: c11p13_period
+    exam: competency
+    difficulty: 2
+  - prompt: In SHM with amplitude A, at what displacement is the kinetic energy three times the potential energy?
+    options:
+    - A/2
+    - A/3
+    - A/√3
+    answer: A/2
+    hints:
+    - KE = 3 PE means PE is ¼ of the total.
+    - ½kx² = ¼ × ½kA².
+    solution: x² = A²/4, so x = A/2.
+    mistakes:
+      A/3: c11p13_energy
+      A/√3: c11p13_energy
+    exam: short
+    difficulty: 2

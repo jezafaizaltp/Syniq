@@ -129,6 +129,31 @@ concepts:
         - '5'
         answer: '7'
         why: 'Substitute: 3(2) + 1 = 7.'
+      ways:
+      - style: visual
+        teach: 'f(x) = x + 1 for x ≠ 1, with a hole at x = 1: the values still close in on 2.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 3
+          step: 0.5
+          points:
+          - at: 0.5
+            label: f(0.5) = 1.5
+          - at: 1
+            label: limit 2 (hole)
+          - at: 1.5
+            label: f(1.5) = 2.5
+          jumps:
+          - from: 0.5
+            to: 1
+            label: from the left
+          - from: 1.5
+            to: 1
+            label: from the right
+          alt: Coming towards x equals 1 from both sides, f of x gets closer and closer to 2, even though f is not defined at 1 itself.
+      - style: real_world
+        teach: 'Walk towards a door, halving the gap each step: 1 m, 50 cm, 25 cm… You may never touch it, but where you are heading is clear: the door. A limit is the value a function heads to, whether or not it ever arrives.'
     - teach: 'If substitution gives 0/0, factorise and cancel the common factor, then substitute. Example: (x² − 1)/(x − 1) = x + 1, so the limit as x → 1 is 2.'
       check:
         prompt: lim(x→4) (x² − 16)/(x − 4) = ?
@@ -138,6 +163,19 @@ concepts:
         - '4'
         answer: '8'
         why: (x − 4)(x + 4)/(x − 4) = x + 4 → 8.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Substitute. A number? That''s the limit. Step 2: 0/0? Factorise top and bottom. Step 3: Cancel the common factor (x − a). Step 4: Substitute again. (x² − 49)/(x − 7) = x + 7 → 14 as x → 7.'
+      - style: visual
+        teach: 'Factorise, cancel, then substitute: the path through a 0/0 limit.'
+        picture:
+          kind: flow
+          steps:
+          - (x² − 1)/(x − 1) at x = 1 → 0/0
+          - = (x − 1)(x + 1)/(x − 1)
+          - = x + 1 (x ≠ 1)
+          - → 2 as x → 1
+          alt: Substituting gives 0 over 0; factorise the top into x minus 1 times x plus 1, cancel x minus 1, then substitute to get 2.
     - teach: 'Standard limits: lim(x→a) (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹ and lim(x→0) sin x / x = 1 (x in radians). So sin(kx)/x → k.'
       picture:
         kind: flow
@@ -155,6 +193,11 @@ concepts:
         - '0'
         answer: '5'
         why: sin(5x)/x = 5 · sin(5x)/(5x) → 5 × 1.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Spot the pattern (xⁿ − aⁿ)/(x − a) → naⁿ⁻¹. Step 2: Or sin(kx)/x: multiply and divide by k to get k · sin(kx)/(kx) → k. Example: sin 3x/x → 3. Step 3: Always use radians for sin x/x.'
+      - style: real_world
+        teach: On a pocket calculator in radian mode, try sin(0.1)/0.1 = 0.998, sin(0.01)/0.01 = 0.99998. The closer x gets to 0, the closer the answer gets to 1. For tiny angles, sin x is almost exactly x.
   items:
   - prompt: Find lim(x→3) (x² + 1).
     answer: '10'
@@ -315,6 +358,55 @@ concepts:
     mistakes:
       '3': c11m12_std
       27/9: c11m12_std
+  - prompt: 'Assertion (A): lim(x→0) sin 5x / x = 5.
+
+      Reason (R): lim(x→0) sin x / x = 1, with x in radians.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Writing sin 5x/x = 5 · sin 5x/(5x) and using R gives 5, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: Evaluate lim(x→3) (x² − 9)/(x − 3).
+    options:
+    - '6'
+    - '0'
+    - '3'
+    answer: '6'
+    hints:
+    - Substituting gives 0/0.
+    - Factorise x² − 9.
+    solution: (x − 3)(x + 3)/(x − 3) = x + 3 → 6.
+    mistakes:
+      '0': c11_zero_zero
+      '3': m11_factor_cancel
+    exam: one_mark
+    difficulty: 2
+  - prompt: Evaluate lim(x→0) sin 4x / sin 2x.
+    options:
+    - '2'
+    - 1/2
+    - '4'
+    answer: '2'
+    hints:
+    - Divide top and bottom by x.
+    - sin 4x/x → 4 and sin 2x/x → 2.
+    solution: (sin 4x/x)/(sin 2x/x) → 4/2 = 2.
+    mistakes:
+      1/2: m11_sin_ax
+      '4': m11_sinx_x
+    exam: short
+    difficulty: 2
 - code: cbse11m.calc.derivatives
   title: Derivatives
   after:
@@ -422,6 +514,19 @@ concepts:
         - 2h
         answer: 2 + h
         why: (1 + 2h + h² − 1)/h = 2 + h, which tends to 2.
+      ways:
+      - style: visual
+        teach: The tangent at a point on y = x² is the limit of chords as the second point slides in.
+        picture:
+          kind: flow
+          steps:
+          - Chord from x = 1 to 1 + h
+          - Slope = ((1 + h)² − 1)/h = 2 + h
+          - Let h → 0
+          - Tangent slope f′(1) = 2
+          alt: The slope of the chord from x equal to 1 to x equal to 1 plus h is 2 plus h; as h shrinks to 0 the chord becomes the tangent with slope 2.
+      - style: real_world
+        teach: 'A car''s average speed over a trip is distance ÷ time. The speedometer shows speed at one instant: the average over a smaller and smaller time gap. That instant speed is the derivative of distance with respect to time.'
     - teach: Power rule d/dx(xⁿ) = nxⁿ⁻¹. Constants give 0. Sums are differentiated term by term, and constant multiples stay in front.
       check:
         prompt: d/dx (4x³ − 2x + 9) = ?
@@ -431,6 +536,27 @@ concepts:
         - 4x² − 2
         answer: 12x² − 2
         why: 4·3x² − 2·1 + 0.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For each xⁿ, bring n down in front. Step 2: Reduce the power by 1. Step 3: Constants vanish. Step 4: Keep coefficients. 4x³ − 2x + 9 → 12x² − 2, so f′(1) = 10.'
+      - style: visual
+        teach: 'Power rule on a few terms: the power comes down and drops by one.'
+        picture:
+          kind: compare
+          columns:
+          - title: f(x)
+            points:
+            - x³
+            - 5x²
+            - 4x
+            - '7'
+          - title: f′(x)
+            points:
+            - 3x²
+            - 10x
+            - '4'
+            - '0'
+          alt: x cubed becomes 3 x squared, 5 x squared becomes 10x, 4x becomes 4, and the constant 7 becomes 0.
     - teach: Product rule (uv)′ = u′v + uv′. Quotient rule (u/v)′ = (u′v − uv′)/v². Also d/dx sin x = cos x and d/dx cos x = −sin x.
       picture:
         kind: compare
@@ -456,6 +582,11 @@ concepts:
         - 2x sin x − x² cos x
         answer: 2x sin x + x² cos x
         why: 'u = x², v = sin x: u′v + uv′.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Name u and v. Step 2: Write u′ and v′. Step 3: Product: u′v + uv′. Quotient: (u′v − uv′)/v², top order matters. Example: x sin x → sin x + x cos x.'
+      - style: real_world
+        teach: A rectangle's area is length × width. If both grow, the area grows from the length's change times the width, plus the width's change times the length. That is exactly the product rule (uv)′ = u′v + uv′.
   items:
   - prompt: Find the derivative of x³ at x = 2.
     answer: '12'
@@ -618,3 +749,52 @@ concepts:
     mistakes:
       '8': c11m12_rule
       '6': c11m12_rule
+  - prompt: 'Assertion (A): The derivative of a constant function is 0.
+
+      Reason (R): A constant function''s graph is a horizontal line, whose slope is 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The derivative is the slope of the graph, and a horizontal line has slope 0, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The distance (in m) a ball rolls in t seconds is s = 4t² + 2t. Find its speed at t = 3 s.'
+    options:
+    - 26 m/s
+    - 42 m/s
+    - 24 m/s
+    answer: 26 m/s
+    hints:
+    - Speed = ds/dt.
+    - Differentiate, then put t = 3.
+    solution: ds/dt = 8t + 2 = 24 + 2 = 26 m/s.
+    mistakes:
+      42 m/s: m11_velocity
+      24 m/s: c11m12_rule
+    exam: case
+    difficulty: 2
+  - prompt: Find the derivative of (x + 1)/x.
+    options:
+    - −1/x²
+    - 1/x²
+    - '1'
+    answer: −1/x²
+    hints:
+    - Write it as 1 + 1/x.
+    - Differentiate x⁻¹.
+    solution: (x + 1)/x = 1 + x⁻¹; derivative 0 − x⁻² = −1/x².
+    mistakes:
+      1/x²: m11_quotient_rule
+      '1': c11_power_rule
+    exam: short
+    difficulty: 2

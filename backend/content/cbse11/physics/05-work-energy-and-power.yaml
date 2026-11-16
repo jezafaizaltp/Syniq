@@ -132,6 +132,27 @@ concepts:
         - negative
         answer: zero
         why: 'The force is up, the motion is sideways: θ = 90°.'
+      ways:
+      - style: visual
+        teach: The angle between force and motion decides the sign of the work.
+        picture:
+          kind: compare
+          columns:
+          - title: 'θ < 90°: positive'
+            points:
+            - pulling a cart forward
+            - gravity on a falling ball
+          - title: 'θ = 90°: zero'
+            points:
+            - carrying a bag on level ground
+            - string on a whirling stone
+          - title: 'θ > 90°: negative'
+            points:
+            - friction on a sliding box
+            - brakes on a car
+          alt: Work is positive when the force has a part along the motion, zero when it is at right angles, and negative when it opposes the motion, like friction.
+      - style: step_by_step
+        teach: 'Step 1: Find the force F and displacement s. Step 2: Find the angle θ between them. Step 3: W = Fs cos θ. Example: 30 N at 60° over 8 m: 30 × 8 × ½ = 120 J. Step 4: Check the sign from θ.'
     - teach: 'Kinetic energy K = ½mv². Work-energy theorem: net work on a body = change in its kinetic energy.'
       check:
         prompt: KE of a 4 kg trolley at 5 m/s?
@@ -141,6 +162,24 @@ concepts:
         - 100 J
         answer: 50 J
         why: ½ × 4 × 25.
+      ways:
+      - style: visual
+        teach: Kinetic energy of a 1 kg ball grows with the square of its speed.
+        picture:
+          kind: bars
+          unit: J
+          bars:
+          - label: 1 m/s
+            value: 0.5
+          - label: 2 m/s
+            value: 2
+          - label: 3 m/s
+            value: 4.5
+          - label: 4 m/s
+            value: 8
+          alt: 'A 1 kilogram ball has 0.5 joules at 1 metre per second, 2 at 2, 4.5 at 3 and 8 at 4: each doubling of speed makes the energy four times larger.'
+      - style: real_world
+        teach: A car at 60 km/h needs about four times the braking distance it needs at 30 km/h, because its kinetic energy is four times as much and the brakes do roughly the same work per metre to remove it.
     - teach: For a varying force, work is the area under the F–x graph. A spring (F = −kx) stores ½kx² when stretched or squeezed by x.
       picture:
         kind: compare
@@ -164,6 +203,11 @@ concepts:
         - 20 J
         answer: 0.5 J
         why: ½ × 400 × 0.0025.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw the F–x graph. Step 2: Work = area under it. Step 3: For a spring, F = kx gives a triangle: area ½ × x × kx = ½kx². Example: k = 400 N/m, x = 0.05 m: ½ × 400 × 0.0025 = 0.5 J.'
+      - style: real_world
+        teach: Stretching a gym spring gets harder the further you pull, because the force grows with x. The work you put in is stored, and released when you let go, which is how a catapult or a toy gun works.
   items:
   - prompt: A 20 N force moves a box 5 m in its own direction. Find the work done (in J).
     answer: '100'
@@ -333,6 +377,55 @@ concepts:
     mistakes:
       '40': c11p05_work
       '10': c11p05_work
+  - prompt: 'Assertion (A): The work done by the centripetal force on a body in uniform circular motion is zero.
+
+      Reason (R): The centripetal force is always perpendicular to the body''s displacement.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both true. With θ = 90°, cos θ = 0, so W = 0: R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A 1000 kg car speeds up from 10 m/s to 20 m/s. How much net work is done on it?'
+    options:
+    - 150000 J
+    - 50000 J
+    - 200000 J
+    answer: 150000 J
+    hints:
+    - Find K before and after.
+    - Work = change in K.
+    solution: K₁ = ½ × 1000 × 100 = 50000 J; K₂ = 200000 J. W = 150000 J.
+    mistakes:
+      50000 J: p11_work_energy
+      200000 J: c11p_ke_square
+    exam: case
+    difficulty: 2
+  - prompt: 'If the speed of a body is doubled, its kinetic energy becomes:'
+    options:
+    - 4 times
+    - 2 times
+    - half
+    answer: 4 times
+    hints:
+    - K = ½mv².
+    - What happens to v² when v doubles?
+    solution: v² becomes (2v)² = 4v², so K becomes 4 times.
+    mistakes:
+      2 times: c11p_ke_square
+      half: p11_ke
+    exam: one_mark
+    difficulty: 2
 - code: cbse11p.wep.energy
   title: Potential energy, conservation and power
   after:
@@ -446,6 +539,26 @@ concepts:
         - 30 J
         answer: 60 J
         why: 3 × 10 × 2.
+      ways:
+      - style: visual
+        teach: 'A 3 kg ball falling 4 m: potential energy turns into kinetic energy (g = 10).'
+        picture:
+          kind: bars
+          unit: J
+          bars:
+          - label: 'top: PE'
+            value: 120
+          - label: 'top: KE'
+            value: 0
+          - label: 'half way: PE'
+            value: 60
+          - label: 'half way: KE'
+            value: 60
+          - label: 'bottom: KE'
+            value: 120
+          alt: At the top the ball has 120 joules of potential energy and none kinetic; half way down 60 and 60; at the bottom 120 joules kinetic. The total stays 120.
+      - style: step_by_step
+        teach: 'Step 1: U = mgh near the Earth. Step 2: Ask if the force is conservative (gravity, spring) or not (friction). Step 3: For a conservative force, work depends only on start and end height, not the path.'
     - teach: If only conservative forces act, mechanical energy K + U stays constant. A body falling from height h reaches v = √(2gh). Friction turns some energy into heat.
       check:
         prompt: 'A ball dropped from 20 m (g = 10) hits the ground at:'
@@ -455,6 +568,19 @@ concepts:
         - 10 m/s
         answer: 20 m/s
         why: √(2 × 10 × 20) = 20.
+      ways:
+      - style: visual
+        teach: Following the energy of a body dropped from height h with no friction.
+        picture:
+          kind: flow
+          steps:
+          - 'At the top: K = 0, U = mgh'
+          - 'Falling: U drops, K grows by the same amount'
+          - 'At the bottom: U = 0, K = mgh'
+          - ½mv² = mgh, so v = √(2gh)
+          alt: At the top all the energy is potential; as the body falls potential energy turns into kinetic energy; at the bottom all of it is kinetic, giving v equals root 2gh.
+      - style: real_world
+        teach: 'A roller coaster climbs slowly to the highest hill, then needs no engine: height turns into speed on the way down and speed back into height on the next hump. Each hump is a little lower, as friction takes some energy as heat and sound.'
     - teach: Power P = W/t = Fv, in watts. 1 kWh = 3.6 × 10⁶ J is a unit of energy. In every collision momentum is conserved; kinetic energy is conserved only in elastic ones.
       picture:
         kind: flow
@@ -471,6 +597,11 @@ concepts:
         - 0.33 kWh
         answer: 3 kWh
         why: 1 kW × 3 h.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Power = work ÷ time, in watts. Step 2: For a steady force at speed v: P = Fv. Step 3: Energy bills use kWh: a 1 kW heater for 1 hour = 3.6 × 10⁶ J. Step 4: In elastic collisions both momentum and KE are conserved; in others only momentum.'
+      - style: real_world
+        teach: Two students climb the same staircase, doing the same work. The one who runs up in 10 s develops more power than the one who walks up in 30 s. Power measures how fast energy is used, not how much.
   items:
   - prompt: Find the potential energy of a 2 kg ball 5 m above the ground. Take g = 10 m/s² (in J).
     answer: '100'
@@ -635,3 +766,52 @@ concepts:
     mistakes:
       '2': c11p05_energy
       '0': c11p05_energy
+  - prompt: 'Assertion (A): In an inelastic collision, the total momentum is conserved.
+
+      Reason (R): In an inelastic collision, the total kinetic energy is conserved.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is true, but R is false
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is true: momentum is conserved in every collision without outside force. R is false: some kinetic energy turns into heat, sound or deformation.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_r
+      Both A and R are true, but R does not explain A: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Situation: A 1.5 kW electric iron is used for 2 hours a day for 30 days. At ₹8 per unit (kWh), what is the cost?'
+    options:
+    - ₹720
+    - ₹360
+    - ₹24
+    answer: ₹720
+    hints:
+    - Energy = power × time in kWh.
+    - 1.5 × 2 × 30 units.
+    solution: 1.5 × 2 × 30 = 90 kWh; 90 × 8 = ₹720.
+    mistakes:
+      ₹360: p11_kwh
+      ₹24: p11_power
+    exam: competency
+    difficulty: 2
+  - prompt: A pump lifts 200 kg of water through 10 m in 20 s. Find its power (g = 10 m/s²).
+    options:
+    - 1000 W
+    - 20000 W
+    - 100 W
+    answer: 1000 W
+    hints:
+    - Work = mgh.
+    - Power = work/time.
+    solution: W = 200 × 10 × 10 = 20000 J; P = 20000/20 = 1000 W.
+    mistakes:
+      20000 W: p11_power
+      100 W: c11p05_energy
+    exam: short
+    difficulty: 2

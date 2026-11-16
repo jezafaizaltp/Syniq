@@ -117,6 +117,11 @@ concepts:
         - 400°
         answer: 360°
         why: A diagonal makes two triangles of 180° each, and 2 × 180° = 360°.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw any four-sided shape. Step 2: Join two opposite corners with a diagonal. Step 3: You now have two triangles. Step 4: Each triangle''s angles add to 180°, and together they make up the quadrilateral''s four angles: 180° + 180° = 360°.'
+      - style: real_world
+        teach: Tear the four corners off a paper quadrilateral and put their points together. They fit exactly round a point with no gap, making a full turn of 360°. Try it with any four-sided shape you cut out.
     - teach: To find a missing angle, add the angles you know and take the total from 360°. If the angles are given as x, 2x, …, add them up, set the sum equal to 360° and solve for x.
       check:
         prompt: Three angles of a quadrilateral are 90°, 90° and 100°. What is the fourth?
@@ -126,6 +131,19 @@ concepts:
         - 100°
         answer: 80°
         why: 90 + 90 + 100 = 280, and 360 − 280 = 80.
+      ways:
+      - style: visual
+        teach: Finding a missing angle when three are known.
+        picture:
+          kind: flow
+          steps:
+          - 'Known: 70°, 105°, 125°'
+          - 'Add them: 300°'
+          - Take from 360°
+          - Missing angle = 60°
+          alt: With angles 70, 105 and 125 degrees, their sum is 300, and 360 minus 300 leaves 60 degrees for the missing angle.
+      - style: step_by_step
+        teach: 'Step 1: Write each angle using x. Example: x, 2x, 2x and 4x. Step 2: Add: 9x. Step 3: Set it equal to 360°: 9x = 360°. Step 4: Solve: x = 40°, so the angles are 40°, 80°, 80°, 160°. Check: they add to 360°.'
     - teach: 'The same idea works for any polygon. From one corner, a shape with n sides splits into n − 2 triangles, so its angles add to (n − 2) × 180°. A pentagon: 3 × 180° = 540°. Walking round any convex shape you turn once, so its exterior angles always add to 360°.'
       picture:
         kind: compare
@@ -154,6 +172,11 @@ concepts:
         - 1080°
         answer: 720°
         why: 6 − 2 = 4 triangles, and 4 × 180° = 720°.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Count the sides, n. Step 2: Subtract 2 to get the number of triangles from one corner. Step 3: Multiply by 180°. Example: a heptagon (7 sides) → 5 triangles → 900°. Step 4: For a regular polygon, divide by n for each angle.'
+      - style: real_world
+        teach: 'Honeycombs are made of regular hexagons. Each angle is 120°, and three of them meet at a point: 3 × 120° = 360°, so the cells fit with no gaps. Bees build the strongest storage with the least wax this way.'
   items:
   - prompt: Three angles of a quadrilateral are 80°, 95° and 110°. Find the fourth, in degrees.
     answer: '75'
@@ -325,6 +348,74 @@ concepts:
     mistakes:
       '10': c8m4_polygon_sum
       '7': c8m4_polygon_sum
+  - prompt: 'Assertion (A): The angles of a quadrilateral add up to 360°.
+
+      Reason (R): A diagonal divides a quadrilateral into two triangles.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Two triangles of 180° give 360°, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): A quadrilateral cannot have four obtuse angles.
+
+      Reason (R): Four angles each over 90° would add up to more than 360°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The angles must total exactly 360°, so four obtuse angles are impossible; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A kite-shaped garden plot has angles in the ratio 2 : 3 : 2 : 5. Find its largest angle.'
+    options:
+    - 150°
+    - 120°
+    - 180°
+    answer: 150°
+    hints:
+    - 'Add the parts: 2 + 3 + 2 + 5.'
+    - One part = 360° ÷ total parts.
+    solution: 12 parts make 360°, so one part is 30°. The largest angle is 5 × 30° = 150°.
+    mistakes:
+      120°: c8_angle_sum_360
+      180°: c8_angle_sum_360
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Kabir measures a quadrilateral''s angles as 85°, 95°, 90° and 100°. What should he conclude?'
+    options:
+    - 'He has measured wrongly: they add to 370°, not 360°'
+    - The shape is a rectangle
+    - The angles are correct
+    answer: 'He has measured wrongly: they add to 370°, not 360°'
+    hints:
+    - Add the four angles.
+    - What must they add to?
+    solution: 85 + 95 + 90 + 100 = 370°, which is not 360°, so at least one measurement is wrong.
+    mistakes:
+      The shape is a rectangle: c8_angle_sum_360
+      The angles are correct: c8_angle_sum_360
+    exam: competency
+    difficulty: 2
 - code: cbse8m.quad.types
   title: Parallelograms, rhombuses, kites and trapeziums
   after:
@@ -443,6 +534,11 @@ concepts:
         - 25°
         answer: 65°
         why: Opposite angles of a parallelogram are equal.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Check for parallel sides: none → general quadrilateral; one pair → trapezium; two pairs → parallelogram. Step 2: For a parallelogram, check the angles: all 90° → rectangle. Step 3: Check the sides: all equal → rhombus. Step 4: Both → square.'
+      - style: real_world
+        teach: Look at the door, a tiled floor, a kite at Makar Sankranti and the side of a bucket seen in profile. You can find a rectangle, a square or rhombus tile, a kite and a trapezium without leaving home.
     - teach: 'Special parallelograms: a rectangle has four right angles and equal diagonals. A rhombus has four equal sides and its diagonals cross at right angles. A square is both a rectangle and a rhombus.'
       picture:
         kind: flow
@@ -460,6 +556,11 @@ concepts:
         - Any parallelogram
         answer: Rhombus
         why: In a rhombus all sides are equal, which makes the diagonals cross at 90°. A rectangle's diagonals are equal but usually not at right angles.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw the two diagonals. Step 2: Do they cut each other in half? Parallelogram family. Step 3: Are they equal? Rectangle. Step 4: Do they meet at right angles? Rhombus. Step 5: Both equal and at right angles → square.'
+      - style: real_world
+        teach: A folding gate or a lazy-tongs toy is made of rhombuses. As it opens and closes, the angles change but the sides stay equal, and the diagonals still cross at right angles.
     - teach: A kite has two pairs of equal sides that sit next to each other. Its diagonals cross at right angles, and the long one cuts the short one in half. Unlike a parallelogram, its opposite sides are not usually equal.
       check:
         prompt: Which describes a kite?
@@ -469,6 +570,25 @@ concepts:
         - All four sides equal
         answer: Two pairs of equal sides next to each other
         why: That is the definition of a kite. Two pairs of parallel sides make a parallelogram.
+      ways:
+      - style: visual
+        teach: 'Kite and parallelogram compared: where the equal sides are.'
+        picture:
+          kind: compare
+          columns:
+          - title: Kite
+            points:
+            - equal sides next to each other
+            - diagonals at right angles
+            - one diagonal halves the other
+          - title: Parallelogram
+            points:
+            - equal sides opposite each other
+            - diagonals halve each other
+            - opposite angles equal
+          alt: A kite has pairs of equal sides next to each other and diagonals crossing at right angles, one halving the other; a parallelogram has equal opposite sides and diagonals that halve each other.
+      - style: real_world
+        teach: 'A paper kite is made with two sticks crossing at right angles: the short stick is cut in half by the long one. That is exactly the shape''s diagonal rule, and it keeps the kite balanced in the wind.'
   items:
   - prompt: In a parallelogram one angle is 70°. Find the angle next to it, in degrees.
     answer: '110'
@@ -653,3 +773,71 @@ concepts:
     mistakes:
       '50': c8_adjacent_vs_opposite
       '310': c8_angle_sum_360
+  - prompt: 'Assertion (A): Every square is a rhombus.
+
+      Reason (R): A square has all four sides equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Four equal sides is what makes a rhombus, so R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Every rhombus is a square.
+
+      Reason (R): A rhombus has all four sides equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: a rhombus need not have right angles. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In parallelogram PQRS, angle P = (2x + 10)° and angle R = (3x − 20)°. Find x.'
+    options:
+    - '30'
+    - '38'
+    - '40'
+    answer: '30'
+    hints:
+    - How are P and R related in a parallelogram?
+    - 'Opposite angles are equal: set them equal.'
+    solution: 'Opposite angles are equal: 2x + 10 = 3x − 20, so x = 30.'
+    mistakes:
+      '38': c8_adjacent_vs_opposite
+      '40': c8_adjacent_vs_opposite
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A carpenter checks that a window frame''s diagonals cut each other in half and are equal in length. What shape has the frame?'
+    options:
+    - A rectangle
+    - A kite
+    - A trapezium
+    answer: A rectangle
+    hints:
+    - Halving each other means a parallelogram.
+    - Equal diagonals in a parallelogram means what?
+    solution: Diagonals that bisect each other give a parallelogram; equal diagonals make it a rectangle.
+    mistakes:
+      A kite: t8_parallelogram_diagonals
+      A trapezium: t8_parallelogram_diagonals
+    exam: competency
+    difficulty: 2
