@@ -15,6 +15,9 @@ tips:
   b12_phosphorus: "Which element's main reservoir is rocks and sediments rather than the air?"
   b12_pioneer: "The first colonisers need no soil; they break down rock."
   b12_secondary: "Soil is already there on an abandoned farm."
+  c12b12_ten: 'About 10% of energy passes from one trophic level to the next: divide by 10 at each step.'
+  c12b12_prod: 'NPP = GPP − respiration: what is left after plants use some for themselves.'
+  c12b12_cycle: Gaseous cycles (carbon, nitrogen) have an atmospheric store; sedimentary cycles (phosphorus, sulfur) are stored in rocks.
 concepts:
 - code: cbse12b.eco.energy
   title: Structure, productivity and energy flow
@@ -100,6 +103,55 @@ concepts:
           - 10
           - 600
         say: NPP is still positive. R must equal GPP.
+  lesson:
+    - teach: 'An ecosystem has biotic (living) and abiotic (non-living) parts working together; forests show vertical layers (stratification). Productivity: gross primary productivity (GPP) is the total rate of making organic matter by photosynthesis; plants use some in respiration (R), so net primary productivity NPP = GPP − R. NPP is food for consumers; secondary productivity is new organic matter made by consumers.'
+      check:
+        prompt: 'GPP is 800 units and respiration uses 300. NPP is:'
+        options:
+        - '500'
+        - '1100'
+        - '300'
+        answer: '500'
+        why: 800 − 300 = 500.
+    - teach: 'Decomposers break dead matter: fragmentation by detritivores like earthworms, leaching of soluble nutrients, catabolism by bacterial and fungal enzymes, humification (dark humus forms, slow to break) and mineralisation (humus releases minerals). Warm, moist, oxygen-rich conditions speed it up; detritus rich in lignin and chitin decays slowly.'
+      picture:
+        kind: flow
+        steps:
+        - fragmentation
+        - leaching
+        - catabolism
+        - humification
+        - mineralisation
+        alt: The steps of decomposition in order.
+      check:
+        prompt: 'Breaking detritus into small pieces by earthworms is:'
+        options:
+        - fragmentation
+        - leaching
+        - mineralisation
+        answer: fragmentation
+        why: It is the first, physical step.
+    - teach: 'Energy flows one way: sun → producers → herbivores → carnivores, with only about 10% passing to each next trophic level (10% law). Plants capture only 2–10% of photosynthetically active radiation (PAR). Food chains link into food webs; detritus food chains start from dead matter. Pyramids of number and biomass can be inverted (e.g. biomass in the sea), but the pyramid of energy is always upright.'
+      picture:
+        kind: bars
+        bars:
+        - label: producers
+          value: 10000
+        - label: herbivores
+          value: 1000
+        - label: carnivores
+          value: 100
+        - label: top carnivores
+          value: 10
+        alt: Energy in joules at each trophic level, falling tenfold each step.
+      check:
+        prompt: Why is the pyramid of energy never inverted?
+        options:
+        - energy is lost at each level
+        - there are always more carnivores
+        - plants store energy forever
+        answer: energy is lost at each level
+        why: Each level gets less than the one below.
   items:
   - prompt: Plants capture 10,000 J. How much energy (J) reaches the carnivores that eat the herbivores?
     answer: '100'
@@ -169,6 +221,123 @@ concepts:
     - Tropical.
     solution: Warm and moist.
     mistakes: {"cold and dry": "b12_decomposition", "frozen": "b12_decomposition", "oxygen-free": "b12_decomposition"}
+  - prompt: Plants trap 20,000 J of energy. How much reaches the herbivores (10% law)?
+    answer: '2000'
+    check: '2000'
+    difficulty: 1
+    hints:
+    - One step up the chain.
+    - Take 10%.
+    solution: 'Step 1: 10% of 20,000. Step 2: 2,000 J.'
+    mistakes:
+      '200': c12b12_ten
+      '20000': c12b12_ten
+  - prompt: A top carnivore at the 4th trophic level receives 5 J. How much energy did the producers hold?
+    answer: '5000'
+    check: '5000'
+    difficulty: 3
+    hints:
+    - 'Work backwards: each step down multiplies by 10.'
+    - From level 4 to level 1 is three steps.
+    solution: 'Step 1: 5 × 10 × 10 × 10. Step 2: 5,000 J.'
+    mistakes:
+      '500': c12b12_ten
+      '50000': c12b12_ten
+  - prompt: The ocean's share of annual biosphere NPP is about how many billion tonnes?
+    answer: '55'
+    check: '55'
+    difficulty: 2
+    hints:
+    - Oceans cover about 70% of the surface.
+    - But they make about a third of the 170 total.
+    solution: 'Step 1: low productivity per area. Step 2: about 55 billion tonnes.'
+    mistakes:
+      '170': c12b12_prod
+      '115': c12b12_prod
+  - prompt: Plants capture what range of photosynthetically active radiation (PAR)?
+    options:
+    - 2–10%
+    - 50–60%
+    - 90–100%
+    answer: 2–10%
+    difficulty: 2
+    hints:
+    - Most sunlight is not used.
+    - It is a small fraction.
+    solution: 'Step 1: much is reflected or lost. Step 2: 2–10%.'
+    mistakes:
+      50–60%: c12b12_ten
+      90–100%: c12b12_ten
+  - prompt: 'In the sea, the pyramid of biomass is usually:'
+    options:
+    - inverted
+    - upright
+    - flat
+    answer: inverted
+    difficulty: 2
+    hints:
+    - Phytoplankton are tiny and quickly eaten.
+    - Fish biomass is larger at a given time.
+    solution: 'Step 1: small standing crop of producers. Step 2: inverted.'
+    mistakes:
+      upright: c12b12_ten
+      flat: c12b12_ten
+  - prompt: 'Dark, amorphous, slow-to-decay material formed in decomposition is:'
+    options:
+    - humus
+    - detritus
+    - leachate
+    answer: humus
+    difficulty: 1
+    hints:
+    - Made in humification.
+    - It holds nutrients in soil.
+    solution: 'Step 1: resistant to microbes. Step 2: humus.'
+    mistakes:
+      detritus: c12b12_prod
+      leachate: c12b12_prod
+  - prompt: Which detritus decays most slowly?
+    options:
+    - rich in lignin and chitin
+    - rich in sugars
+    - rich in nitrogen
+    answer: rich in lignin and chitin
+    difficulty: 2
+    hints:
+    - Some materials are tough for microbes.
+    - Wood and insect shells.
+    solution: 'Step 1: hard to digest. Step 2: lignin and chitin.'
+    mistakes:
+      rich in sugars: c12b12_prod
+      rich in nitrogen: c12b12_prod
+  - prompt: 'A food chain that begins with dead organic matter is a:'
+    options:
+    - detritus food chain
+    - grazing food chain
+    - food web
+    answer: detritus food chain
+    difficulty: 1
+    hints:
+    - Starts with decomposers.
+    - Not with green plants.
+    solution: 'Step 1: begins with detritus. Step 2: detritus food chain.'
+    mistakes:
+      grazing food chain: c12b12_ten
+      food web: c12b12_ten
+  - prompt: In a pond, phytoplankton belong to which trophic level?
+    options:
+    - first (producers)
+    - second
+    - third
+    answer: first (producers)
+    difficulty: 1
+    hints:
+    - They photosynthesise.
+    - They are the base of the chain.
+    solution: 'Step 1: make food from sunlight. Step 2: producers.'
+    mistakes:
+      second: c12b12_ten
+      third: c12b12_ten
 - code: cbse12b.eco.succession
   title: Ecological succession and nutrient cycles
   after:
@@ -212,6 +381,58 @@ concepts:
       Marsh meadow (sedges, grasses): The swamp fills in and becomes wet land.
       Shrubs: Shrubs need drier, firmer soil.
       'Forest: the climax community': Trees come last, once soil has built up.
+  lesson:
+    - teach: Ecological succession is the gradual, fairly predictable change in the species of an area until a stable climax community forms. Primary succession starts where no life existed (bare rock, a new pond, cooled lava) and is slow; secondary succession starts where life was lost but soil remains (abandoned farm, after fire or flood) and is faster. The stages in between are seral stages.
+      picture:
+        kind: flow
+        steps:
+        - bare rock
+        - lichens
+        - mosses
+        - herbs and grasses
+        - shrubs
+        - forest (climax)
+        alt: Primary succession on bare rock from lichens to forest.
+      check:
+        prompt: 'Succession after a forest fire is:'
+        options:
+        - secondary
+        - primary
+        - none
+        answer: secondary
+        why: Soil is still there.
+    - teach: 'Hydrarch succession starts in water and xerarch on dry land; both move towards a mesic (medium-moisture) climax. Pioneers in water are phytoplankton; on rock they are lichens, whose acids weather rock and start soil. Nutrients cycle: gaseous cycles (carbon, nitrogen) have stores in air; sedimentary cycles (phosphorus, sulfur) are stored in Earth''s crust.'
+      check:
+        prompt: 'Pioneer species in water are usually:'
+        options:
+        - phytoplankton
+        - lichens
+        - trees
+        answer: phytoplankton
+        why: Tiny floating algae colonise first.
+    - teach: 'Carbon cycle: about 71% of carbon is dissolved in the oceans; photosynthesis fixes about 4 × 10¹³ kg a year; respiration, decomposition, fires and burning fossil fuels return CO₂; deforestation and fuel use have raised CO₂. Phosphorus cycle: rocks weather to release phosphate, plants take it up, decomposers return it; there is no respiratory release of phosphorus. Ecosystem services (pollination, clean air and water, flood control) were valued by Robert Costanza at about US$33 trillion a year.'
+      picture:
+        kind: compare
+        columns:
+        - title: Carbon cycle
+          points:
+          - gaseous
+          - store in air and oceans
+          - CO₂ released by respiration
+        - title: Phosphorus cycle
+          points:
+          - sedimentary
+          - store in rocks
+          - no gaseous release
+        alt: Carbon and phosphorus cycles compared.
+      check:
+        prompt: 'The main natural reservoir of phosphorus is:'
+        options:
+        - rocks
+        - the atmosphere
+        - sunlight
+        answer: rocks
+        why: Weathering releases phosphates.
   items:
   - prompt: 'The first organisms to colonise bare rock are usually:'
     options:
@@ -287,3 +508,126 @@ concepts:
     - Global warming.
     solution: The carbon cycle.
     mistakes: {"phosphorus cycle": "b12_fossil_carbon", "water table only": "b12_fossil_carbon", "sulfur cycle only": "b12_fossil_carbon"}
+  - prompt: 'Succession that starts in water is called:'
+    options:
+    - hydrarch
+    - xerarch
+    - mesarch
+    answer: hydrarch
+    difficulty: 1
+    hints:
+    - Hydro means water.
+    - Xero means dry.
+    solution: 'Step 1: water start. Step 2: hydrarch.'
+    mistakes:
+      xerarch: c12b12_cycle
+      mesarch: c12b12_cycle
+  - prompt: 'Both hydrarch and xerarch successions end in a climax that is:'
+    options:
+    - mesic (medium moisture)
+    - very wet
+    - very dry
+    answer: mesic (medium moisture)
+    difficulty: 2
+    hints:
+    - They meet in the middle.
+    - Neither too wet nor too dry.
+    solution: 'Step 1: moisture balances. Step 2: mesic.'
+    mistakes:
+      very wet: c12b12_cycle
+      very dry: c12b12_cycle
+  - prompt: Why is secondary succession faster than primary?
+    options:
+    - soil is already present
+    - there is more sunlight
+    - there are no plants
+    answer: soil is already present
+    difficulty: 2
+    hints:
+    - Primary succession must build something first.
+    - Lichens take ages to make it.
+    solution: 'Step 1: no need to form soil. Step 2: faster.'
+    mistakes:
+      there is more sunlight: c12b12_cycle
+      there are no plants: c12b12_cycle
+  - prompt: 'Each intermediate community in succession is a:'
+    options:
+    - seral stage
+    - climax
+    - trophic level
+    answer: seral stage
+    difficulty: 1
+    hints:
+    - The whole series is a sere.
+    - Climax is the final one.
+    solution: 'Step 1: part of a sere. Step 2: seral stage.'
+    mistakes:
+      climax: c12b12_cycle
+      trophic level: c12b12_cycle
+  - prompt: Photosynthesis fixes about how much carbon each year?
+    options:
+    - 4 × 10¹³ kg
+    - 4 × 10³ kg
+    - 4 kg
+    answer: 4 × 10¹³ kg
+    difficulty: 2
+    hints:
+    - A very large global number.
+    - Tens of trillions of kilograms.
+    solution: 'Step 1: global fixation. Step 2: about 4 × 10¹³ kg.'
+    mistakes:
+      4 × 10³ kg: c12b12_cycle
+      4 kg: c12b12_cycle
+  - prompt: Which is a sedimentary nutrient cycle?
+    options:
+    - sulfur
+    - nitrogen
+    - carbon
+    answer: sulfur
+    difficulty: 2
+    hints:
+    - Its main store is in Earth's crust.
+    - Like phosphorus.
+    solution: 'Step 1: rock reservoir. Step 2: sulfur.'
+    mistakes:
+      nitrogen: c12b12_cycle
+      carbon: c12b12_cycle
+  - prompt: Robert Costanza valued nature's ecosystem services at about how many trillion US dollars a year?
+    answer: '33'
+    check: '33'
+    difficulty: 2
+    hints:
+    - More than the global GDP of that time.
+    - Between 30 and 35 trillion.
+    solution: 'Step 1: services like pollination and clean water. Step 2: about US$33 trillion.'
+    mistakes:
+      '3': c12b12_cycle
+      '330': c12b12_cycle
+  - prompt: Which human activity releases stored carbon from ancient plants?
+    options:
+    - burning fossil fuels
+    - planting trees
+    - growing pulses
+    answer: burning fossil fuels
+    difficulty: 1
+    hints:
+    - Coal and oil formed from old organisms.
+    - Burning releases CO₂.
+    solution: 'Step 1: combustion of coal, oil, gas. Step 2: CO₂ added to air.'
+    mistakes:
+      planting trees: c12b12_cycle
+      growing pulses: c12b12_cycle
+  - prompt: 'Lichens help start soil on bare rock because they:'
+    options:
+    - release acids that weather the rock
+    - fix carbon into rock
+    - need deep soil
+    answer: release acids that weather the rock
+    difficulty: 2
+    hints:
+    - They are the pioneers.
+    - Chemicals break down rock surface.
+    solution: 'Step 1: acids dissolve rock. Step 2: soil begins.'
+    mistakes:
+      fix carbon into rock: c12b12_cycle
+      need deep soil: c12b12_cycle

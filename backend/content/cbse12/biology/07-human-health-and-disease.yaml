@@ -15,6 +15,9 @@ tips:
   b12_hiv: "HIV attacks the cells that coordinate the immune response."
   b12_metastasis: "'Meta' means change of place."
   b12_widal: "ELISA is for HIV, Mantoux for TB."
+  c12b7_cause: 'Match each disease to its kind of cause: bacteria (typhoid, pneumonia), virus (common cold, AIDS), protozoa (malaria, amoebiasis), worms (ascariasis, filariasis), fungi (ringworm).'
+  c12b7_imm: Ask whether the body made the antibodies itself (active) or received ready-made ones (passive), and whether it is inborn (innate) or built after exposure (acquired).
+  c12b7_drug: 'Group drugs by source and effect: opioids (poppy; depress), cannabinoids (hemp), cocaine (coca; stimulates).'
 concepts:
 - code: cbse12b.health.diseases
   title: Common diseases in humans
@@ -88,6 +91,61 @@ concepts:
       bin: Fungus
       clue: Microsporum and Trichophyton. Despite the name, what kind?
       why: A fungus, not a worm.
+  lesson:
+    - teach: 'Health is physical, mental and social well-being, not just the absence of disease. Pathogens cause infectious diseases. Bacteria: typhoid (Salmonella typhi, spread by contaminated food and water, confirmed by the Widal test) and pneumonia (Streptococcus pneumoniae, Haemophilus influenzae; affects the alveoli). Viruses: the common cold (rhinoviruses; nose and airway, not lungs).'
+      picture:
+        kind: compare
+        columns:
+        - title: Disease
+          points:
+          - typhoid
+          - pneumonia
+          - common cold
+          - malaria
+          - ringworm
+        - title: Cause
+          points:
+          - bacterium
+          - bacterium
+          - virus
+          - protozoan
+          - fungus
+        alt: Common diseases and the kind of pathogen behind each.
+      check:
+        prompt: 'Pneumonia mainly affects the:'
+        options:
+        - alveoli of the lungs
+        - intestine
+        - skin
+        answer: alveoli of the lungs
+        why: They fill with fluid, making breathing hard.
+    - teach: Malaria is caused by Plasmodium (P. falciparum causes the most serious form) and spread by the female Anopheles mosquito. Sporozoites enter the blood, multiply in liver cells, then in red blood cells; when RBCs burst they release haemozoin, causing chills and high fever. The sexual stage (gametocytes fusing) happens in the mosquito's gut.
+      picture:
+        kind: flow
+        steps:
+        - mosquito bite (sporozoites)
+        - liver cells
+        - red blood cells
+        - RBCs burst (haemozoin)
+        - mosquito takes gametocytes
+        alt: The malaria parasite's path through the human and back to the mosquito.
+      check:
+        prompt: 'In the human body, Plasmodium first multiplies in the:'
+        options:
+        - liver
+        - brain
+        - stomach
+        answer: liver
+        why: Sporozoites reach the liver before the RBCs.
+    - teach: 'Amoebiasis (Entamoeba histolytica) spreads through food contaminated by houseflies. Ascariasis (Ascaris roundworm) spreads through soil and water with eggs. Filariasis or elephantiasis (Wuchereria) is spread by Culex mosquitoes and swells the limbs. Ringworm (fungi like Trichophyton) causes dry scaly patches. Prevention: personal and public hygiene, clean water, and controlling vectors, e.g. Gambusia fish eating mosquito larvae.'
+      check:
+        prompt: 'Houseflies carry the cause of:'
+        options:
+        - amoebiasis
+        - malaria
+        - filariasis
+        answer: amoebiasis
+        why: Flies carry cysts from faeces to food.
   items:
   - prompt: 'Malaria is spread by the:'
     options:
@@ -168,6 +226,132 @@ concepts:
     - In ponds.
     solution: They eat mosquito larvae.
     mistakes: {"repel adults": "b12_gambusia", "poison water": "b12_gambusia", "eat adult mosquitoes": "b12_gambusia"}
+  - prompt: Which Plasmodium species causes the most serious malaria?
+    options:
+    - P. falciparum
+    - P. vivax
+    - P. malariae
+    answer: P. falciparum
+    difficulty: 1
+    hints:
+    - It can cause cerebral malaria.
+    - Its name comes from 'sickle' shaped gametocytes.
+    solution: 'Step 1: most deadly species. Step 2: P. falciparum.'
+    mistakes:
+      P. vivax: c12b7_cause
+      P. malariae: c12b7_cause
+  - prompt: Elephantiasis is spread by which mosquito?
+    options:
+    - Culex
+    - Anopheles
+    - Aedes
+    answer: Culex
+    difficulty: 2
+    hints:
+    - Not the malaria mosquito.
+    - A common house mosquito.
+    solution: 'Step 1: Wuchereria larvae carried by. Step 2: Culex.'
+    mistakes:
+      Anopheles: c12b7_cause
+      Aedes: c12b7_cause
+  - prompt: 'Ringworm is caused by a:'
+    options:
+    - fungus
+    - worm
+    - virus
+    answer: fungus
+    difficulty: 1
+    hints:
+    - The name is misleading.
+    - Trichophyton and Microsporum.
+    solution: 'Step 1: Microsporum, Trichophyton, Epidermophyton. Step 2: fungi.'
+    mistakes:
+      worm: c12b7_cause
+      virus: c12b7_cause
+  - prompt: 'Typhoid is caused by:'
+    options:
+    - Salmonella typhi
+    - Entamoeba histolytica
+    - rhinovirus
+    answer: Salmonella typhi
+    difficulty: 1
+    hints:
+    - It is a bacterium.
+    - Its name contains the disease.
+    solution: 'Step 1: bacterial disease of the intestine. Step 2: Salmonella typhi.'
+    mistakes:
+      Entamoeba histolytica: c12b7_cause
+      rhinovirus: c12b7_cause
+  - prompt: In which host does the sexual stage of Plasmodium happen?
+    options:
+    - female Anopheles mosquito
+    - human
+    - housefly
+    answer: female Anopheles mosquito
+    difficulty: 2
+    hints:
+    - Gametocytes fuse there.
+    - It is the host that carries it to humans.
+    solution: 'Step 1: gametes fuse in the gut of the vector. Step 2: mosquito.'
+    mistakes:
+      human: c12b7_cause
+      housefly: c12b7_cause
+  - prompt: 'Ascaris eggs enter the body mainly through:'
+    options:
+    - contaminated water, vegetables and fruits
+    - mosquito bites
+    - air
+    answer: contaminated water, vegetables and fruits
+    difficulty: 2
+    hints:
+    - Eggs pass out in faeces.
+    - They reach food grown in polluted soil.
+    solution: 'Step 1: soil and water contamination. Step 2: food and water.'
+    mistakes:
+      mosquito bites: c12b7_cause
+      air: c12b7_cause
+  - prompt: 'The common cold mainly infects the:'
+    options:
+    - nose and respiratory passages
+    - lungs' alveoli
+    - liver
+    answer: nose and respiratory passages
+    difficulty: 1
+    hints:
+    - Rhinoviruses; 'rhino' means nose.
+    - It does not reach deep into the lungs.
+    solution: 'Step 1: upper airway infection. Step 2: nose and passages.'
+    mistakes:
+      lungs' alveoli: c12b7_cause
+      liver: c12b7_cause
+  - prompt: Which disease is spread through droplets from an infected person's cough?
+    options:
+    - pneumonia
+    - amoebiasis
+    - filariasis
+    answer: pneumonia
+    difficulty: 2
+    hints:
+    - It is a respiratory infection.
+    - The others spread by food or mosquitoes.
+    solution: 'Step 1: airborne droplets, shared utensils. Step 2: pneumonia.'
+    mistakes:
+      amoebiasis: c12b7_cause
+      filariasis: c12b7_cause
+  - prompt: 'Draining stagnant water near homes helps prevent:'
+    options:
+    - mosquito-borne diseases
+    - ringworm
+    - typhoid only
+    answer: mosquito-borne diseases
+    difficulty: 1
+    hints:
+    - Which insect lays eggs in still water?
+    - Its larvae grow there.
+    solution: 'Step 1: removes breeding sites. Step 2: fewer mosquitoes, less malaria, dengue, filariasis.'
+    mistakes:
+      ringworm: c12b7_cause
+      typhoid only: c12b7_cause
 - code: cbse12b.health.immunity
   title: Immunity, AIDS, cancer and drugs
   after:
@@ -242,6 +426,50 @@ concepts:
       bin: Acquired
       clue: Do they recognise a specific antigen?
       why: Cell-mediated acquired immunity.
+  lesson:
+    - teach: 'Innate immunity is present from birth: physical barriers (skin, mucus), physiological (stomach acid, tears, saliva), cellular (neutrophils, macrophages, natural killer cells) and cytokine barriers (interferons from virus-infected cells). Acquired immunity develops after meeting a pathogen and has memory: the second (secondary) response is faster and stronger than the first (primary).'
+      check:
+        prompt: Acid in the stomach is which barrier?
+        options:
+        - physiological
+        - physical
+        - cytokine
+        answer: physiological
+        why: It is a body secretion that kills microbes.
+    - teach: 'B-lymphocytes make antibodies (humoral immunity); an antibody has 4 chains, H₂L₂, and types include IgA, IgM, IgE, IgG. T-lymphocytes give cell-mediated immunity, including graft rejection. Active immunity: the body makes its own antibodies (infection, vaccines). Passive immunity: ready-made antibodies are given (colostrum, anti-venom). Allergies involve IgE and histamine; autoimmunity is the body attacking itself (rheumatoid arthritis). Bone marrow and thymus are primary lymphoid organs; spleen, lymph nodes and MALT are secondary.'
+      picture:
+        kind: compare
+        columns:
+        - title: Active
+          points:
+          - body makes antibodies
+          - slow to start
+          - long-lasting
+          - vaccine
+        - title: Passive
+          points:
+          - antibodies given
+          - immediate
+          - short-lived
+          - colostrum, anti-venom
+        alt: Active and passive immunity compared.
+      check:
+        prompt: 'An anti-tetanus injection of ready antibodies gives:'
+        options:
+        - passive immunity
+        - active immunity
+        - innate immunity
+        answer: passive immunity
+        why: The antibodies were made elsewhere.
+    - teach: AIDS is caused by HIV, a retrovirus that infects helper T cells and macrophages, slowly weakening immunity. It spreads by unprotected sex, infected blood, shared needles and from mother to child; it is diagnosed with ELISA and slowed by antiretroviral drugs. Cancer cells lose contact inhibition and divide without control; malignant tumours spread (metastasis). Drugs like opioids, cannabinoids and cocaine and alcohol harm health; adolescents need support, not blame, and early help.
+      check:
+        prompt: 'Normal cells stop dividing when they touch other cells. Cancer cells have lost this:'
+        options:
+        - contact inhibition
+        - metastasis
+        - immunity
+        answer: contact inhibition
+        why: So they pile up into tumours.
   items:
   - prompt: How many polypeptide chains does an antibody molecule have?
     answer: '4'
@@ -318,3 +546,129 @@ concepts:
     - IgE.
     solution: Histamine.
     mistakes: {"insulin": "b12_histamine", "interferon": "b12_histamine", "thyroxine": "b12_histamine"}
+  - prompt: 'Interferons are released by:'
+    options:
+    - virus-infected cells
+    - bacteria
+    - red blood cells
+    answer: virus-infected cells
+    difficulty: 2
+    hints:
+    - They are a cytokine barrier.
+    - They protect nearby cells from a virus.
+    solution: 'Step 1: infected cells signal. Step 2: protect neighbours.'
+    mistakes:
+      bacteria: c12b7_imm
+      red blood cells: c12b7_imm
+  - prompt: Which is a primary lymphoid organ?
+    options:
+    - thymus
+    - spleen
+    - lymph node
+    answer: thymus
+    difficulty: 1
+    hints:
+    - Primary organs are where lymphocytes mature.
+    - T cells mature here.
+    solution: 'Step 1: bone marrow and thymus are primary. Step 2: thymus.'
+    mistakes:
+      spleen: c12b7_imm
+      lymph node: c12b7_imm
+  - prompt: 'Rejection of a transplanted organ is mainly due to:'
+    options:
+    - T-lymphocytes
+    - red blood cells
+    - platelets
+    answer: T-lymphocytes
+    difficulty: 2
+    hints:
+    - It is cell-mediated immunity.
+    - The cells recognise 'non-self'.
+    solution: 'Step 1: cell-mediated response. Step 2: T cells.'
+    mistakes:
+      red blood cells: c12b7_imm
+      platelets: c12b7_imm
+  - prompt: A vaccine gives which kind of immunity?
+    options:
+    - active
+    - passive
+    - none
+    answer: active
+    difficulty: 1
+    hints:
+    - It contains weakened or inactivated pathogens or their parts.
+    - Who makes the antibodies?
+    solution: 'Step 1: the body responds and builds memory. Step 2: active.'
+    mistakes:
+      passive: c12b7_imm
+      none: c12b7_imm
+  - prompt: 'Rheumatoid arthritis is an example of:'
+    options:
+    - autoimmune disease
+    - allergy
+    - infectious disease
+    answer: autoimmune disease
+    difficulty: 2
+    hints:
+    - The immune system attacks the body's own joints.
+    - Auto means self.
+    solution: 'Step 1: self cells attacked. Step 2: autoimmune.'
+    mistakes:
+      allergy: c12b7_imm
+      infectious disease: c12b7_imm
+  - prompt: 'HIV is a retrovirus. Its genetic material is:'
+    options:
+    - RNA
+    - DNA
+    - protein
+    answer: RNA
+    difficulty: 2
+    hints:
+    - Retroviruses use reverse transcriptase.
+    - They copy their genes back into DNA.
+    solution: 'Step 1: reverse transcription RNA → DNA. Step 2: RNA.'
+    mistakes:
+      DNA: c12b7_imm
+      protein: c12b7_imm
+  - prompt: Which antibody is linked with allergies?
+    options:
+    - IgE
+    - IgG
+    - IgA
+    answer: IgE
+    difficulty: 2
+    hints:
+    - It triggers mast cells.
+    - Mast cells release histamine.
+    solution: 'Step 1: allergy response. Step 2: IgE.'
+    mistakes:
+      IgG: c12b7_imm
+      IgA: c12b7_imm
+  - prompt: 'Heroin (smack) is obtained from:'
+    options:
+    - poppy (Papaver somniferum)
+    - hemp (Cannabis)
+    - coca plant
+    answer: poppy (Papaver somniferum)
+    difficulty: 2
+    hints:
+    - It is an opioid.
+    - Made from morphine.
+    solution: 'Step 1: morphine from poppy latex. Step 2: poppy.'
+    mistakes:
+      hemp (Cannabis): c12b7_drug
+      coca plant: c12b7_drug
+  - prompt: 'A tumour that stays in one place and does not spread is:'
+    options:
+    - benign
+    - malignant
+    - metastatic
+    answer: benign
+    difficulty: 1
+    hints:
+    - It is the less harmful kind.
+    - It does not invade other tissues.
+    solution: 'Step 1: confined to its site. Step 2: benign.'
+    mistakes:
+      malignant: c12b7_imm
+      metastatic: c12b7_imm
