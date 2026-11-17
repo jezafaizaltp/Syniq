@@ -20,6 +20,9 @@ tips:
   c6m6_back: 'Work backwards: undo the formula one step at a time.'
   c6m6_units: Change everything to the same unit before you calculate.
   c6m6_half: Count full squares as 1, more-than-half as 1, exactly half as ½, less than half as 0.
+  pqc6m6_gate: 'Read the story again: is every part of the boundary fenced?'
+  pqc6m6_wire: The same wire goes round both shapes. What does that tell you about the two boundaries?
+  pqc6m6_cut: Part of the surface is left out. Find the whole surface first, then deal with the part that is left out.
 concepts:
 - code: cbse6m.pa.perimeter
   title: Perimeter
@@ -111,6 +114,11 @@ concepts:
         - 63 cm
         answer: 20 cm
         why: 4 + 7 + 9 = 20.
+      ways:
+      - style: real_world
+        teach: 'A farmer who fences a field needs its perimeter. So does someone who puts a wooden border round a photo, or who walks once round a playground. In each case the question is: how long is the edge all the way round?'
+      - style: step_by_step
+        teach: 'Step 1: Take a four-sided plot with sides 12 m, 9 m, 15 m and 10 m. Step 2: Start at one corner and go round, writing down each side once. Step 3: Add them: 12 + 9 + 15 + 10 = 46. Step 4: The perimeter is 46 m.'
     - teach: 'Shortcuts: a rectangle has two lengths and two breadths, so perimeter = 2 × (length + breadth). A square has 4 equal sides: 4 × side. A regular polygon: number of sides × side.'
       check:
         prompt: Perimeter of a rectangle 10 m by 3 m?
@@ -120,6 +128,27 @@ concepts:
         - 30 m
         answer: 26 m
         why: 2 × (10 + 3) = 26.
+      ways:
+      - style: visual
+        teach: Three shortcuts for perimeter, each with one worked example.
+        picture:
+          kind: compare
+          columns:
+          - title: Rectangle 9 cm by 5 cm
+            points:
+            - 2 × (9 + 5)
+            - 2 × 14 = 28 cm
+          - title: Square of side 8 cm
+            points:
+            - 4 × 8
+            - 32 cm
+          - title: Regular pentagon, side 4 cm
+            points:
+            - 5 × 4
+            - 20 cm
+          alt: 'Rectangle 9 by 5: 2 × (9 + 5) = 28 cm. Square of side 8: 4 × 8 = 32 cm. Regular pentagon of side 4: 5 × 4 = 20 cm.'
+      - style: step_by_step
+        teach: 'Step 1: A rectangle is 11 m long and 4 m wide. Step 2: Add the length and the breadth: 11 + 4 = 15. Step 3: Double it: 2 × 15 = 30 m. Step 4: Check by going round: 11 + 4 + 11 + 4 = 30 m.'
     - teach: You can work backwards. If a square's perimeter is 28 cm, each side is 28 ÷ 4 = 7 cm. If a rectangle's perimeter is 30 cm and its length 9 cm, then length + breadth = 15, so breadth = 6 cm.
       check:
         prompt: A regular pentagon has perimeter 40 cm. How long is each side?
@@ -129,6 +158,19 @@ concepts:
         - 5 cm
         answer: 8 cm
         why: '5 equal sides: 40 ÷ 5 = 8.'
+      ways:
+      - style: visual
+        teach: Working backwards from the perimeter of a square to its side.
+        picture:
+          kind: flow
+          steps:
+          - Square with perimeter 48 cm
+          - It has 4 equal sides, so divide by 4
+          - 48 ÷ 4 = 12
+          - Each side is 12 cm
+          alt: A square with perimeter 48 cm has 4 equal sides, so each side is 48 ÷ 4 = 12 cm.
+      - style: real_world
+        teach: A gardener has 24 m of fencing for a rectangular vegetable patch that must be 8 m long. Half the fencing, 12 m, makes one length and one breadth. So the breadth is 12 − 8 = 4 m.
   items:
   - prompt: Find the perimeter of a rectangle 6 cm long and 4 cm wide (in cm).
     answer: '20'
@@ -287,6 +329,74 @@ concepts:
     mistakes:
       The rectangle: c6m6_around
       The square: c6m6_around
+  - prompt: 'Assertion (A): A regular pentagon with sides of 7 cm has a perimeter of 35 cm.
+
+      Reason (R): The perimeter of a regular polygon is the number of sides multiplied by the length of one side.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. A pentagon has 5 sides, and 5 × 7 = 35 cm; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): A rectangle 10 cm long and 4 cm wide has a perimeter of 14 cm.
+
+      Reason (R): A rectangle has two lengths and two breadths.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 14 cm is only one length and one breadth. The perimeter is 2 × 14 = 28 cm. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A rectangular playground is 60 m long and 40 m wide. A gate 4 m wide is left open and the rest of the boundary is fenced. How much fencing is needed?'
+    options:
+    - 196 m
+    - 200 m
+    - 96 m
+    answer: 196 m
+    hints:
+    - Find the whole boundary first.
+    - The gate is part of the boundary but has no fence.
+    solution: 'Perimeter = 2 × (60 + 40) = 200 m. Leave out the 4 m gate: 200 − 4 = 196 m.'
+    mistakes:
+      200 m: pqc6m6_gate
+      96 m: c6m6_around
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student bends a 24 cm wire into a square, then straightens it and bends it into an equilateral triangle. Which statement is true?'
+    options:
+    - The triangle's sides are longer than the square's, but both perimeters are 24 cm
+    - The square has the bigger perimeter, because it has more sides
+    - Both shapes have sides of 6 cm
+    answer: The triangle's sides are longer than the square's, but both perimeters are 24 cm
+    hints:
+    - The whole wire is used each time.
+    - Share the wire among 4 sides, then among 3 sides.
+    solution: Both shapes use the whole wire, so both perimeters are 24 cm. The square's side is 24 ÷ 4 = 6 cm and the triangle's is 24 ÷ 3 = 8 cm.
+    mistakes:
+      The square has the bigger perimeter, because it has more sides: pqc6m6_wire
+      Both shapes have sides of 6 cm: c6m6_back
+    exam: competency
+    difficulty: 2
 - code: cbse6m.pa.area
   title: Area
   after:
@@ -358,6 +468,11 @@ concepts:
         - 7 sq units
         answer: 8 sq units
         why: 7 + ½ + ½ = 8.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Trace your hand on squared paper. Step 2: Count the full squares inside, say 14. Step 3: Count the squares that are more than half inside, say 5, as 1 each. Ignore those less than half inside. Step 4: The area is about 14 + 5 = 19 sq cm.'
+      - style: real_world
+        teach: A painter needs the area of a wall to know how much paint to buy. A farmer needs the area of a field to know how much seed to sow. A person laying tiles counts tiles, and each tile is like one unit square.
     - teach: 'For a rectangle, rows × squares in each row: area = length × breadth. For a square, side × side. Area is in square units (sq cm, sq m), perimeter in plain units (cm, m).'
       check:
         prompt: Area of a rectangle 7 cm by 4 cm?
@@ -367,6 +482,19 @@ concepts:
         - 11 sq cm
         answer: 28 sq cm
         why: 7 × 4 = 28.
+      ways:
+      - style: visual
+        teach: Why length times breadth gives the area of a rectangle.
+        picture:
+          kind: flow
+          steps:
+          - A rectangle is 7 cm long and 3 cm wide
+          - It holds 3 rows of unit squares
+          - Each row has 7 squares
+          - Area = 7 × 3 = 21 sq cm
+          alt: A rectangle 7 cm by 3 cm holds 3 rows of 7 unit squares, so its area is 7 × 3 = 21 sq cm.
+      - style: step_by_step
+        teach: 'Step 1: A square garden has side 11 m. Step 2: Area of a square = side × side. Step 3: 11 × 11 = 121. Step 4: Write the unit: 121 sq m. Its perimeter would be 44 m, a different measure with a different unit.'
     - teach: Area and perimeter are different. A 1 × 12 and a 3 × 4 rectangle both cover 12 sq cm, but their perimeters are 26 cm and 14 cm. A diagonal cuts a rectangle into two equal triangles, each with half the area.
       picture:
         kind: compare
@@ -388,6 +516,11 @@ concepts:
         - 10 sq units
         answer: 12 sq units
         why: 6 × 4 = 24, and half of 24 is 12.
+      ways:
+      - style: real_world
+        teach: Two fields can need the same fencing but hold different amounts of crop. A strip 10 m by 2 m and a square 6 m by 6 m both have a perimeter of 24 m. But the strip covers 20 sq m and the square covers 36 sq m.
+      - style: step_by_step
+        teach: 'Step 1: A rectangular sheet 10 cm by 4 cm has area 40 sq cm. Step 2: Cut it along a diagonal. Step 3: Turn one triangle and lay it on the other: they match exactly. Step 4: So each triangle has area 40 ÷ 2 = 20 sq cm.'
   items:
   - prompt: Find the area of a rectangle 5 cm by 3 cm (in sq cm).
     answer: '15'
@@ -554,3 +687,71 @@ concepts:
     mistakes:
       Same perimeter, different area: c6m6_mix
       The square has the bigger area: c6m6_inside
+  - prompt: 'Assertion (A): A rectangle 9 m by 7 m has an area of 63 sq m.
+
+      Reason (R): The area of a rectangle is its length multiplied by its breadth.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 9 × 7 = 63 sq m; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Two rectangles with the same area must have the same perimeter.
+
+      Reason (R): Area measures the surface covered, and perimeter measures the boundary.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: a 1 × 12 and a 3 × 4 rectangle both cover 12 sq cm but have perimeters 26 cm and 14 cm. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A wall is 6 m long and 3 m high. It has a window 2 m by 1 m. The wall is to be painted, but not the window. What area is painted?'
+    options:
+    - 16 sq m
+    - 18 sq m
+    - 20 sq m
+    answer: 16 sq m
+    hints:
+    - Find the area of the whole wall.
+    - The window is part of the wall that gets no paint.
+    solution: 'Wall: 6 × 3 = 18 sq m. Window: 2 × 1 = 2 sq m. Painted area: 18 − 2 = 16 sq m.'
+    mistakes:
+      18 sq m: pqc6m6_cut
+      20 sq m: pqc6m6_cut
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student wants to put a ribbon border round a card 20 cm by 15 cm and also cover the card with coloured paper. The student works out 300 for both. What are the right amounts?'
+    options:
+    - Ribbon 70 cm, the perimeter; paper 300 sq cm, the area
+    - Ribbon 300 cm; paper 300 sq cm
+    - Ribbon 70 sq cm; paper 70 cm
+    answer: Ribbon 70 cm, the perimeter; paper 300 sq cm, the area
+    hints:
+    - Which job goes round the edge, and which covers the surface?
+    - Use a different formula and a different unit for each job.
+    solution: 'The ribbon goes round the edge: 2 × (20 + 15) = 70 cm. The paper covers the surface: 20 × 15 = 300 sq cm.'
+    mistakes:
+      Ribbon 300 cm; paper 300 sq cm: c6m6_mix
+      Ribbon 70 sq cm; paper 70 cm: c6m6_mix
+    exam: competency
+    difficulty: 2

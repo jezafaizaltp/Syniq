@@ -21,6 +21,7 @@ tips:
   c6m2_clock: Count the hour gaps between the hands, then use 30° for each gap.
   c6m2_rest: On a straight line the angles together make a half turn. Take the known part away.
   c6m2_scale: Read the scale that starts at 0 on the first arm.
+  pqc6m2_pairs: 'List the pairs in order: every pair with the first point, then the new pairs with the second point, and so on. Count each pair once.'
 concepts:
 - code: cbse6m.lines.basics
   title: Points, lines, rays and segments
@@ -119,6 +120,11 @@ concepts:
         - A line
         answer: A line segment
         why: Only a segment stops at both ends, so only it has a fixed length.
+      ways:
+      - style: real_world
+        teach: 'The beam of a torch starts at the torch and goes on one way: that is the idea of a ray. The edge of a ruler from 0 to 15 cm stops at both ends: a line segment. A straight road that runs to the horizon in both directions gives the idea of a line.'
+      - style: step_by_step
+        teach: 'Step 1: Look at the ends of the figure. Step 2: Two end points and no arrows: it is a line segment, and you can measure it. Step 3: One end point and one arrow: it is a ray. Step 4: Arrows at both ends and no end points: it is a line.'
     - teach: Through two points only one straight line can pass. Two different lines can cross at most once. Lines that never meet, like rail tracks, are parallel.
       check:
         prompt: Two different straight lines cross. At how many points do they meet?
@@ -128,6 +134,25 @@ concepts:
         - Many
         answer: '1'
         why: If they shared two points they would be the same line.
+      ways:
+      - style: visual
+        teach: Two straight lines on a page either cross once or never meet.
+        picture:
+          kind: compare
+          columns:
+          - title: Lines that cross
+            points:
+            - Meet at exactly one point
+            - Like the two strokes of the letter X
+            - Called intersecting lines
+          - title: Lines that never meet
+            points:
+            - Stay the same distance apart
+            - Like the two rails of a track
+            - Called parallel lines
+          alt: Intersecting lines meet at exactly one point, like the strokes of an X. Parallel lines stay the same distance apart and never meet, like rails.
+      - style: step_by_step
+        teach: 'Step 1: Mark two dots P and Q. Step 2: Lay a ruler so that its edge touches both dots, and draw. Step 3: Try to draw a different straight line through both dots. The ruler always falls back on the same line. Step 4: So two points fix one line.'
     - teach: 'An angle is two rays that start from the same point. That point is the vertex and the rays are the arms. We name the angle with the vertex in the middle: ∠ABC has vertex B, arms BA and BC.'
       picture:
         kind: geometry
@@ -159,6 +184,11 @@ concepts:
         - ZX and ZY
         answer: YX and YZ
         why: The vertex is the middle letter Y, and both arms start at Y.
+      ways:
+      - style: real_world
+        teach: 'Open a pair of scissors. The screw in the middle is the vertex and the two blades are the arms of the angle. Open a book a little: the spine is the vertex and the two covers are the arms.'
+      - style: step_by_step
+        teach: 'Step 1: Find the point where the two rays meet, say E. That is the vertex. Step 2: Pick one point on each arm, say D and F. Step 3: Write the vertex in the middle: ∠DEF. Step 4: Read it backwards, ∠FED, and it is still the same angle.'
   items:
   - prompt: Which has exactly two end points?
     options:
@@ -347,6 +377,74 @@ concepts:
     mistakes:
       A segment BC only: c6m2_ends
       A right angle: c6m2_turn
+  - prompt: 'Assertion (A): A line segment can be measured with a ruler.
+
+      Reason (R): A line segment has two end points, so it has a fixed length.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Because a segment stops at both ends, it has a length that a ruler can measure; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In ∠XYZ, the vertex is X.
+
+      Reason (R): In the name of an angle, the middle letter is the vertex.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the middle letter is Y, so the vertex is Y. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A map shows five villages, and no three of them lie on one straight line. A straight road is to be built between every pair of villages. How many roads are needed?'
+    options:
+    - '10'
+    - '5'
+    - '20'
+    answer: '10'
+    hints:
+    - The first village needs a road to each of the other four.
+    - The second village already has its road to the first. How many new roads does it need?
+    solution: 4 + 3 + 2 + 1 = 10 roads. Each pair of villages is counted once.
+    mistakes:
+      '5': pqc6m2_pairs
+      '20': pqc6m2_pairs
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student draws a figure that starts at point P, passes through Q and has an arrow beyond Q. The student labels it ''line segment PQ''. What is the correct name, and why?'
+    options:
+    - Ray PQ, because it has one end point and goes on one way
+    - Line PQ, because it has an arrow
+    - Line segment PQ, because it passes through two named points
+    answer: Ray PQ, because it has one end point and goes on one way
+    hints:
+    - Count the end points of the figure.
+    - How many ends carry an arrow?
+    solution: The figure stops at P and goes on beyond Q. One end point and one direction make it ray PQ.
+    mistakes:
+      Line PQ, because it has an arrow: c6m2_ends
+      Line segment PQ, because it passes through two named points: c6m2_ends
+    exam: competency
+    difficulty: 2
 - code: cbse6m.lines.angles
   title: Measuring and comparing angles
   after:
@@ -434,6 +532,11 @@ concepts:
         - '3'
         answer: '4'
         why: 360 ÷ 90 = 4.
+      ways:
+      - style: real_world
+        teach: 'A closed door lies along the wall. Open it until it stands straight out from the wall: it has made a quarter turn, 90°. A wheel that spins once and comes back to where it started has made a full turn, 360°. Half of that spin is 180°.'
+      - style: step_by_step
+        teach: 'Step 1: A full turn is 360°. Step 2: Half of it is 360 ÷ 2 = 180°, a straight angle. Step 3: A quarter of it is 360 ÷ 4 = 90°, a right angle. Step 4: Three quarter turns make 3 × 90 = 270°.'
     - teach: Angles less than 90° are acute. Between 90° and 180° they are obtuse. More than 180° but less than 360° they are reflex.
       picture:
         kind: number_line
@@ -460,6 +563,11 @@ concepts:
         - Acute
         answer: Reflex
         why: 200° is more than 180°.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Is the angle less than 90°? Then it is acute, like 60°. Step 2: Is it exactly 90°? Then it is a right angle. Step 3: Is it between 90° and 180°? Then it is obtuse, like 110°. Step 4: Is it between 180° and 360°? Then it is reflex, like 250°.'
+      - style: real_world
+        teach: The tip of a pizza slice is an acute angle. The corner of a page is a right angle. A laptop screen pushed back past upright makes an obtuse angle with the keyboard. The pizza left on the plate after one slice is taken shows a reflex angle.
     - teach: To measure, place the protractor's centre on the vertex and line up 0 with one arm. Read the scale that starts at 0 on that arm where the other arm crosses. On a clock each hour gap is 360 ÷ 12 = 30°.
       check:
         prompt: At 2 o'clock, what angle do the clock hands make?
@@ -469,6 +577,19 @@ concepts:
         - 120°
         answer: 60°
         why: 'The hands are 2 hour gaps apart: 2 × 30° = 60°.'
+      ways:
+      - style: visual
+        teach: Measuring an angle with a protractor, one step at a time.
+        picture:
+          kind: flow
+          steps:
+          - Put the protractor's centre on the vertex
+          - Turn it so one arm lies along a 0 line
+          - Follow the scale that starts from that 0
+          - Read the number where the other arm crosses
+          alt: 'To measure an angle: centre the protractor on the vertex, line up one arm with 0, follow the scale that starts at that 0, and read where the other arm crosses.'
+      - style: real_world
+        teach: A clock face is a ready-made protractor marked in jumps of 30°. At 1 o'clock the hands are one hour gap apart, so the angle between them is 30°. At 2 o'clock they are two gaps apart, so the angle is 2 × 30 = 60°.
   items:
   - prompt: How many degrees are in a right angle?
     answer: '90'
@@ -645,3 +766,71 @@ concepts:
     mistakes:
       140°: c6m2_scale
       180°: c6m2_scale
+  - prompt: 'Assertion (A): Two right angles together make a straight angle.
+
+      Reason (R): A right angle is 90° and a straight angle is 180°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 90° + 90° = 180°, so two right angles make a straight angle; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): An angle of 95° is acute.
+
+      Reason (R): An acute angle is less than 90°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 95° is more than 90° and less than 180°, so it is obtuse. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A round pizza is cut from the centre into 8 equal slices. What is the angle at the tip of each slice?'
+    options:
+    - 45°
+    - 40°
+    - 80°
+    answer: 45°
+    hints:
+    - All the tips together make one full turn at the centre.
+    - Share the full turn equally among the slices.
+    solution: A full turn is 360°. 360 ÷ 8 = 45°, so each tip is 45°.
+    mistakes:
+      40°: c6m2_turn
+      80°: c6m2_turn
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student measures an angle that is clearly wider than the corner of a book. Where the second arm crosses, one scale of the protractor reads 60 and the other reads 120. What should the student write?'
+    options:
+    - 120°, because an angle wider than a right angle is more than 90°
+    - 60°, because the smaller reading is always the right one
+    - 180°, the two readings added together
+    answer: 120°, because an angle wider than a right angle is more than 90°
+    hints:
+    - Compare the angle with a right angle before you read the scale.
+    - Only one of the two readings fits what you can see.
+    solution: The angle is wider than a right angle, so it is obtuse. Of the two readings only 120° is more than 90°.
+    mistakes:
+      60°, because the smaller reading is always the right one: c6_protractor_scale
+      180°, the two readings added together: c6m2_type
+    exam: competency
+    difficulty: 2

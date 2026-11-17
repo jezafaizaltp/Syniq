@@ -22,6 +22,7 @@ tips:
   c6m5_common: List the multiples (or factors) of both numbers and look for the ones in both lists.
   c6m5_tree: Keep splitting until every branch ends in a prime, then multiply them back to check.
   c6m5_digits: 'Use the divisibility rule for that number: look at the last digits or the digit sum.'
+  pqc6m5_claim: The claim is about odd numbers. To break it, you need an odd number that fails the claim.
 concepts:
 - code: cbse6m.prime.factors
   title: Factors, multiples and primes
@@ -101,6 +102,11 @@ concepts:
         - '5'
         answer: '6'
         why: 20 ÷ 6 leaves 2 over; 4 × 5 = 20 so 4 and 5 are factors.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: To find the factors of 20, start with 1: 1 × 20. Step 2: Try 2: 2 × 10. Try 3: it does not divide 20. Step 3: Try 4: 4 × 5. The next number, 5, is already in a pair, so stop. Step 4: The factors of 20 are 1, 2, 4, 5, 10 and 20.'
+      - style: real_world
+        teach: 24 students in a parade can stand in 1 row of 24, 2 rows of 12, 3 rows of 8 or 4 rows of 6. Every row size that leaves nobody out is a factor of 24. Rows of 5 leave 4 students over, so 5 is not a factor of 24.
     - teach: 'A prime number has exactly two factors: 1 and itself (2, 3, 5, 7, 11, 13). A composite number has more than two. 1 has only one factor, so it is neither. 2 is the only even prime.'
       check:
         prompt: Is 21 prime or composite?
@@ -110,6 +116,28 @@ concepts:
         - Neither
         answer: Composite
         why: 21 = 3 × 7, so it has the factors 1, 3, 7, 21.
+      ways:
+      - style: visual
+        teach: Sort numbers by how many factors they have.
+        picture:
+          kind: compare
+          columns:
+          - title: 'Prime: exactly 2 factors'
+            points:
+            - 7 has factors 1, 7
+            - 11 has factors 1, 11
+            - '2 has factors 1, 2: the only even prime'
+          - title: 'Composite: more than 2'
+            points:
+            - 4 has factors 1, 2, 4
+            - 9 has factors 1, 3, 9
+            - 15 has factors 1, 3, 5, 15
+          - title: Neither
+            points:
+            - '1 has only one factor: 1'
+          alt: Primes such as 7, 11 and 2 have exactly two factors. Composites such as 4, 9 and 15 have more than two. The number 1 has only one factor, so it is neither.
+      - style: step_by_step
+        teach: 'Step 1: Is 43 prime? It is odd, so 2 does not divide it. Step 2: Its digit sum is 7, so 3 does not divide it. Step 3: It does not end in 0 or 5, so 5 does not divide it. Step 4: The next prime is 7, but 7 × 7 = 49 is already more than 43, so we can stop. 43 is prime.'
     - teach: 'Common multiples are in both lists: multiples of 4 (4, 8, 12, 16, 20, 24) and of 6 (6, 12, 18, 24) share 12 and 24. Common factors divide both. Two numbers with only 1 as a common factor are co-prime, like 9 and 10.'
       picture:
         kind: compare
@@ -132,6 +160,11 @@ concepts:
         - No, both are even
         answer: No, both divide by 7
         why: 14 = 2 × 7 and 21 = 3 × 7 share the factor 7.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: List multiples of 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30. Step 2: List multiples of 5: 5, 10, 15, 20, 25, 30. Step 3: Circle the numbers in both lists: 15 and 30. Step 4: The smallest common multiple of 3 and 5 is 15.'
+      - style: real_world
+        teach: A florist has 12 roses and 20 lilies and wants identical bunches with no flower left over. The number of bunches must divide both 12 and 20, so it can be 1, 2 or 4. The most is 4 bunches, each with 3 roses and 5 lilies.
   items:
   - prompt: How many factors does 12 have?
     answer: '6'
@@ -304,6 +337,74 @@ concepts:
     mistakes:
       '40': c6m5_common
       '14': c6m5_common
+  - prompt: 'Assertion (A): 14 and 25 are co-prime.
+
+      Reason (R): Two numbers are co-prime when their only common factor is 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The factors of 14 are 1, 2, 7, 14 and of 25 are 1, 5, 25. Only 1 is common; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 1 is a prime number.
+
+      Reason (R): A prime number has exactly two factors.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 1 has only one factor, itself, so it is neither prime nor composite. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A teacher has 30 pencils and 45 erasers and wants to make identical kits that use up everything. What is the greatest number of kits?'
+    options:
+    - '15'
+    - '5'
+    - '90'
+    answer: '15'
+    hints:
+    - The number of kits must divide both 30 and 45.
+    - List the common factors and pick the largest.
+    solution: The common factors of 30 and 45 are 1, 3, 5 and 15. The greatest is 15 kits, each with 2 pencils and 3 erasers.
+    mistakes:
+      '5': c6m5_common
+      '90': c6m5_common
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student says, ''Every odd number is prime, because 2 does not divide it.'' Which number shows that the student is wrong?'
+    options:
+    - 21, because 21 = 3 × 7
+    - 13, because it is odd
+    - 2, because it is even and prime
+    answer: 21, because 21 = 3 × 7
+    hints:
+    - Look for an odd number with a factor other than 1 and itself.
+    - An example that fits the claim cannot break it.
+    solution: 21 is odd, but 3 and 7 divide it, so it is composite. One such number is enough to show the claim is wrong.
+    mistakes:
+      13, because it is odd: c6m5_prime
+      2, because it is even and prime: pqc6m5_claim
+    exam: competency
+    difficulty: 2
 - code: cbse6m.prime.factorise
   title: Prime factorisation and divisibility
   after:
@@ -376,6 +477,11 @@ concepts:
         - 3 × 6
         answer: 2 × 3 × 3
         why: 9 and 6 are not prime; split them until only primes are left.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Divide 126 by the smallest prime that works: 126 ÷ 2 = 63. Step 2: 63 is odd, so try 3: 63 ÷ 3 = 21. Step 3: Again by 3: 21 ÷ 3 = 7. Step 4: 7 is prime, so stop. 126 = 2 × 3 × 3 × 7.'
+      - style: real_world
+        teach: Primes are the building blocks of numbers. Every whole number bigger than 1 is either a single block or is built by multiplying blocks, and each number has only one set of blocks. However you split 30, you end with 2, 3 and 5.
     - teach: 'Divisibility tests save time. By 2: last digit even. By 5: ends in 0 or 5. By 10: ends in 0. By 3: digit sum divides by 3. By 9: digit sum divides by 9.'
       check:
         prompt: Is 7,425 divisible by 9?
@@ -384,6 +490,25 @@ concepts:
         - 'No'
         answer: 'Yes'
         why: Digit sum 7 + 4 + 2 + 5 = 18, and 18 divides by 9.
+      ways:
+      - style: visual
+        teach: 'Five quick tests in two groups: look at the last digit, or add the digits.'
+        picture:
+          kind: compare
+          columns:
+          - title: Look at the last digit
+            points:
+            - 'By 2: last digit is 0, 2, 4, 6 or 8'
+            - 'By 5: last digit is 0 or 5'
+            - 'By 10: last digit is 0'
+          - title: Add the digits
+            points:
+            - 'By 3: digit sum is a multiple of 3'
+            - 'By 9: digit sum is a multiple of 9'
+            - 738 → 7 + 3 + 8 = 18, so both work
+          alt: 'Tests by last digit: 2, 5 and 10. Tests by digit sum: 3 and 9. For 738 the digit sum is 18, so 738 is divisible by both 3 and 9.'
+      - style: step_by_step
+        teach: 'Step 1: Test 1,245. Step 2: The last digit is 5: not even, so not divisible by 2; divisible by 5; not by 10. Step 3: The digit sum is 1 + 2 + 4 + 5 = 12, a multiple of 3, so 3 divides it. Step 4: 12 is not a multiple of 9, so 9 does not.'
     - teach: 'By 4: the last two digits divide by 4. By 8: the last three digits divide by 8. By 6: it passes both the test for 2 and the test for 3.'
       check:
         prompt: Is 5,132 divisible by 4?
@@ -392,6 +517,19 @@ concepts:
         - 'No'
         answer: 'Yes'
         why: The last two digits 32 divide by 4.
+      ways:
+      - style: visual
+        teach: Testing one number, 5,124, by 4, by 8 and by 6.
+        picture:
+          kind: flow
+          steps:
+          - Is 5,124 divisible by 4, by 8, by 6?
+          - 'By 4: last two digits 24, and 24 ÷ 4 = 6, so yes'
+          - 'By 8: last three digits 124, and 124 ÷ 8 leaves 4, so no'
+          - 'By 6: even, and digit sum 12 is a multiple of 3, so yes'
+          alt: 5,124 is divisible by 4 because 24 is; not by 8 because 124 leaves a remainder; and by 6 because it is even and its digit sum 12 is a multiple of 3.
+      - style: real_world
+        teach: A year that does not end in 00 is a leap year when 4 divides it, so you only need its last two digits. For 2028, 28 ÷ 4 = 7, so it is a leap year. For 2026, 26 ÷ 4 leaves 2, so it is not.
   items:
   - prompt: What is the prime factorisation of 60?
     options:
@@ -578,3 +716,71 @@ concepts:
     mistakes:
       '8': c6m5_tree
       '2': c6m5_tree
+  - prompt: 'Assertion (A): 7,290 is divisible by 9.
+
+      Reason (R): A number is divisible by 9 when the sum of its digits is divisible by 9.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 7 + 2 + 9 + 0 = 18, and 9 divides 18; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The prime factorisation of 40 is 4 × 10.
+
+      Reason (R): In a prime factorisation, every factor must be a prime number.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 4 and 10 are not prime. Splitting them gives 40 = 2 × 2 × 2 × 5. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: 1,416 marbles are to be packed into equal boxes with none left over. Boxes that hold 5, 8 or 9 marbles are available. Which box size works?'
+    options:
+    - Boxes of 8
+    - Boxes of 5
+    - Boxes of 9
+    answer: Boxes of 8
+    hints:
+    - Use a divisibility test for each box size.
+    - Look at the last digit, the last three digits and the digit sum.
+    solution: 1,416 does not end in 0 or 5. Its digit sum is 12, which 9 does not divide. Its last three digits give 416 ÷ 8 = 52, so boxes of 8 work.
+    mistakes:
+      Boxes of 5: c6m5_digits
+      Boxes of 9: c6m5_digits
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: One student starts a factor tree for 120 with 12 × 10. Another starts with 2 × 60. They expect to end with different prime factorisations. What will they find?'
+    options:
+    - Both end with 2 × 2 × 2 × 3 × 5
+    - They end with different primes, because they started differently
+    - The first student ends with 12 × 10 and stops there
+    answer: Both end with 2 × 2 × 2 × 3 × 5
+    hints:
+    - Keep splitting each branch until only primes are left.
+    - Can a number have two different sets of prime factors?
+    solution: 12 × 10 = (2 × 2 × 3) × (2 × 5) and 2 × 60 = 2 × (2 × 2 × 3 × 5). Both give 2 × 2 × 2 × 3 × 5, because a number has only one prime factorisation.
+    mistakes:
+      They end with different primes, because they started differently: c6m5_tree
+      The first student ends with 12 × 10 and stops there: c6m5_tree
+    exam: competency
+    difficulty: 2
