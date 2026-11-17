@@ -61,6 +61,11 @@ concepts:
         - C
         answer: B
         why: A is first, B is second.
+      ways:
+      - style: step_by_step
+        teach: 'Line up some toys. Step 1: Put 5 toys in a row, all facing the same way. Step 2: Point to the one at the front: first. Step 3: Point to the next ones: second, third, fourth. Step 4: The one at the end is fifth, and also last.'
+      - style: real_world
+        teach: At a ticket counter, the person who came first is served first, and everyone else waits for their turn.
     - teach: In a family some people are older and some are younger. Grandparents are older than parents. A baby is younger than everyone.
       check:
         prompt: Who is usually the oldest in a family?
@@ -70,6 +75,23 @@ concepts:
         - a cousin of 5
         answer: a grandparent
         why: Grandparents were born long before the others.
+      ways:
+      - style: visual
+        teach: The ages of people in one family, from the oldest to the youngest.
+        picture:
+          kind: bars
+          bars:
+          - label: Grandfather
+            value: 65
+          - label: Father
+            value: 40
+          - label: Cousin
+            value: 9
+          - label: Baby
+            value: 1
+          alt: Grandfather is 65, father is 40, the cousin is 9 and the baby is 1. Grandfather is the oldest and the baby is the youngest.
+      - style: real_world
+        teach: Each birthday adds one more candle to the cake, so an older person has had more birthdays.
     - teach: 'Before and after: in 1st, 2nd, 3rd, the 2nd comes after the 1st and before the 3rd.'
       check:
         prompt: Which place comes just before third?
@@ -79,6 +101,19 @@ concepts:
         - last
         answer: second
         why: First, second, then third.
+      ways:
+      - style: visual
+        teach: 'Morning jobs in order: first, second, third, fourth.'
+        picture:
+          kind: flow
+          steps:
+          - '1st: Wake up'
+          - '2nd: Brush your teeth'
+          - '3rd: Have a bath'
+          - '4th: Eat breakfast'
+          alt: First wake up, second brush your teeth, third have a bath, fourth eat breakfast.
+      - style: step_by_step
+        teach: 'Find what comes before and after. Step 1: Say the order: 1st, 2nd, 3rd, 4th, 5th. Step 2: Point to 4th. Step 3: The one just before it is 3rd. Step 4: The one just after it is 5th.'
   items:
   - prompt: Who is at the very front of a line?
     options:
@@ -275,6 +310,36 @@ concepts:
     mistakes:
       2nd: c1m7_order
       1st: c1m7_order
+  - prompt: 'Case: Three children run a race. Sara crosses the line after Tom. Ben crosses the line after Sara. In what place does Sara finish?'
+    options:
+    - second
+    - first
+    - third
+    answer: second
+    hints:
+    - Who crossed the line before everyone?
+    - Who came next?
+    solution: Tom finished first, then Sara, then Ben. So Sara finished second.
+    mistakes:
+      first: c1m7_order
+      third: c1m7_order
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Grandmother is 70 years old, Mother is 38 and Lina is 6. Who is the youngest?'
+    options:
+    - Lina
+    - Mother
+    - Grandmother
+    answer: Lina
+    hints:
+    - The youngest person was born last.
+    - Who has had the fewest birthdays?
+    solution: Lina is 6, which is the smallest age, so Lina is the youngest. Grandmother is the oldest.
+    mistakes:
+      Mother: c1m7_age
+      Grandmother: c1m7_age
+    exam: competency
+    difficulty: 2
 - code: cbse1m.lina.count
   title: Counting family members
   after:
@@ -336,6 +401,27 @@ concepts:
         - '4'
         answer: '3'
         why: Mother 1, father 2, child 3.
+      ways:
+      - style: visual
+        teach: Counting the people in a family, one name at a time.
+        picture:
+          kind: compare
+          columns:
+          - title: Family member
+            points:
+            - Grandfather
+            - Mother
+            - Sister
+            - Me
+          - title: Count
+            points:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+          alt: Grandfather is 1, mother is 2, sister is 3 and me is 4. There are 4 people in this family.
+      - style: real_world
+        teach: When a family travels by train, a parent counts everyone before getting off, so nobody is left behind.
     - teach: 'Families can be big or small. We compare family sizes: 6 is more than 4. When someone new joins, the family grows by one.'
       picture:
         kind: bars
@@ -356,6 +442,11 @@ concepts:
         - both the same
         answer: B
         why: 6 is more than 4.
+      ways:
+      - style: step_by_step
+        teach: 'Compare two families. Step 1: Draw a dot for each person in family A. Step 2: Draw dots for family B just below. Step 3: Match the dots one to one. Step 4: The family with dots left over is bigger.'
+      - style: real_world
+        teach: When a new baby is born, the family needs one more cup, one more plate and room for one more person.
     - teach: 'Counting body parts in a family: each person has 2 eyes, 2 hands, 1 nose. For 3 people: eyes 2, 4, 6.'
       check:
         prompt: How many noses do 4 people have?
@@ -365,6 +456,19 @@ concepts:
         - '2'
         answer: '4'
         why: Each person has 1 nose, so 4 people have 4.
+      ways:
+      - style: visual
+        teach: Counting the noses and the ears in a family of 5 people.
+        picture:
+          kind: bars
+          bars:
+          - label: Noses
+            value: 5
+          - label: Ears
+            value: 10
+          alt: '5 people have 5 noses, one each. They have 10 ears, two each: 2, 4, 6, 8, 10.'
+      - style: real_world
+        teach: When buying shoes for the family, we count 2 shoes for each person, not 1.
   items:
   - prompt: 'Lina''s family: mother, father, grandmother, brother and Lina. How many people?'
     answer: '5'
@@ -534,3 +638,33 @@ concepts:
     mistakes:
       '5': c1m7_count
       '4': c1m7_count
+  - prompt: 'Case: Amar''s family has 4 people. For a festival dinner, 3 guests are coming. How many plates are needed for everyone?'
+    options:
+    - '7'
+    - '4'
+    - '3'
+    answer: '7'
+    hints:
+    - Does everyone, family and guests, need a plate?
+    - Start at 4 and count on 3.
+    solution: '4 family members and 3 guests: 4, then 5, 6, 7. So 7 plates are needed.'
+    mistakes:
+      '4': c1m7_count
+      '3': c1m7_count
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Zoya''s family has 6 people and Amar''s family has 4. They all go on a picnic together. How many people are there in all?'
+    options:
+    - '10'
+    - '2'
+    - '6'
+    answer: '10'
+    hints:
+    - Are the families put together or compared?
+    - Start at 6 and count on 4.
+    solution: 'Both families go together, so we add: 6, then 7, 8, 9, 10. There are 10 people.'
+    mistakes:
+      '2': c1m7_count
+      '6': c1m7_count
+    exam: competency
+    difficulty: 2
