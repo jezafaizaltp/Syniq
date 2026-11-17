@@ -22,6 +22,8 @@ tips:
   c6m1_oddsum: Count how many odd numbers you are adding. That count, times itself, is the sum.
   c6m1_tri: A triangular number is 1 + 2 + 3 + ... up to some number. Count the last one you add.
   c6m1_shape: Draw the shape and count the dots, sides or squares one by one.
+  pqc6m1_count: Write out every term up to the one asked for, and count the positions as you go.
+  pqc6m1_which: Squaring the count works when only odd numbers from 1 are added. Here every counting number is added. Which rule fits that?
 concepts:
 - code: cbse6m.pat.seq
   title: Number sequences and their rules
@@ -101,6 +103,11 @@ concepts:
         - '15'
         answer: '5'
         why: 10 − 5, 15 − 10 and 20 − 15 are all 5.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look at 5, 9, 13, 17. Step 2: Find the gaps: 9 − 5 = 4, 13 − 9 = 4, 17 − 13 = 4. Step 3: The gap is always 4, so the rule is ''add 4''. Step 4: The next number is 17 + 4 = 21.'
+      - style: real_world
+        teach: House numbers on one side of a street often go 1, 3, 5, 7 and on the other side 2, 4, 6, 8. Once you know the rule 'add 2', you can tell which side house 15 is on without walking there.
     - teach: 'Some gaps grow. Triangular numbers 1, 3, 6, 10, 15 go up by 2, 3, 4, 5, so the next gap is 6. Square numbers 1, 4, 9, 16 go up by 3, 5, 7: the gaps are the odd numbers.'
       picture:
         kind: flow
@@ -119,6 +126,11 @@ concepts:
         - '10'
         answer: '11'
         why: The gaps are 3, 5, 7, 9, so the next gap is 11 (25 + 11 = 36).
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Look at 2, 3, 5, 8, 12. Step 2: Write the gaps: 1, 2, 3, 4. Step 3: The gaps grow by 1 each time, so the next gap is 5. Step 4: The next number is 12 + 5 = 17.'
+      - style: real_world
+        teach: 'A shop stacks cans in a triangle: 1 can on top, 2 in the row below, 3 in the row below that. With 1, 2, 3 and 4 rows the stack holds 1, 3, 6 and 10 cans. Each new row adds one more can than the row before.'
     - teach: 'Other rules multiply or combine. Powers of 2 double each time: 1, 2, 4, 8, 16. Virahanka numbers add the two before: 1, 2, 3, 5, 8, 13, because 5 + 8 = 13.'
       check:
         prompt: Which rule makes 1, 3, 9, 27, 81?
@@ -128,6 +140,27 @@ concepts:
         - Add the two before
         answer: Multiply by 3
         why: 1 × 3 = 3, 3 × 3 = 9, 9 × 3 = 27, 27 × 3 = 81.
+      ways:
+      - style: visual
+        teach: 'Two rules that do not use a fixed gap: doubling, and adding the two numbers before.'
+        picture:
+          kind: compare
+          columns:
+          - title: Doubling rule
+            points:
+            - Start with 5
+            - 5 × 2 = 10
+            - 10 × 2 = 20
+            - 20 × 2 = 40
+          - title: Add the two before
+            points:
+            - Start with 1, 2
+            - 1 + 2 = 3
+            - 2 + 3 = 5
+            - 3 + 5 = 8
+          alt: Doubling from 5 gives 5, 10, 20, 40. Adding the two numbers before, from 1 and 2, gives 1, 2, 3, 5, 8.
+      - style: real_world
+        teach: Fold a sheet of paper in half and you get 2 layers. Fold it again and you get 4, then 8. Every fold doubles the layers, so the number of layers follows the doubling rule.
   items:
   - prompt: 'What is the next number: 2, 4, 6, 8, ...?'
     answer: '10'
@@ -287,6 +320,74 @@ concepts:
     mistakes:
       2, 4, 6, 8, 10: c6m1_times
       1, 4, 9, 16, 25: c6m1_times
+  - prompt: 'Assertion (A): In the sequence 4, 7, 10, 13, the next number is 16.
+
+      Reason (R): Each number in this sequence is 3 more than the one before.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The gap is always 3, so the next number is 13 + 3 = 16; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In the triangular numbers 1, 3, 6, 10, the gap between neighbours stays the same.
+
+      Reason (R): The gaps between the neighbouring square numbers 1, 4, 9, 16 are odd numbers.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the gaps are 2, 3, 4, so they grow. R is true: the gaps 3, 5, 7 are odd numbers.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A shopkeeper stacks boxes so that the top row has 1 box, the next row 2, the next 3, and so on. How many boxes are there in a stack of 7 rows?'
+    options:
+    - '28'
+    - '21'
+    - '49'
+    answer: '28'
+    hints:
+    - 'Add the rows: 1 + 2 + 3 + ... up to the last row.'
+    - How many boxes are in the last row?
+    solution: 1 + 2 + 3 + 4 + 5 + 6 + 7 = 28 boxes. It is the 7th triangular number.
+    mistakes:
+      '21': c6m1_tri
+      '49': c6m1_tri
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student saves ₹1 on day 1, ₹2 on day 2, ₹4 on day 3 and ₹8 on day 4, doubling every day. A friend says the saving on day 7 will be ₹14, because 7 × 2 = 14. What is the saving on day 7?'
+    options:
+    - ₹64
+    - ₹14
+    - ₹32
+    answer: ₹64
+    hints:
+    - The rule doubles the amount of the day before. It does not double the day number.
+    - Write the amount for each day up to day 7.
+    solution: The amounts are 1, 2, 4, 8, 16, 32, 64. On day 7 the saving is ₹64.
+    mistakes:
+      ₹14: t6_doubling
+      ₹32: pqc6m1_count
+    exam: competency
+    difficulty: 2
 - code: cbse6m.pat.relations
   title: How sequences are connected
   after:
@@ -346,6 +447,11 @@ concepts:
         - '25'
         answer: '36'
         why: Six odd numbers from 1 add to 6 × 6 = 36.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: To add 1 + 3 + 5, count how many odd numbers there are: 3. Step 2: Multiply the count by itself: 3 × 3 = 9. Step 3: Check by adding: 1 + 3 = 4 and 4 + 5 = 9. Step 4: The same shortcut works for any run of odd numbers that starts at 1.'
+      - style: real_world
+        teach: Set out chairs in a square. One chair is a 1 × 1 square. Put 3 more around one corner and you have a 2 × 2 square of 4. Put 5 more around and you have a 3 × 3 square of 9. Each time you add the next odd number of chairs.
     - teach: 'Adding counting numbers from 1 gives triangular numbers: 1 + 2 + 3 + 4 = 10. A quick way: 1 + 2 + ... + n = n × (n + 1) ÷ 2.'
       check:
         prompt: What is 1 + 2 + 3 + ... + 10?
@@ -355,6 +461,26 @@ concepts:
         - '100'
         answer: '55'
         why: 10 × 11 ÷ 2 = 55.
+      ways:
+      - style: visual
+        teach: Pair the first number with the last, the second with the second last, and so on. Every pair has the same total.
+        picture:
+          kind: compare
+          columns:
+          - title: Make pairs from 1 to 8
+            points:
+            - 1 + 8 = 9
+            - 2 + 7 = 9
+            - 3 + 6 = 9
+            - 4 + 5 = 9
+          - title: Add the pairs
+            points:
+            - 4 pairs, each makes 9
+            - 4 × 9 = 36
+            - 'Formula: 8 × 9 ÷ 2 = 36'
+          alt: The numbers 1 to 8 make four pairs that each add to 9, so the total is 4 × 9 = 36, the same as 8 × 9 ÷ 2.
+      - style: step_by_step
+        teach: 'Step 1: To add 1 + 2 + ... + 12, take n = 12. Step 2: Find n + 1 = 13. Step 3: Multiply: 12 × 13 = 156. Step 4: Halve it: 156 ÷ 2 = 78. So the sum is 78.'
     - teach: 'Two triangular numbers side by side make a square: 3 + 6 = 9 and 6 + 10 = 16. Shapes also make sequences: a triangle has 3 sides, a square 4, a pentagon 5.'
       check:
         prompt: Which two neighbouring triangular numbers add to 25?
@@ -364,6 +490,19 @@ concepts:
         - 15 and 21
         answer: 10 and 15
         why: 10 + 15 = 25 = 5 × 5.
+      ways:
+      - style: visual
+        teach: Take any two neighbours from the triangular numbers and add them.
+        picture:
+          kind: flow
+          steps:
+          - 'Triangular numbers: 1, 3, 6, 10, 15'
+          - 'Pick two neighbours: 3 and 6'
+          - 'Add them: 3 + 6 = 9'
+          - 9 = 3 × 3, a square number
+          alt: From the triangular numbers 1, 3, 6, 10, 15, the neighbours 3 and 6 add to 9, which is 3 × 3, a square number.
+      - style: real_world
+        teach: 'Build a staircase of 3 steps from blocks: it uses 1 + 2 + 3 = 6 blocks. Turn a 2-step staircase of 3 blocks upside down and push it against the first. Together they fill a 3 × 3 square of 9 blocks.'
   items:
   - prompt: What is 1 + 3 + 5 + 7 + 9?
     answer: '25'
@@ -528,3 +667,71 @@ concepts:
       '81': c6m1_oddsum
       '41': c6m1_oddsum
       '40': c6m1_oddsum
+  - prompt: 'Assertion (A): 1 + 3 + 5 + 7 + 9 + 11 = 36.
+
+      Reason (R): The sum of the first n odd numbers is n × n.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Six odd numbers are added, and 6 × 6 = 36; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): 1 + 2 + 3 + 4 + 5 is a square number.
+
+      Reason (R): Adding the counting numbers from 1 gives triangular numbers.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: the sum is 15, which is not a number times itself. R is true: 15 is the 5th triangular number.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A class makes a dot rangoli. It starts with 1 dot, then adds an L-shaped border of 3 dots, then one of 5 dots, and so on. Counting the first dot as number 1, how many dots are there after 12 such additions?'
+    options:
+    - '144'
+    - '24'
+    - '23'
+    answer: '144'
+    hints:
+    - Each addition is the next odd number.
+    - How many odd numbers have been added in all?
+    solution: The first 12 odd numbers are added, and their sum is 12 × 12 = 144 dots.
+    mistakes:
+      '24': c6m1_oddsum
+      '23': c6m1_oddsum
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A wall has 15 bricks in the bottom row, 14 in the next row, and so on up to 1 brick at the top. A builder wants the total without adding row by row. Which working gives it?'
+    options:
+    - 15 × 16 ÷ 2 = 120
+    - 15 × 15 = 225
+    - 15 × 2 = 30
+    answer: 15 × 16 ÷ 2 = 120
+    hints:
+    - The rows are 1, 2, 3, ... up to 15.
+    - Which shortcut adds all the counting numbers from 1 to n?
+    solution: 1 + 2 + ... + 15 = 15 × 16 ÷ 2 = 120 bricks.
+    mistakes:
+      15 × 15 = 225: pqc6m1_which
+      15 × 2 = 30: t6_add_run
+    exam: competency
+    difficulty: 2

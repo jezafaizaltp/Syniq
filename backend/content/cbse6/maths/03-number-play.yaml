@@ -22,6 +22,7 @@ tips:
   c6m3_order: For the largest number put the biggest digits on the left; for the smallest, the smallest non-zero digit first.
   c6m3_steps: Do one step of the rule at a time and write down each result.
   c6m3_estimate: Round to an easy number first, then multiply.
+  pqc6m3_zeros: Zeros among the digits are allowed. The routine only fails when all four digits are the same.
 concepts:
 - code: cbse6m.numplay.patterns
   title: Numbers that tell stories
@@ -98,6 +99,11 @@ concepts:
         - '14'
         answer: '25'
         why: 25 is bigger than both its neighbours 9 and 14.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take the row 15, 40, 22, 9. Step 2: 15 has one neighbour, 40, and 15 is smaller, so it is not a supercell. Step 3: 40 is bigger than both 15 and 22, so it is a supercell. Step 4: 22 loses to 40, and 9 loses to 22, so neither is a supercell.'
+      - style: real_world
+        teach: 'Think of a hilltop: the ground on every side of it is lower. A supercell is the hilltop of a number grid. It does not have to be the biggest number in the whole grid, only bigger than the cells that touch it.'
     - teach: 'The digit sum adds the digits: 472 → 4 + 7 + 2 = 13. A palindrome reads the same from both sides, like 252 or 7337. Reversing a number and adding often gives a palindrome: 25 + 52 = 77.'
       check:
         prompt: What is 36 + 63?
@@ -107,6 +113,19 @@ concepts:
         - '69'
         answer: '99'
         why: 36 + 63 = 99, and 99 reads the same both ways.
+      ways:
+      - style: visual
+        teach: Reverse a number, add the two, and see what you get.
+        picture:
+          kind: flow
+          steps:
+          - Start with 62
+          - 'Reverse the digits: 26'
+          - 'Add: 62 + 26 = 88'
+          - '88 reads the same both ways: a palindrome'
+          alt: Start with 62, reverse it to 26, add to get 88, which reads the same both ways and so is a palindrome.
+      - style: step_by_step
+        teach: 'Step 1: To find the digit sum of 5,208, write its digits apart: 5, 2, 0, 8. Step 2: Add them one at a time: 5 + 2 = 7. Step 3: 7 + 0 = 7, then 7 + 8 = 15. Step 4: The digit sum is 15. A zero adds nothing to it.'
     - teach: 'Place value: 1,00,000 (one lakh) is the smallest 6-digit number and 99,999 is the largest 5-digit number. To make the largest number from digits, put them in falling order; for the smallest, rising order, but never start with 0.'
       check:
         prompt: Using the digits 3, 0, 7, 1 once each, what is the smallest 4-digit number?
@@ -116,6 +135,26 @@ concepts:
         - '1307'
         answer: '1037'
         why: A 4-digit number cannot start with 0, so start with 1, then 0, 3, 7.
+      ways:
+      - style: visual
+        teach: Making the largest and the smallest number from a set of digits.
+        picture:
+          kind: compare
+          columns:
+          - title: Largest from 3, 8, 1, 5
+            points:
+            - Put the digits in falling order
+            - 8, 5, 3, 1
+            - 'Largest number: 8,531'
+          - title: Smallest from 3, 0, 7, 5
+            points:
+            - Rising order would start with 0
+            - 'Put the smallest non-zero digit first: 3'
+            - 'Then the rest in rising order: 0, 5, 7'
+            - 'Smallest number: 3,057'
+          alt: 'The largest number from 3, 8, 1, 5 is 8,531, digits in falling order. The smallest from 3, 0, 7, 5 is 3,057: the smallest non-zero digit first, then the rest in rising order.'
+      - style: real_world
+        teach: The distance meter of a car that reads 9,999 km rolls over to 10,000 after one more kilometre. The largest 4-digit number has become the smallest 5-digit number. The same thing happens at every row of nines.
   items:
   - prompt: Which number is a palindrome?
     options:
@@ -288,6 +327,74 @@ concepts:
     mistakes:
       7,000: c6m3_place
       7,00,000: c6m3_place
+  - prompt: 'Assertion (A): The number 8,008 is a palindrome.
+
+      Reason (R): A palindrome reads the same from left to right and from right to left.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Read from the right, 8,008 is still 8,008; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The digit sum of 1,000 is 1,000.
+
+      Reason (R): The digit sum adds the digits of a number, not the number itself.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 1 + 0 + 0 + 0 = 1. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A school gives each locker a 3-digit code. A code is called ''lucky'' if it is a palindrome. How many of the codes 404, 440, 505, 550 and 616 are lucky?'
+    options:
+    - '3'
+    - '5'
+    - '2'
+    answer: '3'
+    hints:
+    - Read each code from the right.
+    - A lucky code looks the same read from either end.
+    solution: 404, 505 and 616 read the same both ways. 440 and 550 do not. So 3 codes are lucky.
+    mistakes:
+      '5': c6m3_pal
+      '2': c6m3_pal
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student must write the smallest 5-digit number using 6, 0, 3, 8 and 1 once each, and writes 01368. What is wrong, and what is the right number?'
+    options:
+    - It starts with 0, so it is really a 4-digit number; the answer is 10,368
+    - Nothing is wrong; 01368 is the smallest
+    - The digits should be in falling order; the answer is 86,310
+    answer: It starts with 0, so it is really a 4-digit number; the answer is 10,368
+    hints:
+    - How many digits does 01368 have once the zero in front is dropped?
+    - Which digit is the smallest one that can stand first?
+    solution: 'A number cannot begin with 0. Put the smallest non-zero digit, 1, first and then the rest in rising order: 10,368.'
+    mistakes:
+      Nothing is wrong; 01368 is the smallest: c6m3_order
+      The digits should be in falling order; the answer is 86,310: c6m3_order
+    exam: competency
+    difficulty: 2
 - code: cbse6m.numplay.games
   title: Number puzzles and estimation
   after:
@@ -363,6 +470,11 @@ concepts:
         - '1211'
         answer: '2111'
         why: Put the biggest digit 2 first, then the 1s.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Take 2718. Step 2: The largest number from its digits is 8721. Step 3: The smallest is 1278. Step 4: Subtract: 8721 − 1278 = 7443. Now do the same again with 7443, and keep going.'
+      - style: real_world
+        teach: D. R. Kaprekar was a school teacher in Devlali, Maharashtra, who loved to play with numbers. In 1949 he found that this routine always lands on the same number. That number is now called the Kaprekar constant.
     - teach: 'The Collatz game: if the number is even, halve it; if it is odd, multiply by 3 and add 1. Keep going. Every starting number anyone has tried ends at 1, but nobody has proved it always will.'
       picture:
         kind: flow
@@ -382,6 +494,11 @@ concepts:
         - '21'
         answer: '22'
         why: 7 is odd, so 3 × 7 + 1 = 22.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start at 21. It is odd, so 21 × 3 + 1 = 64. Step 2: 64 is even, so halve it: 32. Step 3: Keep halving: 16, 8, 4, 2, 1. Step 4: The game has reached 1 in 7 moves.'
+      - style: real_world
+        teach: Think of it as a board game with two rules. On an even square you slide down to half. On an odd square you climb to three times the number plus one. Computers have tried enormous starting numbers and all came down to 1, yet nobody can prove it must.
     - teach: Estimation means a good guess using easy numbers. Days in 10 years are about 10 × 365 = 3,650. Round first, then calculate, then ask whether the answer makes sense.
       check:
         prompt: About how many hours are in a week?
@@ -391,6 +508,19 @@ concepts:
         - About 700
         answer: About 170
         why: 7 × 24 = 168, which is about 170.
+      ways:
+      - style: visual
+        teach: 'Estimating in three moves: round, calculate, check.'
+        picture:
+          kind: flow
+          steps:
+          - 'Question: 28 rows of 31 seats. About how many seats?'
+          - 'Round to easy numbers: 30 rows of 30'
+          - 'Calculate: 30 × 30 = 900'
+          - 'Check: about 900 seats is sensible for a big hall'
+          alt: To estimate 28 rows of 31 seats, round to 30 rows of 30, calculate 900, and check that about 900 seats is sensible.
+      - style: real_world
+        teach: 'A shopkeeper who needs 6 notebooks for each of 48 students thinks: about 50 × 6 = 300. Nobody needs the exact 288 to know that an order of three hundred will do.'
   items:
   - prompt: 'Kaprekar step: largest minus smallest for 5432 and 2345. What is 5432 − 2345?'
     answer: '3087'
@@ -555,3 +685,71 @@ concepts:
     mistakes:
       '13:41': c6m3_pal
       '14:14': c6m3_pal
+  - prompt: 'Assertion (A): In the Collatz game, the number after 15 is 46.
+
+      Reason (R): For an odd number, the rule is to multiply by 3 and add 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 15 is odd, so 15 × 3 + 1 = 46; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In the Collatz game, the number after 18 is 55.
+
+      Reason (R): For an even number, the rule is to halve it.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 18 is even, so the next number is 18 ÷ 2 = 9. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A school has 38 classrooms with about 42 students in each. The principal wants a quick estimate of the number of students. Which estimate is best?'
+    options:
+    - About 1,600
+    - About 160
+    - About 16,000
+    answer: About 1,600
+    hints:
+    - Round each number to the nearest ten.
+    - Multiply the rounded numbers.
+    solution: 38 is about 40 and 42 is about 40. 40 × 40 = 1,600, so there are about 1,600 students.
+    mistakes:
+      About 160: c6m3_estimate
+      About 16,000: c6m3_estimate
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student starts Kaprekar''s routine with 6200. The largest number from its digits is 6200 and the smallest is 0026. A friend says it will take many steps to reach 6174. What happens?'
+    options:
+    - The first subtraction already gives 6174
+    - The first subtraction gives 6226, so more steps are needed
+    - The routine cannot start, because two digits are zero
+    answer: The first subtraction already gives 6174
+    hints:
+    - 0026 is just 26.
+    - Subtract the smallest number from the largest.
+    solution: 6200 − 26 = 6174. The routine reaches Kaprekar's number in one step.
+    mistakes:
+      The first subtraction gives 6226, so more steps are needed: c6m3_steps
+      The routine cannot start, because two digits are zero: pqc6m3_zeros
+    exam: competency
+    difficulty: 2
