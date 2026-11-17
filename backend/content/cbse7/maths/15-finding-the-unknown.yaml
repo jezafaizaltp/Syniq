@@ -108,6 +108,11 @@ concepts:
         - '40'
         answer: '14'
         why: Add 4 to both sides.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Solve x − 6 = 9. Step 2: The 6 is being subtracted, so add 6 to both sides. Step 3: x − 6 + 6 = 9 + 6. Step 4: x = 15. Check: 15 − 6 = 9.'
+      - style: real_world
+        teach: 'On a balance, a bag of rice and a 2 kg weight on one pan are level with a 5 kg weight on the other. Take 2 kg off both pans and it stays level: the bag alone balances 3 kg. An equation is solved the same way.'
     - teach: 'Undo each operation with its opposite. 4x = 28: divide both sides by 4, x = 7. x/3 = 6: multiply both sides by 3, x = 18. For two steps, like 3x − 2 = 13, undo the − 2 first (add 2: 3x = 15), then the × 3 (divide by 3: x = 5).'
       picture:
         kind: flow
@@ -124,6 +129,11 @@ concepts:
         - '10'
         answer: '5'
         why: 2x = 10, so x = 5.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Solve 4x − 5 = 31. Step 2: Undo the − 5 first: add 5 to both sides, 4x = 36. Step 3: Undo the × 4: divide both sides by 4, x = 9. Step 4: Check: 4 × 9 − 5 = 31.'
+      - style: real_world
+        teach: 'A gift is put in a box and then wrapped in paper. To open it you remove the paper first and the box second: last on, first off. In 3x − 2 the subtraction was done last, so it is undone first.'
     - teach: 'Always check by putting the answer back in. For 3x − 2 = 13 with x = 5: 3 × 5 − 2 = 13 ✓. If the two sides are not equal, look again.'
       check:
         prompt: Is x = 3 a solution of 4x + 2 = 16?
@@ -132,6 +142,20 @@ concepts:
         - 'Yes'
         answer: 'No'
         why: 4 × 3 + 2 = 14, not 16.
+      ways:
+      - style: visual
+        teach: Checking a solution by putting it back into the equation.
+        picture:
+          kind: flow
+          steps:
+          - 'Equation: 5x − 4 = 21'
+          - 'Suggested answer: x = 5'
+          - 'Left side: 5 × 5 − 4 = 21'
+          - 'Right side: 21'
+          - Both sides are equal, so x = 5 is correct
+          alt: To check x = 5 in 5x − 4 = 21, work out the left side, 5 × 5 − 4 = 21, which equals the right side, so the answer is correct.
+      - style: step_by_step
+        teach: 'Step 1: Someone claims x = 4 solves 2x + 9 = 15. Step 2: Put 4 in: 2 × 4 + 9 = 17. Step 3: 17 is not 15, so x = 4 is wrong. Step 4: Solve again: 2x = 6, so x = 3. Check: 2 × 3 + 9 = 15.'
   items:
   - prompt: Solve x + 7 = 15.
     answer: '8'
@@ -317,6 +341,74 @@ concepts:
     mistakes:
       '-6': c7m15_undo
       '9': c7m15_order
+  - prompt: 'Assertion (A): x = 6 is the solution of 3x + 2 = 20.
+
+      Reason (R): A solution is a value that makes both sides of the equation equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 3 × 6 + 2 = 20, which equals the right side, so by R it is the solution.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): To solve x/5 = 3, we divide both sides by 5.
+
+      Reason (R): An operation is undone by its opposite operation, done on both sides.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: x is being divided by 5, so by R we multiply both sides by 5, giving x = 15. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A balance has 3 identical boxes and a 4 kg weight on the left pan and a 19 kg weight on the right pan. It is level. What does each box weigh?'
+    options:
+    - 5 kg
+    - 15 kg
+    - 7⅔ kg
+    answer: 5 kg
+    hints:
+    - Write the balance as an equation with x for one box.
+    - Remove the loose 4 kg from both pans first.
+    solution: '3x + 4 = 19. Take 4 from both sides: 3x = 15. Divide by 3: x = 5 kg.'
+    mistakes:
+      15 kg: c7m15_order
+      7⅔ kg: c7m15_order
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student solves 2x − 6 = 10 like this: ''2x = 10 − 6 = 4, so x = 2.'' What is the correct solution?'
+    options:
+    - x = 8
+    - x = 2
+    - x = 5
+    answer: x = 8
+    hints:
+    - How do you undo 'subtract 6'?
+    - Do the same thing to both sides, then check your answer.
+    solution: 'Add 6 to both sides: 2x = 16, so x = 8. Check: 2 × 8 − 6 = 10. The student subtracted 6 instead of adding it.'
+    mistakes:
+      x = 2: c7m15_undo
+      x = 5: c7m15_check
+    exam: competency
+    difficulty: 2
 - code: cbse7m.eqn.words
   title: Forming equations from word problems
   after:
@@ -406,6 +498,11 @@ concepts:
         - n/3 = 36
         answer: 3n = 36
         why: '''Three times'' means multiply by 3.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Read: ''A number minus 12 is 30.'' Step 2: Call the number n. Step 3: Write the equation: n − 12 = 30. Step 4: Solve: n = 42. Check in the words: 42 minus 12 is 30.'
+      - style: real_world
+        teach: You buy some pens at ₹10 each and one notebook for ₹25, and pay ₹75 in all. With p for the number of pens, 10p + 25 = 75, so 10p = 50 and p = 5. The bill itself is an equation.
     - teach: Write everything using the same letter. 'Anu has ₹5 more than Binu; together they have ₹45.' Let Binu have b. Anu has b + 5. So b + (b + 5) = 45, 2b + 5 = 45, 2b = 40, b = 20. Binu has ₹20 and Anu ₹25.
       check:
         prompt: Tom is 3 years older than Sam. Sam is s. How old is Tom?
@@ -415,6 +512,20 @@ concepts:
         - 3s
         answer: s + 3
         why: Older means add.
+      ways:
+      - style: visual
+        teach: Writing both unknown amounts with one letter, then solving.
+        picture:
+          kind: flow
+          steps:
+          - Dia has 10 more stickers than Eli; together they have 36
+          - Let Eli have e stickers
+          - Then Dia has e + 10
+          - e + (e + 10) = 36, so 2e = 26
+          - 'e = 13: Eli has 13 and Dia has 23'
+          alt: 'If Eli has e stickers and Dia has e + 10, then 2e + 10 = 36, so e = 13: Eli has 13 and Dia has 23.'
+      - style: real_world
+        teach: Two siblings share ₹100 so that the elder gets ₹20 more. If the younger gets y, the elder gets y + 20, and y + y + 20 = 100 gives y = 40. The younger gets ₹40 and the elder ₹60.
     - teach: 'Shapes give equations too. A rectangle has length 2 cm more than its breadth b, and perimeter 28 cm: 2(b + b + 2) = 28, so 2b + 2 = 14, 2b = 12, b = 6 cm and length 8 cm.'
       check:
         prompt: A square's perimeter is 36 cm. Side s satisfies which equation?
@@ -424,6 +535,20 @@ concepts:
         - 2s = 36
         answer: 4s = 36
         why: A square has 4 equal sides.
+      ways:
+      - style: visual
+        teach: Turning a fact about a shape's perimeter into an equation.
+        picture:
+          kind: flow
+          steps:
+          - 'Triangle sides: x, x + 1 and x + 2 cm; perimeter 18 cm'
+          - x + (x + 1) + (x + 2) = 18
+          - 3x + 3 = 18
+          - 3x = 15, so x = 5
+          - 'Sides: 5 cm, 6 cm and 7 cm'
+          alt: A triangle with sides x, x + 1 and x + 2 and perimeter 18 cm gives 3x + 3 = 18, so x = 5 and the sides are 5, 6 and 7 cm.
+      - style: step_by_step
+        teach: 'Step 1: An isosceles triangle has two equal sides of s cm and a base of 6 cm; its perimeter is 26 cm. Step 2: Equation: 2s + 6 = 26. Step 3: 2s = 20, so s = 10. Step 4: Check: 10 + 10 + 6 = 26.'
   items:
   - prompt: I double a number and add 3 to get 19. What is the number?
     answer: '8'
@@ -610,3 +735,71 @@ concepts:
     mistakes:
       '15.33': c7m15_order
       '18': c7m15_order
+  - prompt: 'Assertion (A): ''Three more than twice a number is 17'' gives the equation 2n + 3 = 17.
+
+      Reason (R): ''Twice a number'' is written 2n, and ''three more than'' adds 3.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Twice the number is 2n, three more is 2n + 3, and that equals 17; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): ''A number decreased by 5 is 12'' gives the equation 5 − n = 12.
+
+      Reason (R): ''Decreased by 5'' means that 5 is subtracted from the number.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: by R, 5 is taken from the number, so the equation is n − 5 = 12. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A cricket club charges a joining fee of ₹500 and then ₹150 each month. Sana has paid ₹1,700 in all. For how many months has Sana been a member?'
+    options:
+    - 8 months
+    - 11 months
+    - 3 months
+    answer: 8 months
+    hints:
+    - Let m be the number of months and write the total paid.
+    - Take away the joining fee before dividing.
+    solution: 500 + 150m = 1,700. So 150m = 1,200 and m = 8 months.
+    mistakes:
+      11 months: c7m15_unknown
+      3 months: c7m15_unknown
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: The sum of three consecutive even numbers is 78. A student calls them n, n + 1 and n + 2. What should they be called, and what are the numbers?'
+    options:
+    - n, n + 2 and n + 4; the numbers are 24, 26 and 28
+    - n, n + 1 and n + 2; the numbers are 25, 26 and 27
+    - n, 2n and 3n; the numbers are 13, 26 and 39
+    answer: n, n + 2 and n + 4; the numbers are 24, 26 and 28
+    hints:
+    - How far apart are even numbers that follow one another?
+    - Write the sum and solve for n.
+    solution: 'Consecutive even numbers differ by 2: n, n + 2, n + 4. 3n + 6 = 78, so n = 24. The numbers are 24, 26 and 28.'
+    mistakes:
+      n, n + 1 and n + 2; the numbers are 25, 26 and 27: c7m15_unknown
+      n, 2n and 3n; the numbers are 13, 26 and 39: c7m15_unknown
+    exam: competency
+    difficulty: 2

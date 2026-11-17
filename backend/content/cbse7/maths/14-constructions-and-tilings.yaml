@@ -19,6 +19,7 @@ tips:
   c7m14_turn: Imagine standing at the point and turning all the way round once. How many degrees is one full turn?
   c7m14_360: At a point where tiles meet, the corner angles must add to exactly 360°. Divide 360 by the corner angle.
   c7m14_same_area: Moving or turning pieces changes the shape, not the total area.
+  pqc7m14_reach: Each arc reaches only as far as the compass is open. How far must the two arcs reach if they are to meet?
 concepts:
 - code: cbse7m.cons.bisect
   title: Constructions with ruler and compass
@@ -102,6 +103,11 @@ concepts:
         - 2 cm
         answer: 4 cm
         why: It cuts AB into two equal halves.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Draw AB = 8 cm. Step 2: Open the compass to more than 4 cm, say 5 cm. Step 3: From A draw arcs above and below AB; with the same opening do the same from B. Step 4: Join the two crossing points: this line meets AB at its midpoint, 4 cm from each end, at 90°.'
+      - style: real_world
+        teach: To hang a picture exactly midway between two nails, a carpenter can swing equal lengths of string from each nail and mark where the arcs cross, above and below. The line through the two marks is the perpendicular bisector.
     - teach: 'Every point on the perpendicular bisector is the same distance from A and from B. That is why the arcs work: each crossing point is one compass-width from both ends.'
       check:
         prompt: P is on the perpendicular bisector of AB and PA = 6 cm. What is PB?
@@ -111,6 +117,20 @@ concepts:
         - 12 cm
         answer: 6 cm
         why: Points on it are equally far from A and B.
+      ways:
+      - style: visual
+        teach: Why every point of the perpendicular bisector is equally far from A and from B.
+        picture:
+          kind: flow
+          steps:
+          - Take any point P on the perpendicular bisector
+          - The bisector meets AB at M, so AM = MB
+          - PM is shared, and the angles at M are both 90°
+          - △PMA ≅ △PMB by SAS
+          - So PA = PB
+          alt: For a point P on the perpendicular bisector meeting AB at M, triangles PMA and PMB are congruent by SAS, so PA equals PB.
+      - style: real_world
+        teach: On a football pitch the halfway line is the perpendicular bisector of the line joining the centres of the two goals. A ball placed anywhere on the halfway line is exactly as far from one goal centre as from the other.
     - teach: 'To bisect an angle, draw an arc from the corner cutting both arms. From those two points draw equal arcs that cross. The line from the corner through the crossing splits the angle into two equal parts. A regular hexagon: keep the compass at the circle''s radius and step round the circle; it fits exactly 6 times.'
       check:
         prompt: An angle of 120° is bisected. What is each part?
@@ -120,6 +140,20 @@ concepts:
         - 30°
         answer: 60°
         why: 120 ÷ 2 = 60.
+      ways:
+      - style: visual
+        teach: Bisecting an angle with a compass, one arc at a time.
+        picture:
+          kind: flow
+          steps:
+          - From corner O, draw an arc cutting both arms at P and Q
+          - From P, draw an arc inside the angle
+          - From Q, draw an arc with the same opening to cross it at R
+          - Join OR
+          - OR splits the angle into two equal parts
+          alt: Draw an arc from the corner O cutting the arms at P and Q, draw equal arcs from P and Q crossing at R, and join OR to bisect the angle.
+      - style: step_by_step
+        teach: 'Step 1: Draw a circle and keep the compass at its radius. Step 2: Put the point anywhere on the circle and mark an arc across the circle. Step 3: Move to that mark and repeat, six times in all. Step 4: You arrive back at the start; join the six marks to get a regular hexagon.'
   items:
   - prompt: A perpendicular bisector cuts AB at what angle, in degrees?
     answer: '90'
@@ -316,6 +350,74 @@ concepts:
     mistakes:
       Only at A: c7m14_equal_dist
       Anywhere on the line AB itself: c7m14_equal_dist
+  - prompt: 'Assertion (A): A point on the perpendicular bisector of AB is equally far from A and from B.
+
+      Reason (R): The perpendicular bisector passes through the midpoint of AB at right angles, which gives two congruent triangles.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The two triangles formed with the midpoint are congruent by SAS, so the distances to A and B are equal; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Bisecting an angle of 90° gives two angles of 30°.
+
+      Reason (R): An angle bisector divides an angle into two equal parts.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: two equal parts of 90° are 45° each. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A student must construct an angle of 30° using only a ruler and compass. Which plan works?'
+    options:
+    - Construct a 60° angle, as in an equilateral triangle, and bisect it
+    - Construct a 90° angle and bisect it
+    - Draw any angle and bisect it twice
+    answer: Construct a 60° angle, as in an equilateral triangle, and bisect it
+    hints:
+    - Bisecting halves an angle. Which angle is double 30°?
+    - Which triangle gives that angle with compass arcs alone?
+    solution: An equilateral triangle, made with equal compass arcs, has 60° angles. Bisecting 60° gives two angles of 30°.
+    mistakes:
+      Construct a 90° angle and bisect it: c7m14_bisector
+      Draw any angle and bisect it twice: c7m14_bisector
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: While drawing the perpendicular bisector of a 12 cm line, a student opens the compass to 5 cm. The arcs from the two ends do not cross. Why?'
+    options:
+    - The opening must be more than half the line, so more than 6 cm
+    - The compass must be opened to exactly 12 cm
+    - Arcs can never cross; a protractor is needed
+    answer: The opening must be more than half the line, so more than 6 cm
+    hints:
+    - How far does each arc reach from its end of the line?
+    - Add the two reaches and compare with 12 cm.
+    solution: Each arc reaches 5 cm, and 5 + 5 = 10 cm is less than 12 cm, so the arcs cannot meet. The opening must be more than 6 cm.
+    mistakes:
+      The compass must be opened to exactly 12 cm: pqc7m14_reach
+      Arcs can never cross; a protractor is needed: pqc7m14_reach
+    exam: competency
+    difficulty: 2
 - code: cbse7m.cons.tiling
   title: Tilings and plane patterns
   after:
@@ -396,6 +498,11 @@ concepts:
         - '6'
         answer: '3'
         why: 3 × 120 = 360.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: A regular 10-sided tile has corner angles of 144°. Step 2: Divide the full turn by it: 360° ÷ 144° = 2.5. Step 3: Two tiles leave a gap of 72°, and three overlap. Step 4: The answer is not a whole number, so this tile cannot cover a floor on its own.'
+      - style: real_world
+        teach: 'Look at a tiled bathroom floor, a brick wall or a honeycomb. In each one the pieces fit edge to edge with no gaps and no overlaps: wherever corners meet, they fill the full turn exactly. That is what makes a pattern a tiling.'
     - teach: 'A regular polygon tiles on its own only when its angle divides 360° exactly. A regular pentagon''s angle is 108°: 3 × 108 = 324 (a gap) and 4 × 108 = 432 (overlap), so pentagons cannot tile alone. Any triangle and any quadrilateral can tile, because their angles add to 180° or 360°.'
       check:
         prompt: Can regular pentagons tile a floor on their own?
@@ -404,6 +511,26 @@ concepts:
         - 'Yes'
         answer: 'No'
         why: 108° does not divide 360° exactly.
+      ways:
+      - style: visual
+        teach: Regular shapes that tile on their own, and regular shapes that cannot.
+        picture:
+          kind: compare
+          columns:
+          - title: Tile on their own
+            points:
+            - 'Equilateral triangle: 60° corners'
+            - 'Square: 90° corners'
+            - 'Regular hexagon: 120° corners'
+            - Each angle divides 360° exactly
+          - title: Cannot tile alone
+            points:
+            - 'Regular pentagon: 108° corners'
+            - 'Regular 10-sided shape: 144° corners'
+            - 360° is not a whole number of these
+          alt: Equilateral triangles, squares and regular hexagons tile alone because 60°, 90° and 120° divide 360° exactly; regular pentagons (108°) and regular 10-sided shapes (144°) cannot.
+      - style: step_by_step
+        teach: 'Step 1: Cut a quadrilateral of any shape from card and make several copies. Step 2: Its four angles add to 360°. Step 3: Turn the copies so that the four different corners meet at one point. Step 4: Together they fill the full turn exactly, so the shape tiles.'
     - teach: 'Mixed tilings use two or more shapes: two regular octagons (135° each) and a square (90°) make 135 + 135 + 90 = 360°. A tangram is a square cut into 7 pieces; rearranged into a boat or a cat, the area stays the same.'
       check:
         prompt: A tangram square of area 16 cm² is made into a boat. What is the boat's area?
@@ -413,6 +540,20 @@ concepts:
         - 32 cm²
         answer: 16 cm²
         why: The same 7 pieces are used, so the area does not change.
+      ways:
+      - style: visual
+        teach: Checking whether a mix of two regular shapes fills the turn at a point.
+        picture:
+          kind: flow
+          steps:
+          - 'Regular hexagon corner: 120°'
+          - 'Equilateral triangle corner: 60°'
+          - Try 2 hexagons and 2 triangles at a point
+          - 120 + 120 + 60 + 60 = 360°
+          - 'No gap and no overlap: the mix tiles'
+          alt: Two regular hexagons and two equilateral triangles at a point give 120 + 120 + 60 + 60 = 360 degrees, so the mix tiles.
+      - style: real_world
+        teach: Cut a sheet of paper into pieces and rearrange them into a house, a boat or a bird. However odd the new outline looks, it uses exactly the same paper, so its area is unchanged. Tangram puzzles rely on this.
   items:
   - prompt: How many squares meet at each corner of a square tiling?
     answer: '4'
@@ -610,3 +751,71 @@ concepts:
     mistakes:
       3/4: c7m14_same_area
       1/4: c7m14_same_area
+  - prompt: 'Assertion (A): Regular hexagons can tile a floor on their own.
+
+      Reason (R): Each angle of a regular hexagon is 120°, and 120° divides 360° exactly.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 360° ÷ 120° = 3, so three hexagons fill the turn at every point; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): Regular pentagons can tile a floor without gaps.
+
+      Reason (R): Around any point in a tiling, the angles add up to 360°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: a pentagon''s 108° does not divide 360°, so by R pentagons leave gaps or overlap. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A designer wants a pattern in which, at every meeting point, one regular hexagon (120° corners) is joined only by equilateral triangles (60° corners). How many triangles are needed at each point?'
+    options:
+    - '4'
+    - '2'
+    - '6'
+    answer: '4'
+    hints:
+    - How many degrees are left after the hexagon's corner?
+    - How many 60° corners fill that?
+    solution: 360° − 120° = 240° is left, and 240° ÷ 60° = 4 triangles.
+    mistakes:
+      '2': c7m14_360
+      '6': c7m14_360
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A tile maker proposes regular 9-sided tiles, whose corner angles are 140°. Will they cover a floor on their own?'
+    options:
+    - 'No: 360° ÷ 140° is not a whole number, so there is a gap or an overlap'
+    - 'Yes: every regular shape tiles'
+    - 'Yes: three of them make 420°, which is more than enough'
+    answer: 'No: 360° ÷ 140° is not a whole number, so there is a gap or an overlap'
+    hints:
+    - What must the corner angles at a point add to?
+    - Try two tiles, then three.
+    solution: Two corners make 280°, leaving a gap of 80°; three make 420°, an overlap. 140° does not divide 360° exactly, so the tiles cannot cover a floor alone.
+    mistakes:
+      'Yes: every regular shape tiles': c7_tiling_angle
+      'Yes: three of them make 420°, which is more than enough': c7_tiling_angle
+    exam: competency
+    difficulty: 2

@@ -103,6 +103,11 @@ concepts:
         - −2
         answer: '2'
         why: Start at −4 and move 6 right.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: To find (−4) + 7, start at −4 on the number line. Step 2: Adding a positive number moves right. Step 3: Move 7 steps: −3, −2, −1, 0, 1, 2, 3. Step 4: You land on 3, so (−4) + 7 = 3.'
+      - style: real_world
+        teach: 'A lift panel shows 3, 2, 1, 0, −1, −2, where 0 is the ground floor and the negatives are basements. Starting on floor 2 and going down 4 floors takes you to −2, the second basement: 2 + (−4) = −2.'
     - teach: 'Tokens help: a + token and a − token cancel to make zero (a zero pair). For (+3) + (−7): three zero pairs vanish and 4 negative tokens are left, so the answer is −4.'
       picture:
         kind: compare
@@ -124,6 +129,11 @@ concepts:
         - −7
         answer: −3
         why: Two zero pairs vanish and three negatives are left.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For (−5) + (+3), lay out 5 negative tokens and 3 positive tokens. Step 2: Pair each positive with a negative: 3 zero pairs. Step 3: Remove the pairs. Step 4: 2 negative tokens remain, so the answer is −2.'
+      - style: real_world
+        teach: 'You owe a friend ₹70, which is −70, and then receive ₹30 pocket money. The ₹30 cancels ₹30 of the debt, and you still owe ₹40: (−70) + 30 = −40.'
     - teach: Subtracting is adding the opposite. 2 − (−4) = 2 + 4 = 6, because taking away a debt leaves you richer. And −1 − 6 = −1 + (−6) = −7.
       check:
         prompt: Find 5 − (−3).
@@ -133,6 +143,20 @@ concepts:
         - −8
         answer: '8'
         why: 5 + 3 = 8.
+      ways:
+      - style: visual
+        teach: Turning a subtraction of a negative number into an addition.
+        picture:
+          kind: flow
+          steps:
+          - 5 − (−3)
+          - Subtracting is adding the opposite
+          - The opposite of −3 is +3
+          - 5 + 3
+          - = 8
+          alt: 'To find 5 − (−3), add the opposite of −3, which is +3: 5 + 3 = 8.'
+      - style: real_world
+        teach: 'In a hill town it is 6 °C in the day and −2 °C at night. The difference is 6 − (−2) = 8 degrees: from −2 up to 0 is 2 degrees, and from 0 up to 6 is 6 more.'
   items:
   - prompt: Find 5 + (−8).
     answer: '-3'
@@ -314,6 +338,74 @@ concepts:
     mistakes:
       4 + (−6): c7m10_opposite
       −4 − 6: c7m10_opposite
+  - prompt: 'Assertion (A): 8 − (−2) = 10.
+
+      Reason (R): Subtracting an integer is the same as adding its opposite.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. The opposite of −2 is 2, so 8 − (−2) = 8 + 2 = 10; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The sum of two negative integers is positive.
+
+      Reason (R): Adding a negative integer moves to the left on the number line.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: starting at a negative number and moving further left gives a negative sum, such as (−3) + (−4) = −7. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A trader''s account shows −₹350, a debt. The trader deposits ₹500 and then pays a bill of ₹275. What does the account show now?'
+    options:
+    - −₹125
+    - ₹125
+    - ₹425
+    answer: −₹125
+    hints:
+    - Start at −350 and move right by 500.
+    - Then move left by 275.
+    solution: −350 + 500 = 150, and 150 − 275 = −125. The account shows a debt of ₹125.
+    mistakes:
+      ₹125: c7m10_direction
+      ₹425: c7m10_direction
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student writes (−3) − (−8) = −11. What is the correct value, and what was the slip?'
+    options:
+    - 5; subtracting −8 means adding 8
+    - −11; nothing is wrong
+    - −5; the two signs should be swapped
+    answer: 5; subtracting −8 means adding 8
+    hints:
+    - What is the opposite of −8?
+    - Rewrite the subtraction as an addition.
+    solution: (−3) − (−8) = (−3) + 8 = 5. The student added −8 instead of adding its opposite.
+    mistakes:
+      −11; nothing is wrong: c7m10_opposite
+      −5; the two signs should be swapped: c7m10_opposite
+    exam: competency
+    difficulty: 2
 - code: cbse7m.int.multdiv
   title: Multiplying and dividing integers
   after:
@@ -402,6 +494,11 @@ concepts:
         - −8
         answer: −15
         why: Five lots of −3.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: 5 × (−2) means five lots of −2, which add to −10. Step 2: Follow the pattern down: 2 × (−2) = −4, 1 × (−2) = −2, 0 × (−2) = 0. Step 3: Each answer rises by 2. Step 4: So the next one, (−1) × (−2), must be 2: negative times negative is positive.'
+      - style: real_world
+        teach: 'A leaking tank loses 5 litres every hour: a change of −5 per hour. In 3 hours the change is 3 × (−5) = −15 litres. And 2 hours ago, which is time −2, it held 10 litres more: (−2) × (−5) = +10.'
     - teach: 'Sign rules, first written by Brahmagupta in 628 CE as fortunes and debts: same signs give a positive, different signs give a negative. Division follows the same rules: (−18) ÷ 3 = −6 and (−18) ÷ (−3) = 6.'
       picture:
         kind: compare
@@ -423,6 +520,11 @@ concepts:
         - '18'
         answer: '4'
         why: Same signs give a positive.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: For (−54) ÷ (−6), first ignore the signs: 54 ÷ 6 = 9. Step 2: Now look at the signs: both are negative. Step 3: Same signs give a positive. Step 4: So the answer is 9. Check: 9 × (−6) = −54.'
+      - style: real_world
+        teach: Paying ₹200 rent each month for 3 months changes your money by 3 × (−200) = −₹600. Sharing a debt of ₹600 equally among 3 people gives each (−600) ÷ 3 = −₹200. Brahmagupta called these debts and fortunes.
     - teach: With several factors, count the negatives. Two negatives make a positive pair, so an even count of negatives gives a positive product and an odd count gives a negative one. (−1) × (−1) × (−1) = −1.
       check:
         prompt: Is (−2) × (−2) × (−2) × (−2) positive or negative?
@@ -431,6 +533,20 @@ concepts:
         - Negative
         answer: Positive
         why: 'Four negatives: an even count.'
+      ways:
+      - style: visual
+        teach: With several factors, find the size first and then count the negative signs.
+        picture:
+          kind: flow
+          steps:
+          - (−2) × (−4) × (−1) × 3
+          - 'Size: 2 × 4 × 1 × 3 = 24'
+          - 'Count the negatives: 3'
+          - 3 is odd, so the product is negative
+          - 'Answer: −24'
+          alt: For (−2) × (−4) × (−1) × 3, the size is 24 and there are three negative factors, an odd count, so the product is −24.
+      - style: step_by_step
+        teach: 'Step 1: Take (−2) × (−5) × (−1) × (−3). Step 2: Pair the negatives: (−2) × (−5) = 10 and (−1) × (−3) = 3. Step 3: Each pair is positive. Step 4: 10 × 3 = 30: four negatives, an even count, give a positive product.'
   items:
   - prompt: Find (−3) × (−4).
     answer: '12'
@@ -611,3 +727,71 @@ concepts:
     mistakes:
       (−2) × (−3) × (−4): c7m10_count_neg
       (−2) × 3 × 4: c7m10_count_neg
+  - prompt: 'Assertion (A): (−5) × (−6) = 30.
+
+      Reason (R): The product of two integers with the same sign is positive.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 5 × 6 = 30, and two negative signs give a positive; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): (−24) ÷ 6 = 4.
+
+      Reason (R): When two integers have different signs, their quotient is negative.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 24 ÷ 6 = 4, but the signs differ, so by R the answer is −4. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The temperature in a freezer falls by 3 °C every hour. It is 0 °C now. What was the temperature 4 hours ago, and what will it be 4 hours from now?'
+    options:
+    - 12 °C then; −12 °C later
+    - −12 °C then; 12 °C later
+    - −12 °C both times
+    answer: 12 °C then; −12 °C later
+    hints:
+    - The change each hour is −3. Time in the past is negative.
+    - Work out (−4) × (−3) and 4 × (−3).
+    solution: 'Four hours ago: (−4) × (−3) = +12 °C. Four hours from now: 4 × (−3) = −12 °C.'
+    mistakes:
+      −12 °C then; 12 °C later: c7m10_signs
+      −12 °C both times: c7m10_signs
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: In a quiz, each right answer scores +5 and each wrong answer scores −2. A team gives 6 right answers and 9 wrong answers. What is the team''s score?'
+    options:
+    - '12'
+    - '48'
+    - −12
+    answer: '12'
+    hints:
+    - Find the marks from right answers and from wrong answers separately.
+    - Add the two results, keeping their signs.
+    solution: 'Right: 6 × 5 = 30. Wrong: 9 × (−2) = −18. Score = 30 + (−18) = 12.'
+    mistakes:
+      '48': c7_int_sign
+      −12: c7_int_sign
+    exam: competency
+    difficulty: 2

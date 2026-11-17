@@ -116,6 +116,11 @@ concepts:
         - 3 × 15
         answer: 3 × 3 × 5
         why: 9 and 15 are not prime; 3, 3 and 5 are.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Start with 120. Step 2: Split it: 120 = 12 × 10. Step 3: Split again until every factor is prime: 12 = 2 × 2 × 3 and 10 = 2 × 5. Step 4: So 120 = 2 × 2 × 2 × 3 × 5 = 2³ × 3 × 5.'
+      - style: real_world
+        teach: 'A sweet-seller can arrange 30 laddus as 2 × 15, 3 × 10 or 5 × 6. Whichever way is chosen, breaking the numbers down further always ends with the same primes: 2, 3 and 5. Primes are the building blocks of numbers.'
     - teach: The HCF (highest common factor) is the largest number that divides both. Write both as primes and multiply the primes they share. 30 = 2 × 3 × 5 and 42 = 2 × 3 × 7 share 2 and 3, so the HCF is 6.
       picture:
         kind: compare
@@ -138,6 +143,11 @@ concepts:
         - '60'
         answer: '10'
         why: 'They share one 2 and one 5: 2 × 5 = 10.'
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the HCF of 40 and 60. Step 2: 40 = 2 × 2 × 2 × 5 and 60 = 2 × 2 × 3 × 5. Step 3: Shared primes: two 2s and one 5. Step 4: HCF = 2 × 2 × 5 = 20.'
+      - style: real_world
+        teach: A teacher has 20 red and 30 blue balloons and wants identical bunches that use every balloon. The HCF of 20 and 30 is 10, so 10 bunches can be made, each with 2 red and 3 blue balloons.
     - teach: 'HCF solves ''largest equal pieces with nothing left over'' problems. 18 m and 24 m ropes cut into the longest equal pieces: the HCF is 6, so pieces are 6 m long. Two numbers with no common prime have HCF 1 (they are co-prime).'
       check:
         prompt: What is the HCF of 8 and 15?
@@ -147,6 +157,20 @@ concepts:
         - '120'
         answer: '1'
         why: 8 = 2³ and 15 = 3 × 5 share no prime.
+      ways:
+      - style: visual
+        teach: Using the HCF to cut two lengths into the longest equal pieces.
+        picture:
+          kind: flow
+          steps:
+          - Ribbons of 28 cm and 42 cm
+          - Cut both into equal pieces, as long as possible, none left
+          - 28 = 2 × 2 × 7 and 42 = 2 × 3 × 7
+          - 'Shared primes: 2 × 7 = 14'
+          - 'Pieces of 14 cm: 2 from one ribbon, 3 from the other'
+          alt: 'Ribbons of 28 cm and 42 cm share the primes 2 and 7, so the HCF is 14: both can be cut into 14 cm pieces with nothing left.'
+      - style: step_by_step
+        teach: 'Step 1: Take 8 and 15. Step 2: 8 = 2 × 2 × 2 and 15 = 3 × 5. Step 3: They share no prime at all. Step 4: So their HCF is 1: they are co-prime, even though neither number is itself prime.'
   items:
   - prompt: Which is the prime factorisation of 60?
     options:
@@ -334,6 +358,74 @@ concepts:
     mistakes:
       '30': c7m11_tree
       '60': c7m11_tree
+  - prompt: 'Assertion (A): The HCF of 14 and 25 is 1.
+
+      Reason (R): 14 and 25 have no common prime factor.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 14 = 2 × 7 and 25 = 5 × 5 share no prime, so the only common factor is 1; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The prime factorisation of 36 is 4 × 9.
+
+      Reason (R): In a prime factorisation, every factor must be a prime number.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: 4 and 9 are not prime. Splitting further gives 36 = 2 × 2 × 3 × 3. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A florist has 36 roses and 54 lilies and wants to make identical bouquets using every flower. What is the greatest number of bouquets, and what does each contain?'
+    options:
+    - 18 bouquets, each with 2 roses and 3 lilies
+    - 9 bouquets, each with 4 roses and 6 lilies
+    - 6 bouquets, each with 6 roses and 9 lilies
+    answer: 18 bouquets, each with 2 roses and 3 lilies
+    hints:
+    - Write 36 and 54 as products of primes.
+    - Multiply all the primes they share.
+    solution: '36 = 2 × 2 × 3 × 3 and 54 = 2 × 3 × 3 × 3. Shared: 2 × 3 × 3 = 18. Each bouquet has 36 ÷ 18 = 2 roses and 54 ÷ 18 = 3 lilies.'
+    mistakes:
+      9 bouquets, each with 4 roses and 6 lilies: c7m11_shared
+      6 bouquets, each with 6 roses and 9 lilies: c7m11_shared
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A student says, ''15 and 28 cannot be co-prime, because neither of them is a prime number.'' Is this right?'
+    options:
+    - 'No: they share no prime factor, so their HCF is 1 and they are co-prime'
+    - 'Yes: co-prime numbers must both be prime'
+    - 'Yes: their HCF is 3'
+    answer: 'No: they share no prime factor, so their HCF is 1 and they are co-prime'
+    hints:
+    - Write 15 and 28 as products of primes.
+    - Is there any prime in both lists?
+    solution: 15 = 3 × 5 and 28 = 2 × 2 × 7. No prime is shared, so the HCF is 1. Co-prime describes the pair, not each number.
+    mistakes:
+      'Yes: co-prime numbers must both be prime': c7m11_shared
+      'Yes: their HCF is 3': c7m11_shared
+    exam: competency
+    difficulty: 2
 - code: cbse7m.hcf.lcm
   title: LCM and its link with HCF
   after:
@@ -421,6 +513,11 @@ concepts:
         - '1'
         answer: '15'
         why: 15 is the first number in both lists.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Find the LCM of 6 and 10. Step 2: List multiples of the bigger number: 10, 20, 30, 40 … Step 3: Test each against 6: 10 no, 20 no, 30 yes. Step 4: LCM = 30. Listing the bigger number''s multiples is the quicker way.'
+      - style: real_world
+        teach: 'Paper cups come in packs of 10 and plates in packs of 4. To have the same number of each with none spare, buy 20 of each: 2 packs of cups and 5 packs of plates. 20 is the LCM of 10 and 4.'
     - teach: 'With primes: use every prime that appears, each the greatest number of times. 12 = 2² × 3 and 18 = 2 × 3², so LCM = 2² × 3² = 36. For two numbers, HCF × LCM = their product: 6 × 36 = 12 × 18 = 216.'
       picture:
         kind: compare
@@ -443,6 +540,26 @@ concepts:
         - '5'
         answer: '30'
         why: 2 × 3 × 5 = 30.
+      ways:
+      - style: visual
+        teach: 'The same two numbers, 14 and 21: shared primes give the HCF, all primes give the LCM.'
+        picture:
+          kind: compare
+          columns:
+          - title: HCF of 14 and 21
+            points:
+            - 14 = 2 × 7
+            - 21 = 3 × 7
+            - 'Shared prime only: 7'
+            - HCF = 7
+          - title: LCM of 14 and 21
+            points:
+            - 'Every prime, the most times it appears: 2 × 3 × 7'
+            - LCM = 42
+            - 'Check: 7 × 42 = 294 = 14 × 21'
+          alt: For 14 and 21 the shared prime 7 gives HCF 7; every prime, 2 × 3 × 7, gives LCM 42; and 7 × 42 equals 14 × 21.
+      - style: step_by_step
+        teach: 'Step 1: Find the LCM of 20 and 30. Step 2: 20 = 2² × 5 and 30 = 2 × 3 × 5. Step 3: Take each prime the most times it appears: 2², 3 and 5. Step 4: LCM = 4 × 3 × 5 = 60. Check: the HCF is 10, and 10 × 60 = 20 × 30.'
     - teach: LCM answers 'when will they happen together again?'. Buses leave every 10 and 15 minutes from the same stop at 8:00. They leave together again after LCM(10, 15) = 30 minutes, at 8:30.
       check:
         prompt: Two lights blink every 4 s and 10 s, together now. After how many seconds will they blink together again?
@@ -452,6 +569,20 @@ concepts:
         - '14'
         answer: '20'
         why: LCM(4, 10) = 20.
+      ways:
+      - style: visual
+        teach: Listing the times of two repeating events to see when they first coincide.
+        picture:
+          kind: flow
+          steps:
+          - Two lights flash every 6 s and every 9 s
+          - 'First light: 6, 12, 18, 24 …'
+          - 'Second light: 9, 18, 27 …'
+          - 'First shared time: 18 s'
+          - They flash together every 18 s
+          alt: A light flashing every 6 seconds and one flashing every 9 seconds first flash together at 18 seconds, the LCM of 6 and 9.
+      - style: real_world
+        teach: One friend visits the library every 4 days and another every 5 days. If both go today, they next meet there after 20 days, the LCM of 4 and 5. Timetables for trains and medicine doses use the same idea.
   items:
   - prompt: Find the LCM of 6 and 8.
     answer: '24'
@@ -639,3 +770,71 @@ concepts:
     mistakes:
       Yes, when the numbers are co-prime: c7m11_every
       Yes, when one number divides the other: c7m11_every
+  - prompt: 'Assertion (A): The LCM of 5 and 9 is 45.
+
+      Reason (R): When two numbers have no common factor other than 1, their LCM is their product.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. 5 and 9 are co-prime, so the LCM is 5 × 9 = 45; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): The LCM of two numbers is always equal to their product.
+
+      Reason (R): For two numbers, HCF × LCM equals their product.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: by R, the LCM equals the product only when the HCF is 1. For 4 and 6 the LCM is 12, not 24. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Two traffic lights turn green every 45 seconds and every 60 seconds. They turn green together at exactly 10:00. When do they next turn green together?'
+    options:
+    - After 180 seconds, at 10:03
+    - After 15 seconds
+    - After 2,700 seconds, at 10:45
+    answer: After 180 seconds, at 10:03
+    hints:
+    - Is this a common factor or a common multiple problem?
+    - List multiples of 60 and test each against 45.
+    solution: 'LCM of 45 and 60: 60 no, 120 no, 180 yes. 180 seconds is 3 minutes, so they are green together at 10:03.'
+    mistakes:
+      After 15 seconds: c7_hcf_lcm
+      After 2,700 seconds, at 10:45: c7_lcm_smallest
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Two numbers have HCF 5 and LCM 60. One of them is 15. A student says the other must be 60 ÷ 15 = 4. What is the other number really?'
+    options:
+    - '20'
+    - '4'
+    - '12'
+    answer: '20'
+    hints:
+    - What does HCF × LCM equal for two numbers?
+    - Divide that product by the number you know.
+    solution: HCF × LCM = 5 × 60 = 300 = product of the two numbers. The other number is 300 ÷ 15 = 20.
+    mistakes:
+      '4': c7m11_product
+      '12': c7m11_product
+    exam: competency
+    difficulty: 2

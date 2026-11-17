@@ -19,6 +19,7 @@ tips:
   c7m9_rules: 'Name what is given: S for a side, A for an angle, in the order they sit round the triangle. Is the angle between the two sides, or the side between the two angles?'
   c7m9_aaa: Equal angles fix the shape, not the size. A small and a big triangle can have the same angles.
   c7m9_base: Equal sides face equal angles. Find which angles sit opposite the equal sides.
+  pqc7m9_third: Two angles are given. Work out the third one before deciding what kind of triangle it is.
 concepts:
 - code: cbse7m.cong.figures
   title: Congruent figures and triangles
@@ -101,6 +102,25 @@ concepts:
         - A small and a large square
         answer: Two pages torn from the same notebook
         why: They are the same shape and the same size.
+      ways:
+      - style: visual
+        teach: What makes two figures congruent, and two ways they can fail to be.
+        picture:
+          kind: compare
+          columns:
+          - title: Congruent
+            points:
+            - Same shape AND same size
+            - One fits exactly on the other
+            - Sliding, turning or flipping is allowed
+            - Two pages of the same notebook
+          - title: Not congruent
+            points:
+            - 'Same shape, different size: a photo and its enlargement'
+            - 'Different shape: a square and a circle'
+          alt: Congruent figures have the same shape and size and fit exactly on each other; a photo and its enlargement, or a square and a circle, are not congruent.
+      - style: real_world
+        teach: Biscuits cut by the same mould are congruent, and so are floor tiles from the same box. A left glove and a right glove are congruent too, but only after one is flipped over.
     - teach: 'When we write △ABC ≅ △PQR, the order tells us which parts match: A with P, B with Q, C with R. So side AB = PQ, BC = QR, CA = RP, and ∠A = ∠P, ∠B = ∠Q, ∠C = ∠R.'
       picture:
         kind: compare
@@ -126,6 +146,11 @@ concepts:
         - ∠Q
         answer: ∠R
         why: C is third in ABC, and R is third in PQR.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: Read △DEF ≅ △XYZ letter by letter. Step 2: First letters match: D with X. Second: E with Y. Third: F with Z. Step 3: Sides use two letters: DE = XY, EF = YZ, FD = ZX. Step 4: Angles use one: ∠D = ∠X, ∠E = ∠Y, ∠F = ∠Z.'
+      - style: real_world
+        teach: 'When two teams line up to shake hands, the first player meets the first, the second meets the second, and so on. The order of the letters in a congruence statement works the same way: it tells you which corner pairs with which.'
     - teach: 'You need only three matching parts to know two triangles are congruent: SSS (three sides), SAS (two sides and the angle between them), ASA (two angles and the side between them), RHS (right angle, hypotenuse and one side). AAA is not enough: three equal angles give the same shape but maybe a different size.'
       picture:
         kind: compare
@@ -149,6 +174,11 @@ concepts:
         - AAA
         answer: ASA
         why: Angle, side, angle, with the side between the angles.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: List what is known to be equal in the two triangles. Step 2: Three sides: SSS. Step 3: Two sides and the angle between them: SAS. Two angles and the side between them: ASA. Step 4: A right angle, the hypotenuse and one more side: RHS. Three angles only: not enough.'
+      - style: real_world
+        teach: 'A factory making triangular roof frames checks only the lengths of the three bars. If the three sides match the pattern, the whole frame must be identical: that is SSS at work, and it is why triangles make rigid frames.'
   items:
   - prompt: What does congruent mean?
     options:
@@ -373,6 +403,74 @@ concepts:
     mistakes:
       'AAA: the angles look equal': c7m9_aaa
       'RHS: there is a right angle at C': c7m9_rules
+  - prompt: 'Assertion (A): Two triangles with the same three angles need not be congruent.
+
+      Reason (R): Equal angles fix the shape of a triangle but not its size.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. One triangle can be an enlargement of the other, with the same angles but longer sides; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): If △ABC ≅ △PQR, then AB = QR.
+
+      Reason (R): In a congruence statement, the letters are written in matching order.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: by the order in R, A matches P and B matches Q, so AB = PQ. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: To find the width AB of a pond, a surveyor picks a point C on land, walks from A through C to D so that CD = CA, and from B through C to E so that CE = CB. The angles at C are vertically opposite. Which rule shows △ABC ≅ △DEC, so that DE gives the width?'
+    options:
+    - SAS
+    - SSS
+    - AAA
+    answer: SAS
+    hints:
+    - Which two pairs of sides are equal?
+    - 'Where does the equal angle sit: between those sides or not?'
+    solution: 'CA = CD, CB = CE, and the angles between them at C are equal (vertically opposite). Two sides and the angle between them: SAS. So DE = AB.'
+    mistakes:
+      SSS: c7m9_rules
+      AAA: c7m9_rules
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A shop has two rectangular tiles with the same area, 24 cm². One is 6 cm by 4 cm and the other is 8 cm by 3 cm. Are the tiles congruent?'
+    options:
+    - 'No: equal area does not mean the same shape and size'
+    - 'Yes: equal areas always mean congruent'
+    - 'Yes: both are rectangles'
+    answer: 'No: equal area does not mean the same shape and size'
+    hints:
+    - Would one tile fit exactly on top of the other?
+    - Compare their lengths and their breadths.
+    solution: 'A 6 by 4 tile cannot cover an 8 by 3 tile exactly: the sides do not match. Congruent figures must match in every length, not just in area.'
+    mistakes:
+      'Yes: equal areas always mean congruent': c7m9_same
+      'Yes: both are rectangles': c7m9_same
+    exam: competency
+    difficulty: 2
 - code: cbse7m.cong.isosceles
   title: Isosceles and equilateral triangles
   after:
@@ -499,6 +597,11 @@ concepts:
         - ∠P and ∠R
         answer: ∠Q and ∠R
         why: ∠R faces PQ and ∠Q faces PR, the equal sides.
+      ways:
+      - style: step_by_step
+        teach: 'Step 1: In △ABC, AB = AC. Step 2: The angle opposite AB is ∠C, and the angle opposite AC is ∠B. Step 3: Equal sides face equal angles, so ∠B = ∠C. Step 4: If ∠A = 50°, then ∠B = ∠C = (180° − 50°) ÷ 2 = 65°.'
+      - style: real_world
+        teach: An A-shaped step-ladder has two legs of equal length, so with the floor it forms an isosceles triangle. Both legs make the same angle with the ground, which is why the ladder stands upright and does not lean.
     - teach: 'It works the other way too: if two angles of a triangle are equal, the sides opposite them are equal, so the triangle is isosceles. The fold line AM splits the triangle into two congruent halves (by SSS), which is why the base angles match.'
       check:
         prompt: In △XYZ, ∠X = ∠Y. Which sides are equal?
@@ -508,6 +611,20 @@ concepts:
         - XY and XZ
         answer: YZ and XZ
         why: YZ faces ∠X and XZ faces ∠Y.
+      ways:
+      - style: visual
+        teach: Why the base angles of an isosceles triangle must be equal.
+        picture:
+          kind: flow
+          steps:
+          - △ABC with AB = AC
+          - Mark M, the midpoint of BC, and join AM
+          - AB = AC, BM = CM, and AM is shared
+          - △ABM ≅ △ACM by SSS
+          - So ∠B = ∠C
+          alt: In triangle ABC with AB = AC, joining A to the midpoint M of BC gives two triangles congruent by SSS, so angle B equals angle C.
+      - style: step_by_step
+        teach: 'Step 1: A triangle has angles 65°, 65° and 50°. Step 2: Two of its angles are equal. Step 3: So the sides opposite the two 65° angles are equal. Step 4: The triangle is isosceles, even though no side was measured.'
     - teach: An equilateral triangle has all three sides equal, so all three angles are equal, and 180° ÷ 3 = 60° each. An isosceles right triangle has angles 90°, 45° and 45°.
       check:
         prompt: An equilateral triangle has sides of 7 cm. What is each angle?
@@ -517,6 +634,25 @@ concepts:
         - 45°
         answer: 60°
         why: All angles are equal and add to 180°.
+      ways:
+      - style: visual
+        teach: Two special triangles whose angles you can find without measuring.
+        picture:
+          kind: compare
+          columns:
+          - title: Equilateral
+            points:
+            - 3 equal sides
+            - 3 equal angles
+            - 180° ÷ 3 = 60° each
+          - title: Isosceles right
+            points:
+            - One angle is 90°
+            - The two equal angles share the other 90°
+            - 45° each
+          alt: An equilateral triangle has three equal angles of 60°; an isosceles right triangle has one 90° angle and two 45° angles.
+      - style: real_world
+        teach: 'Cut a square sandwich from corner to corner: each half has one 90° corner and two 45° corners, an isosceles right triangle. A triangular road warning sign has three equal sides and three 60° corners.'
   items:
   - prompt: An isosceles triangle has base angles of 50° each. Find the top angle, in degrees.
     answer: '80'
@@ -710,3 +846,71 @@ concepts:
     mistakes:
       '22': c7m9_base
       '7.33': c7m9_base
+  - prompt: 'Assertion (A): Each angle of an equilateral triangle is 60°.
+
+      Reason (R): Equal sides of a triangle have equal angles opposite them, and the three angles add up to 180°.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Both true. Three equal sides give three equal angles, and 180° ÷ 3 = 60°; R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Assertion (A): In an isosceles triangle, all three angles are always equal.
+
+      Reason (R): In an isosceles triangle, the angles opposite the equal sides are equal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is false: only the two base angles must be equal; the third can differ. R is true.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The end wall of a house is topped by an isosceles triangle. The angle at the top of the roof is 96°. What angle does each sloping side make with the horizontal base?'
+    options:
+    - 42°
+    - 84°
+    - 48°
+    answer: 42°
+    hints:
+    - How many degrees are left for the two base angles together?
+    - The two base angles are equal.
+    solution: 'The base angles share 180° − 96° = 84° equally: 84° ÷ 2 = 42° each.'
+    mistakes:
+      84°: c7m9_base
+      48°: c7m9_base
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: In △PQR, ∠P = 70° and ∠Q = 40°. A student says the triangle is scalene because the two given angles are different. Is the student right?'
+    options:
+    - 'No: the third angle is 70°, so two angles are equal and the triangle is isosceles'
+    - 'Yes: different angles always mean three different sides'
+    - 'No: the triangle is equilateral'
+    answer: 'No: the third angle is 70°, so two angles are equal and the triangle is isosceles'
+    hints:
+    - Find ∠R first.
+    - Are any two of the three angles equal?
+    solution: '∠R = 180° − 70° − 40° = 70°. So ∠P = ∠R, and the sides opposite them are equal: the triangle is isosceles.'
+    mistakes:
+      'Yes: different angles always mean three different sides': pqc7m9_third
+      'No: the triangle is equilateral': pqc7m9_third
+    exam: competency
+    difficulty: 2
