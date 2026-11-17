@@ -17,6 +17,8 @@ tips:
   c12b9_tool: 'Match the tool to its job: restriction enzyme cuts, ligase joins, vector carries, gel separates by size, PCR copies.'
   c12b9_pcr: Each PCR cycle doubles the DNA, so after n cycles one molecule becomes 2ⁿ copies.
   c12b9_step: 'Put rDNA steps in order: isolate DNA, cut, amplify (PCR), ligate into vector, insert into host, select, grow and purify the product.'
+  c12b9_blue: An insert inside lacZ breaks the enzyme that makes the blue colour. Which colonies lost that enzyme?
+  c12b9_ori: Ask which part of a vector lets it be copied inside the host, so many copies are made.
 concepts:
 - code: cbse12b.biotech.tools
   title: Tools of recombinant DNA technology
@@ -109,6 +111,11 @@ concepts:
         - only after cutting
         answer: on both strands in the 5′→3′ direction
         why: GAATTC on one strand matches GAATTC on the other, read 5′→3′.
+      ways:
+      - style: step_by_step
+        teach: 'Is 5′-GGATCC-3′ a palindrome? Step 1: Write its partner strand 3′→5′: CCTAGG. Step 2: Read the partner 5′→3′: GGATCC. Step 3: Both strands read the same in the 5′→3′ direction. Step 4: Yes: this is the BamHI site.'
+      - style: real_world
+        teach: Restriction enzymes first evolved in bacteria as a defence. When a virus injects its DNA, the enzyme chops it at its sites, while the bacterium's own DNA is protected by chemical tags. Scientists borrowed these 'scissors'.
     - teach: 'Gel electrophoresis separates DNA pieces by size: DNA is negative, so it moves to the anode through agarose gel; smaller pieces move further. Ethidium bromide stains DNA, which glows orange under UV light. Bands are cut out and the DNA extracted (elution).'
       picture:
         kind: number_line
@@ -132,6 +139,11 @@ concepts:
         - proteins only
         answer: smallest DNA pieces
         why: Small pieces slip through the gel more easily.
+      ways:
+      - style: real_world
+        teach: 'Running a gel is like a race through a crowded market: small children (short DNA) slip through quickly and go far, while big adults (long DNA) push slowly. After the race you read who went how far.'
+      - style: step_by_step
+        teach: 'Read a gel. Step 1: Load DNA in wells at the negative end. Step 2: Switch on the current; DNA moves to the positive end. Step 3: Stain and view under UV. Step 4: Bands farthest from the well are the smallest pieces.'
     - teach: 'A cloning vector (plasmid or phage) needs: an origin of replication (ori) to copy itself, selectable markers (e.g. ampicillin or tetracycline resistance in pBR322) to pick out transformed cells, and unique cloning sites. Agrobacterium''s Ti plasmid carries genes into plants; disarmed retroviruses into animal cells. Host cells are made competent with CaCl₂ and heat shock, or DNA is added by microinjection or a gene gun.'
       check:
         prompt: 'The ''ori'' in a vector is needed for:'
@@ -141,6 +153,27 @@ concepts:
         - killing bacteria
         answer: starting replication
         why: Without ori, the plasmid cannot be copied.
+      ways:
+      - style: visual
+        teach: What a good cloning vector needs, and why.
+        picture:
+          kind: compare
+          columns:
+          - title: ori
+            points:
+            - Starts copying
+            - Sets copy number
+          - title: Selectable marker
+            points:
+            - e.g. antibiotic resistance
+            - Picks out transformed cells
+          - title: Cloning site
+            points:
+            - One site per enzyme
+            - Insert goes in cleanly
+          alt: The origin of replication starts copying and sets how many copies form. A selectable marker such as antibiotic resistance picks out transformed cells. A cloning site, with one site per enzyme, lets the insert go in cleanly.
+      - style: real_world
+        teach: 'Agrobacterium is nature''s own genetic engineer: it inserts part of its Ti plasmid into plant cells and makes them form galls. Scientists remove the gall-causing genes and use the ''disarmed'' plasmid to carry useful genes into crops.'
   items:
   - prompt: How many base pairs long is the EcoRI recognition site GAATTC?
     answer: '6'
@@ -343,6 +376,55 @@ concepts:
     mistakes:
       so DNA moves to the anode: c12b9_tool
       so bacteria die: c12b9_tool
+  - prompt: 'Assertion (A): A vector with two or more sites for the same restriction enzyme is not suitable for cloning.
+
+      Reason (R): Cutting at several sites breaks the vector into many fragments, making it hard to insert the gene correctly.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A unique site lets the enzyme open the vector once, so the insert goes into one known place. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In blue–white screening, a researcher sees both blue and white colonies on a plate with X-gal. Which colonies carry the inserted gene?'
+    options:
+    - White colonies
+    - Blue colonies
+    - Both equally
+    answer: White colonies
+    hints:
+    - The gene was inserted into lacZ.
+    - Without working β-galactosidase, can colonies turn X-gal blue?
+    solution: The insert disrupts lacZ, so no β-galactosidase is made and the colonies stay white. Blue colonies have no insert.
+    mistakes:
+      Blue colonies: c12b9_blue
+      Both equally: c12b9_blue
+    exam: case
+    difficulty: 2
+  - prompt: A student builds a plasmid with an insert and a marker but forgets the origin of replication. What will happen in the host?
+    options:
+    - The plasmid won't be copied, so it is lost as cells divide
+    - It will be copied normally
+    - The host cell will die
+    answer: The plasmid won't be copied, so it is lost as cells divide
+    hints:
+    - Which part of a vector starts its copying?
+    - What happens to a non-copied plasmid after cell divisions?
+    solution: Without ori, the plasmid cannot replicate. Each division dilutes it until it disappears from the population.
+    mistakes:
+      It will be copied normally: c12b9_ori
+      The host cell will die: c12b9_ori
+    exam: competency
+    difficulty: 2
 - code: cbse12b.biotech.process
   title: Processes of recombinant DNA technology
   after:
@@ -411,6 +493,11 @@ concepts:
         - lysozyme
         answer: chitinase
         why: Fungal walls contain chitin.
+      ways:
+      - style: step_by_step
+        teach: 'Isolate DNA from a plant leaf. Step 1: Break cell walls with cellulase. Step 2: Remove RNA with ribonuclease and proteins with protease. Step 3: Add chilled ethanol. Step 4: White DNA threads appear and are spooled out.'
+      - style: real_world
+        teach: 'You can see DNA at home: mash strawberries with salt and dish soap, filter, and pour cold alcohol on top. White strands rise into the alcohol. It''s the same chilled-ethanol step used in labs.'
     - teach: 'PCR (Kary Mullis) makes millions of copies of a gene. Each cycle: denaturation (~94 °C, strands separate), annealing (primers bind), extension (heat-stable Taq polymerase from Thermus aquaticus builds new strands). Each cycle doubles the DNA, so n cycles give 2ⁿ copies.'
       picture:
         kind: flow
@@ -429,6 +516,11 @@ concepts:
         - '25'
         answer: '32'
         why: 2 × 2 × 2 × 2 × 2 = 32.
+      ways:
+      - style: real_world
+        teach: PCR lets forensic teams copy DNA from a single hair root or a tiny blood drop until there's enough to test. It's like turning one photocopy into a million in a couple of hours.
+      - style: step_by_step
+        teach: 'PCR doubling. Step 1: Start with 1 DNA molecule. Step 2: After 1 cycle: 2. Step 3: After 6 cycles: 2⁶ = 64. Step 4: So n cycles give 2ⁿ copies; about 30 cycles give over a billion.'
     - teach: 'The gene is ligated into a vector and put into a host. Transformed cells are picked by antibiotic resistance or by insertional inactivation: in blue–white screening, a gene inserted into lacZ stops β-galactosidase, so recombinant colonies stay white. Hosts are grown in large bioreactors (stirred-tank) with controlled temperature, pH and oxygen, then the product goes through downstream processing: separation, purification, formulation and quality testing.'
       check:
         prompt: 'In blue–white screening, blue colonies are:'
@@ -438,6 +530,19 @@ concepts:
         - dead
         answer: non-recombinant
         why: Their lacZ gene still works.
+      ways:
+      - style: visual
+        teach: Steps from a cloned gene to a finished product.
+        picture:
+          kind: flow
+          steps:
+          - Ligate gene into vector
+          - Transform host; select recombinants
+          - Grow in a bioreactor (stirred-tank)
+          - 'Downstream processing: separate, purify, test, pack'
+          alt: Ligate the gene into a vector. Transform the host and select recombinant cells. Grow them in a bioreactor such as a stirred-tank. Then downstream processing separates, purifies, tests and packs the product.
+      - style: real_world
+        teach: A bioreactor is like a smart cooker that keeps temperature, pH, oxygen and stirring perfect around the clock. Thousands of litres of cells grow inside, each making the target protein, such as insulin.
   items:
   - prompt: Starting with one DNA molecule, how many copies are there after 10 PCR cycles?
     answer: '1024'
@@ -634,3 +739,52 @@ concepts:
     mistakes:
       primers bind: c12b9_pcr
       Taq builds new strands: c12b9_pcr
+  - prompt: 'Assertion (A): Taq polymerase is used in PCR.
+
+      Reason (R): Taq polymerase stays active at the high temperatures used to separate DNA strands.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Each cycle heats to about 94 °C. Taq from Thermus aquaticus survives this, so it need not be added again each cycle. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A crime lab has a single drop of dried blood, too little DNA to test. Which technique should it use first?'
+    options:
+    - PCR to amplify the DNA
+    - Gel electrophoresis
+    - Blue–white screening
+    answer: PCR to amplify the DNA
+    hints:
+    - The problem is quantity.
+    - Which method makes many copies?
+    solution: PCR copies the DNA millions of times so there's enough to analyse. Electrophoresis only separates what is already there.
+    mistakes:
+      Gel electrophoresis: c12b9_pcr
+      Blue–white screening: c12b9_pcr
+    exam: case
+    difficulty: 2
+  - prompt: A team must extract DNA from a fungus. Which enzyme should they use to break the cell wall?
+    options:
+    - Chitinase
+    - Lysozyme
+    - Cellulase
+    answer: Chitinase
+    hints:
+    - What is a fungal cell wall made of?
+    - Match the enzyme to that material.
+    solution: Fungal walls contain chitin, so chitinase breaks them. Lysozyme is for bacteria and cellulase for plants.
+    mistakes:
+      Lysozyme: c12b9_step
+      Cellulase: c12b9_step
+    exam: competency
+    difficulty: 2

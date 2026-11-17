@@ -18,6 +18,8 @@ tips:
   c12b11_rate: 'Rates are ''per individual'': divide the number born, died or moved by the starting population.'
   c12b11_curve: "Compare unlimited and limited resources: one gives a J-curve, the other levels off at K. When N is tiny compared with K, how much does the limit matter?"
   c12b11_int: "Score each species: + benefits, − harmed, 0 unaffected. Then match the pair of scores to the name of the interaction."
+  c12b11_k: Ask what happens to growth when food and space run short. Does the curve keep rising forever?
+  c12b11_who: Ask who gains, who loses and who is unaffected in this relationship.
 concepts:
 - code: cbse12b.pop.attributes
   title: Populations and growth
@@ -152,6 +154,25 @@ concepts:
         - '5'
         answer: '0.2'
         why: 10 ÷ 50 = 0.2.
+      ways:
+      - style: visual
+        teach: Features a population has that a single organism does not.
+        picture:
+          kind: compare
+          columns:
+          - title: Rates
+            points:
+            - Birth rate (natality)
+            - Death rate (mortality)
+            - Per individual, per time
+          - title: Make-up
+            points:
+            - Sex ratio
+            - Age structure
+            - Density (N per area)
+          alt: 'A population has rates, birth rate and death rate, measured per individual per unit time. It also has a make-up: sex ratio, age structure and density, the number per area.'
+      - style: step_by_step
+        teach: 'A pond has 50 frogs; in a year 15 tadpoles are born and 6 frogs die. Step 1: Birth rate = 15 ÷ 50 = 0.3 per frog per year. Step 2: Death rate = 6 ÷ 50 = 0.12. Step 3: Net change = 15 − 6 = +9. Step 4: Next year: 59 frogs.'
     - teach: 'Age pyramids show pre-reproductive, reproductive and post-reproductive groups. A triangle with a wide base means many young: an expanding population. A bell shape means stable. An urn shape (narrow base) means declining. Population size changes by births (B) and immigration (I) adding, deaths (D) and emigration (E) removing: Nₜ₊₁ = Nₜ + (B + I) − (D + E).'
       picture:
         kind: compare
@@ -175,6 +196,11 @@ concepts:
         - natality and emigration
         answer: natality and immigration
         why: Births and arrivals add individuals.
+      ways:
+      - style: real_world
+        teach: 'India''s population pyramid used to be a wide triangle with many children. As birth rates fell, the base narrowed and the middle filled out: the pyramid is slowly turning bell-shaped, a sign of slower growth.'
+      - style: step_by_step
+        teach: 'Use the population equation. Step 1: N(t+1) = N(t) + (B + I) − (D + E). Step 2: Start with 400 deer. Step 3: 60 born, 20 arrive, 30 die, 10 leave. Step 4: 400 + 80 − 40 = 440 deer.'
     - teach: 'With unlimited resources a population grows exponentially, dN/dt = rN, giving a J-shaped curve; r is the intrinsic rate of natural increase. In nature resources run out, so growth slows and levels off at the carrying capacity K: the logistic (Verhulst–Pearl) model dN/dt = rN(K − N)/K gives an S-shaped (sigmoid) curve.'
       picture:
         kind: compare
@@ -198,6 +224,11 @@ concepts:
         - r
         answer: K
         why: Then (K − N)/K = 0.
+      ways:
+      - style: real_world
+        teach: 'Bacteria in fresh milk grow slowly at first, then explode, then level off as food runs low and acid builds up. A J-curve that bends into an S: logistic growth in your kitchen.'
+      - style: step_by_step
+        teach: 'Read logistic growth. Step 1: When N is small, growth is almost exponential. Step 2: As N nears K, resources run short. Step 3: Growth slows. Step 4: At N = K, births balance deaths and the curve flattens.'
   items:
   - prompt: A pond has 20 lotus plants; 8 new ones are added in a year. Find the birth rate per plant per year as a fraction.
     answer: 2/5
@@ -384,6 +415,55 @@ concepts:
     mistakes:
       counting leaves: c12b11_rate
       weighing the soil: c12b11_rate
+  - prompt: 'Assertion (A): Logistic growth is more realistic than exponential growth for most natural populations.
+
+      Reason (R): Resources in nature are limited, so every habitat has a carrying capacity.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Limited resources stop indefinite growth; the population levels off at K, giving the S-curve. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Rabbits introduced to a new island multiply very fast at first, then their numbers stop rising and stay roughly steady. What has happened?'
+    options:
+    - They have reached the carrying capacity of the island
+    - They have become extinct
+    - They are still growing exponentially
+    answer: They have reached the carrying capacity of the island
+    hints:
+    - Steady numbers mean births balance deaths.
+    - What limits a population in a fixed space?
+    solution: 'Limited food and space set a carrying capacity K. As numbers approach K, growth slows to zero: the logistic S-curve.'
+    mistakes:
+      They have become extinct: c12b11_k
+      They are still growing exponentially: c12b11_k
+    exam: case
+    difficulty: 2
+  - prompt: A country's age pyramid has a narrow base and a wide top. What is its population likely to do?
+    options:
+    - Decline
+    - Grow fast
+    - Stay stable
+    answer: Decline
+    hints:
+    - A narrow base means few young people.
+    - Who will become the next parents?
+    solution: 'Few children means fewer future parents, so the population is likely to decline: an urn-shaped pyramid.'
+    mistakes:
+      Grow fast: c12b11_rate
+      Stay stable: c12b11_rate
+    exam: competency
+    difficulty: 2
 - code: cbse12b.pop.interactions
   title: Population interactions
   after:
@@ -510,6 +590,27 @@ concepts:
         - commensalism
         answer: resource partitioning
         why: They split the resource and avoid competing.
+      ways:
+      - style: visual
+        teach: Population interactions sorted by who gains and who loses.
+        picture:
+          kind: compare
+          columns:
+          - title: Both gain or neither harmed
+            points:
+            - Mutualism +/+
+            - Commensalism +/0
+          - title: One gains, one loses
+            points:
+            - Predation +/−
+            - Parasitism +/−
+          - title: Harm without gain
+            points:
+            - Competition −/−
+            - Amensalism −/0
+          alt: Mutualism helps both, plus plus, and commensalism helps one without affecting the other, plus zero. Predation and parasitism help one and harm the other, plus minus. Competition harms both, minus minus, and amensalism harms one without affecting the other, minus zero.
+      - style: real_world
+        teach: 'Cattle egrets follow grazing buffaloes and catch insects stirred up from the grass. The egret gains a meal; the buffalo is not affected: commensalism you can see in any Indian field.'
     - teach: 'Predation (+/−) transfers energy and keeps prey numbers in check; prickly pear cactus spread in Australia until a cactus-eating moth was brought in. Prey defend themselves: camouflage, toxins (the monarch butterfly stores poison from the plant it ate as a caterpillar), and plant chemicals like cardiac glycosides in Calotropis, or thorns.'
       check:
         prompt: 'Calotropis is avoided by cattle because it has:'
@@ -519,6 +620,11 @@ concepts:
         - no leaves
         answer: cardiac glycosides (toxic)
         why: Its chemicals are poisonous to grazers.
+      ways:
+      - style: step_by_step
+        teach: 'Why prickly pear spread so fast in Australia. Step 1: It was brought in without its natural enemies. Step 2: Nothing ate it, so it grew unchecked. Step 3: A cactus-eating moth from its home range was introduced. Step 4: The moth controlled it: predation keeps prey in check.'
+      - style: real_world
+        teach: Calotropis (milkweed) makes bitter, poisonous chemicals, so cattle and goats leave it alone. Plants can't run, so many defend themselves with thorns or toxins against grazing.
     - teach: 'Parasitism (+/−): ectoparasites live outside (lice, ticks, Cuscuta on plants), endoparasites inside (tapeworm, liver fluke); brood parasites like the cuckoo lay eggs in a crow''s nest. Commensalism (+/0): orchid on a mango branch, barnacles on a whale, cattle egrets catching insects stirred up by grazing cattle, clownfish among sea anemones. Amensalism (−/0): Penicillium harms bacteria without gaining.'
       check:
         prompt: 'Cattle egrets and grazing cattle show:'
@@ -528,6 +634,27 @@ concepts:
         - competition
         answer: commensalism
         why: Egrets gain insects; cattle neither gain nor lose.
+      ways:
+      - style: visual
+        teach: Kinds of parasites, grouped by where they live.
+        picture:
+          kind: compare
+          columns:
+          - title: Ectoparasites
+            points:
+            - On the host's surface
+            - Lice, ticks, Cuscuta
+          - title: Endoparasites
+            points:
+            - Inside the host
+            - Tapeworm, liver fluke
+          - title: Brood parasites
+            points:
+            - Host raises their young
+            - Koel in a crow's nest
+          alt: Ectoparasites live on the host's surface, like lice, ticks and Cuscuta. Endoparasites live inside, like tapeworms and liver flukes. Brood parasites make the host raise their young, as the koel lays eggs in a crow's nest.
+      - style: step_by_step
+        teach: 'Classify clownfish living among sea anemone tentacles. Step 1: The clownfish gets shelter from predators: +. Step 2: The anemone is not clearly helped or harmed: 0. Step 3: +/0 is commensalism. Step 4: (Some studies suggest a small gain for the anemone too.)'
   items:
   - prompt: 'An orchid growing on a mango branch shows:'
     options:
@@ -734,3 +861,52 @@ concepts:
     mistakes:
       removing all prey: c12b11_int
       adding nutrients to rocks: c12b11_int
+  - prompt: 'Assertion (A): Two closely related species competing for the same limited resource cannot coexist indefinitely.
+
+      Reason (R): According to Gause''s principle, the better competitor eventually eliminates the other.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Gause's competitive exclusion principle states that complete competitors cannot coexist; one wins. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Penicillium mould on a dish releases a chemical that kills nearby bacteria, while the mould itself gains nothing from their death. What interaction is this?'
+    options:
+    - Amensalism
+    - Predation
+    - Mutualism
+    answer: Amensalism
+    hints:
+    - Is the mould eating the bacteria?
+    - One is harmed; is the other helped?
+    solution: 'The bacteria are harmed and the mould is unaffected: −/0, amensalism.'
+    mistakes:
+      Predation: c12b11_who
+      Mutualism: c12b11_who
+    exam: case
+    difficulty: 2
+  - prompt: Cuscuta wraps around a host plant and draws food from it. What kind of relationship is this?
+    options:
+    - Parasitism
+    - Commensalism
+    - Mutualism
+    answer: Parasitism
+    hints:
+    - Is the host harmed?
+    - Does Cuscuta gain?
+    solution: 'Cuscuta gains food and the host is harmed: +/−, parasitism (an ectoparasite on plants).'
+    mistakes:
+      Commensalism: c12b11_int
+      Mutualism: c12b11_int
+    exam: competency
+    difficulty: 2

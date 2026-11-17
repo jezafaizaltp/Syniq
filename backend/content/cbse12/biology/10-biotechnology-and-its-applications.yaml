@@ -18,6 +18,8 @@ tips:
   c12b10_agri: 'Link each GM crop to what it fixes: Bt cotton (bollworms), RNAi tobacco (nematodes), Golden rice (vitamin A).'
   c12b10_med: 'Link each medical use to its method: insulin (two chains made in E. coli), gene therapy (working gene into cells), diagnosis (PCR, ELISA, probes).'
   c12b10_eth: 'Ethics: GEAC checks GM safety; biopiracy is taking bioresources or traditional knowledge without permission or fair payment.'
+  c12b10_proto: 'Ask where the toxin becomes active: in the plant cell, or only in the insect''s gut?'
+  c12b10_patent: Ask who first used the resource and whether they agreed to, or benefit from, its commercial use.
 concepts:
 - code: cbse12b.bioapp.agri
   title: Biotechnology in agriculture
@@ -91,6 +93,27 @@ concepts:
         - protein
         answer: vitamin A
         why: β-carotene is turned into vitamin A in the body.
+      ways:
+      - style: visual
+        teach: Three routes to more food, and their trade-offs.
+        picture:
+          kind: compare
+          columns:
+          - title: Agro-chemicals
+            points:
+            - Fertilisers, pesticides
+            - Costly; harm soil and water
+          - title: Organic farming
+            points:
+            - Manure, biocontrol
+            - Safer; lower yield often
+          - title: GM crops
+            points:
+            - Built-in traits
+            - Fewer sprays; biosafety checks needed
+          alt: Agro-chemicals like fertilisers and pesticides raise output but are costly and harm soil and water. Organic farming with manure and biocontrol is safer but often yields less. GM crops have built-in traits and need fewer sprays, but require biosafety checks.
+      - style: real_world
+        teach: Golden rice was engineered to make β-carotene, which the body turns into vitamin A. In places where rice is the main food, it was designed to help prevent the night blindness caused by vitamin A deficiency.
     - teach: Bt cotton carries cry genes from Bacillus thuringiensis. The bacterium makes an inactive protoxin; in the alkaline gut of a caterpillar it becomes active, binds the midgut cells and makes pores, so the insect dies. cryIAc and cryIIAb protect cotton from bollworms; cryIAb protects corn from corn borers. The bacterium is not harmed because its toxin stays inactive inside it.
       picture:
         kind: flow
@@ -109,6 +132,11 @@ concepts:
         - it is made outside the cell
         answer: it is stored as an inactive protoxin
         why: It only turns active in the insect's alkaline gut.
+      ways:
+      - style: step_by_step
+        teach: 'How Bt cotton stops a bollworm. Step 1: The plant makes the inactive Bt protoxin. Step 2: A bollworm eats the leaf. Step 3: Its alkaline gut activates the toxin. Step 4: The toxin pierces the gut lining and the insect dies.'
+      - style: real_world
+        teach: Bt cotton farmers in India sprayed less pesticide in the early years. But bollworms can evolve resistance, so farmers are told to plant some non-Bt 'refuge' rows to slow it down.
     - teach: RNA interference (RNAi) silences a specific mRNA with matching double-stranded RNA. Tobacco was protected from the root nematode Meloidogyne incognita by adding nematode genes through Agrobacterium so the plant makes dsRNA; the nematode's own mRNA is silenced inside the plant and it cannot survive.
       check:
         prompt: 'RNAi works by:'
@@ -118,6 +146,19 @@ concepts:
         - killing all soil microbes
         answer: silencing a specific mRNA
         why: dsRNA blocks translation of the matching mRNA.
+      ways:
+      - style: visual
+        teach: RNA interference protecting tobacco from a nematode.
+        picture:
+          kind: flow
+          steps:
+          - Nematode genes added to tobacco by Agrobacterium
+          - Plant makes matching double-stranded RNA
+          - Nematode feeds and takes in the dsRNA
+          - Nematode's own mRNA is silenced; it dies
+          alt: Nematode genes are added to tobacco using Agrobacterium. The plant makes matching double-stranded RNA. The nematode feeds and takes it in. Its own matching messenger RNA is silenced and the nematode dies.
+      - style: step_by_step
+        teach: 'RNAi in general. Step 1: Double-stranded RNA that matches a gene enters the cell. Step 2: It binds to that gene''s mRNA. Step 3: The mRNA is destroyed or blocked. Step 4: The protein is not made: the gene is silenced.'
   items:
   - prompt: 'Bt cotton is resistant to:'
     options:
@@ -324,6 +365,55 @@ concepts:
     mistakes:
       fungus: c12b10_agri
       virus: c12b10_agri
+  - prompt: 'Assertion (A): Bt toxin does not kill the Bacillus thuringiensis bacterium that makes it.
+
+      Reason (R): The toxin is stored as an inactive protoxin that becomes active only in the alkaline gut of an insect.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Inside the bacterium the protein is inactive; it is switched on only at high pH in the insect gut. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Farmers ask whether eating Bt cotton seed oil could poison people the way the toxin kills bollworms. What does the science say?'
+    options:
+    - The toxin needs an alkaline insect gut to become active, which humans don't have
+    - Humans digest Bt toxin into vitamins
+    - Bt toxin is not present in any part of the plant
+    answer: The toxin needs an alkaline insect gut to become active, which humans don't have
+    hints:
+    - Is the toxin made in active or inactive form?
+    - What does the stomach's pH look like in humans?
+    solution: The protoxin is activated only at high pH and binds receptors in specific insect guts. Human stomachs are acidic and lack those receptors.
+    mistakes:
+      Humans digest Bt toxin into vitamins: c12b10_proto
+      Bt toxin is not present in any part of the plant: c12b10_proto
+    exam: case
+    difficulty: 2
+  - prompt: A crop is attacked by a nematode that damages its roots. Which biotech approach directly silences the pest's genes?
+    options:
+    - RNA interference
+    - Adding Bt cry genes
+    - Using Ti plasmid alone
+    answer: RNA interference
+    hints:
+    - Bt cry toxins mainly target insect guts.
+    - Which method blocks a specific mRNA?
+    solution: RNAi uses matching dsRNA to destroy the nematode's mRNA, silencing an essential gene.
+    mistakes:
+      Adding Bt cry genes: c12b10_agri
+      Using Ti plasmid alone: c12b10_agri
+    exam: competency
+    difficulty: 2
 - code: cbse12b.bioapp.medicine
   title: Biotechnology in medicine and ethics
   after:
@@ -388,6 +478,11 @@ concepts:
         - B chain
         answer: C-peptide
         why: The two chains were made separately and joined.
+      ways:
+      - style: real_world
+        teach: Before genetic engineering, diabetics used insulin taken from slaughtered cattle and pigs. Some people reacted badly to it. Insulin made by E. coli carrying the human gene is identical to human insulin and plentiful.
+      - style: step_by_step
+        teach: 'How recombinant human insulin was made. Step 1: DNA for chain A and chain B was made separately. Step 2: Each was put into plasmids in E. coli. Step 3: The bacteria made chain A and chain B. Step 4: The chains were extracted and joined by disulfide bonds.'
     - teach: 'Gene therapy corrects a faulty gene by adding a working copy. The first case (1990) treated a 4-year-old with adenosine deaminase (ADA) deficiency: lymphocytes were grown outside the body, given a working ADA gene with a retroviral vector, and returned. This must be repeated because lymphocytes die; adding the gene to early embryonic cells could be a permanent cure.'
       check:
         prompt: Why must lymphocyte-based ADA gene therapy be repeated?
@@ -397,6 +492,25 @@ concepts:
         - the virus kills the patient
         answer: the modified cells are not immortal
         why: New lymphocytes made later still lack the gene.
+      ways:
+      - style: visual
+        teach: 'Gene therapy for ADA deficiency: two approaches.'
+        picture:
+          kind: compare
+          columns:
+          - title: Using lymphocytes
+            points:
+            - Take lymphocytes out
+            - Add working ADA gene (retrovirus)
+            - Return them; repeat as cells die
+          - title: Using early stem cells
+            points:
+            - Add the gene to bone-marrow cells
+            - They keep making new cells
+            - Could be a lasting cure
+          alt: 'Using lymphocytes: take them out, add a working ADA gene with a retroviral vector, and return them, repeating as the cells die. Using early bone-marrow stem cells: add the gene, and since they keep making new cells it could be a lasting cure.'
+      - style: real_world
+        teach: Gene therapy research has grown since 1990, and some inherited blindness and blood disorders now have approved gene treatments. These are expensive and carefully checked for safety.
     - teach: 'Molecular diagnosis finds diseases early: PCR spots very small amounts of a pathogen''s DNA, ELISA detects antigens or antibodies, and labelled probes find mutated genes. Transgenic animals help study diseases, test vaccine and chemical safety and make products: Rosie the cow (1997) gave milk with human α-lactalbumin. India''s GEAC decides on GM research and release. Biopiracy (e.g. patents on basmati, turmeric, neem) uses others'' bioresources without permission or fair payment.'
       check:
         prompt: 'Patenting a country''s traditional plant knowledge without permission is:'
@@ -406,6 +520,25 @@ concepts:
         - transformation
         answer: biopiracy
         why: It takes bioresources without consent or benefit-sharing.
+      ways:
+      - style: visual
+        teach: Uses of transgenic animals, and the ethics around biotech.
+        picture:
+          kind: compare
+          columns:
+          - title: Uses
+            points:
+            - Study diseases
+            - Test vaccines and chemical safety
+            - Make medicines in milk (Rosie the cow)
+          - title: Ethics and law
+            points:
+            - GEAC checks GM safety in India
+            - Patents on traditional resources
+            - 'Biopiracy: using them without consent or sharing'
+          alt: Transgenic animals are used to study diseases, test vaccines and chemical safety, and make medicines in milk, as Rosie the cow did. On ethics and law, India's GEAC checks GM safety, there are patents on traditional resources, and biopiracy means using them without consent or fair sharing.
+      - style: step_by_step
+        teach: 'Why PCR helps early diagnosis. Step 1: Early in infection there are few pathogen cells. Step 2: Symptoms may not show yet. Step 3: PCR copies even a few DNA molecules to detectable levels. Step 4: So infection can be found before it spreads.'
   items:
   - prompt: In which year was gene therapy first used (for ADA deficiency)?
     answer: '1990'
@@ -597,3 +730,52 @@ concepts:
     mistakes:
       all GM research: c12b10_eth
       all exports: c12b10_eth
+  - prompt: 'Assertion (A): PCR can detect an infection before symptoms appear.
+
+      Reason (R): PCR amplifies very small amounts of pathogen DNA to detectable levels.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Because it multiplies tiny amounts of DNA, PCR finds pathogens while their numbers are still low. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A foreign company patents a ''new'' use of a plant that Indian villagers have used as medicine for centuries, without asking them or sharing benefits. What is this called?'
+    options:
+    - Biopiracy
+    - Gene therapy
+    - Biosafety
+    answer: Biopiracy
+    hints:
+    - The resource and knowledge belong to the community.
+    - Was there consent or benefit sharing?
+    solution: Using bioresources or traditional knowledge without permission or fair sharing is biopiracy.
+    mistakes:
+      Gene therapy: c12b10_patent
+      Biosafety: c12b10_patent
+    exam: case
+    difficulty: 2
+  - prompt: A child with ADA deficiency has received gene therapy using their own lymphocytes. Why might they need it repeated?
+    options:
+    - Lymphocytes are not immortal, so the corrected cells die over time
+    - The gene stops working after one day
+    - The retrovirus attacks the child
+    answer: Lymphocytes are not immortal, so the corrected cells die over time
+    hints:
+    - Which cells were given the working gene?
+    - Do those cells live forever?
+    solution: The corrected lymphocytes have a limited life. As they die, ADA falls, so infusions are repeated.
+    mistakes:
+      The gene stops working after one day: c12b10_med
+      The retrovirus attacks the child: c12b10_med
+    exam: competency
+    difficulty: 2
