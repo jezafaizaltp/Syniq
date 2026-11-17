@@ -910,6 +910,7 @@ CBSE6 = {"cbse6-eng", "cbse6-hin", "cbse6-math", "cbse6-sci", "cbse6-ss"}
 CBSE5 = {"cbse5-eng", "cbse5-evs", "cbse5-hin", "cbse5-math"}
 CBSE4 = {"cbse4-eng", "cbse4-evs", "cbse4-hin", "cbse4-math"}
 CBSE3 = {"cbse3-eng", "cbse3-evs", "cbse3-hin", "cbse3-math"}
+CBSE2 = {"cbse2-eng", "cbse2-hin", "cbse2-math"}
 
 
 @pytest.mark.parametrize("subjects", [CBSE9, CBSE11, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse11", "cbse8", "cbse7", "cbse6"])
@@ -932,9 +933,9 @@ def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects
     assert not no_exam, no_exam
 
 
-@pytest.mark.parametrize("subjects", [CBSE5, CBSE4, CBSE3], ids=["cbse5", "cbse4", "cbse3"])
+@pytest.mark.parametrize("subjects", [CBSE5, CBSE4, CBSE3, CBSE2], ids=["cbse5", "cbse4", "cbse3", "cbse2"])
 def test_every_primary_step_has_more_ways_and_every_topic_case_and_competency_questions(subjects):
-    """CBSE Classes 5, 4 and 3: every lesson step can be taught at least three ways, one of them drawn, and every topic has a
+    """CBSE Classes 5, 4, 3 and 2: every lesson step can be taught at least three ways, one of them drawn, and every topic has a
     case question and a competency question. Primary classes have no board exam, so no assertion-reason here."""
     thin, missing, wrong_style = [], [], []
     for path, pack in PACKS:
