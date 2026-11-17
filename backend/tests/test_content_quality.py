@@ -907,6 +907,7 @@ CBSE11 = {"cbse11-bio", "cbse11-chem", "cbse11-eng", "cbse11-math", "cbse11-phy"
 CBSE8 = {"cbse8-eng", "cbse8-hin", "cbse8-math", "cbse8-sci", "cbse8-ss"}
 CBSE7 = {"cbse7-eng", "cbse7-hin", "cbse7-math", "cbse7-sci", "cbse7-ss"}
 CBSE6 = {"cbse6-eng", "cbse6-hin", "cbse6-math", "cbse6-sci", "cbse6-ss"}
+CBSE5 = {"cbse5-eng", "cbse5-evs", "cbse5-hin", "cbse5-math"}
 
 
 @pytest.mark.parametrize("subjects", [CBSE9, CBSE11, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse11", "cbse8", "cbse7", "cbse6"])
@@ -927,6 +928,29 @@ def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects
                 no_exam.append(f"{rel(path)} {c['code']}")
     assert not thin, thin
     assert not no_exam, no_exam
+
+
+def test_every_cbse5_step_has_more_ways_and_every_topic_case_and_competency_questions():
+    """CBSE Class 5: every lesson step can be taught at least three ways, one of them drawn, and every topic has a
+    case question and a competency question. Primary classes have no board exam, so no assertion-reason here."""
+    thin, missing, wrong_style = [], [], []
+    for path, pack in PACKS:
+        if code_of(pack) not in CBSE5:
+            continue
+        for c in pack["concepts"]:
+            for n, step in enumerate(c.get("lesson") or [], start=1):
+                ways = step.get("ways") or []
+                pictured = bool(step.get("picture")) or any(w.get("picture") for w in ways)
+                if len(ways) < 2 or not pictured:
+                    thin.append(f"{rel(path)} {c['code']} step {n}")
+            styles = {i.get("exam") for i in c["items"]}
+            if not {"case", "competency"} <= styles:
+                missing.append(f"{rel(path)} {c['code']}")
+            if "assertion_reason" in styles:
+                wrong_style.append(f"{rel(path)} {c['code']}")
+    assert not thin, thin
+    assert not missing, missing
+    assert not wrong_style, wrong_style
 
 
 def test_assertion_reason_questions_use_the_standard_choices():
