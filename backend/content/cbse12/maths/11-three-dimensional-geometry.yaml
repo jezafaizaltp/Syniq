@@ -14,6 +14,8 @@ tips:
   c12m11_dr: Direction ratios of the line through two points are the differences of their coordinates, in the same order.
   c12m11_angle: cos θ = |a₁a₂ + b₁b₂ + c₁c₂| divided by the product of the two lengths. A zero numerator means perpendicular.
   c12m11_dist: 'Use the right formula: skew lines need (b₁ × b₂)·(a₂ − a₁); parallel lines need b × (a₂ − a₁).'
+  pq12m11_lambda: 'Each value of λ gives one point: multiply the direction vector by λ, then add it to the starting point.'
+  pq12m11_check_parallel: Compare the two direction vectors first. Are they multiples of each other? Then think what b₁ × b₂ would be.
 concepts:
 - code: cbse12m.3d.lines
   title: Direction ratios and equation of a line
@@ -124,6 +126,19 @@ concepts:
         - (1, 0, 2)
         answer: (2, 1, 3)
         why: 'Subtract: (3 − 1, 1 − 0, 5 − 2).'
+      ways:
+      - style: visual
+        teach: Direction ratios and direction cosines of the line through (2, −1, 3) and (5, 3, −1).
+        picture:
+          kind: flow
+          steps:
+          - 'Differences: (5 − 2, 3 − (−1), −1 − 3)'
+          - Direction ratios (3, 4, −4)
+          - Length √(9 + 16 + 16) = √41
+          - Direction cosines (3/√41, 4/√41, −4/√41)
+          alt: Subtract the coordinates to get direction ratios 3, 4, minus 4. Their length is root 41, so the direction cosines are 3, 4 and minus 4, each over root 41.
+      - style: real_world
+        teach: A zip-line runs straight from a platform at (0, 0, 20) to a landing point at (30, 40, 0) metres. Its direction ratios (30, 40, −20), or more simply (3, 4, −2), say how far it goes east and north for every drop.
     - teach: 'Equation of a line through point a parallel to vector b: r = a + λb. In Cartesian form, through (x₁, y₁, z₁) with direction ratios (a, b, c): (x − x₁)/a = (y − y₁)/b = (z − z₁)/c. Each value of λ gives one point.'
       picture:
         kind: flow
@@ -141,6 +156,11 @@ concepts:
         - (1, 2, 2)
         answer: (3, 4, 2)
         why: (1 + 2, 2 + 2, 0 + 2).
+      ways:
+      - style: step_by_step
+        teach: 'Line through (1, 2, −1) parallel to 2i − j + 3k. Step 1: Vector form r = (i + 2j − k) + λ(2i − j + 3k). Step 2: Cartesian form (x − 1)/2 = (y − 2)/(−1) = (z + 1)/3. Step 3: λ = 1 gives the point (3, 1, 2). Step 4: Check: (3 − 1)/2 = (1 − 2)/(−1) = (2 + 1)/3 = 1.'
+      - style: real_world
+        teach: 'A plane flying straight has position = start point + time × velocity. That is r = a + λb: a is where it took off, b is its velocity vector, and λ is the time. Each moment gives one point on its path.'
     - teach: 'Angle between lines with direction ratios (a₁, b₁, c₁) and (a₂, b₂, c₂): cos θ = |a₁a₂ + b₁b₂ + c₁c₂| / (√(a₁² + b₁² + c₁²) √(a₂² + b₂² + c₂²)). They are perpendicular when a₁a₂ + b₁b₂ + c₁c₂ = 0 and parallel when the ratios are proportional.'
       check:
         prompt: 'Lines with direction ratios (1, 2, 3) and (2, 4, 6) are:'
@@ -150,6 +170,23 @@ concepts:
         - skew
         answer: parallel
         why: (2, 4, 6) = 2 × (1, 2, 3).
+      ways:
+      - style: visual
+        teach: Testing two lines for perpendicular or parallel from their direction ratios.
+        picture:
+          kind: compare
+          columns:
+          - title: Perpendicular
+            points:
+            - (1, 2, −1) and (3, −1, 1)
+            - 3 − 2 − 1 = 0
+          - title: Parallel
+            points:
+            - (1, 2, −1) and (2, 4, −2)
+            - Second = 2 × first
+          alt: Direction ratios 1, 2, minus 1 and 3, minus 1, 1 give a sum of products 0, so the lines are perpendicular. 1, 2, minus 1 and 2, 4, minus 2 are in proportion, so the lines are parallel.
+      - style: step_by_step
+        teach: 'Angle between lines with direction ratios (2, 2, 1) and (1, 0, 0). Step 1: Sum of products: 2 + 0 + 0 = 2. Step 2: Lengths: √(4 + 4 + 1) = 3 and 1. Step 3: cos θ = 2/(3 × 1) = 2/3. Step 4: θ = cos⁻¹(2/3), about 48°.'
   items:
   - prompt: The line through (1, 2, 3) and (4, 6, 3) has direction ratios (3, 4, k). Find k.
     answer: '0'
@@ -317,6 +354,55 @@ concepts:
     mistakes:
       yes, at the origin: c12m11_dist
       yes, they are parallel: c12m11_dist
+  - prompt: 'Assertion (A): Lines with direction ratios (1, −2, 3) and (2, −4, 6) are parallel.
+
+      Reason (R): Two lines are parallel when their direction ratios are proportional.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: (2, −4, 6) = 2 × (1, −2, 3), so the ratios are proportional and by R the lines are parallel. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A drone flies in a straight line given by r = (1, 0, 2) + λ(3, 6, 2), with λ = 0 at take-off. Where is it when λ = 0.5?'
+    options:
+    - (2.5, 3, 3)
+    - (4, 6, 4)
+    - (1.5, 3, 1)
+    answer: (2.5, 3, 3)
+    hints:
+    - Find 0.5 × (3, 6, 2) first.
+    - Then add (1, 0, 2).
+    solution: 0.5 × (3, 6, 2) = (1.5, 3, 1), and adding (1, 0, 2) gives (2.5, 3, 3).
+    mistakes:
+      (4, 6, 4): pq12m11_lambda
+      (1.5, 3, 1): pq12m11_lambda
+    exam: case
+    difficulty: 2
+  - prompt: Lines with direction ratios (2, k, −1) and (3, 2, 4) are perpendicular. Find k.
+    options:
+    - −1
+    - '1'
+    - '5'
+    answer: −1
+    hints:
+    - Perpendicular means a₁a₂ + b₁b₂ + c₁c₂ = 0.
+    - 6 + 2k − 4 = 0.
+    solution: 2 × 3 + k × 2 + (−1) × 4 = 0 gives 2 + 2k = 0, so k = −1.
+    mistakes:
+      '1': c12m11_angle
+      '5': c12m11_angle
+    exam: competency
+    difficulty: 2
 - code: cbse12m.3d.distance
   title: Shortest distance between lines
   after:
@@ -423,6 +509,19 @@ concepts:
         - '49'
         answer: '7'
         why: √(4 + 9 + 36) = 7.
+      ways:
+      - style: visual
+        teach: Distance between (1, −2, 3) and (4, 2, 15), one coordinate at a time.
+        picture:
+          kind: flow
+          steps:
+          - 'Differences: 3, 4, 12'
+          - 'Squares: 9, 16, 144'
+          - 'Sum: 169'
+          - Distance = √169 = 13
+          alt: The coordinate differences 3, 4 and 12 square to 9, 16 and 144, which add to 169, so the distance is 13.
+      - style: real_world
+        teach: 'A rope stretched from a corner of a classroom floor to the opposite top corner of a 6 m by 8 m room that is 3 m high has length √(36 + 64 + 9) = √109, a bit over 10 m: the 3D distance formula.'
     - teach: 'In space, two lines can be parallel, intersecting, or skew (neither). The shortest distance between skew lines is along their common perpendicular: for r = a₁ + λb₁ and r = a₂ + μb₂, d = |(b₁ × b₂)·(a₂ − a₁)| / |b₁ × b₂|.'
       picture:
         kind: flow
@@ -440,6 +539,11 @@ concepts:
         - are parallel
         answer: intersect
         why: Zero gap means they meet.
+      ways:
+      - style: step_by_step
+        teach: 'Skew lines r = λ(i + k) and r = (i + j) + μ(j + k). Step 1: b₁ × b₂ = (i + k) × (j + k) = −i − j + k, with length √3. Step 2: a₂ − a₁ = i + j. Step 3: (b₁ × b₂)·(a₂ − a₁) = −1 − 1 + 0 = −2. Step 4: d = |−2|/√3 = 2/√3.'
+      - style: real_world
+        teach: 'Two flyovers cross at different heights: they never meet, and they are not parallel, so they are skew. The clearance between them, measured straight up and down where one passes over the other, is the shortest distance, along their common perpendicular.'
     - teach: For parallel lines r = a₁ + λb and r = a₂ + μb, use d = |b × (a₂ − a₁)| / |b|. (b₁ × b₂ would be 0, so the skew formula cannot be used.)
       check:
         prompt: Why can't the skew formula be used for parallel lines?
@@ -449,6 +553,19 @@ concepts:
         - the dot product is negative
         answer: b₁ × b₂ = 0, so we would divide by zero
         why: Parallel directions have zero cross product.
+      ways:
+      - style: visual
+        teach: Distance between parallel lines r = i + λk and r = 7i + 8j + μk.
+        picture:
+          kind: flow
+          steps:
+          - b = k, a₂ − a₁ = 6i + 8j
+          - b × (a₂ − a₁) = 6j − 8i
+          - '|b × (a₂ − a₁)| = 10, |b| = 1'
+          - Distance = 10
+          alt: With b equal to k and a2 minus a1 equal to 6i plus 8j, the cross product is 6j minus 8i, of length 10; dividing by the length of b, which is 1, gives a distance of 10.
+      - style: step_by_step
+        teach: 'Why the skew formula fails for parallel lines. Step 1: Parallel lines share a direction b. Step 2: Then b₁ × b₂ = b × b = 0. Step 3: The skew formula divides by |b₁ × b₂| = 0, which is impossible. Step 4: So use |b × (a₂ − a₁)|/|b| instead.'
   items:
   - prompt: Find the distance between (1, 2, 2) and the origin.
     answer: '3'
@@ -614,3 +731,52 @@ concepts:
     mistakes:
       skew: c12m11_dist
       coincident and parallel: c12m11_dist
+  - prompt: 'Assertion (A): The lines r = i + λ(2i + j) and r = j + μ(4i + 2j) are parallel.
+
+      Reason (R): Their direction vectors are proportional.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 4i + 2j = 2(2i + j), so the directions are proportional, which is why the lines are parallel. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: One cable runs along the x-axis, r = λi. A second runs straight up through (0, 2, 0), r = 2j + 3k + μk. What is the shortest gap between them?'
+    options:
+    - '2'
+    - '3'
+    - √13
+    answer: '2'
+    hints:
+    - b₁ × b₂ = i × k = −j.
+    - Dot it with a₂ − a₁ = 2j + 3k.
+    solution: b₁ × b₂ = −j, with length 1. (a₂ − a₁)·(−j) = −2, so d = |−2|/1 = 2.
+    mistakes:
+      '3': c12m11_dist
+      √13: m12_common_perp
+    exam: case
+    difficulty: 2
+  - prompt: Which formula gives the distance between r = (1, 2, 0) + λ(2, 1, 2) and r = (0, 1, 3) + μ(4, 2, 4)?
+    options:
+    - '|b × (a₂ − a₁)|/|b|'
+    - '|(b₁ × b₂)·(a₂ − a₁)|/|b₁ × b₂|'
+    - '|a₂ − a₁|'
+    answer: '|b × (a₂ − a₁)|/|b|'
+    hints:
+    - Compare (2, 1, 2) and (4, 2, 4).
+    - If the lines are parallel, what is b₁ × b₂?
+    solution: (4, 2, 4) = 2(2, 1, 2), so the lines are parallel and b₁ × b₂ = 0. The parallel-lines formula |b × (a₂ − a₁)|/|b| must be used.
+    mistakes:
+      '|(b₁ × b₂)·(a₂ − a₁)|/|b₁ × b₂|': pq12m11_check_parallel
+      '|a₂ − a₁|': pq12m11_check_parallel
+    exam: competency
+    difficulty: 2

@@ -16,6 +16,8 @@ tips:
   c12m7_sub: Look for an inside function whose derivative is also present; substitute t for it.
   c12m7_eval: 'Find the antiderivative first, then subtract: F(upper) − F(lower).'
   c12m7_prop: 'Check symmetry first: an odd function over [−a, a] gives 0; an even one gives twice the half.'
+  pq12m7_check_back: Differentiate each option. Which one gives back exactly the function inside the integral?
+  pq12m7_area_vs_net: Over a full wave, the parts above and below the axis may cancel. Does the question ask for net change?
 concepts:
 - code: cbse12m.int.indefinite
   title: Indefinite integrals and methods
@@ -100,6 +102,27 @@ concepts:
         - x⁵ + C
         answer: x⁵/5 + C
         why: Raise the power to 5 and divide by 5.
+      ways:
+      - style: visual
+        teach: Differentiation and integration undo each other, shown as a there-and-back pair.
+        picture:
+          kind: compare
+          columns:
+          - title: Differentiate
+            points:
+            - x⁵ → 5x⁴
+            - sin x → cos x
+            - eˣ → eˣ
+            - ln x → 1/x
+          - title: Integrate back
+            points:
+            - 5x⁴ → x⁵ + C
+            - cos x → sin x + C
+            - eˣ → eˣ + C
+            - 1/x → ln|x| + C
+          alt: Differentiating x to the 5 gives 5x to the 4, sin x gives cos x, e to the x gives itself, ln x gives 1 over x. Integrating each result gives back the original function plus C.
+      - style: step_by_step
+        teach: 'Find ∫(5x⁴ − 2x + 7)dx. Step 1: Integrate term by term. Step 2: 5x⁴ → 5 × x⁵/5 = x⁵. Step 3: −2x → −2 × x²/2 = −x², and 7 → 7x. Step 4: Answer: x⁵ − x² + 7x + C. Check by differentiating: 5x⁴ − 2x + 7.'
     - teach: 'Substitution: if the integrand contains g(x) and g′(x), put t = g(x), dt = g′(x)dx. Example: ∫2x(x² + 1)³dx, with t = x² + 1, becomes ∫t³dt = t⁴/4 + C = (x² + 1)⁴/4 + C.'
       picture:
         kind: flow
@@ -118,6 +141,11 @@ concepts:
         - t = x³
         answer: t = 3x
         why: dt = 3dx, giving (1/3)∫cos t dt = (1/3)sin 3x + C.
+      ways:
+      - style: step_by_step
+        teach: 'Find ∫cos x · e^(sin x) dx. Step 1: The inside function sin x has derivative cos x, which is present. Step 2: Put t = sin x, dt = cos x dx. Step 3: The integral becomes ∫eᵗ dt = eᵗ + C. Step 4: Put back t: e^(sin x) + C.'
+      - style: real_world
+        teach: Substitution is like renaming a long street name to 'the road' while giving directions, then putting the full name back at the end. Calling x² + 1 just t makes the integral short; you rewrite it in x only when you finish.
     - teach: 'By parts: ∫u v dx = u∫v dx − ∫(u′ ∫v dx)dx. Choose u by ILATE (Inverse trig, Log, Algebraic, Trig, Exponential). Partial fractions split rational functions, and special forms like ∫dx/(x² + a²) = (1/a)tan⁻¹(x/a) + C.'
       check:
         prompt: 'For ∫x ln x dx by parts, u should be:'
@@ -127,6 +155,20 @@ concepts:
         - x ln x
         answer: ln x
         why: In ILATE, L (log) comes before A (algebraic).
+      ways:
+      - style: visual
+        teach: ILATE decides which factor to call u in integration by parts.
+        picture:
+          kind: flow
+          steps:
+          - 'I: inverse trig (tan⁻¹x)'
+          - 'L: log (ln x)'
+          - 'A: algebraic (x, x²)'
+          - 'T: trig (sin x, cos x)'
+          - 'E: exponential (eˣ)'
+          alt: 'ILATE order: inverse trigonometric, then logarithmic, then algebraic, then trigonometric, then exponential. The factor earlier in the list is chosen as u.'
+      - style: step_by_step
+        teach: 'Find ∫x cos x dx by parts. Step 1: ILATE: x is algebraic, cos x is trig, so u = x. Step 2: ∫cos x dx = sin x. Step 3: ∫x cos x dx = x sin x − ∫1 × sin x dx. Step 4: = x sin x + cos x + C.'
   items:
   - prompt: If F(x) = ∫3x² dx with F(0) = 0, find F(2).
     answer: '8'
@@ -307,6 +349,55 @@ concepts:
     mistakes:
       -1/2: c12m7_sub
       '1': c12m7_sub
+  - prompt: 'Assertion (A): ∫(1/x)dx = x⁰/0 + C.
+
+      Reason (R): ∫xⁿdx = xⁿ⁺¹/(n + 1) + C for every real n.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Can you divide by 0?
+    - Does the power rule have an exception?
+    solution: Both are false. The power rule needs n ≠ −1, so R is false, and A divides by 0, so A is false too; the correct integral is ln|x| + C.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A tank fills at a rate of r(t) = 6t + 2 litres per minute, and it is empty at t = 0. Integrating the rate, how many litres are in the tank after 3 minutes?'
+    options:
+    - '33'
+    - '20'
+    - '29'
+    answer: '33'
+    hints:
+    - Volume V(t) = ∫(6t + 2)dt = 3t² + 2t + C.
+    - Empty at t = 0 means C = 0.
+    solution: V(t) = 3t² + 2t, so V(3) = 27 + 6 = 33 litres.
+    mistakes:
+      '20': c12m7_power
+      '29': c12m7_power
+    exam: case
+    difficulty: 2
+  - prompt: A student claims ∫2x e^(x²) dx = e^(x²) + C. How can you test the claim most quickly?
+    options:
+    - Differentiate e^(x²) + C and see if you get 2x e^(x²)
+    - Integrate 2x and e^(x²) separately and multiply
+    - Substitute x = 0 into both sides
+    answer: Differentiate e^(x²) + C and see if you get 2x e^(x²)
+    hints:
+    - Integration and differentiation undo each other.
+    - Which test works for every x, not just one value?
+    solution: By the chain rule, d/dx e^(x²) = 2x e^(x²), so the claim is right. Integrating factors separately is not a valid rule, and one value of x cannot prove an identity.
+    mistakes:
+      Integrate 2x and e^(x²) separately and multiply: pq12m7_check_back
+      Substitute x = 0 into both sides: pq12m7_check_back
+    exam: competency
+    difficulty: 2
 - code: cbse12m.int.definite
   title: Definite integrals
   after:
@@ -419,6 +510,20 @@ concepts:
         - '3'
         answer: '9'
         why: F(x) = x², so 9 − 0 = 9.
+      ways:
+      - style: visual
+        teach: The area under y = x + 2 from x = 0 to x = 2, as a trapezium you can check by geometry.
+        picture:
+          kind: flow
+          steps:
+          - Antiderivative F(x) = x²/2 + 2x
+          - F(2) = 2 + 4 = 6
+          - F(0) = 0
+          - ∫₀² (x + 2)dx = 6
+          - 'Trapezium: ½ × (2 + 4) × 2 = 6'
+          alt: F of x is x squared over 2 plus 2x; F of 2 is 6 and F of 0 is 0, so the integral is 6, the same as the trapezium area one half times 2 plus 4 times 2.
+      - style: real_world
+        teach: If a car's speed is v(t), then ∫ₐᵇ v(t)dt is the distance covered from time a to time b. A speedometer gives the rate; the definite integral adds up all the little pieces of distance.
     - teach: 'Properties: ∫ₐᵇ f = −∫ᵦₐ f; ∫ₐᵇ f(x)dx = ∫ₐᵇ f(a + b − x)dx; you can split at any point c. These often turn a hard integral into an easy one.'
       check:
         prompt: If ∫₀² f = 5, what is ∫₂⁰ f?
@@ -428,6 +533,19 @@ concepts:
         - '0'
         answer: '-5'
         why: Swapping the limits changes the sign.
+      ways:
+      - style: visual
+        teach: 'The reflection property: ∫ₐᵇ f(x)dx = ∫ₐᵇ f(a + b − x)dx, used to avoid expanding a power.'
+        picture:
+          kind: flow
+          steps:
+          - I = ∫₀¹ x(1 − x)⁴ dx
+          - 'Replace x by 1 − x: I = ∫₀¹ (1 − x)x⁴ dx'
+          - = ∫₀¹ (x⁴ − x⁵) dx
+          - = 1/5 − 1/6 = 1/30
+          alt: I is the integral from 0 to 1 of x times 1 minus x to the 4. Replacing x with 1 minus x gives the integral of 1 minus x times x to the 4, which is x to the 4 minus x to the 5, giving 1 over 5 minus 1 over 6, which is 1 over 30.
+      - style: step_by_step
+        teach: 'Split at a point. Evaluate ∫₀³ |x − 1| dx. Step 1: |x − 1| changes form at x = 1. Step 2: ∫₀¹ (1 − x)dx = 1 − ½ = ½. Step 3: ∫₁³ (x − 1)dx = [x²/2 − x]₁³ = (4.5 − 3) − (0.5 − 1) = 2. Step 4: Total = ½ + 2 = 2.5.'
     - teach: 'Symmetry: on [−a, a], an odd function (f(−x) = −f(x), like x³ or sin x) integrates to 0; an even function (f(−x) = f(x), like x² or cos x) gives 2∫₀ᵃ f.'
       picture:
         kind: compare
@@ -451,6 +569,11 @@ concepts:
         - 2 sin 1
         answer: '0'
         why: sin x is odd, so the two halves cancel.
+      ways:
+      - style: step_by_step
+        teach: 'Evaluate ∫₋₁¹ (x³ + 3x²)dx. Step 1: x³ is odd, so ∫₋₁¹ x³ dx = 0. Step 2: 3x² is even, so ∫₋₁¹ 3x² dx = 2∫₀¹ 3x² dx. Step 3: 2 × [x³]₀¹ = 2. Step 4: Total = 0 + 2 = 2.'
+      - style: real_world
+        teach: 'Think of a seesaw balanced at the centre: an odd function puts equal weight up on one side and down on the other, so the total is 0. An even function is a mirror image, so one side is exactly half the total.'
   items:
   - prompt: Evaluate ∫₀² x dx.
     answer: '2'
@@ -613,3 +736,52 @@ concepts:
     mistakes:
       1/2: c12m7_prop
       '1': c12m7_prop
+  - prompt: 'Assertion (A): ∫₋π^π sin x dx = 0.
+
+      Reason (R): sin x is an odd function.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: sin(−x) = −sin x, so sin x is odd, and an odd function over [−a, a] integrates to 0. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A cyclist''s speed is v(t) = 3t² metres per second for the first 4 seconds after starting. How many metres does the cyclist cover in those 4 seconds?'
+    options:
+    - '64'
+    - '48'
+    - '16'
+    answer: '64'
+    hints:
+    - Distance = ∫₀⁴ v(t)dt.
+    - ∫3t² dt = t³.
+    solution: Distance = ∫₀⁴ 3t² dt = [t³]₀⁴ = 64 − 0 = 64 m.
+    mistakes:
+      '48': c12m7_eval
+      '16': c12m7_eval
+    exam: case
+    difficulty: 2
+  - prompt: An alternating current gives I(t) = sin t. A student computes ∫₀^(2π) sin t dt to find the total charge that has flowed forwards, and gets 0. What is the best explanation?
+    options:
+    - The forward and backward flows cancel, so the net charge is 0
+    - The student made an arithmetic slip; the answer is 2
+    - Sine cannot be integrated over 2π
+    answer: The forward and backward flows cancel, so the net charge is 0
+    hints:
+    - Where is sin t positive, and where negative, on [0, 2π]?
+    - A definite integral counts parts below the axis as negative.
+    solution: '∫₀^(2π) sin t dt = [−cos t]₀^(2π) = −1 + 1 = 0. The positive half (0 to π) and negative half (π to 2π) cancel: the net charge is 0, though charge did flow both ways.'
+    mistakes:
+      The student made an arithmetic slip; the answer is 2: pq12m7_area_vs_net
+      Sine cannot be integrated over 2π: c12m7_eval
+    exam: competency
+    difficulty: 2

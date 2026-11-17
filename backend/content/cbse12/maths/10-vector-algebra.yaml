@@ -16,6 +16,7 @@ tips:
   c12m10_mag: Magnitude is √(x² + y² + z²). Square each component, add, then take the root.
   c12m10_dot: 'Dot product: multiply matching components and add. Zero means perpendicular.'
   c12m10_cross: '|a × b| is the parallelogram''s area; the triangle is half of it. i × j = k, j × k = i, k × i = j.'
+  pq12m10_ratio: Parallel vectors are multiples of each other. Find the multiplier from one pair of components, then use it on the others.
 concepts:
 - code: cbse12m.vec.basics
   title: Vectors and their addition
@@ -155,6 +156,19 @@ concepts:
         - '48'
         answer: '10'
         why: √(36 + 64) = √100 = 10.
+      ways:
+      - style: visual
+        teach: The magnitude of r = i + 4j + 8k, worked one step at a time.
+        picture:
+          kind: flow
+          steps:
+          - 'Components: 1, 4, 8'
+          - 'Squares: 1, 16, 64'
+          - 'Sum: 81'
+          - '|r| = √81 = 9'
+          alt: The components 1, 4 and 8 square to 1, 16 and 64, which add to 81, so the magnitude is 9.
+      - style: real_world
+        teach: A drone flies 12 m east, 4 m north and 3 m up. Its displacement is 12i + 4j + 3k, and the straight-line distance from its start is √(144 + 16 + 9) = √169 = 13 m, shorter than the 19 m path.
     - teach: Add vectors component by component; this matches the triangle and parallelogram laws. Multiplying by a scalar k scales each component. The vector from A to B is B − A. A unit vector in the direction of a is â = a/|a|.
       picture:
         kind: flow
@@ -171,6 +185,11 @@ concepts:
         - −3i − 4j
         answer: 3i + 4j
         why: B − A = (3, 4, 0).
+      ways:
+      - style: step_by_step
+        teach: 'Find the unit vector along a = 2i − 2j + k. Step 1: |a| = √(4 + 4 + 1) = 3. Step 2: Divide each component by 3. Step 3: â = (2/3)i − (2/3)j + (1/3)k. Step 4: Check: (4 + 4 + 1)/9 = 1, so its length is 1.'
+      - style: real_world
+        teach: 'Walk 6 km east, then 8 km north. The triangle law joins the two arrows tip to tail: the single arrow from start to finish is 6i + 8j, with length √(36 + 64) = 10 km. That is vector addition.'
     - teach: 'Direction cosines of r are l = x/|r|, m = y/|r|, n = z/|r|; they satisfy l² + m² + n² = 1. Section formula: the point dividing AB in ratio m : n internally has position vector (mb + na)/(m + n).'
       check:
         prompt: Midpoint of a = 2i and b = 6i?
@@ -180,6 +199,18 @@ concepts:
         - 3i
         answer: 4i
         why: (a + b)/2 = 8i/2 = 4i.
+      ways:
+      - style: visual
+        teach: Direction cosines of r = i + 4j + 8k, which has |r| = 9.
+        picture:
+          kind: flow
+          steps:
+          - l = 1/9, m = 4/9, n = 8/9
+          - l² = 1/81, m² = 16/81, n² = 64/81
+          - l² + m² + n² = 81/81 = 1
+          alt: Divide each component by 9 to get l equals 1 ninth, m equals 4 ninths, n equals 8 ninths; their squares add to 81 over 81, which is 1.
+      - style: step_by_step
+        teach: 'P divides AB internally in the ratio 2 : 1, with a = i + 2j and b = 7i + 5j. Step 1: p = (2b + 1a)/(2 + 1). Step 2: 2b + a = 14i + 10j + i + 2j = 15i + 12j. Step 3: Divide by 3. Step 4: p = 5i + 4j.'
   items:
   - prompt: Find the magnitude of 3i + 4j.
     answer: '5'
@@ -343,6 +374,55 @@ concepts:
     mistakes:
       '3': c12m10_comp
       '6': c12m10_comp
+  - prompt: 'Assertion (A): The vector 2i − 2j + k has magnitude 3.
+
+      Reason (R): The magnitude of xi + yj + zk is √(x² + y² + z²).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: By R, |2i − 2j + k| = √(4 + 4 + 1) = √9 = 3. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A drone takes off from its base at the origin and lands at the point 6i + 8j + 24k (in metres). How far is it, in a straight line, from its base?'
+    options:
+    - '26'
+    - '38'
+    - '10'
+    answer: '26'
+    hints:
+    - Distance = magnitude of the position vector.
+    - √(6² + 8² + 24²).
+    solution: '|6i + 8j + 24k| = √(36 + 64 + 576) = √676 = 26 m.'
+    mistakes:
+      '38': c12m10_mag
+      '10': c12m10_mag
+    exam: case
+    difficulty: 2
+  - prompt: For which value of k are a = i + 2j − k and b = 3i + kj − 3k parallel?
+    options:
+    - '6'
+    - '2'
+    - −6
+    answer: '6'
+    hints:
+    - Parallel means b = t a for some number t.
+    - The i-components give t = 3.
+    solution: b = 3a needs 3i + kj − 3k = 3i + 6j − 3k, so k = 6.
+    mistakes:
+      '2': pq12m10_ratio
+      −6: pq12m10_ratio
+    exam: competency
+    difficulty: 2
 - code: cbse12m.vec.products
   title: Dot and cross products
   after:
@@ -459,6 +539,19 @@ concepts:
         - '1'
         answer: '0'
         why: 1 × 1 + 1 × (−1) = 0, so they are perpendicular.
+      ways:
+      - style: visual
+        teach: Finding the angle between a = i + j and b = j + k with the dot product.
+        picture:
+          kind: flow
+          steps:
+          - a·b = 0 + 1 + 0 = 1
+          - '|a| = √2, |b| = √2'
+          - cos θ = 1/(√2 × √2) = 1/2
+          - θ = 60°
+          alt: a dot b is 1; each vector has length root 2; so cos theta is one half and the angle is 60 degrees.
+      - style: real_world
+        teach: 'Work done by a force is a dot product: W = F·d. Pulling with F = 3i + 4j newtons while the box moves d = 2i metres does W = 3 × 2 + 4 × 0 = 6 J. The upward part of the force does no work along the floor.'
     - teach: 'The cross (vector) product: a × b has magnitude |a||b| sin θ and direction by the right-hand rule. a × b = −(b × a); parallel vectors give 0. i × j = k, j × k = i, k × i = j (reverse order gives the minus).'
       picture:
         kind: flow
@@ -476,6 +569,11 @@ concepts:
         - '0'
         answer: −i
         why: j × k = i, so k × j = −i.
+      ways:
+      - style: step_by_step
+        teach: 'Find (i + 2j) × (3i + j). Step 1: i × i = 0 and j × j = 0. Step 2: i × j = k, so 1 × 1 × (i × j) = k. Step 3: j × i = −k, so 2 × 3 × (j × i) = −6k. Step 4: Total = k − 6k = −5k.'
+      - style: real_world
+        teach: 'Tightening a bolt with a spanner: the turning effect is the torque r × F. Curl the fingers of your right hand from r towards F, and your thumb points along the bolt, the direction it moves. Reverse the order and the thumb flips.'
     - teach: '|a × b| is the area of the parallelogram with sides a and b; half of it is the triangle''s area. Use cos θ = a·b/(|a||b|) to find the angle between vectors.'
       check:
         prompt: Angle between i and i + j?
@@ -485,6 +583,19 @@ concepts:
         - 30°
         answer: 45°
         why: cos θ = 1/(1 × √2), so θ = 45°.
+      ways:
+      - style: visual
+        teach: Area of the triangle with corners A(1, 0, 0), B(0, 1, 0), C(0, 0, 1).
+        picture:
+          kind: flow
+          steps:
+          - AB = −i + j, AC = −i + k
+          - AB × AC = i + j + k
+          - '|AB × AC| = √3'
+          - Triangle area = √3/2
+          alt: AB is minus i plus j and AC is minus i plus k; their cross product is i plus j plus k, with length root 3, so the triangle's area is root 3 over 2.
+      - style: step_by_step
+        teach: 'Angle between a = 3i + 4j and b = 4i + 3j. Step 1: a·b = 12 + 12 = 24. Step 2: |a| = 5 and |b| = 5. Step 3: cos θ = 24/25. Step 4: θ is a small acute angle, about 16°, since the vectors point in nearly the same direction.'
   items:
   - prompt: Find (2i + 3j)·(4i − j).
     answer: '5'
@@ -651,3 +762,52 @@ concepts:
     mistakes:
       '144': c12m10_cross
       '36': c12m10_cross
+  - prompt: 'Assertion (A): a × b = b × a for all vectors a and b.
+
+      Reason (R): a · b = b · a for all vectors a and b.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'R is true: the dot product does not depend on order. A is false: a × b = −(b × a), so swapping the order flips the direction.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A force F = 2i + 3j + k newtons pushes a crate through a displacement d = 4i + j + 2k metres. How much work, in joules, does the force do?'
+    options:
+    - '13'
+    - '24'
+    - '9'
+    answer: '13'
+    hints:
+    - Work = F · d.
+    - Multiply matching components and add.
+    solution: W = 2 × 4 + 3 × 1 + 1 × 2 = 8 + 3 + 2 = 13 J.
+    mistakes:
+      '24': c12m10_dot
+      '9': c12m10_dot
+    exam: case
+    difficulty: 2
+  - prompt: A plot is a parallelogram whose sides from one corner are a = 4i + 2j and b = i + 3j (in metres). What is its area in m²?
+    options:
+    - '10'
+    - '14'
+    - '5'
+    answer: '10'
+    hints:
+    - Area = |a × b|.
+    - For vectors in the xy-plane, a × b = (a₁b₂ − a₂b₁)k.
+    solution: a × b = (4 × 3 − 2 × 1)k = 10k, so the area is 10 m².
+    mistakes:
+      '14': c12m10_cross
+      '5': c12m10_cross
+    exam: competency
+    difficulty: 2

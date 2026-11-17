@@ -17,6 +17,7 @@ tips:
   c12m12_form: "Name the unknowns whose values you get to choose first, then turn each limited resource into one inequality."
   c12m12_corner: List every corner of the feasible region, work out Z at each, then pick the largest or smallest.
   c12m12_region: A point is feasible only if it satisfies every constraint, including x ≥ 0 and y ≥ 0.
+  pq12m12_linear: 'Every constraint must be linear: each variable to the power 1, and never one variable multiplied by another.'
 concepts:
 - code: cbse12m.lp.formulate
   title: Formulating linear programming problems
@@ -83,6 +84,19 @@ concepts:
         - Z = xy
         answer: Z = 4x + 7y
         why: Only first powers of x and y, with no products.
+      ways:
+      - style: visual
+        teach: The four parts of every linear programming problem, in the order you write them.
+        picture:
+          kind: flow
+          steps:
+          - 'Decision variables: x chairs, y tables'
+          - 'Objective: Max Z = 40x + 70y'
+          - 'Constraints: one inequality per limited resource'
+          - 'Non-negativity: x ≥ 0, y ≥ 0'
+          alt: First name the decision variables, x chairs and y tables. Then write the objective, maximise Z equals 40x plus 70y. Then one inequality for each limited resource, and finally x and y at least 0.
+      - style: real_world
+        teach: A bakery deciding how many cakes and loaves to bake tomorrow, with limited flour, oven time and staff, wants the most profit. Writing that choice as Z = ax + by with inequalities for each limit turns it into a linear programming problem.
     - teach: 'Constraints come from limited resources: hours, material, money, space. Each becomes a linear inequality. Example: a chair takes 2 h and a table 3 h, with 12 h available: 2x + 3y ≤ 12. You cannot make negative items, so x ≥ 0, y ≥ 0.'
       picture:
         kind: flow
@@ -100,6 +114,11 @@ concepts:
         - x + y ≤ 40
         answer: 5x + 8y ≤ 40
         why: Total spending cannot go over the budget.
+      ways:
+      - style: step_by_step
+        teach: 'Turn a resource into a constraint. Step 1: A chair uses 3 kg of wood, a table 5 kg. Step 2: x chairs and y tables use 3x + 5y kg. Step 3: Only 60 kg are available. Step 4: So 3x + 5y ≤ 60.'
+      - style: real_world
+        teach: A farmer has 50 acres for wheat (x acres) and rice (y acres). Land gives x + y ≤ 50. If rice needs 3 workers per acre and wheat 1, with 90 workers, labour gives x + 3y ≤ 90. Every limit becomes one line of the model.
     - teach: 'Common types: manufacturing (maximise profit within machine hours), diet (minimise cost while meeting nutrient minimums, so ≥ constraints), transportation (minimise shipping cost).'
       check:
         prompt: 'In a diet problem, nutrient constraints usually use:'
@@ -109,6 +128,23 @@ concepts:
         - '='
         answer: ≥
         why: The diet must provide at least the needed amount.
+      ways:
+      - style: visual
+        teach: Maximising and minimising problems, and the kind of constraint each usually has.
+        picture:
+          kind: compare
+          columns:
+          - title: 'Manufacturing: maximise'
+            points:
+            - Z = profit
+            - '≤ constraints: limited hours, material'
+          - title: 'Diet: minimise'
+            points:
+            - Z = cost
+            - '≥ constraints: minimum nutrients'
+          alt: A manufacturing problem maximises profit, with less-than-or-equal constraints for limited hours and material. A diet problem minimises cost, with greater-than-or-equal constraints for the minimum nutrients needed.
+      - style: step_by_step
+        teach: 'Formulate a diet problem. Step 1: Let x kg of food P and y kg of food Q. Step 2: P has 3 units of protein per kg, Q has 2; at least 12 are needed: 3x + 2y ≥ 12. Step 3: P costs ₹50/kg and Q ₹40/kg: minimise Z = 50x + 40y. Step 4: Add x, y ≥ 0.'
   items:
   - prompt: 'In an LPP, the function to maximise or minimise is called the:'
     options:
@@ -291,6 +327,55 @@ concepts:
     mistakes:
       '40': c12m12_form
       '80': c12m12_form
+  - prompt: 'Assertion (A): In a diet problem the nutrient constraints are usually of the form ≥.
+
+      Reason (R): Each nutrient has a minimum amount that the diet must provide.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Because each nutrient has a minimum (R), the amount supplied must be at least that minimum, giving ≥ constraints. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A workshop makes x stools (profit ₹40 each) and y benches (₹90 each). A stool needs 1 hour of cutting and a bench 3 hours; 30 hours are available. Which is the correct model?'
+    options:
+    - Max Z = 40x + 90y; x + 3y ≤ 30; x, y ≥ 0
+    - Max Z = 40x + 90y; x + 3y ≥ 30; x, y ≥ 0
+    - Max Z = x + 3y; 40x + 90y ≤ 30; x, y ≥ 0
+    answer: Max Z = 40x + 90y; x + 3y ≤ 30; x, y ≥ 0
+    hints:
+    - Z is built from the profits.
+    - The hours used cannot go above the hours available.
+    solution: Profit gives Z = 40x + 90y to maximise. Hours used, x + 3y, can be at most 30. Items cannot be negative.
+    mistakes:
+      Max Z = 40x + 90y; x + 3y ≥ 30; x, y ≥ 0: c12m12_form
+      Max Z = x + 3y; 40x + 90y ≤ 30; x, y ≥ 0: c12m12_form
+    exam: case
+    difficulty: 2
+  - prompt: Which of these cannot be a constraint in a linear programming problem?
+    options:
+    - xy ≤ 20
+    - 2x + y ≤ 20
+    - x ≥ 3
+    answer: xy ≤ 20
+    hints:
+    - What does 'linear' require of each term?
+    - Look for a term with two variables multiplied together.
+    solution: xy is a product of the two variables, so xy ≤ 20 is not linear. The other two are linear inequalities.
+    mistakes:
+      2x + y ≤ 20: pq12m12_linear
+      x ≥ 3: pq12m12_linear
+    exam: competency
+    difficulty: 2
 - code: cbse12m.lp.graphical
   title: Graphical method and corner points
   after:
@@ -392,6 +477,19 @@ concepts:
         - only the line itself
         answer: the side containing the origin
         why: At (0, 0), 0 ≤ 4 is true.
+      ways:
+      - style: visual
+        teach: The graphical method from constraints to the feasible region, step by step.
+        picture:
+          kind: flow
+          steps:
+          - Draw each constraint as a line
+          - Test a point such as (0, 0) to choose a side
+          - Shade the side that satisfies it
+          - The overlap of all shading is the feasible region
+          alt: Draw each constraint line, test a point like the origin to pick the correct side, shade it, and the area where all the shadings overlap is the feasible region.
+      - style: step_by_step
+        teach: 'Which side of 2x + y = 8 is 2x + y ≤ 8? Step 1: Draw the line through (4, 0) and (0, 8). Step 2: Test (0, 0): 0 ≤ 8 is true. Step 3: So shade the side containing the origin. Step 4: Points like (5, 5), where 15 > 8, are on the other side.'
     - teach: 'Corner point theorem: if the feasible region is bounded, the maximum and minimum of Z occur at corner points. So find all corners (where boundary lines meet), compute Z at each, and compare.'
       picture:
         kind: compare
@@ -417,6 +515,11 @@ concepts:
         - (0, 3)
         answer: (2, 2)
         why: Z = 6 + 8 = 14, the largest value.
+      ways:
+      - style: step_by_step
+        teach: 'Max Z = 3x + 4y with x + 2y ≤ 10, x ≤ 6, x, y ≥ 0. Step 1: Corners: (0, 0), (6, 0), (6, 2), (0, 5). Step 2: Z = 0, 18, 26, 20. Step 3: The largest is 26. Step 4: So make x = 6 and y = 2.'
+      - style: real_world
+        teach: Slide a ruler across the feasible region, always parallel to the line 3x + 4y = 0. Z grows as the ruler moves away from the origin. The last point the ruler touches before leaving the region is always a corner.
     - teach: If the region is unbounded, a max or min may not exist; check by drawing Z greater (or less) than the candidate value and seeing whether it meets the region. If no point satisfies all constraints, the problem is infeasible.
       check:
         prompt: 'Constraints x + y ≤ 2 and x + y ≥ 5 together give:'
@@ -426,6 +529,27 @@ concepts:
         - an unbounded region
         answer: no feasible region
         why: No (x, y) can make the sum both ≤ 2 and ≥ 5.
+      ways:
+      - style: visual
+        teach: Three kinds of feasible region, and what each means for the answer.
+        picture:
+          kind: compare
+          columns:
+          - title: Bounded
+            points:
+            - Closed polygon
+            - Max and min both at corners
+          - title: Unbounded
+            points:
+            - Stretches to infinity
+            - 'Max or min may not exist: check'
+          - title: Empty
+            points:
+            - No point fits every rule
+            - Problem is infeasible
+          alt: 'A bounded region is a closed polygon and has its max and min at corners. An unbounded region stretches to infinity, so a max or min may not exist. An empty region means no point fits all the rules: the problem is infeasible.'
+      - style: step_by_step
+        teach: 'Spot an infeasible problem. Step 1: Constraints x + y ≤ 2 and x + y ≥ 5. Step 2: The first allows only points on or below the line x + y = 2. Step 3: The second needs points on or above x + y = 5. Step 4: No point does both, so there is no feasible region.'
   items:
   - prompt: Maximise Z = 3x + 2y with x + y ≤ 4, x, y ≥ 0. Find the maximum Z.
     answer: '12'
@@ -599,3 +723,52 @@ concepts:
     mistakes:
       is 0: c12m12_region
       is 1: c12m12_region
+  - prompt: 'Assertion (A): On a bounded feasible region, Z = 3x + 2y attains its maximum at a corner point.
+
+      Reason (R): Every point of a feasible region is a corner point.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is true, but R is false
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'A is the corner point theorem, so it is true. R is false: most points of a region lie inside it or along its edges, not at corners.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_r
+      Both A and R are true, but R does not explain A: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A tailor makes x shirts (profit ₹60 each) and y trousers (₹80 each). Cloth allows x + y ≤ 10 and time allows x + 2y ≤ 14, with x, y ≥ 0. What is the largest profit in ₹?'
+    options:
+    - '680'
+    - '600'
+    - '560'
+    answer: '680'
+    hints:
+    - The corners are (0, 0), (10, 0), (0, 7) and where the two lines meet.
+    - x + y = 10 and x + 2y = 14 meet at (6, 4).
+    solution: 'Z at the corners: (10, 0) gives 600, (0, 7) gives 560, (6, 4) gives 360 + 320 = 680. The largest profit is ₹680.'
+    mistakes:
+      '600': c12m12_corner
+      '560': c12m12_corner
+    exam: case
+    difficulty: 2
+  - prompt: A feasible region has corners (0, 0), (5, 0), (3, 4) and (0, 6). For Z = 2x + y, a student picks (3, 4) as the only maximum. What is right?
+    options:
+    - Z = 10 at both (5, 0) and (3, 4), so every point on the edge joining them is optimal
+    - Z is largest only at (3, 4)
+    - Z is largest only at (0, 6)
+    answer: Z = 10 at both (5, 0) and (3, 4), so every point on the edge joining them is optimal
+    hints:
+    - Work out Z at all four corners.
+    - What if two corners tie?
+    solution: Z = 0, 10, 10 and 6 at the four corners. The maximum 10 occurs at (5, 0) and (3, 4), so it holds along the whole edge between them.
+    mistakes:
+      Z is largest only at (3, 4): c12m12_corner
+      Z is largest only at (0, 6): c12m12_corner
+    exam: competency
+    difficulty: 2

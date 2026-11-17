@@ -18,6 +18,8 @@ tips:
   c12m5_chain: Differentiate the outside function, keep the inside, then multiply by the derivative of the inside.
   c12m5_rule: Recall the standard derivative exactly before substituting a value.
   c12m5_param: For parametric curves, divide dy/dt by dx/dt.
+  pq12m5_how_fast: The question asks how fast, which is a rate of change. Is that the height itself, or its derivative?
+  pq12m5_corner: A smooth curve has one slope at every point. Look for a graph with a sharp corner but no break.
 concepts:
 - code: cbse12m.cont.continuity
   title: Continuity
@@ -129,6 +131,27 @@ concepts:
         - yes, f(1) exists
         answer: no, the left limit is 2 but f(1) = 3
         why: The two sides do not meet, so there is a jump.
+      ways:
+      - style: visual
+        teach: 'Three things can happen at x = a: the graph joins up, jumps, or has a hole.'
+        picture:
+          kind: compare
+          columns:
+          - title: Continuous
+            points:
+            - Left limit = right limit = f(a)
+            - Draw without lifting the pen
+          - title: Jump
+            points:
+            - Left and right limits differ
+            - 'Example: [x] at x = 1'
+          - title: Hole
+            points:
+            - Limits agree, but f(a) is missing or different
+            - 'Example: (x² − 16)/(x − 4) at x = 4'
+          alt: 'Continuous: left limit, right limit and f(a) are equal. Jump: left and right limits differ, as with the greatest integer function at 1. Hole: the limits agree but f(a) is missing or different, as with x squared minus 16 over x minus 4 at 4.'
+      - style: step_by_step
+        teach: 'Is f(x) = 2x + 1 for x ≤ 1 and 4x − 1 for x > 1 continuous at 1? Step 1: Left-hand limit: 2(1) + 1 = 3. Step 2: Right-hand limit: 4(1) − 1 = 3. Step 3: f(1) = 2(1) + 1 = 3. Step 4: All three agree, so f is continuous at 1.'
     - teach: Polynomials, sin x, cos x, eˣ and |x| are continuous everywhere. A rational function is continuous except where its denominator is 0; tan x fails at odd multiples of π/2. Sums, products, quotients (non-zero denominator) and compositions of continuous functions are continuous.
       check:
         prompt: Where is f(x) = 1/(x − 4) discontinuous?
@@ -138,6 +161,25 @@ concepts:
         - x = −4
         answer: x = 4
         why: The denominator is zero there.
+      ways:
+      - style: visual
+        teach: Which common functions are continuous everywhere, and where others break.
+        picture:
+          kind: compare
+          columns:
+          - title: Continuous everywhere
+            points:
+            - Polynomials
+            - sin x, cos x, eˣ
+            - '|x|'
+          - title: Break somewhere
+            points:
+            - 1/(x − 2) at x = 2
+            - tan x at odd multiples of π/2
+            - '[x] at every integer'
+          alt: Polynomials, sine, cosine, e to the x and the modulus function are continuous everywhere. 1 over x minus 2 breaks at 2, tan x at odd multiples of pi by 2, and the greatest integer function at every integer.
+      - style: step_by_step
+        teach: 'Where is f(x) = (x + 1)/(x² − 5x + 4) not continuous? Step 1: A rational function breaks only where its denominator is 0. Step 2: x² − 5x + 4 = (x − 1)(x − 4). Step 3: This is 0 at x = 1 and x = 4. Step 4: f is continuous at every other real number.'
     - teach: 'Differentiable at a point means continuous there, but not the other way round: |x| is continuous at 0 but has a sharp corner, so it is not differentiable there. The greatest integer function [x] jumps at every integer.'
       picture:
         kind: compare
@@ -159,6 +201,11 @@ concepts:
         - x = −3
         answer: x = 3
         why: The corner of the V shape is where x − 3 = 0.
+      ways:
+      - style: step_by_step
+        teach: 'Why |x| has no derivative at 0. Step 1: For x < 0, |x| = −x, with slope −1. Step 2: For x > 0, |x| = x, with slope +1. Step 3: At 0 the left slope −1 and the right slope +1 disagree. Step 4: So there is no single slope: continuous, but not differentiable.'
+      - style: real_world
+        teach: 'A road with a sharp V-shaped bend has no gap: a car can drive straight through it, so the road is continuous. But the direction changes in an instant, with no single heading at the tip. That is what a corner like |x| at 0 looks like to calculus.'
   items:
   - prompt: f(x) = kx + 1 for x ≤ 2 and 3x − 1 for x > 2. Find k so that f is continuous at 2.
     answer: '2'
@@ -330,6 +377,55 @@ concepts:
     mistakes:
       '1': c12m5_lim
       '-1': c12m5_lim
+  - prompt: 'Assertion (A): f(x) = |x − 2| is differentiable at x = 2.
+
+      Reason (R): f(x) = |x − 2| is continuous at x = 2.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'R is true: both one-sided limits and f(2) are 0. A is false: the left slope is −1 and the right slope is +1, so there is a corner at 2.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A courier charges ₹50 for any parcel up to 2 kg and ₹(20w + k) for a parcel of w kg above 2 kg. For the charge to have no sudden jump at 2 kg, what must k be?'
+    options:
+    - '10'
+    - '50'
+    - '30'
+    answer: '10'
+    hints:
+    - No jump means the two rules give the same charge at w = 2.
+    - Set 20 × 2 + k equal to 50.
+    solution: Continuity at 2 kg needs 20 × 2 + k = 50, so 40 + k = 50 and k = 10.
+    mistakes:
+      '50': c12m5_lim
+      '30': c12m5_lim
+    exam: case
+    difficulty: 2
+  - prompt: Which of these functions is continuous at x = 0 but not differentiable there?
+    options:
+    - '|x| + 2'
+    - x² + 2
+    - 1/x
+    answer: '|x| + 2'
+    hints:
+    - First rule out a function that is not even defined at 0.
+    - Of the other two, which graph has a corner at 0?
+    solution: '1/x is not defined at 0. x² + 2 is smooth with slope 0 there. |x| + 2 is |x| moved up by 2: no break, but a sharp corner at 0.'
+    mistakes:
+      x² + 2: pq12m5_corner
+      1/x: m12_one_over_x
+    exam: competency
+    difficulty: 2
 - code: cbse12m.cont.derivatives
   title: Differentiation rules
   after:
@@ -423,6 +519,11 @@ concepts:
         - '6'
         answer: '24'
         why: 3(x² + 1)² × 2x = 3 × 4 × 2 = 24.
+      ways:
+      - style: step_by_step
+        teach: 'Differentiate y = sin(x²). Step 1: The outside is sin, the inside is x². Step 2: Differentiate the outside and keep the inside: cos(x²). Step 3: Multiply by the inside''s derivative, 2x. Step 4: dy/dx = 2x cos(x²).'
+      - style: real_world
+        teach: Gears show the chain rule. If gear A turns 3 times for each turn of gear B, and B turns 2 times for each turn of gear C, then A turns 3 × 2 = 6 times for each turn of C. Rates of linked changes multiply.
     - teach: 'Standard derivatives: sin x → cos x; cos x → −sin x; tan x → sec²x; eˣ → eˣ; ln x → 1/x; sin⁻¹x → 1/√(1 − x²); tan⁻¹x → 1/(1 + x²). Combine them with the chain rule.'
       check:
         prompt: y = e^(2x). dy/dx at x = 0?
@@ -432,6 +533,29 @@ concepts:
         - '0'
         answer: '2'
         why: dy/dx = 2e^(2x); at 0 it is 2.
+      ways:
+      - style: visual
+        teach: The standard derivatives side by side, to learn as pairs.
+        picture:
+          kind: compare
+          columns:
+          - title: Function
+            points:
+            - sin x
+            - cos x
+            - tan x
+            - eˣ
+            - ln x
+          - title: Derivative
+            points:
+            - cos x
+            - −sin x
+            - sec²x
+            - eˣ
+            - 1/x
+          alt: sin x gives cos x; cos x gives minus sin x; tan x gives sec squared x; e to the x gives e to the x; ln x gives 1 over x.
+      - style: step_by_step
+        teach: 'Differentiate y = e^(sin x). Step 1: The outside is eᵘ, whose derivative is itself: e^(sin x). Step 2: The inside is sin x, with derivative cos x. Step 3: Multiply: dy/dx = e^(sin x) cos x. Step 4: At x = 0 this is e⁰ × 1 = 1.'
     - teach: 'Other techniques: implicit differentiation (differentiate both sides, treating y as a function of x), logarithmic differentiation (take ln first, for xˣ or long products), parametric dy/dx = (dy/dt)/(dx/dt), and second derivatives (differentiate twice).'
       check:
         prompt: x = 2t, y = t². Find dy/dx at t = 3.
@@ -441,6 +565,19 @@ concepts:
         - '2'
         answer: '3'
         why: dy/dt = 2t = 6, dx/dt = 2, so 6/2 = 3.
+      ways:
+      - style: visual
+        teach: Implicit differentiation on the curve xy = 6 at the point (2, 3).
+        picture:
+          kind: flow
+          steps:
+          - xy = 6
+          - 'Product rule: y + x · dy/dx = 0'
+          - dy/dx = −y/x
+          - 'At (2, 3): dy/dx = −3/2'
+          alt: Start with xy equals 6; differentiate with the product rule to get y plus x dy by dx equals 0; so dy by dx is minus y over x, which is minus 3 over 2 at the point 2, 3.
+      - style: real_world
+        teach: A drone flies along x = 2t, y = 4t − t², with t in seconds. Its path's slope is dy/dx = (dy/dt)/(dx/dt) = (4 − 2t)/2. At t = 1 the slope is 1, so it is climbing at 45°; at t = 2 the slope is 0, the top of its path.
   items:
   - prompt: If y = x³, find dy/dx at x = 2.
     answer: '12'
@@ -601,3 +738,52 @@ concepts:
     mistakes:
       '0': c12m5_rule
       '2': c12m5_rule
+  - prompt: 'Assertion (A): d/dx (sin 2x) = cos 2x.
+
+      Reason (R): By the chain rule, the derivative of sin(g(x)) is cos(g(x)) × g′(x).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'R is the chain rule, so it is true. Using it, d/dx (sin 2x) = cos 2x × 2 = 2 cos 2x, so A is false: it misses the factor 2.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A balloon''s height after t minutes is h(t) = t³ − 3t² + 5t metres. How fast, in metres per minute, is it rising at t = 2?'
+    options:
+    - '5'
+    - '6'
+    - '2'
+    answer: '5'
+    hints:
+    - Rate of rising is h′(t).
+    - h′(t) = 3t² − 6t + 5.
+    solution: h′(t) = 3t² − 6t + 5, so h′(2) = 12 − 12 + 5 = 5 m per minute. (The height itself at t = 2 is 6 m.)
+    mistakes:
+      '6': pq12m5_how_fast
+      '2': c12m5_rule
+    exam: case
+    difficulty: 2
+  - prompt: A student differentiates y = cos(x²) and writes dy/dx = −sin(x²). What is wrong?
+    options:
+    - The factor 2x from the inside is missing
+    - The minus sign should not be there
+    - Nothing; it is correct
+    answer: The factor 2x from the inside is missing
+    hints:
+    - cos(x²) is a function of a function.
+    - What does the chain rule multiply by at the end?
+    solution: 'The derivative of cos u is −sin u, so the sign is right, but u = x² needs its derivative 2x: dy/dx = −2x sin(x²).'
+    mistakes:
+      The minus sign should not be there: c12m5_rule
+      Nothing; it is correct: c12m5_chain
+    exam: competency
+    difficulty: 2
