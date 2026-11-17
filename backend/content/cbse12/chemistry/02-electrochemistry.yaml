@@ -107,6 +107,19 @@ concepts:
         - neither
         answer: zinc
         why: Zinc is oxidised to Zn²⁺ ions that go into solution.
+      ways:
+      - style: visual
+        teach: The Daniell cell, followed from zinc to copper.
+        picture:
+          kind: flow
+          steps:
+          - Zn → Zn²⁺ + 2e⁻ at the anode (−)
+          - Electrons travel through the wire
+          - Cu²⁺ + 2e⁻ → Cu at the cathode (+)
+          - Salt bridge ions balance the charge
+          alt: Zinc loses two electrons at the negative anode. The electrons travel through the wire to the positive cathode, where copper ions gain them and become copper. Ions from the salt bridge balance the charge in each beaker.
+      - style: real_world
+        teach: 'A lemon battery: push a zinc nail and a copper coin into a lemon and join them with wire. Zinc gives up electrons, they flow through the wire to copper, and a tiny LED can glow. The lemon juice is the electrolyte.'
     - teach: Electrode potentials are measured against the standard hydrogen electrode (0 V). E°cell = E°cathode − E°anode. The more positive reduction potential becomes the cathode. A positive E°cell means the reaction is spontaneous, since ΔG° = −nFE°cell.
       picture:
         kind: flow
@@ -124,6 +137,11 @@ concepts:
         - neither
         answer: silver
         why: Silver has the higher reduction potential.
+      ways:
+      - style: step_by_step
+        teach: 'Cell Mg | Mg²⁺ || Ni²⁺ | Ni with E°(Mg²⁺/Mg) = −2.37 V, E°(Ni²⁺/Ni) = −0.25 V. Step 1: Nickel''s value is higher, so it is the cathode. Step 2: E°cell = −0.25 − (−2.37). Step 3: E°cell = 2.12 V. Step 4: Positive, so the reaction runs on its own.'
+      - style: real_world
+        teach: The electrochemical series is like a tug of war for electrons. Whoever has the more positive reduction potential pulls harder and wins the electrons, becoming the cathode. The bigger the difference, the stronger the push in the wire.
     - teach: 'Nernst equation at 298 K: E = E° − (0.059/n) log Q. As the reaction proceeds, Q grows and E falls; at equilibrium E = 0 and E° = (0.059/n) log K.'
       check:
         prompt: 'At equilibrium, a cell''s E is:'
@@ -133,6 +151,19 @@ concepts:
         - maximum
         answer: '0'
         why: No net reaction, so no driving force.
+      ways:
+      - style: visual
+        teach: How a cell's voltage changes as it runs down.
+        picture:
+          kind: flow
+          steps:
+          - 'Fresh cell: Q small, E above E°'
+          - Reactants used, products build up
+          - Q grows, E falls
+          - 'Equilibrium: E = 0, cell is dead'
+          alt: In a fresh cell Q is small and E can be above E standard. As reactants are used and products build up, Q grows and E falls. At equilibrium E is zero and the cell is dead.
+      - style: step_by_step
+        teach: 'A cell with E° = 0.59 V and n = 1. Step 1: At equilibrium E = 0. Step 2: So E° = 0.059 log K. Step 3: log K = 0.59 ÷ 0.059 = 10. Step 4: K = 10¹⁰: the reaction goes almost to completion.'
   items:
   - prompt: E°(Cu²⁺/Cu) = 0.34 V and E°(Zn²⁺/Zn) = −0.76 V. Find E°cell (V).
     answer: '1.1'
@@ -312,6 +343,55 @@ concepts:
     mistakes:
       E° falls with time: c12c2_cell
       the salt bridge disappears: c12c2_cell
+  - prompt: 'Assertion (A): Copper does not displace zinc from zinc sulphate solution.
+
+      Reason (R): Zinc has a lower (more negative) standard reduction potential than copper.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: For Cu + Zn²⁺, E°cell = −0.76 − 0.34 = −1.10 V, which is negative, so the reaction is not spontaneous. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A student stores copper sulphate solution in an iron can. After a day, reddish metal appears inside. Why? (E° Fe²⁺/Fe = −0.44 V, Cu²⁺/Cu = 0.34 V)'
+    options:
+    - Iron displaces copper because its reduction potential is lower
+    - Copper displaces iron because its reduction potential is higher
+    - The can rusts and the rust is red
+    answer: Iron displaces copper because its reduction potential is lower
+    hints:
+    - Which metal loses electrons more easily?
+    - Find E°cell = E°cathode − E°anode with Cu²⁺ being reduced.
+    solution: E°cell = 0.34 − (−0.44) = 0.78 V, positive. Iron is oxidised and Cu²⁺ is reduced, depositing red copper on the can.
+    mistakes:
+      Copper displaces iron because its reduction potential is higher: c12c2_cell
+      The can rusts and the rust is red: c12_corrosion
+    exam: case
+    difficulty: 2
+  - prompt: 'An engineer wants the highest-voltage cell from three electrodes: A (E° = −1.66 V), B (E° = −0.13 V), C (E° = +0.80 V). Which pair?'
+    options:
+    - A as anode, C as cathode
+    - B as anode, C as cathode
+    - A as anode, B as cathode
+    answer: A as anode, C as cathode
+    hints:
+    - E°cell = E°cathode − E°anode.
+    - Pick the biggest gap between two values.
+    solution: The largest difference is 0.80 − (−1.66) = 2.46 V, using A as anode and C as cathode.
+    mistakes:
+      B as anode, C as cathode: c12c2_cell
+      A as anode, B as cathode: c12c2_cell
+    exam: competency
+    difficulty: 2
 - code: cbse12c.ec.conductance
   title: Conductance, electrolysis and batteries
   after:
@@ -429,6 +509,25 @@ concepts:
         - stay the same
         answer: rise sharply
         why: A weak acid ionises much more on dilution.
+      ways:
+      - style: visual
+        teach: How molar conductivity changes on dilution for strong and weak electrolytes.
+        picture:
+          kind: compare
+          columns:
+          - title: Strong (KCl)
+            points:
+            - Fully ionised already
+            - Λm rises slowly on dilution
+            - Straight line vs √c
+          - title: Weak (CH₃COOH)
+            points:
+            - Only partly ionised
+            - Λm rises sharply on dilution
+            - Steep curve near zero
+          alt: A strong electrolyte like KCl is already fully ionised, so molar conductivity rises slowly on dilution and gives a straight line against the square root of concentration. A weak electrolyte like acetic acid is only partly ionised, so molar conductivity rises sharply on dilution, curving steeply near zero.
+      - style: step_by_step
+        teach: 'κ = 0.006 S/cm for a 0.04 mol/L solution. Step 1: Λm = κ × 1000 / c. Step 2: κ × 1000 = 6. Step 3: 6 ÷ 0.04 = 150. Step 4: Λm = 150 S cm² mol⁻¹.'
     - teach: 'Kohlrausch''s law: at infinite dilution, Λ°m = ν₊λ°₊ + ν₋λ°₋, each ion contributing independently. It lets us find Λ°m for weak electrolytes from strong ones.'
       check:
         prompt: λ°(Na⁺) = 50, λ°(Cl⁻) = 76 S cm² mol⁻¹. Λ°m(NaCl)?
@@ -438,6 +537,19 @@ concepts:
         - '3800'
         answer: '126'
         why: 50 + 76.
+      ways:
+      - style: visual
+        teach: 'Kohlrausch''s law: build the weak acid from three strong electrolytes.'
+        picture:
+          kind: flow
+          steps:
+          - Λ°(HCl) gives H⁺ + Cl⁻
+          - + Λ°(CH₃COONa) gives CH₃COO⁻ + Na⁺
+          - − Λ°(NaCl) removes Na⁺ + Cl⁻
+          - '= Λ°(CH₃COOH): H⁺ + CH₃COO⁻'
+          alt: Add the limiting molar conductivity of hydrochloric acid and of sodium acetate, then subtract that of sodium chloride. The sodium and chloride parts cancel, leaving hydrogen ion plus acetate ion, which is acetic acid.
+      - style: real_world
+        teach: 'Like working out a single item''s price from bills: if tea + biscuit costs ₹30 and biscuit + cake costs ₹50, and cake + tea costs ₹40, you can separate each item. Kohlrausch lets each ion carry its own fixed ''price''.'
     - teach: 'Electrolysis uses current to drive a reaction. Faraday: m = ZIt; 1 F = 96,500 C per mole of electrons. Batteries: primary (dry cell, not rechargeable), secondary (lead storage, rechargeable), fuel cells (H₂ + O₂ → water). Rusting is electrochemical corrosion; paint, galvanising and sacrificial zinc prevent it.'
       picture:
         kind: flow
@@ -455,6 +567,11 @@ concepts:
         - tin only
         answer: zinc
         why: Zinc corrodes first, protecting the iron.
+      ways:
+      - style: real_world
+        teach: 'Electroplating a spoon with silver: the spoon is the cathode, silver ions gain electrons there and coat it. The more charge passed, the thicker the coat, exactly as Faraday''s law m = ZIt says.'
+      - style: step_by_step
+        teach: 'How much aluminium (M = 27) does 3 F of charge deposit? Step 1: Al³⁺ + 3e⁻ → Al, so 3 mol of electrons give 1 mol of Al. Step 2: 3 F = 3 mol of electrons. Step 3: That deposits 1 mol of Al. Step 4: Mass = 27 g.'
   items:
   - prompt: A current of 2 A flows for 965 s. Find the charge (C).
     answer: '1930'
@@ -625,3 +742,52 @@ concepts:
     mistakes:
       127/100: c12c2_far
       127/400: c12c2_far
+  - prompt: 'Assertion (A): Λ°m of acetic acid cannot be found by extrapolating its Λm to zero concentration.
+
+      Reason (R): For a weak electrolyte, Λm rises steeply at very low concentrations, so the curve can''t be extended reliably.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: The steep rise near zero makes extrapolation unreliable, so Kohlrausch's law is used instead. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Iron gates near the sea rust much faster than those inland. What is the main reason?'
+    options:
+    - Salt in the air makes the water film a better electrolyte
+    - Sea air has more oxygen
+    - Sea air is colder
+    answer: Salt in the air makes the water film a better electrolyte
+    hints:
+    - Rusting is a tiny cell on the iron surface.
+    - What helps ions move in that cell?
+    solution: Rusting is electrochemical. Dissolved salt adds ions, so the surface water conducts better and corrosion speeds up.
+    mistakes:
+      Sea air has more oxygen: c12_corrosion
+      Sea air is colder: c12_corrosion
+    exam: case
+    difficulty: 2
+  - prompt: To protect an underground iron pipe, a block of which metal should be connected to it as a sacrificial anode?
+    options:
+    - Magnesium
+    - Copper
+    - Silver
+    answer: Magnesium
+    hints:
+    - The protecting metal must corrode instead of iron.
+    - It needs a more negative E° than iron.
+    solution: Magnesium has a much more negative reduction potential than iron, so it is oxidised first and iron is spared.
+    mistakes:
+      Copper: c12_corrosion
+      Silver: c12_corrosion
+    exam: competency
+    difficulty: 2
