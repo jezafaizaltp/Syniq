@@ -145,6 +145,27 @@ concepts:
         - decreases
         answer: stays the same
         why: The force is perpendicular to motion, so no work is done.
+      ways:
+      - style: visual
+        teach: How the magnetic force on a moving charge depends on its direction to the field.
+        picture:
+          kind: compare
+          columns:
+          - title: Along B (θ = 0°)
+            points:
+            - sin 0° = 0
+            - No force
+          - title: At an angle θ
+            points:
+            - F = qvB sin θ
+            - Part of the full force
+          - title: At right angles (θ = 90°)
+            points:
+            - sin 90° = 1
+            - Largest force, qvB
+          alt: Moving along the field there is no force. At an angle theta the force is q v B sin theta. At right angles the force is largest, q v B.
+      - style: step_by_step
+        teach: 'A proton moves at 10⁶ m/s at right angles to a 0.5 T field. Step 1: q = 1.6 × 10⁻¹⁹ C, sin 90° = 1. Step 2: F = qvB. Step 3: F = 1.6 × 10⁻¹⁹ × 10⁶ × 0.5. Step 4: F = 8 × 10⁻¹⁴ N.'
     - teach: 'In a uniform field, a charge moving at right angles to B goes in a circle: qvB = mv²/r, so r = mv/(qB) and period T = 2πm/(qB), the same at any speed. If v also has a part along B, the path is a helix.'
       picture:
         kind: flow
@@ -163,6 +184,11 @@ concepts:
         - the same
         answer: double
         why: r ∝ v.
+      ways:
+      - style: step_by_step
+        teach: 'Radius of that proton''s circle. Step 1: r = mv/(qB). Step 2: m = 1.67 × 10⁻²⁷ kg, v = 10⁶ m/s. Step 3: r = 1.67 × 10⁻²¹ / (8 × 10⁻²⁰). Step 4: r ≈ 0.021 m, about 2 cm.'
+      - style: real_world
+        teach: 'A cyclotron speeds up particles by kicking them each half-turn. It works because the time for one circle, T = 2πm/(qB), does not depend on speed: faster particles go in bigger circles but arrive back at the same moment.'
     - teach: 'A wire of length l carrying current I in field B feels F = IlB sin θ (Fleming''s left-hand rule). Parallel currents in the same direction attract. A coil of N turns, area A has magnetic moment m = NIA and feels torque τ = NIAB sin θ: this turns a galvanometer''s coil.'
       check:
         prompt: 'Two parallel wires carry currents in opposite directions. They:'
@@ -172,6 +198,19 @@ concepts:
         - feel no force
         answer: repel
         why: Opposite currents repel; like currents attract.
+      ways:
+      - style: visual
+        teach: How a moving-coil galvanometer turns a current into a pointer reading.
+        picture:
+          kind: flow
+          steps:
+          - Current I flows in the coil
+          - Field gives torque τ = NIAB
+          - Spring twists back until it balances
+          - Deflection is proportional to I
+          alt: Current flows in the coil, the magnetic field gives a torque N I A B, a spring twists back until it balances, and the deflection is proportional to the current.
+      - style: step_by_step
+        teach: 'Force on a wire. Step 1: l = 0.4 m, I = 5 A, B = 0.25 T, at 90°. Step 2: F = IlB sin θ. Step 3: F = 5 × 0.4 × 0.25 × 1. Step 4: F = 0.5 N, direction by Fleming''s left-hand rule.'
   items:
   - prompt: A 2 m wire carries 5 A at right angles to a 0.3 T field. Find the force (N).
     answer: '3'
@@ -345,6 +384,55 @@ concepts:
     mistakes:
       '99': c12p4_meter
       '100': c12p4_meter
+  - prompt: 'Assertion (A): A charged particle moving in a uniform magnetic field keeps the same speed.
+
+      Reason (R): The magnetic force on it is always perpendicular to its velocity.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A force at right angles to the velocity does no work, so the kinetic energy and speed stay constant; only the direction changes. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In a mass spectrometer, two ions with the same charge and the same speed enter a uniform magnetic field. Ion A has twice the mass of ion B. What is the ratio of the radii r_A : r_B?'
+    options:
+    - '2 : 1'
+    - '1 : 2'
+    - '4 : 1'
+    answer: '2 : 1'
+    hints:
+    - r = mv/(qB).
+    - Only m differs between the two ions.
+    solution: 'With v, q and B the same, r ∝ m. Ion A has twice the mass, so r_A : r_B = 2 : 1.'
+    mistakes:
+      '1 : 2': c12p4_circle
+      '4 : 1': c12p4_circle
+    exam: case
+    difficulty: 2
+  - prompt: A galvanometer of resistance 20 Ω gives full-scale deflection at 10 mA. What must be done to turn it into a voltmeter reading up to 10 V?
+    options:
+    - Add 980 Ω in series
+    - Add 980 Ω in parallel
+    - Add 1000 Ω in series
+    answer: Add 980 Ω in series
+    hints:
+    - Total resistance needed = 10 V ÷ 0.01 A.
+    - Subtract the galvanometer's own resistance.
+    solution: Total R = 10/0.01 = 1000 Ω. The galvanometer already has 20 Ω, so add 980 Ω in series.
+    mistakes:
+      Add 980 Ω in parallel: c12p4_meter
+      Add 1000 Ω in series: c12p4_meter
+    exam: competency
+    difficulty: 2
 - code: cbse12p.mag.field
   title: Biot–Savart and Ampère's laws
   after:
@@ -470,6 +558,19 @@ concepts:
         - half
         answer: double
         why: B ∝ I.
+      ways:
+      - style: visual
+        teach: 'Field at the centre of a circular coil: 50 turns, radius 0.2 m, current 2 A.'
+        picture:
+          kind: flow
+          steps:
+          - B = μ₀NI/(2R)
+          - μ₀ = 4π × 10⁻⁷, N = 50, I = 2 A, R = 0.2 m
+          - B = 4π × 10⁻⁷ × 100 / 0.4
+          - B = π × 10⁻⁴ T
+          alt: 'Use B equals mu nought N I over 2R with 50 turns, 2 amperes and radius 0.2 metre: B is 4 pi times 10 to the minus 7 times 100 over 0.4, which is pi times 10 to the minus 4 tesla.'
+      - style: real_world
+        teach: An MRI scanner uses huge coils carrying large currents to make a strong, steady magnetic field through the patient's body. The Biot–Savart law is how engineers work out the field each part of the coil adds.
     - teach: 'Ampère''s circuital law: ∮B·dl = μ₀I_enclosed. It gives the field of a long straight wire, B = μ₀I/(2πr), circling the wire (right-hand thumb rule). For a long solenoid with n turns per metre, B = μ₀nI inside, uniform, and nearly zero outside.'
       picture:
         kind: compare
@@ -497,6 +598,11 @@ concepts:
         - falls to zero
         answer: stays the same
         why: The field inside is uniform.
+      ways:
+      - style: step_by_step
+        teach: 'Field 4 cm from a long wire carrying 20 A. Step 1: B = μ₀I/(2πr) = 2 × 10⁻⁷ × I/r. Step 2: = 2 × 10⁻⁷ × 20 / 0.04. Step 3: = 10⁻⁴ T. Step 4: That is about twice the Earth''s field, enough to swing a compass nearby.'
+      - style: real_world
+        teach: 'Hold a compass under a wire joined to a battery: the needle swings when the current flows. Grip the wire with your right thumb along the current, and your curled fingers show which way the needle''s north end points.'
     - teach: 'A toroid (solenoid bent into a ring) has B = μ₀NI/(2πr) inside its core and zero outside. Directions: curl right-hand fingers with the current; the thumb gives B for a loop or solenoid.'
       check:
         prompt: Field outside an ideal toroid?
@@ -506,6 +612,23 @@ concepts:
         - μ₀nI
         answer: zero
         why: The field is confined to the core.
+      ways:
+      - style: visual
+        teach: 'Solenoid and toroid compared: where the field is and how strong.'
+        picture:
+          kind: compare
+          columns:
+          - title: Long solenoid
+            points:
+            - 'Inside: B = μ₀nI, uniform'
+            - 'Outside: nearly zero'
+          - title: Toroid
+            points:
+            - 'Inside core: B = μ₀NI/(2πr)'
+            - 'Outside and in the hole: zero'
+          alt: A long solenoid has a uniform field mu nought n I inside and almost none outside. A toroid has mu nought N I over 2 pi r inside its core and zero outside and in the central hole.
+      - style: step_by_step
+        teach: 'Direction of B inside a solenoid. Step 1: Look at the end of the coil. Step 2: Curl your right-hand fingers along the current in the turns. Step 3: Your thumb points along B inside. Step 4: That end acts as the north pole.'
   items:
   - prompt: Find B (in units of 10⁻⁵ T) 0.1 m from a long wire carrying 5 A.
     answer: '1'
@@ -676,3 +799,52 @@ concepts:
     mistakes:
       downward, away from the viewer: c12p4_field
       along the wire: c12p4_field
+  - prompt: 'Assertion (A): The magnetic field outside an ideal toroid is zero.
+
+      Reason (R): An Ampère loop drawn outside the toroid encloses zero net current.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A loop outside the toroid is crossed by each turn twice, in and out, so the net enclosed current is 0 and ∮B·dl = 0, giving B = 0 by symmetry. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A long straight power line carries 100 A. What is the magnetic field it produces 5 m below it, at ground level? (μ₀ = 4π × 10⁻⁷ T m/A)'
+    options:
+    - 4 × 10⁻⁶ T
+    - 4 × 10⁻⁵ T
+    - 2 × 10⁻⁵ T
+    answer: 4 × 10⁻⁶ T
+    hints:
+    - B = μ₀I/(2πr).
+    - μ₀/(2π) = 2 × 10⁻⁷.
+    solution: B = 2 × 10⁻⁷ × 100 / 5 = 4 × 10⁻⁶ T, about a tenth of the Earth's field.
+    mistakes:
+      4 × 10⁻⁵ T: c12p4_field
+      2 × 10⁻⁵ T: c12p4_field
+    exam: case
+    difficulty: 2
+  - prompt: You need to double the field inside a long solenoid without changing the current. What can you do?
+    options:
+    - Double the number of turns per metre
+    - Stretch it to twice the length with the same turns
+    - Double its radius
+    answer: Double the number of turns per metre
+    hints:
+    - Inside a long solenoid, B = μ₀nI.
+    - Which change doubles n?
+    solution: B = μ₀nI, so doubling n doubles B. Stretching with the same turns halves n, and the radius does not appear in the formula.
+    mistakes:
+      Stretch it to twice the length with the same turns: c12p4_field
+      Double its radius: c12p4_field
+    exam: competency
+    difficulty: 2

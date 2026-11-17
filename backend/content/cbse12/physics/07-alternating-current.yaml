@@ -162,6 +162,23 @@ concepts:
         - 10√2 A
         answer: 10 A
         why: I_rms = I_m/√2.
+      ways:
+      - style: visual
+        teach: Peak and rms values of household mains, side by side.
+        picture:
+          kind: compare
+          columns:
+          - title: Peak value
+            points:
+            - Highest point of the wave
+            - V_m ≈ 311 V for Indian mains
+          - title: rms value
+            points:
+            - V_rms = V_m/√2
+            - '220 V: what meters and ratings show'
+          alt: The peak value is the highest point of the wave, about 311 volts for Indian mains. The rms value is the peak divided by root 2, which is the 220 volts shown on meters and ratings.
+      - style: real_world
+        teach: 'A 220 V rms supply heats a toaster exactly as much as a steady 220 V DC supply would. That is what rms means: the steady value that gives the same heating, even though the actual voltage swings up to about 311 V and back.'
     - teach: 'In a resistor V and I are in phase. In an inductor I lags V by 90°, with reactance X_L = ωL. In a capacitor I leads V by 90°, with reactance X_C = 1/(ωC). Series LCR: Z = √(R² + (X_L − X_C)²), tan φ = (X_L − X_C)/R.'
       picture:
         kind: compare
@@ -190,6 +207,11 @@ concepts:
         - unchanged
         answer: smaller
         why: X_C = 1/(ωC) falls as ω rises.
+      ways:
+      - style: step_by_step
+        teach: 'Series LCR with R = 8 Ω, X_L = 20 Ω, X_C = 14 Ω. Step 1: X_L − X_C = 6 Ω. Step 2: Z = √(8² + 6²) = 10 Ω. Step 3: tan φ = 6/8, so φ ≈ 37°. Step 4: X_L > X_C, so the circuit acts like an inductor: current lags voltage.'
+      - style: real_world
+        teach: 'A capacitor blocks steady DC but lets high-frequency AC through, because X_C = 1/(ωC) gets small as ω grows. Speaker crossovers use this: a capacitor sends the high notes to the small tweeter.'
     - teach: 'Resonance: when X_L = X_C, they cancel, so Z = R and the current is largest. This happens at ω₀ = 1/√(LC). Radios tune stations this way.'
       check:
         prompt: L = 1 H, C = 1 μF. ω₀?
@@ -199,6 +221,27 @@ concepts:
         - 10⁶ rad/s
         answer: 1000 rad/s
         why: 1/√(10⁻⁶) = 1000.
+      ways:
+      - style: visual
+        teach: How a series LCR circuit behaves below, at and above resonance.
+        picture:
+          kind: compare
+          columns:
+          - title: Below ω₀
+            points:
+            - X_C > X_L
+            - Acts like a capacitor
+          - title: At ω₀ = 1/√(LC)
+            points:
+            - X_L = X_C, Z = R
+            - Current is largest
+          - title: Above ω₀
+            points:
+            - X_L > X_C
+            - Acts like an inductor
+          alt: Below resonance X C is bigger and the circuit acts like a capacitor. At resonance, omega nought equals 1 over root L C, the reactances cancel, Z equals R and the current is largest. Above resonance X L is bigger and it acts like an inductor.
+      - style: step_by_step
+        teach: 'Resonance for L = 0.4 H and C = 25 μF. Step 1: LC = 0.4 × 25 × 10⁻⁶ = 10⁻⁵. Step 2: √(LC) ≈ 3.16 × 10⁻³. Step 3: ω₀ = 1/√(LC) ≈ 316 rad/s. Step 4: At that ω, X_L = X_C ≈ 126 Ω, so they cancel.'
   items:
   - prompt: The peak voltage is 200√2 V. Find the rms voltage (V).
     answer: '200'
@@ -365,6 +408,55 @@ concepts:
     mistakes:
       '0': c12p7_react
       '22': c12p7_react
+  - prompt: 'Assertion (A): A capacitor allows AC to flow through the circuit but blocks steady DC.
+
+      Reason (R): The capacitive reactance X_C = 1/(ωC) is infinite when ω = 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: For DC, ω = 0 and X_C is infinite, so no steady current flows; for AC, X_C is finite and the current alternates. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A radio''s tuning circuit has a 2 μH inductor. To pick up a station at ω = 10⁷ rad/s, what capacitance is needed?'
+    options:
+    - 5 nF
+    - 50 nF
+    - 0.5 nF
+    answer: 5 nF
+    hints:
+    - 'Resonance: ω₀² = 1/(LC).'
+    - C = 1/(ω₀²L).
+    solution: C = 1/(ω₀²L) = 1/(10¹⁴ × 2 × 10⁻⁶) = 1/(2 × 10⁸) = 5 × 10⁻⁹ F = 5 nF.
+    mistakes:
+      50 nF: c12p7_react
+      0.5 nF: c12p7_react
+    exam: case
+    difficulty: 2
+  - prompt: An AC voltmeter across a mains socket reads 230 V. A student says the voltage never goes above 230 V. What is right?
+    options:
+    - The meter shows rms; the peak is about 325 V
+    - 'The student is right: 230 V is the peak'
+    - The peak is 230 ÷ √2 ≈ 163 V
+    answer: The meter shows rms; the peak is about 325 V
+    hints:
+    - AC meters read rms values.
+    - V_m = √2 × V_rms.
+    solution: The 230 V reading is rms. The peak is √2 × 230 ≈ 325 V, which insulation must be able to withstand.
+    mistakes:
+      'The student is right: 230 V is the peak': c12p7_rms
+      The peak is 230 ÷ √2 ≈ 163 V: c12p7_rms
+    exam: competency
+    difficulty: 2
 - code: cbse12p.ac.power
   title: Power in AC and transformers
   after:
@@ -465,6 +557,27 @@ concepts:
         - 50 W
         answer: 100 W
         why: 100 × 2 × 0.5.
+      ways:
+      - style: visual
+        teach: Power factor for the three simple circuit elements.
+        picture:
+          kind: compare
+          columns:
+          - title: Pure resistor
+            points:
+            - φ = 0°, cos φ = 1
+            - Full power used
+          - title: Pure inductor or capacitor
+            points:
+            - φ = 90°, cos φ = 0
+            - 'Wattless current: no average power'
+          - title: LCR circuit
+            points:
+            - cos φ = R/Z
+            - Between 0 and 1
+          alt: 'A pure resistor has phase 0 and power factor 1, so full power is used. A pure inductor or capacitor has phase 90 degrees and power factor 0: a wattless current. An LCR circuit has power factor R over Z, between 0 and 1.'
+      - style: step_by_step
+        teach: 'A motor draws 10 A rms from 220 V rms with cos φ = 0.6. Step 1: Apparent power V × I = 2200 VA. Step 2: Average power P = V I cos φ. Step 3: P = 2200 × 0.6 = 1320 W. Step 4: The rest of the current does no useful work but still heats the wires.'
     - teach: 'A transformer changes AC voltage using mutual induction. Ideal: Vs/Vp = Ns/Np = Ip/Is. Step-up (Ns > Np) raises voltage and lowers current; step-down does the opposite. Losses: copper (I²R), eddy currents, hysteresis, flux leakage.'
       picture:
         kind: flow
@@ -482,6 +595,11 @@ concepts:
         - 240 V
         answer: 60 V
         why: 240 × 50/200.
+      ways:
+      - style: step_by_step
+        teach: 'An ideal step-up transformer: 200 primary turns, 4000 secondary turns, 230 V in. Step 1: Ns/Np = 20. Step 2: Vs = 20 × 230 = 4600 V. Step 3: Power in = power out, so current falls by the same factor. Step 4: If Ip = 10 A, then Is = 0.5 A.'
+      - style: real_world
+        teach: A phone charger contains a small step-down transformer (or its modern electronic version) that turns 230 V mains into about 5 V. More turns on the primary than the secondary lowers the voltage.
     - teach: Power is sent over long lines at very high voltage. For the same power P = VI, higher V means lower I, and line loss I²R falls sharply. Step-down transformers bring it back to 220 V near homes. An LC circuit oscillates at ω = 1/√(LC), swapping energy between C and L.
       check:
         prompt: 'Doubling transmission voltage (same power) makes I²R loss:'
@@ -491,6 +609,19 @@ concepts:
         - double
         answer: a quarter
         why: I halves, so I² is a quarter.
+      ways:
+      - style: visual
+        teach: Why power is sent over long lines at very high voltage.
+        picture:
+          kind: flow
+          steps:
+          - Same power P = VI to send
+          - Raise V by 10 times
+          - Current falls to I/10
+          - Line loss I²R falls to 1/100
+          alt: To send the same power, raising the voltage ten times lowers the current to one tenth, and the line loss I squared R falls to one hundredth.
+      - style: step_by_step
+        teach: 'An LC circuit with L = 0.1 H and C = 10 μF. Step 1: Energy swaps between the capacitor''s field and the inductor''s field. Step 2: ω = 1/√(LC) = 1/√(10⁻⁶). Step 3: ω = 1000 rad/s. Step 4: Without resistance this would go on for ever; real circuits slowly lose energy as heat.'
   items:
   - prompt: A transformer has 100 primary and 500 secondary turns, with 220 V in. Find the output voltage (V).
     answer: '1100'
@@ -654,3 +785,52 @@ concepts:
     mistakes:
       '1000': c12p7_react
       '100000': c12p7_react
+  - prompt: 'Assertion (A): A transformer cannot work on steady DC.
+
+      Reason (R): A transformer works by mutual induction, which needs a changing flux.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Steady DC gives a constant flux in the core, so no EMF is induced in the secondary. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A power station sends 1 MW along a line of resistance 10 Ω. How much power is lost in the line if it is sent at 10 kV?'
+    options:
+    - 100 kW
+    - 10 kW
+    - 1 MW
+    answer: 100 kW
+    hints:
+    - I = P/V.
+    - Loss = I²R.
+    solution: I = 10⁶/10⁴ = 100 A. Loss = 100² × 10 = 10⁵ W = 100 kW, a tenth of the power sent.
+    mistakes:
+      10 kW: c12p7_power
+      1 MW: c12p7_power
+    exam: case
+    difficulty: 2
+  - prompt: A student connects a 12 V car battery to the primary of a step-up transformer, hoping to get 240 V. The output is zero. Why?
+    options:
+    - Steady DC gives no changing flux, so nothing is induced
+    - The transformer needs more secondary turns
+    - The battery's voltage is too low
+    answer: Steady DC gives no changing flux, so nothing is induced
+    hints:
+    - How does the secondary get its EMF?
+    - What does DC do to the flux in the core?
+    solution: A transformer works by mutual induction, which needs a changing current and flux. Steady DC gives a constant flux, so the secondary EMF is zero.
+    mistakes:
+      The transformer needs more secondary turns: c12p7_trans
+      The battery's voltage is too low: c12p7_trans
+    exam: competency
+    difficulty: 2

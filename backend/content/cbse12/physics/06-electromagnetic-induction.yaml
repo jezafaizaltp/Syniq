@@ -139,6 +139,27 @@ concepts:
         - all the time
         answer: only while it is moving
         why: EMF needs a changing flux.
+      ways:
+      - style: visual
+        teach: Three ways to change the flux Φ = BA cos θ through a coil, and so induce an EMF.
+        picture:
+          kind: compare
+          columns:
+          - title: Change B
+            points:
+            - Move a magnet in or out
+            - Switch a nearby current on or off
+          - title: Change A
+            points:
+            - Slide a rod along rails
+            - Squeeze or stretch the loop
+          - title: Change θ
+            points:
+            - Rotate the coil
+            - This is how a generator works
+          alt: Flux can change by changing B, by moving a magnet or switching a nearby current; by changing the area, by sliding a rod or squeezing the loop; or by changing the angle, by rotating the coil as in a generator.
+      - style: step_by_step
+        teach: 'A 200-turn coil''s flux rises from 0.01 Wb to 0.05 Wb in 0.2 s. Step 1: ΔΦ = 0.04 Wb per turn. Step 2: dΦ/dt = 0.04/0.2 = 0.2 Wb/s. Step 3: ε = N dΦ/dt = 200 × 0.2. Step 4: ε = 40 V.'
     - teach: 'Lenz''s law gives the direction: the induced current opposes the change that produced it. Push a N pole in and the coil''s near face becomes N, pushing back. This is energy conservation: you must do work to make the current.'
       picture:
         kind: flow
@@ -156,6 +177,11 @@ concepts:
         - neither
         answer: S, attracting it back
         why: It opposes the decrease in flux by trying to keep the magnet close.
+      ways:
+      - style: step_by_step
+        teach: 'Use Lenz''s law when a magnet''s N pole is pulled away from a coil. Step 1: Flux towards the magnet is falling. Step 2: The coil opposes that fall. Step 3: Its near face becomes S, attracting the retreating N pole. Step 4: So you feel a pull back: you do work, which becomes electrical energy.'
+      - style: real_world
+        teach: Drop a strong magnet down a copper pipe and it falls slowly. As it falls, it changes the flux through each ring of the pipe, inducing currents whose fields push back on it. Lenz's law turns the pipe into a gentle brake.
     - teach: 'A rod of length l moving at speed v across field B has motional EMF ε = Blv. Changing flux in a solid metal sets up swirling eddy currents: useful in magnetic braking and induction furnaces, wasteful in transformer cores (so cores are laminated).'
       check:
         prompt: Why are transformer cores made of thin insulated sheets?
@@ -165,6 +191,19 @@ concepts:
         - to increase resistance of the coils
         answer: to reduce eddy currents
         why: Thin sheets break up the paths for eddy currents.
+      ways:
+      - style: visual
+        teach: Motional EMF in a rod sliding on rails, from motion to current.
+        picture:
+          kind: flow
+          steps:
+          - Rod of length 0.4 m moves at 5 m/s
+          - Field B = 0.5 T across it
+          - ε = Blv = 0.5 × 0.4 × 5 = 1 V
+          - 'With a 2 Ω circuit: I = 0.5 A'
+          alt: A 0.4 metre rod moving at 5 metres per second across a 0.5 tesla field has EMF B l v equal to 1 volt; in a 2 ohm circuit the current is 0.5 ampere.
+      - style: real_world
+        teach: 'Some trains and exercise bikes use magnetic brakes: magnets near a spinning metal disc set up eddy currents in it, and by Lenz''s law these oppose the motion. There is no rubbing, so nothing wears out.'
   items:
   - prompt: Flux through a 100-turn coil changes by 0.02 Wb in 0.1 s. Find the induced EMF (V).
     answer: '20'
@@ -339,6 +378,55 @@ concepts:
     mistakes:
       friction with air only: c12p6_lenz
       gravity: c12p6_lenz
+  - prompt: 'Assertion (A): A magnet falls more slowly through a copper pipe than through a plastic pipe of the same size.
+
+      Reason (R): Eddy currents induced in the copper oppose the magnet''s motion.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Copper conducts, so the moving magnet induces eddy currents in it, and by Lenz's law they oppose its fall. Plastic does not conduct, so it has no such currents. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: An aircraft with a wingspan of 40 m flies horizontally at 250 m/s where the vertical component of the Earth''s field is 5 × 10⁻⁵ T. What EMF is induced between its wingtips?'
+    options:
+    - 0.5 V
+    - 5 V
+    - 0.05 V
+    answer: 0.5 V
+    hints:
+    - 'Treat the wings as a rod: ε = Blv.'
+    - Use the vertical component of the field.
+    solution: ε = Blv = 5 × 10⁻⁵ × 40 × 250 = 0.5 V.
+    mistakes:
+      5 V: c12p6_flux
+      0.05 V: c12p6_flux
+    exam: case
+    difficulty: 2
+  - prompt: A metal ring is placed on top of a coil wound round an iron core. When the coil's switch is closed, the ring jumps up. Which explanation is right?
+    options:
+    - The rising flux induces a current in the ring that opposes it, so the ring is repelled
+    - The ring becomes a permanent magnet
+    - Heat from the coil pushes the ring up
+    answer: The rising flux induces a current in the ring that opposes it, so the ring is repelled
+    hints:
+    - What happens to the flux through the ring when the switch closes?
+    - How does the ring's induced current respond to that change?
+    solution: Closing the switch makes the flux through the ring rise quickly. By Lenz's law the ring's induced current makes a field opposing the rise, so the ring and coil repel and the ring jumps.
+    mistakes:
+      The ring becomes a permanent magnet: c12p6_lenz
+      Heat from the coil pushes the ring up: c12p6_lenz
+    exam: competency
+    difficulty: 2
 - code: cbse12p.emi.inductance
   title: Inductance and the AC generator
   after:
@@ -453,6 +541,19 @@ concepts:
         - 5 V
         answer: 6 V
         why: L × dI/dt = 3 × 2.
+      ways:
+      - style: visual
+        teach: 'Self-inductance: what happens in a coil when its own current changes.'
+        picture:
+          kind: flow
+          steps:
+          - Current in the coil changes
+          - Its own flux Φ = LI changes
+          - Induced EMF ε = −L dI/dt
+          - The EMF opposes the change in current
+          alt: When the current in a coil changes, its own flux L I changes, inducing an EMF of minus L dI by dt, which opposes the change in current.
+      - style: real_world
+        teach: 'An inductor behaves like a heavy flywheel for current: hard to start and hard to stop. Switch a big coil off suddenly and the current tries to keep going, which is why a spark can jump at the switch.'
     - teach: 'Mutual inductance: a changing current in coil 1 induces an EMF in a nearby coil 2: ε₂ = −M dI₁/dt. An inductor stores energy U = ½LI² in its magnetic field.'
       check:
         prompt: Energy in a 2 H inductor with 2 A?
@@ -462,6 +563,25 @@ concepts:
         - 2 J
         answer: 4 J
         why: ½ × 2 × 2² = 4.
+      ways:
+      - style: visual
+        teach: Mutual inductance between two coils, and energy stored in an inductor.
+        picture:
+          kind: compare
+          columns:
+          - title: Mutual inductance
+            points:
+            - Current changes in coil 1
+            - 'EMF in coil 2: ε₂ = −M dI₁/dt'
+            - Used in transformers, wireless chargers
+          - title: Stored energy
+            points:
+            - U = ½LI²
+            - Kept in the magnetic field
+            - Doubling I gives 4 times U
+          alt: 'Mutual inductance: a changing current in coil 1 induces an EMF minus M dI1 by dt in coil 2, as in transformers and wireless chargers. Stored energy in an inductor is one half L I squared, kept in its magnetic field, so doubling the current gives four times the energy.'
+      - style: step_by_step
+        teach: 'Energy in a 0.5 H coil. Step 1: U = ½LI². Step 2: At I = 2 A, U = ½ × 0.5 × 4 = 1 J. Step 3: At I = 6 A, U = ½ × 0.5 × 36 = 9 J. Step 4: Three times the current gives nine times the energy.'
     - teach: 'AC generator: a coil of N turns, area A, rotates at ω in field B. Flux NBA cos ωt changes, giving ε = NBAω sin ωt, with peak ε₀ = NBAω. Mechanical energy becomes electrical energy.'
       picture:
         kind: flow
@@ -479,6 +599,11 @@ concepts:
         - the same
         answer: double
         why: ε₀ ∝ ω.
+      ways:
+      - style: step_by_step
+        teach: 'Peak EMF of a generator. Step 1: N = 500 turns, A = 0.02 m², B = 0.2 T, ω = 100 rad/s. Step 2: ε₀ = NBAω. Step 3: ε₀ = 500 × 0.2 × 0.02 × 100. Step 4: ε₀ = 200 V.'
+      - style: real_world
+        teach: 'In a hydroelectric dam, falling water spins turbines that rotate huge coils in magnetic fields. The flux through the coils keeps changing, so an alternating EMF is induced: the water''s mechanical energy becomes the electricity in our homes.'
   items:
   - prompt: Current in a 2 H inductor changes by 3 A in 1 s. Find the induced EMF (V).
     answer: '6'
@@ -644,3 +769,52 @@ concepts:
     mistakes:
       the coil runs out of charge: c12p6_lenz
       the battery voltage rises: c12p6_lenz
+  - prompt: 'Assertion (A): The energy stored in an inductor becomes four times larger when its current is doubled.
+
+      Reason (R): The energy stored in an inductor is U = ½LI².'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: U depends on I², so doubling I multiplies U by 2² = 4. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A wireless phone charger has a pad coil and a phone coil with mutual inductance 2 μH. The pad current changes at 10⁶ A/s. What EMF is induced in the phone coil?'
+    options:
+    - 2 V
+    - 0.5 V
+    - 2 × 10⁶ V
+    answer: 2 V
+    hints:
+    - ε₂ = M dI₁/dt (size).
+    - 2 μH = 2 × 10⁻⁶ H.
+    solution: ε₂ = 2 × 10⁻⁶ × 10⁶ = 2 V.
+    mistakes:
+      0.5 V: c12p6_L
+      2 × 10⁶ V: c12p6_L
+    exam: case
+    difficulty: 2
+  - prompt: A generator gives a peak EMF of 100 V. Its coil is made to spin twice as fast. What is the new peak EMF?
+    options:
+    - 200 V
+    - 100 V
+    - 400 V
+    answer: 200 V
+    hints:
+    - ε₀ = NBAω.
+    - Only ω changes.
+    solution: ε₀ is proportional to ω, so doubling the spin rate doubles the peak EMF to 200 V (and also doubles the frequency).
+    mistakes:
+      100 V: c12p6_L
+      400 V: c12p6_L
+    exam: competency
+    difficulty: 2

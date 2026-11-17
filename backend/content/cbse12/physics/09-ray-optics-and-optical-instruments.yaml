@@ -130,6 +130,25 @@ concepts:
         - 30 cm
         answer: 15 cm
         why: f = R/2.
+      ways:
+      - style: visual
+        teach: The Cartesian sign convention for mirrors and lenses, in one picture.
+        picture:
+          kind: compare
+          columns:
+          - title: Positive (+)
+            points:
+            - Distances along the incoming light
+            - Heights above the axis
+            - Convex mirror f, convex lens f
+          - title: Negative (−)
+            points:
+            - Distances against the incoming light
+            - Heights below the axis
+            - Concave mirror f, concave lens f
+          alt: Distances measured along the incoming light, heights above the axis, and the focal lengths of convex mirrors and convex lenses are positive. Distances against the light, heights below the axis, and the focal lengths of concave mirrors and concave lenses are negative.
+      - style: step_by_step
+        teach: 'Concave mirror, f = −15 cm, object at u = −20 cm. Step 1: 1/v = 1/f − 1/u = −1/15 + 1/20. Step 2: = (−4 + 3)/60 = −1/60. Step 3: v = −60 cm: real image in front of the mirror. Step 4: m = −v/u = −3: inverted and three times larger.'
     - teach: 'Refraction: light bends because its speed changes. n = c/v; Snell''s law n₁ sin i = n₂ sin r. A pool looks shallower: apparent depth = real depth/n. Going from denser to rarer, beyond the critical angle C (sin C = 1/n) light is totally internally reflected: optical fibres, mirages, sparkling diamonds.'
       picture:
         kind: flow
@@ -147,6 +166,11 @@ concepts:
         - 45°
         answer: 30°
         why: sin C = 1/2.
+      ways:
+      - style: step_by_step
+        teach: 'Critical angle of diamond, n = 2.42. Step 1: sin C = 1/n = 1/2.42. Step 2: sin C ≈ 0.41. Step 3: C ≈ 24°. Step 4: Light inside a diamond hitting a face at more than 24° is totally reflected, so cut diamonds trap and bounce light: they sparkle.'
+      - style: real_world
+        teach: Optical fibres carry internet signals as light. The light hits the glass wall at more than the critical angle each time, so it is totally reflected and zig-zags along for kilometres with very little loss.
     - teach: 'Thin lens formula: 1/v − 1/u = 1/f, m = v/u. Lens maker''s formula 1/f = (n − 1)(1/R₁ − 1/R₂). Power P = 1/f (f in metres) in dioptres; convex lenses have positive power. Lenses in contact: P = P₁ + P₂.'
       check:
         prompt: f = +25 cm. Power?
@@ -156,6 +180,19 @@ concepts:
         - +0.25 D
         answer: +4 D
         why: 1/0.25 m = 4 D.
+      ways:
+      - style: visual
+        teach: 'Using the thin lens formula: a convex lens, f = 12 cm, object at u = −18 cm.'
+        picture:
+          kind: flow
+          steps:
+          - 1/v − 1/u = 1/f
+          - 1/v = 1/12 + 1/(−18) = 1/36
+          - 'v = +36 cm: real image behind the lens'
+          - 'm = v/u = 36/(−18) = −2: inverted, twice as tall'
+          alt: Put f equal to 12 and u equal to minus 18 into 1 over v minus 1 over u equals 1 over f to get 1 over v equal to 1 over 36, so v is plus 36 centimetres, a real image; magnification is minus 2, inverted and twice as tall.
+      - style: real_world
+        teach: An eye doctor prescribes lenses in dioptres. A −2.5 D lens is a concave lens with f = −0.4 m for short sight; a +1.5 D lens is a convex lens for long sight. Powers of lenses in contact simply add.
   items:
   - prompt: A lens has focal length 0.5 m. Find its power (dioptre).
     answer: '2'
@@ -319,6 +356,55 @@ concepts:
     mistakes:
       it refracts out: c12p9_refr
       it stops: c12p9_refr
+  - prompt: 'Assertion (A): A diamond sparkles more than a glass piece cut in the same shape.
+
+      Reason (R): Diamond has a larger refractive index, so its critical angle is smaller.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A smaller critical angle means more of the light inside meets faces beyond it and is totally reflected many times before escaping, so diamond sparkles more. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A camera with a convex lens of focal length 5 cm photographs a person 2.5 m away. How far behind the lens must the film or sensor be? (Give the nearest answer.)'
+    options:
+    - About 5.1 cm
+    - About 2.5 m
+    - Exactly 5 cm
+    answer: About 5.1 cm
+    hints:
+    - Use 1/v − 1/u = 1/f with u = −250 cm.
+    - 1/v = 1/5 − 1/250.
+    solution: '1/v = 1/5 + 1/(−250) = 49/250, so v = 250/49 ≈ 5.1 cm: just beyond the focal point, as for any distant object.'
+    mistakes:
+      About 2.5 m: c12p9_sign
+      Exactly 5 cm: c12p9_sign
+    exam: case
+    difficulty: 2
+  - prompt: A student looks straight down into a 1.2 m deep tank of water (n = 4/3) and thinks the bottom is 1.2 m below. Where does the bottom actually appear to be?
+    options:
+    - 0.9 m below the surface
+    - 1.6 m below the surface
+    - 1.2 m below the surface
+    answer: 0.9 m below the surface
+    hints:
+    - Apparent depth = real depth ÷ n.
+    - Is the tank deeper or shallower than it looks?
+    solution: Apparent depth = 1.2 ÷ (4/3) = 0.9 m. The tank is really deeper than it looks, which is why pools can be dangerous.
+    mistakes:
+      1.6 m below the surface: c12p9_refr
+      1.2 m below the surface: c12p9_refr
+    exam: competency
+    difficulty: 2
 - code: cbse12p.optics.instruments
   title: Prisms and optical instruments
   after:
@@ -430,6 +516,19 @@ concepts:
         - 4°
         answer: 2°
         why: (1.5 − 1) × 4.
+      ways:
+      - style: visual
+        teach: How a prism bends white light twice and splits it into its colours.
+        picture:
+          kind: flow
+          steps:
+          - White light enters one face and bends
+          - It bends again leaving the second face
+          - Violet has a larger n, so it bends most
+          - 'Red bends least: the colours spread into a spectrum'
+          alt: White light bends as it enters one face of the prism and again as it leaves. Violet light has a larger refractive index and bends most, red bends least, so the colours spread into a spectrum.
+      - style: step_by_step
+        teach: 'A thin prism of angle 4° and n = 1.6. Step 1: For a thin prism, δ = (n − 1)A. Step 2: n − 1 = 0.6. Step 3: δ = 0.6 × 4°. Step 4: δ = 2.4°.'
     - teach: 'Simple microscope (magnifying glass): m = 1 + D/f with the image at D = 25 cm. Compound microscope: objective forms a real enlarged image, eyepiece magnifies it again; m ≈ (L/f₀)(D/fₑ).'
       picture:
         kind: compare
@@ -453,6 +552,11 @@ concepts:
         - '25'
         answer: '2'
         why: 1 + 25/25 = 2.
+      ways:
+      - style: step_by_step
+        teach: 'A magnifying glass of f = 10 cm. Step 1: Image at the near point D = 25 cm. Step 2: m = 1 + D/f. Step 3: m = 1 + 25/10. Step 4: m = 3.5: things look three and a half times larger.'
+      - style: real_world
+        teach: A jeweller's eyepiece is a short-focus convex lens. The shorter the focal length, the larger 1 + D/f becomes, which is why a jeweller's lens is small and strongly curved.
     - teach: 'Astronomical telescope in normal adjustment: m = f₀/fₑ, tube length f₀ + fₑ. A large objective gathers more light. Reflecting telescopes use a mirror: no chromatic aberration, and a mirror is easier to support than a huge lens.'
       check:
         prompt: f₀ = 150 cm, fₑ = 5 cm. Magnifying power?
@@ -462,6 +566,25 @@ concepts:
         - '750'
         answer: '30'
         why: 150/5 = 30.
+      ways:
+      - style: visual
+        teach: Refracting and reflecting telescopes compared.
+        picture:
+          kind: compare
+          columns:
+          - title: Refracting telescope
+            points:
+            - Large lens as objective
+            - Colours focus at slightly different points
+            - Heavy lens is hard to support
+          - title: Reflecting telescope
+            points:
+            - Large mirror as objective
+            - No chromatic aberration
+            - Mirror supported from behind
+          alt: A refracting telescope uses a large lens, which focuses colours at slightly different points and is hard to support. A reflecting telescope uses a large mirror, which has no chromatic aberration and can be supported from behind.
+      - style: step_by_step
+        teach: 'A telescope with f₀ = 150 cm and fₑ = 6 cm in normal adjustment. Step 1: m = f₀/fₑ. Step 2: m = 150/6 = 25. Step 3: Length = f₀ + fₑ. Step 4: Length = 156 cm.'
   items:
   - prompt: A telescope has f₀ = 100 cm and fₑ = 5 cm. Find its magnifying power.
     answer: '20'
@@ -633,3 +756,52 @@ concepts:
     mistakes:
       the prism adds colour: c12p9_refr
       light slows to zero: c12p9_refr
+  - prompt: 'Assertion (A): Large research telescopes use mirrors rather than lenses as objectives.
+
+      Reason (R): A mirror has no chromatic aberration and can be supported over its whole back surface.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Mirrors reflect all colours to the same focus and can be held from behind, so very large ones are practical. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A school telescope has an objective of focal length 90 cm and wants a magnifying power of 30 in normal adjustment. What eyepiece focal length is needed, and how long is the tube?'
+    options:
+    - 3 cm, tube 93 cm
+    - 30 cm, tube 120 cm
+    - 3 cm, tube 87 cm
+    answer: 3 cm, tube 93 cm
+    hints:
+    - m = f₀/fₑ.
+    - Length = f₀ + fₑ.
+    solution: fₑ = 90/30 = 3 cm, and the tube length is 90 + 3 = 93 cm.
+    mistakes:
+      30 cm, tube 120 cm: c12p9_inst
+      3 cm, tube 87 cm: c12p9_inst
+    exam: case
+    difficulty: 2
+  - prompt: You have two convex lenses, of focal lengths 4 cm and 40 cm, to build an astronomical telescope. How should you use them?
+    options:
+    - 40 cm lens as the objective, 4 cm lens as the eyepiece
+    - 4 cm lens as the objective, 40 cm lens as the eyepiece
+    - Either way gives the same magnification
+    answer: 40 cm lens as the objective, 4 cm lens as the eyepiece
+    hints:
+    - m = f₀/fₑ.
+    - Which choice makes this ratio larger than 1?
+    solution: With f₀ = 40 cm and fₑ = 4 cm, m = 10. The other way round gives m = 0.1, which makes things look smaller.
+    mistakes:
+      4 cm lens as the objective, 40 cm lens as the eyepiece: c12p9_inst
+      Either way gives the same magnification: c12p9_inst
+    exam: competency
+    difficulty: 2

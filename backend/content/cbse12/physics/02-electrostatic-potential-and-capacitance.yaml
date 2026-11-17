@@ -124,6 +124,19 @@ concepts:
         - neither
         answer: scalar
         why: It is work per charge, and work is a scalar.
+      ways:
+      - style: visual
+        teach: What 'potential at a point' means, built up one idea at a time.
+        picture:
+          kind: flow
+          steps:
+          - Start a +1 C test charge far away (infinity)
+          - Bring it slowly to the point
+          - Work done per coulomb = potential V
+          - 'For a point charge: V = kq/r'
+          alt: Start a unit positive test charge at infinity, bring it slowly to the point, and the work done per coulomb is the potential, which for a point charge is kq over r.
+      - style: real_world
+        teach: Electric potential is like height for a ball. A ball rolls from high ground to low ground, and a positive charge moves from high potential to low potential. A 9 V battery lifts each coulomb of charge through 9 J of 'electrical height'.
     - teach: 'For several charges, add their potentials, keeping signs. Potential energy of two charges is U = kq₁q₂/r. Moving charge q through potential difference ΔV takes work W = qΔV. The field points towards decreasing potential: E = −dV/dr.'
       picture:
         kind: bars
@@ -143,6 +156,11 @@ concepts:
         - 5/3 J
         answer: 15 J
         why: W = qΔV = 3 × 5.
+      ways:
+      - style: step_by_step
+        teach: 'Potential at P from +8 μC at 2 m and −1 μC at 3 m. Step 1: V₁ = 9 × 10⁹ × 8 × 10⁻⁶ / 2 = 36 × 10³ V. Step 2: V₂ = 9 × 10⁹ × (−1 × 10⁻⁶) / 3 = −3 × 10³ V. Step 3: Potential is a scalar: just add. Step 4: V = 33 × 10³ V.'
+      - style: real_world
+        teach: 'A 1.5 V cell gives each coulomb 1.5 J of energy; a 230 V mains socket gives each coulomb 230 J. That is why W = qΔV: the same charge does far more work when pushed through a bigger potential difference.'
     - teach: Equipotential surfaces join points of equal potential. They are always perpendicular to field lines, and no work is needed to move a charge along them. Inside a conductor E = 0, and the whole conductor is at one potential; extra charge sits on the surface.
       check:
         prompt: Work to move 2 C along an equipotential at 10 V?
@@ -152,6 +170,23 @@ concepts:
         - 5 J
         answer: 0 J
         why: ΔV = 0 along an equipotential.
+      ways:
+      - style: visual
+        teach: Equipotential surfaces for two simple fields, always at right angles to the field lines.
+        picture:
+          kind: compare
+          columns:
+          - title: Point charge
+            points:
+            - 'Field lines: straight out from the charge'
+            - 'Equipotentials: spheres around it'
+          - title: Uniform field
+            points:
+            - 'Field lines: parallel, evenly spaced'
+            - 'Equipotentials: flat planes across them'
+          alt: Around a point charge the field lines go straight out and the equipotentials are spheres. In a uniform field the lines are parallel and the equipotentials are flat planes across them, always at right angles.
+      - style: step_by_step
+        teach: 'Work on a 3 C charge. Step 1: Moving along one equipotential: ΔV = 0, so W = 0. Step 2: Moving from the 10 V surface to the 4 V surface: ΔV = 6 V. Step 3: W = qΔV = 3 × 6. Step 4: The field does 18 J of work on it.'
   items:
   - prompt: Find the potential (in units of 10³ V) 1 m from a 1 μC charge (k = 9 × 10⁹).
     answer: '9'
@@ -321,6 +356,55 @@ concepts:
     mistakes:
       90°: c12p2_v
       180°: c12p2_v
+  - prompt: 'Assertion (A): No work is done in moving a charge along an equipotential surface.
+
+      Reason (R): The electric field is perpendicular to an equipotential surface.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Since E is perpendicular to the surface (R), the force on the charge has no component along the motion, so W = 0. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In an old TV tube, an electron (charge 1.6 × 10⁻¹⁹ C) starts from rest and is accelerated through 2000 V. How much kinetic energy does it gain?'
+    options:
+    - 3.2 × 10⁻¹⁶ J
+    - 1.6 × 10⁻¹⁹ J
+    - 2000 J
+    answer: 3.2 × 10⁻¹⁶ J
+    hints:
+    - Energy gained = qΔV.
+    - Multiply 1.6 × 10⁻¹⁹ by 2000.
+    solution: W = qΔV = 1.6 × 10⁻¹⁹ × 2000 = 3.2 × 10⁻¹⁶ J.
+    mistakes:
+      1.6 × 10⁻¹⁹ J: c12p2_work
+      2000 J: c12p2_work
+    exam: case
+    difficulty: 2
+  - prompt: At a point P, the electric field due to two charges is zero. Must the potential at P also be zero?
+    options:
+    - 'No: midway between two equal positive charges E = 0 but V = 2kq/r'
+    - Yes, always
+    - Yes, because V = E × r
+    answer: 'No: midway between two equal positive charges E = 0 but V = 2kq/r'
+    hints:
+    - Field is a vector; potential is a scalar.
+    - Try two equal positive charges and the midpoint between them.
+    solution: 'At the midpoint the two fields are equal and opposite, so E = 0. The potentials are both positive and add: V = 2kq/r ≠ 0.'
+    mistakes:
+      Yes, always: c12p2_v
+      Yes, because V = E × r: c12p2_v
+    exam: competency
+    difficulty: 2
 - code: cbse12p.pot.capacitance
   title: Capacitors and dielectrics
   after:
@@ -435,6 +519,19 @@ concepts:
         - four times
         answer: double
         why: C ∝ A.
+      ways:
+      - style: visual
+        teach: How changing the plates changes a parallel-plate capacitor, C = ε₀A/d.
+        picture:
+          kind: flow
+          steps:
+          - 'Start: capacitance C'
+          - 'Double the plate area A: 2C'
+          - 'Halve the gap d: 2C'
+          - 'Do both: 4C'
+          alt: Starting from capacitance C, doubling the plate area gives 2C, halving the gap gives 2C, and doing both gives 4C.
+      - style: real_world
+        teach: A phone's touch screen is a grid of tiny capacitors. A finger near the glass changes the capacitance at that spot, and the phone senses where the change happened. That is why gloves, which keep the finger away, often do not work.
     - teach: A dielectric (insulator) of constant K between the plates becomes polarised and weakens the field, so C rises to Kε₀A/d. In parallel, capacitors share the same voltage and C = C₁ + C₂ + …; in series they carry the same charge and 1/C = 1/C₁ + 1/C₂ + …
       picture:
         kind: compare
@@ -458,6 +555,11 @@ concepts:
         - 4 μF
         answer: 2 μF
         why: 1/C = 1/4 + 1/4 = 1/2.
+      ways:
+      - style: step_by_step
+        teach: 'Combine 4 μF and 12 μF. Step 1: In series: 1/C = 1/4 + 1/12 = 4/12. Step 2: So C = 3 μF, smaller than either. Step 3: In parallel: C = 4 + 12 = 16 μF. Step 4: Series shrinks, parallel adds: the opposite of resistors.'
+      - style: real_world
+        teach: A camera flash charges a capacitor slowly from a small battery, then empties it through the bulb in a thousandth of a second. The capacitor stores energy so it can be released much faster than the battery could supply it.
     - teach: 'Energy stored: U = ½CV² = Q²/(2C) = ½QV. It sits in the electric field between the plates, with energy density ½ε₀E².'
       check:
         prompt: Energy in a 4 F capacitor at 2 V?
@@ -467,6 +569,19 @@ concepts:
         - 4 J
         answer: 8 J
         why: ½ × 4 × 2² = 8.
+      ways:
+      - style: visual
+        teach: Energy stored in a 5 μF capacitor charged to 100 V.
+        picture:
+          kind: flow
+          steps:
+          - U = ½CV²
+          - C = 5 × 10⁻⁶ F, V = 100 V
+          - U = ½ × 5 × 10⁻⁶ × 10⁴
+          - U = 0.025 J
+          alt: Use U equals one half C V squared with C equal to 5 times 10 to the minus 6 farad and V equal to 100 volts, giving 0.025 joule.
+      - style: step_by_step
+        teach: 'What happens to U if V is doubled? Step 1: U = ½CV². Step 2: C stays the same. Step 3: V² becomes (2V)² = 4V². Step 4: So the stored energy becomes 4 times as large.'
   items:
   - prompt: A capacitor holds 20 μC at 10 V. Find its capacitance in μF.
     answer: '2'
@@ -626,3 +741,52 @@ concepts:
     mistakes:
       '72': c12p2_comb
       '8': c12p2_comb
+  - prompt: 'Assertion (A): Inserting a dielectric slab into an isolated charged capacitor reduces the energy it stores.
+
+      Reason (R): With Q fixed, U = Q²/(2C), and the dielectric increases C.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: The capacitor is isolated, so Q cannot change. The dielectric raises C to KC, and U = Q²/(2C) falls by the factor K. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A hospital defibrillator uses a 100 μF capacitor charged to 2000 V. How much energy does it store for one shock?'
+    options:
+    - 200 J
+    - 400 J
+    - 0.2 J
+    answer: 200 J
+    hints:
+    - U = ½CV².
+    - C = 10⁻⁴ F and V² = 4 × 10⁶.
+    solution: U = ½ × 10⁻⁴ × (2000)² = ½ × 10⁻⁴ × 4 × 10⁶ = 200 J.
+    mistakes:
+      400 J: c12p2_energy
+      0.2 J: c12p2_energy
+    exam: case
+    difficulty: 2
+  - prompt: You have three 6 μF capacitors. Which arrangement gives a total of 9 μF?
+    options:
+    - Two in series, with the third in parallel to them
+    - All three in series
+    - All three in parallel
+    answer: Two in series, with the third in parallel to them
+    hints:
+    - Work out each option.
+    - Two 6 μF in series give 3 μF.
+    solution: Two in series give 3 μF; adding the third in parallel gives 3 + 6 = 9 μF. All in series give 2 μF; all in parallel give 18 μF.
+    mistakes:
+      All three in series: c12p2_comb
+      All three in parallel: c12p2_comb
+    exam: competency
+    difficulty: 2

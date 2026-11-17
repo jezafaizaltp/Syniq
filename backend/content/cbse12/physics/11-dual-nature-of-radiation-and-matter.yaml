@@ -126,6 +126,27 @@ concepts:
         - a few slow electrons
         answer: none
         why: Below ν₀ no electrons are emitted, whatever the intensity.
+      ways:
+      - style: visual
+        teach: Three ways to get electrons out of a metal, and what supplies the energy.
+        picture:
+          kind: compare
+          columns:
+          - title: Thermionic
+            points:
+            - Heat the metal
+            - Old TV and radio valves
+          - title: Field emission
+            points:
+            - Very strong electric field
+            - Pulls electrons out
+          - title: Photoelectric
+            points:
+            - Shine light of high enough frequency
+            - Solar cells, light sensors
+          alt: Thermionic emission heats the metal, as in old valves. Field emission uses a very strong electric field to pull electrons out. Photoelectric emission uses light of high enough frequency, as in light sensors.
+      - style: real_world
+        teach: Automatic doors and street lights that switch on at dusk use photocells. Light frees electrons in the cell, a current flows, and the circuit knows whether light is falling on it.
     - teach: 'Observations: photocurrent ∝ intensity; maximum kinetic energy depends on frequency, not intensity; emission is instant. The wave theory could not explain these. Einstein: light comes in photons of energy E = hν. One photon frees one electron: K_max = hν − φ₀, where φ₀ = hν₀ is the work function.'
       picture:
         kind: flow
@@ -143,6 +164,11 @@ concepts:
         - 24 eV
         answer: 2 eV
         why: 6 − 4.
+      ways:
+      - style: step_by_step
+        teach: 'Light of 248 nm on a metal with φ₀ = 3 eV. Step 1: E = hc/λ = 1240/248 = 5 eV. Step 2: K_max = E − φ₀ = 5 − 3 = 2 eV. Step 3: Stopping potential V₀ = 2 V. Step 4: Brighter light of the same λ gives more electrons, but K_max stays 2 eV.'
+      - style: real_world
+        teach: 'Think of a coconut stall where each throw must reach a set height to knock a coconut down. A thousand weak throws knock down nothing; one strong throw does. Each photon is a throw: its energy hν decides, not how many photons arrive.'
     - teach: 'The stopping potential V₀ is the reverse voltage that just stops the fastest electrons: eV₀ = K_max. Photons also carry momentum p = h/λ. Useful: hc ≈ 1240 eV nm, so a 620 nm photon has 2 eV.'
       check:
         prompt: K_max = 1.5 eV. Stopping potential?
@@ -152,6 +178,19 @@ concepts:
         - 0.75 V
         answer: 1.5 V
         why: eV₀ = K_max, so V₀ = 1.5 V.
+      ways:
+      - style: visual
+        teach: From photon energy to stopping potential, one step at a time.
+        picture:
+          kind: flow
+          steps:
+          - Photon energy hν
+          - Minus work function φ₀
+          - Equals K_max of the fastest electron
+          - 'Stopping potential: eV₀ = K_max'
+          alt: The photon's energy h nu, minus the work function phi nought, gives the maximum kinetic energy of the fastest electron, and the stopping potential satisfies e V nought equals that kinetic energy.
+      - style: step_by_step
+        teach: 'Threshold for a metal with φ₀ = 2.48 eV. Step 1: At threshold, hν₀ = φ₀. Step 2: λ₀ = hc/φ₀ = 1240/2.48. Step 3: λ₀ = 500 nm. Step 4: Light of longer wavelength, even very bright red light, frees no electrons.'
   items:
   - prompt: Photons of 5 eV hit a metal with work function 2 eV. Find K_max (eV).
     answer: '3'
@@ -325,6 +364,55 @@ concepts:
     mistakes:
       '10': c12p11_db
       1/10: c12p11_db
+  - prompt: 'Assertion (A): Very bright red light may free no electrons from a metal while dim violet light does.
+
+      Reason (R): Each photon''s energy depends on its frequency, and one photon frees one electron.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Red photons each carry less energy, which may be below the work function, however many arrive. Violet photons each carry enough. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A solar-powered calculator''s cell needs at least 1.1 eV to free an electron. Which is the longest wavelength of light that can still work it? (hc = 1240 eV nm)'
+    options:
+    - About 1130 nm
+    - About 400 nm
+    - About 1364 nm
+    answer: About 1130 nm
+    hints:
+    - λ₀ = hc/φ₀.
+    - 1240 ÷ 1.1.
+    solution: λ₀ = 1240/1.1 ≈ 1127 nm, about 1130 nm, in the near infrared. Longer wavelengths carry too little energy per photon.
+    mistakes:
+      About 400 nm: c12p11_units
+      About 1364 nm: c12p11_units
+    exam: case
+    difficulty: 2
+  - prompt: In a photoelectric experiment, the light's intensity is doubled while its frequency stays the same (above threshold). What happens?
+    options:
+    - Twice as many electrons; same stopping potential
+    - Same number of electrons; double the stopping potential
+    - Twice as many electrons and double the stopping potential
+    answer: Twice as many electrons; same stopping potential
+    hints:
+    - Intensity sets the number of photons.
+    - Frequency sets each photon's energy.
+    solution: Double intensity means twice as many photons, so twice the current. Each photon still has the same hν, so K_max and V₀ do not change.
+    mistakes:
+      Same number of electrons; double the stopping potential: c12p11_photo
+      Twice as many electrons and double the stopping potential: c12p11_photo
+    exam: competency
+    difficulty: 2
 - code: cbse12p.dual.matter
   title: Matter waves
   after:
@@ -408,6 +496,23 @@ concepts:
         - the same
         answer: half
         why: λ ∝ 1/p.
+      ways:
+      - style: visual
+        teach: de Broglie's idea completes a symmetry between light and matter.
+        picture:
+          kind: compare
+          columns:
+          - title: Light
+            points:
+            - Known as a wave
+            - 'Shown to act as particles: photons'
+          - title: Matter
+            points:
+            - Known as particles
+            - 'Shown to act as waves: λ = h/p'
+          alt: Light was known as a wave and was shown to act as particles, photons. Matter was known as particles and was shown to act as waves, with wavelength h over p.
+      - style: step_by_step
+        teach: 'An electron moving at 10⁶ m/s. Step 1: p = mv = 9.1 × 10⁻³¹ × 10⁶ = 9.1 × 10⁻²⁵ kg m/s. Step 2: λ = h/p. Step 3: λ = 6.63 × 10⁻³⁴ / 9.1 × 10⁻²⁵. Step 4: λ ≈ 7.3 × 10⁻¹⁰ m, about the size of an atom.'
     - teach: For everyday objects λ is unbelievably tiny, so we never notice the wave. For electrons it is comparable to atomic spacing. An electron accelerated through V volts has λ = h/√(2meV) ≈ 1.227/√V nm.
       picture:
         kind: compare
@@ -431,6 +536,11 @@ concepts:
         - '40'
         answer: '20'
         why: 20 × 20 = 400, so λ ≈ 0.061 nm.
+      ways:
+      - style: step_by_step
+        teach: 'Electrons accelerated through 2500 V. Step 1: λ ≈ 1.227/√V nm. Step 2: √2500 = 50. Step 3: λ ≈ 1.227/50. Step 4: λ ≈ 0.025 nm, thousands of times shorter than visible light.'
+      - style: real_world
+        teach: A 150 g cricket ball bowled at 40 m/s has λ = h/(mv) ≈ 10⁻³⁴ m, far smaller than a nucleus. No gap could ever be that narrow, so a ball never diffracts. Waves show up only for tiny particles like electrons.
     - teach: Davisson and Germer saw electrons diffract from a nickel crystal, confirming matter waves. Electron microscopes use very short electron wavelengths to see much finer detail than light microscopes.
       check:
         prompt: 'Electron microscopes beat light microscopes because electrons have:'
@@ -440,6 +550,23 @@ concepts:
         - no mass
         answer: much shorter wavelengths
         why: Shorter λ resolves finer detail.
+      ways:
+      - style: visual
+        teach: Light microscope and electron microscope compared.
+        picture:
+          kind: compare
+          columns:
+          - title: Light microscope
+            points:
+            - λ ≈ 500 nm
+            - Sees cells and bacteria
+          - title: Electron microscope
+            points:
+            - λ ≈ 0.005 nm at high voltage
+            - Sees viruses and large molecules
+          alt: A light microscope uses wavelengths of about 500 nanometres and can see cells and bacteria. An electron microscope uses electron wavelengths around 0.005 nanometres and can see viruses and large molecules.
+      - style: step_by_step
+        teach: 'How Davisson and Germer showed electron waves. Step 1: Fire electrons at a nickel crystal. Step 2: Measure how many bounce off at each angle. Step 3: A strong peak appears at one angle, as in X-ray diffraction. Step 4: The λ worked out from the peak matches h/p.'
   items:
   - prompt: An electron is accelerated through 100 V. Find its wavelength (nm) using 1.227/√V, to three decimals.
     answer: '0.123'
@@ -622,3 +749,52 @@ concepts:
     mistakes:
       energy: c12p11_db
       speed: c12p11_db
+  - prompt: 'Assertion (A): An electron microscope can show finer detail than a light microscope.
+
+      Reason (R): Fast electrons have a much shorter de Broglie wavelength than visible light.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: The smallest detail a microscope can show is about one wavelength. Electrons' wavelength is far shorter, so they reveal finer detail. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: An electron microscope accelerates electrons through 10,000 V. Using λ ≈ 1.227/√V nm, what is their wavelength?'
+    options:
+    - About 0.012 nm
+    - About 0.12 nm
+    - About 1.2 nm
+    answer: About 0.012 nm
+    hints:
+    - √10,000 = 100.
+    - 1.227 ÷ 100.
+    solution: λ ≈ 1.227/100 = 0.01227 nm, about 0.012 nm.
+    mistakes:
+      About 0.12 nm: c12p11_db
+      About 1.2 nm: c12p11_db
+    exam: case
+    difficulty: 2
+  - prompt: A proton and an α-particle are accelerated through the same voltage. Which has the longer de Broglie wavelength?
+    options:
+    - The proton
+    - The α-particle
+    - Both the same
+    answer: The proton
+    hints:
+    - Gained KE = qV, and λ = h/√(2mK) = h/√(2mqV).
+    - 'Compare m × q: the α-particle has 4 times the mass and 2 times the charge.'
+    solution: λ ∝ 1/√(mq). For the α-particle mq is 8 times the proton's, so its λ is √8 times shorter. The proton has the longer wavelength.
+    mistakes:
+      The α-particle: c12p11_db
+      Both the same: c12p11_db
+    exam: competency
+    difficulty: 2
