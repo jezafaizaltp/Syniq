@@ -904,6 +904,7 @@ def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions()
 
 CBSE9 = {"cbse9-eng", "cbse9-hin", "cbse9-math", "cbse9-sci", "cbse9-ss"}
 CBSE10 = {"cbse10-eng", "cbse10-hin", "cbse10-hinb", "cbse10-math", "cbse10-sci", "cbse10-ss"}
+CBSE12 = {"cbse12-bio", "cbse12-chem", "cbse12-eng", "cbse12-math", "cbse12-phy"}
 CBSE11 = {"cbse11-bio", "cbse11-chem", "cbse11-eng", "cbse11-math", "cbse11-phy"}
 CBSE8 = {"cbse8-eng", "cbse8-hin", "cbse8-math", "cbse8-sci", "cbse8-ss"}
 CBSE7 = {"cbse7-eng", "cbse7-hin", "cbse7-math", "cbse7-sci", "cbse7-ss"}
@@ -916,9 +917,9 @@ CBSE1 = {"cbse1-eng", "cbse1-hin", "cbse1-math"}
 CBSEKG = {"cbselkg-eng", "cbselkg-hin", "cbselkg-math", "cbselkg-world", "cbseukg-eng", "cbseukg-hin", "cbseukg-math", "cbseukg-world"}
 
 
-@pytest.mark.parametrize("subjects", [CBSE9, CBSE10, CBSE11, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse10", "cbse11", "cbse8", "cbse7", "cbse6"])
+@pytest.mark.parametrize("subjects", [CBSE9, CBSE10, CBSE11, CBSE12, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse10", "cbse11", "cbse12", "cbse8", "cbse7", "cbse6"])
 def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects):
-    """CBSE Class 9 (the 2026-27 books), Classes 10, 11, 8, 7 and 6: every lesson step can be taught at least three ways,
+    """CBSE Class 9 (the 2026-27 books), Classes 10, 11, 12, 8, 7 and 6: every lesson step can be taught at least three ways,
     one of them drawn, and every topic has at least one question in a CBSE board format (assertion-reason allowed)."""
     thin, no_exam = [], []
     for path, pack in PACKS:
