@@ -986,3 +986,17 @@ def test_class_6_to_12_and_kerala_solutions_show_the_working_or_the_reason():
         and len(str(item.get("solution", "")).split()) <= 4
     ]
     assert not bare, bare
+
+
+KERALA_TWO_HINTS = ("biology/", "chemistry/", "physics/", "maths/", "english/", "hindi/", "it/", "social-science/")
+
+
+def test_every_kerala_question_has_a_second_closer_hint():
+    """Kerala Class 9 pilot packs (except Malayalam, which the owner reviews): every question has at least two hints,
+    so a stuck learner gets a nudge and then a closer step before any answer is shown. CBSE packs already do."""
+    single = [
+        f"{rel(path)}: {str(item['prompt'])[:60]}"
+        for path, pack, concept, item in all_items()
+        if rel(path).startswith(KERALA_TWO_HINTS) and len(item.get("hints") or []) < 2
+    ]
+    assert not single, single
