@@ -167,42 +167,42 @@ concepts:
         options: ["Every 10 years", "Every 5 years", "Every year", "Every 20 years"]
         answer: "Every 10 years"
         difficulty: 1
-        hints: ["1991, 2001, 2011..."]
+        hints: ["1991, 2001, 2011...", "Count the years from 2001 to 2011."]
         solution: "The census is decennial: every 10 years."
         mistakes: {"Every 5 years": census_interval}
       - prompt: "A town has 50,000 people living on 20 sq km. What is its population density, in persons per sq km?"
         answer: "2500"
         check: "50000/20"
         difficulty: 1
-        hints: ["Density = population ÷ area."]
+        hints: ["Density = population ÷ area.", "50,000 ÷ 20 = ?"]
         solution: "50,000 ÷ 20 = 2,500 per sq km"
         mistakes: {"1000000": pop_density_formula, "1/2500": pop_density_formula}
       - prompt: "According to Census 2011, which state had the largest population?"
         options: ["Uttar Pradesh", "Kerala", "Bihar", "Maharashtra"]
         answer: "Uttar Pradesh"
         difficulty: 2
-        hints: ["About 20 crore people."]
+        hints: ["About 20 crore people.", "Its capital is Lucknow."]
         solution: "Uttar Pradesh was the most populous state."
         mistakes: {"Bihar": "most_populous", "Maharashtra": "most_populous"}
       - prompt: "In which year was the latest completed census of India held?"
         answer: "2011"
         check: "2011"
         difficulty: 1
-        hints: ["Ten years after 2001."]
+        hints: ["Ten years after 2001.", "2001 + 10 = ?"]
         solution: "The latest completed census was in 2011."
         mistakes: {"2021": census_interval}
       - prompt: "Kerala's population density (860) is much higher than India's (382). What does this mean?"
-        options: ["More people live on each square kilometre in Kerala", "Kerala has more people than India", "Kerala is larger than India", "Fewer people live in Kerala per sq km"]
+        options: ["More people live on each square kilometre in Kerala", "Kerala has more people in total than the whole of India", "Kerala covers a larger area than the whole of India", "Fewer people live on each square kilometre in Kerala"]
         answer: "More people live on each square kilometre in Kerala"
         difficulty: 2
-        hints: ["Density compares people with area."]
+        hints: ["Density compares people with area.", "A higher density means more people on each square kilometre."]
         solution: "Higher density means more crowding per unit area."
-        mistakes: {"Kerala has more people than India": pop_density_formula}
+        mistakes: {"Kerala has more people in total than the whole of India": "pop_density_formula"}
       - prompt: "A district has 12,00,000 people and an area of 1,500 sq km. What is its density, in persons per sq km?"
         answer: "800"
         check: "1200000/1500"
         difficulty: 3
-        hints: ["Divide population by area."]
+        hints: ["Divide population by area.", "12,00,000 ÷ 1,500 = ?"]
         solution: "12,00,000 ÷ 1,500 = 800 per sq km"
         mistakes: {"1800000000": pop_density_formula}
       - prompt: "District A has 9,00,000 people on 300 sq km. District B has 15,00,000 people on 750 sq km. Which is more densely populated?"
@@ -213,12 +213,12 @@ concepts:
         solution: "Step 1: A = 3000 per sq km. Step 2: B = 2000 per sq km. Step 3: A is denser, even though B has more people."
         mistakes: {"District B": pop_density_formula, "Both the same": pop_density_formula, "You cannot tell without a map": pop_density_formula}
       - prompt: "Why is the census repeated every 10 years instead of being done once?"
-        options: ["The population and its features keep changing, and planning needs fresh figures", "The law requires counting every house once a decade only", "It is used to elect the Prime Minister", "Old census records are thrown away"]
+        options: ["The population and its features keep changing, and planning needs fresh figures", "The law allows houses to be counted only once in ten years, and never more often", "It is used to elect the Prime Minister, whose term runs for ten years", "Old census records are thrown away after ten years, so they must be made again"]
         answer: "The population and its features keep changing, and planning needs fresh figures"
         difficulty: 2
         hints: ["What changes the population?", "Who uses census figures?"]
         solution: "Step 1: Births, deaths and migration keep changing the population. Step 2: Governments need new figures to plan schools, hospitals, jobs and seats."
-        mistakes: {"The law requires counting every house once a decade only": census_why, "It is used to elect the Prime Minister": census_why, "Old census records are thrown away": census_why}
+        mistakes: {"The law allows houses to be counted only once in ten years, and never more often": "census_why", "It is used to elect the Prime Minister, whose term runs for ten years": "census_why", "Old census records are thrown away after ten years, so they must be made again": "census_why"}
       - prompt: A panchayat has 24,000 people on an area of 16 sq km. What is its population density, in persons per sq km?
         answer: '1500'
         check: 24000/16
@@ -265,10 +265,10 @@ concepts:
           '2016': census_gap
       - prompt: Why does the government need census data?
         options:
-        - To plan schools, hospitals, jobs and services
-        - To decide the weather
-        - To choose cricket teams
-        - To print stamps
+        - "To plan schools, hospitals, jobs and services"
+        - "To forecast the weather for each district"
+        - "To choose players for the national cricket team"
+        - "To decide which pictures to print on stamps"
         answer: To plan schools, hospitals, jobs and services
         difficulty: 1
         hints:
@@ -276,7 +276,7 @@ concepts:
         - What does a government plan for?
         solution: 'Step 1: The census gives facts about people. Step 2: Planning needs these facts. Step 3: Schools, hospitals and jobs are planned from them.'
         mistakes:
-          To decide the weather: census_gap
+          "To forecast the weather for each district": census_gap
       - prompt: Village P has 6,000 people on 4 sq km. Village Q has 9,000 people on 10 sq km. Which is more densely populated?
         options:
         - Village P
@@ -318,17 +318,17 @@ concepts:
         difficulty: 2
       - prompt: Why does a country hold a census?
         options:
-        - To plan schools, hospitals and services using accurate numbers
-        - To collect taxes from every person
-        - To choose the Prime Minister
+        - "To plan schools, hospitals and services using accurate numbers"
+        - "To collect a tax from every person who is counted in it"
+        - "To choose the Prime Minister from among those who are counted"
         answer: To plan schools, hospitals and services using accurate numbers
         hints:
         - What can a government do with a full count of people?
         - Planning needs numbers.
         solution: Knowing how many people there are, and their age, literacy and work, helps plan schools, hospitals and other services.
         mistakes:
-          To collect taxes from every person: census_why
-          To choose the Prime Minister: census_why
+          "To collect a tax from every person who is counted in it": census_why
+          "To choose the Prime Minister from among those who are counted": census_why
         exam: short
         difficulty: 2
 
@@ -474,45 +474,45 @@ concepts:
         answer: "1000"
         check: "1000"
         difficulty: 1
-        hints: ["It is given per thousand."]
-        solution: "Females per 1000 males."
+        hints: ["It is given per thousand.", "Census reports say females per thousand males: write thousand as a number."]
+        solution: "Sex ratio = number of females for every 1000 males, which lets places of different size be compared."
         mistakes: {"100": k9_sex_ratio_base}
       - prompt: "A village has 600 men and 630 women. What is its sex ratio?"
         answer: "1050"
         check: "Rational(630, 600)*1000"
         difficulty: 2
-        hints: ["Females ÷ males × 1000."]
+        hints: ["Females ÷ males × 1000.", "630 ÷ 600 = 1.05. Now multiply by 1000."]
         solution: "630 ÷ 600 × 1000 = 1050"
         mistakes: {"952": sex_ratio_formula}
       - prompt: "Which state had the highest sex ratio in Census 2011?"
         options: ["Kerala", "Haryana", "Punjab", "Uttar Pradesh"]
         answer: "Kerala"
         difficulty: 1
-        hints: ["1084 females per 1000 males."]
+        hints: ["1084 females per 1000 males.", "The only state with more females than males: our own state."]
         solution: "Kerala's sex ratio was 1084."
         mistakes: {"Haryana": kerala_figures}
       - prompt: "India's literacy rate in Census 2011 was about:"
         options: ["74%", "94%", "50%", "100%"]
         answer: "74%"
         difficulty: 2
-        hints: ["Kerala's was about 94%."]
+        hints: ["Kerala's was about 94%.", "It is about three quarters, a little below 75%."]
         solution: "India about 74%; Kerala about 94%."
         mistakes: {"94%": kerala_figures}
       - prompt: "A place has 300 children (0–14), 100 elderly (65+) and 800 people aged 15–64. What is the dependency ratio?"
         answer: "50"
         check: "Rational(300 + 100, 800)*100"
         difficulty: 3
-        hints: ["(300 + 100) ÷ 800 × 100."]
+        hints: ["(300 + 100) ÷ 800 × 100.", "400 ÷ 800 × 100 = ?"]
         solution: "400 ÷ 800 × 100 = 50"
         mistakes: {"200": dependency_formula}
       - prompt: "Why does Kerala have a larger share of elderly people than many states?"
-        options: ["Long life expectancy and low birth rates", "High birth rates", "Low literacy", "Few hospitals"]
+        options: ["Long life expectancy and low birth rates", "High birth rates and large families", "Low literacy and few schools for adults", "Few hospitals and short life expectancy"]
         answer: "Long life expectancy and low birth rates"
         difficulty: 2
-        hints: ["People live longer and families are smaller."]
+        hints: ["People live longer and families are smaller.", "Good health care lets people live longer, and fewer babies are born."]
         solution: "Good health care raises life expectancy, and fewer births mean fewer children relative to adults."
 
-        mistakes: {"High birth rates": "kerala_elderly", "Few hospitals": "kerala_elderly"}
+        mistakes: {"High birth rates and large families": "kerala_elderly", "Few hospitals and short life expectancy": "kerala_elderly"}
       - prompt: "A town has 2,06,000 people, of whom 1,00,000 are males. What is its sex ratio?"
         answer: "1060"
         check: "(206000-100000)/100000*1000"
@@ -521,12 +521,12 @@ concepts:
         solution: "Step 1: Females = 2,06,000 − 1,00,000 = 1,06,000. Step 2: 1,06,000 ÷ 1,00,000 × 1000 = 1060."
         mistakes: {"2060": sex_ratio_formula, "943.4": sex_ratio_formula}
       - prompt: "India's child sex ratio (ages 0–6) is lower than its overall sex ratio. What does a falling child sex ratio most likely signal?"
-        options: ["Discrimination against girls, before or after birth", "More girls are being born than boys", "Girls' health is improving fastest", "Only mistakes in counting"]
+        options: ["Discrimination against girls, before or after birth", "More girls are being born than boys each year", "Girls' health is improving faster than boys'", "Only small mistakes made while counting"]
         answer: "Discrimination against girls, before or after birth"
         difficulty: 3
         hints: ["Naturally, roughly equal numbers of girls and boys are born.", "Why might fewer girls survive or be born?"]
         solution: "Step 1: Nature gives roughly equal numbers. Step 2: A low and falling child sex ratio points to sex-selection and neglect of girls, a social problem laws try to stop."
-        mistakes: {"More girls are being born than boys": girls_missing, "Girls' health is improving fastest": girls_missing, "Only mistakes in counting": girls_missing}
+        mistakes: {"More girls are being born than boys each year": "girls_missing", "Girls' health is improving faster than boys'": "girls_missing", "Only small mistakes made while counting": "girls_missing"}
       - prompt: A village has 800 men and 840 women. What is its sex ratio?
         answer: '1050'
         check: 840/800*1000
@@ -589,10 +589,10 @@ concepts:
           '1': scale_up
       - prompt: 'Kerala''s high literacy and long life expectancy are linked mainly to:'
         options:
-        - Good schools and public health care
-        - Low rainfall
-        - Fewer roads
-        - Mountains
+        - "Good schools and public health care"
+        - "Low rainfall and a dry climate"
+        - "Fewer roads and less traffic"
+        - "Mountains that keep diseases out"
         answer: Good schools and public health care
         difficulty: 2
         hints:
@@ -600,7 +600,7 @@ concepts:
         - These are services, not geography.
         solution: 'Step 1: Literacy comes from schooling. Step 2: Long life comes from health care. Step 3: Kerala invested in both.'
         mistakes:
-          Low rainfall: transition_stage
+          "Low rainfall and a dry climate": transition_stage
       - prompt: 'In Census 2011, India''s overall sex ratio was:'
         options:
         - '943'
@@ -771,44 +771,44 @@ concepts:
         answer: "13"
         check: "20 - 7"
         difficulty: 1
-        hints: ["Subtract deaths from births."]
+        hints: ["Subtract deaths from births.", "20 − 7 = ?"]
         solution: "20 − 7 = 13 per 1000"
         mistakes: {"27": growth_formula}
       - prompt: "What is the demographic dividend?"
-        options: ["The chance for faster growth when many people are of working age", "Money paid to large families", "A tax on population", "The number of elderly people"]
+        options: ["The chance for faster growth when many people are of working age", "Money that the government pays to families with many children", "A tax that is charged on each person counted in the census", "The share of elderly people who need care from their families"]
         answer: "The chance for faster growth when many people are of working age"
         difficulty: 2
-        hints: ["Think of a large young workforce."]
+        hints: ["Think of a large young workforce.", "Dividend means a gain: a gain from many working-age people."]
         solution: "A large working-age share can boost the economy if people have skills and jobs."
-        mistakes: {"The number of elderly people": dividend_meaning}
+        mistakes: {"The share of elderly people who need care from their families": "dividend_meaning"}
       - prompt: "Which of these does NOT directly change population size?"
         options: ["Literacy rate", "Births", "Deaths", "Migration"]
         answer: "Literacy rate"
         difficulty: 1
-        hints: ["Population changes when people are added or removed."]
+        hints: ["Population changes when people are added or removed.", "Births, deaths and moving add or remove people. Which choice does not?"]
         solution: "Births, deaths and migration change numbers; literacy does not directly."
         mistakes: {"Migration": "population_change", "Deaths": "population_change"}
       - prompt: "In the middle stage of the demographic transition, why does population grow fast?"
         options: ["Death rates fall while birth rates stay high", "Birth rates fall while death rates rise", "Both rates are low", "Everyone migrates"]
         answer: "Death rates fall while birth rates stay high"
         difficulty: 2
-        hints: ["Medicine improves before family size changes."]
+        hints: ["Medicine improves before family size changes.", "Fewer people die, but families still have many children."]
         solution: "The gap between high births and falling deaths makes growth fast."
         mistakes: {"Both rates are low": growth_formula}
       - prompt: "Birth rate 18 and death rate 7 per 1000. What is the growth rate as a percentage per year?"
         answer: "11/10"
         check: "Rational(18 - 7, 1000)*100"
         difficulty: 3
-        hints: ["11 per 1000 = ? per 100."]
+        hints: ["11 per 1000 = ? per 100.", "18 − 7 = 11 per 1000. Divide by 10 to get per 100."]
         solution: "11 per 1000 = 1.1 per 100 = 1.1%"
         mistakes: {"11": growth_formula}
       - prompt: "Which kind of migration has strongly affected Kerala's economy?"
-        options: ["Migration of workers to the Gulf countries", "Migration to Antarctica", "Nomadic herding", "Migration of the Harappans"]
+        options: ["Migration of workers to the Gulf countries", "Migration of scientists to Antarctica", "Seasonal nomadic herding in the hills", "Migration of the Harappans to the south"]
         answer: "Migration of workers to the Gulf countries"
         difficulty: 2
-        hints: ["Remittances."]
+        hints: ["Remittances.", "Money sent home from countries like the UAE and Saudi Arabia."]
         solution: "Gulf migration and the money sent home changed Kerala's economy."
-        mistakes: {"Nomadic herding": "gulf_migration", "Migration of the Harappans": "gulf_migration"}
+        mistakes: {"Seasonal nomadic herding in the hills": "gulf_migration", "Migration of the Harappans to the south": "gulf_migration"}
       - prompt: "A state of 20,00,000 people has a birth rate of 25 and a death rate of 10 per 1000. About how many people does its population grow by naturally in a year?"
         answer: "30000"
         check: "(25-10)/1000*2000000"
@@ -817,12 +817,12 @@ concepts:
         solution: "Step 1: Growth rate = 15 per 1000. Step 2: 20,00,000 has 2000 thousands. Step 3: 15 × 2000 = 30,000."
         mistakes: {"15": rate_to_number, "70000": growth_formula, "300000": rate_to_number}
       - prompt: "How can India make the most of its demographic dividend?"
-        options: ["Educate, train and find jobs for its large young population", "Close schools to save money", "Discourage young people from working", "Spend less on health"]
+        options: ["Educate, train and find jobs for its large young population", "Close schools to save money for building new roads", "Discourage young people from working until they are older", "Spend less on health so more money goes to factories"]
         answer: "Educate, train and find jobs for its large young population"
         difficulty: 2
         hints: ["The dividend comes from many people being of working age.", "What turns young people into a productive workforce?"]
         solution: "Step 1: Many working-age people can boost growth. Step 2: Only if they are healthy, skilled and employed; otherwise the chance is lost."
-        mistakes: {"Close schools to save money": use_the_young, "Discourage young people from working": use_the_young, "Spend less on health": use_the_young}
+        mistakes: {"Close schools to save money for building new roads": "use_the_young", "Discourage young people from working until they are older": "use_the_young", "Spend less on health so more money goes to factories": "use_the_young"}
       - prompt: Birth rate is 16 per 1000 and death rate 6 per 1000. What is the natural growth rate, per 1000?
         answer: '10'
         check: 16-6
@@ -860,10 +860,10 @@ concepts:
           Birth rate: natural_minus
       - prompt: Why do death rates fall before birth rates in the demographic transition?
         options:
-        - Medicine and clean water reduce deaths quickly, but family size changes slowly
-        - Births stop suddenly
-        - People stop migrating
-        - The census changes
+        - "Medicine and clean water reduce deaths quickly, but family size changes slowly"
+        - "Births stop suddenly as soon as hospitals are built in every district"
+        - "People stop migrating, so the number of deaths in each place falls"
+        - "The census changes the way deaths are counted before births"
         answer: Medicine and clean water reduce deaths quickly, but family size changes slowly
         difficulty: 3
         hints:
@@ -871,7 +871,7 @@ concepts:
         - Do habits about family size change overnight?
         solution: 'Step 1: Vaccines and clean water quickly cut deaths. Step 2: Choices about family size change over a generation. Step 3: So deaths fall first.'
         mistakes:
-          Births stop suddenly: transition_stage
+          "Births stop suddenly as soon as hospitals are built in every district": transition_stage
       - prompt: A town of 50,000 people has a birth rate of 20 and a death rate of 8 per 1000. About how many people does it grow by naturally in a year?
         answer: '600'
         check: 50000*(20-8)/1000

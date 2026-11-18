@@ -161,35 +161,35 @@ concepts:
         options: ["3x − 7", "x² − 7", "7", "x³ + x"]
         answer: "3x − 7"
         difficulty: 1
-        hints: ["Degree 1 means the highest power of x is x itself."]
+        hints: ["Degree 1 means the highest power of x is x itself.", "Look for x with no square or cube."]
         solution: "Step 1: 3x − 7 has highest power x¹. Step 2: x² − 7 has degree 2, 7 has degree 0 and x³ + x has degree 3."
         mistakes: {"x² − 7": "degree_highest_power", "7": "degree_highest_power"}
       - prompt: "What is the degree of 3x² − 5x + 7?"
         answer: "2"
         check: "degree(3*x**2 - 5*x + 7, x)"
         difficulty: 1
-        hints: ["Find the highest power of x."]
+        hints: ["Find the highest power of x.", "The x² term has power 2."]
         solution: "The highest power is x², so the degree is 2."
         mistakes: {"3": coefficient_not_degree, "7": coefficient_not_degree}
       - prompt: "What is the coefficient of x in 4x³ + 2x² − 9x + 1?"
         answer: "-9"
         check: "Poly(4*x**3 + 2*x**2 - 9*x + 1, x).coeff_monomial(x)"
         difficulty: 1
-        hints: ["Find the term with just x, and keep its sign."]
+        hints: ["Find the term with just x, and keep its sign.", "The x term is −9x."]
         solution: "The x term is −9x, so the coefficient is −9."
         mistakes: {"9": dropped_sign}
       - prompt: "What is the constant term of (x + 2)(x − 5)?"
         answer: "-10"
         check: "expand((x + 2)*(x - 5)).subs(x, 0)"
         difficulty: 2
-        hints: ["The constant term comes from 2 × (−5)."]
+        hints: ["The constant term comes from 2 × (−5).", "2 × (−5) = ?"]
         solution: "Step 1: The constants are 2 and −5. Step 2: 2 × (−5) = −10."
         mistakes: {"10": dropped_sign, "-3": added_constants}
       - prompt: "What is the degree of (x² + 1)(x³ − x)?"
         answer: "5"
         check: "degree(expand((x**2 + 1)*(x**3 - x)), x)"
         difficulty: 2
-        hints: ["x² × x³ = ?"]
+        hints: ["x² × x³ = ?", "Add the powers: 2 + 3."]
         solution: "Step 1: The highest terms are x² and x³. Step 2: x² × x³ = x⁵. Step 3: Degree 5."
         mistakes: {"6": multiplied_degrees}
       - prompt: "What is the degree of (x + 1)³?"
@@ -414,21 +414,21 @@ concepts:
         answer: "11"
         check: "2*3 + 5"
         difficulty: 1
-        hints: ["Put 3 in place of x: 2 × 3 + 5."]
+        hints: ["Put 3 in place of x: 2 × 3 + 5.", "6 + 5 = ?"]
         solution: "Step 1: p(3) = 2 × 3 + 5. Step 2: = 6 + 5 = 11."
         mistakes: {"10": times_not_plus}
       - prompt: "p(x) = x² − 4. What is p(−2)?"
         answer: "0"
         check: "(-2)**2 - 4"
         difficulty: 1
-        hints: ["(−2)² = 4."]
+        hints: ["(−2)² = 4.", "4 − 4 = ?"]
         solution: "Step 1: p(−2) = (−2)² − 4. Step 2: = 4 − 4 = 0."
         mistakes: {"-8": square_of_negative}
       - prompt: "p(x) = x³ − 2x² + x − 1. What is p(2)?"
         answer: "1"
         check: "2**3 - 2*2**2 + 2 - 1"
         difficulty: 2
-        hints: ["2³ = 8 and 2 × 2² = 8."]
+        hints: ["2³ = 8 and 2 × 2² = 8.", "8 − 8 + 2 − 1 = ?"]
         solution: "Step 1: 8 − 8 + 2 − 1. Step 2: = 1."
         mistakes: {"3": "substitute_carefully", "-1": "substitute_carefully"}
       - prompt: "p(x) = 3x² − x + 2. What is p(−1)?"
@@ -449,7 +449,7 @@ concepts:
         answer: "4"
         check: "(11 - 3)/2"
         difficulty: 3
-        hints: ["2a + 3 = 11."]
+        hints: ["2a + 3 = 11.", "2a = 8, so a = 8 ÷ 2."]
         solution: "Step 1: 2a + 3 = 11. Step 2: 2a = 8. Step 3: a = 4."
         mistakes: {"8": forgot_divide, "7": times_not_plus}
       - prompt: "p(x) = x² − 5x + 6. There are two numbers that make p(x) = 0. What is the smaller one?"
@@ -705,7 +705,7 @@ concepts:
         answer: "4x² − 3x + 3"
         check: "expand((3*x**2 + 2*x - 1) + (x**2 - 5*x + 4))"
         difficulty: 1
-        hints: ["Add the x² terms, then the x terms, then the numbers."]
+        hints: ["Add the x² terms, then the x terms, then the numbers.", "3x² + x² = 4x², 2x − 5x = −3x, −1 + 4 = 3."]
         solution: "Step 1: 3x² + x² = 4x². Step 2: 2x − 5x = −3x. Step 3: −1 + 4 = 3. Step 4: 4x² − 3x + 3."
         mistakes: {"4x² + 7x + 3": sign_slip, "4x⁴ − 3x² + 3": added_powers}
       - prompt: "(5x − 3) − (2x − 7) = ?"
@@ -713,7 +713,7 @@ concepts:
         answer: "3x + 4"
         check: "expand((5*x - 3) - (2*x - 7))"
         difficulty: 1
-        hints: ["Taking away the bracket flips every sign inside: −2x + 7."]
+        hints: ["Taking away the bracket flips every sign inside: −2x + 7.", "5x − 2x = 3x, and −3 + 7 = 4."]
         solution: "Step 1: 5x − 3 − 2x + 7. Step 2: = 3x + 4."
         mistakes: {"3x − 10": minus_negative, "3x − 4": minus_negative}
       - prompt: "x(2x² − 3x + 4) = ?"
@@ -721,7 +721,7 @@ concepts:
         answer: "2x³ − 3x² + 4x"
         check: "expand(x*(2*x**2 - 3*x + 4))"
         difficulty: 2
-        hints: ["Multiply every term inside by x."]
+        hints: ["Multiply every term inside by x.", "x × 2x² = 2x³, x × (−3x) = −3x², x × 4 = 4x."]
         solution: "x × 2x² − x × 3x + x × 4 = 2x³ − 3x² + 4x"
         mistakes: {"2x³ − 3x + 4": multiply_every_term}
       - prompt: "(x + 2)(x² − x + 3) = ?"

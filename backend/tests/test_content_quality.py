@@ -968,3 +968,63 @@ def test_assertion_reason_questions_use_the_standard_choices():
         if item.get("exam") == "assertion_reason" and item.get("options") != cp.AR_OPTIONS
     ]
     assert not bad, bad
+
+
+SOLUTIONS_EXPLAINED = (
+    "cbse6/", "cbse7/", "cbse8/", "cbse9/", "cbse10/", "cbse11/", "cbse12/",
+    "biology/", "chemistry/", "physics/", "maths/", "english/", "hindi/", "it/", "social-science/",
+)
+
+
+def test_class_6_to_12_and_kerala_solutions_show_the_working_or_the_reason():
+    """Answers explain themselves: a solution is more than the bare answer (owner asked for a teaching product, not an answer key).
+    Covers CBSE 6-12 and the Kerala Class 9 packs except Malayalam; KG-5 keep short answers on purpose."""
+    bare = [
+        f"{rel(path)}: {str(item['prompt'])[:60]} -> {item.get('solution')!r}"
+        for path, pack, concept, item in all_items()
+        if rel(path).startswith(SOLUTIONS_EXPLAINED)
+        and len(str(item.get("solution", "")).split()) <= 4
+    ]
+    assert not bare, bare
+
+
+KERALA_TWO_HINTS = ("biology/", "chemistry/", "physics/", "maths/", "english/", "hindi/", "it/", "social-science/")
+
+
+def test_every_kerala_question_has_a_second_closer_hint():
+    """Kerala Class 9 pilot packs (except Malayalam, which the owner reviews): every question has at least two hints,
+    so a stuck learner gets a nudge and then a closer step before any answer is shown. CBSE packs already do."""
+    single = [
+        f"{rel(path)}: {str(item['prompt'])[:60]}"
+        for path, pack, concept, item in all_items()
+        if rel(path).startswith(KERALA_TWO_HINTS) and len(item.get("hints") or []) < 2
+    ]
+    assert not single, single
+
+
+def answer_stands_out_by_length(options, answer) -> bool:
+    """True when the right choice is clearly the longest (30% longer than the next), so a learner could pick it
+    without knowing anything. Short choices (all under 25 characters) are left alone."""
+    lengths = [len(str(o)) for o in options]
+    longest = max(lengths)
+    return (longest >= 25 and len(str(answer)) == longest and lengths.count(longest) == 1
+            and len(str(answer)) > 1.3 * sorted(lengths)[-2])
+
+
+# Where the longest choice is right by the nature of the question (the sentence with the most detail) or is a
+# proper name that can't be padded.
+LONGEST_IS_THE_POINT = (
+    "किस वाक्य में सबसे अधिक जानकारी है", "'छिपकली दीवार पर बैठी।'", "Who wrote the poem 'Success'",
+    "What does OCR stand for", "Which law protects women from violence at home",
+)
+NO_LENGTH_GIVEAWAY = KERALA_TWO_HINTS + ("cbselkg/", "cbseukg/", "cbse1/", "cbse2/", "cbse3/", "cbse4/", "cbse5/", "cbse6/", "cbse7/", "cbse8/", "cbse9/", "cbse10/", "cbse11/", "cbse12/")
+
+
+def test_the_right_choice_does_not_stand_out_by_length():
+    """Wrong choices should be as full as the right one, or length alone gives the answer away."""
+    stand_out = [f"{rel(path)}: {str(item['prompt'])[:60]}"
+                 for path, pack, concept, item in all_items()
+                 if rel(path).startswith(NO_LENGTH_GIVEAWAY) and item.get("options") and len(item["options"]) >= 3
+                 and not str(item["prompt"]).startswith(LONGEST_IS_THE_POINT)
+                 and answer_stands_out_by_length(item["options"], item["answer"])]
+    assert not stand_out, stand_out
