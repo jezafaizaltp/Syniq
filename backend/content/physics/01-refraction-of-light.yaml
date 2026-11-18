@@ -250,12 +250,12 @@ concepts:
         solution: "Light travels at different speeds in different media. The change in speed at the boundary makes it change direction."
         mistakes: {"Reflection at the surface": speed_same}
       - prompt: "A ray of light strikes a glass block along the normal. What happens to it?"
-        options: ["It goes straight through without bending", "It bends towards the normal", "It bends away from the normal", "It is totally reflected"]
+        options: ["It goes straight through without bending", "It bends towards the normal inside the glass", "It bends away from the normal inside the glass", "It is totally reflected back from the surface"]
         answer: "It goes straight through without bending"
         difficulty: 2
         hints: ["Along the normal, the angle of incidence is 0°.", "With 0° incidence there is no slant, so no bending."]
         solution: "With angle of incidence 0°, the angle of refraction is also 0°. The light slows down but does not change direction."
-        mistakes: {"It bends towards the normal": bends_wrong_way}
+        mistakes: {"It bends towards the normal inside the glass": "bends_wrong_way"}
       - prompt: "A ray hits a water surface making an angle of 30° with the surface. What is the angle of incidence, in degrees?"
         answer: "60"
         check: "90 - 30"
@@ -643,10 +643,10 @@ concepts:
           8/9: index_upside_down
       - prompt: Why does a diamond bend light more than glass does?
         options:
-        - 'Light is much slower in diamond: its refractive index is larger'
-        - Diamond is heavier than glass
-        - Diamond reflects all light
-        - Light is faster in diamond
+        - "Light is much slower in diamond: its refractive index is larger"
+        - "Diamond is heavier than glass, so it pulls light rays more"
+        - "Diamond reflects all the light that falls on its surface"
+        - "Light is faster in diamond: its refractive index is smaller"
         answer: 'Light is much slower in diamond: its refractive index is larger'
         difficulty: 3
         hints:
@@ -654,7 +654,7 @@ concepts:
         - Diamond's n is about 2.42; glass's about 1.5.
         solution: 'Step 1: Diamond''s n ≈ 2.42, glass''s ≈ 1.5. Step 2: Light slows much more in diamond. Step 3: A bigger change in speed means more bending.'
         mistakes:
-          Light is faster in diamond: diamond_index
+          "Light is faster in diamond: its refractive index is smaller": diamond_index
       - prompt: Light travels at 1.24 × 10⁸ m/s in a gem. Taking the speed in vacuum as 3 × 10⁸ m/s, its refractive index is about
         options:
         - '2.42'
@@ -803,12 +803,12 @@ concepts:
             alt: A tank 120 centimetres deep looks 90 centimetres deep, so the bottom seems raised by 30 centimetres.
     items:
       - prompt: "A coin lies at the bottom of a glass of water. Seen from above, how does it appear?"
-        options: ["Raised, nearer the surface", "Deeper than it is", "At its real depth", "Upside down"]
+        options: ["Raised, nearer the surface", "Deeper than it really is", "At its real depth, unmoved", "Upside down and smaller"]
         answer: "Raised, nearer the surface"
         difficulty: 1
         hints: ["A swimming pool looks shallower than it is.", "Water makes things look less deep than they are."]
         solution: "Rays leaving the water bend away from the normal, so the coin appears raised."
-        mistakes: {"Deeper than it is": depth_multiplied}
+        mistakes: {"Deeper than it really is": "depth_multiplied"}
       - prompt: "A tank is 120 cm deep and full of water (n = 4/3). Seen from straight above, how deep does it appear, in cm?"
         answer: "90"
         check: "120/Rational(4, 3)"
@@ -838,13 +838,13 @@ concepts:
         solution: "Real depth = 30 × 4/3 = 40 cm. It is deeper than it looks."
         mistakes: {"45/2": depth_multiplied}
       - prompt: "Why does a straight stick partly dipped in water look bent at the surface?"
-        options: ["Light from the dipped part bends as it leaves the water", "Water really bends the stick", "Light reflects off the water surface", "Light slows down in air"]
+        options: ["Light from the dipped part bends as it leaves the water", "Water really bends the stick a little at the surface", "Light reflects off the water surface into our eyes", "Light slows down as it travels from water into air"]
         answer: "Light from the dipped part bends as it leaves the water"
         difficulty: 2
         hints: ["Every point of the dipped part looks raised.", "Light from under water bends at the surface on its way to your eye."]
         solution: "Light from the part under water refracts away from the normal at the surface, so that part appears raised and the stick looks bent."
 
-        mistakes: {"Water really bends the stick": "stick_refraction", "Light reflects off the water surface": "stick_refraction"}
+        mistakes: {"Water really bends the stick a little at the surface": "stick_refraction", "Light reflects off the water surface into our eyes": "stick_refraction"}
       - prompt: "A coin lies under 12 cm of water (n = 4/3). Seen from straight above, by how many cm does it appear raised?"
         answer: "3"
         check: "12 - 12/(4/3)"
@@ -868,10 +868,10 @@ concepts:
         mistakes: {"It is shallower than it looks": depth_multiplied, "Water makes the bottom invisible": stick_refraction, "The pond's depth keeps changing with the light": stick_refraction}
       - prompt: A swimming pool looks shallower than it really is. Why?
         options:
-        - Light from the bottom bends away from the normal as it leaves the water
-        - Water magnifies the pool
-        - Light bends towards the normal as it leaves the water
-        - The pool reflects the sky
+        - "Light from the bottom bends away from the normal as it leaves the water"
+        - "The water acts like a magnifying glass over the whole pool floor"
+        - "Light from the bottom bends towards the normal as it leaves the water"
+        - "The pool surface reflects the sky, which hides how deep it is"
         answer: Light from the bottom bends away from the normal as it leaves the water
         difficulty: 1
         hints:
@@ -879,7 +879,7 @@ concepts:
         - 'Denser to rarer: which way does it bend?'
         solution: 'Step 1: Light from the bottom goes from water into air. Step 2: It bends away from the normal. Step 3: Traced back, the rays seem to come from a higher point.'
         mistakes:
-          Light bends towards the normal as it leaves the water: bends_wrong_way
+          "Light from the bottom bends towards the normal as it leaves the water": bends_wrong_way
       - prompt: A coin lies under 8 cm of water (n = 4/3). How deep does it appear from straight above, in cm?
         answer: '6'
         check: 8/(4/3)
@@ -1108,26 +1108,26 @@ concepts:
         solution: "At the critical angle the refracted ray runs along the surface, at 90° to the normal."
         mistakes: {"0": angle_from_surface}
       - prompt: "Diamond's critical angle (about 24°) is much smaller than glass's (about 42°). Why does this make diamonds sparkle more?"
-        options: ["More of the light inside is totally internally reflected", "Diamond lets more light straight through", "Diamond makes its own light", "Light speeds up in diamond"]
+        options: ["More of the light inside is totally internally reflected", "Diamond lets more of the light pass straight through", "Diamond gives out some light of its own when it is cut", "Light speeds up inside diamond, so it shines brighter"]
         answer: "More of the light inside is totally internally reflected"
         difficulty: 3
         hints: ["Any ray meeting the surface at more than 24° is trapped.", "A smaller critical angle traps more of the light inside."]
         solution: "With a small critical angle, most rays inside hit the faces above 24° and are reflected many times before leaving through the top, so the diamond flashes brightly."
-        mistakes: {"Light speeds up in diamond": speed_same}
+        mistakes: {"Light speeds up inside diamond, so it shines brighter": "speed_same"}
       - prompt: "Light goes from air into glass with an angle of incidence of 60°. Glass's critical angle is 42°. Can total internal reflection happen at this surface?"
-        options: ["No: the light is going from a rarer to a denser medium", "Yes: 60° is more than the critical angle", "Yes: glass always reflects some light", "Only if the glass is thick"]
+        options: ["No: the light is going from a rarer to a denser medium", "Yes: 60° is more than the critical angle of glass", "Yes: glass always reflects some of the light fully", "Only if the glass block is thick enough to trap it"]
         answer: "No: the light is going from a rarer to a denser medium"
         difficulty: 3
         hints: ["Total internal reflection has two conditions.", "Which way is the light travelling: from denser to rarer, or rarer to denser?"]
         solution: "Step 1: Total internal reflection needs light going from denser to rarer. Step 2: Here it goes from air (rarer) into glass, so it cannot happen, whatever the angle."
-        mistakes: {"Yes: 60° is more than the critical angle": tir_wrong_direction, "Yes: glass always reflects some light": tir_wrong_direction, "Only if the glass is thick": tir_wrong_direction}
+        mistakes: {"Yes: 60° is more than the critical angle of glass": "tir_wrong_direction", "Yes: glass always reflects some of the light fully": "tir_wrong_direction", "Only if the glass block is thick enough to trap it": "tir_wrong_direction"}
       - prompt: "On a hot day, a road far ahead seems to have a pool of water on it. What causes this mirage?"
-        options: ["Light from the sky bends through hot air layers and is totally internally reflected near the road", "There really is a thin layer of water on the road", "The tar reflects light like a mirror", "Heat waves from the road are coloured blue"]
+        options: ["Light from the sky bends through hot air layers and is totally internally reflected near the road", "There really is a thin layer of water on the road, left by the heat drawing water up from below", "The black tar surface reflects light from the sky like a polished mirror, whatever the weather", "Heat waves rising from the hot road are themselves blue, so they look like a pool of water"]
         answer: "Light from the sky bends through hot air layers and is totally internally reflected near the road"
         difficulty: 3
         hints: ["Air near the hot road is rarer than the air above.", "What can happen to light going from denser to rarer at a very slanting angle?"]
         solution: "Step 1: Light from the sky passes into hotter, rarer air near the road and bends away from the normal. Step 2: At a large enough angle it is totally internally reflected upwards. Step 3: We see the sky's image on the road, which looks like water."
-        mistakes: {"There really is a thin layer of water on the road": mirage_layers, "The tar reflects light like a mirror": mirage_layers, "Heat waves from the road are coloured blue": mirage_layers}
+        mistakes: {"There really is a thin layer of water on the road, left by the heat drawing water up from below": "mirage_layers", "The black tar surface reflects light from the sky like a polished mirror, whatever the weather": "mirage_layers", "Heat waves rising from the hot road are themselves blue, so they look like a pool of water": "mirage_layers"}
       - prompt: "Three materials have critical angles of 24°, 42° and 49°. Which has the largest refractive index?"
         options: ["The one with 24°", "The one with 49°", "The one with 42°", "They all have the same index"]
         answer: "The one with 24°"
@@ -1203,9 +1203,9 @@ concepts:
           '42': critical_angle_rule
       - prompt: Light in air hits a glass block at 70°. Glass's critical angle is 42°. Will there be total internal reflection at this surface?
         options:
-        - 'No: light is going from air into glass, rarer to denser'
-        - 'Yes: 70° is more than 42°'
-        - Only if the glass is thick
+        - "No: light is going from air into glass, rarer to denser"
+        - "Yes: 70° is more than 42°, so it reflects fully"
+        - "Only if the glass block is thick enough"
         answer: 'No: light is going from air into glass, rarer to denser'
         difficulty: 3
         hints:
@@ -1213,7 +1213,7 @@ concepts:
         - Total internal reflection needs denser to rarer.
         solution: 'Step 1: Air to glass is rarer to denser. Step 2: Total internal reflection can only happen going denser to rarer. Step 3: So no, whatever the angle.'
         mistakes:
-          'Yes: 70° is more than 42°': tir_wrong_direction
+          "Yes: 70° is more than 42°, so it reflects fully": tir_wrong_direction
       - prompt: 'Situation: Light inside a diamond (critical angle 24°) meets a face at 35°. What happens?'
         options:
         - It is totally reflected inside
@@ -1231,16 +1231,16 @@ concepts:
         difficulty: 2
       - prompt: Light going from air into water at 60° to the normal. Can total internal reflection happen here?
         options:
-        - No, light must go from denser to rarer
-        - Yes, 60° is bigger than 49°
-        - Yes, at any angle
+        - "No, light must go from denser to rarer"
+        - "Yes, 60° is bigger than 49°, so it can"
+        - "Yes, it can happen at any angle at all"
         answer: No, light must go from denser to rarer
         hints:
         - Which way is the light travelling?
         - Air is rarer than water.
         solution: Going from air into water is rarer to denser, so total internal reflection cannot happen, however big the angle.
         mistakes:
-          Yes, 60° is bigger than 49°: pqk9p01_tir_two
-          Yes, at any angle: pqk9p01_tir_two
+          "Yes, 60° is bigger than 49°, so it can": pqk9p01_tir_two
+          "Yes, it can happen at any angle at all": pqk9p01_tir_two
         exam: competency
         difficulty: 2
