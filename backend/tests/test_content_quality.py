@@ -1017,7 +1017,7 @@ LONGEST_IS_THE_POINT = (
     "किस वाक्य में सबसे अधिक जानकारी है", "'छिपकली दीवार पर बैठी।'", "Who wrote the poem 'Success'",
     "What does OCR stand for", "Which law protects women from violence at home",
 )
-NO_LENGTH_GIVEAWAY = KERALA_TWO_HINTS + ("cbse4/", "cbse5/", "cbse6/", "cbse7/", "cbse8/", "cbse9/", "cbse10/", "cbse11/", "cbse12/")
+NO_LENGTH_GIVEAWAY = KERALA_TWO_HINTS + ("cbse3/", "cbse4/", "cbse5/", "cbse6/", "cbse7/", "cbse8/", "cbse9/", "cbse10/", "cbse11/", "cbse12/")
 
 
 def test_the_right_choice_does_not_stand_out_by_length():
