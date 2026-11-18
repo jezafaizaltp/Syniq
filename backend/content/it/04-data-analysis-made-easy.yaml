@@ -208,12 +208,12 @@ concepts:
         solution: "Step 1: Density = 1,260,000 ÷ 900. Step 2: = 1,400 people per sq km."
         mistakes: {"14": density_divide, "140": density_divide}
       - prompt: "A student typed =F2/C2 in G2 instead of =C2/F2. What will the column show?"
-        options: ["Area per person, a very small number, not the density", "The correct density", "An error message", "The total population"]
+        options: ["Area per person, a very small number, not the density", "The correct density, since division order does not matter", "An error message, because the cells are the wrong way round", "The total population of the state, added up from the rows"]
         answer: "Area per person, a very small number, not the density"
         difficulty: 3
         hints: ["C2 is the population and F2 the area.", "What happens if you divide area by population?"]
         solution: "Step 1: Density is population ÷ area, so C2/F2. Step 2: F2/C2 is area ÷ population: square kilometres per person, a tiny decimal, not people per sq km."
-        mistakes: {"The correct density": density_divide, "An error message": calc_formula, "The total population": calc_formula}
+        mistakes: {"The correct density, since division order does not matter": "density_divide", "An error message, because the cells are the wrong way round": "calc_formula", "The total population of the state, added up from the rows": "calc_formula"}
       - prompt: A town has 90,000 people on 300 sq km. What is its population density?
         answer: '300'
         check: 90000/300
@@ -428,19 +428,19 @@ concepts:
         solution: "860 falls in the very high band of the chapter's density categories."
         mistakes: {"High population density": lookup_fn}
       - prompt: "What does COUNTIF do?"
-        options: ["Counts the cells in a range that meet a condition", "Counts all empty cells", "Finds the largest value", "Counts cells with formulas"]
+        options: ["Counts the cells in a range that meet a condition", "Counts all the empty cells in the selected range", "Finds the largest value in a row or column", "Counts every cell that contains a formula"]
         answer: "Counts the cells in a range that meet a condition"
         difficulty: 1
         hints: ["COUNT + IF.", "It counts, but only the cells that meet the condition."]
         solution: "It counts cells meeting a condition."
-        mistakes: {"Finds the largest value": countif_fn}
+        mistakes: {"Finds the largest value in a row or column": "countif_fn"}
       - prompt: "What is the LOOKUP function used for?"
-        options: ["To find a value in a row or column and return the matching value from another", "To protect cells", "To count empty cells", "To sort data"]
+        options: ["To find a value in a row or column and return the matching value from another", "To protect the cells of a sheet with a password so that nobody can change them", "To count the empty cells in a range and show the total in the selected cell", "To sort the data in a column from the smallest value to the largest value"]
         answer: "To find a value in a row or column and return the matching value from another"
         difficulty: 2
         hints: ["It matched density to category.", "It looks up a value and returns the matching one."]
         solution: "It looks up a value and returns the corresponding result."
-        mistakes: {"To protect cells": lookup_fn}
+        mistakes: {"To protect the cells of a sheet with a password so that nobody can change them": "lookup_fn"}
       - prompt: "Which menu option gives a selected range a name like 'Criteria'?"
         options: ["Data → Define Range", "Tools → Protect Sheet", "Data → AutoFilter", "Insert → Function"]
         answer: "Data → Define Range"
@@ -470,12 +470,12 @@ concepts:
         solution: "59 is in the 40–59 band, so the grade is C."
         mistakes: {"B": lookup_fn}
       - prompt: "Your lookup table lists the lower limits as 800, 400, 200, 100, 0 (largest first). LOOKUP gives strange categories. Why?"
-        options: ["LOOKUP needs the search vector sorted from smallest to largest", "LOOKUP cannot use numbers", "The range must be named Classification", "COUNTIF must be used first"]
+        options: ["LOOKUP needs the search vector sorted from smallest to largest", "LOOKUP cannot work with numbers, only with words in cells", "The range must first be named Classification to be used", "COUNTIF must be used on the column before LOOKUP works"]
         answer: "LOOKUP needs the search vector sorted from smallest to largest"
         difficulty: 3
         hints: ["How were the lower limits written in the textbook table?", "LOOKUP searches through the list in order."]
         solution: "Step 1: LOOKUP finds the largest lower limit not more than the value by moving up the list. Step 2: That only works when the limits go 0, 100, 200, 400, 800 in increasing order."
-        mistakes: {"LOOKUP cannot use numbers": lookup_fn, "The range must be named Classification": lookup_fn, "COUNTIF must be used first": countif_fn}
+        mistakes: {"LOOKUP cannot work with numbers, only with words in cells": "lookup_fn", "The range must first be named Classification to be used": "lookup_fn", "COUNTIF must be used on the column before LOOKUP works": "countif_fn"}
       - prompt: "In J2:J36, 6 states are Very High, 9 High, 11 Moderate and 4 Low. How many are Very Low?"
         answer: "5"
         check: "35 - (6+9+11+4)"
@@ -684,33 +684,33 @@ concepts:
         solution: "They can view but not edit."
         mistakes: {"Edit any cell": protect_sheet}
       - prompt: "Where is the Standard Filter found?"
-        options: ["Data → More Filters → Standard Filter", "Tools → Protect Sheet", "Format → Cells", "Insert → Chart"]
+        options: ["Data → More Filters → Standard Filter", "Tools → Protect Sheet → Filter Rows", "Format → Cells → Conditional Filter", "Insert → Chart → Data Range Filter"]
         answer: "Data → More Filters → Standard Filter"
         difficulty: 2
         hints: ["It is with AutoFilter in the Data menu.", "Data → More Filters → ___ Filter."]
         solution: "Data → More Filters → Standard Filter."
-        mistakes: {"Tools → Protect Sheet": autofilter}
+        mistakes: {"Tools → Protect Sheet → Filter Rows": "autofilter"}
       - prompt: "You filtered to show only Very High Density states. What happened to the other rows?"
-        options: ["They are hidden and come back when the filter is removed", "They are deleted forever", "They moved to Sheet2", "They turned into zeros"]
+        options: ["They are hidden and come back when the filter is removed", "They are deleted forever and cannot be brought back", "They are moved to Sheet2 until the filter is removed", "Their values are turned into zeros by the filter"]
         answer: "They are hidden and come back when the filter is removed"
         difficulty: 2
         hints: ["Filtering does not change the data.", "Hidden rows return when you clear the filter."]
         solution: "A filter only hides the other rows; remove the filter and they appear again."
-        mistakes: {"They are deleted forever": autofilter}
+        mistakes: {"They are deleted forever and cannot be brought back": "autofilter"}
       - prompt: "You need to find how many states have literacy above 90% and show only those states. Which pair of tools fits best?"
-        options: ["COUNTIF to count and AutoFilter to show them", "Protect Sheet and Define Range", "Delete Decimal Place and ROUND", "Fill handle and Export"]
+        options: ["COUNTIF to count and AutoFilter to show them", "Protect Sheet to count and Define Range to show", "Delete Decimal Place to count and ROUND to show", "Fill handle to count and Export as PDF to show"]
         answer: "COUNTIF to count and AutoFilter to show them"
         difficulty: 3
         hints: ["One counts, one displays.", "COUNTIF counts; AutoFilter shows."]
         solution: "COUNTIF counts; AutoFilter (or Standard Filter) shows the rows."
-        mistakes: {"Protect Sheet and Define Range": countif_fn}
+        mistakes: {"Protect Sheet to count and Define Range to show": "countif_fn"}
       - prompt: "You protected a sheet and gave the file to a friend. They can open it but cannot type a correction. What must happen first?"
-        options: ["The sheet is unprotected with the password", "The friend uses AutoFilter", "The file is saved as a new name", "The friend deletes the rows"]
+        options: ["The sheet is unprotected with the password", "The friend switches on AutoFilter first", "The file is saved again under a new name", "The friend deletes the protected rows"]
         answer: "The sheet is unprotected with the password"
         difficulty: 3
         hints: ["What does Protect Sheet stop?", "Where is the same option to undo it?"]
         solution: "Step 1: A protected sheet can be viewed but not edited. Step 2: Tools → Protect Sheet again with the password removes the protection so edits are allowed."
-        mistakes: {"The friend uses AutoFilter": protect_sheet, "The file is saved as a new name": protect_sheet, "The friend deletes the rows": protect_sheet}
+        mistakes: {"The friend switches on AutoFilter first": "protect_sheet", "The file is saved again under a new name": "protect_sheet", "The friend deletes the protected rows": "protect_sheet"}
       - prompt: "After filtering to Very High Density, you see 6 rows and add their populations. Then you clear the filter. How many rows are deleted from the sheet?"
         answer: "0"
         check: "0"
@@ -769,10 +769,10 @@ concepts:
           '30': it4_hide_not_delete
       - prompt: You want classmates to see marks but not change them. What should you do?
         options:
-        - Protect the sheet with a password
-        - Use AutoFilter
-        - Use COUNTIF
-        - Delete the marks
+        - "Protect the sheet with a password"
+        - "Turn on AutoFilter for the marks"
+        - "Use COUNTIF on the marks column"
+        - "Delete the marks after they see them"
         answer: Protect the sheet with a password
         difficulty: 2
         hints:
@@ -780,7 +780,7 @@ concepts:
         - Which feature blocks editing?
         solution: 'Step 1: Viewing must stay possible. Step 2: Editing must be blocked. Step 3: Protect the sheet.'
         mistakes:
-          Use AutoFilter: it4_protect_view
+          "Turn on AutoFilter for the marks": it4_protect_view
       - prompt: Which tool lets you filter by a condition such as 'density greater than 500'?
         options:
         - Standard Filter
@@ -797,10 +797,10 @@ concepts:
           Define Range: it4_lookup_or_countif
       - prompt: How do you unprotect a sheet?
         options:
-        - Tools → Protect Sheet again and enter the password
-        - Delete the file
-        - Use AutoFilter
-        - Export as PDF
+        - "Tools → Protect Sheet again and enter the password"
+        - "Delete the file and make the sheet again from scratch"
+        - "Switch on AutoFilter and choose Unprotect from the list"
+        - "Export the sheet as a PDF and then open the PDF file"
         answer: Tools → Protect Sheet again and enter the password
         difficulty: 2
         hints:
@@ -808,19 +808,19 @@ concepts:
         - You need the password.
         solution: 'Step 1: Protection is toggled in Tools. Step 2: Choose Protect Sheet again. Step 3: Enter the password.'
         mistakes:
-          Use AutoFilter: it4_protect_view
+          "Switch on AutoFilter and choose Unprotect from the list": it4_protect_view
       - prompt: 'Situation: You share a marks sheet with classmates so they can see it but not change it. What should you use?'
         options:
-        - Tools → Protect Sheet with a password
-        - Data → AutoFilter
-        - Delete the marks column
+        - "Tools → Protect Sheet with a password"
+        - "Data → AutoFilter on the marks column"
+        - "Delete the marks column before sharing"
         answer: Tools → Protect Sheet with a password
         hints:
         - They must still be able to view it.
         - Which tool stops changes only?
         solution: Protect Sheet stops changes but still lets people open and view the file.
         mistakes:
-          Data → AutoFilter: it4_protect_view
-          Delete the marks column: it4_hide_not_delete
+          "Data → AutoFilter on the marks column": it4_protect_view
+          "Delete the marks column before sharing": it4_hide_not_delete
         exam: case
         difficulty: 2
