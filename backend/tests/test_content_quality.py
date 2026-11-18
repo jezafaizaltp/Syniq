@@ -970,12 +970,19 @@ def test_assertion_reason_questions_use_the_standard_choices():
     assert not bad, bad
 
 
-def test_class_11_and_12_solutions_show_the_working_or_the_reason():
-    """Board-level answers explain themselves: a solution is more than the bare answer (owner asked for a teaching product, not an answer key)."""
+SOLUTIONS_EXPLAINED = (
+    "cbse6/", "cbse7/", "cbse8/", "cbse9/", "cbse10/", "cbse11/", "cbse12/",
+    "biology/", "chemistry/", "physics/", "maths/", "english/", "hindi/", "it/", "social-science/",
+)
+
+
+def test_class_6_to_12_and_kerala_solutions_show_the_working_or_the_reason():
+    """Answers explain themselves: a solution is more than the bare answer (owner asked for a teaching product, not an answer key).
+    Covers CBSE 6-12 and the Kerala Class 9 packs except Malayalam; KG-5 keep short answers on purpose."""
     bare = [
         f"{rel(path)}: {str(item['prompt'])[:60]} -> {item.get('solution')!r}"
         for path, pack, concept, item in all_items()
-        if rel(path).startswith(("cbse11/", "cbse12/"))
+        if rel(path).startswith(SOLUTIONS_EXPLAINED)
         and len(str(item.get("solution", "")).split()) <= 4
     ]
     assert not bare, bare
