@@ -102,6 +102,25 @@ concepts:
         - they stop at the poles
         answer: there are no magnetic monopoles
         why: Without isolated poles, lines must form closed loops.
+      ways:
+      - style: visual
+        teach: A bar magnet and a current-carrying solenoid behave the same way.
+        picture:
+          kind: compare
+          columns:
+          - title: Bar magnet
+            points:
+            - N and S poles at the ends
+            - Lines N to S outside, S to N inside
+            - 'Cut it: each piece has N and S'
+          - title: Solenoid with current
+            points:
+            - One end acts as N, the other as S
+            - Same closed-loop pattern of lines
+            - 'Cut it: each part is still a small solenoid'
+          alt: A bar magnet has N and S poles, field lines going N to S outside and S to N inside, and every piece keeps both poles when cut. A solenoid carrying current has one end acting as N and the other as S, the same closed-loop pattern, and each cut part is still a small solenoid.
+      - style: real_world
+        teach: 'Break a fridge magnet and try to get a piece with only a north pole: it never works. Every piece has both poles because magnetism comes from tiny current loops in atoms, and a loop always has two faces.'
     - teach: 'In a uniform field B, a magnet feels torque τ = mB sin θ and has potential energy U = −mB cos θ. It is most stable aligned with the field (θ = 0, U = −mB). Gauss''s law for magnetism: net flux through any closed surface is zero.'
       picture:
         kind: compare
@@ -130,6 +149,11 @@ concepts:
         - 90°
         answer: 180°
         why: Torque is zero but U is highest; a nudge flips it.
+      ways:
+      - style: step_by_step
+        teach: 'A 5 A m² magnet in a 0.4 T field. Step 1: At θ = 0°, U = −mB = −2 J: most stable. Step 2: At θ = 90°, τ = mB = 2 N m, the largest torque. Step 3: At θ = 180°, U = +2 J: least stable. Step 4: Turning it from 0° to 180° takes 2 − (−2) = 4 J of work.'
+      - style: real_world
+        teach: A compass needle swings and settles pointing along the Earth's field. Any other angle gives it a torque mB sin θ that turns it back, and it rests where its potential energy −mB cos θ is lowest.
     - teach: The Earth behaves like a giant magnet. At any place, the declination is the angle between geographic and magnetic north; the dip (inclination) is the angle the field makes with the horizontal. The horizontal component of the field is what a compass needle follows.
       check:
         prompt: 'At the magnetic poles, the dip is:'
@@ -139,6 +163,27 @@ concepts:
         - 45°
         answer: 90°
         why: The field points straight down (or up) there.
+      ways:
+      - style: visual
+        teach: The three elements of the Earth's magnetic field at a place.
+        picture:
+          kind: compare
+          columns:
+          - title: Declination
+            points:
+            - Angle between geographic and magnetic north
+            - Measured in the horizontal plane
+          - title: Dip
+            points:
+            - Angle between the field and the horizontal
+            - 0° at the magnetic equator, 90° at the poles
+          - title: Horizontal component
+            points:
+            - B_H = B cos(dip)
+            - What a compass needle follows
+          alt: Declination is the angle between geographic and magnetic north. Dip is the angle the field makes with the horizontal, 0 degrees at the magnetic equator and 90 at the poles. The horizontal component, B times cos of the dip, is what a compass follows.
+      - style: step_by_step
+        teach: 'At a place the dip is 30° and B = 4 × 10⁻⁵ T. Step 1: B_H = B cos 30°. Step 2: = 4 × 10⁻⁵ × 0.866 ≈ 3.5 × 10⁻⁵ T. Step 3: B_V = B sin 30° = 2 × 10⁻⁵ T. Step 4: Check: B_H² + B_V² ≈ B².'
   items:
   - prompt: A magnet of moment 2 A m² is at 90° to a 0.5 T field. Find the torque (N m).
     answer: '1'
@@ -306,6 +351,55 @@ concepts:
     mistakes:
       3/4: c12p5_earth
       '1': c12p5_earth
+  - prompt: 'Assertion (A): Magnetic field lines always form closed loops.
+
+      Reason (R): Isolated magnetic poles (monopoles) have not been found.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: With no monopoles, field lines cannot start or end anywhere, so they must close on themselves; this is Gauss's law for magnetism. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A compass needle of moment 0.2 A m² is held at 90° to the Earth''s horizontal field of 4 × 10⁻⁵ T and released. What torque acts on it at the moment it is released?'
+    options:
+    - 8 × 10⁻⁶ N m
+    - '0'
+    - 2 × 10⁻⁴ N m
+    answer: 8 × 10⁻⁶ N m
+    hints:
+    - τ = mB sin θ.
+    - sin 90° = 1.
+    solution: τ = 0.2 × 4 × 10⁻⁵ × 1 = 8 × 10⁻⁶ N m.
+    mistakes:
+      '0': c12p5_dipole
+      2 × 10⁻⁴ N m: c12p5_dipole
+    exam: case
+    difficulty: 2
+  - prompt: At the Earth's magnetic north pole, a student finds that an ordinary horizontal compass needle does not settle in any direction. Why?
+    options:
+    - The field is vertical there, so its horizontal component is almost zero
+    - The Earth's field is zero there
+    - Compasses work only near the equator
+    answer: The field is vertical there, so its horizontal component is almost zero
+    hints:
+    - What is the dip angle at a magnetic pole?
+    - A horizontal compass responds to B_H = B cos(dip).
+    solution: At a magnetic pole the dip is 90°, so B_H = B cos 90° = 0. The field is strong but vertical, giving a horizontal needle nothing to line up with.
+    mistakes:
+      The Earth's field is zero there: c12p5_earth
+      Compasses work only near the equator: c12p5_earth
+    exam: competency
+    difficulty: 2
 - code: cbse12p.magmat.materials
   title: Magnetic properties of materials
   after:
@@ -402,6 +496,19 @@ concepts:
         - '0.2'
         answer: '1.2'
         why: μr = 1 + χ.
+      ways:
+      - style: visual
+        teach: How the quantities that describe a magnetised material link together.
+        picture:
+          kind: flow
+          steps:
+          - Applied field H
+          - Magnetisation M = χH
+          - B = μ₀(H + M) = μ₀(1 + χ)H
+          - μr = 1 + χ, so B = μ₀μrH
+          alt: An applied field H produces magnetisation M equal to chi H. Then B equals mu nought times H plus M, which is mu nought times 1 plus chi times H, so mu r equals 1 plus chi.
+      - style: step_by_step
+        teach: 'A material has χ = 299. Step 1: μr = 1 + χ = 300. Step 2: In H = 100 A/m, M = χH = 29,900 A/m. Step 3: B = μ₀μrH = 4π × 10⁻⁷ × 300 × 100. Step 4: B ≈ 0.038 T: a ferromagnet hugely strengthens the field.'
     - teach: 'Diamagnetic (χ small, negative: bismuth, copper, water) are weakly repelled; superconductors are perfect diamagnets (Meissner effect). Paramagnetic (χ small, positive: aluminium, sodium, oxygen) are weakly attracted; Curie''s law χ ∝ 1/T. Ferromagnetic (χ large: iron, cobalt, nickel) are strongly attracted because of domains.'
       picture:
         kind: compare
@@ -430,6 +537,11 @@ concepts:
         - unaffected in every way
         answer: weakly repelled
         why: Copper is diamagnetic.
+      ways:
+      - style: step_by_step
+        teach: 'Curie''s law with numbers. Step 1: A paramagnet has χ = 6 × 10⁻⁴ at 300 K. Step 2: χ ∝ 1/T. Step 3: At 150 K the temperature halves. Step 4: So χ doubles to 1.2 × 10⁻³: colder means better alignment of atomic magnets.'
+      - style: real_world
+        teach: 'A superconducting magnet floats above a track in maglev trains and in classroom demos. A superconductor is a perfect diamagnet: it pushes the field out completely (the Meissner effect), so the magnet is repelled and hovers.'
     - teach: 'Above its Curie temperature, a ferromagnet becomes paramagnetic. Hysteresis: after removing H, some magnetism remains (retentivity); a reverse H (coercivity) is needed to remove it. Soft iron (low retentivity, low coercivity, small loss) suits transformer cores and electromagnets; steel suits permanent magnets.'
       check:
         prompt: 'A permanent magnet should have:'
@@ -439,6 +551,25 @@ concepts:
         - low coercivity
         answer: high retentivity and high coercivity
         why: It must keep its magnetism and resist losing it.
+      ways:
+      - style: visual
+        teach: Choosing a material for the job from its hysteresis behaviour.
+        picture:
+          kind: compare
+          columns:
+          - title: Soft iron
+            points:
+            - Low retentivity, low coercivity
+            - Small hysteresis loss
+            - Transformer cores, electromagnets
+          - title: Steel
+            points:
+            - High retentivity, high coercivity
+            - Hard to demagnetise
+            - Permanent magnets
+          alt: Soft iron has low retentivity and coercivity and small hysteresis loss, so it is used for transformer cores and electromagnets. Steel has high retentivity and coercivity and is hard to demagnetise, so it makes permanent magnets.
+      - style: real_world
+        teach: A scrapyard crane's electromagnet must drop the scrap the moment the current stops. Its core is soft iron, which loses its magnetism at once. A fridge magnet must keep its magnetism for years, so it is made of a hard material instead.
   items:
   - prompt: A material has χ = 0.5. Find its relative permeability μr.
     answer: '1.5'
@@ -629,3 +760,52 @@ concepts:
     mistakes:
       boiling point: c12p5_mat
       critical angle: c12p5_mat
+  - prompt: 'Assertion (A): A piece of iron loses its strong magnetism when heated above about 1043 K.
+
+      Reason (R): Above the Curie temperature, thermal motion destroys the alignment of the domains.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 1043 K is iron's Curie temperature. Above it the domains break up and iron becomes paramagnetic. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: An engineer must choose a core for a transformer that is magnetised and demagnetised 50 times a second. Which property matters most?'
+    options:
+    - A narrow hysteresis loop (low loss each cycle)
+    - High retentivity
+    - Negative susceptibility
+    answer: A narrow hysteresis loop (low loss each cycle)
+    hints:
+    - Energy lost per cycle equals the area of the hysteresis loop.
+    - The core goes round the loop 50 times every second.
+    solution: Energy lost each cycle is the loop's area, and it repeats 50 times a second, so a soft material with a narrow loop (like soft iron) wastes the least.
+    mistakes:
+      High retentivity: c12p5_mat
+      Negative susceptibility: c12p5_mat
+    exam: case
+    difficulty: 2
+  - prompt: Three rods hang between the poles of a strong magnet. Rod X lines up along the field strongly, rod Y lines up weakly, rod Z turns across the field. Which set fits X, Y and Z?
+    options:
+    - Iron, aluminium, bismuth
+    - Bismuth, iron, aluminium
+    - Aluminium, bismuth, iron
+    answer: Iron, aluminium, bismuth
+    hints:
+    - Strong alignment means large positive χ.
+    - 'Turning across the field means weak repulsion: negative χ.'
+    solution: Iron is ferromagnetic (strong), aluminium is paramagnetic (weak, along the field) and bismuth is diamagnetic (pushed away, so it turns across the field).
+    mistakes:
+      Bismuth, iron, aluminium: c12p5_mat
+      Aluminium, bismuth, iron: c12p5_mat
+    exam: competency
+    difficulty: 2

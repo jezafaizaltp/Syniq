@@ -101,6 +101,27 @@ concepts:
         - isotones
         answer: isotopes
         why: Same Z = 6, different A.
+      ways:
+      - style: visual
+        teach: 'Isotopes, isobars and isotones: what each pair has in common.'
+        picture:
+          kind: compare
+          columns:
+          - title: Isotopes
+            points:
+            - Same Z, different A
+            - ¹²C and ¹⁴C
+          - title: Isobars
+            points:
+            - Same A, different Z
+            - ⁴⁰Ar and ⁴⁰Ca
+          - title: Isotones
+            points:
+            - Same N
+            - ¹³C and ¹⁴N (7 neutrons each)
+          alt: Isotopes share the atomic number but differ in mass number, like carbon 12 and carbon 14. Isobars share the mass number, like argon 40 and calcium 40. Isotones share the neutron number, like carbon 13 and nitrogen 14, with 7 neutrons each.
+      - style: step_by_step
+        teach: 'Counting in ²⁰⁸Pb (Z = 82). Step 1: A = 208 nucleons. Step 2: Z = 82 protons. Step 3: N = A − Z = 126 neutrons. Step 4: A neutral atom also has 82 electrons, outside the nucleus.'
     - teach: Nuclear radius R = R₀A^(1/3) with R₀ ≈ 1.2 fm, so volume ∝ A and nuclear density is about the same for all nuclei (≈ 2.3 × 10¹⁷ kg/m³). The nuclear force holding nucleons together is very strong, short-range, and does not depend on charge.
       check:
         prompt: A nucleus has 8 times the mass number of another. Its radius is how many times larger?
@@ -110,6 +131,19 @@ concepts:
         - '4'
         answer: '2'
         why: 8^(1/3) = 2.
+      ways:
+      - style: visual
+        teach: Why every nucleus has about the same density.
+        picture:
+          kind: flow
+          steps:
+          - R = R₀A^(1/3)
+          - Volume ∝ R³ ∝ A
+          - Mass ∝ A
+          - 'Density = mass/volume: the same for all'
+          alt: The radius is R nought times A to the one third, so the volume is proportional to A. The mass is also proportional to A, so the density, mass over volume, is the same for every nucleus.
+      - style: real_world
+        teach: Nuclear matter is about 2.3 × 10¹⁷ kg/m³. A teaspoon of it would weigh hundreds of millions of tonnes. Neutron stars are giant balls of matter this dense, a city-sized object heavier than the Sun.
     - teach: 'A nucleus weighs less than its separate nucleons: the mass defect ΔM. Binding energy E_b = ΔMc², with 1 u ↔ 931.5 MeV. Binding energy per nucleon peaks at about 8.75 MeV near A = 56 (iron), so iron is the most stable; very light and very heavy nuclei can release energy by moving towards it.'
       picture:
         kind: bars
@@ -131,6 +165,11 @@ concepts:
         - both
         answer: splitting U-235
         why: U-235's pieces have higher binding energy per nucleon; iron is already at the peak.
+      ways:
+      - style: step_by_step
+        teach: 'Binding energy of ⁴He. Step 1: 2 protons + 2 neutrons = 4.0319 u. Step 2: The ⁴He nucleus is 4.0015 u. Step 3: Mass defect = 0.0304 u, which is 0.0304 × 931.5 ≈ 28.3 MeV. Step 4: Per nucleon: 28.3/4 ≈ 7.1 MeV.'
+      - style: real_world
+        teach: A tightly packed suitcase needs energy to pull apart; the energy it would take is like the binding energy. Iron-56's nucleons are the most tightly held of all, so iron sits at the top of the binding-energy curve.
   items:
   - prompt: How many neutrons are in ²³⁵U (Z = 92)?
     answer: '143'
@@ -306,6 +345,55 @@ concepts:
     mistakes:
       much stronger: c12p13_count
       zero: c12p13_count
+  - prompt: 'Assertion (A): The mass of a nucleus is less than the total mass of its separate protons and neutrons.
+
+      Reason (R): Energy is released when nucleons bind together, and this energy comes from mass, E = Δmc².'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Binding releases energy E_b, which takes away mass Δm = E_b/c². So the nucleus weighs less than its parts. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A nucleus of mass number 125 is compared with a hydrogen nucleus (A = 1). Using R = R₀A^(1/3), how many times larger is its radius?'
+    options:
+    - '5'
+    - '125'
+    - '25'
+    answer: '5'
+    hints:
+    - R ∝ A^(1/3).
+    - Find the cube root of 125.
+    solution: R ∝ A^(1/3), and 125^(1/3) = 5, so the radius is 5 times larger (its volume is 125 times larger).
+    mistakes:
+      '125': c12p13_count
+      '25': c12p13_count
+    exam: case
+    difficulty: 2
+  - prompt: Iron-56 has binding energy per nucleon of about 8.8 MeV, uranium-235 about 7.6 MeV and helium-4 about 7.1 MeV. Which statement follows?
+    options:
+    - Iron-56 is the most stable of the three
+    - Uranium is most stable because it has the most nucleons
+    - All three are equally stable
+    answer: Iron-56 is the most stable of the three
+    hints:
+    - Stability depends on binding energy per nucleon, not total.
+    - Which has the largest value per nucleon?
+    solution: Higher binding energy per nucleon means each nucleon is held more tightly. Iron-56, with 8.8 MeV, is the most stable.
+    mistakes:
+      Uranium is most stable because it has the most nucleons: c12p13_be
+      All three are equally stable: c12p13_be
+    exam: competency
+    difficulty: 2
 - code: cbse12p.nuclei.energy
   title: Nuclear fission and fusion
   after:
@@ -398,6 +486,11 @@ concepts:
         - the fragments fuse again
         answer: each fission releases more neutrons
         why: The new neutrons trigger further fissions.
+      ways:
+      - style: step_by_step
+        teach: 'Energy from 1 g of uranium-235. Step 1: 1 g has about 2.56 × 10²¹ nuclei. Step 2: Each fission gives 200 MeV = 3.2 × 10⁻¹¹ J. Step 3: Total ≈ 8.2 × 10¹⁰ J. Step 4: That is roughly what burning 2–3 tonnes of coal gives.'
+      - style: real_world
+        teach: 'Line up dominoes so each one knocks over two more: one push brings down the whole room within seconds. A fission chain reaction grows the same way, which is why it must be carefully controlled in a reactor.'
     - teach: In a reactor the chain is controlled. A moderator (heavy water, graphite) slows neutrons so they cause fission. Control rods (cadmium, boron) absorb neutrons to keep the rate steady. A coolant carries heat away to make steam for turbines. India has reactors at Tarapur, Kudankulam and elsewhere.
       check:
         prompt: 'Pushing control rods further in makes the reaction rate:'
@@ -407,6 +500,27 @@ concepts:
         - stay the same
         answer: fall
         why: More neutrons are absorbed.
+      ways:
+      - style: visual
+        teach: The jobs of the main parts of a nuclear reactor.
+        picture:
+          kind: compare
+          columns:
+          - title: Moderator
+            points:
+            - Heavy water or graphite
+            - Slows neutrons so they cause fission
+          - title: Control rods
+            points:
+            - Cadmium or boron
+            - Absorb neutrons to steady the rate
+          - title: Coolant
+            points:
+            - Water or liquid sodium
+            - Carries heat to make steam
+          alt: The moderator, heavy water or graphite, slows neutrons so they cause fission. Control rods of cadmium or boron absorb neutrons to keep the rate steady. The coolant, water or liquid sodium, carries heat away to make steam.
+      - style: real_world
+        teach: Kudankulam in Tamil Nadu and Tarapur in Maharashtra generate electricity from fission. Operators push control rods in to slow the reaction and pull them out to speed it up, like a car's brake and accelerator.
     - teach: 'Nuclear fusion: light nuclei join (hydrogen into helium), releasing even more energy per nucleon. It needs temperatures of millions of kelvin so nuclei can overcome their electrical repulsion. Fusion powers the Sun and stars.'
       check:
         prompt: 'Fusion happens naturally in:'
@@ -416,6 +530,25 @@ concepts:
         - car engines
         answer: the core of stars
         why: Only there are temperature and pressure high enough.
+      ways:
+      - style: visual
+        teach: 'Fission and fusion compared: what happens, what starts it, where it is used.'
+        picture:
+          kind: compare
+          columns:
+          - title: Fission
+            points:
+            - Heavy nucleus splits
+            - Started by slow neutrons
+            - Used in today's power stations
+          - title: Fusion
+            points:
+            - Light nuclei join
+            - Needs millions of kelvin
+            - Powers the Sun; more energy per kg
+          alt: In fission a heavy nucleus splits, started by slow neutrons, as in today's power stations. In fusion light nuclei join, which needs millions of kelvin; it powers the Sun and releases more energy per kilogram.
+      - style: step_by_step
+        teach: 'Why fusion needs such heat. Step 1: Two hydrogen nuclei are both positive. Step 2: They repel strongly as they get close. Step 3: Only at millions of kelvin do they move fast enough to get within the nuclear force''s short range. Step 4: Then they fuse and release energy.'
   items:
   - prompt: About how much energy (MeV) is released per fission of uranium-235?
     answer: '200'
@@ -605,3 +738,52 @@ concepts:
     mistakes:
       fission: c12p13_react
       burning coal: c12p13_react
+  - prompt: 'Assertion (A): Fusion reactions occur naturally in the core of the Sun.
+
+      Reason (R): The Sun''s core is hot and dense enough for hydrogen nuclei to overcome their repulsion.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: The core is at about 15 million K under huge pressure, so hydrogen nuclei collide fast enough to fuse into helium. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A reactor''s power starts rising too fast. What should the operators do first?'
+    options:
+    - Push the control rods further in
+    - Remove the moderator
+    - Add more uranium fuel
+    answer: Push the control rods further in
+    hints:
+    - What part absorbs neutrons?
+    - Fewer neutrons means fewer fissions.
+    solution: Control rods absorb neutrons. Pushing them in removes more neutrons, so fewer fissions happen and the power falls.
+    mistakes:
+      Remove the moderator: c12p13_react
+      Add more uranium fuel: c12p13_react
+    exam: case
+    difficulty: 2
+  - prompt: In a chain reaction each fission releases 3 neutrons, but only 1 on average goes on to cause another fission. What happens to the reaction?
+    options:
+    - It stays steady, as in a working reactor
+    - It grows rapidly, as in a bomb
+    - It dies out at once
+    answer: It stays steady, as in a working reactor
+    hints:
+    - Count how many fissions each fission leads to.
+    - 'One leading to one: does the number grow, shrink or stay?'
+    solution: 'If each fission causes exactly one more, the number of fissions per generation stays constant: the controlled, steady state a reactor is designed for.'
+    mistakes:
+      It grows rapidly, as in a bomb: c12p13_react
+      It dies out at once: c12p13_react
+    exam: competency
+    difficulty: 2

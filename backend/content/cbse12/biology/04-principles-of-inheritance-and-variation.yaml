@@ -19,6 +19,8 @@ tips:
   c12b4_dom: 'Check what the heterozygote looks like: like one parent (dominance), in between (incomplete), or both shown (co-dominance).'
   c12b4_chrom: "Start from the normal human count, then add one for a trisomy or take one away for a monosomy."
   c12b4_sex: Ask which parent gives the X and which can give the Y, and whether the trait sits on the X.
+  c12b4_test: In a test cross, the recessive parent only gives recessive alleles. So what does any recessive offspring tell you about the other parent?
+  c12b4_xlink: Sons get their only X from their mother. Write the mother's two X types first.
 concepts:
 - code: cbse12b.inh.mendel
   title: Mendel's laws
@@ -132,6 +134,11 @@ concepts:
         - '9 : 3 : 3 : 1'
         answer: '3 : 1'
         why: TT and Tt are tall (3 boxes), tt is dwarf (1 box).
+      ways:
+      - style: real_world
+        teach: 'Mendel chose peas wisely: they grow fast, have clear either-or traits, and can be self- or cross-pollinated by hand. He also counted thousands of plants, which is why his ratios came out so close to 3 : 1.'
+      - style: step_by_step
+        teach: 'Can a child with blood group O have parents with groups A and B? Step 1: O is ii. Step 2: The child needs one i from each parent. Step 3: An A parent can be Iᴬi, a B parent Iᴮi. Step 4: Yes, if both parents carry i.'
     - teach: 'A test cross crosses an unknown dominant-looking plant with the homozygous recessive. If all offspring are dominant, the plant was TT; if half are recessive, it was Tt. Not every gene shows simple dominance: in snapdragon red × white gives pink (incomplete dominance), and in ABO blood groups Iᴬ and Iᴮ both show in AB (co-dominance), with three alleles in total (multiple alleles).'
       check:
         prompt: 'In a test cross, the unknown plant is crossed with a:'
@@ -141,6 +148,27 @@ concepts:
         - heterozygous plant
         answer: homozygous recessive
         why: The recessive parent only gives recessive alleles, so the unknown's alleles show directly.
+      ways:
+      - style: step_by_step
+        teach: 'A purple-flowered pea of unknown genotype is test-crossed with white (pp). Step 1: White gives only p. Step 2: If all offspring are purple, the parent gave only P: it was PP. Step 3: If about half are white, it also gave p: it was Pp. Step 4: The offspring reveal the hidden allele.'
+      - style: visual
+        teach: Three ways two alleles can show together in a heterozygote.
+        picture:
+          kind: compare
+          columns:
+          - title: Complete dominance
+            points:
+            - Heterozygote looks like one parent
+            - 'Pea: Tt is tall'
+          - title: Incomplete dominance
+            points:
+            - Heterozygote is in between
+            - 'Snapdragon: pink'
+          - title: Co-dominance
+            points:
+            - Both show fully
+            - Blood group AB
+          alt: In complete dominance the heterozygote looks like one parent, as a Tt pea is tall. In incomplete dominance it is in between, as in pink snapdragons. In co-dominance both alleles show fully, as in blood group AB.
     - teach: 'A dihybrid cross follows two genes, e.g. seed shape (R/r) and colour (Y/y). RrYy × RrYy gives an F₂ of 9 round yellow : 3 round green : 3 wrinkled yellow : 1 wrinkled green. The genes sort into gametes independently of each other: the law of independent assortment (true for genes on different chromosomes).'
       picture:
         kind: bars
@@ -162,6 +190,11 @@ concepts:
         - '9'
         answer: '1'
         why: Only rryy is both recessive.
+      ways:
+      - style: real_world
+        teach: 'Independent assortment is like dealing two separate packs of cards: drawing a red card from one pack doesn''t change your chance of drawing a king from the other. Genes on different chromosomes sort just as separately.'
+      - style: step_by_step
+        teach: 'Use the 9 : 3 : 3 : 1 ratio on 640 F₂ plants. Step 1: Total parts = 16. Step 2: One part = 640 ÷ 16 = 40. Step 3: Both recessive = 1 part = 40 plants. Step 4: Each single-dominant class = 3 parts = 120 plants.'
   items:
   - prompt: In a monohybrid F₂ of 400 plants, how many are expected to show the recessive trait?
     answer: '100'
@@ -341,6 +374,55 @@ concepts:
     mistakes:
       monohybrid cross: c12b4_cross
       test cross of one gene: c12b4_cross
+  - prompt: 'Assertion (A): A cross between two pink snapdragons gives some red and some white offspring.
+
+      Reason (R): In incomplete dominance, the alleles do not blend permanently; they separate again in gametes.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Pink plants are Rr. The R and r alleles separate into gametes, so RR (red) and rr (white) reappear in a 1 : 2 : 1 ratio. R explains A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A breeder has a tall pea plant and wants to sell its seeds as ''pure tall''. How can they check it is not hybrid?'
+    options:
+    - 'Cross it with a dwarf plant: any dwarf offspring means it is Tt'
+    - Cross it with another tall plant
+    - Look at its height carefully
+    answer: 'Cross it with a dwarf plant: any dwarf offspring means it is Tt'
+    hints:
+    - TT and Tt look the same.
+    - Which partner would reveal a hidden recessive allele?
+    solution: 'A test cross with tt shows the hidden allele: TT × tt gives all tall; Tt × tt gives about half dwarf.'
+    mistakes:
+      Cross it with another tall plant: c12b4_test
+      Look at its height carefully: c12b4_test
+    exam: case
+    difficulty: 2
+  - prompt: In a hospital, a baby has blood group O. The mother is group A. Which father's blood group is impossible?
+    options:
+    - AB
+    - B
+    - O
+    answer: AB
+    hints:
+    - The O baby is ii and needs an i from the father.
+    - Which genotype has no i allele?
+    solution: An AB father is IᴬIᴮ and cannot pass on i, so that man cannot be the father of an O child. A, B or O fathers can carry i.
+    mistakes:
+      B: c12b4_dom
+      O: c12b4_dom
+    exam: competency
+    difficulty: 2
 - code: cbse12b.inh.chromosomes
   title: Chromosomal theory, sex determination and disorders
   after:
@@ -427,6 +509,25 @@ concepts:
         - snapdragon
         answer: Drosophila
         why: Fruit flies breed fast and have few chromosomes.
+      ways:
+      - style: visual
+        teach: How the behaviour of chromosomes matches Mendel's factors point by point.
+        picture:
+          kind: compare
+          columns:
+          - title: Mendel's factors
+            points:
+            - Come in pairs
+            - Separate into gametes
+            - Sort independently
+          - title: Chromosomes
+            points:
+            - Come in homologous pairs
+            - Separate at meiosis I
+            - Pairs line up independently
+          alt: Mendel's factors come in pairs, separate into gametes and sort independently. Chromosomes come in homologous pairs, separate at meiosis one, and the pairs line up independently, matching the factors.
+      - style: real_world
+        teach: Morgan chose fruit flies because they breed in two weeks, are easy to keep in bottles, and have only four chromosome pairs. That speed let him follow many generations and spot linked genes in a few years.
     - teach: 'Sex determination differs between animals: humans XX female and XY male (male heterogametic, so the father''s sperm decides the sex); grasshopper XX female and XO male; birds ZW female and ZZ male (female heterogametic). Polygenic traits like human skin colour are controlled by several genes; pleiotropy is one gene affecting many traits (e.g. phenylketonuria).'
       picture:
         kind: compare
@@ -455,6 +556,11 @@ concepts:
         - temperature
         answer: mother's egg
         why: Females are ZW, so the egg carries Z or W.
+      ways:
+      - style: step_by_step
+        teach: 'In birds, who decides the chick''s sex? Step 1: Males are ZZ and give only Z. Step 2: Females are ZW and give Z or W. Step 3: ZW chicks are female, ZZ male. Step 4: So in birds the mother''s egg decides sex.'
+      - style: real_world
+        teach: 'In some families, many people share a skin colour range rather than just ''dark'' or ''light''. That''s because skin colour is polygenic: several genes each add a little, giving a smooth range of shades.'
     - teach: 'Mendelian disorders come from a single gene: haemophilia and colour blindness (X-linked recessive, seen more in males), sickle-cell anaemia and phenylketonuria (autosomal recessive), thalassemia. Chromosomal disorders come from extra or missing chromosomes: Down''s syndrome (trisomy 21), Klinefelter''s (44 + XXY), Turner''s (44 + XO). Pedigree charts trace a trait through a family.'
       check:
         prompt: 'Klinefelter''s syndrome has the sex chromosomes:'
@@ -464,6 +570,25 @@ concepts:
         - XYY only in females
         answer: XXY
         why: One extra X with a Y.
+      ways:
+      - style: visual
+        teach: 'Two kinds of genetic disorders: single-gene and whole-chromosome.'
+        picture:
+          kind: compare
+          columns:
+          - title: Mendelian (one gene)
+            points:
+            - 'Haemophilia, colour blindness: X-linked'
+            - 'Sickle-cell, PKU: autosomal'
+            - Follow Mendel's ratios
+          - title: Chromosomal
+            points:
+            - Whole chromosome extra or missing
+            - Down's, Klinefelter's, Turner's
+            - Usually from meiosis errors
+          alt: 'Mendelian disorders come from one gene: haemophilia and colour blindness are X-linked, sickle-cell anaemia and PKU are autosomal, and they follow Mendel''s ratios. Chromosomal disorders come from a whole chromosome extra or missing, as in Down''s, Klinefelter''s and Turner''s syndromes, usually from errors in meiosis.'
+      - style: step_by_step
+        teach: 'A carrier mother (XᶜX) and a colour-blind father (XᶜY) have a daughter. Step 1: The father gives his Xᶜ to every daughter. Step 2: The mother gives Xᶜ or X, equally likely. Step 3: Daughters are XᶜXᶜ or XᶜX. Step 4: Half of the daughters are colour-blind.'
   items:
   - prompt: How many chromosomes does a person with Down's syndrome have?
     answer: '47'
@@ -644,3 +769,52 @@ concepts:
     mistakes:
       trisomy: c12b4_chrom
       crossing over: c12b4_chrom
+  - prompt: 'Assertion (A): Haemophilia is more common in males than in females.
+
+      Reason (R): Haemophilia is caused by a recessive allele on the X chromosome, and males have only one X.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A male with the allele on his single X shows the disease; a female needs it on both X chromosomes. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A man with normal vision and a woman who is a carrier for colour blindness plan a family. A genetic counsellor explains the risks for sons. What chance does each son have of being colour-blind?'
+    options:
+    - 50%
+    - 25%
+    - 0%
+    answer: 50%
+    hints:
+    - Sons get their X from the mother.
+    - The mother has one normal and one affected X.
+    solution: Each son gets either the mother's normal X or her affected X, equally likely. So each son has a 50% chance.
+    mistakes:
+      25%: c12b4_xlink
+      0%: c12b4_xlink
+    exam: case
+    difficulty: 2
+  - prompt: A doctor sees a karyotype with 47 chromosomes including XXY. Which condition is this?
+    options:
+    - Klinefelter's syndrome
+    - Turner's syndrome
+    - Down's syndrome
+    answer: Klinefelter's syndrome
+    hints:
+    - Is the extra chromosome a sex chromosome or an autosome?
+    - Turner's has one fewer chromosome.
+    solution: 44 + XXY = 47 with an extra X in a male is Klinefelter's syndrome. Turner's is 45 (XO); Down's has an extra chromosome 21.
+    mistakes:
+      Turner's syndrome: c12b4_chrom
+      Down's syndrome: c12b4_chrom
+    exam: competency
+    difficulty: 2

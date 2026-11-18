@@ -18,6 +18,8 @@ tips:
   c12b7_cause: "First decide the kind of cause (bacteria, virus, protozoa, worms or fungi), then how it spreads: air, water, food, insects or contact."
   c12b7_imm: "Ask whether the body made the antibodies itself or received ready-made ones, and whether the protection is inborn or built after exposure."
   c12b7_drug: "Group drugs by the plant they come from and their effect: do they slow the body down or speed it up? Which plant's latex gives morphine?"
+  c12b7_spread: 'Ask how this pathogen reaches a new person: through water and food, through the air, or through a vector.'
+  c12b7_memory: Think about what the first dose leaves behind in the body, and how that changes a later meeting with the pathogen.
 concepts:
 - code: cbse12b.health.diseases
   title: Common diseases in humans
@@ -119,6 +121,11 @@ concepts:
         - skin
         answer: alveoli of the lungs
         why: They fill with fluid, making breathing hard.
+      ways:
+      - style: step_by_step
+        teach: 'A patient has high fever for a week, stomach pain and loss of appetite after drinking unsafe water. Step 1: Water-borne, so think of gut infections. Step 2: Long, rising fever suggests typhoid. Step 3: Confirm with the Widal test. Step 4: Treat with antibiotics and make drinking water safe.'
+      - style: real_world
+        teach: 'Washing hands with soap before eating, as public health campaigns teach, prevents many diseases at once: typhoid, amoebiasis and worm infections all pass from dirty hands to mouth.'
     - teach: Malaria is caused by Plasmodium (P. falciparum causes the most serious form) and spread by the female Anopheles mosquito. Sporozoites enter the blood, multiply in liver cells, then in red blood cells; when RBCs burst they release haemozoin, causing chills and high fever. The sexual stage (gametocytes fusing) happens in the mosquito's gut.
       picture:
         kind: flow
@@ -137,6 +144,11 @@ concepts:
         - stomach
         answer: liver
         why: Sporozoites reach the liver before the RBCs.
+      ways:
+      - style: step_by_step
+        teach: 'Why malaria fever comes and goes. Step 1: Plasmodium multiplies inside red blood cells. Step 2: After a set time, the cells burst together. Step 3: Haemozoin is released into the blood. Step 4: That causes chills and high fever, repeating every 2–3 days.'
+      - style: real_world
+        teach: India's malaria programmes use bed nets treated with insecticide. The female Anopheles bites mostly at night, so sleeping under a net blocks the main route of infection, especially for children.
     - teach: 'Amoebiasis (Entamoeba histolytica) spreads through food contaminated by houseflies. Ascariasis (Ascaris roundworm) spreads through soil and water with eggs. Filariasis or elephantiasis (Wuchereria) is spread by Culex mosquitoes and swells the limbs. Ringworm (fungi like Trichophyton) causes dry scaly patches. Prevention: personal and public hygiene, clean water, and controlling vectors, e.g. Gambusia fish eating mosquito larvae.'
       check:
         prompt: 'Houseflies carry the cause of:'
@@ -146,6 +158,29 @@ concepts:
         - filariasis
         answer: amoebiasis
         why: Flies carry cysts from faeces to food.
+      ways:
+      - style: visual
+        teach: Common diseases grouped by how they spread.
+        picture:
+          kind: compare
+          columns:
+          - title: Food and water
+            points:
+            - Typhoid
+            - Amoebiasis (houseflies)
+            - Ascariasis
+          - title: Air and droplets
+            points:
+            - Common cold
+            - Pneumonia
+          - title: Mosquitoes
+            points:
+            - Malaria (Anopheles)
+            - Filariasis (Culex)
+            - Dengue, chikungunya (Aedes)
+          alt: Typhoid, amoebiasis carried by houseflies, and ascariasis spread through food and water. The common cold and pneumonia spread through air and droplets. Malaria is spread by Anopheles, filariasis by Culex, and dengue and chikungunya by Aedes mosquitoes.
+      - style: real_world
+        teach: The Aedes mosquito breeds in clean water collected in coolers, flower pots and old tyres. Emptying these once a week, a 'dry day', is one of the simplest ways towns in India cut dengue cases.
   items:
   - prompt: 'Malaria is spread by the:'
     options:
@@ -352,6 +387,55 @@ concepts:
     mistakes:
       ringworm: c12b7_cause
       typhoid only: c12b7_cause
+  - prompt: 'Assertion (A): A person with malaria gets chills and high fever at regular intervals.
+
+      Reason (R): Red blood cells infected with Plasmodium burst together at intervals, releasing the toxin haemozoin.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Synchronised bursting of RBCs releases haemozoin, which causes the bouts of chills and fever. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: After heavy rain, a town sees many cases of amoebiasis and typhoid. Which single public action would cut both the most?'
+    options:
+    - Supplying safe, clean drinking water
+    - Spraying insecticide for mosquitoes
+    - Giving everyone antibiotics
+    answer: Supplying safe, clean drinking water
+    hints:
+    - How do these two diseases spread?
+    - Which action blocks that route for everyone?
+    solution: Both spread through contaminated food and water. Clean water supply blocks the route; mosquitoes are not involved.
+    mistakes:
+      Spraying insecticide for mosquitoes: c12b7_spread
+      Giving everyone antibiotics: c12b7_spread
+    exam: case
+    difficulty: 2
+  - prompt: A village has many cases of swollen legs and genitals. Which control step should health workers focus on?
+    options:
+    - Controlling Culex mosquitoes
+    - Boiling drinking water
+    - Killing houseflies
+    answer: Controlling Culex mosquitoes
+    hints:
+    - Swollen limbs suggest a filarial worm.
+    - What carries it between people?
+    solution: This is filariasis (elephantiasis), caused by Wuchereria and spread by Culex mosquitoes. Controlling Culex breaks the chain.
+    mistakes:
+      Boiling drinking water: c12b7_cause
+      Killing houseflies: c12b7_cause
+    exam: competency
+    difficulty: 2
 - code: cbse12b.health.immunity
   title: Immunity, AIDS, cancer and drugs
   after:
@@ -436,6 +520,27 @@ concepts:
         - cytokine
         answer: physiological
         why: It is a body secretion that kills microbes.
+      ways:
+      - style: visual
+        teach: The kinds of innate barriers we are born with, and examples of each.
+        picture:
+          kind: compare
+          columns:
+          - title: Physical
+            points:
+            - Skin
+            - Mucus in airways and gut
+          - title: Physiological
+            points:
+            - Stomach acid
+            - Tears, saliva
+          - title: Cellular and cytokine
+            points:
+            - Neutrophils, macrophages, NK cells
+            - Interferons from infected cells
+          alt: Physical barriers are skin and mucus in the airways and gut. Physiological barriers are stomach acid, tears and saliva. Cellular and cytokine barriers include neutrophils, macrophages, natural killer cells, and interferons from virus-infected cells.
+      - style: real_world
+        teach: 'Why a booster vaccine works: the first dose makes memory cells. When the booster comes, those cells respond faster and stronger, like a team that has practised the drill once already.'
     - teach: 'B-lymphocytes make antibodies (humoral immunity); an antibody has 4 chains, H₂L₂, and types include IgA, IgM, IgE, IgG. T-lymphocytes give cell-mediated immunity, including graft rejection. Active immunity: the body makes its own antibodies (infection, vaccines). Passive immunity: ready-made antibodies are given (colostrum, anti-venom). Allergies involve IgE and histamine; autoimmunity is the body attacking itself (rheumatoid arthritis). Bone marrow and thymus are primary lymphoid organs; spleen, lymph nodes and MALT are secondary.'
       picture:
         kind: compare
@@ -461,6 +566,11 @@ concepts:
         - innate immunity
         answer: passive immunity
         why: The antibodies were made elsewhere.
+      ways:
+      - style: step_by_step
+        teach: 'Snakebite treatment. Step 1: The venom acts fast; there''s no time to make antibodies. Step 2: Anti-venom contains ready-made antibodies from horses. Step 3: They neutralise the venom at once. Step 4: That is passive immunity, quick but short-lived.'
+      - style: real_world
+        teach: 'Hay fever in spring is an allergy: harmless pollen triggers IgE antibodies, mast cells release histamine, and the nose runs and eyes itch. Antihistamine tablets block that last step.'
     - teach: AIDS is caused by HIV, a retrovirus that infects helper T cells and macrophages, slowly weakening immunity. It spreads by unprotected sex, infected blood, shared needles and from mother to child; it is diagnosed with ELISA and slowed by antiretroviral drugs. Cancer cells lose contact inhibition and divide without control; malignant tumours spread (metastasis). Drugs like opioids, cannabinoids and cocaine and alcohol harm health; adolescents need support, not blame, and early help.
       check:
         prompt: 'Normal cells stop dividing when they touch other cells. Cancer cells have lost this:'
@@ -470,6 +580,19 @@ concepts:
         - immunity
         answer: contact inhibition
         why: So they pile up into tumours.
+      ways:
+      - style: visual
+        teach: How HIV slowly weakens the immune system, from entry to illness.
+        picture:
+          kind: flow
+          steps:
+          - HIV enters macrophages
+          - Reverse transcriptase makes viral DNA
+          - Virus multiplies, infects helper T cells
+          - Helper T count falls; other infections take hold
+          alt: HIV enters macrophages, where reverse transcriptase makes viral DNA. The virus multiplies and infects helper T cells. As helper T cell numbers fall, other infections take hold.
+      - style: real_world
+        teach: 'HIV is not spread by hugging, sharing food, or using the same toilet. Knowing this helps fight stigma: people living with HIV, on regular treatment, can study, work and live long lives.'
   items:
   - prompt: How many polypeptide chains does an antibody molecule have?
     answer: '4'
@@ -672,3 +795,52 @@ concepts:
     mistakes:
       malignant: c12b7_imm
       metastatic: c12b7_imm
+  - prompt: 'Assertion (A): A second infection by the same pathogen is usually milder than the first.
+
+      Reason (R): Memory cells formed during the first response produce a faster and stronger secondary response.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Memory B and T cells recognise the pathogen quickly the second time, so the body clears it before it causes much illness. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A child is bitten by a dog suspected of rabies. Doctors give rabies immunoglobulin and start the vaccine the same day. Why both?'
+    options:
+    - The immunoglobulin protects at once; the vaccine builds lasting immunity
+    - The vaccine works at once; the immunoglobulin lasts for life
+    - Both do the same thing
+    answer: The immunoglobulin protects at once; the vaccine builds lasting immunity
+    hints:
+    - Which one gives ready-made antibodies?
+    - Which one makes the body produce its own?
+    solution: Immunoglobulin is passive immunity, immediate but short. The vaccine induces active immunity, slower but lasting.
+    mistakes:
+      The vaccine works at once; the immunoglobulin lasts for life: c12b7_memory
+      Both do the same thing: c12b7_imm
+    exam: case
+    difficulty: 2
+  - prompt: Why are transplant patients given drugs that suppress immunity?
+    options:
+    - To stop T-cells rejecting the new organ
+    - To kill viruses in the new organ
+    - To help the organ grow
+    answer: To stop T-cells rejecting the new organ
+    hints:
+    - Which immune cells attack foreign tissue?
+    - What would happen if they were not held back?
+    solution: Cell-mediated immunity by T-lymphocytes attacks the graft as foreign. Immunosuppressants like cyclosporin A prevent rejection.
+    mistakes:
+      To kill viruses in the new organ: c12b7_imm
+      To help the organ grow: c12b7_imm
+    exam: competency
+    difficulty: 2

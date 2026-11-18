@@ -19,6 +19,8 @@ tips:
   c12p3_comb: 'Series: add resistances. Parallel: add reciprocals, then flip; the total is smaller than the smallest.'
   c12p3_power: P = VI = I²R = V²/R. Choose the form with the two quantities you know.
   c12p3_cell: 'A real cell loses Ir inside itself: terminal V = ε − Ir, and I = ε/(R + r).'
+  pq12p3_series_bright: In series both bulbs carry the same current. Work out each one's resistance from its rating, R = V²/P, then compare I²R.
+  pq12p3_swap: The balance condition P/Q = R/S uses only the four resistances. Does swapping the battery and galvanometer change any of them?
 concepts:
 - code: cbse12p.current.ohm
   title: Current, resistance and Ohm's law
@@ -121,6 +123,19 @@ concepts:
         - 1/3 A
         answer: 3 A
         why: I = q/t = 6/2.
+      ways:
+      - style: visual
+        teach: How a current flows in a metal wire, from field to drift.
+        picture:
+          kind: flow
+          steps:
+          - Battery sets up a field in the wire
+          - Free electrons accelerate, then hit ions
+          - 'Average result: slow drift, about 1 mm/s'
+          - Current I = neAv_d
+          alt: The battery sets up a field in the wire; free electrons accelerate and keep colliding with ions; the average result is a slow drift of about a millimetre per second; the current is n e A times the drift speed.
+      - style: real_world
+        teach: 'Electrons drift only millimetres per second, yet a bulb lights the instant you switch on. The wire is already full of free electrons, like a pipe full of water: push at one end and water comes out of the other at once.'
     - teach: 'Ohm''s law: V = IR for ohmic conductors at fixed temperature. Resistance R = ρl/A: longer wires resist more, thicker wires less. Resistivity ρ depends on the material, and for metals it rises with temperature.'
       picture:
         kind: compare
@@ -144,6 +159,11 @@ concepts:
         - the same
         answer: half
         why: R ∝ 1/A.
+      ways:
+      - style: step_by_step
+        teach: 'Resistance of a copper wire. Step 1: ρ = 1.7 × 10⁻⁸ Ω m, l = 100 m, A = 1 mm² = 10⁻⁶ m². Step 2: R = ρl/A. Step 3: R = 1.7 × 10⁻⁸ × 100 / 10⁻⁶. Step 4: R = 1.7 Ω.'
+      - style: real_world
+        teach: A heater or AC uses a thick cable, not thin lamp wire. A thicker wire has a larger A, so a smaller R = ρl/A, and less heat is wasted in the cable itself. Thin wire carrying a big current can overheat.
     - teach: 'Series: R = R₁ + R₂ + … (same current). Parallel: 1/R = 1/R₁ + 1/R₂ + … (same voltage). Power P = VI = I²R = V²/R; energy = Pt.'
       check:
         prompt: 'Two 10 Ω resistors in parallel give:'
@@ -153,6 +173,25 @@ concepts:
         - 10 Ω
         answer: 5 Ω
         why: 1/R = 1/10 + 1/10 = 1/5.
+      ways:
+      - style: visual
+        teach: 'Series and parallel resistors: what stays the same and how to combine.'
+        picture:
+          kind: compare
+          columns:
+          - title: Series
+            points:
+            - Same current through each
+            - R = R₁ + R₂ + …
+            - Total is larger
+          - title: Parallel
+            points:
+            - Same voltage across each
+            - 1/R = 1/R₁ + 1/R₂ + …
+            - Total is smaller
+          alt: In series the same current flows through each resistor and resistances add, giving a larger total. In parallel each has the same voltage, reciprocals add, and the total is smaller.
+      - style: step_by_step
+        teach: '10 Ω and 15 Ω in parallel across 12 V. Step 1: 1/R = 1/10 + 1/15 = 3/30 + 2/30 = 5/30. Step 2: R = 6 Ω. Step 3: Total current I = 12/6 = 2 A. Step 4: Power P = VI = 12 × 2 = 24 W.'
   items:
   - prompt: A 12 V battery drives current through 4 Ω. Find the current (A).
     answer: '3'
@@ -312,6 +351,55 @@ concepts:
     mistakes:
       '300': c12p3_power
       '12': c12p3_power
+  - prompt: 'Assertion (A): Household appliances are connected in parallel.
+
+      Reason (R): In parallel each appliance gets the full mains voltage and can be switched on or off independently.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Parallel wiring gives every appliance the full supply voltage and its own switch, which is exactly why homes use it. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A family runs a 1500 W geyser for 2 hours a day for 30 days. Electricity costs ₹6 per kWh. What is the geyser''s monthly cost?'
+    options:
+    - ₹540
+    - ₹18
+    - ₹270
+    answer: ₹540
+    hints:
+    - Energy = power × time, in kWh.
+    - 1.5 kW × 2 h × 30 days.
+    solution: Energy = 1.5 × 2 × 30 = 90 kWh. Cost = 90 × 6 = ₹540.
+    mistakes:
+      ₹18: c12p3_power
+      ₹270: c12p3_power
+    exam: case
+    difficulty: 2
+  - prompt: A 60 W bulb and a 100 W bulb, both rated for 220 V, are joined in series across 220 V. Which glows brighter?
+    options:
+    - The 60 W bulb
+    - The 100 W bulb
+    - Both equally
+    answer: The 60 W bulb
+    hints:
+    - R = V²/P for each bulb.
+    - In series, the power is I²R with the same I.
+    solution: R(60 W) = 220²/60 ≈ 807 Ω and R(100 W) = 220²/100 = 484 Ω. With the same current, the larger resistance has the larger I²R, so the 60 W bulb glows brighter.
+    mistakes:
+      The 100 W bulb: pq12p3_series_bright
+      Both equally: pq12p3_series_bright
+    exam: competency
+    difficulty: 2
 - code: cbse12p.current.circuits
   title: Cells, Kirchhoff's rules and the Wheatstone bridge
   after:
@@ -434,6 +522,19 @@ concepts:
         - 3 A
         answer: 1 A
         why: 3/(2 + 1) = 1.
+      ways:
+      - style: visual
+        teach: 'A real cell with internal resistance: EMF 12 V, r = 1 Ω, joined to R = 5 Ω.'
+        picture:
+          kind: flow
+          steps:
+          - I = ε/(R + r) = 12/6 = 2 A
+          - 'Voltage lost inside: Ir = 2 × 1 = 2 V'
+          - Terminal voltage V = 12 − 2 = 10 V
+          - 'Check: IR = 2 × 5 = 10 V'
+          alt: Current is 12 over 6, which is 2 amperes. The voltage lost inside the cell is 2 volts, so the terminal voltage is 10 volts, which matches 2 amperes times 5 ohms.
+      - style: real_world
+        teach: When a car's starter motor runs, the headlights dim. The starter draws a huge current, so the battery's internal drop Ir is large, and the terminal voltage left for the lights falls for those few seconds.
     - teach: 'Kirchhoff''s junction rule: current in = current out (charge is conserved). Loop rule: around any closed loop, the sum of EMFs equals the sum of IR drops (energy is conserved).'
       picture:
         kind: flow
@@ -451,6 +552,11 @@ concepts:
         - 2 A
         answer: 3 A
         why: 'In = out: 5 = 2 + 3.'
+      ways:
+      - style: step_by_step
+        teach: 'A loop has a 10 V battery and a 4 V battery facing opposite ways, with a 3 Ω resistor. Step 1: Net EMF = 10 − 4 = 6 V. Step 2: Loop rule: net EMF = IR. Step 3: 6 = I × 3. Step 4: I = 2 A, in the direction the 10 V battery pushes.'
+      - style: real_world
+        teach: 'At a road junction, the cars arriving each minute must equal the cars leaving, or they would pile up. Kirchhoff''s junction rule says the same about charge: current in equals current out.'
     - teach: 'Wheatstone bridge: four resistors P, Q, R, S with a galvanometer across the middle. It is balanced (no galvanometer current) when P/Q = R/S. This lets you find an unknown resistance.'
       check:
         prompt: P = 1 Ω, Q = 2 Ω, R = 5 Ω. S for balance?
@@ -460,6 +566,19 @@ concepts:
         - 8 Ω
         answer: 10 Ω
         why: S = RQ/P = 5 × 2/1.
+      ways:
+      - style: visual
+        teach: Balancing a Wheatstone bridge to find an unknown S.
+        picture:
+          kind: flow
+          steps:
+          - P = 10 Ω, Q = 20 Ω, R = 15 Ω
+          - Adjust until the galvanometer reads zero
+          - 'Balance: P/Q = R/S'
+          - S = 15 × 20/10 = 30 Ω
+          alt: With P equal to 10, Q equal to 20 and R equal to 15 ohms, adjust until the galvanometer reads zero; then P over Q equals R over S, so S is 30 ohms.
+      - style: step_by_step
+        teach: 'A metre bridge balances at 40 cm with 6 Ω in the left gap. Step 1: R/S = l/(100 − l). Step 2: 6/S = 40/60. Step 3: S = 6 × 60/40. Step 4: S = 9 Ω.'
   items:
   - prompt: A cell of EMF 2 V and internal resistance 0.5 Ω gives 1 A. Find its terminal voltage (V).
     answer: '1.5'
@@ -626,3 +745,52 @@ concepts:
     mistakes:
       '3': c12p3_cell
       '6': c12p3_cell
+  - prompt: 'Assertion (A): The terminal voltage of a cell is less than its EMF while it supplies current.
+
+      Reason (R): Part of the EMF is used to drive the current through the cell''s internal resistance.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'V = ε − Ir: the Ir part is used inside the cell, so less is left at the terminals. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A torch uses two cells in series, each of EMF 1.5 V and internal resistance 0.5 Ω, to light a 2 Ω bulb. What current flows?'
+    options:
+    - 1 A
+    - 1.5 A
+    - 0.75 A
+    answer: 1 A
+    hints:
+    - In series, EMFs add and internal resistances add.
+    - I = total EMF ÷ (R + total r).
+    solution: Total EMF = 3 V and total r = 1 Ω. I = 3/(2 + 1) = 1 A.
+    mistakes:
+      1.5 A: c12p3_cell
+      0.75 A: c12p3_cell
+    exam: case
+    difficulty: 2
+  - prompt: A Wheatstone bridge with P = 5 Ω, Q = 10 Ω, R = 8 Ω and S = 16 Ω is balanced. A student swaps the positions of the battery and the galvanometer. What happens?
+    options:
+    - It stays balanced
+    - It becomes unbalanced
+    - The galvanometer reading doubles
+    answer: It stays balanced
+    hints:
+    - Check P/Q and R/S.
+    - Which arms do the resistances sit in after the swap?
+    solution: P/Q = R/S = 1/2 still holds with the battery and galvanometer swapped, so the bridge stays balanced and the galvanometer still reads zero.
+    mistakes:
+      It becomes unbalanced: pq12p3_swap
+      The galvanometer reading doubles: pq12p3_swap
+    exam: competency
+    difficulty: 2

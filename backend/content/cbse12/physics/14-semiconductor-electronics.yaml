@@ -101,6 +101,27 @@ concepts:
         - diamond
         answer: germanium
         why: 0.7 eV, less than silicon's 1.1 eV.
+      ways:
+      - style: visual
+        teach: Conductors, semiconductors and insulators sorted by their energy bands.
+        picture:
+          kind: compare
+          columns:
+          - title: Conductor
+            points:
+            - Bands overlap
+            - 'No gap: e.g. copper'
+          - title: Semiconductor
+            points:
+            - Small gap, about 1 eV
+            - Si 1.1 eV, Ge 0.7 eV
+          - title: Insulator
+            points:
+            - Large gap, over 3 eV
+            - Diamond about 6 eV
+          alt: In a conductor like copper the bands overlap and there is no gap. A semiconductor has a small gap of about 1 eV, 1.1 for silicon and 0.7 for germanium. An insulator has a gap over 3 eV, about 6 for diamond.
+      - style: real_world
+        teach: Think of the band gap as a wall electrons must jump to become free. In copper there is no wall; in silicon a low wall that some electrons clear at room temperature; in diamond a wall so high almost none clear it.
     - teach: In a pure (intrinsic) semiconductor, each electron that jumps leaves a hole, so nₑ = nₕ = nᵢ. Heating frees more carriers, so conductivity rises with temperature, unlike metals.
       check:
         prompt: 'Heating pure silicon makes its resistance:'
@@ -110,6 +131,25 @@ concepts:
         - stay the same
         answer: fall
         why: More electron-hole pairs carry current.
+      ways:
+      - style: visual
+        teach: How heating changes a metal and a semiconductor in opposite ways.
+        picture:
+          kind: compare
+          columns:
+          - title: Metal, heated
+            points:
+            - Same number of free electrons
+            - More collisions with vibrating ions
+            - Conductivity falls
+          - title: Semiconductor, heated
+            points:
+            - Many more electrons cross the gap
+            - 'Each leaves a hole: more carriers'
+            - Conductivity rises
+          alt: A heated metal keeps the same number of free electrons but they collide more with vibrating ions, so conductivity falls. A heated semiconductor gains many electrons across the gap, each leaving a hole, so conductivity rises.
+      - style: step_by_step
+        teach: 'In pure silicon at room temperature. Step 1: Some electrons gain enough energy to jump the 1.1 eV gap. Step 2: Each leaves behind a hole in the valence band. Step 3: So nₑ = nₕ = nᵢ. Step 4: Both electrons and holes carry current, in opposite directions.'
     - teach: 'Doping adds a tiny amount of impurity. A pentavalent atom (P, As) donates an extra electron: n-type, electrons are majority carriers. A trivalent atom (B, Al) accepts an electron, leaving a hole: p-type, holes are majority carriers. Always nₑnₕ = nᵢ².'
       picture:
         kind: compare
@@ -133,6 +173,11 @@ concepts:
         - an insulator
         answer: n-type
         why: Arsenic is pentavalent, a donor.
+      ways:
+      - style: step_by_step
+        teach: 'Doped silicon with nᵢ = 1.5 × 10¹⁶ m⁻³ and nₑ = 4.5 × 10²² m⁻³. Step 1: nₑnₕ = nᵢ². Step 2: nₕ = (1.5 × 10¹⁶)² / 4.5 × 10²². Step 3: nₕ = 2.25 × 10³² / 4.5 × 10²² = 5 × 10⁹ m⁻³. Step 4: Electrons far outnumber holes: n-type.'
+      - style: real_world
+        teach: A single drop of ink colours a whole glass of water. In the same way, about one phosphorus atom per million silicon atoms multiplies silicon's free electrons thousands of times. That tiny 'ink' is doping.
   items:
   - prompt: What is the valency of an atom used to make n-type silicon?
     answer: '5'
@@ -315,6 +360,55 @@ concepts:
     mistakes:
       semiconductor: c12p14_band
       conductor: c12p14_band
+  - prompt: 'Assertion (A): An n-type semiconductor is electrically neutral overall.
+
+      Reason (R): Each donor atom that gives up an electron becomes a positive ion that stays in the crystal.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Every extra free electron is matched by a fixed positive donor ion, so total charge stays zero. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A chip maker adds arsenic to pure silicon. What kind of material results, and what are its majority carriers?'
+    options:
+    - n-type, electrons
+    - p-type, holes
+    - n-type, holes
+    answer: n-type, electrons
+    hints:
+    - How many valence electrons does arsenic have?
+    - Silicon has 4; one extra is free.
+    solution: 'Arsenic is pentavalent: four electrons bond with silicon and the fifth is free. So the material is n-type, with electrons as majority carriers.'
+    mistakes:
+      p-type, holes: c12p14_dope
+      n-type, holes: c12p14_dope
+    exam: case
+    difficulty: 2
+  - prompt: A light sensor uses a semiconductor with a 2 eV band gap. Which light will make it conduct? (hc = 1240 eV nm)
+    options:
+    - Light shorter than about 620 nm
+    - Light longer than about 620 nm
+    - Any light, whatever its wavelength
+    answer: Light shorter than about 620 nm
+    hints:
+    - A photon must carry at least 2 eV.
+    - λ = 1240/E.
+    solution: λ = 1240/2 = 620 nm. Shorter wavelengths have more energy per photon than 2 eV and can lift electrons across the gap.
+    mistakes:
+      Light longer than about 620 nm: c12p14_band
+      Any light, whatever its wavelength: c12p14_band
+    exam: competency
+    difficulty: 2
 - code: cbse12p.semi.diode
   title: p-n junction and diodes
   after:
@@ -391,6 +485,19 @@ concepts:
         - many holes
         answer: fixed ions and almost no free carriers
         why: Carriers near the junction have recombined.
+      ways:
+      - style: visual
+        teach: How a depletion region and barrier form when p-type and n-type meet.
+        picture:
+          kind: flow
+          steps:
+          - Electrons diffuse from n to p, holes from p to n
+          - They recombine near the junction
+          - 'Fixed ions are left: + on n side, − on p side'
+          - Their field forms a barrier, about 0.7 V in Si
+          alt: Electrons diffuse from the n side to the p side and holes the other way; they recombine near the junction, leaving fixed positive ions on the n side and negative ions on the p side, whose field forms a barrier of about 0.7 volt in silicon.
+      - style: real_world
+        teach: 'Picture two crowded rooms with a door: people drift through and some pair off near the doorway, leaving a strip where nobody is free to move. That empty strip is like the depletion region, and its fixed charges push back on anyone else crossing.'
     - teach: 'Forward bias (p to +, n to −) lowers the barrier: current (mA) flows once the voltage passes about 0.7 V for Si. Reverse bias widens the depletion region: only a tiny current (μA) flows, until breakdown at a large voltage.'
       picture:
         kind: compare
@@ -414,6 +521,11 @@ concepts:
         - in reverse
         answer: very little
         why: 0.3 V is below silicon's 0.7 V barrier.
+      ways:
+      - style: step_by_step
+        teach: 'A silicon LED circuit: 9 V supply, 2 V across the LED, 20 mA wanted. Step 1: Voltage left for the resistor: 9 − 2 = 7 V. Step 2: R = V/I. Step 3: R = 7/0.02. Step 4: R = 350 Ω, so a 330 Ω or 390 Ω resistor is used.'
+      - style: real_world
+        teach: A diode is a one-way valve for current, like the valve in a bicycle pump that lets air in but not out. Connect it the right way (forward bias) and current flows; turn it round and almost nothing gets through.
     - teach: 'A diode lets current pass one way, so it can rectify AC. Half-wave (one diode) passes one half of each cycle: output frequency equals input. Full-wave (two diodes or a bridge) uses both halves: output ripple frequency is twice the input. A capacitor filter smooths the output.'
       check:
         prompt: 'A full-wave rectifier on 60 Hz gives ripple at:'
@@ -423,6 +535,25 @@ concepts:
         - 30 Hz
         answer: 120 Hz
         why: 'Both halves give a pulse: 2 × 60.'
+      ways:
+      - style: visual
+        teach: Half-wave and full-wave rectifiers compared.
+        picture:
+          kind: compare
+          columns:
+          - title: Half-wave
+            points:
+            - One diode
+            - Passes only one half of each cycle
+            - 50 Hz in, 50 Hz pulses out
+          - title: Full-wave
+            points:
+            - Two diodes or a four-diode bridge
+            - Uses both halves
+            - 50 Hz in, 100 Hz pulses out
+          alt: A half-wave rectifier uses one diode, passes only one half of each cycle, and gives 50 hertz pulses from 50 hertz AC. A full-wave rectifier uses two diodes or a bridge, uses both halves, and gives 100 hertz pulses.
+      - style: step_by_step
+        teach: 'Turning mains into smooth DC for a phone. Step 1: A transformer steps 230 V AC down. Step 2: A bridge rectifier turns both halves positive. Step 3: A capacitor charges at each peak and fills the dips. Step 4: A regulator holds the output steady at 5 V.'
   items:
   - prompt: A full-wave rectifier runs on 50 Hz AC. Find the output ripple frequency (Hz).
     answer: '100'
@@ -602,3 +733,52 @@ concepts:
     mistakes:
       majority carriers: c12p14_bias
       the barrier vanishing: c12p14_bias
+  - prompt: 'Assertion (A): A full-wave rectifier on 50 Hz mains gives an output with 100 Hz ripple.
+
+      Reason (R): A full-wave rectifier passes both halves of each AC cycle as positive pulses.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Each 50 Hz cycle has two halves and both become pulses, giving 100 pulses a second. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A student connects a silicon diode in series with a 1 kΩ resistor across a 5 V battery, with the p-side to the positive terminal. Taking a 0.7 V drop across the diode, what current flows?'
+    options:
+    - 4.3 mA
+    - 5 mA
+    - Almost zero
+    answer: 4.3 mA
+    hints:
+    - Is the diode forward or reverse biased?
+    - I = (5 − 0.7)/1000.
+    solution: p to + is forward bias, so the diode conducts with about 0.7 V across it. I = 4.3 V / 1000 Ω = 4.3 mA.
+    mistakes:
+      5 mA: c12p14_bias
+      Almost zero: c12p14_bias
+    exam: case
+    difficulty: 2
+  - prompt: The same diode is turned round in the circuit (p-side to the negative terminal). What happens and why?
+    options:
+    - 'Almost no current: reverse bias widens the depletion region'
+    - 4.3 mA flows the other way
+    - The current doubles
+    answer: 'Almost no current: reverse bias widens the depletion region'
+    hints:
+    - Which way is the diode biased now?
+    - What happens to the barrier in that case?
+    solution: 'With p to −, the diode is reverse biased: the barrier rises and the depletion region widens, so only a tiny current from minority carriers flows.'
+    mistakes:
+      4.3 mA flows the other way: c12p14_bias
+      The current doubles: c12p14_bias
+    exam: competency
+    difficulty: 2

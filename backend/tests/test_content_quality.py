@@ -903,15 +903,23 @@ def test_every_kerala9_step_has_more_ways_and_every_topic_exam_style_questions()
 
 
 CBSE9 = {"cbse9-eng", "cbse9-hin", "cbse9-math", "cbse9-sci", "cbse9-ss"}
+CBSE10 = {"cbse10-eng", "cbse10-hin", "cbse10-hinb", "cbse10-math", "cbse10-sci", "cbse10-ss"}
+CBSE12 = {"cbse12-bio", "cbse12-chem", "cbse12-eng", "cbse12-math", "cbse12-phy"}
 CBSE11 = {"cbse11-bio", "cbse11-chem", "cbse11-eng", "cbse11-math", "cbse11-phy"}
 CBSE8 = {"cbse8-eng", "cbse8-hin", "cbse8-math", "cbse8-sci", "cbse8-ss"}
 CBSE7 = {"cbse7-eng", "cbse7-hin", "cbse7-math", "cbse7-sci", "cbse7-ss"}
 CBSE6 = {"cbse6-eng", "cbse6-hin", "cbse6-math", "cbse6-sci", "cbse6-ss"}
+CBSE5 = {"cbse5-eng", "cbse5-evs", "cbse5-hin", "cbse5-math"}
+CBSE4 = {"cbse4-eng", "cbse4-evs", "cbse4-hin", "cbse4-math"}
+CBSE3 = {"cbse3-eng", "cbse3-evs", "cbse3-hin", "cbse3-math"}
+CBSE2 = {"cbse2-eng", "cbse2-hin", "cbse2-math"}
+CBSE1 = {"cbse1-eng", "cbse1-hin", "cbse1-math"}
+CBSEKG = {"cbselkg-eng", "cbselkg-hin", "cbselkg-math", "cbselkg-world", "cbseukg-eng", "cbseukg-hin", "cbseukg-math", "cbseukg-world"}
 
 
-@pytest.mark.parametrize("subjects", [CBSE9, CBSE11, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse11", "cbse8", "cbse7", "cbse6"])
+@pytest.mark.parametrize("subjects", [CBSE9, CBSE10, CBSE11, CBSE12, CBSE8, CBSE7, CBSE6], ids=["cbse9", "cbse10", "cbse11", "cbse12", "cbse8", "cbse7", "cbse6"])
 def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects):
-    """CBSE Class 9 (the 2026-27 books), Classes 11, 8, 7 and 6: every lesson step can be taught at least three ways,
+    """CBSE Class 9 (the 2026-27 books), Classes 10, 11, 12, 8, 7 and 6: every lesson step can be taught at least three ways,
     one of them drawn, and every topic has at least one question in a CBSE board format (assertion-reason allowed)."""
     thin, no_exam = [], []
     for path, pack in PACKS:
@@ -927,6 +935,30 @@ def test_every_step_has_more_ways_and_every_topic_board_style_questions(subjects
                 no_exam.append(f"{rel(path)} {c['code']}")
     assert not thin, thin
     assert not no_exam, no_exam
+
+
+@pytest.mark.parametrize("subjects", [CBSE5, CBSE4, CBSE3, CBSE2, CBSE1, CBSEKG], ids=["cbse5", "cbse4", "cbse3", "cbse2", "cbse1", "cbsekg"])
+def test_every_primary_step_has_more_ways_and_every_topic_case_and_competency_questions(subjects):
+    """CBSE Classes 5 to 1, LKG and UKG: every lesson step can be taught at least three ways, one of them drawn, and every topic has a
+    case question and a competency question. Primary classes have no board exam, so no assertion-reason here."""
+    thin, missing, wrong_style = [], [], []
+    for path, pack in PACKS:
+        if code_of(pack) not in subjects:
+            continue
+        for c in pack["concepts"]:
+            for n, step in enumerate(c.get("lesson") or [], start=1):
+                ways = step.get("ways") or []
+                pictured = bool(step.get("picture")) or any(w.get("picture") for w in ways)
+                if len(ways) < 2 or not pictured:
+                    thin.append(f"{rel(path)} {c['code']} step {n}")
+            styles = {i.get("exam") for i in c["items"]}
+            if not {"case", "competency"} <= styles:
+                missing.append(f"{rel(path)} {c['code']}")
+            if "assertion_reason" in styles:
+                wrong_style.append(f"{rel(path)} {c['code']}")
+    assert not thin, thin
+    assert not missing, missing
+    assert not wrong_style, wrong_style
 
 
 def test_assertion_reason_questions_use_the_standard_choices():

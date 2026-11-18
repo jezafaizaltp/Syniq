@@ -17,6 +17,9 @@ tips:
   c12m9_od: 'Order: the highest derivative present. Degree: the power of that highest derivative, once the equation is a polynomial in derivatives.'
   c12m9_sep: 'Separate: all y-terms with dy, all x-terms with dx, integrate both sides, then use the given condition to find C.'
   c12m9_if: Write it as dy/dx + Py = Q, then IF = e^(∫P dx). Read P carefully, including its sign.
+  pq12m9_substitute: Find y′ and y″ for the given y, then put them into the left side. Does it simplify to 0?
+  pq12m9_shape: 'Compare the equation with the three standard forms: g(y)dy = f(x)dx, dy/dx = F(y/x), and dy/dx + Py = Q.'
+  pq12m9_doubling: Every 3 hours the number doubles. How many doublings fit into 9 hours?
 concepts:
 - code: cbse12m.de.basics
   title: Order, degree and solutions
@@ -104,6 +107,25 @@ concepts:
         - '2'
         answer: '3'
         why: The highest derivative is the third, y‴.
+      ways:
+      - style: visual
+        teach: 'Reading the order: look only for the highest derivative present.'
+        picture:
+          kind: compare
+          columns:
+          - title: Equation
+            points:
+            - y′ + 2y = 0
+            - y″ − y′ = x
+            - y‴ + y = 0
+          - title: Order
+            points:
+            - '1'
+            - '2'
+            - '3'
+          alt: y prime plus 2y equals 0 has order 1; y double prime minus y prime equals x has order 2; y triple prime plus y equals 0 has order 3.
+      - style: real_world
+        teach: 'Newton''s cooling law, dT/dt = −k(T − T₀), uses only the first derivative: order 1. Newton''s second law, m d²x/dt² = F, uses acceleration, the second derivative: order 2. Physics is full of both.'
     - teach: Its degree is the power of the highest-order derivative, but only when the equation is a polynomial in the derivatives. If a derivative sits inside sin, eˣ, log and so on, the degree is not defined.
       picture:
         kind: compare
@@ -129,6 +151,11 @@ concepts:
         - not defined
         answer: '2'
         why: The highest derivative y″ is squared; the cube is on a lower derivative.
+      ways:
+      - style: step_by_step
+        teach: 'Find the degree of (y″)² + (y′)³ + y = 0. Step 1: The highest derivative present is y″. Step 2: The equation is a polynomial in y′ and y″. Step 3: y″ appears with power 2. Step 4: So the order is 2 and the degree is 2.'
+      - style: real_world
+        teach: 'Degree is like counting the exponent on the top ingredient of a recipe. If that derivative is sealed inside sin or e, as in y″ + e^(y′) = 0, it is not a plain power any more, so the degree cannot be read: it is not defined.'
     - teach: A general solution has as many arbitrary constants as the order. A particular solution fixes them using given conditions. To check a solution, substitute it into the equation.
       check:
         prompt: Is y = e^(2x) a solution of y′ = 2y?
@@ -138,6 +165,19 @@ concepts:
         - only at x = 0
         answer: 'yes'
         why: y′ = 2e^(2x) = 2y.
+      ways:
+      - style: visual
+        teach: 'Checking a solution and fixing its constant: y = Ae^(2x) for y′ = 2y.'
+        picture:
+          kind: flow
+          steps:
+          - y = Ae^(2x)
+          - 'y′ = 2Ae^(2x) = 2y: it solves y′ = 2y'
+          - 'Given y(0) = 5: A × 1 = 5'
+          - 'Particular solution: y = 5e^(2x)'
+          alt: y equals A e to the 2x has derivative 2A e to the 2x, which is 2y, so it solves the equation. With y of 0 equal to 5, A is 5, giving the particular solution 5 e to the 2x.
+      - style: step_by_step
+        teach: 'Solve y′ = 6x with y(1) = 4. Step 1: Integrate: y = 3x² + C, the general solution with one constant (order 1). Step 2: Put x = 1: 3 + C = 4. Step 3: C = 1. Step 4: Particular solution y = 3x² + 1.'
   items:
   - prompt: Find the order of d²y/dx² + 3(dy/dx)³ = 0.
     answer: '2'
@@ -307,6 +347,55 @@ concepts:
     mistakes:
       '9': c12m9_od
       '14': c12m9_od
+  - prompt: 'Assertion (A): The general solution of y″ = 0 contains two arbitrary constants.
+
+      Reason (R): y″ = 0 is a second-order differential equation.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Integrating twice gives y = Ax + B, with two constants. The number of constants equals the order, which is 2, so A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: The temperature T (°C) of a cup of tea cooling in a 25 °C room follows dT/dt = −k(T − 25). What are the order and degree of this equation?'
+    options:
+    - Order 1, degree 1
+    - Order 1, degree not defined
+    - Order 2, degree 1
+    answer: Order 1, degree 1
+    hints:
+    - 'Which derivative appears: first or second?'
+    - Is it a polynomial in that derivative, and to what power?
+    solution: Only dT/dt appears, so the order is 1. It appears to the power 1 in a polynomial equation, so the degree is 1.
+    mistakes:
+      Order 1, degree not defined: c12m9_od
+      Order 2, degree 1: c12m9_od
+    exam: case
+    difficulty: 2
+  - prompt: A student says y = e^(−x) is a solution of y″ − y = 0. Is the student right?
+    options:
+    - Yes, it satisfies the equation
+    - No, the left side becomes 2e^(−x)
+    - No, only y = eˣ works
+    answer: Yes, it satisfies the equation
+    hints:
+    - y′ = −e^(−x).
+    - Differentiate again for y″.
+    solution: y′ = −e^(−x) and y″ = e^(−x), so y″ − y = e^(−x) − e^(−x) = 0. It is a solution (and so is eˣ).
+    mistakes:
+      No, the left side becomes 2e^(−x): pq12m9_substitute
+      No, only y = eˣ works: pq12m9_substitute
+    exam: competency
+    difficulty: 2
 - code: cbse12m.de.solve
   title: Separable, homogeneous and linear equations
   after:
@@ -417,6 +506,19 @@ concepts:
         - dy = y dx
         answer: dy/y = dx/x
         why: Divide by y and multiply by dx.
+      ways:
+      - style: visual
+        teach: Separating the variables in dy/dx = e^(x − y), one move at a time.
+        picture:
+          kind: flow
+          steps:
+          - dy/dx = eˣ · e^(−y)
+          - 'Move e^(−y): eʸ dy = eˣ dx'
+          - Integrate both sides
+          - eʸ = eˣ + C
+          alt: Write e to the x minus y as e to the x times e to the minus y; move it across to get e to the y dy equals e to the x dx; integrating gives e to the y equals e to the x plus C.
+      - style: step_by_step
+        teach: 'Solve dy/dx = 3x²y with y(0) = 2. Step 1: Separate: dy/y = 3x² dx. Step 2: Integrate: ln|y| = x³ + C. Step 3: So y = Ae^(x³). Step 4: y(0) = A = 2, giving y = 2e^(x³).'
     - teach: 'Homogeneous: dy/dx = F(y/x), like dy/dx = (x + y)/x. Substitute y = vx, so dy/dx = v + x dv/dx; the equation becomes separable in v and x.'
       check:
         prompt: 'After y = vx, dy/dx equals:'
@@ -426,6 +528,20 @@ concepts:
         - v x
         answer: v + x dv/dx
         why: Product rule on vx.
+      ways:
+      - style: visual
+        teach: The y = vx substitution on dy/dx = (x + 2y)/x.
+        picture:
+          kind: flow
+          steps:
+          - 'Put y = vx: dy/dx = v + x dv/dx'
+          - v + x dv/dx = 1 + 2v
+          - x dv/dx = 1 + v
+          - dv/(1 + v) = dx/x
+          - ln|1 + v| = ln|x| + C, so y = Cx² − x
+          alt: Put y equals v x, so dy by dx is v plus x dv by dx. The equation becomes x dv by dx equals 1 plus v; separating and integrating gives ln of 1 plus v equals ln x plus C, so y equals C x squared minus x.
+      - style: real_world
+        teach: A homogeneous equation looks the same when you zoom in or out. Resizing a photo scales x and y by the same factor but keeps the ratio y/x, and dy/dx = F(y/x) depends only on that ratio. That is why v = y/x is the natural new variable.
     - teach: 'Linear first order: dy/dx + Py = Q (P, Q functions of x). Multiply by the integrating factor IF = e^(∫P dx); the left side becomes d(y × IF)/dx, so y × IF = ∫Q × IF dx + C. Growth and decay: dy/dt = ky gives y = y₀e^(kt).'
       picture:
         kind: flow
@@ -443,6 +559,11 @@ concepts:
         - 2x
         answer: e^(2x)
         why: P = 2, ∫2 dx = 2x.
+      ways:
+      - style: step_by_step
+        teach: 'Solve dy/dx + 2y = 4. Step 1: P = 2, so IF = e^(2x). Step 2: Multiply: d(y e^(2x))/dx = 4e^(2x). Step 3: Integrate: y e^(2x) = 2e^(2x) + C. Step 4: y = 2 + Ce^(−2x); as x grows, y settles at 2.'
+      - style: real_world
+        teach: Money in an account with 5% interest compounded continuously grows by dA/dt = 0.05A, so A = A₀e^(0.05t). The same equation, with a negative k, describes a medicine leaving the bloodstream.
   items:
   - prompt: Solve dy/dx = 2x with y(0) = 1. Find y(2).
     answer: '5'
@@ -626,3 +747,52 @@ concepts:
     mistakes:
       '4': c12m9_sep
       '1': c12m9_sep
+  - prompt: 'Assertion (A): The integrating factor of dy/dx − y/x = x² (x > 0) is 1/x.
+
+      Reason (R): IF = e^(∫P dx), and here P = −1/x.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: ∫(−1/x)dx = −ln x, so IF = e^(−ln x) = 1/x. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A bacteria culture grows by dN/dt = kN. It doubles from 1000 to 2000 in 3 hours. How many bacteria are there after 9 hours?'
+    options:
+    - '8000'
+    - '6000'
+    - '4000'
+    answer: '8000'
+    hints:
+    - N = 1000e^(kt), with e^(3k) = 2.
+    - e^(9k) = (e^(3k))³.
+    solution: N(t) = 1000e^(kt) and e^(3k) = 2. Then N(9) = 1000 × (e^(3k))³ = 1000 × 8 = 8000.
+    mistakes:
+      '6000': pq12m9_doubling
+      '4000': pq12m9_doubling
+    exam: case
+    difficulty: 2
+  - prompt: Which method fits dy/dx + y tan x = sec x best?
+    options:
+    - Integrating factor, as a linear equation
+    - Substitute y = vx
+    - Separate the variables directly
+    answer: Integrating factor, as a linear equation
+    hints:
+    - Is it of the form dy/dx + Py = Q?
+    - What are P and Q here?
+    solution: 'It is dy/dx + Py = Q with P = tan x and Q = sec x: a linear equation. IF = e^(∫tan x dx) = sec x.'
+    mistakes:
+      Substitute y = vx: pq12m9_shape
+      Separate the variables directly: pq12m9_shape
+    exam: competency
+    difficulty: 2

@@ -15,6 +15,8 @@ tips:
   c12m4_prop: 'Use the property: |kA| = kⁿ|A| for an n × n matrix, |AB| = |A||B|, |Aᵀ| = |A|.'
   c12m4_cof: Cofactor Aᵢⱼ = (−1)^(i+j) × minor. Check the sign from the position before you finish.
   c12m4_solve: Write the system as AX = B, find |A|, then use X = A⁻¹B (or elimination to check).
+  pq12m4_which_unknown: 'Check which letter stands for which item before you choose: the two unknowns give two different prices.'
+  pq12m4_check_det: Before using the inverse recipe, work out ad − bc. What happens if you have to divide by that number?
 concepts:
 - code: cbse12m.det.value
   title: Determinant values and area
@@ -100,6 +102,20 @@ concepts:
         - '7'
         answer: '14'
         why: 5 × 4 − 2 × 3 = 20 − 6 = 14.
+      ways:
+      - style: visual
+        teach: Expanding a 3 × 3 determinant along row 1, shown on [[2, 1, 3], [0, 4, 1], [1, 0, 2]].
+        picture:
+          kind: flow
+          steps:
+          - 'Signs along row 1: + − +'
+          - +2 × |[[4, 1], [0, 2]]| = 2 × 8 = 16
+          - −1 × |[[0, 1], [1, 2]]| = −1 × (−1) = 1
+          - +3 × |[[0, 4], [1, 0]]| = 3 × (−4) = −12
+          - 'Total: 16 + 1 − 12 = 5'
+          alt: 'Expand along row 1 with signs plus, minus, plus: 2 times 8 is 16, minus 1 times minus 1 is 1, 3 times minus 4 is minus 12; the determinant is 5.'
+      - style: real_world
+        teach: A determinant measures how much a matrix stretches area. [[2, 0], [0, 5]] stretches a 1 × 1 tile into a 2 × 5 rectangle, and its determinant 2 × 5 − 0 = 10 is exactly that area. A determinant of 0 squashes the tile flat.
     - teach: 'Useful properties: |Aᵀ| = |A|; swapping two rows changes the sign; two equal rows give 0; |AB| = |A||B|; for an n × n matrix, |kA| = kⁿ|A|. A triangular matrix has determinant equal to the product of its diagonal.'
       check:
         prompt: A is 3 × 3 with |A| = 2. Find |3A|.
@@ -109,6 +125,24 @@ concepts:
         - '18'
         answer: '54'
         why: '|3A| = 3³ × 2 = 27 × 2 = 54.'
+      ways:
+      - style: visual
+        teach: Which row changes leave the determinant alone, and which change it.
+        picture:
+          kind: compare
+          columns:
+          - title: Leaves |A| the same
+            points:
+            - 'Transpose: |Aᵀ| = |A|'
+            - Add a multiple of one row to another row
+          - title: Changes |A|
+            points:
+            - 'Swap two rows: sign flips'
+            - 'Multiply one row by k: × k'
+            - 'Multiply the whole n × n matrix by k: × kⁿ'
+          alt: Transposing, or adding a multiple of one row to another, leaves the determinant the same. Swapping two rows flips the sign, multiplying one row by k multiplies it by k, and multiplying the whole n by n matrix by k multiplies it by k to the power n.
+      - style: step_by_step
+        teach: 'B is 3 × 3 with |B| = 2. Find |5B|. Step 1: 5B multiplies every one of the 3 rows by 5. Step 2: Each row multiplies the determinant by 5. Step 3: So |5B| = 5³ × 2 = 125 × 2 = 250. Step 4: Not 5 × 2 = 10: that would scale only one row.'
     - teach: Area of a triangle with vertices (x₁, y₁), (x₂, y₂), (x₃, y₃) = ½|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|. If this is 0, the three points lie on one line (collinear).
       picture:
         kind: geometry
@@ -141,6 +175,11 @@ concepts:
         - '10'
         answer: '12'
         why: ½|0 + 6(4 − 0) + 0| = ½ × 24 = 12.
+      ways:
+      - style: step_by_step
+        teach: 'Area of the triangle with vertices (2, 1), (5, 1), (2, 4). Step 1: x₁(y₂ − y₃) = 2(1 − 4) = −6. Step 2: x₂(y₃ − y₁) = 5(4 − 1) = 15. Step 3: x₃(y₁ − y₂) = 2(1 − 1) = 0. Step 4: Area = ½|−6 + 15 + 0| = 4.5 square units.'
+      - style: real_world
+        teach: 'Three bus stops sit at (1, 1), (2, 3) and (3, 5) on a town map. The area formula gives 1(3 − 5) + 2(5 − 1) + 3(1 − 3) = −2 + 8 − 6 = 0, so the stops lie on one straight road: one bus route can pass all three.'
   items:
   - prompt: Find the determinant of [[3, 4], [1, 2]].
     answer: '2'
@@ -301,6 +340,55 @@ concepts:
     mistakes:
       '7': c12m4_prop
       '0': c12m4_prop
+  - prompt: 'Assertion (A): If two rows of a 3 × 3 matrix are identical, its determinant is 0.
+
+      Reason (R): Swapping two rows of a matrix changes the sign of its determinant.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Swap the two identical rows: the matrix does not change, but by R the determinant changes sign, so D = −D and D = 0. A is true because of R.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A surveyor marks the corners of a triangular plot at (0, 0), (6, 0) and (2, 5) on a grid where each unit is 10 m. Using determinants, what is the area of the plot in square units?'
+    options:
+    - '15'
+    - '30'
+    - '12'
+    answer: '15'
+    hints:
+    - Use Area = ½|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|.
+    - 'Only the middle term is non-zero here: 6 × (5 − 0).'
+    solution: Area = ½|0(0 − 5) + 6(5 − 0) + 2(0 − 0)| = ½ × 30 = 15 square units.
+    mistakes:
+      '30': m12_area_det
+      '12': m12_area_det
+    exam: case
+    difficulty: 2
+  - prompt: A is a 3 × 3 matrix with |A| = 2. A student says |3A| = 6. What is the correct value of |3A|?
+    options:
+    - '54'
+    - '6'
+    - '18'
+    answer: '54'
+    hints:
+    - 3A multiplies every row of A by 3.
+    - How many rows does a 3 × 3 matrix have?
+    solution: Each of the 3 rows is multiplied by 3, so |3A| = 3³ × |A| = 27 × 2 = 54.
+    mistakes:
+      '6': c12m4_prop
+      '18': c12m4_prop
+    exam: competency
+    difficulty: 2
 - code: cbse12m.det.systems
   title: Adjoint, inverse and solving equations
   after:
@@ -424,6 +512,19 @@ concepts:
         - '-5'
         answer: '-7'
         why: 'Delete row 2, column 1: minor 7; sign (−1)³ = −1.'
+      ways:
+      - style: visual
+        teach: Minors and cofactors of A = [[5, 2], [3, 4]], one position at a time.
+        picture:
+          kind: flow
+          steps:
+          - A = [[5, 2], [3, 4]]
+          - 'Minors: M₁₁ = 4, M₁₂ = 3, M₂₁ = 2, M₂₂ = 5'
+          - 'Sign pattern: + − / − +'
+          - 'Cofactors: A₁₁ = 4, A₁₂ = −3, A₂₁ = −2, A₂₂ = 5'
+          alt: For A equals 5, 2, 3, 4 the minors are 4, 3, 2, 5; applying the sign pattern plus minus, minus plus gives cofactors 4, minus 3, minus 2, 5.
+      - style: step_by_step
+        teach: 'Find the cofactor A₂₃ of [[1, 2, 0], [3, 1, 4], [0, 5, 2]]. Step 1: Delete row 2 and column 3, leaving [[1, 2], [0, 5]]. Step 2: Its determinant is 1 × 5 − 2 × 0 = 5, the minor. Step 3: The sign is (−1)^(2+3) = −1. Step 4: A₂₃ = −5.'
     - teach: The adjoint adj A is the transpose of the matrix of cofactors. A(adj A) = |A|I, so A⁻¹ = adj A / |A| when |A| ≠ 0.
       check:
         prompt: 'A is 2 × 2 with |A| = 3. A(adj A) equals:'
@@ -433,6 +534,19 @@ concepts:
         - 9I
         answer: 3I
         why: A(adj A) = |A|I.
+      ways:
+      - style: visual
+        teach: From A to A⁻¹ through the adjoint, shown on A = [[5, 2], [3, 4]].
+        picture:
+          kind: flow
+          steps:
+          - '|A| = 20 − 6 = 14'
+          - Cofactor matrix [[4, −3], [−2, 5]]
+          - 'Transpose: adj A = [[4, −2], [−3, 5]]'
+          - A⁻¹ = adj A ÷ 14
+          alt: 'For A equals 5, 2, 3, 4: the determinant is 14, the cofactor matrix is 4, minus 3, minus 2, 5, its transpose adj A is 4, minus 2, minus 3, 5, and A inverse is adj A divided by 14.'
+      - style: step_by_step
+        teach: 'Check that A(adj A) = |A|I for A = [[5, 2], [3, 4]], adj A = [[4, −2], [−3, 5]]. Step 1: Row 1 × column 1: 20 − 6 = 14. Step 2: Row 1 × column 2: −10 + 10 = 0. Step 3: Row 2 × column 1: 12 − 12 = 0. Step 4: Row 2 × column 2: −6 + 20 = 14. So the product is 14I.'
     - teach: 'A system like 2x + 3y = 8, x + y = 3 can be written AX = B. If |A| ≠ 0 there is exactly one solution, X = A⁻¹B. If |A| = 0, compute (adj A)B: if it is not zero, there is no solution; if it is zero, there may be infinitely many or none.'
       picture:
         kind: flow
@@ -450,6 +564,11 @@ concepts:
         - exactly two solutions
         answer: no solution
         why: The system is inconsistent.
+      ways:
+      - style: step_by_step
+        teach: 'Solve 4x + 3y = 18, x + 2y = 7. Step 1: A = [[4, 3], [1, 2]], |A| = 8 − 3 = 5, so there is one solution. Step 2: A⁻¹ = ⅕[[2, −3], [−1, 4]]. Step 3: X = ⅕[2 × 18 − 3 × 7, −18 + 4 × 7] = ⅕[15, 10]. Step 4: x = 3, y = 2.'
+      - style: real_world
+        teach: 'Two straight roads x + y = 2 and 2x + 2y = 5 never meet: they are parallel. Their coefficient matrix [[1, 1], [2, 2]] has determinant 0, and (adj A)B is not zero, so the system has no solution, just as the two roads have no crossing.'
   items:
   - prompt: Solve 2x + y = 5, x + y = 3. Find x.
     answer: '2'
@@ -616,3 +735,52 @@ concepts:
     mistakes:
       infinitely many solutions: c12m4_solve
       a unique solution: c12m4_solve
+  - prompt: 'Assertion (A): The system x + y = 2, 2x + 2y = 6 has no solution.
+
+      Reason (R): For this system, the determinant of the coefficient matrix is 0.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, but R does not explain A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 'Both are true: the lines are parallel (2x + 2y = 6 means x + y = 3), and |A| = 2 − 2 = 0. But |A| = 0 alone does not decide it: x + y = 2, 2x + 2y = 4 also has |A| = 0 and infinitely many solutions. So R does not explain A.'
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A canteen sells tea at ₹x a cup and samosas at ₹y each. Order 1: 2 teas and 3 samosas cost ₹70. Order 2: 3 teas and 2 samosas cost ₹80. Solving with matrices, what is the price of one tea?'
+    options:
+    - ₹20
+    - ₹10
+    - ₹15
+    answer: ₹20
+    hints:
+    - Write 2x + 3y = 70 and 3x + 2y = 80 as AX = B.
+    - '|A| = 2 × 2 − 3 × 3 = −5.'
+    solution: '|A| = 4 − 9 = −5. x = (70 × 2 − 3 × 80) ÷ (−5) = (−100) ÷ (−5) = 20 and y = (2 × 80 − 3 × 70) ÷ (−5) = 10. A tea costs ₹20.'
+    mistakes:
+      ₹10: pq12m4_which_unknown
+      ₹15: c12m4_solve
+    exam: case
+    difficulty: 2
+  - prompt: A student tries to find A⁻¹ for A = [[2, 6], [1, 3]] using the adjoint formula. What should the teacher say?
+    options:
+    - No inverse exists, because |A| = 0
+    - The inverse is [[3, −6], [−1, 2]]
+    - The inverse is [[3, 6], [1, 2]]
+    answer: No inverse exists, because |A| = 0
+    hints:
+    - Work out ad − bc first.
+    - A⁻¹ = adj A ÷ |A|.
+    solution: '|A| = 2 × 3 − 6 × 1 = 0, so A is singular and A⁻¹ = adj A ÷ |A| cannot be formed.'
+    mistakes:
+      The inverse is [[3, −6], [−1, 2]]: pq12m4_check_det
+      The inverse is [[3, 6], [1, 2]]: pq12m4_check_det
+    exam: competency
+    difficulty: 2

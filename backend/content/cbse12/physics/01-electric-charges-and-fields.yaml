@@ -17,6 +17,9 @@ tips:
   c12p1_units: Convert μC to C (× 10⁻⁶) before using k = 9 × 10⁹, then match the units the question asks for.
   c12p1_gauss: 'Gauss''s law: flux depends only on the charge inside the closed surface, Φ = q_in/ε₀.'
   c12p1_dipole: For a dipole, p = q × (separation). Torque τ = pE sin θ is largest at 90° and zero when p is along E.
+  pq12p1_induced: Neutral paper still has charges inside that can shift a little. Which kind of charge ends up on the side nearer the comb?
+  pq12p1_one_face: That would be the flux through the whole closed box. How many identical faces share it equally?
+  pq12p1_inside: Draw a closed surface just inside the metal shell. How much charge does that surface enclose?
 concepts:
 - code: cbse12p.charge.coulomb
   title: Charge and Coulomb's law
@@ -125,6 +128,27 @@ concepts:
         - 1.6 × 10⁻¹⁸ C
         answer: 0.8 × 10⁻¹⁹ C
         why: It is half of e, not a whole multiple.
+      ways:
+      - style: visual
+        teach: The three basic properties of electric charge, side by side.
+        picture:
+          kind: compare
+          columns:
+          - title: Conserved
+            points:
+            - Total charge never changes
+            - Rubbing only moves electrons
+          - title: Additive
+            points:
+            - Add charges with their signs
+            - +3 μC and −1 μC make +2 μC
+          - title: Quantised
+            points:
+            - q = ne, n a whole number
+            - e = 1.6 × 10⁻¹⁹ C
+          alt: 'Charge is conserved: the total never changes, rubbing only moves electrons. It is additive: add with signs, so plus 3 and minus 1 microcoulomb make plus 2. It is quantised: q equals n times e, with e equal to 1.6 times 10 to the minus 19 coulomb.'
+      - style: real_world
+        teach: 'Rub a balloon on dry hair: electrons move from the hair to the balloon. The balloon becomes negative and the hair equally positive, so the total is still zero. Charge was moved, not made.'
     - teach: 'Coulomb''s law: F = kq₁q₂/r², with k = 9 × 10⁹ N m² C⁻². Force is along the line joining the charges. With several charges, add the force vectors from each one (superposition).'
       picture:
         kind: bars
@@ -144,6 +168,11 @@ concepts:
         - half
         answer: 4 times larger
         why: 'F ∝ 1/r²: (1/2)² in the bottom gives × 4.'
+      ways:
+      - style: step_by_step
+        teach: 'Two forces act on a charge: 3 N east from one charge and 4 N north from another. Step 1: Superposition says add them as vectors. Step 2: They are at right angles. Step 3: Size = √(3² + 4²) = 5 N. Step 4: Direction: between east and north, nearer north.'
+      - style: real_world
+        teach: Car factories spray paint as charged droplets onto an oppositely charged car body. Coulomb attraction pulls the paint onto every surface, even round corners, wasting less paint than ordinary spraying.
     - teach: Electric field E = F/q₀ is force per unit positive test charge; for a point charge E = kq/r². Field lines start on + and end on −, never cross. A dipole (charges ±q a distance 2a apart) has moment p = q × 2a; in a uniform field it feels torque τ = pE sin θ.
       check:
         prompt: When is the torque on a dipole in a uniform field zero?
@@ -153,6 +182,19 @@ concepts:
         - never
         answer: when p is along E
         why: sin 0° = 0.
+      ways:
+      - style: visual
+        teach: An electric dipole and the torque it feels in a uniform field.
+        picture:
+          kind: flow
+          steps:
+          - Charges +q and −q, 2a apart
+          - Dipole moment p = q × 2a, from − to +
+          - 'In field E at angle θ: τ = pE sin θ'
+          - Largest at 90°, zero when p lines up with E
+          alt: A dipole is charges plus q and minus q a distance 2a apart. Its moment p equals q times 2a, pointing from minus to plus. In a field E at angle theta it feels torque p E sin theta, largest at 90 degrees and zero when p lines up with E.
+      - style: step_by_step
+        teach: 'Field 2 m from a 4 μC charge. Step 1: Convert: q = 4 × 10⁻⁶ C. Step 2: E = kq/r² = 9 × 10⁹ × 4 × 10⁻⁶ / 2². Step 3: = 36 × 10³ / 4. Step 4: E = 9 × 10³ N/C, pointing away from the charge.'
   items:
   - prompt: How many electrons make a charge of 1.6 × 10⁻¹⁸ C? (e = 1.6 × 10⁻¹⁹ C)
     answer: '10'
@@ -319,6 +361,55 @@ concepts:
     mistakes:
       '1': c12p1_inv
       3/2: c12p1_inv
+  - prompt: 'Assertion (A): A charge of 2.4 × 10⁻¹⁹ C cannot exist on an isolated body.
+
+      Reason (R): Charge is quantised in whole multiples of e = 1.6 × 10⁻¹⁹ C.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: 2.4 × 10⁻¹⁹ ÷ 1.6 × 10⁻¹⁹ = 1.5, not a whole number. Because charge is quantised (R), such a charge is impossible. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Two small charged spheres in a lab push each other with 0.8 N. The distance between them is halved and one charge is doubled. What is the new force?'
+    options:
+    - 6.4 N
+    - 1.6 N
+    - 3.2 N
+    answer: 6.4 N
+    hints:
+    - Halving r multiplies F by 4.
+    - Doubling one charge multiplies F by 2.
+    solution: F ∝ q₁q₂/r². The new force is 0.8 × 2 × 4 = 6.4 N.
+    mistakes:
+      1.6 N: c12p1_inv
+      3.2 N: c12p1_inv
+    exam: case
+    difficulty: 2
+  - prompt: A plastic comb rubbed on dry hair picks up small bits of neutral paper. Which explanation is best?
+    options:
+    - The charged comb polarises the paper and attracts the opposite charge on its near side
+    - Rubbing magnetises the comb
+    - The paper already carries a large charge
+    answer: The charged comb polarises the paper and attracts the opposite charge on its near side
+    hints:
+    - The paper starts neutral.
+    - Attraction to the near side is stronger than repulsion from the far side. Why?
+    solution: The comb's charge pulls opposite charge in the paper slightly towards it and pushes like charge away. The nearer opposite charge feels a stronger force, so the paper is attracted.
+    mistakes:
+      Rubbing magnetises the comb: pq12p1_induced
+      The paper already carries a large charge: pq12p1_induced
+    exam: competency
+    difficulty: 2
 - code: cbse12p.charge.gauss
   title: Electric flux and Gauss's law
   after:
@@ -394,6 +485,27 @@ concepts:
         - half of E ΔS
         answer: '0'
         why: 'cos 90° = 0: no field passes through.'
+      ways:
+      - style: visual
+        teach: Flux through the same area at three different angles to the field.
+        picture:
+          kind: compare
+          columns:
+          - title: θ = 0°
+            points:
+            - Field straight through
+            - Φ = EA, the largest
+          - title: θ = 60°
+            points:
+            - Field slanted
+            - Φ = EA cos 60° = EA/2
+          - title: θ = 90°
+            points:
+            - Field skims along the surface
+            - Φ = 0
+          alt: When the field goes straight through, theta is 0 and the flux is E A, the largest. At 60 degrees the flux is half of that. At 90 degrees the field skims along the surface and the flux is zero.
+      - style: real_world
+        teach: Hold a window frame out in steady vertical rain. Held flat, it catches the most rain; tilted, less; held edge-on, none. Electric flux works the same way with field lines instead of raindrops, which is why cos θ appears.
     - teach: 'Gauss''s law: total flux through any closed surface = q_enclosed/ε₀. Shape and size don''t matter; charges outside add nothing to the total. Choose a symmetric ''Gaussian surface'' to find fields quickly.'
       picture:
         kind: flow
@@ -412,6 +524,11 @@ concepts:
         - q/ε₀
         answer: '0'
         why: Net enclosed charge is zero.
+      ways:
+      - style: step_by_step
+        teach: 'A closed surface holds +5 μC and −2 μC; a 7 μC charge sits outside. Step 1: Only enclosed charge counts. Step 2: q_enclosed = 5 − 2 = 3 μC. Step 3: Φ = q_enclosed/ε₀. Step 4: Φ = 3 × 10⁻⁶/ε₀; the outside 7 μC adds nothing.'
+      - style: real_world
+        teach: Count people crossing a fence around a field. Anyone who walks in from outside and out again adds zero to the net count. Only people who start inside change it. Gauss's law treats field lines from outside charges the same way.
     - teach: 'Results: long straight wire E = λ/(2πε₀r); infinite plane sheet E = σ/(2ε₀), the same at any distance; thin spherical shell: E = kq/r² outside, zero inside.'
       check:
         prompt: 'For a long wire, doubling r makes E:'
@@ -421,6 +538,27 @@ concepts:
         - unchanged
         answer: half
         why: E ∝ 1/r for a line of charge.
+      ways:
+      - style: visual
+        teach: How the field changes with distance for the three Gauss's-law results.
+        picture:
+          kind: compare
+          columns:
+          - title: Long wire
+            points:
+            - E = λ/(2πε₀r)
+            - E ∝ 1/r
+          - title: Infinite sheet
+            points:
+            - E = σ/(2ε₀)
+            - Same at every distance
+          - title: Thin shell
+            points:
+            - 'Outside: E = kq/r²'
+            - 'Inside: E = 0'
+          alt: A long wire gives E equal to lambda over 2 pi epsilon nought r, falling as 1 over r. An infinite sheet gives sigma over 2 epsilon nought, the same at every distance. A thin shell gives kq over r squared outside and zero inside.
+      - style: step_by_step
+        teach: 'A long charged wire gives 1200 N/C at 1 cm. Find E at 3 cm. Step 1: For a wire, E ∝ 1/r. Step 2: Distance grows 3 times. Step 3: So E falls to one third. Step 4: E = 1200 ÷ 3 = 400 N/C.'
   items:
   - prompt: A field of 100 N/C passes straight through an area of 0.5 m². Find the flux (N m²/C).
     answer: '50'
@@ -592,3 +730,52 @@ concepts:
     mistakes:
       '18': c12p1_units
       '1': c12p1_units
+  - prompt: 'Assertion (A): The total electric flux through a closed surface surrounding an electric dipole is zero.
+
+      Reason (R): The net charge enclosed by the surface is zero.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A dipole has +q and −q, so the enclosed charge is 0 and by Gauss's law the total flux is 0. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A small charge of 8.85 μC is placed at the centre of a cubical box. What is the electric flux through one face? (ε₀ = 8.85 × 10⁻¹² C² N⁻¹ m⁻²)'
+    options:
+    - 1.67 × 10⁵ N m²/C
+    - 10⁶ N m²/C
+    - 6 × 10⁶ N m²/C
+    answer: 1.67 × 10⁵ N m²/C
+    hints:
+    - Total flux = q/ε₀.
+    - By symmetry, each face gets an equal share.
+    solution: Total flux = 8.85 × 10⁻⁶ / 8.85 × 10⁻¹² = 10⁶ N m²/C. Each of the 6 faces gets 10⁶/6 ≈ 1.67 × 10⁵ N m²/C.
+    mistakes:
+      10⁶ N m²/C: pq12p1_one_face
+      6 × 10⁶ N m²/C: c12p1_gauss
+    exam: case
+    difficulty: 2
+  - prompt: A student says the field inside a charged hollow metal sphere is strongest at the centre. Which reasoning corrects this?
+    options:
+    - A Gaussian sphere inside encloses no charge, so the field inside is zero
+    - The field doubles at the centre
+    - The field inside equals kq/R² everywhere
+    answer: A Gaussian sphere inside encloses no charge, so the field inside is zero
+    hints:
+    - Where does the charge on a conductor sit?
+    - Apply Gauss's law to a sphere smaller than the shell.
+    solution: The charge sits on the outer surface. A Gaussian sphere inside it encloses no charge, so by symmetry and Gauss's law E = 0 everywhere inside.
+    mistakes:
+      The field doubles at the centre: pq12p1_inside
+      The field inside equals kq/R² everywhere: pq12p1_inside
+    exam: competency
+    difficulty: 2

@@ -18,6 +18,8 @@ tips:
   c12b5_pair: 'Use base pairing: A pairs with T (U in RNA) and G pairs with C, so A = T and G = C in double-stranded DNA.'
   c12b5_code: Codons are read three bases at a time; stop codons code for no amino acid.
   c12b5_exp: 'Link each classic experiment to what it showed: Griffith (transformation), Hershey–Chase (DNA is genetic material), Meselson–Stahl (semi-conservative).'
+  c12b5_hc: Ask which part of the phage carried the label that ended up inside the bacteria.
+  c12b5_mut: 'Count what changes downstream: does one codon change, or does every later codon shift?'
 concepts:
 - code: cbse12b.mol.dna
   title: DNA structure and replication
@@ -117,6 +119,11 @@ concepts:
         - C
         answer: T
         why: Every A on one strand pairs with a T on the other.
+      ways:
+      - style: step_by_step
+        teach: 'A DNA strand has 5′-GGATC-3′. Step 1: Pair each base: G–C, A–T. Step 2: Complement in order: CCTAG. Step 3: The new strand runs the other way. Step 4: Written 3′→5′ it is 3′-CCTAG-5′.'
+      - style: real_world
+        teach: 'DNA''s two strands are like the two sides of a zip: the teeth (bases) only fit their own partner. Unzip it and each side carries enough information to rebuild the other, which is why the pairing rule matters so much.'
     - teach: Griffith showed a 'transforming principle' turned harmless R strain Pneumococcus into deadly S strain. Avery, MacLeod and McCarty showed this principle is DNA. Hershey and Chase grew phages with radioactive phosphorus (DNA) or sulphur (protein); only the phosphorus entered bacteria, proving DNA is the genetic material. Human DNA is about 2.2 m long and is packed around histone octamers as nucleosomes.
       check:
         prompt: 'In Hershey and Chase''s experiment, the label that entered bacteria was:'
@@ -126,6 +133,19 @@ concepts:
         - ¹⁵N in protein
         answer: ³²P in DNA
         why: DNA has phosphorus; protein coats stayed outside.
+      ways:
+      - style: visual
+        teach: Three experiments that pinned down the genetic material.
+        picture:
+          kind: flow
+          steps:
+          - 'Griffith (1928): heat-killed S turns live R deadly'
+          - 'Avery, MacLeod, McCarty: the transforming principle is DNA'
+          - 'Hershey–Chase (1952): ³²P (DNA) enters bacteria, ³⁵S (protein) stays out'
+          - 'Conclusion: DNA is the genetic material'
+          alt: In 1928 Griffith found heat-killed S bacteria could turn live R bacteria deadly. Avery, MacLeod and McCarty showed the transforming principle is DNA. In 1952 Hershey and Chase showed labelled phosphorus in DNA enters bacteria while labelled sulphur in protein stays out. So DNA is the genetic material.
+      - style: real_world
+        teach: Each of your cells packs about two metres of DNA into a nucleus a few micrometres wide. It's like fitting 40 km of thread into a tennis ball. Winding it round histone spools (nucleosomes) makes this possible.
     - teach: 'DNA replication is semi-conservative: each new molecule keeps one old strand. Meselson and Stahl showed this using heavy ¹⁵N and light ¹⁴N in E. coli. DNA polymerase adds nucleotides only 5′→3′, so the leading strand is made continuously and the lagging strand in short Okazaki fragments joined by DNA ligase.'
       picture:
         kind: flow
@@ -143,6 +163,11 @@ concepts:
         - RNA polymerase
         answer: DNA ligase
         why: Ligase seals the gaps between fragments.
+      ways:
+      - style: real_world
+        teach: Photocopying a two-page letter by separating the pages, then copying each onto a blank sheet, gives two sets each with one original and one new page. That is semi-conservative replication.
+      - style: step_by_step
+        teach: 'Meselson–Stahl after two generations in ¹⁴N. Step 1: Start: all heavy (¹⁵N/¹⁵N). Step 2: Generation 1: all hybrid (¹⁵N/¹⁴N). Step 3: Generation 2: each hybrid gives one hybrid and one light. Step 4: So half hybrid, half light.'
   items:
   - prompt: A DNA sample has 30% adenine. What percentage is guanine?
     answer: '20'
@@ -332,6 +357,55 @@ concepts:
     mistakes:
       3′→5′: c12b5_exp
       both directions: c12b5_exp
+  - prompt: 'Assertion (A): DNA with a higher proportion of G–C pairs needs more heat to separate its strands.
+
+      Reason (R): A G–C pair is held by three hydrogen bonds, while an A–T pair is held by two.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: More hydrogen bonds per pair means more energy is needed to pull the strands apart. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In a Hershey–Chase style experiment, a student labels phage protein coats with ³⁵S. After infection and blending, where is most of the radioactivity found?'
+    options:
+    - In the liquid outside the bacteria
+    - Inside the bacteria
+    - In the new phages made inside
+    answer: In the liquid outside the bacteria
+    hints:
+    - Which part of the phage contains sulphur?
+    - Does that part enter the bacterium?
+    solution: ³⁵S labels protein, which stays outside as the empty coat. Blending knocks the coats off, so the label stays in the liquid.
+    mistakes:
+      Inside the bacteria: c12b5_hc
+      In the new phages made inside: c12b5_hc
+    exam: case
+    difficulty: 2
+  - prompt: In a DNA sample, 18% of bases are thymine. What percentage are cytosine?
+    options:
+    - 32%
+    - 18%
+    - 64%
+    answer: 32%
+    hints:
+    - A = T, so A is also 18%.
+    - Share the rest equally between G and C.
+    solution: A + T = 36%, leaving 64% for G + C. C = 32%.
+    mistakes:
+      18%: c12b5_pair
+      64%: c12b5_pair
+    exam: competency
+    difficulty: 2
 - code: cbse12b.mol.expression
   title: Transcription, translation and regulation
   after:
@@ -393,6 +467,11 @@ concepts:
         - neither
         answer: coding strand
         why: The mRNA is copied from the template, so it matches the coding strand.
+      ways:
+      - style: step_by_step
+        teach: 'A template strand reads 3′-TACGGA-5′. Step 1: RNA pairs with the template: T→A, A→U, C→G, G→C. Step 2: mRNA is 5′-AUGCCU-3′. Step 3: It matches the coding strand, 5′-ATGCCT-3′, with U for T. Step 4: Codons: AUG (start), CCU.'
+      - style: real_world
+        teach: A recipe book (DNA) stays safely in the library (nucleus). You photocopy one recipe (mRNA), take it to the kitchen (ribosome), and cook (make protein). Cutting out the ads between recipe steps is splicing.
     - teach: 'The genetic code is triplet: 64 codons, 61 for amino acids and 3 stop codons (UAA, UAG, UGA). AUG codes for methionine and is the start codon. The code is degenerate (several codons for one amino acid), unambiguous, nearly universal and non-overlapping. tRNA is the adapter: its anticodon pairs with a codon, and it carries the matching amino acid to the ribosome.'
       check:
         prompt: How many stop codons are there?
@@ -402,6 +481,25 @@ concepts:
         - '4'
         answer: '3'
         why: UAA, UAG and UGA.
+      ways:
+      - style: visual
+        teach: 'The main features of the genetic code: how it is read and what it means.'
+        picture:
+          kind: compare
+          columns:
+          - title: How it's read
+            points:
+            - 'Triplet: 3 bases = 1 codon'
+            - Non-overlapping
+            - AUG starts; 3 codons stop
+          - title: What it means
+            points:
+            - 'Degenerate: many codons, one amino acid'
+            - 'Unambiguous: one codon, one amino acid'
+            - Nearly universal
+          alt: The code is read as triplets, three bases per codon, without overlap; AUG starts and three codons stop. It is degenerate, with many codons for one amino acid, unambiguous, with each codon meaning one amino acid, and nearly universal.
+      - style: step_by_step
+        teach: 'Read mRNA 5′-AUG UUU GGC UAG-3′. Step 1: AUG: start, methionine. Step 2: UUU: phenylalanine. Step 3: GGC: glycine. Step 4: UAG: stop. The peptide has 3 amino acids.'
     - teach: Genes are switched on and off as needed. In E. coli's lac operon, a repressor blocks the operator; lactose (the inducer) binds the repressor so the z, y and a genes are transcribed. The Human Genome Project found about 3 × 10⁹ bp and roughly 20,000–25,000 genes. DNA fingerprinting compares repeat regions (VNTRs) and is used in forensics and paternity tests.
       check:
         prompt: 'When lactose is absent, the lac genes are:'
@@ -411,6 +509,25 @@ concepts:
         - deleted
         answer: switched off by the repressor
         why: The repressor sits on the operator.
+      ways:
+      - style: visual
+        teach: The lac operon in E. coli, switched off without lactose and on with it.
+        picture:
+          kind: compare
+          columns:
+          - title: No lactose
+            points:
+            - Repressor binds the operator
+            - RNA polymerase blocked
+            - z, y, a genes off
+          - title: Lactose present
+            points:
+            - Inducer binds the repressor
+            - Repressor leaves the operator
+            - z, y, a genes transcribed
+          alt: With no lactose, the repressor binds the operator, blocking RNA polymerase, so genes z, y and a are off. With lactose present, the inducer binds the repressor, which leaves the operator, and the genes are transcribed.
+      - style: real_world
+        teach: DNA fingerprinting helped identify victims after disasters and reunite lost children with families. Repeat regions (VNTRs) vary so much between people that, apart from identical twins, no two patterns match.
   items:
   - prompt: How many codons are there in the genetic code?
     answer: '64'
@@ -600,3 +717,52 @@ concepts:
     mistakes:
       the genetic code: c12b5_exp
       histone proteins: c12b5_exp
+  - prompt: 'Assertion (A): A frameshift mutation usually changes a protein far more than a single base substitution.
+
+      Reason (R): Inserting or deleting one base shifts the reading frame, so every codon after it is read wrongly.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: A substitution alters at most one codon; a frameshift changes all codons downstream. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In sickle-cell anaemia, GAG changes to GUG in one codon of haemoglobin''s β chain. What kind of change is this, and what is its effect?'
+    options:
+    - A point substitution changing one amino acid
+    - A frameshift changing every later amino acid
+    - A deletion removing the whole gene
+    answer: A point substitution changing one amino acid
+    hints:
+    - How many bases changed?
+    - Did the reading frame move?
+    solution: 'Only one base changed (A→U), so only one codon changes: glutamic acid becomes valine. The frame is not shifted.'
+    mistakes:
+      A frameshift changing every later amino acid: c12b5_mut
+      A deletion removing the whole gene: c12b5_mut
+    exam: case
+    difficulty: 2
+  - prompt: E. coli is grown in a medium with glucose but no lactose. What is the state of the lac operon?
+    options:
+    - 'Off: the repressor sits on the operator'
+    - 'On: all three genes are transcribed'
+    - Only gene z is on
+    answer: 'Off: the repressor sits on the operator'
+    hints:
+    - Which sugar acts as the inducer?
+    - Without the inducer, what does the repressor do?
+    solution: Without lactose there is no inducer, so the repressor binds the operator and blocks transcription.
+    mistakes:
+      'On: all three genes are transcribed': c12b5_exp
+      Only gene z is on: c12b5_exp
+    exam: competency
+    difficulty: 2

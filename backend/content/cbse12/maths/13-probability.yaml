@@ -17,6 +17,7 @@ tips:
   c12m13_ind: Independent means P(A ∩ B) = P(A) × P(B). Mutually exclusive means P(A ∩ B) = 0. They are different ideas.
   c12m13_bayes: 'Bayes: the cause''s share of the total. Top = P(cause) × P(result | cause); bottom = the sum of that over all causes.'
   c12m13_ev: E(X) = Σ x × p. Multiply each value by its probability, then add.
+  pq12m13_base_rate: Think about how few people have the condition to begin with. Which group produces most of the positive results?
 concepts:
 - code: cbse12m.prob.conditional
   title: Conditional probability and independence
@@ -124,6 +125,19 @@ concepts:
         - 1/2
         answer: 1/3
         why: Given {4, 5, 6}, one of three outcomes is 5.
+      ways:
+      - style: visual
+        teach: 'Conditional probability as a smaller sample space: cards 1 to 12, given a multiple of 3.'
+        picture:
+          kind: flow
+          steps:
+          - 'B = multiple of 3: {3, 6, 9, 12}'
+          - A = even number
+          - A ∩ B = {6, 12}
+          - P(A|B) = 2/4 = 1/2
+          alt: Given the card is a multiple of 3, only 3, 6, 9 and 12 remain. Two of them, 6 and 12, are even, so the probability of even given a multiple of 3 is 2 out of 4, one half.
+      - style: real_world
+        teach: The chance of rain on any day might be 20%, but if the morning is dark and cloudy, the chance given that is much higher. Knowing B changes the world you are counting in, which is what P(A|B) measures.
     - teach: 'Multiplication rule: P(A ∩ B) = P(B) × P(A|B). A and B are independent if knowing B does not change A: P(A|B) = P(A), or P(A ∩ B) = P(A)P(B). Mutually exclusive events (cannot both happen) with non-zero probabilities are never independent.'
       picture:
         kind: compare
@@ -147,6 +161,11 @@ concepts:
         - '0.1'
         answer: '0.2'
         why: 0.4 × 0.5 = 0.2.
+      ways:
+      - style: step_by_step
+        teach: 'Check independence. Step 1: P(A) = 0.3, P(B) = 0.5, P(A ∩ B) = 0.15. Step 2: P(A) × P(B) = 0.15. Step 3: This equals P(A ∩ B). Step 4: So A and B are independent: knowing B leaves P(A) at 0.3.'
+      - style: real_world
+        teach: 'Rolling a red die and a blue die: the red result tells you nothing about the blue, so the events are independent. Drawing two cards without putting the first back is different: the first card changes what is left.'
     - teach: 'Total probability: if E₁, E₂, … split the sample space (one and only one happens), then P(A) = P(E₁)P(A|E₁) + P(E₂)P(A|E₂) + … Draw a tree: multiply along branches, add the branches that end in A.'
       check:
         prompt: P(E₁) = P(E₂) = 1/2, P(A|E₁) = 1/2, P(A|E₂) = 1/4. P(A)?
@@ -156,6 +175,19 @@ concepts:
         - 1/8
         answer: 3/8
         why: 1/4 + 1/8 = 3/8.
+      ways:
+      - style: visual
+        teach: 'A probability tree for being late: by bus or on foot.'
+        picture:
+          kind: flow
+          steps:
+          - 'Bus 0.7 → late 0.1: 0.07'
+          - 'Walk 0.3 → late 0.2: 0.06'
+          - Add the late branches
+          - P(late) = 0.13
+          alt: Bus with probability 0.7 and late 0.1 gives 0.07; walking with probability 0.3 and late 0.2 gives 0.06; adding the late branches gives 0.13.
+      - style: step_by_step
+        teach: 'Total probability for a match. Step 1: P(rain) = 0.4, P(no rain) = 0.6. Step 2: P(cancelled | rain) = 0.5, P(cancelled | no rain) = 0.1. Step 3: Multiply along branches: 0.2 and 0.06. Step 4: P(cancelled) = 0.26.'
   items:
   - prompt: A die is rolled; the result is even. Find the probability it is 6, as a fraction.
     answer: 1/3
@@ -319,6 +351,55 @@ concepts:
     mistakes:
       1/2: c12m13_cond
       1/4: c12m13_cond
+  - prompt: 'Assertion (A): If P(A) = 0.4, P(B) = 0.5 and P(A ∩ B) = 0.2, then A and B are independent.
+
+      Reason (R): A and B are independent when P(A ∩ B) = P(A) × P(B).'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: P(A) × P(B) = 0.4 × 0.5 = 0.2 = P(A ∩ B), so by R the events are independent. A is true because of R.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: In a class of 40, 25 play cricket, 15 play football and 10 play both. A student picked at random plays football. What is the probability they also play cricket?'
+    options:
+    - 2/3
+    - 1/4
+    - 2/5
+    answer: 2/3
+    hints:
+    - The sample space is now only the football players.
+    - How many of those 15 play cricket too?
+    solution: Given football, there are 15 students, of whom 10 play cricket. P = 10/15 = 2/3.
+    mistakes:
+      1/4: c12m13_cond
+      2/5: c12m13_cond
+    exam: case
+    difficulty: 2
+  - prompt: A and B are mutually exclusive, with P(A) = 0.3 and P(B) = 0.4. A student says they must be independent. Which is correct?
+    options:
+    - 'Not independent: P(A ∩ B) = 0 but P(A)P(B) = 0.12'
+    - Independent, because they cannot affect each other
+    - Independent, because P(A ∪ B) = 0.7
+    answer: 'Not independent: P(A ∩ B) = 0 but P(A)P(B) = 0.12'
+    hints:
+    - Mutually exclusive means they cannot both happen.
+    - Compare P(A ∩ B) with P(A) × P(B).
+    solution: Mutually exclusive gives P(A ∩ B) = 0, but P(A)P(B) = 0.12 ≠ 0. If one happens, the other certainly does not, so they are dependent.
+    mistakes:
+      Independent, because they cannot affect each other: c12m13_ind
+      Independent, because P(A ∪ B) = 0.7: c12m13_ind
+    exam: competency
+    difficulty: 2
 - code: cbse12m.prob.bayes
   title: Bayes' theorem and random variables
   after:
@@ -436,6 +517,23 @@ concepts:
         - the number of outcomes
         answer: the chance of a cause, given what was observed
         why: It works backwards from the result to the cause.
+      ways:
+      - style: visual
+        teach: Bayes' theorem turns a forward probability into a backward one.
+        picture:
+          kind: compare
+          columns:
+          - title: Known (forward)
+            points:
+            - P(result | cause)
+            - e.g. P(fever | flu)
+          - title: Wanted (backward)
+            points:
+            - P(cause | result)
+            - e.g. P(flu | fever)
+          alt: We usually know the forward probability of a result given a cause, such as fever given flu. Bayes' theorem finds the backward probability of the cause given the result, such as flu given fever.
+      - style: real_world
+        teach: A detective sees muddy boots and asks who probably went outside. Each suspect has a chance of going out and a chance of muddy boots if they did. Bayes' theorem weighs both to rank the suspects, reasoning backwards from the clue.
     - teach: 'Example: bag I (chosen with probability 1/2) has 3 red of 4; bag II (1/2) has 1 red of 4. A red ball is drawn. P(red) = 3/8 + 1/8 = 1/2. P(bag I | red) = (3/8)/(1/2) = 3/4.'
       picture:
         kind: flow
@@ -453,6 +551,11 @@ concepts:
         - 1/2
         answer: 1/4
         why: (1/8)/(1/2) = 1/4, and 3/4 + 1/4 = 1.
+      ways:
+      - style: step_by_step
+        teach: 'Box A (chosen with probability 1/3) has 2 faulty of 10; box B (2/3) has 1 faulty of 10. A faulty item is drawn. Step 1: P(A)P(F|A) = 1/3 × 1/5 = 1/15. Step 2: P(B)P(F|B) = 2/3 × 1/10 = 1/15. Step 3: P(F) = 2/15. Step 4: P(A|F) = (1/15)/(2/15) = 1/2.'
+      - style: real_world
+        teach: An email filter learns how often words like 'prize' appear in spam and in normal mail. When a new email contains 'prize', Bayes' theorem turns those rates into the chance that this email is spam.
     - teach: A random variable X assigns a number to each outcome. Its probability distribution lists values xᵢ with probabilities pᵢ, all ≥ 0 and adding to 1. The mean or expectation is E(X) = Σ xᵢpᵢ.
       check:
         prompt: X = 1 or 3 with probabilities 1/2 each. E(X)?
@@ -462,6 +565,24 @@ concepts:
         - 3/2
         answer: '2'
         why: 1 × 1/2 + 3 × 1/2 = 2.
+      ways:
+      - style: visual
+        teach: The distribution of X = number of heads in 3 tosses of a fair coin, counted out of 8 outcomes.
+        picture:
+          kind: bars
+          unit: outcomes out of 8
+          bars:
+          - label: 0 heads
+            value: 1
+          - label: 1 head
+            value: 3
+          - label: 2 heads
+            value: 3
+          - label: 3 heads
+            value: 1
+          alt: Out of 8 equally likely outcomes, 0 heads happens once, 1 head three times, 2 heads three times and 3 heads once. The mean is 12 over 8, which is 1.5.
+      - style: step_by_step
+        teach: 'Expected gain of a game. Step 1: Win ₹20 with probability 1/10. Step 2: Otherwise (9/10) lose ₹3. Step 3: E = 20 × 1/10 + (−3) × 9/10 = 2 − 2.7. Step 4: E = −₹0.70: on average a player loses 70 paise a game.'
   items:
   - prompt: Machine A makes 60% of bulbs (2% faulty), B 40% (5% faulty). Find P(faulty) as a fraction.
     answer: 4/125
@@ -620,3 +741,52 @@ concepts:
     mistakes:
       3/4: c12m13_bayes
       1/3: c12m13_bayes
+  - prompt: 'Assertion (A): The numbers 0.3, 0.5 and 0.4 can be the probabilities of a probability distribution.
+
+      Reason (R): Every probability lies between 0 and 1.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: A is false, but R is true
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: R is true. But in a distribution the probabilities must also add to 1, and 0.3 + 0.5 + 0.4 = 1.2, so A is false.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, and R explains A: ar_test_a
+      Both A and R are true, but R does not explain A: ar_test_a
+      A is true, but R is false: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: 30% of students come by school bus and 70% walk. On a rainy day 10% of bus riders and 2% of walkers are late. A late student is chosen. What is the probability they came by bus?'
+    options:
+    - 15/22
+    - 3/10
+    - 1/10
+    answer: 15/22
+    hints:
+    - P(late) = 0.3 × 0.1 + 0.7 × 0.02.
+    - P(bus | late) = P(bus)P(late | bus) ÷ P(late).
+    solution: P(late) = 0.03 + 0.014 = 0.044. P(bus | late) = 0.03/0.044 = 30/44 = 15/22.
+    mistakes:
+      3/10: c12m13_bayes
+      1/10: c12m13_bayes
+    exam: case
+    difficulty: 2
+  - prompt: A screening test detects a condition in 95% of people who have it and wrongly flags 5% of people who do not. Only 1% of people have the condition. Someone tests positive. Which statement is best?
+    options:
+    - The chance they have it is only about 16%
+    - The chance they have it is 95%
+    - The chance they have it is 1%
+    answer: The chance they have it is only about 16%
+    hints:
+    - P(positive) = 0.01 × 0.95 + 0.99 × 0.05.
+    - Then divide the 'has it' part by that total.
+    solution: P(positive) = 0.0095 + 0.0495 = 0.059. P(has it | positive) = 0.0095/0.059 ≈ 0.16. Most positives come from the large group without the condition.
+    mistakes:
+      The chance they have it is 95%: pq12m13_base_rate
+      The chance they have it is 1%: c12m13_bayes
+    exam: competency
+    difficulty: 2

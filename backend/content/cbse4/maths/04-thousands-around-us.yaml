@@ -12,6 +12,7 @@ tips:
   c4m4_carry: Work from the ones place leftwards. When a place reaches 10 or more, carry 1 to the next place.
   c4m4_borrow: Start at the ones. If the top digit is smaller, borrow 1 from the next place to make 10 more.
   c4m4_compare: 'Compare digits from the left: thousands first, then hundreds, and so on.'
+  pqc4m4_round: Round each number to the nearest hundred, add the rounded numbers, and see how close that is to the guess.
 concepts:
 - code: cbse4m.thou.place
   title: Numbers up to 9999
@@ -113,6 +114,18 @@ concepts:
         - '1'
         answer: '10'
         why: 10 tens = 100.
+      ways:
+      - style: visual
+        teach: How ten of one place make one of the next place up.
+        picture:
+          kind: flow
+          steps:
+          - 10 ones make 1 ten
+          - 10 tens make 1 hundred
+          - 10 hundreds make 1 thousand
+          alt: 10 ones make 1 ten, 10 tens make 1 hundred and 10 hundreds make 1 thousand.
+      - style: real_world
+        teach: Shops pack pencils in boxes of 10, and 10 boxes in a carton. A carton holds 100 pencils, and 10 cartons hold 1,000. Packing in tens makes big numbers easy to count.
     - teach: 'A 4-digit number has thousands, hundreds, tens and ones. 3,452 = 3 thousands + 4 hundreds + 5 tens + 2 ones = 3000 + 400 + 50 + 2. A zero keeps an empty place: 4,027 has no hundreds.'
       picture:
         kind: area_grid
@@ -148,6 +161,11 @@ concepts:
         - '500'
         answer: '50'
         why: '5 is in the tens place: 5 tens = 50.'
+      ways:
+      - style: step_by_step
+        teach: 'Break a number into places. Step 1: Take 6,183. Step 2: The 6 is in the thousands place: 6000. Step 3: The 1 is hundreds: 100; the 8 is tens: 80; the 3 is ones: 3. Step 4: So 6,183 = 6000 + 100 + 80 + 3.'
+      - style: real_world
+        teach: On a train ticket or a house number like 2,706, the zero tells you there are no tens. Without it, the number would read 276, which is a very different house.
     - teach: 'To compare 4-digit numbers, start from the left. 4,120 vs 4,098: thousands are equal (4), hundreds 1 vs 0, so 4,120 is bigger. The smallest 4-digit number is 1,000; the largest is 9,999.'
       check:
         prompt: 'Which is bigger: 6,301 or 6,130?'
@@ -157,6 +175,23 @@ concepts:
         - they are equal
         answer: 6,301
         why: Thousands equal; hundreds 3 is more than 1.
+      ways:
+      - style: visual
+        teach: Comparing two 4-digit numbers place by place, from the left.
+        picture:
+          kind: compare
+          columns:
+          - title: 6,315
+            points:
+            - 'Thousands: 6'
+            - 'Hundreds: 3'
+          - title: 6,293
+            points:
+            - 'Thousands: 6'
+            - 'Hundreds: 2'
+          alt: 'To compare 6,315 and 6,293, look at the thousands first: both are 6. Then the hundreds: 3 is more than 2, so 6,315 is bigger.'
+      - style: real_world
+        teach: 'When two cricket grounds report crowds of 8,410 and 8,395, people check the thousands first: both 8. The hundreds decide it: 4 beats 3, so the first ground had more people.'
   items:
   - prompt: What is the value of 4 in 3,452?
     answer: '400'
@@ -328,6 +363,36 @@ concepts:
     mistakes:
       six thousand four hundred five: c4m4_place
       six hundred forty-five: c4m4_place
+  - prompt: 'Case: Two schools collected old newspapers for recycling. School A collected 3,508 kg and School B collected 3,580 kg. Which school collected more?'
+    options:
+    - School B
+    - School A
+    - They collected the same
+    answer: School B
+    hints:
+    - The thousands are the same. Look at the next place.
+    - Then compare the tens.
+    solution: Both have 3 thousands and 5 hundreds. In the tens, 8 is more than 0, so School B's 3,580 kg is more.
+    mistakes:
+      School A: c4m4_compare
+      They collected the same: c4m4_compare
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: You are writing a cheque-style note for ''four thousand and sixty'' rupees. Which number should you write?'
+    options:
+    - 4,060
+    - 4,600
+    - 4,006
+    answer: 4,060
+    hints:
+    - How many hundreds are there in 'four thousand and sixty'?
+    - Sixty means 6 tens. Which place holds it?
+    solution: 'Four thousand and sixty has 4 thousands, 0 hundreds, 6 tens and 0 ones: 4,060.'
+    mistakes:
+      4,600: c4m4_place
+      4,006: c4m4_place
+    exam: competency
+    difficulty: 2
 - code: cbse4m.thou.addsub
   title: Adding and taking away bigger numbers
   after:
@@ -402,6 +467,27 @@ concepts:
         - '1'
         answer: '3'
         why: Write 3 and carry 1 ten to the tens place.
+      ways:
+      - style: step_by_step
+        teach: 'Add 1,467 + 2,385. Step 1: Ones: 7 + 5 = 12, write 2, carry 1. Step 2: Tens: 6 + 8 + 1 = 15, write 5, carry 1. Step 3: Hundreds: 4 + 3 + 1 = 8. Step 4: Thousands: 1 + 2 = 3. The answer is 3,852.'
+      - style: visual
+        teach: Lining up the places before adding, so the carried 1 goes to the right column.
+        picture:
+          kind: compare
+          columns:
+          - title: Place
+            points:
+            - Thousands
+            - Hundreds
+            - Tens
+            - Ones
+          - title: 1,467 + 2,385
+            points:
+            - 1 + 2 = 3
+            - 4 + 3 + 1 = 8
+            - '6 + 8 + 1 = 15: write 5, carry 1'
+            - '7 + 5 = 12: write 2, carry 1'
+          alt: 'Adding 1,467 and 2,385 place by place: ones 7 + 5 = 12, write 2 and carry 1; tens 6 + 8 + 1 = 15, write 5 and carry 1; hundreds 4 + 3 + 1 = 8; thousands 1 + 2 = 3. The answer is 3,852.'
     - teach: 'To take away, also start from the ones. If the top digit is too small, borrow 1 from the next place: that adds 10 to the place you are working on. 5,000 − 1,250 = 3,750.'
       picture:
         kind: flow
@@ -419,6 +505,11 @@ concepts:
         - 3,001
         answer: 2,999
         why: Borrowing passes through every zero, leaving 9s.
+      ways:
+      - style: step_by_step
+        teach: 'Take away 4,312 − 1,546. Step 1: Ones: 2 is less than 6, so borrow: 12 − 6 = 6. Step 2: Tens: 0 is less than 4, borrow: 10 − 4 = 6. Step 3: Hundreds: 2 is less than 5, borrow: 12 − 5 = 7. Step 4: Thousands: 3 − 1 = 2. The answer is 2,766.'
+      - style: real_world
+        teach: A shopkeeper who gets a ₹2,000 note for a ₹1,385 bill works out the change by taking away. Checking by adding back, 1,385 + 615 = 2,000, makes sure the change is right.
     - teach: 'Estimate to check: round to the nearest hundred or thousand. 2,980 + 1,020 is about 3,000 + 1,000 = 4,000. If your answer is far from the estimate, check again.'
       check:
         prompt: About how much is 4,910 + 2,080?
@@ -428,6 +519,21 @@ concepts:
         - about 9,000
         answer: about 7,000
         why: Round to 5,000 + 2,000 = 7,000.
+      ways:
+      - style: visual
+        teach: Estimating a sum by rounding each number to the nearest thousand.
+        picture:
+          kind: bars
+          bars:
+          - label: 3,940 rounds to
+            value: 4000
+          - label: 2,070 rounds to
+            value: 2000
+          - label: Estimate of the sum
+            value: 6000
+          alt: 3,940 rounds to 4,000 and 2,070 rounds to 2,000, so their sum is about 6,000.
+      - style: real_world
+        teach: Before going to a shop, people often round prices to get a quick total. If the bill comes out very different from that guess, it is worth checking for a mistake.
   items:
   - prompt: What is 2,345 + 1,278?
     answer: '3623'
@@ -598,3 +704,33 @@ concepts:
       '6600': c4m4_borrow
       '2400': c4m4_borrow
       '1600': c4m4_borrow
+  - prompt: 'Case: A cricket match had 2,640 people on Saturday and 1,875 on Sunday. The organiser says, ''That''s about 3,500 people in all.'' Is the organiser''s estimate sensible?'
+    options:
+    - No, it is about 4,500
+    - Yes, it is about 3,500
+    - No, it is about 1,000
+    answer: No, it is about 4,500
+    hints:
+    - Round each number to the nearest hundred first.
+    - Add the rounded numbers. Is the total near 3,500?
+    solution: 2,640 is about 2,600 and 1,875 is about 1,900. 2,600 + 1,900 = 4,500, so 3,500 is too low. (The exact total is 4,515.)
+    mistakes:
+      Yes, it is about 3,500: pqc4m4_round
+      No, it is about 1,000: pqc4m4_round
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: Your school needs 3,000 bricks for a wall. 1,764 bricks have already arrived. How many more bricks are needed?'
+    options:
+    - 1,236
+    - 1,336
+    - 2,764
+    answer: 1,236
+    hints:
+    - Do you need to add or take away?
+    - Start at the ones place and borrow where the top digit is too small.
+    solution: '3,000 − 1,764 = 1,236. Check: 1,764 + 1,236 = 3,000.'
+    mistakes:
+      1,336: c4m4_borrow
+      2,764: c4m4_borrow
+    exam: competency
+    difficulty: 2

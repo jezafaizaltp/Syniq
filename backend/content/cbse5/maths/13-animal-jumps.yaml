@@ -121,6 +121,11 @@ concepts:
         - '4'
         answer: '12'
         why: 4 × 3 = 12.
+      ways:
+      - style: step_by_step
+        teach: 'A squirrel hops 4 each time from 0. Step 1: Say the landing spots: 4, 8, 12, 16, 20. Step 2: These are the 4 times table. Step 3: After 6 hops it is at 4 × 6 = 24.'
+      - style: real_world
+        teach: 'Counting coins of ₹5 is skip counting: 5, 10, 15, 20. After 8 coins you have 5 × 8 = ₹40, without adding one coin at a time.'
     - teach: 'To find how many jumps reach a number, divide: to reach 30 with jumps of 3 takes 30 ÷ 3 = 10 jumps. If the number does not divide exactly, the animal never lands on it.'
       check:
         prompt: Jumping 5 from 0, will a frog land on 22?
@@ -130,6 +135,33 @@ concepts:
         - Only after 22 jumps
         answer: 'No'
         why: 22 is not in the 5 times table.
+      ways:
+      - style: visual
+        teach: 'Jumps of 5 from 0: which numbers it lands on and which it skips.'
+        picture:
+          kind: number_line
+          from: 0
+          to: 25
+          step: 5
+          jumps:
+          - from: 0
+            to: 5
+            label: '1'
+          - from: 5
+            to: 10
+            label: '2'
+          - from: 10
+            to: 15
+            label: '3'
+          - from: 15
+            to: 20
+            label: '4'
+          points:
+          - at: 22
+            label: '22: never landed on'
+          alt: Jumps of 5 from 0 land on 5, 10, 15 and 20 after 4 jumps. A number like 22 is not in the 5 times table, so the jumper never lands on it.
+      - style: step_by_step
+        teach: 'Will a hop of 7 from 0 land on 50? Step 1: Divide: 50 ÷ 7 = 7 remainder 1. Step 2: There is a remainder, so 50 is not in the 7 times table. Step 3: The hopper lands on 49 and then 56, jumping over 50.'
     - teach: 'If it starts somewhere else, add the jumps to the start. From 2 with jumps of 5: 2, 7, 12, 17. After 3 jumps it is at 2 + 3 × 5 = 17.'
       check:
         prompt: Starting at 1, jumping 3 each time, where is it after 2 jumps?
@@ -139,6 +171,27 @@ concepts:
         - '4'
         answer: '7'
         why: 1 + 3 + 3 = 7.
+      ways:
+      - style: visual
+        teach: Jumps of 4 that start at 1 instead of 0.
+        picture:
+          kind: number_line
+          from: 0
+          to: 14
+          step: 1
+          jumps:
+          - from: 1
+            to: 5
+            label: '+4'
+          - from: 5
+            to: 9
+            label: '+4'
+          - from: 9
+            to: 13
+            label: '+4'
+          alt: Starting at 1 and jumping 4 each time lands on 5, 9 and 13. After 3 jumps, 1 plus 3 times 4 is 13.
+      - style: real_world
+        teach: 'Houses on one side of a road are often numbered 1, 3, 5, 7: they start at 1 and jump 2 each time. The 10th house is 1 + 9 × 2 = 19.'
   items:
   - prompt: A frog jumps 3 steps each time, starting at 0. Where is it after 7 jumps?
     answer: '21'
@@ -313,6 +366,36 @@ concepts:
     mistakes:
       '36': c5m13_count
       '60': c5m13_count
+  - prompt: 'Case: A frog jumps 6 steps each time, starting at 0. A child says it will land on 44. Is the child right?'
+    options:
+    - No, 44 is not a multiple of 6
+    - Yes, after 7 jumps
+    - Yes, after 8 jumps
+    answer: No, 44 is not a multiple of 6
+    hints:
+    - Where does the frog land? Write the 6 times table.
+    - Is 44 in it?
+    solution: The frog lands on 6, 12, ... 42, 48. 44 ÷ 6 = 7 remainder 2, so the frog never lands on 44.
+    mistakes:
+      Yes, after 7 jumps: c5m13_land
+      Yes, after 8 jumps: c5m13_land
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A beetle starts at 5 and moves 3 each time. Where is it after 4 moves?'
+    options:
+    - '17'
+    - '12'
+    - '20'
+    answer: '17'
+    hints:
+    - Find the distance of 4 moves first.
+    - Add that to the starting number.
+    solution: '4 moves of 3 = 12. Starting at 5: 5 + 12 = 17.'
+    mistakes:
+      '12': c5m13_start
+      '20': c5m13_start
+    exam: competency
+    difficulty: 2
 - code: cbse5m.jumps.meet
   title: When two jumpers meet
   after:
@@ -399,6 +482,11 @@ concepts:
         - '5'
         answer: '10'
         why: 10 is the first number in both lists.
+      ways:
+      - style: step_by_step
+        teach: 'Jumps of 4 and 5 from 0. Step 1: List the 4 jumper: 4, 8, 12, 16, 20. Step 2: List the 5 jumper: 5, 10, 15, 20. Step 3: The first number in both lists is 20. That is where they first land together.'
+      - style: real_world
+        teach: 'One child climbs stairs 2 at a time and a friend 3 at a time. They both step on stair 6, then stair 12, then stair 18: every common multiple of 2 and 3.'
     - teach: 'The first meeting point is the smallest common multiple. For jumps of 4 and 6, list: 4, 8, 12 and 6, 12. They first meet at 12.'
       check:
         prompt: Where do jumps of 3 and 4 first meet?
@@ -408,6 +496,24 @@ concepts:
         - '24'
         answer: '12'
         why: 3, 6, 9, 12 and 4, 8, 12.
+      ways:
+      - style: visual
+        teach: Jumps of 3 and 4 shown side by side, with the first meeting point.
+        picture:
+          kind: compare
+          columns:
+          - title: Jumps of 3
+            points:
+            - 3, 6, 9, 12
+          - title: Jumps of 4
+            points:
+            - 4, 8, 12
+          - title: First meet
+            points:
+            - '12'
+          alt: Jumps of 3 land on 3, 6, 9, 12. Jumps of 4 land on 4, 8, 12. They first meet at 12.
+      - style: real_world
+        teach: 'Two traffic signals: one turns green every 4 minutes and one every 10 minutes. List 4, 8, 12, 16, 20 and 10, 20. They turn green together first after 20 minutes.'
     - teach: If a deer jumps 5 m and a frog 2 m, each jump the deer gains 3 m. After 4 jumps each, the deer is 3 × 4 = 12 m ahead.
       check:
         prompt: A horse jumps 4 m and a goat 3 m. After 5 jumps each, how far ahead is the horse?
@@ -417,6 +523,22 @@ concepts:
         - 35 m
         answer: 5 m
         why: 'It gains 1 m each jump: 1 × 5 = 5 m.'
+      ways:
+      - style: visual
+        teach: 'A hare jumping 6 m and a tortoise stepping 1 m: the gap after each turn.'
+        picture:
+          kind: bars
+          unit: ' m'
+          bars:
+          - label: After 1 turn
+            value: 5
+          - label: After 2 turns
+            value: 10
+          - label: After 3 turns
+            value: 15
+          alt: Each turn the hare goes 6 m and the tortoise 1 m, so the hare gains 5 m. The gap is 5 m after 1 turn, 10 m after 2 and 15 m after 3.
+      - style: step_by_step
+        teach: 'How far ahead after 5 jumps each, if one jumps 8 m and the other 3 m? Step 1: Gap per jump: 8 − 3 = 5 m. Step 2: Multiply by the jumps: 5 × 5 = 25 m. Check: 40 m − 15 m = 25 m.'
   items:
   - prompt: A frog jumps 2 and a rabbit jumps 3, both from 0. What is the first number they both land on?
     answer: '6'
@@ -583,3 +705,33 @@ concepts:
     mistakes:
       '12': c5m13_meet
       '70': c5m13_meet
+  - prompt: 'Case: Two children play a hopping game from 0. One hops 4 squares at a time, the other 6. They want to know where both will first land on the same square. A child says 24, because 4 × 6 = 24. Is that the first meeting square?'
+    options:
+    - No, they first meet at 12
+    - Yes, 24 is first
+    - No, they first meet at 10
+    answer: No, they first meet at 12
+    hints:
+    - List where each child lands.
+    - Look for the first number in both lists, not just any common one.
+    solution: '4: 4, 8, 12. 6: 6, 12. They first meet at 12. 24 is a common multiple, but not the smallest.'
+    mistakes:
+      Yes, 24 is first: c5m13_meet
+      No, they first meet at 10: c5m13_meet
+    exam: case
+    difficulty: 2
+  - prompt: 'Situation: A horse jumps 9 m each time and a goat 4 m. Both start together. How far ahead is the horse after 6 jumps each?'
+    options:
+    - 30 m
+    - 54 m
+    - 13 m
+    answer: 30 m
+    hints:
+    - How much does the horse gain in one jump?
+    - Multiply that by the number of jumps.
+    solution: 'Each jump the horse gains 9 − 4 = 5 m. After 6 jumps: 5 × 6 = 30 m ahead.'
+    mistakes:
+      54 m: c5m13_ahead
+      13 m: c5m13_ahead
+    exam: competency
+    difficulty: 2

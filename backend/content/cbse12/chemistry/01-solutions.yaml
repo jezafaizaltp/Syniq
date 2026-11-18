@@ -18,6 +18,8 @@ tips:
   c12c1_conc: Molality = moles of solute per kg of solvent; molarity = moles per litre of solution; mole fraction = moles of one part over total moles.
   c12c1_raoult: 'Raoult: partial pressure = mole fraction × pure vapour pressure. Total = sum of partial pressures.'
   c12c1_coll: 'Colligative effects count particles: ΔT = i × K × m. Salts split into ions, so i > 1.'
+  c12c1_temp: Heating changes a liquid's volume but not its mass. Which unit divides only by a mass?
+  c12c1_ions: 'Write each one splitting in water and count the particles: the more particles, the bigger the drop.'
 concepts:
 - code: cbse12c.sol.conc
   title: Concentration, solubility and Raoult's law
@@ -139,6 +141,30 @@ concepts:
         - it uses volume
         answer: it uses mass of solvent, which does not change with temperature
         why: Volume expands with heat; mass does not.
+      ways:
+      - style: visual
+        teach: Four ways of giving concentration, and what each one divides by.
+        picture:
+          kind: compare
+          columns:
+          - title: Mole fraction x
+            points:
+            - moles of one part
+            - ÷ total moles
+            - no unit
+          - title: Molarity M
+            points:
+            - moles of solute
+            - ÷ litres of solution
+            - changes with temperature
+          - title: Molality m
+            points:
+            - moles of solute
+            - ÷ kg of solvent
+            - same at any temperature
+          alt: Mole fraction is moles of one part divided by total moles and has no unit. Molarity is moles of solute per litre of solution and changes with temperature. Molality is moles of solute per kilogram of solvent and does not change with temperature.
+      - style: step_by_step
+        teach: '3 mol of solute in 1.5 kg of water. Step 1: Molality divides by kilograms of solvent, not litres of solution. Step 2: m = 3 ÷ 1.5. Step 3: m = 2 mol/kg. Step 4: Warming the solution changes its volume but not its mass, so this number stays put.'
     - teach: 'Gas solubility: Henry''s law p = K_H x: the higher the gas''s partial pressure, the more dissolves. Soft drinks are bottled under CO₂ pressure; divers risk ''bends'' when dissolved nitrogen comes out on rising too fast. Gases dissolve less in warm water.'
       check:
         prompt: 'Opening a soda bottle makes it fizz because:'
@@ -148,6 +174,23 @@ concepts:
         - sugar reacts with air
         answer: the CO₂ pressure above it drops, so less gas stays dissolved
         why: 'Henry''s law: lower p, lower solubility.'
+      ways:
+      - style: visual
+        teach: What raises and lowers the amount of gas that dissolves in a liquid.
+        picture:
+          kind: compare
+          columns:
+          - title: More gas dissolves
+            points:
+            - Higher partial pressure of the gas
+            - Colder liquid
+          - title: Less gas dissolves
+            points:
+            - Pressure released (bottle opened)
+            - Warmer liquid
+          alt: More gas dissolves when its partial pressure is higher or the liquid is colder. Less dissolves when the pressure is released, as when a bottle is opened, or when the liquid is warmer.
+      - style: real_world
+        teach: 'At high mountains the air pressure is low, so less oxygen dissolves in the blood. Climbers can feel weak and confused: Henry''s law at work inside the body. Bottled oxygen raises the oxygen''s partial pressure again.'
     - teach: 'Raoult''s law: in a solution of volatile liquids, p₁ = x₁p₁°. Ideal solutions obey it (ΔH_mix = 0, ΔV_mix = 0). Positive deviation (ethanol + acetone): weaker attractions, higher vapour pressure. Negative deviation (chloroform + acetone): stronger attractions, lower vapour pressure. Large deviations give azeotropes.'
       picture:
         kind: compare
@@ -171,6 +214,11 @@ concepts:
         - none
         answer: negative
         why: Heat release means stronger new attractions.
+      ways:
+      - style: real_world
+        teach: 'Nail-polish remover (acetone) mixed with a little chloroform smells weaker than you''d expect. The two molecules grab each other through hydrogen bonds, so fewer escape into the air: a negative deviation from Raoult''s law.'
+      - style: step_by_step
+        teach: 'Liquids P and Q, pure vapour pressures 200 and 50 mm Hg, x_P = 0.3. Step 1: p_P = 0.3 × 200 = 60. Step 2: x_Q = 0.7, so p_Q = 0.7 × 50 = 35. Step 3: Total = 95 mm Hg if the mixture is ideal. Step 4: A measured value above 95 would mean positive deviation.'
   items:
   - prompt: A solution has 2 mol of A and 3 mol of B. Find the mole fraction of A as a fraction.
     answer: 2/5
@@ -340,6 +388,55 @@ concepts:
     mistakes:
       warm water has more salt: c12c1_conc
       warm water is heavier: c12c1_conc
+  - prompt: 'Assertion (A): Molality of a solution does not change when it is heated.
+
+      Reason (R): Molality is defined using the mass of the solvent, and mass does not depend on temperature.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Heating changes volume but not mass. Molality uses kilograms of solvent, so it stays the same. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Scuba divers breathing compressed air may get the ''bends'' if they rise too fast. What causes it?'
+    options:
+    - Nitrogen dissolved under high pressure comes out as bubbles in the blood
+    - Oxygen dissolves more as the diver rises
+    - Water pressure crushes the lungs on rising
+    answer: Nitrogen dissolved under high pressure comes out as bubbles in the blood
+    hints:
+    - Deep underwater the pressure is high, so more gas dissolves.
+    - What happens to dissolved gas when pressure drops fast?
+    solution: By Henry's law, high pressure deep down dissolves more nitrogen in the blood. Rising quickly lowers the pressure and the extra nitrogen forms bubbles.
+    mistakes:
+      Oxygen dissolves more as the diver rises: c12_henry
+      Water pressure crushes the lungs on rising: c12_henry
+    exam: case
+    difficulty: 2
+  - prompt: A lab assistant must make a solution whose concentration stays the same in a hot room and a cold room. Which unit should the label use?
+    options:
+    - Molality
+    - Molarity
+    - Grams per litre
+    answer: Molality
+    hints:
+    - 'Which quantity changes when a liquid warms: its mass or its volume?'
+    - Pick the unit that does not divide by volume.
+    solution: Volume expands on warming, so molarity and g/L change. Molality uses the mass of solvent, which stays fixed.
+    mistakes:
+      Molarity: c12c1_temp
+      Grams per litre: c12c1_temp
+    exam: competency
+    difficulty: 2
 - code: cbse12c.sol.colligative
   title: Colligative properties
   after:
@@ -436,6 +533,25 @@ concepts:
         - more for urea
         answer: equally
         why: Same number of particles.
+      ways:
+      - style: visual
+        teach: 'Why a non-volatile solute lowers vapour pressure: it takes up room at the surface.'
+        picture:
+          kind: compare
+          columns:
+          - title: Pure solvent
+            points:
+            - Whole surface is solvent
+            - Many molecules escape
+            - Higher vapour pressure
+          - title: Solution
+            points:
+            - Some surface taken by solute
+            - Fewer solvent molecules escape
+            - Lower vapour pressure
+          alt: At the surface of a pure solvent every spot is solvent, so many molecules escape and vapour pressure is higher. In a solution some surface spots are taken by solute, fewer solvent molecules escape and vapour pressure is lower.
+      - style: step_by_step
+        teach: 'Solute mole fraction 0.02, pure solvent at 50 mm Hg. Step 1: Relative lowering = x_solute = 0.02. Step 2: Lowering = 0.02 × 50 = 1 mm Hg. Step 3: New vapour pressure = 49 mm Hg. Step 4: Only the number of solute particles mattered, not what they are.'
     - teach: 'Boiling point rises: ΔT_b = K_b m (water K_b = 0.52 K kg/mol). Freezing point falls: ΔT_f = K_f m (water K_f = 1.86). Osmotic pressure π = CRT: solvent moves through a semipermeable membrane towards the more concentrated side; reverse osmosis pushes it the other way to purify water.'
       picture:
         kind: flow
@@ -454,6 +570,11 @@ concepts:
         - it makes ice harder
         answer: it lowers the freezing point of water
         why: Salt water stays liquid below 0 °C.
+      ways:
+      - style: real_world
+        teach: 'In cold places, salt is spread on icy roads. The dissolved ions lower water''s freezing point, so ice melts even below 0 °C. Car radiators use ethylene glycol for the same reason: the coolant won''t freeze in winter.'
+      - style: step_by_step
+        teach: 'A 0.5 m urea solution in water (K_b = 0.52). Step 1: Urea does not split, so i = 1. Step 2: ΔT_b = 0.52 × 0.5 = 0.26 K. Step 3: It boils at 100.26 °C. Step 4: Doubling the molality would double the rise.'
     - teach: 'Electrolytes break into ions, so they give more particles than expected. The van ''t Hoff factor i counts this: NaCl → i ≈ 2, CaCl₂ → i ≈ 3; association (like acetic acid in benzene) gives i < 1. Then ΔT_f = iK_f m.'
       check:
         prompt: i for K₂SO₄ assuming full dissociation?
@@ -463,6 +584,24 @@ concepts:
         - '7'
         answer: '3'
         why: 2K⁺ + SO₄²⁻.
+      ways:
+      - style: visual
+        teach: 'Counting particles: each formula unit can give a different number in water.'
+        picture:
+          kind: bars
+          unit: particles per formula unit
+          bars:
+          - label: Urea
+            value: 1
+          - label: KCl
+            value: 2
+          - label: Na₂SO₄
+            value: 3
+          - label: AlCl₃
+            value: 4
+          alt: Urea gives 1 particle per formula unit, KCl gives 2, sodium sulphate gives 3 and aluminium chloride gives 4, so their effects on freezing point grow in that order.
+      - style: real_world
+        teach: Count people, not groups. If 10 families arrive and each family splits into 3 people at the door, the hall feels 30 arrivals. Colligative properties 'feel' the people (ions), so salts act stronger than their molality suggests.
   items:
   - prompt: Kf of water is 1.86 K kg/mol. Find ΔTf (K) for a 1 m glucose solution, to two decimals.
     answer: '1.86'
@@ -632,3 +771,52 @@ concepts:
     mistakes:
       exactly 2: c12c1_coll
       greater than 1: c12c1_coll
+  - prompt: 'Assertion (A): A 0.1 m KCl solution has a lower freezing point than a 0.1 m glucose solution.
+
+      Reason (R): Colligative properties depend on the number of solute particles in the solution.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: KCl splits into two ions, giving about twice the particles of glucose, so its freezing point falls more. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A hospital drip must have the same osmotic pressure as blood. What happens to red blood cells if pure water is dripped instead?'
+    options:
+    - They swell and may burst
+    - They shrink
+    - Nothing changes
+    answer: They swell and may burst
+    hints:
+    - 'Which side is more concentrated: the cell or pure water?'
+    - Water moves towards the more concentrated side.
+    solution: Pure water is hypotonic to the cell. Water moves into the cell by osmosis, so the cell swells and may burst.
+    mistakes:
+      They shrink: c12_hypertonic
+      Nothing changes: c12c1_coll
+    exam: case
+    difficulty: 2
+  - prompt: A town must choose the best de-icer per mole spread on the roads. Which gives the biggest freezing point drop?
+    options:
+    - CaCl₂
+    - NaCl
+    - Sugar
+    answer: CaCl₂
+    hints:
+    - Count the ions each one gives.
+    - More particles, bigger drop.
+    solution: CaCl₂ gives 3 ions, NaCl gives 2 and sugar gives 1 particle. So CaCl₂ lowers the freezing point most per mole.
+    mistakes:
+      NaCl: c12c1_ions
+      Sugar: c12c1_ions
+    exam: competency
+    difficulty: 2

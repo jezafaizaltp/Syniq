@@ -16,6 +16,8 @@ tips:
   c12c3_order: Order = sum of the powers in the experimental rate law. Rate changes by (factor)^(power) for each reactant.
   c12c3_half: 'First order: t½ = 0.693/k, the same at every stage. After n half-lives, (1/2)ⁿ is left.'
   c12c3_temp: Higher temperature or a catalyst means more molecules can pass the activation energy barrier.
+  c12c3_fridge: Think about what a lower temperature does to the share of molecules with enough energy to react.
+  c12c3_firstorder: Check whether the time to halve depends on how much you start with.
 concepts:
 - code: cbse12c.kin.rate
   title: Rate, rate law and order
@@ -114,6 +116,25 @@ concepts:
         - 0.8 mol L⁻¹ s⁻¹
         answer: 0.2 mol L⁻¹ s⁻¹
         why: Divide by the coefficient 2.
+      ways:
+      - style: visual
+        teach: Average rate and instantaneous rate read from the same concentration curve.
+        picture:
+          kind: compare
+          columns:
+          - title: Average rate
+            points:
+            - Change in [A] ÷ time interval
+            - Slope of a chord between two times
+            - Hides changes inside the interval
+          - title: Instantaneous rate
+            points:
+            - Rate at one moment
+            - Slope of the tangent at that time
+            - Falls as reactant is used up
+          alt: Average rate is the change in concentration divided by the time interval, the slope of a chord between two times, and it hides changes inside the interval. Instantaneous rate is the rate at one moment, the slope of the tangent there, and it falls as reactant is used up.
+      - style: real_world
+        teach: 'A car trip of 120 km in 3 hours has an average speed of 40 km/h, but the speedometer shows the speed at each moment. Reaction rate works the same way: the average over an interval, or the ''speedometer'' reading at one instant.'
     - teach: 'Rate law: rate = k[A]ˣ[B]ʸ, found by experiment. The order is x + y and can be 0, a fraction or a whole number. Molecularity is the number of species colliding in one elementary step (1, 2 or 3).'
       picture:
         kind: compare
@@ -137,6 +158,11 @@ concepts:
         - '2'
         answer: 3/2
         why: 1/2 + 1.
+      ways:
+      - style: step_by_step
+        teach: 'Find the order from data: [A] = 0.2 gives rate 5; [A] = 0.4 gives rate 10. Step 1: [A] doubled. Step 2: The rate also doubled. Step 3: 2ˣ = 2, so x = 1. Step 4: The reaction is first order in A.'
+      - style: real_world
+        teach: Order is like a recipe you discover by cooking, not by reading the label. The balanced equation may show two molecules of something, but only experiments tell how the speed actually responds when you add more of it.
     - teach: 'Units of k depend on order: zero order mol L⁻¹ s⁻¹, first order s⁻¹, second order L mol⁻¹ s⁻¹. A reaction like ester hydrolysis in a large excess of water behaves as first order (pseudo first order) because [water] barely changes.'
       check:
         prompt: 'k has units L mol⁻¹ s⁻¹. The order is:'
@@ -146,6 +172,27 @@ concepts:
         - '0'
         answer: '2'
         why: That is the pattern for second order.
+      ways:
+      - style: visual
+        teach: Units of k for each order, from rate = k[A]ⁿ.
+        picture:
+          kind: compare
+          columns:
+          - title: Zero order
+            points:
+            - rate = k
+            - k in mol L⁻¹ s⁻¹
+          - title: First order
+            points:
+            - rate = k[A]
+            - k in s⁻¹
+          - title: Second order
+            points:
+            - rate = k[A]²
+            - k in L mol⁻¹ s⁻¹
+          alt: For zero order, rate equals k and k has units mole per litre per second. For first order, rate equals k times A and k has units per second. For second order, rate equals k times A squared and k has units litre per mole per second.
+      - style: step_by_step
+        teach: 'Sucrose turns into glucose and fructose in lots of water. Step 1: True rate = k[sucrose][H₂O]. Step 2: Water is in huge excess, so [H₂O] hardly changes. Step 3: Fold it into k: k'' = k[H₂O]. Step 4: Rate = k''[sucrose], pseudo first order.'
   items:
   - prompt: Rate = k[A]²[B]. What is the overall order?
     answer: '3'
@@ -319,6 +366,55 @@ concepts:
     mistakes:
       it is found by experiment: c12c3_order
       it equals the order: c12c3_order
+  - prompt: 'Assertion (A): The order of a reaction can be a fraction.
+
+      Reason (R): Order is found by experiment and need not match the coefficients of the balanced equation.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: Because the rate law is experimental, the powers can be fractional, as in some gas-phase reactions. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: Milk kept in a fridge stays fresh for days, but sours in hours on a hot kitchen shelf. Why?'
+    options:
+    - Fewer molecules have enough energy to react at low temperature
+    - The fridge removes the bacteria
+    - Cold milk has a different rate law
+    answer: Fewer molecules have enough energy to react at low temperature
+    hints:
+    - Souring is a set of chemical reactions.
+    - How does temperature change the share of energetic collisions?
+    solution: Lowering temperature cuts the fraction of molecules with energy above Ea, so the souring reactions slow right down.
+    mistakes:
+      The fridge removes the bacteria: c12c3_fridge
+      Cold milk has a different rate law: c12c3_fridge
+    exam: case
+    difficulty: 2
+  - prompt: A chemist doubles [B] and finds the rate unchanged. What can be concluded?
+    options:
+    - The reaction is zero order in B
+    - B is not a reactant
+    - The reaction is first order in B
+    answer: The reaction is zero order in B
+    hints:
+    - Rate changes by 2ʸ when [B] doubles.
+    - What power makes 2ʸ = 1?
+    solution: 2ʸ = 1 gives y = 0. B can still be used up; its concentration just doesn't affect the rate.
+    mistakes:
+      B is not a reactant: c12c3_order
+      The reaction is first order in B: c12c3_order
+    exam: competency
+    difficulty: 2
 - code: cbse12c.kin.integrated
   title: Integrated rate laws and temperature
   after:
@@ -425,6 +521,25 @@ concepts:
         - 20 then 40 min
         answer: 20 min each
         why: First-order half-life is constant.
+      ways:
+      - style: visual
+        teach: Zero and first order compared, side by side.
+        picture:
+          kind: compare
+          columns:
+          - title: Zero order
+            points:
+            - '[A] falls in a straight line'
+            - t½ = [A]₀/2k
+            - t½ shrinks as [A]₀ drops
+          - title: First order
+            points:
+            - '[A] falls on a curve'
+            - t½ = 0.693/k
+            - t½ stays the same
+          alt: In zero order the concentration falls in a straight line, half-life is A nought over 2k, and it shrinks as the starting amount drops. In first order the concentration falls on a curve, half-life is 0.693 over k, and it stays the same.
+      - style: step_by_step
+        teach: 'First order, k = 0.01 min⁻¹. How long to fall from 0.5 to 0.05 mol/L? Step 1: [A]₀/[A] = 10, log 10 = 1. Step 2: t = (2.303/k) × 1. Step 3: t = 2.303/0.01. Step 4: t = 230.3 min.'
     - teach: After n half-lives, the fraction left is (1/2)ⁿ. So 3 half-lives leave 1/8; 4 leave 1/16.
       picture:
         kind: bars
@@ -446,6 +561,11 @@ concepts:
         - 1/4
         answer: 1/16
         why: (1/2)⁴.
+      ways:
+      - style: real_world
+        teach: Carbon dating uses half-lives. Living things keep a steady amount of carbon-14; after death it halves every 5730 years. A bone with 1/4 of the living level is about two half-lives, roughly 11,460 years, old.
+      - style: step_by_step
+        teach: 'A drug has a 2-hour half-life. Step 1: After 2 h, 1/2 is left. Step 2: After 4 h, 1/4. Step 3: After 6 h, 1/8. Step 4: After 8 h, 1/16 of the dose remains, which is why doses are repeated.'
     - teach: 'Temperature: many reactions roughly double in rate per 10 °C. Arrhenius: k = Ae^(−Ea/RT). Only collisions with enough energy (≥ Ea) and the right orientation react. A catalyst gives a lower-Ea path, so more collisions succeed; it does not change ΔH.'
       check:
         prompt: 'A catalyst changes:'
@@ -455,6 +575,25 @@ concepts:
         - the equilibrium constant
         answer: the activation energy
         why: It offers a new pathway with lower Ea.
+      ways:
+      - style: visual
+        teach: How a catalyst changes the energy path but not the start or end.
+        picture:
+          kind: compare
+          columns:
+          - title: Without catalyst
+            points:
+            - High energy hill (Ea)
+            - Few collisions succeed
+            - Same ΔH
+          - title: With catalyst
+            points:
+            - Lower hill
+            - Many more collisions succeed
+            - Same ΔH
+          alt: Without a catalyst the energy hill Ea is high and few collisions succeed. With a catalyst the hill is lower and many more succeed. Reactants and products sit at the same levels, so ΔH is the same.
+      - style: real_world
+        teach: 'Crossing a mountain range: a catalyst is like a tunnel. You start and end in the same valleys (same ΔH), but you don''t have to climb the peak, so many more travellers make it across each hour.'
   items:
   - prompt: A first-order reaction has k = 0.0693 s⁻¹. Find t½ (s).
     answer: '10'
@@ -621,3 +760,52 @@ concepts:
     mistakes:
       molecules get bigger: c12c3_temp
       Ea increases: c12c3_temp
+  - prompt: 'Assertion (A): The half-life of a first-order reaction is the same whether we start with 1 mol or 2 mol of reactant.
+
+      Reason (R): For a first-order reaction, t½ = 0.693/k, which has no concentration term.'
+    options:
+    - Both A and R are true, and R explains A
+    - Both A and R are true, but R does not explain A
+    - A is true, but R is false
+    - A is false, but R is true
+    answer: Both A and R are true, and R explains A
+    hints:
+    - Decide first whether A is true on its own.
+    - Then decide whether R is true, and whether R is the reason for A.
+    solution: t½ depends only on k for first order, so the starting amount doesn't matter. R explains A.
+    difficulty: 2
+    mistakes:
+      Both A and R are true, but R does not explain A: ar_link
+      A is true, but R is false: ar_test_r
+      A is false, but R is true: ar_test_a
+    exam: assertion_reason
+  - prompt: 'Case: A hospital stores a radioactive tracer with a 6-hour half-life. It arrives at 8 am with 160 units of activity. What will the activity be at 8 pm?'
+    options:
+    - 40 units
+    - 80 units
+    - 20 units
+    answer: 40 units
+    hints:
+    - How many half-lives fit into 12 hours?
+    - Halve once per half-life.
+    solution: '12 h is two half-lives: 160 → 80 → 40 units.'
+    mistakes:
+      80 units: c12c3_half
+      20 units: c12c3_half
+    exam: case
+    difficulty: 2
+  - prompt: A reaction takes 20 min to go from 1 M to 0.5 M and another 20 min to go from 0.5 M to 0.25 M. What is its order?
+    options:
+    - First order
+    - Zero order
+    - Second order
+    answer: First order
+    hints:
+    - Compare the two halving times.
+    - For which order is the halving time independent of starting amount?
+    solution: Equal half-lives at different concentrations are the sign of a first-order reaction.
+    mistakes:
+      Zero order: c12c3_firstorder
+      Second order: c12c3_firstorder
+    exam: competency
+    difficulty: 2
