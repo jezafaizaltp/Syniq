@@ -968,3 +968,14 @@ def test_assertion_reason_questions_use_the_standard_choices():
         if item.get("exam") == "assertion_reason" and item.get("options") != cp.AR_OPTIONS
     ]
     assert not bad, bad
+
+
+def test_class_11_and_12_solutions_show_the_working_or_the_reason():
+    """Board-level answers explain themselves: a solution is more than the bare answer (owner asked for a teaching product, not an answer key)."""
+    bare = [
+        f"{rel(path)}: {str(item['prompt'])[:60]} -> {item.get('solution')!r}"
+        for path, pack, concept, item in all_items()
+        if rel(path).startswith(("cbse11/", "cbse12/"))
+        and len(str(item.get("solution", "")).split()) <= 4
+    ]
+    assert not bare, bare
