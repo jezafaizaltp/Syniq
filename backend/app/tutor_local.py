@@ -402,7 +402,7 @@ def quiz(db: DbSession, user: User, concept: Concept, lang: str, state: dict) ->
 
 def _tip(db: DbSession, lang: str, item: Item, response: str) -> str | None:
     for wrong, tag in (item.misconceptions or {}).items():
-        if learning.same_answer(wrong, response):
+        if learning.same_answer(wrong, response, item.options):
             key = f"tip.{tag}"
             if i18n.has(key):
                 return i18n.t(lang, key)
@@ -413,7 +413,7 @@ def _tip(db: DbSession, lang: str, item: Item, response: str) -> str | None:
 
 def check_quiz(db: DbSession, item: Item, lang: str, state: dict, response: str) -> Reply:
     tries = int(state.get("tries", 0)) + 1
-    if learning.same_answer(response, item.answer):
+    if learning.same_answer(response, item.answer, item.options):
         text = i18n.t(lang, "tutor.local.right") + (f" {item.solution}" if item.solution else "")
         return Reply(text, chips=["test", "explain"], state={k: v for k, v in state.items() if k not in ("quiz", "tries", "hints")})
     tip = _tip(db, lang, item, response)

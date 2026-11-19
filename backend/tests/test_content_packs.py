@@ -49,6 +49,18 @@ def test_numbers_written_differently_count_as_right():
     assert not learning.same_answer("0.33", "1/3")
 
 
+def test_choices_that_differ_only_in_capitals_are_different_answers():
+    """Genetics and capital-letter questions offer Tt / TT / tt or 'Homo sapiens' / 'homo sapiens' as choices:
+    picking the wrong one must not count as right just because the letters match."""
+    genes = ["Tt", "TT", "tt"]
+    assert learning.same_answer("Tt", "Tt", genes)
+    assert not learning.same_answer("TT", "Tt", genes)
+    assert not learning.same_answer("homo sapiens", "Homo sapiens", ["Homo sapiens", "homo sapiens", "Homo Sapiens"])
+    # A typed answer that isn't one of the choices is still read kindly.
+    assert learning.same_answer("homo  Sapiens ", "Homo sapiens", ["Homo sapiens", "Panthera leo"])
+    assert learning.same_answer("2.50", "2.5", ["2.5", "25"])
+
+
 def test_packs_are_loaded_and_reloading_changes_nothing():
     with SessionLocal() as db:
         chapter = db.query(Chapter).filter(Chapter.number == 1, Chapter.title == "Pairs of Equations").one()
