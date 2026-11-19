@@ -1028,3 +1028,29 @@ def test_the_right_choice_does_not_stand_out_by_length():
                  and not str(item["prompt"]).startswith(LONGEST_IS_THE_POINT)
                  and answer_stands_out_by_length(item["options"], item["answer"])]
     assert not stand_out, stand_out
+
+
+ABSOLUTE_WORDS = re.compile(r"\b(always|never|only|all|none|every|nothing|nobody|everything|forever)\b", re.I)
+
+
+def wrong_choices_all_use_absolute_words(prompt, options, answer) -> bool:
+    """True when every wrong choice says always/never/only/all... and the right one doesn't, so a test-wise learner
+    could pick the one calm choice without knowing anything. Words already in the question don't count, nor does
+    'nothing is wrong'."""
+    in_prompt = {w.lower() for w in ABSOLUTE_WORDS.findall(str(prompt))}
+
+    def absolute(text):
+        text = re.sub(r"(?i)\b(there is )?nothing (is|went) wrong\b", "", str(text))
+        return any(w.lower() not in in_prompt for w in ABSOLUTE_WORDS.findall(text))
+
+    wrong = [o for o in options if str(o) != str(answer)]
+    return bool(wrong) and not absolute(answer) and all(absolute(o) for o in wrong)
+
+
+def test_wrong_choices_do_not_all_use_absolute_words():
+    """'Always', 'never' and 'only' on every wrong choice gives the answer away just as length does."""
+    giveaways = [f"{rel(path)}: {str(item['prompt'])[:60]}"
+                 for path, pack, concept, item in all_items()
+                 if rel(path).startswith(NO_LENGTH_GIVEAWAY) and item.get("options") and len(item["options"]) >= 3
+                 and wrong_choices_all_use_absolute_words(item["prompt"], item["options"], item["answer"])]
+    assert not giveaways, giveaways
