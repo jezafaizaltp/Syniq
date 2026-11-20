@@ -562,8 +562,15 @@ def _ungroup(n: str) -> str:
     return n.replace(",", "") if _GROUPED.match(n) else n
 
 
-def same_answer(a: str, b: str) -> bool:
-    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5, 1,00,000 and 100000)."""
+def same_answer(a: str, b: str, options: list | None = None) -> bool:
+    """Same text, or the same number written another way (2.50 and 2.5, 1/2 and 0.5, 1,00,000 and 100000).
+
+    When both are choices of the same question, only the exact choice counts: 'Tt' and 'TT', or 'Homo sapiens'
+    and 'homo sapiens', are different answers there even though they differ only in capitals."""
+    if options:
+        choices = {str(o).strip() for o in options}
+        if str(a).strip() in choices and str(b).strip() in choices:
+            return str(a).strip() == str(b).strip()
     a, b = normalise(a), normalise(b)
     if a == b:
         return True
@@ -593,12 +600,12 @@ def record_attempt(
     time_ms: int | None,
     explanation_style: str | None,
 ) -> tuple[bool, str | None, Mastery]:
-    correct = same_answer(response, item.answer)
+    correct = same_answer(response, item.answer, item.options)
     # The server decides which explanation this answer reflects on (the app's value is not trusted for this).
     explanation_style = style_to_credit(db, student.id, item.concept_id)
     misconception = None
     if not correct:
-        misconception = next((tag for wrong, tag in item.misconceptions.items() if same_answer(response, wrong)), None)
+        misconception = next((tag for wrong, tag in item.misconceptions.items() if same_answer(response, wrong, item.options)), None)
 
     db.add(
         Attempt(
@@ -815,7 +822,7 @@ def traps_of(item: Item) -> list[str]:
 
 def mistake_made(item: Item, response: str) -> str | None:
     """Which known mistake a wrong answer is, if any."""
-    tag = next((tag for wrong, tag in (item.misconceptions or {}).items() if same_answer(response, wrong)), None)
+    tag = next((tag for wrong, tag in (item.misconceptions or {}).items() if same_answer(response, wrong, item.options)), None)
     if tag:
         return tag
     sum_ = responses.parse_arithmetic(item.prompt, item.answer)

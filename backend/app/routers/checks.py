@@ -201,7 +201,7 @@ def answer_check(
     item = db.get(Item, body.item_id)
     response = body.response.strip()
     answers = dict(check.answers or {})
-    answers[str(body.item_id)] = {"response": response, "correct": bool(response) and learning.same_answer(response, item.answer)}
+    answers[str(body.item_id)] = {"response": response, "correct": bool(response) and learning.same_answer(response, item.answer, item.options)}
     check.answers = answers
     if len(answers) >= len(check.item_ids):
         check.status = "done"

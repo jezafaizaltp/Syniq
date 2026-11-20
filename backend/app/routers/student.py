@@ -430,7 +430,7 @@ SPOT_FRIENDS = ["Asha", "Ravi", "Meera", "Arjun", "Zara", "Kabir", "Nila", "Dev"
 
 def spot_material(item: Item) -> list[str]:
     """The wrong answers this question has a written mistake for."""
-    return [w for w in (item.misconceptions or {}) if not learning.same_answer(w, item.answer)]
+    return [w for w in (item.misconceptions or {}) if not learning.same_answer(w, item.answer, item.options)]
 
 
 def _spot_events_today(db: DbSession, user: User, kind: str) -> list[LearningEvent]:
@@ -487,7 +487,7 @@ def spot_answer(
     # Only a puzzle SYNiq gave today can be answered, and only its first answer can earn a star.
     if body.item_id not in {e.item_id for e in _spot_events_today(db, user, "spot_seen")}:
         raise HTTPException(404, "Item not found")
-    correct = learning.same_answer(body.choice, item.answer)
+    correct = learning.same_answer(body.choice, item.answer, item.options)
     on = rewards.rewards_on(db, user)
     stars_today = _spot_events_today(db, user, "spot_star")
     already = body.item_id in {e.item_id for e in stars_today}
